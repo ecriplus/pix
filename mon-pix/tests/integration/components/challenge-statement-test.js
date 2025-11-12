@@ -27,6 +27,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
   hooks.beforeEach(function () {
     stubCurrentUserService(this.owner);
+    this.store = this.owner.lookup('service:store');
   });
 
   /*
@@ -38,7 +39,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
     // Inspired from: https://github.com/emberjs/ember-mocha/blob/0790a78d7464655fee0c103d2fa960fa53a056ca/tests/setup-component-test-test.js#L118-L122
     test('should render challenge instruction if it exists', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         instruction: 'La consigne de mon test',
         id: 'rec_challenge',
@@ -53,7 +54,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should render a tag for focused challenge with tooltip', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         instruction: 'La consigne de mon test',
         id: 'rec_challenge',
@@ -69,7 +70,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should render a tag for other challenge with tooltip', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         instruction: 'La consigne de mon test',
         id: 'rec_challenge',
@@ -85,7 +86,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should not render challenge instruction if it does not exist', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {});
 
       // when
@@ -97,7 +98,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should add title "destination (Ouverture d\'une nouvelle fenêtre)" to external links', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'recigAYl5bl96WGXj',
         instruction: 'Cliquer sur les liens [lien 1](https://monlien1.com) et [lien 2](https://monlien2.com)',
@@ -119,7 +120,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should display a specific style', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         instruction: 'La consigne de mon test',
         id: 'rec_challenge',
@@ -137,7 +138,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should not display focused challenges specific style', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         instruction: 'La consigne de mon test',
         id: 'rec_challenge',
@@ -155,12 +156,12 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should have a screen reader only warning if challenge has an embed', async function (assert) {
       // given
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         hasValidEmbedDocument: true,
         id: 'rec_challenge',
         instruction: 'La consigne de mon test',
       });
-      addAssessmentToContext(this, { id: '267845' });
 
       // when
       await renderChallengeStatement(this);
@@ -175,12 +176,12 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should have a screen reader only warning if challenge has an alternative instruction', async function (assert) {
       // given
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'rec_challenge',
         instruction: 'La consigne de mon test',
         alternativeInstruction: 'La consigne alternative de mon test',
       });
-      addAssessmentToContext(this, { id: '267845' });
 
       // when
       await renderChallengeStatement(this);
@@ -209,7 +210,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           module('when text to speech button is activated', function () {
             test('it should render the text to speech button', async function (assert) {
               // given
-              addAssessmentToContext(this, { id: '267567' });
+              addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
               addChallengeToContext(this, {
                 instruction: 'La consigne du test avec un bouton de lecture à haute voix',
                 id: 'rec_challenge1',
@@ -234,7 +235,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
             module('when the text to speech has started', function () {
               test('it should display a stop button', async function (assert) {
                 // given
-                addAssessmentToContext(this, { id: '267567' });
+                addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
                 addChallengeToContext(this, {
                   instruction: "Test d'intégration vocalisation",
                   id: 'rec_challenge1',
@@ -265,7 +266,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
             module('when user clicks on text-to-speech button', function () {
               test('should push analytics event', async function (assert) {
                 // given
-                addAssessmentToContext(this, { id: '267567' });
+                addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
                 addChallengeToContext(this, {
                   instruction: "Test d'intégration vocalisation",
                   id: 'rec_challenge4',
@@ -299,7 +300,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           module('when text to speech button is deactivated', function () {
             test('it should not render the text to speech button', async function (assert) {
               // given
-              addAssessmentToContext(this, { id: '267567' });
+              addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
               addChallengeToContext(this, {
                 instruction: 'La consigne du test avec un bouton de lecture à haute voix',
                 id: 'rec_challenge1',
@@ -324,9 +325,19 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
         });
 
         module('when the assessment is a certification', function () {
-          test('it should not render the text to speech button', async function (assert) {
+          test('it should not render the text to speech button when certification is not adjusted for accessibility', async function (assert) {
             // given
-            addAssessmentToContext(this, { id: '267567', isCertification: true });
+            const certificationCourse = this.store.createRecord('certification-course', {
+              id: 'cert123',
+              isAdjustedForAccessibility: false,
+            });
+            const assessment = this.store.createRecord('assessment', {
+              id: '267567',
+              type: 'CERTIFICATION',
+              certificationCourse,
+            });
+            addAssessmentToContext(this, assessment);
+
             addChallengeToContext(this, {
               instruction: 'La consigne du test avec un bouton de lecture à haute voix',
               id: 'rec_challenge1',
@@ -347,6 +358,40 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
               )
               .doesNotExist();
           });
+
+          test('it should render the text to speech button when certification is adjusted for accessibility', async function (assert) {
+            // given
+            const certificationCourse = this.store.createRecord('certification-course', {
+              id: 'cert123',
+              isAdjustedForAccessibility: true,
+            });
+            const assessment = this.store.createRecord('assessment', {
+              id: '267567',
+              type: 'CERTIFICATION',
+              certificationCourse,
+            });
+            addAssessmentToContext(this, assessment);
+
+            addChallengeToContext(this, {
+              instruction: 'La consigne du test avec un bouton de lecture à haute voix',
+              id: 'rec_challenge1',
+              locales: ['fr'],
+            });
+
+            // when
+            const screen = await render(
+              hbs`<ChallengeStatement @challenge={{this.challenge}} @assessment={{this.assessment}} @isTextToSpeechActivated={{true}} />`,
+            );
+
+            // then
+            assert
+              .dom(
+                screen.getByRole('button', {
+                  name: t('pages.challenge.statement.text-to-speech.play'),
+                }),
+              )
+              .exists();
+          });
         });
       });
 
@@ -360,7 +405,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           module('when text to speech button is activated', function () {
             test('it should not render the text to speech button', async function (assert) {
               // given
-              addAssessmentToContext(this, { id: '267567' });
+              addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267567' }));
               addChallengeToContext(this, {
                 instruction: 'La consigne du test avec un bouton de lecture à haute voix',
                 id: 'rec_challenge1',
@@ -386,7 +431,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           module('when text to speech button is deactivated', function () {
             test('it should not render the text to speech button', async function (assert) {
               // given
-              addAssessmentToContext(this, { id: '267567' });
+              addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267567' }));
               addChallengeToContext(this, {
                 instruction: 'La consigne du test avec un bouton de lecture à haute voix',
                 id: 'rec_challenge1',
@@ -414,7 +459,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       module('when the browers speech synthesis is disabled', function () {
         test('it should not display text to speech button', async function (assert) {
           // given
-          addAssessmentToContext(this, { id: '267567' });
+          addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267567' }));
           addChallengeToContext(this, {
             instruction: 'La consigne du test avec un bouton de lecture à haute voix',
             id: 'rec_challenge1',
@@ -451,7 +496,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
   module('Alternative instruction section:', function () {
     test('should hide alternative instruction zone if no alternative instruction', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'recigAYl5bl96WGXj',
         instruction: 'La consigne de mon test',
@@ -467,7 +512,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should show alternative instruction zone if there is an alternative instruction', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'recigAYl5bl96WGXj',
         instruction: 'La consigne de mon test',
@@ -483,7 +528,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should display alternative instruction text on button click', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'recigAYl5bl96WGXj',
         instruction: 'La consigne de mon test',
@@ -500,7 +545,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
     test('should hide alternative instruction text on second button click', async function (assert) {
       // given
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
       addChallengeToContext(this, {
         id: 'recigAYl5bl96WGXj',
         instruction: 'La consigne de mon test',
@@ -531,7 +576,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
         id: 'rec_challenge',
       };
       addChallengeToContext(this, challenge);
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
       // when
       await renderChallengeStatement(this);
@@ -544,7 +589,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
     test('should not display challenge illustration if it does not exist', async function (assert) {
       // given
       addChallengeToContext(this, {});
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
       // when
       await renderChallengeStatement(this);
@@ -567,7 +612,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           hasAttachment: false,
           id: 'rec_challenge',
         });
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -587,7 +632,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
           hasMultipleAttachments: false,
           id: 'rec_challenge',
         });
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         const screen = await renderChallengeStatement(this);
@@ -626,7 +671,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should display as many radio button as attachments', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -638,7 +683,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should display radio buttons with right label', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -651,7 +696,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should select first attachment as default selected radio button', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -664,7 +709,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should select first attachment as default selected radio button when QROC', async function (assert) {
         // given
         addChallengeToContext(this, challengeQROC);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -677,7 +722,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should display attachements paragraph text', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -692,7 +737,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should display help icon next to attachements paragraph', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -704,7 +749,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test('should display instructions regarding downloading issues', async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         await renderChallengeStatement(this);
@@ -715,7 +760,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test("should display one link button with default attachment's url", async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         const screen = await renderChallengeStatement(this);
@@ -729,7 +774,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
       test("should update link button href with checked attachment's url", async function (assert) {
         // given
         addChallengeToContext(this, challenge);
-        addAssessmentToContext(this, { id: '267845' });
+        addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
         // when
         const screen = await renderChallengeStatement(this);
@@ -756,7 +801,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
     test('should be displayed when the challenge has a valid Embed object', async function (assert) {
       // given
       addChallengeToContext(this, { hasValidEmbedDocument: true, id: 'rec_challenge' });
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
       // when
       await renderChallengeStatement(this);
@@ -768,7 +813,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
     test('should not be displayed when the challenge does not have a valid Embed object', async function (assert) {
       // given
       addChallengeToContext(this, { hasValidEmbedDocument: false, id: 'rec_challenge' });
-      addAssessmentToContext(this, { id: '267845' });
+      addAssessmentToContext(this, this.store.createRecord('assessment', { id: '267845' }));
 
       // when
       await renderChallengeStatement(this);
