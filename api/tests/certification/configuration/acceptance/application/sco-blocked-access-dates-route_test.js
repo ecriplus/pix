@@ -33,9 +33,9 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       // then
       expect(response.statusCode).to.equal(201);
       const [updatedValue] = await knex('sco-blocked-access-dates')
-        .where({ key: 'scoBlockedAccessDateLycee' })
+        .where({ key: 'sco-blocked-access-date-lycee' })
         .pluck('value');
-      expect(updatedValue).to.equal('2025-12-15');
+      expect(updatedValue.toDateString()).to.equal(new Date('2025-12-15').toDateString());
     });
   });
 
@@ -58,10 +58,16 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       // then
       expect(response.statusCode).to.equal(200);
       const result = JSON.parse(response.payload);
-      expect(result.data.attributes).to.deep.equal({
-        scoBlockedAccessDateCollege: scoBlockedAccessDates.scoBlockedAccessDateCollege,
-        scoBlockedAccessDateLycee: scoBlockedAccessDates.scoBlockedAccessDateLycee,
-      });
+      expect(result.data.attributes.dates).to.deep.equal([
+        {
+          key: 'sco-blocked-access-date-college',
+          value: scoBlockedAccessDates.scoBlockedAccessDateCollege.toISOString(),
+        },
+        {
+          key: 'sco-blocked-access-date-lycee',
+          value: scoBlockedAccessDates.scoBlockedAccessDateLycee.toISOString(),
+        },
+      ]);
     });
   });
 });

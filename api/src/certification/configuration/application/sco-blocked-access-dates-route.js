@@ -27,11 +27,11 @@ const register = async function (server) {
             key: Joi.string().required(),
           }),
           payload: Joi.object({
-            data: {
-              attributes: {
+            data: Joi.object({
+              attributes: Joi.object({
                 value: Joi.date().format('YYYY-MM-DD').required(),
-              },
-            },
+              }).required(),
+            }).required(),
           }),
         },
         handler: scoBlockedAccessDatesController.updateScoBlockedAccessDates,

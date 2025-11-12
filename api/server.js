@@ -9,6 +9,7 @@ import { bannerRoutes } from './src/banner/routes.js';
 import {
   attachTargetProfileRoutes,
   certificationConfigurationRoutes,
+  scoBlockedAccessDatesRoutes,
   scoWhitelistRoutes,
 } from './src/certification/configuration/routes.js';
 import { certificationEnrolmentRoutes } from './src/certification/enrolment/routes.js';
@@ -51,6 +52,7 @@ const certificationRoutes = [
   certificationResultRoutes,
   certificationSessionRoutes,
   scoringRoutes,
+  scoBlockedAccessDatesRoutes,
   scoWhitelistRoutes,
   certificationEvaluationRoutes,
 ];

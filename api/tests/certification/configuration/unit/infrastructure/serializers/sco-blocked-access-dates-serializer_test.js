@@ -16,15 +16,17 @@ describe('Certification | Configuration | Unit | Serializer | sco-blocked-access
 
       // then
       expect(serializedScoBlockedAccessDates).to.deep.equal({
-        data: [
-          {
-            type: 'sco-blocked-access-dates',
-            attributes: {
-              'sco-blocked-access-date-lycee': new Date('2025-10-15'),
-              'sco-blocked-access-date-college': new Date('2025-11-10'),
-            },
+        data: {
+          attributes: {
+            dates: [
+              {
+                scoBlockedAccessDateLycee: new Date('2025-10-15'),
+                scoBlockedAccessDateCollege: new Date('2025-11-10'),
+              },
+            ],
           },
-        ],
+          type: 'sco-blocked-access-dates',
+        },
       });
     });
   });

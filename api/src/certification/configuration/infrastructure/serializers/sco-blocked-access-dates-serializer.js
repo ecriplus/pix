@@ -2,10 +2,13 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (ScoBlockedAccessDates) {
+const serialize = function (scoBlockedAccessDates) {
   return new Serializer('sco-blocked-access-dates', {
-    attributes: ['scoBlockedAccessDateLycee', 'scoBlockedAccessDateCollege'],
-  }).serialize(ScoBlockedAccessDates);
+    transform() {
+      return { dates: scoBlockedAccessDates };
+    },
+    attributes: ['dates'],
+  }).serialize({});
 };
 
 export { serialize };

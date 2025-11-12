@@ -60,9 +60,11 @@ import { getComplementaryCertificationForTargetProfileAttachmentRepository } fro
 import { getComplementaryCertificationTargetProfileHistory } from './get-complementary-certification-target-profile-history.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
+import { getScoBlockedAccessDates } from './get-sco-blocked-access-dates.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 import { updateCertificationVersion } from './update-certification-version.js';
+import { updateScoBlockedAccessDates } from './update-sco-blocked-access-dates.js';
 
 const usecasesWithoutInjectedDependencies = {
   calibrateFrameworkVersion,
@@ -78,6 +80,8 @@ const usecasesWithoutInjectedDependencies = {
   importScoWhitelist,
   searchAttachableTargetProfiles,
   updateCertificationVersion,
+  getScoBlockedAccessDates,
+  updateScoBlockedAccessDates,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
