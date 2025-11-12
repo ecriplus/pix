@@ -37,29 +37,17 @@
                     {
                       "userName": "Max",
                       "direction": "outgoing",
-                      "content": "C’est bon, je suis tranquille. J’ai un mot de passe ultra fort : 18 caractères avec des majuscules, minuscules, chiffres et caractères spéciaux. Impossible que je me fasse pirater mes comptes ! 💪",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "C’est bon, je suis tranquille. J’ai un mot de passe ultra fort : 18 caractères avec des majuscules, minuscules, chiffres et caractères spéciaux. Impossible que je me fasse pirater mes comptes ! 💪"
                     },
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
-                      "content": "C’est cool, mais tu utiliseras le même sur tous tes comptes ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "C’est cool, mais tu utiliseras le même sur tous tes comptes ?"
                     },
                     {
                       "userName": "Max",
                       "direction": "incoming",
-                      "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎"
                     }
                   ]
                 }
@@ -452,20 +440,12 @@
                     {
                       "userName": "Max",
                       "direction": "outgoing",
-                      "content": "T’avais raison j’étais loin du compte avec mon unique mot de passe ultra fort.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "T’avais raison j’étais loin du compte avec mon unique mot de passe ultra fort."
                     },
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
-                      "content": "Eh oui Max, il en faut bien plus pour protéger efficacement ses comptes !",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Eh oui Max, il en faut bien plus pour protéger efficacement ses comptes !"
                     }
                   ]
                 }
