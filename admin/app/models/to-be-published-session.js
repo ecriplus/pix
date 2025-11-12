@@ -1,7 +1,9 @@
+import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
-import dayjs from 'dayjs';
 
 export default class ToBePublishedSession extends Model {
+  @service intl;
+
   @attr() certificationCenterName;
   @attr('date-only') sessionDate;
   @attr() sessionTime;
@@ -13,6 +15,6 @@ export default class ToBePublishedSession extends Model {
   }
 
   get printableFinalizationDate() {
-    return dayjs(this.finalizedAt).format('DD/MM/YYYY');
+    return this.intl.formatDate(this.finalizedAt);
   }
 }

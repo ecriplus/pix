@@ -5,7 +5,7 @@ import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import formatDate from 'ember-intl/helpers/format-date';
 import { eq } from 'ember-truth-helpers';
 
 export default class List extends Component {
@@ -40,11 +40,11 @@ export default class List extends Component {
           </:header>
           <:cell>
             Du:
-            {{dayjsFormat place.activationDate "DD/MM/YYYY"}}
+            {{formatDate place.activationDate}}
             {{#if place.hasExpirationDate}}
               <br />
               Au:
-              {{dayjsFormat place.expirationDate "DD/MM/YYYY"}}
+              {{formatDate place.expirationDate}}
             {{/if}}
           </:cell>
         </PixTableColumn>

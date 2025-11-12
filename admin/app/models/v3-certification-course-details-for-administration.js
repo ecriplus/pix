@@ -1,5 +1,4 @@
 import Model, { attr, hasMany } from '@ember-data/model';
-import dayjs from 'dayjs';
 import { assessmentStates } from 'pix-admin/models/certification';
 
 const ONE_HOUR_45_MINUTES_IN_MS = 1 * 60 * 60 * 1000 + 45 * 60 * 1000;
@@ -69,9 +68,9 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   }
 
   get duration() {
-    const start = dayjs(this.createdAt);
-    const end = this.wasCompleted ? dayjs(this.completedAt) : dayjs(this.endedAt);
-    return end.diff(start);
+    const start = new Date(this.createdAt);
+    const end = this.wasCompleted ? new Date(this.completedAt) : new Date(this.endedAt);
+    return end - start;
   }
 
   get hasExceededTimeLimit() {

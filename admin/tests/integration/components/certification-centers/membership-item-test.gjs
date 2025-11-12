@@ -1,6 +1,5 @@
 import { clickByName, render as renderScreen } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import MembershipItem from 'pix-admin/components/certification-centers/membership-item';
 import { module, test } from 'qunit';
@@ -12,9 +11,11 @@ module('Integration | Component |  certification-centers/membership-item', funct
   setupIntlRenderingTest(hooks);
 
   let store;
+  let intl;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    intl = this.owner.lookup('service:intl');
   });
 
   hooks.afterEach(function () {
@@ -51,8 +52,8 @@ module('Integration | Component |  certification-centers/membership-item', funct
       );
 
       // then
-      const expectedLastAccessedAtDate = dayjs(certificationCenterMembership.lastAccessedAt).format('DD-MM-YYYY');
-      const expectedCreationDate = dayjs(certificationCenterMembership.createdAt).format('DD-MM-YYYY - HH:mm:ss');
+      const expectedLastAccessedAtDate = intl.formatDate(certificationCenterMembership.lastAccessedAt);
+      const expectedCreationDate = intl.formatDate(certificationCenterMembership.createdAt, { format: 'long' });
 
       assert.dom(screen.getByRole('link', { name: certificationCenterMembership.id })).exists();
       assert.dom(screen.getByRole('cell', { name: user.firstName })).exists();

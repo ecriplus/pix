@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
@@ -21,7 +20,7 @@ export default class ViewAutonomousCourse extends Component {
   displayedAttributes = [
     {
       label: this.translatedLabel('created-date'),
-      value: dayjs(this.args.autonomousCourse.createdAt).format('DD/MM/YYYY'),
+      value: this.intl.formatDate(this.args.autonomousCourse.createdAt),
     },
     { label: this.translatedLabel('internal-title'), value: this.args.autonomousCourse.internalTitle },
     { label: this.translatedLabel('public-title'), value: this.args.autonomousCourse.publicTitle },

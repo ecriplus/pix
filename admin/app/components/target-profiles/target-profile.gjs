@@ -9,10 +9,10 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import { pageTitle } from 'ember-page-title';
 import ENV from 'pix-admin/config/environment';
 
-import formatDate from '../../helpers/format-date';
 import ConfirmPopup from '../confirm-popup';
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import Breadcrumb from './breadcrumb';

@@ -4,8 +4,8 @@ import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 import MembershipItemActions from './membership-item-actions';
 import MembershipItemRole from './membership-item-role';
@@ -74,7 +74,7 @@ export default class CertificationCentersMembershipItemComponent extends Compone
     <PixTableColumn @context={{@context}}>
       <:header>Date de rattachement</:header>
       <:cell>
-        {{dayjsFormat @certificationCenterMembership.createdAt "DD-MM-YYYY - HH:mm:ss"}}
+        {{formatDate @certificationCenterMembership.createdAt format="long"}}
       </:cell>
     </PixTableColumn>
     <PixTableColumn @context={{@context}}>
@@ -92,7 +92,7 @@ export default class CertificationCentersMembershipItemComponent extends Compone
       <:header>Dernier accès</:header>
       <:cell>
         {{#if @certificationCenterMembership.lastAccessedAt}}
-          {{dayjsFormat @certificationCenterMembership.lastAccessedAt "DD-MM-YYYY"}}
+          {{formatDate @certificationCenterMembership.lastAccessedAt}}
         {{else}}
           {{t "components.certification-centers.membership-item.no-last-connection-date-info"}}
         {{/if}}

@@ -1,13 +1,15 @@
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
+import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
-import dayjs from 'dayjs';
 import groupBy from 'lodash/groupBy';
 import sortBy from 'lodash/sortBy';
 
 const PIX_PLUS_INDEX = '';
 
 export default class CertificationDetails extends Model {
+  @service intl;
+
   @attr() competencesWithMark;
   @attr() totalScore;
   @attr() percentageCorrectAnswers;
@@ -49,12 +51,12 @@ export default class CertificationDetails extends Model {
 
   @computed('createdAt')
   get creationDate() {
-    return dayjs(this.createdAt).format('DD/MM/YYYY, HH:mm:ss');
+    return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
   @computed('completedAt')
   get completionDate() {
-    return dayjs(this.completedAt).format('DD/MM/YYYY, HH:mm:ss');
+    return this.intl.formatDate(this.completedAt, { format: 'long' });
   }
 
   #includePixPlusCompetences(answersByCompetence) {

@@ -7,7 +7,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import formatDate from 'pix-admin/helpers/format-date';
+import formatDate from 'ember-intl/helpers/format-date';
 
 export default class OrganizationLearnerInformation extends Component {
   @service accessControl;
@@ -45,7 +45,9 @@ export default class OrganizationLearnerInformation extends Component {
               DDN
             </:header>
             <:cell>
-              {{formatDate organizationLearner.birthdate}}
+              {{#if organizationLearner.birthdate}}
+                {{formatDate organizationLearner.birthdate}}
+              {{/if}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

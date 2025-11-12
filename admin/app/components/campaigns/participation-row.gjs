@@ -7,8 +7,8 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import { and } from 'ember-truth-helpers';
 
 export default class ParticipationRow extends Component {
@@ -91,7 +91,7 @@ export default class ParticipationRow extends Component {
 
     <PixTableColumn @context={{@context}}>
       <:header>Date de début</:header>
-      <:cell>{{dayjsFormat @participation.createdAt "DD/MM/YYYY"}}</:cell>
+      <:cell>{{formatDate @participation.createdAt}}</:cell>
     </PixTableColumn>
 
     <PixTableColumn @context={{@context}}>
@@ -101,14 +101,14 @@ export default class ParticipationRow extends Component {
 
     <PixTableColumn @context={{@context}}>
       <:header>Date d'envoi</:header>
-      <:cell>{{if @participation.sharedAt (dayjsFormat @participation.sharedAt "DD/MM/YYYY") "-"}}</:cell>
+      <:cell>{{if @participation.sharedAt (formatDate @participation.sharedAt) "-"}}</:cell>
     </PixTableColumn>
 
     <PixTableColumn @context={{@context}}>
       <:header>Supprimée le</:header>
       <:cell>
         {{#if @participation.deletedAt}}
-          {{dayjsFormat @participation.deletedAt "DD/MM/YYYY"}}
+          {{formatDate @participation.deletedAt}}
           par
           <LinkTo @route="authenticated.users.get" @model={{@participation.deletedBy}}>
             {{@participation.deletedByFullName}}

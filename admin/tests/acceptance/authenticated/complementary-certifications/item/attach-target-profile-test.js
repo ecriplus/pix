@@ -1,6 +1,5 @@
 import { clickByName, getScreen, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn, waitUntil } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -20,7 +19,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             id: 1,
             key: 'KEY',
             label: 'MARIANNE CERTIF',
-            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
           server.create('target-profile', {
             id: 3,
@@ -47,7 +46,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               id: 1,
               key: 'KEY',
               label: 'MARIANNE CERTIF',
-              targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+              targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
             });
             server.create('target-profile', {
               id: 3,
@@ -98,7 +97,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             id: 1,
             key: 'KEY',
             label: 'MARIANNE CERTIF',
-            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
           server.create('attachable-target-profile', {
             id: 3,
@@ -132,7 +131,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               id: 1,
               key: 'KEY',
               label: 'MARIANNE CERTIF',
-              targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+              targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
             });
             server.create('attachable-target-profile', {
               id: 5,
@@ -222,7 +221,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             key: 'KEY',
             hasExternalJury: true,
             label: 'MARIANNE CERTIF',
-            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
           server.create('attachable-target-profile', {
             id: 5,
@@ -298,7 +297,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             key: 'KEY',
             hasExternalJury: true,
             label: 'MARIANNE CERTIF',
-            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+            targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
           server.create('attachable-target-profile', {
             id: 5,
@@ -363,7 +362,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           id: 1,
           key: 'KEY',
           label: 'MARIANNE CERTIF',
-          targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') }],
+          targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
         });
         server.create('target-profile', {
           id: 3,

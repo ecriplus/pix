@@ -1,5 +1,5 @@
 import { clickByText, fillByLabel, visit } from '@1024pix/ember-testing-library';
-import dayjs from 'dayjs';
+import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -9,10 +9,14 @@ import sinon from 'sinon';
 module('Acceptance | organization invitations management', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks, 'fr');
 
   const now = new Date('2019-01-01T05:06:07Z');
 
+  let intl;
+
   hooks.beforeEach(function () {
+    intl = this.owner.lookup('service:intl');
     sinon.stub(Date, 'now').returns(now);
   });
 
@@ -46,7 +50,7 @@ module('Acceptance | organization invitations management', function (hooks) {
 
       // then
       assert.dom(screen.getByText("Un email a bien a été envoyé à l'adresse user@example.com.")).exists();
-      assert.dom(screen.getByText(dayjs(now).format('DD/MM/YYYY [-] HH:mm'))).exists();
+      assert.dom(screen.getByText(intl.formatDate(now, { format: 'medium' }))).exists();
       assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
     });
 
@@ -68,7 +72,7 @@ module('Acceptance | organization invitations management', function (hooks) {
       await clickByText('Inviter');
 
       // then
-      assert.dom(screen.queryByText(dayjs(now).format('DD/MM/YYYY [-] HH:mm'))).doesNotExist();
+      assert.dom(screen.queryByText(intl.formatDate(now, { format: 'medium' }))).doesNotExist();
       assert.dom(screen.getByText('Une erreur s’est produite, veuillez réessayer.')).exists();
     });
   });

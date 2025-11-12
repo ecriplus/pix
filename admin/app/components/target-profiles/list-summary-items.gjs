@@ -11,8 +11,8 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
-import formatDate from '../../helpers/format-date';
 import { categories } from '../../helpers/target-profile-categories.js';
 
 export default class TargetProfileListSummaryItems extends Component {

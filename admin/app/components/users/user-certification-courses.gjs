@@ -4,8 +4,8 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 export default class UserCertificationCourses extends Component {
   @service intl;
@@ -57,7 +57,7 @@ export default class UserCertificationCourses extends Component {
               {{t "components.users.certification-centers.certification-courses.table-headers.created-at"}}
             </:header>
             <:cell>
-              {{dayjsFormat certificationCourse.createdAt "DD/MM/YYYY"}}
+              {{formatDate certificationCourse.createdAt}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

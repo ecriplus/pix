@@ -7,8 +7,8 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import { and, not } from 'ember-truth-helpers';
 
 import ConfirmPopup from '../confirm-popup';
@@ -84,7 +84,7 @@ export default class CampaignParticipation extends Component {
               Date de début
             </:header>
             <:cell>
-              {{dayjsFormat participation.createdAt "DD/MM/YYYY"}}
+              {{formatDate participation.createdAt}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
@@ -100,7 +100,7 @@ export default class CampaignParticipation extends Component {
               Date d'envoi
             </:header>
             <:cell>
-              {{if participation.sharedAt (dayjsFormat participation.sharedAt "DD/MM/YYYY") "-"}}
+              {{if participation.sharedAt (formatDate participation.sharedAt) "-"}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
@@ -108,11 +108,7 @@ export default class CampaignParticipation extends Component {
               Supprimé le
             </:header>
             <:cell>
-              {{#if participation.deletedAt}}
-                {{dayjsFormat participation.deletedAt "DD/MM/YYYY"}}
-              {{else}}
-                -
-              {{/if}}
+              {{if participation.deletedAt (formatDate participation.deletedAt) "-"}}
             </:cell>
           </PixTableColumn>
           {{#if (and this.accessControl.hasAccessToUsersActionsScope (not participation.isFromCombinedCourse))}}

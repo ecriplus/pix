@@ -10,6 +10,12 @@ module('Integration | Component | Certification Centers | Invitations', function
   setupRenderingTest(hooks);
   setupIntl(hooks, 'fr');
 
+  let intl;
+
+  hooks.beforeEach(function () {
+    intl = this.owner.lookup('service:intl');
+  });
+
   module('when there is no certification center invitations', function () {
     test('should show "Aucune invitation en attente"', async function (assert) {
       // given
@@ -29,7 +35,6 @@ module('Integration | Component | Certification Centers | Invitations', function
     test('should show invitations list', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const dayjsService = this.owner.lookup('service:dayjs');
 
       const invitationUpdatedAt1 = new Date('2020-02-02T09:00:00Z');
       const invitationUpdatedAt2 = new Date('2022-02-02T15:12:00Z');
@@ -57,9 +62,6 @@ module('Integration | Component | Certification Centers | Invitations', function
       );
 
       // then
-      const formattedInvitationUpdatedAt1 = dayjsService.self(invitationUpdatedAt1).format('DD/MM/YYYY [-] HH:mm');
-      const formattedInvitationUpdatedAt2 = dayjsService.self(invitationUpdatedAt2).format('DD/MM/YYYY [-] HH:mm');
-
       const table = screen.getByRole('table', {
         name: t('components.certification-centers.invitations.table.caption'),
       });
@@ -69,10 +71,14 @@ module('Integration | Component | Certification Centers | Invitations', function
       assert.dom(within(table).getByRole('columnheader', { name: 'Date de dernier envoi' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Locale' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'elo.dela@example.net' })).exists();
-      assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt1 })).exists();
+      assert
+        .dom(within(table).getByRole('cell', { name: intl.formatDate(invitationUpdatedAt1, { format: 'medium' }) }))
+        .exists();
       assert.dom(within(table).getByRole('cell', { name: 'fr-FR' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'alain.finis@example.net' })).exists();
-      assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt2 })).exists();
+      assert
+        .dom(within(table).getByRole('cell', { name: intl.formatDate(invitationUpdatedAt2, { format: 'medium' }) }))
+        .exists();
       assert.dom(within(table).getByRole('cell', { name: 'fr-BE' })).exists();
     });
   });

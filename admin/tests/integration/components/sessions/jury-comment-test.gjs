@@ -1,6 +1,5 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import dayjs from 'dayjs';
 import JuryComment from 'pix-admin/components/sessions/jury-comment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -9,6 +8,12 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | JuryComment', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  let intl;
+
+  hooks.beforeEach(function () {
+    intl = this.owner.lookup('service:intl');
+  });
 
   module('when there is no comment', function () {
     module('when current user is not allowed to comment', function () {
@@ -153,7 +158,7 @@ module('Integration | Component | JuryComment', function (hooks) {
       // then
       assert.dom(screen.getByText("Commentaire de l'équipe Certification")).exists();
       assert.dom(screen.getByText('Vernon Sanders Law')).exists();
-      assert.dom(screen.getByText(_formatDate('2021-06-21T14:30:21Z'))).exists();
+      assert.dom(screen.getByText(intl.formatDate(date, { format: 'medium' }))).exists();
       assert
         .dom(
           screen.getByText(
@@ -449,7 +454,3 @@ module('Integration | Component | JuryComment', function (hooks) {
     });
   });
 });
-
-function _formatDate(dateString) {
-  return dayjs(dateString).format('DD/MM/YYYY à HH:mm');
-}

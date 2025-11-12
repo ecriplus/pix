@@ -1,7 +1,7 @@
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
+import { service } from '@ember/service';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-import dayjs from 'dayjs';
 
 export const assessmentStates = {
   COMPLETED: 'completed',
@@ -27,6 +27,8 @@ export const certificationStatuses = [
 ];
 
 export default class Certification extends Model {
+  @service intl;
+
   @attr() sessionId;
   @attr() assessmentId;
   @attr() userId;
@@ -60,12 +62,12 @@ export default class Certification extends Model {
 
   @computed('createdAt')
   get creationDate() {
-    return dayjs(this.createdAt).format('DD/MM/YYYY, HH:mm:ss');
+    return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
   @computed('completedAt')
   get completionDate() {
-    return this.completedAt ? dayjs(this.completedAt).format('DD/MM/YYYY, HH:mm:ss') : null;
+    return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
   }
 
   @computed('status')

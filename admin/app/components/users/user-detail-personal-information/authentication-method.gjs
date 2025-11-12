@@ -5,9 +5,8 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 import AddAuthenticationMethodModal from './add-authentication-method-modal';
 import ReassignGarAuthenticationMethodModal from './reassign-gar-authentication-method-modal';
@@ -131,7 +130,7 @@ export default class AuthenticationMethod extends Component {
         'components.users.user-detail-personal-information.authentication-method.no-last-connection-date-info',
       );
     return this.intl.t('components.users.user-detail-personal-information.authentication-method.last-logged-at', {
-      date: dayjs(date).format('DD/MM/YYYY'),
+      date: this.intl.formatDate(date),
     });
   }
 
@@ -223,7 +222,7 @@ export default class AuthenticationMethod extends Component {
       {{#if @user.emailConfirmedAt}}
         <li>
           <strong>Adresse e-mail confirmée le :</strong>
-          {{dayjsFormat @user.emailConfirmedAt "DD/MM/YYYY"}}
+          {{formatDate @user.emailConfirmedAt}}
         </li>
       {{else}}
         <li>
@@ -247,7 +246,7 @@ export default class AuthenticationMethod extends Component {
           {{orderedLastApplicationConnection.label}}
           :
           {{#if orderedLastApplicationConnection.lastLoggedAt}}
-            {{dayjsFormat orderedLastApplicationConnection.lastLoggedAt "DD/MM/YYYY"}}
+            {{formatDate orderedLastApplicationConnection.lastLoggedAt}}
           {{/if}}
         </li>
       {{/each}}

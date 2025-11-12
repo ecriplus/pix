@@ -10,10 +10,9 @@ import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import map from 'lodash/map';
 import { statusToDisplayName } from 'pix-admin/models/session';
-
-import formatDate from '../../helpers/format-date';
 
 export default class ListItems extends Component {
   @tracked selectedCertificationCenterTypeOption = null;
@@ -196,7 +195,9 @@ export default class ListItems extends Component {
                 {{t "pages.sessions.table.headers.session-date"}}
               </:header>
               <:cell>
-                {{formatDate session.date}}
+                {{#if session.date}}
+                  {{formatDate session.date}}
+                {{/if}}
                 à
                 {{session.time}}
               </:cell>
@@ -214,7 +215,9 @@ export default class ListItems extends Component {
                 {{t "pages.sessions.table.headers.finalization-session-date"}}
               </:header>
               <:cell>
-                {{formatDate session.finalizedAt}}
+                {{#if session.finalizedAt}}
+                  {{formatDate session.finalizedAt}}
+                {{/if}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}}>
@@ -222,7 +225,9 @@ export default class ListItems extends Component {
                 {{t "pages.sessions.table.headers.publication-session-date"}}
               </:header>
               <:cell>
-                {{formatDate session.publishedAt}}
+                {{#if session.publishedAt}}
+                  {{formatDate session.publishedAt}}
+                {{/if}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}}>

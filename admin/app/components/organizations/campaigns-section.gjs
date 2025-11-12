@@ -2,7 +2,7 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import formatDate from 'ember-intl/helpers/format-date';
 import { or } from 'ember-truth-helpers';
 
 import CampaignType from '../campaigns/type';
@@ -39,7 +39,7 @@ import CampaignType from '../campaigns/type';
         </PixTableColumn>
         <PixTableColumn @context={{context}}>
           <:header>Créée le</:header>
-          <:cell>{{dayjsFormat campaign.createdAt "DD/MM/YYYY"}}</:cell>
+          <:cell>{{formatDate campaign.createdAt}}</:cell>
         </PixTableColumn>
         <PixTableColumn @context={{context}}>
           <:header>Créée par</:header>
@@ -52,7 +52,7 @@ import CampaignType from '../campaigns/type';
         <PixTableColumn @context={{context}}>
           <:header>Archivée le</:header>
           <:cell>{{#if campaign.archivedAt}}
-              {{dayjsFormat campaign.archivedAt "DD/MM/YYYY"}}
+              {{formatDate campaign.archivedAt}}
             {{else}}
               -
             {{/if}}</:cell>
@@ -60,7 +60,7 @@ import CampaignType from '../campaigns/type';
         <PixTableColumn @context={{context}}>
           <:header>Supprimée le</:header>
           <:cell>{{#if campaign.deletedAt}}
-              {{dayjsFormat campaign.deletedAt "DD/MM/YYYY"}}
+              {{formatDate campaign.deletedAt}}
             {{else}}
               -
             {{/if}}</:cell>

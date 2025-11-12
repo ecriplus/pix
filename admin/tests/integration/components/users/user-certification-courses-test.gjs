@@ -1,5 +1,4 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import UserCertificationCourses from 'pix-admin/components/users/user-certification-courses';
 import { module, test } from 'qunit';
@@ -11,10 +10,12 @@ module('Integration | Component | Users | User certification courses', function 
   setupIntlRenderingTest(hooks);
 
   let store;
+  let intl;
   const userId = 1;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    intl = this.owner.lookup('service:intl');
 
     const serviceRouter = this.owner.lookup('service:router');
     sinon.stub(serviceRouter, 'currentRoute').value({ parent: { params: { user_id: userId } } });
@@ -55,6 +56,7 @@ module('Integration | Component | Users | User certification courses', function 
       const certificationCourse2 = store.createRecord('user-certification-course', {
         isPublished: false,
       });
+      const certificationCourseCreatedAt = intl.formatDate(certificationCourse.createdAt);
 
       sinon.stub(store, 'query').resolves([certificationCourse, certificationCourse2]);
 
@@ -73,9 +75,7 @@ module('Integration | Component | Users | User certification courses', function 
       const idCell = screen.getByRole('cell', { name: certificationCourse.id });
       assert.dom(within(idCell).getByRole('link', { name: certificationCourse.id })).exists();
 
-      assert
-        .dom(screen.getByRole('cell', { name: dayjs(certificationCourse.createdAt).format('DD/MM/YYYY') }))
-        .exists();
+      assert.dom(screen.getByRole('cell', { name: certificationCourseCreatedAt })).exists();
 
       const sessionIdCell = screen.getByRole('cell', { name: certificationCourse.sessionId });
       assert.dom(within(sessionIdCell).getByRole('link', { name: certificationCourse.sessionId })).exists();

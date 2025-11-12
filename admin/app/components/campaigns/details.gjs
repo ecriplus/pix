@@ -3,8 +3,8 @@ import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import CampaignType from './type';
@@ -32,7 +32,7 @@ export default class Details extends Component {
       </header>
       <p class="campaign__subtitle">
         Créée le
-        {{dayjsFormat @campaign.createdAt "DD/MM/YYYY"}}
+        {{formatDate @campaign.createdAt}}
         par
         {{@campaign.creatorFirstName}}
         {{@campaign.creatorLastName}}
@@ -57,7 +57,7 @@ export default class Details extends Component {
           <li>Titre du parcours : {{@campaign.title}}</li>
         {{/if}}
         {{#if @campaign.archivedAt}}
-          <li>Archivée le {{dayjsFormat @campaign.archivedAt "DD/MM/YYYY"}}</li>
+          <li>Archivée le {{formatDate @campaign.archivedAt}}</li>
         {{/if}}
 
         <br />

@@ -1,6 +1,5 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
@@ -32,7 +31,7 @@ export default class Cgu extends Component {
 
     return date
       ? this.intl.t('components.users.user-detail-personal-information.cgu.validation.status.validated-with-date', {
-          formattedDate: dayjs(date).format('DD/MM/YYYY'),
+          formattedDate: this.intl.formatDate(date),
         })
       : this.intl.t('components.users.user-detail-personal-information.cgu.validation.status.validated');
   }

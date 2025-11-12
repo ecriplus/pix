@@ -8,17 +8,17 @@ import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntl, { setCurrentLocale } from '../../helpers/setup-intl.js';
+import { setCurrentLocale } from '../../helpers/setup-intl.js';
 
 const { DEFAULT_LOCALE } = ENV.APP;
 
 module('Unit | Services | locale', function (hooks) {
   setupTest(hooks);
-  setupIntl(hooks, 'fr');
 
   let localeService;
   let currentDomainService;
   let metricsService;
+  let dayjsService;
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
@@ -32,6 +32,12 @@ module('Unit | Services | locale', function (hooks) {
     }
     this.owner.register('service:metrics', metricsServiceStub);
     metricsService = this.owner.lookup('service:metrics');
+
+    class dayjsServiceStub extends Service {
+      setLocale = sinon.stub();
+    }
+    this.owner.register('service:dayjs', dayjsServiceStub);
+    dayjsService = this.owner.lookup('service:dayjs');
   });
 
   module('currentLocale', function () {
@@ -166,8 +172,6 @@ module('Unit | Services | locale', function (hooks) {
   module('setCurrentLocale', function () {
     test('set app locale in the cookies', function (assert) {
       // given
-      const dayjsService = this.owner.lookup('service:dayjs');
-      sinon.stub(dayjsService, 'setLocale');
       const intlService = this.owner.lookup('service:intl');
       sinon.stub(intlService, 'setLocale');
       const cookiesService = this.owner.lookup('service:cookies');

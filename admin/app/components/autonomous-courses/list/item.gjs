@@ -2,8 +2,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
-
-import formatDate from '../../../helpers/format-date';
+import formatDate from 'ember-intl/helpers/format-date';
 
 <template>
   <PixTableColumn @context={{@context}}>

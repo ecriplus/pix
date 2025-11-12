@@ -1,11 +1,11 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import CertificationInformationState from 'pix-admin/components/certifications/certification/informations/state';
 import { assessmentResultStatus } from 'pix-admin/models/certification';
+import setupIntlRenderingTest from 'pix-admin/tests/helpers/setup-intl-rendering';
 import { module, test } from 'qunit';
 
 module('Integration | Component | Certifications | Certification | Information | State', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   let store;
 

@@ -1,9 +1,9 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { setupApplicationTest } from 'ember-qunit';
 import { statusToDisplayName } from 'pix-admin/models/session';
 import { FINALIZED } from 'pix-admin/models/session';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
@@ -11,12 +11,21 @@ import { module, test } from 'qunit';
 module('Integration | Component | routes/authenticated/sessions/session | informations', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
+
+  let intl;
+
+  hooks.beforeEach(function () {
+    intl = this.owner.lookup('service:intl');
+  });
 
   module('regardless of session status', function () {
     test('it renders the details page with correct info', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
       const session = this.server.create('session');
+      const sessionDate = intl.formatDate(new Date(session.date));
+      const sessionCreatedAt = intl.formatDate(new Date(session.createdAt));
 
       // when
       const screen = await visit(`/sessions/${session.id}`);
@@ -30,13 +39,11 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       assert.dom(screen.getByText(session.address)).exists();
       assert.dom(screen.getByText(session.room)).exists();
       assert.dom(screen.getByText(session.examiner)).exists();
-      assert
-        .dom(screen.getByText(`${dayjs(session.date, 'YYYY-MM-DD').format('DD/MM/YYYY')} à ${session.time}`))
-        .exists();
+      assert.dom(screen.getByText(`${sessionDate} à ${session.time}`)).exists();
       assert.dom(screen.getByText(session.description)).exists();
       assert.dom(screen.getByText(session.accessCode)).exists();
       assert.dom(screen.getByText(statusToDisplayName[session.status])).exists();
-      assert.dom(screen.getByText(dayjs(session.createdAt, 'YYYY-MM-DD').format('DD/MM/YYYY'))).exists();
+      assert.dom(screen.getByText(sessionCreatedAt)).exists();
     });
   });
 

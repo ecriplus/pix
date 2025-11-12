@@ -1,7 +1,7 @@
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
+import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
-import dayjs from 'dayjs';
 import find from 'lodash/find';
 
 import { assessmentStates, certificationStatuses } from './certification';
@@ -12,6 +12,8 @@ export const juryCertificationSummaryStatuses = [
 
 const statuses = [...certificationStatuses, ...juryCertificationSummaryStatuses];
 export default class JuryCertificationSummary extends Model {
+  @service intl;
+
   @attr() firstName;
   @attr() lastName;
   @attr() status;
@@ -27,12 +29,12 @@ export default class JuryCertificationSummary extends Model {
 
   @computed('createdAt')
   get creationDate() {
-    return dayjs(this.createdAt).format('DD/MM/YYYY, HH:mm:ss');
+    return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
   @computed('completedAt')
   get completionDate() {
-    return this.completedAt ? dayjs(this.completedAt).format('DD/MM/YYYY, HH:mm:ss') : null;
+    return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
   }
 
   @computed('numberOfCertificationIssueReportsWithRequiredAction')
