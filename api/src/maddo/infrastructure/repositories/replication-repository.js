@@ -70,6 +70,7 @@ export const replications = [
         'max_level',
         'sum_user_max_level',
         'nb_user',
+        'passage_count',
         'nb_tubes_in_competence',
       );
     },
