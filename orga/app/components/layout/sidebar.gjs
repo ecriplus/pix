@@ -14,6 +14,7 @@ import UserLoggedMenu from './user-logged-menu';
 export default class SidebarMenu extends Component {
   @service currentUser;
   @service url;
+  @service router;
 
   @tracked canShowCredit;
 
@@ -27,6 +28,13 @@ export default class SidebarMenu extends Component {
     } else {
       return 'authenticated.campaigns';
     }
+  }
+
+  get classNamesCampaigns() {
+    if (this.router?.currentRoute?.name.startsWith('authenticated.combined-course.')) {
+      return 'active';
+    }
+    return null;
   }
 
   get documentationUrl() {
@@ -106,7 +114,11 @@ export default class SidebarMenu extends Component {
           {{t "navigation.main.home"}}</PixNavigationButton>
 
         {{#if this.shouldDisplayCampaignsEntry}}
-          <PixNavigationButton @route={{this.redirectionRoute}} @icon="conversionPath">
+          <PixNavigationButton
+            @route={{this.redirectionRoute}}
+            @icon="conversionPath"
+            class={{this.classNamesCampaigns}}
+          >
             {{t "navigation.main.campaigns"}}</PixNavigationButton>
         {{/if}}
 
