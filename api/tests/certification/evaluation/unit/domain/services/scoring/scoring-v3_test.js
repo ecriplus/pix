@@ -29,7 +29,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       sharedCertificationCandidateRepository,
       sharedVersionRepository,
       dependencies;
-    let clock;
+    let clock, version;
     const now = new Date('2019-01-01T05:06:07Z');
     let allChallenges;
 
@@ -60,7 +60,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       };
       scoringDegradationService = { downgradeCapacity: sinon.stub().rejects(new Error('Args mismatch')) };
       scoringConfigurationRepository = {
-        getLatestByDateAndLocale: sinon.stub().callsFake((a) => {
+        getLatestByVersionAndLocale: sinon.stub().callsFake((a) => {
           throw new Error(`Args mismatch: ${a}`);
         }),
       };
@@ -74,6 +74,12 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       dependencies = {
         findByCertificationCourseIdAndAssessmentId: sinon.stub(),
       };
+
+      version = domainBuilder.certification.evaluation.buildVersion({
+        challengesConfiguration: {
+          maximumAssessmentLength: 1,
+        },
+      });
     });
 
     afterEach(function () {
@@ -116,8 +122,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           competencesForScoring: [domainBuilder.buildCompetenceForScoring()],
         });
 
-        scoringConfigurationRepository.getLatestByDateAndLocale
-          .withArgs({ locale: 'fr', date: certificationCourse.getStartDate() })
+        scoringConfigurationRepository.getLatestByVersionAndLocale
+          .withArgs({ locale: 'fr', version })
           .resolves(scoringConfiguration);
 
         assessmentResult = domainBuilder.buildAssessmentResult({
@@ -193,10 +199,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             reconciliationDate: candidate.reconciledAt,
           })
           .resolves(version);
-
-        scoringConfigurationRepository.getLatestByDateAndLocale
-          .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-          .resolves(scoringConfiguration);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -346,10 +348,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               })
               .resolves(version);
 
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
-
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
@@ -437,20 +435,12 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 capacityHistory,
               });
               const candidate = domainBuilder.buildCertificationCandidate({ reconciledAt: new Date('2021-01-01') });
-              const version = domainBuilder.certification.evaluation.buildVersion({
-                challengesConfiguration: {
-                  maximumAssessmentLength: 1,
-                },
-              });
 
               dependencies.findByCertificationCourseIdAndAssessmentId.resolves({
                 allChallenges: answeredChallenges,
                 askedChallengesWithoutLiveAlerts: answeredChallenges,
                 challengeCalibrationsWithoutLiveAlerts,
               });
-              scoringConfigurationRepository.getLatestByDateAndLocale
-                .withArgs({ locale: 'fr', date: certificationCourse.getStartDate() })
-                .resolves(scoringConfiguration);
               answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
               certificationCourseRepository.get
                 .withArgs({ id: certificationAssessment.certificationCourseId })
@@ -494,10 +484,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                     capacity: expectedCapacity,
                   },
                 ]);
-
-              scoringConfigurationRepository.getLatestByDateAndLocale
-                .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-                .resolves(scoringConfiguration);
 
               const event = new CertificationCompletedJob({
                 assessmentId: certificationAssessment.id,
@@ -577,11 +563,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 capacityHistory,
               });
               const candidate = domainBuilder.buildCertificationCandidate({ reconciledAt: new Date('2021-01-01') });
-              const version = domainBuilder.certification.evaluation.buildVersion({
-                challengesConfiguration: {
-                  maximumAssessmentLength: 1,
-                },
-              });
 
               dependencies.findByCertificationCourseIdAndAssessmentId.resolves({
                 allChallenges,
@@ -630,10 +611,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                     capacity: expectedCapacity,
                   },
                 ]);
-
-              scoringConfigurationRepository.getLatestByDateAndLocale
-                .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-                .resolves(scoringConfiguration);
 
               // when
               await handleV3CertificationScoring({
@@ -711,6 +688,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
         assessmentResultRepository.save.resolves(domainBuilder.buildAssessmentResult());
         competenceMarkRepository.save.resolves();
+
+        scoringConfigurationRepository.getLatestByVersionAndLocale
+          .withArgs({ locale: 'fr', version })
+          .resolves(scoringConfiguration);
       });
 
       describe('when the minimum number of answers required by the config were NOT answered', function () {
@@ -774,10 +755,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               })
               .resolves(version);
 
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
-              .resolves(scoringConfiguration);
-
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 challenges: answeredChallenges,
@@ -801,10 +778,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                   capacity: expectedCapacity,
                 },
               ]);
-
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
 
             const event = new CertificationJuryDone({
               certificationCourseId,
@@ -929,10 +902,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 },
               ]);
 
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
-
             // when
             await handleV3CertificationScoring({
               event,
@@ -1020,10 +989,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               askedChallengesWithoutLiveAlerts: answeredChallenges,
               challengeCalibrationsWithoutLiveAlerts,
             });
-
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
@@ -1203,10 +1168,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 },
               ]);
 
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
-
             scoringDegradationService.downgradeCapacity.returns(expectedCapacity);
 
             // when
@@ -1285,10 +1246,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               askedChallengesWithoutLiveAlerts: answeredChallenges,
               challengeCalibrationsWithoutLiveAlerts,
             });
-
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
@@ -1418,10 +1375,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               challengeCalibrationsWithoutLiveAlerts,
             });
 
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
-
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
             certificationCourseRepository.get
@@ -1547,10 +1500,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               askedChallengesWithoutLiveAlerts: allChallenges,
               challengeCalibrationsWithoutLiveAlerts,
             });
-
-            scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
-              .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 

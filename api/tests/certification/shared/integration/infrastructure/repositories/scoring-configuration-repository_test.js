@@ -2,12 +2,13 @@ import { knex } from '../../../../../../db/knex-database-connection.js';
 import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
 import {
   getLatestByDateAndLocale,
+  getLatestByVersionAndLocale,
   saveCertificationScoringConfiguration,
   saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {
@@ -96,6 +97,39 @@ describe('Integration | Repository | scoring-configuration-repository', function
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
       expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-8);
       expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(8);
+    });
+  });
+
+  describe('#getLatestByVersionAndLocale', function () {
+    it('should return a list of Pix Origin competences for scoring', async function () {
+      // given
+      // Competences exist in multiple frameworks with the same index
+      // Here, we need to get only competences that are part of the PIX_ORIGIN framework
+      const competenceIndex = '1.1';
+      buildFramework({ competenceIndex, origin: 'external' });
+      buildFramework({ competenceIndex, origin: PIX_ORIGIN });
+
+      const version = domainBuilder.certification.evaluation.buildVersion({
+        id: 1,
+      });
+
+      databaseBuilder.factory.buildCertificationVersion({
+        id: 1,
+      });
+
+      databaseBuilder.factory.buildCertificationVersion({
+        id: 2,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await getLatestByVersionAndLocale({ locale: 'fr-fr', version });
+
+      // then
+      expect(result).to.be.instanceOf(V3CertificationScoring);
+      expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
+      expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
     });
   });
 
