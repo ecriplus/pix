@@ -495,7 +495,7 @@
                           "content": "<p>Il contient des mots du dictionnaire.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !🎉</p>",
-                            "diagnosis": "<p>Effectivement, même si ce mot de passe contient un symbole et des chiffres et fait plus de , il utilise des mots courants du dictionnaire.</p>"
+                            "diagnosis": "<p>Effectivement, même si ce mot de passe contient un symbole et des chiffres et fait plus de 12 caractères, il utilise des mots courants du dictionnaire.</p>"
                           }
                         },
                         {
@@ -531,7 +531,7 @@
                           "content": "<p>Il contient des informations personnelles. 🤫</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !🎉</p>",
-                            "diagnosis": "<p>Effectivement, ce mot de passe contient un prénom et un code postal. Ce sont des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Effectivement, ce mot de passe contient un prénom et une année. Ce sont des informations faciles à deviner pour un pirate.</p>"
                           }
                         },
                         {
@@ -766,7 +766,8 @@
                     "tolerances": [],
                     "solutions": [
                       "Ls,jbdlsadcem3t!",
-                      "Ls,j’bdlsadcem3t!"
+                      "Ls,j’bdlsadcem3t!",
+                      "Ls,j'bdlsadcem3t!"
                     ]
                   }
                 ],
