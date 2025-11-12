@@ -578,7 +578,7 @@
                     "content": "<span>En français, cette technique d’arnaque s’appelle le</span>"
                   },
                   {
-                    "input": "",
+                    "input": "nom-arnaque",
                     "type": "input",
                     "inputType": "text",
                     "size": 25,
@@ -685,8 +685,8 @@
               "element": {
                 "id": "b4378629-5d13-4a5d-a1a7-d512f312865c",
                 "type": "embed",
-                "isCompletionRequired": true,
-                "title": "",
+                "isCompletionRequired": false,
+                "title": "Sélectionner et marquer un message malveillant comme indésirable.",
                 "url": "https://epreuves.pix.fr/pixmail-phishing.html?lang=fr&mode=a",
                 "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p>",
                 "solution": "",
