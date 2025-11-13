@@ -9,6 +9,8 @@ const serialize = function (combinedCourseParticipations, meta) {
       'lastName',
       'status',
       'createdAt',
+      'division',
+      'group',
       'updatedAt',
       'hasFormationItem',
       'nbModules',

@@ -51,6 +51,8 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
     learner1 = databaseBuilder.factory.buildOrganizationLearner({
       firstName: 'Paul',
       lastName: 'Azerty',
+      division: '6eme A',
+      group: 'Groupe 1',
       organizationId,
     });
     participation1 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
@@ -62,6 +64,8 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
     learner2 = databaseBuilder.factory.buildOrganizationLearner({
       firstName: 'Marianne',
       lastName: 'Klee',
+      division: '5eme B',
+      group: 'Groupe 2',
       organizationId,
     });
     participation2 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
@@ -108,6 +112,8 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
         id: participation1.id,
         firstName: learner1.firstName,
         lastName: learner1.lastName,
+        division: learner1.division,
+        group: learner1.group,
         status: CombinedCourseParticipationStatuses.STARTED,
         createdAt: participation1.createdAt,
         updatedAt: participation1.updatedAt,
@@ -121,6 +127,8 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
         id: participation2.id,
         firstName: learner2.firstName,
         lastName: learner2.lastName,
+        division: learner2.division,
+        group: learner2.group,
         status: CombinedCourseParticipationStatuses.COMPLETED,
         createdAt: participation2.createdAt,
         updatedAt: participation2.updatedAt,
@@ -149,6 +157,8 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
         id: participation2.id,
         firstName: learner2.firstName,
         lastName: learner2.lastName,
+        division: learner2.division,
+        group: learner2.group,
         status: CombinedCourseParticipationStatuses.COMPLETED,
         createdAt: participation2.createdAt,
         updatedAt: participation2.updatedAt,

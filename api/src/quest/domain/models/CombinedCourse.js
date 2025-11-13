@@ -98,6 +98,8 @@ export class CombinedCourseDetails extends CombinedCourse {
       status: this.status,
       firstName: this.participation.firstName,
       lastName: this.participation.lastName,
+      division: this.participation.division,
+      group: this.participation.group,
       createdAt: this.participation.createdAt,
       updatedAt: this.participation.updatedAt,
       hasFormationItem: this.items.some(({ type }) => type === COMBINED_COURSE_ITEM_TYPES.FORMATION),

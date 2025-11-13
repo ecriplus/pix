@@ -12,7 +12,7 @@ import {
 export const save = async function ({ organizationLearnerId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const existingcombinedCourse = await knexConnection('organization_learner_participations')
+  const existingCombinedCourse = await knexConnection('organization_learner_participations')
     .where({
       referenceId: combinedCourseId.toString(),
       organizationLearnerId,
@@ -20,7 +20,7 @@ export const save = async function ({ organizationLearnerId, combinedCourseId })
     })
     .first();
 
-  if (existingcombinedCourse) return;
+  if (existingCombinedCourse) return;
 
   await knexConnection('organization_learner_participations')
     .insert({
@@ -39,8 +39,10 @@ export const getByUserId = async function ({ userId, combinedCourseId }) {
     .select(
       'organization_learner_participations.id',
       'organizationLearnerId',
-      'firstName',
-      'lastName',
+      'view-active-organization-learners.firstName',
+      'view-active-organization-learners.lastName',
+      'view-active-organization-learners.division',
+      'view-active-organization-learners.group',
       'organization_learner_participations.status',
       'organization_learner_participations.createdAt',
       'organization_learner_participations.updatedAt',
@@ -110,6 +112,7 @@ export const update = async function ({ id, ...updateFields }) {
 
 /**
  * @param {[number]} combinedCourseIds
+ * @param {number} page
  * @returns {Promise<[CombinedCourseParticipation]>}
  */
 export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
@@ -117,8 +120,10 @@ export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
   const queryBuilder = knexConnection('organization_learner_participations')
     .select(
       'organization_learner_participations.id',
-      'firstName',
-      'lastName',
+      'view-active-organization-learners.firstName',
+      'view-active-organization-learners.lastName',
+      'view-active-organization-learners.division',
+      'view-active-organization-learners.group',
       'organization_learner_participations.status',
       'organizationLearnerId',
       'organization_learner_participations.createdAt',

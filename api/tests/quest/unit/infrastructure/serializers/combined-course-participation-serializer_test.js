@@ -9,6 +9,8 @@ describe('CombinedCourseParticipationSerializer', function () {
       id: 1,
       firstName: 'John',
       lastName: 'Doe',
+      division: '6 eme',
+      group: 'Groupe A',
       status: CombinedCourseParticipationStatuses.COMPLETED,
       createdAt: new Date('2023-01-01T00:00:00Z'),
       updatedAt: new Date('2023-01-02T00:00:00Z'),
@@ -28,6 +30,8 @@ describe('CombinedCourseParticipationSerializer', function () {
         attributes: {
           'first-name': 'John',
           'last-name': 'Doe',
+          division: '6 eme',
+          group: 'Groupe A',
           status: CombinedCourseParticipationStatuses.COMPLETED,
           'created-at': new Date('2023-01-01T00:00:00Z'),
           'updated-at': new Date('2023-01-02T00:00:00Z'),

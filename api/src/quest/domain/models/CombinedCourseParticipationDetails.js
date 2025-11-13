@@ -4,6 +4,8 @@ export class CombinedCourseParticipationDetails {
     firstName,
     lastName,
     status,
+    division,
+    group,
     updatedAt,
     createdAt,
     nbModules,
@@ -17,6 +19,8 @@ export class CombinedCourseParticipationDetails {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.firstName = firstName;
+    this.division = division;
+    this.group = group;
     this.lastName = lastName;
     this.hasFormationItem = hasFormationItem;
     this.nbModules = nbModules;
