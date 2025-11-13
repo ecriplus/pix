@@ -1,4 +1,6 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { CalibratedChallenge } from '../../../certification/evaluation/domain/models/CalibratedChallenge.js';
+import { CalibratedChallengeSkill } from '../../../certification/evaluation/domain/models/CalibratedChallengeSkill.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Challenge } from '../../domain/models/Challenge.js';
@@ -114,6 +116,27 @@ export async function findValidatedBySkills(skills, locale) {
   const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
+}
+
+export async function findActiveFlashCompatibleCalibratedChallenges({
+  locale,
+  version,
+  dependencies = {
+    getInstance,
+  },
+} = {}) {
+  _assertLocaleIsDefined(locale);
+  const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
+
+  const challengeDtos = await _findChallengesForCertification({
+    locale,
+    cacheKey,
+    versionId: version.id,
+    dependencies,
+  });
+
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => toCalibratedChallengeDomain({ challengeDto, skill }));
 }
 
 export async function findActiveFlashCompatible({
@@ -280,6 +303,21 @@ function toDomain({ challengeDto, webComponentTagName, webComponentProps, skill,
     successProbabilityThreshold,
     hasEmbedInternalValidation: challengeDto.hasEmbedInternalValidation,
     noValidationNeeded: challengeDto.noValidationNeeded,
+  });
+}
+
+function toCalibratedChallengeDomain({ challengeDto, skill }) {
+  return new CalibratedChallenge({
+    id: challengeDto.id,
+    discriminant: challengeDto.alpha,
+    difficulty: challengeDto.delta,
+    blindnessCompatibility: challengeDto.accessibility1,
+    colorBlindnessCompatibility: challengeDto.accessibility2,
+    skill: new CalibratedChallengeSkill({
+      id: skill.id,
+      name: skill.name,
+      competenceId: skill.competenceId,
+    }),
   });
 }
 
