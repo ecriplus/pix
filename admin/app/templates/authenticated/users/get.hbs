@@ -39,6 +39,8 @@
       aria-label={{t "pages.user-details.navbar.certification-centers-list-aria-label"}}
     >
       {{t "pages.user-details.navbar.certification-centers-list"}}
+      ({{@model.certificationCenterMembershipCount}})
+
     </LinkTo>
 
     <LinkTo @route="authenticated.users.get.certification-courses">
