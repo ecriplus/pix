@@ -8,7 +8,11 @@ img.module-navigation {
 
 .module-navigation {
   @include breakpoints.device-is('mobile') {
-    position: sticky;
+    position: fixed;
+    top: var(--pix-spacing-2x);
+    right: var(--pix-spacing-2x);
+    left: var(--pix-spacing-2x);
+    width: calc(100vw - var(--pix-spacing-4x));
     padding: 0;
   }
 
