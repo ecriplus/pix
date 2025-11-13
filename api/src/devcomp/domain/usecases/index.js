@@ -2,6 +2,7 @@ import * as userRepository from '../../../identity-access-management/infrastruct
 import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { saveOrganizationLearnerPassageForUserJobRepository } from '../../../prescription/organization-learner/infrastructure/repositories/jobs/save-organization-learner-passage-for-user-job-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as targetProfileSummaryForAdminRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
@@ -24,6 +25,7 @@ const dependencies = {
   tubeRepository,
   targetProfileTrainingRepository,
   targetProfileTrainingOrganizationRepository,
+  saveOrganizationLearnerPassageForUserJobRepository,
   skillRepository,
   userRepository,
   llmApi,

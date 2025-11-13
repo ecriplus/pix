@@ -2,13 +2,23 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { PassageDoesNotExistError, PassageTerminatedError } from '../errors.js';
 
-const terminatePassage = withTransaction(async function ({ passageId, passageRepository }) {
+const terminatePassage = withTransaction(async function ({
+  passageId,
+  passageRepository,
+  saveOrganizationLearnerPassageForUserJobRepository,
+}) {
   const passage = await _getPassage({ passageId, passageRepository });
   if (passage.terminatedAt) {
     throw new PassageTerminatedError();
   }
   passage.terminate();
   const terminatedPassage = await passageRepository.update({ passage });
+
+  await saveOrganizationLearnerPassageForUserJobRepository.performAsync({
+    userId: passage.userId,
+    moduleId: passage.moduleId,
+  });
+
   return terminatedPassage;
 });
 
