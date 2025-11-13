@@ -150,11 +150,14 @@ async function _findChallengesForCertification({ versionId, locale, cacheKey, de
   const certificationChallengeIds = certificationChallenges.map(({ challengeId }) => challengeId);
 
   const findCallback = async (knex) => {
-    return knex.whereIn('id', certificationChallengeIds).whereRaw('?=ANY(??)', [locale, 'locales']).orderBy('id');
+    return knex
+      .whereIn('id', certificationChallengeIds)
+      .where('status', VALIDATED_STATUS)
+      .whereRaw('?=ANY(??)', [locale, 'locales'])
+      .orderBy('id');
   };
 
-  const challengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
-  const validChallengeDtos = challengeDtos.filter((challenge) => challenge.status === VALIDATED_STATUS);
+  const validChallengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
 
   return decorateWithCertificationCalibration({
     validChallengeDtos,
