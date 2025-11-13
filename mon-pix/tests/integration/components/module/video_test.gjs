@@ -6,6 +6,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialogClose } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Video', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -77,7 +78,7 @@ module('Integration | Component | Module | Video', function (hooks) {
     assert.dom('video > track').doesNotExist();
   });
 
-  test('should be able to use the modal for transcription', async function (assert) {
+  test('should be able to open and close the modal for transcription', async function (assert) {
     // given
     const url = 'https://videos.pix.fr/modulix/placeholder-video.mp4';
 
@@ -101,6 +102,11 @@ module('Integration | Component | Module | Video', function (hooks) {
     assert.ok(await screen.findByRole('dialog'));
     assert.ok(screen.getByText('transcription'));
     assert.ok(onVideoTranscriptionOpenStub.calledOnce);
+
+    await click(screen.getByRole('button', { name: 'Fermer' }));
+    await waitForDialogClose();
+
+    assert.dom(screen.queryByRole('dialog')).doesNotExist();
   });
 
   test('should not be able to open the modal if there is no transcription', async function (assert) {

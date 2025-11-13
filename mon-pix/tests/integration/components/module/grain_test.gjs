@@ -676,6 +676,27 @@ module('Integration | Component | Module | Grain', function (hooks) {
         });
       });
     });
+
+    module('when type of element is not supported', function () {
+      test('it should not display this element', async function (assert) {
+        // given
+        const title = 'An Expand title';
+        const expandElement = {
+          title,
+          content: '<p>My Content</p>',
+          type: 'not-supported-element-type',
+        };
+        const grain = {
+          components: [{ type: 'element', element: expandElement }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.grain-card-content__element')).doesNotExist();
+      });
+    });
   });
 
   module('when onGrainContinue is called', function () {
@@ -1922,6 +1943,30 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(screen.getByText('Leçon')).exists();
+    });
+  });
+
+  module('when grain has type ‘short-lesson‘', function () {
+    test('should not display a title with value "Leçon"', async function (assert) {
+      // given
+      const contentText = 'element content';
+      const textElement = {
+        content: contentText,
+        type: 'text',
+        isAnswerable: false,
+      };
+      const grain = {
+        id: '12345-abcdef',
+        type: 'short-lesson',
+        components: [{ type: 'element', element: textElement }],
+      };
+
+      // when
+      const screen = await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+      // then
+      assert.dom(screen.queryByText('Leçon')).doesNotExist();
+      assert.dom(screen.getByText(contentText)).exists();
     });
   });
 

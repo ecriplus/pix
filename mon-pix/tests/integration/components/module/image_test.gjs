@@ -5,6 +5,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialogClose } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Image', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -68,7 +69,7 @@ module('Integration | Component | Module | Image', function (hooks) {
     });
   });
 
-  test('should be able to use the modal for alternative instruction', async function (assert) {
+  test('should be able to open and close the modal for alternative instruction', async function (assert) {
     // given
     const alternativeText = 'alternative instruction';
 
@@ -91,6 +92,11 @@ module('Integration | Component | Module | Image', function (hooks) {
     assert.ok(await screen.findByRole('dialog'));
     assert.ok(screen.getByText(alternativeText));
     assert.ok(onImageAlternativeTextOpenStub.calledOnce);
+
+    await click(screen.getByRole('button', { name: 'Fermer' }));
+    await waitForDialogClose();
+
+    assert.dom(screen.queryByRole('dialog')).doesNotExist();
   });
 
   test('should not be able to open the modal if there is no alternative instruction', async function (assert) {
