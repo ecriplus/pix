@@ -193,7 +193,6 @@ async function buildBaseDataForCertification() {
       challengeId: challenge.id,
       discriminant: 1.0,
       difficulty: 2.1,
-      version: '202001010900',
       versionId,
     });
   }

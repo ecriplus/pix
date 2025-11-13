@@ -464,10 +464,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         versionId: certificationVersion.id,
       });
       expect(certificationFrameworksChallenges).to.have.length(1);
-      expect(
-        _.omit(certificationFrameworksChallenges[0], 'id', 'createdAt', 'complementaryCertificationKey', 'version'),
-      ).to.deep.equal({
-        calibrationId: null,
+      expect(_.omit(certificationFrameworksChallenges[0], 'id', 'createdAt')).to.deep.equal({
         discriminant: activeCalibratedChallenge.alpha,
         difficulty: activeCalibratedChallenge.delta,
         challengeId: certificationFrameworkChallenge.challengeId,
