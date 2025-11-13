@@ -20,7 +20,7 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const options = {
         method: 'PATCH',
-        url: '/api/admin/sco-blocked-access-dates/sco-blocked-access-date-lycee',
+        url: '/api/admin/sco-blocked-access-dates/lycee',
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: { data: { attributes: { value: '2025-12-15' } } },
       };
@@ -33,8 +33,8 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       // then
       expect(response.statusCode).to.equal(201);
       const [updatedValue] = await knex('sco-blocked-access-dates')
-        .where({ key: 'sco-blocked-access-date-lycee' })
-        .pluck('value');
+        .where({ scoOrganizationType: 'lycee' })
+        .pluck('reopeningDate');
       expect(updatedValue.toDateString()).to.equal(new Date('2025-12-15').toDateString());
     });
   });
@@ -58,14 +58,20 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       // then
       expect(response.statusCode).to.equal(200);
       const result = JSON.parse(response.payload);
-      expect(result.data.attributes.dates).to.deep.equal([
+      expect(result.data).to.deep.equal([
         {
-          key: 'sco-blocked-access-date-college',
-          value: scoBlockedAccessDates.scoBlockedAccessDateCollege.toISOString(),
+          type: 'sco-blocked-access-dates',
+          attributes: {
+            scoOrganizationType: 'college',
+            reopeningDate: scoBlockedAccessDates.collegeDate.toISOString(),
+          },
         },
         {
-          key: 'sco-blocked-access-date-lycee',
-          value: scoBlockedAccessDates.scoBlockedAccessDateLycee.toISOString(),
+          type: 'sco-blocked-access-dates',
+          attributes: {
+            scoOrganizationType: 'lycee',
+            reopeningDate: scoBlockedAccessDates.lyceeDate.toISOString(),
+          },
         },
       ]);
     });

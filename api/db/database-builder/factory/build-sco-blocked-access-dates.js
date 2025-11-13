@@ -1,25 +1,29 @@
 import { databaseBuffer } from '../database-buffer.js';
 
 const buildScoBlockedAccessDates = function ({
-  scoBlockedAccessDateCollege = new Date('2025-11-15'),
-  scoBlockedAccessDateLycee = new Date('2025-10-15'),
+  collegeDate = new Date('2025-11-15'),
+  lyceeDate = new Date('2025-10-15'),
 } = {}) {
   databaseBuffer.pushInsertable({
     tableName: 'sco-blocked-access-dates',
     values: {
       id: databaseBuffer.getNextId(),
-      key: 'sco-blocked-access-date-college',
-      value: scoBlockedAccessDateCollege,
+      scoOrganizationType: 'college',
+      reopeningDate: collegeDate,
     },
   });
   databaseBuffer.pushInsertable({
     tableName: 'sco-blocked-access-dates',
-    values: { id: databaseBuffer.getNextId(), key: 'sco-blocked-access-date-lycee', value: scoBlockedAccessDateLycee },
+    values: {
+      id: databaseBuffer.getNextId(),
+      scoOrganizationType: 'lycee',
+      reopeningDate: lyceeDate,
+    },
   });
 
   return {
-    scoBlockedAccessDateCollege,
-    scoBlockedAccessDateLycee,
+    collegeDate,
+    lyceeDate,
   };
 };
 

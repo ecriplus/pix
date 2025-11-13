@@ -12,7 +12,16 @@ describe('Certification | Configuration | Unit | UseCase | get-sco-blocked-acces
 
   it('should return sco blocked access dates', async function () {
     // given
-    const scoBlockedAccessDates = domainBuilder.certification.configuration.buildScoBlockedAccessDates();
+    const scoBlockedAccessDates = [
+      domainBuilder.certification.configuration.buildScoBlockedAccessDate({
+        scoOrganizationType: 'lycee',
+        reopeningDate: new Date('2025-10-15'),
+      }),
+      domainBuilder.certification.configuration.buildScoBlockedAccessDate({
+        scoOrganizationType: 'college',
+        reopeningDate: new Date('2025-11-15'),
+      }),
+    ];
     scoBlockedAccessDatesRepository.getScoBlockedAccessDates.resolves(scoBlockedAccessDates);
 
     // when

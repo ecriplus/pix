@@ -8,9 +8,15 @@ const up = async function (knex) {
   await knex.schema.createTable(TABLE_NAME, function (table) {
     table.increments('id').primary();
 
-    table.string('key', 255).notNullable().comment('');
+    table
+      .string('scoOrganizationType', 255)
+      .notNullable()
+      .comment('Type of school organization affected by the reopening of their access');
 
-    table.timestamp('value').notNullable().comment('');
+    table
+      .timestamp('reopeningDate')
+      .notNullable()
+      .comment('Date of reopening of school organizations access to Pix Certif');
   });
 };
 

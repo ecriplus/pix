@@ -64,7 +64,7 @@ import { getScoBlockedAccessDates } from './get-sco-blocked-access-dates.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 import { updateCertificationVersion } from './update-certification-version.js';
-import { updateScoBlockedAccessDates } from './update-sco-blocked-access-dates.js';
+import { updateScoBlockedAccessDate } from './update-sco-blocked-access-date.js';
 
 const usecasesWithoutInjectedDependencies = {
   calibrateFrameworkVersion,
@@ -81,7 +81,7 @@ const usecasesWithoutInjectedDependencies = {
   searchAttachableTargetProfiles,
   updateCertificationVersion,
   getScoBlockedAccessDates,
-  updateScoBlockedAccessDates,
+  updateScoBlockedAccessDate,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
