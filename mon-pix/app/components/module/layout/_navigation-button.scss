@@ -118,11 +118,11 @@
 
     &--current {
       color: var(--pix-neutral-0);
-      background-color: rgb(var(--pix-primary-700-inline), 0.6);
+      background: linear-gradient(0deg, rgb(var(--pix-primary-700-inline), 0.6) 0%, rgb(var(--pix-primary-700-inline), 0.6) 100%), var(--pix-neutral-0);
     }
 
     &--enabled {
-      background-color: rgb(var(--pix-primary-700-inline), 0.2);
+      background: linear-gradient(0deg, rgb(var(--pix-primary-700-inline), 0.2) 0%, rgb(var(--pix-primary-700-inline), 0.2) 100%), var(--pix-neutral-0);
     }
 
     &--disabled {
