@@ -10,6 +10,7 @@ module('Unit | Route | application', function (hooks) {
 
     sinon.stub(this.route.session, 'setup').resolves();
     sinon.stub(this.route.featureToggles, 'load').resolves();
+    sinon.stub(this.route.oidcIdentityProviders, 'load').resolves();
     sinon.stub(this.route.locale, 'setBestLocale').resolves();
     sinon.stub(this.route.currentUser, 'load').resolves();
   });
@@ -30,7 +31,7 @@ module('Unit | Route | application', function (hooks) {
     });
 
     test('sets up the session', async function (assert) {
-      // given // when
+      // when
       await this.route.beforeModel();
 
       // then
@@ -38,15 +39,23 @@ module('Unit | Route | application', function (hooks) {
     });
 
     test('loads feature toggles', async function (assert) {
-      // given // when
+      // when
       await this.route.beforeModel();
 
       // then
       assert.ok(this.route.featureToggles.load.called);
     });
 
+    test('loads identity providers', async function (assert) {
+      // when
+      await this.route.beforeModel();
+
+      // then
+      assert.ok(this.route.oidcIdentityProviders.load.called);
+    });
+
     test('loads current user', async function (assert) {
-      // given // when
+      // when
       await this.route.beforeModel();
 
       // then
