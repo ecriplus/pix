@@ -1,4 +1,4 @@
-This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 13/11/2025 17:24:55 with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -72,9 +72,10 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 ## CampaignApi
 
 * [CampaignApi](#module_CampaignApi)
-    * [~save(campaign)](#module_CampaignApi..save) ⇒ <code>Promise.&lt;SavedCampaign&gt;</code>
+    * [~save(campaigns, options)](#module_CampaignApi..save) ⇒ <code>Promise.&lt;(SavedCampaign\|Array.&lt;CampaignPayload&gt;)&gt;</code>
     * [~get(campaignId)](#module_CampaignApi..get) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~getByCampaignParticipationId(campaignParticipationId)](#module_CampaignApi..getByCampaignParticipationId) ⇒ <code>Promise.&lt;(Campaign\|null)&gt;</code>
+    * [~getByCode(code, string)](#module_CampaignApi..getByCode) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~update(payload)](#module_CampaignApi..update) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~findAllForOrganization(payload)](#module_CampaignApi..findAllForOrganization) ⇒ <code>Promise.&lt;CampaignListResponse&gt;</code>
     * [~findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds)](#module_CampaignApi..findCampaignSkillIdsForCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;Number&gt;&gt;</code>
@@ -82,6 +83,7 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
     * [~deleteActiveCampaigns(payload)](#module_CampaignApi..deleteActiveCampaigns) ⇒ <code>Promise.&lt;void&gt;</code>
     * [~CampaignPayload](#module_CampaignApi..CampaignPayload) : <code>object</code>
     * [~UserNotAuthorizedToCreateCampaignError](#module_CampaignApi..UserNotAuthorizedToCreateCampaignError) : <code>object</code>
+    * [~CampaignCreationOptions](#module_CampaignApi..CampaignCreationOptions) : <code>object</code>
     * [~UpdateCampaignPayload](#module_CampaignApi..UpdateCampaignPayload) : <code>object</code>
     * [~PageDefinition](#module_CampaignApi..PageDefinition) : <code>object</code>
     * [~CampaignListPayload](#module_CampaignApi..CampaignListPayload) : <code>object</code>
@@ -92,7 +94,7 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 
 <a name="module_CampaignApi..save"></a>
 
-### CampaignApi~save(campaign) ⇒ <code>Promise.&lt;SavedCampaign&gt;</code>
+### CampaignApi~save(campaigns, options) ⇒ <code>Promise.&lt;(SavedCampaign\|Array.&lt;CampaignPayload&gt;)&gt;</code>
 **Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
 **Throws**:
 
@@ -101,7 +103,8 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 
 | Param | Type |
 | --- | --- |
-| campaign | <code>CampaignPayload</code> | 
+| campaigns | <code>CampaignPayload</code> \| <code>Array.&lt;CampaignPayload&gt;</code> | 
+| options | <code>CampaignCreationOptions</code> | 
 
 <a name="module_CampaignApi..get"></a>
 
@@ -120,6 +123,16 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 | Param | Type |
 | --- | --- |
 | campaignParticipationId | <code>number</code> | 
+
+<a name="module_CampaignApi..getByCode"></a>
+
+### CampaignApi~getByCode(code, string) ⇒ <code>Promise.&lt;Campaign&gt;</code>
+**Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
+
+| Param | Type |
+| --- | --- |
+| code | <code>number</code> | 
+| string | <code>locale</code> | 
 
 <a name="module_CampaignApi..update"></a>
 
@@ -190,6 +203,16 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 | Name | Type |
 | --- | --- |
 | message | <code>string</code> | 
+
+<a name="module_CampaignApi..CampaignCreationOptions"></a>
+
+### CampaignApi~CampaignCreationOptions : <code>object</code>
+**Kind**: inner typedef of [<code>CampaignApi</code>](#module_CampaignApi)  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| allowCreationWithoutTargetProfileShare | <code>boolean</code> | 
 
 <a name="module_CampaignApi..UpdateCampaignPayload"></a>
 
@@ -322,6 +345,7 @@ This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-do
 * [OrganizationLearnerApi](#module_OrganizationLearnerApi)
     * [~find(payload)](#module_OrganizationLearnerApi..find) ⇒ <code>Promise.&lt;OrganizationLearnerListResponse&gt;</code>
     * [~get(organizationLearnerId)](#module_OrganizationLearnerApi..get) ⇒ <code>Promise.&lt;OrganizationLearner&gt;</code>
+    * [~findByUserId(userId)](#module_OrganizationLearnerApi..findByUserId) ⇒ <code>Promise.&lt;Array.&lt;OrganizationLearner&gt;&gt;</code>
     * [~PageDefinition](#module_OrganizationLearnerApi..PageDefinition) : <code>object</code>
     * [~FilterDefinition](#module_OrganizationLearnerApi..FilterDefinition) : <code>object</code>
     * [~OrganizationLearnerListPayload](#module_OrganizationLearnerApi..OrganizationLearnerListPayload) : <code>object</code>
@@ -350,6 +374,17 @@ Si le params 'filter' est présent, les organization-learners seront filtrés
 | Param | Type |
 | --- | --- |
 | organizationLearnerId | <code>number</code> | 
+
+<a name="module_OrganizationLearnerApi..findByUserId"></a>
+
+### OrganizationLearnerApi~findByUserId(userId) ⇒ <code>Promise.&lt;Array.&lt;OrganizationLearner&gt;&gt;</code>
+return organization learners link to a given userId
+
+**Kind**: inner method of [<code>OrganizationLearnerApi</code>](#module_OrganizationLearnerApi)  
+
+| Param | Type |
+| --- | --- |
+| userId | <code>number</code> | 
 
 <a name="module_OrganizationLearnerApi..PageDefinition"></a>
 

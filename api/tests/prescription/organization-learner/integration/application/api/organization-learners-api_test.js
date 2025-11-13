@@ -66,4 +66,56 @@ describe('Integration | API | Organization Learner', function () {
       expect(learner).instanceOf(OrganizationLearner);
     });
   });
+
+  describe('#findByUserId', function () {
+    it('should return empty array if no user match', async function () {
+      //when
+      const learners = await organizationLearnersApi.findByUserId(123);
+
+      // then
+      expect(learners).lengthOf(0);
+    });
+    it('should return organization learner associated to a given userId', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const learner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      });
+      const otherLearnerWithSameUser = databaseBuilder.factory.buildOrganizationLearner({
+        userId: learner.userId,
+      });
+      databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const learners = await organizationLearnersApi.findByUserId(learner.userId);
+
+      // then
+      expect(learners).lengthOf(2);
+      expect(learners).deep.members([
+        {
+          id: learner.id,
+          firstName: learner.firstName,
+          lastName: learner.lastName,
+          features: learner.features,
+          userId: learner.userId,
+          organizationId: learner.organizationId,
+          division: undefined,
+        },
+        {
+          id: otherLearnerWithSameUser.id,
+          firstName: otherLearnerWithSameUser.firstName,
+          lastName: otherLearnerWithSameUser.lastName,
+          features: otherLearnerWithSameUser.features,
+          userId: otherLearnerWithSameUser.userId,
+          organizationId: otherLearnerWithSameUser.organizationId,
+          division: undefined,
+        },
+      ]);
+    });
+  });
 });
