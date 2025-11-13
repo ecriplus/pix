@@ -1086,7 +1086,7 @@
         "certification": "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant et répondez à la question en sa présence.",
         "default": "Nous avons détecté un changement de page. En certification, votre réponse ne serait pas validée.",
         "v3-accessible-certification": "Nous avons détecté un changement de page. Si vous avez été contraint de changer de page pour utiliser un outil d’accessibilité numérique (tel qu'un lecteur d'écran ou un clavier virtuel), répondez tout de même à la question.",
-        "v3-certification": "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler, le cas échéant."
+        "v3-certification": "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler en direct de son « Espace Surveillant »."
       },
       "illustration": {
         "placeholder": "Chargement de l'image en cours"
@@ -1100,7 +1100,7 @@
       },
       "live-alerts": {
         "challenge": {
-          "message": "Prévenez votre surveillant afin qu'il puisse constater votre problème."
+          "message": "Prévenez votre surveillant afin qu'il puisse constater votre problème et le gérer en direct dans son interface « Espace Surveillant »."
         },
         "companion": {
           "message": "Merci de contacter votre surveillant afin qu’il confirme la présence de l’extension."
