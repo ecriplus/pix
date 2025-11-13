@@ -600,6 +600,10 @@
         "archive-organization": "Archiver l'organisation",
         "child-organization": "Organisation fille de",
         "code": "Code",
+        "country": {
+          "label": "Pays (code INSEE)",
+          "not-found": "Pays non trouvé pour le code {countryCode}"
+        },
         "created-at": "Créée le",
         "created-by": "Créée par",
         "credits": "Crédits",
