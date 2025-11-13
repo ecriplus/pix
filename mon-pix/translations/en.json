@@ -1686,6 +1686,9 @@
             "enabled": "Go to step {sectionTitle}",
             "steps": "Step {indexSection} of {totalSections}."
           }
+        },
+        "tooltip": {
+          "disabled": "Next: {sectionTitle}"
         }
       },
       "preview": {

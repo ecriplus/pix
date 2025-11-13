@@ -1666,6 +1666,9 @@
             "disabled": "No disponible. Finalizar el paso anterior.",
             "enabled": "Acceder al paso {sectionTitle}"
           }
+        },
+        "tooltip": {
+          "disabled": "A continuación: {sectionTitle}"
         }
       },
       "beta-banner": "Este módulo está en versión beta. Se podrán realizar modificaciones a lo largo del tiempo.",

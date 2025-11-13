@@ -17,6 +17,11 @@ export default class ModulixNavigationButton extends Component {
   @tracked isTooltipVisible = false;
 
   @action
+  mobileSectionTitle(type) {
+    return this.tooltipText(type);
+  }
+
+  @action
   sectionTitle(type) {
     return this.intl.t(`pages.modulix.section.${type}`);
   }
@@ -24,6 +29,19 @@ export default class ModulixNavigationButton extends Component {
   @action
   sectionTitleIcon(type) {
     return SECTION_TITLE_ICONS[type];
+  }
+
+  @action
+  tooltipText(type) {
+    const sectionTitle = this.intl.t(`pages.modulix.section.${type}`);
+
+    if (this.args.isCurrentSection || this.args.isPastSection) {
+      return sectionTitle;
+    }
+
+    return this.intl.t('pages.modulix.navigation.tooltip.disabled', {
+      sectionTitle,
+    });
   }
 
   get buttonClass() {
@@ -108,7 +126,7 @@ export default class ModulixNavigationButton extends Component {
         @isDisabled={{this.isDisabled}}
         aria-label={{this.ariaLabelButton}}
         aria-current="{{this.isCurrentSection}}"
-      >{{this.sectionTitle @section.type}}</PixButton>
+      ><span class="module-navigation-mobile-button__text">{{this.mobileSectionTitle @section.type}}</span></PixButton>
     {{else}}
       <div
         class="navigation-tooltip {{if this.isTooltipVisible 'navigation-tooltip--visible' ''}}"
@@ -133,7 +151,7 @@ export default class ModulixNavigationButton extends Component {
           class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}"
           aria-hidden="true"
         >
-          {{this.sectionTitle @section.type}}
+          {{this.tooltipText @section.type}}
         </span>
       </div>
     {{/if}}

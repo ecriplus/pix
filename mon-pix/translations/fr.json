@@ -1694,6 +1694,9 @@
             "enabled": "Accéder à l'étape {sectionTitle}",
             "steps": "Étape {indexSection} sur {totalSections}."
           }
+        },
+        "tooltip": {
+          "disabled": "A suivre : {sectionTitle}"
         }
       },
       "preview": {
