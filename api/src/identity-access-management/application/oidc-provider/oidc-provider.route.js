@@ -6,7 +6,7 @@ import { oidcProviderController } from './oidc-provider.controller.js';
 export const oidcProviderRoutes = [
   {
     method: 'GET',
-    path: '/api/oidc/identity-providers',
+    path: '/api/oidc/identity-providers/{any*}',
     options: {
       auth: false,
       cache: false,
