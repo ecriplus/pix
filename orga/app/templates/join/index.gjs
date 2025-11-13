@@ -1,8 +1,9 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
-import LoginForm from 'pix-orga/components/auth/login-form';
 import LoginOrRegister from 'pix-orga/components/auth/login-or-register';
+import LoginForm from 'pix-orga/components/authentication/login-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
 
 <template>
@@ -11,6 +12,9 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
 
     <AuthenticationLayout class="signin-page-layout">
       <:header>
+        <PixButtonLink @variant="secondary" @route="join.signup" @query={{@controller.routeQueryParams}}>
+          {{t "pages.login.signup.label"}}
+        </PixButtonLink>
       </:header>
 
       <:content>
@@ -29,6 +33,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
           @isInvitationCancelled={{@controller.isInvitationCancelled}}
           @organizationInvitationId={{@controller.invitationId}}
           @organizationInvitationCode={{@controller.code}}
+          @organizationName={{@model.organizationName}}
         />
       </:content>
     </AuthenticationLayout>

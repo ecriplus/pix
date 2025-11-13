@@ -132,6 +132,11 @@
       "title": "Patcipaties voltooid"
     }
   },
+  "cgu": {
+    "error": "Je moet de gebruiksvoorwaarden en het privacybeleid van Pix accepteren om een account aan te maken.",
+    "label": "De gebruiksvoorwaarden van Pix accepteren",
+    "read-message": "Lees de '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'gebruiksvoorwaarden'</a>' en de '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'privacybeleid'</a>'."
+  },
   "charts": {
     "participants-by-day": {
       "captions": {
@@ -253,6 +258,17 @@
       },
       "subjects": "Onderwerpen: {value, number}",
       "thematic-results": "Badges: {value, number}"
+    },
+    "validation": {
+      "password": {
+        "error": "Je hebt het verkeerde wachtwoord ingevoerd. Je wachtwoord moet langer zijn dan 8 tekens en ten minste één cijfer, één kleine letter en één hoofdletter bevatten.",
+        "rules": {
+          "contains-digit": "ten minste één cijfer",
+          "contains-lowercase": "ten minste één kleine letter",
+          "contains-uppercase": "ten minste één hoofdletter",
+          "min-length": "Minstens 8 tekens"
+        }
+      }
     }
   },
   "components": {
@@ -1059,6 +1075,34 @@
     "index": {
       "title": "Home"
     },
+    "join": {
+      "signup": {
+        "errors": {
+          "invalid-or-already-used-email": "Ongeldig of reeds gebruikt e-mailadres"
+        },
+        "fields": {
+          "email": {
+            "error": "Je e-mailadres is ongeldig.",
+            "label": "E-mailadres",
+            "placeholder": "b.v. jan.jansen@email.com"
+          },
+          "firstname": {
+            "error": "Je voornaam is niet ingevuld.",
+            "label": "Voornaam",
+            "placeholder": "b.v. Jan"
+          },
+          "lastname": {
+            "error": "Je achternaam is niet ingevuld.",
+            "label": "Achternaam",
+            "placeholder": "b.v. Jansen"
+          },
+          "legend": "Vereiste informatie voor registratie."
+        },
+        "submit": "Ik meld me aan",
+        "subtitle": "om toegang te krijgen tot uw Pix Orga-account",
+        "title": "Registreer u op Pix"
+      }
+    },
     "join-request-form": {
       "firstname": "Je voornaam",
       "lastname": "Je achternaam",
@@ -1071,6 +1115,9 @@
     },
     "login": {
       "join-invitation": "Je bent uitgenodigd om lid te worden van: {organizationName}",
+      "signup": {
+        "label": "Registreren op Pix"
+      },
       "title": "Inloggen",
       "with-pix-account": "met uw Pix-account"
     },

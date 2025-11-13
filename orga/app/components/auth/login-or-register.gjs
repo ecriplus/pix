@@ -7,9 +7,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
+import LoginForm from '../authentication/login-form';
 import LocaleSwitcher from '../locale-switcher';
 import PageTitle from '../ui/page-title';
-import LoginForm from './login-form';
 import RegisterForm from './register-form';
 
 export default class LoginOrRegister extends Component {

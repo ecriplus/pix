@@ -2,6 +2,7 @@
 @use 'pix-design-tokens/breakpoints';
 
 // global
+@use 'globals/a11y' as *;
 @use 'globals/colors' as *;
 @use 'globals/layout' as *;
 @use 'globals/competences' as *;
@@ -94,6 +95,9 @@
 /* App/Components */
 @use 'sco-organization-participant/generate-username-password-modal' as *;
 @use 'analysis/global-positioning' as *;
+@use 'authentication/signup-form' as *;
+@use 'authentication/new-password-input/password-checklist' as *;
+@use 'authentication/new-password-input/password-rule' as *;
 
 body,
 html {

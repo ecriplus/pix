@@ -202,6 +202,11 @@
       "login-user-temporary-blocked-error": "You have reached too many failed login attempts. Please try again later or '<'a href=\"{url}\"'>'reset your password here'</a>'."
     },
     "breadcrumb": "Breadcrumb",
+    "cgu": {
+      "error": "You must accept to the Pix terms of use and personal data protection policy to create an account.",
+      "label": "I accept the terms of use and personal data protection policy of Pix",
+      "read-message": "Read the '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'Pix terms of use'</a>' and the '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'personal data protection policy'</a>'."
+    },
     "filters": {
       "actions": {
         "clear": "Clear filters"
@@ -253,6 +258,17 @@
       },
       "subjects": "Topics: {value, number}",
       "thematic-results": "Badges: {value, number}"
+    },
+    "validation": {
+      "password": {
+        "error": "Le mot de passe saisi est erroné. Votre mot de passe doit être supérieur à 8 caractères et contenir au minimum un chiffre, une minuscule et une majuscule.",
+        "rules": {
+          "contains-digit": "un chiffre minimum",
+          "contains-lowercase": "une minuscule minimum",
+          "contains-uppercase": "une majuscule minimum",
+          "min-length": "8 caractères minimum"
+        }
+      }
     }
   },
   "components": {
@@ -1071,6 +1087,39 @@
     "index": {
       "title": "Home"
     },
+    "join": {
+      "signup": {
+        "errors": {
+          "invalid-or-already-used-email": "Invalid or already used e-mail address"
+        },
+        "fields": {
+          "email": {
+            "error": "Your email address is invalid.",
+            "label": "Email address",
+            "placeholder": "e.g. john.smith@email.com"
+          },
+          "firstname": {
+            "error": "You have not entered your first name.",
+            "label": "First name",
+            "placeholder": "e.g. John"
+          },
+          "lastname": {
+            "error": "You have not entered your last name.",
+            "label": "Last name",
+            "placeholder": "e.g. Smith"
+          },
+          "legend": "Information required for sign up.",
+          "password": {
+            "completed-message": "{ rulesCompleted } out of { rulesCount } requirements completed.",
+            "instructions-label": "Your password must comply with the following rules:",
+            "label": "Password"
+          }
+        },
+        "submit": "Sign up",
+        "subtitle": "to access your Pix Orga space.",
+        "title": "Sign up on Pix"
+      }
+    },
     "join-request-form": {
       "firstname": "Votre prénom",
       "lastname": "Votre nom",
@@ -1083,6 +1132,9 @@
     },
     "login": {
       "join-invitation": "You have been invited to join: {organizationName}",
+      "signup": {
+        "label": "Sign up on Pix"
+      },
       "title": "Log in",
       "with-pix-account": "with your Pix Account"
     },
