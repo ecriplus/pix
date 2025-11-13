@@ -119,6 +119,7 @@ const get = async function ({ organizationId }) {
       parentOrganizationName: 'parentOrganizations.name',
       administrationTeamId: 'organizations.administrationTeamId',
       administrationTeamName: 'administrationTeams.name',
+      countryCode: 'organizations.countryCode',
     })
     .leftJoin('users AS archivists', 'archivists.id', 'organizations.archivedBy')
     .leftJoin(
@@ -214,6 +215,7 @@ const save = async function ({ organization }) {
     'documentationUrl',
     'administrationTeamId',
     'parentOrganizationId',
+    'countryCode',
   ]);
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME).returning('*').insert(data);
   const savedOrganization = _toDomain(organizationCreated);
@@ -445,6 +447,7 @@ function _toDomain(rawOrganization) {
     parentOrganizationName: rawOrganization.parentOrganizationName,
     administrationTeamId: rawOrganization.administrationTeamId,
     administrationTeamName: rawOrganization.administrationTeamName,
+    countryCode: rawOrganization.countryCode,
   });
 
   return organization;

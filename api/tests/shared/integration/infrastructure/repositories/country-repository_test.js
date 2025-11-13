@@ -1,6 +1,7 @@
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Country } from '../../../../../src/shared/domain/read-models/Country.js';
 import * as countryRepository from '../../../../../src/shared/infrastructure/repositories/country-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Shared | Repository | country-repository', function () {
   describe('#findAll', function () {
@@ -54,6 +55,57 @@ describe('Integration | Shared | Repository | country-repository', function () {
 
         // then
         expect(countries).to.deep.equal([]);
+      });
+    });
+  });
+
+  describe('#getByCode', function () {
+    beforeEach(async function () {
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99345',
+        commonName: 'TOGO',
+        originalName: 'TOGO',
+      });
+
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99345',
+        commonName: 'TOGO',
+        originalName: 'RÉPUBLIQUE TOGOLAISE',
+      });
+
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99876',
+        commonName: 'NABOO',
+        originalName: 'NABOO',
+      });
+
+      await databaseBuilder.commit();
+    });
+    describe('when there is a matching code', function () {
+      it('should return matching actual country', async function () {
+        // when
+        const result = await countryRepository.getByCode('99345');
+
+        // then
+        const togoCountry = domainBuilder.buildCountry({
+          code: '99345',
+          name: 'TOGO',
+        });
+
+        expect(result).to.deep.equal(togoCountry);
+      });
+    });
+
+    describe('when there is no matching code', function () {
+      it('should throw notFoundError', async function () {
+        // given
+        const nonExistingCode = '1234';
+
+        // when
+        const error = await catchErr(countryRepository.getByCode)(nonExistingCode);
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
       });
     });
   });

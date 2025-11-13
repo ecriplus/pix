@@ -1,3 +1,4 @@
+import { COUNTRY_FRANCE_CODE } from '../../seeds/data/common/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAdministrationTeam } from './build-administration-team.js';
 
@@ -23,7 +24,7 @@ const buildOrganization = function buildOrganization({
   identityProviderForCampaigns = null,
   parentOrganizationId = null,
   administrationTeamId = null,
-  countryCode = null,
+  countryCode = COUNTRY_FRANCE_CODE,
 } = {}) {
   if (!administrationTeamId) {
     administrationTeamId = buildAdministrationTeam().id;

@@ -4,6 +4,14 @@ import {
   ADMINISTRATION_TEAM_ROCKET_ID,
   ADMINISTRATION_TEAM_SOLO_ID,
   COLLEGE_TAG,
+  COUNTRY_CANADA_CODE,
+  COUNTRY_CANADA_ID,
+  COUNTRY_FRANCE_CODE,
+  COUNTRY_FRANCE_ID,
+  COUNTRY_TOGO_CODE,
+  COUNTRY_TOGO_ID,
+  COUNTRY_VIETNAM_CODE,
+  COUNTRY_VIETNAM_ID,
   PIX_PUBLIC_TARGET_PROFILE_ID,
   REAL_PIX_SUPER_ADMIN_ID,
 } from './constants.js';
@@ -15,6 +23,9 @@ const { ROLES } = PIX_ADMIN;
 export const commonBuilder = async function ({ databaseBuilder }) {
   // administration teams
   _createAdministrationTeams(databaseBuilder);
+
+  // countries
+  _createCountries(databaseBuilder);
 
   // legal-document
   createPixOrgaTermsOfService(databaseBuilder);
@@ -30,6 +41,42 @@ export const commonBuilder = async function ({ databaseBuilder }) {
   await _createPublicTargetProfile(databaseBuilder);
   await databaseBuilder.commit();
 };
+
+function _createCountries(databaseBuilder) {
+  databaseBuilder.factory.buildCertificationCpfCountry({
+    id: COUNTRY_CANADA_ID,
+    code: COUNTRY_CANADA_CODE,
+    commonName: 'CANADA',
+    originalName: 'CANADA',
+  });
+
+  databaseBuilder.factory.buildCertificationCpfCountry({
+    id: COUNTRY_FRANCE_ID,
+    code: COUNTRY_FRANCE_CODE,
+    commonName: 'FRANCE',
+    originalName: 'FRANCE',
+  });
+
+  databaseBuilder.factory.buildCertificationCpfCountry({
+    id: COUNTRY_TOGO_ID,
+    code: COUNTRY_TOGO_CODE,
+    commonName: 'TOGO',
+    originalName: 'TOGO',
+  });
+
+  databaseBuilder.factory.buildCertificationCpfCountry({
+    id: COUNTRY_VIETNAM_ID,
+    code: COUNTRY_VIETNAM_CODE,
+    commonName: 'VIET NAM',
+    originalName: 'VIET NAM',
+  });
+
+  databaseBuilder.factory.buildCertificationCpfCountry({
+    code: '99425',
+    commonName: 'TURKS ET CAIQUES (ILES)',
+    originalName: 'TURKS ET CAÏQUES (ÎLES)',
+  });
+}
 
 function _createAdministrationRocketTeam(databaseBuilder) {
   databaseBuilder.factory.buildAdministrationTeam({

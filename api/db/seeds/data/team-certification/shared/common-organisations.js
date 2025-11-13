@@ -4,6 +4,7 @@ import { usecases as organizationalEntitiesUsecases } from '../../../../../src/o
 import * as organizationCreationValidator from '../../../../../src/organizational-entities/domain/validators/organization-creation-validator.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { COUNTRY_FRANCE_CODE } from '../../common/constants.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
 import { SHARED_ORGANIZATION_USER_ID } from './constants.js';
 
@@ -31,6 +32,7 @@ export class CommonOrganizations {
         isManagingStudents: true,
         externalId: 'SCO_MANAGING_STUDENTS_EXTERNAL_ID',
         administrationTeamId: administrationTeam.id,
+        countryCode: COUNTRY_FRANCE_CODE,
       });
 
       const scoOrganization = await organizationalEntitiesUsecases.createOrganization({
@@ -68,6 +70,7 @@ export class CommonOrganizations {
         isManagingStudents: false,
         externalId: 'PRO_EXTERNAL_ID',
         administrationTeamId: administrationTeam.id,
+        countryCode: COUNTRY_FRANCE_CODE,
       });
 
       const proOrganization = await organizationalEntitiesUsecases.createOrganization({
@@ -104,6 +107,7 @@ export class CommonOrganizations {
         isManagingStudents: false,
         externalId: 'SUP_EXTERNAL_ID',
         administrationTeamId: administrationTeam.id,
+        countryCode: COUNTRY_FRANCE_CODE,
       });
 
       const supOrganization = await organizationalEntitiesUsecases.createOrganization({

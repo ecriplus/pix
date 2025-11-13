@@ -905,4 +905,18 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
   });
+
+  context('#setCountryName', function () {
+    it('updates the country name', function () {
+      // given
+      const countryName = 'France';
+      const organizationToUpdate = domainBuilder.buildOrganizationForAdmin({ countryName: null });
+
+      // when
+      organizationToUpdate.setCountryName(countryName);
+
+      // then
+      expect(organizationToUpdate.countryName).to.equal(countryName);
+    });
+  });
 });
