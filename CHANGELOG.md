@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.256.0](https://github.com/1024pix/pix/compare/v5.255.0...v5.256.0) (2025-11-13)
+
+### :rocket: Amélioration
+
+- [#14136](https://github.com/1024pix/pix/pull/14136) Ajouter une nouvelle colonne passage_count à la table organizations_cover_rates (PIX-20110) 
+- [#14144](https://github.com/1024pix/pix/pull/14144) création module gestion mdp nov 
+- [#14102](https://github.com/1024pix/pix/pull/14102) Créer un nouveau formulaire d'inscription (PIX-19803) 
+- [#14139](https://github.com/1024pix/pix/pull/14139) CY_phishing_AVA changement URL audio 
+- [#14115](https://github.com/1024pix/pix/pull/14115) Envoyer les évènements Plausible dans l'élément ShortVideo (PIX-20365) 
+
+### :bug: Correction
+
+- [#14133](https://github.com/1024pix/pix/pull/14133) Afficher que l'on est dans la parties campagne lorsque l'on visite le parcours apparenant (PIX-20269). 
+
+### :building_construction: Tech
+
+- [#14119](https://github.com/1024pix/pix/pull/14119) Ajout d'un index pour chercher les challenges de certification (PIX-20244). 
+- [#14123](https://github.com/1024pix/pix/pull/14123) Supprimer les tests unitaires des composants modules et Training card (PIX-20311)
+
 # [5.255.0](https://github.com/1024pix/pix/compare/v5.254.0...v5.255.0) (2025-11-12)
 
 ### :rocket: Amélioration
