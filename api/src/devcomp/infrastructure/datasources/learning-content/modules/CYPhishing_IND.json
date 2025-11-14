@@ -5,13 +5,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les messages et mails d’arnaques sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez les indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi les réflexes pour vous protéger et protéger les autres. 🕵️<br><br></p>",
+    "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi des réflexes pour vous protéger et protéger les autres. 🕵️<br><br></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
       "<p>Connaître la définition du hameçonnage (phishing)</p>",
-      "<p>Reconnaître les indices caractéristiques d’un message d’arnaque</p>",
-      "<p>Agir face à un message d’hameçonnage</p>"
+      "<p>Reconnaître des indices caractéristiques d’un message d’arnaque</p>",
+      "<p>Agir face à un message d'arnaque</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -30,7 +30,7 @@
               "element": {
                 "id": "f9a9eca3-9b86-4c44-9651-02c61a0a445c",
                 "type": "text",
-                "content": "<p>En 2024, plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde, accompagnés d’une <strong>diffusion de messages</strong> pour <strong>inciter les internautes</strong> à s’y rendre.</p><p>L’<strong>impact&nbsp;économique</strong> est colossal, avec des pertes estimées à plus de 1&nbsp;000 milliards de dollars.💲💲💲</p><p><strong>Même les professionnels de l’informatique</strong>&nbsp;sont touchés&nbsp;: près d’un tiers des équipes techniques déclarent avoir déjà été visées ou piégées par ce type d’attaque.</p>"
+                "content": "<p>En 2024, plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde. Des escrocs diffusent massivement des <strong>messages d'arnaque</strong> qui incitent les internautes à se rendre sur ces sites. </p><p>L’<strong>impact&nbsp;économique</strong>&nbsp;de ces aranques est colossal, avec des sommes volées estimées à plus de 1&nbsp;000 milliards de dollars.&nbsp;💰</p><p><strong>Même les professionnels de l’informatique</strong>&nbsp;sont touchés&nbsp;: près d’un tiers des équipes techniques déclarent avoir déjà été visées ou piégées par ce type d’attaque.</p>"
               }
             },
             {
@@ -76,7 +76,7 @@
               "element": {
                 "id": "b85bf93d-d444-4cd4-8cbd-bb8f7fc70714",
                 "type": "text",
-                "content": "<p>Il est donc essentiel d’apprendre à <strong>se protéger de ces arnaques</strong>, en évitant de mordre à l’hameçon.&nbsp;🪝</p>"
+                "content": "<p>🪝 Il est donc essentiel d’apprendre à <strong>se protéger de ces arnaques</strong>, en évitant de mordre à l’hameçon.</p>"
               }
             }
           ]
@@ -117,18 +117,18 @@
                     {
                       "id": "ac687790-6967-46b2-b77b-8e477be78dcb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, à quoi correspond l’exemple ci-dessus ?</p>",
+                      "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Un faux message d’une banque écrit par un escroc</p>",
+                          "content": "<p>Un faux message d’une banque écrit par un escroc.</p>",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p><p>Dans ce message, <strong>l’escroc se fait passer pour une personne ou une organisation de confiance</strong>. </p><p>C’est une technique utilisée dans les arnaques par hameçonnage.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Un message important d’une banque à son client</p>",
+                          "content": "<p>Un message important d’une banque à son client.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non.</p><p>Dans ce message, <strong>l’escroc se fait passer pour une personne ou une organisation de confiance</strong>. </p><p>C’est une technique utilisée dans les arnaques par hameçonnage.</p>"
                           }
@@ -159,7 +159,7 @@
                     {
                       "id": "2e030d67-cac0-4cab-9330-29e49ec1d38e",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, à quoi correspond l’exemple ci-dessus ?</p>",
+                      "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -201,7 +201,7 @@
                     {
                       "id": "1f343330-1692-4614-9fc5-1132354e18ea",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, à quoi correspond l’exemple ci-dessus ?<br></p>",
+                      "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?<br></p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -243,27 +243,27 @@
                     {
                       "id": "6b0f2e57-33e3-40b6-b0bf-781b248a3b95",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, à quoi correspond l’exemple ci-dessus ?</p>",
+                      "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Un message d’arnaque pour vous voler de l’argent.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Peut-être pas.</p><p>Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien à cliquer ou de numéro à contacter. </p>"
+                            "diagnosis": "<p>Peut-être pas.</p><p>Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien cliquable ou de numéro à contacter. </p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Un message de procédure sécurisée d’achat en ligne.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! </p><p> Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien à cliquer ou de numéro à contacter.</p>"
+                            "diagnosis": "<p>Bien vu ! </p><p> Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien cliquable ou de numéro à contacter.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p> Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien à cliquer ou de numéro à contacter.</p>"
+                            "diagnosis": "<p> Ce message <strong>semble légitime</strong>. Il donne un code à saisir, mais ne précise pas où le saisir. Il n’y a pas de lien cliquable ou de numéro à contacter.</p>"
                           }
                         }
                       ],
@@ -285,7 +285,7 @@
               "element": {
                 "id": "cb301130-8149-461b-b203-7f40281ee8ff",
                 "type": "text",
-                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels</strong> qui imite une personne ou un organisme de confiance.🎣</p><p><br>⚠️ Les messages de hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
+                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels</strong> qui imite une personne ou un organisme de confiance.🎣</p><p><br>⚠️ Les messages d'hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
               }
             }
           ]
@@ -333,7 +333,7 @@
               "element": {
                 "id": "77909d47-54bc-4fc6-8b36-bb1816894d44",
                 "type": "text",
-                "content": "<p>Dans les mails de hameçonnage, l’escroc <strong>imite de façon imparfaite</strong> une personne ou un organisme de confiance. 👺</p><p>Ayez l’œil pour repérer ces imperfections !<br></p>"
+                "content": "<p>Dans les mails d'hameçonnage, l’escroc <strong>imite de façon imparfaite</strong> une personne ou un organisme de confiance. 👺</p><p>Ayez l’œil pour repérer ces imperfections !<br></p>"
               }
             }
           ]
@@ -363,7 +363,7 @@
               "element": {
                 "id": "ab18801a-ba3e-47be-ae4e-ecc43a754d6a",
                 "type": "text",
-                "content": "<p>Avec ces indices, vous savez maintenant mieux repérer les messages de hameçonnage. </p><p>Mais ils continuent d’encombrer votre boîte mail. Que faire ?</p>"
+                "content": "<p>Avec ces indices, vous savez maintenant mieux repérer les messages d'hameçonnage. </p><p>Mais ils continuent d’encombrer votre boîte mail. Que faire ?</p>"
               }
             }
           ]
@@ -404,7 +404,7 @@
               "element": {
                 "id": "70cadc99-643a-4257-b711-72a76f194da3",
                 "type": "text",
-                "content": "<h4>Comment réagir en cas de hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
+                "content": "<h4>Comment réagir en cas d'hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
               }
             }
           ]
@@ -419,7 +419,7 @@
               "element": {
                 "id": "cb32bbb8-1d16-4a0b-ab88-ba8b7b15afe3",
                 "type": "text",
-                "content": "<h5>Vous avez encore un doute ? 🕵️</h5><p>N’hésitez pas à demander de l’aide à un proche en qui vous avez confiance.<br></p>"
+                "content": "<h4>Vous avez encore un doute ? 🕵️</h4><p>N’hésitez pas à demander de l’aide à un proche en qui vous avez confiance.<br></p>"
               }
             }
           ]
@@ -440,7 +440,7 @@
               "element": {
                 "id": "e7da66f2-7e20-4c0f-85ed-f344bc48a8d2",
                 "type": "text",
-                "content": "<p>L’hameçonnage (ou phishing en anglais) est une technique utilisée par des escrocs pour <strong>vous inciter à communiquer des données personnelles</strong> en se <strong>faisant passer pour un tiers de confiance</strong>. 🎣</p><p>Un message de <strong>hameçonnage</strong> peut ressembler à un message légitime. Il comporte souvent plusieurs petits <strong>indices</strong> à repérer&nbsp;:</p>"
+                "content": "<p>L’hameçonnage (ou phishing en anglais) est une technique utilisée par des escrocs pour <strong>vous inciter à communiquer des données personnelles</strong> en se <strong>faisant passer pour un tiers de confiance</strong>. 🎣</p><p>Un message d'<strong>hameçonnage</strong> peut ressembler à un message légitime. Il comporte souvent plusieurs petits <strong>indices</strong> à repérer&nbsp;:</p>"
               }
             },
             {
@@ -572,10 +572,37 @@
                     "solutions": [
                       "1"
                     ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": "<p>Vous avez correctement  identifié les caractéristiques des messages de phishing.</p>"
                   },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Il vous manque un ou plusieurs éléments pour identifier les caractéristiques des messages de phishing. N’hésitez pas à réessayer.<br></p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "c48e0abc-5e66-48c0-9e09-a835bab39082",
+          "type": "activity",
+          "title": "QROCM",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5133b388-4a10-482f-8874-dbe8a9ec0932",
+                "type": "qrocm",
+                "instruction": "<p>Complétez la phrase suivante :</p>",
+                "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>En français, cette technique d’arnaque s’appelle le</span>"
+                    "content": "<span>En français, la technique d’arnaque par diffusion massive de message s’appelle le</span>"
                   },
                   {
                     "input": "nom-arnaque",
@@ -596,12 +623,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonne réponse !</p>",
-                    "diagnosis": "<p>Vous avez correctement  identifié les caractéristiques du hameçonnage.</p>"
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": "<p>L'hameçonnage est le mot français pour le phishing.</p>"
                   },
                   "invalid": {
-                    "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Il vous manque un ou plusieurs éléments pour identifier les caractéristiques des messages de phishing. N’hésitez pas à réessayer.<br></p>"
+                    "state": "<p>Mauvais réponse.</p>",
+                    "diagnosis": "<p>Revoyez le contenu du module pour trouver la traduction du mot phishing en français.</p>"
                   }
                 }
               }
@@ -618,7 +645,7 @@
               "element": {
                 "id": "93c7cfc9-93e9-42b8-95e2-b424da4548aa",
                 "type": "text",
-                "content": "<p>Votre abonnement à la revue <em>Paysages du monde</em> se termine. Vous avez reçu plusieurs emails pour vous inviter à le prolonger.</p>"
+                "content": "<p>Votre abonnement à la revue <em>Paysages du monde</em> se termine. Vous avez reçu plusieurs mails pour vous inviter à le prolonger.</p>"
               }
             },
             {
@@ -688,7 +715,7 @@
                 "isCompletionRequired": false,
                 "title": "Sélectionner et marquer un message malveillant comme indésirable.",
                 "url": "https://epreuves.pix.fr/pixmail-phishing.html?lang=fr&mode=a",
-                "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p>",
+                "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p><p><br></p><h4>⚠️L’activité suivante n’est pas jouable pour l’instant ⚠️</h4><p><br></p>",
                 "solution": "",
                 "height": 500
               }
@@ -711,7 +738,7 @@
               "element": {
                 "id": "72764293-9f8c-4c9e-83d1-a94cfbbe840c",
                 "type": "text",
-                "content": "<p>Vous avez reçu un email d’un site de vente de chaussures où vous avez passé commande.  Le message vous indique un problème avec votre commande.  Vous avez <strong>un doute sur l’authenticité de ce message</strong>.</p>"
+                "content": "<p>Vous avez reçu un mail d’un site de vente de chaussures où vous avez passé commande.  Le message vous indique un problème avec votre commande.  Vous avez <strong>un doute sur l’authenticité de ce message</strong>.</p>"
               }
             },
             {
@@ -719,7 +746,7 @@
               "element": {
                 "id": "79554085-8e51-4d07-b39b-32010a95bb57",
                 "type": "qcu-declarative",
-                "instruction": "<p>Choisissez un moyen de vérifier si ce message est une arnaque&nbsp;:</p>",
+                "instruction": "<p>Quel moyen choisissez-vous pour vérifier si ce message est une arnaque ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -732,14 +759,14 @@
                     "id": "2",
                     "content": "<p>J’appelle le numéro du service après-vente sur le site.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement c’est une très bonne idée. </p><p>Vous auriez aussi pu vérifier sur votre compte client si un problème existait dans le suivi de votre commande.</p>"
+                      "diagnosis": "<p>Effectivement c’est une très bonne idée. </p><p>Vous pouvez aussi vérifier sur votre compte client si un problème existe dans le suivi de votre commande.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je vérifie le suivi de ma commande sur mon compte client.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement c’est une très bonne idée. Vous auriez aussi pu contacter le service après-vente.</p>"
+                      "diagnosis": "<p>Effectivement c’est une très bonne idée. Vous pouvez aussi contacter le service après-vente.</p>"
                     }
                   },
                   {
