@@ -23,6 +23,10 @@ export default class Url extends UrlBaseService {
     return this.getPixWebsiteUrlFor('ACCESSIBILITY_ORGA');
   }
 
+  get supportHomeUrl() {
+    return this.getPixWebsiteUrlFor('SUPPORT');
+  }
+
   get campaignsRootUrl() {
     if (ENV.APP.CAMPAIGNS_ROOT_URL) return ENV.APP.CAMPAIGNS_ROOT_URL;
     return `${this.pixAppUrl}/campagnes/`;
