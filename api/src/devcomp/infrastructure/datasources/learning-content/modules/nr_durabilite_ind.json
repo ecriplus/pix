@@ -1,7 +1,7 @@
 {
   "id": "e2b42968-4797-46e7-b9ca-11d0d0dfa978",
   "slug": "metaux-eau-reemploi",
-  "title": "Métaux, eau douce, produits chimiques : pourquoi faut-il réutiliser nos équipements numériques ?",
+  "title": "Le numérique : pourquoi privilégier le réemploi ?",
   "isBeta": false,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
@@ -11,7 +11,7 @@
     "objectives": [
       "<p>Connaître les métaux et terres rares qui composent les appareils informatiques.</p>",
       "<p>Identifier les principaux impacts environnementaux liés à l’extraction des métaux et terres rares.</p>",
-      "<p>Comprendre pourquoi et comment le réemploi et le reconditionnement permettent de réduire ces impacts.</p>"
+      "<p>Comprendre l’intérêt du réemploi et du reconditionnement pour réduire l’impact environnemental.</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -25,6 +25,18 @@
           "type": "discovery",
           "title": "Accroche",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a67c4f7f-4995-4c3d-9257-f92ba8d9cdc8",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/926c637c-e574-4e55-a74d-49c9a19801af.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
             {
               "type": "element",
               "element": {
@@ -217,7 +229,7 @@
               "element": {
                 "id": "dad5436d-1659-4514-99b3-b316dc795888",
                 "type": "text",
-                "content": "<h5>🤔Et que se passe-t-il quand on produit toujours plus d’appareils ?</h5><p> La <strong>demande</strong> en métaux et en terres rares <strong>augmente fortement</strong>. Le secteur du numérique <strong>mobilise</strong> désormais <strong>une grande part des réserves mondiales</strong> de certains matériaux, comme le tantale ou l’indium. </p><p><strong>💡Bon à savoir</strong> </p><p>Les <strong>terres rares</strong> sont des métaux <strong>essentiels aux appareils numériques</strong>. Présentes dans la terre mais <strong>très peu concentrées</strong>, leur extraction exige beaucoup d’énergie, d’eau et de produits chimiques polluants.<br><br></p>"
+                "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p><strong>La demande</strong> en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le tantale ou l’indium. </p><p><strong>💡Bon à savoir</strong> </p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...= sont des métaux <strong>essentiels aux appareils numériques</strong>. Présentes dans la terre mais <strong>très peu concentrées</strong>, leur extraction exige beaucoup d’énergie, d’eau et de produits chimiques polluants.<br><br></p>"
               }
             }
           ]
@@ -254,14 +266,13 @@
                     },
                     {
                       "id": "8db7e730-9601-4e62-b6a4-9e351097e40f",
-                      "type": "qcu",
-                      "instruction": "<p>Vous imaginez vivre à côté d’un lac… de déchets chimiques ?<br> Ce “lac noir” visible depuis l’espace s’est formé à cause de quoi ?<br><br></p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p> Ce “lac noir” visible depuis l’espace s’est formé à cause de quoi ?<br><br></p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>De la fonte des glaces</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...</p>",
                             "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         },
@@ -269,7 +280,6 @@
                           "id": "2",
                           "content": "<p>Du traitement des terres rares&nbsp;</p>",
                           "feedback": {
-                            "state": "<p>Exact !</p>",
                             "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         },
@@ -277,7 +287,6 @@
                           "id": "3",
                           "content": "<p>D’une coulée de pétrole</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...</p>",
                             "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         }
@@ -300,26 +309,24 @@
                     {
                       "id": "154555e7-4169-41f8-a3ea-e74f40decb34",
                       "type": "text",
-                      "content": "<p>Pour extraire le lithium, on pompe l’eau salée des nappes souterraines dans de grands bassins d’évaporation.<br> Ce procédé consomme d’<strong>énormes volumes d’eau</strong> dans des régions souvent arides, et laisse derrière lui<strong> des déchets salins et chimiques</strong>.<br> Les sols s’appauvrissent, les sources d’eau potable s’assèchent, et la faune locale décline.</p>"
+                      "content": "<p>Pour extraire le lithium (essentiel pour les batteries), on pompe l’eau salée des nappes souterraines dans de grands bassins d’évaporation.<br> Ce procédé consomme d’<strong>énormes volumes d’eau</strong> dans des régions souvent arides, et laisse derrière lui<strong> des déchets salins et chimiques</strong>.<br> Les sols s’appauvrissent, les sources d’eau potable s’assèchent, et la faune locale décline.</p>"
                     },
                     {
                       "id": "f6da76af-0fca-4bb8-862e-f3f6433b1dcb",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Une batterie “écologique”, ça existe vraiment ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui, grâce au Lithium</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...</p>",
                             "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et <strong>contamine les nappes phréatiques</strong>.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Pas encore car l’extraction est polluante</p>",
+                          "content": "<p>Non, car l’extraction est polluante</p>",
                           "feedback": {
-                            "state": "<p>Exact !&nbsp;</p>",
                             "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et <strong>contamine les nappes phréatiques</strong>.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
                           }
                         },
@@ -327,8 +334,7 @@
                           "id": "3",
                           "content": "<p>Oui, si on les recharge souvent</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...</p>",
-                            "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et contamine les nappes phréatiques.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
+                            "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et <strong>contamine les nappes phréatiques</strong>.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
                           }
                         }
                       ],
@@ -354,22 +360,20 @@
                     },
                     {
                       "id": "664090f9-9d14-45f8-bfbd-8c09715ee51a",
-                      "type": "qcu",
-                      "instruction": "<p>Saviez-vous que certains de vos appareils numériques pouvaient contenir un peu du travail d’un enfant ?<br></p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Nos appareils peuvent-ils encore dépendre du travail d’enfants dans certaines mines ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Non, impossible !</p>",
                           "feedback": {
-                            "state": "<p>Malheusement si...</p>",
-                            "diagnosis": "<p>Le travail des enfants reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
+                            "diagnosis": "<p>Le <strong>travail des enfants</strong> reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Oui, dans certains cas</p>",
                           "feedback": {
-                            "state": "<p>Malheureusement...</p>",
                             "diagnosis": "<p>Le <strong>travail des enfants</strong> reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
                           }
                         },
@@ -377,7 +381,6 @@
                           "id": "3",
                           "content": "<p>Seulement pour les appareils anciens</p>",
                           "feedback": {
-                            "state": "<p>Malheureusement non...</p>",
                             "diagnosis": "<p>Le <strong>travail des enfants</strong> reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
                           }
                         }
@@ -433,26 +436,24 @@
                     {
                       "id": "1a7e6933-9fd4-42ce-a844-44547efcd603",
                       "type": "text",
-                      "content": "<p><strong>Amandine a un soucis d’ordinateur portable.</strong><br>Le sien a quelques années et commence à avoir <strong>des pixels morts</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais c’est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
+                      "content": "<p><strong>Amandine a un souci d’ordinateur portable.</strong><br>Le sien a quelques années et commence à avoir <strong>des pixels morts</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais il est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
                     },
                     {
                       "id": "c62a71c2-ec8a-4da8-b1dc-fbebd3e86f69",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>A votre avis, quelle solution Amandine devrait choisir pour limiter son impact et avoir un PC fonctionnel à nouveau ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Le garder encore un peu</p>",
+                          "content": "<p>Le garder encore un peu.</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...&nbsp;</p>",
                             "diagnosis": "<p>Bonne idée, mais seulement<strong> à court terme</strong>, mais si l’appareil devient difficile à utiliser, <strong>le réparer</strong> permet de <strong>vraiment prolonger sa durée de vie</strong> tout en évitant une nouvelle production.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Acheter un ordinateur d’occasion remis en état (reconditionné)</p>",
+                          "content": "<p>Acheter un ordinateur d’occasion remis en état (reconditionné).</p>",
                           "feedback": {
-                            "state": "<p>C’est bien, mais pas l’idéal...</p>",
                             "diagnosis": "<p>C’est un <strong>bon compromis</strong>, mais pas le meilleur ici. Le reconditionné évite la fabrication d’un neuf, mais <strong>réparer votre appareil actuel</strong> reste plus écologique.<br></p>"
                           }
                         },
@@ -460,15 +461,13 @@
                           "id": "3",
                           "content": "<p>Acheter un ordinateur portable neuf.</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...</p>",
                             "diagnosis": "<p>C’est l’option la <strong>plus polluante</strong>&nbsp;: chaque appareil neuf mobilise beaucoup de métaux, d’eau et d’énergie. Acheter neuf relance la production et <strong>augmente les impacts environnementaux</strong>.<br><br></p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "<p>Réparer son ordinateur actuel</p>",
+                          "content": "<p>Réparer son ordinateur actuel.</p>",
                           "feedback": {
-                            "state": "<p>Exact !&nbsp;</p>",
                             "diagnosis": "<p>C’est la <strong>meilleure option</strong> pour l’environnement. Remplacer la batterie ou l’écran prolonge la vie de l’appareil sans en produire un nouveau. Chaque réparation évite<strong> des kilos de matières extraites et des centaines de litres d’eau douce consommés</strong>.</p>"
                           }
                         }
@@ -486,31 +485,28 @@
                     },
                     {
                       "id": "22e11b89-febc-4cbc-b65a-ebc109072b52",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Que peut faire Amandine pour limiter son impact environnemental tout en répondant à ses nouveaux besoins ?<br></p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>acheter un ordinateur neuf</p>",
+                          "content": "<p>Acheter un ordinateur neuf.</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...&nbsp;</p>",
                             "diagnosis": "<p>C’est l’option qui <strong>consomme le plus de ressources</strong>. Chaque appareil neuf mobilise beaucoup de métaux, d’eau et de produits chimiques, et relance toute la production.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Louer un appareil temporairement</p>",
+                          "content": "<p>Louer un appareil temporairement.</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment...&nbsp;</p>",
                             "diagnosis": "<p>C’est une solution <strong>temporaire</strong>, mais peu durable. Les appareils loués sont <strong>souvent neufs</strong> ou <strong>fréquemment renouvelés</strong>, ce qui maintient la production et la consommation de ressources.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>acheter un ordinateur reconditionné</p>",
+                          "content": "<p>Acheter un ordinateur reconditionné.</p>",
                           "feedback": {
-                            "state": "<p>Exact !&nbsp;</p>",
-                            "diagnosis": "<p>C’est le meilleur choix pour allier performance et sobriété. Déjà fabriqué, l’appareil reconditionné est remis en état <strong>avant revente</strong>. Il répond à de nouveaux besoins <strong>sans relancer la production d’un neuf</strong>.</p>"
+                            "diagnosis": "<p>C’est le meilleur choix pour allier performance et sobriété. Déjà fabriqué, l’appareil reconditionné est remis en état <strong>avant la revente</strong>. Il répond à de nouveaux besoins <strong>sans relancer la production d’un neuf</strong>.</p>"
                           }
                         }
                       ],
@@ -519,14 +515,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "9dd2444c-4ef4-4f16-8f7d-44d5cefdd8b9",
-                "type": "text",
-                "content": ""
-              }
             }
           ]
         },
@@ -540,7 +528,7 @@
               "element": {
                 "id": "367f03f5-4e1a-41c1-b345-f374ef78d331",
                 "type": "text",
-                "content": "<h5><strong>🤔</strong>Prolonger la vie d’un appareil, c’est vraiment utile ?</h5><p>Oui ! <strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter de fabriquer un nouvel appareil.&nbsp; </p><h5>🤔Mais si j’ai besoin de changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>, ce qui lui donne une seconde vie et limite son impact. </p><h5>🤔Mais ça marche à tous les coups ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p><p><strong>💡Astuce&nbsp;:</strong> </p><p>Pensez à <strong>protéger</strong> vos appareils numériques (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;<br><br></p>"
+                "content": "<p><strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter de fabriquer un nouvel appareil.&nbsp; </p><h5>🤔Mais si j’ai besoin de changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>, ce qui lui donne une seconde vie et limite son impact. </p><h5>🤔Mais ça marche à tous les coups ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p><p><strong>💡Astuce&nbsp;:</strong> </p><p>Pensez à <strong>protéger</strong> vos appareils numériques (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;<br><br></p>"
               }
             }
           ]
@@ -562,6 +550,404 @@
                 "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
                 "type": "text",
                 "content": "<ul><li>Nos ordinateurs et téléphones contiennent plus de<strong> 50 métaux</strong>, dont plusieurs<strong> terres rares</strong>, <strong>extraits</strong> au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li><li><strong>Faire durer</strong> ou <strong>réparer</strong> ses appareils, c’est <strong>éviter la production d’un neuf</strong> et limiter l’extraction de métaux et la consommation d’eau.</li><li>Dans le cas d’un <strong>achat</strong>, choisir le <strong>reconditionné</strong> reste la solution la <strong>plus économe</strong> en ressources et la<strong> plus responsable</strong>.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "97838c32-af71-4a54-b9c0-a4cb5fbc02fd",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "613b8222-09b6-4ed5-8ea3-94af14fc284b",
+          "type": "activity",
+          "title": "Activité 1 ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b3e8bb14-25a2-4663-a03d-8f358373dfe7",
+                "type": "qab",
+                "instruction": "<p><strong>Vrai ou faux&nbsp;?</strong> Identifiez si chaque affirmation est correcte concernant les métaux et terres rares présents dans nos appareils numériques.</p>",
+                "cards": [
+                  {
+                    "id": "53251948-04c9-4f2a-ae23-79d12efb0051",
+                    "text": "« Une batterie de smartphone contient surtout du lithium et du cobalt. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "3817569f-cb91-4963-b764-90dee77fce0d",
+                    "text": "« Les écrans tactiles ne contiennent pas de terres rares. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "539fbcaf-ada5-4141-a1a5-9bc83bb36695",
+                    "text": "« Les circuits électroniques peuvent contenir du cuivre, de l’argent et même de l’or. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "c9d56d19-c2f5-4523-9828-772c0ea992c0",
+                    "text": "« Le boîtier d’un smartphone est généralement fabriqué en fer pour plus de solidité. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "3950dc63-be0c-404e-93cc-465c3a145d20",
+                    "text": "« Le néodyme, une terre rare, est utilisé dans les haut-parleurs pour produire le son. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "489a20bc-01f0-4578-9fb5-04e95d4c1ec4",
+          "type": "activity",
+          "title": "Activité 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "623bc269-ce7a-4a06-91b3-d15c87a72dbd",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 2,
+                  "title": "☠️ Extraction des terres rares au Myanmar : un danger pour la santé des populations locales",
+                  "author": "D’après le rapport Global Witness, 2024",
+                  "date": "mai 2024",
+                  "paragraphs": [
+                    "Dans l’État de Kachin, au nord du Myanmar, l’extraction des terres rares s’est multipliée depuis 2016. Les opérations minières, souvent illégales et non régulées, utilisent des procédés chimiques extrêmement toxiques pour séparer les métaux recherchés des roches environnantes.",
+                    "{{highlightedSentence}} Les analyses de Global Witness montrent que les sols et les cours d’eau sont contaminés par des concentrations anormales d’arsenic et d’acides résiduels issus des bassins de lixiviation.",
+                    "De nombreuses familles ont dû quitter leurs terres agricoles devenues impropres à la culture. Les sources d’eau potable locales présentent désormais des signes d’acidification et de pollution chimique durable, entraînant une exposition chronique pour les communautés restantes."
+                  ],
+                  "highlightedSentence": "Les habitants vivant à proximité de ces sites signalent de graves effets sur leur santé : irritations cutanées, douleurs abdominales, troubles respiratoires et atteintes rénales.",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "280facae-1a08-4d31-a6f1-17debf9630bd",
+                "type": "qcm",
+                "instruction": "<p>Selon l’article, quels problèmes majeurs l’extraction des terres rares provoque-t-elle dans l’État de Kachin ? (3 réponses attendues)</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>La pollution des sols et des cours d’eau</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Des effets graves sur la santé des habitants</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Le déplacement de familles dont les terres deviennent impropres à la culture</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "Une hausse des conflits entre exploitants et autorités locales"
+                  },
+                  {
+                    "id": "5",
+                    "content": "La contamination des forêts par des engins lourds"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>success</p>",
+                    "diagnosis": "<p>Exact. L’article décrit des pollutions sévères, des risques importants pour la santé et le déplacement de familles touchées par la contamination durable des sols et de l’eau.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>error</p>",
+                    "diagnosis": "<p>Certaines réponses sélectionnées ne figurent pas dans l’article. Les impacts mentionnés concernent surtout la pollution, la santé et le déplacement des populations.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "ccf8652f-4d04-4ba0-adf8-a52ba280bd68",
+          "type": "activity",
+          "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c32ce6e9-24bd-4124-b068-21630ba71616",
+                "type": "qrocm",
+                "instruction": "<p>Classez chaque comportement du <strong>moins polluant (1)</strong> au <strong>plus polluant (4)</strong>.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p><span>Achat d’un appareil neuf</span></p>"
+                  },
+                  {
+                    "input": "choice1",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un rang",
+                    "ariaLabel": "Sélectionner un rang pour l’achat d’un appareil neuf",
+                    "defaultValue": "Sélectionner un rang",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "1 (le moins polluant)"
+                      },
+                      {
+                        "id": "2",
+                        "content": "2"
+                      },
+                      {
+                        "id": "3",
+                        "content": "3"
+                      },
+                      {
+                        "id": "4",
+                        "content": "4 (le plus polluant)"
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>Achat d’un appareil reconditionné alors que l’appareil actuel fonctionne encore bien</span></p>"
+                  },
+                  {
+                    "input": "choice2",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un rang",
+                    "ariaLabel": "Sélectionner un rang pour l’achat reconditionné alors que l’appareil fonctionne encore",
+                    "defaultValue": "Sélectionner un rang",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "1 (le moins polluant)"
+                      },
+                      {
+                        "id": "2",
+                        "content": "2"
+                      },
+                      {
+                        "id": "3",
+                        "content": "3"
+                      },
+                      {
+                        "id": "4",
+                        "content": "4 (le plus polluant)"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>Achat d’un appareil reconditionné après que l’ancien est devenu inutilisable</span></p>"
+                  },
+                  {
+                    "input": "choice3",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un rang",
+                    "ariaLabel": "Sélectionner un rang pour l’achat reconditionné après fin de vie",
+                    "defaultValue": "Sélectionner un rang",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "1 (le moins polluant)"
+                      },
+                      {
+                        "id": "2",
+                        "content": "2"
+                      },
+                      {
+                        "id": "3",
+                        "content": "3"
+                      },
+                      {
+                        "id": "4",
+                        "content": "4 (le plus polluant)"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>Réparation de l’appareil actuel</span></p>"
+                  },
+                  {
+                    "input": "choice4",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un rang",
+                    "ariaLabel": "Sélectionner un rang pour la réparation",
+                    "defaultValue": "Sélectionner un rang",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "1 (le moins polluant)"
+                      },
+                      {
+                        "id": "2",
+                        "content": "2"
+                      },
+                      {
+                        "id": "3",
+                        "content": "3"
+                      },
+                      {
+                        "id": "4",
+                        "content": "4 (le plus polluant)"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse.</p>",
+                    "diagnosis": "<p>Exact&nbsp;: la réparation reste l’option la moins polluante. Ensuite vient l’achat reconditionné en cas de fin de vie réelle, puis l’achat reconditionné inutile. L’achat neuf est le plus polluant car il relance toute la chaîne de fabrication et l’extraction des métaux.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Réponse incorrecte.</p>",
+                    "diagnosis": "<p>Rappelez-vous&nbsp;: l’impact est lié surtout à la fabrication. Moins on produit, moins on extrait de métaux, moins on consomme d’eau et d’énergie, et moins on pollue.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "31241558-ecd0-4709-b091-3f6f58eba29a",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "1f5b9dd5-7369-4036-9a04-0afa3279c0c2",
+          "type": "challenge",
+          "title": "Et vous ? ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "787a7af6-dc3f-4eff-a8cb-e8616d5d776c",
+                "type": "qcu-declarative",
+                "instruction": "<p>Quel âge a votre smartphone&nbsp;?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>0 an</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Votre smartphone est tout récent. Sa durée de vie technique peut atteindre <strong>5 à 10 ans</strong> si vous l’entretenez. En moyenne, les utilisateurs des pays de l’OCDE remplacent leur téléphone au bout de <strong>2 à 3 ans</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>1 an</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Votre téléphone est encore très loin de ses limites techniques. Un smartphone moderne peut fonctionner <strong>5 à 10 ans</strong>, alors que la moyenne de remplacement se situe entre <strong>2 et 3 ans</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>2 ans</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Vous êtes dans la <strong>moyenne exacte</strong> de remplacement observée dans les pays de l’OCDE. Pourtant, un téléphone peut souvent durer <strong>bien plus de 5 ans</strong> s’il est entretenu ou réparé.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>3 ans</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Vous arrivez à l’âge où beaucoup d’utilisateurs changent leur smartphone. Toutefois, la durée de vie technique d’un appareil reste généralement <strong>supérieure à 5 ans</strong>, voire davantage en cas de réparation.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>4 ans</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Votre téléphone approche de l’âge où certaines limites peuvent apparaître (batterie, performances). Mais un smartphone peut encore fonctionner <strong>plus de 5 ans</strong> avec une batterie neuve ou une petite réparation.</p>"
+                    }
+                  },
+                  {
+                    "id": "6",
+                    "content": "<p>5 ans</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Vous dépassez déjà la durée d’usage moyenne de <strong>2 à 3 ans</strong> observée dans les pays de l’OCDE. Vous exploitez bien les capacités techniques de votre appareil, qui peut encore fonctionner avec des réparations simples.</p>"
+                    }
+                  },
+                  {
+                    "id": "7",
+                    "content": "<p>Plus de 5 ans</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Votre smartphone dépasse largement la durée d’usage moyenne observée (2 à 3 ans). À partir de 5 ans, les limites logicielles ou matérielles peuvent apparaître, mais utiliser un appareil aussi longtemps est un <strong>excellent geste de sobriété numérique</strong>.</p>"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fb040f45-74ae-4ba1-993e-893e97cd0da6",
+                "type": "text",
+                "content": "<p><strong>Chaque petite action compte.</strong></p><p>Que ce soit <strong>remplacer une batterie</strong>, réparer un écran ou simplement <strong>garder votre phone un an de plu</strong><strong>s</strong>&nbsp;:<br><strong>moins on renouvelle, moins on produit, et moins on extrait de ressources</strong>.</p>"
               }
             }
           ]
