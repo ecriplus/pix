@@ -53,7 +53,7 @@ export default class UserDetailPersonalInformationComponent extends Component {
       await this.args.user.reload();
       this.pixToast.sendSuccessNotification({ message: DISSOCIATE_SUCCESS_NOTIFICATION_MESSAGE });
     } catch {
-      const errorMessage = 'Une erreur est survenue !';
+      const errorMessage = this.intl.t('common.api-error-messages.internal-server-error');
       this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {
       this.displayDissociateModal = false;
@@ -70,7 +70,7 @@ export default class UserDetailPersonalInformationComponent extends Component {
         message: this.intl.t('components.organization-learner-information.deletion-modal.success-message'),
       });
     } catch {
-      const errorMessage = 'Une erreur est survenue !';
+      const errorMessage = this.intl.t('common.api-error-messages.internal-server-error');
       this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {
       this.displayDeletionLearnerModal = false;
