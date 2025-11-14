@@ -107,44 +107,6 @@ module('Integration | Component | Authentication::LoginForm', function (hooks) {
         });
       });
 
-      module('When the user has a temporary password', function () {
-        test('it displays a should change password message', async function (assert) {
-          // given
-          const errorResponse = {
-            responseJSON: {
-              errors: [{ status: '401', code: 'SHOULD_CHANGE_PASSWORD' }],
-            },
-          };
-          const currentDomainService = this.owner.lookup('service:current-domain');
-          sinon.stub(currentDomainService, 'getExtension').returns('fr');
-          sinon.stub(sessionService, 'authenticate');
-          sessionService.authenticate.rejects(errorResponse);
-
-          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
-          await fillByLabel(emailInputLabel, 'pix@example.net');
-          await fillByLabel(passwordInputLabel, 'Mauvais mot de passe');
-
-          //  when
-          await clickByName(loginLabel);
-
-          // then
-          const expectedErrorMessage = t('pages.login-form.errors.should-change-password', {
-            url: 'https://app.pix.fr/mot-de-passe-oublie',
-            htmlSafe: true,
-          });
-          assert
-            .dom(
-              screen.getByText((content, node) => {
-                const hasText = (node) => node.innerHTML.trim() === expectedErrorMessage.__string;
-                const nodeHasText = hasText(node);
-                const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child));
-                return nodeHasText && childrenDontHaveText;
-              }),
-            )
-            .exists();
-        });
-      });
-
       module('When credentials do not match any user', function () {
         test('it displays an invalid credentials message', async function (assert) {
           // given

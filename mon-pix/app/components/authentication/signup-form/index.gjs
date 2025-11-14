@@ -99,7 +99,7 @@ export default class SignupForm extends Component {
 
       user.password = null;
     } catch (errorResponse) {
-      // Error response format is different from EmberAdapter and EmberSimpleAuth
+      // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
       const error = get(errorResponse, errorResponse?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
       this._manageApiErrors(error);
     } finally {
