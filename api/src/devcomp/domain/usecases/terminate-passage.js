@@ -5,7 +5,7 @@ import { PassageDoesNotExistError, PassageTerminatedError } from '../errors.js';
 const terminatePassage = withTransaction(async function ({
   passageId,
   passageRepository,
-  saveOrganizationLearnerPassageForUserJobRepository,
+  updateCombinedCourseJobRepository,
 }) {
   const passage = await _getPassage({ passageId, passageRepository });
   if (passage.terminatedAt) {
@@ -14,7 +14,7 @@ const terminatePassage = withTransaction(async function ({
   passage.terminate();
   const terminatedPassage = await passageRepository.update({ passage });
 
-  await saveOrganizationLearnerPassageForUserJobRepository.performAsync({
+  await updateCombinedCourseJobRepository.performAsync({
     userId: passage.userId,
     moduleId: passage.moduleId,
   });
