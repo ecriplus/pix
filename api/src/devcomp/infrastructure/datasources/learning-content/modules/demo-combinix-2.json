@@ -1,5 +1,6 @@
 {
   "id": "f32a2238-4f65-4698-b486-15d51935d335",
+  "shortId": "df82ec66",
   "slug": "demo-combinix-2",
   "title": "Demo combinix 2",
   "isBeta": true,
@@ -9,7 +10,9 @@
     "duration": 1,
     "level": "novice",
     "tabletSupport": "inconvenient",
-    "objectives": ["Test parcours combiné 2"]
+    "objectives": [
+      "Test parcours combiné 2"
+    ]
   },
   "sections": [
     {

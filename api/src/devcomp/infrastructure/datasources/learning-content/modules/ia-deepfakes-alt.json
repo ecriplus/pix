@@ -1,5 +1,6 @@
 {
   "id": "c7fe268a-9371-4eec-8a8a-df79c7479a46",
+  "shortId": "a23e9d63",
   "slug": "tmp-ia-deepfakes-alt",
   "title": "Les deepfakes (hypertrucages) : c’est quoi ?",
   "isBeta": true,
@@ -698,7 +699,10 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": ["1", "3"]
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },

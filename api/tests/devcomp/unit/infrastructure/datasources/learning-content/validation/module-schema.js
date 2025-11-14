@@ -122,6 +122,7 @@ const moduleSectionSchema = Joi.object({
 
 const moduleSchema = Joi.object({
   id: uuidSchema,
+  shortId: Joi.string().length(8).required(),
   slug: Joi.string()
     .regex(/^[a-z0-9-]+$/)
     .required(),

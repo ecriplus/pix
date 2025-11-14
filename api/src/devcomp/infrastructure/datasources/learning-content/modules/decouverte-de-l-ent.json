@@ -1,5 +1,6 @@
 {
   "id": "1c765240-c790-4f32-8ec0-bc9945bcc5ce",
+  "shortId": "c6437577",
   "slug": "decouverte-de-l-ent",
   "title": "À la découverte de l’ENT",
   "isBeta": true,
@@ -196,7 +197,10 @@
                     "diagnosis": "<p>Pas tout à fait ! Grâce à l'ENT, Martin peut consulter des informations qui concernent sa fille&nbsp;: ses notes, son emploi du temps, ses devoirs. Par contre, il ne peut pas modifier l'emploi du temps de la classe.</p>"
                   }
                 },
-                "solutions": ["1", "2"]
+                "solutions": [
+                  "1",
+                  "2"
+                ]
               }
             }
           ]

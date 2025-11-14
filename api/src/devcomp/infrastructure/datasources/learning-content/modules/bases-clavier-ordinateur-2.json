@@ -1,5 +1,6 @@
 {
   "id": "bb0a4ed3-1b49-4782-b867-05ade0868c4f",
+  "shortId": "31ca924a",
   "slug": "bases-clavier-2",
   "title": "Les bases du clavier sur ordinateur 2/2",
   "isBeta": true,
@@ -65,7 +66,10 @@
                     "ariaLabel": "zone de saisie",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
+                    "solutions": [
+                      "voilà le zèbre déçu",
+                      "« voilà le zèbre déçu »"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -319,7 +323,6 @@
             }
           ]
         },
-
         {
           "id": "d310a45d-b3e1-4875-9c8e-55d39368d039",
           "type": "activity",
@@ -353,17 +356,21 @@
                     "placeholder": "recopiez la phrase ",
                     "ariaLabel": "zone de saisie",
                     "defaultValue": "",
-                    "tolerances": ["t1"],
-                    "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
+                    "tolerances": [
+                      "t1"
+                    ],
+                    "solutions": [
+                      "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
+                    ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bonne réponse ! \uD83C\uDF4F\uD83C\uDF4F\uD83C\uDF4F",
+                    "state": "Bonne réponse ! 🍏🍏🍏",
                     "diagnosis": "<p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>"
                   },
                   "invalid": {
-                    "state": "Mauvaise réponse. \uD83C\uDF4E\uD83C\uDF4E\uD83C\uDF4E",
+                    "state": "Mauvaise réponse. 🍎🍎🍎",
                     "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
                   }
                 }

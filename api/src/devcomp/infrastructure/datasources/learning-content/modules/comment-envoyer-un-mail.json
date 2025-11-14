@@ -1,5 +1,6 @@
 {
   "id": "d4c4a2b2-0046-471d-ad9c-15f9cfc8f1f6",
+  "shortId": "7762efcb",
   "slug": "comment-envoyer-un-mail",
   "title": "Comment envoyer un mail ? ",
   "isBeta": true,
@@ -407,7 +408,9 @@
                         "content": "Rayan"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -439,7 +442,9 @@
                         "content": "Jennifer, Marine, Clément, Rayan"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -471,7 +476,9 @@
                         "content": "Costumes pour le 27 octobre"
                       }
                     ],
-                    "solutions": ["4"]
+                    "solutions": [
+                      "4"
+                    ]
                   }
                 ],
                 "feedbacks": {

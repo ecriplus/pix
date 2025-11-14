@@ -1,5 +1,6 @@
 {
   "id": "654c44dc-0560-4acc-9860-4a67c923577f",
+  "shortId": "740d5aa9",
   "slug": "bases-clavier-1",
   "title": "Les bases du clavier sur ordinateur 1/2",
   "isBeta": true,
@@ -293,7 +294,9 @@
                           "ariaLabel": "Cliquer ici",
                           "defaultValue": "",
                           "tolerances": [],
-                          "solutions": ["cornichons"]
+                          "solutions": [
+                            "cornichons"
+                          ]
                         },
                         {
                           "type": "text",
@@ -309,7 +312,9 @@
                           "ariaLabel": "Cliquer ici",
                           "defaultValue": "",
                           "tolerances": [],
-                          "solutions": ["vide"]
+                          "solutions": [
+                            "vide"
+                          ]
                         },
                         {
                           "type": "text",
@@ -322,7 +327,7 @@
                           "diagnosis": "<p>Bravo ! Vous avez bien complété la phrase.</p>"
                         },
                         "invalid": {
-                          "state": "Mauvaise réponse. \uD83C\uDF7D\uFE0F",
+                          "state": "Mauvaise réponse. 🍽️",
                           "diagnosis": "<p> Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
                         }
                       }
@@ -615,7 +620,9 @@
                           "ariaLabel": "Cliquer ici",
                           "defaultValue": "",
                           "tolerances": [],
-                          "solutions": ["céleri"]
+                          "solutions": [
+                            "céleri"
+                          ]
                         }
                       ],
                       "feedbacks": {
@@ -648,7 +655,9 @@
                           "ariaLabel": "Cliquer ici",
                           "defaultValue": "",
                           "tolerances": [],
-                          "solutions": ["pastèque"]
+                          "solutions": [
+                            "pastèque"
+                          ]
                         }
                       ],
                       "feedbacks": {
@@ -681,7 +690,9 @@
                           "ariaLabel": "Cliquer ici",
                           "defaultValue": "",
                           "tolerances": [],
-                          "solutions": ["bac à glaçons"]
+                          "solutions": [
+                            "bac à glaçons"
+                          ]
                         }
                       ],
                       "feedbacks": {
