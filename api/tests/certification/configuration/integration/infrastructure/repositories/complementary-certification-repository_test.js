@@ -74,54 +74,6 @@ describe('Integration | Certification | Repository | complementary-certification
     });
   });
 
-  describe('#getByLabel', function () {
-    context('when the complementary certification does not exist', function () {
-      it('should throw a NotFoundError', async function () {
-        // given
-        const unknownComplementaryCertificationLabel = 'a label';
-
-        // when
-        const error = await catchErr(complementaryCertificationRepository.getByLabel)({
-          label: unknownComplementaryCertificationLabel,
-        });
-
-        // then
-        expect(error).to.be.instanceOf(NotFoundError);
-        expect(error.message).to.equal('Complementary certification does not exist');
-      });
-    });
-
-    it('should return the complementary certification by its label', async function () {
-      // given
-      const label = 'Pix+ Édu 1er degré';
-      databaseBuilder.factory.buildComplementaryCertification({
-        id: 1,
-        key: 'EDU_1ER_DEGRE',
-        label,
-      });
-
-      databaseBuilder.factory.buildComplementaryCertification({
-        id: 3,
-        key: 'EDU_2ND_DEGRE',
-        label: 'Pix+ Édu 2nd degré',
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const complementaryCertification = await complementaryCertificationRepository.getByLabel({ label });
-
-      // then
-      const expectedComplementaryCertification =
-        domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
-          id: 1,
-          key: 'EDU_1ER_DEGRE',
-          label: 'Pix+ Édu 1er degré',
-        });
-      expect(complementaryCertification).to.deep.equal(expectedComplementaryCertification);
-    });
-  });
-
   describe('#getByKey', function () {
     context('when the complementary certification does not exist', function () {
       it('should throw a NotFoundError', async function () {
