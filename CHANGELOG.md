@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.257.0](https://github.com/1024pix/pix/compare/v5.256.0...v5.257.0) (2025-11-14)
+
+### :rocket: Amélioration
+
+- [#14146](https://github.com/1024pix/pix/pull/14146) Afficher le nombre de centres de certification dans l'onglet de navigation (PIX-20004) 
+- [#14125](https://github.com/1024pix/pix/pull/14125) Afficher le pays dans la page de détail d'une organisation (PIX-20137) 
+- [#14137](https://github.com/1024pix/pix/pull/14137) Ajouter un job lorsqu'un module est terminé (pix-19076) 
+- [#14147](https://github.com/1024pix/pix/pull/14147) Ajouter une contrainte d'unicité sur module pour la table organization-learner-participation (pix-20406) 
+- [#14122](https://github.com/1024pix/pix/pull/14122) Appeler /oidc/identity-providers pour récupérer les OIDC providers sur Pix Orga (PIX-20322) 
+- [#14124](https://github.com/1024pix/pix/pull/14124) Cacher l'édition d'un candidat si le scope n'est pas accessible (PIX-20360). 
+- [#14118](https://github.com/1024pix/pix/pull/14118) Remonter coté back le nom du pays dans la route de détail d'une orga (PIx-20136) 
+- [#14121](https://github.com/1024pix/pix/pull/14121) Supprimer la jauge de progression (PIX-20107) 
+- [#14140](https://github.com/1024pix/pix/pull/14140) Traiter les retours design sur la barre de navigation des modules (PIX-20375) 
+- [#14162](https://github.com/1024pix/pix/pull/14162) Update CYPhishing_IND.json 
+
+### :bug: Correction
+
+- [#14142](https://github.com/1024pix/pix/pull/14142) Permettre le téléchargement de résultat d'une collecte de profil lorsqu'un utilisateur a demandé à anonymiser son compte (PIX-20401). 
+- [#14149](https://github.com/1024pix/pix/pull/14149) Stepper horizontal - Ne pas afficher le bouton "Suivant" dans les steps précédentes (PIX-19973) 
+
+### :building_construction: Tech
+
+- [#14120](https://github.com/1024pix/pix/pull/14120) Nettoyage de trois colonnes deprecated dans certification-frameworks-challenges (PIX-20131). 
+
+### :arrow_up: Montée de version
+
+- [#14088](https://github.com/1024pix/pix/pull/14088) Update dependency eslint-plugin-unicorn to v61 (dossier racine)
+
 # [5.256.0](https://github.com/1024pix/pix/compare/v5.255.0...v5.256.0) (2025-11-13)
 
 ### :rocket: Amélioration
