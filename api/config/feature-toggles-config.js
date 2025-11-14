@@ -87,4 +87,11 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'a11y', 'team-certif', 'pix-certif'],
   },
+  areModuleShortIdUrlsEnabled: {
+    type: 'boolean',
+    description: 'Enable module urls using short ID before slug',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
+    tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
+  },
 };
