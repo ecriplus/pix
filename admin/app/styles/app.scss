@@ -33,6 +33,7 @@
 @use 'components/administration/certification/competence-scoring-configuration' as *;
 @use 'components/administration/certification/certification-version-challenges-configuration-form' as *;
 @use 'components/administration/certification/sco-whitelist-configuration' as *;
+@use 'components/administration/certification/sco-blocked-access-date-configuration' as *;
 @use 'components/administration/certification/scoring-simulator' as *;
 @use 'components/autonomous-courses/details' as *;
 @use 'components/autonomous-courses/form' as *;

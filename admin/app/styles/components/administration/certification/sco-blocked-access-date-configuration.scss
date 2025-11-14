@@ -1,0 +1,40 @@
+.sco-blocked-access-date-configuration {
+  .block-layout__actions{
+    display: block;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--pix-spacing-6x);
+    margin-top: var(--pix-spacing-6x);
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    gap: var(--pix-spacing-4x);
+    margin-bottom: var(--pix-spacing-4x);
+  }
+
+  &__current-date {
+    font-weight: var(--pix-font-normal);
+    font-size: 1.2rem;
+  }
+
+  .pix-input__label {
+    font-weight: var();
+  }
+}
+
+.pix-input {
+  flex-direction: row;
+  gap: var(--pix-spacing-4x);
+  align-items: center;
+}
+
+.pix-label {
+  font-weight: var(--pix-font-normal);
+  font-size: 1.2rem;
+}
+

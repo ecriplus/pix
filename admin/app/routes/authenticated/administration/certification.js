@@ -5,8 +5,13 @@ export default class CertificationRoute extends Route {
   @service store;
 
   async model() {
-    return this.store.queryRecord('certification-version', {
+    const dates = await this.store.findAll('sco-blocked-access-date');
+    const version = await this.store.queryRecord('certification-version', {
       scope: 'CORE',
     });
+    return {
+      scoBlockedAccessDates: dates,
+      certificationVersion: version,
+    };
   }
 }
