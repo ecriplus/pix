@@ -32,6 +32,10 @@ export default class ModulePassage extends Component {
     });
   }
 
+  get isNewPattern() {
+    return this.args.module.isNewPattern;
+  }
+
   @action
   getSectionTypeForGrain(grain) {
     return this.enrichedSections.find((section) => section.firstGrainId === grain.id).sectionType;
@@ -251,7 +255,7 @@ export default class ModulePassage extends Component {
   <template>
     {{pageTitle @module.title}}
 
-    <main class="module-passage">
+    <main class="module-passage {{if this.isNewPattern 'module-passage--new-pattern'}}">
       {{#if @module.isBeta}}
         <BetaBanner />
       {{/if}}

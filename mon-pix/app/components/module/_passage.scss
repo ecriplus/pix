@@ -1,6 +1,16 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
 
 .module-passage {
+  @include breakpoints.device-is('mobile') {
+    padding-top: 0;
+
+    &--new-pattern {
+      padding-top: 70px;
+    }
+  }
+
   max-width: var(--modulix-max-content-width);
   margin: 0 auto;
   padding: 0 var(--pix-spacing-4x);
