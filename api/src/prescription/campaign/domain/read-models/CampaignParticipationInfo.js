@@ -12,7 +12,7 @@ const validationSchema = Joi.object({
   participantExternalId: Joi.string().optional().allow(null),
   additionalInfos: Joi.object().allow(null),
   studentNumber: Joi.string().optional().allow(null),
-  userId: Joi.number().integer().required(),
+  userId: Joi.number().integer().required().allow(null),
   campaignParticipationId: Joi.number().integer().required(),
   isCompleted: Joi.boolean().required(),
   createdAt: Joi.date().required(),

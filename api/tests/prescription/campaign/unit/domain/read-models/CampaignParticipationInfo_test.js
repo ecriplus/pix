@@ -115,6 +115,11 @@ describe('Unit | Domain | Read-models | CampaignParticipationInfo', function () 
       );
     });
 
+    it('should not throw an ObjectValidationError when userId is null', function () {
+      // when
+      expect(() => new CampaignParticipationInfo({ ...validArguments, userId: null })).to.not.throw();
+    });
+
     it('should throw an ObjectValidationError when isCompleted is not valid', function () {
       // when
       expect(() => new CampaignParticipationInfo({ ...validArguments, isCompleted: 'les zouzous' })).to.throw(

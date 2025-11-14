@@ -210,6 +210,56 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"Non";"NA";"NA";"NA";"NA";"NA";"NA";"NA";"NA"`,
         );
       });
+
+      it('should not throw when organization learner is anonymized', async function () {
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          firstName: 'Maurice',
+          lastName: 'le Choco Suisse',
+          organizationId: organization.id,
+          userId: null,
+        });
+        const participationShared = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          organizationLearnerId: organizationLearner.id,
+          status: CampaignParticipationStatuses.SHARED,
+          userId: null,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
+          campaignParticipationId: participationShared.id,
+        });
+
+        const otherOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          firstName: 'Jeannette',
+          lastName: 'la rainette',
+          organizationId: organization.id,
+          userId: null,
+        });
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          organizationLearnerId: otherOrganizationLearner.id,
+          status: CampaignParticipationStatuses.STARTED,
+          userId: null,
+        });
+
+        await databaseBuilder.commit();
+
+        const call = startWritingCampaignProfilesCollectionResultsToStream({
+          campaignId: campaign.id,
+          writableStream,
+          i18n,
+          campaignRepository,
+          userRepository,
+          competenceRepository,
+          organizationRepository,
+          campaignParticipationRepository,
+          placementProfileService,
+          organizationFeatureApi,
+        });
+
+        await expect(call).fulfilled;
+      });
     });
 
     context('when campaign has external id feature', function () {

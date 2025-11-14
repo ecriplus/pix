@@ -564,6 +564,12 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
 
         context('participation started', function () {
           beforeEach(async function () {
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
             // learner
             participant = databaseBuilder.factory.buildUser();
             organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
@@ -595,11 +601,36 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               userId: participant.id,
             });
 
-            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-              databaseBuilder.factory.buildCampaignSkill({
-                campaignId: campaign.id,
-                skillId: skillId,
-              });
+            // anonymized learner
+            const anonymizedOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+              firstName: 'Anonymized',
+              lastName: 'Anonymized',
+              organizationId: organization.id,
+              userId: null,
+            });
+
+            const anonymizedUser = databaseBuilder.factory.buildUser.anonymous();
+            const anonymizedCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: anonymizedOrganizationLearner.id,
+              userId: null,
+              status: CampaignParticipationStatuses.STARTED,
+              createdAt: new Date('2018-01-01'),
+            });
+
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: anonymizedCampaignParticipation.id,
+              userId: anonymizedUser.id,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.CAMPAIGN,
+              createdAt: new Date('2018-01-01'),
+            });
+
+            databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: anonymizedUser.id,
             });
 
             await databaseBuilder.commit();
@@ -608,6 +639,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           it('should return a csv line with progression', async function () {
             // given
             const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
+
             let csvSecondLine =
               `"${organization.name}";` +
               `${campaign.id};` +
@@ -619,6 +651,32 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
             if (!hideProgression) csvSecondLine += '0,333;';
             csvSecondLine +=
               `"${createdAtFormated}";` +
+              '"Non";' +
+              `"NA";` +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA"';
+
+            let csvThirdLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"Anonymized";` +
+              `"Anonymized";`;
+            if (!hideProgression) csvThirdLine += '0;';
+            csvThirdLine +=
+              `"01/01/2018 01:00";` +
               '"Non";' +
               `"NA";` +
               '"NA";' +
@@ -648,6 +706,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
             // then
             expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
             expect(csvLines[1]).to.equal(csvSecondLine);
+            expect(csvLines[2]).to.equal(csvThirdLine);
           });
         });
 
