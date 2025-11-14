@@ -80,12 +80,12 @@ module('Acceptance | join and signup', function (hooks) {
     module('When user already exists', function () {
       test('displays an error message', async function (assert) {
         // given
-        const alreadyExistUserError = {
+        const alreadyExistingUserError = {
           status: '422',
           source: { pointer: 'data/attributes/email' },
           detail: 'INVALID_OR_ALREADY_USED_EMAIL',
         };
-        server.post('/users', { errors: [alreadyExistUserError] }, 422);
+        server.post('/users', { errors: [alreadyExistingUserError] }, 422);
 
         // when
         const screen = await visit(`/rejoindre?invitationId=${invitationId}&code=${invitationCode}`);

@@ -231,7 +231,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
         expect(response.statusCode).to.equal(409);
       });
 
-      it('should respond with a 404 if given email is not linked to an existing user', async function () {
+      it('should respond with a 401 if given email is not linked to an existing user', async function () {
         // given
         const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
           status: OrganizationInvitation.StatusType.PENDING,
@@ -257,7 +257,8 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
         const response = await server.inject(options);
 
         // then
-        expect(response.statusCode).to.equal(404);
+        expect(response.statusCode).to.equal(401);
+        expect(response.result.errors[0].code).to.equal('MISSING_OR_INVALID_CREDENTIALS');
       });
 
       it('should respond with a 412 if membership already exist with userId and OrganizationId', async function () {
