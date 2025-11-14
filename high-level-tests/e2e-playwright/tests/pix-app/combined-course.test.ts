@@ -22,7 +22,7 @@ test('pass a combined course as sco user and see the final result', async ({ pag
   await test.step('Run campaign', async function () {
     await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Ignorer' }).click();
-    await page.getByRole('button', { name: 'Je passe et je vais à la' }).click();
+    await page.getByRole('button', { name: 'Je passe et je vais à la prochaine question' }).click();
     await page.getByRole('link', { name: 'Voir mes résultats' }).first().click();
     await page.getByRole('link', { name: 'Continuer' }).click();
   });
@@ -34,7 +34,7 @@ test('pass a combined course as sco user and see the final result', async ({ pag
   await test.step('Run module', async function () {
     await page.getByRole('button', { name: 'Commencer le module' }).click();
     await page.getByRole('button', { name: 'Terminer' }).click();
-    await page.getByRole('link', { name: 'Continuer' }).click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
   });
 
   await test.step('End of combined course', async function () {

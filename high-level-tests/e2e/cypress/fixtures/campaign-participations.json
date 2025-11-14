@@ -52,7 +52,7 @@
   {
     "id": 7,
     "campaignId": 1,
-    "status": "TO_SHARE",
+    "status": "SHARED",
     "participantExternalId": "a11y vérif",
     "userId": 3,
     "organizationLearnerId": 8
