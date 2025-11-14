@@ -7,6 +7,7 @@ function serialize(module) {
     transform(module) {
       const transformedModule = {
         id: module.id,
+        shortId: module.shortId,
         slug: module.slug,
         title: module.title,
         isBeta: module.isBeta,
@@ -27,7 +28,7 @@ function serialize(module) {
 
       return transformedModule;
     },
-    attributes: ['slug', 'title', 'isBeta', 'version', 'sections', 'details', 'redirectionUrl'],
+    attributes: ['shortId', 'slug', 'title', 'isBeta', 'version', 'sections', 'details', 'redirectionUrl'],
     sections: {
       ref: 'id',
       includes: true,

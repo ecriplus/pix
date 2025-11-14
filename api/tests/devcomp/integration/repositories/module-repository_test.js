@@ -15,6 +15,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       const modulesIds = ['f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d', '6282925d-4775-4bca-b513-4c3009ec5886'];
       const firstModule = {
         id: modulesIds[0],
+        shortId: 'gbsri73s',
         slug: 'getAllByIdsModuleSlug1',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
@@ -58,6 +59,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       };
       const secondModule = {
         id: modulesIds[1],
+        shortId: '1bdri73s',
         slug: 'getAllByIdsModuleSlug2',
         title: 'Bac à sable',
         isBeta: true,
@@ -223,6 +225,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       const existingModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
       const expectedFoundModule = {
         id: existingModuleId,
+        shortId: 'gbsri73s',
         slug: 'existingModuleSlug',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
@@ -337,6 +340,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
       const expectedFoundModule = {
         id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+        shortId: 'gbsri73s',
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
         isBeta: true,
@@ -485,6 +489,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
       const expectedFoundModule = {
         id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+        shortId: 'gbsri73s',
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
         isBeta: true,

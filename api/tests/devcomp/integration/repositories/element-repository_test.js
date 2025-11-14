@@ -35,6 +35,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       };
       moduleDatasourceStub.getById.withArgs(moduleId).resolves({
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'gbsri73s',
         slug: 'bac-a-sable',
         title: 'Bac à sable',
         isBeta: true,
@@ -126,6 +127,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       };
       moduleDatasourceStub.getById.withArgs(moduleId).resolves({
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'gbsri73s',
         slug: 'bac-a-sable',
         title: 'Bac à sable',
         isBeta: true,
@@ -262,6 +264,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'gbsri73s',
         slug: 'bac-a-sable',
         title: 'Bac à sable',
         isBeta: true,

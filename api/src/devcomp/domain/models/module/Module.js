@@ -1,8 +1,9 @@
 import { assertIsArray, assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 
 class Module {
-  constructor({ id, slug, title, isBeta, sections, details, version }) {
+  constructor({ id, shortId, slug, title, isBeta, sections, details, version }) {
     assertNotNullOrUndefined(id, 'The id is required for a module');
+    assertNotNullOrUndefined(shortId, 'The shortId is required for a module');
     assertNotNullOrUndefined(slug, 'The slug is required for a module');
     assertNotNullOrUndefined(title, 'The title is required for a module');
     assertNotNullOrUndefined(isBeta, 'isBeta value is required for a module');
@@ -10,6 +11,7 @@ class Module {
     assertNotNullOrUndefined(details, 'The details are required for a module');
 
     this.id = id;
+    this.shortId = shortId;
     this.slug = slug;
     this.title = title;
     this.isBeta = isBeta;
