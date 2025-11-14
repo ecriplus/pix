@@ -199,12 +199,20 @@
       "save": "Opslaan"
     },
     "api-error-messages": {
-      "bad-request-error": "De gegevens die je hebt opgegeven, hebben niet het juiste format.",
+      "account-conflict": "Dit account is al gekoppeld aan deze organisatie. Log in met een ander account of neem contact op met support.",
+      "bad-request-error": "De gegevens die u hebt opgegeven, hebben niet het juiste formaat.",
+      "default": "Er is een fout opgetreden. Probeer het opnieuw of neem contact op met de klantenservice.",
+      "expired-authentication-key": "Uw verificatieverzoek is verlopen.",
       "gateway-timeout-error": "De service ondervindt vertragingen. Probeer het later nog eens.",
       "internal-server-error": "Er is een interne fout opgetreden. Onze teams zijn bezig het probleem op te lossen. Probeer het later nog eens.",
-      "login-unauthorized-error": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist.",
-      "login-user-blocked-error": "Je account is geblokkeerd omdat je te veel inlogpogingen hebt gedaan. Hef de blokkering op door contact op te nemen via'<'a href=\"{url}\"'>'contact'</a>'.",
-      "login-user-temporary-blocked-error": "Je hebt te veel inlogpogingen gedaan. Probeer het later nog eens of klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen."
+      "login-unauthorized-error": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist.",
+      "login-unauthorized-remaining-attempts-error": "Waarschuwing: je hebt {remainingAttempts, plural, =0 {0 poging} =1 {1 poging} other {# pogingen}} over voordat je Pix account permanent geblokkeerd wordt.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Waarschuwing: je hebt {remainingAttempts, plural, =0 {0 poging} =1 {1 poging} other {# pogingen}}over voordat je Pix account permanent geblokkeerd wordt.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen.",
+      "login-unauthorized-with-user-name-error": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen.",
+      "login-unexpected-error": "Kan geen verbinding maken. Probeer het over enkele ogenblikken opnieuw. Als het probleem zich blijft voordoen, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'neem dan contact met ons op'</a>'.",
+      "login-user-blocked-error": "Je account is geblokkeerd omdat je te veel verbindingspogingen hebt gedaan. U kunt de blokkering opheffen door '<'a href=\"{url}\"'>'contact us'</a>'.",
+      "login-user-temporary-blocked-error": "Je hebt te veel inlogpogingen gedaan, je Pix-account is tijdelijk geblokkeerd voor {blockingDurationMinutes} minuten. Probeer het later nog eens of klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen.",
+      "login-user-temporary-blocked-with-username-error": "Je hebt te veel inlogpogingen gedaan, je Pix-account is tijdelijk geblokkeerd voor {blockingDurationMinutes} minuten.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen."
     },
     "breadcrumb": "Leidraad",
     "filters": {
@@ -1132,7 +1140,6 @@
         "empty-email": "Uw e-mailadres is niet ingevuld.",
         "empty-password": "Uw wachtwoord is niet ingevoerd.",
         "invalid-email": "Je e-mailadres is ongeldig.",
-        "should-change-password": "Je hebt momenteel een tijdelijk wachtwoord. Klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen.",
         "status": {
           "403": "Toegang tot Pix Orga is beperkt tot uitgenodigde leden. Elke ruimte wordt beheerd door een Pix Orga-beheerder die specifiek is voor de organisatie die het gebruikt. Neem contact met hem/haar op om je uit te nodigen.",
           "404": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist.",
