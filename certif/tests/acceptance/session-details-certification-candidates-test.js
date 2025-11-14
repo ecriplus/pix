@@ -183,6 +183,11 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
         let session;
 
         hooks.beforeEach(async () => {
+          server.create('feature-toggle', {
+            id: 0,
+            isPixPlusCandidateA11yEnabled: false,
+          });
+
           allowedCertificationCenterAccess = server.create('allowed-certification-center-access');
           certificationPointOfContact = server.create('certification-point-of-contact', {
             firstName: 'Lena',

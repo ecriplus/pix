@@ -1,6 +1,8 @@
 import { service } from '@ember/service';
 import Model, { attr, hasMany } from '@ember-data/model';
 
+import { SUBSCRIPTION_TYPES } from './subscription';
+
 export default class CertificationCandidate extends Model {
   @service intl;
   @attr('string') firstName;
@@ -51,6 +53,13 @@ export default class CertificationCandidate extends Model {
     }
 
     return '-';
+  }
+
+  get subscriptionType() {
+    if (this.subscriptions.some((sub) => sub.isCore)) {
+      return SUBSCRIPTION_TYPES.CORE;
+    }
+    return SUBSCRIPTION_TYPES.COMPLEMENTARY;
   }
 
   hasDualCertificationSubscriptionCoreClea(centerHabilitations) {

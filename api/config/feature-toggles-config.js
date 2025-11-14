@@ -81,4 +81,10 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
   },
+  isPixPlusCandidateA11yEnabled: {
+    type: 'boolean',
+    description: 'Enable candidate accessibility adjustment for Pix+ certifications',
+    defaultValue: false,
+    tags: ['frontend', 'a11y', 'team-certif', 'pix-certif'],
+  },
 };
