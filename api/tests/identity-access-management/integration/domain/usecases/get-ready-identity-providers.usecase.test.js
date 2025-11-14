@@ -1,3 +1,4 @@
+import { oidcAuthenticationServiceRegistry } from '../../../../../lib/domain/usecases/index.js';
 import { OidcAuthenticationService } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
@@ -54,6 +55,9 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     });
 
     await databaseBuilder.commit();
+
+    oidcAuthenticationServiceRegistry.testOnly_reset();
+    await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   });
 
   it('returns the ready OIDC Providers for Pix App', async function () {
