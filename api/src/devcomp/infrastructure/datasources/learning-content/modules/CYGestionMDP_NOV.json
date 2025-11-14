@@ -42,7 +42,7 @@
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
-                      "content": "C’est cool, mais tu utiliseras le même sur tous tes comptes ?"
+                      "content": "C’est bien, mais tu utiliseras le même sur tous tes comptes ?"
                     },
                     {
                       "userName": "Max",
@@ -86,7 +86,7 @@
               "element": {
                 "id": "00d2c0cc-fc93-4e3b-8962-a267a4e5da61",
                 "type": "text",
-                "content": "<p>Max a reçu un message de la part d’un site sur lequel il a un compte. Le site a été piraté et les mots de passe de plusieurs milliers d’utilisateurs ont été volés.🏴‍☠️</p><p>Il a un seul mot de passe fort pour tous ses comptes. Inquiet, il décide de vérifier si tout va bien sur ses différents comptes en ligne.</p>"
+                "content": "<p>Max a reçu un message de la part d’un site sur lequel il a un compte. Les mots de passe de plusieurs milliers d’utilisateurs ont été volés.🏴‍☠️</p><br><p>Il utilise <strong>un seul mot de passe fort</strong> pour tous ses comptes. Inquiet, il décide de vérifier si tout va bien sur ses différents comptes en ligne.</p>"
               }
             },
             {
@@ -125,7 +125,7 @@
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-ok.jpg"
                     },
                     {
-                      "name": "Streaming",
+                      "name": "Vidéo à la demande",
                       "description": "Rien à signaler sur ce compte.",
                       "icon": "https://assets.pix.org/modules/tmp-ia-hallu/picto_moduleIA_hallu.svg",
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-ok.jpg"
@@ -207,7 +207,7 @@
               "element": {
                 "id": "06b27e61-500c-4c6a-85e1-6888b1ff6ff6",
                 "type": "text",
-                "content": "<p>Max sait maintenant qu’il doit avoir des mots de passe différents pour chaque compte.&nbsp; </p><p>Il veut être sûr de ne pas les oublier. Il a trouvé plusieurs méthodes, mais sont-elles vraiment sûres ?&nbsp; 🤔<br></p>"
+                "content": "<p>Max a compris qu’il doit utiliser des mots de passe différents pour chaque compte.&nbsp; </p><p>Maintenant, il veut être sûr de ne pas les oublier. Il a trouvé plusieurs méthodes, mais sont-elles vraiment sûres ?&nbsp; 🤔</p>"
               }
             }
           ]
@@ -234,7 +234,7 @@
                 "cards": [
                   {
                     "id": "dcd3d82b-b34a-4ee0-aadf-d32a0d381afe",
-                    "text": "Écrire certains mots de passe dans un carnet",
+                    "text": "Écrire certains mots de passe dans un carnet.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp1.jpg",
                       "altText": ""
@@ -245,7 +245,7 @@
                   },
                   {
                     "id": "4712472b-7dd9-495b-85b7-9e08b40193c2",
-                    "text": "Noter tous ses mots de passe dans un fichier sur l’ordinateur",
+                    "text": "Noter tous ses mots de passe dans un fichier sur l’ordinateur.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp2.jpg",
                       "altText": ""
@@ -256,7 +256,7 @@
                   },
                   {
                     "id": "08653d9f-54da-4177-83f5-5b19f629b302",
-                    "text": "Envoyer un mot de passe par message à un ami de confiance",
+                    "text": "Envoyer un mot de passe par message à un ami de confiance.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp3.jpg",
                       "altText": ""
@@ -267,7 +267,7 @@
                   },
                   {
                     "id": "5792e794-8e87-4eb6-8eeb-9e6a2d4363b1",
-                    "text": "Enregistrer ses mots de passe dans son navigateur",
+                    "text": "Enregistrer ses mots de passe dans son navigateur.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp4.jpg",
                       "altText": ""
@@ -278,7 +278,7 @@
                   },
                   {
                     "id": "f9425b88-9d61-4288-aba3-6ba33cde25a1",
-                    "text": "Utiliser une phrase pour l’aider à construire et mémoriser son mot de passe",
+                    "text": "Utiliser une phrase pour créer et mémoriser plus facilement son mot de passe.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp5.jpg",
                       "altText": ""
@@ -335,7 +335,7 @@
               "element": {
                 "id": "fb6353dc-30e0-4a82-8ba6-facf2f2667d2",
                 "type": "text",
-                "content": "<p>Un jour, en voulant se connecter à son compte de vidéos à la demande, Max se rend compte qu’il a oublié son mot de passe. Impossible de se connecter ! 😬 </p><p>Pas de panique ! Il est toujours possible de retrouver l’accès à son compte.<br></p>"
+                "content": "<p>Un jour, en voulant se connecter à son compte de vidéo à la demande, Max se rend compte qu’il a oublié son mot de passe. Impossible de se connecter ! 😬 </p><br><p>Pas de panique ! Il est toujours possible de retrouver l’accès à son compte.</p>"
               }
             },
             {
@@ -490,11 +490,11 @@
               "element": {
                 "id": "b66d075b-26cb-4429-a921-080b88673f14",
                 "type": "qab",
-                "instruction": "<p>Pour chacunes des affirmations suivantes, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe.</p>",
+                "instruction": "<p>Pour chacune des affirmations suivantes, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe.</p>",
                 "cards": [
                   {
                     "id": "25aec05e-cfa7-4532-a6e3-6831da038200",
-                    "text": "Gilles clique sur « Non » quand son navigateur lui propose d’enregistrer son mot de passe",
+                    "text": "Gilles clique sur « Non » quand son navigateur lui propose d’enregistrer son mot de passe.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -505,7 +505,7 @@
                   },
                   {
                     "id": "6887c428-70c0-4938-83aa-5565659ed66c",
-                    "text": "Florian enregistre ses mots de passe dans un fichier nommé « important.txt » sur son ordinateur",
+                    "text": "Florian enregistre ses mots de passe dans un fichier nommé « important.txt » sur son ordinateur.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -516,7 +516,7 @@
                   },
                   {
                     "id": "71835e39-8260-4d05-bdb0-69b65928d00a",
-                    "text": "Valérie envoie son mot de passe à son collègue pour qu’il puisse consulter un dossier urgent",
+                    "text": "Valérie envoie son mot de passe à son collègue pour qu’il puisse consulter un dossier urgent.",
                     "image": {
                       "url": "",
                       "altText": ""
