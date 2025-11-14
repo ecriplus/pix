@@ -921,7 +921,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                   assert
                     .dom(
                       screen.getByText(
-                        "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler, le cas échéant.",
+                        "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler en direct de son « Espace Surveillant ».",
                       ),
                     )
                     .exists();
@@ -961,7 +961,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                   assert
                     .dom(
                       screen.getByText(
-                        "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler, le cas échéant.",
+                        "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant afin qu'il puisse le constater et le signaler en direct de son « Espace Surveillant ».",
                       ),
                     )
                     .exists();

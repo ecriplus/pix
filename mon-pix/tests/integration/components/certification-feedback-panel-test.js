@@ -71,7 +71,11 @@ module('Integration | Component | certification-feedback-panel', function (hooks
           // then
           assert.dom(screen.getByText('En attente du surveillant...')).exists();
           assert
-            .dom(screen.getByText("Prévenez votre surveillant afin qu'il puisse constater votre problème."))
+            .dom(
+              screen.getByText(
+                "Prévenez votre surveillant afin qu'il puisse constater votre problème et le gérer en direct dans son interface « Espace Surveillant ».",
+              ),
+            )
             .exists();
         });
 

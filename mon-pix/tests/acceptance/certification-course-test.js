@@ -602,7 +602,11 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               .hasAttribute('aria-disabled');
             assert.dom(screen.getByText('Les actions sont mises en pause en attendant le surveillant')).exists();
             assert
-              .dom(screen.getByText("Prévenez votre surveillant afin qu'il puisse constater votre problème."))
+              .dom(
+                screen.getByText(
+                  "Prévenez votre surveillant afin qu'il puisse constater votre problème et le gérer en direct dans son interface « Espace Surveillant ».",
+                ),
+              )
               .exists();
           });
         });
