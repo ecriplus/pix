@@ -5,7 +5,7 @@ import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
-import { and, eq } from 'ember-truth-helpers';
+import { and, eq, not } from 'ember-truth-helpers';
 import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 const Content = <template>
@@ -123,7 +123,7 @@ function hasWhiteBackground(item) {
       </:description>
     </Content>
   {{else}}
-    {{#if @isLocked}}
+    {{#if (and @isLocked (not @item.isCompleted))}}
       <Content
         @title={{@item.title}}
         @isLocked={{true}}
