@@ -1,7 +1,7 @@
-import Component from '@glimmer/component';
-import { t } from 'ember-intl';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 import AdministrationBlockLayout from '../block-layout';
 import DateEditor from './date-editor';
@@ -13,11 +13,11 @@ export default class ScoBlockedAccessDates extends Component {
   @service pixToast;
 
   get collegeDate() {
-    return this.args.model?.find(date => date.scoOrganizationType === 'college');
+    return this.args.model?.find((date) => date.scoOrganizationType === 'college');
   }
 
   get lyceeDate() {
-    return this.args.model?.find(date => date.scoOrganizationType === 'lycee');
+    return this.args.model?.find((date) => date.scoOrganizationType === 'lycee');
   }
 
   @action
@@ -26,12 +26,12 @@ export default class ScoBlockedAccessDates extends Component {
     try {
       await adapter.updateRecord(organizationType, dateInput);
       this.pixToast.sendSuccessNotification({
-        message: this.intl.t('pages.administration.certification.sco-blocked-access-date.success')
+        message: this.intl.t('pages.administration.certification.sco-blocked-access-date.success'),
       });
       await this.router.refresh();
     } catch {
       this.pixToast.sendErrorNotification({
-        message: this.intl.t('pages.administration.certification.sco-blocked-access-date.error')
+        message: this.intl.t('pages.administration.certification.sco-blocked-access-date.error'),
       });
     }
   }

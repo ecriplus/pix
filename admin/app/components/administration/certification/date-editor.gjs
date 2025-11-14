@@ -1,9 +1,9 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { on } from '@ember/modifier';
 import { t } from 'ember-intl';
 
 export default class DateEditor extends Component {
@@ -34,10 +34,7 @@ export default class DateEditor extends Component {
   <template>
     <div class="sco-blocked-access-date-configuration__section">
       {{#if this.isEditing}}
-        <PixInput
-          type='date'
-          @value={{this.dateInput}}
-          {{on "change" this.updateInput}}>
+        <PixInput type="date" @value={{this.dateInput}} {{on "change" this.updateInput}}>
           <:label>{{@label}}</:label>
         </PixInput>
         <PixButton @variant="secondary" @type="success" @triggerAction={{this.save}}>

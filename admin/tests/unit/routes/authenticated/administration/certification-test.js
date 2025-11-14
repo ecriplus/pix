@@ -10,19 +10,24 @@ module('Unit | Route | authenticated/administration/certification', function (ho
     test('it should return the correct model', async function (assert) {
       // given
       const queryRecordStub = sinon.stub();
+      const findAllStub = sinon.stub();
       class StoreStub extends Service {
         queryRecord = queryRecordStub;
+        findAll = findAllStub;
       }
       this.owner.register('service:store', StoreStub);
       const route = this.owner.lookup('route:authenticated/administration/certification');
-      const expectedModel = Symbol('model');
-      queryRecordStub.withArgs('certification-version', { scope: 'CORE' }).resolves(expectedModel);
+      const certificationVersion = Symbol(' certification version');
+      const scoBlockedAccessDates = Symbol('sco blocked access date');
+      queryRecordStub.withArgs('certification-version', { scope: 'CORE' }).resolves(certificationVersion);
+      findAllStub.withArgs('sco-blocked-access-date').resolves(scoBlockedAccessDates);
 
       // when
-      const model = await route.model();
+      const result = await route.model();
 
       // then
-      assert.deepEqual(model, expectedModel);
+      assert.strictEqual(result.certificationVersion, certificationVersion);
+      assert.strictEqual(result.scoBlockedAccessDates, scoBlockedAccessDates);
     });
   });
 });
