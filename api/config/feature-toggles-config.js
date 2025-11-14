@@ -71,7 +71,7 @@ export default {
     type: 'boolean',
     description: 'Displays the new design of authentication pages',
     defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: false },
+    devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-acces', 'pix-orga'],
   },
   isModulixNavEnabled: {
