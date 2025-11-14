@@ -4,7 +4,6 @@ import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (hooks) {
   setupApplicationTest(hooks);
@@ -142,57 +141,53 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
     });
   });
 
-  module('when FT isModulixNavEnabled is enabled', function () {
-    module('when the user moves on to the next section', function () {
-      test('should change the state of navigation section buttons', async function (assert) {
-        // given
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: true });
-        const sections = _createSections(server);
+  module('when the user moves on to the next section', function () {
+    test('should change the state of navigation section buttons', async function (assert) {
+      // given
+      const sections = _createSections(server);
 
-        server.create('module', {
-          id: 'bien-ecrire-son-adresse-mail',
-          slug: 'bien-ecrire-son-adresse-mail',
-          title: 'Bien écrire son adresse mail',
-          sections,
-        });
-
-        // when
-        const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
-        const navigation = screen.getByRole('navigation', { name: t('navigation.nav-bar.aria-label') });
-        const firstSectionButton = within(navigation).getByRole('button', {
-          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-            indexSection: 1,
-            totalSections: 2,
-          })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
-            sectionTitle: 'Explorer pour comprendre',
-          })}`,
-        });
-        const secondSectionButton = within(navigation).getByRole('button', {
-          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-            indexSection: 2,
-            totalSections: 2,
-          })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
-        });
-
-        // then
-        assert.dom(firstSectionButton).hasAttribute('aria-current', 'step');
-        assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
-
-        assert.dom(secondSectionButton).hasAttribute('aria-current', 'false');
-        assert.dom(secondSectionButton).hasAttribute('aria-disabled', 'true');
-
-        //when
-        await click(screen.getByRole('button', { name: 'Continuer' }));
-        await click(screen.getByRole('button', { name: 'Continuer' }));
-
-        // then
-        assert.dom(firstSectionButton).hasAttribute('aria-current', 'false');
-        assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
-
-        assert.dom(secondSectionButton).hasAttribute('aria-current', 'step');
-        assert.dom(secondSectionButton).hasNoAttribute('aria-disabled');
+      server.create('module', {
+        id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
+        title: 'Bien écrire son adresse mail',
+        sections,
       });
+
+      // when
+      const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+      const navigation = screen.getByRole('navigation', { name: t('navigation.nav-bar.aria-label') });
+      const firstSectionButton = within(navigation).getByRole('button', {
+        name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+          indexSection: 1,
+          totalSections: 2,
+        })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+          sectionTitle: 'Explorer pour comprendre',
+        })}`,
+      });
+      const secondSectionButton = within(navigation).getByRole('button', {
+        name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+          indexSection: 2,
+          totalSections: 2,
+        })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
+      });
+
+      // then
+      assert.dom(firstSectionButton).hasAttribute('aria-current', 'step');
+      assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
+
+      assert.dom(secondSectionButton).hasAttribute('aria-current', 'false');
+      assert.dom(secondSectionButton).hasAttribute('aria-disabled', 'true');
+
+      //when
+      await click(screen.getByRole('button', { name: 'Continuer' }));
+      await click(screen.getByRole('button', { name: 'Continuer' }));
+
+      // then
+      assert.dom(firstSectionButton).hasAttribute('aria-current', 'false');
+      assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
+
+      assert.dom(secondSectionButton).hasAttribute('aria-current', 'step');
+      assert.dom(secondSectionButton).hasNoAttribute('aria-disabled');
     });
   });
 });

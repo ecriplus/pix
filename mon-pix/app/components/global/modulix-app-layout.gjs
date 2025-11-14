@@ -26,7 +26,7 @@ export default class ModulixAppLayout extends Component {
   }
 
   get shouldDisplayNavigation() {
-    return this.featureToggles.featureToggles?.isModulixNavEnabled && this.args.isModulixPassage && this.isNewPattern;
+    return this.args.isModulixPassage && this.isNewPattern;
   }
 
   <template>

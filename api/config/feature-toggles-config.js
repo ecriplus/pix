@@ -74,13 +74,6 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-acces', 'pix-orga'],
   },
-  isModulixNavEnabled: {
-    type: 'boolean',
-    description: 'Enables navigation for modules',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
-  },
   isPixPlusCandidateA11yEnabled: {
     type: 'boolean',
     description: 'Enable candidate accessibility adjustment for Pix+ certifications',
