@@ -9,7 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import ENV from 'pix-orga/config/environment';
+import get from 'lodash/get';
 import { FormValidation } from 'pix-orga/utils/form-validation';
 
 import isEmailValid from '../../utils/email-validator';
@@ -26,6 +26,7 @@ class NewLoginForm extends Component {
   @service locale;
   @service session;
   @service store;
+  @service authErrorMessages;
 
   @tracked globalError = null;
   @tracked isLoading = false;
@@ -71,15 +72,17 @@ class NewLoginForm extends Component {
           );
         } catch (err) {
           const error = err.errors[0];
+          // TODO: should be managed with a code instead of status only
           const isInvitationAlreadyAcceptedByAnotherUser = error.status === '409';
           if (isInvitationAlreadyAcceptedByAnotherUser) {
             this.globalError = this.intl.t('pages.login-form.errors.status.409');
             this.isLoading = false;
             return;
           }
+          // TODO: should be managed with a code instead of status only
           const isUserAlreadyOrganizationMember = error.status === '412';
           if (!isUserAlreadyOrganizationMember) {
-            this.globalError = this.intl.t(this._getI18nKeyByStatus(+error.status));
+            this.globalError = this.#getErrorMessage(err);
             this.isLoading = false;
             return;
           }
@@ -88,7 +91,7 @@ class NewLoginForm extends Component {
 
       await this.session.authenticate('authenticator:oauth2', login, this.password);
     } catch (responseError) {
-      this._handleApiError(responseError);
+      this.globalError = this.#getErrorMessage(responseError);
     } finally {
       this.isLoading = false;
     }
@@ -129,49 +132,15 @@ class NewLoginForm extends Component {
     }
   }
 
-  _handleApiError(responseError) {
-    const errors = responseError?.responseJSON?.errors;
-    const error = Array.isArray(errors) && errors.length > 0 && errors[0];
-    switch (error?.code) {
-      case 'SHOULD_CHANGE_PASSWORD':
-        this.globalError = this.intl.t(ENV.APP.API_ERROR_MESSAGES.SHOULD_CHANGE_PASSWORD.I18N_KEY, {
-          url: this.url.pixAppForgottenPasswordUrl,
-          htmlSafe: true,
-        });
-        break;
-      case 'USER_IS_TEMPORARY_BLOCKED':
-        this.globalError = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: this.url.pixAppForgottenPasswordUrl,
-          htmlSafe: true,
-        });
-        break;
-      case 'USER_IS_BLOCKED':
-        this.globalError = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-          url: 'https://support.pix.org/support/tickets/new',
-          htmlSafe: true,
-        });
-        break;
-      default:
-        this.globalError = this.intl.t(this._getI18nKeyByStatus(responseError.status));
-    }
-  }
+  #getErrorMessage(responseError) {
+    // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
+    const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
 
-  _getI18nKeyByStatus(status) {
-    switch (status) {
-      case 400:
-        return ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY;
-      case 401:
-        return ENV.APP.API_ERROR_MESSAGES.LOGIN_UNAUTHORIZED.I18N_KEY;
-      // TODO: This case should be handled with a specific error code like USER_IS_TEMPORARY_BLOCKED or USER_IS_BLOCKED
-      case 403:
-        return ENV.APP.API_ERROR_MESSAGES.NOT_LINKED_ORGANIZATION.I18N_KEY;
-      case 422:
-        return ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY;
-      case 504:
-        return ENV.APP.API_ERROR_MESSAGES.GATEWAY_TIMEOUT.I18N_KEY;
-      default:
-        return ENV.APP.API_ERROR_MESSAGES.INTERNAL_SERVER_ERROR.I18N_KEY;
+    // TODO: should be managed with a code instead of status only
+    if (responseError.status === 403 && !error.code) {
+      return this.intl.t('pages.login-form.errors.status.403');
     }
+    return this.authErrorMessages.getAuthenticationErrorMessage(error);
   }
 
   <template>
@@ -263,6 +232,7 @@ class LegacyLoginForm extends Component {
   @service locale;
   @service session;
   @service store;
+  @service authErrorMessages;
 
   @tracked errorMessage = null;
   @tracked isLoading = false;
@@ -306,7 +276,7 @@ class LegacyLoginForm extends Component {
         }
         const isUserAlreadyOrganizationMember = error.status === '412';
         if (!isUserAlreadyOrganizationMember) {
-          this.errorMessage = this.intl.t(this._getI18nKeyByStatus(+error.status));
+          this.errorMessage = this.#getErrorMessage(err);
           this.isLoading = false;
           return;
         }
@@ -353,7 +323,7 @@ class LegacyLoginForm extends Component {
     try {
       await this.session.authenticate('authenticator:oauth2', email, password);
     } catch (responseError) {
-      this._handleApiError(responseError);
+      this.errorMessage = this.#getErrorMessage(responseError);
     } finally {
       this.isLoading = false;
     }
@@ -376,51 +346,14 @@ class LegacyLoginForm extends Component {
     }
   }
 
-  _handleApiError(responseError) {
-    const errors = responseError?.responseJSON?.errors;
-    const error = Array.isArray(errors) && errors.length > 0 && errors[0];
-    switch (error?.code) {
-      case 'SHOULD_CHANGE_PASSWORD':
-        this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.SHOULD_CHANGE_PASSWORD.I18N_KEY, {
-          url: this.url.pixAppForgottenPasswordUrl,
-          htmlSafe: true,
-        });
-        break;
-      case 'USER_IS_TEMPORARY_BLOCKED':
-        this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: this.url.pixAppForgottenPasswordUrl,
-          htmlSafe: true,
-        });
-        break;
-      case 'USER_IS_BLOCKED':
-        this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-          url: 'https://support.pix.org/support/tickets/new',
-          htmlSafe: true,
-        });
-        break;
-      default:
-        this.errorMessage = this.intl.t(this._getI18nKeyByStatus(responseError.status));
-    }
-  }
+  #getErrorMessage(responseError) {
+    // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
+    const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
 
-  _getI18nKeyByStatus(status) {
-    switch (status) {
-      case 400:
-        return ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY;
-      case 401:
-        return ENV.APP.API_ERROR_MESSAGES.LOGIN_UNAUTHORIZED.I18N_KEY;
-      // TODO: This case should be handled with a specific error code like USER_IS_TEMPORARY_BLOCKED or USER_IS_BLOCKED
-      case 403:
-        return ENV.APP.API_ERROR_MESSAGES.NOT_LINKED_ORGANIZATION.I18N_KEY;
-      case 404:
-        return ENV.APP.API_ERROR_MESSAGES.USER_NOT_FOUND.I18N_KEY;
-      case 422:
-        return ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY;
-      case 504:
-        return ENV.APP.API_ERROR_MESSAGES.GATEWAY_TIMEOUT.I18N_KEY;
-      default:
-        return ENV.APP.API_ERROR_MESSAGES.INTERNAL_SERVER_ERROR.I18N_KEY;
+    if (responseError.status === 403 && !error.code) {
+      return this.intl.t('pages.login-form.errors.status.403');
     }
+    return this.authErrorMessages.getAuthenticationErrorMessage(error);
   }
 
   <template>
