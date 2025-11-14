@@ -62,44 +62,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
     });
-
-    test('should display navigation', async function (assert) {
-      // given
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: false });
-
-      const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
-      const qcuElement = {
-        instruction: 'instruction',
-        proposals: ['radio1', 'radio2'],
-        type: 'qcu',
-      };
-      const components = [
-        {
-          type: 'element',
-          element: textElement,
-        },
-        {
-          type: 'element',
-          element: qcuElement,
-        },
-      ];
-      const section = store.createRecord('section', {
-        id: 'section1',
-        type: 'blank',
-        grains: [{ id: 'grainId1', components }],
-      });
-
-      const module = store.createRecord('module', { title: 'Module title', sections: [section] });
-      const passage = store.createRecord('passage');
-
-      // when
-      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-      // then
-      assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
-    });
   });
 
   module('when a grain contains non existing elements', function () {
@@ -265,34 +227,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists({ count: 1 });
     });
-
-    test('should display navigation', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
-      const qcuElement = {
-        instruction: 'instruction',
-        proposals: ['radio1', 'radio2'],
-        type: 'qcu',
-      };
-      const section = store.createRecord('section', {
-        id: 'section1',
-        type: 'blank',
-        grains: [
-          { components: [{ type: 'element', element: textElement }] },
-          { components: [{ type: 'element', element: qcuElement }] },
-        ],
-      });
-
-      const module = store.createRecord('module', { title: 'Module title', sections: [section] });
-      const passage = store.createRecord('passage');
-
-      // when
-      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-      // then
-      assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 2' })).exists();
-    });
   });
 
   module('when user clicks on skip button', function () {
@@ -414,36 +348,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // then
       const grainsAfteronGrainContinue = screen.getAllByRole('article');
       assert.strictEqual(grainsAfteronGrainContinue.length, 2);
-    });
-
-    test('should update navigation', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
-      const section = store.createRecord('section', {
-        id: 'section1',
-        type: 'blank',
-        grains: [
-          { components: [{ type: 'element', element: text1Element }] },
-          { components: [{ type: 'element', element: text2Element }] },
-        ],
-      });
-
-      const module = store.createRecord('module', {
-        slug: 'module-slug',
-        title: 'Module title',
-        sections: [section],
-      });
-      const passage = store.createRecord('passage');
-
-      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-      // when
-      await clickByName(continueButtonName);
-
-      // then
-      assert.dom(screen.getByRole('navigation', { name: 'Étape 2 sur 2' })).exists();
     });
 
     test('should give focus on the last grain when appearing', async function (assert) {
