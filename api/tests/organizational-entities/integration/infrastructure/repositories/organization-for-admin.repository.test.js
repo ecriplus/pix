@@ -1173,17 +1173,24 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     it('updates organization detail', async function () {
       // given
       const parentOrganizationId = databaseBuilder.factory.buildOrganization({ name: 'Parent Organization' }).id;
-      const childOrganization = databaseBuilder.factory.buildOrganization({ name: 'Child Organization' });
+      const childOrganization = databaseBuilder.factory.buildOrganization({
+        name: 'Child Organization',
+        countryCode: 99100,
+      });
       await databaseBuilder.commit();
-      const childOrganizationForAdmin = new OrganizationForAdmin(childOrganization);
+      const childOrganizationForAdmin = new OrganizationForAdmin({
+        ...childOrganization,
+        parentOrganizationId,
+        countryCode: 99243,
+      });
 
       // when
-      childOrganizationForAdmin.parentOrganizationId = parentOrganizationId;
       await repositories.organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
 
       // then
       const updatedOrganization = await knex('organizations').where({ id: childOrganization.id }).first();
       expect(updatedOrganization.parentOrganizationId).to.equal(parentOrganizationId);
+      expect(updatedOrganization.countryCode).to.equal(99243);
       expect(updatedOrganization.updatedAt).to.deep.equal(new Date('2022-02-02'));
     });
 
