@@ -136,10 +136,8 @@ module('Integration | Component | Authentication::LoginForm', function (hooks) {
         test('it displays an not linked organisation message', async function (assert) {
           // given
           const errorResponse = {
-            status: Number(ApiErrorMessages.NOT_LINKED_ORGANIZATION.CODE),
-            responseJSON: {
-              errors: [{ status: '403' }],
-            },
+            status: 403,
+            responseJSON: { errors: [{ status: '403' }] },
           };
 
           sinon.stub(sessionService, 'authenticate');
@@ -153,7 +151,7 @@ module('Integration | Component | Authentication::LoginForm', function (hooks) {
           await clickByName(loginLabel);
 
           // then
-          assert.dom(screen.getByText(t(ApiErrorMessages.NOT_LINKED_ORGANIZATION.I18N_KEY))).exists();
+          assert.dom(screen.getByText(t('pages.login-form.errors.status.403'))).exists();
         });
       });
     });
