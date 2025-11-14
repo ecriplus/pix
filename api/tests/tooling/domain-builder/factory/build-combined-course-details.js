@@ -5,6 +5,62 @@ import { Module } from '../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder } from '../domain-builder.js';
 
+function buildCombinedCourse({ combinedCourse, quest } = {}) {
+  const campaign = domainBuilder.buildCampaign({ title: 'diagnostique', code: 'ABCDIAG1' });
+  const module = new Module({
+    id: 7,
+    slug: 'slug',
+    title: 'title',
+    duration: 10,
+    version: '',
+    image: 'emile',
+  });
+
+  quest =
+    quest ??
+    new Quest({
+      id: 1,
+      rewardId: null,
+      rewardType: null,
+      eligibilityRequirements: [],
+      successRequirements: [
+        {
+          requirement_type: 'campaignParticipations',
+          comparison: 'all',
+          data: {
+            campaignId: {
+              data: campaign.id,
+              comparison: 'equal',
+            },
+          },
+        },
+        {
+          requirement_type: 'passages',
+          comparison: 'all',
+          data: {
+            moduleId: {
+              data: module.id,
+              comparison: 'equal',
+            },
+          },
+        },
+      ],
+    });
+
+  return (
+    combinedCourse ??
+    new CombinedCourse({
+      id: 1,
+      code: 'COMBINIX1',
+      organizationId: 1,
+      name: 'Mon parcours',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      illustration: '/illustrations/image.svg',
+      questId: quest.id,
+    })
+  );
+}
+
 function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
   const campaign = domainBuilder.buildCampaign({ title: 'diagnostique', code: 'ABCDIAG1' });
   const module = new Module({
@@ -75,4 +131,4 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
   return combinedCourseDetails;
 }
 
-export { buildCombinedCourseDetails };
+export { buildCombinedCourse, buildCombinedCourseDetails };
