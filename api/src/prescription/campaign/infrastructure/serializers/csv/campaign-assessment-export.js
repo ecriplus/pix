@@ -64,6 +64,18 @@ class CampaignAssessmentExport {
           stageAcquisitionRepository,
         });
 
+        const sharedKnowledgeElementsByUserIdAndCompetenceId =
+          await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
+            sharedParticipations.map(({ campaignParticipationId }) => campaignParticipationId),
+          );
+
+        const startedParticipations = campaignParticipationInfoChunk.filter(
+          ({ isShared, isCompleted }) => !isShared && !isCompleted,
+        );
+        const startedKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
+          userIds: startedParticipations.map(({ userId }) => userId),
+        });
+
         const csvLines = await Promise.all(
           campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
             this.#buildCSVLineForParticipation({
@@ -73,7 +85,8 @@ class CampaignAssessmentExport {
               campaignParticipationInfoChunk,
               knowledgeElementRepository,
               knowledgeElementSnapshotRepository,
-              sharedParticipations,
+              sharedKnowledgeElementsByUserIdAndCompetenceId,
+              startedKnowledgeElementsByUserIdAndCompetenceId,
             }),
           ),
         );
@@ -148,12 +161,10 @@ class CampaignAssessmentExport {
 
   async #buildCSVLineForParticipation({
     campaignParticipationInfo,
-    campaignParticipationInfoChunk,
-    knowledgeElementRepository,
-    knowledgeElementSnapshotRepository,
-    sharedParticipations,
     acquiredStages,
     acquiredBadges,
+    sharedKnowledgeElementsByUserIdAndCompetenceId,
+    startedKnowledgeElementsByUserIdAndCompetenceId,
   }) {
     return new CampaignAssessmentResultLine({
       organization: this.organization,
@@ -167,10 +178,8 @@ class CampaignAssessmentExport {
       stageCollection: this.stageCollection,
       participantKnowledgeElementsByCompetenceId: await this.#getParticipantKnowledgeElementsByCompetenceId({
         campaignParticipationInfo,
-        campaignParticipationInfoChunk,
-        knowledgeElementRepository,
-        knowledgeElementSnapshotRepository,
-        sharedParticipations,
+        sharedKnowledgeElementsByUserIdAndCompetenceId,
+        startedKnowledgeElementsByUserIdAndCompetenceId,
       }),
       acquiredStages:
         acquiredStages &&
@@ -187,19 +196,13 @@ class CampaignAssessmentExport {
 
   async #getParticipantKnowledgeElementsByCompetenceId({
     campaignParticipationInfo,
-    campaignParticipationInfoChunk,
-    knowledgeElementRepository,
-    knowledgeElementSnapshotRepository,
-    sharedParticipations,
+    sharedKnowledgeElementsByUserIdAndCompetenceId,
+    startedKnowledgeElementsByUserIdAndCompetenceId,
   }) {
     let participantKnowledgeElementsByCompetenceId;
     if (!campaignParticipationInfo.userId) return this.learningContent.getKnowledgeElementsGroupedByCompetence([]);
 
     if (campaignParticipationInfo.isShared) {
-      const sharedKnowledgeElementsByUserIdAndCompetenceId =
-        await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
-          sharedParticipations.map(({ campaignParticipationId }) => campaignParticipationId),
-        );
       const sharedResultInfo = sharedKnowledgeElementsByUserIdAndCompetenceId.find(
         (knowledElementForSharedParticipation) => {
           const sameParticipationId =
@@ -214,13 +217,7 @@ class CampaignAssessmentExport {
         sharedResultInfo.knowledgeElements,
       );
     } else if (campaignParticipationInfo.isCompleted === false) {
-      const startedParticipations = campaignParticipationInfoChunk.filter(
-        ({ isShared, isCompleted }) => !isShared && !isCompleted,
-      );
-      const othersKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
-        userIds: startedParticipations.map(({ userId }) => userId),
-      });
-      const othersResultInfo = othersKnowledgeElementsByUserIdAndCompetenceId.find(
+      const othersResultInfo = startedKnowledgeElementsByUserIdAndCompetenceId.find(
         (knowledElementForOtherParticipation) =>
           campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId,
       );
