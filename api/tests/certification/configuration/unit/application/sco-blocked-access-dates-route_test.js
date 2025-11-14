@@ -11,7 +11,7 @@ describe('Certification | Configuration | Unit | Application | Router | sco-bloc
         sinon
           .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
           .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(scoBlockedAccessDatesController, 'updateScoBlockedAccessDates').returns('ok');
+        sinon.stub(scoBlockedAccessDatesController, 'updateScoBlockedAccessDate').returns('ok');
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -24,7 +24,7 @@ describe('Certification | Configuration | Unit | Application | Router | sco-bloc
 
         // then
         expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(scoBlockedAccessDatesController.updateScoBlockedAccessDates);
+        sinon.assert.notCalled(scoBlockedAccessDatesController.updateScoBlockedAccessDate);
       });
     });
   });

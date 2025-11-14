@@ -40,7 +40,7 @@ describe('Certification | Configuration | Integration | Repository | sco-blocked
       });
 
       //then
-      const [updatedValue] = await knex('sco-blocked-access-dates')
+      const [updatedValue] = await knex('sco_blocked_access_dates')
         .where({ scoOrganizationType: 'lycee' })
         .pluck('reopeningDate');
       expect(updatedValue.toDateString()).to.equal(new Date('2025-12-15').toDateString());

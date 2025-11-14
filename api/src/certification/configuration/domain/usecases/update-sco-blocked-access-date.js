@@ -12,6 +12,6 @@ export const updateScoBlockedAccessDate = withTransaction(
    * @param {scoBlockedAccessDatesRepository} params.scoBlockedAccessDatesRepository
    */
   async ({ scoOrganizationType, reopeningDate, scoBlockedAccessDatesRepository }) => {
-    await scoBlockedAccessDatesRepository.updateScoBlockedAccessDate({ scoOrganizationType, reopeningDate });
+    return scoBlockedAccessDatesRepository.updateScoBlockedAccessDate({ scoOrganizationType, reopeningDate });
   },
 );

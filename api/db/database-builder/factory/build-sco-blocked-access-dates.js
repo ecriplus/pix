@@ -5,17 +5,15 @@ const buildScoBlockedAccessDates = function ({
   lyceeDate = new Date('2025-10-15'),
 } = {}) {
   databaseBuffer.pushInsertable({
-    tableName: 'sco-blocked-access-dates',
+    tableName: 'sco_blocked_access_dates',
     values: {
-      id: databaseBuffer.getNextId(),
       scoOrganizationType: 'college',
       reopeningDate: collegeDate,
     },
   });
   databaseBuffer.pushInsertable({
-    tableName: 'sco-blocked-access-dates',
+    tableName: 'sco_blocked_access_dates',
     values: {
-      id: databaseBuffer.getNextId(),
       scoOrganizationType: 'lycee',
       reopeningDate: lyceeDate,
     },

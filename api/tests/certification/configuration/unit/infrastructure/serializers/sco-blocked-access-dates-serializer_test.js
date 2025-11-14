@@ -24,16 +24,18 @@ describe('Certification | Configuration | Unit | Serializer | sco-blocked-access
         data: [
           {
             type: 'sco-blocked-access-dates',
+            id: 'lycee',
             attributes: {
-              scoOrganizationType: 'lycee',
-              reopeningDate: new Date('2025-10-15'),
+              'sco-organization-type': 'lycee',
+              'reopening-date': new Date('2025-10-15'),
             },
           },
           {
             type: 'sco-blocked-access-dates',
+            id: 'college',
             attributes: {
-              scoOrganizationType: 'college',
-              reopeningDate: new Date('2025-11-15'),
+              'sco-organization-type': 'college',
+              'reopening-date': new Date('2025-11-15'),
             },
           },
         ],

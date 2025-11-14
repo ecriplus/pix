@@ -6,7 +6,7 @@ import { ScoBlockedAccessDate } from '../../domain/read-models/ScoBlockedAccessD
  */
 export const getScoBlockedAccessDates = async () => {
   const knexConn = DomainTransaction.getConnection();
-  const data = await knexConn('sco-blocked-access-dates').select('scoOrganizationType', 'reopeningDate');
+  const data = await knexConn('sco_blocked_access_dates').select('scoOrganizationType', 'reopeningDate');
   return data.map(_toDomain);
 };
 
@@ -17,7 +17,7 @@ export const getScoBlockedAccessDates = async () => {
  */
 export const updateScoBlockedAccessDate = async ({ scoOrganizationType, reopeningDate }) => {
   const knexConn = DomainTransaction.getConnection();
-  await knexConn('sco-blocked-access-dates').update({ reopeningDate }).where({ scoOrganizationType });
+  await knexConn('sco_blocked_access_dates').update({ reopeningDate }).where({ scoOrganizationType });
 };
 
 const _toDomain = ({ scoOrganizationType, reopeningDate }) => {

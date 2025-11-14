@@ -32,7 +32,7 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
 
       // then
       expect(response.statusCode).to.equal(201);
-      const [updatedValue] = await knex('sco-blocked-access-dates')
+      const [updatedValue] = await knex('sco_blocked_access_dates')
         .where({ scoOrganizationType: 'lycee' })
         .pluck('reopeningDate');
       expect(updatedValue.toDateString()).to.equal(new Date('2025-12-15').toDateString());
@@ -61,16 +61,18 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       expect(result.data).to.deep.equal([
         {
           type: 'sco-blocked-access-dates',
+          id: 'college',
           attributes: {
-            scoOrganizationType: 'college',
-            reopeningDate: scoBlockedAccessDates.collegeDate.toISOString(),
+            'sco-organization-type': 'college',
+            'reopening-date': scoBlockedAccessDates.collegeDate.toISOString(),
           },
         },
         {
           type: 'sco-blocked-access-dates',
+          id: 'lycee',
           attributes: {
-            scoOrganizationType: 'lycee',
-            reopeningDate: scoBlockedAccessDates.lyceeDate.toISOString(),
+            'sco-organization-type': 'lycee',
+            'reopening-date': scoBlockedAccessDates.lyceeDate.toISOString(),
           },
         },
       ]);
