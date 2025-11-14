@@ -83,7 +83,7 @@ export default class JoinRequestForm extends Component {
             @id="uai"
             name="uai"
             type="text"
-            {{on "focusout" this.validateUai}}
+            {{on "change" this.validateUai}}
             @errorMessage={{this.uaiValidationMessage}}
             @validationStatus={{if this.uaiValidationMessage "error" "default"}}
             required={{true}}
@@ -100,7 +100,7 @@ export default class JoinRequestForm extends Component {
             @id="firstName"
             name="firstName"
             type="firstName"
-            {{on "focusout" this.validateFirstName}}
+            {{on "change" this.validateFirstName}}
             @errorMessage={{this.firstNameValidationMessage}}
             @validationStatus={{if this.firstNameValidationMessage "error" "default"}}
             required={{true}}
@@ -116,7 +116,7 @@ export default class JoinRequestForm extends Component {
             @id="lastName"
             name="lastName"
             type="lastName"
-            {{on "focusout" this.validateLastName}}
+            {{on "change" this.validateLastName}}
             @errorMessage={{this.lastNameValidationMessage}}
             @validationStatus={{if this.lastNameValidationMessage "error" "default"}}
             required={{true}}
