@@ -328,10 +328,12 @@ function toCalibratedChallengeDomain({ challengeDto, skill }) {
     difficulty: challengeDto.delta,
     blindnessCompatibility: challengeDto.accessibility1,
     colorBlindnessCompatibility: challengeDto.accessibility2,
+    competenceId: challengeDto.competenceId,
     skill: new CalibratedChallengeSkill({
       id: skill.id,
       name: skill.name,
       competenceId: skill.competenceId,
+      tubeId: skill.tubeId,
     }),
   });
 }

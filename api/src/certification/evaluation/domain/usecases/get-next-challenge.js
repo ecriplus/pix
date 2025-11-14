@@ -14,7 +14,6 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
-import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
@@ -72,23 +71,23 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  const complementaryCertificationKey =
-    candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
-
   const version = await versionRepository.getByScopeAndReconciliationDate({
     scope: candidate.subscriptionScope,
     reconciliationDate: candidate.reconciledAt,
   });
 
-  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
-    locale,
-    complementaryCertificationKey,
-    version,
-  });
+  const activeFlashCompatibleCalibratedChallenges =
+    await sharedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
+      locale,
+      version,
+    });
 
-  const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
+  const alreadyAnsweredCalibratedChallenges =
+    await sharedChallengeRepository.getManyCalibratedChallenges(alreadyAnsweredChallengeIds);
 
-  const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
+  const challenges = [
+    ...new Set([...alreadyAnsweredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges]),
+  ];
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -133,7 +132,7 @@ const getNextChallenge = async function ({
 
   await sessionManagementCertificationChallengeRepository.save({ certificationChallenge });
 
-  return challenge;
+  return sharedChallengeRepository.get(challenge.id);
 };
 
 const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {

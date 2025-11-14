@@ -11,13 +11,25 @@ export class CalibratedChallenge {
    * @param difficulty
    * @param blindnessCompatibility
    * @param colorBlindnessCompatibility
+   * @param competenceId
+   * @param skill
    */
-  constructor({ id, discriminant, difficulty, blindnessCompatibility, colorBlindnessCompatibility } = {}) {
+  constructor({
+    id,
+    discriminant,
+    difficulty,
+    blindnessCompatibility,
+    colorBlindnessCompatibility,
+    competenceId,
+    skill,
+  } = {}) {
     this.id = id;
     this.discriminant = discriminant;
     this.difficulty = difficulty;
     this.blindnessCompatibility = blindnessCompatibility;
     this.colorBlindnessCompatibility = colorBlindnessCompatibility;
+    this.competenceId = competenceId;
+    this.skill = skill;
   }
 
   get isAccessible() {

@@ -20,6 +20,7 @@ import { buildBadgeDetails } from './build-badge-details.js';
 import { buildBadgeForCalculation } from './build-badge-for-calculation.js';
 import { buildBadgeToAttach } from './build-badge-to-attach.js';
 import { buildCalibratedChallenge } from './build-calibrated-challenge.js';
+import { buildCalibratedChallengeSkill } from './build-calibrated-challenge-skill.js';
 import { buildCampaign } from './build-campaign.js';
 import { buildCampaignCollectiveResult } from './build-campaign-collective-result.js';
 import { buildCampaignLearningContent } from './build-campaign-learning-content.js';
@@ -277,6 +278,7 @@ const certification = {
   },
   evaluation: {
     buildCalibratedChallenge,
+    buildCalibratedChallengeSkill,
     buildCandidate: buildEvaluationCandidate,
     buildResultsSession,
     buildComplementaryCertificationScoringCriteria,

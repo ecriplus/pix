@@ -893,10 +893,12 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
               discriminant: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.alpha,
               difficulty: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.delta,
+              competenceId: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
             domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -906,10 +908,12 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
               discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
               difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
           ]);
@@ -933,10 +937,12 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
               discriminant: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.alpha,
               difficulty: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.delta,
+              competenceId: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
             domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -946,10 +952,12 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
               discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
               difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
             domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -959,10 +967,12 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
               discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
               difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
           ]);
@@ -1004,10 +1014,12 @@ describe('Integration | Repository | challenge-repository', function () {
               focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
               discriminant: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.alpha,
               difficulty: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.delta,
+              competenceId: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
             domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -1018,10 +1030,12 @@ describe('Integration | Repository | challenge-repository', function () {
               focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
               discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
               difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
               skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
                 id: skillData00_tube00competence00_actif.id,
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
               }),
             }),
           ]);
@@ -2087,12 +2101,10 @@ describe('Integration | Repository | challenge-repository', function () {
   });
 
   describe('#findActiveFlashCompatibleCalibratedChallenges', function () {
-    let defaultSuccessProbabilityThreshold;
     let skillsLC = [];
     let challengesLC = [];
 
     beforeEach(async function () {
-      defaultSuccessProbabilityThreshold = config.features.successProbabilityThreshold;
       await knex('learningcontent.challenges').truncate();
       await knex('learningcontent.skills').truncate();
       skillsLC = [];
@@ -2114,15 +2126,16 @@ describe('Integration | Repository | challenge-repository', function () {
         scope: Frameworks.CORE,
       });
 
-      challengesLC.push(
-        domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
-      );
-      challengesLC.push(
-        domainBuilder.buildChallenge({
-          id: 'otherChallengeForComplementaryCertification',
-          status: 'validé',
-        }),
-      );
+      challengesLC.push({
+        id: 'challengeForComplementaryCertification',
+        status: 'validé',
+        skillId: skillData03_tube02competence01_actif.id,
+      });
+      challengesLC.push({
+        id: 'otherChallengeForComplementaryCertification',
+        status: 'validé',
+        skillId: skillData03_tube02competence01_actif.id,
+      });
       challengesLC.push(domainBuilder.buildChallenge({ id: 'toto', status: 'archivé' }));
 
       databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
@@ -2230,40 +2243,13 @@ describe('Integration | Repository | challenge-repository', function () {
                 challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
               discriminant: certificationFrameworkChallenge.discriminant,
               difficulty: certificationFrameworkChallenge.difficulty,
-            }),
-          ]);
-        });
-      });
-
-      context('when successProbabilityThreshold is passed in parameters', function () {
-        it('should override default successProbabilityThreshold with the one given in parameter', async function () {
-          // given
-          challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
-          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-          const version = databaseBuilder.factory.buildCertificationVersion();
-          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            challengeId: challengesLC[3].id,
-            versionId: version.id,
-          });
-          await databaseBuilder.commit();
-
-          // when
-          const challenges = await challengeRepository.findActiveFlashCompatibleCalibratedChallenges({
-            locale: 'fr',
-            successProbabilityThreshold: 0.75,
-            version,
-          });
-
-          // then
-          expect(challenges).to.deep.equal([
-            domainBuilder.certification.evaluation.buildCalibratedChallenge({
-              id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
-              blindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
-              discriminant: certificationFrameworkChallenge.discriminant,
-              difficulty: certificationFrameworkChallenge.difficulty,
+              competenceId: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.competenceId,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: 'skillId00',
+                name: 'name skillId00',
+                competenceId: 'competenceId00',
+                tubeId: 'tubeId00',
+              }),
             }),
           ]);
         });
