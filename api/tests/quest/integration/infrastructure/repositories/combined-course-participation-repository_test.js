@@ -338,11 +338,15 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       const learner1 = databaseBuilder.factory.buildOrganizationLearner({
         firstName: 'Alice',
         lastName: 'Azerty',
+        division: '6eme',
+        group: 'Groupe 2',
         organizationId,
       });
       const learner2 = databaseBuilder.factory.buildOrganizationLearner({
         firstName: 'Bob',
         lastName: 'Bernard',
+        division: '6eme',
+        group: 'Groupe 2',
         organizationId,
       });
 
@@ -387,6 +391,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
           combinedCourseId: combinedCourseId1,
           firstName: learner1.firstName,
           lastName: learner1.lastName,
+          division: '6eme',
+          group: 'Groupe 2',
           status: OrganizationLearnerParticipationStatuses.COMPLETED,
           createdAt: participation1.createdAt,
           updatedAt: participation1.updatedAt,
@@ -397,6 +403,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
           combinedCourseId: combinedCourseId2,
           firstName: learner2.firstName,
           lastName: learner2.lastName,
+          division: '6eme',
+          group: 'Groupe 2',
           status: OrganizationLearnerParticipationStatuses.STARTED,
           createdAt: participation2.createdAt,
           updatedAt: participation2.updatedAt,
@@ -489,6 +497,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
           createdAt: participation2.createdAt,
           updatedAt: participation2.updatedAt,
           organizationLearnerId: learner2.id,
+          division: '6eme',
+          group: 'AB1',
         },
       ]);
     });
