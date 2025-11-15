@@ -75,7 +75,7 @@ module('Unit | Service | currentDomain', function (hooks) {
 
   module('#domain', function () {
     module('when location is localhost', function () {
-      test('returns locahost as domain', function (assert) {
+      test('returns localhost as domain', function (assert) {
         // given
 
         sinon.stub(Location, 'getHref').returns('http://localhost:4200/foo?bar=baz');

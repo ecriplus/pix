@@ -6,13 +6,8 @@ import { oidcProviderController } from './oidc-provider.controller.js';
 export const oidcProviderRoutes = [
   {
     method: 'GET',
-    path: '/api/oidc/identity-providers',
+    path: '/api/oidc/identity-providers/{any*}',
     options: {
-      validate: {
-        query: Joi.object({
-          target: Joi.string().optional().default('app'), // Now useless, will soon be removed
-        }),
-      },
       auth: false,
       cache: false,
       handler: (request, h) => oidcProviderController.getIdentityProviders(request, h),

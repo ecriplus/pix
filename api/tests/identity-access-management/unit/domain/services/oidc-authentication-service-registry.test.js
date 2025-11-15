@@ -4,6 +4,7 @@ import { OidcAuthenticationService } from '../../../../../src/identity-access-ma
 import { OidcAuthenticationServiceRegistry } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service-registry.js';
 import { PoleEmploiOidcAuthenticationService } from '../../../../../src/identity-access-management/domain/services/pole-emploi-oidc-authentication-service.js';
 import { oidcProviderRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Services | oidc-authentication-service-registry', function () {
@@ -41,27 +42,25 @@ describe('Unit | Identity Access Management | Domain | Services | oidc-authentic
         // given
         const oidcProviderServices = [
           { code: 'ONE' },
-          { code: 'OIDC', isReady: true },
+          { code: 'OIDC', application: 'app', applicationTld: '.fr', isReady: true },
           { code: 'OIDC_FOR_PIX_ADMIN', isReadyForPixAdmin: true },
         ];
+
+        const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.fr' });
 
         // when
         const result = await oidcAuthenticationServiceRegistry.loadOidcProviderServices(oidcProviderServices);
 
         // then
         const allOidcProviderServices = oidcAuthenticationServiceRegistry.getAllOidcProviderServices();
-        const readyOidcProviderServices = oidcAuthenticationServiceRegistry.getReadyOidcProviderServices();
-        const readyOidcProviderServicesForPixAdmin =
-          oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
+        const readyOidcProviderServices =
+          oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
 
         expect(result).to.be.true;
         expect(allOidcProviderServices).to.have.lengthOf(3);
 
         expect(readyOidcProviderServices).to.have.lengthOf(1);
         expect(readyOidcProviderServices.map((service) => service.code)).to.contain('OIDC');
-
-        expect(readyOidcProviderServicesForPixAdmin).to.have.lengthOf(1);
-        expect(readyOidcProviderServicesForPixAdmin.map((service) => service.code)).to.contain('OIDC_FOR_PIX_ADMIN');
       });
     });
 

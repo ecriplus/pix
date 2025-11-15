@@ -9,6 +9,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
 
   before(async function () {
     const genericOidcProviderProperties = {
+      application: 'app',
+      applicationTld: '.org',
       enabled: true,
       accessTokenLifespan: '7d',
       clientId: 'client',
@@ -25,6 +27,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     await databaseBuilder.factory.buildOidcProvider(genericOidcProviderProperties);
 
     const genericDisabledOidcProviderProperties = {
+      application: 'app',
+      applicationTld: '.org',
       enabled: false,
       accessTokenLifespan: '7d',
       clientId: 'client',
@@ -41,6 +45,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     await databaseBuilder.factory.buildOidcProvider(genericDisabledOidcProviderProperties);
 
     const genericOidcProviderFoxPixAdminProperties = {
+      application: 'admin',
+      applicationTld: '.fr',
       enabledForPixAdmin: true,
       accessTokenLifespan: '7d',
       clientId: 'client',
@@ -49,7 +55,7 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       identityProvider: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
       openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
       organizationName: 'OIDC Example',
-      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      redirectUri: 'https://admin.dev.pix.fr/connexion/oidc-example-net',
       scope: 'openid profile',
       slug: 'oidc-example-net',
       source: 'oidcexamplenet',
@@ -62,6 +68,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
         afterLogoutUrl: 'https://example.net',
         sendingUrl: 'https://example.net',
       },
+      application: 'app',
+      applicationTld: '.fr',
       enabled: true,
       accessTokenLifespan: '7d',
       clientId: 'client',
@@ -70,7 +78,7 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       identityProvider: 'POLE_EMPLOI',
       openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
       organizationName: 'OIDC Example',
-      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      redirectUri: 'https://app.dev.pix.fr/connexion/oidc-example-net',
       scope: 'openid profile',
       slug: 'oidc-example-net',
       source: 'oidcexamplenet',
@@ -79,6 +87,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
 
     const fwbOidcProviderProperties = {
       additionalRequiredProperties: { logoutUrl: 'https://example.net' },
+      application: 'app',
+      applicationTld: '.org',
       enabled: true,
       accessTokenLifespan: '7d',
       clientId: 'client',
@@ -118,83 +128,102 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     });
   });
 
-  describe('#getReadyOidcProviderServices', function () {
-    it('returns ready OIDC Providers', async function () {
+  describe('#getReadyOidcProviderServicesByRequestedApplication', function () {
+    it('returns ready OIDC Providers by requestedApplication', async function () {
       // given
       await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+      const requestedApplicationForApp = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
+      const requestedApplicationForAdmin = new RequestedApplication({
+        applicationName: 'admin',
+        applicationTld: '.fr',
+      });
 
       // when
-      const services = oidcAuthenticationServiceRegistry.getReadyOidcProviderServices();
+      const readyServicesForApp =
+        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+          requestedApplicationForApp,
+        );
+      const readyServicesForAdmin =
+        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+          requestedApplicationForAdmin,
+        );
 
       // then
-      const serviceCodes = services.map((service) => service.code);
-      expect(serviceCodes).to.have.lengthOf(3);
-      expect(serviceCodes).to.contain('OIDC_EXAMPLE');
-      expect(serviceCodes).to.contain('POLE_EMPLOI');
-      expect(serviceCodes).to.contain('FWB');
-    });
-  });
+      const serviceCodesForApp = readyServicesForApp.map((service) => service.code);
+      expect(serviceCodesForApp).to.have.lengthOf(2);
+      expect(serviceCodesForApp).to.contain('OIDC_EXAMPLE');
+      expect(serviceCodesForApp).to.contain('FWB');
 
-  describe('#getReadyOidcProviderServicesForPixAdmin', function () {
-    it('returns ready OIDC Providers for Pix Admin', async function () {
-      // given
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-
-      // when
-      const services = oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
-
-      // then
-      const serviceCodes = services.map((service) => service.code);
-      expect(serviceCodes).to.have.lengthOf(1);
-      expect(serviceCodes).to.contain('OIDC_EXAMPLE_FOR_PIX_ADMIN');
+      const serviceCodesForAdmin = readyServicesForAdmin.map((service) => service.code);
+      expect(serviceCodesForAdmin).to.have.lengthOf(1);
+      expect(serviceCodesForAdmin).to.contain('OIDC_EXAMPLE_FOR_PIX_ADMIN');
     });
   });
 
   describe('#getOidcProviderServiceByCode', function () {
-    it('returns a ready OIDC Provider for Pix App', async function () {
+    it('returns the ready OIDC Providers for Pix App', async function () {
       // given
+      const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
       await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
       // when
       const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
         identityProviderCode: 'OIDC_EXAMPLE',
+        requestedApplication,
       });
 
       // then
       expect(service.code).to.equal('OIDC_EXAMPLE');
     });
 
-    describe('when the requestedApplication is admin', function () {
-      it('returns a ready OIDC provider for Pix Admin', async function () {
-        // given
-        const requestedApplication = new RequestedApplication('admin');
-        await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+    it('returns the ready OIDC Providers for Pix Admin', async function () {
+      // given
+      const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
+      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-        // when
-        const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
-          identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
-          requestedApplication,
-        });
-
-        // then
-        expect(service.code).to.equal('OIDC_EXAMPLE_FOR_PIX_ADMIN');
+      // when
+      const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+        identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
+        requestedApplication,
       });
+
+      // then
+      expect(service.code).to.equal('OIDC_EXAMPLE_FOR_PIX_ADMIN');
     });
 
-    describe('when the OIDC Provider is not supported', function () {
-      it('throws an error ', async function () {
+    describe('when the OIDC Provider is not for the requestedApplication', function () {
+      it('throws an InvalidIdentityProviderError', async function () {
         // given
+        const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.fr' });
         await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
         // when
         const error = catchErrSync(
           oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode,
           oidcAuthenticationServiceRegistry,
-        )({ identityProviderCode: 'OIDC_EXAMPLE_UNSUPPORTED' });
+        )({ identityProviderCode: 'OIDC_EXAMPLE', requestedApplication });
 
         // then
         expect(error).to.be.an.instanceOf(InvalidIdentityProviderError);
-        expect(error.message).to.equal(`Identity provider OIDC_EXAMPLE_UNSUPPORTED is not supported.`);
+        expect(error.message).to.equal(`Identity provider OIDC_EXAMPLE is not supported.`);
+      });
+    });
+
+    describe('when the OIDC Provider is not supported', function () {
+      it('throws an InvalidIdentityProviderError', async function () {
+        // given
+        const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
+        await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+
+        // when
+        const error = catchErrSync(
+          oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode,
+          oidcAuthenticationServiceRegistry,
+        )({ identityProviderCode: 'SOME_UNSUPPORTED_OP', requestedApplication });
+
+        // then
+        expect(error).to.be.an.instanceOf(InvalidIdentityProviderError);
+        expect(error.message).to.equal(`Identity provider SOME_UNSUPPORTED_OP is not supported.`);
       });
     });
   });

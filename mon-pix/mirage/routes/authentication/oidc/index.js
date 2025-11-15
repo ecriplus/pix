@@ -35,7 +35,7 @@ export default function (config) {
     };
   });
 
-  config.get('/oidc/identity-providers', () => {
+  config.get('/oidc/identity-providers/:cache_buster', () => {
     return {
       data: [
         {

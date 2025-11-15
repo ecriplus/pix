@@ -698,7 +698,7 @@ function routes() {
     return schema.combinedCourseStatistics.find(combinedCourseId);
   });
 
-  this.get('/oidc/identity-providers', () => {
+  this.get('/oidc/identity-providers/:cache_buster', () => {
     return {
       data: [
         {

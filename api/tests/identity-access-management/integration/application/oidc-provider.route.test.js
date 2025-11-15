@@ -1,5 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 
+import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import { oidcProviderController } from '../../../../src/identity-access-management/application/oidc-provider/oidc-provider.controller.js';
 import { identityAccessManagementRoutes } from '../../../../src/identity-access-management/application/routes.js';
 import {
@@ -19,6 +20,63 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
     httpTestServer = new HttpTestServer();
     httpTestServer.setupDeserialization();
     await httpTestServer.register(routesUnderTest);
+  });
+
+  describe('GET /api/oidc/identity-providers', function () {
+    it('can be used to not share cache between different applications with form /api/oidc/identity-providers/XXX', async function () {
+      // given
+      const oidcProvider1Properties = {
+        application: 'orga',
+        applicationTld: '.org',
+        enabled: true,
+        accessTokenLifespan: '7d',
+        clientId: 'client',
+        clientSecret: 'plainTextSecret',
+        shouldCloseSession: true,
+        identityProvider: 'OIDC_PROVIDER_FOR_OIDC_IDENTITY_PROVIDERS-1',
+        openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+        organizationName: 'OIDC Example',
+        redirectUri: 'https://orga.dev.pix.org/connexion/oidc-example-net',
+        scope: 'openid profile',
+        slug: 'oidc-example-net',
+        source: 'oidcexamplenet',
+      };
+      await databaseBuilder.factory.buildOidcProvider(oidcProvider1Properties);
+
+      const oidcProvider2Properties = {
+        application: 'orga',
+        applicationTld: '.fr',
+        enabled: true,
+        accessTokenLifespan: '7d',
+        clientId: 'client',
+        clientSecret: 'plainTextSecret',
+        shouldCloseSession: true,
+        identityProvider: 'OIDC_IDENTITY_PROVIDERS-2',
+        openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+        organizationName: 'OIDC Example',
+        redirectUri: 'https://orga.dev.pix.fr/connexion/oidc-example-net',
+        scope: 'openid profile',
+        slug: 'oidc-example-net',
+        source: 'oidcexamplenet',
+      };
+      await databaseBuilder.factory.buildOidcProvider(oidcProvider2Properties);
+
+      await databaseBuilder.commit();
+
+      oidcAuthenticationServiceRegistry.testOnly_reset();
+      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+
+      // when
+      const headers1 = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };
+      const response1 = await httpTestServer.request('GET', '/api/oidc/identity-providers', null, null, headers1);
+
+      const headers2 = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };
+      const response2 = await httpTestServer.request('GET', '/api/oidc/identity-providers/org', null, null, headers2);
+
+      // then
+      expect(response2.statusCode).to.deep.equal(response1.statusCode);
+      expect(response2.result.data).to.deep.equal(response1.result.data);
+    });
   });
 
   describe('POST /api/oidc/user/check-reconciliation', function () {

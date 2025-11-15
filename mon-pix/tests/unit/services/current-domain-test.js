@@ -72,7 +72,7 @@ module('Unit | Service | currentDomain', function (hooks) {
 
   module('#domain', function () {
     module('when location is localhost', function () {
-      test('returns locahost as domain', function (assert) {
+      test('returns localhost as domain', function (assert) {
         // given
         _stubWindowUrl(this.owner, 'http://localhost:4200/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');

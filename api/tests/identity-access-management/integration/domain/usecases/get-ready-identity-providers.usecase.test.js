@@ -1,3 +1,4 @@
+import { oidcAuthenticationServiceRegistry } from '../../../../../lib/domain/usecases/index.js';
 import { OidcAuthenticationService } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
@@ -6,6 +7,8 @@ import { databaseBuilder, expect } from '../../../../test-helper.js';
 describe('Integration | Identity Access Management | Domain | UseCases | get-ready-identity-providers', function () {
   beforeEach(async function () {
     await databaseBuilder.factory.buildOidcProvider({
+      application: 'app',
+      applicationTld: '.org',
       identityProvider: 'OIDC_PROVIDER_FOR_APP',
       organizationName: 'OIDC Provider For App',
       slug: 'oidc-provider-for-app',
@@ -20,6 +23,8 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     });
 
     await databaseBuilder.factory.buildOidcProvider({
+      application: 'app',
+      applicationTld: '.org',
       identityProvider: 'OIDC_PROVIDER_DISABLED',
       organizationName: 'OIDC Provider Disabled',
       slug: 'oidc-provider-disabled',
@@ -34,6 +39,8 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     });
 
     await databaseBuilder.factory.buildOidcProvider({
+      application: 'admin',
+      applicationTld: '.fr',
       identityProvider: 'OIDC_PROVIDER_FOR_ADMIN',
       organizationName: 'OIDC Provider For Admin',
       slug: 'oidc-provider-for-admin',
@@ -43,16 +50,19 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
       clientSecret: 'plainTextSecret',
       accessTokenLifespan: '7d',
       openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
-      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      redirectUri: 'https://admin.dev.pix.fr/connexion/oidc-example-net',
       scope: 'openid profile',
     });
 
     await databaseBuilder.commit();
+
+    oidcAuthenticationServiceRegistry.testOnly_reset();
+    await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   });
 
-  it('returns enabled oidc providers (excluding the PixAdmin ones)', async function () {
+  it('returns the ready OIDC Providers for Pix App', async function () {
     // given
-    const requestedApplication = new RequestedApplication('app');
+    const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
 
     // when
     const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
@@ -66,21 +76,19 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_APP');
   });
 
-  describe('when the provided requestedApplication is Pix Admin', function () {
-    it('returns enabled oidc providers for PixAdmin only', async function () {
-      // given
-      const requestedApplication = new RequestedApplication('admin');
+  it('returns the ready OIDC Providers for Pix Admin', async function () {
+    // given
+    const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
 
-      // when
-      const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
+    // when
+    const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
 
-      // then
-      expect(identityProviders).to.be.instanceOf(Array);
-      expect(identityProviders.length).to.equal(1);
+    // then
+    expect(identityProviders).to.be.instanceOf(Array);
+    expect(identityProviders.length).to.equal(1);
 
-      const returnedIdentityProvider = identityProviders[0];
-      expect(returnedIdentityProvider).to.be.instanceOf(OidcAuthenticationService);
-      expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_ADMIN');
-    });
+    const returnedIdentityProvider = identityProviders[0];
+    expect(returnedIdentityProvider).to.be.instanceOf(OidcAuthenticationService);
+    expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_ADMIN');
   });
 });

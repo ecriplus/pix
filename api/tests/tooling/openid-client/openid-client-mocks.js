@@ -3,7 +3,6 @@ import { OidcAuthenticationService } from '../../../src/identity-access-manageme
 import { sinon } from '../../test-helper.js';
 
 const clientId = 'client';
-const redirectUri = 'https://app.dev.pix.org/connexion/oidc-example-net';
 const scope = 'openid profile';
 const openIdConfigurationResponse = {
   token_endpoint: 'https://oidc.example.net/ea5ac20c-5076-4806-860a-b0aeb01645d4/oauth2/v2.0/token',
@@ -51,10 +50,12 @@ function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig'
   };
 }
 
-async function createMockedTestOidcProvider() {
+async function createMockedTestOidcProvider({ application, applicationTld }) {
   oidcAuthenticationServiceRegistry.testOnly_reset();
 
   const openIdClientMock = createOpenIdClientMock(openIdConfigurationResponse);
+
+  const redirectUri = `https://${application}.dev.pix${applicationTld}/connexion/oidc-example-net`;
 
   const authorizationUrl = `${openIdConfigurationResponse.authorization_endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=state&nonce=nonce`;
   openIdClientMock.buildAuthorizationUrl.returns(authorizationUrl);
@@ -66,6 +67,8 @@ async function createMockedTestOidcProvider() {
     new OidcAuthenticationService(
       {
         accessTokenLifespanMs: 60000,
+        application,
+        applicationTld,
         clientId,
         clientSecret: 'secret',
         enabled: true,
