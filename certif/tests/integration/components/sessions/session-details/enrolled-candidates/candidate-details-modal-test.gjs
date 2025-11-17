@@ -32,6 +32,7 @@ module(
         birthInseeCode: 76255,
         birthPostalCode: 76260,
         sex: 'F',
+        accessibilityAdjustmentNeeded: true,
         subscriptions: [pixEduSubscription],
       });
 
@@ -67,6 +68,7 @@ module(
       assert.dom(screen.getByText('12345')).exists();
       assert.dom(screen.getByText('25/12/2000')).exists();
       assert.dom(screen.getByText('10 %')).exists();
+      assert.dom(screen.getByText('Oui')).exists();
       assert.dom(screen.getByText('Pix+Edu')).exists();
     });
 
@@ -150,7 +152,7 @@ module(
         );
 
         // then
-        assert.strictEqual(screen.getAllByText('-').length, 12);
+        assert.strictEqual(screen.getAllByText('-').length, 13);
       });
     });
 
@@ -175,6 +177,7 @@ module(
           birthInseeCode: 76255,
           birthPostalCode: 76260,
           sex: 'F',
+          accessibilityAdjustmentNeeded: false,
           billingMode: 'PREPAID',
           prepaymentCode: 'prep123',
           subscriptions: [coreSubscription],
@@ -207,6 +210,7 @@ module(
         assert.dom(screen.getByText('12345')).exists();
         assert.dom(screen.getByText('25/12/2000')).exists();
         assert.dom(screen.getByText('10 %')).exists();
+        assert.dom(screen.getByText('-')).exists();
         assert.dom(screen.getByText('Prépayée')).exists();
         assert.dom(screen.getByText('prep123')).exists();
       });

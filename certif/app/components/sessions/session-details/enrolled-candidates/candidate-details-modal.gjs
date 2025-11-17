@@ -78,6 +78,13 @@ export default class CandidateDetailsModal extends Component {
     return transform(value) || value || '-';
   }
 
+  @action
+  getAccessibilityAdjustmentNeeded() {
+    return this.args.candidate['accessibilityAdjustmentNeeded']
+      ? this.intl.t('common.labels.candidate.accessibility-adjusted-certification-needed')
+      : '-';
+  }
+
   computeSubscriptionsText = (candidate) => {
     const complementaryCertificationList = this.args.complementaryCertifications ?? [];
     const subscriptionLabels = [];
@@ -115,6 +122,10 @@ export default class CandidateDetailsModal extends Component {
               @value={{this.getRowValue field.value field.transform}}
             />
           {{/each}}
+          <CandidateDetailsModalRow
+            @label={{this.getRowLabel 'forms.certification-labels.accessibility'}}
+            @value={{this.getAccessibilityAdjustmentNeeded}}
+          />
           {{#if @shouldDisplayPaymentOptions}}
             <CandidateDetailsModalRow
               @label={{this.getRowLabel 'forms.certification-labels.pricing'}}
