@@ -59,6 +59,21 @@ export async function getMany(ids, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
+export async function getManyCalibratedChallenges(ids, locale) {
+  const challengeDtos = await getInstance().loadMany(ids);
+  challengeDtos.forEach((challengeDto, index) => {
+    if (challengeDto) return;
+    logger.warn({ challengeId: ids[index] }, 'Épreuve introuvable');
+    throw new NotFoundError('Épreuve introuvable');
+  });
+  const localeChallengeDtos = locale
+    ? challengeDtos.filter((challengeDto) => challengeDto.locales.includes(locale))
+    : challengeDtos;
+  localeChallengeDtos.sort(byId);
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(localeChallengeDtos);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => toCalibratedChallengeDomain({ challengeDto, skill }));
+}
+
 export async function list(locale) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `list(${locale})`;

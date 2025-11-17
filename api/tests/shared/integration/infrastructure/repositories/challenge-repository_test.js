@@ -862,6 +862,174 @@ describe('Integration | Repository | challenge-repository', function () {
     });
   });
 
+  describe('#getManyCalibratedChallenges', function () {
+    context('when no locale provided', function () {
+      context('when at least one challenge is not found amongst the provided ids', function () {
+        it('should throw a NotFound error', async function () {
+          // when
+          const err = await catchErr(challengeRepository.getManyCalibratedChallenges)([
+            'challengeIdPipeauPipette',
+            'challengeId00',
+          ]);
+
+          // then
+          expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
+        });
+      });
+
+      context('when all challenges are found', function () {
+        it('should return the challenges', async function () {
+          // when
+          const challenges = await challengeRepository.getManyCalibratedChallenges(['challengeId02', 'challengeId00']);
+
+          // then
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
+              blindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
+              discriminant: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.alpha,
+              difficulty: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+          ]);
+        });
+
+        it('should allow duplicates', async function () {
+          // when
+          const challenges = await challengeRepository.getManyCalibratedChallenges([
+            'challengeId02',
+            'challengeId00',
+            'challengeId02',
+          ]);
+
+          // then
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
+              blindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
+              discriminant: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.alpha,
+              difficulty: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+          ]);
+        });
+      });
+    });
+
+    context('when locale is provided', function () {
+      context('when at least one challenge is not found amongst the provided ids', function () {
+        it('should throw a NotFound error', async function () {
+          // when
+          const err = await catchErr(challengeRepository.getManyCalibratedChallenges)([
+            'challengeIdPipeauPipette',
+            'challengeId00',
+          ]);
+
+          // then
+          expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
+        });
+      });
+
+      context('when all challenges are found', function () {
+        it('should return only the challenges for given locale', async function () {
+          // when
+          const challenges = await challengeRepository.getManyCalibratedChallenges(
+            ['challengeId02', 'challengeId00', 'challengeId01'],
+            'en',
+          );
+
+          // then
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
+              blindnessCompatibility:
+                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
+              focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
+              discriminant: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.alpha,
+              difficulty: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+              focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
+              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+              }),
+            }),
+          ]);
+        });
+      });
+    });
+  });
+
   describe('list', function () {
     context('when locale is not defined', function () {
       it('should throw an Error', async function () {
