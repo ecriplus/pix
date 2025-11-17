@@ -65,10 +65,10 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         };
         passageRepository.get.withArgs({ passageId }).resolves(passage);
 
-        const saveOrganizationLearnerPassageForUserJobRepository = {
+        const updateCombinedCourseJobRepository = {
           performAsync: sinon.stub(),
         };
-        saveOrganizationLearnerPassageForUserJobRepository.performAsync.resolves();
+        updateCombinedCourseJobRepository.performAsync.resolves();
 
         const updatedPassage = {
           terminatedAt: new Date('2025-03-04'),
@@ -80,7 +80,7 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         const returnedPassage = await terminatePassage({
           passageId,
           passageRepository,
-          saveOrganizationLearnerPassageForUserJobRepository,
+          updateCombinedCourseJobRepository,
         });
 
         // then
@@ -112,10 +112,10 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         };
         passageRepository.update.withArgs({ passage }).resolves(updatedPassage);
 
-        const saveOrganizationLearnerPassageForUserJobRepository = {
+        const updateCombinedCourseJobRepository = {
           performAsync: sinon.stub(),
         };
-        saveOrganizationLearnerPassageForUserJobRepository.performAsync
+        updateCombinedCourseJobRepository.performAsync
           .withArgs({ moduleId: passage.moduleId, userId: passage.userId })
           .resolves();
 
@@ -123,11 +123,11 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         await terminatePassage({
           passageId,
           passageRepository,
-          saveOrganizationLearnerPassageForUserJobRepository,
+          updateCombinedCourseJobRepository,
         });
 
         // then
-        expect(saveOrganizationLearnerPassageForUserJobRepository.performAsync).to.have.been.calledOnceWith({
+        expect(updateCombinedCourseJobRepository.performAsync).to.have.been.calledOnceWith({
           userId: passage.userId,
           moduleId: passage.moduleId,
         });

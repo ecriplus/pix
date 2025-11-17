@@ -86,7 +86,7 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       // Build training trigger
       const { id: trainingTriggerId } = buildTrainingTrigger({
         trainingId,
-        threshold: 10,
+        threshold: training.threshold ?? 0,
         type: 'prerequisite',
       });
 

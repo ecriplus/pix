@@ -2,6 +2,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import combinedCourseDetailsService from '../services/combined-course-details-service.js';
 
 const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = injectDependencies(
@@ -33,6 +34,7 @@ const dependencies = {
   targetProfileRepository: repositories.targetProfileRepository,
   organizationLearnerPassageParticipationRepository: repositories.organizationLearnerPassageParticipationRepository,
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
+  organizationLearnerRepository,
   codeGenerator,
   logger,
 };
@@ -41,6 +43,7 @@ import { checkUserQuest } from './check-user-quest-success.js';
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
 import { findCombinedCourseByCampaignId } from './find-combined-course-by-campaign-id.js';
+import { findCombinedCourseByModuleIdAndUserId } from './find-combined-course-by-moduleId-and-user-id.js';
 import { findCombinedCourseParticipations } from './find-combined-course-participations.js';
 import { getCombinedCourseByCode } from './get-combined-course-by-code.js';
 import getCombinedCourseById from './get-combined-course-by-id.js';
@@ -56,6 +59,7 @@ const usecasesWithoutInjectedDependencies = {
   checkUserQuest,
   createOrUpdateQuestsInBatch,
   findCombinedCourseByCampaignId,
+  findCombinedCourseByModuleIdAndUserId,
   getCombinedCourseByCode,
   getCombinedCourseStatistics,
   getCombinedCourseById,

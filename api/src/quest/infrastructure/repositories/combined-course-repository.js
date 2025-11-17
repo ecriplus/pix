@@ -100,4 +100,23 @@ const _toDTO = (combinedCourse) => {
   };
 };
 
-export { findByCampaignId, findByOrganizationId, getByCode, getById, saveInBatch };
+const findByModuleIdAndOrganizationIds = async ({ moduleId, organizationIds }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const combinedCourses = await knexConn('combined_courses')
+    .select(
+      'combined_courses.id',
+      'combined_courses.organizationId',
+      'combined_courses.code',
+      'combined_courses.name',
+      'combined_courses.description',
+      'combined_courses.illustration',
+      'combined_courses.questId',
+    )
+    .join('quests', 'combined_courses.questId', 'quests.id')
+    .whereIn('combined_courses.organizationId', organizationIds)
+    .whereJsonSupersetOf('quests.successRequirements', [{ data: { moduleId: { data: moduleId } } }]);
+
+  return combinedCourses.map((quest) => new CombinedCourse(quest));
+};
+
+export { findByCampaignId, findByModuleIdAndOrganizationIds, findByOrganizationId, getByCode, getById, saveInBatch };

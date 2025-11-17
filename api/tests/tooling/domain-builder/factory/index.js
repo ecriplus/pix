@@ -68,7 +68,7 @@ import { buildChallenge, buildChallengeWithWebComponent } from './build-challeng
 import { buildChallengeLearningContentDataObject } from './build-challenge-learning-content-data-object.js';
 import { buildCleaCertifiedCandidate } from './build-clea-certified-candidate.js';
 import { buildClientApplication } from './build-client-application.js';
-import { buildCombinedCourseDetails } from './build-combined-course-details.js';
+import { buildCombinedCourse, buildCombinedCourseDetails } from './build-combined-course-details.js';
 import { buildCompetence } from './build-competence.js';
 import { buildCompetenceEvaluation } from './build-competence-evaluation.js';
 import { buildCompetenceMark } from './build-competence-mark.js';
@@ -411,6 +411,7 @@ export {
   buildChallengeWithWebComponent,
   buildCleaCertifiedCandidate,
   buildClientApplication,
+  buildCombinedCourse,
   buildCombinedCourseDetails,
   buildCompetence,
   buildCompetenceEvaluation,

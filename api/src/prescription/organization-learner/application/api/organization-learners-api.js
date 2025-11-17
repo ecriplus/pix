@@ -128,3 +128,15 @@ export const get = async (organizationLearnerId) => {
   const learner = await usecases.getOrganizationLearner({ organizationLearnerId });
   return _toAPIModel(learner);
 };
+
+/**
+ * @function
+ * @name findByUserId
+ * @description return organization learners link to a given userId
+ * @param {number} userId
+ * @returns {Promise<Array<OrganizationLearner>>}
+ */
+export const findByUserId = async (userId) => {
+  const learners = await usecases.findOrganizationLearnersByUserId({ userId });
+  return learners.map((learner) => _toAPIModel(learner));
+};
