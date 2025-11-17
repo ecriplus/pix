@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.258.0](https://github.com/1024pix/pix/compare/v5.257.0...v5.258.0) (2025-11-17)
+
+### :rocket: Amélioration
+
+- [#14148](https://github.com/1024pix/pix/pull/14148) :lipstick: Expliciter le traitement immédiat des signalements par le surveillant dans l'ES (PIX-16647) 
+- [#14153](https://github.com/1024pix/pix/pull/14153) Afficher la classe ou le groupe des participations aux parcours combinés (PIX-19969) 
+- [#14168](https://github.com/1024pix/pix/pull/14168) Afficher le besoin d'a11y dans la modale de détail d'un candidat (PIX-13681). 
+- [#14141](https://github.com/1024pix/pix/pull/14141) Ajouter l'oralisation dans les épreuves de certif (PIX-20377). 
+- [#14169](https://github.com/1024pix/pix/pull/14169) Ajouter un feature toggle areModuleShortIdUrlsEnabled (PIX-20381) 
+- [#14151](https://github.com/1024pix/pix/pull/14151) Amélioration du responsive sur l'écran de présentation du parcours combiné (PIX-20327) 
+- [#14046](https://github.com/1024pix/pix/pull/14046) Filtrer les OIDC providers filtrés par app sur Pix App et Pix Admin (PIX-19809) 
+- [#14165](https://github.com/1024pix/pix/pull/14165) modif relecture gestionmdp nov 
+- [#14129](https://github.com/1024pix/pix/pull/14129) Permettre au support de supprimer les prescrit lié aux utilisateurs (Pix-20225) 
+
+### :bug: Correction
+
+- [#14156](https://github.com/1024pix/pix/pull/14156) Corriger le focusAndScroll en Mobile (PIX-20402) 
+- [#14159](https://github.com/1024pix/pix/pull/14159) Corriger le problème du formulaire de récupération d'espace Pix Orga lorsqu’il est soumis par clavier (PIX-20420) 
+
+### :building_construction: Tech
+
+- [#14160](https://github.com/1024pix/pix/pull/14160) Activer usePixOrgaNewAuthDesign sur les review apps 
+- [#14167](https://github.com/1024pix/pix/pull/14167) Optimiser le téléchargement des exports de campagnes Evaluation / Exam (PIX-20438). 
+- [#14173](https://github.com/1024pix/pix/pull/14173) Rendre facile l’utilisation des variables d’environnement DOMAIN_PIX*** (DOMAIN_PIX_CERTIF, etc.) rapport aux tests 
+- [#14163](https://github.com/1024pix/pix/pull/14163) Supprimer le feature toggle isModulixNavEnabled (PIX-20352)(PIX-20034) 
+
+### :coffee: Autre
+
 # [5.257.0](https://github.com/1024pix/pix/compare/v5.256.0...v5.257.0) (2025-11-14)
 
 ### :rocket: Amélioration
