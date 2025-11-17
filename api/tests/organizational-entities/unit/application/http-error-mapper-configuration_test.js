@@ -1,5 +1,6 @@
 import { organizationalEntitiesDomainErrorMappingConfiguration } from '../../../../src/organizational-entities/application/http-error-mapper-configuration.js';
 import {
+  CountryNotFoundError,
   TagNotFoundError,
   UnableToDetachParentOrganizationFromChildOrganization,
 } from '../../../../src/organizational-entities/domain/errors.js';
@@ -50,6 +51,25 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
       // then
       expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
       expect(error.message).to.equal('Unable to detach parent organization from child organization');
+      expect(error.meta).to.equal(meta);
+    });
+  });
+
+  context('when mapping "CountryNotFoundError"', function () {
+    it('should return a Not found Http Error', function () {
+      // given
+      const httpErrorMapper = organizationalEntitiesDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === CountryNotFoundError.name,
+      );
+
+      const meta = { countryCode: 123456 };
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new CountryNotFoundError({ meta }));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.NotFoundError);
+      expect(error.message).to.equal('Country not found');
       expect(error.meta).to.equal(meta);
     });
   });
