@@ -56,7 +56,7 @@
                     {
                       "userName": "Lila",
                       "direction": "outgoing",
-                      "content": "Mais tu tombes bien, justement, je viens de créer un logiciel d’IA qui reconnait différentes plantes pour nous aider à les distinguer !"
+                      "content": "Mais tu tombes bien, justement, je viens de créer un logiciel d’IA qui reconnait différentes plantes pour nous aider à les distinguer !"
                     },
                     {
                       "userName": "Arthur",
@@ -292,36 +292,12 @@
           "title": "Lesson n°1 : données étiquetées",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
-                      "type": "text",
-                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, une des méthodes consiste à lui faire faire ce que vous venez de faire :</p><ul><li>D’abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données</strong>.🌼</li><li>Chaque exemple est accompagné d’une étiquette indiquant <strong>le nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit alors que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "e089a941-4bfb-473f-879a-892f1be410ce",
-                      "type": "text",
-                      "content": "<p>Ensuite, l'IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
-                      "type": "text",
-                      "content": "<p>Il s’agit d’une technique d’apprentissage automatique utilisée en intelligence artificielle. 🤖</p><p>On l’appelle <strong>l’apprentissage automatique supervisé</strong>.</p><p>Pourquoi ce nom ? Parce que les ingénieurs fournissent au logiciel un jeu d’exemples annotés, soigneusement préparés, qui guident et encadrent son apprentissage.👨🏽‍💻</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "533a20ac-123a-4dc5-b13c-0a5601437e62",
+                "type": "text",
+                "content": "<p>Vous venez de tester une des méthodes de la reconnaissance d’images, comme le fait un logiciel d’IA. 🔍</p><h5>  Mais comment apprend-il à reconnaître ce qu’il voit ? </h5><p>  On lui montre de nombreux exemples d’images avec leur nom&nbsp;: ce sont des données étiquetées. 🏷️</p><p>  Cette méthode s’appelle l’apprentissage supervisé&nbsp;: les ingénieurs fournissent au logiciel d’IA un jeu d’exemples annotés, soigneusement préparés, qui guident et encadrent son apprentissage.👨🏽‍💻</p>"
+              }
             }
           ]
         },
@@ -335,7 +311,7 @@
               "element": {
                 "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
                 "type": "text",
-                "content": "<p>Mais au fait, comment un logiciel d'IA traite-t-il une image ? Découvrons cela ensemble. </p>"
+                "content": "<p>Mais au fait, comment un logiciel d’IA traite-t-il une image ? Découvrons cela ensemble. </p>"
               }
             }
           ]
@@ -371,7 +347,7 @@
                     {
                       "id": "4c380d32-3c56-4235-9d3e-8c1497575b07",
                       "type": "text",
-                      "content": "<p>Une photographie numérique est composée de milliers de petits carrés appelés pixels. Notre œil ne voit pas ces carrés tellement ils sont petits !<br></p>"
+                      "content": "<p>Une photographie numérique est composée de milliers de petits carrés appelés pixels. Notre œil ne voit pas ces carrés tellement ils sont petits !<br></p>"
                     },
                     {
                       "id": "ee4a85c2-59a0-4541-acb3-bbbbb0a055ca",
@@ -416,7 +392,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>En informatique, une photographie est une multitude de petits points appelés pixels.🟢<br></p><p>Chaque pixel est associé à des nombres qui indiquent sa couleur.&nbsp;🖼️➡️🔢<br></p><p>À partir du tableau de nombre représentant l’image, le logiciel d’IA va pouvoir faire des calculs.</p>"
+                "content": "<h5>Comment un logiciel d’IA peut-il faire des calculs à partir d’une image ?</h5><p>En informatique, une photographie est une multitude de petits points appelés pixels.🟢<br></p><p>Chaque pixel est associé à des nombres qui indiquent sa couleur.&nbsp;🖼️➡️🔢<br></p><p>Ainsi, à partir du tableau de nombre représentant l’image, le logiciel d’IA va pouvoir faire des calculs.</p>"
               }
             }
           ]
@@ -517,7 +493,7 @@
                     {
                       "id": "df83f537-de47-43da-8087-480f5b44bc8f",
                       "type": "text",
-                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d’ail des ours.</p><p>Le logiciel n’arrive pas à trancher avec certitude. </p><p>Il indique un score 0,4 pour « ail des ours » et de 0,6 pour « muguet ».</p>"
+                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d’ail des ours.</p><p>Le logiciel n’arrive pas à trancher avec certitude. </p><p>Il indique un score 0,4 pour «&nbsp;ail des ours&nbsp;» et de 0,6 pour «&nbsp;muguet&nbsp;».</p>"
                     },
                     {
                       "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
@@ -767,7 +743,7 @@
               "element": {
                 "id": "c68dc04d-69b2-4ca6-9635-e38fea109723",
                 "type": "text",
-                "content": "<p>L’<strong>a</strong><strong>pprentissage automatique</strong> est une technique de l’intelligence artificielle. Elle permet de donner aux machines la capacité de réaliser une tâche (comme reconnaître une image de muguet) sur de nouveaux exemples (une nouvelle photo) . Cet apprentissage se fait à partir de données, et non d'une programmation explicite (on ne décrit pas l'image à la machine).&nbsp;🦾</p><p>L’<strong>apprentissage automatique supervisé</strong> est l’une des méthodes de l’apprentissage automatique.🤖</p><p>Cette méthode consiste à fournir à un logiciel d’IA de nombreuses données étiquetées afin de lui apprendre à reconnaître les bonnes réponses. </p><ul>    <li>🏷️ Pendant la&nbsp;<strong>phase d’entraînement</strong>&nbsp;: le logiciel ajuste ses paramètres de calcul sur les valeurs numériques des données d’entrée afin de prédire la bonne étiquette. </li>    <li>🏋️Pendant la&nbsp;<strong>phase de test </strong>: on vérifie ensuite si le logiciel est capable de bien prédire les étiquettes sur de nouvelles données qu’il n’a jamais vues. C’est ce qu’on appelle la généralisation 🚀. </li><li>La qualité des données fournies est essentielle pour rendre le logiciel fiable. Comme les prédictions reposent sur des statistiques, il existe toujours un risque d’erreur. ⚠️</li></ul><p>L’apprentissage supervisé est utilisé dans <strong>de nombreux domaines</strong> : génération de texte, prévision météo, reconnaissance vocale ou détection de tumeurs.🌐</p>"
+                "content": "<p>L’<strong>a</strong><strong>pprentissage automatique</strong> est une technique de l’intelligence artificielle. Elle permet de donner aux machines la capacité de réaliser une tâche (comme reconnaître une image de muguet) sur de nouveaux exemples (une nouvelle photo) . Cet apprentissage se fait à partir de données, et non d’une programmation explicite (on ne décrit pas l’image à la machine).&nbsp;🦾</p><p>L’<strong>apprentissage automatique supervisé</strong> est l’une des méthodes de l’apprentissage automatique.🤖</p><p>Cette méthode consiste à fournir à un logiciel d’IA de nombreuses données étiquetées afin de lui apprendre à reconnaître les bonnes réponses. </p><ul>    <li>🏷️ Pendant la&nbsp;<strong>phase d’entraînement</strong>&nbsp;: le logiciel ajuste ses paramètres de calcul sur les valeurs numériques des données d’entrée afin de prédire la bonne étiquette. </li>    <li>🏋️Pendant la&nbsp;<strong>phase de test </strong>: on vérifie ensuite si le logiciel est capable de bien prédire les étiquettes sur de nouvelles données qu’il n’a jamais vues. C’est ce qu’on appelle la généralisation 🚀. </li><li>La qualité des données fournies est essentielle pour rendre le logiciel fiable. Comme les prédictions reposent sur des statistiques, il existe toujours un risque d’erreur. ⚠️</li></ul><p>L’apprentissage supervisé est utilisé dans <strong>de nombreux domaines</strong> : génération de texte, prévision météo, reconnaissance vocale ou détection de tumeurs.🌐</p>"
               }
             }
           ]
@@ -978,7 +954,7 @@
               "element": {
                 "id": "8a3c8142-e5fc-4135-9826-c4a404f4a644",
                 "type": "qcu-declarative",
-                "instruction": "<p>Et maintenant, auriez-vous confiance dans une application qui reconnaît les champignons à partir d'une image et dit s’ils sont comestibles ? 🍄‍🟫</p>",
+                "instruction": "<p>Et maintenant, auriez-vous confiance dans une application qui reconnaît les champignons à partir d’une image et dit s’ils sont comestibles ? 🍄‍🟫</p>",
                 "proposals": [
                   {
                     "id": "1",
