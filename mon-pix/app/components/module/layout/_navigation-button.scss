@@ -76,10 +76,9 @@
   &.pix-button[aria-disabled="true"] {
     color: var(--pix-neutral-900);
     background-color: unset;
-    opacity: 1;
 
     .pix-icon {
-      opacity: 0.5;
+      opacity: 0.3;
       fill: var(--pix-neutral-800);
     }
   }
