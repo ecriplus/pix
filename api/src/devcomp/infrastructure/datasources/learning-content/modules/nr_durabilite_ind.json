@@ -180,39 +180,107 @@
               "element": {
                 "id": "aceecf16-a635-4a19-83a4-76ba9a75de85",
                 "type": "qrocm",
-                "instruction": "<p>Combien avez-vous trouvé d’éléments dans cet appareil numérique ?</p>",
+                "instruction": "<p>Associez chaque métal à la partie du smartphone dans laquelle il est principalement utilisé.</p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Nombre de métaux ou terres rares différents&nbsp;:&nbsp;</p>"
+                    "content": "<p><span>Lithium</span></p>"
                   },
                   {
-                    "input": "1",
-                    "type": "input",
-                    "inputType": "number",
-                    "size": 2,
-                    "display": "inline",
-                    "placeholder": "0",
-                    "ariaLabel": "Nombre de métaux et terres rares",
-                    "defaultValue": "0",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
+                    "input": "choice1",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un usage",
+                    "ariaLabel": "Sélectionner un usage pour le lithium",
+                    "defaultValue": "Sélectionner un usage",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Batteries"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Écrans (couleurs et rétroéclairage)"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Circuits électroniques"
+                      }
                     ],
                     "solutions": [
-                      "15"
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>Terres rares (europium, terbium, yttrium…)</span></p>"
+                  },
+                  {
+                    "input": "choice2",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un usage",
+                    "ariaLabel": "Sélectionner un usage pour les terres rares",
+                    "defaultValue": "Sélectionner un usage",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Batteries"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Écrans (couleurs et rétroéclairage)"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Circuits électroniques"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>Or, cuivre, argent<br></p>"
+                  },
+                  {
+                    "input": "choice3",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionner un usage",
+                    "ariaLabel": "Sélectionner un usage pour l’or, le cuivre et l'argent",
+                    "defaultValue": "Sélectionner un usage",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Batteries"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Écrans (couleurs et rétroéclairage)"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Circuits électroniques"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
                     ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bien joué !&nbsp;</p>",
-                    "diagnosis": "<p>Nous avons sélectionné un échantillon de quelques exemples parmi <strong>plus de 50 métaux et terres rares différents</strong> utilisés dans la fabrication d’un smartphone.</p>"
+                    "state": "<p>Bonne réponse !&nbsp;</p>",
+                    "diagnosis": "<p>Lithium → batteries, terres rares → écran, or → circuits.<br>\nL’image ne montrait qu’un extrait : un smartphone contient plus de <strong>50 métaux et terres rares</strong> différents.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas exactement...</p>",
-                    "diagnosis": "<p>Il y en avait 15 à trouver dans l’image, mais nous avons sélectionné un échantillon de quelques exemples parmi plus de <strong>50 métaux et terres rares différents</strong> utilisés dans la fabrication d’un smartphone.</p>"
+                    "diagnosis": "<p>Lithium → batteries, terres rares → écran, or → circuits.<br>\nL’image ne montrait qu’un extrait : un smartphone contient plus de <strong>50 métaux et terres rares</strong> différents.</p>"
                   }
                 }
               }
@@ -229,7 +297,7 @@
               "element": {
                 "id": "dad5436d-1659-4514-99b3-b316dc795888",
                 "type": "text",
-                "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p><strong>La demande</strong> en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le tantale ou l’indium. </p><p><strong>💡Bon à savoir</strong> </p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...= sont des métaux <strong>essentiels aux appareils numériques</strong>. Présentes dans la terre mais <strong>très peu concentrées</strong>, leur extraction exige beaucoup d’énergie, d’eau et de produits chimiques polluants.<br><br></p>"
+                "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p><strong>La demande</strong> en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le tantale ou l’indium. </p><p><strong>💡Bon à savoir</strong> </p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...) sont des métaux <strong>essentiels aux appareils numériques</strong>. Présentes dans la terre mais <strong>très peu concentrées</strong>, leur extraction exige beaucoup d’énergie, d’eau et de produits chimiques polluants.<br><br></p>"
               }
             }
           ]
