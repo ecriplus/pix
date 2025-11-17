@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 import UrlBaseService from './url-base.js';
 
 export default class Url extends UrlBaseService {
+  @service currentUser;
   @service intl;
   @service locale;
 
@@ -32,6 +33,13 @@ export default class Url extends UrlBaseService {
     }
 
     return 'https://cloud.pix.fr/s/JmBn2q5rpzgrjxN/download';
+  }
+
+  get documentationUrl() {
+    if (this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents) {
+      return this.intl.t('common.urls.documentation.sco-managing-students');
+    }
+    return this.intl.t('common.urls.documentation.other');
   }
 
   get urlToDownloadSessionIssueReportSheet() {

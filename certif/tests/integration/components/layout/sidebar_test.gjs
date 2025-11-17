@@ -8,9 +8,6 @@ import sinon from 'sinon';
 
 import setupRenderingIntlTest from '../../../helpers/setup-intl-rendering';
 
-const LINK_SCO = 'http://cloud.pix.fr/s/GqwW6dFDDrHezfS';
-const LINK_OTHER = 'http://cloud.pix.fr/s/fLSG4mYCcX7GDRF';
-
 module('Integration | Component | Layout | Sidebar', function (hooks) {
   setupRenderingIntlTest(hooks);
 
@@ -248,7 +245,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
         // then
         assert
           .dom(screen.getByRole('link', { name: t('navigation.sidebar.documentation') }))
-          .hasAttribute('href', LINK_SCO);
+          .hasAttribute('href', t('common.urls.documentation.sco-managing-students'));
       });
     });
 
@@ -280,7 +277,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
         // then
         assert
           .dom(screen.getByRole('link', { name: t('navigation.sidebar.documentation') }))
-          .hasAttribute('href', LINK_OTHER);
+          .hasAttribute('href', t('common.urls.documentation.other'));
       });
     });
   });
