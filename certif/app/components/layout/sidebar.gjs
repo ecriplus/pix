@@ -8,19 +8,10 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-const LINK_SCO = 'http://cloud.pix.fr/s/GqwW6dFDDrHezfS';
-const LINK_OTHER = 'http://cloud.pix.fr/s/fLSG4mYCcX7GDRF';
-
 export default class Sidebar extends Component {
+  @service url;
   @service currentUser;
   @service router;
-
-  get documentationLink() {
-    if (this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents) {
-      return LINK_SCO;
-    }
-    return LINK_OTHER;
-  }
 
   get showLinkToSessions() {
     return !this.currentUser.currentAllowedCertificationCenterAccess.isAccessRestricted;
@@ -97,7 +88,7 @@ export default class Sidebar extends Component {
           </li>
           <li>
             <PixNavigationButton
-              href={{this.documentationLink}}
+              href={{this.url.documentationUrl}}
               @icon='book'
               @title='Documentation'
               @target='_blank'

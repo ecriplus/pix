@@ -188,6 +188,10 @@
       "invigilator": "Surveillant"
     },
     "urls": {
+      "documentation": {
+        "other": "https://cloud.pix.fr/s/fLSG4mYCcX7GDRF",
+        "sco-managing-students": "https://cloud.pix.fr/s/GqwW6dFDDrHezfS"
+      },
       "fraud": "https://cloud.pix.fr/s/LiXkoBq9GD5aLbN/download",
       "session-issue-report-sheet": "https://cloud.pix.fr/s/B76yA8ip9Radej9/download",
       "session-v3-issue-report-sheet": "https://cloud.pix.fr/s/wJc6N3sZNZRC4MZ/download"
