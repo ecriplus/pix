@@ -19,16 +19,6 @@ const findAll = async function () {
   return result.map(_toDomain);
 };
 
-const getByLabel = async function ({ label }) {
-  const complementaryCertification = await knex.from('complementary-certifications').where({ label }).first();
-
-  if (!complementaryCertification) {
-    throw new NotFoundError('Complementary certification does not exist');
-  }
-
-  return _toDomain(complementaryCertification);
-};
-
 /**
  * @param {ComplementaryCertificationKey} key
  * @returns {Promise<ComplementaryCertification>}
@@ -54,4 +44,4 @@ const getById = async function ({ id }) {
   return _toDomain(complementaryCertification);
 };
 
-export { findAll, getById, getByKey, getByLabel };
+export { findAll, getById, getByKey };
