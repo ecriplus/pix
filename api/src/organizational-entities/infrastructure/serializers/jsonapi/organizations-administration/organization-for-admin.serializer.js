@@ -122,8 +122,8 @@ const deserialize = function (json) {
     parentOrganizationId: attributes['parent-organization-id'] ? parseInt(attributes['parent-organization-id']) : null,
     features: attributes.features,
     tagIds,
+    countryCode: attributes['country-code'] && parseInt(attributes['country-code']),
   });
-
   return organization;
 };
 

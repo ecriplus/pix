@@ -175,6 +175,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
           [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true },
           [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: true },
         },
+        countryCode: '99100',
       };
 
       // when
@@ -198,6 +199,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'data-protection-officer-email': organizationAttributes.dataProtectionOfficerEmail,
             'administration-team-id': organizationAttributes.administrationTeamId,
             features: organizationAttributes.features,
+            'country-code': organizationAttributes.countryCode,
           },
         },
       });
@@ -230,6 +232,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             active: organizationAttributes.features.MULTIPLE_SENDING_ASSESSMENT.active,
           },
         },
+        countryCode: 99100,
       });
       expect(organization).to.be.instanceOf(OrganizationForAdmin);
       expect(organization).to.deep.equal(expectedOrganization);
@@ -303,6 +306,24 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
 
       // then
       expect(organization.parentOrganizationId).to.equal(5);
+    });
+
+    it('should not deserialize country code if not present', function () {
+      // when
+      const organization = organizationForAdminSerializer.deserialize({
+        data: {
+          type: 'organizations',
+          id: '7',
+          attributes: {
+            name: 'Lycée St Cricq',
+            type: Organization.types.SCO,
+            'country-code': undefined,
+          },
+        },
+      });
+
+      // then
+      expect(organization.countryCode).undefined;
     });
   });
 });
