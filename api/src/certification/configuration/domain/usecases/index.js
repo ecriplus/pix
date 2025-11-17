@@ -3,7 +3,6 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
-import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
@@ -29,7 +28,6 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
- * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {versionsRepository} VersionsRepository
  **/
 const dependencies = {
@@ -44,7 +42,6 @@ const dependencies = {
   learningContentRepository,
   skillRepository,
   tubeRepository,
-  sharedFlashAlgorithmConfigurationRepository,
   versionsRepository,
 };
 

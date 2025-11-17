@@ -16,7 +16,6 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as competenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
@@ -36,7 +35,6 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {challengeCalibrationRepository} ChallengeCalibrationRepository
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {flashAlgorithmService} FlashAlgorithmService
  * @typedef {challengeRepository} ChallengeRepository
@@ -57,7 +55,6 @@ const dependencies = {
   competenceMarkRepository,
   certificationCourseRepository,
   scoringDegradationService,
-  flashAlgorithmConfigurationRepository,
   scoringConfigurationRepository,
   answerRepository,
   certificationAssessmentHistoryRepository,

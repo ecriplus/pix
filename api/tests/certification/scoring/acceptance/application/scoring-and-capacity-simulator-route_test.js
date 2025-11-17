@@ -457,7 +457,7 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
 
-          databaseBuilder.factory.buildCertificationConfiguration({
+          databaseBuilder.factory.buildCertificationVersion({
             competencesScoringConfiguration: [
               {
                 competence: '1.1',
@@ -496,12 +496,12 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
           expect(response.result.data).to.deep.equal({
             type: 'scoring-and-capacity-simulator-reports',
             attributes: {
-              capacity: -0.2727528125000003,
+              capacity: -0.532765625,
               score: 127,
               competences: [
                 {
                   competenceCode: '1.1',
-                  level: 2,
+                  level: 1,
                 },
               ],
             },

@@ -83,9 +83,9 @@ export const handleV3CertificationScoring = withTransaction(
       configuration: version.challengesConfiguration,
     });
 
-    const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
+    const v3CertificationScoring = await scoringConfigurationRepository.getLatestByVersionAndLocale({
       locale,
-      date: certificationCourse.getStartDate(),
+      version,
     });
 
     const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({

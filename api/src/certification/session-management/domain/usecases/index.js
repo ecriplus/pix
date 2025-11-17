@@ -18,7 +18,6 @@ import {
   challengeRepository,
   competenceMarkRepository,
   cpfExportRepository,
-  flashAlgorithmConfigurationRepository,
   repositories,
   sessionSummaryRepository,
   sharedCompetenceMarkRepository,
@@ -51,7 +50,6 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').SessionForSupervisingRepository} SessionForSupervisingRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationReportRepository} CertificationReportRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CompetenceMarkRepository} CompetenceMarkRepository
- * @typedef {import('../../infrastructure/repositories/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ComplementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCpfCityRepository} CertificationCpfCityRepository
@@ -109,7 +107,6 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {mailService} MailService
  * @typedef {flashAlgorithmService} FlashAlgorithmService
  * @typedef {sessionPublicationService} SessionPublicationService
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {cpfExportRepository} CpfExportRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
@@ -135,7 +132,6 @@ const dependencies = {
   certificationChallengeRepository,
   certificationRepository,
   certificationIssueReportRepository,
-  flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   sessionPublicationService,
   sharedCertificationCourseRepository,

@@ -70,21 +70,11 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           startDate: new Date('2009-02-01'),
           expirationDate: new Date('2010-02-01'),
           challengesConfiguration: null,
-        });
-        databaseBuilder.factory.buildCertificationVersion({
-          startDate: new Date('2010-02-01'),
-          expirationDate: null,
-        });
-
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2009-02-01'),
-          expirationDate: new Date('2010-02-01'),
-          challengesConfiguration: null,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
         });
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2010-02-01'),
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2010-02-01'),
           expirationDate: null,
         });
 
@@ -154,7 +144,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         const descOrderedAssessmentResults = await knex('assessment-results').orderBy('createdAt', 'DESC');
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
-        expect(lastAssessmentResult.pixScore).to.be.equal(55);
+        expect(lastAssessmentResult.pixScore).to.be.equal(48);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
       });
     });
@@ -219,20 +209,6 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
 
         databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2024-02-01'),
-          expirationDate: null,
-          challengesConfiguration: null,
-        });
-
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2010-02-01'),
-          expirationDate: new Date('2024-02-01'),
-          challengesConfiguration: {
-            maximumAssessmentLength: 1,
-          },
-        });
-
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2024-02-01'),
           expirationDate: null,
           challengesConfiguration: null,
           globalScoringConfiguration: null,
@@ -308,7 +284,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         const descOrderedAssessmentResults = await knex('assessment-results').orderBy('createdAt', 'DESC');
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
-        expect(lastAssessmentResult.pixScore).to.be.equal(55);
+        expect(lastAssessmentResult.pixScore).to.be.equal(48);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
       });
     });

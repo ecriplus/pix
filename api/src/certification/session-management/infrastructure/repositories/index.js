@@ -17,7 +17,6 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as certificationReportRepository from '../../../shared/infrastructure/repositories/certification-report-repository.js';
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as certificationCandidateForSupervisingRepository from './certification-candidate-for-supervising-repository.js';
 import * as certificationCandidateRepository from './certification-candidate-repository.js';
 import * as certificationCenterAccessRepository from './certification-center-access-repository.js';
@@ -76,7 +75,6 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {certificationCpfCityRepository} CertificationCpfCityRepository
  * @typedef {certificationCpfCountryRepository} CertificationCpfCountryRepository
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {cpfExportRepository} CpfExportRepository
  * @typedef {juryCertificationSummaryRepository} JuryCertificationSummaryRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
@@ -145,7 +143,6 @@ export {
   challengeRepository,
   competenceMarkRepository,
   cpfExportRepository,
-  flashAlgorithmConfigurationRepository,
   repositories,
   sessionSummaryRepository,
   sharedCompetenceMarkRepository,

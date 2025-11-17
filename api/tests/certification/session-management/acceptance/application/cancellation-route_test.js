@@ -157,7 +157,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
     context('when certification is v3', function () {
       it('should create a new cancelled assessment-result', async function () {
         // given
-        databaseBuilder.factory.buildCertificationVersion();
         const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
         const session = databaseBuilder.factory.buildSession({
           version: AlgorithmEngineVersion.V3,
@@ -217,8 +216,8 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           earnedPix: 16,
         });
 
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2024-01-14'),
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2024-01-14'),
           competencesScoringConfiguration: [
             {
               competence: 'index Compétence A',
@@ -281,7 +280,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
   describe('PATCH /api/admin/certification-courses/{certificationCourseId}/uncancel', function () {
     it('should uncancel the certification with a new assessment-result', async function () {
       // given
-      databaseBuilder.factory.buildCertificationVersion();
       const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
       const session = databaseBuilder.factory.buildSession({
         version: AlgorithmEngineVersion.V3,
@@ -342,8 +340,8 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         earnedPix: 16,
       });
 
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: new Date('2024-01-14'),
+      databaseBuilder.factory.buildCertificationVersion({
+        startDate: new Date('2024-01-14'),
         competencesScoringConfiguration: [
           {
             competence: 'index Compétence A',
