@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import { ModuleDoesNotExistError } from '../../../../src/devcomp/domain/errors.js';
+import { ModuleDoesNotExistError, ModuleInstantiationError } from '../../../../src/devcomp/domain/errors.js';
 import { Module } from '../../../../src/devcomp/domain/models/module/Module.js';
 import moduleDatasource from '../../../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
@@ -297,6 +297,48 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       expect(createHashStub).to.have.been.calledOnceWith('sha256');
       expect(updateStub).to.have.been.calledOnceWith(JSON.stringify(expectedFoundModule));
       expect(digestStub).to.have.been.calledOnceWith('hex');
+    });
+  });
+
+  describe('getByShortId', function () {
+    describe('errors', function () {
+      it('should throw a NotFoundError if the module does not exist', async function () {
+        // given
+        const nonExistingModuleShortId = 'm4tthia5';
+
+        // when
+        const error = await catchErr(moduleRepository.getByShortId)({
+          shortId: nonExistingModuleShortId,
+          moduleDatasource,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+      it('should throw an Error if module does not build correctly', async function () {
+        // given
+        const moduleDatasourceStub = {
+          getByShortId: async () => {
+            return {
+              id: 1,
+              shortId: 'm4tthia5',
+              slug: 'incomplete module',
+            };
+          },
+        };
+
+        sinon.stub(ModuleFactory, 'build').throws(new ModuleInstantiationError());
+
+        // when
+        const error = await catchErr(moduleRepository.getByShortId)({
+          shortId: 'm4tthia5',
+          moduleDatasource: moduleDatasourceStub,
+        });
+
+        // then
+        expect(error).not.to.be.instanceOf(NotFoundError);
+        expect(error).to.be.instanceOf(ModuleInstantiationError);
+      });
     });
   });
 
