@@ -1,4 +1,7 @@
-import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
+import {
+  AdministrationTeamNotFound,
+  CountryNotFoundError,
+} from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import {
@@ -20,12 +23,19 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
 
+    const newCountry = databaseBuilder.factory.buildCertificationCpfCountry({
+      code: 99102,
+      originalName: 'Islande',
+      commonName: 'Islande',
+    });
+
     await databaseBuilder.commit();
 
     const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
       id: organizationId,
       name: "Nouveau nom d'organization",
       administrationTeamId: newAdministrationTeamId,
+      countryCode: newCountry.code,
     });
 
     // when
@@ -37,6 +47,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization).to.be.instanceOf(OrganizationForAdmin);
     expect(updatedOrganization.name).to.equal("Nouveau nom d'organization");
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
+    expect(updatedOrganization.countryCode).to.equal(99102);
   });
 
   context('when administration team does not exist', function () {
@@ -58,6 +69,56 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // then
       expect(error).to.be.instanceOf(AdministrationTeamNotFound);
+    });
+  });
+
+  context('when country does not exist', function () {
+    it('should throw a CountryNotFound error', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+
+      await databaseBuilder.commit();
+
+      const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+        id: organization.id,
+        administrationTeamId: organization.administrationTeamId,
+        countryCode: 123456,
+      });
+
+      // when
+      const error = await catchErr(usecases.updateOrganizationInformation)({
+        organization: organizationNewInformations,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(CountryNotFoundError);
+      expect(error.message).equal('Country not found for code 123456');
+      expect(error.meta.countryCode).to.equal(123456);
+    });
+  });
+
+  context('when there is no new country code', function () {
+    it('should not update country code', async function () {
+      // given
+      const initialOrganization = databaseBuilder.factory.buildOrganization();
+
+      const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+
+      await databaseBuilder.commit();
+
+      const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+        id: initialOrganization.id,
+        administrationTeamId: newAdministrationTeamId,
+        countryCode: null,
+      });
+
+      // when
+      const response = await usecases.updateOrganizationInformation({
+        organization: organizationNewInformations,
+      });
+
+      // then
+      expect(response.countryCode).equal(initialOrganization.countryCode);
     });
   });
 });
