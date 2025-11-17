@@ -80,17 +80,17 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     expect(firstCourse.name).to.equal('First Combined Course');
     expect(firstCourse.participations).to.have.lengthOf(2);
     expect(firstCourse.participations[0]).to.be.an.instanceof(CombinedCourseParticipation);
-    expect(firstCourse.participations[0].firstName).to.equal('Alice');
-    expect(firstCourse.participations[0].lastName).to.equal('Anderson');
-    expect(firstCourse.participations[1].firstName).to.equal('Bob');
-    expect(firstCourse.participations[1].lastName).to.equal('Brown');
+    expect(firstCourse.participations[0].status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
+    expect(firstCourse.participations[0].combinedCourseId).to.equal(combinedCourseId1);
+    expect(firstCourse.participations[1].status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
+    expect(firstCourse.participations[1].combinedCourseId).to.equal(combinedCourseId1);
 
     expect(secondCourse.code).to.equal('COURSE2');
     expect(secondCourse.name).to.equal('Second Combined Course');
     expect(secondCourse.participations).to.have.lengthOf(1);
     expect(secondCourse.participations[0]).to.be.an.instanceof(CombinedCourseParticipation);
-    expect(secondCourse.participations[0].firstName).to.equal('Charlie');
-    expect(secondCourse.participations[0].lastName).to.equal('Clark');
+    expect(secondCourse.participations[0].status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
+    expect(secondCourse.participations[0].combinedCourseId).to.equal(combinedCourseId2);
   });
 
   it('should return combined courses with empty participations when no participations exist', async function () {
@@ -197,9 +197,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const secondCourse = result.combinedCourses.find((course) => course.id === combinedCourseId2);
 
     expect(firstCourse.participations).to.have.lengthOf(1);
-    expect(firstCourse.participations[0].firstName).to.equal('Alice');
+    expect(firstCourse.participations[0].combinedCourseId).to.equal(combinedCourseId1);
+    expect(firstCourse.participations[0].status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
 
     expect(secondCourse.participations).to.have.lengthOf(1);
-    expect(secondCourse.participations[0].firstName).to.equal('Bob');
+    expect(secondCourse.participations[0].combinedCourseId).to.equal(combinedCourseId2);
+    expect(secondCourse.participations[0].status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
   });
 });
