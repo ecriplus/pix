@@ -27,12 +27,10 @@ const dependencies = {
 };
 
 import { attachBadges } from './attach-badges.js';
-import { getComplementaryCertificationTargetProfileHistory } from './get-complementary-certification-target-profile-history.js';
 import { sendTargetProfileNotifications } from './send-target-profile-notifications.js';
 
 const usecasesWithoutInjectedDependencies = {
   attachBadges,
-  getComplementaryCertificationTargetProfileHistory,
   sendTargetProfileNotifications,
 };
 
