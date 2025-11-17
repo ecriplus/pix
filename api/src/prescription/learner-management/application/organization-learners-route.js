@@ -49,8 +49,11 @@ const register = async (server) => {
             assign: 'organizationLearnerBelongsToOrganization',
           },
           {
-            method: securityPreHandlers.checkAdminMemberHasRoleSupport,
-            assign: 'checkAdminMemberHasRoleSupport',
+            method: securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            ]),
+            assign: 'hasAtLeastOneAccessOf',
           },
         ],
         validate: {

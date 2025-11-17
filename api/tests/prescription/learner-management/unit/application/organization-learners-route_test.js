@@ -14,8 +14,18 @@ describe('Unit | Prescription | learner management | Application | Router | orga
         .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
         .callsFake((request, h) => h.response().code(200));
       sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+        .callsFake((request, h) => h.response().code(200));
+      sinon
         .stub(organizationLearnersController, 'deleteOrganizationLearnerFromAdmin')
         .callsFake((request, h) => h.response('ok').code(200));
+      sinon
+        .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+        .withArgs([
+          securityPreHandlers.checkAdminMemberHasRoleSupport,
+          securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+        ])
+        .returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
@@ -24,7 +34,7 @@ describe('Unit | Prescription | learner management | Application | Router | orga
 
       // then
       sinon.assert.calledOnce(securityPreHandlers.checkOrganizationLearnerBelongsToOrganization);
-      sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
       sinon.assert.calledOnce(organizationLearnersController.deleteOrganizationLearnerFromAdmin);
     });
   });

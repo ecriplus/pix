@@ -67,7 +67,7 @@ module('Unit | Service | access-control', function (hooks) {
 
   module('#hasAccessToDeleteOrganizationLearnerScope', function () {
     [
-      { role: 'isSuperAdmin', hasAccess: false },
+      { role: 'isSuperAdmin', hasAccess: true },
       { role: 'isSupport', hasAccess: true },
       { role: 'isMetier', hasAccess: false },
       { role: 'isCertif', hasAccess: false },
