@@ -904,6 +904,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'Combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -951,6 +952,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -998,6 +1000,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1044,13 +1047,14 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const recommendedModuleIdsForUser = [];
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
                 comparison: COMPARISONS_REQUIREMENT.ALL,
                 data: {
                   moduleId: {
-                    data: 7,
+                    data: 'abcdefgh1',
                     comparison: COMPARISONS_CRITERION.EQUAL,
                   },
                 },
@@ -1062,7 +1066,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
-          const module = new Module({ id: 7, title: 'module', duration: 10 });
+          const module = new Module({ id: 'abcdefgh1', title: 'module', duration: 10 });
           const dataForQuest = new DataForQuest({
             eligibility: new Eligibility({
               passages: [
@@ -1103,6 +1107,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const recommendableModuleIds = [{ moduleId: module.id, targetProfileIds: [campaign.targetProfileId] }];
           const recommendedModuleIdsForUser = [];
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1170,12 +1175,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         it('should return module if it in quest, recommandable and recommended for user', function () {
           // given
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-          const module = new Module({ id: 1, title: 'module' });
+          const module = new Module({ id: 'ebcde1', title: 'module' });
           const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
           const recommendableModuleIds = [{ moduleId: module.id, targetProfileIds: [campaign.targetProfileId] }];
           const recommendedModuleIdsForUser = [{ moduleId: module.id }];
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1256,8 +1262,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           it('should return a campaign participation item and a formation item', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-            const firstModule = new Module({ id: 1, title: 'module' });
-            const secondModule = new Module({ id: 2, title: 'module' });
+            const firstModule = new Module({ id: 'abcdef1', title: 'module' });
+            const secondModule = new Module({ id: 'abcdef2', title: 'module' });
             const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
@@ -1266,6 +1272,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ];
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
+              name: 'combinix',
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1353,8 +1360,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           it('should return two campaign participation items and two formation items', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-            const firstModule = new Module({ id: 1, title: 'module' });
-            const secondModule = new Module({ id: 2, title: 'module' });
+            const firstModule = new Module({ id: 'abcdef1', title: 'module' });
+            const secondModule = new Module({ id: 'abcdef2', title: 'module' });
             const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
             const secondCampaign = domainBuilder.buildCampaign({ id: 999, targetProfileId: 101 });
 
@@ -1364,6 +1371,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ];
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
+              name: 'combinix',
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1481,8 +1489,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           it('should return a combined course item even if data for quest is empty', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-            const firstModule = new Module({ id: 1, title: 'module' });
-            const secondModule = new Module({ id: 2, title: 'module' });
+            const firstModule = new Module({ id: 'abcdef1', title: 'module' });
+            const secondModule = new Module({ id: 'abcdef2', title: 'module' });
             const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
@@ -1491,6 +1499,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ];
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
+              name: 'combinix',
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1563,8 +1572,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           it('should return formation block for each target profile in the right order', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-            const module = new Module({ id: 1, title: 'module' });
-            const module2 = new Module({ id: 2, title: 'module2' });
+            const module = new Module({ id: 'abcdef1', title: 'module' });
+            const module2 = new Module({ id: 'abcdef3', title: 'module2' });
             const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888, code: 'campaign123' });
             const campaign2 = domainBuilder.buildCampaign({ id: 333, targetProfileId: 666, code: 'campaign456' });
 
@@ -1574,6 +1583,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ];
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
+              name: 'combinix',
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1691,8 +1701,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           it('should return a formation item and a quest item', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-            const moduleFromTargetProfile = new Module({ id: 1, title: 'module' });
-            const moduleFromQuest = new Module({ id: 2, title: 'module from quest' });
+            const moduleFromTargetProfile = new Module({ id: 'abcdefgh1', title: 'module' });
+            const moduleFromQuest = new Module({ id: 'abcdefgh3', title: 'module from quest' });
             const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
@@ -1700,6 +1710,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ];
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
+              name: 'combinix',
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1801,6 +1812,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
+          name: 'combinix',
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1848,9 +1860,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         // given
         const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
         const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2', targetProfileId: 999 });
-        const module = new Module({ id: 7, title: 'title', slug: 'abcdef' });
+        const module = new Module({ id: 'abc2de', title: 'title', slug: 'abcdef' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
+          name: 'combinix',
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -1944,9 +1957,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
       });
       it('should evaluates if module is completed', function () {
         // given
-        const module = new Module({ id: 7, title: 'title', slug: 'abcdef' });
+        const module = new Module({ id: 'abc2de', title: 'title', slug: 'abcdef' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
+          name: 'combinix',
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
@@ -1989,6 +2003,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -2033,6 +2048,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
+            name: 'combinix',
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -2077,12 +2093,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         // given
         const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
         const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2', targetProfileId: 999 });
-        const module1 = new Module({ id: 7, title: 'module diag 1', slug: 'module-abcdef-1' });
-        const module11 = new Module({ id: 8, title: 'module diag 1.1', slug: 'module-azerty-1.1' });
-        const module2 = new Module({ id: 9, title: 'module diag 2', slug: 'module-querty-2' });
-        const module22 = new Module({ id: 10, title: 'module diag 2.2', slug: 'module-osef-2-2' });
+        const module1 = new Module({ id: 'abcde1', title: 'module diag 1', slug: 'module-abcdef-1' });
+        const module11 = new Module({ id: 'abcde2', title: 'module diag 1.1', slug: 'module-azerty-1.1' });
+        const module2 = new Module({ id: 'abcde3', title: 'module diag 2', slug: 'module-querty-2' });
+        const module22 = new Module({ id: 'abcde4', title: 'module diag 2.2', slug: 'module-osef-2-2' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
+          name: 'combinix',
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
