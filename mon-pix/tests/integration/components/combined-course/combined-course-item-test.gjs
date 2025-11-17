@@ -1,4 +1,4 @@
-import { getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import CombinedCourseItem from 'mon-pix/components/combined-course/combined-course-item';
 import { module, test } from 'qunit';
@@ -184,11 +184,7 @@ module('Integration | Component | combined course item', function (hooks) {
       );
 
       //then
-      assert.ok(
-        screen.getByText(t('common.display.percentage', { value: 0.15 }), {
-          normalizer: getDefaultNormalizer({ trim: false, collapseWhitespace: false }),
-        }),
-      );
+      assert.ok(screen.getByText('15 %'));
 
       assert.ok(
         screen.getByText(
