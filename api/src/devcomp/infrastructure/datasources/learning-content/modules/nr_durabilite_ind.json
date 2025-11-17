@@ -955,59 +955,62 @@
               "type": "element",
               "element": {
                 "id": "787a7af6-dc3f-4eff-a8cb-e8616d5d776c",
-                "type": "qcu-declarative",
+                "type": "custom",
                 "instruction": "<p>Quel âge a votre smartphone&nbsp;?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>0 an</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Votre smartphone est tout récent. Sa durée de vie technique peut atteindre <strong>5 à 10 ans</strong> si vous l’entretenez. En moyenne, les utilisateurs des pays de l’OCDE remplacent leur téléphone au bout de <strong>2 à 3 ans</strong>.</p>"
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "0 an",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Votre smartphone est tout récent. Sa durée de vie technique peut atteindre 5 à 10 ans si vous l’entretenez. En moyenne, les utilisateurs des pays de l’OCDE remplacent leur téléphone au bout de 2 à 3 ans."
+                      }
+                    },
+                    {
+                      "label": "1 an",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Votre téléphone est encore très loin de ses limites techniques. Un smartphone moderne peut fonctionner 5 à 10 ans, alors que la moyenne de remplacement se situe entre 2 et 3 ans."
+                      }
+                    },
+                    {
+                      "label": "2 ans",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous êtes dans la moyenne exacte de remplacement observée dans les pays de l’OCDE. Pourtant, un téléphone peut souvent durer bien plus de 5 ans s’il est entretenu ou réparé."
+                      }
+                    },
+                    {
+                      "label": "3 ans",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous arrivez à l’âge où beaucoup d’utilisateurs changent leur smartphone. Toutefois, la durée de vie technique d’un appareil reste généralement supérieure à 5 ans, voire davantage en cas de réparation."
+                      }
+                    },
+                    {
+                      "label": "4 ans",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Votre téléphone approche de l’âge où certaines limites peuvent apparaître (batterie, performances). Mais un smartphone peut encore fonctionner plus de 5 ans avec une batterie neuve ou une petite réparation."
+                      }
+                    },
+                    {
+                      "label": "5 ans",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous dépassez déjà la durée d’usage moyenne de 2 à 3 ans observée dans les pays de l’OCDE. Vous exploitez bien les capacités techniques de votre appareil, qui peut encore fonctionner avec des réparations simples."
+                      }
+                    },
+                    {
+                      "label": "Plus de 5 ans",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Votre smartphone dépasse largement la durée d’usage moyenne (2 à 3 ans). À partir de 5 ans, des limites peuvent apparaître, mais utiliser un appareil aussi longtemps est un excellent geste de sobriété numérique."
+                      }
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>1 an</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Votre téléphone est encore très loin de ses limites techniques. Un smartphone moderne peut fonctionner <strong>5 à 10 ans</strong>, alors que la moyenne de remplacement se situe entre <strong>2 et 3 ans</strong>.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>2 ans</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Vous êtes dans la <strong>moyenne exacte</strong> de remplacement observée dans les pays de l’OCDE. Pourtant, un téléphone peut souvent durer <strong>bien plus de 5 ans</strong> s’il est entretenu ou réparé.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>3 ans</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Vous arrivez à l’âge où beaucoup d’utilisateurs changent leur smartphone. Toutefois, la durée de vie technique d’un appareil reste généralement <strong>supérieure à 5 ans</strong>, voire davantage en cas de réparation.</p>"
-                    }
-                  },
-                  {
-                    "id": "5",
-                    "content": "<p>4 ans</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Votre téléphone approche de l’âge où certaines limites peuvent apparaître (batterie, performances). Mais un smartphone peut encore fonctionner <strong>plus de 5 ans</strong> avec une batterie neuve ou une petite réparation.</p>"
-                    }
-                  },
-                  {
-                    "id": "6",
-                    "content": "<p>5 ans</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Vous dépassez déjà la durée d’usage moyenne de <strong>2 à 3 ans</strong> observée dans les pays de l’OCDE. Vous exploitez bien les capacités techniques de votre appareil, qui peut encore fonctionner avec des réparations simples.</p>"
-                    }
-                  },
-                  {
-                    "id": "7",
-                    "content": "<p>Plus de 5 ans</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Votre smartphone dépasse largement la durée d’usage moyenne observée (2 à 3 ans). À partir de 5 ans, les limites logicielles ou matérielles peuvent apparaître, mais utiliser un appareil aussi longtemps est un <strong>excellent geste de sobriété numérique</strong>.</p>"
-                    }
-                  }
-                ]
+                  ]
+                }
               }
             },
             {
