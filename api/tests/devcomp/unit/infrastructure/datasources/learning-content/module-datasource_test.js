@@ -43,6 +43,34 @@ describe('Unit | Infrastructure | Datasources | Learning Content | ModuleDatasou
     });
   });
 
+  describe('#getByShortId', function () {
+    describe('when a module with the given shortId exist', function () {
+      it('should return a module', async function () {
+        // Given
+        const bacASableShortId = '6a68bf32';
+
+        // When
+        const module = await moduleDatasource.getByShortId(bacASableShortId);
+
+        // Then
+        expect(module).to.exist;
+      });
+    });
+
+    describe('when a module with the given shortId does not exist', function () {
+      it('should throw an ModuleDoesNotExistError', async function () {
+        // given
+        const id = 'inexistent-shortId';
+
+        // when
+        const error = await catchErr(moduleDatasource.getByShortId)(id);
+
+        // then
+        expect(error).to.be.instanceOf(ModuleDoesNotExistError);
+      });
+    });
+  });
+
   describe('#getById', function () {
     describe('when exists', function () {
       it('should return something', async function () {

@@ -29,6 +29,15 @@ const moduleDatasource = {
 
     return foundModule;
   },
+  getByShortId: async (shortId) => {
+    const foundModule = referential.modules.find((module) => module.shortId === shortId);
+
+    if (foundModule === undefined) {
+      throw new ModuleDoesNotExistError();
+    }
+
+    return foundModule;
+  },
   getBySlug: async (slug) => {
     const foundModule = referential.modules.find((module) => module.slug === slug);
 
