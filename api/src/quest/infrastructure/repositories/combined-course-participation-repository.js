@@ -154,24 +154,12 @@ export const update = async function ({ id, ...updateFields }) {
 
 /**
  * @param {[number]} combinedCourseIds
- * @param {number} page
  * @returns {Promise<[CombinedCourseParticipation]>}
  */
-export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
+export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
   const knexConnection = DomainTransaction.getConnection();
-  const queryBuilder = knexConnection('organization_learner_participations')
-    .select(
-      'organization_learner_participations.id',
-      'view-active-organization-learners.firstName',
-      'view-active-organization-learners.lastName',
-      'view-active-organization-learners.division',
-      'view-active-organization-learners.group',
-      'organization_learner_participations.status',
-      'organizationLearnerId',
-      'organization_learner_participations.createdAt',
-      'organization_learner_participations.updatedAt',
-      'organization_learner_participations.referenceId',
-    )
+  const results = await knexConnection('organization_learner_participations')
+    .select('organization_learner_participations.status', 'organization_learner_participations.referenceId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
@@ -181,14 +169,7 @@ export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
       'organization_learner_participations.referenceId',
       combinedCourseIds.map((combinedCourseId) => combinedCourseId.toString()),
     )
-    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE)
-    .orderBy([
-      { column: 'lastName', order: 'asc' },
-      { column: 'firstName', order: 'asc' },
-    ]);
-  const { results, pagination } = await fetchPage({ queryBuilder, paginationParams: page });
-  return {
-    combinedCourseParticipations: results.map((participation) => new CombinedCourseParticipation(participation)),
-    meta: { ...pagination },
-  };
+    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE);
+
+  return results.map((participation) => new CombinedCourseParticipation(participation));
 };
