@@ -350,6 +350,48 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
+  describe('GET /api/combined-courses/{combinedCourseId}/participations/{participationId}', function () {
+    context('when user has membership in the combined course organization', function () {
+      it('should return the participation detail page', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+          name: 'Mon parcours combiné',
+          code: 'PARCOURS123',
+          organizationId,
+          successRequirements: [],
+        });
+        const learner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: 'Paul',
+          lastName: 'Azerty',
+        });
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+        const participationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
+          organizationLearnerId: learner.id,
+          combinedCourseId,
+        }).id;
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-courses/${combinedCourseId}/participations/${participationId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data.type).to.equal('combined-course-participation-details');
+      });
+    });
+  });
+
   describe('GET /api/organizations/{organizationId}/combined-courses', function () {
     context('when user belongs to the organization', function () {
       it('should return the list of combined courses for the organization', async function () {

@@ -78,8 +78,156 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
+  describe('#findById', function () {
+    it('should return combined course participation for given participationId', async function () {
+      // given
+      const { id: organizationLearnerId, firstName, lastName } = databaseBuilder.factory.buildOrganizationLearner();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.findById({ participationId });
+
+      // then
+      expect(result.id).equal(participationId);
+      expect(result.firstName).equal(firstName);
+      expect(result.lastName).equal(lastName);
+    });
+
+    it('should return null when participation does not have combined course type', async function () {
+      // given
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        type: OrganizationLearnerParticipationTypes.PASSAGE,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.findById({ participationId });
+
+      // then
+      expect(result).null;
+    });
+
+    it('should return null when organization learner is deleted', async function () {
+      // given
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+        deletedAt: new Date(),
+        deletedBy: userId,
+      });
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.findById({ participationId });
+
+      // then
+      expect(result).null;
+    });
+
+    it('should return null when participation has been deleted', async function () {
+      // given
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        deletedAt: new Date(),
+        deletedBy: userId,
+      });
+
+      // when
+      const result = await combinedCourseParticipationRepository.findById({ participationId });
+
+      // then
+      expect(result).null;
+    });
+
+    it('should return null when participation does not exist', async function () {
+      // when
+      const result = await combinedCourseParticipationRepository.findById({ participationId: 12 });
+
+      // then
+      expect(result).null;
+    });
+  });
+
+  describe('#isParticipationOnCombinedCourse', function () {
+    it('should return true if participation is on combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).true;
+    });
+
+    it('should return false if participation is not on combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId: '123',
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).false;
+    });
+
+    it('should return false if participation is not of COMBINED_COURSE type', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.PASSAGE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).false;
+    });
+  });
+
   describe('#getByUserId', function () {
-    it('should return quest participation for given user and quest', async function () {
+    it('should return combinedCourse participation for given user and combinedCourse ids', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const {
@@ -100,7 +248,6 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       const result = await combinedCourseParticipationRepository.getByUserId({ userId, combinedCourseId });
 
       // then
-      expect(result.id).to.be.finite;
       expect(result.combinedCourseId).to.deep.equal(combinedCourseId);
       expect(result.organizationLearnerId).to.deep.equal(organizationLearnerId);
       expect(result.firstName).equal(firstName);
@@ -108,7 +255,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(result.status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
     });
 
-    it('should throw NotFound error when quest participation does not exist for given user and quest', async function () {
+    it('should throw NotFound error when combinedCourse participation does not exist for given user and combinedCourse ids', async function () {
       // given
       const userId = 1;
       const combinedCourseId = 2;
@@ -192,7 +339,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await databaseBuilder.commit();
     });
 
-    it('should return user ids only for given quest id', async function () {
+    it('should return user ids only for given combinedCourse id', async function () {
       // when
       const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
         combinedCourseId,
@@ -322,7 +469,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
   });
 
   describe('#findByCombinedCourseIds', function () {
-    it('should return a paginated list of participations for given quest IDs', async function () {
+    it('should return a paginated list of participations for given combinedCourse ids', async function () {
       // given
       const { id: combinedCourseId1, organizationId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI1',
@@ -413,7 +560,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       ]);
     });
 
-    it('should return empty array when no participations match the quest IDs', async function () {
+    it('should return empty array when no participations match the combinedCourse ids', async function () {
       // given
       const { id: combinedCourseId1 } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
       const { id: combinedCourseId2 } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI2' });
@@ -430,7 +577,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(combinedCourseParticipations).to.deep.equal([]);
     });
 
-    it('should return the second page of participations for a given questId', async function () {
+    it('should return the second page of participations for a given combinedCourse id', async function () {
       // given
       const { id: combinedCourseId1, organizationId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI1',

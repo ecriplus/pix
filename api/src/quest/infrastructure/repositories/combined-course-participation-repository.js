@@ -1,3 +1,4 @@
+import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { filterByFullName } from '../../../shared/infrastructure/utils/filter-utils.js';
@@ -30,6 +31,47 @@ export const save = async function ({ organizationLearnerId, combinedCourseId })
       referenceId: combinedCourseId,
     })
     .returning('id');
+};
+
+/**
+ * @param {number} participationId
+ * @returns {Promise<CombinedCourseParticipation | null>}
+ */
+export const findById = async function ({ participationId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const combinedCourseParticipation = await knexConnection('organization_learner_participations')
+    .select('organization_learner_participations.id', 'firstName', 'lastName')
+    .join(
+      'view-active-organization-learners',
+      'view-active-organization-learners.id',
+      'organization_learner_participations.organizationLearnerId',
+    )
+    .where({
+      'organization_learner_participations.id': participationId,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .whereNull('organization_learner_participations.deletedAt')
+    .first();
+  if (!combinedCourseParticipation) return null;
+  return new CombinedCourseParticipation(combinedCourseParticipation);
+};
+
+/**
+ * @param {number} combinedCourseId
+ * @param {number} participationId
+ * @returns {Promise<boolean>}
+ */
+export const isParticipationOnCombinedCourse = async function ({ combinedCourseId, participationId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const { count } = await knexConnection('organization_learner_participations')
+    .select(knex.raw('count(1)'))
+    .where({
+      referenceId: combinedCourseId.toString(),
+      'organization_learner_participations.id': participationId,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .first();
+  return Boolean(count);
 };
 
 export const getByUserId = async function ({ userId, combinedCourseId }) {

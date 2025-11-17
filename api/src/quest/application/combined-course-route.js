@@ -77,7 +77,7 @@ const register = async function (server) {
           }),
         },
         notes: [
-          "- Récupération du parcours combiné dont l'id de la quête est passé en paramètre," +
+          "- Récupération du parcours combiné dont l'id est passé en paramètre," +
             " Nécessite que l'utilisateur soit membre de l'organisation propriétaire du parcours combiné",
         ],
         tags: ['api', 'combined-course', 'orga'],
@@ -99,7 +99,7 @@ const register = async function (server) {
           }),
         },
         notes: [
-          "- Récupération des statistiques de participations d'un parcours combiné dont l'id de la quête est passé en paramètre,\n" +
+          "- Récupération des statistiques de participations du parcours combiné dont l'id est passé en paramètre,\n" +
             " Nécessite que l'utilisateur soit membre de l'organisation propriétaire du parcours combiné",
         ],
         tags: ['api', 'combined-course', 'orga'],
@@ -138,7 +138,33 @@ const register = async function (server) {
           }),
         },
         notes: [
-          "- Récupération des participations d'un parcours combiné dont l'id de la quête est passé en paramètre,\n" +
+          "- Récupération des participations du parcours combiné dont l'id est passé en paramètre,\n" +
+            " Nécessite que l'utilisateur soit membre de l'organisation propriétaire du parcours combiné",
+        ],
+        tags: ['api', 'combined-course', 'orga'],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/combined-courses/{combinedCourseId}/participations/{participationId}',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserCanManageCombinedCourse,
+          },
+          {
+            method: securityPreHandlers.checkParticipationBelongsToCombinedCourse,
+          },
+        ],
+        handler: combinedCourseController.getCombinedCourseParticipationById,
+        validate: {
+          params: Joi.object({
+            combinedCourseId: identifiersType.combinedCourseId,
+            participationId: identifiersType.participationId,
+          }),
+        },
+        notes: [
+          "- Récupération de la participation dont l'id est passée en paramètre,\n" +
             " Nécessite que l'utilisateur soit membre de l'organisation propriétaire du parcours combiné",
         ],
         tags: ['api', 'combined-course', 'orga'],

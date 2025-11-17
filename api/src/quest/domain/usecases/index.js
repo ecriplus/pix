@@ -47,6 +47,7 @@ import { findCombinedCourseByModuleIdAndUserId } from './find-combined-course-by
 import { findCombinedCourseParticipations } from './find-combined-course-participations.js';
 import { getCombinedCourseByCode } from './get-combined-course-by-code.js';
 import getCombinedCourseById from './get-combined-course-by-id.js';
+import { getCombinedCourseParticipationById } from './get-combined-course-participation-by-id.js';
 import { getCombinedCourseStatistics } from './get-combined-course-statistics.js';
 import getCombinedCoursesByOrganizationId from './get-combined-courses-by-organization-id.js';
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
@@ -63,6 +64,7 @@ const usecasesWithoutInjectedDependencies = {
   getCombinedCourseByCode,
   getCombinedCourseStatistics,
   getCombinedCourseById,
+  getCombinedCourseParticipationById,
   findCombinedCourseParticipations,
   getCombinedCoursesByOrganizationId,
   getQuestResultsForCampaignParticipation,

@@ -8,6 +8,7 @@ import { Organization } from '../../organizational-entities/domain/models/Organi
 import * as checkCampaignBelongsToCombinedCourseUsecase from '../../prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import * as checkCampaignParticipationBelongsToUserUsecase from '../../prescription/campaign/application/usecases/checkCampaignParticipationBelongsToUser.js';
 import * as checkAuthorizationToAccessCombinedCourseUsecase from '../../quest/application/usecases/check-authorization-to-access-combined-course.js';
+import * as checkParticipationBelongsToCombinedCourseUsecase from '../../quest/application/usecases/check-participation-belongs-to-combined-course.js';
 import * as checkUserCanManageCombinedCourseUsecase from '../../quest/application/usecases/check-user-can-manage-combined-course.js';
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
 import { ForbiddenAccess, NotFoundError } from '../domain/errors.js';
@@ -712,6 +713,30 @@ async function checkUserCanManageCombinedCourse(
   }
 }
 
+async function checkParticipationBelongsToCombinedCourse(
+  request,
+  h,
+  dependencies = { checkParticipationBelongsToCombinedCourseUsecase },
+) {
+  const { participationId, combinedCourseId } = request.params;
+  try {
+    const isParticipationRelatedToCombinedCourse =
+      await dependencies.checkParticipationBelongsToCombinedCourseUsecase.execute({
+        participationId,
+        combinedCourseId,
+      });
+    if (isParticipationRelatedToCombinedCourse) {
+      return h.response(true);
+    }
+    return _replyForbiddenError(h);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      return _replyForbiddenError(h);
+    }
+    throw error;
+  }
+}
+
 function hasAtLeastOneAccessOf(securityChecks) {
   return async (request, h) => {
     const responses = await PromiseUtils.map(securityChecks, (securityCheck) => securityCheck(request, h));
@@ -960,6 +985,7 @@ const securityPreHandlers = {
   checkUserOwnsCertificationCourse,
   makeCheckOrganizationHasFeature,
   checkOrganizationAccess,
+  checkParticipationBelongsToCombinedCourse,
 };
 
 export { securityPreHandlers };

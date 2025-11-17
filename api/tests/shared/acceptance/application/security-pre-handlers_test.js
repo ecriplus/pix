@@ -1,3 +1,7 @@
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
@@ -666,6 +670,68 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       });
 
       await databaseBuilder.commit();
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(response.result).to.deep.equal(jsonApiError403);
+    });
+  });
+
+  describe('#checkParticipationBelongsToCombinedCourse', function () {
+    beforeEach(async function () {
+      server.route({
+        method: 'GET',
+        path: '/api/fake-cc/{combinedCourseId}/fake-p/{participationId}',
+        handler: (_, h) => h.response({}).code(200),
+        config: {
+          auth: false,
+          pre: [
+            {
+              method: securityPreHandlers.checkParticipationBelongsToCombinedCourse,
+            },
+          ],
+        },
+      });
+    });
+
+    it('should return true if participation belongs to combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/fake-cc/${combinedCourseId}/fake-p/${participationId}`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('should return an error if participation does not belong to combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/fake-cc/${combinedCourseId}/fake-p/${participationId}`,
+      };
+
       // when
       const response = await server.inject(options);
 
