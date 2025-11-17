@@ -197,6 +197,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
                 href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="training__logo-url-link"
               >
                 Voir la liste des logos éditeur
               </a>
