@@ -50,7 +50,12 @@ function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig'
   };
 }
 
-async function createMockedTestOidcProvider({ application, applicationTld }) {
+async function createMockedTestOidcProvider({
+  application,
+  applicationTld,
+  connectionMethodCode,
+  identityProvider = 'OIDC_EXAMPLE_NET',
+}) {
   oidcAuthenticationServiceRegistry.testOnly_reset();
 
   const openIdClientMock = createOpenIdClientMock(openIdConfigurationResponse);
@@ -71,11 +76,12 @@ async function createMockedTestOidcProvider({ application, applicationTld }) {
         applicationTld,
         clientId,
         clientSecret: 'secret',
+        connectionMethodCode,
         enabled: true,
         enabledForPixAdmin: true,
         configKey: 'oidcExampleNet',
         shouldCloseSession: true,
-        identityProvider: 'OIDC_EXAMPLE_NET',
+        identityProvider,
         openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
         organizationName: 'OIDC Example',
         redirectUri,
