@@ -3,9 +3,11 @@
     "actions": {
       "add": "Ajouter",
       "archive": "Archiver",
+      "are-you-sure": "En cochant cette case vous affirmer avoir les droits d'effectuer cette action.",
       "cancel": "Annuler",
       "close": "Fermer",
       "confirm": "Confirmer",
+      "confirm-deletion": "Oui, je supprime",
       "confirm-title": "Merci de confirmer",
       "deactivate": "Désactiver",
       "download-template": "Télécharger le template",
@@ -538,6 +540,36 @@
         "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
     },
+    "organization-learner-information": {
+      "deletion-modal": {
+        "success-message": "l'utilisateur a bien été supprimé de l'organisation.",
+        "title": "Confirmer la suppression du prescrit",
+        "warning-message": "Vous êtes sur le point de supprimer {firstName} {lastName} de l'organisation {organizationName}. Cette action est irréversible."
+      },
+      "table": {
+        "actions": {
+          "delete": "Supprimer",
+          "dissociate": "Dissocier"
+        },
+        "active": {
+          "false": "Inscription désactivée",
+          "true": "Inscription activée"
+        },
+        "caption": "Liste des informations d'un prescrit sur les différentes organisations auxquels il appartient. Dans le cas d'une organisation avec import, il est possible de dissocier l'utilisateur via la colonne action.",
+        "columns": {
+          "actions": "Actions",
+          "active": "Actif",
+          "birthdate": "Date de naissance",
+          "createdAt": "Créé le",
+          "division-group": "Classe/Groupe",
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "organization": "Organisation",
+          "updatedAt": "Mise à jour le"
+        }
+      },
+      "title": "Informations prescrit"
+    },
     "organizations": {
       "all-tags": {
         "recently-used-tags": "Liste de tags récemment utilisés avec {tagName}"
@@ -729,11 +761,6 @@
       "list-items": {
         "table": {
           "caption": "Liste des utilisateurs. Contient le prénom, le nom, l'adresse e-mail et l'identifiant."
-        }
-      },
-      "organization-learner-information": {
-        "table": {
-          "caption": "Liste des informations d'un prescrit. Contient le prénom, le nom, la date de naissance, sa classe ou groupe, le nom de l'organisation auquel prescrit est rattaché, la date de création, la dernière date de mise à jour de ses informations, son état (actif ou inactif). Une action permet le dissocier le prescrit de l'organisation auquel il est rattaché.."
         }
       },
       "organizations": {

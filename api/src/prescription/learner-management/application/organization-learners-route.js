@@ -40,6 +40,37 @@ const register = async (server) => {
       },
     },
     {
+      method: 'DELETE',
+      path: '/api/admin/organizations/{organizationId}/organization-learners/{organizationLearnerId}',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkOrganizationLearnerBelongsToOrganization,
+            assign: 'organizationLearnerBelongsToOrganization',
+          },
+          {
+            method: securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            ]),
+            assign: 'hasAtLeastOneAccessOf',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+            organizationLearnerId: identifiersType.organizationLearnerId,
+          }),
+        },
+        handler: organizationLearnersController.deleteOrganizationLearnerFromAdmin,
+        notes: [
+          '- **This is a restricted endpoint to ADMIN_SUPPORT member from Administration back office**\n' +
+            '- it allows to delete an organization learner belonging to an organization',
+        ],
+        tags: ['api', 'admin', 'organization-learners'],
+      },
+    },
+    {
       method: 'PATCH',
       path: '/api/organizations/{organizationId}/organization-learners/{organizationLearnerId}',
       config: {

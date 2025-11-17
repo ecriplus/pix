@@ -5,6 +5,8 @@
       "type": "node",
       "request": "launch",
       "name": "api start",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
       "outputCapture": "std",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/api",
