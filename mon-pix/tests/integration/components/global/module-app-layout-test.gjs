@@ -10,80 +10,41 @@ module('Integration | Component | Global | Module App Layout', function (hooks) 
 
   module('navigation', function (hooks) {
     let store;
-    let featureToggles;
     let routerService;
 
     hooks.beforeEach(function () {
       store = this.owner.lookup('service:store');
-      featureToggles = this.owner.lookup('service:featureToggles');
       routerService = this.owner.lookup('service:router');
     });
     module('When route is ‘passage‘', function () {
       module('When module has multiple sections', function () {
-        module('when isModulixNavEnabled feature toggle is enabled', function () {
-          test('it should display a navbar', async function (assert) {
-            // given
-            const currentRoute = {
-              name: 'module.passage',
-              params: {},
-              parent: {
-                name: 'module',
-                params: {
-                  slug: 'mon-slug',
-                },
+        test('it should display a navbar', async function (assert) {
+          // given
+          const currentRoute = {
+            name: 'module.passage',
+            params: {},
+            parent: {
+              name: 'module',
+              params: {
+                slug: 'mon-slug',
               },
-            };
-            sinon.stub(routerService, 'currentRoute').value(currentRoute);
+            },
+          };
+          sinon.stub(routerService, 'currentRoute').value(currentRoute);
 
-            sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: true });
+          const section = store.createRecord('section', { type: 'question-yourself', grains: [] });
+          const anotherSection = store.createRecord('section', { type: 'explore-to-understand', grains: [] });
 
-            const section = store.createRecord('section', { type: 'question-yourself', grains: [] });
-            const anotherSection = store.createRecord('section', { type: 'explore-to-understand', grains: [] });
-
-            store.createRecord('module', {
-              slug: 'mon-slug',
-              sections: [section, anotherSection],
-            });
-
-            // when
-            const screen = await render(<template><ModulixAppLayout @isModulixPassage={{true}} /></template>);
-
-            // then
-            assert.dom(screen.getByRole('navigation')).exists();
+          store.createRecord('module', {
+            slug: 'mon-slug',
+            sections: [section, anotherSection],
           });
-        });
 
-        module('when isModulixNavEnabled feature toggle is disabled', function () {
-          test('it should not display a navbar', async function (assert) {
-            // given
-            const currentRoute = {
-              name: 'module.passage',
-              params: {},
-              parent: {
-                name: 'module',
-                params: {
-                  slug: 'mon-slug',
-                },
-              },
-            };
-            sinon.stub(routerService, 'currentRoute').value(currentRoute);
+          // when
+          const screen = await render(<template><ModulixAppLayout @isModulixPassage={{true}} /></template>);
 
-            sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: false });
-
-            const section = store.createRecord('section', { type: 'question-yourself', grains: [] });
-            const anotherSection = store.createRecord('section', { type: 'explore-to-understand', grains: [] });
-
-            store.createRecord('module', {
-              slug: 'mon-slug',
-              sections: [section, anotherSection],
-            });
-
-            // when
-            const screen = await render(<template><ModulixAppLayout @isModulixPassage={{true}} /></template>);
-
-            // then
-            assert.dom(screen.queryByRole('navigation')).doesNotExist();
-          });
+          // then
+          assert.dom(screen.getByRole('navigation')).exists();
         });
       });
 
@@ -101,8 +62,6 @@ module('Integration | Component | Global | Module App Layout', function (hooks) 
             },
           };
           sinon.stub(routerService, 'currentRoute').value(currentRoute);
-
-          sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: true });
 
           const section = store.createRecord('section', { type: 'blank', grains: [] });
 
@@ -134,8 +93,6 @@ module('Integration | Component | Global | Module App Layout', function (hooks) 
           },
         };
         sinon.stub(routerService, 'currentRoute').value(currentRoute);
-
-        sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: true });
 
         const section = store.createRecord('section', { type: 'question-yourself', grains: [] });
         const anotherSection = store.createRecord('section', { type: 'explore-to-understand', grains: [] });
