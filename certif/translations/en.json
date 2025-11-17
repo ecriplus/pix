@@ -700,8 +700,7 @@
           "invigilator-kit": {
             "extra-information": "Download invigilator’s kit",
             "label": "Invigilator’s kit"
-          },
-          "label": "Downloads:"
+          }
         },
         "page-title": "Details | Session {sessionId} | Pix Certif",
         "panel-clea": {

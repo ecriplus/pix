@@ -10,7 +10,6 @@ export default class ControlsLinks extends Component {
 
   <template>
     <div class='session-details__controls-links'>
-      <span class='session-details__controls-title'>{{t 'pages.sessions.detail.downloads.label'}}</span>
       <PixButtonLink
         href='{{@urlToDownloadSessionIssueReportSheet}}'
         @variant='secondary'
