@@ -44,7 +44,7 @@ import TimedChallengeInstructions from 'mon-pix/components/timed-challenge-instr
         />
       {{else}}
         <AssessmentBanner
-          @title={{@model.assessment.title}}
+          @assessment={{@model.assessment}}
           @displayHomeLink={{@controller.displayHomeLink}}
           @isTextToSpeechActivated={{@controller.isTextToSpeechActivated}}
           @toggleTextToSpeech={{@controller.toggleTextToSpeech}}

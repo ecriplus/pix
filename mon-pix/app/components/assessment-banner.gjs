@@ -15,11 +15,11 @@ export default class AssessmentBanner extends Component {
     <div class="assessment-banner">
       <header class="assessment-banner-container" role="banner">
         <img class="assessment-banner__pix-logo" src="/images/pix-logo-blanc.svg" alt="{{t 'common.pix'}}" />
-        {{#if @title}}
+        {{#if this.title}}
           <div class="assessment-banner__splitter"></div>
           <h1 class="assessment-banner__title">
             <span class="sr-only"> {{t "pages.assessment-banner.title"}} </span>
-            {{@title}}
+            {{this.title}}
           </h1>
         {{/if}}
         <div class="assessment-banner__actions">
@@ -54,12 +54,13 @@ export default class AssessmentBanner extends Component {
                   <PixButton @variant="secondary" @triggerAction={{this.toggleClosingModal}}>
                     {{t "common.actions.stay"}}
                   </PixButton>
-                  <PixButtonLink
-                    @route="authenticated"
+                  <ButtonLinkWithHistory
+                    @redirectionUrl={{this.redirectionUrl}}
+                    @defaultRoute="authenticated"
                     aria-label={{t "pages.assessment-banner.modal.actions.quit.extra-information"}}
                   >
                     {{t "common.actions.quit"}}
-                  </PixButtonLink>
+                  </ButtonLinkWithHistory>
                 </div>
               </:footer>
             </PixModal>
@@ -70,8 +71,56 @@ export default class AssessmentBanner extends Component {
   </template>
   @service intl;
   @service featureToggles;
+  @service currentUser;
+  @service store;
+  @service router;
 
   @tracked showClosingModal = false;
+  @tracked campaign = null;
+  @tracked campaignParticipation = null;
+
+  constructor(...args) {
+    super(...args);
+    this.args?.assessment?.campaign.then(async (campaign) => {
+      this.campaign = campaign;
+      if (this.campaign?.customResultPageButtonUrl && !this.isRedirectionUrlInternal) {
+        this.campaignParticipation = await this.store.queryRecord('campaign-participation', {
+          campaignId: campaign.id,
+          userId: this.currentUser.user.id,
+        });
+      }
+    });
+  }
+
+  get isRedirectionUrlInternal() {
+    if (this.campaign.customResultPageButtonUrl.startsWith('http')) {
+      return false;
+    }
+    try {
+      this.router.recognize(this.campaign.customResultPageButtonUrl);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  get redirectionUrl() {
+    if (!this.campaign || !this.campaign.customResultPageButtonUrl) return null;
+
+    if (this.isRedirectionUrlInternal) {
+      return this.campaign.customResultPageButtonUrl;
+    } else {
+      const params = {};
+
+      params.externalId = this.campaignParticipation?.participantExternalId ?? undefined;
+
+      return buildUrl(this.campaign.customResultPageButtonUrl, params);
+    }
+  }
+
+  get title() {
+    return this.args?.assessment?.title;
+  }
 
   get textToSpeechTooltipText() {
     return this.args.isTextToSpeechActivated
@@ -90,4 +139,55 @@ export default class AssessmentBanner extends Component {
   @action toggleClosingModal() {
     this.showClosingModal = !this.showClosingModal;
   }
+}
+
+class ButtonLinkWithHistory extends Component {
+  @service router;
+
+  @action
+  transitionToRedirectionUrl() {
+    this.router.transitionTo(this.args.redirectionUrl);
+  }
+
+  get isRedirectionUrlInternal() {
+    if (this.args.redirectionUrl.startsWith('http')) {
+      return false;
+    }
+    try {
+      return Boolean(this.router.recognize(this.args.redirectionUrl));
+    } catch {
+      return false;
+    }
+  }
+
+  <template>
+    {{#if @redirectionUrl}}
+      {{#if this.isRedirectionUrlInternal}}
+        <PixButton @triggerAction={{this.transitionToRedirectionUrl}} ...attributes>
+          {{yield}}
+        </PixButton>
+      {{else}}
+        <PixButtonLink @href={{@redirectionUrl}} ...attributes>
+          {{yield}}
+        </PixButtonLink>
+      {{/if}}
+    {{else}}
+      <PixButtonLink @route={{@defaultRoute}} ...attributes>
+        {{yield}}
+      </PixButtonLink>
+    {{/if}}
+  </template>
+}
+
+function buildUrl(customUrl, params) {
+  const url = new URL(customUrl);
+  const urlParams = new URLSearchParams(url.search);
+
+  for (const key in params) {
+    if (params[key] !== undefined) {
+      urlParams.set(key, params[key]);
+    }
+  }
+  url.search = urlParams.toString();
+  return url.toString();
 }

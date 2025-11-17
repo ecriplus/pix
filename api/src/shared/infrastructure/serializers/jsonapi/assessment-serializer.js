@@ -1,4 +1,5 @@
 import jsonapiSerializer from 'jsonapi-serializer';
+import isEmpty from 'lodash/isEmpty.js';
 
 import { DomainError } from '../../../domain/errors.js';
 import { Assessment } from '../../../domain/models/Assessment.js';
@@ -12,10 +13,11 @@ const typesMapping = {
   course: 'courses',
   certificationCourse: 'certification-courses',
   progression: 'progressions',
+  campaign: 'campaigns',
 };
 
 const serialize = function (assessments) {
-  return new Serializer('assessment', {
+  const serializer = new Serializer('assessment', {
     attributes: [
       'title',
       'type',
@@ -37,6 +39,7 @@ const serialize = function (assessments) {
       'showQuestionCounter',
       'orderedChallengeIdsAnswered',
       'nextChallenge',
+      'campaign',
     ],
     typeForAttribute: (attribute) => typesMapping[attribute],
     answers: {
@@ -44,6 +47,19 @@ const serialize = function (assessments) {
       relationshipLinks: {
         related(record) {
           return `/api/answers?assessmentId=${record.id}`;
+        },
+      },
+    },
+    campaign: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: {
+        related: function (record) {
+          if (record.type !== 'CAMPAIGN') {
+            return null;
+          }
+          return `/api/campaigns?filter[code]=${record.codeCampaign}`;
         },
       },
     },
@@ -76,7 +92,15 @@ const serialize = function (assessments) {
         },
       },
     },
-  }).serialize(assessments);
+  });
+
+  const result = serializer.serialize(assessments);
+
+  if (isEmpty(result.data.relationships.campaign)) {
+    delete result.data.relationships.campaign;
+  }
+
+  return result;
 };
 
 const deserialize = function (json) {

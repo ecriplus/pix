@@ -11,7 +11,6 @@ import TrainingCard from '../../../../training/card';
 export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
   @service pixMetrics;
-  @service campaignParticipationResult;
   @service store;
 
   @tracked isShareResultsLoading = false;

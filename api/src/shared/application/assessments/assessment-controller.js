@@ -30,6 +30,7 @@ const getAssessmentWithNextChallenge = async function (request) {
 
     return sharedUsecases.updateAssessmentWithNextChallenge({ assessment: assessmentWithoutChallenge, userId, locale });
   });
+
   return assessmentSerializer.serialize(assessment.toDto());
 };
 

@@ -210,6 +210,11 @@ describe('Acceptance | API | assessment-controller-get', function () {
                 related: `/api/answers?assessmentId=${assessmentId}`,
               },
             },
+            campaign: {
+              links: {
+                related: `/api/campaigns?filter[code]=${campaign.code}`,
+              },
+            },
             progression: {
               data: {
                 id: `progression-${assessmentId}`,
