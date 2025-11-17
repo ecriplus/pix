@@ -578,7 +578,7 @@
       "errors": {
         "existing-participation": "You cannot take this customised test.",
         "existing-participation-info": "Please contact your teacher so that they can delete your previous participation in Pix Orga.",
-        "existing-participation-user-info": "There is already a participation associated with the name ",
+        "existing-participation-user-info": "There is already a participation associated with the name {lastName} {firstName}",
         "no-longer-accessible": "Oops, the requested page is not available.",
         "not-accessible": "Oops, the requested page is not available."
       }
