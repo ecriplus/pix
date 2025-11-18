@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/les-ia-consomment/picto_moduleIA_conso.svg",
-    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux et des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
+    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, des ordinateurs très puissants, des réseaux et des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -57,7 +57,7 @@
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
-                      "content": "Sur ton vieux smartphone ? Et ça fonctionne correctement ? 😅"
+                      "content": "C’est bluffant hein ? Même ton vieux smartphone peut l’utiliser ! 😅"
                     },
                     {
                       "userName": "Enzo",
@@ -67,7 +67,7 @@
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
-                      "content": "Ou alors… Les réponses ne viennent pas de ton téléphone ? 🤔"
+                      "content": "🤦‍♀️C’est parce que c’est pas ton téléphone qui travaille !"
                     }
                   ]
                 }
@@ -106,7 +106,7 @@
               "element": {
                 "id": "926790dc-f2f3-43bf-a6d4-d20f3b39c5cb",
                 "type": "text",
-                "content": "<p> Découvrez <strong>le trajet d‘une demande</strong> à un logiciel d‘IA générative.</p>"
+                "content": "<p> Découvrez <strong>le trajet d‘une demande</strong> à un logiciel d‘IA générative en ligne.</p>"
               }
             },
             {
@@ -120,7 +120,7 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Enzo écrit et envoie sa demande au logiciel d‘IA générative.",
+                      "title": "Enzo écrit et envoie sa demande au logiciel d‘IA générative en ligne.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
@@ -162,12 +162,12 @@
                       }
                     },
                     {
-                      "title": "La demande d‘Enzo parvient à un supercalculateur.",
+                      "title": "La demande d’Enzo parvient à un centre de données.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape4.png",
-                        "alt": "La demande d‘Enzo parvient à un supercalculateur."
+                        "alt": "La demande d’Enzo parvient à un centre de données."
                       },
                       "license": {
                         "name": "",
@@ -176,12 +176,26 @@
                       }
                     },
                     {
-                      "title": "Le supercalculateur calcule la réponse à apporter.",
+                      "title": "La demande est envoyée au serveur de l’IA générative. ",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape5.png",
-                        "alt": "Le supercalculateur calcule la réponse à apporter."
+                        "alt": "La demande est envoyée au serveur de l’IA générative. "
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "l’IA générative calcule la réponse à apporter.",
+                      "description": "",
+                      "displayWidth": 600,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape5-v2.png",
+                        "alt": "l’IA générative calcule la réponse à apporter."
                       },
                       "license": {
                         "name": "",
@@ -264,28 +278,28 @@
                     "id": "1",
                     "content": "<p>Dans notre appareil personnel</p>",
                     "feedback": {
-                      "diagnosis": "<p>En fait, non.</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, mais par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>En fait, non.</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Dans un supercalculateur</p>",
+                    "content": "<p>Dans un ordinateur très puissant</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet !</p><p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>En effet !</p><p>La réponse est <strong>calculée </strong>par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Sur internet</p>",
                     "feedback": {
-                      "diagnosis": "<p>En fait, non.</p><p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur </strong>accessible via <strong>internet</strong>.<br></p>"
+                      "diagnosis": "<p>En fait, non.</p><p>La réponse est <strong>calculée </strong>par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur </strong>accessible via <strong>internet</strong>.<br></p>"
+                      "diagnosis": "<p>La réponse est <strong>calculée </strong>par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
                     }
                   }
                 ],
@@ -304,7 +318,7 @@
               "element": {
                 "id": "140817f0-531a-44a6-83bb-2a7b094848c8",
                 "type": "text",
-                "content": "<p>Les réponses créées par un logiciel d’IA générative sont <strong>calculées</strong> dans de puissants ordinateurs, <strong>des supercalculateurs</strong>. Ils sont parfois <strong>situés à l’autre bout du monde, et accessibles via internet</strong>.</p>"
+                "content": "<p>Les réponses créées par un logiciel d’IA générative sont <strong>calculées</strong> dans des <strong>ordinateurs très puissants</strong>. Ils sont parfois <strong>situés à l’autre bout du monde, et accessibles via internet</strong>.</p>"
               }
             }
           ]
@@ -312,7 +326,7 @@
         {
           "id": "fff6aed9-7c64-4f1a-933f-0640c9ff6c1b",
           "type": "transition",
-          "title": "Discussion fonctionnement supercalculateur",
+          "title": "Discussion fonctionnement centre de données",
           "components": [
             {
               "type": "element",
@@ -342,7 +356,7 @@
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
-                      "content": "Mais maintenant, je suis curieux : comment fait le supercalculateur pour créer les réponses ? 🤔"
+                      "content": "Mais maintenant, je suis curieux : comment fait le centre de données pour créer les réponses ? 🤔"
                     }
                   ]
                 }
@@ -353,14 +367,14 @@
         {
           "id": "c568c13b-5f8e-40a2-a934-bcf5e30e73ae",
           "type": "discovery",
-          "title": "Découverte traitement supercalculateur",
+          "title": "Découverte traitement centre de données",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "8ceec6c1-0391-4644-8bee-edf0be8c7038",
                 "type": "text",
-                "content": "<p>Découvrez <strong>comment le supercalculateur répond </strong>à la demande d’Enzo.</p>"
+                "content": "<p>Découvrez <strong>comment le centre de données répond </strong>à la demande d’Enzo.</p>"
               }
             },
             {
@@ -374,12 +388,12 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Une requête est reçue par le supercalculateur.",
+                      "title": "Une requête est reçue par le centre de données.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel1.png",
-                        "alt": "Une requête est reçue par le supercalculateur."
+                        "alt": "Une requête est reçue par le centre de données."
                       },
                       "license": {
                         "name": "",
@@ -388,12 +402,12 @@
                       }
                     },
                     {
-                      "title": "Elle est transmise à des serveurs (ordinateurs puissants) spécialisés pour l‘IA.",
+                      "title": "Elle est transmise à des ordinateurs très puissants spécialisés pour l‘IA.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel2.png",
-                        "alt": "Elle est transmise à des supercalculateurs (gros ordinateurs) spécialisés pour l‘IA."
+                        "alt": "Elle est transmise à des ordinateurs très puissants spécialisés pour l‘IA."
                       },
                       "license": {
                         "name": "",
@@ -402,12 +416,12 @@
                       }
                     },
                     {
-                      "title": "Les serveurs calculent la réponse. Ils consomment de l‘énergie.",
+                      "title": "Les ordinateurs calculent la réponse. Ils consomment de l‘énergie.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel3.png",
-                        "alt": "Les serveurs calculent la réponse. Ils consomment de l‘énergie."
+                        "alt": "Les ordinateurs calculent la réponse. Ils consomment de l‘énergie."
                       },
                       "license": {
                         "name": "",
@@ -472,12 +486,12 @@
                       }
                     },
                     {
-                      "title": "La réponse sort du supercalculateur et est envoyée sur internet.",
+                      "title": "La réponse sort du centre de données et est envoyée sur internet.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel8.png",
-                        "alt": "La réponse sort du supercalculateur et est envoyée sur internet."
+                        "alt": "La réponse sort du centre de données et est envoyée sur internet."
                       },
                       "license": {
                         "name": "",
@@ -505,7 +519,7 @@
               "element": {
                 "id": "40de84e9-fc48-40c3-9d3f-499f6454d46a",
                 "type": "text",
-                "content": "<p>Nous savons désormais que répondre à une requête demande de<strong> nombreux calculs</strong> <strong>sur des ordinateurs puissants</strong>, des supercalculateurs. Cela consomme<strong> beaucoup</strong> <strong>d’électricité </strong>et <strong>d’eau.</strong> </p><p>🤔Et si personne ne fait de demande ?</p><p>Les <strong>machines</strong> restent <strong>allumées en permanence</strong> et elles continuent à <strong>consommer de l’énergie</strong>.⚡&nbsp;</p><br>"
+                "content": "<p>Nous savons désormais que répondre à une requête demande de<strong> nombreux calculs</strong> <strong>sur des ordinateurs très puissants</strong>. Cela consomme<strong> beaucoup</strong> <strong>d’électricité </strong>et <strong>d’eau.</strong> </p><p>🤔Et si personne ne fait de demande ?</p><p>Les <strong>machines</strong> restent <strong>allumées en permanence</strong> et elles continuent à <strong>consommer de l’énergie</strong>.⚡&nbsp;</p><br>"
               }
             }
           ]
@@ -523,7 +537,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Discussion supercalculateurs",
+                  "title": "Discussion centre de données",
                   "messages": [
                     {
                       "userName": "Enzo",
@@ -556,7 +570,7 @@
               "element": {
                 "id": "8286afa8-20b5-4e86-99bc-7daf29f91363",
                 "type": "text",
-                "content": "<p>Imaginons que <strong>plusieurs personnes utilisent une IA en même temps</strong>, que se passe-t-il côté calculs ? </p><p>En <strong>choisissant la demande</strong> envoyée <strong>et le</strong> <strong>nombre d‘utilisateurs</strong>, testez la <strong>capacité de calcul</strong> d’un supercalculateur pour répondre aux questions ci-dessous.</p>"
+                "content": "<p>Imaginons que <strong>plusieurs personnes utilisent une IA en même temps</strong>, que se passe-t-il côté calculs ? </p><p>En <strong>choisissant la demande</strong> envoyée <strong>et le</strong> <strong>nombre d‘utilisateurs</strong>, testez la <strong>capacité de calcul</strong> d’un centre de données pour répondre aux questions ci-dessous.</p>"
               }
             },
             {
@@ -580,27 +594,27 @@
                     {
                       "id": "43d66e84-554c-4750-8658-7329c4a4f759",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Si on envoie <strong>800 demandes</strong> de <strong>création de vidéo</strong>, le supercalculateur peut-il les traiter ?</p>",
+                      "instruction": "<p>Si on envoie <strong>800 demandes</strong> de <strong>création de vidéo</strong>, le centre de données peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le centre de données peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si.</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le centre de données peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p><p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le centre de données peut traiter plusieurs centaines de demandes en même temps.</p><p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -613,27 +627,27 @@
                     {
                       "id": "541dc2cc-dd98-43cd-ba10-a81adb041750",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Si on envoie <strong> 25 000 demandes</strong> de <strong>création de dessin</strong>, le supercalculateur peut-il les traiter ?</p>",
+                      "instruction": "<p>Si on envoie <strong> 25 000 demandes</strong> de <strong>création de dessin</strong>, le centre de données peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -646,27 +660,27 @@
                     {
                       "id": "83a69884-2d96-4bd9-99b3-a28cdf11c90c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Si on envoie <strong> 90 000 demandes</strong> de <strong>création de texte</strong>, le supercalculateur peut-il les traiter ?</p>",
+                      "instruction": "<p>Si on envoie <strong> 90 000 demandes</strong> de <strong>création de texte</strong>, le centre de données peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>Le <strong>supercalculateur</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p>Le <strong>centre de données</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si.</p><p>Le <strong>supercalculateur</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>Le <strong>centre de données</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le <strong>supercalculateur</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p><p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à 90 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>Le <strong>centre de données</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p><p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à 90 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -721,7 +735,7 @@
         {
           "id": "c388aeb1-74d6-49cf-924c-87fa8a015bb7",
           "type": "short-lesson",
-          "title": "Leçon conso énergie supercalculateur",
+          "title": "Leçon conso énergie d’un centre de données",
           "components": [
             {
               "type": "element",
@@ -913,7 +927,7 @@
               "element": {
                 "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
                 "type": "text",
-                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><p><br></p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><p><br></p><h5>🤔 Et les personnes qui conçoivent l'IA, que peuvent-ils faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
+                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><h5>🤔 Et les personnes qui conçoivent l’IA, que peuvent-ils faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
               }
             }
           ]
@@ -934,7 +948,7 @@
               "element": {
                 "id": "d705c485-ea6d-4109-a7c7-b236684b8330",
                 "type": "text",
-                "content": "<ul>    <li>Chaque <strong>question </strong>posée à une <strong>IA</strong> <strong>générative </strong>demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres requêtes</strong>.</li>    <li>Ces calculs sont effectués par des <strong>supercalculateurs</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> <strong>et d’eau</strong> pour leur refroidissement.</li>    <li>Les <strong>demandes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie&nbsp;</strong>que les demandes de texte.</li><li>On peut <strong>réduire la consommation</strong> <strong>d’énergie </strong><strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
+                "content": "<ul>    <li>Chaque <strong>question </strong>posée à une <strong>IA</strong> <strong>générative </strong>demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres requêtes</strong>.</li>    <li>Ces calculs sont effectués par des <strong>ordinateurs très puissants</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> <strong>et d’eau</strong> pour leur refroidissement.</li>    <li>Les <strong>demandes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie&nbsp;</strong>que les demandes de texte.</li><li>On peut <strong>réduire la consommation</strong> <strong>d’énergie </strong><strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
               }
             }
           ]
@@ -1007,7 +1021,7 @@
                   },
                   {
                     "id": "5b09edb2-4fd1-4153-8dd9-0cd3caf7becf",
-                    "text": "Un supercalculateur traite une seule requête à la fois.",
+                    "text": "Un centre de données traite une seule requête à la fois.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1034,7 +1048,7 @@
               "element": {
                 "id": "542558c9-7795-4928-b45a-02aa19d7993e",
                 "type": "qcu",
-                "instruction": "<p>Qu’est-ce qui consomme de grandes quantités d’énergie dans un supercalculateur ?</p>",
+                "instruction": "<p>Qu’est-ce qui consomme de grandes quantités d’énergie dans un centre de données ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -1049,7 +1063,7 @@
                     "content": "<p>les calculs et le refroidissement des machines</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse ! 🎉</p>",
-                      "diagnosis": "<p>Ce sont bien les calculs effectués par le supercalculateur et le refroidissement des machines qui consomment beaucoup d’énergie.</p>"
+                      "diagnosis": "<p>Ce sont bien les calculs effectués par les ordinateurs très puissants et le refroidissement des machines qui consomment beaucoup d’énergie.</p>"
                     }
                   },
                   {
@@ -1130,21 +1144,39 @@
             {
               "type": "element",
               "element": {
-                "id": "ad8d2726-a384-42e4-9fcc-e229a742003e",
-                "type": "text",
-                "content": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "6a18255a-eb6c-411f-9989-78fb97cf69e7",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "calcul-impact",
-                "props": {
-                  "titleLevel": 0
-                }
+                "type": "qcu-declarative",
+                "instruction": "<p>Pour utiliser une IA générative de <strong>manière responsable</strong>, quelle bonne résolution pouvez-vous vous adopter&nbsp;?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Me demander si une solution plus simple et moins énergivore peut répondre à mon besoin.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Excellent réflexe&nbsp;: parfois une simple recherche ou une ressource déjà existante suffit, sans lancer de calculs coûteux.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Limiter les demandes lourdes comme les images ou les vidéos quand ce n’est pas indispensable.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bonne démarche&nbsp;: ces contenus sont parmi les requêtes les plus énergivores.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Regrouper mes requêtes et éviter les essais répétés inutiles.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pertinent&nbsp;: réduire les allers-retours limite la charge de calcul dans les centres de données.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Avoir conscience que chaque requête mobilise des ordinateurs très puissants dans des centres de données.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est essentiel&nbsp;: comprendre l’impact réel aide à adopter des usages plus sobres.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
