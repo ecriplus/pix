@@ -2,7 +2,7 @@
   "id": "ccad60a8-6c48-4d91-84cb-d717a1ea4918",
   "slug": "tmp-iagenbiais-avance",
   "title": "IA génératives : Qui programme la morale ?",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les IA génératives produisent souvent des résultats convaincants, mais elles peuvent aussi <strong>commettre des erreurs, halluciner ou reproduire des biais</strong>. Ces <strong>limites</strong> proviennent en partie de la façon dont elles sont <strong>entraînées</strong> à partir d’immenses ensembles de textes.</p><p>Or, <strong>l’entraînement d’une IA n’est jamais neutre</strong>&nbsp;: il intègre des choix humains sur ce qu’elle doit apprendre… et sur ce qu’elle doit éviter. Comment alors <strong>transmettre des valeurs humaines</strong> à une IA, quand ces valeurs diffèrent d’un pays à l’autre ?</p><p>Ce module vous invite à explorer <strong>les enjeux techniques, moraux et politiques</strong> de cette question centrale&nbsp;: <em>qui programme la morale ?</em></p>",
