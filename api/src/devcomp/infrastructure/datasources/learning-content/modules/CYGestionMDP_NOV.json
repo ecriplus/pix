@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Même si vous choisissez des mots de passe forts, ce n’est pas toujours suffisant pour protéger vos comptes en ligne. Dans ce module, découvrez comment éviter les erreurs courantes, garder vos mots de passe secrets et réagir en cas d’oubli.</p>",
+    "description": "<p>Même si vous choisissez des mots de passe forts, ce n’est pas toujours suffisant pour protéger vos comptes en ligne. Dans ce module, découvrez comment garder vos mots de passe secrets, réagir en cas d’oubli et éviter les erreurs courantes.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -490,7 +490,7 @@
               "element": {
                 "id": "90e0818e-bd50-4a22-b488-f7b72a747fbf",
                 "type": "text",
-                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+                "content": "<p>Voyons si vous avez retenu l’essentiel avec de nouveaux exemples.</p>"
               }
             },
             {
@@ -502,7 +502,7 @@
                 "cards": [
                   {
                     "id": "25aec05e-cfa7-4532-a6e3-6831da038200",
-                    "text": "Gilles clique sur « Non » quand son navigateur lui propose d’enregistrer son mot de passe.",
+                    "text": "Cliquer sur « Non » quand le navigateur propose d’enregistrer son mot de passe.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -513,7 +513,7 @@
                   },
                   {
                     "id": "6887c428-70c0-4938-83aa-5565659ed66c",
-                    "text": "Florian enregistre ses mots de passe dans un fichier nommé « important.txt » sur son ordinateur.",
+                    "text": "Enregistrer ses mots de passe dans un fichier nommé « important.txt » sur son ordinateur.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -524,7 +524,7 @@
                   },
                   {
                     "id": "71835e39-8260-4d05-bdb0-69b65928d00a",
-                    "text": "Valérie envoie son mot de passe à son collègue pour qu’il puisse consulter un dossier urgent.",
+                    "text": "Envoie un mot de passe à un collègue pour qu’il puisse consulter un dossier urgent.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -535,7 +535,7 @@
                   },
                   {
                     "id": "dc4b266d-0c98-4ce7-9f27-3efc85cc36c6",
-                    "text": "Juliane utilise un mot de passe différent pour chacun de ses comptes en ligne.",
+                    "text": "Utiliser un mot de passe différent pour chacun de ses comptes en ligne.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -662,7 +662,7 @@
               "element": {
                 "id": "b47a304f-0f00-4249-badf-484dcabef68f",
                 "type": "text",
-                "content": "<p>Maintenant que vous savez réagir en cas d’oubli, à vous de jouer !</p><p>Lola souhaite se connecter sur un forum de discussion en ligne. Mais elle a oublié son mot de passe.<br></p>"
+                "content": "<p>Lola souhaite se connecter sur un forum de discussion en ligne. Mais elle a oublié son mot de passe.<br></p>"
               }
             },
             {
