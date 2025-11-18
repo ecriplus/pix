@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.259.0](https://github.com/1024pix/pix/compare/v5.258.0...v5.259.0) (2025-11-18)
+
+### :rocket: Amélioration
+
+- [#14177](https://github.com/1024pix/pix/pull/14177) Ajuster la couleur du texte des boutons disabled dans la barre de navigation de modulix (PIX-20450) 
+- [#14097](https://github.com/1024pix/pix/pull/14097) création IAGenBIAIS_AVA.json 
+- [#14180](https://github.com/1024pix/pix/pull/14180) IaGenImpact retours IGESR 
+- [#14152](https://github.com/1024pix/pix/pull/14152) Mettre à jour les parcours combiné une fois un module terminé (PIX-19693) 
+- [#14143](https://github.com/1024pix/pix/pull/14143) Page de détails d'une participation à un parcours (PIX-20270) 
+- [#14065](https://github.com/1024pix/pix/pull/14065) Redirige l'utilisateur vers le lien configuré sur la campagne quand il quitte l'évaluation (PIX-20226) 
+- [#14134](https://github.com/1024pix/pix/pull/14134) Utilisations des configurations de score de `certification_versions` (PIX-20368). 
+
+### :bug: Correction
+
+- [#14178](https://github.com/1024pix/pix/pull/14178) Donner les bons liens anglais de documentation (PIX-20441). 
+
+### :building_construction: Tech
+
+- [#14161](https://github.com/1024pix/pix/pull/14161) :broom: Réduit la « densité informationnelle » (PIX-5750) 
+- [#14170](https://github.com/1024pix/pix/pull/14170) Supprimer la méthode "getByLabel" de complementaryCertificationRepository (PIX-18053). 
+
+### :coffee: Autre
+
 # [5.258.0](https://github.com/1024pix/pix/compare/v5.257.0...v5.258.0) (2025-11-17)
 
 ### :rocket: Amélioration
