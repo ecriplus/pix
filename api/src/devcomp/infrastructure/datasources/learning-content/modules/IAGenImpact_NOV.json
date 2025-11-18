@@ -367,7 +367,7 @@
         {
           "id": "c568c13b-5f8e-40a2-a934-bcf5e30e73ae",
           "type": "discovery",
-          "title": "Découverte traitement centre données",
+          "title": "Découverte traitement centre de données",
           "components": [
             {
               "type": "element",
@@ -421,7 +421,7 @@
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel3.png",
-                        "alt": "Les ordianteurs calculent la réponse. Ils consomment de l‘énergie."
+                        "alt": "Les ordinateurs calculent la réponse. Ils consomment de l‘énergie."
                       },
                       "license": {
                         "name": "",
@@ -486,12 +486,12 @@
                       }
                     },
                     {
-                      "title": "La réponse sort du centre données et est envoyée sur internet.",
+                      "title": "La réponse sort du centre de données et est envoyée sur internet.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel8.png",
-                        "alt": "La réponse sort du centre données et est envoyée sur internet."
+                        "alt": "La réponse sort du centre de données et est envoyée sur internet."
                       },
                       "license": {
                         "name": "",
@@ -640,7 +640,7 @@
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre données ne peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
