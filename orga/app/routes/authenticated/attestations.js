@@ -4,6 +4,9 @@ import { service } from '@ember/service';
 
 export default class AuthenticatedAttestationsRoute extends Route {
   queryParams = {
+    attestationKey: {
+      refreshModel: true,
+    },
     pageNumber: {
       refreshModel: true,
     },
@@ -32,7 +35,7 @@ export default class AuthenticatedAttestationsRoute extends Route {
   }
 
   async model(params) {
-    const attestationKey = this.currentUser.prescriber.availableAttestations[0];
+    const attestationKey = params.attestationKey ?? this.currentUser.prescriber.availableAttestations[0];
     const organizationId = this.currentUser.organization.id;
     const attestationParticipantStatuses = await this.store.query('attestation-participant-status', {
       organizationId,
@@ -51,10 +54,10 @@ export default class AuthenticatedAttestationsRoute extends Route {
     if (this.currentUser.organization.isManagingStudents) {
       const divisions = await this.currentUser.organization.divisions;
       const options = divisions.map(({ name }) => ({ label: name, value: name }));
-      return { options, attestationParticipantStatuses };
+      return { options, attestationParticipantStatuses, attestationKey };
     }
 
-    return { attestationParticipantStatuses };
+    return { attestationParticipantStatuses, attestationKey };
   }
 
   resetController(controller, isExiting) {
@@ -64,6 +67,7 @@ export default class AuthenticatedAttestationsRoute extends Route {
       controller.search = null;
       controller.pageSize = 50;
       controller.pageNumber = 1;
+      controller.attestationKey = null;
     }
   }
 

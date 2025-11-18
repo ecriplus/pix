@@ -106,7 +106,7 @@ module('Integration | Component | Attestations', function (hooks) {
     });
   });
 
-  module('when organization does not have divisions and SIXTH_GRADE attestation', function () {
+  module('when organization does not managing student with SIXTH_GRADE attestation', function () {
     test('it should display all basics information', async function (assert) {
       // given
       const noop = sinon.stub();
@@ -132,7 +132,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @attestationKey={{SIXTH_GRADE_ATTESTATION_KEY}}
+            @divisions={{divisions}}
+            @onSubmit={{onSubmit}}
+            @onFilter={{noop}}
+          />
+        </template>,
       );
 
       const downloadButton = await screen.getByRole('button', {
