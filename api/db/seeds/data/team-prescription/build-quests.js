@@ -14,6 +14,7 @@ import {
   AEFE_TAG,
   COUNTRY_FRANCE_CODE,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+  PRO_ORGANIZATION_ID,
   SCO_ORGANIZATION_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
@@ -506,7 +507,6 @@ export const buildQuests = async (databaseBuilder) => {
   const allAttestationIds = [
     rewardId, // sixth-grade attestation
     parenthoodAttestationId, // parenthood attestation
-    ...educationAttestations.map((attestation) => attestation.id),
   ];
 
   allAttestationIds.forEach((attestationId) => {
@@ -515,5 +515,21 @@ export const buildQuests = async (databaseBuilder) => {
       rewardType: REWARD_TYPES.ATTESTATION,
       rewardId: attestationId,
     });
+  });
+
+  educationAttestations.forEach((attestation) => {
+    const rewardId = databaseBuilder.factory.buildProfileReward({
+      userId: allAttestationsUser.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
+      rewardId: attestation.id,
+    }).id;
+
+    if (['MINARM', 'EDUSECU'].includes(attestation.key)) {
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        userId: allAttestationsUser.id,
+        organizationId: PRO_ORGANIZATION_ID,
+        profileRewardId: rewardId,
+      });
+    }
   });
 };
