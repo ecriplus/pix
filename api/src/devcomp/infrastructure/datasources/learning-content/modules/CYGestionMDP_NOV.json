@@ -27,6 +27,14 @@
             {
               "type": "element",
               "element": {
+                "id": "6c457dfe-9945-40fe-b8bf-117b5ffd3a58",
+                "type": "text",
+                "content": "<p>Max vient d’apprendre comment créer un mot de passe fort.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "32d159e2-e2fd-41aa-8cd0-9a82f0bf178d",
                 "type": "custom",
                 "instruction": "",
@@ -37,16 +45,16 @@
                     {
                       "userName": "Max",
                       "direction": "outgoing",
-                      "content": "C’est bon, je suis tranquille. J’ai un mot de passe ultra fort : 18 caractères avec des majuscules, minuscules, chiffres et caractères spéciaux. Impossible que je me fasse pirater mes comptes ! 💪"
+                      "content": "C’est bon, je suis tranquille. J’ai un mot de passe ultra fort : 18 caractères avec des majuscules, minuscules, chiffres et caractères spéciaux. Impossible qu’on pirate mes comptes ! 💪"
                     },
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
-                      "content": "C’est bien, mais tu utiliseras le même sur tous tes comptes ?"
+                      "content": "C’est bien, mais tu utiliseras le même mot de passe sur tous tes comptes ?"
                     },
                     {
                       "userName": "Max",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎"
                     }
                   ]
@@ -86,7 +94,7 @@
               "element": {
                 "id": "00d2c0cc-fc93-4e3b-8962-a267a4e5da61",
                 "type": "text",
-                "content": "<p>Max a reçu un message de la part d’un site sur lequel il a un compte. Les mots de passe de plusieurs milliers d’utilisateurs ont été volés.🏴‍☠️</p><br><p>Il utilise <strong>un seul mot de passe fort</strong> pour tous ses comptes. Inquiet, il décide de vérifier si tout va bien sur ses différents comptes en ligne.</p>"
+                "content": "<p>Max a reçu un message de la part d’un site sur lequel il a un compte. Les mots de passe de milliers d’utilisateurs ont été volés.🏴‍☠️</p><br><p>Max utilise <strong>un seul mot de passe fort</strong> pour tous ses comptes. Il faut donc vérifier si tout va bien sur ses différents comptes en ligne.</p>"
               }
             },
             {
@@ -94,7 +102,7 @@
               "element": {
                 "id": "f529dc80-5cef-42be-8f09-9515cf33c208",
                 "type": "custom",
-                "instruction": "<p>Cliquez sur ses différents comptes en ligne&nbsp;:</p>",
+                "instruction": "<p>Cliquez sur chacune des cartes ci-dessous pour découvrir si les comptes en ligne de Max ont été piratés&nbsp;:</p>",
                 "tagName": "flip-cards",
                 "props": {
                   "titleLevel": 0,
@@ -102,24 +110,24 @@
                   "cardList": [
                     {
                       "name": "Messagerie",
-                      "description": "Compte piraté : des messages ont été envoyés à la place de Max.",
+                      "description": "Compte piraté : des messages ont été envoyés à différentes personnes de la part de Max.",
                       "icon": "https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg",
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
                     },
                     {
                       "name": "Réseau social",
-                      "description": "Compte piraté :  il n’arrive plus à accéder à son compte !",
+                      "description": "Compte piraté : Max n’arrive plus à se connecter à son compte. !",
                       "icon": "https://assets.pix.org/modules/mon-premier-prompt/picto_moduleIA_prompt1.svg",
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
                     },
                     {
-                      "name": "Achat en ligne",
+                      "name": "Achats en ligne",
                       "description": "Compte piraté : oh non… Un achat de 249 € a été effectué à la place de Max. 😓",
                       "icon": "https://assets.pix.org/modules/jeux-video-enfant/ppn3_details.svg",
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
                     },
                     {
-                      "name": "Réservation d’hôtel",
+                      "name": "Réservation d’hôtels",
                       "description": "Rien à signaler sur ce compte.",
                       "icon": "https://assets.pix.org/modules/ent-homme-fauteuil.png",
                       "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-ok.jpg"
@@ -146,34 +154,34 @@
               "element": {
                 "id": "92c5432c-16b7-46a5-b4b9-4b36783d2883",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, comment Max aurait pu éviter que plusieurs de ses comptes soient piratés en même temps ?</p>",
+                "instruction": "<p>Plusieurs comptes de Max ont donc été piratés. À votre avis, comment Max aurait pu éviter cela ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>En créant un mot de passe différent par compte en ligne.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui ! En découvrant le mot de passe d’un de ses comptes en ligne, les pirates ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
+                      "diagnosis": "<p>Eh oui ! En découvrant le mot de passe d’un des comptes en ligne de Max, les pirates informatiques ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>En évitant de se connecter pendant quelques jours après le piratage.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Ce n’est pas le fait de se connecter qui a permis le piratage.<br>En découvrant le mot de passe d’un de ses comptes en ligne, les pirates ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
+                      "diagnosis": "<p>Eh non ! Ce n’est pas le fait de se connecter qui a permis le piratage.<br>En découvrant le mot de passe d’un des comptes en ligne de Max, les pirates informatiques ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>En activant l’antivirus de son ordinateur.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp; Un antivirus protège votre appareil contre les virus ou logiciels malveillants, mais il ne peut pas empêcher qu’un mot de passe soit volé sur Internet.<br>En découvrant le mot de passe d’un de ses comptes en ligne, les pirates ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
+                      "diagnosis": "<p>Eh non !&nbsp; Un antivirus protège votre appareil contre les virus ou logiciels malveillants, mais il ne peut pas empêcher qu’un mot de passe soit volé sur Internet.<br>En découvrant le mot de passe d’un des comptes en ligne de Max, les pirates informatiques ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En découvrant le mot de passe d’un de ses comptes en ligne, les pirates ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
+                      "diagnosis": "<p>En découvrant le mot de passe d’un des comptes en ligne de Max, les pirates informatiques ont pu l’essayer sur d’autres sites. 🔓 </p><p>Avoir un seul mot de passe fort, ce n’est pas suffisant !</p>"
                     }
                   }
                 ],
@@ -192,7 +200,7 @@
               "element": {
                 "id": "02726fe3-410b-45d9-bcc9-fdf394cb0b3a",
                 "type": "text",
-                "content": "<h4>Comment protéger ses comptes en ligne ?</h4><p>Choisir des <strong>mots de passe différents</strong> pour chaque site.</p><p>En cas de vol d’un de vos mots de passe, seul le site concerné sera accessible pour le pirate. Les autres comptes resteront encore protégés. 🛡</p>"
+                "content": "<h4>🛡️ Comment protéger vos comptes en ligne ?</h4><p>Choisissez des <strong>mots de passe différents</strong> pour chaque site.</p><p>En cas de vol d’un de vos mots de passe, seul le site concerné sera accessible pour les pirates informatiques. Les autres comptes resteront encore protégés. 🛡</p>"
               }
             }
           ]
@@ -207,7 +215,7 @@
               "element": {
                 "id": "06b27e61-500c-4c6a-85e1-6888b1ff6ff6",
                 "type": "text",
-                "content": "<p>Max a compris qu’il doit utiliser des mots de passe différents pour chaque compte.&nbsp; </p><p>Maintenant, il veut être sûr de ne pas les oublier. Il a trouvé plusieurs méthodes, mais sont-elles vraiment sûres ?&nbsp; 🤔</p>"
+                "content": "<p>Max a compris qu’il devait utiliser des mots de passe différents pour chaque compte.&nbsp; </p><p>Maintenant, il veut être sûr de ne pas les oublier. Il a trouvé plusieurs méthodes. Mais sont-elles vraiment sûres ?&nbsp; 🤔</p>"
               }
             }
           ]
@@ -220,17 +228,9 @@
             {
               "type": "element",
               "element": {
-                "id": "48537709-5591-4a9e-bf0e-ea20dc3bce6c",
-                "type": "text",
-                "content": "<p>Découvrons comment Max pense garder ses différents mots de passe.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "de075231-8d4b-4c1d-bce5-bd24860a150c",
                 "type": "qab",
-                "instruction": "<p>Aidez Max à trouver une méthode sûre pour ne pas oublier ses mots de passe.<br></p>",
+                "instruction": "<p>Pour aider Max à ne pas oublier ses mots de passe, choisissez si chaque méthode est bonne ou mauvaise.</p>",
                 "cards": [
                   {
                     "id": "dcd3d82b-b34a-4ee0-aadf-d32a0d381afe",
@@ -305,7 +305,7 @@
               "element": {
                 "id": "6f69f7d9-5de2-4994-96ed-b4b9891c97b7",
                 "type": "text",
-                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣Choisir une phrase facile à retenir.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j</strong>’étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣Transformez-là en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqjp.</strong></blockquote>"
+                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣Choisir une phrase facile à retenir.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j</strong>’étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqjp.</strong></blockquote>"
               }
             }
           ]
@@ -320,7 +320,7 @@
               "element": {
                 "id": "27e40885-2bfa-422f-a53a-8c3552ffaa55",
                 "type": "text",
-                "content": "<p>Mais si on oublie un mot de passe, on fait comment ?&nbsp;<br></p>"
+                "content": "<p>Mais si vous oubliez un de vos mots de passe, comment faire ?</p>"
               }
             }
           ]
@@ -345,7 +345,7 @@
                 "type": "custom-draft",
                 "title": "récupération de mot de passe #3",
                 "url": "https://1024pix.github.io/atelier-contenus/MCU/recupmdp1.html",
-                "instruction": "<p>Aidez Max à retrouver l’accès à son compte, explorez la page de connexion ci-dessous.<br></p>",
+                "instruction": "<p>Explorez la page de connexion ci-dessous. Trouvez où cliquer pour aidez Max à retrouver l’accès à son compte<br></p>",
                 "height": 550
               }
             },
@@ -355,7 +355,7 @@
                 "id": "db860658-8dd8-47e5-ba2a-0316f65c275c",
                 "type": "expand",
                 "title": "🗝️ Indice",
-                "content": "<p>L’adresse mail de Max utilisée pour ce compte est&nbsp;: maxfaitdustreaming@pixmail.fr</p>"
+                "content": "<p>L’adresse mail de Max utilisée pour ce compte est&nbsp;: max@pixmail.fr</p>"
               }
             },
             {
@@ -371,34 +371,34 @@
               "element": {
                 "id": "974b520d-8c5d-4f24-b9e5-7986ce597ea3",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, que va pouvoir faire Max grâce à ce message ?<br></p>",
+                "instruction": "<p>À votre avis, que va pourra faire Max grâce à ce message ?<br></p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Créer un nouveau mot de passe.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui ! Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, qu’un mot de passe faible qu’on devine trop facilement.<br></p>"
+                      "diagnosis": "<p>Eh oui ! Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, plutôt qu’un mot de passe faible qu’on devine trop facilement.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Récupérer son mot de passe.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, qu’un mot de passe faible qu’on devine trop facilement.</p>"
+                      "diagnosis": "<p>Eh non ! Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, plutôt qu’un mot de passe faible qu’on devine trop facilement.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Créer un nouveau compte.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Pas besoin de créer un nouveau compte. Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, qu’un mot de passe faible qu’on devine trop facilement.</p>"
+                      "diagnosis": "<p>Eh non ! Pas besoin de créer un nouveau compte. Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, plutôt qu’un mot de passe faible qu’on devine trop facilement.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, qu’un mot de passe faible qu’on devine trop facilement.</p>"
+                      "diagnosis": "<p>Max pourra <strong>créer un nouveau mot de passe</strong> pour remplacer l’ancien&nbsp;: c’est ce qu’on appelle <strong>réinitialiser</strong> son mot de passe.</p><p>Il vaut mieux avoir un mot de passe fort qu’on oublie parfois, plutôt qu’un mot de passe faible qu’on devine trop facilement.</p>"
                     }
                   }
                 ],
@@ -485,12 +485,20 @@
           "type": "activity",
           "title": "Activité d’application #1",
           "components": [
+             {
+              "type": "element",
+              "element": {
+                "id": "90e0818e-bd50-4a22-b488-f7b72a747fbf",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            },
             {
               "type": "element",
               "element": {
                 "id": "b66d075b-26cb-4429-a921-080b88673f14",
                 "type": "qab",
-                "instruction": "<p>Pour chacune des affirmations suivantes, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe.</p>",
+                "instruction": "<p>Pour chacune des situations suivantes, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe.</p>",
                 "cards": [
                   {
                     "id": "25aec05e-cfa7-4532-a6e3-6831da038200",
