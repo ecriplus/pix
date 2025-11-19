@@ -25,6 +25,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
     it('should serialize with redirectionUrl', function () {
       // given
       const id = 'id';
+      const shortId = 'glzovn7d';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const redirectionUrl = 'https://app.pix.fr/parcours/COMBINIX1';
@@ -42,7 +43,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ id, details, slug, title, sections: [], isBeta, version });
+      const moduleFromDomain = new Module({ id, shortId, details, slug, title, sections: [], isBeta, version });
       moduleFromDomain.setRedirectionUrl(redirectionUrl);
       const expectedJson = {
         data: {
@@ -50,6 +51,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           id,
           attributes: {
             'redirection-url': redirectionUrl,
+            'short-id': shortId,
             slug,
             title,
             'is-beta': isBeta,
@@ -74,6 +76,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
     it('should serialize with empty sections list', function () {
       // given
       const id = 'id';
+      const shortId = 'glzovn7d';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
@@ -92,6 +95,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       };
       const moduleFromDomain = new Module({
         id,
+        shortId,
         details,
         slug,
         title,
@@ -104,6 +108,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           type: 'modules',
           id,
           attributes: {
+            'short-id': shortId,
             slug,
             title,
             'is-beta': isBeta,
@@ -128,6 +133,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
     it('should serialize with empty grains list', function () {
       // given
       const id = 'id';
+      const shortId = 'glzovn7d';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
@@ -146,6 +152,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       };
       const moduleFromDomain = new Module({
         id,
+        shortId,
         details,
         slug,
         title,
@@ -158,6 +165,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           type: 'modules',
           id,
           attributes: {
+            'short-id': shortId,
             slug,
             title,
             'is-beta': isBeta,
@@ -197,6 +205,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
     it('should serialize with grains list of components', function () {
       // given
       const id = 'id';
+      const shortId = 'glzovn7d';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
@@ -215,6 +224,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       };
       const moduleFromDomain = new Module({
         id,
+        shortId,
         slug,
         title,
         isBeta,
@@ -243,6 +253,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const expectedJson = {
         data: {
           attributes: {
+            'short-id': shortId,
             slug,
             title: 'Bien écrire son adresse mail',
             'is-beta': isBeta,

@@ -1,5 +1,6 @@
 {
   "id": "f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d",
+  "shortId": "9d4dcab8",
   "slug": "bien-ecrire-son-adresse-mail",
   "title": "Bien écrire une adresse mail",
   "isBeta": true,
@@ -233,8 +234,12 @@
                           "placeholder": "",
                           "ariaLabel": "Réponse 1 sur 1",
                           "defaultValue": "",
-                          "tolerances": ["t1"],
-                          "solutions": ["@"]
+                          "tolerances": [
+                            "t1"
+                          ],
+                          "solutions": [
+                            "@"
+                          ]
                         }
                       ],
                       "feedbacks": {
@@ -288,7 +293,9 @@
                               "content": "le fournisseur d'adresse mail"
                             }
                           ],
-                          "solutions": ["1"]
+                          "solutions": [
+                            "1"
+                          ]
                         },
                         {
                           "type": "text",
@@ -316,7 +323,9 @@
                               "content": "le fournisseur d'adresse mail"
                             }
                           ],
-                          "solutions": ["2"]
+                          "solutions": [
+                            "2"
+                          ]
                         }
                       ],
                       "feedbacks": {
@@ -523,13 +532,18 @@
                     "placeholder": "",
                     "ariaLabel": "Adresse mail de Naomi",
                     "defaultValue": "",
-                    "tolerances": ["t1"],
-                    "solutions": ["naomizao457@yahoo.com", "naomizao457@yahoo.fr"]
+                    "tolerances": [
+                      "t1"
+                    ],
+                    "solutions": [
+                      "naomizao457@yahoo.com",
+                      "naomizao457@yahoo.fr"
+                    ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bravo !&nbsp;\uD83D\uDCAB",
+                    "state": "Bravo !&nbsp;💫",
                     "diagnosis": "<p>Tout est dans l'ordre&nbsp;: l'identifiant, l'arobase puis le fournisseur d'adresse mail</p>"
                   },
                   "invalid": {

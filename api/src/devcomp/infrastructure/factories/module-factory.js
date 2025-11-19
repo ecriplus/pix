@@ -39,6 +39,7 @@ export class ModuleFactory {
     try {
       return new Module({
         id: moduleData.id,
+        shortId: moduleData.shortId,
         slug: moduleData.slug,
         title: moduleData.title,
         version: moduleData.version,

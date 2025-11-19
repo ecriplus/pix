@@ -33,6 +33,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            shortId: 'giedjc7f3',
             slug: 'title',
             title: 'title',
             isBeta: true,
@@ -88,6 +89,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            shortId: 'giedjc7f3',
             slug: 'title',
             title: 'title',
             isBeta: true,
@@ -143,6 +145,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            shortId: 'giedjc7f3',
             slug: 'title',
             title: 'title',
             isBeta: true,
@@ -207,6 +210,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
       const version = Symbol('version');
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'giedjc7f3',
         slug: 'title',
         title: 'title',
         version,
@@ -264,6 +268,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -362,6 +367,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -413,6 +419,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -464,6 +471,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -515,6 +523,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -562,6 +571,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -623,6 +633,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '256900b7-4c4f-4f1c-8326-ebec85a694c2',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -680,6 +691,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -732,6 +744,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -782,6 +795,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -843,6 +857,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -913,6 +928,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -995,6 +1011,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1070,6 +1087,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1161,6 +1179,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1231,6 +1250,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const givenData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1287,6 +1307,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1365,6 +1386,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1422,6 +1444,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1476,6 +1499,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1532,6 +1556,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1591,6 +1616,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: 'effc5154-bc45-4eb1-b4ec-84036a574161',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1648,6 +1674,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1708,6 +1735,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1767,6 +1795,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1837,6 +1866,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1915,6 +1945,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -1998,6 +2029,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -2095,6 +2127,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -2171,6 +2204,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -2233,6 +2267,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -2297,6 +2332,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
           slug: 'title',
           title: 'title',
           isBeta: true,
@@ -2352,6 +2388,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'giedjc7f3',
         slug: 'title',
         title: 'title',
         isBeta: true,
@@ -2410,6 +2447,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'giedjc7f3',
         slug: 'title',
         title: 'title',
         isBeta: true,

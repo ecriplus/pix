@@ -58,6 +58,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   it('should save the passage', async function () {
     // given
     const moduleId = Symbol('moduleId');
+    const moduleShortId = 'bds87bds';
     const moduleSlug = 'les-adresses-email';
     const passageId = 1234;
     const userId = Symbol('userId');
@@ -69,6 +70,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const version = Symbol('version');
     const module = new Module({
       id: moduleId,
+      shortId: moduleShortId,
       slug: moduleSlug,
       title,
       isBeta,

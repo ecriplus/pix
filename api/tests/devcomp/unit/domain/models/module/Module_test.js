@@ -7,6 +7,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
     it('should create a module and keep attributes', function () {
       // given
       const id = 1;
+      const shortId = 'e074af34';
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = false;
@@ -15,10 +16,11 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const version = Symbol('version');
 
       // when
-      const module = new Module({ id, slug, title, isBeta, sections, details, version });
+      const module = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
 
       // then
       expect(module.id).to.equal(id);
+      expect(module.shortId).to.equal(shortId);
       expect(module.slug).to.equal(slug);
       expect(module.title).to.equal(title);
       expect(module.isBeta).to.equal(isBeta);
@@ -38,10 +40,21 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       });
     });
 
-    describe('if a module does not have a slug', function () {
+    describe('if a module does not have a shortId', function () {
       it('should throw an error', function () {
         // when
         const error = catchErrSync(() => new Module({ id: 1 }))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The shortId is required for a module');
+      });
+    });
+
+    describe('if a module does not have a slug', function () {
+      it('should throw an error', function () {
+        // when
+        const error = catchErrSync(() => new Module({ id: 1, shortId: 'e074af34' }))();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
@@ -52,7 +65,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
     describe('if a module does not have a title', function () {
       it('should throw an error', function () {
         // when
-        const error = catchErrSync(() => new Module({ id: 1, slug: 'my-slug' }))();
+        const error = catchErrSync(() => new Module({ id: 1, shortId: 'e074af34', slug: 'my-slug' }))();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
@@ -67,6 +80,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
           () =>
             new Module({
               id: 'id_module_1',
+              shortId: 'e074af34',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
             }),
@@ -85,6 +99,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
           () =>
             new Module({
               id: 'id_module_1',
+              shortId: 'e074af34',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
@@ -104,6 +119,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
           () =>
             new Module({
               id: 'id_module_1',
+              shortId: 'e074af34',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
@@ -124,6 +140,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
           () =>
             new Module({
               id: 'id_module_1',
+              shortId: 'e074af34',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
@@ -143,6 +160,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
 
     beforeEach(function () {
       const id = 1;
+      const shortId = 'e074af34';
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = false;
@@ -150,7 +168,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const details = Symbol('details');
       const version = Symbol('version');
 
-      module = new Module({ id, slug, title, isBeta, sections, details, version });
+      module = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
     });
 
     it('should set redirectionUrl', function () {

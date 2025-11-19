@@ -1,5 +1,6 @@
 {
   "id": "5df14039-803b-4db4-9778-67e4b84afbbd",
+  "shortId": "ecc13f55",
   "slug": "adresse-ip-publique-et-vous",
   "title": "L'adresse IP publique : ce qu'elle révèle sur vous !",
   "isBeta": true,
@@ -210,7 +211,7 @@
                     "id": "1",
                     "content": "C'est l'adresse qui permet d'identifier un appareil informatique connecté à internet.",
                     "feedback": {
-                      "state": "Bonne réponse \uD83D\uDCAB",
+                      "state": "Bonne réponse 💫",
                       "diagnosis": "<p>L'adresse IP publique est l’équivalent d’une adresse postale pour identifier où est une personne.</p>"
                     }
                   },
@@ -438,8 +439,13 @@
                     "placeholder": "",
                     "ariaLabel": "Nom du pays :",
                     "defaultValue": "",
-                    "tolerances": ["t1"],
-                    "solutions": ["Japon", "Tokyo"]
+                    "tolerances": [
+                      "t1"
+                    ],
+                    "solutions": [
+                      "Japon",
+                      "Tokyo"
+                    ]
                   }
                 ],
                 "feedbacks": {

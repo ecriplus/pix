@@ -1,5 +1,6 @@
 {
   "id": "ab82925d-4775-4bca-b513-4c3009ec5886",
+  "shortId": "f2eeb056",
   "slug": "demo-llm",
   "title": "Démo LLM",
   "isBeta": true,
@@ -8,7 +9,9 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient un exemple d’intégration de ChatPix.</p>",
     "duration": 2,
     "level": "novice",
-    "objectives": ["<p>Démonstration</p>"],
+    "objectives": [
+      "<p>Démonstration</p>"
+    ],
     "tabletSupport": "inconvenient"
   },
   "sections": [

@@ -25,6 +25,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
     it('should get and return a Module with a redirection url', async function () {
       // given
       const id = 1;
+      const shortId = 'f9f8bk1d';
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = false;
@@ -32,7 +33,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
       const details = Symbol('details');
       const version = Symbol('version');
 
-      const expectedModule = new Module({ id, slug, title, isBeta, sections, details, version });
+      const expectedModule = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
       const moduleRepository = {
         getBySlug: sinon.stub(),
       };
