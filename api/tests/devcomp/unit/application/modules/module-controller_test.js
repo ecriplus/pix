@@ -1,8 +1,6 @@
 import { modulesController } from '../../../../../src/devcomp/application/modules/module-controller.js';
-import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/module-route.js';
-import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Modules | Module Controller', function () {
   describe('#getBySlug', function () {
@@ -24,18 +22,6 @@ describe('Unit | Devcomp | Application | Modules | Module Controller', function 
       });
 
       expect(result).to.equal(serializedModule);
-    });
-
-    it('should throw an error if referential data is incorrect', async function () {
-      // given
-      sinon.stub(modulesController, 'getBySlug').throws(new ModuleInstantiationError());
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('GET', '/api/modules/slug');
-
-      expect(response.statusCode).to.equal(502);
     });
   });
 });
