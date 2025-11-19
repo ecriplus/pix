@@ -57,12 +57,12 @@ export const handleV3CertificationScoring = withTransaction(
 
     const toBeCancelled = event instanceof CertificationCancelled;
 
+    const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
     const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
       await dependencies.findByCertificationCourseIdAndAssessmentId({
-        certificationCourseId,
+        certificationCourse,
         assessmentId,
       });
-    const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
     const abortReason = certificationCourse.getAbortReason();
 

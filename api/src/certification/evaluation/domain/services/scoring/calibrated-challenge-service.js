@@ -15,24 +15,21 @@ import { withTransaction } from '../../../../../shared/domain/DomainTransaction.
 export const findByCertificationCourseIdAndAssessmentId = withTransaction(
   /**
    * @param {Object} params
-   * @param {number} params.certificationCourseId
    * @param {number} params.assessmentId
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
    * @param {SharedChallengeRepository} params.sharedChallengeRepository
    * @param {ChallengeRepository} params.challengeRepository
-   * @param {CertificationCourseRepository} params.certificationCourseRepository
    */
   async ({
-    certificationCourseId,
+    certificationCourse,
     assessmentId,
     challengeCalibrationRepository,
     certificationChallengeLiveAlertRepository,
     sharedChallengeRepository,
     challengeRepository,
-    certificationCourseRepository,
   }) => {
-    const fromArchivedCalibration = await _isOldCalibration({ certificationCourseId, certificationCourseRepository });
+    const fromArchivedCalibration = await _isOldCalibration(certificationCourse);
 
     const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
       useObsoleteChallenges: true,
@@ -41,7 +38,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
 
     const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
       compatibleChallenges: flashCompatibleChallenges,
-      certificationCourseId,
+      certificationCourseId: certificationCourse.getId(),
       challengeCalibrationRepository,
       sharedChallengeRepository,
       challengeRepository,
@@ -60,13 +57,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
   },
 );
 
-/**
- * @param {Object} params
- * @param {number} params.certificationCourseId
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- */
-const _isOldCalibration = async ({ certificationCourseId, certificationCourseRepository }) => {
-  const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+const _isOldCalibration = async (certificationCourse) => {
   const latestCalibrationDate = config.v3Certification.latestCalibrationDate;
   return certificationCourse.getStartDate() < latestCalibrationDate;
 };

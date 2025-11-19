@@ -11,7 +11,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
     let challengeCalibrationRepository,
       challengeRepository,
       certificationChallengeLiveAlertRepository,
-      certificationCourseRepository,
       sharedChallengeRepository,
       originalLatestCalibrationDate;
 
@@ -27,8 +26,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
       challengeCalibrationRepository = {
         getByCertificationCourseId: sinon.stub().rejects(new Error('Args mismatch')),
       };
-
-      certificationCourseRepository = { get: sinon.stub() };
 
       certificationChallengeLiveAlertRepository = {
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
@@ -91,11 +88,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           })
           .resolves(challengesAfterCalibration);
 
-        certificationCourseRepository.get
-          .withArgs({ id: certificationCourseId })
-          .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
-          );
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          createdAt: new Date('2025-06-23'),
+        });
 
         // when
         const {
@@ -103,12 +99,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           askedChallengesWithoutLiveAlerts: askedChallenges,
           challengeCalibrationsWithoutLiveAlerts: challengeCalibrations,
         } = await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
-          certificationCourseId,
+          certificationCourse,
           assessmentId,
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
           sharedChallengeRepository,
-          certificationCourseRepository,
           challengeRepository,
         });
 
@@ -158,23 +153,21 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           .resolves(challengesAfterCalibration);
 
         const expectedAskedChallengesWithoutLiveAlerts = askedChallenges.slice(0, -1);
-        certificationCourseRepository.get
-          .withArgs({ id: certificationCourseId })
-          .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
-          );
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          createdAt: new Date('2025-06-23'),
+        });
 
         const expectedChallengeCalibrations = challengeCalibrations.slice(0, -1);
 
         // when
         const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
           await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
-            certificationCourseId,
+            certificationCourse,
             assessmentId,
             challengeCalibrationRepository,
             certificationChallengeLiveAlertRepository,
             sharedChallengeRepository,
-            certificationCourseRepository,
             challengeRepository,
           });
 
@@ -197,11 +190,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           sharedChallengeRepository,
         );
 
-        certificationCourseRepository.get
-          .withArgs({ id: certificationCourseId })
-          .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2019-01-01') }),
-          );
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          createdAt: new Date('2019-01-01'),
+        });
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId })
           .resolves([]);
@@ -214,20 +206,13 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         challengeRepository.findFlashCompatibleWithoutLocale.resolves(expectedAskedChallenges);
 
-        certificationCourseRepository.get
-          .withArgs({ id: certificationCourseId })
-          .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-20') }),
-          );
-
         // when
         await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
-          certificationCourseId,
+          certificationCourse,
           assessmentId,
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
           sharedChallengeRepository,
-          certificationCourseRepository,
           challengeRepository,
         });
 
@@ -276,20 +261,18 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           })
           .resolves(challengesAfterCalibration);
 
-        certificationCourseRepository.get
-          .withArgs({ id: certificationCourseId })
-          .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-25') }),
-          );
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          createdAt: new Date('2025-06-25'),
+        });
         config.v3Certification.latestCalibrationDate = new Date('2025-06-23');
         // when
         await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
-          certificationCourseId,
+          certificationCourse,
           assessmentId,
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
           sharedChallengeRepository,
-          certificationCourseRepository,
           challengeRepository,
         });
 
