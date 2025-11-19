@@ -57,7 +57,7 @@ export function buildTrainings(databaseBuilder) {
     link: '/modules/bac-a-sable/details',
     duration: '00:10:00',
     editorName: 'Pix',
-    editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/pix-logo.svg',
+    editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
     locale: 'fr-fr',
   }).id;

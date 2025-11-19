@@ -12,7 +12,7 @@ const buildTraining = function ({
   locale = 'fr-fr',
   targetProfileIds = [1],
   editorName = 'Ministère education nationale',
-  editorLogoUrl = 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+  editorLogoUrl = 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
   trainingTriggers,
 } = {}) {
   return new Training({
