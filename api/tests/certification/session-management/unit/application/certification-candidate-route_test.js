@@ -1,14 +1,14 @@
 import { certificationCandidateController } from '../../../../../src/certification/session-management/application/certification-candidate-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-candidate-route.js';
-import { assessmentSupervisorAuthorization as sessionSupervisorAuthorization } from '../../../../../src/certification/shared/application/pre-handlers/session-supervisor-authorization.js';
+import { assessmentInvigilatorAuthorization as sessionInvigilatorAuthorization } from '../../../../../src/certification/shared/application/pre-handlers/session-invigilator-authorization.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Certification Candidate', function () {
   describe('POST certification-candidates/{certificationCandidateId}/authorize-to-start', function () {
-    it('should return 200 if the user is a supervisor of the session linked to the candidate', async function () {
+    it('should return 200 if the user is an invigilator of the session linked to the candidate', async function () {
       //given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response(true));
       sinon.stub(certificationCandidateController, 'authorizeToStart').returns('ok');
 
@@ -27,10 +27,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       expect(response.statusCode).to.equal(200);
     });
 
-    it('should return 401 if the user is not a supervisor of the session linked to the candidate and certification center is in the whitelist', async function () {
+    it('should return 401 if the user is not an invigilator of the session linked to the candidate and certification center is in the whitelist', async function () {
       //given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response().code(401).takeover());
 
       const httpTestServer = new HttpTestServer();
@@ -50,10 +50,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
   });
 
   describe('POST certification-candidates/{certificationCandidateId}/authorize-to-resume', function () {
-    it('should return 204 if the user is a supervisor of the session linked to the candidate', async function () {
+    it('should return 204 if the user is an invigilator of the session linked to the candidate', async function () {
       // given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response(true));
       sinon
         .stub(certificationCandidateController, 'authorizeToResume')
@@ -68,10 +68,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       expect(response.statusCode).to.equal(204);
     });
 
-    it('should return 401 if the user is not a supervisor of the session linked to the candidate', async function () {
+    it('should return 401 if the user is not an invigilator of the session linked to the candidate', async function () {
       // given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response().code(401).takeover());
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -85,10 +85,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
   });
 
   describe('PATCH certification-candidates/{certificationCandidateId}/end-assessment-by-supervisor', function () {
-    it('should return 200 if the user is a supervisor of the session linked to the candidate', async function () {
+    it('should return 200 if the user is an invigilator of the session linked to the candidate', async function () {
       // given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response(true));
       sinon.stub(certificationCandidateController, 'endAssessmentBySupervisor').returns(null);
       const httpTestServer = new HttpTestServer();
@@ -104,10 +104,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       expect(response.statusCode).to.equal(204);
     });
 
-    it('should return 401 if the user is not a supervisor of the session linked to the candidate', async function () {
+    it('should return 401 if the user is not an invigilator of the session linked to the candidate', async function () {
       // given
       sinon
-        .stub(sessionSupervisorAuthorization, 'verifyByCertificationCandidateId')
+        .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response().code(401).takeover());
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);

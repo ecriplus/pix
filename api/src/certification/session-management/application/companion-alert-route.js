@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { responseObjectErrorDoc } from '../../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
-import { assessmentSupervisorAuthorization } from '../../shared/application/pre-handlers/session-supervisor-authorization.js';
+import { assessmentInvigilatorAuthorization } from '../../shared/application/pre-handlers/session-invigilator-authorization.js';
 import { companionAlertController } from './companion-alert-controller.js';
 
 export function register(server) {
@@ -33,7 +33,7 @@ export function register(server) {
         },
         pre: [
           {
-            method: assessmentSupervisorAuthorization.verifyBySessionId,
+            method: assessmentInvigilatorAuthorization.verifyBySessionId,
             assign: 'isSupervisorForSession',
           },
         ],
