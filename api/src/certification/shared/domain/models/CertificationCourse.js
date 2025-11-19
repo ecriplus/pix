@@ -44,7 +44,7 @@ class CertificationCourse {
    * @param {number} props.userId
    * @param {number} props.sessionId
    * @param {Date} props.maxReachableLevelOnCertificationDate
-   * @param {string} props.abortReason
+   * @param {ABORT_REASONS} props.abortReason
    * @param {ComplementaryCertificationCourse} props.complementaryCertificationCourse
    * @param {number} props.numberOfChallenges
    * @param {AlgorithmEngineVersion} props.version

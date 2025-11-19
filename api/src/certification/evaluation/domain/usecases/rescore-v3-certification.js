@@ -3,6 +3,11 @@
  * @typedef {import('./index.js').ScoringV2Service} ScoringV2Service
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').Services} Services
+ * @typedef {import('../../../shared/domain/events/CertificationRescored.js').CertificationRescored} CertificationRescoredEvent
+ * @typedef {import('../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
+ * @typedef {import('../services/scoring/scoring-v3.js').handleV3CertificationScoring} HandleV3CertificationScoringService
+ * @typedef {import('../services/scoring/calibrated-challenge-service.js').findByCertificationCourseIdAndAssessmentId} FindByCertificationCourseIdAndAssessmentIdService
+ * @typedef {import('../services/scoring/scoring-v3.js').scoreDoubleCertificationV3} ScoreDoubleCertificationV3Service
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
@@ -79,6 +84,14 @@ const _verifySessionIsPublishable = async ({ certificationCourseId, evaluationSe
 
 /**
  * @param {Object} params
+ * @param {CertificationAssessment} params.certificationAssessment
+ * @param {CertificationRescoredEvent} params.event
+ * @param {string} params.locale
+ * @param {Object} params.services
+ * @param {HandleV3CertificationScoringService} params.services.handleV3CertificationScoring
+ * @param {FindByCertificationCourseIdAndAssessmentIdService} params.services.findByCertificationCourseIdAndAssessmentId
+ * @param {ScoreDoubleCertificationV3Service} params.services.scoreDoubleCertificationV3
+ * @returns {Promise<void>}
  */
 async function _handleV3CertificationScoring({ certificationAssessment, event, locale, services }) {
   const certificationCourse = await services.handleV3CertificationScoring({

@@ -4,6 +4,8 @@
  * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('../../../shared/domain/models/Challenge.js').Challenge} Challenge
+ * @typedef {import('../../scoring/domain/read-models/ChallengeCalibration.js').ChallengeCalibration} ChallengeCalibration
  */
 import differenceBy from 'lodash/differenceBy.js';
 
@@ -13,6 +15,8 @@ import { withTransaction } from '../../../../../shared/domain/DomainTransaction.
 export const findByCertificationCourseIdAndAssessmentId = withTransaction(
   /**
    * @param {Object} params
+   * @param {number} params.certificationCourseId
+   * @param {number} params.assessmentId
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
    * @param {SharedChallengeRepository} params.sharedChallengeRepository
@@ -69,8 +73,15 @@ const _isOldCalibration = async ({ certificationCourseId, certificationCourseRep
 
 /**
  * @param {Object} params
+ * @param {Array<Challenge>} params.compatibleChallenges
+ * @param {number} params.certificationCourseId
  * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
+ * @param {boolean} [params.fromArchivedCalibration=false]
+ * @returns {Promise<Object>} An object containing challenges and their calibrations.
+ * @property {Array<Challenge>} allChallenges
+ * @property {Array<Challenge>} askedChallenges
+ * @property {Array<ChallengeCalibration>} challengesCalibrations
  */
 const _findByCertificationCourseId = async ({
   compatibleChallenges,
