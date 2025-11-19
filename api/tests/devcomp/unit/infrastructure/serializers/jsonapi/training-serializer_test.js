@@ -72,7 +72,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
               hours: 5,
               minutes: 0,
             },
-            'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
             'editor-name': 'Ministère education nationale',
             'internal-title': 'Training 1 internal title',
             'is-disabled': false,
@@ -343,7 +343,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             },
             locale: 'fr-fr',
             'editor-name': 'Ministère education nationale',
-            'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
           },
           relationships: {
             'target-profile-summaries': {
@@ -389,7 +389,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             },
             locale: 'fr-fr',
             'editor-name': 'Ministère education nationale',
-            'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
           },
           relationships: {
             'target-profile-summaries': {
@@ -425,7 +425,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             type: 'webinaire',
             locale: 'fr-fr',
             'editor-name': 'Ministère education nationale',
-            'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
             'is-disabled': true,
           },
         },
@@ -441,7 +441,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
         locale: 'fr-fr',
         duration: '3d3h3m',
         type: 'webinaire',
-        editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
         editorName: 'Ministère education nationale',
         isDisabled: true,
       });
@@ -472,7 +472,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
               type: 'webinaire',
               locale: 'fr-fr',
               'editor-name': 'Ministère education nationale',
-              'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
             },
           },
         };

@@ -657,7 +657,7 @@ describe('Integration | Repository | training-repository', function () {
         internalTitle: 'Mon nouveau titre interne',
         link: 'https://example.net/mon-nouveau-lien',
         editorName: 'Mon nouvel editeur',
-        editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/nouveau-logo.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/nouveau-logo.svg',
         isDisabled: true,
         notExistingAttribute: 'notExistingValue',
       };
@@ -693,7 +693,7 @@ describe('Integration | Repository | training-repository', function () {
         internalTitle: 'Mon nouveau titre interne',
         link: 'https://example.net/mon-nouveau-lien',
         editorName: 'Mon nouvel editeur',
-        editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/nouveau-logo.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/nouveau-logo.svg',
         isDisabled: true,
       };
 
@@ -722,7 +722,7 @@ describe('Integration | Repository | training-repository', function () {
         internalTitle: 'Mon nouveau titre interne',
         link: 'https://example.net/mon-nouveau-lien',
         editorName: 'Mon nouvel editeur',
-        editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/nouveau-logo.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/nouveau-logo.svg',
       };
 
       // when

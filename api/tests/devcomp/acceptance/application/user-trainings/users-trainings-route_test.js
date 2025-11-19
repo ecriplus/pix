@@ -48,7 +48,7 @@ describe('Acceptance | Routes | UserTrainingsRoute', function () {
             type: 'webinaire',
             'editor-name': "Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
             'editor-logo-url':
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+              'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
           },
           relationships: {
             'target-profile-summaries': {
