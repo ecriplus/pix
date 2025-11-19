@@ -14,10 +14,12 @@ const terminatePassage = withTransaction(async function ({
   passage.terminate();
   const terminatedPassage = await passageRepository.update({ passage });
 
-  await updateCombinedCourseJobRepository.performAsync({
-    userId: passage.userId,
-    moduleId: passage.moduleId,
-  });
+  if (passage.userId) {
+    await updateCombinedCourseJobRepository.performAsync({
+      userId: passage.userId,
+      moduleId: passage.moduleId,
+    });
+  }
 
   return terminatedPassage;
 });
