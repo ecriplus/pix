@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.260.0](https://github.com/1024pix/pix/compare/v5.259.0...v5.260.0) (2025-11-19)
+
+### :rocket: Amélioration
+
+- [#14189](https://github.com/1024pix/pix/pull/14189) : Modifs module GestionMDP_Nov 
+- [#14174](https://github.com/1024pix/pix/pull/14174) Ajouter un champ shortId aux modules (PIX-20382) 
+- [#13980](https://github.com/1024pix/pix/pull/13980) IaGenEthique_NOV retour Jennifer, Nicolas et PYO 
+- [#14145](https://github.com/1024pix/pix/pull/14145) Integration NR_Durabilite_IND 
+- [#14190](https://github.com/1024pix/pix/pull/14190) modifs module MDP Nov suite relectures 
+
+### :building_construction: Tech
+
+- [#14179](https://github.com/1024pix/pix/pull/14179) :truck: Supprime l'API interne du cas d'utilisation `getById` d'une certification complémentaire (pix-20480) 
+- [#14181](https://github.com/1024pix/pix/pull/14181) Modifier l'url listant les logos des contenu formatif sur Pix Admin (PIX-20455).
+
 # [5.259.0](https://github.com/1024pix/pix/compare/v5.258.0...v5.259.0) (2025-11-18)
 
 ### :rocket: Amélioration
