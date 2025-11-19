@@ -639,7 +639,7 @@
       "errors": {
         "existing-participation": "El test no está accesible para ti.",
         "existing-participation-info": "Ponte en contacto con tu profesor para que retire tu participación en Pix Orga.",
-        "existing-participation-user-info": "Hay una participación asociada a nombre de ",
+        "existing-participation-user-info": "Hay una participación asociada a nombre de {lastName} {firstName}",
         "no-longer-accessible": "Uy, la página solicitada ya no está disponible.",
         "not-accessible": "Uy, la página solicitada no está disponible."
       }
@@ -1655,7 +1655,7 @@
       "title": "Conectarse a Pix"
     },
     "modulix": {
-      "navigation" : {
+      "navigation": {
         "buttons": {
           "aria-label": {
             "steps": "Paso {indexSection} de {totalSections}.",

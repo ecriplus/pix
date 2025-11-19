@@ -639,7 +639,7 @@
       "errors": {
         "existing-participation": "De cursus is niet toegankelijk voor jou.",
         "existing-participation-info": "Neem contact op met je docent om je deelname aan Pix Orga te laten verwijderen.",
-        "existing-participation-user-info": "Er is al een geassocieerde deelneming op naam van",
+        "existing-participation-user-info": "Er is al een geassocieerde deelneming op naam van {lastName} {firstName}",
         "no-longer-accessible": "Oeps, de door u opgevraagde pagina is niet langer toegankelijk.",
         "not-accessible": "Oeps, de opgevraagde pagina is niet toegankelijk."
       }
@@ -1663,7 +1663,7 @@
       "title": "Verbinding maken met Pix"
     },
     "modulix": {
-      "navigation" : {
+      "navigation": {
         "buttons": {
           "aria-label": {
             "steps": "Stap {indexSection} van {totalSections}.",

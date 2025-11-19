@@ -10,11 +10,13 @@ export default class ExistingParticipation extends Route {
     this.session.requireAuthenticationAndApprovedTermsOfService(transition);
   }
 
-  model() {
+  async model() {
     const { code } = this.paramsFor('campaigns');
+    const organizationToJoin = await this.store.queryRecord('organization-to-join', { code });
+
     return this.store.queryRecord('organization-learner-identity', {
       userId: this.currentUser.user.id,
-      campaignCode: code,
+      organizationId: organizationToJoin.id,
     });
   }
 }

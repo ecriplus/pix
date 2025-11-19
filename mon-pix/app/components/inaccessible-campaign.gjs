@@ -6,7 +6,7 @@ import t from 'ember-intl/helpers/t';
 
 export default class InaccessibleCampaign extends Component {
   <template>
-    <PixBlock>
+    <PixBlock ...attributes>
       <div class="campaign-landing-page__start__image__container">
         <div class="campaign-landing-page__pix-logo">
           <img class="campaign-landing-page__image" src="/images/pix-logo.svg" alt="{{t 'navigation.pix'}}" />
@@ -23,6 +23,9 @@ export default class InaccessibleCampaign extends Component {
       </div>
       <div class="campaign-landing-page-error">
         <h1 class="campaign-landing-page-error__title">{{yield}}</h1>
+        {{#if (has-block "content")}}
+          {{yield to="content"}}
+        {{/if}}
         <PixButtonLink @route="authenticated" class="campaign-landing-page__error-button">
           {{t "navigation.back-to-profile"}}
         </PixButtonLink>
