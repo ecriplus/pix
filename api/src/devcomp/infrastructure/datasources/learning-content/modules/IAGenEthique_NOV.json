@@ -5,7 +5,7 @@
   "title": "Ce qu’il faut éviter de dire à une IA générative",
   "isBeta": true,
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/IAGenEthique_NOV/picto-ia-ethique-vector-1.svg",
     "description": "<p>Quand vous discutez avec un logiciel d’<strong>intelligence artificielle (IA</strong>) générative, la conversation n’est pas privée.</p><p>Tout ce que vous écrivez peut être <strong>enregistré et parfois réutilisé</strong> pour améliorer l’IA.</p><p>Dans ce module, vous allez comprendre<strong> pourquoi les échanges avec une IA générative ne sont pas totalement privés</strong> et <strong>quelles informations il vaut mieux éviter d’écrire</strong> dans vos instructions (prompts).</p>",
     "duration": 10,
     "level": "novice",
@@ -178,7 +178,7 @@
               "element": {
                 "id": "3a93f685-54c5-42eb-83b0-2459f1c81007",
                 "type": "text",
-                "content": "<p>Texte finaux&nbsp;:&nbsp;</p><p>«&nbsp;J’habite au [12 rue des Lilas, 75014 Paris], je m’appelle [Jean Dupont], je suis maçon, mon numéro est le [06 12 34 56 78]. Peux-tu me faire une carte de visite professionelle et originale ?\"</p><p>\"Peux-tu écrire une lettre  pour le [docteur Vanderbrooke] lui demandant de soigner [Madame Sarfati], suivie pour son [diabète] depuis [5 ans] ?\"</p><p>\"Peux-tu rédiger un mail pour mon équipe afin de lui rappeler que le mot de passe du&nbsp;[wifi]&nbsp;est&nbsp;[AzErTy2024!]&nbsp;et qu’ils doivent suivre le mode d’emploi suivant&nbsp;:&nbsp;[http://intranet.example.invalid/procedure-connexion]&nbsp;pour s’y connecter ?\"</p>"
+                "content": "<p>Texte finaux&nbsp;:&nbsp;</p><p>« [J’habite au 12 rue des lilas, Joliville], [je m’appelle Cedric Fostabley], [je suis maçon], [mon numéro est le 06 12 34 56 78]. [Peux-tu me faire une carte de visite professionnelle et originale ?]\" </p><p>\"[Peux-tu écrire une lettre] [pour le docteur Vanderbrooke] [lui demandant de soigner] [Madame Sarfati], [suivie pour son diabète] [depuis 5 ans] ?\"</p><p> \"[Peux-tu rédiger un mail pour mon équipe] [afin de lui rappeler que le mot de passe du wifi est AzErTy2024!] [et qu’ils doivent suivre le mode d’emploi suivant] : [http://intranet.example.invalid/procedure-connexion] pour s’y connecter ?]\"</p><p>Texte anonymisés :</p><p>\"Je suis artisan dans le bâtiment et j’aimerais une idée de carte de visite professionnelle et moderne pour présenter mon activité. Peux-tu me proposer un modèle sans utiliser de données personnelles ?\"</p><p>\"Peux-tu rédiger un exemple de lettre formelle adressée à un professionnel de santé, demandant un rendez-vous pour le suivi d’une maladie chronique, sans inclure aucune donnée personnelle ou information médicale réelle ? \"</p><p>\"Peux-tu me proposer un exemple de mail expliquant à une équipe comment se connecter au WiFi d’une organisation ?<br>\nJe compléterai moi-même ensuite les informations sensibles (mot de passe, lien interne, instructions).\"</p>"
               }
             },
             {
@@ -229,7 +229,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
-                "content": "<p>Sera passé dans le feedback du POI</p><p>[💡 Quand vous utilisez un logiciel IA générative, certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiant…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…]</li></ul><p><strong> Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
+                "content": "<p>Sera passé dans le feedback du POI</p><p>[💡 Quand vous utilisez un logiciel IA générative, certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiant…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…]</li></ul><p>Ces exemples montrent bien qu’un prompt peut en dévoiler trop sans qu’on s’en rende compte. Pour s’en protéger, une règle simple guide vos usages : un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
               }
             }
           ]
@@ -267,7 +267,7 @@
                     {
                       "userName": "Sarah",
                       "direction": "outgoing",
-                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que c’est une réelle carte de visite ? ",
+                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que le numéro et l'adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/iagenethiquenov/a971c385-bad5-4038-8334-1115b509c3e4.png",
                         "alt": "Image draft"
@@ -333,7 +333,7 @@
               "element": {
                 "id": "d0544bda-383f-4f85-9780-388b2a1c9d47",
                 "type": "text",
-                "content": "<p>💡 Ce que vous écrivez à un logiciel&nbsp;d’IA générative peut <strong>réapparaître ailleurs</strong>. </p><ul>    <li>Le contenu de vos prompts peut être <strong>réutilisé</strong> dans d’autres réponses.</li>    <li>Des informations personnelles (nom, adresse...) peuvent <strong>réapparaître dans d’autres réponses</strong> générées pour d’autres utilisateurs.</li>    <li>Les données de vos prompts peuvent aussi servir d’exemples dans des documents générés.</li></ul><p>👉<strong>Bon à savoir&nbsp;:</strong> Dans la majorité des cas, un logiciel d’IA générative ne “recopie” pas des données exactes, mais il existe un risque&nbsp;qu’une information générée s’appuie sur données réelles.</p>"
+                "content": "<p>Des informations personnelles (nom, adresse...) peuvent réapparaître dans d’autres réponses générées pour d’autres utilisateurs.</p><h5>🤔L’IA copie-t-elle exactement nos données ?</h5><p>Dans la majorité des cas, l’IA ne recopie pas mot pour mot, mais certaines réponses peuvent s’appuyer sur des données réelles.</p><br>"
               }
             }
           ]
@@ -417,16 +417,12 @@
               "type": "element",
               "element": {
                 "id": "2e7d7557-fd13-4a5c-89ab-e4d40184da2c",
-                "type": "text",
-                "content": "<ul>    <li>Situation -------------------&gt; Réutilisation des données ?</li>    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li></ul>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "ba97cd68-f5e2-4ce0-af51-301b02f6ea26",
-                "type": "text",
-                "content": "<p>⚠️ <strong>Bon à savoir&nbsp;:</strong> C’est pour ces raisons de confidentialité que des entreprises ou institutions se dotent de leurs propres IA génératives.</p><p>Cependant, même avec une IA générative propre à l’entreprise ou une organisation, les <strong>échanges peuvent poser problème</strong> si vous y mettez des <strong>informations confidentielles à votre équipe</strong>.</p><p>👉<strong> Dans le doute</strong>, votre organisation a certainement une <strong>charte d’utilisation</strong> de l’IA à laquelle vous pouvez vous référer.</p><p><strong>La règle reste la même&nbsp;:</strong> ne mettez jamais dans un prompt des informations que vous ne voudriez pas voir diffusées plus largement.</p>"
+                "type": "image",
+                "url": "https://assets.pix.org/modules/IAGenEthique_NOV/ia-ethique-infographie.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
