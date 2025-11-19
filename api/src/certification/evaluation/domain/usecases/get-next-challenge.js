@@ -4,6 +4,7 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
@@ -25,6 +26,7 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
+ * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionRepository} params.versionRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -39,6 +41,7 @@ const getNextChallenge = async function ({
   certificationCourseRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
+  calibratedChallengeRepository,
   versionRepository,
   flashAlgorithmService,
   pickChallengeService,
@@ -77,13 +80,13 @@ const getNextChallenge = async function ({
   });
 
   const activeFlashCompatibleCalibratedChallenges =
-    await sharedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
+    await calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
       locale,
       version,
     });
 
   const alreadyAnsweredCalibratedChallenges =
-    await sharedChallengeRepository.getManyCalibratedChallenges(alreadyAnsweredChallengeIds);
+    await calibratedChallengeRepository.getManyCalibratedChallenges(alreadyAnsweredChallengeIds);
 
   const challenges = [
     ...new Set([...alreadyAnsweredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges]),
