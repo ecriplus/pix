@@ -132,6 +132,45 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
           moduleId: passage.moduleId,
         });
       });
+
+      it('should not schedule a job to notify passage termination', async function () {
+        // given
+        const passageId = 1234;
+
+        const passageRepository = {
+          get: sinon.stub(),
+          update: sinon.stub(),
+        };
+
+        const passage = {
+          id: passageId,
+          userId: null,
+          moduleId: Symbol('module-id'),
+          terminatedAt: null,
+          terminate: sinon.stub(),
+        };
+        passageRepository.get.withArgs({ passageId }).resolves(passage);
+
+        const updatedPassage = {
+          id: passageId,
+          terminatedAt: new Date('2025-03-04'),
+        };
+        passageRepository.update.withArgs({ passage }).resolves(updatedPassage);
+
+        const updateCombinedCourseJobRepository = {
+          performAsync: sinon.stub(),
+        };
+
+        // when
+        await terminatePassage({
+          passageId,
+          passageRepository,
+          updateCombinedCourseJobRepository,
+        });
+
+        // then
+        expect(updateCombinedCourseJobRepository.performAsync.called).false;
+      });
     });
   });
 });
