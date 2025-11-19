@@ -190,67 +190,105 @@ module('Integration | Component | organizations/information-section-edit', funct
     });
 
     module('#features', function () {
-      test('should display place management features as deactivated', async function (assert) {
-        organization.features = {
-          PLACES_MANAGEMENT: {
-            active: false,
-            params: null,
-          },
-        };
+      module('PLACES_MANAGEMENT', function () {
+        test('should display features as deactivated', async function (assert) {
+          organization.features = {
+            PLACES_MANAGEMENT: {
+              active: false,
+              params: null,
+            },
+          };
 
-        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+          const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
-        assert.false(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.notOk(
-          screen.queryByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ),
-        );
+          assert.false(
+            screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+              .checked,
+          );
+          assert.notOk(
+            screen.queryByLabelText(
+              t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+            ),
+          );
+        });
+
+        test('should display features as activated and lockThreshold deactivated', async function (assert) {
+          organization.features = {
+            PLACES_MANAGEMENT: {
+              active: true,
+              params: { enableMaximumPlacesLimit: false },
+            },
+          };
+
+          const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+          assert.true(
+            screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+              .checked,
+          );
+          assert.false(
+            screen.getByLabelText(
+              t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+            ).checked,
+          );
+        });
+
+        test('should display features as activated  and lockThreshold activated', async function (assert) {
+          organization.features = {
+            PLACES_MANAGEMENT: {
+              active: true,
+              params: { enableMaximumPlacesLimit: true },
+            },
+          };
+
+          const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+          assert.true(
+            screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+              .checked,
+          );
+          assert.true(
+            screen.getByLabelText(
+              t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+            ).checked,
+          );
+        });
       });
 
-      test('should display place management features as activated and lockThreshold deactivated', async function (assert) {
-        organization.features = {
-          PLACES_MANAGEMENT: {
-            active: true,
-            params: { enableMaximumPlacesLimit: false },
-          },
-        };
+      module('CAMPAIGN_WITHOUT_USER_PROFILE', function () {
+        test('should display features as deactivated', async function (assert) {
+          organization.features = {
+            CAMPAIGN_WITHOUT_USER_PROFILE: {
+              active: false,
+              params: null,
+            },
+          };
 
-        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+          const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
-        assert.true(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.false(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ).checked,
-        );
-      });
+          assert.false(
+            screen.getByLabelText(
+              t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
+            ).checked,
+          );
+        });
 
-      test('should display place management features as activated  and lockThreshold activated', async function (assert) {
-        organization.features = {
-          PLACES_MANAGEMENT: {
-            active: true,
-            params: { enableMaximumPlacesLimit: true },
-          },
-        };
+        test('should display features as activated', async function (assert) {
+          organization.features = {
+            CAMPAIGN_WITHOUT_USER_PROFILE: {
+              active: true,
+              params: null,
+            },
+          };
 
-        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+          const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
-        assert.true(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.true(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ).checked,
-        );
+          assert.true(
+            screen.getByLabelText(
+              t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
+            ).checked,
+          );
+        });
       });
     });
   });
