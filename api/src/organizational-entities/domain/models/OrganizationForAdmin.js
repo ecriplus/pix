@@ -228,6 +228,7 @@ class OrganizationForAdmin {
     this.tagsToAdd = differenceBy(tags, this.tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     this.tagsToRemove = differenceBy(this.tags, tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     if (organization.administrationTeamId) this.administrationTeamId = organization.administrationTeamId;
+    if (organization.countryCode) this.countryCode = organization.countryCode;
   }
 
   setCountryName(countryName) {

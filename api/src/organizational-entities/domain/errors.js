@@ -35,6 +35,13 @@ class ArchiveOrganizationsInBatchError extends DomainError {
   }
 }
 
+class CountryNotFoundError extends DomainError {
+  constructor({ code = 'COUNTRY_NOT_FOUND', message = 'Country not found', meta } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
 class DpoEmailInvalid extends DomainError {
   constructor({ code = 'DPO_EMAIL_INVALID', message = 'DPO email invalid', meta } = {}) {
     super(message);
@@ -98,6 +105,7 @@ export {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
   ArchiveOrganizationsInBatchError,
+  CountryNotFoundError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,

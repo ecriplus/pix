@@ -4,6 +4,7 @@ import {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
   ArchiveOrganizationsInBatchError,
+  CountryNotFoundError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
@@ -58,6 +59,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   {
     name: AdministrationTeamNotFound.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
+  },
+  {
+    name: CountryNotFoundError.name,
+    httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code, error.meta),
   },
 ].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
 

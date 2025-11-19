@@ -1,15 +1,21 @@
-import { AdministrationTeamNotFound } from '../errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import { AdministrationTeamNotFound, CountryNotFoundError } from '../errors.js';
 
 const updateOrganizationInformation = async function ({
   organization,
   organizationForAdminRepository,
   tagRepository,
   administrationTeamRepository,
+  countryRepository,
 }) {
   const existingOrganization = await organizationForAdminRepository.get({ organizationId: organization.id });
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);
 
   await _checkAdministrationTeamExists(organization.administrationTeamId, administrationTeamRepository);
+
+  if (organization.countryCode) {
+    await _checkCountryExists(organization.countryCode, countryRepository);
+  }
 
   existingOrganization.updateWithDataProtectionOfficerAndTags(
     organization,
@@ -31,6 +37,18 @@ async function _checkAdministrationTeamExists(administrationTeamId, administrati
         administrationTeamId: administrationTeamId,
       },
     });
+  }
+}
+
+async function _checkCountryExists(countryCode, countryRepository) {
+  try {
+    await countryRepository.getByCode(countryCode);
+  } catch {
+    logger.error({
+      event: 'Not_found_country',
+      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
+    });
+    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
   }
 }
 

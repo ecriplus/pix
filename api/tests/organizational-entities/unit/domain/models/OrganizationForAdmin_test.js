@@ -347,6 +347,34 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organization.administrationTeamId).to.equal(initialAdministrationTeamId);
     });
 
+    it('updates country code', async function () {
+      // given
+      const initialCountryCode = Symbol('initial country code');
+      const newCountryCode = Symbol('new country code');
+
+      const organization = new OrganizationForAdmin({ countryCode: initialCountryCode });
+
+      // when
+      organization.updateWithDataProtectionOfficerAndTags({ countryCode: newCountryCode, features });
+
+      // then
+      expect(organization.countryCode).to.equal(newCountryCode);
+    });
+
+    it('does not update country code to empty value', async function () {
+      // given
+      const initialCountryCode = Symbol('initial country code');
+      const newCountryCode = null;
+
+      const organization = new OrganizationForAdmin({ countryCode: initialCountryCode });
+
+      // when
+      organization.updateWithDataProtectionOfficerAndTags({ countryCode: newCountryCode, features });
+
+      // then
+      expect(organization.countryCode).to.equal(initialCountryCode);
+    });
+
     context('updates organization isManagingStudents', function () {
       it('updates organization isManagingStudents when LEARNER_IMPORT feature does not exist', function () {
         // given

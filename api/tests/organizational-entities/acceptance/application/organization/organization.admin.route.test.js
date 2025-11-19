@@ -676,6 +676,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
 
+      const country = databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99102',
+        commonName: 'Islande',
+        originalName: 'Islande',
+      });
+
       const organizationAttributes = {
         externalId: '0446758F',
         provinceCode: '044',
@@ -696,6 +702,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             email: organizationAttributes.email,
             credit: organizationAttributes.credit,
             'administration-team-id': administrationTeamId,
+            'country-code': country.code,
           },
         },
       };

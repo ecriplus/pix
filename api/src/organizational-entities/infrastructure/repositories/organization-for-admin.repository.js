@@ -247,6 +247,7 @@ const update = async function ({ organization }) {
     'showSkills',
     'type',
     'administrationTeamId',
+    'countryCode',
   ]);
 
   await _enableFeatures(knexConn, organization.features, organization.id);
