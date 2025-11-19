@@ -44,7 +44,9 @@ export default class DateEditor extends Component {
           {{t "pages.administration.certification.sco-blocked-access-date.cancel-button"}}
         </PixButton>
       {{else}}
-        <span class="sco-blocked-access-date-configuration__current-date">{{@label}} {{this.formattedDate}}</span>
+        <span class="sco-blocked-access-date-configuration__current-date">{{@label}}
+          {{this.formattedDate}}
+          {{t "pages.administration.certification.sco-blocked-access-date.hour"}}</span>
         <PixButton @variant="secondary" @triggerAction={{this.toggleEdit}}>
           {{t "pages.administration.certification.sco-blocked-access-date.modify-button"}}
         </PixButton>

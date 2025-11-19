@@ -51,6 +51,7 @@ import organizationMembership from './models/organization-membership';
 import organizationPlace from './models/organization-place';
 import organizationPlacesCapacity from './models/organization-places-capacity';
 import profile from './models/profile';
+import scoBlockedAccessDate from './models/sco-blocked-access-date';
 import scorecard from './models/scorecard';
 import session from './models/session';
 import skill from './models/skill';
@@ -128,6 +129,7 @@ export default {
   organizationPlace,
   organizationPlacesCapacity,
   profile,
+  scoBlockedAccessDate,
   scorecard,
   session,
   skill,

@@ -864,6 +864,7 @@
           "cancel-button": "Annuler",
           "error": "Erreur lors de la mise à jour de la date",
           "high-school-date": "Date de réouverture pour les lycées :",
+          "hour": "(00h00, heure France métropolitaine)",
           "middle-school-date": "Date de réouverture pour les collèges :",
           "modify-button": "Modifier",
           "save-button": "Enregistrer",

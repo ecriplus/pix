@@ -13,18 +13,18 @@ export default class ScoBlockedAccessDates extends Component {
   @service pixToast;
 
   get collegeDate() {
-    return this.args.model?.find((date) => date.scoOrganizationType === 'college');
+    return this.args.model?.find((date) => date.id === 'COLLEGE');
   }
 
   get lyceeDate() {
-    return this.args.model?.find((date) => date.scoOrganizationType === 'lycee');
+    return this.args.model?.find((date) => date.id === 'LYCEE');
   }
 
   @action
-  async saveDate(organizationType, dateInput) {
+  async saveDate(scoOrganizationTagName, dateInput) {
     const adapter = this.store.adapterFor('sco-blocked-access-date');
     try {
-      await adapter.updateRecord(organizationType, dateInput);
+      await adapter.updateRecord(scoOrganizationTagName, dateInput);
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.administration.certification.sco-blocked-access-date.success'),
       });
@@ -38,12 +38,12 @@ export default class ScoBlockedAccessDates extends Component {
 
   @action
   saveLyceeDate(dateInput) {
-    return this.saveDate('lycee', dateInput);
+    return this.saveDate('LYCEE', dateInput);
   }
 
   @action
   saveCollegeDate(dateInput) {
-    return this.saveDate('college', dateInput);
+    return this.saveDate('COLLEGE', dateInput);
   }
 
   <template>

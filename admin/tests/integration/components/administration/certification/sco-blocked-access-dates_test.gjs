@@ -10,11 +10,11 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | administration/certification/sco-blocked-access-dates', function (hooks) {
   setupIntlRenderingTest(hooks);
-  test('it should display complementary certification list', async function (assert) {
+  test('it should display sco blocked access dates', async function (assert) {
     // given
     const model = [
-      { scoOrganizationType: 'college', reopeningDate: new Date('2025-11-15') },
-      { scoOrganizationType: 'lycee', reopeningDate: new Date('2025-10-15') },
+      { id: 'COLLEGE', reopeningDate: new Date('2025-11-15') },
+      { id: 'LYCEE', reopeningDate: new Date('2025-10-15') },
     ];
 
     // when
@@ -27,14 +27,18 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     assert
       .dom(
         screen.getByText(
-          t('pages.administration.certification.sco-blocked-access-date.high-school-date') + ' 15/10/2025',
+          t('pages.administration.certification.sco-blocked-access-date.high-school-date') +
+            ' 15/10/2025 ' +
+            t('pages.administration.certification.sco-blocked-access-date.hour'),
         ),
       )
       .exists();
     assert
       .dom(
         screen.getByText(
-          t('pages.administration.certification.sco-blocked-access-date.middle-school-date') + ' 15/11/2025',
+          t('pages.administration.certification.sco-blocked-access-date.middle-school-date') +
+            ' 15/11/2025 ' +
+            t('pages.administration.certification.sco-blocked-access-date.hour'),
         ),
       )
       .exists();
@@ -43,8 +47,8 @@ module('Integration | Component | administration/certification/sco-blocked-acces
   test('it should display an input when modify button is clicked', async function (assert) {
     // given
     const model = [
-      { scoOrganizationType: 'college', reopeningDate: new Date('2025-11-15') },
-      { scoOrganizationType: 'lycee', reopeningDate: new Date('2025-10-15') },
+      { id: 'COLLEGE', reopeningDate: new Date('2025-11-15') },
+      { id: 'LYCEE', reopeningDate: new Date('2025-10-15') },
     ];
 
     // when
@@ -70,8 +74,8 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     sinon.stub(adapter, 'updateRecord').resolves();
 
     const model = [
-      { scoOrganizationType: 'college', reopeningDate: new Date('2025-11-15') },
-      { scoOrganizationType: 'lycee', reopeningDate: new Date('2025-10-15') },
+      { id: 'COLLEGE', reopeningDate: new Date('2025-11-15') },
+      { id: 'LYCEE', reopeningDate: new Date('2025-10-15') },
     ];
 
     // when
@@ -96,8 +100,8 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     sinon.stub(adapter, 'updateRecord').rejects();
 
     const model = [
-      { scoOrganizationType: 'college', reopeningDate: new Date('2025-11-15') },
-      { scoOrganizationType: 'lycee', reopeningDate: new Date('2025-10-15') },
+      { id: 'COLLEGE', reopeningDate: new Date('2025-11-15') },
+      { id: 'LYCEE', reopeningDate: new Date('2025-10-15') },
     ];
 
     // when

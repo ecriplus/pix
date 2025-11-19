@@ -7,9 +7,8 @@ export default class ScoBlockedAccessDatesAdapter extends ApplicationAdapter {
     return `${this.host}/${this.namespace}/sco-blocked-access-dates`;
   }
 
-  updateRecord(scoOrganizationType, reopeningDate) {
-    console.log('hi');
-    const url = `${this.host}/${this.namespace}/sco-blocked-access-dates/${scoOrganizationType}`;
+  updateRecord(scoOrganizationTagName, reopeningDate) {
+    const url = `${this.host}/${this.namespace}/sco-blocked-access-dates/${scoOrganizationTagName}`;
     const payload = {
       data: {
         attributes: {
