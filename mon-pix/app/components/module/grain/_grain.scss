@@ -23,6 +23,10 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     font-weight: var(--pix-font-bold);
   }
 
+  &__card {
+    border-radius: $grain-card-border-radius;
+  }
+
   &__card,
   &-card__tag,
   &-card__footer {
@@ -43,10 +47,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
         }
       }
     }
-  }
-
-  &__card {
-    border-radius: $grain-card-border-radius;
   }
 
   &:focus-visible {

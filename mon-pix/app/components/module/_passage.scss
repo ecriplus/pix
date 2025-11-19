@@ -3,6 +3,10 @@
 
 
 .module-passage {
+  max-width: var(--modulix-max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--pix-spacing-4x);
+
   @include breakpoints.device-is('mobile') {
     padding-top: 0;
 
@@ -10,10 +14,6 @@
       padding-top: 70px;
     }
   }
-
-  max-width: var(--modulix-max-content-width);
-  margin: 0 auto;
-  padding: 0 var(--pix-spacing-4x);
 
   .auto-scroll {
     min-height: calc(100vh - var(--scroll-offset));
