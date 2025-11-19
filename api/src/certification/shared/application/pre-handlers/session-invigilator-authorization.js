@@ -1,10 +1,10 @@
 import { extractUserIdFromRequest } from '../../../../shared/infrastructure/utils/request-response-utils.js';
-import * as supervisorAccessRepository from '../../../session-management/infrastructure/repositories/supervisor-access-repository.js';
+import * as invigilatorAccessRepository from '../../../session-management/infrastructure/repositories/invigilator-access-repository.js';
 
-const verifyByCertificationCandidateId = async function (request, h, dependencies = { supervisorAccessRepository }) {
+const verifyByCertificationCandidateId = async function (request, h, dependencies = { invigilatorAccessRepository }) {
   const supervisorUserId = extractUserIdFromRequest(request);
   const certificationCandidateId = request.params.certificationCandidateId;
-  const isSupervisorForSession = await dependencies.supervisorAccessRepository.isUserSupervisorForSessionCandidate({
+  const isSupervisorForSession = await dependencies.invigilatorAccessRepository.isUserInvigilatorForSessionCandidate({
     supervisorId: supervisorUserId,
     certificationCandidateId,
   });
@@ -16,11 +16,11 @@ const verifyByCertificationCandidateId = async function (request, h, dependencie
   return true;
 };
 
-const verifyBySessionId = async function (request, h, dependencies = { supervisorAccessRepository }) {
+const verifyBySessionId = async function (request, h, dependencies = { invigilatorAccessRepository }) {
   const userId = extractUserIdFromRequest(request);
   const sessionId = request.params.sessionId;
 
-  const isSupervisorForSession = await dependencies.supervisorAccessRepository.isUserSupervisorForSession({
+  const isSupervisorForSession = await dependencies.invigilatorAccessRepository.isUserInvigilatorForSession({
     sessionId,
     userId,
   });

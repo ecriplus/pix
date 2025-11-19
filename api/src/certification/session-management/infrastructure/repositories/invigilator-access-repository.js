@@ -5,13 +5,13 @@ const create = async function ({ sessionId, userId }) {
   await knexConn('supervisor-accesses').insert({ sessionId, userId });
 };
 
-const isUserSupervisorForSession = async function ({ sessionId, userId }) {
+const isUserInvigilatorForSession = async function ({ sessionId, userId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn.select(1).from('supervisor-accesses').where({ sessionId, userId }).first();
   return Boolean(result);
 };
 
-const isUserSupervisorForSessionCandidate = async function ({ supervisorId, certificationCandidateId }) {
+const isUserInvigilatorForSessionCandidate = async function ({ supervisorId, certificationCandidateId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn
     .select(1)
@@ -22,4 +22,4 @@ const isUserSupervisorForSessionCandidate = async function ({ supervisorId, cert
   return Boolean(result);
 };
 
-export { create, isUserSupervisorForSession, isUserSupervisorForSessionCandidate };
+export { create, isUserInvigilatorForSession, isUserInvigilatorForSessionCandidate };

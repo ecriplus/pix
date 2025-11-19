@@ -1,7 +1,7 @@
 //@ts-check
 /**
  * @typedef {import('./index.js').InvigilatorSessionRepository} InvigilatorSessionRepository
- * @typedef {import('./index.js').SupervisorAccessRepository} SupervisorAccessRepository
+ * @typedef {import('./index.js').InvigilatorAccessRepository} InvigilatorAccessRepository
  * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
  * @typedef {import('./index.js').CertificationCenterAccessRepository} CertificationCenterAccessRepository
  */
@@ -20,7 +20,7 @@ export const superviseSession = withTransaction(
    * @param {string} params.invigilatorPassword
    * @param {number} params.userId
    * @param {InvigilatorSessionRepository} params.invigilatorSessionRepository
-   * @param {SupervisorAccessRepository} params.supervisorAccessRepository
+   * @param {InvigilatorAccessRepository} params.invigilatorAccessRepository
    * @param {CertificationCenterRepository} params.certificationCenterRepository
    * @param {CertificationCenterAccessRepository} params.certificationCenterAccessRepository
    */
@@ -29,7 +29,7 @@ export const superviseSession = withTransaction(
     invigilatorPassword,
     userId,
     invigilatorSessionRepository,
-    supervisorAccessRepository,
+    invigilatorAccessRepository,
     certificationCenterRepository,
     certificationCenterAccessRepository,
   }) => {
@@ -69,6 +69,6 @@ export const superviseSession = withTransaction(
       throw new CertificationCenterIsArchivedError();
     }
 
-    await supervisorAccessRepository.create({ sessionId, userId });
+    await invigilatorAccessRepository.create({ sessionId, userId });
   },
 );

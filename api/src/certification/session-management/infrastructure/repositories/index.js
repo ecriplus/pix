@@ -28,6 +28,7 @@ import * as competenceMarkRepository from './competence-mark-repository.js';
 import * as courseAssessmentResultRepository from './course-assessment-result-repository.js';
 import * as cpfExportRepository from './cpf-export-repository.js';
 import * as finalizedSessionRepository from './finalized-session-repository.js';
+import * as invigilatorAccessRepository from './invigilator-access-repository.js';
 import * as invigilatorSessionRepository from './invigilator-session-repository.js';
 import * as juryCertificationRepository from './jury-certification-repository.js';
 import * as juryCertificationSummaryRepository from './jury-certification-summary-repository.js';
@@ -37,7 +38,6 @@ import * as sessionForSupervisingRepository from './session-for-supervising-repo
 import * as sessionJuryCommentRepository from './session-jury-comment-repository.js';
 import * as sessionRepository from './session-repository.js';
 import * as sessionSummaryRepository from './session-summary-repository.js';
-import * as supervisorAccessRepository from './supervisor-access-repository.js';
 import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-certification-course-details-for-administration-repository.js';
 
 /**
@@ -61,7 +61,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {sessionSummaryRepository} SessionSummaryRepository
  * @typedef {sessionRepository} SessionRepository
  * @typedef {invigilatorSessionRepository} InvigilatorSessionRepository
- * @typedef {supervisorAccessRepository} SupervisorAccessRepository
+ * @typedef {invigilatorAccessRepository} InvigilatorAccessRepository
  * @typedef {certificationReportRepository} CertificationReportRepository
  * @typedef {certificationRepository} CertificationRepository
  * @typedef {v3CertificationCourseDetailsForAdministrationRepository} V3CertificationCourseDetailsForAdministrationRepository
@@ -103,7 +103,7 @@ const repositoriesWithoutInjectedDependencies = {
   sessionJuryCommentRepository,
   certificationRepository,
   certificationIssueReportRepository,
-  supervisorAccessRepository,
+  invigilatorAccessRepository,
   certificationReportRepository,
   v3CertificationCourseDetailsForAdministrationRepository,
   competenceRepository,

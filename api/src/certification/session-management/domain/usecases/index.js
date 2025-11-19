@@ -30,7 +30,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../infrastructure/repositories/index.js').FinalizedSessionRepository} FinalizedSessionRepository
  * @typedef {import('../../infrastructure/repositories/index.js').JuryCertificationSummaryRepository} JuryCertificationSummaryRepository
- * @typedef {import('../../infrastructure/repositories/index.js').SupervisorAccessRepository} SupervisorAccessRepository
+ * @typedef {import('../../infrastructure/repositories/index.js').InvigilatorAccessRepository} InvigilatorAccessRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationOfficerRepository} CertificationOfficerRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationIssueReportRepository} CertificationIssueReportRepository
  * @typedef {import('../../infrastructure/repositories/index.js').FinalizedSessionRepository} FinalizedSessionRepository
