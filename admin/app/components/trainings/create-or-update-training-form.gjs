@@ -194,9 +194,10 @@ export default class CreateOrUpdateTrainingForm extends Component {
             </PixInput>
             <small>
               <a
-                href="https://1024pix.github.io/pix-images-list/viewer.html?directory=contenu-formatif/editeur/"
+                href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="training__logo-url-link"
               >
                 Voir la liste des logos éditeur
               </a>
