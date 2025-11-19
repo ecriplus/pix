@@ -3,17 +3,11 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | Serializer | sco-blocked-access-dates-serializer', function () {
   describe('#serialize', function () {
-    it('should serialize asco blocked access dates to JSONAPI', function () {
+    it('should serialize a sco blocked access dates to JSONAPI', function () {
       // given
       const scoBlockedAccessDates = [
-        domainBuilder.certification.configuration.buildScoBlockedAccessDate({
-          scoOrganizationType: 'lycee',
-          reopeningDate: new Date('2025-10-15'),
-        }),
-        domainBuilder.certification.configuration.buildScoBlockedAccessDate({
-          scoOrganizationType: 'college',
-          reopeningDate: new Date('2025-11-15'),
-        }),
+        domainBuilder.certification.configuration.buildScoBlockedAccessDateLycee(),
+        domainBuilder.certification.configuration.buildScoBlockedAccessDateCollege(),
       ];
 
       // when
@@ -24,17 +18,15 @@ describe('Certification | Configuration | Unit | Serializer | sco-blocked-access
         data: [
           {
             type: 'sco-blocked-access-dates',
-            id: 'lycee',
+            id: 'LYCEE',
             attributes: {
-              'sco-organization-type': 'lycee',
               'reopening-date': new Date('2025-10-15'),
             },
           },
           {
             type: 'sco-blocked-access-dates',
-            id: 'college',
+            id: 'COLLEGE',
             attributes: {
-              'sco-organization-type': 'college',
               'reopening-date': new Date('2025-11-15'),
             },
           },

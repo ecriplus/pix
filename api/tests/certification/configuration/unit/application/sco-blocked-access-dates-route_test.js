@@ -16,11 +16,9 @@ describe('Certification | Configuration | Unit | Application | Router | sco-bloc
         await httpTestServer.register(moduleUnderTest);
 
         // when
-        const response = await httpTestServer.request(
-          'PATCH',
-          '/api/admin/sco-blocked-access-dates/sco-blocked-access-date-lycee',
-          { data: { attributes: { value: '2025-11-15' } } },
-        );
+        const response = await httpTestServer.request('PATCH', '/api/admin/sco-blocked-access-dates/LYCEE', {
+          data: { attributes: { value: '2025-11-15' } },
+        });
 
         // then
         expect(response.statusCode).to.equal(403);

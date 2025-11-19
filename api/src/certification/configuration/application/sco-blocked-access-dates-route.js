@@ -4,6 +4,7 @@ import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { ScoOrganizationTagName } from '../domain/models/ScoOrganizationTagName.js';
 import { scoBlockedAccessDatesController } from './sco-blocked-access-dates-controller.js';
 
 const register = async function (server) {
@@ -24,7 +25,9 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            key: Joi.string().required(),
+            key: Joi.string()
+              .required()
+              .valid(...Object.values(ScoOrganizationTagName)),
           }),
           payload: Joi.object({
             data: Joi.object({

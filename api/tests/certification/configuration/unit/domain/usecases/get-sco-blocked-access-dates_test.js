@@ -2,10 +2,10 @@ import { getScoBlockedAccessDates } from '../../../../../../src/certification/co
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | get-sco-blocked-access-dates', function () {
-  let scoBlockedAccessDatesRepository;
+  let ScoBlockedAccessDatesRepository;
 
   beforeEach(function () {
-    scoBlockedAccessDatesRepository = {
+    ScoBlockedAccessDatesRepository = {
       getScoBlockedAccessDates: sinon.stub(),
     };
   });
@@ -13,22 +13,16 @@ describe('Certification | Configuration | Unit | UseCase | get-sco-blocked-acces
   it('should return sco blocked access dates', async function () {
     // given
     const scoBlockedAccessDates = [
-      domainBuilder.certification.configuration.buildScoBlockedAccessDate({
-        scoOrganizationType: 'lycee',
-        reopeningDate: new Date('2025-10-15'),
-      }),
-      domainBuilder.certification.configuration.buildScoBlockedAccessDate({
-        scoOrganizationType: 'college',
-        reopeningDate: new Date('2025-11-15'),
-      }),
+      domainBuilder.certification.configuration.buildScoBlockedAccessDateCollege(),
+      domainBuilder.certification.configuration.buildScoBlockedAccessDateLycee(),
     ];
-    scoBlockedAccessDatesRepository.getScoBlockedAccessDates.resolves(scoBlockedAccessDates);
+    ScoBlockedAccessDatesRepository.getScoBlockedAccessDates.resolves(scoBlockedAccessDates);
 
     // when
-    const results = await getScoBlockedAccessDates({ scoBlockedAccessDatesRepository });
+    const results = await getScoBlockedAccessDates({ ScoBlockedAccessDatesRepository });
 
     // then
-    expect(scoBlockedAccessDatesRepository.getScoBlockedAccessDates).to.have.been.calledOnce;
+    expect(ScoBlockedAccessDatesRepository.getScoBlockedAccessDates).to.have.been.calledOnce;
     expect(results).to.deep.equal(scoBlockedAccessDates);
   });
 });

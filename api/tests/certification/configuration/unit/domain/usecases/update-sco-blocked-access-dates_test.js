@@ -1,36 +1,40 @@
 import { updateScoBlockedAccessDate } from '../../../../../../src/certification/configuration/domain/usecases/update-sco-blocked-access-date.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | update-sco-blocked-access-date', function () {
-  let scoBlockedAccessDatesRepositoryStub;
+  let ScoBlockedAccessDatesRepositoryStub;
+  const scoBlockedAccessDate = domainBuilder.certification.configuration.buildScoBlockedAccessDateLycee();
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
 
-    scoBlockedAccessDatesRepositoryStub = {
+    ScoBlockedAccessDatesRepositoryStub = {
+      findScoBlockedAccessDateByKey: sinon.stub().resolves(scoBlockedAccessDate),
       updateScoBlockedAccessDate: sinon.stub().resolves(),
     };
   });
 
   it('should update a sco blocked access date', async function () {
     // given
-    const scoOrganizationType = 'lycee';
+    const scoOrganizationTagName = 'LYCEE';
     const reopeningDate = new Date('2025-12-15');
 
     // when
     await updateScoBlockedAccessDate({
-      scoOrganizationType,
+      scoOrganizationTagName,
       reopeningDate,
-      scoBlockedAccessDatesRepository: scoBlockedAccessDatesRepositoryStub,
+      ScoBlockedAccessDatesRepository: ScoBlockedAccessDatesRepositoryStub,
     });
 
     // then
-    expect(scoBlockedAccessDatesRepositoryStub.updateScoBlockedAccessDate).to.have.been.calledOnceWithExactly({
-      scoOrganizationType,
-      reopeningDate,
-    });
+    expect(ScoBlockedAccessDatesRepositoryStub.findScoBlockedAccessDateByKey).to.have.been.calledOnceWithExactly(
+      scoOrganizationTagName,
+    );
+    expect(ScoBlockedAccessDatesRepositoryStub.updateScoBlockedAccessDate).to.have.been.calledOnceWithExactly(
+      scoBlockedAccessDate,
+    );
   });
 });

@@ -1,13 +1,13 @@
 /**
- * @typedef {import ('./index.js').scoBlockedAccessDatesRepository} scoBlockedAccessDatesRepository
+ * @typedef {import ('./index.js').ScoBlockedAccessDatesRepository} ScoBlockedAccessDatesRepository
  */
 
 /**
  * @param {Object} params
- * @param {scoBlockedAccessDatesRepository} params.scoBlockedAccessDatesRepository
- * @returns {Promise<Array<>>}
+ * @param {ScoBlockedAccessDatesRepository} paramsScoBlockedAccessDatesRepository
+ * @returns {Promise<Array<ScoBlockedAccessDate>>}
  */
 
-export const getScoBlockedAccessDates = async ({ scoBlockedAccessDatesRepository }) => {
-  return scoBlockedAccessDatesRepository.getScoBlockedAccessDates();
+export const getScoBlockedAccessDates = async ({ ScoBlockedAccessDatesRepository }) => {
+  return ScoBlockedAccessDatesRepository.getScoBlockedAccessDates();
 };

@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('./index.js').scoBlockedAccessDatesRepository} scoBlockedAccessDatesRepository
+ * @typedef {import ('./index.js').ScoBlockedAccessDatesRepository} ScoBlockedAccessDatesRepository
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -7,11 +7,14 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 export const updateScoBlockedAccessDate = withTransaction(
   /**
    * @param {Object} params
-   * @param {String} params.scoOrganizationType
+   * @param {String} params.scoOrganizationTagName
    * @param {Date} params.reopeningDate
-   * @param {scoBlockedAccessDatesRepository} params.scoBlockedAccessDatesRepository
+   * @param {ScoBlockedAccessDatesRepository} params.ScoBlockedAccessDatesRepository
    */
-  async ({ scoOrganizationType, reopeningDate, scoBlockedAccessDatesRepository }) => {
-    return scoBlockedAccessDatesRepository.updateScoBlockedAccessDate({ scoOrganizationType, reopeningDate });
+  async ({ scoOrganizationTagName, reopeningDate, ScoBlockedAccessDatesRepository }) => {
+    const scoBlockedAccessDate =
+      await ScoBlockedAccessDatesRepository.findScoBlockedAccessDateByKey(scoOrganizationTagName);
+    scoBlockedAccessDate.updateReopeningDate(reopeningDate);
+    return ScoBlockedAccessDatesRepository.updateScoBlockedAccessDate(scoBlockedAccessDate);
   },
 );

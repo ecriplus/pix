@@ -1,25 +1,46 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ScoBlockedAccessDate } from '../../domain/read-models/ScoBlockedAccessDate.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { ScoBlockedAccessDate } from '../../domain/models/ScoBlockedAccessDate.js';
 
 /**
  * @returns {Promise<Array<ScoBlockedAccessDate>>}
  */
 export const getScoBlockedAccessDates = async () => {
   const knexConn = DomainTransaction.getConnection();
-  const data = await knexConn('sco_blocked_access_dates').select('scoOrganizationType', 'reopeningDate');
+  const data = await knexConn('certification_sco_blocked_access_dates').select(
+    'scoOrganizationTagName',
+    'reopeningDate',
+  );
   return data.map(_toDomain);
 };
 
 /**
- * @param {Object} params
- * @param {String} params.scoOrganizationType
- * @param {Date} params.reopeningDate
+ * @returns {Promise<ScoBlockedAccessDate>}
+ * @throws {NotFoundError} if ScoBlockedAccessDate does not exist
  */
-export const updateScoBlockedAccessDate = async ({ scoOrganizationType, reopeningDate }) => {
+export const findScoBlockedAccessDateByKey = async (scoOrganizationTagName) => {
   const knexConn = DomainTransaction.getConnection();
-  await knexConn('sco_blocked_access_dates').update({ reopeningDate }).where({ scoOrganizationType });
+  const data = await knexConn('certification_sco_blocked_access_dates')
+    .select('scoOrganizationTagName', 'reopeningDate')
+    .where({ scoOrganizationTagName });
+  if (data.length > 0) {
+    return _toDomain(data[0]);
+  } else {
+    throw new NotFoundError(`ScoBlockedAccessDate ${scoOrganizationTagName} does not exist.`);
+  }
 };
 
-const _toDomain = ({ scoOrganizationType, reopeningDate }) => {
-  return new ScoBlockedAccessDate({ scoOrganizationType, reopeningDate });
+/**
+ * @param {Object} params
+ * @param {ScoBlockedAccessDate} params.scoBlockedAccessDate
+ */
+export const updateScoBlockedAccessDate = async (scoBlockedAccessDate) => {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification_sco_blocked_access_dates')
+    .update({ reopeningDate: scoBlockedAccessDate.reopeningDate })
+    .where({ scoOrganizationTagName: scoBlockedAccessDate.scoOrganizationTagName });
+};
+
+const _toDomain = ({ scoOrganizationTagName, reopeningDate }) => {
+  return new ScoBlockedAccessDate({ scoOrganizationTagName, reopeningDate });
 };
