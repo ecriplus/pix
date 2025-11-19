@@ -2,7 +2,7 @@ import { config } from '../../../../../src/shared/config.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 import { createServer, expect, nock } from '../../../../test-helper.js';
 
-describe('Acceptance | Controller | modules-controller-getBySlug', function () {
+describe('Acceptance | Controller | Modules | Route', function () {
   let server;
 
   beforeEach(async function () {
