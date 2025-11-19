@@ -35,7 +35,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         findFlashCompatibleWithoutLocale: sinon
           .stub()
           .withArgs({
-            useObsoleteChallenges: true,
             fromArchivedCalibration: false,
           })
           .resolves(challengeList),
@@ -83,7 +82,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         challengeRepository.findFlashCompatibleWithoutLocale
           .withArgs({
-            useObsoleteChallenges: true,
             fromArchivedCalibration: false,
           })
           .resolves(challengesAfterCalibration);
@@ -147,7 +145,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         challengeRepository.findFlashCompatibleWithoutLocale
           .withArgs({
-            useObsoleteChallenges: true,
             fromArchivedCalibration: false,
           })
           .resolves(challengesAfterCalibration);
@@ -218,7 +215,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         // then
         expect(challengeRepository.findFlashCompatibleWithoutLocale).to.have.been.calledOnceWithExactly({
-          useObsoleteChallenges: true,
           fromArchivedCalibration: false,
         });
       });
@@ -256,7 +252,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         challengeRepository.findFlashCompatibleWithoutLocale
           .withArgs({
-            useObsoleteChallenges: true,
             fromArchivedCalibration: false,
           })
           .resolves(challengesAfterCalibration);
@@ -278,7 +273,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         // then
         expect(challengeRepository.findFlashCompatibleWithoutLocale).to.have.been.calledOnceWithExactly({
-          useObsoleteChallenges: true,
           fromArchivedCalibration: false,
         });
       });

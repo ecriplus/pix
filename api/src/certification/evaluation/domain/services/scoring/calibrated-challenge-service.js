@@ -32,7 +32,6 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
     const fromArchivedCalibration = await _isOldCalibration(certificationCourse);
 
     const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
-      useObsoleteChallenges: true,
       fromArchivedCalibration,
     });
 

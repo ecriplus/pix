@@ -14,19 +14,16 @@ const VALIDATED_STATUS = 'validé';
 const ARCHIVED_STATUS = 'archivé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
 
-export async function findFlashCompatibleWithoutLocale({
-  useObsoleteChallenges,
-  fromArchivedCalibration = false,
-} = {}) {
+export async function findFlashCompatibleWithoutLocale({ fromArchivedCalibration = false } = {}) {
   if (fromArchivedCalibration) {
     return _findFlashCompatibleWithoutLocaleFromArchive();
   }
-  return _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges });
+  return _findFlashCompatibleWithoutLocaleFromLCMS();
 }
 
-async function _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges } = {}) {
-  const acceptedStatuses = useObsoleteChallenges ? [OBSOLETE_STATUS, ...OPERATIVE_STATUSES] : OPERATIVE_STATUSES;
-  const cacheKey = `findFlashCompatibleByStatuses({ useObsoleteChallenges: ${Boolean(useObsoleteChallenges)} })`;
+async function _findFlashCompatibleWithoutLocaleFromLCMS() {
+  const acceptedStatuses = [OBSOLETE_STATUS, ...OPERATIVE_STATUSES];
+  const cacheKey = `findFlashCompatibleByStatuses({ useObsoleteChallenges: true })`;
   const findFlashCompatibleByStatusesCallback = (knex) =>
     knex.whereIn('status', acceptedStatuses).whereNotNull('alpha').whereNotNull('delta').orderBy('id');
   const challengeDtos = await getInstance().find(cacheKey, findFlashCompatibleByStatusesCallback);
