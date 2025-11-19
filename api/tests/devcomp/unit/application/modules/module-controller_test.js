@@ -1,6 +1,7 @@
 import { modulesController } from '../../../../../src/devcomp/application/modules/module-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/module-route.js';
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
+import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Modules | Module Controller', function () {
@@ -10,9 +11,7 @@ describe('Unit | Devcomp | Application | Modules | Module Controller', function 
       const encryptedRedirectionUrl = 'encryptedRedirectionUrl';
       const serializedModule = Symbol('serialized modules');
       const module = Symbol('modules');
-      const usecases = {
-        getModule: sinon.stub(),
-      };
+      sinon.stub(usecases, 'getModule');
       usecases.getModule.withArgs({ slug, encryptedRedirectionUrl }).returns(module);
       const moduleSerializer = {
         serialize: sinon.stub(),
