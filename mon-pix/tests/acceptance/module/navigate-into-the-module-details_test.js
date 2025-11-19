@@ -12,11 +12,12 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
   setupMirage(hooks);
   setupIntl(hooks);
 
-  module('when user arrive on the module details page', function () {
+  module('when user arrives on the module details page', function () {
     test('should display the link to passage button', async function (assert) {
       // given
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        shortId: 'm4tth7a5',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         sections: [],
@@ -30,7 +31,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
       });
 
       // when
-      const screen = await visit('/modules/bien-ecrire-son-adresse-mail/details');
+      const screen = await visit('/modules/m4tth7a5/bien-ecrire-son-adresse-mail/details');
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.details.startModule') })).exists({ count: 1 });
@@ -46,6 +47,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
 
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        shortId: 'm4tth7a5',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         sections: [section],
@@ -59,11 +61,11 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
       });
 
       // when
-      const screen = await visit('/modules/bien-ecrire-son-adresse-mail/details');
+      const screen = await visit('/modules/m4tth7a5/bien-ecrire-son-adresse-mail/details');
       await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
       // then
-      assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/passage');
+      assert.strictEqual(currentURL(), '/modules/m4tth7a5/bien-ecrire-son-adresse-mail/passage');
     });
   });
 });

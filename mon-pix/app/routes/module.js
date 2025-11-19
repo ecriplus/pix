@@ -4,9 +4,10 @@ import { service } from '@ember/service';
 export default class ModuleRoute extends Route {
   @service store;
   @service metrics;
+  @service router;
 
   model(params) {
-    return this.store.queryRecord('module', { slug: params.slug, encryptedRedirectionUrl: params.redirection });
+    return this.store.queryRecord('module', { shortId: params.shortId, encryptedRedirectionUrl: params.redirection });
   }
 
   activate() {

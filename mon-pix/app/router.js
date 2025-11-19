@@ -109,7 +109,9 @@ Router.map(function () {
 
   this.route('module-preview-existing', { path: '/modules/preview/:slug' });
   this.route('module-preview', { path: '/modules/preview' });
-  this.route('module', { path: '/modules/:slug' }, function () {
+
+  // eslint-disable-next-line ember/routes-segments-snake-case
+  this.route('module', { path: '/modules/:shortId/:slug' }, function () {
     this.route('details');
     this.route('passage');
     this.route('recap');

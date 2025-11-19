@@ -59,13 +59,14 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'm4tth74s',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: true,
       sections: [section],
     });
 
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    const screen = await visit('/modules/m4tth74s/bien-ecrire-son-adresse-mail/passage');
 
     const firstQcuVerifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     const rightAnswerRadio = screen.getByLabelText('I am the right answer!');
@@ -145,6 +146,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'm4tth74s',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: true,
@@ -159,7 +161,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       solution: qcu1.proposals[1].id,
     });
 
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    const screen = await visit('/modules/m4tth74s/bien-ecrire-son-adresse-mail/passage');
 
     const firstQcuVerifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     const rightAnswerRadio = screen.getByLabelText('I am the right answer!');

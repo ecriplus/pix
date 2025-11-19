@@ -36,6 +36,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       });
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        shortId: 'm4tth7a5',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
@@ -50,7 +51,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       });
       await authenticate(user);
 
-      screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+      screen = await visit('/modules/m4tth7a5/bien-ecrire-son-adresse-mail/passage');
       await clickByName('Terminer');
     });
 
