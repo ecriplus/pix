@@ -1153,8 +1153,8 @@
         "text-to-speech": {
           "activate": "Activate text-to-speech",
           "deactivate": "Deactivate text-to-speech",
-          "play": "Read out loud",
-          "stop": "Stop reading"
+          "play": "Read the instructions out loud",
+          "stop": "Stop reading the instructions"
         },
         "tooltip": {
           "aria-label": "Show question's warning",

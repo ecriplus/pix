@@ -1,6 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
-import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -28,21 +27,13 @@ export default class ChallengeStatement extends Component {
         <div class="challenge-statement__instruction-section">
           <div class="challenge-statement__instructions-and-text-to-speech-container">
             {{#if this.showTextToSpeechButton}}
-              <PixTooltip @position="right" @isInline={{true}}>
-                <:triggerElement>
-                  <button
-                    type="button"
-                    class="challenge-statement__text-to-speech-trigger"
-                    aria-label={{this.textToSpeechButtonTooltipText}}
-                    {{on "click" this.toggleInstructionTextToSpeech}}
-                  >
-                    <PixIcon @name={{if this.isSpeaking "stopCircle" "volumeOn"}} />
-                  </button>
-                </:triggerElement>
-                <:tooltip>
-                  {{this.textToSpeechButtonTooltipText}}
-                </:tooltip>
-              </PixTooltip>
+              <PixButton
+                @triggerAction={{this.toggleInstructionTextToSpeech}}
+                @variant="tertiary"
+                @iconBefore={{if this.isSpeaking "stopCircle" "volumeOn"}}
+              >
+                {{this.textToSpeechButtonTooltipText}}
+              </PixButton>
             {{/if}}
             <MarkdownToHtmlUnsafe
               @class="challenge-statement-instruction__text"
