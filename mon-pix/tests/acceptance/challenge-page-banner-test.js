@@ -92,7 +92,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
         await click(screen.getByRole('button', { name: 'Activer la vocalisation' }));
 
         // then
-        assert.dom(screen.getByRole('button', { name: 'Lire à haute voix' })).exists();
+        assert.dom(screen.getByRole('button', { name: 'Lire la consigne à haute voix' })).exists();
       });
 
       test("should hide text-to-speech button in challenge instruction when it's been deactivated in the banner", async function (assert) {
@@ -103,7 +103,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
         await click(screen.getByRole('button', { name: 'Désactiver la vocalisation' }));
 
         // then
-        assert.dom(screen.queryByRole('button', { name: 'Lire à haute voix' })).doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Lire la consigne à haute voix' })).doesNotExist();
       });
     });
   });

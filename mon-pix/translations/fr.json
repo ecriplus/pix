@@ -1154,8 +1154,8 @@
         "text-to-speech": {
           "activate": "Activer la vocalisation",
           "deactivate": "Désactiver la vocalisation",
-          "play": "Lire à haute voix",
-          "stop": "Arrêter la lecture"
+          "play": "Lire la consigne à haute voix",
+          "stop": "Arrêter la lecture de la consigne"
         },
         "tooltip": {
           "aria-label": "Afficher l'indication sur l'épreuve.",
