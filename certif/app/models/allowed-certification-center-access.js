@@ -17,8 +17,8 @@ export default class AllowedCertificationCenterAccess extends Model {
   @attr() isAccessBlockedAgri;
   @attr() relatedOrganizationTags;
   @attr() habilitations;
-  @attr() pixCertifScoBlockedAccessDateLycee;
-  @attr() pixCertifScoBlockedAccessDateCollege;
+  @attr('date') pixCertifScoBlockedAccessDateLycee;
+  @attr('date') pixCertifScoBlockedAccessDateCollege;
 
   get isSco() {
     return this.type === CERTIFICATION_CENTER_TYPES.SCO;
