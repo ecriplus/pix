@@ -58,9 +58,9 @@ const getNextChallenge = async function ({
     excludedChallengeIds: validatedLiveAlertChallengeIds,
   });
 
-  const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
+  const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 
-  const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
+  const excludedChallengeIds = [...answeredChallengeIds, ...validatedLiveAlertChallengeIds];
 
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId(
@@ -84,11 +84,9 @@ const getNextChallenge = async function ({
     version,
   });
 
-  const alreadyAnsweredCalibratedChallenges = await calibratedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
+  const answeredCalibratedChallenges = await calibratedChallengeRepository.getMany(answeredChallengeIds);
 
-  const challenges = [
-    ...new Set([...alreadyAnsweredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges]),
-  ];
+  const challenges = [...new Set([...answeredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges])];
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
