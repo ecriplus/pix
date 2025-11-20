@@ -58,25 +58,23 @@ export const handleV3CertificationScoring = withTransaction(
     const toBeCancelled = event instanceof CertificationCancelled;
 
     const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-      await dependencies.findByCertificationCourseIdAndAssessmentId({
-        certificationCourse,
-        assessmentId,
-      });
 
-    const abortReason = certificationCourse.getAbortReason();
-
+    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
     const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
       sessionId: certificationCourse.getSessionId(),
       userId: certificationCourse.getUserId(),
     });
-
-    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
-
     const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
       scope,
       reconciliationDate: certificationCandidate.reconciledAt,
     });
+
+    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+      await dependencies.findByCertificationCourseIdAndAssessmentId({
+        certificationCourse,
+        version,
+        assessmentId,
+      });
 
     const algorithm = new FlashAssessmentAlgorithm({
       flashAlgorithmImplementation: flashAlgorithmService,
@@ -88,6 +86,7 @@ export const handleV3CertificationScoring = withTransaction(
       version,
     });
 
+    const abortReason = certificationCourse.getAbortReason();
     const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
       abortReason,
       algorithm,

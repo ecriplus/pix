@@ -206,23 +206,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           version: 3,
         });
 
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: new Date('2018-12-01T01:02:03Z'),
-          competencesScoringConfiguration: [
-            {
-              competence: '1.1',
-              values: [
-                {
-                  bounds: {
-                    max: -2.2,
-                    min: -9.8,
-                  },
-                  competenceLevel: 0,
-                },
-              ],
-            },
-          ],
-        });
         databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2018-12-01T01:02:03Z'),
         });
@@ -293,7 +276,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         version: AlgorithmEngineVersion.V3,
       });
 
-      databaseBuilder.factory.buildCertificationConfiguration();
       databaseBuilder.factory.buildCertificationVersion();
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({

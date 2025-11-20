@@ -411,7 +411,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
       userId: user.id,
       state: Assessment.states.STARTED,
     });
-    databaseBuilder.factory.buildCertificationConfiguration();
 
     await databaseBuilder.commit();
 
