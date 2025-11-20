@@ -429,6 +429,11 @@
           "modal-title": "Confirmer l'annulation du rejet de la certification"
         },
         "user-details-link": "Voir les détails de l'utilisateur"
+      },
+      "search-form": {
+        "ariaLabel": "Rechercher une certification avec un identifiant",
+        "label": "Trouver une certification",
+        "placeholder": "ID de la certification"
       }
     },
     "complementary-certifications": {
