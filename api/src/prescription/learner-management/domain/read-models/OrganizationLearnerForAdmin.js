@@ -6,8 +6,8 @@ import { IMPORT_KEY_FIELD } from '../constants.js';
 
 const validationSchema = Joi.object({
   id: Joi.number().integer().required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
+  firstName: Joi.string().required().allow(''),
+  lastName: Joi.string().required().allow(''),
   birthdate: Joi.string().required().allow(null),
   division: Joi.string().required().allow(null),
   group: Joi.string().required().allow(null),

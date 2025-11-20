@@ -29,6 +29,26 @@ describe('Unit | Domain | Read-models | OrganizationLearnerForAdmin', function (
       expect(() => new OrganizationLearnerForAdmin(validArguments)).not.to.throw(ObjectValidationError);
     });
 
+    it('should successfully instantiate learner from anonymous user flows (ex: simplified campaign)', function () {
+      const leanerFromAnonymousUser = {
+        id: 1,
+        firstName: '',
+        lastName: '',
+        birthdate: null,
+        division: null,
+        group: null,
+        organizationId: 1,
+        organizationName: 'Simplified access',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDisabled: false,
+        organizationIsManagingStudents: false,
+      };
+
+      // when
+      expect(() => new OrganizationLearnerForAdmin(leanerFromAnonymousUser)).not.to.throw(ObjectValidationError);
+    });
+
     describe('additionalColumns', function () {
       it('should not throw when addtionalInformations is not defined', function () {
         const learner = new OrganizationLearnerForAdmin({
