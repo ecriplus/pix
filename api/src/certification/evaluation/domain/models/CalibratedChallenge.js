@@ -1,4 +1,8 @@
-import { Accessibility } from '../../../../shared/domain/models/Challenge.js';
+export const Accessibility = Object.freeze({
+  RAS: 'RAS',
+  OK: 'OK',
+});
+
 /**
  * Traduction: Épreuve calibrée
  */
