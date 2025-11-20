@@ -3,10 +3,11 @@ import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function () {
-  let id, isBeta, slug, title, duration, image;
+  let id, isBeta, slug, title, duration, image, shortId;
 
   beforeEach(function () {
     id = '12a3a2b4-e873-4789-ae1c-57f6f2b99890';
+    shortId = '87ejdt65';
     slug = 'tmp-module-test';
     title = "Test d'un module";
     isBeta = false;
@@ -16,10 +17,11 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
 
   it('should init and keep attributes', function () {
     // when
-    const module = new ModuleMetadata({ id, slug, title, isBeta, duration, image });
+    const module = new ModuleMetadata({ id, shortId, slug, title, isBeta, duration, image });
 
     // then
     expect(module.id).to.equal(id);
+    expect(module.shortId).to.equal(shortId);
     expect(module.slug).to.equal(slug);
     expect(module.title).to.equal(title);
     expect(module.isBeta).to.equal(isBeta);
@@ -47,6 +49,27 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     });
   });
 
+  describe('if a module does not have a short id', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () =>
+          new ModuleMetadata({
+            id,
+            slug,
+            title,
+            isBeta,
+            duration,
+            image,
+          }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The short id is required for a module metadata');
+    });
+  });
+
   describe('if a module does not have a slug', function () {
     it('should throw an error', function () {
       // when
@@ -58,6 +81,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             isBeta,
             duration,
             image,
+            shortId,
           }),
       )();
 
@@ -78,6 +102,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             isBeta,
             duration,
             image,
+            shortId,
           }),
       )();
 
@@ -98,6 +123,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             slug,
             duration,
             image,
+            shortId,
           }),
       )();
 
@@ -118,6 +144,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             slug,
             isBeta,
             image,
+            shortId,
           }),
       )();
 
@@ -142,6 +169,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             slug,
             isBeta,
             image,
+            shortId,
           }),
       )();
 
@@ -166,6 +194,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             slug,
             isBeta,
             image,
+            shortId,
           }),
       )();
 
@@ -186,6 +215,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             slug,
             isBeta,
+            shortId,
           }),
       )();
 
