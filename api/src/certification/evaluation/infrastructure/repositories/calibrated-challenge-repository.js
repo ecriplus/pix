@@ -23,7 +23,7 @@ export async function getMany(ids, locale) {
     : challengeDtos;
   localeChallengeDtos.sort(byId);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(localeChallengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toCalibratedChallengeDomain({ challengeDto, skill }));
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
 }
 
 export async function findActiveFlashCompatible({
@@ -44,7 +44,7 @@ export async function findActiveFlashCompatible({
   });
 
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toCalibratedChallengeDomain({ challengeDto, skill }));
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
 }
 
 async function _findChallengesForCertification({ versionId, locale, cacheKey, dependencies }) {
@@ -105,7 +105,7 @@ function byId(challenge1, challenge2) {
   return challenge1.id < challenge2.id ? -1 : 1;
 }
 
-function toCalibratedChallengeDomain({ challengeDto, skill }) {
+function _toDomain({ challengeDto, skill }) {
   return new CalibratedChallenge({
     id: challengeDto.id,
     discriminant: challengeDto.alpha,
