@@ -339,6 +339,26 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           },
         ]);
       });
+
+      describe('When user has a learner without firstName and lastName (ex: from a simplified campaign)', function () {
+        it('returns 200', async function () {
+          // given
+          const superAdmin = await insertUserWithRoleSuperAdmin();
+          const user = databaseBuilder.factory.buildUser();
+          databaseBuilder.factory.buildOrganizationLearner({ firstName: '', lastName: '', userId: user.id });
+          await databaseBuilder.commit();
+
+          // when
+          const response = await server.inject({
+            method: 'GET',
+            url: `/api/admin/users/${user.id}`,
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(200);
+        });
+      });
     });
   });
 
