@@ -75,7 +75,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
       assert.dom(screen.getByText('La longueur du texte ne doit pas excéder 255 caractères')).exists();
     });
 
-    test('it should display an error text when the customResultPageButtonUrl is not a url', async function (assert) {
+    test('it should display an error text when the customResultPageButtonUrl is not a valid absolute or relative url', async function (assert) {
       campaign.isTypeAssessment = true;
 
       // when
@@ -86,7 +86,22 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByText('Ce champ doit être une URL complète et valide')).exists();
+      assert.dom(screen.getByText('Ce champ doit être une URL valide')).exists();
+    });
+
+    test('should accept relative url for customResultPageButtonUrl', async function (assert) {
+      campaign.isTypeAssessment = true;
+
+      // when
+      const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
+
+      await fillByLabel(
+        'URL du bouton de la page de fin de parcours Si une URL pour le bouton est saisie, le texte est également requis.',
+        '/parcours/combinix1',
+      );
+
+      // then
+      assert.dom(screen.queryByText('Ce champ doit être une URL valide')).doesNotExist();
     });
   });
 
