@@ -73,7 +73,7 @@ const register = async function (server) {
             certificationCandidateId: identifiersType.certificationCandidateId,
           }),
         },
-        handler: certificationCandidateController.endAssessmentBySupervisor,
+        handler: certificationCandidateController.endAssessmentByInvigilator,
         tags: ['api'],
       },
     },

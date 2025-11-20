@@ -294,7 +294,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
           certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
           const assessment = domainBuilder.buildCertificationAssessment();
-          assessment.endBySupervisor({ now: new Date() });
+          assessment.endByInvigilator({ now: new Date() });
           certificationAssessmentRepository.getByCertificationCandidateId.resolves(assessment);
 
           // when

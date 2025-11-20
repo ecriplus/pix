@@ -97,7 +97,7 @@ class CertificationAssessment {
     }
   }
 
-  endBySupervisor({ now }) {
+  endByInvigilator({ now }) {
     this.state = states.ENDED_BY_SUPERVISOR;
     this.endedAt = now;
   }

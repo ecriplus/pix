@@ -22,10 +22,10 @@ const authorizeToResume = async function (request, h) {
   return h.response().code(204);
 };
 
-const endAssessmentBySupervisor = async function (request) {
+const endAssessmentByInvigilator = async function (request) {
   const certificationCandidateId = request.params.certificationCandidateId;
 
-  await usecases.endAssessmentBySupervisor({ certificationCandidateId });
+  await usecases.endAssessmentByInvigilator({ certificationCandidateId });
 
   return null;
 };
@@ -33,6 +33,6 @@ const endAssessmentBySupervisor = async function (request) {
 const certificationCandidateController = {
   authorizeToStart,
   authorizeToResume,
-  endAssessmentBySupervisor,
+  endAssessmentByInvigilator,
 };
 export { certificationCandidateController };
