@@ -10,7 +10,7 @@ export class CalibratedChallengeSkill {
    * @param competenceId
    * @param tubeId
    */
-  constructor({ id, name, competenceId, tubeId } = {}) {
+  constructor({ id, name, competenceId, tubeId }) {
     this.id = id;
     this.name = name;
     this.competenceId = competenceId;
