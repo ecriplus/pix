@@ -287,6 +287,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         userId: userId1,
         firstName: 'Georges',
         lastName: 'Zelio',
+        division: '6eme',
+        group: null,
         organizationId: combinedCourse.organizationId,
       });
       databaseBuilder.factory.buildUser({ id: userId2 });
@@ -294,14 +296,17 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         userId: userId2,
         firstName: 'Loubna',
         lastName: 'Aresto',
+        division: '6eme',
+        group: null,
         organizationId: combinedCourse.organizationId,
       });
-
       databaseBuilder.factory.buildUser({ id: userId3 });
       const organizationLearner3 = databaseBuilder.factory.buildOrganizationLearner({
         userId: userId3,
         firstName: 'Nour',
         lastName: 'Aresto',
+        division: null,
+        group: 'A',
         organizationId: combinedCourse.organizationId,
       });
 
@@ -369,6 +374,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         // then
         expect(userIds).deep.equal([userId2, userId3, userId1]);
       });
+
       it('should return participation matching learner lastName', async function () {
         // when
         const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
@@ -379,6 +385,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         // then
         expect(userIds).deep.equal([userId2, userId3]);
       });
+
       it('should return participation matching learner firstName', async function () {
         // when
         const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
@@ -389,6 +396,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         // then
         expect(userIds).deep.equal([userId1]);
       });
+
       it('should return participation matching participation status', async function () {
         // when
         const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
@@ -399,11 +407,56 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         // then
         expect(userIds).deep.equal([userId2, userId1]);
       });
+
       it('should return participations even with empty status filter', async function () {
         // when
         const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: { statuses: [] },
+        });
+
+        // then
+        expect(userIds).deep.equal([userId2, userId3, userId1]);
+      });
+
+      it('should return participations matching learner division', async function () {
+        // when
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
+          combinedCourseId,
+          filters: { divisions: ['6eme'] },
+        });
+
+        // then
+        expect(userIds).deep.equal([userId2, userId1]);
+      });
+
+      it('should return participations even with empty division filter', async function () {
+        // when
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
+          combinedCourseId,
+          filters: { divisions: [] },
+        });
+
+        // then
+        expect(userIds).deep.equal([userId2, userId3, userId1]);
+      });
+
+      it('should return participations matching learner group', async function () {
+        // when
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
+          combinedCourseId,
+          filters: { groups: ['A'] },
+        });
+
+        // then
+        expect(userIds).deep.equal([userId3]);
+      });
+
+      it('should return participations even with empty group filter', async function () {
+        // when
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
+          combinedCourseId,
+          filters: { groups: [] },
         });
 
         // then
