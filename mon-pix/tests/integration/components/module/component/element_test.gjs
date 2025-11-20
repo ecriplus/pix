@@ -111,7 +111,7 @@ module('Integration | Component | Module | Element', function (hooks) {
     const element = {
       id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
       type: 'image',
-      url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+      url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
       alt: "Dessin détaillé dans l'alternative textuelle",
       alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
     };
@@ -384,18 +384,18 @@ module('Integration | Component | Module | Element', function (hooks) {
       type: 'flashcards',
       title: "Introduction à l'adresse e-mail",
       instruction: '<p>...</p>',
-      introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+      introImage: { url: 'https://assets.pix.org/modules/placeholder-details.svg' },
       cards: [
         {
           id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
           recto: {
             image: {
-              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+              url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
             },
             text: "A quoi sert l'arobase dans mon adresse email ?",
           },
           verso: {
-            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+            image: { url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg' },
             text: "Parce que c'est joli",
           },
         },

@@ -275,7 +275,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
       test('should display image element', async function (assert) {
         // given
         const url =
-          'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg';
+          'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg';
         const imageElement = {
           url,
           alt: 'alt text',
@@ -326,19 +326,19 @@ module('Integration | Component | Module | Grain', function (hooks) {
           type: 'flashcards',
           title: "Introduction à l'adresse e-mail",
           instruction: '<p>...</p>',
-          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+          introImage: { url: 'https://assets.pix.org/modules/placeholder-details.svg' },
           isAnswerable: true,
           cards: [
             {
               id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
               recto: {
                 image: {
-                  url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+                  url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
                 },
                 text: "A quoi sert l'arobase dans mon adresse email ?",
               },
               verso: {
-                image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+                image: { url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg' },
                 text: "Parce que c'est joli",
               },
             },

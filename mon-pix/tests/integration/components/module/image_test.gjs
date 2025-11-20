@@ -13,7 +13,7 @@ module('Integration | Component | Module | Image', function (hooks) {
   test('should display an image', async function (assert) {
     // given
     const url =
-      'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg';
+      'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg';
 
     const imageElement = {
       url,
@@ -74,7 +74,7 @@ module('Integration | Component | Module | Image', function (hooks) {
     const alternativeText = 'alternative instruction';
 
     const imageElement = {
-      url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+      url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
       alt: 'alt text',
       alternativeText,
     };
@@ -102,7 +102,7 @@ module('Integration | Component | Module | Image', function (hooks) {
   test('should not be able to open the modal if there is no alternative instruction', async function (assert) {
     // given
     const imageElement = {
-      url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+      url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
       alt: 'alt text',
       alternativeText: '',
     };

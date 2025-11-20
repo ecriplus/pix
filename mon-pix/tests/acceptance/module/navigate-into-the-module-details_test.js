@@ -21,7 +21,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
         title: 'Bien écrire son adresse mail',
         sections: [],
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',
           duration: 'duration',
           level: 'level',
@@ -50,7 +50,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
         title: 'Bien écrire son adresse mail',
         sections: [section],
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',
           duration: 'duration',
           level: 'level',

@@ -19,7 +19,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
       title: 'Bien écrire son adresse mail',
       isBeta: false,
       details: {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
@@ -49,7 +49,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,
@@ -83,7 +83,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,

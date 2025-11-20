@@ -12,7 +12,7 @@ module('Integration | Component | Module | Flashcards Intro Card', function (hoo
   test('should display an intro card', async function (assert) {
     // given
     const introImage = {
-      url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+      url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
     };
     const title = 'Introduction à la poésie';
 
@@ -25,7 +25,7 @@ module('Integration | Component | Module | Flashcards Intro Card', function (hoo
     assert.ok(screen.getByRole('heading', { name: 'Introduction à la poésie' }));
     assert.strictEqual(
       screen.getByRole('presentation').getAttribute('src'),
-      'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+      'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
     );
     assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
   });
@@ -71,7 +71,7 @@ module('Integration | Component | Module | Flashcards Intro Card', function (hoo
     test('should set them to the image', async function (assert) {
       // given
       const introImage = {
-        url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+        url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
         information: { height: 400, width: 300 },
       };
       const title = 'Introduction à la poésie';

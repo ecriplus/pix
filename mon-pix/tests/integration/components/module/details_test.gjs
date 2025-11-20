@@ -16,7 +16,7 @@ module('Integration | Component | Module | Details', function (hooks) {
     const store = this.owner.lookup('service:store');
     const descriptionContent = 'description';
     const details = {
-      image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+      image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
       description: `<p>${descriptionContent}</p>`,
       duration: 12,
       level: 'novice',
@@ -248,7 +248,7 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
   const store = this.owner.lookup('service:store');
 
   const details = {
-    image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+    image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
     description: '<p>Description</p>',
     duration: 12,
     level: 'novice',
