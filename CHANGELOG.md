@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.261.0](https://github.com/1024pix/pix/compare/v5.260.0...v5.261.0) (2025-11-20)
+
+### :rocket: Amélioration
+
+- [#14186](https://github.com/1024pix/pix/pull/14186) Enregistrer le code pays lors de la modification d'une orga (PIX-20294) 
+- [#14138](https://github.com/1024pix/pix/pull/14138) Repliquer la nouvelle colonne passage_count de la table organizations_cover_rates (PIX-20110) 
+
+### :bug: Correction
+
+- [#14199](https://github.com/1024pix/pix/pull/14199) Appeler le job pour synchroniser les passages lorsque le userId n'est pas null (PIX-20482). 
+
+### :building_construction: Tech
+
+- [#14183](https://github.com/1024pix/pix/pull/14183) Afficher un message d'erreur plus explicite pour un utilisateur ayant un problème d'accès à une campagne (Pix-20052). 
+- [#14195](https://github.com/1024pix/pix/pull/14195) Éviter les warnings "mixed-decls" de Sass 
+
+### :coffee: Autre
+
 # [5.260.0](https://github.com/1024pix/pix/compare/v5.259.0...v5.260.0) (2025-11-19)
 
 ### :rocket: Amélioration
