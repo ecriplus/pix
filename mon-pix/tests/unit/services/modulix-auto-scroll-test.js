@@ -1,3 +1,4 @@
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -44,13 +45,21 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
 
       test('should scroll to given html element', function (assert) {
         // given
-        const scrollOffsetPx = 70;
         const topOfGivenElement = 150;
+        const navbarHeight = 72;
         const windowScrollY = 12;
+        const distanceBetweenNavbarAndGrain = 70;
 
+        class MediaServiceStub extends Service {
+          isDesktop = false;
+        }
+        this.owner.register('service:media', MediaServiceStub);
         const modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
         htmlElement.getBoundingClientRect = sinon.stub().returns({ top: topOfGivenElement });
+        const navbarElement = document.createElement('nav');
+        navbarElement.getBoundingClientRect = sinon.stub().returns({ height: navbarHeight });
         const scroll = sinon.stub();
+        const getNavbar = sinon.stub().returns(navbarElement);
         const getWindowScrollY = sinon.stub().returns(windowScrollY);
         const userPrefersReducedMotion = sinon.stub().returns(false);
 
@@ -59,11 +68,14 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
           scroll,
           userPrefersReducedMotion,
           getWindowScrollY,
+          getNavbar,
         });
 
         // then
+        const expectedScrollPosition =
+          topOfGivenElement + windowScrollY - (navbarHeight + distanceBetweenNavbarAndGrain);
         sinon.assert.calledWithExactly(scroll, {
-          top: topOfGivenElement + windowScrollY - scrollOffsetPx,
+          top: expectedScrollPosition,
           behavior: 'smooth',
         });
         assert.ok(true);
@@ -73,6 +85,7 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
         let modulixAutoScrollService;
         let scrollStub;
         let getWindowScrollYStub;
+        let getNavbarStub;
 
         hooks.beforeEach(function () {
           modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
@@ -86,6 +99,7 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
           const givenWindowScrollY = 5;
           getWindowScrollYStub = sinon.stub();
           getWindowScrollYStub.returns(givenWindowScrollY);
+          getNavbarStub = sinon.stub();
         });
 
         function executeFocusAndScroll(givenUserPrefersReducedMotion) {
@@ -95,6 +109,7 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
             scroll: scrollStub,
             userPrefersReducedMotion: userPrefersReducedMotionStub,
             getWindowScrollY: getWindowScrollYStub,
+            getNavbar: getNavbarStub,
           });
         }
 
