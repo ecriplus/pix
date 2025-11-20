@@ -1,13 +1,13 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-module('Unit | Validator | absolute-url', function (hooks) {
+module('Unit | Validator | absolute-or-relative-url', function (hooks) {
   setupTest(hooks);
 
   const options = { message: "Le lien n'est pas valide." };
 
   test('it does not returns an error message when url is empty', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const emptyUrl = '';
 
     const message = await validator.validate(emptyUrl, { ...options, allowBlank: true });
@@ -16,7 +16,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it returns an error message when url does not start with http(s)://', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const badUrl = 'google.com';
 
     const message = await validator.validate(badUrl, options);
@@ -25,7 +25,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it does not return an error message when url starts with http://', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const goodUrl = 'http://google.com';
 
     const message = await validator.validate(goodUrl, options);
@@ -34,7 +34,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it does not return an error message when url starts with https://', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const goodUrl = 'https://google.com';
 
     const message = await validator.validate(goodUrl, options);
@@ -43,7 +43,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it returns an error message when url does not end with domain extension', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const badUrl = 'http://google';
 
     const message = await validator.validate(badUrl, options);
@@ -52,7 +52,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it returns an error message where url is not a relative and absolute url', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const badUrl = 'coucou';
 
     const message = await validator.validate(badUrl, { ...options, allowRelativeUrl: true });
@@ -61,7 +61,7 @@ module('Unit | Validator | absolute-url', function (hooks) {
   });
 
   test('it does not returns an error message where url is a relative url', async function (assert) {
-    const validator = this.owner.lookup('validator:absolute-url');
+    const validator = this.owner.lookup('validator:absolute-or-relative-url');
     const badUrl = '/coucou';
 
     const message = await validator.validate(badUrl, { ...options, allowRelativeUrl: true });

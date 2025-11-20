@@ -53,8 +53,7 @@ const Validations = buildValidations({
   },
   customResultPageButtonUrl: {
     validators: [
-      validator('format', {
-        type: 'url',
+      validator('absolute-or-relative-url', {
         allowBlank: true,
         message: 'Ce champ doit être une URL complète et valide',
       }),
