@@ -50,4 +50,22 @@ module('Unit | Validator | absolute-url', function (hooks) {
 
     assert.strictEqual(message, options.message);
   });
+
+  test('it returns an error message where url is not a relative and absolute url', async function (assert) {
+    const validator = this.owner.lookup('validator:absolute-url');
+    const badUrl = 'coucou';
+
+    const message = await validator.validate(badUrl, { ...options, allowRelativeUrl: true });
+
+    assert.strictEqual(message, options.message);
+  });
+
+  test('it does not returns an error message where url is a relative url', async function (assert) {
+    const validator = this.owner.lookup('validator:absolute-url');
+    const badUrl = '/coucou';
+
+    const message = await validator.validate(badUrl, { ...options, allowRelativeUrl: true });
+
+    assert.true(message);
+  });
 });
