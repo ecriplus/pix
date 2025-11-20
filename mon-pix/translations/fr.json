@@ -1696,7 +1696,7 @@
           }
         },
         "tooltip": {
-          "disabled": "A suivre : {sectionTitle}"
+          "disabled": "À suivre : {sectionTitle}"
         }
       },
       "preview": {
