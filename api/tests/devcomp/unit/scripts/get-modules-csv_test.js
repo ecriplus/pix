@@ -31,7 +31,7 @@ describe('Unit | Scripts | Get Modules as CSV', function () {
               element: {
                 id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
                 type: 'image',
-                url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+                url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                 alt: "Dessin détaillé dans l'alternative textuelle",
                 alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
               },

@@ -20,7 +20,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,
@@ -230,7 +230,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,
@@ -387,7 +387,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,
@@ -536,7 +536,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,

@@ -32,7 +32,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const isBeta = true;
       const version = Symbol('version');
       const details = {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
@@ -82,7 +82,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const isBeta = true;
       const version = Symbol('version');
       const details = {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
@@ -139,7 +139,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const isBeta = true;
       const version = Symbol('version');
       const details = {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
@@ -211,7 +211,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const isBeta = true;
       const version = Symbol('version');
       const details = {
-        image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,

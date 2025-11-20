@@ -38,7 +38,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             title: 'title',
             isBeta: true,
             details: {
-              image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+              image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
               duration: 5,
               level: 'novice',
@@ -94,7 +94,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             title: 'title',
             isBeta: true,
             details: {
-              image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+              image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
               duration: 5,
               level: 'novice',
@@ -150,7 +150,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             title: 'title',
             isBeta: true,
             details: {
-              image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+              image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
               duration: 5,
               level: 'novice',
@@ -216,7 +216,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         version,
         isBeta: true,
         details: {
-          image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',
           duration: 5,
           level: 'novice',
@@ -238,7 +238,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     element: {
                       id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
                       type: 'image',
-                      url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                      url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                       alt: 'Alternative',
                       alternativeText: 'Alternative textuelle',
                     },
@@ -273,7 +273,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -372,7 +372,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -424,7 +424,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -446,7 +446,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                       element: {
                         id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
                         type: 'image',
-                        url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                        url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                         alt: 'Alternative',
                         alternativeText: 'Alternative textuelle',
                         legend: 'legend',
@@ -476,7 +476,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -528,7 +528,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -696,7 +696,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -749,7 +749,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -800,7 +800,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -862,7 +862,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -933,7 +933,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1016,7 +1016,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1092,7 +1092,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1184,7 +1184,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1209,20 +1209,20 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         title: "Introduction à l'adresse e-mail",
                         instruction: '<p>...</p>',
                         introImage: {
-                          url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                          url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                         },
                         cards: [
                           {
                             id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
                             recto: {
                               image: {
-                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                                url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                               },
                               text: "A quoi sert l'arobase dans mon adresse email ?",
                             },
                             verso: {
                               image: {
-                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                                url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                               },
                               text: "Parce que c'est joli",
                             },
@@ -1255,7 +1255,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1312,7 +1312,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1341,7 +1341,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             id: '4420c9f6-ae21-4401-a16c-41296d898a66',
                             text: 'La Terre est plus proche du Soleil que Mars.',
                             image: {
-                              url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                              url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                               altText: 'coucou',
                             },
                             proposalA: 'Vrai',
@@ -1391,7 +1391,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1416,7 +1416,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             {
                               id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
                               type: 'image',
-                              url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                              url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                               alt: "Dessin détaillé dans l'alternative textuelle",
                               alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
                             },
@@ -1449,7 +1449,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1504,7 +1504,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1561,7 +1561,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1621,7 +1621,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1679,7 +1679,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1740,7 +1740,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1800,7 +1800,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1871,7 +1871,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -1950,7 +1950,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2034,7 +2034,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2132,7 +2132,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2160,20 +2160,20 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                               title: "Introduction à l'adresse e-mail",
                               instruction: '<p>...</p>',
                               introImage: {
-                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                                url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                               },
                               cards: [
                                 {
                                   id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
                                   recto: {
                                     image: {
-                                      url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                                      url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                                     },
                                     text: "A quoi sert l'arobase dans mon adresse email ?",
                                   },
                                   verso: {
                                     image: {
-                                      url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                                      url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                                     },
                                     text: "Parce que c'est joli",
                                   },
@@ -2209,7 +2209,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2272,7 +2272,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2337,7 +2337,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           title: 'title',
           isBeta: true,
           details: {
-            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
             duration: 5,
             level: 'novice',
@@ -2393,7 +2393,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         title: 'title',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',
           duration: 5,
           level: 'novice',
@@ -2452,7 +2452,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         title: 'title',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',
           duration: 5,
           level: 'novice',

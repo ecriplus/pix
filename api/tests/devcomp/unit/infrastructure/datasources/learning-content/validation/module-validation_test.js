@@ -500,7 +500,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
       const invalidImage = {
         id: '167907eb-ee0d-4de0-9fc8-609b2b62ed9f',
         type: 'image',
-        url: 'https://images.pix.fr/modulix/placeholder-image.svg',
+        url: 'https://assets.pix.org/modules/placeholder-image.svg',
         alt: '<p>cooucou</p>',
         alternativeText: '',
       };
@@ -661,7 +661,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         title: '<h1>Bac à sable</h1>',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
           duration: 5,
           level: 'novice',
