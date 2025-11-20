@@ -445,6 +445,7 @@
             "title": "Current certification framework details"
           },
           "history": {
+            "label": "Versions",
             "table": {
               "caption": "Versions list in descending order"
             },

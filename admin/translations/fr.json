@@ -446,6 +446,7 @@
             "title": "Détails du référentiel de certification actuel"
           },
           "history": {
+            "label": "Versions",
             "table": {
               "caption": "Liste des versions par ordre décroissant"
             },

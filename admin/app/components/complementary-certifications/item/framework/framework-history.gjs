@@ -16,7 +16,7 @@ import { t } from 'ember-intl';
       <:columns as |version context|>
         <PixTableColumn @context={{context}}>
           <:header>
-            Version
+            {{t "components.complementary-certifications.item.framework.history.label"}}
           </:header>
           <:cell>
             {{version}}
