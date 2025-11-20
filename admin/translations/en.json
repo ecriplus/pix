@@ -439,7 +439,7 @@
           "creation-form": {
             "submit-button": "Submit the new certification framework",
             "success-notification": "The new certification framework has been successfully created.",
-            "title": "Creating a new certification framework for {complementaryCertificationLabel}"
+            "title": "Creating a new version of the certification framework for {complementaryCertificationLabel}"
           },
           "details": {
             "title": "Current certification framework details"

@@ -439,7 +439,7 @@
           "creation-form": {
             "submit-button": "Créer le nouveau référentiel de certification",
             "success-notification": "Le nouveau référentiel de certification a été créé avec succès",
-            "title": "Créer un nouveau référentiel de certification pour {complementaryCertificationLabel}"
+            "title": "Créer une nouvelle version du référentiel de certification pour {complementaryCertificationLabel}"
           },
           "details": {
             "empty-current-framework": "Le référentiel de certification actuel est vide.",
