@@ -74,7 +74,7 @@ export default async function initUser(databaseBuilder) {
     // Acquired + Not certifiable
     {
       altMessage: '1 RT non-certifiable, acquis et valide',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Droit- Pret-certif_Bronze--Initie.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Droit- Pret-certif_Bronze--Initie.svg',
       message: '1 RT non-certifiable, acquis et valide **avec markdown**',
       title: '1 RT non-certifiable, acquis et valide',
       isCertifiable: false,
@@ -90,7 +90,7 @@ export default async function initUser(databaseBuilder) {
     },
     {
       altMessage: '1 RT non-certifiable, acquis, valide et en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-Initie-PREMIER-DEGRE.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-Initie-PREMIER-DEGRE.svg',
       message: '1 RT non-certifiable, acquis, valide et en lacune',
       title: '1 RT non-certifiable, acquis, valide et en lacune',
       isCertifiable: false,
@@ -107,7 +107,7 @@ export default async function initUser(databaseBuilder) {
     // Acquired + Certifiables
     {
       altMessage: '1 RT certifiable, acquis et valide',
-      imageUrl: 'https://images.pix.fr/badges/Badge_Pixome%CC%80tre-plane%CC%80te.svg',
+      imageUrl: 'https://assets.pix.org/badges/Badge_Pixome%CC%80tre-plane%CC%80te.svg',
       message: '1 RT certifiable, acquis et valide **avec markdown**',
       title: '1 RT certifiable, acquis et valide',
       isCertifiable: true,
@@ -123,7 +123,7 @@ export default async function initUser(databaseBuilder) {
     },
     {
       altMessage: '1 RT certifiable, acquis, valide et en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-2-Confirme-certif.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-2-Confirme-certif.svg',
       message: '1 RT certifiable, acquis, valide et en lacune',
       title: '1 RT certifiable, acquis, valide et en lacune',
       isCertifiable: true,
@@ -140,7 +140,7 @@ export default async function initUser(databaseBuilder) {
     // Not-acquired + Always visible (displayed)
     {
       altMessage: '1 RT certifiable, non-acquis et en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-3-Avance-certif.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-3-Avance-certif.svg',
       message: '1 RT certifiable, non-acquis et en lacune',
       title: '1 RT certifiable, non-acquis et en lacune',
       isCertifiable: true,
@@ -156,7 +156,7 @@ export default async function initUser(databaseBuilder) {
     },
     {
       altMessage: '1 RT non-certifiable, non-acquis et en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-2-Confirme.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-2-Confirme.svg',
       message: '1 RT non-certifiable, non-acquis et en lacune',
       title: '1 RT non-certifiable, non-acquis et en lacune',
       isCertifiable: false,
@@ -173,7 +173,7 @@ export default async function initUser(databaseBuilder) {
     // Not-acquired + Not always visible (not displayed)
     {
       altMessage: '1 RT certifiable, non-acquis et pas en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-3-Avance-certif.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-3-Avance-certif.svg',
       message: '1 RT certifiable, non-acquis et pas en lacune',
       title: '1 RT certifiable, non-acquis et pas en lacune',
       isCertifiable: true,
@@ -189,7 +189,7 @@ export default async function initUser(databaseBuilder) {
     },
     {
       altMessage: '1 RT non-certifiable, non-acquis et pas en lacune',
-      imageUrl: 'https://images.pix.fr/badges/Pix_plus_Edu-2-Confirme.svg',
+      imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-2-Confirme.svg',
       message: '1 RT non-certifiable, non-acquis et pas en lacune',
       title: '1 RT non-certifiable, non-acquis et pas en lacune',
       isCertifiable: false,

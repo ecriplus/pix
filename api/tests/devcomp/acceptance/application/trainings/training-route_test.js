@@ -234,7 +234,7 @@ describe('Acceptance | Controller | training-controller', function () {
           title: 'new title',
           internalTitle: 'new internal title',
           editorName: 'editor name',
-          editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/logo.svg',
+          editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/logo.svg',
           duration: {
             days: 2,
             hours: 2,
