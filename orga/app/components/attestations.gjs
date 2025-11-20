@@ -17,12 +17,17 @@ export const PARENTHOOD_ATTESTATION_KEY = 'PARENTHOOD';
 
 export default class Attestations extends Component {
   @service currentUser;
+  @service intl;
 
   get displaySixthGrade() {
     return (
       this.currentUser.prescriber.availableAttestations.includes(SIXTH_GRADE_ATTESTATION_KEY) &&
       this.args.divisions != undefined
     );
+  }
+
+  get attestationName() {
+    return this.intl.t('pages.attestations.' + this.args.attestationKey);
   }
 
   get availableAttestations() {
@@ -58,13 +63,18 @@ export default class Attestations extends Component {
       {{/if}}
 
       {{#if this.displayAttestations}}
-        <OtherAttestations @attestations={{this.availableAttestations}} @onSubmit={{@onSubmit}} />
+        <OtherAttestations
+          @attestations={{this.availableAttestations}}
+          @selectedAttestation={{@attestationKey}}
+          @onFilter={{@onFilter}}
+          @onSubmit={{@onSubmit}}
+        />
       {{/if}}
     </section>
 
     <section class="attestation-page__list">
       <h2 class="attestations-page__section-title attestations-page__section-title--list">
-        {{t "pages.attestations.section.list"}}
+        {{t "pages.attestations.section.list" attestationName=this.attestationName}}
       </h2>
       <List
         @participantStatuses={{@participantStatuses}}
@@ -81,7 +91,6 @@ export default class Attestations extends Component {
 
 class OtherAttestations extends Component {
   @service intl;
-  @tracked selectedAttestation = null;
 
   get options() {
     return this.args.attestations.map((attestation) => ({
@@ -94,16 +103,16 @@ class OtherAttestations extends Component {
   async onSubmit(event) {
     event.preventDefault();
 
-    await this.args.onSubmit(this.selectedAttestation, []);
-    this.selectedAttestation = null;
+    await this.args.onSubmit(this.args.selectedAttestation, []);
+    this.args.onFilter('attestationKey', null);
   }
 
   @action
   onSelectedAttestationChange(value) {
     if (value === '') {
-      this.selectedAttestation = null;
+      this.args.onFilter('attestationKey', null);
     } else {
-      this.selectedAttestation = value;
+      this.args.onFilter('attestationKey', value);
     }
   }
 
@@ -114,7 +123,7 @@ class OtherAttestations extends Component {
       </p>
       <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
         <PixSelect
-          @value={{this.selectedAttestation}}
+          @value={{@selectedAttestation}}
           @options={{this.options}}
           @onChange={{this.onSelectedAttestationChange}}
           @placeholder={{t "common.filters.placeholder"}}

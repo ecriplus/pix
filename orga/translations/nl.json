@@ -568,7 +568,7 @@
       "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
       "section": {
         "download": "Downloaden",
-        "list": "Follow-up"
+        "list": "Opvolging : {attestationName}"
       },
       "select-divisions-label": "Selecteer de certificaten voor een of meer klassen",
       "select-label": "Certificat",

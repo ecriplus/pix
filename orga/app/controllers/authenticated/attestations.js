@@ -14,6 +14,7 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service notifications;
   @service intl;
 
+  @tracked attestationKey = null;
   @tracked pageNumber = 1;
   @tracked pageSize = 50;
   @tracked statuses = [];

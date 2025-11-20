@@ -568,7 +568,7 @@
       "no-attestations": "Aucune attestation disponible pour votre sélection",
       "section": {
         "download": "Téléchargement",
-        "list": "Suivi"
+        "list": "Suivi : {attestationName}"
       },
       "select-divisions-label": "Sélectionnez les attestations d'une ou plusieurs classes",
       "select-label": "Attestation",

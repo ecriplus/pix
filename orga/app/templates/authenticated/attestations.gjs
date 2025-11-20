@@ -6,6 +6,7 @@ import Attestations from 'pix-orga/components/attestations';
 
   <div class="attestations-page">
     <Attestations
+      @attestationKey={{@model.attestationKey}}
       @participantStatuses={{@model.attestationParticipantStatuses}}
       @divisions={{@model.options}}
       @onSubmit={{@controller.downloadAttestations}}

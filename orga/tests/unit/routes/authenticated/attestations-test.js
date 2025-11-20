@@ -62,7 +62,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           isManagingStudents: true,
         };
         prescriber = {
-          availableAttestations: [],
+          availableAttestations: ['MY_KEY'],
         };
       }
 
@@ -86,6 +86,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // then
       assert.deepEqual(actualOptions, {
         attestationParticipantStatuses,
+        attestationKey: 'MY_KEY',
         options: [
           {
             label: '3èmeA',
@@ -99,7 +100,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       });
     });
 
-    test('it should return undefined if current organization is not managing students', async function (assert) {
+    test('it should return no options if current organization is not managing students', async function (assert) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
@@ -111,7 +112,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           isManagingStudents: false,
         };
         prescriber = {
-          availableAttestations: [],
+          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
         };
       }
 
@@ -133,7 +134,116 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       const actualOptions = await route.model({ statuses: [] });
 
       // then
-      assert.deepEqual(actualOptions, { attestationParticipantStatuses });
+      assert.deepEqual(actualOptions, { attestationParticipantStatuses, attestationKey: 'MY_OTHER_KEY' });
+    });
+
+    test('it should call the store with the first available attestation key', async function (assert) {
+      // given
+      const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
+      const attestationParticipantStatuses = Symbol('expected-attestations');
+      class CurrentUserStub extends Service {
+        canAccessAttestationsPage = true;
+        organization = {
+          id: 12345,
+          divisions,
+          isManagingStudents: false,
+        };
+        prescriber = {
+          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
+        };
+      }
+
+      const findRecordStub = sinon.stub();
+      const queryRecord = sinon.stub();
+      class StoreStub extends Service {
+        findRecord = findRecordStub;
+        query = queryRecord;
+      }
+
+      queryRecord.resolves(attestationParticipantStatuses);
+
+      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:store', StoreStub);
+
+      const route = this.owner.lookup('route:authenticated/attestations');
+
+      // when
+      await route.model({ statuses: [] });
+
+      // then
+      assert.ok(
+        queryRecord.calledOnceWithExactly('attestation-participant-status', {
+          organizationId: 12345,
+          attestationKey: 'MY_OTHER_KEY',
+          filter: {
+            statuses: [],
+            divisions: undefined,
+            search: undefined,
+          },
+          page: {
+            number: undefined,
+            size: undefined,
+          },
+        }),
+      );
+    });
+
+    test('it should call the store with available params', async function (assert) {
+      // given
+      const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
+      const attestationParticipantStatuses = Symbol('expected-attestations');
+      class CurrentUserStub extends Service {
+        canAccessAttestationsPage = true;
+        organization = {
+          id: 12345,
+          divisions,
+          isManagingStudents: false,
+        };
+        prescriber = {
+          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
+        };
+      }
+
+      const findRecordStub = sinon.stub();
+      const queryRecord = sinon.stub();
+      class StoreStub extends Service {
+        findRecord = findRecordStub;
+        query = queryRecord;
+      }
+
+      queryRecord.resolves(attestationParticipantStatuses);
+
+      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:store', StoreStub);
+
+      const route = this.owner.lookup('route:authenticated/attestations');
+
+      // when
+      await route.model({
+        attestationKey: 'POUET',
+        statuses: ['YES', 'NO', 'CAN YOU REPEAT THE QUESTION'],
+        divisions: ['substract', 'multiply'],
+        search: 'Maurice',
+        pageNumber: 666,
+        pageSize: 25,
+      });
+
+      // then
+      assert.ok(
+        queryRecord.calledOnceWithExactly('attestation-participant-status', {
+          organizationId: 12345,
+          attestationKey: 'POUET',
+          filter: {
+            statuses: ['YES', 'NO', 'CAN YOU REPEAT THE QUESTION'],
+            divisions: ['substract', 'multiply'],
+            search: 'Maurice',
+          },
+          page: {
+            number: 666,
+            size: 25,
+          },
+        }),
+      );
     });
   });
 });
