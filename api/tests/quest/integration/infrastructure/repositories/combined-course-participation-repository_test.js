@@ -324,16 +324,15 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
 
-      const { questId: anotherQuestId, id: anotherCombinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: anotherCombinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         organizationId: combinedCourse.organizationId,
         code: 'anotherQuest',
       });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: organizationLearner1.id,
-        questId: anotherQuestId,
         combinedCourseId: anotherCombinedCourseId,
+        status: CombinedCourseParticipationStatuses.COMPLETED,
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
 
       await databaseBuilder.commit();
