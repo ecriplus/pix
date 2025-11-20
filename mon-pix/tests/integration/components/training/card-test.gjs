@@ -40,7 +40,7 @@ module('Integration | Component | Training | Card', function (hooks) {
       )
       .hasAttribute(
         'src',
-        'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+        'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
       );
   });
 
@@ -74,24 +74,24 @@ module('Integration | Component | Training | Card', function (hooks) {
     [
       {
         type: 'webinaire',
-        src: new RegExp(/https:\/\/images.pix.fr\/contenu-formatif\/type\/Webinaire-[1-3].svg/g),
+        src: new RegExp(/https:\/\/assets.pix.org\/contenu-formatif\/type\/Webinaire-[1-3].svg/g),
         tagName: 'tertiary',
       },
       {
         type: 'autoformation',
-        src: new RegExp(/https:\/\/images.pix.fr\/contenu-formatif\/type\/Autoformation-[1-3].svg/g),
+        src: new RegExp(/https:\/\/assets.pix.org\/contenu-formatif\/type\/Autoformation-[1-3].svg/g),
         tagName: 'primary',
       },
-      { type: 'e-learning', src: 'https://images.pix.fr/contenu-formatif/type/E-learning-1.svg', tagName: 'success' },
-      { type: 'hybrid-training', src: 'https://images.pix.fr/contenu-formatif/type/Hybrid-1.svg', tagName: 'error' },
+      { type: 'e-learning', src: 'https://assets.pix.org/contenu-formatif/type/E-learning-1.svg', tagName: 'success' },
+      { type: 'hybrid-training', src: 'https://assets.pix.org/contenu-formatif/type/Hybrid-1.svg', tagName: 'error' },
       {
         type: 'in-person-training',
-        src: 'https://images.pix.fr/contenu-formatif/type/In-person-1.svg',
+        src: 'https://assets.pix.org/contenu-formatif/type/In-person-1.svg',
         tagName: 'secondary',
       },
       {
         type: 'modulix',
-        src: new RegExp(/https:\/\/images.pix.fr\/contenu-formatif\/type\/Modulix-[1-3].svg/g),
+        src: new RegExp(/https:\/\/assets.pix.org\/contenu-formatif\/type\/Modulix-[1-3].svg/g),
         tagName: 'primary',
       },
     ].forEach(({ type, src, tagName }) => {
@@ -153,7 +153,7 @@ module('Integration | Component | Training | Card', function (hooks) {
       duration: duration ?? { hours: 6 },
       editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
       editorLogoUrl:
-        'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+        'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
     };
   }
 });

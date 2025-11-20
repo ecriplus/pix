@@ -22,7 +22,7 @@ module('Integration | Component | evaluation-shared-results-modal', function (ho
           duration: { hours: 6 },
           editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
           editorLogoUrl:
-            'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+            'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
         },
         {
           title: 'Mon super training 2',
@@ -32,7 +32,7 @@ module('Integration | Component | evaluation-shared-results-modal', function (ho
           duration: { hours: 8 },
           editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
           editorLogoUrl:
-            'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+            'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
         },
         {
           title: 'Mon super training 3',
@@ -42,7 +42,7 @@ module('Integration | Component | evaluation-shared-results-modal', function (ho
           duration: { hours: 10 },
           editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
           editorLogoUrl:
-            'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+            'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
         },
       ];
 
