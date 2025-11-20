@@ -1,5 +1,12 @@
 # Pix Changelog
 
+# [5.262.0](https://github.com/1024pix/pix/compare/v5.261.0...v5.262.0) (2025-11-20)
+
+### :rocket: Amélioration
+
+- [#14188](https://github.com/1024pix/pix/pull/14188) Permettre au prescripteur de voir une liste de suivi en fonction de l'attestation séléctionné (Pix-20240). 
+- [#14192](https://github.com/1024pix/pix/pull/14192) Permettre de connaitre l'état de la fonctionnalité `CAMPAIGN_WITHOUT_USER_PROFILE` sur une organisation dans PixAdmin (PIX-20476).
+
 # [5.261.0](https://github.com/1024pix/pix/compare/v5.260.0...v5.261.0) (2025-11-20)
 
 ### :rocket: Amélioration
