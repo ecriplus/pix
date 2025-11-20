@@ -324,8 +324,8 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
     });
   });
 
-  module('Complementary certifications tab', function () {
-    test('should contain link to "complementary certifications" management page', async function (assert) {
+  module('Certification frameworks tab', function () {
+    test('should contain link to "Certification frameworks" management page', async function (assert) {
       // given
       class AccessControlStub extends Service {
         hasAccessToComplementaryCertificationsScope = true;
@@ -336,7 +336,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
       const screen = await render(<template><Sidebar /></template>);
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Certifications complémentaires' })).exists();
+      assert.dom(screen.getByRole('link', { name: 'Référentiels de certification' })).exists();
     });
   });
 
