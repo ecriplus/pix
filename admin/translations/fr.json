@@ -435,7 +435,7 @@
       "item": {
         "complementary-certification": "Certification complémentaire",
         "framework": {
-          "create-button": "Créer un nouveau référentiel de certification",
+          "create-button": "Créer une nouvelle version du référentiel",
           "creation-form": {
             "submit-button": "Créer le nouveau référentiel de certification",
             "success-notification": "Le nouveau référentiel de certification a été créé avec succès",

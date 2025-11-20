@@ -435,7 +435,7 @@
       "item": {
         "complementary-certification": "Complementary certification",
         "framework": {
-          "create-button": "Create a new certification framework",
+          "create-button": "Create a new version of the certification framework",
           "creation-form": {
             "submit-button": "Submit the new certification framework",
             "success-notification": "The new certification framework has been successfully created.",
