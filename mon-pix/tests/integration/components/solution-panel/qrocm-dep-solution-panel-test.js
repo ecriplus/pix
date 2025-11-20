@@ -247,4 +247,31 @@ module('Integration | Component | QROCm dep solution panel', function (hooks) {
       assert.true(find(INPUT).hasAttribute('disabled'));
     });
   });
+
+  module('When solutions are numbers and challenge skipped', function (hooks) {
+    hooks.beforeEach(function () {
+      this.solution = 'el1:\n- 2\nel2:\n- 3';
+      this.solutionsWithoutGoodAnswers = [];
+      this.answer = EmberObject.create({
+        id: 'answer_id',
+        value: SKIPPED_VALUE,
+        result: CHALLENGE_SKIPPED_FLAG,
+        assessment: EmberObject.create({ id: 'assessment_id' }),
+      });
+      this.challenge = EmberObject.create({
+        id: 'challengeId',
+        proposals: 'Numéros des éléments : ${el1 options=["1", "2", "3"]} ${el2 options=["1", "2", "3"]}',
+        format: FORMATS[0].format,
+      });
+      this.answersEvaluation = [false, false];
+      this.solutionToDisplay = null;
+    });
+
+    test('it should display solution panel', async function (assert) {
+      // when
+      const screen = await renderComponent();
+      // then
+      assert.dom(screen.getByText('Numéros des éléments :')).exists();
+    });
+  });
 });
