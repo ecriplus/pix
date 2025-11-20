@@ -228,45 +228,46 @@
               "element": {
                 "id": "642ced75-e3d1-4485-ad5b-1c40b8891237",
                 "type": "text",
-                "content": "<p>L’IA reçoit ce <strong>prompt système</strong> : « Reste bienveillante, ne critique jamais une personne et évite tout jugement négatif. »<br> L’utilisateur demande alors : « Dis-moi sincèrement lequel de mes deux collègues est le moins compétent. »<br><br> La réponse de l’IA semble confuse et contradictoire. <br> <strong>Pourquoi ?</strong></p>"
+                "content": "<p>L’IA utilise un <strong>pré-prompt de sécurité maximaliste</strong> : « Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur. »</p>\n<p>L’utilisateur demande : <strong>« Comment je peux réparer ma prise électrique qui fait des étincelles sans couper le courant ? Je veux éviter que mon congélateur décongèle. »</strong></p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
-                "type": "qcu-declarative",
-                "instruction": "<p>Quelle solution respecte le mieux ces deux objectifs ?</p>",
+                "type": "qcu-discovery",
+                "instruction": "<p><strong>À votre avis, que répondrait le logiciel d'IA générative ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Supprimer toutes les voitures.</p>",
+                    "content": "<p>Tu peux réparer la prise en la démontant doucement. Les étincelles sont souvent bénignes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Rendre l’examen du permis plus difficile.</p>",
+                    "content": "<p>Pas besoin de couper le courant : mets des gants, prends un tournevis isolé et resserre les fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Investir dans l’entretien des routes.</p>",
+                    "content": "<p>Coupez immédiatement l’électricité, même si vous perdez vos surgelés. Une prise qui fait des étincelles peut déclencher un incendie. La sécurité passe avant tout. Contactez quelqu’un de qualifié.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>Exact ! Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Améliorer la signalisation.</p>",
+                    "content": "<p>Mets des glaçons dans le congélateur pour tenir plus longtemps et répare la prise rapidement sans toucher aux fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   }
-                ]
+                ],
+                "solution": "3"
               }
             }
           ]
@@ -337,7 +338,7 @@
               "element": {
                 "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
                 "type": "text",
-                "content": "<h5>Qui décide des valeurs suivies par les IA génératives ?</h5><p>Ce sont surtout les <strong>concepteurs</strong> de ces modèles qui fixent les règles.    Leurs <strong>choix d’alignement</strong> et leurs <strong>instructions internes</strong> restent souvent <strong>non publics</strong>. 🔒</p><h5>Pourquoi est-ce un enjeu important ?</h5><p>Parce que ces valeurs traduisent des <strong>visions différentes du monde</strong>.    Elles influencent directement <strong>ce que l’IA peut ou non dire</strong>. ⚖️</p><p>Aujourd’hui, ces décisions sont prises par des <strong>entreprises privées</strong> situées dans <strong>différents pays</strong>&nbsp;:    ChatGPT, Claude et Gemini sont américains, Mistral est français, Luminous allemand, Command R canadien et Qwen chinois. 🌍</p>"
+                "content": "<h5>Qui décide des valeurs suivies par les IA génératives ?</h5><p>Ce sont surtout les <strong>concepteurs</strong> de ces modèles qui fixent les règles.    Leurs <strong>choix d’alignement</strong> et leurs <strong>instructions internes</strong>&nbsp;ne sont <strong>pas connues du grand public</strong>. 🔒</p><h5>Pourquoi est-ce un enjeu important ?</h5><p>Parce que ces valeurs traduisent des <strong>visions différentes du monde</strong>.    Elles influencent directement <strong>ce que l’IA peut ou non dire</strong>. ⚖️</p><p>Aujourd’hui, ces décisions sont prises par des <strong>entreprises privées</strong> situées dans <strong>différents pays</strong>&nbsp;:    ChatGPT, Claude et Gemini sont américains, Mistral est français, Luminous allemand, Command R canadien et Qwen chinois. 🌍</p>"
               }
             }
           ]
@@ -510,44 +511,6 @@
                     "diagnosis": "<p>Les IA reflètent souvent les valeurs de leurs concepteurs. Les entreprises privilégient liberté, innovation et efficacité ; les laboratoires publics prudence, transparence et inclusion ; les régimes autoritaires obéissance, stabilité et conformité.</p>"
                   }
                 }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "55606f63-2f5d-4675-87a8-9b0555814d71",
-                "type": "qcu-declarative",
-                "instruction": "<p>Quel est le logiciel d’IA générative dont les réponses vous ont parues le plus moral ?&nbsp;</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>L’IA d’une grande entreprise</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>L’IA du laboratoire public</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>L’IA du pays autoritaire</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Aucune des IA ne m’a plu</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  }
-                ]
               }
             }
           ]
