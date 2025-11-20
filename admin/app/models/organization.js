@@ -48,6 +48,7 @@ export default class Organization extends Model {
       LEARNER_IMPORT: 'LEARNER_IMPORT',
       IS_MANAGING_STUDENTS: 'IS_MANAGING_STUDENTS',
       SHOW_NPS: 'SHOW_NPS',
+      CAMPAIGN_WITHOUT_USER_PROFILE: 'CAMPAIGN_WITHOUT_USER_PROFILE',
       SHOW_SKILLS: 'SHOW_SKILLS',
       ATTESTATIONS_MANAGEMENT: 'ATTESTATIONS_MANAGEMENT',
     };
@@ -58,6 +59,7 @@ export default class Organization extends Model {
       Organization.featureList,
       'MULTIPLE_SENDING_ASSESSMENT',
       'IS_MANAGING_STUDENTS',
+      'CAMPAIGN_WITHOUT_USER_PROFILE',
       'SHOW_SKILLS',
       'PLACES_MANAGEMENT',
     );

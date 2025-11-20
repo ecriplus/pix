@@ -647,6 +647,7 @@
         "external-id": "Identifiant externe",
         "features": {
           "ATTESTATIONS_MANAGEMENT": "Attestations",
+          "CAMPAIGN_WITHOUT_USER_PROFILE": "Mode interro (nom non définitif)",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Certificabilité automatique",
           "IS_MANAGING_STUDENTS": "Gestion d'élèves/étudiants",
           "LEARNER_IMPORT": "Import",
