@@ -1,7 +1,7 @@
 import {
   Accessibility,
   CalibratedChallenge,
-} from '../../../../src/certification/evaluation/domain/models/CalibratedChallenge.js';
+} from '../../../../../../src/certification/evaluation/domain/models/CalibratedChallenge.js';
 import { buildCalibratedChallengeSkill } from './build-calibrated-challenge-skill.js';
 
 export function buildCalibratedChallenge({

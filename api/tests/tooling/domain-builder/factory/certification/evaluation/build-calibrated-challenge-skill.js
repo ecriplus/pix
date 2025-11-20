@@ -1,4 +1,4 @@
-import { CalibratedChallengeSkill } from '../../../../src/certification/evaluation/domain/models/CalibratedChallengeSkill.js';
+import { CalibratedChallengeSkill } from '../../../../../../src/certification/evaluation/domain/models/CalibratedChallengeSkill.js';
 
 export function buildCalibratedChallengeSkill({
   id = 'recSkill1',

@@ -19,8 +19,6 @@ import { buildBadgeCriterionForCalculation } from './build-badge-criterion-for-c
 import { buildBadgeDetails } from './build-badge-details.js';
 import { buildBadgeForCalculation } from './build-badge-for-calculation.js';
 import { buildBadgeToAttach } from './build-badge-to-attach.js';
-import { buildCalibratedChallenge } from './build-calibrated-challenge.js';
-import { buildCalibratedChallengeSkill } from './build-calibrated-challenge-skill.js';
 import { buildCampaign } from './build-campaign.js';
 import { buildCampaignCollectiveResult } from './build-campaign-collective-result.js';
 import { buildCampaignLearningContent } from './build-campaign-learning-content.js';
@@ -193,6 +191,8 @@ import {
 } from './certification/enrolment/build-subscription.js';
 import { buildUserEnrolment } from './certification/enrolment/build-user.js';
 import { buildUserCertificationEligibility } from './certification/enrolment/build-user-certification-eligibility.js';
+import { buildCalibratedChallenge } from './certification/evaluation/build-calibrated-challenge.js';
+import { buildCalibratedChallengeSkill } from './certification/evaluation/build-calibrated-challenge-skill.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
 import { buildComplementaryCertificationScoringCriteria } from './certification/evaluation/build-complementary-certification-scoring-criteria.js';
 import { buildComplementaryCertificationScoringWithoutComplementaryReferential } from './certification/evaluation/build-complementary-certification-scoring-without-complementary-referential.js';
