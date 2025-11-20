@@ -850,7 +850,12 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         const campaign = { organizationId: 1 };
         const campaignParticipationResult = {
           hasReachedStage: true,
-          reachedStage: { reachedStage: 4, totalStage: 5, message: 'lorem ipsum dolor sit amet' },
+          reachedStage: {
+            reachedStage: 4,
+            totalStage: 5,
+            message: 'existing message stages',
+            title: 'existing title stages',
+          },
         };
 
         // when
@@ -870,7 +875,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         };
         assert.strictEqual(screen.getAllByText(t('pages.skill-review.stage.starsAcquired', stars)).length, 2);
 
-        assert.dom(screen.getByText(campaignParticipationResult.reachedStage.message)).exists();
+        assert.ok(screen.getByText(campaignParticipationResult.reachedStage.title));
+        assert.ok(screen.getByText(campaignParticipationResult.reachedStage.message));
       });
     });
 
@@ -910,7 +916,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         const campaign = { organizationId: 1 };
         const campaignParticipationResult = {
           hasReachedStage: false,
-          reachedStage: { message: 'not existing message' },
+          reachedStage: { message: 'not existing message', title: 'not existing title' },
         };
 
         // when
@@ -925,9 +931,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
         // then
         const stars = { acquired: 0, total: 0 };
-        assert.dom(screen.queryByText(t('pages.skill-review.stage.starsAcquired', stars))).doesNotExist();
+        assert.notOk(screen.queryByText(t('pages.skill-review.stage.starsAcquired', stars)));
 
-        assert.dom(screen.queryByTestId('stage-message')).doesNotExist();
+        assert.notOk(screen.queryByText(campaignParticipationResult.reachedStage.message));
+        assert.notOk(screen.queryByText(campaignParticipationResult.reachedStage.title));
       });
     });
   });

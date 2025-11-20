@@ -210,7 +210,8 @@ export default class EvaluationResultsHero extends Component {
         </h2>
 
         {{#if @campaignParticipationResult.hasReachedStage}}
-          <div class="evaluation-results-hero-details__stage-message" data-testid="stage-message">
+          <div class="evaluation-results-hero-details__stage-message">
+            <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.title}} />
             <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
           </div>
         {{/if}}
