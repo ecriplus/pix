@@ -35,8 +35,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         get: sinon.stub(),
       };
       calibratedChallengeRepository = {
-        getManyCalibratedChallenges: sinon.stub(),
-        findActiveFlashCompatibleCalibratedChallenges: sinon.stub(),
+        getMany: sinon.stub(),
+        findActiveFlashCompatible: sinon.stub(),
       };
       certificationCourseRepository = {
         get: sinon.stub(),
@@ -120,8 +120,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ id: complementaryCertificationId })
           .resolves(complementaryCertification);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges.resolves([nextCalibratedChallenge]);
-        calibratedChallengeRepository.getManyCalibratedChallenges.withArgs([]).resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([nextCalibratedChallenge]);
+        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -220,14 +220,14 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({ assessmentId: assessment.id })
             .resolves(candidateNeedingAccessibilityAdjustment);
 
-          calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+          calibratedChallengeRepository.findActiveFlashCompatible
             .withArgs({
               locale,
               version,
             })
             .resolves(allChallenges);
 
-          calibratedChallengeRepository.getManyCalibratedChallenges.withArgs([]).resolves([]);
+          calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
             .withArgs({
@@ -381,14 +381,14 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
             version,
           })
           .resolves([alreadyAnsweredChallenge, nextCalibratedChallenge]);
 
-        calibratedChallengeRepository.getManyCalibratedChallenges
+        calibratedChallengeRepository.getMany
           .withArgs([alreadyAnsweredChallenge.id, outdatedChallenge.id])
           .resolves([alreadyAnsweredChallenge, outdatedChallenge]);
 
@@ -479,13 +479,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
             version,
           })
           .resolves([nextCalibratedChallenge, lastSeenChallenge]);
-        calibratedChallengeRepository.getManyCalibratedChallenges.withArgs([]).resolves([]);
+        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -588,14 +588,14 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
           })
           .resolves([]);
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs()
           .resolves([
             calibratedChallengeWithLiveAlert,
             calibratedChallengeWithOtherSkill,
             calibratedChallengeWithLiveAlertedSkill,
           ]);
-        calibratedChallengeRepository.getManyCalibratedChallenges.withArgs([]).resolves([]);
+        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -697,15 +697,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
             version,
           })
           .resolves([answeredChallenge]);
-        calibratedChallengeRepository.getManyCalibratedChallenges
-          .withArgs([answeredChallenge.id])
-          .resolves([answeredChallenge]);
+        calibratedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
 
         // when
         const error = await catchErr(getNextChallenge)({
@@ -778,13 +776,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({ assessmentId: assessment.id })
               .resolves(candidate);
 
-            calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges
+            calibratedChallengeRepository.findActiveFlashCompatible
               .withArgs({
                 locale,
                 version,
               })
               .resolves([nextCalibratedChallenge]);
-            calibratedChallengeRepository.getManyCalibratedChallenges.withArgs([]).resolves([]);
+            calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
@@ -836,7 +834,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     });
 
     context('when the certification is a complementary certification', function () {
-      it('should call findActiveFlashCompatibleCalibratedChallenges with the version', async function () {
+      it('should call findActiveFlashCompatible with the version', async function () {
         // given
         versionRepository = {
           getByScopeAndReconciliationDate: sinon.stub(),
@@ -879,7 +877,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .resolves(version);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges.resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([]);
 
         // when
         await catchErr(getNextChallenge)({
@@ -900,9 +898,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(
-          calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges,
-        ).to.have.been.calledOnceWithExactly({
+        expect(calibratedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
           version,
         });
@@ -910,7 +906,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     });
 
     context('when the certification is a Pix core or double certification', function () {
-      it('should call findActiveFlashCompatibleCalibratedChallenges without version', async function () {
+      it('should call findActiveFlashCompatible without version', async function () {
         // given
         const v3CertificationCourse = domainBuilder.buildCertificationCourse({
           version: AlgorithmEngineVersion.V3,
@@ -943,7 +939,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges.resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([]);
 
         // when
         await catchErr(getNextChallenge)({
@@ -964,9 +960,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(
-          calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges,
-        ).to.have.been.calledOnceWithExactly({
+        expect(calibratedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
           version,
         });

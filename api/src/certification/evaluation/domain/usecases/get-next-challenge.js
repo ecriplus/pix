@@ -79,14 +79,12 @@ const getNextChallenge = async function ({
     reconciliationDate: candidate.reconciledAt,
   });
 
-  const activeFlashCompatibleCalibratedChallenges =
-    await calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
-      locale,
-      version,
-    });
+  const activeFlashCompatibleCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
+    locale,
+    version,
+  });
 
-  const alreadyAnsweredCalibratedChallenges =
-    await calibratedChallengeRepository.getManyCalibratedChallenges(alreadyAnsweredChallengeIds);
+  const alreadyAnsweredCalibratedChallenges = await calibratedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
 
   const challenges = [
     ...new Set([...alreadyAnsweredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges]),

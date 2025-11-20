@@ -480,12 +480,12 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
     await databaseBuilder.commit();
   });
 
-  describe('#getManyCalibratedChallenges', function () {
+  describe('#getMany', function () {
     context('when no locale provided', function () {
       context('when at least one challenge is not found amongst the provided ids', function () {
         it('should throw a NotFound error', async function () {
           // when
-          const err = await catchErr(calibratedChallengeRepository.getManyCalibratedChallenges)([
+          const err = await catchErr(calibratedChallengeRepository.getMany)([
             'challengeIdPipeauPipette',
             'challengeId00',
           ]);
@@ -499,10 +499,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
       context('when all challenges are found', function () {
         it('should return the challenges', async function () {
           // when
-          const challenges = await calibratedChallengeRepository.getManyCalibratedChallenges([
-            'challengeId02',
-            'challengeId00',
-          ]);
+          const challenges = await calibratedChallengeRepository.getMany(['challengeId02', 'challengeId00']);
 
           // then
           expect(challenges).to.deepEqualArray([
@@ -542,7 +539,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
 
         it('should allow duplicates', async function () {
           // when
-          const challenges = await calibratedChallengeRepository.getManyCalibratedChallenges([
+          const challenges = await calibratedChallengeRepository.getMany([
             'challengeId02',
             'challengeId00',
             'challengeId02',
@@ -605,7 +602,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
       context('when at least one challenge is not found amongst the provided ids', function () {
         it('should throw a NotFound error', async function () {
           // when
-          const err = await catchErr(calibratedChallengeRepository.getManyCalibratedChallenges)([
+          const err = await catchErr(calibratedChallengeRepository.getMany)([
             'challengeIdPipeauPipette',
             'challengeId00',
           ]);
@@ -619,7 +616,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
       context('when all challenges are found', function () {
         it('should return only the challenges for given locale', async function () {
           // when
-          const challenges = await calibratedChallengeRepository.getManyCalibratedChallenges(
+          const challenges = await calibratedChallengeRepository.getMany(
             ['challengeId02', 'challengeId00', 'challengeId01'],
             'en',
           );
@@ -665,7 +662,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
     });
   });
 
-  describe('#findActiveFlashCompatibleCalibratedChallenges', function () {
+  describe('#findActiveFlashCompatible', function () {
     let skillsLC = [];
     let challengesLC = [];
 
@@ -723,12 +720,11 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
       await databaseBuilder.commit();
 
       // when
-      const flashCompatibleChallenges =
-        await calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
-          date: candidateReconciliationDate,
-          locale: 'fr',
-          version,
-        });
+      const flashCompatibleChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
+        date: candidateReconciliationDate,
+        locale: 'fr',
+        version,
+      });
 
       // then
       expect(flashCompatibleChallenges).to.have.lengthOf(1);
@@ -744,7 +740,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
         await databaseBuilder.commit();
 
         // when
-        const err = await catchErr(calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges)();
+        const err = await catchErr(calibratedChallengeRepository.findActiveFlashCompatible)();
 
         // then
         expect(err.message).to.equal('Locale shall be defined');
@@ -760,7 +756,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
           await databaseBuilder.commit();
 
           // when
-          const challenges = await calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
+          const challenges = await calibratedChallengeRepository.findActiveFlashCompatible({
             locale: 'fr',
             version,
           });
@@ -794,7 +790,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
           await databaseBuilder.commit();
 
           // when
-          const challenges = await calibratedChallengeRepository.findActiveFlashCompatibleCalibratedChallenges({
+          const challenges = await calibratedChallengeRepository.findActiveFlashCompatible({
             locale: 'nl',
             version,
           });

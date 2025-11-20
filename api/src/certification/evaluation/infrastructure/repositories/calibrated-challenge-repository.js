@@ -11,7 +11,7 @@ const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONT
 const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
 
-export async function getManyCalibratedChallenges(ids, locale) {
+export async function getMany(ids, locale) {
   const challengeDtos = await getInstance().loadMany(ids);
   challengeDtos.forEach((challengeDto, index) => {
     if (challengeDto) return;
@@ -26,7 +26,7 @@ export async function getManyCalibratedChallenges(ids, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toCalibratedChallengeDomain({ challengeDto, skill }));
 }
 
-export async function findActiveFlashCompatibleCalibratedChallenges({
+export async function findActiveFlashCompatible({
   locale,
   version,
   dependencies = {
