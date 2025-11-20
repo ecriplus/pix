@@ -1,10 +1,13 @@
-import { config } from '../../../shared/config.js';
-
-const { features } = config;
 class AllowedCertificationCenterAccess {
   #isInWhitelist = false;
 
-  constructor({ center, isRelatedToManagingStudentsOrganization, relatedOrganizationTags }) {
+  constructor({
+    center,
+    isRelatedToManagingStudentsOrganization,
+    relatedOrganizationTags,
+    scoBlockedAccessDateCollege,
+    scoBlockedAccessDateLycee,
+  }) {
     this.id = center.id;
     this.name = center.name;
     this.externalId = center.externalId;
@@ -13,6 +16,8 @@ class AllowedCertificationCenterAccess {
     this.#isInWhitelist = !!center.isInWhitelist;
     this.isRelatedToManagingStudentsOrganization = isRelatedToManagingStudentsOrganization;
     this.relatedOrganizationTags = relatedOrganizationTags;
+    this.pixCertifScoBlockedAccessDateCollege = scoBlockedAccessDateCollege;
+    this.pixCertifScoBlockedAccessDateLycee = scoBlockedAccessDateLycee;
   }
 
   isAccessBlockedCollege() {
@@ -20,22 +25,20 @@ class AllowedCertificationCenterAccess {
       this.isCollege() &&
       !this.isLycee() &&
       !this.isInWhitelist() &&
-      new Date() < new Date(features.pixCertifScoBlockedAccessDateCollege)
+      new Date() < new Date(this.pixCertifScoBlockedAccessDateCollege)
     );
   }
 
   isAccessBlockedLycee() {
-    return (
-      this.isLycee() && !this.isInWhitelist() && new Date() < new Date(features.pixCertifScoBlockedAccessDateLycee)
-    );
+    return this.isLycee() && !this.isInWhitelist() && new Date() < new Date(this.pixCertifScoBlockedAccessDateLycee);
   }
 
   isAccessBlockedAEFE() {
-    return this.isAEFE() && !this.isInWhitelist() && new Date() < new Date(features.pixCertifScoBlockedAccessDateLycee);
+    return this.isAEFE() && !this.isInWhitelist() && new Date() < new Date(this.pixCertifScoBlockedAccessDateLycee);
   }
 
   isAccessBlockedAgri() {
-    return this.isAgri() && !this.isInWhitelist() && new Date() < new Date(features.pixCertifScoBlockedAccessDateLycee);
+    return this.isAgri() && !this.isInWhitelist() && new Date() < new Date(this.pixCertifScoBlockedAccessDateLycee);
   }
 
   hasTag(tagName) {
@@ -64,14 +67,6 @@ class AllowedCertificationCenterAccess {
 
   isInWhitelist() {
     return this.#isInWhitelist;
-  }
-
-  get pixCertifScoBlockedAccessDateLycee() {
-    return features.pixCertifScoBlockedAccessDateLycee ?? null;
-  }
-
-  get pixCertifScoBlockedAccessDateCollege() {
-    return features.pixCertifScoBlockedAccessDateCollege ?? null;
   }
 }
 
