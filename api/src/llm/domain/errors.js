@@ -54,6 +54,7 @@ export class NoAttachmentNorMessageProvidedError extends DomainError {
   }
 }
 
+// TODO: remove after migration is done successfully
 export class IncorrectMessagesOrderingError extends DomainError {
   constructor() {
     super('Messages must respect the ordering enforced by LLM providers');

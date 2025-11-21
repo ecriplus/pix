@@ -198,6 +198,18 @@ describe('Integration | API | Controller Error', function () {
     });
   });
 
+  context('500 Internal server error', function () {
+    const INTERNAL_SERVER_ERROR = 500;
+
+    it('responds Internal server error when a LLMDomainErrors.IncorrectMessagesOrderingError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.IncorrectMessagesOrderingError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(INTERNAL_SERVER_ERROR);
+      expect(responseDetail(response)).to.equal('Messages must respect the ordering enforced by LLM providers');
+    });
+  });
+
   context('503 Service Unavailable', function () {
     const SERVICE_UNAVAILABLE_ERROR = 503;
 

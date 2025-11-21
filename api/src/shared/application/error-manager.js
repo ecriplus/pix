@@ -523,6 +523,10 @@ function _mapToHttpError(error) {
     return new HttpErrors.ConflictError(error.message, error.code);
   }
 
+  if (error instanceof LLMDomainErrors.IncorrectMessagesOrderingError) {
+    return new HttpErrors.InternalServerError(error.message);
+  }
+
   return new HttpErrors.BaseHttpError(error.message);
 }
 
