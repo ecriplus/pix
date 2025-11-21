@@ -148,7 +148,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Quand vous discutez avec une IA, les <strong>données</strong> que vous lui transmettez ou les <strong>questions</strong> que vous lui posez <strong>ne sont pas effacées</strong>. Elles sont stockées et peuvent être <strong>réutilisées</strong>&nbsp;:&nbsp; </p><ul>    <li>pour <strong>améliorer l’IA</strong> (corriger ses erreurs, l’entraîner),</li>    <li>pour faire des <strong>statistiques</strong> (par exemple&nbsp;: combien de fois une question est posée).</li></ul><p>De plus, une entreprise d’IA peut <strong>être amenée à fournir vos données</strong> à la justice ou aux services de renseignement d’un pays, même si ce n’est pas celui où vous vivez.&nbsp; </p><p>⚠️ Cela peut poser des risques pour votre vie privée, la sécurité de vos données et la confiance que vous placez dans ces technologies.</p>"
+                "content": "<p>Les informations que vous envoyez <strong>ne sont pas effacées</strong>&nbsp;: elles sont <strong>stockées</strong> et peuvent être <strong>réutilisées</strong>, par exemple pour <strong>améliorer l’IA</strong> ou <strong>établir des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p><h5><br></h5>"
               }
             }
           ]
@@ -178,7 +178,7 @@
               "element": {
                 "id": "3a93f685-54c5-42eb-83b0-2459f1c81007",
                 "type": "text",
-                "content": "<p>Texte finaux&nbsp;:&nbsp;</p><p>« [J’habite au 12 rue des lilas, Joliville], [je m’appelle Cedric Fostabley], [je suis maçon], [mon numéro est le 06 12 34 56 78]. [Peux-tu me faire une carte de visite professionnelle et originale ?]\" </p><p>\"[Peux-tu écrire une lettre] [pour le docteur Vanderbrooke] [lui demandant de soigner] [Madame Sarfati], [suivie pour son diabète] [depuis 5 ans] ?\"</p><p> \"[Peux-tu rédiger un mail pour mon équipe] [afin de lui rappeler que le mot de passe du wifi est AzErTy2024!] [et qu’ils doivent suivre le mode d’emploi suivant] : [http://intranet.example.invalid/procedure-connexion] pour s’y connecter ?]\"</p><p>Texte anonymisés :</p><p>\"Je suis artisan dans le bâtiment et j’aimerais une idée de carte de visite professionnelle et moderne pour présenter mon activité. Peux-tu me proposer un modèle sans utiliser de données personnelles ?\"</p><p>\"Peux-tu rédiger un exemple de lettre formelle adressée à un professionnel de santé, demandant un rendez-vous pour le suivi d’une maladie chronique, sans inclure aucune donnée personnelle ou information médicale réelle ? \"</p><p>\"Peux-tu me proposer un exemple de mail expliquant à une équipe comment se connecter au WiFi d’une organisation ?<br>\nJe compléterai moi-même ensuite les informations sensibles (mot de passe, lien interne, instructions).\"</p>"
+                "content": "<p>Texte finaux&nbsp;:&nbsp;</p><p>«&nbsp;[J’habite au 12 rue des lilas, Joliville], [je m’appelle Cedric Fostabley], [je suis maçon], [mon numéro est le 06 12 34 56 78]. [Peux-tu me faire une carte de visite professionnelle et originale ?]\" </p><p>\"[Peux-tu écrire une lettre] [pour le docteur Vanderbrooke] [lui demandant de soigner] [Madame Sarfati], [suivie pour son diabète] [depuis 5 ans] ?\"</p><p> \"[Peux-tu rédiger un mail pour mon équipe] [afin de lui rappeler que le mot de passe du wifi est AzErTy2024!] [et qu’ils doivent suivre le mode d’emploi suivant]&nbsp;: [http://intranet.example.invalid/procedure-connexion] pour s’y connecter ?]\"</p><p>Texte anonymisés&nbsp;:</p><p>\"Je suis artisan dans le bâtiment et j’aimerais une idée de carte de visite professionnelle et moderne pour présenter mon activité. Peux-tu me proposer un modèle sans utiliser de données personnelles ?\"</p><p>\"Peux-tu rédiger un exemple de lettre formelle adressée à un professionnel de santé, demandant un rendez-vous pour le suivi d’une maladie chronique, sans inclure aucune donnée personnelle ou information médicale réelle ? \"</p><p>\"Peux-tu me proposer un exemple de mail expliquant à une équipe comment se connecter au WiFi d’une organisation ?<br>Je compléterai moi-même ensuite les informations sensibles (mot de passe, lien interne, instructions).\"</p>"
               }
             },
             {
@@ -229,7 +229,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
-                "content": "<p>Sera passé dans le feedback du POI</p><p>[💡 Quand vous utilisez un logiciel IA générative, certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiant…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…]</li></ul><p>Ces exemples montrent bien qu’un prompt peut en dévoiler trop sans qu’on s’en rende compte. Pour s’en protéger, une règle simple guide vos usages : un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
+                "content": "<p>Sera passé dans le feedback du POI</p><p>[💡 Quand vous utilisez un logiciel IA générative, certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiant…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…]</li></ul><p>Ces exemples montrent bien qu’un prompt peut en dévoiler trop sans qu’on s’en rende compte. Pour s’en protéger, une règle simple guide vos usages&nbsp;: un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
               }
             }
           ]
@@ -267,7 +267,7 @@
                     {
                       "userName": "Sarah",
                       "direction": "outgoing",
-                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que le numéro et l'adresse sont vrais ?",
+                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/iagenethiquenov/a971c385-bad5-4038-8334-1115b509c3e4.png",
                         "alt": "Image draft"
@@ -333,7 +333,7 @@
               "element": {
                 "id": "d0544bda-383f-4f85-9780-388b2a1c9d47",
                 "type": "text",
-                "content": "<p>Des informations personnelles (nom, adresse...) peuvent réapparaître dans d’autres réponses générées pour d’autres utilisateurs.</p><h5>🤔L’IA copie-t-elle exactement nos données ?</h5><p>Dans la majorité des cas, l’IA ne recopie pas mot pour mot, mais certaines réponses peuvent s’appuyer sur des données réelles.</p><br>"
+                "content": "<p>Des informations personnelles (nom, adresse...) peuvent réapparaître dans d’autres réponses générées pour d’autres utilisateurs.</p><h5>🤔L’IA copie-t-elle exactement nos données ?</h5><p>Dans la majorité des cas, l’IA ne recopie pas mot pour mot, mais certaines réponses peuvent s’appuyer sur des données réelles.</p><br>"
               }
             }
           ]
