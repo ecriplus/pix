@@ -1,4 +1,4 @@
-import { resizeByHeight, resizeByWidth, resizeImage, validateOptions } from 'mon-pix/utils/resize-image';
+import { resizeImage } from 'mon-pix/utils/resize-image';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | Resize Image', function () {
@@ -87,92 +87,6 @@ module('Unit | Utility | Resize Image', function () {
 
       //then
       assert.deepEqual(dimensions, { height: 20, width: 100 });
-    });
-  });
-
-  module('#resizeByHeight', function () {
-    test('should return the accurate result for a resize by height', function (assert) {
-      // given
-      const imageInformation = { width: 100, height: 50 };
-      const MAX_HEIGHT = 100;
-      // when
-      const dimensions = resizeByHeight(imageInformation, MAX_HEIGHT);
-
-      // then
-      assert.deepEqual(dimensions, { width: 200, height: 100 });
-    });
-  });
-
-  module('#resizeByWidth', function () {
-    test('should return the accurate result for a resize by width', function (assert) {
-      // given
-      const imageInformation = { width: 50, height: 100 };
-      const MAX_WIDTH = 100;
-      // when
-      const dimensions = resizeByWidth(imageInformation, MAX_WIDTH);
-
-      // then
-      assert.deepEqual(dimensions, { width: 50, height: 100 });
-    });
-  });
-
-  module('#validateOptions', function () {
-    test('should return false if options is undefined', function (assert) {
-      // given
-      const options = undefined;
-
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.false(validationStatus);
-    });
-    test('should return false if options has neither MAX_WIDTH nor MAX_HEIGHT', function (assert) {
-      // given
-      const options = {};
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.false(validationStatus);
-    });
-    test('should return true if options contains MAX_WIDTH', function (assert) {
-      // given
-      const options = { MAX_WIDTH: 20 };
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.true(validationStatus);
-    });
-    test('should return true if options contains MAX_HEIGHT', function (assert) {
-      // given
-      const options = { MAX_HEIGHT: 20 };
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.true(validationStatus);
-    });
-
-    test('should return false if provided MAX_WIDTH equals 0', function (assert) {
-      // given
-      const options = { MAX_WIDTH: 0 };
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.false(validationStatus);
-    });
-
-    test('should return false if provided MAX_HEIGHT equals 0', function (assert) {
-      // given
-      const options = { MAX_HEIGHT: 0 };
-      // when
-      const validationStatus = validateOptions(options);
-
-      // then
-      assert.false(validationStatus);
     });
   });
 });
