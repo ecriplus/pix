@@ -3,19 +3,16 @@ export const Accessibility = Object.freeze({
   OK: 'OK',
 });
 
-/**
- * Traduction: Épreuve calibrée
- */
 export class CalibratedChallenge {
   /**
    * Constructeur d'épreuve calibrée
    *
    * @param id
-   * @param discriminant
-   * @param difficulty
-   * @param blindnessCompatibility
-   * @param colorBlindnessCompatibility
-   * @param skill
+   * @param {number} discriminant
+   * @param {number} difficulty
+   * @param {Accessibility} blindnessCompatibility
+   * @param {Accessibility} colorBlindnessCompatibility
+   * @param {CalibratedChallengeSkill} skill
    */
   constructor({ id, discriminant, difficulty, blindnessCompatibility, colorBlindnessCompatibility, skill }) {
     this.id = id;

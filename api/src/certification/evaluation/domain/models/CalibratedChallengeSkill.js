@@ -1,14 +1,9 @@
-/**
- * Traduction: Acquis d'épreuve calibrée
- */
 export class CalibratedChallengeSkill {
-  /**
-   * Constructeur d'acquis d'épreuve calibré
-   *
+  /*
    * @param id
-   * @param name
-   * @param competenceId
-   * @param tubeId
+   * @param {string} name
+   * @param {string} competenceId
+   * @param {string} tubeId
    */
   constructor({ id, name, competenceId, tubeId }) {
     this.id = id;
