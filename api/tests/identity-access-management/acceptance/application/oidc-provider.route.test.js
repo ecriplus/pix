@@ -379,6 +379,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
     it('returns an accessToken with a 200 HTTP status code', async function () {
       // given
+      const start = new Date();
       const firstName = 'Brice';
       const lastName = 'Glace';
       const externalIdentifier = 'sub';
@@ -421,8 +422,12 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result.access_token).to.exist;
-      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+
+      const result = response.result;
+      expect(result).to.have.property('access_token');
+      expect(result).to.have.property('logout_url_uuid');
+
+      const decodedAccessToken = tokenService.getDecodedToken(result.access_token);
       expect(decodedAccessToken).to.include({ aud: 'https://app.dev.pix.org' });
 
       const createdUser = await knex('users').first();
@@ -431,7 +436,15 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       expect(createdUser.locale).to.equal('fr-FR');
 
       const createdAuthenticationMethod = await knex('authentication-methods').first();
+      expect(createdAuthenticationMethod.identityProvider).to.equal('OIDC_EXAMPLE_NET');
       expect(createdAuthenticationMethod.externalIdentifier).to.equal('sub');
+
+      const userLogin = await knex('user-logins').first();
+      expect(userLogin.lastLoggedAt).to.be.greaterThanOrEqual(start);
+
+      const lastUserApplicationConnection = await knex('last-user-application-connections').first();
+      expect(lastUserApplicationConnection.application).to.equal('app');
+      expect(lastUserApplicationConnection.lastLoggedAt).to.be.greaterThanOrEqual(start);
     });
 
     context('when authentication key has expired', function () {
