@@ -53,6 +53,7 @@ import { findRecommendedModulesByCampaignParticipationIds } from './find-recomme
 import { findTargetProfileSummariesForTraining } from './find-target-profile-summaries-for-training.js';
 import { findTutorials } from './find-tutorials.js';
 import { getModule } from './get-module.js';
+import { getModuleByShortId } from './get-module-by-short-id.js';
 import { getModuleMetadataList } from './get-module-metadata-list.js';
 import { getTraining } from './get-training.js';
 import { getUserModuleStatuses } from './get-user-module-statuses.js';
@@ -86,6 +87,7 @@ const usecasesWithoutInjectedDependencies = {
   findTutorials,
   getModuleMetadataList,
   getModule,
+  getModuleByShortId,
   getTraining,
   getUserModuleStatuses,
   handleTrainingRecommendation,
