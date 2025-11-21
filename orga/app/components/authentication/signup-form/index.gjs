@@ -7,6 +7,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import get from 'lodash/get';
 
 import isEmailValid from '../../../utils/email-validator.js';
 import { FormValidation } from '../../../utils/form-validation';
@@ -33,6 +34,7 @@ export default class SignupForm extends Component {
   @service pixMetrics;
   @service store;
   @service intl;
+  @service authErrorMessages;
 
   @tracked isLoading = false;
   @tracked globalError = null;
@@ -95,6 +97,7 @@ export default class SignupForm extends Component {
       this.isLoading = false;
       return;
     }
+
     try {
       await user.save();
 
@@ -107,23 +110,20 @@ export default class SignupForm extends Component {
       await this.session.authenticate('authenticator:oauth2', this.email, this.password);
 
       this.password = null;
-    } catch {
-      if (user.errors) {
-        return this.#updateInputsStatus(user);
+    } catch (errorResponse) {
+      if (user.errors?.length > 0) {
+        return this.validation.setErrorsFromApi(user.errors);
       }
-
-      this.globalError = this.intl.t('pages.login-or-register.register-form.errors.default');
+      this.globalError = this.#getApiErrorMessage(errorResponse);
     } finally {
       this.isLoading = false;
     }
   }
 
-  #updateInputsStatus(user) {
-    const errors = user.errors;
-    errors.forEach(({ attribute, message }) => {
-      this.validation[attribute].status = 'error';
-      this.validation[attribute].message = message;
-    });
+  #getApiErrorMessage(errorResponse) {
+    // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
+    const error = get(errorResponse, errorResponse?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
+    return this.authErrorMessages.getAuthenticationErrorMessage(error);
   }
 
   #acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, createdUserEmail) {

@@ -72,32 +72,8 @@ module.exports = function (environment) {
           CODE: '401',
           I18N_KEY: 'common.api-error-messages.login-unauthorized-error',
         },
-        SHOULD_CHANGE_PASSWORD: {
-          CODE: '401',
-          I18N_KEY: 'pages.login-form.errors.should-change-password',
-        },
-        USER_IS_TEMPORARY_BLOCKED: {
-          CODE: '403',
-          I18N_KEY: 'common.api-error-messages.login-user-temporary-blocked-error',
-        },
-        USER_IS_BLOCKED: {
-          CODE: '403',
-          I18N_KEY: 'common.api-error-messages.login-user-blocked-error',
-        },
-        NOT_LINKED_ORGANIZATION: {
-          CODE: '403',
-          I18N_KEY: 'pages.login-form.errors.status.403',
-        },
-        USER_NOT_FOUND: {
-          CODE: '404',
-          I18N_KEY: 'pages.login-form.errors.status.404',
-        },
         INTERNAL_SERVER_ERROR: {
           CODE: '500',
-          I18N_KEY: 'common.api-error-messages.internal-server-error',
-        },
-        BAD_GATEWAY: {
-          CODE: '502',
           I18N_KEY: 'common.api-error-messages.internal-server-error',
         },
         GATEWAY_TIMEOUT: {

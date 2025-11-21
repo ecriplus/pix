@@ -80,7 +80,12 @@ module('Acceptance | join and signup', function (hooks) {
     module('When user already exists', function () {
       test('displays an error message', async function (assert) {
         // given
-        server.post('/users', { errors: [{ status: '422', source: { pointer: 'data/attributes/email' } }] }, 422);
+        const alreadyExistingUserError = {
+          status: '422',
+          source: { pointer: 'data/attributes/email' },
+          detail: 'INVALID_OR_ALREADY_USED_EMAIL',
+        };
+        server.post('/users', { errors: [alreadyExistingUserError] }, 422);
 
         // when
         const screen = await visit(`/rejoindre?invitationId=${invitationId}&code=${invitationCode}`);
@@ -95,7 +100,7 @@ module('Acceptance | join and signup', function (hooks) {
         // then
         assert.strictEqual(currentURL(), `/rejoindre/inscription?code=${invitationCode}&invitationId=${invitationId}`);
         assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
-        assert.ok(screen.getByText(t('pages.join.signup.fields.email.error')));
+        assert.ok(screen.getByText(t('pages.join.signup.errors.invalid-or-already-used-email')));
       });
     });
   });

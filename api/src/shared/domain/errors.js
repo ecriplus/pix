@@ -603,6 +603,12 @@ class AlreadyExistingInvitationError extends DomainError {
   }
 }
 
+class InvitationNotFoundError extends NotFoundError {
+  constructor() {
+    super('Invitation not found', 'INVITATION_NOT_FOUND');
+  }
+}
+
 class AlreadyRegisteredEmailAndUsernameError extends DomainError {
   constructor(message = 'Cette adresse e-mail et cet identifiant sont déjà utilisés.') {
     super(message);
@@ -1077,6 +1083,7 @@ export {
   InvalidSessionResultTokenError,
   InvalidTemporaryKeyError,
   InvalidVerificationCodeError,
+  InvitationNotFoundError,
   LanguageNotSupportedError,
   LearningContentResourceNotFound,
   ManyOrganizationsFoundError,

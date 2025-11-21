@@ -1,4 +1,5 @@
-import { AlreadyExistingMembershipError } from '../../../shared/domain/errors.js';
+import { MissingOrInvalidCredentialsError } from '../../../identity-access-management/domain/errors.js';
+import { AlreadyExistingMembershipError, UserNotFoundError } from '../../../shared/domain/errors.js';
 
 /**
  * @typedef {function} acceptOrganizationInvitation
@@ -21,13 +22,15 @@ const acceptOrganizationInvitation = async function ({
   organizationInvitedUserRepository,
   userRepository,
 }) {
-  const organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, email });
-
+  let organizationInvitedUser;
   try {
+    organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, email });
     organizationInvitedUser.acceptInvitation({ code });
   } catch (error) {
     if (error instanceof AlreadyExistingMembershipError) {
       await organizationInvitationRepository.markAsAccepted(organizationInvitationId);
+    } else if (error instanceof UserNotFoundError) {
+      throw new MissingOrInvalidCredentialsError();
     }
     throw error;
   }

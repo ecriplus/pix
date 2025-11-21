@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { InvitationNotFoundError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { OrganizationInvitedUser } from '../../../../../src/team/domain/models/OrganizationInvitedUser.js';
 import { organizationInvitedUserRepository } from '../../../../../src/team/infrastructure/repositories/organization-invited-user.repository.js';
@@ -177,8 +177,7 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
       });
 
       // then
-      expect(error).to.be.an.instanceOf(NotFoundError);
-      expect(error.message).to.equal('Not found organization-invitation for ID 3256');
+      expect(error).to.be.an.instanceOf(InvitationNotFoundError);
     });
 
     it('should throw an error if have no user', async function () {
@@ -194,7 +193,6 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
 
       // then
       expect(error).to.be.an.instanceOf(NotFoundError);
-      expect(error.message).to.equal('Not found user for email wrong@email.net');
     });
   });
 

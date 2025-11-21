@@ -147,7 +147,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      assert.dom(screen.getByText(t('pages.login-or-register.register-form.errors.default'))).exists();
+      assert.dom(screen.getByText(/Impossible de se connecter/)).exists();
       assert.ok(sessionService.authenticate.notCalled);
     });
   });

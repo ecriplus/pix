@@ -231,7 +231,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
   });
 });
 
-// Error response format is different from EmberAdapter and EmberSimpleAuth
+// EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
 function _buildApiReponseError({ status = '400', errorCode, meta, isAdapterError = false }) {
   if (isAdapterError) {
     return { errors: [{ status, code: errorCode, meta }], isAdapterError };
