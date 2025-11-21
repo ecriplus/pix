@@ -1,13 +1,33 @@
+import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import {
   ChatForbiddenError,
   ChatNotFoundError,
-  MaxPromptsReachedError,
-  NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
   PromptAlreadyOngoingError,
-  TooLargeMessageInputError,
 } from '../errors.js';
+import { ChatV2 } from '../models/ChatV2.js';
 
+/**
+ * @typedef {import ('../../infrastructure/repositories/index.js').chatRepository} ChatRepository
+ * @typedef {import ('../../infrastructure/repositories/index.js').promptRepository} PromptRepository
+ * @typedef {import ('../../infrastructure/streaming/to-event-stream.js')} toEventStream
+ * @typedef {import ('../../infrastructure/streaming/to-event-stream.js').StreamCapture} StreamCapture
+ * @typedef {import ('../../../shared/infrastructure/mutex/RedisMutex.js').redisMutex} RedisMutex
+ */
+
+const logger = child('llm:api', { event: SCOPES.LLM });
+
+/**
+ * @param {Object} params
+ * @param {string=} params.chatId
+ * @param {number=} params.userId
+ * @param {string=} params.message
+ * @param {string=} params.attachmentName
+ * @param {ChatRepository} params.chatRepository
+ * @param {PromptRepository} params.promptRepository
+ * @param {toEventStream} params.toEventStream
+ * @param {RedisMutex} params.redisMutex
+ */
 export async function promptChat({
   chatId,
   userId,
@@ -33,7 +53,7 @@ export async function promptChat({
       throw new NoAttachmentNorMessageProvidedError();
     }
 
-    const chat = await chatRepository.get(chatId);
+    const chat = await chatRepository.getV2(chatId);
 
     if (!chat) {
       throw new ChatNotFoundError(chatId);
@@ -43,45 +63,29 @@ export async function promptChat({
       throw new ChatForbiddenError();
     }
 
-    const { configuration } = chat;
-    if (hasAnAttachmentBeenProvided && !configuration.hasAttachment) {
-      throw new NoAttachmentNeededError();
-    }
+    chat.addUserMessage(message, attachmentName);
+
     let attachmentMessageType;
-    let isAttachmentValid;
     if (hasAnAttachmentBeenProvided) {
-      isAttachmentValid = chat.addAttachmentContextMessages(attachmentName, message);
-      attachmentMessageType = isAttachmentValid
-        ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
-        : toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
+      attachmentMessageType =
+        chat.lastAttachmentStatus === ChatV2.ATTACHMENT_STATUS.SUCCESS
+          ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
+          : toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
     } else {
       attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.NONE;
     }
+
     let readableStream = null;
-    // As long as the attachment context has been added to the chat, if we receive other attachments valid or invalid later on we must
-    // forward the message to the LLM anyway
-    const shouldSendMessageToLLM =
-      !hasAnAttachmentBeenProvided || (hasAnAttachmentBeenProvided && chat.hasAttachmentContextBeenAdded);
-    if (hasAMessageBeenProvided) {
-      if (message.length > configuration.inputMaxChars) {
-        throw new TooLargeMessageInputError();
-      }
-
-      if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
-        throw new MaxPromptsReachedError();
-      }
-
-      if (shouldSendMessageToLLM) {
-        readableStream = await promptRepository.prompt({
-          message,
-          chat,
-        });
-      }
+    if (chat.shouldSendForInference) {
+      readableStream = await promptRepository.promptV2({
+        messages: chat.messagesForInference,
+        configuration: chat.configuration,
+      });
     }
 
     return toEventStream.fromLLMResponse({
       llmResponse: readableStream,
-      onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository, redisMutex),
+      onStreamDone: finalize({ chat, chatRepository, redisMutex }),
       attachmentMessageType,
       shouldSendDebugData: chat.isPreview,
       prompt: message,
@@ -96,36 +100,36 @@ export async function promptChat({
  * @function
  * @name finalize
  *
- * @param {Chat} chat
- * @param {string} message
- * @param {boolean} hasJustBeenSentToLLM
- * @param {Object} chatRepository
- * @param {Object} redisMutex
+ * @param {object} params
+ * @param {ChatV2} params.chat
+ * @param {ChatRepository} params.chatRepository
+ * @param {RedisMutex} params.redisMutex
  * @returns {(streamCapture: StreamCapture, hasStreamSucceeded: boolean) => Promise<void>}
  */
-function finalize(chat, message, hasJustBeenSentToLLM, chatRepository, redisMutex) {
+function finalize({ chat, chatRepository, redisMutex }) {
   return async (streamCapture, hasStreamSucceeded) => {
-    if (hasStreamSucceeded) {
-      const hasErrorOccurredDuringStream = !!streamCapture.errorOccurredDuringStream;
-      const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM && !hasErrorOccurredDuringStream;
-      const shouldBeForwardedToLLM =
-        hasJustBeenSentToLLM && !streamCapture.wasModerated && !hasErrorOccurredDuringStream;
-      chat.addUserMessage(
-        message,
-        shouldBeCountedAsAPrompt,
-        shouldBeForwardedToLLM,
-        streamCapture.haveVictoryConditionsBeenFulfilled,
-        streamCapture.wasModerated,
-      );
-      chat.addLLMMessage(
-        streamCapture.LLMMessageParts.join(''),
-        !hasErrorOccurredDuringStream,
-        hasErrorOccurredDuringStream,
-      );
-      chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
-      await chatRepository.save(chat);
-    }
+    try {
+      if (hasStreamSucceeded) {
+        if (chat.lastUserMessage) {
+          chat.lastUserMessage.wasModerated = streamCapture.wasModerated;
+        }
 
-    await redisMutex.release(chat.id);
+        if (streamCapture.haveVictoryConditionsBeenFulfilled) {
+          chat.haveVictoryConditionsBeenFulfilled = true;
+        }
+
+        const assistantMessage = streamCapture.LLMMessageParts.join('');
+        if (assistantMessage) {
+          chat.addAssistantMessage(assistantMessage);
+        }
+
+        chat?.updateTokenConsumption?.(streamCapture.inputTokens, streamCapture.outputTokens);
+        await chatRepository.saveV2(chat);
+      }
+    } catch (err) {
+      logger.error({ err, chatId: chat.id, streamCapture }, 'error while finalizing');
+    } finally {
+      await redisMutex.release(chat.id);
+    }
   };
 }
