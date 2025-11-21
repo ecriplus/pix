@@ -433,7 +433,7 @@
     },
     "complementary-certifications": {
       "item": {
-        "complementary-certification": "Certification complémentaire",
+        "certification-framework": "Référentiel de certification",
         "framework": {
           "create-button": "Créer une nouvelle version du référentiel",
           "creation-form": {
@@ -487,7 +487,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "Toutes les certifications complémentaires"
+      "title": "Tous les référentiels de certification"
     },
     "layout": {
       "menu-bar": {

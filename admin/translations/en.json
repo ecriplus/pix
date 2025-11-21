@@ -433,7 +433,7 @@
     },
     "complementary-certifications": {
       "item": {
-        "complementary-certification": "Complementary certification",
+        "certification-framework": "Complementary certification",
         "framework": {
           "create-button": "Create a new version of the certification framework",
           "creation-form": {
@@ -486,7 +486,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "All complementary certifications"
+      "title": "All certification frameworks"
     },
     "layout": {
       "menu-bar": {

@@ -22,8 +22,8 @@ module('Integration | Component | complementary-certifications/item/header', fun
     );
 
     // then
-    assert.ok(screen.getByRole('heading', { name: 'Certification complémentaire Pix+Droit', level: 1 }));
+    assert.ok(screen.getByRole('heading', { name: 'Référentiel de certification Pix+Droit', level: 1 }));
     const nav = screen.getByRole('navigation');
-    assert.ok(within(nav).getByRole('link', { name: 'Toutes les certifications complémentaires' }));
+    assert.ok(within(nav).getByRole('link', { name: 'Tous les référentiels de certification' }));
   });
 });

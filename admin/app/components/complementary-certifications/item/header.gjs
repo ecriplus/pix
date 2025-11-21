@@ -25,7 +25,7 @@ export default class Header extends Component {
 
     <div class="complementary-certification-header">
       <h1 class="complementary-certification-header__title">
-        <small>{{t "components.complementary-certifications.item.complementary-certification"}}</small>
+        <small>{{t "components.complementary-certifications.item.certification-framework"}}</small>
         <span>{{@complementaryCertificationLabel}}</span>
       </h1>
     </div>
