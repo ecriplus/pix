@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { get, save, saveV2 } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { get, getV2, save, saveV2 } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
@@ -571,6 +571,110 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             }),
           ],
           hasAttachmentContextBeenAdded: true,
+          totalInputTokens: 1500,
+          totalOutputTokens: 2500,
+        }),
+      );
+    });
+  });
+
+  describe('#getV2', function () {
+    it('should return null when chat is not found', async function () {
+      // when
+      const chat = await getV2(randomUUID());
+
+      // then
+      expect(chat).to.be.null;
+    });
+
+    it('should return the ChatV2 model when chat is found', async function () {
+      // given
+      const chatId = databaseBuilder.factory.buildChatV2({
+        assessmentId: 123,
+        userId: 456,
+        challengeId: 'recCHallengeA',
+        configId: 'someConfigId',
+        configContent: {
+          challenge: {
+            victoryConditions: {
+              expectations: [
+                {
+                  type: 'answer_does_not_contain',
+                  value: 'saucisse',
+                },
+              ],
+            },
+          },
+        },
+        haveVictoryConditionsBeenFulfilled: true,
+        moduleId: null,
+        passageId: null,
+        totalInputTokens: 1500,
+        totalOutputTokens: 2500,
+      }).id;
+      databaseBuilder.factory.buildChatMessageV2({
+        attachmentName: 'attachmentA',
+        chatId,
+        content: 'Voici le fichier :',
+        emitter: 'user',
+        index: 0,
+        wasModerated: false,
+      });
+      databaseBuilder.factory.buildChatMessageV2({
+        attachmentName: null,
+        chatId,
+        content: 'Les arc en ciels c super bo',
+        emitter: 'assistant',
+        index: 1,
+        wasModerated: null,
+      });
+      databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+      await databaseBuilder.commit();
+
+      // when
+      const chat = await getV2(chatId);
+
+      // then
+      expect(chat).to.deepEqualInstance(
+        new ChatV2({
+          id: chatId,
+          userId: 456,
+          assessmentId: 123,
+          challengeId: 'recCHallengeA',
+          passageId: null,
+          moduleId: null,
+          configurationId: 'someConfigId',
+          configuration: new Configuration({
+            challenge: {
+              victoryConditions: {
+                expectations: [
+                  {
+                    type: 'answer_does_not_contain',
+                    value: 'saucisse',
+                  },
+                ],
+              },
+            },
+          }),
+          messages: [
+            new MessageV2({
+              attachmentName: 'attachmentA',
+              chatId,
+              content: 'Voici le fichier :',
+              emitter: 'user',
+              index: 0,
+              wasModerated: false,
+            }),
+            new MessageV2({
+              attachmentName: null,
+              chatId,
+              content: 'Les arc en ciels c super bo',
+              emitter: 'assistant',
+              index: 1,
+              wasModerated: null,
+            }),
+          ],
+          haveVictoryConditionsBeenFulfilled: true,
           totalInputTokens: 1500,
           totalOutputTokens: 2500,
         }),
