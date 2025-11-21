@@ -7,7 +7,7 @@ import { module, test } from 'qunit';
 
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
 
-module('Acceptance | Route | routes/authenticated/certifications/certification | informations', function (hooks) {
+module('Acceptance | Route | routes/authenticated/sessions/certification | informations', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -67,22 +67,11 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
     // when
-    const screen = await visit(`/certifications/${certification.id}`);
+    const screen = await visit(`/sessions/certification/${certification.id}`);
 
     // then
-    assert.dom(screen.getByRole('heading', { name: 'Certifications' })).exists();
-    assert.dom(screen.getByRole('textbox', { name: 'Rechercher une session avec un identifiant' })).exists();
-  });
-
-  test('it should set certifications menubar item active', async function (assert) {
-    // given
-    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-
-    // when
-    const screen = await visit(`/certifications/${certification.id}`);
-
-    // then
-    assert.dom(screen.getByRole('link', { name: 'Certifications' })).hasClass('active');
+    assert.dom(screen.getByRole('heading', { name: `Certif ${certification.id}` })).exists();
+    assert.dom(screen.getByRole('textbox', { name: 'Rechercher une certification avec un identifiant' })).exists();
   });
 
   module('certification information read', function () {
@@ -91,7 +80,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
       // when
-      const screen = await visit(`/certifications/${certification.id}`);
+      const screen = await visit(`/sessions/certification/${certification.id}`);
 
       // then
       const table = screen.getByRole('table', { name: 'Détails du résultat par compétence' });
@@ -112,7 +101,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.queryByText('Signalements')).doesNotExist();
@@ -129,7 +118,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [certificationIssueReport] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByText('Signalements')).exists();
@@ -154,7 +143,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByText('1 Signalement(s) impactant(s)')).exists();
@@ -186,7 +175,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [certificationIssueReportImpactful] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByText('1 Signalement(s) impactant(s)')).exists();
@@ -212,7 +201,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [certificationIssueReportNonImpactful] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByText('1 Signalement(s) non impactant(s)')).exists();
@@ -238,7 +227,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [certificationIssueReportImpactful] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByLabelText('Signalement résolu')).exists();
@@ -257,7 +246,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         certification.update({ certificationIssueReports: [certificationIssueReportImpactful] });
 
         // when
-        const screen = await visit('/certifications/123');
+        const screen = await visit('/sessions/certification/123');
 
         // then
         assert.dom(screen.getByLabelText('Signalement non résolu')).exists();
@@ -278,7 +267,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           certification.update({ certificationIssueReports: [certificationIssueReport] });
 
           // when
-          const screen = await visit('/certifications/123');
+          const screen = await visit('/sessions/certification/123');
 
           // then
           assert
@@ -296,7 +285,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       test('it should redirect to user detail page', async function (assert) {
         // given
         await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        await visit(`/certifications/${certification.id}`);
+        await visit(`/sessions/certification/${certification.id}`);
 
         // when
         await clickByName("Voir les détails de l'utilisateur");
@@ -333,7 +322,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             complementaryCertificationCourseResultWithExternal,
           });
 
-          const screen = await visit(`/certifications/${certification.id}`);
+          const screen = await visit(`/sessions/certification/${certification.id}`);
 
           // when
           await click(screen.getByRole('button', { name: 'Modifier le volet jury' }));
@@ -386,7 +375,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             return schema.certifications.first();
           });
 
-          const screen = await visit(`/certifications/${certification.id}`);
+          const screen = await visit(`/sessions/certification/${certification.id}`);
 
           // when
           await click(screen.getByRole('button', { name: 'Modifier le volet jury' }));
@@ -474,7 +463,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             competencesWithMark: [],
           });
 
-          const screen = await visit(`/certifications/${certification1.id}`);
+          const screen = await visit(`/sessions/certification/${certification1.id}`);
           await click(screen.getByRole('button', { name: 'Modifier le volet jury' }));
           await _switchCertificationDetail(screen, session.id, certification2.id);
 
@@ -506,7 +495,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
 
         // when
-        const screen = await visit(`/certifications/${certification.id}`);
+        const screen = await visit(`/sessions/certification/${certification.id}`);
 
         // then
         assert.dom(screen.getByText('Certification complémentaire')).exists();
@@ -532,7 +521,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
 
         // when
-        const screen = await visit(`/certifications/${certification.id}`);
+        const screen = await visit(`/sessions/certification/${certification.id}`);
 
         // then
         assert.dom(screen.getByText('Résultats de la certification complémentaire Pix+ Edu :')).exists();
@@ -572,7 +561,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
                   204,
                 );
 
-                const screen = await visit(`/certifications/${certification.id}`);
+                const screen = await visit(`/sessions/certification/${certification.id}`);
                 await click(screen.getAllByRole('button', { name: 'Résoudre le signalement' }).at(0));
 
                 await screen.findByRole('dialog');
@@ -605,7 +594,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
                 500,
               );
 
-              const screen = await visit(`/certifications/${certification.id}`);
+              const screen = await visit(`/sessions/certification/${certification.id}`);
 
               await click(screen.getAllByRole('button', { name: 'Résoudre le signalement' }).at(0));
               await screen.findByRole('dialog');
@@ -630,7 +619,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
           // when
-          const screen = await visit(`/certifications/${certification.id}`);
+          const screen = await visit(`/sessions/certification/${certification.id}`);
           await clickByName('Modifier le commentaire jury');
 
           // then
@@ -646,7 +635,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
           // when
-          const screen = await visit(`/certifications/${certification.id}`);
+          const screen = await visit(`/sessions/certification/${certification.id}`);
           await clickByName('Modifier le commentaire jury');
           await clickByName('Annuler');
 
@@ -662,7 +651,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
             // when
-            const screen = await visit(`/certifications/${certification.id}`);
+            const screen = await visit(`/sessions/certification/${certification.id}`);
             await clickByName('Modifier le commentaire jury');
             await fillByLabel('Notes internes Jury Pix :', 'Whatever jury said');
 
@@ -684,7 +673,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             });
 
             // when
-            const screen = await visit(`/certifications/${certification.id}`);
+            const screen = await visit(`/sessions/certification/${certification.id}`);
             await clickByName('Modifier le commentaire jury');
             await fillByLabel('Notes internes Jury Pix :', 'Whatever jury said');
 
@@ -705,7 +694,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
           // when
-          const screen = await visit(`/certifications/${certification.id}`);
+          const screen = await visit(`/sessions/certification/${certification.id}`);
           await click(screen.getByRole('button', { name: 'Re-scorer la certification' }));
 
           // then
@@ -718,7 +707,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
             // when
-            const screen = await visit(`/certifications/${certification.id}`);
+            const screen = await visit(`/sessions/certification/${certification.id}`);
             this.server.post(`/admin/certifications/${certification.id}/rescore`, () => ({}), 400);
 
             await click(screen.getByRole('button', { name: 'Re-scorer la certification' }));

@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
 
-module('Acceptance | authenticated/certifications/certification/profile', function (hooks) {
+module('Acceptance | authenticated/sessions/certification/profile', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -16,7 +16,7 @@ module('Acceptance | authenticated/certifications/certification/profile', functi
       const certification = this.server.create('certification');
 
       // when
-      await visit(`/certifications/${certification.id}/profile`);
+      await visit(`/sessions/certification/${certification.id}/profile`);
 
       // then
       assert.strictEqual(currentURL(), '/login');
@@ -61,7 +61,7 @@ module('Acceptance | authenticated/certifications/certification/profile', functi
       });
 
       // when
-      const screen = await visit('/certifications/123/profile');
+      const screen = await visit('/sessions/certification/123/profile');
 
       // then
       assert.dom(screen.getByText('ID du compte Pix du candidat: 456')).exists();

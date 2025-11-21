@@ -28,7 +28,7 @@ export default class CertificationsHeader extends Component {
               {{t "pages.certifications.table.headers.id"}}
             </:header>
             <:cell>
-              <LinkTo @route="authenticated.certifications.certification.informations" @model={{certification.id}}>
+              <LinkTo @route="authenticated.sessions.certification.informations" @model={{certification.id}}>
                 {{certification.id}}
               </LinkTo>
             </:cell>

@@ -24,6 +24,6 @@ export default class CertificationRoute extends Route {
   @action
   error(anError) {
     this.errorNotifier.notify(anError);
-    this.router.transitionTo('authenticated.certifications');
+    this.router.transitionTo('authenticated.sessions');
   }
 }

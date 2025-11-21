@@ -22,7 +22,7 @@ export default class CertificationsSearchForm extends Component {
   loadCertification(event) {
     event.preventDefault();
     const certifId = trim(this.inputId);
-    this.router.transitionTo('authenticated.certifications.certification', certifId);
+    this.router.transitionTo('authenticated.sessions.certification', certifId);
   }
 
   <template>

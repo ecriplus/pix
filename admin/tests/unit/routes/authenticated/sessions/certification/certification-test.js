@@ -3,14 +3,14 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-module('Unit | Route | authenticated/certifications/certification', function (hooks) {
+module('Unit | Route | authenticated/sessions/certification', function (hooks) {
   setupTest(hooks);
 
   test('#setupController', function (assert) {
     // given
     const certifications = { inputId: 5 };
     const id = Symbol('id');
-    const route = this.owner.lookup('route:authenticated/certifications/certification');
+    const route = this.owner.lookup('route:authenticated/sessions/certification');
 
     // when
     route.setupController(certifications, { id });
@@ -22,7 +22,7 @@ module('Unit | Route | authenticated/certifications/certification', function (ho
   module('#beforeModel', function () {
     test('it should check if current user is super admin, certif, or support', function (assert) {
       // given
-      const route = this.owner.lookup('route:authenticated/certifications/certification');
+      const route = this.owner.lookup('route:authenticated/sessions/certification');
 
       const restrictAccessToStub = sinon.stub().returns();
       class AccessControlStub extends Service {
@@ -40,7 +40,7 @@ module('Unit | Route | authenticated/certifications/certification', function (ho
 
   test('#error', function (assert) {
     // given
-    const route = this.owner.lookup('route:authenticated/certifications/certification');
+    const route = this.owner.lookup('route:authenticated/sessions/certification');
     const errorNotifierStub = {
       notify: sinon.stub().resolves(),
     };

@@ -5,7 +5,7 @@ export default class CertificationNeutralizationRoute extends Route {
   @service store;
 
   async model() {
-    const { certification_id } = this.paramsFor('authenticated.certifications.certification');
+    const { certification_id } = this.paramsFor('authenticated.sessions.certification');
     return this.store.findRecord('certification-details', certification_id);
   }
 }

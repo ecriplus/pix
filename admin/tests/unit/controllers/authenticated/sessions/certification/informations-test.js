@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import setupIntl from '../../../../../helpers/setup-intl';
 
-module('Unit | Controller | authenticated/certifications/certification/informations', function (hooks) {
+module('Unit | Controller | authenticated/sessions/certification/informations', function (hooks) {
   setupTest(hooks);
   setupIntl(hooks);
 
@@ -35,7 +35,7 @@ module('Unit | Controller | authenticated/certifications/certification/informati
 
   hooks.beforeEach(function () {
     const store = this.owner.lookup('service:store');
-    controller = this.owner.lookup('controller:authenticated/certifications/certification/informations');
+    controller = this.owner.lookup('controller:authenticated/sessions/certification/informations');
     controller.model = {
       certification: store.createRecord('certification', {
         competencesWithMark,
@@ -310,7 +310,7 @@ module('Unit | Controller | authenticated/certifications/certification/informati
   module('#onJuryCommentSave', function () {
     test('it displays a success notification if jury comment is saved', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/informations');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/informations');
       controller.saveAssessmentResult = sinon.stub();
       controller.saveAssessmentResult.resolves();
 
@@ -330,7 +330,7 @@ module('Unit | Controller | authenticated/certifications/certification/informati
 
     test('it displays an error notification if jury comment cannot be saved', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/informations');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/informations');
       controller.saveAssessmentResult = sinon.stub();
       controller.saveAssessmentResult.throws();
 

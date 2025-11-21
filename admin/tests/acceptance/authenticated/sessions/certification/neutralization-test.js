@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 import setupIntl from '../../../../helpers/setup-intl';
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
 
-module('Acceptance | Route | routes/authenticated/certifications/certification | neutralization', function (hooks) {
+module('Acceptance | Route | routes/authenticated/sessions/certification | neutralization', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
@@ -24,7 +24,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       });
 
       // when
-      const screen = await visit(`/certifications/${certificationId}/neutralization`);
+      const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
       // then
       assert.dom(screen.getByText('Aucune épreuve posée.')).exists();
@@ -73,7 +73,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
 
         // when
-        const screen = await visit(`/certifications/${certificationId}/neutralization`);
+        const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
         // then
         assert.dom(screen.getByText('recCGEqqWBQnzD3NZ')).exists();
@@ -102,7 +102,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
 
         // when
-        const screen = await visit(`/certifications/${certificationId}/neutralization`);
+        const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
         // then
         assert.dom(screen.getByText('1')).exists();
@@ -134,7 +134,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             });
 
             // when
-            const screen = await visit(`/certifications/${certificationId}/neutralization`);
+            const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
             // then
             assert.dom(screen.getByRole('button', { name: 'Neutraliser' })).exists();
@@ -165,7 +165,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             });
 
             // when
-            const screen = await visit(`/certifications/${certificationId}/neutralization`);
+            const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
             // then
             assert.dom(screen.getByRole('button', { name: 'Dé-neutraliser' })).exists();
@@ -194,7 +194,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
               status: 'started',
               listChallengesAndAnswers,
             });
-            const screen = await visit(`/certifications/${certificationId}/neutralization`);
+            const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
             // when
             await clickByName('Dé-neutraliser');
@@ -226,7 +226,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
               status: 'started',
               listChallengesAndAnswers,
             });
-            const screen = await visit(`/certifications/${certificationId}/neutralization`);
+            const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
             // when
             await clickByName('Neutraliser');
@@ -261,7 +261,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           });
 
           // when
-          const screen = await visit(`/certifications/${certificationId}/neutralization`);
+          const screen = await visit(`/sessions/certification/${certificationId}/neutralization`);
 
           // then
           assert.dom(screen.queryByText('Action')).doesNotExist();
@@ -317,7 +317,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       });
 
       // when
-      await visit(`/certifications/${certificationId}/neutralization`);
+      await visit(`/sessions/certification/${certificationId}/neutralization`);
 
       // then
       const firstRowContent = document.querySelector('tr:nth-child(1) td:nth-child(2)').innerText;

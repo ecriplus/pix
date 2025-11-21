@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
 
-module('Acceptance | authenticated/certifications/certification/details', function (hooks) {
+module('Acceptance | authenticated/sessions/certification/details', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -33,7 +33,7 @@ module('Acceptance | authenticated/certifications/certification/details', functi
       });
 
       // when
-      const screen = await visit(`/certifications/${certificationId}/details`);
+      const screen = await visit(`/sessions/certification/${certificationId}/details`);
 
       // then
       assert.dom(screen.getByText('Statut :')).exists();
@@ -55,7 +55,7 @@ module('Acceptance | authenticated/certifications/certification/details', functi
       });
 
       // when
-      const screen = await visit(`/certifications/${certificationId}/details`);
+      const screen = await visit(`/sessions/certification/${certificationId}/details`);
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'Informations complémentaires', level: 2 })).exists();
@@ -85,7 +85,7 @@ module('Acceptance | authenticated/certifications/certification/details', functi
       });
 
       // when
-      const screen = await visit(`/certifications/${certificationId}/details`);
+      const screen = await visit(`/sessions/certification/${certificationId}/details`);
 
       // then
       assert.dom(screen.queryByText('Enregistrer')).doesNotExist();

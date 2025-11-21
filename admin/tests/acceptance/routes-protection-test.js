@@ -39,26 +39,6 @@ module('Acceptance | routes protection', function (hooks) {
     });
   });
 
-  module('When route is /certifications/menu', function () {
-    test('guest users are redirected to login page when visiting /certifications', async function (assert) {
-      // when
-      await visit('/certifications');
-
-      // then
-      assert.strictEqual(currentURL(), '/login');
-    });
-  });
-
-  module('When route is /certifications/single', function () {
-    test('guest users are redirected to login page when visiting /certifications/single', async function (assert) {
-      // when
-      await visit('/certifications/single');
-
-      // then
-      assert.strictEqual(currentURL(), '/login');
-    });
-  });
-
   module('When route is /sessions', function () {
     test('guest users are redirected to login page when visiting /sessions', async function (assert) {
       // when

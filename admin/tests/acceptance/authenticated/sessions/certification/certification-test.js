@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
 
-module('Acceptance | Route | routes/authenticated/certifications/certification', function (hooks) {
+module('Acceptance | Route | routes/authenticated/sessions/certification', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -34,7 +34,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
       // when
-      const screen = await visit(`/certifications/${certification.id}`);
+      const screen = await visit(`/sessions/certification/${certification.id}`);
 
       // then
       assert.dom(screen.queryByRole('link', { name: 'Profil' })).doesNotExist();
@@ -64,7 +64,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
       // when
-      const screen = await visit(`/certifications/${certification.id}`);
+      const screen = await visit(`/sessions/certification/${certification.id}`);
 
       // then
       assert.dom(screen.queryByRole('link', { name: 'Neutralisation' })).doesNotExist();
@@ -98,7 +98,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
       // when
-      const screen = await visit(`/certifications/${certification.id}`);
+      const screen = await visit(`/sessions/certification/${certification.id}`);
 
       // then
       assert.dom(screen.getByRole('link', { name: 'Profil' })).exists();
@@ -129,7 +129,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
       // when
-      const screen = await visit(`/certifications/${certification.id}`);
+      const screen = await visit(`/sessions/certification/${certification.id}`);
 
       // then
       assert.dom(screen.getByRole('link', { name: 'Neutralisation' })).exists();

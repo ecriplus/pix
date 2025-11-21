@@ -24,7 +24,7 @@ module('Integration | Component | certifications/search-form', function (hooks) 
     await clickByName('Charger');
 
     // then
-    assert.ok(transitionTo.calledWith('authenticated.certifications.certification', 'super-certif'));
+    assert.ok(transitionTo.calledWith('authenticated.sessions.certification', 'super-certif'));
     assert.dom(screen.getByRole('textbox')).hasValue(certificationId);
   });
 });

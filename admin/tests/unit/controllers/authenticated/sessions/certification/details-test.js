@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 
 import setupIntl from '../../../../../helpers/setup-intl';
 
-module('Unit | Controller | authenticated/certifications/certification/informations', function (hooks) {
+module('Unit | Controller | authenticated/sessions/certification/details', function (hooks) {
   setupTest(hooks);
   setupIntl(hooks);
 
@@ -11,7 +11,7 @@ module('Unit | Controller | authenticated/certifications/certification/informati
     test('it should return the model with the formatted question number for each associated challenge', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/details');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/details');
       controller.model = store.createRecord('v3-certification-course-details-for-administration', {
         certificationChallengesForAdministration: createChallengesForAdministration(
           ['ko', null, 'ko', 'aband', null, null, 'ok'],

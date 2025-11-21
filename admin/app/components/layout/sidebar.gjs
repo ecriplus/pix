@@ -53,16 +53,7 @@ export default class Sidebar extends Component {
         <PixNavigationButton class="sidebar__link" @route="authenticated.sessions" @icon="session">
           {{t "components.layout.sidebar.sessions"}}
         </PixNavigationButton>
-        {{#if this.accessControl.hasAccessToCertificationActionsScope}}
-          <PixNavigationButton
-            class="sidebar__link"
-            @route="authenticated.certifications"
-            @icon="newRealease"
-            aria-label={{t "components.layout.sidebar.certifications"}}
-          >
-            {{t "components.layout.sidebar.certifications"}}
-          </PixNavigationButton>
-        {{/if}}
+
         <PixNavigationButton
           class="sidebar__link"
           @route="authenticated.complementary-certifications"

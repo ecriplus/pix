@@ -3,7 +3,7 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-module('Unit | Route | authenticated/certifications/certification/profile', function (hooks) {
+module('Unit | Route | authenticated/sessions/certification/profile', function (hooks) {
   setupTest(hooks);
 
   module('#model', function () {
@@ -15,10 +15,10 @@ module('Unit | Route | authenticated/certifications/certification/profile', func
         findRecord = findRecordStub;
       }
       this.owner.register('service:store', StoreStub);
-      const route = this.owner.lookup('route:authenticated/certifications/certification/profile');
+      const route = this.owner.lookup('route:authenticated/sessions/certification/profile');
       route.paramsFor = paramsForStub;
       const expectedModel = Symbol('model');
-      paramsForStub.withArgs('authenticated.certifications.certification').returns({ certification_id: 123 });
+      paramsForStub.withArgs('authenticated.sessions.certification').returns({ certification_id: 123 });
       findRecordStub.withArgs('certified-profile', 123).resolves(expectedModel);
 
       // when
