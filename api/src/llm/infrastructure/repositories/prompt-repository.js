@@ -10,6 +10,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
 /**
  * @typedef {import('../../domain/models/Configuration').Configuration} Configuration
  * @typedef {import('../../domain/models/Chat').Chat} Chat
+ * @typedef {import('../../domain/models/ChatV2').ChatV2} ChatV2
  */
 
 /**
@@ -27,6 +28,59 @@ export async function prompt({ message, chat }) {
     prompt: message,
     configuration: chat.configuration.toDTO(),
     history: messagesToForward,
+  });
+  let response;
+  const url = config.llm.postPromptUrl;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Request-ID': getCorrelationContext().request_id,
+        authorization: `Bearer ${jwt.sign(
+          {
+            client_id: 'pix-api',
+            scope: 'api',
+          },
+          config.llm.authSecret,
+        )}`,
+      },
+      body: payload,
+    });
+  } catch (err) {
+    logger.error(`error when trying to reach LLM API : ${err}`);
+    throw new LLMApiError(err.toString());
+  }
+  if (response.ok) {
+    return response.body;
+  }
+
+  const { status, err } = await handleFetchErrors(response);
+  logger.error({ err }, `error when reaching LLM API : code ${status}`);
+  throw new LLMApiError(err);
+}
+
+/**
+ * @typedef MessageDTO
+ * @property {string=} content
+ * @property {"user"|"assistant"} emitter
+ */
+
+/**
+ * @function
+ * @name promptV2
+ *
+ * @param {Object} params
+ * @param {MessageDTO[]} params.messages
+ * @param {Configuration} params.configuration
+ * @returns {Promise<ReadableStream>}
+ */
+export async function promptV2({ messages, configuration }) {
+  const lastMessage = messages.pop();
+  const payload = JSON.stringify({
+    prompt: lastMessage.content,
+    configuration: configuration.toDTO(),
+    history: messages,
   });
   let response;
   const url = config.llm.postPromptUrl;
