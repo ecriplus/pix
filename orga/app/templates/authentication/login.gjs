@@ -1,6 +1,7 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
+import AuthenticationIdentityProviders from 'pix-orga/components/authentication/authentication-identity-providers';
 import LoginForm from 'pix-orga/components/authentication/login-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
 import LocaleSwitcher from 'pix-orga/components/locale-switcher';
@@ -24,6 +25,8 @@ import PageTitle from 'pix-orga/components/ui/page-title';
           @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
           @isInvitationCancelled={{@controller.isInvitationCancelled}}
         />
+
+        <AuthenticationIdentityProviders />
       </:content>
     </AuthenticationLayout>
 
