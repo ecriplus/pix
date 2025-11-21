@@ -16,7 +16,6 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
    * @param {Object} params
    * @param {CertificationCourse} params.certificationCourse
    * @param {Version} params.version
-   * @param {number} params.assessmentId
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
    * @param {SharedChallengeRepository} params.sharedChallengeRepository
@@ -25,7 +24,6 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
   async ({
     certificationCourse,
     version,
-    assessmentId,
     challengeCalibrationRepository,
     certificationChallengeLiveAlertRepository,
     challengeRepository,
@@ -38,6 +36,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
       challengeCalibrationRepository,
     });
 
+    const assessmentId = certificationCourse.getAssessment().id;
     const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
       await _removeChallengesWithValidatedLiveAlerts(
         challengesCalibrations,

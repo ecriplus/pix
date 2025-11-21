@@ -64,6 +64,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: certificationCourseId,
           createdAt: new Date('2025-06-23'),
+          assessment: domainBuilder.buildAssessment({ certificationCourseId, id: assessmentId }),
         });
 
         // when
@@ -120,6 +121,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: certificationCourseId,
           createdAt: new Date('2025-06-23'),
+          assessment: domainBuilder.buildAssessment({ certificationCourseId, id: assessmentId }),
         });
 
         // when

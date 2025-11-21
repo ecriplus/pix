@@ -73,7 +73,6 @@ export const handleV3CertificationScoring = withTransaction(
       await dependencies.findByCertificationCourseIdAndAssessmentId({
         certificationCourse,
         version,
-        assessmentId,
       });
 
     const algorithm = new FlashAssessmentAlgorithm({
