@@ -9,7 +9,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'getByCode').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'getByCode').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -26,7 +26,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'getById').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'getById').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -43,7 +43,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'getStatistics').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'getStatistics').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -60,7 +60,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'findParticipations').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'findParticipations').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -87,9 +87,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
       sinon.stub(securityPreHandlers, 'checkParticipationBelongsToCombinedCourse').returns(() => true);
-      sinon
-        .stub(combinedCourseController, 'getCombinedCourseParticipationById')
-        .callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'getCombinedCourseParticipationById').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -107,7 +105,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'start').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'start').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -124,7 +122,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'reassessStatus').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'reassessStatus').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
@@ -141,7 +139,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').returns(() => true);
-      sinon.stub(combinedCourseController, 'getByOrganizationId').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'getByOrganizationId').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
