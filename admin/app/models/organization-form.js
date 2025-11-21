@@ -88,7 +88,7 @@ const Validations = buildValidations({
   },
   documentationUrl: {
     validators: [
-      validator('absolute-url', {
+      validator('absolute-or-relative-url', {
         allowBlank: true,
         message: "Le lien n'est pas valide.",
       }),

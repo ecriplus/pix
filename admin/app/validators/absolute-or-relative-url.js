@@ -1,7 +1,16 @@
 import FormatValidator from 'ember-cp-validations/validators/format';
 
-const AbsoluteUrl = FormatValidator.extend({
+const AbsoluteOrRelativeUrl = FormatValidator.extend({
   validate(value, options, model, attribute) {
+    if (options.allowRelativeUrl && value) {
+      try {
+        const url = new URL(`${window.location.origin}${value}`);
+        return this._super(url.href, { ...options, type: 'url', regex: /.+/ }, model, attribute);
+      } catch {
+        return options.message;
+      }
+    }
+
     if (value && !(value.startsWith('http://') || value.startsWith('https://'))) {
       return options.message;
     }
@@ -9,7 +18,7 @@ const AbsoluteUrl = FormatValidator.extend({
   },
 });
 
-AbsoluteUrl.reopenClass({
+AbsoluteOrRelativeUrl.reopenClass({
   /**
    * Define attribute specific dependent keys for your validator
    *
@@ -27,4 +36,4 @@ AbsoluteUrl.reopenClass({
   },
 });
 
-export default AbsoluteUrl;
+export default AbsoluteOrRelativeUrl;
