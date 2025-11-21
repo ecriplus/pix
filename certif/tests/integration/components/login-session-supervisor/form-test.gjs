@@ -119,7 +119,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         assert
           .dom(
             within(screen.getByRole('alert')).getByText(
-              t('pages.session-supervising.login.form.errors.session-not-accessible', { date: blockedAccessDate }),
+              t('pages.session-supervising.login.form.errors.session-not-accessible', { date: '01/09/2025' }),
             ),
           )
           .exists();
