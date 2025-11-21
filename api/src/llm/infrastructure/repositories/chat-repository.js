@@ -3,6 +3,9 @@ import { Chat } from '../../domain/models/Chat.js';
 
 /**
  * @typedef {import('../../domain/models/Chat').Message} Message
+ * @typedef {import('../../domain/models/ChatV2').ChatV2} ChatV2
+ * @typedef {import('../../domain/models/ChatV2').MessageV2} MessageV2
+
  */
 
 /**
@@ -25,6 +28,17 @@ export async function get(chatId) {
     },
     messageDTOs,
   );
+}
+
+function toDomain(chatDTO, messageDTOs) {
+  const messages = messageDTOs.map((messageDTO) => ({
+    ...messageDTO,
+    isFromUser: messageDTO.emitter === 'user',
+  }));
+  return Chat.fromDTO({
+    ...chatDTO,
+    messages,
+  });
 }
 
 /**
@@ -80,7 +94,7 @@ export async function save(chat) {
 
 /**
  * @function
- * @name save
+ * @name _buildDatabaseMessage
  *
  * @param {Object} params
  * @param {string} params.chatId chatId
@@ -120,13 +134,75 @@ function _buildDatabaseMessage({ chatId, message }) {
   };
 }
 
-function toDomain(chatDTO, messageDTOs) {
-  const messages = messageDTOs.map((messageDTO) => ({
-    ...messageDTO,
-    isFromUser: messageDTO.emitter === 'user',
-  }));
-  return Chat.fromDTO({
-    ...chatDTO,
-    messages,
-  });
+/**
+ * @function
+ * @name saveV2
+ *
+ * @param {ChatV2} chat
+ * @returns {Promise<void>}
+ */
+export async function saveV2(chat) {
+  const knexConn = DomainTransaction.getConnection();
+  const chatDTO = chat.toDTO();
+  const {
+    id: chatId,
+    userId,
+    assessmentId,
+    challengeId,
+    configurationId: configId,
+    configuration: configContent,
+    moduleId,
+    passageId,
+    haveVictoryConditionsBeenFulfilled,
+    totalInputTokens,
+    totalOutputTokens,
+  } = chatDTO;
+  const startedAt = new Date();
+  const updatedAt = new Date();
+
+  await knexConn('chats')
+    .insert({
+      id: chatId,
+      userId,
+      assessmentId,
+      challengeId,
+      configContent,
+      configId,
+      haveVictoryConditionsBeenFulfilled,
+      moduleId,
+      passageId,
+      startedAt,
+      totalInputTokens,
+      totalOutputTokens,
+      updatedAt,
+    })
+    .onConflict(['id'])
+    .merge(['haveVictoryConditionsBeenFulfilled', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
+
+  for (const message of chatDTO.messages) {
+    const databaseMessage = _buildDatabaseMessageV2({ chatId, message });
+    await knexConn('chat_messages').insert(databaseMessage).onConflict(['chatId', 'index']).ignore();
+  }
+}
+
+/**
+ * @function
+ * @name _buildDatabaseMessage
+ *
+ * @param {Object} params
+ * @param {string} params.chatId chatId
+ * @param {MessageV2} params.message message
+ * @returns {Promise<void>}
+ */
+function _buildDatabaseMessageV2({ chatId, message }) {
+  const { index, attachmentName, content, emitter, wasModerated } = message;
+
+  return {
+    attachmentName,
+    chatId,
+    content,
+    emitter,
+    index,
+    wasModerated: wasModerated ?? null,
+  };
 }

@@ -1,8 +1,9 @@
 import { randomUUID } from 'node:crypto';
 
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
+import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { get, save, saveV2 } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
@@ -165,7 +166,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         // then
         const insertedChat = await knex.select().from('chats').where({ id: databaseChat.id }).first();
 
-        expect(insertedChat).to.deep.equal({
+        expect(insertedChat).to.deep.include({
           ...databaseChat,
           totalInputTokens: 3,
           totalOutputTokens: 4,
@@ -239,6 +240,206 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           shouldBeForwardedToLLM: true,
           shouldBeCountedAsAPrompt: true,
           haveVictoryConditionsBeenFulfilled: true,
+          wasModerated: null,
+        });
+      });
+    });
+  });
+
+  describe('#saveV2', function () {
+    let clock, now;
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers(new Date('2025-09-26'));
+      now = new Date(clock.now);
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    context('when there is no chats or messages existing in database with chat id passed in parameter', function () {
+      it('should save the chat and messages correctly in database', async function () {
+        // given
+        const uuid = randomUUID();
+        const moduleId = randomUUID();
+        const chat = new ChatV2({
+          id: uuid,
+          userId: 123,
+          passageId: 234,
+          moduleId,
+          configurationId: 'some-config-id',
+          configuration: new Configuration({
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 4,
+            },
+            attachment: {
+              name: 'test.csv',
+              context: 'le contexte',
+            },
+          }),
+          haveVictoryConditionsBeenFulfilled: true,
+          messages: [
+            new MessageV2({
+              index: 0,
+              content: 'je suis user',
+              emitter: 'user',
+              attachmentName: 'attachmentName',
+            }),
+            new MessageV2({
+              index: 1,
+              content: 'je suis LLM',
+              emitter: 'assistant',
+            }),
+            new MessageV2({
+              index: 2,
+              content: 'message modéré',
+              emitter: 'user',
+              wasModerated: true,
+            }),
+          ],
+        });
+        const chatDTO = chat.toDTO();
+
+        // when
+        await saveV2(chat);
+
+        // then
+        const insertedChat = await knex.select().from('chats').where({ id: chat.id }).first();
+        const messages = await knex.select().from('chat_messages').where({ chatId: chat.id }).orderBy('index');
+
+        expect(insertedChat).to.deep.include({
+          id: chatDTO.id,
+          userId: chatDTO.userId,
+          passageId: chatDTO.passageId,
+          moduleId: chatDTO.moduleId,
+          configContent: chatDTO.configuration,
+          configId: chatDTO.configurationId,
+          haveVictoryConditionsBeenFulfilled: true,
+          startedAt: now,
+          updatedAt: now,
+        });
+
+        expect(messages).to.have.lengthOf(3);
+        expect(messages[0]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 0,
+          emitter: 'user',
+          content: 'je suis user',
+          attachmentName: 'attachmentName',
+          wasModerated: null,
+        });
+
+        expect(messages[1]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 1,
+          emitter: 'assistant',
+          content: 'je suis LLM',
+          wasModerated: null,
+        });
+
+        expect(messages[2]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 2,
+          emitter: 'user',
+          content: 'message modéré',
+          wasModerated: true,
+        });
+      });
+    });
+
+    context('when there is already a chat with no messages existing in database', function () {
+      let databaseChat;
+
+      beforeEach(async function () {
+        databaseChat = databaseBuilder.factory.buildChatV2();
+        await databaseBuilder.commit();
+      });
+
+      it('should save a chat with same chat id correctly without updating the startedAt field', async function () {
+        // given
+        await clock.tickAsync('01:00:00');
+        const updatedAtWithDifferentDateFromStartedAt = new Date(clock.now);
+        const chat = new ChatV2({
+          ...databaseChat,
+          configuration: new Configuration(databaseChat.configContent),
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          messages: [],
+        });
+
+        // when
+        await saveV2(chat);
+
+        // then
+        const insertedChat = await knex.select().from('chats').where({ id: databaseChat.id }).first();
+
+        expect(insertedChat).to.deep.include({
+          ...databaseChat,
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          haveVictoryConditionsBeenFulfilled: false,
+          updatedAt: updatedAtWithDifferentDateFromStartedAt,
+          startedAt: now,
+        });
+      });
+    });
+
+    context('when there is already a chat with messages existing in database', function () {
+      let databaseChat, firstDatabaseChatMessage, secondDatabaseChatMessage;
+
+      beforeEach(async function () {
+        databaseChat = databaseBuilder.factory.buildChat();
+        firstDatabaseChatMessage = databaseBuilder.factory.buildChatMessageV2({ chatId: databaseChat.id });
+        secondDatabaseChatMessage = databaseBuilder.factory.buildChatMessageV2({
+          chatId: databaseChat.id,
+          index: 1,
+          emitter: 'assistant',
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should save only new messages related to the chat with same chat id', async function () {
+        const firstMessage = new MessageV2({
+          ...firstDatabaseChatMessage,
+          emitter: 'user',
+        });
+        const secondMessage = new MessageV2({
+          ...secondDatabaseChatMessage,
+          emitter: 'assistant',
+          content: 'Content not to be saved',
+        });
+        const thirdMessage = new MessageV2({
+          index: 2,
+          content: 'contenu qui respecte les conditions de victoires : merguez',
+          emitter: 'user',
+        });
+
+        const chat = new ChatV2({
+          ...databaseChat,
+          configuration: new Configuration(databaseChat.configContent),
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          messages: [firstMessage, secondMessage, thirdMessage],
+        });
+
+        // when
+        await saveV2(chat);
+
+        // then
+        const messages = await knex.select().from('chat_messages').where({ chatId: chat.id }).orderBy('index');
+
+        expect(messages).to.have.lengthOf(3);
+        expect(messages[0]).deep.include(firstDatabaseChatMessage);
+        expect(messages[1]).deep.include(secondDatabaseChatMessage);
+        expect(messages[1].content).to.not.equal('Content not to be saved');
+        expect(messages[2]).to.deep.include({
+          chatId: databaseChat.id,
+          index: 2,
+          emitter: 'user',
+          content: thirdMessage.content,
           wasModerated: null,
         });
       });

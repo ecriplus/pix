@@ -48,4 +48,35 @@ const buildChatMessage = function ({
   });
 };
 
-export { buildChatMessage };
+const buildChatMessageV2 = function ({
+  id = databaseBuffer.getNextId(),
+  attachmentName = 'attachmentName',
+  chatId,
+  content = 'Contenu du message',
+  emitter = 'user',
+  index = 0,
+  wasModerated = false,
+  createdAt = new Date(),
+} = {}) {
+  if (!chatId) {
+    chatId = buildChat().id;
+  }
+
+  const values = {
+    id,
+    attachmentName,
+    chatId,
+    content,
+    emitter,
+    index,
+    wasModerated,
+    createdAt,
+  };
+
+  return databaseBuffer.pushInsertable({
+    tableName: TABLE_NAME,
+    values,
+  });
+};
+
+export { buildChatMessage, buildChatMessageV2 };

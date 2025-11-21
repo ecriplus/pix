@@ -1,4 +1,4 @@
-import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { ChatV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { startChat } from '../../../../../src/llm/domain/usecases/start-chat.js';
 import { chatRepository, configurationRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
@@ -34,10 +34,9 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
         // then
         expect(chat).to.deepEqualInstance(
-          new Chat({
+          new ChatV2({
             id: '123e4567-e89b-12d3-a456-426614174000',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
-            hasAttachmentContextBeenAdded: false,
             totalInputTokens: 0,
             totalOutputTokens: 0,
           }),
@@ -84,7 +83,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
         // then
         expect(chat).to.deepEqualInstance(
-          new Chat({
+          new ChatV2({
             id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
             assessmentId: 11,
@@ -93,7 +92,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             moduleId,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
-            hasAttachmentContextBeenAdded: false,
             totalInputTokens: 0,
             totalOutputTokens: 0,
           }),
@@ -108,6 +106,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           moduleId,
           passageId: 22,
           configId: 'uneConfigQuiExist',
+          haveVictoryConditionsBeenFulfilled: false,
           configContent: {
             challenge: {
               inputMaxChars: 456,
@@ -118,7 +117,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
               context: '**coucou**',
             },
           },
-          hasAttachmentContextBeenAdded: false,
           totalInputTokens: 0,
           totalOutputTokens: 0,
         });
@@ -138,28 +136,15 @@ async function getChatAndMessagesFromDB(chatId) {
         'userId',
         'configId',
         'configContent',
-        'hasAttachmentContextBeenAdded',
         'moduleId',
         'passageId',
+        'haveVictoryConditionsBeenFulfilled',
         'totalInputTokens',
         'totalOutputTokens',
       )
       .first(),
     messagesDB: await knex('chat_messages')
-      .select(
-        'index',
-        'emitter',
-        'attachmentName',
-        'attachmentContext',
-        'hasAttachmentBeenSubmittedAlongWithAPrompt',
-        'haveVictoryConditionsBeenFulfilled',
-        'content',
-        'shouldBeRenderedInPreview',
-        'shouldBeForwardedToLLM',
-        'shouldBeCountedAsAPrompt',
-        'wasModerated',
-        'hasErrorOccurred',
-      )
+      .select('index', 'emitter', 'attachmentName', 'attachmentContext', 'content', 'wasModerated')
       .where({ chatId })
       .orderBy('index'),
   };

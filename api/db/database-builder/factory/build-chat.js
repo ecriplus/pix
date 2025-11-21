@@ -52,4 +52,52 @@ const buildChat = function ({
   });
 };
 
-export { buildChat };
+const buildChatV2 = function ({
+  id = randomUUID(),
+  userId = null,
+  assessmentId = null,
+  challengeId = null,
+  configId = null,
+  configContent = {
+    challenge: {
+      victoryConditions: {
+        expectations: [
+          {
+            type: 'answer_contains',
+            value: 'merguez',
+          },
+        ],
+      },
+    },
+  },
+  haveVictoryConditionsBeenFulfilled = false,
+  moduleId = null,
+  passageId = null,
+  startedAt = new Date(),
+  totalInputTokens = 0,
+  totalOutputTokens = 0,
+  updatedAt = new Date(),
+} = {}) {
+  const values = {
+    id,
+    userId,
+    assessmentId,
+    challengeId,
+    configId,
+    configContent,
+    moduleId,
+    passageId,
+    haveVictoryConditionsBeenFulfilled,
+    totalInputTokens,
+    totalOutputTokens,
+    startedAt,
+    updatedAt,
+  };
+
+  return databaseBuffer.pushInsertable({
+    tableName: TABLE_NAME,
+    values,
+  });
+};
+
+export { buildChat, buildChatV2 };
