@@ -49,7 +49,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
         <JoinRequestForm @onSubmit={{@controller.createScoOrganizationInvitation}} />
       {{/if}}
 
-      <LinkTo @route="login" class="join-request-form__back">
+      <LinkTo @route="authentication.login" class="join-request-form__back">
         <PixIcon @name="arrowLeft" />
         Revenir à la page de connexion
       </LinkTo>

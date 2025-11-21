@@ -18,7 +18,7 @@ module('Unit | Route | authenticated', function (hooks) {
       route.beforeModel(transition);
 
       // then
-      assert.ok(requireAuthenticationStub.calledWith(transition, 'login'));
+      assert.ok(requireAuthenticationStub.calledWith(transition, 'authentication.login'));
       assert.notOk(replaceWithStub.called);
     });
 
