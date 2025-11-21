@@ -782,6 +782,67 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         expect(createdAuthenticationMethod.identityProvider).to.equal('OIDC_EXAMPLE_NET');
       });
     });
+
+    describe('POST /api/oidc/user/reconcile', function () {
+      beforeEach(async function () {
+        await createServerWithMockedTestOidcProvider({
+          application: 'orga',
+          applicationTld: '.org',
+          identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+          connectionMethodCode: 'OIDC_EXAMPLE_NET',
+        });
+      });
+
+      it('returns 200 HTTP status code', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser.withRawPassword({
+          email: 'eva.poree@example.net',
+          rawPassword: 'pix123',
+        });
+        await databaseBuilder.commit();
+
+        const idToken = jsonwebtoken.sign(
+          { given_name: 'Brice', family_name: 'Glace', nonce: 'nonce', sub: 'some-user-unique-id' },
+          'secret',
+        );
+        const userAuthenticationKey = await authenticationSessionService.save({
+          sessionContent: { idToken },
+          userInfo: {
+            userId: user.id,
+            firstName: 'Brice',
+            lastName: 'Glace',
+            nonce: 'nonce',
+            externalIdentityId: 'some-user-unique-id',
+          },
+        });
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/oidc/user/reconcile`,
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.dev.pix.org',
+          },
+          payload: {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                authentication_key: userAuthenticationKey,
+              },
+            },
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.access_token).to.exist;
+
+        const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+        expect(decodedAccessToken).to.include({ aud: 'https://orga.dev.pix.org' });
+        expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
+      });
+    });
   });
 
   async function createServerWithMockedTestOidcProvider({
