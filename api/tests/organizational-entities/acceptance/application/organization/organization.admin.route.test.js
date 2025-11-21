@@ -925,7 +925,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       let feature, firstOrganization, otherOrganization;
 
       beforeEach(async function () {
-        feature = databaseBuilder.factory.buildFeature({ key: 'feature', description: ' best feature ever' });
+        feature = databaseBuilder.factory.buildFeature({
+          key: ORGANIZATION_FEATURE.COVER_RATE.key,
+          description: ' best feature ever',
+        });
         firstOrganization = databaseBuilder.factory.buildOrganization({ name: 'first organization', type: 'PRO' });
         otherOrganization = databaseBuilder.factory.buildOrganization({ name: 'other organization', type: 'PRO' });
 
@@ -934,9 +937,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
       it('responds with a 204 - no content', async function () {
         // given
-        const input = `Feature ID;Organization ID;Params
-      ${feature.id};${firstOrganization.id};{"id": 123}
-      ${feature.id};${otherOrganization.id};{"id": 123}`;
+        const input = `Feature Name;Organization ID;Params
+      ${feature.key};${firstOrganization.id};
+      ${feature.key};${otherOrganization.id};`;
 
         const options = {
           method: 'POST',
