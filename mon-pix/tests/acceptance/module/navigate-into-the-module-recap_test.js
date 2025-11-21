@@ -41,7 +41,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
         isBeta: true,
         sections: [section],
         details: {
-          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',
           duration: 'duration',
           level: 'level',

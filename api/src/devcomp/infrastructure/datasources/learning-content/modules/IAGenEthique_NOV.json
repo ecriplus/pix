@@ -5,7 +5,7 @@
   "title": "Ce qu’il faut éviter de dire à une IA générative",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Quand vous discutez avec un logiciel d’<strong>intelligence artificielle (IA</strong>) générative, la conversation n’est pas privée.</p><p>Tout ce que vous écrivez peut être <strong>enregistré et parfois réutilisé</strong> pour améliorer l’IA.</p><p>Dans ce module, vous allez comprendre<strong> pourquoi les échanges avec une IA générative ne sont pas totalement privés</strong> et <strong>quelles informations il vaut mieux éviter d’écrire</strong> dans vos instructions (prompts).</p>",
     "duration": 10,
     "level": "novice",

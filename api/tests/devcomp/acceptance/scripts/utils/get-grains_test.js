@@ -8,7 +8,7 @@ describe('Acceptance | Script | Helper | Get grains', function () {
       slug: 'bac-a-sable',
       title: 'Bac à sable',
       details: {
-        image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+        image: 'https://assets.pix.org/modules/placeholder-details.svg',
         description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
         duration: 5,
         level: 'novice',
@@ -78,7 +78,7 @@ describe('Acceptance | Script | Helper | Get grains', function () {
                   element: {
                     id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
                     type: 'image',
-                    url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+                    url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
                     alt: "Dessin détaillé dans l'alternative textuelle",
                     alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
                   },

@@ -45,7 +45,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
         title: 'Bac à sable',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: '<p>Découvrez avec ce didacticiel comment fonctionne Modulix !</p>',
           duration: 5,
           level: 'novice',

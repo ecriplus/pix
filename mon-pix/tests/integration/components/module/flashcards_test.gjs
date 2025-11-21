@@ -42,7 +42,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     assert.ok(screen.getByRole('heading', { name: "Introduction à l'adresse e-mail", level: 4 }));
     assert.strictEqual(
       screen.getByRole('presentation').getAttribute('src'),
-      'https://images.pix.fr/modulix/flashcards-intro.png',
+      'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg',
     );
     assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
     assert.dom(screen.queryByText(t('pages.modulix.flashcards.direction'))).doesNotExist();
@@ -175,7 +175,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       assert.ok(screen.getByText("A quoi sert l'arobase dans mon adresse email ?"));
       assert.strictEqual(
         screen.getByRole('presentation').getAttribute('src'),
-        'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+        'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
       );
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.seeAnswer') })).exists();
       assert.ok(screen.getByText(t('pages.modulix.flashcards.direction')));
@@ -373,12 +373,12 @@ function _getFlashcards() {
     id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
     recto: {
       image: {
-        url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+        url: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
       },
       text: "A quoi sert l'arobase dans mon adresse email ?",
     },
     verso: {
-      image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+      image: { url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg' },
       text: "Parce que c'est joli",
     },
   };
@@ -386,13 +386,13 @@ function _getFlashcards() {
     id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
     recto: {
       image: {
-        url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+        url: 'https://assets.pix.org/modules/didacticiel/icon.svg',
       },
       text: 'Qui a écrit le Dormeur du Val ?',
     },
     verso: {
       image: {
-        url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+        url: 'https://assets.pix.org/modules/didacticiel/chaton.jpg',
       },
       text: 'Arthur Rimbaud',
     },
@@ -403,7 +403,7 @@ function _getFlashcards() {
     type: 'flashcards',
     title: "Introduction à l'adresse e-mail",
     instruction: 'Lisez la question, essayez de trouver la réponse puis retourner la carte en cliquant dessus',
-    introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
+    introImage: { url: 'https://assets.pix.org/modules/didacticiel/ordi-spatial.svg' },
     cards: [firstCard, secondCard],
   };
 

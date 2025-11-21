@@ -40,7 +40,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
         title: 'Bac à sable',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
           duration: 5,
           level: 'novice',
@@ -132,7 +132,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
         title: 'Bac à sable',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
           duration: 5,
           level: 'novice',
@@ -269,7 +269,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
         title: 'Bac à sable',
         isBeta: true,
         details: {
-          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
           duration: 5,
           level: 'novice',

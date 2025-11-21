@@ -25,7 +25,7 @@ export default class ModulixPreview extends Component {
   "slug": "demo-preview-modulix",
   "title": "Démo preview Modulix",
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "Découvrez la page de prévisualisation pour contribuer à Modulix !",
     "duration": 5,
     "level": "novice",
@@ -65,7 +65,7 @@ export default class ModulixPreview extends Component {
             "element": {
               "id": "4444444a-4444-4bcd-e444-4f4444gh4444",
               "type": "image",
-              "url": "https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg",
+              "url": "https://assets.pix.org/modules/didacticiel/ordi-spatial.svg",
               "alt": "Dessin détaillé dans l'alternative textuelle",
               "alternativeText": "Dessin d'un ordinateur dans un univers spatial."
             }
