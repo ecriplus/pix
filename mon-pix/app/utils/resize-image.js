@@ -13,20 +13,20 @@
  * or `null` if the image information is invalid.
  */
 export function resizeImage(imageInformation, options) {
-  if (!imageInformation || !hasDimensions(imageInformation)) {
+  if (!imageInformation || !_hasDimensions(imageInformation)) {
     return null;
   }
 
-  if (!validateOptions(options)) {
+  if (!_validateOptions(options)) {
     return imageInformation;
   }
 
-  if (options.MAX_HEIGHT) return resizeByHeight(imageInformation, options.MAX_HEIGHT);
+  if (options.MAX_HEIGHT) return _resizeByHeight(imageInformation, options.MAX_HEIGHT);
 
-  return resizeByWidth(imageInformation, options.MAX_WIDTH);
+  return _resizeByWidth(imageInformation, options.MAX_WIDTH);
 }
 
-export function resizeByHeight(imageInformation, MAX_HEIGHT) {
+function _resizeByHeight(imageInformation, MAX_HEIGHT) {
   const width = Math.round((MAX_HEIGHT * imageInformation.width) / imageInformation.height);
   const height = MAX_HEIGHT;
   return {
@@ -35,7 +35,14 @@ export function resizeByHeight(imageInformation, MAX_HEIGHT) {
   };
 }
 
-export function resizeByWidth(imageInformation, MAX_WIDTH) {
+function _resizeByWidth(imageInformation, MAX_WIDTH) {
+  if (imageInformation.width <= MAX_WIDTH) {
+    return {
+      width: imageInformation.width,
+      height: imageInformation.height,
+    };
+  }
+
   const height = Math.round((MAX_WIDTH * imageInformation.height) / imageInformation.width);
   const width = MAX_WIDTH;
   return {
@@ -44,11 +51,11 @@ export function resizeByWidth(imageInformation, MAX_WIDTH) {
   };
 }
 
-export function hasDimensions(imageInformation) {
+function _hasDimensions(imageInformation) {
   return imageInformation.width > 0 && imageInformation.height > 0;
 }
 
-export function validateOptions(options) {
+function _validateOptions(options) {
   if (options === undefined) return false;
 
   const isDimensionsKeysProvided = Object.entries(options).some(([key, value]) => {
