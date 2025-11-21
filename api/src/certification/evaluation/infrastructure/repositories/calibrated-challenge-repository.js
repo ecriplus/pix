@@ -49,6 +49,7 @@ export async function findActiveFlashCompatible({
 
 async function _findChallengesForCertification({ versionId, locale, cacheKey, dependencies }) {
   const certificationChallenges = await knex
+    .select('difficulty', 'discriminant', 'challengeId')
     .from('certification-frameworks-challenges')
     .where({ versionId })
     .whereNotNull('discriminant')
@@ -58,6 +59,7 @@ async function _findChallengesForCertification({ versionId, locale, cacheKey, de
 
   const findCallback = async (knex) => {
     return knex
+      .select('id', 'skillId', 'accessibility1', 'accessibility2')
       .whereIn('id', certificationChallengeIds)
       .where('status', VALIDATED_STATUS)
       .whereRaw('?=ANY(??)', [locale, 'locales'])
