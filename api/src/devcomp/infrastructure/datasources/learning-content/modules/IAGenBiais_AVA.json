@@ -425,15 +425,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       }
                     ],
                     "solutions": [
@@ -455,15 +455,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       }
                     ],
                     "solutions": [
@@ -485,15 +485,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       }
                     ],
                     "solutions": [
@@ -525,55 +525,66 @@
               "element": {
                 "id": "bfa513c1-1cde-4f49-8cda-4cf9cb8b16e9",
                 "type": "qab",
-                "instruction": "<p><strong>Identifiez la cause probable</strong> du comportement de l’IA (règle de sécurité, ton imposé, biais d’entraînement, hallucination).</p>",
+                "instruction": "<p><strong>Identifiez la cause probable</strong> du comportement de l’IA (règle de sécurité, prompt système, pré-prompt, biais d’entraînement, hallucination).</p>",
                 "cards": [
                   {
                     "id": "b8ef8a17-9e49-4a3f-bb04-4030cf7399b1",
-                    "text": "« Je ne peux pas vous aider à récupérer un mot de passe. Contactez le support officiel. »",
+                    "text": "« Je ne peux pas répondre à cette demande, car elle pourrait vous exposer à un risque. »",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
                     "proposalA": "Règle de sécurité (alignement)",
-                    "proposalB": "Hallucination factuelle",
+                    "proposalB": "Pré-prompt utilisateur",
                     "solution": "A"
                   },
                   {
                     "id": "a93d3e14-1cc8-4d42-9a07-9d4b73041a11",
-                    "text": "« Je suis désolé pour votre deuil. Restons positifs et tournés vers l’avenir ! »",
+                    "text": "« Je comprends totalement votre point de vue, et vous avez entièrement raison ! »",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Ton imposé par le prompt système",
-                    "proposalB": "Biais dans les données d’entraînement",
+                    "proposalA": "Prompt système (ton imposé)",
+                    "proposalB": "Biais d’entraînement",
                     "solution": "A"
                   },
                   {
                     "id": "62b8573c-58b1-4b9a-8c01-1eaf2f8ad58e",
-                    "text": "« La capitale de l’Italie est Paris. »",
+                    "text": "« Bien sûr ! En suivant vos consignes, je serai très bref et direct. Voici la réponse… »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Pré-prompt utilisateur",
+                    "proposalB": "Règle de sécurité",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "1a8d3422-daa1-48b4-823d-2c26a2b2a8c2",
+                    "text": "« Pour ce métier, il vaut mieux éviter les personnes ‘trop sensibles’. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Biais d’entraînement (stéréotypes)",
+                    "proposalB": "Prompt système (ton imposé)",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "fea1d3d7-656c-4e21-b6a2-6adbf2859136",
+                    "text": "« La capitale du Japon est… Séoul. »",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
                     "proposalA": "Hallucination factuelle",
-                    "proposalB": "Règle de sécurité (alignement)",
-                    "solution": "A"
-                  },
-                  {
-                    "id": "1a8d3422-daa1-48b4-823d-2c26a2b2a8c2",
-                    "text": "« Pour ce poste technique, il faut quelqu’un ‘solide et déterminé’ ; évitons des candidats trop ‘émotifs’. »",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Biais dans les données d’entraînement (stéréotypes)",
-                    "proposalB": "Ton imposé par le prompt système",
+                    "proposalB": "Pré-prompt utilisateur",
                     "solution": "A"
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → refus d’aider sur des actions risquées/sensibles.<br>• <em>Ton imposé</em> → style constant (p. ex. toujours positif).<br>• <em>Biais d’entraînement</em> → stéréotypes reflétés par les données.<br>• <em>Hallucination</em> → affirmation factuelle incorrecte.</p>"
+                  "diagnosis": "<p>🔎 <strong>Clés de lecture :</strong><br>• <em>Règle de sécurité</em> → l’IA refuse pour protéger l’utilisateur.<br>• <em>Prompt système</em> → ton ou comportement imposé par les concepteurs.<br>• <em>Pré-prompt</em> → consigne ajoutée par l’utilisateur qui influence la réponse.<br>• <em>Biais d’entraînement</em> → stéréotype ou vision du monde appris dans les données.<br>• <em>Hallucination</em> → erreur factuelle produite par l’IA.</p>"
                 }
               }
             }
@@ -606,7 +617,7 @@
                 "isCompletionRequired": false,
                 "title": "Vacances annulées...",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmhnoosw200006h01qloteibh",
-                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire à vos amis que les vacances sont annulées...</p>",
+                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire aux festivaliers que l'évenements est annulé.</p>",
                 "solution": "",
                 "height": 500
               }
