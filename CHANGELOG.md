@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.263.0](https://github.com/1024pix/pix/compare/v5.262.0...v5.263.0) (2025-11-21)
+
+### :rocket: Amélioration
+
+- [#14202](https://github.com/1024pix/pix/pull/14202) Ajout des traductions manquantes pour les attestations (PIX-20478) 
+- [#14164](https://github.com/1024pix/pix/pull/14164) Améliorer la gestion des erreurs API de l'auth PixOrga (PIX-20393) 
+- [#14203](https://github.com/1024pix/pix/pull/14203) Améliorer le style du bouton d'oralisation des épreuves (PIX-20473). 
+- [#14209](https://github.com/1024pix/pix/pull/14209) Supporter les url relative de fin de campagne (PIX-19548) 
+
+### :bug: Correction
+
+- [#14196](https://github.com/1024pix/pix/pull/14196)  Affichage buggé sur les solutions à afficher.  (PIX-20480) 
+- [#14205](https://github.com/1024pix/pix/pull/14205) Afficher le titre du palier atteint sur la page de résultat d'une campagne (PIX-19855). 
+- [#14204](https://github.com/1024pix/pix/pull/14204) Erreur Ember à l'affichage d'une page user dans PixAdmin (PIX-19901) 
+
+### :building_construction: Tech
+
+- [#14201](https://github.com/1024pix/pix/pull/14201) :recycle: Renomme supervisor dans `session-supervisor-authorization.js` par invigilator (PIX-20483)  
+- [#14194](https://github.com/1024pix/pix/pull/14194) Modifier le domaine des seeds (PIX-20462). 
+- [#14176](https://github.com/1024pix/pix/pull/14176) Simplifier les fonctions de récupération des parcours combinés (PIX-20442) 
+
+### :arrow_up: Montée de version
+
+- [#14157](https://github.com/1024pix/pix/pull/14157) Update dependency @1024pix/oppsy to ^1.0.2 (api) 
+- [#14212](https://github.com/1024pix/pix/pull/14212) Update dependency @1024pix/pix-ui to ^55.31.2 (admin) 
+- [#14214](https://github.com/1024pix/pix/pull/14214) Update dependency @1024pix/pix-ui to ^55.31.2 (certif) 
+- [#14215](https://github.com/1024pix/pix/pull/14215) Update dependency @1024pix/pix-ui to ^55.31.2 (junior) 
+- [#14217](https://github.com/1024pix/pix/pull/14217) Update dependency @1024pix/pix-ui to ^55.31.2 (mon-pix) 
+- [#14218](https://github.com/1024pix/pix/pull/14218) Update dependency @1024pix/pix-ui to ^55.31.2 (orga)
+
 # [5.262.0](https://github.com/1024pix/pix/compare/v5.261.0...v5.262.0) (2025-11-20)
 
 ### :rocket: Amélioration
