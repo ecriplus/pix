@@ -194,4 +194,28 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
     expect(combinedCourseParticipations).lengthOf(1);
     expect(combinedCourseParticipations[0].id).equal(participation1.id);
   });
+
+  it('should return a list on participations filtered by division', async function () {
+    // when
+    const { combinedCourseParticipations } = await usecases.findCombinedCourseParticipations({
+      combinedCourseId,
+      filters: { divisions: ['6eme A'] },
+    });
+
+    // then
+    expect(combinedCourseParticipations).lengthOf(1);
+    expect(combinedCourseParticipations[0].id).equal(participation1.id);
+  });
+
+  it('should return a list on participations filtered by group', async function () {
+    // when
+    const { combinedCourseParticipations } = await usecases.findCombinedCourseParticipations({
+      combinedCourseId,
+      filters: { groups: ['Groupe 2'] },
+    });
+
+    // then
+    expect(combinedCourseParticipations).lengthOf(1);
+    expect(combinedCourseParticipations[0].id).equal(participation2.id);
+  });
 });
