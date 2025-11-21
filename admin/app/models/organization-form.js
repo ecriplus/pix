@@ -82,6 +82,7 @@ const Validations = buildValidations({
         allowString: true,
         integer: true,
         positive: true,
+        allowBlank: true,
         message: 'Le nombre de crédits doit être un nombre supérieur ou égal à 0.',
       }),
     ],

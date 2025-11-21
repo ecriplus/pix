@@ -34,6 +34,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       externalId: 'VELIT',
       provinceCode: 'h50',
       email: 'sco.generic.account@example.net',
+      administrationTeamId: '123',
       isOrganizationSCO: true,
       credit: 0,
       documentationUrl: 'https://pix.fr/',
@@ -142,10 +143,21 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel(t('components.organizations.information-section-view.credits'), 'credit');
+      await fillByLabel(t('components.organizations.information-section-view.credits'), '-7');
 
       // then
       assert.dom(screen.getByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.')).exists();
+    });
+
+    test('it should allow empty value for credit', async function (assert) {
+      // given
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // when
+      await fillByLabel(t('components.organizations.information-section-view.credits'), '');
+
+      // then
+      assert.notOk(screen.queryByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.'));
     });
 
     test("it should show error message if organization's documentationUrl is not valid", async function (assert) {
