@@ -36,6 +36,13 @@ export function resizeByHeight(imageInformation, MAX_HEIGHT) {
 }
 
 export function resizeByWidth(imageInformation, MAX_WIDTH) {
+  if (imageInformation.width <= MAX_WIDTH) {
+    return {
+      width: imageInformation.width,
+      height: imageInformation.height,
+    };
+  }
+
   const height = Math.round((MAX_WIDTH * imageInformation.height) / imageInformation.width);
   const width = MAX_WIDTH;
   return {

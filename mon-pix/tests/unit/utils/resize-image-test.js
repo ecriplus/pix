@@ -61,7 +61,7 @@ module('Unit | Utility | Resize Image', function () {
       assert.deepEqual(dimensions, { height: 100, width: 200 });
     });
 
-    test('should return accurate result when MAX_WIDTH option is provided', function (assert) {
+    test('should return current width if MAX_WIDTH option is provided and larger than width', function (assert) {
       // given
       const imageInformation = { height: 100, width: 50 };
       const options = {
@@ -72,7 +72,21 @@ module('Unit | Utility | Resize Image', function () {
       const dimensions = resizeImage(imageInformation, options);
 
       //then
-      assert.deepEqual(dimensions, { height: 200, width: 100 });
+      assert.deepEqual(dimensions, { height: 100, width: 50 });
+    });
+
+    test('should return MAX_WIDTH if MAX_WIDTH option is provided and smaller than width', function (assert) {
+      // given
+      const imageInformation = { height: 100, width: 500 };
+      const options = {
+        MAX_WIDTH: 100,
+      };
+
+      // when
+      const dimensions = resizeImage(imageInformation, options);
+
+      //then
+      assert.deepEqual(dimensions, { height: 20, width: 100 });
     });
   });
 
@@ -98,7 +112,7 @@ module('Unit | Utility | Resize Image', function () {
       const dimensions = resizeByWidth(imageInformation, MAX_WIDTH);
 
       // then
-      assert.deepEqual(dimensions, { width: 100, height: 200 });
+      assert.deepEqual(dimensions, { width: 50, height: 100 });
     });
   });
 
