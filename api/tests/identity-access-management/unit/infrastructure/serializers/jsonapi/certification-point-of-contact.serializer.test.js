@@ -1,6 +1,5 @@
 import * as certificationPointOfContactSerializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
-import { config as settings } from '../../../../../../src/shared/config.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Serializer | JSONAPI | certification-point-of-contact-serializer', function () {
   describe('#serialize()', function () {
@@ -8,10 +7,6 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
       // given
       const habilitation1 = { id: 1, label: 'Certif comp 1', key: 'CERTIF_COMP_1' };
       const habilitation2 = { id: 2, label: 'Certif comp 2', key: 'CERTIF_COMP_2' };
-      sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateCollege').value('2022-06-01');
-      sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateLycee').value('2022-08-01');
-
-      settings.features.pixCertifScoBlockedAccessDateLycee = '2022-08-01';
 
       const allowedCertificationCenterAccess1 = domainBuilder.buildAllowedCertificationCenterAccess({
         id: 123,
@@ -21,6 +16,8 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
         isRelatedToManagingStudentsOrganization: false,
         relatedOrganizationTags: [],
         habilitations: [habilitation1, habilitation2],
+        scoBlockedAccessDateCollege: '2022-06-01',
+        scoBlockedAccessDateLycee: '2022-08-01',
       });
 
       const allowedCertificationCenterAccess2 = domainBuilder.buildAllowedCertificationCenterAccess({
@@ -31,6 +28,8 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
         isRelatedToManagingStudentsOrganization: true,
         relatedOrganizationTags: ['tag1'],
         habilitations: [],
+        scoBlockedAccessDateCollege: '2022-06-01',
+        scoBlockedAccessDateLycee: '2022-08-01',
       });
 
       const certificationCenterMemberships = [
