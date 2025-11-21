@@ -1,5 +1,6 @@
 import { combinedCourseController } from '../../../../src/quest/application/combined-course-controller.js';
 import * as combinedCourseRoute from '../../../../src/quest/application/combined-course-route.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
@@ -65,7 +66,16 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('GET', '/api/combined-courses/123/participations');
+      await httpTestServer.request(
+        'GET',
+        '/api/combined-courses/123/participations?' +
+          'page[number]=1' +
+          '&page[size]=5' +
+          '&filters[fullName]=Mar' +
+          `&filters[statuses][]=${OrganizationLearnerParticipationStatuses.STARTED}` +
+          '&filters[divisions][]=6eme' +
+          '&filters[groups][]=A',
+      );
 
       // then
       expect(securityPreHandlers.checkUserCanManageCombinedCourse).to.have.been.called;
