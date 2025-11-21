@@ -113,8 +113,10 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
   });
 
   describe('POST /api/admin/oidc/user/reconcile', function () {
-    it('returns 200 HTTP status code', async function () {
+    it('returns an accessToken with a 200 HTTP status code', async function () {
       // given
+      const start = new Date();
+
       const user = databaseBuilder.factory.buildUser.withRawPassword({
         email: 'eva.poree@example.net',
         rawPassword: 'pix123',
@@ -159,11 +161,26 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result.access_token).to.exist;
-      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
-      expect(decodedAccessToken).to.include({
-        aud: 'https://admin.pix.fr',
-      });
+
+      const result = response.result;
+      expect(result).to.have.property('access_token');
+
+      const decodedAccessToken = tokenService.getDecodedToken(result.access_token);
+      expect(decodedAccessToken).to.include({ aud: 'https://admin.pix.fr' });
+
+      const authenticationMethods = await knex('authentication-methods');
+      const createdAuthenticationMethod = authenticationMethods.find(
+        (authenticationMethod) => authenticationMethod.identityProvider == 'OIDC_EXAMPLE_NET',
+      );
+      expect(createdAuthenticationMethod).to.exist;
+      expect(createdAuthenticationMethod.externalIdentifier).to.equal('some-user-unique-id');
+
+      const userLogin = await knex('user-logins').first();
+      expect(userLogin.lastLoggedAt).to.be.greaterThanOrEqual(start);
+
+      const lastUserApplicationConnection = await knex('last-user-application-connections').first();
+      expect(lastUserApplicationConnection.application).to.equal('admin');
+      expect(lastUserApplicationConnection.lastLoggedAt).to.be.greaterThanOrEqual(start);
     });
   });
 });
