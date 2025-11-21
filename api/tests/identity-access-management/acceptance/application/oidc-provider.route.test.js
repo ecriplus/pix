@@ -585,6 +585,144 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
   });
 
   context('when the OIDC provider has a connectionMethodCode', function () {
+    describe('POST /api/oidc/token', function () {
+      let payload, cookies;
+
+      context('when requestedApplication is generic (i.e. is not admin)', function () {
+        beforeEach(async function () {
+          await createServerWithMockedTestOidcProvider({
+            application: 'orga',
+            applicationTld: '.org',
+            identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+            connectionMethodCode: 'OIDC_EXAMPLE_NET',
+          });
+
+          const query = querystring.stringify({ identity_provider: 'OIDC_EXAMPLE_NET-ORGA' });
+          const authUrlResponse = await server.inject({
+            method: 'GET',
+            url: `/api/oidc/authorization-url?${query}`,
+            headers: {
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'orga.dev.pix.org',
+            },
+          });
+          cookies = authUrlResponse.headers['set-cookie'];
+
+          const redirectTarget = new URL(authUrlResponse.result.redirectTarget);
+
+          payload = {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                code: 'code',
+                state: redirectTarget.searchParams.get('state'),
+              },
+            },
+          };
+        });
+
+        context('When user does not have an account', function () {
+          it('returns status code 401 with authentication key matching session content and error code to validate cgu', async function () {
+            // given
+            const idToken = jsonwebtoken.sign({ given_name: 'John', family_name: 'Doe', sub: 'sub' }, 'secret');
+
+            openIdClientMock.authorizationCodeGrant.resolves({
+              access_token: 'access_token',
+              id_token: idToken,
+              expires_in: 60,
+              refresh_token: 'refresh_token',
+            });
+
+            // when
+            const response = await server.inject({
+              method: 'POST',
+              url: '/api/oidc/token',
+              headers: {
+                cookie: cookies[0],
+                'x-forwarded-proto': 'https',
+                'x-forwarded-host': 'orga.dev.pix.org',
+              },
+              payload,
+            });
+
+            // then
+            const [error] = response.result.errors;
+            expect(response.statusCode).to.equal(401);
+            expect(error.code).to.exist;
+            expect(error.code).to.equal('SHOULD_VALIDATE_CGU');
+
+            const authenticationKey = error.meta.authenticationKey;
+            expect(authenticationKey).to.exist;
+
+            const result = await authenticationSessionService.getByKey(authenticationKey);
+            expect(result).to.deep.equal({
+              sessionContent: new AuthenticationSessionContent({
+                accessToken: 'access_token',
+                idToken,
+                expiresIn: 60,
+                refreshToken: 'refresh_token',
+              }),
+              userInfo: {
+                externalIdentityId: 'sub',
+                firstName: 'John',
+                lastName: 'Doe',
+              },
+            });
+          });
+        });
+
+        context('When user has an account', function () {
+          it('returns 200 with access_token and logout_url_uuid', async function () {
+            // given
+            const firstName = 'John';
+            const lastName = 'Doe';
+            const externalIdentifier = 'sub';
+
+            const userId = databaseBuilder.factory.buildUser({ firstName, lastName }).id;
+            databaseBuilder.factory.buildAuthenticationMethod.withIdentityProvider({
+              identityProvider: 'OIDC_EXAMPLE_NET',
+              externalIdentifier,
+              userId,
+            });
+            await databaseBuilder.commit();
+
+            const idToken = jsonwebtoken.sign(
+              { given_name: firstName, family_name: lastName, sub: externalIdentifier },
+              'secret',
+            );
+
+            openIdClientMock.authorizationCodeGrant.resolves({
+              access_token: 'access_token',
+              id_token: idToken,
+              expires_in: 60,
+              refresh_token: 'refresh_token',
+            });
+
+            // when
+            const response = await server.inject({
+              method: 'POST',
+              url: '/api/oidc/token',
+              headers: {
+                cookie: cookies[0],
+                'x-forwarded-proto': 'https',
+                'x-forwarded-host': 'orga.dev.pix.org',
+              },
+              payload,
+            });
+
+            // then
+            expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+            expect(response.result.access_token).to.exist;
+
+            const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+            expect(decodedAccessToken).to.include({ aud: 'https://orga.dev.pix.org' });
+            expect(response.statusCode).to.equal(200);
+            expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
+          });
+        });
+      });
+    });
+
     describe('POST /api/oidc/users', function () {
       beforeEach(async function () {
         await createServerWithMockedTestOidcProvider({
