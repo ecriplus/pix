@@ -235,7 +235,7 @@ function generateTrainings(numberOfTrainings) {
       duration: { hours: 6 },
       editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
       editorLogoUrl:
-        'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+        'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
     };
     results.push(training);
   }
