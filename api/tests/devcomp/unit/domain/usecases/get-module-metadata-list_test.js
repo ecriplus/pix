@@ -9,6 +9,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
   beforeEach(function () {
     firstModule = {
       id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+      shortId: 'jh87et25',
       slug: 'getAllByIdsModuleSlug1',
       title: 'Bien écrire son adresse mail',
       isBeta: true,
@@ -46,6 +47,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
     };
     secondModule = {
       id: '6282925d-4775-4bca-b513-4c3009ec5886',
+      shortId: '87ki0tr7',
       slug: 'getAllByIdsModuleSlug2',
       title: 'Bac à sable',
       isBeta: true,
@@ -95,6 +97,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
     const expectedModuleMetadataList = [
       {
         id: firstModule.id,
+        shortId: firstModule.shortId,
         slug: firstModule.slug,
         title: firstModule.title,
         isBeta: firstModule.isBeta,
@@ -103,6 +106,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
       },
       {
         id: secondModule.id,
+        shortId: secondModule.shortId,
         slug: secondModule.slug,
         title: secondModule.title,
         isBeta: secondModule.isBeta,

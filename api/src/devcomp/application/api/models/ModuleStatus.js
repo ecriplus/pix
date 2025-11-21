@@ -1,6 +1,7 @@
 export class ModuleStatus {
-  constructor({ id, slug, title, status, duration, image, createdAt, updatedAt, terminatedAt }) {
+  constructor({ id, shortId, slug, title, status, duration, image, createdAt, updatedAt, terminatedAt }) {
     this.id = id;
+    this.shortId = shortId;
     this.slug = slug;
     this.title = title;
     this.status = status;

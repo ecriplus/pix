@@ -15,7 +15,7 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
     clock.restore();
   });
 
-  describe('#getModuleStatuses', function () {
+  describe('#getUserModuleStatuses', function () {
     it('should return a list of Module statuses', async function () {
       // given
       nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
@@ -50,6 +50,7 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
       const expectedResult = [
         {
           id: existingModuleIdWithoutRelatedPassage,
+          shortId: '6a68bf32',
           slug: 'bac-a-sable',
           title: 'Bac à sable',
           duration: 5,
@@ -61,6 +62,7 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
         },
         {
           id: existingModuleId2,
+          shortId: '9d4dcab8',
           slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire une adresse mail',
           duration: 10,
@@ -72,6 +74,7 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
         },
         {
           id: existingModuleId3,
+          shortId: 'ecc13f55',
           slug: 'adresse-ip-publique-et-vous',
           title: "L'adresse IP publique : ce qu'elle révèle sur vous !",
           duration: 10,
