@@ -330,6 +330,22 @@
         "label-tubes": "Sujets"
       }
     },
+    "authentication": {
+      "authentication-identity-providers": {
+        "login": {
+          "heading": "Autres méthodes de connexion"
+        },
+        "select-another-organization-link": "Choisir un autre méthode de connexion",
+        "signup": {
+          "heading": "Autres méthodes d’inscription"
+        }
+      },
+      "oidc-provider-selector": {
+        "label": "Rechercher une méthode de connexion",
+        "placeholder": "Sélectionner une méthode de connexion",
+        "searchLabel": "Recherche par mots-clés"
+      }
+    },
     "certificability": {
       "placeholder-select": "Certifiable / Non certifiable"
     },
@@ -1752,6 +1768,16 @@
         "empty": "Aucun élève."
       },
       "title": "{count, plural, =0 {Élèves} =1 {Élève ({count})} other {Élèves ({count})}}"
+    },
+    "sso-selection": {
+      "login": {
+        "button": "Je me connecte",
+        "message": "Vous allez être redirigé(e) vers la page de connexion de « {providerName} » afin de vous identifier sur Pix."
+      },
+      "signup": {
+        "button": "Je m'inscris"
+      },
+      "title": "Choisissez votre méthode de connexion"
     },
     "statistics": {
       "before-date": "au",

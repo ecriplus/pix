@@ -330,6 +330,22 @@
         "label-tubes": "Topics"
       }
     },
+    "authentication": {
+      "authentication-identity-providers": {
+        "login": {
+          "heading": "Other ways to log in"
+        },
+        "select-another-organization-link": "Choose another way to log in",
+        "signup": {
+          "heading": "Other ways to sign up"
+        }
+      },
+      "oidc-provider-selector": {
+        "label": "Search for a login method",
+        "placeholder": "Select a a login method",
+        "searchLabel": "Keyword search"
+      }
+    },
     "certificability": {
       "placeholder-select": "Eligible / Non-eligible"
     },
@@ -1764,6 +1780,16 @@
         "empty": "No students."
       },
       "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
+    },
+    "sso-selection": {
+      "signin": {
+        "button": "Log in",
+        "message": "You will be redirected to the “{providerName}” connection page in order to identify yourself on Pix."
+      },
+      "signup": {
+        "button": "Sign up"
+      },
+      "title": "Choose your login method"
     },
     "statistics": {
       "before-date": "on",
