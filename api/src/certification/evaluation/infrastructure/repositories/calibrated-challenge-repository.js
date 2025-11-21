@@ -1,30 +1,11 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
-import { child, SCOPES } from '../../../../shared/infrastructure/utils/logger.js';
 import { CalibratedChallenge } from '../../domain/models/CalibratedChallenge.js';
 import { CalibratedChallengeSkill } from '../../domain/models/CalibratedChallengeSkill.js';
 
-const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
-
 const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
-
-export async function getMany(ids, locale) {
-  const challengeDtos = await getInstance().loadMany(ids);
-  challengeDtos.forEach((challengeDto, index) => {
-    if (challengeDto) return;
-    logger.warn({ challengeId: ids[index] }, 'Épreuve introuvable');
-    throw new NotFoundError('Épreuve introuvable');
-  });
-  const localeChallengeDtos = locale
-    ? challengeDtos.filter((challengeDto) => challengeDto.locales.includes(locale))
-    : challengeDtos;
-  localeChallengeDtos.sort(byId);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(localeChallengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
-}
 
 export async function findActiveFlashCompatible({
   locale,
@@ -91,8 +72,8 @@ function decorateWithCertificationCalibration({ validChallengeDtos, certificatio
 
     return {
       ...challenge,
-      alpha: discriminant,
-      delta: difficulty,
+      discriminant,
+      difficulty,
     };
   });
 }
@@ -103,18 +84,13 @@ function _assertLocaleIsDefined(locale) {
   }
 }
 
-function byId(challenge1, challenge2) {
-  return challenge1.id < challenge2.id ? -1 : 1;
-}
-
 function _toDomain({ challengeDto, skill }) {
   return new CalibratedChallenge({
     id: challengeDto.id,
-    discriminant: challengeDto.alpha,
-    difficulty: challengeDto.delta,
+    discriminant: challengeDto.discriminant,
+    difficulty: challengeDto.difficulty,
     blindnessCompatibility: challengeDto.accessibility1,
     colorBlindnessCompatibility: challengeDto.accessibility2,
-    competenceId: challengeDto.competenceId,
     skill: new CalibratedChallengeSkill({
       id: skill.id,
       name: skill.name,

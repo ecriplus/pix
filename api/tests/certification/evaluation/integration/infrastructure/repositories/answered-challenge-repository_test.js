@@ -1,9 +1,8 @@
-import { knex } from '../../../../../../db/knex-database-connection.js';
-import * as calibratedChallengeRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/calibrated-challenge-repository.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import * as answeredChallengeRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/answered-challenge-repository.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Certification | Evaluation | Integration | Repository | calibrated-challenge-repository', function () {
+describe('Certification | Evaluation | Integration | Repository | answered-challenge-repository', function () {
   const challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson = {
     id: 'challengeId00',
     instruction: 'instruction challengeId00',
@@ -479,155 +478,112 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
     await databaseBuilder.commit();
   });
 
-  describe('#findActiveFlashCompatible', function () {
-    let skillsLC = [];
-    let challengesLC = [];
-
-    beforeEach(async function () {
-      await knex('learningcontent.challenges').truncate();
-      await knex('learningcontent.skills').truncate();
-      skillsLC = [];
-      challengesLC = [];
-      skillsLC.push(skillData02_tube02competence01_perime);
-      skillsLC.push(skillData03_tube02competence01_actif);
-      skillsLC.push(skillData00_tube00competence00_actif);
-      challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
-      challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
-      challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
-    });
-
-    it('returns only valid calibrated flash compatible challenges', async function () {
-      // given
-      const candidateReconciliationDate = new Date('2025-01-01');
-
-      const version = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
-      const otherVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: Frameworks.CORE,
-      });
-
-      challengesLC.push({
-        id: 'challengeForComplementaryCertification',
-        status: 'validé',
-        skillId: skillData03_tube02competence01_actif.id,
-      });
-      challengesLC.push({
-        id: 'otherChallengeForComplementaryCertification',
-        status: 'validé',
-        skillId: skillData03_tube02competence01_actif.id,
-      });
-      challengesLC.push(domainBuilder.buildChallenge({ id: 'toto', status: 'archivé' }));
-
-      databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-
-      const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        challengeId: challengesLC[3].id,
-        versionId: version.id,
-      });
-
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        challengeId: challengesLC[4].id,
-        versionId: otherVersion.Id,
-      });
-
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        challengeId: challengesLC[0].id,
-        versionId: otherVersion.id,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const flashCompatibleChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-        date: candidateReconciliationDate,
-        locale: 'fr',
-        version,
-      });
-
-      // then
-      expect(flashCompatibleChallenges).to.have.lengthOf(1);
-      expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[3].id);
-      expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
-      expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
-    });
-
-    context('when locale is not defined', function () {
-      it('should throw an Error', async function () {
-        // given
-        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-        await databaseBuilder.commit();
-
-        // when
-        const err = await catchErr(calibratedChallengeRepository.findActiveFlashCompatible)();
-
-        // then
-        expect(err.message).to.equal('Locale shall be defined');
-      });
-    });
-
-    context('when locale is defined', function () {
-      context('when no active flash compatible challenges found', function () {
-        it('should return an empty array', async function () {
-          // given
-          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-          const version = databaseBuilder.factory.buildCertificationVersion();
-          await databaseBuilder.commit();
-
+  describe('#getMany', function () {
+    context('when no locale provided', function () {
+      context('when at least one challenge is not found amongst the provided ids', function () {
+        it('should throw a NotFound error', async function () {
           // when
-          const challenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-            locale: 'fr',
-            version,
-          });
+          const err = await catchErr(answeredChallengeRepository.getMany)([
+            'challengeIdPipeauPipette',
+            'challengeId00',
+          ]);
 
           // then
-          expect(challenges).to.deep.equal([]);
+          expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
         });
       });
 
-      context('when active flash compatible challenges found', function () {
+      context('when all challenges are found', function () {
         it('should return the challenges', async function () {
-          // given
-          challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
-          challengesLC.push(challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson);
-          challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
-          challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
-          challengesLC.push(challengeData09_skill03_qcu_archive_flashCompatible_fr_noEmbedJson);
-          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-          const version = databaseBuilder.factory.buildCertificationVersion();
-
-          databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            challengeId: challengesLC[3].id,
-            versionId: version.id,
-          });
-
-          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            challengeId: challengesLC[4].id,
-            versionId: version.id,
-          });
-
-          await databaseBuilder.commit();
-
           // when
-          const challenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-            locale: 'nl',
-            version,
-          });
+          const challenges = await answeredChallengeRepository.getMany(['challengeId02', 'challengeId00']);
 
           // then
-          expect(challenges).to.deep.equal([
-            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
               id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
-              blindnessCompatibility:
-                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
-              discriminant: certificationFrameworkChallenge.discriminant,
-              difficulty: certificationFrameworkChallenge.difficulty,
-              competenceId: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.competenceId,
-              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-                id: 'skillId00',
-                name: 'name skillId00',
-                competenceId: 'competenceId00',
-                tubeId: 'tubeId00',
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+          ]);
+        });
+
+        it('should allow duplicates', async function () {
+          // when
+          const challenges = await answeredChallengeRepository.getMany([
+            'challengeId02',
+            'challengeId00',
+            'challengeId02',
+          ]);
+
+          // then
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+          ]);
+        });
+      });
+    });
+
+    context('when locale is provided', function () {
+      context('when at least one challenge is not found amongst the provided ids', function () {
+        it('should throw a NotFound error', async function () {
+          // when
+          const err = await catchErr(answeredChallengeRepository.getMany)([
+            'challengeIdPipeauPipette',
+            'challengeId00',
+          ]);
+
+          // then
+          expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
+        });
+      });
+
+      context('when all challenges are found', function () {
+        it('should return only the challenges for given locale', async function () {
+          // when
+          const challenges = await answeredChallengeRepository.getMany(
+            ['challengeId02', 'challengeId00', 'challengeId01'],
+            'en',
+          );
+
+          // then
+          expect(challenges).to.deepEqualArray([
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+              }),
+            }),
+            domainBuilder.certification.evaluation.buildAnsweredChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              skill: domainBuilder.certification.evaluation.buildAnsweredChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
               }),
             }),
           ]);

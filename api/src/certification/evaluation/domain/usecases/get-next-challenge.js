@@ -42,6 +42,7 @@ const getNextChallenge = async function ({
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
   calibratedChallengeRepository,
+  answeredChallengeRepository,
   versionRepository,
   flashAlgorithmService,
   pickChallengeService,
@@ -84,9 +85,9 @@ const getNextChallenge = async function ({
     version,
   });
 
-  const answeredCalibratedChallenges = await calibratedChallengeRepository.getMany(answeredChallengeIds);
+  const answeredChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
 
-  const challenges = [...new Set([...answeredCalibratedChallenges, ...activeFlashCompatibleCalibratedChallenges])];
+  const challenges = [...new Set([...answeredChallenges, ...activeFlashCompatibleCalibratedChallenges])];
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,

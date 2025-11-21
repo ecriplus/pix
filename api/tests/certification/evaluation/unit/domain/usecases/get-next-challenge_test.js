@@ -13,6 +13,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       calibratedChallengeRepository,
       certificationCourseRepository,
       complementaryCertificationRepository,
+      answeredChallengeRepository,
       certificationChallengeLiveAlertRepository,
       sessionManagementCertificationChallengeRepository,
       pickChallengeService,
@@ -35,8 +36,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         get: sinon.stub(),
       };
       calibratedChallengeRepository = {
-        getMany: sinon.stub(),
         findActiveFlashCompatible: sinon.stub(),
+      };
+      answeredChallengeRepository = {
+        getMany: sinon.stub(),
       };
       certificationCourseRepository = {
         get: sinon.stub(),
@@ -121,7 +124,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(complementaryCertification);
 
         calibratedChallengeRepository.findActiveFlashCompatible.resolves([nextCalibratedChallenge]);
-        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
+        answeredChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -159,6 +162,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sharedChallengeRepository,
           versionRepository,
           calibratedChallengeRepository,
+          answeredChallengeRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -227,7 +231,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             })
             .resolves(allChallenges);
 
-          calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
+          answeredChallengeRepository.getMany.withArgs([]).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
             .withArgs({
@@ -264,6 +268,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             certificationCourseRepository,
             calibratedChallengeRepository,
             sharedChallengeRepository,
+            answeredChallengeRepository,
             versionRepository,
             flashAlgorithmService,
             locale,
@@ -388,7 +393,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .resolves([alreadyAnsweredChallenge, nextCalibratedChallenge]);
 
-        calibratedChallengeRepository.getMany
+        answeredChallengeRepository.getMany
           .withArgs([alreadyAnsweredChallenge.id, outdatedChallenge.id])
           .resolves([alreadyAnsweredChallenge, outdatedChallenge]);
 
@@ -427,6 +432,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseRepository,
           sharedChallengeRepository,
           calibratedChallengeRepository,
+          answeredChallengeRepository,
           versionRepository,
           flashAlgorithmService,
           locale,
@@ -485,7 +491,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             version,
           })
           .resolves([nextCalibratedChallenge, lastSeenChallenge]);
-        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
+        answeredChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -532,6 +538,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
+          answeredChallengeRepository,
           calibratedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
@@ -595,7 +602,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             calibratedChallengeWithOtherSkill,
             calibratedChallengeWithLiveAlertedSkill,
           ]);
-        calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
+        answeredChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -642,6 +649,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           calibratedChallengeRepository,
+          answeredChallengeRepository,
           sharedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
@@ -703,7 +711,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             version,
           })
           .resolves([answeredChallenge]);
-        calibratedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
+        answeredChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
 
         // when
         const error = await catchErr(getNextChallenge)({
@@ -714,6 +722,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseRepository,
           calibratedChallengeRepository,
           sharedChallengeRepository,
+          answeredChallengeRepository,
           versionRepository,
           flashAlgorithmService,
           locale,
@@ -782,7 +791,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
                 version,
               })
               .resolves([nextCalibratedChallenge]);
-            calibratedChallengeRepository.getMany.withArgs([]).resolves([]);
+            answeredChallengeRepository.getMany.withArgs([]).resolves([]);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
@@ -818,6 +827,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               certificationChallengeLiveAlertRepository,
               certificationCourseRepository,
               calibratedChallengeRepository,
+              answeredChallengeRepository,
               sharedChallengeRepository,
               versionRepository,
               flashAlgorithmService,
@@ -887,6 +897,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           calibratedChallengeRepository,
+          answeredChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
           locale,
@@ -948,6 +959,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
+          answeredChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
           calibratedChallengeRepository,
