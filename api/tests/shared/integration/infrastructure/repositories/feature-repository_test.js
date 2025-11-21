@@ -33,4 +33,26 @@ describe('Integration | Infrastructure | Repositories | feature-repository', fun
       });
     });
   });
+
+  describe('#findAll', function () {
+    it('list all features from database', async function () {
+      //given
+      const firstFeature = databaseBuilder.factory.buildFeature({
+        key: 'ORALIZATION',
+        description: 'Ma description de feature',
+      });
+      const secondFeature = databaseBuilder.factory.buildFeature({
+        key: 'ATTESTATIONS_MANAGEMENT',
+        description: 'Ma description de feature',
+      });
+
+      await databaseBuilder.commit();
+      // when
+      const results = await featureRepository.findAll();
+
+      // then
+      expect(results).lengthOf(2);
+      expect(results).deep.members([new Feature(firstFeature), new Feature(secondFeature)]);
+    });
+  });
 });
