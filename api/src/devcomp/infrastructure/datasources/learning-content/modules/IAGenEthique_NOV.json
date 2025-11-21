@@ -420,7 +420,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/IAGenEthique_NOV/ia-ethique-infographie.png",
                 "alt": "",
-                "alternativeText": "",
+                "alternativeText": "<p>Infographie présentant trois types de comptes pour l’utilisation d’une IA : compte personnel gratuit (les prompts sont réutilisés), abonnement individuel payant (la réutilisation peut être désactivée selon l’option choisie), et abonnement entreprise payant (les données ne devraient pas être réutilisées selon le contrat). Un encadré “Bon à savoir” rappelle que certaines organisations créent leur propre IA pour mieux protéger leurs données, mais qu’il faut malgré tout éviter d’y saisir des informations sensibles. L’image mentionne également l’existence de chartes d’usage internes et se conclut par une règle : si une information doit rester privée, ne pas la mettre dans un message destiné à une IA.</p>",
                 "legend": "",
                 "licence": ""
               }
