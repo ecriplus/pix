@@ -306,7 +306,7 @@
               "element": {
                 "id": "6f69f7d9-5de2-4994-96ed-b4b9891c97b7",
                 "type": "text",
-                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣Choisir une phrase facile à retenir.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j</strong>’étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqjp.</strong></blockquote>"
+                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣Choisir une phrase facile à retenir.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j’</strong>étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqj’p.</strong></blockquote>"
               }
             }
           ]
@@ -591,7 +591,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Cliquer sur le lien «&nbsp;Mot de passe oublié&nbsp;».</p>",
+                          "content": "<p>Cliquer sur le lien «&nbsp;Mot de passe oublié ?&nbsp;».</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Le lien «&nbsp;<strong>Mot de passe oublié ?</strong>&nbsp;» est la première étape pour retrouver l’accès à son compte.</p>"
