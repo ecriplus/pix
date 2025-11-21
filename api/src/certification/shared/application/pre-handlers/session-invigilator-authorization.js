@@ -31,6 +31,6 @@ const verifyBySessionId = async function (request, h, dependencies = { superviso
   return true;
 };
 
-const assessmentSupervisorAuthorization = { verifyByCertificationCandidateId, verifyBySessionId };
+const assessmentInvigilatorAuthorization = { verifyByCertificationCandidateId, verifyBySessionId };
 
-export { assessmentSupervisorAuthorization };
+export { assessmentInvigilatorAuthorization };

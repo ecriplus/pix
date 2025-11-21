@@ -4,7 +4,7 @@ const Joi = BaseJoi.extend(JoiDate);
 
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { sessionForSupervisingController } from '../../session-management/application/session-for-supervising-controller.js';
-import { assessmentSupervisorAuthorization } from '../../shared/application/pre-handlers/session-supervisor-authorization.js';
+import { assessmentInvigilatorAuthorization } from '../../shared/application/pre-handlers/session-invigilator-authorization.js';
 
 const register = async function (server) {
   server.route([
@@ -19,7 +19,7 @@ const register = async function (server) {
         },
         pre: [
           {
-            method: assessmentSupervisorAuthorization.verifyBySessionId,
+            method: assessmentInvigilatorAuthorization.verifyBySessionId,
             assign: 'isSupervisorForSession',
           },
         ],
