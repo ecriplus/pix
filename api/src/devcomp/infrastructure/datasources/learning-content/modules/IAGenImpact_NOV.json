@@ -1151,30 +1151,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Me demander si une solution plus simple et moins énergivore peut répondre à mon besoin.</p>",
+                    "content": "<p>Me demander si une solution plus simple et moins consommatrice d'énergie peut répondre à mon besoin.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Excellent réflexe&nbsp;: parfois une simple recherche ou une ressource déjà existante suffit, sans lancer de calculs coûteux.</p>"
+                      "diagnosis": "<p>Excellent réflexe ! C’est une très bonne manière de réduire l’empreinte énergétique de vos usages. Et bonne nouvelle : les autres propositions sont aussi valables pour adopter une utilisation plus responsable.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Limiter les demandes lourdes comme les images ou les vidéos quand ce n’est pas indispensable.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bonne démarche&nbsp;: ces contenus sont parmi les requêtes les plus énergivores.</p>"
+                      "diagnosis": "<p>Très bon choix ! Limiter les requêtes lourdes est un geste efficace pour économiser de l’énergie. Et bien sûr, les autres propositions vont aussi dans le bon sens.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Regrouper mes requêtes et éviter les essais répétés inutiles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pertinent&nbsp;: réduire les allers-retours limite la charge de calcul dans les centres de données.</p>"
+                      "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Avoir conscience que chaque requête mobilise des ordinateurs très puissants dans des centres de données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est essentiel&nbsp;: comprendre l’impact réel aide à adopter des usages plus sobres.</p>"
+                      "diagnosis": "<p>Parfait ! Prendre conscience de l’impact réel est un premier pas essentiel pour ajuster vos usages. Et vous avez raison : toutes les autres propositions contribuent également à un usage plus responsable.</p>"
                     }
                   }
                 ]
