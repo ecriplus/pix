@@ -39,6 +39,17 @@ async function createOidcUser({
 
   const { userInfo, sessionContent } = sessionContentAndUserInfo;
 
+  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
+
+  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+    identityProviderCode: identityProvider,
+    requestedApplication,
+  });
+
+  const connectionMethodCode = oidcAuthenticationService.connectionMethodCode;
+  identityProvider = connectionMethodCode || identityProvider;
+
   const authenticationMethod = await authenticationMethodRepository.findOneByExternalIdentifierAndIdentityProvider({
     externalIdentifier: userInfo.externalIdentityId,
     identityProvider,
@@ -57,14 +68,6 @@ async function createOidcUser({
     lang: language,
   });
 
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
-
-  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
-    identityProviderCode: identityProvider,
-    requestedApplication,
-  });
-
   const userId = await oidcAuthenticationService.createUserAccount({
     user,
     userInfo,
@@ -77,7 +80,7 @@ async function createOidcUser({
   await _updateUserLastConnection({
     userId,
     requestedApplication,
-    oidcAuthenticationService,
+    identityProvider,
     authenticationMethodRepository,
     lastUserApplicationConnectionsRepository,
     userLoginRepository,
@@ -98,7 +101,7 @@ export { createOidcUser };
 async function _updateUserLastConnection({
   userId,
   requestedApplication,
-  oidcAuthenticationService,
+  identityProvider,
   authenticationMethodRepository,
   lastUserApplicationConnectionsRepository,
   userLoginRepository,
@@ -111,6 +114,6 @@ async function _updateUserLastConnection({
   });
   await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
     userId,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider,
   });
 }

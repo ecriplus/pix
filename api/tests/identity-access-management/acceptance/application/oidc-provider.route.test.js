@@ -584,8 +584,80 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     });
   });
 
-  async function createServerWithMockedTestOidcProvider({ application, applicationTld }) {
-    openIdClientMock = await createMockedTestOidcProvider({ application, applicationTld });
+  context('when the OIDC provider has a connectionMethodCode', function () {
+    describe('POST /api/oidc/users', function () {
+      beforeEach(async function () {
+        await createServerWithMockedTestOidcProvider({
+          application: 'orga',
+          applicationTld: '.org',
+          identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+          connectionMethodCode: 'OIDC_EXAMPLE_NET',
+        });
+      });
+
+      it('creates an authentication method with connectionMethodCode as value for identityProvider', async function () {
+        // given
+        const firstName = 'Brice';
+        const lastName = 'Glace';
+        const externalIdentifier = 'sub';
+        const idToken = jsonwebtoken.sign(
+          { given_name: firstName, family_name: lastName, nonce: 'nonce', sub: externalIdentifier },
+          'secret',
+        );
+
+        const sessionContent = new AuthenticationSessionContent({ idToken });
+        const userAuthenticationKey = await authenticationSessionService.save({
+          sessionContent,
+          userInfo: {
+            firstName,
+            lastName,
+            nonce: 'nonce',
+            externalIdentityId: externalIdentifier,
+          },
+        });
+
+        const request = {
+          method: 'POST',
+          url: '/api/oidc/users',
+          headers: {
+            cookie: 'locale=fr-FR',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.dev.pix.org',
+          },
+          payload: {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                authentication_key: userAuthenticationKey,
+              },
+            },
+          },
+        };
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+
+        const createdAuthenticationMethod = await knex('authentication-methods').first();
+        expect(createdAuthenticationMethod.identityProvider).to.equal('OIDC_EXAMPLE_NET');
+      });
+    });
+  });
+
+  async function createServerWithMockedTestOidcProvider({
+    application,
+    applicationTld,
+    identityProvider,
+    connectionMethodCode,
+  }) {
+    openIdClientMock = await createMockedTestOidcProvider({
+      application,
+      applicationTld,
+      identityProvider,
+      connectionMethodCode,
+    });
     server = await createServer();
   }
 });

@@ -925,6 +925,48 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       expect(result).to.equal(userId);
     });
 
+    context('when there is a connectionMethodCode', function () {
+      it('creates an authentication method with connectionMethodCode as value for identityProvider', async function () {
+        // given
+        const externalIdentityId = '1233BBBC';
+
+        const user = new UserToCreate({
+          firstName: 'Adam',
+          lastName: 'Troisjours',
+        });
+        const userInfo = {};
+        const userId = 1;
+        userToCreateRepository.create.withArgs({ user }).resolves({ id: userId });
+
+        const identityProvider = 'genericOidcProviderCode';
+        const connectionMethodCode = 'aliasForGenericOidcProviderCode';
+
+        const oidcAuthenticationService = new OidcAuthenticationService(
+          { identityProvider, connectionMethodCode },
+          { openIdClient },
+        );
+        const expectedAuthenticationMethod = new AuthenticationMethod({
+          identityProvider: connectionMethodCode,
+          externalIdentifier: externalIdentityId,
+          userId,
+        });
+
+        // when
+        await oidcAuthenticationService.createUserAccount({
+          externalIdentityId,
+          user,
+          userInfo,
+          authenticationMethodRepository,
+          userToCreateRepository,
+        });
+
+        // then
+        expect(authenticationMethodRepository.create).to.have.been.calledWithExactly({
+          authenticationMethod: expectedAuthenticationMethod,
+        });
+      });
+    });
+
     context('when claimsToStore is empty', function () {
       it('does not store claimsToStore', async function () {
         // given

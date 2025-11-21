@@ -237,7 +237,7 @@ export class OidcAuthenticationService {
 
       const authenticationComplement = this.createAuthenticationComplement({ userInfo });
       const authenticationMethod = new AuthenticationMethod({
-        identityProvider: this.identityProvider,
+        identityProvider: this.connectionMethodCode || this.identityProvider,
         userId: createdUserId,
         externalIdentifier: externalIdentityId,
         authenticationComplement,
