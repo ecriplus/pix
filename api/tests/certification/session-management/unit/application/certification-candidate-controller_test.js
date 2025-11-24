@@ -61,20 +61,20 @@ describe('Certification | Session Management | Unit | Application | Controller |
     });
   });
 
-  describe('#endAssessmentBySupervisor', function () {
-    it('should call the endAssessmentBySupervisor use case', async function () {
+  describe('#endAssessmentByInvigilator', function () {
+    it('should call the endAssessmentByInvigilator use case', async function () {
       // given
       const certificationCandidateId = 2;
-      sinon.stub(usecases, 'endAssessmentBySupervisor');
-      usecases.endAssessmentBySupervisor.resolves();
+      sinon.stub(usecases, 'endAssessmentByInvigilator');
+      usecases.endAssessmentByInvigilator.resolves();
 
       // when
-      await certificationCandidateController.endAssessmentBySupervisor({
+      await certificationCandidateController.endAssessmentByInvigilator({
         params: { certificationCandidateId },
       });
 
       // then
-      expect(usecases.endAssessmentBySupervisor).to.have.been.calledWithExactly({
+      expect(usecases.endAssessmentByInvigilator).to.have.been.calledWithExactly({
         certificationCandidateId,
       });
     });

@@ -152,7 +152,7 @@ import { createCertificationChallengeLiveAlert } from './create-certification-ch
 import { deleteCertificationIssueReport } from './delete-certification-issue-report.js';
 import { deleteSessionJuryComment } from './delete-session-jury-comment.js';
 import { dismissLiveAlert } from './dismiss-live-alert.js';
-import { endAssessmentBySupervisor } from './end-assessment-by-supervisor.js';
+import { endAssessmentByInvigilator } from './end-assessment-by-invigilator.js';
 import { finalizeSession } from './finalize-session.js';
 import { findFinalizedSessionsToPublish } from './find-finalized-sessions-to-publish.js';
 import { findFinalizedSessionsWithRequiredAction } from './find-finalized-sessions-with-required-action.js';
@@ -196,7 +196,7 @@ const usecasesWithoutInjectedDependencies = {
   deleteCertificationIssueReport,
   deleteSessionJuryComment,
   dismissLiveAlert,
-  endAssessmentBySupervisor,
+  endAssessmentByInvigilator,
   finalizeSession,
   findFinalizedSessionsToPublish,
   findFinalizedSessionsWithRequiredAction,

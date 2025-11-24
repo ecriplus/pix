@@ -1,8 +1,8 @@
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
-import { endAssessmentBySupervisor } from '../../../../../../src/certification/session-management/domain/usecases/end-assessment-by-supervisor.js';
+import { endAssessmentByInvigilator } from '../../../../../../src/certification/session-management/domain/usecases/end-assessment-by-invigilator.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | end-assessment-by-supervisor', function () {
+describe('Unit | UseCase | end-assessment-by-invigilator', function () {
   let certificationAssessmentRepository;
 
   beforeEach(function () {
@@ -26,7 +26,7 @@ describe('Unit | UseCase | end-assessment-by-supervisor', function () {
         .withArgs({ certificationCandidateId })
         .resolves(completedCertificationAssessment);
 
-      await endAssessmentBySupervisor({
+      await endAssessmentByInvigilator({
         certificationCandidateId,
         certificationAssessmentRepository,
       });
@@ -50,7 +50,7 @@ describe('Unit | UseCase | end-assessment-by-supervisor', function () {
         .withArgs({ certificationCandidateId })
         .resolves(startedCertificationAssessment);
 
-      await endAssessmentBySupervisor({
+      await endAssessmentByInvigilator({
         certificationCandidateId,
         certificationAssessmentRepository,
       });

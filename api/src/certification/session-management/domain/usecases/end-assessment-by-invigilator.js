@@ -1,4 +1,4 @@
-const endAssessmentBySupervisor = async function ({ certificationCandidateId, certificationAssessmentRepository }) {
+const endAssessmentByInvigilator = async function ({ certificationCandidateId, certificationAssessmentRepository }) {
   const certificationAssessment = await certificationAssessmentRepository.getByCertificationCandidateId({
     certificationCandidateId,
   });
@@ -7,8 +7,8 @@ const endAssessmentBySupervisor = async function ({ certificationCandidateId, ce
     return;
   }
 
-  certificationAssessment.endBySupervisor({ now: new Date() });
+  certificationAssessment.endByInvigilator({ now: new Date() });
   await certificationAssessmentRepository.save(certificationAssessment);
 };
 
-export { endAssessmentBySupervisor };
+export { endAssessmentByInvigilator };

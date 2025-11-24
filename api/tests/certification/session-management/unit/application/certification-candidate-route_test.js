@@ -90,7 +90,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       sinon
         .stub(sessionInvigilatorAuthorization, 'verifyByCertificationCandidateId')
         .callsFake((request, h) => h.response(true));
-      sinon.stub(certificationCandidateController, 'endAssessmentBySupervisor').returns(null);
+      sinon.stub(certificationCandidateController, 'endAssessmentByInvigilator').returns(null);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 

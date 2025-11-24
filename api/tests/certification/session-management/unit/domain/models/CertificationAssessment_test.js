@@ -492,7 +492,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       });
 
       // when
-      certificationAssessment.endBySupervisor({ now });
+      certificationAssessment.endByInvigilator({ now });
 
       // then
       expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_SUPERVISOR);
