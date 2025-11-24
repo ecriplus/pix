@@ -1,7 +1,8 @@
 import { ScoBlockedAccessDate } from '../../../../../../src/certification/configuration/domain/models/ScoBlockedAccessDate.js';
+import { ScoOrganizationTagName } from '../../../../../../src/certification/configuration/domain/models/ScoOrganizationTagName.js';
 
 export const buildScoBlockedAccessDateCollege = function ({
-  scoOrganizationTagName = 'COLLEGE',
+  scoOrganizationTagName = ScoOrganizationTagName.COLLEGE,
   reopeningDate = new Date('2025-11-15'),
 } = {}) {
   return new ScoBlockedAccessDate({
@@ -11,7 +12,7 @@ export const buildScoBlockedAccessDateCollege = function ({
 };
 
 export const buildScoBlockedAccessDateLycee = function ({
-  scoOrganizationTagName = 'LYCEE',
+  scoOrganizationTagName = ScoOrganizationTagName.LYCEE,
   reopeningDate = new Date('2025-10-15'),
 } = {}) {
   return new ScoBlockedAccessDate({

@@ -1,3 +1,4 @@
+import { ScoOrganizationTagName } from '../../../../../src/certification/configuration/domain/models/ScoOrganizationTagName.js';
 import {
   createServer,
   databaseBuilder,
@@ -15,7 +16,7 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
   });
 
   describe('PATCH /api/admin/sco-blocked-access-dates', function () {
-    it('should return 201 HTTP status code when updating valid entry', async function () {
+    it('should return 200 HTTP status code when updating valid entry', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const options = {
@@ -31,9 +32,9 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       const response = await server.inject(options);
 
       // then
-      expect(response.statusCode).to.equal(201);
+      expect(response.statusCode).to.equal(200);
       const [updatedValue] = await knex('certification_sco_blocked_access_dates')
-        .where({ scoOrganizationTagName: 'LYCEE' })
+        .where({ scoOrganizationTagName: ScoOrganizationTagName.LYCEE })
         .pluck('reopeningDate');
       expect(updatedValue.toDateString()).to.equal(new Date('2025-12-15').toDateString());
     });
@@ -77,14 +78,14 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
       expect(result.data).to.deep.equal([
         {
           type: 'sco-blocked-access-dates',
-          id: 'COLLEGE',
+          id: ScoOrganizationTagName.COLLEGE,
           attributes: {
             'reopening-date': scoBlockedAccessDates.collegeDate.toISOString(),
           },
         },
         {
           type: 'sco-blocked-access-dates',
-          id: 'LYCEE',
+          id: ScoOrganizationTagName.LYCEE,
           attributes: {
             'reopening-date': scoBlockedAccessDates.lyceeDate.toISOString(),
           },

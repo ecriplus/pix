@@ -5,7 +5,7 @@ const updateScoBlockedAccessDate = async function (request, h) {
   const scoOrganizationTagName = request.params.key;
   const reopeningDate = request.payload.data.attributes.value;
   await usecases.updateScoBlockedAccessDate({ scoOrganizationTagName, reopeningDate });
-  return h.response().code(201);
+  return h.response().code(200);
 };
 
 const getScoBlockedAccessDates = async function (request, h) {

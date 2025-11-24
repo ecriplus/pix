@@ -1,3 +1,4 @@
+import { ScoOrganizationTagName } from '../../../src/certification/configuration/domain/models/ScoOrganizationTagName.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 const buildScoBlockedAccessDates = function ({
@@ -7,14 +8,14 @@ const buildScoBlockedAccessDates = function ({
   databaseBuffer.pushInsertable({
     tableName: 'certification_sco_blocked_access_dates',
     values: {
-      scoOrganizationTagName: 'COLLEGE',
+      scoOrganizationTagName: ScoOrganizationTagName.COLLEGE,
       reopeningDate: collegeDate,
     },
   });
   databaseBuffer.pushInsertable({
     tableName: 'certification_sco_blocked_access_dates',
     values: {
-      scoOrganizationTagName: 'LYCEE',
+      scoOrganizationTagName: ScoOrganizationTagName.LYCEE,
       reopeningDate: lyceeDate,
     },
   });
