@@ -53,8 +53,8 @@ export const ORGANIZATIONS_UPDATE_HEADER = {
 export const ORGANIZATION_FEATURES_HEADER = {
   columns: [
     new CsvColumn({
-      property: 'featureId',
-      name: 'Feature ID',
+      property: 'featureName',
+      name: 'Feature Name',
       isRequired: true,
     }),
     new CsvColumn({

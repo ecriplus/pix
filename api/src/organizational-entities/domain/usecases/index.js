@@ -4,6 +4,7 @@ import * as schoolRepository from '../../../school/infrastructure/repositories/s
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as countryRepository from '../../../shared/infrastructure/repositories/country-repository.js';
+import * as featureRepository from '../../../shared/infrastructure/repositories/feature-repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import * as administrationTeamRepository from '../../infrastructure/repositories/administration-team-repository.js';
@@ -50,6 +51,7 @@ const repositories = {
   certificationCenterRepository,
   certificationCenterForAdminRepository,
   countryRepository,
+  featureRepository,
   dataProtectionOfficerRepository,
   certificationCenterApiRepository,
   complementaryCertificationHabilitationRepository,

@@ -6,6 +6,7 @@ import { createReadStream } from 'node:fs';
 
 import { getDataBuffer } from '../../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { ORGANIZATION_FEATURES_HEADER } from '../constants.js';
 import { FeatureParamsNotProcessable } from '../errors.js';
@@ -20,16 +21,18 @@ export const addOrganizationFeatureInBatch = withTransaction(
    * @param {Object} params.dependencies
    * @returns {Promise<void>}
    */
-  async ({ userId, filePath, organizationFeatureRepository, learnersApi }) => {
+  async ({ userId, filePath, organizationFeatureRepository, featureRepository, learnersApi }) => {
     const stream = createReadStream(filePath);
     const buffer = await getDataBuffer(stream);
 
+    const features = await featureRepository.findAll();
     const csvParser = new CsvParser(buffer, ORGANIZATION_FEATURES_HEADER);
     const csvData = csvParser.parse();
-    const data = csvData.map(({ featureId, organizationId, params, deleteLearner }) => {
+    const data = csvData.map(({ featureName, organizationId, params, deleteLearner }) => {
       try {
-        return new OrganizationFeature({ featureId, organizationId, params, deleteLearner });
-      } catch {
+        return new OrganizationFeature({ featureName, organizationId, params, deleteLearner, features });
+      } catch (error) {
+        if (error instanceof EntityValidationError) throw error;
         throw new FeatureParamsNotProcessable();
       }
     });

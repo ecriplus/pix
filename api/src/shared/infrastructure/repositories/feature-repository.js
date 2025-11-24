@@ -12,4 +12,11 @@ const getFeatureByKey = async function (key) {
   return new Feature(feature);
 };
 
-export { getFeatureByKey };
+const findAll = async function () {
+  const knexConn = DomainTransaction.getConnection();
+  const features = await knexConn('features').select('*');
+
+  return features.map((feature) => new Feature(feature));
+};
+
+export { findAll, getFeatureByKey };

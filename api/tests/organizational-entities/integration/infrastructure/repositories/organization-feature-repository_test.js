@@ -1,5 +1,4 @@
 import { FeatureNotFound, OrganizationNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
-import { OrganizationFeature } from '../../../../../src/organizational-entities/domain/models/OrganizationFeature.js';
 import { OrganizationFeatureItem } from '../../../../../src/organizational-entities/domain/models/OrganizationFeatureItem.js';
 import * as organizationFeatureRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-feature-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
@@ -21,16 +20,16 @@ describe('Integration | Repository | Organization-for-admin', function () {
       await databaseBuilder.commit();
 
       const organizationFeatures = [
-        new OrganizationFeature({
+        {
           featureId: feature.id,
           organizationId: organization.id,
           params: `{ "id": 123 }`,
-        }),
-        new OrganizationFeature({
+        },
+        {
           featureId: feature.id,
           organizationId: otherOrganization.id,
           params: `{ "id": 456 }`,
-        }),
+        },
       ];
 
       // when
@@ -61,16 +60,16 @@ describe('Integration | Repository | Organization-for-admin', function () {
       await databaseBuilder.commit();
 
       const organizationFeatures = [
-        new OrganizationFeature({
+        {
           featureId: feature.id,
           organizationId: organization.id,
           params: `["SOMETHING"]`,
-        }),
-        new OrganizationFeature({
+        },
+        {
           featureId: feature.id,
           organizationId: otherOrganization.id,
           params: `{ "id": 456 }`,
-        }),
+        },
       ];
 
       // when
@@ -95,11 +94,11 @@ describe('Integration | Repository | Organization-for-admin', function () {
       await databaseBuilder.commit();
 
       const organizationFeatures = [
-        new OrganizationFeature({
+        {
           featureId: feature.id,
           organizationId: organization.id,
           params: `{ "id": 123 }`,
-        }),
+        },
       ];
 
       // when
@@ -109,11 +108,11 @@ describe('Integration | Repository | Organization-for-admin', function () {
     it('throws an error if organization does not exists', async function () {
       const notExistingId = 999;
       const organizationFeatures = [
-        new OrganizationFeature({
+        {
           featureId: feature.id,
           organizationId: notExistingId,
           params: `{ "id": 123 }`,
-        }),
+        },
       ];
 
       // when
@@ -125,11 +124,11 @@ describe('Integration | Repository | Organization-for-admin', function () {
     it('throws an error if feature does not exists', async function () {
       const notExistingId = 999;
       const organizationFeatures = [
-        new OrganizationFeature({
+        {
           featureId: notExistingId,
           organizationId: organization.id,
           params: `{ "id": 123 }`,
-        }),
+        },
       ];
 
       // when
@@ -220,7 +219,7 @@ describe('Integration | Repository | Organization-for-admin', function () {
       expect(results[0].params).to.be.deep.equal(featureParams);
     });
 
-    it('should return empty arry when no feature detected', async function () {
+    it('should return empty array when no feature detected', async function () {
       // when
       const results = await organizationFeatureRepository.findAllOrganizationFeaturesFromOrganizationId({
         organizationId: organization.id,

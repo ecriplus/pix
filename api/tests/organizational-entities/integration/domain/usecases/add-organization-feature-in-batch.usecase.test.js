@@ -3,8 +3,8 @@ import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants
 import { createTempFile, databaseBuilder, expect, knex, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | add-organization-feature-in-batch', function () {
-  let learnerImportfeatureId,
-    campaignWithoutUserProfilefeatureId,
+  let learnerImportFeature,
+    campaignWithoutUserProfileFeature,
     filePath,
     userId,
     learnerImportOrganizationId,
@@ -12,10 +12,12 @@ describe('Integration | Organizational Entities | Domain | UseCase | add-organiz
 
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser().id;
-    learnerImportfeatureId = databaseBuilder.factory.buildFeature({ key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key }).id;
-    campaignWithoutUserProfilefeatureId = databaseBuilder.factory.buildFeature({
+    learnerImportFeature = databaseBuilder.factory.buildFeature({
+      key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+    });
+    campaignWithoutUserProfileFeature = databaseBuilder.factory.buildFeature({
       key: ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE.key,
-    }).id;
+    });
 
     learnerImportOrganizationId = databaseBuilder.factory.buildOrganization().id;
     campaignWithoutUserProfileOrganizationId = databaseBuilder.factory.buildOrganization().id;
@@ -31,9 +33,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | add-organiz
     // given
     filePath = await createTempFile(
       'test.csv',
-      `Feature ID;Organization ID;Params
-    ${learnerImportfeatureId};${learnerImportOrganizationId};{"id": 123}
-    ${campaignWithoutUserProfilefeatureId};${campaignWithoutUserProfileOrganizationId};{"id": 456}
+      `Feature Name;Organization ID;Params
+    ${learnerImportFeature.key};${learnerImportOrganizationId};{"id": 123}
+    ${campaignWithoutUserProfileFeature.key};${campaignWithoutUserProfileOrganizationId};
 `,
     );
     // when
@@ -45,14 +47,14 @@ describe('Integration | Organizational Entities | Domain | UseCase | add-organiz
     //eslint-disable-next-line no-unused-vars
     expect(result.map(({ id, ...data }) => data)).deep.members([
       {
-        featureId: learnerImportfeatureId,
+        featureId: learnerImportFeature.id,
         organizationId: learnerImportOrganizationId,
         params: { id: 123 },
       },
       {
-        featureId: campaignWithoutUserProfilefeatureId,
+        featureId: campaignWithoutUserProfileFeature.id,
         organizationId: campaignWithoutUserProfileOrganizationId,
-        params: { id: 456 },
+        params: null,
       },
     ]);
   });
@@ -91,9 +93,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | add-organiz
     it('should not delete learners without parameters', async function () {
       filePath = await createTempFile(
         'test.csv',
-        `Feature ID;Organization ID;Params
-      ${learnerImportfeatureId};${learnerImportOrganizationId};{"id": 123}
-      ${campaignWithoutUserProfilefeatureId};${campaignWithoutUserProfileOrganizationId};{"id": 456}
+        `Feature Name;Organization ID;Params
+      ${learnerImportFeature.key};${learnerImportOrganizationId};{"id": 123}
+      ${campaignWithoutUserProfileFeature.key};${campaignWithoutUserProfileOrganizationId};
   `,
       );
 
@@ -117,9 +119,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | add-organiz
 
       filePath = await createTempFile(
         'test.csv',
-        `"Feature ID";"Organization ID";"Params";"Delete Learner"
-      ${learnerImportfeatureId};${learnerImportOrganizationId};{"id": 123};Y
-      ${campaignWithoutUserProfilefeatureId};${campaignWithoutUserProfileOrganizationId};{"id": 456};
+        `"Feature Name";"Organization ID";"Params";"Delete Learner"
+      ${learnerImportFeature.key};${learnerImportOrganizationId};{"id": 123};Y
+      ${campaignWithoutUserProfileFeature.key};${campaignWithoutUserProfileOrganizationId};;
   `,
       );
 
