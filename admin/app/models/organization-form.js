@@ -104,6 +104,14 @@ const Validations = buildValidations({
       }),
     ],
   },
+  countryCode: {
+    validators: [
+      validator('presence', {
+        presence: true,
+        message: 'components.organizations.editing.country.selector.error-message',
+      }),
+    ],
+  },
 });
 
 export default class OrganizationForm extends Model.extend(Validations) {
@@ -118,6 +126,7 @@ export default class OrganizationForm extends Model.extend(Validations) {
   @attr('string') documentationUrl;
   @attr() identityProviderForCampaigns;
   @attr('string') administrationTeamId;
+  @attr('string') countryCode;
 
   #getErrorAttribute(name) {
     const nameAttribute = this.validations.attrs.get(name);
@@ -168,5 +177,9 @@ export default class OrganizationForm extends Model.extend(Validations) {
 
   get administrationTeamIdError() {
     return this.#getErrorAttribute('administrationTeamId');
+  }
+
+  get countryCodeError() {
+    return this.#getErrorAttribute('countryCode');
   }
 }
