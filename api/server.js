@@ -6,7 +6,6 @@ import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
 import { bannerRoutes } from './src/banner/routes.js';
-import { complementaryCertificationRoutes } from './src/certification/complementary-certification/routes.js';
 import {
   attachTargetProfileRoutes,
   certificationConfigurationRoutes,
@@ -51,7 +50,6 @@ const certificationRoutes = [
   certificationEnrolmentRoutes,
   certificationResultRoutes,
   certificationSessionRoutes,
-  complementaryCertificationRoutes,
   scoringRoutes,
   scoWhitelistRoutes,
   certificationEvaluationRoutes,

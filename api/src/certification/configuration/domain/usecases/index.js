@@ -3,6 +3,7 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
+import * as targetProfileHistoryRepository from '../../../shared/infrastructure/repositories/target-profile-history-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
@@ -41,6 +42,7 @@ const dependencies = {
   frameworkChallengesRepository,
   learningContentRepository,
   skillRepository,
+  targetProfileHistoryRepository,
   tubeRepository,
   versionsRepository,
 };
@@ -52,6 +54,7 @@ import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveVersionByScope } from './get-active-version-by-scope.js';
 import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
+import { getComplementaryCertificationTargetProfileHistory } from './get-complementary-certification-target-profile-history.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
@@ -67,6 +70,7 @@ const usecasesWithoutInjectedDependencies = {
   getCurrentFrameworkVersion,
   getActiveVersionByScope,
   getComplementaryCertificationForTargetProfileAttachmentRepository,
+  getComplementaryCertificationTargetProfileHistory,
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,
