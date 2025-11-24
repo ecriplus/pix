@@ -100,19 +100,16 @@ Router.map(function () {
           this.route('timeline');
         });
       });
-    });
-
-    this.route('candidates', function () {
-      this.route('timeline', { path: '/:candidate_id/timeline' });
-    });
-
-    this.route('certifications', function () {
-      this.route('certification', { path: '/:certification_id' }, function () {
+      this.route('certification', { path: '/certification/:certification_id' }, function () {
         this.route('informations', { path: '/' });
         this.route('neutralization');
         this.route('details');
         this.route('profile');
       });
+    });
+
+    this.route('candidates', function () {
+      this.route('timeline', { path: '/:candidate_id/timeline' });
     });
 
     this.route('complementary-certifications', function () {

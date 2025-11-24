@@ -2,13 +2,13 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-module('Unit | Controller | authenticated/certifications/certification/neutralization', function (hooks) {
+module('Unit | Controller | authenticated/sessions/certification/neutralization', function (hooks) {
   setupTest(hooks);
 
   module('#neutralizeChallenge', function () {
     test('neutralizes a challenge', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),
@@ -33,7 +33,7 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
 
     test('notifies a successful neutralization and updates model', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),
@@ -66,7 +66,7 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
 
     test('notifies a failed neutralization', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),
@@ -100,7 +100,7 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
   module('#deneutralizeChallenge', function () {
     test('deneutralizes a challenge', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),
@@ -125,7 +125,7 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
 
     test('notifies a successful deneutralization and updates model', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),
@@ -150,7 +150,7 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
 
     test('notifies a failed deneutralization', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/certifications/certification/neutralization');
+      const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
       controller.certificationDetails = {
         id: 'certificationCourseId',
         save: sinon.stub(),

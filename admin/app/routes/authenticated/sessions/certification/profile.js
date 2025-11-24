@@ -5,7 +5,7 @@ export default class AuthenticatedCertificationsCertificationProfileRoute extend
   @service store;
 
   model() {
-    const { certification_id } = this.paramsFor('authenticated.certifications.certification');
+    const { certification_id } = this.paramsFor('authenticated.sessions.certification');
     return this.store.findRecord('certified-profile', certification_id);
   }
 }

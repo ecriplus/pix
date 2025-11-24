@@ -5,8 +5,8 @@ export default class CertificationDetailsRoute extends Route {
   @service store;
 
   model() {
-    const certificationVersion = this.modelFor('authenticated.certifications.certification').version;
-    const { certification_id } = this.paramsFor('authenticated.certifications.certification');
+    const certificationVersion = this.modelFor('authenticated.sessions.certification').version;
+    const { certification_id } = this.paramsFor('authenticated.sessions.certification');
     if (certificationVersion === 3) {
       return this.store.findRecord('v3-certification-course-details-for-administration', certification_id);
     }

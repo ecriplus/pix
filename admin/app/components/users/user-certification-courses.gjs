@@ -44,10 +44,7 @@ export default class UserCertificationCourses extends Component {
               {{t "components.users.certification-centers.certification-courses.table-headers.id"}}
             </:header>
             <:cell>
-              <LinkTo
-                @route="authenticated.certifications.certification.informations"
-                @model={{certificationCourse.id}}
-              >
+              <LinkTo @route="authenticated.sessions.certification.informations" @model={{certificationCourse.id}}>
                 {{certificationCourse.id}}
               </LinkTo>
             </:cell>

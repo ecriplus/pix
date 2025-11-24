@@ -429,6 +429,11 @@
           "modal-title": "Confirm certification unrejection"
         },
         "user-details-link": "See user details"
+      },
+      "search-form": {
+        "ariaLabel": "Search for a certification with an identifier",
+        "label": "Find a certification",
+        "placeholder": "Certification ID"
       }
     },
     "complementary-certifications": {

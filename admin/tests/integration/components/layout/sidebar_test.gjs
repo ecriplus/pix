@@ -294,36 +294,6 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
     assert.dom(screen.getByRole('link', { name: 'Centres de certifications' })).exists();
   });
 
-  module('Certifications tab', function () {
-    test('should contain link to "certifications" management page when admin member have access to certification actions scope', async function (assert) {
-      // given
-      class AccessControlStub extends Service {
-        hasAccessToCertificationActionsScope = true;
-      }
-      this.owner.register('service:accessControl', AccessControlStub);
-
-      // when
-      const screen = await render(<template><Sidebar /></template>);
-
-      // then
-      assert.dom(screen.getByRole('link', { name: 'Certifications' })).exists();
-    });
-
-    test('should not contain link to "certifications" management page when admin member does not have access to certification actions scope', async function (assert) {
-      // given
-      class AccessControlStub extends Service {
-        hasAccessToCertificationActionsScope = false;
-      }
-      this.owner.register('service:accessControl', AccessControlStub);
-
-      // when
-      const screen = await render(<template><Sidebar /></template>);
-
-      // then
-      assert.dom(screen.queryByRole('link', { name: 'Certifications' })).doesNotExist();
-    });
-  });
-
   module('Certification frameworks tab', function () {
     test('should contain link to "Certification frameworks" management page', async function (assert) {
       // given
