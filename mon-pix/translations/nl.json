@@ -603,7 +603,7 @@
         "legal": "Door op \"Ik begin\" te klikken, wordt informatie over je voortgang tijdens de cursus naar de cursusorganisator gestuurd zodat zij je kunnen ondersteunen. Als je aan het einde van de cursus op de knop \"Stuur mijn resultaten\" klikt, worden je resultaten naar de organisator gestuurd.",
         "legal-with-auto-share": "Door op \"Ik begin\" te klikken, wordt informatie over je voortgang tijdens de cursus naar de cursusorganisator gestuurd zodat zij je kunnen ondersteunen. Aan het einde van je test worden je resultaten automatisch gedeeld met je organisatie.",
         "title": "Begin je Pix-reis",
-        "title-with-username": "<span>{userFirstName},</span><br> ben je klaar om je vaardigheden te testen?"
+        "title-with-username": "'<span>'{userFirstName}'</span>','<br>' ben je klaar om je vaardigheden te testen?"
       },
       "profiles-collection": {
         "action": "Laten we gaan!",
@@ -1380,7 +1380,7 @@
           "text": "Om er meer over te weten",
           "url": "https://pix.fr/actualites/decouvrez-votre-nouveau-tableau-de-bord"
         },
-        "message": "<h2>Welkom bij Pix in het Nederlands!</h2><p>De vertaling van al onze vaardigheden is binnenkort beschikbaar. '<'a href=\"https://pix.org/nl-be/de-planning-voor-de-uitrol-van-pix-in-het-nederlan\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'Meer informatie'</a>'</p></p>"
+        "message": "<h2>Welkom bij Pix in het Nederlands!</h2><p>De vertaling van al onze vaardigheden is binnenkort beschikbaar. '<'a href=\"https://pix.org/nl-be/de-planning-voor-de-uitrol-van-pix-in-het-nederlan\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'Meer informatie'</a>'</p>"
       },
       "recommended-competences": {
         "extra-information": "Toegang tot alle aanbevolen vaardigheden",
