@@ -30,7 +30,7 @@
               "element": {
                 "id": "35a9be34-9b63-4cf5-b984-432010aff74e",
                 "type": "text",
-                "content": "<p>Enzo teste un logiciel d’intelligence artificielle générative&nbsp;son smartphone.</p><p>    Il est impressionné par sa rapidité…</p>"
+                "content": "<p>Enzo teste un logiciel d’intelligence artificielle générative sur son smartphone.</p><p> Il est impressionné par sa rapidité…</p>"
               }
             }
           ]
@@ -279,7 +279,7 @@
                     "id": "1",
                     "content": "<p>Dans notre appareil personnel</p>",
                     "feedback": {
-                      "diagnosis": "<p>En fait, non.</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>En fait, non.</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, mais par des <strong>ordinateurs très puissants</strong>, regroupés dans des <strong>centres de données</strong> (datacenters) accessibles via <strong>internet</strong>.</p>"
                     }
                   },
                   {
@@ -319,7 +319,7 @@
               "element": {
                 "id": "140817f0-531a-44a6-83bb-2a7b094848c8",
                 "type": "text",
-                "content": "<p>Les réponses créées par un logiciel d’IA générative sont <strong>calculées</strong> dans des <strong>ordinateurs très puissants</strong>. Ils sont parfois <strong>situés à l’autre bout du monde, et accessibles via internet</strong>.</p>"
+                "content": "<p>Les réponses créées par un logiciel d’IA générative sont <strong>calculées</strong> dans des <strong>ordinateurs très puissants</strong>. Ils sont parfois <strong>situés à l’autre bout du monde et accessibles via internet</strong>.</p>"
               }
             }
           ]
@@ -459,12 +459,12 @@
                       }
                     },
                     {
-                      "title": "Les ordinateurs dédiés à l'IA générative poursuivent les calculs et préparent la réponse.",
+                      "title": "Les ordinateurs dédiés à l’IA générative poursuivent les calculs et préparent la réponse.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel6.png",
-                        "alt": "Les ordinateurs dédiés à l'IA générative poursuivent les calculs et préparent la réponse."
+                        "alt": "Les ordinateurs dédiés à l’IA générative poursuivent les calculs et préparent la réponse."
                       },
                       "license": {
                         "name": "",
@@ -700,28 +700,28 @@
                           "id": "1",
                           "content": "<p>La création de texte</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p> Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En fait non. </p><p> Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calcul.</strong></p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "<p>La création d‘image</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En fait non. </p><p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calcul.</strong></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>La création de vidéo</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>Ce sont les<strong> vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En effet !</p><p>Ce sont les<strong> vidéos </strong>qui demandent la<strong> plus grande puissance de calcul.</strong></p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
+                            "diagnosis": "<p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calcul.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
                           }
                         }
                       ],
@@ -899,7 +899,7 @@
                           "id": "1",
                           "content": "<p>utile</p>",
                           "feedback": {
-                            "diagnosis": "<p>Mauvais choix.</p><p>Pour connaître la météo, autant utiliser <strong>une application météo</strong> ou <strong>regarder sur Internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
+                            "diagnosis": "<p>Mauvais choix.</p><p>Pour connaître la météo, autant utiliser <strong>une application météo</strong> ou <strong>regarder sur internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
                           }
                         },
                         {
@@ -1151,30 +1151,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Me demander si une solution plus simple et moins consommatrice d'énergie peut répondre à mon besoin.</p>",
+                    "content": "<p>Me demander si une solution plus simple et moins consommatrice d’énergie peut répondre à mon besoin.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Excellent réflexe ! C’est une très bonne manière de réduire l’empreinte énergétique de vos usages. Et bonne nouvelle : les autres propositions sont aussi valables pour adopter une utilisation plus responsable.</p>"
+                      "diagnosis": "<p>Excellent réflexe ! C’est une très bonne manière de réduire l’empreinte énergétique de vos usages. Et bonne nouvelle&nbsp;: les autres propositions sont aussi valables pour adopter une utilisation plus responsable.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Limiter les demandes lourdes comme les images ou les vidéos quand ce n’est pas indispensable.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bon choix ! Limiter les requêtes lourdes est un geste efficace pour économiser de l’énergie. Et bien sûr, les autres propositions vont aussi dans le bon sens.</p>"
+                      "diagnosis": "<p>Très bon choix ! Limiter les requêtes lourdes est un geste efficace pour économiser de l’énergie. Et bien sûr, les autres propositions vont aussi dans le bon sens.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Regrouper mes requêtes et éviter les essais répétés inutiles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
+                      "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Avoir conscience que chaque requête mobilise des ordinateurs très puissants dans des centres de données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Parfait ! Prendre conscience de l’impact réel est un premier pas essentiel pour ajuster vos usages. Et vous avez raison : toutes les autres propositions contribuent également à un usage plus responsable.</p>"
+                      "diagnosis": "<p>Parfait ! Prendre conscience de l’impact réel est un premier pas essentiel pour ajuster vos usages. Et vous avez raison&nbsp;: toutes les autres propositions contribuent également à un usage plus responsable.</p>"
                     }
                   }
                 ]
