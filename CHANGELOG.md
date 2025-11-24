@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.264.0](https://github.com/1024pix/pix/compare/v5.263.0...v5.264.0) (2025-11-24)
+
+### :rocket: Amélioration
+
+- [#14235](https://github.com/1024pix/pix/pull/14235) : créa module CY_gestionMDP_IND 
+- [#14193](https://github.com/1024pix/pix/pull/14193) Ajouter la route GET /api/modules/v2/shortId (PIX-20384) 
+- [#14226](https://github.com/1024pix/pix/pull/14226) Créer une table de configuration des dates de réouverture en BDD (PIX-20403) 
+- [#14229](https://github.com/1024pix/pix/pull/14229) modif relecture eval 
+- [#14221](https://github.com/1024pix/pix/pull/14221) Modulix Biais ind - modif image graphique Biographie femmes wiki 
+- [#14232](https://github.com/1024pix/pix/pull/14232) NRDurabilite_IND retours team CYB 
+
+### :bug: Correction
+
+- [#14227](https://github.com/1024pix/pix/pull/14227) Les images plus petites que la largeur d'un module sont agrandies (PIX-20515) 
+- [#14233](https://github.com/1024pix/pix/pull/14233) Linter tous les fichiers de traduction de Pix App 
+
+### :building_construction: Tech
+
+- [#14182](https://github.com/1024pix/pix/pull/14182) :truck: Déplace la dernière route à propos de profils cible dans le cadre de configuration des certifications complémentaires (pix-20495) 
+- [#14216](https://github.com/1024pix/pix/pull/14216) Modifier le domaine des contenus des modules (PIX-20514). 
+- [#14208](https://github.com/1024pix/pix/pull/14208) Modifier le domaine des illustrations des cartes de formation sur Pix App (PIX-20461). 
+- [#14223](https://github.com/1024pix/pix/pull/14223) Renommage d'éléments relatifs aux référentiels de certification (PIX-20501) 
+- [#14211](https://github.com/1024pix/pix/pull/14211) Retourner le shortId dans l'api interne getModuleStatuses dans l'API (PIX-20386). 
+
+### :arrow_up: Montée de version
+
+- [#14234](https://github.com/1024pix/pix/pull/14234) Update dependency redis to v7.2.11
+
 # [5.263.0](https://github.com/1024pix/pix/compare/v5.262.0...v5.263.0) (2025-11-21)
 
 ### :rocket: Amélioration
