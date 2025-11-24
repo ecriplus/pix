@@ -625,6 +625,13 @@
             "placeholder": "Sélectionner une équipe en charge"
           }
         },
+        "country": {
+          "selector": {
+            "error-message": "Le pays est requis",
+            "label": "Pays",
+            "placeholder": "Sélectionner un pays"
+          }
+        },
         "name": {
           "label": "Nom"
         },

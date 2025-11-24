@@ -624,6 +624,13 @@
             "placeholder": "Choose an administration team"
           }
         },
+        "country": {
+          "selector": {
+            "error-message": "Country is required",
+            "label": "Country",
+            "placeholder": "Choose a country"
+          }
+        },
         "name": {
           "label": "Name"
         },
