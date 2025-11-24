@@ -30,6 +30,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           IS_MANAGING_STUDENTS: { active: false },
         },
         administrationTeamId: 456,
+        countryCode: 99100,
       });
       this.server.create('organization', { id: '1234' });
 

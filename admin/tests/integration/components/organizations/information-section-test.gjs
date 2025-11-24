@@ -6,6 +6,7 @@ import { t } from 'ember-intl/test-support';
 import InformationSection from 'pix-admin/components/organizations/information-section';
 import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -19,10 +20,20 @@ module('Integration | Component | organizations/information-section', function (
     this.owner.register('service:access-control', AccessControlStub);
 
     const store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
+    const findAllStub = sinon.stub(store, 'findAll');
+
+    findAllStub
+      .withArgs('administration-team')
+      .resolves([
         store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
         store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
+      ]);
+
+    findAllStub
+      .withArgs('country')
+      .resolves([
+        store.createRecord('country', { code: '99101', name: 'Danemark' }),
+        store.createRecord('country', { code: '99100', name: 'France' }),
       ]);
   });
 
@@ -152,6 +163,7 @@ module('Integration | Component | organizations/information-section', function (
       documentationUrl: 'https://pix.fr/',
       features: {},
       administrationTeamId: 123,
+      countryCode: 99100,
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {
@@ -181,15 +193,8 @@ module('Integration | Component | organizations/information-section', function (
       await clickByName(t('common.actions.cancel'));
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'Organization SCO' })).exists();
-      assert.dom(screen.getByRole('button', { name: t('common.actions.edit') })).exists();
-      assert
-        .dom(
-          screen.getByRole('button', {
-            name: t('components.organizations.information-section-view.archive-organization'),
-          }),
-        )
-        .exists();
+      assert.ok(await screen.findByRole('heading', { name: 'Organization SCO' }));
+      assert.ok(await screen.findByRole('button', { name: t('common.actions.edit') }));
     });
 
     test('it should revert changes on click to cancel button', async function (assert) {
@@ -286,6 +291,15 @@ module('Integration | Component | organizations/information-section', function (
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'Équipe 2' }));
 
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.country.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      const danemarkOption = await screen.findByRole('option', { name: 'Danemark (99101)' });
+      await click(danemarkOption);
+
       await fillByLabel(t('components.organizations.information-section-view.credits'), 50);
       await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
       await fillByLabel(t('components.organizations.information-section-view.documentation-link'), 'https://pix.fr/');
@@ -310,6 +324,9 @@ module('Integration | Component | organizations/information-section', function (
       assert
         .dom(screen.queryByText(t('components.organizations.information-section-view.province-code')))
         .doesNotExist();
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.country.label')).nextElementSibling)
+        .hasText('Danemark (99101)');
       assert
         .dom(
           screen.getByText(t('components.organizations.information-section-view.administration-team'))

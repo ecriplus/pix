@@ -25,6 +25,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @tracked showArchivingConfirmationModal = false;
   @tracked toggleLockPlaces = false;
   @tracked administrationTeams = [];
+  @tracked countries = [];
 
   noIdentityProviderOption = { label: this.intl.t('common.words.none'), value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
@@ -39,6 +40,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   async #onMount() {
     this._initForm();
     this.administrationTeams = await this.store.findAll('administration-team');
+    this.countries = await this.store.findAll('country');
   }
 
   get isManagingStudentAvailable() {
@@ -65,10 +67,23 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return options;
   }
 
+  get countriesOptions() {
+    const options = this.countries.map((country) => ({
+      value: country.code,
+      label: `${country.name} (${country.code})`,
+    }));
+
+    return options;
+  }
+
   get translatedAdministrationTeamIdErrorMessage() {
     return this.form.administrationTeamIdError.message
       ? this.intl.t(this.form.administrationTeamIdError.message)
       : null;
+  }
+
+  get translatedCountryCodeErrorMessage() {
+    return this.form.countryCodeError.message ? this.intl.t(this.form.countryCodeError.message) : null;
   }
 
   @action
@@ -79,6 +94,11 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @action
   onChangeAdministrationTeam(newAdministrationTeamId) {
     this.form.administrationTeamId = newAdministrationTeamId;
+  }
+
+  @action
+  onChangeCountry(newCountryCode) {
+    this.form.countryCode = newCountryCode;
   }
 
   @action
@@ -121,6 +141,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
       (team) => team.id === this.form.administrationTeamId,
     )?.name;
 
+    const countryName = this.countries.find((country) => country.code === this.form.countryCode)?.name;
+
     this.args.organization.set('name', this.form.name);
     this.args.organization.set('externalId', this.form.externalId);
     this.args.organization.set('provinceCode', this.form.provinceCode);
@@ -134,6 +156,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('features', this.form.features);
     this.args.organization.set('administrationTeamId', this.form.administrationTeamId);
     this.args.organization.set('administrationTeamName', administrationTeamName);
+    this.args.organization.set('countryCode', this.form.countryCode);
+    this.args.organization.set('countryName', countryName ?? null);
 
     this.closeAndResetForm();
     return this.args.onSubmit();
@@ -156,6 +180,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
       administrationTeamId: this.args.organization.administrationTeamId
         ? `${this.args.organization.administrationTeamId}`
         : null,
+      countryCode: this.args.organization.countryCode ? `${this.args.organization.countryCode}` : null,
     });
   }
 
@@ -213,6 +238,25 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @placeholder={{t "components.organizations.editing.administration-team.selector.placeholder"}}
           >
             <:label>{{t "components.organizations.editing.administration-team.selector.label"}}</:label>
+          </PixSelect>
+        </div>
+
+        <div class="form-field">
+          <PixSelect
+            required
+            @aria-required={{true}}
+            @requiredLabel={{t "common.forms.mandatory"}}
+            @errorMessage={{this.translatedCountryCodeErrorMessage}}
+            @validationStatus={{this.form.countryCodeError.status}}
+            @options={{this.countriesOptions}}
+            @value={{this.form.countryCode}}
+            @onChange={{this.onChangeCountry}}
+            @hideDefaultOption={{true}}
+            @isSearchable={{true}}
+            class="admin-form__select"
+            @placeholder={{t "components.organizations.editing.country.selector.placeholder"}}
+          >
+            <:label>{{t "components.organizations.editing.country.selector.label"}}</:label>
           </PixSelect>
         </div>
 
