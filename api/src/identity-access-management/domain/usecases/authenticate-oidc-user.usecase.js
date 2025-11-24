@@ -80,9 +80,6 @@ async function authenticateOidcUser({
       authenticationKey,
       userClaims,
       isAuthenticationComplete: false,
-      // TODO: The properties givenName and familyName are kept for backward compatibility with the Front. They will be removed soon.
-      givenName: userClaims.firstName,
-      familyName: userClaims.lastName,
     };
   }
 

@@ -157,8 +157,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             lastName: 'TITEGOUTTE',
             email: 'melu@example.net',
           },
-          givenName: 'Mélusine',
-          familyName: 'TITEGOUTTE',
           isAuthenticationComplete: false,
         });
       });
