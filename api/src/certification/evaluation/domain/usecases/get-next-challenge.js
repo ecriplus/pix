@@ -87,7 +87,7 @@ const getNextChallenge = async function ({
 
   const answeredChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
 
-  const challenges = [...new Set([...answeredChallenges, ...activeFlashCompatibleCalibratedChallenges])];
+  const challenges = deduplicate([...answeredChallenges, ...activeFlashCompatibleCalibratedChallenges]);
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -157,4 +157,18 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
 };
 
-export { getNextChallenge };
+const deduplicate = (challenges) => {
+  return Object.values(
+    challenges.reduce((acc, challenge) => {
+      const existing = acc[challenge.id];
+
+      if (!existing) {
+        acc[challenge.id] = challenge;
+      }
+
+      return acc;
+    }, {}),
+  );
+};
+
+export { deduplicate, getNextChallenge };

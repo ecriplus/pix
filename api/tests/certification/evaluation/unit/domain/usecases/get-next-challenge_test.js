@@ -1,4 +1,7 @@
-import { getNextChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
+import {
+  deduplicate,
+  getNextChallenge,
+} from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
@@ -178,11 +181,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         it('should only pick among challenges with no accessibilities issues', async function () {
           // given
           const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: 'recCHAL1',
             blindnessCompatibility: 'RAS',
             colorBlindnessCompatibility: 'OK',
           });
           const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
           const accessibleChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: 'recCHAL2',
             blindnessCompatibility: 'OK',
             colorBlindnessCompatibility: 'RAS',
           });
@@ -977,6 +982,29 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           version,
         });
       });
+    });
+  });
+
+  describe('#deduplicate', function () {
+    it('returns the deduplicated challenges by id', async function () {
+      // given
+      const challengeList = [
+        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
+        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL1' }),
+      ];
+
+      const expectedChallengeList = [
+        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
+      ];
+
+      // when
+      const deduplicatedChallenges = deduplicate(challengeList);
+
+      // then
+      expect(deduplicatedChallenges.length).to.equal(2);
+      expect(deduplicatedChallenges).to.have.deep.members(expectedChallengeList);
     });
   });
 });
