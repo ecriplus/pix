@@ -7,7 +7,7 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 export const updateScoBlockedAccessDate = withTransaction(
   /**
    * @param {Object} params
-   * @param {String} params.scoOrganizationTagName
+   * @param {ScoOrganisationTagName} params.scoOrganizationTagName
    * @param {Date} params.reopeningDate
    * @param {ScoBlockedAccessDatesRepository} params.ScoBlockedAccessDatesRepository
    */
