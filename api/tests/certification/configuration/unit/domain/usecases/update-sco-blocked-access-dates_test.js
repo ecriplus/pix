@@ -12,7 +12,7 @@ describe('Certification | Configuration | Unit | UseCase | update-sco-blocked-ac
     });
 
     ScoBlockedAccessDatesRepositoryStub = {
-      findScoBlockedAccessDateByKey: sinon.stub().resolves(scoBlockedAccessDate),
+      getScoBlockedAccessDateByKey: sinon.stub().resolves(scoBlockedAccessDate),
       updateScoBlockedAccessDate: sinon.stub().resolves(),
     };
   });
@@ -30,7 +30,7 @@ describe('Certification | Configuration | Unit | UseCase | update-sco-blocked-ac
     });
 
     // then
-    expect(ScoBlockedAccessDatesRepositoryStub.findScoBlockedAccessDateByKey).to.have.been.calledOnceWithExactly(
+    expect(ScoBlockedAccessDatesRepositoryStub.getScoBlockedAccessDateByKey).to.have.been.calledOnceWithExactly(
       scoOrganizationTagName,
     );
     expect(ScoBlockedAccessDatesRepositoryStub.updateScoBlockedAccessDate).to.have.been.calledOnceWithExactly(

@@ -11,20 +11,25 @@ export const getScoBlockedAccessDates = async () => {
     'scoOrganizationTagName',
     'reopeningDate',
   );
-  return data.map(_toDomain);
+  if (data.length > 0) {
+    return data.map(_toDomain);
+  } else {
+    throw new NotFoundError(`No ScoBlockedAccessDate found.`);
+  }
 };
 
 /**
  * @returns {Promise<ScoBlockedAccessDate>}
  * @throws {NotFoundError} if ScoBlockedAccessDate does not exist
  */
-export const findScoBlockedAccessDateByKey = async (scoOrganizationTagName) => {
+export const getScoBlockedAccessDateByKey = async (scoOrganizationTagName) => {
   const knexConn = DomainTransaction.getConnection();
   const data = await knexConn('certification_sco_blocked_access_dates')
     .select('scoOrganizationTagName', 'reopeningDate')
-    .where({ scoOrganizationTagName });
-  if (data.length > 0) {
-    return _toDomain(data[0]);
+    .where({ scoOrganizationTagName })
+    .first();
+  if (data) {
+    return _toDomain(data);
   } else {
     throw new NotFoundError(`ScoBlockedAccessDate ${scoOrganizationTagName} does not exist.`);
   }

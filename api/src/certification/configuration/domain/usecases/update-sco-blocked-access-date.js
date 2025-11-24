@@ -13,7 +13,7 @@ export const updateScoBlockedAccessDate = withTransaction(
    */
   async ({ scoOrganizationTagName, reopeningDate, ScoBlockedAccessDatesRepository }) => {
     const scoBlockedAccessDate =
-      await ScoBlockedAccessDatesRepository.findScoBlockedAccessDateByKey(scoOrganizationTagName);
+      await ScoBlockedAccessDatesRepository.getScoBlockedAccessDateByKey(scoOrganizationTagName);
     scoBlockedAccessDate.updateReopeningDate(reopeningDate);
     return ScoBlockedAccessDatesRepository.updateScoBlockedAccessDate(scoBlockedAccessDate);
   },
