@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
+import didInsert from '../../../modifiers/modifier-did-insert';
 import ModulixNavigationButton from './navigation-button';
 
 export default class ModulixNavigation extends Component {
@@ -52,12 +53,23 @@ export default class ModulixNavigation extends Component {
     return this.args.sections.indexOf(section) + 1;
   }
 
+  @action
+  setHTMLElementOffset(htmlElement) {
+    const bannerElement = document.getElementById('pix-layout-banner-container');
+    if (!bannerElement) return;
+    const distanceBetweenNavigationAndBanner = 8;
+    const top = bannerElement.getBoundingClientRect().height + distanceBetweenNavigationAndBanner;
+    htmlElement.style.setProperty('top', `${top}px `);
+  }
+
   <template>
     <PixNavigation
+      id="module-navigation"
       class="app-navigation module-navigation"
       @navigationAriaLabel={{t "navigation.nav-bar.aria-label"}}
       @openLabel={{t "navigation.nav-bar.open"}}
       @closeLabel={{t "navigation.nav-bar.close"}}
+      {{didInsert this.setHTMLElementOffset}}
     >
       <:brand>
         <img class="module-navigation__logo" src="/images/modulix-pix-logo.svg" alt={{t "navigation.homepage"}} />
