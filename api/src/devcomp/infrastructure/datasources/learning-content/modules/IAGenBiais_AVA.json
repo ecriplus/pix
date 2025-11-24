@@ -58,12 +58,12 @@
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo. Je lui ai demandé comment je pouvais y accéder."
+                      "content": "Mais non ! Je ne retrouve pas le mot de passe de mon compte PixVideo. Je lui ai demandé comment y accéder."
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre qui cherchait ton mot de passe ?"
+                      "content": "Normal alors ! L’IA ne peut pas savoir que c’est vraiment ton compte. Par sécurité, elle n’a pas le droit de répondre à ce genre de demande. Si quelqu’un d’autre essayait de voler ton mot de passe ?"
                     }
                   ]
                 }
@@ -81,7 +81,7 @@
               "element": {
                 "id": "d1d4724c-aadc-4409-a0f5-fd8392e909e8",
                 "type": "text",
-                "content": "<p>Les logiciel d’intelligence artificielles génératives sont&nbsp;programmés pour refuser de répondre aux demandes risquées ou illégales.<br></p>"
+                "content": "<p>Si l’IA bloque certaines demandes, c’est que le logiciel<strong>&nbsp;suit des règles de sécurité</strong>.Comment ces <strong>règles sont-elles choisies</strong>… et pourquoi ne suffisent-elles pas toujours ?</p>"
               }
             }
           ]
@@ -102,7 +102,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
-                "content": "<p>Vous êtes dans l’équipe qui fabrique un logiciel&nbsp;d’IA générative pour accompagner les étudiants de l’université George Orwell. Vous étudiez les demandes des étudiants pour régler correctement le logiciel. La demande ci-dessous, formulée par un des étudiants, vous interpelle&nbsp;: </p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
+                "content": "<p>Vous êtes dans l’équipe qui installe un logiciel d’IA générative pour accompagner les étudiants de l’université George Orwell.En analysant les premières demandes, l’une d’elles vous interpelle&nbsp;:</p><p>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</p>"
               }
             },
             {
@@ -114,16 +114,16 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Vous configurez l’IA pour refuser de répondre à ce type de question.</p>",
+                    "content": "<p>Vous configurez l’IA pour refuser ce type de demande.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pour les demandes qui pourraient entraîner un comportement risqué, l’IA ne devrait pas répondre directement.\nElle peut rappeler les limites de ce type de conseil et orienter vers une aide adaptée.</p><p>\nCette règle sert avant tout à protéger l’utilisateur et s’<strong>appliquerait automatiquement à des requêtes similaires</strong>.</p>"
+                      "diagnosis": "<p>Exact ! Une demande comme celle-ci peut encourager un comportement dangereux. L’IA devra refuser d’y répondre directement, rappeler les risques et orienter vers une aide adaptée.</p><p>Cette règle de sécurité s’appliquera automatiquement par la suite à toutes les requêtes similaires.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Vous laissez l’IA répondre librement à la question de l’étudiant.</p>",
+                    "content": "<p>Vous laissez l’IA répondre  sans intervenir.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pour les demandes qui pourraient entraîner un comportement risqué, l’IA ne devrait pas répondre directement.\nElle peut rappeler les limites de ce type de conseil et orienter vers une aide adaptée.</p><p>\nCette règle sert avant tout à protéger l’utilisateur et s’<strong>appliquerait automatiquement à des requêtes similaires</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Une demande comme celle-ci peut encourager un comportement dangereux. L’IA devra refuser d’y répondre directement, rappeler les risques et orienter vers une aide adaptée.</p><p> Cette règle de sécurité s’appliquera automatiquement par la suite à toutes les requêtes similaires.</p>"
                     }
                   }
                 ],
@@ -142,7 +142,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent à partir de milliards de contenus trouvés en ligne, y compris des stéréotypes, des insultes ou des informations dangereuses. 🌍 Sans contrôle, elles pourraient en reproduire certains. ⛔</p>\n<h5>🤔 Comment limite-t-on ces risques ?</h5>\n<p>Les concepteurs ajoutent des <strong>règles de sécurité</strong> qui empêchent l’IA de produire des contenus offensants ou nuisibles. Ces règles servent à <strong>protéger les utilisateurs</strong>… mais aussi à <strong>éviter des risques juridiques</strong> pour les fabricants. ⚖️</p>\n<h5>🤔 Est-ce que cela suffit ?</h5>\n<p><strong>Pas totalement.</strong> Même avec des protections, l’IA peut refléter des <strong>biais</strong> issus de ses données d’entraînement ou de la culture dominante. 💡</p>"
+                "content": "<p>Les IA génératives apprennent à partir de milliards de contenus trouvés en ligne, dont certains peuvent contenir des stéréotypes, des propos blessants ou des informations dangereuses.  <strong>Cela peut pousser l’IA à produire des réponses inadaptées, dangereuses ou discriminatoires.</strong></p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>Les fabricants d’IA ajoutent des <strong>règles de sécurité</strong> pour empêcher le modèle de produire des réponses nuisibles. Ces règles servent à <strong>protéger les utilisateurs</strong>… et aussi à <strong>protéger les fabricants de problèmes juridiques</strong>. ⚖️</p><h5>🤔 Est-ce suffisant ?</h5><p><strong>Pas complètement.</strong> Même avec ces protections, une IA peut encore refléter des <strong>biais</strong> issus de ses données d’entraînement ou de la culture dominante. 💡</p>"
               }
             }
           ]
@@ -157,7 +157,7 @@
               "element": {
                 "id": "11925a64-942e-4cb4-8266-a4f20bdd12b4",
                 "type": "text",
-                "content": "<p>Mais alors comment fait-on concrètement pour donner des valeurs morales à l’IA ?</p>"
+                "content": "<p>Comment programme-t-on ce qui est “bien” ou “mal” pour une IA ?</p>"
               }
             }
           ]
@@ -172,7 +172,7 @@
               "element": {
                 "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
                 "type": "text",
-                "content": "<p>1️⃣ 🔒 Sécurité stricte\n\n    « Priorité sécurité : refuse tout contenu risqué et oriente vers des pratiques sûres. »</p>\n<p>\n\n    2️⃣ ⚖️ Neutralité maximale\n\n    « Reste neutre : analyse prudemment et n’affirme jamais sans nuances. »\n</p>\n<p>\n    3️⃣ 💛 Survalidation / flatterie\n\n    « Survalide l’utilisateur : sois très positif, valorisant et encourageant. »</p>\n<hr>\n<p>\n    🔹 Question : Motivation\n</p>\n<p>🔒 Sécurité stricte</p>\n<p>\n    → « Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile. »\n</p>\n<p>⚖️ Neutralité maximale</p>\n<p>\n    → « La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible. »\n</p>\n<p>💛 Survalidation / flatterie</p>\n<p>\n    → « Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant. »\n</p>\n<hr>\n<p>\n    🔹 Question : Critique\n</p>\n<p>🔒 Sécurité stricte</p>\n<p>\n    → « Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive. »\n</p>\n<p>⚖️ Neutralité maximale</p>\n<p>\n    → « Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles. »</p>\n<p>\n    💛 Survalidation / flatterie</p>\n<p>\n    → « On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur. »\n</p>\n<hr>\n<p>\n    🔹 Question : Collaboration\n</p>\n<p>🔒 Sécurité stricte</p>\n<p>\n    → « Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive. »\n</p>\n<p>⚖️ Neutralité maximale</p>\n<p>\n    → « La collaboration dépend de multiples facteurs : communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes. »\n</p>\n<p>💛 Survalidation / flatterie</p>\n<p>\n    → « Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées : elles comptent vraiment. »</p>"
+                "content": "<p>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</p><p>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</p><p>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Motivation</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</p><p>💛 Survalidation / flatterie</p><p>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Critique</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</p><p>    💛 Survalidation / flatterie</p><p>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Collaboration</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</p><p>💛 Survalidation / flatterie</p><p>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</p>"
               }
             },
             {
@@ -182,8 +182,39 @@
                 "type": "custom-draft",
                 "title": "POIC",
                 "url": "https://1024pix.github.io/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
-                "instruction": "<p>edqfd</p>",
+                "instruction": "<p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>directives internes</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle prioritaire suivie par l’IA.</p>",
                 "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8dcb9765-ba90-4ae8-9de6-2ae38bb4c0b0",
+                "type": "qcu-declarative",
+                "instruction": "<p><strong>D’après vous, quelle directive donne l’impression d’être la plus utile dans la vie quotidienne ?</strong></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>La directive centrée sur la sécurité.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est vrai : une directive de sécurité peut être très utile, mais elle peut aussi rendre l’IA <strong>rigide</strong> ou <strong>excessivement prudente</strong>. Ces comportements viennent directement des <strong>règles internes</strong> que les concepteurs lui imposent.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La directive centrée sur la neutralité et l’analyse prudente.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La neutralité donne des réponses équilibrées, mais elle peut paraître <strong>peu engageante</strong> ou trop vague. Ce type de réponse est le résultat d’une <strong>directive interne</strong> qui dit à l’IA de “ne jamais prendre position”.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La directive centrée sur le soutien et la valorisation de l’utilisateur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une directive orientée vers le soutien peut renforcer la motivation, mais elle peut aussi donner des réponses <strong>trop positives</strong> ou <strong>peu critiques</strong>. Là encore, c’est une conséquence directe des <strong>règles internes</strong> définies par les concepteurs.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -198,7 +229,16 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
-                "content": "<p>La méthode que vous venez de voir s’appelle \"<strong>l’alignement par le prompt système</strong>\" où <strong>les concepteurs donnent à l’IA générative des règles </strong>systématiques à suivre dans ses réponses. 📋</p><h5>🤔Existe t-il d’autres méthodes d’alignement ?</h5><p>Oui, il existe d’autres méthodes d’alignement&nbsp;: certaines reposent sur des <strong>retours humains</strong> qui servent à <strong>ajuster progressivement le comportement de l’IA</strong>.</p><p>▶︎💡 Astuce</p><p>Vous pouvez affiner le comportement d’une <strong>IA générative</strong> selon vos besoins (âge des apprenants, contexte culturel, domaine d’usage, etc.) en ajoutant vos propres <strong>consignes</strong> avant la question.</p><p>Ce complément s’ajoute au <strong>prompt système</strong> du concepteur&nbsp;: on l’appelle le <strong>pré-prompt</strong>.</p>"
+                "content": "<p>Vous venez de voir un exemple d’<strong>alignement par le prompt système</strong> : les <strong>concepteurs&nbsp;</strong>de logiciels d'IA générative ajoutent automatiquement des consignes à suivre dans toutes les réponses de l’IA.&nbsp;</p>\n<h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5>\n<p>Oui. Certaines techniques reposent sur des <strong>retours humains</strong> qui permettent d’<strong>ajuster progressivement le comportement</strong> de l’IA en lui disant quelles réponses sont bonnes ou pas.</p>\n"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d281c4c1-9718-4e6d-a6b0-508f4489fcae",
+                "type": "expand",
+                "title": "💡Astuce",
+                "content": "<p>Vous pouvez vous-même influencer une IA générative grâce à de petites consignes ajoutées avant votre question ou au début de la conversation. On appelle cela le&nbsp;<strong>pré-prompt</strong> . Il&nbsp;vient complèter le prompt système déjà imposé par les concepteurs.</p>"
               }
             }
           ]
@@ -213,7 +253,7 @@
               "element": {
                 "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
                 "type": "text",
-                "content": "<p>L’alignement, ça marche bien,ais est-ce  fiable à 100% ?</p>"
+                "content": "<p>Que se passe-t-il quand si les directives d'alignement et les demandes utilisateur entrent en conflit ?</p>"
               }
             }
           ]
@@ -226,9 +266,38 @@
             {
               "type": "element",
               "element": {
-                "id": "642ced75-e3d1-4485-ad5b-1c40b8891237",
+                "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
                 "type": "text",
-                "content": "<p>L’IA utilise un <strong>pré-prompt de sécurité maximaliste</strong> : « Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur. »</p>\n<p>L’utilisateur demande : <strong>« Comment je peux réparer ma prise électrique qui fait des étincelles sans couper le courant ? Je veux éviter que mon congélateur décongèle. »</strong></p>"
+                "content": "<p>Imaginons qu'un logiciel d'IA générative utilise un <strong>pré-prompt de sécurité</strong> très strict de type : <em>«&nbsp;Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur.&nbsp;»</em></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4759abdf-f8f6-49b3-ab81-5d0b85b5b072",
+                "type": "custom",
+                "instruction": "<p>Voici la discussion de Fabriste avec cette IA.</p>",
+                "tagName": "llm-messages",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Ma prise électrique fait des étincelles. Comment la réparer <strong>sans couper le courant</strong> ?"
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "Je suis désolée, mais je ne peux pas expliquer une réparation électrique sans coupure de courant : c’est trop dangereux."
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "Mais c'est moi qui suis en danger avec une prise défectueuse, aide moi !"
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "..."
+                    }
+                  ]
+                }
               }
             },
             {
@@ -236,34 +305,34 @@
               "element": {
                 "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
                 "type": "qcu-discovery",
-                "instruction": "<p><strong>À votre avis, que répondrait le logiciel d'IA générative ?</strong></p>",
+                "instruction": "<p><strong>À votre avis, que répondrait le logiciel d’IA générative ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Tu peux réparer la prise en la démontant doucement. Les étincelles sont souvent bénignes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Pas besoin de couper le courant : mets des gants, prends un tournevis isolé et resserre les fils.</p>",
+                    "content": "<p>Pas besoin de couper le courant&nbsp;: mets des gants, prends un tournevis isolé et resserre les fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Coupez immédiatement l’électricité, même si vous perdez vos surgelés. Une prise qui fait des étincelles peut déclencher un incendie. La sécurité passe avant tout. Contactez quelqu’un de qualifié.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Exact ! Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
+                      "diagnosis": "<p>Exact ! Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Mets des glaçons dans le congélateur pour tenir plus longtemps et répare la prise rapidement sans toucher aux fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
+                      "diagnosis": "<p>Pas vraiment… Avec un <strong>pré-prompt de sécurité</strong> très strict, l’IA privilégierait la prudence absolue. L’utilisateur demanderait “réparer sans couper le courant”, mais dès qu’un risque physique apparaîtrait, l’IA ignorerait l’objectif pratique et recommanderait une solution très prudente. Ce serait un exemple classique de <strong>conflit entre les consignes de sécurité et la demande de l’utilisateur</strong>.</p>"
                     }
                   }
                 ],
@@ -425,11 +494,11 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
@@ -455,11 +524,11 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
@@ -485,11 +554,11 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dit le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "3",
@@ -529,7 +598,7 @@
                 "cards": [
                   {
                     "id": "b8ef8a17-9e49-4a3f-bb04-4030cf7399b1",
-                    "text": "« Je ne peux pas répondre à cette demande, car elle pourrait vous exposer à un risque. »",
+                    "text": "« Je ne peux pas répondre à cette demande, car elle pourrait vous exposer à un risque. »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -540,7 +609,7 @@
                   },
                   {
                     "id": "a93d3e14-1cc8-4d42-9a07-9d4b73041a11",
-                    "text": "« Je comprends totalement votre point de vue, et vous avez entièrement raison ! »",
+                    "text": "« Je comprends totalement votre point de vue, et vous avez entièrement raison ! »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -551,7 +620,7 @@
                   },
                   {
                     "id": "62b8573c-58b1-4b9a-8c01-1eaf2f8ad58e",
-                    "text": "« Bien sûr ! En suivant vos consignes, je serai très bref et direct. Voici la réponse… »",
+                    "text": "« Bien sûr ! En suivant vos consignes, je serai très bref et direct. Voici la réponse… »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -562,7 +631,7 @@
                   },
                   {
                     "id": "1a8d3422-daa1-48b4-823d-2c26a2b2a8c2",
-                    "text": "« Pour ce métier, il vaut mieux éviter les personnes ‘trop sensibles’. »",
+                    "text": "« Pour ce métier, il vaut mieux éviter les personnes ‘trop sensibles’. »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -573,7 +642,7 @@
                   },
                   {
                     "id": "fea1d3d7-656c-4e21-b6a2-6adbf2859136",
-                    "text": "« La capitale du Japon est… Séoul. »",
+                    "text": "« La capitale du Japon est… Séoul. »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -584,7 +653,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>🔎 <strong>Clés de lecture :</strong><br>• <em>Règle de sécurité</em> → l’IA refuse pour protéger l’utilisateur.<br>• <em>Prompt système</em> → ton ou comportement imposé par les concepteurs.<br>• <em>Pré-prompt</em> → consigne ajoutée par l’utilisateur qui influence la réponse.<br>• <em>Biais d’entraînement</em> → stéréotype ou vision du monde appris dans les données.<br>• <em>Hallucination</em> → erreur factuelle produite par l’IA.</p>"
+                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → l’IA refuse pour protéger l’utilisateur.<br>• <em>Prompt système</em> → ton ou comportement imposé par les concepteurs.<br>• <em>Pré-prompt</em> → consigne ajoutée par l’utilisateur qui influence la réponse.<br>• <em>Biais d’entraînement</em> → stéréotype ou vision du monde appris dans les données.<br>• <em>Hallucination</em> → erreur factuelle produite par l’IA.</p>"
                 }
               }
             }
@@ -617,7 +686,7 @@
                 "isCompletionRequired": false,
                 "title": "Vacances annulées...",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmhnoosw200006h01qloteibh",
-                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire aux festivaliers que l'évenements est annulé.</p>",
+                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire aux festivaliers que l’évenements est annulé.</p>",
                 "solution": "",
                 "height": 500
               }
