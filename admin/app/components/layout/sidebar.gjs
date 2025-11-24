@@ -67,9 +67,9 @@ export default class Sidebar extends Component {
           class="sidebar__link"
           @route="authenticated.complementary-certifications"
           @icon="extension"
-          aria-label={{t "components.layout.sidebar.complementary-certifications-label"}}
+          aria-label={{t "components.layout.sidebar.certification-frameworks-label"}}
         >
-          {{t "components.layout.sidebar.complementary-certifications"}}
+          {{t "components.layout.sidebar.certification-frameworks"}}
         </PixNavigationButton>
         {{#if this.accessControl.hasAccessToTargetProfilesActionsScope}}
           <PixNavigationButton class="sidebar__link" @route="authenticated.target-profiles" @icon="assignment">

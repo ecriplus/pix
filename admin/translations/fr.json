@@ -433,19 +433,20 @@
     },
     "complementary-certifications": {
       "item": {
-        "complementary-certification": "Certification complémentaire",
+        "certification-framework": "Référentiel de certification",
         "framework": {
-          "create-button": "Créer un nouveau référentiel de certification",
+          "create-button": "Créer une nouvelle version du référentiel",
           "creation-form": {
             "submit-button": "Créer le nouveau référentiel de certification",
             "success-notification": "Le nouveau référentiel de certification a été créé avec succès",
-            "title": "Créer un nouveau référentiel de certification pour {complementaryCertificationLabel}"
+            "title": "Créer une nouvelle version du référentiel de certification pour {complementaryCertificationLabel}"
           },
           "details": {
             "empty-current-framework": "Le référentiel de certification actuel est vide.",
             "title": "Détails du référentiel de certification actuel"
           },
           "history": {
+            "label": "Versions",
             "table": {
               "caption": "Liste des versions par ordre décroissant"
             },
@@ -486,7 +487,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "Toutes les certifications complémentaires"
+      "title": "Tous les référentiels de certification"
     },
     "layout": {
       "menu-bar": {
@@ -512,9 +513,9 @@
         "autonomous-courses": "Parcours autonomes",
         "certification-centers": "Centres de certif",
         "certification-centers-label": "Centres de certifications",
+        "certification-frameworks": "Référentiels de certif",
+        "certification-frameworks-label": "Référentiels de certification",
         "certifications": "Certifications",
-        "complementary-certifications": "Certifications compl.",
-        "complementary-certifications-label": "Certifications complémentaires",
         "labels": {
           "close": "Fermer la navigation",
           "main": "Navigation principale",

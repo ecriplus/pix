@@ -433,18 +433,19 @@
     },
     "complementary-certifications": {
       "item": {
-        "complementary-certification": "Complementary certification",
+        "certification-framework": "Complementary certification",
         "framework": {
-          "create-button": "Create a new certification framework",
+          "create-button": "Create a new version of the certification framework",
           "creation-form": {
             "submit-button": "Submit the new certification framework",
             "success-notification": "The new certification framework has been successfully created.",
-            "title": "Creating a new certification framework for {complementaryCertificationLabel}"
+            "title": "Creating a new version of the certification framework for {complementaryCertificationLabel}"
           },
           "details": {
             "title": "Current certification framework details"
           },
           "history": {
+            "label": "Versions",
             "table": {
               "caption": "Versions list in descending order"
             },
@@ -485,7 +486,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "All complementary certifications"
+      "title": "All certification frameworks"
     },
     "layout": {
       "menu-bar": {
@@ -511,9 +512,9 @@
         "autonomous-courses": "Autonomous courses",
         "certification-centers": "Certif centers",
         "certification-centers-label": "Certifications centers",
+        "certification-frameworks": "Certif frameworks",
+        "certification-frameworks-label": "Certification frameworks",
         "certifications": "Certifications",
-        "complementary-certifications": "Compl. certifications",
-        "complementary-certifications-label": "Complementary certifications",
         "labels": {
           "close": "Close navigation",
           "main": "Main navigation",

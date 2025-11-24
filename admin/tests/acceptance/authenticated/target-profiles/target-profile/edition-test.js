@@ -39,7 +39,7 @@ module('Acceptance | Target Profile Edition', function (hooks) {
   test('it should edit target profile informations and selected tubes', async function (assert) {
     await fillByLabel(/Nom interne/, 'Un nouveau nom interne');
 
-    await fillByLabel(/Référentiel/, 'Pi');
+    await fillByLabel(/Référentiels :/, 'Pi');
     await click(screen.getByLabelText('Pix + Cuisine'));
     await clickByName('area_f2_a1 code · area_f2_a1 title');
     await clickByName('competence_f2_a1_c1 index competence_f2_a1_c1 name');

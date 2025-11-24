@@ -32,15 +32,15 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
       assert.strictEqual(currentURL(), '/complementary-certifications/list');
     });
 
-    test('it should set complementary certifications menubar item active', async function (assert) {
+    test('it should set certification frameworks menubar item active', async function (assert) {
       // when
       const screen = await visit('/complementary-certifications/list');
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Certifications complémentaires' })).hasClass('active');
+      assert.dom(screen.getByRole('link', { name: 'Référentiels de certification' })).hasClass('active');
     });
 
-    test('it should render the complementary certifications list', async function (assert) {
+    test('it should render the certification frameworks list', async function (assert) {
       // given
       server.create('complementary-certification', { id: 1, key: 'AN', label: 'TOINE' });
 
@@ -55,7 +55,7 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
       assert.dom(screen.getByText('TOINE')).exists({ count: 1 });
     });
 
-    test('it should redirect to complementary certification framework details on click if not double certification', async function (assert) {
+    test('it should redirect to certification framework details on click if not double certification', async function (assert) {
       // given
       server.create('complementary-certification', {
         id: 1,
