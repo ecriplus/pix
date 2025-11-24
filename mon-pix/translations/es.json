@@ -35,15 +35,12 @@
     "description": "Pix es una plataforma en línea para evaluar y certificar las competencias digitales de ciudadanos (alumnos/as, estudiantes, jóvenes que dejan la escuela, demandantes de empleo, personas mayores)"
   },
   "common": {
-    "display": {
-      "percentage": "{value, number, ::percent}"
-    },
     "actions": {
       "back": "Volver",
       "cancel": "Cancelar",
       "close": "Cerrar",
-      "continue": "Continuar",
       "confirm": "Confirmar",
+      "continue": "Continuar",
       "download": "Descargar",
       "lets-go": "¡Empecemos!",
       "login": "Iniciar sesión",
@@ -98,6 +95,9 @@
       "title": "Nuestra política de privacidad ha cambiado. Te invitamos a consultarla: ",
       "url-label": "Política de protección de datos."
     },
+    "display": {
+      "percentage": "{value, number, ::percent}"
+    },
     "error": "Se ha producido un error. Vuelve a intentarlo o ponte en contacto con el servicio de asistencia.",
     "form": {
       "error": "error",
@@ -116,7 +116,6 @@
       "nl": "Holandés"
     },
     "level": "nivel",
-    "no-level": "No nivel",
     "loading": {
       "default": "Cargando",
       "results": "Preparación de tus resultados",
@@ -125,6 +124,7 @@
     "new-information-banner": {
       "close-label": "Cerrar el banner"
     },
+    "no-level": "No nivel",
     "or": "o",
     "pagination": {
       "action": {
@@ -163,6 +163,17 @@
       }
     },
     "authentication": {
+      "authentication-identity-providers": {
+        "login": {
+          "heading": "Otros medios de conexión",
+          "login-with-featured-identity-provider-link": "Conectar con {featuredIdentityProvider}"
+        },
+        "select-another-organization-link": "Elegir otra organización",
+        "signup": {
+          "heading": "Otros medios de registro",
+          "signup-with-featured-identity-provider-link": "Regístrese en {featuredIdentityProvider}"
+        }
+      },
       "login-form": {
         "fields": {
           "login": {
@@ -182,17 +193,6 @@
         "label": "Buscar una organización",
         "placeholder": "Seleccione una organización",
         "searchLabel": "Búsqueda por palabras clave"
-      },
-      "authentication-identity-providers": {
-        "login": {
-          "heading": "Otros medios de conexión",
-          "login-with-featured-identity-provider-link": "Conectar con {featuredIdentityProvider}"
-        },
-        "select-another-organization-link": "Elegir otra organización",
-        "signup": {
-          "heading": "Otros medios de registro",
-          "signup-with-featured-identity-provider-link": "Regístrese en {featuredIdentityProvider}"
-        }
       },
       "password-reset-demand-form": {
         "actions": {
@@ -377,21 +377,17 @@
     },
     "pix": "Pix",
     "showcase-homepage": "Página de inicio de Pix.{ tld }",
-    "user-logged-menu": {
-      "details": "Consultar mis datos"
-    },
     "user": {
       "account": "Mi cuenta",
       "certifications": "Mis certificaciones",
       "sign-out": "Desconectarse",
       "tests": "Mis tests"
+    },
+    "user-logged-menu": {
+      "details": "Consultar mis datos"
     }
   },
   "pages": {
-    "attestations": {
-      "title": "Mis títulos",
-      "subtitle": "Acceda a todos sus certificados Pix y descárguelos."
-    },
     "account-recovery": {
       "errors": {
         "account-exists": "Ya existe una cuenta con esta dirección de correo electrónico.",
@@ -543,6 +539,10 @@
       },
       "title": "Fin de la prueba"
     },
+    "attestations": {
+      "subtitle": "Acceda a todos sus certificados Pix y descárguelos.",
+      "title": "Mis títulos"
+    },
     "authentication": {
       "login": {
         "signup-button": "Regístrate"
@@ -572,6 +572,15 @@
           "legal-informations": "Con o sin cuenta Pix, la información relativa a tu progreso en el test nos llegará a nosotros.'<br>'Esta información la utiliza Pix para mejorar el servicio.",
           "title": "Empieza el test:"
         }
+      }
+    },
+    "campaign": {
+      "errors": {
+        "existing-participation": "El test no está accesible para ti.",
+        "existing-participation-info": "Ponte en contacto con tu profesor para que retire tu participación en Pix Orga.",
+        "existing-participation-user-info": "Hay una participación asociada a nombre de {lastName} {firstName}",
+        "no-longer-accessible": "Uy, la página solicitada ya no está disponible.",
+        "not-accessible": "Uy, la página solicitada no está disponible."
       }
     },
     "campaign-landing": {
@@ -607,6 +616,9 @@
       "warning-message": "¿No eres { firstName } { lastName }?",
       "warning-message-logout": "Desconectarse"
     },
+    "campaign-participation": {
+      "title": "Test"
+    },
     "campaign-participation-overview": {
       "card": {
         "finished-at": "Finalizado el {date}",
@@ -632,34 +644,14 @@
       },
       "title": "Test"
     },
-    "campaign-participation": {
-      "title": "Test"
-    },
-    "campaign": {
-      "errors": {
-        "existing-participation": "El test no está accesible para ti.",
-        "existing-participation-info": "Ponte en contacto con tu profesor para que retire tu participación en Pix Orga.",
-        "existing-participation-user-info": "Hay una participación asociada a nombre de {lastName} {firstName}",
-        "no-longer-accessible": "Uy, la página solicitada ya no está disponible.",
-        "not-accessible": "Uy, la página solicitada no está disponible."
-      }
-    },
     "certificate": {
-      "congratulations": "¡Felicidades!",
-      "global": {
-        "explanation": {
-          "default": "You've reached {globalLevelLabel} level of Pix Certification!",
-          "pre-beginner-level": "You have completed your Pix Certification test, but your results do not allow you to obtain the first level."
-        },
-        "progressbar-explanation": "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )",
-        "labels": {
-          "advanced": "Advanced",
-          "beginner": "Beginner",
-          "expert": "Expert",
-          "independent": "Independent",
-          "level": "Your level"
-        }
-      },
+      "attestation": "Descargar mi certificado",
+      "back-link": "Volver a mis certificaciones",
+      "candidate": "Candidato :",
+      "candidate-birth": "Nacido/a el {birthdate}",
+      "candidate-birth-complete": "Nacido/a el {birthdate} en {birthplace}",
+      "certification-center": "Centro de certificación :",
+      "certification-date": "Fecha de examen :",
       "certification-value": {
         "paragraphs": {
           "1": "Officially recognised, Pix Certification attests to your mastery of digital skills. You'll be joining a community of millions of certified users. Congratulations on this important step in your career!",
@@ -667,48 +659,56 @@
           "3": "On the day of your certification, it was possible to reach level 7 and a maximum of 895 pix (Expert 1 level)."
         }
       },
-      "attestation": "Descargar mi certificado",
-      "back-link": "Volver a mis certificaciones",
-      "candidate-birth": "Nacido/a el {birthdate}",
-      "candidate-birth-complete": "Nacido/a el {birthdate} en {birthplace}",
-      "certification-center": "Centro de certificación :",
+      "competences": {
+        "information": "Tu puntuación certificada se ha calculado a partir de tus respuestas durante el proceso de certificación. Por lo tanto, puede diferir del número de Pix que aparece en tu perfil. El día de tu certificación, era posible alcanzar el nivel {maxReachableLevelOnCertificationDate} de competencias y {maxReachablePixCountOnCertificationDate} pix como máximo."
+      },
+      "complementary": {
+        "alternative": "Certificación complementaria",
+        "clea": "Certificación CléA Numérique by Pix",
+        "title": "No hay ninguna certificación obtenida"
+      },
+      "congratulations": "¡Felicidades!",
       "delivered-at": "Fecha de emisión :",
-      "subtitle": "(niveles de {maxReachableLevel})",
       "details": {
         "competences": {
           "description": "Tu puntuación Pix da una estimación de tu nivel en las 16 competencias digitales.",
           "title": "Su perfil de competencias digitales"
         }
       },
-      "certification-date": "Fecha de examen :",
-      "candidate": "Candidato :",
-      "competences": {
-        "information": "Tu puntuación certificada se ha calculado a partir de tus respuestas durante el proceso de certificación. Por lo tanto, puede diferir del número de Pix que aparece en tu perfil. El día de tu certificación, era posible alcanzar el nivel {maxReachableLevelOnCertificationDate} de competencias y {maxReachablePixCountOnCertificationDate} pix como máximo."
-      },
-      "complementary": {
-        "alternative": "Certificación complementaria",
-        "title": "No hay ninguna certificación obtenida",
-        "clea": "Certificación CléA Numérique by Pix"
-      },
       "exam-date": "Fecha de presentación:",
+      "global": {
+        "explanation": {
+          "default": "You've reached {globalLevelLabel} level of Pix Certification!",
+          "pre-beginner-level": "You have completed your Pix Certification test, but your results do not allow you to obtain the first level."
+        },
+        "labels": {
+          "advanced": "Advanced",
+          "beginner": "Beginner",
+          "expert": "Expert",
+          "independent": "Independent",
+          "level": "Your level"
+        },
+        "progressbar-explanation": "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )"
+      },
       "hexagon-score": {
         "certified": "certificados"
       },
       "issued-on": "Entregado el",
       "jury-info": "Las observaciones del tribunal no se comparten en la página de comprobación de tu certificado.",
       "jury-title": "Observaciones del tribunal",
+      "learn-about-certification-results": "¿Cómo interpretar los resultados?",
       "professionalizing-warning": "El certificado Pix está reconocido como cualificación profesional por France Compétences una vez alcanzada una puntuación mínima de 120 pix.",
+      "subtitle": "(niveles de {maxReachableLevel})",
       "title": "Certificado Pix",
       "verification-code": {
-        "share": "Share your certificate",
-        "information": "Your unique verification code",
         "alt": "Copiar",
         "copied": "¡Código copiado!",
         "copy": "Copiar el código",
+        "information": "Your unique verification code",
+        "share": "Share your certificate",
         "title": "Código de comprobación",
         "tooltip": "Facilita este código para que un tercero pueda comprobar la autenticidad de tu certificado"
-      },
-      "learn-about-certification-results": "¿Cómo interpretar los resultados?"
+      }
     },
     "certification-ender": {
       "candidate": {
@@ -829,22 +829,19 @@
         },
         "language-not-supported": "La certificación Pix aún no está disponible en {userLanguage}. '<br>' Los idiomas disponibles actualmente para la certificación son: {availableLanguages}. '<br>' Puedes elegir otro idioma en la página",
         "language-not-supported-link": "Mi cuenta",
+        "missing-center-habilitation": "No puede unirse a la sesión. El centro de certificación no está autorizado para realizar esta certificación.",
         "session-not-accessible": "La sesión a la que intentas unirte ya no está disponible.",
         "wrong-account": "La información introducida corresponde a un candidato inscrito en la sesión y que ya está conectado con otra cuenta. Comprueba que te has conectado con la cuenta que inició la certificación.",
         "wrong-account-sco": "Actualmente estás utilizando una cuenta que no está vinculada a tu centro. Conéctate a la cuenta con la que completaste tus tests o pide ayuda al supervisor.",
         "wrong-account-sco-link": {
           "label": "¿Cómo encuentro la cuenta vinculada al establecimiento?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
-        },
-        "missing-center-habilitation": "No puede unirse a la sesión. El centro de certificación no está autorizado para realizar esta certificación."
+        }
       },
       "first-title": "Unirse a una sesión",
       "form": {
         "actions": {
           "submit": "Continuar"
-        },
-        "fields-validation": {
-          "session-number-error": "El número de sesión se compone únicamente de dígitos."
         },
         "fields": {
           "birth-date": "Fecha de nacimiento",
@@ -855,6 +852,9 @@
           "first-name": "Nombre",
           "session-number": "Número de sesión",
           "session-number-information": "Comunicado únicamente por el supervisor al inicio de la sesión"
+        },
+        "fields-validation": {
+          "session-number-error": "El número de sesión se compone únicamente de dígitos."
         },
         "placeholders": {
           "birth-day": "DD",
@@ -917,25 +917,25 @@
       "title": "Unirse a una sesión de certificación"
     },
     "certifications-list": {
-      "comment": "Comentario:",
-      "description": "Acceda a todas sus certificaciones Pix. Consulta los detalles y descarga tus certificados.",
-      "no-certification": {
-        "text": "Aún no tienes Pix certificación"
-      },
       "buttons": {
         "details": "Ver detalles",
-        "download-certificate": "Descargar certificado",
-        "download-attestation": "Descargar certificado"
+        "download-attestation": "Descargar certificado",
+        "download-certificate": "Descargar certificado"
       },
-      "statuses": {
-        "cancelled": "Cancelado",
-        "rejected": "No obtenido",
-        "not-published": "Resultados pendientes",
-        "validated": "Obtenido"
-      },
+      "comment": "Comentario:",
+      "description": "Acceda a todas sus certificaciones Pix. Consulta los detalles y descarga tus certificados.",
       "information": {
         "certification-center": "Centro de certificación :",
         "date": "Fecha del examen :"
+      },
+      "no-certification": {
+        "text": "Aún no tienes Pix certificación"
+      },
+      "statuses": {
+        "cancelled": "Cancelado",
+        "not-published": "Resultados pendientes",
+        "rejected": "No obtenido",
+        "validated": "Obtenido"
       },
       "title": "Mis certificaciones"
     },
@@ -959,15 +959,6 @@
         },
         "title": "Certificación {certificationNumber}"
       },
-      "embed-simulator": {
-        "actions": {
-          "launch": "Empezar",
-          "launch-label": "Empezar simulación",
-          "reset": "Restablecer",
-          "reset-label": "Reiniciar simulación"
-        },
-        "placeholder": "Cargando la aplicación"
-      },
       "certification-feedback-panel": {
         "actions": {
           "no-send-feedback": "No, vuelvo a la prueba",
@@ -976,6 +967,15 @@
         },
         "description": "¿Estás seguro/a de que quieres informar de un problema?",
         "information": "Al informar de un problema, tu certificación se pausa hasta que el supervisor intervenga para validar o invalidar tu informe."
+      },
+      "embed-simulator": {
+        "actions": {
+          "launch": "Empezar",
+          "launch-label": "Empezar simulación",
+          "reset": "Restablecer",
+          "reset-label": "Reiniciar simulación"
+        },
+        "placeholder": "Cargando la aplicación"
       },
       "feedback-panel": {
         "actions": {
@@ -991,12 +991,12 @@
             "category-selection": {
               "label": "Tengo un problema con",
               "options": {
-                "other": "Otro",
                 "accessibility": "La accesibilidad a la prueba",
                 "answer": "La respuesta",
                 "download": "El archivo que se debe descargar",
                 "embed": "El simulador/la aplicación",
                 "link": "El enlace indicado en la pregunta",
+                "other": "Otro",
                 "picture": "La imagen",
                 "question": "La pregunta",
                 "tutorial": "El tutorial"
@@ -1011,7 +1011,6 @@
                 "answer-not-accepted": "Mi respuesta es correcta, pero no ha sido validada",
                 "answer-not-agreed": "No estoy de acuerdo con la respuesta",
                 "download": {
-                  "other": "Tengo otro problema con el archivo",
                   "edit-failure": {
                     "label": "No puedo modificar el archivo",
                     "solution": "Es probable que el archivo esté abierto en «Sólo lectura» o «Modo protegido». '<br>'Haz clic en «Activar modificación» o «Editar documento» en el banner de la parte superior del archivo si aparece. '<br>'Si no es así, guarda el archivo con otro nombre y abre este nuevo archivo."
@@ -1023,7 +1022,8 @@
                   "open-failure": {
                     "label": "No puedo abrir el archivo en un ordenador",
                     "solution": "Si no puedes abrir un archivo, consulta la '<a href=\"https://pix.org/en/help-how-to-open-modify-find-a-downloaded-file-in-a-pix-question\">' documentación de ayuda'</a>' situada bajo el botón de descarga. Allí encontrarás programas o herramientas en línea recomendadas."
-                  }
+                  },
+                  "other": "Tengo otro problema con el archivo"
                 },
                 "embed-displayed-on-desktop-with-problems": {
                   "label": "En un ordenador, aparece el simulador, pero tiene un problema",
@@ -1199,38 +1199,38 @@
       }
     },
     "combined-courses": {
-      "process-custom-passages": {
-        "title": "Cálculo de los siguientes pasos en tu curso actual",
-        "description": "Analizamos tus resultados y creamos tu plan de formación personalizado",
-        "list": {
-          "results-analysis": "Análisis de tus resultados",
-          "select-passages": "Selección de cursos de formación adecuados.",
-          "generate-personalise-course": "Generación de tu curso personalizado."
-        }
-      },
-      "content": {
-        "start-button": "Iniciar el curso",
-        "resume-course": "Reanudar mi curso",
-        "step": "Paso {stepNumber}"
-      },
       "completed": {
-        "title": "¡Enhorabuena! ¡Ya ha terminado!",
         "description": "¡Bien hecho! Ha dado un paso importante para navegar por el mundo digital.",
+        "retry-text": "¿Quieres repasar? ¡Puedes volver a reproducir todos los módulos libremente!",
         "survey-button": "Responder a la encuesta de satisfacción",
         "survey-button-description": "Responda al cuestionario para dar su opinión sobre el recorrido.",
-        "retry-text": "¿Quieres repasar? ¡Puedes volver a reproducir todos los módulos libremente!"
+        "title": "¡Enhorabuena! ¡Ya ha terminado!"
+      },
+      "content": {
+        "resume-course": "Reanudar mi curso",
+        "start-button": "Iniciar el curso",
+        "step": "Paso {stepNumber}"
       },
       "items": {
-        "formation": {
-          "title": "Programa personalizado de módulos",
-          "description": "¡Completa tu diagnóstico para desbloquear un programa de módulos adaptado a tu resultado!"
-        },
         "aria-label-completed-campaign": "Este elemento se completa con una tasa de éxito del {value, number, ::percent}",
         "aria-label-completed-campaign-with-stages": "Ha obtenido {acquired, plural, =0 {no estrella} =1 {# estrella} other {# estrellas}} de {total}",
+        "aria-label-duration": "Duración estimada: {duration} minutos.",
         "completed": "¡Completado!",
-        "tagText": "¡Ya estás ahí!",
         "duration": "≈ {duration} min.",
-        "aria-label-duration": "Duración estimada: {duration} minutos."
+        "formation": {
+          "description": "¡Completa tu diagnóstico para desbloquear un programa de módulos adaptado a tu resultado!",
+          "title": "Programa personalizado de módulos"
+        },
+        "tagText": "¡Ya estás ahí!"
+      },
+      "process-custom-passages": {
+        "description": "Analizamos tus resultados y creamos tu plan de formación personalizado",
+        "list": {
+          "generate-personalise-course": "Generación de tu curso personalizado.",
+          "results-analysis": "Análisis de tus resultados",
+          "select-passages": "Selección de cursos de formación adecuados."
+        },
+        "title": "Cálculo de los siguientes pasos en tu curso actual"
       }
     },
     "comparison-window": {
@@ -1551,126 +1551,7 @@
       "iframe-title": "ChatPix",
       "title": "Previsualización ChatPix"
     },
-    "oidc-signup-or-login": {
-      "error": {
-        "account-conflict": "Esta cuenta ya está asociada a esta organización. Conéctate con otra cuenta o ponte en contacto con el servicio de asistencia.",
-        "data-sharing-refused": "Te informamos de que la transmisión de tus datos, especificados en la página anterior, es imprescindible para poder acceder y utilizar el servicio.",
-        "error-message": "Debes aceptar las condiciones de uso de Pix.",
-        "expired-authentication-key": "Tu solicitud de autenticación ha caducado.",
-        "invalid-email": "Tu dirección de correo electrónico no es válida.",
-        "login-unauthorized-error": "La dirección de correo electrónico y/o la contraseña introducidas son incorrectas.",
-        "password-reset-token-invalid-or-expired": "Ha pasado demasiado tiempo para validar su nueva contraseña. Vuelva a la página de inicio de sesión para volver a introducir su nombre de usuario y contraseña temporal."
-      },
-      "login-form": {
-        "button": "Iniciar sesión",
-        "description": "Conéctate para vincular tu cuenta existente y recuperar tus competencias evaluadas anteriormente.",
-        "email": "Dirección de correo electrónico",
-        "password": "Contraseña",
-        "title": "Ya tengo una cuenta Pix"
-      },
-      "signup-form": {
-        "button": "Creo una cuenta",
-        "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
-        "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
-        "last-name-label-and-value": "Apellidos: {lastName}",
-        "first-name-label-and-value": "Nombre: {firstName}",
-        "title": "No tengo una cuenta Pix"
-      },
-      "title": "Crea una cuenta Pix"
-    },
-    "sco-signup-or-login": {
-      "invitation": "{ organizationName } te invita a unirte a Pix",
-      "login-form": {
-        "button": "Conectarse",
-        "fields": {
-          "login": {
-            "label": "Dirección de correo electrónico o nombre de usuario"
-          },
-          "password": {
-            "label": "Contraseña"
-          }
-        },
-        "forgotten-password": {
-          "email": "Una dirección de correo electrónico:",
-          "instruction": "¿Olvidaste tu contraseña? Tienes una cuenta Pix con:",
-          "other-identity": "Un nombre de usuario: ponte en contacto con tu profesor para restablecerlo",
-          "reset-link": "Haz clic aquí para restablecerlo"
-        },
-        "title": "Ya tengo una cuenta Pix",
-        "unexpected-user-account-error": "La dirección de correo electrónico o el nombre de usuario es incorrecto. Para continuar, debes conectarte a tu cuenta, que tiene la forma: "
-      },
-      "signup-form": {
-        "button": "Inscribirse",
-        "button-form": "Crear cuenta",
-        "fields": {
-          "birthdate": {
-            "day": {
-              "error": "Tu día de nacimiento no es válido.",
-              "label": "Día de nacimiento",
-              "placeholder": "DD"
-            },
-            "label": "Fecha de nacimiento (DD/MM/AAAA)",
-            "month": {
-              "error": "Tu mes de nacimiento no es válido.",
-              "label": "Mes de nacimiento",
-              "placeholder": "MM"
-            },
-            "year": {
-              "error": "Tu año de nacimiento no es válido.",
-              "label": "Año de nacimiento",
-              "placeholder": "AAAA"
-            }
-          },
-          "cgu": "Acepto las '<a href=\"https://pix.fr/conditions-generales-d-utilisation\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\">'condiciones de uso de Pix'</a>'",
-          "email": {
-            "error": "Tu correo electrónico no es válido.",
-            "help": "(ej. nombre@ejemplo.fr)",
-            "label": "Dirección de correo electrónico"
-          },
-          "firstname": {
-            "error": "No has indicado tu nombre.",
-            "label": "Nombre"
-          },
-          "lastname": {
-            "error": "No has indicado tus apellidos.",
-            "label": "Apellidos"
-          },
-          "password": {
-            "error": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito.",
-            "help": "(mínimo 8 caracteres, incluyendo una mayúscula, una minúscula y un dígito)",
-            "label": "Contraseña",
-            "show-button": "mostrar la contraseña"
-          },
-          "username": {
-            "label": "Mi nombre de usuario"
-          }
-        },
-        "not-me": "No soy yo",
-        "options": {
-          "email": "Mi dirección de correo electrónico",
-          "text": "Me inscribo con:",
-          "username": "Mi nombre de usuario"
-        },
-        "rgpd-legal-notice": "Para saber cómo se tratan tus datos y cuáles son tus derechos, puedes leer el",
-        "rgpd-legal-notice-link": "aviso legal.",
-        "rgpd-legal-notice-url": "https://cloud.pix.fr/s/nqgBodTkbtsGb39",
-        "title": "Crear cuenta"
-      },
-      "title": "Conectarse a Pix"
-    },
     "modulix": {
-      "navigation": {
-        "buttons": {
-          "aria-label": {
-            "steps": "Paso {indexSection} de {totalSections}.",
-            "disabled": "No disponible. Finalizar el paso anterior.",
-            "enabled": "Acceder al paso {sectionTitle}"
-          }
-        },
-        "tooltip": {
-          "disabled": "A continuación: {sectionTitle}"
-        }
-      },
       "beta-banner": "Este módulo está en versión beta. Se podrán realizar modificaciones a lo largo del tiempo.",
       "buttons": {
         "activity": {
@@ -1769,8 +1650,8 @@
         },
         "direction": "Busca la respuesta y gira la tarjeta",
         "navigation": {
-          "shortCurrentStep": "{current}/{total}",
-          "longCurrentStep": "{current} Paso a paso {total}"
+          "longCurrentStep": "{current} Paso a paso {total}",
+          "shortCurrentStep": "{current}/{total}"
         },
         "position": "{currentCardPosition}Tarjeta /{totalCards}"
       },
@@ -1794,10 +1675,22 @@
           "title": "Transcripción"
         }
       },
+      "navigation": {
+        "buttons": {
+          "aria-label": {
+            "disabled": "No disponible. Finalizar el paso anterior.",
+            "enabled": "Acceder al paso {sectionTitle}",
+            "steps": "Paso {indexSection} de {totalSections}."
+          }
+        },
+        "tooltip": {
+          "disabled": "A continuación: {sectionTitle}"
+        }
+      },
       "preview": {
         "showJson": "Show JSON",
-        "textarea-label": "Contenido del módulo",
-        "stepper": "Preview : stepper {direction}"
+        "stepper": "Preview : stepper {direction}",
+        "textarea-label": "Contenido del módulo"
       },
       "qab": {
         "correct-answer": "Respuesta correcta",
@@ -1831,11 +1724,11 @@
         "title": "¡Módulo completado!"
       },
       "section": {
-        "question-yourself": "Pregúntate a ti mismo",
         "explore-to-understand": "Explora para comprender",
-        "retain-the-essentials": "Retén lo esencial",
+        "go-further": "Ve más allá",
         "practise": "Practica",
-        "go-further": "Ve más allá"
+        "question-yourself": "Pregúntate a ti mismo",
+        "retain-the-essentials": "Retén lo esencial"
       },
       "sidebar": {
         "button": "Visualizar los pasos del módulo"
@@ -1843,8 +1736,8 @@
       "stepper": {
         "aria-role-description": "Secuencia de etapas",
         "step": {
-          "aria-role-description": "etapa",
-          "aria-label": "{currentStep} de {totalSteps}"
+          "aria-label": "{currentStep} de {totalSteps}",
+          "aria-role-description": "etapa"
         }
       },
       "verification-precondition-failed-alert": {
@@ -1871,20 +1764,35 @@
       "title": "¡Atención!",
       "username": "Nombre de usuario"
     },
+    "oidc-signup-or-login": {
+      "error": {
+        "account-conflict": "Esta cuenta ya está asociada a esta organización. Conéctate con otra cuenta o ponte en contacto con el servicio de asistencia.",
+        "data-sharing-refused": "Te informamos de que la transmisión de tus datos, especificados en la página anterior, es imprescindible para poder acceder y utilizar el servicio.",
+        "error-message": "Debes aceptar las condiciones de uso de Pix.",
+        "expired-authentication-key": "Tu solicitud de autenticación ha caducado.",
+        "invalid-email": "Tu dirección de correo electrónico no es válida.",
+        "login-unauthorized-error": "La dirección de correo electrónico y/o la contraseña introducidas son incorrectas.",
+        "password-reset-token-invalid-or-expired": "Ha pasado demasiado tiempo para validar su nueva contraseña. Vuelva a la página de inicio de sesión para volver a introducir su nombre de usuario y contraseña temporal."
+      },
+      "login-form": {
+        "button": "Iniciar sesión",
+        "description": "Conéctate para vincular tu cuenta existente y recuperar tus competencias evaluadas anteriormente.",
+        "email": "Dirección de correo electrónico",
+        "password": "Contraseña",
+        "title": "Ya tengo una cuenta Pix"
+      },
+      "signup-form": {
+        "button": "Creo una cuenta",
+        "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
+        "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+        "first-name-label-and-value": "Nombre: {firstName}",
+        "last-name-label-and-value": "Apellidos: {lastName}",
+        "title": "No tengo una cuenta Pix"
+      },
+      "title": "Crea una cuenta Pix"
+    },
     "password-reset-demand": {
       "title": "¿Olvidaste tu contraseña?"
-    },
-    "profile-already-shared": {
-      "actions": {
-        "continue": "Continúa tu experiencia Pix"
-      },
-      "explanation": "Ya has enviado el siguiente perfil a la organización {organization}',<br>'lo hiciste el {date} a las {hour,time,hhmm}",
-      "first-title": "Ha habido un imprevisto",
-      "retry": {
-        "button": "Reenviar mi perfil",
-        "message": "{organization} te invita a volver a enviar tu perfil para medir tu progreso."
-      },
-      "title": "Perfil ya enviado"
     },
     "profile": {
       "accessibility": {
@@ -1901,6 +1809,7 @@
           "no-level": "Competencia sin empezar"
         }
       },
+      "description": "Evalúe a su propio ritmo en 16 habilidades digitales. Elige una habilidad y empieza a ganar pix.",
       "first-title": "Tienes 16 competencias en las que hacer pruebas. '<br>'¡Concéntrate y a por ello!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -1922,8 +1831,19 @@
         "icon": "Información sobre los pix",
         "label": "Abrir la información emergente",
         "title": "¿Por qué 1024 pix?"
+      }
+    },
+    "profile-already-shared": {
+      "actions": {
+        "continue": "Continúa tu experiencia Pix"
       },
-      "description": "Evalúe a su propio ritmo en 16 habilidades digitales. Elige una habilidad y empieza a ganar pix."
+      "explanation": "Ya has enviado el siguiente perfil a la organización {organization}',<br>'lo hiciste el {date} a las {hour,time,hhmm}",
+      "first-title": "Ha habido un imprevisto",
+      "retry": {
+        "button": "Reenviar mi perfil",
+        "message": "{organization} te invita a volver a enviar tu perfil para medir tu progreso."
+      },
+      "title": "Perfil ya enviado"
     },
     "reset-password": {
       "error": {
@@ -1942,6 +1862,86 @@
       "ko": "Respuesta incorrecta",
       "ok": "Respuesta correcta",
       "timedout": "Tiempo superado"
+    },
+    "sco-signup-or-login": {
+      "invitation": "{ organizationName } te invita a unirte a Pix",
+      "login-form": {
+        "button": "Conectarse",
+        "fields": {
+          "login": {
+            "label": "Dirección de correo electrónico o nombre de usuario"
+          },
+          "password": {
+            "label": "Contraseña"
+          }
+        },
+        "forgotten-password": {
+          "email": "Una dirección de correo electrónico:",
+          "instruction": "¿Olvidaste tu contraseña? Tienes una cuenta Pix con:",
+          "other-identity": "Un nombre de usuario: ponte en contacto con tu profesor para restablecerlo",
+          "reset-link": "Haz clic aquí para restablecerlo"
+        },
+        "title": "Ya tengo una cuenta Pix",
+        "unexpected-user-account-error": "La dirección de correo electrónico o el nombre de usuario es incorrecto. Para continuar, debes conectarte a tu cuenta, que tiene la forma: "
+      },
+      "signup-form": {
+        "button": "Inscribirse",
+        "button-form": "Crear cuenta",
+        "fields": {
+          "birthdate": {
+            "day": {
+              "error": "Tu día de nacimiento no es válido.",
+              "label": "Día de nacimiento",
+              "placeholder": "DD"
+            },
+            "label": "Fecha de nacimiento (DD/MM/AAAA)",
+            "month": {
+              "error": "Tu mes de nacimiento no es válido.",
+              "label": "Mes de nacimiento",
+              "placeholder": "MM"
+            },
+            "year": {
+              "error": "Tu año de nacimiento no es válido.",
+              "label": "Año de nacimiento",
+              "placeholder": "AAAA"
+            }
+          },
+          "cgu": "Acepto las '<a href=\"https://pix.fr/conditions-generales-d-utilisation\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\">'condiciones de uso de Pix'</a>'",
+          "email": {
+            "error": "Tu correo electrónico no es válido.",
+            "help": "(ej. nombre@ejemplo.fr)",
+            "label": "Dirección de correo electrónico"
+          },
+          "firstname": {
+            "error": "No has indicado tu nombre.",
+            "label": "Nombre"
+          },
+          "lastname": {
+            "error": "No has indicado tus apellidos.",
+            "label": "Apellidos"
+          },
+          "password": {
+            "error": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito.",
+            "help": "(mínimo 8 caracteres, incluyendo una mayúscula, una minúscula y un dígito)",
+            "label": "Contraseña",
+            "show-button": "mostrar la contraseña"
+          },
+          "username": {
+            "label": "Mi nombre de usuario"
+          }
+        },
+        "not-me": "No soy yo",
+        "options": {
+          "email": "Mi dirección de correo electrónico",
+          "text": "Me inscribo con:",
+          "username": "Mi nombre de usuario"
+        },
+        "rgpd-legal-notice": "Para saber cómo se tratan tus datos y cuáles son tus derechos, puedes leer el",
+        "rgpd-legal-notice-link": "aviso legal.",
+        "rgpd-legal-notice-url": "https://cloud.pix.fr/s/nqgBodTkbtsGb39",
+        "title": "Crear cuenta"
+      },
+      "title": "Conectarse a Pix"
     },
     "send-profile": {
       "disabled-share": "Este test ha sido desactivado por el organizador. Ya no es posible enviar resultados.",
@@ -1983,8 +1983,8 @@
     "signup": {
       "actions": {
         "login": "Iniciar sesión",
-        "submit": "Crear cuenta",
-        "sign-up-on-pix": "Crear cuenta en Pix"
+        "sign-up-on-pix": "Crear cuenta en Pix",
+        "submit": "Crear cuenta"
       },
       "fields": {
         "email": {
@@ -2039,7 +2039,6 @@
       "error": "¡Uy, se ha producido un error!",
       "hero": {
         "acquired-badges-title": "Premios obtenidos",
-        "thanks": "¡Gracias, {name}, por participar!",
         "explanations": {
           "improve": "Si quieres mejorar tu puntuación, puedes volver a intentar algunas preguntas.",
           "send-results": "Envíe sus resultados al organizador del curso y siga avanzando con los cursos recomendados.",
@@ -2056,7 +2055,8 @@
           "title": "Mejora tus resultados"
         },
         "see-trainings": "Ver los cursos",
-        "shared-message": "Tus resultados se enviaron el {date} a las {time}."
+        "shared-message": "Tus resultados se enviaron el {date} a las {time}.",
+        "thanks": "¡Gracias, {name}, por participar!"
       },
       "improve": {
         "description": "Puedes volver a intentar algunas de las preguntas",
@@ -2122,7 +2122,7 @@
           },
           "shared-results-modal": {
             "return-results-action": "Cerrar y volver a los resultados",
-            "subtitle": "¿Listo para desarrollar tus habilidades? \uD83C\uDF93",
+            "subtitle": "¿Listo para desarrollar tus habilidades? 🎓",
             "title": "Resultados compartidos"
           },
           "tab-label": "Formación",
@@ -2165,13 +2165,9 @@
         "webinaire": "Webinario"
       }
     },
-    "tutorial-panel": {
-      "info": "Estos enlaces a tutoriales han sido sugeridos por usuarios de Pix.",
-      "title": "Para tener éxito la próxima vez"
-    },
     "tutorial": {
-      "dot-action-title": "Paso {stepNumber} de {stepsCount}",
       "dot-action-description": "Acceder al paso {stepNumber} en {stepsCount}",
+      "dot-action-title": "Paso {stepNumber} de {stepsCount}",
       "dots-nav-label": "Pasos del tutorial",
       "next": "Siguiente",
       "next-title": "Mostrar siguiente paso",
@@ -2202,6 +2198,10 @@
       "start": "Comenzar el test",
       "title": "Tutorial de la campaña"
     },
+    "tutorial-panel": {
+      "info": "Estos enlaces a tutoriales han sido sugeridos por usuarios de Pix.",
+      "title": "Para tener éxito la próxima vez"
+    },
     "update-expired-password": {
       "button": "Restablecer",
       "fields": {
@@ -2216,6 +2216,31 @@
       "validation": "Tu contraseña ha sido actualizada."
     },
     "user-account": {
+      "account-update-email": {
+        "email-information": "Esta dirección de correo electrónico debe ser válida en caso de que olvides tu contraseña. '<br>' Esta será tu nueva dirección de conexión.",
+        "fields": {
+          "errors": {
+            "empty-password": "Tu contraseña no puede estar vacía.",
+            "invalid-password": "La contraseña que has introducido no es válida.",
+            "mismatching-email": "Las dos direcciones de correo electrónico no son idénticas. Por favor, comprueba la información introducida.",
+            "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando.",
+            "unknown-error": "Se ha producido un error. Vuelve a intentarlo o ponte en contacto con el servicio de asistencia.",
+            "wrong-email-format": "Tu dirección de correo electrónico no es válida."
+          },
+          "new-email": {
+            "label": "Nueva dirección de correo electrónico"
+          },
+          "new-email-confirmation": {
+            "label": "Confirmación de la dirección de correo electrónico"
+          },
+          "password": {
+            "label": "Contraseña"
+          }
+        },
+        "password-information": "Introduce tu contraseña para confirmar",
+        "save-button": "Confirmar",
+        "title": "Cambio de la dirección de correo electrónico"
+      },
       "account-update-email-with-validation": {
         "fields": {
           "errors": {
@@ -2234,31 +2259,6 @@
           }
         },
         "save-button": "Recibir un código de comprobación",
-        "title": "Cambio de la dirección de correo electrónico"
-      },
-      "account-update-email": {
-        "email-information": "Esta dirección de correo electrónico debe ser válida en caso de que olvides tu contraseña. '<br>' Esta será tu nueva dirección de conexión.",
-        "fields": {
-          "errors": {
-            "empty-password": "Tu contraseña no puede estar vacía.",
-            "invalid-password": "La contraseña que has introducido no es válida.",
-            "mismatching-email": "Las dos direcciones de correo electrónico no son idénticas. Por favor, comprueba la información introducida.",
-            "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando.",
-            "unknown-error": "Se ha producido un error. Vuelve a intentarlo o ponte en contacto con el servicio de asistencia.",
-            "wrong-email-format": "Tu dirección de correo electrónico no es válida."
-          },
-          "new-email-confirmation": {
-            "label": "Confirmación de la dirección de correo electrónico"
-          },
-          "new-email": {
-            "label": "Nueva dirección de correo electrónico"
-          },
-          "password": {
-            "label": "Contraseña"
-          }
-        },
-        "password-information": "Introduce tu contraseña para confirmar",
-        "save-button": "Confirmar",
         "title": "Cambio de la dirección de correo electrónico"
       },
       "connexion-methods": {
@@ -2322,8 +2322,6 @@
       "title": "Mi cuenta"
     },
     "user-tests": {
-      "description": "Accede a sus tests Pix, sigue su progreso y continúe donde lo dejó.",
-      "title": "Mis tests",
       "anonymised-participations": {
         "course": "Recorrido",
         "states": {
@@ -2331,7 +2329,9 @@
           "started": "comenzado"
         },
         "title": "rutas desactivadas"
-      }
+      },
+      "description": "Accede a sus tests Pix, sigue su progreso y continúe donde lo dejó.",
+      "title": "Mis tests"
     },
     "user-trainings": {
       "description": "Sigue progresando gracias a las formaciones recomendadas al final de tu evaluación.",
