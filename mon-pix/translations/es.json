@@ -603,7 +603,7 @@
         "legal": "Al hacer clic en «Empiezo» te conectarás a la plataforma y se enviará la información sobre tu progreso en el test al organizador del mismo para que pueda ayudarte si es necesario. Al final del test, haciendo clic en el botón «Envío mis resultados», se enviarán tus resultados al organizador.",
         "legal-with-auto-share": "Al hacer clic en «Empiezo» te conectarás a la plataforma y se enviará la información sobre tu progreso en el test al organizador del mismo para que pueda ayudarte si es necesario. Al final del test, sus resultados se enviarán automáticamente al organizador.",
         "title": "Empieza tu test Pix",
-        "title-with-username": "<span>¿{userFirstName},</span><br>Listo para evaluar tus habilidades?"
+        "title-with-username": "'<span>'¿{userFirstName}'</span>','<br>' Listo para evaluar tus habilidades?"
       },
       "profiles-collection": {
         "action": "¡Empecemos!",
@@ -1089,7 +1089,7 @@
       "is-focused-challenge": {
         "info-alert": {
           "adjusted-course-title": "Responde a esta pregunta sin utilizar Internet ni ninguna aplicación.",
-          "subtitle": " ",
+          "subtitle": "Si cambia de página o pestaña durante una prueba de certificación, su respuesta no será validada.",
           "title": "Responde a esta pregunta sin buscar en internet ni utilizar ningún programa informático."
         }
       },
@@ -1404,7 +1404,7 @@
       "title": "Descargar los resultados de la sesión"
     },
     "error": {
-      "content-text": "'<p>'Por favor, vuelve a cargar esta página o vuelve a la página de inicio.'</p><p>'También puedes ponerte en contacto con nosotros con '<a href=\"https://support.pix.fr/support/tickets/new\">'el formulario del centro de ayuda.'</a>'especificando el código de error que aparece a continuación en la descripción.'</p><p>Te pedimos disculpas por las molestias ocasionadas.'</p><p>'El equipo Pix.'</p>'",
+      "content-text": "'<p>'Por favor, vuelve a cargar esta página o vuelve a la página de inicio.'</p><p>'También puedes ponerte en contacto con nosotros con '<a href=\"https://support.pix.fr/support/tickets/new\">'el formulario del centro de ayuda.'</a>'especificando el código de error que aparece a continuación en la descripción.'</p><p>'Te pedimos disculpas por las molestias ocasionadas.'</p><p>'El equipo Pix.'</p>'",
       "first-title": "¡Uy, se ha producido un error!"
     },
     "evaluation-results": {
@@ -1837,7 +1837,7 @@
       "actions": {
         "continue": "Continúa tu experiencia Pix"
       },
-      "explanation": "Ya has enviado el siguiente perfil a la organización {organization}',<br>'lo hiciste el {date} a las {hour,time,hhmm}",
+      "explanation": "Ya has enviado el siguiente perfil a la organización {organization}'<br>'lo hiciste el {date} a las {hour,time,hhmm}",
       "first-title": "Ha habido un imprevisto",
       "retry": {
         "button": "Reenviar mi perfil",
