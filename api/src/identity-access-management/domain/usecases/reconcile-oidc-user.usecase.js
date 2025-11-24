@@ -27,14 +27,6 @@ export const reconcileOidcUser = async function ({
   audience,
   requestedApplication,
 }) {
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
-
-  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
-    identityProviderCode: identityProvider,
-    requestedApplication,
-  });
-
   const sessionContentAndUserInfo = await authenticationSessionService.getByKey(authenticationKey);
   if (!sessionContentAndUserInfo) {
     throw new AuthenticationKeyExpired();
@@ -47,13 +39,25 @@ export const reconcileOidcUser = async function ({
 
   const { userId, externalIdentityId } = userInfo;
 
+  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
+
+  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+    identityProviderCode: identityProvider,
+    requestedApplication,
+  });
+
+  const connectionMethodCode = oidcAuthenticationService.connectionMethodCode;
+  identityProvider = connectionMethodCode || identityProvider;
+
   const authenticationComplement = oidcAuthenticationService.createAuthenticationComplement({
     userInfo,
     sessionContent,
   });
+
   await authenticationMethodRepository.create({
     authenticationMethod: new AuthenticationMethod({
-      identityProvider: oidcAuthenticationService.identityProvider,
+      identityProvider,
       userId,
       externalIdentifier: externalIdentityId,
       authenticationComplement,
@@ -63,7 +67,7 @@ export const reconcileOidcUser = async function ({
   await _updateUserLastConnection({
     userId,
     requestedApplication,
-    oidcAuthenticationService,
+    identityProvider,
     authenticationMethodRepository,
     lastUserApplicationConnectionsRepository,
     userLoginRepository,
@@ -85,7 +89,7 @@ export const reconcileOidcUser = async function ({
 async function _updateUserLastConnection({
   userId,
   requestedApplication,
-  oidcAuthenticationService,
+  identityProvider,
   authenticationMethodRepository,
   lastUserApplicationConnectionsRepository,
   userLoginRepository,
@@ -98,6 +102,6 @@ async function _updateUserLastConnection({
   });
   await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
     userId,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider,
   });
 }

@@ -52,6 +52,9 @@ async function authenticateOidcUser({
     requestedApplication,
   });
 
+  const connectionMethodCode = oidcAuthenticationService.connectionMethodCode;
+  identityProviderCode = connectionMethodCode || identityProviderCode;
+
   const sessionContent = await oidcAuthenticationService.exchangeCodeForTokens({
     code,
     state,
@@ -65,7 +68,7 @@ async function authenticateOidcUser({
   });
   const user = await userRepository.findByExternalIdentifier({
     externalIdentityId: userInfo.externalIdentityId,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider: identityProviderCode,
   });
 
   if (!user) {
@@ -89,6 +92,7 @@ async function authenticateOidcUser({
     userInfo,
     userId: user.id,
     sessionContent,
+    identityProvider: identityProviderCode,
     oidcAuthenticationService,
     authenticationMethodRepository,
   });
@@ -96,7 +100,7 @@ async function authenticateOidcUser({
   await _updateUserLastConnection({
     user,
     requestedApplication,
-    oidcAuthenticationService,
+    identityProvider: identityProviderCode,
     authenticationMethodRepository,
     lastUserApplicationConnectionsRepository,
     userLoginRepository,
@@ -142,6 +146,7 @@ async function _updateAuthenticationMethodWithComplement({
   userInfo,
   userId,
   sessionContent,
+  identityProvider,
   oidcAuthenticationService,
   authenticationMethodRepository,
 }) {
@@ -153,14 +158,14 @@ async function _updateAuthenticationMethodWithComplement({
   await authenticationMethodRepository.updateAuthenticationComplementByUserIdAndIdentityProvider({
     authenticationComplement,
     userId,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider,
   });
 }
 
 async function _updateUserLastConnection({
   user,
   requestedApplication,
-  oidcAuthenticationService,
+  identityProvider,
   authenticationMethodRepository,
   lastUserApplicationConnectionsRepository,
   userLoginRepository,
@@ -173,6 +178,6 @@ async function _updateUserLastConnection({
   });
   await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
     userId: user.id,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider,
   });
 }

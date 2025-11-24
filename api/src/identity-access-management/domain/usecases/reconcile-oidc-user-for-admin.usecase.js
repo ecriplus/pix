@@ -50,10 +50,13 @@ export const reconcileOidcUserForAdmin = async function ({
   const { userInfo } = sessionContentAndUserInfo;
   const { externalIdentityId } = userInfo;
 
+  const connectionMethodCode = oidcAuthenticationService.connectionMethodCode;
+  identityProvider = connectionMethodCode || identityProvider;
+
   const authenticationComplement = oidcAuthenticationService.createAuthenticationComplement({ userInfo });
   await authenticationMethodRepository.create({
     authenticationMethod: new AuthenticationMethod({
-      identityProvider: oidcAuthenticationService.identityProvider,
+      identityProvider,
       userId,
       externalIdentifier: externalIdentityId,
       authenticationComplement,
@@ -63,7 +66,7 @@ export const reconcileOidcUserForAdmin = async function ({
   await _updateUserLastConnection({
     userId,
     requestedApplication,
-    oidcAuthenticationService,
+    identityProvider,
     authenticationMethodRepository,
     lastUserApplicationConnectionsRepository,
     userLoginRepository,
@@ -96,7 +99,7 @@ async function _assertExternalIdentifier({
 async function _updateUserLastConnection({
   userId,
   requestedApplication,
-  oidcAuthenticationService,
+  identityProvider,
   authenticationMethodRepository,
   lastUserApplicationConnectionsRepository,
   userLoginRepository,
@@ -109,6 +112,6 @@ async function _updateUserLastConnection({
   });
   await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
     userId,
-    identityProvider: oidcAuthenticationService.identityProvider,
+    identityProvider,
   });
 }

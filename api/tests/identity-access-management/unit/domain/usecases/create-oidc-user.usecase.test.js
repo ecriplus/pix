@@ -1,22 +1,16 @@
 import { AuthenticationKeyExpired } from '../../../../../src/identity-access-management/domain/errors.js';
 import { createOidcUser } from '../../../../../src/identity-access-management/domain/usecases/create-oidc-user.usecase.js';
-import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { UserAlreadyExistsWithAuthenticationMethodError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-user', function () {
-  let authenticationMethodRepository,
-    userToCreateRepository,
-    userLoginRepository,
-    lastUserApplicationConnectionsRepository;
-  let authenticationSessionService, oidcAuthenticationService, oidcAuthenticationServiceRegistry;
-  let clock;
-  let now;
+  let authenticationMethodRepository;
+  let userToCreateRepository;
+  let authenticationSessionService;
+  let oidcAuthenticationService;
+  let oidcAuthenticationServiceRegistry;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
-    now = new Date(clock.now);
-
     authenticationMethodRepository = {
       findOneByExternalIdentifierAndIdentityProvider: sinon.stub(),
       updateLastLoggedAtByIdentityProvider: sinon.stub(),
@@ -38,18 +32,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
       getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
     };
-
-    userLoginRepository = {
-      updateLastLoggedAt: sinon.stub(),
-    };
-
-    lastUserApplicationConnectionsRepository = {
-      upsert: sinon.stub(),
-    };
-  });
-
-  afterEach(function () {
-    clock.restore();
   });
 
   context('when authentication key is expired', function () {
@@ -96,74 +78,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       // then
       expect(error).to.be.instanceOf(UserAlreadyExistsWithAuthenticationMethodError);
       expect(error.message).to.equal('Authentication method already exists for this external identifier.');
-    });
-  });
-
-  it('creates the user account with given language and returns an access token, the logout url uuid and update the last logged date with the existing external user id', async function () {
-    // given
-    const idToken = 'idToken';
-    const language = 'nl';
-    const audience = 'htttps://app.pix.fr';
-    const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.fr' });
-    authenticationSessionService.getByKey.withArgs('AUTHENTICATION_KEY').resolves({
-      sessionContent: { idToken, accessToken: 'accessToken' },
-      userInfo: { firstName: 'Jean', lastName: 'Heymar', externalIdentityId: 'externalId' },
-    });
-    authenticationMethodRepository.findOneByExternalIdentifierAndIdentityProvider
-      .withArgs({ externalIdentifier: 'externalId', identityProvider: 'SOME_IDP' })
-      .resolves(null);
-    oidcAuthenticationService.createUserAccount.resolves(10);
-    oidcAuthenticationService.createAccessToken
-      .withArgs({ userId: 10, audience })
-      .returns('accessTokenForExistingExternalUser');
-    oidcAuthenticationService.saveIdToken.withArgs({ idToken, userId: 10 }).resolves('logoutUrlUUID');
-
-    // when
-    const result = await createOidcUser({
-      identityProvider: 'SOME_IDP',
-      authenticationKey: 'AUTHENTICATION_KEY',
-      locale: 'nl-BE',
-      language,
-      audience,
-      authenticationSessionService,
-      oidcAuthenticationServiceRegistry,
-      authenticationMethodRepository,
-      userToCreateRepository,
-      userLoginRepository,
-      lastUserApplicationConnectionsRepository,
-      requestedApplication,
-    });
-
-    // then
-    expect(oidcAuthenticationService.createUserAccount).to.have.been.calledWithMatch({
-      user: {
-        firstName: 'Jean',
-        lastName: 'Heymar',
-        locale: 'nl-BE',
-        lang: 'nl',
-        cgu: true,
-        lastTermsOfServiceValidatedAt: now,
-      },
-      sessionContent: { idToken, accessToken: 'accessToken' },
-      externalIdentityId: 'externalId',
-      userToCreateRepository,
-      authenticationMethodRepository,
-    });
-    expect(oidcAuthenticationService.createAccessToken).to.have.been.calledOnce;
-    expect(oidcAuthenticationService.saveIdToken).to.have.been.calledOnce;
-    expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: 10 });
-    expect(result).to.deep.equal({
-      accessToken: 'accessTokenForExistingExternalUser',
-      logoutUrlUUID: 'logoutUrlUUID',
-    });
-    expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
-      userId: 10,
-      identityProvider: oidcAuthenticationService.identityProvider,
-    });
-    expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
-      userId: 10,
-      application: 'app',
-      lastLoggedAt: sinon.match.instanceOf(Date),
     });
   });
 });

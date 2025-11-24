@@ -379,6 +379,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
     it('returns an accessToken with a 200 HTTP status code', async function () {
       // given
+      const start = new Date();
       const firstName = 'Brice';
       const lastName = 'Glace';
       const externalIdentifier = 'sub';
@@ -421,8 +422,12 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result.access_token).to.exist;
-      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+
+      const result = response.result;
+      expect(result).to.have.property('access_token');
+      expect(result).to.have.property('logout_url_uuid');
+
+      const decodedAccessToken = tokenService.getDecodedToken(result.access_token);
       expect(decodedAccessToken).to.include({ aud: 'https://app.dev.pix.org' });
 
       const createdUser = await knex('users').first();
@@ -431,7 +436,15 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       expect(createdUser.locale).to.equal('fr-FR');
 
       const createdAuthenticationMethod = await knex('authentication-methods').first();
+      expect(createdAuthenticationMethod.identityProvider).to.equal('OIDC_EXAMPLE_NET');
       expect(createdAuthenticationMethod.externalIdentifier).to.equal('sub');
+
+      const userLogin = await knex('user-logins').first();
+      expect(userLogin.lastLoggedAt).to.be.greaterThanOrEqual(start);
+
+      const lastUserApplicationConnection = await knex('last-user-application-connections').first();
+      expect(lastUserApplicationConnection.application).to.equal('app');
+      expect(lastUserApplicationConnection.lastLoggedAt).to.be.greaterThanOrEqual(start);
     });
 
     context('when authentication key has expired', function () {
@@ -571,8 +584,279 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     });
   });
 
-  async function createServerWithMockedTestOidcProvider({ application, applicationTld }) {
-    openIdClientMock = await createMockedTestOidcProvider({ application, applicationTld });
+  context('when the OIDC provider has a connectionMethodCode', function () {
+    describe('POST /api/oidc/token', function () {
+      let payload, cookies;
+
+      context('when requestedApplication is generic (i.e. is not admin)', function () {
+        beforeEach(async function () {
+          await createServerWithMockedTestOidcProvider({
+            application: 'orga',
+            applicationTld: '.org',
+            identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+            connectionMethodCode: 'OIDC_EXAMPLE_NET',
+          });
+
+          const query = querystring.stringify({ identity_provider: 'OIDC_EXAMPLE_NET-ORGA' });
+          const authUrlResponse = await server.inject({
+            method: 'GET',
+            url: `/api/oidc/authorization-url?${query}`,
+            headers: {
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'orga.dev.pix.org',
+            },
+          });
+          cookies = authUrlResponse.headers['set-cookie'];
+
+          const redirectTarget = new URL(authUrlResponse.result.redirectTarget);
+
+          payload = {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                code: 'code',
+                state: redirectTarget.searchParams.get('state'),
+              },
+            },
+          };
+        });
+
+        context('When user does not have an account', function () {
+          it('returns status code 401 with authentication key matching session content and error code to validate cgu', async function () {
+            // given
+            const idToken = jsonwebtoken.sign({ given_name: 'John', family_name: 'Doe', sub: 'sub' }, 'secret');
+
+            openIdClientMock.authorizationCodeGrant.resolves({
+              access_token: 'access_token',
+              id_token: idToken,
+              expires_in: 60,
+              refresh_token: 'refresh_token',
+            });
+
+            // when
+            const response = await server.inject({
+              method: 'POST',
+              url: '/api/oidc/token',
+              headers: {
+                cookie: cookies[0],
+                'x-forwarded-proto': 'https',
+                'x-forwarded-host': 'orga.dev.pix.org',
+              },
+              payload,
+            });
+
+            // then
+            const [error] = response.result.errors;
+            expect(response.statusCode).to.equal(401);
+            expect(error.code).to.exist;
+            expect(error.code).to.equal('SHOULD_VALIDATE_CGU');
+
+            const authenticationKey = error.meta.authenticationKey;
+            expect(authenticationKey).to.exist;
+
+            const result = await authenticationSessionService.getByKey(authenticationKey);
+            expect(result).to.deep.equal({
+              sessionContent: new AuthenticationSessionContent({
+                accessToken: 'access_token',
+                idToken,
+                expiresIn: 60,
+                refreshToken: 'refresh_token',
+              }),
+              userInfo: {
+                externalIdentityId: 'sub',
+                firstName: 'John',
+                lastName: 'Doe',
+              },
+            });
+          });
+        });
+
+        context('When user has an account', function () {
+          it('returns 200 with access_token and logout_url_uuid', async function () {
+            // given
+            const firstName = 'John';
+            const lastName = 'Doe';
+            const externalIdentifier = 'sub';
+
+            const userId = databaseBuilder.factory.buildUser({ firstName, lastName }).id;
+            databaseBuilder.factory.buildAuthenticationMethod.withIdentityProvider({
+              identityProvider: 'OIDC_EXAMPLE_NET',
+              externalIdentifier,
+              userId,
+            });
+            await databaseBuilder.commit();
+
+            const idToken = jsonwebtoken.sign(
+              { given_name: firstName, family_name: lastName, sub: externalIdentifier },
+              'secret',
+            );
+
+            openIdClientMock.authorizationCodeGrant.resolves({
+              access_token: 'access_token',
+              id_token: idToken,
+              expires_in: 60,
+              refresh_token: 'refresh_token',
+            });
+
+            // when
+            const response = await server.inject({
+              method: 'POST',
+              url: '/api/oidc/token',
+              headers: {
+                cookie: cookies[0],
+                'x-forwarded-proto': 'https',
+                'x-forwarded-host': 'orga.dev.pix.org',
+              },
+              payload,
+            });
+
+            // then
+            expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+            expect(response.result.access_token).to.exist;
+
+            const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+            expect(decodedAccessToken).to.include({ aud: 'https://orga.dev.pix.org' });
+            expect(response.statusCode).to.equal(200);
+            expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
+          });
+        });
+      });
+    });
+
+    describe('POST /api/oidc/users', function () {
+      beforeEach(async function () {
+        await createServerWithMockedTestOidcProvider({
+          application: 'orga',
+          applicationTld: '.org',
+          identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+          connectionMethodCode: 'OIDC_EXAMPLE_NET',
+        });
+      });
+
+      it('creates an authentication method with connectionMethodCode as value for identityProvider', async function () {
+        // given
+        const firstName = 'Brice';
+        const lastName = 'Glace';
+        const externalIdentifier = 'sub';
+        const idToken = jsonwebtoken.sign(
+          { given_name: firstName, family_name: lastName, nonce: 'nonce', sub: externalIdentifier },
+          'secret',
+        );
+
+        const sessionContent = new AuthenticationSessionContent({ idToken });
+        const userAuthenticationKey = await authenticationSessionService.save({
+          sessionContent,
+          userInfo: {
+            firstName,
+            lastName,
+            nonce: 'nonce',
+            externalIdentityId: externalIdentifier,
+          },
+        });
+
+        const request = {
+          method: 'POST',
+          url: '/api/oidc/users',
+          headers: {
+            cookie: 'locale=fr-FR',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.dev.pix.org',
+          },
+          payload: {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                authentication_key: userAuthenticationKey,
+              },
+            },
+          },
+        };
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+
+        const createdAuthenticationMethod = await knex('authentication-methods').first();
+        expect(createdAuthenticationMethod.identityProvider).to.equal('OIDC_EXAMPLE_NET');
+      });
+    });
+
+    describe('POST /api/oidc/user/reconcile', function () {
+      beforeEach(async function () {
+        await createServerWithMockedTestOidcProvider({
+          application: 'orga',
+          applicationTld: '.org',
+          identityProvider: 'OIDC_EXAMPLE_NET-ORGA',
+          connectionMethodCode: 'OIDC_EXAMPLE_NET',
+        });
+      });
+
+      it('returns 200 HTTP status code', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser.withRawPassword({
+          email: 'eva.poree@example.net',
+          rawPassword: 'pix123',
+        });
+        await databaseBuilder.commit();
+
+        const idToken = jsonwebtoken.sign(
+          { given_name: 'Brice', family_name: 'Glace', nonce: 'nonce', sub: 'some-user-unique-id' },
+          'secret',
+        );
+        const userAuthenticationKey = await authenticationSessionService.save({
+          sessionContent: { idToken },
+          userInfo: {
+            userId: user.id,
+            firstName: 'Brice',
+            lastName: 'Glace',
+            nonce: 'nonce',
+            externalIdentityId: 'some-user-unique-id',
+          },
+        });
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/oidc/user/reconcile`,
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.dev.pix.org',
+          },
+          payload: {
+            data: {
+              attributes: {
+                identity_provider: 'OIDC_EXAMPLE_NET-ORGA',
+                authentication_key: userAuthenticationKey,
+              },
+            },
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.access_token).to.exist;
+
+        const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
+        expect(decodedAccessToken).to.include({ aud: 'https://orga.dev.pix.org' });
+        expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
+      });
+    });
+  });
+
+  async function createServerWithMockedTestOidcProvider({
+    application,
+    applicationTld,
+    identityProvider,
+    connectionMethodCode,
+  }) {
+    openIdClientMock = await createMockedTestOidcProvider({
+      application,
+      applicationTld,
+      identityProvider,
+      connectionMethodCode,
+    });
     server = await createServer();
   }
 });

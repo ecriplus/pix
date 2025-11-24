@@ -35,6 +35,7 @@ export class OidcAuthenticationService {
       claimsToStore,
       clientId,
       clientSecret,
+      connectionMethodCode,
       extraAuthorizationUrlParameters,
       enabled,
       enabledForPixAdmin,
@@ -64,6 +65,7 @@ export class OidcAuthenticationService {
     this.extraAuthorizationUrlParameters = extraAuthorizationUrlParameters;
     this.shouldCloseSession = shouldCloseSession;
     this.identityProvider = identityProvider;
+    this.connectionMethodCode = connectionMethodCode;
     this.openidClientExtraMetadata = openidClientExtraMetadata;
     this.openidConfigurationUrl = openidConfigurationUrl;
     this.organizationName = organizationName;
@@ -235,7 +237,7 @@ export class OidcAuthenticationService {
 
       const authenticationComplement = this.createAuthenticationComplement({ userInfo });
       const authenticationMethod = new AuthenticationMethod({
-        identityProvider: this.identityProvider,
+        identityProvider: this.connectionMethodCode || this.identityProvider,
         userId: createdUserId,
         externalIdentifier: externalIdentityId,
         authenticationComplement,
