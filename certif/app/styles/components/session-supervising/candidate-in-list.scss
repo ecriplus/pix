@@ -74,6 +74,10 @@
     width: fit-content;
   }
 
+  &__live-alert-button {
+    margin-top: var(--pix-spacing-2x);
+  }
+
   &__menu {
     border-left: 1px solid var(--pix-neutral-100);
     padding: var(--pix-spacing-2x);

@@ -76,14 +76,19 @@
               </PixTag>
             {{/if}}
           </div>
-
-          {{#if @candidate.hasOngoingChallengeLiveAlert}}
-            <PixButton @triggerAction={{this.askUserToHandleLiveAlert}} @variant="error">
-              {{t "pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge"}}
-            </PixButton>
-          {{/if}}
         </div>
       {{/if}}
+
+      {{#if @candidate.hasOngoingChallengeLiveAlert}}
+        <PixButton
+          @triggerAction={{this.askUserToHandleLiveAlert}}
+          @variant="error"
+          class="session-supervising-candidate-in-list__live-alert-button"
+        >
+          {{t "pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge"}}
+        </PixButton>
+      {{/if}}
+
       {{#if this.isConfirmButtonToBeDisplayed}}
         <PixButton
           aria-label={{this.authorizationButtonAriaLabel}}
