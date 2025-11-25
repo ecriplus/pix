@@ -12,20 +12,46 @@ import { KnowledgeElement } from '../../../../../../src/shared/domain/models/Kno
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
+const {
+  buildStage,
+  buildBadge,
+  buildCampaign,
+  learningContent,
+  buildCampaignSkill,
+  buildTargetProfile,
+  buildBadgeAcquisition,
+  buildKnowledgeElement,
+  buildStageAcquisition,
+  buildOrganizationLearner,
+  buildCampaignParticipation,
+  buildKnowledgeElementSnapshot,
+} = databaseBuilder.factory;
+
 describe('Integration | UseCase | get-campaign-participations', function () {
   context('when campaign type is assessment', function () {
     it('should return all participations for given campaign', async function () {
       // given
-      const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
-      const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
-      const competence = databaseBuilder.factory.learningContent.buildCompetence({ areaId });
-      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId: competence.id });
-      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+      const frameworkId = learningContent.buildFramework().id;
+      const areaId = learningContent.buildArea({ frameworkId }).id;
+      const competence = learningContent.buildCompetence({ areaId });
+      const tube = learningContent.buildTube({ competenceId: competence.id });
+      const skillId = learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+      const organizationLearner1 = buildOrganizationLearner({ lastName: 'Albert' });
 
-      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({ lastName: 'Albert' });
-      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
-      const participation1 = databaseBuilder.factory.buildCampaignParticipation({
+      const targetProfile = buildTargetProfile();
+
+      // Build stages
+      const stage0 = buildStage({ targetProfileId: targetProfile.id, threshold: 0 });
+      const stage1 = buildStage({ targetProfileId: targetProfile.id, threshold: 20 });
+      const stage2 = buildStage({ targetProfileId: targetProfile.id, threshold: 21 });
+      buildStage({ targetProfileId: targetProfile.id, threshold: 22 });
+
+      const badge1 = buildBadge({ targetProfileId: targetProfile.id, key: 'BADGE1' });
+      const badge2 = buildBadge({ targetProfileId: targetProfile.id, key: 'BADGE2' });
+
+      const campaign = buildCampaign({ type: CampaignTypes.ASSESSMENT, targetProfileId: targetProfile.id });
+      buildCampaignSkill({ campaignId: campaign.id, skillId });
+      const participation1 = buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.SHARED,
         organizationLearnerId: organizationLearner1.id,
@@ -35,22 +61,28 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         createdAt: new Date('2020-01-03'),
         sharedAt: new Date('2020-01-03'),
       });
-      const ke = databaseBuilder.factory.buildKnowledgeElement({
+      buildStageAcquisition({ campaignParticipationId: participation1.id, stageId: stage0.id });
+      buildStageAcquisition({ campaignParticipationId: participation1.id, stageId: stage1.id });
+      buildStageAcquisition({ campaignParticipationId: participation1.id, stageId: stage2.id });
+
+      buildBadgeAcquisition({ campaignParticipationId: participation1.id, badgeId: badge1.id });
+
+      const ke = buildKnowledgeElement({
         status: KnowledgeElement.StatusType.VALIDATED,
         skillId,
         userId: participation1.userId,
       });
 
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+      buildKnowledgeElementSnapshot({
         campaignParticipationId: participation1.id,
         snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
       });
 
-      const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+      const organizationLearner2 = buildOrganizationLearner({
         lastName: 'Michele',
         organizationId: organizationLearner1.organizationId,
       });
-      databaseBuilder.factory.buildCampaignParticipation({
+      buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.STARTED,
         organizationLearnerId: organizationLearner2.id,
@@ -59,13 +91,14 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         validatedSkillsCount: null,
         createdAt: new Date('2020-01-03'),
       });
-      databaseBuilder.factory.buildCampaignParticipation({
+
+      buildCampaignParticipation({
         status: CampaignParticipationStatuses.STARTED,
         masteryRate: 0.5,
         createdAt: new Date('2020-01-04'),
       });
 
-      databaseBuilder.factory.buildCampaignParticipation({
+      buildCampaignParticipation({
         status: CampaignParticipationStatuses.STARTED,
         masteryRate: 0.5,
         createdAt: new Date('2020-01-01'),
@@ -88,7 +121,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
 
       // then
       expect(models).to.have.lengthOf(1);
-      expect(models).to.deep.members([
+      expect(models[0]).to.deep.equal(
         new AssessmentCampaignParticipation({
           campaignParticipationId: participation1.id,
           userId: participation1.userId,
@@ -110,8 +143,30 @@ describe('Integration | UseCase | get-campaign-participations', function () {
               title: tube.practicalTitle_i18n[FRENCH_SPOKEN],
             },
           ],
+          stages: {
+            reachedStage: 2,
+            numberOfStages: 3,
+          },
+          badges: [
+            {
+              id: badge1.id,
+              key: badge1.key,
+              title: badge1.title,
+              imageUrl: badge1.imageUrl,
+              altMessage: badge1.altMessage,
+              isAcquired: true,
+            },
+            {
+              id: badge2.id,
+              key: badge2.key,
+              title: badge2.title,
+              imageUrl: badge2.imageUrl,
+              altMessage: badge2.altMessage,
+              isAcquired: false,
+            },
+          ],
         }),
-      ]);
+      );
       expect(meta).to.deep.equal({
         page: 1,
         pageCount: 2,
@@ -124,9 +179,9 @@ describe('Integration | UseCase | get-campaign-participations', function () {
   context('when campaign type is profile collection', function () {
     it('should return all participations for given campaign', async function () {
       // given
-      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
-      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner();
-      const participation1 = databaseBuilder.factory.buildCampaignParticipation({
+      const campaign = buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
+      const organizationLearner1 = buildOrganizationLearner();
+      const participation1 = buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.SHARED,
         organizationLearnerId: organizationLearner1.id,
@@ -134,10 +189,10 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         pixScore: 42,
         validatedSkillsCount: 10,
       });
-      const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+      const organizationLearner2 = buildOrganizationLearner({
         organizationId: organizationLearner1.organizationId,
       });
-      const participation2 = databaseBuilder.factory.buildCampaignParticipation({
+      const participation2 = buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.STARTED,
         organizationLearnerId: organizationLearner2.id,
@@ -145,7 +200,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         pixScore: 21,
         validatedSkillsCount: 10,
       });
-      databaseBuilder.factory.buildCampaignParticipation({
+      buildCampaignParticipation({
         status: CampaignParticipationStatuses.STARTED,
         masteryRate: 0.5,
       });

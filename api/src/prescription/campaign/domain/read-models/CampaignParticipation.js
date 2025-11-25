@@ -50,6 +50,11 @@ class CampaignParticipation {
  * @extends CampaignParticipationArgs
  * @property {number} masteryRate
  * @property {Object} tubes
+ * @property {{
+ *  reachedStage: number
+ *  numberOfStages: number
+ * }} stages
+ * @property {Badge[]} badges
  */
 
 /**
@@ -63,6 +68,8 @@ class AssessmentCampaignParticipation extends CampaignParticipation {
     super(args);
     this.masteryRate = !_.isNil(args.masteryRate) ? Number(args.masteryRate) : null;
     this.tubes = args.tubes;
+    this.stages = args.stages;
+    this.badges = args.badges;
   }
 }
 
@@ -79,6 +86,17 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
   constructor(args) {
     super(args);
     this.pixScore = args.pixScore;
+  }
+}
+
+class Badge {
+  constructor({ id, key, title, imageUrl, altMessage, isAcquired }) {
+    this.id = id;
+    this.key = key;
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.altMessage = altMessage;
+    this.isAcquired = isAcquired;
   }
 }
 
@@ -116,6 +134,7 @@ class TubeCoverage {
 
 export {
   AssessmentCampaignParticipation,
+  Badge,
   CampaignParticipation,
   ProfilesCollectionCampaignParticipation,
   TubeCoverage,

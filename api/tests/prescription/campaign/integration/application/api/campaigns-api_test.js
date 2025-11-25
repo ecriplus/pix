@@ -138,6 +138,11 @@ describe('Integration | Application | campaign-api', function () {
           masteryRate: null,
           status: CampaignParticipationStatuses.STARTED,
           tubes: undefined,
+          stages: {
+            numberOfStages: 0,
+            reachedStage: 0,
+          },
+          badges: [],
         },
         {
           campaignParticipationId: participation1.id,
@@ -159,6 +164,11 @@ describe('Integration | Application | campaign-api', function () {
               practicalTitle: 'practicalTitle FR Tube A',
             },
           ],
+          stages: {
+            numberOfStages: 0,
+            reachedStage: 0,
+          },
+          badges: [],
         },
       ]);
       expect(result.meta).to.deep.equal({
