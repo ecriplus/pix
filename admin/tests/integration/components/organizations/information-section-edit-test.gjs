@@ -6,6 +6,7 @@ import { fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import InformationSectionEdit from 'pix-admin/components/organizations/information-section-edit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -13,10 +14,20 @@ module('Integration | Component | organizations/information-section-edit', funct
   setupIntlRenderingTest(hooks);
   hooks.beforeEach(function () {
     const store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
+    const findAllStub = sinon.stub(store, 'findAll');
+
+    findAllStub
+      .withArgs('administration-team')
+      .resolves([
         store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
         store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
+      ]);
+
+    findAllStub
+      .withArgs('country')
+      .resolves([
+        store.createRecord('country', { code: '99101', name: 'Danemark' }),
+        store.createRecord('country', { code: '99100', name: 'France' }),
       ]);
   });
 
@@ -199,6 +210,34 @@ module('Integration | Component | organizations/information-section-edit', funct
 
       // then
       assert.ok(administrationTeamIdErrorMessage);
+    });
+
+    test("it should show error message if organization's country is empty", async function (assert) {
+      const organizationWithoutCountryCode = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: null,
+      });
+
+      // when
+      const screen = await render(
+        <template><InformationSectionEdit @organization={{organizationWithoutCountryCode}} /></template>,
+      );
+
+      const countryCodeErrorMessage = screen.getByText(
+        t('components.organizations.editing.country.selector.error-message'),
+      );
+
+      // then
+      assert.ok(countryCodeErrorMessage);
     });
 
     module('#features', function () {
@@ -385,6 +424,94 @@ module('Integration | Component | organizations/information-section-edit', funct
             name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
           }),
         ).getByText(t('components.organizations.editing.administration-team.selector.placeholder')),
+      );
+    });
+  });
+
+  module('countries select', function () {
+    test('it should display select with options loaded', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: 99100,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.country.selector.label')} *`,
+        }),
+      );
+      const listbox = await screen.findByRole('listbox');
+
+      //then
+      assert.ok(within(listbox).getByRole('option', { name: 'Danemark (99101)' }));
+      assert.ok(within(listbox).getByRole('option', { name: 'France (99100)' }));
+    });
+
+    test('it should display current country as pre-selected option if organization has one', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        features: {},
+        documentationUrl: 'https://pix.fr/',
+        administrationTeamId: 123,
+        countryCode: 99100,
+      });
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.editing.country.selector.label')} *`,
+          }),
+        ).getByText('France (99100)'),
+      );
+    });
+
+    test('it should display the placeholder if organization does not have a country code', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: null,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.editing.country.selector.label')} *`,
+          }),
+        ).getByText(t('components.organizations.editing.country.selector.placeholder')),
       );
     });
   });
