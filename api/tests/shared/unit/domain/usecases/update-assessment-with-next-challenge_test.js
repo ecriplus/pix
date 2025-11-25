@@ -76,7 +76,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       [
         Assessment.states.ABORTED,
         Assessment.states.COMPLETED,
-        Assessment.states.ENDED_BY_SUPERVISOR,
+        Assessment.states.ENDED_BY_INVIGILATOR,
         Assessment.states.ENDED_DUE_TO_FINALIZATION,
       ].forEach((assessmentState) => {
         it(`should return an assessment with its answers`, async function () {

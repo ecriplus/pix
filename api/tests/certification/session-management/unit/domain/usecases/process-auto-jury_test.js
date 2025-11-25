@@ -687,7 +687,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
-          certificationState: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+          certificationState: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
           certificationAssessmentRepository,
           certificationCourseRepository,
           certificationIssueReportRepository,

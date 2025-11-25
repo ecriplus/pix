@@ -541,7 +541,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 98,
-          state: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+          state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
         });
 
         const userId3 = databaseBuilder.factory.buildUser().id;

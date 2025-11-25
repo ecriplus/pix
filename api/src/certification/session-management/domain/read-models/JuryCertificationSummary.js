@@ -1,7 +1,7 @@
 import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 const STARTED = 'started';
-const ENDED_BY_SUPERVISOR = 'endedBySupervisor';
+const ENDED_BY_INVIGILATOR = 'endedBySupervisor';
 const CORE_CERTIFICATION = 'CORE';
 const DOUBLE_CORE_CLEA_CERTIFICATION = 'DOUBLE_CORE_CLEA';
 
@@ -16,7 +16,7 @@ class JuryCertificationSummary {
     completedAt,
     abortReason,
     isPublished,
-    isEndedBySupervisor,
+    isEndedByInvigilator,
     complementaryCertificationLabelObtained,
     complementaryCertificationKeyObtained,
     certificationIssueReports,
@@ -24,7 +24,7 @@ class JuryCertificationSummary {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.status = _getStatus({ status, isEndedBySupervisor });
+    this.status = _getStatus({ status, isEndedByInvigilator });
     this.pixScore = pixScore;
     this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
     this.certificationObtained = _getCertificationObtained({
@@ -64,9 +64,9 @@ class JuryCertificationSummary {
   }
 }
 
-function _getStatus({ status, isEndedBySupervisor }) {
-  if (isEndedBySupervisor) {
-    return ENDED_BY_SUPERVISOR;
+function _getStatus({ status, isEndedByInvigilator }) {
+  if (isEndedByInvigilator) {
+    return ENDED_BY_INVIGILATOR;
   }
 
   if (!Object.values(assessmentResultStatuses).includes(status)) {
@@ -86,7 +86,7 @@ function _getCertificationObtained({ complementaryCertificationLabelObtained, co
   return complementaryCertificationLabelObtained;
 }
 
-const statuses = { ...assessmentResultStatuses, STARTED, ENDED_BY_SUPERVISOR };
+const statuses = { ...assessmentResultStatuses, STARTED, ENDED_BY_INVIGILATOR };
 
 JuryCertificationSummary.statuses = statuses;
 

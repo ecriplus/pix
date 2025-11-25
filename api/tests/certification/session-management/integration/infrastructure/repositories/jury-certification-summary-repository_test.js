@@ -153,7 +153,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         const assessmentId = dbf.buildAssessment({
           certificationCourseId: certificationCourse.id,
-          state: Assessment.states.ENDED_BY_SUPERVISOR,
+          state: Assessment.states.ENDED_BY_INVIGILATOR,
         }).id;
 
         dbf.buildAssessmentResult({ assessmentId, createdAt: new Date('2018-02-15T00:00:00Z') });

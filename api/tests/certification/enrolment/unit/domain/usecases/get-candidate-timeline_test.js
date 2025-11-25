@@ -308,7 +308,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           expect(candidateTimeline.events).to.deep.includes(
             new CertificationEndedEvent({
               when: assessment.endedAt,
-              assessmentState: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+              assessmentState: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
             }),
           );
         });

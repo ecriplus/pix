@@ -557,7 +557,7 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
 
       // then
       const { state } = await knex('assessments').where('id', assessmentId).first('state');
-      expect(state).to.equal(Assessment.states.ENDED_BY_SUPERVISOR);
+      expect(state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
     });
   });
 

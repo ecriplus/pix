@@ -17,7 +17,7 @@ import { NeutralizationAttempt } from './NeutralizationAttempt.js';
 const states = {
   COMPLETED: 'completed',
   STARTED: 'started',
-  ENDED_BY_SUPERVISOR: 'endedBySupervisor',
+  ENDED_BY_INVIGILATOR: 'endedBySupervisor',
   ENDED_DUE_TO_FINALIZATION: 'endedDueToFinalization',
 };
 
@@ -29,7 +29,7 @@ const certificationAssessmentSchema = Joi.object({
   completedAt: Joi.date().allow(null),
   endedAt: Joi.date().allow(null),
   state: Joi.string()
-    .valid(states.COMPLETED, states.STARTED, states.ENDED_BY_SUPERVISOR, states.ENDED_DUE_TO_FINALIZATION)
+    .valid(states.COMPLETED, states.STARTED, states.ENDED_BY_INVIGILATOR, states.ENDED_DUE_TO_FINALIZATION)
     .required(),
   version: Joi.number()
     .integer()
@@ -98,7 +98,7 @@ class CertificationAssessment {
   }
 
   endByInvigilator({ now }) {
-    this.state = states.ENDED_BY_SUPERVISOR;
+    this.state = states.ENDED_BY_INVIGILATOR;
     this.endedAt = now;
   }
 
@@ -187,7 +187,7 @@ class CertificationAssessment {
   }
 
   static get uncompletedAssessmentStates() {
-    return [states.STARTED, states.ENDED_BY_SUPERVISOR, states.ENDED_DUE_TO_FINALIZATION];
+    return [states.STARTED, states.ENDED_BY_INVIGILATOR, states.ENDED_DUE_TO_FINALIZATION];
   }
 
   _getLastChallenge() {

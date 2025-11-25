@@ -57,7 +57,7 @@ describe('Unit | UseCase | end-assessment-by-invigilator', function () {
 
       // then
       expect(startedCertificationAssessment.endedAt).to.be.instanceOf(Date);
-      expect(startedCertificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_SUPERVISOR);
+      expect(startedCertificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
       expect(certificationAssessmentRepository.save).to.have.been.calledWithExactly(startedCertificationAssessment);
     });
   });

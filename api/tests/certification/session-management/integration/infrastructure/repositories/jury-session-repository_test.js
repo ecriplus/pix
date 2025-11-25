@@ -670,7 +670,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_SUPERVISOR,
+        state: states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -684,7 +684,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulTwo.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_SUPERVISOR,
+        state: states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -734,7 +734,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_SUPERVISOR,
+        state: states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -761,7 +761,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithImpactfulSubCategory.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_SUPERVISOR,
+        state: states.ENDED_BY_INVIGILATOR,
       });
       databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulSubCategory.id,

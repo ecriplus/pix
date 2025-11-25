@@ -770,7 +770,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               certificationCourseId: 789,
               createdAt: new Date('2020-01-01'),
               completedAt: new Date('2020-01-01'),
-              state: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+              state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
               version: 2,
               certificationChallenges: [
                 domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -837,7 +837,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
                 certificationCourseId: 789,
                 createdAt: new Date('2020-01-01'),
                 completedAt: new Date('2020-01-01'),
-                state: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+                state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
                 version: 2,
                 certificationChallenges: [domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false })],
                 certificationAnswersByDate: ['answer'],
