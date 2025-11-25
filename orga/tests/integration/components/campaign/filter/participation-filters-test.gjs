@@ -1220,7 +1220,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           </template>,
         );
         // then
-        assert.ok(screen.getByRole('textbox', { name: 'Groupes' }));
+        assert.ok(screen.getByRole('textbox', { name: t('common.filters.groups.label') }));
         assert.ok(screen.getByLabelText('d1'));
       });
 
@@ -1244,7 +1244,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           </template>,
         );
 
-        await click(screen.getByLabelText(t('pages.campaign-results.filters.type.groups.title')));
+        await click(screen.getByLabelText(t('common.filters.groups.label')));
         await click(
           await screen.findByRole('checkbox', {
             name: 'd1',
@@ -1285,7 +1285,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       );
 
       // then
-      assert.notOk(screen.queryByRole('textbox', { name: 'Rechercher par classes' }));
+      assert.notOk(screen.queryByRole('textbox', { name: t('common.filters.divisions.label') }));
       assert.notOk(screen.queryByLabelText('d2'));
     });
   });

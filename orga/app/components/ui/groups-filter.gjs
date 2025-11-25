@@ -26,8 +26,8 @@ export default class GroupsFilter extends Component {
       <div class="groups-filter--is-loading placeholder-box"></div>
     {{else}}
       <PixMultiSelect
-        @placeholder={{t "pages.campaign-results.filters.type.groups.title"}}
-        @emptyMessage={{t "pages.campaign-results.filters.type.groups.empty"}}
+        @placeholder={{t "common.filters.groups.placeholder"}}
+        @emptyMessage={{t "common.filters.groups.empty"}}
         @screenReaderOnly={{true}}
         @isSearchable={{true}}
         @onChange={{@onSelect}}
@@ -36,7 +36,7 @@ export default class GroupsFilter extends Component {
         ...attributes
       >
         <:default as |option|>{{option.label}}</:default>
-        <:label>{{t "pages.campaign-results.filters.type.groups.title"}}</:label>
+        <:label>{{t "common.filters.groups.label"}}</:label>
       </PixMultiSelect>
     {{/if}}
   </template>
