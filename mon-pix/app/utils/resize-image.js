@@ -27,6 +27,13 @@ export function resizeImage(imageInformation, options) {
 }
 
 function _resizeByHeight(imageInformation, MAX_HEIGHT) {
+  if (imageInformation.height <= MAX_HEIGHT && imageInformation.type !== 'vector') {
+    return {
+      width: imageInformation.width,
+      height: imageInformation.height,
+    };
+  }
+
   const width = Math.round((MAX_HEIGHT * imageInformation.width) / imageInformation.height);
   const height = MAX_HEIGHT;
   return {
@@ -36,7 +43,7 @@ function _resizeByHeight(imageInformation, MAX_HEIGHT) {
 }
 
 function _resizeByWidth(imageInformation, MAX_WIDTH) {
-  if (imageInformation.width <= MAX_WIDTH) {
+  if (imageInformation.width <= MAX_WIDTH && imageInformation.type !== 'vector') {
     return {
       width: imageInformation.width,
       height: imageInformation.height,
