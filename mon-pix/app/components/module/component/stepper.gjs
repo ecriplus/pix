@@ -17,7 +17,7 @@ import { TrackedSet } from 'tracked-built-ins';
 import didInsert from '../../../modifiers/modifier-did-insert';
 import { VERIFY_RESPONSE_DELAY } from './element';
 
-export const NEXT_STEP_BUTTON_DELAY = VERIFY_RESPONSE_DELAY + 500;
+export const NEXT_STEP_BUTTON_DELAY = VERIFY_RESPONSE_DELAY;
 
 export default class ModulixStepper extends Component {
   @tracked locallyAnsweredElements = new TrackedSet();
