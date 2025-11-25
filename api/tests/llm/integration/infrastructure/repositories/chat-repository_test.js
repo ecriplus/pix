@@ -444,14 +444,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               totalInputTokens: 1500,
               totalOutputTokens: 2500,
             }).id;
-            databaseBuilder.factory.buildChatMessage({
-              attachmentName: null,
-              chatId,
-              content: 'Je dois faire quoi ??!',
-              emitter: 'user',
-              index: 0,
-              wasModerated: false,
-            });
             databaseBuilder.factory.buildChatMessage_old({
               attachmentName: 'attachmentA',
               chatId,
@@ -460,10 +452,27 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               hasAttachmentBeenSubmittedAlongWithAPrompt: false,
               hasErrorOccurred: null,
               haveVictoryConditionsBeenFulfilled: false,
+              index: 0,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage_old({
+              attachmentName: 'attachmentA',
+              attachmentContext: 'Le contenu de la PJ',
+              chatId,
+              content: null,
+              emitter: 'assistant',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
               index: 1,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-              shouldBeCountedAsAPrompt: false,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage({
+              attachmentName: null,
+              chatId,
+              content: 'Je dois faire quoi ??!',
+              emitter: 'user',
+              index: 2,
               wasModerated: false,
             });
             databaseBuilder.factory.buildChatMessage({
@@ -471,7 +480,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               chatId,
               content: 'Les arc en ciels c super bo',
               emitter: 'assistant',
-              index: 2,
+              index: 3,
               wasModerated: null,
             });
             databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
@@ -499,19 +508,19 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                 }),
                 messages: [
                   new Message({
+                    attachmentName: 'attachmentA',
+                    content: null,
                     chatId,
-                    attachmentName: null,
-                    content: 'Je dois faire quoi ??!',
                     emitter: 'user',
                     index: 0,
                     wasModerated: false,
                   }),
                   new Message({
-                    attachmentName: 'attachmentA',
-                    content: null,
                     chatId,
+                    attachmentName: null,
+                    content: 'Je dois faire quoi ??!',
                     emitter: 'user',
-                    index: 1,
+                    index: 2,
                     wasModerated: false,
                   }),
                   new Message({
@@ -519,7 +528,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                     chatId,
                     content: 'Les arc en ciels c super bo',
                     emitter: 'assistant',
-                    index: 2,
+                    index: 3,
                     wasModerated: null,
                   }),
                 ],
@@ -555,14 +564,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               totalInputTokens: 1500,
               totalOutputTokens: 2500,
             }).id;
-            databaseBuilder.factory.buildChatMessage({
-              attachmentName: null,
-              chatId,
-              content: 'Je dois faire quoi ??!',
-              emitter: 'user',
-              index: 0,
-              wasModerated: false,
-            });
             databaseBuilder.factory.buildChatMessage_old({
               attachmentName: 'attachmentA',
               chatId,
@@ -571,10 +572,27 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               hasAttachmentBeenSubmittedAlongWithAPrompt: true,
               hasErrorOccurred: null,
               haveVictoryConditionsBeenFulfilled: false,
+              index: 0,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage_old({
+              attachmentName: 'attachmentA',
+              attachmentContext: 'Le contenu de la PJ',
+              chatId,
+              content: null,
+              emitter: 'assistant',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
               index: 1,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-              shouldBeCountedAsAPrompt: false,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage({
+              attachmentName: null,
+              chatId,
+              content: 'Je dois faire quoi ??!',
+              emitter: 'user',
+              index: 2,
               wasModerated: false,
             });
             databaseBuilder.factory.buildChatMessage({
@@ -582,7 +600,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               chatId,
               content: 'Les arc en ciels c super bo',
               emitter: 'assistant',
-              index: 2,
+              index: 3,
               wasModerated: null,
             });
             databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
@@ -610,11 +628,11 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                 }),
                 messages: [
                   new Message({
-                    chatId,
                     attachmentName: 'attachmentA',
                     content: 'Je dois faire quoi ??!',
+                    chatId,
                     emitter: 'user',
-                    index: 0,
+                    index: 2,
                     wasModerated: false,
                   }),
                   new Message({
@@ -622,7 +640,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                     chatId,
                     content: 'Les arc en ciels c super bo',
                     emitter: 'assistant',
-                    index: 2,
+                    index: 3,
                     wasModerated: null,
                   }),
                 ],

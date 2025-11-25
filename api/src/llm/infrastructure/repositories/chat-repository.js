@@ -29,11 +29,16 @@ export async function get(chatId) {
 
 function migrateToNewMessageDTOs(messageDTOs) {
   const messages = [];
+  let attachmentNameWaitingToBeMerged = null;
   for (const message of messageDTOs) {
     if (message.emitter === 'assistant' && (message.attachmentName || message.attachmentContext)) continue;
     if (message.hasAttachmentBeenSubmittedAlongWithAPrompt) {
-      messages.at(-1).attachmentName = message.attachmentName;
+      attachmentNameWaitingToBeMerged = message.attachmentName;
       continue;
+    }
+    if (attachmentNameWaitingToBeMerged) {
+      message.attachmentName = attachmentNameWaitingToBeMerged;
+      attachmentNameWaitingToBeMerged = null;
     }
     messages.push(message);
   }
