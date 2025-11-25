@@ -1233,7 +1233,7 @@
         "list": {
           "generate-personalize-course": "Génération de votre parcours personnalisé.",
           "results-analysis": "Analyse de vos résultats.",
-          "select-passages": "Séléction des formations adaptées."
+          "select-passages": "Sélection des formations adaptées."
         },
         "title": "Calcul de la suite du parcours en cours."
       }
