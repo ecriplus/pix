@@ -5,7 +5,6 @@ import {
   NoAttachmentNorMessageProvidedError,
   PromptAlreadyOngoingError,
 } from '../errors.js';
-import { Chat } from '../models/Chat.js';
 
 /**
  * @typedef {import ('../../infrastructure/repositories/index.js').chatRepository} ChatRepository
@@ -65,16 +64,6 @@ export async function promptChat({
 
     chat.addUserMessage(message, attachmentName);
 
-    let attachmentMessageType;
-    if (hasAnAttachmentBeenProvided) {
-      attachmentMessageType =
-        chat.lastAttachmentStatus === Chat.ATTACHMENT_STATUS.SUCCESS
-          ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
-          : toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
-    } else {
-      attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.NONE;
-    }
-
     let readableStream = null;
     if (chat.shouldSendForInference) {
       readableStream = await promptRepository.prompt({
@@ -86,7 +75,7 @@ export async function promptChat({
     return toEventStream.fromLLMResponse({
       llmResponse: readableStream,
       onStreamDone: finalize({ chat, chatRepository, redisMutex }),
-      attachmentMessageType,
+      attachmentMessageType: chat.lastAttachmentStatus,
       shouldSendDebugData: chat.isPreview,
       prompt: message,
     });

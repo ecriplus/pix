@@ -1,18 +1,13 @@
 import { PassThrough, pipeline } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
+import { Chat } from '../../domain/models/Chat.js';
 import * as events from './transforms/events.js';
 import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
 import * as responseObjectToEventStreamTransform from './transforms/response-object-to-event-stream-transform.js';
 import * as sendDebugDataTransform from './transforms/send-debug-data-transform.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
-
-export const ATTACHMENT_MESSAGE_TYPES = {
-  NONE: 'NONE',
-  IS_VALID: 'IS_VALID',
-  IS_INVALID: 'IS_INVALID',
-};
 
 /**
  * @typedef {Object} StreamCapture
@@ -54,8 +49,8 @@ export async function fromLLMResponse({
   writableStream.on('error', (err) => {
     logger.warn({ err, prompt }, 'error while streaming response');
   });
-  if (attachmentMessageType !== ATTACHMENT_MESSAGE_TYPES.NONE) {
-    writableStream.write(events.getAttachmentMessage(attachmentMessageType === ATTACHMENT_MESSAGE_TYPES.IS_VALID));
+  if (attachmentMessageType !== Chat.ATTACHMENT_STATUS.NONE) {
+    writableStream.write(events.getAttachmentMessage(attachmentMessageType === Chat.ATTACHMENT_STATUS.SUCCESS));
   }
   const readableStream = llmResponse ?? emptyReadable();
   /** @type {StreamCapture} */
