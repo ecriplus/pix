@@ -65,7 +65,7 @@ export class ChatV2 {
       this.configuration.attachmentName,
       'Configuration must have an attachment config setup to call this getter',
     );
-    return this.messages.some((message) => message.attachmentName === this.configuration.attachmentName);
+    return this.messages.some((message) => this.isAttachmentValid(message.attachmentName));
   }
 
   get isPreview() {
@@ -85,9 +85,8 @@ export class ChatV2 {
         continue;
       }
 
-      const isValidAttachment = message.attachmentName === this.configuration.attachmentName;
       // valid attachment should only count once
-      if (isValidAttachment && !isAttachmentAlreadyInContext) {
+      if (this.isAttachmentValid(message.attachmentName) && !isAttachmentAlreadyInContext) {
         isAttachmentAlreadyInContext = true;
         count++;
         continue;
@@ -119,8 +118,7 @@ export class ChatV2 {
         continue;
       }
 
-      const isValidAttachment = message.attachmentName === this.configuration.attachmentName;
-      if (isValidAttachment && !isAttachmentAlreadyInContext) {
+      if (this.isAttachmentValid(message.attachmentName) && !isAttachmentAlreadyInContext) {
         messagesForInference.push(
           {
             role: 'user',
@@ -167,7 +165,7 @@ export class ChatV2 {
   get lastAttachmentStatus() {
     const lastMessage = this.messages.at(-1);
     if (!lastMessage?.attachmentName) return ChatV2.ATTACHMENT_STATUS.NONE;
-    return lastMessage.attachmentName === this.configuration.attachmentName
+    return this.isAttachmentValid(lastMessage.attachmentName)
       ? ChatV2.ATTACHMENT_STATUS.SUCCESS
       : ChatV2.ATTACHMENT_STATUS.FAILURE;
   }
@@ -246,6 +244,23 @@ export class ChatV2 {
   updateTokenConsumption(inputTokens, outputTokens) {
     this.totalInputTokens += inputTokens;
     this.totalOutputTokens += outputTokens;
+  }
+
+  /**
+   * @param {string} attachmentName
+   */
+  isAttachmentValid(attachmentName) {
+    if (!this.configuration.hasAttachment || !attachmentName) {
+      return false;
+    }
+    const fileExtension = attachmentName.split('.').at(-1);
+    const attachmentFilename = attachmentName.split('.').slice(0, -1).join('');
+    const fileExtensionFromConfig = this.configuration.attachmentName.split('.').at(-1);
+    const attachmentFilenameFromConfig = this.configuration.attachmentName.split('.').slice(0, -1).join('');
+    if (fileExtension !== fileExtensionFromConfig) {
+      return false;
+    }
+    return attachmentFilename.includes(attachmentFilenameFromConfig);
   }
 
   toDTO() {
