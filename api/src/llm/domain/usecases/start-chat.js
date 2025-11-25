@@ -48,6 +48,6 @@ export async function startChat({
     totalInputTokens: 0,
     totalOutputTokens: 0,
   });
-  await chatRepository.saveV2(newChat);
+  await chatRepository.save(newChat);
   return newChat;
 }

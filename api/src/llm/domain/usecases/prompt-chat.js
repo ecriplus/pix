@@ -124,7 +124,7 @@ function finalize({ chat, chatRepository, redisMutex }) {
         }
 
         chat?.updateTokenConsumption?.(streamCapture.inputTokens, streamCapture.outputTokens);
-        await chatRepository.saveV2(chat);
+        await chatRepository.save(chat);
       }
     } catch (err) {
       logger.error({ err, chatId: chat.id, streamCapture }, 'error while finalizing');
