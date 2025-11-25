@@ -164,7 +164,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
 
         // then
-        expect(juryCertificationSummaries[0].status).to.equal('endedByinvigilator');
+        expect(juryCertificationSummaries[0].status).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
       });
     });
 
