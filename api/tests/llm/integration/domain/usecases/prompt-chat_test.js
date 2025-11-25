@@ -10,7 +10,7 @@ import {
   PromptAlreadyOngoingError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
-import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
+import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
 import { chatRepository, promptRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
@@ -65,7 +65,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   context('when chatId does not refer to an existing chat', function () {
     it('should throw a ChatNotFoundError', async function () {
       const anotherChatId = randomUUID();
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123,
         configurationId: 'uneConfigQuiExist',
@@ -77,7 +77,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         messages: [],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
 
       // when
       const err = await catchErr(promptChat)({
@@ -96,14 +96,14 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   context('when user does not own the chat', function () {
     it('should throw a ChatForbiddenError', async function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123456,
         configurationId: 'uneConfigQuiExist',
         configuration: new Configuration({ llm: {} }),
         messages: [],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
 
       // when
       const err = await catchErr(promptChat)({
@@ -122,7 +122,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   context('checking maxChars limit', function () {
     it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123,
         configurationId: 'uneConfigQuiExist',
@@ -134,7 +134,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         messages: [],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
 
       // when
       const err = await catchErr(promptChat)({
@@ -153,7 +153,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   context('checking maxPrompts limit', function () {
     it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123,
         configurationId: 'uneConfigQuiExist',
@@ -164,12 +164,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          buildBasicUserMessageV2('coucou user1', 0),
-          buildBasicAssistantMessageV2('coucou LLM2', 1),
-          buildBasicUserMessageV2('coucou user2', 2),
+          buildBasicUserMessage('coucou user1', 0),
+          buildBasicAssistantMessage('coucou LLM2', 1),
+          buildBasicUserMessage('coucou user2', 2),
         ],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
 
       // when
       const err = await catchErr(promptChat)({ chatId, userId: 123, message: 'un message', ...dependencies });
@@ -207,15 +207,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       context('when no attachmentName is provided', function () {
         it('should return a stream which will contain the llm response', async function () {
           // given
-          const chat = new ChatV2({
+          const chat = new Chat({
             id: chatId,
             userId: 123,
             configurationId,
             configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
-          await createChatV2(chat.toDTO());
+          await createChat(chat.toDTO());
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
@@ -307,15 +307,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
         it('should release chat resource', async function () {
           // given
-          const chat = new ChatV2({
+          const chat = new Chat({
             id: chatId,
             userId: 123,
             configurationId,
             configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
-          await createChatV2(chat.toDTO());
+          await createChat(chat.toDTO());
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
@@ -426,19 +426,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when no attachmentName is expected for the given configuration', function () {
           it('should throw a NoAttachmentNeededError', async function () {
             // given
-            const chat = new ChatV2({
+            const chat = new Chat({
               id: chatId,
               userId: 123,
               configurationId,
               configuration,
               haveVictoryConditionsBeenFulfilled: false,
               messages: [
-                buildBasicUserMessageV2('coucou user1', 0),
-                buildBasicAssistantMessageV2('coucou LLM2', 1),
-                buildBasicUserMessageV2('coucou user2', 2),
+                buildBasicUserMessage('coucou user1', 0),
+                buildBasicAssistantMessage('coucou LLM2', 1),
+                buildBasicUserMessage('coucou user2', 2),
               ],
             });
-            await createChatV2(chat.toDTO());
+            await createChat(chat.toDTO());
 
             // when
             const err = await catchErr(promptChat)({
@@ -464,26 +464,26 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 'persisting the user message with attachment and content but not actually forwarding the attachment to the llm',
               async function () {
                 // given
-                const chat = new ChatV2({
+                const chat = new Chat({
                   id: chatId,
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    buildBasicUserMessageV2('coucou user1', 0),
-                    buildBasicAssistantMessageV2('coucou LLM1', 1),
-                    new MessageV2({
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
+                    new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
                       emitter: 'user',
                       content: null,
                     }),
-                    buildBasicUserMessageV2('coucou user2', 3),
-                    buildBasicAssistantMessageV2('coucou LLM2', 4),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
-                await createChatV2(chat.toDTO());
+                await createChat(chat.toDTO());
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
@@ -621,15 +621,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           context('when the context for the valid attachmentName has not been added yet', function () {
             it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist the new message', async function () {
               // given
-              const chat = new ChatV2({
+              const chat = new Chat({
                 id: chatId,
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
                 haveVictoryConditionsBeenFulfilled: false,
-                messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+                messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
-              await createChatV2(chat.toDTO());
+              await createChat(chat.toDTO());
 
               // when
               const stream = await promptChat({
@@ -702,26 +702,26 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 "only forwarding the message content to the llm with the history's attachment context and not a new attachment context",
               async function () {
                 // given
-                const chat = new ChatV2({
+                const chat = new Chat({
                   id: chatId,
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
                   haveVictoryConditionsBeenFulfilled: false,
                   messages: [
-                    buildBasicUserMessageV2('coucou user1', 0),
-                    buildBasicAssistantMessageV2('coucou LLM1', 1),
-                    new MessageV2({
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
+                    new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
                       content: null,
                       emitter: 'user',
                     }),
-                    buildBasicUserMessageV2('coucou user2', 3),
-                    buildBasicAssistantMessageV2('coucou LLM2', 4),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
-                await createChatV2(chat.toDTO());
+                await createChat(chat.toDTO());
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
@@ -862,18 +862,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 'adding the attachment context in the conversation and persisting the message but not the fake exchange',
               async function () {
                 // given
-                const chat = new ChatV2({
+                const chat = new Chat({
                   id: chatId,
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
                   haveVictoryConditionsBeenFulfilled: false,
-                  messages: [
-                    buildBasicUserMessageV2('coucou user1', 0),
-                    buildBasicAssistantMessageV2('coucou LLM1', 1),
-                  ],
+                  messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
-                await createChatV2(chat.toDTO());
+                await createChat(chat.toDTO());
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
@@ -992,15 +989,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       context('when no attachmentName is provided', function () {
         it('should throw a NoAttachmentNorMessageProvidedError', async function () {
           // given
-          const chat = new ChatV2({
+          const chat = new Chat({
             id: chatId,
             userId: 123,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}),
             haveVictoryConditionsBeenFulfilled: false,
-            messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM2', 1)],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM2', 1)],
           });
-          await createChatV2(chat.toDTO());
+          await createChat(chat.toDTO());
 
           // when
           const err = await catchErr(promptChat)({
@@ -1021,19 +1018,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when no attachmentName is expected for the given configuration', function () {
           it('should throw a NoAttachmentNeededError', async function () {
             // given
-            const chat = new ChatV2({
+            const chat = new Chat({
               id: chatId,
               userId: 123,
               configurationId,
               configuration,
               haveVictoryConditionsBeenFulfilled: false,
               messages: [
-                buildBasicUserMessageV2('coucou user1', 0),
-                buildBasicAssistantMessageV2('coucou LLM2', 1),
-                buildBasicUserMessageV2('coucou user2', 2),
+                buildBasicUserMessage('coucou user1', 0),
+                buildBasicAssistantMessage('coucou LLM2', 1),
+                buildBasicUserMessage('coucou user2', 2),
               ],
             });
-            await createChatV2(chat.toDTO());
+            await createChat(chat.toDTO());
 
             // when
             const err = await catchErr(promptChat)({
@@ -1056,26 +1053,26 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           context('when the context for the valid attachmentName has already been added', function () {
             it('should return a stream which will contain the attachment-failure event and persist the user message which will not be forwarded the LLM', async function () {
               // given
-              const chat = new ChatV2({
+              const chat = new Chat({
                 id: chatId,
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
                 haveVictoryConditionsBeenFulfilled: false,
                 messages: [
-                  buildBasicUserMessageV2('coucou user1', 0),
-                  buildBasicAssistantMessageV2('coucou LLM1', 1),
-                  new MessageV2({
+                  buildBasicUserMessage('coucou user1', 0),
+                  buildBasicAssistantMessage('coucou LLM1', 1),
+                  new Message({
                     index: 2,
                     attachmentName: 'expected_file.txt',
                     content: null,
                     emitter: 'user',
                   }),
-                  buildBasicUserMessageV2('coucou user2', 3),
-                  buildBasicAssistantMessageV2('coucou LLM2', 4),
+                  buildBasicUserMessage('coucou user2', 3),
+                  buildBasicAssistantMessage('coucou LLM2', 4),
                 ],
               });
-              await createChatV2(chat.toDTO());
+              await createChat(chat.toDTO());
 
               // when
               const stream = await promptChat({
@@ -1162,15 +1159,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           context('when the context for the valid attachmentName has not been added yet', function () {
             it('should return a stream which will contain only the attachment-failure event and still persist the new message', async function () {
               // given
-              const chat = new ChatV2({
+              const chat = new Chat({
                 id: chatId,
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
                 haveVictoryConditionsBeenFulfilled: false,
-                messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+                messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
-              await createChatV2(chat.toDTO());
+              await createChat(chat.toDTO());
 
               // when
               const stream = await promptChat({
@@ -1244,26 +1241,26 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 'persisting the user message but not forwarding it to the llm ',
               async function () {
                 // given
-                const chat = new ChatV2({
+                const chat = new Chat({
                   id: chatId,
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
                   haveVictoryConditionsBeenFulfilled: true,
                   messages: [
-                    buildBasicUserMessageV2('coucou user1', 0),
-                    buildBasicAssistantMessageV2('coucou LLM1', 1),
-                    new MessageV2({
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
+                    new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
                       content: null,
                       emitter: 'user',
                     }),
-                    buildBasicUserMessageV2('coucou user2', 3),
-                    buildBasicAssistantMessageV2('coucou LLM2', 4),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
-                await createChatV2(chat.toDTO());
+                await createChat(chat.toDTO());
 
                 // when
                 const stream = await promptChat({
@@ -1356,18 +1353,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 'adding the attachment context in the conversation',
               async function () {
                 // given
-                const chat = new ChatV2({
+                const chat = new Chat({
                   id: chatId,
                   userId: 123,
                   configurationId: 'uneConfigQuiExist',
                   configuration: configurationWithAttachment,
                   haveVictoryConditionsBeenFulfilled: false,
-                  messages: [
-                    buildBasicUserMessageV2('coucou user1', 0),
-                    buildBasicAssistantMessageV2('coucou LLM1', 1),
-                  ],
+                  messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
-                await createChatV2(chat.toDTO());
+                await createChat(chat.toDTO());
 
                 // when
                 const stream = await promptChat({
@@ -1437,15 +1431,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
     context('stream capture', function () {
       it('should mark the current user message if victory conditions have been fulfilled, according to the stream response', async function () {
         // given
-        const chat = new ChatV2({
+        const chat = new Chat({
           id: chatId,
           userId: 123,
           configurationId,
           configuration,
           haveVictoryConditionsBeenFulfilled: false,
-          messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
-        await createChatV2(chat.toDTO());
+        await createChat(chat.toDTO());
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
@@ -1538,7 +1532,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
       it('should update the token consumption if such information was provided in the stream response', async function () {
         // given
-        const chat = new ChatV2({
+        const chat = new Chat({
           id: chatId,
           userId: 123,
           configurationId,
@@ -1546,9 +1540,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           haveVictoryConditionsBeenFulfilled: false,
           totalInputTokens: 1_000,
           totalOutputTokens: 2_000,
-          messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
-        await createChatV2(chat.toDTO());
+        await createChat(chat.toDTO());
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
@@ -1641,15 +1635,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
       it('should mark the current user message if user message has been moderated, according to the stream response', async function () {
         // given
-        const chat = new ChatV2({
+        const chat = new Chat({
           id: chatId,
           userId: 123,
           configurationId,
           configuration,
           haveVictoryConditionsBeenFulfilled: false,
-          messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
-        await createChatV2(chat.toDTO());
+        await createChat(chat.toDTO());
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
@@ -1728,14 +1722,14 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       context('when chat is a preview chat', function () {
         it('should return a stream which will contain, at the end, information regarding token consumption', async function () {
           // given
-          const chat = new ChatV2({
+          const chat = new Chat({
             id: chatId,
             configurationId,
             configuration,
             haveVictoryConditionsBeenFulfilled: false,
-            messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
-          await createChatV2(chat.toDTO());
+          await createChat(chat.toDTO());
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
@@ -1829,15 +1823,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       context('when chat is not a preview chat', function () {
         it('should return a stream which will not contain, at the end, any information regarding token consumption', async function () {
           // given
-          const chat = new ChatV2({
+          const chat = new Chat({
             id: chatId,
             userId: 123,
             configurationId,
             configuration,
             haveVictoryConditionsBeenFulfilled: false,
-            messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
-          await createChatV2(chat.toDTO());
+          await createChat(chat.toDTO());
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
@@ -1945,15 +1939,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
     it('should return a stream which will contain the partial llm response and the error', async function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123,
         configurationId,
         configuration,
         haveVictoryConditionsBeenFulfilled: false,
-        messages: [buildBasicUserMessageV2('coucou user1', 0), buildBasicAssistantMessageV2('coucou LLM1', 1)],
+        messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
       const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
           configuration: {
@@ -2047,7 +2041,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   context('when error occured during usecase', function () {
     it('should release the lock', async function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: chatId,
         userId: 123456,
         configurationId: 'uneConfigQuiExist',
@@ -2055,7 +2049,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         hasAttachmentContextBeenAdded: false,
         messages: [],
       });
-      await createChatV2(chat.toDTO());
+      await createChat(chat.toDTO());
 
       // when
       const err = await catchErr(promptChat)({
@@ -2079,30 +2073,30 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   });
 });
 
-function buildBasicUserMessageV2(content, index) {
-  return new MessageV2({
+function buildBasicUserMessage(content, index) {
+  return new Message({
     index,
     content,
     emitter: 'user',
   });
 }
 
-function buildBasicAssistantMessageV2(content, index) {
-  return new MessageV2({
+function buildBasicAssistantMessage(content, index) {
+  return new Message({
     index,
     content,
     emitter: 'assistant',
   });
 }
 
-async function createChatV2(chatDTO) {
-  databaseBuilder.factory.buildChatV2({
+async function createChat(chatDTO) {
+  databaseBuilder.factory.buildChat({
     ...chatDTO,
     configId: chatDTO.configurationId,
     configContent: chatDTO.configuration,
   });
   for (const messageDTO of chatDTO.messages) {
-    databaseBuilder.factory.buildChatMessageV2({
+    databaseBuilder.factory.buildChatMessage({
       ...messageDTO,
       chatId: chatDTO.id,
       wasModerated: messageDTO.wasModerated ?? null,

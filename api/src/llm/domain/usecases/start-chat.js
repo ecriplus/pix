@@ -1,4 +1,4 @@
-import { ChatV2 } from '../models/ChatV2.js';
+import { Chat } from '../models/Chat.js';
 
 /**
  * @typedef {import ('../../infrastructure/repositories/index.js').chatRepository} ChatRepository
@@ -35,7 +35,7 @@ export async function startChat({
     configuration = await configurationRepository.get(configurationId);
   }
   const chatId = randomUUID();
-  const newChat = new ChatV2({
+  const newChat = new Chat({
     id: chatId,
     userId,
     assessmentId,

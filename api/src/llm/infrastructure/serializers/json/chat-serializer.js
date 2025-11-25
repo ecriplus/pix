@@ -1,5 +1,5 @@
 /**
- * @param {import('../../../domain/models/ChatV2.js').ChatV2} chat
+ * @param {import('../../../domain/models/Chat.js').Chat} chat
  */
 export function serialize(chat) {
   return {

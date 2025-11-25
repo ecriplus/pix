@@ -287,9 +287,9 @@ describe('Acceptance | Route | llm-preview', function () {
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
       };
-      await databaseBuilder.factory.buildChatV2(chat);
+      await databaseBuilder.factory.buildChat(chat);
       for (const message of messages) {
-        await databaseBuilder.factory.buildChatMessageV2(message);
+        await databaseBuilder.factory.buildChatMessage(message);
       }
       await databaseBuilder.commit();
 

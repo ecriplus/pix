@@ -3,7 +3,7 @@ import { buildChat } from './build-chat.js';
 
 const TABLE_NAME = 'chat_messages';
 
-const buildChatMessage = function ({
+const buildChatMessage_old = function ({
   id = databaseBuffer.getNextId(),
   attachmentName = 'attachmentName',
   attachmentContext = 'attachmentContext',
@@ -48,7 +48,7 @@ const buildChatMessage = function ({
   });
 };
 
-const buildChatMessageV2 = function ({
+const buildChatMessage = function ({
   id = databaseBuffer.getNextId(),
   attachmentName = 'attachmentName',
   chatId,
@@ -79,4 +79,4 @@ const buildChatMessageV2 = function ({
   });
 };
 
-export { buildChatMessage, buildChatMessageV2 };
+export { buildChatMessage, buildChatMessage_old };

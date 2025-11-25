@@ -869,7 +869,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
                 context: 'some context',
               },
             }),
-            hasAttachmentContextBeenAdded: false,
             messages: [],
           });
           const chatDTO = chat.toDTO();

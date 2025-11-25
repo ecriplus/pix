@@ -226,9 +226,9 @@ import {
   buildLtiPlatformRegistrationWithPlatformConfig,
 } from './identity-access-management/build-lti-platform-registration.js';
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
-import { buildChatV2 } from './llm/build-chatv2.js';
+import { buildChat } from './llm/build-chat.js';
 import { buildConfiguration } from './llm/build-configuration.js';
-import { buildAssistantMessageV2, buildUserMessageV2 } from './llm/build-messagev2.js';
+import { buildAssistantMessage, buildUserMessage } from './llm/build-message.js';
 import { buildCampaignParticipation as maddoBuildCampaignParticipation } from './maddo/build-campaign-participation.js';
 import { buildTubeCoverage } from './maddo/build-tube-coverage.js';
 import { buildOrganizationDto } from './organizational-entities/build-organization-dto.js';
@@ -358,10 +358,10 @@ const maddo = {
 };
 
 const llm = {
-  buildAssistantMessageV2,
-  buildChatV2,
+  buildAssistantMessage,
+  buildChat,
   buildConfiguration,
-  buildUserMessageV2,
+  buildUserMessage,
 };
 
 export {

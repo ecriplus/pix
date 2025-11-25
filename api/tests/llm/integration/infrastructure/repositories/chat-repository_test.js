@@ -1,9 +1,8 @@
 import { randomUUID } from 'node:crypto';
 
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
-import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { get, getV2, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
@@ -24,7 +23,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         // given
         const uuid = randomUUID();
         const moduleId = randomUUID();
-        const chat = new ChatV2({
+        const chat = new Chat({
           id: uuid,
           userId: 123,
           passageId: 234,
@@ -42,18 +41,18 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           }),
           haveVictoryConditionsBeenFulfilled: true,
           messages: [
-            new MessageV2({
+            new Message({
               index: 0,
               content: 'je suis user',
               emitter: 'user',
               attachmentName: 'attachmentName',
             }),
-            new MessageV2({
+            new Message({
               index: 1,
               content: 'je suis LLM',
               emitter: 'assistant',
             }),
-            new MessageV2({
+            new Message({
               index: 2,
               content: 'message modéré',
               emitter: 'user',
@@ -114,7 +113,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       let databaseChat;
 
       beforeEach(async function () {
-        databaseChat = databaseBuilder.factory.buildChatV2();
+        databaseChat = databaseBuilder.factory.buildChat();
         await databaseBuilder.commit();
       });
 
@@ -122,7 +121,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         // given
         await clock.tickAsync('01:00:00');
         const updatedAtWithDifferentDateFromStartedAt = new Date(clock.now);
-        const chat = new ChatV2({
+        const chat = new Chat({
           ...databaseChat,
           configuration: new Configuration(databaseChat.configContent),
           totalInputTokens: 3,
@@ -152,8 +151,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
 
       beforeEach(async function () {
         databaseChat = databaseBuilder.factory.buildChat();
-        firstDatabaseChatMessage = databaseBuilder.factory.buildChatMessageV2({ chatId: databaseChat.id });
-        secondDatabaseChatMessage = databaseBuilder.factory.buildChatMessageV2({
+        firstDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({ chatId: databaseChat.id });
+        secondDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({
           chatId: databaseChat.id,
           index: 1,
           emitter: 'assistant',
@@ -163,22 +162,22 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       });
 
       it('should save only new messages related to the chat with same chat id', async function () {
-        const firstMessage = new MessageV2({
+        const firstMessage = new Message({
           ...firstDatabaseChatMessage,
           emitter: 'user',
         });
-        const secondMessage = new MessageV2({
+        const secondMessage = new Message({
           ...secondDatabaseChatMessage,
           emitter: 'assistant',
           content: 'Content not to be saved',
         });
-        const thirdMessage = new MessageV2({
+        const thirdMessage = new Message({
           index: 2,
           content: 'contenu qui respecte les conditions de victoires : merguez',
           emitter: 'user',
         });
 
-        const chat = new ChatV2({
+        const chat = new Chat({
           ...databaseChat,
           configuration: new Configuration(databaseChat.configContent),
           totalInputTokens: 3,
@@ -235,7 +234,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             },
           },
         },
-        hasAttachmentContextBeenAdded: true,
+        haveVictoryConditionsBeenFulfilled: true,
         moduleId: null,
         passageId: null,
         totalInputTokens: 1500,
@@ -243,33 +242,19 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       }).id;
       databaseBuilder.factory.buildChatMessage({
         attachmentName: 'attachmentA',
-        attachmentContext: 'Je suis un poulet',
         chatId,
         content: 'Voici le fichier :',
         emitter: 'user',
-        hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-        hasErrorOccurred: null,
-        haveVictoryConditionsBeenFulfilled: false,
         index: 0,
-        shouldBeForwardedToLLM: true,
-        shouldBeRenderedInPreview: true,
-        shouldBeCountedAsAPrompt: true,
         wasModerated: false,
       });
       databaseBuilder.factory.buildChatMessage({
         attachmentName: null,
-        attachmentContext: null,
         chatId,
         content: 'Les arc en ciels c super bo',
         emitter: 'assistant',
-        hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-        hasErrorOccurred: null,
-        haveVictoryConditionsBeenFulfilled: true,
         index: 1,
-        shouldBeForwardedToLLM: true,
-        shouldBeRenderedInPreview: true,
-        shouldBeCountedAsAPrompt: false,
-        wasModerated: false,
+        wasModerated: null,
       });
       databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
       await databaseBuilder.commit();
@@ -302,131 +287,13 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           messages: [
             new Message({
               attachmentName: 'attachmentA',
-              attachmentContext: 'Je suis un poulet',
-              chatId,
-              content: 'Voici le fichier :',
-              isFromUser: true,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-              hasErrorOccurred: null,
-              haveVictoryConditionsBeenFulfilled: false,
-              index: 0,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-            }),
-            new Message({
-              attachmentName: null,
-              attachmentContext: null,
-              chatId,
-              content: 'Les arc en ciels c super bo',
-              isFromUser: false,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              hasErrorOccurred: null,
-              haveVictoryConditionsBeenFulfilled: true,
-              index: 1,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-              shouldBeCountedAsAPrompt: false,
-              wasModerated: false,
-            }),
-          ],
-          hasAttachmentContextBeenAdded: true,
-          totalInputTokens: 1500,
-          totalOutputTokens: 2500,
-        }),
-      );
-    });
-  });
-
-  describe('#getV2', function () {
-    it('should return null when chat is not found', async function () {
-      // when
-      const chat = await getV2(randomUUID());
-
-      // then
-      expect(chat).to.be.null;
-    });
-
-    it('should return the ChatV2 model when chat is found', async function () {
-      // given
-      const chatId = databaseBuilder.factory.buildChatV2({
-        assessmentId: 123,
-        userId: 456,
-        challengeId: 'recCHallengeA',
-        configId: 'someConfigId',
-        configContent: {
-          challenge: {
-            victoryConditions: {
-              expectations: [
-                {
-                  type: 'answer_does_not_contain',
-                  value: 'saucisse',
-                },
-              ],
-            },
-          },
-        },
-        haveVictoryConditionsBeenFulfilled: true,
-        moduleId: null,
-        passageId: null,
-        totalInputTokens: 1500,
-        totalOutputTokens: 2500,
-      }).id;
-      databaseBuilder.factory.buildChatMessageV2({
-        attachmentName: 'attachmentA',
-        chatId,
-        content: 'Voici le fichier :',
-        emitter: 'user',
-        index: 0,
-        wasModerated: false,
-      });
-      databaseBuilder.factory.buildChatMessageV2({
-        attachmentName: null,
-        chatId,
-        content: 'Les arc en ciels c super bo',
-        emitter: 'assistant',
-        index: 1,
-        wasModerated: null,
-      });
-      databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
-      await databaseBuilder.commit();
-
-      // when
-      const chat = await getV2(chatId);
-
-      // then
-      expect(chat).to.deepEqualInstance(
-        new ChatV2({
-          id: chatId,
-          userId: 456,
-          assessmentId: 123,
-          challengeId: 'recCHallengeA',
-          passageId: null,
-          moduleId: null,
-          configurationId: 'someConfigId',
-          configuration: new Configuration({
-            challenge: {
-              victoryConditions: {
-                expectations: [
-                  {
-                    type: 'answer_does_not_contain',
-                    value: 'saucisse',
-                  },
-                ],
-              },
-            },
-          }),
-          messages: [
-            new MessageV2({
-              attachmentName: 'attachmentA',
               chatId,
               content: 'Voici le fichier :',
               emitter: 'user',
               index: 0,
               wasModerated: false,
             }),
-            new MessageV2({
+            new Message({
               attachmentName: null,
               chatId,
               content: 'Les arc en ciels c super bo',
@@ -446,7 +313,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       context('when there is an assistant message with an attachmentName or attachmentContext', function () {
         it('should ignore that message', async function () {
           // given
-          const chatId = databaseBuilder.factory.buildChatV2({
+          const chatId = databaseBuilder.factory.buildChat({
             assessmentId: 123,
             userId: 456,
             challengeId: 'recCHallengeA',
@@ -469,7 +336,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             totalInputTokens: 1500,
             totalOutputTokens: 2500,
           }).id;
-          databaseBuilder.factory.buildChatMessageV2({
+          databaseBuilder.factory.buildChatMessage({
             attachmentName: 'attachmentA',
             chatId,
             content: 'Voici le fichier :',
@@ -477,7 +344,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             index: 0,
             wasModerated: false,
           });
-          databaseBuilder.factory.buildChatMessage({
+          databaseBuilder.factory.buildChatMessage_old({
             attachmentName: 'attachmentA',
             attachmentContext: 'Le contenu de la pièce jointe',
             chatId,
@@ -492,7 +359,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             shouldBeCountedAsAPrompt: false,
             wasModerated: false,
           });
-          databaseBuilder.factory.buildChatMessageV2({
+          databaseBuilder.factory.buildChatMessage({
             attachmentName: null,
             chatId,
             content: 'Les arc en ciels c super bo',
@@ -500,15 +367,15 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             index: 2,
             wasModerated: null,
           });
-          databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+          databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
           await databaseBuilder.commit();
 
           // when
-          const chat = await getV2(chatId);
+          const chat = await get(chatId);
 
           // then
           expect(chat).to.deepEqualInstance(
-            new ChatV2({
+            new Chat({
               id: chatId,
               userId: 456,
               assessmentId: 123,
@@ -529,7 +396,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                 },
               }),
               messages: [
-                new MessageV2({
+                new Message({
                   attachmentName: 'attachmentA',
                   chatId,
                   content: 'Voici le fichier :',
@@ -537,7 +404,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                   index: 0,
                   wasModerated: false,
                 }),
-                new MessageV2({
+                new Message({
                   attachmentName: null,
                   chatId,
                   content: 'Les arc en ciels c super bo',
@@ -559,7 +426,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         function () {
           it('should keep that message', async function () {
             // given
-            const chatId = databaseBuilder.factory.buildChatV2({
+            const chatId = databaseBuilder.factory.buildChat({
               assessmentId: 123,
               userId: 456,
               challengeId: 'recCHallengeA',
@@ -577,7 +444,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               totalInputTokens: 1500,
               totalOutputTokens: 2500,
             }).id;
-            databaseBuilder.factory.buildChatMessageV2({
+            databaseBuilder.factory.buildChatMessage({
               attachmentName: null,
               chatId,
               content: 'Je dois faire quoi ??!',
@@ -585,7 +452,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 0,
               wasModerated: false,
             });
-            databaseBuilder.factory.buildChatMessage({
+            databaseBuilder.factory.buildChatMessage_old({
               attachmentName: 'attachmentA',
               chatId,
               content: null,
@@ -599,7 +466,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               shouldBeCountedAsAPrompt: false,
               wasModerated: false,
             });
-            databaseBuilder.factory.buildChatMessageV2({
+            databaseBuilder.factory.buildChatMessage({
               attachmentName: null,
               chatId,
               content: 'Les arc en ciels c super bo',
@@ -607,15 +474,15 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 2,
               wasModerated: null,
             });
-            databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+            databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
             await databaseBuilder.commit();
 
             // when
-            const chat = await getV2(chatId);
+            const chat = await get(chatId);
 
             // then
             expect(chat).to.deepEqualInstance(
-              new ChatV2({
+              new Chat({
                 id: chatId,
                 userId: 456,
                 assessmentId: 123,
@@ -631,7 +498,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                   },
                 }),
                 messages: [
-                  new MessageV2({
+                  new Message({
                     chatId,
                     attachmentName: null,
                     content: 'Je dois faire quoi ??!',
@@ -639,7 +506,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                     index: 0,
                     wasModerated: false,
                   }),
-                  new MessageV2({
+                  new Message({
                     attachmentName: 'attachmentA',
                     content: null,
                     chatId,
@@ -647,7 +514,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                     index: 1,
                     wasModerated: false,
                   }),
-                  new MessageV2({
+                  new Message({
                     attachmentName: null,
                     chatId,
                     content: 'Les arc en ciels c super bo',
@@ -670,7 +537,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         function () {
           it('should merge that message with the other user message containing the prompt', async function () {
             // given
-            const chatId = databaseBuilder.factory.buildChatV2({
+            const chatId = databaseBuilder.factory.buildChat({
               assessmentId: 123,
               userId: 456,
               challengeId: 'recCHallengeA',
@@ -688,7 +555,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               totalInputTokens: 1500,
               totalOutputTokens: 2500,
             }).id;
-            databaseBuilder.factory.buildChatMessageV2({
+            databaseBuilder.factory.buildChatMessage({
               attachmentName: null,
               chatId,
               content: 'Je dois faire quoi ??!',
@@ -696,7 +563,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 0,
               wasModerated: false,
             });
-            databaseBuilder.factory.buildChatMessage({
+            databaseBuilder.factory.buildChatMessage_old({
               attachmentName: 'attachmentA',
               chatId,
               content: null,
@@ -710,7 +577,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               shouldBeCountedAsAPrompt: false,
               wasModerated: false,
             });
-            databaseBuilder.factory.buildChatMessageV2({
+            databaseBuilder.factory.buildChatMessage({
               attachmentName: null,
               chatId,
               content: 'Les arc en ciels c super bo',
@@ -718,15 +585,15 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 2,
               wasModerated: null,
             });
-            databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+            databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
             await databaseBuilder.commit();
 
             // when
-            const chat = await getV2(chatId);
+            const chat = await get(chatId);
 
             // then
             expect(chat).to.deepEqualInstance(
-              new ChatV2({
+              new Chat({
                 id: chatId,
                 userId: 456,
                 assessmentId: 123,
@@ -742,7 +609,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                   },
                 }),
                 messages: [
-                  new MessageV2({
+                  new Message({
                     chatId,
                     attachmentName: 'attachmentA',
                     content: 'Je dois faire quoi ??!',
@@ -750,7 +617,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
                     index: 0,
                     wasModerated: false,
                   }),
-                  new MessageV2({
+                  new Message({
                     attachmentName: null,
                     chatId,
                     content: 'Les arc en ciels c super bo',

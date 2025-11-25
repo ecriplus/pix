@@ -5,7 +5,7 @@ import {
   NoAttachmentNorMessageProvidedError,
   PromptAlreadyOngoingError,
 } from '../errors.js';
-import { ChatV2 } from '../models/ChatV2.js';
+import { Chat } from '../models/Chat.js';
 
 /**
  * @typedef {import ('../../infrastructure/repositories/index.js').chatRepository} ChatRepository
@@ -53,7 +53,7 @@ export async function promptChat({
       throw new NoAttachmentNorMessageProvidedError();
     }
 
-    const chat = await chatRepository.getV2(chatId);
+    const chat = await chatRepository.get(chatId);
 
     if (!chat) {
       throw new ChatNotFoundError(chatId);
@@ -68,7 +68,7 @@ export async function promptChat({
     let attachmentMessageType;
     if (hasAnAttachmentBeenProvided) {
       attachmentMessageType =
-        chat.lastAttachmentStatus === ChatV2.ATTACHMENT_STATUS.SUCCESS
+        chat.lastAttachmentStatus === Chat.ATTACHMENT_STATUS.SUCCESS
           ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
           : toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
     } else {
@@ -77,7 +77,7 @@ export async function promptChat({
 
     let readableStream = null;
     if (chat.shouldSendForInference) {
-      readableStream = await promptRepository.promptV2({
+      readableStream = await promptRepository.prompt({
         messages: chat.messagesForInference,
         configuration: chat.configuration,
       });
@@ -101,7 +101,7 @@ export async function promptChat({
  * @name finalize
  *
  * @param {object} params
- * @param {ChatV2} params.chat
+ * @param {Chat} params.chat
  * @param {ChatRepository} params.chatRepository
  * @param {RedisMutex} params.redisMutex
  * @returns {(streamCapture: StreamCapture, hasStreamSucceeded: boolean) => Promise<void>}

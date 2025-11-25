@@ -14,7 +14,7 @@ export const llmPreviewController = {
   },
 
   async getChat(request) {
-    const chat = await chatRepository.getV2(request.params.chatId);
+    const chat = await chatRepository.get(request.params.chatId);
 
     if (!chat) {
       throw new ChatNotFoundError(request.params.chatId);

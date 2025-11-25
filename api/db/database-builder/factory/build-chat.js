@@ -22,54 +22,6 @@ const buildChat = function ({
       },
     },
   },
-  hasAttachmentContextBeenAdded = false,
-  moduleId = null,
-  passageId = null,
-  startedAt = new Date(),
-  totalInputTokens = 0,
-  totalOutputTokens = 0,
-  updatedAt = new Date(),
-} = {}) {
-  const values = {
-    id,
-    userId,
-    assessmentId,
-    challengeId,
-    configId,
-    configContent,
-    moduleId,
-    passageId,
-    hasAttachmentContextBeenAdded,
-    totalInputTokens,
-    totalOutputTokens,
-    startedAt,
-    updatedAt,
-  };
-
-  return databaseBuffer.pushInsertable({
-    tableName: TABLE_NAME,
-    values,
-  });
-};
-
-const buildChatV2 = function ({
-  id = randomUUID(),
-  userId = null,
-  assessmentId = null,
-  challengeId = null,
-  configId = null,
-  configContent = {
-    challenge: {
-      victoryConditions: {
-        expectations: [
-          {
-            type: 'answer_contains',
-            value: 'merguez',
-          },
-        ],
-      },
-    },
-  },
   haveVictoryConditionsBeenFulfilled = false,
   moduleId = null,
   passageId = null,
@@ -100,4 +52,4 @@ const buildChatV2 = function ({
   });
 };
 
-export { buildChat, buildChatV2 };
+export { buildChat };

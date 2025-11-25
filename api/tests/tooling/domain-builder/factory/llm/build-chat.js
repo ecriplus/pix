@@ -1,7 +1,7 @@
-import { ChatV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
+import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { buildConfiguration } from './build-configuration.js';
 
-export function buildChatV2({
+export function buildChat({
   id = 'some-uuid',
   userId = 123,
   assessmentId = 456,
@@ -15,7 +15,7 @@ export function buildChatV2({
   totalInputTokens = 200,
   totalOutputTokens = 400,
 } = {}) {
-  return new ChatV2({
+  return new Chat({
     id,
     userId,
     assessmentId,

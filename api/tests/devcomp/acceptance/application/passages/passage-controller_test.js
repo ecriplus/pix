@@ -383,7 +383,6 @@ describe('Acceptance | Controller | passage-controller', function () {
                 context: 'some context',
               },
             }),
-            hasAttachmentContextBeenAdded: false,
             messages: [],
           });
           const chatDTO = chat.toDTO();

@@ -1,4 +1,4 @@
-import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.js';
+import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { serialize } from '../../../../../src/llm/infrastructure/serializers/json/chat-serializer.js';
 import { expect } from '../../../../test-helper.js';
@@ -7,7 +7,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
   describe('serialize', function () {
     it('serializes Chat', function () {
       // given
-      const chat = new ChatV2({
+      const chat = new Chat({
         id: '123e4567-e89b-12d3-a456-426614174000',
         configuration: new Configuration({
           challenge: {
@@ -23,17 +23,17 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         totalOutputTokens: 5_000,
         haveVictoryConditionsBeenFulfilled: true,
         messages: [
-          new MessageV2({
+          new Message({
             index: 0,
             content: 'Salut',
             emitter: 'user',
           }),
-          new MessageV2({
+          new Message({
             index: 1,
             content: 'Bonjour comment puis-je vous aider ?',
             emitter: 'assistant',
           }),
-          new MessageV2({
+          new Message({
             index: 2,
             content: 'voici mon rib',
             attachmentName: 'filename.txt',

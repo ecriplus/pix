@@ -1,11 +1,11 @@
 import { Readable } from 'node:stream';
 
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { promptV2 } from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
+import { prompt } from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
 import { expect, nock, waitForStreamFinalizationToBeDone } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | prompt-repository', function () {
-  context('#promptV2', function () {
+  context('#prompt', function () {
     const configuration = new Configuration({
       challenge: {
         inputMaxPrompts: 100,
@@ -36,7 +36,7 @@ describe('LLM | Integration | Infrastructure | Repositories | prompt-repository'
           .reply(201, Readable.from(llmResponseChunks));
 
         // when
-        const response = await promptV2({ messages, configuration });
+        const response = await prompt({ messages, configuration });
 
         // then
         const parts = [];
@@ -91,7 +91,7 @@ describe('LLM | Integration | Infrastructure | Repositories | prompt-repository'
           .reply(201, Readable.from(llmResponseChunks));
 
         // when
-        const response = await promptV2({ messages, configuration });
+        const response = await prompt({ messages, configuration });
 
         // then
         const parts = [];
