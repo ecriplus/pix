@@ -23,7 +23,7 @@ export default class CombinedCourse extends Component {
   @service locale;
   @service currentUser;
 
-  get statusOptions() {
+  get statusesOptions() {
     return [
       {
         label: this.intl.t('pages.combined-course.filters.status.STARTED'),
@@ -44,8 +44,26 @@ export default class CombinedCourse extends Component {
     return this.currentUser.organization.isSco;
   }
 
+  get divisionFilterLabels() {
+    return this.isScoOrganization
+      ? {
+          placeholder: 'common.filters.divisions.placeholder',
+          label: 'common.filters.divisions.label',
+          empty: 'common.filters.divisions.empty',
+        }
+      : {
+          placeholder: 'common.filters.groups.placeholder',
+          label: 'common.filters.groups.label',
+          empty: 'common.filters.groups.empty',
+        };
+  }
+
   get divisionColumnName() {
     return this.intl.t(`components.group.${this.isScoOrganization ? 'SCO' : 'SUP'}`);
+  }
+
+  get divisionOptions() {
+    return this.args.divisions.map((division) => ({ label: division.name, value: division.name }));
   }
 
   @action
@@ -56,6 +74,12 @@ export default class CombinedCourse extends Component {
   @action
   onSearchFullName(name, value) {
     this.args.onFilter('fullName', value);
+  }
+
+  @action
+  onSearchDivisions(divisions) {
+    const eventName = this.isScoOrganization ? 'divisions' : 'groups';
+    this.args.onFilter(eventName, divisions);
   }
 
   <template>
@@ -70,12 +94,27 @@ export default class CombinedCourse extends Component {
         <:label>{{t "common.filters.fullname.label"}}</:label>
       </PixSearchInput>
 
+      {{#if this.displayDivisionColumn}}
+        <PixMultiSelect
+          @placeholder={{t this.divisionFilterLabels.placeholder}}
+          @emptyMessage={{t this.divisionFilterLabels.empty}}
+          @screenReaderOnly={{true}}
+          @values={{@divisionsFilter}}
+          @onChange={{this.onSearchDivisions}}
+          @options={{this.divisionOptions}}
+          @isSearchable={{true}}
+        >
+          <:label>{{t this.divisionFilterLabels.label}}</:label>
+          <:default as |option|>{{option.label}}</:default>
+        </PixMultiSelect>
+      {{/if}}
+
       <PixMultiSelect
         @placeholder={{t "pages.combined-course.filters.status.placeholder"}}
         @screenReaderOnly={{true}}
-        @options={{this.statusOptions}}
+        @options={{this.statusesOptions}}
         @onChange={{this.onSelectStatus}}
-        @values={{@statusFilter}}
+        @values={{@statusesFilter}}
         @hideDefaultOption={{false}}
       >
         <:label>{{t "pages.combined-course.filters.by-status"}}</:label>
