@@ -64,6 +64,36 @@ describe('LLM | Unit | Domain | Models | ChatV2', function () {
       });
     });
   });
+  describe('#get hasVictoryConditions', function () {
+    context('when chat has victory conditions', function () {
+      it('should return true', function () {
+        // given
+        const chat = new ChatV2({
+          id: 'some-chat-id',
+          configuration: new Configuration({
+            challenge: { victoryConditions: { expectations: ['super_victory_condition'] } },
+          }),
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('hasVictoryConditions', true);
+      });
+    });
+    context('when chat has no victory conditions', function () {
+      it('should return false', function () {
+        // given
+        const chat = new ChatV2({
+          id: 'some-chat-id',
+          configuration: new Configuration({}),
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('hasVictoryConditions', false);
+      });
+    });
+  });
 
   describe('#get isPreview', function () {
     context('when userId is defined', function () {

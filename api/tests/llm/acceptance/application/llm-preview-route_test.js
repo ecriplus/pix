@@ -11,7 +11,7 @@ import {
   waitForStreamFinalizationToBeDone,
 } from '../../../test-helper.js';
 
-describe.only('Acceptance | Route | llm-preview', function () {
+describe('Acceptance | Route | llm-preview', function () {
   let server;
 
   beforeEach(async function () {
@@ -229,7 +229,7 @@ describe.only('Acceptance | Route | llm-preview', function () {
       });
     });
 
-    it.only('returns status code 200 and chat information', async function () {
+    it('returns status code 200 and chat information', async function () {
       // given
       const chatId = '123e4567-e89b-12d3-a456-426614174000';
       const messages = [
@@ -243,54 +243,26 @@ describe.only('Acceptance | Route | llm-preview', function () {
         },
         {
           attachmentName: null,
-          attachmentContext: null,
           content: 'coucou LLM1',
           chatId,
           emitter: 'assistant',
           index: 1,
-          shouldBeRenderedInPreview: true,
-          hasErrorOccurred: true,
           wasModerated: null,
         },
         {
           attachmentName: 'expected_file.txt',
-          attachmentContext: null,
-          chatId,
-          emitter: 'user',
-          index: 2,
-          shouldBeRenderedInPreview: true,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-          wasModerated: null,
-        },
-        {
-          attachmentName: 'expected_file.txt',
-          chatId,
-          content: null,
-          index: 3,
-          attachmentContext: 'add me in the chat !',
-          emitter: 'assistant',
-          shouldBeRenderedInPreview: false,
-          wasModerated: null,
-        },
-        {
-          attachmentName: null,
-          attachmentContext: null,
           content: 'un message',
           chatId,
           emitter: 'user',
-          index: 4,
-          shouldBeRenderedInPreview: true,
-          haveVictoryConditionsBeenFulfilled: true,
+          index: 2,
           wasModerated: null,
         },
         {
           attachmentName: null,
-          attachmentContext: null,
           chatId,
           content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
           emitter: 'assistant',
-          index: 5,
-          shouldBeRenderedInPreview: true,
+          index: 3,
           wasModerated: null,
         },
       ];
@@ -317,7 +289,7 @@ describe.only('Acceptance | Route | llm-preview', function () {
       };
       await databaseBuilder.factory.buildChatV2(chat);
       for (const message of messages) {
-        await databaseBuilder.factory.buildChatMessage(message);
+        await databaseBuilder.factory.buildChatMessageV2(message);
       }
       await databaseBuilder.commit();
 
@@ -338,42 +310,35 @@ describe.only('Acceptance | Route | llm-preview', function () {
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
         hasVictoryConditions: true,
+        haveVictoryConditionsBeenFulfilled: true,
         messages: [
           {
             content: 'coucou user1',
             attachmentName: null,
             isFromUser: true,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: null,
           },
           {
             content: 'coucou LLM1',
             attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: true,
           },
           {
             content: 'un message',
             attachmentName: 'expected_file.txt',
             isFromUser: true,
             isAttachmentValid: true,
-            haveVictoryConditionsBeenFulfilled: true,
             wasModerated: null,
-            hasErrorOccurred: undefined,
           },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
             attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: null,
           },
         ],
       });

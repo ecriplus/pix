@@ -1,11 +1,7 @@
-import { Message } from '../../../domain/models/Chat.js';
-
 /**
- * @param {import('../../../domain/models/Chat').Chat} chat
+ * @param {import('../../../domain/models/ChatV2.js').ChatV2} chat
  */
 export function serialize(chat) {
-  const messagesForPreview = chat.messages.filter(({ shouldBeRenderedInPreview }) => shouldBeRenderedInPreview);
-
   return {
     id: chat.id,
     inputMaxChars: chat.configuration.inputMaxChars,
@@ -15,23 +11,13 @@ export function serialize(chat) {
     totalInputTokens: chat.totalInputTokens,
     totalOutputTokens: chat.totalOutputTokens,
     hasVictoryConditions: chat.hasVictoryConditions,
-    messages: messagesForPreview.map(
-      ({
-        content,
-        attachmentName,
-        isFromUser,
-        haveVictoryConditionsBeenFulfilled,
-        wasModerated,
-        hasErrorOccurred,
-      }) => ({
-        content,
-        attachmentName,
-        isFromUser,
-        haveVictoryConditionsBeenFulfilled,
-        wasModerated,
-        hasErrorOccurred,
-        isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
-      }),
-    ),
+    haveVictoryConditionsBeenFulfilled: chat.haveVictoryConditionsBeenFulfilled,
+    messages: chat.messages.map(({ content, attachmentName, emitter, wasModerated }) => ({
+      content,
+      attachmentName,
+      isFromUser: emitter === 'user',
+      wasModerated,
+      isAttachmentValid: chat.isAttachmentValid(attachmentName),
+    })),
   };
 }

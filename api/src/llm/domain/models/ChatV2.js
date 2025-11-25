@@ -72,6 +72,10 @@ export class ChatV2 {
     return !this.userId;
   }
 
+  get hasVictoryConditions() {
+    return this.configuration.hasVictoryConditions;
+  }
+
   get currentUserPromptsCount() {
     const userMessages = this.messages.filter((message) => message.emitter === 'user');
 
