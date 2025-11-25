@@ -7,7 +7,7 @@ describe('Certification | Configuration | Integration | Repository | sco-blocked
   describe('#getScoBlockedAccessDates', function () {
     it('should get blocked access dates ', async function () {
       // given
-      databaseBuilder.factory.buildScoBlockedAccessDates();
+      databaseBuilder.factory.buildDefaultScoBlockedAccessDates();
       await databaseBuilder.commit();
 
       const scoBlockedAccessDates = [
@@ -60,7 +60,7 @@ describe('Certification | Configuration | Integration | Repository | sco-blocked
   describe('#updateScoBlockedAccessDate', function () {
     it('should update blocked access dates ', async function () {
       // given
-      databaseBuilder.factory.buildScoBlockedAccessDates();
+      databaseBuilder.factory.buildDefaultScoBlockedAccessDates();
       await databaseBuilder.commit();
 
       //when

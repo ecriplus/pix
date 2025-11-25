@@ -11,14 +11,21 @@ export function buildScoBlockedAccessDate({ reopeningDate = new Date('2025-11-15
   });
 }
 
-export function buildScoBlockedAccessDates({
-  collegeDate = new Date('2025-11-15'),
-  lyceeDate = new Date('2025-10-15'),
-} = {}) {
-  buildScoBlockedAccessDate({ reopeningDate: collegeDate, scoOrganizationTagName: ScoOrganizationTagName.COLLEGE });
-  buildScoBlockedAccessDate({ reopeningDate: lyceeDate, scoOrganizationTagName: ScoOrganizationTagName.LYCEE });
-  return {
-    collegeDate,
-    lyceeDate,
-  };
+export function buildCollegeScoBlockedAccessDate(reopeningDate = new Date('2025-11-15')) {
+  buildScoBlockedAccessDate({
+    reopeningDate,
+    scoOrganizationTagName: ScoOrganizationTagName.COLLEGE,
+  });
+}
+
+export function buildLyceeScoBlockedAccessDate(reopeningDate = new Date('2025-10-15')) {
+  buildScoBlockedAccessDate({
+    reopeningDate,
+    scoOrganizationTagName: ScoOrganizationTagName.LYCEE,
+  });
+}
+
+export function buildDefaultScoBlockedAccessDates() {
+  buildCollegeScoBlockedAccessDate();
+  buildLyceeScoBlockedAccessDate();
 }

@@ -25,7 +25,7 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: { data: { attributes: { value: '2025-12-15' } } },
       };
-      databaseBuilder.factory.buildScoBlockedAccessDates();
+      databaseBuilder.factory.buildDefaultScoBlockedAccessDates();
       await databaseBuilder.commit();
 
       // when
@@ -66,7 +66,10 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
-      const scoBlockedAccessDates = databaseBuilder.factory.buildScoBlockedAccessDates();
+      const collegeReopeningDate = new Date('2025-10-23');
+      const lyceeReopeningDate = new Date('2025-12-23');
+      databaseBuilder.factory.buildCollegeScoBlockedAccessDate(collegeReopeningDate);
+      databaseBuilder.factory.buildLyceeScoBlockedAccessDate(lyceeReopeningDate);
       await databaseBuilder.commit();
 
       // when
@@ -80,14 +83,14 @@ describe('Certification | Configuration | Acceptance | API | sco-blocked-access-
           type: 'sco-blocked-access-dates',
           id: ScoOrganizationTagName.COLLEGE,
           attributes: {
-            'reopening-date': scoBlockedAccessDates.collegeDate.toISOString(),
+            'reopening-date': collegeReopeningDate.toISOString(),
           },
         },
         {
           type: 'sco-blocked-access-dates',
           id: ScoOrganizationTagName.LYCEE,
           attributes: {
-            'reopening-date': scoBlockedAccessDates.lyceeDate.toISOString(),
+            'reopening-date': lyceeReopeningDate.toISOString(),
           },
         },
       ]);
