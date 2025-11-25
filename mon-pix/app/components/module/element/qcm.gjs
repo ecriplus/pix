@@ -79,9 +79,10 @@ export default class ModuleQcm extends ModuleElement {
     event.preventDefault();
     this.args.updateSkipButton(true);
     this.isAnswering = true;
+    super.onAnswer(event);
+
     await this.waitFor(VERIFY_RESPONSE_DELAY);
 
-    super.onAnswer(event);
     if (this.shouldDisplayRequiredMessage === true) {
       this.isAnswering = false;
       this.args.updateSkipButton(false);
@@ -97,13 +98,13 @@ export default class ModuleQcm extends ModuleElement {
       isKo: !this.answerIsValid,
     };
 
+    this.args.updateSkipButton(false);
+    this.isAnswering = false;
+
     this.passageEvents.record({
       type: 'QCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
-
-    this.isAnswering = false;
-    this.args.updateSkipButton(false);
   }
 
   waitFor(duration) {

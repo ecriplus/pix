@@ -639,9 +639,12 @@ module('Integration | Component | Module | Grain', function (hooks) {
           const passage = store.createRecord('passage');
           this.set('passage', passage);
 
+          const onElementAnswer = sinon.stub();
+          this.set('onElementAnswer', onElementAnswer);
+
           // when
           const screen = await render(hbs`
-            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @onElementAnswer={{this.onElementAnswer}} @passage={{this.passage}} />`);
           await click(screen.getByLabelText('checkbox1'));
           await click(screen.getByLabelText('checkbox2'));
           const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
