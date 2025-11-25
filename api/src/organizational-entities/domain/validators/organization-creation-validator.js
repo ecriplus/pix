@@ -21,6 +21,12 @@ const organizationValidationJoiSchema = Joi.object({
   administrationTeamId: Joi.number().required().messages({
     'any.required': 'L’équipe en charge n’est pas renseignée.',
   }),
+
+  countryCode: Joi.number().min(99000).max(99999).integer().required().messages({
+    'any.required': 'Le code pays n’est pas renseigné.',
+    'number.min': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+    'number.max': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+  }),
 });
 
 const validate = function (organizationCreationParams) {
