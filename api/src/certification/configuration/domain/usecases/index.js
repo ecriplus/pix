@@ -11,6 +11,7 @@ import * as centerRepository from '../../infrastructure/repositories/center-repo
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
 import * as frameworkChallengesRepository from '../../infrastructure/repositories/framework-challenges-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
+import * as ScoBlockedAccessDatesRepository from '../../infrastructure/repositories/sco-blocked-access-dates-repository.js';
 import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
 
 /**
@@ -29,6 +30,7 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
+ * @typedef {ScoBlockedAccessDatesRepository} ScoBlockedAccessDatesRepository
  * @typedef {versionsRepository} VersionsRepository
  **/
 const dependencies = {
@@ -36,6 +38,7 @@ const dependencies = {
   attachableTargetProfileRepository,
   candidateRepository,
   centerRepository,
+  ScoBlockedAccessDatesRepository,
   challengeRepository,
   complementaryCertificationForTargetProfileAttachmentRepository,
   complementaryCertificationRepository,
@@ -57,9 +60,11 @@ import { getComplementaryCertificationForTargetProfileAttachmentRepository } fro
 import { getComplementaryCertificationTargetProfileHistory } from './get-complementary-certification-target-profile-history.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
+import { getScoBlockedAccessDates } from './get-sco-blocked-access-dates.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 import { updateCertificationVersion } from './update-certification-version.js';
+import { updateScoBlockedAccessDate } from './update-sco-blocked-access-date.js';
 
 const usecasesWithoutInjectedDependencies = {
   calibrateFrameworkVersion,
@@ -75,6 +80,8 @@ const usecasesWithoutInjectedDependencies = {
   importScoWhitelist,
   searchAttachableTargetProfiles,
   updateCertificationVersion,
+  getScoBlockedAccessDates,
+  updateScoBlockedAccessDate,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
