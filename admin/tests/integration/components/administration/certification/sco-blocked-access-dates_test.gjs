@@ -18,7 +18,7 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @model={{model}} /></template>);
+    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /></template>);
 
     // then
     assert
@@ -52,7 +52,7 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @model={{model}} /></template>);
+    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /></template>);
 
     const modifyButtons = await screen.getAllByText(
       t('pages.administration.certification.sco-blocked-access-date.modify-button'),
@@ -79,7 +79,7 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @model={{model}} /><PixToastContainer /></template>);
+    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>);
 
     const modifyButtons = await screen.getAllByText(
       t('pages.administration.certification.sco-blocked-access-date.modify-button'),
@@ -105,7 +105,7 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @model={{model}} /><PixToastContainer /></template>);
+    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>);
 
     const modifyButtons = await screen.getAllByText(
       t('pages.administration.certification.sco-blocked-access-date.modify-button'),

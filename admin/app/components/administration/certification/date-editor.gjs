@@ -17,6 +17,10 @@ export default class DateEditor extends Component {
   @action
   toggleEdit() {
     this.isEditing = !this.isEditing;
+
+    if (!this.isEditing) {
+      this.dateInput = null;
+    }
   }
 
   @action
@@ -34,17 +38,19 @@ export default class DateEditor extends Component {
   <template>
     <div class="sco-blocked-access-date-configuration__section">
       {{#if this.isEditing}}
-        <PixInput type="date" @value={{this.dateInput}} {{on "change" this.updateInput}}>
-          <:label>{{@label}}</:label>
-        </PixInput>
-        <PixButton @variant="secondary" @type="success" @triggerAction={{this.save}}>
-          {{t "pages.administration.certification.sco-blocked-access-date.save-button"}}
-        </PixButton>
-        <PixButton @variant="tertiary" @type="reset" @triggerAction={{this.toggleEdit}}>
-          {{t "pages.administration.certification.sco-blocked-access-date.cancel-button"}}
-        </PixButton>
+        <form class="sco-blocked-access-date-configuration__form" {{on "submit" this.save}}>
+          <PixInput type="date" @value={{this.dateInput}} {{on "change" this.updateInput}}>
+            <:label><span class="pix-body-l">{{@label}}</span></:label>
+          </PixInput>
+          <PixButton @variant="secondary" @type="submit">
+            {{t "pages.administration.certification.sco-blocked-access-date.save-button"}}
+          </PixButton>
+          <PixButton @variant="tertiary" @type="reset" @triggerAction={{this.toggleEdit}}>
+            {{t "pages.administration.certification.sco-blocked-access-date.cancel-button"}}
+          </PixButton>
+        </form>
       {{else}}
-        <span class="sco-blocked-access-date-configuration__current-date">{{@label}}
+        <span class="pix-body-l">{{@label}}
           {{this.formattedDate}}
           {{t "pages.administration.certification.sco-blocked-access-date.hour"}}</span>
         <PixButton @variant="secondary" @triggerAction={{this.toggleEdit}}>

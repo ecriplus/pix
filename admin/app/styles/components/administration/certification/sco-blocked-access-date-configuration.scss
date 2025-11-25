@@ -17,13 +17,10 @@
     margin-bottom: var(--pix-spacing-4x);
   }
 
-  &__current-date {
-    font-weight: var(--pix-font-normal);
-    font-size: 1.2rem;
-  }
-
-  .pix-input__label {
-    font-weight: var();
+  &__form {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
   }
 }
 
@@ -32,9 +29,3 @@
   gap: var(--pix-spacing-4x);
   align-items: center;
 }
-
-.pix-label {
-  font-weight: var(--pix-font-normal);
-  font-size: 1.2rem;
-}
-

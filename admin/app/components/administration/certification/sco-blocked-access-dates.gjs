@@ -13,11 +13,11 @@ export default class ScoBlockedAccessDates extends Component {
   @service pixToast;
 
   get collegeDate() {
-    return this.args.model?.find((date) => date.id === 'COLLEGE');
+    return this.args.scoBlockedAccessDates?.find((date) => date.id === 'COLLEGE');
   }
 
   get lyceeDate() {
-    return this.args.model?.find((date) => date.id === 'LYCEE');
+    return this.args.scoBlockedAccessDates?.find((date) => date.id === 'LYCEE');
   }
 
   @action
