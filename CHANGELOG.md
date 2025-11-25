@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.265.0](https://github.com/1024pix/pix/compare/v5.264.0...v5.265.0) (2025-11-25)
+
+### :rocket: Amélioration
+
+- [#14185](https://github.com/1024pix/pix/pull/14185)  Ajouter un validateur pour le modèle CombinedCourseTemplate (PIX-20014) 
+- [#14237](https://github.com/1024pix/pix/pull/14237) ajout POI dans mdoule CY-gestionMDP-ind 
+- [#14231](https://github.com/1024pix/pix/pull/14231) Ajouter de la validation sur l'import de feature dans PixAdmin (Pix-20523). 
+- [#14230](https://github.com/1024pix/pix/pull/14230) Correction "serveurs" 
+- [#14222](https://github.com/1024pix/pix/pull/14222) Déplacer le détail d'une certification dans la partie Sessions (PIX-20509). 
+- [#14175](https://github.com/1024pix/pix/pull/14175) Enregistrer le connectionMethodCode comme IdentityProvider quand un utilisateur se connecte (PIX-20399) 
+- [#14228](https://github.com/1024pix/pix/pull/14228) Permettre de vider le champs "crédits" d'une orga sur Pix Admin (PIX-20453) 
+
+### :bug: Correction
+
+- [#14184](https://github.com/1024pix/pix/pull/14184) Corriger affichage barre de navigation en Mobile et avec bannière (PIX-20469) 
+
+### :building_construction: Tech
+
+- [#14207](https://github.com/1024pix/pix/pull/14207) :recycle: Renomme le cas d'utilsation `end-assessment-by-supervisor` pour utiliser `invigilator` (PIX-20507) 
+- [#14236](https://github.com/1024pix/pix/pull/14236) Linter tous les fichiers de traduction de Pix Certif
+
 # [5.264.0](https://github.com/1024pix/pix/compare/v5.263.0...v5.264.0) (2025-11-24)
 
 ### :rocket: Amélioration
