@@ -1093,6 +1093,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     it('saves the given organization', async function () {
       // given
       const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: 99100,
+      });
       await insertMultipleSendingFeatureForNewOrganization();
 
       await databaseBuilder.commit();
@@ -1102,6 +1105,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         type: 'SCO',
         createdBy: superAdminUserId,
         administrationTeamId: administrationTeam.id,
+        countryCode: 99100,
       });
 
       // when
@@ -1112,11 +1116,13 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedOrganization.name).to.equal('Organization SCO');
       expect(savedOrganization.type).to.equal('SCO');
       expect(savedOrganization.createdBy).to.equal(superAdminUserId);
+      expect(savedOrganization.countryCode).to.equal(99100);
     });
 
     context('when the organization type is SCO-1D', function () {
       it('adds mission_management, oralization and learner_import features to the organization', async function () {
         const superAdminUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildCertificationCpfCountry({ countryCode: 99100 });
         const missionManagementFeatureId = databaseBuilder.factory.buildFeature(
           ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT,
         ).id;
@@ -1136,6 +1142,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           type: 'SCO-1D',
           createdBy: superAdminUserId,
           administrationTeamId: administrationTeam.id,
+          countryCode: 99100,
         });
 
         const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });
