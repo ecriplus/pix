@@ -627,7 +627,7 @@
           },
           "edit-modal": {
             "accessibility-adjustment": {
-              "details": "The adjustment involves removing questions that are not accessible",
+              "details": "The adjustment involves <b>removing questions that are not accessible</b> and <b>allowing the oral presentation of the challenges questions</b>",
               "label": "Candidate needs an adjustment",
               "title": "Digital accessibility adjustment"
             },

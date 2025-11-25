@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import Component from '@glimmer/component';
@@ -35,9 +36,12 @@ export default class CandidateEditionModal extends Component {
             <legend class='edit-candidate-modal-form-accessibility-adjustment__legend'>{{t
                 'pages.sessions.detail.candidates.edit-modal.accessibility-adjustment.title'
               }}</legend>
-            <span id='adjustment-details'>{{t
-                'pages.sessions.detail.candidates.edit-modal.accessibility-adjustment.details'
-              }}</span>
+            <PixNotificationAlert
+              @withIcon={{true}}
+              class='edit-candidate-modal-form-accessibility-adjustment__description'
+            >
+              {{t 'pages.sessions.detail.candidates.edit-modal.accessibility-adjustment.details' htmlSafe=true}}
+            </PixNotificationAlert>
             <PixCheckbox
               aria-describedby='adjustment-details'
               @checked={{@candidate.accessibilityAdjustmentNeeded}}

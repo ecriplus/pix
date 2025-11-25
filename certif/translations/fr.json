@@ -627,7 +627,7 @@
           },
           "edit-modal": {
             "accessibility-adjustment": {
-              "details": "L'aménagement consiste à retirer les questions non accessibles",
+              "details": "L'aménagement consiste à <b>retirer les questions non accessibles</b> ainsi qu'à <b>permettre l'oralisation de l'énoncé des épreuves</b>.",
               "label": "Le candidat a besoin d'un aménagement",
               "title": "Aménagement d'accessibilité numérique"
             },
