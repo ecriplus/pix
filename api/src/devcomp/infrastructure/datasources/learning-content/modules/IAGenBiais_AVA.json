@@ -121,7 +121,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Vous laissez l’IA répondre  sans intervenir.</p>",
+                    "content": "<p>Vous laissez l’IA répondre sans intervenir.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! Une demande comme celle-ci peut encourager un comportement dangereux. L’IA devra refuser d’y répondre directement, rappeler les risques et orienter vers une aide adaptée.</p><p> Cette règle de sécurité s’appliquera automatiquement par la suite à toutes les requêtes similaires.</p>"
                     }
