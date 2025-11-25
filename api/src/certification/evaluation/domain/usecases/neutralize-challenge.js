@@ -1,6 +1,18 @@
+/**
+ * @typedef {import('../../../shared/infrastructure/repositories/certification-assessment-repository.js')} CertificationAssessmentRepository
+ * @typedef {import('../events/ChallengeNeutralized.js').ChallengeNeutralized} ChallengeNeutralizedEvent
+ */
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';
 
-const neutralizeChallenge = async function ({
+/**
+ * @param {Object} params
+ * @param {string} params.certificationCourseId
+ * @param {string} params.challengeRecId
+ * @param {string} params.juryId
+ * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+ * @returns {Promise<ChallengeNeutralizedEvent>}
+ */
+export const neutralizeChallenge = async function ({
   certificationCourseId,
   challengeRecId,
   juryId,
@@ -13,5 +25,3 @@ const neutralizeChallenge = async function ({
   await certificationAssessmentRepository.save(certificationAssessment);
   return new ChallengeNeutralized({ certificationCourseId, juryId });
 };
-
-export { neutralizeChallenge };
