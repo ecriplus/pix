@@ -13,6 +13,8 @@ export function buildCampaignParticipation({
   clientId,
   masteryRate,
   tubes,
+  badges,
+  stages,
   pixScore,
 } = {}) {
   return new CampaignParticipation({
@@ -28,6 +30,8 @@ export function buildCampaignParticipation({
     clientId,
     masteryRate,
     tubes,
+    badges,
+    stages,
     pixScore,
   });
 }

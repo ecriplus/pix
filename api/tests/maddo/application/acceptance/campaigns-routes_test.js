@@ -121,12 +121,23 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
                 practicalTitle: tube.practicalTitle_i18n['fr'],
               }),
             ],
+            stages: {
+              numberOfStages: 0,
+              reachedStage: 0,
+            },
+            badges: [],
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation2,
             participantFirstName: organizationLearner2.firstName,
             participantLastName: organizationLearner2.lastName,
             clientId,
+            stages: {
+              numberOfStages: 0,
+              reachedStage: 0,
+            },
+            tubes: undefined,
+            badges: [],
           }),
         ]);
         expect(response.result.page).to.deep.equal({
@@ -304,6 +315,11 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
                 practicalTitle: tube.practicalTitle_i18n['fr'],
               }),
             ],
+            stages: {
+              numberOfStages: 0,
+              reachedStage: 0,
+            },
+            badges: [],
           }),
         ]);
         expect(response.result.page).to.deep.equal({
@@ -490,12 +506,23 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
                 practicalTitle: tube.practicalTitle_i18n['fr'],
               }),
             ],
+            stages: {
+              numberOfStages: 0,
+              reachedStage: 0,
+            },
+            badges: [],
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participationCreatedAfterDate,
             participantFirstName: organizationLearner.firstName,
             participantLastName: organizationLearner.lastName,
             clientId,
+            stages: {
+              numberOfStages: 0,
+              reachedStage: 0,
+            },
+            tubes: undefined,
+            badges: [],
           }),
         ]);
         expect(response.result.page).to.deep.equal({

@@ -15,6 +15,8 @@ class CampaignParticipation {
     clientId,
     masteryRate,
     tubes,
+    badges,
+    stages,
     pixScore,
   } = {}) {
     this.id = id;
@@ -30,6 +32,8 @@ class CampaignParticipation {
     this.participantId = crypto.hash('sha1', `${userId}_${clientId}`);
     this.masteryRate = masteryRate;
     this.tubes = tubes;
+    this.badges = badges;
+    this.stages = stages;
     this.pixScore = pixScore;
   }
 }
