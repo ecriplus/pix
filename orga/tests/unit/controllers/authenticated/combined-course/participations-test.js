@@ -14,6 +14,8 @@ module('Unit | Controller | authenticated/combined-course/participations', funct
       // given
       controller.fullName = 'nom1';
       controller.statuses = ['STARTED'];
+      controller.divisions = ['6eme'];
+      controller.groups = ['A'];
 
       // when
       controller.clearFilters();
@@ -21,6 +23,8 @@ module('Unit | Controller | authenticated/combined-course/participations', funct
       // then
       assert.strictEqual(controller.fullName, '');
       assert.deepEqual(controller.statuses, []);
+      assert.deepEqual(controller.divisions, []);
+      assert.deepEqual(controller.groups, []);
     });
   });
   module('#triggerFiltering', function () {
@@ -29,14 +33,20 @@ module('Unit | Controller | authenticated/combined-course/participations', funct
         // given
         controller.fullName = 'nom1';
         controller.statuses = [];
+        controller.divisions = [];
+        controller.groups = [];
 
         // when
         controller.triggerFiltering('fullName', 'nom2');
         controller.triggerFiltering('statuses', ['STARTED']);
+        controller.triggerFiltering('divisions', ['6eme']);
+        controller.triggerFiltering('groups', ['A']);
 
         // then
         assert.strictEqual(controller.fullName, 'nom2');
         assert.deepEqual(controller.statuses, ['STARTED']);
+        assert.deepEqual(controller.divisions, ['6eme']);
+        assert.deepEqual(controller.groups, ['A']);
       });
     });
   });
