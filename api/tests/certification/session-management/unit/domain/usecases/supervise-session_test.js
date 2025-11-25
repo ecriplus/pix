@@ -10,7 +10,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 
 describe('Unit | UseCase | supervise-session', function () {
   let invigilatorSessionRepository;
-  let supervisorAccessRepository;
+  let invigilatorAccessRepository;
   let certificationCenterRepository;
   let certificationCenterAccessRepository;
 
@@ -21,7 +21,7 @@ describe('Unit | UseCase | supervise-session', function () {
     invigilatorSessionRepository = {
       get: sinon.stub(),
     };
-    supervisorAccessRepository = {
+    invigilatorAccessRepository = {
       create: sinon.stub(),
     };
     certificationCenterRepository = {
@@ -55,7 +55,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorPassword,
       userId,
       invigilatorSessionRepository,
-      supervisorAccessRepository,
+      invigilatorAccessRepository,
       certificationCenterRepository,
       certificationCenterAccessRepository,
     });
@@ -87,7 +87,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorPassword: session.invigilatorPassword,
       userId,
       invigilatorSessionRepository,
-      supervisorAccessRepository,
+      invigilatorAccessRepository,
       certificationCenterRepository,
       certificationCenterAccessRepository,
     });
@@ -117,7 +117,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorPassword: session.invigilatorPassword,
       userId,
       invigilatorSessionRepository,
-      supervisorAccessRepository,
+      invigilatorAccessRepository,
       certificationCenterRepository,
       certificationCenterAccessRepository,
     });
@@ -150,7 +150,7 @@ describe('Unit | UseCase | supervise-session', function () {
         invigilatorPassword: session.invigilatorPassword,
         userId,
         invigilatorSessionRepository,
-        supervisorAccessRepository,
+        invigilatorAccessRepository,
         certificationCenterRepository,
         certificationCenterAccessRepository,
       });
@@ -160,7 +160,7 @@ describe('Unit | UseCase | supervise-session', function () {
     });
   });
 
-  it('should create a supervisor access', async function () {
+  it('should create an invigilator access', async function () {
     // given
     const sessionId = 123;
     const userId = 434;
@@ -181,12 +181,12 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorPassword: session.invigilatorPassword,
       userId,
       invigilatorSessionRepository,
-      supervisorAccessRepository,
+      invigilatorAccessRepository,
       certificationCenterRepository,
       certificationCenterAccessRepository,
     });
 
     // then
-    expect(supervisorAccessRepository.create).to.have.been.calledWithExactly({ sessionId, userId });
+    expect(invigilatorAccessRepository.create).to.have.been.calledWithExactly({ sessionId, userId });
   });
 });

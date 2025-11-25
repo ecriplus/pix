@@ -2,15 +2,15 @@ import { assessmentInvigilatorAuthorization as sessionInvigilatorAuthorization }
 import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Pre-handler | Invigilator Authorization', function () {
-  let supervisorAccessRepository;
+  let invigilatorAccessRepository;
   let dependencies;
 
   beforeEach(function () {
-    supervisorAccessRepository = {
-      isUserSupervisorForSessionCandidate: sinon.stub(),
-      isUserSupervisorForSession: sinon.stub(),
+    invigilatorAccessRepository = {
+      isUserInvigilatorForSessionCandidate: sinon.stub(),
+      isUserInvigilatorForSession: sinon.stub(),
     };
-    dependencies = { supervisorAccessRepository };
+    dependencies = { invigilatorAccessRepository };
   });
 
   describe('#verifyByCertificationCandidateId', function () {
@@ -24,7 +24,7 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
     describe('When user is the invigilator of the assessment session', function () {
       it('should return true', async function () {
         // given
-        supervisorAccessRepository.isUserSupervisorForSessionCandidate
+        invigilatorAccessRepository.isUserInvigilatorForSessionCandidate
           .withArgs({
             certificationCandidateId: 8,
             supervisorId: 100,
@@ -46,7 +46,7 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
     describe('When user is not the invigilator of the assessment session', function () {
       it('should return 401', async function () {
         // given
-        supervisorAccessRepository.isUserSupervisorForSessionCandidate
+        invigilatorAccessRepository.isUserInvigilatorForSessionCandidate
           .withArgs({
             certificationCandidateId: 8,
             supervisorId: 100,
@@ -77,13 +77,13 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
     describe('When user is the invigilator of the assessment session', function () {
       it('should return true', async function () {
         // given
-        supervisorAccessRepository.isUserSupervisorForSession.resolves(true);
+        invigilatorAccessRepository.isUserInvigilatorForSession.resolves(true);
 
         // when
         const response = await sessionInvigilatorAuthorization.verifyBySessionId(request, hFake, dependencies);
 
         // then
-        sinon.assert.calledWith(supervisorAccessRepository.isUserSupervisorForSession, {
+        sinon.assert.calledWith(invigilatorAccessRepository.isUserInvigilatorForSession, {
           sessionId: 201,
           userId: 100,
         });
@@ -94,7 +94,7 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
     describe('When user is not the invigilator of the session', function () {
       it('should return status code 401', async function () {
         // given
-        supervisorAccessRepository.isUserSupervisorForSession.resolves(false);
+        invigilatorAccessRepository.isUserInvigilatorForSession.resolves(false);
         request.headers = generateAuthenticatedUserRequestHeaders({ userId: 101 });
 
         // when
