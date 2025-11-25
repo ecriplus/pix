@@ -144,15 +144,28 @@ export async function getV2(chatId) {
   const knexConn = DomainTransaction.getConnection();
   const chatDTO = await knexConn('chats').where({ id: chatId }).first();
   if (!chatDTO) return null;
-  const messageDTOs = await knexConn('chat_messages').where({ chatId });
+  const messageDTOs = await knexConn('chat_messages').where({ chatId }).orderBy('index');
   return toDomainV2(
     {
       ...chatDTO,
       configurationId: chatDTO.configId,
       configuration: chatDTO.configContent,
     },
-    messageDTOs,
+    migrateToNewMessageDTOs(messageDTOs),
   );
+}
+
+function migrateToNewMessageDTOs(messageDTOs) {
+  const messages = [];
+  for (const message of messageDTOs) {
+    if (message.emitter === 'assistant' && (message.attachmentName || message.attachmentContext)) continue;
+    if (message.hasAttachmentBeenSubmittedAlongWithAPrompt) {
+      messages.at(-1).attachmentName = message.attachmentName;
+      continue;
+    }
+    messages.push(message);
+  }
+  return messages;
 }
 
 function toDomainV2(chatDTO, messageDTOs) {

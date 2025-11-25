@@ -680,5 +680,332 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         }),
       );
     });
+
+    context('retrocompatibility', function () {
+      context('when there is an assistant message with an attachmentName or attachmentContext', function () {
+        it('should ignore that message', async function () {
+          // given
+          const chatId = databaseBuilder.factory.buildChatV2({
+            assessmentId: 123,
+            userId: 456,
+            challengeId: 'recCHallengeA',
+            configId: 'someConfigId',
+            configContent: {
+              challenge: {
+                victoryConditions: {
+                  expectations: [
+                    {
+                      type: 'answer_does_not_contain',
+                      value: 'saucisse',
+                    },
+                  ],
+                },
+              },
+            },
+            haveVictoryConditionsBeenFulfilled: true,
+            moduleId: null,
+            passageId: null,
+            totalInputTokens: 1500,
+            totalOutputTokens: 2500,
+          }).id;
+          databaseBuilder.factory.buildChatMessageV2({
+            attachmentName: 'attachmentA',
+            chatId,
+            content: 'Voici le fichier :',
+            emitter: 'user',
+            index: 0,
+            wasModerated: false,
+          });
+          databaseBuilder.factory.buildChatMessage({
+            attachmentName: 'attachmentA',
+            attachmentContext: 'Le contenu de la pièce jointe',
+            chatId,
+            content: null,
+            emitter: 'assistant',
+            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            hasErrorOccurred: null,
+            haveVictoryConditionsBeenFulfilled: false,
+            index: 1,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            shouldBeCountedAsAPrompt: false,
+            wasModerated: false,
+          });
+          databaseBuilder.factory.buildChatMessageV2({
+            attachmentName: null,
+            chatId,
+            content: 'Les arc en ciels c super bo',
+            emitter: 'assistant',
+            index: 2,
+            wasModerated: null,
+          });
+          databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+          await databaseBuilder.commit();
+
+          // when
+          const chat = await getV2(chatId);
+
+          // then
+          expect(chat).to.deepEqualInstance(
+            new ChatV2({
+              id: chatId,
+              userId: 456,
+              assessmentId: 123,
+              challengeId: 'recCHallengeA',
+              passageId: null,
+              moduleId: null,
+              configurationId: 'someConfigId',
+              configuration: new Configuration({
+                challenge: {
+                  victoryConditions: {
+                    expectations: [
+                      {
+                        type: 'answer_does_not_contain',
+                        value: 'saucisse',
+                      },
+                    ],
+                  },
+                },
+              }),
+              messages: [
+                new MessageV2({
+                  attachmentName: 'attachmentA',
+                  chatId,
+                  content: 'Voici le fichier :',
+                  emitter: 'user',
+                  index: 0,
+                  wasModerated: false,
+                }),
+                new MessageV2({
+                  attachmentName: null,
+                  chatId,
+                  content: 'Les arc en ciels c super bo',
+                  emitter: 'assistant',
+                  index: 2,
+                  wasModerated: null,
+                }),
+              ],
+              haveVictoryConditionsBeenFulfilled: true,
+              totalInputTokens: 1500,
+              totalOutputTokens: 2500,
+            }),
+          );
+        });
+      });
+
+      context(
+        'when there is a user message with an attachmentName and hasAttachmentBeenSubmittedAlongWithAPrompt set to false',
+        function () {
+          it('should keep that message', async function () {
+            // given
+            const chatId = databaseBuilder.factory.buildChatV2({
+              assessmentId: 123,
+              userId: 456,
+              challengeId: 'recCHallengeA',
+              configId: 'someConfigId',
+              configContent: {
+                challenge: {
+                  victoryConditions: {
+                    expectations: [],
+                  },
+                },
+              },
+              haveVictoryConditionsBeenFulfilled: false,
+              moduleId: null,
+              passageId: null,
+              totalInputTokens: 1500,
+              totalOutputTokens: 2500,
+            }).id;
+            databaseBuilder.factory.buildChatMessageV2({
+              attachmentName: null,
+              chatId,
+              content: 'Je dois faire quoi ??!',
+              emitter: 'user',
+              index: 0,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage({
+              attachmentName: 'attachmentA',
+              chatId,
+              content: null,
+              emitter: 'user',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
+              index: 1,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsAPrompt: false,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessageV2({
+              attachmentName: null,
+              chatId,
+              content: 'Les arc en ciels c super bo',
+              emitter: 'assistant',
+              index: 2,
+              wasModerated: null,
+            });
+            databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+            await databaseBuilder.commit();
+
+            // when
+            const chat = await getV2(chatId);
+
+            // then
+            expect(chat).to.deepEqualInstance(
+              new ChatV2({
+                id: chatId,
+                userId: 456,
+                assessmentId: 123,
+                challengeId: 'recCHallengeA',
+                passageId: null,
+                moduleId: null,
+                configurationId: 'someConfigId',
+                configuration: new Configuration({
+                  challenge: {
+                    victoryConditions: {
+                      expectations: [],
+                    },
+                  },
+                }),
+                messages: [
+                  new MessageV2({
+                    chatId,
+                    attachmentName: null,
+                    content: 'Je dois faire quoi ??!',
+                    emitter: 'user',
+                    index: 0,
+                    wasModerated: false,
+                  }),
+                  new MessageV2({
+                    attachmentName: 'attachmentA',
+                    content: null,
+                    chatId,
+                    emitter: 'user',
+                    index: 1,
+                    wasModerated: false,
+                  }),
+                  new MessageV2({
+                    attachmentName: null,
+                    chatId,
+                    content: 'Les arc en ciels c super bo',
+                    emitter: 'assistant',
+                    index: 2,
+                    wasModerated: null,
+                  }),
+                ],
+                haveVictoryConditionsBeenFulfilled: false,
+                totalInputTokens: 1500,
+                totalOutputTokens: 2500,
+              }),
+            );
+          });
+        },
+      );
+
+      context(
+        'when there is a user message with an attachmentName and hasAttachmentBeenSubmittedAlongWithAPrompt set to true',
+        function () {
+          it('should merge that message with the other user message containing the prompt', async function () {
+            // given
+            const chatId = databaseBuilder.factory.buildChatV2({
+              assessmentId: 123,
+              userId: 456,
+              challengeId: 'recCHallengeA',
+              configId: 'someConfigId',
+              configContent: {
+                challenge: {
+                  victoryConditions: {
+                    expectations: [],
+                  },
+                },
+              },
+              haveVictoryConditionsBeenFulfilled: false,
+              moduleId: null,
+              passageId: null,
+              totalInputTokens: 1500,
+              totalOutputTokens: 2500,
+            }).id;
+            databaseBuilder.factory.buildChatMessageV2({
+              attachmentName: null,
+              chatId,
+              content: 'Je dois faire quoi ??!',
+              emitter: 'user',
+              index: 0,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessage({
+              attachmentName: 'attachmentA',
+              chatId,
+              content: null,
+              emitter: 'user',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
+              index: 1,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsAPrompt: false,
+              wasModerated: false,
+            });
+            databaseBuilder.factory.buildChatMessageV2({
+              attachmentName: null,
+              chatId,
+              content: 'Les arc en ciels c super bo',
+              emitter: 'assistant',
+              index: 2,
+              wasModerated: null,
+            });
+            databaseBuilder.factory.buildChatMessageV2({ content: 'je ne fais pas partie du chat du test !! ' });
+            await databaseBuilder.commit();
+
+            // when
+            const chat = await getV2(chatId);
+
+            // then
+            expect(chat).to.deepEqualInstance(
+              new ChatV2({
+                id: chatId,
+                userId: 456,
+                assessmentId: 123,
+                challengeId: 'recCHallengeA',
+                passageId: null,
+                moduleId: null,
+                configurationId: 'someConfigId',
+                configuration: new Configuration({
+                  challenge: {
+                    victoryConditions: {
+                      expectations: [],
+                    },
+                  },
+                }),
+                messages: [
+                  new MessageV2({
+                    chatId,
+                    attachmentName: 'attachmentA',
+                    content: 'Je dois faire quoi ??!',
+                    emitter: 'user',
+                    index: 0,
+                    wasModerated: false,
+                  }),
+                  new MessageV2({
+                    attachmentName: null,
+                    chatId,
+                    content: 'Les arc en ciels c super bo',
+                    emitter: 'assistant',
+                    index: 2,
+                    wasModerated: null,
+                  }),
+                ],
+                haveVictoryConditionsBeenFulfilled: false,
+                totalInputTokens: 1500,
+                totalOutputTokens: 2500,
+              }),
+            );
+          });
+        },
+      );
+    });
   });
 });

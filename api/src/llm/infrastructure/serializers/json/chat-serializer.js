@@ -4,29 +4,7 @@ import { Message } from '../../../domain/models/Chat.js';
  * @param {import('../../../domain/models/Chat').Chat} chat
  */
 export function serialize(chat) {
-  let messagesForPreview = chat.messages.filter(({ shouldBeRenderedInPreview }) => shouldBeRenderedInPreview);
-
-  let i = 0;
-
-  while (i < messagesForPreview.length - 1) {
-    const current = messagesForPreview[i];
-    const next = messagesForPreview[i + 1];
-
-    if (current.hasAttachmentBeenSubmittedAlongWithAPrompt) {
-      const mergedMessage = new Message({
-        index: i,
-        content: next.content,
-        attachmentName: current.attachmentName,
-        isFromUser: true,
-        haveVictoryConditionsBeenFulfilled: next.haveVictoryConditionsBeenFulfilled,
-        wasModerated: next.wasModerated,
-      });
-
-      messagesForPreview = messagesForPreview.toSpliced(i, 2, mergedMessage);
-    } else {
-      i++;
-    }
-  }
+  const messagesForPreview = chat.messages.filter(({ shouldBeRenderedInPreview }) => shouldBeRenderedInPreview);
 
   return {
     id: chat.id,

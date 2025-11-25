@@ -9,7 +9,7 @@ import { ChatV2, MessageV2 } from '../../../../../src/llm/domain/models/ChatV2.j
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
-describe.only('LLM | Unit | Domain | Models | ChatV2', function () {
+describe('LLM | Unit | Domain | Models | ChatV2', function () {
   describe('#get hasAttachmentContextBeenAdded', function () {
     context('when there are no user messages with the expected attachment', function () {
       it('returns false', function () {

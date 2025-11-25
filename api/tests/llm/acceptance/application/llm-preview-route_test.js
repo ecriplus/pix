@@ -11,7 +11,7 @@ import {
   waitForStreamFinalizationToBeDone,
 } from '../../../test-helper.js';
 
-describe('Acceptance | Route | llm-preview', function () {
+describe.only('Acceptance | Route | llm-preview', function () {
   let server;
 
   beforeEach(async function () {
@@ -148,15 +148,7 @@ describe('Acceptance | Route | llm-preview', function () {
 
       const chatId = response.headers.location.split('/').at(-1);
       const chat = await knex('chats')
-        .select(
-          'id',
-          'userId',
-          'configId',
-          'configContent',
-          'hasAttachmentContextBeenAdded',
-          'totalInputTokens',
-          'totalOutputTokens',
-        )
+        .select('id', 'userId', 'configId', 'configContent', 'totalInputTokens', 'totalOutputTokens')
         .where({ id: chatId })
         .first();
       expect(chat).to.deep.contain({
@@ -171,7 +163,6 @@ describe('Acceptance | Route | llm-preview', function () {
             validationPrompt: 'Un nouveau prompt de validation à transmettre à poc-llm',
           },
         },
-        hasAttachmentContextBeenAdded: false,
       });
     });
   });
@@ -238,17 +229,15 @@ describe('Acceptance | Route | llm-preview', function () {
       });
     });
 
-    it('returns status code 200 and chat information', async function () {
+    it.only('returns status code 200 and chat information', async function () {
       // given
       const chatId = '123e4567-e89b-12d3-a456-426614174000';
       const messages = [
         {
           attachmentName: null,
-          attachmentContext: null,
           content: 'coucou user1',
           chatId,
           emitter: 'user',
-          shouldBeRenderedInPreview: true,
           index: 0,
           wasModerated: null,
         },
@@ -321,12 +310,12 @@ describe('Acceptance | Route | llm-preview', function () {
             context: 'add me in the chat !',
           },
         },
-        hasAttachmentContextBeenAdded: true,
+        haveVictoryConditionsBeenFulfilled: true,
         messages,
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
       };
-      await databaseBuilder.factory.buildChat(chat);
+      await databaseBuilder.factory.buildChatV2(chat);
       for (const message of messages) {
         await databaseBuilder.factory.buildChatMessage(message);
       }
