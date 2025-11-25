@@ -10,9 +10,7 @@
     "duration": 5,
     "level": "novice",
     "tabletSupport": "inconvenient",
-    "objectives": [
-      "Non régression fonctionnelle"
-    ]
+    "objectives": ["Non régression fonctionnelle"]
   },
   "sections": [
     {
@@ -62,6 +60,59 @@
                         }
                       ],
                       "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "0f8eb663-be85-4cb1-9168-e5c39f4ec1bd",
+                      "type": "qrocm",
+                      "instruction": "<p>Compléter le texte suivant :</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<span>Pix est un</span>"
+                        },
+                        {
+                          "input": "pix-name",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 10,
+                          "display": "inline",
+                          "placeholder": "",
+                          "ariaLabel": "Mot à trouver",
+                          "defaultValue": "",
+                          "tolerances": ["t1", "t3"],
+                          "solutions": ["Groupement"]
+                        },
+                        {
+                          "type": "text",
+                          "content": "<span>d'intérêt public qui a été créée en</span>"
+                        },
+                        {
+                          "input": "pix-birth",
+                          "type": "input",
+                          "inputType": "number",
+                          "size": 10,
+                          "display": "inline",
+                          "placeholder": "",
+                          "ariaLabel": "Année à trouver",
+                          "defaultValue": "",
+                          "tolerances": [],
+                          "solutions": [2016]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Correct&#8239;!",
+                          "diagnosis": "<p> vous nous connaissez bien &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
+                        },
+                        "invalid": {
+                          "state": "Incorrect&#8239;!",
+                          "diagnosis": "<p> vous y arriverez la prochaine fois&#8239;!</p>"
+                        }
+                      }
                     }
                   ]
                 },
@@ -128,11 +179,7 @@
                           "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "3",
-                        "4"
-                      ]
+                      "solutions": ["1", "3", "4"]
                     }
                   ]
                 },
@@ -941,11 +988,7 @@
                     "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3",
-                  "4"
-                ]
+                "solutions": ["1", "3", "4"]
               }
             }
           ]
@@ -1032,13 +1075,8 @@
                     "placeholder": "",
                     "ariaLabel": "Mot à trouver",
                     "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "Groupement"
-                    ]
+                    "tolerances": ["t1", "t3"],
+                    "solutions": ["Groupement"]
                   },
                   {
                     "type": "text",
@@ -1054,9 +1092,7 @@
                     "ariaLabel": "Année à trouver",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [
-                      2016
-                    ]
+                    "solutions": [2016]
                   }
                 ],
                 "feedbacks": {
@@ -1110,14 +1146,8 @@
                     "placeholder": "",
                     "ariaLabel": "Remplir le prénom de la personne qui est en train de parler dans la visioconférence",
                     "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "Katie"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["Katie"]
                   }
                 ],
                 "feedbacks": {
@@ -1190,12 +1220,8 @@
                     "placeholder": "",
                     "ariaLabel": "Nom de ce produit",
                     "defaultValue": "",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "Modulix"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["Modulix"]
                   }
                 ],
                 "feedbacks": {
