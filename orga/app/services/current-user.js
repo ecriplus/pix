@@ -64,6 +64,14 @@ export default class CurrentUserService extends Service {
     this.combinedCourses = await this.organization.combinedCourses;
   }
 
+  async loadDivisions() {
+    if (this.organization.isManagingStudents) {
+      if (this.organization.isSco) return this.organization.divisions;
+      if (this.organization.isSup) return this.organization.groups;
+    }
+    return null;
+  }
+
   get hasCombinedCourses() {
     return Boolean(this.combinedCourses && this.combinedCourses.length > 0);
   }
