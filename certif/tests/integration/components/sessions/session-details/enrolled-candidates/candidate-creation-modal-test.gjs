@@ -88,6 +88,13 @@ module(
         )
         .exists();
       assert.dom(screen.getByRole('textbox', { name: 'E-mail de convocation' })).exists();
+      assert
+        .dom(
+          screen.getByText(
+            "L'envoi automatique de convocation par Pix n'est pas encore disponible. Le centre de certification se charge de convoquer les candidats.",
+          ),
+        )
+        .exists();
     });
 
     test('it should have some inputs required', async function (assert) {

@@ -605,6 +605,7 @@
               "enrol-the-candidate": "Enrol the candidate"
             },
             "complementary-certification-none": "None",
+            "email-convocation-info": "Automatic sending of exam invitations via Pix is not yet available. The certification center is responsible for inviting candidates.",
             "info-panel": "If this field isn’t filled in, the results won't be transmitted by email for the affected candidate(s).<br />The candidate will see their results displayed directly on their Pix account.",
             "notifications": {
               "error-add-duplicate": "This candidate is already in the list, you can't add them again.",
