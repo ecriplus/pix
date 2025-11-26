@@ -1,20 +1,5 @@
 @use 'pix-design-tokens/typography';
 
-.admin-form--training__logo-url-input {
-  @extend %pix-body-s;
-
-  strong {
-    font-weight: 500;
-  }
-
-  small {
-    display: block;
-    margin-top: var(--pix-spacing-2x);
-    color: var(--pix-neutral-500);
-    font-size: 0.813rem;
-  }
-}
-
 .admin-form--training__duration {
   display: flex;
   gap: 2rem;
@@ -26,6 +11,9 @@
 }
 
 .training__logo-url-link {
+  @extend %pix-body-xs;
+
+  display: block;
   color: var(--pix-primary-700);
   text-decoration: underline;
 }

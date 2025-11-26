@@ -180,28 +180,24 @@ export default class CreateOrUpdateTrainingForm extends Component {
           >
             <:label>Langue localisée</:label>
           </PixSelect>
-          <div class="admin-form--training__logo-url-input">
-            <PixInput
-              @id="trainingEditorLogoUrl"
-              @subLabel="Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg"
-              required={{true}}
-              aria-required={{true}}
-              @value={{this.form.editorLogoUrl}}
-              {{on "change" (fn this.updateForm "editorLogoUrl")}}
-            >
-              <:label>Url du logo de l'éditeur (.svg)</:label>
-            </PixInput>
-            <small>
-              <a
-                href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="training__logo-url-link"
-              >
-                Voir la liste des logos éditeur
-              </a>
-            </small>
-          </div>
+          <PixInput
+            @id="trainingEditorLogoUrl"
+            @subLabel="Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg"
+            required={{true}}
+            aria-required={{true}}
+            @value={{this.form.editorLogoUrl}}
+            {{on "change" (fn this.updateForm "editorLogoUrl")}}
+          >
+            <:label>Url du logo de l'éditeur (.svg)</:label>
+          </PixInput>
+          <a
+            href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="training__logo-url-link"
+          >
+            Voir la liste des logos éditeur
+          </a>
           <PixInput
             @id="trainingEditorName"
             @subLabel="Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité"
