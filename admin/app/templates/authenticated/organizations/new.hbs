@@ -9,7 +9,8 @@
 
 <main class="main-admin-form">
   <Organizations::CreationForm
-    @organization={{@model}}
+    @organization={{@model.organization}}
+    @countries={{@model.countries}}
     @onSubmit={{this.addOrganization}}
     @onCancel={{this.goBackToOrganizationList}}
     @parentOrganizationName={{this.parentOrganizationName}}
