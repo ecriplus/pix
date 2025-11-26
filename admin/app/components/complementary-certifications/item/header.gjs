@@ -13,7 +13,7 @@ export default class Header extends Component {
         label: this.intl.t('components.complementary-certifications.title'),
       },
       {
-        label: this.args.complementaryCertificationLabel,
+        label: this.args.complementaryCertification.label,
       },
     ];
   }
@@ -25,8 +25,14 @@ export default class Header extends Component {
 
     <div class="complementary-certification-header">
       <h1 class="complementary-certification-header__title">
-        <small>{{t "components.complementary-certifications.item.certification-framework"}}</small>
-        <span>{{@complementaryCertificationLabel}}</span>
+        <small>
+          {{#if @complementaryCertification.hasComplementaryReferential}}
+            {{t "components.complementary-certifications.item.certification-framework"}}
+          {{else}}
+            {{t "components.complementary-certifications.item.target-profile"}}
+          {{/if}}
+        </small>
+        <span>{{@complementaryCertification.label}}</span>
       </h1>
     </div>
   </template>

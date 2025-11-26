@@ -1,6 +1,6 @@
 {{page-title "Certification complémentaire " @model.id " | Pix Admin" replace=true}}
 
-<ComplementaryCertifications::Item::Header @complementaryCertificationLabel={{@model.label}} />
+<ComplementaryCertifications::Item::Header @complementaryCertification={{@model}} />
 
 <main class="page-body complementary-certification complementary-certification--no-tabs">
   {{outlet}}
