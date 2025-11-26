@@ -39,6 +39,15 @@ export default class OrganizationCreationForm extends Component {
     return options;
   }
 
+  get countriesOptions() {
+    const options = this.args.countries.map((country) => ({
+      value: country.code,
+      label: `${country.name} (${country.code})`,
+    }));
+
+    return options;
+  }
+
   get submitButtonText() {
     return this.args.parentOrganizationName
       ? 'components.organizations.creation.actions.add-child-organization'
@@ -58,6 +67,11 @@ export default class OrganizationCreationForm extends Component {
   @action
   handleAdministrationTeamSelectionChange(value) {
     this.args.organization.administrationTeamId = value;
+  }
+
+  @action
+  handleCountrySelectionChange(value) {
+    this.args.organization.countryCode = value;
   }
 
   @action
@@ -133,6 +147,21 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
+
+          <PixSelect
+            @onChange={{this.handleCountrySelectionChange}}
+            @options={{this.countriesOptions}}
+            @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
+            @hideDefaultOption={{true}}
+            @value={{@organization.countryCode}}
+            required
+            @aria-required={{true}}
+            @requiredLabel={{t "common.fields.required-field"}}
+            @isSearchable={{true}}
+          >
+            <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
+          </PixSelect>
+
         </Card>
 
         <Card class="admin-form__card" @title="Configuration">
