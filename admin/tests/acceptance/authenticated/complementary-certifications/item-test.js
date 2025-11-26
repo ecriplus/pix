@@ -10,7 +10,7 @@ module('Acceptance | Complementary certifications | Complementary certification 
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  test('it should display target profile and framework tabs', async function (assert) {
+  test('it should display only framework tab when hasComplementaryReferential is true', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
     server.create('complementary-certification', {
@@ -32,13 +32,9 @@ module('Acceptance | Complementary certifications | Complementary certification 
     assert.ok(
       within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.framework.tab') }),
     );
-    assert.ok(
-      within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.target-profile') }),
+    assert.notOk(
+      within(navigation).queryByRole('link', { name: t('components.complementary-certifications.item.target-profile') }),
     );
-    await click(
-      within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.target-profile') }),
-    );
-    assert.strictEqual(currentURL(), '/complementary-certifications/1/target-profile');
   });
 
   test('it should display target profiles links and redirect to details page on click', async function (assert) {
