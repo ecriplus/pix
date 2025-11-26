@@ -1,13 +1,6 @@
 .sco-blocked-access-date-configuration {
-  .block-layout__actions{
+  .block-layout__actions {
     display: block;
-  }
-
-  &__actions {
-    display: flex;
-    flex-direction: row;
-    gap: var(--pix-spacing-6x);
-    margin-top: var(--pix-spacing-6x);
   }
 
   &__section {
@@ -21,11 +14,11 @@
     display: flex;
     gap: var(--pix-spacing-4x);
     align-items: center;
-  }
-}
 
-.pix-input {
-  flex-direction: row;
-  gap: var(--pix-spacing-4x);
-  align-items: center;
+    .pix-input {
+      flex-direction: row;
+      gap: var(--pix-spacing-4x);
+      align-items: center;
+    }
+  }
 }

@@ -866,6 +866,8 @@
           "hour": "(00:00, Metropolitan France time)",
           "middle-school-date": "Reopening date for middle schools: {date}",
           "modify-button": "Modify",
+          "not-configured": "Not configured",
+          "not-found": "Reopening dates could not be found",
           "save-button": "Submit",
           "success": "Date successfully updated",
           "title": "Configuration of reopening dates for Pix Certif SCO spaces"

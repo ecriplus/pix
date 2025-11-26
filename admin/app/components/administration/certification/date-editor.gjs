@@ -2,16 +2,20 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class DateEditor extends Component {
+  @service intl;
   @tracked isEditing = false;
   @tracked dateInput;
 
-  get formattedDate() {
-    return this.args.date?.reopeningDate?.toLocaleDateString('fr-FR');
+  get displayText() {
+    const date = this.args.date?.reopeningDate;
+    if (!date) return this.intl.t('pages.administration.certification.sco-blocked-access-date.not-configured');
+    return `${date.toLocaleDateString('fr-FR')} ${this.intl.t('pages.administration.certification.sco-blocked-access-date.hour')}`;
   }
 
   @action
@@ -50,9 +54,7 @@ export default class DateEditor extends Component {
           </PixButton>
         </form>
       {{else}}
-        <span class="pix-body-l">{{@label}}
-          {{this.formattedDate}}
-          {{t "pages.administration.certification.sco-blocked-access-date.hour"}}</span>
+        <span class="pix-body-l">{{@label}} {{this.displayText}}</span>
         <PixButton @variant="secondary" @triggerAction={{this.toggleEdit}}>
           {{t "pages.administration.certification.sco-blocked-access-date.modify-button"}}
         </PixButton>

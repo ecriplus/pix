@@ -79,7 +79,9 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>);
+    const screen = await render(
+      <template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>,
+    );
 
     const modifyButtons = await screen.getAllByText(
       t('pages.administration.certification.sco-blocked-access-date.modify-button'),
@@ -105,7 +107,9 @@ module('Integration | Component | administration/certification/sco-blocked-acces
     ];
 
     // when
-    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>);
+    const screen = await render(
+      <template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>,
+    );
 
     const modifyButtons = await screen.getAllByText(
       t('pages.administration.certification.sco-blocked-access-date.modify-button'),
@@ -118,5 +122,36 @@ module('Integration | Component | administration/certification/sco-blocked-acces
 
     // then
     assert.dom(await screen.getByText(t('pages.administration.certification.sco-blocked-access-date.error'))).exists();
+  });
+
+  test('it should display "Non renseigné" when dates are not configured', async function (assert) {
+    // given
+    const model = [];
+
+    // when
+    const screen = await render(<template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /></template>);
+
+    // then
+    assert
+      .dom(screen.getByRole('heading', { name: t('pages.administration.certification.sco-blocked-access-date.title') }))
+      .exists();
+    assert
+      .dom(
+        screen.getByText(
+          t('pages.administration.certification.sco-blocked-access-date.high-school-date') +
+            ' ' +
+            t('pages.administration.certification.sco-blocked-access-date.not-configured'),
+        ),
+      )
+      .exists();
+    assert
+      .dom(
+        screen.getByText(
+          t('pages.administration.certification.sco-blocked-access-date.middle-school-date') +
+            ' ' +
+            t('pages.administration.certification.sco-blocked-access-date.not-configured'),
+        ),
+      )
+      .exists();
   });
 });

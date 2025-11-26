@@ -867,6 +867,8 @@
           "hour": "(00h00, heure France métropolitaine)",
           "middle-school-date": "Date de réouverture pour les collèges :",
           "modify-button": "Modifier",
+          "not-configured": "Non renseigné",
+          "not-found": "Les dates de réouverture n'ont pas été trouvées",
           "save-button": "Enregistrer",
           "success": "Date mise à jour avec succès",
           "title": "Configuration des dates de réouverture des espaces Pix Certif SCO"
