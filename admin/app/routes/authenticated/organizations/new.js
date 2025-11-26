@@ -28,9 +28,11 @@ export default class NewRoute extends Route {
 
   async model() {
     const organization = await this.store.createRecord('organization');
+    const administrationTeams = await this.store.findAll('administration-team');
     const countries = await this.store.findAll('country');
     return RSVP.hash({
       organization,
+      administrationTeams,
       countries,
     });
   }

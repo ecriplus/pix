@@ -18,13 +18,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     { code: '99101', name: 'Danemark' },
   ];
 
+  const administrationTeams = [
+    { id: 'team-1', name: 'Équipe 1' },
+    { id: 'team-2', name: 'Équipe 2' },
+  ];
+
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-      ]);
   });
 
   test('it renders', async function (assert) {
@@ -36,6 +36,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       <template>
         <CreationForm
           @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
           @countries={{countries}}
           @onSubmit={{onSubmit}}
           @onCancel={{onCancel}}
@@ -64,6 +65,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         <template>
           <CreationForm
             @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
             @onCancel={{onCancel}}
@@ -90,6 +92,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         <template>
           <CreationForm
             @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
             @onCancel={{onCancel}}
@@ -151,6 +154,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         <template>
           <CreationForm
             @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
             @onCancel={{onCancel}}
@@ -180,6 +184,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       <template>
         <CreationForm
           @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
           @countries={{countries}}
           @onSubmit={{onSubmit}}
           @onCancel={{onCancel}}
@@ -206,6 +211,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       <template>
         <CreationForm
           @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
           @countries={{countries}}
           @onSubmit={{onSubmit}}
           @onCancel={{onCancel}}

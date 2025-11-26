@@ -5,15 +5,12 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import Card from '../card';
 
 export default class OrganizationCreationForm extends Component {
   @service store;
-
-  @tracked administrationTeams = [];
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -22,17 +19,8 @@ export default class OrganizationCreationForm extends Component {
     { value: 'SCO-1D', label: 'Établissement scolaire du premier degré' },
   ];
 
-  constructor() {
-    super(...arguments);
-    this.#onMount();
-  }
-
-  async #onMount() {
-    this.administrationTeams = await this.store.findAll('administration-team');
-  }
-
   get administrationTeamsOptions() {
-    const options = this.administrationTeams.map((administrationTeam) => ({
+    const options = this.args.administrationTeams.map((administrationTeam) => ({
       value: administrationTeam.id,
       label: administrationTeam.name,
     }));

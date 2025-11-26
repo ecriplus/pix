@@ -10,6 +10,7 @@
 <main class="main-admin-form">
   <Organizations::CreationForm
     @organization={{@model.organization}}
+    @administrationTeams={{@model.administrationTeams}}
     @countries={{@model.countries}}
     @onSubmit={{this.addOrganization}}
     @onCancel={{this.goBackToOrganizationList}}
