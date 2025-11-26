@@ -22,9 +22,10 @@ export default class CombinedCourseItem extends Model {
   @attr('boolean') isLocked;
   @attr('number') duration;
   @attr('string') image;
+  @belongsTo('combined-course', { async: false, inverse: 'items' }) combinedCourse;
 
   get route() {
-    return this.type === CombinedCourseItemTypes.CAMPAIGN ? 'campaigns' : 'module';
+    return this.type === CombinedCourseItemTypes.CAMPAIGN ? 'campaigns' : 'old-module';
   }
 
   get iconUrl() {
@@ -50,6 +51,4 @@ export default class CombinedCourseItem extends Model {
   get validatedStages() {
     return this.validatedStagesCount - 1;
   }
-
-  @belongsTo('combined-course', { async: false, inverse: 'items' }) combinedCourse;
 }
