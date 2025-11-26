@@ -6,7 +6,7 @@ describe('Certification | Configuration | Unit | Serializer | framework-history-
   describe('#serialize', function () {
     it('should serialize a framework history to JSONAPI', function () {
       // given
-      const frameworkHistory = ['20250101080000', '20240101080000', '20230101080000'];
+      const frameworkHistory = [{ id: 456, startDate: new Date('2024-01-01'), expirationDate: new Date('2025-02-02') }];
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
 
       // when

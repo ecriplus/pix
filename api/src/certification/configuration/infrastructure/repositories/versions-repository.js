@@ -127,7 +127,10 @@ export async function update({ version }) {
 export async function getFrameworkHistory({ scope }) {
   const knexConn = DomainTransaction.getConnection();
 
-  return knexConn('certification_versions').where({ scope }).orderBy('startDate', 'desc').pluck('id');
+  return knexConn('certification_versions')
+    .select('id', 'startDate', 'expirationDate')
+    .where({ scope })
+    .orderBy('startDate', 'desc');
 }
 
 const _toDomain = ({

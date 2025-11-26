@@ -10,10 +10,10 @@ describe('Certification | Configuration | Unit | UseCase | get-framework-history
       getFrameworkHistory: sinon.stub(),
     };
 
-    const currentVersionId = 456;
-    const previousVersionId = 123;
+    const currentVersion = { id: 456, startDate: new Date('2024-01-01'), expirationDate: new Date('2025-02-02') };
+    const previousVersion = { id: 123, startDate: new Date('2022-01-01'), expirationDate: new Date('2024-01-01') };
 
-    versionsRepository.getFrameworkHistory.resolves([currentVersionId, previousVersionId]);
+    versionsRepository.getFrameworkHistory.resolves([currentVersion, previousVersion]);
 
     // when
     const frameworkHistory = await getFrameworkHistory({
@@ -26,6 +26,6 @@ describe('Certification | Configuration | Unit | UseCase | get-framework-history
       scope: complementaryCertificationKey,
     });
 
-    expect(frameworkHistory).to.deep.equal([currentVersionId, previousVersionId]);
+    expect(frameworkHistory).to.deep.equal([currentVersion, previousVersion]);
   });
 });
