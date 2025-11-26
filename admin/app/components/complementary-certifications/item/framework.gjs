@@ -8,11 +8,13 @@ import { t } from 'ember-intl';
 
 import FrameworkDetails from './framework/framework-details';
 import FrameworkHistory from './framework/framework-history';
+import History from './target-profile/history';
 
 export default class ComplementaryCertificationFramework extends Component {
   @service currentUser;
   @service store;
   @service router;
+  @tracked complementaryCertification;
   @tracked currentConsolidatedFramework;
   @tracked frameworkHistory;
 
@@ -25,17 +27,17 @@ export default class ComplementaryCertificationFramework extends Component {
   async #onMount() {
     const routeParams = this.router.currentRoute.parent.parent.params;
 
-    const complementaryCertification = await this.store.peekRecord(
+    this.complementaryCertification = await this.store.peekRecord(
       'complementary-certification',
       routeParams.complementary_certification_id,
     );
 
     this.currentConsolidatedFramework = await this.store.findRecord(
       'certification-consolidated-framework',
-      complementaryCertification.key,
+      this.complementaryCertification.key,
     );
 
-    const frameworkHistory = await this.store.queryRecord('framework-history', complementaryCertification.key);
+    const frameworkHistory = await this.store.queryRecord('framework-history', this.complementaryCertification.key);
     this.frameworkHistory = frameworkHistory?.history;
   }
 
@@ -64,6 +66,10 @@ export default class ComplementaryCertificationFramework extends Component {
 
     {{#if this.frameworkHistory.length}}
       <FrameworkHistory @history={{this.frameworkHistory}} />
+    {{/if}}
+
+    {{#if this.complementaryCertification.targetProfilesHistory}}
+      <History @targetProfilesHistory={{this.complementaryCertification.targetProfilesHistory}} />
     {{/if}}
   </template>
 }

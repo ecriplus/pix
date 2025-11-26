@@ -10,10 +10,11 @@
     <LinkTo @route="authenticated.complementary-certifications.item.framework">
       {{t "components.complementary-certifications.item.framework.tab"}}
     </LinkTo>
+  {{else}}
+    <LinkTo @route="authenticated.complementary-certifications.item.target-profile">
+      {{t "components.complementary-certifications.item.target-profile"}}
+    </LinkTo>
   {{/if}}
-  <LinkTo @route="authenticated.complementary-certifications.item.target-profile">
-    {{t "components.complementary-certifications.item.target-profile"}}
-  </LinkTo>
 </PixTabs>
 
 <main class="page-body complementary-certification">
