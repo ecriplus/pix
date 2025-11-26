@@ -1,5 +1,5 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
-import { click, triggerEvent } from '@ember/test-helpers';
+import { click, fillIn, triggerEvent } from '@ember/test-helpers';
 import CreateOrUpdateTrainingForm from 'pix-admin/components/trainings/create-or-update-training-form';
 import { localeCategories, typeCategories } from 'pix-admin/models/training';
 import { module, test } from 'qunit';
@@ -28,7 +28,13 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     assert.dom(screen.getByLabelText('Heures (HH)')).exists();
     assert.dom(screen.getByLabelText('Minutes (MM)')).exists();
     assert.dom(screen.getByLabelText('Langue localisée')).exists();
-    assert.dom(screen.getByLabelText('Nom du fichier du logo éditeur', { exact: false })).exists();
+    assert
+      .dom(
+        screen.getByRole('textbox', {
+          name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+        }),
+      )
+      .exists();
     assert.dom(screen.queryByLabelText('Mettre en pause')).doesNotExist();
     assert
       .dom(
@@ -64,7 +70,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
   module('when model is provided', function () {
     test('it should display the items with model values', async function (assert) {
       // given
-      const editorLogo = 'un-logo.svg';
+      const editorLogo = 'https://example.net/un-logo.svg';
       const model = {
         title: 'Un contenu formatif',
         internalTitle: 'Mon titre interne',
@@ -72,7 +78,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         type: 'webinaire',
         locale: 'fr-fr',
         editorName: 'Un éditeur de contenu formatif',
-        editorLogoUrl: `https://example.net/${editorLogo}`,
+        editorLogoUrl: editorLogo,
         duration: { days: 0, hours: 0, minutes: 0 },
         isDisabled: false,
       };
@@ -93,7 +99,13 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       assert.dom(screen.getByLabelText('Heures (HH)')).hasValue(model.duration.hours.toString());
       assert.dom(screen.getByLabelText('Minutes (MM)')).hasValue(model.duration.minutes.toString());
       assert.strictEqual(screen.getByLabelText('Langue localisée').innerText, localeCategories[model.locale]);
-      assert.dom(screen.getByLabelText('Nom du fichier du logo éditeur', { exact: false })).hasValue(editorLogo);
+      assert
+        .dom(
+          screen.getByRole('textbox', {
+            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+          }),
+        )
+        .hasValue(editorLogo);
       assert.strictEqual(screen.getByLabelText('Mettre en pause').checked, model.isDisabled);
       assert
         .dom(
@@ -125,15 +137,20 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       assert.strictEqual(submittedData.title, 'New Title');
     });
 
-    test('should format editor logo URL with base URL on form submission', async function (assert) {
+    test('should save editor logo URL on form submission', async function (assert) {
       // given
       const onSubmitStub = sinon.stub();
-      await render(
+      const screen = await render(
         <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
       );
 
       // when
-      await fillByLabel('Nom du fichier du logo éditeur', 'new-logo.svg', { exact: false });
+      await fillIn(
+        screen.getByRole('textbox', {
+          name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+        }),
+        'https://assets.pix.org/contenu-formatif/editeur/new-logo.svg',
+      );
       await triggerEvent('form', 'submit');
 
       // then

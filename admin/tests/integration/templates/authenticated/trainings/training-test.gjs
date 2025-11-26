@@ -25,7 +25,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       type: 'type',
       locale: 'fr-fr',
       editorName: 'Albert',
-      editorLogoUrl: 'my-logo-url',
+      editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/my-logo-url',
       isRecommendable: true,
       isDisabled: false,
     });

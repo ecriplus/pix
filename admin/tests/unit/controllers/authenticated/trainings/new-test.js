@@ -39,7 +39,7 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
         link: 'https://mon-lien',
         type: 'webinaire',
         locale: 'fr-fr',
-        editorLogoUrl: 'https//images.fr/mon-logo.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
         editorName: 'Un éditeur de contenu formatif',
         duration: '6h',
       };

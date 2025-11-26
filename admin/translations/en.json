@@ -1390,19 +1390,19 @@
           }
         },
         "details": {
-          "contentType": "Content type : ",
-          "duration": "Duration : ",
-          "editorLogo": "Editor logo : ",
-          "editorName": "Editor name : ",
-          "internalTitle": "Internal title : ",
-          "localizedLanguage": "Localized language : ",
-          "publishedOn": "Published on : ",
-          "status": "Status : ",
+          "contentType": "Content type: ",
+          "duration": "Duration: ",
+          "editorLogo": "Editor logo url: ",
+          "editorName": "Editor name: ",
+          "internalTitle": "Internal title: ",
+          "localizedLanguage": "Localized language: ",
+          "publishedOn": "Published on: ",
+          "status": "Status: ",
           "status-label": {
             "disabled": "Non-triggerable",
             "enabled": "Triggerable"
           },
-          "title": "Public title : "
+          "title": "Public title: "
         },
         "duplicate": {
           "button": {

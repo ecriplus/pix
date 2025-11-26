@@ -1,5 +1,5 @@
 import { clickByName, fillByLabel, screen, visit } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -89,7 +89,12 @@ module('Acceptance | Trainings | Training', function (hooks) {
         await fillByLabel('Heures (HH)', 0);
         await fillByLabel('Minutes (MM)', 0);
         await click(screen.getByText('Francophone (fr)'));
-        await fillByLabel('Nom du fichier du logo éditeur', 'Logo.svg', { exact: false });
+        await fillIn(
+          screen.getByRole('textbox', {
+            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+          }),
+          'https://assets.pix.org/contenu-formatif/editeur/logo.svg',
+        );
         await fillByLabel("Nom de l'éditeur", 'Editeur', { exact: false });
         await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
 

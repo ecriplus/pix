@@ -1393,7 +1393,7 @@
         "details": {
           "contentType": "Type de contenu :",
           "duration": "Durée :",
-          "editorLogo": "Logo de l'éditeur :",
+          "editorLogo": "Url du logo de l'éditeur :",
           "editorName": "Nom d'éditeur :",
           "internalTitle": "Titre interne :",
           "localizedLanguage": "Langue localisée :",
