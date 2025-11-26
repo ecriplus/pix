@@ -140,4 +140,29 @@ describe('Quest | Unit | Domain | Models | OrganizationLearnerParticipation', fu
       });
     });
   });
+
+  describe('isTerminated', function () {
+    [
+      { status: OrganizationLearnerParticipationStatuses.COMPLETED, expected: true },
+      { status: OrganizationLearnerParticipationStatuses.NOT_STARTED, expected: false },
+      { status: OrganizationLearnerParticipationStatuses.STARTED, expected: false },
+    ].forEach(({ status, expected }) => {
+      it(`should return ${expected} if status is ${status}`, function () {
+        // given && when
+        const organizationLearnerParticipation = new OrganizationLearnerParticipation({
+          id: 12,
+          organizationLearnerId: 15,
+          status,
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          referenceId: '666',
+          createdAt: new Date('2024-01-01'),
+          updatedAt: new Date('2025-01-01'),
+          completedAt: new Date('2025-01-01'),
+        });
+
+        // then
+        expect(organizationLearnerParticipation.isTerminated).equal(expected);
+      });
+    });
+  });
 });

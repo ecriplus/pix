@@ -36,6 +36,10 @@ export class OrganizationLearnerParticipation {
     this.referenceId = referenceId;
   }
 
+  get isTerminated() {
+    return this.status === OrganizationLearnerParticipationStatuses.COMPLETED;
+  }
+
   get fieldsForUpdate() {
     return {
       id: this.id,
