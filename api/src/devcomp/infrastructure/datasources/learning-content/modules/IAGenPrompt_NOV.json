@@ -39,12 +39,12 @@
                     {
                       "userName": "Agnès",
                       "direction": "incoming",
-                      "content": "J’ai du mal à trouver un nom pour mon association de yoga. J’aimerais quelque chose d’original mais je n’ai pas d’inspiration... 🤯"
+                      "content": "J’aimerais créer mon association de yoga, mais je ne sais pas du tout par où commencer… 😵‍💫"
                     },
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
-                      "content": "🤖 Tu devrais essayer avec un logiciel d’IA générative, ça peut vraiment t’aider à trouver des idées sympas ! 💡"
+                      "content": "🤖 Tu devrais essayer avec un logiciel d’IA générative ! Elle peut te donner les différentes étapes à suivre. 💡"
                     },
                     {
                       "userName": "Agnès",
@@ -97,38 +97,38 @@
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yogasso.webp",
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/llm.webp",
                     "alt": "IA générative ChatPIX",
-                    "width": 1634,
-                    "height": 1135
+                    "width": 1169,
+                    "height": 656
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 660,
-                        "y1": 32,
-                        "x2": 1158,
-                        "y2": 86
+                        "x1": 583,
+                        "y1": 7,
+                        "x2": 1162,
+                        "y2": 88
                       },
                       "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 23,
-                        "y1": 105,
-                        "x2": 636,
-                        "y2": 275
+                        "x1": 11,
+                        "y1": 89,
+                        "x2": 881,
+                        "y2": 376
                       },
                       "info": "Ce texte c’est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 30,
-                        "y1": 558,
-                        "x2": 1148,
-                        "y2": 671
+                        "x1": 8,
+                        "y1": 536,
+                        "x2": 1154,
+                        "y2": 636
                       },
                       "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
                       "tooltipPosition": "bottom"
@@ -146,21 +146,21 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Des idées de noms pour une association de yoga ?</p>",
+                    "content": "<p>Je veux créer une association de yoga. Par où commencer ?</p>",
                     "feedback": {
                       "diagnosis": "<p>En effet, le prompt, c’est la question posée ou la consigne donnée au logiciel d’IA générative.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga :</p><p>1. Yoga en mouvement</p><p>2. Souffle &amp; Racines</p><p>3.&nbsp;Clair de Lune Yoga</p><p>4. Yogâme</p>",
+                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: quel style de yoga ? pour qui ? où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une asso.</li><li>Écrivez les règles de l’association&nbsp;: comment elle fonctionne, qui décide quoi.</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta pub et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Posez une question</p>",
+                    "content": "<p>Pose une question.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est <strong>la question posée</strong> ou la<strong> consigne </strong>donnée au <strong>logiciel d’IA générative</strong>.</p>"
                     }
