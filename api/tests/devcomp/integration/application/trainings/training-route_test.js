@@ -123,7 +123,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
             type: 'webinaire',
             locale: 'fr-fr',
             'editor-name': 'ministère',
-            'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
           },
         },
       };
@@ -270,7 +270,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               type: 'webinaire',
               locale: 'fr-fr',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -307,7 +307,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               type: 'webinaire',
               locale: 'fr-fr',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -342,7 +342,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               type: 'webinaire',
               locale: 'fr-fr',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -377,7 +377,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               type: 'webinaire',
               locale: 'fr-fr',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -412,7 +412,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 type: 'webinaire',
                 locale: 'fr-fr',
                 'editor-name': 'ministère',
-                'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
             },
           };
@@ -479,7 +479,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               duration: { days: 2, hours: 2, minutes: 2 },
               locale: 'fr-fr',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -513,7 +513,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
               'editor-name': 'ministère',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -547,7 +547,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
               locale: 'fr-fr',
-              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
         };
@@ -617,7 +617,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 type: 'webinaire',
                 locale: 'fr-BE',
                 'editor-name': 'ministère',
-                'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
             },
           };
@@ -652,7 +652,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 type: 'webinaire',
                 locale: 'ja-Jpan-JP-u-ca-japanese-hc-h12',
                 'editor-name': 'ministère',
-                'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
             },
           };
@@ -778,7 +778,10 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
           const httpTestServer = new HttpTestServer();
           await httpTestServer.register(moduleUnderTest);
 
-          const payloadAttributes = { title: 'new title' };
+          const payloadAttributes = {
+            title: 'new title',
+            'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+          };
           const payload = { data: { attributes: payloadAttributes } };
 
           // when
@@ -804,7 +807,10 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
-        const payloadAttributes = { title: 'new title' };
+        const payloadAttributes = {
+          title: 'new title',
+          'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+        };
         const payload = { data: { attributes: payloadAttributes } };
 
         // when
@@ -941,7 +947,10 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 .callsFake(securityPreHandlersResponses.checkAdminMemberHasRoleMetier);
               const validPayload = {
                 data: {
-                  attributes: { duration },
+                  attributes: {
+                    duration,
+                    'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+                  },
                 },
               };
               const httpTestServer = new HttpTestServer();
@@ -996,6 +1005,40 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
           // then
           expect(result.statusCode).to.equal(400);
+        });
+      });
+
+      describe('when editorLogoUrl is not a valid url', function () {
+        it('should return 400', async function () {
+          // given
+          const invalidPayload = {
+            data: {
+              attributes: {
+                link: 'http://www.example.net',
+                title: 'ma formation',
+                'internal-title': 'Ma formation',
+                duration: { days: 2, hours: 2, minutes: 2 },
+                type: 'webinaire',
+                locale: 'fr-fr',
+                'editor-name': 'ministère',
+                'editor-logo-url': 'image.svg',
+              },
+            },
+          };
+          sinon.stub(trainingController, 'create').callsFake((request, h) => h.response().created());
+          sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request('PATCH', '/api/admin/trainings/1', invalidPayload);
+
+          // then
+          expect(JSON.parse(response.payload).errors[0].detail).to.equal(
+            '"data.attributes.editor-logo-url" with value "image.svg" fails to match the required pattern: /^https:\\/\\/assets\\.pix\\.org\\/contenu-formatif\\/editeur\\/.*\\.svg$/',
+          );
+          expect(response.statusCode).to.equal(400);
         });
       });
     });

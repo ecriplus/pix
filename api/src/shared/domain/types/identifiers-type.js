@@ -14,6 +14,7 @@ const implementationType = {
 };
 
 const certificationVerificationCodeType = Joi.string().regex(/^P-[a-zA-Z0-9]{8}$/);
+const editorLogoUrlValidation = new RegExp('^https:\\/\\/assets\\.pix\\.org\\/contenu-formatif\\/editeur\\/.*\\.svg$');
 
 const inePattern = new RegExp('^[0-9]{9}[a-zA-Z]{2}$');
 const inaPattern = new RegExp('^[0-9]{10}[a-zA-Z]{1}$');
@@ -105,6 +106,7 @@ paramsToExport.positiveInteger32bits = {
 
 export {
   certificationVerificationCodeType,
+  editorLogoUrlValidation,
   paramsToExport as identifiersType,
   queryToExport as optionalIdentifiersType,
   queriesType,
