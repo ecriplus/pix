@@ -16,7 +16,7 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     const secondModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
     const secondTraining = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: '/modules/bien-ecrire-son-adresse-mail/details',
+      link: '/modules/9d4dcab8/bien-ecrire-son-adresse-mail/details',
     });
 
     databaseBuilder.factory.buildUserRecommendedTraining({
@@ -37,10 +37,15 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
 
     expect(recommendedModules).to.have.lengthOf(2);
     expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
-    expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId });
+    expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId, shortId: 'ecc13f55' });
     expect(recommendedModules[1]).to.be.an.instanceOf(RecommendedModule);
-    expect(recommendedModules[1]).to.be.deep.equal({ id: secondTraining.id, moduleId: secondModuleId });
+    expect(recommendedModules[1]).to.be.deep.equal({
+      id: secondTraining.id,
+      moduleId: secondModuleId,
+      shortId: '9d4dcab8',
+    });
   });
+
   it('ignores module when its slug does not pass regex', async function () {
     // given
     nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
@@ -75,6 +80,6 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
 
     expect(recommendedModules).to.have.lengthOf(1);
     expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
-    expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId });
+    expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId, shortId: 'ecc13f55' });
   });
 });
