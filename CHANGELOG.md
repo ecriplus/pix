@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.266.0](https://github.com/1024pix/pix/compare/v5.265.0...v5.266.0) (2025-11-26)
+
+### :rocket: Amélioration
+
+- [#14131](https://github.com/1024pix/pix/pull/14131) Création de l'API de config des dates de réouverture des espaces Pix Certif SCO (PIX-20547) 
+- [#14252](https://github.com/1024pix/pix/pull/14252) CY_gestionMDP_IND retours 
+- [#14239](https://github.com/1024pix/pix/pull/14239) Permettre de filtrer les participations aux parcours combinés sur les divisions / groups de l'organisation (Pix-20128). 
+- [#14243](https://github.com/1024pix/pix/pull/14243) Permettre de sélectionner un pays lors de la modification d'une orga (PIX-20295) 
+
+### :bug: Correction
+
+- [#14242](https://github.com/1024pix/pix/pull/14242) Corriger l'erreur de typographie sur la page de chargement des contenu formatifs (PIX-20555). 
+- [#14244](https://github.com/1024pix/pix/pull/14244) Les images vectorielles doivent prendre toute la place du conteneur dans les modules (PIX-20554) 
+
+### :building_construction: Tech
+
+- [#14198](https://github.com/1024pix/pix/pull/14198) :recycle: Utilise le terme `invigilator` plutôt que `supervisor` dans le repo `supervisor-access-repository` (PIX-20481) 
+- [#14225](https://github.com/1024pix/pix/pull/14225) Mise à jour epreuves-components 
+- [#14240](https://github.com/1024pix/pix/pull/14240) Suppression de bouts de code obsolètes dans les mécanismes d’authentification (PIX-20549) 
+- [#14200](https://github.com/1024pix/pix/pull/14200) Utilisation d'un `CalibratedChallenge` dans la récupération d'un challenge (PIX-17946). 
+
+### :arrow_up: Montée de version
+
+- [#14241](https://github.com/1024pix/pix/pull/14241) Update dependency @1024pix/pix-ui to ^55.32.2 (mon-pix)
+
 # [5.265.0](https://github.com/1024pix/pix/compare/v5.264.0...v5.265.0) (2025-11-25)
 
 ### :rocket: Amélioration
