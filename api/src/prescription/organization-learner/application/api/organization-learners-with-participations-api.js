@@ -80,9 +80,9 @@ export async function find({ userIds }) {
   );
 }
 
-export async function getByUserIdAndOrganizationId({ userId, organizationId }) {
+export async function findByOrganizationAndOrganizationLearnerId({ organizationLearnerId, organizationId }) {
   const organizationLearnerWithParticipation = await getOrganizationLearnerWithParticipations({
-    userId,
+    organizationLearnerId,
     organizationId,
     organizationLearnerRepository,
     organizationRepository,

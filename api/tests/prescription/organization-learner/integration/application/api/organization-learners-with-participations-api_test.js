@@ -103,7 +103,7 @@ describe('Integration | API | Organization Learner With Participations', functio
     });
   });
 
-  describe('#getByUserIdAndOrganizationId', function () {
+  describe('#findByOrganizationAndOrganizationLearnerId', function () {
     it('should return OrganizationLearnerWithParticipations given id', async function () {
       // given
       const organization1 = databaseBuilder.factory.buildOrganization({ type: 'SCO' });
@@ -157,8 +157,8 @@ describe('Integration | API | Organization Learner With Participations', functio
       await databaseBuilder.commit();
 
       // when
-      const apiResponse = await organizationLearnersWithParticipationsApi.getByUserIdAndOrganizationId({
-        userId: user1.id,
+      const apiResponse = await organizationLearnersWithParticipationsApi.findByOrganizationAndOrganizationLearnerId({
+        organizationLearnerId: organizationLearner1.id,
         organizationId: organization1.id,
       });
 
