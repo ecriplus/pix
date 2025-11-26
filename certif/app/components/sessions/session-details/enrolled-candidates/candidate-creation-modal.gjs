@@ -432,6 +432,10 @@ export default class CandidateCreationModal extends Component {
             </PixInput>
           </div>
 
+          <PixNotificationAlert class='new-candidate-modal-form__info-panel' @withIcon={{true}}>
+            {{t 'pages.sessions.detail.candidates.add-modal.email-convocation-info'}}
+          </PixNotificationAlert>
+
           {{#if @shouldDisplayPaymentOptions}}
             <div class='new-candidate-modal-form__field'>
               <PixSelect

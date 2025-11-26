@@ -605,6 +605,7 @@
               "enrol-the-candidate": "Inscrire le candidat"
             },
             "complementary-certification-none": "Aucune",
+            "email-convocation-info": "L'envoi automatique de convocation par Pix n'est pas encore disponible. Le centre de certification se charge de convoquer les candidats.",
             "info-panel": "Si le champ n’est pas renseigné, les résultats ne seront pas transmis par mail pour le/les candidats concernés.<br />Le candidat verra ses résultats affichés directement sur son compte Pix.",
             "notifications": {
               "error-add-duplicate": "Ce candidat est déjà dans la liste, vous ne pouvez pas l'ajouter à nouveau.",
