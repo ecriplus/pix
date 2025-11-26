@@ -7,7 +7,7 @@ export class FlashAssessmentAlgorithmConfiguration {
    * @param {number} [props.challengesBetweenSameCompetence] - define a number of questions before getting another one on the same competence
    * @param {boolean} [props.limitToOneQuestionPerTube] - limits questions to one per tube
    * @param {boolean} [props.enablePassageByAllCompetences] - enable or disable the passage through all competences
-   * @param {number} [props.variationPercent] - maximum variation of estimated level between two answers
+   * @param {number} props.variationPercent
    */
   constructor({
     maximumAssessmentLength = config.v3Certification.numberOfChallengesPerCourse,

@@ -72,7 +72,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      version = domainBuilder.certification.evaluation.buildVersion().challengesConfiguration;
+      version = domainBuilder.certification.evaluation.buildVersion();
     });
 
     context('when there are challenges left to answer', function () {

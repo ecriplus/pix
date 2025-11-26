@@ -1,3 +1,10 @@
+/**
+ * @typedef {import('../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js').FlashAssessmentAlgorithmConfiguration} FlashAssessmentAlgorithmConfiguration
+ * @typedef {import('./CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
+ * @typedef {import('../services/algorithm-methods/flash.js')} FlashAlgorithmImplementation
+ */
+
 import { config } from '../../../../shared/config.js';
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from './FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
 import { FlashAssessmentAlgorithmNonAnsweredSkillsRule } from './FlashAssessmentAlgorithmNonAnsweredSkillsRule.js';
@@ -14,10 +21,15 @@ const availableRules = [
 
 class FlashAssessmentAlgorithm {
   /**
-   * Model to interact with the flash algorithm
-   * @param configuration - options to configure algorithm challenge selection and behaviour
+   * @param {object} params
+   * @param {FlashAlgorithmImplementation} params.flashAlgorithmImplementation
+   * @param {FlashAssessmentAlgorithmConfiguration} params.configuration
    */
-  constructor({ flashAlgorithmImplementation, configuration = {} } = {}) {
+  constructor({ flashAlgorithmImplementation, configuration }) {
+    /**
+     * @private
+     * @type {FlashAssessmentAlgorithmConfiguration}
+     */
     this._configuration = configuration;
     this.flashAlgorithmImplementation = flashAlgorithmImplementation;
 
@@ -28,6 +40,12 @@ class FlashAssessmentAlgorithm {
     });
   }
 
+  /**
+   * @param {object} params
+   * @param {Answer[]} params.assessmentAnswers
+   * @param {CalibratedChallenge[]} params.challenges
+   * @param {number} [params.initialCapacity]
+   */
   getPossibleNextChallenges({
     assessmentAnswers,
     challenges,
@@ -60,6 +78,11 @@ class FlashAssessmentAlgorithm {
     });
   }
 
+  /**
+   * @param {object} params
+   * @param {Answer[]} params.assessmentAnswers
+   * @param {number} params.maximumAssessmentLength
+   */
   #hasAnsweredToAllChallenges({ assessmentAnswers, maximumAssessmentLength }) {
     if (assessmentAnswers && assessmentAnswers.length === maximumAssessmentLength) {
       return true;
@@ -68,6 +91,10 @@ class FlashAssessmentAlgorithm {
     return false;
   }
 
+  /**
+   * @param {Answer[]} assessmentAnswers
+   * @param {CalibratedChallenge[]} challenges
+   */
   #applyChallengeSelectionRules(assessmentAnswers, challenges) {
     return this.ruleEngine.execute({
       assessmentAnswers,
@@ -75,6 +102,12 @@ class FlashAssessmentAlgorithm {
     });
   }
 
+  /**
+   * @param {object} params
+   * @param {Answer[]} params.allAnswers
+   * @param {CalibratedChallenge[]} params.challenges
+   * @param {number} [params.initialCapacity]
+   */
   getCapacityAndErrorRate({
     allAnswers,
     challenges,
@@ -88,6 +121,12 @@ class FlashAssessmentAlgorithm {
     });
   }
 
+  /**
+   * @param {object} params
+   * @param {Answer[]} params.allAnswers
+   * @param {CalibratedChallenge[]} params.challenges
+   * @param {number} [params.initialCapacity]
+   */
   getCapacityAndErrorRateHistory({
     allAnswers,
     challenges,
@@ -101,6 +140,12 @@ class FlashAssessmentAlgorithm {
     });
   }
 
+  /**
+   * @param {object} params
+   * @param {number} params.capacity
+   * @param {number} params.discriminant
+   * @param {number} params.difficulty
+   */
   getReward({ capacity, discriminant, difficulty }) {
     return this.flashAlgorithmImplementation.getReward({ capacity, discriminant, difficulty });
   }

@@ -1,3 +1,12 @@
+/**
+ * @typedef {import('../../../evaluation/domain/models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
+ * @typedef {import('../../../evaluation/domain/models/FlashAssessmentAlgorithm.js').FlashAssessmentAlgorithm} FlashAssessmentAlgorithm
+ * @typedef {import('../../../evaluation/domain/services/index.js').ScoringDegradationService} ScoringDegradationService
+ * @typedef {import('../../../shared/domain/models/V3CertificationScoring.js').V3CertificationScoring} V3CertificationScoring
+ * @typedef {import('../../../shared/domain/models/CompetenceMark.js').CompetenceMark} CompetenceMark
+ */
+
 import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
 import { status as CertificationStatus } from '../../../../shared/domain/models/AssessmentResult.js';
@@ -5,7 +14,14 @@ import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfigu
 import { ABORT_REASONS } from '../../../shared/domain/models/CertificationCourse.js';
 import { Intervals } from './Intervals.js';
 
-class CertificationAssessmentScoreV3 {
+export class CertificationAssessmentScoreV3 {
+  /**
+   * @param {object} params
+   * @param {number} params.nbPix
+   * @param {number} [params.percentageCorrectAnswers=100]
+   * @param {CertificationStatus} [params.status=CertificationStatus.VALIDATED]
+   * @param {CompetenceMark[]} params.competenceMarks
+   */
   constructor({ nbPix, percentageCorrectAnswers = 100, status = CertificationStatus.VALIDATED, competenceMarks }) {
     this.nbPix = nbPix;
     this.percentageCorrectAnswers = percentageCorrectAnswers;
@@ -13,6 +29,18 @@ class CertificationAssessmentScoreV3 {
     this._competenceMarks = competenceMarks;
   }
 
+  /**
+   * @param {Object} params
+   * @param {FlashAssessmentAlgorithm} params.algorithm
+   * @param {CalibratedChallenge[]} params.challenges
+   * @param {Answer[]} params.allAnswers
+   * @param {CalibratedChallenge[]} params.allChallenges
+   * @param {string} params.abortReason
+   * @param {Date} params.maxReachableLevelOnCertificationDate
+   * @param {V3CertificationScoring} params.v3CertificationScoring
+   * @param {ScoringDegradationService} params.scoringDegradationService
+   * @returns {CertificationAssessmentScoreV3}
+   */
   static fromChallengesAndAnswers({
     algorithm,
     challenges,
@@ -20,7 +48,7 @@ class CertificationAssessmentScoreV3 {
     allChallenges,
     abortReason,
     maxReachableLevelOnCertificationDate,
-    v3CertificationScoring = [],
+    v3CertificationScoring,
     scoringDegradationService,
   }) {
     const certificationScoringIntervals = v3CertificationScoring.getIntervals();
@@ -127,5 +155,3 @@ const _shouldDowngradeCapacity = ({ maximumAssessmentLength, answers, abortReaso
     abortReason === ABORT_REASONS.CANDIDATE
   );
 };
-
-export { CertificationAssessmentScoreV3 };

@@ -4,7 +4,6 @@
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('../index.js').SharedVersionRepository} SharedVersionRepository
  * @typedef {import('../index.js').SharedCertificationCandidateRepository} SharedCertificationCandidateRepository
@@ -28,9 +27,8 @@ export const handleV3CertificationScoring = withTransaction(
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {CompetenceMarkRepository} params.competenceMarkRepository
    * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
-   * @param {CertificationChallengeRepository} params.certificationChallengeRepository
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {SharedVersionRepository} params.SharedVersionRepository
+   * @param {SharedVersionRepository} params.sharedVersionRepository
    * @param {SharedCertificationCandidateRepository} params.sharedCertificationCandidateRepository
    * @param {AnswerRepository} params.answerRepository
    * @param {FlashAlgorithmService} params.flashAlgorithmService

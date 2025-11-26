@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../shared/domain/models/Version.js').Version} Version
+ * @typedef {import('../../../shared/domain/models/Version.js').Version} Version
  */
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -153,7 +153,6 @@ function _toDomain({ challengeDto, skill }) {
   });
 }
 
-/** @type {LearningContentRepository} */
 let instance;
 
 function getInstance() {
