@@ -230,16 +230,16 @@
                   ],
                   "prompts": [
                     {
-                      "prompt": "Nom chien",
-                      "response": "Tu cherches un nom pour un chien ? Si oui, quel type de chien ou de personnalité a-t-il ? Cela peut m’aider à te proposer quelque chose de sympa !"
+                      "prompt": "Pont",
+                      "response": "<p>Le mot <strong>pont</strong> peut avoir plusieurs sens selon ce que tu veux dire. Voici les plus courants :</p><p>1. <strong>Sens physiques / concrets</strong></p><ul><li><strong>Construction qui permet de traverser</strong> une rivière, une route, une vallée.</li><li><strong>Partie d’un navire :</strong> le pont d’un bateau.</li><li><strong>Partie d’un instrument de musique</strong> (violon, guitare…).</li><li><strong>En anatomie</strong> : un pont entre deux parties (ex : pont nasal).</li></ul><p>2. <strong>Sens figurés / expressions</strong></p><ul><li><strong>Prendre un jour de congé entre un jour férié et le week-end.</strong></li><li><strong>Établir un contact, une passerelle.</strong></li></ul>"
                     },
                     {
-                      "prompt": "Donne moi des idées de noms de chiens.",
-                      "response": "<p>Avec plaisir ! 🐶 Voici une liste de noms de chien :</p> <p>1. Tokyo</p><p>2. Nala</p><p>3. Milou</p><p>4. Sushi</p><p>5. Luna</p><p>6. Apéro</p><p>7. Simba</p><p>8. Paco</p><p>9. Bart</p><p>10. Cookie<p>"
+                      "prompt": "Faire le pont",
+                      "response": "<p><strong>“Faire le pont”</strong> est une expression française qui signifie <strong>profiter d’un jour férié</strong> qui tombe un mardi ou un jeudi <strong>pour faire un long week-end</strong>, en prenant le lundi ou le vendredi comme jour de congé.</p><p>C’est souvent utilisé dans le contexte du <strong>travail</strong>, du <strong>calendrier scolaire </strong>ou des <strong>vacances</strong>.</p><p>Si tu veux, je peux aussi t’expliquer l’origine de l’expression.</p>"
                     },
                     {
-                      "prompt": "Liste-moi 10 noms de chiens pour m’aider à choisir un nom pour mon beagle de 4 mois.",
-                      "response": "<p>Avec plaisir ! 🎉</p><p>Voici 10 idées de noms qui iraient super bien pour un beagle de 4 mois, à la fois mignons, joueurs et un peu espiègles (comme le sont souvent les beagles)🐾 :</p><p>1.Scout — pour son côté explorateur et curieux</p><p>2.Happy — car il sera toujours joyeux</p><p>3.Charlie — un classique tendre et facile à appeler</p><p>4. Mojo — plein d’énergie et de bonne humeur</p><p>5.Oreo — pour un petit loulou tricolore</p><p>6.Flash — s’il court partout comme un fou</p><p>7. Biscuit — doux et gourmand</p><p>8. Lucky — parce qu’il a la chance d’être avec toi (et toi avec lui)</p><p>9. Marley — comme dans le film, fidèle et un peu canaille</p><p>10. Jazz — dynamique et musical, pour un chien plein de vie</p>"
+                      "prompt": "Explique moi comment bien faire le pont au yoga.",
+                      "response": "<p>Voici comment bien faire le pont en yoga, ou <strong>\"Urdhva Dhanurasana\"</strong>.</p><ul><li>Allonge-toi <strong>sur le dos, genoux pliés</strong>, pieds à plat et écartés largeur de bassin.</li><li> Pose les mains <strong>près des oreilles</strong>, doigts pointés vers les épaules.</li><li> Pousse d’abord <strong>dans les pieds</strong> → soulève le bassin.</li><li> Ensuite pousse <strong>dans les mains</strong> → décolle la tête et ouvre la poitrine.</li><li> Cherche la <strong>longueur</strong>, pas la hauteur : bras et jambes actifs.</li></ul><p><strong>À éviter</strong></p><ul><li>Monter d’un coup (risque pours les poignets et lombaires).</li><li>Laisser les coudes ou genoux s’écarter.</li><li>Lancer la tête en arrière</li></ul><p>Si tu veux, je peux te donner des <strong>astuces</strong> pour progresser selon ton niveau.</p>"
                     }
                   ]
                 }
@@ -256,7 +256,7 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d’IA générative en langage informatique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
+                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
                   },
                   {
@@ -270,7 +270,7 @@
                     "id": "3",
                     "content": "<p>On parle à un logiciel d’IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
+                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
                   }
                 ],
@@ -339,15 +339,15 @@
                   "prompts": [
                     {
                       "prompt": "Propose un programme de repas pour le week-end.",
-                      "response": "<p> <strong>Samedi </strong> </p><p>🥗 Déjeuner : Salade de quinoa, poulet, avocat, tomates  </p><p>🐟 Dîner : Saumon au four, courgettes, riz</p>  <p><strong>Dimanche </strong></p> <p>🍗 Déjeuner : Poulet rôti, gratin de légumes, tarte aux fruits  </p><p>🍲 Dîner : Soupe de légumes, croque-monsieur</p>"
+                      "response": "<p> <strong>Samedi </strong> </p><p>🥗 Déjeuner : Salade de quinoa, poulet, avocat, tomates  </p><p>🐟 Dîner : Saumon au four, courgettes, riz</p>  <p><strong>Dimanche </strong></p> <p>🍗 Déjeuner : Poulet rôti, gratin de légumes, tarte aux fruits  </p><p>🍲 Dîner : Soupe de légumes, croque-monsieur</p>"
                     },
                     {
                       "prompt": "Propose un programme de repas végétariens pour le week-end.",
-                      "response": "<p> <strong>Samedi </strong> </p><p>🥪 Déjeuner : Sandwich houmous, crudités (carottes, concombre, salade) + fruit  </p><p>🍝 Dîner : Pâtes complètes + sauce tomate aux herbes + parmesan ou levure maltée</p>  <p><strong>Dimanche </strong></p> <p>🥗 Déjeuner : Salade composée (lentilles en boîte, feta, tomates, maïs, vinaigrette citronnée)  </p><p>🌮 Déjeuner : Tacos aux haricots noirs, maïs, poivrons, guacamole et coriandre</p>"
+                      "response": "<p> <strong>Samedi </strong> </p><p>🥪 Déjeuner : Sandwich houmous, crudités (carottes, concombre, salade) + fruit  </p><p>🍝 Dîner : Pâtes complètes + sauce tomate aux herbes + parmesan ou levure maltée</p>  <p><strong>Dimanche </strong></p> <p>🥗 Déjeuner : Salade composée (lentilles en boîte, feta, tomates, maïs, vinaigrette citronnée)  </p><p>🌮 Déjeuner : Tacos aux haricots noirs, maïs, poivrons, guacamole et coriandre</p>"
                     },
                     {
                       "prompt": "Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.",
-                      "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
+                      "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
                     }
                   ]
                 }
@@ -358,7 +358,7 @@
               "element": {
                 "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, parmi ces prompts, lequel exprime le mieux le besoin d'Agnès ?</p>",
+                "instruction": "<p>D’après vous, parmi ces prompts, lequel exprime le mieux le besoin d’Agnès ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -378,7 +378,7 @@
                     "id": "3",
                     "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l'objectif (impressionner ses amis).</p>"
+                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l’objectif (impressionner ses amis).</p>"
                     }
                   }
                 ],
@@ -493,7 +493,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
-                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, sous forme de consigne simple et claire.💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «Traduis», «Liste», «Résume», etc.</li><li>On peut ajouter des informations supplémentaires pour donner du <strong>contexte</strong>.</li></ul></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong> pour vérifier qu’il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong> pour mieux guider le logiciel.📝</li></ul>"
+                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.📝</li></ul>"
               }
             }
           ]
