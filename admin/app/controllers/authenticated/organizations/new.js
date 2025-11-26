@@ -25,7 +25,7 @@ export default class NewController extends Controller {
 
     if (!this.model.name || !this.model.type || !this.model.administrationTeamId) {
       this.pixToast.sendErrorNotification({
-        message: this.intl.t('components.organizations.creation.administration-team.required-fields-error'),
+        message: this.intl.t('components.organizations.creation.required-fields-error'),
       });
       return;
     }

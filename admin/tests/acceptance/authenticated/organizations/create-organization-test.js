@@ -113,9 +113,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
       await clickByName('Ajouter');
 
       // then
-      assert
-        .dom(screen.getByText(t('components.organizations.creation.administration-team.required-fields-error')))
-        .exists();
+      assert.dom(screen.getByText(t('components.organizations.creation.required-fields-error'))).exists();
     });
   });
 });

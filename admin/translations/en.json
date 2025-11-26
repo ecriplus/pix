@@ -614,13 +614,19 @@
           "add-child-organization": "Add child organization"
         },
         "administration-team": {
-          "required-fields-error": "Please fill in all required fields.",
           "selector": {
             "label": "Choose an administration team",
             "placeholder": "Administration team"
           }
         },
-        "parent-organization-name": "Parent organization: {parentOrganizationName}"
+        "country": {
+          "selector": {
+            "label": "Choose a country",
+            "placeholder": "Country (INSEE code)"
+          }
+        },
+        "parent-organization-name": "Parent organization: {parentOrganizationName}",
+        "required-fields-error": "Please fill in all required fields."
       },
       "editing": {
         "administration-team": {
