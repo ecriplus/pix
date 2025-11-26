@@ -1,11 +1,10 @@
 import { config } from '../../../shared/config.js';
-import { NotFoundError } from '../../../shared/domain/errors.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { CombinedCourseDetails } from '../models/CombinedCourse.js';
 import { DataForQuest } from '../models/DataForQuest.js';
 
 async function getCombinedCourseDetails({
-  userId,
+  organizationLearnerId,
   combinedCourseId,
   combinedCourseParticipationRepository,
   combinedCourseRepository,
@@ -17,14 +16,11 @@ async function getCombinedCourseDetails({
 }) {
   const combinedCourse = await combinedCourseRepository.getById({ id: combinedCourseId });
   const quest = await questRepository.findById({ questId: combinedCourse.questId });
-  let participation = null;
-  try {
-    participation = await combinedCourseParticipationRepository.getByUserId({ combinedCourseId, userId });
-  } catch (err) {
-    if (!(err instanceof NotFoundError)) {
-      throw err;
-    }
-  }
+
+  const participation = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+    organizationLearnerId,
+    combinedCourseId,
+  });
 
   const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, participation);
   const campaignIds = combinedCourseDetails.campaignIds;
@@ -49,8 +45,8 @@ async function getCombinedCourseDetails({
   let dataForQuest;
 
   if (participation) {
-    const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
-      userId,
+    const eligibility = await eligibilityRepository.findByOrganizationAndOrganizationLearnerId({
+      organizationLearnerId,
       organizationId: combinedCourse.organizationId,
       moduleIds,
     });
@@ -65,7 +61,8 @@ async function getCombinedCourseDetails({
       });
     }
   }
-  const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
+
+  const modules = await moduleRepository.getByIds({ moduleIds });
 
   const combinedCourseUrl = '/parcours/' + combinedCourseDetails.code;
   const encryptedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
