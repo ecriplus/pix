@@ -117,6 +117,12 @@ Router.map(function () {
     this.route('recap');
   });
 
+  this.route('old-module', { path: '/modules/:slug' }, function () {
+    this.route('details');
+    this.route('passage');
+    this.route('recap');
+  });
+
   this.route('terms-of-service', { path: '/cgu' });
 
   this.route('inscription', function () {
