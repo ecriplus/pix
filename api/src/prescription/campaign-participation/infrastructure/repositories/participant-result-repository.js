@@ -45,7 +45,7 @@ const get = async function ({ userId, campaignId, badges, reachedStage, stages, 
       // if the stage is a stage level, we need to add the converted threshold
       reachedStage = {
         ...reachedStage,
-        threshold: stage.threshold,
+        threshold: stage?.threshold,
       };
     }
   }
