@@ -112,7 +112,7 @@ function finalize({ chat, chatRepository, redisMutex }) {
           chat.addAssistantMessage(assistantMessage);
         }
 
-        chat?.updateTokenConsumption?.(streamCapture.inputTokens, streamCapture.outputTokens);
+        chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
         await chatRepository.save(chat);
       }
     } catch (err) {

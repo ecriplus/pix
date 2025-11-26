@@ -10,6 +10,43 @@ import { Configuration } from '../../../../../src/llm/domain/models/Configuratio
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Chat', function () {
+  describe('#constructor', function () {
+    it('should reorder messages according to their index', function () {
+      const messages = [
+        domainBuilder.llm.buildUserMessage({
+          index: 2,
+          content: 'que contient cette piece jointe ?',
+          attachmentName: 'wrong_file.txt',
+        }),
+        domainBuilder.llm.buildAssistantMessage({ index: 1, content: 'oui bien sur' }),
+        domainBuilder.llm.buildUserMessage({ index: 0, content: 'Peux tu m aider ?' }),
+        domainBuilder.llm.buildAssistantMessage({ index: 3, content: 'je sais pas ce que c' }),
+      ];
+      const configuration = domainBuilder.llm.buildConfiguration({ attachmentName: 'right_file.txt' });
+      const chat = new Chat({
+        id: 'fael-le-filou',
+        userId: 123,
+        assessmentId: 456,
+        challengeId: 'recChallengeABC123',
+        configuration,
+        haveVictoryConditionsBeenFulfilled: null,
+        messages,
+        totalInputTokens: 456,
+        totalOutputTokens: 456,
+      });
+
+      expect(chat.messages).to.deepEqualArray([
+        domainBuilder.llm.buildUserMessage({ index: 0, content: 'Peux tu m aider ?' }),
+        domainBuilder.llm.buildAssistantMessage({ index: 1, content: 'oui bien sur' }),
+        domainBuilder.llm.buildUserMessage({
+          index: 2,
+          content: 'que contient cette piece jointe ?',
+          attachmentName: 'wrong_file.txt',
+        }),
+        domainBuilder.llm.buildAssistantMessage({ index: 3, content: 'je sais pas ce que c' }),
+      ]);
+    });
+  });
   describe('#get hasAttachmentContextBeenAdded', function () {
     context('when there are no user messages with the expected attachment', function () {
       it('returns false', function () {
