@@ -15,6 +15,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
   hooks.beforeEach(async function () {
     this.intl = this.owner.lookup('service:intl');
+    server.create('country', { code: '99100', name: 'France' });
 
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
   });
@@ -90,6 +91,14 @@ module('Acceptance | Organizations | Create', function (hooks) {
       );
       await screen.findByRole('listbox');
       await click(screen.getByText('Équipe 2'));
+
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.country.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      await click(screen.getByText('France (99100)'));
 
       await fillByLabel('Crédits', 120);
 
