@@ -54,6 +54,16 @@ export class NoAttachmentNorMessageProvidedError extends DomainError {
   }
 }
 
+// TODO: remove after migration is done successfully
+export class IncorrectMessagesOrderingError extends DomainError {
+  constructor() {
+    super('Messages must respect the ordering enforced by LLM providers');
+    // ✅ system prompt -> user -> assistant -> user ...
+    // 💥 system prompt -> assistant ...
+    // 💥 system prompt -> user -> user ...
+  }
+}
+
 export class PromptAlreadyOngoingError extends DomainError {
   constructor(chatId) {
     super(`A prompt is already ongoing for chat with id ${chatId}`);

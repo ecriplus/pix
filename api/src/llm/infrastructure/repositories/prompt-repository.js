@@ -13,20 +13,26 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  */
 
 /**
+ * @typedef MessageDTO
+ * @property {string=} content
+ * @property {"user"|"assistant"} emitter
+ */
+
+/**
  * @function
  * @name prompt
  *
  * @param {Object} params
- * @param {string} params.message
- * @param {Chat} params.chat
+ * @param {MessageDTO[]} params.messages
+ * @param {Configuration} params.configuration
  * @returns {Promise<ReadableStream>}
  */
-export async function prompt({ message, chat }) {
-  const messagesToForward = chat.messagesToForwardToLLM;
+export async function prompt({ messages, configuration }) {
+  const lastMessage = messages.pop();
   const payload = JSON.stringify({
-    prompt: message,
-    configuration: chat.configuration.toDTO(),
-    history: messagesToForward,
+    prompt: lastMessage.content,
+    configuration: configuration.toDTO(),
+    history: messages,
   });
   let response;
   const url = config.llm.postPromptUrl;

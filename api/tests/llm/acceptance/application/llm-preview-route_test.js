@@ -148,15 +148,7 @@ describe('Acceptance | Route | llm-preview', function () {
 
       const chatId = response.headers.location.split('/').at(-1);
       const chat = await knex('chats')
-        .select(
-          'id',
-          'userId',
-          'configId',
-          'configContent',
-          'hasAttachmentContextBeenAdded',
-          'totalInputTokens',
-          'totalOutputTokens',
-        )
+        .select('id', 'userId', 'configId', 'configContent', 'totalInputTokens', 'totalOutputTokens')
         .where({ id: chatId })
         .first();
       expect(chat).to.deep.contain({
@@ -171,7 +163,6 @@ describe('Acceptance | Route | llm-preview', function () {
             validationPrompt: 'Un nouveau prompt de validation à transmettre à poc-llm',
           },
         },
-        hasAttachmentContextBeenAdded: false,
       });
     });
   });
@@ -244,64 +235,34 @@ describe('Acceptance | Route | llm-preview', function () {
       const messages = [
         {
           attachmentName: null,
-          attachmentContext: null,
           content: 'coucou user1',
           chatId,
           emitter: 'user',
-          shouldBeRenderedInPreview: true,
           index: 0,
           wasModerated: null,
         },
         {
           attachmentName: null,
-          attachmentContext: null,
           content: 'coucou LLM1',
           chatId,
           emitter: 'assistant',
           index: 1,
-          shouldBeRenderedInPreview: true,
-          hasErrorOccurred: true,
           wasModerated: null,
         },
         {
           attachmentName: 'expected_file.txt',
-          attachmentContext: null,
-          chatId,
-          emitter: 'user',
-          index: 2,
-          shouldBeRenderedInPreview: true,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-          wasModerated: null,
-        },
-        {
-          attachmentName: 'expected_file.txt',
-          chatId,
-          content: null,
-          index: 3,
-          attachmentContext: 'add me in the chat !',
-          emitter: 'assistant',
-          shouldBeRenderedInPreview: false,
-          wasModerated: null,
-        },
-        {
-          attachmentName: null,
-          attachmentContext: null,
           content: 'un message',
           chatId,
           emitter: 'user',
-          index: 4,
-          shouldBeRenderedInPreview: true,
-          haveVictoryConditionsBeenFulfilled: true,
+          index: 2,
           wasModerated: null,
         },
         {
           attachmentName: null,
-          attachmentContext: null,
           chatId,
           content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
           emitter: 'assistant',
-          index: 5,
-          shouldBeRenderedInPreview: true,
+          index: 3,
           wasModerated: null,
         },
       ];
@@ -321,7 +282,7 @@ describe('Acceptance | Route | llm-preview', function () {
             context: 'add me in the chat !',
           },
         },
-        hasAttachmentContextBeenAdded: true,
+        haveVictoryConditionsBeenFulfilled: true,
         messages,
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
@@ -349,42 +310,35 @@ describe('Acceptance | Route | llm-preview', function () {
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
         hasVictoryConditions: true,
+        haveVictoryConditionsBeenFulfilled: true,
         messages: [
           {
             content: 'coucou user1',
             attachmentName: null,
             isFromUser: true,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: null,
           },
           {
             content: 'coucou LLM1',
             attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: true,
           },
           {
             content: 'un message',
             attachmentName: 'expected_file.txt',
             isFromUser: true,
             isAttachmentValid: true,
-            haveVictoryConditionsBeenFulfilled: true,
             wasModerated: null,
-            hasErrorOccurred: undefined,
           },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
             attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: false,
             wasModerated: null,
-            hasErrorOccurred: null,
           },
         ],
       });

@@ -75,7 +75,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             inputMaxChars: 5,
           },
         }),
-        hasAttachmentContextBeenAdded: false,
         messages: [],
       });
       await createChat(chat.toDTO());
@@ -102,7 +101,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         userId: 123456,
         configurationId: 'uneConfigQuiExist',
         configuration: new Configuration({ llm: {} }),
-        hasAttachmentContextBeenAdded: false,
         messages: [],
       });
       await createChat(chat.toDTO());
@@ -134,7 +132,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             inputMaxChars: 5,
           },
         }),
-        hasAttachmentContextBeenAdded: false,
         messages: [],
       });
       await createChat(chat.toDTO());
@@ -154,63 +151,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   });
 
   context('checking maxPrompts limit', function () {
-    it('should ignore messages from LLM when checking for maxPrompts limit', async function () {
-      // given
-      const chat = new Chat({
-        id: chatId,
-        userId: 123,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({
-          llm: {},
-          challenge: {
-            inputMaxPrompts: 2,
-          },
-        }),
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          buildBasicAssistantMessage('coucou LLM1', 0),
-          buildBasicAssistantMessage('coucou LLM2', 1),
-          buildBasicUserMessage('coucou user', 2),
-        ],
-      });
-      await createChat(chat.toDTO());
-      const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
-        .post('/chat', {
-          configuration: {
-            llm: {},
-            challenge: {
-              inputMaxPrompts: 2,
-            },
-          },
-          history: [
-            { content: 'coucou LLM1', role: 'assistant' },
-            { content: 'coucou LLM2', role: 'assistant' },
-            { content: 'coucou user', role: 'user' },
-          ],
-          prompt: 'un message',
-        })
-        .reply(201, Readable.from(['19:{"message":"salut"}']));
-
-      // when
-      const stream = await promptChat({
-        chatId,
-        userId: 123,
-        message: 'un message',
-        ...dependencies,
-      });
-
-      // then
-      const parts = [];
-      const decoder = new TextDecoder();
-      for await (const chunk of stream) {
-        parts.push(decoder.decode(chunk));
-      }
-      await waitForStreamFinalizationToBeDone();
-      const llmResponse = parts.join('');
-      expect(llmResponse).to.deep.equal('data: salut\n\n');
-      expect(llmPostPromptScope.isDone()).to.be.true;
-    });
-
     it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
       // given
       const chat = new Chat({
@@ -330,70 +270,41 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               },
             },
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             totalInputTokens: 0,
             totalOutputTokens: 0,
           });
-          expect(messagesDB).to.deep.equal([
-            {
-              index: 0,
-              content: 'coucou user1',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: null,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 1,
-              content: 'coucou LLM1',
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              wasModerated: null,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 2,
-              content: 'un message',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 3,
-              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              hasErrorOccurred: false,
-              wasModerated: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-          ]);
+          expect(messagesDB[0]).to.deep.include({
+            index: 0,
+            content: 'coucou user1',
+            emitter: 'user',
+            wasModerated: null,
+            attachmentName: null,
+          });
+          expect(messagesDB[1]).to.deep.include({
+            index: 1,
+            content: 'coucou LLM1',
+            emitter: 'assistant',
+            wasModerated: null,
+            attachmentName: null,
+          });
+          expect(messagesDB[2]).to.deep.include({
+            index: 2,
+            content: 'un message',
+            emitter: 'user',
+            wasModerated: false,
+            attachmentName: null,
+          });
+          expect(messagesDB[3]).to.deep.include({
+            index: 3,
+            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+            emitter: 'assistant',
+            wasModerated: null,
+            attachmentName: null,
+          });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
+
         it('should release chat resource', async function () {
           // given
           const chat = new Chat({
@@ -461,96 +372,52 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               },
             },
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             totalInputTokens: 0,
             totalOutputTokens: 0,
           });
-          expect(messagesDB).to.deep.equal([
-            {
-              index: 0,
-              content: 'coucou user1',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: null,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 1,
-              content: 'coucou LLM1',
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              wasModerated: null,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 2,
-              content: 'un message',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 3,
-              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              hasErrorOccurred: false,
-              wasModerated: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 4,
-              content: 'un autre message',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-              hasErrorOccurred: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-            {
-              index: 5,
-              content: "coucou c'est vraiment super",
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              hasErrorOccurred: false,
-              wasModerated: null,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-            },
-          ]);
+          expect(messagesDB[0]).to.deep.include({
+            index: 0,
+            content: 'coucou user1',
+            emitter: 'user',
+            wasModerated: null,
+            attachmentName: null,
+          });
+          expect(messagesDB[1]).to.deep.include({
+            index: 1,
+            content: 'coucou LLM1',
+            emitter: 'assistant',
+            wasModerated: null,
+            attachmentName: null,
+          });
+          expect(messagesDB[2]).to.deep.include({
+            index: 2,
+            content: 'un message',
+            emitter: 'user',
+            wasModerated: false,
+            attachmentName: null,
+          });
+          expect(messagesDB[3]).to.deep.include({
+            index: 3,
+            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+            emitter: 'assistant',
+            wasModerated: null,
+            attachmentName: null,
+          });
+          expect(messagesDB[4]).to.deep.include({
+            index: 4,
+            content: 'un autre message',
+            emitter: 'user',
+            wasModerated: false,
+            attachmentName: null,
+          });
+          expect(messagesDB[5]).to.deep.include({
+            index: 5,
+            content: "coucou c'est vraiment super",
+            emitter: 'assistant',
+            wasModerated: null,
+            attachmentName: null,
+          });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
       });
@@ -564,7 +431,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               userId: 123,
               configurationId,
               configuration,
-              hasAttachmentContextBeenAdded: false,
+              haveVictoryConditionsBeenFulfilled: false,
               messages: [
                 buildBasicUserMessage('coucou user1', 0),
                 buildBasicAssistantMessage('coucou LLM2', 1),
@@ -591,10 +458,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         });
 
         context('when attachmentName is not the expected one for the given configuration', function () {
-          context('when the context for this attachmentName has already been added', function () {
+          context('when the context for the valid attachmentName has already been added', function () {
             it(
-              'should return a stream which will contain the attachment event and the llm response while ' +
-                'adding a fictional wrong attachment message from user that will not be send to llm, just persisted',
+              'should return a stream which will contain the attachment-failure event and the llm response while ' +
+                'persisting the user message with attachment and content but not actually forwarding the attachment to the llm',
               async function () {
                 // given
                 const chat = new Chat({
@@ -609,23 +476,11 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
-                      isFromUser: true,
-                      shouldBeRenderedInPreview: true,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                      emitter: 'user',
+                      content: null,
                     }),
-                    new Message({
-                      index: 3,
-                      attachmentName: 'expected_file.txt',
-                      attachmentContext: 'add me in the chat !',
-                      isFromUser: false,
-                      shouldBeRenderedInPreview: false,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                    }),
-                    buildBasicUserMessage('coucou user2', 4),
-                    buildBasicAssistantMessage('coucou LLM2', 5),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
                 await createChat(chat.toDTO());
@@ -705,144 +560,65 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       context: 'add me in the chat !',
                     },
                   },
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: false,
                   totalInputTokens: 0,
                   totalOutputTokens: 0,
                 });
-                expect(messagesDB).to.deep.equal([
-                  {
-                    index: 0,
-                    content: 'coucou user1',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    wasModerated: null,
-                    hasErrorOccurred: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    attachmentContext: null,
-                    attachmentName: null,
-                  },
-                  {
-                    index: 1,
-                    content: 'coucou LLM1',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    wasModerated: null,
-                    hasErrorOccurred: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    attachmentContext: null,
-                    attachmentName: null,
-                  },
-                  {
-                    index: 2,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: null,
-                    content: null,
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                    hasErrorOccurred: null,
-                  },
-                  {
-                    index: 3,
-                    content: null,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 4,
-                    content: 'coucou user2',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    attachmentContext: null,
-                    attachmentName: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 5,
-                    content: 'coucou LLM2',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentContext: null,
-                    attachmentName: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 6,
-                    attachmentName: 'wrong_file.txt',
-                    content: null,
-                    emitter: 'user',
-                    shouldBeForwardedToLLM: false,
-                    shouldBeRenderedInPreview: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 7,
-                    content: 'un message',
-                    emitter: 'user',
-                    shouldBeForwardedToLLM: true,
-                    shouldBeRenderedInPreview: true,
-                    shouldBeCountedAsAPrompt: true,
-                    wasModerated: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    attachmentName: null,
-                  },
-                  {
-                    index: 8,
-                    content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-                    emitter: 'assistant',
-                    shouldBeForwardedToLLM: true,
-                    shouldBeRenderedInPreview: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasErrorOccurred: false,
-                    wasModerated: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    attachmentContext: null,
-                    attachmentName: null,
-                  },
-                ]);
+                expect(messagesDB[0]).to.deep.include({
+                  index: 0,
+                  content: 'coucou user1',
+                  emitter: 'user',
+                  wasModerated: null,
+                  attachmentName: null,
+                });
+                expect(messagesDB[1]).to.deep.include({
+                  index: 1,
+                  content: 'coucou LLM1',
+                  emitter: 'assistant',
+                  wasModerated: null,
+                  attachmentName: null,
+                });
+                expect(messagesDB[2]).to.deep.include({
+                  index: 2,
+                  attachmentName: 'expected_file.txt',
+                  content: null,
+                  emitter: 'user',
+                  wasModerated: null,
+                });
+                expect(messagesDB[3]).to.deep.include({
+                  index: 3,
+                  content: 'coucou user2',
+                  emitter: 'user',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[4]).to.deep.include({
+                  index: 4,
+                  content: 'coucou LLM2',
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[5]).to.deep.include({
+                  index: 5,
+                  attachmentName: 'wrong_file.txt',
+                  content: 'un message',
+                  emitter: 'user',
+                  wasModerated: false,
+                });
+                expect(messagesDB[6]).to.deep.include({
+                  index: 6,
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  emitter: 'assistant',
+                  wasModerated: null,
+                  attachmentName: null,
+                });
                 expect(llmPostPromptScope.isDone()).to.be.true;
               },
             );
           });
 
-          context('when the context for this attachmentName has not been added yet', function () {
+          context('when the context for the valid attachmentName has not been added yet', function () {
             it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist the new message', async function () {
               // given
               const chat = new Chat({
@@ -850,7 +626,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
-                hasAttachmentContextBeenAdded: false,
+                haveVictoryConditionsBeenFulfilled: false,
                 messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
               await createChat(chat.toDTO());
@@ -890,68 +666,31 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     context: 'add me in the chat !',
                   },
                 },
-                hasAttachmentContextBeenAdded: false,
+                haveVictoryConditionsBeenFulfilled: false,
                 totalInputTokens: 0,
                 totalOutputTokens: 0,
               });
-              expect(messagesDB).to.deep.equal([
-                {
-                  index: 0,
-                  content: 'coucou user1',
-                  emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: true,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 1,
-                  content: 'coucou LLM1',
-                  emitter: 'assistant',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 2,
-                  attachmentName: 'wrong_file.txt',
-                  content: null,
-                  emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: false,
-                  shouldBeCountedAsAPrompt: false,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                  attachmentContext: null,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 3,
-                  content: 'un message',
-                  emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: false,
-                  shouldBeCountedAsAPrompt: false,
-                  wasModerated: false,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                },
-              ]);
+              expect(messagesDB[0]).to.deep.include({
+                index: 0,
+                content: 'coucou user1',
+                emitter: 'user',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[1]).to.deep.include({
+                index: 1,
+                content: 'coucou LLM1',
+                emitter: 'assistant',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[2]).to.deep.include({
+                index: 2,
+                attachmentName: 'wrong_file.txt',
+                content: 'un message',
+                emitter: 'user',
+                wasModerated: false,
+              });
             });
           });
         });
@@ -959,8 +698,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
-              'should return a stream which will contain the attachment event and the llm response while ' +
-                'only adding a fictional user message that will not be send to the LLM, but persisted. Thus, it should re-send the context to the LLM',
+              'should return a stream which will contain the attachment-success event and the llm response while ' +
+                "only forwarding the message content to the llm with the history's attachment context and not a new attachment context",
               async function () {
                 // given
                 const chat = new Chat({
@@ -968,30 +707,18 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: false,
                   messages: [
                     buildBasicUserMessage('coucou user1', 0),
                     buildBasicAssistantMessage('coucou LLM1', 1),
                     new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
-                      isFromUser: true,
-                      shouldBeRenderedInPreview: true,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                      content: null,
+                      emitter: 'user',
                     }),
-                    new Message({
-                      index: 3,
-                      attachmentName: 'expected_file.txt',
-                      attachmentContext: 'add me in the chat !',
-                      isFromUser: false,
-                      shouldBeRenderedInPreview: false,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                    }),
-                    buildBasicUserMessage('coucou user2', 4),
-                    buildBasicAssistantMessage('coucou LLM2', 5),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
                 await createChat(chat.toDTO());
@@ -1071,138 +798,59 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       context: 'add me in the chat !',
                     },
                   },
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: false,
                   totalInputTokens: 0,
                   totalOutputTokens: 0,
                 });
-                expect(messagesDB).to.deep.equal([
-                  {
-                    index: 0,
-                    content: 'coucou user1',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 1,
-                    content: 'coucou LLM1',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 2,
-                    attachmentName: 'expected_file.txt',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    content: null,
-                  },
-                  {
-                    index: 3,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                    content: null,
-                  },
-                  {
-                    index: 4,
-                    content: 'coucou user2',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 5,
-                    content: 'coucou LLM2',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 6,
-                    attachmentName: 'expected_file.txt',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: false,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                    content: null,
-                  },
-                  {
-                    index: 7,
-                    content: 'un message',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    wasModerated: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                  },
-                  {
-                    index: 8,
-                    content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasErrorOccurred: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                ]);
+                expect(messagesDB[0]).to.deep.include({
+                  index: 0,
+                  content: 'coucou user1',
+                  emitter: 'user',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[1]).to.deep.include({
+                  index: 1,
+                  content: 'coucou LLM1',
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[2]).to.deep.include({
+                  index: 2,
+                  attachmentName: 'expected_file.txt',
+                  emitter: 'user',
+                  wasModerated: null,
+                  content: null,
+                });
+                expect(messagesDB[3]).to.deep.include({
+                  index: 3,
+                  content: 'coucou user2',
+                  emitter: 'user',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[4]).to.deep.include({
+                  index: 4,
+                  content: 'coucou LLM2',
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[5]).to.deep.include({
+                  index: 5,
+                  attachmentName: 'expected_file.txt',
+                  content: 'un message',
+                  emitter: 'user',
+                  wasModerated: false,
+                });
+                expect(messagesDB[6]).to.deep.include({
+                  index: 6,
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
                 expect(llmPostPromptScope.isDone()).to.be.true;
               },
             );
@@ -1210,8 +858,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
           context('when the context for this attachmentName has not been added yet', function () {
             it(
-              'should return a stream which will contain the attachment event and the llm response while ' +
-                'adding the attachment context in the conversation',
+              'should return a stream which will contain the attachment-success event and the llm response while ' +
+                'adding the attachment context in the conversation and persisting the message but not the fake exchange',
               async function () {
                 // given
                 const chat = new Chat({
@@ -1219,7 +867,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
-                  hasAttachmentContextBeenAdded: false,
+                  haveVictoryConditionsBeenFulfilled: false,
                   messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
                 await createChat(chat.toDTO());
@@ -1297,96 +945,38 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       context: 'add me in the chat !',
                     },
                   },
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: false,
                   totalInputTokens: 0,
                   totalOutputTokens: 0,
                 });
-                expect(messagesDB).to.deep.equal([
-                  {
-                    index: 0,
-                    content: 'coucou user1',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 1,
-                    content: 'coucou LLM1',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    hasErrorOccurred: null,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 2,
-                    attachmentName: 'expected_file.txt',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                    content: null,
-                  },
-                  {
-                    index: 3,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                    content: null,
-                  },
-                  {
-                    index: 4,
-                    content: 'un message',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    wasModerated: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                  },
-                  {
-                    index: 5,
-                    content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasErrorOccurred: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                ]);
+                expect(messagesDB[0]).to.deep.include({
+                  index: 0,
+                  content: 'coucou user1',
+                  emitter: 'user',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[1]).to.deep.include({
+                  index: 1,
+                  content: 'coucou LLM1',
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[2]).to.deep.include({
+                  index: 2,
+                  attachmentName: 'expected_file.txt',
+                  emitter: 'user',
+                  wasModerated: false,
+                  content: 'un message',
+                });
+                expect(messagesDB[3]).to.deep.include({
+                  index: 3,
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
                 expect(llmPostPromptScope.isDone()).to.be.true;
               },
             );
@@ -1404,7 +994,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}),
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM2', 1)],
           });
           await createChat(chat.toDTO());
@@ -1433,7 +1023,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               userId: 123,
               configurationId,
               configuration,
-              hasAttachmentContextBeenAdded: false,
+              haveVictoryConditionsBeenFulfilled: false,
               messages: [
                 buildBasicUserMessage('coucou user1', 0),
                 buildBasicAssistantMessage('coucou LLM2', 1),
@@ -1460,38 +1050,26 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         });
 
         context('when attachmentName is not the expected one for the given configuration', function () {
-          context('when the context for this attachmentName has already been added', function () {
-            it('should return a stream which will contain the attachment event and add a fictional wrong attachment message from user that will not be send to the LLM but persisted', async function () {
+          context('when the context for the valid attachmentName has already been added', function () {
+            it('should return a stream which will contain the attachment-failure event and persist the user message which will not be forwarded the LLM', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
-                hasAttachmentContextBeenAdded: true,
+                haveVictoryConditionsBeenFulfilled: false,
                 messages: [
                   buildBasicUserMessage('coucou user1', 0),
                   buildBasicAssistantMessage('coucou LLM1', 1),
                   new Message({
                     index: 2,
                     attachmentName: 'expected_file.txt',
-                    isFromUser: true,
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    content: null,
+                    emitter: 'user',
                   }),
-                  new Message({
-                    index: 3,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    isFromUser: false,
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                  }),
-                  buildBasicUserMessage('coucou user2', 4),
-                  buildBasicAssistantMessage('coucou LLM2', 5),
+                  buildBasicUserMessage('coucou user2', 3),
+                  buildBasicAssistantMessage('coucou LLM2', 4),
                 ],
               });
               await createChat(chat.toDTO());
@@ -1529,114 +1107,56 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     context: 'add me in the chat !',
                   },
                 },
-                hasAttachmentContextBeenAdded: true,
+                haveVictoryConditionsBeenFulfilled: false,
                 totalInputTokens: 0,
                 totalOutputTokens: 0,
               });
-              expect(messagesDB).to.deep.equal([
-                {
-                  index: 0,
-                  content: 'coucou user1',
-                  emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: true,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 1,
-                  content: 'coucou LLM1',
-                  emitter: 'assistant',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 2,
-                  attachmentName: 'expected_file.txt',
-                  emitter: 'user',
-                  content: null,
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                  attachmentContext: null,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 3,
-                  attachmentName: 'expected_file.txt',
-                  attachmentContext: 'add me in the chat !',
-                  content: null,
-                  emitter: 'assistant',
-                  shouldBeRenderedInPreview: false,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 4,
-                  content: 'coucou user2',
-                  emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: true,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 5,
-                  content: 'coucou LLM2',
-                  emitter: 'assistant',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
-                  attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-                {
-                  index: 6,
-                  attachmentName: 'wrong_file.txt',
-                  content: null,
-                  emitter: 'user',
-                  shouldBeForwardedToLLM: false,
-                  shouldBeRenderedInPreview: true,
-                  shouldBeCountedAsAPrompt: true,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  attachmentContext: null,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
-                },
-              ]);
+              expect(messagesDB[0]).to.deep.include({
+                index: 0,
+                content: 'coucou user1',
+                emitter: 'user',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[1]).to.deep.include({
+                index: 1,
+                content: 'coucou LLM1',
+                emitter: 'assistant',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[2]).to.deep.include({
+                index: 2,
+                attachmentName: 'expected_file.txt',
+                emitter: 'user',
+                content: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[3]).to.deep.include({
+                index: 3,
+                content: 'coucou user2',
+                emitter: 'user',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[4]).to.deep.include({
+                index: 4,
+                content: 'coucou LLM2',
+                emitter: 'assistant',
+                attachmentName: null,
+                wasModerated: null,
+              });
+              expect(messagesDB[5]).to.deep.include({
+                index: 5,
+                attachmentName: 'wrong_file.txt',
+                content: null,
+                emitter: 'user',
+                wasModerated: false,
+              });
             });
           });
 
-          context('when the context for this attachmentName has not been added yet', function () {
+          context('when the context for the valid attachmentName has not been added yet', function () {
             it('should return a stream which will contain only the attachment-failure event and still persist the new message', async function () {
               // given
               const chat = new Chat({
@@ -1644,7 +1164,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 userId: 123,
                 configurationId,
                 configuration: configurationWithAttachment,
-                hasAttachmentContextBeenAdded: false,
+                haveVictoryConditionsBeenFulfilled: false,
                 messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
               await createChat(chat.toDTO());
@@ -1683,7 +1203,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     context: 'add me in the chat !',
                   },
                 },
-                hasAttachmentContextBeenAdded: false,
+                haveVictoryConditionsBeenFulfilled: false,
                 totalInputTokens: 0,
                 totalOutputTokens: 0,
               });
@@ -1692,28 +1212,14 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   index: 0,
                   content: 'coucou user1',
                   emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: true,
                   attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
                   wasModerated: null,
                 },
                 {
                   index: 1,
                   content: 'coucou LLM1',
                   emitter: 'assistant',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: true,
-                  shouldBeCountedAsAPrompt: false,
                   attachmentName: null,
-                  attachmentContext: null,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
                   wasModerated: null,
                 },
                 {
@@ -1721,14 +1227,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   attachmentName: 'wrong_file.txt',
                   content: null,
                   emitter: 'user',
-                  shouldBeRenderedInPreview: true,
-                  shouldBeForwardedToLLM: false,
-                  shouldBeCountedAsAPrompt: true,
-                  hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                  attachmentContext: null,
-                  hasErrorOccurred: null,
-                  haveVictoryConditionsBeenFulfilled: false,
-                  wasModerated: null,
+                  wasModerated: false,
                 },
               ]);
             });
@@ -1738,8 +1237,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
-              'should return a stream which will contain the attachment event while ' +
-                'adding a fictional attachment user message that will not be send to the LLM but persisted. Thus,it wont send to the LLM the context once again',
+              'should return a stream which will only contain the attachment-success event while ' +
+                'persisting the user message but not forwarding it to the llm ',
               async function () {
                 // given
                 const chat = new Chat({
@@ -1747,30 +1246,18 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: true,
                   messages: [
                     buildBasicUserMessage('coucou user1', 0),
                     buildBasicAssistantMessage('coucou LLM1', 1),
                     new Message({
                       index: 2,
                       attachmentName: 'expected_file.txt',
-                      isFromUser: true,
-                      shouldBeRenderedInPreview: true,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                      content: null,
+                      emitter: 'user',
                     }),
-                    new Message({
-                      index: 3,
-                      attachmentName: 'expected_file.txt',
-                      attachmentContext: 'add me in the chat !',
-                      isFromUser: false,
-                      shouldBeRenderedInPreview: false,
-                      shouldBeForwardedToLLM: true,
-                      shouldBeCountedAsAPrompt: false,
-                    }),
-                    buildBasicUserMessage('coucou user2', 4),
-                    buildBasicAssistantMessage('coucou LLM2', 5),
+                    buildBasicUserMessage('coucou user2', 3),
+                    buildBasicAssistantMessage('coucou LLM2', 4),
                   ],
                 });
                 await createChat(chat.toDTO());
@@ -1808,7 +1295,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       context: 'add me in the chat !',
                     },
                   },
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: true,
                   totalInputTokens: 0,
                   totalOutputTokens: 0,
                 });
@@ -1817,28 +1304,14 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     index: 0,
                     content: 'coucou user1',
                     emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
                     attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
                     wasModerated: null,
                   },
                   {
                     index: 1,
                     content: 'coucou LLM1',
                     emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
                     attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
                     wasModerated: null,
                   },
                   {
@@ -1846,70 +1319,28 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     attachmentName: 'expected_file.txt',
                     content: null,
                     emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
                     wasModerated: null,
                   },
                   {
                     index: 3,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    content: null,
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
+                    content: 'coucou user2',
+                    emitter: 'user',
+                    attachmentName: null,
                     wasModerated: null,
                   },
                   {
                     index: 4,
-                    content: 'coucou user2',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
+                    content: 'coucou LLM2',
+                    emitter: 'assistant',
                     attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
                     wasModerated: null,
                   },
                   {
                     index: 5,
-                    content: 'coucou LLM2',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 6,
                     attachmentName: 'expected_file.txt',
                     content: null,
                     emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: false,
-                    shouldBeCountedAsAPrompt: true,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
+                    wasModerated: false,
                   },
                 ]);
               },
@@ -1918,7 +1349,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
           context('when the context for this attachmentName has not been added yet', function () {
             it(
-              'should return a stream which will contain the attachment event while ' +
+              'should return a stream which will contain the attachment-success event while ' +
                 'adding the attachment context in the conversation',
               async function () {
                 // given
@@ -1927,7 +1358,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configurationId: 'uneConfigQuiExist',
                   configuration: configurationWithAttachment,
-                  hasAttachmentContextBeenAdded: false,
+                  haveVictoryConditionsBeenFulfilled: false,
                   messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
                 await createChat(chat.toDTO());
@@ -1965,68 +1396,31 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       context: 'add me in the chat !',
                     },
                   },
-                  hasAttachmentContextBeenAdded: true,
+                  haveVictoryConditionsBeenFulfilled: false,
                   totalInputTokens: 0,
                   totalOutputTokens: 0,
                 });
-                expect(messagesDB).to.deep.equal([
-                  {
-                    index: 0,
-                    content: 'coucou user1',
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 1,
-                    content: 'coucou LLM1',
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    attachmentName: null,
-                    attachmentContext: null,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 2,
-                    attachmentName: 'expected_file.txt',
-                    content: null,
-                    emitter: 'user',
-                    shouldBeRenderedInPreview: true,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: true,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    attachmentContext: null,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                  {
-                    index: 3,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
-                    content: null,
-                    emitter: 'assistant',
-                    shouldBeRenderedInPreview: false,
-                    shouldBeForwardedToLLM: true,
-                    shouldBeCountedAsAPrompt: false,
-                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-                    hasErrorOccurred: null,
-                    haveVictoryConditionsBeenFulfilled: false,
-                    wasModerated: null,
-                  },
-                ]);
+                expect(messagesDB[0]).to.deep.include({
+                  index: 0,
+                  content: 'coucou user1',
+                  emitter: 'user',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[1]).to.deep.include({
+                  index: 1,
+                  content: 'coucou LLM1',
+                  emitter: 'assistant',
+                  attachmentName: null,
+                  wasModerated: null,
+                });
+                expect(messagesDB[2]).to.deep.include({
+                  index: 2,
+                  attachmentName: 'expected_file.txt',
+                  content: null,
+                  emitter: 'user',
+                  wasModerated: false,
+                });
               },
             );
           });
@@ -2042,7 +1436,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configurationId,
           configuration,
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: false,
           messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
         await createChat(chat.toDTO());
@@ -2101,68 +1495,38 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               inputMaxChars: 255,
             },
           },
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: true,
           totalInputTokens: 0,
           totalOutputTokens: 0,
         });
-        expect(messagesDB).to.deep.equal([
-          {
-            index: 0,
-            content: 'coucou user1',
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 1,
-            content: 'coucou LLM1',
-            emitter: 'assistant',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 2,
-            content: 'un message',
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-            haveVictoryConditionsBeenFulfilled: true,
-            wasModerated: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            hasErrorOccurred: null,
-          },
-          {
-            index: 3,
-            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-            emitter: 'assistant',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-            hasErrorOccurred: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            wasModerated: null,
-          },
-        ]);
+        expect(messagesDB[0]).to.deep.include({
+          index: 0,
+          content: 'coucou user1',
+          emitter: 'user',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[1]).to.deep.include({
+          index: 1,
+          content: 'coucou LLM1',
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[2]).to.deep.include({
+          index: 2,
+          content: 'un message',
+          emitter: 'user',
+          wasModerated: false,
+          attachmentName: null,
+        });
+        expect(messagesDB[3]).to.deep.include({
+          index: 3,
+          content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        });
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
 
@@ -2173,7 +1537,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configurationId,
           configuration,
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: false,
           totalInputTokens: 1_000,
           totalOutputTokens: 2_000,
           messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
@@ -2234,68 +1598,38 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               inputMaxChars: 255,
             },
           },
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: true,
           totalInputTokens: 4_000,
           totalOutputTokens: 7_000,
         });
-        expect(messagesDB).to.deep.equal([
-          {
-            index: 0,
-            content: 'coucou user1',
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 1,
-            content: 'coucou LLM1',
-            emitter: 'assistant',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 2,
-            content: 'un message',
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-            haveVictoryConditionsBeenFulfilled: true,
-            wasModerated: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            hasErrorOccurred: null,
-          },
-          {
-            index: 3,
-            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-            emitter: 'assistant',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-            hasErrorOccurred: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            wasModerated: null,
-          },
-        ]);
+        expect(messagesDB[0]).to.deep.include({
+          index: 0,
+          content: 'coucou user1',
+          emitter: 'user',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[1]).to.deep.include({
+          index: 1,
+          content: 'coucou LLM1',
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[2]).to.deep.include({
+          index: 2,
+          content: 'un message',
+          emitter: 'user',
+          wasModerated: false,
+          attachmentName: null,
+        });
+        expect(messagesDB[3]).to.deep.include({
+          index: 3,
+          content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        });
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
 
@@ -2306,7 +1640,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configurationId,
           configuration,
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: false,
           messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
         await createChat(chat.toDTO());
@@ -2355,54 +1689,31 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               inputMaxChars: 255,
             },
           },
-          hasAttachmentContextBeenAdded: false,
+          haveVictoryConditionsBeenFulfilled: false,
           totalInputTokens: 0,
           totalOutputTokens: 0,
         });
-        expect(messagesDB).to.deep.equal([
-          {
-            index: 0,
-            content: 'coucou user1',
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 1,
-            content: 'coucou LLM1',
-            emitter: 'assistant',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-            wasModerated: null,
-          },
-          {
-            index: 2,
-            content: "C'est quoi un chat tout terrain ? Un cat-cat !!",
-            emitter: 'user',
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: false,
-            shouldBeCountedAsAPrompt: true,
-            wasModerated: true,
-            attachmentName: null,
-            attachmentContext: null,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: false,
-            hasErrorOccurred: null,
-          },
-        ]);
+        expect(messagesDB[0]).to.deep.include({
+          index: 0,
+          content: 'coucou user1',
+          emitter: 'user',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[1]).to.deep.include({
+          index: 1,
+          content: 'coucou LLM1',
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        });
+        expect(messagesDB[2]).to.deep.include({
+          index: 2,
+          content: "C'est quoi un chat tout terrain ? Un cat-cat !!",
+          emitter: 'user',
+          wasModerated: true,
+          attachmentName: null,
+        });
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
     });
@@ -2415,7 +1726,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             id: chatId,
             configurationId,
             configuration,
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await createChat(chat.toDTO());
@@ -2472,69 +1783,39 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               },
             },
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             totalInputTokens: 3000,
             totalOutputTokens: 5000,
             userId: null,
           });
-          expect(messagesDB).to.deep.equal([
-            {
-              index: 0,
-              content: 'coucou user1',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-              wasModerated: null,
-            },
-            {
-              index: 1,
-              content: 'coucou LLM1',
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-              wasModerated: null,
-            },
-            {
-              index: 2,
-              content: 'un message',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-            },
-            {
-              index: 3,
-              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              hasErrorOccurred: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              wasModerated: null,
-            },
-          ]);
+          expect(messagesDB[0]).to.deep.include({
+            index: 0,
+            content: 'coucou user1',
+            emitter: 'user',
+            attachmentName: null,
+            wasModerated: null,
+          });
+          expect(messagesDB[1]).to.deep.include({
+            index: 1,
+            content: 'coucou LLM1',
+            emitter: 'assistant',
+            attachmentName: null,
+            wasModerated: null,
+          });
+          expect(messagesDB[2]).to.deep.include({
+            index: 2,
+            content: 'un message',
+            emitter: 'user',
+            wasModerated: false,
+            attachmentName: null,
+          });
+          expect(messagesDB[3]).to.deep.include({
+            index: 3,
+            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+            emitter: 'assistant',
+            attachmentName: null,
+            wasModerated: null,
+          });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
       });
@@ -2547,7 +1828,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configurationId,
             configuration,
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await createChat(chat.toDTO());
@@ -2605,68 +1886,38 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               },
             },
-            hasAttachmentContextBeenAdded: false,
+            haveVictoryConditionsBeenFulfilled: false,
             totalInputTokens: 0,
             totalOutputTokens: 0,
           });
-          expect(messagesDB).to.deep.equal([
-            {
-              index: 0,
-              content: 'coucou user1',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-              wasModerated: null,
-            },
-            {
-              index: 1,
-              content: 'coucou LLM1',
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-              wasModerated: null,
-            },
-            {
-              index: 2,
-              content: 'un message',
-              emitter: 'user',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: true,
-              wasModerated: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              hasErrorOccurred: null,
-            },
-            {
-              index: 3,
-              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-              emitter: 'assistant',
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeCountedAsAPrompt: false,
-              hasErrorOccurred: false,
-              attachmentName: null,
-              attachmentContext: null,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: false,
-              wasModerated: null,
-            },
-          ]);
+          expect(messagesDB[0]).to.deep.include({
+            index: 0,
+            content: 'coucou user1',
+            emitter: 'user',
+            attachmentName: null,
+            wasModerated: null,
+          });
+          expect(messagesDB[1]).to.deep.include({
+            index: 1,
+            content: 'coucou LLM1',
+            emitter: 'assistant',
+            attachmentName: null,
+            wasModerated: null,
+          });
+          expect(messagesDB[2]).to.deep.include({
+            index: 2,
+            content: 'un message',
+            emitter: 'user',
+            wasModerated: false,
+            attachmentName: null,
+          });
+          expect(messagesDB[3]).to.deep.include({
+            index: 3,
+            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+            emitter: 'assistant',
+            attachmentName: null,
+            wasModerated: null,
+          });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
       });
@@ -2693,7 +1944,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         userId: 123,
         configurationId,
         configuration,
-        hasAttachmentContextBeenAdded: false,
+        haveVictoryConditionsBeenFulfilled: false,
         messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
       });
       await createChat(chat.toDTO());
@@ -2750,68 +2001,39 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             inputMaxChars: 255,
           },
         },
-        hasAttachmentContextBeenAdded: false,
+        haveVictoryConditionsBeenFulfilled: false,
         totalInputTokens: 0,
         totalOutputTokens: 0,
       });
-      expect(messagesDB).to.deep.equal([
-        {
-          index: 0,
-          content: 'coucou user1',
-          emitter: 'user',
-          shouldBeRenderedInPreview: true,
-          shouldBeForwardedToLLM: true,
-          shouldBeCountedAsAPrompt: true,
-          attachmentName: null,
-          attachmentContext: null,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-          haveVictoryConditionsBeenFulfilled: false,
-          hasErrorOccurred: null,
-          wasModerated: null,
-        },
-        {
-          index: 1,
-          content: 'coucou LLM1',
-          emitter: 'assistant',
-          shouldBeRenderedInPreview: true,
-          shouldBeForwardedToLLM: true,
-          shouldBeCountedAsAPrompt: false,
-          attachmentName: null,
-          attachmentContext: null,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-          haveVictoryConditionsBeenFulfilled: false,
-          hasErrorOccurred: null,
-          wasModerated: null,
-        },
-        {
-          index: 2,
-          content: 'un message',
-          emitter: 'user',
-          shouldBeRenderedInPreview: true,
-          shouldBeForwardedToLLM: false,
-          shouldBeCountedAsAPrompt: false,
-          wasModerated: false,
-          attachmentName: null,
-          attachmentContext: null,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-          haveVictoryConditionsBeenFulfilled: false,
-          hasErrorOccurred: null,
-        },
-        {
-          index: 3,
-          content: "coucou c'est super\nle couscous c plutot bon",
-          emitter: 'assistant',
-          shouldBeRenderedInPreview: true,
-          shouldBeForwardedToLLM: false,
-          shouldBeCountedAsAPrompt: false,
-          hasErrorOccurred: true,
-          attachmentName: null,
-          attachmentContext: null,
-          hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-          haveVictoryConditionsBeenFulfilled: false,
-          wasModerated: null,
-        },
-      ]);
+      expect(messagesDB[0]).to.deep.include({
+        index: 0,
+        content: 'coucou user1',
+        emitter: 'user',
+        attachmentName: null,
+        wasModerated: null,
+      });
+      expect(messagesDB[1]).to.deep.include({
+        index: 1,
+        content: 'coucou LLM1',
+        emitter: 'assistant',
+        attachmentName: null,
+        wasModerated: null,
+      });
+      expect(messagesDB[2]).to.deep.include({
+        index: 2,
+        content: 'un message',
+        emitter: 'user',
+        wasModerated: false,
+        attachmentName: null,
+      });
+      // TODO: Est-ce qu'on veut vraiment persister un message assistant en erreur ? 🤔
+      expect(messagesDB[3]).to.deep.include({
+        index: 3,
+        content: "coucou c'est super\nle couscous c plutot bon",
+        emitter: 'assistant',
+        attachmentName: null,
+        wasModerated: null,
+      });
       expect(llmPostPromptScope.isDone()).to.be.true;
     });
   });
@@ -2855,10 +2077,7 @@ function buildBasicUserMessage(content, index) {
   return new Message({
     index,
     content,
-    isFromUser: true,
-    shouldBeRenderedInPreview: true,
-    shouldBeForwardedToLLM: true,
-    shouldBeCountedAsAPrompt: true,
+    emitter: 'user',
   });
 }
 
@@ -2866,10 +2085,7 @@ function buildBasicAssistantMessage(content, index) {
   return new Message({
     index,
     content,
-    isFromUser: false,
-    shouldBeRenderedInPreview: true,
-    shouldBeForwardedToLLM: true,
-    shouldBeCountedAsAPrompt: false,
+    emitter: 'assistant',
   });
 }
 
@@ -2883,13 +2099,8 @@ async function createChat(chatDTO) {
     databaseBuilder.factory.buildChatMessage({
       ...messageDTO,
       chatId: chatDTO.id,
-      emitter: messageDTO.isFromUser ? 'user' : 'assistant',
-      hasErrorOccurred: messageDTO.hasErrorOccurred ?? null,
-      shouldBeCountedAsPrompt: messageDTO.shouldBeCountedAsAPrompt,
       wasModerated: messageDTO.wasModerated ?? null,
-      content: messageDTO.attachmentName ? null : messageDTO.content,
       attachmentName: messageDTO.attachmentName ?? null,
-      attachmentContext: messageDTO.attachmentContext ?? null,
     });
   }
   await databaseBuilder.commit();
@@ -2903,26 +2114,13 @@ async function getChatAndMessagesFromDB(chatId) {
         'userId',
         'configId',
         'configContent',
-        'hasAttachmentContextBeenAdded',
+        'haveVictoryConditionsBeenFulfilled',
         'totalInputTokens',
         'totalOutputTokens',
       )
       .first(),
     messagesDB: await knex('chat_messages')
-      .select(
-        'index',
-        'emitter',
-        'attachmentName',
-        'attachmentContext',
-        'hasAttachmentBeenSubmittedAlongWithAPrompt',
-        'haveVictoryConditionsBeenFulfilled',
-        'content',
-        'shouldBeRenderedInPreview',
-        'shouldBeForwardedToLLM',
-        'shouldBeCountedAsAPrompt',
-        'wasModerated',
-        'hasErrorOccurred',
-      )
+      .select('index', 'emitter', 'attachmentName', 'content', 'wasModerated')
       .where({ chatId })
       .orderBy('index'),
   };

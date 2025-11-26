@@ -1,4 +1,11 @@
-import { assertGreaterOrEqualToZero } from '../../../shared/domain/models/asserts.js';
+import { assertGreaterOrEqualToZero, assertNotNullOrUndefined } from '../../../shared/domain/models/asserts.js';
+import {
+  IncorrectMessagesOrderingError,
+  MaxPromptsReachedError,
+  NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
+  TooLargeMessageInputError,
+} from '../errors.js';
 import { Configuration } from './Configuration.js';
 
 export class Chat {
@@ -12,7 +19,7 @@ export class Chat {
    * @param {number=} params.moduleId
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
-   * @param {boolean} params.hasAttachmentContextBeenAdded
+   * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
    * @param {number|undefined} params.totalInputTokens
    * @param {number|undefined} params.totalOutputTokens
    * @param {Message[]} params.messages
@@ -26,7 +33,7 @@ export class Chat {
     moduleId,
     configurationId,
     configuration,
-    hasAttachmentContextBeenAdded,
+    haveVictoryConditionsBeenFulfilled,
     messages = [],
     totalInputTokens,
     totalOutputTokens,
@@ -39,18 +46,26 @@ export class Chat {
     this.moduleId = moduleId;
     this.configurationId = configurationId;
     this.configuration = configuration;
-    this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
-    this.messages = messages;
+    this.messages = messages.sort((messA, messB) => messA.index - messB.index);
+    this.haveVictoryConditionsBeenFulfilled = haveVictoryConditionsBeenFulfilled;
     this.totalInputTokens = totalInputTokens;
     this.totalOutputTokens = totalOutputTokens;
   }
 
-  get currentPromptsCount() {
-    return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
+  static get ATTACHMENT_STATUS() {
+    return {
+      NONE: 'NONE',
+      SUCCESS: 'SUCCESS',
+      FAILURE: 'FAILURE',
+    };
   }
 
-  get messagesToForwardToLLM() {
-    return this.messages.filter((message) => message.shouldBeForwardedToLLM).map((message) => message.toLLMHistory());
+  get hasAttachmentContextBeenAdded() {
+    assertNotNullOrUndefined(
+      this.configuration.attachmentName,
+      'Configuration must have an attachment config setup to call this getter',
+    );
+    return this.messages.some((message) => this.isAttachmentValid(message.attachmentName));
   }
 
   get isPreview() {
@@ -61,95 +76,185 @@ export class Chat {
     return this.configuration.hasVictoryConditions;
   }
 
+  get currentUserPromptsCount() {
+    const userMessages = this.messages.filter((message) => message.emitter === 'user');
+
+    if (!this.configuration.hasAttachment) return userMessages.length;
+
+    let isAttachmentAlreadyInContext = false;
+    let count = 0;
+    for (const message of userMessages) {
+      if (!message.attachmentName) {
+        count++;
+        continue;
+      }
+
+      // valid attachment should only count once
+      if (this.isAttachmentValid(message.attachmentName) && !isAttachmentAlreadyInContext) {
+        isAttachmentAlreadyInContext = true;
+        count++;
+        continue;
+      }
+
+      const isAttachmentOnly = !message.content;
+      if (isAttachmentAlreadyInContext && isAttachmentOnly) continue;
+
+      count++;
+    }
+
+    return count;
+  }
+
+  get messagesForInference() {
+    const messagesForInference = [];
+    let isAttachmentAlreadyInContext = false;
+    for (const message of this.messages) {
+      if (message.wasModerated) continue;
+
+      const isAssistantMessage = message.emitter === 'assistant';
+      const noAttachmentExpectedForConfig = !this.configuration.hasAttachment;
+      const noAttachmentInMessage = !message.attachmentName;
+      if (isAssistantMessage || noAttachmentExpectedForConfig || noAttachmentInMessage) {
+        messagesForInference.push({
+          role: message.emitter,
+          content: message.content,
+        });
+        continue;
+      }
+
+      if (this.isAttachmentValid(message.attachmentName) && !isAttachmentAlreadyInContext) {
+        messagesForInference.push(
+          {
+            role: 'user',
+            content: `<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>${message.attachmentName}</attachment_name></system_notification>`,
+          },
+          {
+            role: 'assistant',
+            content: `<read_attachment_tool>Lecture de la pièce jointe, ${message.attachmentName} : <attachment_content>${this.configuration.attachmentContext}</attachment_content></read_attachment_tool>`,
+          },
+        );
+        isAttachmentAlreadyInContext = true;
+      }
+
+      if (isAttachmentAlreadyInContext && message.content) {
+        messagesForInference.push({
+          role: message.emitter,
+          content: message.content,
+        });
+      }
+    }
+
+    return messagesForInference;
+  }
+
+  get shouldSendForInference() {
+    if (this.messagesForInference.length === 0) return false;
+
+    const lastMessage = this.messages.at(-1);
+    const isFromUser = lastMessage.emitter === 'user';
+    if (!isFromUser) return false;
+
+    if (!this.configuration.hasAttachment) return true;
+
+    const hasContent = !!lastMessage.content;
+    const hasAttachment = !!lastMessage.attachmentName;
+    if (this.hasAttachmentContextBeenAdded) {
+      return hasContent;
+    }
+
+    if (hasAttachment) return false; // since hasAttachmentContextBeenAdded is false, it means the attachment was invalid
+    return hasContent;
+  }
+
+  get lastAttachmentStatus() {
+    const lastMessage = this.messages.at(-1);
+    if (!lastMessage?.attachmentName) return Chat.ATTACHMENT_STATUS.NONE;
+    return this.isAttachmentValid(lastMessage.attachmentName)
+      ? Chat.ATTACHMENT_STATUS.SUCCESS
+      : Chat.ATTACHMENT_STATUS.FAILURE;
+  }
+
+  get lastUserMessage() {
+    return this.messages.findLast((message) => message.emitter === 'user');
+  }
+
   /**
-   * @param {string=} message
-   * @param {boolean=} shouldBeCountedAsAPrompt
-   * @param {boolean=} shouldBeForwardedToLLM
-   * @param {boolean=} haveVictoryConditionsBeenFulfilled
-   * @param {boolean} wasModerated
+   * @param {string=} content
+   * @param {string=} attachmentName
    */
-  addUserMessage(
-    message,
-    shouldBeCountedAsAPrompt,
-    shouldBeForwardedToLLM,
-    haveVictoryConditionsBeenFulfilled,
-    wasModerated,
-  ) {
-    if (!message) return;
+  addUserMessage(content, attachmentName) {
+    if (!content && !attachmentName) {
+      throw new NoAttachmentNorMessageProvidedError();
+    }
+    if (attachmentName && !this.configuration.hasAttachment) {
+      throw new NoAttachmentNeededError();
+    }
+    if (content) {
+      if (content.length > this.configuration.inputMaxChars) {
+        throw new TooLargeMessageInputError();
+      }
+
+      if (this.currentUserPromptsCount >= this.configuration.inputMaxPrompts) {
+        throw new MaxPromptsReachedError();
+      }
+    }
+
+    if (this.messagesForInference.at(-1)?.role === 'user') {
+      throw new IncorrectMessagesOrderingError();
+    }
+
     this.messages.push(
       new Message({
         index: this.messages.length,
-        content: message,
-        isFromUser: true,
-        shouldBeCountedAsAPrompt,
-        shouldBeForwardedToLLM,
-        shouldBeRenderedInPreview: true,
-        haveVictoryConditionsBeenFulfilled,
-        wasModerated,
+        content,
+        emitter: 'user',
+        attachmentName: attachmentName ?? null,
+        wasModerated: null,
       }),
     );
   }
 
   /**
-   * @param {string} message
-   * @param {boolean} shouldBeForwardedToLLM
-   * @param {boolean} hasErrorOccurred
+   * @param {string=} content
    */
-  addLLMMessage(message, shouldBeForwardedToLLM, hasErrorOccurred) {
-    if (!message) return;
+  addAssistantMessage(content) {
+    if (!content) {
+      throw new NoAttachmentNorMessageProvidedError();
+    }
+
+    if (this.messages.length === 0) {
+      throw new IncorrectMessagesOrderingError();
+    }
+
+    if (this.messages.at(-1).emitter === 'assistant') {
+      throw new IncorrectMessagesOrderingError();
+    }
+
     this.messages.push(
       new Message({
         index: this.messages.length,
-        content: message,
-        isFromUser: false,
-        shouldBeForwardedToLLM,
-        shouldBeRenderedInPreview: true,
-        shouldBeCountedAsAPrompt: false,
-        hasErrorOccurred,
+        content,
+        emitter: 'assistant',
+        attachmentName: null,
+        wasModerated: null,
       }),
     );
+  }
+
+  /**
+   * @param {number} inputTokens
+   * @param {number} outputTokens
+   */
+  updateTokenConsumption(inputTokens, outputTokens) {
+    this.totalInputTokens += inputTokens;
+    this.totalOutputTokens += outputTokens;
   }
 
   /**
    * @param {string} attachmentName
-   * @param {string} message
-   *
-   * @returns {boolean}
    */
-  addAttachmentContextMessages(attachmentName, message) {
-    const attachmentContext = this.configuration.attachmentContext;
-    const isAttachmentValid = this.isAttachmentValid(attachmentName);
-    this.messages.push(
-      new Message({
-        index: this.messages.length,
-        attachmentName,
-        isFromUser: true,
-        hasAttachmentBeenSubmittedAlongWithAPrompt: !!message,
-        shouldBeForwardedToLLM: isAttachmentValid && !this.hasAttachmentContextBeenAdded,
-        shouldBeRenderedInPreview: true,
-        shouldBeCountedAsAPrompt: !message,
-      }),
-    );
-    if (isAttachmentValid && !this.hasAttachmentContextBeenAdded) {
-      this.messages.push(
-        new Message({
-          index: this.messages.length,
-          attachmentName,
-          attachmentContext,
-          isFromUser: false,
-          shouldBeForwardedToLLM: true,
-          shouldBeRenderedInPreview: false,
-          shouldBeCountedAsAPrompt: false,
-        }),
-      );
-      this.hasAttachmentContextBeenAdded = true;
-    }
-
-    return isAttachmentValid;
-  }
-
   isAttachmentValid(attachmentName) {
-    if (!this.configuration.hasAttachment) {
+    if (!this.configuration.hasAttachment || !attachmentName) {
       return false;
     }
     const fileExtension = attachmentName.split('.').at(-1);
@@ -162,15 +267,6 @@ export class Chat {
     return attachmentFilename.includes(attachmentFilenameFromConfig);
   }
 
-  updateTokenConsumption(inputTokens, outputTokens) {
-    // FIXME this can be removed after some time, this guard was for the chats in cache at the time the feature was introduced
-    // The decision taken was to not update token consumption at all on an already cached chat
-    this.totalInputTokens = Number.isInteger(this.totalInputTokens) ? this.totalInputTokens + inputTokens : undefined;
-    this.totalOutputTokens = Number.isInteger(this.totalOutputTokens)
-      ? this.totalOutputTokens + outputTokens
-      : undefined;
-  }
-
   toDTO() {
     return {
       id: this.id,
@@ -181,7 +277,7 @@ export class Chat {
       passageId: this.passageId,
       configurationId: this.configurationId,
       configuration: this.configuration.toDTO(),
-      hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
+      haveVictoryConditionsBeenFulfilled: this.haveVictoryConditionsBeenFulfilled,
       messages: this.messages.map((message) => message.toDTO()),
       totalInputTokens: this.totalInputTokens,
       totalOutputTokens: this.totalOutputTokens,
@@ -204,62 +300,16 @@ export class Message {
    * @param {string=} params.index
    * @param {string=} params.content
    * @param {string=} params.attachmentName
-   * @param {string=} params.attachmentContext
-   * @param {boolean} params.isFromUser
-   * @param {boolean} params.shouldBeForwardedToLLM
-   * @param {boolean} params.shouldBeRenderedInPreview
-   * @param {boolean} params.shouldBeCountedAsAPrompt
-   * @param {boolean=} params.hasAttachmentBeenSubmittedAlongWithAPrompt
-   * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
+   * @param {'user' | 'assistant'} params.emitter
    * @param {boolean=} params.wasModerated
-   * @param {boolean=} params.hasErrorOccurred
    */
-  constructor({
-    index,
-    content,
-    attachmentName,
-    attachmentContext,
-    isFromUser,
-    shouldBeForwardedToLLM,
-    shouldBeRenderedInPreview,
-    shouldBeCountedAsAPrompt,
-    hasAttachmentBeenSubmittedAlongWithAPrompt,
-    haveVictoryConditionsBeenFulfilled,
-    wasModerated,
-    hasErrorOccurred,
-  }) {
+  constructor({ index, content, attachmentName, emitter, wasModerated }) {
     assertGreaterOrEqualToZero(index, 'index shall be greater or equal to 0');
     this.index = index;
     this.content = content;
-    this.isFromUser = isFromUser;
+    this.emitter = emitter;
     this.attachmentName = attachmentName;
-    this.attachmentContext = attachmentContext;
-    this.shouldBeForwardedToLLM = !!shouldBeForwardedToLLM;
-    this.shouldBeRenderedInPreview = !!shouldBeRenderedInPreview;
-    this.shouldBeCountedAsAPrompt = !!shouldBeCountedAsAPrompt;
-    this.hasAttachmentBeenSubmittedAlongWithAPrompt = hasAttachmentBeenSubmittedAlongWithAPrompt;
-    this.haveVictoryConditionsBeenFulfilled = haveVictoryConditionsBeenFulfilled;
     this.wasModerated = wasModerated;
-    this.hasErrorOccurred = hasErrorOccurred;
-  }
-
-  get isAttachment() {
-    return !!this.attachmentName && this.isFromUser;
-  }
-
-  get isAttachmentContent() {
-    return !!this.attachmentName && !this.isFromUser;
-  }
-
-  get #contentForLLMHistory() {
-    if (this.content) return this.content;
-    if (this.isAttachment) {
-      return `<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>${this.attachmentName}</attachment_name></system_notification>`;
-    }
-    if (this.isAttachmentContent) {
-      return `<read_attachment_tool>Lecture de la pièce jointe, ${this.attachmentName} : <attachment_content>${this.attachmentContext}</attachment_content></read_attachment_tool>`;
-    }
-    throw new Error('chat message should have content or attachment');
   }
 
   toDTO() {
@@ -267,22 +317,8 @@ export class Message {
       index: this.index,
       content: this.content,
       attachmentName: this.attachmentName,
-      attachmentContext: this.attachmentContext,
-      isFromUser: this.isFromUser,
-      shouldBeForwardedToLLM: this.shouldBeForwardedToLLM,
-      shouldBeRenderedInPreview: this.shouldBeRenderedInPreview,
-      shouldBeCountedAsAPrompt: this.shouldBeCountedAsAPrompt,
-      hasAttachmentBeenSubmittedAlongWithAPrompt: this.hasAttachmentBeenSubmittedAlongWithAPrompt,
-      haveVictoryConditionsBeenFulfilled: this.haveVictoryConditionsBeenFulfilled,
+      emitter: this.emitter,
       wasModerated: this.wasModerated,
-      hasErrorOccurred: this.hasErrorOccurred,
-    };
-  }
-
-  toLLMHistory() {
-    return {
-      content: this.#contentForLLMHistory,
-      role: this.isFromUser ? 'user' : 'assistant',
     };
   }
 }

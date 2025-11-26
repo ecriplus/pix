@@ -16,15 +16,40 @@ export async function get(chatId) {
   const knexConn = DomainTransaction.getConnection();
   const chatDTO = await knexConn('chats').where({ id: chatId }).first();
   if (!chatDTO) return null;
-  const messageDTOs = await knexConn('chat_messages').where({ chatId });
+  const messageDTOs = await knexConn('chat_messages').where({ chatId }).orderBy('index');
   return toDomain(
     {
       ...chatDTO,
       configurationId: chatDTO.configId,
       configuration: chatDTO.configContent,
     },
-    messageDTOs,
+    migrateToNewMessageDTOs(messageDTOs),
   );
+}
+
+function migrateToNewMessageDTOs(messageDTOs) {
+  const messages = [];
+  let attachmentNameWaitingToBeMerged = null;
+  for (const message of messageDTOs) {
+    if (message.emitter === 'assistant' && (message.attachmentName || message.attachmentContext)) continue;
+    if (message.hasAttachmentBeenSubmittedAlongWithAPrompt) {
+      attachmentNameWaitingToBeMerged = message.attachmentName;
+      continue;
+    }
+    if (attachmentNameWaitingToBeMerged) {
+      message.attachmentName = attachmentNameWaitingToBeMerged;
+      attachmentNameWaitingToBeMerged = null;
+    }
+    messages.push(message);
+  }
+  return messages;
+}
+
+function toDomain(chatDTO, messageDTOs) {
+  return Chat.fromDTO({
+    ...chatDTO,
+    messages: messageDTOs,
+  });
 }
 
 /**
@@ -46,7 +71,7 @@ export async function save(chat) {
     configuration: configContent,
     moduleId,
     passageId,
-    hasAttachmentContextBeenAdded,
+    haveVictoryConditionsBeenFulfilled,
     totalInputTokens,
     totalOutputTokens,
   } = chatDTO;
@@ -61,7 +86,7 @@ export async function save(chat) {
       challengeId,
       configContent,
       configId,
-      hasAttachmentContextBeenAdded,
+      haveVictoryConditionsBeenFulfilled,
       moduleId,
       passageId,
       startedAt,
@@ -70,7 +95,7 @@ export async function save(chat) {
       updatedAt,
     })
     .onConflict(['id'])
-    .merge(['hasAttachmentContextBeenAdded', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
+    .merge(['haveVictoryConditionsBeenFulfilled', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
 
   for (const message of chatDTO.messages) {
     const databaseMessage = _buildDatabaseMessage({ chatId, message });
@@ -80,7 +105,7 @@ export async function save(chat) {
 
 /**
  * @function
- * @name save
+ * @name _buildDatabaseMessage
  *
  * @param {Object} params
  * @param {string} params.chatId chatId
@@ -88,45 +113,14 @@ export async function save(chat) {
  * @returns {Promise<void>}
  */
 function _buildDatabaseMessage({ chatId, message }) {
-  const {
-    index,
-    attachmentName,
-    attachmentContext,
-    content,
-    hasAttachmentBeenSubmittedAlongWithAPrompt,
-    hasErrorOccurred,
-    haveVictoryConditionsBeenFulfilled,
-    isFromUser,
-    shouldBeCountedAsAPrompt,
-    shouldBeRenderedInPreview,
-    shouldBeForwardedToLLM,
-    wasModerated,
-  } = message;
+  const { index, attachmentName, content, emitter, wasModerated } = message;
 
   return {
     attachmentName,
-    attachmentContext,
     chatId,
     content,
-    emitter: isFromUser ? 'user' : 'assistant',
-    hasAttachmentBeenSubmittedAlongWithAPrompt,
-    hasErrorOccurred: hasErrorOccurred ?? null,
-    haveVictoryConditionsBeenFulfilled,
+    emitter,
     index,
-    shouldBeForwardedToLLM,
-    shouldBeRenderedInPreview,
-    shouldBeCountedAsAPrompt,
     wasModerated: wasModerated ?? null,
   };
-}
-
-function toDomain(chatDTO, messageDTOs) {
-  const messages = messageDTOs.map((messageDTO) => ({
-    ...messageDTO,
-    isFromUser: messageDTO.emitter === 'user',
-  }));
-  return Chat.fromDTO({
-    ...chatDTO,
-    messages,
-  });
 }
