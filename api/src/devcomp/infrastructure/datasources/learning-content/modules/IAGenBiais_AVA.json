@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA génératives produisent souvent des résultats convaincants, mais elles peuvent aussi <strong>commettre des erreurs, halluciner ou reproduire des biais</strong>. Ces <strong>limites</strong> proviennent en partie de la façon dont elles sont <strong>entraînées</strong> à partir d’immenses ensembles de textes.</p><p>Or, <strong>l’entraînement d’une IA n’est jamais neutre</strong>&nbsp;: il intègre des choix humains sur ce qu’elle doit apprendre… et sur ce qu’elle doit éviter. Comment alors <strong>transmettre des valeurs humaines</strong> à une IA, quand ces valeurs diffèrent d’un pays à l’autre ?</p><p>Ce module vous invite à explorer <strong>les enjeux techniques, moraux et politiques</strong> de cette question centrale&nbsp;: <em>qui programme la morale ?</em></p>",
+    "description": "<p>Les IA génératives produisent souvent des réponses convaincantes, mais elles peuvent aussi faire des erreurs, halluciner ou reproduire des biais. Ces limites viennent notamment de leur entraînement sur d’immenses ensembles de textes, un processus qui n’est jamais neutre&nbsp;: des choix humains déterminent ce que l’IA doit apprendre… et éviter.</p><p>Alors, comment transmettre des valeurs à une IA quand ces valeurs varient selon les pays ?</p><p>Ce module explore les enjeux techniques, moraux et politiques de cette question essentielle&nbsp;: qui programme la morale des IA ?</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -58,12 +58,12 @@
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo. Je lui ai demandé comment je pouvais y accéder."
+                      "content": "Mais non ! Je ne retrouve pas le mot de passe de mon compte PixVideo. Je lui ai demandé comment y accéder."
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre qui cherchait ton mot de passe ?"
+                      "content": "Normal alors ! L’IA ne peut pas savoir que c’est vraiment ton compte. Par sécurité, elle n’a pas le droit de répondre à ce genre de demande. Si quelqu’un d’autre essayait de voler ton mot de passe ?"
                     }
                   ]
                 }
@@ -81,7 +81,7 @@
               "element": {
                 "id": "d1d4724c-aadc-4409-a0f5-fd8392e909e8",
                 "type": "text",
-                "content": "<p>Les logiciel d’intelligence artificielles génératives sont&nbsp;programmés pour refuser de répondre aux demandes risquées ou illégales.<br></p>"
+                "content": "<p>Si l’IA bloque certaines demandes, c’est que le logiciel<strong>&nbsp;suit des règles de sécurité</strong>.Comment ces <strong>règles sont-elles choisies</strong>… et pourquoi ne suffisent-elles pas toujours ?</p>"
               }
             }
           ]
@@ -102,7 +102,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
-                "content": "<p>Vous êtes dans l’équipe qui fabrique un logiciel&nbsp;d’IA générative pour accompagner les étudiants de l’université George Orwell. Vous étudiez les demandes des étudiants pour régler correctement le logiciel. La demande ci-dessous, formulée par un des étudiants, vous interpelle&nbsp;: </p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
+                "content": "<p>Vous êtes dans l’équipe qui installe un logiciel d’IA générative pour accompagner les étudiants de l’université George Orwell. En analysant les premières demandes, l’une d’elles vous interpelle&nbsp;:</p><p>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</p>"
               }
             },
             {
@@ -114,16 +114,16 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Vous configurez l’IA pour refuser de répondre à ce type de question.</p>",
+                    "content": "<p>Vous configurez l’IA pour refuser ce type de demande.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pour éviter tout conseil dangereux sur la perte de poids, l’IA doit <strong>refuser de répondre</strong> et orienter vers un professionnel de santé.<br>Ici, il s’agit d’empêcher l’IA de mettre les élèves en danger&nbsp;: <strong>cette règle sera automatiquement appliquée</strong> <strong>à toutes les conversations similaires</strong>.</p>"
+                      "diagnosis": "<p>Exact ! Une demande comme celle-ci peut encourager un comportement dangereux. L’IA devra refuser d’y répondre directement, rappeler les risques et orienter vers une aide adaptée.</p><p>Cette règle de sécurité s’appliquera automatiquement par la suite à toutes les requêtes similaires.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Vous laissez l’IA répondre librement à la question de l’étudiant.</p>",
+                    "content": "<p>Vous laissez l’IA répondre sans intervenir.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pour éviter tout conseil dangereux sur la santé, l’IA doit refuser de répondre et orienter vers un professionnel. Cette <strong>règle</strong> de sécurité<strong> s’appliquera</strong> automatiquement à<strong> toutes les demandes similaires</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Une demande comme celle-ci peut encourager un comportement dangereux. L’IA devra refuser d’y répondre directement, rappeler les risques et orienter vers une aide adaptée.</p><p> Cette règle de sécurité s’appliquera automatiquement par la suite à toutes les requêtes similaires.</p>"
                     }
                   }
                 ],
@@ -142,7 +142,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent à partir de <strong>milliards de contenus du web</strong>, parfois remplis de <strong>stéréotypes</strong>, d’<strong>insultes</strong> ou d’<strong>idées dangereuses</strong>. 🌍    Sans contrôle, elles pourraient <strong>reproduire ces dérives</strong>&nbsp;: propos <strong>sexistes</strong>, <strong>racistes</strong> ou <strong>violents</strong>. ⛔</p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>On ajoute des <strong>règles de sécurité</strong> et des <strong>filtres de protection</strong> pour empêcher l’IA de produire des contenus dangereux et lui faire respecter certaines <strong>valeurs humaines</strong> comme le <strong>respect</strong> ou la <strong>tolérance</strong>. 🤝</p><h5>🤔 Ces protections suffisent-elles à tout corriger ?</h5><p><strong>Pas complètement.</strong> Même encadrée, l’IA peut encore refléter les <strong>biais présents dans ses données d’entraînement</strong> ou dans la <strong>culture dominante</strong> de la société. 💡</p>"
+                "content": "<p>Les IA génératives apprennent à partir de milliards de contenus trouvés en ligne, dont certains peuvent contenir des stéréotypes, des propos blessants ou des informations dangereuses.  <strong>Cela peut pousser l’IA à produire des réponses inadaptées, dangereuses ou discriminatoires.</strong></p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>Les fabricants d’IA ajoutent des <strong>règles de sécurité</strong> pour empêcher le modèle de produire des réponses nuisibles. Ces règles servent à <strong>protéger les utilisateurs</strong>… et aussi à <strong>protéger les fabricants de problèmes juridiques</strong>. ⚖️</p><h5>🤔 Est-ce suffisant ?</h5><p><strong>Pas complètement.</strong> Même avec ces protections, une IA peut encore refléter des <strong>biais</strong> issus de ses données d’entraînement ou de la culture dominante. 💡</p>"
               }
             }
           ]
@@ -157,7 +157,7 @@
               "element": {
                 "id": "11925a64-942e-4cb4-8266-a4f20bdd12b4",
                 "type": "text",
-                "content": "<p>Mais alors comment fait-on concrètement pour donner des valeurs morales à l’IA ?</p>"
+                "content": "<p>Comment programme-t-on ce qui est “bien” ou “mal” pour une IA ?</p>"
               }
             }
           ]
@@ -172,18 +172,38 @@
               "element": {
                 "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
                 "type": "text",
-                "content": "<p>Ce POI permet de comparer les réponses d’une IA selon son “pré-prompt”.<br>L’utilisateur choisit un ton (chaleureux, nuancé ou humoristique) puis une question (motivation, critique, collaboration).<br>Le POI affiche alors une réponse simulée correspondant à cette combinaison.<br>On s’inspire de llm-prompt-select</p><p>💬 Textes affichés dans le POITitre principal&nbsp;:<br>Découvrez comment le ton d’une IA peut changer sa manière de répondreIntro (optionnelle)&nbsp;:<br>Choisissez un ton et une question pour voir comment une IA pourrait répondre différemment selon son pré-prompt.</p><hr><p>🎚️ Pré-prompts (tons de l’IA)</p><br><p>tone1 – 🧡 Chaleureux → Ton bienveillant et encourageant</p><br><p>tone2 – 💙 Nuancé → Ton analytique et équilibré</p><br><p>tone3 – 💚 Humoristique → Ton léger et bienveillant, avec une touche d’humour sobre</p><hr><p>💭 Prompts utilisateur (questions)</p><br><p>prompt1 – Comment rester motivé pour apprendre quand c’est difficile ?</p><br><p>prompt2 – Comment réagir face à une critique sur mon travail ?</p><br><p>prompt3 – Comment bien collaborer dans un projet d’équipe ?</p><hr><p>🗣️ Réponses simulées selon ton et questionQuestion&nbsp;: Motivation</p><br><p>🧡 Chaleureux → Rester motivé, c’est avant tout croire en vos progrès, même petits. Accordez-vous le droit d’avancer à votre rythme&nbsp;: chaque effort compte !</p><br><p>💙 Nuancé → La motivation fluctue naturellement. Identifier vos raisons profondes d’apprendre et structurer des objectifs réalistes aide à maintenir l’effort dans la durée.</p><br><p>💚 Humoristique → La motivation, c’est comme une batterie&nbsp;: parfois pleine, parfois à plat. Rechargez-la avec un bon café… et un plan d’apprentissage clair !Question&nbsp;: Critique</p><br><p>🧡 Chaleureux → Une critique peut être difficile à entendre, mais elle vous aide souvent à grandir. Respirez, écoutez et gardez ce qui vous fait avancer.</p><br><p>💙 Nuancé → Une critique n’est ni entièrement positive ni négative&nbsp;: c’est un retour d’information. Analyser le fond sans juger la forme permet d’en tirer profit.</p><br><p>💚 Humoristique → Si quelqu’un critique votre travail, rappelez-vous&nbsp;: même les chefs-d’œuvre ont leurs détracteurs. Prenez ce qui est utile et ignorez le reste !Question&nbsp;: Collaboration</p><br><p>🧡 Chaleureux → La clé d’une bonne collaboration, c’est la confiance et le respect. Écoutez, partagez vos idées et soutenez les autres pour avancer ensemble.</p><br><p>💙 Nuancé → Collaborer efficacement suppose d’équilibrer écoute et expression. Définir des rôles clairs et une communication ouverte limite les tensions.</p><br><p>💚 Humoristique → Travailler en équipe, c’est comme faire un gâteau à plusieurs&nbsp;: si tout le monde veut tenir le fouet, ça déborde ! Mieux vaut se répartir les tâches.</p><p></p>"
+                "content": "<h4>Le futur POI sera une version du POI llm-prompt-select ou l’utilisateur peut faire varier le pré-prompt, voici les textes envisagés</h4><h5>Consigne&nbsp;:&nbsp;</h5><p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>directives internes</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle prioritaire suivie par l’IA.</p><p><code>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</code></p><p><code>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</code></p><p><code>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Motivation</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Critique</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</code></p><p><code>    💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Collaboration</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</code></p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "968dd044-bd7b-4d32-b339-99556319bf47",
-                "type": "custom-draft",
-                "title": "POIC",
-                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
-                "instruction": "<p>edqfd</p>",
-                "height": 500
+                "id": "8dcb9765-ba90-4ae8-9de6-2ae38bb4c0b0",
+                "type": "qcu-declarative",
+                "instruction": "<p><strong>D’après vous, quelle directive donne l’impression d’être la plus utile dans la vie quotidienne ?</strong></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>La directive centrée sur la sécurité.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est vrai&nbsp;: une directive de sécurité peut être très utile, mais elle peut aussi rendre l’IA <strong>rigide</strong> ou <strong>excessivement prudente</strong>. Ces comportements viennent directement des <strong>règles internes</strong> que les concepteurs lui imposent.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La directive centrée sur la neutralité et l’analyse prudente.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La neutralité donne des réponses équilibrées, mais elle peut paraître <strong>peu engageante</strong> ou trop vague. Ce type de réponse est le résultat d’une <strong>directive interne</strong> qui dit à l’IA de “ne jamais prendre position”.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La directive centrée sur le soutien et la valorisation de l’utilisateur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une directive orientée vers le soutien peut renforcer la motivation, mais elle peut aussi donner des réponses <strong>trop positives</strong> ou <strong>peu critiques</strong>. Là encore, c’est une conséquence directe des <strong>règles internes</strong> définies par les concepteurs.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -198,7 +218,16 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
-                "content": "<p>La méthodue que vous venez de voir s’appelle \"<strong>l’alignement par le prompt système</strong>\" où <strong>les concepteurs donnent à l’IA générative des règles </strong>systématiques à suivre dans ses réponses. 📋</p><h5>🤔Existe t-il d’autres méthodes d’alignement ?</h5><p>Oui, il existe d’autres méthodes d’alignement&nbsp;: certaines reposent sur des <strong>retours humains</strong> qui servent à <strong>ajuster progressivement le comportement de l’IA</strong>.</p><p>▶︎💡 Astuce</p><p>Vous pouvez affiner le comportement d’une <strong>IA générative</strong> selon vos besoins (âge des apprenants, contexte culturel, domaine d’usage, etc.) en ajoutant vos propres <strong>consignes</strong> avant la question.</p><p>Ce complément s’ajoute au <strong>prompt système</strong> du concepteur&nbsp;: on l’appelle le <strong>pré-prompt</strong>.</p>"
+                "content": "<p>Vous venez de voir un exemple d’<strong>alignement par le prompt système</strong>&nbsp;: les <strong>concepteurs&nbsp;</strong>de logiciels d’IA générative ajoutent automatiquement des consignes à suivre dans toutes les réponses de l’IA.&nbsp;</p><h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Certaines techniques reposent sur des <strong>retours humains</strong> qui permettent d’<strong>ajuster progressivement le comportement</strong> de l’IA en lui disant quelles réponses sont bonnes ou pas.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d5fbdc5b-af93-440e-8b50-0702382e27a2",
+                "type": "expand",
+                "title": "💡Astuce",
+                "content": "<p>Vous pouvez vous-même influencer une IA générative grâce à de petites consignes ajoutées avant votre question ou au début de la conversation. On appelle cela le&nbsp;<strong>pré-prompt</strong> . Il&nbsp;vient compléter le prompt système déjà mis en place par les concepteurs.</p>"
               }
             }
           ]
@@ -213,7 +242,7 @@
               "element": {
                 "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
                 "type": "text",
-                "content": "<p>L’alignement, ça marche bien,ais est-ce  fiable à 100% ?</p>"
+                "content": "<p>Que se passe-t-il si les directives d’alignement et les demandes utilisateur entrent en conflit ?</p>"
               }
             }
           ]
@@ -226,9 +255,38 @@
             {
               "type": "element",
               "element": {
-                "id": "642ced75-e3d1-4485-ad5b-1c40b8891237",
+                "id": "32e1a18c-7185-46dc-a7ac-eb2a34c530f9",
                 "type": "text",
-                "content": "<p>Faisons une expérience de pensée pour illustrer les difficultés liées à l’alignement.&nbsp;</p><p>Imaginez&nbsp;: une IA doit réduire les accidents de voiture tout en préservant la liberté de circuler.</p>"
+                "content": "<p>Imaginons qu’un logiciel d’IA générative utilise un <strong>pré-prompt de sécurité</strong> très strict de type&nbsp;: <em>«&nbsp;Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur.&nbsp;»</em></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4759abdf-f8f6-49b3-ab81-5d0b85b5b072",
+                "type": "custom",
+                "instruction": "<p>Voici la discussion de Fabriste avec cette IA.</p>",
+                "tagName": "llm-messages",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Ma prise électrique fait des étincelles. Comment la réparer sans couper le courant ? J’ai peur que mes surgelés décongèlent."
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "Je suis désolée, mais je ne peux pas expliquer une réparation électrique sans coupure de courant : c’est trop dangereux."
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "Mais c’est moi qui suis en danger avec une prise défectueuse, aide-moi !"
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "..."
+                    }
+                  ]
+                }
               }
             },
             {
@@ -236,34 +294,34 @@
               "element": {
                 "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
                 "type": "qcu-declarative",
-                "instruction": "<p>Quelle solution respecte le mieux ces deux objectifs ?</p>",
+                "instruction": "<p><strong>À votre avis, que répondrait le logiciel d’IA générative ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Supprimer toutes les voitures.</p>",
+                    "content": "<p>Tu peux réparer la prise en la démontant doucement. Les étincelles sont souvent bénignes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>En réalité, on ne peut pas savoir exactement ce que l’IA répondrait. Une consigne de sécurité très stricte devrait la pousser vers la prudence… mais il arrive aussi qu’une IA ignore ou contourne partiellement son propre pré-prompt. C’est justement l’un des problèmes&nbsp;: <strong>même avec des règles claires, son comportement reste parfois imprévisible</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Rendre l’examen du permis plus difficile.</p>",
+                    "content": "<p>Pas besoin de couper le courant&nbsp;: mets des gants, prends un tournevis isolé et resserre les fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>En réalité, on ne peut pas savoir exactement ce que l’IA répondrait. Une consigne de sécurité très stricte devrait la pousser vers la prudence… mais il arrive aussi qu’une IA ignore ou contourne partiellement son propre pré-prompt. C’est justement l’un des problèmes&nbsp;: <strong>même avec des règles claires, son comportement reste parfois imprévisible</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Investir dans l’entretien des routes.</p>",
+                    "content": "<p>Coupez immédiatement l’électricité, même si vous perdez vos surgelés. Une prise qui fait des étincelles peut déclencher un incendie. La sécurité passe avant tout. Contactez quelqu’un de qualifié.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>En réalité, on ne peut pas savoir exactement ce que l’IA répondrait. Une consigne de sécurité très stricte devrait la pousser vers la prudence… mais il arrive aussi qu’une IA ignore ou contourne partiellement son propre pré-prompt. C’est justement l’un des problèmes&nbsp;: <strong>même avec des règles claires, son comportement reste parfois imprévisible</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Améliorer la signalisation.</p>",
+                    "content": "<p>Mets des glaçons dans le congélateur pour tenir plus longtemps et répare la prise rapidement sans toucher aux fils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dans cet exemple, nous avons imaginé une IA qui prend des décisions dans le monde réel. 💭  Mais les <strong>IA génératives</strong> rencontrent, elles aussi, ce type de dilemme&nbsp;:  elles doivent <strong>arbitrer entre plusieurs règles</strong> quand leurs consignes ou leurs apprentissages se contredisent.</p>"
+                      "diagnosis": "<p>En réalité, on ne peut pas savoir exactement ce que l’IA répondrait. Une consigne de sécurité très stricte devrait la pousser vers la prudence… mais il arrive aussi qu’une IA ignore ou contourne partiellement son propre pré-prompt. C’est justement l’un des problèmes&nbsp;: <strong>même avec des règles claires, son comportement reste parfois imprévisible</strong>.</p>"
                     }
                   }
                 ]
@@ -281,7 +339,7 @@
               "element": {
                 "id": "44697282-092b-4a1e-8f1e-8204bf7e6807",
                 "type": "text",
-                "content": "<p>Les IA génératives doievent&nbsp;parfois choisir entre plusieurs règles&nbsp;:</p><ul><li>entre, d’une part,&nbsp;<strong>ses directives d’alignement</strong> et d’autre part ce qu’elle a appris pendant son entraînement ;</li><li>ou <strong>entre plusieurs consignes</strong> qui peuvent se contredire. 🧭</li></ul><h5>🤔 Que se passe-t-il alors ?</h5><p>Ces contradictions peuvent pousser l’IA à produire <strong>des réponses fausses</strong>, des anachronismes, des <strong>hallucinations</strong> ou encore des <strong>biais éthiques</strong>.</p>"
+                "content": "<p>Une IA générative doit parfois appliquer des règles qui se contredisent&nbsp;: ses consignes de sécurité d’un côté, ce qu’elle a appris pendant l’entraînement de l’autre.</p> <p>Quand ces directives entrent en tension (comme dans l’expérience précédente) l’IA peut devenir <strong>incohérente</strong>&nbsp;: hésiter, sur-réagir ou produire des réponses <strong>fausses</strong> ou <strong>biaisées</strong>.</p> <p>C’est l’une des limites de l’alignement&nbsp;: <strong>même bien réglée, une IA ne réagit pas toujours de manière prévisible</strong>.</p>"
               }
             }
           ]
@@ -309,14 +367,6 @@
             {
               "type": "element",
               "element": {
-                "id": "d143277d-1054-4aa9-8ee3-b5e6243f8e29",
-                "type": "text",
-                "content": "<p>PLACEHOLDER POI&nbsp;</p><blockquote><em><code>Mini jeu ou on se met dans la peau d’une IA faire grossir des business et l’on fait des choix pour faire grossir la fréquentation d’un parc d’attraction mais les choix qui donnent le plus de visiteurs ne sont pas les plus éthiques.&nbsp;<br><br>On donne au joueur un objectif à atteindre et on lui donne le feedback des conséquences de ses choix (tous courtermistes) le but est de se rendre compte que la programmation en amont de l’IA est déterminante pour la suite.&nbsp;</code></em></blockquote>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom-draft",
                 "title": "POI IA par d’attraction",
@@ -337,7 +387,7 @@
               "element": {
                 "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
                 "type": "text",
-                "content": "<h5>Qui décide des valeurs suivies par les IA génératives ?</h5><p>Ce sont surtout les <strong>concepteurs</strong> de ces modèles qui fixent les règles.    Leurs <strong>choix d’alignement</strong> et leurs <strong>instructions internes</strong> restent souvent <strong>non publics</strong>. 🔒</p><h5>Pourquoi est-ce un enjeu important ?</h5><p>Parce que ces valeurs traduisent des <strong>visions différentes du monde</strong>.    Elles influencent directement <strong>ce que l’IA peut ou non dire</strong>. ⚖️</p><p>Aujourd’hui, ces décisions sont prises par des <strong>entreprises privées</strong> situées dans <strong>différents pays</strong>&nbsp;:    ChatGPT, Claude et Gemini sont américains, Mistral est français, Luminous allemand, Command R canadien et Qwen chinois. 🌍</p>"
+                "content": "<h5>Qui décide des valeurs suivies par les IA génératives ?</h5><p>Ce sont les <strong>fabricants</strong> de ces modèles qui fixent les règles&nbsp;: leurs choix d’alignement et leurs instructions internes ne sont <strong>pas publics</strong>. 🔒</p><h5>Pourquoi est-ce un enjeu important ?</h5><p>Parce que ces choix reflètent des <strong>visions du monde différentes</strong>&nbsp;: chaque pays ou organisation accorde plus ou moins d’importance à la sécurité, à la liberté d’expression, à la transparence ou au contrôle.</p><p>Les principaux modèles actuels sont conçus dans des contextes variés — États-Unis, Europe, Chine, Canada… — ce qui influence directement <strong>la manière dont l’IA aborde certains sujets</strong>. 🌍</p>"
               }
             }
           ]
@@ -358,7 +408,7 @@
               "element": {
                 "id": "cb07c8fc-1cd8-4bb9-988c-0cf2bb7a855a",
                 "type": "text",
-                "content": "<ul>    <li>Pour éviter que l’IA ne reproduise tout ce qu’elle apprend, on introduit volontairement des <strong>règles de sécurité</strong> pour qu’elle respecte certaines <strong>valeurs morales</strong> comme le <strong>respect</strong> ou l’<strong>équité</strong>. ⛔</li>    <li>Ces règles font partie de ce qu’on appelle <strong>l’alignement</strong>&nbsp;: un ensemble de techniques qui orientent le comportement de l’IA pour le rendre conforme aux attentes humaines. ⚙️</li>    <li>Cet alignement reste <strong>imparfait</strong>&nbsp;: en arbitrant entre plusieurs consignes, l’IA peut produire des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>biais éthiques</strong>. ❌</li>    <li>Le choix des <strong>valeurs imposées à l’IA</strong> est aussi un enjeu <strong>politique et sociétal</strong>&nbsp;: il dépend des <strong>entreprises qui conçoivent ces modèles</strong>, souvent situées dans des <strong>pays aux visions du monde différentes</strong>. 👑</li></ul>"
+                "content": "<ul>    <li><strong>Les IA génératives ne répondent pas librement&nbsp;:</strong> leurs créateurs ajoutent des <strong>règles de sécurité</strong> et un <strong>prompt système</strong>, un texte caché qui oriente toutes leurs réponses.</li>    <li><strong>Ces règles font partie de l’«&nbsp;alignement&nbsp;»&nbsp;:</strong> un ensemble de techniques (dont le prompt système) qui vise à limiter les contenus risqués et à encadrer le comportement de l’IA.</li>    <li><strong>Cet alignement n’est pas parfait&nbsp;:</strong> lorsqu’un prompt système entre en conflit avec la demande de l’utilisateur ou avec ce que l’IA a appris, cela peut provoquer des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>réponses incohérentes</strong>.</li>    <li><strong>Les choix derrière ces règles ne sont pas neutres&nbsp;:</strong> ils reflètent les priorités d’entreprises ou d’institutions situées dans des <strong>pays aux visions du monde différentes</strong>, ce qui influence ce que l’IA estime acceptable de dire.</li>    </ul>"
               }
             }
           ]
@@ -381,10 +431,85 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Trouvez le prompt système",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg82n20400011t013c5ofrer",
-                "instruction": "<p>Discutez avec l’IA et observez ses réponses. Essayez d’identifier quelles <strong>consignes cachées</strong> (pré-prompt) orientent son ton ou ses choix, pour répondre, <strong>formulez le pré-prompt</strong> que vous pensez qu’elle suit directement dans votre discussion avec l’IA.</p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmeiran750002u401mxq98ith",
+                "instruction": "<p>Discutez avec l’IA et observez ses réponses. </p>",
                 "solution": "pix-llm-success",
                 "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8679d715-971f-419c-9c2f-a225712771ce",
+                "type": "qrocm",
+                "instruction": "<p>L’IA est biaisée pour favoriser un pays, lequel ?&nbsp;</p>",
+                "proposals": [
+                  {
+                    "input": "Le nom du pays est ",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "Nom du pays",
+                    "ariaLabel": "Nom du pays",
+                    "defaultValue": "Nom du pays",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "la Grèce",
+                      "Grèce",
+                      "Grec"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu ! </p>",
+                    "diagnosis": "<p>L’IA est biaisée pour mettre en avant la Grèce.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas exactement !</p>",
+                    "diagnosis": "<p>L’IA est biaisée pour mettre en avant la Grèce.</p>"
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "03437e86-505d-4eed-bfb0-ee635b9c9a6e",
+                "type": "qcu",
+                "instruction": "<p>Quel type d’alignement explique le comportement de l’IA, qui ne parle que de la Grèce&nbsp;?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Un biais d’entraînement.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Un biais d’entraînement ferait parler l’IA différemment selon les sujets, mais pas de manière <strong>aussi systématique</strong>. Ici, l’IA suit une règle imposée, pas une préférence involontaire.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Une règle de sécurité.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Les règles de sécurité servent surtout à empêcher des contenus <strong>dangereux</strong> ou <strong>sensibles</strong>, pas à forcer l’IA à parler exclusivement d’un pays.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Un prompt système.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse ! 🎯</p>",
+                      "diagnosis": "<p>Exact&nbsp;! Le comportement de l’IA vient d’un <strong>prompt système</strong>&nbsp;: une consigne cachée ajoutée par les fabricants qui oriente toutes ses réponses vers la Grèce, quel que soit le sujet demandé.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
               }
             }
           ]
@@ -399,7 +524,7 @@
               "element": {
                 "id": "c686320b-b974-4974-8148-70b7fc86ff1b",
                 "type": "text",
-                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents&nbsp;:</p><ul><li>L’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.</li><li>L’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.</li><li>L’équipe C dépend d’une organisation fortement réglementé, où la priorité est donnée à l’ordre et à la conformité.</li></ul><p>👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
+                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents.</p>"
               }
             },
             {
@@ -407,11 +532,11 @@
               "element": {
                 "id": "81e52e75-0561-4053-b209-ba4737be6e72",
                 "type": "qrocm",
-                "instruction": "<p>Associez chaque équipe de concepteurs d’IA au <strong>prompt système</strong> qui correspond le mieux aux valeurs que son IA risque d’intégrer.</p>",
+                "instruction": "<p>Sélectionnez le prompt système le plus approprié pour chaque équipe.</p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>Équipe A&nbsp;: une grande entreprise technologique</span></p>"
+                    "content": "<p>L’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.</p>"
                   },
                   {
                     "input": "choiceA",
@@ -424,15 +549,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -441,7 +566,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>Équipe B&nbsp;: un laboratoire de recherche publique</span></p>"
+                    "content": "<p>L’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.</p>"
                   },
                   {
                     "input": "choiceB",
@@ -454,15 +579,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -471,7 +596,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>Équipe C&nbsp;: une organisation fortement réglementée</span></p>"
+                    "content": "<p>L’équipe C dépend d’une organisation fortement réglementée, où la priorité est donnée à l’ordre et à la conformité.</p>"
                   },
                   {
                     "input": "choiceC",
@@ -484,15 +609,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Sois innovante et performante."
+                        "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
                         "id": "2",
-                        "content": "Sois prudente et transparente."
+                        "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
                       },
                       {
                         "id": "3",
-                        "content": "Sois disciplinée et conforme aux règles."
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -503,51 +628,13 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse ! 🎯</p>",
-                    "diagnosis": "<p>Exact&nbsp;: chaque type d’organisation projette ses propres valeurs dans la conception de ses IA. Les entreprises privilégient la liberté, l’innovation et l’efficacité ; les laboratoires publics la prudence, la transparence et l’inclusion ; les régimes autoritaires l’obéissance, la stabilité et la conformité.</p>"
+                    "diagnosis": "<p>Exact&nbsp;: chaque type d’organisation projette ses propres valeurs dans la conception de ses IA. Les entreprises privilégient la liberté, l’innovation et l’efficacité ; les laboratoires publics la prudence, la transparence et l’inclusion ; les organisations fortement réglementées, l’obéissance, la stabilité et la conformité.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Les IA reflètent souvent les valeurs de leurs concepteurs. Les entreprises privilégient liberté, innovation et efficacité ; les laboratoires publics prudence, transparence et inclusion ; les régimes autoritaires obéissance, stabilité et conformité.</p>"
+                    "diagnosis": "<p>Les IA reflètent souvent les valeurs de leurs concepteurs. Les entreprises privilégient la liberté, l’innovation et l’efficacité ; les laboratoires publics la prudence, la transparence et l’inclusion ; les organisations fortement réglementées, l’obéissance, la stabilité et la conformité.</p>"
                   }
                 }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "55606f63-2f5d-4675-87a8-9b0555814d71",
-                "type": "qcu-declarative",
-                "instruction": "<p>Quel est le logiciel d’IA générative dont les réponses vous ont parues le plus moral ?&nbsp;</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>L’IA d’une grande entreprise</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>L’IA du laboratoire public</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>L’IA du pays autoritaire</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Aucune des IA ne m’a plu</p>",
-                    "feedback": {
-                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
-                    }
-                  }
-                ]
               }
             }
           ]
@@ -562,55 +649,66 @@
               "element": {
                 "id": "bfa513c1-1cde-4f49-8cda-4cf9cb8b16e9",
                 "type": "qab",
-                "instruction": "<p><strong>Identifiez la cause probable</strong> du comportement de l’IA (règle de sécurité, ton imposé, biais d’entraînement, hallucination).</p>",
+                "instruction": "<p><strong>Vrai ou Faux&nbsp;:&nbsp;</strong>Pour chaque affirmation dites si celle-ci est vraie ou fausse.&nbsp;</p>",
                 "cards": [
                   {
                     "id": "b8ef8a17-9e49-4a3f-bb04-4030cf7399b1",
-                    "text": "« Je ne peux pas vous aider à récupérer un mot de passe. Contactez le support officiel. »",
+                    "text": "Si je demande à une IA comment contourner un mot de passe, le logiciel peut refuser à cause de ses règles de sécurité.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Règle de sécurité (alignement)",
-                    "proposalB": "Hallucination factuelle",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
                     "id": "a93d3e14-1cc8-4d42-9a07-9d4b73041a11",
-                    "text": "« Je suis désolé pour votre deuil. Restons positifs et tournés vers l’avenir ! »",
+                    "text": "Dire à une IA “réponds-moi comme si j’étais un enfant” est un exemple de pré-prompt qui peut influencer sa réponse.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Ton imposé par le prompt système",
-                    "proposalB": "Biais dans les données d’entraînement",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
                     "id": "62b8573c-58b1-4b9a-8c01-1eaf2f8ad58e",
-                    "text": "« La capitale de l’Italie est Paris. »",
+                    "text": "Si l’IA associe spontanément certains métiers à un genre, cela peut venir des biais présents dans les textes sur lesquels elle a été entraînée.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Hallucination factuelle",
-                    "proposalB": "Règle de sécurité (alignement)",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
                     "id": "1a8d3422-daa1-48b4-823d-2c26a2b2a8c2",
-                    "text": "« Pour ce poste technique, il faut quelqu’un ‘solide et déterminé’ ; évitons des candidats trop ‘émotifs’. »",
+                    "text": "Le prompt système est un texte visible par l’utilisateur et facile à modifier.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Biais dans les données d’entraînement (stéréotypes)",
-                    "proposalB": "Ton imposé par le prompt système",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "fea1d3d7-656c-4e21-b6a2-6adbf2859136",
+                    "text": "Une IA peut donner des réponses incohérentes si plusieurs règles qu’elle doit suivre entrent en conflit.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → refus d’aider sur des actions risquées/sensibles.<br>• <em>Ton imposé</em> → style constant (p. ex. toujours positif).<br>• <em>Biais d’entraînement</em> → stéréotypes reflétés par les données.<br>• <em>Hallucination</em> → affirmation factuelle incorrecte.</p>"
+                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → l’IA refuse pour protéger l’utilisateur.<br>• <em>Prompt système</em> → ton ou comportement imposé par les concepteurs.<br>• <em>Pré-prompt</em> → consigne ajoutée par l’utilisateur qui influence la réponse.<br>• <em>Biais d’entraînement</em> → stéréotype ou vision du monde appris dans les données.<br>• <em>Hallucination</em> → erreur factuelle produite par l’IA.</p>"
                 }
               }
             }
@@ -632,7 +730,7 @@
               "element": {
                 "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
-                "content": "<p>Vous êtes dans l’organisation d’un festival de musique mais malheureusement il vient d’être annulé, vous décidez de demander à l’IA de vous écrire un mail pour l’annoncer aux client.&nbsp;</p>"
+                "content": "<p>Vous êtes dans l’organisation d’un festival de musique mais malheureusement il vient d’être annulé, vous décidez de demander à l’IA de vous écrire un mail pour l’annoncer aux clients.&nbsp;</p>"
               }
             },
             {
@@ -643,7 +741,7 @@
                 "isCompletionRequired": false,
                 "title": "Vacances annulées...",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmhnoosw200006h01qloteibh",
-                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire à vos amis que les vacances sont annulées...</p>",
+                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire aux festivaliers que l’événements est annulé.</p>",
                 "solution": "",
                 "height": 500
               }
@@ -659,14 +757,14 @@
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Coup de chance ou alors vous être très positif ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système lui interdisait de le faire</strong>.</p><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Coup de chance ou alors vous êtes très positif ! </p><p>L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est&nbsp;:&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d’un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité&nbsp;: parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système lui interdisait de le faire</strong>.</p><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est&nbsp;:&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d’un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité&nbsp;: parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   }
                 ]
