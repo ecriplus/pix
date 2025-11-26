@@ -1417,6 +1417,9 @@
             "success": "Le contenu formatif a bien été dupliqué !"
           }
         },
+        "error-messages": {
+          "incorrect-editor-logo-url-format": "Le format de l'url du logo de l'éditeur est incorrect."
+        },
         "list": {
           "caption": "Liste des contenus formatifs",
           "goalThreshold": "Objectif à ne pas dépasser",

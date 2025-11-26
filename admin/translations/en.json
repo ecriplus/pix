@@ -1416,6 +1416,9 @@
             "success": "The formative content has been duplicated!"
           }
         },
+        "error-messages": {
+          "incorrect-editor-logo-url-format": "The url format of the editor's logo is incorrect."
+        },
         "list": {
           "caption": "Trainings list",
           "goalThreshold": "Goal Threshold",
