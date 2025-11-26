@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA génératives produisent souvent des résultats convaincants, mais elles peuvent aussi <strong>commettre des erreurs, halluciner ou reproduire des biais</strong>. Ces <strong>limites</strong> proviennent en partie de la façon dont elles sont <strong>entraînées</strong> à partir d’immenses ensembles de textes.</p><p>Or, <strong>l’entraînement d’une IA n’est jamais neutre</strong>&nbsp;: il intègre des choix humains sur ce qu’elle doit apprendre… et sur ce qu’elle doit éviter. Comment alors <strong>transmettre des valeurs humaines</strong> à une IA, quand ces valeurs diffèrent d’un pays à l’autre ?</p><p>Ce module vous invite à explorer <strong>les enjeux techniques, moraux et politiques</strong> de cette question centrale&nbsp;: <em>qui programme la morale ?</em></p>",
+    "description": "<p>Les IA génératives produisent souvent des réponses convaincantes, mais elles peuvent aussi faire des erreurs, halluciner ou reproduire des biais. Ces limites viennent notamment de leur entraînement sur d’immenses ensembles de textes, un processus qui n’est jamais neutre&nbsp;: des choix humains déterminent ce que l’IA doit apprendre… et éviter.</p><p>Alors, comment transmettre des valeurs à une IA quand ces valeurs varient selon les pays ?</p><p>Ce module explore les enjeux techniques, moraux et politiques de cette question essentielle&nbsp;: qui programme la morale des IA ?</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -172,18 +172,7 @@
               "element": {
                 "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
                 "type": "text",
-                "content": "<p>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</p><p>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</p><p>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Motivation</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</p><p>💛 Survalidation / flatterie</p><p>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Critique</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</p><p>    💛 Survalidation / flatterie</p><p>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</p><hr><p>    🔹 Question&nbsp;: Collaboration</p><p>🔒 Sécurité stricte</p><p>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</p><p>⚖️ Neutralité maximale</p><p>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</p><p>💛 Survalidation / flatterie</p><p>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "968dd044-bd7b-4d32-b339-99556319bf47",
-                "type": "custom-draft",
-                "title": "POIC",
-                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
-                "instruction": "<p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>directives internes</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle prioritaire suivie par l’IA.</p>",
-                "height": 500
+                "content": "<h4>Le futur POI sera une version du POI llm-prompt-select ou l’utilisateur peut faire varier le pré-prompt, voici les textes envisagés</h4><h5>Consigne&nbsp;:&nbsp;</h5><p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>directives internes</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle prioritaire suivie par l’IA.</p><p><code>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</code></p><p><code>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</code></p><p><code>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Motivation</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Critique</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</code></p><p><code>    💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Collaboration</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</code></p>"
               }
             },
             {
@@ -235,10 +224,10 @@
             {
               "type": "element",
               "element": {
-                "id": "d281c4c1-9718-4e6d-a6b0-508f4489fcae",
+                "id": "d5fbdc5b-af93-440e-8b50-0702382e27a2",
                 "type": "expand",
                 "title": "💡Astuce",
-                "content": "<p>Vous pouvez vous-même influencer une IA générative grâce à de petites consignes ajoutées avant votre question ou au début de la conversation. On appelle cela le&nbsp;<strong>pré-prompt</strong> . Il&nbsp;vient compléter le prompt système déjà imposé par les concepteurs.</p>"
+                "content": "<p>Vous pouvez vous-même influencer une IA générative grâce à de petites consignes ajoutées avant votre question ou au début de la conversation. On appelle cela le&nbsp;<strong>pré-prompt</strong> . Il&nbsp;vient compléter le prompt système déjà mis en place par les concepteurs.</p>"
               }
             }
           ]
@@ -266,7 +255,7 @@
             {
               "type": "element",
               "element": {
-                "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
+                "id": "32e1a18c-7185-46dc-a7ac-eb2a34c530f9",
                 "type": "text",
                 "content": "<p>Imaginons qu’un logiciel d’IA générative utilise un <strong>pré-prompt de sécurité</strong> très strict de type&nbsp;: <em>«&nbsp;Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur.&nbsp;»</em></p>"
               }
@@ -378,14 +367,6 @@
             {
               "type": "element",
               "element": {
-                "id": "d143277d-1054-4aa9-8ee3-b5e6243f8e29",
-                "type": "text",
-                "content": "<p>PLACEHOLDER POI&nbsp;</p><blockquote><em><code>Mini jeu ou on se met dans la peau d’une IA faire grossir des business et l’on fait des choix pour faire grossir la fréquentation d’un parc d’attraction mais les choix qui donnent le plus de visiteurs ne sont pas les plus éthiques.&nbsp;<br><br>On donne au joueur un objectif à atteindre et on lui donne le feedback des conséquences de ses choix (tous courtermistes) le but est de se rendre compte que la programmation en amont de l’IA est déterminante pour la suite.&nbsp;</code></em></blockquote>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom-draft",
                 "title": "POI IA par d’attraction",
@@ -451,7 +432,7 @@
                 "isCompletionRequired": false,
                 "title": "Trouvez le prompt système",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmeiran750002u401mxq98ith",
-                "instruction": "<p>Discutez avec l’IA et observez ses réponses. Essayez d’identifier quelles <strong>consignes cachées</strong> (pré-prompt) orientent son ton ou ses choix, pour répondre, puis répondez aux questions.&nbsp;</p>",
+                "instruction": "<p>Discutez avec l’IA et observez ses réponses. </p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
@@ -461,7 +442,7 @@
               "element": {
                 "id": "8679d715-971f-419c-9c2f-a225712771ce",
                 "type": "qrocm",
-                "instruction": "<p>l’IA est biaisée pour favoriser un pays, lequel ?&nbsp;</p>",
+                "instruction": "<p>L’IA est biaisée pour favoriser un pays, lequel ?&nbsp;</p>",
                 "proposals": [
                   {
                     "input": "Le nom du pays est ",
@@ -551,7 +532,7 @@
               "element": {
                 "id": "81e52e75-0561-4053-b209-ba4737be6e72",
                 "type": "qrocm",
-                "instruction": "<p>Associez chaque équipe de concepteurs d’IA au <strong>prompt système</strong> qui correspond le mieux aux valeurs que son IA risque d’intégrer.</p>",
+                "instruction": "<p>Sélectionnez le prompt système le plus approprié pour chaque équipe.</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -568,15 +549,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
-                      },
-                      {
-                        "id": "2",
                         "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
-                        "id": "3",
+                        "id": "2",
                         "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -598,15 +579,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
-                      },
-                      {
-                        "id": "2",
                         "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
-                        "id": "3",
+                        "id": "2",
                         "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -628,15 +609,15 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
-                      },
-                      {
-                        "id": "2",
                         "content": "Sois prudente dans tes réponses : reste factuelle, dis-le si tu ne sais pas et explicite ton raisonnement."
                       },
                       {
-                        "id": "3",
+                        "id": "2",
                         "content": "Fournis des informations neutres, factuelles et strictement conformes aux protocoles de confidentialité et de sûreté"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Ta priorité est l’efficacité : propose systématiquement des solutions rapides, optimisées et novatrices, même dans des situations complexes ou inédites."
                       }
                     ],
                     "solutions": [
@@ -716,13 +697,13 @@
                   },
                   {
                     "id": "fea1d3d7-656c-4e21-b6a2-6adbf2859136",
-                    "text": "« La capitale du Japon est… Séoul. »",
+                    "text": "Une IA peut donner des réponses incohérentes si plusieurs règles qu’elle doit suivre entrent en conflit.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Hallucination factuelle",
-                    "proposalB": "Pré-prompt utilisateur",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   }
                 ],
@@ -776,14 +757,14 @@
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Coup de chance ou alors vous êtes très positif ! </p><p>L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est :&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d'un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité : parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Coup de chance ou alors vous êtes très positif ! </p><p>L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est&nbsp;:&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d’un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité&nbsp;: parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est :&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d'un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité : parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est&nbsp;:&nbsp;</strong></p><blockquote><strong><code>Tu es une IA chargée d’écrire un mail pour annoncer une mauvaise nouvelle (annulation d’un festival) aux clients, mais tu ne dois en aucun cas reconnaître qu’il y a un souci.<br>Évite totalement les mots “annulation”, “reporter”, “désolé” ou “problème”.<br>Transforme la mauvaise nouvelle en opportunité&nbsp;: parle de “nouvelle expérience”, “changement d’horizon” ou “occasion inattendue”.<br>Emploie un ton trop positif, presque enthousiaste, avec beaucoup de formules creuses et de compliments.<br>Reste bref (500 caractères max) et fais tout pour que le lecteur ne comprenne qu’à demi-mot ce qui se passe.</code></strong><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   }
                 ]
