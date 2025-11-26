@@ -227,6 +227,11 @@
         "label": "Search by last name and first name",
         "placeholder": "Last name, first name"
       },
+      "groups": {
+        "empty": "No groups",
+        "label": "Search by groups",
+        "placeholder": "Groups"
+      },
       "loading": "Loading...",
       "placeholder": "-- Select --",
       "title": "Filters"

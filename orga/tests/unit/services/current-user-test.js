@@ -577,6 +577,72 @@ module('Unit | Service | current-user', function (hooks) {
       });
     });
 
+    module('#loadDivisions', function () {
+      test('should return null on organization not managingStudents', async function (assert) {
+        // given
+        currentUserService.organization = {
+          isManagingStudents: false,
+        };
+
+        // when
+        const result = await currentUserService.loadDivisions();
+
+        // then
+        assert.strictEqual(result, null);
+      });
+
+      test('should return null on organization managingStudents', async function (assert) {
+        // given
+        currentUserService.organization = {
+          isManagingStudents: false,
+          isSco: false,
+          isSup: false,
+        };
+
+        // when
+        const result = await currentUserService.loadDivisions();
+
+        // then
+        assert.strictEqual(result, null);
+      });
+
+      test('should return divisions on sco organization managingStudents', async function (assert) {
+        // given
+        const division1 = Object.create({ id: 1 });
+        const group1 = Object.create({ id: 2 });
+        currentUserService.organization = {
+          isManagingStudents: true,
+          isSco: true,
+          divisions: [division1],
+          groups: [group1],
+        };
+
+        // when
+        const result = await currentUserService.loadDivisions();
+
+        // then
+        assert.deepEqual(result, [division1]);
+      });
+
+      test('should return divisions on sup organization managingStudents', async function (assert) {
+        // given
+        const division1 = Object.create({ id: 1 });
+        const group1 = Object.create({ id: 2 });
+        currentUserService.organization = {
+          isManagingStudents: true,
+          isSup: true,
+          divisions: [division1],
+          groups: [group1],
+        };
+
+        // when
+        const result = await currentUserService.loadDivisions();
+
+        // then
+        assert.deepEqual(result, [group1]);
+      });
+    });
+
     module('#hasCombinedCourses', function () {
       test('should return true when combined courses exist', function (assert) {
         // given

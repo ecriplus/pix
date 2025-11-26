@@ -7,7 +7,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | CombinedCourse | Participations', function (hooks) {
+module('Integration | Component | combined-course/participations', function (hooks) {
   const participations = [
     {
       id: 123,
@@ -42,7 +42,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
   hooks.beforeEach(function () {
     const currentUser = this.owner.lookup('service:current-user');
     currentUser.organization = {
-      isManagingStudents: true,
+      isManagingStudents: false,
       isSco: false,
     };
   });
@@ -321,7 +321,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         // given
         const clearFilters = sinon.stub();
 
-        const statusFilter = [];
+        const statusesFilter = [];
 
         // when
         const screen = await render(
@@ -329,7 +329,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             <CombinedCourseParticipations
               @hasCampaigns={{true}}
               @hasModules={{true}}
-              @statusFilter={{statusFilter}}
+              @statusesFilter={{statusesFilter}}
               @clearFilters={{clearFilters}}
               @participations={{participations}}
               @onFilter={{onFilter}}
@@ -396,11 +396,11 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       });
     });
 
-    module('status filter', function () {
-      test('it should trigger onFilter on change statuses', async function (assert) {
+    module('statuses filter', function () {
+      test('it should trigger onFilter on statuses change', async function (assert) {
         // given
         const onFilter = sinon.stub();
-        const statusFilter = [];
+        const statusesFilter = [];
 
         // when
         const screen = await render(
@@ -408,7 +408,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             <CombinedCourseParticipations
               @hasCampaigns={{true}}
               @hasModules={{true}}
-              @statusFilter={{statusFilter}}
+              @statusesFilter={{statusesFilter}}
               @onFilter={{onFilter}}
               @participations={{participations}}
             />
@@ -441,6 +441,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         isManagingStudents: true,
         isSco: true,
       };
+      const divisions = [];
 
       // when
       const screen = await render(
@@ -450,6 +451,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             @hasModules={{true}}
             @participations={{participations}}
             @onFilter={{onFilter}}
+            @divisions={{divisions}}
           />
         </template>,
       );
@@ -475,6 +477,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         isManagingStudents: true,
         isSco: false,
       };
+      const divisions = [];
 
       // when
       const screen = await render(
@@ -484,6 +487,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             @hasModules={{true}}
             @participations={{participations}}
             @onFilter={{onFilter}}
+            @divisions={{divisions}}
           />
         </template>,
       );
@@ -509,6 +513,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         isManagingStudents: false,
         isSco: true,
       };
+      const divisions = [];
 
       // when
       const screen = await render(
@@ -518,6 +523,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             @hasModules={{true}}
             @participations={{participations}}
             @onFilter={{onFilter}}
+            @divisions={{divisions}}
           />
         </template>,
       );

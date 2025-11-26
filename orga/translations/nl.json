@@ -228,6 +228,11 @@
         "label": "Zoeken op voor- en achternaam",
         "placeholder": "Achternaam, voornaam"
       },
+      "groups": {
+        "empty": "Geen groepen",
+        "label": "Zoeken op groepen",
+        "placeholder": "Groepen"
+      },
       "loading": "Laden...",
       "placeholder": "-- Selecteer --",
       "title": "Filters"

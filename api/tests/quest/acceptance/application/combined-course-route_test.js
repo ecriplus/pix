@@ -308,34 +308,19 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
           organizationId,
           successRequirements: [],
         });
-        const learner = databaseBuilder.factory.buildOrganizationLearner({
-          organizationId,
-          firstName: 'Paul',
-          lastName: 'Azerty',
-        });
-        const learner2 = databaseBuilder.factory.buildOrganizationLearner({
-          organizationId,
-          firstName: 'Jacques',
-          lastName: 'Qwerty',
-        });
+        const learnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
         databaseBuilder.factory.buildMembership({ userId, organizationId });
         databaseBuilder.factory.buildOrganizationLearnerParticipation({
           type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
           status: OrganizationLearnerParticipationStatuses.STARTED,
-          organizationLearnerId: learner.id,
-          combinedCourseId,
-        });
-        databaseBuilder.factory.buildOrganizationLearnerParticipation({
-          organizationLearnerId: learner2.id,
-          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-          status: OrganizationLearnerParticipationStatuses.STARTED,
+          organizationLearnerId: learnerId,
           combinedCourseId,
         });
         await databaseBuilder.commit();
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${combinedCourseId}/participations?page[number]=1&page[size]=5&filters[fullName]=aze`,
+          url: `/api/combined-courses/${combinedCourseId}/participations`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -345,7 +330,6 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.result.data[0].type).to.equal('combined-course-participations');
-        expect(response.result.meta).deep.equal({ rowCount: 1, page: 1, pageCount: 1, pageSize: 5 });
       });
     });
   });

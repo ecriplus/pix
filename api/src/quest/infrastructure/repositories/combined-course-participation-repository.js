@@ -141,6 +141,12 @@ function addSearchFilters(queryBuilder, filters = {}) {
   if (filters.statuses?.length > 0) {
     queryBuilder.whereIn('organization_learner_participations.status', filters.statuses);
   }
+  if (filters.divisions?.length > 0) {
+    queryBuilder.whereIn('view-active-organization-learners.division', filters.divisions);
+  }
+  if (filters.groups?.length > 0) {
+    queryBuilder.whereIn('view-active-organization-learners.group', filters.groups);
+  }
 }
 
 export const update = async function ({ id, ...updateFields }) {

@@ -13,9 +13,11 @@ import CombinedCourseParticipations from 'pix-orga/components/combined-course/pa
     @hasCampaigns={{@model.combinedCourse.hasCampaigns}}
     @hasModules={{@model.combinedCourse.hasModules}}
     @participations={{@model.combinedCourseParticipations}}
+    @divisions={{@model.divisions}}
     @onFilter={{@controller.triggerFiltering}}
-    @statusFilter={{@controller.statuses}}
     @fullNameFilter={{@controller.fullName}}
+    @statusesFilter={{@controller.statuses}}
+    @divisionsFilter={{@controller.divisionsFilter}}
     @clearFilters={{@controller.clearFilters}}
   />
 </template>

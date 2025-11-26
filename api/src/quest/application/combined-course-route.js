@@ -134,6 +134,8 @@ const register = async function (server) {
                   ),
                 )
                 .optional(),
+              divisions: Joi.array().items(Joi.string()).optional(),
+              groups: Joi.array().items(Joi.string()).optional(),
             },
           }),
         },
