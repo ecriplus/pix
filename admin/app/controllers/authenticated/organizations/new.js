@@ -22,8 +22,9 @@ export default class NewController extends Controller {
   @action
   async addOrganization(event) {
     event.preventDefault();
+    const { name, type, administrationTeamId, countryCode } = this.model.organization;
 
-    if (!this.model.name || !this.model.type || !this.model.administrationTeamId) {
+    if (!name || !type || !administrationTeamId || !countryCode) {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('components.organizations.creation.required-fields-error'),
       });
@@ -31,21 +32,24 @@ export default class NewController extends Controller {
     }
 
     if (this.parentOrganizationId) {
-      this.model.setProperties({
+      this.model.organization.setProperties({
         parentOrganizationId: this.parentOrganizationId,
       });
     }
 
     try {
-      await this.model.save();
+      await this.model.organization.save();
       this.pixToast.sendSuccessNotification({ message: 'L’organisation a été créée avec succès.' });
 
-      if (this.model.parentOrganizationId) {
-        const parentOrganization = await this.store.findRecord('organization', this.model.parentOrganizationId);
+      if (this.model.organization.parentOrganizationId) {
+        const parentOrganization = await this.store.findRecord(
+          'organization',
+          this.model.organization.parentOrganizationId,
+        );
         await parentOrganization.hasMany('children').reload();
       }
 
-      this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.id);
+      this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.organization.id);
     } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
