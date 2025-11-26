@@ -27,6 +27,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training.id,
       moduleId,
+      shortId: 'ecc13f55',
       targetProfileIds: [targetProfileId1, targetProfileId2],
     });
   });
@@ -53,6 +54,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training.id,
       moduleId,
+      shortId: 'ecc13f55',
       targetProfileIds: [targetProfileId1],
     });
   });
@@ -90,6 +92,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training2.id,
       moduleId: module2Id,
+      shortId: 'ecc13f55',
       targetProfileIds: [targetProfileId1],
     });
   });
