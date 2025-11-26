@@ -452,7 +452,12 @@
           "history": {
             "label": "Versions",
             "table": {
-              "caption": "Versions list in descending order"
+              "caption": "Versions list in descending order",
+              "columns": {
+                "expiration-date": "Expiration date",
+                "start-date": "Start date",
+                "version-id": "Version ID"
+              }
             },
             "title": "Framework versions history"
           },
