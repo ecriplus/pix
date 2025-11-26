@@ -2,21 +2,6 @@
 
 <ComplementaryCertifications::Item::Header @complementaryCertificationLabel={{@model.label}} />
 
-<PixTabs
-  class="complementary-certification__tabs"
-  @ariaLabel={{t "components.complementary-certifications.item.navigation.aria-label"}}
->
-  {{#if @model.hasComplementaryReferential}}
-    <LinkTo @route="authenticated.complementary-certifications.item.framework">
-      {{t "components.complementary-certifications.item.framework.tab"}}
-    </LinkTo>
-  {{else}}
-    <LinkTo @route="authenticated.complementary-certifications.item.target-profile">
-      {{t "components.complementary-certifications.item.target-profile"}}
-    </LinkTo>
-  {{/if}}
-</PixTabs>
-
-<main class="page-body complementary-certification">
+<main class="page-body complementary-certification complementary-certification--no-tabs">
   {{outlet}}
 </main>
