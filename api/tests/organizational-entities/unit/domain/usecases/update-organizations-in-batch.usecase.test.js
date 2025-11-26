@@ -1,6 +1,7 @@
 import { OrganizationBatchUpdateDTO } from '../../../../../src/organizational-entities/domain/dtos/OrganizationBatchUpdateDTO.js';
 import {
   AdministrationTeamNotFound,
+  CountryNotFoundError,
   DpoEmailInvalid,
   OrganizationBatchUpdateError,
   OrganizationNotFound,
@@ -8,13 +9,14 @@ import {
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { updateOrganizationsInBatch } from '../../../../../src/organizational-entities/domain/usecases/update-organizations-in-batch.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, createTempFile, domainBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {
-  let filePath, organizationForAdminRepository, administrationTeamRepository;
+  let filePath, organizationForAdminRepository, administrationTeamRepository, countryRepository;
 
   const csvHeaders =
-    'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID';
+    'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code';
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -25,6 +27,10 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       get: sinon.stub(),
       update: sinon.stub(),
       exist: sinon.stub(),
+    };
+
+    countryRepository = {
+      getByCode: sinon.stub().resolves(domainBuilder.buildCountry({ code: '99100' })),
     };
 
     administrationTeamRepository = {
@@ -61,8 +67,8 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
 
     beforeEach(async function () {
       const fileData = `${csvHeaders}
-      1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234
-      2;New Name;;;;;;;Cali;;5678`;
+      1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234;99100
+      2;New Name;;;;;;;Cali;;5678;99100`;
       filePath = await createTempFile('test.csv', fileData);
       csvData = [
         new OrganizationBatchUpdateDTO({
@@ -74,12 +80,14 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           dataProtectionOfficerFirstName: 'Adam',
           dataProtectionOfficerEmail: 'foo@email.com',
           administrationTeamId: '1234',
+          countryCode: '99100',
         }),
         new OrganizationBatchUpdateDTO({
           id: '2',
           name: 'New Name',
           dataProtectionOfficerFirstName: 'Cali',
           administrationTeamId: '5678',
+          countryCode: '99100',
         }),
       ];
     });
@@ -91,7 +99,12 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       organizationForAdminRepository.get.onCall(1).resolves(domainBuilder.buildOrganizationForAdmin({ id: 2 }));
 
       // when
-      await updateOrganizationsInBatch({ filePath, organizationForAdminRepository, administrationTeamRepository });
+      await updateOrganizationsInBatch({
+        filePath,
+        organizationForAdminRepository,
+        administrationTeamRepository,
+        countryRepository,
+      });
 
       // then
       expect(DomainTransaction.execute).to.have.been.called;
@@ -114,7 +127,12 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       expectedSecondOrganization.updateFromOrganizationBatchUpdateDto(csvData[1]);
 
       // when
-      await updateOrganizationsInBatch({ filePath, organizationForAdminRepository, administrationTeamRepository });
+      await updateOrganizationsInBatch({
+        filePath,
+        organizationForAdminRepository,
+        administrationTeamRepository,
+        countryRepository,
+      });
 
       // then
       expect(DomainTransaction.execute).to.have.been.called;
@@ -133,7 +151,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       it('throws an OrganizationNotFound', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(false);
@@ -143,6 +161,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then
@@ -159,7 +178,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
         it('throws an AdministrationTeamNotFound', async function () {
           // given
           const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
           filePath = await createTempFile('test.csv', fileData);
           organizationForAdminRepository.exist.resolves(true);
@@ -170,6 +189,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
             filePath,
             organizationForAdminRepository,
             administrationTeamRepository,
+            countryRepository,
           });
 
           // then
@@ -181,11 +201,39 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       });
     });
 
+    describe('when country code is provided', function () {
+      context('when country does not exist', function () {
+        it('throws a CountryNotFoundError', async function () {
+          // given
+          const fileData = `${csvHeaders}
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;99999
+        `;
+          filePath = await createTempFile('test.csv', fileData);
+          organizationForAdminRepository.exist.resolves(true);
+          countryRepository.getByCode.rejects(new NotFoundError());
+
+          // when
+          const error = await catchErr(updateOrganizationsInBatch)({
+            filePath,
+            organizationForAdminRepository,
+            administrationTeamRepository,
+            countryRepository,
+          });
+
+          // then
+          expect(organizationForAdminRepository.update).to.not.have.been.called;
+          expect(error).to.be.instanceOf(CountryNotFoundError);
+          expect(error.message).to.equal('Country not found for code 99999');
+          expect(error.meta.countryCode).to.equal('99999');
+        });
+      });
+    });
+
     describe('when administration team id is not provided', function () {
       it('does not call administrationTeamRepository.getById', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
@@ -197,6 +245,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then
@@ -209,7 +258,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       it('throws an UnableToAttachChildOrganizationToParentOrganizationError', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.onCall(0).resolves(true);
@@ -220,6 +269,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then
@@ -234,7 +284,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       it('throws an DpoEmailInvalid', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo;1234
+        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
@@ -244,6 +294,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then
@@ -258,7 +309,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       it('throws an OrganizationBatchUpdateError', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
@@ -270,6 +321,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then

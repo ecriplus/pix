@@ -4,10 +4,12 @@ import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as emailValidationService from '../../../shared/domain/services/email-validation-service.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { getDataBuffer } from '../../../shared/infrastructure/utils/buffer.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { ORGANIZATIONS_UPDATE_HEADER } from '../constants.js';
 import { OrganizationBatchUpdateDTO } from '../dtos/OrganizationBatchUpdateDTO.js';
 import {
   AdministrationTeamNotFound,
+  CountryNotFoundError,
   DpoEmailInvalid,
   OrganizationBatchUpdateError,
   OrganizationNotFound,
@@ -20,12 +22,14 @@ import {
  * @param {string} params.filePath
  * @param {OrganizationForAdminRepository} params.organizationForAdminRepository
  * @param {AdministrationTeamRepository} params.administrationTeamRepository
+ * @param {CountryRepository} params.countryRepository
  * @return {Promise<void>}
  */
 export const updateOrganizationsInBatch = async function ({
   filePath,
   organizationForAdminRepository,
   administrationTeamRepository,
+  countryRepository,
 }) {
   const organizationBatchUpdateDtos = await _getCsvData(filePath);
 
@@ -38,6 +42,7 @@ export const updateOrganizationsInBatch = async function ({
           organizationBatchUpdateDto,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         try {
@@ -61,6 +66,7 @@ async function _checkOrganizationUpdate({
   organizationBatchUpdateDto,
   organizationForAdminRepository,
   administrationTeamRepository,
+  countryRepository,
 }) {
   const organization = await organizationForAdminRepository.exist({ organizationId: organizationBatchUpdateDto.id });
   if (!organization) {
@@ -111,7 +117,23 @@ async function _checkOrganizationUpdate({
     }
   }
 
+  if (organizationBatchUpdateDto.countryCode) {
+    await _checkCountryExists(organizationBatchUpdateDto.countryCode, countryRepository);
+  }
+
   return organization;
+}
+
+async function _checkCountryExists(countryCode, countryRepository) {
+  try {
+    await countryRepository.getByCode(countryCode);
+  } catch {
+    logger.error({
+      event: 'Not_found_country',
+      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
+    });
+    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
+  }
 }
 
 async function _getCsvData(filePath) {
