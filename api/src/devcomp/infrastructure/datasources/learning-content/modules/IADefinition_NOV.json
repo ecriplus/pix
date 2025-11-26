@@ -166,7 +166,7 @@
                     "id": "940cf3fa-b3fa-4d89-8551-77ce96474a89",
                     "text": "Jouer et gagner une partie de jeu d’échec.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordiechecs.png",
+                      "url": "https://assets.pix.org/modules/ia-dit-ia/echecs.png",
                       "altText": ""
                     },
                     "proposalA": "vrai",
@@ -177,7 +177,7 @@
                     "id": "a2d89587-3356-4f06-8458-416e6aa7d4dd",
                     "text": "Dialoguer sur des sujets variés.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordidiscut.png",
+                      "url": "https://assets.pix.org/modules/ia-dit-ia/discussion.png",
                       "altText": ""
                     },
                     "proposalA": "vrai",
@@ -188,7 +188,7 @@
                     "id": "fef2a126-7d2d-401e-981c-aaf06317b171",
                     "text": "Conduire un véhicule en ville.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordiconduit.png",
+                      "url": "https://assets.pix.org/modules/ia-dit-ia/voiture.png",
                       "altText": ""
                     },
                     "proposalA": "vrai",
@@ -199,7 +199,7 @@
                     "id": "df9eb3bd-ef3f-4db3-88a6-455e41d08dba",
                     "text": "Écrire la fin d’une symphonie inachevée.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordimusique.png",
+                      "url": "https://assets.pix.org/modules/ia-dit-ia/musique.png",
                       "altText": ""
                     },
                     "proposalA": "vrai",
