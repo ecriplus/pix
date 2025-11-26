@@ -29,7 +29,11 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
 
       // then
       const expectedResult = [
-        new RecommendedModule({ id: trainingId, moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd' }),
+        new RecommendedModule({
+          id: trainingId,
+          moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd',
+          shortId: 'ecc13f55',
+        }),
       ];
 
       expect(result).to.deep.equal(expectedResult);
@@ -81,11 +85,13 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
         new RecommendableModule({
           id: trainingId,
           moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd',
+          shortId: 'ecc13f55',
           targetProfileIds: [targetProfileId],
         }),
         new RecommendableModule({
           id: trainingId2,
           moduleId: '9beb922f-4d8e-495d-9c85-0e7265ca78d6',
+          shortId: 'e074af34',
           targetProfileIds: [targetProfileId2],
         }),
       ];
