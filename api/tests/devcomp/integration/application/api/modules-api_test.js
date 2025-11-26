@@ -1,3 +1,4 @@
+import { Module } from '../../../../../src/devcomp/application/api/models/Module.js';
 import { ModuleStatus } from '../../../../../src/devcomp/application/api/models/ModuleStatus.js';
 import * as modulesApi from '../../../../../src/devcomp/application/api/modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
@@ -13,6 +14,88 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
 
   afterEach(function () {
     clock.restore();
+  });
+
+  describe('#getModulesByIds', function () {
+    it('should return a list of Module', async function () {
+      // given
+      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
+      const existingModuleId1 = '6282925d-4775-4bca-b513-4c3009ec5886';
+      const existingModuleId2 = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
+      const moduleIds = [existingModuleId1, existingModuleId2];
+
+      // when
+      const result = await modulesApi.getModulesByIds({ moduleIds });
+
+      // then
+      const expectedResult = [
+        {
+          id: existingModuleId1,
+          shortId: '6a68bf32',
+          slug: 'bac-a-sable',
+          title: 'Bac à sable',
+          duration: 5,
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+        },
+        {
+          id: existingModuleId2,
+          shortId: '9d4dcab8',
+          slug: 'bien-ecrire-son-adresse-mail',
+          title: 'Bien écrire une adresse mail',
+          duration: 10,
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+        },
+      ];
+
+      expect(result).deep.equal(expectedResult);
+      expect(result[0]).instanceOf(Module);
+    });
+
+    context('if moduleIds is not an array', function () {
+      it('should return an empty array with null value', async function () {
+        // given
+        const moduleIds = null;
+
+        // when
+        const result = await modulesApi.getModulesByIds({ moduleIds });
+
+        // then
+        expect(result).empty;
+      });
+
+      it('should return an empty array with undefined value', async function () {
+        // given
+        const moduleIds = undefined;
+
+        // when
+        const result = await modulesApi.getModulesByIds({ moduleIds });
+
+        // then
+        expect(result).empty;
+      });
+
+      it('should return an empty array with not an array', async function () {
+        // given
+        const moduleIds = {};
+
+        // when
+        const result = await modulesApi.getModulesByIds({ moduleIds });
+
+        // then
+        expect(result).empty;
+      });
+
+      it('should return an empty array with an empty array', async function () {
+        // given
+        const moduleIds = {};
+
+        // when
+        const result = await modulesApi.getModulesByIds({ moduleIds });
+
+        // then
+        expect(result).empty;
+      });
+    });
   });
 
   describe('#getUserModuleStatuses', function () {
