@@ -54,7 +54,7 @@ export function buildTrainings(databaseBuilder) {
     id: trainingId++,
     title: 'Bac à sable Pix',
     internalTitle: 'Bac à sable Pix',
-    link: '/modules/bac-a-sable/details',
+    link: '/modules/6a68bf32/bac-a-sable/details',
     duration: '00:10:00',
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
