@@ -263,7 +263,7 @@
                       "type": "custom-draft",
                       "title": "Générer",
                       "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_gestionMDP_IND/generer.html",
-                      "instruction": "<p>Générez un mot de passe et créez l’entrée pour Elio.</p>",
+                      "instruction": "<p>Générez un mot de passe et créez la nouvelle entrée pour Elio.</p>",
                       "height": 550
                     }
                   ]
