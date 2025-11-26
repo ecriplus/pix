@@ -271,6 +271,64 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
+  describe('#findMostRecentByLearnerId', function () {
+    it('should return most recent combinedCourse participation for given learnerId and combinedCourse ids', async function () {
+      // given
+      const {
+        firstName,
+        lastName,
+        id: organizationLearnerId,
+        organizationId,
+      } = databaseBuilder.factory.buildOrganizationLearner();
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({ organizationId });
+      const expectedCombinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        createdAt: new Date('2025-01-01'),
+        combinedCourseId,
+      });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        createdAt: new Date('2024-01-01'),
+        combinedCourseId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+        organizationLearnerId,
+        combinedCourseId,
+      });
+
+      // then
+      expect(result).instanceOf(CombinedCourseParticipation);
+      expect(result.id).equal(expectedCombinedCourseParticipation.id);
+      expect(result.combinedCourseId).equal(combinedCourseId);
+      expect(result.organizationLearnerId).equal(organizationLearnerId);
+      expect(result.firstName).equal(firstName);
+      expect(result.lastName).equal(lastName);
+      expect(result.status).equal(OrganizationLearnerParticipationStatuses.COMPLETED);
+    });
+
+    it('should return null when participation is not found', async function () {
+      // given
+      const organizationLearnerId = 1;
+      const combinedCourseId = 2;
+
+      // when
+      const result = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+        organizationLearnerId,
+        combinedCourseId,
+      });
+
+      // then
+      expect(result).null;
+    });
+  });
+
   describe('#findPaginatedCombinedCourseParticipationById', function () {
     let combinedCourseId;
     const userId1 = 987;
