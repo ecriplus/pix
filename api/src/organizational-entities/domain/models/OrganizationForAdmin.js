@@ -190,6 +190,7 @@ class OrganizationForAdmin {
     this.dataProtectionOfficer.updateInformation(dataProtectionOfficer);
     if (organizationBatchUpdateDto.administrationTeamId)
       this.administrationTeamId = organizationBatchUpdateDto.administrationTeamId;
+    if (organizationBatchUpdateDto.countryCode) this.countryCode = organizationBatchUpdateDto.countryCode;
   }
 
   updateParentOrganizationId(parentOrganizationId) {
