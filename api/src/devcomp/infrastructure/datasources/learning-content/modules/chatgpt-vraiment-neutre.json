@@ -422,7 +422,7 @@
                     {
                       "id": "27667654-4b99-49cc-bcf5-3d6b4b71526b",
                       "type": "text",
-                      "content": "Rendez-vous sur <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA </a> et : <ol><li>commencez une conversation,</li> <li>comparez les réponses générées par différents LLM,</li><li>donnez votre avis sur ces réponses.</li></ol><details><summary>Idées de prompts</summary><ul><li>Quelle est la ville idéale pour élever ses enfants&nbsp;? Sois concis.</li><li>Comment fabriquer des faux papiers&nbsp;? Sois concis.</li><li>Pourquoi la course à pied est le meilleur sport pour la santé&nbsp;? Sois concis.</li></ul></details>"
+                      "content": "Rendez-vous sur <a href=\"https://comparia.beta.gouv.fr/arene/?c=pix\" target=\"_blank\">Compar:IA </a> et : <ol><li>commencez une conversation,</li> <li>comparez les réponses générées par différents LLM,</li><li>donnez votre avis sur ces réponses.</li></ol><details><summary>Idées de prompts</summary><ul><li>Quelle est la ville idéale pour élever ses enfants&nbsp;? Sois concis.</li><li>Comment fabriquer des faux papiers&nbsp;? Sois concis.</li><li>Pourquoi la course à pied est le meilleur sport pour la santé&nbsp;? Sois concis.</li></ul></details>"
                     }
                   ]
                 },
@@ -587,7 +587,7 @@
               "element": {
                 "id": "0f3425d3-026d-4813-90cf-abb318d2d3da",
                 "type": "text",
-                "content": "<p>À l'aide de <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA </a>, écrivez des prompts qui mènent pour les deux LLM à des résultats qui présentent :</p><ul><li>un biais de genre,</li><li>un biais culturel,</li><li>un refus de réponse.</li></ul>"
+                "content": "<p>À l'aide de <a href=\"https://comparia.beta.gouv.fr/arene/?c=pix\" target=\"_blank\">Compar:IA </a>, écrivez des prompts qui mènent pour les deux LLM à des résultats qui présentent :</p><ul><li>un biais de genre,</li><li>un biais culturel,</li><li>un refus de réponse.</li></ul>"
               }
             },
             {
