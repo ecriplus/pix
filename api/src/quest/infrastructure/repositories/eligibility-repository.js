@@ -5,16 +5,19 @@ export const find = async ({ userId, organizationLearnerWithParticipationApi }) 
   return result.map(toDomain);
 };
 
-export const findByUserIdAndOrganizationId = async ({
-  userId,
+export const findByOrganizationAndOrganizationLearnerId = async ({
+  organizationLearnerId,
   organizationId,
   organizationLearnerWithParticipationApi,
-  modulesApi,
+  organizationLearnerParticipationRepository,
   moduleIds = [],
 }) => {
-  const passages = await modulesApi.getUserModuleStatuses({ userId, moduleIds });
-  const result = await organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId({
-    userId,
+  const passages = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
+    organizationLearnerId,
+    moduleIds,
+  });
+  const result = await organizationLearnerWithParticipationApi.findByOrganizationAndOrganizationLearnerId({
+    organizationLearnerId,
     organizationId,
   });
   return toDomain({ ...result, passages });

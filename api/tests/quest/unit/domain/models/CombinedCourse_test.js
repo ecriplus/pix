@@ -11,12 +11,15 @@ import {
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
 import { CombinedCourseTemplate } from '../../../../../src/quest/domain/models/CombinedCourseTemplate.js';
-import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { DataForQuest } from '../../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { Module } from '../../../../../src/quest/domain/models/Module.js';
-import { Quest, REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPARISONS as COMPARISONS_REQUIREMENT } from '../../../../../src/quest/domain/models/Requirement.js';
+import {
+  CRITERION_COMPARISONS,
+  Quest,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
@@ -43,21 +46,21 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: campaignId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: 7,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -86,12 +89,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           eligibilityRequirements: [],
           successRequirements: [
             {
-              requirement_type: 'passages',
-              comparison: 'all',
+              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: 7,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -124,21 +127,21 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: 2,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: moduleId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -167,12 +170,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           eligibilityRequirements: [],
           successRequirements: [
             {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: 2,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -323,29 +326,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: campaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: secondCampaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -389,29 +392,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: campaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: secondCampaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -457,29 +460,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: firstModuleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: secondModuleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -488,12 +491,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const eligibility = new Eligibility({
             passages: [
               {
-                id: firstModuleId,
-                status: 'COMPLETED',
+                referenceId: firstModuleId,
+                isTerminated: true,
               },
               {
-                id: secondModuleId,
-                status: 'COMPLETED',
+                referenceId: secondModuleId,
+                isTerminated: true,
               },
             ],
           });
@@ -522,29 +525,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: firstModuleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: secondModuleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -553,12 +556,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const eligibility = new Eligibility({
             passages: [
               {
-                id: firstModuleId,
-                status: 'COMPLETED',
+                referenceId: firstModuleId,
+                isTerminated: true,
               },
               {
-                id: secondModuleId,
-                status: CampaignParticipationStatuses.STARTED,
+                referenceId: secondModuleId,
+                isTerminated: false,
               },
             ],
           });
@@ -590,29 +593,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: campaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: moduleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -627,8 +630,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ],
             passages: [
               {
-                id: moduleId,
-                status: 'COMPLETED',
+                referenceId: moduleId,
+                isTerminated: true,
               },
             ],
           });
@@ -657,29 +660,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   campaignId: {
                     data: campaign.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   status: {
                     data: CampaignParticipationStatuses.SHARED,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: moduleId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                   isTerminated: {
                     data: true,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -694,8 +697,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             ],
             passages: [
               {
-                id: moduleId,
-                status: CampaignParticipationStatuses.STARTED,
+                referenceId: moduleId,
+                isTerminated: false,
               },
             ],
           });
@@ -727,43 +730,43 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     campaignId: {
                       data: campaign.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     status: {
                       data: CampaignParticipationStatuses.SHARED,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: moduleId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     isTerminated: {
                       data: true,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: notRecommendedModuleId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     isTerminated: {
                       data: true,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -778,12 +781,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               ],
               passages: [
                 {
-                  id: moduleId,
-                  status: 'COMPLETED',
+                  referenceId: moduleId,
+                  isTerminated: true,
                 },
                 {
-                  id: notRecommendedModuleId,
-                  status: CampaignParticipationStatuses.STARTED,
+                  referenceId: notRecommendedModuleId,
+                  isTerminated: false,
                 },
               ],
             });
@@ -817,43 +820,43 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     campaignId: {
                       data: campaign.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     status: {
                       data: CampaignParticipationStatuses.SHARED,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: moduleId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     isTerminated: {
                       data: true,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: notRecommendedModuleId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                     isTerminated: {
                       data: true,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -868,12 +871,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               ],
               passages: [
                 {
-                  id: moduleId,
-                  status: CampaignParticipationStatuses.STARTED,
+                  referenceId: moduleId,
+                  isTerminated: false,
                 },
                 {
-                  id: notRecommendedModuleId,
-                  status: CampaignParticipationStatuses.STARTED,
+                  referenceId: notRecommendedModuleId,
+                  isTerminated: false,
                 },
               ],
             });
@@ -908,11 +911,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -956,11 +959,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -1004,11 +1007,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -1051,11 +1054,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: 'abcdefgh1',
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -1071,8 +1074,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             eligibility: new Eligibility({
               passages: [
                 {
-                  id: 7,
-                  status: 'NOT_STARTED',
+                  referenceId: 7,
+                  isTerminated: false,
                 },
               ],
             }),
@@ -1111,21 +1114,21 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: module.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -1142,8 +1145,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.SHARED }],
               passages: [
                 {
-                  id: module.id,
-                  status: 'NOT_STARTED',
+                  referenceId: module.id,
+                  isTerminated: false,
                 },
               ],
             }),
@@ -1185,21 +1188,21 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   moduleId: {
                     data: module.id,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -1215,8 +1218,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.SHARED }],
               passages: [
                 {
-                  id: module.id,
-                  status: 'NOT_STARTED',
+                  referenceId: module.id,
+                  isTerminated: false,
                 },
               ],
             }),
@@ -1276,31 +1279,31 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: firstModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: secondModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -1316,12 +1319,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.STARTED }],
                 passages: [
                   {
-                    id: firstModule.id,
-                    status: 'NOT_STARTED',
+                    referenceId: firstModule.id,
+                    isTerminated: false,
                   },
                   {
-                    id: secondModule.id,
-                    status: 'NOT_STARTED',
+                    referenceId: secondModule.id,
+                    isTerminated: false,
                   },
                 ],
               }),
@@ -1375,41 +1378,41 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: firstModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: secondCampaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: secondModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -1428,12 +1431,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.STARTED }],
                 passages: [
                   {
-                    id: firstModule.id,
-                    status: 'NOT_STARTED',
+                    referenceId: firstModule.id,
+                    isTerminated: false,
                   },
                   {
-                    id: secondModule.id,
-                    status: 'NOT_STARTED',
+                    referenceId: secondModule.id,
+                    isTerminated: false,
                   },
                 ],
               }),
@@ -1503,31 +1506,31 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: firstModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: secondModule.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -1587,41 +1590,41 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: module.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign2.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: module2.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -1637,12 +1640,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 campaignParticipations: [],
                 passages: [
                   {
-                    id: module.id,
-                    status: 'NOT_STARTED',
+                    referenceId: module.id,
+                    isTerminated: false,
                   },
                   {
-                    id: module2.id,
-                    status: 'NOT_STARTED',
+                    referenceId: module2.id,
+                    isTerminated: false,
                   },
                 ],
               }),
@@ -1714,31 +1717,31 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               successRequirements: [
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     targetProfileId: {
                       data: campaign.targetProfileId,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: moduleFromTargetProfile.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
                 {
                   requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: COMPARISONS_REQUIREMENT.ALL,
+                  comparison: REQUIREMENT_COMPARISONS.ALL,
                   data: {
                     moduleId: {
                       data: moduleFromQuest.id,
-                      comparison: COMPARISONS_CRITERION.EQUAL,
+                      comparison: CRITERION_COMPARISONS.EQUAL,
                     },
                   },
                 },
@@ -1754,12 +1757,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.STARTED }],
                 passages: [
                   {
-                    id: moduleFromTargetProfile.id,
-                    status: 'NOT_STARTED',
+                    referenceId: moduleFromTargetProfile.id,
+                    isTerminated: false,
                   },
                   {
-                    id: moduleFromQuest.id,
-                    status: 'NOT_STARTED',
+                    referenceId: moduleFromQuest.id,
+                    isTerminated: false,
                   },
                 ],
               }),
@@ -1816,11 +1819,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 targetProfileId: {
                   data: campaign1.targetProfileId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -1867,31 +1870,31 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 targetProfileId: {
                   data: campaign2.targetProfileId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 targetProfileId: {
                   data: campaign1.targetProfileId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -1964,11 +1967,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -1981,7 +1984,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         );
         const dataForQuest = new DataForQuest({
           eligibility: new Eligibility({
-            passages: [{ id: module.id, status: 'COMPLETED' }],
+            passages: [{ referenceId: module.id, isTerminated: true }],
           }),
         });
 
@@ -2007,11 +2010,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -2052,11 +2055,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             successRequirements: [
               {
                 requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: COMPARISONS_REQUIREMENT.ALL,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: {
                   targetProfileId: {
                     data: campaign.targetProfileId,
-                    comparison: COMPARISONS_CRITERION.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
               },
@@ -2103,61 +2106,61 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           successRequirements: [
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 targetProfileId: {
                   data: campaign2.targetProfileId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module2.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module22.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 targetProfileId: {
                   data: campaign1.targetProfileId,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module1.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
             {
               requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: COMPARISONS_REQUIREMENT.ALL,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 moduleId: {
                   data: module11.id,
-                  comparison: COMPARISONS_CRITERION.EQUAL,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -2175,8 +2178,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               { campaignId: campaign2.id, status: CampaignParticipationStatuses.SHARED, masteryRate: 0.12 },
             ],
             passages: [
-              { id: module2.id, status: 'COMPLETED' },
-              { id: module22.id, status: 'COMPLETED' },
+              { referenceId: module2.id, isTerminated: true },
+              { referenceId: module22.id, isTerminated: true },
             ],
           }),
         });

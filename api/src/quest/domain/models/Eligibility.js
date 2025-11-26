@@ -6,8 +6,8 @@ export class Eligibility {
     this.organization = organization;
     this.campaignParticipations = campaignParticipations;
     this.passages = passages.map((passage) => ({
-      moduleId: passage.id,
-      isTerminated: passage.status === 'COMPLETED',
+      moduleId: passage.referenceId,
+      isTerminated: passage.isTerminated,
     }));
   }
 
