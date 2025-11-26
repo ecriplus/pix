@@ -31,8 +31,8 @@ describe("a11y", () => {
       { url: "/nonconnecte" },
       { url: "/recuperer-mon-compte", skipFailures: true },
       { url: "/verification-certificat" },
-      { url: "/modules/bac-a-sable/details" },
-      { url: "/modules/bac-a-sable/passage" },
+      { url: "/modules/6a68bf32/bac-a-sable/details" },
+      { url: "/modules/6a68bf32/bac-a-sable/passage" },
     ];
 
     notAuthenticatedPages.forEach(({ url, skipFailures = false }) => {
