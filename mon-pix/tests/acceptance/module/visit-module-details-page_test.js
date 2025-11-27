@@ -15,6 +15,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     // given
     const module = server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'm4tth7as',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: false,
@@ -30,10 +31,9 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     });
 
     // when
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/details');
-
+    const screen = await visit('/modules/m4tth7as/bien-ecrire-son-adresse-mail/details');
     // then
-    assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/details');
+    assert.strictEqual(currentURL(), '/modules/m4tth7as/bien-ecrire-son-adresse-mail/details');
     assert.ok(document.title.includes(module.title));
     assert.dom(screen.queryByRole('alert')).doesNotExist();
     assert.dom(screen.queryByText(t('pages.modulix.beta-banner'))).doesNotExist();
@@ -45,6 +45,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
       // given
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        shortId: 'm4tth7as',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
@@ -60,7 +61,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
       });
 
       // when
-      const screen = await visit('/modules/bien-ecrire-son-adresse-mail/details');
+      const screen = await visit('/modules/m4tth7as/bien-ecrire-son-adresse-mail/details');
 
       // then
       assert.dom(screen.getByRole('alert')).exists();
@@ -80,6 +81,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     });
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'm4tth7as',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: {
@@ -94,9 +96,9 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     });
 
     // when
-    await visit('/modules/bien-ecrire-son-adresse-mail');
+    await visit('/modules/m4tth7as/bien-ecrire-son-adresse-mail');
 
     // then
-    assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/details');
+    assert.strictEqual(currentURL(), '/modules/m4tth7as/bien-ecrire-son-adresse-mail/details');
   });
 });

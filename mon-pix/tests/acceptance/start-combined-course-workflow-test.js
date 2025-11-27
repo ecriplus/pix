@@ -103,6 +103,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
         campaign = server.create('campaign', { code: 'ABCDIAG', organizationId: 1 });
         const module = server.create('module', {
           id: 'combinix-slug',
+          shortId: 'm4tth74s',
           slug: 'combinix-slug',
           title: 'combinix-title',
           details: { tabletSupport: 'comfortable' },
@@ -180,9 +181,8 @@ module('Acceptance | Combined course | Start Combined course workflow', function
 
             //when
             await click(screen.getByText(combinedCourseModuleItem.title));
-
             //then
-            assert.strictEqual(currentURL(), '/modules/combinix-slug/details');
+            assert.strictEqual(currentURL(), '/modules/m4tth74s/combinix-slug/details');
           });
         });
       });

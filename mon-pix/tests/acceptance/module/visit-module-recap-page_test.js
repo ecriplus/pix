@@ -15,14 +15,15 @@ module('Acceptance | Module | Routes | recap', function (hooks) {
     // given
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'm4tth74s',
       slug: 'bien-ecrire-son-adresse-mail',
       details: { tabletSupport: 'comfortable' },
     });
 
     // when
-    await visit('/modules/bien-ecrire-son-adresse-mail/recap');
+    await visit('/modules/m4tth74s/bien-ecrire-son-adresse-mail/recap');
 
     // then
-    assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/details');
+    assert.strictEqual(currentURL(), '/modules/m4tth74s/bien-ecrire-son-adresse-mail/details');
   });
 });

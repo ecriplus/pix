@@ -7,6 +7,7 @@ import sinon from 'sinon';
 
 import { CombinedCourseStatuses } from '../../../../../models/combined-course.js';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering.js';
+
 module('Integration | Component | Combined Courses | Presentation', function (hooks) {
   setupIntlRenderingTest(hooks);
 
@@ -281,7 +282,7 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
       assert.strictEqual(
         screen.getByRole('link', { name: /mon module/ }).getAttribute('href'),
         router.urlFor(
-          'module',
+          'old-module',
           {
             slug: combinedCourseItem.reference,
           },
@@ -361,7 +362,7 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
     // then
     await click(screen.getByRole('button', { name: t('pages.combined-courses.content.resume-button') }));
     assert.ok(
-      router.transitionTo.calledWith('module', 'mon-module', { queryParams: { redirection: 'une+url+chiffree' } }),
+      router.transitionTo.calledWith('old-module', 'mon-module', { queryParams: { redirection: 'une+url+chiffree' } }),
     );
   });
   test('when an item is locked, its link does not exist', async function (assert) {

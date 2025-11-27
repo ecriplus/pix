@@ -63,7 +63,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
+        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage');
         assert.ok(true);
       });
     });
@@ -97,7 +97,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
+          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage');
           assert.ok(true);
         });
       });
@@ -186,7 +186,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
+            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage');
             assert.ok(true);
           });
         });
@@ -258,6 +258,7 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
   const module = store.createRecord('module', {
     id: 'module-title',
     slug: 'module-slug',
+    shortId: '3r7cl7m3',
     title: 'Module title',
     details,
   });

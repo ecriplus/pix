@@ -20,17 +20,18 @@ module('Acceptance | Module | Routes | get', function (hooks) {
       ],
     });
     server.create('module', {
-      id: 'bien-ecrire-son-adresse-mail',
+      id: 'def0f7e1-8f4d-4352-a7b3-1cccff1038d6',
+      shortId: '3r7cl7m3',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       sections: [section],
     });
 
     // when
-    await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    await visit('/modules/3r7cl7m3/bien-ecrire-son-adresse-mail/passage');
 
     // then
-    assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/passage');
+    assert.strictEqual(currentURL(), '/modules/3r7cl7m3/bien-ecrire-son-adresse-mail/passage');
   });
 
   test('should include the module title inside the page title', async function (assert) {
@@ -49,14 +50,15 @@ module('Acceptance | Module | Routes | get', function (hooks) {
     });
 
     server.create('module', {
-      id: 'bien-ecrire-son-adresse-mail',
+      id: 'def0f7e1-8f4d-4352-a7b3-1cccff1038d6',
+      shortId: '3r7cl7m3',
       slug: 'bien-ecrire-son-adresse-mail',
       title: module.title,
       sections: [section],
     });
 
     // when
-    await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    await visit('/modules/3r7cl7m3/bien-ecrire-son-adresse-mail/passage');
 
     // then
     assert.ok(document.title.includes(module.title));

@@ -62,6 +62,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'di4n3c0r',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: { tabletSupport: 'comfortable' },
@@ -76,7 +77,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     });
 
     // when
-    let screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    let screen = await visit('/modules/di4n3c0r/bien-ecrire-son-adresse-mail/passage');
     await click(screen.getByLabelText('I am the right answer!'));
 
     const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
@@ -93,7 +94,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       return screen.queryByRole('heading', { name: 'Module terminé !', level: 1 });
     });
 
-    screen = await visit('/modules/bien-ecrire-son-adresse-mail/');
+    screen = await visit('/modules/di4n3c0r/bien-ecrire-son-adresse-mail/');
 
     const startModuleButton = screen.getByRole('button', { name: 'Commencer le module' });
     await click(startModuleButton);

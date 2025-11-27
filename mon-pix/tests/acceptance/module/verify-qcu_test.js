@@ -52,14 +52,15 @@ module('Acceptance | Module | Routes | verifyQcu', function (hooks) {
     });
 
     server.create('module', {
-      id: 'bien-ecrire-son-adresse-mail',
+      id: 'def0f7e1-8f4d-4352-a7b3-1cccff1038d6',
+      shortId: '3r7cl7m3',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       sections: [section],
     });
 
     // when
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    const screen = await visit('/modules/3r7cl7m3/bien-ecrire-son-adresse-mail/passage');
     const allVerifyButtons = screen.getAllByRole('button', { name: 'Vérifier ma réponse' });
     const [firstQcuVerifyButton, nextQcuVerifyButton] = allVerifyButtons;
 

@@ -51,12 +51,13 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'di4n3c0r',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       sections: [section],
     });
 
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    const screen = await visit('/modules/di4n3c0r/bien-ecrire-son-adresse-mail/passage');
 
     const qcmVerifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     const rightAnswerCheckbox = screen.getByLabelText('I am the second right answer!');
@@ -129,13 +130,14 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      shortId: 'di4n3c0r',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: false,
       sections: [section],
     });
 
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    const screen = await visit('/modules/di4n3c0r/bien-ecrire-son-adresse-mail/passage');
 
     const qcmVerifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     const rightAnswerCheckbox = screen.getByLabelText('I am the second right answer!');

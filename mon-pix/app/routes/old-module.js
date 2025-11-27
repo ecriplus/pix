@@ -7,7 +7,7 @@ export default class ModuleRoute extends Route {
   @service router;
 
   model(params) {
-    return this.store.queryRecord('module', { shortId: params.shortId, encryptedRedirectionUrl: params.redirection });
+    return this.store.queryRecord('module', { slug: params.slug, encryptedRedirectionUrl: params.redirection });
   }
 
   activate() {

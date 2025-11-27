@@ -29,7 +29,8 @@ export default class ModulixDetails extends Component {
       category: 'Modulix',
       moduleId: this.args.module.id,
     });
-    this.router.transitionTo('module.passage', this.args.module.slug);
+
+    this.router.transitionTo('module.passage');
   }
 
   @action
@@ -38,7 +39,7 @@ export default class ModulixDetails extends Component {
       category: 'Modulix',
       moduleId: this.args.module.id,
     });
-    this.router.transitionTo('module.passage', this.args.module.slug);
+    this.router.transitionTo('module.passage');
   }
 
   @action
