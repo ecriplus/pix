@@ -276,8 +276,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         });
       });
 
-      context('when supervisor stops the test', function () {
-        it('should add an ended by supervisor event', async function () {
+      context('when invigilator stops the test', function () {
+        it('should add an ended by invigilator event', async function () {
           // given
           const sessionId = 1234;
           const certificationCandidateId = 4567;

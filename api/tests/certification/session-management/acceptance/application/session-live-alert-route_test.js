@@ -15,7 +15,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
   });
 
   describe('PATCH /sessions/{sessionId}/candidates/{candidateId}/dismiss-live-alert', function () {
-    describe('when user has supervisor authorization', function () {
+    describe('when user has invigilator authorization', function () {
       it('should return 204 when the alert is ongoing', async function () {
         // given
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -23,8 +23,8 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
         });
-        const supervisorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: supervisorUserId, sessionId: session.id });
+        const invigilatorUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
@@ -43,7 +43,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' });
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' });
         const options = {
           headers,
           method: 'PATCH',
@@ -63,7 +63,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
       });
     });
 
-    describe('when user does not have supervisor authorization', function () {
+    describe('when user does not have invigilator authorization', function () {
       it('should return 401 when the alert is ongoing', async function () {
         // given
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -71,8 +71,8 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
         });
-        const supervisorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: supervisorUserId, sessionId: session.id });
+        const invigilatorUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const userNotLinkedToTheSessionId = databaseBuilder.factory.buildUser().id;
 
@@ -98,7 +98,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
   });
 
   describe('PATCH /sessions/{sessionId}/candidates/{candidateId}/validate-live-alert', function () {
-    describe('when user has supervisor authorization', function () {
+    describe('when user has invigilator authorization', function () {
       it('should return 204 when the alert is ongoing', async function () {
         // given
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -106,12 +106,12 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
         });
-        const supervisorUserId = databaseBuilder.factory.buildUser().id;
+        const invigilatorUserId = databaseBuilder.factory.buildUser().id;
         databaseBuilder.factory.buildIssueReportCategory({
           name: 'IMAGE_NOT_DISPLAYING',
           issueReportCategoryId: 5,
         });
-        databaseBuilder.factory.buildSupervisorAccess({ userId: supervisorUserId, sessionId: session.id });
+        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
@@ -130,7 +130,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' });
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' });
         const options = {
           headers,
           method: 'PATCH',
@@ -155,7 +155,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
       });
     });
 
-    describe('when user does not have supervisor authorization', function () {
+    describe('when user does not have invigilator authorization', function () {
       it('should return 401 when the alert is ongoing', async function () {
         // given
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -163,8 +163,8 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
         });
-        const supervisorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: supervisorUserId, sessionId: session.id });
+        const invigilatorUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const userNotLinkedToTheSessionId = databaseBuilder.factory.buildUser().id;
 

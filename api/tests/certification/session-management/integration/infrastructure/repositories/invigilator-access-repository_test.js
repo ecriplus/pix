@@ -58,9 +58,9 @@ describe('Integration | Repository | invigilator-access-repository', function ()
   describe('#isUserInvigilatorForSessionCandidate', function () {
     it("should return true if the user is invigilating the candidate's session", async function () {
       // given
-      const supervisorId = databaseBuilder.factory.buildUser().id;
+      const invigilatorId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: supervisorId });
+      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: invigilatorId });
       const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate({ sessionId }).id;
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
       await databaseBuilder.commit();
@@ -68,7 +68,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // when
       const isUserInvigilatorForSession = await invigilatorAccessRepository.isUserInvigilatorForSessionCandidate({
         certificationCandidateId,
-        supervisorId,
+        invigilatorId,
       });
 
       // then
@@ -77,9 +77,9 @@ describe('Integration | Repository | invigilator-access-repository', function ()
 
     it("should return false if the user is not invigilating the candidate's session", async function () {
       // given
-      const supervisorId = databaseBuilder.factory.buildUser().id;
+      const invigilatorId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: supervisorId });
+      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: invigilatorId });
       const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate().id;
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
       await databaseBuilder.commit();
@@ -87,7 +87,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // when
       const isUserInvigilatorForSession = await invigilatorAccessRepository.isUserInvigilatorForSessionCandidate({
         certificationCandidateId,
-        supervisorId,
+        invigilatorId,
       });
 
       // then

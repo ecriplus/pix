@@ -40,11 +40,11 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         status: CertificationCompanionLiveAlertStatus.ONGOING,
       });
 
-      const { userId: supervisorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId });
+      const { userId: invigilatorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId });
 
       await databaseBuilder.commit();
 
-      const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorId, source: 'pix-certif' });
+      const headers = generateAuthenticatedUserRequestHeaders({ userId: invigilatorId, source: 'pix-certif' });
 
       const options = {
         headers,
@@ -61,18 +61,18 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       expect(alerts).to.deep.equal([{ assessmentId, status: CertificationCompanionLiveAlertStatus.CLEARED }]);
     });
 
-    describe('when user does NOT have supervisor access on session', function () {
+    describe('when user does NOT have invigilator access on session', function () {
       it('should return 401 unauthorized', async function () {
         // given
         const { id: certificationCenterId } = databaseBuilder.factory.buildCertificationCenter();
         const { id: sessionId } = databaseBuilder.factory.buildSession({ certificationCenterId });
         const { id: otherSessionId } = databaseBuilder.factory.buildSession({ certificationCenterId });
 
-        const { userId: supervisorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId: otherSessionId });
+        const { userId: invigilatorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId: otherSessionId });
 
         await databaseBuilder.commit();
 
-        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorId, source: 'pix-certif' });
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: invigilatorId, source: 'pix-certif' });
 
         const options = {
           headers,

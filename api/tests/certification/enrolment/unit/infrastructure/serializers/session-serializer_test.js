@@ -49,7 +49,7 @@ describe('Unit | Certification | enrolment | Serializer | session-serializer', f
     });
 
     context('when session does not have a link to an existing certification center', function () {
-      it('should convert a SessionEnrolment model object into JSON API data including supervisor password', function () {
+      it('should convert a SessionEnrolment model object into JSON API data including invigilator password', function () {
         // when
         const json = serializer.serialize(session);
 

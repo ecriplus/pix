@@ -14,7 +14,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
   describe('POST /api/certification-candidates/{certificationCandidateId}/authorize-to-start', function () {
     context('when user is authenticated', function () {
-      context('when the user is the supervisor of the session', function () {
+      context('when the user is the invigilator of the session', function () {
         it('should return a 204 status code', async function () {
           // given
           const candidateUserId = databaseBuilder.factory.buildUser({}).id;

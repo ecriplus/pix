@@ -683,7 +683,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
     });
 
-    describe('when the certification was ended by the supervisor', function () {
+    describe('when the certification was ended by the invigilator', function () {
       it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({

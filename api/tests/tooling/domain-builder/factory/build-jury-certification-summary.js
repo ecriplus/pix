@@ -11,7 +11,7 @@ const buildJuryCertificationSummary = function ({
   completedAt = new Date('2020-01-02'),
   abortReason = null,
   isPublished = true,
-  isEndedBySupervisor = false,
+  isEndedByInvigilator = false,
   certificationObtained,
   certificationIssueReports = [],
 } = {}) {
@@ -25,7 +25,7 @@ const buildJuryCertificationSummary = function ({
     completedAt,
     abortReason,
     isPublished,
-    isEndedBySupervisor,
+    isEndedByInvigilator,
     certificationObtained,
     certificationIssueReports,
   });

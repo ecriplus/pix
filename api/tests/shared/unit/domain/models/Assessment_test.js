@@ -43,27 +43,27 @@ describe('Unit | Domain | Models | Assessment', function () {
     });
   });
 
-  describe('#isEndedBySupervisor', function () {
-    it('should return true when its state is endedBySupervisor', function () {
+  describe('#isEndedByInvigilator', function () {
+    it('should return true when its state is endedByInvigilator', function () {
       // given
-      const assessment = new Assessment({ state: 'endedBySupervisor' });
+      const assessment = new Assessment({ state: Assessment.states.ENDED_BY_INVIGILATOR });
 
       // when
-      const isEndedBySupervisor = assessment.isEndedBySupervisor();
+      const isEndedByInvigilator = assessment.isEndedByInvigilator();
 
       // then
-      expect(isEndedBySupervisor).to.be.true;
+      expect(isEndedByInvigilator).to.be.true;
     });
 
-    it('should return false when its state is not endedBySupervisor', function () {
+    it('should return false when its state is not endedByInvigilator', function () {
       // given
       const assessment = new Assessment({ state: '' });
 
       // when
-      const isEndedBySupervisor = assessment.isEndedBySupervisor();
+      const isEndedByInvigilator = assessment.isEndedByInvigilator();
 
       // then
-      expect(isEndedBySupervisor).to.be.false;
+      expect(isEndedByInvigilator).to.be.false;
     });
   });
 

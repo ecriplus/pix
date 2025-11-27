@@ -21,7 +21,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       expect(finalizedSession.isPublishable).to.be.false;
     });
 
-    it('is publishable when session has no global comment, no started or error status, no issue report requiring action and supervisor was used', function () {
+    it('is publishable when session has no global comment, no started or error status, no issue report requiring action and invigilator was used', function () {
       // given / when
       const finalizedSession = FinalizedSession.from({
         sessionId: 1234,
@@ -37,7 +37,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       expect(finalizedSession.isPublishable).to.be.true;
     });
 
-    context('when supervisor portal was used', function () {
+    context('when invigilator portal was used', function () {
       it('is publishable even if a test end screen has not been seen', function () {
         // when
         const finalizedSession = FinalizedSession.from({

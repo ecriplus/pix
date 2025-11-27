@@ -421,8 +421,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
         });
 
-        describe('when the are multiple different supervisors per session', function () {
-          it('should return the session with an array of supervisors', function () {
+        describe('when the are multiple different invigilators per session', function () {
+          it('should return the session with an array of invigilators', function () {
             // given
             const parsedCsvData = [
               _lineWithSessionAndNoCandidate({ sessionNumber: 1, examiner: 'Big' }),
