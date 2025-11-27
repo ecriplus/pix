@@ -14,6 +14,19 @@ export function getTransform() {
   });
 }
 
+export class LengthPrefixedJsonDecoderStream extends TransformStream {
+  constructor() {
+    super({
+      async transform(chunk, controller) {
+        const objects = findObjects(chunk);
+        for (const object of objects) {
+          controller.enqueue(object);
+        }
+      },
+    });
+  }
+}
+
 function findObjects(str) {
   const objects = [];
   while (str.length > 0) {
