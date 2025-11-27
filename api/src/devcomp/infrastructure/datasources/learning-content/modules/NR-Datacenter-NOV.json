@@ -1,0 +1,495 @@
+{
+  "id": "05ff418a-3329-44bf-9094-14014301df3c",
+  "shortId": "da86e4a7",
+  "slug": "centre-de-donnee-novice",
+  "title": "L’impact caché de nos usages numériques en ligne",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Description&nbsp;: Sur internet, les informations semblent arriver instantanément sur nos appareils. Pourtant, elles parcourent parfois de très longues distances et mobilisent des ressources dont vous n’avez pas conscience. </p><p>Dans ce module, vous allez découvrir où sont stockées les données, comment elles vous parviennent et pourquoi certains usages numériques demandent beaucoup plus d’énergie que d’autres.<br><br></p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Identifier le rôle des centres de données dans nos usages en ligne</p>",
+      "<p>Connaître les deux postes principaux de consommation d’énergie des centres de données (fonctionnement et refroidissement)</p>",
+      "<p>Repérer que certaines activités en ligne utilisent plus d’énergie que d’autres</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "56400413-eeca-40bd-91b8-a21dfe8335e6",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "eda01316-c852-4076-ae82-47f1894a8576",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "363fc96a-2479-43be-ac96-26c015882591",
+                "type": "text",
+                "content": "<p>Kilian veut savoir d’où vient le mot “chocolat”.<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a5ec4920-3834-43d8-a69c-6b7525f89f84",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-27-nov-2025-16-36-38.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "85a09eeb-14ed-4864-b6f3-2e43ab261bcc",
+                "type": "qcu-discovery",
+                "instruction": "<p>Parmi ces propositions, pour laquelle l’information est la plus proche de lui ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Dans le dictionnaire posé sur l’étagère, juste en dessous.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Le dictionnaire est l’information réellement la plus proche de Kilian.</p><p><strong>Contrairement aux informations affichées par un ordinateur ou une IA</strong>, celles-ci ne viennent pas de loin&nbsp;: elles ne parcourent aucune distance, elles sont déjà là, juste à portée de main.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Dans les rayons de la bibliothèque municipale.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Les rayons de la bibliothèque contiennent bien l’information, mais ils sont physiquement plus éloignés.<br>Et même si cela reste proche à l’échelle d’une ville, <strong>c’est toujours plus près que l’information fournie par une IA</strong>&nbsp;: ces informations-là sont calculées loin de chez Killian et peuvent parcourir des <strong>milliers de kilomètres</strong> avant d’arriver sur l’écran de Kilian.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>En demandant à un IA générative en ligne sur son ordinateur posé juste à côté de lui.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>L’information <strong>la plus proche</strong> n’est pas celle sur son ordinateur. Même si l’ordinateur est juste à côté, l’information donnée par l’IA est calculée loin de lui. Parfois, elle parcourt <strong>des milliers de kilomètres</strong> avant d’arriver chez lui.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a1600733-0174-45b5-9e62-2030e2661e84",
+          "type": "transition",
+          "title": "Transition 0",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
+                "type": "text",
+                "content": "<p>Voyons maintenant d<strong>’où sont réellement stockées</strong> les informations affichées sur nos appareils.<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a20fcbbd-b819-4f32-b0da-296057028331",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "87288c8d-a95b-4b48-a820-f4394c304450",
+          "type": "discovery",
+          "title": "Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7f4902af-d533-4031-88aa-c2f2c01f196b",
+                "type": "text",
+                "content": "<p>Si l’information ne vient pas de votre appareil numérique, alors, quand vous ouvrez un site en ligne, <strong>quel élément envoie vraiment l’information jusqu’à vous</strong> ?<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0c6f4d09-1eb4-4b35-acf6-e82b70cefd0e",
+                "type": "custom",
+                "instruction": "<p>Retournez les cartes pour voir ce qui permet à votre appareil d’afficher un site internet.&nbsp;</p>",
+                "tagName": "flip-cards",
+                "props": {
+                  "titleLevel": 2,
+                  "name": "Retourne les machins",
+                  "cardList": [
+                    {
+                      "name": "Ce qui reçoit",
+                      "description": "C’est votre appareil (smartphone, ordinateur) qui reçoit les informations et les affiche !",
+                      "icon": "https://assets.pix.org/draft/modules/nrdatacenternov/4598349.png",
+                      "image": "https://assets.pix.org/draft/modules/nrdatacenternov/3930510.png"
+                    },
+                    {
+                      "name": "Ce qui envoie",
+                      "description": "Un serveur est un ordinateur très puissant qui stocke les données, les envoie et réalise les calculs nécessaires pour répondre aux demandes des utilisateurs.",
+                      "icon": "https://assets.pix.org/draft/modules/nrdatacenternov/2089268.png",
+                      "image": "https://assets.pix.org/draft/modules/nrdatacenternov/969438.png"
+                    },
+                    {
+                      "name": "La où est l’information",
+                      "description": "Elle est dans un centre de données, un grand batiment qui regroupe beaucoup de serveurs !",
+                      "icon": "https://assets.pix.org/draft/modules/nrdatacenternov/1261055.png",
+                      "image": "https://assets.pix.org/draft/modules/nrdatacenternov/2857401.png"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "5412a16b-122a-4b35-a033-478b1fb550f9",
+          "type": "short-lesson",
+          "title": "Leçon 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cdd8eb84-62f6-4081-adef-8afde16db75a",
+                "type": "text",
+                "content": "<p>Les serveurs sont rangés dans de grands bâtiments appelés <strong>centres de données</strong>. Un centre de données peut contenir entre<strong> quelques centaines et plusieurs centaines de milliers de serveurs</strong>. </p><p>Et ça ressemble à ça !</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2654d872-e8c9-4aff-9a9d-a6948899a523",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/robert-baltzer-screenshot002.jpg",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "Montrer qu’on voit \"un seul\" serveur et qu’il y a pleiiiiin de serveurs",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2be610db-2a96-4486-99e5-3da2033a306d",
+                "type": "text",
+                "content": "<h5>🤔Tout le monde utilise ces serveurs quand il utilise internet ? </h5><p>Oui ! En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes sollicitent les serveurs <strong>en même temps</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dc4b2dc1-8eba-40ec-8bb1-8dcfa325f725",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0f1152d5-7aca-44d0-9515-1816c4991258",
+                "type": "text",
+                "content": "<p>Passons maintenant à ce qui se passe du côté du <strong>centre de donnée et des serveurs</strong> lorsqu’ils travaillent.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dd58482c-96e9-451a-a99b-b107267700e0",
+          "type": "discovery",
+          "title": "Découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
+                "type": "text",
+                "content": "<p>Voici une courbe qui montre l’évolution de la<strong> température et de la consommation électrique</strong> d’un serveur dans un centre de données. </p><p><strong>Observez la courbe puis répondez à la question suivante.</strong><br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4ac11755-c95e-4e5f-b3a8-66f89b452c66",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/58f0df97-276e-4b48-888d-b35a39310040.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "image draft, la température ne sera pas représentée sous forme de courbe au final",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "af91e3cb-2dc1-42d4-95be-92e251c54c14",
+                "type": "qcu-discovery",
+                "instruction": "<p>Que pouvez-vous dire de la consommation électrique et de la température du serveur ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Les changements de température n’ont rien à voir avec la consommation électrique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !  Quand un serveur <strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chaud</strong> et il <strong>consomme un peu</strong>. Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Quand le serveur travaille, la température augmente et la consommation électrique aussi.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! Quand un serveur <strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chaud</strong> et il <strong>consomme un peu</strong>. Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La consommation électrique est toujours la même, peu importe ce que fait le serveur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !  Quand un serveur <strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chaud</strong> et il <strong>consomme un peu</strong>. Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.&nbsp;</p>",
+                    "feedback": {
+                      "diagnosis": "<p> Quand un serveur <strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chaud</strong> et il <strong>consomme un peu</strong>. Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f72a0fef-29da-439e-b811-c235dece8d13",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": []
+        },
+        {
+          "id": "7e2e2720-6e05-48c8-9af9-99b290deeb41",
+          "type": "short-lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6d057f84-d3aa-4965-8552-9c6b55710c17",
+                "type": "text",
+                "content": "<p>Les serveurs sont nombreux et <strong>rangés au même endroit</strong>. Quand ils travaillent en continu, <strong>la chaleur s’accumule très vite</strong>. Sans refroidissement, ils peuvent s’abîmer, fondre ou même prendre feu. <strong>Ils doivent donc être refroidis en permanence</strong>. </p><h5>🤔Le refroidissement consomme-t-il aussi quelque chose ? </h5><p>Oui. Le refroidissement (comme une clim classique) utilise <strong>beaucoup d’électricité</strong>. Et certains systèmes utilisent aussi <strong>beaucoup d’eau</strong>.<br>Faire fonctionner les serveurs et les refroidir demande <strong>beaucoup d’énergie</strong>.<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e6b6c65e-0ca9-46a6-87d7-ac3aa1b75fc2",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "be64a075-5cfa-493d-be0b-6cdb99698cc3",
+                "type": "text",
+                "content": "<p>Regardons enfin <strong>quels usages numériques font le plus travailler</strong> les serveurs, et pourquoi.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "41c909dc-2f70-4ba8-b215-3683d4e138f9",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8b07744b-4b36-4bf0-9c39-d806a6987b64",
+                "type": "text",
+                "content": "<p>A chaque question, donner quel usage vous pensez être celui qui demande le plus de travail à un serveur. <br></p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "4f9237bf-e0d3-42ec-990c-a869600f336b",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Envoyer un message vocal.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp;Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations et de choses à stocker pour les serveurs.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Envoyer un message texte.&nbsp;</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !&nbsp;Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations et de choses à stocker pour les serveurs.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations et de choses à stocker pour les serveurs.<br><br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "a01a88a1-9c44-44cb-9b13-750c89592f58",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Envoyer un message vocal</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas tout à fait. Le message vocal demande un peu de données, mais moins qu’une vidéo en streaming.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Regarder une vidéo en streaming</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exact ! La vidéo en streaming demande beaucoup plus de données. Les serveurs doivent envoyer un flux continu&nbsp;: c’est un usage lourd.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>La vidéo en streaming demande beaucoup plus de données. Les serveurs doivent envoyer un flux continu&nbsp;: c’est un usage lourd.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "55985477-3b47-4d7c-b7eb-f25c4b05bd7b",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Regarder une vidéo en qualité standard</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Presque ! Mais la qualité standard nécessite moins de données que la HD, donc les serveurs travaillent moins.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Regarder une vidéo en HD</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Oui ! Plus la qualité de la vidéo est élevée, plus il faut transférer de données. Les serveurs travaillent donc plus fortement.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Plus la qualité de la vidéo est élevée, plus il faut transférer de données. Les serveurs travaillent donc plus fortement.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Faire une demande à une IA générative</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exact ! L’IA générative demande énormément de calcul. C’est aujourd’hui l’un des usages les plus gourmands côté serveurs.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faire une recherche sur internet</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas cette fois ! Une recherche web est légère&nbsp;: elle mobilise peu de données et peu de calcul par rapport à une IA générative.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Une recherche web est légère&nbsp;: elle mobilise peu de données et peu de calcul par rapport à une IA générative.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1c30817b-6fcd-4023-9b6c-ea820420bdcb",
+          "type": "short-lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9e0cedec-5784-4cbe-abbc-60e1706499ef",
+                "type": "text",
+                "content": "<p>Et certains usages, demandent tout cela en même temps, comme les lives vidéos !</p><h5>🤔Pourquoi certains usages font plus travailler les serveurs ?</h5><p>Parce que tout ne demande pas la même chose aux serveurs. Certains usages demandent surtout <strong>beaucoup d’informations&nbsp;</strong>à envoyer (comme la vidéo). D’autres usages demandent surtout <strong>beaucoup de calcul</strong> (comme l’IA). </p><h5>🤔On peut faire quelque chose ?</h5><p>Oui. Choisir des usages <strong>plus légers</strong> quand c’est possible.</p><p>Par exemple&nbsp;:&nbsp; </p><ul><li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de la streamer</strong> à chaque fois ;</li><li>et parfois&nbsp;: <strong>se déconnecter</strong> quand on n’en a plus besoin, ce qui améliore aussi le bien-être.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c9fa05f8-6f99-45e0-be12-0f7828bf0e0f",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "bf637ca3-ee20-45c0-bc0e-df672f4dfdf3",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "065ea5c0-8fc9-4014-9c87-49133966943d",
+                "type": "text",
+                "content": "<ul><li>Les informations que vous consultez en ligne sont stockées dans des <strong>serveurs</strong>, dans de grands bâtiments appelés <strong>centres de données</strong>.</li><li><strong>Les serveurs consomment beaucoup d’énergie</strong>&nbsp;: ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li><li><strong>Les serveurs travaillent plus ou moins selon vos usages</strong>&nbsp;: envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li><li><strong>Vous pouvez agir</strong>&nbsp;: choisir des usages plus légers ou se déconnecter quand on n’en a plus besoin réduit l’énergie utilisée.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
