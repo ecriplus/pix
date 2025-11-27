@@ -13,6 +13,7 @@ module('Integration | Component | complementary-certifications/attach-badges', f
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    sinon.stub(store, 'queryRecord');
   });
 
   test('should reset state when target profile selector is changed', async function (assert) {
