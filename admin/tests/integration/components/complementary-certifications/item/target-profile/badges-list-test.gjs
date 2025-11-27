@@ -18,8 +18,8 @@ module('Integration | Component | complementary-certifications/item/target-profi
           name: 'ALEX TARGET',
           id: 3,
           badges: [
-            { id: 1023, label: 'Badge Cascade', level: 3, imageUrl: 'http://badge-cascade.net' },
-            { id: 1025, label: 'Badge Volcan', level: 1, imageUrl: 'http://badge-volcan.net' },
+            { id: 1023, label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+            { id: 1025, label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
           ],
         },
       ],

@@ -250,7 +250,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           await fillIn(within(table).getByRole('spinbutton', { name: '200 Badge Arène Feu Niveau' }), '1');
           await fillIn(
             within(table).getByRole('textbox', { name: '200 Badge Arène Feu Image svg certificat Pix App' }),
-            'IMAGE1.svg',
+            'logo-placeholder.png',
           );
           await fillIn(
             within(table).getByRole('textbox', { name: '200 Badge Arène Feu Label du certificat' }),
@@ -326,7 +326,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           const ariaLabel = '200 Badge Arène Feu';
           await fillIn(
             within(table).getByRole('textbox', { name: `${ariaLabel} Image svg certificat Pix App` }),
-            'IMAGE1.svg',
+            'logo-placeholder.png',
           );
           await fillIn(within(table).getByRole('textbox', { name: `${ariaLabel} Label du certificat` }), 'LABEL');
           await fillIn(
