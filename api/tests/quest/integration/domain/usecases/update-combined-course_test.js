@@ -42,7 +42,12 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       trainingId: trainingId,
       campaignParticipationId,
     });
-    databaseBuilder.factory.buildPassage({ userId, moduleId, terminatedAt: new Date() });
+    databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+      organizationLearnerId,
+      moduleId,
+      status: OrganizationLearnerParticipationStatuses.COMPLETED,
+    });
+
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
@@ -69,14 +74,14 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
       ],
     });
-    const combinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-      organizationLearnerId,
-      combinedCourseId,
-      createdAt: new Date('2022-01-01'),
-      updatedAt: new Date('2022-01-01'),
-      status: OrganizationLearnerParticipationStatuses.STARTED,
-    });
+    const combinedCourseParticipation =
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
+        organizationLearnerId,
+        combinedCourseId,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
     await databaseBuilder.commit();
 
     await usecases.updateCombinedCourse({ userId, code });
@@ -167,8 +172,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
       ],
     });
-    databaseBuilder.factory.buildOrganizationLearnerParticipation({
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
       organizationLearnerId,
       combinedCourseId,
       createdAt: new Date('2022-01-01'),
@@ -211,14 +215,14 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
       ],
     });
-    const combinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-      organizationLearnerId,
-      combinedCourseId,
-      createdAt: new Date('2022-01-01'),
-      updatedAt: new Date('2022-01-01'),
-      status: OrganizationLearnerParticipationStatuses.STARTED,
-    });
+    const combinedCourseParticipation =
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
+        organizationLearnerId,
+        combinedCourseId,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
     await databaseBuilder.commit();
 
     await usecases.updateCombinedCourse({ userId, code });

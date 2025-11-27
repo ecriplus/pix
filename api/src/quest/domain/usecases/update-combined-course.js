@@ -6,12 +6,17 @@ export async function updateCombinedCourse({
   code,
   combinedCourseRepository,
   combinedCourseParticipationRepository,
+  organizationLearnerPrescriptionRepository,
   organizationLearnerPassageParticipationRepository,
   combinedCourseDetailsService,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
-  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+  const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
     userId,
+    organizationId: combinedCourse.organizationId,
+  });
+  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+    organizationLearnerId,
     combinedCourseId: combinedCourse.id,
   });
 

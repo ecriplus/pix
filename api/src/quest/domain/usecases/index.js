@@ -1,3 +1,4 @@
+import * as organizationLearnerPrescriptionRepository from '../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
@@ -35,6 +36,7 @@ const dependencies = {
   organizationLearnerPassageParticipationRepository: repositories.organizationLearnerPassageParticipationRepository,
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
   organizationLearnerRepository,
+  organizationLearnerPrescriptionRepository,
   codeGenerator,
   logger,
 };
