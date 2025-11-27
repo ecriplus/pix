@@ -1,7 +1,8 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { AdministrationTeamNotFound, CountryNotFoundError } from '../errors.js';
 
-const updateOrganizationInformation = async function ({
+const updateOrganizationInformation = withTransaction(async function ({
   organization,
   organizationForAdminRepository,
   tagRepository,
@@ -26,7 +27,7 @@ const updateOrganizationInformation = async function ({
   await organizationForAdminRepository.update({ organization: existingOrganization });
 
   return organizationForAdminRepository.get({ organizationId: organization.id });
-};
+});
 
 async function _checkAdministrationTeamExists(administrationTeamId, administrationTeamRepository) {
   const existingAdministrationTeam = await administrationTeamRepository.getById(administrationTeamId);

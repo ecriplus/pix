@@ -1412,6 +1412,44 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           expect(enabledFeatures[0].params).deep.equal({ enableMaximumPlacesLimit: true });
         });
       });
+
+      describe('ATTESTATIONS_MANAGEMENT', function () {
+        let organization;
+
+        beforeEach(async function () {
+          databaseBuilder.factory.buildFeature({
+            key: ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key,
+          });
+          const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+          organization = databaseBuilder.factory.buildOrganization({
+            name: 'super orga',
+            createdBy: userId,
+          });
+
+          await databaseBuilder.commit();
+        });
+
+        it('should insert new feature with given params', async function () {
+          // given && when
+          const organizationToUpdate = new OrganizationForAdmin({
+            id: organization.id,
+            documentationUrl: 'https://pix.fr/',
+            features: {
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key]: {
+                active: true,
+                params: ['my-reward', 'other-reward'],
+              },
+            },
+          });
+          await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+          //then
+          const enabledFeatures = await knex('organization-features');
+          expect(enabledFeatures).lengthOf(1);
+          expect(enabledFeatures[0].params).deep.equal(['my-reward', 'other-reward']);
+        });
+      });
     });
 
     it('should create data protection officer', async function () {

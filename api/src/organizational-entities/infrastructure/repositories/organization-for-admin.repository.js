@@ -397,6 +397,10 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
 }
 
 function _paramsForFeature(importFormats, key, value) {
+  if (key === ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key) {
+    return JSON.stringify(value.params);
+  }
+
   if (key === ORGANIZATION_FEATURE.LEARNER_IMPORT.key) {
     const learnerImportFormat = importFormats.find(({ name }) => name === value.params.name);
     return { organizationLearnerImportFormatId: learnerImportFormat.id };
