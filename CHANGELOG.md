@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.268.0](https://github.com/1024pix/pix/compare/v5.267.0...v5.268.0) (2025-11-27)
+
+### :rocket: Amélioration
+
+- [#14238](https://github.com/1024pix/pix/pull/14238) Ajouter le nouveau format /modules/:shortId/:slug (PIX-20385) 
+- [#14245](https://github.com/1024pix/pix/pull/14245) Ajouter les paliers et résultats thématiques aux participations MADDO (PIX-19098) 
+- [#14166](https://github.com/1024pix/pix/pull/14166) Création de l'interface utilisateur de config des dates de réouverture des espaces Pix Certif SCO (PIX-20404) 
+- [#14246](https://github.com/1024pix/pix/pull/14246) Prendre en compte le pays (via son code INSEE) lors de la création d'une organisation (PIX-20297) 
+
+### :bug: Correction
+
+- [#14273](https://github.com/1024pix/pix/pull/14273) Garder la configuration des attestations lors de la mise à jour d'une Organisation (PIX-20591). 
+
+### :building_construction: Tech
+
+- [#14275](https://github.com/1024pix/pix/pull/14275) Supprimer le script d'ajout des shortId aux modules (PIX-20475) 
+- [#14259](https://github.com/1024pix/pix/pull/14259) Utiliser les nouvelles URLs de modules dans les contenus formatifs des seeds (PIX-20388)
+
 # [5.267.0](https://github.com/1024pix/pix/compare/v5.266.0...v5.267.0) (2025-11-27)
 
 ### :rocket: Amélioration
