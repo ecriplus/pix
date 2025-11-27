@@ -189,6 +189,5 @@
   "exports": {
     "./tests/*": "./tests/*",
     "./*": "./app/*"
-  },
-  "main": "./app/app.js"
+  }
 }
