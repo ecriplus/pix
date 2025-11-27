@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.267.0](https://github.com/1024pix/pix/compare/v5.266.0...v5.267.0) (2025-11-27)
+
+### :rocket: Amélioration
+
+- [#14268](https://github.com/1024pix/pix/pull/14268) Afficher deux nouvelles colonnes dans le tableau d'historique de versions (PIX-20546) 
+- [#14256](https://github.com/1024pix/pix/pull/14256) Ajouter un encart d'info pour l'email de convocation (PIX-6278). 
+- [#14251](https://github.com/1024pix/pix/pull/14251) Mentionner l'oralisation dans la modale d'édition du candidat (PIX-20572). 
+- [#14263](https://github.com/1024pix/pix/pull/14263) Mise à jour des liens comparia MDX-45 
+- [#14270](https://github.com/1024pix/pix/pull/14270) Modifications IAGenBiaisAva MDX-17 
+
+### :bug: Correction
+
+- [#14254](https://github.com/1024pix/pix/pull/14254) Erreur de transaction sur la neutralisation / deneutralisation (PIX-20543). 
+
+### :building_construction: Tech
+
+- [#14248](https://github.com/1024pix/pix/pull/14248) Simplifier les entités `Chat` et `Message` (PIX-20440)
+
 # [5.266.0](https://github.com/1024pix/pix/compare/v5.265.0...v5.266.0) (2025-11-26)
 
 ### :rocket: Amélioration
