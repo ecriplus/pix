@@ -64,7 +64,7 @@ export const PRO_COMBINED_COURSE = {
     trainings: [
       {
         title: 'Demo combinix 1',
-        link: '/modules/demo-combinix-1',
+        link: '/modules/27d6ca4f/demo-combinix-1',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
         locale: 'fr',
@@ -76,7 +76,7 @@ export const PRO_COMBINED_COURSE = {
       },
       {
         title: 'Demo combinix 2',
-        link: '/modules/demo-combinix-2',
+        link: '/modules/df82ec66/demo-combinix-2',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
         locale: 'fr',
@@ -88,7 +88,7 @@ export const PRO_COMBINED_COURSE = {
       },
       {
         title: 'Demo combinix 1',
-        link: '/modules/demo-combinix-1',
+        link: '/modules/27d6ca4f/demo-combinix-1',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
         locale: 'fr-fr',
@@ -100,7 +100,7 @@ export const PRO_COMBINED_COURSE = {
       },
       {
         title: 'Demo combinix 2',
-        link: '/modules/demo-combinix-2',
+        link: '/modules/df82ec66/demo-combinix-2',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
         locale: 'fr-fr',
