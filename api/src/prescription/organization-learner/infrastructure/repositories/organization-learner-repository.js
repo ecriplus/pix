@@ -250,15 +250,16 @@ function _getPage(results, page = { number: 1, size: 10 }) {
   };
 }
 
-async function getIdByUserIdAndOrganizationId({ organizationId, userId }) {
-  const row = await knex('view-active-organization-learners')
+async function findIdByUserIdAndOrganizationId({ organizationId, userId }) {
+  if (!organizationId || !userId) return null;
+
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('view-active-organization-learners')
     .where('organizationId', organizationId)
     .andWhere('userId', userId)
     .first('id');
-  if (!row) {
-    throw new NotFoundError(`Learner not found for organization ID ${organizationId} and user Id ${userId}.`);
-  }
-  return row.id;
+
+  return result?.id || null;
 }
 
 const findByIds = async function ({ ids }) {
@@ -530,12 +531,12 @@ export {
   findByOrganizationIdAndUpdatedAtOrderByDivision,
   findByOrganizationsWhichNeedToComputeCertificability,
   findByUserId,
+  findIdByUserIdAndOrganizationId,
   findOrganizationLearnersByDivisions,
   findPaginatedAttestationStatusForOrganizationLearnersAndKey,
   findPaginatedLearners,
   get,
   getAttestationsForOrganizationLearnersAndKey,
-  getIdByUserIdAndOrganizationId,
   getLatestOrganizationLearner,
   isActive,
   updateUserIdWhereNull,
