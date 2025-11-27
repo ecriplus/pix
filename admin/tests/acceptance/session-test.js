@@ -174,8 +174,8 @@ module('Acceptance | Session pages', function (hooks) {
 
             // We were unable to access clipboard in test environment so we used a stub
             const writeTextStub = sinon.stub();
+            Object.defineProperty(navigator, 'clipboard', { writable: true, value: { writeText: writeTextStub } });
 
-            sinon.stub(navigator, 'clipboard').value({ writeText: writeTextStub.returns() });
             // when
             await clickByName('Lien de téléchargement des résultats');
             await screen.findByText('Copié');
