@@ -1,5 +1,6 @@
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -7,6 +8,9 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
   let organizationForAdminRepository, tagRepository, administrationTeamRepository;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
     organizationForAdminRepository = {
       get: sinon.stub(),
       update: sinon.stub(),
