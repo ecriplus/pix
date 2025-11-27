@@ -52,8 +52,7 @@ export default class UpsertQuestsInBatch extends Component {
           this.errorResponseHandler.notify(responseJson, undefined, true);
         }
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;

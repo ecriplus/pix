@@ -31,7 +31,6 @@ export default class CertificationIssueReportModal extends Component {
 
       this.pixToast.sendSuccessNotification({ message: 'Le signalement a été résolu.' });
     } catch (error) {
-      console.log('error', error);
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue :\n' + error?.errors[0]?.detail });
     } finally {
       this.args.toggleResolveModal();
