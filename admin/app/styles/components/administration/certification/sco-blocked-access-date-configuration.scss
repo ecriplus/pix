@@ -1,0 +1,24 @@
+.sco-blocked-access-date-configuration {
+  .block-layout__actions {
+    display: block;
+  }
+
+  &__section {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+    margin-bottom: var(--pix-spacing-4x);
+  }
+
+  &__form {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+
+    .pix-input {
+      flex-direction: row;
+      gap: var(--pix-spacing-4x);
+      align-items: center;
+    }
+  }
+}

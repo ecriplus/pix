@@ -859,6 +859,19 @@
           },
           "title": "Configuration of thresholds by skill"
         },
+        "sco-blocked-access-date": {
+          "cancel-button": "Cancel",
+          "error": "Could not save the new date",
+          "high-school-date": "Reopening date for high schools: {date}",
+          "hour": "(00:00, Metropolitan France time)",
+          "middle-school-date": "Reopening date for middle schools: {date}",
+          "modify-button": "Modify",
+          "not-configured": "Not configured",
+          "not-found": "Reopening dates could not be found",
+          "save-button": "Submit",
+          "success": "Date successfully updated",
+          "title": "Configuration of reopening dates for Pix Certif SCO spaces"
+        },
         "sco-whitelist": {
           "export": {
             "button": "Export whitelist (CSV)",
