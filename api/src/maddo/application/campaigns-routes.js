@@ -57,6 +57,29 @@ const register = async function (server) {
                     masteryRate: Joi.number().description(
                       "Taux de réussite, i.e. pourcentage d'acquis validés dans la campagne",
                     ),
+                    stages: Joi.object({
+                      reachedStage: Joi.number().description('Palier atteint dans la campagne'),
+                      numberOfStages: Joi.number().description('Nombre total de paliers dans la campagne'),
+                    })
+                      .description(
+                        'Paliers associés à la participation à la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                      )
+                      .label('CampaignParticipationStages'),
+                    badges: Joi.array()
+                      .items(
+                        Joi.object({
+                          id: Joi.number().description('ID du badge'),
+                          altMessage: Joi.string().description('Message alternatif du badge'),
+                          imageUrl: Joi.string().description("URL de l'image du badge"),
+                          key: Joi.string().description('Clé unique du badge'),
+                          title: Joi.string().description('Titre du badge'),
+                          isAcquired: Joi.boolean().description('Indique si le badge a été obtenu'),
+                        }).label('CampaignParticipationBadge'),
+                      )
+                      .description(
+                        'Badges associés à la participation à la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                      )
+                      .label('CampaignParticipationBadges'),
                     tubes: Joi.array()
                       .items(
                         Joi.object({
