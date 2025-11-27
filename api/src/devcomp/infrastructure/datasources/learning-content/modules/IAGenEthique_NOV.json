@@ -133,7 +133,7 @@
                     }
                   },
                   {
-                    "id": "'",
+                    "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Le fabricant de l’IA peut <strong>consulter certaines conversations</strong> pour <strong>améliorer le fonctionnement</strong> de l’IA générative. Il peut aussi vérifier que les utilisateurs<strong> respectent les règles de sécurité </strong>et la <strong>politique d’utilisation</strong>.</p>"
