@@ -2,9 +2,16 @@ import { certificationAdminController } from '../../../../../src/certification/e
 import { ChallengeDeneutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Application | Controller | certification', function () {
+  beforeEach(async function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
+  });
+
   describe('#neutralizeChallenge', function () {
     it('neutralizes the challenge and dispatches the event', async function () {
       // given
