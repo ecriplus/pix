@@ -482,7 +482,7 @@
               "element": {
                 "id": "03437e86-505d-4eed-bfb0-ee635b9c9a6e",
                 "type": "qcu",
-                "instruction": "<p>Quel type d’alignement explique le comportement de l’IA, qui ne parle que de la Grèce&nbsp;?</p>",
+                "instruction": "<p>Quel type d’alignement explique le comportement de l’IA, qui ne parle que de ce pays ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -708,7 +708,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → l’IA refuse pour protéger l’utilisateur.<br>• <em>Prompt système</em> → ton ou comportement imposé par les concepteurs.<br>• <em>Pré-prompt</em> → consigne ajoutée par l’utilisateur qui influence la réponse.<br>• <em>Biais d’entraînement</em> → stéréotype ou vision du monde appris dans les données.<br>• <em>Hallucination</em> → erreur factuelle produite par l’IA.</p>"
+                  "diagnosis": "<p>Comprendre ces mécanismes permet d’interpréter plus finement les réponses d’un logiciel d'IA générative… et d’éviter de leur accorder plus de fiabilité qu’elles n’en ont réellement.</p>"
                 }
               }
             }
