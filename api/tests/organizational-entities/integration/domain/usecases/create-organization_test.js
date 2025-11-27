@@ -1,5 +1,6 @@
 import {
   AdministrationTeamNotFound,
+  CountryNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
@@ -20,6 +21,12 @@ describe('Integration | UseCases | create-organization', function () {
   beforeEach(async function () {
     superAdminUserId = databaseBuilder.factory.buildUser().id;
     databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+    databaseBuilder.factory.buildCertificationCpfCountry({
+      code: 99100,
+      commonName: 'France',
+      originalName: 'France',
+    });
+
     await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
   });
@@ -32,6 +39,7 @@ describe('Integration | UseCases | create-organization', function () {
       documentationUrl: 'https://pix.fr',
       createdBy: superAdminUserId,
       administrationTeamId: 1234,
+      countryCode: 99100,
     });
 
     // when
@@ -46,6 +54,7 @@ describe('Integration | UseCases | create-organization', function () {
     expect(createdOrganization.dataProtectionOfficer.firstName).to.equal('');
     expect(createdOrganization.dataProtectionOfficer.lastName).to.equal('');
     expect(createdOrganization.dataProtectionOfficer.email).to.equal('');
+    expect(createdOrganization.countryCode).to.equal(99100);
   });
 
   describe('error cases', function () {
@@ -60,6 +69,7 @@ describe('Integration | UseCases | create-organization', function () {
             createdBy: superAdminUserId,
             administrationTeamId: 1234,
             parentOrganizationId: 9999,
+            countryCode: 99100,
           });
 
           // when
@@ -91,6 +101,7 @@ describe('Integration | UseCases | create-organization', function () {
               createdBy: superAdminUserId,
               administrationTeamId: 1234,
               parentOrganizationId: childOrganizationId,
+              countryCode: 99100,
             });
 
             // when
@@ -121,6 +132,7 @@ describe('Integration | UseCases | create-organization', function () {
           documentationUrl: 'https://pix.fr',
           createdBy: superAdminUserId,
           administrationTeamId: 9999,
+          countryCode: 99100,
         });
 
         // when
@@ -132,6 +144,28 @@ describe('Integration | UseCases | create-organization', function () {
             meta: { administrationTeamId: organization.administrationTeamId },
           }),
         );
+      });
+    });
+
+    describe('when country does not exist', function () {
+      it('throws CountryNotFoundError', async function () {
+        // given
+        const organization = new OrganizationForAdmin({
+          name: 'ACME',
+          type: 'PRO',
+          documentationUrl: 'https://pix.fr',
+          createdBy: superAdminUserId,
+          administrationTeamId: 1234,
+          countryCode: 99999,
+        });
+
+        // when
+        const error = await catchErr(usecases.createOrganization)({ organization });
+
+        // then
+        expect(error).to.be.instanceOf(CountryNotFoundError);
+        expect(error.message).to.equal('Country not found for code 99999');
+        expect(error.meta).to.deep.equal({ countryCode: 99999 });
       });
     });
 
@@ -163,6 +197,7 @@ describe('Integration | UseCases | create-organization', function () {
         documentationUrl: 'https://pix.fr',
         createdBy: superAdminUserId,
         administrationTeamId: 1234,
+        countryCode: 99100,
       });
 
       // when

@@ -339,6 +339,11 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           // given
           const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
           databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          databaseBuilder.factory.buildCertificationCpfCountry({
+            code: 99100,
+            commonName: 'France',
+            originalName: 'France',
+          });
           await databaseBuilder.commit();
 
           // when
@@ -354,6 +359,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'documentation-url': 'https://kingArthur.com',
                   'data-protection-officer-email': 'justin.ptipeu@example.net',
                   'administration-team-id': 1234,
+                  'country-code': 99100,
                 },
               },
             },
@@ -369,6 +375,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
           expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
           expect(createdOrganization['created-by']).to.equal(superAdminUserId);
+          expect(createdOrganization['country-code']).to.equal(99100);
         });
       });
 
@@ -377,6 +384,11 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           // given
           const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
           databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          databaseBuilder.factory.buildCertificationCpfCountry({
+            code: 99100,
+            commonName: 'France',
+            originalName: 'France',
+          });
           const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
           await databaseBuilder.commit();
 
@@ -394,6 +406,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'data-protection-officer-email': 'justin.ptipeu@example.net',
                   'administration-team-id': 1234,
                   'parent-organization-id': parentOrganizationId,
+                  'country-code': 99100,
                 },
               },
             },

@@ -1,9 +1,15 @@
-import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import {
+  AdministrationTeamNotFound,
+  CountryNotFoundError,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
   organization,
   administrationTeamRepository,
+  countryRepository,
   dataProtectionOfficerRepository,
   organizationForAdminRepository,
   organizationCreationValidator,
@@ -19,6 +25,8 @@ const createOrganization = async function ({
   }
 
   organizationCreationValidator.validate(organization);
+
+  await _checkCountryExists(organization.countryCode, countryRepository);
 
   const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
 
@@ -58,5 +66,17 @@ function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
         parentOrganizationId: parentOrganization.id,
       },
     });
+  }
+}
+
+async function _checkCountryExists(countryCode, countryRepository) {
+  try {
+    await countryRepository.getByCode(countryCode);
+  } catch {
+    logger.error({
+      event: 'Not_found_country',
+      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
+    });
+    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
   }
 }

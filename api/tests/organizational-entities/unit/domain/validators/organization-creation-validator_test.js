@@ -20,6 +20,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           type: 'PRO',
           documentationUrl: 'https://kingArthur.com',
           administrationTeamId: 1234,
+          countryCode: 99123,
         };
 
         // when/then
@@ -35,7 +36,12 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             attribute: 'name',
             message: 'Le nom n’est pas renseigné.',
           };
-          const organizationCreationParams = { name: MISSING_VALUE, type: 'PRO', administrationTeamId: 1234 };
+          const organizationCreationParams = {
+            name: MISSING_VALUE,
+            type: 'PRO',
+            administrationTeamId: 1234,
+            countryCode: 99123,
+          };
 
           try {
             // when
@@ -62,7 +68,12 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             },
           ];
 
-          const organizationCreationParams = { name: 'ACME', type: MISSING_VALUE, administrationTeamId: 1234 };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: MISSING_VALUE,
+            administrationTeamId: 1234,
+            countryCode: 99123,
+          };
 
           try {
             // when
@@ -81,7 +92,12 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             attribute: 'type',
             message: 'Le type de l’organisation doit avoir l’une des valeurs suivantes: SCO, SUP, PRO.',
           };
-          const organizationCreationParams = { name: 'ACME', type: 'PTT', administrationTeamId: 1234 };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PTT',
+            administrationTeamId: 1234,
+            countryCode: 99123,
+          };
 
           try {
             // when
@@ -96,7 +112,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
         ['SUP', 'SCO', 'PRO', 'SCO-1D'].forEach((type) => {
           it(`should not throw with ${type} as type`, function () {
             // given
-            const organizationCreationParams = { name: 'ACME', type, administrationTeamId: 1234 };
+            const organizationCreationParams = { name: 'ACME', type, administrationTeamId: 1234, countryCode: 99123 };
 
             // when/then
             return expect(() => organizationCreationValidator.validate(organizationCreationParams)).to.not.throw();
@@ -112,6 +128,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             documentationUrl: 'invalidUrl',
             administrationTeamId: 1234,
+            countryCode: 99123,
           };
           const error = await catchErr(organizationCreationValidator.validate)(organizationCreationParams);
 
@@ -128,7 +145,83 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             attribute: 'administrationTeamId',
             message: 'L’équipe en charge n’est pas renseignée.',
           };
-          const organizationCreationParams = { name: 'ACME', type: 'PRO', administrationTeamId: undefined };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            countryCode: 99123,
+            administrationTeamId: undefined,
+          };
+
+          try {
+            // when
+            organizationCreationValidator.validate(organizationCreationParams);
+            expect.fail('should have thrown an error');
+          } catch (errors) {
+            // then
+            _assertErrorMatchesWithExpectedOne(errors, expectedError);
+          }
+        });
+      });
+
+      context('on countryCode attribute', function () {
+        it('should reject with error when countryCode is missing', function () {
+          // given
+          const expectedError = {
+            attribute: 'countryCode',
+            message: 'Le code pays n’est pas renseigné.',
+          };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            administrationTeamId: 1234,
+            countryCode: undefined,
+          };
+
+          try {
+            // when
+            organizationCreationValidator.validate(organizationCreationParams);
+            expect.fail('should have thrown an error');
+          } catch (errors) {
+            // then
+            _assertErrorMatchesWithExpectedOne(errors, expectedError);
+          }
+        });
+
+        it('should reject with error when countryCode is below minimum', function () {
+          // given
+          const expectedError = {
+            attribute: 'countryCode',
+            message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+          };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            administrationTeamId: 1234,
+            countryCode: 98999,
+          };
+
+          try {
+            // when
+            organizationCreationValidator.validate(organizationCreationParams);
+            expect.fail('should have thrown an error');
+          } catch (errors) {
+            // then
+            _assertErrorMatchesWithExpectedOne(errors, expectedError);
+          }
+        });
+
+        it('should reject with error when countryCode is above maximum', function () {
+          // given
+          const expectedError = {
+            attribute: 'countryCode',
+            message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+          };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            administrationTeamId: 1234,
+            countryCode: 100000,
+          };
 
           try {
             // when
@@ -147,6 +240,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           name: MISSING_VALUE,
           type: MISSING_VALUE,
           administrationTeamId: MISSING_VALUE,
+          countryCode: MISSING_VALUE,
         };
 
         try {
@@ -155,7 +249,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           expect.fail('should have thrown an error');
         } catch (errors) {
           // then
-          expect(errors.invalidAttributes).to.have.lengthOf(4);
+          expect(errors.invalidAttributes).to.have.lengthOf(5);
         }
       });
     });
