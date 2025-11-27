@@ -295,7 +295,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       const frameworkHistory = await versionsRepository.getFrameworkHistory({ scope });
 
       // then
-      expect(frameworkHistory).to.deep.equal([version3.id, version2.id, version1.id]);
+      expect(frameworkHistory).to.deep.equal([
+        { id: version3.id, startDate: version3.startDate, expirationDate: version3.expirationDate },
+        { id: version2.id, startDate: version2.startDate, expirationDate: version2.expirationDate },
+        { id: version1.id, startDate: version1.startDate, expirationDate: version1.expirationDate },
+      ]);
     });
   });
 });

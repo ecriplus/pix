@@ -453,7 +453,12 @@
           "history": {
             "label": "Versions",
             "table": {
-              "caption": "Liste des versions par ordre décroissant"
+              "caption": "Liste des versions par ordre décroissant",
+              "columns": {
+                "expiration-date": "Date d'expiration",
+                "start-date": "Date de début",
+                "version-id": "ID de version"
+              }
             },
             "title": "Historique des versions du référentiel"
           },

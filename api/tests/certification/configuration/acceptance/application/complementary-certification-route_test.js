@@ -644,14 +644,16 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
 
-      const olderVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: complementaryCertification.key,
-        startDate: new Date('2024-01-11'),
-      });
-
       const newerVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: complementaryCertification.key,
         startDate: new Date('2025-01-11'),
+        expirationDate: null,
+      });
+
+      const olderVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2024-01-11'),
+        expirationDate: newerVersion.expirationDate,
       });
 
       databaseBuilder.factory.buildCertificationVersion({
@@ -677,7 +679,10 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'framework-histories',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          history: [newerVersion.id, olderVersion.id],
+          history: [
+            { id: newerVersion.id, startDate: newerVersion.startDate, expirationDate: newerVersion.expirationDate },
+            { id: olderVersion.id, startDate: olderVersion.startDate, expirationDate: olderVersion.expirationDate },
+          ],
         },
       });
     });
