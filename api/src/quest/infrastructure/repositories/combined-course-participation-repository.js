@@ -149,7 +149,7 @@ export const findPaginatedCombinedCourseParticipationById = async function ({ co
   const knexConnection = DomainTransaction.getConnection();
 
   const queryBuilder = knexConnection('organization_learner_participations')
-    .select('view-active-organization-learners.userId')
+    .select('view-active-organization-learners.id')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
@@ -159,13 +159,12 @@ export const findPaginatedCombinedCourseParticipationById = async function ({ co
       referenceId: combinedCourseId.toString(),
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     })
-    .whereNotNull('userId')
-    .orderBy(['lastName', 'firstName', 'userId']);
+    .orderBy(['lastName', 'firstName']);
 
   queryBuilder.modify(addSearchFilters, filters);
   const { results, pagination } = await fetchPage({ queryBuilder, paginationParams: page });
   return {
-    userIds: results.map((result) => result.userId),
+    organizationLearnerIds: results.map((result) => result.id),
     meta: pagination,
   };
 };

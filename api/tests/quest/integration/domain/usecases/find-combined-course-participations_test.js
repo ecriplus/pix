@@ -1,9 +1,6 @@
 import { CombinedCourseParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseParticipationDetails } from '../../../../../src/quest/domain/models/CombinedCourseParticipationDetails.js';
-import {
-  OrganizationLearnerParticipationStatuses,
-  OrganizationLearnerParticipationTypes,
-} from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -55,11 +52,10 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
       group: 'Groupe 1',
       organizationId,
     });
-    participation1 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    participation1 = databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
       organizationLearnerId: learner1.id,
       combinedCourseId,
       status: CombinedCourseParticipationStatuses.STARTED,
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     });
     learner2 = databaseBuilder.factory.buildOrganizationLearner({
       firstName: 'Marianne',
@@ -68,31 +64,29 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
       group: 'Groupe 2',
       organizationId,
     });
-    participation2 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    participation2 = databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
       organizationLearnerId: learner2.id,
       combinedCourseId,
       status: OrganizationLearnerParticipationStatuses.COMPLETED,
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     });
     databaseBuilder.factory.buildCampaignParticipation({
       campaignId,
       organizationLearnerId: learner2.id,
       userId: learner2.userId,
     });
-    databaseBuilder.factory.buildPassage({
+    databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
       moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-      userId: learner2.userId,
-      terminatedAt: new Date('2025-10-12'),
+      organizationLearnerId: learner2.id,
+      status: OrganizationLearnerParticipationStatuses.COMPLETED,
     });
 
     const { id: anotherCombinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COMBI2',
     });
-    databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
       organizationLearnerId: learner1.id,
       combinedCourseId: anotherCombinedCourseId,
       status: OrganizationLearnerParticipationStatuses.COMPLETED,
-      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     });
 
     await databaseBuilder.commit();
