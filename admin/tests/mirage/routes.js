@@ -116,10 +116,6 @@ export default function routes() {
     return certificationVersion.update(params.data.attributes);
   });
 
-  this.get('/admin/sco-blocked-access-dates', (schema) => {
-    return schema.scoBlockedAccessDates.all();
-  });
-
   this.get('/admin/sessions', findPaginatedAndFilteredSessions);
   this.get('/admin/sessions/to-publish', getToBePublishedSessions);
   this.get('/admin/sessions/with-required-action', getWithRequiredActionSessions);
