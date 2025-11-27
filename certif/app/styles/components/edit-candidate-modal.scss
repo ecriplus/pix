@@ -18,8 +18,14 @@
   }
 }
 
-.edit-candidate-modal-form-accessibility-adjustment__legend {
-  color: var(--pix-neutral-900);
-  font-weight: var(--pix-font-medium);
-  font-size: 1rem;
+.edit-candidate-modal-form-accessibility-adjustment {
+  &__legend {
+    color: var(--pix-neutral-900);
+    font-weight: var(--pix-font-medium);
+    font-size: 1rem;
+  }
+
+  &__description {
+    margin-block: var(--pix-spacing-2x);
+  }
 }

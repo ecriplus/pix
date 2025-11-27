@@ -48,7 +48,6 @@ module(
         .dom(
           screen.getByRole('checkbox', {
             name: "Le candidat a besoin d'un aménagement",
-            description: "L'aménagement consiste à retirer les questions non accessibles",
             checked: false,
           }),
         )
