@@ -29,7 +29,7 @@ export function getTransform(streamCapture) {
 
       if (message) {
         streamCapture.LLMMessageParts.push(...message.split(''));
-        data += getFormattedMessage(message);
+        data += events.getFormattedMessage(message);
       }
 
       if (error) {
@@ -47,9 +47,4 @@ export function getTransform(streamCapture) {
       else callback();
     },
   });
-}
-
-function getFormattedMessage(message) {
-  const formattedMessage = message.replaceAll('\n', '\ndata: ');
-  return `data: ${formattedMessage}\n\n`;
 }
