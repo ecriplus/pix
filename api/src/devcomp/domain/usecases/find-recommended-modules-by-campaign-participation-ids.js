@@ -14,7 +14,7 @@ export const findRecommendedModulesByCampaignParticipationIds = async function (
     userRecommendedTrainings.map(async ({ id, link }) => {
       try {
         const module = await moduleService.getModuleByLink({ link, moduleRepository });
-        return { id, moduleId: module.id };
+        return { id, moduleId: module.id, shortId: module.shortId };
       } catch {
         logger.error({ message: `Erreur sur le lien de la ressource : ${link}` });
         return;

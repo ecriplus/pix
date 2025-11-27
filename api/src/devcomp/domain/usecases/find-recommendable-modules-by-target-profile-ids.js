@@ -13,7 +13,7 @@ const findRecommendableModulesByTargetProfileIds = async function ({
     recommendedTrainings.map(async ({ id, link, targetProfileIds }) => {
       try {
         const module = await moduleService.getModuleByLink({ link, moduleRepository });
-        return { id, moduleId: module.id, targetProfileIds };
+        return { id, moduleId: module.id, shortId: module.shortId, targetProfileIds };
       } catch {
         logger.error({ message: `Erreur sur le lien de la ressource : ${link}` });
         return;
