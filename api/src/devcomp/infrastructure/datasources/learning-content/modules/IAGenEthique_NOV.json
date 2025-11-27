@@ -11,7 +11,7 @@
     "level": "novice",
     "objectives": [
       "<p>Comprendre que les conversations avec les IA génératives sont réutilisées</p>",
-      "<p>Savoir rédiger un prompt en protégeant ses informations personnelles</p>",
+      "<p>Savoir rédiger un prompt qui n’inclut pas d’informations personnelles</p>",
       "<p>Connaître les risques du partage de données sensibles avec l’IA générative</p>"
     ],
     "tabletSupport": "comfortable"
@@ -31,7 +31,7 @@
               "element": {
                 "id": "d8b1ceea-a424-4baa-a4d6-140f1d2607b5",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "<p>Asmae discute de son usage de l'IA générative avec un ami.</p>",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Conversation à propos de la confidentialité de l’IA",
@@ -93,7 +93,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
-                "content": "<p>Voici un extrait  des conditions d’utilisation du logiciel d’IA générative ChatGPT.</p>"
+                "content": "<p>Consigne : Lisez cet extrait des condition d'utilisatio de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</p>"
               }
             },
             {
@@ -131,6 +131,13 @@
                     "feedback": {
                       "diagnosis": "<p>Ce n’est pas ça.&nbsp;<br>Le fabricant de l’IA peut <strong>consulter certaines conversations</strong> pour <strong>améliorer le fonctionnement</strong> de l’IA générative. Il peut aussi vérifier que les utilisateurs<strong> respectent les règles de sécurité </strong>et la <strong>politique d’utilisation</strong>.</p>"
                     }
+                  },
+                  {
+                    "id": "'",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Le fabricant de l’IA peut <strong>consulter certaines conversations</strong> pour <strong>améliorer le fonctionnement</strong> de l’IA générative. Il peut aussi vérifier que les utilisateurs<strong> respectent les règles de sécurité </strong>et la <strong>politique d’utilisation</strong>.</p>"
+                    }
                   }
                 ],
                 "solution": "1"
@@ -148,7 +155,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Les informations que vous envoyez <strong>ne sont pas effacées</strong>&nbsp;: elles sont <strong>stockées</strong> et peuvent être <strong>réutilisées</strong>, par exemple pour <strong>améliorer l’IA</strong> ou <strong>établir des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p><h5><br></h5>"
+                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p><h5><br></h5>"
               }
             }
           ]
@@ -212,6 +219,13 @@
                     "feedback": {
                       "diagnosis": "<p>Ce sont toutes des données personnelles, sensibles ou confidentielles.</p>"
                     }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.&nbsp;</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce sont toutes des données personnelles, sensibles ou confidentielles.</p>"
+                    }
                   }
                 ],
                 "solution": "1"
@@ -269,7 +283,7 @@
                       "direction": "outgoing",
                       "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/iagenethiquenov/a971c385-bad5-4038-8334-1115b509c3e4.png",
+                        "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
                         "alt": "Image draft"
                       }
                     },
@@ -393,6 +407,13 @@
                     "feedback": {
                       "diagnosis": "<p>Eh non !<br>Les entreprises qui gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. </p>"
                     }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Les entreprises qui gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>.</p>"
+                    }
                   }
                 ],
                 "solution": "2"
@@ -418,7 +439,7 @@
               "element": {
                 "id": "2e7d7557-fd13-4a5c-89ab-e4d40184da2c",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/IAGenEthique_NOV/ia-ethique-infographie.png",
+                "url": "https://assets.pix.org/modules/IAGenEthique_NOV/ia-ethique-infographie-1.png",
                 "alt": "",
                 "alternativeText": "<p>Infographie présentant trois types de comptes pour l’utilisation d’une IA : compte personnel gratuit (les prompts sont réutilisés), abonnement individuel payant (la réutilisation peut être désactivée selon l’option choisie), et abonnement entreprise payant (les données ne devraient pas être réutilisées selon le contrat). Un encadré “Bon à savoir” rappelle que certaines organisations créent leur propre IA pour mieux protéger leurs données, mais qu’il faut malgré tout éviter d’y saisir des informations sensibles. L’image mentionne également l’existence de chartes d’usage internes et se conclut par une règle : si une information doit rester privée, ne pas la mettre dans un message destiné à une IA.</p>",
                 "legend": "",
@@ -521,7 +542,7 @@
                   },
                   {
                     "id": "eefcb119-7033-4e8d-ae7d-542d7dc57688",
-                    "text": "\"Fais-moi des invitations pour ma soirée d’anniversaire : Erwan Leguebec, 30 ans, mardi 14 octobre à 20 h, 14 chemin des Bas Vignons 01000 Bourg-en-Bresse, 06 12 34 56 78.\"",
+                    "text": "\"Fais-moi des invitations pour ma soirée d’anniversaire : Erwan Leguebec, 30 ans, mardi 14 octobre à 20 h, 14 chemin des Bas Vignons, 01 62 38 23 11.\"",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -664,7 +685,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Fais une analyse de ces clients et propose un plan marketing adapté : <ul><li>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, 31000 Toulouse, téléphone : 06 39 98 33 45, e-mail : marie.dubois@pix.com <li> Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de Paris, 94100 Créteil, téléphone : 04 65 71 68 37, e-mail : ahmed.ouali@pix.fr</ul>"
+                      "content": "Fais une analyse de ces clients et propose un plan marketing adapté : <ul><li>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, téléphone : 06 39 98 33 45, e-mail : marie.dubois@pix.com <li> Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de l'ouest, téléphone : 04 65 71 68 37, e-mail : ahmed.ouali@pix.fr</ul>"
                     }
                   ]
                 }
