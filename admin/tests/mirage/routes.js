@@ -452,6 +452,9 @@ export default function routes() {
   this.post('/admin/certification/deneutralize-challenge', () => {
     return new Response(204);
   });
+  this.get('/admin/certification-candidates/:id/timeline', (schema, request) => {
+    return { data: { type: 'certification-candidates-timeline', id: request.id, attributes: { events: [] } } };
+  });
 
   this.post('/admin/organizations/:id/invitations', (schema, request) => {
     const params = JSON.parse(request.requestBody);
