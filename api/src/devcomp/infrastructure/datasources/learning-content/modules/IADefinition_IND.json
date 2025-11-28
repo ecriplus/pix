@@ -498,7 +498,7 @@
                     {
                       "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/IAGenDefIndDec4b.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/jeune-pousse-v2.png",
                       "alt": "",
                       "alternativeText": "<p>Une photo d’une jeune pousse d’ail des ours, son&nbsp;score est de 0,4 pour ail des ours et de 0,6 pour muguet.</p>",
                       "legend": "",
@@ -568,7 +568,7 @@
                     {
                       "id": "fdc063a3-de25-43e4-ab22-007339ad8d68",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema_prediction.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema-prediction-v3.png",
                       "alt": "Un schéma ",
                       "alternativeText": "<p>Un schéma représentant le fait que le logiciel ne peut pas prédire \"Tournesol\" s’il n’a été entrainé qu’avec des étiquettes \"ail des ours\" ou \"muguet\".</p>",
                       "legend": "Si le logiciel ne connaît que les étiquettes “ail des ours” et “muguet” et qu’on lui présente une image de “tournesol”, il ne peut pas prédire que c’est un tournesol. Il va seulement donner une prédiction qui s’approche des étiquettes qu’il connaît.",
