@@ -1,12 +1,24 @@
+/**
+ * @typedef {import('../../shared/domain/models/Version.js').Version} Version
+ */
+
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { CalibratedChallenge } from '../../domain/models/CalibratedChallenge.js';
 import { CalibratedChallengeSkill } from '../../domain/models/CalibratedChallengeSkill.js';
 
 const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
 
+/**
+ * @param {Object} params
+ * @param {string} params.locale
+ * @param {Version} params.version
+ * @returns {Promise<CalibratedChallenge[]>} challenges with validated LCMS status
+ */
 export async function findActiveFlashCompatible({
   locale,
   version,
@@ -17,22 +29,10 @@ export async function findActiveFlashCompatible({
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
 
-  const challengeDtos = await _findChallengesForCertification({
-    locale,
-    cacheKey,
-    versionId: version.id,
-    dependencies,
-  });
-
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
-}
-
-async function _findChallengesForCertification({ versionId, locale, cacheKey, dependencies }) {
   const certificationChallenges = await knex
     .select('difficulty', 'discriminant', 'challengeId')
     .from('certification-frameworks-challenges')
-    .where({ versionId })
+    .where({ versionId: version.id })
     .whereNotNull('discriminant')
     .whereNotNull('difficulty');
 
@@ -49,11 +49,62 @@ async function _findChallengesForCertification({ versionId, locale, cacheKey, de
 
   const validChallengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
 
-  return decorateWithCertificationCalibration({
+  const challengeDtos = decorateWithCertificationCalibration({
     validChallengeDtos,
     certificationChallenges,
   });
+
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
 }
+
+/**
+ * @param {Object} params
+ * @param {Array<string>} params.ids - array of challenge ids
+ * @param {Version} params.version
+ * @returns {Promise<CalibratedChallenge[]>}
+ */
+export async function getMany({
+  ids,
+  version,
+  dependencies = {
+    getInstance,
+  },
+} = {}) {
+  const calibrations = await knex
+    .select('difficulty', 'discriminant', 'challengeId')
+    .from('certification-frameworks-challenges')
+    .whereIn('challengeId', ids)
+    .andWhere({ versionId: version.id })
+    .whereNotNull('discriminant')
+    .whereNotNull('difficulty');
+
+  if (calibrations.length !== ids.length) {
+    logger.error({ challengeIds: ids }, 'Some challenges do not exist in certification version');
+    throw new NotFoundError('Some challenges do not exist in certification version');
+  }
+
+  const lcmsChallenges = await dependencies.getInstance().loadMany(ids);
+  lcmsChallenges.forEach((challengeDto, index) => {
+    if (challengeDto) return;
+    logger.error({ challengeId: ids[index] }, 'Some challenges do not exist in LCMS');
+    throw new NotFoundError('Some challenges do not exist in LCMS');
+  });
+
+  lcmsChallenges.sort(_byId);
+
+  const challengesWithCalibration = decorateWithCertificationCalibration({
+    validChallengeDtos: lcmsChallenges,
+    certificationChallenges: calibrations,
+  });
+
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengesWithCalibration);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
+}
+
+const _byId = (challenge1, challenge2) => {
+  return challenge1.id < challenge2.id ? -1 : 1;
+};
 
 async function loadChallengeDtosSkills(challengeDtos) {
   return Promise.all(

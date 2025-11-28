@@ -1,6 +1,7 @@
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import * as calibratedChallengeRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/calibrated-challenge-repository.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Integration | Repository | calibrated-challenge-repository', function () {
@@ -498,8 +499,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
 
     it('returns only valid calibrated flash compatible challenges', async function () {
       // given
-      const candidateReconciliationDate = new Date('2025-01-01');
-
       const version = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
       const otherVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Frameworks.CORE,
@@ -538,7 +537,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
 
       // when
       const flashCompatibleChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-        date: candidateReconciliationDate,
         locale: 'fr',
         version,
       });
@@ -632,6 +630,149 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             }),
           ]);
         });
+      });
+    });
+  });
+
+  describe('#getMany', function () {
+    context('when at least one challenge is not found in cert referential amongst the provided ids', function () {
+      it('should throw a NotFound error', async function () {
+        // given
+        const versionWithoutChallenges = databaseBuilder.factory.buildCertificationVersion({
+          scope: Frameworks.CORE,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const err = await catchErr(calibratedChallengeRepository.getMany)({
+          ids: ['challengeIdPipeauPipette', 'challengeId00'],
+          version: versionWithoutChallenges,
+        });
+
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+        expect(err).to.have.property('message', 'Some challenges do not exist in certification version');
+      });
+    });
+
+    context('when at least one challenge is not found in LCMS amongst the provided ids', function () {
+      it('should throw a NotFound error', async function () {
+        // given
+        const version = databaseBuilder.factory.buildCertificationVersion({
+          scope: Frameworks.CORE,
+        });
+        const challengeCalibrationNotInLCMS = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          challengeId: 'challengeIdPipeauPipette',
+          versionId: version.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const err = await catchErr(calibratedChallengeRepository.getMany)({
+          ids: [challengeCalibrationNotInLCMS.challengeId],
+          version,
+        });
+
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+        expect(err).to.have.property('message', 'Some challenges do not exist in LCMS');
+      });
+    });
+
+    context('when all challenges are found', function () {
+      let skillsLC = [];
+      let challengesLC = [];
+
+      beforeEach(async function () {
+        await knex('learningcontent.challenges').truncate();
+        await knex('learningcontent.skills').truncate();
+        skillsLC = [];
+        challengesLC = [];
+        skillsLC.push(skillData02_tube02competence01_perime);
+        skillsLC.push(skillData03_tube02competence01_actif);
+        skillsLC.push(skillData00_tube00competence00_actif);
+        challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
+        challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
+        challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
+      });
+
+      it('should return only the challenges for given locale', async function () {
+        const versionActive = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
+        const otherVersion = databaseBuilder.factory.buildCertificationVersion({
+          scope: Frameworks.CORE,
+        });
+
+        challengesLC.push({
+          id: 'challengeForComplementaryCertification',
+          status: 'validé',
+          skillId: skillData03_tube02competence01_actif.id,
+        });
+        challengesLC.push({
+          id: 'otherChallengeForComplementaryCertification',
+          status: 'archivé',
+          skillId: skillData03_tube02competence01_actif.id,
+        });
+
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+        const challengeValide = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          challengeId: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.id,
+          versionId: versionActive.id,
+        });
+
+        const challengePerime = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          challengeId: challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.id,
+          versionId: versionActive.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          challengeId: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.id,
+          versionId: otherVersion.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const challenges = await calibratedChallengeRepository.getMany({
+          ids: [challengeValide.challengeId, challengePerime.challengeId],
+          version: versionActive,
+        });
+
+        // then
+        expect(challenges).to.deep.equal([
+          domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.id,
+            blindnessCompatibility:
+              challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.accessibility1,
+            colorBlindnessCompatibility:
+              challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.accessibility2,
+            discriminant: challengePerime.discriminant,
+            difficulty: challengePerime.difficulty,
+            competenceId: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.competenceId,
+            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+              id: skillData03_tube02competence01_actif.id,
+              name: skillData03_tube02competence01_actif.name,
+              competenceId: skillData03_tube02competence01_actif.competenceId,
+              tubeId: skillData03_tube02competence01_actif.tubeId,
+            }),
+          }),
+          domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.id,
+            blindnessCompatibility:
+              challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.accessibility1,
+            colorBlindnessCompatibility:
+              challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.accessibility2,
+            discriminant: challengePerime.discriminant,
+            difficulty: challengePerime.difficulty,
+            competenceId: challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.competenceId,
+            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+              id: skillData03_tube02competence01_actif.id,
+              name: skillData03_tube02competence01_actif.name,
+              competenceId: skillData03_tube02competence01_actif.competenceId,
+              tubeId: skillData03_tube02competence01_actif.tubeId,
+            }),
+          }),
+        ]);
       });
     });
   });

@@ -9,16 +9,11 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
- * @typedef {import('../../../evaluation/domain/usecases/index.js').AnsweredChallengeRepository} AnsweredChallengeRepository
  */
-
-import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
-
-const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
 
 /**
  * @param {Object} params
@@ -28,7 +23,6 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
- * @param {AnsweredChallengeRepository} params.answeredChallengeRepository
  * @param {VersionRepository} params.versionRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -44,7 +38,6 @@ const getNextChallenge = async function ({
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
   calibratedChallengeRepository,
-  answeredChallengeRepository,
   versionRepository,
   flashAlgorithmService,
   pickChallengeService,
@@ -87,7 +80,10 @@ const getNextChallenge = async function ({
     version,
   });
 
-  const answeredCalibratedChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
+  const answeredCalibratedChallenges = await calibratedChallengeRepository.getMany({
+    ids: answeredChallengeIds,
+    version,
+  });
 
   const challenges = candidateCertificationReferential(answeredCalibratedChallenges, currentCalibratedChallenges);
 
@@ -99,11 +95,6 @@ const getNextChallenge = async function ({
   const challengesForCandidate = candidate.accessibilityAdjustmentNeeded
     ? challengesWithoutSkillsWithAValidatedLiveAlert.filter((challenge) => challenge.isAccessible)
     : challengesWithoutSkillsWithAValidatedLiveAlert;
-  debugGetNextChallenge(
-    candidate.accessibilityAdjustmentNeeded
-      ? `Candidate needs accessibility adjustment, possible challenges have been filtered (${challengesForCandidate.length} out of ${challengesWithoutSkillsWithAValidatedLiveAlert.length} selected`
-      : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
-  );
 
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
