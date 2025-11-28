@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.270.0](https://github.com/1024pix/pix/compare/v5.269.0...v5.270.0) (2025-11-28)
+
+### :rocket: Amélioration
+
+- [#14264](https://github.com/1024pix/pix/pull/14264) Modifier en masse les pays des organisations (PIX-20343) 
+
+### :arrow_up: Montée de version
+
+- [#14285](https://github.com/1024pix/pix/pull/14285) Update dependency @1024pix/epreuves-components to ^2.2.0 (junior)
+
 # [5.269.0](https://github.com/1024pix/pix/compare/v5.268.0...v5.269.0) (2025-11-28)
 
 ### :rocket: Amélioration
