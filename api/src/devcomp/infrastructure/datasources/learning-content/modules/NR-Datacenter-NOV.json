@@ -490,6 +490,386 @@
           ]
         }
       ]
+    },
+    {
+      "id": "4079a85f-60c9-4d2b-8b0d-5fa56a53cbc9",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "3aa484f2-7742-4cb0-96f9-441fbbf3cab1",
+          "type": "activity",
+          "title": "Activité 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a266c379-06be-400f-b5b0-78e1bfd5c0d0",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l'essentiel.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e76bdb47-cc56-4987-91d3-3d1e028a7911",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des phrases suivantes, dites si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "1424a19b-5547-4657-b288-33288c1500aa",
+                    "text": "Les informations que vous consultez en ligne sont stockées dans votre appareil",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai ",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "9c4ff43d-5717-482c-b174-f2a2833ea4e5",
+                    "text": "Les serveurs sont allumés en permanence, même quand personne ne les utilise.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "36c04ec3-8b6f-46f2-8215-c2e09fd257a0",
+                    "text": "Les serveurs ne chauffent presque pas, donc ils n’ont pas besoin de refroidissement.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "8e854d9d-3639-46e8-928e-3cc000d3748e",
+                    "text": "Tous les usages en ligne demandent la même quantité de travail aux serveurs.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "0e35d650-6d60-4b6b-9431-91629dc5045e",
+                    "text": "Choisir des usages plus légers (comme baisser la qualité d'une vidéo) permet de réduire l’énergie utilisée par les serveurs.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "76cc531a-a816-421d-a92f-b6a33befe486",
+          "type": "activity",
+          "title": "Activité 2",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "bb6baa92-46f7-4eaa-ae9f-dcd77a32624d",
+                      "type": "qcu",
+                      "instruction": "<p>Vous voulez envoyer une information rapide à un ami. Quel choix est le plus léger pour les serveurs ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Un message texte.</p>",
+                          "feedback": {
+                            "state": "\n<p>Bien vu !&nbsp;</p>",
+                            "diagnosis": "<p>Le message texte est le plus léger, c'est celui qui va demander le moins de calcul et de stockage.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Un message vocal.&nbsp;</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Le format le plus léger est le message texte, pas le vocal.&nbsp;Un message vocal demande plus calculs et de stockage.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Un courte vidéo de vous.</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Le format le plus léger est le message texte, pas la vidéo. La vidéo demande beaucoup de calculs et de stockage.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "360a5710-c9ae-4620-b9c2-a9da9bfc603b",
+                      "type": "qcu",
+                      "instruction": "<p>Vous écoutez souvent la même chanson en streaming. Comment réduire le travail des serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Baisser le volume.</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !&nbsp;</p>",
+                            "diagnosis": "<p>Pour réduire le travail des serveurs, la bonne réponse est de télécharger la chanson.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Télécharger la chanson.</p>",
+                          "feedback": {
+                            "state": "<p>Bien vu !&nbsp;</p>",
+                            "diagnosis": "<p>Télécharger la chanson est la meilleure solution, cela évitera de solliciter les serveurs à chaque écoute !</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Regarder le clip de la chanson.</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Pour réduire la charge, il faut télécharger la chanson, pas regarder le clip.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "d9b81d92-b66f-4cc5-b47a-9ceaffd40b69",
+                      "type": "qcu",
+                      "instruction": "<p>Vous voulez savoir combien font 23×9. Quel choix est le plus léger pour les serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Faire le calcul vous-même.</p>",
+                          "feedback": {
+                            "state": "<p>Bien vu !</p>",
+                            "diagnosis": "<p>Faire le calcul vous-même n'utilise pas les serverurs, c'est donc le meilleur moyen !&nbsp;</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Demander à un logiciel d'IA générative.&nbsp;</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !&nbsp;</p>",
+                            "diagnosis": "<p>Le choix le plus léger est de faire le calcul vous-même, pas de solliciter une IA demande beaucoup de calculs aux serveurs, même pour une question aussi simple.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Chercher sur internet.</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>La bonne réponse est de faire le calcul vous-même, pas de lancer une recherche web, internet n'est pas toujours la bonne solution.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b3b03583-9e13-49f4-a01e-a2e5a4458460",
+          "type": "activity",
+          "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "056c8078-a480-4baa-8a5d-1ebb8a9d4d45",
+                "type": "qrocm",
+                "instruction": "<p>Trouvez les mots manquants dans la phrase suivante. <br></p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>L'information part du&nbsp;</p>"
+                  },
+                  {
+                    "input": "",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "Centre de données",
+                      "Votre appareil",
+                      "Serveur"
+                    ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "centre de données"
+                      },
+                      {
+                        "id": "2",
+                        "content": "serveur"
+                      },
+                      {
+                        "id": "3",
+                        "content": "votre appareil"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>qui est rangé dans un</p>"
+                  },
+                  {
+                    "input": "",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "serveur",
+                      "centre de données",
+                      "votre appareil"
+                    ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "serveur"
+                      },
+                      {
+                        "id": "2",
+                        "content": "votre appareil"
+                      },
+                      {
+                        "id": "3",
+                        "content": "centre de donnée"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>pour être affichée sur</p>"
+                  },
+                  {
+                    "input": "zdad",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "",
+                    "defaultValue": "10",
+                    "tolerances": [
+                      "votre appareil",
+                      "serveur",
+                      "centre de donnée"
+                    ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "votre appareil"
+                      },
+                      {
+                        "id": "2",
+                        "content": "serveur"
+                      },
+                      {
+                        "id": "3",
+                        "content": "centre de donnée"
+                      }
+                    ],
+                    "solutions": []
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !&nbsp;</p>",
+                    "diagnosis": "<p>L'information que vous demandez est stockée dans un serveurs (qui stocke, envoie les données et fait les calculs) qui est rangé dans un centre de données avec plein d'autres serveurs. Le serveur vous l'envoi par internet et puis elle s'affiche sur votre appareil.&nbsp;</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non !</p>",
+                    "diagnosis": "<p>L'information que vous demandez est stockée dans un serveurs (qui stocke, envoie les données et fait les calculs) qui est rangé dans un centre de données avec plein d'autres serveurs. Le serveur vous l'envoi par internet et puis elle s'affiche sur votre appareil.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4389bd1a-7331-4937-8006-90a723b64994",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "5915d9c5-40ec-475c-881d-669fc1455d55",
+          "type": "challenge",
+          "title": "Aller plus loin",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
+                "type": "qcu-declarative",
+                "instruction": "<p>Et vous, qu’allez-vous faire pour utiliser Internet de manière plus responsable, même si une partie des impacts dépend aussi des grandes entreprises du numérique ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Limiter les vidéos en haute définition quand ce n’est pas nécessaire.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée !&nbsp;</p>\n<p>Réduire la qualité vidéo diminue la quantité de données transférées : c’est plus léger pour les serveurs.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Télécharger les contenus que vous consultez souvent au lieu de les streamer en continu.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée !</p>\n<p>Un contenu téléchargé ne sollicite plus les serveurs à chaque utilisation.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Utiliser d'autres moyens que des outils en ligne quand c'est possible. <br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée !&nbsp;</p><p>Quand c'est possible, c'est la meilleure solution !&nbsp;</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
