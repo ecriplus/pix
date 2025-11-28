@@ -15,8 +15,6 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
-import * as answeredChallengeRepository from '../../infrastructure/repositories/answered-challenge-repository.js';
-import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
@@ -42,8 +40,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
- * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
- * @typedef {answeredChallengeRepository} AnsweredChallengeRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {versionRepository} VersionRepository
  * @typedef {services} Services
@@ -58,8 +54,6 @@ const dependencies = {
   verifyCertificateCodeService,
   assessmentResultRepository,
   answerRepository,
-  answeredChallengeRepository,
-  calibratedChallengeRepository,
   sharedCompetenceMarkRepository,
   sharedChallengeRepository,
   userRepository,

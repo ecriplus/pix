@@ -4,7 +4,6 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
@@ -15,6 +14,7 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
@@ -26,7 +26,6 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
- * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionRepository} params.versionRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -41,8 +40,6 @@ const getNextChallenge = async function ({
   certificationCourseRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
-  calibratedChallengeRepository,
-  answeredChallengeRepository,
   versionRepository,
   flashAlgorithmService,
   pickChallengeService,
@@ -59,9 +56,9 @@ const getNextChallenge = async function ({
     excludedChallengeIds: validatedLiveAlertChallengeIds,
   });
 
-  const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
+  const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 
-  const excludedChallengeIds = [...answeredChallengeIds, ...validatedLiveAlertChallengeIds];
+  const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
 
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId(
@@ -75,19 +72,23 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
+  const complementaryCertificationKey =
+    candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
+
   const version = await versionRepository.getByScopeAndReconciliationDate({
     scope: candidate.subscriptionScope,
     reconciliationDate: candidate.reconciledAt,
   });
 
-  const activeFlashCompatibleCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
+  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,
+    complementaryCertificationKey,
     version,
   });
 
-  const answeredChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
+  const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
 
-  const challenges = deduplicate([...answeredChallenges, ...activeFlashCompatibleCalibratedChallenges]);
+  const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -132,7 +133,7 @@ const getNextChallenge = async function ({
 
   await sessionManagementCertificationChallengeRepository.save({ certificationChallenge });
 
-  return sharedChallengeRepository.get(challenge.id);
+  return challenge;
 };
 
 const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
@@ -157,18 +158,4 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
 };
 
-const deduplicate = (challenges) => {
-  return Object.values(
-    challenges.reduce((acc, challenge) => {
-      const existing = acc[challenge.id];
-
-      if (!existing) {
-        acc[challenge.id] = challenge;
-      }
-
-      return acc;
-    }, {}),
-  );
-};
-
-export { deduplicate, getNextChallenge };
+export { getNextChallenge };

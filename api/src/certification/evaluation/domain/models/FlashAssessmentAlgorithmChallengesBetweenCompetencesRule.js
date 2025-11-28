@@ -13,7 +13,7 @@ export class FlashAssessmentAlgorithmChallengesBetweenCompetencesRule {
     );
 
     const challengesWithNoRecentlyAnsweredCompetence = availableChallenges.filter(
-      (availableChallenge) => !lastCompetenceIds.includes(availableChallenge.skill.competenceId),
+      ({ competenceId }) => !lastCompetenceIds.includes(competenceId),
     );
 
     return challengesWithNoRecentlyAnsweredCompetence.length > 0
@@ -28,7 +28,7 @@ export class FlashAssessmentAlgorithmChallengesBetweenCompetencesRule {
         allChallenges,
         answer,
       );
-      return challenge.skill.competenceId;
+      return challenge.competenceId;
     });
 
     return competenceIds;

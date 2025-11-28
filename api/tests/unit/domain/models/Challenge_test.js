@@ -4,7 +4,7 @@ import { ValidatorQCU } from '../../../../src/evaluation/domain/models/Validator
 import { ValidatorQROC } from '../../../../src/evaluation/domain/models/ValidatorQROC.js';
 import { ValidatorQROCMDep } from '../../../../src/evaluation/domain/models/ValidatorQROCMDep.js';
 import { ValidatorQROCMInd } from '../../../../src/evaluation/domain/models/ValidatorQROCMInd.js';
-import { Challenge, Statuses } from '../../../../src/shared/domain/models/Challenge.js';
+import { Accessibility, Challenge, Statuses } from '../../../../src/shared/domain/models/Challenge.js';
 import { Skill } from '../../../../src/shared/domain/models/Skill.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 
@@ -334,6 +334,32 @@ describe('Unit | Domain | Models | Challenge', function () {
 
       // when then
       expect(challenge.isFocused()).to.be.false;
+    });
+  });
+
+  describe('#isAccessible', function () {
+    [
+      { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: Accessibility.OK, isAccessible: true },
+      { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: Accessibility.RAS, isAccessible: true },
+      { blindnessCompatibility: Accessibility.RAS, colorBlindnessCompatibility: Accessibility.OK, isAccessible: true },
+      { blindnessCompatibility: Accessibility.RAS, colorBlindnessCompatibility: Accessibility.RAS, isAccessible: true },
+      { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: 'KO', isAccessible: false },
+      { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: 'autre chose', isAccessible: false },
+      { blindnessCompatibility: 'autre chose', colorBlindnessCompatibility: Accessibility.OK, isAccessible: false },
+      { blindnessCompatibility: 'KO', colorBlindnessCompatibility: Accessibility.RAS, isAccessible: false },
+    ].forEach(({ blindnessCompatibility, colorBlindnessCompatibility, isAccessible }) => {
+      context(
+        `when blindnessCompatibility is ${blindnessCompatibility} and colorBlindnessCompatibility is ${colorBlindnessCompatibility}`,
+        function () {
+          it(`returns ${isAccessible}`, function () {
+            // given
+            const challenge = domainBuilder.buildChallenge({ blindnessCompatibility, colorBlindnessCompatibility });
+
+            // when then
+            expect(challenge.isAccessible).to.equal(isAccessible);
+          });
+        },
+      );
     });
   });
 

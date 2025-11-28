@@ -27,19 +27,19 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
 
   describe('#execute', function () {
     it('should return the challenges with non answered competences', function () {
-      const unansweredCompetenceUnansweredChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+      const unansweredCompetenceUnansweredChallenge = domainBuilder.buildChallenge({
         id: 'challenge1',
-        skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ competenceId: 'competenceId1' }),
+        competenceId: 'competenceId1',
       });
 
-      const answeredCompetenceUnansweredChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+      const answeredCompetenceUnansweredChallenge = domainBuilder.buildChallenge({
         id: 'challenge2',
-        skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ competenceId: 'competenceId2' }),
+        competenceId: 'competenceId2',
       });
 
-      const answeredCompetenceAnsweredChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+      const answeredCompetenceAnsweredChallenge = domainBuilder.buildChallenge({
         id: 'challenge3',
-        skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ competenceId: 'competenceId2' }),
+        competenceId: 'competenceId2',
       });
 
       const allChallenges = [
