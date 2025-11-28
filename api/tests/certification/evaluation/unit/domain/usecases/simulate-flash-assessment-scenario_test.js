@@ -19,7 +19,7 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
         challengesConfiguration,
       });
 
-      const challengeRepositoryStub = { findActiveFlashCompatible: sinon.stub() };
+      const calibratedChallengeRepository = { findActiveFlashCompatible: sinon.stub() };
 
       const versionRepositoryStub = {
         getById: sinon.stub().resolves(version),
@@ -30,12 +30,12 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
         locale,
         accessibilityAdjustmentNeeded,
         complementaryCertificationKey: undefined,
-        sharedChallengeRepository: challengeRepositoryStub,
+        calibratedChallengeRepository,
         versionRepository: versionRepositoryStub,
       });
 
       // then
-      expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
+      expect(calibratedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
         locale,
         version,
       });
