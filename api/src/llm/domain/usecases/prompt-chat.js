@@ -5,7 +5,6 @@ import { Chat } from '../models/Chat.js';
 /**
  * @typedef {import ('../../infrastructure/repositories/index.js').chatRepository} ChatRepository
  * @typedef {import ('../../infrastructure/repositories/index.js').promptRepository} PromptRepository
- * @typedef {import ('../../infrastructure/streaming/to-event-stream.js').StreamCapture} StreamCapture
  * @typedef {import ('../../../shared/infrastructure/mutex/RedisMutex.js').redisMutex} RedisMutex
  * @typedef {import ('../../infrastructure/streaming/llm-response-handler.js').LLMResponseHandler} LLMResponseHandler
  * @typedef {import ('../../infrastructure/streaming/llm-response-handler.js').LLMResponseMetadata} LLMResponseMetadata

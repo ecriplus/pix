@@ -1,19 +1,3 @@
-import { Transform } from 'node:stream';
-
-export function getTransform() {
-  const decoder = new TextDecoder();
-  return new Transform({
-    objectMode: true,
-    transform(chunk, _encoding, callback) {
-      const objects = findObjects(decoder.decode(chunk));
-      for (const object of objects) {
-        this.push(object);
-      }
-      callback();
-    },
-  });
-}
-
 export class LengthPrefixedJsonDecoderStream extends TransformStream {
   constructor() {
     super({
