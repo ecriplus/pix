@@ -715,11 +715,11 @@
                     "content": "<p>L'information part du&nbsp;</p>"
                   },
                   {
-                    "input": "",
+                    "input": "a",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "a faire",
                     "defaultValue": "",
                     "tolerances": [
                       "Centre de données",
@@ -749,11 +749,11 @@
                     "content": "<p>qui est rangé dans un</p>"
                   },
                   {
-                    "input": "",
+                    "input": "z",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "a faire",
                     "defaultValue": "",
                     "tolerances": [
                       "serveur",
@@ -787,7 +787,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "a faire",
                     "defaultValue": "10",
                     "tolerances": [
                       "votre appareil",
