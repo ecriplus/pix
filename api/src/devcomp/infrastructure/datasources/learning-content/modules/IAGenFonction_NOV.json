@@ -164,7 +164,7 @@
               "element": {
                 "id": "9a7f547c-7d63-4ece-b93e-96c92e48ae5a",
                 "type": "text",
-                "content": "<p>Mais comment fonctionne un logiciel d'IA générative ? Comment fait-il pour construire sa réponse ?</p>"
+                "content": "<p>Mais comment fonctionne un logiciel d’IA générative ? Comment fait-il pour construire sa réponse ?</p>"
               }
             }
           ]
@@ -183,16 +183,55 @@
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
                       "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p>👉 <strong>Cherchez un mot dans votre tête pour compléter ce texte.</strong></p><blockquote><code>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du [_________]\"</code></blockquote>"
+                    },
+                    {
+                      "id": "5aef88e6-f410-4636-b0e6-aa3eee7d2280",
+                      "type": "qrocm",
+                      "instruction": "<p>Tapez le mot auquel vous pensez dans la zone de saisie ci-dessous.&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "input": "zone de saisie",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 10,
+                          "display": "inline",
+                          "placeholder": "votre mot",
+                          "ariaLabel": "zone de saisie",
+                          "defaultValue": "",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "beurre",
+                            "sucre",
+                            "chocolat",
+                            "caramel",
+                            "nutella",
+                            "confiture",
+                            "confiture de fraise",
+                            "confiture d’abricot",
+                            "fromage",
+                            "harissa"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Merci !&nbsp;</p>",
+                          "diagnosis": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Merci !&nbsp;</p>",
+                          "diagnosis": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
+                        }
+                      }
                     }
                   ]
                 },
                 {
                   "elements": [
-                    {
-                      "id": "8f59bf30-fa84-4114-9707-eabc9f648f9e",
-                      "type": "text",
-                      "content": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
-                    },
                     {
                       "id": "de590f05-252c-4110-859a-07a2e276ac80",
                       "type": "qcu-discovery",
@@ -202,21 +241,21 @@
                           "id": "1",
                           "content": "<p>Un mot au hasard.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n'êtes pas une IA. </p><p>Un logiciel d'IA générative lui, utilise toujours la même méthode : ni par hasard, ni par préférence. Il choisit des mots très probables<strong> selon le contexte de la conversation.</strong></p>"
+                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p>Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables<strong> selon le contexte de la conversation.</strong></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Un mot très probable.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n'êtes pas une IA. </p><p>Un logiciel d'IA générative lui, utilise toujours la même méthode : ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong></p>"
+                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p>Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Un mot que je préfère.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n'êtes pas une IA. </p><p> Un logiciel d'IA générative lui, utilise toujours la même méthode : ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong><br></p>"
+                            "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p> Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong><br></p>"
                           }
                         }
                       ],
@@ -335,13 +374,76 @@
             {
               "type": "element",
               "element": {
-                "id": "8759c6d1-0193-461f-9a51-3220ba255978",
-                "type": "image",
-                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v3.png",
-                "alt": "",
-                "alternativeText": "<p>L’image montre un schéma en 4 étapes expliquant comment un modèle de langage prédit mot par mot la suite d’une phrase.</p><ol><li>«&nbsp;On peut y …&nbsp;» → propositions&nbsp;: aller, arriver, passer, parvenir.</li><li>«&nbsp;On peut y aller …&nbsp;» → propositions&nbsp;: en, avec, à, quand.</li><li>«&nbsp;On peut y aller en …&nbsp;» → propositions&nbsp;: train, voiture, covoiturage, avion.</li><li>Phrase finale générée&nbsp;: «&nbsp;On peut y aller en train.&nbsp;» ✅</li></ol>",
-                "legend": "",
-                "licence": ""
+                "id": "31291521-b440-4cdf-9518-bde1191b8b73",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Recherche du premier mot manquant",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v4-carrousel-img1-500x400px.png",
+                        "alt": "Interface illustrant une phrase en construction : « Comment aller de Rennes à Brest ? On peut y ? ». Sous la phrase, une liste de verbes apparaît avec leur probabilité : « aller » (forte), « arriver », « passer », « parvenir » (faible)."
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Recherche du deuxième mot manquant",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v4-carrousel-img2-500x400px.png",
+                        "alt": "Interface montrant la phrase complétée : « Comment aller de Rennes à Brest ? On peut y aller ? ». En dessous, une liste de propositions avec leur probabilité : « en » (forte), « avec », « à », « quand » (faible)."
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Recherche du troisième mot manquant",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v4-carrousel-img3-500x400px.png",
+                        "alt": "Interface affichant la phrase : « Comment aller de Rennes à Brest ? On peut y aller en ? ». En dessous, des moyens de transport avec leur probabilité : « train » (forte), « voiture », « covoiturage », « avion » (faible)."
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Recherche du dernier mot manquant, la phrase est complétée.",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v4-carrousel-img4-500x400px.png",
+                        "alt": "Interface montrant la phrase finalisée : « Comment aller de Rennes à Brest ? On peut y aller en train. » avec une icône de validation en arrière-plan."
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 2,
+                  "disableAnimation": false,
+                  "disableLoop": true,
+                  "imageTextDisplay": ""
+                }
               }
             },
             {
@@ -349,7 +451,7 @@
               "element": {
                 "id": "2bb5feaf-d938-4340-be65-c57b44162aba",
                 "type": "text",
-                "content": "<p>⚠️ Cette méthode a des <strong>limites</strong>. L’IA génère simplement la suite de mots la plus probable. </p><p>Le texte créé peut donc être <strong>trompeur</strong>, <strong>faux </strong>ou même <strong>illogique</strong>.</p><p>    🔍 Il faut donc <strong>toujours vérifier</strong> si le texte produit a du sens et correspond à la réalité.</p>"
+                "content": "<p>⚠️ Cette méthode a des <strong>limites</strong>. L’IA génère simplement la suite de mots la plus probable. </p><p>Le texte créé peut donc être <strong>trompeur</strong>, <strong>faux </strong>ou même <strong>illogique</strong>.</p><p>    🔍 Il faut donc <strong>toujours vérifier</strong> si le texte produit a du sens et correspond à la réalité.</p>"
               }
             }
           ]
