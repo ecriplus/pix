@@ -1,5 +1,5 @@
 import {
-  deduplicate,
+  candidateCertificationReferential,
   getNextChallenge,
 } from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -985,22 +985,51 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     });
   });
 
-  describe('#deduplicate', function () {
-    it('returns the deduplicated challenges by id', async function () {
+  describe('#candidateCertificationReferential', function () {
+    it('returns deduplicated challenges by id', async function () {
       // given
-      const challengeList = [
-        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL2' }),
+      const challengeListA = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
         domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
-        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL1' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
       ];
 
+      const challengeListB = [domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' })];
+
       const expectedChallengeList = [
-        domainBuilder.certification.evaluation.buildAnsweredChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
         domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
       ];
 
       // when
-      const deduplicatedChallenges = deduplicate(challengeList);
+      const deduplicatedChallenges = candidateCertificationReferential(challengeListA, challengeListB);
+
+      // then
+      expect(deduplicatedChallenges.length).to.equal(2);
+      expect(deduplicatedChallenges).to.have.deep.members(expectedChallengeList);
+    });
+
+    it('should return challenges with answeredCalibratedChallenges taking precedence over currentCalibratedChallenges', async function () {
+      // given
+      const answeredCalibratedChallenges = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 10 }),
+      ];
+
+      const currentCalibratedChallenges = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 11 }),
+      ];
+
+      const expectedChallengeList = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 10 }),
+      ];
+
+      // when
+      const deduplicatedChallenges = candidateCertificationReferential(
+        answeredCalibratedChallenges,
+        currentCalibratedChallenges,
+      );
 
       // then
       expect(deduplicatedChallenges.length).to.equal(2);

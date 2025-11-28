@@ -9,6 +9,7 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').AnsweredChallengeRepository} AnsweredChallengeRepository
  */
 
 import Debug from 'debug';
@@ -27,6 +28,7 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
+ * @param {AnsweredChallengeRepository} params.answeredChallengeRepository
  * @param {VersionRepository} params.versionRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -80,14 +82,14 @@ const getNextChallenge = async function ({
     reconciliationDate: candidate.reconciledAt,
   });
 
-  const activeFlashCompatibleCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
+  const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
     locale,
     version,
   });
 
-  const answeredChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
+  const answeredCalibratedChallenges = await answeredChallengeRepository.getMany(answeredChallengeIds);
 
-  const challenges = deduplicate([...answeredChallenges, ...activeFlashCompatibleCalibratedChallenges]);
+  const challenges = candidateCertificationReferential(answeredCalibratedChallenges, currentCalibratedChallenges);
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -157,7 +159,16 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
 };
 
-const deduplicate = (challenges) => {
+/**
+ * Construct a certification referential in the state presented to the current user
+ * Allows the LCMS to be released during a certification without impacting the user
+ *
+ * Example: after LCMS release if a challenge becomes archived ('perime'), this challenge will be in
+ *          `answeredCalibratedChallenges` param, but not in `currentCalibratedChallenges` param
+ */
+const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {
+  // It is critical that answeredCalibratedChallenges is in first parameter in order to take precedence
+  const challenges = [...answeredCalibratedChallenges, ...currentCalibratedChallenges];
   return Object.values(
     challenges.reduce((acc, challenge) => {
       const existing = acc[challenge.id];
@@ -171,4 +182,4 @@ const deduplicate = (challenges) => {
   );
 };
 
-export { deduplicate, getNextChallenge };
+export { candidateCertificationReferential, getNextChallenge };
