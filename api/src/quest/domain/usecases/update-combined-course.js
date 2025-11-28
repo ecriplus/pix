@@ -15,22 +15,29 @@ export async function updateCombinedCourse({
     userId,
     organizationId: combinedCourse.organizationId,
   });
-  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+
+  const combinedCourseDetailsBeforeUpdate = await combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
     combinedCourseId: combinedCourse.id,
   });
 
-  const moduleToSynchronizeIds = combinedCourseDetails.items
+  const moduleToSynchronizeIds = combinedCourseDetailsBeforeUpdate.items
     .filter((item) => item.type === COMBINED_COURSE_ITEM_TYPES.MODULE)
     .map((item) => item.id);
 
-  if (!combinedCourseDetails.participation) {
+  if (!combinedCourseDetailsBeforeUpdate.participation) {
     return null;
   }
 
   await organizationLearnerPassageParticipationRepository.synchronize({
-    organizationLearnerId: combinedCourseDetails.participation.organizationLearnerId,
+    organizationLearnerId: combinedCourseDetailsBeforeUpdate.participation.organizationLearnerId,
     moduleIds: moduleToSynchronizeIds,
+  });
+
+  // TODO: remove this when we have a better way to handle this . it makes my hair stand on end
+  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+    organizationLearnerId,
+    combinedCourseId: combinedCourse.id,
   });
 
   const isCombinedCourseCompleted = await combinedCourseDetails.items.every((item) => item.isCompleted);
