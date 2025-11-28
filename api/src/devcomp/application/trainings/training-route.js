@@ -144,7 +144,7 @@ const register = async function (server) {
                   .valid(...lowerCaseSupportedLocales)
                   .required(),
                 'editor-name': Joi.string().required(),
-                'editor-logo-url': Joi.string().uri().required(),
+                'editor-logo-url': Joi.string().regex(editorLogoUrlValidation).required(),
               }),
               type: Joi.string().valid('trainings'),
             }).required(),
