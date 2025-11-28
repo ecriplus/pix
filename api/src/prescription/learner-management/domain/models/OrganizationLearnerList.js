@@ -8,18 +8,14 @@ class OrganizationLearnerList {
   }
 
   getDeletableOrganizationLearners(organizationLearnerIdsToDelete, userId) {
-    const organizationLearnersInOrganization = this.organizationLearners.filter((organizationLearner) => {
-      return organizationLearnerIdsToDelete.includes(organizationLearner.id);
-    });
-
-    if (organizationLearnersInOrganization.length !== organizationLearnerIdsToDelete.length) {
+    if (this.organizationLearners.length !== organizationLearnerIdsToDelete.length) {
       logger.error(
         `User id ${userId} could not delete organization learners because some learner id in (${organizationLearnerIdsToDelete.join(',')}) don't belong to organization id ${this.organizationId}`,
       );
       throw new CouldNotDeleteLearnersError();
     }
 
-    return organizationLearnersInOrganization;
+    return this.organizationLearners;
   }
 }
 
