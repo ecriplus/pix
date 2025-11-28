@@ -191,7 +191,7 @@
                       }
                     },
                     {
-                      "title": "l’IA générative calcule la réponse à apporter.",
+                      "title": "L’IA générative calcule la réponse à apporter.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
@@ -928,7 +928,7 @@
               "element": {
                 "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
                 "type": "text",
-                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><h5>🤔 Et les personnes qui conçoivent l’IA, que peuvent-ils faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
+                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><h5>🤔 Et les personnes qui conçoivent l’IA, que peuvent-elles faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
               }
             }
           ]
@@ -1147,11 +1147,11 @@
               "element": {
                 "id": "6a18255a-eb6c-411f-9989-78fb97cf69e7",
                 "type": "qcu-declarative",
-                "instruction": "<p>Pour utiliser une IA générative de <strong>manière responsable</strong>, quelle bonne résolution pouvez-vous vous adopter&nbsp;?</p>",
+                "instruction": "<p>Pour utiliser une IA générative de <strong>manière responsable</strong>, quelle bonne résolution pouvez-vous adopter&nbsp;?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Me demander si une solution plus simple et moins consommatrice d’énergie peut répondre à mon besoin.</p>",
+                    "content": "<p>Me demander si une solution moins consommatrice d’énergie peut répondre à mon besoin.</p>",
                     "feedback": {
                       "diagnosis": "<p>Excellent réflexe ! C’est une très bonne manière de réduire l’empreinte énergétique de vos usages. Et bonne nouvelle&nbsp;: les autres propositions sont aussi valables pour adopter une utilisation plus responsable.</p>"
                     }
@@ -1165,18 +1165,12 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Regrouper mes requêtes et éviter les essais répétés inutiles.</p>",
+                    "content": "<p>Avoir des demandes précises au logiciel d'IA générative pour éviter des demandes répétées.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
                     }
                   },
-                  {
-                    "id": "4",
-                    "content": "<p>Avoir conscience que chaque requête mobilise des ordinateurs très puissants dans des centres de données.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Parfait ! Prendre conscience de l’impact réel est un premier pas essentiel pour ajuster vos usages. Et vous avez raison&nbsp;: toutes les autres propositions contribuent également à un usage plus responsable.</p>"
-                    }
-                  }
+                  
                 ]
               }
             }
