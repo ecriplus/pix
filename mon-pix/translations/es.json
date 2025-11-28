@@ -1226,7 +1226,7 @@
       "process-custom-passages": {
         "description": "Analizamos tus resultados y creamos tu plan de formación personalizado",
         "list": {
-          "generate-personalise-course": "Generación de tu curso personalizado.",
+          "generate-personalize-course": "Generación de tu curso personalizado.",
           "results-analysis": "Análisis de tus resultados",
           "select-passages": "Selección de cursos de formación adecuados."
         },

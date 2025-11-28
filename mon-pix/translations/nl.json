@@ -1230,7 +1230,7 @@
       "process-custom-passages": {
         "description": "We analyseren uw resultaten en stellen uw gepersonaliseerde trainingsplan op.",
         "list": {
-          "generate-personalise-course": "Uw gepersonaliseerde cursus genereren.",
+          "generate-personalize-course": "Uw gepersonaliseerde cursus genereren.",
           "results-analysis": "Analyse van uw resultaten.",
           "select-passages": "Geschikte trainingen selecteren."
         },

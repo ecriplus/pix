@@ -1230,7 +1230,7 @@
       "process-custom-passages": {
         "description": "We analyse your results and build your personalised training plan.",
         "list": {
-          "generate-personalise-course": "Generating your personalised course.",
+          "generate-personalize-course": "Generating your personalised course.",
           "results-analysis": "Analysis of your results.",
           "select-passages": "Selecting suitable training courses."
         },
