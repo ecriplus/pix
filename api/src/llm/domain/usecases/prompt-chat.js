@@ -38,12 +38,12 @@ export async function promptChat({
     throw new ChatNotFoundError('null id provided');
   }
 
-  try {
-    const locked = await redisMutex.lock(chatId);
-    if (!locked) {
-      throw new PromptAlreadyOngoingError(chatId);
-    }
+  const locked = await redisMutex.lock(chatId);
+  if (!locked) {
+    throw new PromptAlreadyOngoingError(chatId);
+  }
 
+  try {
     const chat = await chatRepository.get(chatId);
     if (!chat) {
       throw new ChatNotFoundError(chatId);

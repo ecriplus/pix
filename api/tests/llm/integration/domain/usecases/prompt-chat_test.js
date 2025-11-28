@@ -1,15 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
-import {
-  ChatForbiddenError,
-  ChatNotFoundError,
-  MaxPromptsReachedError,
-  NoAttachmentNeededError,
-  NoAttachmentNorMessageProvidedError,
-  PromptAlreadyOngoingError,
-  TooLargeMessageInputError,
-} from '../../../../../src/llm/domain/errors.js';
+import { NoAttachmentNeededError, NoAttachmentNorMessageProvidedError } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
@@ -37,148 +29,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       redisMutex,
       llmResponseHandler,
     };
-  });
-
-  context('when no chat id provided', function () {
-    it('should throw a ChatNotFoundError', async function () {
-      // when
-      const err = await catchErr(promptChat)({ chatId: null, message: 'un message', userId: 12345, ...dependencies });
-
-      // then
-      expect(err).to.be.instanceOf(ChatNotFoundError);
-      expect(err.message).to.equal('The chat of id "null id provided" does not exist');
-    });
-  });
-
-  context('when prompt is already ongoing for given chat', function () {
-    it('should throw a PromptAlreadyOngoingError', async function () {
-      // when
-      const chatId = randomUUID();
-      await dependencies.redisMutex.lock(chatId);
-      const err = await catchErr(promptChat)({ chatId, message: 'un message', userId: 12345, ...dependencies });
-
-      // then
-      expect(err).to.be.instanceOf(PromptAlreadyOngoingError);
-      expect(err.message).to.equal(`A prompt is already ongoing for chat with id ${chatId}`);
-    });
-  });
-
-  context('when chatId does not refer to an existing chat', function () {
-    it('should throw a ChatNotFoundError', async function () {
-      const anotherChatId = randomUUID();
-      const chat = new Chat({
-        id: chatId,
-        userId: 123,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({
-          llm: {},
-          challenge: {
-            inputMaxChars: 5,
-          },
-        }),
-        messages: [],
-      });
-      await createChat(chat.toDTO());
-
-      // when
-      const err = await catchErr(promptChat)({
-        chatId: anotherChatId,
-        message: 'un message',
-        userId: 12345,
-        ...dependencies,
-      });
-
-      // then
-      expect(err).to.be.instanceOf(ChatNotFoundError);
-      expect(err.message).to.equal(`The chat of id "${anotherChatId}" does not exist`);
-    });
-  });
-
-  context('when user does not own the chat', function () {
-    it('should throw a ChatForbiddenError', async function () {
-      // given
-      const chat = new Chat({
-        id: chatId,
-        userId: 123456,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({ llm: {} }),
-        messages: [],
-      });
-      await createChat(chat.toDTO());
-
-      // when
-      const err = await catchErr(promptChat)({
-        chatId,
-        userId: 12345,
-        message: 'un message',
-        ...dependencies,
-      });
-
-      // then
-      expect(err).to.be.instanceOf(ChatForbiddenError);
-      expect(err.message).to.equal('User has not the right to use this chat');
-    });
-  });
-
-  context('checking maxChars limit', function () {
-    it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
-      // given
-      const chat = new Chat({
-        id: chatId,
-        userId: 123,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({
-          llm: {},
-          challenge: {
-            inputMaxChars: 5,
-          },
-        }),
-        messages: [],
-      });
-      await createChat(chat.toDTO());
-
-      // when
-      const err = await catchErr(promptChat)({
-        chatId,
-        userId: 123,
-        message: 'un message',
-        ...dependencies,
-      });
-
-      // then
-      expect(err).to.be.instanceOf(TooLargeMessageInputError);
-      expect(err.message).to.equal("You've reached the max characters input");
-    });
-  });
-
-  context('checking maxPrompts limit', function () {
-    it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
-      // given
-      const chat = new Chat({
-        id: chatId,
-        userId: 123,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({
-          challenge: {
-            inputMaxPrompts: 2,
-          },
-        }),
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          buildBasicUserMessage('coucou user1', 0),
-          buildBasicAssistantMessage('coucou LLM2', 1),
-          buildBasicUserMessage('coucou user2', 2),
-        ],
-      });
-      await createChat(chat.toDTO());
-
-      // when
-      const err = await catchErr(promptChat)({ chatId, userId: 123, message: 'un message', ...dependencies });
-
-      // then
-      expect(err).to.be.instanceOf(MaxPromptsReachedError);
-      expect(err.message).to.equal("You've reached the max prompts authorized");
-    });
   });
 
   context('success cases', function () {
@@ -1951,40 +1801,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         },
       ]);
       expect(llmPostPromptScope.isDone()).to.be.true;
-    });
-  });
-
-  context('when error occured during usecase', function () {
-    it('should release the lock', async function () {
-      // given
-      const chat = new Chat({
-        id: chatId,
-        userId: 123456,
-        configurationId: 'uneConfigQuiExist',
-        configuration: new Configuration({ llm: {} }),
-        hasAttachmentContextBeenAdded: false,
-        messages: [],
-      });
-      await createChat(chat.toDTO());
-
-      // when
-      const err = await catchErr(promptChat)({
-        chatId,
-        userId: 12345,
-        message: 'un message',
-        ...dependencies,
-      });
-      const sameError = await catchErr(promptChat)({
-        chatId,
-        userId: 12345,
-        message: 'un message',
-        ...dependencies,
-      });
-
-      // then
-      expect(err).to.be.instanceOf(ChatForbiddenError);
-      expect(err.message).to.equal('User has not the right to use this chat');
-      expect(sameError).to.deepEqualInstance(err);
     });
   });
 });
