@@ -417,11 +417,11 @@
                 "props": {
                   "messages": [
                     {
-                      "direction": "inbound",
+                      "direction": "outbound",
                       "content": "<p>Je veux adopter un animal. J’habite en appartement. Quelles sont les 5 meilleures options ?</p>"
                     },
                     {
-                      "direction": "outbound",
+                      "direction": "inbound",
                       "content": "<p>Voici cinq options d’animaux adaptés à la vie en appartement :</p> <p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p>"
                     }
                   ]
@@ -493,7 +493,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
-                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.📝</li></ul>"
+                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.</li></ul>"
               }
             }
           ]
