@@ -312,42 +312,6 @@
                           "du ?"
                         ]
                       }
-                    },
-                    {
-                      "id": "860fd8e3-4b25-4ffb-b813-a7c8ca794112",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>D’après vous, quel mot va choisir l’IA à cette dernière étape ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>sucre</p>",
-                          "feedback": {
-                            "diagnosis": "<p>En effet, c’est le mot le plus probable.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>miel</p>",
-                          "feedback": {
-                            "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir le mot « sucre », qui est très probable...</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>caramel</p>",
-                          "feedback": {
-                            "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir « sucre », qui est très probable...</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>chocolat</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas sûr...&nbsp;Il choisira sans doute un mot plus probable&nbsp;: sucre, miel ou caramel.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
                     }
                   ]
                 }
