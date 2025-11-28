@@ -26,7 +26,7 @@ module('Integration | Component | complementary-certifications/attach-badges', f
       name: 'Current Profile',
     });
     const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-      id: 12,
+      id: '12',
       name: 'New Target Profile',
     });
     sinon.stub(store, 'query').resolves([attachableTargetProfile]);
@@ -69,7 +69,7 @@ module('Integration | Component | complementary-certifications/attach-badges', f
       name: 'Current Profile',
     });
     const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-      id: 12,
+      id: '12',
       name: 'Target Profile',
       badges: [{ id: 1, label: 'Badge 1' }],
     });

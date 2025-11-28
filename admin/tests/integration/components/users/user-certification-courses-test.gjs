@@ -48,7 +48,7 @@ module('Integration | Component | Users | User certification courses', function 
     test('displays a table with a table of certification courses', async function (assert) {
       // given
       const certificationCourse = store.createRecord('user-certification-course', {
-        id: 1,
+        id: '1',
         sessionId: 23,
         createdAt: new Date('2025-04-01'),
         isPublished: true,

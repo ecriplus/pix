@@ -11,8 +11,8 @@ module('Integration | Component | complementary-certifications/list', function (
     // given
     const store = this.owner.lookup('service:store');
     const complementaryCertifications = [
-      store.createRecord('complementary-certification', { id: 0, key: 'DROIT', label: 'Pix+Droit' }),
-      store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' }),
+      store.createRecord('complementary-certification', { id: '0', key: 'DROIT', label: 'Pix+Droit' }),
+      store.createRecord('complementary-certification', { id: '1', key: 'CLEA', label: 'Cléa' }),
     ];
 
     // when
@@ -36,9 +36,9 @@ module('Integration | Component | complementary-certifications/list', function (
     // given
     const store = this.owner.lookup('service:store');
     const complementaryCertifications = [
-      store.createRecord('complementary-certification', { id: 1, label: 'Certif+ B' }),
-      store.createRecord('complementary-certification', { id: 2, label: 'Certif+ C' }),
-      store.createRecord('complementary-certification', { id: 3, label: 'Certif+ A' }),
+      store.createRecord('complementary-certification', { id: '1', label: 'Certif+ B' }),
+      store.createRecord('complementary-certification', { id: '2', label: 'Certif+ C' }),
+      store.createRecord('complementary-certification', { id: '3', label: 'Certif+ A' }),
     ];
 
     // when

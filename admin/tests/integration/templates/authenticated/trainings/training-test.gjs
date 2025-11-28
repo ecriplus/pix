@@ -18,7 +18,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
     this.owner.lookup('service:router');
     store = this.owner.lookup('service:store');
     model = store.createRecord('training', {
-      id: 12,
+      id: '12',
       title: 'title',
       internalTitle: 'internalTitle',
       link: 'my-training-link',
@@ -83,14 +83,14 @@ module('Integration | Component | Trainings | Training', function (hooks) {
   module('when trigger is defined', function (hooks) {
     hooks.beforeEach(function () {
       store.createRecord('training-trigger', {
-        id: 6,
+        id: '6',
         type: 'goal',
         threshold: '80',
         areas: [],
         training: model,
       });
       store.createRecord('training-trigger', {
-        id: 7,
+        id: '7',
         type: 'prerequisite',
         threshold: '80',
         areas: [],

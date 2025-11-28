@@ -191,7 +191,7 @@ module('Integration | Component | Certifications | Certification | Information |
       hooks.beforeEach(async function () {
         // given
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           userId: 1,
           status: assessmentResultStatus.VALIDATED,
           isPublished: false,
@@ -292,7 +292,7 @@ module('Integration | Component | Certifications | Certification | Information |
       hooks.beforeEach(async function () {
         // given
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           userId: 1,
           status: assessmentResultStatus.CANCELLED,
           isPublished: false,
@@ -531,7 +531,7 @@ module('Integration | Component | Certifications | Certification | Information |
       hooks.beforeEach(async function () {
         // given
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           userId: 1,
           status: assessmentResultStatus.VALIDATED,
           isPublished: false,
@@ -632,7 +632,7 @@ module('Integration | Component | Certifications | Certification | Information |
       hooks.beforeEach(async function () {
         // given
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           userId: 1,
           status: assessmentResultStatus.REJECTED,
           isRejectedForFraud: true,
@@ -872,7 +872,7 @@ module('Integration | Component | Certifications | Certification | Information |
 
         // given
         const certification = store.createRecord('certification', {
-          id: 123,
+          id: '123',
           userId: 1,
           status: assessmentResultStatus.VALIDATED,
           isPublished: false,
@@ -912,7 +912,7 @@ module('Integration | Component | Certifications | Certification | Information |
 
         // given
         const certification = store.createRecord('certification', {
-          id: 123,
+          id: '123',
           userId: 1,
           status: assessmentResultStatus.VALIDATED,
           isPublished: false,

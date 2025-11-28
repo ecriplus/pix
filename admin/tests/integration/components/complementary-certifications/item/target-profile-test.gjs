@@ -16,7 +16,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
-        id: 10,
+        id: '10',
         key: 'CLEA',
         label: 'CléA Numérique',
         hasComplementaryReferential: false,
@@ -24,10 +24,10 @@ module('Integration | Component | complementary-certifications/item/target-profi
           {
             detachedAt: null,
             name: 'ALEX TARGET',
-            id: 3,
+            id: '3',
             badges: [
-              { id: 1023, label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
-              { id: 1025, label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1023', label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1025', label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
             ],
           },
         ],
@@ -69,7 +69,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
-        id: 10,
+        id: '10',
         key: 'DROIT',
         label: 'Pix+Droit',
         hasComplementaryReferential: true,
@@ -77,10 +77,10 @@ module('Integration | Component | complementary-certifications/item/target-profi
           {
             detachedAt: null,
             name: 'ALEX TARGET',
-            id: 3,
+            id: '3',
             badges: [
-              { id: 1023, label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
-              { id: 1025, label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1023', label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1025', label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
             ],
           },
         ],

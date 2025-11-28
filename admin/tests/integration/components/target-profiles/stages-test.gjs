@@ -83,7 +83,7 @@ module('Integration | Component | Stages', function (hooks) {
     test('it should NOT display stage type radio buttons', async function (assert) {
       // given
       const stage = store.createRecord('stage', {
-        id: 1,
+        id: '1',
         level: 0,
         title: 'stage 1',
       });
@@ -107,7 +107,7 @@ module('Integration | Component | Stages', function (hooks) {
     test('it should display delete button on a stage', async function (assert) {
       // given
       const stage = store.createRecord('stage', {
-        id: 1,
+        id: '1',
         level: 1,
       });
       const stageCollection = store.createRecord('stage-collection', {
@@ -130,7 +130,7 @@ module('Integration | Component | Stages', function (hooks) {
     test('it should display modal when deleting a stage', async function (assert) {
       // given
       const stage = store.createRecord('stage', {
-        id: 1,
+        id: '1',
         level: 1,
       });
       const stageCollection = store.createRecord('stage-collection', {
@@ -212,7 +212,7 @@ module('Integration | Component | Stages', function (hooks) {
     test('it should display the items', async function (assert) {
       // given
       const stage = store.createRecord('stage', {
-        id: 1,
+        id: '1',
         threshold: 100,
         level: null,
         title: 'My title',
@@ -254,7 +254,7 @@ module('Integration | Component | Stages', function (hooks) {
     test('it should display the items', async function (assert) {
       // given
       const stage = store.createRecord('stage', {
-        id: 1,
+        id: '1',
         level: 0,
         threshold: null,
         title: 'My title',
@@ -325,7 +325,7 @@ module('Integration | Component | Stages', function (hooks) {
       hooks.beforeEach(async function () {
         // given
         const stage = store.createRecord('stage', {
-          id: 1,
+          id: '1',
           threshold: 50,
           level: null,
           title: 'My title',

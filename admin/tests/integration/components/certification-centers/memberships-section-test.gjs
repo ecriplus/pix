@@ -28,13 +28,13 @@ module('Integration | Component | certification-centers/memberships-section', fu
       email: 'froufrou@example.net',
     });
     const certificationCenterMembership1 = store.createRecord('certification-center-membership', {
-      id: 1,
+      id: '1',
       user: user1,
       role: 'ADMIN',
       createdAt: new Date('2018-02-15T05:06:07Z'),
     });
     const certificationCenterMembership2 = store.createRecord('certification-center-membership', {
-      id: 2,
+      id: '2',
       user: user2,
       role: 'MEMBER',
       createdAt: new Date('2018-02-15T05:06:07Z'),

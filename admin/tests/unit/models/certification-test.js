@@ -49,7 +49,7 @@ module('Unit | Model | certification', function (hooks) {
       const certification = store.createRecord('certification', {
         competencesWithMark: [
           {
-            id: 1,
+            id: '1',
             area_code: '1',
             competence_code: '1.1',
             competenceId: 'rec11',
@@ -58,7 +58,7 @@ module('Unit | Model | certification', function (hooks) {
             assessmentResultId: 123,
           },
           {
-            id: 2,
+            id: '2',
             area_code: '2',
             competence_code: '2.1',
             competenceId: 'rec21',
@@ -94,7 +94,7 @@ module('Unit | Model | certification', function (hooks) {
       const certification = store.createRecord('certification', {
         competencesWithMark: [
           {
-            id: 1,
+            id: '1',
             area_code: '1',
             competence_code: '1.1',
             competenceId: 'rec11',
@@ -103,7 +103,7 @@ module('Unit | Model | certification', function (hooks) {
             assessmentResultId: 123,
           },
           {
-            id: 2,
+            id: '2',
             area_code: '2',
             competence_code: '2.1',
             competenceId: 'rec21',

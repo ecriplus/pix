@@ -15,11 +15,11 @@ module('Integration | Component | certification-centers/information-view', funct
     // given
     const store = this.owner.lookup('service:store');
     const pixDroitHabilitation = store.createRecord('complementary-certification', {
-      id: 0,
+      id: '0',
       key: 'DROIT',
       label: 'Pix+Droit',
     });
-    const cleaHabilitation = store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' });
+    const cleaHabilitation = store.createRecord('complementary-certification', { id: '1', key: 'CLEA', label: 'Cléa' });
     const availableHabilitations = [pixDroitHabilitation, cleaHabilitation];
 
     const certificationCenter = store.createRecord('certification-center', {

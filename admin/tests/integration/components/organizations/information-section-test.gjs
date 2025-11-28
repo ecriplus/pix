@@ -111,7 +111,7 @@ module('Integration | Component | organizations/information-section', function (
         //given
         const store = this.owner.lookup('service:store');
         const parentOrganization = store.createRecord('organization', {
-          id: 5,
+          id: '5',
           type: 'SCO',
         });
         const organization = store.createRecord('organization', {

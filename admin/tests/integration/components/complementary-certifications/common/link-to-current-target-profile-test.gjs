@@ -13,7 +13,7 @@ module(
       const store = this.owner.lookup('service:store');
       const currentTargetProfile = store.createRecord('target-profile', {
         name: 'ALEX TARGET',
-        id: 1,
+        id: '1',
       });
 
       // when

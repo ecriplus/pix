@@ -24,7 +24,7 @@ module('Integration | Component | organizations/children/actions-section', funct
     test('it should display create child organization button', async function (assert) {
       // given
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         name: 'Orga 1',
       });
 
@@ -45,7 +45,7 @@ module('Integration | Component | organizations/children/actions-section', funct
     test('it should not display create child organization button if organization is already a child', async function (assert) {
       // given
       const childOrganization = store.createRecord('organization', {
-        id: 2,
+        id: '2',
         name: 'Orga 2',
         parentOrganizationId: '1234',
       });
@@ -77,7 +77,7 @@ module('Integration | Component | organizations/children/actions-section', funct
       this.owner.register('service:access-control', AccessControlStub);
 
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         name: 'Orga 1',
       });
 
@@ -102,7 +102,7 @@ module('Integration | Component | organizations/children/actions-section', funct
         this.owner.register('service:access-control', AccessControlStub);
 
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           name: 'Orga 1',
         });
 

@@ -18,7 +18,7 @@ module('Integration | Component | badges/badge', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const badge = store.createRecord('badge', {
-      id: 42,
+      id: '42',
       title: 'mon titre',
       message: 'mon message',
       imageUrl: 'data:,',
@@ -29,7 +29,7 @@ module('Integration | Component | badges/badge', function (hooks) {
       criteria: [],
     });
     const targetProfile = store.createRecord('target-profile', {
-      id: 1,
+      id: '1',
       internalName: 'Profil cible',
     });
 
@@ -51,24 +51,24 @@ module('Integration | Component | badges/badge', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const targetProfile = store.createRecord('target-profile', {
-      id: 1,
+      id: '1',
       internalName: 'Profil cible',
       areas: [],
     });
     const criterionCampaignParticipation = store.createRecord('badge-criterion', {
-      id: 123,
+      id: '123',
       threshold: 25,
       scope: 'CampaignParticipation',
       cappedTubes: [],
     });
     const criterionCappedTubes = store.createRecord('badge-criterion', {
-      id: 456,
+      id: '456',
       threshold: 95,
       scope: 'CappedTubes',
       cappedTubes: [],
     });
     const badge = store.createRecord('badge', {
-      id: 42,
+      id: '42',
       title: 'mon titre',
       message: 'mon message',
       imageUrl: 'data:,',
@@ -96,13 +96,13 @@ module('Integration | Component | badges/badge', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const targetProfile = store.createRecord('target-profile', {
-      id: 1,
+      id: '1',
       internalName: 'Profil cible',
       areas: [],
     });
 
     const badge = store.createRecord('badge', {
-      id: 42,
+      id: '42',
       title: 'mon titre',
       message: 'mon message',
       imageUrl: 'data:,',

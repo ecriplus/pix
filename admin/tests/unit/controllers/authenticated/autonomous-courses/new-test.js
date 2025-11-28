@@ -41,7 +41,7 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
     test('it should save autonomous course and redirect to autonomous course details', async function (assert) {
       // given
       const autonomousCourse = {
-        id: 2,
+        id: '2',
         internalTitle: 'un nom interne',
         publicTitle: 'un nom public',
         targetProfileId: 32,

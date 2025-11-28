@@ -127,7 +127,7 @@ module('Unit | Model | v3-certification-course-details-for-administration', func
 function createChallengesForAdministration(answerStatuses, store) {
   return answerStatuses.map((answerStatus, index) =>
     store.createRecord('certification-challenges-for-administration', {
-      id: index,
+      id: String(index),
       answerStatus,
       validatedLiveAlert: !answerStatus,
     }),

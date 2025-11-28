@@ -15,7 +15,7 @@ module('Integration | Component | complementary-certifications/attach-badges/bad
       store.queryRecord = sinon.stub().returns(new Promise(() => {}));
       const attachableTargetProfile = store.createRecord('attachable-target-profile', {
         name: 'ALEX TARGET',
-        id: 1,
+        id: '1',
       });
       const noop = () => {};
 
@@ -43,7 +43,7 @@ module('Integration | Component | complementary-certifications/attach-badges/bad
 
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
           name: 'ALEX TARGET',
-          id: 1,
+          id: '1',
         });
         const noop = () => {};
 
@@ -72,7 +72,7 @@ module('Integration | Component | complementary-certifications/attach-badges/bad
           hasMany: sinon.stub().returns({
             value: sinon.stub().returns([
               {
-                id: 1000,
+                id: '1000',
                 title: 'canards',
                 isCertifiable: true,
               },
@@ -81,7 +81,7 @@ module('Integration | Component | complementary-certifications/attach-badges/bad
         });
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
           name: 'ALEX TARGET',
-          id: 1,
+          id: '1',
         });
         const noop = () => {};
 

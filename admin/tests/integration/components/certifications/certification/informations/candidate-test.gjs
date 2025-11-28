@@ -89,7 +89,7 @@ module('Integration | Component | Certifications | Certification | Information |
       this.owner.register('service:pixToast', NotificationsStub);
 
       const certification = store.createRecord('certification', {
-        id: 1,
+        id: '1',
         firstName: 'Jane',
         lastName: 'Doe',
         birthdate: new Date(),

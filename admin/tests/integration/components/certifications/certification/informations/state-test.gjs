@@ -20,7 +20,7 @@ module('Integration | Component | Certifications | Certification | Information |
       status: 'rejected',
       isPublished: false,
     });
-    const session = store.createRecord('session', { id: 7404 });
+    const session = store.createRecord('session', { id: '7404' });
 
     // when
     const screen = await render(
@@ -59,7 +59,7 @@ module('Integration | Component | Certifications | Certification | Information |
       const certification = store.createRecord('certification', {
         isPublished: true,
       });
-      const session = store.createRecord('session', { id: 7404 });
+      const session = store.createRecord('session', { id: '7404' });
 
       // when
       const screen = await render(
@@ -81,7 +81,7 @@ module('Integration | Component | Certifications | Certification | Information |
         isPublished: false,
         status: assessmentResultStatus.CANCELLED,
       });
-      const session = store.createRecord('session', { id: 7404 });
+      const session = store.createRecord('session', { id: '7404' });
 
       // when
       const screen = await render(

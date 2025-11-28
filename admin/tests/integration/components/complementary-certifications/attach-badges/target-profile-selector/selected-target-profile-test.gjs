@@ -14,7 +14,7 @@ module('Integration | Component | selected-target-profile', function (hooks) {
     const store = this.owner.lookup('service:store');
     const attachableTargetProfile = store.createRecord('attachable-target-profile', {
       name: 'ALEX TARGET',
-      id: 1,
+      id: '1',
     });
 
     // when

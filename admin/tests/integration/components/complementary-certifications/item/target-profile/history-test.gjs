@@ -12,9 +12,9 @@ module('Integration | Component | complementary-certifications/item/target-profi
     const store = this.owner.lookup('service:store');
     const complementaryCertification = store.createRecord('complementary-certification', {
       targetProfilesHistory: [
-        { id: 1023, name: 'Target Cascade', attachedAt: new Date('2023-10-10T10:50:00Z'), detachedAt: null },
+        { id: '1023', name: 'Target Cascade', attachedAt: new Date('2023-10-10T10:50:00Z'), detachedAt: null },
         {
-          id: 1025,
+          id: '1025',
           name: 'Target Volcan',
           attachedAt: new Date('2019-10-08T10:50:00Z'),
           detachedAt: new Date('2020-10-08T10:50:00Z'),

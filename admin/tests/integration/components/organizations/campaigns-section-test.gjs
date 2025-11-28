@@ -29,7 +29,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
     test('it should display campaign columns', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
-        id: 1,
+        id: '1',
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
         type: 'ASSESSMENT',
@@ -60,7 +60,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
 
     test('it should display a list of campaigns', async function (assert) {
       const campaign1 = store.createRecord('campaign', {
-        id: 1,
+        id: '1',
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
         type: 'ASSESSMENT',
@@ -72,7 +72,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         targetProfileName: 'Nom du profil cible',
       });
       const campaign2 = store.createRecord('campaign', {
-        id: 2,
+        id: '2',
         name: 'Nom de campagne 2',
         archivedAt: new Date('2021-01-03'),
         type: 'PROFILES_COLLECTION',
@@ -95,7 +95,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
 
     test('it should display information of each campaigns', async function (assert) {
       const campaign1 = store.createRecord('campaign', {
-        id: 1,
+        id: '1',
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
         deletedAt: new Date('2023-12-31'),
@@ -110,7 +110,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         targetProfileName: 'Nom du profil cible',
       });
       const campaign2 = store.createRecord('campaign', {
-        id: 2,
+        id: '2',
         name: 'Nom de campagne 2',
         archivedAt: new Date('2021-01-03'),
         type: 'PROFILES_COLLECTION',
@@ -154,7 +154,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
     test('it should display - when there is no archivedAt date', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
-        id: 1,
+        id: '1',
         name: 'Nom de campagne 1',
         archivedAt: null,
         deletedAt: new Date('2021-01-02'),
@@ -177,7 +177,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
     test('it should display - when there is no deletedAt date', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
-        id: 1,
+        id: '1',
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-02'),
         deletedAt: null,
