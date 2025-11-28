@@ -10,6 +10,7 @@ describe('Unit | Organizational Entities | Domain | DTO | OrganizationBatchUpdat
         name: 'Mon Orga',
         dataProtectionOfficerEmail: 'adam.troisjour@example.net',
         administrationTeamId: '1234',
+        countryCode: '99100',
       };
 
       // when
@@ -29,6 +30,7 @@ describe('Unit | Organizational Entities | Domain | DTO | OrganizationBatchUpdat
         dataProtectionOfficerFirstName: '',
         dataProtectionOfficerEmail: 'adam.troisjour@example.net',
         administrationTeamId: '1234',
+        countryCode: '99100',
       });
     });
   });

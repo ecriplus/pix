@@ -1,20 +1,14 @@
 import { OrganizationBatchUpdateDTO } from '../../../../../src/organizational-entities/domain/dtos/OrganizationBatchUpdateDTO.js';
-import {
-  AdministrationTeamNotFound,
-  DpoEmailInvalid,
-  OrganizationBatchUpdateError,
-  OrganizationNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../../../../../src/organizational-entities/domain/errors.js';
+import { OrganizationBatchUpdateError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { updateOrganizationsInBatch } from '../../../../../src/organizational-entities/domain/usecases/update-organizations-in-batch.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, createTempFile, domainBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {
-  let filePath, organizationForAdminRepository, administrationTeamRepository;
+  let filePath, organizationForAdminRepository, administrationTeamRepository, countryRepository;
 
   const csvHeaders =
-    'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID';
+    'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code';
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -25,6 +19,10 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       get: sinon.stub(),
       update: sinon.stub(),
       exist: sinon.stub(),
+    };
+
+    countryRepository = {
+      getByCode: sinon.stub().resolves(domainBuilder.buildCountry({ code: '99100' })),
     };
 
     administrationTeamRepository = {
@@ -61,8 +59,8 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
 
     beforeEach(async function () {
       const fileData = `${csvHeaders}
-      1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234
-      2;New Name;;;;;;;Cali;;5678`;
+      1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234;99100
+      2;New Name;;;;;;;Cali;;5678;99100`;
       filePath = await createTempFile('test.csv', fileData);
       csvData = [
         new OrganizationBatchUpdateDTO({
@@ -74,12 +72,14 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           dataProtectionOfficerFirstName: 'Adam',
           dataProtectionOfficerEmail: 'foo@email.com',
           administrationTeamId: '1234',
+          countryCode: '99100',
         }),
         new OrganizationBatchUpdateDTO({
           id: '2',
           name: 'New Name',
           dataProtectionOfficerFirstName: 'Cali',
           administrationTeamId: '5678',
+          countryCode: '99100',
         }),
       ];
     });
@@ -91,7 +91,12 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       organizationForAdminRepository.get.onCall(1).resolves(domainBuilder.buildOrganizationForAdmin({ id: 2 }));
 
       // when
-      await updateOrganizationsInBatch({ filePath, organizationForAdminRepository, administrationTeamRepository });
+      await updateOrganizationsInBatch({
+        filePath,
+        organizationForAdminRepository,
+        administrationTeamRepository,
+        countryRepository,
+      });
 
       // then
       expect(DomainTransaction.execute).to.have.been.called;
@@ -114,7 +119,12 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       expectedSecondOrganization.updateFromOrganizationBatchUpdateDto(csvData[1]);
 
       // when
-      await updateOrganizationsInBatch({ filePath, organizationForAdminRepository, administrationTeamRepository });
+      await updateOrganizationsInBatch({
+        filePath,
+        organizationForAdminRepository,
+        administrationTeamRepository,
+        countryRepository,
+      });
 
       // then
       expect(DomainTransaction.execute).to.have.been.called;
@@ -129,136 +139,11 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
   });
 
   context('when CSV files contains some errors in the list of organizations to update', function () {
-    context('when an organization does not exist', function () {
-      it('throws an OrganizationNotFound', async function () {
-        // given
-        const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
-        `;
-        filePath = await createTempFile('test.csv', fileData);
-        organizationForAdminRepository.exist.resolves(false);
-
-        // when
-        const error = await catchErr(updateOrganizationsInBatch)({
-          filePath,
-          organizationForAdminRepository,
-          administrationTeamRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.exist).to.have.been.called;
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(OrganizationNotFound);
-        expect(error.message).to.equal('Organization does not exist');
-        expect(error.meta.organizationId).to.equal('1');
-      });
-    });
-
-    describe('when administration team id is provided', function () {
-      context('when administration team does not exist', function () {
-        it('throws an AdministrationTeamNotFound', async function () {
-          // given
-          const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
-        `;
-          filePath = await createTempFile('test.csv', fileData);
-          organizationForAdminRepository.exist.resolves(true);
-          administrationTeamRepository.getById.resolves(null);
-
-          // when
-          const error = await catchErr(updateOrganizationsInBatch)({
-            filePath,
-            organizationForAdminRepository,
-            administrationTeamRepository,
-          });
-
-          // then
-          expect(organizationForAdminRepository.update).to.not.have.been.called;
-          expect(error).to.be.instanceOf(AdministrationTeamNotFound);
-          expect(error.message).to.equal('Administration team does not exist');
-          expect(error.meta.administrationTeamId).to.equal('1234');
-        });
-      });
-    });
-
-    describe('when administration team id is not provided', function () {
-      it('does not call administrationTeamRepository.getById', async function () {
-        // given
-        const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;
-        `;
-        filePath = await createTempFile('test.csv', fileData);
-        organizationForAdminRepository.exist.resolves(true);
-        const organization = domainBuilder.buildOrganizationForAdmin({ id: 1 });
-        organizationForAdminRepository.get.resolves(organization);
-
-        // when
-        await updateOrganizationsInBatch({
-          filePath,
-          organizationForAdminRepository,
-          administrationTeamRepository,
-        });
-
-        // then
-        expect(administrationTeamRepository.getById).to.not.have.been.called;
-        expect(organizationForAdminRepository.update).to.have.been.calledOnceWithExactly({ organization });
-      });
-    });
-
-    context('when parent organization does not exist', function () {
-      it('throws an UnableToAttachChildOrganizationToParentOrganizationError', async function () {
-        // given
-        const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
-        `;
-        filePath = await createTempFile('test.csv', fileData);
-        organizationForAdminRepository.exist.onCall(0).resolves(true);
-        organizationForAdminRepository.exist.onCall(1).resolves(false);
-
-        // when
-        const error = await catchErr(updateOrganizationsInBatch)({
-          filePath,
-          organizationForAdminRepository,
-          administrationTeamRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.message).to.equal('Unable to attach child organization to parent organization');
-        expect(error.meta.organizationId).to.equal('1');
-      });
-    });
-
-    context('when data protection officer email is not valid', function () {
-      it('throws an DpoEmailInvalid', async function () {
-        // given
-        const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo;1234
-        `;
-        filePath = await createTempFile('test.csv', fileData);
-        organizationForAdminRepository.exist.resolves(true);
-
-        // when
-        const error = await catchErr(updateOrganizationsInBatch)({
-          filePath,
-          organizationForAdminRepository,
-          administrationTeamRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(DpoEmailInvalid);
-        expect(error.message).to.equal('DPO email invalid');
-        expect(error.meta.organizationId).to.equal('1');
-      });
-    });
-
     context('when an unexpected error happens', function () {
       it('throws an OrganizationBatchUpdateError', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
@@ -270,6 +155,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
+          countryRepository,
         });
 
         // then

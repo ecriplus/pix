@@ -932,6 +932,22 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organizationToUpdate.administrationTeamId).to.equal(administrationTeamId);
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
+
+    it('updates the organization country code', function () {
+      // given
+      const countryCode = 99100;
+      const organizationToUpdate = domainBuilder.buildOrganizationForAdmin({ countryCode: 99500 });
+
+      // when
+      organizationToUpdate.updateFromOrganizationBatchUpdateDto(
+        new OrganizationBatchUpdateDTO({ id: '1', countryCode }),
+      );
+
+      // then
+      const expectedOrganization = domainBuilder.buildOrganizationForAdmin({ countryCode });
+      expect(organizationToUpdate.countryCode).to.equal(countryCode);
+      expect(organizationToUpdate).to.deep.equal(expectedOrganization);
+    });
   });
 
   context('#setCountryName', function () {
