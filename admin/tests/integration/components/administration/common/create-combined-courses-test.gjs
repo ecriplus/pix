@@ -49,7 +49,9 @@ module('Integration | Component | administration/create-combined-courses', funct
 
     test('it displays a success notification', async function (assert) {
       // when
-      const screen = await render(<template><CreateCombinedCourses /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><CreateCombinedCourses /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(t('components.administration.create-combined-courses.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -89,7 +91,9 @@ module('Integration | Component | administration/create-combined-courses', funct
         );
 
       // when
-      const screen = await render(<template><CreateCombinedCourses /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><CreateCombinedCourses /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.create-combined-courses.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -111,7 +115,9 @@ module('Integration | Component | administration/create-combined-courses', funct
         })
         .rejects();
       // when
-      const screen = await render(<template><CreateCombinedCourses /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><CreateCombinedCourses /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.create-combined-courses.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 

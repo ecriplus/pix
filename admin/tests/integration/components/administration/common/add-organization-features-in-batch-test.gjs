@@ -49,7 +49,9 @@ module('Integration | Component |  administration/add-organization-features-in-b
 
     test('it displays a success notification', async function (assert) {
       // when
-      const screen = await render(<template><AddOrganizationFeaturesInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><AddOrganizationFeaturesInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(
         t('components.administration.add-organization-features-in-batch.upload-button'),
       );
@@ -87,7 +89,9 @@ module('Integration | Component |  administration/add-organization-features-in-b
         );
 
       // when
-      const screen = await render(<template><AddOrganizationFeaturesInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><AddOrganizationFeaturesInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.add-organization-features-in-batch.upload-button'),
       );
@@ -111,7 +115,9 @@ module('Integration | Component |  administration/add-organization-features-in-b
         })
         .rejects();
       // when
-      const screen = await render(<template><AddOrganizationFeaturesInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><AddOrganizationFeaturesInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.add-organization-features-in-batch.upload-button'),
       );

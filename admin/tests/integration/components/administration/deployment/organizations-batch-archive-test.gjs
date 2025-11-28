@@ -29,7 +29,9 @@ module('Integration | Component | administration/organizations-batch-archive', f
       requestManagerService.request.resolves({ response: { ok: true, status: 204 } });
 
       // when
-      const screen = await render(<template><OrganizationsBatchArchive /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><OrganizationsBatchArchive /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.organizations-batch-archive.upload-button'),
       );
@@ -63,7 +65,9 @@ module('Integration | Component | administration/organizations-batch-archive', f
       });
 
       // when
-      const screen = await render(<template><OrganizationsBatchArchive /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><OrganizationsBatchArchive /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.organizations-batch-archive.upload-button'),
       );

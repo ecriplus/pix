@@ -19,7 +19,9 @@ module('Integration | Component | administration/oidc-providers-import', functio
       const file = new Blob(['foo'], { type: `valid-file` });
 
       // when
-      const screen = await render(<template><OidcProvidersImport /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><OidcProvidersImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.oidc-providers-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -44,7 +46,9 @@ module('Integration | Component | administration/oidc-providers-import', functio
       const file = new Blob(['foo'], { type: `invalid-file` });
 
       // when
-      const screen = await render(<template><OidcProvidersImport /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><OidcProvidersImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.oidc-providers-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 

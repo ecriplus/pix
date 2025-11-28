@@ -30,7 +30,9 @@ module('Integration | Component | administration/certification-centers-batch-arc
       );
 
       // when
-      const screen = await render(<template><CertificationCentersBatchArchive /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><CertificationCentersBatchArchive /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.certification-centers-batch-archive.upload-button'),
       );
@@ -71,7 +73,9 @@ module('Integration | Component | administration/certification-centers-batch-arc
       );
 
       // when
-      const screen = await render(<template><CertificationCentersBatchArchive /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><CertificationCentersBatchArchive /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.certification-centers-batch-archive.upload-button'),
       );

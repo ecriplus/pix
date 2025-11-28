@@ -49,7 +49,9 @@ module('Integration | Component |  administration/upsert-quests-in-batch', funct
 
     test('it displays a success notification', async function (assert) {
       // when
-      const screen = await render(<template><UpsertQuestsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpsertQuestsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(t('components.administration.upsert-quests-in-batch.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -89,7 +91,9 @@ module('Integration | Component |  administration/upsert-quests-in-batch', funct
         );
 
       // when
-      const screen = await render(<template><UpsertQuestsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpsertQuestsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.upsert-quests-in-batch.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -121,7 +125,9 @@ module('Integration | Component |  administration/upsert-quests-in-batch', funct
         })
         .rejects();
       // when
-      const screen = await render(<template><UpsertQuestsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpsertQuestsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(t('components.administration.upsert-quests-in-batch.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
