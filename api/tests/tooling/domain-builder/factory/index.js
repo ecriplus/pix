@@ -191,8 +191,6 @@ import {
 } from './certification/enrolment/build-subscription.js';
 import { buildUserEnrolment } from './certification/enrolment/build-user.js';
 import { buildUserCertificationEligibility } from './certification/enrolment/build-user-certification-eligibility.js';
-import { buildAnsweredChallenge } from './certification/evaluation/build-answered-challenge.js';
-import { buildAnsweredChallengeSkill } from './certification/evaluation/build-answered-challenge-skill.js';
 import { buildCalibratedChallenge } from './certification/evaluation/build-calibrated-challenge.js';
 import { buildCalibratedChallengeSkill } from './certification/evaluation/build-calibrated-challenge-skill.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
@@ -282,8 +280,6 @@ const certification = {
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadgeForEnrolment,
   },
   evaluation: {
-    buildAnsweredChallengeSkill,
-    buildAnsweredChallenge,
     buildCalibratedChallenge,
     buildCalibratedChallengeSkill,
     buildCandidate: buildEvaluationCandidate,
@@ -373,8 +369,6 @@ export {
   buildAdminMember,
   buildAllowedCertificationCenterAccess,
   buildAnswer,
-  buildAnsweredChallenge,
-  buildAnsweredChallengeSkill,
   buildArea,
   buildAssessment,
   buildAssessmentResult,
