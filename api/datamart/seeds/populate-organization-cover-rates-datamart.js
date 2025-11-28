@@ -21,7 +21,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '3.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -37,7 +37,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '4.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 1,
   },
   {
@@ -53,7 +53,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '5.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -69,7 +69,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '2.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 1,
   },
   {
@@ -85,7 +85,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '2.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -101,7 +101,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '1.3',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -117,7 +117,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '1.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 1,
   },
   {
@@ -133,7 +133,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '5.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 1,
   },
   {
@@ -149,7 +149,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '4.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -165,7 +165,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '1.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -181,7 +181,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '3.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -197,7 +197,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '5.2',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 3,
   },
   {
@@ -213,7 +213,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '3.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 2,
   },
   {
@@ -229,7 +229,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '1.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 3,
   },
   {
@@ -245,7 +245,7 @@ const organizationCoverRates = [
     extraction_date: '2025-05-04',
     tag_name: 'PRO',
     competence_code: '2.1',
-    nb_user: 42,
+    passage_count: 42,
     max_level: 3,
   },
 ];

@@ -217,7 +217,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
           extraction_date: '2025-01-01',
           max_level: 5,
           sum_user_max_level: 2,
-          nb_user: 2,
+          passage_count: 2,
           nb_tubes_in_competence: 1,
         });
         datamartBuilder.factory.buildOrganizationsCoverRates({
@@ -231,7 +231,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
           extraction_date: '2025-01-01',
           max_level: 7,
           sum_user_max_level: 6,
-          nb_user: 2,
+          passage_count: 2,
           nb_tubes_in_competence: 1,
         });
         await datamartBuilder.commit();
