@@ -104,7 +104,6 @@
                   },
                   "areas": [
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 660,
                         "y1": 32,
@@ -115,7 +114,6 @@
                       "tooltipPosition": "bottom"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 23,
                         "y1": 105,
@@ -126,7 +124,6 @@
                       "tooltipPosition": "bottom"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 30,
                         "y1": 558,
