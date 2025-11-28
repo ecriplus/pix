@@ -13,6 +13,11 @@ const ChallengeType = Object.freeze({
   QROCM_DEP: 'QROCM-dep',
 });
 
+const Accessibility = Object.freeze({
+  RAS: 'RAS',
+  OK: 'OK',
+});
+
 const Statuses = Object.freeze({
   VALIDATED: 'validé',
   ARCHIVED: 'archivé',
@@ -166,6 +171,13 @@ class Challenge {
     return [Statuses.VALIDATED, Statuses.ARCHIVED].includes(this.status);
   }
 
+  get isAccessible() {
+    return (
+      (this.blindnessCompatibility === Accessibility.OK || this.blindnessCompatibility === Accessibility.RAS) &&
+      (this.colorBlindnessCompatibility === Accessibility.OK || this.colorBlindnessCompatibility === Accessibility.RAS)
+    );
+  }
+
   set successProbabilityThreshold(successProbabilityThreshold) {
     if (this.difficulty == null || this.discriminant == null || successProbabilityThreshold == null) return;
     this.minimumCapability = this.difficulty - Math.log(1 / successProbabilityThreshold - 1) / this.discriminant;
@@ -200,4 +212,4 @@ class Challenge {
 
 Challenge.Type = ChallengeType;
 
-export { Challenge, Statuses, ChallengeType as Type };
+export { Accessibility, Challenge, Statuses, ChallengeType as Type };

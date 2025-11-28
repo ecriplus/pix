@@ -1,5 +1,6 @@
 /**
- * @typedef {import('./index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ * @typedef {import('./index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('./index.js').VersionRepository} VersionRepository
  */
 
@@ -11,7 +12,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 /**
  * @param {Object} params
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
- * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
+ * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {VersionRepository} params.versionRepository
  */
 export async function simulateFlashAssessmentScenario({
@@ -21,10 +22,10 @@ export async function simulateFlashAssessmentScenario({
   initialCapacity,
   variationPercent,
   flashAlgorithmService,
+  sharedChallengeRepository,
   accessibilityAdjustmentNeeded,
   stopAtChallenge,
   versionId,
-  calibratedChallengeRepository,
   versionRepository,
 }) {
   const version = await versionRepository.getById(versionId);
@@ -32,7 +33,7 @@ export async function simulateFlashAssessmentScenario({
   return _simulateCertificationScenario({
     locale,
     accessibilityAdjustmentNeeded,
-    challengeRepository: calibratedChallengeRepository,
+    challengeRepository: sharedChallengeRepository,
     flashAlgorithmService,
     pickChallenge,
     pickAnswerStatus,
@@ -45,7 +46,7 @@ export async function simulateFlashAssessmentScenario({
 
 /**
  * @param {Object} params
- * @param {CalibratedChallengeRepository} params.challengeRepository
+ * @param {SharedChallengeRepository} params.challengeRepository
  */
 async function _simulateCertificationScenario({
   pickChallenge,

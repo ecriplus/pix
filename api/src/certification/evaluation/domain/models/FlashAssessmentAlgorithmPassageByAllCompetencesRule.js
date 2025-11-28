@@ -15,11 +15,11 @@ export class FlashAssessmentAlgorithmPassageByAllCompetencesRule {
 
   static _filterAlreadyAnsweredCompetences({ assessmentAnswers, allChallenges, availableChallenges }) {
     const answeredCompetenceIds = assessmentAnswers.map(
-      ({ challengeId }) => lodash.find(allChallenges, { id: challengeId }).skill.competenceId,
+      ({ challengeId }) => lodash.find(allChallenges, { id: challengeId }).competenceId,
     );
 
     const remainingChallenges = allChallenges.filter(
-      (challenge) => !answeredCompetenceIds.includes(challenge.skill.competenceId),
+      (challenge) => !answeredCompetenceIds.includes(challenge.competenceId),
     );
 
     if (remainingChallenges.length === 0) return availableChallenges;

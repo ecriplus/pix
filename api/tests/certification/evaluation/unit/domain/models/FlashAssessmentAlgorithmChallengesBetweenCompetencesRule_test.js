@@ -31,46 +31,34 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           const competence1Id = 'competence1Id';
           const competence2Id = 'competence2Id';
           const competence3Id = 'competence3Id';
-          const answeredChallengeCompetence1 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const answeredChallengeCompetence1 = domainBuilder.buildSkill({
             id: 'chall1.1',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence1Id,
-            }),
+            competenceId: competence1Id,
           });
 
-          const unansweredChallengeCompetence1 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const unansweredChallengeCompetence1 = domainBuilder.buildSkill({
             id: 'chall1.2',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence1Id,
-            }),
+            competenceId: competence1Id,
           });
 
-          const answeredChallengeCompetence2 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const answeredChallengeCompetence2 = domainBuilder.buildSkill({
             id: 'chall2.1',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence2Id,
-            }),
+            competenceId: competence2Id,
           });
 
-          const unansweredChallengeCompetence2 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const unansweredChallengeCompetence2 = domainBuilder.buildSkill({
             id: 'chall2.2',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence2Id,
-            }),
+            competenceId: competence2Id,
           });
 
-          const answeredChallengeCompetence3 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const answeredChallengeCompetence3 = domainBuilder.buildSkill({
             id: 'chall3.1',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence3Id,
-            }),
+            competenceId: competence3Id,
           });
 
-          const unansweredChallengeCompetence3 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const unansweredChallengeCompetence3 = domainBuilder.buildSkill({
             id: 'chall3.2',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence3Id,
-            }),
+            competenceId: competence3Id,
           });
 
           const allChallenges = [
@@ -112,33 +100,24 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
         it('should return all the previously available challenges', function () {
           const competence1Id = 'competence1Id';
           const competence2Id = 'competence2Id';
-
-          const answeredChallengeCompetence1 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const answeredChallengeCompetence1 = domainBuilder.buildSkill({
             id: 'chall1.1',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence1Id,
-            }),
+            competenceId: competence1Id,
           });
 
-          const unansweredChallengeCompetence1 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const unansweredChallengeCompetence1 = domainBuilder.buildSkill({
             id: 'chall1.2',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence1Id,
-            }),
+            competenceId: competence1Id,
           });
 
-          const answeredChallengeCompetence2 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const answeredChallengeCompetence2 = domainBuilder.buildSkill({
             id: 'chall2.1',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence2Id,
-            }),
+            competenceId: competence2Id,
           });
 
-          const unansweredChallengeCompetence2 = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+          const unansweredChallengeCompetence2 = domainBuilder.buildSkill({
             id: 'chall2.2',
-            skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
-              competenceId: competence2Id,
-            }),
+            competenceId: competence2Id,
           });
 
           const allChallenges = [
