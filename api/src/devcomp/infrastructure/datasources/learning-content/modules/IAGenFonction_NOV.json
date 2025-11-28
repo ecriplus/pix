@@ -442,7 +442,7 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "disableLoop": true,
-                  "imageTextDisplay": ""
+                  "imageTextDisplay": "1:1"
                 }
               }
             },
