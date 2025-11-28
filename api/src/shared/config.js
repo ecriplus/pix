@@ -391,6 +391,13 @@ const configuration = (function () {
       },
     },
     metrics: {
+      prometheus: {
+        prefix: process.env.PROMETHEUS_PREFIX ?? 'pix_api',
+        pushgateway: {
+          pushInterval: ms(process.env.PROMETHEUS_PUSHGATEWAY_PUSH_INTERVAL ?? '15s'),
+          url: process.env.PROMETHEUS_PUSHGATEWAY_URL,
+        },
+      },
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
       isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),

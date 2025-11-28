@@ -5,6 +5,7 @@ import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
+import { startPushingMetrics, stopPushingMetrics } from './src/shared/infrastructure/metrics/pushgateway.js';
 import { quitMutex } from './src/shared/infrastructure/mutex/RedisMutex.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
@@ -28,6 +29,7 @@ const start = async function () {
   await _setupEcosystem();
   server = await createServer();
   await server.start();
+  startPushingMetrics();
 };
 
 async function _exitOnSignal(signal) {
@@ -49,6 +51,8 @@ async function _exitOnSignal(signal) {
   await quitMutex();
   logger.info('Closing connections to redis monitor...');
   await redisMonitor.quit();
+  logger.info('Flushing metrics...');
+  await stopPushingMetrics();
   logger.info('Exiting process...');
 }
 
