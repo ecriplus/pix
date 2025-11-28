@@ -123,7 +123,6 @@
                   },
                   "areas": [
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 10,
                         "y1": 100,
@@ -133,7 +132,6 @@
                       "info": "🔋 Batterie : Stockage d’énergie grâce aux métaux rares lithium et cobalt."
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 100,
                         "y1": 60,
@@ -143,7 +141,6 @@
                       "info": "📱 Écran tactile : Sensibilité et couleurs assurées par l’indium, l’étain et plusieurs terres rares (europium, terbium et yttrium)."
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 190,
                         "y1": 40,
@@ -153,7 +150,6 @@
                       "info": "💻 Boîtier / Structure : Solidité et légèreté obtenues grâce à l’aluminium et au magnésium."
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 280,
                         "y1": 70,
@@ -163,7 +159,6 @@
                       "info": "⚙️ Circuits électroniques : Conduction et résistance assurées par le cuivre, l’argent, l’or, le nickel et l’étain."
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 370,
                         "y1": 50,

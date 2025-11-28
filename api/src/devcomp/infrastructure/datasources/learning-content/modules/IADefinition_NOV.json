@@ -288,7 +288,6 @@
                   },
                   "areas": [
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 390,
                         "y1": 120,
@@ -298,7 +297,6 @@
                       "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 510,
                         "y1": 588,
@@ -308,7 +306,6 @@
                       "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 248,
                         "y1": 398,
@@ -318,7 +315,6 @@
                       "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 828,
                         "y1": 560,
@@ -329,7 +325,6 @@
                       "tooltipPosition": "bottom"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 122,
                         "y1": 796,
@@ -339,7 +334,6 @@
                       "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
                     },
                     {
-                      "shape": "rect",
                       "coords": {
                         "x1": 986,
                         "y1": 148,

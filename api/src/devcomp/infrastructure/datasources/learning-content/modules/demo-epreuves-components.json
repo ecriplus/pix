@@ -103,63 +103,47 @@
                   },
                   "areas": [
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 390,
-                        "y1": 120,
-                        "x2": 842,
-                        "y2": 400
+                      "coords": { "x1": 390, "y1": 120, "x2": 842, "y2": 400 },
+                      "spot": {
+                        "x": 240,
+                        "y": 130
                       },
                       "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
                     },
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 510,
-                        "y1": 588,
-                        "x2": 702,
-                        "y2": 635
-                      },
+                      "coords": { "x1": 510, "y1": 588, "x2": 702, "y2": 635 },
                       "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
                     },
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 248,
-                        "y1": 398,
-                        "x2": 325,
-                        "y2": 492
+                      "coords": { "x1": 248, "y1": 398, "x2": 325, "y2": 492 },
+                      "spot": {
+                        "x": 34,
+                        "y": -24
                       },
                       "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
                     },
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 828,
-                        "y1": 560,
-                        "x2": 1042,
-                        "y2": 725
+                      "coords": { "x1": 828, "y1": 560, "x2": 1042, "y2": 725 },
+                      "spot": {
+                        "x": 34,
+                        "y": -24
                       },
                       "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
                       "tooltipPosition": "bottom"
                     },
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 122,
-                        "y1": 796,
-                        "x2": 318,
-                        "y2": 916
+                      "coords": { "x1": 122, "y1": 796, "x2": 318, "y2": 916 },
+                      "spot": {
+                        "x": 34,
+                        "y": -24
                       },
                       "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
                     },
                     {
-                      "shape": "rect",
-                      "coords": {
-                        "x1": 986,
-                        "y1": 148,
-                        "x2": 1100,
-                        "y2": 230
+                      "coords": { "x1": 986, "y1": 148, "x2": 1100, "y2": 230 },
+                      "spot": {
+                        "x": 34,
+                        "y": -24
                       },
                       "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
                       "tooltipPosition": "bottom"
