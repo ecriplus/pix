@@ -8,10 +8,15 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 module('Integration | Component | confirm-popup', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const confirm = sinon.stub();
+  const cancel = sinon.stub();
+
   test('should display confirm', async function (assert) {
     // given & when
     const display = true;
-    const screen = await render(<template><ConfirmPopup @show={{display}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByRole('heading', { name: 'Merci de confirmer' })).exists();
@@ -23,7 +28,9 @@ module('Integration | Component | confirm-popup', function (hooks) {
     // given & when
     const display = false;
 
-    const screen = await render(<template><ConfirmPopup @show={{display}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.queryByRole('heading', { name: 'Merci de confirmer' })).doesNotExist();
@@ -34,9 +41,8 @@ module('Integration | Component | confirm-popup', function (hooks) {
   test('should call cancel action on click on cancel button', async function (assert) {
     // given
     const display = true;
-    const cancel = sinon.stub();
 
-    await render(<template><ConfirmPopup @show={{display}} @cancel={{cancel}} /></template>);
+    await render(<template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>);
 
     // when
     await clickByName('Annuler');
@@ -48,8 +54,7 @@ module('Integration | Component | confirm-popup', function (hooks) {
   test('should call confirm action on click on confirm button', async function (assert) {
     // given
     const display = true;
-    const confirm = sinon.stub();
-    await render(<template><ConfirmPopup @show={{display}} @confirm={{confirm}} /></template>);
+    await render(<template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>);
 
     // when
     await clickByName('Confirmer');
@@ -63,7 +68,9 @@ module('Integration | Component | confirm-popup', function (hooks) {
     const display = true;
 
     // when
-    const screen = await render(<template><ConfirmPopup @show={{display}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByText('Merci de confirmer')).exists();
@@ -75,7 +82,9 @@ module('Integration | Component | confirm-popup', function (hooks) {
     const title = 'Titre de test';
 
     // when
-    const screen = await render(<template><ConfirmPopup @show={{display}} @title={{title}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @title={{title}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByText(title)).exists();
@@ -84,7 +93,9 @@ module('Integration | Component | confirm-popup', function (hooks) {
   test('should display default closeTitle if it is not defined', async function (assert) {
     // given & when
     const display = true;
-    const screen = await render(<template><ConfirmPopup @show={{display}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
@@ -96,7 +107,11 @@ module('Integration | Component | confirm-popup', function (hooks) {
     const closeTitle = "Titre du bouton d'annulation";
 
     // when
-    const screen = await render(<template><ConfirmPopup @show={{display}} @closeTitle={{closeTitle}} /></template>);
+    const screen = await render(
+      <template>
+        <ConfirmPopup @show={{display}} @closeTitle={{closeTitle}} @confirm={{confirm}} @cancel={{cancel}} />
+      </template>,
+    );
 
     // then
     assert.dom(screen.getByText(closeTitle)).exists();
@@ -105,7 +120,9 @@ module('Integration | Component | confirm-popup', function (hooks) {
   test('should display default submitTitle if it is not defined', async function (assert) {
     // given & when
     const display = true;
-    const screen = await render(<template><ConfirmPopup @show={{display}} /></template>);
+    const screen = await render(
+      <template><ConfirmPopup @show={{display}} @confirm={{confirm}} @cancel={{cancel}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByRole('button', { name: 'Confirmer' })).exists();
@@ -117,7 +134,11 @@ module('Integration | Component | confirm-popup', function (hooks) {
     const submitTitle = 'Titre du bouton dde confirmation';
 
     // when
-    const screen = await render(<template><ConfirmPopup @show={{display}} @submitTitle={{submitTitle}} /></template>);
+    const screen = await render(
+      <template>
+        <ConfirmPopup @show={{display}} @submitTitle={{submitTitle}} @confirm={{confirm}} @cancel={{cancel}} />
+      </template>,
+    );
 
     // then
     assert.dom(screen.getByText(submitTitle)).exists();

@@ -5,11 +5,15 @@ import { t } from 'ember-intl/test-support';
 import InformationSectionView from 'pix-admin/components/organizations/information-section-view';
 import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | organizations/information-section-view', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  const toggleEditMode = sinon.stub();
+  const toggleArchivingConfirmationModal = sinon.stub();
 
   module('when user has access', function (hooks) {
     let originalDashboardUrl;
@@ -53,7 +57,15 @@ module('Integration | Component | organizations/information-section-view', funct
       };
 
       // when
-      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+      const screen = await render(
+        <template>
+          <InformationSectionView
+            @organization={{organization}}
+            @toggleEditMode={{toggleEditMode}}
+            @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+          />
+        </template>,
+      );
 
       // then
       assert
@@ -125,7 +137,15 @@ module('Integration | Component | organizations/information-section-view', funct
       };
 
       // when
-      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+      const screen = await render(
+        <template>
+          <InformationSectionView
+            @organization={{organization}}
+            @toggleEditMode={{toggleEditMode}}
+            @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+          />
+        </template>,
+      );
 
       // then
       assert
@@ -142,7 +162,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -161,7 +189,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -198,7 +234,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -231,7 +275,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -248,7 +300,15 @@ module('Integration | Component | organizations/information-section-view', funct
       const organization = EmberObject.create({ type: 'SUP', name: 'SUPer Orga' });
 
       // when
-      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+      const screen = await render(
+        <template>
+          <InformationSectionView
+            @organization={{organization}}
+            @toggleEditMode={{toggleEditMode}}
+            @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+          />
+        </template>,
+      );
 
       // then
       assert.dom(screen.getByRole('button', { name: t('common.actions.edit') })).exists();
@@ -266,7 +326,15 @@ module('Integration | Component | organizations/information-section-view', funct
       const organization = EmberObject.create({});
 
       // when
-      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+      const screen = await render(
+        <template>
+          <InformationSectionView
+            @organization={{organization}}
+            @toggleEditMode={{toggleEditMode}}
+            @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+          />
+        </template>,
+      );
 
       // then
       assert
@@ -285,7 +353,15 @@ module('Integration | Component | organizations/information-section-view', funct
         const organization = store.createRecord('organization', { archivistFullName: 'Rob Lochon', archivedAt });
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -311,7 +387,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         assert
           .dom(
@@ -331,7 +415,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -356,7 +448,15 @@ module('Integration | Component | organizations/information-section-view', funct
         };
 
         // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+        const screen = await render(
+          <template>
+            <InformationSectionView
+              @organization={{organization}}
+              @toggleEditMode={{toggleEditMode}}
+              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+            />
+          </template>,
+        );
 
         // then
         assert
@@ -381,7 +481,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByLabelText(
@@ -403,7 +511,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
 
             // then
             assert.ok(
@@ -428,7 +544,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByLabelText(
@@ -458,7 +582,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByLabelText(
@@ -482,7 +614,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByText(
@@ -501,7 +641,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByText(
@@ -523,7 +671,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
             // then
             assert.ok(
               screen.getByLabelText(
@@ -546,7 +702,15 @@ module('Integration | Component | organizations/information-section-view', funct
           });
 
           // when
-          const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+          const screen = await render(
+            <template>
+              <InformationSectionView
+                @organization={{organization}}
+                @toggleEditMode={{toggleEditMode}}
+                @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+              />
+            </template>,
+          );
           // then
           assert.ok(
             screen.getByText(
@@ -565,7 +729,15 @@ module('Integration | Component | organizations/information-section-view', funct
           });
 
           // when
-          const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+          const screen = await render(
+            <template>
+              <InformationSectionView
+                @organization={{organization}}
+                @toggleEditMode={{toggleEditMode}}
+                @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+              />
+            </template>,
+          );
 
           // then
           assert.ok(
@@ -590,7 +762,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
 
             // then
             assert.ok(
@@ -615,7 +795,15 @@ module('Integration | Component | organizations/information-section-view', funct
             });
 
             // when
-            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            const screen = await render(
+              <template>
+                <InformationSectionView
+                  @organization={{organization}}
+                  @toggleEditMode={{toggleEditMode}}
+                  @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+                />
+              </template>,
+            );
 
             // then
             assert.ok(
@@ -641,7 +829,15 @@ module('Integration | Component | organizations/information-section-view', funct
       this.owner.register('service:access-control', AccessControlStub);
 
       // when
-      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+      const screen = await render(
+        <template>
+          <InformationSectionView
+            @organization={{organization}}
+            @toggleEditMode={{toggleEditMode}}
+            @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
+          />
+        </template>,
+      );
 
       // then
       assert.dom(screen.queryByRole('button', { name: t('common.actions.edit') })).doesNotExist();

@@ -8,6 +8,11 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component |  certification-centers/membership-item-actions', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const onSaveRoleButtonClicked = sinon.stub();
+  const onModifyRoleButtonClicked = sinon.stub();
+  const onDeactivateMembershipButtonClicked = sinon.stub();
+  const onCancelButtonClicked = sinon.stub();
+
   module('when edition mode is deactivated', function () {
     test('displays 2 buttons, "Modifier le rôle" and "Désactiver"', async function (assert) {
       // given
@@ -15,7 +20,13 @@ module('Integration | Component |  certification-centers/membership-item-actions
 
       //  when
       const screen = await renderScreen(
-        <template><MembershipItemActions @isEditionMode={{isEditionMode}} /></template>,
+        <template>
+          <MembershipItemActions
+            @isEditionMode={{isEditionMode}}
+            @onModifyRoleButtonClicked={{onModifyRoleButtonClicked}}
+            @onDeactivateMembershipButtonClicked={{onDeactivateMembershipButtonClicked}}
+          />
+        </template>,
       );
 
       // then
@@ -26,9 +37,7 @@ module('Integration | Component |  certification-centers/membership-item-actions
     module('when "Modifier le rôle" button is clicked', function () {
       test('emits an event without any data', async function (assert) {
         // given
-        const onModifyRoleButtonClicked = sinon.stub();
         const isEditionMode = false;
-        const onDeactivateMembershipButtonClicked = sinon.stub();
 
         //  when
         await renderScreen(
@@ -51,8 +60,6 @@ module('Integration | Component |  certification-centers/membership-item-actions
     module('when "Désactiver" button is clicked', function () {
       test('emits an event without any data', async function (assert) {
         // given
-        const onDeactivateMembershipButtonClicked = sinon.stub();
-        const onModifyRoleButtonClicked = sinon.stub();
         const isEditionMode = false;
 
         //  when
@@ -81,7 +88,13 @@ module('Integration | Component |  certification-centers/membership-item-actions
 
       //  when
       const screen = await renderScreen(
-        <template><MembershipItemActions @isEditionMode={{isEditionMode}} /></template>,
+        <template>
+          <MembershipItemActions
+            @isEditionMode={{isEditionMode}}
+            @onSaveRoleButtonClicked={{onSaveRoleButtonClicked}}
+            @onCancelButtonClicked={{onCancelButtonClicked}}
+          />
+        </template>,
       );
 
       // then
@@ -94,8 +107,6 @@ module('Integration | Component |  certification-centers/membership-item-actions
     module('when "Enregistrer" button is clicked', function () {
       test('emits an event without any data', async function (assert) {
         // given
-        const onSaveRoleButtonClicked = sinon.stub();
-        const onCancelButtonClicked = sinon.stub();
         const isEditionMode = true;
 
         //  when
@@ -119,8 +130,6 @@ module('Integration | Component |  certification-centers/membership-item-actions
     module('when "Annuler" button is clicked', function () {
       test('emits an event without any data', async function (assert) {
         // given
-        const onCancelButtonClicked = sinon.stub();
-        const onSaveRoleButtonClicked = sinon.stub();
         const isEditionMode = true;
 
         //  when

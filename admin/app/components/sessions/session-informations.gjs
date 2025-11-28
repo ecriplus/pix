@@ -121,15 +121,17 @@ import JuryComment from './jury-comment';
       {{#if @accessControl.hasAccessToCertificationActionsScope}}
         <div class="session-info__actions">
           {{#if @sessionModel.finalizedAt}}
-            {{#if @isCurrentUserAssignedToSession}}
-              <PixButton @size="large" @isDisabled={{true}}>{{t
-                  "pages.sessions.informations.buttons.assigned-to-session"
-                }}</PixButton>
-            {{else}}
-              <PixButton @size="large" @triggerAction={{@checkForAssignment}}>{{t
-                  "pages.sessions.informations.buttons.assign-session"
-                }}</PixButton>
-            {{/if}}
+            <PixButton
+              @size="large"
+              @isDisabled={{@isCurrentUserAssignedToSession}}
+              @triggerAction={{@checkForAssignment}}
+            >
+              {{#if @isCurrentUserAssignedToSession}}
+                {{t "pages.sessions.informations.buttons.assigned-to-session"}}
+              {{else}}
+                {{t "pages.sessions.informations.buttons.assign-session"}}
+              {{/if}}
+            </PixButton>
             {{#if @sessionModel.isPublished}}
               <PixTooltip @position="right" @isWide={{true}}>
                 <:triggerElement>

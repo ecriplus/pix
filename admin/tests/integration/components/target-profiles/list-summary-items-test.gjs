@@ -11,6 +11,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
   setupIntlRenderingTest(hooks);
 
   const triggerFiltering = () => {};
+  const resetFilter = () => {};
 
   test('it should display target profile summary', async function (assert) {
     // given
@@ -30,7 +31,13 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
     // when
     const screen = await render(
       <template>
-        <ListSummaryItems @id={{id}} @summaries={{summaries}} @name={{name}} @triggerFiltering={{triggerFiltering}} />
+        <ListSummaryItems
+          @id={{id}}
+          @summaries={{summaries}}
+          @name={{name}}
+          @triggerFiltering={{triggerFiltering}}
+          @onResetFilter={{resetFilter}}
+        />
       </template>,
     );
 
@@ -59,6 +66,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
             @name={{name}}
             @categories={{categories}}
             @triggerFiltering={{triggerFiltering}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );
@@ -87,6 +95,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
             @name={{name}}
             @categories={{categories}}
             @triggerFiltering={{triggerFiltering}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );
@@ -112,6 +121,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
             @name={{name}}
             @categories={{categories}}
             @triggerFiltering={{triggerFiltering}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );
@@ -143,6 +153,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
             @name={{name}}
             @categories={{categories}}
             @triggerFiltering={{triggerFilteringSpy}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );

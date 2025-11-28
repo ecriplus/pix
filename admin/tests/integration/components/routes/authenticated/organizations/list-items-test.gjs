@@ -14,6 +14,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
   });
 
   const triggerFiltering = function () {};
+  const resetFilter = function () {};
 
   test('it should display header with id, name, type, team and externalId', async function (assert) {
     // given
@@ -29,7 +30,13 @@ module('Integration | Component | routes/authenticated/organizations | list-item
 
     // when
     const screen = await render(
-      <template><ListItems @organizations={{organizations}} @triggerFiltering={{triggerFiltering}} /></template>,
+      <template>
+        <ListItems
+          @organizations={{organizations}}
+          @triggerFiltering={{triggerFiltering}}
+          @onResetFilter={{resetFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -49,7 +56,9 @@ module('Integration | Component | routes/authenticated/organizations | list-item
 
   test('if should display search inputs', async function (assert) {
     // when
-    const screen = await render(<template><ListItems @triggerFiltering={{triggerFiltering}} /></template>);
+    const screen = await render(
+      <template><ListItems @triggerFiltering={{triggerFiltering}} @onResetFilter={{resetFilter}} /></template>,
+    );
 
     // then
     assert.dom(screen.getByRole('spinbutton', { name: 'Identifiant' })).exists();
@@ -72,7 +81,13 @@ module('Integration | Component | routes/authenticated/organizations | list-item
 
     // when
     const screen = await render(
-      <template><ListItems @organizations={{organizations}} @triggerFiltering={{triggerFiltering}} /></template>,
+      <template>
+        <ListItems
+          @organizations={{organizations}}
+          @triggerFiltering={{triggerFiltering}}
+          @onResetFilter={{resetFilter}}
+        />
+      </template>,
     );
 
     // then
