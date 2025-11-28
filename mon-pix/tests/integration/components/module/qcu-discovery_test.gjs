@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/component/element';
 import ModuleQcuDiscovery from 'mon-pix/components/module/element/qcu-discovery';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -10,6 +11,16 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | QCUDiscovery', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  let clock;
+
+  hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers();
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
 
   test('it should display an instruction, a direction and a list of proposals', async function (assert) {
     // given
@@ -44,6 +55,7 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
       const button1 = screen.getByRole('button', { name: proposals[0].content });
       await click(button1);
 
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
       // then
       const button2 = screen.getByRole('button', { name: proposals[1].content });
       const button3 = screen.getByRole('button', { name: proposals[2].content });
@@ -76,6 +88,8 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
       );
       const button1 = screen.getByRole('button', { name: proposals[0].content });
       await click(button1);
+
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
 
       // then
       sinon.assert.calledWithExactly(onAnswerStub, {

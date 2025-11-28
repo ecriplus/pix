@@ -5,6 +5,7 @@ import { t } from 'ember-intl';
 import ProposalButton from 'mon-pix/components/module/component/proposal-button';
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
+import { VERIFY_RESPONSE_DELAY } from '../component/element';
 import ModuleElement from './module-element';
 
 export default class ModuleQcuDeclarative extends ModuleElement {
@@ -30,6 +31,10 @@ export default class ModuleQcuDeclarative extends ModuleElement {
   async onAnswer(event) {
     event.preventDefault();
     this.selectedProposalId = event.submitter.value;
+
+    await this.waitFor(VERIFY_RESPONSE_DELAY);
+    await this.args.onAnswer({ element: this.element });
+
     this.shouldDisplayFeedback = true;
     this.passageEvents.record({
       type: 'QCU_DECLARATIVE_ANSWERED',
@@ -38,12 +43,14 @@ export default class ModuleQcuDeclarative extends ModuleElement {
         answer: this.selectedProposalAnswer,
       },
     });
-
-    await this.args.onAnswer({ element: this.element });
   }
 
   get isAnswered() {
     return this.selectedProposalId !== null;
+  }
+
+  waitFor(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
   <template>
