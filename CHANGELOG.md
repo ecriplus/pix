@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.269.0](https://github.com/1024pix/pix/compare/v5.268.0...v5.269.0) (2025-11-28)
+
+### :rocket: Amélioration
+
+- [#14197](https://github.com/1024pix/pix/pull/14197) IAGenEthique_NOV integration images 
+- [#14265](https://github.com/1024pix/pix/pull/14265) Permettre de sélectionner un pays lors de la création d'orga (PIX-20298) 
+- [#14258](https://github.com/1024pix/pix/pull/14258) Renvoyer le shortId sur les apis internes recommended-modules-api (PIX-20387) 
+
+### :rewind: Retour en arrière
+
+- [#14282](https://github.com/1024pix/pix/pull/14282) Revert "[TECH] Utilisation d'un `CalibratedChallenge` dans la récupération d'un challenge (PIX-17946)."
+
+### :building_construction: Tech
+
+- [#14272](https://github.com/1024pix/pix/pull/14272) Supprimer ember-cli-clipboard de PixAdmin 
+
+### :arrow_up: Montée de version
+
+- [#14219](https://github.com/1024pix/pix/pull/14219) Update adobe/s3mock Docker tag to v4.10.0 (.circleci) 
+- [#14276](https://github.com/1024pix/pix/pull/14276) Update adobe/s3mock Docker tag to v4.10.0 (docker) 
+- [#14280](https://github.com/1024pix/pix/pull/14280) Update adobe/s3mock Docker tag to v4.10.0 (dossier racine) 
+- [#14061](https://github.com/1024pix/pix/pull/14061) Update dependency @1024pix/ember-testing-library to ^3.0.25 (mon-pix) 
+- [#14281](https://github.com/1024pix/pix/pull/14281) Update dependency @1024pix/pix-ui to ^55.32.2 (admin) 
+- [#14283](https://github.com/1024pix/pix/pull/14283) Update dependency @1024pix/pix-ui to ^55.32.2 (certif)
+
 # [5.268.0](https://github.com/1024pix/pix/compare/v5.267.0...v5.268.0) (2025-11-27)
 
 ### :rocket: Amélioration
