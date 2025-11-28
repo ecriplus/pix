@@ -1165,12 +1165,11 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Avoir des demandes précises au logiciel d'IA générative pour éviter des demandes répétées.</p>",
+                    "content": "<p>Avoir des demandes précises au logiciel d’IA générative pour éviter des demandes répétées.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
                     }
-                  },
-                  
+                  }
                 ]
               }
             }
