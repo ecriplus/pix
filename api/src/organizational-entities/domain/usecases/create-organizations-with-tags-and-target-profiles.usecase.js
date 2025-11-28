@@ -14,7 +14,11 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import {
+  AdministrationTeamNotFound,
+  CountryNotFoundError,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 
@@ -36,6 +40,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
   tagRepository,
   targetProfileShareRepository,
   organizationValidator,
+  countryRepository,
 }) {
   if (isEmpty(organizations)) {
     throw new ObjectValidationError('Les organisations ne sont pas renseignées.');
@@ -55,6 +60,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
       administrationTeamRepository,
       organizationForAdminRepository,
       transformedOrganizationsData,
+      countryRepository,
     });
 
     await _addDataProtectionOfficers({
@@ -91,9 +97,10 @@ async function _createOrganizations({
   transformedOrganizationsData,
   administrationTeamRepository,
   organizationForAdminRepository,
+  countryRepository,
 }) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
-    const { administrationTeamId, parentOrganizationId } = organizationToCreate.organization;
+    const { administrationTeamId, parentOrganizationId, countryCode } = organizationToCreate.organization;
     const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
 
     if (!administrationTeam) {
@@ -111,6 +118,8 @@ async function _createOrganizations({
 
       _assertOrganizationIsNotChildOrganization(organization);
     }
+
+    await _checkCountryExists(countryCode, countryRepository);
 
     try {
       const createdOrganization = await organizationForAdminRepository.save({
@@ -291,6 +300,14 @@ async function _addTargetProfiles({ createdOrganizations, targetProfileShareRepo
     }
 
     throw new DomainError(error.message);
+  }
+}
+
+async function _checkCountryExists(countryCode, countryRepository) {
+  try {
+    await countryRepository.getByCode(countryCode);
+  } catch {
+    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
   }
 }
 
