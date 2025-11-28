@@ -121,6 +121,7 @@ const requiredFieldNamesForOrganizationsImport = [
   'DPOEmail',
   'administrationTeamId',
   'parentOrganizationId',
+  'countryCode',
 ];
 
 async function deserializeForOrganizationsImport(file) {
@@ -170,6 +171,9 @@ async function deserializeForOrganizationsImport(file) {
           value = 'fr-fr';
         }
         if (columnName === 'adminstrationTeamId') {
+          value = parseInt(value, 10);
+        }
+        if (columnName === 'countryCode') {
           value = parseInt(value, 10);
         }
       }

@@ -2,6 +2,7 @@ import lodash from 'lodash';
 
 import {
   AdministrationTeamNotFound,
+  CountryNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -31,7 +32,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     ondeImportFormat,
     userId,
     byDefaultFeatureId,
-    administrationTeamId;
+    administrationTeamId,
+    countryCode;
 
   beforeEach(async function () {
     databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
@@ -39,6 +41,10 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     oralizationFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER);
     importStudentsFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
     administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+    countryCode = databaseBuilder.factory.buildCertificationCpfCountry({
+      originalName: 'Lalaland',
+      commonName: 'Lalaland',
+    }).code;
     ondeImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
     });
@@ -82,6 +88,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             targetProfiles: '',
             organizationInvitationRole: '',
             administrationTeamId: '',
+            countryCode: undefined,
           },
         ];
 
@@ -129,6 +136,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             attribute: 'administrationTeamId',
             message: "L'id de l'équipe en charge est manquant",
           },
+          { attribute: 'countryCode', message: 'Le code pays n’est pas renseigné.' },
         ]);
       });
     });
@@ -151,6 +159,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
+            countryCode,
           },
           {
             type: 'PRO',
@@ -166,6 +175,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
+            countryCode,
           },
           {
             type: 'PRO',
@@ -181,6 +191,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
+            countryCode,
           },
         ];
 
@@ -221,6 +232,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
+            countryCode,
           },
           {
             type: 'PRO',
@@ -236,6 +248,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'MEMBER',
             administrationTeamId,
+            countryCode,
           },
           {
             type: 'PRO',
@@ -251,6 +264,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
+            countryCode,
           },
         ];
 
@@ -294,6 +308,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -309,6 +324,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -324,6 +340,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -354,6 +371,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'emailInvitations',
             'targetProfiles',
             'administrationTeamId',
+            'countryCode',
           ),
         );
 
@@ -387,6 +405,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -402,6 +421,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'MEMBER',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -417,6 +437,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -453,6 +474,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -468,6 +490,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'MEMBER',
           administrationTeamId: 9999,
+          countryCode,
         },
       ];
 
@@ -507,6 +530,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -522,6 +546,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'MEMBER',
           administrationTeamId: anotherAdministrationTeamId,
+          countryCode,
         },
       ];
 
@@ -535,6 +560,78 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       expect(organizationsInDB).to.have.lengthOf(2);
       expect(organizationsInDB[0].administrationTeamId).to.equal(administrationTeamId);
       expect(organizationsInDB[1].administrationTeamId).to.equal(anotherAdministrationTeamId);
+    });
+  });
+
+  describe('when one provided country code is not found in database', function () {
+    it('should rollback', async function () {
+      // given
+      const invalidCountryCode = 99998;
+      const organizationsWithNonExistingCountryCode = [
+        {
+          type: 'PRO',
+          externalId: 'b400',
+          name: 'Mathieu Bâtiment',
+          provinceCode: '567',
+          credit: 20,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+          countryCode: invalidCountryCode,
+        },
+      ];
+
+      // when
+      const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
+        organizations: organizationsWithNonExistingCountryCode,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(CountryNotFoundError);
+      expect(error.meta).to.deep.equal({
+        countryCode: invalidCountryCode,
+      });
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(0);
+    });
+  });
+
+  describe('when provided country code is found in database', function () {
+    it('should save the organizations', async function () {
+      // given
+      const organizationsWithExistingCountryCode = [
+        {
+          type: 'PRO',
+          externalId: 'b400',
+          name: 'Mathieu Bâtiment',
+          provinceCode: '567',
+          credit: 20,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+          countryCode,
+        },
+      ];
+
+      // when
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
+        organizations: organizationsWithExistingCountryCode,
+      });
+
+      // then
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(1);
+      expect(organizationsInDB[0].countryCode).to.equal(Number(countryCode));
     });
   });
 
@@ -562,6 +659,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -577,6 +675,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -592,6 +691,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -622,6 +722,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'emailInvitations',
             'targetProfiles',
             'administrationTeamId',
+            'countryCode',
           ),
         );
 
@@ -657,6 +758,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -672,6 +774,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -712,6 +815,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -764,6 +868,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'PRO',
@@ -778,6 +883,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -820,6 +926,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           credit: 10,
           provinceCode: '123',
           administrationTeamId,
+          countryCode,
         },
         {
           type: 'SCO-1D',
@@ -832,6 +939,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           credit: 1230,
           provinceCode: '123',
           administrationTeamId,
+          countryCode,
         },
       ];
 
@@ -867,6 +975,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             administrationTeamId,
             parentOrganizationId,
+            countryCode,
           },
         ];
 
@@ -892,6 +1001,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             administrationTeamId,
             parentOrganizationId: 12345,
+            countryCode,
           },
         ];
 
@@ -923,6 +1033,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             administrationTeamId,
             parentOrganizationId,
+            countryCode,
           },
         ];
 

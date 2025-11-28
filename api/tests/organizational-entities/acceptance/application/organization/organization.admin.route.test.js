@@ -54,15 +54,20 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       databaseBuilder.factory.buildTag({ name: 'GARBURE' });
       databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
       databaseBuilder.factory.buildAdministrationTeam({ id: 1234 });
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: 99100,
+        commonName: 'France',
+        originalName: 'France',
+      });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId }).id;
       await databaseBuilder.commit();
 
       const buffer =
-        'type,externalId,name,provinceCode,credit,createdBy,documentationUrl,identityProviderForCampaigns,isManagingStudents,emailForSCOActivation,DPOFirstName,DPOLastName,DPOEmail,emailInvitations,organizationInvitationRole,locale,tags,targetProfiles,administrationTeamId,parentOrganizationId\n' +
-        `SCO,ANNEGRAELLE,Orga des Anne-Graelle,33700,666,${superAdminUserId},url.com,,true,,Anne,Graelle,anne-graelle@example.net,,ADMIN,fr,GRAS_GARGOUILLE,${targetProfileId},1234,\n` +
-        `PRO,ANNEGARBURE,Orga des Anne-Garbure,33700,999,${superAdminUserId},,,,,Anne,Garbure,anne-garbure@example.net,,ADMIN,fr,GARBURE,${targetProfileId},1234,${parentOrganizationId}`;
+        'type,externalId,name,provinceCode,credit,createdBy,documentationUrl,identityProviderForCampaigns,isManagingStudents,emailForSCOActivation,DPOFirstName,DPOLastName,DPOEmail,emailInvitations,organizationInvitationRole,locale,tags,targetProfiles,administrationTeamId,parentOrganizationId,countryCode\n' +
+        `SCO,ANNEGRAELLE,Orga des Anne-Graelle,33700,666,${superAdminUserId},url.com,,true,,Anne,Graelle,anne-graelle@example.net,,ADMIN,fr,GRAS_GARGOUILLE,${targetProfileId},1234,,99100\n` +
+        `PRO,ANNEGARBURE,Orga des Anne-Garbure,33700,999,${superAdminUserId},,,,,Anne,Garbure,anne-garbure@example.net,,ADMIN,fr,GARBURE,${targetProfileId},1234,${parentOrganizationId},99100`;
 
       // when
       const response = await server.inject({
@@ -90,6 +95,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         identityProviderForCampaigns: null,
         isManagingStudents: true,
         parentOrganizationId: null,
+        countryCode: 99100,
       });
 
       const secondOrganizationCreated = organizations.find((organization) => organization.externalId === 'ANNEGARBURE');
@@ -103,6 +109,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         identityProviderForCampaigns: null,
         isManagingStudents: false,
         parentOrganizationId,
+        countryCode: 99100,
       });
 
       const dataProtectionOfficers = await knex('data-protection-officers');
