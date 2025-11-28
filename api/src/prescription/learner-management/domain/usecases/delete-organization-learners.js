@@ -22,8 +22,9 @@ const deleteOrganizationLearners = withTransaction(async function ({
   }
 
   const organizationLearnersFromOrganization =
-    await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
+    await organizationLearnerRepository.findOrganizationLearnersByOrganizationIdAndLearnerIds({
       organizationId,
+      organizationLearnerIds,
     });
 
   const organizationLearnerList = new OrganizationLearnerList({
