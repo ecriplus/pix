@@ -14,7 +14,7 @@ import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
 import { chatRepository, promptRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
-import * as toEventStream from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
+import { LLMResponseHandler } from '../../../../../src/llm/infrastructure/streaming/llm-response-handler.js';
 import { redisMutex } from '../../../../../src/shared/infrastructure/mutex/RedisMutex.js';
 import {
   catchErr,
@@ -26,15 +26,16 @@ import {
 } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
-  let dependencies, chatId;
+  let dependencies, chatId, llmResponseHandler, resultChunks;
 
   beforeEach(function () {
     chatId = randomUUID();
+    ({ llmResponseHandler, resultChunks } = setupResponseStream());
     dependencies = {
       promptRepository,
       chatRepository,
-      toEventStream,
       redisMutex,
+      llmResponseHandler,
     };
   });
 
@@ -205,7 +206,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
     context('when a prompt is provided', function () {
       context('when no attachmentName is provided', function () {
-        it('should return a stream which will contain the llm response', async function () {
+        it('should write the llm response in the stream and persist the exchange', async function () {
           // given
           const chat = new Chat({
             id: chatId,
@@ -240,22 +241,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             );
 
           // when
-          const stream = await promptChat({
+          await promptChat({
             chatId,
             userId: 123,
             message: 'un message',
             attachmentName: null,
             ...dependencies,
           });
+          await waitForStreamFinalizationToBeDone();
+          const llmResponse = resultChunks.join('');
 
           // then
-          const parts = [];
-          const decoder = new TextDecoder();
-          for await (const chunk of stream) {
-            parts.push(decoder.decode(chunk));
-          }
-          await waitForStreamFinalizationToBeDone();
-          const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
           );
@@ -349,15 +345,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             attachmentName: null,
             ...dependencies,
           });
+          await waitForStreamFinalizationToBeDone();
 
           // then
-          await waitForStreamFinalizationToBeDone();
+          const { llmResponseHandler: secondLlmResponseHandler } = setupResponseStream();
           await promptChat({
             chatId,
             userId: 123,
             message: 'un autre message',
             attachmentName: null,
             ...dependencies,
+            llmResponseHandler: secondLlmResponseHandler,
           });
           await waitForStreamFinalizationToBeDone();
 
@@ -460,7 +458,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when attachmentName is not the expected one for the given configuration', function () {
           context('when the context for the valid attachmentName has already been added', function () {
             it(
-              'should return a stream which will contain the attachment-failure event and the llm response while ' +
+              'should write the attachment-failure event and the llm response in the stream while ' +
                 'persisting the user message with attachment and content but not actually forwarding the attachment to the llm',
               async function () {
                 // given
@@ -524,22 +522,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   );
 
                 // when
-                const stream = await promptChat({
+                await promptChat({
                   chatId,
                   userId: 123,
                   message: 'un message',
                   attachmentName: 'wrong_file.txt',
                   ...dependencies,
                 });
+                await waitForStreamFinalizationToBeDone();
+                const llmResponse = resultChunks.join('');
 
                 // then
-                const parts = [];
-                const decoder = new TextDecoder();
-                for await (const chunk of stream) {
-                  parts.push(decoder.decode(chunk));
-                }
-                await waitForStreamFinalizationToBeDone();
-                const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
@@ -619,7 +612,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
 
           context('when the context for the valid attachmentName has not been added yet', function () {
-            it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist the new message', async function () {
+            it('should only write the attachment-failure event in the stream, it will not forward the prompt to the llm but still persist the new message', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
@@ -632,22 +625,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               await createChat(chat.toDTO());
 
               // when
-              const stream = await promptChat({
+              await promptChat({
                 chatId,
                 userId: 123,
                 message: 'un message',
                 attachmentName: 'wrong_file.txt',
                 ...dependencies,
               });
+              await waitForStreamFinalizationToBeDone();
+              const llmResponse = resultChunks.join('');
 
               // then
-              const parts = [];
-              const decoder = new TextDecoder();
-              for await (const chunk of stream) {
-                parts.push(decoder.decode(chunk));
-              }
-              await waitForStreamFinalizationToBeDone();
-              const llmResponse = parts.join('');
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
 
@@ -698,7 +686,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
-              'should return a stream which will contain the attachment-success event and the llm response while ' +
+              'should write the attachment-success event and the llm response in the stream while ' +
                 "only forwarding the message content to the llm with the history's attachment context and not a new attachment context",
               async function () {
                 // given
@@ -762,22 +750,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   );
 
                 // when
-                const stream = await promptChat({
+                await promptChat({
                   chatId,
                   userId: 123,
                   message: 'un message',
                   attachmentName: 'expected_file.txt',
                   ...dependencies,
                 });
+                await waitForStreamFinalizationToBeDone();
+                const llmResponse = resultChunks.join('');
 
                 // then
-                const parts = [];
-                const decoder = new TextDecoder();
-                for await (const chunk of stream) {
-                  parts.push(decoder.decode(chunk));
-                }
-                await waitForStreamFinalizationToBeDone();
-                const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-success\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
@@ -858,7 +841,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
           context('when the context for this attachmentName has not been added yet', function () {
             it(
-              'should return a stream which will contain the attachment-success event and the llm response while ' +
+              'should write the attachment-success event and the llm response in the stream while ' +
                 'adding the attachment context in the conversation and persisting the message but not the fake exchange',
               async function () {
                 // given
@@ -909,22 +892,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   );
 
                 // when
-                const stream = await promptChat({
+                await promptChat({
                   chatId,
                   userId: 123,
                   message: 'un message',
                   attachmentName: 'expected_file.txt',
                   ...dependencies,
                 });
+                await waitForStreamFinalizationToBeDone();
+                const llmResponse = resultChunks.join('');
 
                 // then
-                const parts = [];
-                const decoder = new TextDecoder();
-                for await (const chunk of stream) {
-                  parts.push(decoder.decode(chunk));
-                }
-                await waitForStreamFinalizationToBeDone();
-                const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-success\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
@@ -1051,7 +1029,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
         context('when attachmentName is not the expected one for the given configuration', function () {
           context('when the context for the valid attachmentName has already been added', function () {
-            it('should return a stream which will contain the attachment-failure event and persist the user message which will not be forwarded the LLM', async function () {
+            it('should only write the attachment-failure event in the stream and persist the user message which will not be forwarded the LLM', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
@@ -1075,21 +1053,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               await createChat(chat.toDTO());
 
               // when
-              const stream = await promptChat({
+              await promptChat({
                 chatId,
                 userId: 123,
                 message: null,
                 attachmentName: 'wrong_file.txt',
                 ...dependencies,
               });
-              // then
-              const parts = [];
-              const decoder = new TextDecoder();
-              for await (const chunk of stream) {
-                parts.push(decoder.decode(chunk));
-              }
               await waitForStreamFinalizationToBeDone();
-              const llmResponse = parts.join('');
+              const llmResponse = resultChunks.join('');
+
+              // then
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
               const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
@@ -1157,7 +1131,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
 
           context('when the context for the valid attachmentName has not been added yet', function () {
-            it('should return a stream which will contain only the attachment-failure event and still persist the new message', async function () {
+            it('should only write the attachment-failure event in the stream but still persist the new message', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
@@ -1170,22 +1144,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               await createChat(chat.toDTO());
 
               // when
-              const stream = await promptChat({
+              await promptChat({
                 chatId,
                 userId: 123,
                 message: null,
                 attachmentName: 'wrong_file.txt',
                 ...dependencies,
               });
+              await waitForStreamFinalizationToBeDone();
+              const llmResponse = resultChunks.join('');
 
               // then
-              const parts = [];
-              const decoder = new TextDecoder();
-              for await (const chunk of stream) {
-                parts.push(decoder.decode(chunk));
-              }
-              await waitForStreamFinalizationToBeDone();
-              const llmResponse = parts.join('');
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
               const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
@@ -1237,7 +1206,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
-              'should return a stream which will only contain the attachment-success event while ' +
+              'should only write the attachment-success event in the stream while ' +
                 'persisting the user message but not forwarding it to the llm ',
               async function () {
                 // given
@@ -1263,22 +1232,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 await createChat(chat.toDTO());
 
                 // when
-                const stream = await promptChat({
+                await promptChat({
                   chatId,
                   userId: 123,
                   message: null,
                   attachmentName: 'expected_file.txt',
                   ...dependencies,
                 });
+                await waitForStreamFinalizationToBeDone();
+                const llmResponse = resultChunks.join('');
 
                 // then
-                const parts = [];
-                const decoder = new TextDecoder();
-                for await (const chunk of stream) {
-                  parts.push(decoder.decode(chunk));
-                }
-                await waitForStreamFinalizationToBeDone();
-                const llmResponse = parts.join('');
                 expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
                 expect(chatDB).to.deep.equal({
@@ -1349,7 +1313,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
           context('when the context for this attachmentName has not been added yet', function () {
             it(
-              'should return a stream which will contain the attachment-success event while ' +
+              'should only write the attachment-success event while ' +
                 'adding the attachment context in the conversation',
               async function () {
                 // given
@@ -1364,22 +1328,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 await createChat(chat.toDTO());
 
                 // when
-                const stream = await promptChat({
+                await promptChat({
                   chatId,
                   userId: 123,
                   message: null,
                   attachmentName: 'expected_file.txt',
                   ...dependencies,
                 });
+                await waitForStreamFinalizationToBeDone();
+                const llmResponse = resultChunks.join('');
 
                 // then
-                const parts = [];
-                const decoder = new TextDecoder();
-                for await (const chunk of stream) {
-                  parts.push(decoder.decode(chunk));
-                }
-                await waitForStreamFinalizationToBeDone();
-                const llmResponse = parts.join('');
                 expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
                 expect(chatDB).to.deep.equal({
@@ -1465,22 +1424,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           );
 
         // when
-        const stream = await promptChat({
+        await promptChat({
           chatId,
           userId: 123,
           message: 'un message',
           attachmentName: null,
           ...dependencies,
         });
+        await waitForStreamFinalizationToBeDone();
+        const llmResponse = resultChunks.join('');
 
         // then
-        const parts = [];
-        const decoder = new TextDecoder();
-        for await (const chunk of stream) {
-          parts.push(decoder.decode(chunk));
-        }
-        await waitForStreamFinalizationToBeDone();
-        const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal(
           "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: victory-conditions-success\ndata: \n\n",
         );
@@ -1568,22 +1522,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           );
 
         // when
-        const stream = await promptChat({
+        await promptChat({
           chatId,
           userId: 123,
           message: 'un message',
           attachmentName: null,
           ...dependencies,
         });
+        await waitForStreamFinalizationToBeDone();
+        const llmResponse = resultChunks.join('');
 
         // then
-        const parts = [];
-        const decoder = new TextDecoder();
-        for await (const chunk of stream) {
-          parts.push(decoder.decode(chunk));
-        }
-        await waitForStreamFinalizationToBeDone();
-        const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal(
           "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: victory-conditions-success\ndata: \n\n",
         );
@@ -1661,22 +1610,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           .reply(201, Readable.from(['21:{"wasModerated":true}']));
 
         // when
-        const stream = await promptChat({
+        await promptChat({
           chatId,
           userId: 123,
           message: "C'est quoi un chat tout terrain ? Un cat-cat !!",
           attachmentName: null,
           ...dependencies,
         });
+        await waitForStreamFinalizationToBeDone();
+        const llmResponse = resultChunks.join('');
 
         // then
-        const parts = [];
-        const decoder = new TextDecoder();
-        for await (const chunk of stream) {
-          parts.push(decoder.decode(chunk));
-        }
-        await waitForStreamFinalizationToBeDone();
-        const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal('event: user-message-moderated\ndata: \n\n');
         const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
         expect(chatDB).to.deep.equal({
@@ -1720,7 +1664,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
     context('debug', function () {
       context('when chat is a preview chat', function () {
-        it('should return a stream which will contain, at the end, information regarding token consumption', async function () {
+        it('should write information regarding token consumption in the stream', async function () {
           // given
           const chat = new Chat({
             id: chatId,
@@ -1754,22 +1698,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             );
 
           // when
-          const stream = await promptChat({
+          await promptChat({
             chatId,
             userId: 123,
             message: 'un message',
             attachmentName: null,
             ...dependencies,
           });
+          await waitForStreamFinalizationToBeDone();
+          const llmResponse = resultChunks.join('');
 
           // then
-          const parts = [];
-          const decoder = new TextDecoder();
-          for await (const chunk of stream) {
-            parts.push(decoder.decode(chunk));
-          }
-          await waitForStreamFinalizationToBeDone();
-          const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: debug-input-tokens\ndata: 3000\n\nevent: debug-output-tokens\ndata: 5000\n\n",
           );
@@ -1821,7 +1760,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
 
       context('when chat is not a preview chat', function () {
-        it('should return a stream which will not contain, at the end, any information regarding token consumption', async function () {
+        it('should not write any information regarding token consumption in the stream', async function () {
           // given
           const chat = new Chat({
             id: chatId,
@@ -1856,22 +1795,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             );
 
           // when
-          const stream = await promptChat({
+          await promptChat({
             chatId,
             userId: 123,
             message: 'un message',
             attachmentName: null,
             ...dependencies,
           });
+          await waitForStreamFinalizationToBeDone();
+          const llmResponse = resultChunks.join('');
 
           // then
-          const parts = [];
-          const decoder = new TextDecoder();
-          for await (const chunk of stream) {
-            parts.push(decoder.decode(chunk));
-          }
-          await waitForStreamFinalizationToBeDone();
-          const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
           );
@@ -1937,7 +1871,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
     });
 
-    it('should return a stream which will contain the partial llm response and the error', async function () {
+    it('should write a stream which will contain the partial llm response and the error, but persist nothing', async function () {
       // given
       const chat = new Chat({
         id: chatId,
@@ -1971,22 +1905,17 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         );
 
       // when
-      const stream = await promptChat({
+      await promptChat({
         chatId,
         userId: 123,
         message: 'un message',
         attachmentName: null,
         ...dependencies,
       });
+      await waitForStreamFinalizationToBeDone();
+      const llmResponse = resultChunks.join('');
 
       // then
-      const parts = [];
-      const decoder = new TextDecoder();
-      for await (const chunk of stream) {
-        parts.push(decoder.decode(chunk));
-      }
-      await waitForStreamFinalizationToBeDone();
-      const llmResponse = parts.join('');
       expect(llmResponse).to.deep.equal(
         "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\nevent: error\ndata: \n\n",
       );
@@ -2005,35 +1934,22 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         totalInputTokens: 0,
         totalOutputTokens: 0,
       });
-      expect(messagesDB[0]).to.deep.include({
-        index: 0,
-        content: 'coucou user1',
-        emitter: 'user',
-        attachmentName: null,
-        wasModerated: null,
-      });
-      expect(messagesDB[1]).to.deep.include({
-        index: 1,
-        content: 'coucou LLM1',
-        emitter: 'assistant',
-        attachmentName: null,
-        wasModerated: null,
-      });
-      expect(messagesDB[2]).to.deep.include({
-        index: 2,
-        content: 'un message',
-        emitter: 'user',
-        wasModerated: false,
-        attachmentName: null,
-      });
-      // TODO: Est-ce qu'on veut vraiment persister un message assistant en erreur ? 🤔
-      expect(messagesDB[3]).to.deep.include({
-        index: 3,
-        content: "coucou c'est super\nle couscous c plutot bon",
-        emitter: 'assistant',
-        attachmentName: null,
-        wasModerated: null,
-      });
+      expect(messagesDB).to.deep.equal([
+        {
+          index: 0,
+          content: 'coucou user1',
+          emitter: 'user',
+          attachmentName: null,
+          wasModerated: null,
+        },
+        {
+          index: 1,
+          content: 'coucou LLM1',
+          emitter: 'assistant',
+          attachmentName: null,
+          wasModerated: null,
+        },
+      ]);
       expect(llmPostPromptScope.isDone()).to.be.true;
     });
   });
@@ -2124,4 +2040,16 @@ async function getChatAndMessagesFromDB(chatId) {
       .where({ chatId })
       .orderBy('index'),
   };
+}
+
+function setupResponseStream() {
+  const resultChunks = [];
+  const responseStream = new WritableStream({
+    write(chunk) {
+      resultChunks.push(chunk);
+    },
+  });
+  const llmResponseHandler = new LLMResponseHandler(responseStream);
+
+  return { llmResponseHandler, resultChunks };
 }
