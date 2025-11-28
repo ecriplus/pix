@@ -26,7 +26,7 @@ module('Integration | Component | Certifications | Certification | Information |
     const certification = store.createRecord('certification', {
       firstName: 'Jane',
       lastName: 'Doe',
-      birthdate: new Date(),
+      birthdate: '2000-12-15',
       sex: 'F',
       birthplace: 'Paris',
       birthPostalCode: '75001',
@@ -92,7 +92,7 @@ module('Integration | Component | Certifications | Certification | Information |
         id: '1',
         firstName: 'Jane',
         lastName: 'Doe',
-        birthdate: new Date(),
+        birthdate: '2000-12-15',
         sex: 'F',
         birthplace: 'Paris',
         birthPostalCode: '75001',
