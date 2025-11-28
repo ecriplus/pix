@@ -14,6 +14,7 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/organizations/new');
+    controller.model = {};
     store = this.owner.lookup('service:store');
     notifications = this.owner.lookup('service:pixToast');
     sinon.stub(notifications, 'sendSuccessNotification');
@@ -38,9 +39,10 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
           name: 'New Child Orga',
           type: 'SCO',
           administrationTeamId: '456',
+          countryCode: '99100',
           save: sinon.stub(),
         };
-        controller.model = organizationModelStub;
+        controller.model.organization = organizationModelStub;
 
         const parentOrganizationModelStub = {
           hasMany: sinon.stub(),
@@ -70,9 +72,10 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
           name: 'New Orga',
           type: 'SCO',
           administrationTeamId: '456',
+          countryCode: '99100',
           save: sinon.stub(),
         };
-        controller.model = organizationModelStub;
+        controller.model.organization = organizationModelStub;
       });
 
       test('it should not call find parent organization model', async function (assert) {
@@ -84,6 +87,35 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
 
         // then
         assert.true(findParentOrganizationModelStub.notCalled);
+      });
+    });
+
+    module('Mandatory fields', function (hooks) {
+      const mandatoryFields = { name: 'New Orga', type: 'SCO', administrationTeamId: '456', countryCode: '99100' };
+
+      const organizationModelStub = {
+        name: mandatoryFields.name,
+        type: mandatoryFields.type,
+        administrationTeamId: mandatoryFields.administrationTeamId,
+        countryCode: mandatoryFields.countryCode,
+        save: sinon.stub(),
+      };
+
+      Object.keys(mandatoryFields).forEach(function (mandatoryField) {
+        hooks.afterEach(function () {
+          organizationModelStub[mandatoryField] = mandatoryFields[mandatoryField];
+        });
+        test(`should not save model if ${mandatoryField} property is missing`, async function (assert) {
+          // given
+          controller.model.organization = organizationModelStub;
+          organizationModelStub[mandatoryField] = undefined;
+
+          // when
+          await controller.addOrganization(event);
+
+          // then
+          assert.true(organizationModelStub.save.notCalled);
+        });
       });
     });
   });

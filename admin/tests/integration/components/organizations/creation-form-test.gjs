@@ -11,19 +11,36 @@ module('Integration | Component | organizations/creation-form', function (hooks)
   const onSubmit = () => {};
   const onCancel = () => {};
 
+  let store;
+
+  const countries = [
+    { code: '99100', name: 'France' },
+    { code: '99101', name: 'Danemark' },
+  ];
+
+  const administrationTeams = [
+    { id: 'team-1', name: 'Équipe 1' },
+    { id: 'team-2', name: 'Équipe 2' },
+  ];
+
+  hooks.beforeEach(function () {
+    store = this.owner.lookup('service:store');
+  });
+
   test('it renders', async function (assert) {
-    const store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-      ]);
+    //given
     const organization = store.createRecord('organization', { type: '' });
 
     // when
     const screen = await render(
       <template>
-        <CreationForm @organization={{organization}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+        <CreationForm
+          @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
+          @countries={{countries}}
+          @onSubmit={{onSubmit}}
+          @onCancel={{onCancel}}
+        />
       </template>,
     );
 
@@ -34,24 +51,25 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     assert
       .dom(screen.getByText(t('components.organizations.creation.administration-team.selector.placeholder')))
       .exists();
+    assert.ok(screen.getByLabelText(`${t('components.organizations.creation.country.selector.label')} *`));
     assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Ajouter' })).exists();
   });
 
   module('#selectOrganizationType', function () {
     test('should update attribute organization.type', async function (assert) {
-      const store = this.owner.lookup('service:store');
-      store.findAll = () =>
-        Promise.resolve([
-          store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-          store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-        ]);
+      // given
       const organization = store.createRecord('organization', { type: '' });
 
-      // given
       const screen = await render(
         <template>
-          <CreationForm @organization={{organization}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+          <CreationForm
+            @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
         </template>,
       );
 
@@ -65,20 +83,20 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     });
   });
 
-  module('#handlePixTeamSelectionChange', function () {
+  module('#handleAdministrationTeamSelectionChange', function () {
     test('should update attribute organization Administration team', async function (assert) {
-      const store = this.owner.lookup('service:store');
-      store.findAll = () =>
-        Promise.resolve([
-          store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-          store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-        ]);
+      // given
       const organization = store.createRecord('organization', { type: '' });
 
-      // given
       const screen = await render(
         <template>
-          <CreationForm @organization={{organization}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+          <CreationForm
+            @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
         </template>,
       );
 
@@ -96,19 +114,81 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     });
   });
 
+  module('Country information', function () {
+    test('should render countries options in list', async function (assert) {
+      // given
+      const organization = store.createRecord('organization', { type: '' });
+
+      const screen = await render(
+        <template>
+          <CreationForm
+            @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
+        </template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.country.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      const options = await screen.getAllByRole('option');
+
+      // then
+      assert.strictEqual(options.length, 2);
+      assert.strictEqual(options[0].title, 'France (99100)');
+      assert.strictEqual(options[1].title, 'Danemark (99101)');
+    });
+
+    test('should update organization model with countryCode attribute when selecting a country', async function (assert) {
+      // given
+      const organization = store.createRecord('organization', { type: '' });
+
+      const screen = await render(
+        <template>
+          <CreationForm
+            @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
+        </template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.country.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'France (99100)' }));
+
+      // then
+      assert.strictEqual(organization.countryCode, '99100');
+    });
+  });
+
   test('Adds data protection officer information', async function (assert) {
-    const store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-      ]);
+    // given
     const organization = store.createRecord('organization', { type: '' });
 
-    // given
     await render(
       <template>
-        <CreationForm @organization={{organization}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+        <CreationForm
+          @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
+          @countries={{countries}}
+          @onSubmit={{onSubmit}}
+          @onCancel={{onCancel}}
+        />
       </template>,
     );
 
@@ -125,18 +205,17 @@ module('Integration | Component | organizations/creation-form', function (hooks)
 
   test('Credits can be added', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    store.findAll = () =>
-      Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
-      ]);
     const organization = store.createRecord('organization', { type: '' });
 
-    //when
     await render(
       <template>
-        <CreationForm @organization={{organization}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+        <CreationForm
+          @organization={{organization}}
+          @administrationTeams={{administrationTeams}}
+          @countries={{countries}}
+          @onSubmit={{onSubmit}}
+          @onCancel={{onCancel}}
+        />
       </template>,
     );
 

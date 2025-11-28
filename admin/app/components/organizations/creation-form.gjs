@@ -5,15 +5,12 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import Card from '../card';
 
 export default class OrganizationCreationForm extends Component {
   @service store;
-
-  @tracked administrationTeams = [];
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -22,20 +19,20 @@ export default class OrganizationCreationForm extends Component {
     { value: 'SCO-1D', label: 'Établissement scolaire du premier degré' },
   ];
 
-  constructor() {
-    super(...arguments);
-    this.#onMount();
-  }
-
-  async #onMount() {
-    this.administrationTeams = await this.store.findAll('administration-team');
-  }
-
   get administrationTeamsOptions() {
-    const options = this.administrationTeams.map((administrationTeam) => ({
+    const options = this.args.administrationTeams.map((administrationTeam) => ({
       value: administrationTeam.id,
       label: administrationTeam.name,
     }));
+    return options;
+  }
+
+  get countriesOptions() {
+    const options = this.args.countries.map((country) => ({
+      value: country.code,
+      label: `${country.name} (${country.code})`,
+    }));
+
     return options;
   }
 
@@ -58,6 +55,11 @@ export default class OrganizationCreationForm extends Component {
   @action
   handleAdministrationTeamSelectionChange(value) {
     this.args.organization.administrationTeamId = value;
+  }
+
+  @action
+  handleCountrySelectionChange(value) {
+    this.args.organization.countryCode = value;
   }
 
   @action
@@ -133,6 +135,21 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
+
+          <PixSelect
+            @onChange={{this.handleCountrySelectionChange}}
+            @options={{this.countriesOptions}}
+            @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
+            @hideDefaultOption={{true}}
+            @value={{@organization.countryCode}}
+            required
+            @aria-required={{true}}
+            @requiredLabel={{t "common.fields.required-field"}}
+            @isSearchable={{true}}
+          >
+            <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
+          </PixSelect>
+
         </Card>
 
         <Card class="admin-form__card" @title="Configuration">

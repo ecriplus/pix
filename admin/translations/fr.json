@@ -615,13 +615,19 @@
           "add-child-organization": "Ajouter une organisation fille"
         },
         "administration-team": {
-          "required-fields-error": "Veuillez remplir tous les champs obligatoires.",
           "selector": {
             "label": "Sélectionner une équipe en charge",
             "placeholder": "Équipe en charge"
           }
         },
-        "parent-organization-name": "Organisation mère : {parentOrganizationName}"
+        "country": {
+          "selector": {
+            "label": "Sélectionner un pays",
+            "placeholder": "Pays (code INSEE)"
+          }
+        },
+        "parent-organization-name": "Organisation mère : {parentOrganizationName}",
+        "required-fields-error": "Veuillez remplir tous les champs obligatoires."
       },
       "editing": {
         "administration-team": {

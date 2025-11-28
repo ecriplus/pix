@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import RSVP from 'rsvp';
 
 export default class NewRoute extends Route {
   @service router;
@@ -25,8 +26,15 @@ export default class NewRoute extends Route {
     }
   }
 
-  model() {
-    return this.store.createRecord('organization');
+  async model() {
+    const organization = await this.store.createRecord('organization');
+    const administrationTeams = await this.store.findAll('administration-team');
+    const countries = await this.store.findAll('country');
+    return RSVP.hash({
+      organization,
+      administrationTeams,
+      countries,
+    });
   }
 
   resetController(controller, isExiting) {
