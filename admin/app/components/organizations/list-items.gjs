@@ -13,7 +13,6 @@ import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
 
 export default class ActionsOnUsersRoleInOrganization extends Component {
   @tracked showModal = false;
@@ -165,7 +164,6 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
       @title="Détacher l'organisation du profil cible"
       @onCloseButtonClick={{this.closeModal}}
       @showModal={{this.showModal}}
-      aria-hidden="{{not this.showModal}}"
     >
       <:content>
         <p>
