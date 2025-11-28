@@ -9,6 +9,6 @@ export default class CertificationCandidateTimelineAdapter extends ApplicationAd
       delete query.candidateId;
       return `${this.host}/${this.namespace}/certification-candidates/${candidateId}/timeline`;
     }
-    return super.urlForQuery(...arguments);
+    return super.urlForQueryRecord(...arguments);
   }
 }
