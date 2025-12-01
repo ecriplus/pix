@@ -478,12 +478,27 @@
           "title": "Leçon 4",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "6d557df0-b390-43de-9115-5f693b7d123b",
-                "type": "text",
-                "content": "<h5>🧐Que faire si vous recevez un média trop beau pour être vrai, choquant ou inquiétant ?</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p><p>⚠️<strong>Partager un deepfake malveillant</strong> peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong><strong>contre vous</strong>.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d047d05c-d77c-490d-9dc6-d0fcc5252ba6",
+                      "type": "text",
+                      "content": "<h5>🧐Que faire si vous recevez un média trop beau pour être vrai, choquant ou inquiétant ?</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7a82f038-3a9d-4b02-84c0-d48b7aed4a20",
+                      "type": "text",
+                      "content": "<p>⚠️<strong>Partager un deepfake malveillant</strong> peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong><strong>contre vous</strong>.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
