@@ -377,7 +377,7 @@
               "element": {
                 "id": "f13c6d5e-220d-48f4-8fc5-8b07ce0a7f31",
                 "type": "text",
-                "content": "<p>D’où viennent ces logiciels malveillants ?</p>"
+                "content": "<p>Mais qui crée ces logiciels malveillants, et pourquoi ?</p>"
               }
             }
           ]
@@ -433,7 +433,7 @@
               "element": {
                 "id": "b6b4fd71-8578-4d75-a513-e0ce629bdd78",
                 "type": "text",
-                "content": "<p>Maintenant que vous en savez plus au sujet des logiciels malveillants, voyons si vous avez retenu l’essentiel.</p>"
+                "content": "<p>Maintenant que vous en savez plus au sujet des logiciels malveillants, revoyons ensemble l’essentiel.</p>"
               }
             }
           ]
