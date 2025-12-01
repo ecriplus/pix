@@ -11,6 +11,8 @@ function buildAllowedCertificationCenterAccess({
   relatedOrganizationTags = [],
   habilitations = [],
   isInWhitelist,
+  scoBlockedAccessDateCollege,
+  scoBlockedAccessDateLycee,
 } = {}) {
   return new AllowedCertificationCenterAccess({
     center: {
@@ -23,6 +25,8 @@ function buildAllowedCertificationCenterAccess({
     },
     isRelatedToManagingStudentsOrganization,
     relatedOrganizationTags,
+    scoBlockedAccessDateCollege,
+    scoBlockedAccessDateLycee,
   });
 }
 

@@ -1,20 +1,7 @@
-import { config as settings } from '../../../../src/shared/config.js';
 import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', function () {
   context('#isInWhitelist', function () {
-    let originalEnvValueDateCollege, originalEnvValueDateLycee;
-
-    beforeEach(function () {
-      originalEnvValueDateCollege = settings.features.pixCertifScoBlockedAccessDateCollege;
-      originalEnvValueDateLycee = settings.features.pixCertifScoBlockedAccessDateLycee;
-    });
-
-    afterEach(function () {
-      settings.features.pixCertifScoBlockedAccessDateCollege = originalEnvValueDateCollege;
-      settings.features.pixCertifScoBlockedAccessDateLycee = originalEnvValueDateLycee;
-    });
-
     it('should return true when certification center is in whitelist', function () {
       // given
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
@@ -319,12 +306,12 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessDateCollege = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
         type: 'SCO',
         isRelatedToManagingStudentsOrganization: true,
         relatedOrganizationTags: ['COLLEGE', 'some_other_tag'],
+        scoBlockedAccessDateCollege: '2021-01-01',
       };
     });
 
@@ -407,11 +394,11 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
         type: 'SCO',
         isRelatedToManagingStudentsOrganization: true,
+        scoBlockedAccessDateLycee: '2021-01-01',
         relatedOrganizationTags: ['LYCEE PRO', 'some_other_tag'],
       };
     });
@@ -489,12 +476,12 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
         type: 'SCO',
         isRelatedToManagingStudentsOrganization: true,
         relatedOrganizationTags: ['AEFE', 'some_other_tag'],
+        scoBlockedAccessDateLycee: '2021-01-01',
       };
     });
 
@@ -565,12 +552,12 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
         type: 'SCO',
         isRelatedToManagingStudentsOrganization: true,
         relatedOrganizationTags: ['AGRICULTURE', 'some_other_tag'],
+        scoBlockedAccessDateLycee: '2021-01-01',
       };
     });
 
@@ -684,10 +671,9 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     describe('when pixCertifScoBlockedAccessDateLycee is defined', function () {
       it('should return the french formated pixCertifScoBlockedAccessDateLycee', function () {
         // given
-        sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateLycee').value('2022-02-01');
-
         const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
           id: 1,
+          scoBlockedAccessDateLycee: '2022-02-01',
         });
 
         // when
@@ -699,10 +685,8 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     });
 
     describe('when pixCertifScoBlockedAccessDateLycee is not defined', function () {
-      it('should return null', function () {
+      it('should return undefined', function () {
         // given
-        sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateLycee').value(undefined);
-
         const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
           id: 1,
         });
@@ -711,7 +695,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
         const result = allowedCertificationCenterAccess.pixCertifScoBlockedAccessDateLycee;
 
         // then
-        expect(result).to.be.null;
+        expect(result).to.be.undefined;
       });
     });
   });
@@ -720,9 +704,9 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     describe('when pixCertifScoBlockedAccessDateCollege is defined', function () {
       it('should return the french formated pixCertifScoBlockedAccessDateCollege', function () {
         // given
-        sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateCollege').value('2022-02-01');
         const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
           id: 1,
+          scoBlockedAccessDateCollege: '2022-02-01',
         });
 
         // when
@@ -734,9 +718,8 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     });
 
     describe('when pixCertifScoBlockedAccessDateCollege is not defined', function () {
-      it('should return null', function () {
+      it('should return undefined', function () {
         // given
-        sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateCollege').value(undefined);
         const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
           id: 1,
         });
@@ -745,7 +728,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
         const result = allowedCertificationCenterAccess.pixCertifScoBlockedAccessDateCollege;
 
         // then
-        expect(result).to.be.null;
+        expect(result).to.be.undefined;
       });
     });
   });

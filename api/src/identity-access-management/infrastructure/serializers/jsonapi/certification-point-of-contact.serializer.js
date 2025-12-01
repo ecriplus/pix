@@ -69,8 +69,8 @@ const serialize = function (certificationPointOfContact) {
             isAccessBlockedLycee: access.isAccessBlockedLycee(),
             isAccessBlockedAEFE: access.isAccessBlockedAEFE(),
             isAccessBlockedAgri: access.isAccessBlockedAgri(),
-            pixCertifScoBlockedAccessDateCollege: access.pixCertifScoBlockedAccessDateCollege,
-            pixCertifScoBlockedAccessDateLycee: access.pixCertifScoBlockedAccessDateLycee,
+            pixCertifScoBlockedAccessDateCollege: access.pixCertifScoBlockedAccessDateCollege ?? null,
+            pixCertifScoBlockedAccessDateLycee: access.pixCertifScoBlockedAccessDateLycee ?? null,
           };
         },
       );

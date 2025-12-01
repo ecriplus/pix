@@ -282,8 +282,6 @@ const configuration = (function () {
       maxReachableLevel: _getNumber(process.env.MAX_REACHABLE_LEVEL, 5),
       newYearOrganizationLearnersImportDate: _getDate(process.env.NEW_YEAR_ORGANIZATION_LEARNERS_IMPORT_DATE),
       successProbabilityThreshold: parseFloat(process.env.SUCCESS_PROBABILITY_THRESHOLD ?? '0.95'),
-      pixCertifScoBlockedAccessDateLycee: process.env.PIX_CERTIF_SCO_BLOCKED_ACCESS_DATE_LYCEE,
-      pixCertifScoBlockedAccessDateCollege: process.env.PIX_CERTIF_SCO_BLOCKED_ACCESS_DATE_COLLEGE,
       scheduleComputeOrganizationLearnersCertificability: {
         cron: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_JOB_CRON || '0 21 * * *',
         chunkSize: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_CHUNK_SIZE || 1000,
@@ -531,8 +529,6 @@ const configuration = (function () {
     config.features.dayBeforeCompetenceResetV2 = 7;
     config.features.garAccessV2 = false;
     config.features.maxReachableLevel = 5;
-    config.features.pixCertifScoBlockedAccessDateLycee = null;
-    config.features.pixCertifScoBlockedAccessDateCollege = null;
 
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;

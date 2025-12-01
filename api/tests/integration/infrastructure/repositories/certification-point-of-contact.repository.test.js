@@ -111,6 +111,8 @@ describe('Integration | Identity Access Management |  Repository | Certification
           habilitations: [],
           isRelatedToManagingStudentsOrganization: false,
           relatedOrganizationTags: [],
+          pixCertifScoBlockedAccessDateCollege: undefined,
+          pixCertifScoBlockedAccessDateLycee: undefined,
         },
       ];
 
@@ -185,6 +187,8 @@ describe('Integration | Identity Access Management |  Repository | Certification
         habilitations: [],
         isRelatedToManagingStudentsOrganization: false,
         relatedOrganizationTags: [],
+        pixCertifScoBlockedAccessDateCollege: undefined,
+        pixCertifScoBlockedAccessDateLycee: undefined,
       };
 
       expect(allowedCertificationCenterAccess).to.deep.equal(expectedAllowedCertificationCenterAccess);

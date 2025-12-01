@@ -54,10 +54,16 @@ const getCertificationCenterAccess = async ({ certificationCenterId }) => {
     .groupBy('certification-centers.id', 'organizations.isManagingStudents')
     .first();
 
-  return _toDomain({ certificationCenterAccess });
+  const scoBlockedAccessDatesRows = await knex('certification_sco_blocked_access_dates').select(
+    'scoOrganizationTagName',
+    'reopeningDate',
+  );
+  const scoBlockedAccessDates = _transformScoBlockedAccessDates(scoBlockedAccessDatesRows);
+
+  return _toDomain({ certificationCenterAccess, scoBlockedAccessDates });
 };
 
-const _toDomain = ({ certificationCenterAccess }) => {
+const _toDomain = ({ certificationCenterAccess, scoBlockedAccessDates }) => {
   return new AllowedCertificationCenterAccess({
     center: {
       id: certificationCenterAccess.id,
@@ -69,6 +75,8 @@ const _toDomain = ({ certificationCenterAccess }) => {
     },
     isRelatedToManagingStudentsOrganization: certificationCenterAccess.isRelatedToManagingStudentsOrganization,
     relatedOrganizationTags: _cleanTags(certificationCenterAccess),
+    scoBlockedAccessDateCollege: scoBlockedAccessDates.college,
+    scoBlockedAccessDateLycee: scoBlockedAccessDates.lycee,
   });
 };
 
@@ -120,7 +128,13 @@ const getAllowedCenterAccesses = async function ({ centerList }) {
     .orderBy('certification-centers.id')
     .groupBy('certification-centers.id', 'organizations.isManagingStudents');
 
-  return _toDomainList({ allowedAccessDTOs, centerList });
+  const scoBlockedAccessDatesRows = await knex('certification_sco_blocked_access_dates').select(
+    'scoOrganizationTagName',
+    'reopeningDate',
+  );
+  const scoBlockedAccessDates = _transformScoBlockedAccessDates(scoBlockedAccessDatesRows);
+
+  return _toDomainList({ allowedAccessDTOs, centerList, scoBlockedAccessDates });
 };
 
 /**
@@ -183,7 +197,7 @@ const getPointOfContact = async function ({
 
 export { getAllowedCenterAccesses, getAuthorizedCenterIds, getCertificationCenterAccess, getPointOfContact };
 
-function _toDomainList({ allowedAccessDTOs, centerList }) {
+function _toDomainList({ allowedAccessDTOs, centerList, scoBlockedAccessDates }) {
   return allowedAccessDTOs.map((allowedCenterAccessDTO) => {
     const center = centerList.find((center) => center.id === allowedCenterAccessDTO.id);
 
@@ -195,6 +209,8 @@ function _toDomainList({ allowedAccessDTOs, centerList }) {
       },
       isRelatedToManagingStudentsOrganization: Boolean(allowedCenterAccessDTO.isRelatedToManagingStudentsOrganization),
       relatedOrganizationTags: _cleanTags(allowedCenterAccessDTO),
+      scoBlockedAccessDateCollege: scoBlockedAccessDates.college,
+      scoBlockedAccessDateLycee: scoBlockedAccessDates.lycee,
     });
   });
 }
@@ -259,4 +275,11 @@ async function _findNotDisabledCertificationCenterMemberships(userId) {
       userId,
       disabledAt: null,
     });
+}
+
+function _transformScoBlockedAccessDates(scoBlockedAccessDatesRows) {
+  return {
+    college: scoBlockedAccessDatesRows.find((row) => row.scoOrganizationTagName === 'COLLEGE')?.reopeningDate,
+    lycee: scoBlockedAccessDatesRows.find((row) => row.scoOrganizationTagName === 'LYCEE')?.reopeningDate,
+  };
 }

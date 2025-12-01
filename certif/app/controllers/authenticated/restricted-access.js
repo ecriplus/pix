@@ -13,13 +13,13 @@ export default class RestrictedAccessController extends Controller {
   get certificationOpeningDate() {
     if (this.model.isAccessBlockedCollege) {
       return this.intl.t('pages.sco.restricted-access.title-access', {
-        date: dayjs.utc(this.model.pixCertifScoBlockedAccessDateCollege).format('L'),
+        date: dayjs(this.model.pixCertifScoBlockedAccessDateCollege).format('L'),
       });
     }
 
     if (this.model.isAccessBlockedLycee || this.model.isAccessBlockedAEFE || this.model.isAccessBlockedAgri) {
       return this.intl.t('pages.sco.restricted-access.title-access', {
-        date: dayjs.utc(this.model.pixCertifScoBlockedAccessDateLycee).format('L'),
+        date: dayjs(this.model.pixCertifScoBlockedAccessDateLycee).format('L'),
       });
     }
 
