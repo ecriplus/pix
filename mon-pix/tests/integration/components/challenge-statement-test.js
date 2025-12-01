@@ -287,12 +287,14 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.play') }));
 
                 // then
-                sinon.assert.calledWithExactly(trackEvent, "Clic sur le bouton de lecture d'épreuve : play", {
-                  category: 'Vocalisation',
-                  disabled: true,
-                  action: "Lecture d'une épreuve",
-                });
-                assert.ok(true);
+                assert.ok(
+                  trackEvent.calledWithExactly("Clic sur le bouton de lecture d'épreuve : play", {
+                    category: 'Vocalisation',
+                    disabled: true,
+                    action: "Lecture d'une épreuve",
+                  }),
+                  'trackEvent should be called with correct arguments for non-certification',
+                );
               });
             });
           });
@@ -391,6 +393,65 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 }),
               )
               .exists();
+          });
+
+          module('when user clicks on text-to-speech button', function (hooks) {
+            hooks.beforeEach(function () {
+              window.sessionStorage.removeItem('certifCandidateStorage');
+            });
+
+            hooks.afterEach(function () {
+              window.sessionStorage.removeItem('certifCandidateStorage');
+            });
+
+            test('should push analytics event only once', async function (assert) {
+              // given
+              const trackEvent = sinon.stub();
+              class MetricsStubService extends Service {
+                trackEvent = trackEvent;
+              }
+              this.owner.register('service:pix-metrics', MetricsStubService);
+
+              const certificationCourse = this.store.createRecord('certification-course', {
+                id: 'cert123',
+                isAdjustedForAccessibility: true,
+              });
+
+              const assessment = this.store.createRecord('assessment', {
+                id: '267567',
+                type: 'CERTIFICATION',
+                certificationCourse,
+              });
+              addAssessmentToContext(this, assessment);
+
+              addChallengeToContext(this, {
+                instruction: 'La consigne du test avec un bouton de lecture à haute voix',
+                id: 'rec_challenge1',
+                locales: ['fr'],
+              });
+
+              const screen = await render(
+                hbs`<ChallengeStatement @challenge={{this.challenge}} @assessment={{this.assessment}} @isTextToSpeechActivated={{true}} />`,
+              );
+
+              // when
+              await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.play') }));
+
+              assert.ok(
+                trackEvent.calledWithExactly('certifChallengeTextToSpeech'),
+                'Analytics event should be pushed on first click',
+              );
+
+              trackEvent.resetHistory();
+
+              await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.stop') }));
+              await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.play') }));
+
+              assert.notOk(
+                trackEvent.calledWithExactly('certifChallengeTextToSpeech'),
+                'Analytics event should NOT be pushed on subsequent clicks',
+              );
+            });
           });
         });
       });

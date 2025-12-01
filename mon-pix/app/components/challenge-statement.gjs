@@ -16,6 +16,9 @@ import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
 import MarkdownToHtmlUnsafe from 'mon-pix/components/markdown-to-html-unsafe';
 import ENV from 'mon-pix/config/environment';
 import extractExtension from 'mon-pix/helpers/extract-extension';
+import { SessionStorageEntry } from 'mon-pix/utils/session-storage-entry';
+
+const certifCandidateStorage = new SessionStorageEntry('certifCandidateStorage');
 
 const PREFERRED_ATTACHMENT_FORMATS = ['docx', 'xlsx', 'pptx'];
 
@@ -199,12 +202,12 @@ export default class ChallengeStatement extends Component {
   }
 
   get showTextToSpeechButton() {
-    const certificationCourse = this.args.assessment.belongsTo('certificationCourse').value();
-
     const isTextToSpeechFeatureActivated =
       window.speechSynthesis &&
       this.featureToggles.featureToggles?.isTextToSpeechButtonEnabled &&
       this.args.isTextToSpeechActivated;
+
+    const certificationCourse = this.args.assessment.belongsTo('certificationCourse').value();
 
     const shouldShowInAssessment =
       !this.args.assessment.isCertification || certificationCourse?.isAdjustedForAccessibility;
@@ -262,6 +265,13 @@ export default class ChallengeStatement extends Component {
       category: 'Vocalisation',
       action: "Lecture d'une épreuve",
     });
+
+    if (this.args.assessment.isCertification) {
+      if (!certifCandidateStorage.get()) {
+        this.pixMetrics.trackEvent('certifChallengeTextToSpeech');
+        certifCandidateStorage.set('certifChallengeTextToSpeech');
+      }
+    }
   }
 
   stopTextToSpeechOnLeaveOrRefresh() {
