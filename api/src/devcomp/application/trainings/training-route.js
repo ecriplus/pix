@@ -3,7 +3,11 @@ import Joi from 'joi';
 import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { getSupportedLocales } from '../../../shared/domain/services/locale-service.js';
-import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import {
+  editorLogoUrlValidation,
+  identifiersType,
+  optionalIdentifiersType,
+} from '../../../shared/domain/types/identifiers-type.js';
 import { trainingController as trainingsController } from './training-controller.js';
 
 const lowerCaseSupportedLocales = getSupportedLocales().map((supportedLocale) => supportedLocale.toLowerCase());
@@ -140,7 +144,7 @@ const register = async function (server) {
                   .valid(...lowerCaseSupportedLocales)
                   .required(),
                 'editor-name': Joi.string().required(),
-                'editor-logo-url': Joi.string().uri().required(),
+                'editor-logo-url': Joi.string().regex(editorLogoUrlValidation).required(),
               }),
               type: Joi.string().valid('trainings'),
             }).required(),
@@ -212,7 +216,7 @@ const register = async function (server) {
                   .valid(...lowerCaseSupportedLocales)
                   .allow(null),
                 'editor-name': Joi.string().allow(null),
-                'editor-logo-url': Joi.string().allow(null),
+                'editor-logo-url': Joi.string().regex(editorLogoUrlValidation).required(),
               }),
               type: Joi.string().valid('trainings'),
             }).required(),

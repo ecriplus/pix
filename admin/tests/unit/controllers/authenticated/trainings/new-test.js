@@ -1,9 +1,13 @@
+import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import setupIntl from '../../../../helpers/setup-intl';
+
 module('Unit | Controller | authenticated/trainings/new', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
 
   let controller;
 
@@ -39,7 +43,7 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
         link: 'https://mon-lien',
         type: 'webinaire',
         locale: 'fr-fr',
-        editorLogoUrl: 'https//images.fr/mon-logo.svg',
+        editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
         editorName: 'Un éditeur de contenu formatif',
         duration: '6h',
       };
@@ -67,21 +71,69 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
       assert.ok(controller.router.transitionTo.calledWith('authenticated.trainings.training', trainingData.id));
     });
 
-    test('it should display error notification when training cannot be saved', async function (assert) {
-      controller.pixToast = {
-        sendErrorNotification: sinon.stub(),
-      };
+    module('when training cannot be saved', function () {
+      module('when the editorLogoUrl format is incorrect', function () {
+        test('it should display a specific error message', async function (assert) {
+          controller.pixToast = {
+            sendErrorNotification: sinon.stub(),
+          };
 
-      const saveStub = sinon.stub().rejects();
+          const saveStub = sinon
+            .stub()
+            .rejects({ errors: [{ status: '400', detail: 'data.attributes.editor-logo-url' }] });
 
-      controller.store.createRecord = sinon.stub().returns({ save: saveStub });
+          controller.store.createRecord = sinon.stub().returns({ save: saveStub });
 
-      // when
-      await controller.createOrUpdateTraining();
+          // when
+          await controller.createOrUpdateTraining();
 
-      // then
-      assert.ok(saveStub.called);
-      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
+          // then
+          assert.ok(saveStub.called);
+          assert.ok(
+            controller.pixToast.sendErrorNotification.calledWith({
+              message: t('pages.trainings.training.error-messages.incorrect-editor-logo-url-format'),
+            }),
+          );
+        });
+      });
+
+      module('for 400, 404, 412, 422 HTTP errors', function () {
+        test('it should display the error detail message', async function (assert) {
+          controller.pixToast = {
+            sendErrorNotification: sinon.stub(),
+          };
+
+          const saveStub = sinon.stub().rejects({ errors: [{ status: '404', detail: 'Ressource introuvable.' }] });
+
+          controller.store.createRecord = sinon.stub().returns({ save: saveStub });
+
+          // when
+          await controller.createOrUpdateTraining();
+
+          // then
+          assert.ok(saveStub.called);
+          assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Ressource introuvable.' }));
+        });
+      });
+
+      module('for other errors', function () {
+        test('it should display the default error message', async function (assert) {
+          controller.pixToast = {
+            sendErrorNotification: sinon.stub(),
+          };
+
+          const saveStub = sinon.stub().rejects();
+
+          controller.store.createRecord = sinon.stub().returns({ save: saveStub });
+
+          // when
+          await controller.createOrUpdateTraining();
+
+          // then
+          assert.ok(saveStub.called);
+          assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
+        });
+      });
     });
   });
 });

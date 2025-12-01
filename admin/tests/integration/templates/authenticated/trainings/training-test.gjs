@@ -1,7 +1,7 @@
 /* eslint-disable ember/template-no-let-reference */
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import Training from 'pix-admin/templates/authenticated/trainings/training';
 import { module, test } from 'qunit';
@@ -25,7 +25,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       type: 'type',
       locale: 'fr-fr',
       editorName: 'Albert',
-      editorLogoUrl: 'my-logo-url',
+      editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/my-logo-url',
       isRecommendable: true,
       isDisabled: false,
     });
@@ -130,6 +130,68 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       assert.ok(deleteTriggerAdapterStub.calledOnce);
       assert.ok(reloadStub.calledOnce);
       assert.ok(notificationSuccessStub.calledOnce);
+    });
+  });
+
+  module('error cases', function () {
+    module('when editorLogoURl format is incorrect', function () {
+      test('should display an error', async function (assert) {
+        // given
+        sinon.stub(model, 'save').rejects({ errors: [{ status: '400', detail: 'data.attributes.editor-logo-url' }] });
+
+        const notificationErrorStub = sinon.stub();
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
+
+        // when
+        const screen = await render(<template><Training @model={{model}} /></template>);
+        await click(screen.getByRole('button', { name: 'Modifier' }));
+        await fillIn(
+          screen.getByRole('textbox', {
+            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+          }),
+          'bonjour!',
+        );
+        await click(screen.getByRole('button', { name: 'Modifier le contenu formatif' }));
+
+        // then
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: t('pages.trainings.training.error-messages.incorrect-editor-logo-url-format'),
+        });
+        assert.ok(true);
+      });
+    });
+
+    module('for other errors', function () {
+      test('should display a default error', async function (assert) {
+        // given
+        sinon.stub(model, 'save').rejects();
+
+        const notificationErrorStub = sinon.stub();
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
+
+        // when
+        const screen = await render(<template><Training @model={{model}} /></template>);
+        await click(screen.getByRole('button', { name: 'Modifier' }));
+        await fillIn(
+          screen.getByRole('textbox', {
+            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+          }),
+          'bonjour!',
+        );
+        await click(screen.getByRole('button', { name: 'Modifier le contenu formatif' }));
+
+        // then
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: 'Une erreur est survenue.',
+        });
+        assert.ok(true);
+      });
     });
   });
 });

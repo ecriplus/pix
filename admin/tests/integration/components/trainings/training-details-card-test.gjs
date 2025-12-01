@@ -15,7 +15,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     type: 'webinaire',
     locale: 'fr-fr',
     editorName: 'Un éditeur de contenu formatif',
-    editorLogoUrl: 'un-logo.svg',
+    editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/un-logo.svg',
     duration: {
       days: 2,
     },
@@ -34,7 +34,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     assert.dom(screen.getByText('2j')).exists();
     assert.dom(screen.getByText('Franco-français (fr-fr)')).exists();
     assert.dom(screen.getByText('Un éditeur de contenu formatif')).exists();
-    assert.dom(screen.getByText('un-logo.svg')).exists();
+    assert.dom(screen.getByText('https://assets.pix.org/contenu-formatif/editeur/un-logo.svg')).exists();
     assert.dom(screen.getByAltText('Un éditeur de contenu formatif')).exists();
   });
 
@@ -93,7 +93,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
           type: 'webinaire',
           locale: 'fr-fr',
           editorName: 'Un éditeur de contenu formatif',
-          editorLogoUrl: 'un-logo.svg',
+          editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/un-logo.svg',
           duration,
           isRecommendable: true,
         };

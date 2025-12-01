@@ -41,8 +41,15 @@ export default class Training extends Component {
       await this.args.model.save();
       this.pixToast.sendSuccessNotification({ message: 'Le contenu formatif a été mis à jour avec succès.' });
       this.toggleEditMode();
-    } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+    } catch (error) {
+      const errorStatus = error.errors?.[0]?.status;
+      const errorMessage = error.errors?.[0]?.detail;
+
+      let message = this.intl.t('common.notifications.generic-error');
+      if (errorStatus === '400' && errorMessage.includes('data.attributes.editor-logo-url')) {
+        message = this.intl.t('pages.trainings.training.error-messages.incorrect-editor-logo-url-format');
+      }
+      this.pixToast.sendErrorNotification({ message });
     }
   }
 

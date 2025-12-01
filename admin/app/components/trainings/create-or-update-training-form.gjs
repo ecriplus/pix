@@ -35,7 +35,7 @@ class Form {
     this.type = type || null;
     this.duration = duration || { days: 0, hours: 0, minutes: 0 };
     this.locale = locale || null;
-    this.editorLogoUrl = editorLogoUrl?.split('/').at(-1) || null;
+    this.editorLogoUrl = editorLogoUrl || null;
     this.editorName = editorName || null;
     this.isDisabled = isDisabled || false;
   }
@@ -79,8 +79,8 @@ export default class CreateOrUpdateTrainingForm extends Component {
       locale: this.form.locale,
       editorName: this.form.editorName,
       isDisabled: this.form.isDisabled,
+      editorLogoUrl: this.form.editorLogoUrl,
     };
-    training.editorLogoUrl = `https://assets.pix.org/contenu-formatif/editeur/${this.form.editorLogoUrl}`;
 
     try {
       this.submitting = true;
@@ -180,29 +180,24 @@ export default class CreateOrUpdateTrainingForm extends Component {
           >
             <:label>Langue localisée</:label>
           </PixSelect>
-          <div class="admin-form--training__logo-url-input">
-            <PixInput
-              @id="trainingEditorLogoUrl"
-              @subLabel="Exemple : logo-ministere-education-nationale-et-jeunesse.svg"
-              required={{true}}
-              aria-required={{true}}
-              placeholder="logo-ministere-education-nationale-et-jeunesse.svg"
-              @value={{this.form.editorLogoUrl}}
-              {{on "change" (fn this.updateForm "editorLogoUrl")}}
-            >
-              <:label>Nom du fichier du logo éditeur (.svg)</:label>
-            </PixInput>
-            <small>
-              <a
-                href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="training__logo-url-link"
-              >
-                Voir la liste des logos éditeur
-              </a>
-            </small>
-          </div>
+          <PixInput
+            @id="trainingEditorLogoUrl"
+            @subLabel="Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg"
+            required={{true}}
+            aria-required={{true}}
+            @value={{this.form.editorLogoUrl}}
+            {{on "change" (fn this.updateForm "editorLogoUrl")}}
+          >
+            <:label>Url du logo de l'éditeur (.svg)</:label>
+          </PixInput>
+          <a
+            href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="training__logo-url-link"
+          >
+            Voir la liste des logos éditeur
+          </a>
           <PixInput
             @id="trainingEditorName"
             @subLabel="Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité"

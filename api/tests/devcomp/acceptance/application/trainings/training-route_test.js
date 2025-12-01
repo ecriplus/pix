@@ -165,7 +165,7 @@ describe('Acceptance | Controller | training-controller', function () {
           },
           locale: 'fr',
           'editor-name': 'Un ministère',
-          'editor-logo-url': 'https://mon-logo.svg',
+          'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
         },
       };
 
@@ -185,7 +185,7 @@ describe('Acceptance | Controller | training-controller', function () {
                 hours: 6,
               },
               locale: 'fr',
-              'editor-logo-url': 'https://mon-logo.svg',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
               'editor-name': 'Un ministère',
             },
           },

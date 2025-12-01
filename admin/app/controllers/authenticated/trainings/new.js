@@ -6,6 +6,7 @@ export default class NewController extends Controller {
   @service pixToast;
   @service store;
   @service router;
+  @service intl;
 
   @action
   goToTrainingDetails(trainingId) {
@@ -30,13 +31,17 @@ export default class NewController extends Controller {
 
   _handleResponseError({ errors }) {
     if (!errors) {
-      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     }
     errors.forEach((error) => {
       if (['400', '404', '412', '422'].includes(error.status)) {
-        return this.pixToast.sendErrorNotification({ message: error.detail });
+        let message = error.detail;
+        if (message.includes('data.attributes.editor-logo-url')) {
+          message = this.intl.t('pages.trainings.training.error-messages.incorrect-editor-logo-url-format');
+        }
+        return this.pixToast.sendErrorNotification({ message });
       }
-      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     });
   }
 }
