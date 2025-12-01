@@ -77,8 +77,8 @@ module('Integration | Component | Tutorials | Card', function (hooks) {
     });
   });
 
-  module('link rel', function () {
-    test('should set rel="noreferrer" on external links', async function (assert) {
+  module('link referrer policy', function () {
+    test('should set referrerpolicy="strict-origin" on external links', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       this.set(
@@ -99,7 +99,7 @@ module('Integration | Component | Tutorials | Card', function (hooks) {
 
       // then
       const link = screen.getByRole('link', { name: 'Mon super tutoriel' });
-      assert.strictEqual(link.getAttribute('rel'), 'noreferrer');
+      assert.strictEqual(link.getAttribute('referrerpolicy'), 'strict-origin');
     });
 
     test('should not set rel="noreferrer" on internal links', async function (assert) {

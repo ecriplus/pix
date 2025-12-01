@@ -16,7 +16,7 @@ export default class Card extends Component {
           <h4 class="tutorial-card-content__title">
             <a
               target="_blank"
-              rel={{this.linkRel}}
+              referrerpolicy="strict-origin"
               href="{{@tutorial.link}}"
               title="{{@tutorial.title}}"
               {{on "click" this.trackAccess}}
@@ -64,8 +64,6 @@ export default class Card extends Component {
   @tracked savingStatus;
   @tracked evaluationStatus;
 
-  static TUTORIAL_PIX_URL_HOST = 'tutorial.pix.fr';
-
   constructor(owner, args) {
     super(owner, args);
     this.savingStatus = args.tutorial.isSaved ? buttonStatusTypes.recorded : buttonStatusTypes.unrecorded;
@@ -98,12 +96,6 @@ export default class Card extends Component {
 
   get isTutorialSaved() {
     return this.savingStatus !== buttonStatusTypes.unrecorded;
-  }
-
-  get linkRel() {
-    const tutorialUrl = new URL(this.args.tutorial.link);
-    const isKnownHost = tutorialUrl.host === Card.TUTORIAL_PIX_URL_HOST;
-    return isKnownHost ? null : 'noreferrer';
   }
 
   @action
