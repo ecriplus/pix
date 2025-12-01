@@ -1,25 +1,23 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-const create = async function ({ sessionId, userId }) {
+export async function create({ sessionId, userId }) {
   const knexConn = DomainTransaction.getConnection();
   await knexConn('supervisor-accesses').insert({ sessionId, userId });
-};
+}
 
-const isUserInvigilatorForSession = async function ({ sessionId, userId }) {
+export async function isUserInvigilatorForSession({ sessionId, userId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn.select(1).from('supervisor-accesses').where({ sessionId, userId }).first();
   return Boolean(result);
-};
+}
 
-const isUserInvigilatorForSessionCandidate = async function ({ supervisorId, certificationCandidateId }) {
+export async function isUserInvigilatorForSessionCandidate({ invigilatorId, certificationCandidateId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn
     .select(1)
     .from('supervisor-accesses')
     .innerJoin('certification-candidates', 'supervisor-accesses.sessionId', 'certification-candidates.sessionId')
-    .where({ 'certification-candidates.id': certificationCandidateId, 'supervisor-accesses.userId': supervisorId })
+    .where({ 'certification-candidates.id': certificationCandidateId, 'supervisor-accesses.userId': invigilatorId })
     .first();
   return Boolean(result);
-};
-
-export { create, isUserInvigilatorForSession, isUserInvigilatorForSessionCandidate };
+}

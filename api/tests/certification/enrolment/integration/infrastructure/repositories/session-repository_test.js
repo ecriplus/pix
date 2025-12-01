@@ -192,8 +192,8 @@ describe('Integration | Repository | certification | enrolment | SessionEnrolmen
         });
       });
 
-      context('when the session has been accessed by one or more supervisor', function () {
-        it('should remove supervisor accesses and delete the session', async function () {
+      context('when the session has been accessed by one or more invigilator', function () {
+        it('should remove invigilator accesses and delete the session', async function () {
           // given
           const sessionId = databaseBuilder.factory.buildSession().id;
           databaseBuilder.factory.buildSupervisorAccess({ sessionId });

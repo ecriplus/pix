@@ -109,7 +109,7 @@ const completeByAssessmentId = function (assessmentId) {
 };
 
 const endBySupervisorByAssessmentId = function (assessmentId) {
-  return this._updateStateById({ id: assessmentId, state: Assessment.states.ENDED_BY_SUPERVISOR });
+  return this._updateStateById({ id: assessmentId, state: Assessment.states.ENDED_BY_INVIGILATOR });
 };
 
 const getByCertificationCandidateId = async function (certificationCandidateId) {

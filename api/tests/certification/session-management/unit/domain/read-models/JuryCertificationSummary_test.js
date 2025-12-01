@@ -62,13 +62,13 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       });
     });
 
-    context('when assessment is ended by supervisor', function () {
-      it(`should returns "endedBySupervisor" status`, function () {
+    context('when assessment is ended by invigilator', function () {
+      it(`should returns "endedByInvigilator" status`, function () {
         // when
-        const juryCertificationSummary = new JuryCertificationSummary({ isEndedBySupervisor: true });
+        const juryCertificationSummary = new JuryCertificationSummary({ isEndedByInvigilator: true });
 
         // then
-        expect(juryCertificationSummary.status).equal(JuryCertificationSummary.statuses['ENDED_BY_SUPERVISOR']);
+        expect(juryCertificationSummary.status).equal(JuryCertificationSummary.statuses['ENDED_BY_INVIGILATOR']);
       });
     });
 

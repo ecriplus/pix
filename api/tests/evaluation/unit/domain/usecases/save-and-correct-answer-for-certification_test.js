@@ -5,7 +5,7 @@ import { saveAndCorrectAnswerForCertification } from '../../../../../src/evaluat
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
-  CertificationEndedBySupervisorError,
+  CertificationEndedByInvigilatorError,
   ChallengeAlreadyAnsweredError,
   ChallengeNotAskedError,
 } from '../../../../../src/shared/domain/errors.js';
@@ -120,10 +120,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     });
   });
 
-  context('when the assessment has been ended by supervisor', function () {
-    it('should throw a CertificationEndedBySupervisorError error', async function () {
+  context('when the assessment has been ended by invigilator', function () {
+    it('should throw a CertificationEndedByInvigilatorError error', async function () {
       // given
-      assessment.state = Assessment.states.ENDED_BY_SUPERVISOR;
+      assessment.state = Assessment.states.ENDED_BY_INVIGILATOR;
 
       // when
       const error = await catchErr(saveAndCorrectAnswerForCertification)({
@@ -135,7 +135,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
 
       // then
-      expect(error).to.be.an.instanceOf(CertificationEndedBySupervisorError);
+      expect(error).to.be.an.instanceOf(CertificationEndedByInvigilatorError);
     });
   });
 

@@ -467,18 +467,18 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       });
     });
 
-    describe('when the assessment is ENDED_BY_SUPERVISOR', function () {
+    describe('when the assessment is ENDED_BY_INVIGILATOR', function () {
       it('should NOT change the assessment state"', function () {
         // given
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          state: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+          state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
         });
 
         // when
         certificationAssessment.endDueToFinalization();
 
         // when then
-        expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_SUPERVISOR);
+        expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
       });
     });
   });
@@ -495,7 +495,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       certificationAssessment.endByInvigilator({ now });
 
       // then
-      expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_SUPERVISOR);
+      expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
       expect(certificationAssessment.endedAt).to.deep.equal(now);
     });
   });
@@ -918,7 +918,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       // then
       expect(result).to.deep.equal([
         CertificationAssessment.states.STARTED,
-        CertificationAssessment.states.ENDED_BY_SUPERVISOR,
+        CertificationAssessment.states.ENDED_BY_INVIGILATOR,
         CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
       ]);
     });

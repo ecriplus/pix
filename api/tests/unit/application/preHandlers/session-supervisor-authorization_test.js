@@ -27,7 +27,7 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
         invigilatorAccessRepository.isUserInvigilatorForSessionCandidate
           .withArgs({
             certificationCandidateId: 8,
-            supervisorId: 100,
+            invigilatorId: 100,
           })
           .resolves(true);
 
@@ -49,7 +49,7 @@ describe('Unit | Pre-handler | Invigilator Authorization', function () {
         invigilatorAccessRepository.isUserInvigilatorForSessionCandidate
           .withArgs({
             certificationCandidateId: 8,
-            supervisorId: 100,
+            invigilatorId: 100,
           })
           .resolves(false);
 

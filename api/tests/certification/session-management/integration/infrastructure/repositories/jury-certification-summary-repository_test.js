@@ -141,8 +141,8 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
       });
     });
 
-    context('when the session has an ended by supervisor assessment', function () {
-      it('should return a JuryCertificationSummary with a endedBySupervisor status', async function () {
+    context('when the session has an ended by invigilator assessment', function () {
+      it('should return a JuryCertificationSummary with a endedByInvigilator status', async function () {
         // given
         const dbf = databaseBuilder.factory;
         const sessionId = dbf.buildSession().id;
@@ -153,7 +153,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         const assessmentId = dbf.buildAssessment({
           certificationCourseId: certificationCourse.id,
-          state: Assessment.states.ENDED_BY_SUPERVISOR,
+          state: Assessment.states.ENDED_BY_INVIGILATOR,
         }).id;
 
         dbf.buildAssessmentResult({ assessmentId, createdAt: new Date('2018-02-15T00:00:00Z') });
@@ -164,7 +164,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
 
         // then
-        expect(juryCertificationSummaries[0].status).to.equal('endedBySupervisor');
+        expect(juryCertificationSummaries[0].status).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
       });
     });
 
