@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import lodash from 'lodash';
 
 import { config } from '../config.js';
@@ -27,7 +29,7 @@ function getCorrelationContext() {
 
   return {
     user_id: extractUserIdFromRequest(request),
-    request_id: get(request, 'headers.x-request-id', '-'),
+    request_id: get(request, 'headers.x-request-id', `default_${randomUUID()}`),
   };
 }
 

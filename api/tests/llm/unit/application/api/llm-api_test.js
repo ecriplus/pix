@@ -1,9 +1,12 @@
+import { Readable } from 'node:stream';
+
 import * as llmApi from '../../../../../src/llm/application/api/llm-api.js';
 import { LLMChatDTO } from '../../../../../src/llm/application/api/models/LLMChatDTO.js';
 import { ChatNotFoundError, NoUserIdProvidedError } from '../../../../../src/llm/domain/errors.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { usecases } from '../../../../../src/llm/domain/usecases/index.js';
+import { LLMResponseHandler } from '../../../../../src/llm/infrastructure/streaming/llm-response-handler.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Application | API | llm', function () {
@@ -165,14 +168,13 @@ describe('LLM | Unit | Application | API | llm', function () {
     });
 
     context('when chat id provided', function () {
-      let promptChat, chat;
+      let promptChat;
 
       beforeEach(function () {
-        chat = Symbol('chat');
-        promptChat = sinon.stub(usecases, 'promptChat').resolves(chat);
+        promptChat = sinon.stub(usecases, 'promptChat');
       });
 
-      it('returns chat information', async function () {
+      it('returns response stream', async function () {
         // given
         const chatId = 'chatId';
         const userId = 123;
@@ -180,11 +182,17 @@ describe('LLM | Unit | Application | API | llm', function () {
         const attachmentName = 'attachmentName';
 
         // when
-        const actualChat = await llmApi.prompt({ chatId, userId, message, attachmentName });
+        const stream = await llmApi.prompt({ chatId, userId, message, attachmentName });
 
         // then
-        expect(actualChat).to.equal(chat);
-        expect(promptChat).to.have.been.calledOnceWithExactly({ chatId, userId, message, attachmentName });
+        expect(stream).to.be.instanceOf(Readable);
+        expect(promptChat).to.have.been.calledOnceWith({
+          chatId,
+          userId,
+          message,
+          attachmentName,
+          llmResponseHandler: sinon.match.instanceOf(LLMResponseHandler),
+        });
       });
     });
   });

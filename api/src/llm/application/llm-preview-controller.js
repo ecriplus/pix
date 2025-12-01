@@ -1,9 +1,12 @@
+import { Readable } from 'node:stream';
+
 import { getPixAppUrl } from '../../shared/domain/services/url-service.js';
 import { ChatForbiddenError, ChatNotFoundError } from '../domain/errors.js';
 import { Configuration } from '../domain/models/Configuration.js';
 import { usecases } from '../domain/usecases/index.js';
 import { chatRepository } from '../infrastructure/repositories/index.js';
 import * as chatSerializer from '../infrastructure/serializers/json/chat-serializer.js';
+import { LLMResponseHandler } from '../infrastructure/streaming/llm-response-handler.js';
 
 export const llmPreviewController = {
   async startChat(request, h) {
@@ -29,7 +32,10 @@ export const llmPreviewController = {
   async promptChat(request, h) {
     const { chatId } = request.params;
     const { prompt, attachmentName } = request.payload;
-    const response = await usecases.promptChat({ chatId, message: prompt, attachmentName });
-    return h.response(response).type('text/event-stream').code(201);
+
+    const responseStream = new TransformStream();
+    const llmResponseHandler = new LLMResponseHandler(responseStream.writable);
+    await usecases.promptChat({ chatId, message: prompt, attachmentName, llmResponseHandler });
+    return h.response(Readable.fromWeb(responseStream.readable)).type('text/event-stream').code(201);
   },
 };
