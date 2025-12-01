@@ -52,7 +52,7 @@ module('Unit | Controller | session-supervising', function (hooks) {
       assert.ok(
         controller.fileSaver.save.calledWith({
           token,
-          url: '/api/sessions/456/supervisor-kit',
+          url: '/api/sessions/456/invigilator-kit',
         }),
       );
     });

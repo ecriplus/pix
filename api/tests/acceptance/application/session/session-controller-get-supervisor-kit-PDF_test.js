@@ -5,14 +5,14 @@ import {
   generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
-describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', function () {
+describe('Acceptance | Controller | session-controller-get-invigilator-kit-pdf', function () {
   let server;
 
   beforeEach(async function () {
     server = await createServer();
   });
 
-  describe('GET /api/sessions/{id}/supervisor-kit', function () {
+  describe('GET /api/sessions/{id}/invigilator-kit', function () {
     let user, sessionIdAllowed;
 
     beforeEach(async function () {
@@ -38,7 +38,7 @@ describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', 
       // when
       const options = {
         method: 'GET',
-        url: `/api/sessions/${sessionIdAllowed}/supervisor-kit`,
+        url: `/api/sessions/${sessionIdAllowed}/invigilator-kit`,
         payload: {},
         headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };

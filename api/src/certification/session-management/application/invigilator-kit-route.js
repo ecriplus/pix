@@ -9,7 +9,7 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/sessions/{sessionId}/supervisor-kit',
+      path: '/api/sessions/{sessionId}/invigilator-kit',
       config: {
         validate: {
           params: Joi.object({

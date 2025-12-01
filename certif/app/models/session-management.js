@@ -23,8 +23,8 @@ export default class Session extends Model {
     return this.status === FINALIZED || this.status === IN_PROCESS || this.status === PROCESSED;
   }
 
-  get urlToDownloadSupervisorKitPdf() {
-    return `${ENV.APP.API_HOST}/api/sessions/${this.id}/supervisor-kit`;
+  get urlToDownloadInvigilatorKitPdf() {
+    return `${ENV.APP.API_HOST}/api/sessions/${this.id}/invigilator-kit`;
   }
 
   get completedCertificationReports() {

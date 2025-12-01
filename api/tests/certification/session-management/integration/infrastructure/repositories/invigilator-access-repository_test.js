@@ -13,9 +13,9 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       await invigilatorAccessRepository.create({ sessionId, userId });
 
       // then
-      const supervisorAccessInDB = await knex.from('supervisor-accesses').first();
-      expect(supervisorAccessInDB.sessionId).to.equal(sessionId);
-      expect(supervisorAccessInDB.userId).to.equal(userId);
+      const invigilatorAccessInDB = await knex.from('supervisor-accesses').first();
+      expect(invigilatorAccessInDB.sessionId).to.equal(sessionId);
+      expect(invigilatorAccessInDB.userId).to.equal(userId);
     });
   });
 
