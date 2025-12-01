@@ -11,16 +11,13 @@ import {
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
 import { CombinedCourseTemplate } from '../../../../../src/quest/domain/models/CombinedCourseTemplate.js';
+import { COMPARISONS as CRITERION_COMPARISONS } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { DataForQuest } from '../../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { Module } from '../../../../../src/quest/domain/models/Module.js';
-import {
-  CRITERION_COMPARISONS,
-  Quest,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { Quest, REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPARISONS as REQUIREMENT_COMPARISONS } from '../../../../../src/quest/domain/models/Requirement.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
   describe('CombinedCourseDetails', function () {
@@ -1108,7 +1105,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         it('should not return module if it is recommandable, but not recommended for user', function () {
           // given
           const module = new Module({ id: 'module-id', title: 'module' });
-          const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+          const campaign = new Campaign({ id: 777, targetProfileId: 888 });
           const recommendableModuleIds = [{ moduleId: module.id, targetProfileIds: [campaign.targetProfileId] }];
           const recommendedModuleIdsForUser = [];
           const combinedCourseTemplate = new CombinedCourseTemplate({
@@ -1170,7 +1167,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           // given
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const module = new Module({ id: 'ebcde1', title: 'module' });
-          const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+          const campaign = new Campaign({ id: 777, targetProfileId: 888 });
 
           const recommendableModuleIds = [{ moduleId: module.id, targetProfileIds: [campaign.targetProfileId] }];
           const recommendedModuleIdsForUser = [{ moduleId: module.id }];
@@ -1248,7 +1245,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
             const firstModule = new Module({ id: 'abcdef1', title: 'module' });
             const secondModule = new Module({ id: 'abcdef2', title: 'module' });
-            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+            const campaign = new Campaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
               { moduleId: firstModule.id, targetProfileIds: [campaign.targetProfileId] },
@@ -1328,8 +1325,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
             const firstModule = new Module({ id: 'abcdef1', title: 'module' });
             const secondModule = new Module({ id: 'abcdef2', title: 'module' });
-            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
-            const secondCampaign = domainBuilder.buildCampaign({ id: 999, targetProfileId: 101 });
+            const campaign = new Campaign({ id: 777, targetProfileId: 888 });
+            const secondCampaign = new Campaign({ id: 999, targetProfileId: 101 });
 
             const recommendableModuleIds = [
               { moduleId: firstModule.id, targetProfileIds: [campaign.targetProfileId] },
@@ -1433,7 +1430,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
             const firstModule = new Module({ id: 'abcdef1', title: 'module' });
             const secondModule = new Module({ id: 'abcdef2', title: 'module' });
-            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+            const campaign = new Campaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
               { moduleId: firstModule.id, targetProfileIds: [campaign.targetProfileId] },
@@ -1498,8 +1495,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
             const module = new Module({ id: 'abcdef1', title: 'module' });
             const module2 = new Module({ id: 'abcdef3', title: 'module2' });
-            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888, code: 'campaign123' });
-            const campaign2 = domainBuilder.buildCampaign({ id: 333, targetProfileId: 666, code: 'campaign456' });
+            const campaign = new Campaign({ id: 777, targetProfileId: 888, code: 'campaign123' });
+            const campaign2 = new Campaign({ id: 333, targetProfileId: 666, code: 'campaign456' });
 
             const recommendableModuleIds = [
               { moduleId: module.id, targetProfileIds: [campaign2.targetProfileId, campaign.targetProfileId] },
@@ -1603,7 +1600,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
             const moduleFromTargetProfile = new Module({ id: 'abcdefgh1', title: 'module' });
             const moduleFromQuest = new Module({ id: 'abcdefgh3', title: 'module from quest' });
-            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+            const campaign = new Campaign({ id: 777, targetProfileId: 888 });
 
             const recommendableModuleIds = [
               { moduleId: moduleFromTargetProfile.id, targetProfileIds: [campaign.targetProfileId] },
@@ -1813,6 +1810,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           }),
         ]);
       });
+
       it('should evaluates if module is completed', function () {
         // given
         const module = new Module({ id: 'abc2de', title: 'title', slug: 'abcdef' });
@@ -2058,6 +2056,64 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             id: module11.id,
             reference: module11.slug,
             title: module11.title,
+            type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+            redirection: redirectionUrl,
+            isCompleted: false,
+            isLocked: true,
+          }),
+        ]);
+      });
+
+      it('should identify module or campaign even if they  have a same id', function () {
+        const campaign = new Campaign({ id: '3', code: 'ABCDIAG2', title: 'diagnostique2', targetProfileId: 999 });
+        const module = new Module({ id: '3', title: 'module diag 1', slug: 'module-abcdef-1' });
+        const combinedCourseTemplate = new CombinedCourseTemplate({
+          name: 'combinix',
+          combinedCourseContent: [
+            {
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign.targetProfileId,
+            },
+            {
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module.id,
+            },
+          ],
+        });
+        const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          combinedCourseQuestFormat,
+        );
+        const dataForQuest = new DataForQuest({
+          eligibility: new Eligibility({
+            campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.STARTED }],
+            passages: [],
+          }),
+        });
+        const redirectionUrl = 'redirectionUrl';
+
+        // when
+        combinedCourse.generateItems({
+          itemDetails: [module, campaign],
+          encryptedCombinedCourseUrl: redirectionUrl,
+          dataForQuest,
+        });
+        // then
+        expect(combinedCourse.items).to.deep.equal([
+          new CombinedCourseItem({
+            id: campaign.id,
+            reference: campaign.code,
+            title: campaign.title,
+            type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+            masteryRate: null,
+            isCompleted: false,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: module.id,
+            reference: module.slug,
+            title: module.title,
             type: COMBINED_COURSE_ITEM_TYPES.MODULE,
             redirection: redirectionUrl,
             isCompleted: false,
