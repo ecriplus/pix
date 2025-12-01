@@ -27,7 +27,10 @@ module('Integration | Component | complementary-certifications/item/framework', 
       },
     });
 
-    store.peekRecord = sinon.stub().resolves('complementary-certification-key');
+    store.peekRecord = sinon.stub().resolves({
+      key: 'complementary-certification-key',
+      targetProfilesHistory: [],
+    });
     store.queryRecord = sinon.stub().resolves({});
   });
 

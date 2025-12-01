@@ -8,11 +8,13 @@ import { t } from 'ember-intl';
 
 import FrameworkDetails from './framework/framework-details';
 import FrameworkHistory from './framework/framework-history';
+import History from './target-profile/history';
 
 export default class ComplementaryCertificationFramework extends Component {
   @service currentUser;
   @service store;
   @service router;
+  @tracked targetProfilesHistory;
   @tracked currentConsolidatedFramework;
   @tracked frameworkHistory;
 
@@ -29,6 +31,8 @@ export default class ComplementaryCertificationFramework extends Component {
       'complementary-certification',
       routeParams.complementary_certification_id,
     );
+
+    this.targetProfilesHistory = complementaryCertification.targetProfilesHistory;
 
     this.currentConsolidatedFramework = await this.store.findRecord(
       'certification-consolidated-framework',
@@ -64,6 +68,10 @@ export default class ComplementaryCertificationFramework extends Component {
 
     {{#if this.frameworkHistory.length}}
       <FrameworkHistory @history={{this.frameworkHistory}} />
+    {{/if}}
+
+    {{#if this.targetProfilesHistory}}
+      <History @targetProfilesHistory={{this.targetProfilesHistory}} />
     {{/if}}
   </template>
 }
