@@ -90,7 +90,7 @@
     "@1024pix/eslint-plugin": "^2.1.14",
     "@babel/eslint-parser": "^7.18.2",
     "@babel/plugin-syntax-import-attributes": "^7.24.1",
-    "@eslint/compat": "^1.0.1",
+    "@eslint/compat": "^2.0.0",
     "@ls-lint/ls-lint": "^2.0.0",
     "chai": "^6.0.0",
     "chai-as-promised": "^8.0.0",
