@@ -81,7 +81,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
   describe('#findById', function () {
     it('should return combined course participation for given participationId', async function () {
       // given
-      const { id: organizationLearnerId, firstName, lastName } = databaseBuilder.factory.buildOrganizationLearner();
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner();
       const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId,
         status: OrganizationLearnerParticipationStatuses.STARTED,
@@ -94,8 +94,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
       // then
       expect(result.id).equal(participationId);
-      expect(result.firstName).equal(firstName);
-      expect(result.lastName).equal(lastName);
+      expect(result.organizationLearnerId).equal(organizationLearnerId);
     });
 
     it('should return null when participation does not have combined course type', async function () {
