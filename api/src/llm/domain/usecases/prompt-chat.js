@@ -1,5 +1,5 @@
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
-import { ChatForbiddenError, ChatNotFoundError, PromptAlreadyOngoingError } from '../errors.js';
+import { ChatForbiddenError, ChatNotFoundError, LLMApiError, PromptAlreadyOngoingError } from '../errors.js';
 import { Chat } from '../models/Chat.js';
 
 /**
@@ -8,9 +8,10 @@ import { Chat } from '../models/Chat.js';
  * @typedef {import ('../../../shared/infrastructure/mutex/RedisMutex.js').redisMutex} RedisMutex
  * @typedef {import ('../../infrastructure/streaming/llm-response-handler.js').LLMResponseHandler} LLMResponseHandler
  * @typedef {import ('../../infrastructure/streaming/llm-response-handler.js').LLMResponseMetadata} LLMResponseMetadata
+ * @typedef {typeof defaultLogger} Logger
  */
 
-const logger = child('llm:api', { event: SCOPES.LLM });
+const defaultLogger = child('llm:api', { event: SCOPES.LLM });
 
 /**
  * @param {object} params
@@ -22,6 +23,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @param {PromptRepository} params.promptRepository
  * @param {RedisMutex} params.redisMutex
  * @param {LLMResponseHandler} params.llmResponseHandler
+ * @param {Logger=} params.logger
  * @returns {Promise<void>}
  */
 export async function promptChat({
@@ -33,6 +35,7 @@ export async function promptChat({
   promptRepository,
   redisMutex,
   llmResponseHandler,
+  logger = defaultLogger,
 }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
@@ -61,7 +64,7 @@ export async function promptChat({
       });
     }
 
-    runFlow({ chat, chatRepository, llmResponseHandler, redisMutex });
+    runFlow({ chat, chatRepository, llmResponseHandler, logger, redisMutex });
   } catch (error) {
     await redisMutex.release(chatId);
     throw error;
@@ -77,9 +80,10 @@ export async function promptChat({
  * @param {ChatRepository} params.chatRepository
  * @param {RedisMutex} params.redisMutex
  * @param {LLMResponseHandler} params.llmResponseHandler
+ * @param {Logger=} params.logger
  * @returns {Promise<void>}
  */
-async function runFlow({ chat, chatRepository, redisMutex, llmResponseHandler }) {
+async function runFlow({ chat, chatRepository, llmResponseHandler, logger = defaultLogger, redisMutex }) {
   /** @type {LLMResponseMetadata} */
   let llmResponseMetadata;
   try {
@@ -99,7 +103,7 @@ async function runFlow({ chat, chatRepository, redisMutex, llmResponseHandler })
 
     if (errorOccurredDuringStream) {
       await llmResponseHandler.pushErrorEvent();
-      throw new Error(errorOccurredDuringStream);
+      throw new LLMApiError(errorOccurredDuringStream);
     }
 
     if (chat.lastUserMessage) {
@@ -129,6 +133,7 @@ async function runFlow({ chat, chatRepository, redisMutex, llmResponseHandler })
     await chatRepository.save(chat);
   } catch (err) {
     logger.error({ err, message: chat.lastUserMessage, llmResponseMetadata }, 'error in runFlow');
+    await llmResponseHandler.finish();
   } finally {
     await redisMutex.release(chat.id);
   }

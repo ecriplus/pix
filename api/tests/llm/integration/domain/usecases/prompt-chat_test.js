@@ -1,7 +1,11 @@
 import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
-import { NoAttachmentNeededError, NoAttachmentNorMessageProvidedError } from '../../../../../src/llm/domain/errors.js';
+import {
+  LLMApiError,
+  NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
+} from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
@@ -14,6 +18,7 @@ import {
   expect,
   knex,
   nock,
+  sinon,
   waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
 
@@ -1753,6 +1758,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             '40:{"message":"\\nle couscous c plutot bon"}35:{"error":"une erreur est survenue"}',
           ]),
         );
+      const logger = { error: sinon.stub() };
 
       // when
       await promptChat({
@@ -1760,6 +1766,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         userId: 123,
         message: 'un message',
         attachmentName: null,
+        logger,
         ...dependencies,
       });
       await waitForStreamFinalizationToBeDone();
@@ -1801,6 +1808,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         },
       ]);
       expect(llmPostPromptScope.isDone()).to.be.true;
+      expect(logger.error).to.have.been.calledOnce;
+      expect(logger.error).to.have.been.calledOnceWith(
+        {
+          err: sinon.match.instanceOf(LLMApiError),
+          message: sinon.match.object,
+          llmResponseMetadata: sinon.match.object,
+        },
+        'error in runFlow',
+      );
     });
   });
 });
