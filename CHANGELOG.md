@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.271.0](https://github.com/1024pix/pix/compare/v5.270.0...v5.271.0) (2025-12-01)
+
+### :rocket: Amélioration
+
+- [#14253](https://github.com/1024pix/pix/pull/14253) Ajuster le temps d'apparition du bouton suivant dans un stepper horizontal (PIX-20521) 
+- [#14295](https://github.com/1024pix/pix/pull/14295) Créer en masse des organisations en leurs spécifiant leurs pays (PIX-20344) 
+- [#14296](https://github.com/1024pix/pix/pull/14296) IAGenImpact, correction coquilles 
+- [#14305](https://github.com/1024pix/pix/pull/14305) IaInfox_NOV retours de panel 
+- [#14255](https://github.com/1024pix/pix/pull/14255) modification images - module IA vous avez dit IA 
+- [#14260](https://github.com/1024pix/pix/pull/14260) Modifs mon premier prompt (activite 1 2 et recap) 
+- [#14306](https://github.com/1024pix/pix/pull/14306) Update IagenBiais_NOV retours de panel 
+- [#14262](https://github.com/1024pix/pix/pull/14262) Utiliser  `oganizationLearnerId` au lieu du `userId` pour récupérer les données d'un parcours prescrit (Pix-20576). 
+- [#14154](https://github.com/1024pix/pix/pull/14154) Utiliser la nouvelle colonne passage_count pour le calcul du taux de couverture 
+
+### :bug: Correction
+
+- [#14292](https://github.com/1024pix/pix/pull/14292) ne pas remonter tout les learners d'une orga lors de la suppression de learner (PIX-20609)" 
+
+### :building_construction: Tech
+
+- [#14249](https://github.com/1024pix/pix/pull/14249) :recycle: Renomme les constantes appelées `supervisor` pour utiliser `invigilator` (PIX-20573) 
+- [#14300](https://github.com/1024pix/pix/pull/14300) Ajouter le shortId dans le script listant les modules pour la réplication BDD (PIX-20468). 
+- [#14287](https://github.com/1024pix/pix/pull/14287) mettre à jour  epreuve-component 
+- [#14271](https://github.com/1024pix/pix/pull/14271) Réaliser un script pour changer le domaine des urls de badges et de logos en BDD (PIX-20463). 
+
+### :arrow_up: Montée de version
+
+- [#14288](https://github.com/1024pix/pix/pull/14288) Update dependency @1024pix/epreuves-components to ^2.2.1 (junior) 
+- [#14289](https://github.com/1024pix/pix/pull/14289) Update dependency @1024pix/epreuves-components to ^2.2.1 (mon-pix) 
+- [#14290](https://github.com/1024pix/pix/pull/14290) Update dependency @1024pix/pix-ui to ^55.32.2 (junior) 
+- [#14291](https://github.com/1024pix/pix/pull/14291) Update dependency @1024pix/pix-ui to ^55.32.2 (orga) 
+- [#14257](https://github.com/1024pix/pix/pull/14257) Update nginx Docker tag to v1.29.3
+
 # [5.270.0](https://github.com/1024pix/pix/compare/v5.269.0...v5.270.0) (2025-11-28)
 
 ### :rocket: Amélioration
