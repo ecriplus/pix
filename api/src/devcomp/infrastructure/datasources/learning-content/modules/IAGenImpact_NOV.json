@@ -924,12 +924,27 @@
           "title": "Leçon - Agir pour réduire l‘impact",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
-                "type": "text",
-                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><h5>🤔 Et les personnes qui conçoivent l’IA, que peuvent-elles faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "4744f347-e7e6-48c7-a443-4cea2bb9dfd0",
+                      "type": "text",
+                      "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "dea57d55-43e8-45cc-9c23-1bc6f1aa164d",
+                      "type": "text",
+                      "content": "<h5>🤔 Et les personnes qui conçoivent l’IA, que peuvent-elles faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
