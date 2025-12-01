@@ -1032,7 +1032,7 @@
               "element": {
                 "id": "ffd4ab68-15fb-497d-bf67-9820d17feee3",
                 "type": "qcu-declarative",
-                "instruction": "<p>Maintenant que vous avez joué ce module, que ferez-vous si un logiciel d’IA générative vous dit que la Statue de la Liberté se trouve à Tokyo ?&nbsp;🗽</p>",
+                "instruction": "<p>Maintenant que vous avez joué ce module, que feriez-vous si un logiciel d’IA générative vous dit que la Statue de la Liberté se trouve à Tokyo ?&nbsp;🗽</p>",
                 "proposals": [
                   {
                     "id": "1",
