@@ -12,7 +12,7 @@ import {
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
-  findOrganizationLearnersByOrganizationId,
+  findOrganizationLearnersByOrganizationIdAndLearnerIds,
   getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
@@ -1889,7 +1889,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     });
   });
 
-  describe('#findOrganizationLearnersByOrganizationId', function () {
+  describe('#findOrganizationLearnersByOrganizationIdAndLearnerIds', function () {
     let myOrganizationId;
     let otherOrganizationId;
     let organizationLearner;
@@ -1911,15 +1911,33 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         organizationId: myOrganizationId,
       });
       await databaseBuilder.commit();
-      const results = await findOrganizationLearnersByOrganizationId({
+      const results = await findOrganizationLearnersByOrganizationIdAndLearnerIds({
         organizationId: myOrganizationId,
+        organizationLearnerIds: [organizationLearner.id, otherOrganizationLearner.id],
       });
 
+      expect(results).lengthOf(2);
+      expect(results[0]).instanceOf(OrganizationLearner);
+      expect(results[1]).instanceOf(OrganizationLearner);
       expect(results).to.deep.members([
         new OrganizationLearner(organizationLearner),
         new OrganizationLearner(otherOrganizationLearner),
       ]);
+    });
+
+    it('should return only learners matching organizationLearnersIds', async function () {
+      const otherOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: myOrganizationId,
+      });
+      await databaseBuilder.commit();
+      const results = await findOrganizationLearnersByOrganizationIdAndLearnerIds({
+        organizationId: myOrganizationId,
+        organizationLearnerIds: [otherOrganizationLearner.id],
+      });
+
+      expect(results).lengthOf(1);
       expect(results[0]).instanceOf(OrganizationLearner);
+      expect(results).to.deep.members([new OrganizationLearner(otherOrganizationLearner)]);
     });
 
     it('should not return deleted learner', async function () {
@@ -1930,8 +1948,9 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       await databaseBuilder.commit();
 
-      const results = await findOrganizationLearnersByOrganizationId({
+      const results = await findOrganizationLearnersByOrganizationIdAndLearnerIds({
         organizationId: myOrganizationId,
+        organizationLearnerIds: [organizationLearner.id],
       });
       expect(results).to.deep.equal([new OrganizationLearner(organizationLearner)]);
     });

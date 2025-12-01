@@ -29,32 +29,31 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
         const organizationLearnerList = new OrganizationLearnerList(payload);
 
         // when
-        const result = organizationLearnerList.getDeletableOrganizationLearners([345]);
+        const result = organizationLearnerList.getDeletableOrganizationLearners([123, 345]);
 
         // then
-        expect(result).to.be.deep.equal([{ id: 345 }]);
+        expect(result).to.be.deep.equal([{ id: 123 }, { id: 345 }]);
       });
     });
 
     context('when some organizationLearnerIds belong to organization', function () {
       it('should throw', function () {
         sinon.stub(logger, 'error');
-        //when
-        const payload = {
-          organizationId: 777,
-          organizationLearners: [{ id: 123 }, { id: 345 }],
-        };
 
-        const organizationLearnerList = new OrganizationLearnerList(payload);
+        //when
+        const organizationLearnerList = new OrganizationLearnerList({
+          organizationId: 777,
+          organizationLearners: [{ id: 123 }],
+        });
 
         const result = catchErrSync(organizationLearnerList.getDeletableOrganizationLearners, organizationLearnerList)(
-          [456, 123],
+          [123, 453],
           'userIdSample',
         );
 
         expect(result).to.be.instanceof(CouldNotDeleteLearnersError);
         expect(logger.error).to.have.calledWithExactly(
-          "User id userIdSample could not delete organization learners because some learner id in (456,123) don't belong to organization id 777",
+          "User id userIdSample could not delete organization learners because some learner id in (123,453) don't belong to organization id 777",
         );
       });
     });
