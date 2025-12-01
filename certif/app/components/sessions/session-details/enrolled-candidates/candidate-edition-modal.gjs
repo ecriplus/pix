@@ -5,13 +5,26 @@ import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 export default class CandidateEditionModal extends Component {
+  @service pixMetrics;
+
   closeModal = () => {
     this.args.candidate.rollbackAttributes();
     this.args.closeModal();
+  };
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    this.args.updateCandidate();
+
+    if (this.args.candidate.accessibilityAdjustmentNeeded) {
+      this.pixMetrics.trackEvent('certifCandidateAccessibilityAdjustmentNeeded');
+    }
   };
 
   <template>
@@ -22,7 +35,7 @@ export default class CandidateEditionModal extends Component {
       @onCloseButtonClick={{this.closeModal}}
     >
       <:content>
-        <form id='edit-candidate-form' class='edit-candidate-modal__form' {{on 'submit' @updateCandidate}}>
+        <form id='edit-candidate-form' class='edit-candidate-modal__form' {{on 'submit' this.handleFormSubmit}}>
           <div class='edit-candidate-modal-form__disabled-fields'>
             <PixInput @id='last-name' autocomplete='off' disabled='true' value={{@candidate.lastName}}>
               <:label>{{t 'common.labels.candidate.birth-name'}}</:label>

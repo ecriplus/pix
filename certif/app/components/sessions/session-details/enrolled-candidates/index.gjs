@@ -122,8 +122,7 @@ export default class EnrolledCandidates extends Component {
   }
 
   @action
-  async updateCandidate(event) {
-    event.preventDefault();
+  async updateCandidate() {
     try {
       const adapter = this.store.adapterFor('certification-candidate');
       await adapter.updateRecord({ candidate: this.certificationCandidateInEditModal, sessionId: this.args.sessionId });
