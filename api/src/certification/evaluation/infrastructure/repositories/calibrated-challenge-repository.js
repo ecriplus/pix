@@ -2,7 +2,7 @@
  * @typedef {import('../../shared/domain/models/Version.js').Version} Version
  */
 
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
@@ -26,10 +26,11 @@ export async function findActiveFlashCompatible({
     getInstance,
   },
 } = {}) {
+  const knexConn = DomainTransaction.getConnection();
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
 
-  const certificationChallenges = await knex
+  const certificationChallenges = await knexConn
     .select('difficulty', 'discriminant', 'challengeId')
     .from('certification-frameworks-challenges')
     .where({ versionId: version.id })
@@ -38,8 +39,8 @@ export async function findActiveFlashCompatible({
 
   const certificationChallengeIds = certificationChallenges.map(({ challengeId }) => challengeId);
 
-  const findCallback = async (knex) => {
-    return knex
+  const findCallback = async (lcmsKnex) => {
+    return lcmsKnex
       .select('id', 'skillId', 'accessibility1', 'accessibility2')
       .whereIn('id', certificationChallengeIds)
       .where('status', VALIDATED_STATUS)
@@ -71,7 +72,8 @@ export async function getMany({
     getInstance,
   },
 } = {}) {
-  const calibrations = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const calibrations = await knexConn
     .select('difficulty', 'discriminant', 'challengeId')
     .from('certification-frameworks-challenges')
     .whereIn('challengeId', ids)

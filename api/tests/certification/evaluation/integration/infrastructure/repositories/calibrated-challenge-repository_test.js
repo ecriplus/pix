@@ -718,11 +718,15 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
         const challengeValide = databaseBuilder.factory.buildCertificationFrameworksChallenge({
           challengeId: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.id,
           versionId: versionActive.id,
+          discriminant: 1.0,
+          difficulty: 2.1,
         });
 
-        const challengePerime = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        const challengeArchive = databaseBuilder.factory.buildCertificationFrameworksChallenge({
           challengeId: challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.id,
           versionId: versionActive.id,
+          discriminant: 2.0,
+          difficulty: 3.1,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
@@ -734,7 +738,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
 
         // when
         const challenges = await calibratedChallengeRepository.getMany({
-          ids: [challengeValide.challengeId, challengePerime.challengeId],
+          ids: [challengeValide.challengeId, challengeArchive.challengeId],
           version: versionActive,
         });
 
@@ -746,8 +750,8 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
               challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.accessibility1,
             colorBlindnessCompatibility:
               challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.accessibility2,
-            discriminant: challengePerime.discriminant,
-            difficulty: challengePerime.difficulty,
+            discriminant: challengeValide.discriminant,
+            difficulty: challengeValide.difficulty,
             competenceId: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.competenceId,
             skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
               id: skillData03_tube02competence01_actif.id,
@@ -762,8 +766,8 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
               challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.accessibility1,
             colorBlindnessCompatibility:
               challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.accessibility2,
-            discriminant: challengePerime.discriminant,
-            difficulty: challengePerime.difficulty,
+            discriminant: challengeArchive.discriminant,
+            difficulty: challengeArchive.difficulty,
             competenceId: challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson.competenceId,
             skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
               id: skillData03_tube02competence01_actif.id,
