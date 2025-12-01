@@ -13,21 +13,47 @@ module('Unit | Route | module', function (hooks) {
     assert.ok(route);
   });
 
-  test('should load the corresponding model', async function (assert) {
-    // given
-    const route = this.owner.lookup('route:module');
-    const store = this.owner.lookup('service:store');
+  module('when no corresponding module data exists', function () {
+    test('should load the corresponding model', async function (assert) {
+      // given
+      const route = this.owner.lookup('route:module');
+      const store = this.owner.lookup('service:store');
 
-    const module = Symbol('the-module');
+      const module = Symbol('the-module');
 
-    store.queryRecord = sinon.stub();
-    store.queryRecord.withArgs('module', { shortId: 'dfc4isne', encryptedRedirectionUrl: 'somehash' }).resolves(module);
+      store.queryRecord = sinon.stub();
+      store.queryRecord
+        .withArgs('module', { shortId: 'dfc4isne', encryptedRedirectionUrl: 'somehash' })
+        .resolves(module);
 
-    // when
-    const model = await route.model({ shortId: 'dfc4isne', redirection: 'somehash' });
+      // when
+      const model = await route.model({ shortId: 'dfc4isne', redirection: 'somehash' });
 
-    // then
-    assert.strictEqual(model, module);
+      // then
+      assert.strictEqual(model, module);
+    });
+  });
+
+  module('when the module data exists', function () {
+    test('should load data', async function (assert) {
+      // given
+      const route = this.owner.lookup('route:module');
+      const store = this.owner.lookup('service:store');
+      const shortId = 'dfc4isne';
+
+      const module = { shortId };
+
+      store.queryRecord = sinon.stub();
+      store.peekAll = sinon.stub();
+      store.peekAll.returns([module]);
+
+      // when
+      const model = await route.model({ shortId: 'dfc4isne', redirection: 'somehash' });
+
+      // then
+      sinon.assert.notCalled(store.queryRecord);
+      assert.strictEqual(model, module);
+    });
   });
 
   test('activate should set metrics context', function (assert) {

@@ -7,7 +7,12 @@ export default class ModuleRoute extends Route {
   @service router;
 
   model(params) {
-    return this.store.queryRecord('module', { shortId: params.shortId, encryptedRedirectionUrl: params.redirection });
+    const modules = this.store.peekAll('module');
+    const currentModule = modules.find((module) => module.shortId === params.shortId);
+    if (!currentModule) {
+      return this.store.queryRecord('module', { shortId: params.shortId, encryptedRedirectionUrl: params.redirection });
+    }
+    return currentModule;
   }
 
   activate() {
