@@ -3,20 +3,23 @@
     "id": 1,
     "type": "PRO",
     "name": "Dragon & Co",
-    "administrationTeamId": 1
+    "administrationTeamId": 1,
+    "countryCode": 99100
   },
   {
     "id": 2,
     "type": "SCO",
     "name": "The Night Watch",
     "isManagingStudents": true,
-    "administrationTeamId": 2
+    "administrationTeamId": 2,
+    "countryCode": 99100
   },
   {
     "id": 3,
     "type": "SUP",
     "name": "The Order of Maesters",
     "isManagingStudents": true,
-    "administrationTeamId": 1
+    "administrationTeamId": 1,
+    "countryCode": 99100
   }
 ]

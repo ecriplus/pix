@@ -296,6 +296,7 @@ export async function createOrganizationInDB({
       identityProviderForCampaigns: null,
       parentOrganizationId: null,
       administrationTeamId,
+      countryCode: 99100,
     })
     .returning('id');
   return id;
