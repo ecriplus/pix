@@ -9,6 +9,6 @@ export default class OldModulePassageRoute extends Route {
   }
 
   redirect(model) {
-    this.router.replaceWith('module.passage', model);
+    this.router.replaceWith('module.passage', model.shortId, model.slug);
   }
 }
