@@ -46,8 +46,12 @@ const getCombinedCourseParticipationById = async function (
   dependencies = { combinedCourseParticipationDetailSerializer },
 ) {
   const participationId = request.params.participationId;
-  const combinedCourseParticipation = await usecases.getCombinedCourseParticipationById({ participationId });
-  return dependencies.combinedCourseParticipationDetailSerializer.serialize(combinedCourseParticipation);
+  const combinedCourseId = request.params.combinedCourseId;
+  const combinedCourseDetails = await usecases.getCombinedCourseParticipationById({
+    participationId,
+    combinedCourseId,
+  });
+  return dependencies.combinedCourseParticipationDetailSerializer.serialize(combinedCourseDetails);
 };
 
 const findParticipations = async (request, _, dependencies = { combinedCourseParticipationSerializer }) => {
