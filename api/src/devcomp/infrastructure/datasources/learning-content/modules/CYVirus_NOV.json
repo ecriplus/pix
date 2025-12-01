@@ -41,7 +41,6 @@
                 "type": "video",
                 "title": "Short-video de l’accroche",
                 "url": "https://assets.pix.org/draft/modules/cy_virus_nov/video-draft-accroche.mp4",
-                "poster": "",
                 "subtitles": "",
                 "transcription": "<p>Vidéo montrant un écran d’ordinateur qui se comporte de manière inhabituelle.</p>"
               }
@@ -157,8 +156,7 @@
                   "randomSlides": false,
                   "titleLevel": 4,
                   "disableAnimation": false,
-                  "disableLoop": false,
-                  "imageTextDisplay": ""
+                  "disableLoop": false
                 }
               }
             },
