@@ -281,7 +281,7 @@ export default class CandidateInList extends Component {
   async endAssessmentForCandidate() {
     this.closeConfirmationModal();
     try {
-      await this.args.onSupervisorEndAssessment(this.args.candidate);
+      await this.args.onInvigilatorEndAssessment(this.args.candidate);
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.session-supervising.candidate-in-list.test-end-modal.success', {
           firstName: this.args.candidate.firstName,

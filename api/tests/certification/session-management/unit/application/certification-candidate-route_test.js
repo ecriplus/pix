@@ -84,7 +84,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
     });
   });
 
-  describe('PATCH certification-candidates/{certificationCandidateId}/end-assessment-by-supervisor', function () {
+  describe('PATCH certification-candidates/{certificationCandidateId}/end-assessment-by-invigilator', function () {
     it('should return 200 if the user is an invigilator of the session linked to the candidate', async function () {
       // given
       sinon
@@ -97,7 +97,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       // when
       const response = await httpTestServer.request(
         'PATCH',
-        '/api/certification-candidates/1/end-assessment-by-supervisor',
+        '/api/certification-candidates/1/end-assessment-by-invigilator',
       );
 
       // then
@@ -115,7 +115,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       // when
       const response = await httpTestServer.request(
         'PATCH',
-        '/api/certification-candidates/1/end-assessment-by-supervisor',
+        '/api/certification-candidates/1/end-assessment-by-invigilator',
       );
 
       // then

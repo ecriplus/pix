@@ -60,7 +60,7 @@ const register = async function (server) {
     },
     {
       method: 'PATCH',
-      path: '/api/certification-candidates/{certificationCandidateId}/end-assessment-by-supervisor',
+      path: '/api/certification-candidates/{certificationCandidateId}/end-assessment-by-invigilator',
       config: {
         pre: [
           {

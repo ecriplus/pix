@@ -34,13 +34,13 @@ module('Unit | Adapters | certification-candidate-for-supervising', function (ho
       });
     });
 
-    module('when request type is endAssessmentBySupervisor', function () {
+    module('when request type is endAssessmentByInvigilator', function () {
       test('should build url', async function (assert) {
         // when
-        const url = await adapter.buildURL(undefined, 2, undefined, 'endAssessmentBySupervisor', undefined);
+        const url = await adapter.buildURL(undefined, 2, undefined, 'endAssessmentByInvigilator', undefined);
 
         // then
-        assert.true(url.endsWith('certification-candidates/2/end-assessment-by-supervisor'));
+        assert.true(url.endsWith('certification-candidates/2/end-assessment-by-invigilator'));
       });
     });
   });

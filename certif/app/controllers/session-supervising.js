@@ -19,8 +19,8 @@ export default class SessionSupervisingController extends Controller {
   }
 
   @action
-  async endAssessmentBySupervisor(candidate) {
-    await candidate.endAssessmentBySupervisor();
+  async endAssessmentByInvigilator(candidate) {
+    await candidate.endAssessmentByInvigilator();
   }
 
   @action

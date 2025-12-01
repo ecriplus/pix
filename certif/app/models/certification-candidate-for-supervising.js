@@ -5,7 +5,7 @@ const assessmentStates = {
   COMPLETED: 'completed',
   STARTED: 'started',
   ABORTED: 'aborted',
-  ENDED_BY_SUPERVISOR: 'endedBySupervisor',
+  ENDED_BY_INVIGILATOR: 'endedBySupervisor',
 };
 
 export default class CertificationCandidateForSupervising extends Model {
@@ -33,7 +33,7 @@ export default class CertificationCandidateForSupervising extends Model {
   }
 
   get hasCompleted() {
-    return [assessmentStates.COMPLETED, assessmentStates.ENDED_BY_SUPERVISOR].includes(this.assessmentStatus);
+    return [assessmentStates.COMPLETED, assessmentStates.ENDED_BY_INVIGILATOR].includes(this.assessmentStatus);
   }
 
   get hasOngoingChallengeLiveAlert() {
@@ -64,8 +64,8 @@ export default class CertificationCandidateForSupervising extends Model {
     urlType: 'authorizeToResume',
   });
 
-  endAssessmentBySupervisor = memberAction({
+  endAssessmentByInvigilator = memberAction({
     type: 'patch',
-    urlType: 'endAssessmentBySupervisor',
+    urlType: 'endAssessmentByInvigilator',
   });
 }
