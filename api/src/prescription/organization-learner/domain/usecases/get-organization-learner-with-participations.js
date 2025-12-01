@@ -2,8 +2,7 @@ import { CampaignParticipationStatuses } from '../../../shared/domain/constants.
 
 export const getOrganizationLearnerWithParticipations = async function ({
   organizationId,
-  userId,
-  organizationLearnerRepository,
+  organizationLearnerId,
   organizationRepository,
   campaignParticipationOverviewRepository,
   tagRepository,
@@ -11,10 +10,6 @@ export const getOrganizationLearnerWithParticipations = async function ({
   stageAcquisitionRepository,
   stageAcquisitionComparisonService,
 }) {
-  const organizationLearnerId = await organizationLearnerRepository.getIdByUserIdAndOrganizationId({
-    organizationId,
-    userId,
-  });
   const organization = await organizationRepository.get(organizationId);
   const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
     organizationLearnerId,

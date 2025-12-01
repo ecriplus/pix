@@ -2,10 +2,7 @@ import dayjs from 'dayjs';
 import sinon from 'sinon';
 
 import { StatusesEnumValues } from '../../../../../src/devcomp/domain/models/module/UserModuleStatus.js';
-import {
-  OrganizationLearnerParticipationStatuses,
-  OrganizationLearnerParticipationTypes,
-} from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -68,7 +65,6 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
     it('should update passage when participation already exists', async function () {
       const learnerParticipationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         status: 'STARTED',
-        type: OrganizationLearnerParticipationTypes.PASSAGE,
         organizationLearnerId: organizationLearner.id,
         moduleId: '1234-abcdef',
         createdAt: dayjs().subtract('40', 'days').toDate(),

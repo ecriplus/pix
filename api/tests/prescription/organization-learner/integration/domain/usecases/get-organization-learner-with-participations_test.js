@@ -6,7 +6,6 @@ import { tagRepository } from '../../../../../../src/organizational-entities/inf
 import { CampaignParticipationOverview } from '../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
 import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
 import { getOrganizationLearnerWithParticipations } from '../../../../../../src/prescription/organization-learner/domain/usecases/get-organization-learner-with-participations.js';
-import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
@@ -52,9 +51,8 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
 
       // when
       const result = await getOrganizationLearnerWithParticipations({
-        userId,
+        organizationLearnerId,
         organizationId: organization.id,
-        organizationLearnerRepository,
         organizationRepository,
         campaignParticipationOverviewRepository,
         tagRepository,
@@ -156,9 +154,8 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
 
       // when
       const result = await getOrganizationLearnerWithParticipations({
-        userId,
+        organizationLearnerId,
         organizationId: organization.id,
-        organizationLearnerRepository,
         organizationRepository,
         campaignParticipationOverviewRepository,
         tagRepository,

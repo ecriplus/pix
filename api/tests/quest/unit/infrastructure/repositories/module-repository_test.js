@@ -3,24 +3,23 @@ import * as moduleRepository from '../../../../../src/quest/infrastructure/repos
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Repositories | Module Repository', function () {
-  describe('#getByUserIdAndModuleIds', function () {
-    it('should call getUserModuleStatuses from modulesApi', async function () {
+  describe('#getByIds', function () {
+    it('should call getByIds from modulesApi', async function () {
       // given
-      const userId = 1;
       const moduleIds = [1, 2];
       const modules = [{ id: 1, title: 'title', slug: 'slug' }];
 
       const modulesApiStub = {
-        getUserModuleStatuses: sinon.stub(),
+        getModulesByIds: sinon.stub(),
       };
-      modulesApiStub.getUserModuleStatuses.withArgs({ userId, moduleIds }).resolves(modules);
+      modulesApiStub.getModulesByIds.withArgs({ moduleIds }).resolves(modules);
 
       // when
-      const result = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds, modulesApi: modulesApiStub });
+      const result = await moduleRepository.getByIds({ moduleIds, modulesApi: modulesApiStub });
 
       // then
-      expect(modulesApiStub.getUserModuleStatuses).to.be.called;
-      expect(result[0]).to.be.an.instanceOf(Module);
+      expect(modulesApiStub.getModulesByIds).called;
+      expect(result[0]).instanceOf(Module);
     });
   });
 });

@@ -42,6 +42,7 @@ export const PRO_COMBINED_COURSE = {
     description: 'Description parcours combinix 1',
     name: 'Parcours combinix 1',
     stages: [
+      { title: 'Stage 0', threshold: 0 },
       { title: 'Stage 1', threshold: 20 },
       { title: 'Stage 2', threshold: 40 },
       { title: 'Stage 3', threshold: 60 },

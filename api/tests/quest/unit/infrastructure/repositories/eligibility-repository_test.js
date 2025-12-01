@@ -41,6 +41,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       expect(result[0].campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
     });
   });
+
   describe('#findByUserIdAndOrganizationId', function () {
     it('should call organizationLearnerWithParticipationApi', async function () {
       // given
@@ -54,26 +55,37 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
         organization,
         campaignParticipations: [{ targetProfileId }],
       };
-      const userId = 1;
-      const organizationLearnerWithParticipationApi = {
-        getByUserIdAndOrganizationId: sinon.stub(),
-      };
-      organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId
-        .withArgs({ userId, organizationId: organization.id })
-        .resolves(apiResponseSymbol);
-      const moduleApiResponse = [{ id: 1, status: 'COMPLETED' }];
-      const modulesApi = {
-        getUserModuleStatuses: sinon.stub(),
-      };
+      const moduleIds = Symbol('moduleIds');
 
-      modulesApi.getUserModuleStatuses.withArgs({ userId, moduleIds: [] }).resolves(moduleApiResponse);
+      const organizationLearnerParticipationRepository = {
+        findByOrganizationLearnerIdAndModuleIds: sinon.stub(),
+      };
+      organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds
+        .withArgs({
+          organizationLearnerId,
+          moduleIds,
+        })
+        .resolves([
+          {
+            referenceId: 1,
+            isTerminated: true,
+          },
+        ]);
+
+      const organizationLearnerWithParticipationApi = {
+        findByOrganizationAndOrganizationLearnerId: sinon.stub(),
+      };
+      organizationLearnerWithParticipationApi.findByOrganizationAndOrganizationLearnerId
+        .withArgs({ organizationLearnerId, organizationId: organization.id })
+        .resolves(apiResponseSymbol);
 
       // when
-      const result = await repositories.eligibilityRepository.findByUserIdAndOrganizationId({
-        userId,
+      const result = await repositories.eligibilityRepository.findByOrganizationAndOrganizationLearnerId({
+        organizationLearnerId,
         organizationId: organization.id,
         organizationLearnerWithParticipationApi,
-        modulesApi,
+        organizationLearnerParticipationRepository,
+        moduleIds,
       });
 
       // then

@@ -3,10 +3,15 @@ export async function getCombinedCourseByCode({
   code,
   combinedCourseRepository,
   combinedCourseDetailsService,
+  organizationLearnerPrescriptionRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
-  return combinedCourseDetailsService.getCombinedCourseDetails({
+  const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
     userId,
+    organizationId: combinedCourse.organizationId,
+  });
+  return combinedCourseDetailsService.getCombinedCourseDetails({
+    organizationLearnerId,
     combinedCourseId: combinedCourse.id,
   });
 }

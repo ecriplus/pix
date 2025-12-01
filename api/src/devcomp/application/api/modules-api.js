@@ -1,6 +1,22 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
+import { Module } from './models/Module.js';
 import { ModuleStatus } from './models/ModuleStatus.js';
+
+/**
+ * @param {object} params
+ * @param {string[]} params.moduleIds
+ *
+ * @returns {Module[]}
+ */
+const getModulesByIds = async ({ moduleIds }) => {
+  if (!moduleIds || !Array.isArray(moduleIds) || moduleIds.length === 0) {
+    return [];
+  }
+
+  const modules = await usecases.getModuleMetadataList({ ids: moduleIds });
+  return modules.map((module) => new Module(module));
+};
 
 /**
  * @function
@@ -56,4 +72,4 @@ const getUserModuleStatuses = async ({ userId, moduleIds }) => {
   });
 };
 
-export { getUserModuleStatuses };
+export { getModulesByIds, getUserModuleStatuses };

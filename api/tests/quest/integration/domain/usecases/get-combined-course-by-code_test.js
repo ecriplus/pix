@@ -5,10 +5,7 @@ import {
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import {
-  OrganizationLearnerParticipationStatuses,
-  OrganizationLearnerParticipationTypes,
-} from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
 import { COMPARISONS as COMPARISONS_REQUIREMENT } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
@@ -190,7 +187,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         trainingId: training1.id,
         campaignParticipationId: campaignParticipation.id,
       });
-      databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        moduleId: moduleId1,
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
 
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
@@ -255,11 +256,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         ],
       });
 
-      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
         combinedCourseId,
         organizationLearnerId,
         status: OrganizationLearnerParticipationStatuses.STARTED,
-        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
 
       await databaseBuilder.commit();

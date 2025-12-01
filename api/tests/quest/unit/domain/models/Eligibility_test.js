@@ -2,6 +2,20 @@ import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | Eligibility ', function () {
+  describe('#constructor', function () {
+    it('should remap passages to correct format', function () {
+      // given
+      const passages = [{ referenceId: 1, isTerminated: false }];
+
+      // when
+      const result = new Eligibility({ passages });
+
+      // then
+      expect(result.passages).lengthOf(1);
+      expect(result.passages[0]).deep.equal({ moduleId: 1, isTerminated: false });
+    });
+  });
+
   describe('#hasCampaignParticipation', function () {
     it('Should return true if campaign participation exists', function () {
       // given

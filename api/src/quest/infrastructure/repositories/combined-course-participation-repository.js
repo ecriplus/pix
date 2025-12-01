@@ -109,11 +109,47 @@ export const getByUserId = async function ({ userId, combinedCourseId }) {
   return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
+export const findMostRecentByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
+  const knexConnection = DomainTransaction.getConnection();
+
+  const combinedCourseParticipation = await knexConnection('organization_learner_participations')
+    .select(
+      'organization_learner_participations.id',
+      'organizationLearnerId',
+      'view-active-organization-learners.firstName',
+      'view-active-organization-learners.lastName',
+      'view-active-organization-learners.division',
+      'view-active-organization-learners.group',
+      'organization_learner_participations.status',
+      'organization_learner_participations.createdAt',
+      'organization_learner_participations.updatedAt',
+      'organization_learner_participations.referenceId',
+    )
+    .join(
+      'view-active-organization-learners',
+      'view-active-organization-learners.id',
+      '=',
+      'organization_learner_participations.organizationLearnerId',
+    )
+    .where({
+      'view-active-organization-learners.id': organizationLearnerId,
+      'organization_learner_participations.referenceId': combinedCourseId.toString(),
+      'organization_learner_participations.type': OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .whereNull('organization_learner_participations.deletedAt')
+    .orderBy('organization_learner_participations.createdAt', 'DESC')
+    .first();
+
+  if (!combinedCourseParticipation) return null;
+
+  return new CombinedCourseParticipation(combinedCourseParticipation);
+};
+
 export const findPaginatedCombinedCourseParticipationById = async function ({ combinedCourseId, page, filters }) {
   const knexConnection = DomainTransaction.getConnection();
 
   const queryBuilder = knexConnection('organization_learner_participations')
-    .select('view-active-organization-learners.userId')
+    .select('view-active-organization-learners.id')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
@@ -123,13 +159,12 @@ export const findPaginatedCombinedCourseParticipationById = async function ({ co
       referenceId: combinedCourseId.toString(),
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     })
-    .whereNotNull('userId')
-    .orderBy(['lastName', 'firstName', 'userId']);
+    .orderBy(['lastName', 'firstName']);
 
   queryBuilder.modify(addSearchFilters, filters);
   const { results, pagination } = await fetchPage({ queryBuilder, paginationParams: page });
   return {
-    userIds: results.map((result) => result.userId),
+    organizationLearnerIds: results.map((result) => result.id),
     meta: pagination,
   };
 };

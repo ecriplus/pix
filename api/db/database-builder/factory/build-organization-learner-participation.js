@@ -34,14 +34,80 @@ const buildOrganizationLearnerParticipation = function ({
     referenceId: moduleId ?? combinedCourseId?.toString(),
   };
 
-  const organizationLearnerParticipation = databaseBuffer.pushInsertable({
+  return databaseBuffer.pushInsertable({
     tableName: 'organization_learner_participations',
     values,
   });
-
-  return {
-    ...organizationLearnerParticipation,
-  };
 };
 
+buildOrganizationLearnerParticipation.ofTypePassage = function buildOrganizationLearnerParticipationOfTypePassage({
+  id = databaseBuffer.getNextId(),
+  createdAt = new Date(),
+  updatedAt = new Date(),
+  completedAt = null,
+  deletedAt = null,
+  deletedBy = null,
+  organizationLearnerId,
+  status,
+  moduleId,
+  attributes,
+} = {}) {
+  organizationLearnerId = _.isUndefined(organizationLearnerId) ? buildOrganizationLearner().id : organizationLearnerId;
+
+  const values = {
+    id,
+    type: OrganizationLearnerParticipationTypes.PASSAGE,
+    createdAt,
+    updatedAt,
+    completedAt,
+    deletedAt,
+    deletedBy,
+    organizationLearnerId,
+    status,
+    attributes,
+    referenceId: moduleId,
+  };
+
+  return databaseBuffer.pushInsertable({
+    tableName: 'organization_learner_participations',
+    values,
+  });
+};
+
+buildOrganizationLearnerParticipation.ofTypeCombinedCourse =
+  function buildOrganizationLearnerParticipationOfTypeCombinedCourse({
+    id = databaseBuffer.getNextId(),
+    createdAt = new Date(),
+    updatedAt = new Date(),
+    completedAt = null,
+    deletedAt = null,
+    deletedBy = null,
+    organizationLearnerId,
+    status,
+    combinedCourseId,
+    attributes,
+  } = {}) {
+    organizationLearnerId = _.isUndefined(organizationLearnerId)
+      ? buildOrganizationLearner().id
+      : organizationLearnerId;
+
+    const values = {
+      id,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      createdAt,
+      updatedAt,
+      completedAt,
+      deletedAt,
+      deletedBy,
+      organizationLearnerId,
+      status,
+      attributes,
+      referenceId: combinedCourseId.toString(),
+    };
+
+    return databaseBuffer.pushInsertable({
+      tableName: 'organization_learner_participations',
+      values,
+    });
+  };
 export { buildOrganizationLearnerParticipation };

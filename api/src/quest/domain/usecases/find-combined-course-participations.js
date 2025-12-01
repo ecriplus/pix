@@ -7,19 +7,23 @@ export const findCombinedCourseParticipations = async ({
   combinedCourseParticipationRepository,
   combinedCourseDetailsService,
 }) => {
-  const { userIds, meta } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
-    combinedCourseId,
-    page,
-    filters,
-  });
-
-  const combinedCourseParticipations = await PromiseUtils.mapSeries(userIds, async (userId) => {
-    const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
-      userId,
+  const { organizationLearnerIds, meta } =
+    await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
       combinedCourseId,
+      page,
+      filters,
     });
-    return combinedCourseDetails.participationDetails;
-  });
+
+  const combinedCourseParticipations = await PromiseUtils.mapSeries(
+    organizationLearnerIds,
+    async (organizationLearnerId) => {
+      const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+        organizationLearnerId,
+        combinedCourseId,
+      });
+      return combinedCourseDetails.participationDetails;
+    },
+  );
 
   return {
     combinedCourseParticipations,

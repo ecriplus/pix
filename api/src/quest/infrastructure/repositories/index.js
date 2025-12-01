@@ -19,6 +19,7 @@ import * as combinedCourseParticipationRepository from './combined-course-partic
 import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
+import * as organizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
 import * as organizationLearnerPassageParticipationRepository from './organization-learner-passage-participation-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as recommendedModulesRepository from './recommended-module-repository.js';
@@ -48,6 +49,7 @@ const repositoriesWithoutInjectedDependencies = {
 };
 
 const dependencies = {
+  organizationLearnerParticipationRepository,
   organizationLearnerWithParticipationApi,
   knowledgeElementsApi,
   campaignsApi,
