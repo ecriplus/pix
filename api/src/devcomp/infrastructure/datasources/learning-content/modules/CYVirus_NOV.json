@@ -1,0 +1,644 @@
+{
+  "id": "f8fdc1be-1a2c-4708-9f2e-b388e82d2f8a",
+  "shortId": "448b2c93",
+  "slug": "tmp-cyber-virus-nov",
+  "title": "Mon ordinateur a attrapé un virus : comment est-ce possible ?",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu. <br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Découvrir les effets causés par des logiciels malveillants</p>",
+      "<p>Comprendre d’où viennent les logiciels malveillants</p>",
+      "<p>Reconnaître des situations à risque et les éviter</p>"
+    ],
+    "tabletSupport": "obstructed"
+  },
+  "sections": [
+    {
+      "id": "a422031f-1c9b-4724-a1ce-dd0940023fa5",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "dcb75f1e-b3fc-40a6-b095-d9507a5ae743",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d6b16bfc-5fc9-4b7b-b15e-235644643afa",
+                "type": "text",
+                "content": "<p>Parfois, il arrive qu’un ordinateur se comporte de manière inhabituelle.</p><p><strong>Lancez la vidéo ci-dessous et observez ce qui se passe sur l’écran d’ordinateur.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "78f124a1-e1aa-4f61-aac4-4e2b7a9648af",
+                "type": "video",
+                "title": "Short-video de l’accroche",
+                "url": "https://assets.pix.org/draft/modules/cy_virus_nov/video-draft-accroche.mp4",
+                "poster": "",
+                "subtitles": "",
+                "transcription": "<p>Vidéo montrant un écran d’ordinateur qui se comporte de manière inhabituelle.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fe203758-5321-4021-bea7-058dd541f616",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, qu’arrive-t-il à cet ordinateur ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Il n’a presque plus de batterie.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Il y a un virus informatique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Il y a un logiciel malveillant.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Il y a eu une mise à jour.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "728f43a7-de42-4e89-af86-5ce0e6f816aa",
+          "type": "transition",
+          "title": "Transition de l’accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ab1ca7db-aa26-49fe-8a04-2bf7817957bc",
+                "type": "text",
+                "content": "<p>Les logiciels malveillants (souvent appelés virus informatique), quand ils sont présents sur un appareil, peuvent causer différents problèmes de fonctionnement.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "551722b4-a81f-427e-bdf8-6095439bac67",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "82061340-d5c8-43b8-a57c-b00c4558deaf",
+          "type": "discovery",
+          "title": "Découverte #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "bb25ae46-3706-4abd-8c43-4b774fc244be",
+                "type": "text",
+                "content": "<p><em>&gt;&gt;&gt;Option 1&nbsp;: flipcards ou carrousel image-text</em></p><p><em><br></em></p><p>Voici trois ordinateurs. Certains ont été infectés par un logiciel malveillant, d’autres non.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b1d4da11-3c69-4445-80eb-af0011973f8e",
+                "type": "custom",
+                "instruction": "<p>Cliquez sur les cartes ci-dessous pour en savoir plus sur le fonctionnement de chaque ordinateur.&nbsp;</p>",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "text",
+                  "slides": [
+                    {
+                      "title": "Ordinateur 1",
+                      "description": "➜ Cet ordinateur n’a pas été infecté par un logiciel malveillant.",
+                      "text": " Le curseur bouge par à-coups et les pages web mettent très longtemps à charger. Plusieurs raisons peuvent expliquer ces ralentissements, comme un espace de stockage saturé."
+                    },
+                    {
+                      "title": "Ordinateur 2",
+                      "description": "Cet ordinateur a été infecté par un logiciel malveillant.",
+                      "text": "Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus."
+                    },
+                    {
+                      "title": "Ordinateur 3",
+                      "description": "Cet ordinateur a aussi été infecté par un logiciel malveillant.",
+                      "text": "Rien d’inhabituel. L’ordinateur fonctionne normalement."
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 4,
+                  "disableAnimation": false,
+                  "disableLoop": false,
+                  "imageTextDisplay": ""
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
+                "type": "text",
+                "content": "<p><em>&gt;&gt;&gt;Option 2&nbsp;: nouvelle modalité à trouver pour un genre carrousel de POI/Animation.</em></p><p><em><br></em></p><p><strong>Observez le fonctionnement des 3 ordinateurs ci-dessous. Certains ont été infectés par un logiciel malveillant, d’autres non.</strong></p><br>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "52263674-7a87-4b74-9b97-4633c9d844ab",
+                      "type": "custom-draft",
+                      "title": "Ordinateur 1",
+                      "url": "https://1024pix.github.io/atelier-contenus/MCU/ralentissement.html",
+                      "instruction": "<p>Ordinateur 1</p>",
+                      "height": 400
+                    },
+                    {
+                      "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
+                      "type": "text",
+                      "content": "<p> ➜ <strong>Cet ordinateur n’a pas été infecté par un logiciel malveillant.</strong>  Plusieurs raisons peuvent expliquer ces ralentissements, comme un espace de stockage saturé. (dans un mini feedback ?)</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "4dfa2697-c551-4a54-94e6-07f93deb2c48",
+                      "type": "custom-draft",
+                      "title": "Ordinateur 2",
+                      "url": "https://1024pix.github.io/atelier-contenus/MCU/fichiersmodifies.html",
+                      "instruction": "<p>Ordinateur 2</p>",
+                      "height": 400
+                    },
+                    {
+                      "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
+                      "type": "text",
+                      "content": "<p>➜ <strong>C</strong><strong>et ordinateur a été infecté par un logiciel malveillant.</strong></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "931dee38-a756-44f9-98f9-d5e545d34c1e",
+                      "type": "text",
+                      "content": "<p><strong>Ordinateur 3</strong></p><p>Rien d’inhabituel&nbsp;: l’ordinateur fonctionne normalement. (Animation/POI ?)</p><p>➜<strong> Cet ordinateur a été infecté par un logiciel malveillant.</strong></p>"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "479ea9aa-0b30-4c3b-8262-31547f1a089a",
+                "type": "qcu-discovery",
+                "instruction": "<p>Selon vous, peut-on toujours savoir si un ordinateur a été infecté par un logiciel malveillant ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui, on peut.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Parfois on peut sans douter. Mais difficile d’en être sûre juste en observant le fonctionnement de son appareil.<br>Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>. D’autres agissent<strong> discrètement</strong> sans qu’on le voit.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non, on ne peut pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement. Même si parfois on peut s’en douter, difficile d’en être sûre juste en observant le fonctionnement de son appareil.<br>Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>. D’autres agissent<strong> discrètement</strong> sans qu’on le voit.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Même si parfois on peut s’en douter, difficile d’en être sûre juste en observant le fonctionnement de son appareil.<br>Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>. D’autres agissent<strong> discrètement</strong> sans qu’on le voit.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e655f3de-faf6-44f7-a19c-dc751ec22c6b",
+          "type": "short-lesson",
+          "title": "Leçon #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3255ed2b-a635-4a59-a9ba-b30e1da38c3b",
+                "type": "text",
+                "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un programme informatique capable d’<strong>attaquer</strong> un appareil en s’<strong>installant</strong>  sans qu’on s’en rende compte.</p><h5>🤔 Bon à savoir</h5><p>On utilise souvent le terme de «&nbsp;<strong>virus</strong>&nbsp;» pour désigner tous les logiciels malveillants, alors que le virus n’en est qu’<strong>un</strong> type parmi d’autres.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "008847b3-ca7b-4390-a53e-289e23149009",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "95d323ed-02d2-41cd-ade6-14898ffb9b9f",
+                "type": "text",
+                "content": "<p>Mais alors, faut-il s’inquéter tout le temps d’avoir un logiciel malveillant sur son appareil ? </p><p>Pas forcément. Découvrons cela ensemble.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5ceec67b-38dd-4e18-a5c7-eea46cdf347a",
+          "type": "discovery",
+          "title": "Découverte #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "50b2a382-b5d3-4105-a54b-10265376af41",
+                "type": "text",
+                "content": "<p>La plupart du temps, un logiciel malveillant ne s’installe pas tout seul. Dans certaines situations, certains de vos gestes peuvent être risqués.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d4be83b-3005-47b7-a8f5-12042e8c6dbe",
+                "type": "qab",
+                "instruction": "<p>Dans chacune des situations suivantes, déterminer si l’action présente un risque d’installer un logiciel malveillant ou non.</p>",
+                "cards": [
+                  {
+                    "id": "51f2b83b-2ebc-4b46-95f1-38330147adc4",
+                    "text": "Léa clique sur un lien dans une publicité pour regarder le film “Les 3 mousquetaires” gratuitement.",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-lidl.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Risqué",
+                    "proposalB": "Pas risqué",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "266d6fe3-ac34-4a11-b762-e1b925821b9f",
+                    "text": "Alex branche sur son PC une batterie externe neuve oubliée à la bibliothèque.",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/A5zShWC.jpeg",
+                      "altText": ""
+                    },
+                    "proposalA": "Risqué",
+                    "proposalB": "Pas risqué",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "3ee045e5-4531-4d6b-a7bb-367a193d1c3e",
+                    "text": "Maxence clique sur un fichier pour télécharger la version gratuite d’un logiciel connu.",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/fichier-draft-forum.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Risqué",
+                    "proposalB": "Pas risqué",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "521d68db-6a42-4e77-9e45-6eeb0dc50945",
+                    "text": "Fred utilise une prise USB en libre accès dans un lieu public pour charger son smartphone.",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/APVIHeB.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Risqué",
+                    "proposalB": "Pas risqué",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp; </p><ul><li><strong>Une publicit</strong><strong>é </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante.</li><li><strong>Un fichier</strong> ou <strong>une pièce jointe</strong> dans des&nbsp;messages frauduleux (e-mails, forum, etc.).</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble ou une prise USB&nbsp;</strong>en accès libre (borne de recharge, câble à disposition).</li></ul>"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "3b65709e-f77c-4ee8-abd7-67ef31e3a198",
+          "type": "short-lesson",
+          "title": "Leçon #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
+                "type": "text",
+                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Pour éviter d’installer un logiciel malveillant sans le vouloir, il faut être <strong>vigilant</strong> et adopter des <strong>gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et officiels</strong> pour télécharger un logiciel ou regarder un film.&nbsp;</li><li><strong>Ne pas cliquer sur des fichiers </strong>ou <strong>des pièces jointes</strong> dans des <strong>messages inconnus</strong>.</li><li><strong>Brancher uniquement des appareils de confiance</strong>.</li><li><strong>Charger son appareil sur une prise électrique.</strong></li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "85bdce42-b9d6-44ac-94b0-3a4c7b75b5f9",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f13c6d5e-220d-48f4-8fc5-8b07ce0a7f31",
+                "type": "text",
+                "content": "<p>D’où viennent ces logiciels malveillants ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2dbfa35a-118f-41c6-8a81-4e79d5eb3d5a",
+          "type": "discovery",
+          "title": "Découverte #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3a24782c-14d5-4c2f-baf2-5da35f32694b",
+                "type": "text",
+                "content": "<p>Sur un appareil, certaines informations attirent particulièrement l’attention de personnes avec de mauvaises intentions&nbsp;:&nbsp;les pirates informatiques.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "deaeecaa-4090-4f0d-b2de-17bdbe407518",
+                "type": "custom-draft",
+                "title": "POI valeurs et usages",
+                "url": "https://1024pix.github.io/atelier-contenus/FRI/cyberVirusValeursUsages.html",
+                "instruction": "<p>Cochez ce qui pourrait intéresser un pirate informatique.&nbsp;Vous verrez ensuite ce qu’un pirate pourrait faire grâce à un logiciel malveillant</p>",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "0e06b7b6-3b66-4c36-afe7-557b5352e17f",
+          "type": "short-lesson",
+          "title": "Leçon #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e7efa1be-03f5-4844-830c-249636f8e122",
+                "type": "text",
+                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques</strong>, dans le but de <strong>nuire</strong> aux appareils et à leurs utilisateurs, ainsi que pour en tirer profit.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e7a0892d-77d6-497a-9a7c-3c3c69fb0276",
+          "type": "transition",
+          "title": "Transition #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b6b4fd71-8578-4d75-a513-e0ce629bdd78",
+                "type": "text",
+                "content": "<p>Maintenant que vous en savez plus au sujet des logiciels malveillants, voyons si vous avez retenu l’essentiel.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c705e8cb-b87b-41cd-836d-87e106717111",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "67b8289b-c0c2-4010-857a-4714aec814e5",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a6a46a0d-573d-4fb8-9fb3-f286aaeae6c5",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/cy_virus_nov/infografie1-draft-recap.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "142142d6-fd32-452b-9158-fe7209543865",
+                "type": "text",
+                "content": "<p>Infograhie 1&nbsp;:</p><h5>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </h5><p>Un programme informatique indésirable qui peut s’<strong>installer</strong> sur un appareil. Ils sont créés par des <strong>pirates informatiques</strong> dans le but de <strong>nuire</strong> à son utilisateur (vol de données, d’argent) et à&nbsp;son appareil (ralentissement, fichiers bloqués, etc).</p><h5>Comment s’installe un LM ?&nbsp; </h5><p>Un LM ne s’installe pas tout seul. Les pirates utilisent des <strong>ruses</strong> pour <strong>piéger</strong> des utilisateurs <strong>à leur insu</strong> en <strong>cachan</strong>t des logiciels malveillants dans des messages, pages web, publicités, applications ou logiciels, appareils usb. </p><h5>Quels sont les effets ?&nbsp; </h5><p>Une fois installé sur un appareil, un logiciel malveillant peut provoquer des <strong>dysfonctionnements</strong>. Certains sont <strong>visibles</strong>, d’autres passent totalement <strong>inaperçus</strong>.</p><p><br>Infographie 2&nbsp;:</p><h5>Comment les éviter ? </h5><ul><li>Privilégier les sites légaux et officiels&nbsp;pour télécharger un logiciel ou regarder un film.&nbsp;</li><li>Ne pas cliquer sur des fichiers&nbsp;ou&nbsp;des pièces jointes&nbsp;dans des&nbsp;messages inconnus.</li><li>Brancher uniquement des appareils de confiance.</li><li>Charger son appareil sur une prise électrique.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7794672f-ef38-4580-8d91-d40eedac42a1",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "1515bb16-4f63-4f14-8ccf-c7ed4bfa76e7",
+          "type": "activity",
+          "title": "Activité d’application #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f004b226-a6c0-432e-9eef-0b4a73deb575",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des affirmations suivantes, dites si elle vrai ou fausse.<br></p>",
+                "cards": [
+                  {
+                    "id": "fd29be4e-81c4-4690-aa7f-222113cf157b",
+                    "text": "Un logiciel malveillant peut ralentir fortement un appareil.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "Vrai"
+                  },
+                  {
+                    "id": "757304f1-4866-47e2-afe6-f7a1b11e9485",
+                    "text": "Un logiciel malveillant provoque toujours des effets visibles, une fois installé sur un appareil.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "Faux"
+                  },
+                  {
+                    "id": "3b309b9c-2739-42be-9e72-a623476c638d",
+                    "text": "Les logiciels malveillants sont créés par des pirates informatiques.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "Vrai"
+                  },
+                  {
+                    "id": "6ccf1a10-a2bf-4f55-aa32-372c680ba7b9",
+                    "text": "Un logiciel malveillant peut être utilisé pour voler des données personnelles sur un appareil.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "Vrai"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "23feaab8-74e2-4dec-a2a2-e1f96cc20243",
+          "type": "activity",
+          "title": "Activité d’application #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5df222c3-eb89-4809-984b-916a76322f51",
+                "type": "qcu",
+                "instruction": "<p>Parmi ces différentes actions, laquelle présente un risque d’installer un logiciel malveillant ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Brancher une clé USB trouvée dans un parking pour voir ce qu’elle contient.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse ! 🎉</p>",
+                      "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une clé USB inconnue.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Brancher son smartphone sur une prise électrique pour le charger.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Brancher un casque filaire pour écouter de la musique.<br></p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1e97f15c-e499-4b27-95a9-f5a49a1bf409",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "32caa0d2-288a-4386-afd1-28954da43062",
+          "type": "challenge",
+          "title": "Aller plus loin",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
+                "type": "text",
+                "content": "<p>Pour terminer, prenons le cas d’Alice. </p><p>Alice a utilisé sa clé USB ce matin sur un ordinateur public à la bibliothèque. En rentrant chez elle, elle découvre que ses fichiers ont changé de nom et certains ne s’ouvrent plus.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9d53847b-d609-4477-a9af-27b22d28c9a7",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, que s’est-il passé ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Sa clé USB était abimée.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Un logiciel malveillant était déjà présent sur l’ordinateur public.En branchant sur l’ordinateur infecté, le logiciel a pu se copier sur sa clé et modifier ses fichiers. Un <strong>virus</strong> informatique&nbsp;est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Un virus informatique présent sur l’ordinateur public s’est copié sur la clé USB.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne réponse ! En branchant sur l’ordinateur infecté, le logiciel a pu se copier sur sa clé et modifier ses fichiers. Un <strong>virus</strong> informatique&nbsp;est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Elle avait trop de fichiers sur sa clé USB.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Un logiciel malveillant était déjà présent sur l’ordinateur public.En branchant sur l’ordinateur infecté, le logiciel a pu se copier sur sa clé et modifier ses fichiers. Un <strong>virus</strong> informatique&nbsp;est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
