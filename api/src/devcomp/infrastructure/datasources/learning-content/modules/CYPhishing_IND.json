@@ -603,11 +603,11 @@
               "element": {
                 "id": "5133b388-4a10-482f-8874-dbe8a9ec0932",
                 "type": "qrocm",
-                "instruction": "<p>Complétez la phrase suivante&nbsp;:</p>",
+                "instruction": "Complétez la phrase suivante&nbsp;:",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>En français, la technique d’arnaque par diffusion massive de messages trompeurs s’appelle le</span></p>"
+                    "content": "<span>En français, la technique d’arnaque par diffusion massive de messages trompeurs s’appelle le</span>"
                   },
                   {
                     "input": "nom-arnaque",
@@ -627,7 +627,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>.</span></p>"
+                    "content": "<span>.</span>"
                   }
                 ],
                 "feedbacks": {
