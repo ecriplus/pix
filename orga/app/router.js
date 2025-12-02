@@ -20,6 +20,9 @@ Router.map(function () {
   this.route('authentication', { path: 'connexion' }, function () {
     this.route('login', { path: '' });
     this.route('sso-selection');
+    this.route('oidc.flow', { path: '/:identity_provider_slug' });
+    this.route('oidc.login', { path: '/:identity_provider_slug/login' });
+    this.route('oidc.signup', { path: '/:identity_provider_slug/signup' });
   });
 
   this.route('join', { path: 'rejoindre' }, function () {
