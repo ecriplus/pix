@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
 import { Response } from 'miragejs';
+import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 import { module, test } from 'qunit';
 
 import setupIntl from '../helpers/setup-intl';
@@ -19,8 +20,16 @@ module('Acceptance | join and login', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
+  let invitationStorage;
+
   hooks.beforeEach(function () {
     server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
+    invitationStorage = new SessionStorageEntry('joinInvitationData');
+  });
+
+  hooks.afterEach(function () {
+    server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
+    invitationStorage.remove();
   });
 
   module('When the invitation is valid', function (hooks) {
@@ -54,6 +63,11 @@ module('Acceptance | join and login', function (hooks) {
       assert.strictEqual(currentURL(), '/');
       assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       assert.ok(screen.getByText('Harry Cover'));
+      assert.deepEqual(invitationStorage.get(), {
+        code: 'ABCD',
+        invitationId: '1',
+        organizationName: 'College BRO & Evil Associates',
+      });
     });
 
     module('When user has not accepted terms of service yet', function (hooks) {
@@ -149,6 +163,7 @@ module('Acceptance | join and login', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/connexion');
+      assert.strictEqual(invitationStorage.get(), undefined);
     });
   });
 
