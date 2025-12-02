@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { CombinedCourse } from './CombinedCourse.js';
 import { COMPARISONS as CRITERION_PROPERTY_COMPARISONS } from './CriterionProperty.js';
@@ -7,42 +8,34 @@ import { Quest } from './Quest.js';
 import { buildRequirement, COMPARISONS, TYPES } from './Requirement.js';
 
 export class CombinedCourseTemplate {
-  #quest;
+  #content;
+  #now;
   #name;
   #description;
   #illustration;
 
-  constructor({ name, successRequirements, description, illustration }) {
-    const now = new Date();
-    const { successRequirements: parsedSuccessRequirements } = this.#validate({
+  constructor({ name, combinedCourseContent, description, illustration }) {
+    this.#validate({
       name,
-      successRequirements,
+      combinedCourseContent,
       description,
       illustration,
     });
+    this.#now = new Date();
     this.#name = name;
-    this.#quest = new Quest({
-      createdAt: now,
-      updatedAt: now,
-      rewardType: null,
-      rewardId: null,
-      eligibilityRequirements: [],
-      successRequirements: parsedSuccessRequirements,
-    });
+    this.#content = combinedCourseContent;
     this.#description = description;
     this.#illustration = illustration;
   }
 
   get targetProfileIds() {
-    return this.#quest.successRequirements
-      .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)
-      .map(({ data }) => parseInt(data.targetProfileId.data));
+    return this.#content
+      .filter((requirement) => requirement.type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)
+      .map(({ value }) => parseInt(value));
   }
 
   get moduleIds() {
-    return this.#quest.successRequirements
-      .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.PASSAGES)
-      .map(({ data }) => data.moduleId.data);
+    return this.#content.filter((requirement) => requirement.type === TYPES.OBJECT.PASSAGES).map(({ value }) => value);
   }
 
   toCombinedCourse(code, organizationId, campaigns) {
@@ -54,24 +47,24 @@ export class CombinedCourseTemplate {
   }
 
   toCombinedCourseQuestFormat(campaigns) {
-    const successRequirements = this.#quest.successRequirements.map((requirement) => {
-      if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        const requirementTargetProfileId = requirement.data.targetProfileId.data;
+    const successRequirements = this.#content.map((requirement) => {
+      if (requirement.type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
+        const requirementTargetProfileId = requirement.value;
         const campaignId = campaigns.find(({ targetProfileId }) => targetProfileId === requirementTargetProfileId).id;
         return buildRequirement({
           requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           comparison: COMPARISONS.ALL,
           data: {
             campaignId: { data: campaignId, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
-            status: { data: 'SHARED', comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
+            status: { data: CampaignParticipationStatuses.SHARED, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
           },
         });
-      } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
+      } else if (requirement.type === TYPES.OBJECT.PASSAGES) {
         return buildRequirement({
           requirement_type: TYPES.OBJECT.PASSAGES,
           comparison: COMPARISONS.ALL,
           data: {
-            ...requirement.data,
+            moduleId: { data: requirement.value, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
             isTerminated: { data: true, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
           },
         });
@@ -79,10 +72,14 @@ export class CombinedCourseTemplate {
         return requirement;
       }
     });
+
     return new Quest({
-      ...this.#quest,
-      successRequirements,
+      createdAt: this.#now,
+      updatedAt: this.#now,
+      rewardType: null,
+      rewardId: null,
       eligibilityRequirements: [],
+      successRequirements,
     });
   }
 
@@ -97,35 +94,22 @@ export class CombinedCourseTemplate {
 
 const schema = Joi.object({
   name: Joi.string().required(),
-  successRequirements: Joi.array()
+  combinedCourseContent: Joi.array()
     .items(
       Joi.object({
-        requirement_type: Joi.string().valid(TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS, TYPES.OBJECT.PASSAGES).required(),
-        comparison: Joi.string().valid(COMPARISONS.ALL, COMPARISONS.ONE_OF),
-        data: Joi.alternatives()
-          .conditional('requirement_type', {
-            switch: [
-              {
-                is: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                then: Joi.object({
-                  targetProfileId: Joi.object({
-                    data: Joi.number().integer().required(),
-                    comparison: Joi.string().valid(CRITERION_PROPERTY_COMPARISONS.EQUAL).required(),
-                  }).required(),
-                }).required(),
-              },
-              {
-                is: TYPES.OBJECT.PASSAGES,
-                then: Joi.object({
-                  moduleId: Joi.object({
-                    data: Joi.string().required(),
-                    comparison: Joi.string().valid(CRITERION_PROPERTY_COMPARISONS.EQUAL).required(),
-                  }).required(),
-                }).required(),
-              },
-            ],
-          })
-          .required(),
+        type: Joi.string().valid(TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS, TYPES.OBJECT.PASSAGES).required(),
+        value: Joi.alternatives().conditional('type', {
+          switch: [
+            {
+              is: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              then: Joi.number().integer().required(),
+            },
+            {
+              is: TYPES.OBJECT.PASSAGES,
+              then: Joi.string().required(),
+            },
+          ],
+        }),
       }),
     )
     .required(),
