@@ -41,7 +41,7 @@ module.exports = function (environment) {
       SUPPORTED_LOCALES: [
         { value: 'en', nativeName: 'English', displayedInSwitcher: true },
         { value: 'es', nativeName: 'Español', displayedInSwitcher: false },
-        { value: 'es-419', nativeName: 'Español (Latinoamérica)', displayedInSwitcher: false },
+        { value: 'es-419', nativeName: 'Español (Latinoamérica y el Caribe)', displayedInSwitcher: true },
         { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
         { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
         { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
