@@ -12,7 +12,7 @@ module('Integration | Component | complementary-certifications/item/header', fun
       // given
       const store = this.owner.lookup('service:store');
       const complementaryCertification = store.createRecord('complementary-certification', {
-        id: 0,
+        id: '0',
         key: 'DROIT',
         label: 'Pix+Droit',
         hasComplementaryReferential: true,
@@ -36,7 +36,7 @@ module('Integration | Component | complementary-certifications/item/header', fun
       // given
       const store = this.owner.lookup('service:store');
       const complementaryCertification = store.createRecord('complementary-certification', {
-        id: 0,
+        id: '0',
         key: 'CLEA',
         label: 'CléA Numérique',
         hasComplementaryReferential: false,
