@@ -9,25 +9,6 @@
     @extend %pix-title-xs;
   }
 
-  &__details {
-    margin-top: 1.5rem;
-  }
-
-  &__details-label {
-    float: left;
-    margin-right: var(--pix-spacing-1x);
-  }
-
-  &__details-value {
-    margin-bottom: 0.5rem;
-
-    &::after {
-      display: table;
-      clear: left;
-      content: '';
-    }
-  }
-
   &__editor-logo {
     width: 100%;
     height: 100%;

@@ -1424,19 +1424,20 @@
           }
         },
         "details": {
-          "contentType": "Type de contenu :",
-          "duration": "Durée :",
-          "editorLogo": "Url du logo de l'éditeur :",
-          "editorName": "Nom d'éditeur :",
-          "internalTitle": "Titre interne :",
-          "localizedLanguage": "Langue localisée :",
-          "publishedOn": "Publié sur :",
-          "status": "Statut :",
+          "contentType": "Type de contenu",
+          "duration": "Durée",
+          "editor-logo-aria-label": "Lien pour accéder à l'image du logo du contenu formatif (nouvelle fenêtre)",
+          "editorLogo": "Url du logo de l'éditeur",
+          "editorName": "Nom d'éditeur",
+          "internalTitle": "Titre interne",
+          "localizedLanguage": "Langue localisée",
+          "publishedOn": "Publié sur",
+          "status": "Statut",
           "status-label": {
             "disabled": "Non déclenchable",
             "enabled": "Déclenchable"
           },
-          "title": "Titre public :"
+          "title": "Titre public"
         },
         "duplicate": {
           "button": {
