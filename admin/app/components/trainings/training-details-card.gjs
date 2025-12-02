@@ -20,10 +20,9 @@ export default class TrainingDetailsCard extends Component {
   <template>
     {{! template-lint-disable no-redundant-role }}
     <article class="training-details-card" role="article">
+      <h1 class="training-details-card__title">{{@training.internalTitle}}</h1>
+      <StateTag @isDisabled={{@training.isDisabled}} />
       <div class="training-details-card__content">
-        <h1 class="training-details-card__title">{{@training.internalTitle}}</h1>
-        <StateTag @isDisabled={{@training.isDisabled}} />
-
         <DescriptionList>
 
           <DescriptionList.Divider />
@@ -91,8 +90,10 @@ export default class TrainingDetailsCard extends Component {
           <DescriptionList.Divider />
 
         </DescriptionList>
+        <div class="training-details-card__editor-logo">
+          <img src={{@training.editorLogoUrl}} alt={{@training.editorName}} />
+        </div>
       </div>
-      <img class="training-details-card__editor-logo" src={{@training.editorLogoUrl}} alt={{@training.editorName}} />
     </article>
   </template>
 }
