@@ -6,31 +6,30 @@
   @extend %pix-body-s;
 
   &__title {
-    margin-bottom: 16px;
-    font-weight: normal;
-    font-size: 1.25rem;
+    margin: var(--pix-spacing-4x) 0;
 
     @extend %pix-title-xs;
   }
 
   &__author {
-    margin-bottom: 4px;
     font-weight: bold;
   }
 
   &__date {
+    @extend %pix-body-xs;
+
     color: var(--pix-neutral-500);
-    font-size: 0.9rem;
   }
 
   &__content {
-    padding: 8px 24px;
-    background-color: var(--pix-neutral-20);
+    margin: var(--pix-spacing-3x) 0;
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
   }
 
   &__field {
     height: 80px;
-    margin-bottom: 20px;
+    margin-bottom: var(--pix-spacing-3x);
   }
 
   &__actions {
