@@ -3,7 +3,15 @@ import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.
 import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
-import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationLoggerContext,
+  CampaignParticipationStatuses,
+} from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../../src/quest/domain/models/Quest.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
@@ -654,12 +662,16 @@ describe('Integration | UseCases | delete-campaign', function () {
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: campaignId,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              status: {
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },

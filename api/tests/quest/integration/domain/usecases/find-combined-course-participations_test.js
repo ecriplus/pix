@@ -1,6 +1,14 @@
-import { CombinedCourseParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationStatuses,
+  CombinedCourseParticipationStatuses,
+} from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseParticipationDetails } from '../../../../../src/quest/domain/models/CombinedCourseParticipationDetails.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -14,30 +22,30 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
               data: campaignId,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
-              data: 'SHARED',
-              comparison: 'equal',
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             moduleId: {
               data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             isTerminated: {
               data: true,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },

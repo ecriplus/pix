@@ -1,5 +1,11 @@
 import iconv from 'iconv-lite';
 
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -94,16 +100,16 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
       eligibilityRequirements: [],
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
               data: firstCreatedCampaignForFirstOrganization.id,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
-              data: 'SHARED',
-              comparison: 'equal',
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },
@@ -120,16 +126,16 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
       eligibilityRequirements: [],
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
               data: secondCreatedCampaignForFirstOrganization.id,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
-              data: 'SHARED',
-              comparison: 'equal',
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },
@@ -144,16 +150,16 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
       eligibilityRequirements: [],
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
               data: createdCampaignForSecondOrganization.id,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
-              data: 'SHARED',
-              comparison: 'equal',
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },

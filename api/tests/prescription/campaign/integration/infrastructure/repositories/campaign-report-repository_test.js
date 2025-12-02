@@ -8,6 +8,11 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../../src/quest/domain/models/Quest.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
@@ -1078,12 +1083,16 @@ describe('Integration | Repository | Campaign-Report', function () {
           organizationId,
           successRequirements: [
             {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: campaignInQuest.id,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },
@@ -1111,12 +1120,16 @@ describe('Integration | Repository | Campaign-Report', function () {
           organizationId,
           successRequirements: [
             {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: campaignInQuest.id,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },

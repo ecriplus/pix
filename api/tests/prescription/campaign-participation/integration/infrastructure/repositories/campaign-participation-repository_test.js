@@ -14,6 +14,11 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../../src/quest/domain/models/Quest.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -1484,30 +1489,30 @@ describe('Integration | Repository | Campaign Participation', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: campaignInCombinedCourse.id,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
               status: {
-                data: 'SHARED',
-                comparison: 'equal',
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               moduleId: {
                 data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
@@ -1547,12 +1552,16 @@ describe('Integration | Repository | Campaign Participation', function () {
       databaseBuilder.factory.buildCombinedCourse({
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: campaignInCombinedCourse.id,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              status: {
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },

@@ -6,6 +6,11 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../../src/quest/domain/models/Quest.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -88,12 +93,16 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           organizationId: combinedCourseCampaign.organizationId,
           successRequirements: [
             {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
               data: {
                 campaignId: {
                   data: combinedCourseCampaign.id,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
             },

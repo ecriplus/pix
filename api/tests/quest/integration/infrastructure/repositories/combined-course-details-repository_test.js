@@ -1,4 +1,11 @@
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import * as combinedCourseDetailsRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-details-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -15,12 +22,16 @@ describe('Quest | Integration | Repository | combined-course-details', function 
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: campaignId,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
+              },
+              status: {
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
@@ -32,16 +43,16 @@ describe('Quest | Integration | Repository | combined-course-details', function 
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               moduleId: {
                 data: moduleId,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
@@ -72,12 +83,16 @@ describe('Quest | Integration | Repository | combined-course-details', function 
         organizationId: anotherOrganizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: 123,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.ALL,
+              },
+              status: {
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: COMPARISONS_CRITERION.ALL,
               },
             },
           },
