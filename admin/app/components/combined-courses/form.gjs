@@ -19,7 +19,7 @@ export default class CombineCourseForm extends Component {
 
   @tracked combinedCourseItems = [];
   @tracked itemId = null;
-  @tracked itemType = 'campaign';
+  @tracked itemType = 'targetProfile';
   @tracked name = '';
   @tracked illustration = '';
   @tracked description = '';
@@ -29,8 +29,8 @@ export default class CombineCourseForm extends Component {
   @action
   addItem(event) {
     event.preventDefault();
-    if (this.itemType === 'campaign') {
-      this.addCampaign();
+    if (this.itemType === 'targetProfile') {
+      this.addTargetProfile();
     } else {
       this.addModule();
     }
@@ -38,7 +38,7 @@ export default class CombineCourseForm extends Component {
     document.getElementsByName('itemType')[0].focus();
   }
 
-  addCampaign() {
+  addTargetProfile() {
     this.combinedCourseItems = [
       ...this.combinedCourseItems,
       {
@@ -83,14 +83,18 @@ export default class CombineCourseForm extends Component {
       exportLink.setAttribute('download', `${this.name}.csv`);
       exportLink.click();
 
-      console.log(csvContent);
-    } catch (e) {
-      console.error(e);
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.combined-courses.create-form.notifications.success'),
+      });
+    } catch {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.combined-courses.create-form.notifications.error'),
+      });
     }
   }
 
   getItemType(item) {
-    return item.type === 'campaignParticipations' ? 'campaign' : 'module';
+    return item.type === 'campaignParticipations' ? 'targetProfile' : 'module';
   }
 
   getItemValue(item) {
@@ -116,36 +120,55 @@ export default class CombineCourseForm extends Component {
 
   <template>
     <PixBlock @variant="admin" class="combined-course-page">
-      <h1 class="combined-course-page__title"> {{t "common.components.combined-courses.create-form.title"}}</h1>
 
       <form class="combined-course-page__form">
-        <PixInput
-          @id="organizationIds"
-          @value={{this.organizationIds}}
-          @requiredLabel="Champ obligatoire"
-          {{on "change" (fn this.setData "organizationIds")}}
-          class="combined-course-page__input"
-        >
-          <:label>
-            {{t "common.components.combined-courses.create-form.labels.organizationsList"}}
-          </:label>
-          <:subLabel>
-            {{t "common.components.combined-courses.create-form.labels.organizationsListSubLabel"}}
-          </:subLabel>
-        </PixInput>
+        <h1 class="combined-course-page__title"> {{t "components.combined-courses.create-form.title"}}</h1>
 
-        <PixInput
-          @id="creatorId"
-          @value={{this.creatorId}}
-          @requiredLabel="Champ obligatoire"
-          {{on "change" (fn this.setData "creatorId")}}
-          class="combined-course-page__input"
-        >
-          <:label>
-            {{t "common.components.combined-courses.create-form.labels.creatorId"}}
-          </:label>
-        </PixInput>
+        <PixFieldset>
+          <:title>
+            {{t "components.combined-courses.create-form.fieldsetElement"}}
+          </:title>
+          <:content>
+            <div class="combined-course-page__fieldset">
+              <PixRadioButton
+                name="itemType"
+                @value="targetProfile"
+                checked={{if (eq this.itemType "targetProfile") "checked"}}
+                {{on "change" (fn this.setData "itemType")}}
+              >
+                <:label>{{t "components.combined-courses.create-form.labels.target-profile"}}</:label>
+              </PixRadioButton>
+              <PixRadioButton
+                name="itemType"
+                checked={{if (eq this.itemType "module") "checked"}}
+                @value="module"
+                {{on "change" (fn this.setData "itemType")}}
+              >
+                <:label>{{t "components.combined-courses.create-form.labels.module"}}</:label>
+              </PixRadioButton>
+            </div>
+          </:content>
+        </PixFieldset>
 
+        <div class="combined-course-page__form-addItem">
+          <PixInput
+            @id="itemId"
+            @value={{this.itemId}}
+            @requiredLabel="Champ obligatoire"
+            {{on "change" (fn this.setData "itemId")}}
+            {{on "keyup" this.handleKeyPress}}
+            class="combined-course-page__input"
+          >
+            <:label>
+              {{t "components.combined-courses.create-form.labels.itemId"}}
+            </:label>
+          </PixInput>
+
+          <PixButton @triggerAction={{this.addItem}} class="combined-course-page__button">{{t
+              "components.combined-courses.create-form.addItemButton"
+            }}</PixButton>
+        </div>
+        <hr class="combined-course-page__separator" />
         <PixInput
           @id="name"
           @value={{this.name}}
@@ -154,7 +177,7 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            {{t "common.components.combined-courses.create-form.labels.name"}}
+            {{t "components.combined-courses.create-form.labels.name"}}
           </:label>
         </PixInput>
 
@@ -166,7 +189,7 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            {{t "common.components.combined-courses.create-form.labels.illustration"}}
+            {{t "components.combined-courses.create-form.labels.illustration"}}
 
           </:label>
         </PixInput>
@@ -177,78 +200,68 @@ export default class CombineCourseForm extends Component {
           @requiredLabel="Champ obligatoire"
           {{on "change" (fn this.setData "description")}}
           class="combined-course-page__input"
+          rows="10"
         >
           <:label>
-            {{t "common.components.combined-courses.create-form.labels.description"}}
+            {{t "components.combined-courses.create-form.labels.description"}}
 
           </:label>
         </PixTextarea>
 
-        <PixFieldset>
-          <:title>
-            {{t "common.components.combined-courses.create-form.fieldsetElement"}}
-          </:title>
-          <:content>
-            <PixRadioButton
-              name="itemType"
-              @value="campaign"
-              checked={{if (eq this.itemType "campaign") "checked"}}
-              {{on "change" (fn this.setData "itemType")}}
-            >
-              <:label>{{t "common.components.combined-courses.create-form.label.campaign"}}</:label>
-            </PixRadioButton>
-            <PixRadioButton
-              name="itemType"
-              checked={{if (eq this.itemType "module") "checked"}}
-              @value="module"
-              {{on "change" (fn this.setData "itemType")}}
-            >
-              <:label> {{t "common.components.combined-courses.create-form.label.module"}}</:label>
-            </PixRadioButton>
-          </:content>
-        </PixFieldset>
+        <hr class="combined-course-page__separator" />
 
         <PixInput
-          @id="itemId"
-          @value={{this.itemId}}
+          @id="organizationIds"
+          @value={{this.organizationIds}}
           @requiredLabel="Champ obligatoire"
-          {{on "change" (fn this.setData "itemId")}}
-          {{on "keyup" this.handleKeyPress}}
+          {{on "change" (fn this.setData "organizationIds")}}
           class="combined-course-page__input"
         >
           <:label>
-            {{t "common.components.combined-courses.create-form.label.itemId"}}
+            {{t "components.combined-courses.create-form.labels.organizationsList"}}
+          </:label>
+          <:subLabel>
+            {{t "components.combined-courses.create-form.labels.organizationsListSubLabel"}}
+          </:subLabel>
+        </PixInput>
+
+        <PixInput
+          @id="creatorId"
+          @value={{this.creatorId}}
+          @requiredLabel="Champ obligatoire"
+          {{on "change" (fn this.setData "creatorId")}}
+          class="combined-course-page__input"
+        >
+          <:label>
+            {{t "components.combined-courses.create-form.labels.creatorId"}}
           </:label>
         </PixInput>
 
-        <PixButton @triggerAction={{this.addItem}} class="combined-course-page__button">{{t
-            "common.components.combined-courses.create-form.addItemButton"
-          }}</PixButton>
       </form>
 
-      <hr class="combined-course-page__separator" />
+      <div class="combined-course-page__items">
+        <h2 class="combined-course-page__title">
+          {{t "components.combined-courses.create-form.courseContent"}}</h2>
 
-      <h2 class="combined-course-page__title">
-        {{t "common.components.combined-courses.create-form.label.courseContent"}}</h2>
+        {{#if (gt this.combinedCourseItems.length 0)}}
+          <ul class="combined-course-page__list">
+            {{#each this.combinedCourseItems as |item|}}
+              <li class="combined-course-page__list-item"><PixTag @color={{this.getItemColor item}}>
+                  {{this.getItemType item}}
+                  -
+                  {{this.getItemValue item}}
+                </PixTag>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p> {{t "components.combined-courses.create-form.contentFeedback"}}</p>
+        {{/if}}
 
-      {{#if (gt this.combinedCourseItems.length 0)}}
-        <ul class="combined-course-page__list">
-          {{#each this.combinedCourseItems as |item|}}
-            <li class="combined-course-page__list-item"><PixTag @color={{this.getItemColor item}}>
-                {{this.getItemType item}}
-                -
-                {{this.getItemValue item}}
-              </PixTag>
-            </li>
-          {{/each}}
-        </ul>
-      {{else}}
-        <p> {{t "common.components.combined-courses.create-form.contentFeedback"}}</p>
-      {{/if}}
-
-      <PixButton class="combined-course-page__button" @triggerAction={{this.downloadCSV}} @variant="success">{{t
-          "common.components.combined-courses.create-form.downloadButton"
-        }}</PixButton>
+        <PixButton class="combined-course-page__button" @triggerAction={{this.downloadCSV}} @variant="success">{{t
+            "components.combined-courses.create-form.downloadButton"
+          }}</PixButton>
+      </div>
     </PixBlock>
   </template>
 }

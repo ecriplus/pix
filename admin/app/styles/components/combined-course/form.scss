@@ -2,8 +2,11 @@
 
 .combined-course-page {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--pix-spacing-6x);
+  justify-content: space-around;
+  padding-top: var(--pix-spacing-8x);
+  padding-bottom: var(--pix-spacing-8x);
 
   &__title {
     @extend %pix-title-m;
@@ -11,8 +14,15 @@
 
   &__form {
     display: inline-flex;
+    flex: 0 1 30rem;
     flex-direction: column;
     gap: var(--pix-spacing-6x);
+  }
+
+  &__form-addItem {
+    display: inline-flex;
+    gap: var(--pix-spacing-4x);
+    align-items: end;
   }
 
   &__input {
@@ -33,4 +43,24 @@
     flex-direction: column;
     gap: var(--pix-spacing-3x);
   }
+
+  &__fieldset {
+    display: inline-flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+
+    .pix-radio-button {
+      margin-top: 0;
+    }
+  }
+
+  &__items {
+    display: inline-flex;
+    flex: 0 0 50%;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+  }
+
+
+
 }
