@@ -739,7 +739,7 @@
       "grains": [
         {
           "id": "87a55230-a331-4a06-b533-59a0766d0213",
-          "type": "activity",
+          "type": "challenge",
           "title": "Transfert",
           "components": [
             {
