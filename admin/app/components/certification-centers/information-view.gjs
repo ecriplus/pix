@@ -115,16 +115,17 @@ export default class InformationView extends Component {
 
       <DescriptionList.Divider />
 
-      <span class="label">{{t "pages.certification-centers.information-view.habilitations.title"}}</span>
-      <ul class="certification-center-information-display__habilitations-list">
-        {{#each this.availableHabilitations as |habilitation|}}
-          <HabilitationTag
-            @label={{habilitation.label}}
-            @active={{habilitation.isHabilitated}}
-            @arialabel={{habilitation.ariaLabel}}
-          />
-        {{/each}}
-      </ul>
+      <DescriptionList.Item @label={{t "pages.certification-centers.information-view.habilitations.title"}}>
+        <ul class="certification-center-information-display__habilitations-list">
+          {{#each this.availableHabilitations as |habilitation|}}
+            <HabilitationTag
+              @label={{habilitation.label}}
+              @active={{habilitation.isHabilitated}}
+              @arialabel={{habilitation.ariaLabel}}
+            />
+          {{/each}}
+        </ul>
+      </DescriptionList.Item>
 
       <DescriptionList.Divider />
 
