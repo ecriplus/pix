@@ -1386,8 +1386,20 @@
         }
       },
       "label": {
-        "estimated-time": "Estimated time: ",
-        "estimated-time-experimental": "(experimental data based on the relativity of time)"
+        "comment": "Comments (internal use)",
+        "created-at": "Creation date",
+        "description": "Description",
+        "estimated-time": "Estimated time",
+        "estimated-time-experimental": "(experimental data based on the relativity of time)",
+        "external-name": "External name",
+        "id": "ID",
+        "link-autonomous-course": "Is associated with an autonomous course",
+        "link-autonomous-course-or-campaign": "associated with a campaign or an autonomous course",
+        "link-campaign": "Is associated with a campaign",
+        "name": "Internal name",
+        "outdated": "Outdated",
+        "owner-organization-id": "Reference organisation",
+        "simplified-access": "Simplified Access"
       },
       "resettable-checkbox": {
         "label": "Allow resetting for evaluation-type campaigns when multiple submissions are enabled for the organisation"

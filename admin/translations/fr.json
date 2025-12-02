@@ -1387,8 +1387,20 @@
         }
       },
       "label": {
-        "estimated-time": "Temps estimé : ",
-        "estimated-time-experimental": "(données expérimentales basées sur la relativité du temps)"
+        "comment": "Commentaire (usage interne)",
+        "created-at": "Date de création",
+        "description": "Description",
+        "estimated-time": "Temps estimé",
+        "estimated-time-experimental": "(données expérimentales basées sur la relativité du temps)",
+        "external-name": "Nom externe",
+        "id": "ID",
+        "link-autonomous-course": "Est associé à un parcours autonome",
+        "link-autonomous-course-or-campaign": "Associé à une campagne ou un parcours autonome",
+        "link-campaign": "Est associé à une campagne",
+        "name": "Nom interne",
+        "outdated": "Obsolète",
+        "owner-organization-id": "Organisation de référence",
+        "simplified-access": "Parcours Accès Simplifié"
       },
       "resettable-checkbox": {
         "label": "Permettre la remise à zéro des acquis du profil cible"
