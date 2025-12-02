@@ -499,6 +499,27 @@
       },
       "title": "All certification frameworks"
     },
+     "combined-courses": {
+      "create-form": {
+        "title": "Course creator",
+      "labels": {
+        "organizationsList": "Organisations list",
+        "organizationsListSubLabel": "(ids separated by commas)",
+        "creatorId": "Creator id",
+        "name":  "Name",
+        "illustration": "Illustration",
+        "description": " Description",
+        "campaign": "Campaign",
+        "module": "Module",
+        "itemId": "Id"
+      },
+      "fieldsetElement": "Choose the element type you want to add :",
+      "addItemButton": "Add",
+      "downloadButton": "Download CSV",
+      "courseContent": "Course content",
+      "contentFeedback": "Your course does not have any items yet."
+      }
+    },
     "layout": {
       "menu-bar": {
         "entries": {

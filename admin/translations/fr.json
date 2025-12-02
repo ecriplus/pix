@@ -500,6 +500,27 @@
       },
       "title": "Tous les référentiels de certification"
     },
+    "combined-courses": {
+      "create-form": {
+        "title": "Créateur de parcours",
+      "labels": {
+        "organizationsList": "liste des organisations",
+        "organizationsListSubLabel": "(ids séparés par des virgules)",
+        "creatorId": "Identifiant du créateur",
+        "name":  "Nom",
+        "illustration": "Illustration",
+        "description": " Description",
+        "campaign": "Campagne",
+        "module": "Module",
+        "itemId": "Identifiant"
+      },
+      "fieldsetElement": "Choisissez le type d'élément à ajouter :",
+      "addItemButton": "Ajouter",
+      "downloadButton": "Télécharger le CSV",
+      "courseContent": "Contenu du parcours",
+      "contentFeedback": "Votre parcours n'a aucun élément ajouté."
+      }
+    },
     "layout": {
       "menu-bar": {
         "entries": {

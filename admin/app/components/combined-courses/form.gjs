@@ -10,6 +10,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import { eq, gt } from 'ember-truth-helpers';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
 
@@ -115,7 +116,7 @@ export default class CombineCourseForm extends Component {
 
   <template>
     <PixBlock @variant="admin" class="combined-course-page">
-      <h1 class="combined-course-page__title">Créateur de parcours</h1>
+      <h1 class="combined-course-page__title"> {{t "common.components.combined-courses.create-form.title"}}</h1>
 
       <form class="combined-course-page__form">
         <PixInput
@@ -126,10 +127,10 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            liste des organisations
+            {{t "common.components.combined-courses.create-form.labels.organizationsList"}}
           </:label>
           <:subLabel>
-            (ids séparés par des virgules)
+            {{t "common.components.combined-courses.create-form.labels.organizationsListSubLabel"}}
           </:subLabel>
         </PixInput>
 
@@ -141,7 +142,7 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            Identifiant du créateur
+            {{t "common.components.combined-courses.create-form.labels.creatorId"}}
           </:label>
         </PixInput>
 
@@ -153,7 +154,7 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            Nom
+            {{t "common.components.combined-courses.create-form.labels.name"}}
           </:label>
         </PixInput>
 
@@ -165,7 +166,8 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            Illustration
+            {{t "common.components.combined-courses.create-form.labels.illustration"}}
+
           </:label>
         </PixInput>
 
@@ -177,12 +179,15 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            Description
+            {{t "common.components.combined-courses.create-form.labels.description"}}
+
           </:label>
         </PixTextarea>
 
         <PixFieldset>
-          <:title>Choisissez le type d'élément à ajouter :</:title>
+          <:title>
+            {{t "common.components.combined-courses.create-form.fieldsetElement"}}
+          </:title>
           <:content>
             <PixRadioButton
               name="itemType"
@@ -190,7 +195,7 @@ export default class CombineCourseForm extends Component {
               checked={{if (eq this.itemType "campaign") "checked"}}
               {{on "change" (fn this.setData "itemType")}}
             >
-              <:label>Campagne</:label>
+              <:label>{{t "common.components.combined-courses.create-form.label.campaign"}}</:label>
             </PixRadioButton>
             <PixRadioButton
               name="itemType"
@@ -198,7 +203,7 @@ export default class CombineCourseForm extends Component {
               @value="module"
               {{on "change" (fn this.setData "itemType")}}
             >
-              <:label>Module</:label>
+              <:label> {{t "common.components.combined-courses.create-form.label.module"}}</:label>
             </PixRadioButton>
           </:content>
         </PixFieldset>
@@ -212,16 +217,19 @@ export default class CombineCourseForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            Identifiant
+            {{t "common.components.combined-courses.create-form.label.itemId"}}
           </:label>
         </PixInput>
 
-        <PixButton @triggerAction={{this.addItem}} class="combined-course-page__button">Ajouter un item</PixButton>
+        <PixButton @triggerAction={{this.addItem}} class="combined-course-page__button">{{t
+            "common.components.combined-courses.create-form.addItemButton"
+          }}</PixButton>
       </form>
 
       <hr class="combined-course-page__separator" />
 
-      <h2 class="combined-course-page__title">Contenu du parcours tout court</h2>
+      <h2 class="combined-course-page__title">
+        {{t "common.components.combined-courses.create-form.label.courseContent"}}</h2>
 
       {{#if (gt this.combinedCourseItems.length 0)}}
         <ul class="combined-course-page__list">
@@ -235,11 +243,12 @@ export default class CombineCourseForm extends Component {
           {{/each}}
         </ul>
       {{else}}
-        <p>Votre parcours n'a aucun élément ajouté.</p>
+        <p> {{t "common.components.combined-courses.create-form.contentFeedback"}}</p>
       {{/if}}
 
-      <PixButton class="combined-course-page__button" @triggerAction={{this.downloadCSV}} @variant="success">Télécharger
-        le CSV</PixButton>
+      <PixButton class="combined-course-page__button" @triggerAction={{this.downloadCSV}} @variant="success">{{t
+          "common.components.combined-courses.create-form.downloadButton"
+        }}</PixButton>
     </PixBlock>
   </template>
 }
