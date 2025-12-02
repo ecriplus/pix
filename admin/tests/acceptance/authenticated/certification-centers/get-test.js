@@ -136,8 +136,7 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
 
       // then
       assert.dom(screen.getByText('Habilitations aux certifications complémentaires')).exists();
-      // TODO : h1 en double, fix quand on mettra les templates dans les components
-      // assert.dom(screen.getByRole('heading', { name: 'nouveau nom', level: 1 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'nouveau nom', level: 1 })).exists();
       assert.dom(screen.getByText('Établissement supérieur')).exists();
       assert.dom(screen.getByText('nouvel identifiant externe')).exists();
       assert.dom(screen.getByText('Justin Ptipeu')).exists();

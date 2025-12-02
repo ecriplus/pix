@@ -1003,7 +1003,15 @@
           },
           "title": "Habilitated to the following complementary certifications"
         },
-        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}."
+        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
+        "list": {
+          "dpo": "DPO",
+          "dpo-definition": "Data Protection Officer",
+          "dpo-email": "E-mail address of ",
+          "dpo-name": "Name of ",
+          "external-id": "External identifier",
+          "type": "Type"
+        }
       },
       "notifications": {
         "failure": {

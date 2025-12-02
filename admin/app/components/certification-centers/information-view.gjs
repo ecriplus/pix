@@ -8,6 +8,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import sortBy from 'lodash/sortBy';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
 
 import HabilitationTag from './habilitation-tag';
@@ -74,38 +75,60 @@ export default class InformationView extends Component {
       </PixNotificationAlert>
     {{/if}}
 
-    <dl class="certification-center-information-display__list">
-      <dt class="label">Type :</dt>
-      <dd>{{@certificationCenter.typeLabel}}</dd>
+    <DescriptionList>
+      <DescriptionList.Divider />
 
-      <dt class="label">Identifiant externe :</dt>
-      <dd>{{@certificationCenter.externalId}}</dd>
+      <DescriptionList.Item @label={{t "pages.certification-centers.information-view.list.type"}}>
+        {{@certificationCenter.typeLabel}}
+      </DescriptionList.Item>
 
-      <dt class="label">
-        Nom du
-        <abbr title="Délégué à la protection des données">DPO</abbr>
-        :
-      </dt>
-      <dd>{{@certificationCenter.dataProtectionOfficerFullName}}</dd>
+      <DescriptionList.Divider />
 
-      <dt class="label">
-        Adresse e-mail du
-        <abbr title="Délégué à la protection des données">DPO</abbr>
-        :
-      </dt>
-      <dd>{{@certificationCenter.dataProtectionOfficerEmail}}</dd>
-    </dl>
+      <DescriptionList.Item @label={{t "pages.certification-centers.information-view.list.external-id"}}>
+        {{@certificationCenter.externalId}}
+      </DescriptionList.Item>
 
-    <span class="label">{{t "pages.certification-centers.information-view.habilitations.title"}}</span>
-    <ul class="certification-center-information-display__habilitations-list">
-      {{#each this.availableHabilitations as |habilitation|}}
-        <HabilitationTag
-          @label={{habilitation.label}}
-          @active={{habilitation.isHabilitated}}
-          @arialabel={{habilitation.ariaLabel}}
-        />
-      {{/each}}
-    </ul>
+      <DescriptionList.Divider />
+
+      <DescriptionList.ItemWithHTMLElement>
+        <:label>
+          {{t "pages.certification-centers.information-view.list.dpo-name"}}
+          <abbr title={{t "pages.certification-centers.information-view.list.dpo-definition"}}>{{t
+              "pages.certification-centers.information-view.list.dpo"
+            }}</abbr>
+        </:label>
+        <:value>
+          {{@certificationCenter.dataProtectionOfficerFullName}}
+        </:value>
+      </DescriptionList.ItemWithHTMLElement>
+      <DescriptionList.ItemWithHTMLElement>
+        <:label>
+          {{t "pages.certification-centers.information-view.list.dpo-email"}}
+          <abbr title={{t "pages.certification-centers.information-view.list.dpo-definition"}}>{{t
+              "pages.certification-centers.information-view.list.dpo"
+            }}</abbr>
+        </:label>
+        <:value>
+          {{@certificationCenter.dataProtectionOfficerEmail}}
+        </:value>
+      </DescriptionList.ItemWithHTMLElement>
+
+      <DescriptionList.Divider />
+
+      <span class="label">{{t "pages.certification-centers.information-view.habilitations.title"}}</span>
+      <ul class="certification-center-information-display__habilitations-list">
+        {{#each this.availableHabilitations as |habilitation|}}
+          <HabilitationTag
+            @label={{habilitation.label}}
+            @active={{habilitation.isHabilitated}}
+            @arialabel={{habilitation.ariaLabel}}
+          />
+        {{/each}}
+      </ul>
+
+      <DescriptionList.Divider />
+
+    </DescriptionList>
 
     <ul class="certification-center-information-display__action-buttons">
       <li>
