@@ -7,7 +7,7 @@ import { ScriptRunner } from '../../src/shared/application/scripts/script-runner
 export class UpdateModulixTrainingsLink extends Script {
   constructor() {
     super({
-      description: 'Update Modulix training link',
+      description: 'Update Modulix training link and remove tmp from slug',
       permanent: false,
       options: {
         dryRun: {
@@ -33,7 +33,8 @@ export class UpdateModulixTrainingsLink extends Script {
           link: training.link,
           moduleRepository: repositories.moduleRepository,
         });
-        const newLink = `${splittedLink[0]}modules/${module.shortId}${splittedLink[1]}`;
+        const tmpSlug = splittedLink[1].split('tmp-');
+        const newLink = `${splittedLink[0]}modules/${module.shortId}${tmpSlug.join('')}`;
         await trx('trainings').update({ link: newLink, updatedAt: new Date() }).where({ id: training.id });
       }
 
@@ -49,7 +50,6 @@ export class UpdateModulixTrainingsLink extends Script {
 
       await trx.commit();
       logger.info(`${trainingsToBeUpdated.length} trainings have been successfully updated`);
-      return;
     } catch (error) {
       await trx.rollback();
       throw error;

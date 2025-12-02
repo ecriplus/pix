@@ -40,7 +40,7 @@ describe('integration | modulix | scripts | UpdateModulixTrainingsLink', functio
       expect(logger.info).to.have.been.calledWith('1 training(s) should have been updated');
 
       expect(logger.info).to.have.been.calledWith(
-        'Training link after update : https://app.pix.fr/modules/4eacd0c3/tmp-prompt-intermediaire',
+        'Training link after update : https://app.pix.fr/modules/4eacd0c3/prompt-intermediaire',
       );
 
       const trainings = await knex('trainings').orderBy('id');
@@ -86,7 +86,7 @@ describe('integration | modulix | scripts | UpdateModulixTrainingsLink', functio
       // then
       const trainings = await knex('trainings').orderBy('id');
 
-      expect(trainings[0].link).to.equal('https://app.pix.fr/modules/4eacd0c3/tmp-prompt-intermediaire');
+      expect(trainings[0].link).to.equal('https://app.pix.fr/modules/4eacd0c3/prompt-intermediaire');
       expect(trainings[0].updatedAt).to.deep.equal(now);
 
       expect(trainings[1].link).to.equal('https://app.pix.fr/modules/6a68bf32/bac-a-sable/details');
