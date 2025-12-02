@@ -14,6 +14,7 @@ import {
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { LYCEE_TAG } from '../../common/constants.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
@@ -37,6 +38,7 @@ export class ScoManagingStudent {
 
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
+    await this.#setupScoBlockedAccessFeature({ organization });
     const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
     const organizationLearners = await this.#addCertifiableUsers({ organization });
 
@@ -91,6 +93,15 @@ export class ScoManagingStudent {
       databaseBuilder: this.databaseBuilder,
     });
     return { organization, organizationMember };
+  }
+
+  async #setupScoBlockedAccessFeature({ organization }) {
+    await organizationalEntitiesUsecases.addTagsToOrganizations({
+      organizationTags: [{ organizationId: organization.id, tagName: LYCEE_TAG.name }],
+    });
+
+    this.databaseBuilder.factory.buildDefaultScoBlockedAccessDates();
+    await this.databaseBuilder.commit();
   }
 
   async #addCertifCenter({ organization, organizationMember }) {
