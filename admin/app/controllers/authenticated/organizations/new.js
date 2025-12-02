@@ -15,7 +15,10 @@ export default class NewController extends Controller {
   @tracked parentOrganizationName = null;
 
   @action
-  goBackToOrganizationList() {
+  redirectOnCancel() {
+    if (this.parentOrganizationId) {
+      return this.router.transitionTo('authenticated.organizations.get.children', this.parentOrganizationId);
+    }
     this.router.transitionTo('authenticated.organizations');
   }
 
