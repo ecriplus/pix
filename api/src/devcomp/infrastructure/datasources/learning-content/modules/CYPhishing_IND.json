@@ -286,7 +286,7 @@
               "element": {
                 "id": "cb301130-8149-461b-b203-7f40281ee8ff",
                 "type": "text",
-                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels.</strong>&nbsp;Un escroc <strong>se fait passer pour</strong> une personne ou un organisme de confiance, généralement en <strong>jouant sur vos émotions</strong>, pour <strong>récupérer vos données personnelles</strong>..🎣</p><p><br>⚠️ Les messages d’hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
+                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels.</strong>&nbsp;Un escroc <strong>se fait passer pour</strong> une personne ou un organisme de confiance, généralement en <strong>jouant sur vos émotions</strong>, pour <strong>récupérer vos données personnelles</strong>.🎣</p><p><br>⚠️ Les messages d’hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
               }
             }
           ]
@@ -624,6 +624,10 @@
                     "solutions": [
                       "hameçonnage"
                     ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>.</span></p>"
                   }
                 ],
                 "feedbacks": {
