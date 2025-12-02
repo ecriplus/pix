@@ -1,5 +1,6 @@
 import { clickByName, fillByLabel, getByTextWithHtml, visit, within } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
@@ -93,7 +94,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
           const screen = await visit('/sessions/3');
 
           // then
-          assert.dom(screen.getByText('Commentaire global :')).exists();
+          assert.dom(screen.getByText(t('pages.sessions.informations.labels.global-comment'))).exists();
           assert.dom(screen.getByText('Vraiment, super session!')).exists();
         });
       });
@@ -111,7 +112,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
           const screen = await visit('/sessions/3');
 
           // then
-          assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
+          assert.dom(screen.queryByText(t('pages.sessions.informations.labels.global-comment'))).doesNotExist();
         });
       });
 
@@ -129,7 +130,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
           const screen = await visit('/sessions/3');
 
           // then
-          assert.dom(screen.getByText('Informations complémentaires :')).exists();
+          assert.dom(screen.getByText(t('pages.sessions.informations.labels.complementary-info'))).exists();
         });
 
         module('When session has a sessionJoiningIssue', function () {
@@ -195,7 +196,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
           const screen = await visit('/sessions/3');
 
           // then
-          assert.dom(screen.queryByText('Informations complémentaires :')).doesNotExist();
+          assert.dom(screen.queryByText(t('pages.sessions.informations.labels.complementary-info'))).doesNotExist();
         });
       });
     });

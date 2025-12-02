@@ -1,5 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { statusToDisplayName } from 'pix-admin/models/session';
 import { FINALIZED } from 'pix-admin/models/session';
@@ -56,10 +57,10 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       // when
       const screen = await visit(`/sessions/${session.id}`);
       // then
-      assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
-      assert.dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :')).doesNotExist();
-      assert.dom(screen.queryByText('Nombre de signalement(s) :')).doesNotExist();
-      assert.dom(screen.queryByText('Nombre de certification(s) en erreur :')).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.sessions.informations.labels.global-comment'))).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.sessions.informations.labels.impactful-issues'))).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.sessions.informations.labels.total-issues'))).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.sessions.informations.labels.scoring-errors'))).doesNotExist();
     });
 
     test('it does not render the action buttons', async function (assert) {
@@ -110,12 +111,18 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       const screen = await visit(`/sessions/${session.id}`);
 
       // when
-      assert.dom(screen.queryByText('Nombre de certification(s) démarrée(s) :').parentElement).includesText('1');
       assert
-        .dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :').parentElement)
+        .dom(screen.queryByText(t('pages.sessions.informations.labels.started-certifications')).parentElement)
+        .includesText('1');
+      assert
+        .dom(screen.queryByText(t('pages.sessions.informations.labels.impactful-issues')).parentElement)
         .includesText('2');
-      assert.dom(screen.queryByText('Nombre de signalement(s) :').parentElement).includesText('3');
-      assert.dom(screen.queryByText('Nombre de certification(s) en erreur :').parentElement).includesText('4');
+      assert
+        .dom(screen.queryByText(t('pages.sessions.informations.labels.total-issues')).parentElement)
+        .includesText('3');
+      assert
+        .dom(screen.queryByText(t('pages.sessions.informations.labels.scoring-errors')).parentElement)
+        .includesText('4');
     });
 
     test('it renders the examinerGlobalComment if any', async function (assert) {
@@ -127,7 +134,7 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       const screen = await visit(`/sessions/${session.id}`);
 
       // then
-      assert.dom(screen.getByText('Commentaire global :')).exists();
+      assert.dom(screen.getByText(t('pages.sessions.informations.labels.global-comment'))).exists();
       assert.dom(screen.getByText(session.examinerGlobalComment)).exists();
     });
 
@@ -140,7 +147,7 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       const screen = await visit(`/sessions/${session.id}`);
 
       // then
-      assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.sessions.informations.labels.global-comment'))).doesNotExist();
     });
 
     module('when the session results have been sent to the prescriber', function () {
