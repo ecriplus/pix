@@ -1,5 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
-import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Challenge } from '../../domain/models/Challenge.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
@@ -114,66 +112,6 @@ export async function findValidatedBySkills(skills, locale) {
   const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
-export async function findActiveFlashCompatible({
-  locale,
-  successProbabilityThreshold = config.features.successProbabilityThreshold,
-  version,
-  dependencies = {
-    getInstance,
-  },
-} = {}) {
-  _assertLocaleIsDefined(locale);
-  const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
-
-  const challengeDtos = await _findChallengesForCertification({
-    locale,
-    cacheKey,
-    versionId: version.id,
-    dependencies,
-  });
-
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) =>
-    toDomain({ challengeDto, skill, successProbabilityThreshold }),
-  );
-}
-
-async function _findChallengesForCertification({ versionId, locale, cacheKey, dependencies }) {
-  const certificationChallenges = await knex
-    .from('certification-frameworks-challenges')
-    .where({ versionId })
-    .whereNotNull('discriminant')
-    .whereNotNull('difficulty');
-
-  const certificationChallengeIds = certificationChallenges.map(({ challengeId }) => challengeId);
-
-  const findCallback = async (knex) => {
-    return knex.whereIn('id', certificationChallengeIds).whereRaw('?=ANY(??)', [locale, 'locales']).orderBy('id');
-  };
-
-  const challengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
-  const validChallengeDtos = challengeDtos.filter((challenge) => challenge.status === VALIDATED_STATUS);
-
-  return decorateWithCertificationCalibration({
-    validChallengeDtos,
-    certificationChallenges,
-  });
-}
-
-function decorateWithCertificationCalibration({ validChallengeDtos, certificationChallenges }) {
-  return validChallengeDtos.map((challenge) => {
-    const { discriminant, difficulty } = certificationChallenges.find(
-      ({ challengeId }) => challengeId === challenge.id,
-    );
-
-    return {
-      ...challenge,
-      alpha: discriminant,
-      delta: difficulty,
-    };
-  });
 }
 
 export async function findValidatedBySkillId(skillId, locale) {

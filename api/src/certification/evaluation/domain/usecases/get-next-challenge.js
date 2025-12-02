@@ -4,20 +4,16 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
  */
 
-import Debug from 'debug';
-
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
-import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
-
-const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
 
 /**
  * @param {Object} params
@@ -26,6 +22,7 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
+ * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionRepository} params.versionRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -40,6 +37,7 @@ const getNextChallenge = async function ({
   certificationCourseRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
+  calibratedChallengeRepository,
   versionRepository,
   flashAlgorithmService,
   pickChallengeService,
@@ -56,9 +54,9 @@ const getNextChallenge = async function ({
     excludedChallengeIds: validatedLiveAlertChallengeIds,
   });
 
-  const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
+  const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 
-  const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
+  const excludedChallengeIds = [...answeredChallengeIds, ...validatedLiveAlertChallengeIds];
 
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId(
@@ -72,23 +70,22 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  const complementaryCertificationKey =
-    candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
-
   const version = await versionRepository.getByScopeAndReconciliationDate({
     scope: candidate.subscriptionScope,
     reconciliationDate: candidate.reconciledAt,
   });
 
-  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
+  const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
     locale,
-    complementaryCertificationKey,
     version,
   });
 
-  const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
+  const answeredCalibratedChallenges = await calibratedChallengeRepository.getMany({
+    ids: answeredChallengeIds,
+    version,
+  });
 
-  const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
+  const challenges = candidateCertificationReferential(answeredCalibratedChallenges, currentCalibratedChallenges);
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -98,11 +95,6 @@ const getNextChallenge = async function ({
   const challengesForCandidate = candidate.accessibilityAdjustmentNeeded
     ? challengesWithoutSkillsWithAValidatedLiveAlert.filter((challenge) => challenge.isAccessible)
     : challengesWithoutSkillsWithAValidatedLiveAlert;
-  debugGetNextChallenge(
-    candidate.accessibilityAdjustmentNeeded
-      ? `Candidate needs accessibility adjustment, possible challenges have been filtered (${challengesForCandidate.length} out of ${challengesWithoutSkillsWithAValidatedLiveAlert.length} selected`
-      : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
-  );
 
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
@@ -133,7 +125,7 @@ const getNextChallenge = async function ({
 
   await sessionManagementCertificationChallengeRepository.save({ certificationChallenge });
 
-  return challenge;
+  return sharedChallengeRepository.get(challenge.id);
 };
 
 const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
@@ -158,4 +150,27 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
 };
 
-export { getNextChallenge };
+/**
+ * Construct a certification referential in the state presented to the current user
+ * Allows the LCMS to be released during a certification without impacting the user
+ *
+ * Example: after LCMS release if a challenge becomes archived ('perime'), this challenge will be in
+ *          `answeredCalibratedChallenges` param, but not in `currentCalibratedChallenges` param
+ */
+const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {
+  // It is critical that answeredCalibratedChallenges is in first parameter in order to take precedence
+  const challenges = [...answeredCalibratedChallenges, ...currentCalibratedChallenges];
+  return Object.values(
+    challenges.reduce((acc, challenge) => {
+      const existing = acc[challenge.id];
+
+      if (!existing) {
+        acc[challenge.id] = challenge;
+      }
+
+      return acc;
+    }, {}),
+  );
+};
+
+export { candidateCertificationReferential, getNextChallenge };

@@ -1,4 +1,7 @@
-import { getNextChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
+import {
+  candidateCertificationReferential,
+  getNextChallenge,
+} from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
@@ -10,6 +13,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
     let answerRepository,
       sharedChallengeRepository,
+      calibratedChallengeRepository,
       certificationCourseRepository,
       complementaryCertificationRepository,
       certificationChallengeLiveAlertRepository,
@@ -32,8 +36,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       };
       sharedChallengeRepository = {
         get: sinon.stub(),
-        getMany: sinon.stub(),
+      };
+      calibratedChallengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
+        getMany: sinon.stub(),
       };
       certificationCourseRepository = {
         get: sinon.stub(),
@@ -72,9 +78,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     context('when there are challenges left to answer', function () {
       it('should save the returned next challenge', async function () {
         // given
-        const nextChallengeToAnswer = domainBuilder.buildChallenge({
+        const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
           blindnessCompatibility: 'KO',
         });
+        const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
         const locale = 'fr-FR';
         const complementaryCertificationId = 123;
         const complementaryCertification =
@@ -116,13 +123,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ id: complementaryCertificationId })
           .resolves(complementaryCertification);
 
-        sharedChallengeRepository.findActiveFlashCompatible.resolves([nextChallengeToAnswer]);
-        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([nextCalibratedChallenge]);
+        calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
             allAnswers: [],
-            challenges: [nextChallengeToAnswer],
+            challenges: [nextCalibratedChallenge],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
           })
@@ -130,21 +137,23 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         flashAlgorithmService.getPossibleNextChallenges
           .withArgs({
-            availableChallenges: [nextChallengeToAnswer],
+            availableChallenges: [nextCalibratedChallenge],
             capacity: 0,
           })
-          .returns([nextChallengeToAnswer]);
+          .returns([nextCalibratedChallenge]);
 
         const getChallengePickerImpl = sinon.stub();
         getChallengePickerImpl
           .withArgs({
-            possibleChallenges: [nextChallengeToAnswer],
+            possibleChallenges: [nextCalibratedChallenge],
           })
-          .returns(nextChallengeToAnswer);
+          .returns(nextCalibratedChallenge);
         pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+        sharedChallengeRepository.get.withArgs(nextCalibratedChallenge.id).resolves(challenge);
+
         // when
-        const challenge = await getNextChallenge({
+        const returnedChallenge = await getNextChallenge({
           answerRepository,
           assessment,
           sessionManagementCertificationChallengeRepository,
@@ -152,6 +161,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseRepository,
           sharedChallengeRepository,
           versionRepository,
+          calibratedChallengeRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -160,24 +170,27 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(challenge).to.equal(nextChallengeToAnswer);
+        expect(challenge).to.equal(returnedChallenge);
       });
 
       context('when candidate needs accessibility adjustment', function () {
         it('should only pick among challenges with no accessibilities issues', async function () {
           // given
-          const nextChallengeToAnswer = domainBuilder.buildChallenge({
+          const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: 'recCHAL1',
             blindnessCompatibility: 'RAS',
             colorBlindnessCompatibility: 'OK',
           });
-          const accessibleChallenge = domainBuilder.buildChallenge({
+          const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
+          const accessibleChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
+            id: 'recCHAL2',
             blindnessCompatibility: 'OK',
             colorBlindnessCompatibility: 'RAS',
           });
           const allChallenges = [
-            nextChallengeToAnswer,
+            nextCalibratedChallenge,
             accessibleChallenge,
-            domainBuilder.buildChallenge({
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
               blindnessCompatibility: 'autre chose',
               colorBlindnessCompatibility: 'OK',
             }),
@@ -212,20 +225,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({ assessmentId: assessment.id })
             .resolves(candidateNeedingAccessibilityAdjustment);
 
-          sharedChallengeRepository.findActiveFlashCompatible
+          calibratedChallengeRepository.findActiveFlashCompatible
             .withArgs({
               locale,
-              complementaryCertificationKey: undefined,
               version,
             })
             .resolves(allChallenges);
 
-          sharedChallengeRepository.getMany.withArgs([]).resolves([]);
+          calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
             .withArgs({
               allAnswers: [],
-              challenges: [nextChallengeToAnswer, accessibleChallenge],
+              challenges: [nextCalibratedChallenge, accessibleChallenge],
               capacity: config.v3Certification.defaultCandidateCapacity,
               variationPercent: undefined,
             })
@@ -233,26 +245,29 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
           flashAlgorithmService.getPossibleNextChallenges
             .withArgs({
-              availableChallenges: [nextChallengeToAnswer, accessibleChallenge],
+              availableChallenges: [nextCalibratedChallenge, accessibleChallenge],
               capacity: 0,
             })
-            .returns([nextChallengeToAnswer]);
+            .returns([nextCalibratedChallenge]);
 
           const getChallengePickerImpl = sinon.stub();
           getChallengePickerImpl
             .withArgs({
-              possibleChallenges: [nextChallengeToAnswer],
+              possibleChallenges: [nextCalibratedChallenge],
             })
-            .returns(nextChallengeToAnswer);
+            .returns(nextCalibratedChallenge);
           pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+          sharedChallengeRepository.get.withArgs(nextCalibratedChallenge.id).resolves(challenge);
+
           // when
-          const challenge = await getNextChallenge({
+          const returnedChallenge = await getNextChallenge({
             answerRepository,
             assessment,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
+            calibratedChallengeRepository,
             sharedChallengeRepository,
             versionRepository,
             flashAlgorithmService,
@@ -263,7 +278,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           });
 
           // then
-          expect(challenge).to.equal(nextChallengeToAnswer);
+          expect(returnedChallenge).to.equal(challenge);
         });
       });
 
@@ -310,6 +325,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
             sharedChallengeRepository,
+            calibratedChallengeRepository,
             versionRepository,
             flashAlgorithmService,
             locale,
@@ -328,12 +344,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     context('when some answered challenges are not valid anymore', function () {
       it('saves next challenge', async function () {
         // given
-        const nextChallengeToAnswer = domainBuilder.buildChallenge({
-          id: 'nextChallengeToAnswer',
+        const nextCalibratedChallenge = domainBuilder.buildChallenge({
+          id: 'nextCalibratedChallenge',
           blindnessCompatibility: 'KO',
           status: 'validé',
           skill: domainBuilder.buildSkill({ id: 'nottAnsweredSkill' }),
         });
+        const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
         const alreadyAnsweredChallenge = domainBuilder.buildChallenge({
           id: 'alreadyAnsweredChallenge',
           status: 'validé',
@@ -369,22 +386,21 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        sharedChallengeRepository.findActiveFlashCompatible
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
-            complementaryCertificationKey: undefined,
             version,
           })
-          .resolves([alreadyAnsweredChallenge, nextChallengeToAnswer]);
+          .resolves([alreadyAnsweredChallenge, nextCalibratedChallenge]);
 
-        sharedChallengeRepository.getMany
-          .withArgs([alreadyAnsweredChallenge.id, outdatedChallenge.id])
+        calibratedChallengeRepository.getMany
+          .withArgs({ ids: [alreadyAnsweredChallenge.id, outdatedChallenge.id], version })
           .resolves([alreadyAnsweredChallenge, outdatedChallenge]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
             allAnswers: [answerStillValid, answerWithOutdatedChallenge],
-            challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextChallengeToAnswer],
+            challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextCalibratedChallenge],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
           })
@@ -392,27 +408,30 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         flashAlgorithmService.getPossibleNextChallenges
           .withArgs({
-            availableChallenges: [nextChallengeToAnswer],
+            availableChallenges: [nextCalibratedChallenge],
             capacity: 0,
           })
-          .returns([nextChallengeToAnswer]);
+          .returns([nextCalibratedChallenge]);
 
         const getChallengePickerImpl = sinon.stub();
         getChallengePickerImpl
           .withArgs({
-            possibleChallenges: [nextChallengeToAnswer],
+            possibleChallenges: [nextCalibratedChallenge],
           })
-          .returns(nextChallengeToAnswer);
+          .returns(nextCalibratedChallenge);
         pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+        sharedChallengeRepository.get.withArgs(nextCalibratedChallenge.id).resolves(challenge);
+
         // when
-        const challenge = await getNextChallenge({
+        const returnedChallenge = await getNextChallenge({
           answerRepository,
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
+          calibratedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
           locale,
@@ -422,7 +441,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(challenge).to.equal(nextChallengeToAnswer);
+        expect(returnedChallenge).to.equal(challenge);
       });
     });
 
@@ -430,7 +449,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       it('should save the returned next challenge', async function () {
         // given
         const locale = 'fr-FR';
-        const skill = domainBuilder.buildSkill({ id: 'skill1' });
+        const skill = domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ id: 'skill1' });
 
         const v3CertificationCourse = domainBuilder.buildCertificationCourse({
           version: AlgorithmEngineVersion.V3,
@@ -441,10 +460,11 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           courseId: v3CertificationCourse.getId(),
         });
 
-        const nextChallenge = domainBuilder.buildChallenge({
+        const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge({
           id: 'NextChallenge',
           skill,
         });
+        const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
         const lastSeenChallenge = domainBuilder.buildChallenge({
           id: nonAnsweredCertificationChallenge.challengeId,
@@ -464,19 +484,18 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        sharedChallengeRepository.findActiveFlashCompatible
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
-            complementaryCertificationKey: undefined,
             version,
           })
-          .resolves([nextChallenge, lastSeenChallenge]);
-        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
+          .resolves([nextCalibratedChallenge, lastSeenChallenge]);
+        calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
             allAnswers: [],
-            challenges: [nextChallenge],
+            challenges: [nextCalibratedChallenge],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
           })
@@ -484,10 +503,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         flashAlgorithmService.getPossibleNextChallenges
           .withArgs({
-            availableChallenges: [nextChallenge],
+            availableChallenges: [nextCalibratedChallenge],
             capacity: 0,
           })
-          .returns([nextChallenge]);
+          .returns([nextCalibratedChallenge]);
 
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
@@ -503,19 +522,22 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const getChallengePickerImpl = sinon.stub();
         getChallengePickerImpl
           .withArgs({
-            possibleChallenges: [nextChallenge],
+            possibleChallenges: [nextCalibratedChallenge],
           })
-          .returns(nextChallenge);
+          .returns(nextCalibratedChallenge);
         pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+        sharedChallengeRepository.get.withArgs(nextCalibratedChallenge.id).resolves(challenge);
+
         // when
-        const challenge = await getNextChallenge({
+        const returnedChallenge = await getNextChallenge({
           answerRepository,
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
+          calibratedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
           locale,
@@ -525,15 +547,15 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(challenge).to.equal(nextChallenge);
+        expect(returnedChallenge).to.equal(challenge);
         expect(sessionManagementCertificationChallengeRepository.save).to.have.been.called;
       });
 
       it('should not return a challenge with the same skill', async function () {
         // given
         const locale = 'fr-FR';
-        const firstSkill = domainBuilder.buildSkill({ id: 'skill1' });
-        const secondSkill = domainBuilder.buildSkill({ id: 'skill2' });
+        const firstSkill = domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ id: 'skill1' });
+        const secondSkill = domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({ id: 'skill2' });
 
         const v3CertificationCourse = domainBuilder.buildCertificationCourse({
           version: AlgorithmEngineVersion.V3,
@@ -544,17 +566,21 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           courseId: v3CertificationCourse.getId(),
         });
 
-        const challengeWithLiveAlertedSkill = domainBuilder.buildChallenge({
-          id: 'NextChallenge',
-          skill: firstSkill,
-        });
+        const calibratedChallengeWithLiveAlertedSkill = domainBuilder.certification.evaluation.buildCalibratedChallenge(
+          {
+            id: 'NextChallenge',
+            skill: firstSkill,
+          },
+        );
 
-        const challengeWithOtherSkill = domainBuilder.buildChallenge({
+        const calibratedChallengeWithOtherSkill = domainBuilder.certification.evaluation.buildCalibratedChallenge({
           id: 'NextChallenge',
           skill: secondSkill,
         });
 
-        const challengeWithLiveAlert = domainBuilder.buildChallenge({
+        const challenge = domainBuilder.buildChallenge(calibratedChallengeWithOtherSkill);
+
+        const calibratedChallengeWithLiveAlert = domainBuilder.certification.evaluation.buildCalibratedChallenge({
           id: nonAnsweredCertificationChallenge.challengeId,
           skill: firstSkill,
         });
@@ -567,15 +593,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
           })
           .resolves([]);
-        sharedChallengeRepository.findActiveFlashCompatible
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs()
-          .resolves([challengeWithLiveAlert, challengeWithOtherSkill, challengeWithLiveAlertedSkill]);
-        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
+          .resolves([
+            calibratedChallengeWithLiveAlert,
+            calibratedChallengeWithOtherSkill,
+            calibratedChallengeWithLiveAlertedSkill,
+          ]);
+        calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
             allAnswers: [],
-            challenges: [challengeWithOtherSkill],
+            challenges: [calibratedChallengeWithOtherSkill],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
           })
@@ -583,10 +613,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         flashAlgorithmService.getPossibleNextChallenges
           .withArgs({
-            availableChallenges: [challengeWithOtherSkill],
+            availableChallenges: [calibratedChallengeWithOtherSkill],
             capacity: 0,
           })
-          .returns([challengeWithOtherSkill]);
+          .returns([calibratedChallengeWithOtherSkill]);
 
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
@@ -602,18 +632,21 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const getChallengePickerImpl = sinon.stub();
         getChallengePickerImpl
           .withArgs({
-            possibleChallenges: [challengeWithOtherSkill],
+            possibleChallenges: [calibratedChallengeWithOtherSkill],
           })
-          .returns(challengeWithOtherSkill);
+          .returns(calibratedChallengeWithOtherSkill);
         pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+        sharedChallengeRepository.get.withArgs(calibratedChallengeWithOtherSkill.id).resolves(challenge);
+
         // when
-        const challenge = await getNextChallenge({
+        const returnedChallenge = await getNextChallenge({
           answerRepository,
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
+          calibratedChallengeRepository,
           sharedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
@@ -624,7 +657,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(challenge).to.equal(challengeWithOtherSkill);
+        expect(returnedChallenge).to.equal(challenge);
         expect(sessionManagementCertificationChallengeRepository.save).to.have.been.called;
       });
     });
@@ -669,14 +702,15 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        sharedChallengeRepository.findActiveFlashCompatible
+        calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
             locale,
-            complementaryCertificationKey: undefined,
             version,
           })
           .resolves([answeredChallenge]);
-        sharedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
+        calibratedChallengeRepository.getMany
+          .withArgs({ ids: [answeredChallenge.id], version })
+          .resolves([answeredChallenge]);
 
         // when
         const error = await catchErr(getNextChallenge)({
@@ -685,6 +719,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
+          calibratedChallengeRepository,
           sharedChallengeRepository,
           versionRepository,
           flashAlgorithmService,
@@ -702,8 +737,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     });
 
     context('when loading a configuration', function () {
-      const competenceId = 'cmp1';
-
       Object.entries({
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
@@ -716,9 +749,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         .forEach((flashConfiguration) => {
           it('should use the configuration', async function () {
             //given
-            const nextChallengeToAnswer = domainBuilder.buildChallenge({
-              competenceId,
-            });
+            const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge();
+            const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
             const v3CertificationCourse = domainBuilder.buildCertificationCourse({
               version: AlgorithmEngineVersion.V3,
@@ -751,19 +783,18 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({ assessmentId: assessment.id })
               .resolves(candidate);
 
-            sharedChallengeRepository.findActiveFlashCompatible
+            calibratedChallengeRepository.findActiveFlashCompatible
               .withArgs({
                 locale,
-                complementaryCertificationKey: undefined,
                 version,
               })
-              .resolves([nextChallengeToAnswer]);
-            sharedChallengeRepository.getMany.withArgs([]).resolves([]);
+              .resolves([nextCalibratedChallenge]);
+            calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 allAnswers: [],
-                challenges: [nextChallengeToAnswer],
+                challenges: [nextCalibratedChallenge],
                 capacity: config.v3Certification.defaultCandidateCapacity,
                 variationPercent: version.challengesConfiguration.variationPercent,
               })
@@ -771,26 +802,29 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
             flashAlgorithmService.getPossibleNextChallenges
               .withArgs({
-                availableChallenges: [nextChallengeToAnswer],
+                availableChallenges: [nextCalibratedChallenge],
                 capacity: 0,
               })
-              .returns([nextChallengeToAnswer]);
+              .returns([nextCalibratedChallenge]);
 
             const getChallengePickerImpl = sinon.stub();
             getChallengePickerImpl
               .withArgs({
-                possibleChallenges: [nextChallengeToAnswer],
+                possibleChallenges: [nextCalibratedChallenge],
               })
-              .returns(nextChallengeToAnswer);
+              .returns(nextCalibratedChallenge);
             pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
+            sharedChallengeRepository.get.withArgs(nextCalibratedChallenge.id).resolves(challenge);
+
             // when
-            const challenge = await getNextChallenge({
+            const returnedChallenge = await getNextChallenge({
               answerRepository,
               assessment,
               sessionManagementCertificationChallengeRepository,
               certificationChallengeLiveAlertRepository,
               certificationCourseRepository,
+              calibratedChallengeRepository,
               sharedChallengeRepository,
               versionRepository,
               flashAlgorithmService,
@@ -801,7 +835,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             });
 
             // then
-            expect(challenge).to.equal(nextChallengeToAnswer);
+            expect(returnedChallenge).to.equal(challenge);
           });
         });
     });
@@ -850,7 +884,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .resolves(version);
 
-        sharedChallengeRepository.findActiveFlashCompatible.resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([]);
 
         // when
         await catchErr(getNextChallenge)({
@@ -859,6 +893,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
+          calibratedChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
           locale,
@@ -870,9 +905,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
+        expect(calibratedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
-          complementaryCertificationKey: Frameworks.PIX_PLUS_EDU_CPE,
           version,
         });
       });
@@ -912,7 +946,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        sharedChallengeRepository.findActiveFlashCompatible.resolves([]);
+        calibratedChallengeRepository.findActiveFlashCompatible.resolves([]);
 
         // when
         await catchErr(getNextChallenge)({
@@ -921,6 +955,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
+          calibratedChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
           locale,
@@ -932,12 +967,63 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
 
         // then
-        expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
+        expect(calibratedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
-          complementaryCertificationKey: undefined,
           version,
         });
       });
+    });
+  });
+
+  describe('#candidateCertificationReferential', function () {
+    it('returns deduplicated challenges by id', async function () {
+      // given
+      const challengeListA = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
+      ];
+
+      const challengeListB = [domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' })];
+
+      const expectedChallengeList = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1' }),
+      ];
+
+      // when
+      const deduplicatedChallenges = candidateCertificationReferential(challengeListA, challengeListB);
+
+      // then
+      expect(deduplicatedChallenges.length).to.equal(2);
+      expect(deduplicatedChallenges).to.have.deep.members(expectedChallengeList);
+    });
+
+    it('should return challenges with answeredCalibratedChallenges taking precedence over currentCalibratedChallenges', async function () {
+      // given
+      const answeredCalibratedChallenges = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 10 }),
+      ];
+
+      const currentCalibratedChallenges = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 11 }),
+      ];
+
+      const expectedChallengeList = [
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL2' }),
+        domainBuilder.certification.evaluation.buildCalibratedChallenge({ id: 'recCHAL1', discriminant: 10 }),
+      ];
+
+      // when
+      const deduplicatedChallenges = candidateCertificationReferential(
+        answeredCalibratedChallenges,
+        currentCalibratedChallenges,
+      );
+
+      // then
+      expect(deduplicatedChallenges.length).to.equal(2);
+      expect(deduplicatedChallenges).to.have.deep.members(expectedChallengeList);
     });
   });
 });
