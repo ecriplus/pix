@@ -11,14 +11,13 @@ module('Integration | Template | authenticated/combined-course/participation-det
   test('it renders template', async function (assert) {
     // given
     const model = {
-      combinedCourseParticipation: {
-        firstName: 'Jean',
-        lastName: 'Bon',
-        combinedCourseId: 123,
-      },
       combinedCourse: {
         id: 123,
         name: 'Combinix',
+      },
+      participation: {
+        firstName: 'Jean',
+        lastName: 'Bon',
       },
     };
 
