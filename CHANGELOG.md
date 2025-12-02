@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.272.0](https://github.com/1024pix/pix/compare/v5.271.0...v5.272.0) (2025-12-02)
+
+### :rocket: Amélioration
+
+- [#14304](https://github.com/1024pix/pix/pull/14304) création module cyber virus nov 
+- [#14269](https://github.com/1024pix/pix/pull/14269) Déplacer l'historique des profils cibles sous les versions de référentiel de certification pour les Pix+ (PIX-20545) 
+- [#14302](https://github.com/1024pix/pix/pull/14302) IAgenLimite_NOV update retours de panels 
+- [#14277](https://github.com/1024pix/pix/pull/14277) MDX-32 Integration NR_Datacenter_NOV 
+- [#14213](https://github.com/1024pix/pix/pull/14213) Utilisation dans Pix Certif de la table de config des dates de réouverture des espaces Pix Certif SCO (PIX-20405) 
+
+### :bug: Correction
+
+- [#14310](https://github.com/1024pix/pix/pull/14310) La redirection des anciens urls de module en /passage ne fonctionne pas (PIX-20620) 
+- [#14312](https://github.com/1024pix/pix/pull/14312) Les liens vers des tutos Youtube ne fonctionnent pas (PIX-20617) 
+- [#14286](https://github.com/1024pix/pix/pull/14286) Les mêmes acquis ont été proposés 2 fois au cours d'une même certification Pix transverse (PIX-20605). 
+
+### :building_construction: Tech
+
+- [#14311](https://github.com/1024pix/pix/pull/14311) Ajouter une contrainte not-nullable sur le champ CountryCode de la table organizations (PIX-20348) 
+- [#14309](https://github.com/1024pix/pix/pull/14309) Mettre à jour  epreuves component en version 2.2.2. 
+- [#14261](https://github.com/1024pix/pix/pull/14261) Permettre au métier d'entrer une URL complète de logo dans le formulaire du contenu formatif sur Pix Admin (PIX-20548). 
+- [#14297](https://github.com/1024pix/pix/pull/14297) Remplacer les usages de streams Nodejs par des streams Web dans le Bounded Context LLM (PIX-20422) 
+
+### :arrow_up: Montée de version
+
+- [#14294](https://github.com/1024pix/pix/pull/14294) Update dependency webpack to v5.103.0 (junior)
+
 # [5.271.0](https://github.com/1024pix/pix/compare/v5.270.0...v5.271.0) (2025-12-01)
 
 ### :rocket: Amélioration
