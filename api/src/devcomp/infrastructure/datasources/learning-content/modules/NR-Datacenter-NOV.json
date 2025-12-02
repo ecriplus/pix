@@ -516,16 +516,17 @@
                       "id": "a91021ec-28c2-47b3-97b0-aec23096593e",
                       "type": "text",
                       "content": "<p>Vous savez désormais que certains usages demandent plus de travail que d’autres aux serveurs.</p><h5>🤔Pourquoi certains usages font plus travailler les serveurs ?</h5><p>Parce que tout ne demande pas la même chose aux serveurs. Certains usages demandent surtout <strong>beaucoup d’informations&nbsp;</strong>à envoyer (comme la vidéo). D’autres usages demandent surtout <strong>beaucoup de calcul</strong> (comme l’IA).&nbsp;Et certains usages demandent tout cela en même temps, comme les lives vidéos !</p>"
-                    },
-                    {
-                      "id": "b85da841-8158-4229-b653-f736d63caa5f",
-                      "type": "text",
-                      "content": "<h5>🤔On peut faire quelque chose pour faire moins consommer les serveurs ?</h5><p>Oui. Choisir des usages <strong>plus légers</strong> quand c’est possible.</p><p>Par exemple&nbsp;:&nbsp; </p><ul><li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de la streamer</strong> à chaque fois ;</li><li>et parfois&nbsp;: <strong>se déconnecter</strong> quand on n’en a plus besoin, ce qui améliore aussi le bien-être.</li></ul>"
                     }
                   ]
                 },
                 {
-                  "elements": []
+                  "elements": [
+                    {
+                      "id": "4e583f9f-7e9d-4951-9e5a-8ec19b014a4a",
+                      "type": "text",
+                      "content": "<h5>🤔On peut faire quelque chose pour faire moins consommer les serveurs ?</h5><p>Oui. Choisir des usages <strong>plus légers</strong> quand c’est possible.</p><p>Par exemple&nbsp;:&nbsp; </p><ul><li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de la streamer</strong> à chaque fois ;</li><li>et parfois&nbsp;: <strong>se déconnecter</strong> quand on n’en a plus besoin, ce qui améliore aussi le bien-être.</li></ul>"
+                    }
+                  ]
                 }
               ]
             }
