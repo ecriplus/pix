@@ -104,6 +104,47 @@ export async function getMany({
   return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
 }
 
+/**
+ * @param {Object} params
+ * @param {Version} params.version
+ * @returns {Promise<CalibratedChallenge[]>}
+ */
+export const findAllCalibratedChallenges = async ({
+  version,
+  dependencies = {
+    getInstance,
+  },
+}) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const calibrationForThisVersion = await knexConn
+    .select('discriminant', 'difficulty', 'challengeId')
+    .from('certification-frameworks-challenges')
+    .where({ versionId: version.id })
+    .whereNotNull('discriminant')
+    .whereNotNull('difficulty')
+    .orderBy('challengeId');
+
+  const challengesIds = calibrationForThisVersion.map(({ challengeId }) => challengeId);
+
+  const lcmsChallenges = await dependencies.getInstance().loadMany(challengesIds);
+  lcmsChallenges.forEach((challengeDto, index) => {
+    if (challengeDto) return;
+    logger.error({ challengeId: challengesIds[index] }, 'Some challenges do not exist in LCMS');
+    throw new NotFoundError('Some challenges do not exist in LCMS');
+  });
+
+  lcmsChallenges.sort(_byId);
+
+  const challengesWithCalibration = decorateWithCertificationCalibration({
+    validChallengeDtos: lcmsChallenges,
+    certificationChallenges: calibrationForThisVersion,
+  });
+
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengesWithCalibration);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
+};
+
 const _byId = (challenge1, challenge2) => {
   return challenge1.id < challenge2.id ? -1 : 1;
 };

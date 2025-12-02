@@ -18,6 +18,7 @@ import * as complementaryCertificationBadgesRepository from '../../../shared/inf
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
+import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
@@ -49,6 +50,7 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {sharedCertificationCandidateRepository} SharedCertificationCandidateRepository
  * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
+ * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  */
 const dependencies = {
   assessmentResultRepository,
@@ -73,6 +75,7 @@ const dependencies = {
   sharedChallengeRepository,
   sharedCertificationCandidateRepository,
   sharedVersionRepository,
+  calibratedChallengeRepository,
 };
 
 import { findByCertificationCourseIdAndAssessmentId } from './scoring/calibrated-challenge-service.js';

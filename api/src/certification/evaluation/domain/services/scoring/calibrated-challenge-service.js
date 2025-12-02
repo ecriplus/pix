@@ -1,13 +1,21 @@
+//@ts-check
 /**
  * @typedef {import('../index.js').ChallengeCalibrationRepository} ChallengeCalibrationRepository
- * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
  * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('../index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  * @typedef {import('../../../../scoring/domain/read-models/ChallengeCalibration.js').ChallengeCalibration} ChallengeCalibration
  * @typedef {import('../../../../shared/domain/models/Version.js').Version} Version
  * @typedef {import('../../../../shared/domain/models/CertificationCourse.js').CertificationCourse} CertificationCourse
+ * @typedef {import('../../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ */
+/**
+ * @typedef {Object} FindByCertificationCourseIdAndAssessmentIdResult
+ * @property {Array<CalibratedChallenge>} allChallenges - All calibrated challenges for the version no matter the locale
+ * @property {Array<CalibratedChallenge>} askedChallengesWithoutLiveAlerts - Calibrated challenges presented to the candidate, excluding those with validated live alerts.
+ * @property {Array<ChallengeCalibration>} challengeCalibrationsWithoutLiveAlerts - Calibrations of challenges presented to the candidate, excluding those with validated live alerts.
  */
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 
@@ -18,17 +26,17 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
    * @param {Version} params.version
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
-   * @param {SharedChallengeRepository} params.sharedChallengeRepository
-   * @param {ChallengeRepository} params.challengeRepository
+   * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
+   * @returns {Promise<FindByCertificationCourseIdAndAssessmentIdResult>}
    */
   async ({
     certificationCourse,
     version,
     challengeCalibrationRepository,
     certificationChallengeLiveAlertRepository,
-    challengeRepository,
+    calibratedChallengeRepository,
   }) => {
-    const flashCompatibleChallenges = await challengeRepository.findAllCalibratedChallenges(version);
+    const flashCompatibleChallenges = await calibratedChallengeRepository.findAllCalibratedChallenges({ version });
 
     const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
       compatibleChallenges: flashCompatibleChallenges,
@@ -50,14 +58,18 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
 );
 
 /**
+ * @typedef {Object} FindByCertificationCourseIdObject
+ * @property {Array<CalibratedChallenge>} allChallenges - all challenges data + calibration for this version
+ * @property {Array<CalibratedChallenge>} askedChallenges - all challenges data + calibrations PRESENTED to candidate
+ * @property {Array<ChallengeCalibration>} challengesCalibrations - only calibrations of challenges PRESENTED to candidate
+ */
+
+/**
  * @param {Object} params
- * @param {Array<Challenge>} params.compatibleChallenges
+ * @param {Array<CalibratedChallenge>} params.compatibleChallenges
  * @param {number} params.certificationCourseId
  * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
- * @returns {Promise<Object>}
- * @property {Array<Challenge>} allChallenges - all challenges data + calibration for this version
- * @property {Array<Challenge>} askedChallenges - all challenges data + calibrations PRESENTED to candidate
- * @property {Array<ChallengeCalibration>} challengesCalibrations - only calibrations of challenges PRESENTED to candidate
+ * @returns {Promise<FindByCertificationCourseIdObject>}
  */
 const _findByCertificationCourseId = async ({
   compatibleChallenges,
@@ -75,6 +87,9 @@ const _findByCertificationCourseId = async ({
 };
 
 /**
+ * @param {Array<ChallengeCalibration>} challengesCalibrations - only calibrations of challenges PRESENTED to candidate
+ * @param {number} assessmentId
+ * @param {Array<CalibratedChallenge>} askedChallenges - all challenges data + calibrations PRESENTED to candidate
  * @param {CertificationChallengeLiveAlertRepository} certificationChallengeLiveAlertRepository
  */
 async function _removeChallengesWithValidatedLiveAlerts(

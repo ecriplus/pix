@@ -19,39 +19,8 @@ const ARCHIVED_STATUS = 'archivé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
 
 /**
- * @param {Version} version
+ * @deprecated replaced by api/src/certification/evaluation/infrastructure/repositories/calibrated-challenge-repository.js
  */
-export const findAllCalibratedChallenges = async (version) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  const calibrationForThisVersion = await knexConn
-    .select('discriminant', 'difficulty', 'challengeId')
-    .from('certification-frameworks-challenges')
-    .where({ versionId: version.id })
-    .whereNotNull('discriminant')
-    .whereNotNull('difficulty')
-    .orderBy('challengeId');
-
-  const challengesIds = calibrationForThisVersion.map(({ challengeId }) => challengeId);
-
-  const challengeDtos = await getInstance().getMany(challengesIds);
-
-  const calibratedChallenges = calibrationForThisVersion.map((challengeCalibrationAtDate) => {
-    const correspondingChallenge = challengeDtos.find(
-      (challengeDto) => challengeCalibrationAtDate.challengeId === challengeDto.id,
-    );
-
-    // We replace "current" LCMS calibration with our version "at date" calibration
-    correspondingChallenge.alpha = challengeCalibrationAtDate.discriminant;
-    correspondingChallenge.delta = challengeCalibrationAtDate.difficulty;
-
-    return correspondingChallenge;
-  });
-
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(calibratedChallenges);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-};
-
 export async function findFlashCompatibleWithoutLocale({ fromArchivedCalibration = false } = {}) {
   if (fromArchivedCalibration) {
     return _findFlashCompatibleWithoutLocaleFromArchive();

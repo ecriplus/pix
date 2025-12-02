@@ -9,7 +9,7 @@ const { minimumAnswersRequiredToValidateACertification } = config.v3Certificatio
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
   context('#findByCertificationCourseIdAndAssessmentId', function () {
     let challengeCalibrationRepository,
-      challengeRepository,
+      calibratedChallengeRepository,
       certificationChallengeLiveAlertRepository,
       originalLatestCalibrationDate;
 
@@ -30,7 +30,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
       };
 
-      challengeRepository = {
+      calibratedChallengeRepository = {
         findAllCalibratedChallenges: sinon.stub().rejects(new Error('Args mismatch')),
       };
       originalLatestCalibrationDate = config.v3Certification.latestCalibrationDate;
@@ -49,7 +49,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const version = domainBuilder.certification.evaluation.buildVersion({
           startDate: new Date('2025-06-22'),
         });
-        challengeRepository.findAllCalibratedChallenges.withArgs(version).resolves(challengeList);
+        calibratedChallengeRepository.findAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
 
         const expectedAskedChallenges = [...challengeList.slice(1)];
         const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(expectedAskedChallenges);
@@ -78,7 +78,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           assessmentId,
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
-          challengeRepository,
+          calibratedChallengeRepository,
         });
 
         // then
@@ -96,7 +96,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const version = domainBuilder.certification.evaluation.buildVersion({
           startDate: new Date('2025-06-22'),
         });
-        challengeRepository.findAllCalibratedChallenges.withArgs(version).resolves(challengeList);
+        calibratedChallengeRepository.findAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
 
         const challengeWithValidatedLiveAlert = domainBuilder.buildChallenge({
           ...challengeList.at(-1),
@@ -132,7 +132,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
             assessmentId,
             challengeCalibrationRepository,
             certificationChallengeLiveAlertRepository,
-            challengeRepository,
+            calibratedChallengeRepository,
           });
 
         // then

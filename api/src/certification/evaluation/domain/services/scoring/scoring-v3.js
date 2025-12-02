@@ -1,4 +1,13 @@
 /**
+ * @typedef {import('./calibrated-challenge-service.js').findByCertificationCourseIdAndAssessmentId} FindByCertificationCourseIdAndAssessmentId
+ */
+
+/**
+ * @typedef {Object} ScoringV3Dependencies
+ * @property {FindByCertificationCourseIdAndAssessmentId} findByCertificationCourseIdAndAssessmentId
+ */
+
+/**
  * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
@@ -33,6 +42,7 @@ export const handleV3CertificationScoring = withTransaction(
    * @param {AnswerRepository} params.answerRepository
    * @param {FlashAlgorithmService} params.flashAlgorithmService
    * @param {ScoringDegradationService} params.scoringDegradationService
+   * @param {ScoringV3Dependencies} params.dependencies
    */
   async ({
     event,
