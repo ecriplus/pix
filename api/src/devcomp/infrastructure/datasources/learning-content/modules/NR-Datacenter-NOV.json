@@ -894,13 +894,8 @@
               "type": "element",
               "element": {
                 "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
-                "type": "embed",
-                "isCompletionRequired": false,
-                "title": "Simulateur de l'impact de votre usage du numérique !",
-                "url": "<script name=\"impact-co2\" src=\"https://impactco2.fr/iframe.js\" data-type=\"usagenumerique\" data-search=\"?emails=50&email . appareil='smartphone'&email . transmission . émetteur . réseau='fixe FR'&email . taille=0.075&email . terminaux . temps écriture=3&email . destinataires=1&streaming . durée=420&streaming . appareil='TV'&streaming . transmission . réseau='fixe FR'&streaming . qualité='HD'&visio . durée=180&visio . appareil='ordinateur portable'&visio . emplacements=2&visio . transmission . réseau='fixe FR'&visio . qualité='SD'&language=fr&theme=default\"></script>",
-                "instruction": "<p>A vous de jouer, évaluer l'impact de votre utilisation numérique à l'aide cet outil !&nbsp;</p>",
-                "solution": "",
-                "height": 500
+                "type": "text",
+                "content": "<p>L'embed marche pas, trouver un truc, là ça fait planter la PR<br></p>"
               }
             }
           ]
