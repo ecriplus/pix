@@ -283,7 +283,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p>Effectivement,&nbsp;un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>L’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule</strong> grâce à des éléments très crédibles. Son but&nbsp;: la&nbsp;pour la pousser à<strong> agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
+                    "diagnosis": "<p>Effectivement,&nbsp;un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>L’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule</strong> grâce à des éléments très crédibles. Son but&nbsp;:&nbsp;la pousser à<strong> agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
                   },
                   "invalid": {
                     "state": "",
@@ -363,14 +363,14 @@
                           "id": "2",
                           "content": "<p>Version 2</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est un&nbsp;<strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est un <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est un&nbsp;<strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est un <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
                         }
                       ],
@@ -394,21 +394,21 @@
                           "id": "1",
                           "content": "<p>Version 1</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un&nbsp;<strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Version 2</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un&nbsp;<strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                            "diagnosis": "<p>Même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un&nbsp;<strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                            "diagnosis": "<p>Même si les deux messages transmettent la même demande d’aide, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est un <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
                         }
                       ],
@@ -439,14 +439,14 @@
                           "id": "2",
                           "content": "<p>Version 2</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même information, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche un&nbsp;<strong>biais de coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même information, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche un <strong>biais de coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même information, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche un&nbsp;<strong>biais de coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                            "diagnosis": "<p>Même si les deux messages transmettent la même information, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche un <strong>biais de coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
                           }
                         }
                       ],
@@ -468,7 +468,7 @@
               "element": {
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
-                "content": "<p>Dans les attaques reposant sur l’ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. 🧠</p><p> <br></p><p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
+                "content": "<p>Dans les attaques reposant sur l’ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. 🧠</p><p> </p><p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
               }
             }
           ]
@@ -524,7 +524,7 @@
                           "id": "1",
                           "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Dans cet exemple, il s’agit d’une <strong>arnaque au président</strong>, une forme d’attaque courante contre les entreprises. </p>"
+                            "diagnosis": "<p>Eh non ! Il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Dans cet exemple, il s’agit d’une <strong>arnaque au président</strong>, une forme d’attaque courante contre les entreprises.</p>"
                           }
                         },
                         {
@@ -686,7 +686,7 @@
               "element": {
                 "id": "97dbd631-143c-4904-8ecd-785b5b7384c1",
                 "type": "text",
-                "content": "<ul>    <li>Les <strong>attaques reposant sur l’ingénierie sociale</strong> exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>.</li><br>    <li>L’attaquant <strong>trompe ou manipule la victime</strong> afin de la faire <strong>agir volontairement</strong> contre son propre intérêt. </li><br>    <li>Dans certains cas, l’attaquant <strong>manipule</strong> <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><br>    <li>Ces attaques reposent sur des mécanismes de <strong>manipulation psychologique&nbsp;</strong>qui exploitent des <strong>biais cognitifs</strong> pour influencer nos décisions.<br></li><br>    <li>Ces attaques peuvent prendre plusieurs formes&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
+                "content": "<ul>    <li>Les <strong>attaques reposant sur l’ingénierie sociale</strong> exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>.</li><br>    <li>L’attaquant <strong>trompe ou manipule la victime</strong> afin de la faire <strong>agir volontairement</strong> contre son propre intérêt. </li><br>    <li>Dans certains cas, l’attaquant <strong>manipule</strong> <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><br>    <li>Ces attaques reposent sur des mécanismes de <strong>manipulation psychologique</strong> qui exploitent des <strong>biais cognitifs</strong> pour influencer nos décisions.<br></li><br>    <li>Ces attaques peuvent prendre plusieurs formes&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
               }
             }
           ]
@@ -862,7 +862,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Les attaquants n’ont pas seulement exploité  une faille technique pour pouvoir entrer dans les systèmes.</p>"
+                          "diagnosis": "<p>Les attaquants n’ont pas seulement exploité une faille technique pour pouvoir entrer dans les systèmes.</p>"
                         }
                       },
                       "solutions": [
