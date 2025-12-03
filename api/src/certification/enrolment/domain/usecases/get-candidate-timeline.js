@@ -3,26 +3,29 @@
  * @typedef {import ('./index.js').CandidateRepository} CandidateRepository
  * @typedef {import ('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import ('./index.js').PlacementProfileService} PlacementProfileService
+ * @typedef {import ('./index.js').EligibilityService} EligibilityService
  * @typedef {import ('./index.js').CertificationBadgesService} CertificationBadgesService
+ * @typedef {import ('../../infrastructure/repositories/index.js').ComplementaryCertificationCourseRepository} ComplementaryCertificationCourseRepository
+ * @typedef {import ('../../infrastructure/repositories/index.js').ComplementaryCertificationBadgeWithOffsetVersionRepository} ComplementaryCertificationBadgeWithOffsetVersionRepository
  * @typedef {import ('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {import ('../models/timeline/TimelineEvent.js').TimelineEvent} TimelineEvent
  * @typedef {import ('../models/Candidate.js').Candidate} Candidate
  * @typedef {import ('../models/Candidate.js').Subscription} Subscription
+ * @typedef {import ('../read-models/UserCertificationEligibility.js').UserCertificationEligibility} UserCertificationEligibility
  * @typedef {import ('../../../shared/domain/models/CertificationCourse.js').CertificationCourse} CertificationCourse
  * @typedef {import ('../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  */
 
-import { FRENCH_FRANCE } from '../../../../shared/domain/services/locale-service.js';
+import { CandidateCertifiableAndEligibleEvent } from '../models/timeline/CandidateCertifiableAndEligibleEvent.js';
 import { CandidateCertifiableEvent } from '../models/timeline/CandidateCertifiableEvent.js';
 import { CandidateCreatedEvent } from '../models/timeline/CandidateCreatedEvent.js';
 import { CandidateEndScreenEvent } from '../models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../models/timeline/CandidateNotCertifiableEvent.js';
+import { CandidateNotEligibleEvent } from '../models/timeline/CandidateNotEligibleEvent.js';
 import { CandidateReconciledEvent } from '../models/timeline/CandidateReconciledEvent.js';
 import { CandidateTimeline } from '../models/timeline/CandidateTimeline.js';
 import { CertificationEndedEvent } from '../models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../models/timeline/CertificationStartedEvent.js';
-import { ComplementaryCertifiableEvent } from '../models/timeline/ComplementaryCertifiableEvent.js';
-import { ComplementaryNotCertifiableEvent } from '../models/timeline/ComplementaryNotCertifiableEvent.js';
 
 /**
  * @param {Object} params
@@ -31,7 +34,10 @@ import { ComplementaryNotCertifiableEvent } from '../models/timeline/Complementa
  * @param {CandidateRepository} params.candidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+ * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
+ * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
+ * @param {EligibilityService} params.eligibilityService
  * @param {PlacementProfileService} params.placementProfileService
  * @returns {Promise<CandidateTimeline>}
  */
@@ -42,6 +48,9 @@ export const getCandidateTimeline = async ({
   certificationAssessmentRepository,
   certificationBadgesService,
   placementProfileService,
+  eligibilityService,
+  complementaryCertificationCourseRepository,
+  complementaryCertificationBadgeWithOffsetVersionRepository,
 }) => {
   const timeline = new CandidateTimeline({ certificationCandidateId });
 
@@ -64,6 +73,9 @@ export const getCandidateTimeline = async ({
       candidate,
       placementProfileService,
       certificationBadgesService,
+      eligibilityService,
+      complementaryCertificationCourseRepository,
+      complementaryCertificationBadgeWithOffsetVersionRepository,
     });
     events.forEach((event) => timeline.addEvent(event));
     return timeline;
@@ -75,6 +87,9 @@ export const getCandidateTimeline = async ({
     certificationCourse,
     placementProfileService,
     certificationBadgesService,
+    eligibilityService,
+    complementaryCertificationCourseRepository,
+    complementaryCertificationBadgeWithOffsetVersionRepository,
   });
   events.forEach((event) => timeline.addEvent(event));
 
@@ -98,27 +113,31 @@ export const getCandidateTimeline = async ({
  * @param {Candidate} params.candidate
  * @param {PlacementProfileService} params.placementProfileService
  * @param {CertificationBadgesService} params.certificationBadgesService
+ * @param {EligibilityService} params.eligibilityService
+ * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
+ * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
  * @returns {Promise<Array<TimelineEvent>>}
  */
 const _whenCandidateDidNotStartCertification = async ({
   candidate,
   placementProfileService,
   certificationBadgesService,
+  eligibilityService,
+  complementaryCertificationCourseRepository,
+  complementaryCertificationBadgeWithOffsetVersionRepository,
 }) => {
   const certificabilityEvent = await _getCertificabilityEvent({
+    candidate,
     userId: candidate.userId,
     atDate: candidate.reconciledAt,
     placementProfileService,
-  });
-
-  const complementaryEligibilityEvent = await _getComplementaryEligibilityEvent({
-    userId: candidate.userId,
-    atDate: candidate.reconciledAt,
-    subscriptions: candidate.subscriptions,
+    eligibilityService,
     certificationBadgesService,
+    complementaryCertificationCourseRepository,
+    complementaryCertificationBadgeWithOffsetVersionRepository,
   });
 
-  return [certificabilityEvent].concat(complementaryEligibilityEvent);
+  return [certificabilityEvent];
 };
 
 /**
@@ -127,6 +146,9 @@ const _whenCandidateDidNotStartCertification = async ({
  * @param {CertificationCourse} params.certificationCourse
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {PlacementProfileService} params.placementProfileService
+ * @param {EligibilityService} params.eligibilityService
+ * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
+ * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
  * @returns {Promise<Array<TimelineEvent>>}
  */
 const _whenCandidateHasStartedTheTest = async ({
@@ -134,95 +156,93 @@ const _whenCandidateHasStartedTheTest = async ({
   certificationCourse,
   certificationBadgesService,
   placementProfileService,
+  eligibilityService,
+  complementaryCertificationCourseRepository,
+  complementaryCertificationBadgeWithOffsetVersionRepository,
 }) => {
   const certificabilityEvent = await _getCertificabilityEvent({
+    candidate,
     userId: certificationCourse.getUserId(),
     atDate: certificationCourse.getStartDate(),
     placementProfileService,
-  });
-
-  const complementaryEligibilityEvent = await _getComplementaryEligibilityEvent({
-    userId: certificationCourse.getUserId(),
-    atDate: certificationCourse.getStartDate(),
-    subscriptions: candidate.subscriptions,
+    eligibilityService,
     certificationBadgesService,
+    complementaryCertificationCourseRepository,
+    complementaryCertificationBadgeWithOffsetVersionRepository,
   });
 
-  return [certificabilityEvent].concat(complementaryEligibilityEvent);
+  return [certificabilityEvent];
 };
 
 /**
  * @param {Object} params
  * @param {number} params.userId
+ * @param {Candidate} params.candidate
  * @param {Date} params.atDate
  * @param {PlacementProfileService} params.placementProfileService
+ * @param {CertificationBadgesService} params.certificationBadgesService
+ * @param {EligibilityService} params.eligibilityService
+ * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
+ * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
  * @returns {Promise<TimelineEvent>}
  */
-const _getCertificabilityEvent = async ({ userId, atDate, placementProfileService }) => {
-  const placementProfile = await placementProfileService.getPlacementProfile({
-    userId: userId,
+const _getCertificabilityEvent = async ({
+  candidate,
+  userId,
+  atDate,
+  certificationBadgesService,
+  eligibilityService,
+  placementProfileService,
+  complementaryCertificationCourseRepository,
+  complementaryCertificationBadgeWithOffsetVersionRepository,
+}) => {
+  const userEligibility = await eligibilityService.getUserCertificationEligibility({
+    userId,
     limitDate: atDate,
-    locale: FRENCH_FRANCE,
+    certificationBadgesService,
+    placementProfileService,
+    complementaryCertificationCourseRepository,
+    complementaryCertificationBadgeWithOffsetVersionRepository,
   });
 
-  if (!placementProfile.isCertifiable()) {
+  return _determineUserEligibilityStatus({ userEligibility, atDate, candidate });
+};
+
+/**
+ * @param {Object} params
+ * @param {UserCertificationEligibility} params.userEligibility
+ * @param {Date} params.atDate
+ * @param {Candidate} params.candidate
+ * @returns {TimelineEvent}
+ */
+const _determineUserEligibilityStatus = ({ userEligibility, atDate, candidate }) => {
+  if (!userEligibility.isCertifiable) {
     return new CandidateNotCertifiableEvent({ when: atDate });
+  }
+
+  if (_candidateIsRegisteredToDoubleCertification(candidate)) {
+    if (_candidateIsEligibleToDoubleCertification(userEligibility)) {
+      return new CandidateCertifiableAndEligibleEvent({ when: atDate });
+    }
+
+    return new CandidateNotEligibleEvent({ when: atDate });
   }
 
   return new CandidateCertifiableEvent({ when: atDate });
 };
 
 /**
- * @param {Object} params
- * @param {Array<Subscription>} params.subscriptions
- * @param {number} params.userId
- * @param {Date} params.atDate
- * @param {CertificationBadgesService} params.certificationBadgesService
- * @returns {Promise<Array<TimelineEvent>>}
+ * @param {Candidate} candidate
+ * @returns {boolean}
  */
-const _getComplementaryEligibilityEvent = async ({
-  userId,
-  atDate,
-  subscriptions = [],
-  certificationBadgesService,
-}) => {
-  const onlyCoreSubscription = () => subscriptions.length === 1 && subscriptions[0].isCore();
-  if (onlyCoreSubscription()) {
-    return [];
-  }
+const _candidateIsRegisteredToDoubleCertification = (candidate) => {
+  return candidate.subscriptions.length === 2;
+};
 
-  const highestCertifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
-    userId,
-    limitDate: atDate,
-  });
-
-  const findBadge = (subscription) => {
-    return highestCertifiableBadgeAcquisitions.find(
-      (badge) => subscription.complementaryCertificationId === badge.complementaryCertificationId,
-    );
-  };
-
-  const events = [];
-  subscriptions
-    .filter((subscription) => subscription.isComplementary())
-    .forEach((subscription) => {
-      const badge = findBadge(subscription);
-      if (badge) {
-        events.push(
-          new ComplementaryCertifiableEvent({
-            when: atDate,
-            complementaryCertificationKey: badge.complementaryCertificationKey,
-          }),
-        );
-      } else {
-        events.push(
-          new ComplementaryNotCertifiableEvent({
-            when: atDate,
-            complementaryCertificationId: subscription.complementaryCertificationId,
-          }),
-        );
-      }
-    });
-
-  return events;
+/**
+ * @param {UserCertificationEligibility} userEligibility
+ * @returns {boolean}
+ */
+const _candidateIsEligibleToDoubleCertification = (userEligibility) => {
+  return userEligibility.doubleCertificationEligibility && userEligibility.doubleCertificationEligibility.isBadgeValid;
 };
