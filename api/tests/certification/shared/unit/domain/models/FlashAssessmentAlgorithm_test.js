@@ -4,6 +4,7 @@ import { config } from '../../../../../../src/shared/config.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
+  challengesBetweenSameCompetence: 2,
   limitToOneQuestionPerTube: false,
   enablePassageByAllCompetences: false,
 };

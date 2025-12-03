@@ -2,7 +2,7 @@ import { FlashAssessmentAlgorithmConfiguration } from '../../../../src/certifica
 
 export const buildFlashAlgorithmConfiguration = ({
   maximumAssessmentLength,
-  challengesBetweenSameCompetence,
+  challengesBetweenSameCompetence = 2,
   limitToOneQuestionPerTube,
   enablePassageByAllCompetences,
   variationPercent,
