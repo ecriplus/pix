@@ -51,7 +51,7 @@
                       "label": "2 kilogrammes",
                       "feedback": {
                         "type": "bad",
-                        "text": "Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                        "text": "Eh non ! Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
                       }
                     },
                     {
@@ -62,17 +62,24 @@
                       }
                     },
                     {
+                      "label": "120 kilogrammes",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Eh non ! C’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                      }
+                    },
+                    {
                       "label": "200 kilogrammes",
                       "feedback": {
                         "type": "good",
-                        "text": "C’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                        "text": "Bien vu ! C’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
                       }
                     },
                     {
                       "label": "2 tonnes",
                       "feedback": {
                         "type": "bad",
-                        "text": "C’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                        "text": "Eh non ! C’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
                       }
                     }
                   ]
@@ -304,9 +311,8 @@
                   "elements": [
                     {
                       "id": "843b69d0-3f09-4c93-adb4-f57ffe20b587",
-                      "type": "expand",
-                      "title": "Bon à savoir 💡",
-                      "content": "<p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...) sont des métaux <strong>essentiels aux appareils numériques&nbsp;</strong>(les ordinateurs, tablettes, smartphones...). Présentes en très faible concentration dans la terre, leur extraction demande beaucoup d’énergie, d’eau et de produits chimiques polluants.</p>"
+                      "type": "text",
+                      "content": "<p><strong>💡Bon à savoir</strong></p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...) sont des métaux <strong>essentiels aux appareils numériques&nbsp;</strong>(les ordinateurs, tablettes, smartphones...). Présentes en très faible concentration dans la terre, leur extraction demande beaucoup d’énergie, d’eau et de produits chimiques polluants.</p>"
                     }
                   ]
                 }
@@ -342,7 +348,7 @@
                     {
                       "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
                       "type": "text",
-                      "content": "<p>Observez l’évolution de la mine de terres rares au fil des années, à partir d’une vue aérienne. Répondez ensuite à la question ci-dessous.&nbsp;</p><p><a href=\"https://earth.google.com/web/search/Bayan+Obo,+Baotou,+Mongolie-int%c3%a9rieure,+Chine/@41.80231179,109.99371383,1603.900575a,30139.21568664d,35y,0h,0t,0r/data=CjsiJgokCdr95P0-HiDAEWVu9880gSHAGUXlCzo3b1LAIaC-jA5Q11LAOg0IAREAAAAAAADwPyABQgIIAToDCgEwQgIIAEoNCP___________wEQAA\" target=\"_blank\">Vue Google Earth&nbsp;: Bayan Obo / Baotou, Chine</a>&nbsp;(sera directement lu en short vidéo)</p>"
+                      "content": "<p>Observez l’évolution de cette mine au fil des années, à partir d’une vue aérienne. Répondez ensuite à la question ci-dessous.&nbsp;</p><p><a href=\"https://earth.google.com/web/search/Bayan+Obo,+Baotou,+Mongolie-int%c3%a9rieure,+Chine/@41.80231179,109.99371383,1603.900575a,30139.21568664d,35y,0h,0t,0r/data=CjsiJgokCdr95P0-HiDAEWVu9880gSHAGUXlCzo3b1LAIaC-jA5Q11LAOg0IAREAAAAAAADwPyABQgIIAToDCgEwQgIIAEoNCP___________wEQAA\" target=\"_blank\">Vue Google Earth&nbsp;: Bayan Obo / Baotou, Chine</a>&nbsp;(sera directement lu en short vidéo)</p>"
                     },
                     {
                       "id": "8db7e730-9601-4e62-b6a4-9e351097e40f",
@@ -353,21 +359,21 @@
                           "id": "1",
                           "content": "<p>La fonte des glaces</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Le traitement des terres rares&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu. Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Bien vu. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Une coulée de pétrole</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
                           }
                         },
                         {
@@ -416,17 +422,17 @@
                           }
                         },
                         {
-                          "id": "2",
-                          "content": "<p>Non, car l’extraction est polluante.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Bien vu. </p><p>Le <strong>lithium</strong> est indispensable aux batteries, mais son extraction <strong>détruit les écosystèmes</strong> et <strong>contamine les nappes phréatiques</strong>, entraînant manque d’eau et pollution pour les populations locales.</p>"
-                          }
-                        },
-                        {
                           "id": "3",
                           "content": "<p>Oui, si on les recharge souvent.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non. </p><p>Le <strong>lithium</strong> est indispensable aux batteries, mais son extraction <strong>détruit les écosystèmes</strong> et <strong>contamine les nappes phréatiques</strong>, entraînant manque d’eau et pollution pour les populations locales.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Non, car l’extraction est polluante.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu. </p><p>Le <strong>lithium</strong> est indispensable aux batteries, mais son extraction <strong>détruit les écosystèmes</strong> et <strong>contamine les nappes phréatiques</strong>, entraînant manque d’eau et pollution pour les populations locales.</p>"
                           }
                         },
                         {
@@ -465,7 +471,7 @@
                       "props": {
                         "titleLevel": 2,
                         "title": "⛏️ Extraction artisanale en RDC : conditions de travail et risques humains",
-                        "author": "UNICEF",
+                        "author": "PLACEHOLDER",
                         "date": "Novembre 2014",
                         "paragraphs": [
                           "Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques.",
@@ -482,31 +488,31 @@
                       "instruction": "<p>En 2014, certaines mines impliquaient des enfants. Est-ce encore le cas aujourd’hui, selon vous ?</p>",
                       "proposals": [
                         {
-                          "id": "1",
-                          "content": "<p>Non, impossible !</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Malheureusement non. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>impliquer des enfants</strong>.Ces situations sont liées à l’exploitation artisanale et aux conditions de vie très précaires des familles.</p>"
-                          }
-                        },
-                        {
                           "id": "2",
                           "content": "<p>Oui, dans certains cas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Malheureusement oui. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>impliquer des enfants</strong>.Ces situations sont liées à l’exploitation artisanale et aux conditions de vie très précaires des familles.</p>"
+                            "diagnosis": "<p>Malheureusement oui. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>toujours&nbsp;</strong><strong>impliquer des enfants</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Seulement pour les appareils anciens.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Malheureusement non. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>impliquer des enfants</strong>.Ces situations sont liées à l’exploitation artisanale et aux conditions de vie très précaires des familles.</p>"
+                            "diagnosis": "<p>Malheureusement non. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>toujours&nbsp;</strong><strong>impliquer des enfants</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Non, impossible !</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Malheureusement non. </p><p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>toujours&nbsp;</strong><strong>impliquer des enfants</strong>.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>impliquer des enfants</strong>.Ces situations sont liées à l’exploitation artisanale et aux conditions de vie très précaires des familles.</p>"
+                            "diagnosis": "<p>Dans certaines zones minières, l’extraction du cobalt, de l’étain ou du tungstène peut <strong>toujours&nbsp;</strong><strong>impliquer des enfants</strong>.</p>"
                           }
                         }
                       ],
@@ -543,7 +549,7 @@
               "element": {
                 "id": "138eea6b-49c9-449c-993d-0440fdf59a0b",
                 "type": "text",
-                "content": "<p>Vous avez vu les impacts de l’extraction. Passons aux décisions du quotidien. Pour chaque situation, choisissez l’option qui réduit le plus l’impact environnemental.</p>"
+                "content": "<p>Vous avez vu les impacts de l’extraction. Passons aux décisions du quotidien.</p>"
               }
             }
           ]
@@ -676,9 +682,8 @@
                     },
                     {
                       "id": "5aafa8f3-3e00-416f-92e9-17d052c50516",
-                      "type": "expand",
-                      "title": "💡Astuce",
-                      "content": "<p>Pensez à <strong>protéger</strong> vos appareils (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;</p>"
+                      "type": "text",
+                      "content": "<p><strong>💡Astuce</strong></p><p>Pensez à <strong>protéger</strong> vos appareils (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;</p>"
                     }
                   ]
                 }
@@ -794,117 +799,49 @@
           "title": "Activité 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "acfc6cc4-a138-470b-8cb7-e4d9d338a71d",
-                      "type": "qcu",
-                      "instruction": "<p>Lors de l’extraction de certains métaux utilisés dans les appareils numériques, quel impact environnemental majeur est observé&nbsp;?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Une amélioration durable de la qualité des sols</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>L’extraction mobilise souvent des produits chimiques qui dégradent fortement les sols.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Une pollution importante des sols et de l’eau</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu&nbsp;!</p>",
-                            "diagnosis": "<p>Exact&nbsp;: l’extraction peut contaminer les sols et les cours d’eau avec des résidus toxiques.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Aucune pollution notable</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>Au contraire, c’est l’un des principaux impacts observés.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
+              "type": "element",
+              "element": {
+                "id": "728ddefd-d9c9-457f-8c5d-032448fa010d",
+                "type": "qcm",
+                "instruction": "<p>Quels problèmes majeurs l’extraction des terres rares provoque-t-elle dans l’État de Kachin, au Myanmar ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>la pollution des sols et des sources d'eau douce</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>une hasse des conflits entre les exploitants des ressources et les autorités locales</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>des feux de forêts&nbsp;</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>des effets graves sur la santé des habitants</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>le déplacement de familles dont les terres deviennent incultivables<br></p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien joué !</p>",
+                    "diagnosis": "<p>Ces situations entraînent souvent de fortes pollutions, des risques pour la santé et le déplacement de familles touchées par la dégradation durable de leur environnement. Et ce ne sont que quelques exemples : d’autres impacts sociaux et humains existent, même s’ils ne figurent pas ici.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non.</p>",
+                    "diagnosis": "<p>Certaines conséquences importantes ne figurent pas dans votre sélection. L’extraction peut entraîner divers effets environnementaux, sociaux et sanitaires. Et ce ne sont que quelques exemples : d’autres impacts existent, même s’ils ne sont pas listés ici.</p>"
+                  }
                 },
-                {
-                  "elements": [
-                    {
-                      "id": "86f283c9-d7a0-423a-a3f4-380e1d6335e6",
-                      "type": "qcu",
-                      "instruction": "<p>Quels effets sur la santé peuvent être liés à cette pollution&nbsp;?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Aucun effet particulier</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>La pollution issue de l’extraction peut provoquer divers problèmes de santé.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Des soucis de santé chez les populations locales</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu&nbsp;!</p>",
-                            "diagnosis": "<p>Oui&nbsp;: l’exposition à certains résidus peut entraîner des irritations et des troubles respiratoires.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Une amélioration de la qualité de l’air</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>L’extraction peut au contraire générer des émanations nocives.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "0151fb26-5897-49dc-a84e-d0d3f2937918",
-                      "type": "qcu",
-                      "instruction": "<p>Quels impacts sociaux peuvent aussi être observés dans les zones d’extraction&nbsp;?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>La création de nouvelles terres agricoles</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>L’extraction rend parfois les sols impropres à la culture.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Aucun changement pour les habitants</p>",
-                          "feedback": {
-                            "state": "<p>Eh non&nbsp;!</p>",
-                            "diagnosis": "<p>L’extraction peut priver les populations de leurs terres et droits.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Une perte de leurs droits et de leurs terres.</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu&nbsp;!</p>",
-                            "diagnosis": "<p>Exact&nbsp;: lorsque les sols et l’eau sont trop pollués, certaines familles doivent quitter la zone.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3"
-                    }
-                  ]
-                }
-              ]
+                "solutions": [
+                  "1",
+                  "4",
+                  "5"
+                ]
+              }
             }
           ]
         },
@@ -1095,14 +1032,14 @@
                       "label": "0 an",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Votre smartphone est tout récent. Sa durée de vie technique peut atteindre 5 à 10 ans si vous l’entretenez."
+                        "text": "Votre smartphone est tout récent. Prenez en soin ! Sa durée de vie technique peut atteindre 5 à 10 ans si vous l’entretenez."
                       }
                     },
                     {
                       "label": "1 an",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Votre téléphone est encore très loin de ses limites techniques. Un smartphone moderne peut fonctionner 5 à 10 ans."
+                        "text": "Votre téléphone est encore très loin de ses limites techniques. En en prenant soin, un smartphone moderne peut fonctionner 5 à 10 ans."
                       }
                     },
                     {
