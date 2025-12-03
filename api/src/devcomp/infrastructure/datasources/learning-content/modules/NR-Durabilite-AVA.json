@@ -1,0 +1,1195 @@
+{
+  "id": "2b01b6af-1b32-44ac-9f64-9fb064fa2971",
+  "shortId": "dd3ddf6c",
+  "slug": "tmp-nr-obsolescence-programmee",
+  "title": "En finir avec l’obsolescence programmée ? ",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Extraction, fabrication, distribution, consommation… Produire de nouveaux appareils numériques a des impacts environnementaux importants. Le renouvellement toujours plus rapide des équipements accentue cette pression sur l’environnement. </p><p><br>Dans ce module, vous découvrirez les mécanismes d’obsolescence qui raccourcissent la durée de vie des appareils numériques et comprendrez comment s’amorce la transition vers une économie circulaire plus durable.</p>",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "<p>Connaître les impacts de la fabrication d’un équipement informatique</p>",
+      "<p>Identifier des pratiques d’obsolescence programmée</p>",
+      "<p>Connaître le principe de l’économie circulaire</p>"
+    ],
+    "tabletSupport": "inconvenient"
+  },
+  "sections": [
+    {
+      "id": "c01af84a-c0c6-4ef4-ad08-f272390b24a5",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "171f155c-a6a3-4d04-9572-eb0e7af85cf6",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0f94e969-ccc9-40fb-9357-fc7db47aca4a",
+                "type": "text",
+                "content": "<p>Chaque année, plus d’un milliard de smartphones sont vendus dans le monde.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9e8b7be9-71a9-49bd-8358-c6542684b92f",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, quel pourcentage de français change de téléphone alors que l’ancien fonctionne encore ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>15%</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est bien plus ! Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>47%</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est bien plus ! Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>88%</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b22979ea-4258-4738-89c9-822af98676bc",
+          "type": "transition",
+          "title": "transition accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b463d10b-7b0e-403a-9ba2-d7fb5a4e9ef0",
+                "type": "text",
+                "content": "<p>Changer son matériel informatique a un impact environnemental fort. Voyons pourquoi.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e71b5bb4-bef9-42db-bac4-823339b28829",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "d34bf2a0-a3cf-42ba-8f40-459c48fb5fae",
+          "type": "discovery",
+          "title": "Activité découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5b3d3352-284f-4520-80a2-fecf99a6fc14",
+                "type": "text",
+                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives&nbsp;: l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "6dc7cc3b-9fba-498d-bd9d-9ec89d6f0869",
+                      "type": "custom",
+                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de minerais ?<br>Déplacez la jauge entre 1kg et 800kg.</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
+                            }
+                          },
+                          {
+                            "label": "200kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
+                            }
+                          },
+                          {
+                            "label": "400kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
+                            }
+                          },
+                          {
+                            "label": "800kg",
+                            "feedback": {
+                              "type": "good",
+                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "10dbae70-c3ba-4cd6-a3a2-adf81cb60eba",
+                      "type": "custom",
+                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et une&nbsp;1,5 tonne d’eau.</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1 litre",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                            }
+                          },
+                          {
+                            "label": "500 litres",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                            }
+                          },
+                          {
+                            "label": "1 tonne",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                            }
+                          },
+                          {
+                            "label": "1,5 tonne",
+                            "feedback": {
+                              "type": "good",
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "c6d1cf5f-34f7-4875-8583-234d2bf092a9",
+                      "type": "custom",
+                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos d’énergie fossile ?<br>Déplacez la jauge entre 1kg et&nbsp;240kg.</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
+                            }
+                          },
+                          {
+                            "label": "80kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
+                            }
+                          },
+                          {
+                            "label": "160kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
+                            }
+                          },
+                          {
+                            "label": "240kg",
+                            "feedback": {
+                              "type": "good",
+                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7e2ffcb2-a37f-4767-80ce-bee937eac2d8",
+                      "type": "custom",
+                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de produits toxiques ?<br>Déplacez la jauge entre 1kg et 33kg.</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
+                            }
+                          },
+                          {
+                            "label": "11kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
+                            }
+                          },
+                          {
+                            "label": "22kg",
+                            "feedback": {
+                              "type": "good",
+                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
+                            }
+                          },
+                          {
+                            "label": "33kg",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "29736061-d82a-460e-9688-c373ac0b28b0",
+          "type": "short-lesson",
+          "title": "Leçon 1",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "c9318c2a-ee21-434a-8eea-6fef1156a962",
+                      "type": "text",
+                      "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle&nbsp;consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "59207989-005a-43b9-98bb-f91e0b3da26f",
+                      "type": "text",
+                      "content": "<h5>Est-ce vraiment un problème ?</h5><p><br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent&nbsp;: nous utilisons aujourd’hui <strong>plus de ressources</strong> naturelles que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.&nbsp;🌍</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b441314f-22a3-4c25-bbb9-1ff8851386a9",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8773c280-9e0e-423d-a698-9043db500dd0",
+                "type": "text",
+                "content": "<p>Mais même lorsqu’on sait que fabriquer un nouvel appareil consomme énormément d’énergie et de ressources, il est souvent difficile d’y échapper...</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d1b89f0f-015f-4930-a02c-c1c73ab8b044",
+          "type": "discovery",
+          "title": "Activité découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3c4e7e34-d4e4-43f9-ba12-386d413a7e56",
+                "type": "text",
+                "content": "<p>Voici Jeff. Il travaille au service “vente, conseil et diagnostic” d’une grande enseigne d’informatique. Ce matin, plusieurs clients viennent demander conseil. Il doit poser un premier diagnostic aux problèmes rencontrés par ces clients.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "1dc7dcad-7cd0-439b-97bd-85a2fbb9d127",
+                      "type": "text",
+                      "content": "<p>Mon imprimante refuse d’imprimer, elle dit que la cartouche est vide… mais je l’ai changée la semaine dernière et j’ai imprimé sans problème hier !</p>"
+                    },
+                    {
+                      "id": "cfa55f35-7071-4469-8668-1f1fd84aef22",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/imprimante-cassee-durabilite.png",
+                      "alt": "Une femme avec une imprimante cassée",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "5ebd266a-6efb-4741-a3f9-66ad90f82002",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le capteur d’encre s’est déréglé, l’imprimante doit être réparée.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas tout à fait, ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’<strong>obsolescence technique</strong>, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Le fabricant limite volontairement l’impression pour vendre de nouvelles cartouches</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En effet, l’imprimante est un cas assez classique de ce qu’on appelle l’<strong>obsolescence technique</strong>&nbsp;: le fabricant limite volontairement la durée de fonctionnement de l’appareil en limitant  la durée de fonctionnement de l’un de ses composants (ici la cartouche).</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>La cartouche a été mal reconnue après l’installation, la cartouche est à jeter.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas tout à fait, ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’<strong>obsolescence technique</strong>, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas&nbsp;</p>",
+                          "feedback": {
+                            "diagnosis": "<p>ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’obsolescence technique, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "9d1ebcab-8f6d-475a-be06-6d388214c8de",
+                      "type": "text",
+                      "content": "<p>Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !</p>"
+                    },
+                    {
+                      "id": "223c4351-1768-45f6-bea4-b62167da8601",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le téléphone a plus d’un an, c’est normal qu’il ralentisse au fil des mises à jour.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas vraiment, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation&nbsp;: onglets nombreux ou applications en arrière plan.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas vraiment, même si ces pratiques utilisent de la batterie, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le fabricant limite les performances pour pousser à changer de modèle.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, ici, il semble que ce soit bien la mise à jour qui rend volontairement ce modèle de téléphone moins performant. On parle alors d’<strong>obsolescence logicielle</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "d60b233d-a77e-4f31-bdef-dc12422d1741",
+                      "type": "text",
+                      "content": "<p>La batterie de mon ordinateur est morte, mais le réparateur que j’ai été voir dit qu’elle est collée et qu’il faut tout changer. J’ai du mal à le croire.</p>"
+                    },
+                    {
+                      "id": "264ca995-c4c9-4601-b49e-a2f976f80c52",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>C’est étonnant en effet, les batteries sont toujours faciles à remplacer, le réparateur veut certainement vendre un nouveau produit.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Malheureusement, certains fabricants rendent les produits volontairement impossibles à réparer en usant de techniques telles que les batteries collées, des pièces détachées introuvables ou hors de prix. On parle alors de <strong>limitation à la réparabilité</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>C’est possible, certains appareils sont volontairement conçus pour limiter la réparation.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agit en effet d’un cas de <strong>limitation à la réparabilité</strong>. L’appareil est physiquement difficile à réparer comme avec cette batterie collée, les pièces détachées sont onéreuses ou ne sont pas proposées à la vente.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Certains fabricants rendent les produits volontairement impossibles à réparer en usant de techniques telles que les batteries collées, des pièces détachées introuvables ou hors de prix. On parle alors de <strong>limitation à la réparabilité</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
+                      "type": "text",
+                      "content": "<p>J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?&nbsp;</p>"
+                    },
+                    {
+                      "id": "5759eb75-ee53-4028-9c95-2a5a85b9e9ca",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Lors du lancement d’une nouvelle version, votre ancien téléphone devient alors obsolète, il vaut mieux changer avant qu’il ne soit trop dépassé.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Non ! Le simple lancement d’une nouvelle version ne rend pas votre modèle précédent obsolète. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Oui, car votre ancien écran de téléphone ne sera plus adapté aux nouvelles applications.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Non, le lancement de ce nouveau design d’écran n’aura pas d’impact sur votre téléphone actuel. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>A vous de voir, ces changements semblent surtout esthétiques ou marketing. Ils sont surtout là pour vous donner envie d’acheter du neuf.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas&nbsp;</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "90ca7062-d879-4b9b-883a-d57bcb72a9bb",
+          "type": "short-lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
+                      "type": "text",
+                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à racheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "dd7638c3-1e9e-4d37-8deb-96b03c33aab5",
+                      "type": "text",
+                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies&nbsp;:</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.<br></li></ul>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3c977266-2ebe-403f-93cb-e12c16872122",
+                      "type": "text",
+                      "content": "<p>Les fabricants peuvent également jouer sur l’<strong>aspect psychologique</strong> (ou par <strong>effet de mode</strong>). Cette stratégie est très puissante.&nbsp;🧠</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a19fddd3-5a99-400d-bb6d-e886ada9798e",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b2b94d0c-976d-4326-b5d4-b2fcd916f89b",
+                "type": "text",
+                "content": "<p>Alors, comment sortir du modèle «&nbsp;extraire, produire, consommer, jeter&nbsp;», également appelé système linéaire ?<br><br>En changeant de réflexe. D’autres gestes sont possibles&nbsp;:</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3b918f95-aafa-4709-a8a3-2746f33bd56a",
+          "type": "discovery",
+          "title": "Activité de découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8975a87a-3103-4b3c-ab41-3b9d585d619a",
+                "type": "text",
+                "content": "<p>Voici un schéma représentant différentes étapes de vie d’un produit. Quatre verbes ont été volontairement effacés et remplacés par les chiffres 1, 2, 3, 4.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b43a0e76-a868-44d3-8cef-48095d234f07",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/schema-eco-circulaire.png",
+                "alt": "Description en détail ci-après ",
+                "alternativeText": "<p>Schéma représentant quatre niveaux de circularité appliqués au cycle de vie des appareils électroniques&nbsp;: fabrication, distribution, consommation et tri. Au-dessus du cycle linéaire apparaissent quatre boucles. La plus large (1) relie le tri à la fabrication avec l’étiquette “On utilise les matières premières”. Une boucle intermédiaire (2), partant du tri vers la distribution, indique “On remet en état, on revend”. Une boucle plus petite (3), partant de la consommation vers la distribution, est intitulée “On donne, on revend”. Enfin, la plus courte (4) relie la consommation à elle-même et porte la mention “On garde le même appareil”. Ces boucles illustrent les stratégies de réemploi, réparation et prolongation de durée de vie.</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c886cc16-235f-4bf9-a9b3-c5d070e28c2d",
+                "type": "qrocm",
+                "instruction": "<p>Après avoir analysé le schéma, complétez avec les termes manquants.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>1 =&nbsp;</p>"
+                  },
+                  {
+                    "input": "Un",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "Sélectionnez",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Refabriquer"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Recycler"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Réemployer"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Réparer"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>2 =&nbsp;</p>"
+                  },
+                  {
+                    "input": "Deux",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "Sélectionnez",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Refabriquer"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Recycler"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Réemployer"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Réparer"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>3 =</p>"
+                  },
+                  {
+                    "input": "Trois",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "Sélectionnez",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Recycler"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Réparer"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Refabriquer"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Réemployer"
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>4 =</p>"
+                  },
+                  {
+                    "input": "Quatre",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "Sélectionnez",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Refabriquer"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Recycler"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Réemployer"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Réparer"
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien joué !</p>",
+                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong>&nbsp;: vous avez ici les actions au coeur de l’économie circulaire !</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas vraiment.</p>",
+                    "diagnosis": "<p>Quand on utilise les matières premières, on <strong>recycle</strong>. Quand on récupère les pièces détachées, on <strong>refabrique</strong> à partir des pièces récupérées. Quand on utilise un appareil encore fonctionnel pour le donner ou le revendre, on parle de <strong>réemploi</strong>. Enfin, quand on souhaite garder son  appareil, on peut également le <strong>réparer</strong>. Ces quatre gestes sont les piliers de l’économie circulaire.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "5ebd6e63-375e-4df0-ba59-80142dd54c64",
+          "type": "short-lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "12f35076-ff72-40f7-b41f-14a680bcb313",
+                      "type": "text",
+                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong>&nbsp;: on extrait, on produit, on consomme, puis on <strong>jette</strong>.&nbsp;🚮 </p><p>Chaque année, de nombreux appareils encore utilisables finissent à la poubelle.&nbsp; Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "967c7ce3-bb66-4b23-a3a1-c8ccf5f1ea00",
+                      "type": "text",
+                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles même énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques produits&nbsp;: le meilleur déchet est celui que l’on ne produit pas.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "81d82353-d909-48c0-8791-732999302eab",
+                      "type": "text",
+                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui&nbsp;: l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6aad2357-5bf8-40bc-b04b-4f110f2028ae",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "7efb3903-9577-4826-8649-783828ff6b68",
+          "type": "summary",
+          "title": "Retenir l’essentiel",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fcffe15b-8162-4f23-bee7-aa81594b6e62",
+                "type": "text",
+                "content": "<ul><li>La <strong>fabrication des équipements</strong> a des impacts environnementaux&nbsp;: émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.&nbsp;</li><li>Les pratiques d’<strong>obsolescence,&nbsp;</strong>qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements. </li><li>Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. </li><li>Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9c58f606-7f0a-4ba3-b387-9644a53fe159",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "1096fc60-c6b3-4546-a86c-019cda881e6a",
+          "type": "activity",
+          "title": "Application 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a439ddb8-fc46-4e67-ba6e-544dccaef549",
+                "type": "qcu",
+                "instruction": "<p>Parmi les affirmations suivantes, laquelle décrit le mieux l’étape de fabrication ?</p>",
+                "proposals": [
+                  {
+                    "id": "3",
+                    "content": "<p>La fabrication n’est pas une étape polluante, les usines de fabrication fonctionnent majoritairement à l’énergie renouvelable.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La fabrication a un impact environnemental négligeable par rapport à l’utilisation quotidienne de l’appareil.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>L’étape de fabrication des appareils numériques est très polluante. </p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p> La fabrication est effectivement l’étape la plus polluante de la vie d’un appareil numérique.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>L’étape de fabrication est aujourd’hui totalement automatisée, ce qui élimine la majorité des pollutions.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.<br></p>",
+                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "21a113ff-a3d5-431d-adf7-e221dda208b5",
+          "type": "activity",
+          "title": "Application 2",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "784e5111-2234-4730-8cf4-c68b38dfb4ec",
+                      "type": "text",
+                      "content": "<p>Reconnaître et sélectionner le type de stratégies derrière chaque cas présenté&nbsp;:</p>"
+                    },
+                    {
+                      "id": "1e1a6976-b96e-4202-b27d-17c3ddc96195",
+                      "type": "qcu",
+                      "instruction": "<p>Le prix de la réparation d’une montre connectée est plus élevé que l’achat d’une montre neuve.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Limitation à la réparabilité</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Le prix des réparations trop élevé est souvent un frein à la réparation.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Obsolescence logicielle</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence logicielle se produit lorsque les mises à jour ne sont plus compatibles ou rendent l’appareil moins performant. Cela ne concerne pas directement le prix de la réparation.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Obsolescence par effet de mode</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence par effet de mode repose sur le désir de changer d’appareil parce qu’il n’est plus à la mode, pas parce que la réparation est trop coûteuse.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5ff16265-8026-41d3-9697-916afebf4e5c",
+                      "type": "qcu",
+                      "instruction": "<p>L’arrêt des mises à jour du système d’exploitation de l’ordinateur entraîne des incompatibilités et accroît la vulnérabilité de l’appareil.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Obsolescence technique</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence technique renvoie à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…), ce qui n’est pas le cas ici.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Obsolescence logicielle</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>L’arrêt de mise à jour logicielle est un cause fréquente d’obsolescence.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Obsolescence par effet de mode</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>L’obsolescence par effet de mode vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel. Ici, le type d’obsolescence est directement lié au bon fonctionnement l’appareil.&nbsp;</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6e9332f6-5852-4376-9b10-5b8af0022def",
+                      "type": "qcu",
+                      "instruction": "<p>Le smartphone réduit automatiquement ses performances lorsque la batterie atteint un certain niveau d’usure.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Obsolescence technique</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>L’obsolescence technique renvoie bien à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…).</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Obsolescence logicielle</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence logicielle touche principalement les mises à jour, les incompatibilités ou l’arrêt du support logiciel, ce qui n’est pas le cas ici.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Obsolescence par effet de mode</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>L’obsolescence par effet de mode vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel, ce qui n’est pas le cas ici.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "0ececc0b-83c4-41b8-88f0-9c0673d98ffa",
+                      "type": "qcu",
+                      "instruction": "<p>Les choix esthétiques et fonctionnels d’un équipement sont mis en avant par la publicité, puis volontairement modifiés sur la gamme suivante pour rendre le modèle précédent moins attractif.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Obsolescence technique</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence technique renvoie à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…). Ici, les leviers utilisés pour provoquer l’achat d’un appareil neuf  sont différents.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Obsolescence logicielle</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence logicielle touche principalement les mises à jour, les incompatibilités ou l’arrêt du support logiciel. Ici, les leviers utilisés pour provoquer l’achat d’un appareil neuf sont différents.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Obsolescence par effet de mode</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Il s’agit bien ici des leviers psychologiques qui poussent le consommateur à acheter du neuf.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ee81f04c-d4b5-43ea-aaf4-29d637270e1c",
+          "type": "activity",
+          "title": "Application 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fcf77703-3fad-45ba-bf97-2ebd6e49c672",
+                "type": "text",
+                "content": "<p>Vous devez acheter un ordinateur portable. En consommateur averti, vous souhaitez réduire autant que possible votre empreinte écologique. </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b5bffb62-594d-407c-af81-fe7fa603379f",
+                "type": "qab",
+                "instruction": "<p>Identifiez si chaque proposition correspond à une logique d’économie <strong>circulaire</strong> ou à une logique&nbsp;<strong>linéaire</strong>.</p>",
+                "cards": [
+                  {
+                    "id": "d5fb3fcf-d7ff-48d0-901e-7fd884e434a4",
+                    "text": "Location longue durée de l’ordinateur",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Circulaire",
+                    "proposalB": "Linéaire",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "af10dfc1-ed27-4c7f-98a0-3c8cf359d596",
+                    "text": "Achat d’un ordinateur reconditionné",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Circulaire",
+                    "proposalB": "Linéaire",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "110eb755-31f8-4701-9c0c-7e157bf2f538",
+                    "text": "Système d’abonnement avec un ordinateur neuf tous les deux ans",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Circulaire",
+                    "proposalB": "Linéaire",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "273ac6f4-3454-404e-8d21-00550ce17128",
+                    "text": "Opération “Reprise + Bonus” : votre vieil ordinateur est recyclé, vous avez une réduction sur un neuf",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Circulaire",
+                    "proposalB": "Linéaire",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>La location et le reconditionnement sont des pratiques de l’économie circulaire. Attention, parfois, certaines pratiques peuvent être trompeuses ! Le recyclage n’est pas toujours la solution, surtout si l’on incite à acheter toujours plus de neuf avec un système de \"bonus\" d’achat.</p>"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61baaee7-ae03-4763-a9ac-fb61480d5b07",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "4dc0b6a5-e897-436a-bdf5-86ee8f4d7407",
+          "type": "challenge",
+          "title": "Transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5baa2fa9-a281-4e00-bf0f-008790c17132",
+                "type": "text",
+                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes&nbsp;:&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "5a19a0c7-b684-4b84-93b2-4788da82376c",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/tablette-1.png",
+                "alt": "Une tablette (à modifier)",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d25a2a3f-1832-4338-8d01-11d6155f4f63",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/tablette-2.png",
+                "alt": "Une deuxième tablette (à modifier)",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fadb1f8a-ee5b-4248-9430-e754f361395e",
+                "type": "qcu",
+                "instruction": "<p>Laquelle de ces deux tablettes est la plus facile à réparer ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>La première tablette </p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p>C’est exact ! Sur l’étiquette Energy, le pictogramme “tournevis” indique le degré de réparabilité de la tablette. Cette tablette étant en classe \"A\", elle est  mieux notée et donc plus facilement réparable que l’autre tablette</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La deuxième tablette</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p>C’est l’inverse ! Sur l’étiquette Energy, le pictogramme “tournevis” indique le degré de réparabilité de la tablette. Ici, le smartphone est en classe C contre une classe A pour l’autre tablette, c’est donc l’autre tablette qui est plus facilement réparable.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
