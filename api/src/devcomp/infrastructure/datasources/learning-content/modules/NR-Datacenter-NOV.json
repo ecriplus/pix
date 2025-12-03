@@ -51,31 +51,24 @@
               "element": {
                 "id": "85a09eeb-14ed-4864-b6f3-2e43ab261bcc",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, quand vous envoyez ce message à la personne assise juste à côté de vous, où passe vraiment l’information ?</p>",
+                "instruction": "<p>À votre avis, quand vous envoyez ce message à la personne assise juste à côté de vous, que se passe t-il avec votre message ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Elle passe directement de votre téléphone au sien, comme un message “de voisin à voisin”.</p>",
+                    "content": "<p>Le message passe directement de votre téléphone à celui de la personne qui vous accompagne, sans quitter la salle d'attente.</p>",
                     "feedback": {
                       "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Elle passe par plusieurs appareils en parcourant des centaines, voire des milliers, de kilomètres.</p>",
+                    "content": "<p>Le message passe par plusieurs appareils en parcourant des centaines, voire des milliers, de kilomètres.</p>",
                     "feedback": {
                       "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Elle reste uniquement dans la salle d’attente et ne sort pas de la pièce</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
@@ -290,21 +283,21 @@
                     "id": "1",
                     "content": "<p>Les changements de température n’ont rien à voir avec la consommation électrique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !  Quand un appareil numérique&nbsp;<strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chaud</strong> et il <strong>consomme un peu</strong>. <strong>C’est pareil pour les serveurs</strong> ! Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.<br><br></p>"
+                      "diagnosis": "<p>Eh non&nbsp;! Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Quand le smartphone travaille, la température augmente et la consommation électrique aussi.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !  Quand un appareil numérique&nbsp;<strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chauffe un peu</strong> et il <strong>consomme un peu</strong>. <strong>C’est pareil pour les serveurs</strong> ! Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.<br></p>"
+                      "diagnosis": "<p>Bien vu !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>La consommation électrique est toujours la même, peu importe ce que fait l’appareil.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !  Quand un appareil numérique&nbsp;<strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chauffe un peu</strong> et il <strong>consomme un peu</strong>. <strong>C’est pareil pour les serveurs</strong> ! Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.</p>"
+                      "diagnosis": "<p>Eh non !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise.</strong></p>"
                     }
                   },
                   {
@@ -896,7 +889,38 @@
               "element": {
                 "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
                 "type": "text",
-                "content": "<p>L'embed marche pas, trouver un truc, là ça fait planter la PR<br></p>"
+                "content": "<p>Dans ce module, vous avez vu que certains usages en ligne demandent <strong>beaucoup plus de travail</strong> aux centres de données que d’autres.\n    Bonne nouvelle&nbsp;: il existe des gestes très simples pour alléger ce travail, sans changer complètement vos habitudes.\n</p><p>    Voici trois idées faciles à tester cette semaine.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "85753fa4-13df-4941-8610-8c508233ee61",
+                "type": "qcu-declarative",
+                "instruction": "<p>Choisissez celle qui vous semble la plus accessible pour vous.</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Regarder une vidéo en qualité standard quand la haute définition n’est pas utile.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée&nbsp;! 😊<br>\n    Essayer la qualité standard pendant une semaine est un bon test.\n    Si cela ne vous dérange pas, cette habitude pourrait facilement s’installer dans votre quotidien.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Télécharger une chanson que j’écoute souvent plutôt que la streamer tous les jours.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bon choix&nbsp;! 🎧<br>\n    Télécharger une chanson que vous écoutez régulièrement permet d’éviter de solliciter les centres de données à chaque écoute.\n    Testez-le cette semaine&nbsp;: si cela vous convient, c’est une habitude simple à garder.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Envoyer un message texte quand un vocal n’est pas nécessaire.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Parfait&nbsp;! ✉️<br>\n    Le message texte est l’option la plus légère.\n    Vous pouvez essayer cette astuce pendant une semaine et voir si cela vous convient.\n    Si cela ne change pas grand-chose pour vous, pourquoi ne pas en faire une habitude&nbsp;?</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
