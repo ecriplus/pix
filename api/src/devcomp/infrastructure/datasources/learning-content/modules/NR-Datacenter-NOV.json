@@ -55,7 +55,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Le message passe directement de votre téléphone à celui de la personne qui vous accompagne, sans quitter la salle d'attente.</p>",
+                    "content": "<p>Le message passe directement de votre téléphone à celui de la personne qui vous accompagne, sans quitter la salle d’attente.</p>",
                     "feedback": {
                       "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
@@ -119,7 +119,7 @@
               "element": {
                 "id": "0c6f4d09-1eb4-4b35-acf6-e82b70cefd0e",
                 "type": "qcu-discovery",
-                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p>",
+                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p><p>Question&nbsp;: Où va le \"J’aime\" de Killian quand il appuie sur le bouton ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -154,32 +154,36 @@
           "title": "Leçon 1",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "cdd8eb84-62f6-4081-adef-8afde16db75a",
-                "type": "text",
-                "content": "<p>Dans les <strong>centres de données</strong>, on trouve des&nbsp;<strong>serveurs</strong>.&nbsp;Un serveur est un ordinateur très puissant qui stocke les données, les envoie et fait les calculs nécessaires pour répondre aux demandes des utilisateurs. Un centre de données peut contenir entre<strong> quelques centaines et plusieurs centaines de milliers de serveurs</strong>. </p><p>Et ça ressemble à ça !</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "2654d872-e8c9-4aff-9a9d-a6948899a523",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/robert-baltzer-screenshot002.jpg",
-                "alt": "",
-                "alternativeText": "",
-                "legend": "Montrer qu’on voit \"un seul\" serveur et qu’il y a pleiiiiin de serveurs",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "2be610db-2a96-4486-99e5-3da2033a306d",
-                "type": "text",
-                "content": "<h5>🤔Tout le monde utilise ces serveurs quand il utilise internet ? </h5><p>Oui ! En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes sollicitent les serveurs <strong>en même temps</strong>.</p>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
+                      "type": "text",
+                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des&nbsp;<strong>serveurs</strong>.&nbsp;Un serveur est un ordinateur très puissant qui stocke les données, les envoie et fait les calculs nécessaires pour répondre aux demandes des utilisateurs. Un centre de données peut contenir entre<strong> quelques centaines et plusieurs centaines de milliers de serveurs</strong>. </p><p>Et ça ressemble à ça !</p>"
+                    },
+                    {
+                      "id": "929770b6-cc52-407e-a324-30b3cc48807b",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/nrdatacenternov/robert-baltzer-screenshot002.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "Montrer qu’on voit \"un seul\" serveur et qu’il y a pleiiiiin de serveurs",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "01a90945-8314-4fcd-9a06-013424c40d99",
+                      "type": "text",
+                      "content": "<h5>🤔Tout le monde utilise ces serveurs quand il utilise internet ? </h5><p>Oui ! En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes sollicitent les serveurs <strong>en même temps</strong>.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -236,6 +240,20 @@
                       }
                     },
                     {
+                      "title": "Killian met son smartphone en charge ",
+                      "description": "Après que la batterie soit épuisée il le recharge complètement",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-3-dec-2025-16-35-19.png",
+                        "alt": "aaa"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
                       "title": "Le smartphone a été oublié",
                       "description": "Killian a oublié son smartphone quasiment chargé sur la table en partant le matin",
                       "displayWidth": 500,
@@ -255,7 +273,7 @@
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-36-30.png",
-                        "alt": "aa"
+                        "alt": "aaaa"
                       },
                       "license": {
                         "name": "",
@@ -283,21 +301,21 @@
                     "id": "1",
                     "content": "<p>Les changements de température n’ont rien à voir avec la consommation électrique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non&nbsp;! Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
+                      "diagnosis": "<p>Eh non&nbsp;! Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Quand le smartphone travaille, la température augmente et la consommation électrique aussi.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
+                      "diagnosis": "<p>Bien vu !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>La consommation électrique est toujours la même, peu importe ce que fait l’appareil.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>\n    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>\n    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise.</strong></p>"
+                      "diagnosis": "<p>Eh non !  Quand un appareil numérique <strong>travaille beaucoup</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>personne ne les utilise.</strong></p>"
                     }
                   },
                   {
@@ -889,7 +907,7 @@
               "element": {
                 "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
                 "type": "text",
-                "content": "<p>Dans ce module, vous avez vu que certains usages en ligne demandent <strong>beaucoup plus de travail</strong> aux centres de données que d’autres.\n    Bonne nouvelle&nbsp;: il existe des gestes très simples pour alléger ce travail, sans changer complètement vos habitudes.\n</p><p>    Voici trois idées faciles à tester cette semaine.</p>"
+                "content": "<p>Dans ce module, vous avez vu que certains usages en ligne demandent <strong>beaucoup plus de travail</strong> aux centres de données que d’autres.    Bonne nouvelle&nbsp;: il existe des gestes très simples pour alléger ce travail, sans changer complètement vos habitudes.</p><p>    Voici trois idées faciles à tester cette semaine.</p>"
               }
             },
             {
@@ -903,21 +921,21 @@
                     "id": "1",
                     "content": "<p>Regarder une vidéo en qualité standard quand la haute définition n’est pas utile.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bonne idée&nbsp;! 😊<br>\n    Essayer la qualité standard pendant une semaine est un bon test.\n    Si cela ne vous dérange pas, cette habitude pourrait facilement s’installer dans votre quotidien.</p>"
+                      "diagnosis": "<p>Bonne idée&nbsp;! 😊<br>    Essayer la qualité standard pendant une semaine est un bon test.    Si cela ne vous dérange pas, cette habitude pourrait facilement s’installer dans votre quotidien.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Télécharger une chanson que j’écoute souvent plutôt que la streamer tous les jours.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bon choix&nbsp;! 🎧<br>\n    Télécharger une chanson que vous écoutez régulièrement permet d’éviter de solliciter les centres de données à chaque écoute.\n    Testez-le cette semaine&nbsp;: si cela vous convient, c’est une habitude simple à garder.</p>"
+                      "diagnosis": "<p>Très bon choix&nbsp;! 🎧<br>    Télécharger une chanson que vous écoutez régulièrement permet d’éviter de solliciter les centres de données à chaque écoute.    Testez-le cette semaine&nbsp;: si cela vous convient, c’est une habitude simple à garder.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Envoyer un message texte quand un vocal n’est pas nécessaire.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Parfait&nbsp;! ✉️<br>\n    Le message texte est l’option la plus légère.\n    Vous pouvez essayer cette astuce pendant une semaine et voir si cela vous convient.\n    Si cela ne change pas grand-chose pour vous, pourquoi ne pas en faire une habitude&nbsp;?</p>"
+                      "diagnosis": "<p>Parfait&nbsp;! ✉️<br>    Le message texte est l’option la plus légère.    Vous pouvez essayer cette astuce pendant une semaine et voir si cela vous convient.    Si cela ne change pas grand-chose pour vous, pourquoi ne pas en faire une habitude&nbsp;?</p>"
                     }
                   }
                 ]
