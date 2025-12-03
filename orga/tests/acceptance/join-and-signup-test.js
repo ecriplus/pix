@@ -13,10 +13,6 @@ module('Acceptance | join and signup', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
-  hooks.beforeEach(function () {
-    server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
-  });
-
   module('When the invitation is valid', function (hooks) {
     let invitationId;
     let invitationCode;

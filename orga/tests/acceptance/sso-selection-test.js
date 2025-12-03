@@ -12,10 +12,6 @@ module('Acceptance | SSO selection', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
-  hooks.beforeEach(function () {
-    server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
-  });
-
   module('When the user logs in through SSO', function () {
     test('it displays the sso selection page for login', async function (assert) {
       // given
