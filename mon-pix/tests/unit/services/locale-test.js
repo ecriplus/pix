@@ -330,6 +330,10 @@ module('Unit | Services | locale', function (hooks) {
           value: 'en',
         },
         {
+          label: 'Español (Latinoamérica y el Caribe)',
+          value: 'es-419',
+        },
+        {
           label: 'Français',
           value: 'fr',
         },
