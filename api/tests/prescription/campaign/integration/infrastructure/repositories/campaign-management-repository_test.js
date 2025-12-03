@@ -164,6 +164,74 @@ describe('Integration | Repository | Campaign-Management', function () {
       });
     });
 
+    it('should return campaign details with an empty code if campaign is part of a combined course', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const owner = databaseBuilder.factory.buildUser();
+      const organization = databaseBuilder.factory.buildOrganization({});
+      const targetProfile = databaseBuilder.factory.buildTargetProfile();
+
+      const campaign = databaseBuilder.factory.buildCampaign({
+        creatorId: user.id,
+        ownerId: owner.id,
+        organizationId: organization.id,
+        isForAbsoluteNovice: false,
+        code: 'ABCDEF',
+        targetProfileId: targetProfile.id,
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId: organization.id,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaign.id,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignManagementRepository.get(campaign.id);
+      // then
+      expect(result).to.deep.include({
+        id: campaign.id,
+        name: campaign.name,
+        code: '-',
+        type: campaign.type,
+        createdAt: campaign.createdAt,
+        archivedAt: campaign.archivedAt,
+        creatorFirstName: user.firstName,
+        creatorLastName: user.lastName,
+        creatorId: user.id,
+        ownerId: owner.id,
+        ownerFirstName: owner.firstName,
+        ownerLastName: owner.lastName,
+        organizationId: organization.id,
+        organizationName: organization.name,
+        targetProfileId: campaign.targetProfileId,
+        targetProfileName: targetProfile.name,
+        title: campaign.title,
+        customLandingPageText: campaign.customLandingPageText,
+        isForAbsoluteNovice: false,
+        customResultPageText: null,
+        customResultPageButtonText: null,
+        customResultPageButtonUrl: null,
+        totalParticipationsCount: 0,
+        sharedParticipationsCount: 0,
+        isPartOfCombinedCourse: true,
+      });
+    });
+
     describe('When there are participations', function () {
       context('when campaign type is ASSESSMENT', function () {
         it('should return total and shared participations count', async function () {
@@ -352,23 +420,45 @@ describe('Integration | Repository | Campaign-Management', function () {
         });
 
         // then
-        expect(campaignManagements[0]).to.deep.includes({
-          id: campaign.id,
-          name: campaign.name,
-          code: campaign.code,
-          createdAt: campaign.createdAt,
-          archivedAt: campaign.archivedAt,
-          deletedAt: campaign.deletedAt,
-          type: campaign.type,
-          creatorLastName: creator.lastName,
-          creatorFirstName: creator.firstName,
-          creatorId: creator.id,
-          ownerId: owner.id,
-          ownerFirstName: owner.firstName,
-          ownerLastName: owner.lastName,
-          targetProfileId: targetProfile.id,
-          targetProfileName: targetProfile.name,
-        });
+        expect(campaignManagements).to.have.deep.members([
+          {
+            alternativeTextToExternalIdHelpImage: undefined,
+            archivedAt: campaign.archivedAt,
+            archivedBy: undefined,
+            assessmentMethod: undefined,
+            code: 'AZERTY789',
+            createdAt: campaign.createdAt,
+            creatorFirstName: 'Arthur',
+            creatorId: creator.id,
+            creatorLastName: 'King',
+            customLandingPageText: undefined,
+            customResultPageButtonText: undefined,
+            customResultPageButtonUrl: undefined,
+            customResultPageText: undefined,
+            deletedAt: campaign.deletedAt,
+            deletedBy: null,
+            externalIdHelpImageUrl: undefined,
+            externalIdLabel: undefined,
+            externalIdType: undefined,
+            hasParticipation: false,
+            id: campaign.id,
+            isForAbsoluteNovice: undefined,
+            multipleSendings: undefined,
+            name: 'campaign name',
+            organizationId: undefined,
+            organizationName: undefined,
+            ownerFirstName: 'Elizabeth',
+            ownerId: owner.id,
+            ownerLastName: 'Queen',
+            sharedParticipationsCount: undefined,
+            targetProfileId: targetProfile.id,
+            targetProfileName: 'mon profil cible',
+            title: undefined,
+            totalParticipationsCount: NaN,
+            type: 'ASSESSMENT',
+            isPartOfCombinedCourse: false,
+          },
+        ]);
       });
 
       it('should sort campaigns by descending creation date', async function () {
