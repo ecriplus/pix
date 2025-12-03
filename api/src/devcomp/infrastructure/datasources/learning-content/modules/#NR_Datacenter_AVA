@@ -1,0 +1,482 @@
+{
+  "id": "7ee3ef2d-b29d-4029-86cf-f88ceb4ddea2",
+  "shortId": "e89cf72c",
+  "slug": "tmp-centre-de-donnees-mieux-faire",
+  "title": "Centre de données : peut-on mieux faire ?",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Tous nos usages numériques mobilisent des serveurs, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à toutes les échelles : celle de l’utilisateur, celle des entreprises et enfin celle des législateurs.<br><br></p>",
+    "duration": 10,
+    "level": "advanced",
+    "objectives": [
+      "<p>Décrire les impacts environnementaux des centres de données.</p>",
+      "<p>Identifier les changements de pratiques nécessaires pour réduire l’impact environnemental des centres de données. </p>",
+      "<p>Connaître des solutions techniques pour réduire les impacts environnementaux des centres de données.</p>"
+    ],
+    "tabletSupport": "inconvenient"
+  },
+  "sections": [
+    {
+      "id": "af70f187-85ab-4ed0-8229-f2448ed30061",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "28c67a26-1605-4108-b933-9718ee445485",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6395f495-5219-445d-9976-53710245da39",
+                "type": "text",
+                "content": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "555bfd7c-b0d9-4c84-a1fa-71e699e72ab1",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "7260fc78-af23-46f9-ad3c-11ee75a44905",
+          "type": "discovery",
+          "title": "Activité#1 - Les impacts environnementaux en cascade des centres de données",
+          "components": []
+        },
+        {
+          "id": "e3322cbb-6e25-4048-ae12-f58b166199d3",
+          "type": "short-lesson",
+          "title": "Lesson#1 - Les impacts environnementaux en cascade des centres de données",
+          "components": []
+        },
+        {
+          "id": "bc79c9ca-cf77-4376-a25c-a84419ef866f",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b3276727-321b-4cb2-baa8-fa8483d36bc6",
+                "type": "text",
+                "content": "<p>Avec la multiplication de nos usages numériques, et donc la construction de nouveaux centres de données, ces multiples impacts environnementaux vont s’amplifier. Que peuvent faire les entreprises du numérique ?<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cfb7b28c-6958-4476-80e7-c54bf8826f1f",
+          "type": "discovery",
+          "title": "Activité#2 - En tant qu’entreprise du numérique, que faire ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
+                "type": "text",
+                "content": "<p>Bob travaille dans une entreprise qui crée des sites web [notamment PixCloud] Il veut limiter la sollicitation des centres de données lorsque les internautes utilisent le site web. </p><p>POI : Faites les bons choix pour limiter la sollicitation des serveurs. </p><ul><li>1. Le format des fichiers&gt; choisit des images plutôt que des vidéos&nbsp;</li><li>2. La taille des fichiers&gt; Compresser le fichier et choisir le plus léger</li><li>3. Le player automatique&gt; Le désactiver</li><li>4. Les fonctionnalités&nbsp;&gt; Supprimer les fonctionnalités non utiliséesPlusieurs choix : à chaque fois, on voit la jauge de sollicitation du serveur qui diminue ou reste stable.<br><br></li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0d304653-ceb2-46b1-b866-3eec68bb5898",
+          "type": "short-lesson",
+          "title": "Leçon #2 : Les pratiques d’éco-conception de sites web.",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
+                      "type": "text",
+                      "content": "<p>On appelle ces actions des pratiques d’éco-conception.  Elle désigne l’ensemble des pratiques visant à réduire l’empreinte environnementale des logiciels tout au long de leur cycle de vie : conception, développement, déploiement, utilisation et fin de vie. </p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
+                      "type": "text",
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p><br>En pratique, elles sont encore très peu respectées, surtout dans les grands services numériques où la performance prime.<br>Cependant, la prise de conscience progresse : de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresse.<br><br></p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "0763af8f-39b5-4686-ba06-68e1a5f86852",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6379f16a-320d-4217-8b85-e5190f6bc29b",
+                "type": "text",
+                "content": "<p>Mais, il n’y a pas que les concepteurs de site web qui peuvent agir, il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2520cd9f-d909-4af0-a5c1-4851c801b89d",
+          "type": "discovery",
+          "title": "Découverte #3 : Techniquement, que peut-on faire ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f1f75637-b690-46b1-b8c9-dde14fe6ae09",
+                "type": "text",
+                "content": "<p>Dona travaille dans une entreprise qui conçoit des centres de données. <br>Elle anime une réunion avec son équipe pour trouver des pistes de solutions pour réduire les impacts environnementaux des futurs centres de données.<br></p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "6f22447e-a97e-4580-a161-8851edbdb611",
+                      "type": "custom",
+                      "instruction": "<p><br></p>",
+                      "tagName": "message-conversation",
+                      "props": {
+                        "title": "Donna & Boubacar",
+                        "messages": [
+                          {
+                            "userName": "Dona",
+                            "direction": "incoming",
+                            "content": "Alors, quelles solutions proposez-vous ?",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          },
+                          {
+                            "userName": "Boubacar",
+                            "direction": "outgoing",
+                            "content": "Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produites par des éoliennes ou par des panneaux solaires ? ☀️",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "9b8689af-c414-4cfc-a19d-1bb8991b7330",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Boubacar ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Transférer la chaleur produite par le centre de données.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.</strong></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.</strong></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.</strong></p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.<strong></strong></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.</strong></p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "deb1f3b1-9c19-44a1-8049-d91568682049",
+                      "type": "custom",
+                      "instruction": "",
+                      "tagName": "message-conversation",
+                      "props": {
+                        "title": "Dona & Oscar",
+                        "messages": [
+                          {
+                            "userName": "Dona",
+                            "direction": "incoming",
+                            "content": "C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          },
+                          {
+                            "userName": "Oscar",
+                            "direction": "outgoing",
+                            "content": "Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "19d83e51-2310-4564-8037-44105f3b514f",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Oscar ? </p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu ! </p><p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces. <br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>  Il s’agit ici d<strong>’utiliser la chaleur fatale produite par le centre de données.</strong> C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "58a69897-5b5a-472f-b92f-8e6a88c4a3ec",
+                      "type": "custom",
+                      "instruction": "<p><br></p>",
+                      "tagName": "message-conversation",
+                      "props": {
+                        "title": "Dona & Amira",
+                        "messages": [
+                          {
+                            "userName": "Dona",
+                            "direction": "incoming",
+                            "content": "C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          },
+                          {
+                            "userName": "Amira",
+                            "direction": "outgoing",
+                            "content": "Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides : par exemple en Suède ?❄️",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "1f59df7b-6743-4ae9-99b8-2524b4305b1f",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Amira ? <br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p><p>  L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "33523dd4-57f9-4f14-a040-f59d262c220a",
+                      "type": "custom",
+                      "instruction": "",
+                      "tagName": "message-conversation",
+                      "props": {
+                        "title": "Dona & Alaric",
+                        "messages": [
+                          {
+                            "userName": "Dona",
+                            "direction": "incoming",
+                            "content": "Pas mal… Une dernière suggestion ?",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          },
+                          {
+                            "userName": "Alaric",
+                            "direction": "outgoing",
+                            "content": "Pourquoi pas installer le centre de donnée sur une plateforme maritime, on pourrait utiliser l’eau de l’océan ?",
+                            "image": {
+                              "src": "",
+                              "alt": ""
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "918183c7-9552-4607-a464-8ca92a8a783b",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Alaric ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "3fa37fed-41a0-400f-9077-9ce21eb8656a",
+          "type": "short-lesson",
+          "title": "Leçon #3 : Des pistes techniques qui ont des limites + une incitation législative",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
+                      "type": "text",
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts plutôt que par la réduction des impacts environnementaux.<br><br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "75e9088f-97d4-45de-8631-5a84e7399b08",
+                      "type": "text",
+                      "content": "<h5>Alors, comment inciter les acteurs du numérique à adopter des pratiques plus vertueuses ?</h5><p>La <strong>loi </strong>joue un rôle important pour encourager ces changements de pratiques. Depuis 2019, un règlement de l’Union européenne définit des exigences d’éco-conception applicables aux exploitants de centres de données. </p><p>En France, la loi REEN vise également à inciter les centres de données à être moins consommateurs en leur accordant une réduction d’une taxe s’ils respectent des critères environnementaux.<br></p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7bf7819e-1864-417e-827d-151fc6ca9f71",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "bcaaf217-6b24-442a-aec9-cf3ae33a469f",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8dde623f-d573-4782-925b-f3c0e50bf780",
+                "type": "text",
+                "content": "<ul><li><strong>L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>En tant qu’utilisateur ou que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>La <strong>loi </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
