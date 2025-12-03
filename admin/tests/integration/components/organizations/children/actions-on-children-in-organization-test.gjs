@@ -30,7 +30,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
     test('it should display confirmation modal with orga id in modal text', async function (assert) {
       // given
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         name: 'Orga 1',
       });
 
@@ -58,7 +58,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
       test('it should close modal, detach organization, send success notification and refresh model', async function (assert) {
         // given
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           name: 'Orga 1',
         });
 
@@ -107,7 +107,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
         test('it should send error notification for UNABLE_TO_DETACH_PARENT_ORGANIZATION_FROM_CHILD_ORGANIZATION error', async function (assert) {
           // given
           const organization = store.createRecord('organization', {
-            id: 1,
+            id: '1',
             name: 'Orga 1',
           });
 
@@ -140,7 +140,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
         test('it should send generic error notification for any other code', async function (assert) {
           // given
           const organization = store.createRecord('organization', {
-            id: 1,
+            id: '1',
             name: 'Orga 1',
           });
 
@@ -171,7 +171,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
         test('it should send generic error notification if error has no code', async function (assert) {
           // given
           const organization = store.createRecord('organization', {
-            id: 1,
+            id: '1',
             name: 'Orga 1',
           });
 
@@ -204,7 +204,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
         test('it should send generic error notification if error response has no errors array', async function (assert) {
           // given
           const organization = store.createRecord('organization', {
-            id: 1,
+            id: '1',
             name: 'Orga 1',
           });
 
@@ -238,7 +238,7 @@ module('Integration | Component | organizations/children/actions-on-children-in-
       test('it should close modal and not detach organization', async function (assert) {
         // given
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           name: 'Orga 1',
         });
 

@@ -34,7 +34,9 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       window.fetch.resolves(fetchResponse({ status: 204 }));
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -60,7 +62,9 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -93,7 +97,9 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -127,7 +133,9 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -156,7 +164,9 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );

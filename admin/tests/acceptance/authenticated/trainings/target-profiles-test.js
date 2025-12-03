@@ -29,7 +29,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
       duration: '10:00:00',
       locale: 'fr-fr',
       editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-      editorLogoUrl: 'https://mon-logo.svg',
+      editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
       prerequisiteThreshold: null,
       goalThreshold: null,
       targetProfileSummaries: [targetProfileSummary],

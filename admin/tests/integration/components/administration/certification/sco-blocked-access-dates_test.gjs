@@ -80,7 +80,9 @@ module('Integration | Component | administration/certification/sco-blocked-acces
 
     // when
     const screen = await render(
-      <template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>,
+      <template>
+        <ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer @closeButtonAriaLabel="Close" />
+      </template>,
     );
 
     const modifyButtons = await screen.getAllByText(
@@ -108,7 +110,9 @@ module('Integration | Component | administration/certification/sco-blocked-acces
 
     // when
     const screen = await render(
-      <template><ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer /></template>,
+      <template>
+        <ScoBlockedAccessDates @scoBlockedAccessDates={{model}} /><PixToastContainer @closeButtonAriaLabel="Close" />
+      </template>,
     );
 
     const modifyButtons = await screen.getAllByText(

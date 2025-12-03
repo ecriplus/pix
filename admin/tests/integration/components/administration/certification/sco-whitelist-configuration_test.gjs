@@ -45,7 +45,9 @@ module('Integration | Component | administration/certification/sco-whitelist-con
         // given
         fileSaverStub.resolves();
         // when
-        const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
+        const screen = await render(
+          <template><ScoWhitelistConfiguration /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+        );
         const input = await screen.findByText(t('pages.administration.certification.sco-whitelist.export.button'));
         await triggerEvent(input, 'click');
 
@@ -61,7 +63,9 @@ module('Integration | Component | administration/certification/sco-whitelist-con
         // given
         fileSaverStub.rejects();
         // when
-        const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
+        const screen = await render(
+          <template><ScoWhitelistConfiguration /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+        );
         const input = await screen.findByText(t('pages.administration.certification.sco-whitelist.export.button'));
         await triggerEvent(input, 'click');
 
@@ -89,7 +93,9 @@ module('Integration | Component | administration/certification/sco-whitelist-con
 
       test('it displays a success notification', async function (assert) {
         // when
-        const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
+        const screen = await render(
+          <template><ScoWhitelistConfiguration /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+        );
         const input = await screen.getByLabelText(t('pages.administration.certification.sco-whitelist.import.button'));
         await triggerEvent(input, 'change', { files: [file] });
 
@@ -116,7 +122,9 @@ module('Integration | Component | administration/certification/sco-whitelist-con
             })
             .rejects();
           // when
-          const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
+          const screen = await render(
+            <template><ScoWhitelistConfiguration /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+          );
           const input = await screen.findByLabelText(
             t('pages.administration.certification.sco-whitelist.import.button'),
           );
@@ -156,7 +164,9 @@ module('Integration | Component | administration/certification/sco-whitelist-con
             );
 
           // when
-          const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
+          const screen = await render(
+            <template><ScoWhitelistConfiguration /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+          );
           const input = await screen.findByLabelText(
             t('pages.administration.certification.sco-whitelist.import.button'),
           );

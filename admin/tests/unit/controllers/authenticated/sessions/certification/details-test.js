@@ -37,7 +37,7 @@ module('Unit | Controller | authenticated/sessions/certification/details', funct
 function createChallengesForAdministration(answerStatuses, store) {
   return answerStatuses.map((answerStatus, index) =>
     store.createRecord('certification-challenges-for-administration', {
-      id: index,
+      id: String(index),
       answerStatus,
       validatedLiveAlert: !answerStatus,
     }),

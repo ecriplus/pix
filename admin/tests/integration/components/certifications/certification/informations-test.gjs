@@ -24,7 +24,7 @@ module('Integration | Component | Certifications | Certification | Informations'
   test('should display the global actions block', async function (assert) {
     // given
     const certification = store.createRecord('certification', { userId: 1, competencesWithMark: [] });
-    const session = store.createRecord('session', { id: 7404 });
+    const session = store.createRecord('session', { id: '7404' });
 
     // when
     const screen = await render(
@@ -38,7 +38,7 @@ module('Integration | Component | Certifications | Certification | Informations'
   test('should display certification state card', async function (assert) {
     // given
     const certification = store.createRecord('certification', { competencesWithMark: [] });
-    const session = store.createRecord('session', { id: 7404 });
+    const session = store.createRecord('session', { id: '7404' });
 
     // when
     const screen = await render(
@@ -52,7 +52,7 @@ module('Integration | Component | Certifications | Certification | Informations'
   test('should display the certification candidate card', async function (assert) {
     // given
     const certification = store.createRecord('certification', { competencesWithMark: [] });
-    const session = store.createRecord('session', { id: 7404 });
+    const session = store.createRecord('session', { id: '7404' });
 
     // when
     const screen = await render(
@@ -68,7 +68,7 @@ module('Integration | Component | Certifications | Certification | Informations'
       test('should not display issue reports card', async function (assert) {
         // given
         const certification = store.createRecord('certification', { competencesWithMark: [] });
-        const session = store.createRecord('session', { id: 7404 });
+        const session = store.createRecord('session', { id: '7404' });
         const issueReports = [];
 
         // when
@@ -91,7 +91,7 @@ module('Integration | Component | Certifications | Certification | Informations'
       test('should display issue reports card', async function (assert) {
         // given
         const certification = store.createRecord('certification', { competencesWithMark: [] });
-        const session = store.createRecord('session', { id: 7404 });
+        const session = store.createRecord('session', { id: '7404' });
         const issueReports = [store.createRecord('certification-issue-report')];
 
         // when

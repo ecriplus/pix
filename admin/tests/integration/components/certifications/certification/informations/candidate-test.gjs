@@ -26,7 +26,7 @@ module('Integration | Component | Certifications | Certification | Information |
     const certification = store.createRecord('certification', {
       firstName: 'Jane',
       lastName: 'Doe',
-      birthdate: new Date(),
+      birthdate: '2000-12-15',
       sex: 'F',
       birthplace: 'Paris',
       birthPostalCode: '75001',
@@ -89,10 +89,10 @@ module('Integration | Component | Certifications | Certification | Information |
       this.owner.register('service:pixToast', NotificationsStub);
 
       const certification = store.createRecord('certification', {
-        id: 1,
+        id: '1',
         firstName: 'Jane',
         lastName: 'Doe',
-        birthdate: new Date(),
+        birthdate: '2000-12-15',
         sex: 'F',
         birthplace: 'Paris',
         birthPostalCode: '75001',

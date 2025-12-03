@@ -16,7 +16,7 @@ export default Factory.extend({
   },
 
   imageUrl() {
-    return 'mon_image.png';
+    return 'logo-placeholder.png';
   },
 
   outdated() {

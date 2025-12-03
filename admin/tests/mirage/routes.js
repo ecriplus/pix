@@ -273,6 +273,7 @@ export default function routes() {
 
   this.get('/admin/certification-centers', findPaginatedFilteredCertificationCenters);
   this.get('/admin/certification-centers/:id');
+  this.patch('/admin/certification-centers/:id');
   this.get('/admin/certification-centers/:id/certification-center-memberships', (schema, request) => {
     const certificationCenterId = request.params.id;
     return schema.certificationCenterMemberships.where({ certificationCenterId });
@@ -451,6 +452,9 @@ export default function routes() {
   });
   this.post('/admin/certification/deneutralize-challenge', () => {
     return new Response(204);
+  });
+  this.get('/admin/certification-candidates/:id/timeline', (schema, request) => {
+    return schema.certificationCandidateTimelines.find(request.params.id);
   });
 
   this.post('/admin/organizations/:id/invitations', (schema, request) => {

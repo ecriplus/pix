@@ -47,7 +47,9 @@ module('Integration | Component |  administration/anonymize-gar-import', functio
       );
 
       // when
-      const screen = await render(<template><AnonymizeGarImport /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><AnonymizeGarImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(t('components.administration.anonymize-gar-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -81,7 +83,9 @@ module('Integration | Component |  administration/anonymize-gar-import', functio
       );
 
       // when
-      const screen = await render(<template><AnonymizeGarImport /><PixToastContainer /></template>);
+      const screen = await render(
+        <template><AnonymizeGarImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+      );
       const input = await screen.getByLabelText(t('components.administration.anonymize-gar-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -111,7 +115,9 @@ module('Integration | Component |  administration/anonymize-gar-import', functio
         );
 
         // when
-        const screen = await render(<template><AnonymizeGarImport /><PixToastContainer /></template>);
+        const screen = await render(
+          <template><AnonymizeGarImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+        );
         const input = await screen.findByLabelText(t('components.administration.anonymize-gar-import.upload-button'));
         await triggerEvent(input, 'change', { files: [file] });
 
@@ -132,7 +138,9 @@ module('Integration | Component |  administration/anonymize-gar-import', functio
         window.fetch.resolves(fetchMock({ status: 500 }));
 
         // when
-        const screen = await render(<template><AnonymizeGarImport /><PixToastContainer /></template>);
+        const screen = await render(
+          <template><AnonymizeGarImport /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
+        );
         const input = await screen.findByLabelText(t('components.administration.anonymize-gar-import.upload-button'));
         await triggerEvent(input, 'change', { files: [file] });
 

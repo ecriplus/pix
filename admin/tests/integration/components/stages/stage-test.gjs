@@ -203,6 +203,7 @@ module('Integration | Component | Stage', function (hooks) {
         <Stage
           @stage={{stage}}
           @isEditMode={{true}}
+          @toggleEditMode={{toggleEditMode}}
           @hasLinkedCampaign={{hasLinkedCampaign}}
           @onUpdate={{update}}
           @targetProfileName={{targetProfileName}}

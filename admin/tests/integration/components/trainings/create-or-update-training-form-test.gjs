@@ -70,7 +70,6 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
   module('when model is provided', function () {
     test('it should display the items with model values', async function (assert) {
       // given
-      const editorLogo = 'https://example.net/un-logo.svg';
       const model = {
         title: 'Un contenu formatif',
         internalTitle: 'Mon titre interne',
@@ -78,7 +77,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         type: 'webinaire',
         locale: 'fr-fr',
         editorName: 'Un éditeur de contenu formatif',
-        editorLogoUrl: editorLogo,
+        editorLogoUrl: `http://localhost:4202/logo-placeholder.png`,
         duration: { days: 0, hours: 0, minutes: 0 },
         isDisabled: false,
       };
@@ -105,7 +104,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
             name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
           }),
         )
-        .hasValue(editorLogo);
+        .hasValue(model.editorLogoUrl);
       assert.strictEqual(screen.getByLabelText('Mettre en pause').checked, model.isDisabled);
       assert
         .dom(
@@ -168,7 +167,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         type: 'webinaire',
         locale: 'fr-fr',
         editorName: 'Un éditeur de contenu formatif',
-        editorLogoUrl: 'https://example.net/un-logo.svg',
+        editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         duration: { days: 0, hours: 0, minutes: 0 },
         isDisabled: false,
       };

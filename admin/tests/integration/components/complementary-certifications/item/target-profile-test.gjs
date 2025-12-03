@@ -16,7 +16,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
-        id: 10,
+        id: '10',
         key: 'CLEA',
         label: 'CléA Numérique',
         hasComplementaryReferential: false,
@@ -24,10 +24,10 @@ module('Integration | Component | complementary-certifications/item/target-profi
           {
             detachedAt: null,
             name: 'ALEX TARGET',
-            id: 3,
+            id: '3',
             badges: [
-              { id: 1023, label: 'Badge Cascade', level: 3, imageUrl: 'http://badge-cascade.net' },
-              { id: 1025, label: 'Badge Volcan', level: 1, imageUrl: 'http://badge-volcan.net' },
+              { id: '1023', label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1025', label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
             ],
           },
         ],
@@ -55,6 +55,59 @@ module('Integration | Component | complementary-certifications/item/target-profi
       assert
         .dom(
           screen.getByRole('heading', {
+            name: t('components.complementary-certifications.target-profiles.history-list.title'),
+          }),
+        )
+        .exists();
+    });
+  });
+  module('Complementary V2', function () {
+    test('it should only display target profile history', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const serviceRouter = this.owner.lookup('service:router');
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.adminMember = { isSuperAdmin: true };
+      const complementaryCertification = store.createRecord('complementary-certification', {
+        id: '10',
+        key: 'DROIT',
+        label: 'Pix+Droit',
+        hasComplementaryReferential: true,
+        targetProfilesHistory: [
+          {
+            detachedAt: null,
+            name: 'ALEX TARGET',
+            id: '3',
+            badges: [
+              { id: '1023', label: 'Badge Cascade', level: 3, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+              { id: '1025', label: 'Badge Volcan', level: 1, imageUrl: 'http://localhost:4202/logo-placeholder.png' },
+            ],
+          },
+        ],
+      });
+
+      sinon
+        .stub(serviceRouter, 'currentRoute')
+        .value({ parent: { parent: { params: { complementary_certification_id: complementaryCertification.id } } } });
+
+      // when
+      const screen = await render(<template><TargetProfile /></template>);
+
+      // then
+      assert.dom(screen.queryByText('Rattacher un nouveau profil cible')).doesNotExist();
+      assert
+        .dom(
+          screen.queryByRole('heading', {
+            name: t('components.complementary-certifications.target-profiles.badges-list.title'),
+          }),
+        )
+        .doesNotExist();
+      assert.dom(screen.queryByText('Badge Cascade')).doesNotExist();
+      assert.dom(screen.queryByText('Badge Volcan')).doesNotExist();
+
+      assert
+        .dom(
+          screen.queryByRole('heading', {
             name: t('components.complementary-certifications.target-profiles.history-list.title'),
           }),
         )

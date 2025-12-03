@@ -23,13 +23,13 @@ module('Integration | Component | users | certification-centers | membership-ite
     test('with last access date if there is one', async function (assert) {
       // given
       const certificationCenter = store.createRecord('certification-center', {
-        id: 2,
+        id: '2',
         name: 'Centre Jean-Bonboeur',
         type: 'SUP',
         externalId: 'PAIN123',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         certificationCenter,
         role: 'MEMBER',
         lastAccessedAt: new Date('2020-01-01'),
@@ -66,13 +66,13 @@ module('Integration | Component | users | certification-centers | membership-ite
     test('with default access date if there is none', async function (assert) {
       // given
       const certificationCenter = store.createRecord('certification-center', {
-        id: 2,
+        id: '2',
         name: 'Centre Jean-Bonboeur',
         type: 'SUP',
         externalId: 'PAIN123',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         certificationCenter,
         role: 'MEMBER',
       });
@@ -104,13 +104,13 @@ module('Integration | Component | users | certification-centers | membership-ite
     test('displays a role selector input, save and cancel buttons instead of "Modifier le rôle" button', async function (assert) {
       // given
       const certificationCenter = store.createRecord('certification-center', {
-        id: 2,
+        id: '2',
         name: 'Centre Tristan-Douille',
         type: 'SUP',
         externalId: 'PAIN123',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         certificationCenter,
         role: 'MEMBER',
         createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -145,13 +145,13 @@ module('Integration | Component | users | certification-centers | membership-ite
       test('deactivates edition mode and saves the new role', async function (assert) {
         // given
         const certificationCenter = store.createRecord('certification-center', {
-          id: 2,
+          id: '2',
           name: 'Centre John-Doeuf',
           type: 'SCO',
           externalId: 'BRUNCH888',
         });
         const certificationCenterMembership = store.createRecord('certification-center-membership', {
-          id: 1,
+          id: '1',
           certificationCenter,
           role: 'MEMBER',
           createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -194,7 +194,7 @@ module('Integration | Component | users | certification-centers | membership-ite
         store.push({
           data: [
             {
-              id: 1,
+              id: '1',
               type: 'certification-center',
               attributes: {
                 name: 'Centre Emma-Carena',
@@ -204,7 +204,7 @@ module('Integration | Component | users | certification-centers | membership-ite
               relationships: {},
             },
             {
-              id: 1,
+              id: '1',
               type: 'certification-center-membership',
               attributes: {
                 role: 'MEMBER',
@@ -213,7 +213,7 @@ module('Integration | Component | users | certification-centers | membership-ite
               relationships: {
                 certificationCenter: {
                   data: {
-                    id: 1,
+                    id: '1',
                     type: 'certification-center',
                   },
                 },

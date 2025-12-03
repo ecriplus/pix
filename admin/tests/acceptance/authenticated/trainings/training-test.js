@@ -39,7 +39,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         duration: { days: 0, hours: 10, minutes: 0 },
         locale: 'fr-fr',
         editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-        editorLogoUrl: 'https://mon-logo.svg',
+        editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         prerequisiteThreshold: null,
         goalThreshold: null,
       });
@@ -53,7 +53,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         duration: { days: 0, hours: 10, minutes: 0 },
         locale: 'fr-fr',
         editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-        editorLogoUrl: 'https://mon-logo.svg',
+        editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         prerequisiteThreshold: null,
         goalThreshold: null,
         targetProfileSummaries: [

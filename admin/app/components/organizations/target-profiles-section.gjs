@@ -11,7 +11,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
 import uniq from 'lodash/uniq';
 
 export default class OrganizationTargetProfilesSectionComponent extends Component {
@@ -214,7 +213,6 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
       @title="Détacher le profil cible de l'organisation"
       @onCloseButtonClick={{this.closeModal}}
       @showModal={{this.showModal}}
-      aria-hidden="{{not this.showModal}}"
     >
       <:content>
         <p>

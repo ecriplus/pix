@@ -17,7 +17,7 @@ module('Integration | Component | certifications/list', function (hooks) {
     // given
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
-        id: 1,
+        id: '1',
         numberOfCertificationIssueReportsWithRequiredAction: 2,
       }),
     ];

@@ -17,7 +17,7 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     sinon.stub(store, 'findAll').withArgs('framework').resolves(frameworks);
 
     const complementaryCertification = store.createRecord('complementary-certification', {
-      id: 0,
+      id: '0',
       key: 'DROIT',
       label: 'Pix+Droit',
     });

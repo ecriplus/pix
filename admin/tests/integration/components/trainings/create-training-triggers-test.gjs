@@ -27,22 +27,22 @@ const buildTrainingTrigger = (store) => {
     practicalTitle: 'tube4Thematic2Competence1Area1 practicalTitle',
   });
   const trainingTriggerTube1 = store.createRecord('trigger-tube', {
-    id: 1,
+    id: '1',
     tube: tube1Thematic1Competence1Area1,
     level: 3,
   });
   const trainingTriggerTube2 = store.createRecord('trigger-tube', {
-    id: 2,
+    id: '2',
     tube: tube2Thematic1Competence1Area1,
     level: 1,
   });
   const trainingTriggerTube3 = store.createRecord('trigger-tube', {
-    id: 3,
+    id: '3',
     tube: tube3Thematic1Competence1Area1,
     level: 5,
   });
   const trainingTriggerTube4 = store.createRecord('trigger-tube', {
-    id: 4,
+    id: '4',
     tube: tube4Thematic2Competence1Area1,
     level: 8,
   });
@@ -90,7 +90,7 @@ const buildTrainingTrigger = (store) => {
     practicalTitle: 'tube1Thematic1Competence1Area2 practicalTitle',
   });
   const trainingTriggerTubeForArea2 = store.createRecord('trigger-tube', {
-    id: 5,
+    id: '5',
     tube: tube1Thematic1Competence1Area2,
     level: 3,
   });

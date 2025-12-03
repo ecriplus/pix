@@ -50,7 +50,7 @@ module(
         const onChangeStub = sinon.stub();
         const onErrorStub = sinon.stub();
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-          id: 12,
+          id: '12',
           name: 'target-profile',
         });
         sinon.stub(store, 'query').resolves([attachableTargetProfile]);
@@ -80,7 +80,7 @@ module(
         const onChangeStub = sinon.stub();
         const onErrorStub = sinon.stub();
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-          id: 12,
+          id: '12',
           name: 'target-profile',
         });
         sinon.stub(store, 'query').resolves([attachableTargetProfile]);
@@ -188,7 +188,7 @@ module(
         const onChangeStub = sinon.stub();
         const onErrorStub = sinon.stub();
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-          id: 12,
+          id: '12',
           name: 'target-profile',
         });
         sinon.stub(store, 'query').resolves([attachableTargetProfile]);
@@ -218,7 +218,7 @@ module(
         const onChangeStub = sinon.stub();
         const onErrorStub = sinon.stub();
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-          id: 12,
+          id: '12',
           name: 'target-profile',
         });
         sinon.stub(store, 'query').resolves([attachableTargetProfile]);
@@ -251,7 +251,7 @@ module(
         const onChangeStub = sinon.stub();
         const onErrorStub = sinon.stub();
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
-          id: 12,
+          id: '12',
           name: 'target-profile',
         });
         sinon.stub(store, 'query').resolves([attachableTargetProfile]);

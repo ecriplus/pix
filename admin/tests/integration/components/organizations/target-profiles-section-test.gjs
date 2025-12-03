@@ -25,7 +25,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
     test('it disables the button when the input is empty', async function (assert) {
       // given
       const organization = EmberObject.create({
-        id: 1,
+        id: '1',
         targetProfiles: [],
       });
 
@@ -45,11 +45,11 @@ module('Integration | Component | organizations/target-profiles-section', functi
       const attachTargetProfileStub = sinon.stub(adapter, 'attachTargetProfile').resolves();
       this.owner.register('service:pixToast', NotificationsStub);
       const targetProfileSummary = store.createRecord('target-profile-summary', {
-        id: 666,
+        id: '666',
         internalName: 'Number of The Beast',
       });
       const organization = EmberObject.create({
-        id: 1,
+        id: '1',
         targetProfiles: [],
       });
 
@@ -66,19 +66,19 @@ module('Integration | Component | organizations/target-profiles-section', functi
       await clickByName('Valider');
 
       // then
-      assert.ok(attachTargetProfileStub.calledWith({ organizationId: 1, targetProfileIds: ['1'] }));
+      assert.ok(attachTargetProfileStub.calledWith({ organizationId: '1', targetProfileIds: ['1'] }));
     });
 
     test('it should have a link to redirect on target profile page', async function (assert) {
       const targetProfileSummary = store.createRecord('target-profile-summary', {
-        id: 666,
+        id: '666',
         internalName: 'Number of The Beast',
       });
 
       const targetProfileSummaries = [targetProfileSummary];
 
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         targetProfiles: [],
       });
 
@@ -98,17 +98,17 @@ module('Integration | Component | organizations/target-profiles-section', functi
       test('it should display an Actions column with a detach button', async function (assert) {
         // given
         const publicTargetProfileSummary = store.createRecord('target-profile-summary', {
-          id: 666,
+          id: '666',
           internalName: 'Number of The Beast',
           canDetach: false,
         });
         const privateTargetProfileSummary = store.createRecord('target-profile-summary', {
-          id: 777,
+          id: '777',
           internalName: 'Super Lucky',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           targetProfiles: [],
         });
         const targetProfileSummaries = [publicTargetProfileSummary, privateTargetProfileSummary];
@@ -129,12 +129,12 @@ module('Integration | Component | organizations/target-profiles-section', functi
       test('it should open confirm modal when click on "Détacher" button', async function (assert) {
         // given
         const targetProfileSummary = store.createRecord('target-profile-summary', {
-          id: 666,
+          id: '666',
           internalName: 'Number of The Beast',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           targetProfiles: [],
         });
         const targetProfileSummaries = [targetProfileSummary];
@@ -161,12 +161,12 @@ module('Integration | Component | organizations/target-profiles-section', functi
         const adapter = store.adapterFor('target-profile');
         const detachOrganizationsTargetProfileStub = sinon.stub(adapter, 'detachOrganizations').resolves();
         const targetProfileSummary = store.createRecord('target-profile-summary', {
-          id: 666,
+          id: '666',
           internalName: 'Number of The Beast',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           targetProfiles: [],
           get: sinon.stub().returns({ reload: sinon.stub() }),
         });
@@ -195,12 +195,12 @@ module('Integration | Component | organizations/target-profiles-section', functi
         sinon.stub(adapter, 'detachOrganizations').resolves();
 
         const organization = store.createRecord('organization', {
-          id: 1,
+          id: '1',
           targetProfiles: [],
         });
         const targetProfileSummaries = [
           store.createRecord('target-profile-summary', {
-            id: 666,
+            id: '666',
             internalName: 'Number of The Beast',
             canDetach: true,
           }),
@@ -228,7 +228,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
     test('it should not allow to add target profiles', async function (assert) {
       // given
       const organization = EmberObject.create({
-        id: 1,
+        id: '1',
         targetProfiles: [],
       });
 

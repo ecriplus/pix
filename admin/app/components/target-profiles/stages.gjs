@@ -84,7 +84,7 @@ export default class Stages extends Component {
 
   get isLevelType() {
     const zeroStage = this.stages.find((stage) => stage.isZeroStage);
-    return zeroStage?.isTypeLevel;
+    return Boolean(zeroStage?.isTypeLevel);
   }
 
   get columnNameByStageType() {
@@ -103,7 +103,7 @@ export default class Stages extends Component {
   }
 
   get isAddFirstSkillStageDisabled() {
-    return this.stages.find((stage) => stage.isFirstSkill);
+    return this.stages.some((stage) => stage.isFirstSkill);
   }
 
   get isStageTypeLevelChecked() {

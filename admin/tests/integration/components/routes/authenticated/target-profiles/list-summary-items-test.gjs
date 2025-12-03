@@ -8,13 +8,18 @@ module('Integration | Component | routes/authenticated/target-profiles | list-su
   setupIntlRenderingTest(hooks);
 
   const triggerFiltering = function () {};
+  const resetFilter = function () {};
   const goToTargetProfilePage = function () {};
 
   test('it should display search inputs (name, id and status)', async function (assert) {
     // when
     const screen = await render(
       <template>
-        <ListSummaryItems @triggerFiltering={{triggerFiltering}} @goToTargetProfilePage={{goToTargetProfilePage}} />
+        <ListSummaryItems
+          @triggerFiltering={{triggerFiltering}}
+          @goToTargetProfilePage={{goToTargetProfilePage}}
+          @onResetFilter={{resetFilter}}
+        />
       </template>,
     );
 
@@ -43,6 +48,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-su
           @summaries={{summaries}}
           @triggerFiltering={{triggerFiltering}}
           @goToTargetProfilePage={{goToTargetProfilePage}}
+          @onResetFilter={{resetFilter}}
         />
       </template>,
     );
@@ -68,6 +74,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-su
           @summaries={{summaries}}
           @triggerFiltering={{triggerFiltering}}
           @goToTargetProfilePage={{goToTargetProfilePage}}
+          @onResetFilter={{resetFilter}}
         />
       </template>,
     );
@@ -93,6 +100,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-su
           @summaries={{summaries}}
           @triggerFiltering={{triggerFiltering}}
           @goToTargetProfilePage={{goToTargetProfilePage}}
+          @onResetFilter={{resetFilter}}
         />
       </template>,
     );
@@ -116,6 +124,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-su
           @summaries={{summaries}}
           @triggerFiltering={{triggerFiltering}}
           @goToTargetProfilePage={{goToTargetProfilePage}}
+          @onResetFilter={{resetFilter}}
         />
       </template>,
     );

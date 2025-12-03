@@ -8,7 +8,7 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 const answers = [
   {
-    id: 1,
+    id: '1',
     questionNumber: '1',
     answerStatus: 'ok',
     answerStatusName: 'OK',
@@ -19,7 +19,7 @@ const answers = [
     skillName: '@rec123',
   },
   {
-    id: 2,
+    id: '2',
     questionNumber: '2',
     answerStatus: 'ko',
     answerStatusName: 'KO',
@@ -30,7 +30,7 @@ const answers = [
     skillName: '@rec124',
   },
   {
-    id: 3,
+    id: '3',
     questionNumber: '[3]',
     answerStatus: null,
     answerStatusName: 'Signalement validé',
@@ -41,7 +41,7 @@ const answers = [
     skillName: '@rec125',
   },
   {
-    id: 4,
+    id: '4',
     questionNumber: '3',
     answerStatus: 'aband',
     answerStatusName: 'Abandonnée',
@@ -52,7 +52,7 @@ const answers = [
     skillName: '@rec124',
   },
   {
-    id: 5,
+    id: '5',
     questionNumber: '4',
     answerStatus: 'timedout',
     answerStatusName: 'Temps écoulé',
@@ -63,7 +63,7 @@ const answers = [
     skillName: '@rec124',
   },
   {
-    id: 6,
+    id: '6',
     questionNumber: '5',
     answerStatus: 'focusedOut',
     answerStatusName: 'Focus out',
@@ -74,7 +74,7 @@ const answers = [
     skillName: '@rec124',
   },
   {
-    id: 8,
+    id: '8',
     questionNumber: '7',
     answerStatus: 'unimplemented',
     answerStatusName: 'Non implémentée',
@@ -517,7 +517,7 @@ module('Integration | Component | Certifications | certification > details v3', 
             const model = store.createRecord('v3-certification-course-details-for-administration', {
               certificationChallengesForAdministration: [
                 store.createRecord('certification-challenges-for-administration', {
-                  id: 1,
+                  id: '1',
                   questionNumber: 1,
                   answerStatus: 'aband',
                 }),
@@ -626,11 +626,11 @@ function createCertificationCourseDetailsRecord({ certificationChallengesForAdmi
 function createChallengesForAdministration(answerStatuses, store) {
   return answerStatuses.map((answerStatus, index) =>
     store.createRecord('certification-challenges-for-administration', {
-      id: index,
+      id: String(index),
       questionNumber: index + 1,
       answerStatus,
       answerValue: answerStatus ? `Réponse ${index + 1}` : null,
-      validatedLiveAlert: !answerStatus ? { id: index + 10, issueReportSubcategory: 'WEBSITE_BLOCKED' } : false,
+      validatedLiveAlert: !answerStatus ? { id: String(index + 10), issueReportSubcategory: 'WEBSITE_BLOCKED' } : false,
     }),
   );
 }

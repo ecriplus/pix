@@ -109,11 +109,11 @@ module('Unit | Route | authenticated/organizations/get/all-tags', function (hook
     const route = this.owner.lookup('route:authenticated/organizations/get/all-tags');
     const store = this.owner.lookup('service:store');
 
-    const tag1 = store.createRecord('tag', { id: 1, name: 'MEDNUM' });
-    const tag2 = store.createRecord('tag', { id: 2, name: 'AEFE' });
-    const tag3 = store.createRecord('tag', { id: 3, name: 'CFA' });
-    const tag4 = store.createRecord('tag', { id: 4, name: 'POLE EMPLOI' });
-    const organization = store.createRecord('organization', { id: 7, tags: [tag1, tag2] });
+    const tag1 = store.createRecord('tag', { id: '1', name: 'MEDNUM' });
+    const tag2 = store.createRecord('tag', { id: '2', name: 'AEFE' });
+    const tag3 = store.createRecord('tag', { id: '3', name: 'CFA' });
+    const tag4 = store.createRecord('tag', { id: '4', name: 'POLE EMPLOI' });
+    const organization = store.createRecord('organization', { id: '7', tags: [tag1, tag2] });
     route.modelFor = sinon.stub().returns(organization);
     store.query = sinon.stub().resolves([tag1, tag2, tag3, tag4]);
 

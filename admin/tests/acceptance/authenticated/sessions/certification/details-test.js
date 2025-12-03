@@ -48,7 +48,7 @@ module('Acceptance | authenticated/sessions/certification/details', function (ho
     test('renders the V3 details page', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-      const certificationId = this.server.create('certification', { id: 2, version: 3 }).id;
+      const certificationId = this.server.create('certification', { id: '2', version: 3 }).id;
       this.server.create('v3-certification-course-details-for-administration', {
         id: certificationId,
         certificationChallengesForAdministration: [],

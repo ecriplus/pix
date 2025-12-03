@@ -13,7 +13,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
     currentUser.adminMember = { isSuperAdmin: true };
     const complementaryCertification = store.createRecord('complementary-certification', {
       label: 'Pix+ Droit',
-      targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3 }],
+      targetProfilesHistory: [{ name: 'ALEX TARGET', id: '3' }],
     });
     const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
 
@@ -39,7 +39,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       const store = this.owner.lookup('service:store');
       const complementaryCertification = store.createRecord('complementary-certification', {
         label: 'MARIANNE CERTIF',
-        targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3 }],
+        targetProfilesHistory: [{ name: 'ALEX TARGET', id: '3' }],
       });
       const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
 
@@ -66,7 +66,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
         label: 'MARIANNE CERTIF',
-        targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3 }],
+        targetProfilesHistory: [{ name: 'ALEX TARGET', id: '3' }],
       });
       const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
 

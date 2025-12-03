@@ -18,12 +18,12 @@ module('Integration | Component | organizations/children/list', function (hooks)
     // given
     const store = this.owner.lookup('service:store');
     const organization1 = store.createRecord('organization', {
-      id: 1,
+      id: '1',
       name: 'Collège The Night Watch',
       externalId: 'UA123456',
     });
     const organization2 = store.createRecord('organization', {
-      id: 2,
+      id: '2',
       name: 'Lycée KingsLanding',
       externalId: 'UB64321',
     });

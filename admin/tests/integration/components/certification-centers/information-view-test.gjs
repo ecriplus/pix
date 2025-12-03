@@ -1,21 +1,25 @@
 import { render } from '@1024pix/ember-testing-library';
 import InformationView from 'pix-admin/components/certification-centers/information-view';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | certification-centers/information-view', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const toggleEditMode = sinon.stub();
+  const toggleShowArchiveModal = sinon.stub();
+
   test('it should display label and values in read mode', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const pixDroitHabilitation = store.createRecord('complementary-certification', {
-      id: 0,
+      id: '0',
       key: 'DROIT',
       label: 'Pix+Droit',
     });
-    const cleaHabilitation = store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' });
+    const cleaHabilitation = store.createRecord('complementary-certification', { id: '1', key: 'CLEA', label: 'Cléa' });
     const availableHabilitations = [pixDroitHabilitation, cleaHabilitation];
 
     const certificationCenter = store.createRecord('certification-center', {
@@ -34,6 +38,8 @@ module('Integration | Component | certification-centers/information-view', funct
         <InformationView
           @availableHabilitations={{availableHabilitations}}
           @certificationCenter={{certificationCenter}}
+          @toggleEditMode={{toggleEditMode}}
+          @toggleShowArchiveModal={{toggleShowArchiveModal}}
         />
       </template>,
     );
@@ -60,7 +66,15 @@ module('Integration | Component | certification-centers/information-view', funct
     });
 
     // when
-    const screen = await render(<template><InformationView @certificationCenter={{certificationCenter}} /></template>);
+    const screen = await render(
+      <template>
+        <InformationView
+          @certificationCenter={{certificationCenter}}
+          @toggleEditMode={{toggleEditMode}}
+          @toggleShowArchiveModal={{toggleShowArchiveModal}}
+        />
+      </template>,
+    );
 
     // then
     assert.dom(screen.getByText('Tableau de bord')).exists();

@@ -26,13 +26,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
     test('with last access date if exists', async function (assert) {
       // given
       const user = store.createRecord('user', {
-        id: 1,
+        id: '1',
         firstName: 'Jojo',
         lastName: 'La Gringue',
         email: 'jojo@example.net',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         user,
         role: 'MEMBER',
         createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -69,13 +69,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
     test('with default last access date when there is none', async function (assert) {
       // given
       const user = store.createRecord('user', {
-        id: 1,
+        id: '1',
         firstName: 'Jojo',
         lastName: 'La Gringue',
         email: 'jojo@example.net',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         user,
         role: 'MEMBER',
         createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -104,13 +104,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
     test('displays a role selector input, save and cancel buttons instead of "Modifier le rôle" button', async function (assert) {
       // given
       const user = store.createRecord('user', {
-        id: 1,
+        id: '1',
         firstName: 'Jojo',
         lastName: 'La Gringue',
         email: 'jojo@example.net',
       });
       const certificationCenterMembership = store.createRecord('certification-center-membership', {
-        id: 1,
+        id: '1',
         user,
         role: 'MEMBER',
         createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -141,13 +141,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
       test('deactivates edition mode and saves the new role', async function (assert) {
         // given
         const user = store.createRecord('user', {
-          id: 1,
+          id: '1',
           firstName: 'Jojo',
           lastName: 'La Gringue',
           email: 'jojo@example.net',
         });
         const certificationCenterMembership = store.createRecord('certification-center-membership', {
-          id: 1,
+          id: '1',
           user,
           role: 'MEMBER',
           createdAt: new Date('2023-09-13T10:47:07Z'),
@@ -186,13 +186,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
       test('hides role selector input, displays current role, "Modifier le rôle" and "Désactiver" buttons', async function (assert) {
         // given
         const user = store.createRecord('user', {
-          id: 1,
+          id: '1',
           firstName: 'Jojo',
           lastName: 'La Gringue',
           email: 'jojo@example.net',
         });
         const certificationCenterMembership = store.createRecord('certification-center-membership', {
-          id: 1,
+          id: '1',
           user,
           role: 'MEMBER',
           createdAt: new Date('2023-09-13T10:47:07Z'),

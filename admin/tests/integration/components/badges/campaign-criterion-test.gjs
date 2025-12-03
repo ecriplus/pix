@@ -21,7 +21,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const criterion = store.createRecord('badge-criterion', {
-      id: 123,
+      id: '123',
       threshold: 60,
     });
 
@@ -41,7 +41,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         // when
         const store = this.owner.lookup('service:store');
         const criterion = store.createRecord('badge-criterion', {
-          id: 123,
+          id: '123',
           threshold: 60,
         });
 

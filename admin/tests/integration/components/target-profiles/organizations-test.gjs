@@ -12,6 +12,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
   const triggerFiltering = () => {};
   const goToOrganizationPage = () => {};
   const detachOrganizations = () => {};
+  const resetFilters = () => {};
   const queryParams = { hideArchived: false };
 
   hooks.beforeEach(function () {
@@ -35,6 +36,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -59,6 +61,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -84,6 +87,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -104,6 +108,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -126,6 +131,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -150,6 +156,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -176,6 +183,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -202,6 +210,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -224,6 +233,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -257,6 +267,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
+            @onResetFilter={{resetFilters}}
           />
         </template>,
       );
@@ -285,6 +296,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
+            @onResetFilter={{resetFilters}}
           />
         </template>,
       );
@@ -310,6 +322,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
+            @onResetFilter={{resetFilters}}
           />
         </template>,
       );

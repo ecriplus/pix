@@ -19,7 +19,7 @@ module('Integration | Component | organizations/children/list-item', function (h
       // given
       const store = this.owner.lookup('service:store');
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         name: 'Collège The Night Watch',
         externalId: 'UA123456',
       });
@@ -47,7 +47,7 @@ module('Integration | Component | organizations/children/list-item', function (h
       // given
       const store = this.owner.lookup('service:store');
       const organization = store.createRecord('organization', {
-        id: 1,
+        id: '1',
         name: 'Collège The Night Watch',
         externalId: 'UA123456',
       });

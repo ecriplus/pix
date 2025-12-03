@@ -556,7 +556,6 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
                       certificationIssueReport.id,
                     );
                     certificationIssueReportToUpdate.update({ resolvedAt: new Date(), resolution });
-                    return new Response({});
                   },
                   204,
                 );

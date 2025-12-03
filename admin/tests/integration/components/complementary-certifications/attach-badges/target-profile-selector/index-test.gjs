@@ -74,7 +74,7 @@ module(
         const store = this.owner.lookup('service:store');
         const attachableTargetProfile = store.createRecord('attachable-target-profile', {
           name: 'ALEX TARGET',
-          id: 1,
+          id: '1',
         });
         store.query = sinon.stub().resolves([attachableTargetProfile]);
         const noop = () => {};

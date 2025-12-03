@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click, fillIn } from '@ember/test-helpers';
+import { click } from '@ember/test-helpers';
 import ListItems from 'pix-admin/components/organizations/list-items';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -21,8 +21,9 @@ module('Integration | Component | ListItems', function (hooks) {
   const organizations = [organization1, organization2];
   organizations.meta = { page: 1, pageSize: 1 };
 
-  const triggerFiltering = () => {};
-  const goToOrganizationPage = () => {};
+  const triggerFiltering = sinon.stub();
+  const resetFilter = sinon.stub();
+  const goToOrganizationPage = sinon.stub();
   const detachOrganizations = sinon.stub();
 
   test('it should not display an Actions column to detach organizations', async function (assert) {
@@ -35,6 +36,7 @@ module('Integration | Component | ListItems', function (hooks) {
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @detachOrganizations={{detachOrganizations}}
+          @onResetFilter={{resetFilter}}
           @showDetachColumn={{false}}
         />
       </template>,
@@ -56,6 +58,7 @@ module('Integration | Component | ListItems', function (hooks) {
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
             @detachOrganizations={{detachOrganizations}}
+            @onResetFilter={{resetFilter}}
             @showDetachColumn={{true}}
           />
         </template>,
@@ -80,6 +83,7 @@ module('Integration | Component | ListItems', function (hooks) {
             @triggerFiltering={{triggerFiltering}}
             @detachOrganizations={{detachOrganizations}}
             @targetProfileName={{targetProfileName}}
+            @onResetFilter={{resetFilter}}
             @showDetachColumn={{true}}
           />
         </template>,
@@ -104,6 +108,7 @@ module('Integration | Component | ListItems', function (hooks) {
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
             @detachOrganizations={{detachOrganizations}}
+            @onResetFilter={{resetFilter}}
             @showDetachColumn={{true}}
           />
         </template>,
@@ -124,6 +129,7 @@ module('Integration | Component | ListItems', function (hooks) {
   module('filters', () => {
     module('internal identifier', () => {
       test('it should not allow to search text in id input', async function (assert) {
+        //when
         const screen = await render(
           <template>
             <ListItems
@@ -131,21 +137,19 @@ module('Integration | Component | ListItems', function (hooks) {
               @externalId="123"
               @goToOrganizationPage={{goToOrganizationPage}}
               @triggerFiltering={{triggerFiltering}}
+              @onResetFilter={{resetFilter}}
             />
           </template>,
         );
         const input = screen.getByLabelText('Identifiant');
 
-        await fillIn(input, 'not allowed text');
-
-        assert.strictEqual(input.value, '');
+        // then
+        assert.dom(input).hasAttribute('type', 'number');
       });
     });
 
     test('when one filter is active, clic on reset filter button should trigger onResetFilters method', async function (assert) {
       // given
-      const onResetFilters = sinon.stub();
-
       const screen = await render(
         <template>
           <ListItems
@@ -153,7 +157,7 @@ module('Integration | Component | ListItems', function (hooks) {
             @externalId="123"
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
-            @onResetFilter={{onResetFilters}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );
@@ -163,7 +167,7 @@ module('Integration | Component | ListItems', function (hooks) {
       await click(button);
 
       // then
-      assert.true(onResetFilters.calledOnce);
+      assert.true(resetFilter.calledOnce);
     });
 
     test('when no filter is active, reset filter button should be disabled', async function (assert) {
@@ -174,6 +178,7 @@ module('Integration | Component | ListItems', function (hooks) {
             @organizations={{organizations}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
+            @onResetFilter={{resetFilter}}
           />
         </template>,
       );
