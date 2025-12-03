@@ -12,7 +12,7 @@ export const createCombinedCourses = withTransaction(
     codeGenerator,
     accessCodeRepository,
     combinedCourseRepository,
-    recommendedModulesRepository,
+    recommendedModuleRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER);
     const csvData = csvParser.parse();
@@ -33,7 +33,7 @@ export const createCombinedCourses = withTransaction(
         pendingCodes.push(combinedCourseCode);
 
         for (const targetProfile of targetProfiles) {
-          const recommendableModules = await recommendedModulesRepository.findIdsByTargetProfileIds({
+          const recommendableModules = await recommendedModuleRepository.findIdsByTargetProfileIds({
             targetProfileIds: [targetProfile.id],
           });
 

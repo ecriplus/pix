@@ -25,7 +25,7 @@ const { combinedCourseDetailsService: CombinedCourseDetailsService } = injectDep
     questRepository: repositories.questRepository,
     moduleRepository: repositories.moduleRepository,
     eligibilityRepository: repositories.eligibilityRepository,
-    recommendedModulesRepository: repositories.recommendedModulesRepository,
+    recommendedModuleRepository: repositories.recommendedModuleRepository,
   },
 );
 
