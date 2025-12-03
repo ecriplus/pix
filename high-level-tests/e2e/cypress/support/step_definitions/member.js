@@ -6,10 +6,11 @@ When(`je saisis l'URL de l'invitation`, () => {
 });
 
 Then(`je suis redirigé vers la page pour rejoindre l'organisation`, () => {
-  cy.get(".login-or-register-panel__invitation").should(
-    "contain",
-    "Vous êtes invité(e) à rejoindre l'organisation"
-  );
+  cy.get(".pix-notification-alert").should("contain", "Vous êtes invité(e) à rejoindre");
+});
+
+When(`je clique sur s'inscrire sur Pix`, () => {
+  cy.get("a").contains("S'inscrire sur Pix").click();
 });
 
 Then(`je vois {int} invitation\(s\) en attente`, (numberOfInvitations) => {
