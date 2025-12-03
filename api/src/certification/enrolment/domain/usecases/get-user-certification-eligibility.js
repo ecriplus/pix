@@ -1,98 +1,28 @@
 /**
- * @typedef {import ('./index.js').ComplementaryCertificationBadgeWithOffsetVersionRepository} ComplementaryCertificationBadgeWithOffsetVersionRepository
+ * @typedef {import ('./index.js').EligibilityService} EligibilityService
  */
-
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationEligibility, UserCertificationEligibility } from '../read-models/UserCertificationEligibility.js';
 
 /**
  * @param {Object} params
- * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
+ * @param {EligibilityService} params.eligibilityService
  */
 const getUserCertificationEligibility = async function ({
   userId,
   limitDate = new Date(),
+  eligibilityService,
   placementProfileService,
   certificationBadgesService,
   complementaryCertificationCourseRepository,
   complementaryCertificationBadgeWithOffsetVersionRepository,
 }) {
-  const placementProfile = await placementProfileService.getPlacementProfile({ userId, limitDate });
-  const isCertifiable = placementProfile.isCertifiable();
-  let doubleCertificationEligibility = null;
-
-  if (!isCertifiable) {
-    return new UserCertificationEligibility({
-      id: userId,
-      isCertifiable,
-      doubleCertificationEligibility,
-    });
-  }
-
-  const userAcquiredBadges = await certificationBadgesService.findLatestBadgeAcquisitions({
+  return eligibilityService.getUserCertificationEligibility({
     userId,
     limitDate,
-  });
-
-  const [doubleCertificationBadge] = userAcquiredBadges.filter(
-    (acquiredBadge) => acquiredBadge.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
-  );
-
-  if (doubleCertificationBadge) {
-    const allComplementaryCertificationBadgesForSameTargetProfile =
-      await complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile({
-        complementaryCertificationBadgeId: doubleCertificationBadge.complementaryCertificationBadgeId,
-      });
-    const acquiredComplementaryCertificationBadge = allComplementaryCertificationBadgesForSameTargetProfile.find(
-      ({ id }) => id === doubleCertificationBadge.complementaryCertificationBadgeId,
-    );
-
-    const badgeIsOutdated = acquiredComplementaryCertificationBadge?.offsetVersion !== 0;
-
-    const userComplementaryCertifications = await complementaryCertificationCourseRepository.findByUserId({
-      userId,
-    });
-
-    const hasValidatedDoubleCertification = _hasValidatedDoubleCertification(
-      userComplementaryCertifications,
-      acquiredComplementaryCertificationBadge,
-    );
-
-    const badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt =
-      acquiredComplementaryCertificationBadge?.offsetVersion === 1 && !hasValidatedDoubleCertification;
-
-    if (
-      _isEligible({
-        badgeIsOutdated,
-        badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt,
-      })
-    ) {
-      doubleCertificationEligibility = new CertificationEligibility({
-        label: doubleCertificationBadge.complementaryCertificationBadgeLabel,
-        imageUrl: doubleCertificationBadge.complementaryCertificationBadgeImageUrl,
-        isBadgeValid: !doubleCertificationBadge.isOutdated,
-        validatedDoubleCertification: hasValidatedDoubleCertification,
-      });
-    }
-  }
-
-  return new UserCertificationEligibility({
-    id: userId,
-    isCertifiable,
-    doubleCertificationEligibility,
+    placementProfileService,
+    certificationBadgesService,
+    complementaryCertificationCourseRepository,
+    complementaryCertificationBadgeWithOffsetVersionRepository,
   });
 };
-
-function _isEligible({ badgeIsOutdated, badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt }) {
-  return !badgeIsOutdated || badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt;
-}
-
-function _hasValidatedDoubleCertification(userComplementaryCertifications, acquiredComplementaryCertificationBadge) {
-  return userComplementaryCertifications.some(
-    (userComplementaryCertification) =>
-      userComplementaryCertification.isAcquiredExpectedLevelByPixSource() &&
-      acquiredComplementaryCertificationBadge?.id === userComplementaryCertification.complementaryCertificationBadgeId,
-  );
-}
 
 export { getUserCertificationEligibility };
