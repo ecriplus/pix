@@ -35,7 +35,7 @@ export default class JoinRoute extends Route {
 
   async redirect(model) {
     if (!model) {
-      const transition = this.router.replaceWith('login');
+      const transition = this.router.replaceWith('authentication.login');
       transition.data.isInvitationCancelled = this.isInvitationCancelled;
       transition.data.hasInvitationAlreadyBeenAccepted = this.hasInvitationAlreadyBeenAccepted;
 

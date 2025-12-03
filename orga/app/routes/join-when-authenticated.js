@@ -5,7 +5,7 @@ export default class JoinWhenAuthenticatedRoute extends Route {
   @service session;
 
   beforeModel(transition) {
-    this.session.requireAuthentication(transition, 'login');
+    this.session.requireAuthentication(transition, 'authentication.login');
 
     const { queryParams } = transition.to;
     const alternativeRootURL = transition.router.generate('join', { queryParams });

@@ -2,6 +2,7 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
+import AuthenticationIdentityProviders from 'pix-orga/components/authentication/authentication-identity-providers';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
 
 import SignupForm from '../../components/authentication/signup-form/index';
@@ -31,6 +32,11 @@ import SignupForm from '../../components/authentication/signup-form/index';
         @organizationInvitationCode={{@controller.code}}
       />
 
+      <AuthenticationIdentityProviders
+        @isForSignup={{true}}
+        @invitationId={{@controller.invitationId}}
+        @invitationCode={{@controller.code}}
+      />
     </:content>
   </AuthenticationLayout>
 </template>

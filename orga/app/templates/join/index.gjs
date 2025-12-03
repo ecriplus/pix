@@ -3,6 +3,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import LoginOrRegister from 'pix-orga/components/auth/login-or-register';
+import AuthenticationIdentityProviders from 'pix-orga/components/authentication/authentication-identity-providers';
 import LoginForm from 'pix-orga/components/authentication/login-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
 
@@ -34,6 +35,11 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
           @organizationInvitationId={{@controller.invitationId}}
           @organizationInvitationCode={{@controller.code}}
           @organizationName={{@model.organizationName}}
+        />
+
+        <AuthenticationIdentityProviders
+          @invitationId={{@controller.invitationId}}
+          @invitationCode={{@controller.code}}
         />
       </:content>
     </AuthenticationLayout>

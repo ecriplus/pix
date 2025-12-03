@@ -2,21 +2,17 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-export default class SignupRoute extends Route {
+export default class SsoSelectionRoute extends Route {
   @service router;
-  @service session;
   @service store;
 
   @tracked isInvitationCancelled = false;
   @tracked hasInvitationAlreadyBeenAccepted = false;
 
-  routeIfAlreadyAuthenticated = 'join-when-authenticated';
-
-  beforeModel() {
-    this.session.prohibitAuthentication(this.routeIfAlreadyAuthenticated);
-  }
-
   model(params) {
+    if (!params.invitationId && !params.code) {
+      return null;
+    }
     return this.store
       .queryRecord('organization-invitation', {
         invitationId: params.invitationId,
@@ -35,11 +31,10 @@ export default class SignupRoute extends Route {
   }
 
   async redirect(model) {
-    if (!model) {
+    if (!model && (this.isInvitationCancelled || this.hasInvitationAlreadyBeenAccepted)) {
       const transition = this.router.replaceWith('authentication.login');
       transition.data.isInvitationCancelled = this.isInvitationCancelled;
       transition.data.hasInvitationAlreadyBeenAccepted = this.hasInvitationAlreadyBeenAccepted;
-
       return transition;
     }
   }

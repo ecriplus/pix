@@ -7,7 +7,7 @@ export default class TermsOfServiceRoute extends Route {
   @service session;
 
   beforeModel(transition) {
-    this.session.requireAuthentication(transition, 'login');
+    this.session.requireAuthentication(transition, 'authentication.login');
 
     if (transition.isAborted) {
       return;

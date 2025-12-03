@@ -8,9 +8,19 @@ export default class OidcIdentityProviders extends Service {
   @tracked isOidcProviderAuthenticationInProgress = false;
 
   async load() {
-    const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
-    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
-      this[oidcIdentityProvider.id] = oidcIdentityProvider;
-    });
+    await this.store.findAll('oidc-identity-provider');
+  }
+
+  get list() {
+    return this.store.peekAll('oidc-identity-provider');
+  }
+
+  get hasIdentityProviders() {
+    return this.list?.length > 0;
+  }
+
+  findBySlug(providerSlug) {
+    if (!this.hasIdentityProviders) return;
+    return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
   }
 }

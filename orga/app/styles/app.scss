@@ -59,11 +59,11 @@
 @use 'components/statistics/cover-rate-gauge' as *;
 
 // pages
-
 @use 'pages/login' as *;
 @use 'pages/sign-form' as *;
 @use 'pages/join' as *;
 @use 'pages/join-request' as *;
+@use 'pages/authentication/sso-selection' as *;
 @use 'pages/authenticated' as *;
 @use 'pages/authenticated/index' as *;
 @use 'pages/authenticated/attestations' as *;
@@ -95,7 +95,10 @@
 /* App/Components */
 @use 'sco-organization-participant/generate-username-password-modal' as *;
 @use 'analysis/global-positioning' as *;
+@use 'authentication/authentication-identity-providers' as *;
+@use 'authentication/oidc-provider-selector' as *;
 @use 'authentication/signup-form' as *;
+@use 'authentication/sso-selection-form' as *;
 @use 'authentication/new-password-input/password-checklist' as *;
 @use 'authentication/new-password-input/password-rule' as *;
 
