@@ -200,10 +200,8 @@ export default class TargetProfile extends Component {
 
     <main class="page-body">
       <section class="page-section target-profile-section">
-        <div class="page-section__header">
-          <h2 class="page-section__title target-profile__title">{{@model.internalName}}</h2>
-          <Category @category={{@model.category}} />
-        </div>
+        <h1 class="page-section__title">{{@model.internalName}}</h1>
+        <Category @category={{@model.category}} />
         <div class="target-profile-section__container">
 
           <DescriptionList>
