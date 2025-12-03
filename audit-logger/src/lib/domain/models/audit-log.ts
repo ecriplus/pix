@@ -1,4 +1,3 @@
-
 export class AuditLog {
   id?: string;
   occurredAt: Date;
