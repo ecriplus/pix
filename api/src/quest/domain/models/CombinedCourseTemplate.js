@@ -46,27 +46,39 @@ export class CombinedCourseTemplate {
     );
   }
 
+  static buildRequirementForCombinedCourse({ campaignId, moduleId }) {
+    if (campaignId) {
+      return buildRequirement({
+        requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+        comparison: COMPARISONS.ALL,
+        data: {
+          campaignId: { data: campaignId, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
+          status: { data: CampaignParticipationStatuses.SHARED, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
+        },
+      });
+    } else if (moduleId) {
+      return buildRequirement({
+        requirement_type: TYPES.OBJECT.PASSAGES,
+        comparison: COMPARISONS.ALL,
+        data: {
+          moduleId: { data: moduleId, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
+          isTerminated: { data: true, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
+        },
+      });
+    }
+  }
+
   toCombinedCourseQuestFormat(campaigns) {
     const successRequirements = this.#content.map((requirement) => {
       if (requirement.type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const requirementTargetProfileId = requirement.value;
         const campaignId = campaigns.find(({ targetProfileId }) => targetProfileId === requirementTargetProfileId).id;
-        return buildRequirement({
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS.ALL,
-          data: {
-            campaignId: { data: campaignId, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
-            status: { data: CampaignParticipationStatuses.SHARED, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
-          },
+        return CombinedCourseTemplate.buildRequirementForCombinedCourse({
+          campaignId,
         });
       } else if (requirement.type === TYPES.OBJECT.PASSAGES) {
-        return buildRequirement({
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS.ALL,
-          data: {
-            moduleId: { data: requirement.value, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
-            isTerminated: { data: true, comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL },
-          },
+        return CombinedCourseTemplate.buildRequirementForCombinedCourse({
+          moduleId: requirement.value,
         });
       } else {
         return requirement;
