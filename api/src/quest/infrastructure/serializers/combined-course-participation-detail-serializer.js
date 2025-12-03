@@ -17,6 +17,7 @@ const serialize = function (combinedCourseParticipation) {
         'title',
         'type',
         'masteryRate',
+        'participationStatus',
         'isCompleted',
         'isLocked',
         'totalStagesCount',

@@ -1,18 +1,29 @@
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | Eligibility ', function () {
   describe('#constructor', function () {
     it('should remap passages to correct format', function () {
       // given
-      const passages = [{ referenceId: 1, isTerminated: false }];
+      const passages = [
+        {
+          status: OrganizationLearnerParticipationStatuses.STARTED,
+          referenceId: 1,
+          isTerminated: false,
+        },
+      ];
 
       // when
       const result = new Eligibility({ passages });
 
       // then
       expect(result.passages).lengthOf(1);
-      expect(result.passages[0]).deep.equal({ moduleId: 1, isTerminated: false });
+      expect(result.passages[0]).deep.equal({
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        moduleId: 1,
+        isTerminated: false,
+      });
     });
   });
 
@@ -20,10 +31,10 @@ describe('Quest | Unit | Domain | Models | Eligibility ', function () {
     it('Should return true if campaign participation exists', function () {
       // given
       const campaignParticipations = [{ id: 1 }];
-      const eligiblity = new Eligibility({ campaignParticipations });
+      const eligibility = new Eligibility({ campaignParticipations });
 
       // when
-      const result = eligiblity.hasCampaignParticipation(1);
+      const result = eligibility.hasCampaignParticipation(1);
 
       // then
       expect(result).to.be.true;
@@ -32,10 +43,10 @@ describe('Quest | Unit | Domain | Models | Eligibility ', function () {
     it('Should return false if campaign participation does not exist', function () {
       // given
       const campaignParticipations = [{ id: 2 }];
-      const eligiblity = new Eligibility({ campaignParticipations });
+      const eligibility = new Eligibility({ campaignParticipations });
 
       // when
-      const result = eligiblity.hasCampaignParticipation(1);
+      const result = eligibility.hasCampaignParticipation(1);
 
       // then
       expect(result).to.be.false;
