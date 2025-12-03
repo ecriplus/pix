@@ -9,7 +9,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  module('when user arrive on the module passage page', function () {
+  module('when user arrives on the module passage page', function () {
     test('should ignore tmp string from slug if present in url', async function (assert) {
       // given
       server.create('module', {
@@ -62,7 +62,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
     });
   });
 
-  module('when user click on continue button', function () {
+  module('when user clicks on continue button', function () {
     module('when the grain displayed is not the last', function () {
       test('should display the continue button', async function (assert) {
         // given
