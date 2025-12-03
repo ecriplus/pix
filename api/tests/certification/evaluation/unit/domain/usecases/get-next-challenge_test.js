@@ -741,7 +741,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
-        variationPercent: 20,
+        variationPercent: 0.2,
       })
         .map(([key, value]) => ({
           [key]: value,
