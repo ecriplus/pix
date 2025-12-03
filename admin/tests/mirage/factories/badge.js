@@ -41,7 +41,7 @@ export default Factory.extend({
       });
       badge.update({
         criteria: [criteriaCampaign],
-        imageUrl: `https://assets.pix.org/badges/${badge.imageUrl}`,
+        imageUrl: `${badge.imageUrl}`,
       });
     }
   },

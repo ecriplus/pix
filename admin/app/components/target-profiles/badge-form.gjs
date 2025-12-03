@@ -17,8 +17,7 @@ export default class BadgeForm extends Component {
   @service pixToast;
   @service store;
   @service router;
-
-  BASE_URL = 'https://assets.pix.org/badges/';
+  @service intl;
 
   badge = {
     key: '',
@@ -29,17 +28,12 @@ export default class BadgeForm extends Component {
     isAlwaysVisible: false,
     campaignThreshold: null,
     cappedTubesCriteria: [],
+    imageUrl: '',
   };
-
-  imageName = '';
 
   @action
   updateFormValue(key, event) {
-    if (key === 'imageName') {
-      this.imageName = event.target.value;
-    } else {
-      this.badge[key] = event.target.value;
-    }
+    this.badge[key] = event.target.value;
   }
 
   @action
@@ -73,12 +67,7 @@ export default class BadgeForm extends Component {
 
   async _createBadge() {
     try {
-      const badgeWithFormattedImageUrl = {
-        ...this.badge,
-        imageUrl: this.BASE_URL + this.imageName,
-      };
-
-      const badge = this.store.createRecord('badge', badgeWithFormattedImageUrl);
+      const badge = this.store.createRecord('badge', this.badge);
 
       await badge.save({
         adapterOptions: { targetProfileId: this.args.targetProfile.id },
@@ -90,8 +79,21 @@ export default class BadgeForm extends Component {
       return badge;
     } catch (error) {
       console.error(error);
-      this.pixToast.sendErrorNotification({ message: `${error.errors[0].detail}` });
+      this._handleResponseError(error);
     }
+  }
+
+  _handleResponseError({ errors }) {
+    if (!errors) {
+      return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
+    }
+    errors.forEach((error) => {
+      let message = error.detail;
+      if (message.includes('data.attributes.image-url')) {
+        message = this.intl.t('components.badges.api-error-messages.incorrect-image-url-format');
+      }
+      return this.pixToast.sendErrorNotification({ message });
+    });
   }
 
   <template>
@@ -121,13 +123,13 @@ export default class BadgeForm extends Component {
               </a>
             </p>
             <PixInput
-              @id="image-name"
-              @value={{this.imageName}}
+              @id="image-url"
+              @value={{this.badge.imageUrl}}
               @requiredLabel={{t "common.forms.mandatory"}}
-              placeholder="exemple: clea_num.svg"
-              {{on "change" (fn this.updateFormValue "imageName")}}
+              placeholder="Exemple: https://assets.pix.org/badges/clea_num.svg"
+              {{on "change" (fn this.updateFormValue "imageUrl")}}
             >
-              <:label>Nom de l'image (svg)</:label>
+              <:label>Url de l'image (svg)</:label>
             </PixInput>
           </div>
           <div class="badge-form__text-field">
