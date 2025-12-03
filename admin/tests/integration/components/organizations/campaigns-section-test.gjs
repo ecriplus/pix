@@ -130,9 +130,9 @@ module('Integration | Component | organizations/campaigns-section', function (ho
       const screen = await render(<template><CampaignsSection @campaigns={{campaigns}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('link', { name: '123' })).exists();
       assert.dom(screen.getByText('123')).exists();
       assert.dom(screen.getByTitle("Campagne d'évaluation")).exists();
+      assert.dom(screen.getByRole('link', { name: 'Nom de campagne 1' })).exists();
       assert.dom(screen.getByText('Nom de campagne 1')).exists();
       assert.dom(screen.getByText('Karam King')).exists();
       assert.dom(screen.getByText('Amar Di')).exists();
@@ -141,10 +141,10 @@ module('Integration | Component | organizations/campaigns-section', function (ho
       assert.dom(screen.getByText('02/01/2021')).exists();
       assert.dom(screen.getByText('31/12/2023')).exists();
 
-      assert.dom(screen.getByRole('link', { name: '456' })).exists();
       assert.dom(screen.getByText('456')).exists();
       assert.dom(screen.getByTitle('Campagne de collecte de profil')).exists();
       assert.dom(screen.getByText('Nom de campagne 2')).exists();
+      assert.dom(screen.getByRole('link', { name: 'Nom de campagne 2' })).exists();
       assert.dom(screen.getByText('Queen Elizabeth')).exists();
       assert.dom(screen.getByText('Amer Credi')).exists();
       assert.dom(screen.getByText('03/01/2021')).exists();
