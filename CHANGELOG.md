@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.273.0](https://github.com/1024pix/pix/compare/v5.272.0...v5.273.0) (2025-12-03)
+
+### :rocket: Amélioration
+
+- [#14319](https://github.com/1024pix/pix/pull/14319) Ajouter la locale es-419 dans le locale switcher (pix-20627) 
+- [#14322](https://github.com/1024pix/pix/pull/14322) Modifier les urls des modules dans la table trainings (PIX-20389) 
+- [#14155](https://github.com/1024pix/pix/pull/14155) Supprimer la colonne nb_user de la table organizations_cover_rates (PIX-20110) 
+- [#14135](https://github.com/1024pix/pix/pull/14135) Tmp botaniste retours ig 
+- [#14298](https://github.com/1024pix/pix/pull/14298) Update IAGenPrompt_IND.json
+
 # [5.272.0](https://github.com/1024pix/pix/compare/v5.271.0...v5.272.0) (2025-12-02)
 
 ### :rocket: Amélioration
