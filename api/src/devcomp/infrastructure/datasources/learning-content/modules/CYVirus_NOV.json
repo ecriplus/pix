@@ -585,11 +585,6 @@
                         }
                       ],
                       "solution": "3"
-                    },
-                    {
-                      "id": "50b0ab39-7547-4e9b-b9d4-2f9c41a00102",
-                      "type": "text",
-                      "content": ""
                     }
                   ]
                 },
@@ -625,7 +620,7 @@
                           }
                         }
                       ],
-                      "solution": ""
+                      "solution": "3"
                     }
                   ]
                 }
