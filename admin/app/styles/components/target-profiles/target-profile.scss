@@ -1,19 +1,37 @@
 /* stylelint-disable selector-class-pattern, selector-id-pattern */
+@use 'pix-design-tokens/breakpoints';
+
 .target-profile-section {
   &__container {
     display: flex;
-    gap: var(--pix-spacing-4x);
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--pix-spacing-4x);
+    flex-direction: column;
 
-    li {
-      margin-bottom: var(--pix-spacing-2x);
+    @include breakpoints.device-is('tablet') {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
     }
   }
 
   &:not(:first-of-type) {
     margin-top: 20px;
+  }
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-bottom: var(--pix-spacing-3x);
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
+    border: 1px var(--pix-primary-100) solid;
+    border-radius: var(--pix-spacing-2x);
+
+    @include breakpoints.device-is('tablet') {
+      height: 300px;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -24,9 +42,6 @@
 }
 
 .target-profile {
-  &__title {
-    margin-right: var(--pix-spacing-3x);
-  }
 
   &__actions {
     display: flex;

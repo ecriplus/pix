@@ -307,7 +307,9 @@ export default class TargetProfile extends Component {
           </DescriptionList>
 
           {{! template-lint-disable no-redundant-role }}
-          <img src={{@model.imageUrl}} role="img" alt="Profil cible" />
+          <div class="target-profile-section__image">
+            <img src={{@model.imageUrl}} role="img" alt="Profil cible" />
+          </div>
         </div>
         <div class="target-profile__actions">
           <PixButtonLink
