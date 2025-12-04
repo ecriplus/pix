@@ -24,7 +24,7 @@ describe('integration | modulix | scripts | UpdateModulixTrainingsLink', functio
       // given
       databaseBuilder.factory.buildTraining({
         id: 1,
-        link: `https://app.pix.fr/modules/tmp-prompt-intermediaire`,
+        link: `https://app.pix.fr/modules/prompt-intermediaire`,
         updatedAt: new Date('2020-09-10'),
         type: 'modulix',
       });
@@ -45,15 +45,15 @@ describe('integration | modulix | scripts | UpdateModulixTrainingsLink', functio
 
       const trainings = await knex('trainings').orderBy('id');
 
-      expect(trainings[0].link).to.equal('https://app.pix.fr/modules/tmp-prompt-intermediaire');
       expect(trainings[0].updatedAt).to.deep.equal(new Date('2020-09-10'));
+      expect(trainings[0].link).to.equal('https://app.pix.fr/modules/prompt-intermediaire');
     });
 
     it('update modulix trainings link', async function () {
       // given
       databaseBuilder.factory.buildTraining({
         id: 1,
-        link: `https://app.pix.fr/modules/tmp-prompt-intermediaire`,
+        link: `https://app.pix.fr/modules/prompt-intermediaire`,
         updatedAt: new Date('2020-09-10'),
         type: 'modulix',
       });
