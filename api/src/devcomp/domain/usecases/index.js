@@ -11,7 +11,6 @@ import * as skillRepository from '../../../shared/infrastructure/repositories/sk
 import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
-import * as targetProfileTrainingOrganizationRepository from '../../infrastructure/repositories/target-profile-training-organization-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
 
 const dependencies = {
@@ -24,7 +23,6 @@ const dependencies = {
   targetProfileSummaryForAdminRepository,
   tubeRepository,
   targetProfileTrainingRepository,
-  targetProfileTrainingOrganizationRepository,
   updateCombinedCourseJobRepository,
   skillRepository,
   userRepository,
