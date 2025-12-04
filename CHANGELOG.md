@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.274.0](https://github.com/1024pix/pix/compare/v5.273.0...v5.274.0) (2025-12-04)
+
+### :rocket: Amélioration
+
+- [#14220](https://github.com/1024pix/pix/pull/14220) Ajouter la sélection de SSO sur Pix Orga (PIX-20323) 
+- [#14329](https://github.com/1024pix/pix/pull/14329) Ajouter un feature toggle isModulixIssueReportDisplayed (PIX-20489)  
+- [#14324](https://github.com/1024pix/pix/pull/14324) Améliorer le créateur de parcours combiné sur Admin (PIX-20654). 
+- [#14333](https://github.com/1024pix/pix/pull/14333) FRI Traitement relectures Update CYPhishing_AVA 
+- [#14315](https://github.com/1024pix/pix/pull/14315) MDX-32, modification NRDatacenter_NOV avant relecture 
+- [#14327](https://github.com/1024pix/pix/pull/14327) MDX-34 NR_Durabilite_IND retours edito 
+- [#14340](https://github.com/1024pix/pix/pull/14340) Mettre à jour le bandeau sco avec l'url de la nouvelle doc (PIX-20650) 
+- [#14344](https://github.com/1024pix/pix/pull/14344) Modifs module GestionMDP_IND suite relecture JRO 
+- [#14332](https://github.com/1024pix/pix/pull/14332) modifs virus nov 
+- [#14279](https://github.com/1024pix/pix/pull/14279) Récupération des détails d'une participation d'un parcours combiné (PIX-20526) 
+- [#14318](https://github.com/1024pix/pix/pull/14318) Rediriger vers la page de l'orga mère lors de l'annulation de la création d'une orga fille sur Pix Admin (PIX-20560) 
+
+### :building_construction: Tech
+
+- [#14308](https://github.com/1024pix/pix/pull/14308) :recycle: Renomme ce qui tourne autour du kit de supervision pour utiliser le terme `invigilator` (pix-20619) 
+- [#14301](https://github.com/1024pix/pix/pull/14301) Améliorer l'idendification des éléments dans generateItems (PIX-19095). 
+- [#14326](https://github.com/1024pix/pix/pull/14326) Completer les données de test de parcours combinés (PIX-20613) 
+- [#14278](https://github.com/1024pix/pix/pull/14278) Corriger les erreurs de la console de tests Pix Admin 
+- [#14337](https://github.com/1024pix/pix/pull/14337) Supprimer le script ModifyBadgeAndTrainingLogoUrlsDomain (PIX-20470). 
+
+### :arrow_up: Montée de version
+
+- [#14307](https://github.com/1024pix/pix/pull/14307) Update dependency @eslint/compat to v2 (api)
+
 # [5.273.0](https://github.com/1024pix/pix/compare/v5.272.0...v5.273.0) (2025-12-03)
 
 ### :rocket: Amélioration
