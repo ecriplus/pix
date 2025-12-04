@@ -59,8 +59,11 @@ const get = async function (campaignId) {
     externalIdLabel: externalIdFeature?.params?.label,
     externalIdType: externalIdFeature?.params?.type,
   };
-  const campaignManagement = new CampaignManagement(campaign);
-  return campaignManagement;
+
+  const combinedCourse = await CombinedCourseRepository.findByCampaignId({ campaignId: campaign.id });
+  const isPartOfCombinedCourse = combinedCourse.length === 1;
+
+  return new CampaignManagement({ ...campaign, isPartOfCombinedCourse });
 };
 
 const findPaginatedCampaignManagements = async function ({ organizationId, page }) {

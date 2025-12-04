@@ -197,4 +197,36 @@ module('Integration | Component | Campaigns | details', function (hooks) {
       assert.dom(screen.queryByRole('button', { name: 'Modifier' })).doesNotExist();
     });
   });
+
+  module('when campaign code is an empty string', function () {
+    test('it should not display line for code', async function (assert) {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const campaign = { code: '' };
+
+      //when
+      const screen = await render(<template><Details @campaign={{campaign}} /></template>);
+
+      // expect
+      assert.dom(screen.queryByText('Code :')).doesNotExist();
+    });
+  });
+
+  module('when campaign code is not an empty string', function () {
+    test('it should display line for code', async function (assert) {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const campaign = { code: 'CAMPAIGN' };
+
+      //when
+      const screen = await render(<template><Details @campaign={{campaign}} /></template>);
+
+      // expect
+      assert.dom(screen.getByText('Code :', { exact: false })).exists();
+    });
+  });
 });
