@@ -217,15 +217,22 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     beforeEach(async function () {
       const userSuperAdmin = databaseBuilder.factory.buildUser.withRole();
 
+      const administrationTeamId1 = databaseBuilder.factory.buildAdministrationTeam({ id: 56789 }).id;
+      const administrationTeamId2 = databaseBuilder.factory.buildAdministrationTeam({ id: 1234 }).id;
+
       databaseBuilder.factory.buildOrganization({
+        id: 1,
         name: 'The name of the organization',
         type: 'SUP',
         externalId: '1234567A',
+        administrationTeamId: administrationTeamId1,
       });
       databaseBuilder.factory.buildOrganization({
+        id: 2,
         name: 'Organization of the night',
         type: 'PRO',
         externalId: '1234568A',
+        administrationTeamId: administrationTeamId2,
       });
 
       options = {
@@ -298,6 +305,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         expect(response.result.meta).to.deep.equal(expectedMetaData);
         expect(response.result.data).to.have.lengthOf(1);
         expect(response.result.data[0].type).to.equal('organizations');
+      });
+
+      it('should return a 200 status code with filtered data', async function () {
+        // given
+        options.url =
+          '/api/admin/organizations?filter[name]=Organization of the night&filter[externalId]=1234568A&filter[administrationTeamId]=1234&page[number]=1&page[size]=2';
+        const expectedMetaData = { page: 1, pageSize: 2, rowCount: 1, pageCount: 1 };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.meta).to.deep.equal(expectedMetaData);
+        expect(response.result.data).to.have.lengthOf(1);
+        expect(response.result.data[0].type).to.equal('organizations');
+        expect(response.result.data[0].id).to.equal('2');
       });
 
       it('should return a 200 status code with empty result', async function () {

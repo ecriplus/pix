@@ -43,6 +43,7 @@ const queriesType = {
 
 const typesPositiveInteger32bits = [
   'adminMemberId',
+  'administrationTeamId',
   'assessmentId',
   'authenticationMethodId',
   'autonomousCourseId',

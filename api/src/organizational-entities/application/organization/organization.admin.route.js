@@ -117,6 +117,7 @@ const register = async function (server) {
               id: identifiersType.organizationId.empty('').allow(null).optional(),
               name: Joi.string().empty('').allow(null).optional(),
               hideArchived: Joi.boolean().optional(),
+              administrationTeamId: identifiersType.administrationTeamId.empty('').allow(null).optional(),
             }).default({}),
             page: Joi.object({
               number: Joi.number().integer().empty('').allow(null).optional(),
@@ -132,7 +133,7 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle permettant un accès à l'admin de Pix**\n" +
             '- Elle permet de récupérer & chercher une liste d’organisations\n' +
-            '- Cette liste est paginée et filtrée selon un **name** et/ou un **type** et/ou un **identifiant externe** donnés',
+            '- Cette liste est paginée et filtrée selon un **name** et/ou un **type** et/ou un **identifiant externe** et/ou une **équipe en charge** donnés',
         ],
       },
     },
