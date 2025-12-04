@@ -48,8 +48,8 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             const createCampaignLink = screen.queryByRole('link', { name: 'Créer les campagnes' });
             assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/RaPpKjFHNX2kSR4');
 
-            const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la nouvelle certification' });
-            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/2q4c4QT9jGbGbEq');
+            const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
+            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/GqwW6dFDDrHezfS');
           });
         });
       });
