@@ -21,146 +21,67 @@ module('Acceptance | Login', function (hooks) {
     sinon.stub(domainService, 'getExtension');
   });
 
-  module('When usePixOrgaNewAuthDesign is false', function (hooks) {
-    hooks.beforeEach(function () {
-      server.create('feature-toggle', {
-        id: 0,
-        usePixOrgaNewAuthDesign: false,
-      });
-    });
+  test('renders layout', async function (assert) {
+    // given & when
+    const screen = await visit('/connexion');
 
-    test('renders legacy view', async function (assert) {
-      // given & when
-      const screen = await visit('/connexion');
+    // then
+    const authenticationLayoutImageContainer = document.querySelector('.authentication-layout__image');
+    const image = within(authenticationLayoutImageContainer).getByAltText('');
+    assert.dom(image).hasAttribute('src', '/images/authentication.svg');
 
-      // then
-      assert.dom('.authentication-layout__image').doesNotExist();
-      const footerLink = screen.queryByRole('link', { name: t('navigation.footer.legal-notice') });
-      assert.dom(footerLink).doesNotExist();
-    });
+    assert.dom(screen.queryByRole('link', { name: t('navigation.footer.legal-notice') })).exists();
+  });
 
-    module('When on french domain (.fr)', function () {
-      test('does not display locale switcher', async function (assert) {
-        // given
-        domainService.getExtension.returns('fr');
-
-        // when
-        const screen = await visit('/connexion');
-
-        // then
-        assert.dom(screen.queryByRole('button', { name: t('components.locale-switcher.label') })).doesNotExist();
-      });
-    });
-
-    module('When on international domain (.org)', function () {
-      module('when the user changes locale with the locale switcher', function () {
-        test('displays the login page with the selected language', async function (assert) {
-          // given
-          domainService.getExtension.returns('org');
-
-          // when
-          const screen = await visit('/connexion?lang=en');
-          await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
-          await screen.findByRole('listbox');
-          await click(screen.getByRole('option', { name: 'Français' }));
-
-          // then
-          assert.strictEqual(currentURL(), '/connexion');
-          assert.dom(screen.getByRole('heading', { name: 'Connectez-vous', level: 1 })).exists();
-        });
-      });
-    });
-
-    test('User logs in', async function (assert) {
+  module('When on french domain (.fr)', function () {
+    test('does not display locale switcher', async function (assert) {
       // given
-      const user = createUserWithMembershipAndTermsOfServiceAccepted();
-      createPrescriberByUser({ user });
-
-      const screen = await visit('/connexion');
+      domainService.getExtension.returns('fr');
 
       // when
-      await fillByLabel(t('pages.login-form.email.label'), user.email);
-      await fillByLabel(t('pages.login-form.password'), 'secret');
-      await clickByName(t('pages.login-form.login'));
+      const screen = await visit('/connexion');
 
       // then
-      const homepageHeading = screen.getByRole('heading', {
-        name: t('components.index.organization-information.title'),
-      });
-      assert.dom(homepageHeading).exists();
+      assert.dom(screen.queryByRole('button', { name: t('components.locale-switcher.label') })).doesNotExist();
     });
   });
 
-  module('When usePixOrgaNewAuthDesign is true', function (hooks) {
-    hooks.beforeEach(function () {
-      server.create('feature-toggle', {
-        id: 0,
-        usePixOrgaNewAuthDesign: true,
-      });
-    });
-
-    test('renders new layout', async function (assert) {
-      // given & when
-      const screen = await visit('/connexion');
-
-      // then
-      const authenticationLayoutImageContainer = document.querySelector('.authentication-layout__image');
-      const image = within(authenticationLayoutImageContainer).getByAltText('');
-      assert.dom(image).hasAttribute('src', '/images/authentication.svg');
-
-      assert.dom(screen.queryByRole('link', { name: t('navigation.footer.legal-notice') })).exists();
-    });
-
-    module('When on french domain (.fr)', function () {
-      test('does not display locale switcher', async function (assert) {
+  module('When on international domain (.org)', function () {
+    module('when the user changes locale with the locale switcher', function () {
+      test('displays the login page with the selected language', async function (assert) {
         // given
-        domainService.getExtension.returns('fr');
+        domainService.getExtension.returns('org');
 
         // when
-        const screen = await visit('/connexion');
+        const screen = await visit('/connexion?lang=en');
+        await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Français' }));
 
         // then
-        assert.dom(screen.queryByRole('button', { name: t('components.locale-switcher.label') })).doesNotExist();
+        assert.strictEqual(currentURL(), '/connexion');
+        assert.dom(screen.getByRole('heading', { name: 'Connectez-vous', level: 1 })).exists();
       });
     });
+  });
 
-    module('When on international domain (.org)', function () {
-      module('when the user changes locale with the locale switcher', function () {
-        test('displays the login page with the selected language', async function (assert) {
-          // given
-          domainService.getExtension.returns('org');
+  test('User logs in', async function (assert) {
+    // given
+    domainService.getExtension.returns('fr');
+    const user = createUserWithMembershipAndTermsOfServiceAccepted();
+    createPrescriberByUser({ user });
 
-          // when
-          const screen = await visit('/connexion?lang=en');
-          await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
-          await screen.findByRole('listbox');
-          await click(screen.getByRole('option', { name: 'Français' }));
+    const screen = await visit('/connexion');
 
-          // then
-          assert.strictEqual(currentURL(), '/connexion');
-          assert.dom(screen.getByRole('heading', { name: 'Connectez-vous', level: 1 })).exists();
-        });
-      });
+    // when
+    await fillByLabel(t('pages.login-form.email.label'), user.email);
+    await fillByLabel(t('pages.login-form.password'), 'secret');
+    await clickByName(t('pages.login-form.login'));
+
+    // then
+    const homepageHeading = screen.getByRole('heading', {
+      name: t('components.index.organization-information.title'),
     });
-
-    test('User logs in', async function (assert) {
-      // given
-      domainService.getExtension.returns('fr');
-      const user = createUserWithMembershipAndTermsOfServiceAccepted();
-      createPrescriberByUser({ user });
-
-      const screen = await visit('/connexion');
-
-      // when
-      await fillByLabel(t('pages.login-form.email.label'), user.email);
-      await fillByLabel(t('pages.login-form.password'), 'secret');
-      await clickByName(t('pages.login-form.login'));
-
-      // then
-      const homepageHeading = screen.getByRole('heading', {
-        name: t('components.index.organization-information.title'),
-      });
-      assert.dom(homepageHeading).exists();
-    });
+    assert.dom(homepageHeading).exists();
   });
 });

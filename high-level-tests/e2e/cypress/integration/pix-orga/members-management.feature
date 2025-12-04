@@ -8,7 +8,8 @@ Fonctionnalité: Gestion des membres d'une organisation
   Scénario: Je rejoins une organisation
     Lorsque je saisis l'URL de l'invitation
     Alors je suis redirigé vers la page pour rejoindre l'organisation
-    Lorsque je saisis "Aemon" dans le champ "Prénom"
+    Et je clique sur s'inscrire sur Pix
+    Alors je saisis "Aemon" dans le champ "Prénom"
     Et je saisis "Targaryen" dans le champ "Nom"
     Et je saisis "aemon.targaryen@example.net" dans le champ "Adresse e-mail"
     Et je saisis "Pix_example1" dans le champ "Mot de passe"
@@ -21,8 +22,7 @@ Fonctionnalité: Gestion des membres d'une organisation
   Scénario: Je rejoins une organisation et j'ai déjà un compte
     Lorsque je saisis l'URL de l'invitation
     Alors je suis redirigé vers la page pour rejoindre l'organisation
-    Lorsque je clique sur "Se connecter"
-    Et je me connecte avec le compte "daenerys.targaryen@pix.fr"
+    Lorsque je me connecte avec le compte "daenerys.targaryen@pix.fr"
     Alors je suis redirigé vers le compte Orga de "Daenerys"
 
   Scénario: Je rejoins une organisation en étant déjà authentifié

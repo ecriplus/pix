@@ -20,15 +20,9 @@ module('Acceptance | join and login', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
-  let invitationStorage;
-
-  hooks.beforeEach(function () {
-    server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
-    invitationStorage = new SessionStorageEntry('joinInvitationData');
-  });
+  const invitationStorage = new SessionStorageEntry('joinInvitationData');
 
   hooks.afterEach(function () {
-    server.create('feature-toggle', { id: 0, usePixOrgaNewAuthDesign: true });
     invitationStorage.remove();
   });
 
