@@ -290,12 +290,16 @@
         "ASSESSMENT": "Beoordelingscampagne",
         "COMBINED_COURSE": "Leerprogramma",
         "EXAM": "Vraagmodus [beta]",
+        "FORMATION": "Training",
+        "MODULE": "Module",
         "PROFILES_COLLECTION": "Campagne profielverzameling"
       },
       "information": {
         "ASSESSMENT": "Beoordeling",
         "COMBINED_COURSE": "Leerprogramma",
         "EXAM": "Vraagmodus [beta]",
+        "FORMATION": "Training",
+        "MODULE": "Module",
         "PROFILES_COLLECTION": "Profielverzameling"
       }
     },
@@ -451,6 +455,8 @@
     },
     "participation-status": {
       "COMPLETED": "Voltooid",
+      "LOCKED": "Te ontgrendelen",
+      "NOT_STARTED": "Te doen",
       "SHARED": "Voltooid",
       "STARTED": "Bezig"
     },
@@ -1067,6 +1073,16 @@
         }
       },
       "introduction": "De leertrajecten bestaan uit beoordelingen en gepersonaliseerde leermodules, waardoor het onderwijs kan worden aangepast aan het niveau van elke deelnemer.",
+      "participation-detail": {
+        "breadcrumb": "Deelname van {firstName} {lastName}",
+        "column": {
+          "campaign": "Campagne",
+          "module": "Module",
+          "status": "Status"
+        },
+        "formation-locked": "Ontgrendeld zodra de campagne is voltooid",
+        "step-label": "Stap {number}"
+      },
       "statistics": {
         "completed-participations": "Voltooide deelnames",
         "total-participations": "Totaal van de deelnemingen"
