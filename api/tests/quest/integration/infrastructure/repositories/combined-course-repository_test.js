@@ -1,3 +1,4 @@
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   CRITERION_COMPARISONS,
@@ -168,16 +169,16 @@ describe('Quest | Integration | Repository | combined-course', function () {
         illustration,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               campaignId: {
                 data: campaignId,
-                comparison: 'equal',
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
               status: {
-                data: 'SHARED',
-                comparison: 'equal',
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
@@ -218,12 +219,16 @@ describe('Quest | Integration | Repository | combined-course', function () {
       const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const successRequirements = [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
-            targetProfileId: {
+            campaignId: {
               data: 1,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },
@@ -279,12 +284,16 @@ describe('Quest | Integration | Repository | combined-course', function () {
       const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const successRequirements = [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
-            targetProfileId: {
+            campaignId: {
               data: 1,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },

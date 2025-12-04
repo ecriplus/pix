@@ -1,4 +1,10 @@
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -17,16 +23,16 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-campa
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
               data: campaignId,
-              comparison: 'equal',
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
-              data: 'SHARED',
-              comparison: 'equal',
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
         },

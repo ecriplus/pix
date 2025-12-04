@@ -151,6 +151,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
               data: campaign.id,
               comparison: COMPARISONS_CRITERION.EQUAL,
             },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
           },
         },
         {
@@ -159,6 +163,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
           data: {
             moduleId: {
               data: moduleId,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+            isTerminated: {
+              data: true,
               comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
@@ -224,6 +232,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
               data: campaign.id,
               comparison: COMPARISONS_CRITERION.EQUAL,
             },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
           },
         },
       ],
@@ -266,6 +278,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
               data: campaign.id,
               comparison: COMPARISONS_CRITERION.EQUAL,
             },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
           },
         },
       ],
@@ -295,6 +311,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
           data: {
             campaignId: {
               data: campaign.id,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
               comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },

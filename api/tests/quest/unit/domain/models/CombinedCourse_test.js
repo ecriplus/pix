@@ -52,6 +52,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                   data: campaignId,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
               },
             },
             {
@@ -60,6 +64,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               data: {
                 moduleId: {
                   data: 7,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                isTerminated: {
+                  data: true,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
@@ -94,6 +102,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               data: {
                 moduleId: {
                   data: 7,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                isTerminated: {
+                  data: true,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
@@ -133,6 +145,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                   data: 2,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
               },
             },
             {
@@ -141,6 +157,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               data: {
                 moduleId: {
                   data: moduleId,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                isTerminated: {
+                  data: true,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
@@ -175,6 +195,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               data: {
                 campaignId: {
                   data: 2,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+                status: {
+                  data: CampaignParticipationStatuses.SHARED,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
