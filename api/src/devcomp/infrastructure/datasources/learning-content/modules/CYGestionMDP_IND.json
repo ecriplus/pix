@@ -23,7 +23,7 @@
       "grains": [
         {
           "id": "926af19e-2d5f-42dd-814b-d32714406a5c",
-          "type": "activity",
+          "type": "discovery",
           "title": "Accroche",
           "components": [
             {
