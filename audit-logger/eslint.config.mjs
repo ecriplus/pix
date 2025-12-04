@@ -12,6 +12,7 @@ import mocha from 'eslint-plugin-mocha';
 import nRecommendedConfig from 'eslint-plugin-n';
 import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
 import unicorn from 'eslint-plugin-unicorn';
+import tseslint from 'typescript-eslint';
 
 const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
 
@@ -20,6 +21,7 @@ const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
 export default [
   includeIgnoreFile(gitignorePath),
   ...pixRecommendedConfig,
+  ...tseslint.configs.recommended,
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
   { plugins: { 'chai-expect': fixupPluginRules(chai) } },
