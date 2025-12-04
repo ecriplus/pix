@@ -139,7 +139,7 @@ export const MAXI_COMBINED_COURSE = {
     trainings: [
       {
         title: 'Mon premier prompt !',
-        link: '/modules/4920d56c/tmp-ia-premier-prompt/details',
+        link: '/modules/4920d56c/ia-premier-prompt/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -150,7 +150,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: "J'améliore mon prompt !",
-        link: '/modules/4eacd0c3/tmp-prompt-intermediaire',
+        link: '/modules/4eacd0c3/prompt-intermediaire',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -161,7 +161,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Elles hallucinent, ces IA génératives !',
-        link: '/modules/9be9cfae/tmp-ia-hallu/details',
+        link: '/modules/9be9cfae/ia-hallu/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -172,7 +172,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les deepfakes (hypertrucages) : c’est quoi ?',
-        link: '/modules/05b24fee/tmp-ia-deepfakes/passage',
+        link: '/modules/05b24fee/ia-deepfakes/passage',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -183,7 +183,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: "J'améliore mon prompt !",
-        link: '/modules/4eacd0c3/tmp-prompt-intermediaire',
+        link: '/modules/4eacd0c3/prompt-intermediaire',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -194,7 +194,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Elles hallucinent, ces IA génératives !',
-        link: '/modules/9be9cfae/tmp-ia-hallu/details',
+        link: '/modules/9be9cfae/ia-hallu/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -205,7 +205,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les deepfakes : c’est quoi ?',
-        link: '/modules/05b24fee/tmp-ia-deepfakes/passage',
+        link: '/modules/05b24fee/ia-deepfakes/passage',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -216,7 +216,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Comment font les IA génératives pour répondre à nos demandes ?',
-        link: '/modules/797ea8fb/tmp-ia-fonctionnement-debut/details',
+        link: '/modules/797ea8fb/ia-fonctionnement-debut/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -227,7 +227,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Comment font les IA génératives pour répondre à nos demandes ?',
-        link: '/modules/797ea8fb/tmp-ia-fonctionnement-debut/details',
+        link: '/modules/797ea8fb/ia-fonctionnement-debut/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -239,7 +239,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Comment une IA générative a-t-elle appris à discuter ?',
-        link: '/modules/76961c86/tmp-ia-fonctionnement-ind/details',
+        link: '/modules/76961c86/ia-fonctionnement-ind/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -250,7 +250,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Comment une IA générative a-t-elle appris à discuter ?',
-        link: '/modules/76961c86/tmp-ia-fonctionnement-ind/details',
+        link: '/modules/76961c86/ia-fonctionnement-ind/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -262,7 +262,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les biais des IA',
-        link: '/modules/163b520e/tmp-ia-bias-ind/details',
+        link: '/modules/163b520e/ia-bias-ind/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -273,7 +273,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les biais des IA',
-        link: '/modules/163b520e/tmp-ia-bias-ind/details',
+        link: '/modules/163b520e/ia-bias-ind/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -306,7 +306,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'IA, vous avez dit IA ?',
-        link: '/modules/cc0cbab7/tmp-ia-dit-ia/details',
+        link: '/modules/cc0cbab7/ia-dit-ia/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -317,7 +317,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'IA, vous avez dit IA ?',
-        link: '/modules/cc0cbab7/tmp-ia-dit-ia/details',
+        link: '/modules/cc0cbab7/ia-dit-ia/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
@@ -328,7 +328,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Mon premier prompt !',
-        link: '/modules/4920d56c/tmp-ia-premier-prompt/details',
+        link: '/modules/4920d56c/ia-premier-prompt/details',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',

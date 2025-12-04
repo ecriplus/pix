@@ -9,7 +9,34 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  module('when user arrive on the module passage page', function () {
+  module('when user arrives on the module passage page', function () {
+    test('should ignore tmp string from slug if present in url', async function (assert) {
+      // given
+      server.create('module', {
+        id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'm4tth7a5',
+        slug: 'ia-def-ind',
+        title: 'Bien écrire son adresse mail',
+        sections: [],
+        details: {
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+          description: '<p>Description</p>',
+          duration: 'duration',
+          level: 'level',
+          objectives: ['Objectif #1'],
+        },
+      });
+
+      server.create('passage', {
+        moduleId: '6282925d-4775-4bca-b513-4c3009ec5886',
+      });
+
+      // when
+      await visit('/modules/tmp-ia-def-ind/passage');
+
+      // then
+      assert.strictEqual(currentURL(), '/modules/m4tth7a5/ia-def-ind/passage');
+    });
     test('should display only the first lesson grain', async function (assert) {
       // given
       const sections = _createSections(server);
@@ -35,7 +62,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
     });
   });
 
-  module('when user click on continue button', function () {
+  module('when user clicks on continue button', function () {
     module('when the grain displayed is not the last', function () {
       test('should display the continue button', async function (assert) {
         // given
