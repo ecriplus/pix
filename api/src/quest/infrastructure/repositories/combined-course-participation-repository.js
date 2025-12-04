@@ -40,7 +40,7 @@ export const save = async function ({ organizationLearnerId, combinedCourseId })
 export const findById = async function ({ participationId }) {
   const knexConnection = DomainTransaction.getConnection();
   const combinedCourseParticipation = await knexConnection('organization_learner_participations')
-    .select('organization_learner_participations.id', 'firstName', 'lastName')
+    .select('organization_learner_participations.id', 'organizationLearnerId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',

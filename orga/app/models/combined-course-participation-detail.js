@@ -1,6 +1,6 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { belongsTo, hasMany } from '@ember-data/model';
 
-export default class CombinedCourseParticipationDetails extends Model {
-  @attr('string') firstName;
-  @attr('string') lastName;
+export default class CombinedCourseParticipationDetail extends Model {
+  @belongsTo('combined-course-participation', { async: false, inverse: null }) participation;
+  @hasMany('combined-course-item', { async: false, inverse: null }) items;
 }

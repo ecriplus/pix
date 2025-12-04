@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
+import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import * as eligibilityRepository from '../../../../../src/quest/infrastructure/repositories/eligibility-repository.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | repositories | eligibility', function () {
@@ -29,7 +30,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
         .resolves(organizationLearnerWithParticipationApiResponseSymbol);
 
       // when
-      const result = await repositories.eligibilityRepository.find({
+      const result = await eligibilityRepository.find({
         userId,
         organizationLearnerWithParticipationApi,
       });
@@ -67,6 +68,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
         })
         .resolves([
           {
+            status: OrganizationLearnerParticipationStatuses.STARTED,
             referenceId: 1,
             isTerminated: true,
           },
@@ -80,7 +82,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
         .resolves(apiResponseSymbol);
 
       // when
-      const result = await repositories.eligibilityRepository.findByOrganizationAndOrganizationLearnerId({
+      const result = await eligibilityRepository.findByOrganizationAndOrganizationLearnerId({
         organizationLearnerId,
         organizationId: organization.id,
         organizationLearnerWithParticipationApi,
@@ -93,7 +95,9 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       expect(result.organization).to.equal(organization);
       expect(result.organizationLearner.id).to.equal(organizationLearnerId);
       expect(result.campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
-      expect(result.passages).to.deep.equal([{ moduleId: 1, isTerminated: true }]);
+      expect(result.passages).to.deep.equal([
+        { status: OrganizationLearnerParticipationStatuses.STARTED, moduleId: 1, isTerminated: true },
+      ]);
     });
   });
 });

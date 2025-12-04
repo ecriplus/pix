@@ -8,6 +8,7 @@ module('Unit | Route | authenticated/combined-course', function (hooks) {
   hooks.afterEach(function () {
     sinon.restore();
   });
+
   module('beforeModel', function () {
     test('user is redirected to index when he has no access', async function (assert) {
       // given
@@ -25,6 +26,7 @@ module('Unit | Route | authenticated/combined-course', function (hooks) {
       assert.ok(replaceWithStub.calledWithExactly('authenticated.index'));
     });
   });
+
   module('model', function () {
     test('fetch a combined course participation detail', async function (assert) {
       // given
@@ -36,7 +38,7 @@ module('Unit | Route | authenticated/combined-course', function (hooks) {
       sinon.stub(route, 'modelFor').returns(combinedCourse);
 
       const participationId = Symbol('participationId');
-      const participationDetail = Symbol('participationDetail');
+      const participationDetail = { participation: Symbol('participation'), items: Symbol('items') };
 
       sinon
         .stub(store, 'queryRecord')
@@ -47,7 +49,11 @@ module('Unit | Route | authenticated/combined-course', function (hooks) {
       const result = await route.model({ participation_id: participationId });
 
       // then
-      assert.deepEqual(result, { combinedCourse, combinedCourseParticipation: participationDetail });
+      assert.deepEqual(result, {
+        combinedCourse,
+        participation: participationDetail.participation,
+        items: participationDetail.items,
+      });
     });
 
     test('replace route with not-found route when queryRecord throws', async function (assert) {

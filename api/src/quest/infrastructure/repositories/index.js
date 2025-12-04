@@ -22,7 +22,7 @@ import * as moduleRepository from './module-repository.js';
 import * as organizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
 import * as organizationLearnerPassageParticipationRepository from './organization-learner-passage-participation-repository.js';
 import * as questRepository from './quest-repository.js';
-import * as recommendedModulesRepository from './recommended-module-repository.js';
+import * as recommendedModuleRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
 import * as targetProfileRepository from './target-profile-repository.js';
@@ -44,7 +44,7 @@ const repositoriesWithoutInjectedDependencies = {
   combinedCourseParticipantRepository,
   combinedCourseParticipationRepository,
   userRepository,
-  recommendedModulesRepository,
+  recommendedModuleRepository,
   targetProfileRepository,
 };
 

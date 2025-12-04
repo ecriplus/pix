@@ -153,6 +153,7 @@ export class CombinedCourseDetails extends CombinedCourse {
 
   #createCampaignCombinedCourseItem({
     campaign,
+    participationStatus,
     isCompleted,
     isLocked,
     masteryRate,
@@ -165,6 +166,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       title: campaign.title,
       type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
       masteryRate: isCompleted ? masteryRate : null,
+      participationStatus,
       isCompleted,
       isLocked,
       totalStagesCount: isCompleted ? totalStagesCount : null,
@@ -172,13 +174,14 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
   }
 
-  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked) {
+  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, participationStatus, isCompleted, isLocked) {
     return new CombinedCourseItem({
       id: module.id,
       reference: module.slug,
       title: module.title,
       type: COMBINED_COURSE_ITEM_TYPES.MODULE,
       redirection: encryptedCombinedCourseUrl,
+      participationStatus,
       isCompleted,
       isLocked,
       duration: module?.duration,
@@ -240,18 +243,19 @@ export class CombinedCourseDetails extends CombinedCourse {
       const isLocked = this.#isCombinedCourseItemLocked(previousItem);
 
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
+        const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
+
         const campaign = itemDetails.find(
           (item) => item.id === requirement.data.campaignId.data && item instanceof Campaign,
         );
-        const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
-
         const associatedParticipation = dataForQuest?.campaignParticipations?.find(
-          (campaignParticipation) => campaignParticipation.campaignId === requirement.data.campaignId.data,
+          (campaignParticipation) => campaignParticipation.campaignId === campaign.id,
         );
+        const participationStatus = associatedParticipation?.status;
+
         const doesCampaignRecommendModules =
           recommendableModuleIds.find((recommandableModule) => {
             if (!this.moduleIds.includes(recommandableModule.moduleId)) return false;
-
             return recommandableModule.targetProfileIds.includes(campaign.targetProfileId);
           }) ?? [];
 
@@ -262,6 +266,7 @@ export class CombinedCourseDetails extends CombinedCourse {
         this.items.push(
           this.#createCampaignCombinedCourseItem({
             campaign,
+            participationStatus,
             isCompleted,
             isLocked,
             masteryRate: associatedParticipation?.masteryRate,
@@ -272,6 +277,8 @@ export class CombinedCourseDetails extends CombinedCourse {
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
         const module = itemDetails.find((item) => item.id === requirement.data.moduleId.data && item instanceof Module);
+        const passage = dataForQuest?.passages.find((passage) => passage.moduleId === module.id);
+        const participationStatus = passage?.status;
 
         const recommandableModule = recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
@@ -280,7 +287,13 @@ export class CombinedCourseDetails extends CombinedCourse {
 
         if (!isRecommandable) {
           this.items.push(
-            this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked),
+            this.#createModuleCombinedCourseItem(
+              module,
+              encryptedCombinedCourseUrl,
+              participationStatus,
+              isCompleted,
+              isLocked,
+            ),
           );
           continue;
         }
@@ -291,7 +304,13 @@ export class CombinedCourseDetails extends CombinedCourse {
 
         if (isRecommended) {
           this.items.push(
-            this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked),
+            this.#createModuleCombinedCourseItem(
+              module,
+              encryptedCombinedCourseUrl,
+              participationStatus,
+              isCompleted,
+              isLocked,
+            ),
           );
           continue;
         }

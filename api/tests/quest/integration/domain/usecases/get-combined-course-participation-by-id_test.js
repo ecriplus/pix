@@ -1,3 +1,4 @@
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -7,34 +8,40 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Domain | Usecases | getCombinedCourseParticipationById', function () {
-  it('should return a participation with given id', async function () {
+  it('should return participation details with given id', async function () {
     // given
-    const { id: organizationLearnerId, firstName, lastName } = databaseBuilder.factory.buildOrganizationLearner();
+    const organizationId = databaseBuilder.factory.buildOrganization().id;
+    const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
+    const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
     const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
       organizationLearnerId,
+      combinedCourseId,
       status: OrganizationLearnerParticipationStatuses.STARTED,
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     });
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseParticipationById({ participationId });
+    const result = await usecases.getCombinedCourseParticipationById({ participationId, combinedCourseId });
 
     // then
-    expect(result.id).equal(participationId);
-    expect(result.firstName).equal(firstName);
-    expect(result.lastName).equal(lastName);
+    expect(result).instanceOf(CombinedCourseDetails);
+    expect(result.id).equal(combinedCourseId);
+    expect(result.participation.id).equal(participationId);
   });
 
   it('should throw when no participation found', async function () {
     // given
+    const combinedCourseId = databaseBuilder.factory.buildCombinedCourse().id;
     const participationId = 12;
 
     // when
-    const error = await catchErr(usecases.getCombinedCourseParticipationById)({ participationId });
+    const error = await catchErr(usecases.getCombinedCourseParticipationById)({ participationId, combinedCourseId });
 
     // then
     expect(error).to.be.instanceof(NotFoundError);
-    expect(error.message).to.equal(`CombinedCourseParticipation introuvable à l'id ${participationId}`);
+    expect(error.message).to.equal(
+      `CombinedCourseParticipation introuvable à l'id ${participationId} pour le combined course ${combinedCourseId}`,
+    );
   });
 });

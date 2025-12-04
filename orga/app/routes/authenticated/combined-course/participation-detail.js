@@ -14,15 +14,19 @@ export default class CombinedCourseParticipationDetailsRoute extends Route {
 
   async model(params) {
     const combinedCourse = this.modelFor('authenticated.combined-course');
-    const combinedCourseParticipation = await this.store
-      .queryRecord('combined-course-participation-detail', {
+    try {
+      const { participation, items } = await this.store.queryRecord('combined-course-participation-detail', {
         combinedCourseId: combinedCourse.id,
         participationId: params.participation_id,
-      })
-      .catch((error) => {
-        console.error(error);
-        this.router.replaceWith('not-found');
       });
-    return { combinedCourse, combinedCourseParticipation };
+      return {
+        combinedCourse,
+        participation,
+        items,
+      };
+    } catch (error) {
+      console.error(error);
+      this.router.replaceWith('not-found');
+    }
   }
 }

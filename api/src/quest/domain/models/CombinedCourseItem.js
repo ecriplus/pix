@@ -11,6 +11,7 @@ export class CombinedCourseItem {
     reference,
     type,
     redirection,
+    participationStatus,
     isCompleted,
     duration,
     image,
@@ -24,6 +25,7 @@ export class CombinedCourseItem {
     this.reference = reference;
     this.redirection = redirection;
     this.type = type;
+    this.participationStatus = participationStatus;
     this.isCompleted = isCompleted;
     this.isLocked = isLocked;
     this.duration = duration;

@@ -15,7 +15,7 @@ const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = i
     questRepository: repositories.questRepository,
     moduleRepository: repositories.moduleRepository,
     eligibilityRepository: repositories.eligibilityRepository,
-    recommendedModulesRepository: repositories.recommendedModulesRepository,
+    recommendedModuleRepository: repositories.recommendedModuleRepository,
   },
 );
 
@@ -29,7 +29,7 @@ const dependencies = {
   combinedCourseParticipantRepository: repositories.combinedCourseParticipantRepository,
   combinedCourseRepository: repositories.combinedCourseRepository,
   moduleRepository: repositories.moduleRepository,
-  recommendedModulesRepository: repositories.recommendedModulesRepository,
+  recommendedModuleRepository: repositories.recommendedModuleRepository,
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
   targetProfileRepository: repositories.targetProfileRepository,

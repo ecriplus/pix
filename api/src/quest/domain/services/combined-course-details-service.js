@@ -12,7 +12,7 @@ async function getCombinedCourseDetails({
   questRepository,
   moduleRepository,
   eligibilityRepository,
-  recommendedModulesRepository,
+  recommendedModuleRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getById({ id: combinedCourseId });
   const quest = await questRepository.findById({ questId: combinedCourse.questId });
@@ -34,7 +34,7 @@ async function getCombinedCourseDetails({
 
   let recommendableModuleIds = [];
   if (targetProfileIds.length > 0) {
-    recommendableModuleIds = await recommendedModulesRepository.findIdsByTargetProfileIds({
+    recommendableModuleIds = await recommendedModuleRepository.findIdsByTargetProfileIds({
       targetProfileIds,
     });
   }
@@ -56,7 +56,7 @@ async function getCombinedCourseDetails({
     const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
 
     if (campaignParticipationIds.length > 0) {
-      recommendedModuleIdsForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
+      recommendedModuleIdsForUser = await recommendedModuleRepository.findIdsByCampaignParticipationIds({
         campaignParticipationIds,
       });
     }

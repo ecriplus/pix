@@ -400,6 +400,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           // then
           expect(result).to.be.true;
         });
+
         it('returns false when some participations are not shared', function () {
           // given
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
@@ -467,6 +468,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           expect(result).to.be.false;
         });
       });
+
       describe('when items are type module', function () {
         it('returns true when every passages are terminated', function () {
           // given
@@ -533,6 +535,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           // then
           expect(result).to.be.true;
         });
+
         it('returns false when some passages are not terminated', function () {
           // given
           const firstModuleId = 1;
@@ -668,6 +671,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           // then
           expect(result).to.be.true;
         });
+
         it('returns false when some modules and campaignParticipations are not done', function () {
           // given
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
@@ -827,6 +831,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             // then
             expect(result).to.be.true;
           });
+
           it('returns false when recommended modules are not done', function () {
             // given
             const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
@@ -947,6 +952,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.SHARED }],
             }),
           });
+
           // when
           combinedCourse.generateItems({ itemDetails: [campaign], dataForQuest });
 
@@ -960,11 +966,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               masteryRate: null,
               validatedStagesCount: null,
               totalStagesCount: null,
+              participationStatus: CampaignParticipationStatuses.SHARED,
               isCompleted: true,
               isLocked: false,
             }),
           ]);
         });
+
         it('should not take encryptedCombinedCourseUrl if item type is campaign', function () {
           // given
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
@@ -989,6 +997,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               campaignParticipations: [{ campaignId: campaign.id, status: CampaignParticipationStatuses.SHARED }],
             }),
           });
+
           // when
           combinedCourse.generateItems({ itemDetails: [campaign], encryptedCombinedCourseUrl, dataForQuest });
 
@@ -1003,11 +1012,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               totalStagesCount: null,
               validatedStagesCount: null,
               redirection: undefined,
+              participationStatus: CampaignParticipationStatuses.SHARED,
               isCompleted: true,
               isLocked: false,
             }),
           ]);
         });
+
         it('should return a combined course item even if data for quest is empty', function () {
           // given
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
@@ -1102,6 +1113,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             }),
           ]);
         });
+
         it('should not return module if it is recommandable, but not recommended for user', function () {
           // given
           const module = new Module({ id: 'module-id', title: 'module' });
@@ -1155,6 +1167,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               reference: campaign.code,
               title: campaign.title,
               type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+              participationStatus: CampaignParticipationStatuses.SHARED,
               isCompleted: true,
               isLocked: false,
               masteryRate: null,
@@ -1163,6 +1176,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             }),
           ]);
         });
+
         it('should return module if it in quest, recommandable and recommended for user', function () {
           // given
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
@@ -1219,6 +1233,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               reference: campaign.code,
               title: campaign.title,
               type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+              participationStatus: CampaignParticipationStatuses.SHARED,
               isCompleted: true,
               masteryRate: null,
               totalStagesCount: null,
@@ -1309,6 +1324,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 masteryRate: null,
                 totalStagesCount: null,
                 validatedStagesCount: null,
+                participationStatus: CampaignParticipationStatuses.STARTED,
                 isCompleted: false,
                 isLocked: false,
               }),
@@ -1320,6 +1336,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               }),
             ]);
           });
+
           it('should return two campaign participation items and two formation items', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
@@ -1397,6 +1414,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 masteryRate: null,
                 totalStagesCount: null,
                 validatedStagesCount: null,
+                participationStatus: CampaignParticipationStatuses.STARTED,
                 isCompleted: false,
                 isLocked: false,
               }),
@@ -1425,6 +1443,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               }),
             ]);
           });
+
           it('should return a combined course item even if data for quest is empty', function () {
             // given
             const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
@@ -1652,6 +1671,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
               encryptedCombinedCourseUrl,
               dataForQuest,
             });
+
             // then
             expect(combinedCourse.items).to.deep.equal([
               new CombinedCourseItem({
@@ -1662,6 +1682,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
                 masteryRate: null,
                 totalStagesCount: null,
                 validatedStagesCount: null,
+                participationStatus: CampaignParticipationStatuses.STARTED,
                 isCompleted: false,
                 isLocked: false,
               }),
@@ -1723,6 +1744,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             totalStagesCount: null,
             validatedStagesCount: null,
             type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+            participationStatus: CampaignParticipationStatuses.STARTED,
             isCompleted: false,
             isLocked: false,
           }),
@@ -1785,6 +1807,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             masteryRate: null,
             totalStagesCount: null,
             validatedStagesCount: null,
+            participationStatus: CampaignParticipationStatuses.SHARED,
             isCompleted: true,
             isLocked: false,
           }),
@@ -1796,6 +1819,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             masteryRate: null,
             totalStagesCount: null,
             validatedStagesCount: null,
+            participationStatus: CampaignParticipationStatuses.STARTED,
             isCompleted: false,
             isLocked: false,
           }),
@@ -2013,6 +2037,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             title: campaign2.title,
             type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
             masteryRate: 0.12,
+            participationStatus: CampaignParticipationStatuses.SHARED,
             isCompleted: true,
             isLocked: false,
           }),
@@ -2039,6 +2064,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             reference: campaign1.code,
             title: campaign1.title,
             type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+            participationStatus: CampaignParticipationStatuses.SHARED,
             masteryRate: 0.21,
             isCompleted: true,
             isLocked: false,
@@ -2107,6 +2133,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             title: campaign.title,
             type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
             masteryRate: null,
+            participationStatus: CampaignParticipationStatuses.STARTED,
             isCompleted: false,
             isLocked: false,
           }),
@@ -2116,6 +2143,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             title: module.title,
             type: COMBINED_COURSE_ITEM_TYPES.MODULE,
             redirection: redirectionUrl,
+            participationStatus: undefined,
             isCompleted: false,
             isLocked: true,
           }),
@@ -2144,6 +2172,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           expect(combinedCourse.status).to.deep.equal(CombinedCourseStatuses.NOT_STARTED);
         });
       });
+
       describe('when there is a participation', function () {
         it('should set status to STARTED if participation is STARTED', function () {
           // given

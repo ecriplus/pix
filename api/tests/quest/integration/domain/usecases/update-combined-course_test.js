@@ -5,7 +5,7 @@ import {
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPARISONS as COMPARISONS_REQUIMENTS } from '../../../../../src/quest/domain/models/Requirement.js';
+import { COMPARISONS as COMPARISONS_REQUIREMENTS } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
 
@@ -38,7 +38,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       successRequirements: [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
@@ -52,7 +52,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             moduleId: {
               data: moduleId,
@@ -145,7 +145,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       successRequirements: [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
@@ -159,7 +159,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             moduleId: {
               data: moduleId,
@@ -173,7 +173,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             moduleId: {
               data: module2Id,
@@ -183,7 +183,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
         },
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             moduleId: {
               data: module3Id,
@@ -226,7 +226,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       successRequirements: [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
@@ -272,7 +272,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       successRequirements: [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
@@ -307,7 +307,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       successRequirements: [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIMENTS.ALL,
+          comparison: COMPARISONS_REQUIREMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,

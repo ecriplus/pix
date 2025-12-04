@@ -31,6 +31,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
 
     expect(error).to.be.instanceOf(NotFoundError);
   });
+
   describe('when there is a combined course participation', function () {
     it('should return CombinedCourse for provided code', async function () {
       nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
@@ -97,6 +98,12 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         ],
       });
 
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        combinedCourseId,
+      });
+
       await databaseBuilder.commit();
 
       const result = await usecases.getCombinedCourseByCode({ code, userId });
@@ -110,6 +117,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
           masteryRate: null,
           redirection: undefined,
+          participationStatus: CampaignParticipationStatuses.STARTED,
           isCompleted: false,
           isLocked: false,
           duration: undefined,
@@ -124,6 +132,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           masteryRate: null,
           redirection: 'encryptedUrl',
+          participationStatus: undefined,
           isCompleted: false,
           isLocked: true,
           duration: 5,
@@ -138,6 +147,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           masteryRate: null,
           redirection: 'encryptedUrl',
+          participationStatus: undefined,
           isCompleted: false,
           isLocked: true,
           duration: 10,
@@ -147,7 +157,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         },
       ]);
       expect(result.id).to.equal(combinedCourseId);
-      expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.NOT_STARTED);
+      expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
@@ -191,6 +201,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         moduleId: moduleId1,
         organizationLearnerId,
         status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        moduleId: moduleId3,
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.NOT_STARTED,
       });
 
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
@@ -276,6 +291,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           validatedStagesCount: 0,
           totalStagesCount: 0,
           redirection: undefined,
+          participationStatus: CampaignParticipationStatuses.SHARED,
           isCompleted: true,
           isLocked: false,
           duration: undefined,
@@ -290,6 +306,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           validatedStagesCount: null,
           totalStagesCount: null,
           redirection: 'encryptedUrl',
+          participationStatus: OrganizationLearnerParticipationStatuses.COMPLETED,
           isCompleted: true,
           isLocked: false,
           duration: 5,
@@ -304,6 +321,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           validatedStagesCount: null,
           totalStagesCount: null,
           redirection: 'encryptedUrl',
+          participationStatus: OrganizationLearnerParticipationStatuses.NOT_STARTED,
           isCompleted: false,
           isLocked: false,
           duration: 10,
