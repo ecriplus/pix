@@ -1679,6 +1679,10 @@
       "interactiveElement": {
         "label": "Élément interactif"
       },
+      "issue-report": {
+        "aria-label": "Envoyer un problème ou une suggestion",
+        "button": "Signaler"
+      },
       "modals": {
         "alternativeText": {
           "title": "Alternative textuelle"
