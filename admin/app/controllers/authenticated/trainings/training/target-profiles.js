@@ -23,10 +23,6 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
     return this.targetProfilesToAttach === '';
   }
 
-  get showOrganizationsFiltersForm() {
-    return this.router.currentRoute.localName.includes('organizations');
-  }
-
   @action
   openModal(targetProfile) {
     this.showModal = true;

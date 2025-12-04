@@ -22,13 +22,6 @@ export default class TargetProfileOrganizationsController extends Controller {
   @tracked type = null;
   @tracked externalId = null;
 
-  optionType = [
-    { value: 'PRO', label: 'PRO' },
-    { value: 'SCO', label: 'SCO' },
-    { value: 'SCO-1D', label: 'SCO-1D' },
-    { value: 'SUP', label: 'SUP' },
-  ];
-
   updateFilters(filters) {
     for (const filterKey of Object.keys(filters)) {
       this[filterKey] = filters[filterKey];
