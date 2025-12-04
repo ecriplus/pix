@@ -38,13 +38,28 @@ module('Acceptance | Organizations | Create', function (hooks) {
       assert.dom(screen.getByText('Nouvelle organisation')).exists();
       assert.dom(screen.getByRole('button', { name: this.intl.t('common.actions.add') })).exists();
     });
+
+    test('it redirects the user to organizations list when cancelling', async function (assert) {
+      // given
+      const screen = await visit('/organizations/new');
+
+      // when
+      const cancelButton = await screen.getByRole('button', { name: this.intl.t('common.actions.cancel') });
+      await click(cancelButton);
+
+      // then
+      assert.strictEqual(currentURL(), '/organizations/list');
+    });
   });
 
-  module('when creating an organization with a parent organization', function () {
-    test('it shows the creation form with parent organization name', async function (assert) {
-      // given
-      const parentOrganization = server.create('organization', { name: 'Wayne Enterprises' });
+  module('when creating an organization with a parent organization', function (hooks) {
+    let parentOrganization;
 
+    hooks.beforeEach(function () {
+      parentOrganization = server.create('organization', { name: 'Wayne Enterprises' });
+    });
+
+    test('it shows the creation form with parent organization name', async function (assert) {
       // when
       const screen = await visit(
         `/organizations/new?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(
@@ -71,6 +86,21 @@ module('Acceptance | Organizations | Create', function (hooks) {
           }),
         )
         .exists();
+    });
+
+    test('it redirects the user to parent organization page when cancelling', async function (assert) {
+      // given
+      const screen = await visit(
+        `/organizations/new?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(
+          parentOrganization.name,
+        )}`,
+      );
+      // when
+      const cancelButton = await screen.getByRole('button', { name: this.intl.t('common.actions.cancel') });
+      await click(cancelButton);
+
+      // then
+      assert.strictEqual(currentURL(), `/organizations/${parentOrganization.id}/children`);
     });
   });
 
