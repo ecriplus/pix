@@ -204,6 +204,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           expirationDate: new Date('2024-02-01'),
           challengesConfiguration: {
             maximumAssessmentLength: 1,
+            defaultCandidateCapacity: -3,
           },
         });
 

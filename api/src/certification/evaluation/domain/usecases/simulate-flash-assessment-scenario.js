@@ -96,6 +96,7 @@ function _simulation({
       ...mostRecentAlgorithmConfiguration,
       variationPercent: variationPercent ?? mostRecentAlgorithmConfiguration.variationPercent,
       maximumAssessmentLength: stopAtChallenge ?? mostRecentAlgorithmConfiguration.maximumAssessmentLength,
+      defaultCandidateCapacity: initialCapacity ?? mostRecentAlgorithmConfiguration.defaultCandidateCapacity,
     }),
   });
 

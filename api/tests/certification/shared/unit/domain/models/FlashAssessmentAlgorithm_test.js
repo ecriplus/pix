@@ -7,6 +7,7 @@ const baseFlashAssessmentAlgorithmConfig = {
   challengesBetweenSameCompetence: 2,
   limitToOneQuestionPerTube: false,
   enablePassageByAllCompetences: false,
+  defaultCandidateCapacity: -3,
 };
 
 describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {

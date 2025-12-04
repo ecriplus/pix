@@ -271,7 +271,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .resolves(existingCertificationCourse);
 
             const version = domainBuilder.certification.evaluation.buildVersion({
-              challengesConfiguration: { maximumAssessmentLength: 25 },
+              challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
@@ -331,7 +331,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .resolves(existingCertificationCourse);
 
             const version = domainBuilder.certification.evaluation.buildVersion({
-              challengesConfiguration: { maximumAssessmentLength: 25 },
+              challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
@@ -423,7 +423,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               userRepository.get.withArgs({ id: user.id }).resolves(user);
 
               version = domainBuilder.certification.evaluation.buildVersion({
-                challengesConfiguration: { maximumAssessmentLength: 32 },
+                challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
             });

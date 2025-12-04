@@ -1,7 +1,11 @@
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Version } from '../../../../../../src/certification/shared/domain/models/Version.js';
 
-export const buildVersion = ({ id = 1, scope = Scopes.CORE, challengesConfiguration = {} } = {}) => {
+export const buildVersion = ({
+  id = 1,
+  scope = Scopes.CORE,
+  challengesConfiguration = { defaultCandidateCapacity: -3 },
+} = {}) => {
   return new Version({
     id,
     scope,

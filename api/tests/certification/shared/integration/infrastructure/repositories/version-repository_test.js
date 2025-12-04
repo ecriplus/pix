@@ -8,7 +8,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
   describe('#getById', function () {
     it('should return a Version it exists', async function () {
       // given
-      const challengesConfiguration = { minChallenges: 5, maxChallenges: 10 };
+      const challengesConfiguration = { minChallenges: 5, maxChallenges: 10, defaultCandidateCapacity: -3 };
 
       const versionId = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.PIX_PLUS_DROIT,
@@ -56,7 +56,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 90,
         globalScoringConfiguration: [{ config: 'old' }],
         competencesScoringConfiguration: [{ config: 'old' }],
-        challengesConfiguration: { config: 'old' },
+        challengesConfiguration: { config: 'old', defaultCandidateCapacity: 2 },
       }).id;
 
       const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
@@ -66,7 +66,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'current' }],
         competencesScoringConfiguration: [{ config: 'current' }],
-        challengesConfiguration: { config: 'current' },
+        challengesConfiguration: { config: 'current', defaultCandidateCapacity: -3 },
       }).id;
 
       databaseBuilder.factory.buildCertificationVersion({
@@ -76,7 +76,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 150,
         globalScoringConfiguration: [{ config: 'future' }],
         competencesScoringConfiguration: [{ config: 'future' }],
-        challengesConfiguration: { config: 'future' },
+        challengesConfiguration: { config: 'future', defaultCandidateCapacity: 1 },
       });
 
       await databaseBuilder.commit();
@@ -91,7 +91,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
       expect(result).to.be.instanceOf(Version);
       expect(result.id).to.equal(expectedVersionId);
       expect(result.scope).to.equal(scope);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'current' });
+      expect(result.challengesConfiguration).to.deep.equal({ config: 'current', defaultCandidateCapacity: -3 });
     });
 
     it('should only consider versions of the specified scope', async function () {
@@ -107,7 +107,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 100,
         globalScoringConfiguration: [{ target: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'target' },
+        challengesConfiguration: { config: 'target', defaultCandidateCapacity: 1 },
       }).id;
 
       databaseBuilder.factory.buildCertificationVersion({
@@ -117,7 +117,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 150,
         globalScoringConfiguration: [{ other: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'other' },
+        challengesConfiguration: { config: 'other', defaultCandidateCapacity: -3 },
       });
 
       await databaseBuilder.commit();
@@ -132,7 +132,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
       expect(result).to.be.instanceOf(Version);
       expect(result.id).to.equal(expectedVersionId);
       expect(result.scope).to.equal(targetScope);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'target' });
+      expect(result.challengesConfiguration).to.deep.equal({ config: 'target', defaultCandidateCapacity: 1 });
     });
 
     context('when reconciliation date equals startDate', function () {
@@ -148,7 +148,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 100,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { minChallenges: 5 },
+          challengesConfiguration: { minChallenges: 5, defaultCandidateCapacity: -3 },
         }).id;
 
         await databaseBuilder.commit();
@@ -162,7 +162,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         // then
         expect(result).to.be.instanceOf(Version);
         expect(result.id).to.equal(expectedVersionId);
-        expect(result.challengesConfiguration).to.deep.equal({ minChallenges: 5 });
+        expect(result.challengesConfiguration).to.deep.equal({ minChallenges: 5, defaultCandidateCapacity: -3 });
       });
     });
 
@@ -179,7 +179,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 90,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
+          challengesConfiguration: { config: 'test', defaultCandidateCapacity: -3 },
         });
 
         await databaseBuilder.commit();
@@ -211,7 +211,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 90,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
+          challengesConfiguration: { config: 'test', defaultCandidateCapacity: 1 },
         });
 
         databaseBuilder.factory.buildCertificationVersion({
@@ -221,7 +221,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 120,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
+          challengesConfiguration: { config: 'test', defaultCandidateCapacity: 2 },
         });
 
         await databaseBuilder.commit();

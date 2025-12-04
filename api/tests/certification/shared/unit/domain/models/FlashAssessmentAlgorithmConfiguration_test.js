@@ -10,6 +10,7 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
       limitToOneQuestionPerTube: false,
       enablePassageByAllCompetences: false,
       variationPercent: 0.2,
+      defaultCandidateCapacity: -3,
     };
     context('maximumAssessmentLength', function () {
       it('should throw an EntityValidationError if it is not an integer', function () {
@@ -111,6 +112,19 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
       it('should throw an EntityValidationError if it is greater than 1', function () {
         // given
         params.variationPercent = 1.1;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+    });
+
+    context('defaultCandidateCapacity', function () {
+      it('should throw an EntityValidationError if it is not a number', function () {
+        // given
+        params.defaultCandidateCapacity = 'not a number';
 
         // when
         const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();

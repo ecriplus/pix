@@ -79,6 +79,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       version = domainBuilder.certification.evaluation.buildVersion({
         challengesConfiguration: {
           maximumAssessmentLength: 1,
+          defaultCandidateCapacity: -3,
         },
       });
     });
@@ -156,6 +157,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
         const version = domainBuilder.certification.evaluation.buildVersion({
           challengesConfiguration: {
             maximumAssessmentLength: 1,
+            defaultCandidateCapacity: -3,
           },
         });
 
@@ -359,6 +361,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             const version = domainBuilder.certification.evaluation.buildVersion({
               challengesConfiguration: {
                 maximumAssessmentLength: 1,
+                defaultCandidateCapacity: -3,
               },
             });
 
@@ -726,6 +729,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
         version = domainBuilder.certification.evaluation.buildVersion({
           challengesConfiguration: {
             maximumAssessmentLength: 1,
+            defaultCandidateCapacity: -3,
           },
         });
         certificationAssessment = domainBuilder.buildCertificationAssessment({

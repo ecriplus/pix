@@ -49,6 +49,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           expirationDate: null,
           challengesConfiguration: {
             maximumAssessmentLength: 10,
+            defaultCandidateCapacity: -3,
           },
         });
 
@@ -393,6 +394,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         expirationDate: null,
         challengesConfiguration: {
           maximumAssessmentLength: 10,
+          defaultCandidateCapacity: -3,
         },
       });
 

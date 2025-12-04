@@ -57,7 +57,7 @@ export default async function publishSessionWithValidatedCertification({
     // stopAtChallenge helps to simulate less answer to trigger degradation, and a check reports at finalization
     const simulatedCertification = await flashUseCases.simulateFlashAssessmentScenario({
       locale: FRENCH_SPOKEN,
-      initialCapacity: config.v3Certification.defaultCandidateCapacity,
+      initialCapacity: version.challengesConfiguration.defaultCandidateCapacity,
       stopAtChallenge: config.v3Certification.numberOfChallengesPerCourse - 1,
       pickChallenge,
       pickAnswerStatus,
