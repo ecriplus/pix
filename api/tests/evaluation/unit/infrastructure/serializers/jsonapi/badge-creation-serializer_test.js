@@ -11,7 +11,7 @@ describe('Unit | Serializer | JSONAPI | badge-creation-serializer', function () 
           attributes: {
             key: 'BADGE_KEY',
             'alt-message': 'alt-message',
-            'image-url': 'https://example.net/image.svg',
+            'image-url': 'https://assets.pix.org/badges/badge_url.svg',
             message: 'message',
             title: 'title',
             'is-certifiable': false,
@@ -28,7 +28,7 @@ describe('Unit | Serializer | JSONAPI | badge-creation-serializer', function () 
       const expectedBadgeCreation = {
         key: 'BADGE_KEY',
         altMessage: 'alt-message',
-        imageUrl: 'https://example.net/image.svg',
+        imageUrl: 'https://assets.pix.org/badges/badge_url.svg',
         message: 'message',
         title: 'title',
         isCertifiable: false,

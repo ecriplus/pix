@@ -13,6 +13,7 @@ const implementationType = {
   uuid: Joi.string().uuid(),
 };
 
+const badgeImageUrlValidation = new RegExp(/^https:\/\/assets.pix.org\/badges\/.*.svg$/);
 const certificationVerificationCodeType = Joi.string().regex(/^P-[a-zA-Z0-9]{8}$/);
 const editorLogoUrlValidation = new RegExp('^https:\\/\\/assets\\.pix\\.org\\/contenu-formatif\\/editeur\\/.*\\.svg$');
 
@@ -106,6 +107,7 @@ paramsToExport.positiveInteger32bits = {
 };
 
 export {
+  badgeImageUrlValidation,
   certificationVerificationCodeType,
   editorLogoUrlValidation,
   paramsToExport as identifiersType,

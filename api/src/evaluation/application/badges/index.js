@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { badgeImageUrlValidation, identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { badgesController } from './badges-controller.js';
 
 const register = async function (server) {
@@ -101,7 +101,7 @@ const register = async function (server) {
               attributes: Joi.object({
                 key: Joi.string().required(),
                 'alt-message': Joi.string().required(),
-                'image-url': Joi.string().required(),
+                'image-url': Joi.string().regex(badgeImageUrlValidation).required(),
                 message: Joi.string().required().allow('').allow(null),
                 title: Joi.string().required().allow('').allow(null),
                 'is-certifiable': Joi.boolean().required(),

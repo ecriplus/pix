@@ -15,7 +15,7 @@ describe('Unit | Application | Badges | Routes', function () {
         attributes: {
           key: 'KEY',
           'alt-message': 'alt-message',
-          'image-url': 'https://example.net/image.svg',
+          'image-url': 'https://assets.pix.org/badges/badge_url.svg',
           message: 'message',
           title: 'title',
           'is-certifiable': false,
