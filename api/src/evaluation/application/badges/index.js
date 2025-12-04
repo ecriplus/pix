@@ -30,7 +30,7 @@ const register = async function (server) {
               attributes: Joi.object({
                 key: Joi.string().required(),
                 'alt-message': Joi.string().required(),
-                'image-url': Joi.string().required(),
+                'image-url': Joi.string().regex(badgeImageUrlValidation).required(),
                 message: Joi.string().required().allow(null, ''),
                 title: Joi.string().required().allow(null),
                 'is-certifiable': Joi.boolean().required(),

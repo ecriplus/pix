@@ -184,7 +184,7 @@ describe('Unit | Application | Badges | Routes', function () {
           title: 'titre du badge modifié',
           message: 'Message modifié',
           'alt-message': 'Message alternatif modifié',
-          'image-url': 'url_image_modifiée',
+          'image-url': 'https://assets.pix.org/badges/new_badge_url.svg',
           'is-certifiable': true,
           'is-always-visible': true,
         },
