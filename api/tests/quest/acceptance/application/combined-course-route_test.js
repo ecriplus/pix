@@ -38,7 +38,7 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
         await databaseBuilder.commit();
 
         const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}`;
+${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}`;
 
         const options = {
           method: 'POST',
@@ -70,7 +70,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         // when
         const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-100;"{""name"":""Combinix"",""successRequirements"":[]}";${notAdminUserId}`;
+100;"{""name"":""Combinix"",""combinedCourseContent"":[]}";${notAdminUserId}`;
 
         const options = {
           method: 'POST',

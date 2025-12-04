@@ -908,16 +908,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'Combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                value: campaign.targetProfileId,
               },
             ],
           });
@@ -956,16 +950,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+
+                value: campaign.targetProfileId,
               },
             ],
           });
@@ -1004,16 +993,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+
+                value: campaign.targetProfileId,
               },
             ],
           });
@@ -1051,16 +1035,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  moduleId: {
-                    data: 'abcdefgh1',
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                value: 'abcdefgh1',
               },
             ],
           });
@@ -1111,26 +1089,15 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const recommendedModuleIdsForUser = [];
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                value: campaign.targetProfileId,
               },
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  moduleId: {
-                    data: module.id,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+
+                value: module.id,
               },
             ],
           });
@@ -1185,26 +1152,16 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           const recommendedModuleIdsForUser = [{ moduleId: module.id }];
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+
+                value: campaign.targetProfileId,
               },
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  moduleId: {
-                    data: module.id,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+
+                value: module.id,
               },
             ],
           });
@@ -1276,36 +1233,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
               name: 'combinix',
-              successRequirements: [
+              combinedCourseContent: [
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: firstModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: firstModule.id,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: secondModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: secondModule.id,
                 },
               ],
             });
@@ -1375,46 +1314,22 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
               name: 'combinix',
-              successRequirements: [
+              combinedCourseContent: [
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: firstModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: firstModule.id,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: secondCampaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: secondCampaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: secondModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: secondModule.id,
                 },
               ],
             });
@@ -1503,36 +1418,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
               name: 'combinix',
-              successRequirements: [
+              combinedCourseContent: [
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: firstModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: firstModule.id,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: secondModule.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: secondModule.id,
                 },
               ],
             });
@@ -1587,46 +1484,22 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
               name: 'combinix',
-              successRequirements: [
+              combinedCourseContent: [
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: module.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: module.id,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign2.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign2.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: module2.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: module2.id,
                 },
               ],
             });
@@ -1714,36 +1587,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
             const recommendedModuleIdsForUser = [];
             const combinedCourseTemplate = new CombinedCourseTemplate({
               name: 'combinix',
-              successRequirements: [
+              combinedCourseContent: [
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    targetProfileId: {
-                      data: campaign.targetProfileId,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                  value: campaign.targetProfileId,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: moduleFromTargetProfile.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: moduleFromTargetProfile.id,
                 },
                 {
-                  requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-                  comparison: REQUIREMENT_COMPARISONS.ALL,
-                  data: {
-                    moduleId: {
-                      data: moduleFromQuest.id,
-                      comparison: CRITERION_COMPARISONS.EQUAL,
-                    },
-                  },
+                  type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+                  value: moduleFromQuest.id,
                 },
               ],
             });
@@ -1816,16 +1671,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           name: 'combinix',
-          successRequirements: [
+          combinedCourseContent: [
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                targetProfileId: {
-                  data: campaign1.targetProfileId,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign1.targetProfileId,
             },
           ],
         });
@@ -1867,36 +1716,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           name: 'combinix',
-          successRequirements: [
+          combinedCourseContent: [
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                targetProfileId: {
-                  data: campaign2.targetProfileId,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign2.targetProfileId,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                targetProfileId: {
-                  data: campaign1.targetProfileId,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign1.targetProfileId,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module.id,
             },
           ],
         });
@@ -1964,16 +1795,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           name: 'combinix',
-          successRequirements: [
+          combinedCourseContent: [
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module.id,
             },
           ],
         });
@@ -2007,16 +1832,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+
+                value: campaign.targetProfileId,
               },
             ],
           });
@@ -2052,16 +1872,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
           const combinedCourseTemplate = new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements: [
+            combinedCourseContent: [
               {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-                data: {
-                  targetProfileId: {
-                    data: campaign.targetProfileId,
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
+                type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+
+                value: campaign.targetProfileId,
               },
             ],
           });
@@ -2103,66 +1918,30 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           name: 'combinix',
-          successRequirements: [
+          combinedCourseContent: [
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                targetProfileId: {
-                  data: campaign2.targetProfileId,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign2.targetProfileId,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module2.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module2.id,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module22.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module22.id,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                targetProfileId: {
-                  data: campaign1.targetProfileId,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              value: campaign1.targetProfileId,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module1.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module1.id,
             },
             {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: module11.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
+              type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              value: module11.id,
             },
           ],
         });

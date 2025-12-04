@@ -4,41 +4,25 @@ import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/d
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { COMPARISONS as COMPARISONS_REQUIREMENT, TYPES } from '../../../../../src/quest/domain/models/Requirement.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
-import { expect } from '../../../../test-helper.js';
+import { catchErrSync, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () {
   describe('#validate', function () {
-    let successRequirements;
-    beforeEach(function () {
-      successRequirements = [
+    it('should throw if name is not provided', function () {
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: 123,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 'abcfdf-156465',
         },
         {
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: 1,
         },
       ];
-    });
-
-    it('should throw if name is not provided', function () {
       // when
       const createCombineCourse = () =>
         new CombinedCourseTemplate({
-          successRequirements,
+          combinedCourseContent,
           description: 'bla bla bla',
           illustration: 'illu.svg',
         });
@@ -47,121 +31,83 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
       expect(createCombineCourse).to.throw(EntityValidationError);
     });
 
-    it('should throw if successRequirement is not provided', function () {
+    it('should throw if combinedCourseContent does not pass validation', function () {
       // when
-      const createCombineCourse = () =>
-        new CombinedCourseTemplate({
-          name: 'combinix',
-          description: 'description',
-          illustration: 'illu.svg',
-        });
-
-      // then
-      expect(createCombineCourse).to.throw(EntityValidationError);
-    });
-
-    it('should throw if successRequirement does not pass validation', function () {
-      // when
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 1,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 1,
         },
       ];
 
       // then
-      expect(
+      const error = catchErrSync(
         () =>
           new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements,
+            combinedCourseContent,
             description: 'description',
             illustration: 'illu.svg',
           }),
-      ).to.throw(EntityValidationError);
+      )();
+
+      expect(error).instanceOf(EntityValidationError);
     });
 
-    it('should throw when a target profile id in success requirement is a string', async function () {
+    it('should throw when a target profile id in combinedCourseContent is a string', async function () {
       //given
 
       const targetProfileId = 12;
 
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: targetProfileId.toString(),
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: targetProfileId.toString(),
         },
       ];
       // then
-      expect(
+      const error = catchErrSync(
         () =>
           new CombinedCourseTemplate({
             name: 'combinix',
-            successRequirements,
+            combinedCourseContent,
             description: 'description',
             illustration: 'illu.svg',
           }),
-      ).to.throw(EntityValidationError);
+      )();
+
+      expect(error).instanceOf(EntityValidationError);
     });
   });
+
   describe('#getTargetProfileIds', function () {
     it('should return target profile ids from campaignParticipations success requirements', async function () {
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: 1,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: 1,
         },
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: 8,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: 8,
         },
       ];
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name: 'combinix',
-        successRequirements,
+        combinedCourseContent,
       });
       expect(combinedCourseTemplate.targetProfileIds).to.deep.equal([1, 8]);
     });
     it('should return empty list of ids if template has not any campaignParticipations success requirements', async function () {
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
         },
       ];
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name: 'combinix',
-        successRequirements,
+        combinedCourseContent,
       });
       expect(combinedCourseTemplate.targetProfileIds).to.deep.equal([]);
     });
@@ -169,61 +115,37 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
 
   describe('#moduleIds', function () {
     it('should return module ids from passages success requirements', async function () {
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 'abcdef-555',
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 'abcdef-555',
         },
         {
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 'abcdef-777',
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 'abcdef-777',
         },
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: 8,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: 8,
         },
       ];
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name: 'combinix',
-        successRequirements,
+        combinedCourseContent,
       });
       expect(combinedCourseTemplate.moduleIds).to.deep.equal(['abcdef-555', 'abcdef-777']);
     });
 
     it('should return empty list of ids if template has not any campaignParticipations success requirements', async function () {
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: 12,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: 12,
         },
       ];
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name: 'combinix',
-        successRequirements,
+        combinedCourseContent,
       });
       expect(combinedCourseTemplate.moduleIds).to.deep.equal([]);
     });
@@ -249,36 +171,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
           targetProfileId: secondTargetProfileId,
         },
       ];
-      const successRequirements = [
+      const combinedCourseContent = [
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: firstTargetProfileId,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: firstTargetProfileId,
         },
         {
-          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            targetProfileId: {
-              data: secondTargetProfileId,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          value: secondTargetProfileId,
         },
         {
-          requirement_type: TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENT.ALL,
-          data: {
-            moduleId: {
-              data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
+          type: TYPES.OBJECT.PASSAGES,
+          value: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
         },
       ];
       const description = 'bla bla bla';
@@ -287,7 +191,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
       // when
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name,
-        successRequirements,
+        combinedCourseContent,
         description,
         illustration,
       });
