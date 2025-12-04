@@ -25,7 +25,7 @@
     }
 
     &--disabled {
-      color: #abadb2;
+      color: var(--pix-neutral-500);
     }
 
     li {

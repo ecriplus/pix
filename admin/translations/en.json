@@ -1003,7 +1003,15 @@
           },
           "title": "Habilitated to the following complementary certifications"
         },
-        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}."
+        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
+        "list": {
+          "dpo": "DPO",
+          "dpo-definition": "Data Protection Officer",
+          "dpo-email": "E-mail address of ",
+          "dpo-name": "Name of ",
+          "external-id": "External identifier",
+          "type": "Type"
+        }
       },
       "notifications": {
         "failure": {
@@ -1232,24 +1240,24 @@
           "unfinalize-session": "Unfinalize the session"
         },
         "labels": {
-          "access-code": "Candidate access code:",
-          "certification-center": "Certification center:",
-          "complementary-info": "Additional information:",
-          "creation-date": "Creation date:",
-          "description": "Description:",
-          "examiner": "Examiner:",
-          "finalization-date": "Finalization date:",
-          "global-comment": "Global comment:",
-          "impactful-issues": "Number of unresolved impactful issue report(s):",
-          "publication-date": "Publication date:",
-          "results-sent-date": "Results sent to prescriber date:",
-          "room-name": "Room name:",
-          "scoring-errors": "Number of certification(s) with scoring error:",
-          "session-date-time": "Session date and time:",
-          "site-name": "Site name:",
-          "started-certifications": "Number of started certification(s):",
-          "status": "Status:",
-          "total-issues": "Number of issue report(s):"
+          "access-code": "Candidate access code",
+          "certification-center": "Certification center",
+          "complementary-info": "Additional information",
+          "creation-date": "Creation date",
+          "description": "Description",
+          "examiner": "Examiner",
+          "finalization-date": "Finalization date",
+          "global-comment": "Global comment",
+          "impactful-issues": "Number of unresolved impactful issue report(s)",
+          "publication-date": "Publication date",
+          "results-sent-date": "Results sent to prescriber date",
+          "room-name": "Room name",
+          "scoring-errors": "Number of certification(s) with scoring error",
+          "session-date-time": "Session date and time",
+          "site-name": "Site name",
+          "started-certifications": "Number of started certification(s)",
+          "status": "Status",
+          "total-issues": "Number of issue report(s)"
         },
         "messages": {
           "incident-info": "Despite an incident during the session, candidates were able to complete their certification test. Additional time was granted to one or more candidates.",
@@ -1378,8 +1386,20 @@
         }
       },
       "label": {
-        "estimated-time": "Estimated time: ",
-        "estimated-time-experimental": "(experimental data based on the relativity of time)"
+        "comment": "Comments (internal use)",
+        "created-at": "Creation date",
+        "description": "Description",
+        "estimated-time": "Estimated time",
+        "estimated-time-experimental": "(experimental data based on the relativity of time)",
+        "external-name": "External name",
+        "id": "ID",
+        "link-autonomous-course": "Is associated with an autonomous course",
+        "link-autonomous-course-or-campaign": "associated with a campaign or an autonomous course",
+        "link-campaign": "Is associated with a campaign",
+        "name": "Internal name",
+        "outdated": "Outdated",
+        "owner-organization-id": "Reference organisation",
+        "simplified-access": "Simplified Access"
       },
       "resettable-checkbox": {
         "label": "Allow resetting for evaluation-type campaigns when multiple submissions are enabled for the organisation"
@@ -1415,19 +1435,20 @@
           }
         },
         "details": {
-          "contentType": "Content type: ",
-          "duration": "Duration: ",
-          "editorLogo": "Editor logo url: ",
-          "editorName": "Editor name: ",
-          "internalTitle": "Internal title: ",
-          "localizedLanguage": "Localized language: ",
-          "publishedOn": "Published on: ",
-          "status": "Status: ",
+          "contentType": "Content type",
+          "duration": "Duration",
+          "editor-logo-aria-label": "Link to access the image of the training content logo (new window)",
+          "editorLogo": "Editor logo url",
+          "editorName": "Editor name",
+          "internalTitle": "Internal title",
+          "localizedLanguage": "Localized language",
+          "publishedOn": "Published on",
+          "status": "Status",
           "status-label": {
             "disabled": "Non-triggerable",
             "enabled": "Triggerable"
           },
-          "title": "Public title: "
+          "title": "Public title"
         },
         "duplicate": {
           "button": {

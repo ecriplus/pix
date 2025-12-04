@@ -1004,7 +1004,15 @@
           },
           "title": "Habilitations aux certifications complémentaires"
         },
-        "is-archived-warning": "Archivé le {archivedAt} par {archivedBy}."
+        "is-archived-warning": "Archivé le {archivedAt} par {archivedBy}.",
+        "list": {
+          "dpo": "DPO",
+          "dpo-definition": "Délégué à la protection des données",
+          "dpo-email": "Adresse e-mail du ",
+          "dpo-name": "Nom du ",
+          "external-id": "Identifiant externe",
+          "type": "Type"
+        }
       },
       "notifications": {
         "failure": {
@@ -1233,24 +1241,24 @@
           "unfinalize-session": "Définaliser la session"
         },
         "labels": {
-          "access-code": "Code d'accès candidat:",
-          "certification-center": "Centre de certification :",
-          "complementary-info": "Informations complémentaires :",
-          "creation-date": "Date de création :",
-          "description": "Description :",
-          "examiner": "Surveillant :",
-          "finalization-date": "Date de finalisation :",
-          "global-comment": "Commentaire global :",
-          "impactful-issues": "Nombre de signalement(s) impactant(s) non résolu(s) :",
-          "publication-date": "Date de publication :",
-          "results-sent-date": "Date d'envoi des résultats au prescripteur :",
-          "room-name": "Nom de la salle :",
-          "scoring-errors": "Nombre de certification(s) en erreur :",
-          "session-date-time": "Date et heure de la session :",
-          "site-name": "Nom du site :",
-          "started-certifications": "Nombre de certification(s) démarrée(s) :",
-          "status": "Statut :",
-          "total-issues": "Nombre de signalement(s) :"
+          "access-code": "Code d'accès candidat",
+          "certification-center": "Centre de certification",
+          "complementary-info": "Informations complémentaires",
+          "creation-date": "Date de création",
+          "description": "Description",
+          "examiner": "Surveillant",
+          "finalization-date": "Date de finalisation",
+          "global-comment": "Commentaire global",
+          "impactful-issues": "Nombre de signalement(s) impactant(s) non résolu(s)",
+          "publication-date": "Date de publication",
+          "results-sent-date": "Date d'envoi des résultats au prescripteur",
+          "room-name": "Nom de la salle",
+          "scoring-errors": "Nombre de certification(s) en erreur",
+          "session-date-time": "Date et heure de la session",
+          "site-name": "Nom du site",
+          "started-certifications": "Nombre de certification(s) démarrée(s)",
+          "status": "Statut",
+          "total-issues": "Nombre de signalement(s)"
         },
         "messages": {
           "incident-info": "Malgré un incident survenu pendant la session, les candidats ont pu terminer leur test de certification. Un temps supplémentaire a été accordé à un ou plusieurs candidats.",
@@ -1379,8 +1387,20 @@
         }
       },
       "label": {
-        "estimated-time": "Temps estimé : ",
-        "estimated-time-experimental": "(données expérimentales basées sur la relativité du temps)"
+        "comment": "Commentaire (usage interne)",
+        "created-at": "Date de création",
+        "description": "Description",
+        "estimated-time": "Temps estimé",
+        "estimated-time-experimental": "(données expérimentales basées sur la relativité du temps)",
+        "external-name": "Nom externe",
+        "id": "ID",
+        "link-autonomous-course": "Est associé à un parcours autonome",
+        "link-autonomous-course-or-campaign": "Associé à une campagne ou un parcours autonome",
+        "link-campaign": "Est associé à une campagne",
+        "name": "Nom interne",
+        "outdated": "Obsolète",
+        "owner-organization-id": "Organisation de référence",
+        "simplified-access": "Parcours Accès Simplifié"
       },
       "resettable-checkbox": {
         "label": "Permettre la remise à zéro des acquis du profil cible"
@@ -1416,19 +1436,20 @@
           }
         },
         "details": {
-          "contentType": "Type de contenu :",
-          "duration": "Durée :",
-          "editorLogo": "Url du logo de l'éditeur :",
-          "editorName": "Nom d'éditeur :",
-          "internalTitle": "Titre interne :",
-          "localizedLanguage": "Langue localisée :",
-          "publishedOn": "Publié sur :",
-          "status": "Statut :",
+          "contentType": "Type de contenu",
+          "duration": "Durée",
+          "editor-logo-aria-label": "Lien pour accéder à l'image du logo du contenu formatif (nouvelle fenêtre)",
+          "editorLogo": "Url du logo de l'éditeur",
+          "editorName": "Nom d'éditeur",
+          "internalTitle": "Titre interne",
+          "localizedLanguage": "Langue localisée",
+          "publishedOn": "Publié sur",
+          "status": "Statut",
           "status-label": {
             "disabled": "Non déclenchable",
             "enabled": "Déclenchable"
           },
-          "title": "Titre public :"
+          "title": "Titre public"
         },
         "duplicate": {
           "button": {

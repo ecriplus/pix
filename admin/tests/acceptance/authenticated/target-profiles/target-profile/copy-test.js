@@ -38,7 +38,7 @@ module('Acceptance | Target Profile copy', function (hooks) {
     await screen.findByRole('button', { name: 'Valider' });
     await clickByName('Valider');
 
-    assert.dom(await screen.findByRole('heading', { name: '[Copie] nom initial interne', level: 2 })).exists();
+    assert.dom(await screen.findByRole('heading', { name: '[Copie] nom initial interne', level: 1 })).exists();
 
     await clickByName('1 · areaUn');
     await clickByName('1.1 competenceUn');

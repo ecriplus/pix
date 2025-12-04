@@ -1,7 +1,9 @@
 /* stylelint-disable selector-class-pattern */
+@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 
 .certification-center-information {
+  margin-bottom: var(--pix-spacing-6x);
 
   &__edit-title{
     @extend %pix-title-s;
@@ -71,7 +73,6 @@
   &__action-buttons {
     display: flex;
     gap: 8px;
-    padding-top: var(--pix-spacing-6x);
   }
 
   &__name {
@@ -79,43 +80,33 @@
   }
 
   &__habilitations-list {
-    display: inline-flex;
-    gap: 24px;
-    margin: 8px 0;
+    display: grid;
+    gap: var(--pix-spacing-1x);
+
+    @include breakpoints.device-is('mobile'){
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    &--enabled {
+      svg {
+        color: var(--pix-success-300);
+      }
+    }
+
+    &--disabled {
+      color: var(--pix-neutral-500);
+    }
 
     li {
+      display: inline-flex;
+      gap: var(--pix-spacing-2x);
       align-items: center;
-      display: flex;
-      padding: 8px 16px;
-      background-color: var(--pix-neutral-20);
-      border-radius: 8px;
-    }
 
-    .habilitation-icon {
-      height: 1.4rem;
-      margin-right: var(--pix-spacing-2x);
-      width: 1.4rem;
-
-      &--granted {
-        fill: var(--pix-success-700);
+      > svg {
+        flex-shrink: 0;
       }
-
-      &--non-granted {
-        fill: var(--pix-neutral-500);
-      }
-    }
-  }
-
-  &__list {
-    display: grid;
-    grid-template-columns: 170px auto;
-    padding: var(--pix-spacing-4x) 0 var(--pix-spacing-2x) 0;
-
-    dd, dt {
-      display: flex;
-      align-items: center;
-      padding: var(--pix-spacing-2x) 0;
-      border-bottom: 0.05rem solid var(--pix-neutral-100);
     }
   }
 }

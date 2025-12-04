@@ -11,6 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 import { pageTitle } from 'ember-page-title';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
 
 import ConfirmPopup from '../confirm-popup';
@@ -199,61 +200,114 @@ export default class TargetProfile extends Component {
 
     <main class="page-body">
       <section class="page-section target-profile-section">
-        <div class="page-section__header">
-          <h2 class="page-section__title target-profile__title">{{@model.internalName}}</h2>
-          <Category @category={{@model.category}} />
-        </div>
+        <h1 class="page-section__title">{{@model.internalName}}</h1>
+        <Category @category={{@model.category}} />
         <div class="target-profile-section__container">
-          <ul>
-            <li><span class="bold">ID&#x20;:&#x20;</span>{{@model.id}}</li>
-            <li><span class="bold">Nom interne&#x20;:&#x20;</span>{{@model.internalName}}</li>
-            <li><span class="bold">Nom externe&#x20;:&#x20;</span>{{@model.name}}</li>
-            <li><span class="bold">{{t "pages.target-profiles.label.estimated-time"}}</span>{{this.estimatedTimeLabel}}
-              {{t "pages.target-profiles.label.estimated-time-experimental"}}</li>
-            <li><span class="bold">Organisation de référence&#x20;:&#x20;</span><LinkTo
+
+          <DescriptionList>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.id"}}>
+              {{@model.id}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.name"}}>
+              {{@model.internalName}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.external-name"}}>
+              {{@model.name}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.estimated-time"}}>
+              {{this.estimatedTimeLabel}}
+              {{t "pages.target-profiles.label.estimated-time-experimental"}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.owner-organization-id"}}>
+              <LinkTo
                 @route="authenticated.organizations.get"
                 @model={{@model.ownerOrganizationId}}
               >{{@model.ownerOrganizationId}}</LinkTo>
-            </li>
-            <li><span class="bold">Date de création&#x20;:&#x20;</span>{{formatDate @model.createdAt}}</li>
-            <li><span class="bold">Obsolète&#x20;:&#x20;</span>{{this.displayBooleanState this.isOutdated}}</li>
-            <li>
-              <span class="bold">Parcours Accès Simplifié&#x20;:&#x20;</span>{{this.displayBooleanState
-                this.isSimplifiedAccess
-              }}
-            </li>
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.created-at"}}>
+              {{formatDate @model.createdAt}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.outdated"}}>
+              {{this.displayBooleanState this.isOutdated}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.label.simplified-access"}}>
+              {{this.displayBooleanState this.isSimplifiedAccess}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
             {{#if this.hasLinkedCampaign}}
-              <li><span class="bold">Est associé à une campagne&#x20;:&#x20;</span>Oui</li>
+              <DescriptionList.Item @label={{t "pages.target-profiles.label.link-campaign"}}>
+                {{t "common.words.yes"}}
+              </DescriptionList.Item>
               {{#if this.hasLinkedAutonomousCourse}}
-                <li><span class="bold">Est associé à un parcours autonome&#x20;:&#x20;</span>Oui</li>
+                <DescriptionList.Item @label={{t "pages.target-profiles.label.link-autonomous-course"}}>
+                  {{t "common.words.yes"}}
+                </DescriptionList.Item>
               {{/if}}
             {{else}}
-              <li><span class="bold">Associé à une campagne ou un parcours autonome&#x20;:&#x20;</span>Non</li>
+              <DescriptionList.Item @label={{t "pages.target-profiles.label.link-autonomous-course-or-campaign"}}>
+                {{t "common.words.no"}}
+              </DescriptionList.Item>
             {{/if}}
-            <li>
-              <span class="bold">{{t
-                  "pages.target-profiles.resettable-checkbox.label"
-                }}&#x20;:&#x20;</span>{{this.displayBooleanState this.areKnowledgeElementsResettable}}
-            </li>
-            <li><span class="bold">{{t
-                  "pages.target-profiles.tubes-count"
-                }}&#x20;:&#x20;</span>{{@model.tubesCount}}</li>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.resettable-checkbox.label"}}>
+              {{this.displayBooleanState this.areKnowledgeElementsResettable}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label={{t "pages.target-profiles.tubes-count"}}>
+              {{@model.tubesCount}}
+            </DescriptionList.Item>
+
             {{#if @model.description}}
-              <li>
-                <span class="bold">Description&#x20;:&#x20;</span>
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label="Description">
                 <SafeMarkdownToHtml @markdown={{@model.description}} />
-              </li>
+              </DescriptionList.Item>
             {{/if}}
+
             {{#if @model.comment}}
-              <li>
-                <span class="bold">Commentaire (usage interne)&#x20;:&#x20;</span>
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label="Commentaire (usage interne)">
                 <SafeMarkdownToHtml @markdown={{@model.comment}} />
-              </li>
+              </DescriptionList.Item>
             {{/if}}
-          </ul>
+
+            <DescriptionList.Divider />
+
+          </DescriptionList>
 
           {{! template-lint-disable no-redundant-role }}
-          <img src={{@model.imageUrl}} role="img" alt="Profil cible" />
+          <div class="target-profile-section__image">
+            <img src={{@model.imageUrl}} role="img" alt="Profil cible" />
+          </div>
         </div>
         <div class="target-profile__actions">
           <PixButtonLink

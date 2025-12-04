@@ -16,9 +16,7 @@ module('Integration | Component | certification-centers/habilitation-tag', funct
     // then
     const listItem = screen.getByLabelText('habilité');
     assert.dom(listItem).exists();
-    const icon = listItem.querySelector('.pix-icon');
-    assert.dom(icon).hasClass('habilitation-icon--granted');
-    assert.dom(icon).hasClass('habilitation-icon');
+    assert.dom(listItem).hasClass('certification-center-information-display__habilitations-list--enabled');
     assert.dom(screen.getByText('Test Label')).exists();
   });
 
@@ -31,25 +29,7 @@ module('Integration | Component | certification-centers/habilitation-tag', funct
     // then
     const listItem = screen.getByLabelText('non habilité');
     assert.dom(listItem).exists();
-    const icon = listItem.querySelector('.pix-icon');
-    assert.dom(icon).hasClass('habilitation-icon--non-granted');
-    assert.dom(icon).hasClass('habilitation-icon');
+    assert.dom(listItem).hasClass('certification-center-information-display__habilitations-list--disabled');
     assert.dom(screen.getByText('Test Label')).exists();
-  });
-
-  test('it should have the correct base class in both cases', async function (assert) {
-    // when active
-    const screenActive = await render(
-      <template><HabilitationTag @active={{true}} @arialabel="habilité" @label="Active" /></template>,
-    );
-    const iconActive = screenActive.getByLabelText('habilité').querySelector('.pix-icon');
-    assert.dom(iconActive).hasClass('habilitation-icon');
-
-    // when not active
-    const screenInactive = await render(
-      <template><HabilitationTag @active={{false}} @arialabel="non habilité" @label="Inactive" /></template>,
-    );
-    const iconInactive = screenInactive.getByLabelText('non habilité').querySelector('.pix-icon');
-    assert.dom(iconInactive).hasClass('habilitation-icon');
   });
 });

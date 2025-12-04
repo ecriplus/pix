@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import InformationView from 'pix-admin/components/certification-centers/information-view';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -45,8 +46,8 @@ module('Integration | Component | certification-centers/information-view', funct
     );
 
     // then
-    assert.dom(screen.getByText('Type :')).exists();
-    assert.dom(screen.getByText('Identifiant externe :')).exists();
+    assert.dom(screen.getByText(t('pages.certification-centers.information-view.list.type'))).exists();
+    assert.dom(screen.getByText(t('pages.certification-centers.information-view.list.external-id'))).exists();
     assert.dom(screen.getByText('Centre SCO')).exists();
     assert.dom(screen.getByText('AX129')).exists();
     assert.dom(screen.getByText('Lucky Number')).exists();

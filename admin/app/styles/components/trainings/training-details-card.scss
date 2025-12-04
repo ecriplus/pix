@@ -1,41 +1,44 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 .training-details-card {
-  display: grid;
-  grid-template-columns: 1fr 180px;
-  gap: 2rem;
+  margin-bottom: var(--pix-spacing-6x);
 
   &__title {
     @extend %pix-title-xs;
   }
 
-  &__details {
-    margin-top: 1.5rem;
-  }
-
-  &__details-label {
-    float: left;
-    margin-right: var(--pix-spacing-1x);
-  }
-
-  &__details-value {
-    margin-bottom: 0.5rem;
-
-    &::after {
-      display: table;
-      clear: left;
-      content: '';
-    }
-  }
-
   &__editor-logo {
-    width: 100%;
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-bottom: var(--pix-spacing-3x);
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
+    border: 1px var(--pix-primary-100) solid;
+    border-radius: var(--pix-spacing-2x);
+
+    @include breakpoints.device-is('tablet') {
+      height: 300px;
+      margin-bottom: 0;
+    }
   }
 
   &__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoints.device-is('tablet') {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+    }
   }
 }

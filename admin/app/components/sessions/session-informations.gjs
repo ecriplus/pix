@@ -4,6 +4,7 @@ import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 import { not } from 'ember-truth-helpers';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import ConfirmPopup from '../confirm-popup';
 import JuryComment from './jury-comment';
@@ -16,116 +17,113 @@ import JuryComment from './jury-comment';
         <span>{{@sessionModel.assignedCertificationOfficer.fullName}}</span>
       </div>
 
-      <ul class="session-info__list">
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.certification-center"}}</span>
-          <span>
-            <LinkTo @route="authenticated.certification-centers.get" @model={{@sessionModel.certificationCenterId}}>
-              {{@sessionModel.certificationCenterName}}
-            </LinkTo>
-          </span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.site-name"}}</span>
-          <span>{{@sessionModel.address}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.room-name"}}</span>
-          <span>{{@sessionModel.room}}</span>
-        </li>
+      <DescriptionList>
 
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.session-date-time"}}</span>
-          <span>{{formatDate @sessionModel.date}} à {{@sessionModel.time}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.examiner"}}</span>
-          <span>{{@sessionModel.examiner}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.description"}}</span>
-          <span>{{@sessionModel.description}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.access-code"}}</span>
-          <span>{{@sessionModel.accessCode}}</span>
-        </li>
-      </ul>
-      <ul class="session-info__list">
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.status"}}</span>
-          <span>{{@sessionModel.displayStatus}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.creation-date"}}</span>
-          <span>{{formatDate @sessionModel.createdAt}}</span>
-        </li>
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.certification-center"}}>
+          <LinkTo @route="authenticated.certification-centers.get" @model={{@sessionModel.certificationCenterId}}>
+            {{@sessionModel.certificationCenterName}}
+          </LinkTo>
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.site-name"}}>
+          {{@sessionModel.address}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.room-name"}}>
+          {{@sessionModel.room}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.session-date-time"}}>
+          {{formatDate @sessionModel.date}}
+          à
+          {{@sessionModel.time}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.examiner"}}>
+          {{@sessionModel.examiner}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.description"}}>
+          {{@sessionModel.description}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.access-code"}}>
+          {{@sessionModel.accessCode}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.status"}}>
+          {{@sessionModel.displayStatus}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.creation-date"}}>
+          {{formatDate @sessionModel.createdAt}}
+        </DescriptionList.Item>
+
         {{#if @sessionModel.finalizedAt}}
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.finalization-date"}}</span>
-            <span>{{formatDate @sessionModel.finalizedAt}}</span>
-          </li>
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.finalization-date"}}>
+            {{formatDate @sessionModel.finalizedAt}}
+          </DescriptionList.Item>
         {{/if}}
+
         {{#if @sessionModel.publishedAt}}
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.publication-date"}}</span>
-            <span>{{formatDate @sessionModel.publishedAt}}</span>
-          </li>
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.publication-date"}}>
+            {{formatDate @sessionModel.publishedAt}}
+          </DescriptionList.Item>
         {{/if}}
-        {{#if @sessionModel.resultsSentToPrescriberAt}}
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.results-sent-date"}}</span>
-            <span>{{formatDate @sessionModel.resultsSentToPrescriberAt}}</span>
-          </li>
-        {{/if}}
-      </ul>
 
-      <ul class="session-info__list">
-        <li class="session-info__list-item">
-          <span>{{t "pages.sessions.informations.labels.started-certifications"}}</span>
-          <span>{{@sessionModel.numberOfStartedCertifications}}</span>
-        </li>
+        {{#if @sessionModel.resultsSentToPrescriberAt}}
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.results-sent-date"}}>
+            {{formatDate @sessionModel.resultsSentToPrescriberAt}}
+          </DescriptionList.Item>
+        {{/if}}
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label={{t "pages.sessions.informations.labels.started-certifications"}}>
+          {{@sessionModel.numberOfStartedCertifications}}
+        </DescriptionList.Item>
+
         {{#if @sessionModel.finalizedAt}}
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.impactful-issues"}}</span>
-            <span>{{@sessionModel.numberOfImpactfullIssueReports}}</span>
-          </li>
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.total-issues"}}</span>
-            <span>{{@sessionModel.totalNumberOfIssueReports}}</span>
-          </li>
-          <li class="session-info__list-item">
-            <span>{{t "pages.sessions.informations.labels.scoring-errors"}}</span>
-            <span>{{@sessionModel.numberOfScoringErrors}}</span>
-          </li>
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.impactful-issues"}}>
+            {{@sessionModel.numberOfImpactfullIssueReports}}
+          </DescriptionList.Item>
+
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.total-issues"}}>
+            {{@sessionModel.totalNumberOfIssueReports}}
+          </DescriptionList.Item>
+
+          <DescriptionList.Item @label={{t "pages.sessions.informations.labels.scoring-errors"}}>
+            {{@sessionModel.numberOfScoringErrors}}
+          </DescriptionList.Item>
+
           {{#if @sessionModel.hasComplementaryInfo}}
-            <li class="session-info__list-item">
-              <span>{{t "pages.sessions.informations.labels.complementary-info"}}</span>
+            <DescriptionList.Item @label={{t "pages.sessions.informations.labels.complementary-info"}}>
               {{#if @sessionModel.hasIncident}}
-                <span>{{t "pages.sessions.informations.messages.incident-info"}}</span>
+                {{t "pages.sessions.informations.messages.incident-info"}}
               {{/if}}
               {{#if @sessionModel.hasJoiningIssue}}
-                <span>{{t "pages.sessions.informations.messages.joining-issue-info"}}</span>
+                {{t "pages.sessions.informations.messages.joining-issue-info"}}
               {{/if}}
-            </li>
+            </DescriptionList.Item>
           {{/if}}
+
           {{#if @sessionModel.hasExaminerGlobalComment}}
-            <li class="session-info__list-item">
-              <span>{{t "pages.sessions.informations.labels.global-comment"}}</span>
-              <span>{{@sessionModel.examinerGlobalComment}}</span>
-            </li>
+            <DescriptionList.Item @label={{t "pages.sessions.informations.labels.global-comment"}}>
+              {{@sessionModel.examinerGlobalComment}}
+            </DescriptionList.Item>
           {{/if}}
         {{/if}}
-      </ul>
+
+        <DescriptionList.Divider />
+
+      </DescriptionList>
 
       {{#if @accessControl.hasAccessToCertificationActionsScope}}
         <div class="session-info__actions">
           {{#if @sessionModel.finalizedAt}}
-            <PixButton
-              @size="large"
-              @isDisabled={{@isCurrentUserAssignedToSession}}
-              @triggerAction={{@checkForAssignment}}
-            >
+            <PixButton @isDisabled={{@isCurrentUserAssignedToSession}} @triggerAction={{@checkForAssignment}}>
               {{#if @isCurrentUserAssignedToSession}}
                 {{t "pages.sessions.informations.buttons.assigned-to-session"}}
               {{else}}
@@ -136,7 +134,6 @@ import JuryComment from './jury-comment';
               <PixTooltip @position="right" @isWide={{true}}>
                 <:triggerElement>
                   <PixButton
-                    @size="large"
                     @isDisabled={{true}}
                     @triggerAction={{@onUnfinalizeSessionButtonClick}}
                     @variant="error"
@@ -148,7 +145,7 @@ import JuryComment from './jury-comment';
                 </:tooltip>
               </PixTooltip>
             {{else}}
-              <PixButton @size="large" @triggerAction={{@onUnfinalizeSessionButtonClick}} @variant="error">{{t
+              <PixButton @triggerAction={{@onUnfinalizeSessionButtonClick}} @variant="error">{{t
                   "pages.sessions.informations.buttons.unfinalize-session"
                 }}
               </PixButton>

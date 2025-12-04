@@ -1,29 +1,7 @@
 .session-info {
-  padding: 20px;
 
   .pix-button svg {
     margin-right: 6px;
-  }
-
-  /* stylelint-disable selector-class-pattern */
-  .row--btn {
-    margin: inherit;
-    margin-right: -20px;
-  }
-
-  &__list {
-    margin-bottom: 40px;
-    padding: 0;
-    list-style: none;
-  }
-
-  &__list-item {
-    display: flex;
-    border-bottom: 1px solid var(--pix-neutral-20);
-
-    span {
-      width: 50%;
-    }
   }
 
   &__certification-officer-assigned {

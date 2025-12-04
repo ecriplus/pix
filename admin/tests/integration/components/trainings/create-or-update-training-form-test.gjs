@@ -1,5 +1,6 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click, fillIn, triggerEvent } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import CreateOrUpdateTrainingForm from 'pix-admin/components/trainings/create-or-update-training-form';
 import { localeCategories, typeCategories } from 'pix-admin/models/training';
 import { module, test } from 'qunit';
@@ -20,8 +21,8 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     );
 
     // then
-    assert.dom(screen.getByLabelText('Titre public :')).exists();
-    assert.dom(screen.getByLabelText('Titre interne :')).exists();
+    assert.dom(screen.getByLabelText(t('pages.trainings.training.details.title'))).exists();
+    assert.dom(screen.getByLabelText(t('pages.trainings.training.details.internalTitle'))).exists();
     assert.dom(screen.getByLabelText('Lien')).exists();
     assert.dom(screen.getByLabelText('Format')).exists();
     assert.dom(screen.getByLabelText('Jours (JJ)')).exists();
@@ -90,8 +91,10 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       );
 
       // then
-      assert.dom(screen.getByLabelText('Titre public :')).hasValue(model.title);
-      assert.dom(screen.getByLabelText('Titre interne :')).hasValue(model.internalTitle);
+      assert.dom(screen.getByLabelText(t('pages.trainings.training.details.title'))).hasValue(model.title);
+      assert
+        .dom(screen.getByLabelText(t('pages.trainings.training.details.internalTitle')))
+        .hasValue(model.internalTitle);
       assert.dom(screen.getByLabelText('Lien')).hasValue(model.link);
       assert.strictEqual(screen.getByLabelText('Format').innerText, typeCategories[model.type]);
       assert.dom(screen.getByLabelText('Jours (JJ)')).hasValue(model.duration.days.toString());
@@ -127,7 +130,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       );
 
       // when
-      await fillByLabel('Titre public :', 'New Title');
+      await fillByLabel(t('pages.trainings.training.details.title'), 'New Title');
       await triggerEvent('form', 'submit');
 
       // then

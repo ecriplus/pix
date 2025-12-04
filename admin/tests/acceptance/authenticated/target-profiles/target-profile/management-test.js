@@ -88,13 +88,24 @@ module('Acceptance | Target Profile Management', function (hooks) {
       const screen = await visit('/target-profiles/1');
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'Profil Cible Fantastix', level: 2 })).exists();
+      const termsList = screen.getAllByRole('term');
+      const definitionsList = screen.getAllByRole('definition');
+
+      assert.dom(screen.getByRole('heading', { name: 'Profil Cible Fantastix', level: 1 })).exists();
       assert.dom(screen.getByText('Thématiques')).exists();
-      assert.dom(_findByListItemText(screen, 'ID : 1')).exists();
-      assert.dom(_findByListItemText(screen, 'Obsolète : Non')).exists();
-      assert.dom(_findByListItemText(screen, 'Parcours Accès Simplifié : Oui')).exists();
-      assert.dom(_findByListItemText(screen, `${t('pages.target-profiles.resettable-checkbox.label')} : Non`)).exists();
-      assert.dom(_findByListItemText(screen, 'Est associé à une campagne : Oui')).exists();
+
+      assert.strictEqual(termsList[0].textContent.trim(), t('pages.target-profiles.label.id'));
+      assert.strictEqual(definitionsList[0].textContent.trim(), '1');
+
+      assert.strictEqual(termsList[6].textContent.trim(), t('pages.target-profiles.label.outdated'));
+      assert.strictEqual(definitionsList[6].textContent.trim(), t('common.words.no'));
+
+      assert.strictEqual(termsList[8].textContent.trim(), t('pages.target-profiles.label.link-campaign'));
+      assert.strictEqual(definitionsList[8].textContent.trim(), t('common.words.yes'));
+
+      assert.strictEqual(termsList[9].textContent.trim(), t('pages.target-profiles.resettable-checkbox.label'));
+      assert.strictEqual(definitionsList[9].textContent.trim(), t('common.words.no'));
+
       assert.dom(screen.getByText('456')).exists();
       assert.dom(screen.getByText('Top profil cible.')).exists();
       assert.dom(screen.getByText('Commentaire Privé.')).exists();
@@ -115,7 +126,11 @@ module('Acceptance | Target Profile Management', function (hooks) {
       await clickByName('Oui, marquer comme accès simplifié');
 
       // then
-      assert.dom(_findByListItemText(screen, 'Parcours Accès Simplifié : Oui')).exists();
+      const termsList = screen.getAllByRole('term');
+      const definitionsList = screen.getAllByRole('definition');
+
+      assert.strictEqual(termsList[7].textContent.trim(), t('pages.target-profiles.label.simplified-access'));
+      assert.strictEqual(definitionsList[7].textContent.trim(), t('common.words.yes'));
     });
 
     test('it should outdate target profile', async function (assert) {
@@ -135,7 +150,14 @@ module('Acceptance | Target Profile Management', function (hooks) {
       assert
         .dom(
           await screen.findByText((_, e) => {
-            return e.textContent.trim() === 'Obsolète : Oui';
+            return e.textContent.trim() === t('pages.target-profiles.label.outdated');
+          }),
+        )
+        .exists();
+      assert
+        .dom(
+          await screen.findByText((_, e) => {
+            return e.textContent.trim() === t('common.words.yes');
           }),
         )
         .exists();
@@ -143,13 +165,3 @@ module('Acceptance | Target Profile Management', function (hooks) {
     });
   });
 });
-
-// workaround https://github.com/testing-library/dom-testing-library/issues/201#issuecomment-484890360
-function _findByListItemText(screen, text) {
-  return (
-    screen.getAllByRole('listitem').find((listitem) => {
-      const cleanListItemText = listitem.textContent.replace(/(\r\n|\n|\r)/gm, '').trim();
-      return cleanListItemText === text;
-    }) || null
-  );
-}

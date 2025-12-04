@@ -3,7 +3,7 @@ import Component from '@glimmer/component';
 
 export default class HabilitationTag extends Component {
   get className() {
-    return `habilitation-icon habilitation-icon--${this.args.active ? '' : 'non-'}granted`;
+    return `certification-center-information-display__habilitations-list--${this.args.active ? 'enabled' : 'disabled'}`;
   }
 
   get icon() {
@@ -13,8 +13,8 @@ export default class HabilitationTag extends Component {
   }
 
   <template>
-    <li aria-label={{@arialabel}}>
-      <PixIcon class={{this.className}} @name={{this.icon}} @plainIcon={{true}} />
+    <li aria-label={{@arialabel}} class={{this.className}}>
+      <PixIcon @name={{this.icon}} />
       {{@label}}
     </li>
   </template>

@@ -95,7 +95,7 @@ module('Acceptance | Target profile creation', function (hooks) {
       assert.dom(screen.getByText('Le profil cible a été créé avec succès.')).exists();
 
       await _unfoldLearningContent();
-      assert.dom(screen.getByRole('heading', { name: 'Un profil cible interne, et vite !', level: 2 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Un profil cible interne, et vite !', level: 1 })).exists();
       let isMobileCompliant = screen.getByTestId('mobile-compliant-tube_f1_a1_c1_th1_tu1').getAttribute('aria-label');
       let isTabletCompliant = screen.getByTestId('tablet-compliant-tube_f1_a1_c1_th1_tu1').getAttribute('aria-label');
       assert.deepEqual(
