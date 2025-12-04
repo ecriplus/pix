@@ -42,6 +42,7 @@ module('Integration | Component | badges/badge', function (hooks) {
     assert.dom(screen.getByText(badge.message)).exists();
     assert.dom(screen.getByText(badge.key)).exists();
     assert.dom(screen.getByText(badge.altMessage)).exists();
+    assert.dom(screen.getByText(badge.imageUrl)).exists();
     assert.dom(screen.getByText('Certifiable')).exists();
     assert.dom(screen.getByText('Lacunes')).exists();
     assert.dom(screen.getByRole('presentation')).exists();
@@ -71,7 +72,7 @@ module('Integration | Component | badges/badge', function (hooks) {
       id: '42',
       title: 'mon titre',
       message: 'mon message',
-      imageUrl: 'data:,',
+      imageUrl: 'https://assets.pix.org/badges/new_badge.svg',
       key: 'ma clef',
       altMessage: 'mon message alternatif',
       isCertifiable: true,

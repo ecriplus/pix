@@ -32,8 +32,6 @@ export default class Badge extends Component {
     });
   }
 
-  IMAGE_BASE_URL = 'https://assets.pix.org/badges/';
-
   get isCertifiableText() {
     return this.args.badge.isCertifiable ? 'Certifiable' : 'Non certifiable';
   }
@@ -42,8 +40,8 @@ export default class Badge extends Component {
     return this.args.badge.isAlwaysVisible ? 'Lacunes' : null;
   }
 
-  get imageName() {
-    return this.args.badge.imageUrl.slice(this.IMAGE_BASE_URL.length);
+  get imageUrl() {
+    return this.args.badge.imageUrl;
   }
 
   get campaignScopeCriterion() {
@@ -66,7 +64,7 @@ export default class Badge extends Component {
         altMessage: this.form.altMessage,
         isCertifiable: this.form.isCertifiable,
         isAlwaysVisible: this.form.isAlwaysVisible,
-        imageUrl: this.IMAGE_BASE_URL + this.form.imageName,
+        imageUrl: this.form.imageUrl,
       };
       await this.args.onUpdateBadge(badgeDTO);
       this.pixToast.sendSuccessNotification({ message: 'Le badge a été mis à jour.' });
@@ -121,7 +119,7 @@ export default class Badge extends Component {
       altMessage: this.args.badge.altMessage,
       isCertifiable: this.args.badge.isCertifiable,
       isAlwaysVisible: this.args.badge.isAlwaysVisible,
-      imageName: this.imageName,
+      imageUrl: this.args.badge.imageUrl,
     };
   }
 
@@ -162,10 +160,10 @@ export default class Badge extends Component {
             <div class="badge-edit-form__field">
               <PixInput
                 class="form-control"
-                @value={{this.form.imageName}}
+                @value={{this.form.imageUrl}}
                 @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (this.onFormInputChange "imageName")}}
-              ><:label>Nom de l'image (svg)</:label></PixInput>
+                {{on "input" (this.onFormInputChange "imageUrl")}}
+              ><:label>Url de l'image (svg)</:label></PixInput>
             </div>
             <div class="badge-edit-form__field">
               <PixInput
@@ -224,8 +222,8 @@ export default class Badge extends Component {
                 <dd class="page-details__value">{{@badge.key}}</dd>
                 <dt class="page-details__label">Nom du badge&nbsp;:&nbsp;</dt>
                 <dd class="page-details__value">{{@badge.title}}</dd>
-                <dt class="page-details__label">Image&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{this.imageName}}</dd>
+                <dt class="page-details__label">Url de l'image&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{this.imageUrl}}</dd>
                 <dt class="page-details__label">Message&nbsp;:&nbsp;</dt>
                 <dd class="page-details__value">
                   <blockquote>
