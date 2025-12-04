@@ -113,26 +113,6 @@ module('Integration | Component | certification-joiner', function (hooks) {
       );
     });
 
-    test('should display an error message if session id contains letters', async function (assert) {
-      // given
-      this.set('onStepChange', sinon.stub());
-      const screen = await render(hbs`<CertificationJoiner @onStepChange={{this.onStepChange}} />`);
-      const sessionIdWithLetters = '123AAA456AAA';
-
-      await _fillInputsToJoinSession({ sessionId: sessionIdWithLetters, screen, t });
-
-      const store = this.owner.lookup('service:store');
-      const createRecordMock = sinon.mock();
-      createRecordMock.returns({ save: function () {} });
-      store.createRecord = createRecordMock;
-
-      // when
-      await click(screen.getByRole('button', { name: t('pages.certification-joiner.form.actions.submit') }));
-
-      // then
-      assert.ok(screen.getByText('Le numéro de session est composé uniquement de chiffres.'));
-    });
-
     test('should display an error message on student mismatch error', async function (assert) {
       // given
       this.set('onStepChange', sinon.stub());
@@ -314,7 +294,7 @@ module('Integration | Component | certification-joiner', function (hooks) {
     // then
     assert
       .dom(
-        screen.getByRole('textbox', {
+        screen.getByRole('spinbutton', {
           name: 'Numéro de session Communiqué uniquement par le surveillant en début de session',
         }),
       )
@@ -403,7 +383,7 @@ module('Integration | Component | certification-joiner', function (hooks) {
 
   async function _fillInputsToJoinSession({ sessionId = '123456', screen, t }) {
     await fillIn(
-      screen.getByRole('textbox', {
+      screen.getByRole('spinbutton', {
         name: 'Numéro de session Communiqué uniquement par le surveillant en début de session',
       }),
       sessionId,

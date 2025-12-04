@@ -15,7 +15,7 @@ export async function fillCertificationJoiner({
   const screen = await getScreen();
 
   await fillIn(
-    screen.getByRole('textbox', {
+    screen.getByRole('spinbutton', {
       name: `${t('pages.certification-joiner.form.fields.session-number')} ${t('pages.certification-joiner.form.fields.session-number-information')}`,
     }),
     sessionId,
