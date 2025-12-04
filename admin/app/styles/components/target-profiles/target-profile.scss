@@ -2,6 +2,8 @@
 @use 'pix-design-tokens/breakpoints';
 
 .target-profile-section {
+  margin-bottom: var(--pix-spacing-6x);
+
   &__container {
     display: flex;
     flex-direction: column;

@@ -2,6 +2,7 @@
 @use 'pix-design-tokens/breakpoints';
 
 .training-details-card {
+  margin-bottom: var(--pix-spacing-6x);
 
   &__title {
     @extend %pix-title-xs;

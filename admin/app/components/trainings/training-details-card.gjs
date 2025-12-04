@@ -18,82 +18,79 @@ export default class TrainingDetailsCard extends Component {
   }
 
   <template>
-    {{! template-lint-disable no-redundant-role }}
-    <article class="training-details-card" role="article">
-      <h1 class="training-details-card__title">{{@training.internalTitle}}</h1>
-      <StateTag @isDisabled={{@training.isDisabled}} />
-      <div class="training-details-card__content">
-        <DescriptionList>
+    <h1 class="training-details-card__title">{{@training.internalTitle}}</h1>
+    <StateTag @isDisabled={{@training.isDisabled}} />
+    <div class="training-details-card__content">
+      <DescriptionList>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.title"}}>
-            {{@training.title}}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.title"}}>
+          {{@training.title}}
+        </DescriptionList.Item>
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.publishedOn"}}>
-            <a
-              href={{@training.link}}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="{{@training.link}} (nouvelle fenêtre)"
-            >
-              {{@training.link}}
-            </a>
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.publishedOn"}}>
+          <a
+            href={{@training.link}}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="{{@training.link}} (nouvelle fenêtre)"
+          >
+            {{@training.link}}
+          </a>
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.contentType"}}>
-            {{@training.type}}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.contentType"}}>
+          {{@training.type}}
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.duration"}}>
-            {{this.formattedDuration}}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.duration"}}>
+          {{this.formattedDuration}}
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.localizedLanguage"}}>
-            {{this.formattedLocale}}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.localizedLanguage"}}>
+          {{this.formattedLocale}}
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.editorName"}}>
-            {{@training.editorName}}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.editorName"}}>
+          {{@training.editorName}}
+        </DescriptionList.Item>
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.editorLogo"}}>
-            <a
-              href={{@training.editorLogoUrl}}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={{t "pages.trainings.training.details.editor-logo-aria-label"}}
-            >
-              {{@training.editorLogoUrl}}
-            </a>
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.editorLogo"}}>
+          <a
+            href={{@training.editorLogoUrl}}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={{t "pages.trainings.training.details.editor-logo-aria-label"}}
+          >
+            {{@training.editorLogoUrl}}
+          </a>
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-          <DescriptionList.Item @label={{t "pages.trainings.training.details.status"}}>
-            {{if
-              @training.isRecommendable
-              (t "pages.trainings.training.details.status-label.enabled")
-              (t "pages.trainings.training.details.status-label.disabled")
-            }}
-          </DescriptionList.Item>
+        <DescriptionList.Item @label={{t "pages.trainings.training.details.status"}}>
+          {{if
+            @training.isRecommendable
+            (t "pages.trainings.training.details.status-label.enabled")
+            (t "pages.trainings.training.details.status-label.disabled")
+          }}
+        </DescriptionList.Item>
 
-          <DescriptionList.Divider />
+        <DescriptionList.Divider />
 
-        </DescriptionList>
-        <div class="training-details-card__editor-logo">
-          <img src={{@training.editorLogoUrl}} alt={{@training.editorName}} />
-        </div>
+      </DescriptionList>
+      <div class="training-details-card__editor-logo">
+        <img src={{@training.editorLogoUrl}} alt={{@training.editorName}} />
       </div>
-    </article>
+    </div>
   </template>
 }

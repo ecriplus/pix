@@ -113,7 +113,7 @@ export default class Training extends Component {
 
     {{! template-lint-disable no-redundant-role }}
     <main class="page-body" role="main">
-      <section class="page-section">
+      <article class="page-section training-details-card">
         {{#if this.isEditMode}}
           <TrainingCreateOrUpdateTrainingForm
             @model={{@model}}
@@ -133,7 +133,7 @@ export default class Training extends Component {
             </div>
           {{/if}}
         {{/if}}
-      </section>
+      </article>
 
       <PixTabs
         @variant="primary"

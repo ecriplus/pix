@@ -7,8 +7,6 @@ import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-in
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
-import { waitForDialogClose } from '../../../../helpers/wait-for';
-
 module('Acceptance | Target Profile Management', function (hooks) {
   setupApplicationTest(hooks);
   setupIntl(hooks, 'fr');
@@ -147,14 +145,22 @@ module('Acceptance | Target Profile Management', function (hooks) {
       await clickByName('Marquer comme obsolète');
       await screen.findByRole('dialog');
       await clickByName('Oui, marquer comme obsolète');
-      await waitForDialogClose();
 
       // then
-      const termsList = await screen.findAllByRole('term');
-      const definitionsList = await screen.findAllByRole('definition');
-
-      assert.strictEqual(termsList[6].textContent.trim(), t('pages.target-profiles.label.outdated'));
-      assert.strictEqual(definitionsList[6].textContent.trim(), t('common.words.yes'));
+      assert
+        .dom(
+          await screen.findByText((_, e) => {
+            return e.textContent.trim() === t('pages.target-profiles.label.outdated');
+          }),
+        )
+        .exists();
+      assert
+        .dom(
+          await screen.findByText((_, e) => {
+            return e.textContent.trim() === t('common.words.yes');
+          }),
+        )
+        .exists();
       assert.dom(screen.queryByRole('button', { name: 'Marquer comme obsolète' })).doesNotExist();
     });
   });

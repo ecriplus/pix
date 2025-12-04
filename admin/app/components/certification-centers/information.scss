@@ -3,6 +3,7 @@
 @use 'pix-design-tokens/typography';
 
 .certification-center-information {
+  margin-bottom: var(--pix-spacing-6x);
 
   &__edit-title{
     @extend %pix-title-s;
