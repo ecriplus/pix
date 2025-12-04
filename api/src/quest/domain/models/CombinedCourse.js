@@ -5,8 +5,10 @@ import {
   CombinedCourseStatuses,
 } from '../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
+import { Campaign } from './Campaign.js';
 import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
 import { CombinedCourseParticipationDetails } from './CombinedCourseParticipationDetails.js';
+import { Module } from './Module.js';
 import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
@@ -238,7 +240,9 @@ export class CombinedCourseDetails extends CombinedCourse {
       const isLocked = this.#isCombinedCourseItemLocked(previousItem);
 
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
+        const campaign = itemDetails.find(
+          (item) => item.id === requirement.data.campaignId.data && item instanceof Campaign,
+        );
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
 
         const associatedParticipation = dataForQuest?.campaignParticipations?.find(
@@ -267,7 +271,7 @@ export class CombinedCourseDetails extends CombinedCourse {
         );
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
-        const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
+        const module = itemDetails.find((item) => item.id === requirement.data.moduleId.data && item instanceof Module);
 
         const recommandableModule = recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,

@@ -1,3 +1,4 @@
+import { Campaign } from '../../../../src/quest/domain/models/Campaign.js';
 import { CombinedCourse, CombinedCourseDetails } from '../../../../src/quest/domain/models/CombinedCourse.js';
 import { DataForQuest } from '../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../src/quest/domain/models/Eligibility.js';
@@ -62,7 +63,11 @@ function buildCombinedCourse({ combinedCourse, quest } = {}) {
 }
 
 function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
-  const campaign = domainBuilder.buildCampaign({ title: 'diagnostique', code: 'ABCDIAG1' });
+  const campaign = new Campaign({
+    id: quest !== undefined ? quest.successRequirements[0].data.campaignId.data : 1,
+    title: 'diagnostique',
+    code: 'ABCDIAG1',
+  });
   const module = new Module({
     id: 7,
     slug: 'slug',
