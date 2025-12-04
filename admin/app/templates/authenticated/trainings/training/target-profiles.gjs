@@ -85,14 +85,12 @@ import t from 'ember-intl/helpers/t';
                 </:header>
                 <:cell>
                   <div class="training-target-profiles-table__actions">
-                    {{#if @controller.displayFilterOrganizationsLink}}
                       <PixButtonLink
                         @variant="primary-bis"
                         @route="authenticated.trainings.training.target-profiles.organizations"
                         @model={{row.id}}
                       >Filtrer par organisations
                       </PixButtonLink>
-                    {{/if}}
                     <PixButton
                       @variant="error"
                       @iconBefore="delete"
