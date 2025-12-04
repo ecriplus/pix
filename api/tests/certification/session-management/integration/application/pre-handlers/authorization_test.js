@@ -17,7 +17,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
           server.route([
             {
               method: 'GET',
-              path: '/api/test/sessions/{sessionId}/supervisor-kit',
+              path: '/api/test/sessions/{sessionId}/invigilator-kit',
               handler: (r, h) => h.response().code(200),
               config: {
                 pre: [
@@ -53,7 +53,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
 
           const options = {
             method: 'GET',
-            url: `/api/test/sessions/${sessionId}/supervisor-kit`,
+            url: `/api/test/sessions/${sessionId}/invigilator-kit`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -80,7 +80,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
 
           const options = {
             method: 'GET',
-            url: `/api/test/sessions/${sessionId}/supervisor-kit`,
+            url: `/api/test/sessions/${sessionId}/invigilator-kit`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -104,7 +104,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
           server.route([
             {
               method: 'GET',
-              path: '/api/test/sessions/{sessionId}/supervisor-kit',
+              path: '/api/test/sessions/{sessionId}/invigilator-kit',
               handler: (r, h) => h.response().code(200),
               config: {
                 pre: [
@@ -122,7 +122,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
       httpServerTest.setupAuthentication();
     });
 
-    context('when the user is authenticated and has supervisor access to the given session', function () {
+    context('when the user is authenticated and has invigilator access to the given session', function () {
       it('should return 200', async function () {
         // given
         const { id: userId } = databaseBuilder.factory.buildUser();
@@ -135,7 +135,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
 
         const options = {
           method: 'GET',
-          url: `/api/test/sessions/${sessionId}/supervisor-kit`,
+          url: `/api/test/sessions/${sessionId}/invigilator-kit`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -147,7 +147,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
       });
     });
 
-    context('when the user is authenticated and has no supervisor access to the given session', function () {
+    context('when the user is authenticated and has no invigilator access to the given session', function () {
       it('should return 403', async function () {
         // given
         const { id: userId } = databaseBuilder.factory.buildUser();
@@ -159,7 +159,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
 
         const options = {
           method: 'GET',
-          url: `/api/test/sessions/${sessionId}/supervisor-kit`,
+          url: `/api/test/sessions/${sessionId}/invigilator-kit`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 

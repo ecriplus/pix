@@ -40,9 +40,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             certificationCourseId,
           });
 
-          const supervisorUserId = databaseBuilder.factory.buildUser({}).id;
+          const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
           databaseBuilder.factory.buildSupervisorAccess({
-            userId: supervisorUserId,
+            userId: invigilatorUserId,
             sessionId,
           });
 
@@ -51,7 +51,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'POST',
             url: `/api/certification-candidates/${candidate.id}/authorize-to-start`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' }),
             payload: { 'authorized-to-start': true },
           };
 
@@ -67,7 +67,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
   describe('POST /api/certification-candidates/{certificationCandidateId}/authorize-to-resume', function () {
     context('when user is authenticated', function () {
-      context('when the user is the supervisor of the session', function () {
+      context('when the user is the invigilator of the session', function () {
         it('should return a 204 status code', async function () {
           // given
           const server = await createServer();
@@ -94,9 +94,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             certificationCourseId,
           });
 
-          const supervisorUserId = databaseBuilder.factory.buildUser({}).id;
+          const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
           databaseBuilder.factory.buildSupervisorAccess({
-            userId: supervisorUserId,
+            userId: invigilatorUserId,
             sessionId,
           });
 
@@ -105,7 +105,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'POST',
             url: `/api/certification-candidates/${candidate.id}/authorize-to-resume`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' }),
           };
 
           // when
@@ -120,7 +120,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
   describe('PATCH /api/certification-candidates/{certificationCandidateId}/end-assessment-by-supervisor', function () {
     context('when user is authenticated', function () {
-      context('when the user is the supervisor of the session', function () {
+      context('when the user is the invigilator of the session', function () {
         it('should return a 204 status code', async function () {
           // given
           const server = await createServer();
@@ -154,9 +154,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             skillId: 'skillId',
           });
 
-          const supervisorUserId = databaseBuilder.factory.buildUser({}).id;
+          const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
           databaseBuilder.factory.buildSupervisorAccess({
-            userId: supervisorUserId,
+            userId: invigilatorUserId,
             sessionId,
           });
 
@@ -164,7 +164,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'PATCH',
             url: `/api/certification-candidates/1001/end-assessment-by-supervisor`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' }),
           };
 
           // when

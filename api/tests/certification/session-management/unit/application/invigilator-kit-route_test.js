@@ -5,7 +5,7 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Invigilator Kit', function () {
-  describe('GET /api/sessions/{sessionId}/supervisor-kit', function () {
+  describe('GET /api/sessions/{sessionId}/invigilator-kit', function () {
     it('should return 200', async function () {
       // when
       sinon.stub(authorization, 'checkUserHaveCertificationCenterMembershipForSession').resolves(true);
@@ -15,7 +15,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Inv
 
       const auth = { credentials: { userId: 99 }, strategy: {} };
 
-      const response = await httpTestServer.request('GET', '/api/sessions/3/supervisor-kit', {}, auth);
+      const response = await httpTestServer.request('GET', '/api/sessions/3/invigilator-kit', {}, auth);
 
       // then
       expect(response.statusCode).to.equal(200);
@@ -31,7 +31,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Inv
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
-        const response = await httpTestServer.request('GET', '/api/sessions/3/supervisor-kit', {}, auth);
+        const response = await httpTestServer.request('GET', '/api/sessions/3/invigilator-kit', {}, auth);
 
         // then
         expect(response.statusCode).to.equal(403);

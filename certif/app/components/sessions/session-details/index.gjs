@@ -21,7 +21,7 @@ export default class SessionDetails extends Component {
   async fetchInvigilatorKit() {
     try {
       const token = this.session.data.authenticated.access_token;
-      await this.fileSaver.save({ url: this.args.model.sessionManagement.urlToDownloadSupervisorKitPdf, token });
+      await this.fileSaver.save({ url: this.args.model.sessionManagement.urlToDownloadInvigilatorKitPdf, token });
     } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.api-error-messages.internal-server-error') });
     }

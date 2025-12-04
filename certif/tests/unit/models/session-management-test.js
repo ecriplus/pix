@@ -8,8 +8,8 @@ import config from '../../../config/environment';
 module('Unit | Model | sessionManagement', function (hooks) {
   setupTest(hooks);
 
-  module('#urlToDownloadSupervisorKitPdf', function () {
-    test('it should return the correct urlToDownloadSupervisorKitPdf', function (assert) {
+  module('#urlToDownloadInvigilatorKitPdf', function () {
+    test('it should return the correct urlToDownloadInvigilatorKitPdf', function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('session-management', { id: '1' });
@@ -24,7 +24,7 @@ module('Unit | Model | sessionManagement', function (hooks) {
       this.owner.register('service:session', SessionStub);
 
       // when/then
-      assert.strictEqual(model.urlToDownloadSupervisorKitPdf, `${config.APP.API_HOST}/api/sessions/1/supervisor-kit`);
+      assert.strictEqual(model.urlToDownloadInvigilatorKitPdf, `${config.APP.API_HOST}/api/sessions/1/invigilator-kit`);
     });
   });
 

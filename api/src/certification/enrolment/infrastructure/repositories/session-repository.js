@@ -70,10 +70,10 @@ export async function remove({ id }) {
     const certificationCandidateIdsInSession = await knex('certification-candidates')
       .where({ sessionId: id })
       .pluck('id');
-    const supervisorAccessIds = await knex('supervisor-accesses').where({ sessionId: id }).pluck('id');
+    const invigilatorAccessIds = await knex('supervisor-accesses').where({ sessionId: id }).pluck('id');
 
-    if (supervisorAccessIds) {
-      await trx('supervisor-accesses').whereIn('id', supervisorAccessIds).del();
+    if (invigilatorAccessIds) {
+      await trx('supervisor-accesses').whereIn('id', invigilatorAccessIds).del();
     }
 
     if (certificationCandidateIdsInSession.length) {

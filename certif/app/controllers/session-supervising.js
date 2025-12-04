@@ -26,7 +26,7 @@ export default class SessionSupervisingController extends Controller {
   @action
   async fetchInvigilatorKit() {
     const token = this.session.data.authenticated.access_token;
-    const url = `/api/sessions/${this.model.id}/supervisor-kit`;
+    const url = `/api/sessions/${this.model.id}/invigilator-kit`;
 
     try {
       await this.fileSaver.save({ url, token });
