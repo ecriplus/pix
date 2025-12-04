@@ -8,6 +8,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { uniqueId } from '@ember/helper';
 import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -21,6 +22,7 @@ const debounceTime = ENV.pagination.debounce;
 export default class CombinedCourse extends Component {
   @service intl;
   @service locale;
+  @service router;
   @service currentUser;
 
   get statusesOptions() {
@@ -57,6 +59,10 @@ export default class CombinedCourse extends Component {
           empty: 'common.filters.groups.empty',
         };
   }
+
+  onClickParticipation = (participation) => {
+    this.router.transitionTo('authenticated.combined-course.participation-detail', participation.id);
+  };
 
   get divisionColumnName() {
     return this.intl.t(`components.group.${this.isScoOrganization ? 'SCO' : 'SUP'}`);
@@ -128,6 +134,7 @@ export default class CombinedCourse extends Component {
         @caption={{t "pages.combined-course.table.description"}}
         @data={{@participations}}
         class="table"
+        @onRowClick={{this.onClickParticipation}}
       >
         <:columns as |participation context|>
           <PixTableColumn @context={{context}}>
@@ -135,7 +142,9 @@ export default class CombinedCourse extends Component {
               {{t "pages.combined-course.table.column.last-name"}}
             </:header>
             <:cell>
-              {{participation.lastName}}
+              <LinkTo @route="authenticated.combined-course.participation-detail" @model={{participation.id}}>
+                {{participation.lastName}}
+              </LinkTo>
             </:cell>
           </PixTableColumn>
 
