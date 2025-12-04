@@ -608,7 +608,11 @@
                     "placeholder": "nom du gestionnaire",
                     "ariaLabel": "nom du gestionnaire",
                     "defaultValue": "",
-                    "tolerances": [],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Gardemots"
                     ]
