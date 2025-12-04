@@ -18,7 +18,12 @@ export class Version {
     assessmentDuration: Joi.number().required(),
     globalScoringConfiguration: Joi.array().allow(null).optional(),
     competencesScoringConfiguration: Joi.array().allow(null).optional(),
-    challengesConfiguration: Joi.object().required(),
+    challengesConfiguration: Joi.object()
+      .keys({
+        defaultCandidateCapacity: Joi.number().required(),
+      })
+      .unknown(true)
+      .required(),
   });
 
   /**
@@ -31,6 +36,7 @@ export class Version {
    * @param {Array<Object>} [params.globalScoringConfiguration] - Global scoring configuration
    * @param {Array<Object>} [params.competencesScoringConfiguration] - Competences scoring configuration
    * @param {Object} params.challengesConfiguration - Challenges configuration
+   * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
    */
   constructor({
     id,

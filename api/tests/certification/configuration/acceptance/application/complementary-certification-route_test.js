@@ -306,7 +306,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(certificationVersion.scope).to.equal(complementaryCertification.key);
       expect(certificationVersion.expirationDate).to.be.null;
       expect(certificationVersion.assessmentDuration).to.equal(DEFAULT_SESSION_DURATION_MINUTES);
-      expect(certificationVersion.challengesConfiguration).to.deep.equal({});
+      expect(certificationVersion.challengesConfiguration).to.deep.equal({ defaultCandidateCapacity: 0 });
       expect(certificationVersion.startDate).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')

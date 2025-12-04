@@ -8,6 +8,7 @@ const defaultChallengesConfiguration = {
   limitToOneQuestionPerTube: true,
   enablePassageByAllCompetences: true,
   variationPercent: 0.5,
+  defaultCandidateCapacity: -3,
 };
 
 const defaultGlobalScoringConfiguration = [

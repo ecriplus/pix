@@ -46,7 +46,11 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         competencesScoringConfiguration: [
           { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
         ],
-        challengesConfiguration: { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+        challengesConfiguration: {
+          maximumAssessmentLength: 32,
+          limitToOneQuestionPerTube: true,
+          defaultCandidateCapacity: -3,
+        },
       });
 
       const tube1 = domainBuilder.buildTube({
@@ -170,7 +174,9 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
           startDate: new Date('2025-10-20T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-          challengesConfiguration: {},
+          challengesConfiguration: {
+            defaultCandidateCapacity: 0,
+          },
         }),
       );
       expect(versionFrameworkChallenges).to.deep.equal(frFrChallenges);

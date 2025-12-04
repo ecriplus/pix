@@ -44,7 +44,9 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
       startDate: dayjs().toDate(),
       expirationDate: null,
       assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-      challengesConfiguration: {},
+      challengesConfiguration: {
+        defaultCandidateCapacity: 0,
+      },
     });
   }
 

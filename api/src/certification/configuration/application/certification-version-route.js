@@ -92,6 +92,7 @@ const register = async function (server) {
                   limitToOneQuestionPerTube: Joi.boolean(),
                   enablePassageByAllCompetences: Joi.boolean(),
                   variationPercent: Joi.number().min(0).max(1),
+                  defaultCandidateCapacity: Joi.number().required(),
                 }).required(),
               },
             },

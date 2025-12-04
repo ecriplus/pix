@@ -9,7 +9,9 @@ export const buildVersion = ({
   assessmentDuration = 105,
   globalScoringConfiguration,
   competencesScoringConfiguration,
-  challengesConfiguration = {},
+  challengesConfiguration = {
+    defaultCandidateCapacity: -3,
+  },
 } = {}) => {
   return new Version({
     id,

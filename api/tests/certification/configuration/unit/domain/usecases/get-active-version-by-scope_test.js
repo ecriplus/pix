@@ -24,7 +24,11 @@ describe('Certification | Configuration | Unit | UseCase | get-active-version-by
       competencesScoringConfiguration: [
         { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
       ],
-      challengesConfiguration: { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+      challengesConfiguration: {
+        maximumAssessmentLength: 32,
+        limitToOneQuestionPerTube: true,
+        defaultCandidateCapacity: -3,
+      },
     });
 
     versionsRepository.findActiveByScope.resolves(expectedVersion);

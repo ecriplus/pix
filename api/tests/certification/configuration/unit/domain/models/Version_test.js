@@ -14,7 +14,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
       assessmentDuration: 120,
       globalScoringConfiguration: [{ capacity: 2.5 }],
       competencesScoringConfiguration: [{ competence1: 'config' }],
-      challengesConfiguration: { minChallenges: 5, maxChallenges: 10 },
+      challengesConfiguration: { minChallenges: 5, maxChallenges: 10, defaultCandidateCapacity: -8 },
     };
 
     // when
@@ -35,7 +35,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
       assessmentDuration: 90,
       globalScoringConfiguration: null,
       competencesScoringConfiguration: null,
-      challengesConfiguration: { minChallenges: 3 },
+      challengesConfiguration: { minChallenges: 3, defaultCandidateCapacity: -8 },
     };
 
     // when

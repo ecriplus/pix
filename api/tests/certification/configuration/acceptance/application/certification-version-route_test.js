@@ -20,7 +20,11 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     it('should get the active certification version for a given scope and return 200', async function () {
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
-      const challengesConfiguration = { maximumAssessmentLength: 20, limitToOneQuestionPerTube: false };
+      const challengesConfiguration = {
+        maximumAssessmentLength: 20,
+        limitToOneQuestionPerTube: false,
+        defaultCandidateCapacity: -3,
+      };
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.CORE,
@@ -76,6 +80,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         maximumAssessmentLength: 20,
         challengesBetweenSameCompetence: 0,
         limitToOneQuestionPerTube: false,
+        defaultCandidateCapacity: -3,
       };
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
@@ -97,6 +102,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         maximumAssessmentLength: 32,
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
+        defaultCandidateCapacity: -3,
       };
 
       const options = {

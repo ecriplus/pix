@@ -15,7 +15,11 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
         competencesScoringConfiguration: [
           { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
         ],
-        challengesConfiguration: { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+        challengesConfiguration: {
+          maximumAssessmentLength: 32,
+          limitToOneQuestionPerTube: true,
+          defaultCandidateCapacity: -3,
+        },
       };
 
       const result = serializer.serialize(certificationVersion);
@@ -33,7 +37,11 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
             'competences-scoring-configuration': [
               { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
             ],
-            'challenges-configuration': { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+            'challenges-configuration': {
+              maximumAssessmentLength: 32,
+              limitToOneQuestionPerTube: true,
+              defaultCandidateCapacity: -3,
+            },
           },
         },
       });
@@ -55,7 +63,11 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
             'competences-scoring-configuration': [
               { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
             ],
-            'challenges-configuration': { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+            'challenges-configuration': {
+              maximumAssessmentLength: 32,
+              limitToOneQuestionPerTube: true,
+              defaultCandidateCapacity: -3,
+            },
           },
         },
       };
@@ -74,6 +86,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
       expect(result.challengesConfiguration).to.deep.equal({
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
+        defaultCandidateCapacity: -3,
       });
     });
   });

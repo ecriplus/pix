@@ -21,7 +21,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
             values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }],
           },
         ],
-        challengesConfiguration: { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true },
+        challengesConfiguration: {
+          maximumAssessmentLength: 32,
+          limitToOneQuestionPerTube: true,
+          defaultCandidateCapacity: -8,
+        },
       });
 
       databaseBuilder.factory.buildComplementaryCertification({ key: version.scope });
@@ -90,7 +94,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
-      const newChallengesConfiguration = { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true };
+      const newChallengesConfiguration = {
+        maximumAssessmentLength: 32,
+        limitToOneQuestionPerTube: true,
+        defaultCandidateCapacity: 1,
+      };
       const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
         id: existingVersion.id,
         scope: existingVersion.scope,
@@ -145,7 +153,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'latest' }],
         competencesScoringConfiguration: [{ config: 'latest' }],
-        challengesConfiguration: { config: 'latest' },
+        challengesConfiguration: { config: 'latest', defaultCandidateCapacity: -3 },
       }).id;
 
       const aScopeWeAreNotInterestedIn = Scopes.CORE;
@@ -156,7 +164,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 150,
         globalScoringConfiguration: [{ other: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'other' },
+        challengesConfiguration: { config: 'other', defaultCandidateCapacity: -8 },
       });
 
       await databaseBuilder.commit();
@@ -173,7 +181,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       expect(result.assessmentDuration).to.equal(120);
       expect(result.globalScoringConfiguration).to.deep.equal([{ config: 'latest' }]);
       expect(result.competencesScoringConfiguration).to.deep.equal([{ config: 'latest' }]);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'latest' });
+      expect(result.challengesConfiguration).to.deep.equal({ config: 'latest', defaultCandidateCapacity: -3 });
     });
 
     context('when no version exists for the scope', function () {
@@ -213,7 +221,9 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'test' }],
         competencesScoringConfiguration: [{ config: 'test' }],
-        challengesConfiguration: { config: 'test' },
+        challengesConfiguration: {
+          defaultCandidateCapacity: 1,
+        },
       }).id;
 
       await databaseBuilder.commit();
@@ -230,7 +240,9 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       expect(result.assessmentDuration).to.equal(120);
       expect(result.globalScoringConfiguration).to.deep.equal([{ config: 'test' }]);
       expect(result.competencesScoringConfiguration).to.deep.equal([{ config: 'test' }]);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'test' });
+      expect(result.challengesConfiguration).to.deep.equal({
+        defaultCandidateCapacity: 1,
+      });
     });
 
     context('when the version does not exist', function () {
