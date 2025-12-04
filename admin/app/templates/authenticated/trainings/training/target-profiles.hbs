@@ -78,7 +78,11 @@
                     >Filtrer par organisations
                     </PixButtonLink>
                   {{/if}}
-                  <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
+                  <PixButton
+                    @variant="error"
+                    @iconBefore="delete"
+                    @triggerAction={{fn this.onClickDetachTargetProfile row}}
+                  >
                     Détacher
                   </PixButton>
                 </div>
@@ -92,3 +96,27 @@
     </section>
   </div>
 {{/if}}
+
+<PixModal
+  @title="Détacher le profil cible du contenu formatif"
+  @onCloseButtonClick={{this.closeModal}}
+  @showModal={{this.showModal}}
+>
+  <:content>
+    <p>
+      Etes-vous sûr de vouloir détacher le profil cible
+      <strong>{{this.targetProfileToDetach.internalName}}</strong>
+      ? Ce profil cible est lié à un parcours apprenant. La recommandation de ce modulix sera altérée si vous le
+      détachez.
+    </p>
+  </:content>
+  <:footer>
+    <PixButton @variant="secondary" @triggerAction={{this.closeModal}}>
+      {{t "common.actions.cancel"}}
+    </PixButton>
+    <PixButton
+      @variant="error"
+      @triggerAction={{fn this.detachTargetProfile this.targetProfileToDetach}}
+    >Confirmer</PixButton>
+  </:footer>
+</PixModal>

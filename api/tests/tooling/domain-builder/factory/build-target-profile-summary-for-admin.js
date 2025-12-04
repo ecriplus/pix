@@ -8,8 +8,9 @@ const buildTargetProfileSummaryForAdmin = function ({
   createdAt,
   ownerOrganizationId,
   sharedOrganizationId,
+  isPartOfCombinedCourse = undefined,
 } = {}) {
-  return new TargetProfileSummaryForAdmin({
+  const targetProfileSummaryForAdmin = new TargetProfileSummaryForAdmin({
     id,
     internalName,
     outdated,
@@ -18,6 +19,10 @@ const buildTargetProfileSummaryForAdmin = function ({
     ownerOrganizationId,
     sharedOrganizationId,
   });
+  if (isPartOfCombinedCourse !== undefined) {
+    targetProfileSummaryForAdmin.isPartOfCombinedCourse = isPartOfCombinedCourse;
+  }
+  return targetProfileSummaryForAdmin;
 };
 
 export { buildTargetProfileSummaryForAdmin };

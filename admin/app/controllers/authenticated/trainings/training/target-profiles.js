@@ -9,6 +9,8 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
   @service router;
   @service featureToggles;
   @tracked targetProfilesToAttach = '';
+  @tracked showModal;
+  @tracked targetProfileToDetach;
 
   @service accessControl;
   @service pixToast;
@@ -27,6 +29,18 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
 
   get displayFilterOrganizationsLink() {
     return this.featureToggles.featureToggles?.isFilteringRecommendedTrainingByOrganizationsEnabled;
+  }
+
+  @action
+  openModal(targetProfile) {
+    this.showModal = true;
+    this.targetProfileToDetach = targetProfile;
+  }
+
+  @action
+  closeModal() {
+    this.showModal = false;
+    this.targetProfileToDetach = null;
   }
 
   @action
@@ -77,22 +91,33 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
   }
 
   @action
-  async detachTargetProfile(targetProfileSummary) {
+  async detachTargetProfile(targetProfile) {
     const { id: trainingId } = this.model.training;
     const { targetProfileSummaries } = this.model;
-    const { id: targetProfileId } = targetProfileSummary;
+    const { id: targetProfileId } = targetProfile;
+
     try {
       const adapter = this.store.adapterFor('training');
       await adapter.detachTargetProfile({
         trainingId,
         targetProfileId,
       });
+      this.closeModal();
       await targetProfileSummaries.reload();
       return this.pixToast.sendSuccessNotification({
         message: `Profil cible détaché avec succès !`,
       });
     } catch (responseError) {
       this._handleResponseError(responseError);
+    }
+  }
+
+  @action
+  async onClickDetachTargetProfile(targetProfile) {
+    if (targetProfile.isPartOfCombinedCourse) {
+      this.openModal(targetProfile);
+    } else {
+      await this.detachTargetProfile(targetProfile);
     }
   }
 

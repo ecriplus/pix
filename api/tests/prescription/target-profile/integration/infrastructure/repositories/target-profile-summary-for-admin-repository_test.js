@@ -319,11 +319,13 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           ...targetProfile1,
           createdAt: undefined,
           category: undefined,
+          isPartOfCombinedCourse: false,
         }),
         domainBuilder.buildTargetProfileSummaryForAdmin({
           ...targetProfile2,
           createdAt: undefined,
           category: undefined,
+          isPartOfCombinedCourse: false,
         }),
       ];
       expect(targetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
