@@ -519,6 +519,7 @@ describe('Acceptance | Controller | training-controller', function () {
           'created-at': undefined,
           'can-detach': false,
           category: undefined,
+          'is-part-of-combined-course': false,
         },
       };
 

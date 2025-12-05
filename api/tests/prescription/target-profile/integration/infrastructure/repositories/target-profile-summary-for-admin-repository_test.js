@@ -1,4 +1,10 @@
+import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import * as targetProfileSummaryForAdminRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../../src/quest/domain/models/Quest.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -211,7 +217,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
             });
 
           // then
-          expect(actualTargetProfileSummaries).to.deep.includes(disciplineTargetProfile);
+          expect(actualTargetProfileSummaries).to.deep.include(disciplineTargetProfile);
         });
       });
 
@@ -328,7 +334,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           isPartOfCombinedCourse: false,
         }),
       ];
-      expect(targetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
+      expect(targetProfileSummaries).to.deep.members(expectedTargetProfileSummaries);
     });
 
     it('should return empty array when no target profile is linked to given training', async function () {
@@ -348,6 +354,79 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       });
 
       expect(targetProfileSummaries).to.be.empty;
+    });
+
+    it('should return a targetProfileSummary instance with correct attribute when target profile is used in a combined course', async function () {
+      // given
+      const training = databaseBuilder.factory.buildTraining();
+
+      const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
+      const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
+
+      const campaignIdInCombinedCourse = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile1.id,
+      }).id;
+
+      const organization = databaseBuilder.factory.buildOrganization();
+
+      databaseBuilder.factory.buildTargetProfileTraining({
+        trainingId: training.id,
+        targetProfileId: targetProfile1.id,
+      });
+      databaseBuilder.factory.buildTargetProfileTraining({
+        trainingId: training.id,
+        targetProfileId: targetProfile2.id,
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId: organization.id,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              campaignId: {
+                data: campaignIdInCombinedCourse,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              status: {
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const targetProfileSummaries = await targetProfileSummaryForAdminRepository.findByTraining({
+        trainingId: training.id,
+      });
+
+      // then
+      expect(targetProfileSummaries).lengthOf(2);
+      expect(targetProfileSummaries).to.deep.equal([
+        {
+          id: targetProfile1.id,
+          internalName: targetProfile1.internalName,
+          outdated: targetProfile1.outdated,
+          createdAt: undefined,
+          category: undefined,
+          isPartOfCombinedCourse: true,
+        },
+        {
+          id: targetProfile2.id,
+          internalName: targetProfile2.internalName,
+          outdated: targetProfile2.outdated,
+          createdAt: undefined,
+          category: undefined,
+          isPartOfCombinedCourse: false,
+        },
+      ]);
     });
   });
 });
