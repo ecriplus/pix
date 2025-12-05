@@ -245,99 +245,6 @@ async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, re
   return parsedData.map((data) => data[requiredFieldNamesForOrganizationBatchArchive]);
 }
 
-const requiredFieldNamesForCampaignsImport = {
-  organizationId: "Identifiant de l'organisation*",
-  name: 'Nom de la campagne*',
-  targetProfileId: 'Identifiant du profil cible*',
-  ownerId: 'Identifiant du propriétaire*',
-  creatorId: 'Identifiant du créateur*',
-};
-
-const optionalFieldNamesForCampaignsImport = {
-  externalIdLabel: "Libellé de l'identifiant externe",
-  externalIdType: "Type de l'identifiant externe",
-  type: 'Type de campagne (Evaluation, Examen)',
-  title: 'Titre du parcours',
-  customLandingPageText: 'Descriptif du parcours',
-  multipleSendings: 'Envoi multiple',
-  customResultPageText: 'Texte de la page de fin de parcours',
-  customResultPageButtonText: 'Texte du bouton de la page de fin de parcours',
-  customResultPageButtonUrl: 'URL du bouton de la page de fin de parcours',
-};
-
-const fieldNamesForCampaignsImport = [
-  ...Object.values(requiredFieldNamesForCampaignsImport),
-  ...Object.values(optionalFieldNamesForCampaignsImport),
-];
-
-async function deserializeForCampaignsImport(file, { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper) {
-  await checkCsvHeader({ filePath: file, requiredFieldNames: Object.values(requiredFieldNamesForCampaignsImport) });
-
-  const cleanedData = await readCsvFile(file);
-  return parseForCampaignsImport(cleanedData, { parseCsvData });
-}
-
-async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper) {
-  const batchCampaignsOptionsWithHeader = {
-    skipEmptyLines: true,
-    header: true,
-    dynamicTyping: false,
-    transformHeader: (header) => header?.trim(),
-    transform: (value, columnName) => {
-      if (typeof value === 'string') {
-        value = value.trim();
-      }
-      if (
-        [
-          requiredFieldNamesForCampaignsImport.organizationId,
-          requiredFieldNamesForCampaignsImport.targetProfileId,
-          requiredFieldNamesForCampaignsImport.creatorId,
-          requiredFieldNamesForCampaignsImport.ownerId,
-        ].includes(columnName)
-      ) {
-        value = parseInt(value, 10);
-      }
-      if (Object.values(requiredFieldNamesForCampaignsImport).includes(columnName) && !value) {
-        throw new FileValidationError(
-          'CSV_CONTENT_NOT_VALID',
-          `${value === '' ? '"empty"' : value} is not a valid value for "${columnName}"`,
-        );
-      }
-      if (columnName === optionalFieldNamesForCampaignsImport.type) {
-        if (value === 'Evaluation') {
-          return CampaignTypes.ASSESSMENT;
-        }
-        if (value === 'Examen') {
-          return CampaignTypes.EXAM;
-        }
-      }
-      return value;
-    },
-  };
-  const data = await parseCsvData(cleanedData, batchCampaignsOptionsWithHeader);
-
-  return data.map((data) => ({
-    organizationId: data[requiredFieldNamesForCampaignsImport.organizationId],
-    name: data[requiredFieldNamesForCampaignsImport.name],
-    targetProfileId: data[requiredFieldNamesForCampaignsImport.targetProfileId],
-    externalIdLabel: data[optionalFieldNamesForCampaignsImport.externalIdLabel],
-    type: data[optionalFieldNamesForCampaignsImport.type] || CampaignTypes.ASSESSMENT,
-    externalIdType:
-      data[optionalFieldNamesForCampaignsImport.externalIdLabel]?.trim()?.length > 0
-        ? data[optionalFieldNamesForCampaignsImport.externalIdType] || 'STRING'
-        : '',
-    creatorId: data[requiredFieldNamesForCampaignsImport.creatorId],
-    title: data[optionalFieldNamesForCampaignsImport.title],
-    customLandingPageText: data[optionalFieldNamesForCampaignsImport.customLandingPageText],
-    multipleSendings:
-      data[optionalFieldNamesForCampaignsImport.multipleSendings].toLowerCase() === 'oui' ? true : false,
-    ownerId: data[requiredFieldNamesForCampaignsImport.ownerId],
-    customResultPageText: data[optionalFieldNamesForCampaignsImport.customResultPageText] || null,
-    customResultPageButtonText: data[optionalFieldNamesForCampaignsImport.customResultPageButtonText] || null,
-    customResultPageButtonUrl: data[optionalFieldNamesForCampaignsImport.customResultPageButtonUrl] || null,
-  }));
-}
-
 function _hasSessionIdAndCandidateInformation(data) {
   return _hasCandidateInformation(data) && data.sessionId;
 }
@@ -541,13 +448,10 @@ function serializeLine(lineArray) {
 }
 
 export {
-  deserializeForCampaignsImport,
   deserializeForCertificationCenterBatchArchive,
   deserializeForOrganizationBatchArchive,
   deserializeForOrganizationsImport,
   deserializeForSessionsImport,
-  fieldNamesForCampaignsImport,
-  parseForCampaignsImport,
   requiredFieldNamesForCertificationCenterBatchArchive,
   requiredFieldNamesForOrganizationBatchArchive,
   requiredFieldNamesForOrganizationsImport,
