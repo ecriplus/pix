@@ -403,91 +403,6 @@
                 {
                   "elements": [
                     {
-                      "id": "ae9cf536-d7b2-423f-872d-b20fc1217716",
-                      "type": "text",
-                      "content": "<p>«&nbsp;Propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
-                    },
-                    {
-                      "id": "90b420d2-029d-4718-b865-8636cbb2daab",
-                      "type": "qcm",
-                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>le contexte</p>"
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>le format</p>"
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>le ton à adopter</p>"
-                        }
-                      ],
-                      "feedbacks": {
-                        "valid": {
-                          "state": "<p>Bien joué ! 🎉</p>",
-                          "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
-                        },
-                        "invalid": {
-                          "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d’entraînement pour des enfants de 6 à 8 ans débutants.</p>"
-                        }
-                      },
-                      "solutions": [
-                        "1",
-                        "2"
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "f64e341e-4e3b-4088-827d-9f353b869749",
-                      "type": "text",
-                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination de joueurs adultes.&nbsp;»</p>"
-                    },
-                    {
-                      "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
-                      "type": "qcm",
-                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>le contexte</p>"
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>le format</p>"
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>le ton à adopter</p>"
-                        }
-                      ],
-                      "feedbacks": {
-                        "valid": {
-                          "state": "<p>Bravo ! 🎉</p>",
-                          "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
-                        },
-                        "invalid": {
-                          "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
-                        }
-                      },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
                       "type": "text",
                       "content": "<p>«&nbsp;Écris un dialogue entre des spectateurs d’un match de volley.&nbsp;»</p>"
@@ -517,7 +432,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le dialogue et le contexte, celui du match de volley.</p>"
+                          "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
                         }
                       },
                       "solutions": [
