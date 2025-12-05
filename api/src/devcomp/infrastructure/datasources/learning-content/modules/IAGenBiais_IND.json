@@ -439,35 +439,35 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.<br></p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Car l’IA a confirmé ce que Paul pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Car la réponse de l’IA est claire et structurée, ça a convaincu Paul.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.<br></p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
+                            "diagnosis": "<p>Ici, la question posée par l’utilisateur comportait déjà un biais&nbsp;: «&nbsp;le jus de pomme est la meilleure boisson au monde&nbsp;». Le logiciel d’IA générative a confirmé ce biais dans sa réponse.</p>"
                           }
                         }
                       ],
