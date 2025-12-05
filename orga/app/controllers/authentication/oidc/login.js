@@ -7,6 +7,7 @@ export default class OidcLoginController extends Controller {
   @service currentDomain;
   @service featureToggles;
   @service session;
+  @service router;
 
   get currentInvitation() {
     const invitationStorage = new SessionStorageEntry('joinInvitationData');
@@ -14,19 +15,12 @@ export default class OidcLoginController extends Controller {
   }
 
   @action
-  async reconcile() {
-    this.isLoading = true;
+  async displayAssociationConfirmation() {
+    this.router.transitionTo('authentication.oidc.confirm', this.model.identity_provider_slug);
+  }
 
-    try {
-      await this.session.authenticate('authenticator:oidc', {
-        authenticationKey: this.args.authenticationKey,
-        identityProviderSlug: this.args.identityProviderSlug,
-        hostSlug: 'user/reconcile',
-      });
-    } catch (responseError) {
-      this.reconcileErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
-    } finally {
-      this.isLoading = false;
-    }
+  @action
+  goToOidcProviderLoginPage() {
+    this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress = true;
   }
 }
