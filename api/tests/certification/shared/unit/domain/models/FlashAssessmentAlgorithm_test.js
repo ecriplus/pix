@@ -9,7 +9,7 @@ const baseFlashAssessmentAlgorithmConfig = {
   enablePassageByAllCompetences: false,
 };
 
-describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlgorithm', function () {
+describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
   let flashAlgorithmImplementation;
 
   beforeEach(function () {
