@@ -370,7 +370,7 @@
               "element": {
                 "id": "aba8fd9b-a0fd-42db-abfc-89ebc37fa983",
                 "type": "text",
-                "content": "<p>Sur internet, certains sujets ou points de vue sont beaucoup plus visibles que d’autres, ils sont parfois sur-représentés. 🌐</p><p><br></p><h5>🤔 Que se passe-t-il alors quand une IA apprend surtout à partir de ces contenus ? </h5><p>Le plus souvent, cette méthode a de très bons résultats. C’est pour cela qu’on l’utilise. </p><p>Cependant,&nbsp; l’IA risque de présenter plus souvent les idées <strong>sur-représentées</strong> dans ses réponses. &nbsp;</p><p>Et ce déséquilibre ne vient pas seulement d’internet ; les personnes qui conçoivent les IA font aussi des choix. En sélectionnant certaines langues ou sources, elles peuvent renforcer des <strong>biais ou des stéréotypes</strong>. ⚠️</p>"
+                "content": "<p>Sur internet, certains sujets ou points de vue sont beaucoup plus visibles que d’autres, ils sont parfois sur-représentés. 🌐</p><h5>🤔 Que se passe-t-il alors quand une IA apprend surtout à partir de ces contenus ? </h5><p>Le plus souvent, cette méthode a de très bons résultats. C’est pour cela qu’on l’utilise. </p><p>Cependant,&nbsp; l’IA risque de présenter plus souvent les idées <strong>sur-représentées</strong> dans ses réponses. &nbsp;</p><p>Et ce déséquilibre ne vient pas seulement d’internet ; les personnes qui conçoivent les IA font aussi des choix. En sélectionnant certaines langues ou sources, elles peuvent renforcer des <strong>biais ou des stéréotypes</strong>. ⚠️</p>"
               }
             }
           ]
@@ -480,7 +480,7 @@
                     {
                       "id": "286f56ef-fce5-4f34-a322-462fea5a7e75",
                       "type": "text",
-                      "content": "<p>Sato n’a jamais été en France. Il se demande à quoi ressemblent les Français.</p>"
+                      "content": "<p>Sato n’a jamais été en France. Il pense que les français portent souvent des bérets.</p>"
                     },
                     {
                       "id": "274394d5-c33a-4e93-9889-c770f5e039d9",
@@ -622,7 +622,7 @@
                     {
                       "id": "0e59aacb-120f-45eb-92f4-d53bbe983d7e",
                       "type": "text",
-                      "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀</p><p><br></p><h5>🤔Savez-vous pourquoi nous tombons parfois dans le piège ?<br></h5><p>Parce que nous croyons plus facilement ce qui va dans le sens de nos idées. C’est ce qu’on appelle le <strong>biais de confirmation</strong>.<br> <br>Et souvent, si notre question contient une opinion,  l’<strong>IA a tendance à la confirmer plutôt qu’à la contredire.</strong></p>"
+                      "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀</p><h5>🤔Savez-vous pourquoi nous tombons parfois dans le piège ?<br></h5><p>Parce que nous croyons plus facilement ce qui va dans le sens de nos idées. C’est ce qu’on appelle le <strong>biais de confirmation</strong>.<br> <br>Et souvent, si notre question contient une opinion,  l’<strong>IA a tendance à la confirmer plutôt qu’à la contredire.</strong></p>"
                     }
                   ]
                 },
@@ -631,7 +631,7 @@
                     {
                       "id": "93bac79a-191d-4cb2-9add-c2b464bffd85",
                       "type": "text",
-                      "content": "<h5>🤔Mais alors… que faire ? <br></h5><p>Il faut rester vigilant, garder un <strong>esprit critique</strong> et toujours <strong>vérifier les réponses</strong> de l’IA. </p><p><br></p><h5>Quelques astuces pour détecter des biais&nbsp;: <br></h5><p>Posez-vous les questions suivantes (si la réponse est «&nbsp;oui&nbsp;», attention 👀)&nbsp;:<br></p><ul><li>Y a-t-il des clichés ou stéréotypes ? 😕<br></li><li>Est-ce qu’un seul point de vue est présenté ? 🙈<br></li><li>Est-ce surtout des opinions plutôt que des faits ? 💭<br></li><li>Les exemples sont-ils tous trop semblables ? 🌍<br><br></li></ul>"
+                      "content": "<h5>🤔Mais alors… que faire ? <br></h5><p>Il faut rester vigilant, garder un <strong>esprit critique</strong> et toujours <strong>vérifier les réponses</strong> de l’IA. </p><h5>Quelques astuces pour détecter des biais&nbsp;: <br></h5><p>Posez-vous les questions suivantes (si la réponse est «&nbsp;oui&nbsp;», attention 👀)&nbsp;:<br></p><ul><li>Y a-t-il des clichés ou stéréotypes ? 😕<br></li><li>Est-ce qu’un seul point de vue est présenté ? 🙈<br></li><li>Est-ce surtout des opinions plutôt que des faits ? 💭<br></li><li>Les exemples sont-ils tous trop semblables ? 🌍<br><br></li></ul>"
                     }
                   ]
                 }
@@ -1009,7 +1009,7 @@
               "element": {
                 "id": "dedd40de-89dd-479e-a79e-ea1ba6b98646",
                 "type": "text",
-                "content": "<p>Enfin,&nbsp;il est important de rester attentif aux biais lorsqu’on utilise l’IA.</p><p>Après en avoir appris davantage sur les biais des IA, quelle résolution pourriez-vous prendre ?</p>"
+                "content": "<p>Après en avoir appris davantage sur les biais des IA, quelle résolution pourriez-vous prendre ?</p>"
               }
             },
             {
@@ -1051,7 +1051,7 @@
                     "id": "5",
                     "content": "<p>Lire les réponses du logiciel d’IA avec un regard critique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée ! Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   }
                 ]
