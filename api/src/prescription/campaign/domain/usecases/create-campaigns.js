@@ -1,4 +1,7 @@
-const createCampaigns = async function ({
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { CampaignTypes } from '../../../shared/domain/constants.js';
+
+const createCampaigns = withTransaction(async function ({
   campaignsToCreate,
   options,
   campaignAdministrationRepository,
@@ -18,7 +21,20 @@ const createCampaigns = async function ({
 
     const campaignToCreate = await campaignCreator.createCampaign(
       {
-        ...campaign,
+        organizationId: campaign.organizationId,
+        ownerId: campaign.ownerId,
+        name: campaign.name,
+        title: campaign.title,
+        type: campaign.type ?? CampaignTypes.ASSESSMENT,
+        targetProfileId: campaign.targetProfileId,
+        creatorId: campaign.creatorId,
+        customLandingPageText: campaign.customLandingPageText,
+        externalIdLabel: campaign.externalIdLabel,
+        externalIdType: campaign.externalIdType,
+        multipleSendings: campaign.multipleSendings,
+        customResultPageText: campaign.customResultPageText,
+        customResultPageButtonText: campaign.customResultPageButtonText,
+        customResultPageButtonUrl: campaign.customResultPageButtonUrl,
         code: generatedCampaignCode,
       },
       options,
@@ -26,7 +42,7 @@ const createCampaigns = async function ({
     enrichedCampaignsData.push(campaignToCreate);
   }
   return campaignAdministrationRepository.save(enrichedCampaignsData);
-};
+});
 
 const _checkIfOwnerIsExistingUser = async function (userRepository, userId) {
   await userRepository.get(userId);

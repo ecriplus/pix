@@ -259,9 +259,9 @@ describe('Acceptance | API | campaign-administration-route', function () {
         const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId }).id;
         await databaseBuilder.commit();
 
-        const buffer = `Identifiant de l'organisation*;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*
-          ${organizationId};Parcours importé par CSV;${targetProfileId};numéro d'étudiant;${userId};;;non;${userId};
-          ${organizationId};Autre parcours importé par CSV;${targetProfileId};numéro d'étudiant;${userId};Titre;Superbe descriptif de parcours;oui;${userId};`;
+        const buffer = `Identifiant de l'organisation*;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Type de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*
+          ${organizationId};Parcours importé par CSV;${targetProfileId};numéro d'étudiant;text;${userId};;;Non;${userId}
+          ${organizationId};Autre parcours importé par CSV;${targetProfileId};numéro d'étudiant;text;${userId};Titre;Superbe descriptif de parcours;Oui;${userId}`;
         const options = {
           method: 'POST',
           url: '/api/admin/campaigns',

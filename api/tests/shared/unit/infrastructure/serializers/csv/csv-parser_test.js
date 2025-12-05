@@ -2,7 +2,7 @@ import iconv from 'iconv-lite';
 
 import { CsvColumn } from '../../../../../../src/shared/infrastructure/serializers/csv/csv-column.js';
 import { CsvParser } from '../../../../../../src/shared/infrastructure/serializers/csv/csv-parser.js';
-import { catchErr, expect } from '../../../../../test-helper.js';
+import { catchErr, catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Shared | Infrastructure | Serializer | CsvParser', function () {
   context('The header is correctly formed', function () {
@@ -41,6 +41,90 @@ describe('Unit | Shared | Infrastructure | Serializer | CsvParser', function () 
 
         expect(result1.col1).to.equal('GodZilla');
         expect(result2.col1).to.equal('Gidora');
+      });
+    });
+
+    context('acceptedValues', function () {
+      it('return a POJO of accepted casting values', async function () {
+        const header = {
+          columns: [new CsvColumn({ property: 'col1', name: 'Column 1', acceptedValues: ['John', 'Jane'] })],
+        };
+
+        const input = `Column 1
+        John
+        Jane`;
+
+        const encodedInput = iconv.encode(input, 'utf8');
+
+        const parser = new CsvParser(encodedInput, header);
+
+        const [result1, result2] = parser.parse();
+
+        expect(result1.col1).equal('John');
+        expect(result2.col1).equal('Jane');
+      });
+
+      it('Throw an error if the value is not accepted', async function () {
+        const header = {
+          columns: [new CsvColumn({ property: 'col1', name: 'Column 1', acceptedValues: ['John', 'Jane'] })],
+        };
+
+        const input = `Column 1
+        Pouet
+        John`;
+
+        const encodedInput = iconv.encode(input, 'utf8');
+
+        const parser = new CsvParser(encodedInput, header);
+
+        const error = catchErrSync(parser.parse, parser)();
+
+        expect(error.code).equal('VALUE_NOT_ACCEPTED');
+        expect(error.meta.field).equal('Column 1');
+        expect(error.meta.value).equal('Pouet');
+        expect(error.meta.acceptedValues).deep.equal(['John', 'Jane']);
+      });
+    });
+
+    context('transformValues', function () {
+      it('return a POJO of tranformed values if found', async function () {
+        const header = {
+          columns: [new CsvColumn({ property: 'col1', name: 'Column 1', transformValues: { John: 'Robert' } })],
+        };
+
+        const input = `Column 1
+        John
+        Jane`;
+
+        const encodedInput = iconv.encode(input, 'utf8');
+
+        const parser = new CsvParser(encodedInput, header);
+
+        const [result1, result2] = parser.parse();
+
+        expect(result1.col1).equal('Robert');
+        expect(result2.col1).equal('Jane');
+      });
+    });
+
+    context('isInteger', function () {
+      it('return a POJO of parsed values if isInteger is true', async function () {
+        const header = {
+          columns: [new CsvColumn({ property: 'col1', name: 'Column 1', isInteger: true })],
+        };
+
+        const input = `Column 1
+        18
+        54`;
+
+        const encodedInput = iconv.encode(input, 'utf8');
+
+        const parser = new CsvParser(encodedInput, header);
+
+        const [result1, result2] = parser.parse();
+
+        expect(result1.col1).equal(18);
+        expect(result2.col1).equal(54);
       });
     });
   });

@@ -123,31 +123,6 @@ describe('Unit | Application | Controller | Campaign administration', function (
     });
   });
 
-  describe('#createCampaigns', function () {
-    it('should return a 204', async function () {
-      // given
-      const userId = Symbol('userId');
-      const path = Symbol('path');
-      const csvSerializerStub = { deserializeForCampaignsImport: sinon.stub() };
-      const request = { auth: { credentials: { userId } }, payload: { path } };
-      sinon.stub(usecases, 'createCampaigns');
-      const deserializedCampaignsToCreate = Symbol('deserializedCampaignsToCreate');
-      csvSerializerStub.deserializeForCampaignsImport.withArgs(path).resolves(deserializedCampaignsToCreate);
-
-      // when
-      const response = await campaignAdministrationController.createCampaigns(request, hFake, {
-        csvSerializer: csvSerializerStub,
-      });
-
-      // then
-      expect(response.statusCode).to.be.equal(204);
-      expect(usecases.createCampaigns).to.have.been.calledWithExactly({
-        campaignsToCreate: deserializedCampaignsToCreate,
-      });
-      expect(csvSerializerStub.deserializeForCampaignsImport).to.have.been.called;
-    });
-  });
-
   describe('#update', function () {
     it('should return the updated campaign', async function () {
       // given
