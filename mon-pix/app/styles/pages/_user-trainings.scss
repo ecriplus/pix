@@ -74,6 +74,7 @@
 .user-trainings-content-list {
   &__item {
     &:hover {
+      border-radius: var(--pix-spacing-2x);
       box-shadow:
         0 7px 14px 0 var(--pix-neutral-100),
         0 3px 6px 0 var(--pix-neutral-500);
