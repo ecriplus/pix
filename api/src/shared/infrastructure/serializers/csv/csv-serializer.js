@@ -5,7 +5,6 @@ import {
   emptySession,
   headers,
 } from '../../../../certification/shared/infrastructure/utils/csv/sessions-import.js';
-import { CampaignTypes } from '../../../../prescription/shared/domain/constants.js';
 import { FileValidationError } from '../../../domain/errors.js';
 import { csvHelper } from '../../helpers/csv.js';
 import { convertDateValue } from '../../utils/date-utils.js';
