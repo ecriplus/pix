@@ -5,21 +5,10 @@ import { CsvImportError } from '../../../domain/errors.js';
 
 const ERRORS = {
   ENCODING_NOT_SUPPORTED: 'ENCODING_NOT_SUPPORTED',
+  VALUE_NOT_ACCEPTED: 'VALUE_NOT_ACCEPTED',
   BAD_CSV_FORMAT: 'BAD_CSV_FORMAT',
   HEADER_REQUIRED: 'HEADER_REQUIRED',
   HEADER_UNKNOWN: 'HEADER_UNKNOWN',
-};
-
-const PARSING_OPTIONS = {
-  header: true,
-  skipEmptyLines: 'greedy',
-  transform: (value) => {
-    if (typeof value === 'string') {
-      value = value.replace('  ', ' ').trim();
-    }
-
-    return value;
-  },
 };
 
 class CsvParser {
@@ -77,7 +66,8 @@ class CsvParser {
       const {
         meta: { fields },
       } = papa.parse(decodedInput, {
-        ...PARSING_OPTIONS,
+        header: true,
+        skipEmptyLines: 'greedy',
         transformHeader: (value) => {
           return value.trim();
         },
@@ -108,12 +98,42 @@ class CsvParser {
       meta: { fields },
       errors,
     } = papa.parse(decodedInput, {
-      ...PARSING_OPTIONS,
+      header: true,
+      skipEmptyLines: 'greedy',
       transformHeader: (value) => {
         const trimmedValue = value.trim();
         const column = this._columns.find((column) => column.name === trimmedValue);
 
         return column ? column.property : trimmedValue;
+      },
+      transform: (value, columnName) => {
+        if (typeof value === 'string') {
+          value = value.replace('  ', ' ').trim();
+        }
+
+        if (value === '') {
+          return null;
+        }
+
+        const column = this._columns.find((column) => column.property === columnName);
+
+        if (column) {
+          if (column.isInteger) return parseInt(value, 10);
+
+          if (column.acceptedValues?.length > 0 && !column.acceptedValues.includes(value)) {
+            throw new CsvImportError(ERRORS.VALUE_NOT_ACCEPTED, {
+              field: column.name,
+              value,
+              acceptedValues: column.acceptedValues,
+            });
+          }
+
+          if (column.transformValues && typeof column.transformValues === 'object') {
+            return column.transformValues[value] ?? value;
+          }
+        }
+
+        return value;
       },
     });
 
