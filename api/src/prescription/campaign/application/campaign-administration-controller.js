@@ -1,17 +1,21 @@
+import { createReadStream } from 'node:fs';
+
 import _ from 'lodash';
 
 import * as checkAdminMemberHasRoleSuperAdminUseCase from '../../../shared/application/usecases/checkAdminMemberHasRoleSuperAdmin.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
+import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getDataBuffer } from '../../learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
+import { CAMPAIGNS_HEADER } from '../domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as csvCampaignsIdsParser from '../infrastructure/serializers/csv/csv-campaigns-ids-parser.js';
 import * as campaignManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
 import * as campaignReportSerializer from '../infrastructure/serializers/jsonapi/campaign-report-serializer.js';
 
 const getTemplateForCreateCampaigns = (request, h) => {
-  const fields = csvSerializer.fieldNamesForCampaignsImport;
+  const fields = CAMPAIGNS_HEADER.columns.map(({ name }) => name);
   const csvTemplateFileContent = generateCSVTemplate(fields);
 
   return h
@@ -21,9 +25,16 @@ const getTemplateForCreateCampaigns = (request, h) => {
     .code(200);
 };
 
-const createCampaigns = async function (request, h, dependencies = { csvSerializer }) {
-  const campaignsToCreate = await dependencies.csvSerializer.deserializeForCampaignsImport(request.payload.path);
+const createCampaigns = async function (request, h, dependencies = { createReadStream, getDataBuffer, CsvParser }) {
+  const filePath = request.payload.path;
+  const stream = dependencies.createReadStream(filePath);
+  const payload = await dependencies.getDataBuffer(stream);
+  const csvParser = new dependencies.CsvParser(payload, CAMPAIGNS_HEADER);
+
+  const campaignsToCreate = csvParser.parse();
+
   await usecases.createCampaigns({ campaignsToCreate });
+
   return h.response(null).code(204);
 };
 
