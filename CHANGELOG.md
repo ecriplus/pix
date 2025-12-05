@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.275.0](https://github.com/1024pix/pix/compare/v5.274.0...v5.275.0) (2025-12-05)
+
+### :rocket: Amélioration
+
+- [#14343](https://github.com/1024pix/pix/pull/14343) Ajouter les détails des étapes et statuts de participations aux parcours combinés (PIX-20527) 
+- [#14325](https://github.com/1024pix/pix/pull/14325) Améliorer l'affichage des informations sur Pix Admin (PIX-20649). 
+- [#14330](https://github.com/1024pix/pix/pull/14330) Enlever "tmp" dans les slug des modules (PIX-20663) 
+- [#14349](https://github.com/1024pix/pix/pull/14349) modifs retours équipe IA gestionmdp nov 
+
+### :building_construction: Tech
+
+- [#14341](https://github.com/1024pix/pix/pull/14341) Configurer typescript-eslint sur l'audit-logger 
+- [#14334](https://github.com/1024pix/pix/pull/14334) Créer la table module_issue_reports (PIX-20490) 
+- [#14335](https://github.com/1024pix/pix/pull/14335) Supprimer le FT usePixOrgaNewAuthDesign (PIX-20675) 
+
+### :coffee: Autre
+
+- [#14247](https://github.com/1024pix/pix/pull/14247) Inscription via SSO - association d'un compte existant (PIX-20539) 
+- [#14345](https://github.com/1024pix/pix/pull/14345) Modifs module CY_Phishing_NOV apres DoD
+
 # [5.274.0](https://github.com/1024pix/pix/compare/v5.273.0...v5.274.0) (2025-12-04)
 
 ### :rocket: Amélioration
