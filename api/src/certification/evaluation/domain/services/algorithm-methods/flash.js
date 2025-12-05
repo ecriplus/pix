@@ -112,6 +112,7 @@ function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEF
 }
 
 /**
+ * @private
  * @param {object} params
  * @param {CalibratedChallenge[]} params.challenges
  * @param {Answer} params.answer
@@ -135,6 +136,7 @@ function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normal
 }
 
 /**
+ * @private
  * @param {number} gaussianMean
  * @returns {number[]}
  */
@@ -150,6 +152,7 @@ function _computeNormalizedPrior(gaussianMean) {
 }
 
 /**
+ * @private
  * @param {CalibratedChallenge} answeredChallenge
  * @param {Answer} answer
  * @param {number[]} previousLikelihood
@@ -175,6 +178,7 @@ function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
 }
 
 /**
+ * @private
  * @param {number} previousCapacity
  * @param {number} variationPercent
  * @param {number[]} normalizedPosteriori
@@ -189,6 +193,7 @@ function _computeCapacity(previousCapacity, variationPercent, normalizedPosterio
 }
 
 /**
+ * @private
  * @param {number} latestCapacity
  * @param {number[]} normalizedPosteriori
  * @returns {number}
@@ -202,6 +207,7 @@ function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
 }
 
 /**
+ * @private
  * @param {object} params
  * @param {Answer[]} params.allAnswers
  * @param {CalibratedChallenge[]} params.challenges
@@ -218,6 +224,7 @@ function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
 }
 
 /**
+ * @private
  * @param {number} previousCapacity
  * @param {number} nextCapacity
  * @param {number} variationPercent
@@ -234,6 +241,7 @@ function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercen
 }
 
 /**
+ * @private
  * @param {{challenge: CalibratedChallenge, reward: number}[]} challengesWithReward
  * @param {number} capacity
  * @returns {CalibratedChallenge[]}
@@ -263,6 +271,7 @@ function _findBestPossibleChallenges(challengesWithReward, capacity) {
 }
 
 /**
+ * @private
  * @param {CalibratedChallenge[]} challenges
  * @param {Answer} answer
  * @returns {CalibratedChallenge}
@@ -290,6 +299,7 @@ function getReward({ capacity, discriminant, difficulty }) {
  * Parameters are not wrapped inside an object for performance reasons.
  * It avoids creating an object before each call which will trigger lots of
  * garbage collection, especially when running simulators.
+ * @private
  * @param {number} capacity
  * @param {number} discriminant
  * @param {number} difficulty
@@ -300,6 +310,7 @@ function _getProbability(capacity, discriminant, difficulty) {
 }
 
 /**
+ * @private
  * @param {object} params
  * @param {number} params.gaussianMean
  * @param {number} params.value
@@ -311,6 +322,7 @@ function _getGaussianValue({ gaussianMean, value }) {
 }
 
 /**
+ * @private
  * @param {number[]} data
  * @returns {number[]}
  */

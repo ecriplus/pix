@@ -3,13 +3,13 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Frameworks', function () {
-  describe('findByName', function () {
+  describe('getByName', function () {
     it('should return the framework when it exists', function () {
       // Given
       const frameworkName = 'CORE';
 
       // When
-      const result = Frameworks.findByName(frameworkName);
+      const result = Frameworks.getByName(frameworkName);
 
       // Then
       expect(result).to.equal(Frameworks.CORE);
@@ -20,14 +20,14 @@ describe('Frameworks', function () {
       const frameworkName = 'NON_EXISTENT';
 
       // When & Then
-      expect(() => Frameworks.findByName(frameworkName)).to.throw(
+      expect(() => Frameworks.getByName(frameworkName)).to.throw(
         NotFoundError,
         'Framework with name "NON_EXISTENT" not found.',
       );
     });
   });
 
-  it('should contain all framework enums', function () {
+  it('should contain the supported Pix scopes', function () {
     expect(Frameworks.CORE).to.equal('CORE');
     expect(Frameworks.PIX_PLUS_DROIT).to.equal('DROIT');
     expect(Frameworks.PIX_PLUS_EDU_1ER_DEGRE).to.equal('EDU_1ER_DEGRE');

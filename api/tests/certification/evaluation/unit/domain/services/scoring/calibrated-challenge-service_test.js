@@ -31,7 +31,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
       };
 
       calibratedChallengeRepository = {
-        findAllCalibratedChallenges: sinon.stub().rejects(new Error('Args mismatch')),
+        getAllCalibratedChallenges: sinon.stub().rejects(new Error('Args mismatch')),
       };
       originalLatestCalibrationDate = config.v3Certification.latestCalibrationDate;
     });
@@ -49,7 +49,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const version = domainBuilder.certification.evaluation.buildVersion({
           startDate: new Date('2025-06-22'),
         });
-        calibratedChallengeRepository.findAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
+        calibratedChallengeRepository.getAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
 
         const expectedAskedChallenges = [...challengeList.slice(1)];
         const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(expectedAskedChallenges);
@@ -96,7 +96,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const version = domainBuilder.certification.evaluation.buildVersion({
           startDate: new Date('2025-06-22'),
         });
-        calibratedChallengeRepository.findAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
+        calibratedChallengeRepository.getAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
 
         const challengeWithValidatedLiveAlert = domainBuilder.buildChallenge({
           ...challengeList.at(-1),

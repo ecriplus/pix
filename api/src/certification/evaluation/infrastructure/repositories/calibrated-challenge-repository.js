@@ -109,7 +109,7 @@ export async function getMany({
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
  */
-export const findAllCalibratedChallenges = async ({
+export const getAllCalibratedChallenges = async ({
   version,
   dependencies = {
     getInstance,

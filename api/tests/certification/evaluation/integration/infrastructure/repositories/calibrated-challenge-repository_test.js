@@ -781,7 +781,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
     });
   });
 
-  describe('#findAllCalibratedChallenges', function () {
+  describe('#getAllCalibratedChallenges', function () {
     let skillsLC;
     let challengesLC;
 
@@ -829,7 +829,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
           await databaseBuilder.commit();
 
           // when
-          const challenges = await calibratedChallengeRepository.findAllCalibratedChallenges({
+          const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
             version: archivedVersionWithNonCompatibleChallenge,
           });
 
@@ -887,7 +887,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
           await databaseBuilder.commit();
 
           // when
-          const challenges = await calibratedChallengeRepository.findAllCalibratedChallenges({
+          const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
             version: archivedVersionWithEligibleChallenge,
           });
 
@@ -906,7 +906,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
                 name: skillData00_tube00competence00_actif.name,
                 competenceId: skillData00_tube00competence00_actif.competenceId,
                 tubeId: skillData00_tube00competence00_actif.tubeId,
-                // TODO: do I need level in scoring ?
               }),
             }),
           ]);
@@ -947,7 +946,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             await databaseBuilder.commit();
 
             // when
-            const challenges = await calibratedChallengeRepository.findAllCalibratedChallenges({
+            const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
               version: activeVersionWithNoEligibleChallenge,
             });
 
@@ -1016,7 +1015,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             await databaseBuilder.commit();
 
             // when
-            const challenges = await calibratedChallengeRepository.findAllCalibratedChallenges({
+            const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
               version: activeVersionWithEligibleChallenge,
             });
 
@@ -1036,7 +1035,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
                   name: skillData00_tube00competence00_actif.name,
                   competenceId: skillData00_tube00competence00_actif.competenceId,
                   tubeId: skillData00_tube00competence00_actif.tubeId,
-                  // TODO: do I need level in scoring ?
                 }),
               }),
               domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -1053,7 +1051,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
                   name: skillData00_tube00competence00_actif.name,
                   competenceId: skillData00_tube00competence00_actif.competenceId,
                   tubeId: skillData00_tube00competence00_actif.tubeId,
-                  // TODO: do I need level in scoring ?
                 }),
               }),
               domainBuilder.certification.evaluation.buildCalibratedChallenge({
@@ -1070,7 +1067,6 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
                   name: skillData02_tube02competence01_perime.name,
                   competenceId: skillData02_tube02competence01_perime.competenceId,
                   tubeId: skillData02_tube02competence01_perime.tubeId,
-                  // TODO: do I need level in scoring ?
                 }),
               }),
             ]);

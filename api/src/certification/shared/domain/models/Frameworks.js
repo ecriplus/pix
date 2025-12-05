@@ -5,7 +5,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
  * @readonly
  * @enum {string}
  */
-export const FrameworksEnum = Object.freeze({
+const FRAMEWORKS = Object.freeze({
   CORE: 'CORE',
   PIX_PLUS_DROIT: 'DROIT',
   PIX_PLUS_EDU_1ER_DEGRE: 'EDU_1ER_DEGRE',
@@ -20,8 +20,8 @@ export const FrameworksEnum = Object.freeze({
  * @returns {string} The framework value.
  * @throws {NotFoundError} If the framework is not found.
  */
-function findByName(name) {
-  const framework = Object.values(FrameworksEnum).find((value) => value === name);
+function getByName(name) {
+  const framework = Object.values(FRAMEWORKS).find((value) => value === name);
   if (!framework) {
     throw new NotFoundError(`Framework with name "${name}" not found.`);
   }
@@ -29,6 +29,6 @@ function findByName(name) {
 }
 
 export const Frameworks = {
-  ...FrameworksEnum,
-  findByName,
+  ...FRAMEWORKS,
+  getByName,
 };

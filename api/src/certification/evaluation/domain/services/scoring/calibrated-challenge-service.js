@@ -36,10 +36,10 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
     certificationChallengeLiveAlertRepository,
     calibratedChallengeRepository,
   }) => {
-    const flashCompatibleChallenges = await calibratedChallengeRepository.findAllCalibratedChallenges({ version });
+    const calibratedChallenges = await calibratedChallengeRepository.getAllCalibratedChallenges({ version });
 
     const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
-      compatibleChallenges: flashCompatibleChallenges,
+      compatibleChallenges: calibratedChallenges,
       certificationCourseId: certificationCourse.getId(),
       challengeCalibrationRepository,
     });

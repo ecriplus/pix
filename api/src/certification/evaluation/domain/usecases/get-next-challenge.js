@@ -168,9 +168,9 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
  *
  * Example: after LCMS release if a challenge becomes archived ('perime'), this challenge will be in
  *          `answeredCalibratedChallenges` param, but not in `currentCalibratedChallenges` param
- * @param {Array<CalibratedChallenge>} answeredCalibratedChallenges property.
+ * @param {Array<CalibratedChallenge>} answeredCalibratedChallenges
  * @param {Array<CalibratedChallenge>} currentCalibratedChallengesproperty.
- * @returns {Array<CalibratedChallenge>} A new array containing only unique challenge objects.
+ * @returns {Array<CalibratedChallenge>}
  */
 const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {
   // It is critical that answeredCalibratedChallenges is in first parameter in order to take precedence
