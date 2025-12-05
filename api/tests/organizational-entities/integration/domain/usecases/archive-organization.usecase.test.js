@@ -8,7 +8,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
       // given
       const now = new Date('2022-02-22');
       const clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      const superAdminUser = databaseBuilder.factory.buildUser();
+      const superAdminUser = databaseBuilder.factory.buildUser.withRole();
       const organization = databaseBuilder.factory.buildOrganization();
       await databaseBuilder.commit();
 

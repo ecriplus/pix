@@ -46,7 +46,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         disabledAt: null,
       });
 
-      const user = databaseBuilder.factory.buildUser();
+      const user = databaseBuilder.factory.buildUser.withRole();
 
       const organizationIds = [organization1.id, organization2.id];
 
@@ -64,7 +64,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         archivedOrganizationId: organization1.id,
         updatedAt: now,
       });
-      await _assertCampaignAreArchived({ organizationId: organization1.id, archivedAt: now });
+      await _assertCampaignAreDeleted({ organizationId: organization1.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization1.id, disabledAt: now });
 
       await _assertOrganizationIsArchived({ archivedOrganizationId: organization2.id, user, archivedAt: now });
@@ -72,7 +72,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         archivedOrganizationId: organization2.id,
         updatedAt: now,
       });
-      await _assertCampaignAreArchived({ organizationId: organization2.id, archivedAt: now });
+      await _assertCampaignAreDeleted({ organizationId: organization2.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization2.id, disabledAt: now });
     });
   });
@@ -95,7 +95,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         disabledAt: null,
       });
 
-      const user = databaseBuilder.factory.buildUser();
+      const user = databaseBuilder.factory.buildUser.withRole();
       await databaseBuilder.commit();
 
       const organizationIds = [organization1.id, nonExistingOrganizationId];
@@ -120,7 +120,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         archivedOrganizationId: organization1.id,
         updatedAt: now,
       });
-      await _assertCampaignAreArchived({ organizationId: organization1.id, archivedAt: now });
+      await _assertCampaignAreDeleted({ organizationId: organization1.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization1.id, disabledAt: now });
     });
   });
@@ -132,9 +132,9 @@ async function _assertMembershipAreDisabled({ organizationId, disabledAt }) {
   expect(archivedMembership1.disabledAt).to.deep.equal(disabledAt);
 }
 
-async function _assertCampaignAreArchived({ organizationId, archivedAt }) {
+async function _assertCampaignAreDeleted({ organizationId, archivedAt }) {
   const archivedCampaign1 = await knex('campaigns').where({ organizationId }).first();
-  expect(archivedCampaign1.archivedAt).to.deep.equal(archivedAt);
+  expect(archivedCampaign1.deletedAt).to.deep.equal(archivedAt);
 }
 
 async function _assertPendingInvitationsAreCanceled({ archivedOrganizationId, updatedAt }) {

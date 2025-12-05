@@ -118,12 +118,9 @@ O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;${orenStudentId};Assassin
           },
         });
 
-        const deletedLearners = await knex('organization-learners')
-          .select('*')
-          .whereNotNull('deletedAt')
-          .orderBy('studentNumber');
+        const deletedLearners = await knex('organization-learners').select('*').whereNotNull('deletedAt');
         expect(deletedLearners).lengthOf(1);
-        expect(deletedLearners[0].studentNumber).equal(activeOrganizationLearner.studentNumber);
+        expect(deletedLearners[0].id).equal(activeOrganizationLearner.id);
       });
     });
   });
