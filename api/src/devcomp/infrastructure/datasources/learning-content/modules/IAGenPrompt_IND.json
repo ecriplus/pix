@@ -528,7 +528,16 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
+                "type": "expand",
+                "title": "🙊 Solution",
+                "content": "<p>Le logiciel d'IA a fait ici une erreur sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
