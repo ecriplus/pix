@@ -1023,35 +1023,35 @@
                     "id": "1",
                     "content": "<p>Formuler les plus prompts neutres possible.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre …&nbsp;»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre …&nbsp;»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Explorer les avis opposés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! Vous pouvez par exemple demander&nbsp;: «&nbsp;Peux-tu maintenant me donner le point de vue inverse, avec des arguments solides ?&nbsp;». </p><p>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !<br></p>"
+                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Peux-tu maintenant me donner le point de vue inverse, avec des arguments solides ?&nbsp;». </p><p>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !<br></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Vérifier les réponses de l’IA avec d’autres sources.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! ous pouvez faire une recherche sur internet ou dans des documents papiers (livres, journaux, magazines…)<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée ! </p><p>Vous pouvez faire une recherche sur internet ou dans des documents papiers (livres, journaux, magazines…)<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Réfléchir à mes propres biais avant d’utiliser l’IA.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! Vous pouvez essayer d’identifier vos propres biais lorsque vous posez une question à un logiciel d’IA générative.<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée ! </p><p>Vous pouvez essayer d’identifier vos propres biais lorsque vous posez une question à un logiciel d’IA générative.<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Lire les réponses du logiciel d’IA avec un regard critique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée ! </p><p>Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   }
                 ]
