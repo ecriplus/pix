@@ -15,9 +15,11 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     buildCampaignParticipation,
     buildCampaignSkill,
     buildCombinedCourse,
+    buildKnowledgeElementSnapshot,
     buildOrganizationLearner,
     buildOrganizationLearnerParticipation,
     buildStage,
+    buildStageAcquisition,
     buildTargetProfile,
     buildTargetProfileTraining,
     buildTargetProfileTube,
@@ -153,6 +155,23 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
         type: Assessment.types.CAMPAIGN,
         campaignParticipationId,
       });
+
+      // If the campaign participation is shared, build knowledge elements and stage acquisitions
+      if (participation.campaignStatus === CampaignParticipationStatuses.SHARED) {
+        // Build knowledge element snapshot for this user
+        buildKnowledgeElementSnapshot({
+          campaignParticipationId,
+          userId,
+        });
+
+        // Build stage 0 acquisition if there are stages
+        if (combinedCourseData.targetProfile.stages) {
+          buildStageAcquisition({
+            stageId: combinedCourseData.targetProfile.stages[0].id,
+            campaignParticipationId,
+          });
+        }
+      }
     }
   });
 };
