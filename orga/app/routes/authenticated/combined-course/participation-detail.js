@@ -12,21 +12,37 @@ export default class CombinedCourseParticipationDetailsRoute extends Route {
     }
   }
 
+  sortItemsByStep = (items) =>
+    items.reduce((itemsBySteps, item) => {
+      if (itemsBySteps.length === 0 || ['FORMATION'].includes(item.type)) {
+        itemsBySteps.push([item]);
+        return itemsBySteps;
+      }
+
+      const lastStep = itemsBySteps[itemsBySteps.length - 1];
+
+      if (lastStep[0].type === item.type || (lastStep[0].type === 'FORMATION' && item.type === 'MODULE')) {
+        lastStep.push(item);
+        return itemsBySteps;
+      }
+
+      itemsBySteps.push([item]);
+      return itemsBySteps;
+    }, []);
+
   async model(params) {
     const combinedCourse = this.modelFor('authenticated.combined-course');
-    try {
-      const { participation, items } = await this.store.queryRecord('combined-course-participation-detail', {
+    return this.store
+      .queryRecord('combined-course-participation-detail', {
         combinedCourseId: combinedCourse.id,
         participationId: params.participation_id,
+      })
+      .then(({ items, participation }) => {
+        return { combinedCourse, participation, itemsBySteps: this.sortItemsByStep(items) };
+      })
+      .catch((error) => {
+        console.error(error);
+        this.router.replaceWith('not-found');
       });
-      return {
-        combinedCourse,
-        participation,
-        items,
-      };
-    } catch (error) {
-      console.error(error);
-      this.router.replaceWith('not-found');
-    }
   }
 }

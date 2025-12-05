@@ -287,14 +287,20 @@
     "activity-type": {
       "explanation": {
         "ASSESSMENT": "Campaign of type assessment",
+        "CAMPAIGN": "Campaign of type assessment",
         "COMBINED_COURSE": "Learning program",
         "EXAM": "Exam mode [beta]",
+        "FORMATION": "Training",
+        "MODULE": "Module",
         "PROFILES_COLLECTION": "Campaign of type profiles collection"
       },
       "information": {
         "ASSESSMENT": "Assessment",
+        "CAMPAIGN": "Assessment",
         "COMBINED_COURSE": "Learning program",
         "EXAM": "Exam mode [beta]",
+        "FORMATION": "Training",
+        "MODULE": "Module",
         "PROFILES_COLLECTION": "Profiles collection"
       }
     },
@@ -450,6 +456,8 @@
     },
     "participation-status": {
       "COMPLETED": "Completed",
+      "LOCKED": "To unlock",
+      "NOT_STARTED": "To do",
       "SHARED": "Completed",
       "STARTED": "In progress"
     },
@@ -1078,6 +1086,16 @@
         }
       },
       "introduction": "The learning courses combine assessments and personalised learning modules, enabling teaching to be tailored to each participant's level.",
+      "participation-detail": {
+        "breadcrumb": "Participation of {firstName} {lastName}",
+        "column": {
+          "campaign": "Campaign",
+          "module": "Module",
+          "status": "Status"
+        },
+        "formation-locked": "Unlocked once the campaign is completed",
+        "step-label": "Step {number}"
+      },
       "statistics": {
         "completed-participations": "Completed participations",
         "total-participations": "Total participations"

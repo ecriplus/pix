@@ -2,30 +2,47 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
+const types = {
+  ASSESSMENT: {
+    icon: 'speed',
+    class: 'assessment',
+  },
+  CAMPAIGN: {
+    icon: 'speed',
+    class: 'assessment',
+  },
+  PROFILES_COLLECTION: {
+    icon: 'profileShare',
+    class: 'profiles-collection',
+  },
+  EXAM: {
+    icon: 'school',
+    class: 'exam',
+  },
+  COMBINED_COURSE: {
+    icon: 'studyLesson',
+    class: 'combined-course',
+  },
+  MODULE: {
+    icon: 'book',
+    class: 'module',
+  },
+  FORMATION: {
+    icon: 'lock',
+    class: 'formation',
+  },
+};
+
 export default class ActivityType extends Component {
   @service intl;
 
-  get iconConfig() {
-    const { type } = this.args;
-    switch (type) {
-      case 'ASSESSMENT':
-        return { icon: 'speed', class: 'activity-type__icon--assessment' };
-      case 'PROFILES_COLLECTION':
-        return { icon: 'profileShare', class: 'activity-type__icon--profile-collection' };
-      case 'EXAM':
-        return { icon: 'school', class: 'activity-type__icon--exam' };
-      case 'COMBINED_COURSE':
-        return { icon: 'studyLesson', class: 'activity-type__icon--combined-course' };
-      default:
-        return { icon: 'close', class: '' };
-    }
+  get icon() {
+    return types[this.args.type].icon;
   }
 
   get pictoCssClass() {
     const classes = ['activity-type__icon'];
-
-    classes.push(this.iconConfig.class);
-
+    classes.push('activity-type__icon--' + types[this.args.type].class);
     if (this.args.big) {
       classes.push(classes[0] + '--big');
     }
@@ -41,30 +58,16 @@ export default class ActivityType extends Component {
   }
 
   get label() {
-    const informationLabels = {
-      ASSESSMENT: 'components.activity-type.information.ASSESSMENT',
-      PROFILES_COLLECTION: 'components.activity-type.information.PROFILES_COLLECTION',
-      EXAM: 'components.activity-type.information.EXAM',
-      COMBINED_COURSE: 'components.activity-type.information.COMBINED_COURSE',
-    };
-
-    const explanationLabels = {
-      ASSESSMENT: 'components.activity-type.explanation.ASSESSMENT',
-      PROFILES_COLLECTION: 'components.activity-type.explanation.PROFILES_COLLECTION',
-      EXAM: 'components.activity-type.explanation.EXAM',
-      COMBINED_COURSE: 'components.activity-type.explanation.COMBINED_COURSE',
-    };
-
     const { type, displayInformationLabel } = this.args;
-
-    return this.intl.t(displayInformationLabel ? informationLabels[type] : explanationLabels[type]);
+    const i18nKey = displayInformationLabel ? 'information' : 'explanation';
+    return this.intl.t(`components.activity-type.${i18nKey}.${type}`);
   }
 
   <template>
     <span class="activity-type">
       <PixIcon
         class={{this.pictoCssClass}}
-        @name={{this.iconConfig.icon}}
+        @name={{this.icon}}
         @ariaHidden={{this.pictoAriaHidden}}
         @title={{this.pictoTitle}}
         ...attributes

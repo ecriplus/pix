@@ -7,6 +7,7 @@
     margin-bottom: var(--pix-spacing-8x);
   }
 
+
   &__header {
     display: flex;
     gap: var(--pix-spacing-4x);
@@ -23,3 +24,24 @@
     gap: var(--pix-spacing-2x);
   }
 }
+
+.participation-detail {
+  &__item-title{
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+  }
+
+  &__status-column {
+    width: 200px;
+  }
+
+  &__step-title{
+    @extend %pix-title-xs;
+
+    margin-top: var(--pix-spacing-8x);
+    margin-bottom: var(--pix-spacing-4x);
+  }
+}
+
+

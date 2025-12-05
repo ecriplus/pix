@@ -47,7 +47,14 @@ module('Integration | Component | combined-course/participations', function (hoo
     };
   });
 
-  module('table', function () {
+  module('table', function (hooks) {
+    let router;
+
+    hooks.beforeEach(function () {
+      router = this.owner.lookup('service:router');
+      router.transitionTo = sinon.stub();
+    });
+
     test('it should have a caption to describe the table ', async function (assert) {
       // when
       const screen = await render(
@@ -202,6 +209,31 @@ module('Integration | Component | combined-course/participations', function (hoo
 
       // then
       assert.ok(within(campaignHeader).getByText(t('pages.combined-course.table.tooltip.modules-column')));
+    });
+
+    test('it should transition to participation detail when clicking on a row', async function (assert) {
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+      const rows = within(table).getAllByRole('row');
+      // Skip header row, click on first data row
+      await click(rows[1]);
+
+      // then
+      assert.true(router.transitionTo.calledOnce);
+      assert.true(
+        router.transitionTo.calledWith('authenticated.combined-course.participation-detail', participations[0].id),
+      );
     });
   });
 

@@ -16,7 +16,7 @@
       fill: var(--pix-tertiary-500);
     }
 
-    &--profile-collection {
+    &--profiles-collection {
       fill: var(--pix-primary-500);
     }
 
@@ -26,6 +26,14 @@
 
     &--combined-course {
       fill: var(--pix-certif-500);
+    }
+
+    &--module {
+      fill: var(--pix-certif-500);
+    }
+
+    &--formation {
+      fill: var(--pix-neutral-500);
     }
 
     &--big {
