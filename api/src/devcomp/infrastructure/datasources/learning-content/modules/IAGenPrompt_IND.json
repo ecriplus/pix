@@ -187,24 +187,24 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Écris un message de relance pour participer à un tournoi de volley."
+                      "content": "J'ai écris ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! »"
                     },
                     {
                       "direction": "inbound",
-                      "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
+                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong> »"
                     }
                   ],
                   "prompts": [
                     {
-                      "prompt": "Adopte un ton festif.",
+                      "prompt": "Rends le plus festif !",
                       "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l’ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t’es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t’attend sur le terrain ! 💪"
                     },
                     {
-                      "prompt": "Adopte un ton sérieux.",
+                      "prompt": "Adopte un ton plus sérieux.",
                       "response": "Madame, Monsieur,<br> Nous n’avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                     },
                     {
-                      "prompt": "Adopte un ton drôle.",
+                      "prompt": "Et en plus drôle ?",
                       "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
