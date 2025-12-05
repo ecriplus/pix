@@ -79,6 +79,7 @@ describe('CampaignManagement', function () {
       ownerId: 234,
       sharedParticipationsCount: 5,
       totalParticipationsCount: 10,
+      isPartOfCombinedCourse: undefined,
     };
 
     const campaignManagement = new CampaignManagement(input);
@@ -134,6 +135,21 @@ describe('CampaignManagement', function () {
       it('should return false if campaign type is not PROFILES_COLLECTION', function () {
         const model = new CampaignManagement({ ...input, type: CampaignTypes.ASSESSMENT });
         expect(model.isTypeProfilesCollection).to.be.false;
+      });
+    });
+
+    describe('code', function () {
+      it('should return a dash string if isPartOfCombinedCourse is true', function () {
+        const model = new CampaignManagement({ ...input, isPartOfCombinedCourse: true });
+        expect(model.code).to.equal('-');
+      });
+      it('should return campaign code if isPartOfCombinedCourse is false', function () {
+        const model = new CampaignManagement({ ...input, isPartOfCombinedCourse: false });
+        expect(model.code).to.equal(input.code);
+      });
+      it('should return campaign code if isPartOfCombinedCourse is undefined', function () {
+        const model = new CampaignManagement({ ...input });
+        expect(model.code).to.equal(input.code);
       });
     });
   });

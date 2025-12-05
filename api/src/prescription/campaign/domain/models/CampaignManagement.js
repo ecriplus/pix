@@ -12,6 +12,7 @@ class CampaignManagement extends Campaign {
     shared,
     started,
     completed,
+    isPartOfCombinedCourse,
     ...campaignAttributes
   } = {}) {
     super(campaignAttributes);
@@ -25,6 +26,8 @@ class CampaignManagement extends Campaign {
     this.sharedParticipationsCount = shared;
     this.totalParticipationsCount = this.#computeTotalParticipation(this.sharedParticipationsCount, started, completed);
     this.hasParticipation = this.totalParticipationsCount > 0;
+    this.isPartOfCombinedCourse = isPartOfCombinedCourse;
+    this.code = isPartOfCombinedCourse ? '-' : campaignAttributes.code;
   }
 
   #computeTotalParticipation(sharedParticipationsCount, started, completed) {

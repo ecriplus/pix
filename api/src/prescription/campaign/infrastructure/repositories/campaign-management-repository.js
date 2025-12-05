@@ -1,4 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import * as CombinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
@@ -58,8 +59,11 @@ const get = async function (campaignId) {
     externalIdLabel: externalIdFeature?.params?.label,
     externalIdType: externalIdFeature?.params?.type,
   };
-  const campaignManagement = new CampaignManagement(campaign);
-  return campaignManagement;
+
+  const combinedCourse = await CombinedCourseRepository.findByCampaignId({ campaignId: campaign.id });
+  const isPartOfCombinedCourse = combinedCourse.length === 1;
+
+  return new CampaignManagement({ ...campaign, isPartOfCombinedCourse });
 };
 
 const findPaginatedCampaignManagements = async function ({ organizationId, page }) {
@@ -89,8 +93,15 @@ const findPaginatedCampaignManagements = async function ({ organizationId, page 
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
-  const campaignManagement = results.map((attributes) => new CampaignManagement(attributes));
-  return { models: campaignManagement, meta: { ...pagination } };
+  const campaignManagements = [];
+  for (const result of results) {
+    const combinedCourse = await CombinedCourseRepository.findByCampaignId({ campaignId: result.id });
+    const isPartOfCombinedCourse = combinedCourse.length === 1;
+    const campaignManagement = new CampaignManagement({ ...result, isPartOfCombinedCourse });
+    campaignManagements.push(campaignManagement);
+  }
+
+  return { models: campaignManagements, meta: { ...pagination } };
 };
 
 async function _countParticipationsByStatus(campaignId, campaignType) {

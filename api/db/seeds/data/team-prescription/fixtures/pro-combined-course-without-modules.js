@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { PRO_ORGANIZATION_ID } from '../../common/constants.js';
-import { CAMPAIGN_PRO_COMBINED_COURSE_ID } from '../constants.js';
+import { CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID } from '../constants.js';
 
 export const COMBINED_COURSE_WITHOUT_MODULES = {
   organizationId: PRO_ORGANIZATION_ID,
@@ -16,7 +16,7 @@ export const COMBINED_COURSE_WITHOUT_MODULES = {
         comparison: 'all',
         data: {
           campaignId: {
-            data: CAMPAIGN_PRO_COMBINED_COURSE_ID,
+            data: CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID,
             comparison: 'equal',
           },
           status: {
@@ -37,10 +37,11 @@ export const COMBINED_COURSE_WITHOUT_MODULES = {
       },
     ],
     campaign: {
+      id: CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID,
       name: 'Je teste mes compétences',
       code: 'CODEX1',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: '/parcours/COMBINIX1/chargement',
+      customResultPageButtonUrl: '/parcours/CBNOMOD/chargement',
       skills: [],
     },
   },
