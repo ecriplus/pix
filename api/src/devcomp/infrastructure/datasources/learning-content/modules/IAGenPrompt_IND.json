@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
-    "description": "<p>Les logiciels d’IA générative (LeChat, ChatGPT, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne.</p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster vos demandes pour améliorer le résultat proposé par le logiciel d’IA générative.</p>",
+    "description": "<p>Les logiciels d’IA générative (LeChat, ChatGPT, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et\"et à ajuster vos demandes pour améliorer le résultat proposé par le logiciel d’IA générative.&nbsp;🚀</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -64,7 +64,7 @@
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Je voulais inviter les joueurs du tournoi. Mon prompt, c’était : « Écris une invitation au tournoi. »"
+                      "content": "Je voulais inviter les joueurs du tournoi. Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
                     },
                     {
                       "userName": "Emma",
@@ -108,7 +108,7 @@
               "element": {
                 "id": "3f36edd3-42cd-4cf3-9063-1ad75166871c",
                 "type": "text",
-                "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Écris une invitation au tournoi.&nbsp;»</p>"
+                "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Aide-moi à organiser le tournoi.&nbsp;»</p>"
               }
             },
             {
@@ -120,19 +120,19 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>l’objet&nbsp;: «&nbsp;le tournoi de volley&nbsp;»</p>"
+                    "content": "<p>le type de sport : « de volley-ball »</p>"
                   },
                   {
                     "id": "2",
-                    "content": "<p>la date&nbsp;: «&nbsp;samedi prochain&nbsp;»</p>"
+                    "content": "<p>le public : « pour les membres du club »</p>"
                   },
                   {
                     "id": "3",
-                    "content": "<p>le lieu&nbsp;: «&nbsp;le gymnase des 3 sapins&nbsp;»</p>"
+                    "content": "<p>le contexte : «  organisé par des bénévoles »</p>"
                   },
                   {
                     "id": "4",
-                    "content": "<p>les destinataires&nbsp;: «&nbsp;les membres du club&nbsp;»</p>"
+                    "content": "<p>l’objectif&nbsp;: « l'organisation logistique&nbsp;»</p>"
                   }
                 ],
                 "feedbacks": {
@@ -262,7 +262,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<h5>🤔Comment modifier la manière dont le logiciel d’IA générative écrit ses réponses ? <br></h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment modifier la manière dont le logiciel d’IA générative écrit ses réponses ? <br></h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («en tant que coach sportif&nbsp;», «comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -340,7 +340,7 @@
                     {
                       "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
                       "type": "text",
-                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties...&nbsp;»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
+                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«fais 2 parties et 2 sous-parties...»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
                 },
