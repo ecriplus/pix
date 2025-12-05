@@ -22,8 +22,6 @@ export default class LoginForm extends Component {
   @service url;
   @service intl;
   @service locale;
-  @service session;
-  @service store;
   @service authErrorMessages;
 
   @tracked globalError = null;
@@ -48,7 +46,7 @@ export default class LoginForm extends Component {
   }
 
   @action
-  async authenticate(event) {
+  async submit(event) {
     if (event) event.preventDefault();
 
     try {
@@ -61,35 +59,16 @@ export default class LoginForm extends Component {
 
       const login = this.login.trim();
 
-      if (this.args.isWithInvitation) {
-        try {
-          await this._acceptOrganizationInvitation(
-            this.args.organizationInvitationId,
-            this.args.organizationInvitationCode,
-            login,
-          );
-        } catch (err) {
-          const error = err.errors[0];
-          // TODO: should be managed with a code instead of status only
-          const isInvitationAlreadyAcceptedByAnotherUser = error.status === '409';
-          if (isInvitationAlreadyAcceptedByAnotherUser) {
-            this.globalError = this.intl.t('pages.login-form.errors.status.409');
-            this.isLoading = false;
-            return;
-          }
-          // TODO: should be managed with a code instead of status only
-          const isUserAlreadyOrganizationMember = error.status === '412';
-          if (!isUserAlreadyOrganizationMember) {
-            this.globalError = this.#getErrorMessage(err);
-            this.isLoading = false;
-            return;
-          }
-        }
-      }
-
-      await this.session.authenticate('authenticator:oauth2', login, this.password);
+      await this.args.onSubmit(login, this.password);
     } catch (responseError) {
-      this.globalError = this.#getErrorMessage(responseError);
+      const error = responseError?.errors[0];
+      // TODO: should be managed with a code instead of status only
+      const isInvitationAlreadyAcceptedByAnotherUser = error.status === '409';
+      if (isInvitationAlreadyAcceptedByAnotherUser) {
+        this.globalError = this.intl.t('pages.login-form.errors.status.409');
+      } else {
+        this.globalError = this.#getErrorMessage(responseError);
+      }
     } finally {
       this.isLoading = false;
     }
@@ -113,23 +92,6 @@ export default class LoginForm extends Component {
     this.validation.login.validate(this.login);
   }
 
-  async _acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, email) {
-    const type = 'organization-invitation-response';
-    const id = `${organizationInvitationId}_${organizationInvitationCode}`;
-    const organizationInvitationRecord = this.store.peekRecord(type, id);
-
-    if (!organizationInvitationRecord) {
-      let record;
-      try {
-        record = this.store.createRecord(type, { id, code: organizationInvitationCode, email });
-        await record.save({ adapterOptions: { organizationInvitationId } });
-      } catch (error) {
-        record.deleteRecord();
-        throw error;
-      }
-    }
-  }
-
   #getErrorMessage(responseError) {
     // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
     const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
@@ -142,7 +104,7 @@ export default class LoginForm extends Component {
   }
 
   <template>
-    <form class="authentication-login-form" {{on "submit" this.authenticate}}>
+    <form class="authentication-login-form" {{on "submit" this.submit}}>
       {{#if @hasInvitationAlreadyBeenAccepted}}
         <PixNotificationAlert @type="error" role="alert">
           {{t "pages.login-form.invitation-already-accepted"}}
