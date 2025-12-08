@@ -4,10 +4,7 @@ import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
-import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPARISONS as COMPARISONS_REQUIREMENT } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -52,50 +49,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              campaignId: {
-                data: campaign.id,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId1,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId2,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ campaignId: campaign.id }, { moduleId: moduleId1 }, { moduleId: moduleId2 }],
       });
 
       databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
@@ -211,63 +165,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              campaignId: {
-                data: campaign.id,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId1,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId2,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId3,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
+        combinedCourseContents: [
+          { campaignId: campaign.id },
+          { moduleId: moduleId1 },
+          { moduleId: moduleId2 },
+          { moduleId: moduleId3 },
         ],
       });
 
@@ -366,63 +268,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              campaignId: {
-                data: campaign.id,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId1,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId2,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: COMPARISONS_REQUIREMENT.ALL,
-            data: {
-              moduleId: {
-                data: moduleId3,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
+        combinedCourseContents: [
+          { campaignId: campaign.id },
+          { moduleId: moduleId1 },
+          { moduleId: moduleId2 },
+          { moduleId: moduleId3 },
         ],
       });
 
