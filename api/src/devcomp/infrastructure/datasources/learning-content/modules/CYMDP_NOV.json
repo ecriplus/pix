@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger vos comptes en ligne. 🔒</p>",
+    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -62,7 +62,7 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"                 
+                      "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"
                     }
                   ]
                 }
@@ -119,8 +119,9 @@
               "type": "element",
               "element": {
                 "id": "c33f99a1-6883-4436-afa5-ce02eaf5975c",
-                "type": "text",
-                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p><details open=\"\">    <summary>Indice</summary>    <p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat.</p></details></p>"
+                "type": "expand",
+                "title": "🗝️ Si vous avez besoin d’aide, cliquer ici pour avoir un indice",
+                "content": "<p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat.</p>\n"
               }
             }
           ]
@@ -823,8 +824,9 @@
               "type": "element",
               "element": {
                 "id": "401dce3e-8708-4c9f-9c0a-cf8e4e899ee6",
-                "type": "text",
-                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><details>    <summary>Indice</summary>    <p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p></details><p></p>"
+                "type": "expand",
+                "title": "🗝️ Si vous avez besoin d’aide, cliquer ici pour avoir un indice",
+                "content": "<p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p>"
               }
             }
           ]
