@@ -252,6 +252,29 @@ module('Unit | Route | login-oidc', function (hooks) {
       assert.ok(true);
     });
 
+    module('when there is an unexpected error (not a JSON:API error)', function () {
+      test('throws back the error', async function (assert) {
+        // given
+        const authenticateStub = sinon.stub().rejects(new Error('Internal Server Error, this is not a JSON:API error'));
+        const sessionStub = Service.create({
+          authenticate: authenticateStub,
+          data: {},
+        });
+        const route = this.owner.lookup('route:authentication/login-oidc');
+        route.set('session', sessionStub);
+        route.router = { transitionTo: sinon.stub() };
+
+        // when & then
+        await assert.rejects(
+          route.model(
+            { identity_provider_slug: 'oidc-partner' },
+            { to: { queryParams: { code: 'test' } } },
+            /Internal Server Error, this is not a JSON:API error/,
+          ),
+        );
+      });
+    });
+
     module('when there is a MISSING_OIDC_STATE error', function () {
       test('it redirects to authentication.login page', async function (assert) {
         // given
