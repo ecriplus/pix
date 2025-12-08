@@ -40,6 +40,8 @@ describe('Integration | UseCases | create-organization', function () {
       createdBy: superAdminUserId,
       administrationTeamId: 1234,
       countryCode: 99100,
+      externalId: 'My external Id',
+      provinceCode: '078',
     });
 
     // when
@@ -55,6 +57,8 @@ describe('Integration | UseCases | create-organization', function () {
     expect(createdOrganization.dataProtectionOfficer.lastName).to.equal('');
     expect(createdOrganization.dataProtectionOfficer.email).to.equal('');
     expect(createdOrganization.countryCode).to.equal(99100);
+    expect(createdOrganization.externalId).to.equal('My external Id');
+    expect(createdOrganization.provinceCode).to.equal('078');
   });
 
   describe('error cases', function () {
@@ -175,6 +179,8 @@ describe('Integration | UseCases | create-organization', function () {
         const organization = new OrganizationForAdmin({
           name: 'ACME',
           type: 'PRO',
+          administrationTeamId: undefined,
+          countryCode: undefined,
         });
 
         // when

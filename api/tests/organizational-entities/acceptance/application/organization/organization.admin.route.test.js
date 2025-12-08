@@ -391,6 +391,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'data-protection-officer-email': 'justin.ptipeu@example.net',
                   'administration-team-id': 1234,
                   'country-code': 99100,
+                  'external-id': 'My external Id',
+                  'province-code': '078',
                 },
               },
             },
@@ -407,6 +409,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
           expect(createdOrganization['created-by']).to.equal(superAdminUserId);
           expect(createdOrganization['country-code']).to.equal(99100);
+          expect(createdOrganization['external-id']).to.equal('My external Id');
+          expect(createdOrganization['province-code']).to.equal('078');
         });
       });
 
