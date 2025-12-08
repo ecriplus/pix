@@ -652,7 +652,9 @@
             "placeholder": "Pays (code INSEE)"
           }
         },
+        "external-id": "Identifiant externe",
         "parent-organization-name": "Organisation mère : {parentOrganizationName}",
+        "province-code": "Département (en 3 chiffres)",
         "required-fields-error": "Veuillez remplir tous les champs obligatoires."
       },
       "editing": {
