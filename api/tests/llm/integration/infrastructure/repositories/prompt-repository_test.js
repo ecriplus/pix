@@ -1,8 +1,9 @@
 import { Readable } from 'node:stream';
 
+import { LLMApiError } from '../../../../../src/llm/domain/errors.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { prompt } from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
-import { expect, nock, waitForStreamFinalizationToBeDone } from '../../../../test-helper.js';
+import { catchErr, expect, nock, waitForStreamFinalizationToBeDone } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | prompt-repository', function () {
   context('#prompt', function () {
@@ -48,6 +49,104 @@ describe('LLM | Integration | Infrastructure | Repositories | prompt-repository'
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal(llmResponseChunks.join(''));
         expect(llmPostPromptScope.isDone()).to.be.true;
+      });
+
+      context('when the llm api responds with an error', function () {
+        context('when the error is a "502 gateway timeout"', function () {
+          it('should retry the request 2 more times before throwing', async function () {
+            // given
+            const messages = buildMessageDTOs(['salut']);
+            const body = {
+              configuration: {
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
+              history: [],
+              prompt: 'salut',
+            };
+            const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+              .post('/chat', body)
+              .reply(502, 'Gateway Timeout')
+              .post('/chat?retry_count=1', body)
+              .reply(502, 'Gateway Timeout')
+              .post('/chat?retry_count=2', body)
+              .reply(502, 'Gateway Timeout');
+
+            // when
+            const error = await catchErr(prompt)({ messages, configuration });
+
+            // then
+            expect(error).to.deepEqualInstance(new LLMApiError('Gateway Timeout'));
+            expect(llmPostPromptScope.isDone()).to.be.true;
+          });
+
+          context('when the llm api responds normally after retrying', function () {
+            it('should return the response', async function () {
+              // given
+              const messages = buildMessageDTOs(['salut']);
+              const llmResponseChunks = ['23:{"message":"Bonjour !"}'];
+              const body = {
+                configuration: {
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                },
+                history: [],
+                prompt: 'salut',
+              };
+              const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                .post('/chat', body)
+                .reply(502, 'Gateway Timeout')
+                .post('/chat?retry_count=1', body)
+                .reply(502, 'Gateway Timeout')
+                .post('/chat?retry_count=2', body)
+                .reply(201, Readable.from(llmResponseChunks));
+
+              // when
+              const response = await prompt({ messages, configuration });
+
+              // then
+              const parts = [];
+              const decoder = new TextDecoder();
+              for await (const chunk of response) {
+                parts.push(decoder.decode(chunk));
+              }
+              await waitForStreamFinalizationToBeDone();
+              const llmResponse = parts.join('');
+              expect(llmResponse).to.deep.equal(llmResponseChunks.join(''));
+              expect(llmPostPromptScope.isDone()).to.be.true;
+            });
+          });
+        });
+
+        context('when the error is not a 502', function () {
+          it('should throw the error', async function () {
+            // given
+            const messages = buildMessageDTOs(['salut']);
+            const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+              .post('/chat', {
+                configuration: {
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                },
+                history: [],
+                prompt: 'salut',
+              })
+              .reply(500, 'Internal Server Error');
+
+            // when
+            const error = await catchErr(prompt)({ messages, configuration });
+
+            // then
+            expect(error).to.deepEqualInstance(new LLMApiError('Internal Server Error'));
+            expect(llmPostPromptScope.isDone()).to.be.true;
+          });
+        });
       });
     });
 
