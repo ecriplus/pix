@@ -11,8 +11,8 @@
     border: none;
   }
 
-  &__reset {
+  &__buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 }

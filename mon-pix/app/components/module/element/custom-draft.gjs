@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { t } from 'ember-intl';
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
@@ -8,6 +9,8 @@ import didInsert from '../../../modifiers/modifier-did-insert';
 import ModuleElement from './module-element';
 
 export default class ModulixCustomDraft extends ModuleElement {
+  @service featureToggles;
+
   get heightStyle() {
     return htmlUnsafe(`height: ${this.args.customDraft.height}px`);
   }
@@ -46,7 +49,13 @@ export default class ModulixCustomDraft extends ModuleElement {
         ></iframe>
       </fieldset>
 
-      <div class="element-custom-draft__reset">
+      <div class="element-custom-draft__buttons">
+        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
+          <PixButton @variant="tertiary" @iconBefore="flag" aria-label={{t "pages.modulix.issue-report.aria-label"}}>{{t
+              "pages.modulix.issue-report.button"
+            }}</PixButton>
+        {{/if}}
+
         <PixButton
           @iconBefore="refresh"
           @variant="tertiary"
