@@ -22,8 +22,8 @@ export default class CertificationInformationGlobalActions extends Component {
   get canPerformCertificationActions() {
     return Boolean(
       !this.args.certification.isPublished &&
-        this.args.session.finalizedAt &&
-        (this.args.certification.status === 'validated' || this.args.certification.status === 'error'),
+      this.args.session.finalizedAt &&
+      (this.args.certification.status === 'validated' || this.args.certification.status === 'error'),
     );
   }
 
@@ -34,8 +34,8 @@ export default class CertificationInformationGlobalActions extends Component {
   get displayUncancelCertificationButton() {
     return Boolean(
       this.args.certification.isCertificationCancelled &&
-        !this.args.certification.isPublished &&
-        this.args.session.finalizedAt,
+      !this.args.certification.isPublished &&
+      this.args.session.finalizedAt,
     );
   }
 
