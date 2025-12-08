@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Un mot de passe trop faible, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort donc difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger vos comptes en ligne. 🔒</p>",
+    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger vos comptes en ligne. 🔒</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -52,27 +52,17 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ho zut ! Mais qu’est-ce qui s’est passé ?"
+                      "content": "Oh zut ! Mais qu’est-ce qui s’est passé ? Tu avais mis un bon mot de passe ?"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Je comprends pas, pourtant j’avais un super mot de passe !"
+                      "content": "Bah oui, je pense. C'était le prénom de mon fils et l'année de naissance de mon chat !"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ah bon ? Tu en es sûre ?"
-                    },
-                    {
-                      "userName": "Emma",
-                      "direction": "incoming",
-                      "content": "C’était le nom de mon fils et l’année de naissance de mon chat !"
-                    },
-                    {
-                      "userName": "Jennifer",
-                      "direction": "outgoing",
-                      "content": "Mais non, ce mot de passe n’est pas assez fort. Un pirate informatique peut le trouver facilement ! 😐"
+                      "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"                 
                     }
                   ]
                 }
@@ -90,7 +80,7 @@
               "element": {
                 "id": "c4a70e3a-9786-4461-b067-0b7d040a7356",
                 "type": "text",
-                "content": "<p>Pour accéder à l’un de vos comptes en ligne, un pirate informatique peut utiliser plusieurs techniques pour trouver votre mot de passe. Découvrons cela ensemble.</p>"
+                "content": "<p>Pour accéder à l’un de vos services en ligne, un pirate informatique peut utiliser plusieurs techniques pour trouver votre mot de passe. Découvrons cela ensemble.</p>"
               }
             }
           ]
@@ -130,7 +120,7 @@
               "element": {
                 "id": "c33f99a1-6883-4436-afa5-ce02eaf5975c",
                 "type": "text",
-                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p><details open=\"\">    <summary>Indice</summary>    <p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du nom de son fils et l’année de naissance de son chat.</p></details></p>"
+                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p><details open=\"\">    <summary>Indice</summary>    <p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat.</p></details></p>"
               }
             }
           ]
@@ -145,7 +135,7 @@
               "element": {
                 "id": "c888f762-4b0c-401a-bfa4-2816af13d1f2",
                 "type": "text",
-                "content": "<p>Pour éviter qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>n’utilisez pas d’informations personnelles</strong> dans vos mots de passe. 🤫</p>"
+                "content": "<p>Pour empêcher qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>évitez d’utiliser des informations personnelles ou publiques</strong> dans vos mots de passe. 🤫</p>"
               }
             }
           ]
@@ -397,7 +387,7 @@
               "element": {
                 "id": "0490f920-e6fb-4af2-9148-7284f29df9e8",
                 "type": "text",
-                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
+                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères en les mélangeant&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez énormément le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
               }
             }
           ]
@@ -425,7 +415,7 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Eh oui ! Bien protéger ses comptes en ligne, c’est important ! ☺️"
+                      "content": "Eh oui ! Le mieux, c'est même d’avoir un mot de passe différent pour chacun de tes services en ligne ! ☺️"
                     }
                   ]
                 }
@@ -449,7 +439,7 @@
               "element": {
                 "id": "466e4d1f-ce33-4084-90d7-f6c2f22a869d",
                 "type": "text",
-                "content": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p><ul>    <li>N’utilisez pas d’informations personnelles. 🤫</li>    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;📖</li>    <li>Créez un mot de passe long (au moins 12 caractères). 📏</li>    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
+                "content": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p><ul>    <li>N’utilisez pas d’informations personnelles ou publiques. 🤫</li>    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;📖</li>    <li>Créez un mot de passe long (au moins 12 caractères). 📏</li>    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
               }
             }
           ]
@@ -523,7 +513,7 @@
                     {
                       "id": "799481bf-03d3-461d-bdd8-5209cff065f6",
                       "type": "qcu",
-                      "instruction": "<p>Pourquoi le mot de passe&nbsp;<em>ChaTEAu-Dragons1 </em>n’est pas un mot de passe fort ?</p>",
+                      "instruction": "<p>Pourquoi le mot de passe&nbsp;<em>ChateauDragons_1 </em>n’est pas un mot de passe fort ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -567,7 +557,7 @@
                     {
                       "id": "7795c82c-0c62-4a54-a9f6-e8c205944fc3",
                       "type": "qcu",
-                      "instruction": "<p>Pourquoi le mot de passe <em>Juliette2012!</em> n’est pas un mot de passe fort ?</p>",
+                      "instruction": "<p>Pourquoi le mot de passe <em>Anniv_2012!!</em> n’est pas un mot de passe fort ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -750,17 +740,17 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation  2️⃣ Transforme-la pour en faire un mot de passe fort."
+                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation.<br>2️⃣ Transforme-la pour en faire un mot de passe fort."
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré » ?"
+                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré ! » ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Parfait ! Si tu prends les premières lettres et la ponctuation, ça donne B-Nel7nemcp 🔒"
+                      "content": "Parfait ! Si tu prends les premières lettres et la ponctuation, ça donne B-Nel7nemcp! 🔒"
                     },
                     {
                       "userName": "Emma",
@@ -810,14 +800,17 @@
                     "solutions": [
                       "Ls,jbdlsadcem3t!",
                       "Ls,j’bdlsadcem3t!",
-                      "Ls,j’bdlsadcem3t!"
+                      "Ls,j’abdlsadcem3t!",
+                      "Ls,j'bdlsadcem3t!",
+                      "Ls,j'abdlsadcem3t!",
+                      "Ls,jabdlsadcem3t!"
                     ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué ! 🎉</p>",
-                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retenir.&nbsp;<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.<br></p>"
+                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retrouver.&nbsp;<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.<br></p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait !</p>",
