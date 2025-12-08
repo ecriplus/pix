@@ -23,4 +23,11 @@ export default class OidcIdentityProviders extends Service {
     if (!this.hasIdentityProviders) return;
     return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
   }
+
+  getIdentityProviderNamesByAuthenticationMethods(methods) {
+    const identityProviderCodes = methods.map(({ identityProvider }) => identityProvider);
+    return this.list
+      .filter((provider) => identityProviderCodes.includes(provider.code))
+      .map((provider) => provider.organizationName);
+  }
 }
