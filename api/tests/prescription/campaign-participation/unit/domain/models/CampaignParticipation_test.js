@@ -1,7 +1,7 @@
 import { ArchivedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import {
-  CampaignParticiationInvalidStatus,
   CampaignParticipationDeletedError,
+  CampaignParticipationInvalidStatus,
 } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import {
@@ -121,13 +121,13 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
     });
 
     context('when the campaign participation status is STARTED', function () {
-      it('throws an CampaignParticiationInvalidStatus', async function () {
+      it('throws an CampaignParticipationInvalidStatus', async function () {
         const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.ASSESSMENT });
         const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
 
         const error = catchErrSync(campaignParticipation.improve, campaignParticipation)();
 
-        expect(error).to.be.an.instanceOf(CampaignParticiationInvalidStatus);
+        expect(error).to.be.an.instanceOf(CampaignParticipationInvalidStatus);
       });
     });
 
@@ -157,13 +157,13 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
       });
 
       context('when the campaign is started', function () {
-        it('throws an CampaignParticiationInvalidStatus error', function () {
+        it('throws an CampaignParticipationInvalidStatus error', function () {
           const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
           const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
 
           const error = catchErrSync(campaignParticipation.share, campaignParticipation)();
 
-          expect(error).to.be.an.instanceOf(CampaignParticiationInvalidStatus);
+          expect(error).to.be.an.instanceOf(CampaignParticipationInvalidStatus);
         });
       });
 
