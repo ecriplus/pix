@@ -9,11 +9,6 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../../src/quest/domain/models/Quest.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -927,36 +922,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           rewardId: null,
           code: 'COMBINIX1',
           organizationId: campaignInCombinedCourse.organizationId,
-          eligibilityRequirements: [],
-          successRequirements: [
-            {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                campaignId: {
-                  data: campaignInCombinedCourse.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-                status: {
-                  data: 'SHARED',
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
-            },
-            {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                moduleId: {
-                  data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-                isTerminated: {
-                  data: true,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
-            },
+          combinedCourseContents: [
+            { campaignId: campaignInCombinedCourse.id },
+            { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
           ],
         });
         databaseBuilder.factory.campaignParticipationOverviewFactory.build({
