@@ -1,10 +1,4 @@
-import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import * as targetProfileSummaryForAdminRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../../src/quest/domain/models/Quest.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -382,20 +376,9 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId: organization.id,
-        successRequirements: [
+        combinedCourseContents: [
           {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              campaignId: {
-                data: campaignIdInCombinedCourse,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
+            campaignId: campaignIdInCombinedCourse,
           },
         ],
       });
