@@ -1,11 +1,5 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../../src/prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
-import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../../src/quest/domain/models/Quest.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Campaign | Application | Usecases | checkCampaignBelongsToCombinedCourse', function () {
@@ -24,22 +18,7 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: campaignId,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId }],
     });
     await databaseBuilder.commit();
 
@@ -57,22 +36,7 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: anotherCampaignId,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: anotherCampaignId }],
     });
     await databaseBuilder.commit();
 
