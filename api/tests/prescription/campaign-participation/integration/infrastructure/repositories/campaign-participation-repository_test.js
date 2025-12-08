@@ -1657,16 +1657,23 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return code of the last participation to a campaign of type PROFILES_COLLECTION for the user', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: expectedCode });
-      const otherCampaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: 'BAD' });
+      const secondCampaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: 'BAD' });
+      const thirdCampaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: 'BADTOO' });
       databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: otherCampaign.id,
+        campaignId: secondCampaign.id,
         status: TO_SHARE,
-        createdAt: new Date(Date.parse('11/11/2011')),
+        createdAt: new Date(Date.parse('10/11/2011')),
         userId,
       });
       databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
+        campaignId: thirdCampaign.id,
         status: TO_SHARE,
+        userId,
+        createdAt: new Date(Date.parse('11/11/2011')),
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        status: STARTED,
         userId,
         createdAt: new Date(Date.parse('12/11/2011')),
       });
