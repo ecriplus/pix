@@ -49,7 +49,6 @@ test('Combined courses', async ({ page }) => {
       await page.getByText('Oui.').click();
       await page.getByRole('button', { name: 'Je valide et je vais à la' }).click();
       await page.getByRole('link', { name: 'Voir mes résultats' }).first().click();
-      await page.getByRole('button', { name: "J'envoie mes résultats" }).click();
       await page.getByRole('link', { name: 'Continuer' }).click();
     });
 

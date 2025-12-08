@@ -27,6 +27,7 @@ export default {
     type: 'boolean',
     description: 'Used to enable anonymization and deletion on prescriber context',
     defaultValue: false,
+    devDefaultValues: { test: true, reviewApp: true },
     tags: ['team-prescription', 'pix-api', 'backend'],
   },
   isFilteringRecommendedTrainingByOrganizationsEnabled: {
@@ -64,7 +65,8 @@ export default {
   isAutoShareEnabled: {
     type: 'boolean',
     description: 'Enable automatic campaign sharing.',
-    defaultValue: false,
+    defaultValue: true,
+    devDefaultValues: { test: true, reviewApp: true },
     tags: ['frontend', 'team-prescription', 'pix-app'],
   },
   isSurveyEnabledForCombinedCourses: {
