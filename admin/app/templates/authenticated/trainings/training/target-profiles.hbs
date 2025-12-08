@@ -98,25 +98,25 @@
 {{/if}}
 
 <PixModal
-  @title="Détacher le profil cible du contenu formatif"
+  @title={{t "pages.trainings.training.targetProfiles.detach-title"}}
   @onCloseButtonClick={{this.closeModal}}
   @showModal={{this.showModal}}
 >
   <:content>
     <p>
-      Etes-vous sûr de vouloir détacher le profil cible
-      <strong>{{this.targetProfileToDetach.internalName}}</strong>
-      ? Ce profil cible est lié à un parcours apprenant. La recommandation de ce modulix sera altérée si vous le
-      détachez.
+      {{t
+        "pages.trainings.training.targetProfiles.detach-modal"
+        htmlSafe=true
+        name=this.targetProfileToDetach.internalName
+      }}
     </p>
   </:content>
   <:footer>
     <PixButton @variant="secondary" @triggerAction={{this.closeModal}}>
       {{t "common.actions.cancel"}}
     </PixButton>
-    <PixButton
-      @variant="error"
-      @triggerAction={{fn this.detachTargetProfile this.targetProfileToDetach}}
-    >Confirmer</PixButton>
+    <PixButton @variant="error" @triggerAction={{fn this.detachTargetProfile this.targetProfileToDetach}}>{{t
+        "common.actions.confirm"
+      }}</PixButton>
   </:footer>
 </PixModal>
