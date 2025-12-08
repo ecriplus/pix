@@ -1,11 +1,4 @@
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
 import * as combinedCourseDetailsRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-details-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -20,43 +13,13 @@ describe('Quest | Integration | Repository | combined-course-details', function 
         code: 'COURSE1',
         name: 'Parcours 1',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              campaignId: {
-                data: campaignId,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: COMPARISONS_CRITERION.EQUAL,
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ campaignId }],
       });
       const combinedCourse2 = databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE2',
         name: 'Parcours 2',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ moduleId: moduleId }],
       });
       await databaseBuilder.commit();
 
@@ -81,22 +44,7 @@ describe('Quest | Integration | Repository | combined-course-details', function 
         code: 'COURSE1',
         name: 'Parcours 1',
         organizationId: anotherOrganizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              campaignId: {
-                data: 123,
-                comparison: COMPARISONS_CRITERION.ALL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: COMPARISONS_CRITERION.ALL,
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ campaignId: 123 }],
       });
       await databaseBuilder.commit();
 
