@@ -262,7 +262,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<h5>🤔Comment modifier la manière dont le logiciel d’IA générative écrit ses réponses ? <br></h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («en tant que coach sportif&nbsp;», «comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («en tant que coach sportif&nbsp;», «comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -300,7 +300,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite à présent faire un autre&nbsp;<strong>tableau </strong>similaire au premier, mais pour cette fois-ci travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>e logiciel d’IA générative</strong> pour répondre à sa demande. N’hésitez pas à préciser au fur et à mesure.</p>"
+                "content": "<p>Gustave souhaite à présent faire un autre&nbsp;<strong>tableau </strong>similaire au premier, cette fois-ci, pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>e logiciel d’IA générative</strong> pour répondre à sa demande. N’hésitez pas à préciser au fur et à mesure.</p>"
               }
             },
             {
@@ -311,7 +311,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !&nbsp;N’hésitez pas à préciser vos prompts au fur et à mesure des résultats.</p>",
+                "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -373,7 +373,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>Le mot <strong>ACTIF</strong>&nbsp;aide à se souvenir des conseils pour rédiger un prompt efficace.</p><ul>    <li><strong>A </strong>comme <strong>Action </strong>: Utilisez un verbe d’<strong>action.</strong></li>    <li><strong>C </strong>comme <strong>Contexte </strong>: Donnez du <strong>contexte.</strong></li><li><strong>T </strong>comme <strong>Ton : </strong>Précisez éventuellement le<strong> ton.</strong></li><li><strong>I </strong>comme <strong>Identité : </strong>Attribuez si nécessaire une<strong> identité</strong> ou un <strong>rôle </strong>à l’IA.</li>    <li><strong>F</strong> comme <strong>Format </strong>: Précisez le <strong>format attendu.</strong></li>        </ul><p>🔄 Vous pouvez demander des corrections&nbsp;ou des précisions au fur et à mesure des résultats.</p><p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais <strong>contenir des résultats qui ne correspondent pas à ce qu’on attend</strong></p><p><strong>🔍&nbsp;Relire&nbsp;</strong>la réponse de l’IA est essentiel avant de l’utiliser ou de la présenter à quelqu’un.</p>"
+                "content": "<p>Le mot <strong>ACTIF</strong>&nbsp;aide à se souvenir des conseils pour rédiger un prompt efficace.</p><ul>    <li><strong>A </strong>comme <strong>Action </strong>: Utilisez un verbe d’<strong>action.</strong></li>    <li><strong>C </strong>comme <strong>Contexte </strong>: Donnez du <strong>contexte.</strong></li><li><strong>T </strong>comme <strong>Ton : </strong>Précisez éventuellement le<strong> ton.</strong></li><li><strong>I </strong>comme <strong>Identité : </strong>Attribuez si nécessaire une<strong> identité</strong> ou un <strong>rôle </strong>à l’IA.</li>    <li><strong>F</strong> comme <strong>Format </strong>: Précisez le <strong>format attendu.</strong></li>        </ul><p>🔄Après chaque réponse, vous pouvez ajuster ou préciser votre prompt pour obtenir un meilleur résultat.</p><p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des résultats qui<strong> ne correspondent pas à ce qu’on attend&nbsp;</strong>ou qui peuvent être partiellement <strong>fausse. <br></strong></p><p><strong>🔍&nbsp;Relire&nbsp;</strong>la réponse de l’IA est essentiel avant de l’utiliser ou de la présenter à quelqu’un.</p>"
               }
             }
           ]
@@ -507,7 +507,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte-rendu qui correspond bien</strong> aux notes de Gustave.</p>"
               }
             },
             {
@@ -537,7 +537,7 @@
                 "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
                 "type": "expand",
                 "title": "🙊 Solution",
-                "content": "<p>Le logiciel d'IA a fait ici une erreur sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Si le logiciel d'IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
