@@ -61,7 +61,9 @@ export default class LoginForm extends Component {
 
       await this.args.onSubmit(login, this.password);
     } catch (responseError) {
-      const error = responseError?.errors[0];
+      // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
+      const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
+
       // TODO: should be managed with a code instead of status only
       const isInvitationAlreadyAcceptedByAnotherUser = error.status === '409';
       if (isInvitationAlreadyAcceptedByAnotherUser) {
