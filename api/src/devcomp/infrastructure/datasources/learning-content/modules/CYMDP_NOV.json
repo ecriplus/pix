@@ -387,7 +387,7 @@
               "element": {
                 "id": "0490f920-e6fb-4af2-9148-7284f29df9e8",
                 "type": "text",
-                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
+                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères en les mélangeant&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez énormément le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
               }
             }
           ]
@@ -415,7 +415,7 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Eh oui ! Bien protéger ses comptes en ligne, c’est important ! ☺️"
+                      "content": "Eh oui ! Le mieux, c'est même d’avoir un mot de passe différent pour chacun de tes comptes ! ☺️"
                     }
                   ]
                 }
