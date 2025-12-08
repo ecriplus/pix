@@ -44,7 +44,7 @@
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
-                      "content": "🤖 Tu devrais essayer avec un logiciel d’IA générative ! Elle peut te donner les différentes étapes à suivre. 💡"
+                      "content": "Tu devrais essayer avec un logiciel d’IA générative ! Il peut te donner les différentes étapes à suivre. 🤖"
                     },
                     {
                       "userName": "Agnès",
@@ -54,7 +54,7 @@
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
-                      "content": "C’est super simple ! 😄 Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
+                      "content": "C’est super simple ! Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
                     }
                   ]
                 }
@@ -120,7 +120,7 @@
                         "x2": 881,
                         "y2": 376
                       },
-                      "info": "Ce texte c’est la réponse apportée par le logiciel d’IA générative.",
+                      "info": "Ce texte est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -153,7 +153,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: quel style de yoga ? pour qui ? où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une asso.</li><li>Écrivez les règles de l’association&nbsp;: comment elle fonctionne, qui décide quoi.</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta pub et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
+                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: Quel style de yoga ? Pour qui ? Où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une association.</li><li>Écris les règles de l’association&nbsp;: Comment elle fonctionne ? Qui décide quoi ?</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta publicité et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
