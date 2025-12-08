@@ -3,19 +3,48 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 
+const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
+const invitationStorage = new SessionStorageEntry('joinInvitationData');
+const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
+
 export default class OidcLoginController extends Controller {
+  @service('store') store;
   @service currentDomain;
   @service featureToggles;
+  @service oidcIdentityProviders;
   @service session;
   @service router;
 
   get currentInvitation() {
-    const invitationStorage = new SessionStorageEntry('joinInvitationData');
     return invitationStorage.get();
   }
 
+  get authenticationKey() {
+    return oidcUserAuthenticationStorage.get()?.authenticationKey;
+  }
+
   @action
-  async displayAssociationConfirmation() {
+  async redirectToAssociationConfirmation(email, password) {
+    const identityProviderSlug = this.model.identity_provider_slug;
+    const identityProvider = this.oidcIdentityProviders.findBySlug(identityProviderSlug);
+
+    const authenticationRequest = this.store.createRecord('user-oidc-authentication-request', {
+      password,
+      email,
+      authenticationKey: this.authenticationKey,
+      identityProvider: identityProvider.code,
+    });
+
+    const { username, authenticationMethods, fullNameFromPix, fullNameFromExternalIdentityProvider } =
+      await authenticationRequest.login();
+    oidcAssociationConfirmationStorage.set({
+      email,
+      username,
+      authenticationMethods,
+      fullNameFromPix,
+      fullNameFromExternalIdentityProvider,
+    });
+
     this.router.transitionTo('authentication.oidc.confirm', this.model.identity_provider_slug);
   }
 
