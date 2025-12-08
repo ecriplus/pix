@@ -52,16 +52,9 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
-        successRequirements: [
+        combinedCourseContents: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
-            data: {
-              campaignId: {
-                data: campaignId,
-                comparison: 'equal',
-              },
-            },
+            campaignId,
           },
         ],
       });
