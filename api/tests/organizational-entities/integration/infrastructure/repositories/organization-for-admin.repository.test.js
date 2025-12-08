@@ -316,6 +316,36 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });
+
+    context('when there are organizations matching the "administrationTeamId" filter', function () {
+      let teamA, teamB;
+
+      beforeEach(function () {
+        teamA = databaseBuilder.factory.buildAdministrationTeam({ name: 'Team A' });
+        teamB = databaseBuilder.factory.buildAdministrationTeam({ name: 'Team B' });
+        databaseBuilder.factory.buildOrganization({ name: 'Org A1', administrationTeamId: teamA.id });
+        databaseBuilder.factory.buildOrganization({ name: 'Org A2', administrationTeamId: teamA.id });
+        databaseBuilder.factory.buildOrganization({ name: 'Org B1', administrationTeamId: teamB.id });
+        return databaseBuilder.commit();
+      });
+
+      it('return only Organizations matching "administrationTeamId" if given in filters', async function () {
+        // given
+        const filter = { administrationTeamId: teamA.id };
+        const page = { number: 1, size: 10 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
+        // when
+        const { models: matchingOrganizations, pagination } =
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
+            filter,
+            page,
+          });
+
+        // then
+        expect(_.map(matchingOrganizations, 'name')).to.have.members(['Org A1', 'Org A2']);
+        expect(pagination).to.deep.equal(expectedPagination);
+      });
+    });
   });
 
   describe('#archive', function () {

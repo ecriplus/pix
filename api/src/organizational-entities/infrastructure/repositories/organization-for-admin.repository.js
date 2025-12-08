@@ -378,7 +378,7 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
 }
 
 function _setSearchFiltersForQueryBuilder(qb, filter) {
-  const { id, name, type, externalId, hideArchived } = filter;
+  const { id, name, type, externalId, hideArchived, administrationTeamId } = filter;
   if (id) {
     qb.where('organizations.id', id);
   }
@@ -393,6 +393,10 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
   }
   if (hideArchived) {
     qb.whereNull('archivedAt');
+  }
+
+  if (administrationTeamId) {
+    qb.where('administrationTeamId', administrationTeamId);
   }
 }
 
