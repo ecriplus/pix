@@ -1,6 +1,8 @@
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { OrganizationLearnerParticipationTypes } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
+import { buildCombinedCourseBlueprint } from '../../../database-builder/factory/build-combined-course-blueprint.js';
 import { PRO_COMBINED_COURSE } from './fixtures/pro-combined-course.js';
 import { COMBINED_COURSE_WITHOUT_CAMPAIGN } from './fixtures/pro-combined-course-without-campaign.js';
 import { COMBINED_COURSE_WITHOUT_MODULES } from './fixtures/pro-combined-course-without-modules.js';
@@ -173,6 +175,19 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
         }
       }
     }
+  });
+};
+
+export const buildCombinedCourseBlueprints = (databaseBuilder) => {
+  const targetProfileId = databaseBuilder.factory.buildTargetProfile({
+    name: 'Mon profil cible de parcours combiné',
+  }).id;
+  const moduleId = 'eeeb4951-6f38-4467-a4ba-0c85ed71321a';
+
+  buildCombinedCourseBlueprint({
+    name: 'Mon parcours combiné 2',
+    internalName: 'Mon schéma de parcours combiné 2',
+    content: CombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { moduleId }]),
   });
 };
 
