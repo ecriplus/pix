@@ -41,12 +41,6 @@ export default class OidcAssociationConfirmation extends Component {
                 <dd>{{@username}}</dd>
               </div>
             {{/if}}
-            {{#if this.shouldShowGarAuthenticationMethod}}
-              <div>
-                <dt>{{t "components.authentication.oidc-association-confirmation.external-connection"}}</dt>
-                <dd>{{t "components.authentication.user-account.connexion-methods.authentication-methods.gar"}}</dd>
-              </div>
-            {{/if}}
             {{#each this.oidcAuthenticationMethodOrganizationNames as |organizationName|}}
               <div>
                 <dt>{{t "components.authentication.oidc-association-confirmation.external-connection"}}</dt>
@@ -69,7 +63,7 @@ export default class OidcAssociationConfirmation extends Component {
         <PixBlock class="oidc-reconciliation__authentication-method-to-add">
           <dl title={{t "components.authentication.oidc-association-confirmation.authentication-method-to-add"}}>
             <dt>{{t "components.authentication.oidc-association-confirmation.external-connection-via"}}
-              {{this.identityProviderOrganizationName}}</dt>
+              {{@identityProviderOrganizationName}}</dt>
             <dd>{{@fullNameFromExternalIdentityProvider}}</dd>
           </dl>
         </PixBlock>
@@ -99,22 +93,12 @@ export default class OidcAssociationConfirmation extends Component {
   @tracked reconcileErrorMessage = null;
   @tracked isLoading = false;
 
-  get identityProviderOrganizationName() {
-    return this.oidcIdentityProviders[this.args.identityProviderSlug]?.organizationName;
-  }
-
   get shouldShowEmail() {
     return !!this.args.email;
   }
 
   get shouldShowUsername() {
     return !!this.args.username;
-  }
-
-  get shouldShowGarAuthenticationMethod() {
-    return this.args.authenticationMethods.some(
-      (authenticationMethod) => authenticationMethod.identityProvider === 'GAR',
-    );
   }
 
   get oidcAuthenticationMethodOrganizationNames() {

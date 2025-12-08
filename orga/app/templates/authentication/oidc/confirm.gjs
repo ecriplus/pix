@@ -13,11 +13,11 @@ import OidcAssociationConfirmation from '../../../components/authentication/oidc
 
     <:content>
       <OidcAssociationConfirmation
-        @identityProviderSlug="pro-connect"
-        @authenticationMethods="email"
-        @fullNameFromPix="John Doe"
-        @fullNameFromExternalIdentityProvider="John Arthur Doe"
-        @email="john@example.net"
+        @identityProviderOrganizationName={{@model.identityProviderOrganizationName}}
+        @authenticationMethods={{@model.authenticationMethods}}
+        @fullNameFromPix={{@model.fullNameFromPix}}
+        @fullNameFromExternalIdentityProvider={{@model.fullNameFromExternalIdentityProvider}}
+        @email={{@model.email}}
       />
     </:content>
   </AuthenticationLayout>
