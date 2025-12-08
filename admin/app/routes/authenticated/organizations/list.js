@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import RSVP from 'rsvp';
 
 export default class ListRoute extends Route {
   @service store;
@@ -15,9 +16,10 @@ export default class ListRoute extends Route {
   };
 
   async model(params) {
-    let model;
+    let organizations, administrationTeams;
     try {
-      model = await this.store.query('organization', {
+      administrationTeams = await this.store.findAll('administration-team');
+      organizations = await this.store.query('organization', {
         filter: {
           id: params.id ? params.id.trim() : '',
           name: params.name ? params.name.trim() : '',
@@ -31,9 +33,13 @@ export default class ListRoute extends Route {
         },
       });
     } catch {
-      model = [];
+      organizations = [];
+      administrationTeams = [];
     }
-    return model;
+    return RSVP.hash({
+      organizations,
+      administrationTeams,
+    });
   }
 
   resetController(controller, isExiting) {

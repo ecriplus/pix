@@ -16,6 +16,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
 
     hooks.beforeEach(function () {
       route.store.query = sinon.stub().resolves();
+      route.store.findAll = sinon.stub().resolves();
       params.pageNumber = 'somePageNumber';
       params.pageSize = 'somePageSize';
       expectedQueryArgs.page = {
@@ -25,7 +26,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
     });
 
     module('when queryParams filters are falsy', function () {
-      test('it should call store.query with no filters on id, name, type and externalId', async function (assert) {
+      test('it should call store with no filters on id, name, type and externalId', async function (assert) {
         // when
         await route.model(params);
         expectedQueryArgs.filter = {
@@ -38,12 +39,13 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
 
         // then
         sinon.assert.calledWith(route.store.query, 'organization', expectedQueryArgs);
+        sinon.assert.calledWith(route.store.findAll, 'administration-team');
         assert.ok(true);
       });
     });
 
     module('when queryParams filters are  truthy', function () {
-      test('it should call store.query with filters containing trimmed values', async function (assert) {
+      test('it should call store with filters containing trimmed values', async function (assert) {
         // given
         params.id = ' someId';
         params.name = ' someName';
@@ -63,6 +65,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
 
         // then
         sinon.assert.calledWith(route.store.query, 'organization', expectedQueryArgs);
+        sinon.assert.calledWith(route.store.findAll, 'administration-team');
         assert.ok(true);
       });
     });
@@ -75,10 +78,10 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
         route.store.query = sinon.stub().rejects();
 
         // when
-        const organizations = await route.model(params);
+        const model = await route.model(params);
 
         // then
-        assert.deepEqual(organizations, []);
+        assert.deepEqual(model, { organizations: [], administrationTeams: [] });
       });
     });
   });
