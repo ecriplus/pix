@@ -1,11 +1,5 @@
 import times from 'lodash/times.js';
 
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
@@ -875,64 +869,11 @@ describe('Acceptance | API | Campaign Participations', function () {
         rewardId: null,
         code: 'COMBINIX1',
         organizationId: campaignInCombinedCourse.organizationId,
-        eligibilityRequirements: [],
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              campaignId: {
-                data: campaignInCombinedCourse.id,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: 'f32a2238-4f65-4698-b486-15d51935d335',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
+        combinedCourseContents: [
+          { campaignId: campaignInCombinedCourse.id },
+          { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
+          { moduleId: 'f32a2238-4f65-4698-b486-15d51935d335' },
+          { moduleId: 'ab82925d-4775-4bca-b513-4c3009ec5886' },
         ],
       });
       databaseBuilder.factory.campaignParticipationOverviewFactory.build({
