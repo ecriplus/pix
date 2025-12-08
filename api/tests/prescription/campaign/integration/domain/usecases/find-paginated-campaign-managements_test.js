@@ -14,18 +14,7 @@ describe('Integration | UseCase | find-paginated-campaign-managements', function
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
-          data: {
-            campaignId: {
-              data: campaignIdInCombinedCourse,
-              comparison: 'equal',
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: campaignIdInCombinedCourse }],
     });
     await databaseBuilder.commit();
 

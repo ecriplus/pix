@@ -184,18 +184,7 @@ describe('Integration | Repository | Campaign-Management', function () {
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId: organization.id,
-        successRequirements: [
-          {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
-            data: {
-              campaignId: {
-                data: campaign.id,
-                comparison: 'equal',
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ campaignId: campaign.id }],
       });
 
       await databaseBuilder.commit();

@@ -6,11 +6,6 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../../src/quest/domain/models/Quest.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -91,22 +86,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId: combinedCourseCampaign.organizationId,
-          successRequirements: [
-            {
-              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-              comparison: REQUIREMENT_COMPARISONS.ALL,
-              data: {
-                campaignId: {
-                  data: combinedCourseCampaign.id,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-                status: {
-                  data: CampaignParticipationStatuses.SHARED,
-                  comparison: CRITERION_COMPARISONS.EQUAL,
-                },
-              },
-            },
-          ],
+          combinedCourseContents: [{ campaignId: combinedCourseCampaign.id }],
         });
 
         const combinedCourseCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({

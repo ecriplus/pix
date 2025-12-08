@@ -203,7 +203,6 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBINIX1',
         organizationId,
-        successRequirements: [],
       });
       databaseBuilder.factory.buildOrganizationLearnerParticipation({
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
@@ -239,7 +238,6 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
-          successRequirements: [],
         });
         databaseBuilder.factory.buildMembership({ userId, organizationId });
         await databaseBuilder.commit();
@@ -268,7 +266,6 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
-          successRequirements: [],
         });
         const learner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
         databaseBuilder.factory.buildMembership({ userId, organizationId });
@@ -306,7 +303,6 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
-          successRequirements: [],
         });
         const learnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
         databaseBuilder.factory.buildMembership({ userId, organizationId });
@@ -344,7 +340,6 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
-          successRequirements: [],
         });
         const learner = databaseBuilder.factory.buildOrganizationLearner({
           organizationId,

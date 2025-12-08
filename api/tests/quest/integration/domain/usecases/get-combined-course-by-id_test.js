@@ -1,10 +1,4 @@
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
@@ -20,51 +14,7 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseById', func
       illustration: 'https://example.com/image.png',
       code: 'TEST_COURSE_123',
       organizationId,
-      eligibilityRequirements: [],
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: 100,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: 200,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: 300,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: 100 }, { campaignId: 200 }, { campaignId: 300 }],
     }).id;
 
     await databaseBuilder.commit();

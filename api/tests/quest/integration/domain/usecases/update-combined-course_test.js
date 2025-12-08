@@ -1,11 +1,8 @@
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPARISONS as COMPARISONS_REQUIREMENTS } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
 
@@ -35,36 +32,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            campaignId: {
-              data: campaign.id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            moduleId: {
-              data: moduleId,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: campaign.id }, { moduleId }],
     });
 
     const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
@@ -142,55 +110,11 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            campaignId: {
-              data: campaign.id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            moduleId: {
-              data: moduleId,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            moduleId: {
-              data: module2Id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            moduleId: {
-              data: module3Id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
+      combinedCourseContents: [
+        { campaignId: campaign.id },
+        { moduleId },
+        { moduleId: module2Id },
+        { moduleId: module3Id },
       ],
     });
     databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
@@ -223,22 +147,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            campaignId: {
-              data: campaign.id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: campaign.id }],
     });
     const combinedCourseParticipation =
       databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
@@ -269,22 +178,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            campaignId: {
-              data: campaign.id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: campaign.id }],
     });
     await databaseBuilder.commit();
 
@@ -304,22 +198,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISONS_REQUIREMENTS.ALL,
-          data: {
-            campaignId: {
-              data: campaign.id,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: COMPARISONS_CRITERION.EQUAL,
-            },
-          },
-        },
-      ],
+      combinedCourseContents: [{ campaignId: campaign.id }],
     });
     const combinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,

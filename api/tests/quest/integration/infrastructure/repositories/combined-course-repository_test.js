@@ -167,22 +167,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
         organizationId,
         description,
         illustration,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              campaignId: {
-                data: campaignId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              status: {
-                data: CampaignParticipationStatuses.SHARED,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
+        combinedCourseContents: [{ campaignId }],
       });
       await databaseBuilder.commit();
     });
@@ -356,96 +341,28 @@ describe('Quest | Integration | Repository | combined-course', function () {
         code: 'QWERTY123',
         name: 'name1',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId }],
       });
 
       const otherCombinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
         code: 'AZERTY123',
         name: 'name2',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId }],
       });
 
       databaseBuilder.factory.buildCombinedCourse({
         code: 'AZERTY456',
         name: 'name3',
         organizationId: organizationId2,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId }],
       });
 
       databaseBuilder.factory.buildCombinedCourse({
         code: 'QWERTY456',
         name: 'name3',
         organizationId: organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: 'module-cde',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId: 'module-cde' }],
       });
 
       await databaseBuilder.commit();
@@ -494,72 +411,21 @@ describe('Quest | Integration | Repository | combined-course', function () {
         code: 'QWERTY123',
         name: 'name1',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId }],
       });
 
       const combinedCourseWithModuleAndOtherOrga = databaseBuilder.factory.buildCombinedCourse({
         code: 'AZERTY123',
         name: 'name2',
         organizationId: organizationId2,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: moduleId,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId }],
       });
 
       databaseBuilder.factory.buildCombinedCourse({
         code: 'AZERTY456',
         name: 'name3',
         organizationId,
-        successRequirements: [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-            data: {
-              moduleId: {
-                data: 'module-cde',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-              isTerminated: {
-                data: true,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-          },
-        ],
-        rewardId: null,
-        rewardType: null,
+        combinedCourseContents: [{ moduleId: 'module-cde' }],
       });
 
       await databaseBuilder.commit();

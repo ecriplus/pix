@@ -1,9 +1,4 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -22,24 +17,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
       code: 'QWERTY123',
       name: 'name1',
       organizationId: organizationLearner.organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            moduleId: {
-              data: moduleId,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
-      rewardId: null,
-      rewardType: null,
+      combinedCourseContents: [{ moduleId }],
     });
 
     //CombinedCourse2 with same module but organization linked to organizationLearner2
@@ -47,24 +25,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
       code: 'AZERTY123',
       name: 'name2',
       organizationId: otherOrganizationLearner.organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            moduleId: {
-              data: moduleId,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
-      rewardId: null,
-      rewardType: null,
+      combinedCourseContents: [{ moduleId }],
     });
 
     //CombinedCourse3 with same module but with an organization not linked to user
@@ -72,24 +33,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
       code: 'AZERTYABC',
       name: 'name2',
       organizationId: thirdOrganization.id,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            moduleId: {
-              data: moduleId,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
-      rewardId: null,
-      rewardType: null,
+      combinedCourseContents: [{ moduleId }],
     });
 
     //CombinedCourse4 with other module but organization linked to user
@@ -97,24 +41,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
       code: 'QWERTYDBE',
       name: 'name1',
       organizationId: organizationLearner.organizationId,
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            moduleId: {
-              data: 'module-cde',
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            isTerminated: {
-              data: true,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-      ],
-      rewardId: null,
-      rewardType: null,
+      combinedCourseContents: [{ moduleId: 'module-cde' }],
     });
 
     await databaseBuilder.commit();
