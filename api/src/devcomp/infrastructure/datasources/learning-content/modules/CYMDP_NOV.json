@@ -810,7 +810,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué ! 🎉</p>",
-                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retenir.&nbsp;<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.<br></p>"
+                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retrouver.&nbsp;<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.<br></p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait !</p>",
