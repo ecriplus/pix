@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.276.0](https://github.com/1024pix/pix/compare/v5.275.0...v5.276.0) (2025-12-08)
+
+### :rocket: Amélioration
+
+- [#14339](https://github.com/1024pix/pix/pull/14339) Cacher les code campagnes lorsqu'elle proviennent d'un parcours combiné dans admin (PIX-20503) 
+- [#14367](https://github.com/1024pix/pix/pull/14367) Modifs experts mdp nov 
+- [#14356](https://github.com/1024pix/pix/pull/14356) Update IAGenBiais_IND.json 
+- [#14354](https://github.com/1024pix/pix/pull/14354) Update IAGenPrompt_IND.json (retours Maeva) 
+
+### :building_construction: Tech
+
+- [#13849](https://github.com/1024pix/pix/pull/13849) Activer par défaut certains feature toggles (PIX-20686). 
+- [#14314](https://github.com/1024pix/pix/pull/14314) Ajouter dans les seeds l'initialisation des valeurs de la table certification_sco_blocked_access_dates 
+- [#14361](https://github.com/1024pix/pix/pull/14361) Completer les acquisitions de paliers et les snapshots dans les seeds des parcours combines (PIX-20711)  
+- [#14355](https://github.com/1024pix/pix/pull/14355) Être plus restrictif sur l'import des campagnes en masse (Pix-20653). 
+
+### :coffee: Autre
+
 # [5.275.0](https://github.com/1024pix/pix/compare/v5.274.0...v5.275.0) (2025-12-05)
 
 ### :rocket: Amélioration
