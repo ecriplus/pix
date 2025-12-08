@@ -178,20 +178,28 @@
             {
               "type": "element",
               "element": {
+                "id": "d0929d7f-98c7-4922-a3ab-5397de53bef1",
+                "type": "text",
+                "content": "Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
-                "instruction": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p><p>Vous pouvez changer le ton de ce message avec l'aide de l'IA.</p>",
+                "instruction": "<p>Vous pouvez changer le ton de ce message avec l'aide de l'IA.</p>",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J'ai écrit ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! »"
+                      "content": "J'ai écrit ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu'à vendredi. »"
                     },
                     {
                       "direction": "inbound",
-                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong> »"
+                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong>  Il vous reste jusqu'à vendredi. »"
                     }
                   ],
                   "prompts": [
@@ -262,7 +270,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer (« en tant que coach sportif&nbsp;», « comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer (« en tant que coach sportif&nbsp;», « comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -349,7 +357,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
-                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à ce que je voulais, que faire ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….</p>"
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….</p>"
                     }
                   ]
                 }
