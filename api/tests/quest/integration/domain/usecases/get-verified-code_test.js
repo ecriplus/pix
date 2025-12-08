@@ -21,8 +21,6 @@ describe('Quest | Integration | Domain | Usecases | getVerifiedCode', function (
       name: 'Combinix',
       code: 'COMBINIX1',
       organizationId,
-      eligibilityRequirements: [],
-      successRequirements: [],
     });
     await databaseBuilder.commit();
 
