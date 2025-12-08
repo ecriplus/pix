@@ -175,7 +175,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
         expect(campaignParticipant.campaignParticipation).to.deep.include({
           campaignId: campaignToStartParticipation.id,
-          status: 'TO_SHARE',
+          status: 'STARTED',
           userId: userIdentity.id,
           organizationLearnerId,
         });

@@ -44,9 +44,8 @@ class CampaignParticipation {
   }
 
   static start({ campaign, userId, organizationLearnerId = null, participantExternalId }) {
-    const { isAssessment, isExam } = campaign;
-    const { STARTED, TO_SHARE } = CampaignParticipationStatuses;
-    const status = [isAssessment, isExam].includes(true) ? STARTED : TO_SHARE;
+    const { STARTED } = CampaignParticipationStatuses;
+    const status = STARTED;
 
     return new CampaignParticipation({
       campaign,
@@ -132,10 +131,9 @@ class CampaignParticipation {
   }
 
   _canBeShared() {
-    if (this.status === CampaignParticipationStatuses.STARTED) {
+    if (this.status === CampaignParticipationStatuses.STARTED && this.campaign.isProfilesCollection === false) {
       throw new CampaignParticipationInvalidStatus(this.id, CampaignParticipationStatuses.STARTED);
     }
-
     if (this.isShared) {
       throw new AlreadySharedCampaignParticipationError();
     }
