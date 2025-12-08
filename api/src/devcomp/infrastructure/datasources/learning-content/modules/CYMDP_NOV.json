@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Un mot de passe trop faible, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort donc difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger vos comptes en ligne. 🔒</p>",
+    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger vos comptes en ligne. 🔒</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -52,27 +52,17 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ho zut ! Mais qu’est-ce qui s’est passé ?"
+                      "content": "Oh zut ! Mais qu’est-ce qui s’est passé ? Tu avais mis un bon mot de passe ?"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Je comprends pas, pourtant j’avais un super mot de passe !"
+                      "content": "Bah oui, je pense. C'était le prénom de mon fils et l'année de naissance de mon chat !"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ah bon ? Tu en es sûre ?"
-                    },
-                    {
-                      "userName": "Emma",
-                      "direction": "incoming",
-                      "content": "C’était le nom de mon fils et l’année de naissance de mon chat !"
-                    },
-                    {
-                      "userName": "Jennifer",
-                      "direction": "outgoing",
-                      "content": "Mais non, ce mot de passe n’est pas assez fort. Un pirate informatique peut le trouver facilement ! 😐"
+                      "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"                 
                     }
                   ]
                 }
@@ -90,7 +80,7 @@
               "element": {
                 "id": "c4a70e3a-9786-4461-b067-0b7d040a7356",
                 "type": "text",
-                "content": "<p>Pour accéder à l’un de vos comptes en ligne, un pirate informatique peut utiliser plusieurs techniques pour trouver votre mot de passe. Découvrons cela ensemble.</p>"
+                "content": "<p>Pour accéder à l’un de vos services en ligne, un pirate informatique peut utiliser plusieurs techniques pour trouver votre mot de passe. Découvrons cela ensemble.</p>"
               }
             }
           ]
@@ -130,7 +120,7 @@
               "element": {
                 "id": "c33f99a1-6883-4436-afa5-ce02eaf5975c",
                 "type": "text",
-                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p><details open=\"\">    <summary>Indice</summary>    <p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du nom de son fils et l’année de naissance de son chat.</p></details></p>"
+                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p><details open=\"\">    <summary>Indice</summary>    <p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat.</p></details></p>"
               }
             }
           ]
@@ -145,7 +135,7 @@
               "element": {
                 "id": "c888f762-4b0c-401a-bfa4-2816af13d1f2",
                 "type": "text",
-                "content": "<p>Pour éviter qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>n’utilisez pas d’informations personnelles</strong> dans vos mots de passe. 🤫</p>"
+                "content": "<p>Pour empêcher qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>évitez d’utiliser des informations personnelles ou publiques</strong> dans vos mots de passe. 🤫</p>"
               }
             }
           ]
