@@ -740,17 +740,17 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation  2️⃣ Transforme-la pour en faire un mot de passe fort."
+                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation.<br>2️⃣ Transforme-la pour en faire un mot de passe fort."
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré » ?"
+                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré ! » ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Parfait ! Si tu prends les premières lettres et la ponctuation, ça donne B-Nel7nemcp 🔒"
+                      "content": "Parfait ! Si tu prends les premières lettres et la ponctuation, ça donne B-Nel7nemcp! 🔒"
                     },
                     {
                       "userName": "Emma",
@@ -800,7 +800,10 @@
                     "solutions": [
                       "Ls,jbdlsadcem3t!",
                       "Ls,j’bdlsadcem3t!",
-                      "Ls,j’bdlsadcem3t!"
+                      "Ls,j’abdlsadcem3t!",
+                      "Ls,j'bdlsadcem3t!",
+                      "Ls,j'abdlsadcem3t!",
+                      "Ls,jabdlsadcem3t!"
                     ]
                   }
                 ],
