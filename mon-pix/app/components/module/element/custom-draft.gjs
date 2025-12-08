@@ -57,6 +57,7 @@ export default class ModulixCustomDraft extends ModuleElement {
         {{/if}}
 
         <PixButton
+          class="element-custom-draft-buttons__retry"
           @iconBefore="refresh"
           @variant="tertiary"
           @triggerAction={{this.resetEmbed}}
