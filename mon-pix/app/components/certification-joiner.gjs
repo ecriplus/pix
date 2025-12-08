@@ -42,21 +42,25 @@ export default class CertificationJoiner extends Component {
     {{! template-lint-disable require-input-label no-bare-strings }}
     <section class="certification-joiner">
       <h1 class="certification-joiner__title">{{t "pages.certification-joiner.first-title"}}</h1>
-      <form autocomplete="off" {{on "submit" this.attemptNext}}>
+      <form {{on "submit" this.attemptNext}}>
         <p class="certification-joiner__mandatory">{{t "common.form.mandatory-all-fields"}}</p>
 
         <PixInput
           @id="certificationJoinerSessionId"
           @errorMessage={{this.sessionIdIsNotANumberMessage}}
           @validationStatus={{this.sessionIdStatus}}
-          pattern={{this.SESSION_ID_VALIDATION_PATTERN}}
           title={{t "pages.certification-joiner.form.fields-validation.session-number-error"}}
           {{on "input" this.checkSessionIdIsValid}}
           {{on "change" this.setSessionId}}
-          inputmode="decimal"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          pattern={{this.SESSION_ID_VALIDATION_PATTERN}}
           required="true"
           @subLabel={{t "pages.certification-joiner.form.fields.session-number-information"}}
           placeholder={{t "pages.certification-joiner.form.placeholders.session-number"}}
+          autocomplete="organization"
         >
           <:label>{{t "pages.certification-joiner.form.fields.session-number"}}</:label>
         </PixInput>
@@ -65,6 +69,7 @@ export default class CertificationJoiner extends Component {
           required="true"
           {{on "change" this.setFirstName}}
           placeholder={{t "pages.certification-joiner.form.placeholders.first-name"}}
+          autocomplete="given-name"
         >
           <:label>{{t "pages.certification-joiner.form.fields.first-name"}}</:label>
         </PixInput>
@@ -73,6 +78,7 @@ export default class CertificationJoiner extends Component {
           required="true"
           {{on "change" this.setLastName}}
           placeholder={{t "pages.certification-joiner.form.placeholders.birth-name"}}
+          autocomplete="family-name"
         >
           <:label>{{t "pages.certification-joiner.form.fields.birth-name"}}</:label>
         </PixInput>
@@ -92,6 +98,7 @@ export default class CertificationJoiner extends Component {
               {{on "focus-in" this.handleInputFocus}}
               @screenReaderOnly="true"
               required="true"
+              autocomplete="bday-day"
             >
               <:label>{{t "pages.certification-joiner.form.fields.birth-day"}}</:label>
             </PixInput>
@@ -106,6 +113,7 @@ export default class CertificationJoiner extends Component {
               {{on "focus-in" this.handleInputFocus}}
               @screenReaderOnly="true"
               required="true"
+              autocomplete="bday-month"
             >
               <:label>{{t "pages.certification-joiner.form.fields.birth-month"}}</:label>
             </PixInput>
@@ -119,6 +127,7 @@ export default class CertificationJoiner extends Component {
               {{on "focus-in" this.handleInputFocus}}
               @screenReaderOnly="true"
               required="true"
+              autocomplete="bday-year"
             >
               <:label>{{t "pages.certification-joiner.form.fields.birth-year"}}</:label>
             </PixInput>
@@ -156,7 +165,6 @@ export default class CertificationJoiner extends Component {
   @service store;
   @service intl;
 
-  SESSION_ID_VALIDATION_PATTERN = '^[0-9]*$';
   V3_CERTIFICATION_SUPPORTED_LANGUAGES = ['en', 'fr'];
 
   @tracked errorMessage = null;
