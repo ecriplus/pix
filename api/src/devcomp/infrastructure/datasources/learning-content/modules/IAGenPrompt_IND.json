@@ -31,7 +31,7 @@
               "element": {
                 "id": "339e443a-9eb7-476c-8689-9a7714c31607",
                 "type": "text",
-                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative d’écrire à sa place l’invitation aux participants. </p><p>Mais il est déçu du résultat… </p>"
+                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l'aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
               }
             }
           ]
@@ -180,14 +180,14 @@
               "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p><p>Vous pouvez changer le ton de ce message avec l'aide de l'IA.</p>",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J'ai écris ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! »"
+                      "content": "J'ai écrit ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! »"
                     },
                     {
                       "direction": "inbound",
@@ -528,7 +528,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p>"
               }
             },
             {
