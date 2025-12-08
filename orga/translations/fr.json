@@ -346,6 +346,20 @@
           "heading": "Autres méthodes d’inscription"
         }
       },
+      "oidc-association-confirmation": {
+        "authentication-method-to-add": "Connexion ajoutée :",
+        "confirm": "Continuer",
+        "current-authentication-methods": "Mes méthodes de connexion actuelles :",
+        "email": "Adresse e-mail",
+        "external-connection": "Connexion externe",
+        "external-connection-via": "Connexion via",
+        "information": "L'évaluation des compétences étant personnalisée, votre compte doit rester strictement personnel",
+        "return": "Retour",
+        "sub-title": "Un nouveau moyen de connexion est sur le point d'être ajouté à votre compte Pix",
+        "switch-account": "Changer de compte",
+        "title": "Attention !",
+        "username": "Identifiant"
+      },
       "oidc-provider-selector": {
         "label": "Rechercher une méthode de connexion",
         "placeholder": "Sélectionner une méthode de connexion",

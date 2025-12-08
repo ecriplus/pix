@@ -11,41 +11,45 @@ import t from 'ember-intl/helpers/t';
 export default class OidcAssociationConfirmation extends Component {
   <template>
     <h1 class="oidc-reconciliation__title">
-      {{t "pages.oidc-reconciliation.title"}}
-      <span class="oidc-reconciliation__subtitle">{{t "pages.oidc-reconciliation.sub-title"}}</span>
+      {{t "components.authentication.oidc-association-confirmation.title"}}
+      <span class="oidc-reconciliation__subtitle">{{t
+          "components.authentication.oidc-association-confirmation.sub-title"
+        }}</span>
     </h1>
-    <p class="oidc-reconciliation__information">{{t "pages.oidc-reconciliation.information"}}</p>
+    <p class="oidc-reconciliation__information">{{t
+        "components.authentication.oidc-association-confirmation.information"
+      }}</p>
     <div class="oidc-reconciliation__container">
       <div class="oidc-reconciliation__user-information">
         <PixIcon @name="userCircle" @plainIcon={{true}} @ariaHidden={{true}} />
         <p>{{@fullNameFromPix}}</p>
         <div class="oidc-reconciliation__user-authentication-methods">
-          <p>{{t "pages.oidc-reconciliation.current-authentication-methods"}}</p>
+          <p>{{t "components.authentication.oidc-association-confirmation.current-authentication-methods"}}</p>
           <dl
             class="oidc-reconciliation__user-authentication-methods-list"
-            title={{t "pages.oidc-reconciliation.current-authentication-methods"}}
+            title={{t "components.authentication.oidc-association-confirmation.current-authentication-methods"}}
           >
             {{#if this.shouldShowEmail}}
               <div>
-                <dt>{{t "pages.oidc-reconciliation.email"}}</dt>
+                <dt>{{t "components.authentication.oidc-association-confirmation.email"}}</dt>
                 <dd>{{@email}}</dd>
               </div>
             {{/if}}
             {{#if this.shouldShowUsername}}
               <div>
-                <dt>{{t "pages.oidc-reconciliation.username"}}</dt>
+                <dt>{{t "components.authentication.oidc-association-confirmation.username"}}</dt>
                 <dd>{{@username}}</dd>
               </div>
             {{/if}}
             {{#if this.shouldShowGarAuthenticationMethod}}
               <div>
-                <dt>{{t "pages.oidc-reconciliation.external-connection"}}</dt>
-                <dd>{{t "pages.user-account.connexion-methods.authentication-methods.gar"}}</dd>
+                <dt>{{t "components.authentication.oidc-association-confirmation.external-connection"}}</dt>
+                <dd>{{t "components.authentication.user-account.connexion-methods.authentication-methods.gar"}}</dd>
               </div>
             {{/if}}
             {{#each this.oidcAuthenticationMethodOrganizationNames as |organizationName|}}
               <div>
-                <dt>{{t "pages.oidc-reconciliation.external-connection"}}</dt>
+                <dt>{{t "components.authentication.oidc-association-confirmation.external-connection"}}</dt>
                 <dd>{{organizationName}}</dd>
               </div>
             {{/each}}
@@ -55,16 +59,17 @@ export default class OidcAssociationConfirmation extends Component {
 
       <div class="oidc-reconciliation__switch-account-button">
         <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
-            "pages.oidc-reconciliation.switch-account"
+            "components.authentication.oidc-association-confirmation.switch-account"
           }}</PixButton>
       </div>
 
       <PixIcon @name="arrowTop" @ariaHidden={{true}} class="oidc-reconciliation__arrow" />
       <div class="oidc-reconciliation__new-authentication-method">
-        <p>{{t "pages.oidc-reconciliation.authentication-method-to-add"}}</p>
+        <p>{{t "components.authentication.oidc-association-confirmation.authentication-method-to-add"}}</p>
         <PixBlock class="oidc-reconciliation__authentication-method-to-add">
-          <dl title={{t "pages.oidc-reconciliation.authentication-method-to-add"}}>
-            <dt>{{t "pages.oidc-reconciliation.external-connection-via"}} {{this.identityProviderOrganizationName}}</dt>
+          <dl title={{t "components.authentication.oidc-association-confirmation.authentication-method-to-add"}}>
+            <dt>{{t "components.authentication.oidc-association-confirmation.external-connection-via"}}
+              {{this.identityProviderOrganizationName}}</dt>
             <dd>{{@fullNameFromExternalIdentityProvider}}</dd>
           </dl>
         </PixBlock>
@@ -78,10 +83,10 @@ export default class OidcAssociationConfirmation extends Component {
 
       <div class="oidc-reconciliation__action-buttons">
         <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
-            "pages.oidc-reconciliation.return"
+            "components.authentication.oidc-association-confirmation.return"
           }}</PixButton>
         <PixButton @triggerAction={{this.reconcile}} @isLoading={{this.isLoading}}>
-          {{t "pages.oidc-reconciliation.confirm"}}
+          {{t "components.authentication.oidc-association-confirmation.confirm"}}
         </PixButton>
       </div>
     </div>
