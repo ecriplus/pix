@@ -72,7 +72,11 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     it('should update a certification version and return 204', async function () {
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
-      const initialChallengesConfiguration = { maximumAssessmentLength: 20, limitToOneQuestionPerTube: false };
+      const initialChallengesConfiguration = {
+        maximumAssessmentLength: 20,
+        challengesBetweenSameCompetence: 0,
+        limitToOneQuestionPerTube: false,
+      };
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Frameworks.PIX_PLUS_DROIT,
@@ -89,7 +93,11 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
-      const newChallengesConfiguration = { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true };
+      const newChallengesConfiguration = {
+        maximumAssessmentLength: 32,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: true,
+      };
 
       const options = {
         method: 'PATCH',

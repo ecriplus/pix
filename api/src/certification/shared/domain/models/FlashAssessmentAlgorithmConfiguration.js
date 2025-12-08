@@ -6,7 +6,7 @@ import { EntityValidationError } from '../../../../shared/domain/errors.js';
 export class FlashAssessmentAlgorithmConfiguration {
   static #schema = Joi.object({
     maximumAssessmentLength: Joi.number().integer().min(0),
-    challengesBetweenSameCompetence: Joi.number().integer().min(0),
+    challengesBetweenSameCompetence: Joi.number().integer().min(0).required(),
     limitToOneQuestionPerTube: Joi.boolean(),
     enablePassageByAllCompetences: Joi.boolean(),
     variationPercent: Joi.number().min(0).max(1),

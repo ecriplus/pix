@@ -58,7 +58,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
               'assessment-duration': 120,
               'global-scoring-configuration': null,
               'competences-scoring-configuration': null,
-              'challenges-configuration': { maximumAssessmentLength: 32 },
+              'challenges-configuration': { maximumAssessmentLength: 32, challengesBetweenSameCompetence: 0 },
             },
           },
         });
