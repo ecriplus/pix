@@ -1476,6 +1476,8 @@
           "targetProfileCount": "Associated Targets Profiles"
         },
         "targetProfiles": {
+          "detach-modal": "Are you sure you want to detach the target profile <strong>{name}</strong>? This target profile is linked to a combined course. The recommendation for this modulix will be altered if you detach it.",
+          "detach-title": "Detach target profile from traning",
           "tabName": "Target Profiles",
           "title": "Attach one or more target profiles"
         },

@@ -7,6 +7,7 @@ export default class TargetProfileSummary extends Model {
   @attr() category;
   @attr() createdAt;
   @attr() canDetach;
+  @attr() isPartOfCombinedCourse;
 
   get translationKeyCategory() {
     return categories[this.category];

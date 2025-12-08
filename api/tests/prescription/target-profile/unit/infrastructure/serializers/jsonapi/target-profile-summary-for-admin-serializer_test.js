@@ -12,6 +12,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-serializer', function () 
           outdated: false,
           category: 'OTHER',
           createdAt: new Date('2021-01-01'),
+          isPartOfCombinedCourse: true,
         }),
         domainBuilder.buildTargetProfileSummaryForAdmin({
           id: 2,
@@ -38,6 +39,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-serializer', function () 
               category: 'OTHER',
               'created-at': new Date('2021-01-01'),
               'can-detach': false,
+              'is-part-of-combined-course': true,
             },
           },
           {

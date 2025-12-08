@@ -10,6 +10,9 @@ class TargetProfileSummaryForAdmin {
     this.createdAt = params.createdAt;
     this.#sharedOrganizationId = params.sharedOrganizationId;
     this.#ownerOrganizationId = params.ownerOrganizationId;
+    if ('isPartOfCombinedCourse' in params) {
+      this.isPartOfCombinedCourse = params.isPartOfCombinedCourse;
+    }
   }
   get canDetach() {
     return Boolean(this.#sharedOrganizationId) && this.#sharedOrganizationId !== this.#ownerOrganizationId;

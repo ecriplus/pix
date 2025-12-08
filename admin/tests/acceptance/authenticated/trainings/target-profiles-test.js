@@ -1,8 +1,9 @@
 import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
+import { waitForDialogClose } from 'pix-admin/tests/helpers/wait-for';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
@@ -11,18 +12,19 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks, 'fr');
 
-  let trainingId, targetProfileSummaryId;
+  let trainingId, targetProfileSummaryId, targetProfileSummary;
 
   hooks.beforeEach(async function () {
     trainingId = 2;
     targetProfileSummaryId = 1111;
 
-    const targetProfileSummary = server.create('target-profile-summary', {
+    targetProfileSummary = server.create('target-profile-summary', {
       id: targetProfileSummaryId,
       internalName: 'Super profil cible 2',
+      isPartOfCombinedCourse: false,
     });
     server.create('training', {
-      id: 2,
+      id: trainingId,
       title: 'Devenir tailleur de citrouille',
       link: 'http://www.example2.net',
       type: 'autoformation',
@@ -40,7 +42,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
   module('When admin member is not logged in', function () {
     test('it should not be accessible by an unauthenticated user', async function (assert) {
       // when
-      await visit(`/trainings/1/target-profiles`);
+      await visit(`/trainings/${trainingId}/target-profiles`);
 
       // then
       assert.strictEqual(currentURL(), '/login');
@@ -72,7 +74,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
         assert.dom(await screen.findByRole('link', { name: 'Super profil cible' })).exists();
       });
 
-      test('it should be able to detach a target profile to a training', async function (assert) {
+      test('it should be able to detach a target profile from a training', async function (assert) {
         await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
         // when
@@ -81,6 +83,30 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
 
         // then
         assert.dom(await screen.findByText('Aucun profil cible associé à ce contenu formatif')).exists();
+      });
+
+      module('when target profile is part of a combined course', function (hooks) {
+        hooks.beforeEach(function () {
+          targetProfileSummary.update('isPartOfCombinedCourse', true);
+        });
+        hooks.afterEach(function () {
+          targetProfileSummary.update('isPartOfCombinedCourse', false);
+        });
+
+        test('it should ask confirmation to detach target', async function (assert) {
+          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+
+          // when
+          const screen = await visit(`/trainings/${trainingId}/target-profiles`);
+          await clickByName('Détacher');
+          const modal = await screen.findByRole('dialog');
+          await click(within(modal).getByRole('button', { name: 'Confirmer' }));
+
+          await waitForDialogClose();
+
+          // then
+          assert.dom(await screen.findByText('Aucun profil cible associé à ce contenu formatif')).exists();
+        });
       });
 
       module('When isFilteringRecommendedTrainingByOrganizationsEnabled feature toggle is true', function (hooks) {

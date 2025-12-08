@@ -78,7 +78,11 @@
                     >Filtrer par organisations
                     </PixButtonLink>
                   {{/if}}
-                  <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
+                  <PixButton
+                    @variant="error"
+                    @iconBefore="delete"
+                    @triggerAction={{fn this.onClickDetachTargetProfile row}}
+                  >
                     Détacher
                   </PixButton>
                 </div>
@@ -92,3 +96,27 @@
     </section>
   </div>
 {{/if}}
+
+<PixModal
+  @title={{t "pages.trainings.training.targetProfiles.detach-title"}}
+  @onCloseButtonClick={{this.closeModal}}
+  @showModal={{this.showModal}}
+>
+  <:content>
+    <p>
+      {{t
+        "pages.trainings.training.targetProfiles.detach-modal"
+        htmlSafe=true
+        name=this.targetProfileToDetach.internalName
+      }}
+    </p>
+  </:content>
+  <:footer>
+    <PixButton @variant="secondary" @triggerAction={{this.closeModal}}>
+      {{t "common.actions.cancel"}}
+    </PixButton>
+    <PixButton @variant="error" @triggerAction={{fn this.detachTargetProfile this.targetProfileToDetach}}>{{t
+        "common.actions.confirm"
+      }}</PixButton>
+  </:footer>
+</PixModal>

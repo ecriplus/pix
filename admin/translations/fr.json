@@ -1477,6 +1477,8 @@
           "targetProfileCount": "Profils cibles associés"
         },
         "targetProfiles": {
+          "detach-modal": "Etes-vous sûr de vouloir détacher le profil cible <strong>{name}</strong> ? Ce profil cible est lié à un parcours apprenant. La recommandation de ce modulix sera altérée si vous le détachez.",
+          "detach-title": "Détacher le profil cible du contenu formatif",
           "tabName": "Profils cibles associés",
           "title": "Rattacher un ou plusieurs profils cibles"
         },
