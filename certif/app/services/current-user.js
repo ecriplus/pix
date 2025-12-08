@@ -16,9 +16,37 @@ export default class CurrentUserService extends Service {
       try {
         this.certificationPointOfContact = await this.store.queryRecord('certification-point-of-contact', {});
 
-        this.currentAllowedCertificationCenterAccess = this.certificationPointOfContact
+        const allowedCertificationCenterAccesses = this.certificationPointOfContact
           .hasMany('allowedCertificationCenterAccesses')
-          .value()[0];
+          .value();
+
+        if (allowedCertificationCenterAccesses.length === 0) {
+          this.currentAllowedCertificationCenterAccess = null;
+          this.currentCertificationCenterMembership = null;
+          this.isAdminOfCurrentCertificationCenter = false;
+          return;
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlCenterId = urlParams.get('centerId');
+        const storedCenterId = localStorage.getItem('currentCenterId');
+        const preferredCenterId = urlCenterId || storedCenterId;
+
+        if (preferredCenterId) {
+          const preferredCenter = allowedCertificationCenterAccesses.find((center) => center.id === preferredCenterId);
+
+          if (preferredCenter) {
+            this.currentAllowedCertificationCenterAccess = preferredCenter;
+          } else {
+            this.currentAllowedCertificationCenterAccess = allowedCertificationCenterAccesses[0];
+          }
+        } else {
+          this.currentAllowedCertificationCenterAccess = allowedCertificationCenterAccesses[0];
+        }
+
+        if (this.currentAllowedCertificationCenterAccess) {
+          localStorage.setItem('currentCenterId', this.currentAllowedCertificationCenterAccess.id);
+        }
 
         this.currentCertificationCenterMembership = this._findCertificationCenterMembershipByCertificationCenterId(
           this.currentAllowedCertificationCenterAccess?.id,
@@ -51,6 +79,8 @@ export default class CurrentUserService extends Service {
         this.certificationPointOfContact.allowedCertificationCenterAccesses.find(
           ({ id }) => id === String(certificationCenterId),
         );
+
+      localStorage.setItem('currentCenterId', certificationCenterId);
 
       this.currentCertificationCenterMembership =
         this._findCertificationCenterMembershipByCertificationCenterId(certificationCenterId);

@@ -217,5 +217,215 @@ module('Unit | Service | current-user', function (hooks) {
       });
       assert.ok(true);
     });
+
+    test('saves the new center id in localStorage', async function (assert) {
+      // given
+      const userId = 123;
+      const store = this.owner.lookup('service:store');
+
+      const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
+        id: '111',
+      });
+
+      const newAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
+        id: '222',
+      });
+
+      const currentCertificationCenterMembership = store.createRecord('certification-center-membership', {
+        id: '1231',
+        certificationCenterId: 111,
+        userId,
+        role: 'MEMBER',
+      });
+
+      const newCertificationCenterMembership = store.createRecord('certification-center-membership', {
+        id: '1232',
+        certificationCenterId: 222,
+        userId,
+        role: 'ADMIN',
+      });
+
+      const certificationPointOfContact = store.createRecord('certification-point-of-contact', {
+        id: '124',
+        allowedCertificationCenterAccesses: [
+          currentAllowedCertificationCenterAccess,
+          newAllowedCertificationCenterAccess,
+        ],
+        certificationCenterMemberships: [currentCertificationCenterMembership, newCertificationCenterMembership],
+      });
+
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.certificationPointOfContact = certificationPointOfContact;
+      currentUser.currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+      sinon.stub(newCertificationCenterMembership, 'save').resolves();
+      localStorage.clear();
+
+      // when
+      await currentUser.updateCurrentCertificationCenter(222);
+
+      // then
+      assert.strictEqual(localStorage.getItem('currentCenterId'), '222');
+    });
+  });
+
+  module('localStorage persistence', function (hooks) {
+    hooks.beforeEach(function () {
+      localStorage.clear();
+    });
+
+    hooks.afterEach(function () {
+      localStorage.clear();
+    });
+
+    test('loads center from localStorage when no query param is present', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const allowedCertificationCenterAccessA = store.createRecord('allowed-certification-center-access', {
+        id: '111',
+      });
+
+      const allowedCertificationCenterAccessB = store.createRecord('allowed-certification-center-access', {
+        id: '222',
+      });
+
+      const certificationCenterMembershipA = store.createRecord('certification-center-membership', {
+        id: '1231',
+        certificationCenterId: 111,
+        userId: 123,
+        role: 'MEMBER',
+      });
+
+      const certificationCenterMembershipB = store.createRecord('certification-center-membership', {
+        id: '1232',
+        certificationCenterId: 222,
+        userId: 123,
+        role: 'ADMIN',
+      });
+
+      const certificationPointOfContact = store.createRecord('certification-point-of-contact', {
+        id: '124',
+        allowedCertificationCenterAccesses: [allowedCertificationCenterAccessA, allowedCertificationCenterAccessB],
+        certificationCenterMemberships: [certificationCenterMembershipA, certificationCenterMembershipB],
+      });
+
+      sinon.stub(store, 'queryRecord').resolves(certificationPointOfContact);
+      sinon.stub(certificationCenterMembershipB, 'save').resolves();
+
+      class SessionStub extends Service {
+        isAuthenticated = true;
+        data = { authenticated: { user_id: 123 } };
+      }
+      this.owner.register('service:session', SessionStub);
+      const currentUser = this.owner.lookup('service:currentUser');
+
+      localStorage.setItem('currentCenterId', '222');
+
+      // when
+      await currentUser.load();
+
+      // then
+      assert.strictEqual(currentUser.currentAllowedCertificationCenterAccess.id, '222');
+      assert.strictEqual(currentUser.currentCertificationCenterMembership, certificationCenterMembershipB);
+      assert.true(currentUser.isAdminOfCurrentCertificationCenter);
+    });
+
+    test('prioritizes query param centerId over localStorage', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const allowedCertificationCenterAccessA = store.createRecord('allowed-certification-center-access', {
+        id: '111',
+      });
+
+      const allowedCertificationCenterAccessB = store.createRecord('allowed-certification-center-access', {
+        id: '222',
+      });
+
+      const certificationCenterMembershipA = store.createRecord('certification-center-membership', {
+        id: '1231',
+        certificationCenterId: 111,
+        userId: 123,
+        role: 'MEMBER',
+      });
+
+      const certificationCenterMembershipB = store.createRecord('certification-center-membership', {
+        id: '1232',
+        certificationCenterId: 222,
+        userId: 123,
+        role: 'ADMIN',
+      });
+
+      const certificationPointOfContact = store.createRecord('certification-point-of-contact', {
+        id: '124',
+        allowedCertificationCenterAccesses: [allowedCertificationCenterAccessA, allowedCertificationCenterAccessB],
+        certificationCenterMemberships: [certificationCenterMembershipA, certificationCenterMembershipB],
+      });
+
+      sinon.stub(store, 'queryRecord').resolves(certificationPointOfContact);
+      sinon.stub(certificationCenterMembershipA, 'save').resolves();
+
+      class SessionStub extends Service {
+        isAuthenticated = true;
+        data = { authenticated: { user_id: 123 } };
+      }
+      this.owner.register('service:session', SessionStub);
+
+      localStorage.setItem('currentCenterId', '222');
+
+      const originalURLSearchParams = window.URLSearchParams;
+      window.URLSearchParams = class extends originalURLSearchParams {
+        constructor() {
+          super('?centerId=111');
+        }
+      };
+
+      const currentUser = this.owner.lookup('service:currentUser');
+
+      // when
+      await currentUser.load();
+
+      // then
+      assert.strictEqual(currentUser.currentAllowedCertificationCenterAccess.id, '111');
+      assert.strictEqual(currentUser.currentCertificationCenterMembership, certificationCenterMembershipA);
+      assert.false(currentUser.isAdminOfCurrentCertificationCenter);
+
+      window.URLSearchParams = originalURLSearchParams;
+    });
+
+    test('saves selected center to localStorage on load', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const allowedCertificationCenterAccessA = store.createRecord('allowed-certification-center-access', {
+        id: '789',
+      });
+
+      const certificationCenterMembershipA = store.createRecord('certification-center-membership', {
+        id: '1231',
+        certificationCenterId: 789,
+        userId: 123,
+        role: 'ADMIN',
+      });
+
+      const certificationPointOfContact = store.createRecord('certification-point-of-contact', {
+        id: '124',
+        allowedCertificationCenterAccesses: [allowedCertificationCenterAccessA],
+        certificationCenterMemberships: [certificationCenterMembershipA],
+      });
+
+      sinon.stub(store, 'queryRecord').resolves(certificationPointOfContact);
+      sinon.stub(certificationCenterMembershipA, 'save').resolves();
+
+      class SessionStub extends Service {
+        isAuthenticated = true;
+        data = { authenticated: { user_id: 123 } };
+      }
+      this.owner.register('service:session', SessionStub);
+      const currentUser = this.owner.lookup('service:currentUser');
+
+      // when
+      await currentUser.load();
+
+      // then
+      assert.strictEqual(localStorage.getItem('currentCenterId'), '789');
+    });
   });
 });
