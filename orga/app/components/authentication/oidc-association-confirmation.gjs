@@ -10,23 +10,23 @@ import t from 'ember-intl/helpers/t';
 
 export default class OidcAssociationConfirmation extends Component {
   <template>
-    <h1 class="oidc-reconciliation__title">
+    <h1 class="oidc-association__title">
       {{t "components.authentication.oidc-association-confirmation.title"}}
-      <span class="oidc-reconciliation__subtitle">{{t
+      <span class="oidc-association__subtitle">{{t
           "components.authentication.oidc-association-confirmation.sub-title"
         }}</span>
     </h1>
-    <p class="oidc-reconciliation__information">{{t
+    <p class="oidc-association__information">{{t
         "components.authentication.oidc-association-confirmation.information"
       }}</p>
-    <div class="oidc-reconciliation__container">
-      <div class="oidc-reconciliation__user-information">
+    <div class="oidc-association__container">
+      <div class="oidc-association__user-information">
         <PixIcon @name="userCircle" @plainIcon={{true}} @ariaHidden={{true}} />
         <p>{{@fullNameFromPix}}</p>
-        <div class="oidc-reconciliation__user-authentication-methods">
+        <div class="oidc-association__user-authentication-methods">
           <p>{{t "components.authentication.oidc-association-confirmation.current-authentication-methods"}}</p>
           <dl
-            class="oidc-reconciliation__user-authentication-methods-list"
+            class="oidc-association__user-authentication-methods-list"
             title={{t "components.authentication.oidc-association-confirmation.current-authentication-methods"}}
           >
             {{#if this.shouldShowEmail}}
@@ -51,16 +51,16 @@ export default class OidcAssociationConfirmation extends Component {
         </div>
       </div>
 
-      <div class="oidc-reconciliation__switch-account-button">
+      <div class="oidc-association__switch-account-button">
         <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
             "components.authentication.oidc-association-confirmation.switch-account"
           }}</PixButton>
       </div>
 
-      <PixIcon @name="arrowTop" @ariaHidden={{true}} class="oidc-reconciliation__arrow" />
-      <div class="oidc-reconciliation__new-authentication-method">
+      <PixIcon @name="arrowTop" @ariaHidden={{true}} class="oidc-association__arrow" />
+      <div class="oidc-association__new-authentication-method">
         <p>{{t "components.authentication.oidc-association-confirmation.authentication-method-to-add"}}</p>
-        <PixBlock class="oidc-reconciliation__authentication-method-to-add">
+        <PixBlock class="oidc-association__authentication-method-to-add">
           <dl title={{t "components.authentication.oidc-association-confirmation.authentication-method-to-add"}}>
             <dt>{{t "components.authentication.oidc-association-confirmation.external-connection-via"}}
               {{@identityProviderOrganizationName}}</dt>
@@ -70,12 +70,12 @@ export default class OidcAssociationConfirmation extends Component {
       </div>
 
       {{#if this.reconcileErrorMessage}}
-        <PixNotificationAlert @type="error" class="oidc-reconciliation__container-error">
+        <PixNotificationAlert @type="error" class="oidc-association__container-error">
           {{this.reconcileErrorMessage}}
         </PixNotificationAlert>
       {{/if}}
 
-      <div class="oidc-reconciliation__action-buttons">
+      <div class="oidc-association__action-buttons">
         <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
             "components.authentication.oidc-association-confirmation.return"
           }}</PixButton>

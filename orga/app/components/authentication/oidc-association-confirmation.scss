@@ -1,0 +1,151 @@
+@use 'pix-design-tokens/typography';
+
+.oidc-association {
+  &__title,
+  &__subtitle,
+  &__information {
+    color: var(--pix-neutral-900);
+    text-align: center;
+  }
+
+  &__title {
+    @extend %pix-title-m;
+
+    padding-top: var(--pix-spacing-8x);
+    text-align: center;
+  }
+
+  &__subtitle {
+    @extend %pix-title-xs;
+
+    display: block;
+    margin: 0;
+    padding: var(--pix-spacing-4x) 0 var(--pix-spacing-1x) 0;
+  }
+
+  &__information {
+    @extend %pix-title-xs;
+
+    margin-bottom: var(--pix-spacing-12x);
+    font-weight: 400;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 500px;
+  }
+
+  &__user-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 570px;
+    padding-top: var(--pix-spacing-8x);
+    background-color: var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+
+    svg {
+      min-width: 120px;
+      height: 120px;
+      color: var(--pix-neutral-100);
+    }
+
+    p {
+      @extend %pix-title-xs;
+
+      margin: 0;
+      padding-top: var(--pix-spacing-2x);
+      color: var(--pix-neutral-900);
+    }
+  }
+
+  &__user-authentication-methods {
+    width: 100%;
+    padding: var(--pix-spacing-8x);
+
+    p {
+      @extend %pix-title-xs;
+
+      font-weight: 400;
+    }
+  }
+
+  &__new-authentication-method {
+    width: 506px;
+    padding-top: var(--pix-spacing-4x);
+
+    p {
+      @extend %pix-title-xs;
+
+      color: var(--pix-neutral-900);
+      font-weight: 400;
+    }
+  }
+
+  &__user-authentication-methods-list {
+    padding: var(--pix-spacing-8x) var(--pix-spacing-10x);
+    background-color: var(--pix-neutral-0);
+    border-radius: var(--pix-spacing-2x);
+
+    dd,
+    dt {
+      display: inline;
+      color: var(--pix-neutral-900);
+
+      @extend %pix-body-l;
+    }
+
+    dt {
+      display: inline-block;
+      width: 38%;
+      padding: var(--pix-spacing-1x) 0;
+      font-weight: 500;
+    }
+  }
+
+  &__switch-account-button {
+    display: flex;
+    justify-content: right;
+    width: 570px;
+    margin-top: var(--pix-spacing-2x);
+  }
+
+  &__arrow {
+    min-width: 50px;
+    height: 70px;
+    color: var(--pix-neutral-20);
+  }
+
+  &__authentication-method-to-add {
+    margin-bottom: 32px;
+    border-radius: 8px;
+
+    dl {
+      margin: 0;
+      padding: var(--pix-spacing-8x) var(--pix-spacing-10x);
+
+      @extend %pix-body-l;
+
+      color: var(--pix-neutral-900);
+    }
+
+    dd,
+    dt {
+      display: inline;
+    }
+
+    dt {
+      font-weight: 500;
+    }
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: var(--pix-spacing-6x);
+    justify-content: center;
+    width: 100%;
+    padding-top: var(--pix-spacing-8x);
+  }
+}
