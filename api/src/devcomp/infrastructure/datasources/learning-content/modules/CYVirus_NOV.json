@@ -160,7 +160,7 @@
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
-                      "content": "<p>Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus.</p><br><p>➜ <strong>C</strong><strong>et ordinateur a été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<p>Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus.</p><br><p>➜ <strong>Cet ordinateur a été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -433,7 +433,7 @@
               "element": {
                 "id": "142142d6-fd32-452b-9158-fe7209543865",
                 "type": "text",
-                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment  éviter les logiciels malveillants ? </h4><ul><li>Privilégier les sites légaux et officiels&nbsp;pour télécharger un logiciel ou regarder un film.&nbsp;</li><li>Ne pas cliquer sur des fichiers&nbsp;ou&nbsp;des pièces jointes&nbsp;dans des&nbsp;messages inconnus.</li><li>Brancher uniquement des appareils de confiance.</li><li>Charger son appareil sur une prise électrique.</li></ul>"
+                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment éviter les logiciels malveillants ? </h4><ul><li>Privilégier les sites légaux et officiels&nbsp;pour télécharger un logiciel ou regarder un film.&nbsp;</li><li>Ne pas cliquer sur des fichiers&nbsp;ou&nbsp;des pièces jointes&nbsp;dans des&nbsp;messages inconnus.</li><li>Brancher uniquement des appareils de confiance.</li><li>Charger son appareil sur une prise électrique.</li></ul>"
               }
             }
           ]
