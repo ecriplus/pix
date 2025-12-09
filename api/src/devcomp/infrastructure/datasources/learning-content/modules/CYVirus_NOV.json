@@ -5,8 +5,8 @@
   "title": "Mon ordinateur a attrapé un virus : comment est-ce possible ?",
   "isBeta": true,
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.</p>",
+    "image": "https://assets.pix.org/modules/CYVirus_NOV/picto_cyber_virus_nov.svg",
+    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.</p><p><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -61,21 +61,21 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Il y a un virus informatique.</p>",
+                    "content": "<p>Il a un virus informatique.</p>",
                     "feedback": {
                       "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Il y a un logiciel malveillant.</p>",
+                    "content": "<p>Il a un logiciel malveillant.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Il y a eu une mise à jour.</p>",
+                    "content": "<p>Il a eu une mise à jour.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
                     }
@@ -103,7 +103,7 @@
               "element": {
                 "id": "ab1ca7db-aa26-49fe-8a04-2bf7817957bc",
                 "type": "text",
-                "content": "<p>Les logiciels malveillants (souvent appelés «&nbsp;virus informatique&nbsp;»), quand ils sont présents sur un appareil, peuvent parfois causer des problèmes de fonctionnement.</p>"
+                "content": "<p>Quand un logiciel malveillant est présent sur un appareil, il peut parfois causer des problèmes de fonctionnement.</p>"
               }
             }
           ]
@@ -143,7 +143,7 @@
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
-                      "content": "<p>Le curseur bouge de manière saccadée et les pages web mettent très longtemps à charger.</p>\n<br>\n<p> ➜ <strong>Cet ordinateur n’a pas été infecté par un logiciel malveillant.</strong>&nbsp;Même si un logiciel malveillant peut provoquer cet effet, d'autres raisons peuvent expliquer ces ralentissements, comme un espace de stockage saturé. <em>(à mettre dans un mini feedback ?)</em></p>"
+                      "content": "<p>Le curseur bouge de manière saccadée et les pages web mettent très longtemps à charger.</p><br><p> ➜ <strong>Cet ordinateur n’a pas été infecté par un logiciel malveillant.</strong>&nbsp;</p><p>Ces ralentissements peuvent venir d’autres problèmes.</p>"
                     }
                   ]
                 },
@@ -160,7 +160,7 @@
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
-                      "content": "<p>Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus.</p>\n<br>\n<p>➜ <strong>C</strong><strong>et ordinateur a été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<p>Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus.</p><br><p>➜ <strong>C</strong><strong>et ordinateur a été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -169,7 +169,7 @@
                     {
                       "id": "931dee38-a756-44f9-98f9-d5e545d34c1e",
                       "type": "text",
-                      "content": "<p><strong>Ordinateur 3</strong></p>\n<br>\n<p>Rien d’inhabituel&nbsp;: l’ordinateur fonctionne normalement. <em>(à montrer ?)</em></p>\n<br>\n<p>➜<strong> Cet ordinateur a aussi été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<p><strong>Ordinateur 3</strong></p><br><p>Rien d’inhabituel&nbsp;: l’ordinateur fonctionne normalement. <em>(à montrer ?)</em></p><br><p>➜<strong> Cet ordinateur a aussi été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 }
@@ -261,7 +261,7 @@
                 "cards": [
                   {
                     "id": "51f2b83b-2ebc-4b46-95f1-38330147adc4",
-                    "text": "Léa clique sur un lien dans une publicité pour regarder un film gratuitement.",
+                    "text": "Léa clique sur une publicité qui propose de regarder un film gratuitement.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-lidl.png",
                       "altText": ""
@@ -377,7 +377,7 @@
               "element": {
                 "id": "e7efa1be-03f5-4844-830c-249636f8e122",
                 "type": "text",
-                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques</strong>, dans le but de <strong>nuire</strong> aux appareils et à leurs utilisateurs, ainsi que pour en tirer profit.</p>"
+                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques.</strong> Le but des pirates est de <strong>nuire</strong> aux appareils et à leurs utilisateurs <strong>pour en tirer profit.</strong><br></p>"
               }
             }
           ]
@@ -411,11 +411,19 @@
             {
               "type": "element",
               "element": {
+                "id": "52c8900a-2705-4fbd-9c3c-644d596a9a23",
+                "type": "text",
+                "content": "<h4>Du pirate informatique à l’ordinateur infecté, itinéraire d’un logiciel malveillant&nbsp;:</h4>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "a6a46a0d-573d-4fb8-9fb3-f286aaeae6c5",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/cy_virus_nov/infografie1-draft-recap.png",
                 "alt": "",
-                "alternativeText": "",
+                "alternativeText": "<p>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </p><p> Un programme informatique indésirable qui peut s’installer sur un appareil. Il&nbsp;est créé par un pirate informatique dans le but de nuire à un utilisateur  et à&nbsp;son appareil. </p><p>Comment s’installe un logiciel malveillant ?&nbsp; </p><p> Un logiciel malveillant ne s’installe pas tout seul. Les pirates utilisent des ruses pour piéger des utilisateurs à leur insu en cachant des logiciels malveillants dans des messages, pages web, publicités, applications ou logiciels, appareils usb. </p><p> Quels sont les effets ?&nbsp; </p><p> Une fois installé, un logiciel malveillant peut provoquer des dysfonctionnements. Certains sont visibles, d’autres passent totalement inaperçus.</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -425,7 +433,7 @@
               "element": {
                 "id": "142142d6-fd32-452b-9158-fe7209543865",
                 "type": "text",
-                "content": "<p>Infograhie 1&nbsp;:</p><h5>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </h5><p>Un programme informatique indésirable qui peut s’<strong>installer</strong> sur un appareil. Ils sont créés par des <strong>pirates informatiques</strong> dans le but de <strong>nuire</strong> à son utilisateur  et à&nbsp;son appareil.</p><h5>Comment s’installe un LM ?&nbsp; </h5><p>Un logiciel malveillant ne s’installe pas tout seul. Les pirates utilisent des <strong>ruses</strong> pour <strong>piéger</strong> des utilisateurs <strong>à leur insu</strong> en <strong>cachan</strong>t des logiciels malveillants dans des messages, pages web, publicités, applications ou logiciels, appareils usb. </p><h5>Quels sont les effets ?&nbsp; </h5><p>Une fois installé, un logiciel malveillant peut provoquer des <strong>dysfonctionnements</strong>. Certains sont <strong>visibles</strong>, d’autres passent totalement <strong>inaperçus</strong>.</p><p><br>Infographie 2&nbsp;:</p><h5>Comment les éviter ? </h5><ul><li>Privilégier les sites légaux et officiels&nbsp;pour télécharger un logiciel ou regarder un film.&nbsp;</li><li>Ne pas cliquer sur des fichiers&nbsp;ou&nbsp;des pièces jointes&nbsp;dans des&nbsp;messages inconnus.</li><li>Brancher uniquement des appareils de confiance.</li><li>Charger son appareil sur une prise électrique.</li></ul>"
+                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment  éviter les logiciels malveillants ? </h4><ul><li>Privilégier les sites légaux et officiels&nbsp;pour télécharger un logiciel ou regarder un film.&nbsp;</li><li>Ne pas cliquer sur des fichiers&nbsp;ou&nbsp;des pièces jointes&nbsp;dans des&nbsp;messages inconnus.</li><li>Brancher uniquement des appareils de confiance.</li><li>Charger son appareil sur une prise électrique.</li></ul>"
               }
             }
           ]
@@ -521,11 +529,11 @@
                     {
                       "id": "2709b208-293c-492c-80ec-41954790512f",
                       "type": "qcu",
-                      "instruction": "<p>Quelle action présente un risque ?</p>",
+                      "instruction": "<p>Brancher un appareil&nbsp;: quelle action présente un risque ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Brancher une clé USB trouvée dans un parking pour voir ce qu’elle contient.</p>",
+                          "content": "<p>Brancher sur un ordinateur une clé USB trouvée dans un parking pour voir ce qu’elle contient.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une clé USB inconnue.</p>"
@@ -541,7 +549,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Brancher un casque filaire pour écouter de la musique.</p>",
+                          "content": "<p>Brancher un casque filaire sur un ordianteur pour écouter de la musique.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
@@ -557,7 +565,7 @@
                     {
                       "id": "929cb848-38e6-4403-8f42-abcda0898a77",
                       "type": "qcu",
-                      "instruction": "<p>Quelle action présente un risque ?</p>",
+                      "instruction": "<p>Regarder un film&nbsp;: quelle action présente un risque ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -593,7 +601,7 @@
                     {
                       "id": "2e7e166a-72af-4096-adf4-8777f9556a90",
                       "type": "qcu",
-                      "instruction": "<p>Quelle action présente un risque ?</p>",
+                      "instruction": "<p>Télécharger un jeu&nbsp;: quelle action présente un risque ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -644,39 +652,95 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "<p>Pour terminer, prenons le cas d’Alice. </p><p>Alice a utilisé sa clé USB ce matin sur un ordinateur public à la bibliothèque. En rentrant chez elle, elle découvre que ses fichiers ont changé de noms et certains ne s’ouvrent plus.</p>"
+                "content": "<p>Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?&nbsp;</p><p>Pour le comprendre, prenons le cas d’Alice. </p><p>Alice a utilisé un ordinateur public à la bibliothèque, pour créer un document. Elle n’est pas allée sur Internet. Elle a enregistré son document sur sa clé USB pour pouvoir le rapporter chez elle.&nbsp;</p><p>En rentrant chez elle, elle découvre que les fichiers de sa clé USB ont changé de noms et certains ne s’ouvrent plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p><br>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "9d53847b-d609-4477-a9af-27b22d28c9a7",
-                "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, que s’est-il passé ?</p>",
+                "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
+                "type": "qrocm",
+                "instruction": "<p>À partir de cet exemple, complétez le texte suivant&nbsp;:</p>",
                 "proposals": [
                   {
-                    "id": "1",
-                    "content": "<p>Sa clé USB était abimée.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Eh non. Un virus informatique était déjà présent sur l’ordinateur public. En branchant sa clé USB sur l’ordinateur infecté, le virus a pu se copier sur sa clé et modifier ses fichiers. </p><p> <strong>Un virus</strong> est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
-                    }
+                    "type": "text",
+                    "content": "<span>Un virus informatique est un </span>"
                   },
                   {
-                    "id": "2",
-                    "content": "<p>Un virus informatique présent sur l’ordinateur public s’est copié sur la clé USB.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Bonne réponse !  En branchant sa clé USB sur l’ordinateur infecté, le virus a pu se copier sur sa clé et modifier ses fichiers. </p><p> <strong>Un virus</strong> est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
-                    }
+                    "input": "nature virus",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionner -",
+                    "defaultValue": "- Sélectionner -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "ordinateur"
+                      },
+                      {
+                        "id": "2",
+                        "content": "logiciel malveillant"
+                      },
+                      {
+                        "id": "3",
+                        "content": "document"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
-                    "id": "3",
-                    "content": "<p>Elle avait trop de fichiers sur sa clé USB.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Eh non. Un virus informatique était déjà présent sur l’ordinateur public. En branchant sa clé USB sur l’ordinateur infecté, le virus a pu se copier sur sa clé et modifier ses fichiers. </p><p><strong>Un virus </strong>est un type de logiciel malveillant capable de <strong>se propager</strong> d’un appareil à un autre.</p>"
-                    }
+                    "type": "text",
+                    "content": "<span>.</span>"
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Il est capable de</span>"
+                  },
+                  {
+                    "input": "1",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionner -",
+                    "defaultValue": "- Sélectionner -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "se propager d’un appareil à un autre"
+                      },
+                      {
+                        "id": "2",
+                        "content": "augmenter la vitesse d’un ordinateur"
+                      },
+                      {
+                        "id": "3",
+                        "content": "se connecter à Internet"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>, sans action de l’utilisateur.</span>"
                   }
                 ],
-                "solution": "2"
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Eh oui !</p>",
+                    "diagnosis": "<p>Un <strong>virus informatique</strong> est type particulier de logiciel malveillant. Il <strong>se propage seul</strong>, jusqu’à infecter des milliers d’appareils, et perturber leur fonctionnement.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas tout-à-fait.</p>",
+                    "diagnosis": "<p>Un <strong>virus informatique</strong> est type particulier de logiciel malveillant. Il <strong>se propage seul</strong>, jusqu’à infecter des milliers d’appareils, et perturber leur fonctionnement.</p>"
+                  }
+                }
               }
             }
           ]
