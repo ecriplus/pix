@@ -22,6 +22,7 @@ const serialize = function (assessments) {
       'title',
       'type',
       'state',
+      'createdAt',
       'answers',
       'codeCampaign',
       'certificationNumber',

@@ -160,6 +160,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       it('should return the expected assessment', async function () {
         // given
         server = await createServer();
+        const createdAtDate = new Date();
         const userId = databaseBuilder.factory.buildUser().id;
         const campaign = databaseBuilder.factory.buildCampaign();
         const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
@@ -168,6 +169,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
         const assessmentId = databaseBuilder.factory.buildAssessment({
           userId,
           courseId,
+          createdAt: createdAtDate,
           state: Assessment.states.STARTED,
           type: Assessment.types.CAMPAIGN,
           campaignParticipationId,
@@ -188,6 +190,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           type: 'assessments',
           id: assessmentId.toString(),
           attributes: {
+            'created-at': createdAtDate,
             state: Assessment.states.STARTED,
             'code-campaign': campaign.code,
             title: campaign.title,

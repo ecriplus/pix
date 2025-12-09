@@ -5,7 +5,7 @@ import { CampaignAssessment } from '../../../../../../src/shared/domain/read-mod
 import { CertificationAssessment } from '../../../../../../src/shared/domain/read-models/CertificationAssessment.js';
 import { CompetenceEvaluationAssessment } from '../../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
 import * as serializer from '../../../../../../src/shared/infrastructure/serializers/jsonapi/assessment-serializer.js';
-import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
   describe('#serialize', function () {
@@ -170,7 +170,11 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
 
     it('should convert an exam CampaignAssessment into JSON API data', function () {
       //given
+      const clock = sinon.useFakeTimers({ now: new Date('2025-10-21T10:00:00Z'), toFake: ['Date'] });
+      const createdAtDate = new Date();
+
       const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
+        createdAt: createdAtDate,
         title: 'Parcours',
         campaign: domainBuilder.buildCampaign({ title: 'Parcours', code: 'CAMPAGNE1', type: CampaignTypes.EXAM }),
       });
@@ -183,9 +187,12 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
 
       // then
       expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
+      expect(json.data.attributes['created-at']).to.deep.equal(new Date());
       expect(json.data.attributes['has-checkpoints']).to.be.false;
       expect(json.data.attributes['code-campaign']).to.equal('CAMPAGNE1');
       expect(json.data.attributes['title']).to.equal('Parcours');
+
+      clock.restore();
     });
   });
 
