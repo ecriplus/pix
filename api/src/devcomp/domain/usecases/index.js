@@ -10,6 +10,7 @@ import * as skillRepository from '../../../shared/infrastructure/repositories/sk
 import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import * as moduleIssueReportRepository from '../../infrastructure/repositories/module-issue-report-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
 
 const dependencies = {
@@ -17,6 +18,7 @@ const dependencies = {
   campaignRepository,
   campaignParticipationRepository,
   knowledgeElementRepository,
+  moduleIssueReportRepository,
   targetProfileRepository,
   targetProfileSummaryForAdminRepository,
   tubeRepository,
@@ -32,6 +34,7 @@ import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { addTutorialEvaluation } from './add-tutorial-evaluation.js';
 import { addTutorialToUser } from './add-tutorial-to-user.js';
 import { attachTargetProfilesToTraining } from './attach-target-profiles-to-training.js';
+import { createModuleIssueReport } from './create-module-issue-report.js';
 import { createOrUpdateTrainingTrigger } from './create-or-update-training-trigger.js';
 import { createPassage } from './create-passage.js';
 import { createTraining } from './create-training.js';
@@ -65,6 +68,7 @@ const usecasesWithoutInjectedDependencies = {
   addTutorialToUser,
   attachTargetProfilesToTraining,
   createOrUpdateTrainingTrigger,
+  createModuleIssueReport,
   createPassage,
   deleteTrainingTrigger,
   createTraining,
