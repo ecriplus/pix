@@ -68,7 +68,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configurationId,
             configuration,
-            hasAttachmentContextBeenAdded: false,
             messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await createChat(chat.toDTO());
@@ -163,7 +162,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configurationId,
             configuration,
-            hasAttachmentContextBeenAdded: false,
             messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await createChat(chat.toDTO());
@@ -322,7 +320,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configurationId,
                   configuration: configurationWithAttachment,
-                  hasAttachmentContextBeenAdded: true,
                   messages: [
                     buildBasicUserMessage('coucou user1', 0),
                     buildBasicAssistantMessage('coucou LLM1', 1),

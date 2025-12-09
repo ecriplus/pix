@@ -212,7 +212,6 @@ describe('Acceptance | Route | llm-preview', function () {
               inputMaxPrompts: 4,
             },
           },
-          hasAttachmentContextBeenAdded: false,
           messages: [],
         };
         await databaseBuilder.factory.buildChat(chat);
@@ -376,7 +375,6 @@ describe('Acceptance | Route | llm-preview', function () {
               inputMaxPrompts: 999,
             },
           },
-          hasAttachmentContextBeenAdded: false,
         });
         await databaseBuilder.commit();
 
@@ -408,7 +406,6 @@ describe('Acceptance | Route | llm-preview', function () {
             context: 'some context',
           },
         },
-        hasAttachmentContextBeenAdded: false,
       });
       await databaseBuilder.commit();
 
