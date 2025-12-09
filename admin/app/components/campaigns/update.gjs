@@ -12,7 +12,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
+import Joi from 'joi';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
+import { FormValidator } from 'pix-admin/utils/form-validator';
 
 export default class Update extends Component {
   @service pixToast;
@@ -22,9 +24,11 @@ export default class Update extends Component {
 
   @tracked displayIsForAbsoluteNoviceWarning;
 
+  validator = new FormValidator(CAMPAIGN_FORM_SCHEMA);
+
   constructor() {
     super(...arguments);
-    this.form = this.store.createRecord('campaign-form', {
+    this.form = {
       name: this.args.campaign.name,
       title: this.args.campaign.title,
       customLandingPageText: this.args.campaign.customLandingPageText,
@@ -33,7 +37,7 @@ export default class Update extends Component {
       customResultPageButtonUrl: this.args.campaign.customResultPageButtonUrl,
       multipleSendings: this.args.campaign.multipleSendings,
       isForAbsoluteNovice: this.args.campaign.isForAbsoluteNovice,
-    });
+    };
 
     this.displayIsForAbsoluteNoviceWarning = this.args.campaign.isForAbsoluteNovice;
   }
@@ -42,70 +46,29 @@ export default class Update extends Component {
   updateFormValue(key, event) {
     if (key === 'isForAbsoluteNovice') {
       this.form[key] = event.target.value === 'true';
-
       this.displayIsForAbsoluteNoviceWarning = this.form[key];
     } else {
       this.form[key] = event.target.value;
     }
+    this.validator.validateField(key, this.form[key]);
   }
 
   @action
   updateFormCheckBoxValue(key) {
     this.form[key] = !this.form[key];
+    this.validator.validateField(key, this.form[key]);
   }
 
   get displayIsForAbsoluteNoviceChoice() {
     return this.args.campaign.isTypeAssessment && this.accessControl.hasAccessToCampaignIsForAbsoluteNoviceEditionScope;
   }
 
-  get nameError() {
-    if (this.form.get('validations.attrs.name').isInvalid) {
-      return { message: this.form.get('validations.attrs.name').message, state: 'error' };
-    }
-    return null;
-  }
+  @action
+  async update(event) {
+    event.preventDefault();
+    const isValid = this.validator.validate(this.form);
+    if (!isValid) return;
 
-  get titleError() {
-    if (this.form.get('validations.attrs.title').isInvalid) {
-      return { message: this.form.get('validations.attrs.title').message, state: 'error' };
-    }
-    return null;
-  }
-
-  get customLandingPageTextError() {
-    if (this.form.get('validations.attrs.customLandingPageText').isInvalid) {
-      return { message: this.form.get('validations.attrs.customLandingPageText').message, state: 'error' };
-    }
-    return null;
-  }
-
-  get customResultPageTextError() {
-    if (this.form.get('validations.attrs.customResultPageText').isInvalid) {
-      return { message: this.form.get('validations.attrs.customResultPageText').message, state: 'error' };
-    }
-    return null;
-  }
-
-  get customResultPageButtonTextError() {
-    if (this.form.get('validations.attrs.customResultPageButtonText').isInvalid) {
-      return { message: this.form.get('validations.attrs.customResultPageButtonText').message, state: 'error' };
-    }
-    return null;
-  }
-
-  get customResultPageButtonUrlError() {
-    if (this.form.get('validations.attrs.customResultPageButtonUrl').isInvalid) {
-      return { message: this.form.get('validations.attrs.customResultPageButtonUrl').message, state: 'error' };
-    }
-    return null;
-  }
-
-  async _checkFormValidation() {
-    const { validations } = await this.form.validate();
-    return validations.isValid;
-  }
-
-  async _update() {
     const campaign = this.args.campaign;
     campaign.name = this.form.name;
     campaign.title = this.form.title;
@@ -137,14 +100,6 @@ export default class Update extends Component {
     }
   }
 
-  @action
-  async update(event) {
-    event.preventDefault();
-    if (await this._checkFormValidation()) {
-      await this._update();
-    }
-  }
-
   <template>
     <section class="page-section">
       <h1>{{@campaign.name}}</h1>
@@ -158,8 +113,8 @@ export default class Update extends Component {
           <PixInput
             @id="name"
             @requiredLabel={{t "common.forms.mandatory"}}
-            @errorMessage={{this.nameError.message}}
-            @validationStatus={{this.nameError.state}}
+            @errorMessage={{this.validator.errors.name}}
+            @validationStatus={{if this.validator.errors.name "error"}}
             @value={{this.form.name}}
             {{on "change" (fn this.updateFormValue "name")}}
           >
@@ -169,8 +124,8 @@ export default class Update extends Component {
           {{#if @campaign.isTypeAssessment}}
             <PixInput
               @id="title"
-              @errorMessage={{this.titleError.message}}
-              @validationStatus={{this.titleError.state}}
+              @errorMessage={{this.validator.errors.title}}
+              @validationStatus={{if this.validator.errors.title "error"}}
               @value={{this.form.title}}
               maxlength="50"
               {{on "change" (fn this.updateFormValue "title")}}
@@ -182,8 +137,8 @@ export default class Update extends Component {
           <PixTextarea
             @id="customLandingPageText"
             @value={{this.form.customLandingPageText}}
-            @errorMessage={{this.customLandingPageTextError.message}}
-            @validationStatus={{this.customLandingPageTextError.state}}
+            @errorMessage={{this.validator.errors.customLandingPageText}}
+            @validationStatus={{if this.validator.errors.customLandingPageText "error"}}
             @maxlength="5000"
             rows="8"
             {{on "change" (fn this.updateFormValue "customLandingPageText")}}
@@ -195,8 +150,8 @@ export default class Update extends Component {
             <PixTextarea
               @id="customResultPageText"
               @value={{this.form.customResultPageText}}
-              @errorMessage={{this.customResultPageTextError.message}}
-              @validationStatus={{this.customResultPageTextError.state}}
+              @errorMessage={{this.validator.errors.customResultPageText}}
+              @validationStatus={{if this.validator.errors.customResultPageText "error"}}
               @maxlength="5000"
               rows="8"
               {{on "change" (fn this.updateFormValue "customResultPageText")}}
@@ -208,8 +163,8 @@ export default class Update extends Component {
               @id="customResultPageButtonText"
               @subLabel="Si un texte pour le bouton est saisi, une URL est également requise."
               @value={{this.form.customResultPageButtonText}}
-              @errorMessage={{this.customResultPageButtonTextError.message}}
-              @validationStatus={{this.customResultPageButtonTextError.state}}
+              @errorMessage={{this.validator.errors.customResultPageButtonText}}
+              @validationStatus={{if this.validator.errors.customResultPageButtonText "error"}}
               {{on "change" (fn this.updateFormValue "customResultPageButtonText")}}
             >
               <:label>Texte du bouton de la page de fin de parcours</:label>
@@ -219,8 +174,8 @@ export default class Update extends Component {
               @id="customResultPageButtonUrl"
               @subLabel="Si une URL pour le bouton est saisie, le texte est également requis."
               @value={{this.form.customResultPageButtonUrl}}
-              @errorMessage={{this.customResultPageButtonUrlError.message}}
-              @validationStatus={{this.customResultPageButtonUrlError.state}}
+              @errorMessage={{this.validator.errors.customResultPageButtonUrl}}
+              @validationStatus={{if this.validator.errors.customResultPageButtonUrl "error"}}
               {{on "change" (fn this.updateFormValue "customResultPageButtonUrl")}}
             >
               <:label>URL du bouton de la page de fin de parcours</:label>
@@ -293,3 +248,29 @@ export default class Update extends Component {
     </section>
   </template>
 }
+
+const CAMPAIGN_FORM_SCHEMA = Joi.object({
+  name: Joi.string().min(1).max(255).required().messages({
+    'any.required': 'Le nom ne peut pas être vide',
+    'string.empty': 'Le nom ne peut pas être vide',
+    'string.min': 'La longueur du nom ne doit pas excéder 255 caractères',
+    'string.max': 'La longueur du nom ne doit pas excéder 255 caractères',
+  }),
+  title: Joi.string().min(0).max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du titre ne doit pas excéder 255 caractères',
+  }),
+  customLandingPageText: Joi.string().min(0).max(5000).empty(['', null]).messages({
+    'string.max': "La longueur du texte de la page d'accueil ne doit pas excéder 5000 caractères",
+  }),
+  customResultPageText: Joi.string().min(0).max(5000).empty(['', null]).messages({
+    'string.max': 'La longueur du texte de la page de résultat ne doit pas excéder 5000 caractères',
+  }),
+  customResultPageButtonText: Joi.string().min(0).max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du texte ne doit pas excéder 255 caractères',
+  }),
+  customResultPageButtonUrl: Joi.string().uri({ allowRelative: true }).empty(['', null]).messages({
+    'string.uri': 'Ce champ doit être une URL valide',
+  }),
+  multipleSendings: Joi.boolean(),
+  isForAbsoluteNovice: Joi.boolean(),
+});

@@ -11,7 +11,6 @@ import autonomousCourseTargetProfile from './models/autonomous-course-target-pro
 import badge from './models/badge';
 import badgeCriterion from './models/badge-criterion';
 import campaign from './models/campaign';
-import campaignForm from './models/campaign-form';
 import campaignParticipation from './models/campaign-participation';
 import certification from './models/certification';
 import certificationCandidate from './models/certification-candidate';
@@ -88,7 +87,6 @@ export default {
   badge,
   badgeCriterion,
   campaign,
-  campaignForm,
   campaignParticipation,
   certification,
   certificationCandidate,
