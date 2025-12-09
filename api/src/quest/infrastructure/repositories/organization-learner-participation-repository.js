@@ -9,11 +9,6 @@ export const findByOrganizationLearnerIdAndModuleIds = async ({ organizationLear
 
   const organizationLearnerParticipations = await knexConn('organization_learner_participations')
     .select('organization_learner_participations.*')
-    .leftJoin(
-      'organization_learner_passage_participations',
-      'organization_learner_participations.id',
-      'organization_learner_passage_participations.organizationLearnerParticipationId',
-    )
     .where({ organizationLearnerId, type: OrganizationLearnerParticipationTypes.PASSAGE })
     .whereIn('referenceId', moduleIds)
     .whereNull('deletedAt');
