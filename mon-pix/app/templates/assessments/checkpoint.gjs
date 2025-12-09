@@ -34,11 +34,7 @@ import ResultItem from 'mon-pix/components/result-item';
             @themeMode="dark"
           />
           <div class="checkpoint__continue-wrapper">
-            <CheckpointContinue
-              @assessmentId={{@model.id}}
-              @nextPageButtonText={{@controller.nextPageButtonText}}
-              @finalCheckpoint={{@controller.finalCheckpoint}}
-            />
+            <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
           </div>
         {{/if}}
       </div>
@@ -56,11 +52,7 @@ import ResultItem from 'mon-pix/components/result-item';
               <ResultItem @answer={{answer}} @openAnswerDetails={{@controller.openComparisonWindow}} />
             {{/each}}
           </div>
-          <CheckpointContinue
-            @assessmentId={{@model.id}}
-            @nextPageButtonText={{@controller.nextPageButtonText}}
-            @finalCheckpoint={{@controller.finalCheckpoint}}
-          />
+          <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
         {{else}}
           <div class="checkpoint-no-answer">
             <h1 class="checkpoint-no-answer__header">
@@ -69,11 +61,7 @@ import ResultItem from 'mon-pix/components/result-item';
             <p class="checkpoint-no-answer__info">
               {{t "pages.checkpoint.answers.already-finished.explanation"}}
             </p>
-            <CheckpointContinue
-              @assessmentId={{@model.id}}
-              @nextPageButtonText={{@controller.nextPageButtonText}}
-              @finalCheckpoint={{@controller.finalCheckpoint}}
-            />
+            <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
           </div>
         {{/if}}
       </main>
