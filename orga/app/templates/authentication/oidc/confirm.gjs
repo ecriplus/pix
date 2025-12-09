@@ -14,6 +14,7 @@ import OidcAssociationConfirmation from '../../../components/authentication/oidc
     <:content>
       <OidcAssociationConfirmation
         @identityProviderOrganizationName={{@model.identityProviderOrganizationName}}
+        @identityProviderSlug={{@model.identityProviderSlug}}
         @authenticationMethods={{@model.authenticationMethods}}
         @fullNameFromPix={{@model.fullNameFromPix}}
         @fullNameFromExternalIdentityProvider={{@model.fullNameFromExternalIdentityProvider}}

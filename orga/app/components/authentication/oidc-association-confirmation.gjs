@@ -52,7 +52,7 @@ export default class OidcAssociationConfirmation extends Component {
       </div>
 
       <div class="oidc-association__switch-account-button">
-        <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
+        <PixButton @triggerAction={{this.backToLoginForm}} @variant="secondary">{{t
             "components.authentication.oidc-association-confirmation.switch-account"
           }}</PixButton>
       </div>
@@ -76,7 +76,7 @@ export default class OidcAssociationConfirmation extends Component {
       {{/if}}
 
       <div class="oidc-association__action-buttons">
-        <PixButton @triggerAction={{this.backToLoginOrRegisterForm}} @variant="secondary">{{t
+        <PixButton @triggerAction={{this.backToLoginForm}} @variant="secondary">{{t
             "components.authentication.oidc-association-confirmation.return"
           }}</PixButton>
         <PixButton @triggerAction={{this.reconcile}} @isLoading={{this.isLoading}}>
@@ -89,6 +89,7 @@ export default class OidcAssociationConfirmation extends Component {
   @service oidcIdentityProviders;
   @service session;
   @service errorMessages;
+  @service router;
 
   @tracked reconcileErrorMessage = null;
   @tracked isLoading = false;
@@ -106,8 +107,8 @@ export default class OidcAssociationConfirmation extends Component {
   }
 
   @action
-  backToLoginOrRegisterForm() {
-    this.args.toggleOidcReconciliation();
+  backToLoginForm() {
+    this.router.transitionTo('authentication.oidc.login', this.args.identityProviderSlug);
   }
 
   @action

@@ -20,6 +20,7 @@ export default class ConfirmRoute extends Route {
     const storedInformations = oidcAssociationConfirmationStorage.get();
     return {
       identityProviderOrganizationName,
+      identityProviderSlug,
       authenticationMethods: storedInformations.authenticationMethods,
       fullNameFromPix: storedInformations.fullNameFromPix,
       fullNameFromExternalIdentityProvider: storedInformations.fullNameFromExternalIdentityProvider,
