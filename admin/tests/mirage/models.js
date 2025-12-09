@@ -42,7 +42,6 @@ import juryCertificationSummary from './models/jury-certification-summary';
 import lastApplicationConnection from './models/last-application-connection';
 import oidcIdentityProvider from './models/oidc-identity-provider';
 import organization from './models/organization';
-import organizationForm from './models/organization-form';
 import organizationInvitation from './models/organization-invitation';
 import organizationLearner from './models/organization-learner';
 import organizationMembership from './models/organization-membership';
@@ -115,7 +114,6 @@ export default {
   lastApplicationConnection,
   oidcIdentityProvider,
   organization,
-  organizationForm,
   organizationInvitation,
   organizationLearner,
   organizationMembership,

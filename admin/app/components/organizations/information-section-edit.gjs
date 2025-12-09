@@ -10,9 +10,11 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { and, eq, notEq, or } from 'ember-truth-helpers';
+import Joi from 'joi';
 import lodashGet from 'lodash/get';
 import lodashSet from 'lodash/set';
 import Organization from 'pix-admin/models/organization';
+import { FormValidator } from 'pix-admin/utils/form-validator';
 
 export default class OrganizationInformationSectionEditionMode extends Component {
   @service accessControl;
@@ -22,6 +24,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @service pixToast;
 
   @tracked isEditMode = false;
+  @tracked form = {};
   @tracked showArchivingConfirmationModal = false;
   @tracked toggleLockPlaces = false;
   @tracked administrationTeams = [];
@@ -30,17 +33,39 @@ export default class OrganizationInformationSectionEditionMode extends Component
   noIdentityProviderOption = { label: this.intl.t('common.words.none'), value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
 
+  validator = new FormValidator(ORGANIZATION_FORM_VALIDATION_SCHEMA, { allowUnknown: true });
+
   constructor() {
     super(...arguments);
-    this.#onMount();
-
+    this.#initForm();
+    this.#loadAsyncData();
     this.toggleLockPlaces = this.form.features['PLACES_MANAGEMENT']?.active ?? false;
   }
 
-  async #onMount() {
-    this._initForm();
+  async #loadAsyncData() {
     this.administrationTeams = await this.store.findAll('administration-team');
     this.countries = await this.store.findAll('country');
+  }
+
+  #initForm() {
+    this.form = {
+      name: this.args.organization.name,
+      externalId: this.args.organization.externalId,
+      provinceCode: this.args.organization.provinceCode,
+      dataProtectionOfficerFirstName: this.args.organization.dataProtectionOfficerFirstName,
+      dataProtectionOfficerLastName: this.args.organization.dataProtectionOfficerLastName,
+      dataProtectionOfficerEmail: this.args.organization.dataProtectionOfficerEmail,
+      email: this.args.organization.email,
+      credit: this.args.organization.credit,
+      documentationUrl: this.args.organization.documentationUrl,
+      identityProviderForCampaigns:
+        this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
+      features: structuredClone(this.args.organization.features),
+      administrationTeamId: this.args.organization.administrationTeamId
+        ? `${this.args.organization.administrationTeamId}`
+        : null,
+      countryCode: this.args.organization.countryCode ? `${this.args.organization.countryCode}` : null,
+    };
   }
 
   get isManagingStudentAvailable() {
@@ -76,35 +101,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return options;
   }
 
-  get translatedAdministrationTeamIdErrorMessage() {
-    return this.form.administrationTeamIdError.message
-      ? this.intl.t(this.form.administrationTeamIdError.message)
-      : null;
-  }
-
-  get translatedCountryCodeErrorMessage() {
-    return this.form.countryCodeError.message ? this.intl.t(this.form.countryCodeError.message) : null;
-  }
-
-  @action
-  onChangeIdentityProvider(newIdentityProvider) {
-    this.form.identityProviderForCampaigns = newIdentityProvider;
-  }
-
-  @action
-  onChangeAdministrationTeam(newAdministrationTeamId) {
-    this.form.administrationTeamId = newAdministrationTeamId;
-  }
-
-  @action
-  onChangeCountry(newCountryCode) {
-    this.form.countryCode = newCountryCode;
-  }
-
   @action
   closeAndResetForm() {
     this.args.toggleEditMode();
-    this._initForm();
+    this.#initForm();
   }
 
   @action
@@ -112,21 +112,26 @@ export default class OrganizationInformationSectionEditionMode extends Component
     if (key === 'features.PLACES_MANAGEMENT.active') {
       this.toggleLockPlaces = !lodashGet(this.form, key);
     }
-
     lodashSet(this.form, key, !lodashGet(this.form, key));
   }
 
   @action
   updateFormValue(key, event) {
-    this.form[key] = event.target.value;
+    this.updateValue(key, event.target.value);
+  }
+
+  @action
+  updateValue(key, value) {
+    this.form = { ...this.form, [key]: value };
+    this.validator.validateField(key, this.form[key]);
   }
 
   @action
   async updateOrganization(event) {
     event.preventDefault();
 
-    const { validations } = await this.form.validate();
-    if (!validations.isValid) {
+    const isValid = await this.validator.validate(this.form);
+    if (!isValid) {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('components.organizations.editing.required-fields-error'),
       });
@@ -163,27 +168,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return this.args.onSubmit();
   }
 
-  _initForm() {
-    this.form = this.store.createRecord('organization-form', {
-      name: this.args.organization.name,
-      externalId: this.args.organization.externalId,
-      provinceCode: this.args.organization.provinceCode,
-      dataProtectionOfficerFirstName: this.args.organization.dataProtectionOfficerFirstName,
-      dataProtectionOfficerLastName: this.args.organization.dataProtectionOfficerLastName,
-      dataProtectionOfficerEmail: this.args.organization.dataProtectionOfficerEmail,
-      email: this.args.organization.email,
-      credit: this.args.organization.credit,
-      documentationUrl: this.args.organization.documentationUrl,
-      identityProviderForCampaigns:
-        this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
-      features: structuredClone(this.args.organization.features),
-      administrationTeamId: this.args.organization.administrationTeamId
-        ? `${this.args.organization.administrationTeamId}`
-        : null,
-      countryCode: this.args.organization.countryCode ? `${this.args.organization.countryCode}` : null,
-    });
-  }
-
   <template>
     <div class="organization__edit-form">
       <form class="form" {{on "submit" this.updateOrganization}}>
@@ -196,8 +180,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
           <PixInput
             required={{true}}
             @requiredLabel={{t "common.forms.mandatory"}}
-            @errorMessage={{this.form.nameError.message}}
-            @validationStatus={{this.form.nameError.status}}
+            @errorMessage={{this.validator.errors.name}}
+            @validationStatus={{if this.validator.errors.name "error"}}
             @value={{this.form.name}}
             {{on "input" (fn this.updateFormValue "name")}}
           ><:label>
@@ -207,8 +191,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.externalIdError.message}}
-            @validationStatus={{this.form.externalIdError.status}}
+            @errorMessage={{this.validator.errors.externalId}}
+            @validationStatus={{if this.validator.errors.externalId "error"}}
             @value={{this.form.externalId}}
             {{on "input" (fn this.updateFormValue "externalId")}}
           ><:label>{{t "components.organizations.information-section-view.external-id"}}</:label></PixInput>
@@ -216,8 +200,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.provinceCodeError.message}}
-            @validationStatus={{this.form.provinceCodeError.status}}
+            @errorMessage={{this.validator.errors.provinceCode}}
+            @validationStatus={{if this.validator.errors.provinceCode "error"}}
             @value={{this.form.provinceCode}}
             {{on "input" (fn this.updateFormValue "provinceCode")}}
           ><:label>{{t "components.organizations.editing.province-code.label"}}</:label></PixInput>
@@ -228,11 +212,14 @@ export default class OrganizationInformationSectionEditionMode extends Component
             required
             @aria-required={{true}}
             @requiredLabel={{t "common.forms.mandatory"}}
-            @errorMessage={{this.translatedAdministrationTeamIdErrorMessage}}
-            @validationStatus={{this.form.administrationTeamIdError.status}}
+            @errorMessage={{if
+              this.validator.errors.administrationTeamId
+              (t this.validator.errors.administrationTeamId)
+            }}
+            @validationStatus={{if this.validator.errors.administrationTeamId "error"}}
             @options={{this.administrationTeamsOptions}}
             @value={{this.form.administrationTeamId}}
-            @onChange={{this.onChangeAdministrationTeam}}
+            @onChange={{fn this.updateValue "administrationTeamId"}}
             @hideDefaultOption={{true}}
             class="admin-form__select"
             @placeholder={{t "components.organizations.editing.administration-team.selector.placeholder"}}
@@ -246,11 +233,11 @@ export default class OrganizationInformationSectionEditionMode extends Component
             required
             @aria-required={{true}}
             @requiredLabel={{t "common.forms.mandatory"}}
-            @errorMessage={{this.translatedCountryCodeErrorMessage}}
-            @validationStatus={{this.form.countryCodeError.status}}
+            @errorMessage={{if this.validator.errors.countryCode (t this.validator.errors.countryCode)}}
+            @validationStatus={{if this.validator.errors.countryCode "error"}}
             @options={{this.countriesOptions}}
             @value={{this.form.countryCode}}
-            @onChange={{this.onChangeCountry}}
+            @onChange={{fn this.updateValue "countryCode"}}
             @hideDefaultOption={{true}}
             @isSearchable={{true}}
             class="admin-form__select"
@@ -262,8 +249,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.dataProtectionOfficerFirstNameError.message}}
-            @validationStatus={{this.form.dataProtectionOfficerFirstNameError.status}}
+            @errorMessage={{this.validator.errors.dataProtectionOfficerFirstName}}
+            @validationStatus={{if this.validator.errors.dataProtectionOfficerFirstName "error"}}
             @value={{this.form.dataProtectionOfficerFirstName}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerFirstName")}}
           ><:label>{{t "components.organizations.information-section-view.dpo-firstname"}}</:label></PixInput>
@@ -271,8 +258,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.dataProtectionOfficerLastNameError.message}}
-            @validationStatus={{this.form.dataProtectionOfficerLastNameError.status}}
+            @errorMessage={{this.validator.errors.dataProtectionOfficerLastName}}
+            @validationStatus={{if this.validator.errors.dataProtectionOfficerLastName "error"}}
             @value={{this.form.dataProtectionOfficerLastName}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerLastName")}}
           ><:label>{{t "components.organizations.information-section-view.dpo-lastname"}}</:label></PixInput>
@@ -280,8 +267,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.dataProtectionOfficerEmailError.message}}
-            @validationStatus={{this.form.dataProtectionOfficerEmailError.status}}
+            @errorMessage={{this.validator.errors.dataProtectionOfficerEmail}}
+            @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
             @value={{this.form.dataProtectionOfficerEmail}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerEmail")}}
           ><:label>{{t "components.organizations.information-section-view.dpo-email"}}</:label></PixInput>
@@ -290,8 +277,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
         <div class="form-field">
           <PixInput
             type="number"
-            @errorMessage={{this.form.creditError.message}}
-            @validationStatus={{this.form.creditError.status}}
+            @errorMessage={{this.validator.errors.credit}}
+            @validationStatus={{if this.validator.errors.credit "error"}}
             @value={{this.form.credit}}
             {{on "input" (fn this.updateFormValue "credit")}}
           ><:label>{{t "components.organizations.information-section-view.credits"}}</:label></PixInput>
@@ -299,8 +286,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.documentationUrlError.message}}
-            @validationStatus={{this.form.documentationUrlError.status}}
+            @errorMessage={{this.validator.errors.documentationUrl}}
+            @validationStatus={{if this.validator.errors.documentationUrl "error"}}
             @value={{this.form.documentationUrl}}
             {{on "input" (fn this.updateFormValue "documentationUrl")}}
           ><:label>{{t "components.organizations.information-section-view.documentation-link"}}</:label></PixInput>
@@ -310,7 +297,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
           <PixSelect
             @options={{this.identityProviderOptions}}
             @value={{this.form.identityProviderForCampaigns}}
-            @onChange={{this.onChangeIdentityProvider}}
+            @onChange={{fn this.updateValue "identityProviderForCampaigns"}}
             @hideDefaultOption={{true}}
             class="admin-form__select"
           >
@@ -320,8 +307,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixInput
-            @errorMessage={{this.form.emailError.message}}
-            @validationStatus={{this.form.emailError.status}}
+            @errorMessage={{this.validator.errors.email}}
+            @validationStatus={{if this.validator.errors.email "error"}}
             @value={{this.form.email}}
             {{on "input" (fn this.updateFormValue "email")}}
           ><:label>{{t "components.organizations.information-section-view.sco-activation-email"}}</:label></PixInput>
@@ -381,3 +368,47 @@ const FeaturesForm = <template>
     {{/let}}
   {{/each}}
 </template>;
+
+const ORGANIZATION_FORM_VALIDATION_SCHEMA = Joi.object({
+  name: Joi.string().min(1).max(255).empty(['', null]).required().messages({
+    'any.required': 'Le nom ne peut pas être vide',
+    'string.empty': 'Le nom ne peut pas être vide',
+    'string.max': 'La longueur du nom ne doit pas excéder 255 caractères',
+  }),
+  externalId: Joi.string().max(255).empty(['', null]).messages({
+    'string.max': "La longueur de l'identifiant externe ne doit pas excéder 255 caractères",
+  }),
+  provinceCode: Joi.string().max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du département ne doit pas excéder 255 caractères',
+  }),
+  dataProtectionOfficerFirstName: Joi.string().max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du prénom ne doit pas excéder 255 caractères.',
+  }),
+  dataProtectionOfficerLastName: Joi.string().max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du nom ne doit pas excéder 255 caractères.',
+  }),
+  dataProtectionOfficerEmail: Joi.string().email({ ignoreLength: true }).min(0).max(255).empty(['', null]).messages({
+    'string.email': "L'e-mail n'a pas le bon format.",
+    'string.max': "La longueur de l'email ne doit pas excéder 255 caractères.",
+  }),
+  email: Joi.string().email({ ignoreLength: true }).max(255).empty(['', null]).messages({
+    'string.email': "L'e-mail n'a pas le bon format.",
+    'string.max': "La longueur de l'email ne doit pas excéder 255 caractères.",
+  }),
+  credit: Joi.number().integer().positive().empty([0, '', null]).messages({
+    'number.base': 'Le nombre de crédits doit être un nombre supérieur ou égal à 0.',
+    'number.positive': 'Le nombre de crédits doit être un nombre supérieur ou égal à 0.',
+  }),
+  documentationUrl: Joi.string().uri({ allowRelative: true }).empty(['', null]).messages({
+    'string.uri': "Le lien n'est pas valide.",
+  }),
+  administrationTeamId: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.editing.administration-team.selector.error-message',
+    'string.empty': 'components.organizations.editing.administration-team.selector.error-message',
+  }),
+  countryCode: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.editing.country.selector.error-message',
+    'string.empty': 'components.organizations.editing.country.selector.error-message',
+  }),
+  identityProviderForCampaigns: Joi.string().empty(['', null]),
+});
