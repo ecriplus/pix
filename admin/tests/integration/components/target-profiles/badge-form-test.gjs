@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click, fillIn } from '@ember/test-helpers';
+import { click, fillIn, triggerEvent } from '@ember/test-helpers';
 import BadgeForm from 'pix-admin/components/target-profiles/badge-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -69,7 +69,7 @@ module('Integration | Component | BadgeForm', function (hooks) {
     const screen = await render(<template><BadgeForm @targetProfile={{targetProfile}} /></template>);
 
     await fillIn(screen.getByLabelText(/Nom du badge/), 'dummy');
-    await fillIn(screen.getByLabelText(/Nom de l'image/), 'dummy');
+    await fillIn(screen.getByLabelText(/Url de l'image/), 'dummy');
     await fillIn(screen.getByLabelText(/Texte alternatif pour l'image/), 'dummy');
     await fillIn(screen.getByLabelText(/Clé/), 'dummy');
 
@@ -166,7 +166,7 @@ module('Integration | Component | BadgeForm', function (hooks) {
       const screen = await render(<template><BadgeForm @targetProfile={{targetProfile}} /></template>);
 
       await fillIn(screen.getByLabelText(/Nom du badge/), 'dummy');
-      await fillIn(screen.getByLabelText(/Nom de l'image/), 'dummy');
+      await fillIn(screen.getByLabelText(/Url de l'image/), 'dummy');
       await fillIn(screen.getByLabelText(/Texte alternatif pour l'image/), 'dummy');
       await fillIn(screen.getByLabelText(/Clé/), 'dummy');
 
@@ -179,6 +179,65 @@ module('Integration | Component | BadgeForm', function (hooks) {
         message: 'Vous devez sélectionner au moins un sujet du profil cible',
       });
       assert.ok(true);
+    });
+  });
+
+  module('on form submission', function () {
+    test('should save badge image url with provided url', async function (assert) {
+      // given
+      const reloadStub = sinon.stub();
+      const targetProfileWithBadge = { ...targetProfile, reload: reloadStub };
+
+      const saveStub = sinon.stub();
+      const badge = { save: saveStub };
+      const createRecordStub = sinon.stub().returns(badge);
+      class StoreStub extends Service {
+        createRecord = createRecordStub;
+      }
+      const transitionToSpy = sinon.spy();
+      class RouterStub extends Service {
+        transitionTo = transitionToSpy;
+      }
+      this.owner.register('service:store', StoreStub);
+      this.owner.register('service:router', RouterStub);
+      const imageUrl = 'https://assets.pix.org/badges/new-badge-image.svg';
+      const badgeInfo = {
+        key: 'NEW_BADGE',
+        altMessage: 'Mon nouveau badge',
+        message: '',
+        title: 'Nouveau badge',
+        isCertifiable: false,
+        isAlwaysVisible: false,
+        campaignThreshold: '75',
+        cappedTubesCriteria: [],
+        imageUrl: 'https://assets.pix.org/badges/new-badge-image.svg',
+      };
+
+      const screen = await render(<template><BadgeForm @targetProfile={{targetProfileWithBadge}} /></template>);
+
+      // when
+      await fillIn(screen.getByLabelText(/Nom du badge/), 'Nouveau badge');
+      await fillIn(screen.getByLabelText(/Texte alternatif pour l'image/), 'Mon nouveau badge');
+      await fillIn(screen.getByLabelText(/Clé/), 'NEW_BADGE');
+      await fillIn(
+        screen.getByRole('textbox', {
+          name: "Url de l'image (svg) *",
+        }),
+        imageUrl,
+      );
+      await click(screen.getByRole('checkbox', { name: "sur l'ensemble du profil cible" }));
+      await fillIn(
+        screen.getByRole('spinbutton', {
+          name: 'Taux de réussite requis *',
+        }),
+        '75',
+      );
+
+      await triggerEvent('form', 'submit');
+
+      // then
+      assert.ok(createRecordStub.calledOnce);
+      sinon.assert.calledOnceWithExactly(createRecordStub, 'badge', badgeInfo);
     });
   });
 });

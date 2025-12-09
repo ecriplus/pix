@@ -482,7 +482,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
           key: 'OLD_KEY',
           title: 'ancien titre',
           message: 'ancien message',
-          imageUrl: 'old_image.png',
+          imageUrl: 'https://assets.pix.org/badges/old_image.png',
           altMessage: 'ancien alt',
           isCertifiable: false,
           isAlwaysVisible: true,
@@ -498,7 +498,10 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'nouveau titre');
         await fillIn(screen.getByLabelText('Clé *', { exact: false }), 'NEW_KEY');
         await fillByLabel('Message', 'nouveau message');
-        await fillIn(screen.getByLabelText("Nom de l'image (svg) *", { exact: false }), 'new_image.svg');
+        await fillIn(
+          screen.getByLabelText("Url de l'image (svg) *", { exact: false }),
+          'https://assets.pix.org/badges/new_image.svg',
+        );
         await fillIn(screen.getByLabelText('Message Alternatif *', { exact: false }), 'nouveau alt');
         await clickByName('Certifiable');
         await clickByName('Lacunes');
@@ -508,7 +511,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
         assert.dom(screen.getAllByText('100')[1]).exists();
         assert.dom(screen.getByText('nouveau titre')).exists();
-        assert.dom(screen.getByText('new_image.svg')).exists();
+        assert.dom(screen.getByText('https://assets.pix.org/badges/new_image.svg')).exists();
         assert.dom(screen.getByText('NEW_KEY')).exists();
         assert.dom(screen.getByText('nouveau message')).exists();
         assert.dom(screen.getByText('nouveau alt')).exists();
@@ -588,7 +591,10 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await clickByName('Clés de lecture');
         await clickByName('Nouveau badge');
         await fillByLabel(/Nom du badge :/, 'Mon nouveau badge');
-        await fillIn(screen.getByLabelText("Nom de l'image (svg) *", { exact: false }), 'troll.png');
+        await fillIn(
+          screen.getByLabelText("Url de l'image (svg) *", { exact: false }),
+          'https://assets.pix.org/badges/troll.png',
+        );
         await fillByLabel(/Texte alternatif pour l'image :/, 'Je mets du png je fais ce que je veux');
         await fillByLabel('Message :', 'message de mon badge');
         await fillByLabel(/Clé/, 'MY_BADGE');
@@ -649,7 +655,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/1');
         assert.dom(screen.getAllByText('1')[1]).exists();
         assert.dom(screen.getByText('Mon nouveau badge')).exists();
-        assert.dom(screen.getByText('troll.png')).exists();
+        assert.dom(screen.getByText('https://assets.pix.org/badges/troll.png')).exists();
         assert.dom(screen.getByText('MY_BADGE')).exists();
         assert.dom(screen.getByText('message de mon badge')).exists();
         assert.dom(screen.getByText('Je mets du png je fais ce que je veux')).exists();

@@ -349,6 +349,7 @@
     },
     "badges": {
       "api-error-messages": {
+        "incorrect-image-url-format": "The url format of the badge's image is incorrect.",
         "key-already-exists": "The badge key {badgeKey} already exists"
       },
       "tooltips": {

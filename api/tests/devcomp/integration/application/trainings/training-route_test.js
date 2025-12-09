@@ -253,7 +253,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
         // then
         expect(JSON.parse(response.payload).errors[0].detail).to.equal(
-          '"data.attributes.editor-logo-url" with value "image.svg" fails to match the required pattern: /^https:\\/\\/assets\\.pix\\.org\\/contenu-formatif\\/editeur\\/.*\\.svg$/',
+          '"data.attributes.editor-logo-url" with value "image.svg" fails to match the required pattern: /^https:\\/\\/assets.pix.org\\/contenu-formatif\\/editeur\\/.*\\.svg$/',
         );
         expect(response.statusCode).to.equal(400);
       });
@@ -1036,7 +1036,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
           // then
           expect(JSON.parse(response.payload).errors[0].detail).to.equal(
-            '"data.attributes.editor-logo-url" with value "image.svg" fails to match the required pattern: /^https:\\/\\/assets\\.pix\\.org\\/contenu-formatif\\/editeur\\/.*\\.svg$/',
+            '"data.attributes.editor-logo-url" with value "image.svg" fails to match the required pattern: /^https:\\/\\/assets.pix.org\\/contenu-formatif\\/editeur\\/.*\\.svg$/',
           );
           expect(response.statusCode).to.equal(400);
         });

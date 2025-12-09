@@ -34,7 +34,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const badgeCreation = {
           key: 'badge1',
           'alt-message': 'alt-message',
-          'image-url': 'https//images.example.net',
+          'image-url': 'https://assets.pix.org/badges/badge_url.svg',
           message: 'Bravo !',
           title: 'Le super badge',
           'is-certifiable': false,
@@ -79,7 +79,7 @@ describe('Acceptance | Route | target-profiles', function () {
           data: {
             attributes: {
               'alt-message': 'alt-message',
-              'image-url': 'https//images.example.net',
+              'image-url': 'https://assets.pix.org/badges/badge_url.svg',
               'is-certifiable': false,
               'is-always-visible': true,
               key: 'badge1',
@@ -118,7 +118,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const badgeCreation = {
           key: 'badge1',
           'alt-message': 'alt-message',
-          'image-url': 'https//images.example.net',
+          'image-url': 'https://assets.pix.org/badges/badge_url.svg',
           message: 'Bravo !',
           title: 'Le super badge',
           'is-certifiable': false,
@@ -173,7 +173,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const badgeCreation = {
           key: 'badge1',
           'alt-message': 'alt-message',
-          'image-url': 'https//images.example.net',
+          'image-url': 'https://assets.pix.org/badges/badge_url.svg',
           message: 'Bravo !',
           title: 'Le super badge',
           'is-certifiable': false,
