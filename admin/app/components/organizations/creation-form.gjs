@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -87,6 +88,11 @@ export default class OrganizationCreationForm extends Component {
     this.args.organization.dataProtectionOfficerEmail = event.target.value;
   }
 
+  @action
+  handleInputChange(key, event) {
+    this.args.organization[key] = event.target.value;
+  }
+
   <template>
     <form class="admin-form" {{on "submit" @onSubmit}}>
       <section class="admin-form__content admin-form__content--with-counters">
@@ -123,6 +129,10 @@ export default class OrganizationCreationForm extends Component {
             <:default as |organizationType|>{{organizationType.label}}</:default>
           </PixSelect>
 
+          <PixInput @id="externalId" {{on "input" (fn this.handleInputChange "externalId")}}>
+            <:label>{{t "components.organizations.creation.external-id"}}</:label>
+          </PixInput>
+
           <PixSelect
             @onChange={{this.handleAdministrationTeamSelectionChange}}
             @options={{this.administrationTeamsOptions}}
@@ -135,6 +145,10 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
+
+          <PixInput @id="provinceCode" {{on "input" (fn this.handleInputChange "provinceCode")}}>
+            <:label>{{t "components.organizations.creation.province-code"}}</:label>
+          </PixInput>
 
           <PixSelect
             @onChange={{this.handleCountrySelectionChange}}

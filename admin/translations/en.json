@@ -651,7 +651,9 @@
             "placeholder": "Country (INSEE code)"
           }
         },
+        "external-id": "External Identifier",
         "parent-organization-name": "Parent organization: {parentOrganizationName}",
+        "province-code": "Province code (3 digits)",
         "required-fields-error": "Please fill in all required fields."
       },
       "editing": {
