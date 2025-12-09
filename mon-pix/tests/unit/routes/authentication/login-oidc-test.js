@@ -5,6 +5,7 @@ import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubOidcIdentityProvidersService } from '../../../helpers/service-stubs';
 import setupIntl from '../../../helpers/setup-intl';
 
 module('Unit | Route | login-oidc', function (hooks) {
@@ -42,18 +43,17 @@ module('Unit | Route | login-oidc', function (hooks) {
         sinon.stub(window, 'fetch').resolves({
           json: sinon.stub().resolves({ redirectTarget: 'https://oidc/connexion' }),
         });
-        const oidcPartner = {
-          id: 'oidc-partner',
-          slug: 'oidc-partner',
-          code: 'OIDC_PARTNER',
-        };
 
-        class OidcIdentityProvidersStub extends Service {
-          'oidc-partner' = oidcPartner;
-          list = [oidcPartner];
-        }
-
-        this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
+        stubOidcIdentityProvidersService(this.owner, {
+          oidcIdentityProviders: [
+            {
+              id: 'oidc-partner',
+              slug: 'oidc-partner',
+              code: 'OIDC_PARTNER',
+              organizationName: 'OIDC Partner',
+            },
+          ],
+        });
       });
 
       module('when identity provider is not supported', function () {
