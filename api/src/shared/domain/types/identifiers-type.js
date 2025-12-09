@@ -90,7 +90,7 @@ const typesPositiveInteger32bits = [
 
 const typesPositiveInteger64bits = ['answerId'];
 
-const typesUuid = ['chatId'];
+const typesUuid = ['chatId', 'moduleId', 'elementId'];
 
 const typesAlphanumeric = ['courseId', 'tutorialId'];
 const typesAlphanumeric255 = ['challengeId', 'competenceId', 'frameworkId', 'tubeId', 'code', 'skillId'];
