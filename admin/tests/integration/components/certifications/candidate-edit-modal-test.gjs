@@ -1,6 +1,6 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import CandidateEditModal from 'pix-admin/components/certifications/candidate-edit-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -25,11 +25,11 @@ module('Integration | Component | certifications/candidate-edit-modal', function
   module('#display', function () {
     test('it should display the modal', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
+      const candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
 
       // when
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+        <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
       );
 
       // then
@@ -40,7 +40,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
   module('#form initialization', function () {
     test('it should initialize common information', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', {
+      const candidate = store.createRecord('certification', {
         firstName: 'Fabrice',
         lastName: 'Gadjo',
         birthdate: '2000-12-15',
@@ -53,7 +53,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
       // when
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+        <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
       );
 
       // then
@@ -65,7 +65,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('#sex', function () {
       test('it should check "Homme" option when candidate is male', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -78,7 +78,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // then
@@ -87,7 +87,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
       test('it should check "Femme" option when candidate is female', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabricia',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -100,7 +100,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // then
@@ -111,7 +111,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when candidate birth information are of type foreign country', function () {
       test('it should init the form with expected informations for type foreign country', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -124,7 +124,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // then
@@ -138,7 +138,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when candidate birth information are of type France with postal code', function () {
       test('it should init the form with expected informations for type France with postal code', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -151,7 +151,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // then
@@ -165,7 +165,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when candidate birth information are of type France with INSEE code', function () {
       test('it should init the form with expected informations for type France with INSEE code', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -178,7 +178,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // then
@@ -193,7 +193,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
   module('#onCancelButtonsClicked', function () {
     test('it should reset form', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', {
+      const candidate = store.createRecord('certification', {
         firstName: 'Fabrice',
         lastName: 'Gadjo',
         birthdate: '2000-12-15',
@@ -202,13 +202,15 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Copenhague',
         birthCountry: 'DANEMARK',
       });
-      this.onCancelButtonsClickedStub = sinon.stub();
+      const onCancelButtonsClickedStub = sinon.stub();
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-/>`,
+        <template>
+          <CandidateEditModal
+            @isDisplayed={{true}}
+            @candidate={{candidate}}
+            @onCancelButtonsClicked={{onCancelButtonsClickedStub}}
+          />
+        </template>,
       );
 
       await fillByLabel('Nom de famille', 'Belmans');
@@ -240,7 +242,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
     test('it should not alter candidate information', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', {
+      const candidate = store.createRecord('certification', {
         firstName: 'Fabrice',
         lastName: 'Gadjo',
         birthdate: '2000-12-15',
@@ -249,14 +251,16 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Copenhague',
         birthCountry: 'DANEMARK',
       });
-      const initialCandidateInformation = this.candidate.getInformation();
-      this.onCancelButtonsClickedStub = sinon.stub();
+      const initialCandidateInformation = candidate.getInformation();
+      const onCancelButtonsClickedStub = sinon.stub();
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-/>`,
+        <template>
+          <CandidateEditModal
+            @isDisplayed={{true}}
+            @candidate={{candidate}}
+            @onCancelButtonsClicked={{onCancelButtonsClickedStub}}
+          />
+        </template>,
       );
       await fillByLabel('Nom de famille', 'Belmans');
       await fillByLabel('Prénom', 'Gideona');
@@ -275,53 +279,53 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       await clickByName('Annuler');
 
       // then
-      const afterCancelCandidateInformation = this.candidate.getInformation();
+      const afterCancelCandidateInformation = candidate.getInformation();
       assert.deepEqual(initialCandidateInformation, afterCancelCandidateInformation);
     });
 
     test('it should call the onCancelButtonsClicked action', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
-      this.onCancelButtonsClickedStub = sinon.stub();
+      const candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
+      const onCancelButtonsClickedStub = sinon.stub();
       await render(
-        hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-/>`,
+        <template>
+          <CandidateEditModal
+            @isDisplayed={{true}}
+            @candidate={{candidate}}
+            @onCancelButtonsClicked={{onCancelButtonsClickedStub}}
+          />
+        </template>,
       );
 
       // when
       await clickByName('Annuler');
 
       // then
-      assert.ok(this.onCancelButtonsClickedStub.called);
+      assert.ok(onCancelButtonsClickedStub.called);
     });
   });
 
   module('#onFormSubmit', function () {
     test('it should not call the onFormSubmit action if a field is not filled', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
-      this.onFormSubmitStub = sinon.stub();
+      const candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
+      const onFormSubmitStub = sinon.stub();
       await render(
-        hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onFormSubmit={{this.onFormSubmitStub}}
-/>`,
+        <template>
+          <CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} @onFormSubmit={{onFormSubmitStub}} />
+        </template>,
       );
 
       // when
       await clickByName('Enregistrer');
 
       // then
-      assert.notOk(this.onFormSubmitStub.called);
+      assert.notOk(onFormSubmitStub.called);
     });
 
     test('it should call the onFormSubmit action if all fields are filled', async function (assert) {
       // given
-      this.candidate = store.createRecord('certification', {
+      const candidate = store.createRecord('certification', {
         firstName: 'Fabrice',
         lastName: 'Gadjo',
         birthdate: '2000-12-15',
@@ -330,13 +334,11 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Copenhague',
         birthCountry: 'DANEMARK',
       });
-      this.onFormSubmitStub = sinon.stub();
+      const onFormSubmitStub = sinon.stub();
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onFormSubmit={{this.onFormSubmitStub}}
-/>`,
+        <template>
+          <CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} @onFormSubmit={{onFormSubmitStub}} />
+        </template>,
       );
       await fillByLabel('Nom de famille', 'Belmans');
       await fillByLabel('Prénom', 'Gideon');
@@ -355,13 +357,13 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       await clickByName('Enregistrer');
 
       // then
-      assert.ok(this.onFormSubmitStub.called);
+      assert.ok(onFormSubmitStub.called);
     });
 
     module('when editing candidate information with foreign country info', function () {
       test('it should update candidate information with foreign country expected information', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -371,14 +373,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'PARIS 15',
           birthCountry: 'FRANCE',
         });
-        this.onFormSubmitStub = sinon.stub();
-        this.onFormSubmitStub.resolves();
+        const onFormSubmitStub = sinon.stub();
+        onFormSubmitStub.resolves();
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onFormSubmit={{this.onFormSubmitStub}}
-/>`,
+          <template>
+            <CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} @onFormSubmit={{onFormSubmitStub}} />
+          </template>,
         );
 
         // when
@@ -390,7 +390,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         await clickByName('Enregistrer');
 
         // then
-        assert.deepEqual(this.candidate.getInformation(), {
+        assert.deepEqual(candidate.getInformation(), {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -406,7 +406,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when editing candidate information with france INSEE code info', function () {
       test('it should update candidate information with france INSEE code expected information', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -416,14 +416,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Copenhague',
           birthCountry: 'DANEMARK',
         });
-        this.onFormSubmitStub = sinon.stub();
-        this.onFormSubmitStub.resolves();
+        const onFormSubmitStub = sinon.stub();
+        onFormSubmitStub.resolves();
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onFormSubmit={{this.onFormSubmitStub}}
-/>`,
+          <template>
+            <CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} @onFormSubmit={{onFormSubmitStub}} />
+          </template>,
         );
 
         // when
@@ -436,7 +434,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         await clickByName('Enregistrer');
 
         // then
-        assert.deepEqual(this.candidate.getInformation(), {
+        assert.deepEqual(candidate.getInformation(), {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -452,7 +450,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when editing candidate information with france postal code info', function () {
       test('it should update candidate information with france postal code expected information', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -462,14 +460,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Copenhague',
           birthCountry: 'DANEMARK',
         });
-        this.onFormSubmitStub = sinon.stub();
-        this.onFormSubmitStub.resolves();
+        const onFormSubmitStub = sinon.stub();
+        onFormSubmitStub.resolves();
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal
-  @isDisplayed={{true}}
-  @candidate={{this.candidate}}
-  @onFormSubmit={{this.onFormSubmitStub}}
-/>`,
+          <template>
+            <CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} @onFormSubmit={{onFormSubmitStub}} />
+          </template>,
         );
 
         // when
@@ -483,7 +479,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         await clickByName('Enregistrer');
 
         // then
-        assert.deepEqual(this.candidate.getInformation(), {
+        assert.deepEqual(candidate.getInformation(), {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -501,7 +497,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when a foreign country is selected', () => {
       test('it shows city field and hides insee code and postal code fields', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -511,7 +507,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthCountry: 'FRANCE',
         });
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // when
@@ -529,7 +525,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when the insee code option is selected', () => {
       test('it shows insee code field and hides postal code and city fields', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -539,7 +535,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthCountry: 'FRANCE',
         });
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // when
@@ -555,7 +551,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     module('when the postal code option is selected', () => {
       test('it shows postal code and city fields and hides insee code field', async function (assert) {
         // given
-        this.candidate = store.createRecord('certification', {
+        const candidate = store.createRecord('certification', {
           firstName: 'Fabrice',
           lastName: 'Gadjo',
           birthdate: '2000-12-15',
@@ -565,7 +561,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthCountry: 'FRANCE',
         });
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
+          <template><CandidateEditModal @isDisplayed={{true}} @candidate={{candidate}} /></template>,
         );
 
         // when
