@@ -17,7 +17,7 @@ module('Unit | Route | login-oidc', function (hooks) {
 
   module('#beforeModel', function () {
     module('when receives error from identity provider', function () {
-      test('throws an error', function (assert) {
+      test('it throws an error', function (assert) {
         // given
         const route = this.owner.lookup('route:authentication/login-oidc');
 
@@ -57,7 +57,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       });
 
       module('when identity provider is not supported', function () {
-        test('should redirect the user to main login page', async function (assert) {
+        test('it redirects the user to main login page', async function (assert) {
           // given
           const route = this.owner.lookup('route:authentication/login-oidc');
           route.router = { transitionTo: sinon.stub() };
@@ -73,7 +73,7 @@ module('Unit | Route | login-oidc', function (hooks) {
 
       module('when attempting transition', function () {
         module('when TransitionIntent is a URLTransitionIntent', function () {
-          test('stores the intent url in session data nextUrl', async function (assert) {
+          test('it stores the intent url in session data nextUrl', async function (assert) {
             // given
             const sessionStub = Service.create({
               attemptedTransition: { intent: { url: '/organisations/PIXOIDC01/acces' } },
@@ -99,7 +99,7 @@ module('Unit | Route | login-oidc', function (hooks) {
 
         module('when TransitionIntent is a NamedTransitionIntent (no URL)', function () {
           module('when there is at least one context', function () {
-            test('builds a url from the intent name and contexts and stores it in session data nextUrl', async function (assert) {
+            test('it builds a url from the intent name and contexts and stores it in session data nextUrl', async function (assert) {
               // given
               const authenticateStub = sinon.stub().resolves();
               const sessionStub = Service.create({
@@ -127,7 +127,7 @@ module('Unit | Route | login-oidc', function (hooks) {
           });
 
           module('when there is no context', function () {
-            test('builds a url from the intent name and stores it in session data nextUrl', async function (assert) {
+            test('it builds a url from the intent name and stores it in session data nextUrl', async function (assert) {
               // given
               const authenticateStub = sinon.stub().resolves();
               const sessionStub = Service.create({
@@ -198,7 +198,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 
-    test('authenticates the user with identity provider', async function (assert) {
+    test('it authenticates the user with identity provider', async function (assert) {
       // given
       const authenticateStub = sinon.stub().resolves();
       const sessionStub = Service.create({
@@ -219,7 +219,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       assert.deepEqual(sessionStub.data, {});
     });
 
-    test('returns values to be received by afterModel to validate CGU', async function (assert) {
+    test('it returns values to be received by afterModel to validate CGU', async function (assert) {
       // given
       const authenticateStub = sinon.stub().rejects({
         errors: [
@@ -253,7 +253,7 @@ module('Unit | Route | login-oidc', function (hooks) {
     });
 
     module('when there is an unexpected error (not a JSON:API error)', function () {
-      test('throws back the error', async function (assert) {
+      test('it throws back the error', async function (assert) {
         // given
         const authenticateStub = sinon.stub().rejects(new Error('Internal Server Error, this is not a JSON:API error'));
         const sessionStub = Service.create({
@@ -304,7 +304,7 @@ module('Unit | Route | login-oidc', function (hooks) {
     });
 
     module('when CGU are already validated and authenticate fails', function () {
-      test('throws an error', async function (assert) {
+      test('it throws an error', async function (assert) {
         // given
         const authenticateStub = sinon.stub().rejects({ errors: [{ detail: 'there was an error' }] });
         const sessionStub = Service.create({
@@ -328,7 +328,7 @@ module('Unit | Route | login-oidc', function (hooks) {
     });
 
     module('when the identity provider does not provide all the user required information', function () {
-      test('throws an error', async function (assert) {
+      test('it throws an error', async function (assert) {
         // given
         const authenticateStub = sinon.stub().rejects({
           errors: [
