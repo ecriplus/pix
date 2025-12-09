@@ -37,6 +37,7 @@ const dependencies = {
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
+  combinedCourseBlueprintRepository: repositories.combinedCourseBlueprintRepository,
   codeGenerator,
   logger,
 };
@@ -44,6 +45,7 @@ const dependencies = {
 import { checkUserQuest } from './check-user-quest-success.js';
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
+import { findCombinedCourseBlueprints } from './find-combined-course-blueprints.js';
 import { findCombinedCourseByCampaignId } from './find-combined-course-by-campaign-id.js';
 import { findCombinedCourseByModuleIdAndUserId } from './find-combined-course-by-moduleId-and-user-id.js';
 import { findCombinedCourseParticipations } from './find-combined-course-participations.js';
@@ -68,6 +70,7 @@ const usecasesWithoutInjectedDependencies = {
   getCombinedCourseById,
   getCombinedCourseParticipationById,
   findCombinedCourseParticipations,
+  findCombinedCourseBlueprints,
   getCombinedCoursesByOrganizationId,
   getQuestResultsForCampaignParticipation,
   getVerifiedCode,
