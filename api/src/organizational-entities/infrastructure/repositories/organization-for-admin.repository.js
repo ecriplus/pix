@@ -383,7 +383,7 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
     qb.where('organizations.id', id);
   }
   if (name) {
-    qb.whereILike('organizations.name', `%${name}%`);
+    qb.where(knex.raw('unaccent(organizations.name) ILIKE unaccent(?)', [`%${name}%`]));
   }
   if (type) {
     qb.where('type', type);
