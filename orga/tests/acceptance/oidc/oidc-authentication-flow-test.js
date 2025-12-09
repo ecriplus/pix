@@ -92,28 +92,26 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
           assert.ok(screen.getByRole('button', { name: t('pages.login-form.login') }));
         });
       });
-
-      // TODO: Uncomment and make those tests work when the signup template is done
-      // module('when the user creates an account', function () {
-      //   module('when the user logs out', function () {
-      //     toRenameToTest('it redirects the user to the logout URL', async function (assert) {
-      //       // given
-      //       const screen = await visit('/connexion/oidc-partner?code=code&state=state');
-      //       await click(screen.getByLabelText(t('common.cgu.label')));
-      //       await click(screen.getByRole('button', { name: 'Je crée mon compte' }));
-      //       // eslint-disable-next-line ember/no-settled-after-test-helper
-      //       await settled();
-
-      //       await click(screen.getByRole('button', { name: 'Lloyd Consulter mes informations' }));
-
-      //       // when
-      //       await click(screen.getByRole('link', { name: 'Se déconnecter' }));
-
-      //       // then
-      //       assert.strictEqual(currentURL(), '/deconnexion');
-      //     });
-      //   });
-      // });
     });
   });
+
+  // TODO: Uncomment and make those tests work when the signup template is done
+  //   module('when the user logs out', function () {
+  //     toRenameToTest('it redirects the user to the logout URL', async function (assert) {
+  //       // given
+  //       const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+  //       await click(screen.getByLabelText(t('common.cgu.label')));
+  //       await click(screen.getByRole('button', { name: 'Je crée mon compte' }));
+  //       // eslint-disable-next-line ember/no-settled-after-test-helper
+  //       await settled();
+  //
+  //       await click(screen.getByRole('button', { name: 'Lloyd Consulter mes informations' }));
+  //
+  //       // when
+  //       await click(screen.getByRole('link', { name: 'Se déconnecter' }));
+  //
+  //       // then
+  //       assert.strictEqual(currentURL(), '/deconnexion');
+  //     });
+  //   });
 });
