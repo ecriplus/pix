@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.277.0](https://github.com/1024pix/pix/compare/v5.276.0...v5.277.0) (2025-12-09)
+
+### :rocket: Amélioration
+
+- [#14357](https://github.com/1024pix/pix/pull/14357) Ajout d'une modal pour éviter le détachement accidentel d'un profil cible de ses contenus formatifs s'il est lié à un parcours combiné (PIX-20512) 
+- [#14373](https://github.com/1024pix/pix/pull/14373) Ajouter une table pour les schémas de parcours combinés (PIX-20727) 
+- [#14351](https://github.com/1024pix/pix/pull/14351) BACK Filtrer les organisations sur l'équipe en charge (PIX-20691) 
+- [#14346](https://github.com/1024pix/pix/pull/14346) Éviter d'avoir l'auto-complétion Google Pay sur le form de certif (PIX-20635). 
+- [#14369](https://github.com/1024pix/pix/pull/14369) Modifs2 experts mdp nov 
+- [#14362](https://github.com/1024pix/pix/pull/14362) Persister le centre choisi dans PixCertif (PIX-20705). 
+
+### :bug: Correction
+
+- [#14359](https://github.com/1024pix/pix/pull/14359) Les bordures des cartes de formation ne sont pas très clean sur Pix App (PIX-20618) 
+
+### :building_construction: Tech
+
+- [#14368](https://github.com/1024pix/pix/pull/14368) Bump des dépendances Pix Admin 
+- [#14378](https://github.com/1024pix/pix/pull/14378) Retirer l'usage d'une table qui n'est plus alimenté (PIX-20738). 
+- [#14370](https://github.com/1024pix/pix/pull/14370) Simplifier la déclaration de Parcours dans les tests (PIX-20725).
+
 # [5.276.0](https://github.com/1024pix/pix/compare/v5.275.0...v5.276.0) (2025-12-08)
 
 ### :rocket: Amélioration
