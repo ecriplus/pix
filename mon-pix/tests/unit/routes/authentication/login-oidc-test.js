@@ -11,6 +11,10 @@ module('Unit | Route | login-oidc', function (hooks) {
   setupTest(hooks);
   setupIntl(hooks);
 
+  hooks.afterEach(function () {
+    sinon.restore();
+  });
+
   module('#beforeModel', function () {
     module('when receives error from identity provider', function () {
       test('throws an error', function (assert) {
@@ -50,10 +54,6 @@ module('Unit | Route | login-oidc', function (hooks) {
         }
 
         this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
-      });
-
-      hooks.afterEach(function () {
-        sinon.restore();
       });
 
       module('when identity provider is not supported', function () {
