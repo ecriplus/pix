@@ -386,8 +386,9 @@ describe('Integration | Certification | Application | jobs | CertificationComple
 
     certificationCompletedJobController = new CertificationCompletedJobController();
 
-    databaseBuilder.factory.buildCertificationConfiguration();
-    databaseBuilder.factory.buildCertificationVersion();
+    const version = databaseBuilder.factory.buildCertificationVersion();
+
+    _createFrameworkChallengesForVersion(version);
 
     await databaseBuilder.commit();
   });
@@ -568,6 +569,19 @@ describe('Integration | Certification | Application | jobs | CertificationComple
     });
   });
 });
+
+const _createFrameworkChallengesForVersion = (version) => {
+  _.flatten(
+    _.range(0, 3).map((skillIndex) =>
+      _.range(0, 3).map((level) => {
+        return databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          challengeId: `recChallenge${skillIndex}_${level}_0`,
+          versionId: version.id,
+        });
+      }),
+    ),
+  );
+};
 
 function _buildValidAnswersAndCertificationChallenges({
   certificationCourseId,

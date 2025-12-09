@@ -21,7 +21,7 @@ export const ABORT_REASONS = {
 
 const V3_CERTIFICATION_AVAILABLE_LANGUAGES = ['fr', 'en'];
 
-class CertificationCourse {
+export class CertificationCourse {
   /**
    * @param {Object} props
    * @param {number} props.id
@@ -44,7 +44,7 @@ class CertificationCourse {
    * @param {number} props.userId
    * @param {number} props.sessionId
    * @param {Date} props.maxReachableLevelOnCertificationDate
-   * @param {string} props.abortReason
+   * @param {ABORT_REASONS} props.abortReason
    * @param {ComplementaryCertificationCourse} props.complementaryCertificationCourse
    * @param {number} props.numberOfChallenges
    * @param {AlgorithmEngineVersion} props.version
@@ -312,6 +312,13 @@ class CertificationCourse {
     this._numberOfChallenges = numberOfChallenges;
   }
 
+  /**
+   * @returns {Assessment}
+   */
+  getAssessment() {
+    return this._assessment;
+  }
+
   isV2() {
     return AlgorithmEngineVersion.isV2(this._version);
   }
@@ -366,5 +373,3 @@ function _sanitizedString(string) {
 
   return withUnifiedWithSpaces;
 }
-
-export { CertificationCourse };

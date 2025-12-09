@@ -395,7 +395,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         beforeEach(async function () {
           ({ options, session } = await _createSession({ version: 3 }));
           databaseBuilder.factory.buildCertificationVersion();
-          databaseBuilder.factory.buildCertificationConfiguration();
           await databaseBuilder.commit();
         });
 
@@ -559,7 +558,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             challengeId: certificationChallenge.challengeId,
             result: AnswerStatus.KO.status,
           });
-          databaseBuilder.factory.buildCertificationConfiguration();
           await databaseBuilder.commit();
 
           options = {
@@ -923,9 +921,6 @@ const _createSessionWithoutChallenge = async () => {
   const userId = databaseBuilder.factory.buildUser().id;
   const candidateId = databaseBuilder.factory.buildUser().id;
   const session = databaseBuilder.factory.buildSession({ version });
-  databaseBuilder.factory.buildCertificationConfiguration({
-    startingDate: new Date('2024-01-01'),
-  });
   databaseBuilder.factory.buildCertificationVersion({
     startDate: new Date('2024-01-01'),
   });

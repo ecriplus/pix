@@ -22,6 +22,11 @@ const getByAssessmentId = async ({ assessmentId }) => {
   return certificationChallengeLiveAlertsDto.map(_toDomain);
 };
 
+/**
+ * @param {Object} params
+ * @param {number} params.assessmentId
+ * @returns {Array<string>} array of challengeId with validated live alert raised for that assessment
+ */
 const getLiveAlertValidatedChallengeIdsByAssessmentId = async ({ assessmentId }) => {
   const knexConn = DomainTransaction.getConnection();
   const liveAlertValidatedChallengeIds = await knexConn('certification-challenge-live-alerts')

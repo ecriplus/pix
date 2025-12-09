@@ -8,7 +8,9 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
- * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
+ * @typedef {typeof import('../services/pick-challenge-service.js').default} PickChallengeService
+ * @typedef {import('../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ * @typedef {import('../../../../shared/domain/models/Assessment.js').Assessment} Assessment
  */
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
@@ -17,6 +19,8 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 
 /**
  * @param {Object} params
+ * @param {Assessment} params.assessment
+ * @param {string} params.locale
  * @param {AnswerRepository} params.answerRepository
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
@@ -30,8 +34,8 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  */
 const getNextChallenge = async function ({
   assessment,
-  answerRepository,
   locale,
+  answerRepository,
   certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
@@ -132,6 +136,14 @@ const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
   return possibleChallenges.length === 0;
 };
 
+/**
+ * Excludes challenges if their associated skill has a validated live alert.
+ *
+ * @param {object} params
+ * @param {Array<string>} params.validatedLiveAlertChallengeIds - An array of challenge IDs with validated live alerts.
+ * @param {Array<CalibratedChallenge>} params.challenges - An array of calibrated challenges.
+ * @returns {Array<CalibratedChallenge>} An array of challenges with skills that do not have validated live alerts.
+ */
 const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAlertChallengeIds, challenges }) => {
   const validatedLiveAlertChallenges = challenges.filter((challenge) => {
     return validatedLiveAlertChallengeIds.includes(challenge.id);
@@ -156,10 +168,14 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
  *
  * Example: after LCMS release if a challenge becomes archived ('perime'), this challenge will be in
  *          `answeredCalibratedChallenges` param, but not in `currentCalibratedChallenges` param
+ * @param {Array<CalibratedChallenge>} answeredCalibratedChallenges
+ * @param {Array<CalibratedChallenge>} currentCalibratedChallengesproperty.
+ * @returns {Array<CalibratedChallenge>}
  */
 const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {
   // It is critical that answeredCalibratedChallenges is in first parameter in order to take precedence
   const challenges = [...answeredCalibratedChallenges, ...currentCalibratedChallenges];
+
   return Object.values(
     challenges.reduce((acc, challenge) => {
       const existing = acc[challenge.id];

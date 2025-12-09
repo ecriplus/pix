@@ -1,3 +1,8 @@
+/**
+ * @typedef {import('../../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ * @typedef {import('../../../../../evaluation/domain/models/Answer.js').Answer} Answer
+ */
+
 import lodash from 'lodash';
 
 import { logger } from '../../../../../shared/infrastructure/utils/logger.js';
@@ -23,7 +28,12 @@ export {
   getReward,
 };
 
-function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY } = {}) {
+/**
+ * @param {object} params
+ * @param {CalibratedChallenge[]} params.availableChallenges
+ * @param {number} [params.capacity=DEFAULT_CAPACITY]
+ */
+function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY }) {
   const challengesWithReward = availableChallenges.map((challenge) => {
     return {
       challenge,
@@ -38,6 +48,13 @@ function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAP
   return _findBestPossibleChallenges(challengesWithReward, capacity);
 }
 
+/**
+ * @param {object} params
+ * @param {Answer[]} params.allAnswers
+ * @param {CalibratedChallenge[]} params.challenges
+ * @param {number} [params.capacity=DEFAULT_CAPACITY]
+ * @param {number} params.variationPercent
+ */
 function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   if (challenges.length === 0 || allAnswers.length === 0) {
     return { capacity, errorRate: DEFAULT_ERROR_RATE };
@@ -53,6 +70,13 @@ function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CA
   return capacityHistory.at(-1);
 }
 
+/**
+ * @param {object} params
+ * @param {Answer[]} params.allAnswers
+ * @param {CalibratedChallenge[]} params.challenges
+ * @param {number} [params.capacity=DEFAULT_CAPACITY]
+ * @param {number} params.variationPercent
+ */
 function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   let latestCapacity = capacity;
 
@@ -87,6 +111,17 @@ function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEF
   return capacityHistory;
 }
 
+/**
+ * @private
+ * @param {object} params
+ * @param {CalibratedChallenge[]} params.challenges
+ * @param {Answer} params.answer
+ * @param {number} params.latestCapacity
+ * @param {number[]} params.likelihood
+ * @param {number[]} params.normalizedPosteriori
+ * @param {number} params.variationPercent
+ * @returns {{ latestCapacity: number, likelihood: number[], normalizedPosteriori: number[] }}
+ */
 function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {
   const answeredChallenge = _findChallengeForAnswer(challenges, answer);
 
@@ -100,6 +135,11 @@ function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normal
   return { latestCapacity, likelihood, normalizedPosteriori };
 }
 
+/**
+ * @private
+ * @param {number} gaussianMean
+ * @returns {number[]}
+ */
 function _computeNormalizedPrior(gaussianMean) {
   return _normalizeDistribution(
     samples.map((sample) =>
@@ -111,6 +151,13 @@ function _computeNormalizedPrior(gaussianMean) {
   );
 }
 
+/**
+ * @private
+ * @param {CalibratedChallenge} answeredChallenge
+ * @param {Answer} answer
+ * @param {number[]} previousLikelihood
+ * @returns {number[]}
+ */
 function _computeLikelihood(answeredChallenge, answer, previousLikelihood) {
   return samples.map((sample, index) => {
     let probability = _getProbability(sample, answeredChallenge.discriminant, answeredChallenge.difficulty);
@@ -119,12 +166,24 @@ function _computeLikelihood(answeredChallenge, answer, previousLikelihood) {
   });
 }
 
+/**
+ * @param {number[]} likelihood
+ * @param {number[]} normalizedGaussian
+ * @returns {number[]}
+ */
 function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
   const posteriori = samples.map((_, index) => likelihood[index] * normalizedGaussian[index]);
 
   return _normalizeDistribution(posteriori);
 }
 
+/**
+ * @private
+ * @param {number} previousCapacity
+ * @param {number} variationPercent
+ * @param {number[]} normalizedPosteriori
+ * @returns {number}
+ */
 function _computeCapacity(previousCapacity, variationPercent, normalizedPosteriori) {
   const rawNextCapacity = lodash.sum(samples.map((sample, index) => sample * normalizedPosteriori[index]));
 
@@ -133,6 +192,12 @@ function _computeCapacity(previousCapacity, variationPercent, normalizedPosterio
     : rawNextCapacity;
 }
 
+/**
+ * @private
+ * @param {number} latestCapacity
+ * @param {number[]} normalizedPosteriori
+ * @returns {number}
+ */
 function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
   const rawErrorRate = lodash.sum(
     samples.map((sample, index) => normalizedPosteriori[index] * (sample - latestCapacity) ** 2),
@@ -141,6 +206,12 @@ function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
   return Math.sqrt(rawErrorRate - (ERROR_RATE_CLASS_INTERVAL ** 2) / 12.0); // prettier-ignore
 }
 
+/**
+ * @private
+ * @param {object} params
+ * @param {Answer[]} params.allAnswers
+ * @param {CalibratedChallenge[]} params.challenges
+ */
 function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
   const alreadyAnsweredSkillsIds = allAnswers
     .map((answer) => _findChallengeForAnswer(challenges, answer))
@@ -152,6 +223,13 @@ function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
   return challengesForNonAnsweredSkills;
 }
 
+/**
+ * @private
+ * @param {number} previousCapacity
+ * @param {number} nextCapacity
+ * @param {number} variationPercent
+ * @returns {number}
+ */
 function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercent) {
   const hasSmallCapacity = -variationPercent < previousCapacity && previousCapacity < variationPercent;
 
@@ -162,8 +240,19 @@ function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercen
     : Math.max(nextCapacity, previousCapacity - gap);
 }
 
+/**
+ * @private
+ * @param {{challenge: CalibratedChallenge, reward: number}[]} challengesWithReward
+ * @param {number} capacity
+ * @returns {CalibratedChallenge[]}
+ */
 function _findBestPossibleChallenges(challengesWithReward, capacity) {
-  const canChallengeBeSuccessful = ({ challenge }) => {
+  /**
+   * @param {{challenge: CalibratedChallenge, reward: number}} challengeWithReward
+   * @returns {boolean}
+   */
+  const canChallengeBeSuccessful = (challengeWithReward) => {
+    const { challenge } = challengeWithReward;
     const minimumSuccessRate = 0;
     const successProbability = _getProbability(capacity, challenge.discriminant, challenge.difficulty);
 
@@ -178,9 +267,15 @@ function _findBestPossibleChallenges(challengesWithReward, capacity) {
 
   const possibleChallengesWithReward = orderedChallengesWithReward.slice(0, MAX_NUMBER_OF_RETURNED_CHALLENGES);
 
-  return possibleChallengesWithReward.map(({ challenge }) => challenge);
+  return possibleChallengesWithReward.map((challengeWithReward) => challengeWithReward.challenge);
 }
 
+/**
+ * @private
+ * @param {CalibratedChallenge[]} challenges
+ * @param {Answer} answer
+ * @returns {CalibratedChallenge}
+ */
 function _findChallengeForAnswer(challenges, answer) {
   const challengeAssociatedToAnswer = challenges.find((challenge) => challenge.id === answer.challengeId);
   if (!challengeAssociatedToAnswer) {
@@ -189,23 +284,48 @@ function _findChallengeForAnswer(challenges, answer) {
   return challengeAssociatedToAnswer;
 }
 
+/**
+ * @param {object} params
+ * @param {number} params.capacity
+ * @param {number} params.discriminant
+ * @param {number} params.difficulty
+ */
 function getReward({ capacity, discriminant, difficulty }) {
   const probability = _getProbability(capacity, discriminant, difficulty);
   return probability * (1 - probability) * Math.pow(discriminant, 2);
 }
 
-// Parameters are not wrapped inside an object for performance reasons
-// It avoids creating an object before each call which will trigger lots of
-// garbage collection, especially when running simulators
+/**
+ * Parameters are not wrapped inside an object for performance reasons.
+ * It avoids creating an object before each call which will trigger lots of
+ * garbage collection, especially when running simulators.
+ * @private
+ * @param {number} capacity
+ * @param {number} discriminant
+ * @param {number} difficulty
+ * @returns {number}
+ */
 function _getProbability(capacity, discriminant, difficulty) {
   return 1 / (1 + Math.exp(discriminant * (difficulty - capacity)));
 }
 
+/**
+ * @private
+ * @param {object} params
+ * @param {number} params.gaussianMean
+ * @param {number} params.value
+ * @returns {number}
+ */
 function _getGaussianValue({ gaussianMean, value }) {
   const variance = 1.5;
   return Math.exp(Math.pow(value - gaussianMean, 2) / (-2 * variance)) / (Math.sqrt(variance) * Math.sqrt(2 * Math.PI));
 }
 
+/**
+ * @private
+ * @param {number[]} data
+ * @returns {number[]}
+ */
 function _normalizeDistribution(data) {
   const sum = lodash.sum(data);
   return data.map((value) => value / sum);

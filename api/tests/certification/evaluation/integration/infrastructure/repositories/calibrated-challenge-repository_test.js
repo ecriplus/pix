@@ -780,4 +780,299 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
       });
     });
   });
+
+  describe('#getAllCalibratedChallenges', function () {
+    let skillsLC;
+    let challengesLC;
+
+    beforeEach(async function () {
+      await knex('learningcontent.challenges').truncate();
+      await knex('learningcontent.skills').truncate();
+      skillsLC = [];
+      challengesLC = [];
+      skillsLC.push(skillData02_tube02competence01_perime);
+      skillsLC.push(skillData03_tube02competence01_actif);
+      skillsLC.push(skillData00_tube00competence00_actif);
+      challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
+      challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
+      challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
+    });
+
+    context('when retrieving challenges from archive', function () {
+      context('when no flash compatible challenges found', function () {
+        it('should return an empty array', async function () {
+          // given
+          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+          const { id } = databaseBuilder.factory.buildCertificationVersion({
+            startDate: new Date('1977-10-19'),
+            expirationDate: new Date('1977-10-20'),
+          });
+          const archivedVersionWithNonCompatibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[0].id,
+            versionId: archivedVersionWithNonCompatibleChallenge.id,
+            discriminant: null,
+            difficulty: null,
+          });
+
+          const activeVersionWithEligibleChallenge = databaseBuilder.factory.buildCertificationVersion({
+            startDate: new Date('1977-10-20'),
+            expirationDate: null,
+          });
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[0].id,
+            versionId: activeVersionWithEligibleChallenge.id,
+            discriminant: 2.2,
+            difficulty: 3.5,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
+            version: archivedVersionWithNonCompatibleChallenge,
+          });
+
+          // then
+          expect(challenges).to.deep.equal([]);
+        });
+      });
+
+      context('when flash compatible challenges found', function () {
+        it('should return the challenges', async function () {
+          // given
+          challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
+          challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
+          challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
+          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+          const { id } = databaseBuilder.factory.buildCertificationVersion({
+            startDate: new Date('1977-10-19'),
+            expirationDate: new Date('1977-10-20'),
+          });
+          const archivedVersionWithEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+          const expectedDiscriminant = 2.221;
+          const expectedDifficulty = 3.554;
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+            versionId: archivedVersionWithEligibleChallenge.id,
+            discriminant: expectedDiscriminant,
+            difficulty: expectedDifficulty,
+          });
+          const notACompartibleDiscriminant = null;
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
+            versionId: archivedVersionWithEligibleChallenge.id,
+            discriminant: notACompartibleDiscriminant,
+            difficulty: expectedDifficulty,
+          });
+          const notACompartibleDifficulty = null;
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+            versionId: archivedVersionWithEligibleChallenge.id,
+            discriminant: expectedDiscriminant,
+            difficulty: notACompartibleDifficulty,
+          });
+
+          const activeVersionWithNonCompatibleChallenge = databaseBuilder.factory.buildCertificationVersion({
+            startDate: new Date('1977-10-20'),
+            expirationDate: null,
+          });
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+            versionId: activeVersionWithNonCompatibleChallenge.id,
+            discriminant: null,
+            difficulty: null,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
+            version: archivedVersionWithEligibleChallenge,
+          });
+
+          // then
+          expect(challenges).to.deep.equal([
+            domainBuilder.certification.evaluation.buildCalibratedChallenge({
+              id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+              discriminant: expectedDiscriminant,
+              difficulty: expectedDifficulty,
+              competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
+              skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                id: skillData00_tube00competence00_actif.id,
+                name: skillData00_tube00competence00_actif.name,
+                competenceId: skillData00_tube00competence00_actif.competenceId,
+                tubeId: skillData00_tube00competence00_actif.tubeId,
+              }),
+            }),
+          ]);
+        });
+      });
+    });
+
+    context('when retrieving current framework', function () {
+      context('when including obsolete challenges', function () {
+        context('when no flash compatible challenges found', function () {
+          it('should return an empty array', async function () {
+            // given
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+            const archivedVersionWithCompatibleChallenge = databaseBuilder.factory.buildCertificationVersion({
+              startDate: new Date('1977-10-19'),
+              expirationDate: new Date('1977-10-20'),
+            });
+
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengesLC[0].id,
+              versionId: archivedVersionWithCompatibleChallenge.id,
+              discriminant: 2.2,
+              difficulty: 3.5,
+            });
+
+            const { id } = databaseBuilder.factory.buildCertificationVersion({
+              startDate: new Date('1977-10-20'),
+              expirationDate: null,
+            });
+            const activeVersionWithNoEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengesLC[0].id,
+              versionId: activeVersionWithNoEligibleChallenge.id,
+              discriminant: null,
+              difficulty: null,
+            });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
+              version: activeVersionWithNoEligibleChallenge,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([]);
+          });
+        });
+
+        context('when flash compatible challenges found', function () {
+          it('should return the challenges', async function () {
+            // given
+            challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
+            challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
+            challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+            const archivedVersionWithNonCompatibleChallenge = databaseBuilder.factory.buildCertificationVersion({
+              startDate: new Date('1977-10-19'),
+              expirationDate: new Date('1977-10-20'),
+            });
+
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              versionId: archivedVersionWithNonCompatibleChallenge.id,
+              discriminant: null,
+              difficulty: null,
+            });
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
+              versionId: archivedVersionWithNonCompatibleChallenge.id,
+              discriminant: null,
+              difficulty: null,
+            });
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+              versionId: archivedVersionWithNonCompatibleChallenge.id,
+              discriminant: null,
+              difficulty: null,
+            });
+
+            const { id } = databaseBuilder.factory.buildCertificationVersion({
+              startDate: new Date('1977-10-20'),
+              expirationDate: null,
+            });
+            const activeVersionWithEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+            const expectedDiscriminant = 2.222;
+            const expectedDifficulty = 3.555;
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+              versionId: activeVersionWithEligibleChallenge.id,
+              discriminant: expectedDiscriminant,
+              difficulty: expectedDifficulty,
+            });
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
+              versionId: activeVersionWithEligibleChallenge.id,
+              discriminant: expectedDiscriminant,
+              difficulty: expectedDifficulty,
+            });
+            databaseBuilder.factory.buildCertificationFrameworksChallenge({
+              challengeId: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+              versionId: activeVersionWithEligibleChallenge.id,
+              discriminant: expectedDiscriminant,
+              difficulty: expectedDifficulty,
+            });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await calibratedChallengeRepository.getAllCalibratedChallenges({
+              version: activeVersionWithEligibleChallenge,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([
+              domainBuilder.certification.evaluation.buildCalibratedChallenge({
+                id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+                blindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+                discriminant: expectedDiscriminant,
+                difficulty: expectedDifficulty,
+                competenceId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.competenceId,
+                skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                  id: skillData00_tube00competence00_actif.id,
+                  name: skillData00_tube00competence00_actif.name,
+                  competenceId: skillData00_tube00competence00_actif.competenceId,
+                  tubeId: skillData00_tube00competence00_actif.tubeId,
+                }),
+              }),
+              domainBuilder.certification.evaluation.buildCalibratedChallenge({
+                id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+                blindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility2,
+                discriminant: expectedDiscriminant,
+                difficulty: expectedDifficulty,
+                competenceId: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.competenceId,
+                skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                  id: skillData00_tube00competence00_actif.id,
+                  name: skillData00_tube00competence00_actif.name,
+                  competenceId: skillData00_tube00competence00_actif.competenceId,
+                  tubeId: skillData00_tube00competence00_actif.tubeId,
+                }),
+              }),
+              domainBuilder.certification.evaluation.buildCalibratedChallenge({
+                id: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
+                blindnessCompatibility:
+                  challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility2,
+                discriminant: expectedDiscriminant,
+                difficulty: expectedDifficulty,
+                competenceId: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.competenceId,
+                skill: domainBuilder.certification.evaluation.buildCalibratedChallengeSkill({
+                  id: skillData02_tube02competence01_perime.id,
+                  name: skillData02_tube02competence01_perime.name,
+                  competenceId: skillData02_tube02competence01_perime.competenceId,
+                  tubeId: skillData02_tube02competence01_perime.tubeId,
+                }),
+              }),
+            ]);
+          });
+        });
+      });
+    });
+  });
 });

@@ -1,9 +1,11 @@
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+
 /**
  * Frameworks scopes
  * @readonly
  * @enum {string}
  */
-export const Frameworks = Object.freeze({
+const FRAMEWORKS = Object.freeze({
   CORE: 'CORE',
   PIX_PLUS_DROIT: 'DROIT',
   PIX_PLUS_EDU_1ER_DEGRE: 'EDU_1ER_DEGRE',
@@ -11,3 +13,22 @@ export const Frameworks = Object.freeze({
   PIX_PLUS_EDU_CPE: 'EDU_CPE',
   PIX_PLUS_PRO_SANTE: 'PRO_SANTE',
 });
+
+/**
+ * Finds a framework by its name.
+ * @param {string} name - The name of the framework to find.
+ * @returns {string} The framework value.
+ * @throws {NotFoundError} If the framework is not found.
+ */
+function getByName(name) {
+  const framework = Object.values(FRAMEWORKS).find((value) => value === name);
+  if (!framework) {
+    throw new NotFoundError(`Framework with name "${name}" not found.`);
+  }
+  return framework;
+}
+
+export const Frameworks = {
+  ...FRAMEWORKS,
+  getByName,
+};

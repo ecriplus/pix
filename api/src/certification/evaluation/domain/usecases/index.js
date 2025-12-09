@@ -29,7 +29,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
- * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  * @typedef {assessmentResultRepository} AssessmentResultRepository

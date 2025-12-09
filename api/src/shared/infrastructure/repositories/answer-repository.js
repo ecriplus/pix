@@ -63,6 +63,12 @@ const findByChallengeAndAssessment = async function ({ challengeId, assessmentId
   return _toDomain(answerDTO);
 };
 
+/**
+ * Finds all unique answers for a given assessment, ordered by creation date.
+ *
+ * @param {number} assessmentId
+ * @returns {Promise<Answer[]>}
+ */
 const findByAssessment = async function (assessmentId) {
   const knexConn = DomainTransaction.getConnection();
   const answerDTOs = await knexConn.select(COLUMNS).from('answers').where({ assessmentId }).orderBy('createdAt');

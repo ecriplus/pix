@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('./CalibratedChallengeSkill.js').CalibratedChallengeSkill} CalibratedChallengeSkill
+ */
+
 export const Accessibility = Object.freeze({
   RAS: 'RAS',
   OK: 'OK',

@@ -9,7 +9,6 @@ import * as areaRepository from '../../../../shared/infrastructure/repositories/
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import * as challengeRepository from '../../../evaluation/infrastructure/repositories/challenge-repository.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -18,6 +17,7 @@ import * as complementaryCertificationBadgesRepository from '../../../shared/inf
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
+import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
@@ -37,7 +37,6 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {flashAlgorithmService} FlashAlgorithmService
- * @typedef {challengeRepository} ChallengeRepository
  * @typedef {scoringService} ScoringService
  * @typedef {areaRepository} AreaRepository
  * @typedef {placementProfileService} PlacementProfileService
@@ -49,6 +48,7 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {sharedCertificationCandidateRepository} SharedCertificationCandidateRepository
  * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
+ * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  */
 const dependencies = {
   assessmentResultRepository,
@@ -61,7 +61,6 @@ const dependencies = {
   certificationChallengeLiveAlertRepository,
   flashAlgorithmService,
   challengeCalibrationRepository,
-  challengeRepository,
   areaRepository,
   placementProfileService,
   scoringService,
@@ -73,6 +72,7 @@ const dependencies = {
   sharedChallengeRepository,
   sharedCertificationCandidateRepository,
   sharedVersionRepository,
+  calibratedChallengeRepository,
 };
 
 import { findByCertificationCourseIdAndAssessmentId } from './scoring/calibrated-challenge-service.js';

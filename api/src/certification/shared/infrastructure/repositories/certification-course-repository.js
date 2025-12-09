@@ -224,7 +224,7 @@ async function getCertificationScope({ courseId }) {
     .first();
 
   if (result?.key && result.key !== ComplementaryCertificationKeys.CLEA) {
-    return result.key;
+    return Frameworks.getByName(result.key);
   }
 
   return Frameworks.CORE;

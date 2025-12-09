@@ -1,10 +1,18 @@
 /**
+ * @typedef {import('./calibrated-challenge-service.js').findByCertificationCourseIdAndAssessmentId} FindByCertificationCourseIdAndAssessmentId
+ */
+
+/**
+ * @typedef {Object} ScoringV3Dependencies
+ * @property {FindByCertificationCourseIdAndAssessmentId} findByCertificationCourseIdAndAssessmentId
+ */
+
+/**
  * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('../index.js').SharedVersionRepository} SharedVersionRepository
  * @typedef {import('../index.js').SharedCertificationCandidateRepository} SharedCertificationCandidateRepository
@@ -28,13 +36,13 @@ export const handleV3CertificationScoring = withTransaction(
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {CompetenceMarkRepository} params.competenceMarkRepository
    * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
-   * @param {CertificationChallengeRepository} params.certificationChallengeRepository
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {SharedVersionRepository} params.SharedVersionRepository
+   * @param {SharedVersionRepository} params.sharedVersionRepository
    * @param {SharedCertificationCandidateRepository} params.sharedCertificationCandidateRepository
    * @param {AnswerRepository} params.answerRepository
    * @param {FlashAlgorithmService} params.flashAlgorithmService
    * @param {ScoringDegradationService} params.scoringDegradationService
+   * @param {ScoringV3Dependencies} params.dependencies
    */
   async ({
     event,
@@ -57,26 +65,23 @@ export const handleV3CertificationScoring = withTransaction(
 
     const toBeCancelled = event instanceof CertificationCancelled;
 
-    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-      await dependencies.findByCertificationCourseIdAndAssessmentId({
-        certificationCourseId,
-        assessmentId,
-      });
     const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
-    const abortReason = certificationCourse.getAbortReason();
-
+    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
     const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
       sessionId: certificationCourse.getSessionId(),
       userId: certificationCourse.getUserId(),
     });
-
-    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
-
     const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
       scope,
       reconciliationDate: certificationCandidate.reconciledAt,
     });
+
+    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+      await dependencies.findByCertificationCourseIdAndAssessmentId({
+        certificationCourse,
+        version,
+      });
 
     const algorithm = new FlashAssessmentAlgorithm({
       flashAlgorithmImplementation: flashAlgorithmService,
@@ -88,6 +93,7 @@ export const handleV3CertificationScoring = withTransaction(
       version,
     });
 
+    const abortReason = certificationCourse.getAbortReason();
     const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
       abortReason,
       algorithm,
