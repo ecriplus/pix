@@ -118,6 +118,10 @@ export default class LoginOidcRoute extends Route {
       return { identityProviderSlug, shouldCreateUserAccount: false };
     } catch (response) {
       const apiError = get(response, 'errors[0]');
+      if (!apiError) {
+        throw response;
+      }
+
       const error = new JSONApiError(apiError.detail, apiError);
 
       if (error.code == 'MISSING_OIDC_STATE') {
