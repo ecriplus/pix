@@ -27,7 +27,7 @@ class CommonOrganizationLearner {
 
   reconcileUser(userId) {
     if (this.userId) {
-      throw new ReconcileCommonOrganizationLearnerError('USER_ALREADY_ERCONCILE');
+      throw new ReconcileCommonOrganizationLearnerError('USER_ALREADY_RECONCILED');
     }
     this.userId = userId;
   }
