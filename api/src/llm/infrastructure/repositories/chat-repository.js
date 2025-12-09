@@ -23,26 +23,8 @@ export async function get(chatId) {
       configurationId: chatDTO.configId,
       configuration: chatDTO.configContent,
     },
-    migrateToNewMessageDTOs(messageDTOs),
+    messageDTOs,
   );
-}
-
-function migrateToNewMessageDTOs(messageDTOs) {
-  const messages = [];
-  let attachmentNameWaitingToBeMerged = null;
-  for (const message of messageDTOs) {
-    if (message.emitter === 'assistant' && (message.attachmentName || message.attachmentContext)) continue;
-    if (message.hasAttachmentBeenSubmittedAlongWithAPrompt) {
-      attachmentNameWaitingToBeMerged = message.attachmentName;
-      continue;
-    }
-    if (attachmentNameWaitingToBeMerged) {
-      message.attachmentName = attachmentNameWaitingToBeMerged;
-      attachmentNameWaitingToBeMerged = null;
-    }
-    messages.push(message);
-  }
-  return messages;
 }
 
 function toDomain(chatDTO, messageDTOs) {
