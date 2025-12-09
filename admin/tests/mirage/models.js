@@ -69,7 +69,6 @@ import triggerTube from './models/trigger-tube';
 import tube from './models/tube';
 import user from './models/user';
 import userCertificationCourse from './models/user-certification-course';
-import userForm from './models/user-form';
 import userLogin from './models/user-login';
 import userParticipation from './models/user-participation';
 import v3CertificationCourseDetailsForAdministration from './models/v3-certification-course-details-for-administration';
@@ -145,7 +144,6 @@ export default {
   tube,
   user,
   userCertificationCourse,
-  userForm,
   userLogin,
   userParticipation,
   v3CertificationCourseDetailsForAdministration,
