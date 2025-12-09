@@ -13,9 +13,9 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  */
 
 /**
- * @typedef MessageDTO
- * @property {string=} content
- * @property {"user"|"assistant"} emitter
+ * @typedef MessageForInference
+ * @property {string} content
+ * @property {"user"|"assistant"} role
  */
 
 /**
@@ -23,7 +23,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @name prompt
  *
  * @param {Object} params
- * @param {MessageDTO[]} params.messages
+ * @param {MessageForInference[]} params.messages
  * @param {Configuration} params.configuration
  * @returns {Promise<ReadableStream>}
  */
