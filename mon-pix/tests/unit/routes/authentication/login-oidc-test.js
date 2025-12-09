@@ -249,10 +249,10 @@ module('Unit | Route | login-oidc', function (hooks) {
       });
     });
 
-    module('when CGU are already validated and authenticate fails', function () {
+    module('when CGU are already validated but authenticate fails', function () {
       test('it throws an error', async function (assert) {
         // given
-        const authenticateStub = sinon.stub().rejects({ errors: [{ detail: 'there was an error' }] });
+        const authenticateStub = sinon.stub().rejects({ errors: [{ detail: 'Some error' }] });
         const sessionStub = Service.create({
           authenticate: authenticateStub,
           data: {},
@@ -267,46 +267,8 @@ module('Unit | Route | login-oidc', function (hooks) {
         } catch (error) {
           // then
           sinon.assert.calledOnce(authenticateStub);
-          assert.strictEqual(error.message, 'there was an error');
+          assert.strictEqual(error.message, 'Some error');
           assert.ok(true);
-        }
-      });
-    });
-
-    module('when the identity provider does not provide all the user required information', function () {
-      test('it throws an error', async function (assert) {
-        // given
-        const authenticateStub = sinon.stub().rejects({
-          errors: [
-            {
-              status: '422',
-              code: 'USER_INFO_MANDATORY_MISSING_FIELDS',
-              title: 'Unprocessable entity',
-              detail:
-                "Un ou des champs obligatoires (Champs manquants : given_name}) n'ont pas été renvoyés par votre fournisseur d'identité OIDC partner.",
-              meta: {
-                shortCode: 'OIDC01',
-              },
-            },
-          ],
-        });
-        const sessionStub = Service.create({
-          authenticate: authenticateStub,
-          data: {},
-        });
-        const route = this.owner.lookup('route:authentication/login-oidc');
-        route.set('session', sessionStub);
-        route.router = { transitionTo: sinon.stub() };
-
-        try {
-          // when
-          await route.model({ identity_provider_slug: 'oidc-partner' }, { to: { queryParams: { code: 'test' } } });
-        } catch (error) {
-          // then
-          assert.strictEqual(
-            error.message,
-            "Un ou des champs obligatoires (Champs manquants : given_name}) n'ont pas été renvoyés par votre fournisseur d'identité OIDC partner.",
-          );
         }
       });
     });
