@@ -35,12 +35,6 @@ export default class OidcAssociationConfirmation extends Component {
                 <dd>{{@email}}</dd>
               </div>
             {{/if}}
-            {{#if this.shouldShowUsername}}
-              <div>
-                <dt>{{t "components.authentication.oidc-association-confirmation.username"}}</dt>
-                <dd>{{@username}}</dd>
-              </div>
-            {{/if}}
             {{#each this.oidcAuthenticationMethodOrganizationNames as |organizationName|}}
               <div>
                 <dt>{{t "components.authentication.oidc-association-confirmation.external-connection"}}</dt>
@@ -85,10 +79,11 @@ export default class OidcAssociationConfirmation extends Component {
       </div>
     </div>
   </template>
+
   @service intl;
   @service oidcIdentityProviders;
   @service session;
-  @service errorMessages;
+  @service authErrorMessages;
   @service router;
 
   @tracked reconcileErrorMessage = null;
@@ -96,10 +91,6 @@ export default class OidcAssociationConfirmation extends Component {
 
   get shouldShowEmail() {
     return !!this.args.email;
-  }
-
-  get shouldShowUsername() {
-    return !!this.args.username;
   }
 
   get oidcAuthenticationMethodOrganizationNames() {
@@ -111,6 +102,7 @@ export default class OidcAssociationConfirmation extends Component {
     this.router.transitionTo('authentication.oidc.login', this.args.identityProviderSlug);
   }
 
+  // TODO : gérer la réconciliation et le reconcileErrorMessage dans une prochaine PR
   @action
   async reconcile() {
     this.isLoading = true;
@@ -122,7 +114,7 @@ export default class OidcAssociationConfirmation extends Component {
         hostSlug: 'user/reconcile',
       });
     } catch (responseError) {
-      this.reconcileErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
+      this.reconcileErrorMessage = this.authErrorMessages.getAuthenticationErrorMessage(responseError);
     } finally {
       this.isLoading = false;
     }
