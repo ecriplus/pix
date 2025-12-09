@@ -110,5 +110,9 @@
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.103.0",
     "xss": "^1.0.15"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
   }
 }
