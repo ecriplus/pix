@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'mon-pix/config/environment';
 
 export default class CheckpointController extends Controller {
   queryParams = ['finalCheckpoint', 'newLevel', 'competenceLeveled'];
@@ -18,6 +19,10 @@ export default class CheckpointController extends Controller {
 
   get showLevelup() {
     return this.model.showLevelup && this.newLevel;
+  }
+
+  get displayShareResultsBanner() {
+    return this.finalCheckpoint && new Date(this.model.createdAt) <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE);
   }
 
   get nextPageButtonText() {

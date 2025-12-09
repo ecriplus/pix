@@ -13,6 +13,7 @@ export const assessmentStates = {
 };
 export default class Assessment extends Model {
   // attributes
+  @attr('date') createdAt;
   @attr('string') certificationNumber;
   @attr('string') codeCampaign;
   @attr('string') state;

@@ -1,6 +1,8 @@
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 
 import setupIntl from '../../../helpers/setup-intl';
@@ -10,9 +12,14 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
   setupIntl(hooks);
 
   let controller;
+  const originalAutoShareDate = ENV.APP.AUTO_SHARE_AFTER_DATE;
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:assessments/checkpoint');
+  });
+
+  hooks.afterEach(function () {
+    ENV.APP.AUTO_SHARE_AFTER_DATE = originalAutoShareDate;
   });
 
   module('#nextPageButtonText', function () {
@@ -21,7 +28,7 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
       controller.set('finalCheckpoint', false);
 
       // then
-      assert.strictEqual(controller.nextPageButtonText, 'Continuer');
+      assert.strictEqual(controller.nextPageButtonText, t('pages.checkpoint.actions.next-page.continue'));
     });
 
     test('should propose to see the results of the assessment if it is the final checkpoint', function (assert) {
@@ -29,7 +36,7 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
       controller.set('finalCheckpoint', true);
 
       // then
-      assert.strictEqual(controller.nextPageButtonText, 'Voir mes résultats');
+      assert.strictEqual(controller.nextPageButtonText, t('pages.checkpoint.actions.next-page.results'));
     });
   });
 
@@ -138,6 +145,41 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
 
       // then
       assert.false(controller.showLevelup);
+    });
+  });
+
+  module('#displayShareResultsBanner', function () {
+    test('should return true when it is final checkpoint and when assessment created is before auto share date', function (assert) {
+      // given
+      ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+      const model = { createdAt: new Date('2023-01-01') };
+      controller.model = model;
+      controller.finalCheckpoint = true;
+
+      // then
+      assert.true(controller.displayShareResultsBanner);
+    });
+
+    test('should return false when assessment created is after auto share date', function (assert) {
+      // given
+      ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+      const model = { createdAt: new Date('2025-01-01') };
+      controller.model = model;
+      controller.finalCheckpoint = true;
+
+      // then
+      assert.false(controller.displayShareResultsBanner);
+    });
+
+    test('should return false when it is not final checkpoint', function (assert) {
+      // given
+      ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+      const model = { createdAt: new Date('2023-01-01') };
+      controller.model = model;
+      controller.finalCheckpoint = false;
+
+      // then
+      assert.false(controller.displayShareResultsBanner);
     });
   });
 });

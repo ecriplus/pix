@@ -2,14 +2,17 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
+import setupIntl from '../helpers/setup-intl';
 
 module('Acceptance | Checkpoint', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
   let assessment;
 
   hooks.beforeEach(function () {
@@ -65,15 +68,14 @@ module('Acceptance | Checkpoint', function (hooks) {
   module('Without answers', function () {
     test('should display a message indicating that there is no answers to provide', async function (assert) {
       // when
-      await visit(`/assessments/${assessment.id}/checkpoint?finalCheckpoint=true`);
+      const screen = await visit(`/assessments/${assessment.id}/checkpoint?finalCheckpoint=true`);
 
       // then
       assert.dom('.checkpoint__progression-gauge').doesNotExist();
       assert.dom('.assessment-results__list').doesNotExist();
       assert.dom('.checkpoint-no-answer').exists();
 
-      assert.dom('.checkpoint__continue').exists();
-      assert.ok(find('.checkpoint__continue').textContent.includes('Voir mes résultats'));
+      assert.ok(screen.getByRole('link', { name: t('pages.checkpoint.actions.next-page.results') }));
       assert.ok(
         find('.checkpoint-no-answer__info').textContent.includes(
           'Vous avez déjà répondu à ces questions lors de vos tests précédents : vous pouvez directement accéder à vos résultats.\n\nVous souhaitez améliorer votre score ? En cliquant sur  “Voir mes résultats”, vous aurez la possibilité de retenter le parcours.',

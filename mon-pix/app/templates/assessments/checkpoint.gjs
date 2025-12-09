@@ -1,13 +1,24 @@
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AssessmentBanner from 'mon-pix/components/assessment-banner';
 import CheckpointContinue from 'mon-pix/components/checkpoint-continue';
 import ComparisonWindow from 'mon-pix/components/comparison-window';
+import InElement from 'mon-pix/components/in-element';
 import LevelupNotif from 'mon-pix/components/levelup-notif';
 import ResultItem from 'mon-pix/components/result-item';
+
 <template>
   {{pageTitle @controller.pageTitle}}
+
+  {{#if @controller.displayShareResultsBanner}}
+    <InElement @destinationId="pix-layout-banner-container">
+      <PixBannerAlert>
+        {{t "pages.checkpoint.sharing-results.information-banner"}}
+      </PixBannerAlert>
+    </InElement>
+  {{/if}}
 
   <div class="background-banner-wrapper challenge">
 
@@ -67,11 +78,13 @@ import ResultItem from 'mon-pix/components/result-item';
       </main>
     </div>
 
-    <ComparisonWindow
-      @showModal={{@controller.isShowingModal}}
-      @answer={{@controller.answer}}
-      @closeComparisonWindow={{@controller.closeComparisonWindow}}
-    />
+    {{#if @controller.shouldDisplayAnswers}}
+      <ComparisonWindow
+        @showModal={{@controller.isShowingModal}}
+        @answer={{@controller.answer}}
+        @closeComparisonWindow={{@controller.closeComparisonWindow}}
+      />
+    {{/if}}
   </div>
 
   {{#if @controller.showLevelup}}
