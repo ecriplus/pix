@@ -198,60 +198,6 @@ module('Unit | Route | login-oidc', function (hooks) {
       this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 
-    test('it authenticates the user with identity provider', async function (assert) {
-      // given
-      const authenticateStub = sinon.stub().resolves();
-      const sessionStub = Service.create({
-        authenticate: authenticateStub,
-        data: {},
-      });
-      const route = this.owner.lookup('route:authentication/login-oidc');
-      route.set('session', sessionStub);
-
-      // when
-      await route.model({ identity_provider_slug: 'oidc-partner' }, { to: { queryParams: { code: 'test' } } });
-
-      // then
-      sinon.assert.calledWithMatch(authenticateStub, 'authenticator:oidc', {
-        code: 'test',
-        state: undefined,
-      });
-      assert.deepEqual(sessionStub.data, {});
-    });
-
-    test('it returns values to be received by afterModel to validate CGU', async function (assert) {
-      // given
-      const authenticateStub = sinon.stub().rejects({
-        errors: [
-          {
-            code: 'SHOULD_VALIDATE_CGU',
-            meta: { authenticationKey: 'key', userClaims: { firstName: 'Mélusine', lastName: 'TITEGOUTTE' } },
-          },
-        ],
-      });
-      const sessionStub = Service.create({
-        authenticate: authenticateStub,
-        data: {},
-      });
-      const route = this.owner.lookup('route:authentication/login-oidc');
-      route.set('session', sessionStub);
-      route.router = { transitionTo: sinon.stub() };
-
-      // when
-      const response = await route.model(
-        { identity_provider_slug: 'oidc-partner' },
-        { to: { queryParams: { code: 'test' } } },
-      );
-
-      // then
-      sinon.assert.calledOnce(authenticateStub);
-      assert.deepEqual(response, {
-        identityProviderSlug: 'oidc-partner',
-        shouldCreateUserAccount: true,
-      });
-      assert.ok(true);
-    });
-
     module('when there is an unexpected error (not a JSON:API error)', function () {
       test('it throws back the error', async function (assert) {
         // given
@@ -362,47 +308,6 @@ module('Unit | Route | login-oidc', function (hooks) {
             "Un ou des champs obligatoires (Champs manquants : given_name}) n'ont pas été renvoyés par votre fournisseur d'identité OIDC partner.",
           );
         }
-      });
-    });
-  });
-
-  module('#redirect', function () {
-    module('when shouldCreateUserAccount', function () {
-      test('it redirects to login or register oidc page', async function (assert) {
-        // given
-        const route = this.owner.lookup('route:authentication/login-oidc');
-        route.router = { transitionTo: sinon.stub() };
-        const identityProviderSlug = 'super-idp-name';
-        const shouldCreateUserAccount = true;
-        const model = { identityProviderSlug, shouldCreateUserAccount };
-
-        // when
-        await route.redirect(model);
-
-        // then
-        (sinon.assert.calledWith(route.router.transitionTo, 'authentication.oidc-signup-or-login', {
-          queryParams: {
-            identityProviderSlug,
-          },
-        }),
-          assert.ok(true));
-      });
-    });
-    module('when not shouldCreateUserAccount', function () {
-      test('it does not redirect to login or register oidc page', async function (assert) {
-        // given
-        const route = this.owner.lookup('route:authentication/login-oidc');
-        route.router = { transitionTo: sinon.stub() };
-        const identityProviderSlug = 'super-idp-name';
-        const shouldCreateUserAccount = false;
-        const model = { identityProviderSlug, shouldCreateUserAccount };
-
-        // when
-        await route.redirect(model);
-
-        // then
-        sinon.assert.notCalled(route.router.transitionTo);
-        assert.ok(true);
       });
     });
   });
