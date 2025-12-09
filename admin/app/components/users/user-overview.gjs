@@ -409,13 +409,11 @@ class UserFormValidator extends FormValidator {
       firstName: Joi.string().min(1).max(255).empty(['', null]).required().messages({
         'any.required': 'Le prénom ne peut pas être vide.',
         'string.empty': 'Le prénom ne peut pas être vide.',
-        'string.min': 'La longueur du prénom ne doit pas excéder 255 caractères.',
         'string.max': 'La longueur du prénom ne doit pas excéder 255 caractères.',
       }),
       lastName: Joi.string().min(1).max(255).empty(['', null]).required().messages({
         'any.required': 'Le nom ne peut pas être vide.',
         'string.empty': 'Le nom ne peut pas être vide.',
-        'string.min': 'La longueur du nom ne doit pas excéder 255 caractères.',
         'string.max': 'La longueur du nom ne doit pas excéder 255 caractères.',
       }),
       lang: Joi.string(),

@@ -16,7 +16,6 @@ import certification from './models/certification';
 import certificationCandidate from './models/certification-candidate';
 import certificationCandidateTimeline from './models/certification-candidate-timeline';
 import certificationCenter from './models/certification-center';
-import certificationCenterForm from './models/certification-center-form';
 import certificationCenterInvitation from './models/certification-center-invitation';
 import certificationCenterMembership from './models/certification-center-membership';
 import certificationChallengesForAdministration from './models/certification-challenges-for-administration';
@@ -91,7 +90,6 @@ export default {
   certificationCandidate,
   certificationCandidateTimeline,
   certificationCenter,
-  certificationCenterForm,
   certificationCenterInvitation,
   certificationCenterMembership,
   certificationChallengesForAdministration,
