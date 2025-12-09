@@ -57,7 +57,6 @@ import stageCollection from './models/stage-collection';
 import subscription from './models/subscription';
 import tag from './models/tag';
 import targetProfile from './models/target-profile';
-import targetProfileForm from './models/target-profile-form';
 import targetProfileSummary from './models/target-profile-summary';
 import thematic from './models/thematic';
 import toBePublishedSession from './models/to-be-published-session';
@@ -131,7 +130,6 @@ export default {
   subscription,
   tag,
   targetProfile,
-  targetProfileForm,
   targetProfileSummary,
   thematic,
   toBePublishedSession,
