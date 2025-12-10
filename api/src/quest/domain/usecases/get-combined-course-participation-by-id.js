@@ -14,10 +14,12 @@ export const getCombinedCourseParticipationById = async ({
     );
   }
 
-  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
-    organizationLearnerId: participation.organizationLearnerId,
-    combinedCourseId,
+  const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
+    combinedCourseId: combinedCourseId,
   });
 
-  return combinedCourseDetails;
+  return combinedCourseDetailsService.getCombinedCourseDetails({
+    organizationLearnerId: participation.organizationLearnerId,
+    combinedCourseDetails,
+  });
 };

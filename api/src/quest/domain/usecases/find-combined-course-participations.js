@@ -14,14 +14,17 @@ export const findCombinedCourseParticipations = async ({
       filters,
     });
 
+  const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
+    combinedCourseId,
+  });
   const combinedCourseParticipations = await PromiseUtils.mapSeries(
     organizationLearnerIds,
     async (organizationLearnerId) => {
-      const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+      const combinedCourseDetail = await combinedCourseDetailsService.getCombinedCourseDetails({
         organizationLearnerId,
-        combinedCourseId,
+        combinedCourseDetails,
       });
-      return combinedCourseDetails.participationDetails;
+      return combinedCourseDetail.participationDetails;
     },
   );
 
