@@ -990,15 +990,15 @@
     "candidate": {
       "code": "Évènement",
       "events": {
+        "CandidateCertifiableAndEligibleEvent": "Candidat certifiable et éligible à la double certification",
         "CandidateCertifiableEvent": "Candidat certifiable",
         "CandidateCreatedEvent": "Candidat inscrit en session",
         "CandidateEndScreenEvent": "Certification complétée (Écran de fin vu)",
         "CandidateNotCertifiableEvent": "Candidat non certifiable (Pix Coeur)",
+        "CandidateNotEligibleEvent": "Candidat non éligible à la double certification",
         "CandidateReconciledEvent": "Candidat réconcilié à un compte utilisateur",
         "CertificationEndedEvent": "Fin de la certification",
-        "CertificationStartedEvent": "Entrée en certification",
-        "ComplementaryCertifiableEvent": "Candidat éligible a sa complémentaire",
-        "ComplementaryNotCertifiableEvent": "Candidat non éligible à sa complémentaire"
+        "CertificationStartedEvent": "Entrée en certification"
       },
       "metadata": "Metadata",
       "title": "Journal d'évènements",

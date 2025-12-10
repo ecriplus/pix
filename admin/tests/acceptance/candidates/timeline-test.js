@@ -26,7 +26,7 @@ module('Acceptance | authenticated/candidates/1/timeline', function (hooks) {
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
       server.create('certification-candidate-timeline', {
         id: '1',
-        events: [{ code: 'CandidateCertifiableEvent', when: new Date() }],
+        events: [{ code: 'CandidateCertifiableAndEligibleEvent', when: new Date() }],
       });
     });
 
