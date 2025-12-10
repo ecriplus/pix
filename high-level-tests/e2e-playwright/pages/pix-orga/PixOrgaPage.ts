@@ -14,11 +14,6 @@ export class PixOrgaPage {
     await this.page.getByRole('button', { name: 'Accepter et continuer' }).click();
   }
 
-  async selectOrganization(organizationName: string) {
-    await this.page.getByRole('button', { name: "Changer d'organisation" }).click();
-    await this.page.getByRole('option', { name: organizationName }).click();
-  }
-
   async waitForUploadSuccess(page: Page) {
     let inProgress = false;
     await page.getByRole('heading').waitFor();
