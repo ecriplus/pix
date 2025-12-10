@@ -25,6 +25,10 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     const version = databaseBuilder.factory.buildCertificationVersion({
       challengesConfiguration: {
         maximumAssessmentLength: 2,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.5,
       },
     });
 

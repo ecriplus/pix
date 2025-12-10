@@ -2,7 +2,7 @@ import { databaseBuffer } from '../database-buffer.js';
 
 const defaultChallengesConfiguration = {
   maximumAssessmentLength: 20,
-  challengesBetweenSameCompetence: null,
+  challengesBetweenSameCompetence: 2,
   limitToOneQuestionPerTube: false,
   enablePassageByAllCompetences: false,
   variationPercent: 0.5,

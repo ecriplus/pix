@@ -4,11 +4,12 @@ import { config } from '../../../../../../src/shared/config.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
+  challengesBetweenSameCompetence: 2,
   limitToOneQuestionPerTube: false,
   enablePassageByAllCompetences: false,
 };
 
-describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlgorithm', function () {
+describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
   let flashAlgorithmImplementation;
 
   beforeEach(function () {
