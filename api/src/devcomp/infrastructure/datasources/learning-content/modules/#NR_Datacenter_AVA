@@ -31,7 +31,46 @@
               "element": {
                 "id": "6395f495-5219-445d-9976-53710245da39",
                 "type": "text",
-                "content": ""
+                "content": "<p>Ces dernières années, le nombre de centres de données n’a fait que croître, et avec lui l’électricité consommée.</p><p><em>[A venir GIF avec un planisphère et l'apparition de points pour les centres de données dans le temps]</em></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f2665813-82bb-4427-a9a0-14a6a5f3df8f",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, d’après les projections, quelle va être l’évolution de la consommation d’énergie par les centres de données entre 2025 et 2030 ?<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Leur consommation d’énergie va diminuer. ↘️</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.</strong><br> Cela est dû notamment à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. D’autres <strong>technologies </strong>sont également <strong>gourmandes en calcul (vidéo, objets connectés, cryptomonnaies…)</strong><br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Leur consommation d’énergie va rester stable. ➡️<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.</strong><br> Cela est dû notamment à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. D’autres <strong>technologies </strong>sont également <strong>gourmandes en calcul (vidéo, objets connectés, cryptomonnaies…)</strong><br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Leur consommation d’énergie va augmenter de 20%. ↗️<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.</strong><br> Cela est dû notamment à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. D’autres <strong>technologies </strong>sont également <strong>gourmandes en calcul (vidéo, objets connectés, cryptomonnaies…)</strong><br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Leur consommation d’énergie va doubler. ↗️↗️↗️<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.</strong><br> Cela est dû notamment à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. D’autres <strong>technologies </strong>sont également <strong>gourmandes en calcul (vidéo, objets connectés, cryptomonnaies…)</strong><br><br></p>"
+                    }
+                  }
+                ],
+                "solution": "4"
               }
             }
           ]
