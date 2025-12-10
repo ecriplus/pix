@@ -1,4 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
+import { click, fillIn } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import Badge from 'pix-admin/components/badges/badge';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -124,5 +127,61 @@ module('Integration | Component | badges/badge', function (hooks) {
         screen.queryByText("Liste des critères d'obtention basés sur une sélection de sujets du profil cible&nbsp;:"),
       )
       .doesNotExist();
+  });
+
+  module('error cases', function () {
+    module('when imageUrl format is incorrect', function () {
+      test('should display an error', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const targetProfile = store.createRecord('target-profile', {
+          id: '1',
+          internalName: 'Profil cible',
+          areas: [],
+        });
+
+        const badge = store.createRecord('badge', {
+          id: '42',
+          title: 'mon titre',
+          message: 'mon message',
+          imageUrl: 'data:,',
+          key: 'ma clef',
+          altMessage: 'mon message alternatif',
+          isCertifiable: true,
+          isAlwaysVisible: true,
+          criteria: [],
+        });
+        const onUpdateBadgeStub = sinon
+          .stub()
+          .rejects({ errors: [{ status: '400', detail: 'data.attributes.image-url' }] });
+
+        const notificationErrorStub = sinon.stub();
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
+
+        // when
+        const screen = await render(
+          <template>
+            <Badge @badge={{badge}} @targetProfile={{targetProfile}} @onUpdateBadge={{onUpdateBadgeStub}} />
+          </template>,
+        );
+        await click(screen.getByRole('button', { name: 'Modifier les informations' }));
+        await fillIn(
+          screen.getByRole('textbox', {
+            name: "Url de l'image (svg) *",
+          }),
+          'bonjour!',
+        );
+        await click(screen.getByRole('button', { name: 'Enregistrer' }));
+
+        // then
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: t('components.badges.api-error-messages.incorrect-image-url-format'),
+        });
+        assert.ok(true);
+      });
+    });
   });
 });
