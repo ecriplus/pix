@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
 import { buildFreshPixAppUser } from '../../helpers/db.js';

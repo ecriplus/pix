@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { BrowserContext } from '@playwright/test';
+import type { BrowserContext } from '@playwright/test';
 
 import { expect, test } from '../../helpers/fixtures.ts';
 
