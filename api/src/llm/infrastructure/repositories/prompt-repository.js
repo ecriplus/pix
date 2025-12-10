@@ -36,33 +36,44 @@ export async function prompt({ messages, configuration }) {
   });
   let response;
   const url = config.llm.postPromptUrl;
-  try {
-    response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Request-ID': getCorrelationContext().request_id,
-        authorization: `Bearer ${jwt.sign(
-          {
-            client_id: 'pix-api',
-            scope: 'api',
-          },
-          config.llm.authSecret,
-        )}`,
-      },
-      body: payload,
-    });
-  } catch (err) {
-    logger.error(`error when trying to reach LLM API : ${err}`);
-    throw new LLMApiError(err.toString());
-  }
-  if (response.ok) {
-    return response.body;
-  }
 
-  const { status, err } = await handleFetchErrors(response);
-  logger.error({ err }, `error when reaching LLM API : code ${status}`);
-  throw new LLMApiError(err);
+  let currentRetryCount = 0;
+  const MAX_RETRY_COUNT = 2;
+  do {
+    try {
+      const urlWithRetryCount = currentRetryCount === 0 ? url : `${url}?retry_count=${currentRetryCount}`;
+      response = await fetch(urlWithRetryCount, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Request-ID': getCorrelationContext().request_id,
+          authorization: `Bearer ${jwt.sign(
+            {
+              client_id: 'pix-api',
+              scope: 'api',
+            },
+            config.llm.authSecret,
+          )}`,
+        },
+        body: payload,
+      });
+    } catch (err) {
+      logger.error(`error when trying to reach LLM API : ${err}`);
+      throw new LLMApiError(err.toString());
+    }
+    if (response.ok) {
+      return response.body;
+    }
+
+    const { status, err } = await handleFetchErrors(response);
+    logger.error({ err }, `error when reaching LLM API : code ${status}`);
+
+    if (status !== 502 || currentRetryCount >= MAX_RETRY_COUNT) {
+      throw new LLMApiError(err);
+    }
+
+    currentRetryCount++;
+  } while (currentRetryCount <= MAX_RETRY_COUNT);
 }
 
 async function handleFetchErrors(response) {
