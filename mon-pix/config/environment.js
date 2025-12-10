@@ -198,8 +198,11 @@ module.exports = function (environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
-
     ENV.APP.DEFAULT_LOCALE = 'fr';
+
+    ENV.APP.BANNER_CONTENT = '';
+    ENV.APP.BANNER_TYPE = '';
+    ENV.APP.INFORMATION_BANNER_POLLING_TIME = 1000 * 60;
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
@@ -213,6 +216,9 @@ module.exports = function (environment) {
     ENV.APP.LOAD_EXTERNAL_SCRIPT = false;
     ENV.APP.FT_FOCUS_CHALLENGE_ENABLED = true;
     ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID = 999;
+    ENV.APP.AUTO_SHARE_AFTER_DATE = '2025-07-18';
+    ENV.APP.COMBINIX_SURVEY_LINK =
+      'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms';
 
     ENV.companion.disabled = true;
 
