@@ -1,7 +1,6 @@
 import * as targetProfileSummaryForAdminSerializer from '../../../prescription/target-profile/infrastructure/serializers/jsonapi/target-profile-summary-for-admin-serializer.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as filteredOrganizationsSerializer from '../../infrastructure/serializers/jsonapi/filtered-organization-serializer.js';
 import * as trainingSerializer from '../../infrastructure/serializers/jsonapi/training-serializer.js';
 import * as trainingSummarySerializer from '../../infrastructure/serializers/jsonapi/training-summary-serializer.js';
 import * as trainingTriggerSerializer from '../../infrastructure/serializers/jsonapi/training-trigger-serializer.js';
@@ -104,23 +103,6 @@ const findPaginatedTrainingsSummariesByTargetProfileId = async function (
   return dependencies.trainingSummarySerializer.serialize(trainings, meta);
 };
 
-const findPaginatedFilteredOrganizations = async function (
-  request,
-  h,
-  dependencies = { filteredOrganizationsSerializer },
-) {
-  const options = request.query;
-  const { trainingId, targetProfileId } = request.params;
-
-  const { models, pagination } = await usecases.findPaginatedFilteredOrganizations({
-    trainingId,
-    targetProfileId,
-    filter: options.filter,
-    page: options.page,
-  });
-  return dependencies.filteredOrganizationsSerializer.serialize(models, pagination);
-};
-
 const trainingController = {
   findPaginatedTrainingSummaries,
   findPaginatedTrainingsSummariesByTargetProfileId,
@@ -133,7 +115,6 @@ const trainingController = {
   createOrUpdateTrigger,
   attachTargetProfiles,
   detachTargetProfile,
-  findPaginatedFilteredOrganizations,
 };
 
 export { trainingController };

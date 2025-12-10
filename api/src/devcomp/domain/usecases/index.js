@@ -6,12 +6,10 @@ import * as targetProfileRepository from '../../../prescription/target-profile/i
 import * as targetProfileSummaryForAdminRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
 import { updateCombinedCourseJobRepository } from '../../../quest/infrastructure/repositories/jobs/update-combined-course-job-repository.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
-import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
-import * as targetProfileTrainingOrganizationRepository from '../../infrastructure/repositories/target-profile-training-organization-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
 
 const dependencies = {
@@ -19,12 +17,10 @@ const dependencies = {
   campaignRepository,
   campaignParticipationRepository,
   knowledgeElementRepository,
-  organizationRepository,
   targetProfileRepository,
   targetProfileSummaryForAdminRepository,
   tubeRepository,
   targetProfileTrainingRepository,
-  targetProfileTrainingOrganizationRepository,
   updateCombinedCourseJobRepository,
   skillRepository,
   userRepository,
@@ -43,7 +39,6 @@ import { deleteTrainingTrigger } from './delete-training-trigger.js';
 import { detachTargetProfilesFromTraining } from './detach-target-profiles-from-training.js';
 import { duplicateTraining } from './duplicate-training.js';
 import { findCampaignParticipationTrainings } from './find-campaign-participation-trainings.js';
-import { findPaginatedFilteredOrganizations } from './find-paginated-filtered-organizations.js';
 import { findPaginatedFilteredTutorials } from './find-paginated-filtered-tutorials.js';
 import { findPaginatedTargetProfileTrainingSummaries } from './find-paginated-target-profile-training-summaries.js';
 import { findPaginatedTrainingSummaries } from './find-paginated-training-summaries.js';
@@ -76,7 +71,6 @@ const usecasesWithoutInjectedDependencies = {
   detachTargetProfilesFromTraining,
   duplicateTraining,
   findCampaignParticipationTrainings,
-  findPaginatedFilteredOrganizations,
   findPaginatedFilteredTutorials,
   findPaginatedTargetProfileTrainingSummaries,
   findPaginatedTrainingSummaries,

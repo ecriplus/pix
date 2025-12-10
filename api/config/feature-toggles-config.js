@@ -30,13 +30,6 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['team-prescription', 'pix-api', 'backend'],
   },
-  isFilteringRecommendedTrainingByOrganizationsEnabled: {
-    type: 'boolean',
-    description: 'Used to enable filtering recommended training by organizations',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-devcomp', 'pix-admin'],
-  },
   isModulixIssueReportDisplayed: {
     type: 'boolean',
     description: 'Enable issue report in modules',
