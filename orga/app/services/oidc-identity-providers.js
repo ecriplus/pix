@@ -3,7 +3,6 @@ import { tracked } from '@glimmer/tracking';
 
 export default class OidcIdentityProviders extends Service {
   @service store;
-  @service currentDomain;
 
   @tracked isOidcProviderAuthenticationInProgress = false;
 
@@ -22,5 +21,12 @@ export default class OidcIdentityProviders extends Service {
   findBySlug(providerSlug) {
     if (!this.hasIdentityProviders) return;
     return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
+  }
+
+  getIdentityProviderNamesByAuthenticationMethods(methods) {
+    const identityProviderCodes = methods.map(({ identityProvider }) => identityProvider);
+    return this.list
+      .filter((provider) => identityProviderCodes.includes(provider.code))
+      .map((provider) => provider.organizationName);
   }
 }

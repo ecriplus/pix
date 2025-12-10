@@ -27,7 +27,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         @isWithInvitation={{false}}
         @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
-        @onLogin={{@controller.reconcile}}
+        @onSubmit={{@controller.redirectToAssociationConfirmation}}
       />
     </:content>
   </AuthenticationLayout>

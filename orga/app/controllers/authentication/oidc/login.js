@@ -3,30 +3,44 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 
+const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
+const invitationStorage = new SessionStorageEntry('joinInvitationData');
+const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
+
 export default class OidcLoginController extends Controller {
-  @service currentDomain;
-  @service featureToggles;
+  @service store;
+  @service oidcIdentityProviders;
   @service session;
+  @service router;
 
   get currentInvitation() {
-    const invitationStorage = new SessionStorageEntry('joinInvitationData');
     return invitationStorage.get();
   }
 
-  @action
-  async reconcile() {
-    this.isLoading = true;
+  get authenticationKey() {
+    return oidcUserAuthenticationStorage.get()?.authenticationKey;
+  }
 
-    try {
-      await this.session.authenticate('authenticator:oidc', {
-        authenticationKey: this.args.authenticationKey,
-        identityProviderSlug: this.args.identityProviderSlug,
-        hostSlug: 'user/reconcile',
-      });
-    } catch (responseError) {
-      this.reconcileErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
-    } finally {
-      this.isLoading = false;
-    }
+  @action
+  async redirectToAssociationConfirmation(email, password) {
+    const identityProviderSlug = this.model.identity_provider_slug;
+    const identityProvider = this.oidcIdentityProviders.findBySlug(identityProviderSlug);
+
+    const authenticationRequest = this.store.createRecord('user-oidc-authentication-request', {
+      password,
+      email,
+      authenticationKey: this.authenticationKey,
+      identityProvider: identityProvider.code,
+    });
+
+    const oidcAssociationConfirmationData = await authenticationRequest.login();
+    oidcAssociationConfirmationStorage.set({ ...oidcAssociationConfirmationData, email });
+
+    this.router.transitionTo('authentication.oidc.confirm', this.model.identity_provider_slug);
+  }
+
+  @action
+  goToOidcProviderLoginPage() {
+    this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress = true;
   }
 }

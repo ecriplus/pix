@@ -751,25 +751,6 @@ function routes() {
     };
   });
 
-  this.get('/oidc/identity-providers/:cache_buster', () => {
-    return {
-      data: [
-        {
-          type: 'oidc-identity-providers',
-          id: 'oidc-partner',
-          attributes: {
-            code: 'OIDC_PARTNER',
-            'organization-name': 'Partenaire OIDC',
-            slug: 'oidc-partner',
-            'should-close-session': false,
-            source: 'oidc-externe',
-            'is-visible': true,
-          },
-        },
-      ],
-    };
-  });
-
   this.get('/oidc/authorization-url', () => {
     return {
       redirectTarget: `https://oidc/connexion/oauth2/authorize`,

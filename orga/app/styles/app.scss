@@ -94,6 +94,7 @@
 @use 'sco-organization-participant/generate-username-password-modal' as *;
 @use 'analysis/global-positioning' as *;
 @use 'authentication/authentication-identity-providers' as *;
+@use 'authentication/oidc-association-confirmation' as *;
 @use 'authentication/oidc-provider-selector' as *;
 @use 'authentication/signup-form' as *;
 @use 'authentication/sso-selection-form' as *;

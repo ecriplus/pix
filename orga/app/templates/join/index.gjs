@@ -30,9 +30,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         @isWithInvitation={{true}}
         @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
-        @organizationInvitationId={{@controller.invitationId}}
-        @organizationInvitationCode={{@controller.code}}
-        @organizationName={{@model.organizationName}}
+        @onSubmit={{@controller.joinAndAuthenticate}}
       />
 
       <AuthenticationIdentityProviders

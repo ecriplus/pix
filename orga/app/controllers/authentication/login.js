@@ -1,10 +1,12 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class LoginController extends Controller {
-  @service currentDomain;
+  @service session;
 
-  get isInternationalDomain() {
-    return this.currentDomain.isInternationalDomain;
+  @action
+  async authenticate(login, password) {
+    await this.session.authenticate('authenticator:oauth2', login, password);
   }
 }

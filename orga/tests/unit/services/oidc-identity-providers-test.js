@@ -44,6 +44,50 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
+  module('getIdentityProviderNamesByAuthenticationMethods', function () {
+    test('should return identity provider names for methods', function (assert) {
+      // given
+      const methods = [
+        { identityProvider: 'FRANCE_CONNECT' },
+        { identityProvider: 'IMPOTS_GOUV' },
+        { identityProvider: 'AUTRE_FOURNISSEUR_D_IDENTITE' },
+      ];
+      const oidcPartnerObject = Object.create({
+        id: 'france-connect',
+        code: 'FRANCE_CONNECT',
+        organizationName: 'France Connect',
+        shouldCloseSession: false,
+        source: 'france-connect',
+      });
+      const secondOidcPartnerObject = Object.create({
+        id: 'impots-gouv',
+        code: 'IMPOTS_GOUV',
+        organizationName: 'Impots.gouv',
+        shouldCloseSession: false,
+        source: 'impots-gouv',
+      });
+      const thirdOidcPartnerObject = Object.create({
+        id: 'la-poste',
+        code: 'LA_POSTE',
+        organizationName: 'la-poste.gouv',
+        shouldCloseSession: false,
+        source: 'la-poste-gouv',
+      });
+      oidcIdentityProvidersService.set(
+        'store',
+        Service.create({
+          peekAll: sinon.stub().returns([oidcPartnerObject, secondOidcPartnerObject, thirdOidcPartnerObject]),
+        }),
+      );
+
+      // when
+      const names = oidcIdentityProvidersService.getIdentityProviderNamesByAuthenticationMethods(methods);
+
+      // expect
+      assert.deepEqual(names, ['France Connect', 'Impots.gouv']);
+    });
+  });
+
   module('list', function () {
     test('lists all identity providers loaded', async function (assert) {
       // given
