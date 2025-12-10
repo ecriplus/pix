@@ -58,7 +58,7 @@ export default async function publishSessionWithValidatedCertification({
     const simulatedCertification = await flashUseCases.simulateFlashAssessmentScenario({
       locale: FRENCH_SPOKEN,
       initialCapacity: version.challengesConfiguration.defaultCandidateCapacity,
-      stopAtChallenge: config.v3Certification.numberOfChallengesPerCourse - 1,
+      stopAtChallenge: version.challengesConfiguration.maximumAssessmentLength - 1,
       pickChallenge,
       pickAnswerStatus,
       versionId: version.id,
