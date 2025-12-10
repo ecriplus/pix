@@ -29,7 +29,6 @@ module('Integration | Component | Oidc-association-confirmation', function (hook
     const authenticationMethods = [{ identityProvider: 'France Connect' }, { identityProvider: 'Impots.gouv' }];
 
     //  when
-
     const screen = await render(
       <template>
         <OidcAssociationConfirmation

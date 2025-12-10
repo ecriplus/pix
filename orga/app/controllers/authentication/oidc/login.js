@@ -33,15 +33,8 @@ export default class OidcLoginController extends Controller {
       identityProvider: identityProvider.code,
     });
 
-    const { username, authenticationMethods, fullNameFromPix, fullNameFromExternalIdentityProvider } =
-      await authenticationRequest.login();
-    oidcAssociationConfirmationStorage.set({
-      email,
-      username,
-      authenticationMethods,
-      fullNameFromPix,
-      fullNameFromExternalIdentityProvider,
-    });
+    const oidcAssociationConfirmationData = await authenticationRequest.login();
+    oidcAssociationConfirmationStorage.set({ ...oidcAssociationConfirmationData, email });
 
     this.router.transitionTo('authentication.oidc.confirm', this.model.identity_provider_slug);
   }
