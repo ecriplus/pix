@@ -137,8 +137,6 @@ module('Integration | Component | organizations/creation-form', function (hooks)
 
       await fillByLabel('Lien vers la documentation', 'www.documentation.fr');
 
-      await fillByLabel('Crédits', 120);
-
       await fillByLabel('Prénom du DPO', 'Justin');
       await fillByLabel('Nom du DPO', 'Ptipeu');
       await fillByLabel('Adresse e-mail du DPO', 'justin.ptipeu@example.net');
@@ -151,7 +149,6 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       assert.strictEqual(organization.provinceCode, '78');
       assert.strictEqual(organization.countryCode, '99100');
       assert.strictEqual(organization.documentationUrl, 'www.documentation.fr');
-      assert.strictEqual(organization.credit, 120);
       assert.strictEqual(organization.dataProtectionOfficerFirstName, 'Justin');
       assert.strictEqual(organization.dataProtectionOfficerLastName, 'Ptipeu');
       assert.strictEqual(organization.dataProtectionOfficerEmail, 'justin.ptipeu@example.net');

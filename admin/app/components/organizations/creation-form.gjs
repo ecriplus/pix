@@ -170,9 +170,6 @@ export default class OrganizationCreationForm extends Component {
           <PixInput @id="documentationUrl" onchange={{this.handleDocumentationUrlChange}}>
             <:label>Lien vers la documentation</:label>
           </PixInput>
-          <PixInput @id="credits" onchange={{this.handleCreditsChange}} type="number">
-            <:label>Crédits</:label>
-          </PixInput>
         </Card>
 
         <Card class="admin-form__card" @title="Data Privacy Officer">
