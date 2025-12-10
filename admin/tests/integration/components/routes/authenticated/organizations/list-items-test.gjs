@@ -7,6 +7,11 @@ import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering'
 
 module('Integration | Component | routes/authenticated/organizations | list-items', function (hooks) {
   setupIntlRenderingTest(hooks);
+  const administrationTeams = [
+    { id: 1, name: 'Team A' },
+    { id: 2, name: 'Team B' },
+    { id: 3, name: 'Team C' },
+  ];
 
   hooks.beforeEach(async function () {
     const currentUser = this.owner.lookup('service:currentUser');
@@ -24,6 +29,9 @@ module('Integration | Component | routes/authenticated/organizations | list-item
       { id: 2, name: 'Université BROS', type: 'SUP', externalId },
       { id: 3, name: 'Entreprise KSSOS', type: 'PRO', externalId },
     ];
+
+    organizations.administrationTeams = administrationTeams;
+
     organizations.meta = {
       rowCount: 3,
     };
@@ -33,6 +41,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
       <template>
         <ListItems
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @triggerFiltering={{triggerFiltering}}
           @onResetFilter={{resetFilter}}
         />
@@ -55,9 +64,17 @@ module('Integration | Component | routes/authenticated/organizations | list-item
   });
 
   test('if should display search inputs', async function (assert) {
+    // given
+
     // when
     const screen = await render(
-      <template><ListItems @triggerFiltering={{triggerFiltering}} @onResetFilter={{resetFilter}} /></template>,
+      <template>
+        <ListItems
+          @administrationTeams={{administrationTeams}}
+          @triggerFiltering={{triggerFiltering}}
+          @onResetFilter={{resetFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -75,6 +92,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
       { id: 2, name: 'Université BROS', type: 'SUP', externalId: '1234567B', administrationTeamName: 'Team B' },
       { id: 3, name: 'Entreprise KSSOS', type: 'PRO', externalId: '1234567C', administrationTeamName: 'Team C' },
     ];
+
     organizations.meta = {
       rowCount: 3,
     };
@@ -84,6 +102,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
       <template>
         <ListItems
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @triggerFiltering={{triggerFiltering}}
           @onResetFilter={{resetFilter}}
         />

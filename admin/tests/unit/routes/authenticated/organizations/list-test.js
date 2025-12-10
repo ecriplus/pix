@@ -35,6 +35,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
           type: '',
           externalId: '',
           hideArchived: undefined,
+          administrationTeamId: '',
         };
 
         // then
@@ -52,12 +53,14 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
         params.type = 'someType ';
         params.externalId = 'someExternalId';
         params.hideArchived = true;
+        params.administrationTeamId = ' someAdministrationTeamId ';
         expectedQueryArgs.filter = {
           id: 'someId',
           name: 'someName',
           type: 'someType',
           externalId: 'someExternalId',
           hideArchived: true,
+          administrationTeamId: 'someAdministrationTeamId',
         };
 
         // when
@@ -98,6 +101,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
         type: 'someType',
         externalId: 'someExternalId',
         hideArchived: false,
+        administrationTeamId: 'someAdministrationTeamId',
       };
     });
 
@@ -114,6 +118,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
         assert.strictEqual(controller.type, null);
         assert.strictEqual(controller.externalId, null);
         assert.false(controller.hideArchived);
+        assert.strictEqual(controller.administrationTeamId, null);
       });
     });
 
@@ -130,6 +135,7 @@ module('Unit | Route | authenticated/organizations/list', function (hooks) {
         assert.strictEqual(controller.type, 'someType');
         assert.strictEqual(controller.externalId, 'someExternalId');
         assert.false(controller.hideArchived);
+        assert.strictEqual(controller.administrationTeamId, 'someAdministrationTeamId');
       });
     });
   });
