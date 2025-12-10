@@ -91,7 +91,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
           // then
           assert.ok(
             screen.getByRole('heading', {
-              name: `${t('components.authentication.oidc-association-confirmation.title')} ${t('components.authentication.oidc-association-confirmation.sub-title')}`,
+              name: `${t('components.authentication.oidc-association-confirmation.title')}`,
             }),
           );
           assert.ok(screen.getByText(t('components.authentication.oidc-association-confirmation.email')));

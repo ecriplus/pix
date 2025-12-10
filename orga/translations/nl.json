@@ -346,17 +346,14 @@
         }
       },
       "oidc-association-confirmation": {
-        "authentication-method-to-add": "Verbinding toegevoegd :",
+        "authentication-method-to-add": "Verbinding toegevoegd",
         "confirm": "Ga verder met",
-        "current-authentication-methods": "Mijn huidige verbindingsmethoden:",
+        "current-authentication-methods": "Mijn huidige verbindingsmethoden",
         "email": "E-mailadres",
         "external-connection": "Externe aansluiting",
         "external-connection-via": "Verbinding via",
-        "information": "Aangezien de vaardigheidstoetsing persoonlijk is, moet je account strikt persoonlijk blijven.",
         "return": "Terug",
-        "sub-title": "Er wordt binnenkort een nieuwe verbindingsmethode toegevoegd aan je Pix-account",
-        "switch-account": "Account wijzigen",
-        "title": "Let op!",
+        "title": "Er wordt binnenkort een nieuwe verbindingsmethode toegevoegd aan je Pix-account",
         "username": "Inloggen"
       },
       "oidc-provider-selector": {

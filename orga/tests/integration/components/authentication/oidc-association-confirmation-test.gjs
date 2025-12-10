@@ -45,10 +45,9 @@ module('Integration | Component | Oidc-association-confirmation', function (hook
     // then
     assert.ok(
       screen.getByRole('heading', {
-        name: `${t('components.authentication.oidc-association-confirmation.title')} ${t('components.authentication.oidc-association-confirmation.sub-title')}`,
+        name: `${t('components.authentication.oidc-association-confirmation.title')}`,
       }),
     );
-    assert.ok(screen.getByText(t('components.authentication.oidc-association-confirmation.information')));
     assert.ok(screen.getByText('Lloyd Cé'));
     assert.ok(screen.getByText('Lloyd Pix'));
     assert.ok(
@@ -68,9 +67,6 @@ module('Integration | Component | Oidc-association-confirmation', function (hook
       ),
     );
 
-    assert.ok(
-      screen.getByRole('button', { name: t('components.authentication.oidc-association-confirmation.switch-account') }),
-    );
     assert.ok(
       screen.getByRole('button', { name: t('components.authentication.oidc-association-confirmation.return') }),
     );
