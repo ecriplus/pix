@@ -19,6 +19,6 @@ describe('Integration | UseCases | startCampaignParticipation', function () {
       });
     });
 
-    expect(startedParticipation).to.deep.include({ userId, campaignId, status: 'TO_SHARE' });
+    expect(startedParticipation).to.deep.include({ userId, campaignId, status: 'STARTED' });
   });
 });

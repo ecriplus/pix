@@ -139,6 +139,12 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
         status: CampaignParticipationStatuses.TO_SHARE,
       });
 
+      // this participation should not be taken into account
+      const startedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        status: CampaignParticipationStatuses.STARTED,
+      });
+
       // shared participations
       const [sharedParticipation1, sharedParticipation2, sharedParticipation3] = Array.from({ length: 3 }, () =>
         databaseBuilder.factory.buildCampaignParticipation({
@@ -160,6 +166,10 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
       // stage 2
       databaseBuilder.factory.buildStageAcquisition({
         campaignParticipationId: toShareParticipation.id,
+        stageId: stage2.id,
+      }); // this participation should not be taken into account
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: startedParticipation.id,
         stageId: stage2.id,
       }); // this participation should not be taken into account
       databaseBuilder.factory.buildStageAcquisition({
