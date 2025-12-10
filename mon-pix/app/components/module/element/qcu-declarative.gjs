@@ -1,3 +1,4 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
@@ -13,6 +14,7 @@ export default class ModuleQcuDeclarative extends ModuleElement {
   @tracked shouldDisplayFeedback = false;
   @service passageEvents;
   @service modulixPreviewMode;
+  @service featureToggles;
 
   get selectedProposalFeedback() {
     return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
@@ -84,6 +86,15 @@ export default class ModuleQcuDeclarative extends ModuleElement {
     {{#if this.shouldDisplayFeedback}}
       <div class="element-qcu-declarative__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.selectedProposalFeedback}}
+
+        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
+          <PixButton
+            @variant="tertiary"
+            @iconBefore="flag"
+            class="element-qcu-declarative-feedback__report-button"
+            aria-label={{t "pages.modulix.issue-report.aria-label"}}
+          >{{t "pages.modulix.issue-report.button"}}</PixButton>
+        {{/if}}
       </div>
     {{/if}}
   </template>
