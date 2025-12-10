@@ -21,6 +21,10 @@
     font-weight: var(--pix-font-bold);
   }
 
+  &__report-button {
+    color: var(--modulix-feedback-state-color);
+  }
+
   @media (not (prefers-reduced-motion: reduce)) {
     animation: 0.75s zoom-in-zoom-out ease;
 

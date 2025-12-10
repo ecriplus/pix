@@ -1671,6 +1671,10 @@
       "interactiveElement": {
         "label": "Interactief element"
       },
+      "issue-report": {
+        "aria-label": "Een probleem of suggestie doorgeven",
+        "button": "Melden"
+      },
       "modals": {
         "alternativeText": {
           "title": "Tekst alternatief"

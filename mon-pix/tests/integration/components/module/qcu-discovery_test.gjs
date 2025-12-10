@@ -134,6 +134,58 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
         .exists();
     });
   });
+
+  module('when isModulixIssueReportDisplayed FT is enabled', function () {
+    test('should display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
+      const onAnswerStub = sinon.stub();
+
+      const qcuDiscoveryElement = _getQcuDiscoveryElement();
+      const { proposals } = qcuDiscoveryElement;
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDiscovery @element={{qcuDiscoveryElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+      const button1 = screen.getByRole('button', { name: proposals[0].content });
+      await click(button1);
+
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is disabled', function () {
+    test('should not display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
+      const onAnswerStub = sinon.stub();
+
+      const qcuDiscoveryElement = _getQcuDiscoveryElement();
+      const { proposals } = qcuDiscoveryElement;
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDiscovery @element={{qcuDiscoveryElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+      const button1 = screen.getByRole('button', { name: proposals[0].content });
+      await click(button1);
+
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
+    });
+  });
 });
 
 function _getQcuDiscoveryElement() {

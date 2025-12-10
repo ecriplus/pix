@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/component/element';
 import ModuleQcuDeclarative from 'mon-pix/components/module/element/qcu-declarative';
 import { module, test } from 'qunit';
@@ -114,6 +115,54 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
       assert.dom(screen.getByText("C'est l'approche de la plupart des gens.")).exists();
       assert.dom(screen.getByText('Possible, mais attention à ne pas faire une rafarinade !')).exists();
       assert.dom(screen.getByText('Digne des plus grands acrobates !')).exists();
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is enabled', function () {
+    test('should display report button', async function (assert) {
+      // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+      const qcuDeclarativeElement = _getQcuDeclarativeElement();
+      const onAnswerStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+      const firstButton = screen.getByRole('button', { name: qcuDeclarativeElement.proposals[0].content });
+      await click(firstButton);
+
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is disabled', function () {
+    test('should not display report button', async function (assert) {
+      // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
+      const qcuDeclarativeElement = _getQcuDeclarativeElement();
+      const onAnswerStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+      const firstButton = screen.getByRole('button', { name: qcuDeclarativeElement.proposals[0].content });
+      await click(firstButton);
+
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
     });
   });
 });

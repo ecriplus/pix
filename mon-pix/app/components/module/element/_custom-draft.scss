@@ -11,8 +11,17 @@
     border: none;
   }
 
-  &__reset {
+  &__buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.element-custom-draft-buttons {
+  &__retry {
+    padding: 0 var(--pix-spacing-4x);
+    background-color: var(--pix-primary-100);
+    border: none;
+    border-radius: 0 0 8px 8px;
   }
 }
