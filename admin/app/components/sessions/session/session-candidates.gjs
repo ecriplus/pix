@@ -10,16 +10,14 @@ export default class SessionCandidates extends Component {
   @service intl;
 
   computeSubscriptionsText = (candidate) => {
-    if (candidate.subscriptions.length === 2) {
-      return this.intl.t('pages.sessions.candidates.subscriptions.dual-core-clea');
-    }
     const subscription = candidate.subscriptions[0];
+
     if (subscription.isCore) {
       return this.intl.t('pages.sessions.candidates.subscriptions.core');
     }
 
     return this.intl.t('pages.sessions.candidates.subscriptions.complementary', {
-      complementaryCertificationId: subscription.complementaryCertificationId,
+      complementaryCertificationKey: subscription.complementaryCertificationKey,
     });
   };
 

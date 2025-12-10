@@ -6,7 +6,7 @@ export const SUBSCRIPTION_TYPES = Object.freeze({
 });
 
 export default class SubscriptionModel extends Model {
-  @attr('number') complementaryCertificationId;
+  @attr('string') complementaryCertificationKey;
   @attr('string') type;
 
   get isCore() {

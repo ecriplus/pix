@@ -1226,7 +1226,7 @@
         "caption": "Candidats",
         "empty-result": "No result",
         "subscriptions": {
-          "complementary": "{complementaryCertificationId} complementary",
+          "complementary": "Complementary ({complementaryCertificationKey})",
           "core": "Pix Certification",
           "dual-core-clea": "Double Certification CléA Numérique"
         }
