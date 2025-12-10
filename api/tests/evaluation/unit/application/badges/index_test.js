@@ -142,6 +142,50 @@ describe('Unit | Application | Badges | Routes', function () {
           );
         });
       });
+
+      context('when the imageUrl is not a valid url (allow png ang svg only)', function () {
+        it('should return 400', async function () {
+          // given
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(badgesRouter);
+          const payload = {
+            data: {
+              type: 'badges',
+              attributes: {
+                key: 'KEY',
+                'alt-message': 'alt-message',
+                'image-url': 'https://assets.pix.org/badges/badge_url.jpg',
+                message: 'message',
+                title: 'title',
+                'is-certifiable': false,
+                'is-always-visible': true,
+                'campaign-threshold': 20,
+                'capped-tubes-criteria': [
+                  {
+                    name: 'dummy name',
+                    threshold: '30',
+                    cappedTubes: [
+                      {
+                        id: '1',
+                        level: 2,
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          };
+
+          // when
+          const response = await httpTestServer.request(method, url, payload);
+
+          // then
+          expect(JSON.parse(response.payload).errors[0].detail).to.equal(
+            '"data.attributes.image-url" with value "https://assets.pix.org/badges/badge_url.jpg" fails to match the required pattern: /^https:\\/\\/assets.pix.org\\/badges\\/.*\\.(svg|png)$/',
+          );
+          expect(response.statusCode).to.equal(400);
+        });
+      });
     });
 
     context('when user has role "CERTIF"', function () {
@@ -252,6 +296,44 @@ describe('Unit | Application | Badges | Routes', function () {
 
           // then
           expect(statusCode).to.equal(400);
+        });
+      });
+
+      context('when the imageUrl is not a valid url (allow png ang svg only)', function () {
+        it('should return 400', async function () {
+          // given
+          validPayload.data = {
+            type: 'badges',
+            attributes: {
+              key: '1',
+              title: 'titre du badge modifié',
+              message: 'Message modifié',
+              'alt-message': 'Message alternatif modifié',
+              'image-url': 'https://assets.pix.org/badges/new_badge_url.jpg',
+              'is-certifiable': true,
+              'is-always-visible': true,
+            },
+          };
+          sinon
+            .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+            .withArgs([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])
+            .callsFake(() => (request, h) => h.response(true));
+          sinon.stub(badgesController, 'updateBadge').returns(null);
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(badgesRouter);
+
+          // when
+          const response = await httpTestServer.request('PATCH', '/api/admin/badges/1', validPayload);
+
+          // then
+          expect(JSON.parse(response.payload).errors[0].detail).to.equal(
+            '"data.attributes.image-url" with value "https://assets.pix.org/badges/new_badge_url.jpg" fails to match the required pattern: /^https:\\/\\/assets.pix.org\\/badges\\/.*\\.(svg|png)$/',
+          );
+          expect(response.statusCode).to.equal(400);
         });
       });
     });
