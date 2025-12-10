@@ -89,7 +89,22 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
           await settled();
 
           // then
-          assert.ok(screen.getByRole('button', { name: t('pages.login-form.login') }));
+          assert.ok(
+            screen.getByRole('heading', {
+              name: `${t('components.authentication.oidc-association-confirmation.title')} ${t('components.authentication.oidc-association-confirmation.sub-title')}`,
+            }),
+          );
+          assert.ok(screen.getByText(t('components.authentication.oidc-association-confirmation.email')));
+          assert.ok(screen.getByText('lloyd.ce@example.net'));
+          assert.ok(
+            screen.getByText(t('components.authentication.oidc-association-confirmation.authentication-method-to-add')),
+          );
+          assert.ok(
+            screen.getByText(
+              `${t('components.authentication.oidc-association-confirmation.external-connection-via')} Partenaire OIDC`,
+            ),
+          );
+          assert.ok(screen.getByText('LLoyd Idp'));
         });
       });
     });
