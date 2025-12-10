@@ -14,6 +14,9 @@ module('Integration | Component | target-profiles | Organizations', function (ho
   const detachOrganizations = () => {};
   const resetFilters = () => {};
   const queryParams = { hideArchived: false };
+  const administrationTeam = EmberObject.create({ id: 1, name: 'Admin Team 1' });
+  const administrationTeam2 = EmberObject.create({ id: 2, name: 'Admin Team 2' });
+  const administrationTeams = [administrationTeam, administrationTeam2];
 
   hooks.beforeEach(function () {
     const currentUser = this.owner.lookup('service:currentUser');
@@ -25,6 +28,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     const organization1 = EmberObject.create({ id: 123, name: 'Orga1', externalId: 'O1' });
     const organization2 = EmberObject.create({ id: 456, name: 'Orga2', externalId: 'O2' });
     const organizations = [organization1, organization2];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -32,6 +36,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -50,6 +55,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     // given
     const organization1 = EmberObject.create({ id: 123, name: 'Orga1', externalId: 'O1' });
     const organizations = [organization1];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -57,6 +63,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -75,6 +82,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
   test('it displays a message when there is no organizations', async function (assert) {
     // given
     const organizations = [];
+
     organizations.meta = { page: 1, pageSize: 1 };
     this.organizations = [];
 
@@ -83,6 +91,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -104,6 +113,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -127,6 +137,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -145,6 +156,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     // given
     const organization1 = EmberObject.create({ id: 123, name: 'Orga1', externalId: 'O1' });
     const organizations = [organization1];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -152,6 +164,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -172,6 +185,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
 
     const organization1 = EmberObject.create({ id: 123, name: 'Orga1', externalId: 'O1' });
     const organizations = [organization1];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -179,6 +193,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -199,6 +214,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
 
     const organization1 = EmberObject.create({ id: 123, name: 'Orga1', externalId: 'O1' });
     const organizations = [organization1];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -206,6 +222,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -222,6 +239,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
   test('it should disable buttons when the inputs are empty', async function (assert) {
     // given
     const organizations = [];
+
     organizations.meta = { page: 1, pageSize: 1 };
 
     // when
@@ -229,6 +247,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       <template>
         <Organizations
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
@@ -255,6 +274,10 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     test('it should enable button when input has content', async function (assert) {
       // given
       const organizations = [];
+      const administrationTeam = EmberObject.create({ id: 1, name: 'Admin Team 1' });
+      const administrationTeam2 = EmberObject.create({ id: 2, name: 'Admin Team 2' });
+      const administrationTeams = [administrationTeam, administrationTeam2];
+      const queryParams = { hideArchived: false };
       const targetProfile = { id: 56 };
 
       // when
@@ -262,6 +285,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
         <template>
           <Organizations
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -280,6 +304,9 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     test('it should call adapter when form is submitted', async function (assert) {
       // given
       const organizations = [];
+      const administrationTeam = EmberObject.create({ id: 1, name: 'Admin Team 1' });
+      const administrationTeam2 = EmberObject.create({ id: 2, name: 'Admin Team 2' });
+      const administrationTeams = [administrationTeam, administrationTeam2];
       const targetProfile = { id: 56 };
       const adapter = store.adapterFor('target-profile');
       const attachOrganizationsStub = sinon.stub(adapter, 'attachOrganizations').resolves({
@@ -291,6 +318,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
         <template>
           <Organizations
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -310,6 +338,9 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     test('it should enable button for existing target profile attachment', async function (assert) {
       // given
       const organizations = [];
+      const administrationTeam = EmberObject.create({ id: 1, name: 'Admin Team 1' });
+      const administrationTeam2 = EmberObject.create({ id: 2, name: 'Admin Team 2' });
+      const administrationTeams = [administrationTeam, administrationTeam2];
       const targetProfile = { id: 56 };
 
       // when
@@ -317,6 +348,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
         <template>
           <Organizations
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
