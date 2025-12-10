@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.278.0](https://github.com/1024pix/pix/compare/v5.277.0...v5.278.0) (2025-12-10)
+
+### :rocket: Amélioration
+
+- [#14376](https://github.com/1024pix/pix/pull/14376) Ajouter les champs "Identifiant externe" et "Département" au formulaire de création d'orga (PIX-20695) 
+- [#14375](https://github.com/1024pix/pix/pull/14375) Assigner le status STARTED aux participations de collectes de profiles à leurs créations (PIX-20706) 
+- [#14274](https://github.com/1024pix/pix/pull/14274) Migrer le scoring V3 sur les referentiels de certifications (PIX-19935). 
+- [#14385](https://github.com/1024pix/pix/pull/14385) Module Cyber Virus Novice modif 
+- [#14363](https://github.com/1024pix/pix/pull/14363) Rendre insensible aux accents le filtre d'une organisation par le nom (PIX-20165) 
+- [#14360](https://github.com/1024pix/pix/pull/14360) Update IAGenPrompt_IND.json - modifs Bon usages 
+
+### :bug: Correction
+
+- [#14365](https://github.com/1024pix/pix/pull/14365)  Gérer les erreurs non-prévues (c’est à dire non-JSON:API) dans le parcours d'authentification OIDC (PIX-20710) 
+- [#14381](https://github.com/1024pix/pix/pull/14381) Afficher clairement le référentiel d'un candidat d'une session (PIX-20741). 
+
+### :building_construction: Tech
+
+- [#14366](https://github.com/1024pix/pix/pull/14366) :recycle: Met à jour le candidat dans une transaction (pix-20719) 
+- [#14379](https://github.com/1024pix/pix/pull/14379) Passage aux template de routes GJS sur Pix Admin 
+- [#14348](https://github.com/1024pix/pix/pull/14348) Permettre au métier d'entrer une URL complète d'image dans le formulaire de création de badge sur Pix Admin (PIX-20588) 
+- [#14374](https://github.com/1024pix/pix/pull/14374) Réessayer les requêtes vers l'API LLM si elle répond par une erreur 502 (PIX-20714) 
+- [#14347](https://github.com/1024pix/pix/pull/14347) Suppression de la feature des organisations rattachées au profil cible via les contenus formatif (PIX-20672). 
+
+### :arrow_up: Montée de version
+
+- [#14371](https://github.com/1024pix/pix/pull/14371) Update dependency ember-source to ~6.9.0 (junior)
+
 # [5.277.0](https://github.com/1024pix/pix/compare/v5.276.0...v5.277.0) (2025-12-09)
 
 ### :rocket: Amélioration
