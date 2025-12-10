@@ -20,6 +20,7 @@ module('Unit | Route | authenticated/target-profiles/target-profile/organization
         name: 'someName',
         type: 'someType',
         externalId: 'someExternalId',
+        administrationTeamId: 'someAdministrationTeamId',
       };
     });
 
@@ -34,6 +35,7 @@ module('Unit | Route | authenticated/target-profiles/target-profile/organization
         assert.deepEqual(controller.name, null);
         assert.deepEqual(controller.type, null);
         assert.deepEqual(controller.externalId, null);
+        assert.deepEqual(controller.administrationTeamId, null);
       });
     });
 
@@ -48,23 +50,26 @@ module('Unit | Route | authenticated/target-profiles/target-profile/organization
         assert.deepEqual(controller.name, 'someName');
         assert.deepEqual(controller.type, 'someType');
         assert.deepEqual(controller.externalId, 'someExternalId');
+        assert.deepEqual(controller.administrationTeamId, 'someAdministrationTeamId');
       });
     });
   });
 
   module('#model', function () {
     module('when an error occurs', function () {
-      test('returns an empty array', async function (assert) {
+      test('returns empty arrays', async function (assert) {
         // given
         const params = {};
         route.modelFor = sinon.stub().returns({ id: '123' });
         route.store.query = sinon.stub().rejects();
+        route.store.findAll = sinon.stub().rejects();
 
         // when
         const model = await route.model(params);
 
         // then
         assert.deepEqual(model.organizations, []);
+        assert.deepEqual(model.administrationTeams, []);
       });
     });
   });
