@@ -3,7 +3,6 @@ import { tracked } from '@glimmer/tracking';
 
 export default class OidcIdentityProviders extends Service {
   @service store;
-  @service currentDomain;
 
   @tracked isOidcProviderAuthenticationInProgress = false;
 

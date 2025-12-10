@@ -21,7 +21,6 @@ export default class LoginForm extends Component {
   @service currentDomain;
   @service url;
   @service intl;
-  @service locale;
   @service authErrorMessages;
 
   @tracked globalError = null;

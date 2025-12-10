@@ -6,10 +6,7 @@ import { SessionStorageEntry } from '../../../utils/session-storage-entry';
 const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
 
 export default class ConfirmRoute extends Route {
-  @service intl;
   @service oidcIdentityProviders;
-  @service router;
-  @service session;
 
   model(params) {
     const identityProviderSlug = params.identity_provider_slug;

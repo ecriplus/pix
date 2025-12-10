@@ -8,9 +8,7 @@ const invitationStorage = new SessionStorageEntry('joinInvitationData');
 const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
 
 export default class OidcLoginController extends Controller {
-  @service('store') store;
-  @service currentDomain;
-  @service featureToggles;
+  @service store;
   @service oidcIdentityProviders;
   @service session;
   @service router;
