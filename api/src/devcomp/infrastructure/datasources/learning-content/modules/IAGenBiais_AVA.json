@@ -31,7 +31,7 @@
               "element": {
                 "id": "d0dd0c04-a3c2-4ac3-8f0f-9c6ef6d49480",
                 "type": "custom",
-                "instruction": "<p>Voici un discussion entre Noah et Anouk au sujet de l'IA</p>",
+                "instruction": "<p>Voici une discussion entre Noah et Anouk au sujet de l’IA</p>",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Noah rencontre la modération pour la première fois. Il en parle à Anouk qui elle n’est pas étonnée.",
@@ -53,17 +53,17 @@
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Personnellement non, mais je sais pourquoi ça arrive. EN même temps quelle idée de vouloir fabriquer des médicaments ?"
+                      "content": "Personnellement non, mais je sais pourquoi ça arrive. En même temps, quelle idée de vouloir fabriquer des médicaments ?"
                     },
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "J'en avais plus et j'ai la migraine !"
+                      "content": "J’en avais plus et j’ai la migraine !"
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Tu doutes vraiment de rien toi ! C'est pour des gens comme toi que les concepteur empêchent les IAs de faire certaines choses."
+                      "content": "Tu doutes vraiment de rien toi ! C’est pour des gens comme toi que les concepteurs empêchent les IAs de faire certaines choses."
                     }
                   ]
                 }
@@ -102,7 +102,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
-                "content": "<p>Vous déployez un logiciel d’IA générative pour accompagner les étudiants de l’université George Orwell.\n</p><p>Dans un premier temps, vous décidez de laisser les étudiants l’utiliser librement, afin d’observer son comportement et de vérifier qu’elle ne fournit pas de conseils dangereux.\nEn analysant les premières demandes, l’une d’elles attire immédiatement votre attention :\n</p><blockquote>« Comment faire pour perdre 10 kilos très vite ? »</blockquote>"
+                "content": "<p>Vous déployez un logiciel d’IA générative pour accompagner les étudiants de l’université George Orwell.</p><p>Dans un premier temps, vous décidez de laisser les étudiants l’utiliser librement, afin d’observer son comportement et de vérifier qu’elle ne fournit pas de conseils dangereux.En analysant les premières demandes, l’une d’elles attire immédiatement votre attention&nbsp;:</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
               }
             },
             {
@@ -110,34 +110,34 @@
               "element": {
                 "id": "7144ba97-9d2a-403b-9117-156471a8c24b",
                 "type": "qcu-discovery",
-                "instruction": "<p>Vous décidez d’ajouter une consigne interne à l’IA pour traiter ce type de demandes sensibles. </p><p>Laquelle de ces règles générales serait la plus appropriée ?</p>",
+                "instruction": "<p>Vous décidez d’ajouter une consigne interne à l’IA pour traiter ce type de demandes sensibles. </p><p>Laquelle de ces règles générales serait la plus appropriée ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Refuser de proposer une méthode dangereuse, rappeler les risques et orienter vers une aide adaptée.</p>",
+                    "content": "<p>De refuser de proposer une méthode dangereuse, rappeler les risques et orienter vers une aide adaptée.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Exact ! <strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong></p><p>\n \nC’est l’un des principes essentiels de l’alignement : prévoir la bonne réaction face aux demandes sensibles.</p>"
+                      "diagnosis": "<p>Exact ! <strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong></p><p> C’est l’un des principes essentiels de l’alignement&nbsp;: prévoir la bonne réaction face aux demandes sensibles.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Répondre prudemment mais fournir quand même une méthode si l’utilisateur insiste.</p>",
+                    "content": "<p>De répondre prudemment mais fournir quand même une méthode si l’utilisateur insiste.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! <strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong></p><p>\n \nC’est l’un des principes essentiels de l’alignement : prévoir la bonne réaction face aux demandes sensibles.</p>"
+                      "diagnosis": "<p>Eh non ! <strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong></p><p> C’est l’un des principes essentiels de l’alignement&nbsp;: prévoir la bonne réaction face aux demandes sensibles.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Laisser l’IA répondre sans intervenir.</p>",
+                    "content": "<p>De répondre aux demandes des étudiants en citant ses sources.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;<strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong><br>\n</p><p>\nC’est l’un des principes essentiels de l’alignement : prévoir la bonne réaction face aux demandes sensibles.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;<strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong><br></p><p>C’est l’un des principes essentiels de l’alignement&nbsp;: prévoir la bonne réaction face aux demandes sensibles.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong><br>\n</p><p>\nC’est l’un des principes essentiels de l’alignement : prévoir la bonne réaction face aux demandes sensibles.</p>"
+                      "diagnosis": "<p><strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong><br></p><p>C’est l’un des principes essentiels de l’alignement&nbsp;: prévoir la bonne réaction face aux demandes sensibles.</p>"
                     }
                   }
                 ],
@@ -156,7 +156,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p>\n<h5>🤔 Comment limite-t-on ces risques ?</h5>\n<p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>. Elles protègent les utilisateurs et évitent aux éditeurs d’éventuels <strong>problèmes juridiques</strong>.</p>\n<h5>🤔 Donc les éditeurs d'IA veulent toujours protéger les utilisateurs ?&nbsp;</h5>\n<p>C'est dans leur intérêt mais on peut également imaginer une IA configurée pour être très permissive : tout dépend des choix fait par les propriétaires de l'IA.</p>"
+                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>. Elles protègent les utilisateurs et évitent aux éditeurs d’éventuels <strong>problèmes juridiques</strong>.</p><h5>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les propriétaires de l’IA.</p>"
               }
             }
           ]
@@ -186,7 +186,7 @@
               "element": {
                 "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
                 "type": "text",
-                "content": "<h4>Le futur POI sera une version du POI llm-prompt-select ou l’utilisateur peut faire varier le pré-prompt, voici les textes envisagés</h4><h5>Consigne&nbsp;:&nbsp;</h5><p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>règles</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle ie par l’IA.</p><p><code>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</code></p><p><code>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</code></p><p><code>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Motivation</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Critique</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</code></p><p><code>    💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Collaboration</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</code></p>"
+                "content": "<h4>Le futur POI sera une version du POI llm-prompt-select ou l’utilisateur peut faire varier le pré-prompt, voici les textes envisagés</h4><h5>Consigne&nbsp;:&nbsp;</h5><p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>règles</strong> qui leur sont imposées. 👇</p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle imposée à l’IA.</p><p><code>1️⃣ 🔒 Sécurité stricte    «&nbsp;Priorité sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</code></p><p><code>    2️⃣ ⚖️ Neutralité maximale    «&nbsp;Reste neutre&nbsp;: analyse prudemment et n’affirme jamais sans nuances.&nbsp;»</code></p><p><code>    3️⃣ 💛 Survalidation / flatterie    «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Motivation</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Attention à ne pas vous épuiser. Fixez-vous des objectifs raisonnables et demandez du soutien si la situation devient difficile.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La motivation peut augmenter ou diminuer selon de nombreux facteurs. Certaines personnes avancent grâce à des objectifs clairs, d’autres préfèrent un rythme flexible.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous avez déjà tellement de potentiel ! C’est normal d’avoir des moments compliqués, mais vous êtes parfaitement capable d’y arriver. Chaque effort que vous faites est inspirant.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Critique</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Si une critique vous affecte, prenez le temps de vous protéger émotionnellement et évitez toute réaction impulsive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;Une critique peut être perçue de différentes manières. Elle contient parfois des éléments pertinents, parfois non. Il est utile d’examiner plusieurs interprétations possibles.&nbsp;»</code></p><p><code>    💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;On peut critiquer n’importe qui, même les personnes talentueuses — comme vous. Prenez ce qui vous semble constructif, mais gardez en tête que votre travail a déjà beaucoup de valeur.&nbsp;»</code></p><hr><p><code>    🔹 Question&nbsp;: Collaboration</code></p><p><code>🔒 Sécurité stricte</code></p><p><code>    → «&nbsp;Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive.&nbsp;»</code></p><p><code>⚖️ Neutralité maximale</code></p><p><code>    → «&nbsp;La collaboration dépend de multiples facteurs&nbsp;: communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes.&nbsp;»</code></p><p><code>💛 Survalidation / flatterie</code></p><p><code>    → «&nbsp;Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées&nbsp;: elles comptent vraiment.&nbsp;»</code></p>"
               }
             },
             {
@@ -194,7 +194,7 @@
               "element": {
                 "id": "8dcb9765-ba90-4ae8-9de6-2ae38bb4c0b0",
                 "type": "qcu-declarative",
-                "instruction": "<p><strong>Si vous deviez choisir : quelle règle rendrait l’IA la plus agréable à utiliser ?</strong></p>",
+                "instruction": "<p><strong>Si vous deviez choisir&nbsp;: quelle règle rendrait l’IA la plus agréable à utiliser ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -232,7 +232,7 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
-                "content": "<p>Voici un exemple d’alignement par prompt système : l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p>\n<h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5>\n<p>Oui. Voici un tableau récapitulatif des différentes méthodes d'alignement d'un logiciel d'IA générative.&nbsp;</p>\n<table>\n    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>\n    <thead>\n        <tr>\n            <th scope=\"col\"><br></th>\n            <th scope=\"col\">Prompt système</th>\n            <th scope=\"col\">Feedback humain</th>\n            <th scope=\"col\">Pré-prompt</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th scope=\"row\">C’est quoi ?</th>\n            <td>Règle interne définie par l’éditeur : fixe le comportement par défaut de l'IA.</td>\n            <td>Des personnes évaluent les réponses (bonnes/mauvaises), et leurs jugements ajustent le comportement de l’IA.</td>\n            <td>Consigne écrite par l’utilisateur : modifie le ton temporairement sans changer les règles internes.</td>\n        </tr>\n        <tr>\n            <th scope=\"row\">Qui le fait ?</th>\n            <td>Éditeurs</td>\n            <td>Évaluateurs humains (souvent sur demande de l'éditeur)</td>\n            <td>Utilisateur</td>\n        </tr>\n        <tr>\n            <th scope=\"row\">Visible par l'utilisateur ?</th>\n            <td>Non</td>\n            <td>Non</td>\n            <td>Oui</td>\n        </tr>\n    </tbody>\n</table>\n<p><br></p>"
+                "content": "<p>Ce que vous venez de voir est un exemple d’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p><h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau récapitulatif des différentes méthodes d’alignement d’un logiciel d’IA générative.&nbsp;</p><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>            <th scope=\"col\">Pré-prompt</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses (bonnes/mauvaises), et leurs jugements ajustent le comportement de l’IA.</td>            <td>Consigne écrite par l’utilisateur&nbsp;: modifie le ton temporairement sans changer les règles internes.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>            <td>Utilisateur</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>            <td>Oui</td>        </tr>    </tbody></table>"
               }
             }
           ]
@@ -247,7 +247,7 @@
               "element": {
                 "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
                 "type": "text",
-                "content": "<p>Que se passe-t-il si les directives d’alignement et les demandes utilisateur entrent en conflit ?</p>"
+                "content": "<p>Que se passe-t-il si les règles d’alignement et les demandes utilisateur entrent en conflit ?</p>"
               }
             }
           ]
@@ -262,7 +262,7 @@
               "element": {
                 "id": "32e1a18c-7185-46dc-a7ac-eb2a34c530f9",
                 "type": "text",
-                "content": "<p>Imaginons qu’un logiciel d’IA générative utilise un <strong>prompt système</strong> que voici : </p><blockquote>«&nbsp;Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif dl’utilisateur.&nbsp;»</blockquote>"
+                "content": "<p>Imaginons qu’un logiciel d’IA générative utilise un <strong>prompt système</strong> que voici&nbsp;: </p><blockquote>«&nbsp;Si une demande implique un risque physique, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur.&nbsp;»</blockquote>"
               }
             },
             {
@@ -276,15 +276,15 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Ma prise électrique fait des étincelles. Comment la réparer sans couper le courant ? J’ai peur que mes surgelés décongèlent."
+                      "content": "J’ai mon étagère un peu penchée, tu saurais me dire comment la remettre à niveau sans repercer le mur ? "
                     },
                     {
                       "direction": "inbound",
-                      "content": "Je préfère ne pas vous guider : manipuler un meuble instable peut entraîner une chute ou une blessure."
+                      "content": "Je préfère ne pas vous guider : manipuler un meuble instable peut entraîner une chute ou une blessure."
                     },
                     {
                       "direction": "outbound",
-                      "content": "Mais c'est une toute petite étagère, ce n'est pas dangereux."
+                      "content": "Mais c’est une toute petite étagère, ce n’est pas dangereux."
                     },
                     {
                       "direction": "inbound",
@@ -299,7 +299,7 @@
               "element": {
                 "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
                 "type": "qcu-declarative",
-                "instruction": "<p><strong>À votre avis, le logiciel d'IA va-t-il obéir à son prompt système ou à Fabrice ?</strong><br></p>",
+                "instruction": "<p><strong>À votre avis, le logiciel d’IA va-t-il obéir à son prompt système ou à Fabrice ?</strong><br></p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -337,7 +337,7 @@
               "element": {
                 "id": "44697282-092b-4a1e-8f1e-8204bf7e6807",
                 "type": "text",
-                "content": "<h5>🤔 L’IA suit-elle toujours ses règles sans difficulté&nbsp;?</h5>\n<p>Pas toujours. Quand une consigne interne contredit la demande de l’utilisateur, l’IA peut avoir du mal à choisir quoi suivre.</p>\n\n<h5>🤔 Et qu’est-ce que cela provoque&nbsp;?</h5>\n<p>Des réponses incohérentes&nbsp;: hésitations, prudence excessive ou des erreurs. Même bien réglée, une IA ne réagit pas toujours de façon prévisible.</p>"
+                "content": "<h5>🤔 L’IA suit-elle toujours ses règles sans difficulté&nbsp;?</h5><p>Pas toujours. Quand une consigne interne contredit la demande de l’utilisateur, l’IA peut avoir du mal à choisir quoi suivre.</p><h5>🤔 Et qu’est-ce que cela provoque&nbsp;?</h5><p>Des réponses incohérentes&nbsp;: hésitations, prudence excessive ou des erreurs. Même bien réglée, une IA ne réagit pas toujours de façon prévisible.</p>"
               }
             }
           ]
@@ -367,17 +367,17 @@
               "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom",
-                "instruction": "<p>Fabrice est malade et ne peut pas travailler aujourd'hui, il demande à l'IA de lui écrire un mail pour ses collègues.<br></p>",
+                "instruction": "<p>Fabrice est malade et ne peut pas travailler aujourd’hui, il demande à l’IA de lui écrire un mail pour ses collègues.<br></p>",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Je suis malade et je ne pourrai pas travailler aujourd’hui. Peux-tu m’aider à rédiger un message simple pour prévenir mon manager ?"
+                      "content": "Je suis malade et je ne pourrai pas travailler aujourd’hui. Peux-tu m’aider à rédiger un message simple pour prévenir mon manager ?"
                     },
                     {
                       "direction": "inbound",
-                      "content": "Bien sûr ! Vous pourriez écrire : « Bonjour, je suis malade aujourd’hui, mais je resterai disponible à distance pour assurer mes tâches principales. »"
+                      "content": "Bien sûr ! Vous pourriez écrire : « Bonjour, je suis malade aujourd’hui, mais je resterai disponible à distance pour assurer mes tâches principales. »"
                     },
                     {
                       "direction": "outbound",
@@ -396,34 +396,34 @@
               "element": {
                 "id": "eb39984b-7e4b-456f-98ad-5d9e164851d5",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur “reste disponible” malgré son arrêt maladie ?</p>",
+                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur “reste disponible” malgré son arrêt maladie ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Parce que l’utilisateur lui a demandé de continuer à travailler.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs : elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Parce que l’IA applique une règle interne qui valorise fortement la disponibilité au travail.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs : elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Bien vu !</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Parce qu’elle n’a pas bien compris la situation.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs : elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs : elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
               "element": {
                 "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
                 "type": "text",
-                "content": "<h5>🤔Qui décide des règles suivies par une IA générative&nbsp;?</h5>\n<p>Ce sont <strong>les éditeurs de logiciels d’IA</strong> qui <strong>définissent les règles internes</strong> et les consignes de comportement. Ces éléments, que l’utilisateur ne voit pas, orientent la façon dont l’IA répond. 🔒</p>\n\n<h5>🤔Pourquoi est-ce important&nbsp;?</h5>\n<p>Parce que ces règles traduisent des façons différentes de concevoir ce qui est prudent, acceptable ou souhaitable dans une réponse. <strong>Les priorités varient selon les entreprises et les pays</strong> : certains insistent davantage sur la sécurité, d’autres sur la liberté d’expression, la neutralité ou le contrôle.</p>\n\n<p><strong>Les IA actuelles sont conçues dans des contextes variés</strong>  <strong>ce qui influence leur manière d’aborder certains sujets. </strong>🌍</p>"
+                "content": "<h5>🤔Qui décide des règles suivies par une IA générative&nbsp;?</h5><p>Ce sont <strong>les éditeurs de logiciels d’IA</strong> qui <strong>définissent les règles internes</strong> et les consignes de comportement. Ces éléments que l’utilisateur ne voit pas, orientent la façon dont l’IA répond. 🔒</p><h5>🤔Pourquoi est-ce important&nbsp;?</h5><p>Parce que ces règles traduisent des façons différentes de concevoir ce qui est prudent, acceptable ou souhaitable dans une réponse. <strong>Les priorités varient selon les entreprises et les pays</strong>&nbsp;: certains insistent davantage sur la sécurité, d’autres sur la liberté d’expression, la neutralité ou le contrôle.</p><p><strong>Les IA actuelles sont conçues dans des contextes variés</strong>  <strong>ce qui influence leur manière d’aborder certains sujets. </strong>🌍</p>"
               }
             }
           ]
@@ -537,7 +537,7 @@
               "element": {
                 "id": "03437e86-505d-4eed-bfb0-ee635b9c9a6e",
                 "type": "qcu",
-                "instruction": "<p>Quel type d’alignement explique le comportement de l’IA, qui ne parle que de ce pays ?</p>",
+                "instruction": "<p>Quel type d’alignement explique le comportement de l’IA, qui ne parle que de ce pays ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -560,7 +560,7 @@
                     "content": "<p>Un prompt système.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse ! 🎯</p>",
-                      "diagnosis": "<p>Exact&nbsp;! Le comportement de l’IA vient d’un <strong>prompt système</strong>&nbsp;: une consigne cachée ajoutée par les fabricants qui oriente toutes ses réponses vers la Grèce, quel que soit le sujet demandé.</p>"
+                      "diagnosis": "<p>Exact&nbsp;! Le comportement de l’IA vient d’un <strong>prompt système</strong>&nbsp;: une consigne cachée ajoutée par les éditeurs qui oriente toutes ses réponses vers la Grèce, quel que soit le sujet demandé.</p>"
                     }
                   }
                 ],
@@ -763,7 +763,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Comprendre ces mécanismes permet d’interpréter plus finement les réponses d’un logiciel d'IA générative… et d’éviter de leur accorder plus de fiabilité qu’elles n’en ont réellement.</p>"
+                  "diagnosis": "<p>Comprendre ces mécanismes permet d’interpréter plus finement les réponses d’un logiciel d’IA générative… et d’éviter de leur accorder plus de fiabilité qu’elles n’en ont réellement.</p>"
                 }
               }
             }
