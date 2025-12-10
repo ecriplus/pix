@@ -5,6 +5,6 @@ export const isCodeAvailable = async function (code) {
   if (isCodeExistsInCampaigns) {
     return false;
   }
-  const isCodeExistsInCombinedCourse = await knex('quests').first('id').where({ code });
+  const isCodeExistsInCombinedCourse = await knex('combined_courses').first('id').where({ code });
   return !isCodeExistsInCombinedCourse;
 };

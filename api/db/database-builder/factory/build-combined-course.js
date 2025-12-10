@@ -23,12 +23,7 @@ const buildCombinedCourse = function ({
   );
 
   const questId = buildQuestForCombinedCourse({
-    illustration,
     successRequirements: successRequirementsFromContents,
-    organizationId,
-    code,
-    name,
-    description,
   }).id;
 
   const values = {
