@@ -280,15 +280,15 @@ const getCodeOfLastParticipationToProfilesCollectionCampaignForUser = async func
 
 const isRetrying = async function ({ campaignParticipationId }) {
   const knexConn = DomainTransaction.getConnection();
-  const { id: campaignId, userId } = await knexConn('campaigns')
-    .select('campaigns.id', 'userId')
+  const { id: campaignId, organizationLearnerId } = await knexConn('campaigns')
+    .select('campaigns.id', 'organizationLearnerId')
     .join('campaign-participations', 'campaigns.id', 'campaignId')
     .where({ 'campaign-participations.id': campaignParticipationId })
     .first();
 
   const campaignParticipations = await knexConn('campaign-participations')
     .select('sharedAt', 'isImproved')
-    .where({ campaignId, userId });
+    .where({ campaignId, organizationLearnerId });
 
   return (
     campaignParticipations.length > 1 &&
