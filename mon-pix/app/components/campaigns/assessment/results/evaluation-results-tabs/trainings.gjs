@@ -45,7 +45,6 @@ export default class EvaluationResultsTabsTrainings extends Component {
       this.args.onResultsShared();
 
       campaignParticipationResultToShare.isShared = true;
-      campaignParticipationResultToShare.canImprove = false;
 
       this.pixMetrics.trackEvent("Envoi des résultats depuis l'onglet Formations", {
         disabled: true,

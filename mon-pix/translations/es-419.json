@@ -2020,7 +2020,7 @@
       "actions": {
         "back-to-pix": "Salir y volver a Pix",
         "continue": "Continúa tu experiencia Pix",
-        "improve": "Lo vuelvo a intentar",
+
         "send": "Envío mis resultados"
       },
       "already-shared": "¡Gracias, tus resultados se han enviado correctamente!",
@@ -2047,7 +2047,6 @@
       "hero": {
         "acquired-badges-title": "Premios obtenidos",
         "explanations": {
-          "improve": "Si quieres mejorar tu puntuación, puedes volver a intentar algunas preguntas.",
           "send-results": "Envíe sus resultados al organizador del curso y siga avanzando con los cursos recomendados.",
           "trainings": "Para ayudarle a progresar, eche un vistazo a nuestros cursos de formación recomendados y encuentre los que más le convienen."
         },

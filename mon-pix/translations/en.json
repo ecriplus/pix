@@ -2033,7 +2033,7 @@
       "actions": {
         "back-to-pix": "Leave and return to Pix",
         "continue": "Continue my Pix experience",
-        "improve": "Try again",
+
         "send": "Submit my results"
       },
       "already-shared": "Thank you, your results have been submitted!",
@@ -2060,7 +2060,6 @@
       "hero": {
         "acquired-badges-title": "Awards received",
         "explanations": {
-          "improve": "If you want to improve your score, you can retry certain questions.",
           "send-results": "Send your results to the customised test organiser and continue with the recommended training.",
           "trainings": "To help you progress, discover our training recommendations and find the ones that suit you best."
         },
