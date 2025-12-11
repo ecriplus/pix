@@ -6,11 +6,11 @@ import { EntityValidationError, ForbiddenAccess } from '../../../../shared/domai
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as emailValidationService from '../../../../shared/domain/services/email-validation-service.js';
 import { OrganizationLearner } from '../../../learner-management/domain/models/OrganizationLearner.js';
-import { CampaignExternalIdTypes } from '../../../shared/domain/constants.js';
+import { CampaignExternalIdTypes, CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { CampaignParticipation } from './CampaignParticipation.js';
 
 const couldNotJoinCampaignErrorMessage = "Vous n'êtes pas autorisé à rejoindre la campagne";
-const couldNotImproveCampaignErrorMessage = 'Vous ne pouvez pas repasser la campagne';
+const couldNotRetryCampaignErrorMessage = 'Vous ne pouvez pas repasser la campagne';
 
 class CampaignParticipant {
   constructor({
@@ -94,12 +94,16 @@ class CampaignParticipant {
       );
     }
 
-    if (['STARTED', 'TO_SHARE'].includes(this.previousCampaignParticipationForUser?.status)) {
-      throw new ForbiddenAccess(couldNotImproveCampaignErrorMessage);
+    if (
+      [CampaignParticipationStatuses.STARTED, CampaignParticipationStatuses.TO_SHARE].includes(
+        this.previousCampaignParticipationForUser?.status,
+      )
+    ) {
+      throw new ForbiddenAccess(couldNotRetryCampaignErrorMessage);
     }
 
-    if (!isReset && this._canImproveResults()) {
-      throw new ForbiddenAccess(couldNotImproveCampaignErrorMessage);
+    if (!isReset && this._canRetryCampaign()) {
+      throw new ForbiddenAccess(couldNotRetryCampaignErrorMessage);
     }
 
     if (isReset && this.previousCampaignParticipationForUser && !this.previousCampaignParticipationForUser.canReset) {
@@ -133,7 +137,7 @@ class CampaignParticipant {
     }
   }
 
-  _canImproveResults() {
+  _canRetryCampaign() {
     return (
       this.campaignToStartParticipation.isAssessment &&
       this.previousCampaignParticipationForUser &&
