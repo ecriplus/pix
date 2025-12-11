@@ -6,6 +6,7 @@ import {
   createServer,
   databaseBuilder,
   datamartBuilder,
+  domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
@@ -202,16 +203,15 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2010-02-01'),
           expirationDate: new Date('2024-02-01'),
-          challengesConfiguration: {
+          challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({
             maximumAssessmentLength: 1,
             defaultCandidateCapacity: -3,
-          },
+          }),
         });
 
         databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2024-02-01'),
           expirationDate: null,
-          challengesConfiguration: null,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
         });
