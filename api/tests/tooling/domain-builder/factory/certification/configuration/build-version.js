@@ -1,5 +1,6 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { buildFlashAlgorithmConfiguration } from '../../build-flash-algorithm-configuration.js';
 
 export const buildVersion = ({
   id = 1,
@@ -9,9 +10,7 @@ export const buildVersion = ({
   assessmentDuration = 105,
   globalScoringConfiguration,
   competencesScoringConfiguration,
-  challengesConfiguration = {
-    defaultCandidateCapacity: -3,
-  },
+  challengesConfiguration,
 } = {}) => {
   return new Version({
     id,
@@ -21,6 +20,6 @@ export const buildVersion = ({
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,
-    challengesConfiguration,
+    challengesConfiguration: challengesConfiguration ?? buildFlashAlgorithmConfiguration(),
   });
 };

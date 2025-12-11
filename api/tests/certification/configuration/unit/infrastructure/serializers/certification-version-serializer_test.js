@@ -65,8 +65,9 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
             ],
             'challenges-configuration': {
               maximumAssessmentLength: 32,
-              limitToOneQuestionPerTube: true,
               defaultCandidateCapacity: -3,
+              challengesBetweenSameCompetence: 0,
+              variationPercent: 1,
             },
           },
         },
@@ -85,8 +86,11 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
       ]);
       expect(result.challengesConfiguration).to.deep.equal({
         maximumAssessmentLength: 32,
-        limitToOneQuestionPerTube: true,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
         defaultCandidateCapacity: -3,
+        challengesBetweenSameCompetence: 0,
+        variationPercent: 1,
       });
     });
   });

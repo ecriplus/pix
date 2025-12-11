@@ -1,6 +1,7 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { createCertificationVersion } from '../../../../../../src/certification/configuration/domain/usecases/create-certification-version.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
@@ -46,11 +47,6 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         competencesScoringConfiguration: [
           { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
         ],
-        challengesConfiguration: {
-          maximumAssessmentLength: 32,
-          limitToOneQuestionPerTube: true,
-          defaultCandidateCapacity: -3,
-        },
       });
 
       const tube1 = domainBuilder.buildTube({
@@ -174,9 +170,11 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
           startDate: new Date('2025-10-20T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-          challengesConfiguration: {
+          challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
+            challengesBetweenSameCompetence: 0,
+            variationPercent: 1,
             defaultCandidateCapacity: 0,
-          },
+          }),
         }),
       );
       expect(versionFrameworkChallenges).to.deep.equal(frFrChallenges);

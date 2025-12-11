@@ -22,11 +22,11 @@ describe('Certification | Configuration | Unit | UseCase | update-certification-
       competencesScoringConfiguration: [
         { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
       ],
-      challengesConfiguration: {
+      challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
         defaultCandidateCapacity: -3,
-      },
+      }),
     });
 
     versionsRepository.update.resolves();

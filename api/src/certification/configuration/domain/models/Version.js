@@ -5,6 +5,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Scopes } from '../../../shared/domain/models/Scopes.js';
 
 export class Version {
@@ -18,12 +19,7 @@ export class Version {
     assessmentDuration: Joi.number().required(),
     globalScoringConfiguration: Joi.array().allow(null).optional(),
     competencesScoringConfiguration: Joi.array().allow(null).optional(),
-    challengesConfiguration: Joi.object()
-      .keys({
-        defaultCandidateCapacity: Joi.number().required(),
-      })
-      .unknown(true)
-      .required(),
+    challengesConfiguration: Joi.object().instance(FlashAssessmentAlgorithmConfiguration).required(),
   });
 
   /**
@@ -35,8 +31,7 @@ export class Version {
    * @param {number} params.assessmentDuration - Assessment duration in minutes
    * @param {Array<Object>} [params.globalScoringConfiguration] - Global scoring configuration
    * @param {Array<Object>} [params.competencesScoringConfiguration] - Competences scoring configuration
-   * @param {Object} params.challengesConfiguration - Challenges configuration
-   * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
+   * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
    */
   constructor({
     id,

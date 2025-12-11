@@ -9,6 +9,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
   describe('#create', function () {
     it('should create a certification version and link challenges', async function () {
       // given
+      const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 32,
+        limitToOneQuestionPerTube: true,
+        defaultCandidateCapacity: -8,
+      });
       const version = domainBuilder.certification.configuration.buildVersion({
         scope: Scopes.PIX_PLUS_DROIT,
         startDate: new Date('2025-06-01'),
@@ -21,11 +26,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
             values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }],
           },
         ],
-        challengesConfiguration: {
-          maximumAssessmentLength: 32,
-          limitToOneQuestionPerTube: true,
-          defaultCandidateCapacity: -8,
-        },
+        challengesConfiguration,
       });
 
       databaseBuilder.factory.buildComplementaryCertification({ key: version.scope });
@@ -82,7 +83,10 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
   describe('#update', function () {
     it('should update the expiration date and challenges configuration of a certification version', async function () {
       // given
-      const initialChallengesConfiguration = { maximumAssessmentLength: 20, limitToOneQuestionPerTube: false };
+      const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 20,
+        limitToOneQuestionPerTube: false,
+      });
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.PIX_PLUS_DROIT,
         startDate: new Date('2024-01-01'),
@@ -94,11 +98,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
-      const newChallengesConfiguration = {
+      const newChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
         defaultCandidateCapacity: 1,
-      };
+      });
       const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
         id: existingVersion.id,
         scope: existingVersion.scope,
@@ -126,6 +130,14 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       // given
       const scope = Scopes.PIX_PLUS_DROIT;
 
+      const oldConfig = {
+        maximumAssessmentLength: 32,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.25,
+        defaultCandidateCapacity: -1,
+      };
       databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-01-01'),
@@ -133,9 +145,17 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 90,
         globalScoringConfiguration: [{ config: 'old' }],
         competencesScoringConfiguration: [{ config: 'old' }],
-        challengesConfiguration: { config: 'old' },
+        challengesConfiguration: oldConfig,
       });
 
+      const middleConfig = {
+        maximumAssessmentLength: 31,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.25,
+        defaultCandidateCapacity: -2,
+      };
       databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-03-01'),
@@ -143,9 +163,17 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 100,
         globalScoringConfiguration: [{ config: 'middle' }],
         competencesScoringConfiguration: [{ config: 'middle' }],
-        challengesConfiguration: { config: 'middle' },
+        challengesConfiguration: middleConfig,
       });
 
+      const expectedConfig = {
+        maximumAssessmentLength: 30,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.25,
+        defaultCandidateCapacity: -3,
+      };
       const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-06-01'),
@@ -153,9 +181,17 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'latest' }],
         competencesScoringConfiguration: [{ config: 'latest' }],
-        challengesConfiguration: { config: 'latest', defaultCandidateCapacity: -3 },
+        challengesConfiguration: expectedConfig,
       }).id;
 
+      const aWeDoNotCareConfig = {
+        maximumAssessmentLength: 29,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.25,
+        defaultCandidateCapacity: -8,
+      };
       const aScopeWeAreNotInterestedIn = Scopes.CORE;
       databaseBuilder.factory.buildCertificationVersion({
         scope: aScopeWeAreNotInterestedIn,
@@ -164,7 +200,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 150,
         globalScoringConfiguration: [{ other: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'other', defaultCandidateCapacity: -8 },
+        challengesConfiguration: aWeDoNotCareConfig,
       });
 
       await databaseBuilder.commit();
@@ -181,7 +217,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       expect(result.assessmentDuration).to.equal(120);
       expect(result.globalScoringConfiguration).to.deep.equal([{ config: 'latest' }]);
       expect(result.competencesScoringConfiguration).to.deep.equal([{ config: 'latest' }]);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'latest', defaultCandidateCapacity: -3 });
+      expect(result.challengesConfiguration).to.deep.equal(expectedConfig);
     });
 
     context('when no version exists for the scope', function () {
@@ -214,6 +250,14 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
     it('should return the version with the given id', async function () {
       // given
       const scope = Scopes.PIX_PLUS_DROIT;
+      const expectedConfig = {
+        maximumAssessmentLength: 30,
+        challengesBetweenSameCompetence: 2,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+        variationPercent: 0.25,
+        defaultCandidateCapacity: 1,
+      };
       const versionId = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-06-01'),
@@ -221,9 +265,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'test' }],
         competencesScoringConfiguration: [{ config: 'test' }],
-        challengesConfiguration: {
-          defaultCandidateCapacity: 1,
-        },
+        challengesConfiguration: expectedConfig,
       }).id;
 
       await databaseBuilder.commit();
@@ -240,9 +282,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       expect(result.assessmentDuration).to.equal(120);
       expect(result.globalScoringConfiguration).to.deep.equal([{ config: 'test' }]);
       expect(result.competencesScoringConfiguration).to.deep.equal([{ config: 'test' }]);
-      expect(result.challengesConfiguration).to.deep.equal({
-        defaultCandidateCapacity: 1,
-      });
+      expect(result.challengesConfiguration).to.deep.equal(expectedConfig);
     });
 
     context('when the version does not exist', function () {
