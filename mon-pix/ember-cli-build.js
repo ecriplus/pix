@@ -27,11 +27,6 @@ module.exports = function (defaults) {
       polyfillUUID: true,
     },
   });
-
-  app.import('node_modules/plyr/dist/plyr.css');
-  app.import('node_modules/plyr/dist/plyr.svg', {
-    destDir: './assets',
-  });
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //

@@ -7,10 +7,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { htmlUnsafe } from 'mon-pix/helpers/html-unsafe';
-import didInsert from 'mon-pix/modifiers/modifier-did-insert';
-import Plyr from 'plyr';
-
-import player_fr from '../plyr-translation/player_fr';
 
 export default class ModulixVideoElement extends Component {
   @tracked modalIsOpen = false;
@@ -38,17 +34,6 @@ export default class ModulixVideoElement extends Component {
   }
 
   @action
-  launchPlyr() {
-    new Plyr(document.getElementById(this.args.video.id), {
-      hideControls: false,
-      disableContextMenu: false,
-      i18n: player_fr,
-      loadSprite: false,
-      iconUrl: '/assets/plyr.svg',
-    });
-  }
-
-  @action
   onPlay() {
     if (this.videoWasStarted) {
       return;
@@ -68,7 +53,6 @@ export default class ModulixVideoElement extends Component {
       <div class="element-video__container">
         {{! template-lint-disable require-media-caption }}
         <video
-          {{didInsert this.launchPlyr}}
           id={{@video.id}}
           ref="video"
           class="pix-video-player"

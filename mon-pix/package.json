@@ -120,7 +120,6 @@
     "miragejs": "^0.1.45",
     "npm-run-all2": "^8.0.0",
     "p-queue": "^8.0.0",
-    "plyr": "^3.7.8",
     "prettier": "^3.0.0",
     "prettier-plugin-ember-template-tag": "^2.0.2",
     "qunit": "^2.19.1",
