@@ -8,22 +8,9 @@ export const COMBINED_COURSE_WITHOUT_CAMPAIGN = {
   quest: {
     code: 'CBNOCAMP',
     name: 'Combinix sans campagne',
-    eligibilityRequirements: [],
-    successRequirements: [
+    combinedCourseContents: [
       {
-        requirement_type: 'passages',
-        comparison: 'all',
-
-        data: {
-          moduleId: {
-            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
+        moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
       },
     ],
   },

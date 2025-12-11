@@ -10,87 +10,36 @@ export const MAXI_COMBINED_COURSE = {
   quest: {
     code: 'MAXICOMBI',
     name: 'Parcours apprenant complet',
-    eligibilityRequirements: [],
-    successRequirements: [
+    combinedCourseContents: [
       {
-        data: {
-          status: { data: 'SHARED', comparison: 'equal' },
-          campaignId: { data: CAMPAIGN_MAXI_COMBINED_COURSE_ID, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'campaignParticipations',
+        campaignId: CAMPAIGN_MAXI_COMBINED_COURSE_ID,
       },
       {
-        data: {
-          moduleId: { data: 'cf183961-e85a-421d-a316-05870191ff82', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'cf183961-e85a-421d-a316-05870191ff82',
       },
       {
-        data: {
-          moduleId: { data: '7a38c90d-9937-4497-bee3-fe58541af420', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: '7a38c90d-9937-4497-bee3-fe58541af420',
       },
       {
-        data: {
-          moduleId: { data: '71618929-fcc9-415e-a3f3-9582545d7a78', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: '71618929-fcc9-415e-a3f3-9582545d7a78',
       },
       {
-        data: {
-          moduleId: { data: 'd03cef94-74af-463d-8901-c886b48d6e0b', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'd03cef94-74af-463d-8901-c886b48d6e0b',
       },
       {
-        data: {
-          moduleId: { data: 'c8607621-09ab-4601-be7d-68ed9c914c30', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'c8607621-09ab-4601-be7d-68ed9c914c30',
       },
       {
-        data: {
-          moduleId: { data: 'a1eea948-2125-488f-8006-9f85e646830d', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'a1eea948-2125-488f-8006-9f85e646830d',
       },
       {
-        data: {
-          moduleId: { data: '8aa17e6d-3470-479d-838d-ff6923de6686', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: '8aa17e6d-3470-479d-838d-ff6923de6686',
       },
       {
-        data: {
-          moduleId: { data: '8343e9c1-5b46-4500-ab85-54061e0c4712', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: '8343e9c1-5b46-4500-ab85-54061e0c4712',
       },
       {
-        data: {
-          moduleId: { data: '40ab5711-4025-4052-a269-00fd0448d60a', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: '40ab5711-4025-4052-a269-00fd0448d60a',
       },
     ],
   },

@@ -10,31 +10,15 @@ export const PRO_COMBINED_COURSE = {
   quest: {
     code: 'COMBINIX1',
     name: 'Parcours apprenant complet',
-    eligibilityRequirements: [],
-    successRequirements: [
+    combinedCourseContents: [
       {
-        data: {
-          status: { data: 'SHARED', comparison: 'equal' },
-          campaignId: { data: CAMPAIGN_PRO_COMBINED_COURSE_ID, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'campaignParticipations',
+        campaignId: CAMPAIGN_PRO_COMBINED_COURSE_ID,
       },
       {
-        data: {
-          moduleId: { data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
       },
       {
-        data: {
-          moduleId: { data: 'f32a2238-4f65-4698-b486-15d51935d335', comparison: 'equal' },
-          isTerminated: { data: true, comparison: 'equal' },
-        },
-        comparison: 'all',
-        requirement_type: 'passages',
+        moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
       },
     ],
   },

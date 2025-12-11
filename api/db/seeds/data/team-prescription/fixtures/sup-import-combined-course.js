@@ -9,33 +9,36 @@ export const SUP_IMPORT_COMBINED_COURSE = {
   quest: {
     code: 'SUPINIX',
     name: 'Parcours combine SUP import',
+    combinedCourseContents: [
+      {
+        campaignId: CAMPAIGN_SUP_COMBINED_COURSE_ID,
+      },
+      {
+        moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+      },
+      {
+        moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
+      },
+    ],
   },
-  successRequirements: [
-    {
-      data: {
-        status: { data: 'SHARED', comparison: 'equal' },
-        campaignId: { data: CAMPAIGN_SUP_COMBINED_COURSE_ID, comparison: 'equal' },
+  targetProfile: {
+    description: 'Description',
+    name: 'Parcours',
+    tubes: [
+      {
+        id: 'tube2e715GxaaWzNK6',
+        level: 2,
       },
-      comparison: 'all',
-      requirement_type: 'campaignParticipations',
+    ],
+    campaign: {
+      id: CAMPAIGN_SUP_COMBINED_COURSE_ID,
+      name: 'Je teste mes compétences',
+      code: 'SUPCAMPIX',
+      customResultPageButtonText: 'Continuer',
+      customResultPageButtonUrl: '/parcours/SUPINIX/chargement',
+      skills: [],
     },
-    {
-      data: {
-        moduleId: { data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a', comparison: 'equal' },
-        isTerminated: { data: true, comparison: 'equal' },
-      },
-      comparison: 'all',
-      requirement_type: 'passages',
-    },
-    {
-      data: {
-        moduleId: { data: 'f32a2238-4f65-4698-b486-15d51935d335', comparison: 'equal' },
-        isTerminated: { data: true, comparison: 'equal' },
-      },
-      comparison: 'all',
-      requirement_type: 'passages',
-    },
-  ],
+  },
   participations: [
     {
       firstName: faker.person.firstName(),

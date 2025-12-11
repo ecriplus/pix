@@ -9,21 +9,9 @@ export const COMBINED_COURSE_WITHOUT_MODULES = {
   quest: {
     code: 'CBNOMOD',
     name: 'Parcours sans modules',
-    eligibilityRequirements: [],
-    successRequirements: [
+    combinedCourseContents: [
       {
-        requirement_type: 'campaignParticipations',
-        comparison: 'all',
-        data: {
-          campaignId: {
-            data: CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID,
-            comparison: 'equal',
-          },
-          status: {
-            data: 'SHARED',
-            comparison: 'equal',
-          },
-        },
+        campaignId: CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID,
       },
     ],
   },

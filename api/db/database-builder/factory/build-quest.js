@@ -3,15 +3,9 @@ import isUndefined from 'lodash/isUndefined.js';
 import { REWARD_TYPES } from '../../../src/quest/domain/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAttestation } from './build-attestation.js';
-import { buildOrganization } from './build-organization.js';
 
 const buildQuest = function ({
   id = databaseBuffer.getNextId(),
-  code = null,
-  name = 'Ma quête',
-  description = null,
-  illustration = null,
-  organizationId = null,
   createdAt = new Date(),
   updatedAt,
   rewardType = REWARD_TYPES.ATTESTATION,
@@ -25,11 +19,6 @@ const buildQuest = function ({
 
   const values = {
     id,
-    code,
-    name,
-    description,
-    illustration,
-    organizationId,
     createdAt,
     updatedAt: updatedAt ?? createdAt,
     rewardType,
@@ -49,22 +38,9 @@ const buildQuest = function ({
   };
 };
 
-const buildQuestForCombinedCourse = function ({
-  code = 'COMBINIX1',
-  name = 'Mon parcours combiné',
-  organizationId,
-  description = 'Le but de ma quête',
-  illustration = 'images/illustration.svg',
-  ...args
-} = {}) {
-  organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
+const buildQuestForCombinedCourse = function ({ successRequirements = [] } = {}) {
   return buildQuest({
-    ...args,
-    code,
-    name,
-    organizationId,
-    description,
-    illustration,
+    successRequirements,
     rewardId: null,
     rewardType: null,
   });
