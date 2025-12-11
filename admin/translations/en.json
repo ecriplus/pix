@@ -27,15 +27,15 @@
       "pix-admin-login-from-password-disabled-error": "Email and password login is disabled. Please use SSO to log in."
     },
     "fields": {
-      "createdAt": "creation date",
-      "id": "id",
-      "internalName": "internal name",
-      "name": "name",
+      "createdAt": "Creation date",
+      "id": "Id",
+      "internalName": "Internal name",
+      "name": "Name",
       "required-field": "Required field",
-      "status": "status",
+      "status": "Status",
       "target-profile": {
         "category": {
-          "name": "category",
+          "name": "Category",
           "tags": {
             "BACK_TO_SCHOOL": "Back to school",
             "COMPETENCES": "Pix Competences",
@@ -438,6 +438,19 @@
         "placeholder": "Certification ID"
       }
     },
+    "combined-course-blueprints": {
+      "items": {
+        "module": "Module",
+        "targetProfile": "Target profile"
+      },
+      "list": {
+        "content": "Contenu",
+        "table": {
+          "caption": "List of combined course blueprints"
+        },
+        "title": "All learner courses"
+      }
+    },
     "combined-courses": {
       "create-form": {
         "addItemButton": "Add",
@@ -552,6 +565,7 @@
         "certification-frameworks": "Certif frameworks",
         "certification-frameworks-label": "Certification frameworks",
         "certifications": "Certifications",
+        "combined-course-blueprints": "Courses blueprints",
         "labels": {
           "close": "Close navigation",
           "main": "Main navigation",
