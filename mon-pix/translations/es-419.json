@@ -1179,7 +1179,7 @@
       "actions": {
         "next-page": {
           "continue": "Continuar",
-          "results": "Ver mis resultados"
+          "results": "Ver y enviar mis resultados"
         }
       },
       "answers": {
@@ -1192,6 +1192,9 @@
       "completion-percentage": {
         "caption": "progreso del test",
         "label": "'<p class=\"sr-only\">'Has completado el '</p>'{completionPercentage}%'<p class=\"sr-only\">' del test.'</p>'"
+      },
+      "sharing-results": {
+        "information-banner": "Al hacer clic en el botón «Enviar mis resultados», sus resultados se enviarán al organizador."
       },
       "title": {
         "assessment-progress": "Progreso",

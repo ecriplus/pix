@@ -21,7 +21,7 @@ Fonctionnalité: Campagne d'évaluation
     Et je clique sur "Je valide"
     Alors je vois l'épreuve "Qui a dit « Toute méchanceté a sa source dans la faiblesse » ?"
     Lorsque je clique sur "Je passe"
-    Et je clique sur "Voir mes résultats"
+    Et je clique sur "Voir et envoyer mes résultats"
     Alors je vois 50% de réussite aux questions
     Alors je vois l'onglet de détails des résultats avec 2 compétences
     Alors je vois que j'ai envoyé les résultats

@@ -3,6 +3,7 @@ import { Assessment } from '../models/Assessment.js';
 class CampaignAssessment {
   constructor(assessment) {
     this.id = assessment.id;
+    this.createdAt = assessment.createdAt;
     this.codeCampaign = assessment.campaign?.code;
     this.state = assessment.state;
     this.title = assessment.campaign?.title ?? '';

@@ -1184,7 +1184,7 @@
       "actions": {
         "next-page": {
           "continue": "Continuer",
-          "results": "Voir mes résultats"
+          "results": "Voir et envoyer mes résultats"
         }
       },
       "answers": {
@@ -1197,6 +1197,9 @@
       "completion-percentage": {
         "caption": "avancement dans le parcours",
         "label": "'<p class=\"sr-only\">'Vous avez effectué '</p>'{completionPercentage}%'<p class=\"sr-only\">' de votre parcours.'</p>'"
+      },
+      "sharing-results": {
+        "information-banner": "En cliquant sur le bouton \"J'envoie mes résultats\", vos résultats seront transmis à l'organisateur."
       },
       "title": {
         "assessment-progress": "Avancement",

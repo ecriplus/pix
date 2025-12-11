@@ -1,18 +1,21 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
 import { resumeCampaignOfTypeAssessmentByCode } from '../helpers/campaign';
 import { invalidateSession } from '../helpers/invalidate-session';
+import setupIntl from '../helpers/setup-intl';
 
 const ASSESSMENT = 'ASSESSMENT';
 
 module('Acceptance | Campaigns | Resume Campaigns with type Assessment', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
   let campaign;
   let studentInfo;
 
@@ -72,7 +75,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       test('should redirect directly to results', async function (assert) {
         // given
         const screen = await visit(`/campagnes/${campaign.code}`);
-        await click(screen.getByRole('link', { name: 'Voir mes résultats' }));
+        await click(screen.getByRole('link', { name: t('pages.checkpoint.actions.next-page.results') }));
 
         // when
         await visit(`/campagnes/${campaign.code}`);
@@ -86,7 +89,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       test('should redirect directly to shared results', async function (assert) {
         // given
         const screen = await visit(`/campagnes/${campaign.code}`);
-        await click(screen.getByRole('link', { name: 'Voir mes résultats' }));
+        await click(screen.getByRole('link', { name: t('pages.checkpoint.actions.next-page.results') }));
         await click(screen.getByRole('button', { name: "J'envoie mes résultats" }));
 
         // when
@@ -114,7 +117,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       test('should display results page', async function (assert) {
         // when
         const screen = await visit(`/campagnes/${campaign.code}`);
-        await click(screen.getByRole('link', { name: 'Voir mes résultats' }));
+        await click(screen.getByRole('link', { name: t('pages.checkpoint.actions.next-page.results') }));
 
         // then
         assert.ok(currentURL().includes(`/campagnes/${campaign.code}/evaluation/resultats`));

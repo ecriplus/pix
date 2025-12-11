@@ -1,13 +1,24 @@
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AssessmentBanner from 'mon-pix/components/assessment-banner';
 import CheckpointContinue from 'mon-pix/components/checkpoint-continue';
 import ComparisonWindow from 'mon-pix/components/comparison-window';
+import InElement from 'mon-pix/components/in-element';
 import LevelupNotif from 'mon-pix/components/levelup-notif';
 import ResultItem from 'mon-pix/components/result-item';
+
 <template>
   {{pageTitle @controller.pageTitle}}
+
+  {{#if @controller.displayShareResultsBanner}}
+    <InElement @destinationId="pix-layout-banner-container">
+      <PixBannerAlert>
+        {{t "pages.checkpoint.sharing-results.information-banner"}}
+      </PixBannerAlert>
+    </InElement>
+  {{/if}}
 
   <div class="background-banner-wrapper challenge">
 
@@ -34,11 +45,7 @@ import ResultItem from 'mon-pix/components/result-item';
             @themeMode="dark"
           />
           <div class="checkpoint__continue-wrapper">
-            <CheckpointContinue
-              @assessmentId={{@model.id}}
-              @nextPageButtonText={{@controller.nextPageButtonText}}
-              @finalCheckpoint={{@controller.finalCheckpoint}}
-            />
+            <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
           </div>
         {{/if}}
       </div>
@@ -56,11 +63,7 @@ import ResultItem from 'mon-pix/components/result-item';
               <ResultItem @answer={{answer}} @openAnswerDetails={{@controller.openComparisonWindow}} />
             {{/each}}
           </div>
-          <CheckpointContinue
-            @assessmentId={{@model.id}}
-            @nextPageButtonText={{@controller.nextPageButtonText}}
-            @finalCheckpoint={{@controller.finalCheckpoint}}
-          />
+          <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
         {{else}}
           <div class="checkpoint-no-answer">
             <h1 class="checkpoint-no-answer__header">
@@ -69,21 +72,19 @@ import ResultItem from 'mon-pix/components/result-item';
             <p class="checkpoint-no-answer__info">
               {{t "pages.checkpoint.answers.already-finished.explanation"}}
             </p>
-            <CheckpointContinue
-              @assessmentId={{@model.id}}
-              @nextPageButtonText={{@controller.nextPageButtonText}}
-              @finalCheckpoint={{@controller.finalCheckpoint}}
-            />
+            <CheckpointContinue @assessmentId={{@model.id}} @nextPageButtonText={{@controller.nextPageButtonText}} />
           </div>
         {{/if}}
       </main>
     </div>
 
-    <ComparisonWindow
-      @showModal={{@controller.isShowingModal}}
-      @answer={{@controller.answer}}
-      @closeComparisonWindow={{@controller.closeComparisonWindow}}
-    />
+    {{#if @controller.shouldDisplayAnswers}}
+      <ComparisonWindow
+        @showModal={{@controller.isShowingModal}}
+        @answer={{@controller.answer}}
+        @closeComparisonWindow={{@controller.closeComparisonWindow}}
+      />
+    {{/if}}
   </div>
 
   {{#if @controller.showLevelup}}
