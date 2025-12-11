@@ -5,6 +5,7 @@ import Organizations from 'pix-admin/components/target-profiles/organizations';
 
   <Organizations
     @organizations={{@model.organizations}}
+    @administrationTeams={{@model.administrationTeams}}
     @targetProfile={{@model.targetProfile}}
     @id={{@controller.id}}
     @name={{@controller.name}}
@@ -14,6 +15,7 @@ import Organizations from 'pix-admin/components/target-profiles/organizations';
     @triggerFiltering={{@controller.triggerFiltering}}
     @goToOrganizationPage={{@controller.goToOrganizationPage}}
     @detachOrganizations={{@controller.detachOrganizations}}
+    @administrationTeamId={{@controller.administrationTeamId}}
     @onResetFilter={{@controller.onResetFilter}}
   />
 </template>

@@ -183,6 +183,7 @@ export default class Organizations extends Component {
 
       <ListItems
         @organizations={{@organizations}}
+        @administrationTeams={{@administrationTeams}}
         @id={{@id}}
         @name={{@name}}
         @type={{@type}}
@@ -193,6 +194,7 @@ export default class Organizations extends Component {
         @targetProfileName={{@targetProfile.internalName}}
         @hideArchived={{@hideArchived}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
+        @administrationTeamId={{@administrationTeamId}}
         @onResetFilter={{@onResetFilter}}
       />
     </section>

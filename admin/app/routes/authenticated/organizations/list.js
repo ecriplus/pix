@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import RSVP from 'rsvp';
 
 export default class ListRoute extends Route {
   @service store;
@@ -12,18 +13,21 @@ export default class ListRoute extends Route {
     type: { refreshModel: true },
     externalId: { refreshModel: true },
     hideArchived: { refreshModel: true },
+    administrationTeamId: { refreshModel: true },
   };
 
   async model(params) {
-    let model;
+    let organizations, administrationTeams;
     try {
-      model = await this.store.query('organization', {
+      administrationTeams = await this.store.findAll('administration-team');
+      organizations = await this.store.query('organization', {
         filter: {
           id: params.id ? params.id.trim() : '',
           name: params.name ? params.name.trim() : '',
           type: params.type ? params.type.trim() : '',
           externalId: params.externalId ? params.externalId.trim() : '',
           hideArchived: params.hideArchived,
+          administrationTeamId: params.administrationTeamId ? params.administrationTeamId.trim() : '',
         },
         page: {
           number: params.pageNumber,
@@ -31,9 +35,13 @@ export default class ListRoute extends Route {
         },
       });
     } catch {
-      model = [];
+      organizations = [];
+      administrationTeams = [];
     }
-    return model;
+    return RSVP.hash({
+      organizations,
+      administrationTeams,
+    });
   }
 
   resetController(controller, isExiting) {
@@ -45,6 +53,7 @@ export default class ListRoute extends Route {
       controller.type = null;
       controller.externalId = null;
       controller.hideArchived = false;
+      controller.administrationTeamId = null;
     }
   }
 }

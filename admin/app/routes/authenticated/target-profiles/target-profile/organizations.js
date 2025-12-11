@@ -13,6 +13,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
     type: { refreshModel: true },
     externalId: { refreshModel: true },
     hideArchived: { refreshModel: true },
+    administrationTeamId: { refreshModel: true },
   };
 
   beforeModel() {
@@ -20,7 +21,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
   }
 
   async model(params) {
-    let organizations;
+    let organizations, administrationTeams;
     const targetProfile = this.modelFor('authenticated.target-profiles.target-profile');
     const queryParams = {
       targetProfileId: targetProfile.id,
@@ -34,17 +35,21 @@ export default class TargetProfileOrganizationsRoute extends Route {
         type: params.type,
         externalId: params.externalId,
         hideArchived: params.hideArchived,
+        administrationTeamId: params.administrationTeamId,
       },
     };
     try {
+      administrationTeams = await this.store.findAll('administration-team');
       organizations = await this.store.query('organization', queryParams);
     } catch {
       organizations = [];
+      administrationTeams = [];
     }
 
     return {
       organizations,
       targetProfile,
+      administrationTeams,
     };
   }
 
@@ -57,6 +62,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
       controller.type = null;
       controller.externalId = null;
       controller.hideArchived = false;
+      controller.administrationTeamId = null;
     }
   }
 }

@@ -19,6 +19,9 @@ module('Integration | Component | ListItems', function (hooks) {
   const organization1 = { id: 123, name: 'Orga1', externalId: 'O1' };
   const organization2 = { id: 456, name: 'Orga2', externalId: 'O2' };
   const organizations = [organization1, organization2];
+  const administrationTeam = { id: 1, name: 'Admin Team 1' };
+  const administrationTeam2 = { id: 2, name: 'Admin Team 2' };
+  const administrationTeams = [administrationTeam, administrationTeam2];
   organizations.meta = { page: 1, pageSize: 1 };
 
   const triggerFiltering = sinon.stub();
@@ -32,6 +35,7 @@ module('Integration | Component | ListItems', function (hooks) {
       <template>
         <ListItems
           @organizations={{organizations}}
+          @administrationTeams={{administrationTeams}}
           @externalId={{null}}
           @goToOrganizationPage={{goToOrganizationPage}}
           @triggerFiltering={{triggerFiltering}}
@@ -54,6 +58,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @externalId={{null}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -78,6 +83,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @externalId={{null}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -104,6 +110,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @externalId={{null}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -134,6 +141,7 @@ module('Integration | Component | ListItems', function (hooks) {
           <template>
             <ListItems
               @organizations={{organizations}}
+              @administrationTeams={{administrationTeams}}
               @externalId="123"
               @goToOrganizationPage={{goToOrganizationPage}}
               @triggerFiltering={{triggerFiltering}}
@@ -154,6 +162,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @externalId="123"
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
@@ -176,6 +185,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
             @onResetFilter={{resetFilter}}

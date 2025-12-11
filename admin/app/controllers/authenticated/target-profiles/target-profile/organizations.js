@@ -21,6 +21,7 @@ export default class TargetProfileOrganizationsController extends Controller {
   @tracked name = null;
   @tracked type = null;
   @tracked externalId = null;
+  @tracked administrationTeamId = null;
 
   updateFilters(filters) {
     for (const filterKey of Object.keys(filters)) {
@@ -64,5 +65,6 @@ export default class TargetProfileOrganizationsController extends Controller {
     this.type = null;
     this.externalId = null;
     this.hideArchived = false;
+    this.administrationTeamId = null;
   }
 }

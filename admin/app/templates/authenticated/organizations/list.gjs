@@ -18,7 +18,8 @@ import ListItems from 'pix-admin/components/organizations/list-items';
   <main class="page-body">
     <section class="page-section organizations-list">
       <ListItems
-        @organizations={{@model}}
+        @organizations={{@model.organizations}}
+        @administrationTeams={{@model.administrationTeams}}
         @id={{@controller.id}}
         @name={{@controller.name}}
         @type={{@controller.type}}
@@ -27,6 +28,7 @@ import ListItems from 'pix-admin/components/organizations/list-items';
         @hideArchived={{@controller.hideArchived}}
         @toggleArchived={{fn (mut @controller.hideArchived)}}
         @showDetachColumn={{false}}
+        @administrationTeamId={{@controller.administrationTeamId}}
         @onResetFilter={{@controller.onResetFilter}}
       />
     </section>

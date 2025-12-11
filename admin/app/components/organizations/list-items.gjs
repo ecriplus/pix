@@ -50,13 +50,33 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   }
 
   @action
+  filterAdministrationTeam(value) {
+    const event = { target: { value } };
+    this.args.triggerFiltering('administrationTeamId', event);
+  }
+
+  @action
   filterHideArchived(value) {
     const event = { target: { value } };
     this.args.triggerFiltering('hideArchived', event);
   }
 
+  get optionAdministrationTeam() {
+    return this.args.administrationTeams.map((team) => ({
+      value: team.id,
+      label: team.name,
+    }));
+  }
+
   get isClearFiltersButtonDisabled() {
-    return !this.args.id && !this.args.name && !this.args.type && !this.args.externalId && !this.args.hideArchived;
+    return (
+      !this.args.id &&
+      !this.args.name &&
+      !this.args.type &&
+      !this.args.externalId &&
+      !this.args.hideArchived &&
+      !this.args.administrationTeamId
+    );
   }
 
   <template>
@@ -80,6 +100,15 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
         @value={{@type}}
       >
         <:label>Type</:label>
+      </PixSelect>
+      <PixSelect
+        @id="administrationTeam"
+        @hideDefaultOption={{true}}
+        @options={{this.optionAdministrationTeam}}
+        @onChange={{this.filterAdministrationTeam}}
+        @value={{@administrationTeamId}}
+      >
+        <:label>{{t "components.organizations.list-items.table.header.administration-team-name"}}</:label>
       </PixSelect>
       <PixInput value={{@externalId}} oninput={{fn @triggerFiltering "externalId"}}>
         <:label>Identifiant externe</:label>
