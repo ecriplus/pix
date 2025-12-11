@@ -149,7 +149,7 @@ class OrganizationForAdmin {
   }
 
   set provinceCode(provinceCode) {
-    this.#provinceCode = provinceCode ? provinceCode.padStart(PAD_TARGET_LENGTH, PAD_STRING) : '';
+    this.#provinceCode = provinceCode ? provinceCode.padStart(PAD_TARGET_LENGTH, PAD_STRING) : null;
   }
 
   get archivistFullName() {
