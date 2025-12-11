@@ -1097,6 +1097,7 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
             REDIRECTION_URL_SECRET: 'secret'
+            NODE_OPTIONS: '--no-experimental-strip-types'
       - store_test_results:
           path: ./node_modules/.playwright/junit
       - store_artifacts:
