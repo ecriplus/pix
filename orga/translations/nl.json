@@ -1384,6 +1384,12 @@
       },
       "title": "Opdrachten"
     },
+    "oidc": {
+      "login": {
+        "sub-title": "om te koppelen aan uw nieuwe aanmeldingsmethode",
+        "title": "Gebruik uw Pix-account"
+      }
+    },
     "organization-learner": {
       "activity": {
         "assessment-summary": "Samenvatting van deelname aan beoordelingscampagnes",

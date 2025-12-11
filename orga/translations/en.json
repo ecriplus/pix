@@ -1402,6 +1402,12 @@
       },
       "title": "Missions"
     },
+    "oidc": {
+      "login": {
+        "sub-title": "to link it to your new access method",
+        "title": "Use your Pix account"
+      }
+    },
     "organization-learner": {
       "activity": {
         "assessment-summary": "Customised tests participations summary",

@@ -1390,6 +1390,12 @@
       },
       "title": "Missions"
     },
+    "oidc": {
+      "login": {
+        "sub-title": "pour le lier à votre nouvelle méthode de connexion",
+        "title": "Utilisez votre compte Pix"
+      }
+    },
     "organization-learner": {
       "activity": {
         "assessment-summary": "Récapitulatif des participations aux campagnes d'évaluation",
