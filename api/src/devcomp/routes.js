@@ -1,4 +1,5 @@
 import * as campaignParticipationRoute from './application/campaign-participations/campaign-participation-route.js';
+import * as moduleIssueReport from './application/module-issue-report/module-issue-report-route.js';
 import * as modulesRoutes from './application/modules/module-route.js';
 import * as passageEvents from './application/passage-events/passage-event-route.js';
 import * as passages from './application/passages/passage-route.js';
@@ -9,6 +10,7 @@ import * as userTutorials from './application/user-tutorials/user-tutorials-rout
 
 const devcompRoutes = [
   campaignParticipationRoute,
+  moduleIssueReport,
   modulesRoutes,
   passages,
   passageEvents,
