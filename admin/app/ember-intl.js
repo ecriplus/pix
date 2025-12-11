@@ -1,5 +1,5 @@
-export default {
-  date: {
+export const formats = {
+  formatDate: {
     // DD/MM/YYYY HH:mm
     medium: {
       year: 'numeric',

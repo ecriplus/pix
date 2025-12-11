@@ -1,15 +1,13 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { setupIntl } from 'ember-intl/test-support';
-import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/organizations/invitations';
+import setupIntlRenderingTest from 'pix-admin/tests/helpers/setup-intl-rendering';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Integration | Component | organization-invitations', function (hooks) {
-  setupRenderingTest(hooks);
-  setupIntl(hooks, 'fr');
+  setupIntlRenderingTest(hooks);
 
   module('when the admin member have access to organization scope', function (hooks) {
     hooks.beforeEach(function () {

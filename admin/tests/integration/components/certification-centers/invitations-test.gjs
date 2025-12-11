@@ -1,14 +1,12 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { setupIntl } from 'ember-intl/test-support';
 import { t } from 'ember-intl/test-support';
-import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/certification-centers/invitations';
+import setupIntlRenderingTest from 'pix-admin/tests/helpers/setup-intl-rendering';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Integration | Component | Certification Centers | Invitations', function (hooks) {
-  setupRenderingTest(hooks);
-  setupIntl(hooks, 'fr');
+  setupIntlRenderingTest(hooks);
 
   let intl;
 
