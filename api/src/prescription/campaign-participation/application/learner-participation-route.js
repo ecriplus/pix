@@ -51,24 +51,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'PATCH',
-      path: '/api/campaign-participations/{campaignParticipationId}/begin-improvement',
-      config: {
-        validate: {
-          params: Joi.object({
-            campaignParticipationId: identifiersType.campaignParticipationId,
-          }),
-        },
-        handler: learnerParticipationController.beginImprovement,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Elle permet de progresser à la fin d'une participation à une campagne" +
-            "- Le contenu de la requête n'est pas pris en compte.",
-        ],
-        tags: ['api', 'campaign-participation'],
-      },
-    },
-    {
       method: 'GET',
       path: '/api/users/{userId}/campaigns/{campaignId}/profile',
       config: {

@@ -186,33 +186,6 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
     });
   });
 
-  describe('#beginImprovement', function () {
-    it('should call the usecase to begin improvement', async function () {
-      // given
-      const campaignParticipationId = 1;
-      const userId = 2;
-      const request = {
-        params: { campaignParticipationId },
-        auth: { credentials: { userId } },
-      };
-
-      sinon.stub(usecases, 'beginCampaignParticipationImprovement');
-      sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => {
-        return lambda();
-      });
-      usecases.beginCampaignParticipationImprovement.resolves();
-
-      // when
-      await learnerParticipationController.beginImprovement(request);
-
-      // then
-      expect(usecases.beginCampaignParticipationImprovement).to.have.been.calledOnceWith({
-        campaignParticipationId,
-        userId,
-      });
-    });
-  });
-
   describe('#getSharedCampaignParticipationProfile', function () {
     let campaignId, dependencies, locale, request, sharedProfileForCampaignSerializerStub, userId;
 
