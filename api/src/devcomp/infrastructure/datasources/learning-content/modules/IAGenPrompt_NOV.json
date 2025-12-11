@@ -44,7 +44,7 @@
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
-                      "content": "🤖 Tu devrais essayer avec un logiciel d’IA générative ! Elle peut te donner les différentes étapes à suivre. 💡"
+                      "content": "Tu devrais essayer avec un logiciel d’IA générative ! Il peut te donner les différentes étapes à suivre. 🤖"
                     },
                     {
                       "userName": "Agnès",
@@ -54,7 +54,7 @@
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
-                      "content": "C’est super simple ! 😄 Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
+                      "content": "C’est super simple ! Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
                     }
                   ]
                 }
@@ -97,38 +97,38 @@
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/modules/mon-premier-prompt/llm.webp",
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yoga-llm.jpg",
                     "alt": "IA générative ChatPIX",
-                    "width": 1169,
-                    "height": 656
+                    "width": 2081,
+                    "height": 1365
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 583,
-                        "y1": 7,
-                        "x2": 1162,
-                        "y2": 88
+                        "x1": 830,
+                        "y1": 20,
+                        "x2": 2048,
+                        "y2": 194
                       },
                       "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 11,
-                        "y1": 89,
-                        "x2": 881,
-                        "y2": 376
+                        "x1": 48,
+                        "y1": 212,
+                        "x2": 1744,
+                        "y2": 698
                       },
-                      "info": "Ce texte c’est la réponse apportée par le logiciel d’IA générative.",
+                      "info": "Ce texte est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 8,
-                        "y1": 536,
-                        "x2": 1154,
-                        "y2": 636
+                        "x1": 66,
+                        "y1": 1144,
+                        "x2": 2056,
+                        "y2": 1358
                       },
                       "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
                       "tooltipPosition": "bottom"
@@ -148,21 +148,21 @@
                     "id": "1",
                     "content": "<p>Je veux créer une association de yoga. Par où commencer ?</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, le prompt, c’est la question posée ou la consigne donnée au logiciel d’IA générative.</p>"
+                      "diagnosis": "<p>En effet, <strong>le prompt</strong>, c’est la <strong>question posée</strong> ou la <strong>consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: quel style de yoga ? pour qui ? où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une asso.</li><li>Écrivez les règles de l’association&nbsp;: comment elle fonctionne, qui décide quoi.</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta pub et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
+                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: Quel style de yoga ? Pour qui ? Où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une association.</li><li>Écris les règles de l’association&nbsp;: Comment elle fonctionne ? Qui décide quoi ?</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta publicité et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Pose une question.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est <strong>la question posée</strong> ou la<strong> consigne </strong>donnée au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   }
                 ],
@@ -225,21 +225,21 @@
                   "messages": [
                     {
                       "direction": "inbound",
-                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je t'aider aujourd’hui ?"
                     }
                   ],
                   "prompts": [
                     {
                       "prompt": "Pont",
-                      "response": "<p>Le mot <strong>pont</strong> peut avoir plusieurs sens selon ce que tu veux dire. Voici les plus courants :</p><p>1. <strong>Sens physiques / concrets</strong></p><ul><li><strong>Construction qui permet de traverser</strong> une rivière, une route, une vallée.</li><li><strong>Partie d’un navire :</strong> le pont d’un bateau.</li><li><strong>Partie d’un instrument de musique</strong> (violon, guitare…).</li><li><strong>En anatomie</strong> : un pont entre deux parties (ex : pont nasal).</li></ul><p>2. <strong>Sens figurés / expressions</strong></p><ul><li><strong>Prendre un jour de congé entre un jour férié et le week-end.</strong></li><li><strong>Établir un contact, une passerelle.</strong></li></ul>"
+                      "response": "<p>Le mot <strong>pont</strong> peut avoir plusieurs sens selon ce que tu veux dire. Voici les plus courants :</p><p>1. <strong>Sens physiques / concrets</strong></p><ul><li><strong>Construction qui permet de traverser</strong> une rivière, une route, une vallée.</li><li><strong>Partie d’un navire :</strong> le pont d’un bateau.</li><li><strong>Partie d’un instrument de musique</strong> (violon, guitare…).</li><li><strong>En anatomie</strong> : un pont entre deux parties (ex : pont nasal).</li></ul><p>2. <strong>Sens figurés / expressions</strong></p><ul><li>Prendre un jour de congé entre un jour férié et le week-end.</li><li>Établir un contact, une passerelle.</li></ul>"
                     },
                     {
                       "prompt": "Faire le pont",
                       "response": "<p><strong>“Faire le pont”</strong> est une expression française qui signifie <strong>profiter d’un jour férié</strong> qui tombe un mardi ou un jeudi <strong>pour faire un long week-end</strong>, en prenant le lundi ou le vendredi comme jour de congé.</p><p>C’est souvent utilisé dans le contexte du <strong>travail</strong>, du <strong>calendrier scolaire </strong>ou des <strong>vacances</strong>.</p><p>Si tu veux, je peux aussi t’expliquer l’origine de l’expression.</p>"
                     },
                     {
-                      "prompt": "Explique moi comment bien faire le pont au yoga.",
-                      "response": "<p>Voici comment bien faire le pont en yoga, ou <strong>\"Urdhva Dhanurasana\"</strong>.</p><ul><li>Allonge-toi <strong>sur le dos, genoux pliés</strong>, pieds à plat et écartés largeur de bassin.</li><li> Pose les mains <strong>près des oreilles</strong>, doigts pointés vers les épaules.</li><li> Pousse d’abord <strong>dans les pieds</strong> → soulève le bassin.</li><li> Ensuite pousse <strong>dans les mains</strong> → décolle la tête et ouvre la poitrine.</li><li> Cherche la <strong>longueur</strong>, pas la hauteur : bras et jambes actifs.</li></ul><p><strong>À éviter</strong></p><ul><li>Monter d’un coup (risque pours les poignets et lombaires).</li><li>Laisser les coudes ou genoux s’écarter.</li><li>Lancer la tête en arrière</li></ul><p>Si tu veux, je peux te donner des <strong>astuces</strong> pour progresser selon ton niveau.</p>"
+                      "prompt": "Explique-moi comment bien faire le pont au yoga.",
+                      "response": "<p>Voici comment bien faire le pont en yoga, ou <strong>\"Urdhva Dhanurasana\"</strong>.</p><ul><li>Allonge-toi <strong>sur le dos, genoux pliés</strong>, pieds à plat et écartés à la largeur du bassin.</li><li> Pose les mains <strong>près des oreilles</strong>, doigts pointés vers les épaules.</li><li> Pousse d’abord <strong>dans les pieds</strong> → soulève le bassin.</li><li> Ensuite pousse <strong>dans les mains</strong> → décolle la tête et ouvre la poitrine.</li><li> Cherche la <strong>longueur</strong>, pas la hauteur : bras et jambes actifs.</li></ul><p><strong>À éviter</strong></p><ul><li>Monter d’un coup (risque pour les poignets et lombaires).</li><li>Laisser les coudes ou genoux s’écarter.</li><li>Lancer la tête en arrière</li></ul><p>Si tu veux, je peux te donner des <strong>astuces</strong> pour progresser selon ton niveau.</p>"
                     }
                   ]
                 }
@@ -289,7 +289,7 @@
               "element": {
                 "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
                 "type": "text",
-                "content": "<p>En revanche, pour que le logiciel d’IA générative réponde vraiment à ce que vous voulez, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’action</strong> comme : «lister», «traduire», «résumer», etc.</p>"
+                "content": "<p>En revanche, pour que le logiciel d’IA générative réponde vraiment à ce que vous voulez, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’action</strong> comme : « lister », « traduire », « résumer », etc.</p>"
               }
             }
           ]
@@ -319,7 +319,7 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
-                "content": "<p>Cette fois-ci, Agnès reçoit pour le week-end des amis végétariens.</p><p>Elle aimerait les épater avec ses&nbsp;repas mais elle ne sait pas quoi cuisiner.</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d’IA générative.</p>"
+                "content": "<p>Cette fois-ci, Agnès organise un week-end yoga.</p><p> Elle veut épater les participants avec des plats végétariens mais elle ne sait pas quoi cuisiner.</p><p>Cliquez sur chaque prompt et observez la réponse du logiciel d’IA générative.</p>"
               }
             },
             {
@@ -346,7 +346,7 @@
                       "response": "<p> <strong>Samedi </strong> </p><p>🥪 Déjeuner : Sandwich houmous, crudités (carottes, concombre, salade) + fruit  </p><p>🍝 Dîner : Pâtes complètes + sauce tomate aux herbes + parmesan ou levure maltée</p>  <p><strong>Dimanche </strong></p> <p>🥗 Déjeuner : Salade composée (lentilles en boîte, feta, tomates, maïs, vinaigrette citronnée)  </p><p>🌮 Déjeuner : Tacos aux haricots noirs, maïs, poivrons, guacamole et coriandre</p>"
                     },
                     {
-                      "prompt": "Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.",
+                      "prompt": "Propose un programme de repas végétariens pour le week-end pour impressionner mes hôtes.",
                       "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
                     }
                   ]
@@ -378,7 +378,7 @@
                     "id": "3",
                     "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l’objectif (impressionner ses amis).</p>"
+                      "diagnosis": "<p>Bien vu ! Ce prompt contient des <strong>éléments précis </strong>: un verbe, une contrainte (repas végétarien) et un objectif (impressionner ses hôtes).</p>"
                     }
                   }
                 ],
@@ -397,7 +397,7 @@
               "element": {
                 "id": "29fbfaf4-e1f9-4f19-9bbb-38f8a712e352",
                 "type": "text",
-                "content": "<p>📌Une autre façon d’être précis, c’est de donner au logiciel d’IA générative autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
+                "content": "<p>📌Une autre façon d’être précis est de donner au logiciel d’IA générative autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
               }
             }
           ]
@@ -439,21 +439,21 @@
                     "id": "1",
                     "content": "<p>La réponse du logiciel d’IA générative est adaptée à la demande.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La réponse du logiciel d’IA générative ne respecte pas ce qui est demandé dans le prompt ! Le crocodile n’est pas l’animal le plus adapté pour un appartement, c’est dangereux et même illégal !</p>"
+                      "diagnosis": "<p><strong>La réponse</strong> du logiciel d’IA générative <strong>ne respecte pas</strong> ce qui est demandé dans le prompt ! Le crocodile n’est pas l’animal le plus adapté pour un appartement. C’est dangereux et même illégal !</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>La réponse du logiciel d’IA générative n’est pas adaptée à la demande.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu, la réponse du logiciel d’IA générative n’est pas adaptée : adopter un crocodile n’est pas une bonne option pour quelqu’un qui habite en appartement, c’est dangereux et même illégal !</p>"
+                      "diagnosis": "<p>Bien vu ! <strong>La réponse</strong> du logiciel d’IA générative <strong>n’est pas adaptée </strong>: adopter un crocodile n’est pas une bonne option pour quelqu’un qui habite en appartement. C’est dangereux et même illégal !</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Regardez bien, la réponse du logiciel d’IA générative ne respecte pas ce qui est demandé dans le prompt : le crocodile n’est pas l’animal le plus adapté pour un appartement !</p>"
+                      "diagnosis": "<p>Regardez bien, <strong>la réponse</strong> du logiciel d’IA générative <strong>ne respecte pas</strong> ce qui est demandé dans le prompt : le crocodile n’est pas l’animal le plus adapté pour un appartement !</p>"
                     }
                   }
                 ],
@@ -472,7 +472,7 @@
               "element": {
                 "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
                 "type": "text",
-                "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, un<strong> logiciel d’IA générative </strong>peut <strong>se tromper</strong>.😓 Il faut <strong>toujours&nbsp;</strong><strong>relire et vérifier la réponse</strong>.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation avec le logiciel d’IA générative en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
+                "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, un<strong> logiciel d’IA générative </strong>peut <strong>se tromper</strong>.😓 Il faut <strong>toujours&nbsp;</strong><strong>relire et vérifier la réponse</strong>.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation avec un logiciel d’IA générative en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
               }
             }
           ]
@@ -493,7 +493,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
-                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.</li></ul>"
+                "content": "<ul><li>Un <strong>prompt </strong>(« instruction » ou « requête » en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.</li></ul>"
               }
             }
           ]
@@ -540,14 +540,14 @@
                     {
                       "id": "8ea206f3-5bb2-49b6-b35e-cee8da3fefdd",
                       "type": "qcu",
-                      "instruction": "<p>Le prompt, c’est la réponse donnée par le logiciel d’IA générative à la question ou consigne de l’utilisateur.</p>",
+                      "instruction": "<p>Le prompt est la réponse donnée par le logiciel d’IA générative à la question ou consigne de l’utilisateur.</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse</p>",
-                            "diagnosis": "<p>Le prompt, ce n’est pas la réponse que donne un logiciel d’IA générative ! C’est la demande que l’utilisateur fait au logiciel d’IA générative sous forme de question ou de consigne.</p>"
+                            "diagnosis": "<p>Le prompt n’est pas la réponse que donne un logiciel d’IA générative ! C’est la demande que l’utilisateur fait au logiciel d’IA générative sous forme de question ou de consigne.</p>"
                           }
                         },
                         {
@@ -624,14 +624,14 @@
                     {
                       "id": "21e81315-16db-4b75-ba3a-65fa73d247dd",
                       "type": "qcu",
-                      "instruction": "<p>On peut faire une confiance aveugle aux réponses d’un logiciel d’IA.</p>",
+                      "instruction": "<p>On peut avoir entièrement confiance dans les réponses d’un logiciel d’IA.</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse</p>",
-                            "diagnosis": "<p>Il faut toujours relire la réponse du logiciel d’IA générative en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d’IA générative !</p>"
+                            "diagnosis": "<p>Il faut toujours relire la réponse d’un logiciel d’IA générative en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d’IA générative !</p>"
                           }
                         },
                         {
@@ -661,7 +661,7 @@
               "element": {
                 "id": "79e24dbc-b512-479b-913d-5df858490409",
                 "type": "qab",
-                "instruction": "<p>Classez chaque prompt ci-dessous selon sa précision dans une des catégories suivantes : «clair et précis» ou «flou et vague».</p>",
+                "instruction": "<p>Classez chaque prompt selon sa précision dans une des catégories suivantes : « clair et précis » ou « flou et vague ».</p>",
                 "cards": [
                   {
                     "id": "5ff6c7e9-b9c5-4b49-a6f9-b381075c2163",
@@ -698,7 +698,7 @@
                   },
                   {
                     "id": "ad6bccf7-ce67-47ff-a60a-dd9938d61715",
-                    "text": "Donne-moi une recette rapide et végétarienne à base de carottes et pois chiches. 🍲",
+                    "text": "Donne-moi une recette rapide et simple à base de carottes et pois chiches. 🍲",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -709,7 +709,7 @@
                   },
                   {
                     "id": "1abb2292-e98c-4181-8d00-4e4f5e2f5f89",
-                    "text": "Propose trois idées d’activités d’arts plastiques pour un atelier enfants (6–8 ans). 🧒",
+                    "text": "Propose trois idées d’activités d’arts plastiques pour un atelier enfants (6 à 8 ans). 🧒",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -720,7 +720,7 @@
                   },
                   {
                     "id": "03ab1311-5107-4ece-83b9-6146c92efad3",
-                    "text": "Comment réussir dans la vie pour être heureux ? 🏆",
+                    "text": "Comment réussir dans la vie pour à être heureux ? 🏆",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -753,7 +753,7 @@
               "element": {
                 "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
                 "type": "text",
-                "content": "<p>Vous avez appris à parler à un logiciel d’IA générative.👏 Maintenant, place à la pratique : voyons si vous pouvez obtenir la réponse voulue !</p>"
+                "content": "<p>Vous avez appris à parler avec un logiciel d’IA générative.👏 Maintenant, place à la pratique : voyons si vous pouvez obtenir la réponse souhaitée !</p>"
               }
             }
           ]
@@ -770,8 +770,8 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
-                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée un poème sur votre animal préféré.<br><br></p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiofcg0r00003v01q7icsut0",
+                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette de quiche végétarienne avec votre légume préféré.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
