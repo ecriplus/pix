@@ -771,7 +771,7 @@
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiofcg0r00003v01q7icsut0",
-                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette de quiche végétarienne avec votre légume préféré.<br><br></p>",
+                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette de quiche végétarienne avec votre légume préféré.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
