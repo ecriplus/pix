@@ -118,7 +118,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     });
   });
 
-  describe('PATCH /api/certification-candidates/{certificationCandidateId}/end-assessment-by-supervisor', function () {
+  describe('PATCH /api/certification-candidates/{certificationCandidateId}/end-assessment-by-invigilator', function () {
     context('when user is authenticated', function () {
       context('when the user is the invigilator of the session', function () {
         it('should return a 204 status code', async function () {
@@ -163,7 +163,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           await databaseBuilder.commit();
           const options = {
             method: 'PATCH',
-            url: `/api/certification-candidates/1001/end-assessment-by-supervisor`,
+            url: `/api/certification-candidates/1001/end-assessment-by-invigilator`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: invigilatorUserId, source: 'pix-certif' }),
           };
 

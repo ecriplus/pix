@@ -16,8 +16,8 @@ export default class CandidateList extends Component {
   }
 
   @action
-  async endAssessmentBySupervisor(candidate) {
-    await this.args.endAssessmentBySupervisor(candidate);
+  async endAssessmentByInvigilator(candidate) {
+    await this.args.endAssessmentByInvigilator(candidate);
   }
 
   @action
