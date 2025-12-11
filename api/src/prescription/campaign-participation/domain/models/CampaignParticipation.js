@@ -3,7 +3,6 @@ import _ from 'lodash';
 import {
   AlreadySharedCampaignParticipationError,
   AssessmentNotCompletedError,
-  CantImproveCampaignParticipationError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ArchivedCampaignError } from '../../../campaign/domain/errors.js';
 import { CampaignParticipationLoggerContext, CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
@@ -94,11 +93,6 @@ class CampaignParticipation {
     this.status = CampaignParticipationStatuses.SHARED;
   }
 
-  improve() {
-    this._canBeImproved();
-    this.status = CampaignParticipationStatuses.STARTED;
-  }
-
   detachUser() {
     this.userId = null;
   }
@@ -118,16 +112,6 @@ class CampaignParticipation {
     this.deletedBy = userId;
 
     this.#loggerContext = CampaignParticipationLoggerContext.DELETION;
-  }
-
-  _canBeImproved() {
-    if (this.status !== CampaignParticipationStatuses.TO_SHARE) {
-      throw new CampaignParticipationInvalidStatus(this.id, CampaignParticipationStatuses.TO_SHARE);
-    }
-
-    if (this.campaign.isProfilesCollection) {
-      throw new CantImproveCampaignParticipationError();
-    }
   }
 
   _canBeShared() {

@@ -227,12 +227,6 @@ class Assessment {
     });
   }
 
-  static createImprovingForCampaign({ userId, campaignParticipationId, method, campaign }) {
-    const assessment = this.createForCampaign({ userId, campaignParticipationId, method, campaign });
-    assessment.isImproving = true;
-    return assessment;
-  }
-
   static createForCompetenceEvaluation({ userId, competenceId }) {
     return new Assessment({
       userId,

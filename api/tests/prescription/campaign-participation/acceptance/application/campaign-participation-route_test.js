@@ -640,7 +640,6 @@ describe('Acceptance | API | Campaign Participations', function () {
             'is-shared': true,
             'can-retry': false,
             'can-reset': false,
-            'can-improve': false,
             'is-disabled': false,
             'participant-external-id': 'participantExternalId',
             'remaining-seconds-before-retrying': 3600 * 24 * 3,

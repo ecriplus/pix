@@ -9,7 +9,6 @@ export default class CampaignParticipationResult extends Model {
   @attr('boolean') canRetry;
   @attr('number') remainingSecondsBeforeRetrying;
   @attr('boolean') canReset;
-  @attr('boolean') canImprove;
   @attr('boolean') isDisabled;
   @attr('boolean') isShared;
   @attr('string') participantExternalId;

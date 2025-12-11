@@ -2024,7 +2024,6 @@
       "actions": {
         "back-to-pix": "Vertrekken en terugkeren naar Pix",
         "continue": "Zet je Pix-ervaring voort",
-        "improve": "Ik zal het nog eens proberen",
         "send": "Ik stuur mijn resultaten"
       },
       "already-shared": "Bedankt, je resultaten zijn verzonden!",
@@ -2051,7 +2050,6 @@
       "hero": {
         "acquired-badges-title": "Gewonnen prijzen",
         "explanations": {
-          "improve": "Als je je score wilt verbeteren, kun je bepaalde vragen opnieuw proberen.",
           "send-results": "Stuur je resultaten naar de cursusorganisator en ga verder met de aanbevolen cursussen.",
           "trainings": "Om je verder te helpen, kun je onze aanbevolen opleidingen bekijken en de opleidingen vinden die het beste bij je passen."
         },

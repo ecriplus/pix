@@ -2041,7 +2041,6 @@
       "actions": {
         "back-to-pix": "Quitter et revenir sur Pix",
         "continue": "Continuez votre expérience Pix",
-        "improve": "Je retente",
         "send": "J'envoie mes résultats"
       },
       "already-shared": "Merci, vos résultats ont bien été envoyés !",
@@ -2068,7 +2067,6 @@
       "hero": {
         "acquired-badges-title": "Récompenses obtenues",
         "explanations": {
-          "improve": "Si vous voulez améliorer votre score, vous pouvez retenter certaines questions.",
           "send-results": "Envoyez vos résultats à l’organisateur du parcours et continuez à progresser avec les formations recommandées.",
           "trainings": "Pour progresser, découvrez nos recommandations de formations et trouvez celles qui vous conviennent le mieux."
         },

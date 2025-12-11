@@ -47,19 +47,6 @@ const shareCampaignResult = async function (request, _, dependencies = { profile
   });
 };
 
-const beginImprovement = async function (request) {
-  const userId = request.auth.credentials.userId;
-  const campaignParticipationId = request.params.campaignParticipationId;
-
-  return DomainTransaction.execute(async () => {
-    await usecases.beginCampaignParticipationImprovement({
-      campaignParticipationId,
-      userId,
-    });
-    return null;
-  });
-};
-
 const getSharedCampaignParticipationProfile = async function (
   request,
   h,
@@ -83,7 +70,6 @@ const getSharedCampaignParticipationProfile = async function (
 const learnerParticipationController = {
   save,
   shareCampaignResult,
-  beginImprovement,
   getSharedCampaignParticipationProfile,
 };
 

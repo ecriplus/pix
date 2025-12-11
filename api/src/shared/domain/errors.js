@@ -59,12 +59,6 @@ class CancelledInvitationError extends DomainError {
   }
 }
 
-class CantImproveCampaignParticipationError extends DomainError {
-  constructor(message = 'Une campagne de collecte de profils ne peut pas être retentée.') {
-    super(message);
-  }
-}
-
 class CampaignCodeError extends DomainError {
   constructor(message = "Le code campagne n'existe pas.") {
     super(message);
@@ -1039,7 +1033,6 @@ export {
   CandidateAlreadyLinkedToUserError,
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
-  CantImproveCampaignParticipationError,
   CertificateVerificationCodeGenerationTooManyTrials,
   CertificationAlgorithmVersionError,
   CertificationBadgeForbiddenDeletionError,

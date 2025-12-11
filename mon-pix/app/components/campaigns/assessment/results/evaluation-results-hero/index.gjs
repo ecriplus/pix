@@ -88,33 +88,6 @@ export default class EvaluationResultsHero extends Component {
   }
 
   @action
-  async handleImproveResults() {
-    if (this.isButtonLoading) return;
-
-    try {
-      this.hasGlobalError = false;
-      this.isButtonLoading = true;
-
-      const campaignParticipationResult = this.args.campaignParticipationResult;
-
-      const adapter = this.store.adapterFor('campaign-participation-result');
-      await adapter.beginImprovement(campaignParticipationResult.id);
-
-      this.pixMetrics.trackEvent("Clic sur le bouton 'Je retente'", {
-        disabled: true,
-        category: 'Fin de parcours',
-        action: 'Amélioration des résultats',
-      });
-
-      this.router.transitionTo('campaigns.entry-point', this.args.campaign.code);
-    } catch {
-      this.hasGlobalError = true;
-    } finally {
-      this.isButtonLoading = false;
-    }
-  }
-
-  @action
   async handleShareResultsClick() {
     if (this.isButtonLoading) return;
 
@@ -236,11 +209,6 @@ export default class EvaluationResultsHero extends Component {
               {{t "pages.skill-review.hero.explanations.send-results"}}
             </p>
           {{/if}}
-          {{#if @campaignParticipationResult.canImprove}}
-            <p class="evaluation-results-hero-details__explanations">
-              {{t "pages.skill-review.hero.explanations.improve"}}
-            </p>
-          {{/if}}
         {{/if}}
 
         <div class="evaluation-results-hero-details__actions">
@@ -278,16 +246,6 @@ export default class EvaluationResultsHero extends Component {
                   {{t "pages.skill-review.actions.send"}}
                 </PixButton>
               {{/if}}
-            {{/if}}
-            {{#if @campaignParticipationResult.canImprove}}
-              <PixButton
-                @variant="tertiary"
-                @size="large"
-                @triggerAction={{this.handleImproveResults}}
-                @isLoading={{this.isButtonLoading}}
-              >
-                {{t "pages.skill-review.actions.improve"}}
-              </PixButton>
             {{/if}}
           {{else}}
             {{#unless @campaign.hasCustomResultPageButton}}

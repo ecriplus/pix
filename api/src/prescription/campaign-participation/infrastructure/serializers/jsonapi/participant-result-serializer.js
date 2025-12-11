@@ -18,7 +18,6 @@ const serialize = function (results) {
       'reachedStage',
       'canRetry',
       'canReset',
-      'canImprove',
       'isDisabled',
       'sharedAt',
       'remainingSecondsBeforeRetrying',

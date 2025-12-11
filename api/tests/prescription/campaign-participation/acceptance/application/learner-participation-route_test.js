@@ -18,7 +18,7 @@ import {
 } from '../../../../test-helper.js';
 import { buildLearningContent } from '../../../../tooling/learning-content-builder/build-learning-content.js';
 
-const { SHARED, STARTED, TO_SHARE } = CampaignParticipationStatuses;
+const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
 
 describe('Acceptance | Routes | Campaign Participations', function () {
   let server, options, user;
@@ -125,6 +125,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
     };
 
     beforeEach(async function () {
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ userId: user.id });
       options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       const targetProfileId = databaseBuilder.factory.buildTargetProfile({ areKnowledgeElementsResettable: true }).id;
       databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'tubeId1', targetProfileId });
@@ -153,18 +154,21 @@ describe('Acceptance | Routes | Campaign Participations', function () {
 
       campaignId = databaseBuilder.factory.buildCampaign({
         targetProfileId,
+        organizationId: organizationLearner.organizationId,
         type: 'ASSESSMENT',
         multipleSendings: false,
       }).id;
 
       multipleSendingsCampaignId = databaseBuilder.factory.buildCampaign({
         targetProfileId,
+        organizationId: organizationLearner.organizationId,
         type: 'ASSESSMENT',
         multipleSendings: true,
       }).id;
 
       databaseBuilder.factory.buildCampaignParticipation({
         userId: user.id,
+        organizationLeaner: organizationLearner.id,
         campaignId: multipleSendingsCampaignId,
         status: CampaignParticipationStatuses.SHARED,
       });
@@ -267,108 +271,6 @@ describe('Acceptance | Routes | Campaign Participations', function () {
 
       // then
       expect(response.statusCode).to.equal(412);
-    });
-  });
-
-  describe('PATCH /api/campaign-participations/{campaignParticipationId}/begin-improvement', function () {
-    it('should return 401 HTTP status code when user is not connected', async function () {
-      // given
-      options = {
-        method: 'PATCH',
-        url: '/api/campaign-participations/123/begin-improvement',
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(401);
-    });
-
-    it('should return 204 HTTP status code', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-        userId,
-        status: TO_SHARE,
-      }).id;
-      databaseBuilder.factory.buildAssessment({
-        userId,
-        campaignParticipationId,
-        isImproving: false,
-        state: Assessment.states.COMPLETED,
-        type: 'CAMPAIGN',
-      });
-      await databaseBuilder.commit();
-      options = {
-        method: 'PATCH',
-        url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(204);
-    });
-
-    it('should return 412 HTTP status code when user has already shared his results', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-        userId,
-        status: SHARED,
-        sharedAt: new Date(),
-      }).id;
-      databaseBuilder.factory.buildAssessment({
-        userId,
-        campaignParticipationId,
-        isImproving: false,
-        state: Assessment.states.COMPLETED,
-        type: 'CAMPAIGN',
-      });
-      await databaseBuilder.commit();
-      options = {
-        method: 'PATCH',
-        url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(412);
-    });
-
-    it('should return 403 HTTP status code when user is not the owner of the participation', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const anotherUserId = databaseBuilder.factory.buildUser().id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-        userId: anotherUserId,
-        status: STARTED,
-      }).id;
-      databaseBuilder.factory.buildAssessment({
-        userId,
-        campaignParticipationId,
-        isImproving: false,
-        state: Assessment.states.COMPLETED,
-        type: 'CAMPAIGN',
-      });
-      await databaseBuilder.commit();
-      options = {
-        method: 'PATCH',
-        url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(403);
     });
   });
 
