@@ -1,4 +1,4 @@
-import { deserializer } from '../../../../../../src/evaluation/infrastructure/serializers/jsonapi/badge-creation-serializer.js';
+import { badgeCreationDeserializer } from '../../../../../../src/evaluation/infrastructure/serializers/jsonapi/badge-creation-serializer.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | badge-creation-serializer', function () {
@@ -11,7 +11,7 @@ describe('Unit | Serializer | JSONAPI | badge-creation-serializer', function () 
           attributes: {
             key: 'BADGE_KEY',
             'alt-message': 'alt-message',
-            'image-url': 'https://assets.pix.org/badges/badge_url.svg',
+            'image-url': '    https://assets.pix.org/badges/badge_url.svg   ',
             message: 'message',
             title: 'title',
             'is-certifiable': false,
@@ -22,7 +22,7 @@ describe('Unit | Serializer | JSONAPI | badge-creation-serializer', function () 
       };
 
       // when
-      const badgeCreation = await deserializer.deserialize(jsonBadge);
+      const badgeCreation = await badgeCreationDeserializer.deserialize(jsonBadge);
 
       // then
       const expectedBadgeCreation = {
