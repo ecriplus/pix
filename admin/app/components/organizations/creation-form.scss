@@ -1,0 +1,38 @@
+@use 'pix-design-tokens/typography';
+
+.organization-creation-form {
+  &__card {
+    .card__content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--pix-spacing-6x);
+      row-gap: var(--pix-spacing-6x);
+    }
+
+    .card__content > * + * {
+      margin-top: 0px;
+    }
+
+    .pix-select {
+      width: 100%;
+    }
+
+    .pix-input__input {
+      height: 42px;
+    }
+  }
+
+  &__input {
+    &--full {
+      grid-column: 1 / span 2;
+
+      .pix-input {
+        width: 100%;
+      }
+    }
+  }
+
+  &__parent-name--full {
+    grid-column: 1 / span 2;
+  }
+}
