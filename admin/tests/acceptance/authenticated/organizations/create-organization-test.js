@@ -130,8 +130,6 @@ module('Acceptance | Organizations | Create', function (hooks) {
       await screen.findByRole('listbox');
       await click(screen.getByText('France (99100)'));
 
-      await fillByLabel('Crédits', 120);
-
       await fillByLabel('Prénom du DPO', 'Justin');
       await fillByLabel('Nom du DPO', 'Ptipeu');
       await fillByLabel('Adresse e-mail du DPO', 'justin.ptipeu@example.net');
