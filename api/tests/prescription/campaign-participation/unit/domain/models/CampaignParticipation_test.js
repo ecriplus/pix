@@ -12,12 +12,11 @@ import {
 import {
   AlreadySharedCampaignParticipationError,
   AssessmentNotCompletedError,
-  CantImproveCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Models | CampaignParticipation', function () {
   describe('delete', function () {
@@ -105,41 +104,6 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
         ],
       });
       expect(campaignParticipation.lastAssessment).to.deep.equal({ createdAt: new Date('2010-10-06') });
-    });
-  });
-
-  describe('improve', function () {
-    context('when the campaign has the type PROFILES_COLLECTION', function () {
-      it('throws an CantImproveCampaignParticipationError', async function () {
-        const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
-        const campaignParticipation = new CampaignParticipation({ campaign, status: TO_SHARE });
-
-        const error = catchErrSync(campaignParticipation.improve, campaignParticipation)();
-
-        expect(error).to.be.an.instanceOf(CantImproveCampaignParticipationError);
-      });
-    });
-
-    context('when the campaign participation status is STARTED', function () {
-      it('throws an CampaignParticipationInvalidStatus', async function () {
-        const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-        const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
-
-        const error = catchErrSync(campaignParticipation.improve, campaignParticipation)();
-
-        expect(error).to.be.an.instanceOf(CampaignParticipationInvalidStatus);
-      });
-    });
-
-    context('when the campaign participation status is TO_SHARE', function () {
-      it('changes the status to STARTED', async function () {
-        const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-        const campaignParticipation = new CampaignParticipation({ campaign, status: TO_SHARE });
-
-        campaignParticipation.improve();
-
-        expect(campaignParticipation.status).to.equal('STARTED');
-      });
     });
   });
 
