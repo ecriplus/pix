@@ -1,4 +1,4 @@
-import * as serializer from '../../../../../../src/evaluation/infrastructure/serializers/jsonapi/badge-serializer.js';
+import { badgeSerializer } from '../../../../../../src/evaluation/infrastructure/serializers/jsonapi/badge-serializer.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
@@ -34,7 +34,7 @@ describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
       };
 
       // when
-      const json = serializer.serialize(badge);
+      const json = badgeSerializer.serialize(badge);
 
       // then
       expect(json).to.deep.equal(expectedSerializedBadge);
@@ -71,7 +71,7 @@ describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
       };
 
       // when
-      const json = serializer.serialize(badge);
+      const json = badgeSerializer.serialize(badge);
 
       // then
       expect(json).to.deep.equal(expectedSerializedBadge);
@@ -108,7 +108,7 @@ describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
       };
 
       // when
-      const json = serializer.serialize(badge);
+      const json = badgeSerializer.serialize(badge);
 
       // then
       expect(json).to.deep.equal(expectedSerializedBadge);
@@ -124,7 +124,7 @@ describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
           attributes: {
             key: 'BADGE_KEY',
             'alt-message': 'alt-message',
-            'image-url': 'https://example.net/image.svg',
+            'image-url': '    https://example.net/image.svg ',
             message: 'message',
             title: 'title',
             'is-certifiable': false,
@@ -135,7 +135,7 @@ describe('Unit | Serializer | JSONAPI | badge-serializer', function () {
       };
 
       // when
-      const badge = await serializer.deserialize(jsonBadge);
+      const badge = await badgeSerializer.deserialize(jsonBadge);
 
       // then
       const expectedBadge = {

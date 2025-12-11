@@ -1,6 +1,7 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
+const { Deserializer } = jsonapiSerializer;
 
 const serialize = function (badge = {}) {
   return new Serializer('badge', {
@@ -9,16 +10,23 @@ const serialize = function (badge = {}) {
   }).serialize(badge);
 };
 
-const deserialize = function (json) {
-  return {
-    key: json.data.attributes['key'],
-    altMessage: json.data.attributes['alt-message'],
-    message: json.data.attributes['message'],
-    title: json.data.attributes['title'],
-    isCertifiable: json.data.attributes['is-certifiable'],
-    isAlwaysVisible: json.data.attributes['is-always-visible'],
-    imageUrl: json.data.attributes['image-url'],
-  };
+const deserialize = function (payload) {
+  return new Deserializer({
+    keyForAttribute: 'camelCase',
+  })
+    .deserialize(payload)
+    .then((record) => {
+      return {
+        key: record.key,
+        altMessage: record.altMessage,
+        message: record.message,
+        title: record.title,
+        isCertifiable: record.isCertifiable,
+        isAlwaysVisible: record.isAlwaysVisible,
+        imageUrl: record.imageUrl.trim(),
+      };
+    });
 };
 
-export { deserialize, serialize };
+const badgeSerializer = { deserialize, serialize };
+export { badgeSerializer };
