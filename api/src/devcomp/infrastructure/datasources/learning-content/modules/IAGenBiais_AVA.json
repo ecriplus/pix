@@ -367,7 +367,7 @@
               "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom",
-                "instruction": "<p>Fabrice est malade et ne peut pas travailler aujourd’hui, il demande à l’IA de lui écrire un mail pour ses collègues.<br></p>",
+                "instruction": "<p>Fabrice est malade et ne peut pas travailler aujourd’hui, il demande à l’IA de lui écrire un mail pour ses collègues.</p>",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
