@@ -120,7 +120,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
       const expectedSerializedCampaignParticipationResult = {
         data: {
           attributes: {
-            'can-improve': false,
             'can-reset': false,
             'can-retry': true,
             'remaining-seconds-before-retrying': 3600 * 24 * 1,
