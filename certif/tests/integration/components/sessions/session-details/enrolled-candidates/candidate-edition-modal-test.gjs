@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import CandidateEditionModal from 'pix-certif/components/sessions/session-details/enrolled-candidates/candidate-edition-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -54,6 +55,45 @@ module(
         .exists();
       assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
       assert.dom(screen.getByRole('button', { name: 'Modifier' })).exists();
+    });
+
+    test('should track event when candidate accessibility adjustment is needed on form submit', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const trackEventStub = sinon.stub();
+      class MetricsStubService extends Service {
+        trackEvent = trackEventStub;
+      }
+      this.owner.register('service:pix-metrics', MetricsStubService);
+
+      const candidate = store.createRecord('certification-candidate', {
+        firstName: 'Jean',
+        lastName: 'De la fontaine',
+        accessibilityAdjustmentNeeded: true,
+      });
+
+      const closeModalStub = sinon.stub();
+      const updateCandidateDataFromValueStub = sinon.stub();
+      const updateCandidateStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template>
+          <CandidateEditionModal
+            @showModal={{true}}
+            @closeModal={{closeModalStub}}
+            @candidate={{candidate}}
+            @updateCandidateDataFromValue={{updateCandidateDataFromValueStub}}
+            @updateCandidate={{updateCandidateStub}}
+          />
+        </template>,
+      );
+
+      await screen.getByRole('button', { name: 'Modifier' }).click();
+
+      // then
+      assert.ok(trackEventStub.calledWith('certifCandidateAccessibilityAdjustmentNeeded'));
     });
   },
 );

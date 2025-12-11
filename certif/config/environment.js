@@ -12,6 +12,10 @@ function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue
   );
 }
 
+function _isFeatureEnabled(environmentVariable) {
+  return environmentVariable === 'true';
+}
+
 const ACTIVE_FEATURE_TOGGLES = [];
 
 module.exports = function (environment) {
@@ -109,6 +113,17 @@ module.exports = function (environment) {
     'ember-inputmask5': {
       defaults: { showMaskOnHover: false },
     },
+
+    metricsAdapters: [
+      {
+        name: 'PlausibleAdapter',
+        environments: _isFeatureEnabled(process.env.ANALYTICS_ENABLED) ? ['all'] : [],
+        config: {
+          siteId: process.env.ANALYTICS_SITE_ID,
+          scriptUrl: process.env.ANALYTICS_SCRIPT_URL,
+        },
+      },
+    ],
   };
 
   if (environment === 'test') {
