@@ -5,7 +5,6 @@ import {
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -130,7 +129,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -238,7 +237,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({
               allAnswers: [],
               challenges: [nextCalibratedChallenge, accessibleChallenge],
-              capacity: config.v3Certification.defaultCandidateCapacity,
+              capacity: version.challengesConfiguration.defaultCandidateCapacity,
               variationPercent: undefined,
             })
             .returns({ capacity: 0 });
@@ -401,7 +400,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [answerStillValid, answerWithOutdatedChallenge],
             challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -496,7 +495,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -606,7 +605,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [calibratedChallengeWithOtherSkill],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -796,7 +795,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({
                 allAnswers: [],
                 challenges: [nextCalibratedChallenge],
-                capacity: config.v3Certification.defaultCandidateCapacity,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
                 variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({ capacity: 0 });

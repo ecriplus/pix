@@ -1,6 +1,5 @@
 import { FlashAssessmentAlgorithm } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
@@ -92,7 +91,7 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
         it('should limit to one challenge', function () {
           const alreadyAnsweredChallengesCount = 10;
           const remainingAnswersToGive = 1;
-          const initialCapacity = config.v3Certification.defaultCandidateCapacity;
+          const initialCapacity = baseFlashAssessmentAlgorithmConfig.defaultCandidateCapacity;
           const computedCapacity = 2;
           const algorithm = new FlashAssessmentAlgorithm({
             flashAlgorithmImplementation,
@@ -165,7 +164,7 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
         it('should return challenges with non answered skills', function () {
           const alreadyAnsweredChallengesCount = 10;
           const remainingAnswersToGive = 1;
-          const initialCapacity = config.v3Certification.defaultCandidateCapacity;
+          const initialCapacity = baseFlashAssessmentAlgorithmConfig.defaultCandidateCapacity;
           const computedCapacity = 2;
           const algorithm = new FlashAssessmentAlgorithm({
             flashAlgorithmImplementation,

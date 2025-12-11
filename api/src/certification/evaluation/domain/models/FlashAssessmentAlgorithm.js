@@ -5,7 +5,6 @@
  * @typedef {import('../services/algorithm-methods/flash.js')} FlashAlgorithmImplementation
  */
 
-import { config } from '../../../../shared/config.js';
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from './FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
 import { FlashAssessmentAlgorithmNonAnsweredSkillsRule } from './FlashAssessmentAlgorithmNonAnsweredSkillsRule.js';
 import { FlashAssessmentAlgorithmOneQuestionPerTubeRule } from './FlashAssessmentAlgorithmOneQuestionPerTubeRule.js';
@@ -46,11 +45,7 @@ class FlashAssessmentAlgorithm {
    * @param {CalibratedChallenge[]} params.challenges
    * @param {number} [params.initialCapacity]
    */
-  getPossibleNextChallenges({
-    assessmentAnswers,
-    challenges,
-    initialCapacity = config.v3Certification.defaultCandidateCapacity,
-  }) {
+  getPossibleNextChallenges({ assessmentAnswers, challenges, initialCapacity }) {
     const maximumAssessmentLength = this._configuration.maximumAssessmentLength;
     if (assessmentAnswers?.length > maximumAssessmentLength) {
       throw new RangeError('User answered more questions than allowed');
@@ -60,10 +55,11 @@ class FlashAssessmentAlgorithm {
       return [];
     }
 
+    const currentCapacity = initialCapacity ?? this._configuration.defaultCandidateCapacity;
     const { capacity } = this.getCapacityAndErrorRate({
       allAnswers: assessmentAnswers,
       challenges,
-      initialCapacity,
+      initialCapacity: currentCapacity,
     });
 
     const challengesAfterRulesApplication = this.#applyChallengeSelectionRules(assessmentAnswers, challenges);
@@ -108,15 +104,12 @@ class FlashAssessmentAlgorithm {
    * @param {CalibratedChallenge[]} params.challenges
    * @param {number} [params.initialCapacity]
    */
-  getCapacityAndErrorRate({
-    allAnswers,
-    challenges,
-    initialCapacity = config.v3Certification.defaultCandidateCapacity,
-  }) {
+  getCapacityAndErrorRate({ allAnswers, challenges, initialCapacity }) {
+    const currentCapacity = initialCapacity ?? this._configuration.defaultCandidateCapacity;
     return this.flashAlgorithmImplementation.getCapacityAndErrorRate({
       allAnswers,
       challenges,
-      capacity: initialCapacity,
+      capacity: currentCapacity,
       variationPercent: this._configuration.variationPercent,
     });
   }
@@ -127,15 +120,12 @@ class FlashAssessmentAlgorithm {
    * @param {CalibratedChallenge[]} params.challenges
    * @param {number} [params.initialCapacity]
    */
-  getCapacityAndErrorRateHistory({
-    allAnswers,
-    challenges,
-    initialCapacity = config.v3Certification.defaultCandidateCapacity,
-  }) {
+  getCapacityAndErrorRateHistory({ allAnswers, challenges, initialCapacity }) {
+    const currentCapacity = initialCapacity ?? this._configuration.defaultCandidateCapacity;
     return this.flashAlgorithmImplementation.getCapacityAndErrorRateHistory({
       allAnswers,
       challenges,
-      capacity: initialCapacity,
+      capacity: currentCapacity,
       variationPercent: this._configuration.variationPercent,
     });
   }

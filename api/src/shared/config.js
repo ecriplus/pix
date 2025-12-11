@@ -463,7 +463,6 @@ const configuration = (function () {
     v3Certification: {
       numberOfChallengesPerCourse: 32,
       defaultProbabilityToPickChallenge: parseInt(process.env.V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE, 10) || 51,
-      defaultCandidateCapacity: -3,
       scoring: {
         minimumAnswersRequiredToValidateACertification: 20,
         maximumReachableScore: 895,
