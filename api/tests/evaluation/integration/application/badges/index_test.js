@@ -5,7 +5,7 @@ import * as badgesRouter from '../../../../../src/evaluation/application/badges/
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Badges | Routes', function () {
+describe('Integration | Application | Badges | Routes', function () {
   describe('POST /api/admin/target-profiles/{id}/badges', function () {
     const method = 'POST';
     const url = '/api/admin/target-profiles/123/badges';
@@ -143,7 +143,7 @@ describe('Unit | Application | Badges | Routes', function () {
         });
       });
 
-      context('when the imageUrl is not a valid url (allow png ang svg only)', function () {
+      context('when the imageUrl is not a valid url (allow png and svg only)', function () {
         it('should return 400', async function () {
           // given
           const httpTestServer = new HttpTestServer();
@@ -299,7 +299,7 @@ describe('Unit | Application | Badges | Routes', function () {
         });
       });
 
-      context('when the imageUrl is not a valid url (allow png ang svg only)', function () {
+      context('when the imageUrl is not a valid url (allow png and svg only)', function () {
         it('should return 400', async function () {
           // given
           validPayload.data = {
