@@ -97,38 +97,38 @@
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/modules/mon-premier-prompt/llm.webp",
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yoga-llm.jpg",
                     "alt": "IA générative ChatPIX",
-                    "width": 1169,
-                    "height": 656
+                    "width": 2081,
+                    "height": 1365
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 583,
-                        "y1": 7,
-                        "x2": 1162,
-                        "y2": 88
+                        "x1": 830,
+                        "y1": 20,
+                        "x2": 2048,
+                        "y2": 194
                       },
                       "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 11,
-                        "y1": 89,
-                        "x2": 881,
-                        "y2": 376
+                        "x1": 48,
+                        "y1": 212,
+                        "x2": 1744,
+                        "y2": 698
                       },
                       "info": "Ce texte est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 8,
-                        "y1": 536,
-                        "x2": 1154,
-                        "y2": 636
+                        "x1": 66,
+                        "y1": 1144,
+                        "x2": 2056,
+                        "y2": 1358
                       },
                       "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
                       "tooltipPosition": "bottom"
