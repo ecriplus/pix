@@ -43,6 +43,7 @@ const dependencies = {
 };
 
 import { checkUserQuest } from './check-user-quest-success.js';
+import { createCombinedCourseBlueprint } from './create-combined-course-blueprint.js';
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
 import { findCombinedCourseBlueprints } from './find-combined-course-blueprints.js';
@@ -78,6 +79,7 @@ const usecasesWithoutInjectedDependencies = {
   startCombinedCourse,
   updateCombinedCourse,
   createCombinedCourses,
+  createCombinedCourseBlueprint,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
