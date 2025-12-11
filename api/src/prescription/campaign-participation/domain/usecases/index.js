@@ -83,7 +83,6 @@ const dependencies = {
   userRecommendedTrainingRepository,
 };
 
-import { beginCampaignParticipationImprovement } from './begin-campaign-participation-improvement.js';
 import { computeCampaignParticipationAnalysis } from './compute-campaign-participation-analysis.js';
 import { deleteCampaignParticipation } from './delete-campaign-participation.js';
 import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
@@ -109,7 +108,6 @@ import { startCampaignParticipation } from './start-campaign-participation.js';
 import { updateParticipantExternalId } from './update-participant-external-id.js';
 
 const usecasesWithoutInjectedDependencies = {
-  beginCampaignParticipationImprovement,
   computeCampaignParticipationAnalysis,
   deleteCampaignParticipation,
   findCampaignParticipationsForUserManagement,
