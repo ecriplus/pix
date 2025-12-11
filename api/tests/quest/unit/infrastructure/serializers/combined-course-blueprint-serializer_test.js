@@ -30,7 +30,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
                 value: 'mon-module',
               },
               {
-                type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUTION,
+                type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
                 value: 123,
               },
             ],
@@ -41,6 +41,59 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
           id: '1',
         },
       ],
+    });
+  });
+
+  it('#deserialize', async function () {
+    const date = new Date();
+    // given
+    const serializedBlueprint = {
+      data: {
+        attributes: {
+          name: 'Mon parcours',
+          'internal-name': 'Mon modèle de parcours',
+          illustration: '/illustrations/image.svg',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          'success-requirements': [
+            {
+              type: 'passages',
+              value: 'mon-module',
+            },
+            {
+              type: 'campaignParticipations',
+              value: 123,
+            },
+          ],
+          'created-at': date,
+          'updated-at': date,
+        },
+        type: 'combined-course-blueprints',
+        id: '1',
+      },
+    };
+
+    // when
+    const deserializedBlueprint = await combinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
+
+    // then
+    expect(deserializedBlueprint).deep.equal({
+      id: '1',
+      name: 'Mon parcours',
+      internalName: 'Mon modèle de parcours',
+      illustration: '/illustrations/image.svg',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      successRequirements: [
+        {
+          type: 'passages',
+          value: 'mon-module',
+        },
+        {
+          type: 'campaignParticipations',
+          value: 123,
+        },
+      ],
+      createdAt: date,
+      updatedAt: date,
     });
   });
 });
