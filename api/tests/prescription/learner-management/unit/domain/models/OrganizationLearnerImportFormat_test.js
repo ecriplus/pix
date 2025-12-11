@@ -218,12 +218,12 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
     });
   });
 
-  describe('#orderedDisplayabledColumns', function () {
-    it('should return columns in right order for displayed', function () {
+  describe('#orderedDisplayableColumns', function () {
+    it('should return displayable columns in right order', function () {
       const organizationLearnerImportFormat = new OrganizationLearnerImportFormat(
         organizationLearnerImportFormatPayload,
       );
-      expect(organizationLearnerImportFormat.orderedDisplayabledColumns).to.deep.equal([
+      expect(organizationLearnerImportFormat.orderedDisplayableColumns).to.deep.equal([
         { name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE, position: 1 },
         { name: IMPORT_KEY_FIELD.COMMON_DIVISION, position: 2 },
       ]);
@@ -254,7 +254,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
       const organizationLearnerImportFormat = new OrganizationLearnerImportFormat(
         organizationLearnerImportFormatPayload,
       );
-      expect(organizationLearnerImportFormat.orderedDisplayabledColumns).lengthOf(0);
+      expect(organizationLearnerImportFormat.orderedDisplayableColumns).lengthOf(0);
     });
   });
 

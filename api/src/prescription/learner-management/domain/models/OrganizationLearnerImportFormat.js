@@ -55,7 +55,7 @@ class OrganizationLearnerImportFormat {
     return this.config.headers.map(({ name }) => ({ name }));
   }
 
-  get orderedDisplayabledColumns() {
+  get orderedDisplayableColumns() {
     return this.#displayable
       .map(({ config }) => {
         return { name: config.displayable.name, position: config.displayable.position };
@@ -74,7 +74,7 @@ class OrganizationLearnerImportFormat {
   }
 
   get columnsToDisplay() {
-    return this.orderedDisplayabledColumns.map((column) => column.name);
+    return this.orderedDisplayableColumns.map((column) => column.name);
   }
 
   get filtersToDisplay() {
@@ -96,11 +96,14 @@ class OrganizationLearnerImportFormat {
 
   /**
    * @function
-   * Transform form params into a repository compliant params
+   * Transform form params into a repository compliant params.
+   *
    * It will take params name from reconciliationMappingColumns and
    * use the corresponding columns name to host the value in an attributes object
+   *
    * Values associated to header columns that have a property key will be set on
    * the main returned object.
+   *
    * @name transformReconciliationData
    * @param {Object} params
    * @returns {Promise<boolean>}

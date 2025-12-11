@@ -56,6 +56,120 @@ export async function buildFreshPixOrgaUser(
   return { userId, targetProfileId: targetProfileIds[0] };
 }
 
+export async function buildFreshPixOrgaUserWithGenericImport(
+  firstName: string,
+  lastName: string,
+  email: string,
+  rawPassword: string,
+  role: string,
+  organization: { type: string; externalId: string; isManagingStudents: boolean },
+) {
+  const organizationId = await createOrganizationInDB(organization);
+  const userId = await createUserInDB(firstName, lastName, email, rawPassword, true, false, false, undefined);
+  await createOrganizationMembershipInDB(userId, organizationId, role);
+
+  const [targetProfileId] = await knex('target-profiles').pluck('id');
+  await knex('target-profile-shares').insert({
+    targetProfileId,
+    organizationId,
+  });
+
+  // Create generic import format
+  const importFormatConfig = {
+    headers: [
+      {
+        name: 'Nom apprenant',
+        config: {
+          property: 'lastName',
+          validate: { type: 'string', required: true },
+          reconcile: { name: 'COMMON_LASTNAME', fieldId: 'reconcileField1', position: 1 },
+        },
+        required: true,
+      },
+      {
+        name: 'Prénom apprenant',
+        config: {
+          property: 'firstName',
+          validate: { type: 'string', required: true },
+          reconcile: { name: 'COMMON_FIRSTNAME', fieldId: 'reconcileField2', position: 2 },
+        },
+        required: true,
+      },
+      {
+        name: 'Classe',
+        config: {
+          validate: { type: 'string', required: true },
+          exportable: true,
+          displayable: { name: 'COMMON_DIVISION', position: 1, filterable: { type: 'string' } },
+        },
+        required: true,
+      },
+      {
+        name: 'Date de naissance',
+        config: {
+          validate: { type: 'date', format: 'YYYY-MM-DD', required: true },
+          reconcile: { name: 'COMMON_BIRTHDATE', fieldId: 'reconcileField3', position: 3 },
+          displayable: { name: 'COMMON_BIRTHDATE', position: 2 },
+        },
+        required: true,
+      },
+    ],
+    unicityColumns: ['Nom apprenant', 'Prénom apprenant', 'Date de naissance'],
+    acceptedEncoding: ['utf8'],
+  };
+
+  const [{ id: importFormatId }] = await knex('organization-learner-import-formats')
+    .insert({
+      name: 'GENERIC',
+      fileType: 'csv',
+      config: importFormatConfig,
+      createdBy: userId,
+    })
+    .returning('id');
+
+  let featureId = await knex('features')
+    .where('key', 'LEARNER_IMPORT')
+    .select('id')
+    .first()
+    .then((row) => row?.id);
+
+  if (!featureId) {
+    [{ id: featureId }] = await knex('features')
+      .insert({
+        key: 'LEARNER_IMPORT',
+        description: "Permet l'import de participants sur PixOrga",
+      })
+      .returning('id');
+  }
+
+  await knex('organization-features').insert({
+    organizationId,
+    featureId,
+    params: { organizationLearnerImportFormatId: importFormatId },
+  });
+
+  // Create a campaign for this organization
+  const campaignCode = 'GENERIC11';
+  const [{ id: campaignId }] = await knex('campaigns')
+    .insert({
+      name: 'Campaign for Generic Import',
+      code: campaignCode,
+      title: 'Test Generic Import Campaign',
+      type: 'ASSESSMENT',
+      createdAt: new Date(),
+      organizationId,
+      creatorId: userId,
+      ownerId: userId,
+      targetProfileId: targetProfileId,
+      assessmentMethod: 'SMART_RANDOM',
+      multipleSendings: false,
+      isForAbsoluteNovice: false,
+    })
+    .returning('id');
+
+  return { userId, targetProfileId, campaignCode, campaignId, organizationId };
+}
+
 export async function setAssessmentIdSequence(id: number) {
   const result = await knex.raw(`SELECT pg_get_serial_sequence(?, ?) AS sequence_name`, ['assessments', 'id']);
   const sequenceName = result.rows[0]?.sequence_name;
@@ -242,6 +356,15 @@ async function createUserInDB(
 
   return userId;
 }
+
+export const deleteUserFromDB = async (userId: number) => {
+  await knex('legal-document-version-user-acceptances').where('userId', userId).delete();
+  await knex('user-orga-settings').where('userId', userId).delete();
+  await knex('last-user-application-connections').where('userId', userId).delete();
+  await knex('user-logins').where('userId', userId).delete();
+  await knex('authentication-methods').where('userId', userId).delete();
+  await knex('users').where('id', userId).delete();
+};
 
 async function createLegalDocumentVersionInDB() {
   const someDate = new Date('2025-07-09');

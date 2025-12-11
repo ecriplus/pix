@@ -2,7 +2,7 @@ import { ReconcileCommonOrganizationLearnerError } from '../errors.js';
 
 /**
  * La réconciliation se passe en 2 étapes :
- *  1. On récupére les utilisateurs qui correspondent aux données de l'import hors nom prénom.
+ *  1. On récupère les utilisateurs qui correspondent aux données de l'import hors nom prénom.
  *  2. On identifie le bon préscrit sur la base du nom prénom en utilisant le service de réconciliation
  *     Cela nous permet d'éviter les coquilles typographiques (prénom accentué ou caractère autres qu'alphanumérique...)
 
