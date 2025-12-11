@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.279.0](https://github.com/1024pix/pix/compare/v5.278.0...v5.279.0) (2025-12-11)
+
+### :rocket: Amélioration
+
+- [#14353](https://github.com/1024pix/pix/pull/14353) Ajouter la confirmation d'association d'une connexion SSO à un compte utilisateur (PIX-20664) 
+- [#14377](https://github.com/1024pix/pix/pull/14377) Ajouter les boutons de signalement dans les feedbacks et POI des modules (PIX-20492). 
+- [#14392](https://github.com/1024pix/pix/pull/14392) Améliorer le rendu des images transparentes dans des grains avec un fond (PIX-20640) 
+- [#14390](https://github.com/1024pix/pix/pull/14390) Enregistrer les signalements en base (PIX-2049) 
+- [#14352](https://github.com/1024pix/pix/pull/14352) FRONT Filtrer les organisations sur l'équipe en charge (PIX-20692) 
+- [#14384](https://github.com/1024pix/pix/pull/14384) MDX-17 Biais_AVA integration retours relecture 
+- [#14389](https://github.com/1024pix/pix/pull/14389) Supprimer le champ Crédits dans le formulaire de création d'orga (PIX-29696) 
+
+### :building_construction: Tech
+
+- [#14313](https://github.com/1024pix/pix/pull/14313) :recycle: Renomme l'URL `end-assessment-by-supervisor` pour utiliser le terme `invigilator` (pix-20625) 
+- [#14395](https://github.com/1024pix/pix/pull/14395) Corriger la manière dont on génére les seeds  (PIX-20758) 
+- [#14331](https://github.com/1024pix/pix/pull/14331) Enlever de config.js le v3Certification.challengesBetweenSameCompetence (PIX-20657) 
+- [#14383](https://github.com/1024pix/pix/pull/14383) Suppression de code temporaire de rétrocompatibilité de ChatPix (PIX-20571)
+
 # [5.278.0](https://github.com/1024pix/pix/compare/v5.277.0...v5.278.0) (2025-12-10)
 
 ### :rocket: Amélioration
