@@ -2,11 +2,7 @@ import dayjs from 'dayjs';
 
 import { getNewAcquiredStages } from '../../../../evaluation/domain/services/stages/get-new-acquired-stages-service.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../prescription/shared/domain/constants.js';
-import {
-  MAX_MASTERY_RATE,
-  MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING,
-  MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING,
-} from '../../constants.js';
+import { MAX_MASTERY_RATE, MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING } from '../../constants.js';
 import { BadgeResult } from './BadgeResult.js';
 import { CompetenceResult } from './CompetenceResult.js';
 
@@ -24,7 +20,7 @@ class AssessmentResult {
     badgeResultsDTO,
     stages,
   }) {
-    const { knowledgeElements, sharedAt, assessmentCreatedAt } = participationResults;
+    const { knowledgeElements, sharedAt } = participationResults;
 
     this.id = participationResults.campaignParticipationId;
     this.isCompleted = participationResults.isCompleted;
@@ -33,11 +29,7 @@ class AssessmentResult {
     this.totalSkillsCount = competences.flatMap(({ targetedSkillIds }) => targetedSkillIds).length;
     this.testedSkillsCount = knowledgeElements.length;
     this.validatedSkillsCount = knowledgeElements.filter(({ isValidated }) => isValidated).length;
-    this.masteryRate = this._computeMasteryRate(
-      participationResults.masteryRate,
-      this.totalSkillsCount,
-      this.validatedSkillsCount,
-    );
+    this.masteryRate = this._computeMasteryRate(this.totalSkillsCount, this.validatedSkillsCount);
 
     this.competenceResults = competences.map(({ competence, area, targetedSkillIds }) => {
       const competenceKnowledgeElements = knowledgeElements.filter(({ skillId }) => targetedSkillIds.includes(skillId));
@@ -63,7 +55,6 @@ class AssessmentResult {
 
     this.badgeResults = badgeResultsDTO.map((badge) => new BadgeResult(badge, participationResults.acquiredBadgeIds));
     this.reachedStage = reachedStage;
-    this.canImprove = this._computeCanImprove(knowledgeElements, assessmentCreatedAt, this.isShared, campaignType);
     this.isDisabled = this._computeIsDisabled(isCampaignArchived, isCampaignDeleted, participationResults.isDeleted);
     this.canRetry = this.#computeCanRetry({
       isCampaignMultipleSendings,
@@ -97,27 +88,13 @@ class AssessmentResult {
     return remainingSecondsBeforeRetrying;
   }
 
-  _computeMasteryRate(masteryRate, totalSkillsCount, validatedSkillsCount) {
+  _computeMasteryRate(totalSkillsCount, validatedSkillsCount) {
     if (totalSkillsCount > 0) {
       const rate = (validatedSkillsCount / totalSkillsCount).toPrecision(2);
       return parseFloat(rate);
     } else {
       return 0;
     }
-  }
-
-  _computeCanImprove(knowledgeElements, assessmentCreatedAt, isShared, campaignType) {
-    if (campaignType === CampaignTypes.EXAM) {
-      return false;
-    }
-    const isImprovementPossible =
-      knowledgeElements.filter((knowledgeElement) => {
-        const isOldEnoughToBeImproved =
-          dayjs(assessmentCreatedAt).diff(knowledgeElement.createdAt, 'days', true) >=
-          MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING;
-        return knowledgeElement.isInvalidated && isOldEnoughToBeImproved;
-      }).length > 0;
-    return isImprovementPossible && !isShared;
   }
 
   #computeCanRetry({ isCampaignMultipleSendings, isOrganizationLearnerActive, campaignType }) {
