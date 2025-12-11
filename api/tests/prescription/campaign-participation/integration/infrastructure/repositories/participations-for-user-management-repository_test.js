@@ -9,7 +9,7 @@ import {
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-const { SHARED } = CampaignParticipationStatuses;
+const { SHARED, STARTED, TO_SHARE } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Participations-For-User-Management', function () {
   describe('#findByUserId', function () {
@@ -423,6 +423,38 @@ describe('Integration | Repository | Participations-For-User-Management', functi
               isFromCombinedCourse: null,
             },
           ]);
+        });
+      });
+
+      context('status casting', function () {
+        it('should convert TO_SHARE status to STARTED for assessment campaign participations', async function () {
+          // given
+          const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
+          const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            firstName: 'John',
+            lastName: 'Doe',
+            userId,
+          });
+          const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+            userId,
+            organizationLearnerId: organizationLearner.id,
+            campaignId: campaign.id,
+            status: TO_SHARE,
+            createdAt: new Date('2024-01-01'),
+          });
+          databaseBuilder.factory.buildAssessment({
+            campaignParticipationId: campaignParticipation.id,
+            type: Assessment.types.CAMPAIGN,
+            userId,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
+
+          // then
+          expect(participationsForUserManagement).to.have.lengthOf(1);
+          expect(participationsForUserManagement[0].status).to.equal(STARTED);
         });
       });
 
