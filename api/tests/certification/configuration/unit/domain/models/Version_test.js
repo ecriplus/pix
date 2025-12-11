@@ -1,5 +1,5 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
@@ -8,7 +8,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
     // given
     const versionData = {
       id: 123,
-      scope: Frameworks.CORE,
+      scope: Scopes.CORE,
       startDate: new Date('2025-01-01'),
       expirationDate: new Date('2025-12-31'),
       assessmentDuration: 120,
@@ -29,7 +29,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
     // given
     const versionData = {
       id: 456,
-      scope: Frameworks.PIX_PLUS_DROIT,
+      scope: Scopes.PIX_PLUS_DROIT,
       startDate: new Date('2025-06-01'),
       expirationDate: null,
       assessmentDuration: 90,
@@ -44,7 +44,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
     // then
     expect(version).to.be.instanceOf(Version);
     expect(version.id).to.equal(456);
-    expect(version.scope).to.equal(Frameworks.PIX_PLUS_DROIT);
+    expect(version.scope).to.equal(Scopes.PIX_PLUS_DROIT);
     expect(version.expirationDate).to.be.null;
     expect(version.globalScoringConfiguration).to.be.null;
     expect(version.competencesScoringConfiguration).to.be.null;
@@ -54,7 +54,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
     // given
     const invalidData = {
       id: 123,
-      scope: Frameworks.CORE,
+      scope: Scopes.CORE,
       startDate: 'not-a-date',
       assessmentDuration: 120,
       challengesConfiguration: { config: 'test' },

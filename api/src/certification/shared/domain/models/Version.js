@@ -1,25 +1,25 @@
 /**
- * @typedef {import('./Frameworks.js').Frameworks} Frameworks
+ * @typedef {import('./Scopes.js').Scopes} Scopes
  */
 
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { Frameworks } from './Frameworks.js';
+import { Scopes } from './Scopes.js';
 
 export class Version {
   static #schema = Joi.object({
     id: Joi.number().required(),
     scope: Joi.string()
       .required()
-      .valid(...Object.values(Frameworks)),
+      .valid(...Object.values(Scopes)),
     challengesConfiguration: Joi.object().required(),
   });
 
   /**
    * @param {Object} params
    * @param {number} params.id - version identifier
-   * @param {Frameworks} params.scope - Framework scope (CORE, DROIT, etc.)
+   * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
    * @param {Object} params.challengesConfiguration - Challenges configuration
    */
   constructor({ id, scope, challengesConfiguration }) {

@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 
 import { usecases as configurationUsecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
-import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { usecases as learningContentUsecases } from '../../../../../src/learning-content/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
@@ -42,7 +42,7 @@ export class CommonCertificationVersions {
         this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
           databaseBuilder,
           fromLcmsFrameworkName: coreFrameworkName,
-          toFrameworkScope: Frameworks.CORE,
+          toFrameworkScope: Scopes.CORE,
         });
       }
     } catch (error) {
@@ -68,7 +68,7 @@ export class CommonCertificationVersions {
         this.pixPlusDroitVersion.currentVersionId = await this.#createActiveFrameworkVersion({
           databaseBuilder,
           fromLcmsFrameworkName: pixPlusDroitFrameworkName,
-          toFrameworkScope: Frameworks.PIX_PLUS_DROIT,
+          toFrameworkScope: Scopes.PIX_PLUS_DROIT,
         });
       }
     } catch (error) {
@@ -94,7 +94,7 @@ export class CommonCertificationVersions {
         this.pixPlusEdu1erDegreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
           databaseBuilder,
           fromLcmsFrameworkName: pixPlusEdu1erDegreFrameworkName,
-          toFrameworkScope: Frameworks.PIX_PLUS_EDU_1ER_DEGRE,
+          toFrameworkScope: Scopes.PIX_PLUS_EDU_1ER_DEGRE,
         });
       }
     } catch (error) {
@@ -191,7 +191,7 @@ export class CommonCertificationVersions {
    */
   static async #createExpiredCoreVersion({ databaseBuilder }) {
     const expiredVersionId = await configurationUsecases.createCertificationVersion({
-      scope: Frameworks.CORE,
+      scope: Scopes.CORE,
       tubeIds: [],
     });
 

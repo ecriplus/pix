@@ -26,7 +26,7 @@ import { CenterHabilitationError } from '../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../shared/domain/models/Scopes.js';
 
 const { features } = config;
 
@@ -70,7 +70,7 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
 
   const certificationScope = certificationCandidate.isEnrolledToComplementaryOnly()
     ? certificationCandidate.complementaryCertification.key
-    : Frameworks.CORE;
+    : Scopes.CORE;
 
   const certificationVersion = await versionRepository.getByScopeAndReconciliationDate({
     scope: certificationScope,

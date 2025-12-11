@@ -2,7 +2,7 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
 import { Candidate } from '../../../evaluation/domain/models/Candidate.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../shared/domain/models/Scopes.js';
 
 export const findByAssessmentId = async function ({ assessmentId }) {
   const result = await knex('certification-candidates')
@@ -49,5 +49,5 @@ const _determineScope = (complementaryCertificationKey) => {
   if (complementaryCertificationKey && complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA) {
     return complementaryCertificationKey;
   }
-  return Frameworks.CORE;
+  return Scopes.CORE;
 };
