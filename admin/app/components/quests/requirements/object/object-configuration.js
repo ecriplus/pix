@@ -150,7 +150,7 @@ const campaignParticipationsConfigField_status = new FieldConfiguration({
   name: 'status',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: false,
-  allowedValues: ['STARTED', 'TO_SHARE', 'SHARED'],
+  allowedValues: ['STARTED', 'SHARED'],
 });
 
 const campaignParticipationsConfiguration = new ObjectConfiguration({

@@ -2,7 +2,6 @@ import Model, { attr } from '@ember-data/model';
 
 export const campaignParticipationStatuses = {
   STARTED: 'En cours',
-  TO_SHARE: 'En attente d’envoi',
   SHARED: 'Envoyé',
 };
 
