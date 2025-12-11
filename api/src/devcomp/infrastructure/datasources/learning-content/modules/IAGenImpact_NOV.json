@@ -263,8 +263,7 @@
                   ],
                   "randomSlides": false,
                   "titleLevel": 0,
-                  "disableAnimation": true,
-                  "disableLoop": true
+                  "disableAnimation": true
                 }
               }
             },
@@ -503,8 +502,7 @@
                   ],
                   "randomSlides": false,
                   "titleLevel": 0,
-                  "disableAnimation": true,
-                  "disableLoop": true
+                  "disableAnimation": true
                 }
               }
             }
