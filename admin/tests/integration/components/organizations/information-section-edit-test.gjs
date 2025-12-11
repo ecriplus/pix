@@ -107,7 +107,10 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel(t('components.organizations.information-section-view.dpo-email'), 'a'.repeat(256));
+      await fillByLabel(
+        t('components.organizations.information-section-view.dpo-email'),
+        'a'.repeat(255) + '@test.com',
+      );
 
       // then
       assert.dom(screen.getByText("La longueur de l'email ne doit pas excéder 255 caractères.")).exists();
@@ -129,7 +132,10 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel(t('components.organizations.information-section-view.sco-activation-email'), 'a'.repeat(256));
+      await fillByLabel(
+        t('components.organizations.information-section-view.sco-activation-email'),
+        'a'.repeat(255) + '@test.com',
+      );
 
       // then
       assert.dom(screen.getByText("La longueur de l'email ne doit pas excéder 255 caractères.")).exists();
@@ -160,12 +166,25 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.dom(screen.getByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.')).exists();
     });
 
+    test('it should allow 0 credits', async function (assert) {
+      // given
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // when
+      await fillByLabel(t('components.organizations.information-section-view.credits'), '0');
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
+
+      // then
+      assert.notOk(screen.queryByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.'));
+    });
+
     test('it should allow empty value for credit', async function (assert) {
       // given
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
       await fillByLabel(t('components.organizations.information-section-view.credits'), '');
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
 
       // then
       assert.notOk(screen.queryByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.'));
@@ -178,7 +197,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       // when
       await fillByLabel(
         t('components.organizations.information-section-view.documentation-link'),
-        'not-valid-url-format',
+        '\\not-valid-url-format',
       );
 
       // then
@@ -203,6 +222,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(
         <template><InformationSectionEdit @organization={{organizationWithoutAdministrationTeam}} /></template>,
       );
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
 
       const administrationTeamIdErrorMessage = screen.getByText(
         t('components.organizations.editing.administration-team.selector.error-message'),
@@ -231,6 +251,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(
         <template><InformationSectionEdit @organization={{organizationWithoutCountryCode}} /></template>,
       );
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
 
       const countryCodeErrorMessage = screen.getByText(
         t('components.organizations.editing.country.selector.error-message'),

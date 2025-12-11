@@ -8,19 +8,35 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import Joi from 'joi';
 import sortBy from 'lodash/sortBy';
+import { FormValidator } from 'pix-admin/utils/form-validator';
 
 import { types } from '../../models/certification-center';
 
 export default class InformationEdit extends Component {
   @service store;
   @tracked selectedHabilitations = [];
+  @tracked form = {};
   certificationCenterTypes = types;
+
+  validator = new FormValidator(CERTIFICATION_CENTER_FORM_SCHEMA);
 
   constructor() {
     super(...arguments);
-    this.form = this.store.createRecord('certification-center-form');
-    this.loadForm();
+
+    Promise.resolve(this.args.certificationCenter.habilitations).then((habilitations) => {
+      this.selectedHabilitations = habilitations;
+    });
+
+    this.form = {
+      name: this.args.certificationCenter.name,
+      externalId: this.args.certificationCenter.externalId,
+      type: this.args.certificationCenter.type,
+      dataProtectionOfficerFirstName: this.args.certificationCenter.dataProtectionOfficerFirstName,
+      dataProtectionOfficerLastName: this.args.certificationCenter.dataProtectionOfficerLastName,
+      dataProtectionOfficerEmail: this.args.certificationCenter.dataProtectionOfficerEmail,
+    };
   }
 
   get sortedHabilitations() {
@@ -28,11 +44,13 @@ export default class InformationEdit extends Component {
   }
 
   onFormInputChange = (name) => (event) => {
-    this.form.set(name, event.target.value);
+    this.form = { ...this.form, [name]: event.target.value };
+    this.validator.validateField(name, this.form[name]);
   };
 
   onTypeChange = (value) => {
-    this.form.set('type', value ? value.trim() : value);
+    this.form = { ...this.form, type: value ? value.trim() : value };
+    this.validator.validateField('type', this.form.type);
   };
 
   onToggleHabilitation = (habilitation) => {
@@ -46,46 +64,27 @@ export default class InformationEdit extends Component {
   };
 
   isSelectedHabilitation = (habilitation) => {
-    const index = this.selectedHabilitations.findIndex((h) => h.id === habilitation.id);
-    return index !== -1;
+    return this.selectedHabilitations.some((h) => h.id === habilitation.id);
   };
 
   save = async (event) => {
     event.preventDefault();
 
-    const { validations } = await this.form.validate();
-    if (!validations.isValid) return;
+    const isValid = this.validator.validate(this.form);
+    if (!isValid) return;
 
-    this.applyFormToModel();
-    this.args.toggleEditMode();
-    return this.args.onSubmit();
-  };
-
-  loadForm = async () => {
-    this.selectedHabilitations = await this.args.certificationCenter.habilitations;
-
-    const properties = this.args.certificationCenter.getProperties(
-      'name',
-      'externalId',
-      'type',
-      'dataProtectionOfficerFirstName',
-      'dataProtectionOfficerLastName',
-      'dataProtectionOfficerEmail',
-    );
-
-    this.form.setProperties(properties);
-  };
-
-  applyFormToModel = () => {
     this.args.certificationCenter.setProperties({
       name: this.form.name,
       externalId: this.form.externalId || null,
       type: this.form.type,
-      habilitations: this.selectedHabilitations,
       dataProtectionOfficerFirstName: this.form.dataProtectionOfficerFirstName,
       dataProtectionOfficerLastName: this.form.dataProtectionOfficerLastName,
       dataProtectionOfficerEmail: this.form.dataProtectionOfficerEmail,
+      habilitations: this.selectedHabilitations,
     });
+
+    this.args.toggleEditMode();
+    return this.args.onSubmit();
   };
 
   <template>
@@ -93,96 +92,64 @@ export default class InformationEdit extends Component {
     <form class="form certification-center-information__edit-form" onsubmit={{this.save}}>
 
       <PixInput
-        class={{if this.form.validations.attrs.name.isInValid "form-control is-invalid" "form-control"}}
         @value={{this.form.name}}
         @requiredLabel={{true}}
+        @errorMessage={{this.validator.errors.name}}
+        @validationStatus={{if this.validator.errors.name "error"}}
         {{on "input" (this.onFormInputChange "name")}}
       >
         <:label>Nom du centre</:label>
       </PixInput>
-
-      {{#if this.form.validations.attrs.name.isInvalid}}
-        <span class="error" aria-label="Message d'erreur du champ nom">
-          {{this.form.validations.attrs.name.message}}
-        </span>
-      {{/if}}
 
       <PixSelect
         @options={{this.certificationCenterTypes}}
         @placeholder="-- Choisissez --"
         @value={{this.form.type}}
         @onChange={{this.onTypeChange}}
-        @errorMessage={{this.form.validations.attrs.type.message}}
+        @errorMessage={{this.validator.errors.type}}
       >
         <:label>Type</:label>
         <:default as |certificationCenterType|>{{certificationCenterType.label}}</:default>
       </PixSelect>
 
       <PixInput
-        class={{if this.form.validations.attrs.externalId.isInvalid "form-control is-invalid" "form-control"}}
         @value={{this.form.externalId}}
+        @errorMessage={{this.validator.errors.externalId}}
+        @validationStatus={{if this.validator.errors.externalId "error"}}
         {{on "input" (this.onFormInputChange "externalId")}}
       >
         <:label>Identifiant externe</:label>
       </PixInput>
 
-      {{#if this.form.validations.attrs.externalId.isInvalid}}
-        <span class="error" aria-label="Message d'erreur du champ ID externe">
-          {{this.form.validations.attrs.externalId.message}}
-        </span>
-      {{/if}}
-
       <PixInput
-        class={{if
-          this.form.validations.attrs.dataProtectionOfficerFirstName.isInvalid
-          "form-control is-invalid"
-          "form-control"
-        }}
         @value={{this.form.dataProtectionOfficerFirstName}}
+        @errorMessage={{this.validator.errors.dataProtectionOfficerFirstName}}
+        @validationStatus={{if this.validator.errors.dataProtectionOfficerFirstName "error"}}
         {{on "input" (this.onFormInputChange "dataProtectionOfficerFirstName")}}
       >
         <:label>Prénom du <abbr title="Délégué à la protection des données">DPO</abbr></:label>
       </PixInput>
 
-      {{#if this.form.validations.attrs.dataProtectionOfficerFirstName.isInvalid}}
-        <span class="error" aria-label="Message d'erreur du champ Prénom du DPO">
-          {{this.form.validations.attrs.dataProtectionOfficerFirstName.message}}
-        </span>
-      {{/if}}
-
       <PixInput
-        class={{if
-          this.form.validations.attrs.dataProtectionOfficerLastName.isInvalid
-          "form-control is-invalid"
-          "form-control"
-        }}
         @value={{this.form.dataProtectionOfficerLastName}}
+        @errorMessage={{this.validator.errors.dataProtectionOfficerLastName}}
+        @validationStatus={{if this.validator.errors.dataProtectionOfficerLastName "error"}}
         {{on "input" (this.onFormInputChange "dataProtectionOfficerLastName")}}
-      ><:label>Nom du <abbr title="Délégué à la protection des données">DPO</abbr></:label></PixInput>
-
-      {{#if this.form.validations.attrs.dataProtectionOfficerLastName.isInvalid}}
-        <span class="error" aria-label="Message d'erreur du champ Nom du DPO">
-          {{this.form.validations.attrs.dataProtectionOfficerLastName.message}}
-        </span>
-      {{/if}}
+      >
+        <:label>Nom du <abbr title="Délégué à la protection des données">DPO</abbr></:label>
+      </PixInput>
 
       <PixInput
-        class={{if
-          this.form.validations.attrs.dataProtectionOfficerEmail.isInvalid
-          "form-control is-invalid"
-          "form-control"
-        }}
         @value={{this.form.dataProtectionOfficerEmail}}
+        @errorMessage={{this.validator.errors.dataProtectionOfficerEmail}}
+        @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
         {{on "input" (this.onFormInputChange "dataProtectionOfficerEmail")}}
-      ><:label>Adresse e-mail du <abbr title="Délégué à la protection des données">DPO</abbr></:label></PixInput>
-
-      {{#if this.form.validations.attrs.dataProtectionOfficerEmail.isInvalid}}
-        <span class="error" aria-label="Message d'erreur du champ Adresse e-mail du DPO">
-          {{this.form.validations.attrs.dataProtectionOfficerEmail.message}}
-        </span>
-      {{/if}}
+      >
+        <:label>Adresse e-mail du <abbr title="Délégué à la protection des données">DPO</abbr></:label>
+      </PixInput>
 
       <span class="field-label">Habilitations aux certifications complémentaires</span>
+
       <ul class="form-field certification-center-information__edit-form__habilitations-checkbox-list">
         {{#each this.sortedHabilitations as |habilitation|}}
           <li class="habilitation-entry">
@@ -209,3 +176,28 @@ export default class InformationEdit extends Component {
     </form>
   </template>
 }
+
+const CERTIFICATION_CENTER_FORM_SCHEMA = Joi.object({
+  name: Joi.string().min(1).max(255).empty(['', null]).required().messages({
+    'any.required': 'Le nom ne peut pas être vide',
+    'string.empty': 'Le nom ne peut pas être vide',
+    'string.max': 'La longueur du nom ne doit pas excéder 255 caractères',
+  }),
+  type: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'Le type ne peut pas être vide',
+    'string.empty': 'Le type ne peut pas être vide',
+  }),
+  externalId: Joi.string().min(0).max(255).empty(['', null]).messages({
+    'string.max': "La longueur de l'identifiant externe ne doit pas excéder 255 caractères",
+  }),
+  dataProtectionOfficerFirstName: Joi.string().min(0).max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du prénom du DPO ne doit pas excéder 255 caractères',
+  }),
+  dataProtectionOfficerLastName: Joi.string().min(0).max(255).empty(['', null]).messages({
+    'string.max': 'La longueur du nom du DPO ne doit pas excéder 255 caractères',
+  }),
+  dataProtectionOfficerEmail: Joi.string().email({ ignoreLength: true }).min(0).max(255).empty(['', null]).messages({
+    'string.email': "L'adresse e-mail du DPO n'a pas le bon format.",
+    'string.max': "La longueur de l'adresse e-mail du DPO ne doit pas excéder 255 caractères.",
+  }),
+});

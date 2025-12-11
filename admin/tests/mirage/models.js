@@ -11,13 +11,11 @@ import autonomousCourseTargetProfile from './models/autonomous-course-target-pro
 import badge from './models/badge';
 import badgeCriterion from './models/badge-criterion';
 import campaign from './models/campaign';
-import campaignForm from './models/campaign-form';
 import campaignParticipation from './models/campaign-participation';
 import certification from './models/certification';
 import certificationCandidate from './models/certification-candidate';
 import certificationCandidateTimeline from './models/certification-candidate-timeline';
 import certificationCenter from './models/certification-center';
-import certificationCenterForm from './models/certification-center-form';
 import certificationCenterInvitation from './models/certification-center-invitation';
 import certificationCenterMembership from './models/certification-center-membership';
 import certificationChallengesForAdministration from './models/certification-challenges-for-administration';
@@ -44,7 +42,6 @@ import juryCertificationSummary from './models/jury-certification-summary';
 import lastApplicationConnection from './models/last-application-connection';
 import oidcIdentityProvider from './models/oidc-identity-provider';
 import organization from './models/organization';
-import organizationForm from './models/organization-form';
 import organizationInvitation from './models/organization-invitation';
 import organizationLearner from './models/organization-learner';
 import organizationMembership from './models/organization-membership';
@@ -59,7 +56,6 @@ import stageCollection from './models/stage-collection';
 import subscription from './models/subscription';
 import tag from './models/tag';
 import targetProfile from './models/target-profile';
-import targetProfileForm from './models/target-profile-form';
 import targetProfileSummary from './models/target-profile-summary';
 import thematic from './models/thematic';
 import toBePublishedSession from './models/to-be-published-session';
@@ -70,7 +66,6 @@ import triggerTube from './models/trigger-tube';
 import tube from './models/tube';
 import user from './models/user';
 import userCertificationCourse from './models/user-certification-course';
-import userForm from './models/user-form';
 import userLogin from './models/user-login';
 import userParticipation from './models/user-participation';
 import v3CertificationCourseDetailsForAdministration from './models/v3-certification-course-details-for-administration';
@@ -88,13 +83,11 @@ export default {
   badge,
   badgeCriterion,
   campaign,
-  campaignForm,
   campaignParticipation,
   certification,
   certificationCandidate,
   certificationCandidateTimeline,
   certificationCenter,
-  certificationCenterForm,
   certificationCenterInvitation,
   certificationCenterMembership,
   certificationChallengesForAdministration,
@@ -121,7 +114,6 @@ export default {
   lastApplicationConnection,
   oidcIdentityProvider,
   organization,
-  organizationForm,
   organizationInvitation,
   organizationLearner,
   organizationMembership,
@@ -136,7 +128,6 @@ export default {
   subscription,
   tag,
   targetProfile,
-  targetProfileForm,
   targetProfileSummary,
   thematic,
   toBePublishedSession,
@@ -147,7 +138,6 @@ export default {
   tube,
   user,
   userCertificationCourse,
-  userForm,
   userLogin,
   userParticipation,
   v3CertificationCourseDetailsForAdministration,

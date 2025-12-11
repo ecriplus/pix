@@ -13,9 +13,11 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 import { not } from 'ember-truth-helpers';
+import Joi from 'joi';
 import CopyButton from 'pix-admin/components/ui/copy-button';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
+import { FormValidator } from 'pix-admin/utils/form-validator';
 
 import ConfirmPopup from '../confirm-popup';
 
@@ -31,13 +33,13 @@ export default class UserOverview extends Component {
   @tracked displayAnonymizeModal = false;
   @tracked isEditionMode = false;
   @tracked authenticationMethods = [];
+  @tracked form = {};
 
-  tooltipTextEmail = this.intl.t('components.users.user-detail-personal-information.actions.copy-email');
-  tooltipTextUsername = this.intl.t('components.users.user-detail-personal-information.actions.copy-username');
+  validator = null;
 
   constructor() {
     super(...arguments);
-    this.form = this.store.createRecord('user-form');
+    this.validator = new UserFormValidator(this.args.user);
     Promise.resolve(this.args.user.authenticationMethods).then((authenticationMethods) => {
       this.authenticationMethods = authenticationMethods;
     });
@@ -99,12 +101,14 @@ export default class UserOverview extends Component {
   }
 
   _initForm() {
-    this.form.firstName = this.args.user.firstName;
-    this.form.lastName = this.args.user.lastName;
-    this.form.email = this.args.user.email;
-    this.form.username = this.args.user.username;
-    this.form.lang = this.args.user.lang;
-    this.form.locale = this.args.user.locale;
+    this.form = {
+      firstName: this.args.user.firstName,
+      lastName: this.args.user.lastName,
+      email: this.args.user.email,
+      username: this.args.user.username,
+      lang: this.args.user.lang,
+      locale: this.args.user.locale,
+    };
   }
 
   @action
@@ -124,10 +128,9 @@ export default class UserOverview extends Component {
   async updateUserDetails(event) {
     event.preventDefault();
 
-    const { validations } = await this.form.validate();
-    if (!validations.isValid) {
-      return;
-    }
+    const isValid = await this.validator.validate(this.form);
+    if (!isValid) return;
+
     this.args.user.firstName = this.form.firstName.trim();
     this.args.user.lastName = this.form.lastName.trim();
     this.args.user.email = !this.form.email ? null : this.form.email.trim();
@@ -181,6 +184,7 @@ export default class UserOverview extends Component {
   @action
   updateFormValue(key, event) {
     this.form[key] = event.target.value;
+    this.validator.validateField(key, this.form[key]);
   }
 
   <template>
@@ -207,8 +211,8 @@ export default class UserOverview extends Component {
             <div class="form-field">
               <PixInput
                 @requiredLabel="obligatoire"
-                @errorMessage={{this.form.firstNameError.message}}
-                @validationStatus={{this.form.firstNameError.status}}
+                @errorMessage={{this.validator.errors.firstName}}
+                @validationStatus={{if this.validator.errors.firstName "error"}}
                 @value={{this.form.firstName}}
                 {{on "input" (fn this.updateFormValue "firstName")}}
               ><:label>
@@ -218,8 +222,8 @@ export default class UserOverview extends Component {
             <div class="form-field">
               <PixInput
                 @requiredLabel="obligatoire"
-                @errorMessage={{this.form.lastNameError.message}}
-                @validationStatus={{this.form.lastNameError.status}}
+                @errorMessage={{this.validator.errors.lastName}}
+                @validationStatus={{if this.validator.errors.lastName "error"}}
                 @value={{this.form.lastName}}
                 {{on "input" (fn this.updateFormValue "lastName")}}
               >
@@ -231,8 +235,8 @@ export default class UserOverview extends Component {
               <div class="form-field">
                 <PixInput
                   @requiredLabel={{this.isEmailRequired}}
-                  @errorMessage={{this.form.emailError.message}}
-                  @validationStatus={{this.form.emailError.status}}
+                  @errorMessage={{this.validator.errors.email}}
+                  @validationStatus={{if this.validator.errors.email "error"}}
                   @value={{this.form.email}}
                   {{on "input" (fn this.updateFormValue "email")}}
                 >
@@ -245,8 +249,8 @@ export default class UserOverview extends Component {
               <div class="form-field">
                 <PixInput
                   @requiredLabel="obligatoire"
-                  @errorMessage={{this.form.usernameError.message}}
-                  @validationStatus={{this.form.usernameError.status}}
+                  @errorMessage={{this.validator.errors.username}}
+                  @validationStatus={{if this.validator.errors.username "error"}}
                   @value={{this.form.username}}
                   {{on "input" (fn this.updateFormValue "username")}}
                 ><:label>
@@ -310,7 +314,7 @@ export default class UserOverview extends Component {
               <CopyButton
                 @id="copy-email"
                 @value={{@user.email}}
-                @tooltip={{this.tooltipTextEmail}}
+                @tooltip={{t "components.users.user-detail-personal-information.actions.copy-email"}}
                 @label={{t "components.users.user-detail-personal-information.actions.copy-email"}}
               />
             </DescriptionList.Item>
@@ -319,7 +323,7 @@ export default class UserOverview extends Component {
               <CopyButton
                 @id="copy-username"
                 @value={{@user.username}}
-                @tooltip={{this.tooltipTextUsername}}
+                @tooltip={{t "components.users.user-detail-personal-information.actions.copy-username"}}
                 @label={{t "components.users.user-detail-personal-information.actions.copy-username"}}
               />
             </DescriptionList.Item>
@@ -397,4 +401,45 @@ export default class UserOverview extends Component {
       @show={{this.displayAnonymizeModal}}
     />
   </template>
+}
+
+class UserFormValidator extends FormValidator {
+  constructor(user) {
+    const schema = {
+      firstName: Joi.string().min(1).max(255).empty(['', null]).required().messages({
+        'any.required': 'Le prénom ne peut pas être vide.',
+        'string.empty': 'Le prénom ne peut pas être vide.',
+        'string.max': 'La longueur du prénom ne doit pas excéder 255 caractères.',
+      }),
+      lastName: Joi.string().min(1).max(255).empty(['', null]).required().messages({
+        'any.required': 'Le nom ne peut pas être vide.',
+        'string.empty': 'Le nom ne peut pas être vide.',
+        'string.max': 'La longueur du nom ne doit pas excéder 255 caractères.',
+      }),
+      lang: Joi.string(),
+      locale: Joi.string(),
+    };
+
+    if (user.username) {
+      // When user already has a username, then username require and email is optional
+      schema.email = Joi.string().email().max(255).allow(null).empty(['']).optional().messages({
+        'string.email': "L'adresse e-mail n'a pas le bon format.",
+        'string.max': "La longueur de l'adresse e-mail ne doit pas excéder 255 caractères.",
+      });
+      schema.username = Joi.string().min(1).max(255).empty(['', null]).required().messages({
+        'any.required': "L'identifiant ne peut pas être vide.",
+        'string.empty': "L'identifiant ne peut pas être vide.",
+        'string.max': "La longueur de l'identifiant ne doit pas excéder 255 caractères.",
+      });
+    } else {
+      // When user does not have user, then email required
+      schema.email = Joi.string().email().max(255).empty(['', null]).required().messages({
+        'any.required': "L'adresse e-mail ne peut pas être vide.",
+        'string.empty': "L'adresse e-mail ne peut pas être vide.",
+        'string.email': "L'adresse e-mail n'a pas le bon format.",
+        'string.max': "La longueur de l'adresse e-mail ne doit pas excéder 255 caractères.",
+      });
+    }
+    super(Joi.object(schema));
+  }
 }

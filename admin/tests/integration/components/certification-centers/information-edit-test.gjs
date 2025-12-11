@@ -125,7 +125,7 @@ module('Integration | Component | certification-centers/information-edit', funct
       );
 
       // when
-      await fillByLabel('Adresse e-mail du DPO', 'a'.repeat(256));
+      await fillByLabel('Adresse e-mail du DPO', 'a'.repeat(255) + '@test.com');
 
       // then
       assert

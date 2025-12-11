@@ -82,7 +82,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
       await fillByLabel(
         'URL du bouton de la page de fin de parcours Si une URL pour le bouton est saisie, le texte est également requis.',
-        'a',
+        '\\not-valid',
       );
 
       // then
