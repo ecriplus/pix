@@ -487,31 +487,6 @@ describe('Unit | Domain | Models | Assessment', function () {
     });
   });
 
-  describe('#createImprovingForCampaign', function () {
-    it('should return a proper improving assessment for campaign', function () {
-      // given
-      const userId = 123;
-      const campaignParticipationId = 456;
-      const method = 'SMART_RANDOM';
-
-      // when
-      const assessment = Assessment.createImprovingForCampaign({
-        userId,
-        campaignParticipationId,
-        method,
-        campaign: domainBuilder.buildCampaign(),
-      });
-
-      // then
-      expect(assessment.userId).to.equal(userId);
-      expect(assessment.campaignParticipationId).to.equal(campaignParticipationId);
-      expect(assessment.state).to.equal(Assessment.states.STARTED);
-      expect(assessment.type).to.equal(Assessment.types.CAMPAIGN);
-      expect(assessment.courseId).to.equal(Assessment.courseIdMessage.CAMPAIGN);
-      expect(assessment.isImproving).to.be.true;
-    });
-  });
-
   describe('#createForCompetenceEvaluation', function () {
     it('should return a proper assessment for competence evaluation', function () {
       // given
