@@ -44,7 +44,7 @@ describe('Acceptance | Controller | Certification | Session management | session
     const response = await server.inject(options);
 
     // then
-    const supervisedSessionInDB = await knex('supervisor-accesses').where({ userId, sessionId: session.id }).first();
+    const supervisedSessionInDB = await knex('invigilator_accesses').where({ userId, sessionId: session.id }).first();
     expect(supervisedSessionInDB).to.exist;
     expect(response.statusCode).to.equal(204);
   });
