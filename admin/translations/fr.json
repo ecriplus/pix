@@ -1223,6 +1223,11 @@
       "title": "Organisations filles"
     },
     "organizations": {
+      "breadcrumb": {
+        "new-child-organization-page": "Nouvelle organisation fille",
+        "new-organization-page": "Nouvelle organisation",
+        "parent-page": "Toutes les organisations"
+      },
       "notifications": {
         "errors": {
           "payload-too-large": "Le poids du logo dépasse la limite autorisée de {maxSizeInMegaBytes} Mo. Veuillez réduire le poids du logo et essayer à nouveau."

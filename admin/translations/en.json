@@ -1221,6 +1221,11 @@
       "title": "Children organisations"
     },
     "organizations": {
+      "breadcrumb": {
+        "new-child-organization-page": "New child organization",
+        "new-organization-page": "New organization",
+        "parent-page": "All organizations"
+      },
       "notifications": {
         "errors": {
           "payload-too-large": "The weight of the logo exceeds the authorised limit of {maxSizeInMegaBytes} MB. Please reduce the weight of the logo and try again."

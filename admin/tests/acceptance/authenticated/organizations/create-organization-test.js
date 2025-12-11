@@ -35,8 +35,8 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
       // then
       assert.dom(screen.queryByText('Organisation mère', { exact: false })).doesNotExist();
-      assert.dom(screen.getByText('Nouvelle organisation')).exists();
-      assert.dom(screen.getByRole('button', { name: this.intl.t('common.actions.add') })).exists();
+      assert.dom(screen.getByText(t('pages.organizations.breadcrumb.new-organization-page'))).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.add') })).exists();
     });
 
     test('it redirects the user to organizations list when cancelling', async function (assert) {
@@ -78,7 +78,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
           }),
         )
         .exists();
-      assert.dom(screen.getByText('Nouvelle organisation fille')).exists();
+      assert.dom(screen.getByText(t('pages.organizations.breadcrumb.new-child-organization-page'))).exists();
       assert
         .dom(
           screen.getByRole('button', {
