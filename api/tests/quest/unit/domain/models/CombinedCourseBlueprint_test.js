@@ -34,7 +34,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
 
       expect(requirements).deep.equal([
         {
-          type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUTION,
+          type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
           value: 123,
         },
         {

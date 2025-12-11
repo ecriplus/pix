@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 export class CombinedCourseBlueprint {
   constructor({ id, name, internalName, description, illustration, content, createdAt, updatedAt }) {
     this.id = id;
@@ -14,12 +16,35 @@ export class CombinedCourseBlueprint {
     return items.map(({ moduleId, targetProfileId }) =>
       moduleId
         ? { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleId }
-        : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUTION, value: targetProfileId },
+        : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId },
     );
   }
 }
 
 export const COMBINED_COURSE_BLUEPRINT_ITEMS = {
   MODULE: 'module',
-  EVALUTION: 'evaluation',
+  EVALUATION: 'evaluation',
 };
+
+export const contentSchema = Joi.array()
+  .items(
+    Joi.object({
+      type: Joi.string()
+        .valid(COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
+        .required(),
+      value: Joi.alternatives().conditional('type', {
+        switch: [
+          {
+            is: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
+            then: Joi.number().integer().required(),
+          },
+          {
+            is: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
+            then: Joi.string().required(),
+          },
+        ],
+      }),
+    }),
+  )
+  .required()
+  .strict();
