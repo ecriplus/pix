@@ -347,17 +347,14 @@
         }
       },
       "oidc-association-confirmation": {
-        "authentication-method-to-add": "Connexion ajoutée :",
+        "authentication-method-to-add": "Connexion ajoutée",
         "confirm": "Continuer",
-        "current-authentication-methods": "Mes méthodes de connexion actuelles :",
+        "current-authentication-methods": "Mes méthodes de connexion actuelles",
         "email": "Adresse e-mail",
         "external-connection": "Connexion externe",
         "external-connection-via": "Connexion via",
-        "information": "L'évaluation des compétences étant personnalisée, votre compte doit rester strictement personnel",
         "return": "Retour",
-        "sub-title": "Un nouveau moyen de connexion est sur le point d'être ajouté à votre compte Pix",
-        "switch-account": "Changer de compte",
-        "title": "Attention !",
+        "title": "Un nouveau moyen de connexion est sur le point d'être ajouté à votre compte Pix",
         "username": "Identifiant"
       },
       "oidc-provider-selector": {
@@ -1392,6 +1389,12 @@
         "title": "Détails d'une mission"
       },
       "title": "Missions"
+    },
+    "oidc": {
+      "login": {
+        "sub-title": "pour le lier à votre nouvelle méthode de connexion",
+        "title": "Utilisez votre compte Pix"
+      }
     },
     "organization-learner": {
       "activity": {

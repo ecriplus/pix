@@ -347,17 +347,14 @@
         }
       },
       "oidc-association-confirmation": {
-        "authentication-method-to-add": "Login method added:",
+        "authentication-method-to-add": "Login method added",
         "confirm": "Continue",
-        "current-authentication-methods": "My current login methods:",
+        "current-authentication-methods": "My current login methods",
         "email": "Email address",
         "external-connection": "External login",
         "external-connection-via": "Login via",
-        "information": "As the assessment of your digital skills is personalized, your account must remain strictly personal",
         "return": "Back",
-        "sub-title": "A new login method is about to be added to your Pix account",
-        "switch-account": "Change account",
-        "title": "Warning",
+        "title": "A new login method is about to be added to your Pix account",
         "username": "Username"
       },
       "oidc-provider-selector": {
@@ -1404,6 +1401,12 @@
         "title": "Mission's information"
       },
       "title": "Missions"
+    },
+    "oidc": {
+      "login": {
+        "sub-title": "to link it to your new access method",
+        "title": "Use your Pix account"
+      }
     },
     "organization-learner": {
       "activity": {

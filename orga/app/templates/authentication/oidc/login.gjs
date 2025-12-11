@@ -19,8 +19,8 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
       {{/if}}
 
       <div>
-        <h1 class="pix-title-m">{{t "pages.login.title"}}</h1>
-        <h3 class="pix-body-l">{{t "pages.login.with-pix-account"}}</h3>
+        <h1 class="pix-title-m">{{t "pages.oidc.login.title"}}</h1>
+        <h3 class="pix-body-l">{{t "pages.oidc.login.sub-title"}}</h3>
       </div>
 
       <LoginForm
