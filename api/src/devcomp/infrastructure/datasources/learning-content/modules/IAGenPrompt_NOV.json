@@ -97,38 +97,38 @@
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yoga-llm.jpg",
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/asso-yoga-mpp-03.jpg",
                     "alt": "IA générative ChatPIX",
-                    "width": 2081,
-                    "height": 1365
+                    "width": 1954,
+                    "height": 1393
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 830,
-                        "y1": 20,
-                        "x2": 2048,
-                        "y2": 194
+                        "x1": 792,
+                        "y1": 44,
+                        "x2": 1922,
+                        "y2": 186
                       },
                       "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 48,
-                        "y1": 212,
-                        "x2": 1744,
-                        "y2": 698
+                        "x1": 42,
+                        "y1": 218,
+                        "x2": 1789,
+                        "y2": 766
                       },
                       "info": "Ce texte est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 66,
-                        "y1": 1144,
-                        "x2": 2056,
-                        "y2": 1358
+                        "x1": 48,
+                        "y1": 1184,
+                        "x2": 1902,
+                        "y2": 1378
                       },
                       "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
                       "tooltipPosition": "bottom"
@@ -148,7 +148,7 @@
                     "id": "1",
                     "content": "<p>Je veux créer une association de yoga. Par où commencer ?</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, <strong>le prompt</strong>, c’est la <strong>question posée</strong> ou la <strong>consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>En effet, le <strong>prompt</strong>, c’est la <strong>question posée</strong> ou la <strong>consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
@@ -160,9 +160,9 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Pose une question.</p>",
+                    "content": "<p>Poser une question.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! Le <strong>prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   }
                 ],
@@ -181,7 +181,7 @@
               "element": {
                 "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
                 "type": "text",
-                "content": "<p><strong>Les réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans <strong>la zone située juste en dessous.</strong></p>"
+                "content": "<p>Les <strong>réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans la <strong>zone située juste en dessous</strong>.</p>"
               }
             }
           ]
@@ -376,7 +376,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
+                    "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes hôtes.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bien vu ! Ce prompt contient des <strong>éléments précis </strong>: un verbe, une contrainte (repas végétarien) et un objectif (impressionner ses hôtes).</p>"
                     }
@@ -770,8 +770,8 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiofcg0r00003v01q7icsut0",
-                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette de quiche végétarienne avec votre légume préféré.</p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
+                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée un poème avec votre animal préféré.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
