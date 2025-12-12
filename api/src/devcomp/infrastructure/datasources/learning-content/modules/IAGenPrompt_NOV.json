@@ -148,7 +148,7 @@
                     "id": "1",
                     "content": "<p>Je veux créer une association de yoga. Par où commencer ?</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, <strong>le prompt</strong>, c’est la <strong>question posée</strong> ou la <strong>consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>En effet, le <strong>prompt</strong>, c’est la <strong>question posée</strong> ou la <strong>consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
@@ -162,7 +162,7 @@
                     "id": "3",
                     "content": "<p>Poser une question.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
+                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! Le <strong>prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   }
                 ],
@@ -181,7 +181,7 @@
               "element": {
                 "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
                 "type": "text",
-                "content": "<p><strong>Les réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans <strong>la zone située juste en dessous.</strong></p>"
+                "content": "<p>Les <strong>réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans la <strong>zone située juste en dessous</strong>.</p>"
               }
             }
           ]
