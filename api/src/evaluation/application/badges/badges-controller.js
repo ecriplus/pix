@@ -1,7 +1,7 @@
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import { sharedUsecases } from '../../../shared/domain/usecases/index.js';
-import { deserializer as badgeCreationDeserializer } from '../../infrastructure/serializers/jsonapi/badge-creation-serializer.js';
-import * as badgeSerializer from '../../infrastructure/serializers/jsonapi/badge-serializer.js';
+import { badgeCreationDeserializer } from '../../infrastructure/serializers/jsonapi/badge-creation-serializer.js';
+import { badgeSerializer } from '../../infrastructure/serializers/jsonapi/badge-serializer.js';
 
 const updateBadge = async function (request, h) {
   const badgeId = request.params.id;

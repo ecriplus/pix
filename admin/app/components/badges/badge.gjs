@@ -69,13 +69,15 @@ export default class Badge extends Component {
       await this.args.onUpdateBadge(badgeDTO);
       this.pixToast.sendSuccessNotification({ message: 'Le badge a été mis à jour.' });
       this.editMode = false;
-    } catch (err) {
+    } catch (error) {
       let errorMessage;
-      err.errors.forEach((error) => {
+      error.errors.forEach((error) => {
         if (error?.code === 'BADGE_KEY_UNIQUE_CONSTRAINT_VIOLATED') {
           errorMessage = this.intl.t('components.badges.api-error-messages.key-already-exists', {
             badgeKey: error.meta,
           });
+        } else if (error?.detail.includes('data.attributes.image-url')) {
+          errorMessage = this.intl.t('components.badges.api-error-messages.incorrect-image-url-format');
         } else {
           errorMessage = error.detail;
         }
