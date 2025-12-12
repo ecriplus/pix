@@ -13,13 +13,19 @@
 
   &__image {
     display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    margin: 1rem 3rem 0 0;
-  }
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-bottom: var(--pix-spacing-3x);
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
+    border: 1px var(--pix-primary-100) solid;
+    border-radius: var(--pix-spacing-2x);
 
-  &__content {
-    flex-grow: 1;
+    @include breakpoints.device-is('tablet') {
+      height: 300px;
+      margin-bottom: 0;
+    }
   }
 
   &__tag:not(:first-child) {

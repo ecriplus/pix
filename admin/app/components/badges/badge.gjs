@@ -10,12 +10,12 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import Breadcrumb from '../target-profiles/breadcrumb';
 import CampaignCriterion from './campaign-criterion';
 import CappedTubesCriterion from './capped-tubes-criterion';
-import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 export default class Badge extends Component {
   @service pixToast;
@@ -203,6 +203,18 @@ export default class Badge extends Component {
             </div>
           </form>
         {{else}}
+
+          {{#if @badge.isCertifiable}}
+            <PixTag @color="success" class="badge-details__tag">
+              {{this.isCertifiableText}}
+            </PixTag>
+          {{/if}}
+          {{#if @badge.isAlwaysVisible}}
+            <PixTag @color="tertiary" class="badge-details__tag">
+              {{this.isAlwaysVisibleText}}
+            </PixTag>
+          {{/if}}
+
           <div class="badge-details">
             <div>
               <DescriptionList>
@@ -249,27 +261,13 @@ export default class Badge extends Component {
 
               </DescriptionList>
 
-              <PixButton
-                @variant="secondary"
-                @size="small"
-                @triggerAction={{this.toggleEditMode}}
-              >
+              <PixButton @variant="secondary" @size="small" @triggerAction={{this.toggleEditMode}}>
                 Modifier les informations
               </PixButton>
             </div>
 
             <div class="badge-details__image">
-              <img src={{@badge.imageUrl}} alt="" width="90px" />
-              {{#if @badge.isCertifiable}}
-                <PixTag @color="success" class="badge-details__tag">
-                  {{this.isCertifiableText}}
-                </PixTag>
-              {{/if}}
-              {{#if @badge.isAlwaysVisible}}
-                <PixTag @color="tertiary" class="badge-details__tag">
-                  {{this.isAlwaysVisibleText}}
-                </PixTag>
-              {{/if}}
+              <img src={{@badge.imageUrl}} alt="" />
             </div>
           </div>
         {{/if}}
