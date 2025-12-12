@@ -1,7 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
-import { fn } from '@ember/helper';
+import { concat, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -98,8 +98,11 @@ export default class OrganizationCreationForm extends Component {
       <p class="admin-form__mandatory-text">
         {{t "common.forms.mandatory-fields" htmlSafe=true}}
       </p>
-      <section class="admin-form__content admin-form__content--with-counters organization-creation-form">
-        <Card class="admin-form__card organization-creation-form__card" @title="Information générique">
+      <section class="admin-form__content organization-creation-form">
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.general-information"}}
+        >
           {{#if @parentOrganizationName}}
             <h2 class="admin-form__content title organization-creation-form__parent-name--full">
               {{t
@@ -116,22 +119,27 @@ export default class OrganizationCreationForm extends Component {
               required={{true}}
               aria-required={{true}}
               @requiredLabel={{t "common.fields.required-field"}}
+              placeholder={{concat
+                (t "common.words.example-abbr")
+                " "
+                (t "components.organizations.creation.name.placeholder")
+              }}
             >
-              <:label>Nom</:label>
+              <:label>{{t "components.organizations.creation.name.label"}}</:label>
             </PixInput>
           </div>
 
           <PixSelect
             @onChange={{this.handleOrganizationTypeSelectionChange}}
             @options={{this.organizationTypes}}
-            @placeholder="Type d'organisation"
+            @placeholder={{t "components.organizations.creation.type.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{@organization.type}}
             required
             aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
           >
-            <:label>Sélectionner un type d'organisation</:label>
+            <:label>{{t "components.organizations.creation.type.label"}}</:label>
             <:default as |organizationType|>{{organizationType.label}}</:default>
           </PixSelect>
 
@@ -162,37 +170,80 @@ export default class OrganizationCreationForm extends Component {
             <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
           </PixSelect>
 
-          <PixInput @id="provinceCode" {{on "input" (fn this.handleInputChange "provinceCode")}}>
+          <PixInput
+            @id="provinceCode"
+            {{on "input" (fn this.handleInputChange "provinceCode")}}
+            placeholder={{concat (t "common.words.example-abbr") " 078"}}
+          >
             <:label>{{t "components.organizations.creation.province-code"}}</:label>
           </PixInput>
 
           <div class="organization-creation-form__input--full">
-            <PixInput @id="externalId" {{on "input" (fn this.handleInputChange "externalId")}}>
-              <:label>{{t "components.organizations.creation.external-id"}}</:label>
+            <PixInput
+              @id="externalId"
+              {{on "input" (fn this.handleInputChange "externalId")}}
+              placeholder={{concat
+                (t "common.words.example-abbr")
+                " "
+                (t "components.organizations.creation.external-id.placeholder")
+              }}
+            >
+              <:label>{{t "components.organizations.creation.external-id.label"}}</:label>
             </PixInput>
           </div>
         </Card>
 
-        <Card class="admin-form__card organization-creation-form__card" @title="Configuration">
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.configuration"}}
+        >
           <div class="organization-creation-form__input--full">
-            <PixInput @id="documentationUrl" onchange={{this.handleDocumentationUrlChange}}>
-              <:label>Lien vers la documentation</:label>
+            <PixInput
+              @id="documentationUrl"
+              onchange={{this.handleDocumentationUrlChange}}
+              placeholder={{concat (t "common.words.example-abbr") " https://www.documentation.org"}}
+            >
+              <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
             </PixInput>
           </div>
         </Card>
 
-        <Card class="admin-form__card organization-creation-form__card" @title="Data Privacy Officer">
-          <PixInput @id="dataProtectionOfficerLastName" onchange={{this.handleDataProtectionOfficerLastNameChange}}>
-            <:label>Nom du DPO</:label>
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.dpo.title"}}
+        >
+          <PixInput
+            @id="dataProtectionOfficerLastName"
+            onchange={{this.handleDataProtectionOfficerLastNameChange}}
+            placeholder={{concat (t "common.words.example-abbr") " Dupont"}}
+          >
+            <:label>{{t "components.organizations.creation.dpo.lastname"}}
+              <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
+                  "components.organizations.creation.dpo.title"
+                }}</abbr></:label>
           </PixInput>
 
-          <PixInput @id="dataProtectionOfficerFirstName" onchange={{this.handleDataProtectionOfficerFirstNameChange}}>
-            <:label>Prénom du DPO</:label>
+          <PixInput
+            @id="dataProtectionOfficerFirstName"
+            onchange={{this.handleDataProtectionOfficerFirstNameChange}}
+            placeholder={{concat (t "common.words.example-abbr") " Jean"}}
+          >
+            <:label>{{t "components.organizations.creation.dpo.firstname"}}
+              <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
+                  "components.organizations.creation.dpo.title"
+                }}</abbr></:label>
           </PixInput>
 
           <div class="organization-creation-form__input--full">
-            <PixInput @id="dataProtectionOfficerEmail" onchange={{this.handleDataProtectionOfficerEmailChange}}>
-              <:label>Adresse e-mail du DPO</:label>
+            <PixInput
+              @id="dataProtectionOfficerEmail"
+              onchange={{this.handleDataProtectionOfficerEmailChange}}
+              placeholder={{concat (t "common.words.example-abbr") " jean-dupont@example.net"}}
+            >
+              <:label>{{t "components.organizations.creation.dpo.email"}}
+                <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
+                    "components.organizations.creation.dpo.title"
+                  }}</abbr></:label>
             </PixInput>
           </div>
         </Card>
