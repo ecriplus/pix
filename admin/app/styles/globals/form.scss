@@ -6,6 +6,7 @@
     height: auto;
   }
 
+  // TODO: replace elements that have this class, with admin-form__mandatory-text class defined below
   &__instructions {
     display: block;
     margin-bottom: 10px;
@@ -113,11 +114,11 @@
   grid-template-columns: 1fr;
   gap: var(--pix-spacing-6x);
 
-    .title {
-      @extend %pix-title-xs;
+  .title {
+    @extend %pix-title-xs;
 
-      color: var(--pix-neutral-900);
-    }
+    color: var(--pix-neutral-900);
+  }
 }
 
 .admin-form__card {
