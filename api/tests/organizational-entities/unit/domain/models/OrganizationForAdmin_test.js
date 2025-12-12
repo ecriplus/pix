@@ -301,7 +301,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(givenOrganization.externalId).to.equal(newExternalId);
     });
 
-    it('updates organization province code even if empty value', function () {
+    it('updates organization province code to null if empty value', function () {
       // given
       const initialProvinceCode = '888';
       const newProvinceCode = '';
@@ -316,7 +316,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // then
-      expect(givenOrganization.provinceCode).to.equal(newProvinceCode);
+      expect(givenOrganization.provinceCode).to.be.null;
     });
 
     it('updates organization administration team id', function () {
