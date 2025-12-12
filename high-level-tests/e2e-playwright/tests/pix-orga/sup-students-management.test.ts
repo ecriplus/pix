@@ -32,7 +32,7 @@ test('Managing sup students', async ({ page }) => {
     await page.getByRole('button', { name: 'Importer une nouvelle liste' }).click();
     await page.getByText('Je confirme avoir bien').click();
     await page
-      .getByRole('textbox', { name: 'Oui, je remplace' })
+      .locator('#students-file-upload-replace')
       .setInputFiles(path.join(import.meta.dirname, '..', '..', 'fixtures', 'sup-ok.csv'));
 
     const hasLoader = await page.locator('.app-loader').isVisible();
@@ -40,10 +40,10 @@ test('Managing sup students', async ({ page }) => {
       await page.waitForSelector('.app-loader', { state: 'detached' });
     }
 
-    await page.getByRole('link', { name: 'Étudiants' }).click();
-    await orgaPage.waitForUploadSuccess(page);
+    await orgaPage.waitForTheImportToComplete(page);
   });
   await test.step('show learners', async () => {
+    await page.getByRole('link', { name: 'Étudiants' }).click();
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
     ).toBeVisible();

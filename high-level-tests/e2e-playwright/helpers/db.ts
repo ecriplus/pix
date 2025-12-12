@@ -62,6 +62,7 @@ export async function buildFreshPixOrgaUserWithGenericImport(
   email: string,
   rawPassword: string,
   role: string,
+  uid: string,
   organization: { type: string; externalId: string; isManagingStudents: boolean },
 ) {
   const organizationId = await createOrganizationInDB(organization);
@@ -120,27 +121,18 @@ export async function buildFreshPixOrgaUserWithGenericImport(
 
   const [{ id: importFormatId }] = await knex('organization-learner-import-formats')
     .insert({
-      name: 'GENERIC',
+      name: `GEN-${uid}`,
       fileType: 'csv',
       config: importFormatConfig,
       createdBy: userId,
     })
     .returning('id');
 
-  let featureId = await knex('features')
+  const featureId = await knex('features')
     .where('key', 'LEARNER_IMPORT')
     .select('id')
     .first()
     .then((row) => row?.id);
-
-  if (!featureId) {
-    [{ id: featureId }] = await knex('features')
-      .insert({
-        key: 'LEARNER_IMPORT',
-        description: "Permet l'import de participants sur PixOrga",
-      })
-      .returning('id');
-  }
 
   await knex('organization-features').insert({
     organizationId,
@@ -149,7 +141,7 @@ export async function buildFreshPixOrgaUserWithGenericImport(
   });
 
   // Create a campaign for this organization
-  const campaignCode = 'GENERIC11';
+  const campaignCode = uid.toUpperCase();
   const [{ id: campaignId }] = await knex('campaigns')
     .insert({
       name: 'Campaign for Generic Import',
@@ -356,15 +348,6 @@ async function createUserInDB(
 
   return userId;
 }
-
-export const deleteUserFromDB = async (userId: number) => {
-  await knex('legal-document-version-user-acceptances').where('userId', userId).delete();
-  await knex('user-orga-settings').where('userId', userId).delete();
-  await knex('last-user-application-connections').where('userId', userId).delete();
-  await knex('user-logins').where('userId', userId).delete();
-  await knex('authentication-methods').where('userId', userId).delete();
-  await knex('users').where('id', userId).delete();
-};
 
 async function createLegalDocumentVersionInDB() {
   const someDate = new Date('2025-07-09');
