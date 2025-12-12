@@ -285,7 +285,7 @@
                   "randomSlides": false,
                   "titleLevel": 2,
                   "disableAnimation": false,
-                  "disableLoop": false,
+                  "enableLoop": true,
                   "imageTextDisplay": "1:1"
                 }
               }
@@ -785,11 +785,7 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "",
-                    "tolerances": [
-                      "un centre de données",
-                      "de votre appareil",
-                      "un serveur"
-                    ],
+                    "tolerances": ["un centre de données", "de votre appareil", "un serveur"],
                     "options": [
                       {
                         "id": "1",
@@ -804,9 +800,7 @@
                         "content": "de votre appareil"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -819,11 +813,7 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "",
-                    "tolerances": [
-                      "un serveur",
-                      "un centre de données",
-                      "de votre appareil"
-                    ],
+                    "tolerances": ["un serveur", "un centre de données", "de votre appareil"],
                     "options": [
                       {
                         "id": "1",
@@ -838,9 +828,7 @@
                         "content": "un centre de données"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -853,11 +841,7 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "10",
-                    "tolerances": [
-                      "votre appareil",
-                      "serveurs",
-                      "centre de donnée"
-                    ],
+                    "tolerances": ["votre appareil", "serveurs", "centre de donnée"],
                     "options": [
                       {
                         "id": "1",
@@ -872,9 +856,7 @@
                         "content": "centre de donnée"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {

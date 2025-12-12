@@ -198,11 +198,7 @@
                           "placeholder": "votre mot",
                           "ariaLabel": "zone de saisie",
                           "defaultValue": "",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
+                          "tolerances": ["t1", "t2", "t3"],
                           "solutions": [
                             "beurre",
                             "sucre",
@@ -345,11 +341,7 @@
                         ],
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": [
-                          "beurre",
-                          "et",
-                          "du ?"
-                        ]
+                        "wordsToAdd": ["beurre", "et", "du ?"]
                       }
                     }
                   ]
@@ -441,7 +433,6 @@
                   "randomSlides": false,
                   "titleLevel": 2,
                   "disableAnimation": false,
-                  "disableLoop": true,
                   "imageTextDisplay": "1:1"
                 }
               }

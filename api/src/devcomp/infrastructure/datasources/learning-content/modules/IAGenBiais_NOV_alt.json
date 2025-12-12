@@ -783,7 +783,7 @@
                   "randomSlides": false,
                   "titleLevel": 2,
                   "disableAnimation": false,
-                  "disableLoop": false
+                  "enableLoop": true
                 }
               }
             },
@@ -825,10 +825,7 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple, ou bien vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "4"
-                ]
+                "solutions": ["2", "4"]
               }
             }
           ]
@@ -876,10 +873,7 @@
                     "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
+                "solutions": ["1", "3"]
               }
             }
           ]
