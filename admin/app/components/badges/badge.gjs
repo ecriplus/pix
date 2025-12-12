@@ -136,54 +136,39 @@ export default class Badge extends Component {
 
         {{#if this.editMode}}
           <form class="form" {{on "submit" this.updateBadge}}>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.title}}
-                @requiredLabel={{true}}
-                {{on "input" (this.onFormInputChange "title")}}
-              ><:label>Titre</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.key}}
-                @requiredLabel={{true}}
-                {{on "input" (this.onFormInputChange "key")}}
-              ><:label>Clé</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixTextarea
-                class="form-control"
-                @value={{this.form.message}}
-                rows="4"
-                {{on "input" (this.onFormInputChange "message")}}
-              ><:label>Message</:label></PixTextarea>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.imageUrl}}
-                @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (this.onFormInputChange "imageUrl")}}
-              ><:label>Url de l'image (svg)</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.altMessage}}
-                @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (this.onFormInputChange "altMessage")}}
-              ><:label>Message Alternatif</:label></PixInput>
-            </div>
+            <PixInput
+              @value={{this.form.title}}
+              @requiredLabel={{true}}
+              {{on "input" (this.onFormInputChange "title")}}
+            ><:label>Titre</:label></PixInput>
+
+            <PixInput
+              @value={{this.form.key}}
+              @requiredLabel={{true}}
+              {{on "input" (this.onFormInputChange "key")}}
+            ><:label>Clé</:label></PixInput>
+
+            <PixTextarea @value={{this.form.message}} rows="4" {{on "input" (this.onFormInputChange "message")}}><:label
+              >Message</:label></PixTextarea>
+
+            <PixInput
+              @value={{this.form.imageUrl}}
+              @requiredLabel={{t "common.forms.mandatory"}}
+              {{on "input" (this.onFormInputChange "imageUrl")}}
+            ><:label>Url de l'image (svg)</:label></PixInput>
+
+            <PixInput
+              @value={{this.form.altMessage}}
+              @requiredLabel={{t "common.forms.mandatory"}}
+              {{on "input" (this.onFormInputChange "altMessage")}}
+            ><:label>Message Alternatif</:label></PixInput>
+
             <div class="badge-edit-form__checkboxes">
-              <div>
-                <PixCheckbox
-                  @checked={{this.form.isCertifiable}}
-                  @variant="tile"
-                  {{on "change" (this.onFormCheckToggle "isCertifiable")}}
-                ><:label>Certifiable</:label></PixCheckbox>
-              </div>
+              <PixCheckbox
+                @checked={{this.form.isCertifiable}}
+                @variant="tile"
+                {{on "change" (this.onFormCheckToggle "isCertifiable")}}
+              ><:label>Certifiable</:label></PixCheckbox>
               <div>
                 <PixCheckbox
                   @type="checkbox"
