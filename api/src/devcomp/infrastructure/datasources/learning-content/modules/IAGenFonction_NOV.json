@@ -182,12 +182,12 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
-                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p>👉 <strong>Cherchez un mot pour compléter ce texte.</strong></p><blockquote><code>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du [_________]\"</code></blockquote>"
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p><code>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du ...\"</code></p>"
                     },
                     {
                       "id": "5aef88e6-f410-4636-b0e6-aa3eee7d2280",
                       "type": "qrocm",
-                      "instruction": "<p>Tapez le mot que vous avez choisi dans la zone de saisie ci-dessous.&nbsp;</p>",
+                      "instruction": "<p>Tapez l'ingrédient que vous mettriez&nbsp;dans la zone de saisie ci-dessous.&nbsp;</p>",
                       "proposals": [
                         {
                           "input": "zone de saisie",
@@ -198,7 +198,11 @@
                           "placeholder": "votre mot",
                           "ariaLabel": "zone de saisie",
                           "defaultValue": "",
-                          "tolerances": ["t1", "t2", "t3"],
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
                           "solutions": [
                             "beurre",
                             "sucre",
@@ -219,8 +223,8 @@
                           "diagnosis": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
                         },
                         "invalid": {
-                          "state": "<p>Excellent choix !&nbsp;</p>",
-                          "diagnosis": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
+                          "state": "<p>Surprenant !&nbsp;</p>",
+                          "diagnosis": "<p>Vous avez choisi un ingrédient rare ou insolite !&nbsp;</p>"
                         }
                       }
                     }
@@ -341,7 +345,11 @@
                         ],
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": ["beurre", "et", "du ?"]
+                        "wordsToAdd": [
+                          "beurre",
+                          "et",
+                          "du ?"
+                        ]
                       }
                     }
                   ]
