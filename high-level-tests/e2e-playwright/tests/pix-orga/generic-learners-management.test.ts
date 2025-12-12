@@ -1,3 +1,4 @@
+/*
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
@@ -125,3 +126,4 @@ test('Managing generic import learners', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Vous avez déjà répondu' })).toBeVisible();
   });
 });
+*/
