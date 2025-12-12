@@ -23,7 +23,9 @@ const findPaginatedParticipationsForCampaignManagement = async function ({ campa
       userFirstName: 'users.firstName',
       userLastName: 'users.lastName',
       participantExternalId: 'campaign-participations.participantExternalId',
-      status: 'campaign-participations.status',
+      status: knex.raw(
+        `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`, // TODO: stop casting TO_SHARE once the migration is done
+      ),
       createdAt: 'campaign-participations.createdAt',
       sharedAt: 'campaign-participations.sharedAt',
       deletedAt: 'campaign-participations.deletedAt',

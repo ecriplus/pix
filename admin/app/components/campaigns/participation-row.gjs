@@ -18,8 +18,8 @@ export default class ParticipationRow extends Component {
   @tracked newParticipantExternalId;
 
   _checkIfParticipantExternalIdIsNull(newParticipantExternalId) {
-    const trimedNewParticipantExternalId = newParticipantExternalId.trim();
-    return trimedNewParticipantExternalId || null;
+    const trimmedNewParticipantExternalId = newParticipantExternalId.trim();
+    return trimmedNewParticipantExternalId || null;
   }
 
   @action

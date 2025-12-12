@@ -6,6 +6,8 @@ import { CampaignParticipationStatuses } from '../../../../../../src/prescriptio
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
+const { STARTED, TO_SHARE } = CampaignParticipationStatuses;
+
 describe('Integration | Repository | Participations-For-Campaign-Management', function () {
   describe('#updateParticipantExternalId', function () {
     context('When campaign participation is not null', function () {
@@ -269,7 +271,7 @@ describe('Integration | Repository | Participations-For-Campaign-Management', fu
       });
     });
 
-    context('whern participations have been anonymised', function () {
+    context('when participations have been anonymised', function () {
       it('should return participation with no userId', async function () {
         // given
         const user = databaseBuilder.factory.buildUser();
@@ -304,6 +306,28 @@ describe('Integration | Repository | Participations-For-Campaign-Management', fu
         // then
         expect(participationsForCampaignManagement).to.have.lengthOf(1);
         expect(participationsForCampaignManagement[0].id).to.equal(campaignParticipation.id);
+      });
+    });
+
+    context('when participation has TO_SHARE status', function () {
+      it('should convert TO_SHARE status to STARTED', async function () {
+        // given
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          status: TO_SHARE,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { models: participationsForCampaignManagement } =
+          await participationsForCampaignManagementRepository.findPaginatedParticipationsForCampaignManagement({
+            campaignId,
+            page,
+          });
+
+        // then
+        expect(participationsForCampaignManagement).to.have.lengthOf(1);
+        expect(participationsForCampaignManagement[0].status).to.equal(STARTED);
       });
     });
   });
