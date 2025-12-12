@@ -160,7 +160,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Pose une question.</p>",
+                    "content": "<p>Poser une question.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est la<strong> question posée</strong> ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
@@ -376,7 +376,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
+                    "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes hôtes.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bien vu ! Ce prompt contient des <strong>éléments précis </strong>: un verbe, une contrainte (repas végétarien) et un objectif (impressionner ses hôtes).</p>"
                     }
