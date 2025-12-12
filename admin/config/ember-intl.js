@@ -39,53 +39,6 @@ module.exports = function (/* environment */) {
     publicOnly: false,
 
     /**
-     * Cause a build error if ICU argument mismatches are detected.
-     *
-     * @property errorOnNamedArgumentMismatch
-     * @type {Boolean}
-     * @default "false"
-     */
-    errorOnNamedArgumentMismatch: false,
-
-    /**
-     * Cause a build error if missing translations are detected.
-     *
-     * See https://ember-intl.github.io/ember-intl/docs/guide/missing-translations#throwing-a-build-error-on-missing-required-translation
-     *
-     * @property errorOnMissingTranslations
-     * @type {Boolean}
-     * @default "false"
-     */
-    errorOnMissingTranslations: true,
-
-    /**
-     * Filter missing translations to ignore expected missing translations.
-     *
-     * See https://ember-intl.github.io/ember-intl/docs/guide/missing-translations#requiring-translations
-     *
-     * @property requiresTranslation
-     * @type {Function}
-     * @default "function(key,locale){return true}"
-     */
-    requiresTranslation(key, locale) {
-      if (locale !== 'fr') {
-        // Ignore any non-French missing translations while Admin is not used in other languages than French
-        return false;
-      }
-
-      return true;
-    },
-
-    /**
-     * removes empty translations from the build output.
-     *
-     * @property stripEmptyTranslations
-     * @type {Boolean}
-     * @default false
-     */
-    stripEmptyTranslations: false,
-
-    /**
      * Add the subdirectories of the translations as a namespace for all keys.
      *
      * @property wrapTranslationsWithNamespace

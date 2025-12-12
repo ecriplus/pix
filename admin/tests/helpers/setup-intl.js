@@ -1,8 +1,12 @@
 import { getContext, settled } from '@ember/test-helpers';
 import { setupIntl as setupIntlFromEmberIntl, t } from 'ember-intl/test-support';
+import { formats } from 'pix-admin/ember-intl';
 
 export async function setCurrentLocale(locale) {
   const { owner } = getContext();
+
+  const intl = owner.lookup('service:intl');
+  intl.setFormats(formats);
 
   const localeService = owner.lookup('service:locale');
   localeService.setCurrentLocale(locale);
