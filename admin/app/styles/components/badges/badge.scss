@@ -1,7 +1,15 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 .badge-details {
   display: flex;
+  flex-direction: column;
+
+  @include breakpoints.device-is('tablet') {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+  }
 
   &__image {
     display: flex;
@@ -16,10 +24,6 @@
 
   &__tag:not(:first-child) {
     margin-top: 0.5rem;
-  }
-
-  &__action {
-    margin-left: auto;
   }
 }
 

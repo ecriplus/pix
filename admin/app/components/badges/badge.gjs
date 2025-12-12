@@ -15,6 +15,7 @@ import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import Breadcrumb from '../target-profiles/breadcrumb';
 import CampaignCriterion from './campaign-criterion';
 import CappedTubesCriterion from './capped-tubes-criterion';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 export default class Badge extends Component {
   @service pixToast;
@@ -202,7 +203,61 @@ export default class Badge extends Component {
             </div>
           </form>
         {{else}}
-          <div class="page-section__details badge-details">
+          <div class="badge-details">
+            <div>
+              <DescriptionList>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="ID">
+                  {{@badge.id}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Clé">
+                  {{@badge.key}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Nom du badge">
+                  {{@badge.title}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Url de l'image">
+                  {{@badge.imageUrl}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Message">
+                  <blockquote>
+                    <SafeMarkdownToHtml @markdown={{@badge.message}} />
+                  </blockquote>
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Message alternatif">
+                  {{@badge.altMessage}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+              </DescriptionList>
+
+              <PixButton
+                @variant="secondary"
+                @size="small"
+                @triggerAction={{this.toggleEditMode}}
+              >
+                Modifier les informations
+              </PixButton>
+            </div>
+
             <div class="badge-details__image">
               <img src={{@badge.imageUrl}} alt="" width="90px" />
               {{#if @badge.isCertifiable}}
@@ -215,34 +270,6 @@ export default class Badge extends Component {
                   {{this.isAlwaysVisibleText}}
                 </PixTag>
               {{/if}}
-            </div>
-            <div class="badge-details__content">
-              <dl class="page-details">
-                <dt class="page-details__label">ID&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.id}}</dd>
-                <dt class="page-details__label">Clé&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.key}}</dd>
-                <dt class="page-details__label">Nom du badge&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.title}}</dd>
-                <dt class="page-details__label">Url de l'image&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{this.imageUrl}}</dd>
-                <dt class="page-details__label">Message&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">
-                  <blockquote>
-                    <SafeMarkdownToHtml @markdown={{@badge.message}} />
-                  </blockquote>
-                </dd>
-                <dt class="page-details__label">Message alternatif&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.altMessage}}</dd>
-              </dl>
-              <PixButton
-                @variant="secondary"
-                class="badge-details__action"
-                @size="small"
-                @triggerAction={{this.toggleEditMode}}
-              >
-                Modifier les informations
-              </PixButton>
             </div>
           </div>
         {{/if}}
