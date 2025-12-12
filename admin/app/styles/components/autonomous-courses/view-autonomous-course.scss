@@ -1,0 +1,9 @@
+.view-autonomous-course {
+  &__copy-link {
+    dd {
+      display: flex;
+      gap: var(--pix-spacing-2x);
+      align-items: center;
+    }
+  }
+}

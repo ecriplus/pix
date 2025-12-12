@@ -66,3 +66,11 @@ a.pix-button {
 .navigation {
   margin: var(--pix-spacing-2x) 0 var(--pix-spacing-6x) 0;
 }
+
+blockquote {
+  margin: 0;
+  padding: var(--pix-spacing-3x);
+  font-style: italic;
+  background-color: var(--pix-primary-10);
+  border-left: 2px dotted var(--pix-primary-100);
+}

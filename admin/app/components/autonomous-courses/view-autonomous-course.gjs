@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
 
@@ -52,24 +53,30 @@ export default class ViewAutonomousCourse extends Component {
   }
 
   <template>
-    <dl class="page-details">
+    <DescriptionList>
+
+      <DescriptionList.Divider />
 
       {{#each this.displayedAttributes as |attribute|}}
-        <dt class="page-details__label">{{attribute.label}}&nbsp;:&nbsp;</dt>
-        <dd class="page-details__value">{{attribute.value}}</dd>
+        <DescriptionList.Item @label={{attribute.label}}>
+          {{attribute.value}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
       {{/each}}
 
-      <dt class="page-details__label">
-        {{t "components.autonomous-courses.view.labels.custom-landing-page"}}&nbsp;:&nbsp;
-      </dt>
-      <dd class="page-details__value">
+      <DescriptionList.Item @label={{t "components.autonomous-courses.view.labels.custom-landing-page"}}>
         <blockquote>
           <SafeMarkdownToHtml @markdown={{@autonomousCourse.customLandingPageText}} />
         </blockquote>
-      </dd>
+      </DescriptionList.Item>
 
-      <dt class="page-details__label">{{t "components.autonomous-courses.view.link-title"}}&nbsp;:&nbsp;</dt>
-      <dd class="page-details__value">
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item
+        @label={{t "components.autonomous-courses.view.link-title"}}
+        class="view-autonomous-course__copy-link"
+      >
         <a
           href={{this.campaignLink}}
           target="_blank"
@@ -86,7 +93,9 @@ export default class ViewAutonomousCourse extends Component {
           </:triggerElement>
           <:tooltip>{{this.tooltipLabel}}</:tooltip>
         </PixTooltip>
-      </dd>
-    </dl>
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+    </DescriptionList>
   </template>
 }
