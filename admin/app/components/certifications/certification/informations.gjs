@@ -15,7 +15,7 @@ import CertificationInformationState from './informations/state';
     <div class="certification-informations__row">
       <CertificationInformationGlobalActions @certification={{@certification}} @session={{@session}} />
     </div>
-    <div class="certification-informations__row">
+    <div class="certification-information__row">
       <CertificationInformationState @certification={{@certification}} @session={{@session}} />
       <CertificationInformationCandidate @certification={{@certification}} />
     </div>

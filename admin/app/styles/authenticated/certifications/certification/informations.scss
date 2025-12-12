@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .certification-informations {
   &__actions {
     display: flex;
@@ -171,6 +173,25 @@
       margin-left: 5px;
       color: var(--pix-error-700);
       font-style: italic;
+    }
+  }
+}
+
+.certification-information {
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.certification-information-card {
+  &__title {
+    @extend %pix-title-xs;
+
+    &--state {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

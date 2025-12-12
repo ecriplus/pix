@@ -19,6 +19,7 @@ module('Integration | Component | Certifications | Certification | Information |
       completedAt: new Date(),
       status: 'rejected',
       isPublished: false,
+      createdAt: new Date('2025-01-10'),
     });
     const session = store.createRecord('session', { id: '7404' });
 
@@ -28,33 +29,27 @@ module('Integration | Component | Certifications | Certification | Information |
     );
 
     // then
-    assert.dom(screen.getByRole('heading', { name: 'État' })).exists();
-    assert.dom(screen.queryByText('Publiée')).doesNotExist();
+    assert.dom(screen.getByRole('heading', { name: 'État Non publiée' })).exists();
     assert.dom(screen.queryByText('Annulée')).doesNotExist();
 
-    const sessionInfo = screen.getByText('Session :');
+    const sessionInfo = screen.getByText('Session');
     assert.dom(sessionInfo).exists();
     assert.dom(within(sessionInfo.parentNode).getByRole('link', { name: session.id })).exists();
 
-    const statusInfo = screen.getByText('Statut :');
+    const statusInfo = screen.getByText('Statut');
     assert.dom(statusInfo).exists();
     assert.dom(within(statusInfo.parentNode).getByText('Rejetée')).exists();
-
-    const createdAtInfo = screen.getByText('Créée le :');
+    const createdAtInfo = screen.getByText('Créée le');
     assert.dom(createdAtInfo).exists();
     assert.dom(within(createdAtInfo.parentNode).getByText(certification.creationDate)).exists();
 
-    const completedAtInfo = screen.getByText('Terminée le :');
+    const completedAtInfo = screen.getByText('Terminée le');
     assert.dom(completedAtInfo).exists();
     assert.dom(within(completedAtInfo.parentNode).getByText(certification.completionDate)).exists();
-
-    const isPublishedInfo = screen.getByText('Publiée :');
-    assert.dom(isPublishedInfo).exists();
-    assert.dom(within(isPublishedInfo.parentNode).getByText('Non')).exists();
   });
 
   module('when the certification is published', function () {
-    test('it should display a tag and a specific text', async function (assert) {
+    test('it should display a tag', async function (assert) {
       // given
       const certification = store.createRecord('certification', {
         isPublished: true,
@@ -68,9 +63,6 @@ module('Integration | Component | Certifications | Certification | Information |
 
       // then
       assert.dom(screen.getByText('Publiée')).exists();
-
-      const isPublishedInfo = screen.getByText('Publiée :');
-      assert.dom(within(isPublishedInfo.parentNode).getByText('Oui')).exists();
     });
   });
 
@@ -89,7 +81,7 @@ module('Integration | Component | Certifications | Certification | Information |
       );
 
       // then
-      const statusInfo = screen.getByText('Statut :');
+      const statusInfo = screen.getByText('Statut');
       assert.dom(statusInfo).exists();
       assert.dom(within(statusInfo.parentNode).getByText('Annulée')).exists();
     });
