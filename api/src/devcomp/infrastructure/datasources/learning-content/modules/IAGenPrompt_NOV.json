@@ -97,38 +97,38 @@
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yoga-llm.jpg",
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/asso-yoga-mpp-03.jpg",
                     "alt": "IA générative ChatPIX",
-                    "width": 2081,
-                    "height": 1365
+                    "width": 1954,
+                    "height": 1393
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 830,
-                        "y1": 20,
-                        "x2": 2048,
-                        "y2": 194
+                        "x1": 792,
+                        "y1": 44,
+                        "x2": 1922,
+                        "y2": 186
                       },
                       "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 48,
-                        "y1": 212,
-                        "x2": 1744,
-                        "y2": 698
+                        "x1": 42,
+                        "y1": 218,
+                        "x2": 1789,
+                        "y2": 766
                       },
                       "info": "Ce texte est la réponse apportée par le logiciel d’IA générative.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 66,
-                        "y1": 1144,
-                        "x2": 2056,
-                        "y2": 1358
+                        "x1": 48,
+                        "y1": 1184,
+                        "x2": 1902,
+                        "y2": 1378
                       },
                       "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
                       "tooltipPosition": "bottom"
@@ -770,8 +770,8 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiofcg0r00003v01q7icsut0",
-                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette de quiche végétarienne avec votre légume préféré.</p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
+                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée un poème avec votre animal préféré.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
