@@ -741,9 +741,9 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>J’utiliserai les réponses qu’elle me donne, sans les vérifier.</p>",
+                    "content": "<p>Je réfléchirai avant d’utiliser les réponses de l’IA.</p>\n",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les logiciels d’IA générative répondent souvent de manière intéressante. </p><p>Mais ils ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
+                      "diagnosis": "<p><strong>C’est une bonne résolution.</strong></p>\n<p>Un logiciel d’IA générative peut se tromper.</p>\n<p>Réfléchir avant d’utiliser une réponse permet d’éviter des erreurs.</p>\n"
                     }
                   },
                   {
