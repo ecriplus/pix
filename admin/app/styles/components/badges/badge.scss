@@ -60,6 +60,10 @@
   }
 }
 
+.badge-criterion {
+  padding-top: var(--pix-spacing-6x);
+}
+
 .badge-criterion__header {
   display: flex;
   flex-wrap: wrap;

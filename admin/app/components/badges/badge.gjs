@@ -258,7 +258,7 @@ export default class Badge extends Component {
         {{/if}}
       </section>
 
-      <section class="badge__criteria main-admin-form">
+      <section class="badge-criterion">
         <div class="admin-form__content">
           {{#if this.campaignScopeCriterion}}
             <CampaignCriterion
