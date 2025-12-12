@@ -1,15 +1,21 @@
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
-  it('#serialize', function () {
+  it('#serialize', async function () {
     // given
-    const combinedCourse = domainBuilder.buildCombinedCourseDetails();
-
+    sinon.stub(cryptoService, 'encrypt');
+    cryptoService.encrypt.withArgs('/parcours/COMBINIX1').resolves('encryptedCombinedCourseUrl');
+    const combinedCourseDetails = domainBuilder.buildCombinedCourseDetails({
+      combinedCourseItems: [{ campaignId: 1 }, { moduleId: 7 }],
+    });
+    await combinedCourseDetails.setEncryptedUrl();
+    combinedCourseDetails.generateItems();
     // when
-    const serializedCombinedCourse = combinedCourseSerializer.serialize(combinedCourse);
+    const serializedCombinedCourse = combinedCourseSerializer.serialize(combinedCourseDetails);
 
     // then
     expect(serializedCombinedCourse).to.deep.equal({
@@ -17,7 +23,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
         attributes: {
           name: 'Mon parcours',
           code: 'COMBINIX1',
-          'organization-id': 1,
+          'organization-id': 3,
           status: CombinedCourseStatuses.NOT_STARTED,
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
           illustration: '/illustrations/image.svg',
@@ -38,7 +44,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           type: 'combined-course-items',
           id: '1',
           attributes: {
-            title: 'diagnostique',
+            title: 'diagnostique1',
             reference: 'ABCDIAG1',
             type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
             redirection: undefined,
@@ -55,8 +61,8 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           type: 'combined-course-items',
           id: '7',
           attributes: {
-            title: 'title',
-            reference: 'slug',
+            title: 'title7',
+            reference: 'slug7',
             type: COMBINED_COURSE_ITEM_TYPES.MODULE,
             redirection: 'encryptedCombinedCourseUrl',
             'is-completed': false,
@@ -65,7 +71,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             'total-stages-count': null,
             'is-locked': true,
             duration: 10,
-            image: 'emile',
+            image: 'emile7',
           },
         },
       ],

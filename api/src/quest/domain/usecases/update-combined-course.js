@@ -16,9 +16,13 @@ export async function updateCombinedCourse({
     organizationId: combinedCourse.organizationId,
   });
 
+  const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
+    combinedCourseId: combinedCourse.id,
+  });
+
   const combinedCourseDetailsBeforeUpdate = await combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
-    combinedCourseId: combinedCourse.id,
+    combinedCourseDetails,
   });
 
   const moduleToSynchronizeIds = combinedCourseDetailsBeforeUpdate.items
@@ -30,25 +34,25 @@ export async function updateCombinedCourse({
   }
 
   await organizationLearnerPassageParticipationRepository.synchronize({
-    organizationLearnerId: combinedCourseDetailsBeforeUpdate.participation.organizationLearnerId,
+    organizationLearnerId,
     moduleIds: moduleToSynchronizeIds,
   });
 
   // TODO: remove this when we have a better way to handle this . it makes my hair stand on end
-  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
+  const updatedCombinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
-    combinedCourseId: combinedCourse.id,
+    combinedCourseDetails,
   });
 
-  const isCombinedCourseCompleted = await combinedCourseDetails.items.every((item) => item.isCompleted);
+  const isCombinedCourseCompleted = await updatedCombinedCourseDetails.items.every((item) => item.isCompleted);
 
   if (isCombinedCourseCompleted) {
-    combinedCourseDetails.participation.complete();
+    updatedCombinedCourseDetails.participation.complete();
     const organizationLearnerParticipation = OrganizationLearnerParticipation.buildFromCombinedCourse(
-      combinedCourseDetails.participation,
+      updatedCombinedCourseDetails.participation,
     );
     await combinedCourseParticipationRepository.update(organizationLearnerParticipation.fieldsForUpdate);
   }
 
-  return combinedCourseDetails.participation;
+  return updatedCombinedCourseDetails.participation;
 }

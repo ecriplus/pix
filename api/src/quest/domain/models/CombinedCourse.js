@@ -4,12 +4,11 @@ import {
   CombinedCourseParticipationStatuses,
   CombinedCourseStatuses,
 } from '../../../prescription/shared/domain/constants.js';
+import { config } from '../../../shared/config.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
-import { Campaign } from './Campaign.js';
+import { cryptoService as injectedCryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
 import { CombinedCourseParticipationDetails } from './CombinedCourseParticipationDetails.js';
-import { Module } from './Module.js';
-import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
 const schema = Joi.object({
@@ -60,18 +59,30 @@ export class CombinedCourse {
 
 export class CombinedCourseDetails extends CombinedCourse {
   items = null;
+  #combinedCourseUrl = null;
 
-  constructor({ id, code, organizationId, name, description, illustration, questId }, quest, participation) {
+  constructor(
+    { id, code, organizationId, name, description, illustration, questId },
+    quest,
+    cryptoService = injectedCryptoService,
+  ) {
     super({ id, code, organizationId, name, description, illustration, questId }, quest);
-    if (!participation) {
-      this.status = CombinedCourseStatuses.NOT_STARTED;
-    } else {
-      this.status =
-        participation.status === CombinedCourseParticipationStatuses.STARTED
-          ? CombinedCourseStatuses.STARTED
-          : CombinedCourseStatuses.COMPLETED;
-    }
-    this.participation = participation;
+    this.campaigns = [];
+    this.recommendableModuleIds = [];
+    this.cryptoService = cryptoService;
+  }
+
+  async setEncryptedUrl() {
+    this.#combinedCourseUrl = await this.cryptoService.encrypt('/parcours/' + this.code, config.module.secret);
+  }
+
+  setRecommandableModuleIds(recommendableModuleIds) {
+    this.recommendableModuleIds = recommendableModuleIds;
+  }
+
+  setItems({ campaigns, modules }) {
+    this.campaigns = campaigns;
+    this.modules = modules;
   }
 
   get hasCampaigns() {
@@ -118,39 +129,6 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
   }
 
-  isCompleted(dataForQuest, recommendableModuleIds = [], recommendedModuleIdsForUser = []) {
-    const successRequirements = this.quest.successRequirements.filter((req) => {
-      if (req.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        return true;
-      } else if (req.requirement_type === TYPES.OBJECT.PASSAGES) {
-        const moduleId = req.data.moduleId.data;
-
-        const isRecommandable = recommendableModuleIds.find(
-          (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === moduleId,
-        );
-
-        if (isRecommandable) {
-          const isRecommended = recommendedModuleIdsForUser.find(
-            (recommendedModule) => recommendedModule.moduleId === moduleId,
-          );
-          if (!isRecommended) {
-            return false;
-          }
-        }
-
-        return true;
-      }
-    });
-
-    const questForUser = new Quest({
-      ...this.quest,
-      eligibilityRequirements: this.quest.eligibilityRequirements,
-      successRequirements,
-    });
-
-    return questForUser.isSuccessful(dataForQuest);
-  }
-
   #createCampaignCombinedCourseItem({
     campaign,
     participationStatus,
@@ -174,13 +152,13 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
   }
 
-  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, participationStatus, isCompleted, isLocked) {
+  #createModuleCombinedCourseItem(module, participationStatus, isCompleted, isLocked) {
     return new CombinedCourseItem({
       id: module.id,
       reference: module.slug,
       title: module.title,
       type: COMBINED_COURSE_ITEM_TYPES.MODULE,
-      redirection: encryptedCombinedCourseUrl,
+      redirection: this.#combinedCourseUrl,
       participationStatus,
       isCompleted,
       isLocked,
@@ -197,9 +175,9 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
   }
 
-  #createFormationCombinedCourseItemIfNeeded(recommandableModule, targetProfileIdsThatNeedAFormationItem) {
+  #createFormationCombinedCourseItemIfNeeded(recommendableModule, targetProfileIdsThatNeedAFormationItem) {
     const targetProfileId = targetProfileIdsThatNeedAFormationItem.find((targetProfileIdOfCampaign) =>
-      recommandableModule.targetProfileIds.includes(targetProfileIdOfCampaign),
+      recommendableModule.targetProfileIds.includes(targetProfileIdOfCampaign),
     );
 
     const shouldBeInFormationItem = Boolean(targetProfileId);
@@ -228,14 +206,19 @@ export class CombinedCourseDetails extends CombinedCourse {
     }
   }
 
-  generateItems({
-    itemDetails,
-    recommendableModuleIds = [],
-    recommendedModuleIdsForUser = [],
-    encryptedCombinedCourseUrl,
-    dataForQuest,
-  }) {
+  generateItems({ recommendedModuleIdsForUser = [], dataForQuest, participation = null } = {}) {
     this.items = [];
+    this.participation = participation;
+
+    if (!this.participation) {
+      this.status = CombinedCourseStatuses.NOT_STARTED;
+    } else {
+      this.status =
+        participation.status === CombinedCourseParticipationStatuses.STARTED
+          ? CombinedCourseStatuses.STARTED
+          : CombinedCourseStatuses.COMPLETED;
+    }
+
     const targetProfileIdsThatNeedAFormationItem = [];
 
     for (const requirement of this.quest.successRequirements) {
@@ -244,19 +227,17 @@ export class CombinedCourseDetails extends CombinedCourse {
 
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
-
-        const campaign = itemDetails.find(
-          (item) => item.id === requirement.data.campaignId.data && item instanceof Campaign,
-        );
+        const campaign = this.campaigns.find((item) => item.id === requirement.data.campaignId.data);
         const associatedParticipation = dataForQuest?.campaignParticipations?.find(
           (campaignParticipation) => campaignParticipation.campaignId === campaign.id,
         );
+
         const participationStatus = associatedParticipation?.status;
 
         const doesCampaignRecommendModules =
-          recommendableModuleIds.find((recommandableModule) => {
-            if (!this.moduleIds.includes(recommandableModule.moduleId)) return false;
-            return recommandableModule.targetProfileIds.includes(campaign.targetProfileId);
+          this.recommendableModuleIds.find((recommendableModule) => {
+            if (!this.moduleIds.includes(recommendableModule.moduleId)) return false;
+            return recommendableModule.targetProfileIds.includes(campaign.targetProfileId);
           }) ?? [];
 
         if (doesCampaignRecommendModules && !isCompleted) {
@@ -276,25 +257,17 @@ export class CombinedCourseDetails extends CombinedCourse {
         );
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
-        const module = itemDetails.find((item) => item.id === requirement.data.moduleId.data && item instanceof Module);
+        const module = this.modules.find((item) => item.id === requirement.data.moduleId.data);
         const passage = dataForQuest?.passages.find((passage) => passage.moduleId === module.id);
         const participationStatus = passage?.status;
 
-        const recommandableModule = recommendableModuleIds.find(
+        const recommendableModule = this.recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
         );
-        const isRecommandable = Boolean(recommandableModule);
+        const isRecommandable = Boolean(recommendableModule);
 
         if (!isRecommandable) {
-          this.items.push(
-            this.#createModuleCombinedCourseItem(
-              module,
-              encryptedCombinedCourseUrl,
-              participationStatus,
-              isCompleted,
-              isLocked,
-            ),
-          );
+          this.items.push(this.#createModuleCombinedCourseItem(module, participationStatus, isCompleted, isLocked));
           continue;
         }
 
@@ -303,20 +276,12 @@ export class CombinedCourseDetails extends CombinedCourse {
         );
 
         if (isRecommended) {
-          this.items.push(
-            this.#createModuleCombinedCourseItem(
-              module,
-              encryptedCombinedCourseUrl,
-              participationStatus,
-              isCompleted,
-              isLocked,
-            ),
-          );
+          this.items.push(this.#createModuleCombinedCourseItem(module, participationStatus, isCompleted, isLocked));
           continue;
         }
 
         const formationCombinedCourseItem = this.#createFormationCombinedCourseItemIfNeeded(
-          recommandableModule,
+          recommendableModule,
           targetProfileIdsThatNeedAFormationItem,
         );
 

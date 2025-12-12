@@ -37,15 +37,14 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
   });
 
   it('should throw an error if CombinedCourse does not exist', async function () {
-    const error = await catchErr(CombinedCourseDetailsService.getCombinedCourseDetails)({
+    const error = await catchErr(CombinedCourseDetailsService.instantiateCombinedCourseDetails)({
       combinedCourseId: 123,
-      organizationLearnerId: 123,
     });
 
     expect(error).to.be.instanceOf(NotFoundError);
   });
 
-  describe('when there is a combined course participation', function () {
+  describe('when there is a combined course', function () {
     let organizationLearnerId, userId, organizationId;
     let targetProfile, campaign;
     let training1, training2;
@@ -80,9 +79,12 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       await databaseBuilder.commit();
 
       // when
+      const combinedCourseDetails = await CombinedCourseDetailsService.instantiateCombinedCourseDetails({
+        combinedCourseId,
+      });
       const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
         organizationLearnerId,
-        combinedCourseId,
+        combinedCourseDetails,
       });
 
       // then
@@ -200,8 +202,11 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       await databaseBuilder.commit();
 
       // when
-      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
+      const combinedCourseDetails = await CombinedCourseDetailsService.instantiateCombinedCourseDetails({
         combinedCourseId,
+      });
+      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
+        combinedCourseDetails,
         organizationLearnerId,
       });
 
@@ -304,8 +309,11 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       await databaseBuilder.commit();
 
       // when
-      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
+      const combinedCourseDetails = await CombinedCourseDetailsService.instantiateCombinedCourseDetails({
         combinedCourseId,
+      });
+      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
+        combinedCourseDetails,
         organizationLearnerId,
       });
 

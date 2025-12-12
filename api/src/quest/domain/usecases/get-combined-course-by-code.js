@@ -10,8 +10,12 @@ export async function getCombinedCourseByCode({
     userId,
     organizationId: combinedCourse.organizationId,
   });
+  const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
+    combinedCourseId: combinedCourse.id,
+  });
+
   return combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
-    combinedCourseId: combinedCourse.id,
+    combinedCourseDetails,
   });
 }
