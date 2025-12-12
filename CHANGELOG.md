@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.280.0](https://github.com/1024pix/pix/compare/v5.279.0...v5.280.0) (2025-12-12)
+
+### :rocket: Amélioration
+
+- [#14386](https://github.com/1024pix/pix/pull/14386) Affichage d'une bannière d'information de partage des résultats sur le checkpoint final d'une campagne (PIX-19651) 
+- [#14413](https://github.com/1024pix/pix/pull/14413) GestionMDP_NOV Retours eval et teamIANR 
+- [#14404](https://github.com/1024pix/pix/pull/14404) Retirer le code permettant de retenter une campagne (Pix-20708). 
+- [#14393](https://github.com/1024pix/pix/pull/14393) Revoir la page de design de configuration d'association de compte (PIX-20755) 
+- [#14317](https://github.com/1024pix/pix/pull/14317) Suivi utilisation de l'oralisation en certification Pix (PIX-20378). 
+- [#14321](https://github.com/1024pix/pix/pull/14321) WIP mon premier prompt - chatpix nlle config recette 
+
+### :bug: Correction
+
+- [#14416](https://github.com/1024pix/pix/pull/14416) Commenter le test flaky en attendant (PIX-XXX) 
+
+### :building_construction: Tech
+
+- [#14400](https://github.com/1024pix/pix/pull/14400) Appliquer des correctifs sur la gestions des images des badges (PIX-20733). 
+- [#14412](https://github.com/1024pix/pix/pull/14412) Bump ember-intl v8 sur Pix Admin 
+- [#14407](https://github.com/1024pix/pix/pull/14407) Masquer le statut TO_SHARE en Admin et convertir en STARTED (PIX-20707) 
+- [#14382](https://github.com/1024pix/pix/pull/14382) Remplacer ember-cp-validation par Joi dans Pix Admin 
+- [#14410](https://github.com/1024pix/pix/pull/14410) Supprime la table `combined_course_participations` (PIX-20375). 
+- [#14388](https://github.com/1024pix/pix/pull/14388) Test e2e import génerique (PIX-20083)
+
 # [5.279.0](https://github.com/1024pix/pix/compare/v5.278.0...v5.279.0) (2025-12-11)
 
 ### :rocket: Amélioration
