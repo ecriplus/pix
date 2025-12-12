@@ -775,6 +775,33 @@
                 "solution": "pix-llm-success",
                 "height": 500
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "979e52dc-c299-46b3-9df4-211259263b56",
+                "type": "expand",
+                "title": "Indice 1",
+                "content": "<p>Avez-vous&nbsp;vérifié le poème produit par l'IA ?&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "be5ec822-0cb7-405b-b390-646f57fcde50",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "<p>Avez-vous demandé à l’IA de corriger sa proposition ?     <br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4c108ecc-0d87-447a-87b3-eb090b3bd577",
+                "type": "expand",
+                "title": "🙈 Solution",
+                "content": "<p>Si le logiciel d'IA a bien produit une poème, il a sûrement fait une&nbsp;erreur et ajouté un cafard.&nbsp;🪳</p><p> Si vous avez réussi à obtenir un <strong>poème </strong>corrigé qui <strong>n'inclut pas de cafard</strong>, votre réponse devrait être validée.&nbsp;✅</p>"
+              }
             }
           ]
         }
