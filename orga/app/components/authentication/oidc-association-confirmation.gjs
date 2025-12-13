@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
+import get from 'lodash/get';
 
 export default class OidcAssociationConfirmation extends Component {
   <template>
@@ -54,7 +55,7 @@ export default class OidcAssociationConfirmation extends Component {
       {{/if}}
 
       <div class="oidc-association__action-buttons">
-        <PixButton @triggerAction={{this.reconcile}} @isLoading={{this.isLoading}}>
+        <PixButton @triggerAction={{this.confirm}} @isLoading={{this.isLoading}}>
           {{t "components.authentication.oidc-association-confirmation.confirm"}}
         </PixButton>
         <PixButton @triggerAction={{this.backToLoginForm}} @variant="secondary">
@@ -69,6 +70,7 @@ export default class OidcAssociationConfirmation extends Component {
   @service session;
   @service authErrorMessages;
   @service router;
+  @service store;
 
   @tracked reconcileErrorMessage = null;
   @tracked isLoading = false;
@@ -86,11 +88,21 @@ export default class OidcAssociationConfirmation extends Component {
     this.router.transitionTo('authentication.oidc.login', this.args.identityProviderSlug);
   }
 
-  // TODO : gérer la réconciliation et le reconcileErrorMessage dans une prochaine PR
   @action
-  async reconcile() {
+  async confirm() {
     this.isLoading = true;
-
+    if (this.args.invitationId) {
+      try {
+        await this._acceptOrganizationInvitation(this.args.invitationId, this.args.invitationCode, this.args.email);
+      } catch (responseError) {
+        // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
+        const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
+        const isUserAlreadyOrganizationMember = error?.status === '412';
+        if (!isUserAlreadyOrganizationMember) {
+          throw responseError;
+        }
+      }
+    }
     try {
       await this.session.authenticate('authenticator:oidc', {
         authenticationKey: this.args.authenticationKey,
@@ -101,6 +113,22 @@ export default class OidcAssociationConfirmation extends Component {
       this.reconcileErrorMessage = this.authErrorMessages.getAuthenticationErrorMessage(responseError);
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async _acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, email) {
+    const type = 'organization-invitation-response';
+    const id = `${organizationInvitationId}_${organizationInvitationCode}`;
+    const organizationInvitationRecord = this.store.peekRecord(type, id);
+    if (!organizationInvitationRecord) {
+      let record;
+      try {
+        record = this.store.createRecord(type, { id, code: organizationInvitationCode, email });
+        await record.save({ adapterOptions: { organizationInvitationId } });
+      } catch (error) {
+        record.deleteRecord();
+        throw error;
+      }
     }
   }
 }
