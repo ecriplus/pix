@@ -48,6 +48,7 @@ export default class OidcLoginController extends Controller {
     const attributes = responseJson.data.attributes;
     const oidcAssociationConfirmationData = {
       email,
+      authenticationKey: this.authenticationKey,
       fullNameFromPix: attributes['full-name-from-pix'],
       fullNameFromExternalIdentityProvider: attributes['full-name-from-external-identity-provider'],
       authenticationMethods: attributes['authentication-methods'],
