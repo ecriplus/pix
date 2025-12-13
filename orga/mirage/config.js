@@ -786,8 +786,9 @@ function routes() {
     };
   });
 
-  this.post('/oidc/user/check-reconciliation', () => {
-    return {
+  this.post(
+    '/oidc/user/check-reconciliation',
+    {
       data: {
         attributes: {
           'full-name-from-pix': 'LLoyd Cé',
@@ -796,6 +797,7 @@ function routes() {
           'authentication-methods': [{ identityProvider: 'PIX' }],
         },
       },
-    };
-  });
+    },
+    200,
+  );
 }
