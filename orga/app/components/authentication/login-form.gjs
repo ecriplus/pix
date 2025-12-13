@@ -59,16 +59,16 @@ export default class LoginForm extends Component {
       const login = this.login.trim();
 
       await this.args.onSubmit(login, this.password);
-    } catch (responseError) {
-      // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
-      const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
+    } catch (error) {
+      // Handling error for those different cases: EmberSimpleAuth, JSON:API response, non-JSON:API response
+      const extractedError = get(error, error.responseJSON ? 'responseJSON.errors[0]' : 'errors[0]') ?? error;
 
       // TODO: should be managed with a code instead of status only
-      const isInvitationAlreadyAcceptedByAnotherUser = error.status === '409';
+      const isInvitationAlreadyAcceptedByAnotherUser = extractedError.status === '409';
       if (isInvitationAlreadyAcceptedByAnotherUser) {
         this.globalError = this.intl.t('pages.login-form.errors.status.409');
       } else {
-        this.globalError = this.#getErrorMessage(responseError);
+        this.globalError = this.#getErrorMessage(extractedError);
       }
     } finally {
       this.isLoading = false;
@@ -93,12 +93,9 @@ export default class LoginForm extends Component {
     this.validation.login.validate(this.login);
   }
 
-  #getErrorMessage(responseError) {
-    // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
-    const error = get(responseError, responseError?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
-
+  #getErrorMessage(error) {
     // TODO: should be managed with a code instead of status only
-    if (responseError.status === 403 && !error.code) {
+    if (error.status === 403 && !error.code) {
       return this.intl.t('pages.login-form.errors.status.403');
     }
     return this.authErrorMessages.getAuthenticationErrorMessage(error);
