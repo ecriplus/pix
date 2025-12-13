@@ -84,7 +84,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
           );
           await fillIn(screen.getByLabelText(t('pages.login-form.password')), 'pix123');
 
-          await click(screen.getByRole('button', { name: 'Je me connecte' }));
+          await click(screen.getByRole('button', { name: t('pages.login-form.login') }));
           // eslint-disable-next-line ember/no-settled-after-test-helper
           await settled();
 
