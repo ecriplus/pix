@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import ENV from 'pix-orga/config/environment';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 
 const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
@@ -26,15 +27,33 @@ export default class OidcLoginController extends Controller {
     const identityProviderSlug = this.model.identity_provider_slug;
     const identityProvider = this.oidcIdentityProviders.findBySlug(identityProviderSlug);
 
-    const authenticationRequest = this.store.createRecord('user-oidc-authentication-request', {
-      password,
-      email,
-      authenticationKey: this.authenticationKey,
-      identityProvider: identityProvider.code,
+    const response = await fetch(`${ENV.APP.API_HOST}/api/oidc/user/check-reconciliation`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: {
+          attributes: {
+            email,
+            password,
+            'authentication-key': this.authenticationKey,
+            'identity-provider': identityProvider.code,
+          },
+        },
+      }),
     });
 
-    const oidcAssociationConfirmationData = await authenticationRequest.login();
-    oidcAssociationConfirmationStorage.set({ ...oidcAssociationConfirmationData, email });
+    if (response.status != 200) throw response;
+    const responseJson = await response.json();
+
+    const attributes = responseJson.data.attributes;
+    const oidcAssociationConfirmationData = {
+      email,
+      fullNameFromPix: attributes['full-name-from-pix'],
+      fullNameFromExternalIdentityProvider: attributes['full-name-from-external-identity-provider'],
+      authenticationMethods: attributes['authentication-methods'],
+    };
+
+    oidcAssociationConfirmationStorage.set(oidcAssociationConfirmationData);
 
     this.router.transitionTo('authentication.oidc.confirm', this.model.identity_provider_slug);
   }
