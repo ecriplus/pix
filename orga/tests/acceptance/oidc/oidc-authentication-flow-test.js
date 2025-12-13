@@ -65,8 +65,8 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
         assert.strictEqual(currentURL(), '/connexion/oidc-partner/login');
       });
 
-      module('when the user has a Pix account', function () {
-        test('the user can log in their account', async function (assert) {
+      module('when the Pix account exists and the password is correct', function () {
+        test('the login form redirects to the OIDC association confirmation page', async function (assert) {
           // given
           server.create('user', {
             email: 'lloyd.ce@example.net',
