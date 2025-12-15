@@ -13,10 +13,10 @@ describe('Certification | Session Management | Unit | Application | Routes | Sup
       const payload = {
         data: {
           id: '121',
-          type: 'supervisor-authentications',
+          type: 'invigilator-authentications',
           attributes: {
             'session-id': '121',
-            'supervisor-password': 'XXX',
+            'invigilator-password': 'XXX',
           },
         },
       };
@@ -38,7 +38,7 @@ describe('Certification | Session Management | Unit | Application | Routes | Sup
         const payload = {
           data: {
             id: '121',
-            type: 'supervisor-authentications',
+            type: 'invigilator-authentications',
             attributes: {
               'session-id': '121',
             },

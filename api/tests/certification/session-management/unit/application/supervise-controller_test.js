@@ -17,10 +17,10 @@ describe('Certification | Session Management | Unit | Application | Controller |
           data: {
             attributes: {
               'session-id': '123',
-              'supervisor-password': '567',
+              'invigilator-password': '567',
             },
             id: 123,
-            type: 'supervisor-authentications',
+            type: 'invigilator-authentications',
           },
         },
       };

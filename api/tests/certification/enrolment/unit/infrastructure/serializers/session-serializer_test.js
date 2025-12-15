@@ -23,7 +23,7 @@ describe('Unit | Certification | enrolment | Serializer | session-serializer', f
             time: '14:30',
             status: SESSION_STATUSES.CREATED,
             description: '',
-            'supervisor-password': 'SOWHAT',
+            'invigilator-password': 'SOWHAT',
           },
           relationships: {
             'certification-candidates': {

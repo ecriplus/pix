@@ -31,10 +31,10 @@ describe('Acceptance | Controller | Certification | Session management | session
       payload: {
         data: {
           id: session.id,
-          type: 'supervisor-authentications',
+          type: 'invigilator-authentications',
           attributes: {
             'session-id': session.id,
-            'supervisor-password': session.invigilatorPassword,
+            'invigilator-password': session.invigilatorPassword,
           },
         },
       },

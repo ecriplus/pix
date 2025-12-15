@@ -18,7 +18,7 @@ export default class LoginSessionSupervisor extends Component {
 
   @tracked formError = null;
   @tracked sessionIdValue = null;
-  @tracked supervisorPasswordValue = null;
+  @tracked invigilatorPasswordValue = null;
 
   @action
   setSessionIdValue(event) {
@@ -26,15 +26,15 @@ export default class LoginSessionSupervisor extends Component {
   }
 
   @action
-  setSupervisorPasswordValue(event) {
-    this.supervisorPasswordValue = event.target.value;
+  setInvigilatorPasswordValue(event) {
+    this.invigilatorPasswordValue = event.target.value;
   }
 
   @action
   async handleFormSubmit(event) {
     event.preventDefault();
 
-    if (!this.sessionIdValue || !this.supervisorPasswordValue) {
+    if (!this.sessionIdValue || !this.invigilatorPasswordValue) {
       this.formError = this.intl.t('pages.session-supervising.login.form.errors.mandatory-fields');
       return;
     }
@@ -42,7 +42,7 @@ export default class LoginSessionSupervisor extends Component {
     try {
       await this.args.authenticateSupervisor({
         sessionId: this.sessionIdValue,
-        supervisorPassword: this.supervisorPasswordValue,
+        invigilatorPassword: this.invigilatorPasswordValue,
       });
     } catch ({ errors }) {
       const error = errors[0];
@@ -91,7 +91,7 @@ export default class LoginSessionSupervisor extends Component {
         @subLabel={{t 'pages.session-supervising.login.form.description'}}
         @prefix='C-'
         placeholder='XXXXXX'
-        {{on 'input' this.setSupervisorPasswordValue}}
+        {{on 'input' this.setInvigilatorPasswordValue}}
       >
         <:label>{{t 'pages.session-supervising.login.form.session-password.label'}}</:label>
       </PixInputPassword>

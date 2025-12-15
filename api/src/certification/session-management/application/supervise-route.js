@@ -17,9 +17,9 @@ const register = async function (server) {
             data: {
               // note: necessary for ember object id
               id: identifiersType.sessionId,
-              type: 'supervisor-authentications',
+              type: 'invigilator-authentications',
               attributes: {
-                'supervisor-password': Joi.string().required(),
+                'invigilator-password': Joi.string().required(),
                 'session-id': identifiersType.sessionId,
               },
             },
