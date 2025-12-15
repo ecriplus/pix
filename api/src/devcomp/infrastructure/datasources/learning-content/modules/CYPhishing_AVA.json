@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/CYphishingava/picto_cyber_phishing_ava.svg",
-    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois à des cyberattaquants de convaincre une personne d’agir volontairement contre ses propres intérêts pour arriver à leurs fins.🔓<br><br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
+    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois à des cyberattaquants de convaincre une personne d’agir volontairement contre ses propres intérêts pour arriver à leurs fins.🔓<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
