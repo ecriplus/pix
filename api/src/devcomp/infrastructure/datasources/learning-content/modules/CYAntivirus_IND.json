@@ -31,7 +31,7 @@
               "element": {
                 "id": "5fd179ed-e09d-496e-adbd-47cda8b2b1c6",
                 "type": "text",
-                "content": "<p>Philippe vient de découvrir qu’un logiciel malveillant s’est installé sur son ordinateur.<br>Pourtant, Philippe est très prudent sur internet&nbsp;: pas de clic sur un lien suspect, pas de pièce jointe douteuse ouverte, pas de clé USB inconnue branchée…<br></p>"
+                "content": "<p>Philippe vient de découvrir qu’un logiciel malveillant s’est installé sur son ordinateur.<br>Pourtant, Philippe est très prudent sur internet&nbsp;: pas de clic sur un lien suspect, pas de pièce jointe douteuse ouverte, pas de clé USB inconnue branchée…</p>"
               }
             },
             {
@@ -52,7 +52,7 @@
                     "id": "2",
                     "content": "<p>Un logiciel malveillant a utilisé une faille technique pour s’installer.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui. Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé.&nbsp; <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
+                      "diagnosis": "<p>Eh oui. Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
                     }
                   },
                   {
@@ -66,7 +66,7 @@
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.&nbsp;<br></p>"
+                      "diagnosis": "<p>Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
                     }
                   }
                 ],
