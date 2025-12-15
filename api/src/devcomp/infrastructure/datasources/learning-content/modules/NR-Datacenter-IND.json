@@ -473,7 +473,7 @@
                   "randomSlides": false,
                   "titleLevel": 2,
                   "disableAnimation": false,
-                  "disableLoop": false,
+                  "enableLoop": true,
                   "imageTextDisplay": "1:1"
                 }
               }
