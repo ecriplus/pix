@@ -14,6 +14,7 @@ const getNextChallengeForCampaignAssessment = async function ({
   smartRandomService,
   campaignRepository,
   knowledgeElementRepository,
+  knowledgeElementForParticipationService,
   campaignParticipationRepository,
   improvementService,
 }) {
@@ -26,6 +27,7 @@ const getNextChallengeForCampaignAssessment = async function ({
       challengeRepository,
       knowledgeElementRepository,
       campaignParticipationRepository,
+      knowledgeElementForParticipationService,
       improvementService,
     });
 

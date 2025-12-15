@@ -6,6 +6,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
     let answerRepository;
     let campaignRepository;
     let challengeRepository;
+    let knowledgeElementForParticipationService;
     let knowledgeElementRepository;
     let campaignParticipationRepository;
     let improvementService;
@@ -20,8 +21,10 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       challengeRepository = {
         findOperativeBySkills: sinon.stub(),
       };
+      knowledgeElementForParticipationService = {
+        findUniqByUserOrCampaignParticipationId: sinon.stub(),
+      };
       knowledgeElementRepository = {
-        findUniqByUserIdForCampaignParticipation: sinon.stub(),
         findUniqByUserId: sinon.stub(),
       };
       campaignParticipationRepository = {
@@ -51,7 +54,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(skills);
       challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
-      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
         .resolves(knowledgeElements);
       campaignParticipationRepository.isRetrying
@@ -67,6 +70,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         answerRepository,
         campaignRepository,
         challengeRepository,
+        knowledgeElementForParticipationService,
         knowledgeElementRepository,
         campaignParticipationRepository,
         improvementService,

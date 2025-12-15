@@ -5,7 +5,7 @@ describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
   // Repositories
   let campaignParticipationRepository;
   let stageAcquisitionRepository;
-  let knowledgeElementRepository;
+  let knowledgeElementForParticipationService;
   let campaignSkillRepository;
   let campaignRepository;
   let stageRepository;
@@ -22,7 +22,7 @@ describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
     campaignParticipationRepository = { get: sinon.stub() };
     stageAcquisitionRepository = { getStageIdsByCampaignParticipation: sinon.stub(), saveStages: sinon.stub() };
     stageRepository = { getByCampaignParticipationId: sinon.stub() };
-    knowledgeElementRepository = { findUniqByUserIdForCampaignParticipation: sinon.stub() };
+    knowledgeElementForParticipationService = { findUniqByUserOrCampaignParticipationId: sinon.stub() };
     skillRepository = { findOperativeByIds: sinon.stub() };
     campaignRepository = {
       findSkillIdsByCampaignParticipationId: sinon.stub().resolves([domainBuilder.buildSkill().id]),
@@ -37,7 +37,7 @@ describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
       campaignParticipationRepository,
       campaignSkillRepository,
       stageAcquisitionRepository,
-      knowledgeElementRepository,
+      knowledgeElementForParticipationService,
       campaignRepository,
       stageRepository,
       skillRepository,
@@ -110,7 +110,7 @@ describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
         stageRepository.getByCampaignParticipationId.withArgs(campaignParticipation.id).resolves(stages);
         getNewAcquiredStagesService.getNewAcquiredStages.returns(stages);
         stageAcquisitionRepository.getStageIdsByCampaignParticipation.withArgs(campaignParticipation.id).resolves([]);
-        knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+        knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
           .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
           .resolves(knowledgeElements);
         campaignRepository.findSkillIdsByCampaignParticipationId
@@ -148,7 +148,7 @@ describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
         stageRepository.getByCampaignParticipationId.withArgs(campaignParticipation.id).resolves(stages);
         getNewAcquiredStagesService.getNewAcquiredStages.returns(stages);
         stageAcquisitionRepository.getStageIdsByCampaignParticipation.withArgs(campaignParticipation.id).resolves([]);
-        knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+        knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
           .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
           .resolves(knowledgeElements);
         campaignRepository.findSkillIdsByCampaignParticipationId

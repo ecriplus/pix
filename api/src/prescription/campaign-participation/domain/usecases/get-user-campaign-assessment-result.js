@@ -6,7 +6,7 @@ const getUserCampaignAssessmentResult = async function ({
   campaignId,
   locale,
   badgeRepository,
-  knowledgeElementRepository,
+  knowledgeElementForParticipationService,
   badgeForCalculationRepository,
   participantResultRepository,
   stageRepository,
@@ -26,7 +26,7 @@ const getUserCampaignAssessmentResult = async function ({
   try {
     const [badges, knowledgeElements] = await Promise.all([
       badgeRepository.findByCampaignId(campaignId),
-      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
         userId,
         campaignParticipationId: campaignParticipation.id,
       }),

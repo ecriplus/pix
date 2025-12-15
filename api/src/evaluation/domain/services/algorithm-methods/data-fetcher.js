@@ -7,6 +7,7 @@ async function fetchForCampaigns({
   answerRepository,
   campaignRepository,
   challengeRepository,
+  knowledgeElementForParticipationService,
   knowledgeElementRepository,
   campaignParticipationRepository,
   improvementService,
@@ -25,6 +26,7 @@ async function fetchForCampaigns({
       assessment,
       isRetrying,
       campaignParticipationRepository,
+      knowledgeElementForParticipationService,
       knowledgeElementRepository,
       improvementService,
     }),
@@ -43,12 +45,13 @@ async function fetchForCampaigns({
 async function _fetchKnowledgeElements({
   assessment,
   isRetrying = false,
+  knowledgeElementForParticipationService,
   knowledgeElementRepository,
   improvementService,
 }) {
   let knowledgeElements;
   if (assessment.type === Assessment.types.CAMPAIGN) {
-    knowledgeElements = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+    knowledgeElements = await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
       userId: assessment.userId,
       campaignParticipationId: assessment.campaignParticipationId,
     });

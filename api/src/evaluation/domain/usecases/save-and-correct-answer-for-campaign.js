@@ -18,7 +18,7 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   scorecardService,
   competenceRepository,
   competenceEvaluationRepository,
-  knowledgeElementRepository,
+  knowledgeElementForParticipationService,
   correctionService,
   campaignRepository,
 } = {}) {
@@ -52,10 +52,11 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
 
   let answerSaved;
   if (assessment.isSmartRandom()) {
-    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
-      userId,
-      campaignParticipationId: assessment.campaignParticipationId,
-    });
+    const knowledgeElementsBefore =
+      await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
+        userId,
+        campaignParticipationId: assessment.campaignParticipationId,
+      });
 
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
@@ -73,7 +74,7 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
       targetSkills,
       knowledgeElementsBefore,
     });
-    await knowledgeElementRepository.saveForCampaignParticipation({
+    await knowledgeElementForParticipationService.save({
       knowledgeElements: knowledgeElementsToAdd,
       campaignParticipationId: assessment.campaignParticipationId,
     });
