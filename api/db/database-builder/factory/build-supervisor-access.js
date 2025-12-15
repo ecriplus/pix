@@ -19,7 +19,7 @@ const buildSupervisorAccess = function ({
     authorizedAt,
   };
   return databaseBuffer.pushInsertable({
-    tableName: 'supervisor-accesses',
+    tableName: 'invigilator_accesses',
     values,
   });
 };
