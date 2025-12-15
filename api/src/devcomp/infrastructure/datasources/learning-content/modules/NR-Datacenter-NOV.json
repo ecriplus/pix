@@ -57,21 +57,21 @@
                     "id": "1",
                     "content": "<p>Le message passe directement de votre téléphone à celui de la personne qui vous accompagne, sans quitter la salle d’attente.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de votre téléphone à son téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul informatique</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le message passe par plusieurs appareils en parcourant des centaines, voire des milliers, de kilomètres.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de votre téléphone à son téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul informatique</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de téléphone à téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>votre message ne passe pas directement de votre téléphone à son téléphone</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Derrière ce geste simple, il y a aussi du <strong>calcul informatique</strong>&nbsp;: le message est coupé en petits morceaux, envoyé très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
                     }
                   }
                 ],
@@ -90,7 +90,7 @@
               "element": {
                 "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
                 "type": "text",
-                "content": "<p>Voyons maintenant <strong>où sont réellement stockées</strong> les informations affichées sur nos appareils.<br></p>"
+                "content": "<p>Voyons maintenant où sont <strong>stockées ces informations</strong> et où se font <strong>ces calculs informatiques</strong> quand nous utilisons internet.</p>"
               }
             }
           ]
@@ -119,7 +119,7 @@
               "element": {
                 "id": "0c6f4d09-1eb4-4b35-acf6-e82b70cefd0e",
                 "type": "qcu-discovery",
-                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p><p>Question&nbsp;: Où va le \"J’aime\" de Killian quand il appuie sur le bouton ?</p>",
+                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p><p>Question&nbsp;: Quand Killian appuie sur “J’aime”, où part cette information ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -161,7 +161,7 @@
                     {
                       "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
                       "type": "text",
-                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des&nbsp;<strong>serveurs</strong>.&nbsp;Un serveur est un ordinateur très puissant qui stocke les données, les envoie et fait les calculs nécessaires pour répondre aux demandes des utilisateurs. Un centre de données peut contenir entre<strong> quelques centaines et plusieurs centaines de milliers de serveurs</strong>. </p><p>Et ça ressemble à ça !</p>"
+                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.<br><strong>Un serveur est un ordinateur très puissant</strong> qui travaille quand vous utilisez internet.<br>Il reçoit votre demande, fait des calculs informatiques, stocke l’information, puis envoie le résultat sur votre appareil </p><p>Voici à quoi ressemble un centre de donnée.</p>"
                     },
                     {
                       "id": "929770b6-cc52-407e-a324-30b3cc48807b",
@@ -179,7 +179,7 @@
                     {
                       "id": "01a90945-8314-4fcd-9a06-013424c40d99",
                       "type": "text",
-                      "content": "<h5>🤔Tout le monde utilise ces serveurs quand il utilise internet ? </h5><p>Oui ! En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes sollicitent les serveurs <strong>en même temps</strong>.</p>"
+                      "content": "<h5>🤔Pourquoi a-t-on besoin de si grands centres de données ? </h5><p>Oui ! En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes sollicitent les serveurs <strong>en même temps</strong>.</p>"
                     }
                   ]
                 }
@@ -197,7 +197,7 @@
               "element": {
                 "id": "0f1152d5-7aca-44d0-9515-1816c4991258",
                 "type": "text",
-                "content": "<p>Passons maintenant à ce qui se passe du côté du <strong>centre de données et des serveurs</strong> lorsqu’ils travaillent.</p>"
+                "content": "<p>Voyons maintenant à ce qui se passe du côté du <strong>centre de données et des serveurs</strong> lorsqu’ils travaillent.</p>"
               }
             }
           ]
@@ -322,7 +322,7 @@
                     "id": "4",
                     "content": "<p>Je ne sais pas.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !  Quand un appareil numérique&nbsp;<strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chauffe un peu</strong> et il <strong>consomme un peu</strong>. <strong>C’est pareil pour les serveurs</strong> ! Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.</p>"
+                      "diagnosis": "<p>Quand un appareil numérique&nbsp;<strong>travaille</strong> plus, il <strong>chauffe</strong> <strong>et</strong> il <strong>consomme</strong> plus d’électricité. Même sans travailler, il <strong>reste chauffe un peu</strong> et il <strong>consomme un peu</strong>. <strong>C’est pareil pour les serveurs</strong> ! Et dans un centre de données, <strong>les serveurs sont allumés en permanence</strong>.</p>"
                     }
                   }
                 ],
@@ -371,7 +371,7 @@
               "element": {
                 "id": "8b07744b-4b36-4bf0-9c39-d806a6987b64",
                 "type": "text",
-                "content": "<p>À chaque question, donner quel usage vous pensez être celui qui demande le plus de travail à un serveur. <br></p>"
+                "content": "<p>Répondez aux questions suivantes en indiquant l'usage qui demande le plus de travail à un serveur.</p>"
               }
             },
             {
@@ -382,7 +382,7 @@
                     {
                       "id": "4f9237bf-e0d3-42ec-990c-a869600f336b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel demande le plus de travail aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -415,7 +415,7 @@
                     {
                       "id": "a01a88a1-9c44-44cb-9b13-750c89592f58",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "instruction": "<p>L'artiste préféré de Solène a sorti une nouvelle chanson. Elle veut la découvrir. Parmi les usages suivants, lequel demande le plus de travail aux serveurs.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -448,7 +448,7 @@
                     {
                       "id": "55985477-3b47-4d7c-b7eb-f25c4b05bd7b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "instruction": "<p>Nathan organise une soirée cinéma pour fêter les 10 ans de son film préféré. Parmi les usages suivants, lequel demande le plus de travail aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -481,7 +481,7 @@
                     {
                       "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel usage demande le plus de travail aux serveurs ?</p>",
+                      "instruction": "<p>Nora a besoin d'une information pour son association de théâtre. Parmi les usages suivants, lequel demande le plus de travail aux serveurs ?</p><br><br>",
                       "proposals": [
                         {
                           "id": "1",
@@ -526,7 +526,7 @@
                     {
                       "id": "a91021ec-28c2-47b3-97b0-aec23096593e",
                       "type": "text",
-                      "content": "<p>Vous savez désormais que certains usages demandent plus de travail que d’autres aux serveurs.</p><h5>🤔Pourquoi certains usages font plus travailler les serveurs ?</h5><p>Parce que tout ne demande pas la même chose aux serveurs. Certains usages demandent surtout <strong>beaucoup d’informations&nbsp;</strong>à envoyer (comme la vidéo). D’autres usages demandent surtout <strong>beaucoup de calcul</strong> (comme l’IA).&nbsp;Et certains usages demandent tout cela en même temps, comme les lives vidéos !</p>"
+                      "content": "<h5>🤔Pourquoi certains usages font plus travailler les serveurs ?</h5>\n<p>\n    <strong>Tous les usages</strong> font travailler les serveurs, <strong>mais pas pour les mêmes raisons</strong>.\n</p>\n\n<ul>\n    <li>\n        Certains demandent surtout <strong>d’envoyer beaucoup de données</strong>\n        <em>(comme la vidéo)</em>.\n    </li>\n    <li>\n        D’autres demandent surtout <strong>de faire des calculs informatiques complexes</strong>\n        <em>(comme l’IA)</em>.\n    </li>\n    <li>\n        Et certains demandent <strong>les deux à la fois</strong>,\n        <em>comme les vidéos en direct</em>.\n    </li>\n</ul>"
                     }
                   ]
                 },
@@ -535,7 +535,7 @@
                     {
                       "id": "4e583f9f-7e9d-4951-9e5a-8ec19b014a4a",
                       "type": "text",
-                      "content": "<h5>🤔On peut faire quelque chose pour faire moins consommer les serveurs ?</h5><p>Oui. Choisir des usages <strong>plus légers</strong> quand c’est possible.</p><p>Par exemple&nbsp;:&nbsp; </p><ul><li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de la streamer</strong> à chaque fois ;</li><li>et parfois&nbsp;: <strong>se déconnecter</strong> quand on n’en a plus besoin, ce qui améliore aussi le bien-être.</li></ul>"
+                      "content": "<h5>🤔On peut faire quelque chose pour faire moins consommer les serveurs ?</h5><p>Oui. Quand c’est possible, choisissez des usages qui <strong>consomment moins d’énergie</strong>.</p><p>Par exemple&nbsp;:&nbsp; </p><ul><li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de la streamer</strong> à chaque fois ;</li><li>et parfois&nbsp;: <strong>se déconnecter</strong> quand on n’en a plus besoin, ce qui améliore aussi le bien-être.</li></ul>"
                     }
                   ]
                 }
@@ -559,7 +559,7 @@
               "element": {
                 "id": "065ea5c0-8fc9-4014-9c87-49133966943d",
                 "type": "text",
-                "content": "<ul><li>Les informations que vous consultez en ligne sont stockées dans des <strong>serveurs</strong>, dans de grands bâtiments appelés <strong>centres de données</strong>.</li><li><strong>Les serveurs consomment beaucoup d’énergie</strong>&nbsp;: ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li><li><strong>Les serveurs travaillent plus ou moins selon vos usages</strong>&nbsp;: envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li><li><strong>Vous pouvez agir</strong>&nbsp;: choisir des usages plus légers ou se déconnecter quand on n’en a plus besoin réduit l’énergie utilisée.</li></ul>"
+                "content": "<ul>\n    <li>🗄️ Les informations que vous consultez en ligne sont stockées, calculées et envoyées par des <strong>serveurs</strong>, eux-mêmes situés dans de grands bâtiments appelés <strong>centres de données</strong>.</li>\n    <li>⚡ <strong>Les serveurs consomment beaucoup d’énergie</strong> : ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li>\n    <li>🎥 <strong>Les serveurs travaillent plus ou moins selon vos usages en ligne</strong> : envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li>\n    <li>🌱 <strong>Vous pouvez agir</strong> : choisir des usages moins gourmands en énergie ou se déconnecter quand on n’en a plus besoin réduit l’énergie utilisée.</li>\n    \n</ul>"
               }
             }
           ]
@@ -592,7 +592,7 @@
                 "cards": [
                   {
                     "id": "9c4ff43d-5717-482c-b174-f2a2833ea4e5",
-                    "text": "Les serveurs sont allumés en permanence, même quand personne ne les utilise.",
+                    "text": "Un serveur est allumé en permanence, même quand personne ne l'utilise.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -603,7 +603,7 @@
                   },
                   {
                     "id": "36c04ec3-8b6f-46f2-8215-c2e09fd257a0",
-                    "text": "Les serveurs ne chauffent presque pas, donc ils n’ont pas besoin de refroidissement.",
+                    "text": "Un serveur ne chauffe presque pas, donc ils n’a donc pas besoin de refroidissement.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -614,7 +614,7 @@
                   },
                   {
                     "id": "8e854d9d-3639-46e8-928e-3cc000d3748e",
-                    "text": "Tous les usages en ligne demandent la même quantité de travail aux serveurs.",
+                    "text": "Un appel en visio demande autant de travail au serveur qu'un appel en ligne normal. ",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -625,7 +625,7 @@
                   },
                   {
                     "id": "0e35d650-6d60-4b6b-9431-91629dc5045e",
-                    "text": "Choisir des usages plus légers (comme baisser la qualité d’une vidéo) permet de réduire l’énergie utilisée par les serveurs.",
+                    "text": "Choisir un usage en ligne plus léger (comme baisser la qualité d’une vidéo) permet de réduire l’énergie utilisée par le serveur.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -670,7 +670,7 @@
                           "content": "<p>Un message vocal.&nbsp;</p>",
                           "feedback": {
                             "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Le format le plus léger est le message texte, pas le vocal.&nbsp;Un message vocal demande plus de calculs et de stockage.</p>"
+                            "diagnosis": "<p>Le format le plus léger n'est pas le message vocal.&nbsp;Un message vocal demande plus de calculs et de stockage. Réessayez&nbsp;!</p>"
                           }
                         },
                         {
@@ -678,7 +678,7 @@
                           "content": "<p>Un courte vidéo de vous.</p>",
                           "feedback": {
                             "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Le format le plus léger est le message texte, pas la vidéo. La vidéo demande beaucoup de calculs et de stockage.</p>"
+                            "diagnosis": "<p>Le format le plus léger n'est pas la vidéo. La vidéo demande beaucoup de calculs et de stockage.&nbsp;Réessayez&nbsp;!</p>"
                           }
                         }
                       ],
@@ -698,7 +698,7 @@
                           "content": "<p>Baisser le volume.</p>",
                           "feedback": {
                             "state": "<p>Eh non !&nbsp;</p>",
-                            "diagnosis": "<p>Pour réduire le travail des serveurs, la bonne réponse est de télécharger la chanson.</p>"
+                            "diagnosis": "<p>Pour réduire le travail des serveurs, ce n'est pas la bonne soulution. Réessayez&nbsp;!</p>"
                           }
                         },
                         {
@@ -714,7 +714,7 @@
                           "content": "<p>Regarder le clip de la chanson.</p>",
                           "feedback": {
                             "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Pour réduire la charge, il faut télécharger la chanson, pas regarder le clip.</p>"
+                            "diagnosis": "<p>Regarder le clip sollicite les serveurs sur le son et l'image, ce n'est donc pas la bonne solution.&nbsp;Réessayez&nbsp;!</p>"
                           }
                         }
                       ],
@@ -727,14 +727,14 @@
                     {
                       "id": "d9b81d92-b66f-4cc5-b47a-9ceaffd40b69",
                       "type": "qcu",
-                      "instruction": "<p>Vous voulez savoir combien font 15x2. Quel choix est le plus léger pour les serveurs ?</p>",
+                      "instruction": "<p>Vous voulez savoir combien font 15 fois 3. Quel choix est le plus léger pour les serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Faire le calcul vous-même.</p>",
                           "feedback": {
                             "state": "<p>Bien vu !</p>",
-                            "diagnosis": "<p>Faire le calcul vous-même n’utilise pas les serveurs, c’est donc le meilleur moyen !&nbsp;</p>"
+                            "diagnosis": "<p>Faire le calcul vous-même n’utilise pas les serveurs, c’est donc le meilleur moyen ! Pour des calculs plus compliqués la majourité des appareils numériques disposent d'une calculatrice !&nbsp;</p>"
                           }
                         },
                         {
@@ -742,7 +742,7 @@
                           "content": "<p>Demander à un logiciel d’IA.&nbsp;</p>",
                           "feedback": {
                             "state": "<p>Eh non !&nbsp;</p>",
-                            "diagnosis": "<p>Le choix le plus léger est de faire le calcul vous-même. Utiliser une IA demande beaucoup de calculs aux serveurs, surtout pour une question aussi simple.</p>"
+                            "diagnosis": "<p>Utiliser une IA demande beaucoup de calculs aux serveurs, surtout pour une question aussi simple.&nbsp;Réessayez&nbsp;!</p>"
                           }
                         },
                         {
@@ -750,7 +750,7 @@
                           "content": "<p>Chercher sur internet.</p>",
                           "feedback": {
                             "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>La bonne réponse est de faire le calcul vous-même, pas de lancer une recherche web, internet n’est pas toujours la bonne solution.</p>"
+                            "diagnosis": "<p>Lancer une recherche web, internet n’est pas toujours la bonne solution.&nbsp;Réessayez&nbsp;!</p>"
                           }
                         }
                       ],
@@ -785,7 +785,11 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "",
-                    "tolerances": ["un centre de données", "de votre appareil", "un serveur"],
+                    "tolerances": [
+                      "un centre de données",
+                      "de votre appareil",
+                      "un serveur"
+                    ],
                     "options": [
                       {
                         "id": "1",
@@ -800,7 +804,9 @@
                         "content": "de votre appareil"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -813,7 +819,11 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "",
-                    "tolerances": ["un serveur", "un centre de données", "de votre appareil"],
+                    "tolerances": [
+                      "un serveur",
+                      "un centre de données",
+                      "de votre appareil"
+                    ],
                     "options": [
                       {
                         "id": "1",
@@ -828,7 +838,9 @@
                         "content": "un centre de données"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -841,7 +853,11 @@
                     "placeholder": "",
                     "ariaLabel": "a faire",
                     "defaultValue": "10",
-                    "tolerances": ["votre appareil", "serveurs", "centre de donnée"],
+                    "tolerances": [
+                      "votre appareil",
+                      "serveurs",
+                      "centre de donnée"
+                    ],
                     "options": [
                       {
                         "id": "1",
@@ -856,7 +872,9 @@
                         "content": "centre de donnée"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -897,7 +915,7 @@
               "element": {
                 "id": "85753fa4-13df-4941-8610-8c508233ee61",
                 "type": "qcu-declarative",
-                "instruction": "<p>Choisissez celle qui vous semble la plus accessible pour vous.</p>",
+                "instruction": "<p>Quel changement êtes-vous prêt à faire ?</p>",
                 "proposals": [
                   {
                     "id": "1",
