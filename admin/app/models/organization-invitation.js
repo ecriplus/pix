@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { equal } from '@ember/object/computed';
 import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class OrganizationInvitation extends Model {
@@ -13,8 +11,13 @@ export default class OrganizationInvitation extends Model {
 
   @belongsTo('organization', { async: true, inverse: null }) organization;
 
-  @equal('status', 'pending') isPending;
-  @equal('status', 'accepted') isAccepted;
+  get isPending() {
+    return this.status === 'pending';
+  }
+
+  get isAccepted() {
+    return this.status === 'accepted';
+  }
 
   get roleInFrench() {
     switch (this.role) {
