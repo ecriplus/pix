@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi des réflexes pour vous protéger et protéger les autres. 🕵️<br><br></p>",
+    "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi des réflexes pour vous protéger et protéger les autres. 🕵️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -286,7 +286,7 @@
               "element": {
                 "id": "cb301130-8149-461b-b203-7f40281ee8ff",
                 "type": "text",
-                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels.</strong>&nbsp;Un escroc <strong>se fait passer pour</strong> une personne ou un organisme de confiance, généralement en <strong>jouant sur vos émotions</strong>, pour <strong>récupérer vos données personnelles</strong>.🎣</p><p><br>⚠️ Les messages d’hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
+                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels.</strong>&nbsp;Un escroc <strong>se fait passer pour</strong> une personne ou un organisme de confiance, généralement en <strong>jouant sur vos émotions</strong>, pour <strong>récupérer vos données personnelles</strong>.🎣</p><p><br>⚠️ Les messages d’hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc de plus en plus durs à repérer.<br><br></p>"
               }
             }
           ]
@@ -301,7 +301,7 @@
               "element": {
                 "id": "2a4eb89a-feee-4e23-8fe7-77b008349e2b",
                 "type": "text",
-                "content": "<p>Le ton d’urgence ou le sujet vous font penser à une arnaque, mais le réalisme du message vous fait douter ? </p><p>Ça arrive, c’est normal.</p><p>Voici des <strong>indices supplémentaires</strong> pour vous aider à débusquer les escrocs. 🕵️</p>"
+                "content": "<p>Le ton d’urgence ou le sujet vous fait penser à une arnaque, mais le réalisme du message vous fait douter ? </p><p>Ça arrive, c’est normal.</p><p>Voici des <strong>indices supplémentaires</strong> pour vous aider à débusquer les escrocs. 🕵️</p>"
               }
             }
           ]
@@ -405,7 +405,7 @@
               "element": {
                 "id": "70cadc99-643a-4257-b711-72a76f194da3",
                 "type": "text",
-                "content": "<h4>Comment de protéger de l’hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
+                "content": "<h4>Comment se protéger de l’hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
               }
             }
           ]
