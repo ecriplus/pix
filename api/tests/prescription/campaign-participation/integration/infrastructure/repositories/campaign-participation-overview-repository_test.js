@@ -262,7 +262,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         organizationLearnerId,
       });
 
-      expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
+      expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.STARTED);
     });
 
     it('retrieves the delete date', async function () {
@@ -485,7 +485,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           userId,
         });
 
-        expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
+        expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.STARTED);
       });
 
       it('retrieves the delete date', async function () {

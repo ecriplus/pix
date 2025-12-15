@@ -24,20 +24,6 @@ module('Unit | Model | Campaign-Participation-Overview', function (hooks) {
         });
       });
 
-      module('when the particiaption status is "TO_SHARE" and the participation is not shared"', function () {
-        test('should return the status "TO_SHARE"', function (assert) {
-          // given
-          const model = store.createRecord('campaign-participation-overview', {
-            status: 'TO_SHARE',
-            isShared: false,
-            disabledAt: null,
-          });
-
-          // when / then
-          assert.strictEqual(model.cardStatus, 'TO_SHARE');
-        });
-      });
-
       module('when the participation status is "SHARED" and the participation is shared"', function () {
         test('should return the status "ENDED"', function (assert) {
           // given

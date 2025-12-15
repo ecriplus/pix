@@ -85,6 +85,7 @@ module('Acceptance | User dashboard page', function (hooks) {
             createdAt: new Date('2020-04-20T04:05:06Z'),
             isShared: false,
           });
+
           await authenticate(user);
         });
 
@@ -99,42 +100,6 @@ module('Acceptance | User dashboard page', function (hooks) {
           // then
           const resumeButton = screen.getByRole('link', { name: 'Reprendre le parcours My Campaign' });
           assert.dom(resumeButton).exists();
-        });
-      });
-
-      module('when user has completed the campaign but not shared his/her results', function (hooks) {
-        hooks.beforeEach(async function () {
-          const unsharedCampaign = server.create(
-            'campaign',
-            {
-              externalIdLabel: 'email',
-              type: ASSESSMENT,
-              isArchived: false,
-              code: '123',
-            },
-            'withThreeChallenges',
-          );
-
-          server.create('campaign-participation-overview', {
-            status: 'TO_SHARE',
-            campaignCode: unsharedCampaign.code,
-            createdAt: new Date('2020-04-20T04:05:06Z'),
-            isShared: false,
-          });
-          await authenticate(user);
-        });
-
-        hooks.afterEach(async function () {
-          await invalidateSession();
-        });
-
-        test('should display a card with a share button', async function (assert) {
-          // when
-          const screen = await visit('/accueil');
-
-          // then
-          const shareButton = screen.getByRole('link', { name: 'Envoyer mes résultats' });
-          assert.dom(shareButton).exists();
         });
       });
     });

@@ -19,7 +19,6 @@ export default class CampaignParticipationOverviews extends Model {
   get cardStatus() {
     if (this.isShared || this.status === 'COMPLETED') return 'ENDED';
     else if (this.disabledAt) return 'DISABLED';
-    else if (this.status === 'TO_SHARE') return 'TO_SHARE';
     else return 'ONGOING';
   }
 }
