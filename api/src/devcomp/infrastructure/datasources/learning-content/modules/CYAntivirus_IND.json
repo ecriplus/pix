@@ -104,7 +104,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
+                "id": "f5c9a779-99b5-4904-88a6-7c4863cc49b4",
                 "type": "custom-draft",
                 "title": "Frise",
                 "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_antivirus/frise.html",
@@ -122,7 +122,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
+                "id": "be27a317-19d8-4a22-8fa7-22b337dfad3c",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, est-ce qu’une seule mise à jour suffit pour protéger définitivement un appareil des logiciels malveillants ?</p>",
                 "proposals": [
