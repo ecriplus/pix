@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.281.0](https://github.com/1024pix/pix/compare/v5.280.0...v5.281.0) (2025-12-15)
+
+### :rocket: Amélioration
+
+- [#14424](https://github.com/1024pix/pix/pull/14424) Ajout solution - prompt nov 
+- [#14401](https://github.com/1024pix/pix/pull/14401) Ajouter une page de listing des schémas de parcours combinés dans Admin (PIX-20726)  
+- [#14421](https://github.com/1024pix/pix/pull/14421) Renommer une colonne dans la table combined_course_blueprints (PIX-20736) 
+- [#14406](https://github.com/1024pix/pix/pull/14406) Supprimer la table target-profile-training-organizations (PIX-20746) 
+- [#14415](https://github.com/1024pix/pix/pull/14415) WIP mon premier prompt nouvelle image cliquable ancienne config LLM et coquilles 
+
+### :building_construction: Tech
+
+- [#14411](https://github.com/1024pix/pix/pull/14411) :recycle: Renommer la table `supervisor-accesses` pour utiliser le terme `invigilator` 
+- [#14420](https://github.com/1024pix/pix/pull/14420) Corrige le test e2e d'import generique (PIX-20775) 
+- [#14391](https://github.com/1024pix/pix/pull/14391) En 'test', s'assurer que les variables d'env sont définies et écrasent celles définies localement (PIX-20566) 
+- [#14429](https://github.com/1024pix/pix/pull/14429) Enlever les inserts dans les champs quest qui ne seront plus utilisés au moment de la création des parcours combinés (PIX-20781) 
+- [#14405](https://github.com/1024pix/pix/pull/14405) Harmoniser provinceCode vide (PIX-20749) 
+- [#14417](https://github.com/1024pix/pix/pull/14417) Remettre en place l’action "Check node version availability on Scalingo" 
+- [#14380](https://github.com/1024pix/pix/pull/14380) Scinder la récupération de la donnée du parcours et son instanciation du parcours (PIX-20759). 
+
+### :coffee: Autre
+
+- [#14418](https://github.com/1024pix/pix/pull/14418) MDX-9 IAGenFonction_NOV, modification QROCM
+
 # [5.280.0](https://github.com/1024pix/pix/compare/v5.279.0...v5.280.0) (2025-12-12)
 
 ### :rocket: Amélioration
