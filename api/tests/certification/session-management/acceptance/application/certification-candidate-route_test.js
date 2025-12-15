@@ -41,7 +41,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           });
 
           const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
-          databaseBuilder.factory.buildSupervisorAccess({
+          databaseBuilder.factory.buildInvigilatorAccess({
             userId: invigilatorUserId,
             sessionId,
           });
@@ -95,7 +95,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           });
 
           const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
-          databaseBuilder.factory.buildSupervisorAccess({
+          databaseBuilder.factory.buildInvigilatorAccess({
             userId: invigilatorUserId,
             sessionId,
           });
@@ -155,7 +155,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           });
 
           const invigilatorUserId = databaseBuilder.factory.buildUser({}).id;
-          databaseBuilder.factory.buildSupervisorAccess({
+          databaseBuilder.factory.buildInvigilatorAccess({
             userId: invigilatorUserId,
             sessionId,
           });

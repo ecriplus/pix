@@ -136,7 +136,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         certificationCenterId: certificationCenter.id,
         certificationCenter: certificationCenter.name,
       });
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId: expectedJurySession.id });
+      databaseBuilder.factory.buildInvigilatorAccess({ sessionId: expectedJurySession.id });
       databaseBuilder.factory.buildSession({ id: 1000099 });
       options = {
         method: 'GET',

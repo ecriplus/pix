@@ -196,8 +196,8 @@ describe('Integration | Repository | certification | enrolment | SessionEnrolmen
         it('should remove invigilator accesses and delete the session', async function () {
           // given
           const sessionId = databaseBuilder.factory.buildSession().id;
-          databaseBuilder.factory.buildSupervisorAccess({ sessionId });
-          databaseBuilder.factory.buildSupervisorAccess({ sessionId });
+          databaseBuilder.factory.buildInvigilatorAccess({ sessionId });
+          databaseBuilder.factory.buildInvigilatorAccess({ sessionId });
 
           await databaseBuilder.commit();
 

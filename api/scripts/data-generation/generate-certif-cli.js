@@ -147,7 +147,7 @@ async function _createSessionAndReturnId({ certificationCenterId, databaseBuilde
     createdAt: new Date(),
   });
 
-  _buildSupervisorAccess({ databaseBuilder, sessionId: id, userId: userIds.at(0) });
+  _buildInvigilatorAccess({ databaseBuilder, sessionId: id, userId: userIds.at(0) });
   return id;
 }
 
@@ -362,9 +362,9 @@ async function _createUser({ firstName, lastName, birthdate, email, organization
   return { userId, organizationLearnerId };
 }
 
-function _buildSupervisorAccess({ databaseBuilder, sessionId }) {
+function _buildInvigilatorAccess({ databaseBuilder, sessionId }) {
   const supervisor = databaseBuilder.factory.buildUser({ firstName: `supervisor${sessionId}` });
-  databaseBuilder.factory.buildSupervisorAccess({
+  databaseBuilder.factory.buildInvigilatorAccess({
     sessionId,
     userId: supervisor.id,
     authorizedAt: new Date(),

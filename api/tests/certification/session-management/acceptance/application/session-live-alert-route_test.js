@@ -24,7 +24,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
           sessionId: session.id,
         });
         const invigilatorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
+        databaseBuilder.factory.buildInvigilatorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
@@ -72,7 +72,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
           sessionId: session.id,
         });
         const invigilatorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
+        databaseBuilder.factory.buildInvigilatorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const userNotLinkedToTheSessionId = databaseBuilder.factory.buildUser().id;
 
@@ -111,7 +111,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
           name: 'IMAGE_NOT_DISPLAYING',
           issueReportCategoryId: 5,
         });
-        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
+        databaseBuilder.factory.buildInvigilatorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
@@ -164,7 +164,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
           sessionId: session.id,
         });
         const invigilatorUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildSupervisorAccess({ userId: invigilatorUserId, sessionId: session.id });
+        databaseBuilder.factory.buildInvigilatorAccess({ userId: invigilatorUserId, sessionId: session.id });
 
         const userNotLinkedToTheSessionId = databaseBuilder.factory.buildUser().id;
 

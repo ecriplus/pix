@@ -40,7 +40,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         status: CertificationCompanionLiveAlertStatus.ONGOING,
       });
 
-      const { userId: invigilatorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId });
+      const { userId: invigilatorId } = databaseBuilder.factory.buildInvigilatorAccess({ sessionId });
 
       await databaseBuilder.commit();
 
@@ -68,7 +68,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const { id: sessionId } = databaseBuilder.factory.buildSession({ certificationCenterId });
         const { id: otherSessionId } = databaseBuilder.factory.buildSession({ certificationCenterId });
 
-        const { userId: invigilatorId } = databaseBuilder.factory.buildSupervisorAccess({ sessionId: otherSessionId });
+        const { userId: invigilatorId } = databaseBuilder.factory.buildInvigilatorAccess({ sessionId: otherSessionId });
 
         await databaseBuilder.commit();
 

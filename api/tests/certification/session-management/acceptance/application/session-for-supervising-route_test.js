@@ -25,7 +25,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         complementaryCertificationId: 99,
       });
       const userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildSupervisorAccess({ userId, sessionId: 121 });
+      databaseBuilder.factory.buildInvigilatorAccess({ userId, sessionId: 121 });
       await databaseBuilder.commit();
 
       const headers = generateAuthenticatedUserRequestHeaders({ userId, source: 'pix-certif' });
