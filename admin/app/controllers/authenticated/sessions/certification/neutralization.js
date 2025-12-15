@@ -1,13 +1,14 @@
 import Controller from '@ember/controller';
-import { action, set } from '@ember/object';
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { alias } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class NeutralizationController extends Controller {
-  @alias('model') certificationDetails;
   @service pixToast;
   @service accessControl;
+
+  get certificationDetails() {
+    return this.model;
+  }
 
   @action
   async neutralize(challengeRecId, questionIndex) {
@@ -52,9 +53,16 @@ export default class NeutralizationController extends Controller {
   }
 
   _updateModel(challengeRecId, neutralized) {
-    const neutralizedChallenge = this.certificationDetails.listChallengesAndAnswers.find((challengeAndAnswer) => {
-      return challengeAndAnswer.challengeId === challengeRecId;
+    const updatedChallenges = this.certificationDetails.listChallengesAndAnswers.map((challenge) => {
+      if (challenge.challengeId === challengeRecId) {
+        return {
+          ...challenge,
+          isNeutralized: neutralized,
+        };
+      }
+      return challenge;
     });
-    set(neutralizedChallenge, 'isNeutralized', neutralized);
+
+    this.certificationDetails.listChallengesAndAnswers = updatedChallenges;
   }
 }
