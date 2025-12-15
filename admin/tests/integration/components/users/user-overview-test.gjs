@@ -1,6 +1,7 @@
 import { clickByName, render, waitFor, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import UserOverview from 'pix-admin/components/users/user-overview';
 import { module, test } from 'qunit';
@@ -448,7 +449,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
       });
 
       module('when user has an email only', function () {
-        test('displays user’s email in edit mode', async function (assert) {
+        test('displays email as required', async function (assert) {
           // given
           const user = EmberObject.create({
             lastName: 'Harry',
@@ -464,29 +465,34 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
           // then
           assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail *' })).hasValue(user.email);
+          assert.dom(screen.queryByRole('textbox', { name: 'Identifiant *' })).doesNotExist();
         });
 
-        test('does not display username in edit mode', async function (assert) {
+        test('can edit the user', async function (assert) {
           // given
-          const user = EmberObject.create({
+          const user = {
             lastName: 'Harry',
             firstName: 'John',
             email: 'john.harry@gmail.com',
             username: null,
             authenticationMethods: [],
-          });
+            save: sinon.stub(),
+          };
 
           // when
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
           await clickByName('Modifier');
+          const firstName = screen.queryByRole('textbox', { name: 'Prénom *' });
+          await fillIn(firstName, 'Johnny');
+          await clickByName('Modifier');
 
           // then
-          assert.dom(screen.queryByRole('textbox', { name: 'Identifiant *' })).doesNotExist();
+          assert.strictEqual(user.firstName, 'Johnny');
         });
       });
 
       module('when user has a username only', function () {
-        test('displays user’s username in edit mode', async function (assert) {
+        test('displays username as required and email as optional', async function (assert) {
           // given
           const user = EmberObject.create({
             lastName: 'Harry',
@@ -502,39 +508,45 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
           // then
           assert.dom(screen.getByRole('textbox', { name: 'Identifiant *' })).hasValue(user.username);
+          const emailInput = screen.getByRole('textbox', { name: 'Adresse e-mail' });
+          assert.dom(emailInput).exists();
+          assert.dom(emailInput).hasNoAttribute('required');
         });
 
-        test('displays not required email', async function (assert) {
+        test('can edit the user', async function (assert) {
           // given
-          const user = EmberObject.create({
+          const user = {
             lastName: 'Harry',
             firstName: 'John',
             email: null,
             username: 'user.name1212',
             authenticationMethods: [],
-          });
+            save: sinon.stub(),
+          };
 
           // when
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
           await clickByName('Modifier');
+          const firstName = screen.queryByRole('textbox', { name: 'Prénom *' });
+          await fillIn(firstName, 'Johnny');
+          await clickByName('Modifier');
 
           // then
-          const emailInput = screen.getByRole('textbox', { name: 'Adresse e-mail' });
-          assert.dom(emailInput).exists();
-          assert.dom(emailInput).hasNoAttribute('required');
+          assert.strictEqual(user.firstName, 'Johnny');
         });
       });
 
       module('when user has no username and no email', function () {
         test('does not display email', async function (assert) {
           // given
-          const user = EmberObject.create({
+          const user = {
             lastName: 'Harry',
             firstName: 'John',
             email: null,
             username: undefined,
             authenticationMethods: [],
-          });
+            save: sinon.stub(),
+          };
 
           // when
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -542,6 +554,28 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
           // then
           assert.dom(screen.queryByRole('textbox', { name: 'Adresse e-mail *' })).doesNotExist();
+        });
+
+        test('can edit the user', async function (assert) {
+          // given
+          const user = {
+            lastName: 'Harry',
+            firstName: 'John',
+            email: null,
+            username: undefined,
+            authenticationMethods: [],
+            save: sinon.stub(),
+          };
+
+          // when
+          const screen = await render(<template><UserOverview @user={{user}} /></template>);
+          await clickByName('Modifier');
+          const firstName = screen.queryByRole('textbox', { name: 'Prénom *' });
+          await fillIn(firstName, 'Johnny');
+          await clickByName('Modifier');
+
+          // then
+          assert.strictEqual(user.firstName, 'Johnny');
         });
       });
     });
