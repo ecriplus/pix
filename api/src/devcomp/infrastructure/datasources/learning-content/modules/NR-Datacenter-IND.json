@@ -1,72 +1,84 @@
 {
-  "id": "2b01b6af-1b32-44ac-9f64-9fb064fa2971",
-  "shortId": "dd3ddf6c",
-  "slug": "nr-obsolescence-programmee",
-  "title": "En finir avec l’obsolescence programmée ? ",
+  "id": "2a4cbdcc-0d75-4b42-bd41-592acc08abb4",
+  "shortId": "dd49b3d9",
+  "slug": "nr-coulisses-centre-donnees",
+  "title": "Dans les coulisses d’un centre de données",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Extraction, fabrication, distribution, consommation… Produire de nouveaux appareils numériques a des impacts environnementaux importants. Le renouvellement toujours plus rapide des équipements accentue cette pression sur l’environnement. </p><p><br>Dans ce module, vous découvrirez les mécanismes d’obsolescence qui raccourcissent la durée de vie des appareils numériques et comprendrez comment s’amorce la transition vers une économie circulaire plus durable.</p>",
+    "description": "<p>Hébergeant l’ensemble des données et services en ligne, les centres de données sont devenus indispensables à nos usages numériques. <br><br>Dans ce module, vous serez plongé dans le fonctionnement d’un centre de données et vous comprendrez comment les évolutions technologiques successives amènent à des usages toujours plus consommateurs d’énergie.<br></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Connaître les impacts de la fabrication d’un équipement informatique</p>",
-      "<p>Identifier des pratiques d’obsolescence programmée</p>",
-      "<p>Connaître le principe de l’économie circulaire</p>"
+      "<p>Connaître les principaux systèmes qui composent un centre de données et leur consommation d’énergie</p>",
+      "<p>Comprendre l’impact environnemental du refroidissement des centres de données</p>",
+      "<p>Comprendre l’impact des nouveaux usages numériques sur les centres de données</p>"
     ],
-    "tabletSupport": "inconvenient"
+    "tabletSupport": "comfortable"
   },
   "sections": [
     {
-      "id": "c01af84a-c0c6-4ef4-ad08-f272390b24a5",
+      "id": "2ed41fd0-449e-41b8-9db5-344a2b60d2e2",
       "type": "question-yourself",
       "grains": [
         {
-          "id": "171f155c-a6a3-4d04-9572-eb0e7af85cf6",
+          "id": "cb6daa7c-39e2-4654-ba1c-733b73615fe4",
           "type": "discovery",
           "title": "Accroche",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "0f94e969-ccc9-40fb-9357-fc7db47aca4a",
+                "id": "3d7daa4f-885d-48eb-b20f-2c6be5b9c46e",
                 "type": "text",
-                "content": "<p>Chaque année, plus d’un milliard de smartphones sont vendus dans le monde.</p>"
+                "content": "<p>En 2021, un centre de données à Strasbourg a pris feu en pleine nuit. </p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "9e8b7be9-71a9-49bd-8358-c6542684b92f",
+                "id": "46a80de7-3d49-465c-9d0a-fd5b6ad6666c",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/ovh-feu.jpeg",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "                                                                               L’incendie du centre de données OVH à Strasbourg",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f5befd08-56e1-42d8-b69f-47ef8a073e06",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, quel pourcentage de français change de téléphone alors que l’ancien fonctionne encore ?</p>",
+                "instruction": "<p>À votre avis, quelles ont été les conséquences de cet incendie ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>15%</p>",
+                    "content": "<p>Aucune conséquence, le feu a été éteint rapidement, aucun site internet ni utilisateur n’a été impacté.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est bien plus ! Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                      "diagnosis": "<p>Au contraire ! L’incendie de ce centre de données a eu des conséquences lourdes sur les services et les usagers. Certains utilisateurs, en perdant leurs données, ont perdu des années de travail.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>47%</p>",
+                    "content": "<p>Un impact léger&nbsp;: quelques ralentissements sur des sites pendant la nuit, aucune perte de données, tout est revenu à la normale le lendemain matin.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est bien plus ! Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                      "diagnosis": "<p>Au contraire ! L’incendie de ce centre de données a eu des conséquences lourdes  sur les services et les usagers. Certains utilisateurs, en perdant leurs données, ont perdu des années de travail.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>88%</p>",
+                    "content": "<p>Un impact majeur&nbsp;: environ 3,5 millions de sites touchés et des milliers d’utilisateurs qui ont perdu des données stockées dans le cloud.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                      "diagnosis": "<p>En effet, la mise hors service d’un centre de données peut rapidement avoir des conséquences importantes sur les services et les usagers. Lors de cet incendie, certains utilisateurs, en perdant leurs données, ont perdu des années de travail.<br></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les dernières études en date de l’ADEME montrent que 88% des français changent de téléphone alors que l’ancien fonctionne encore.</p>"
+                      "diagnosis": "<p>L’incendie de ce centre de données a eu des conséquences lourdes sur les services et les usagers. Certains utilisateurs, en perdant leurs données, ont perdu des années de travail.</p>"
                     }
                   }
                 ],
@@ -76,16 +88,16 @@
           ]
         },
         {
-          "id": "b22979ea-4258-4738-89c9-822af98676bc",
+          "id": "2a768dfe-a1b3-473b-9a2a-8e5ff9f8e354",
           "type": "transition",
-          "title": "transition accroche",
+          "title": "Transition 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "b463d10b-7b0e-403a-9ba2-d7fb5a4e9ef0",
+                "id": "7c644dba-eb4a-479e-b826-bf63696092ee",
                 "type": "text",
-                "content": "<p>Changer son matériel informatique a un impact environnemental fort. Voyons pourquoi.</p>"
+                "content": "<p>Bien qu’exceptionnel, cet incendie  a rappelé à quel point nos usages numériques reposent sur des <strong>infrastructures physiques</strong>, qu’il est nécessaire de contrôler et de surveiller&nbsp;: les <strong>centres de données</strong>. Voyons concrètement, à quoi ressemble un centre de données et comment tout est mis en place pour éviter ce type d’incident.</p>"
               }
             }
           ]
@@ -93,20 +105,20 @@
       ]
     },
     {
-      "id": "e71b5bb4-bef9-42db-bac4-823339b28829",
+      "id": "b33cdd6d-3032-4367-8ed2-5adda01e6019",
       "type": "explore-to-understand",
       "grains": [
         {
-          "id": "d34bf2a0-a3cf-42ba-8f40-459c48fb5fae",
-          "type": "discovery",
+          "id": "61806819-ec02-4083-81fa-cf3db63b52da",
+          "type": "activity",
           "title": "Activité découverte 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "5b3d3352-284f-4520-80a2-fecf99a6fc14",
+                "id": "d24a7253-3d4d-4190-a093-57f82dfb4bbf",
                 "type": "text",
-                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives&nbsp;: l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
+                "content": "<p>Anna est directrice du centre de données et assure une visite exceptionnelle de ce lieu hautement sécurisé. </p>"
               }
             },
             {
@@ -115,168 +127,216 @@
                 {
                   "elements": [
                     {
-                      "id": "6dc7cc3b-9fba-498d-bd9d-9ec89d6f0869",
-                      "type": "custom",
-                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de minerais ?<br>Déplacez la jauge entre 1kg et 800kg.</p>",
-                      "tagName": "pix-cursor",
-                      "props": {
-                        "options": [
-                          {
-                            "label": "1kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
-                            }
-                          },
-                          {
-                            "label": "200kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
-                            }
-                          },
-                          {
-                            "label": "400kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
-                            }
-                          },
-                          {
-                            "label": "800kg",
-                            "feedback": {
-                              "type": "good",
-                              "text": "La fabrication d’un ordinateur portable mobilise 800kg de minerais dont des terres rares et des ressources métalliques. Leur extraction provoque, entre autres, de la déforestation, la perte de biodiversité et expose les mineurs à des poussières toxiques"
-                            }
+                      "id": "ec6c8d21-e7f2-4af0-a817-5aeab73ca6e7",
+                      "type": "text",
+                      "content": "<p>La visite commence par la salle des serveurs.&nbsp;Ces armoires (également appelées “baies” ou “rack”) contiennent les serveurs.</p>"
+                    },
+                    {
+                      "id": "e140a09f-0778-4bd3-acc8-ccd478161658",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/salle-serveurs.png",
+                      "alt": "salle des serveurs d’un centre de données. ",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "b363d1ee-4f07-46ee-89b2-fa3fe49a0e5f",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>A votre avis, à quoi servent les serveurs ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>À contrôler le système de climatisation</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et bien non, les serveurs sont des <strong>ordinateurs très puissants</strong> qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour&nbsp;répondre aux demandes des internautes. </p>"
                           }
-                        ]
-                      }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>A alimenter les équipements électriques</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et bien non, les serveurs sont des <strong>ordinateurs très puissants</strong> qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour&nbsp;répondre aux demandes des internautes.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>A stocker et traiter les données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En fait, les serveurs sont des <strong>ordinateurs très puissants</strong> qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour répondre aux demandes des internautes. </p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Les serveurs sont des <strong>ordinateurs très puissants </strong>qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour répondre aux demandes des internautes. </p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "10dbae70-c3ba-4cd6-a3a2-adf81cb60eba",
-                      "type": "custom",
-                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et une&nbsp;1,5 tonne d’eau.</p>",
-                      "tagName": "pix-cursor",
-                      "props": {
-                        "options": [
-                          {
-                            "label": "1 litre",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
-                            }
-                          },
-                          {
-                            "label": "500 litres",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
-                            }
-                          },
-                          {
-                            "label": "1 tonne",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
-                            }
-                          },
-                          {
-                            "label": "1,5 tonne",
-                            "feedback": {
-                              "type": "good",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
-                            }
+                      "id": "522aaa2f-023b-49c2-8ead-ffd9040c03c0",
+                      "type": "text",
+                      "content": "<p>A chaque étape de la visite, vous traversez des sas de sécurité, des portes blindées, des systèmes d’ouverture par empreinte digitale...</p><br>"
+                    },
+                    {
+                      "id": "e77af6ae-057c-47f1-82e0-5b6ca6f47ec0",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/systeme-securite.png",
+                      "alt": "photos de système de sécurité",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "16ed595e-51f0-4286-8862-fb34019be450",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Pourquoi y a-t-il  des systèmes de sécurité physique (badges, caméras, surveillants) dans un centre de données ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Parce que les serveurs sont fragiles, il n’est pas possible de rentrer dans les salles à plus de trois techniciens</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Hé non ! Dans un centre de données, on ne rigole pas avec la sécurité et on protège tout <strong>risque d’attaque</strong> ou <strong>d’intrusion</strong> qui pourraient venir interrompre le service.</p>"
                           }
-                        ]
-                      }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Pour respecter les normes liées aux bâtiments industriels</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Hé non ! Dans un centre de données, on ne rigole pas avec la sécurité et on protège tout risque <strong>d’attaque</strong> ou <strong>d’intrusion</strong> qui pourraient venir interrompre le service.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Pour éviter les risques d’intrusion physique</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En effet, dans un centre de données, on ne rigole pas avec la sécurité ! Avec des allures de forteresse, le bâtiment est sécurisé pour éviter tout risque <strong>d’attaque</strong> ou <strong>d’intrusion</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Dans un centre de données, on ne rigole pas avec la sécurité ! Avec des allures de forteresse, le bâtiment est sécurisé pour éviter tout risque <strong>d’attaque</strong> ou <strong>d’intrusion</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "c6d1cf5f-34f7-4875-8583-234d2bf092a9",
-                      "type": "custom",
-                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos d’énergie fossile ?<br>Déplacez la jauge entre 1kg et&nbsp;240kg.</p>",
-                      "tagName": "pix-cursor",
-                      "props": {
-                        "options": [
-                          {
-                            "label": "1kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
-                            }
-                          },
-                          {
-                            "label": "80kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
-                            }
-                          },
-                          {
-                            "label": "160kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
-                            }
-                          },
-                          {
-                            "label": "240kg",
-                            "feedback": {
-                              "type": "good",
-                              "text": "La fabrication d’un ordinateur portable mobilise environ 240kg d’énergie fossile car l’extraction des minerais et l’assemblage nécessitent des machines très énergivores. Dans de nombreux pays producteurs d’énergie (Asie, Amérique du Sud, Afrique), cette dernière provient surtout du charbon, ce qui génère d’importantes émissions de gaz à effet de serre."
-                            }
+                      "id": "522aaa2f-023b-49c2-8ead-ffd9040c03c0",
+                      "type": "text",
+                      "content": "<p>Anna souhaite à présent vous montrer le système de refroidissement. Il y a des grilles, à l’arrière des serveurs qui servent à faire passer l’air. Elle vous montre également les énormes tuyaux de climatisation extérieures.&nbsp;</p>"
+                    },
+                    {
+                      "id": "3120d30a-4fa0-46f3-a567-6871dcf740fb",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation.png",
+                      "alt": "photo d’un système de refroidissement",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "a24c03f9-75bf-465f-b456-d73034ef9d6d",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>A votre avis pourquoi trouve-t-on de puissants systèmes de refroidissement dans ce centre de données ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Pour éviter la surchauffe des serveurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En effet, les serveurs chauffent énormément et sans climatisation, ils pourraient prendre feu et entraîner un <strong>incendie</strong>. Le refroidissement permet d’éviter les <strong>pannes</strong>, les arrêts et les incendies.</p>"
                           }
-                        ]
-                      }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Pour le confort des techniciens</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas vraiment.&nbsp;Les serveurs chauffent énormément et sans climatisation, ils pourraient prendre feu et entraîner un <strong>incendie</strong>. Le refroidissement permet d’éviter les <strong>pannes</strong>, les arrêts et les incendies.&nbsp;<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Pour réduire l’humidité ambiante</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas vraiment. Les serveurs chauffent énormément et sans climatisation, ils pourraient prendre feu et entraîner un <strong>incendie</strong>. Le refroidissement permet d’éviter les <strong>pannes</strong>, les arrêts et les incendies.&nbsp;<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Les serveurs chauffent énormément et sans climatisation, ils pourraient prendre feu et entraîner un <strong>incendie</strong>. Le refroidissement permet d’éviter les <strong>pannes</strong>, les arrêts et les incendies.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "7e2ffcb2-a37f-4767-80ce-bee937eac2d8",
-                      "type": "custom",
-                      "instruction": "<p>Après votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de produits toxiques ?<br>Déplacez la jauge entre 1kg et 33kg.</p>",
-                      "tagName": "pix-cursor",
-                      "props": {
-                        "options": [
-                          {
-                            "label": "1kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
-                            }
-                          },
-                          {
-                            "label": "11kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
-                            }
-                          },
-                          {
-                            "label": "22kg",
-                            "feedback": {
-                              "type": "good",
-                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
-                            }
-                          },
-                          {
-                            "label": "33kg",
-                            "feedback": {
-                              "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable génère environ 22kg de produits toxiques : des déchets industriels et des substances chimiques dangereuses qui exposent les travailleurs et les populations locales à des risques pour leur santé (troubles respiratoires, intoxications)."
-                            }
+                      "id": "7b6d1a06-ab74-4839-8496-eca9e66a1b98",
+                      "type": "text",
+                      "content": "<p>Enfin, vous entrez dans la salle du générateur électrique.</p>"
+                    },
+                    {
+                      "id": "b2d1f2ff-11b9-49f4-9742-9882aad281bc",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/generateur.png",
+                      "alt": "photo d’un générateur electrique",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "166daaa1-b53f-4634-9450-5ee2796059dd",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Pourquoi ce centre de données possède-t-il un tel générateur électrique ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Pour compenser les variations de puissance des serveurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Hé non, les générateurs sont là pour assurer un réseau électrique constant. En effet, un centre de données <strong>ne peut pas arrêter de fonctionner</strong>, même en cas de coupure électrique. <br></p>"
                           }
-                        ]
-                      }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Pour assurer l’alimentation même en cas de coupure du réseau électrique</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, un centre de données <strong>ne peut pas arrêter de fonctionner</strong>. Et pour s’assurer qu’il y ait toujours du réseau, même en cas de coupure du réseau électrique, des générateurs sont disponibles.&nbsp;<br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Pour booster les serveurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Hé non, les générateurs sont là pour assurer un réseau électrique constant. En effet, un centre de données <strong>ne peut pas arrêter de fonctionner</strong>, même en cas de coupure électrique. </p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Un centre de données<strong> ne peut pas arrêter de fonctionner</strong>. Et pour s’assurer qu’il y ait toujours du réseau électrique, même en cas de coupure, des générateurs sont disponibles.&nbsp;<br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
                   ]
                 }
@@ -285,7 +345,7 @@
           ]
         },
         {
-          "id": "29736061-d82a-460e-9688-c373ac0b28b0",
+          "id": "ec2d15a9-5c66-4654-9596-32d1131fb87b",
           "type": "short-lesson",
           "title": "Leçon 1",
           "components": [
@@ -295,18 +355,27 @@
                 {
                   "elements": [
                     {
-                      "id": "c9318c2a-ee21-434a-8eea-6fef1156a962",
+                      "id": "aa4ceb37-21c7-42be-a322-09262f76ab48",
                       "type": "text",
-                      "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle&nbsp;consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.</p>"
+                      "content": "<p>Tout est donc mis en place dans un centre de données pour que les serveurs tournent 24h/24, 7 jours/7.</p>"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "59207989-005a-43b9-98bb-f91e0b3da26f",
+                      "id": "8f6df0cc-e134-405b-96ea-ae13a3599b1a",
                       "type": "text",
-                      "content": "<h5>Est-ce vraiment un problème ?</h5><p><br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent&nbsp;: nous utilisons aujourd’hui <strong>plus de ressources</strong> naturelles que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.&nbsp;🌍</p>"
+                      "content": "<p><strong>Et si, malgré toutes ces précautions, il y a une interruption de service ?</strong>&nbsp;❌ </p><p>C’est peu probable, en effet, pour garantir cette totale disponibilité, le système est <strong>surdimensionné</strong> pour anticiper tout dysfonctionnement, panne ou pic de charge,&nbsp; c’est-à-dire toute une augmentation soudaine et inhabituelle de la demande sur le système.<br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "dfea77ef-d7c9-4b1d-a69d-320686efdfef",
+                      "type": "text",
+                      "content": "<p><strong>Malin, mais très consommateur d’énergie, non ?&nbsp;</strong> </p><p>Exactement. Surdimensionner le système signifie plus de matériel et donc plus d’énergie. ⚡<br><br></p>"
                     }
                   ]
                 }
@@ -315,461 +384,244 @@
           ]
         },
         {
-          "id": "b441314f-22a3-4c25-bbb9-1ff8851386a9",
+          "id": "1379b548-b5e3-4d7f-a643-201795bbe1a4",
           "type": "transition",
           "title": "Transition 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "8773c280-9e0e-423d-a698-9043db500dd0",
+                "id": "729553c0-42a0-4a65-8453-878882b83f85",
                 "type": "text",
-                "content": "<p>Mais même lorsqu’on sait que fabriquer un nouvel appareil consomme énormément d’énergie et de ressources, il est souvent difficile d’y échapper...</p>"
+                "content": "<p>Dans un centre de données, un élément est particulièrement gourmand en ressources&nbsp;: le système de refroidissement. Voyons pourquoi&nbsp;:&nbsp;<br></p>"
               }
             }
           ]
         },
         {
-          "id": "d1b89f0f-015f-4930-a02c-c1c73ab8b044",
-          "type": "discovery",
-          "title": "Activité découverte 2",
+          "id": "a69fa5d9-b6a0-4c36-aa6a-fc78068c5e0c",
+          "type": "activity",
+          "title": "Activité découverte 2 ",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "3c4e7e34-d4e4-43f9-ba12-386d413a7e56",
-                "type": "text",
-                "content": "<p>Voici Jeff. Il travaille au service “vente, conseil et diagnostic” d’une grande enseigne d’informatique. Ce matin, plusieurs clients viennent demander conseil. Il doit poser un premier diagnostic aux problèmes rencontrés par ces clients.</p>"
+                "id": "45cb2415-2402-4be7-9130-b7f94f6e4b11",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Les serveurs travaillent... et chauffent",
+                      "description": "Dans la salle des serveurs, il fait chaud. Les serveurs sont équipés de milliers de ventilateurs qui servent à faire circuler l’air chaud et les refroidir. ",
+                      "text": "",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/les-serveurs-chauffent.png",
+                        "alt": "les serveurs chauffent sur l’effet des calculs"
+                      }
+                    },
+                    {
+                      "title": "Il faut refroidir plus ! ",
+                      "description": "La ventilation a elle seule ne suffit pas, il faut expulser cet air chaud et amener de l’air froid. C’est le rôle des climatiseurs. Les climatiseurs consomment beaucoup d’énergie. ",
+                      "text": "",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation-serveurs.png",
+                        "alt": "la climatisation dans la salle des serveurs"
+                      }
+                    },
+                    {
+                      "title": "Ces systèmes de refroidissement ont besoin d’énergie... et d’eau !",
+                      "description": "Pour refroidir l’air, les climatiseurs fonctionnent souvent avec des systèmes de refroidissement par eau. De façon très simplifiée, l’eau capte la chaleur des climatiseurs. Cette eau est ensuite refroidit puis renvoyée vers le climatiseur ",
+                      "text": "",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/eau-refroidit-clim.png",
+                        "alt": "l’eau circule dans les tuyaux pour refroidir l’air"
+                      }
+                    },
+                    {
+                      "title": "En résumé,",
+                      "description": "On a donc une chaîne de refroidissement en plusieurs étapes. Produire du froid nécessite de l’énergie et de l’eau !",
+                      "text": "",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/8le-systeme-refroidissement-resume.png",
+                        "alt": "chaine refroidissement résumée"
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableLoop": false,
+                  "imageTextDisplay": ""
+                }
               }
             },
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "1dc7dcad-7cd0-439b-97bd-85a2fbb9d127",
-                      "type": "text",
-                      "content": "<p>Mon imprimante refuse d’imprimer, elle dit que la cartouche est vide… mais je l’ai changée la semaine dernière et j’ai imprimé sans problème hier !</p>"
-                    },
-                    {
-                      "id": "cfa55f35-7071-4469-8668-1f1fd84aef22",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/imprimante-cassee-durabilite.png",
-                      "alt": "Une femme avec une imprimante cassée",
-                      "alternativeText": "",
-                      "legend": "",
-                      "licence": ""
-                    },
-                    {
-                      "id": "5ebd266a-6efb-4741-a3f9-66ad90f82002",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Le capteur d’encre s’est déréglé, l’imprimante doit être réparée.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas tout à fait, ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’<strong>obsolescence technique</strong>, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Le fabricant limite volontairement l’impression pour vendre de nouvelles cartouches</p>",
-                          "feedback": {
-                            "diagnosis": "<p>En effet, l’imprimante est un cas assez classique de ce qu’on appelle l’<strong>obsolescence technique</strong>&nbsp;: le fabricant limite volontairement la durée de fonctionnement de l’appareil en limitant  la durée de fonctionnement de l’un de ses composants (ici la cartouche).</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>La cartouche a été mal reconnue après l’installation, la cartouche est à jeter.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas tout à fait, ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’<strong>obsolescence technique</strong>, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Je ne sais pas&nbsp;</p>",
-                          "feedback": {
-                            "diagnosis": "<p>ici l’imprimante fonctionnait parfaitement hier. L’imprimante s’arrête après un certain seuil. C’est un exemple d’obsolescence technique, où la durée de vie d’un composant (ici la cartouche) est volontairement limitée et impacte directement la durée d’usage de l’appareil.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
+              "type": "element",
+              "element": {
+                "id": "79544052-5f82-474f-8146-3035d8aa8941",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis, ce complexe système de refroidissement consomme...&nbsp;</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Peu d’électricité comparée à l’électricité utilisée par les serveurs et très peu d’eau&nbsp;</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Et bien non, les systèmes de refroidissement sont très gourmands en énergie et en eau. Ils représentent <strong>entre 30 et 40% de l’énergie</strong> utilisée par les centres de données et nécessite des <strong>milliards de litres d’eau</strong>.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "9d1ebcab-8f6d-475a-be06-6d388214c8de",
-                      "type": "text",
-                      "content": "<p>Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !</p>"
-                    },
-                    {
-                      "id": "223c4351-1768-45f6-bea4-b62167da8601",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Le téléphone a plus d’un an, c’est normal qu’il ralentisse au fil des mises à jour.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas vraiment, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation&nbsp;: onglets nombreux ou applications en arrière plan.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas vraiment, même si ces pratiques utilisent de la batterie, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Le fabricant limite les performances pour pousser à changer de modèle.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, ici, il semble que ce soit bien la mise à jour qui rend volontairement ce modèle de téléphone moins performant. On parle alors d’<strong>obsolescence logicielle</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Je ne sais pas</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>10% de la consommation électrique du centre de données et des centaines de litres d’eau</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Et non, les systèmes de refroidissement sont très gourmands en énergie et en eau. Ils représentent entre <strong>30 et 40% de l’énergie </strong>utilisée par les centres de données et nécessite des <strong>milliards de litres d’eau</strong>.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "d60b233d-a77e-4f31-bdef-dc12422d1741",
-                      "type": "text",
-                      "content": "<p>La batterie de mon ordinateur est morte, mais le réparateur que j’ai été voir dit qu’elle est collée et qu’il faut tout changer. J’ai du mal à le croire.</p>"
-                    },
-                    {
-                      "id": "264ca995-c4c9-4601-b49e-a2f976f80c52",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>C’est étonnant en effet, les batteries sont toujours faciles à remplacer, le réparateur veut certainement vendre un nouveau produit.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Malheureusement, certains fabricants rendent les produits volontairement impossibles à réparer en usant de techniques telles que les batteries collées, des pièces détachées introuvables ou hors de prix. On parle alors de <strong>limitation à la réparabilité</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>C’est possible, certains appareils sont volontairement conçus pour limiter la réparation.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Il s’agit en effet d’un cas de <strong>limitation à la réparabilité</strong>. L’appareil est physiquement difficile à réparer comme avec cette batterie collée, les pièces détachées sont onéreuses ou ne sont pas proposées à la vente.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Je ne sais pas</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Certains fabricants rendent les produits volontairement impossibles à réparer en usant de techniques telles que les batteries collées, des pièces détachées introuvables ou hors de prix. On parle alors de <strong>limitation à la réparabilité</strong>.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Entre 30 et 40% de la consommation électrique du centre de données et des milliards de litres d’eau</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, les systèmes de refroidissement sont particulièrement gourmands en <strong>énergie</strong> et en <strong>eau</strong>. &nbsp;</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
-                      "type": "text",
-                      "content": "<p>J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?&nbsp;</p>"
-                    },
-                    {
-                      "id": "5759eb75-ee53-4028-9c95-2a5a85b9e9ca",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Sélectionnez la réponse qui vous semble la plus pertinente&nbsp;:&nbsp;</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Lors du lancement d’une nouvelle version, votre ancien téléphone devient alors obsolète, il vaut mieux changer avant qu’il ne soit trop dépassé.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Non ! Le simple lancement d’une nouvelle version ne rend pas votre modèle précédent obsolète. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Oui, car votre ancien écran de téléphone ne sera plus adapté aux nouvelles applications.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Non, le lancement de ce nouveau design d’écran n’aura pas d’impact sur votre téléphone actuel. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>A vous de voir, ces changements semblent surtout esthétiques ou marketing. Ils sont surtout là pour vous donner envie d’acheter du neuf.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Je ne sais pas&nbsp;</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence par effet de mode</strong>.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3"
-                    }
-                  ]
-                }
-              ]
+                  }
+                ],
+                "solution": "3"
+              }
             }
           ]
         },
         {
-          "id": "90ca7062-d879-4b9b-883a-d57bcb72a9bb",
+          "id": "538c69e3-19ab-4d7c-ac87-6dccc8ce2f98",
           "type": "short-lesson",
           "title": "Leçon 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
-                      "type": "text",
-                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à racheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "dd7638c3-1e9e-4d37-8deb-96b03c33aab5",
-                      "type": "text",
-                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies&nbsp;:</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.<br></li></ul>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "3c977266-2ebe-403f-93cb-e12c16872122",
-                      "type": "text",
-                      "content": "<p>Les fabricants peuvent également jouer sur l’<strong>aspect psychologique</strong> (ou par <strong>effet de mode</strong>). Cette stratégie est très puissante.&nbsp;🧠</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "edbc9c1f-616e-4702-82c2-b282c887d5f0",
+                "type": "text",
+                "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité, et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, ces milliards de litres d’eau prelevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation.&nbsp;<strong><br><br>Mais les circuits d’eau fonctionnent en circuit fermé, non ?</strong> <br>Même lorsque le refroidissement à l’eau fonctionne en circuit fermé, tout au long de la vie du centre, de l’<strong>eau supplémentaire</strong> est nécessaire pour accélérer le refroidissement. On vaporise par exemple de l’eau pour refroidir les serveurs en cas de fortes chaleurs.&nbsp;<br><br></p>"
+              }
             }
           ]
         },
         {
-          "id": "a19fddd3-5a99-400d-bb6d-e886ada9798e",
-          "type": "transition",
+          "id": "7173fdf3-0e19-4941-8544-4407102bf69d",
+          "type": "discovery",
           "title": "Transition 2",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "b2b94d0c-976d-4326-b5d4-b2fcd916f89b",
+                "id": "5ce93311-9049-4136-b799-194134a0fb36",
                 "type": "text",
-                "content": "<p>Alors, comment sortir du modèle «&nbsp;extraire, produire, consommer, jeter&nbsp;», également appelé système linéaire ?<br><br>En changeant de réflexe. D’autres gestes sont possibles&nbsp;:</p>"
+                "content": "<p>Les centres de données ont donc un impact environnemental important mais comme nos activités deviennent de plus en plus numériques, la demande en centres de données ne cesse d’augmenter.</p>"
               }
             }
           ]
         },
         {
-          "id": "3b918f95-aafa-4709-a8a3-2746f33bd56a",
-          "type": "discovery",
-          "title": "Activité de découverte 3",
+          "id": "5662f61d-8dc1-44bc-831e-46cdd967a372",
+          "type": "activity",
+          "title": "Activité découverte 3 ",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "8975a87a-3103-4b3c-ab41-3b9d585d619a",
-                "type": "text",
-                "content": "<p>Voici un schéma représentant différentes étapes de vie d’un produit. Quatre verbes ont été volontairement effacés et remplacés par les chiffres 1, 2, 3, 4.&nbsp;</p>"
+                "id": "e392985c-2dee-4202-9880-facc0be57f30",
+                "type": "custom",
+                "instruction": "<p>Depuis plusieurs années, des nouvelles technologies ont pris de plus en plus de place dans notre quotidien.&nbsp;</p>",
+                "tagName": "flip-cards",
+                "props": {
+                  "titleLevel": 0,
+                  "name": "",
+                  "cardList": [
+                    {
+                      "name": "Objets connectés",
+                      "description": "Chaque objet envoie en permanence des données vers Internet. Ces flux massifs doivent être stockés, analysés et sécurisés.",
+                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/objet-connecte.png",
+                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/objet-connecte.png"
+                    },
+                    {
+                      "name": "Cryptomonnaie",
+                      "description": "Les milliers de transactions en continue demande énormément de puissance de calcul, donc beaucoup de centres de données",
+                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/crypto.png",
+                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/crypto.png"
+                    },
+                    {
+                      "name": "Cloud",
+                      "description": "Les fichiers, logiciels et services ne sont plus stockés sur les appareils numériques personnels mais sur des serveurs à distance, hébergés dans les centres de données.",
+                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/cloud.png",
+                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/cloud.png"
+                    },
+                    {
+                      "name": "Streaming",
+                      "description": "Les vidéos et musiques sont hébergées dans des serveurs qui doivent être accessibles 24h/24. ",
+                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/streaming.png",
+                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/streaming.png"
+                    },
+                    {
+                      "name": "l’IA générative ",
+                      "description": "Pour produire ses réponses, l’IA générative fait de nombreux calculs qui mobilisent les serveurs des centres de données",
+                      "icon": "",
+                      "image": ""
+                    }
+                  ]
+                }
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "b43a0e76-a868-44d3-8cef-48095d234f07",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/schema-eco-circulaire.png",
-                "alt": "Description en détail ci-après ",
-                "alternativeText": "<p>Schéma représentant quatre niveaux de circularité appliqués au cycle de vie des appareils électroniques&nbsp;: fabrication, distribution, consommation et tri. Au-dessus du cycle linéaire apparaissent quatre boucles. La plus large (1) relie le tri à la fabrication avec l’étiquette “On utilise les matières premières”. Une boucle intermédiaire (2), partant du tri vers la distribution, indique “On remet en état, on revend”. Une boucle plus petite (3), partant de la consommation vers la distribution, est intitulée “On donne, on revend”. Enfin, la plus courte (4) relie la consommation à elle-même et porte la mention “On garde le même appareil”. Ces boucles illustrent les stratégies de réemploi, réparation et prolongation de durée de vie.</p>",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c886cc16-235f-4bf9-a9b3-c5d070e28c2d",
-                "type": "qrocm",
-                "instruction": "<p>Après avoir analysé le schéma, complétez avec les termes manquants.</p>",
+                "id": "0d766e7a-a253-4a2e-8601-cfc3cb38dfb8",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis, quelle est la technologie est la plus gourmande en énergie ?</p>",
                 "proposals": [
                   {
-                    "type": "text",
-                    "content": "<p>1 =&nbsp;</p>"
+                    "id": "1",
+                    "content": "<p>Les objets connectés</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Hé non, l<strong>’IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                    }
                   },
                   {
-                    "input": "Un",
-                    "type": "select",
-                    "display": "block",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "Sélectionnez",
-                    "defaultValue": "",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Refabriquer"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Recycler"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Réemployer"
-                      },
-                      {
-                        "id": "4",
-                        "content": "Réparer"
-                      }
-                    ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "id": "2",
+                    "content": "<p>La crypto-monnaie</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Hé non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<p>2 =&nbsp;</p>"
+                    "id": "3",
+                    "content": "<p>Le cloud</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Hé non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                    }
                   },
                   {
-                    "input": "Deux",
-                    "type": "select",
-                    "display": "block",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "Sélectionnez",
-                    "defaultValue": "",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Refabriquer"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Recycler"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Réemployer"
-                      },
-                      {
-                        "id": "4",
-                        "content": "Réparer"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "id": "4",
+                    "content": "<p>Le streaming</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Hé non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<p>3 =</p>"
-                  },
-                  {
-                    "input": "Trois",
-                    "type": "select",
-                    "display": "block",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "Sélectionnez",
-                    "defaultValue": "",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Recycler"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Réparer"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Refabriquer"
-                      },
-                      {
-                        "id": "4",
-                        "content": "Réemployer"
-                      }
-                    ],
-                    "solutions": [
-                      "4"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>4 =</p>"
-                  },
-                  {
-                    "input": "Quatre",
-                    "type": "select",
-                    "display": "block",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "Sélectionnez",
-                    "defaultValue": "",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Refabriquer"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Recycler"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Réemployer"
-                      },
-                      {
-                        "id": "4",
-                        "content": "Réparer"
-                      }
-                    ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "id": "5",
+                    "content": "<p>L’IA générative</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! L’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                    }
                   }
                 ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bien joué !</p>",
-                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong>&nbsp;: vous avez ici les actions au coeur de l’économie circulaire !</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas vraiment.</p>",
-                    "diagnosis": "<p>Quand on utilise les matières premières, on <strong>recycle</strong>. Quand on récupère les pièces détachées, on <strong>refabrique</strong> à partir des pièces récupérées. Quand on utilise un appareil encore fonctionnel pour le donner ou le revendre, on parle de <strong>réemploi</strong>. Enfin, quand on souhaite garder son  appareil, on peut également le <strong>réparer</strong>. Ces quatre gestes sont les piliers de l’économie circulaire.</p>"
-                  }
-                }
+                "solution": "5"
               }
             }
           ]
         },
         {
-          "id": "5ebd6e63-375e-4df0-ba59-80142dd54c64",
+          "id": "3480e5ae-f1dd-4f6f-b6cd-be2ae7477799",
           "type": "short-lesson",
           "title": "Leçon 3",
           "components": [
@@ -779,27 +631,27 @@
                 {
                   "elements": [
                     {
-                      "id": "12f35076-ff72-40f7-b41f-14a680bcb313",
+                      "id": "c85af1e9-6a85-4541-9e3e-858ce12466c8",
                       "type": "text",
-                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong>&nbsp;: on extrait, on produit, on consomme, puis on <strong>jette</strong>.&nbsp;🚮 </p><p>Chaque année, de nombreux appareils encore utilisables finissent à la poubelle.&nbsp; Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
+                      "content": "<p>En 2025, on compte plus de 12 000 centres de données dans le monde, ce qui représente 25% de la consommation d’énergie du numérique dans le monde. ⚡</p>"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "967c7ce3-bb66-4b23-a3a1-c8ccf5f1ea00",
+                      "id": "069b9b8e-43d0-43d3-bd38-18c57e2f0fc2",
                       "type": "text",
-                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles même énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques produits&nbsp;: le meilleur déchet est celui que l’on ne produit pas.</p>"
+                      "content": "<p><strong>Et cette consommation d’énergie augmente  ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. On considère qu’en 2030, ces besoins auront <strong>doublé</strong>. <br></p>"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "81d82353-d909-48c0-8791-732999302eab",
+                      "id": "bdc0cdd2-c802-4a07-a3c4-fb08673c1ad4",
                       "type": "text",
-                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui&nbsp;: l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
+                      "content": "<p><strong>Concrètement, face à cette accélération, des solutions sont possibles ?&nbsp;</strong> <br>Il est possible de limiter les impacts. En tant qu’utilisateur, il est important de garder en mémoire que certaines technologies sont bien plus gourmandes que d’autres&nbsp;: le streaming vidéo et l’intelligence artificielle générative en tête. Avoir un <strong>usage raisonné</strong> de ces technologies est un enjeu majeur. </p>"
                     }
                   ]
                 }
@@ -810,20 +662,20 @@
       ]
     },
     {
-      "id": "6aad2357-5bf8-40bc-b04b-4f110f2028ae",
+      "id": "d7be693e-fbe0-4dc8-8cf7-e1d9163b0362",
       "type": "retain-the-essentials",
       "grains": [
         {
-          "id": "7efb3903-9577-4826-8649-783828ff6b68",
+          "id": "25b89d6a-cb15-4673-923c-edee5ea651ba",
           "type": "summary",
           "title": "Retenir l’essentiel",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "fcffe15b-8162-4f23-bee7-aa81594b6e62",
+                "id": "8c366312-52a5-4a3e-9db2-2174cb0745a5",
                 "type": "text",
-                "content": "<ul><li>La <strong>fabrication des équipements</strong> a des impacts environnementaux&nbsp;: émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.&nbsp;</li><li>Les pratiques d’<strong>obsolescence,&nbsp;</strong>qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements. </li><li>Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. </li><li>Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
+                "content": "<ul><li>Les centres de données sont des <strong>infrastructures</strong> complexes&nbsp;: équipements informatiques, systèmes de refroidissement, sécurisation, etc.<br><br></li><li>Afin d’assurer un service continu aux internautes, ils sont <strong>surdimensionnés</strong> pour anticiper certains dysfonctionnements ou pics de charge.&nbsp;<br><br></li><li>Le <strong>refroidissement</strong> des centres de données représente environ 30% à 40% de l’électricité d’un centre de données et consomme des milliards de litres d’eau.&nbsp;<br><br></li><li>Les évolutions technologiques successives (streaming, stockage cloud, cryptomonnaie, objets connectés, IA générative) amènent à des <strong>usages toujours plus consommateurs d’énergie</strong>.</li></ul>"
               }
             }
           ]
@@ -831,288 +683,166 @@
       ]
     },
     {
-      "id": "9c58f606-7f0a-4ba3-b387-9644a53fe159",
+      "id": "4b23b0cc-a183-4241-ae7a-0e1594550e49",
       "type": "practise",
       "grains": [
         {
-          "id": "1096fc60-c6b3-4546-a86c-019cda881e6a",
+          "id": "803d1540-82d4-47ac-8d41-aed520f98f60",
           "type": "activity",
           "title": "Application 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "a439ddb8-fc46-4e67-ba6e-544dccaef549",
-                "type": "qcu",
-                "instruction": "<p>Parmi les affirmations suivantes, laquelle décrit le mieux l’étape de fabrication ?</p>",
-                "proposals": [
+                "id": "c787ade5-0ed2-4072-a4a7-997c4890249f",
+                "type": "qab",
+                "instruction": "<p>Vrai ou faux ?&nbsp;</p>",
+                "cards": [
                   {
-                    "id": "3",
-                    "content": "<p>La fabrication n’est pas une étape polluante, les usines de fabrication fonctionnent majoritairement à l’énergie renouvelable.</p>",
-                    "feedback": {
-                      "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
-                    }
+                    "id": "280eddcf-b635-470d-8ea6-b69471e6455a",
+                    "text": "Il y a toujours des générateurs électriques d’urgence dans un centre de données",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
                   },
                   {
-                    "id": "2",
-                    "content": "<p>La fabrication a un impact environnemental négligeable par rapport à l’utilisation quotidienne de l’appareil.</p>",
-                    "feedback": {
-                      "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
-                    }
+                    "id": "dc412f06-9599-46bd-91f5-a8a006d79030",
+                    "text": "L’ensemble du système de sécurité est virtuel",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
                   },
                   {
-                    "id": "1",
-                    "content": "<p>L’étape de fabrication des appareils numériques est très polluante. </p>",
-                    "feedback": {
-                      "state": "<p>Bonne réponse !</p>",
-                      "diagnosis": "<p> La fabrication est effectivement l’étape la plus polluante de la vie d’un appareil numérique.</p>"
-                    }
+                    "id": "2fb572ae-137a-418d-9924-5d09757d4e56",
+                    "text": "La climatisation tourne 24h/24",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
                   },
                   {
-                    "id": "4",
-                    "content": "<p>L’étape de fabrication est aujourd’hui totalement automatisée, ce qui élimine la majorité des pollutions.</p>",
-                    "feedback": {
-                      "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>La fabrication reste aujourd’hui de loin l’étape la plus polluante de la vie d’un appareil numérique.</p>"
-                    }
+                    "id": "34364e0f-5baf-4d1e-a434-42a04d7a1f7c",
+                    "text": "Les serveurs sont rangés dans des armoires",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
                   }
                 ],
-                "solution": "1"
+                "feedback": {
+                  "diagnosis": ""
+                }
               }
             }
           ]
         },
         {
-          "id": "21a113ff-a3d5-431d-adf7-e221dda208b5",
+          "id": "ebf84487-59ff-4909-9966-17a541b1ff19",
           "type": "activity",
           "title": "Application 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "784e5111-2234-4730-8cf4-c68b38dfb4ec",
-                      "type": "text",
-                      "content": "<p>Reconnaître et sélectionner le type de stratégies derrière chaque cas présenté&nbsp;:</p>"
-                    },
-                    {
-                      "id": "1e1a6976-b96e-4202-b27d-17c3ddc96195",
-                      "type": "qcu",
-                      "instruction": "<p>Le prix de la réparation d’une montre connectée est plus élevé que l’achat d’une montre neuve.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Limitation à la réparabilité</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>Le prix des réparations trop élevé est souvent un frein à la réparation.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Obsolescence logicielle</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence logicielle se produit lorsque les mises à jour ne sont plus compatibles ou rendent l’appareil moins performant. Cela ne concerne pas directement le prix de la réparation.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Obsolescence par effet de mode</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence par effet de mode repose sur le désir de changer d’appareil parce qu’il n’est plus à la mode, pas parce que la réparation est trop coûteuse.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
+              "type": "element",
+              "element": {
+                "id": "089943ea-d233-40cd-8ab8-009b37e48897",
+                "type": "qcm",
+                "instruction": "<p>Pourquoi les systèmes de refroidissement des centres de données ont un impact environnemental fort ? </p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Les systèmes de refroidissement ont besoin de beaucoup d’électricité pour fonctionner<br></p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Les systèmes de refroidissement utilisent de l’eau salée prélevée dans les océans</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p> Ils utilisent de grandes quantités d’eau douce pour le refroidissement</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Les climatiseurs fonctionnent au charbon qui est particulièrement polluant</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !&nbsp;</p>",
+                    "diagnosis": "<p>Les systèmes de refroidissement des centres de données ont un impact envionnemental puisqu’ils consomment beaucoup d’électricité et d’eau douce pour fonctionner.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse !&nbsp;</p>",
+                    "diagnosis": "<p>Les systèmes de refroidissement des centres de données ont un impact envionnemental puisqu’ils consomment beaucoup d’électricité et d’eau douce pour fonctionner.</p>"
+                  }
                 },
-                {
-                  "elements": [
-                    {
-                      "id": "5ff16265-8026-41d3-9697-916afebf4e5c",
-                      "type": "qcu",
-                      "instruction": "<p>L’arrêt des mises à jour du système d’exploitation de l’ordinateur entraîne des incompatibilités et accroît la vulnérabilité de l’appareil.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Obsolescence technique</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence technique renvoie à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…), ce qui n’est pas le cas ici.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Obsolescence logicielle</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>L’arrêt de mise à jour logicielle est un cause fréquente d’obsolescence.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Obsolescence par effet de mode</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.<br></p>",
-                            "diagnosis": "<p>L’obsolescence par effet de mode vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel. Ici, le type d’obsolescence est directement lié au bon fonctionnement l’appareil.&nbsp;</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "6e9332f6-5852-4376-9b10-5b8af0022def",
-                      "type": "qcu",
-                      "instruction": "<p>Le smartphone réduit automatiquement ses performances lorsque la batterie atteint un certain niveau d’usure.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Obsolescence technique</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
-                            "diagnosis": "<p>L’obsolescence technique renvoie bien à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…).</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Obsolescence logicielle</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence logicielle touche principalement les mises à jour, les incompatibilités ou l’arrêt du support logiciel, ce qui n’est pas le cas ici.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Obsolescence par effet de mode</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.<br></p>",
-                            "diagnosis": "<p>L’obsolescence par effet de mode vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel, ce qui n’est pas le cas ici.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "0ececc0b-83c4-41b8-88f0-9c0673d98ffa",
-                      "type": "qcu",
-                      "instruction": "<p>Les choix esthétiques et fonctionnels d’un équipement sont mis en avant par la publicité, puis volontairement modifiés sur la gamme suivante pour rendre le modèle précédent moins attractif.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Obsolescence technique</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence technique renvoie à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…). Ici, les leviers utilisés pour provoquer l’achat d’un appareil neuf  sont différents.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Obsolescence logicielle</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence logicielle touche principalement les mises à jour, les incompatibilités ou l’arrêt du support logiciel. Ici, les leviers utilisés pour provoquer l’achat d’un appareil neuf sont différents.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Obsolescence par effet de mode</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>Il s’agit bien ici des leviers psychologiques qui poussent le consommateur à acheter du neuf.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3"
-                    }
-                  ]
-                }
-              ]
+                "solutions": [
+                  "1",
+                  "2"
+                ]
+              }
             }
           ]
         },
         {
-          "id": "ee81f04c-d4b5-43ea-aaf4-29d637270e1c",
+          "id": "8f3d5c7f-4780-4ced-a626-8bb7bbe89184",
           "type": "activity",
           "title": "Application 3",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "fcf77703-3fad-45ba-bf97-2ebd6e49c672",
-                "type": "text",
-                "content": "<p>Vous devez acheter un ordinateur portable. En consommateur averti, vous souhaitez réduire autant que possible votre empreinte écologique. </p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "b5bffb62-594d-407c-af81-fe7fa603379f",
-                "type": "qab",
-                "instruction": "<p>Identifiez si chaque proposition correspond à une logique d’économie <strong>circulaire</strong> ou à une logique&nbsp;<strong>linéaire</strong>.</p>",
-                "cards": [
+                "id": "7854fd2f-5062-4248-9a1e-08a4b971614e",
+                "type": "qcu",
+                "instruction": "<p>Quel est l’impact des nouvelles technologies sur la consommation d’énergie des centres de données ?&nbsp;</p>",
+                "proposals": [
                   {
-                    "id": "d5fb3fcf-d7ff-48d0-901e-7fd884e434a4",
-                    "text": "Location longue durée de l’ordinateur",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Circulaire",
-                    "proposalB": "Linéaire",
-                    "solution": "A"
+                    "id": "1",
+                    "content": "<p>Elles n’ont presque pas d’impact grâce aux progrès technologiques</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse !</p>",
+                      "diagnosis": "<p>L’IA générative, le streaming, le cloud... Toutes ces technologies&nbsp;amènent à des usages toujours plus consommateurs d’énergie.</p>"
+                    }
                   },
                   {
-                    "id": "af10dfc1-ed27-4c7f-98a0-3c8cf359d596",
-                    "text": "Achat d’un ordinateur reconditionné",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Circulaire",
-                    "proposalB": "Linéaire",
-                    "solution": "A"
+                    "id": "2",
+                    "content": "<p>Elles deviennent rapidement neutres grâce aux optimisations logicielles</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse !&nbsp;</p>",
+                      "diagnosis": "<p>L’IA générative, le streaming, le cloud... Toutes ces technologies&nbsp;amènent à des usages toujours plus consommateurs d’énergie.</p>"
+                    }
                   },
                   {
-                    "id": "110eb755-31f8-4701-9c0c-7e157bf2f538",
-                    "text": "Système d’abonnement avec un ordinateur neuf tous les deux ans",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Circulaire",
-                    "proposalB": "Linéaire",
-                    "solution": "B"
+                    "id": "2",
+                    "content": "<p>Elles n’augmentent la consommation que ponctuellement, lors du lancement de ces technologies ou des mises à jour</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse !&nbsp;</p>",
+                      "diagnosis": "<p>L’IA générative, le streaming, le cloud... Toutes ces technologies&nbsp;amènent à des usages toujours plus consommateurs d’énergie.</p>"
+                    }
                   },
                   {
-                    "id": "273ac6f4-3454-404e-8d21-00550ce17128",
-                    "text": "Opération “Reprise + Bonus” : votre vieil ordinateur est recyclé, vous avez une réduction sur un neuf",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Circulaire",
-                    "proposalB": "Linéaire",
-                    "solution": "B"
+                    "id": "4",
+                    "content": "<p>Elles augmentent fortement la consommation d’énergie</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !&nbsp;</p>",
+                      "diagnosis": "<p>L’IA générative, le streaming, le cloud... Toutes ces technologies&nbsp;amènent à des usages toujours plus consommateurs d’énergie.</p>"
+                    }
                   }
                 ],
-                "feedback": {
-                  "diagnosis": "<p>La location et le reconditionnement sont des pratiques de l’économie circulaire. Attention, parfois, certaines pratiques peuvent être trompeuses ! Le recyclage n’est pas toujours la solution, surtout si l’on incite à acheter toujours plus de neuf avec un système de \"bonus\" d’achat.</p>"
-                }
+                "solution": "4"
               }
             }
           ]
@@ -1120,72 +850,104 @@
       ]
     },
     {
-      "id": "61baaee7-ae03-4763-a9ac-fb61480d5b07",
+      "id": "32d8cccb-fa8f-470c-8956-a329cba1c350",
       "type": "go-further",
       "grains": [
         {
-          "id": "4dc0b6a5-e897-436a-bdf5-86ee8f4d7407",
+          "id": "545842c6-cddd-4dee-ba56-f6045806292f",
           "type": "challenge",
           "title": "Transfert",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "5baa2fa9-a281-4e00-bf0f-008790c17132",
+                "id": "1baf5bf6-4e2c-451a-ac35-2373ac9b2a10",
                 "type": "text",
-                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes&nbsp;:&nbsp;</p>"
+                "content": "<p>Maintenant que vous comprenez mieux le fonctionnement des centres de données, voici quelques questions pour réfléchir à vos usages au quotidien. </p>"
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "5a19a0c7-b684-4b84-93b2-4788da82376c",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/tablette-1.png",
-                "alt": "Une tablette (à modifier)",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "d25a2a3f-1832-4338-8d01-11d6155f4f63",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/tablette-2.png",
-                "alt": "Une deuxième tablette (à modifier)",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "fadb1f8a-ee5b-4248-9430-e754f361395e",
-                "type": "qcu",
-                "instruction": "<p>Laquelle de ces deux tablettes est la plus facile à réparer ?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>La première tablette </p>",
-                    "feedback": {
-                      "state": "",
-                      "diagnosis": "<p>C’est exact ! Sur l’étiquette Energy, le pictogramme “tournevis” indique le degré de réparabilité de la tablette. Cette tablette étant en classe \"A\", elle est  mieux notée et donc plus facilement réparable que l’autre tablette</p>"
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "7fcaf7e5-92c7-45fd-9e74-f3d29583016a",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Vous&nbsp;recevez une alerte vous signalant que l’espace de stockage de votre PixCloud est plein</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vous&nbsp;transfèrez vos données sur un disque dur externe</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bravo, c’est un bon réflexe !&nbsp;</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Vous ne faites rien, ça arrive régulièrement.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Gardez en mémoire que plus vous stockez de données sur le cloud, plus vous faites travailler les centres de données.&nbsp;</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>La deuxième tablette</p>",
-                    "feedback": {
-                      "state": "",
-                      "diagnosis": "<p>C’est l’inverse ! Sur l’étiquette Energy, le pictogramme “tournevis” indique le degré de réparabilité de la tablette. Ici, le smartphone est en classe C contre une classe A pour l’autre tablette, c’est donc l’autre tablette qui est plus facilement réparable.</p>"
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "2d849e24-df5c-4a34-b2dd-2ec735a1cdb1",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Vous regardez une courte vidéo d’information en streaming sur votre téléphone. La qualité de lecture est 1080p. Que faites-vous?&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vous baissez la qualité mise par défaut, beaucoup trop haute pour votre vidéo, 720p suffira.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bravo ! En baissant la qualité de la vidéo, vous réduisez le volume de données envoyés par les centres de données.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Vous laissez la qualité par défaut</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En réalité, en baissant la qualité de la vidéo, vous pourriez réduire le volume de données envoyés par les centres de données.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  }
-                ],
-                "solution": "1"
-              }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "c276ef8e-8ecb-4249-823d-38d2352eab19",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Vous souhaitez retrouver l’année des derniers Jeux Olympiques</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vous demandez à ChatGPT</p>",
+                          "feedback": {
+                            "diagnosis": "<p> L’IA générative n’est pas vraiment utile pour ce type de question. Un moteur de recherche vous donnera la réponse plus rapidement… et utilisera bien moins d’énergie côté centres de données.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Vous recherchez sur un moteur de recherche</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En effet, un moteur de recherche vous donnera la réponse plus rapidement… et utilise bien moins d’énergie côté centres de données.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
