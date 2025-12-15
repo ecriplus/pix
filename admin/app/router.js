@@ -178,6 +178,10 @@ Router.map(function () {
     this.route('smart-random-simulator', function () {
       this.route('get-next-challenge');
     });
+
+    this.route('combined-course-blueprints', function () {
+      this.route('list');
+    });
   });
 
   this.route('authentication', { path: '/connexion' }, function () {

@@ -1,0 +1,16 @@
+.combinedCourseBlueprint {
+  &__column {
+    &--compact {
+      width: 1px;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+  }
+}
+
+details {
+  & > summary {
+    width: fit-content;
+    cursor: pointer;
+  }
+}

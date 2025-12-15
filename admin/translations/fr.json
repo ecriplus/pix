@@ -27,15 +27,15 @@
       "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
     "fields": {
-      "createdAt": "date de création",
+      "createdAt": "Date de création",
       "id": "ID",
-      "internalName": "nom interne",
-      "name": "nom",
+      "internalName": "Nom interne",
+      "name": "Nom",
       "required-field": "Champ obligatoire",
-      "status": "statut",
+      "status": "Statut",
       "target-profile": {
         "category": {
-          "name": "catégorie",
+          "name": "Catégorie",
           "tags": {
             "BACK_TO_SCHOOL": "Parcours de rentrée / 6e",
             "COMPETENCES": "Les 16 compétences",
@@ -438,6 +438,19 @@
         "placeholder": "ID de la certification"
       }
     },
+    "combined-course-blueprints": {
+      "items": {
+        "module": "Module",
+        "targetProfile": "Profil Cible"
+      },
+      "list": {
+        "content": "Contenu",
+        "table": {
+          "caption": "Liste des schémas de parcours combinés"
+        },
+        "title": "Tous les schémas de parcours combinés"
+      }
+    },
     "combined-courses": {
       "create-form": {
         "addItemButton": "Ajouter",
@@ -553,6 +566,7 @@
         "certification-frameworks": "Référentiels de certif",
         "certification-frameworks-label": "Référentiels de certification",
         "certifications": "Certifications",
+        "combined-course-blueprints": "Schémas de parcours",
         "labels": {
           "close": "Fermer la navigation",
           "main": "Navigation principale",

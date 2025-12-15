@@ -1,5 +1,5 @@
 import { buildCampaigns } from './build-campaigns.js';
-import { buildCombinedCourses } from './build-combined-courses.js';
+import { buildCombinedCourseBlueprints, buildCombinedCourses } from './build-combined-courses.js';
 import { buildOrganizationLearners } from './build-learners.js';
 import { buildOrganizationLearnersWithMultipleParticipations } from './build-organization-learners-with-multiple-participations.js';
 import { buildPlacesLots } from './build-places-lots.js';
@@ -13,6 +13,7 @@ async function teamPrescriptionDataBuilder({ databaseBuilder }) {
   await buildPlacesLots(databaseBuilder);
   await buildQuests(databaseBuilder);
   await buildCombinedCourses(databaseBuilder);
+  await buildCombinedCourseBlueprints(databaseBuilder);
   await buildOrganizationLearnersWithMultipleParticipations(databaseBuilder);
 }
 

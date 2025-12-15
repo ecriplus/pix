@@ -1,0 +1,15 @@
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+
+describe('Integration | Quest | Domain | UseCases | find-combined-course-blueprints', function () {
+  it('should return combined course blueprints array if at least a result is found', async function () {
+    databaseBuilder.factory.buildCombinedCourseBlueprint({
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'abc-123' }]),
+    });
+    await databaseBuilder.commit();
+    const results = await usecases.findCombinedCourseBlueprints();
+    expect(results).lengthOf(1);
+    expect(results[0]).to.be.instanceOf(CombinedCourseBlueprint);
+  });
+});
