@@ -198,7 +198,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#saveInBatch', function () {
-    it('should save given combined course on quests', async function () {
+    it('should create quests related to given combined courses', async function () {
       // given
       const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
@@ -247,20 +247,19 @@ describe('Quest | Integration | Repository | combined-course', function () {
       await combinedCourseRepository.saveInBatch({ combinedCourses: [firstCombinedCourse, secondCombinedCourse] });
 
       // then
-      const firstSavedQuest = await knex('quests').where('organizationId', firstOrganizationId).first();
-      const secondSavedQuest = await knex('quests').where('organizationId', secondOrganizationId).first();
+      const firstSavedQuest = await knex('combined_courses')
+        .join('quests', 'quests.id', 'combined_courses.questId')
+        .where('combined_courses.organizationId', firstOrganizationId)
+        .first();
 
-      expect(firstSavedQuest.name).to.equal('firstCombinedCourse');
+      const secondSavedQuest = await knex('combined_courses')
+        .join('quests', 'quests.id', 'combined_courses.questId')
+        .where('combined_courses.organizationId', secondOrganizationId)
+        .first();
+
       expect(firstSavedQuest.successRequirements).to.deep.equal(successRequirements);
-      expect(firstSavedQuest.code).equal('firstCode');
-      expect(firstSavedQuest.description).equal('ma description');
-      expect(firstSavedQuest.illustration).equal('mon_illu.svg');
 
-      expect(secondSavedQuest.name).to.equal('secondCombinedCourse');
       expect(secondSavedQuest.successRequirements).to.deep.equal(successRequirements);
-      expect(secondSavedQuest.code).equal('secondCode');
-      expect(secondSavedQuest.description).null;
-      expect(secondSavedQuest.illustration).null;
     });
 
     it('should save given combined course on combined_courses', async function () {
@@ -312,11 +311,12 @@ describe('Quest | Integration | Repository | combined-course', function () {
       await combinedCourseRepository.saveInBatch({ combinedCourses: [firstCombinedCourse, secondCombinedCourse] });
 
       // then
-      const firstSavedQuest = await knex('quests').where('organizationId', firstOrganizationId).first();
-      const secondSavedQuest = await knex('quests').where('organizationId', secondOrganizationId).first();
-
-      const firstSavedCombinedCourse = await knex('combined_courses').where('questId', firstSavedQuest.id).first();
-      const secondSavedCombinedCourse = await knex('combined_courses').where('questId', secondSavedQuest.id).first();
+      const firstSavedCombinedCourse = await knex('combined_courses')
+        .where('combined_courses.organizationId', firstOrganizationId)
+        .first();
+      const secondSavedCombinedCourse = await knex('combined_courses')
+        .where('combined_courses.organizationId', secondOrganizationId)
+        .first();
 
       expect(firstSavedCombinedCourse.name).to.equal('firstCombinedCourse');
       expect(firstSavedCombinedCourse.description).equal('ma description');
