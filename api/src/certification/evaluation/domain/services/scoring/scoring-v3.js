@@ -1,10 +1,10 @@
 /**
- * @typedef {import('./calibrated-challenge-service.js').findByCertificationCourseIdAndAssessmentId} FindByCertificationCourseIdAndAssessmentId
+ * @typedef {import('./calibrated-challenge-service.js').findByCertificationCourseAndVersion} FindByCertificationCourseAndVersion
  */
 
 /**
  * @typedef {Object} ScoringV3Dependencies
- * @property {FindByCertificationCourseIdAndAssessmentId} findByCertificationCourseIdAndAssessmentId
+ * @property {FindByCertificationCourseAndVersion} findByCertificationCourseAndVersion
  */
 
 /**
@@ -23,6 +23,7 @@
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { config } from '../../../../../shared/config.js';
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
+import { CertificationCandidateNotFoundError } from '../../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithm } from '../../../../evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
@@ -72,16 +73,18 @@ export const handleV3CertificationScoring = withTransaction(
       sessionId: certificationCourse.getSessionId(),
       userId: certificationCourse.getUserId(),
     });
+
+    if (!certificationCandidate) {
+      throw new CertificationCandidateNotFoundError();
+    }
+
     const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
       scope,
       reconciliationDate: certificationCandidate.reconciledAt,
     });
 
     const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-      await dependencies.findByCertificationCourseIdAndAssessmentId({
-        certificationCourse,
-        version,
-      });
+      await dependencies.findByCertificationCourseAndVersion({ certificationCourse, version });
 
     const algorithm = new FlashAssessmentAlgorithm({
       flashAlgorithmImplementation: flashAlgorithmService,
@@ -107,7 +110,7 @@ export const handleV3CertificationScoring = withTransaction(
       scoringDegradationService,
     });
 
-    const assessmentResult = await _createV3AssessmentResult({
+    const assessmentResult = _createV3AssessmentResult({
       toBeCancelled,
       allAnswers: candidateAnswers,
       certificationAssessment,
