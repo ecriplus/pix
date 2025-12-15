@@ -57,7 +57,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Philippe n’a pas été assez prudent sur internet.</p>",
+                    "content": "<p>Philippe a certainement été imprudent, contrairement à ce qu’il pense.</p>",
                     "feedback": {
                       "diagnosis": "<p>Adopter les bons gestes pour éviter d’installer des LM c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
                     }
@@ -480,13 +480,13 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>.<br>Pour limiter améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
+                    "content": "<span>.Pour limiter améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
                   },
                   {
                     "input": "2",
                     "type": "input",
                     "inputType": "text",
-                    "size": 15,
+                    "size": 20,
                     "display": "inline",
                     "placeholder": "- trois mots manquants -",
                     "ariaLabel": "trois mots manquants",
@@ -585,8 +585,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Comportement adapté",
-                    "proposalB": "Comportement non adapté",
+                    "proposalA": "Adapté",
+                    "proposalB": "Non adapté",
                     "solution": "B"
                   },
                   {
@@ -596,8 +596,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Comportement adapté",
-                    "proposalB": "Comportement non adapté",
+                    "proposalA": "Adapté",
+                    "proposalB": "Non adapté",
                     "solution": "A"
                   },
                   {
@@ -607,8 +607,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Comportement adapté",
-                    "proposalB": "Comportement non adapté",
+                    "proposalA": "Adapté",
+                    "proposalB": "Non adapté",
                     "solution": "A"
                   },
                   {
@@ -618,8 +618,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Comportement adapté",
-                    "proposalB": "Comportement non adapté",
+                    "proposalA": "Adapté",
+                    "proposalB": "Non adapté",
                     "solution": "B"
                   },
                   {
@@ -629,8 +629,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Comportement adapté",
-                    "proposalB": "Comportement non adapté",
+                    "proposalA": "Adapté",
+                    "proposalB": "Non adapté",
                     "solution": "B"
                   }
                 ],
@@ -663,21 +663,21 @@
                     "id": "1",
                     "content": "<p>Je vérifie si les mises à jour automatiques sont activées sur mes appareils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bon premier pas ! Les mises à jour corrigent des failles qui pourraient être exploitées. Et la prochaine étape, pourrait être d’installer un logiciel antivirus si ce n’est pas encore le cas.<br></p>"
+                      "diagnosis": "<p>Très bon premier pas ! Les mises à jour corrigent des failles qui pourraient être exploitées. Et la prochaine étape, pourrait être d’installer un logiciel antivirus si vous n’en avez pas encore.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>J’installe un logiciel antivirus sur un de mes appareils qui n’en a pas encore.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bon premier pas !&nbsp; Installer un logiciel antivirus complète efficacement la protection de vos appareils. N’oubliez pas d’activer les mises à jour automatique, pour rester à la pointe de la protection.</p>"
+                      "diagnosis": "<p>Très bon premier pas !&nbsp; Installer un logiciel antivirus complète efficacement la protection de vos appareils. N’oubliez pas d’activer les mises à jour automatiques, pour rester à la pointe de la protection.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je prends l’habitude de lire les notifications de sécurité de mon logiciel antivirus avant de les fermer.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une excellente habitude&nbsp;: lire une notification permet souvent d’éviter une infection. Vous pourrez ensuite aller plus loin en sensibilisant vos proches à l’importance de ces alertes.</p>"
+                      "diagnosis": "<p>C’est une excellente habitude&nbsp;: lire une notification permet souvent d’éviter une infection.  N’oubliez pas d’activer les mises à jour automatiques, pour rester à la pointe de la protection.</p>"
                     }
                   },
                   {
