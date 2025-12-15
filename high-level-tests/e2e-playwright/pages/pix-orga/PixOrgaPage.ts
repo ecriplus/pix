@@ -14,14 +14,15 @@ export class PixOrgaPage {
     await this.page.getByRole('button', { name: 'Accepter et continuer' }).click();
   }
 
-  async waitForUploadSuccess(page: Page) {
-    let inProgress = false;
-    await page.getByRole('heading').waitFor();
+  async waitForTheImportToComplete(page: Page) {
+    let done = false;
+    await page.getByRole('heading', { name: 'Importer des' }).waitFor();
     do {
+      await page.waitForTimeout(1000);
       await page.reload({ waitUntil: 'load' });
-      await page.getByRole('heading').waitFor();
-      inProgress = await page.getByRole('paragraph').filter({ hasText: 'un import est en cours' }).isVisible();
-    } while (inProgress);
+      await page.getByRole('heading', { name: 'Importer des' }).waitFor();
+      done = await page.getByRole('paragraph').filter({ hasText: 'Dernier fichier importé avec succès' }).isVisible();
+    } while (!done);
   }
 
   async waitForParticipationScoreComputed(score: string, page: Page) {

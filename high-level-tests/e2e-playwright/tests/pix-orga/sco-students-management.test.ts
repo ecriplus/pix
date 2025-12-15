@@ -54,17 +54,15 @@ test('Managing sco learners', async ({ page }) => {
   await test.step('Import Learners', async () => {
     await page.getByRole('link', { name: 'Élèves' }).click();
     await page.getByRole('link', { name: 'Importer', exact: true }).click();
-    await page
-      .getByRole('textbox', { name: 'Importer la liste' })
-      .setInputFiles(path.join(os.tmpdir(), `sco-${UAJ}.xml`));
+    await page.locator('#students-file-upload').setInputFiles(path.join(os.tmpdir(), `sco-${UAJ}.xml`));
 
     const hasLoader = await page.locator('.app-loader').isVisible();
     if (hasLoader) {
       await page.waitForSelector('.app-loader', { state: 'detached' });
     }
 
+    await orgaPage.waitForTheImportToComplete(page);
     await page.getByRole('link', { name: 'Élèves' }).click();
-    await orgaPage.waitForUploadSuccess(page);
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
     ).toBeVisible();

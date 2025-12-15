@@ -1,8 +1,7 @@
-/*
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
-import { buildFreshPixOrgaUserWithGenericImport, deleteUserFromDB, knex } from '../../helpers/db.ts';
+import { buildFreshPixOrgaUserWithGenericImport } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
@@ -24,53 +23,13 @@ test.beforeEach(async () => {
     `admin-${uid}@example.net`,
     'pix123',
     'ADMIN',
+    uid,
     {
       type: 'PRO',
       externalId: `GENERIC_ORG-${uid}`,
       isManagingStudents: false,
     },
   );
-});
-
-test.afterEach(async () => {
-  const { userId, organizationId, campaignId } = testData;
-
-  // Get participation id
-  const { id: campaignParticipationId } = await knex('campaign-participations')
-    .where('campaignId', testData.campaignId)
-    .first();
-
-  // Get assessment id
-  const { id: assessmentId } = await knex
-    .from('assessments')
-    .select('id')
-    .where('campaignParticipationId', campaignParticipationId)
-    .first();
-
-  await knex('assessment-results').where('assessmentId', assessmentId).delete();
-  await knex('assessments').where('id', assessmentId).delete();
-  await knex('answers').where('assessmentId', assessmentId).delete();
-  await knex('campaign-participations').where('id', campaignParticipationId).delete();
-  await knex('organization-learners').where('organizationId', organizationId).delete();
-  await knex('campaigns').where('id', campaignId).delete();
-  const organizationFeatureIds = await knex('organization-features')
-    .where('organizationId', organizationId)
-    .pluck('id');
-  await knex('organization-features').whereIn('id', organizationFeatureIds).delete();
-  await knex('organization-learner-import-formats').where('createdBy', userId).delete();
-  await knex('target-profile-shares').where('organizationId', organizationId).delete();
-  await knex('memberships').where('userId', userId).delete();
-  await knex('organization-imports').where('organizationId', organizationId).delete();
-  const { id: asimovUserId } = await knex('users').where('email', `asimov.${uid}@example.net`).select('id').first();
-  await deleteUserFromDB(asimovUserId);
-  await deleteUserFromDB(userId);
-  const administrationTeamId = await knex('organizations')
-    .where('id', organizationId)
-    .select('administrationTeamId')
-    .first()
-    .then((row) => row?.administrationTeamId);
-  await knex('organizations').where('id', organizationId).delete();
-  await knex('administration_teams').where('id', administrationTeamId).delete();
 });
 
 test('Managing generic import learners', async ({ page }) => {
@@ -91,13 +50,13 @@ test('Managing generic import learners', async ({ page }) => {
       .locator('#students-file-upload')
       .setInputFiles(path.join(import.meta.dirname, '..', '..', 'fixtures', 'generic-ok.csv'));
 
-    const hasLoader = await page.locator('.app-loader').isVisible();
-    if (hasLoader) {
-      await page.waitForSelector('.app-loader', { state: 'detached' });
-    }
+    await orgaPage.waitForTheImportToComplete(page);
+  });
 
+  await test.step('Show learners', async () => {
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByRole('link', { name: 'Participants' }).click();
-    await orgaPage.waitForUploadSuccess(page);
+    await expect(page.getByRole('heading', { name: 'Participants (3)' })).toBeVisible();
   });
 
   await test.step('Access the campaign and reconcile a new user with an imported learner', async () => {
@@ -126,4 +85,3 @@ test('Managing generic import learners', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Vous avez déjà répondu' })).toBeVisible();
   });
 });
-*/
