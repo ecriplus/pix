@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
 import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
 import groupBy from 'lodash/groupBy';
@@ -20,7 +18,6 @@ export default class CertificationDetails extends Model {
   @attr() listChallengesAndAnswers;
   version = 2;
 
-  @computed('listChallengesAndAnswers', 'listChallengesAndAnswers.@each.isNeutralized')
   get answers() {
     return this.listChallengesAndAnswers.map((answer, index) => {
       answer.order = index + 1;
@@ -28,7 +25,6 @@ export default class CertificationDetails extends Model {
     });
   }
 
-  @computed('answers', 'competencesWithMark')
   get competences() {
     const answersByCompetence = groupBy(this.answers, 'competence');
 
@@ -49,12 +45,10 @@ export default class CertificationDetails extends Model {
     return sortBy(competences, 'index');
   }
 
-  @computed('createdAt')
   get creationDate() {
     return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
-  @computed('completedAt')
   get completionDate() {
     return this.intl.formatDate(this.completedAt, { format: 'long' });
   }

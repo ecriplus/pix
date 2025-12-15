@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 const orderedApplicationNames = ['app', 'orga', 'certif'];
@@ -42,7 +40,6 @@ export default class User extends Model {
   @hasMany('last-application-connection', { async: false, inverse: null }) lastApplicationConnections;
   @hasMany('user-participation', { async: true, inverse: null }) participations;
 
-  @computed('firstName', 'lastName')
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }

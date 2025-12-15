@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
 import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
 import find from 'lodash/find';
@@ -27,35 +25,29 @@ export default class JuryCertificationSummary extends Model {
   @attr() isFlaggedAborted;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
 
-  @computed('createdAt')
   get creationDate() {
     return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
-  @computed('completedAt')
   get completionDate() {
     return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
   }
 
-  @computed('numberOfCertificationIssueReportsWithRequiredAction')
   get numberOfCertificationIssueReportsWithRequiredActionLabel() {
     return this.numberOfCertificationIssueReportsWithRequiredAction > 0
       ? this.numberOfCertificationIssueReportsWithRequiredAction
       : '';
   }
 
-  @computed('status')
   get statusLabel() {
     const statusWithLabel = find(statuses, { value: this.status });
     return statusWithLabel?.label;
   }
 
-  @computed('status')
   get isCertificationStarted() {
     return this.status === 'started';
   }
 
-  @computed('status')
   get isCertificationInError() {
     return this.status === 'error';
   }

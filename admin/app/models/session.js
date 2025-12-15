@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import isEmpty from 'lodash/isEmpty';
 import trim from 'lodash/trim';
@@ -47,12 +45,10 @@ export default class Session extends Model {
   @belongsTo('user', { async: true, inverse: null }) assignedCertificationOfficer;
   @belongsTo('user', { async: true, inverse: null }) juryCommentAuthor;
 
-  @computed('status')
   get isFinalized() {
     return this.status === FINALIZED || this.status === IN_PROCESS || this.status === PROCESSED;
   }
 
-  @computed('examinerGlobalComment')
   get hasExaminerGlobalComment() {
     return !isEmpty(trim(this.examinerGlobalComment));
   }
@@ -61,12 +57,10 @@ export default class Session extends Model {
     return Boolean(this.hasIncident || this.hasJoiningIssue);
   }
 
-  @computed('publishedAt')
   get isPublished() {
     return this.publishedAt !== null;
   }
 
-  @computed('status')
   get displayStatus() {
     return statusToDisplayName[this.status];
   }
