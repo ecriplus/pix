@@ -1,7 +1,5 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { alias } from '@ember/object/computed';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
@@ -17,8 +15,6 @@ export default class IndexController extends Controller {
   @service intl;
   @service store;
 
-  @alias('model') sessionModel;
-
   @tracked modalTitle = '';
   @tracked modalMessage = '';
   @tracked modalConfirmAction = this.cancelModal;
@@ -26,6 +22,10 @@ export default class IndexController extends Controller {
 
   @tracked isCopyButtonClicked = false;
   @tracked copyButtonText = 'Copié';
+
+  get sessionModel() {
+    return this.model;
+  }
 
   get sessionStatusLabel() {
     return statusToDisplayName[this.sessionModel.status];
