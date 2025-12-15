@@ -1,0 +1,705 @@
+{
+  "id": "92d3528c-3404-4ba5-808e-215e0787bf60",
+  "shortId": "93c3b007",
+  "slug": "cyber-antivirus",
+  "title": "Renforcez la protection de vos appareils contre les logiciels malveillants",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Nos appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, découvrons deux méthodes complémentaires pour renforcer la protection de nos appareils face à ces logiciels. 🛡️<br></p>",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "<p>Comprendre que les attaques par logiciels malveillants exploitent des failles des systèmes</p>",
+      "<p>Connaître le rôle d’un logiciel antivirus</p>",
+      "<p>Comprendre que les mises à jour renforcent la protection des appareils</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "ff016dc4-a34d-48a0-a83e-2b888df02af0",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "f6f9c6f3-bad1-4d67-a728-fe28994b9f66",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5fd179ed-e09d-496e-adbd-47cda8b2b1c6",
+                "type": "text",
+                "content": "<p>Philippe vient de découvrir qu’un logiciel malveillant s’est installé sur son ordinateur.<br>Pourtant, Philippe est très prudent sur internet&nbsp;: pas de clic sur un lien suspect, pas pièce jointe douteuse ouverte, pas de clé USB inconnue branchée…<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "58d91eaa-1916-4361-89c8-5b6f869cba9f",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, pour quelle raison l’ordinateur de Philippe a pu être infecté par un logiciel malveillant ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L’ordinateur de Philippe n’est pas assez puissant.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. La puissance d’un ordinateur n’est pas responsable de cela.<br>Par contre, une faille technique peut rendre un appareil numérique vulnérable.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Un logiciel malveillant a utilisé une faille technique pour s’installer.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh oui. Adopter les bons gestes pour éviter d’installer des LM c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé.&nbsp; <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Philippe n’a pas été assez prudent sur internet.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Adopter les bons gestes pour éviter d’installer des LM c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Adopter les bons gestes pour éviter d’installer des LM c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.&nbsp;<br></p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "847a2c51-a389-443a-abe5-dc4f558bdf96",
+          "type": "transition",
+          "title": "Transition accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8397b72b-fdce-4d9a-9071-868df800532e",
+                "type": "text",
+                "content": "<p>Les pirates informatiques cherchent en permanence des failles pour s’introduire dans nos appareils numériques. Comment la sécurité de nos appareils est-elle renforcée pour les en empêcher ?</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ad2548a7-22b1-413c-ad36-fc0accf39880",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "5e3d3700-b7bd-4b1c-ba36-b1cd9a5f60c4",
+          "type": "discovery",
+          "title": "Découverte #1a",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
+                "type": "custom-draft",
+                "title": "Frise",
+                "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_antivirus/frise.html",
+                "instruction": "<p>Explorez la frise ci-dessous et répondez à chacune des questions.</p>",
+                "height": 550
+              }
+            }
+          ]
+        },
+        {
+          "id": "7098c994-e560-4628-9683-8ea4e895535d",
+          "type": "discovery",
+          "title": "Découverte #1b",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, est-ce qu’une seule mise à jour suffit pour protéger définitivement un appareil des logiciels malveillants ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !&nbsp;Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs.<br> </p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs. <br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs. <br></p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "156cd004-7550-43e2-b644-9f6d17b16c28",
+          "type": "short-lesson",
+          "title": "Notion #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
+                "type": "text",
+                "content": "<p>Pour renforcer la protection de son appareil, il faut<strong> accepter une mise à jour quand une notification le demande</strong>, sur tous les appareils numériques (ordinateur, smartphone, tablette). Ces mises à jour entraînent souvent le redémarrage de l’appareil, il faut les accepter quand même.</p><p><br>💡Activer les <strong>mises à jour automatiques</strong> permet de ne plus avoir besoin d’y pense.</p><br>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d4c70e2c-69f5-4db3-b8fd-87fcf372ed54",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "024ea3ae-548b-4f85-8d3f-c09f0f6c8d37",
+                "type": "text",
+                "content": "<p>Les mises à jour des logiciels systèmes améliorent régulièrement la sécurité de nos appareils. <br>Mais pour compléter cette protection, il existe aussi des logiciels spécialisés&nbsp;: les logiciels antivirus.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a1352db6-3746-429d-9d80-e7455845cc73",
+          "type": "discovery",
+          "title": "Découverte #2a",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ae2cfed2-9fde-45d3-bded-8ceb6feb7f99",
+                "type": "text",
+                "content": "<p>Même si l’ordinateur de Philippe intègre déjà certaines protections, il se demande ce qu’il peut faire de plus pour se protéger des logiciels malveillants.<br>Un ami lui conseille d’<strong>installer un logiciel antivirus</strong>.<br>Phillipe se demande ce que fait un logiciel antivirus pour protéger un appareil.<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c2b0f529-38af-4c54-bafa-1b41c4725f1b",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis, quel est le rôle d’un logiciel antivirus ?&nbsp;<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Optimiser les performances générales de l’ordinateur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! Le but d’un logiciel antivirus est d’<strong>empêcher qu’un logiciel malveillant s’installe</strong> sur l’appareil. <br>Pour cela, il <strong>surveille en permanence</strong> ce qui se passe sur l’appareil.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Organiser automatiquement les fichiers pour libérer de l’espace.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! Le but d’un logiciel antivirus est d’<strong>empêcher qu’un logiciel malveillant s’installe</strong> sur l’appareil. <br>Pour cela, il <strong>surveille en permanence</strong> ce qui se passe sur l’appareil.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Empêcher qu’un logiciel malveillant s’installe sur l’appareil.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, le but d’un logiciel antivirus est d’<strong>empêcher qu’un logiciel malveillant s’installe</strong> sur l’appareil. <br>Pour cela, il <strong>surveille en permanence</strong> ce qui se passe sur l’appareil.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Restreindre l’accès aux contenus en fonction de l’âge de l’utilisateur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! Le but d’un logiciel antivirus est d’<strong>empêcher qu’un logiciel malveillant s’installe</strong> sur l’appareil. <br>Pour cela, il <strong>surveille en permanence</strong> ce qui se passe sur l’appareil.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Le but d’un logiciel antivirus est d’<strong>empêcher qu’un logiciel malveillant s’installe</strong> sur l’appareil. <br>Pour cela, il <strong>surveille en permanence</strong> ce qui se passe sur l’appareil.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "03a0d3cc-efb6-4928-8256-5f78d1f4a341",
+          "type": "discovery",
+          "title": "Découverte #2b",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "911286d9-f015-40a7-8150-c0a961f329cd",
+                "type": "text",
+                "content": "<p>Mais qu’est ce que le logiciel antivirus surveille exactement ?</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b219ed49-186e-4e6f-ba77-d003a43ca262",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des actions suivantes, indiquez si, à votre avis, l’antivirus va la surveiller.</p>",
+                "cards": [
+                  {
+                    "id": "f78a8701-3c64-4625-b4a3-af42ed48dfbb",
+                    "text": "Ouverture d’un fichier reçu par mail. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "3717eb56-a751-4016-8cb4-9ae8f6229012",
+                    "text": "Téléchargement d’une vidéo sur un site web.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "364ed12c-42eb-450c-9cf6-2303f51860ed",
+                    "text": "Lancement automatiquement d’un logiciel au démarrage de l’ordinateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "ed4f7975-1936-4657-ba9c-ec0c9f029c93",
+                    "text": "Rédaction d’une lettre sur un logiciel de traitement de texte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "5360a3a5-f829-4069-9638-78a4a34b7966",
+                    "text": "Branchement pour la première fois d’une nouvelle clé usb. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "6ba0de24-6686-42fa-84db-389e1596c36c",
+                    "text": "Paramétrage de la luminosité de l’écran. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Le logiciel antivirus surveille les <strong>actions potentiellement risquées </strong>: ouverture de fichiers, téléchargements, clés USB branchées, programmes lancés…<br>En revanche, il n’intervient pas sur les actions sans risque, comme modifier un fond d’écran ou rédiger un document.</p>"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "0c62be03-ab9c-48d6-b8a1-9e469653365e",
+          "type": "short-lesson",
+          "title": "Notion #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "09624e99-41b4-4988-b697-5339222362cd",
+                "type": "text",
+                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, MacAfee, Trend, Lenovo, CyRadar, Avira, AVG, BitdeFender, ReasonLabs, ClamAV.&nbsp;</p><p>Choisissez-en <strong>un</strong>, c’est <strong>suffisant </strong>! <br><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> en autonomie et en continu</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "37635bb3-71f3-4097-aa94-55d7affe42c4",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "48474476-a292-4856-8dca-637fd8110be9",
+                "type": "text",
+                "content": "<p>Une fois le logiciel antivirus installé, l’utilisateur n’a-t-il vraiment plus rien à faire ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4e8638df-9a8a-49ff-a4e4-cd7b6f802582",
+          "type": "discovery",
+          "title": "Découverte #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "009744f7-8b6e-4fab-918c-bc162f870bf9",
+                "type": "text",
+                "content": "<p>Philippe a reçu plusieurs notifications de son antivirus.<br>Il ne sait pas lesquelles nécessitent une action de sa part.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "480099ac-a5d1-4a86-a5a8-59828e92afac",
+                "type": "custom-draft",
+                "title": "Notifications",
+                "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_antivirus/notifs.html",
+                "instruction": "<p>Pour chacune des notifications, indiquez ce que doit faire Philippe.</p>",
+                "height": 550
+              }
+            }
+          ]
+        },
+        {
+          "id": "5ceccbd9-1af7-4388-a34e-df240c01174a",
+          "type": "short-lesson",
+          "title": "Notion #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0fee0aa5-3408-47c2-81a6-1fce8b187903",
+                "type": "text",
+                "content": "<p>S’il détecte quelque chose d’anormal, l’antivirus va <strong>bloquer</strong>, <strong>effacer </strong>ou <strong>isoler </strong>l’élément suspect puis vous en avertir.<br><br> <strong>⚠️ Attention</strong> <br>Tout comme votre appareil, l’<strong>antivirus </strong>doit être <strong>mis à jour régulièrement</strong> pour rester <strong>efficace</strong>.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1009851e-4b5a-4eeb-8448-0666ff05b702",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "04416213-7153-487d-886f-69a9490da34f",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
+                "type": "text",
+                "content": "<ul>    <li>Les pirates créent des <strong>logiciels </strong><strong>malveillants </strong>qui <strong>exploitent les failles techniques</strong> des appareils numériques.<br>Les <strong>mises à jour des logiciels systèmes</strong> corrigent ces failles et renforcent la sécurité des appareils.<br><br></li>    <li>Un<strong> logiciel antivirus</strong> est <strong>nécessaire </strong>pour compléter la <strong>protection </strong>des appareils.<br><br></li>    <li>L’<strong>antivirus</strong> surveille <strong>en continu </strong>l’activité d’un appareil pour<strong> détecter et bloquer</strong> les logiciels malveillants.<br><br></li>    <li>Pour rester protégé, il est recommandé d’<strong>activer les mises à jour automatiques</strong> de ses appareils et de son logiciel antivirus.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "80ef2c2d-df87-4989-a17f-068a69647838",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "d3d18449-cd4d-445f-87fd-168cb7f4284f",
+          "type": "activity",
+          "title": "Activité s’exercer #1 QROC",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "473406f9-28f2-4572-917b-437afb017520",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "80406a06-e793-46f7-a701-e8632b3143ba",
+                "type": "qrocm",
+                "instruction": "<p>Utilisez le vocabulaire vu précédemment pour compléter le texte suivant&nbsp;:</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<span>Les pirates informatiques créent des logiciels malveillants qui exploitent les </span>"
+                  },
+                  {
+                    "input": "1",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "- deux mots manquants -",
+                    "ariaLabel": "deux mots",
+                    "defaultValue": "deux mots",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "failles techniques"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>.<br>Pour limiter améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
+                  },
+                  {
+                    "input": "2",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 15,
+                    "display": "inline",
+                    "placeholder": "- trois mots manquants -",
+                    "ariaLabel": "trois mots manquants",
+                    "defaultValue": "trois mots manquants",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "mises à jour"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>&nbsp;des logiciels systèmes.</span>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>C’est la correction des failles techniques par les&nbsp; concepteurs des logiciels systèmes qui vient protéger les appareils des logiciels malveillants.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>En cas de doute, vous pouvez relire le récapitulatif.<br></p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "186fe985-8160-482f-bc69-94d6bcdc1fb7",
+          "type": "activity",
+          "title": "Activité s’exercer #2 QCM",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fef05ca3-6910-4604-916e-fd7751417144",
+                "type": "qcm",
+                "instruction": "<p>Quels sont les objectifs principaux d’un logiciel antivirus ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Surveiller en continu l’activité de l’appareil.</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Remplacer les mises à jour de sécurité de l’appareil.</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Détecter la présence de logiciels malveillants.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Améliorer les performances de l’appareil.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>Un antivirus est conçu pour protéger l’appareil&nbsp;: il surveille ce qu’il s’y passe en continu et repère les logiciels potentiellement malveillants.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Un logiciel antivirus est un logiciel supplémentaire qui s’installe sur un appareil.&nbsp;<br>Il se concentre sur la protection.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "3"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "27e464bf-bc49-4435-b41e-fae68a00906b",
+          "type": "activity",
+          "title": "Activité s’exercer #3 QAB",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d6b082d1-43eb-46b9-b756-3633c2c0e94b",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des situations ci-dessous, indiquez si le comportement est adapté.</p>",
+                "cards": [
+                  {
+                    "id": "4b6ba947-69e6-4081-a5f1-c21225c5bc72",
+                    "text": "Martin n’a pas installé d’antivirus, pas besoin : son ordinateur a déjà des protections intégrées.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Comportement adapté",
+                    "proposalB": "Comportement non adapté",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "e2819ff8-f5f7-4070-b07c-d2cf8c2f680e",
+                    "text": "Isabelle active les mises à jour automatiques pour renforcer la protection de ses appareils.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Comportement adapté",
+                    "proposalB": "Comportement non adapté",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "e8be05f6-a45e-4e23-8a39-38317ad23bcc",
+                    "text": "Adrien se débarrasse d’une clé USB que son antivirus lui a désignée comme étant infectée. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Comportement adapté",
+                    "proposalB": "Comportement non adapté",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "2f1690eb-6e3d-43a2-aa78-b917cc625bd5",
+                    "text": "Clarisse ferme les notifications de son antivirus sans les lire, ça ne sert à rien. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Comportement adapté",
+                    "proposalB": "Comportement non adapté",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "f6862c35-1e6b-44ce-b73d-0f55099158d5",
+                    "text": "Arthur laisse passer plusieurs semaines avant de faire une mise à jour proposée par son système d’exploitation.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Comportement adapté",
+                    "proposalB": "Comportement non adapté",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d0b6e40e-3bde-4f9d-ab68-f61fd7eaf6d5",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "c991ca00-285b-487c-a8a0-4c3cd94dc90e",
+          "type": "challenge",
+          "title": "Transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b1ea1966-aa5e-4f49-ac18-f1e4d90d8fe9",
+                "type": "qcu-declarative",
+                "instruction": "<p>D’après vous, quelle serait la première action que vous pourriez mettre en place pour renforcer la protection de vos appareils ?<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Je vérifie si les mises à jour automatiques sont activées sur mes appareils.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bon premier pas ! Les mises à jour corrigent des failles qui pourraient être exploitées. Et la prochaine étape, pourrait être d’installer un logiciel antivirus si ce n’est pas encore le cas.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>J’installe un logiciel antivirus sur un de mes appareils qui n’en a pas encore.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bon premier pas !&nbsp; Installer un logiciel antivirus complète efficacement la protection de vos appareils. N’oubliez pas d’activer les mises à jour automatique, pour rester à la pointe de la protection.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je prends l’habitude de lire les notifications de sécurité de mon logiciel antivirus avant de les fermer.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une excellente habitude&nbsp;: lire une notification permet souvent d’éviter une infection. Vous pourrez ensuite aller plus loin en sensibilisant vos proches à l’importance de ces alertes.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je préfère attendre un peu avant de changer mes habitudes.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Chacun avance à son rythme ! Quand vous le souhaiterez, un premier pas simple peut être d’activer les mises à jour automatiques ou installer un antivirus. Chaque geste compte pour améliorer votre sécurité numérique.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Quand vous le souhaiterez, un premier pas simple peut être d’activer les mises à jour automatiques ou installer un antivirus. Chaque geste compte pour améliorer votre sécurité numérique.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
