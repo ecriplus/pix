@@ -64,7 +64,7 @@
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
+                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
                     },
                     {
                       "userName": "Emma",
@@ -145,7 +145,12 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -175,7 +180,7 @@
               "element": {
                 "id": "d0929d7f-98c7-4922-a3ab-5397de53bef1",
                 "type": "text",
-                "content": "Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger."
+                "content": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p>"
               }
             },
             {
@@ -296,7 +301,7 @@
         {
           "id": "2649a70b-3c92-4be4-b729-f27784225c40",
           "type": "discovery",
-          "title": "Découverte : Aide Gustave avec son prompt",
+          "title": "Découverte : Aide Gustave avec son prompt",
           "components": [
             {
               "type": "element",
@@ -326,6 +331,15 @@
                 "type": "expand",
                 "title": "💡 L’astuce pratique",
                 "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "cfc970e9-4fc4-49af-8ef7-c7b670d1a12a",
+                "type": "expand",
+                "title": "🙈 Solution",
+                "content": "<p>Voici les critères de réussite pour cet exercice :</p><ul><li>Le résultat doit contenir&nbsp;<strong>des exercices de différents niveaux.</strong></li><li>Ces exercices doivent permettre de progresser en <strong>smash </strong>au <strong>volleyball.</strong></li><li>Ils doivent être présentés sous la forme d'un <strong>tableau.</strong></li></ul><p>Si vous avez réussi à obtenir ce résultat avec ChatPix, votre réponse devrait être validée.✅<br></p>"
               }
             }
           ]
@@ -369,7 +383,7 @@
         {
           "id": "97606a38-68e2-427e-b8e5-65411cd7d5d5",
           "type": "summary",
-          "title": "Récap’ : l’essentiel pour faire des bons prompts",
+          "title": "Récap’ : l’essentiel pour faire des bons prompts",
           "components": [
             {
               "type": "element",
@@ -438,7 +452,10 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -477,7 +494,11 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
@@ -547,7 +568,7 @@
         {
           "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
           "type": "challenge",
-          "title": "Défi : l’actualité du tournoi",
+          "title": "Défi : l’actualité du tournoi",
           "components": [
             {
               "type": "element",
@@ -643,6 +664,15 @@
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "type": "expand",
+                "title": "🙈 Solution",
+                "content": "<p>Voici les critères de réussite pour cet exercice : </p><ul><li>Le résultat doit être un <strong>court poème.</strong></li><li>Ce poème doit faire l'<strong>éloge d'une équipe de volleyball qui a gagné un tournoi</strong>.</li><li> Le nom de l'équipe, les <strong>Volley-Raptors</strong>, doit être inclus.</li></ul><p>Si vous avez réussi à obtenir ce résultat avec ChatPix, votre réponse devrait être validée.✅</p>"
               }
             }
           ]
