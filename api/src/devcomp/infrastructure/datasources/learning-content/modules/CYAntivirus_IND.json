@@ -50,7 +50,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Un logiciel malveillant a utilisé une faille technique pour s’installer.</p>",
+                    "content": "<p>Un logiciel malveillant a profité d’une faille technique pour s’installer.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh oui. Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
                     }
