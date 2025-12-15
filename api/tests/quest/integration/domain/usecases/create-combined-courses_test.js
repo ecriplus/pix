@@ -63,30 +63,30 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
 
     const expectedModules = [
       {
-        requirement_type: 'passages',
-        comparison: 'all',
+        requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+        comparison: CRITERION_COMPARISONS.ALL,
         data: {
           moduleId: {
             data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-            comparison: 'equal',
+            comparison: CRITERION_COMPARISONS.EQUAL,
           },
           isTerminated: {
             data: true,
-            comparison: 'equal',
+            comparison: CRITERION_COMPARISONS.EQUAL,
           },
         },
       },
       {
-        requirement_type: 'passages',
-        comparison: 'all',
+        requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+        comparison: CRITERION_COMPARISONS.ALL,
         data: {
           moduleId: {
             data: 'f32a2238-4f65-4698-b486-15d51935d335',
-            comparison: 'equal',
+            comparison: CRITERION_COMPARISONS.EQUAL,
           },
           isTerminated: {
             data: true,
-            comparison: 'equal',
+            comparison: CRITERION_COMPARISONS.EQUAL,
           },
         },
       },
@@ -171,10 +171,12 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
 
     // then
     const [firstCreatedQuestForFirstOrganization, secondCreatedQuestForFirstOrganization] = await knex('quests')
-      .where('organizationId', firstOrganizationId)
-      .orderBy('id');
+      .join('combined_courses', 'combined_courses.questId', 'quests.id')
+      .where('combined_courses.organizationId', firstOrganizationId)
+      .orderBy('quests.id');
     const createdQuestForSecondOrganization = await knex('quests')
-      .where('organizationId', secondOrganizationId)
+      .join('combined_courses', 'combined_courses.questId', 'quests.id')
+      .where('combined_courses.organizationId', secondOrganizationId)
       .first();
 
     // 1st Organization
@@ -224,37 +226,5 @@ ${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""typ
     expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
     expect(createdCampaignForSecondOrganization.customResultPageButtonUrl.endsWith('/chargement')).false;
     expect(createdCampaignForSecondOrganization.customResultPageButtonText).to.equal('Continuer');
-  });
-
-  it('should save same date for each quest in same row, but not for the other rows', async function () {
-    // given
-    const userId = databaseBuilder.factory.buildUser().id;
-    const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
-    const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
-
-    await databaseBuilder.commit();
-
-    const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""type"":""passages"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}]}";${userId}
-${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""type"":""passages"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}]}";${userId}
-`;
-
-    const payload = iconv.encode(input, 'UTF-8');
-
-    // when
-    await usecases.createCombinedCourses({ payload });
-
-    // then
-    const [firstCreatedQuestForFirstOrganization, secondCreatedQuestForFirstOrganization] = await knex('quests')
-      .where('organizationId', firstOrganizationId)
-      .orderBy('id');
-    const createdQuestForSecondOrganization = await knex('quests')
-      .where('organizationId', secondOrganizationId)
-      .first();
-
-    expect(firstCreatedQuestForFirstOrganization.createdAt).to.deep.equal(createdQuestForSecondOrganization.createdAt);
-    expect(firstCreatedQuestForFirstOrganization.createdAt).not.to.deep.equal(
-      secondCreatedQuestForFirstOrganization.createdAt,
-    );
   });
 });

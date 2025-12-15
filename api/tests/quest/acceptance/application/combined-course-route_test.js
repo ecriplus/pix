@@ -51,7 +51,10 @@ ${organizationId};"{""name"":""Combinix"",""combinedCourseContent"":[],""descrip
         const response = await server.inject(options);
 
         // then
-        const createdQuest = await knex('quests').where('organizationId', organizationId).first();
+        const createdQuest = await knex('quests')
+          .join('combined_courses', 'combined_courses.questId', 'quests.id')
+          .where('combined_courses.organizationId', organizationId)
+          .first();
 
         expect(response.statusCode).to.equal(204);
 

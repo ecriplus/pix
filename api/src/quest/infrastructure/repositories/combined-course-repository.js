@@ -75,7 +75,7 @@ const saveInBatch = async ({ combinedCourses }) => {
   const combinedCoursesToSave = combinedCourses.map(_toDTO);
   for (const combinedCourseToSave of combinedCoursesToSave) {
     const [{ id: questId }] = await knexConn('quests')
-      .insert({ ...combinedCourseToSave.quest, ...combinedCourseToSave.combinedCourse })
+      .insert({ ...combinedCourseToSave.quest })
       .returning('id');
     await knexConn('combined_courses').insert({ ...combinedCourseToSave.combinedCourse, questId });
   }
@@ -86,7 +86,6 @@ const _toDTO = (combinedCourse) => {
   return {
     quest: {
       ...questDTO,
-      id: combinedCourse.id,
       eligibilityRequirements: JSON.stringify([]),
       successRequirements: JSON.stringify(questDTO.successRequirements),
     },
