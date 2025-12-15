@@ -408,7 +408,7 @@
               "element": {
                 "id": "45cb2415-2402-4be7-9130-b7f94f6e4b11",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "<p>Voici un cycle de refroidissement classique :<br></p>",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -416,44 +416,64 @@
                     {
                       "title": "Les serveurs travaillent... et chauffent",
                       "description": "Dans la salle des serveurs, il fait chaud. Les serveurs sont équipés de milliers de ventilateurs qui servent à faire circuler l’air chaud et les refroidir. ",
-                      "text": "",
+                      "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/les-serveurs-chauffent.png",
                         "alt": "les serveurs chauffent sur l’effet des calculs"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
                       }
                     },
                     {
                       "title": "Il faut refroidir plus ! ",
                       "description": "La ventilation a elle seule ne suffit pas, il faut expulser cet air chaud et amener de l’air froid. C’est le rôle des climatiseurs. Les climatiseurs consomment beaucoup d’énergie. ",
-                      "text": "",
+                      "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation-serveurs.png",
                         "alt": "la climatisation dans la salle des serveurs"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
                       }
                     },
                     {
                       "title": "Ces systèmes de refroidissement ont besoin d’énergie... et d’eau !",
                       "description": "Pour refroidir l’air, les climatiseurs fonctionnent souvent avec des systèmes de refroidissement par eau. De façon très simplifiée, l’eau capte la chaleur des climatiseurs. Cette eau est ensuite refroidit puis renvoyée vers le climatiseur ",
-                      "text": "",
+                      "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/eau-refroidit-clim.png",
                         "alt": "l’eau circule dans les tuyaux pour refroidir l’air"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
                       }
                     },
                     {
                       "title": "En résumé,",
                       "description": "On a donc une chaîne de refroidissement en plusieurs étapes. Produire du froid nécessite de l’énergie et de l’eau !",
-                      "text": "",
+                      "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/8le-systeme-refroidissement-resume.png",
                         "alt": "chaine refroidissement résumée"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
                       }
                     }
                   ],
                   "randomSlides": false,
-                  "titleLevel": 0,
+                  "titleLevel": 2,
                   "disableAnimation": false,
-                  "disableLoop": false,
+                  "disableLoop": true,
                   "imageTextDisplay": ""
                 }
               }
@@ -535,8 +555,8 @@
                 "instruction": "<p>Depuis plusieurs années, des nouvelles technologies ont pris de plus en plus de place dans notre quotidien.&nbsp;</p>",
                 "tagName": "flip-cards",
                 "props": {
-                  "titleLevel": 0,
-                  "name": "",
+                  "titleLevel": 1,
+                  "name": "flipcard-datacenter-technos",
                   "cardList": [
                     {
                       "name": "Objets connectés",
@@ -565,8 +585,8 @@
                     {
                       "name": "l’IA générative ",
                       "description": "Pour produire ses réponses, l’IA générative fait de nombreux calculs qui mobilisent les serveurs des centres de données",
-                      "icon": "",
-                      "image": ""
+                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/iag.png",
+                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/iag.png"
                     }
                   ]
                 }
