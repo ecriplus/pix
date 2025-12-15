@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import ListSummaryItems from 'pix-admin/components/combined-course-blueprints/list-summary-items';
 import setupIntlRenderingTest from 'pix-admin/tests/helpers/setup-intl-rendering';
 import { module, test } from 'qunit';
@@ -26,5 +27,6 @@ module('Integration | Component | CombinedCourseBlueprints::ListSummaryItems', f
     assert.dom(screen.getByText('25/12/2025')).exists();
     assert.dom(screen.getByText('Module', { exact: false })).exists();
     assert.dom(screen.getByText('abc-123', { exact: false })).exists();
+    assert.ok(screen.getByRole('button', { name: t('components.combined-course-blueprints.list.downloadButton') }));
   });
 });

@@ -1,3 +1,4 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { t } from 'ember-intl';
 import CombinedCourseBlueprintListSummaryItems from 'pix-admin/components/combined-course-blueprints/list-summary-items';
 
