@@ -16,9 +16,10 @@
  * @typedef {import ('../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  */
 
-import { CandidateCertifiableAndEligibleEvent } from '../models/timeline/CandidateCertifiableAndEligibleEvent.js';
 import { CandidateCertifiableEvent } from '../models/timeline/CandidateCertifiableEvent.js';
 import { CandidateCreatedEvent } from '../models/timeline/CandidateCreatedEvent.js';
+import { CandidateDoubleCertificationEligibleEvent } from '../models/timeline/CandidateDoubleCertificationEligibleEvent.js';
+import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
 import { CandidateEndScreenEvent } from '../models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../models/timeline/CandidateNotCertifiableEvent.js';
 import { CandidateNotEligibleEvent } from '../models/timeline/CandidateNotEligibleEvent.js';
@@ -220,12 +221,16 @@ const _determineUserEligibilityStatus = ({ userEligibility, atDate, candidate })
     return new CandidateNotCertifiableEvent({ when: atDate });
   }
 
-  if (_candidateIsRegisteredToDoubleCertification(candidate)) {
-    if (_candidateIsEligibleToDoubleCertification(userEligibility)) {
-      return new CandidateCertifiableAndEligibleEvent({ when: atDate });
-    }
+  if (isRegisteredAndEligibleToDoubleCertification(candidate, userEligibility)) {
+    return new CandidateDoubleCertificationEligibleEvent({ when: atDate });
+  }
 
+  if (isRegisteredButNotEligibleToDoubleCertification(candidate, userEligibility)) {
     return new CandidateNotEligibleEvent({ when: atDate });
+  }
+
+  if (isEligibleButNotRegisteredToDoubleCertification(candidate, userEligibility)) {
+    return new CandidateEligibleButNotRegisteredToDoubleCertificationEvent({ when: atDate });
   }
 
   return new CandidateCertifiableEvent({ when: atDate });
@@ -233,16 +238,27 @@ const _determineUserEligibilityStatus = ({ userEligibility, atDate, candidate })
 
 /**
  * @param {Candidate} candidate
- * @returns {boolean}
- */
-const _candidateIsRegisteredToDoubleCertification = (candidate) => {
-  return candidate.subscriptions.length === 2;
-};
-
-/**
  * @param {UserCertificationEligibility} userEligibility
  * @returns {boolean}
  */
-const _candidateIsEligibleToDoubleCertification = (userEligibility) => {
-  return userEligibility.doubleCertificationEligibility && userEligibility.doubleCertificationEligibility.isBadgeValid;
-};
+function isRegisteredAndEligibleToDoubleCertification(candidate, userEligibility) {
+  return candidate.isRegisteredToDoubleCertification() && userEligibility.isDoubleCertificationOk();
+}
+
+/**
+ * @param {Candidate} candidate
+ * @param {UserCertificationEligibility} userEligibility
+ * @returns {boolean}
+ */
+function isRegisteredButNotEligibleToDoubleCertification(candidate, userEligibility) {
+  return candidate.isRegisteredToDoubleCertification() && !userEligibility.isDoubleCertificationOk();
+}
+
+/**
+ * @param {Candidate} candidate
+ * @param {UserCertificationEligibility} userEligibility
+ * @returns {boolean}
+ */
+function isEligibleButNotRegisteredToDoubleCertification(candidate, userEligibility) {
+  return !candidate.isRegisteredToDoubleCertification() && userEligibility.isDoubleCertificationOk();
+}

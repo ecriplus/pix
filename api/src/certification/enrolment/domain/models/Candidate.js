@@ -155,4 +155,8 @@ export class Candidate {
     const complementarySubscription = this.getComplementarySubscription();
     return complementarySubscription?.complementaryCertificationKey || null;
   }
+
+  isRegisteredToDoubleCertification() {
+    return this.subscriptions.length === 2;
+  }
 }

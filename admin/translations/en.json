@@ -989,9 +989,10 @@
     "candidate": {
       "code": "Event",
       "events": {
-        "CandidateCertifiableAndEligibleEvent": "Candidate is certifiable and eligible to double certification",
         "CandidateCertifiableEvent": "Candidate is certifiable",
         "CandidateCreatedEvent": "Candidate added to the session",
+        "CandidateDoubleCertificationEligibleEvent": "Candidate is certifiable and eligible to double certification",
+        "CandidateEligibleButNotRegisteredToDoubleCertificationEvent": "Candidate eligible but not registered to double certification",
         "CandidateEndScreenEvent": "Certification completed (end screen viewed)",
         "CandidateNotCertifiableEvent": "Candidate not certifiable (Pix Core)",
         "CandidateReconciledEvent": "Candidate reconciled to a user",

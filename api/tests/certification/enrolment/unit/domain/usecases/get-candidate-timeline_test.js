@@ -1,5 +1,6 @@
-import { CandidateCertifiableAndEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCertifiableAndEligibleEvent.js';
 import { CandidateCreatedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCreatedEvent.js';
+import { CandidateDoubleCertificationEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateDoubleCertificationEligibleEvent.js';
+import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
 import { CandidateEndScreenEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotCertifiableEvent.js';
 import { CandidateNotEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotEligibleEvent.js';
@@ -168,7 +169,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         // then
         expect(candidateTimeline.events).to.deep.includes(
           new CertificationStartedEvent({ when: certifCourse.getStartDate() }),
-          new CandidateCertifiableAndEligibleEvent({ when: certifCourse.getStartDate() }),
+          new CandidateDoubleCertificationEligibleEvent({ when: certifCourse.getStartDate() }),
         );
       });
     });
@@ -251,7 +252,47 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
 
           // then
           expect(candidateTimeline.events).to.deep.includes(
-            new CandidateCertifiableAndEligibleEvent({ when: candidate.reconciledAt }),
+            new CandidateDoubleCertificationEligibleEvent({ when: candidate.reconciledAt }),
+          );
+        });
+      });
+    });
+
+    context('when candidate is not registered for a double certification', function () {
+      context('when candidate is certifiable and eligible to double certification', function () {
+        it('should add a candidate not registered to double certification event', async function () {
+          // given
+          const sessionId = 1234;
+          const certificationCandidateId = 4567;
+          const candidate = domainBuilder.certification.enrolment.buildCandidate({
+            userId: 222,
+            reconciledAt: new Date(),
+            subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+          });
+          candidateRepository.get.resolves(candidate);
+          const placementProfile = domainBuilder.buildPlacementProfile();
+          placementProfileService.getPlacementProfile.resolves(placementProfile);
+          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(null);
+          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            new UserCertificationEligibility({
+              isCertifiable: true,
+              doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility({
+                isBadgeValid: true,
+              }),
+            }),
+          );
+
+          // when
+          const candidateTimeline = await getCandidateTimeline({
+            sessionId,
+            certificationCandidateId,
+            ...deps,
+          });
+
+          // then
+          expect(candidateTimeline.events).to.deep.includes(
+            new CandidateEligibleButNotRegisteredToDoubleCertificationEvent({ when: candidate.reconciledAt }),
           );
         });
       });

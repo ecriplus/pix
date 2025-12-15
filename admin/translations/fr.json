@@ -990,9 +990,10 @@
     "candidate": {
       "code": "Évènement",
       "events": {
-        "CandidateCertifiableAndEligibleEvent": "Candidat certifiable et éligible à la double certification",
         "CandidateCertifiableEvent": "Candidat certifiable",
         "CandidateCreatedEvent": "Candidat inscrit en session",
+        "CandidateDoubleCertificationEligibleEvent": "Candidat certifiable et éligible à la double certification",
+        "CandidateEligibleButNotRegisteredToDoubleCertificationEvent": "Candidat éligible mais non inscrit à la double certification",
         "CandidateEndScreenEvent": "Certification complétée (Écran de fin vu)",
         "CandidateNotCertifiableEvent": "Candidat non certifiable (Pix Coeur)",
         "CandidateNotEligibleEvent": "Candidat non éligible à la double certification",
