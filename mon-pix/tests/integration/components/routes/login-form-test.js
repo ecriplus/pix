@@ -21,12 +21,12 @@ module('Integration | Component | routes/login-form', function (hooks) {
     assert.dom(screen.getByLabelText(/Mot de passe/)).exists();
   });
 
-  test('should display an error message when authentication fails', async function (assert) {
+  test('should display an error message and empty password input when authentication fails', async function (assert) {
     // given
     const errorResponse = {
       status: 401,
       responseJSON: {
-        errors: [{ status: '401' }],
+        errors: [{ status: '401', code: 'MISSING_OR_INVALID_CREDENTIALS' }],
       },
     };
 
@@ -42,6 +42,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
 
     // then
     assert.dom(screen.getByText(t('common.api-error-messages.login-unauthorized-error'))).exists();
+    assert.dom(screen.getByLabelText(/Mot de passe/)).hasValue('');
   });
 
   test('should display password when user click', async function (assert) {
