@@ -46,6 +46,7 @@
       "login": "Inloggen",
       "quit": "Terug",
       "refresh-page": "Pagina verversen",
+      "send": "Verzenden",
       "show-less": "Minder tonen",
       "show-more": "Meer bekijken",
       "sign-out": "Uitloggen",
@@ -1676,7 +1677,14 @@
       },
       "issue-report": {
         "aria-label": "Een probleem of suggestie doorgeven",
-        "button": "Melden"
+        "button": "Melden",
+        "modal": {
+          "legend": "Informatie die nodig is om een melding te versturen",
+          "select-label": "Reden voor de melding",
+          "textarea-label": "Opmerking",
+          "textarea-placeholder": "Beschrijf uw probleem of suggestie",
+          "title": "Melding"
+        }
       },
       "modals": {
         "alternativeText": {

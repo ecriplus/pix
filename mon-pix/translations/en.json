@@ -46,6 +46,7 @@
       "login": "Log in to Pix",
       "quit": "Exit",
       "refresh-page": "Refresh the page",
+      "send": "Send",
       "show-less": "Show less",
       "show-more": "Show more",
       "sign-out": "Sign out",
@@ -1676,7 +1677,14 @@
       },
       "issue-report": {
         "aria-label": "Send a problem or suggestion",
-        "button": "Report"
+        "button": "Report",
+        "modal": {
+          "legend": "Information required to send a report",
+          "select-label": "Reason for reporting",
+          "textarea-label": "Comment",
+          "textarea-placeholder": "Describe your problem or suggestion",
+          "title": "Report"
+        }
       },
       "modals": {
         "alternativeText": {
@@ -2033,7 +2041,6 @@
       "actions": {
         "back-to-pix": "Leave and return to Pix",
         "continue": "Continue my Pix experience",
-
         "send": "Submit my results"
       },
       "already-shared": "Thank you, your results have been submitted!",

@@ -254,7 +254,6 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-
     <main class="module-passage {{if this.isNewPattern 'module-passage--new-pattern'}}">
       {{#if @module.isBeta}}
         <BetaBanner />
@@ -303,5 +302,6 @@ export default class ModulePassage extends Component {
         {{/each}}
       </div>
     </main>
+    <div id="modal-container"></div>
   </template>
 }
