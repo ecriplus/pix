@@ -1,9 +1,11 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import formatDate from 'ember-intl/helpers/format-date';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import CandidateEditModal from '../../candidate-edit-modal';
 
@@ -37,51 +39,69 @@ export default class CertificationInformationCandidate extends Component {
   }
 
   <template>
-    <div class="certification-informations__card">
-      <h2 class="certification-informations__card__title">Candidat</h2>
-      <div class="certification-info-field">
-        <span>Prénom :</span>
-        <span>{{@certification.firstName}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Nom de famille :</span>
-        <span>{{@certification.lastName}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Date de naissance :</span>
-        <span>{{if @certification.birthdate (formatDate @certification.birthdate) ""}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Sexe :</span>
-        <span>{{@certification.sex}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Commune de naissance :</span>
-        <span>{{@certification.birthplace}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Code postal de naissance :</span>
-        <span>{{@certification.birthPostalCode}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Code INSEE de naissance :</span>
-        <span>{{@certification.birthInseeCode}}</span>
-      </div>
-      <div class="certification-info-field">
-        <span>Pays de naissance :</span>
-        <span>{{@certification.birthCountry}}</span>
-      </div>
+    <PixBlock @variant="admin" class="certification-information-card">
+      <h2 class="certification-information-card__title">Candidat</h2>
 
-      <div class="candidate-informations__actions">
-        <PixButton
-          @size="small"
-          @triggerAction={{this.toggleCandidateEditModal}}
-          aria-label="Modifier les informations du candidat"
-        >
-          Modifier infos candidat
-        </PixButton>
-      </div>
-    </div>
+      <DescriptionList>
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Prénom">
+          {{@certification.firstName}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Nom de famille">
+          {{@certification.lastName}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Date de naissance">
+          {{if @certification.birthdate (formatDate @certification.birthdate) ""}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Sexe">
+          {{@certification.sex}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Commune de naissance">
+          {{@certification.birthplace}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Code postal de naissance">
+          {{@certification.birthPostalCode}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Code INSEE de naissance">
+          {{@certification.birthInseeCode}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Pays de naissance">
+          {{@certification.birthCountry}}
+        </DescriptionList.Item>
+
+        <DescriptionList.Divider />
+      </DescriptionList>
+
+      <PixButton
+        @size="small"
+        @triggerAction={{this.toggleCandidateEditModal}}
+        aria-label="Modifier les informations du candidat"
+      >
+        Modifier infos candidat
+      </PixButton>
+    </PixBlock>
 
     <CandidateEditModal
       @onCancelButtonsClicked={{this.toggleCandidateEditModal}}

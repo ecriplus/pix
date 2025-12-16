@@ -34,8 +34,8 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
 
         // when
         const screen = await visit('/sessions/1/certifications');
-        click(screen.getByRole('button', { name: 'Publier la session' }));
-        click(await screen.findByRole('button', { name: 'Confirmer' }));
+        await click(screen.getByRole('button', { name: 'Publier la session' }));
+        await click(await screen.findByRole('button', { name: 'Confirmer' }));
 
         assert.dom(await screen.findByRole('button', { name: 'Dépublier la session' })).exists();
       });
@@ -50,8 +50,8 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
 
         // when
         const screen = await visit('/sessions/1/certifications');
-        click(screen.getByRole('button', { name: 'Dépublier la session' }));
-        click(await screen.findByRole('button', { name: 'Confirmer' }));
+        await click(screen.getByRole('button', { name: 'Dépublier la session' }));
+        await click(await screen.findByRole('button', { name: 'Confirmer' }));
 
         assert.dom(await screen.findByRole('button', { name: 'Publier la session' })).exists();
       });

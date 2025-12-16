@@ -161,20 +161,6 @@
   &__certification-issue-reports {
     flex-direction: column;
   }
-
-  .candidate-informations {
-    &__actions {
-      display: flex;
-      margin-top: 8px;
-    }
-
-    &__warning-cpf-message {
-      margin-top: 8px;
-      margin-left: 5px;
-      color: var(--pix-error-700);
-      font-style: italic;
-    }
-  }
 }
 
 .certification-information {
@@ -193,6 +179,10 @@
       display: flex;
       justify-content: space-between;
     }
+  }
+
+  .description-list > div {
+    grid-template-columns: repeat(5, minmax(30%, auto));
   }
 }
 
