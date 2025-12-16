@@ -1176,4 +1176,25 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       expect(result).to.equal(ComplementaryCertificationKeys.PIX_PLUS_DROIT);
     });
   });
+
+  describe('#isRegisteredToDoubleCertification', function () {
+    it('returns true when candidate is registered to double certification', function () {
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription(),
+          domainBuilder.certification.enrolment.buildCoreSubscription(),
+        ],
+      });
+
+      expect(candidate.isRegisteredToDoubleCertification()).to.be.true;
+    });
+
+    it('returns false when candidate is not registered to double certification', function () {
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        subscriptions: [domainBuilder.certification.enrolment.buildComplementarySubscription()],
+      });
+
+      expect(candidate.isRegisteredToDoubleCertification()).to.be.false;
+    });
+  });
 });

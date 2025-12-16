@@ -15,6 +15,7 @@ import * as certificationCenterRepository from '../../../shared/infrastructure/r
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import { enrolmentRepositories } from '../../infrastructure/repositories/index.js';
 import * as certificationCandidatesOdsService from '../services/certification-candidates-ods-service.js';
+import * as eligibilityService from '../services/eligibility-service.js';
 import * as sessionCodeService from '../services/session-code-service.js';
 import * as sessionsImportValidationService from '../services/sessions-import-validation-service.js';
 import * as temporarySessionsStorageForMassImportService from '../services/temporary-sessions-storage-for-mass-import-service.js';
@@ -39,6 +40,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../infrastructure/utils/pdf/attendance-sheet-pdf.js')} AttendanceSheetPdfUtils
  * @typedef {import('../services/temporary-sessions-storage-for-mass-import-service.js').TemporarySessionsStorageForMassImportService} TemporarySessionsStorageForMassImportService
  * @typedef {import('../services/certification-candidates-ods-service.js')} CertificationCandidatesOdsService
+ * @typedef {import('../services/eligibility-service.js')} EligibilityService
  * @typedef {import('../../../../shared/domain/services/placement-profile-service.js')} PlacementProfileService
  * @typedef {import('../../../../shared/infrastructure/repositories/organization-repository.js')} organizationRepository
  * @typedef {import('../../../shared/infrastructure/repositories/certification-candidate-repository.js')} certificationCandidateRepository
@@ -71,6 +73,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {AttendanceSheetPdfUtils} AttendanceSheetPdfUtils
  * @typedef {certificationBadgesService} CertificationBadgesService
  * @typedef {CertificationCandidatesOdsService} CertificationCandidatesOdsService
+ * @typedef {EligibilityService} EligibilityService
  * @typedef {PlacementProfileService} PlacementProfileService
  * @typedef {organizationRepository} OrganizationRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
@@ -90,6 +93,7 @@ const dependencies = {
   certificationCpfService,
   divisionRepository,
   certificationCandidatesOdsService,
+  eligibilityService,
   placementProfileService,
   organizationRepository,
   organizationLearnerRepository,

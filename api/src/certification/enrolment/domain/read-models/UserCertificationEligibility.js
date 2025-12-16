@@ -4,6 +4,10 @@ class UserCertificationEligibility {
     this.isCertifiable = isCertifiable;
     this.doubleCertificationEligibility = doubleCertificationEligibility;
   }
+
+  isDoubleCertificationOk() {
+    return !!this.doubleCertificationEligibility && this.doubleCertificationEligibility.isBadgeValid;
+  }
 }
 
 class CertificationEligibility {

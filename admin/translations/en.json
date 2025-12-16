@@ -991,13 +991,13 @@
       "events": {
         "CandidateCertifiableEvent": "Candidate is certifiable",
         "CandidateCreatedEvent": "Candidate added to the session",
+        "CandidateDoubleCertificationEligibleEvent": "Candidate is certifiable and eligible to double certification",
+        "CandidateEligibleButNotRegisteredToDoubleCertificationEvent": "Candidate eligible but not registered to double certification",
         "CandidateEndScreenEvent": "Certification completed (end screen viewed)",
         "CandidateNotCertifiableEvent": "Candidate not certifiable (Pix Core)",
         "CandidateReconciledEvent": "Candidate reconciled to a user",
         "CertificationEndedEvent": "Certification ended",
-        "CertificationStartedEvent": "Certification started",
-        "ComplementaryCertifiableEvent": "Candidate eligible to complementary",
-        "ComplementaryNotCertifiableEvent": "Candidate not eligible to complementary"
+        "CertificationStartedEvent": "Certification started"
       },
       "metadata": "Metadata",
       "title": "Candidate's timeline",

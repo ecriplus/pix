@@ -1,12 +1,13 @@
-import { CandidateCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCertifiableEvent.js';
 import { CandidateCreatedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCreatedEvent.js';
+import { CandidateDoubleCertificationEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateDoubleCertificationEligibleEvent.js';
+import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
 import { CandidateEndScreenEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotCertifiableEvent.js';
+import { CandidateNotEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotEligibleEvent.js';
 import { CandidateReconciledEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateReconciledEvent.js';
 import { CertificationEndedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationStartedEvent.js';
-import { ComplementaryCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/ComplementaryCertifiableEvent.js';
-import { ComplementaryNotCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/ComplementaryNotCertifiableEvent.js';
+import { UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 import { getCandidateTimeline } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate-timeline.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -16,6 +17,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
     certificationCourseRepository,
     placementProfileService,
     certificationBadgesService,
+    eligibilityService,
     certificationAssessmentRepository,
     deps;
 
@@ -40,12 +42,17 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
       getByCertificationCandidateId: sinon.stub(),
     };
 
+    eligibilityService = {
+      getUserCertificationEligibility: sinon.stub(),
+    };
+
     deps = {
       candidateRepository,
       certificationCourseRepository,
       certificationBadgesService,
       placementProfileService,
       certificationAssessmentRepository,
+      eligibilityService,
     };
   });
 
@@ -80,6 +87,9 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
       });
       candidateRepository.get.resolves(candidate);
       placementProfileService.getPlacementProfile.resolves(domainBuilder.buildPlacementProfile());
+      eligibilityService.getUserCertificationEligibility.resolves(
+        domainBuilder.certification.enrolment.buildCertificationEligibility(),
+      );
 
       // when
       const candidateTimeline = await getCandidateTimeline({
@@ -105,6 +115,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(null);
         const placementProfile = domainBuilder.buildPlacementProfile();
         placementProfileService.getPlacementProfile.resolves(placementProfile);
+        eligibilityService.getUserCertificationEligibility.resolves(
+          domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+            isCertifiable: false,
+          }),
+        );
 
         // when
         const candidateTimeline = await getCandidateTimeline({
@@ -138,6 +153,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         placementProfileService.getPlacementProfile.resolves(placementProfile);
         certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
         certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+        eligibilityService.getUserCertificationEligibility.resolves(
+          domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+            isCertifiable: true,
+          }),
+        );
 
         // when
         const candidateTimeline = await getCandidateTimeline({
@@ -149,34 +169,37 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         // then
         expect(candidateTimeline.events).to.deep.includes(
           new CertificationStartedEvent({ when: certifCourse.getStartDate() }),
-          new CandidateCertifiableEvent({ when: certifCourse.getStartDate() }),
+          new CandidateDoubleCertificationEligibleEvent({ when: certifCourse.getStartDate() }),
         );
       });
     });
 
-    context('when has a complementary subscription', function () {
-      context('when badge is not acquired', function () {
-        it('should indicate the candidate is not eligible to subscribed complementary ', async function () {
+    context('when candidate is registered for a double certification', function () {
+      context('when candidate is certifiable but not eligible to double certification', function () {
+        it('should add a candidate not eligible event', async function () {
           // given
           const sessionId = 1234;
           const certificationCandidateId = 4567;
-          const complementarySubscription = domainBuilder.certification.enrolment.buildComplementarySubscription({
-            complementaryCertificationId: 1,
+          const candidate = domainBuilder.certification.enrolment.buildCandidate({
+            userId: 222,
+            reconciledAt: new Date(),
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription(),
+              domainBuilder.certification.enrolment.buildComplementarySubscription(),
+            ],
           });
-          candidateRepository.get.resolves(
-            domainBuilder.certification.enrolment.buildCandidate({
-              userId: 222,
-              reconciledAt: new Date(),
-              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription(), complementarySubscription],
-            }),
-          );
-          const certifCourse = domainBuilder.buildCertificationCourse({});
+          candidateRepository.get.resolves(candidate);
           const placementProfile = domainBuilder.buildPlacementProfile();
           placementProfileService.getPlacementProfile.resolves(placementProfile);
-          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
-          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([
-            domainBuilder.buildCertifiableBadgeAcquisition({ complementaryCertificationId: 2 }),
-          ]);
+          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(null);
+          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            // Utilisation de la classe à cause de la valeur par défaut dans le builder qui empêche d'avoir une valeur nulle
+            new UserCertificationEligibility({
+              isCertifiable: true,
+              doubleCertificationEligibility: null,
+            }),
+          );
 
           // when
           const candidateTimeline = await getCandidateTimeline({
@@ -187,39 +210,38 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
 
           // then
           expect(candidateTimeline.events).to.deep.includes(
-            new CertificationStartedEvent({ when: certifCourse.getStartDate() }),
-            new CandidateCertifiableEvent({ when: certifCourse.getStartDate() }),
-            new ComplementaryNotCertifiableEvent({
-              when: certifCourse.getStartDate(),
-              complementaryCertificationId: complementarySubscription.complementaryCertificationId,
-            }),
+            new CandidateNotEligibleEvent({ when: candidate.reconciledAt }),
           );
         });
       });
 
-      context('when badge is acquired', function () {
-        it('should indicate the candidate is eligible to subscribed complementary ', async function () {
+      context('when candidate is certifiable and eligible to double certification', function () {
+        it('should add a candidate certifiable and eligible event', async function () {
           // given
           const sessionId = 1234;
           const certificationCandidateId = 4567;
-          const complementarySubscription = domainBuilder.certification.enrolment.buildComplementarySubscription({
-            complementaryCertificationId: 1,
+          const candidate = domainBuilder.certification.enrolment.buildCandidate({
+            userId: 222,
+            reconciledAt: new Date(),
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription(),
+              domainBuilder.certification.enrolment.buildComplementarySubscription(),
+            ],
           });
-          candidateRepository.get.resolves(
-            domainBuilder.certification.enrolment.buildCandidate({
-              userId: 222,
-              reconciledAt: new Date(),
-              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription(), complementarySubscription],
-            }),
-          );
-          const certifCourse = domainBuilder.buildCertificationCourse({});
+          candidateRepository.get.resolves(candidate);
           const placementProfile = domainBuilder.buildPlacementProfile();
           placementProfileService.getPlacementProfile.resolves(placementProfile);
-          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
-          const badge = domainBuilder.buildCertifiableBadgeAcquisition({
-            complementaryCertificationId: complementarySubscription.complementaryCertificationId,
-          });
-          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([badge]);
+          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(null);
+          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            // Utilisation de la classe à cause de la valeur par défaut dans le builder qui empêche d'avoir une valeur nulle
+            new UserCertificationEligibility({
+              isCertifiable: true,
+              doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility({
+                isBadgeValid: true,
+              }),
+            }),
+          );
 
           // when
           const candidateTimeline = await getCandidateTimeline({
@@ -230,12 +252,47 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
 
           // then
           expect(candidateTimeline.events).to.deep.includes(
-            new CertificationStartedEvent({ when: certifCourse.getStartDate() }),
-            new CandidateCertifiableEvent({ when: certifCourse.getStartDate() }),
-            new ComplementaryCertifiableEvent({
-              when: certifCourse.getStartDate(),
-              complementaryCertificationKey: badge.badgeKey,
+            new CandidateDoubleCertificationEligibleEvent({ when: candidate.reconciledAt }),
+          );
+        });
+      });
+    });
+
+    context('when candidate is not registered for a double certification', function () {
+      context('when candidate is certifiable and eligible to double certification', function () {
+        it('should add a candidate not registered to double certification event', async function () {
+          // given
+          const sessionId = 1234;
+          const certificationCandidateId = 4567;
+          const candidate = domainBuilder.certification.enrolment.buildCandidate({
+            userId: 222,
+            reconciledAt: new Date(),
+            subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+          });
+          candidateRepository.get.resolves(candidate);
+          const placementProfile = domainBuilder.buildPlacementProfile();
+          placementProfileService.getPlacementProfile.resolves(placementProfile);
+          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(null);
+          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            new UserCertificationEligibility({
+              isCertifiable: true,
+              doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility({
+                isBadgeValid: true,
+              }),
             }),
+          );
+
+          // when
+          const candidateTimeline = await getCandidateTimeline({
+            sessionId,
+            certificationCandidateId,
+            ...deps,
+          });
+
+          // then
+          expect(candidateTimeline.events).to.deep.includes(
+            new CandidateEligibleButNotRegisteredToDoubleCertificationEvent({ when: candidate.reconciledAt }),
           );
         });
       });
@@ -261,6 +318,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           placementProfileService.getPlacementProfile.resolves(placementProfile);
           certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
           certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+              isCertifiable: true,
+            }),
+          );
 
           // when
           const candidateTimeline = await getCandidateTimeline({
@@ -296,6 +358,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           const assessment = domainBuilder.buildCertificationAssessment();
           assessment.endByInvigilator({ now: new Date() });
           certificationAssessmentRepository.getByCertificationCandidateId.resolves(assessment);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+              isCertifiable: true,
+            }),
+          );
 
           // when
           const candidateTimeline = await getCandidateTimeline({
@@ -334,6 +401,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           const assessment = domainBuilder.buildCertificationAssessment();
           assessment.endDueToFinalization();
           certificationAssessmentRepository.getByCertificationCandidateId.resolves(assessment);
+          eligibilityService.getUserCertificationEligibility.resolves(
+            domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+              isCertifiable: true,
+            }),
+          );
 
           // when
           const candidateTimeline = await getCandidateTimeline({

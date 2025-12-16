@@ -10,7 +10,7 @@ import { Subscription } from '../../domain/models/Subscription.js';
  * @param {Object} params
  * @param {number} params.certificationCandidateId
  *
- * @return {Candidate}
+ * @return {Promise<Candidate>}
  */
 export async function get({ certificationCandidateId }) {
   const candidateData = await buildBaseReadQuery(knex)
@@ -26,7 +26,7 @@ export async function get({ certificationCandidateId }) {
  * @param {Object} params
  * @param {number} params.sessionId
  *
- * @return {Array<Candidate>}
+ * @return {Promise<Array<Candidate>>}
  */
 export async function findBySessionId({ sessionId }) {
   const candidatesData = await buildBaseReadQuery(knex)
@@ -100,7 +100,7 @@ export async function update(candidate) {
  * @function
  * @param {Object} candidate
  *
- * @return {number}
+ * @return {Promise<number>}
  */
 export async function insert(candidate) {
   const candidateDataToSave = adaptModelToDb(candidate);
@@ -151,7 +151,7 @@ export async function deleteBySessionId({ sessionId }) {
  * @function
  * @param candidate
  * @param sessionId
- * @returns {number} return saved candidate id
+ * @returns {Promise<number>} return saved candidate id
  */
 export async function saveInSession({ candidate, sessionId }) {
   const candidateDataToSave = adaptModelToDb(candidate);
@@ -187,7 +187,7 @@ export async function saveInSession({ candidate, sessionId }) {
 /**
  * @function
  * @param id
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
 export async function remove({ id }) {
   await knex.transaction(async (trx) => {

@@ -1,9 +1,9 @@
-import { getUserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/usecases/get-user-certification-eligibility.js';
+import { getUserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/services/eligibility-service.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Certification | Enrolment | Unit | Usecases | get-user-certification-eligibility', function () {
+describe('Certification | Enrolment | Unit | Services | eligibility-service', function () {
   const userId = 123;
   const limitDate = new Date('2024-09-06');
   let dependencies;
