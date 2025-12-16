@@ -71,7 +71,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      version = domainBuilder.certification.evaluation.buildVersion();
+      version = domainBuilder.certification.shared.buildVersion();
     });
 
     context('when there are challenges left to answer', function () {
@@ -678,7 +678,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         };
 
         const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        version = domainBuilder.certification.evaluation.buildVersion({ challengesConfiguration });
+        version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
         answerRepository.findByAssessmentExcludingChallengeIds
@@ -757,7 +757,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             });
 
             const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(flashConfiguration);
-            version = domainBuilder.certification.evaluation.buildVersion({ challengesConfiguration });
+            version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();
@@ -876,7 +876,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        version = domainBuilder.certification.evaluation.buildVersion({ scope: Scopes.PIX_PLUS_EDU_CPE });
+        version = domainBuilder.certification.shared.buildVersion({ scope: Scopes.PIX_PLUS_EDU_CPE });
         versionRepository.getByScopeAndReconciliationDate
           .withArgs({
             scope: Scopes.PIX_PLUS_EDU_CPE,

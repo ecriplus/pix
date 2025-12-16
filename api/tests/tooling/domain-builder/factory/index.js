@@ -206,7 +206,6 @@ import { buildFlashAssessmentAlgorithm } from './certification/evaluation/build-
 import { buildPixPlusCertificationCourse } from './certification/evaluation/build-pix-plus-certification-course.js';
 import { buildComplementaryCertificationScoringWithComplementaryReferential } from './certification/evaluation/build-pix-plus-certification-scoring.js';
 import { buildResultsSession } from './certification/evaluation/build-session.js';
-import { buildVersion as buildEvaluationVersion } from './certification/evaluation/build-version.js';
 import { buildGlobalCertificationLevel } from './certification/results/build-global-mesh-level.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
@@ -224,6 +223,7 @@ import { buildCompetenceForScoring } from './certification/shared/build-competen
 import { buildComplementaryCertification as buildSharedComplementaryCertification } from './certification/shared/build-complementary-certification.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
+import { buildVersion as buildSharedVersion } from './certification/shared/build-version.js';
 import {
   buildLtiPlatformRegistration,
   buildLtiPlatformRegistrationWithPlatformConfig,
@@ -293,7 +293,6 @@ const certification = {
     buildComplementaryCertificationScoringWithoutComplementaryReferential,
     buildComplementaryCertificationScoringWithComplementaryReferential,
     buildDoubleCertificationScoring,
-    buildVersion: buildEvaluationVersion,
     buildPixPlusCertificationCourse,
   },
   sessionManagement: {
@@ -307,6 +306,7 @@ const certification = {
     buildCertificationCompanionLiveAlert,
     buildJuryComment: buildJuryComment,
     buildComplementaryCertification: buildSharedComplementaryCertification,
+    buildVersion: buildSharedVersion,
   },
   lib: {
     buildComplementaryCertificationVersioning,
