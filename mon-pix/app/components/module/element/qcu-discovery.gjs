@@ -7,11 +7,14 @@ import ProposalButton from 'mon-pix/components/module/component/proposal-button'
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import { VERIFY_RESPONSE_DELAY } from '../component/element';
+import ModulixIssueReportModal from '../issue-report/issue-report-modal';
 import ModuleElement from './module-element';
 
 export default class ModuleQcuDiscovery extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
+  @tracked showModal = false;
+
   @service passageEvents;
   @service modulixPreviewMode;
   @service featureToggles;
@@ -56,6 +59,16 @@ export default class ModuleQcuDiscovery extends ModuleElement {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
+  @action
+  onReportClick() {
+    this.showModal = true;
+  }
+
+  @action
+  hideModal() {
+    this.showModal = false;
+  }
+
   <template>
     <form class="element-qcu-discovery" onSubmit={{this.onAnswer}} aria-describedby="instruction-{{this.element.id}}">
       <fieldset>
@@ -93,9 +106,12 @@ export default class ModuleQcuDiscovery extends ModuleElement {
           <PixButton
             @variant="tertiary"
             @iconBefore="flag"
+            @triggerAction={{this.onReportClick}}
             class="element-qcu-discovery-feedback__report-button"
             aria-label={{t "pages.modulix.issue-report.aria-label"}}
           >{{t "pages.modulix.issue-report.button"}}</PixButton>
+
+          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
         {{/if}}
       </div>
     {{/if}}
