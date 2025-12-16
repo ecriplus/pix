@@ -167,7 +167,7 @@
   &__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: var(--pix-spacing-4x);
   }
 }
 
@@ -186,7 +186,9 @@
   }
 }
 
-.certification-information-comments {
-  display: flex;
-  gap: var(--pix-spacing-2x);
+.certification-information-comments-card {
+  &__action-buttons {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+  }
 }
