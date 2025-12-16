@@ -1,12 +1,13 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixCustomDraft from 'mon-pix/components/module/element/custom-draft';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | CustomDraft', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -91,6 +92,37 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+
+    module('when user clicks on report button', function () {
+      test('should display issue-report modal with a form inside', async function (assert) {
+        // given
+        const customDraft = {
+          id: 'id',
+          title: 'title',
+          url: 'https://example.org',
+          instruction: '<p>Instruction du POIC</p>',
+          height: 400,
+        };
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+
+        // when
+        const screen = await render(
+          <template>
+            <div id="modal-container"></div>
+            <ModulixCustomDraft @customDraft={{customDraft}} />
+          </template>,
+        );
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+        await waitForDialog();
+
+        // then
+        assert.dom(screen.getByRole('dialog')).exists();
+        assert
+          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+          .exists();
+      });
     });
   });
 
