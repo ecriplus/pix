@@ -1,4 +1,4 @@
-/*import { Page } from '@playwright/test';
+/*import type { Page } from '@playwright/test';
 
 import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
 import { PIX_APP_USER_DATA, PIX_ORGA_PRO_DATA } from '../../helpers/db-data.ts';

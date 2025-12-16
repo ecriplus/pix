@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 import { buildFreshPixCertifUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';

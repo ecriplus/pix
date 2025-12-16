@@ -1,5 +1,4 @@
-import { Page } from '@playwright/test';
-
+import type { Page } from '@playwright/test';
 export class LoginPage {
   constructor(private readonly page: Page) {}
 

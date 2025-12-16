@@ -1,6 +1,7 @@
 import path from 'node:path';
 
-import { BrowserContext, test as base } from '@playwright/test';
+import type { BrowserContext } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import crypto from 'crypto';
 import * as fs from 'fs/promises';
 

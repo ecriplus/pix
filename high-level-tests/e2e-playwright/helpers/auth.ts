@@ -6,6 +6,7 @@ import ms from 'ms';
 import { PIX_APP_USER_DATA, PIX_CERTIF_PRO_DATA, PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA } from './db-data.js';
 
 export const AUTH_DIR = path.resolve(import.meta.dirname, '../.auth');
+
 export type Credentials = {
   id: number;
   label: string;
@@ -15,6 +16,7 @@ export type Credentials = {
   rawPassword: string;
   appUrl: string;
 };
+
 export const PIX_APP_USER_CREDENTIALS: Credentials = {
   id: PIX_APP_USER_DATA.id,
   label: 'pix-app_user',

@@ -3,9 +3,9 @@ import * as path from 'node:path';
 import * as fs from 'fs/promises';
 import ms from 'ms';
 
+import type { Credentials } from './helpers/auth.ts';
 import {
   AUTH_DIR,
-  Credentials,
   getTokenForPixUser,
   PIX_APP_USER_CREDENTIALS,
   PIX_CERTIF_PRO_CREDENTIALS,
