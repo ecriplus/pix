@@ -130,7 +130,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
         const { id: sessionId } = databaseBuilder.factory.buildSession({
           certificationCenterId,
         });
-        databaseBuilder.factory.buildSupervisorAccess({ userId, sessionId });
+        databaseBuilder.factory.buildInvigilatorAccess({ userId, sessionId });
         await databaseBuilder.commit();
 
         const options = {

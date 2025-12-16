@@ -4,7 +4,7 @@ import { databaseBuffer } from '../database-buffer.js';
 import { buildSession } from './build-session.js';
 import { buildUser } from './build-user.js';
 
-const buildSupervisorAccess = function ({
+export function buildInvigilatorAccess({
   id = databaseBuffer.getNextId(),
   sessionId,
   userId,
@@ -22,6 +22,4 @@ const buildSupervisorAccess = function ({
     tableName: 'invigilator_accesses',
     values,
   });
-};
-
-export { buildSupervisorAccess };
+}

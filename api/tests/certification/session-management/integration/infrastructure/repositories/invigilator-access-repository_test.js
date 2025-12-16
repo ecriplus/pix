@@ -24,7 +24,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
       const userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId });
+      databaseBuilder.factory.buildInvigilatorAccess({ sessionId, userId });
       await databaseBuilder.commit();
 
       // when
@@ -41,7 +41,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
       const userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId });
+      databaseBuilder.factory.buildInvigilatorAccess({ sessionId, userId });
       await databaseBuilder.commit();
 
       // when
@@ -60,7 +60,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // given
       const invigilatorId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: invigilatorId });
+      databaseBuilder.factory.buildInvigilatorAccess({ sessionId, userId: invigilatorId });
       const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate({ sessionId }).id;
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
       await databaseBuilder.commit();
@@ -79,7 +79,7 @@ describe('Integration | Repository | invigilator-access-repository', function ()
       // given
       const invigilatorId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
-      databaseBuilder.factory.buildSupervisorAccess({ sessionId, userId: invigilatorId });
+      databaseBuilder.factory.buildInvigilatorAccess({ sessionId, userId: invigilatorId });
       const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate().id;
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
       await databaseBuilder.commit();

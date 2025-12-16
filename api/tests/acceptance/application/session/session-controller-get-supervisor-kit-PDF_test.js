@@ -29,7 +29,7 @@ describe('Acceptance | Controller | session-controller-get-invigilator-kit-pdf',
       });
 
       sessionIdAllowed = databaseBuilder.factory.buildSession({ certificationCenterId }).id;
-      databaseBuilder.factory.buildSupervisorAccess({ userId: user.id, sessionId: sessionIdAllowed });
+      databaseBuilder.factory.buildInvigilatorAccess({ userId: user.id, sessionId: sessionIdAllowed });
 
       await databaseBuilder.commit();
     });
