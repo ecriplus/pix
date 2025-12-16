@@ -201,7 +201,7 @@
               "element": {
                 "id": "c2b0f529-38af-4c54-bafa-1b41c4725f1b",
                 "type": "qcu-discovery",
-                "instruction": "<p>A votre avis, quel est le rôle d’un logiciel antivirus ?&nbsp;<br></p>",
+                "instruction": "<p>À votre avis, quel est le rôle d’un logiciel antivirus ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -468,7 +468,7 @@
                     "display": "inline",
                     "placeholder": "- deux mots manquants -",
                     "ariaLabel": "deux mots",
-                    "defaultValue": "deux mots",
+                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -480,7 +480,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>.Pour limiter améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
+                    "content": "<span>. Pour améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
                   },
                   {
                     "input": "2",
@@ -490,7 +490,7 @@
                     "display": "inline",
                     "placeholder": "- trois mots manquants -",
                     "ariaLabel": "trois mots manquants",
-                    "defaultValue": "trois mots manquants",
+                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
