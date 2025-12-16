@@ -15,17 +15,10 @@ export const synchronize = async ({ organizationLearnerId, moduleIds, modulesApi
   const modulePassages = await modulesApi.getUserModuleStatuses({ userId: learner.userId, moduleIds });
 
   const learnerParticipationsByModule = await knexConn('organization_learner_participations')
-    .select('organization_learner_participations.id', 'moduleId', 'referenceId')
-    .leftJoin(
-      'organization_learner_passage_participations',
-      'organization_learner_participations.id',
-      'organization_learner_passage_participations.organizationLearnerParticipationId',
-    )
-    .where({ organizationLearnerId: organizationLearnerId, type: OrganizationLearnerParticipationTypes.PASSAGE })
+    .select('organization_learner_participations.id', 'referenceId')
+    .where({ organizationLearnerId, type: OrganizationLearnerParticipationTypes.PASSAGE })
     .whereNull('deletedAt')
-    .where(function () {
-      this.whereIn('moduleId', moduleIds).orWhereIn('referenceId', moduleIds);
-    });
+    .whereIn('referenceId', moduleIds);
 
   for (const modulePassage of modulePassages) {
     const learnerParticipationModule = learnerParticipationsByModule.find(
