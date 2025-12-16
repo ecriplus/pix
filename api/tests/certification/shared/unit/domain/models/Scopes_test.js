@@ -2,7 +2,7 @@ import { Scopes } from '../../../../../../src/certification/shared/domain/models
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('Scopes', function () {
+describe('Unit | Certification | Shared | Domain | Models | Scopes', function () {
   describe('getByName', function () {
     it('should return the scope when it exists', function () {
       // Given
