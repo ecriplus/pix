@@ -217,7 +217,7 @@ class OrganizationForAdmin {
     this.credit = organization.credit;
     this.externalId = organization.externalId;
     this.provinceCode = organization.provinceCode;
-    this.documentationUrl = organization.documentationUrl;
+    this.documentationUrl = isEmpty(organization.documentationUrl) ? null : organization.documentationUrl;
     this.updateIsManagingStudents(organization.features);
     this.showSkills = organization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
     this.identityProviderForCampaigns = organization.identityProviderForCampaigns;

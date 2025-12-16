@@ -611,7 +611,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // then
-      expect(givenOrganization.documentationUrl).to.equal(newDocumentationUrl);
+      expect(givenOrganization.documentationUrl).to.be.null;
     });
 
     it('updates organization showSkills flag', function () {
