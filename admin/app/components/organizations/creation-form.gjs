@@ -95,25 +95,31 @@ export default class OrganizationCreationForm extends Component {
 
   <template>
     <form class="admin-form" {{on "submit" @onSubmit}}>
-      <section class="admin-form__content admin-form__content--with-counters">
-        <Card class="admin-form__card" @title="Information générique">
+      <p class="admin-form__mandatory-text">
+        {{t "common.forms.mandatory-fields" htmlSafe=true}}
+      </p>
+      <section class="admin-form__content admin-form__content--with-counters organization-creation-form">
+        <Card class="admin-form__card organization-creation-form__card" @title="Information générique">
           {{#if @parentOrganizationName}}
-            <h2 class="admin-form__content title">
+            <h2 class="admin-form__content title organization-creation-form__parent-name--full">
               {{t
                 "components.organizations.creation.parent-organization-name"
                 parentOrganizationName=@parentOrganizationName
               }}
             </h2>
           {{/if}}
-          <PixInput
-            @id="organizationName"
-            onchange={{this.handleOrganizationNameChange}}
-            required={{true}}
-            aria-required={{true}}
-            @requiredLabel={{t "common.fields.required-field"}}
-          >
-            <:label>Nom</:label>
-          </PixInput>
+
+          <div class="organization-creation-form__input--full">
+            <PixInput
+              @id="organizationName"
+              onchange={{this.handleOrganizationNameChange}}
+              required={{true}}
+              aria-required={{true}}
+              @requiredLabel={{t "common.fields.required-field"}}
+            >
+              <:label>Nom</:label>
+            </PixInput>
+          </div>
 
           <PixSelect
             @onChange={{this.handleOrganizationTypeSelectionChange}}
@@ -129,10 +135,6 @@ export default class OrganizationCreationForm extends Component {
             <:default as |organizationType|>{{organizationType.label}}</:default>
           </PixSelect>
 
-          <PixInput @id="externalId" {{on "input" (fn this.handleInputChange "externalId")}}>
-            <:label>{{t "components.organizations.creation.external-id"}}</:label>
-          </PixInput>
-
           <PixSelect
             @onChange={{this.handleAdministrationTeamSelectionChange}}
             @options={{this.administrationTeamsOptions}}
@@ -145,10 +147,6 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
-
-          <PixInput @id="provinceCode" {{on "input" (fn this.handleInputChange "provinceCode")}}>
-            <:label>{{t "components.organizations.creation.province-code"}}</:label>
-          </PixInput>
 
           <PixSelect
             @onChange={{this.handleCountrySelectionChange}}
@@ -164,24 +162,39 @@ export default class OrganizationCreationForm extends Component {
             <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
           </PixSelect>
 
+          <PixInput @id="provinceCode" {{on "input" (fn this.handleInputChange "provinceCode")}}>
+            <:label>{{t "components.organizations.creation.province-code"}}</:label>
+          </PixInput>
+
+          <div class="organization-creation-form__input--full">
+            <PixInput @id="externalId" {{on "input" (fn this.handleInputChange "externalId")}}>
+              <:label>{{t "components.organizations.creation.external-id"}}</:label>
+            </PixInput>
+          </div>
         </Card>
 
-        <Card class="admin-form__card" @title="Configuration">
-          <PixInput @id="documentationUrl" onchange={{this.handleDocumentationUrlChange}}>
-            <:label>Lien vers la documentation</:label>
-          </PixInput>
+        <Card class="admin-form__card organization-creation-form__card" @title="Configuration">
+          <div class="organization-creation-form__input--full">
+            <PixInput @id="documentationUrl" onchange={{this.handleDocumentationUrlChange}}>
+              <:label>Lien vers la documentation</:label>
+            </PixInput>
+          </div>
         </Card>
 
-        <Card class="admin-form__card" @title="Data Privacy Officer">
-          <PixInput @id="dataProtectionOfficerFirstName" onchange={{this.handleDataProtectionOfficerFirstNameChange}}>
-            <:label>Prénom du DPO</:label>
-          </PixInput>
+        <Card class="admin-form__card organization-creation-form__card" @title="Data Privacy Officer">
           <PixInput @id="dataProtectionOfficerLastName" onchange={{this.handleDataProtectionOfficerLastNameChange}}>
             <:label>Nom du DPO</:label>
           </PixInput>
-          <PixInput @id="dataProtectionOfficerEmail" onchange={{this.handleDataProtectionOfficerEmailChange}}>
-            <:label>Adresse e-mail du DPO</:label>
+
+          <PixInput @id="dataProtectionOfficerFirstName" onchange={{this.handleDataProtectionOfficerFirstNameChange}}>
+            <:label>Prénom du DPO</:label>
           </PixInput>
+
+          <div class="organization-creation-form__input--full">
+            <PixInput @id="dataProtectionOfficerEmail" onchange={{this.handleDataProtectionOfficerEmailChange}}>
+              <:label>Adresse e-mail du DPO</:label>
+            </PixInput>
+          </div>
         </Card>
       </section>
 
