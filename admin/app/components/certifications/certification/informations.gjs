@@ -5,7 +5,6 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import CertificationCompetenceList from '../competence-list';
-import CertificationInfoField from '../info-field';
 import CertificationComments from './comments';
 import CertificationInformationCandidate from './informations/candidate';
 import CertificationInformationGlobalActions from './informations/global-actions';
@@ -113,25 +112,16 @@ import CertificationInformationState from './informations/state';
 
     <CertificationComments @onJuryCommentSave={{@onJuryCommentSave}} @certification={{@certification}} />
 
-    <div class="certification-informations__row">
-      <div class="certification-informations__card">
-        <h2 class="certification-informations__card__title">Résultats</h2>
-        <CertificationInfoField
-          @value={{@certification.pixScore}}
-          @edition={{false}}
-          @label="Score :"
-          @fieldId="certification-pixScore"
-          @suffix=" Pix"
-        />
+    <PixBlock @variant="admin" class="certification-information-results">
+      <h2 class="certification-information-card__title">Résultats</h2>
 
-        <CertificationCompetenceList
-          @competences={{@certification.competences}}
-          @shouldDisplayPixScore={{@shouldDisplayPixScore}}
-          @edition={{false}}
-          @onUpdateScore={{@onUpdateScore}}
-          @onUpdateLevel={{@onUpdateLevel}}
-        />
-      </div>
-    </div>
+      <CertificationCompetenceList
+        @competences={{@certification.competences}}
+        @shouldDisplayPixScore={{@shouldDisplayPixScore}}
+        @edition={{false}}
+        @onUpdateScore={{@onUpdateScore}}
+        @onUpdateLevel={{@onUpdateLevel}}
+      />
+    </PixBlock>
   </div>
 </template>
