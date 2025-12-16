@@ -409,7 +409,7 @@
               "element": {
                 "id": "46999db8-c96c-42e8-93ac-a558c72a55f2",
                 "type": "text",
-                "content": "<p>Martin a reçu un message de Jérôme, le père de Brian, sur le groupe de parents de l'équipe de Rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
+                "content": "<p>Martin a reçu un message de Jérôme sur le groupe de parents de l'équipe de Rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
               }
             },
             {
@@ -435,35 +435,35 @@
                     "id": "1",
                     "content": "<p>Liker le message de Jérôme.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Jérôme. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le <strong>bon réflexe</strong>, c’est de vérifier <strong>d’où l’image vient</strong> et <strong>si elle est vraie</strong>. <br>Liker cette photo, pourrait être considéré comme un soutien au <strong>cyberharcèlement</strong> mené par Jérôme. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Partager la photo à ses contacts.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le <strong>bon réflexe</strong>, c’est de vérifier <strong>d’où l’image vient</strong> et <strong>si elle est vraie</strong>. <br>Partager cette photo pourrait être considéré comme du <strong>cyberharcèlement</strong>.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Demander à Jérôme d’où vient cette photo.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, en revanche, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> ! <br>La partager, en revanche, pourrait être considéré comme du <strong>cyberharcèlement</strong>.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Chercher à savoir d'où vient une information.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, en revanche, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> !<br>La partager, en revanche, pourrait être considéré comme du <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, en revanche, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> !<br>La partager, en revanche, pourrait être considéré comme du <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   }
                 ],
