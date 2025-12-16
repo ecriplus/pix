@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import Component from '@glimmer/component';
 
 import CertificationIssueReport from './issue-reports/issue-report';
@@ -12,8 +13,8 @@ export default class CertificationInformationIssueReports extends Component {
   }
 
   <template>
-    <div class="certification-informations__card">
-      <h2 class="card-title certification-informations__card__title">Signalements</h2>
+    <PixBlock @variant="admin">
+      <h2 class="certification-information__title certification-issue-reports__title">Signalements</h2>
       {{#if this.impactfulCertificationIssueReports.length}}
         <h3 class="certification-issue-reports__subtitle certification-issue-reports__subtitle--with-action-required">
           {{this.impactfulCertificationIssueReports.length}}
@@ -38,6 +39,6 @@ export default class CertificationInformationIssueReports extends Component {
           {{/each}}
         </ul>
       {{/if}}
-    </div>
+    </PixBlock>
   </template>
 }

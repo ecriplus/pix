@@ -3,20 +3,19 @@
 // List
 .certification-issue-reports {
   &__title {
-    margin-bottom: 16px;
-    font-size: 1.25rem;
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   &__subtitle {
+    @extend %pix-body-m;
+
     margin: 0;
     padding: 0.75rem 1rem;
-    font-weight: normal;
-    font-size: 1rem;
     border-radius: 4px;
 
     &--with-action-required {
-      color: var(--pix-secondary-700);
-      background-color: var(--pix-warning-100);
+      color: var(--pix-warning-700);
+      background-color: var(--pix-warning-50);
     }
 
     &--without-action-required {
