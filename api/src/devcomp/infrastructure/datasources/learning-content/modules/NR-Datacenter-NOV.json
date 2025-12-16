@@ -212,7 +212,7 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
-                "content": "<p>Regardez les usages de Killian et de son smartphone puis répondez à la question.</p>"
+                "content": "<p><strong>Un smartphone et un serveur sont tous deux des ordinateurs</strong>. Voyons comment le smartphone de Killian peut nous apprendre ce qu'il se passe dans un centre de données !&nbsp;</p>"
               }
             },
             {
@@ -241,10 +241,10 @@
                     },
                     {
                       "title": "Killian met son smartphone en charge ",
-                      "description": "Après que la batterie soit épuisée il le recharge complètement",
+                      "description": "Il pose son téléphone pour cuisiner ",
                       "displayWidth": 500,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-3-dec-2025-16-35-19.png",
+                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-16-dec-2025-15_26_53.png",
                         "alt": "aaa"
                       },
                       "license": {
@@ -254,22 +254,8 @@
                       }
                     },
                     {
-                      "title": "Le smartphone a été oublié",
-                      "description": "Killian a oublié son smartphone quasiment chargé sur la table en partant le matin",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-32-06.png",
-                        "alt": "aa"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
                       "title": "La batterie n’a quasiment pas bougé",
-                      "description": "Le téléphone est à peine chaud et la batterie est toujours quasiment pleine !",
+                      "description": "Quand il revient, le téléphone est à peine chaud et la batterie n'a perdue que quelques pourcents !",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-36-30.png",
@@ -770,9 +756,17 @@
             {
               "type": "element",
               "element": {
+                "id": "67881400-f14b-4e8f-a773-c993c44e7404",
+                "type": "text",
+                "content": "<p>Vous voulez afficher une page internet depuis un appareil numérique. <br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "056c8078-a480-4baa-8a5d-1ebb8a9d4d45",
                 "type": "qrocm",
-                "instruction": "<p>Trouvez les mots manquants dans la phrase suivante. <br></p>",
+                "instruction": "<p>Trouvez les mots manquants dans la phrase suivante pour retrouver le trajet de votre demande. <br></p>",
                 "proposals": [
                   {
                     "type": "text",
