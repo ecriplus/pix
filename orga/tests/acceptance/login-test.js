@@ -65,23 +65,25 @@ module('Acceptance | Login', function (hooks) {
     });
   });
 
-  test('User logs in', async function (assert) {
-    // given
-    domainService.getExtension.returns('fr');
-    const user = createUserWithMembershipAndTermsOfServiceAccepted();
-    createPrescriberByUser({ user });
+  module('when the Pix account exists and the password is correct', function () {
+    test('user logs in', async function (assert) {
+      // given
+      domainService.getExtension.returns('fr');
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
 
-    const screen = await visit('/connexion');
+      const screen = await visit('/connexion');
 
-    // when
-    await fillByLabel(t('pages.login-form.email.label'), user.email);
-    await fillByLabel(t('pages.login-form.password'), 'secret');
-    await clickByName(t('pages.login-form.login'));
+      // when
+      await fillByLabel(t('pages.login-form.email.label'), user.email);
+      await fillByLabel(t('pages.login-form.password'), 'secret');
+      await clickByName(t('pages.login-form.login'));
 
-    // then
-    const homepageHeading = screen.getByRole('heading', {
-      name: t('components.index.organization-information.title'),
+      // then
+      const homepageHeading = screen.getByRole('heading', {
+        name: t('components.index.organization-information.title'),
+      });
+      assert.dom(homepageHeading).exists();
     });
-    assert.dom(homepageHeading).exists();
   });
 });

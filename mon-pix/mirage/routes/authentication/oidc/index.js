@@ -89,8 +89,9 @@ export default function (config) {
     };
   });
 
-  config.post('/oidc/user/check-reconciliation', () => {
-    return {
+  config.post(
+    '/oidc/user/check-reconciliation',
+    {
       data: {
         attributes: {
           'full-name-from-pix': 'LLoyd Cé',
@@ -99,6 +100,7 @@ export default function (config) {
           'authentication-methods': [{ identityProvider: 'PIX' }],
         },
       },
-    };
-  });
+    },
+    200,
+  );
 }
