@@ -575,7 +575,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // then
-      expect(givenOrganization.email).to.equal(newEmail);
+      expect(givenOrganization.email).to.be.null;
     });
 
     it('updates organization credit even if null value', function () {

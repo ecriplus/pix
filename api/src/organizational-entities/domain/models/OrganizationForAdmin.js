@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import differenceBy from 'lodash/differenceBy.js';
+import isEmpty from 'lodash/isEmpty.js';
 
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DataProtectionOfficer } from './DataProtectionOfficer.js';
@@ -212,7 +213,7 @@ class OrganizationForAdmin {
     if (organization.name) this.name = organization.name;
     if (organization.type) this.type = organization.type;
     if (organization.logoUrl) this.logoUrl = organization.logoUrl;
-    this.email = organization.email;
+    this.email = isEmpty(organization.email) ? null : organization.email;
     this.credit = organization.credit;
     this.externalId = organization.externalId;
     this.provinceCode = organization.provinceCode;
