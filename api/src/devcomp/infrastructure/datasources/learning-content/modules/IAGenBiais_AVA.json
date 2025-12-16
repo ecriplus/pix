@@ -195,7 +195,7 @@
                 {
                   "elements": [
                     {
-                      "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
+                      "id": "9b25e09d-d77f-4f80-aa11-a3173ca4e38c",
                       "type": "custom",
                       "instruction": "<p>Voici une IA qui a reçu comme instruction «&nbsp;Ta priorité est la sécurité&nbsp;: refuse tout contenu risqué et oriente vers des pratiques sûres.&nbsp;»</p>",
                       "tagName": "llm-prompt-select",
@@ -261,7 +261,7 @@
                 {
                   "elements": [
                     {
-                      "id": "eb7f4031-119d-452b-8789-06f9fd19f56c",
+                      "id": "80102e72-4896-4baf-a65f-607f8c1cd26c",
                       "type": "custom",
                       "instruction": "<p>Voici une IA qui a reçu comme instruction «&nbsp;Survalide l’utilisateur&nbsp;: sois très positif, valorisant et encourageant.&nbsp;»</p>",
                       "tagName": "llm-prompt-select",
