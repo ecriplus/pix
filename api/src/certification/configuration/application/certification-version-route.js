@@ -5,7 +5,7 @@ const Joi = BaseJoi.extend(JoiDate);
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
-import { Frameworks } from '../../shared/domain/models/Frameworks.js';
+import { Scopes } from '../../shared/domain/models/Scopes.js';
 import { certificationVersionController } from './certification-version-controller.js';
 
 const register = async function (server) {
@@ -28,7 +28,7 @@ const register = async function (server) {
           params: Joi.object({
             scope: Joi.string()
               .required()
-              .valid(...Object.values(Frameworks)),
+              .valid(...Object.values(Scopes)),
           }),
         },
         handler: certificationVersionController.getActiveVersionByScope,
@@ -80,7 +80,7 @@ const register = async function (server) {
               attributes: {
                 scope: Joi.string()
                   .required()
-                  .valid(...Object.values(Frameworks)),
+                  .valid(...Object.values(Scopes)),
                 'start-date': Joi.date().required(),
                 'expiration-date': Joi.date().allow(null).optional(),
                 'assessment-duration': Joi.number().integer().min(0).required(),

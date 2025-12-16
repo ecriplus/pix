@@ -1,9 +1,9 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 
 export const buildVersion = ({
   id = 1,
-  scope = Frameworks.CORE,
+  scope = Scopes.CORE,
   startDate = new Date(),
   expirationDate,
   assessmentDuration = 105,

@@ -4,8 +4,8 @@ import { CertificationCourseRejected } from '../../../../../../../src/certificat
 import { CertificationJuryDone } from '../../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { Scopes } from '../../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { config } from '../../../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { CertificationCandidateNotFoundError } from '../../../../../../../src/shared/domain/errors.js';
@@ -192,11 +192,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
         certificationCourseRepository.getCertificationScope
           .withArgs({ courseId: abortedCertificationCourse.getId() })
-          .resolves(Frameworks.CORE);
+          .resolves(Scopes.CORE);
 
         sharedVersionRepository.getByScopeAndReconciliationDate
           .withArgs({
-            scope: Frameworks.CORE,
+            scope: Scopes.CORE,
             reconciliationDate: candidate.reconciledAt,
           })
           .resolves(version);
@@ -310,7 +310,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
           certificationCourseRepository.getCertificationScope
             .withArgs({ courseId: certificationCourse.getId() })
-            .resolves(Frameworks.CORE);
+            .resolves(Scopes.CORE);
 
           // when
           const error = await catchErr(handleV3CertificationScoring)({
@@ -391,11 +391,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: certificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -506,11 +506,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
               certificationCourseRepository.getCertificationScope
                 .withArgs({ courseId: certificationCourse.getId() })
-                .resolves(Frameworks.CORE);
+                .resolves(Scopes.CORE);
 
               sharedVersionRepository.getByScopeAndReconciliationDate
                 .withArgs({
-                  scope: Frameworks.CORE,
+                  scope: Scopes.CORE,
                   reconciliationDate: candidate.reconciledAt,
                 })
                 .resolves(version);
@@ -632,11 +632,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
               certificationCourseRepository.getCertificationScope
                 .withArgs({ courseId: certificationCourse.getId() })
-                .resolves(Frameworks.CORE);
+                .resolves(Scopes.CORE);
 
               sharedVersionRepository.getByScopeAndReconciliationDate
                 .withArgs({
-                  scope: Frameworks.CORE,
+                  scope: Scopes.CORE,
                   reconciliationDate: candidate.reconciledAt,
                 })
                 .resolves(version);
@@ -798,11 +798,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -921,11 +921,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -1057,11 +1057,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -1188,11 +1188,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -1314,11 +1314,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -1442,11 +1442,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
@@ -1568,11 +1568,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             certificationCourseRepository.getCertificationScope
               .withArgs({ courseId: abortedCertificationCourse.getId() })
-              .resolves(Frameworks.CORE);
+              .resolves(Scopes.CORE);
 
             sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
-                scope: Frameworks.CORE,
+                scope: Scopes.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);

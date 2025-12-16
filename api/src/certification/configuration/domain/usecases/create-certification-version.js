@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../shared/domain/models/Frameworks.js').Frameworks} Frameworks
+ * @typedef {import ('../../../shared/domain/models/Scopes.js').Scopes} Scopes
  * @typedef {import ('./index.js').TubeRepository} TubeRepository
  * @typedef {import ('./index.js').SkillRepository} SkillRepository
  * @typedef {import ('./index.js').ChallengeRepository} ChallengeRepository
@@ -16,7 +16,7 @@ import { Version } from '../models/Version.js';
 export const createCertificationVersion = withTransaction(
   /**
    * @param {Object} params
-   * @param {Frameworks} params.scope
+   * @param {Scopes} params.scope
    * @param {Array<string>} params.tubeIds
    * @param {TubeRepository} params.tubeRepository
    * @param {SkillRepository} params.skillRepository
@@ -32,7 +32,7 @@ export const createCertificationVersion = withTransaction(
 
 /**
  * @param {Object} params
- * @param {Frameworks} params.scope
+ * @param {Scopes} params.scope
  * @param {VersionsRepository} params.versionsRepository
  */
 const _buildNewVersion = async ({ scope, versionsRepository }) => {

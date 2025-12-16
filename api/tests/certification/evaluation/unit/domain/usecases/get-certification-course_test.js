@@ -1,6 +1,6 @@
 import { getCertificationCourse } from '../../../../../../src/certification/evaluation/domain/usecases/get-certification-course.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-certification-course', function () {
@@ -44,7 +44,7 @@ describe('Unit | UseCase | get-certification-course', function () {
   it('should get the certificationCourse with numberOfChallenges from version', async function () {
     certificationCourseRepository.get.withArgs({ id: certificationCourse.getId() }).resolves(certificationCourse);
     sharedCertificationCandidateRepository.getBySessionIdAndUserId.resolves(candidate);
-    certificationCourseRepository.getCertificationScope.resolves(Frameworks.CORE);
+    certificationCourseRepository.getCertificationScope.resolves(Scopes.CORE);
     versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
     const actualCertificationCourse = await getCertificationCourse({
@@ -65,7 +65,7 @@ describe('Unit | UseCase | get-certification-course', function () {
       courseId: certificationCourse.getId(),
     });
     expect(versionRepository.getByScopeAndReconciliationDate).to.have.been.calledOnceWithExactly({
-      scope: Frameworks.CORE,
+      scope: Scopes.CORE,
       reconciliationDate: candidate.reconciledAt,
     });
     expect(actualCertificationCourse.getNumberOfChallenges()).to.equal(42);

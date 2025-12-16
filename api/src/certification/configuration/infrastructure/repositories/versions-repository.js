@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../shared/domain/models/Frameworks.js').Frameworks} Frameworks
+ * @typedef {import('../../../shared/domain/models/Scopes.js').Scopes} Scopes
  * @typedef {import('../../domain/models/Version.js').Version} Version
  * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
@@ -40,7 +40,7 @@ export async function getById({ id }) {
 
 /**
  * @param {Object} params
- * @param {Frameworks} params.scope
+ * @param {Scopes} params.scope
  * @returns {Promise<Version|null>}
  */
 export async function findActiveByScope({ scope }) {
@@ -121,7 +121,7 @@ export async function update({ version }) {
 
 /**
  * @param {Object} params
- * @param {Frameworks} params.scope
+ * @param {Scopes} params.scope
  * @returns {Promise<Array<number>>}
  */
 export async function getFrameworkHistory({ scope }) {

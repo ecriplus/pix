@@ -1,5 +1,5 @@
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../src/certification/shared/domain/constants.js';
-import { Frameworks } from '../../../src/certification/shared/domain/models/Frameworks.js';
+import { Scopes } from '../../../src/certification/shared/domain/models/Scopes.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 const defaultChallengesConfiguration = {
@@ -135,7 +135,7 @@ const defaultCompetencesScoringConfiguration = [
 
 export const buildCertificationVersion = function ({
   id = databaseBuffer.getNextId(),
-  scope = Frameworks.CORE,
+  scope = Scopes.CORE,
   startDate = new Date('1977-10-19'),
   expirationDate = null,
   assessmentDuration = DEFAULT_SESSION_DURATION_MINUTES,
