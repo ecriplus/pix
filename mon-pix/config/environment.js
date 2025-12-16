@@ -202,7 +202,6 @@ module.exports = function (environment) {
 
     ENV.APP.BANNER_CONTENT = '';
     ENV.APP.BANNER_TYPE = '';
-    ENV.APP.INFORMATION_BANNER_POLLING_TIME = 1000 * 60;
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
