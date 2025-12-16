@@ -9,6 +9,8 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
       État
       {{#if @certification.isPublished}}
         <PixTag @color="success">Publiée</PixTag>
+      {{else}}
+        <PixTag @color="info">Non publiée</PixTag>
       {{/if}}
     </h2>
 
@@ -41,8 +43,9 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Publiée">
-        {{@certification.publishedText}}
+      <DescriptionList.Item @label="Score">
+        {{@certification.pixScore}}
+        Pix
       </DescriptionList.Item>
 
       <DescriptionList.Divider />
