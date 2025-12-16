@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.282.0](https://github.com/1024pix/pix/compare/v5.281.0...v5.282.0) (2025-12-16)
+
+### :rocket: Amélioration
+
+- [#14423](https://github.com/1024pix/pix/pull/14423) Ajout solution Prompt-ind 
+- [#14432](https://github.com/1024pix/pix/pull/14432) Creation module-datacenter-ind 
+- [#14441](https://github.com/1024pix/pix/pull/14441) CY_phishing_AVA ajout mention cybermalveillance 
+- [#14444](https://github.com/1024pix/pix/pull/14444) CY_Phishing_AVA cybermalveillance+ saut 
+- [#14438](https://github.com/1024pix/pix/pull/14438) CY_phishing_NOV ajout mention cybermalveillance 
+- [#14399](https://github.com/1024pix/pix/pull/14399) Revoir le style global du formulaire de création d'organisation (PIX-20699) 
+
+### :bug: Correction
+
+- [#14449](https://github.com/1024pix/pix/pull/14449) Mise à jour des URLs de documentation (PIX-20807). 
+
+### :building_construction: Tech
+
+- [#14433](https://github.com/1024pix/pix/pull/14433) Ajout de JSDoc dans le scoring-v3.js (PIX-20787). 
+- [#14398](https://github.com/1024pix/pix/pull/14398) Supprimer ember-api-actions de Pix Orga (PIX-20768) 
+
+### :coffee: Autre
+
+- [#14442](https://github.com/1024pix/pix/pull/14442) CY_Phishing_IND retours apres validation
+
 # [5.281.0](https://github.com/1024pix/pix/compare/v5.280.0...v5.281.0) (2025-12-15)
 
 ### :rocket: Amélioration
