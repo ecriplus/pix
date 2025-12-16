@@ -47,6 +47,7 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
       assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
       challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
         challengesBetweenSameCompetence: 0,
+        maximumAssessmentLength: 32,
         variationPercent: 1,
         defaultCandidateCapacity: 0,
       }),

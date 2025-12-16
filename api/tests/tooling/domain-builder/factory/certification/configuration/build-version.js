@@ -20,6 +20,6 @@ export const buildVersion = ({
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,
-    challengesConfiguration: challengesConfiguration ?? buildFlashAlgorithmConfiguration(),
+    challengesConfiguration: buildFlashAlgorithmConfiguration(challengesConfiguration),
   });
 };

@@ -130,7 +130,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
             capacity: version.challengesConfiguration.defaultCandidateCapacity,
-            variationPercent: undefined,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns({ capacity: 0 });
 
@@ -238,7 +238,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               allAnswers: [],
               challenges: [nextCalibratedChallenge, accessibleChallenge],
               capacity: version.challengesConfiguration.defaultCandidateCapacity,
-              variationPercent: undefined,
+              variationPercent: version.challengesConfiguration.variationPercent,
             })
             .returns({ capacity: 0 });
 
@@ -401,7 +401,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             allAnswers: [answerStillValid, answerWithOutdatedChallenge],
             challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextCalibratedChallenge],
             capacity: version.challengesConfiguration.defaultCandidateCapacity,
-            variationPercent: undefined,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns({ capacity: 0 });
 
@@ -496,7 +496,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
             capacity: version.challengesConfiguration.defaultCandidateCapacity,
-            variationPercent: undefined,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns({ capacity: 0 });
 
@@ -606,7 +606,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             allAnswers: [],
             challenges: [calibratedChallengeWithOtherSkill],
             capacity: version.challengesConfiguration.defaultCandidateCapacity,
-            variationPercent: undefined,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns({ capacity: 0 });
 
@@ -677,8 +677,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           getCapacityAndErrorRate: sinon.stub(),
         };
 
-        const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
+        version = domainBuilder.certification.shared.buildVersion({
+          challengesConfiguration: { maximumAssessmentLength: 1 },
+        });
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
         answerRepository.findByAssessmentExcludingChallengeIds
@@ -756,8 +757,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               version: AlgorithmEngineVersion.V3,
             });
 
-            const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(flashConfiguration);
-            version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
+            version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration: flashConfiguration });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();

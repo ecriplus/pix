@@ -19,7 +19,7 @@ export class FlashAssessmentAlgorithmConfiguration {
    * @param {boolean} [props.limitToOneQuestionPerTube] - limits questions to one per tube
    * @param {boolean} [props.enablePassageByAllCompetences] - enable or disable the passage through all competences
    * @param {number} props.variationPercent
-   * @param {number} [props.defaultCandidateCapacity] - starting candidate capacity for first challenge
+   * @param {number} props.defaultCandidateCapacity - starting candidate capacity for first challenge
    */
   constructor({
     maximumAssessmentLength,

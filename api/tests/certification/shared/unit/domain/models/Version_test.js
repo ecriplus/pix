@@ -10,7 +10,11 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 123,
         scope: Scopes.CORE,
-        challengesConfiguration: { minChallenges: 5, maxChallenges: 10, defaultCandidateCapacity: 1 },
+        challengesConfiguration: {
+          challengesBetweenSameCompetence: 0,
+          maximumAssessmentLength: 10,
+          defaultCandidateCapacity: 1,
+        },
       };
 
       // when
@@ -21,8 +25,8 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version.id).to.equal(123);
       expect(version.scope).to.equal(Scopes.CORE);
       expect(version.challengesConfiguration).to.deep.equal({
-        minChallenges: 5,
-        maxChallenges: 10,
+        challengesBetweenSameCompetence: 0,
+        maximumAssessmentLength: 10,
         defaultCandidateCapacity: 1,
       });
     });
@@ -32,7 +36,11 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 456,
         scope: Scopes.PIX_PLUS_DROIT,
-        challengesConfiguration: { defaultCandidateCapacity: -3 },
+        challengesConfiguration: {
+          challengesBetweenSameCompetence: 0,
+          maximumAssessmentLength: 10,
+          defaultCandidateCapacity: -3,
+        },
       };
 
       // when
@@ -42,7 +50,11 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(456);
       expect(version.scope).to.equal(Scopes.PIX_PLUS_DROIT);
-      expect(version.challengesConfiguration).to.deep.equal({ defaultCandidateCapacity: -3 });
+      expect(version.challengesConfiguration).to.deep.equal({
+        challengesBetweenSameCompetence: 0,
+        maximumAssessmentLength: 10,
+        defaultCandidateCapacity: -3,
+      });
     });
 
     it('should throw an EntityValidationError when id is missing', function () {
