@@ -1,13 +1,15 @@
+import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Breadcrumb from 'pix-admin/components/organizations/breadcrumb';
 import CreationForm from 'pix-admin/components/organizations/creation-form';
+
 <template>
   {{pageTitle "Nouvelle orga"}}
   <header class="page-header">
     {{#if @controller.parentOrganizationName}}
-      <Breadcrumb @currentPageLabel="Nouvelle organisation fille" />
+      <Breadcrumb @currentPageLabel={{t "pages.organizations.breadcrumb.new-child-organization-page"}} />
     {{else}}
-      <Breadcrumb @currentPageLabel="Nouvelle organisation" />
+      <Breadcrumb @currentPageLabel={{t "pages.organizations.breadcrumb.new-organization-page"}} />
     {{/if}}
   </header>
 

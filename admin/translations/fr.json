@@ -100,6 +100,7 @@
       "empty-result": "Aucun résultat"
     },
     "words": {
+      "example-abbr": "ex:",
       "no": "Non",
       "none": "Aucun",
       "yes": "Oui"
@@ -656,20 +657,41 @@
         },
         "administration-team": {
           "selector": {
-            "label": "Sélectionner une équipe en charge",
-            "placeholder": "Équipe en charge"
+            "label": "Équipe en charge",
+            "placeholder": "Sélectionner une équipe"
           }
         },
+        "configuration": "Paramétrage",
         "country": {
           "selector": {
-            "label": "Sélectionner un pays",
-            "placeholder": "Pays (code INSEE)"
+            "label": "Pays (code INSEE)",
+            "placeholder": "Sélectionner un pays"
           }
         },
-        "external-id": "Identifiant externe",
+        "documentation-link": "Lien vers la documentation",
+        "dpo": {
+          "definition": "Délégué à la protection des données",
+          "email": "Adresse e-mail du ",
+          "firstname": "Prénom du ",
+          "lastname": "Nom du ",
+          "title": "DPO"
+        },
+        "external-id": {
+          "label": "Identifiant externe",
+          "placeholder": "Mon super idendifiant externe"
+        },
+        "general-information": "Informations générales",
+        "name": {
+          "label": "Nom de l'organisation",
+          "placeholder": "Ma nouvelle organisation"
+        },
         "parent-organization-name": "Organisation mère : {parentOrganizationName}",
         "province-code": "Département (en 3 chiffres)",
-        "required-fields-error": "Veuillez remplir tous les champs obligatoires."
+        "required-fields-error": "Veuillez remplir tous les champs obligatoires.",
+        "type": {
+          "label": "Type de l'organisation",
+          "placeholder": "Sélectionner un type"
+        }
       },
       "editing": {
         "administration-team": {
@@ -1223,6 +1245,11 @@
       "title": "Organisations filles"
     },
     "organizations": {
+      "breadcrumb": {
+        "new-child-organization-page": "Nouvelle organisation fille",
+        "new-organization-page": "Nouvelle organisation",
+        "parent-page": "Toutes les organisations"
+      },
       "notifications": {
         "errors": {
           "payload-too-large": "Le poids du logo dépasse la limite autorisée de {maxSizeInMegaBytes} Mo. Veuillez réduire le poids du logo et essayer à nouveau."

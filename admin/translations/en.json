@@ -100,6 +100,7 @@
       "empty-result": "Aucun résultat"
     },
     "words": {
+      "example-abbr": "e.g.",
       "no": "No",
       "none": "None",
       "yes": "Yes"
@@ -655,20 +656,41 @@
         },
         "administration-team": {
           "selector": {
-            "label": "Choose an administration team",
-            "placeholder": "Administration team"
+            "label": "Administration team",
+            "placeholder": "Select one team"
           }
         },
+        "configuration": "Configuration",
         "country": {
           "selector": {
-            "label": "Choose a country",
-            "placeholder": "Country (INSEE code)"
+            "label": "Country (INSEE code)",
+            "placeholder": "Select one country"
           }
         },
-        "external-id": "External Identifier",
+        "documentation-link": "Link to the documentation",
+        "dpo": {
+          "definition": "Data Protection Officer",
+          "email": "E-mail address of ",
+          "firstname": "Firstname of ",
+          "lastname": "Lastname of ",
+          "title": "DPO"
+        },
+        "external-id": {
+          "label": "External Identifier",
+          "placeholder": "My great external identifier"
+        },
+        "general-information": "General information",
+        "name": {
+          "label": "Name of the organization",
+          "placeholder": "My new organization"
+        },
         "parent-organization-name": "Parent organization: {parentOrganizationName}",
         "province-code": "Province code (3 digits)",
-        "required-fields-error": "Please fill in all required fields."
+        "required-fields-error": "Please fill in all required fields.",
+        "type": {
+          "label": "Type of the organization",
+          "placeholder": "Select one type"
+        }
       },
       "editing": {
         "administration-team": {
@@ -1221,6 +1243,11 @@
       "title": "Children organisations"
     },
     "organizations": {
+      "breadcrumb": {
+        "new-child-organization-page": "New child organization",
+        "new-organization-page": "New organization",
+        "parent-page": "All organizations"
+      },
       "notifications": {
         "errors": {
           "payload-too-large": "The weight of the logo exceeds the authorised limit of {maxSizeInMegaBytes} MB. Please reduce the weight of the logo and try again."

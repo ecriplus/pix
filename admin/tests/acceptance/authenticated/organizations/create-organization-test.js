@@ -14,7 +14,6 @@ module('Acceptance | Organizations | Create', function (hooks) {
   setupIntl(hooks);
 
   hooks.beforeEach(async function () {
-    this.intl = this.owner.lookup('service:intl');
     server.create('country', { code: '99100', name: 'France' });
 
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -25,7 +24,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
     const screen = await visit('/organizations/new');
 
     // then
-    assert.dom(screen.getByRole('link', { name: 'Organisations' })).hasClass('active');
+    assert.dom(screen.getByRole('link', { name: t('components.layout.sidebar.organizations') })).hasClass('active');
   });
 
   module('when creating an organization without a parent organization', function () {
@@ -35,8 +34,8 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
       // then
       assert.dom(screen.queryByText('Organisation mère', { exact: false })).doesNotExist();
-      assert.dom(screen.getByText('Nouvelle organisation')).exists();
-      assert.dom(screen.getByRole('button', { name: this.intl.t('common.actions.add') })).exists();
+      assert.dom(screen.getByText(t('pages.organizations.breadcrumb.new-organization-page'))).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.add') })).exists();
     });
 
     test('it redirects the user to organizations list when cancelling', async function (assert) {
@@ -44,7 +43,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
       const screen = await visit('/organizations/new');
 
       // when
-      const cancelButton = await screen.getByRole('button', { name: this.intl.t('common.actions.cancel') });
+      const cancelButton = await screen.getByRole('button', { name: t('common.actions.cancel') });
       await click(cancelButton);
 
       // then
@@ -71,18 +70,18 @@ module('Acceptance | Organizations | Create', function (hooks) {
       assert
         .dom(
           screen.getByRole('heading', {
-            name: this.intl.t('components.organizations.creation.parent-organization-name', {
+            name: t('components.organizations.creation.parent-organization-name', {
               parentOrganizationName: parentOrganization.name,
             }),
             level: 2,
           }),
         )
         .exists();
-      assert.dom(screen.getByText('Nouvelle organisation fille')).exists();
+      assert.dom(screen.getByText(t('pages.organizations.breadcrumb.new-child-organization-page'))).exists();
       assert
         .dom(
           screen.getByRole('button', {
-            name: this.intl.t('components.organizations.creation.actions.add-child-organization'),
+            name: t('components.organizations.creation.actions.add-child-organization'),
           }),
         )
         .exists();
@@ -96,7 +95,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
         )}`,
       );
       // when
-      const cancelButton = await screen.getByRole('button', { name: this.intl.t('common.actions.cancel') });
+      const cancelButton = await screen.getByRole('button', { name: t('common.actions.cancel') });
       await click(cancelButton);
 
       // then
@@ -108,9 +107,9 @@ module('Acceptance | Organizations | Create', function (hooks) {
     test('it redirects the user on the organization details page on tags tab', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
-      await fillByLabel('Nom *', 'Stark Corp.');
+      await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Stark Corp.');
 
-      await click(screen.getByRole('button', { name: `Sélectionner un type d'organisation *` }));
+      await click(screen.getByRole('button', { name: `${t('components.organizations.creation.type.label')} *` }));
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'Établissement scolaire' }));
 
@@ -130,12 +129,12 @@ module('Acceptance | Organizations | Create', function (hooks) {
       await screen.findByRole('listbox');
       await click(screen.getByText('France (99100)'));
 
-      await fillByLabel('Prénom du DPO', 'Justin');
-      await fillByLabel('Nom du DPO', 'Ptipeu');
-      await fillByLabel('Adresse e-mail du DPO', 'justin.ptipeu@example.net');
+      await fillByLabel(`${t('components.organizations.creation.dpo.firstname')}DPO`, 'Justin');
+      await fillByLabel(`${t('components.organizations.creation.dpo.lastname')}DPO`, 'Ptipeu');
+      await fillByLabel(`${t('components.organizations.creation.dpo.email')}DPO`, 'justin.ptipeu@example.net');
 
       // when
-      await clickByName('Ajouter');
+      await clickByName(t('common.actions.add'));
 
       // then
       assert.strictEqual(currentURL(), '/organizations/1/all-tags');
@@ -144,10 +143,10 @@ module('Acceptance | Organizations | Create', function (hooks) {
     test('it shows validation errors if form is not correctly filled', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
-      await fillByLabel('Nom *', 'Stark Corp.');
+      await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Stark Corp.');
 
       // when
-      await clickByName('Ajouter');
+      await clickByName(t('common.actions.add'));
 
       // then
       assert.dom(screen.getByText(t('components.organizations.creation.required-fields-error'))).exists();
