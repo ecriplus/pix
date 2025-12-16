@@ -5,7 +5,7 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 <template>
   <PixBlock @variant="admin">
-    <h2 class="certification-information-card__title certification-information-card__title--state">
+    <h2 class="certification-information__title certification-information__title--state">
       État
       {{#if @certification.isPublished}}
         <PixTag @color="success">Publiée</PixTag>

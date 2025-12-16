@@ -13,10 +13,10 @@ import CertificationInformationState from './informations/state';
 
 <template>
   <div class="certification-information">
-    <div class="certification-informations__row">
+    <div class="certification-information__buttons-row">
       <CertificationInformationGlobalActions @certification={{@certification}} @session={{@session}} />
     </div>
-    <div class="certification-information__row">
+    <div class="certification-information__block-row">
       <CertificationInformationState @certification={{@certification}} @session={{@session}} />
       <CertificationInformationCandidate @certification={{@certification}} />
     </div>
@@ -25,9 +25,9 @@ import CertificationInformationState from './informations/state';
       <PixBlock @variant="admin">
         <div>
           {{#if @certification.commonComplementaryCertificationCourseResult}}
-            <h2 class="certification-information-card__title">Certification complémentaire</h2>
+            <h2 class="certification-information__title">Certification complémentaire</h2>
 
-            <DescriptionList class="certification-information-complementary-card">
+            <DescriptionList class="certification-information-complementary">
               <DescriptionList.Item @label={{@certification.commonComplementaryCertificationCourseResult.label}}>
                 {{@certification.commonComplementaryCertificationCourseResult.status}}
               </DescriptionList.Item>
@@ -36,7 +36,7 @@ import CertificationInformationState from './informations/state';
 
           {{#if @certification.complementaryCertificationCourseResultWithExternal}}
             <div class="certification-information-pix-edu">
-              <h2 class="certification-information-card__title">Résultats de la certification complémentaire Pix+ Edu</h2>
+              <h2 class="certification-information__title">Résultats de la certification complémentaire Pix+ Edu</h2>
               <div class="certification-information-pix-edu__container">
                 <div class="certification-information-pix-edu__card">
                   <h3>Volet Pix</h3>
@@ -113,7 +113,7 @@ import CertificationInformationState from './informations/state';
     <CertificationComments @onJuryCommentSave={{@onJuryCommentSave}} @certification={{@certification}} />
 
     <PixBlock @variant="admin" class="certification-information-results">
-      <h2 class="certification-information-card__title">Résultats</h2>
+      <h2 class="certification-information__title">Résultats</h2>
 
       <CertificationCompetenceList
         @competences={{@certification.competences}}

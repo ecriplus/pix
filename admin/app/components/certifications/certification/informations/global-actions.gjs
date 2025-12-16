@@ -167,7 +167,7 @@ export default class CertificationInformationGlobalActions extends Component {
       {{t "components.certifications.global-actions.user-details-link"}}
     </PixButtonLink>
 
-    <div class="certification-informations__row__actions">
+    <div class="certification-information-global-actions">
       {{#if this.displayCancelCertificationButton}}
         <PixButton @variant="secondary" @size="small" @triggerAction={{this.onCancelCertificationButtonClick}}>
           {{t "components.certifications.global-actions.cancel.button"}}

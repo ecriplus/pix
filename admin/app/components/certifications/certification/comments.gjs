@@ -37,7 +37,7 @@ export default class Comments extends Component {
 
   <template>
     <PixBlock @variant="admin">
-      <h2 class="certification-information-card__title">Commentaires jury</h2>
+      <h2 class="certification-information__title">Commentaires jury</h2>
       <DescriptionList>
         <DescriptionList.Divider />
 
@@ -82,7 +82,7 @@ export default class Comments extends Component {
       </DescriptionList>
 
       {{#if this.isEditingJuryComment}}
-        <ul class="certification-information-comments-card__action-buttons">
+        <ul class="certification-information-comments__action-buttons">
           <li>
             <PixButton @size="small" @variant="secondary" @triggerAction={{this.cancelJuryCommentEdition}}>
               {{t "common.actions.cancel"}}

@@ -1,81 +1,21 @@
 @use 'pix-design-tokens/typography';
 
-.certification-informations {
-  &__row {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    &__actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    &--center {
-      justify-content: center;
-    }
-
-    &:last-child {
-      margin: 0;
-    }
-  }
-
-  &__card {
-    flex-grow: 1;
-    padding: 1rem;
-    background: var(--pix-neutral-0);
-    border: 1px solid var(--pix-neutral-20);
-    border-radius: 8px;
-
-    &__title {
-      margin-bottom: 0.75rem;
-      font-size: 1.25rem;
-
-      &--state {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--pix-spacing-2x) var(--pix-spacing-4x);
-        justify-content: space-between;
-      }
-    }
-
-    &__list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    &__list-item {
-      margin-bottom: 0.25rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    &__list-label {
-      display: inline-block;
-      min-width: 180px;
-      color: var(--pix-neutral-500);
-    }
-  }
-}
-
 .certification-information {
   display: flex;
   flex-direction: column;
   gap: var(--pix-spacing-4x);
 
-  &__row {
+  &__block-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--pix-spacing-4x);
   }
-}
 
-.certification-information-card {
+  &__buttons-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__title {
     @extend %pix-title-xs;
 
@@ -84,20 +24,26 @@
       justify-content: space-between;
     }
   }
+}
 
+.certification-information-candidate {
   .description-list > div {
     grid-template-columns: repeat(5, minmax(30%, auto));
+
+    dd {
+      grid-column: auto;
+    }
   }
 }
 
-.certification-information-comments-card {
+.certification-information-comments {
   &__action-buttons {
     display: flex;
     gap: var(--pix-spacing-4x);
   }
 }
 
-.certification-information-complementary-card {
+.certification-information-complementary {
   margin-top: var(--pix-spacing-4x);
 }
 
@@ -156,4 +102,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--pix-spacing-4x);
+}
+
+.certification-information-global-actions {
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  justify-content: center;
 }

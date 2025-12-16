@@ -39,8 +39,8 @@ export default class CertificationInformationCandidate extends Component {
   }
 
   <template>
-    <PixBlock @variant="admin" class="certification-information-card">
-      <h2 class="certification-information-card__title">Candidat</h2>
+    <PixBlock @variant="admin" class="certification-information-candidate">
+      <h2 class="certification-information__title">Candidat</h2>
 
       <DescriptionList>
         <DescriptionList.Divider />
