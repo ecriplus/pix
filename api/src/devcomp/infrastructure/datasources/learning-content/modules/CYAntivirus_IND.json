@@ -130,21 +130,21 @@
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs.<br> </p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs. <br></p>"
+                      "diagnosis": "<p>Effectivement, une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs. <br></p>"
+                      "diagnosis": "<p>Une faille peut en cacher une autre. C’est pour cela que des améliorations régulières des logiciels systèmes sont transmises sous la forme de mises à jour. C’est une course permanente entre les pirates et les concepteurs.</p>"
                     }
                   }
                 ],
@@ -163,7 +163,7 @@
               "element": {
                 "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
                 "type": "text",
-                "content": "<p>Pour renforcer la protection de son appareil, il faut<strong> accepter une mise à jour quand une notification le demande</strong>, sur tous les appareils numériques (ordinateur, smartphone, tablette). Ces mises à jour entraînent souvent le redémarrage de l’appareil, il faut les accepter quand même.</p><p><br>💡Activer les <strong>mises à jour automatiques</strong> permet de ne plus avoir besoin d’y pense.</p><br>"
+                "content": "<p>Pour renforcer la protection de son appareil, il faut<strong> accepter une mise à jour quand une notification le demande</strong>, sur tous les appareils numériques (ordinateur, smartphone, tablette). Ces mises à jour entraînent souvent le redémarrage de l’appareil, il faut les accepter quand même.</p><p><br>💡Activer les <strong>mises à jour automatiques</strong> permet de ne plus avoir besoin d’y pense.</p>"
               }
             }
           ]
