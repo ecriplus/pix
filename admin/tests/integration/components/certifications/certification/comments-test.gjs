@@ -32,7 +32,7 @@ module('Integration | Component | Certifications | certification | Comments ', f
     assert.dom(screen.getByText("C'était super, bravo au candidat")).exists();
     assert.dom(screen.getByText("Pour l'organisation")).exists();
     assert.dom(screen.getByText("C'était super, bravo à l'organisation")).exists();
-    assert.dom(screen.getByText('Notes internes Jury Pix :')).exists();
+    assert.dom(screen.getByText('Notes internes Jury Pix')).exists();
     assert.dom(screen.getByText("C'était super, le jury est content")).exists();
   });
 

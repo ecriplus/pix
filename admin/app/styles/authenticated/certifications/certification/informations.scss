@@ -1,11 +1,6 @@
 @use 'pix-design-tokens/typography';
 
 .certification-informations {
-  &__actions {
-    display: flex;
-    justify-content: center;
-  }
-
   &__row {
     display: flex;
     gap: 20px;
@@ -33,36 +28,6 @@
     background: var(--pix-neutral-0);
     border: 1px solid var(--pix-neutral-20);
     border-radius: 8px;
-
-    .certification-info-field {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 0.5em;
-      padding-bottom: 0.5em;
-      border-bottom: 1px solid var(--pix-neutral-20);
-
-      &:last-of-type {
-        border-bottom: none;
-      }
-
-      :first-child:not(button) {
-        min-width: 16em;
-        font-weight: bold;
-      }
-    }
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &--pix-edu {
-      flex: 1;
-      color: var(--pix-neutral-100);
-      font-weight: 500;
-      text-align: center;
-      background-color: var(--pix-neutral-20);
-      border: 2px solid var(--pix-neutral-20);
-    }
 
     &__title {
       margin-bottom: 0.75rem;
@@ -95,75 +60,14 @@
       min-width: 180px;
       color: var(--pix-neutral-500);
     }
-
-    &__score {
-      color: var(--pix-neutral-900);
-      font-size: 1.125rem;
-    }
-  }
-
-  &__pix-edu {
-    &__title {
-      margin-bottom: 16px;
-      font-size: 1.125rem;
-    }
-
-    &__row {
-      display: flex;
-      gap: 16px;
-      margin-top: 16px;
-
-      &__jury-level {
-        display: flex;
-        align-items: start;
-        justify-content: center;
-
-        p {
-          margin-top: 0;
-        }
-
-        .jury-level-edit-icon-button {
-          margin-left: 10px;
-          color: var(--pix-neutral-500);
-          font-size: 19px;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
-      }
-
-      &__jury-level-editor {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        max-width: 100%;
-        padding: 0 8px;
-
-        section:nth-of-type(2) {
-          display: flex;
-          gap: 1rem;
-          margin: 8px 0;
-
-          button:last-child {
-            flex: 2;
-          }
-        }
-      }
-    }
-  }
-
-  &__complementary-certification {
-    &__title {
-      margin-bottom: 24px;
-    }
-  }
-
-  &__certification-issue-reports {
-    flex-direction: column;
   }
 }
 
 .certification-information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+
   &__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -190,5 +94,60 @@
   &__action-buttons {
     display: flex;
     gap: var(--pix-spacing-4x);
+  }
+}
+
+.certification-information-complementary-card {
+  margin-top: var(--pix-spacing-4x);
+}
+
+.certification-information-pix-edu {
+  &__container {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    margin-top: var(--pix-spacing-4x);
+  }
+
+  &__card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    padding: var(--pix-spacing-4x) 0;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+
+    h3 {
+      @extend %pix-title-xs;
+
+      color: var(--pix-neutral-500);
+      text-transform: uppercase;
+    }
+  }
+
+  &__jury-level {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+  }
+
+  &__jury-level-editor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100%;
+    padding: 0 8px;
+
+    section:nth-of-type(2) {
+      display: flex;
+      gap: 1rem;
+      margin: 8px 0;
+
+      button:last-child {
+        flex: 2;
+      }
+    }
   }
 }
