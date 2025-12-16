@@ -6,13 +6,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/ia-dit-ia/picto-ia-dit-ia.svg",
-    "description": "<p>Depuis quelques années, on entend beaucoup parler de l'IA, dans la presse, à la télévision et même dans les discours politiques. Mais, c'est quoi au juste l'IA ?<br>C'est ce que vous allez découvrir dans ce module.</p>",
+    "description": "<p>Depuis quelques années, on entend beaucoup parler de l’IA, dans la presse, à la télévision et même dans les discours politiques. Mais, c’est quoi au juste l’IA ?<br>C’est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
-      "<p>Connaître une définition simple de l'intelligence artificielle</p>",
+      "<p>Connaître une définition simple de l’intelligence artificielle</p>",
       "<p>Identifier des types de tâches que font les logiciels d’IA</p>",
-      "<p>Repérer l’utilisation de l'IA dans des services numériques quotidiens</p>"
+      "<p>Repérer l’utilisation de l’IA dans des services numériques quotidiens</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -31,7 +31,7 @@
               "element": {
                 "id": "e0a5a488-113c-4c30-89e0-354e874aa534",
                 "type": "text",
-                "content": "<p>Peut-être avez vous vu ces dernières années de nombreux titres d'articles parlant d'<strong>IA</strong> ?</p>"
+                "content": "<p>Peut-être avez vous vu ces dernières années de nombreux titres d’articles parlant d’<strong>IA</strong> ?</p>"
               }
             },
             {
@@ -39,7 +39,7 @@
               "element": {
                 "id": "f9de3bea-9094-4773-9e03-d72127d8f313",
                 "type": "text",
-                "content": "<p>Derrière ces deux lettres, «&nbsp;I&nbsp;» et «&nbsp;A&nbsp;», se cache l'<strong>Intelligence Artificielle</strong>.</p>"
+                "content": "<p>Derrière ces deux lettres, «&nbsp;I&nbsp;» et «&nbsp;A&nbsp;», se cache l’<strong>Intelligence Artificielle</strong>.</p>"
               }
             },
             {
@@ -47,7 +47,7 @@
               "element": {
                 "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
                 "type": "text",
-                "content": "<p><strong>À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</strong></p>"
+                "content": "<p><strong>À votre avis, de quand date l’expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</strong></p>"
               }
             },
             {
@@ -91,28 +91,28 @@
                       "label": "1986",
                       "feedback": {
                         "type": "neutral",
-                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "😐 Pas mal, mais c’est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1996",
                       "feedback": {
                         "type": "bad",
-                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "😐 Pas mal, mais c’est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "2006",
                       "feedback": {
                         "type": "bad",
-                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "❌ Et non, c’est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "2016",
                       "feedback": {
                         "type": "bad",
-                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "❌ Et non, c’est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. Alan Turing imagine un test dès 1950 pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     }
                   ]
@@ -131,7 +131,7 @@
               "element": {
                 "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
                 "type": "text",
-                "content": "<p>Avec la récente popularité de ChatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! ⌛</p>"
+                "content": "<p>Avec la récente popularité de ChatGPT et d’autres logiciels d’IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! ⌛</p>"
               }
             }
           ]
@@ -152,7 +152,7 @@
               "element": {
                 "id": "937b62e7-c4f5-479a-8e1f-afbe7881fa92",
                 "type": "text",
-                "content": "<p>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur !</p>"
+                "content": "<p>Et si on regardait plus précisément ce qu’est l’IA ? Pour cela, partons de l’ordinateur !</p>"
               }
             },
             {
@@ -227,7 +227,7 @@
                     {
                       "id": "53537649-ddc5-4971-a5a4-7998646fd2e9",
                       "type": "text",
-                      "content": "<p>Aujourd’hui, les <strong>ordinateurs </strong>peuvent <strong>réaliser toutes sortes de tâches</strong> :<br></p><ul><li>Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image. 👀<br></li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, analyser de grandes quantités de données. 🧠<br></li></ul>"
+                      "content": "<p>Aujourd’hui, les <strong>ordinateurs </strong>peuvent <strong>réaliser toutes sortes de tâches</strong>&nbsp;:<br></p><ul><li>Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image. 👀<br></li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, analyser de grandes quantités de données. 🧠<br></li></ul>"
                     }
                   ]
                 },
@@ -254,7 +254,7 @@
               "element": {
                 "id": "6405e82a-354c-4faf-935b-c81953cf9a2c",
                 "type": "text",
-                "content": "<p>Regardons plus en détail les tâches que réalisent les logiciels d’IA aujourd'hui, et dans quels cas on utilise ces logiciels.</p>"
+                "content": "<p>Regardons plus en détail les tâches que réalisent les logiciels d’IA aujourd’hui, et dans quels cas on utilise ces logiciels.</p>"
               }
             }
           ]
@@ -262,14 +262,14 @@
         {
           "id": "c1f654a7-5476-43d7-bf07-22d11b30337a",
           "type": "discovery",
-          "title": "Découverte - 2 : Où trouver des utilisations de l'IA ? ",
+          "title": "Découverte - 2 : Où trouver des utilisations de l’IA ? ",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "8dba133c-906f-4793-939f-015df7d2acce",
                 "type": "text",
-                "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</strong></p>"
+                "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Survolez l’image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d’intelligence artificielle.</strong></p>"
               }
             },
             {
@@ -294,7 +294,11 @@
                         "x2": 842,
                         "y2": 400
                       },
-                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs ».",
+                      "spot": {
+                        "x": 638,
+                        "y": 210
+                      }
                     },
                     {
                       "coords": {
@@ -303,7 +307,11 @@
                         "x2": 702,
                         "y2": 635
                       },
-                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
+                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur",
+                      "spot": {
+                        "x": 606,
+                        "y": 605
+                      }
                     },
                     {
                       "coords": {
@@ -312,7 +320,11 @@
                         "x2": 325,
                         "y2": 492
                       },
-                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »",
+                      "spot": {
+                        "x": 282,
+                        "y": 442
+                      }
                     },
                     {
                       "coords": {
@@ -321,8 +333,12 @@
                         "x2": 1042,
                         "y2": 725
                       },
-                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
-                      "tooltipPosition": "bottom"
+                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
+                      "tooltipPosition": "bottom",
+                      "spot": {
+                        "x": 924,
+                        "y": 581
+                      }
                     },
                     {
                       "coords": {
@@ -331,7 +347,11 @@
                         "x2": 318,
                         "y2": 916
                       },
-                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »",
+                      "spot": {
+                        "x": 201,
+                        "y": 825
+                      }
                     },
                     {
                       "coords": {
@@ -340,7 +360,53 @@
                         "x2": 1100,
                         "y2": 230
                       },
-                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "tooltipPosition": "bottom",
+                      "spot": {
+                        "x": 1054,
+                        "y": 187
+                      }
+                    },
+                    {
+                      "coords": {
+                        "x1": 1314,
+                        "y1": 30,
+                        "x2": 1252,
+                        "y2": 193
+                      },
+                      "spot": {
+                        "x": 1299,
+                        "y": 114
+                      },
+                      "info": "Lampe à ampoule basse consommation",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 565,
+                        "y1": 500,
+                        "x2": 607,
+                        "y2": 528
+                      },
+                      "spot": {
+                        "x": 584,
+                        "y": 512
+                      },
+                      "info": "Décoration en verre soufflé",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 105,
+                        "y1": 761,
+                        "x2": 4,
+                        "y2": 91
+                      },
+                      "spot": {
+                        "x": 44,
+                        "y": 362
+                      },
+                      "info": "Plante en pot, de type oiseau de paradis",
                       "tooltipPosition": "bottom"
                     }
                   ]
@@ -361,7 +427,7 @@
                     "size": 1,
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "nombre d'utilisation de l'IA",
+                    "ariaLabel": "nombre d’utilisation de l’IA",
                     "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
@@ -372,11 +438,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p>C'est ça ! L'IA est présente dans de nombreux appareils et services du quotidien, comme ici : le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
+                    "diagnosis": "<p>C’est ça ! L’IA est présente dans de nombreux appareils et services du quotidien, comme ici&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p><strong>Eh non. </strong></p><p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
+                    "diagnosis": "<p><strong>Eh non. </strong></p><p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d’IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
                   }
                 }
               }
@@ -386,14 +452,14 @@
         {
           "id": "16244191-1e74-4396-b9bd-d27ace391181",
           "type": "short-lesson",
-          "title": "Leçon - 2 : Où trouver des utilisations de l'IA",
+          "title": "Leçon - 2 : Où trouver des utilisations de l’IA",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
                 "type": "text",
-                "content": "<p>Ces exemples ne sont pas rares : aujourd’hui, de nombreux <strong>appareils et services du quotidien</strong> utilisent des <strong>logiciels d’intelligence artificielle</strong>.</p><p>Certains logiciels sont <strong>spécialisés </strong><strong>dans </strong><strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Des logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de <strong>réaliser des tâches</strong><strong> diverses</strong>&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes ...&nbsp;📝</p><p>Mais attention : même ces logiciels peuvent <strong>se tromper</strong> !</p>"
+                "content": "<p>Ces exemples ne sont pas rares&nbsp;: aujourd’hui, de nombreux <strong>appareils et services du quotidien</strong> utilisent des <strong>logiciels d’intelligence artificielle</strong>.</p><p>Certains logiciels sont <strong>spécialisés </strong><strong>dans </strong><strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Des logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de <strong>réaliser des tâches</strong><strong> diverses</strong>&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes ...&nbsp;📝</p><p>Mais attention&nbsp;: même ces logiciels peuvent <strong>se tromper</strong> !</p>"
               }
             }
           ]
@@ -401,14 +467,14 @@
         {
           "id": "7ee0c174-9a2b-413c-adee-682dc5ed1c70",
           "type": "discovery",
-          "title": "Découverte - 3 : IA et secteurs d'activité",
+          "title": "Découverte - 3 : IA et secteurs d’activité",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "a2b1291d-6043-4582-ac69-337835330c07",
                 "type": "text",
-                "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l'exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p>"
+                "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l’exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p>"
               }
             },
             {
@@ -460,14 +526,14 @@
         {
           "id": "fdf3c015-b354-4f35-a463-76cfc0de4b03",
           "type": "short-lesson",
-          "title": "Leçon - 3 : IA et secteurs d'activité",
+          "title": "Leçon - 3 : IA et secteurs d’activité",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
                 "type": "text",
-                "content": "<p>L’intelligence artificielle est utilisée dans <strong>tous les secteurs d’activité</strong>&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 </strong>Parfois, l'utilisation de l'intelligence artificielle permet de faire des <strong>découvertes </strong>ou des <strong>progrès </strong>importants. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Les médecins l'utilisent pour améliorer le diagnostic de maladies, comme les cancers.</li>    <li>Les scientifiques s’en servent pour améliorer les simulations du changement climatique.</li></ul>"
+                "content": "<p>L’intelligence artificielle est utilisée dans <strong>tous les secteurs d’activité</strong>&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 </strong>Parfois, l’utilisation de l’intelligence artificielle permet de faire des <strong>découvertes </strong>ou des <strong>progrès </strong>importants. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Les médecins l’utilisent pour améliorer le diagnostic de maladies, comme les cancers.</li>    <li>Les scientifiques s’en servent pour améliorer les simulations du changement climatique.</li></ul>"
               }
             }
           ]
@@ -488,7 +554,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
-                "content": "<ul>    <li>L’<strong>intelligence artificielle</strong> est un <strong>domaine scientifique</strong> qui étudie comment les machines peuvent <strong>imiter </strong>certains mécanismes de l<strong>’i</strong><strong>ntelligence humaine</strong>.</li>    <li>Certains logiciels d’IA sont<strong> spécialisés </strong>dans un type de tâche. D'autres peuvent&nbsp;réaliser plusieurs<strong> tâches différentes</strong>.&nbsp;👩‍💻</li>    <li>Les logiciels d’IA sont utilisés dans de nombreux<strong> appareils et services de notre quotidien</strong>.&nbsp;📱</li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès </strong>dans des domaines très variés.&nbsp;📈</li></ul>"
+                "content": "<ul>    <li>L’<strong>intelligence artificielle</strong> est un <strong>domaine scientifique</strong> qui étudie comment les machines peuvent <strong>imiter </strong>certains mécanismes de l<strong>’i</strong><strong>ntelligence humaine</strong>.</li>    <li>Certains logiciels d’IA sont<strong> spécialisés </strong>dans un type de tâche. D’autres peuvent&nbsp;réaliser plusieurs<strong> tâches différentes</strong>.&nbsp;👩‍💻</li>    <li>Les logiciels d’IA sont utilisés dans de nombreux<strong> appareils et services de notre quotidien</strong>.&nbsp;📱</li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès </strong>dans des domaines très variés.&nbsp;📈</li></ul>"
               }
             }
           ]
@@ -502,14 +568,14 @@
         {
           "id": "7a4f925d-782c-40aa-812c-01278b60caee",
           "type": "activity",
-          "title": "Activité d'application - 1 : Vrai ou faux ?",
+          "title": "Activité d’application - 1 : Vrai ou faux ?",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "0fea05ff-8378-40b9-b078-ee55015dc1e6",
                 "type": "text",
-                "content": "<p>Voyons si vous avez retenu l'essentiel.</p>"
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
             {
@@ -574,7 +640,7 @@
         {
           "id": "24445c57-5f45-4ead-8767-936c43913403",
           "type": "activity",
-          "title": " Activité d'application - 2 : Types d'IA",
+          "title": " Activité d’application - 2 : Types d’IA",
           "components": [
             {
               "type": "element",
@@ -592,7 +658,7 @@
                     {
                       "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                       "type": "qcu",
-                      "instruction": "<h5>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>🗣️ 🎤 Une application retrouve le titre d’une musique que vous lui chantez.</h5><p><br>Dans quel type de tâche est spécialisée l’IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -636,7 +702,7 @@
                     {
                       "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                       "type": "qcu",
-                      "instruction": "<h5>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h5><p><br>Dans quel type de tâche est spécialisée l’IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -680,7 +746,7 @@
                     {
                       "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                       "type": "qcu",
-                      "instruction": "<h5>📷 🏷️ Un logiciel ajoute automatiquement des mots-clés à des photographies.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>📷 🏷️ Un logiciel ajoute automatiquement des mots-clés à des photographies.</h5><p><br>Dans quel type de tâche est spécialisée l’IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -739,27 +805,27 @@
               "element": {
                 "id": "7289c873-1f53-4e62-8ed0-5462618547dd",
                 "type": "qcu-declarative",
-                "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des appareils ou des services avec de l’intelligence artificielle ?</p>",
+                "instruction": "<p>Maintenant, vous en savez plus sur ce qu’est l’intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des appareils ou des services avec de l’intelligence artificielle ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Oui.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
+                      "diagnosis": "<p>Pas étonnant ! L’intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
+                      "diagnosis": "<p>Étonnant ! L’intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>J'hésite.</p>",
+                    "content": "<p>J’hésite.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Vous n'êtes pas sûr, mais il y a de grandes chances que ce soit le cas. &nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
+                      "diagnosis": "<p>Vous n’êtes pas sûr, mais il y a de grandes chances que ce soit le cas. &nbsp;L’intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
                   }
                 ]
