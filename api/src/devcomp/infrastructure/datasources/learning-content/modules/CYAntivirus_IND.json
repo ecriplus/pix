@@ -512,7 +512,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>En cas de doute, vous pouvez relire le récapitulatif.<br></p>"
+                    "diagnosis": "<p>En cas de doute, vous pouvez relire le récapitulatif.</p>"
                   }
                 }
               }
@@ -657,7 +657,7 @@
               "element": {
                 "id": "b1ea1966-aa5e-4f49-ac18-f1e4d90d8fe9",
                 "type": "qcu-declarative",
-                "instruction": "<p>D’après vous, quelle serait la première action que vous pourriez mettre en place pour renforcer la protection de vos appareils ?<br></p>",
+                "instruction": "<p>D’après vous, quelle serait la première action que vous pourriez mettre en place pour renforcer la protection de vos appareils ?</p>",
                 "proposals": [
                   {
                     "id": "1",
