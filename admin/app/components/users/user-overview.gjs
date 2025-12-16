@@ -128,7 +128,7 @@ export default class UserOverview extends Component {
   async updateUserDetails(event) {
     event.preventDefault();
 
-    const isValid = await this.validator.validate(this.form);
+    const isValid = this.validator.validate(this.form);
     if (!isValid) return;
 
     this.args.user.firstName = this.form.firstName.trim();
@@ -173,17 +173,17 @@ export default class UserOverview extends Component {
 
   @action
   onChangeLanguage(language) {
-    this.form.lang = language;
+    this.form = { ...this.form, lang: language };
   }
 
   @action
   onLocaleChange(locale) {
-    this.form.locale = locale;
+    this.form = { ...this.form, locale };
   }
 
   @action
   updateFormValue(key, event) {
-    this.form[key] = event.target.value;
+    this.form = { ...this.form, [key]: event.target.value };
     this.validator.validateField(key, this.form[key]);
   }
 
@@ -421,7 +421,7 @@ class UserFormValidator extends FormValidator {
     };
 
     if (user.username) {
-      // When user already has a username, then username require and email is optional
+      // When user has a username, then username require and email is optional
       schema.email = Joi.string().email().max(255).allow(null).empty(['']).optional().messages({
         'string.email': "L'adresse e-mail n'a pas le bon format.",
         'string.max': "La longueur de l'adresse e-mail ne doit pas excéder 255 caractères.",
@@ -431,8 +431,8 @@ class UserFormValidator extends FormValidator {
         'string.empty': "L'identifiant ne peut pas être vide.",
         'string.max': "La longueur de l'identifiant ne doit pas excéder 255 caractères.",
       });
-    } else {
-      // When user does not have user, then email required
+    } else if (user.email) {
+      // When user has email and does not have username, then only email is required
       schema.email = Joi.string().email().max(255).empty(['', null]).required().messages({
         'any.required': "L'adresse e-mail ne peut pas être vide.",
         'string.empty': "L'adresse e-mail ne peut pas être vide.",
@@ -440,6 +440,7 @@ class UserFormValidator extends FormValidator {
         'string.max': "La longueur de l'adresse e-mail ne doit pas excéder 255 caractères.",
       });
     }
-    super(Joi.object(schema));
+
+    super(Joi.object(schema), { allowUnknown: true });
   }
 }
