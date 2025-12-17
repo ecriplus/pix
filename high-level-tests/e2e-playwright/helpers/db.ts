@@ -282,10 +282,11 @@ async function buildBaseDataForCertification() {
       competencesScoringConfiguration: null,
       challengesConfiguration: JSON.stringify({
         maximumAssessmentLength: 32,
-        challengesBetweenSameCompetence: null,
+        challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
         variationPercent: 0.5,
+        defaultCandidateCapacity: -3,
       }),
     })
     .returning('id');

@@ -2,13 +2,15 @@ import { Scopes } from '../../../../../../src/certification/shared/domain/models
 import { Version } from '../../../../../../src/certification/shared/domain/models/Version.js';
 import * as versionRepository from '../../../../../../src/certification/shared/infrastructure/repositories/version-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Certification | Evaluation | Infrastructure | Repository | Version', function () {
   describe('#getById', function () {
     it('should return a Version it exists', async function () {
       // given
-      const challengesConfiguration = { minChallenges: 5, maxChallenges: 10 };
+      const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 10,
+      });
 
       const versionId = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.PIX_PLUS_DROIT,
@@ -56,9 +58,12 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 90,
         globalScoringConfiguration: [{ config: 'old' }],
         competencesScoringConfiguration: [{ config: 'old' }],
-        challengesConfiguration: { config: 'old' },
+        challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({ defaultCandidateCapacity: 2 }),
       }).id;
 
+      const expectedChallengeConf = domainBuilder.buildFlashAlgorithmConfiguration({
+        defaultCandidateCapacity: -3,
+      });
       const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-06-01'),
@@ -66,7 +71,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 120,
         globalScoringConfiguration: [{ config: 'current' }],
         competencesScoringConfiguration: [{ config: 'current' }],
-        challengesConfiguration: { config: 'current' },
+        challengesConfiguration: expectedChallengeConf,
       }).id;
 
       databaseBuilder.factory.buildCertificationVersion({
@@ -76,7 +81,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 150,
         globalScoringConfiguration: [{ config: 'future' }],
         competencesScoringConfiguration: [{ config: 'future' }],
-        challengesConfiguration: { config: 'future' },
+        challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({ defaultCandidateCapacity: 1 }),
       });
 
       await databaseBuilder.commit();
@@ -91,7 +96,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
       expect(result).to.be.instanceOf(Version);
       expect(result.id).to.equal(expectedVersionId);
       expect(result.scope).to.equal(scope);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'current' });
+      expect(result.challengesConfiguration).to.deep.equal(expectedChallengeConf);
     });
 
     it('should only consider versions of the specified scope', async function () {
@@ -100,6 +105,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
       const targetScope = Scopes.PIX_PLUS_PRO_SANTE;
       const otherScope = Scopes.CORE;
 
+      const expectedChallengeConf = domainBuilder.buildFlashAlgorithmConfiguration({ defaultCandidateCapacity: 1 });
       const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
         scope: targetScope,
         startDate: new Date('2025-05-01'),
@@ -107,7 +113,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 100,
         globalScoringConfiguration: [{ target: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'target' },
+        challengesConfiguration: expectedChallengeConf,
       }).id;
 
       databaseBuilder.factory.buildCertificationVersion({
@@ -117,7 +123,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         assessmentDuration: 150,
         globalScoringConfiguration: [{ other: 'scope' }],
         competencesScoringConfiguration: null,
-        challengesConfiguration: { config: 'other' },
+        challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({ defaultCandidateCapacity: -3 }),
       });
 
       await databaseBuilder.commit();
@@ -132,7 +138,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
       expect(result).to.be.instanceOf(Version);
       expect(result.id).to.equal(expectedVersionId);
       expect(result.scope).to.equal(targetScope);
-      expect(result.challengesConfiguration).to.deep.equal({ config: 'target' });
+      expect(result.challengesConfiguration).to.deep.equal(expectedChallengeConf);
     });
 
     context('when reconciliation date equals startDate', function () {
@@ -141,6 +147,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         const reconciliationDate = new Date('2025-06-01');
         const scope = Scopes.PIX_PLUS_DROIT;
 
+        const expectedChallengeConf = domainBuilder.buildFlashAlgorithmConfiguration({ defaultCandidateCapacity: 1 });
         const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
           scope,
           startDate: reconciliationDate,
@@ -148,7 +155,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 100,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { minChallenges: 5 },
+          challengesConfiguration: expectedChallengeConf,
         }).id;
 
         await databaseBuilder.commit();
@@ -162,7 +169,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
         // then
         expect(result).to.be.instanceOf(Version);
         expect(result.id).to.equal(expectedVersionId);
-        expect(result.challengesConfiguration).to.deep.equal({ minChallenges: 5 });
+        expect(result.challengesConfiguration).to.deep.equal(expectedChallengeConf);
       });
     });
 
@@ -179,7 +186,6 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 90,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
         });
 
         await databaseBuilder.commit();
@@ -211,7 +217,6 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 90,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
         });
 
         databaseBuilder.factory.buildCertificationVersion({
@@ -221,7 +226,6 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repository
           assessmentDuration: 120,
           globalScoringConfiguration: null,
           competencesScoringConfiguration: null,
-          challengesConfiguration: { config: 'test' },
         });
 
         await databaseBuilder.commit();

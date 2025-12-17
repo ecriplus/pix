@@ -76,9 +76,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
         findByCertificationCourseAndVersion: sinon.stub(),
       };
 
-      version = domainBuilder.certification.evaluation.buildVersion({
+      version = domainBuilder.certification.shared.buildVersion({
         challengesConfiguration: {
           maximumAssessmentLength: 1,
+          defaultCandidateCapacity: -3,
         },
       });
     });
@@ -153,9 +154,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
         });
 
         const candidate = domainBuilder.buildCertificationCandidate({ reconciledAt: new Date('2021-01-01') });
-        const version = domainBuilder.certification.evaluation.buildVersion({
+        const version = domainBuilder.certification.shared.buildVersion({
           challengesConfiguration: {
             maximumAssessmentLength: 1,
+            defaultCandidateCapacity: -3,
           },
         });
 
@@ -356,9 +358,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             });
 
             const candidate = domainBuilder.buildCertificationCandidate({ reconciledAt: new Date('2021-01-01') });
-            const version = domainBuilder.certification.evaluation.buildVersion({
+            const version = domainBuilder.certification.shared.buildVersion({
               challengesConfiguration: {
                 maximumAssessmentLength: 1,
+                defaultCandidateCapacity: -3,
               },
             });
 
@@ -723,9 +726,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           certificationCourseId,
         });
         candidate = domainBuilder.buildCertificationCandidate({ reconciledAt: new Date('2021-01-01') });
-        version = domainBuilder.certification.evaluation.buildVersion({
+        version = domainBuilder.certification.shared.buildVersion({
           challengesConfiguration: {
             maximumAssessmentLength: 1,
+            defaultCandidateCapacity: -3,
           },
         });
         certificationAssessment = domainBuilder.buildCertificationAssessment({

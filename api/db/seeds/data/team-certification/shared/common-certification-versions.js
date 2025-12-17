@@ -239,6 +239,7 @@ const CHALLENGES_CONFIGURATION = {
   limitToOneQuestionPerTube: true,
   enablePassageByAllCompetences: true,
   variationPercent: 0.5,
+  defaultCandidateCapacity: -3,
 };
 
 const GLOBAL_SCORING_CONFIGURATION = [

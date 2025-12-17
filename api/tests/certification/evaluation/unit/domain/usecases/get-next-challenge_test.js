@@ -5,7 +5,6 @@ import {
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -72,7 +71,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      version = domainBuilder.certification.evaluation.buildVersion();
+      version = domainBuilder.certification.shared.buildVersion();
     });
 
     context('when there are challenges left to answer', function () {
@@ -130,7 +129,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -238,7 +237,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({
               allAnswers: [],
               challenges: [nextCalibratedChallenge, accessibleChallenge],
-              capacity: config.v3Certification.defaultCandidateCapacity,
+              capacity: version.challengesConfiguration.defaultCandidateCapacity,
               variationPercent: undefined,
             })
             .returns({ capacity: 0 });
@@ -401,7 +400,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [answerStillValid, answerWithOutdatedChallenge],
             challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -496,7 +495,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [nextCalibratedChallenge],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -606,7 +605,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             allAnswers: [],
             challenges: [calibratedChallengeWithOtherSkill],
-            capacity: config.v3Certification.defaultCandidateCapacity,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
             variationPercent: undefined,
           })
           .returns({ capacity: 0 });
@@ -679,7 +678,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         };
 
         const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        version = domainBuilder.certification.evaluation.buildVersion({ challengesConfiguration });
+        version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
         answerRepository.findByAssessmentExcludingChallengeIds
@@ -742,6 +741,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
         variationPercent: 0.2,
+        defaultCandidateCapacity: 0,
       })
         .map(([key, value]) => ({
           [key]: value,
@@ -757,7 +757,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             });
 
             const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(flashConfiguration);
-            version = domainBuilder.certification.evaluation.buildVersion({ challengesConfiguration });
+            version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();
@@ -795,7 +795,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({
                 allAnswers: [],
                 challenges: [nextCalibratedChallenge],
-                capacity: config.v3Certification.defaultCandidateCapacity,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
                 variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({ capacity: 0 });
@@ -876,7 +876,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        version = domainBuilder.certification.evaluation.buildVersion({ scope: Scopes.PIX_PLUS_EDU_CPE });
+        version = domainBuilder.certification.shared.buildVersion({ scope: Scopes.PIX_PLUS_EDU_CPE });
         versionRepository.getByScopeAndReconciliationDate
           .withArgs({
             scope: Scopes.PIX_PLUS_EDU_CPE,

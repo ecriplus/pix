@@ -13,7 +13,12 @@ export class Version {
     scope: Joi.string()
       .required()
       .valid(...Object.values(Scopes)),
-    challengesConfiguration: Joi.object().required(),
+    challengesConfiguration: Joi.object()
+      .keys({
+        defaultCandidateCapacity: Joi.number().required(),
+      })
+      .unknown(true)
+      .required(),
   });
 
   /**
@@ -21,6 +26,7 @@ export class Version {
    * @param {number} params.id - version identifier
    * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
    * @param {Object} params.challengesConfiguration - Challenges configuration
+   * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
    */
   constructor({ id, scope, challengesConfiguration }) {
     this.id = id;

@@ -58,7 +58,11 @@ describe('Unit | Certification | Configuration | Application | Router | certific
               'assessment-duration': 120,
               'global-scoring-configuration': null,
               'competences-scoring-configuration': null,
-              'challenges-configuration': { maximumAssessmentLength: 32, challengesBetweenSameCompetence: 0 },
+              'challenges-configuration': {
+                maximumAssessmentLength: 32,
+                challengesBetweenSameCompetence: 0,
+                defaultCandidateCapacity: -3,
+              },
             },
           },
         });
@@ -226,6 +230,29 @@ describe('Unit | Certification | Configuration | Application | Router | certific
               'expiration-date': null,
               'assessment-duration': 120,
               'challenges-configuration': { maximumAssessmentLength: 32 },
+            },
+          },
+        });
+
+        expect(response.statusCode).to.equal(400);
+        sinon.assert.notCalled(certificationVersionController.updateCertificationVersion);
+      });
+
+      it('should return 400 HTTP status code when the defaultCandidateCapacity is invalid', async function () {
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').returns(true);
+        sinon.stub(certificationVersionController, 'updateCertificationVersion').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const response = await httpTestServer.request('PATCH', '/api/admin/certification-versions/123', {
+          data: {
+            id: 'certification-versions',
+            attributes: {
+              scope: Scopes.PIX_PLUS_DROIT,
+              'start-date': '2024-01-01T00:00:00.000Z',
+              'expiration-date': null,
+              'assessment-duration': 120,
+              'challenges-configuration': { defaultCandidateCapacity: 'XXX' },
             },
           },
         });

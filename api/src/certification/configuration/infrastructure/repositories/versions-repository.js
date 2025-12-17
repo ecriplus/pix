@@ -6,6 +6,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Version } from '../../domain/models/Version.js';
 
 /**
@@ -151,6 +152,13 @@ const _toDomain = ({
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,
-    challengesConfiguration,
+    challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
+      maximumAssessmentLength: challengesConfiguration.maximumAssessmentLength,
+      challengesBetweenSameCompetence: challengesConfiguration.challengesBetweenSameCompetence,
+      limitToOneQuestionPerTube: challengesConfiguration.limitToOneQuestionPerTube,
+      enablePassageByAllCompetences: challengesConfiguration.enablePassageByAllCompetences,
+      variationPercent: challengesConfiguration.variationPercent,
+      defaultCandidateCapacity: challengesConfiguration.defaultCandidateCapacity,
+    }),
   });
 };

@@ -12,8 +12,8 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
       const locale = FRENCH_FRANCE;
       const accessibilityAdjustmentNeeded = false;
       const versionId = 1;
-      const challengesConfiguration = { minimumEstimatedSuccessRateRanges: [] };
-      const version = domainBuilder.certification.evaluation.buildVersion({
+      const challengesConfiguration = { minimumEstimatedSuccessRateRanges: [], defaultCandidateCapacity: -1 };
+      const version = domainBuilder.certification.shared.buildVersion({
         id: versionId,
         scope: Scopes.PIX_PLUS_DROIT,
         challengesConfiguration,

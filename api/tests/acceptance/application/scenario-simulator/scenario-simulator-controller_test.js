@@ -29,6 +29,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         limitToOneQuestionPerTube: false,
         enablePassageByAllCompetences: false,
         variationPercent: 0.5,
+        defaultCandidateCapacity: -3,
       },
     });
 

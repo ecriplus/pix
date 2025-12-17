@@ -306,7 +306,14 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(certificationVersion.scope).to.equal(complementaryCertification.key);
       expect(certificationVersion.expirationDate).to.be.null;
       expect(certificationVersion.assessmentDuration).to.equal(DEFAULT_SESSION_DURATION_MINUTES);
-      expect(certificationVersion.challengesConfiguration).to.deep.equal({});
+      expect(certificationVersion.challengesConfiguration).to.deep.equal({
+        challengesBetweenSameCompetence: 0,
+        variationPercent: 1,
+        defaultCandidateCapacity: 0,
+        maximumAssessmentLength: 32,
+        limitToOneQuestionPerTube: false,
+        enablePassageByAllCompetences: false,
+      });
       expect(certificationVersion.startDate).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')

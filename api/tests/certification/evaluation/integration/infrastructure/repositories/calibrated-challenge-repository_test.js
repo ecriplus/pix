@@ -808,7 +808,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             startDate: new Date('1977-10-19'),
             expirationDate: new Date('1977-10-20'),
           });
-          const archivedVersionWithNonCompatibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+          const archivedVersionWithNonCompatibleChallenge = domainBuilder.certification.shared.buildVersion({ id });
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
             challengeId: challengesLC[0].id,
             versionId: archivedVersionWithNonCompatibleChallenge.id,
@@ -850,7 +850,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             startDate: new Date('1977-10-19'),
             expirationDate: new Date('1977-10-20'),
           });
-          const archivedVersionWithEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+          const archivedVersionWithEligibleChallenge = domainBuilder.certification.shared.buildVersion({ id });
           const expectedDiscriminant = 2.221;
           const expectedDifficulty = 3.554;
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
@@ -936,7 +936,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
               startDate: new Date('1977-10-20'),
               expirationDate: null,
             });
-            const activeVersionWithNoEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+            const activeVersionWithNoEligibleChallenge = domainBuilder.certification.shared.buildVersion({ id });
             databaseBuilder.factory.buildCertificationFrameworksChallenge({
               challengeId: challengesLC[0].id,
               versionId: activeVersionWithNoEligibleChallenge.id,
@@ -991,7 +991,7 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
               startDate: new Date('1977-10-20'),
               expirationDate: null,
             });
-            const activeVersionWithEligibleChallenge = domainBuilder.certification.evaluation.buildVersion({ id });
+            const activeVersionWithEligibleChallenge = domainBuilder.certification.shared.buildVersion({ id });
             const expectedDiscriminant = 2.222;
             const expectedDifficulty = 3.555;
             databaseBuilder.factory.buildCertificationFrameworksChallenge({

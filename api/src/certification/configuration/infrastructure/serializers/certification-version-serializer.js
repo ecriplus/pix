@@ -1,5 +1,6 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Version } from '../../domain/models/Version.js';
 
 const { Serializer } = jsonapiSerializer;
@@ -23,6 +24,8 @@ export const serialize = (certificationVersion) => {
 export const deserialize = (json) => {
   const attributes = json.data.attributes;
 
+  const challengesConfiguration = new FlashAssessmentAlgorithmConfiguration(attributes['challenges-configuration']);
+
   return new Version({
     id: json.data.id,
     scope: attributes.scope,
@@ -31,6 +34,6 @@ export const deserialize = (json) => {
     assessmentDuration: attributes['assessment-duration'],
     globalScoringConfiguration: attributes['global-scoring-configuration'],
     competencesScoringConfiguration: attributes['competences-scoring-configuration'],
-    challengesConfiguration: attributes['challenges-configuration'],
+    challengesConfiguration,
   });
 };

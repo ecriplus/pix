@@ -3,6 +3,7 @@ import { Scopes } from '../../../../../src/certification/shared/domain/models/Sc
 import {
   createServer,
   databaseBuilder,
+  domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
@@ -20,7 +21,11 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     it('should get the active certification version for a given scope and return 200', async function () {
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
-      const challengesConfiguration = { maximumAssessmentLength: 20, limitToOneQuestionPerTube: false };
+      const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 20,
+        limitToOneQuestionPerTube: false,
+        defaultCandidateCapacity: -3,
+      });
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.CORE,
@@ -76,6 +81,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         maximumAssessmentLength: 20,
         challengesBetweenSameCompetence: 0,
         limitToOneQuestionPerTube: false,
+        defaultCandidateCapacity: -3,
       };
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
@@ -93,11 +99,12 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
-      const newChallengesConfiguration = {
+      const newChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 32,
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
-      };
+        defaultCandidateCapacity: -3,
+      });
 
       const options = {
         method: 'PATCH',

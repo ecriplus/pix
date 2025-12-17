@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../shared/domain/constants.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Version } from '../models/Version.js';
 
 export const createCertificationVersion = withTransaction(
@@ -44,7 +45,11 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
       startDate: dayjs().toDate(),
       expirationDate: null,
       assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-      challengesConfiguration: {},
+      challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
+        challengesBetweenSameCompetence: 0,
+        variationPercent: 1,
+        defaultCandidateCapacity: 0,
+      }),
     });
   }
 

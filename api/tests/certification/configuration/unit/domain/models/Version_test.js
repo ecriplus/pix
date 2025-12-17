@@ -1,11 +1,15 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Configuration | Domain | Models | Version', function () {
   it('should build a Version with all fields', function () {
     // given
+    const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+      maximumAssessmentLength: 10,
+      defaultCandidateCapacity: -8,
+    });
     const versionData = {
       id: 123,
       scope: Scopes.CORE,
@@ -14,7 +18,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
       assessmentDuration: 120,
       globalScoringConfiguration: [{ capacity: 2.5 }],
       competencesScoringConfiguration: [{ competence1: 'config' }],
-      challengesConfiguration: { minChallenges: 5, maxChallenges: 10 },
+      challengesConfiguration,
     };
 
     // when
@@ -27,6 +31,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
 
   it('should build a Version with optional fields as null', function () {
     // given
+    const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
     const versionData = {
       id: 456,
       scope: Scopes.PIX_PLUS_DROIT,
@@ -35,7 +40,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
       assessmentDuration: 90,
       globalScoringConfiguration: null,
       competencesScoringConfiguration: null,
-      challengesConfiguration: { minChallenges: 3 },
+      challengesConfiguration,
     };
 
     // when
@@ -52,10 +57,28 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
 
   it('should throw an EntityValidationError when trying to construct an invalid Version', function () {
     // given
+    const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
     const invalidData = {
       id: 123,
       scope: Scopes.CORE,
       startDate: 'not-a-date',
+      assessmentDuration: 120,
+      challengesConfiguration,
+    };
+
+    // when
+    const error = catchErrSync(() => new Version(invalidData))();
+
+    // then
+    expect(error).to.be.instanceOf(EntityValidationError);
+  });
+
+  it('should throw an EntityValidationError when trying to construct an invalid Challenges Configuration', function () {
+    // given
+    const invalidData = {
+      id: 123,
+      scope: Scopes.CORE,
+      startDate: new Date('2025-01-01'),
       assessmentDuration: 120,
       challengesConfiguration: { config: 'test' },
     };

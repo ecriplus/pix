@@ -10,7 +10,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 123,
         scope: Scopes.CORE,
-        challengesConfiguration: { minChallenges: 5, maxChallenges: 10 },
+        challengesConfiguration: { minChallenges: 5, maxChallenges: 10, defaultCandidateCapacity: 1 },
       };
 
       // when
@@ -20,7 +20,11 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(123);
       expect(version.scope).to.equal(Scopes.CORE);
-      expect(version.challengesConfiguration).to.deep.equal({ minChallenges: 5, maxChallenges: 10 });
+      expect(version.challengesConfiguration).to.deep.equal({
+        minChallenges: 5,
+        maxChallenges: 10,
+        defaultCandidateCapacity: 1,
+      });
     });
 
     it('should build a Version with PIX_PLUS_DROIT scope', function () {
@@ -28,7 +32,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 456,
         scope: Scopes.PIX_PLUS_DROIT,
-        challengesConfiguration: { config: 'test' },
+        challengesConfiguration: { defaultCandidateCapacity: -3 },
       };
 
       // when
@@ -38,7 +42,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(456);
       expect(version.scope).to.equal(Scopes.PIX_PLUS_DROIT);
-      expect(version.challengesConfiguration).to.deep.equal({ config: 'test' });
+      expect(version.challengesConfiguration).to.deep.equal({ defaultCandidateCapacity: -3 });
     });
 
     it('should throw an EntityValidationError when id is missing', function () {
@@ -110,12 +114,12 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(error).to.be.instanceOf(EntityValidationError);
     });
 
-    it('should throw an EntityValidationError when challengesConfiguration is not an object', function () {
+    it('should throw an EntityValidationError when challengesConfiguration is invalid', function () {
       // given
       const invalidData = {
         id: 123,
         scope: Scopes.CORE,
-        challengesConfiguration: 'not-an-object',
+        challengesConfiguration: { defaultCandidateCapacity: 'not-a-number' },
       };
 
       // when

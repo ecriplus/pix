@@ -3,6 +3,7 @@ import { Assessment } from '../../../../../src/shared/domain/models/Assessment.j
 import {
   createServer,
   databaseBuilder,
+  domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
@@ -49,6 +50,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           expirationDate: null,
           challengesConfiguration: {
             maximumAssessmentLength: 10,
+            defaultCandidateCapacity: -3,
           },
         });
 
@@ -391,9 +393,10 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         scope: 'CORE',
         startDate: new Date('2020-01-01'),
         expirationDate: null,
-        challengesConfiguration: {
+        challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({
           maximumAssessmentLength: 10,
-        },
+          defaultCandidateCapacity: -3,
+        }),
       });
 
       const user = await insertUserWithRoleSuperAdmin();

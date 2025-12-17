@@ -10,6 +10,7 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube: Joi.boolean(),
     enablePassageByAllCompetences: Joi.boolean(),
     variationPercent: Joi.number().min(0).max(1),
+    defaultCandidateCapacity: Joi.number().required(),
   });
 
   /**
@@ -19,6 +20,7 @@ export class FlashAssessmentAlgorithmConfiguration {
    * @param {boolean} [props.limitToOneQuestionPerTube] - limits questions to one per tube
    * @param {boolean} [props.enablePassageByAllCompetences] - enable or disable the passage through all competences
    * @param {number} props.variationPercent
+   * @param {number} [props.defaultCandidateCapacity] - starting candidate capacity for first challenge
    */
   constructor({
     maximumAssessmentLength = config.v3Certification.numberOfChallengesPerCourse,
@@ -26,12 +28,14 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube = false,
     enablePassageByAllCompetences = false,
     variationPercent,
+    defaultCandidateCapacity,
   } = {}) {
     this.maximumAssessmentLength = maximumAssessmentLength;
     this.challengesBetweenSameCompetence = challengesBetweenSameCompetence;
     this.limitToOneQuestionPerTube = limitToOneQuestionPerTube;
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
     this.variationPercent = variationPercent;
+    this.defaultCandidateCapacity = defaultCandidateCapacity;
     this.#validate();
   }
 

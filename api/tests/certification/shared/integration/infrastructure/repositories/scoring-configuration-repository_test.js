@@ -109,7 +109,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
       buildFramework({ competenceIndex, origin: 'external' });
       buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
-      const version = domainBuilder.certification.evaluation.buildVersion({
+      const version = domainBuilder.certification.shared.buildVersion({
         id: 1,
       });
 

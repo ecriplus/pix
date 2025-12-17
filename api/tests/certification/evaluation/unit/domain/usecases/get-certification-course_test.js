@@ -38,7 +38,7 @@ describe('Unit | UseCase | get-certification-course', function () {
     };
 
     const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 42 });
-    version = domainBuilder.certification.evaluation.buildVersion({ challengesConfiguration });
+    version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
   });
 
   it('should get the certificationCourse with numberOfChallenges from version', async function () {
