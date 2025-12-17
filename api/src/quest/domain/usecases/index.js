@@ -33,7 +33,7 @@ const dependencies = {
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
   targetProfileRepository: repositories.targetProfileRepository,
-  organizationLearnerPassageParticipationRepository: repositories.organizationLearnerPassageParticipationRepository,
+  organizationLearnerParticipationRepository: repositories.organizationLearnerParticipationRepository,
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
