@@ -511,9 +511,9 @@
                     },
                     {
                       "name": "Sécurité",
-                      "description": "Reconnaissance de visages pour identifier des personnes autorisées",
+                      "description": "Analyse des transactions financières pour détecter des comportements frauduleux",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/reco_fraude.svg"
                     }
                   ]
                 }
