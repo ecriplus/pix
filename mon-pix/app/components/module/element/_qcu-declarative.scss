@@ -58,6 +58,11 @@
 
 .element-qcu-declarative-feedback {
   &__report-button {
-    color: var(--pix-neutral-0);
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      color: var(--pix-neutral-0);
+    }
   }
 }
