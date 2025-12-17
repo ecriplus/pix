@@ -1,7 +1,7 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixEmbed from 'mon-pix/components/module/element/embed';
 import ENV from 'mon-pix/config/environment';
@@ -9,6 +9,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Embed', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -582,6 +583,79 @@ module('Integration | Component | Module | Embed', function (hooks) {
 
       // then
       assert.notOk(find('.element-embed-container__iframe').allow);
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is enabled', function () {
+    test('should display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+      const embed = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: false,
+        url: 'https://example.org',
+        height: 800,
+      };
+
+      // when
+      const screen = await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+
+    module('when user clicks on report button', function () {
+      test('should display issue-report modal with a form inside', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+        const embed = {
+          id: 'id',
+          title: 'title',
+          isCompletionRequired: false,
+          url: 'https://example.org',
+          height: 800,
+        };
+
+        // when
+        const screen = await render(
+          <template>
+            <div id="modal-container"></div>
+            <ModulixEmbed @embed={{embed}} />
+          </template>,
+        );
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+        await waitForDialog();
+
+        // then
+        assert.dom(screen.getByRole('dialog')).exists();
+        assert
+          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+          .exists();
+      });
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is disabled', function () {
+    test('should not display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
+      const embed = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: false,
+        url: 'https://example.org',
+        height: 800,
+      };
+
+      // when
+      const screen = await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
     });
   });
 });

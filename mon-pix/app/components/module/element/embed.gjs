@@ -7,6 +7,7 @@ import { t } from 'ember-intl';
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import didInsert from '../../../modifiers/modifier-did-insert';
 import { isEmbedAllowedOrigin } from '../../../utils/embed-allowed-origins';
+import ModulixIssueReportModal from '../issue-report/issue-report-modal';
 import ModuleElement from './module-element';
 
 export default class ModulixEmbed extends ModuleElement {
@@ -26,6 +27,7 @@ export default class ModulixEmbed extends ModuleElement {
 
   @service
   passageEvents;
+  @service featureToggles;
 
   @tracked
   isSimulatorLaunched = false;
@@ -35,6 +37,7 @@ export default class ModulixEmbed extends ModuleElement {
 
   @tracked
   embedHeight;
+  @tracked showModal = false;
 
   iframe;
   messageHandler = null;
@@ -137,6 +140,16 @@ export default class ModulixEmbed extends ModuleElement {
     window.removeEventListener('message', this.messageHandler);
   }
 
+  @action
+  onReportClick() {
+    this.showModal = true;
+  }
+
+  @action
+  hideModal() {
+    this.showModal = false;
+  }
+
   <template>
     <div class="element-embed">
       {{#if @embed.instruction}}
@@ -170,16 +183,28 @@ export default class ModulixEmbed extends ModuleElement {
         {{/unless}}
       </div>
 
-      {{#if this.resetButtonDisplayed}}
-        <div class="element-embed__reset">
+      <div class={{if this.resetButtonDisplayed "element-embed__buttons" "element-embed__button"}}>
+        {{#if this.resetButtonDisplayed}}
           <PixButton
+            class="element-embed-buttons__retry"
             @iconBefore="refresh"
             @variant="tertiary"
             @triggerAction={{this.resetEmbed}}
             aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
-        </div>
-      {{/if}}
+        {{/if}}
+
+        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
+          <PixButton
+            @variant="tertiary"
+            @iconBefore="flag"
+            @triggerAction={{this.onReportClick}}
+            aria-label={{t "pages.modulix.issue-report.aria-label"}}
+          >{{t "pages.modulix.issue-report.button"}}</PixButton>
+
+          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
+        {{/if}}
+      </div>
     </div>
   </template>
 }
