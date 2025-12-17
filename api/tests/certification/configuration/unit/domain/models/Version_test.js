@@ -77,7 +77,7 @@ describe('Unit | Certification | Configuration | Domain | Models | Version', fun
     // given
     const invalidData = {
       id: 123,
-      scope: Frameworks.CORE,
+      scope: Scopes.CORE,
       startDate: new Date('2025-01-01'),
       assessmentDuration: 120,
       challengesConfiguration: { config: 'test' },

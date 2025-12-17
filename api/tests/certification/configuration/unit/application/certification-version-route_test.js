@@ -248,7 +248,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
           data: {
             id: 'certification-versions',
             attributes: {
-              scope: Frameworks.PIX_PLUS_DROIT,
+              scope: Scopes.PIX_PLUS_DROIT,
               'start-date': '2024-01-01T00:00:00.000Z',
               'expiration-date': null,
               'assessment-duration': 120,
