@@ -27,13 +27,13 @@
       "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
     "fields": {
+      "actions": "Actions",
       "createdAt": "Date de création",
       "id": "ID",
       "internalName": "Nom interne",
       "name": "Nom",
       "required-field": "Champ obligatoire",
       "status": "Statut",
-      "actions": "Actions",
       "target-profile": {
         "category": {
           "name": "Catégorie",
@@ -441,20 +441,7 @@
       }
     },
     "combined-course-blueprints": {
-      "items": {
-        "module": "Module",
-        "targetProfile": "Profil Cible"
-      },
-      "list": {
-        "content": "Contenu",
-        "downloadButton": "Télécharger le CSV",
-        "table": {
-          "caption": "Liste des schémas de parcours combinés"
-        },
-        "title": "Tous les schémas de parcours combinés"
-      },
       "create": {
-        "title": "Créer un schéma de parcours",
         "addItemButton": "Ajouter",
         "contentFeedback": "Votre parcours n'a aucun élément ajouté.",
         "courseContent": "Contenu du parcours",
@@ -463,16 +450,33 @@
         "labels": {
           "description": "Description",
           "illustration": "Illustration",
+          "internal-name": "Nom du schéma",
           "itemId": "Identifiant",
           "module": "Module",
           "name": "Nom du parcours",
-          "target-profile": "Profil cible",
-          "internal-name": "Nom du schéma"
+          "target-profile": "Profil cible"
         },
         "notifications": {
-          "error": "Oups. Une erreur est survenue lors du téléchargement du CSV.",
+          "error": "Oups. Une erreur est survenue lors de la création du schéma de parcours.",
           "success": "Création du schéma de parcours réussi !"
-        }
+        },
+        "title": "Créer un schéma de parcours"
+      },
+      "items": {
+        "module": "Module",
+        "targetProfile": "Profil Cible"
+      },
+      "list": {
+        "content": "Contenu",
+        "downloadButton": "Télécharger le CSV",
+        "notifications": {
+          "error": "Oups. Une erreur est survenue lors du téléchargement du CSV.",
+          "success": "Téléchargement du schéma de parcours réussi !"
+        },
+        "table": {
+          "caption": "Liste des schémas de parcours combinés"
+        },
+        "title": "Tous les schémas de parcours combinés"
       }
     },
     "complementary-certifications": {

@@ -440,20 +440,7 @@
       }
     },
     "combined-course-blueprints": {
-      "items": {
-        "module": "Module",
-        "targetProfile": "Target profile"
-      },
-      "list": {
-        "content": "Content",
-        "downloadButton": "Download CSV",
-        "table": {
-          "caption": "List of combined course blueprints"
-        },
-        "title": "All learner courses"
-      },
       "create": {
-        "title": "Create a combined course blueprint",
         "addItemButton": "Add",
         "contentFeedback": "Your course does not have any items yet.",
         "courseContent": "Course content",
@@ -462,16 +449,33 @@
         "labels": {
           "description": " Description",
           "illustration": "Illustration",
+          "internal-name": "Blueprint name",
           "itemId": "Id",
           "module": "Module",
           "name": "Course name",
-          "target-profile": "Target profile",
-          "internal-name": "Blueprint name"
+          "target-profile": "Target profile"
         },
         "notifications": {
           "error": "Oups. Something went wrong. Please try again.",
-          "success": "Combined course blueprint created !"
-        }
+          "success": "Combined course blueprint created successfully!"
+        },
+        "title": "Create a combined course blueprint"
+      },
+      "items": {
+        "module": "Module",
+        "targetProfile": "Target profile"
+      },
+      "list": {
+        "content": "Content",
+        "downloadButton": "Download CSV",
+        "notifications": {
+          "error": "Oups. Something went wrong. Please try again.",
+          "success": "Combined course blueprint downloaded successfully!"
+        },
+        "table": {
+          "caption": "List of combined course blueprints"
+        },
+        "title": "All learner courses"
       }
     },
     "complementary-certifications": {
