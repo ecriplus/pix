@@ -18,6 +18,10 @@ export default class OidcLoginController extends Controller {
     return invitationStorage.get();
   }
 
+  get isWithInvitation() {
+    return Boolean(this.currentInvitation);
+  }
+
   get authenticationKey() {
     return oidcUserAuthenticationStorage.get()?.authenticationKey;
   }
