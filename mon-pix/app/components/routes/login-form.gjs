@@ -148,7 +148,10 @@ export default class LoginForm extends Component {
     const error = errorsApi?.responseJSON || errorsApi;
     const errorCode = get(error, 'errors[0].code');
 
-    if (errorCode === 'UNEXPECTED_USER_ACCOUNT') {
+    if (['MISSING_OR_INVALID_CREDENTIALS', 'USER_IS_TEMPORARY_BLOCKED'].includes(errorCode)) {
+      this.password = null;
+      this.errorMessage = this.errorMessages.getAuthenticationErrorMessage(error);
+    } else if (errorCode === 'UNEXPECTED_USER_ACCOUNT') {
       const unexpectedUserAccountErrorMessage = this.intl.t(
         'pages.sco-signup-or-login.login-form.unexpected-user-account-error',
       );
