@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
 import { service } from '@ember/service';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
@@ -60,22 +58,18 @@ export default class Certification extends Model {
 
   @hasMany('certification-issue-report', { async: true, inverse: 'certification' }) certificationIssueReports;
 
-  @computed('createdAt')
   get creationDate() {
     return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
-  @computed('completedAt')
   get completionDate() {
     return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
   }
 
-  @computed('status')
   get statusLabelAndValue() {
     return certificationStatuses.find((certificationStatus) => certificationStatus.value === this.status);
   }
 
-  @computed('isPublished')
   get publishedText() {
     const value = this.isPublished;
     return value ? 'Oui' : 'Non';
@@ -92,7 +86,6 @@ export default class Certification extends Model {
     );
   }
 
-  @computed('competencesWithMark')
   get indexedCompetences() {
     const competencesWithMarks = this.competencesWithMark;
     return competencesWithMarks.reduce((result, value) => {
@@ -101,7 +94,6 @@ export default class Certification extends Model {
     }, {});
   }
 
-  @computed('indexedCompetences')
   get competences() {
     const indexedCompetences = this.indexedCompetences;
     return Object.keys(indexedCompetences)

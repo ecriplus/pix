@@ -185,6 +185,14 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | neutr
                 skill: '',
                 isNeutralized: true,
               },
+              {
+                result: 'ok',
+                value: 'Dummy value',
+                challengeId: 'recABCDEF123456',
+                competence: '1.2',
+                skill: '',
+                isNeutralized: false,
+              },
             ];
 
             const certificationId = this.server.create('certification').id;
@@ -200,7 +208,8 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | neutr
             await clickByName('Dé-neutraliser');
 
             // then
-            assert.dom(await screen.findByRole('button', { name: 'Neutraliser' })).exists();
+            assert.dom(await screen.queryByRole('button', { name: 'Dé-neutraliser' })).doesNotExist();
+            assert.strictEqual((await screen.findAllByRole('button', { name: 'Neutraliser' })).length, 2);
           });
         });
 
@@ -217,6 +226,14 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | neutr
                 skill: '',
                 isNeutralized: false,
               },
+              {
+                result: 'ok',
+                value: 'Dummy value',
+                challengeId: 'recABCDEF123456',
+                competence: '1.2',
+                skill: '',
+                isNeutralized: true,
+              },
             ];
 
             const certificationId = this.server.create('certification').id;
@@ -232,7 +249,8 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | neutr
             await clickByName('Neutraliser');
 
             // then
-            assert.dom(await screen.findByRole('button', { name: 'Dé-neutraliser' })).exists();
+            assert.dom(await screen.queryByRole('button', { name: 'Neutraliser' })).doesNotExist();
+            assert.strictEqual((await screen.findAllByRole('button', { name: 'Dé-neutraliser' })).length, 2);
           });
         });
       });

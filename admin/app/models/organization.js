@@ -1,5 +1,3 @@
-// eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { equal } from '@ember/object/computed';
 import { service } from '@ember/service';
 import Model, { attr, hasMany } from '@ember-data/model';
 import pick from 'lodash/pick';
@@ -32,8 +30,6 @@ export default class Organization extends Model {
   @attr('string') administrationTeamName;
   @attr('number') countryCode;
   @attr('string') countryName;
-  @equal('type', 'SCO') isOrganizationSCO;
-  @equal('type', 'SUP') isOrganizationSUP;
 
   @hasMany('organization-membership', { async: true, inverse: 'organization' }) organizationMemberships;
   @hasMany('target-profile-summary', { async: true, inverse: null }) targetProfileSummaries;
@@ -63,6 +59,14 @@ export default class Organization extends Model {
       'SHOW_SKILLS',
       'PLACES_MANAGEMENT',
     );
+  }
+
+  get isOrganizationSCO() {
+    return this.type === 'SCO';
+  }
+
+  get isOrganizationSUP() {
+    return this.type === 'SUP';
   }
 
   get isLearnerImportEnabled() {

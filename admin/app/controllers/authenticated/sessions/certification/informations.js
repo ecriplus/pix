@@ -1,8 +1,5 @@
 import Controller from '@ember/controller';
-/* eslint-disable ember/no-computed-properties-in-native-classes */
 import { action } from '@ember/object';
-import { alias } from '@ember/object/computed';
-/* eslint-enable ember/no-computed-properties-in-native-classes */
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import cloneDeep from 'lodash/cloneDeep';
@@ -14,13 +11,15 @@ export default class CertificationInformationsController extends Controller {
   MAX_REACHABLE_LEVEL = ENV.APP.MAX_REACHABLE_LEVEL;
 
   // Properties
-  @alias('model.certification') certification;
   @service pixToast;
   @service intl;
 
   @tracked displayJuryLevelSelect = false;
-
   @tracked selectedJuryLevel = null;
+
+  get certification() {
+    return this.model.certification;
+  }
 
   get juryLevelOptions() {
     const translatedDefaultJuryOptions = this.certification.complementaryCertificationCourseResultWithExternal

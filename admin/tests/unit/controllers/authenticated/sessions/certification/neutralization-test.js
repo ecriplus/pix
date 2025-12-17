@@ -9,7 +9,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('neutralizes a challenge', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
@@ -34,7 +34,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('notifies a successful neutralization and updates model', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
@@ -67,7 +67,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('notifies a failed neutralization', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
@@ -101,7 +101,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('deneutralizes a challenge', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
@@ -126,7 +126,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('notifies a successful deneutralization and updates model', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
@@ -151,7 +151,7 @@ module('Unit | Controller | authenticated/sessions/certification/neutralization'
     test('notifies a failed deneutralization', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/sessions/certification/neutralization');
-      controller.certificationDetails = {
+      controller.model = {
         id: 'certificationCourseId',
         save: sinon.stub(),
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
