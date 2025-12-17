@@ -27,7 +27,13 @@ export default class CombineCourseBluePrintForm extends Component {
   constructor() {
     super(...arguments);
     this.blueprint = this.store.createRecord('combined-course-blueprint');
+    this.router.on('routeWillChange', () => {
+      if (this.blueprint.hasDirtyAttributes && !this.blueprint.isSaving) {
+        this.blueprint.unloadRecord();
+      }
+    });
   }
+
   @action
   addItem(event) {
     event.preventDefault();

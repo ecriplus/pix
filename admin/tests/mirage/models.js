@@ -28,6 +28,7 @@ import certifiedCompetence from './models/certified-competence';
 import certifiedProfile from './models/certified-profile';
 import certifiedSkill from './models/certified-skill';
 import certifiedTube from './models/certified-tube';
+import combinedCourseBlueprint from './models/combined-course-blueprint';
 import commonComplementaryCertificationCourseResult from './models/common-complementary-certification-course-result';
 import competence from './models/competence';
 import complementaryCertification from './models/complementary-certification';
@@ -100,6 +101,7 @@ export default {
   certifiedProfile,
   certifiedSkill,
   certifiedTube,
+  combinedCourseBlueprint,
   commonComplementaryCertificationCourseResult,
   competence,
   complementaryCertification,

@@ -180,7 +180,7 @@ Router.map(function () {
 
     this.route('combined-course-blueprints', function () {
       this.route('list');
-      this.route('create');
+      this.route('new');
     });
   });
 
