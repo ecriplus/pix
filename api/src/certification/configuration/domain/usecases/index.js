@@ -1,7 +1,10 @@
+import * as mailService from '../../../../../src/certification/shared/domain/services/mail-service.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
+import * as complementaryCertificationBadgesRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-badge-repository.js';
+import * as organizationRepository from '../../../complementary-certification/infrastructure/repositories/organization-repository.js';
 import * as targetProfileHistoryRepository from '../../../shared/infrastructure/repositories/target-profile-history-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
@@ -24,10 +27,13 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {centerRepository} CenterRepository
  * @typedef {challengeRepository} ChallengeRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
+ * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {frameworkChallengesRepository} FrameworkChallengesRepository
  * @typedef {consolidatedFrameworkRepository} ConsolidatedFrameworkRepository
  * @typedef {complementaryCertificationForTargetProfileAttachmentRepository} ComplementaryCertificationForTargetProfileAttachmentRepository
  * @typedef {learningContentRepository} LearningContentRepository
+ * @typedef {mailService} MailService
+ * @typedef {organizationRepository} OrganizationRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
  * @typedef {ScoBlockedAccessDatesRepository} ScoBlockedAccessDatesRepository
@@ -40,10 +46,13 @@ const dependencies = {
   centerRepository,
   ScoBlockedAccessDatesRepository,
   challengeRepository,
+  complementaryCertificationBadgesRepository,
   complementaryCertificationForTargetProfileAttachmentRepository,
   complementaryCertificationRepository,
   frameworkChallengesRepository,
   learningContentRepository,
+  mailService,
+  organizationRepository,
   skillRepository,
   targetProfileHistoryRepository,
   tubeRepository,
