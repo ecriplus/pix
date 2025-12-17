@@ -80,39 +80,6 @@ export default class CombineCourseBluePrintForm extends Component {
   }
 
   @action
-  async downloadCSV() {
-    try {
-      const jsonParsed = JSON.stringify({
-        name: this.name,
-        description: this.description,
-        illustration: this.illustration,
-        combinedCourseContent: this.combinedCourseItems,
-      });
-      const exportedData = [
-        ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
-        [this.organizationIds, this.creatorId, jsonParsed],
-      ];
-
-      const csvContent = exportedData
-        .map((line) => line.map((data) => `"${data.replaceAll('"', '""').replaceAll('\\""', '\\"')}"`).join(';'))
-        .join('\n');
-
-      const exportLink = document.createElement('a');
-      exportLink.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent));
-      exportLink.setAttribute('download', `${this.name}.csv`);
-      exportLink.click();
-
-      this.pixToast.sendSuccessNotification({
-        message: this.intl.t('components.combined-course-blueprints.create.notifications.success'),
-      });
-    } catch {
-      this.pixToast.sendErrorNotification({
-        message: this.intl.t('components.combined-course-blueprints.create.notifications.error'),
-      });
-    }
-  }
-
-  @action
   setData(key, e) {
     this.blueprint[key] = e.target.value;
   }
