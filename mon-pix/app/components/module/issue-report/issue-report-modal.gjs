@@ -44,6 +44,7 @@ export default class ModulixIssueReportModal extends Component {
   <template>
     <InElement @destinationId="modal-container">
       <PixModal
+        class="issue-report-modal"
         @title={{t "pages.modulix.issue-report.modal.title"}}
         @onCloseButtonClick={{this.hideModal}}
         @showModal={{@showModal}}
