@@ -23,8 +23,8 @@ export const createCombinedCourses = withTransaction(
       const { organizationIds: organizationIdsSeparatedByComma, creatorId, content } = row;
       const organizationIds = organizationIdsSeparatedByComma.split(',');
       const combinedCourseInformation = JSON.parse(content);
-      const combinedCourseTemplate = new CombinedCourseBlueprint(combinedCourseInformation);
-      const targetProfileIds = combinedCourseTemplate.targetProfileIds;
+      const combinedCourseBlueprint = new CombinedCourseBlueprint(combinedCourseInformation);
+      const targetProfileIds = combinedCourseBlueprint.targetProfileIds;
       const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
 
       for (const organizationId of organizationIds) {
@@ -39,7 +39,9 @@ export const createCombinedCourses = withTransaction(
 
           const hasRecommendableModulesInTargetProfile =
             recommendableModules.length > 0 &&
-            Boolean(recommendableModules.filter(({ moduleId }) => combinedCourseTemplate.moduleIds.includes(moduleId)));
+            Boolean(
+              recommendableModules.filter(({ moduleId }) => combinedCourseBlueprint.moduleIds.includes(moduleId)),
+            );
 
           let combinedCourseUrl = '/parcours/' + combinedCourseCode;
 
@@ -61,7 +63,7 @@ export const createCombinedCourses = withTransaction(
 
         const createdCampaigns = await campaignRepository.save({ campaigns });
 
-        const combinedCourse = combinedCourseTemplate.toCombinedCourse(
+        const combinedCourse = combinedCourseBlueprint.toCombinedCourse(
           combinedCourseCode,
           organizationId,
           createdCampaigns,
