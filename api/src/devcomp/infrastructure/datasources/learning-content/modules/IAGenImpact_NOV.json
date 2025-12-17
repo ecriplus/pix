@@ -891,7 +891,7 @@
                     {
                       "id": "366e03b8-b1d7-4e99-a0b2-2e8c8da3e64c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quelle est la météo  aujourd’hui ?</p>",
+                      "instruction": "<p>Quelle est la météo aujourd’hui ?</p>",
                       "proposals": [
                         {
                           "id": "1",
