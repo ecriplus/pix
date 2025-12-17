@@ -511,7 +511,7 @@
                     },
                     {
                       "name": "Sécurité",
-                      "description": "Analyse des transactions financières pour détecter des comportements frauduleux",
+                      "description": "Analyse des transactions financières pour détecter des fraudes",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
                       "image": "https://assets.pix.org/modules/ia-dit-ia/reco_fraude.svg"
                     }
