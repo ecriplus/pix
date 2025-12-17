@@ -46,6 +46,7 @@
       "login": "Se connecter sur Pix",
       "quit": "Quitter",
       "refresh-page": "Rafraîchir la page",
+      "send": "Envoyer",
       "show-less": "Afficher moins",
       "show-more": "Afficher plus",
       "sign-out": "Se déconnecter",
@@ -1684,7 +1685,14 @@
       },
       "issue-report": {
         "aria-label": "Envoyer un problème ou une suggestion",
-        "button": "Signaler"
+        "button": "Signaler",
+        "modal": {
+          "legend": "Informations requises pour envoyer un signalement",
+          "select-label": "Raison du signalement",
+          "textarea-label": "Commentaire",
+          "textarea-placeholder": "Décrivez-nous votre problème ou votre suggestion",
+          "title": "Signalement"
+        }
       },
       "modals": {
         "alternativeText": {

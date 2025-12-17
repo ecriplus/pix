@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | QCUDiscovery', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -158,6 +159,41 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+
+    module('when user clicks on report button', function () {
+      test('should display issue-report modal with a form inside', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+        const passageEventService = this.owner.lookup('service:passageEvents');
+        sinon.stub(passageEventService, 'record');
+        const onAnswerStub = sinon.stub();
+
+        const qcuDiscoveryElement = _getQcuDiscoveryElement();
+        const { proposals } = qcuDiscoveryElement;
+
+        // when
+        const screen = await render(
+          <template>
+            <div id="modal-container"></div>
+            <ModuleQcuDiscovery @element={{qcuDiscoveryElement}} @onAnswer={{onAnswerStub}} />
+          </template>,
+        );
+        const button1 = screen.getByRole('button', { name: proposals[0].content });
+        await click(button1);
+
+        await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+        await waitForDialog();
+
+        // then
+        assert.dom(screen.getByRole('dialog')).exists();
+        assert
+          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+          .exists();
+      });
     });
   });
 

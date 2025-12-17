@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | QCUDeclarative', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -139,6 +140,39 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+
+    module('when user clicks on report button', function () {
+      test('should display issue-report modal with a form inside', async function (assert) {
+        // given
+        const passageEventService = this.owner.lookup('service:passageEvents');
+        sinon.stub(passageEventService, 'record');
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+        const qcuDeclarativeElement = _getQcuDeclarativeElement();
+        const onAnswerStub = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <div id="modal-container"></div>
+            <ModuleQcuDeclarative @element={{qcuDeclarativeElement}} @onAnswer={{onAnswerStub}} />
+          </template>,
+        );
+        const firstButton = screen.getByRole('button', { name: qcuDeclarativeElement.proposals[0].content });
+        await click(firstButton);
+
+        await clock.tickAsync(VERIFY_RESPONSE_DELAY + 10);
+
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+        await waitForDialog();
+
+        // then
+        assert.dom(screen.getByRole('dialog')).exists();
+        assert
+          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+          .exists();
+      });
     });
   });
 

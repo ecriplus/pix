@@ -1,0 +1,40 @@
+@use 'pix-design-tokens/typography';
+
+.issue-report-modal-form {
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+  }
+
+  &__comment {
+    resize: none;
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    justify-content: flex-end;
+  }
+}
+
+.issue-report-modal {
+  &__mandatory {
+    @extend %pix-body-xs;
+
+    padding-bottom: var(--pix-spacing-2x);
+    color: var(--pix-neutral-800);
+  }
+
+
+  .pix-modal {
+    &__header {
+      border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
+    }
+
+    &__footer {
+      padding-bottom: var(--pix-spacing-4x);
+      border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
+    }
+  }
+}

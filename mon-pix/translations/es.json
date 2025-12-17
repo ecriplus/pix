@@ -46,6 +46,7 @@
       "login": "Iniciar sesión",
       "quit": "Salir",
       "refresh-page": "Actualizar la página",
+      "send": "Enviar",
       "show-less": "Mostrar menos",
       "show-more": "Ver más",
       "sign-out": "Desconectarse",
@@ -1672,7 +1673,14 @@
       },
       "issue-report": {
         "aria-label": "Enviar un problema o una sugerencia",
-        "button": "Señalar"
+        "button": "Señalar",
+        "modal": {
+          "legend": "Información necesaria para enviar una denuncia",
+          "select-label": "Motivo de la notificación",
+          "textarea-label": "Comentario",
+          "textarea-placeholder": "Descríbanos su problema o sugerencia",
+          "title": "Notificación"
+        }
       },
       "modals": {
         "alternativeText": {
