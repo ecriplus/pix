@@ -49,8 +49,16 @@
     display: flex;
     justify-content: flex-end;
 
-    button {
+    button:not([aria-disabled="true"]) {
       color: var(--pix-info-700);
+
+      &:hover {
+        color: var(--pix-info-500);
+      }
+
+      &:focus, &:active {
+        color: var(--pix-info-900);
+      }
     }
   }
 }
