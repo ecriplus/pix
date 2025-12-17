@@ -15,11 +15,17 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__container {
+    padding: var(--pix-spacing-2x);
+    border: 2px dashed var(--pix-primary-700);
+    border-radius: 8px 8px 8px 0;
+  }
 }
 
 .element-custom-draft-buttons {
   &__retry {
-    padding: 0 var(--pix-spacing-4x);
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
     background-color: var(--pix-primary-100);
     border: none;
     border-radius: 0 0 8px 8px;
