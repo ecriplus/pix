@@ -1,4 +1,4 @@
-import { sendTargetProfileNotifications } from '../../../../../../src/certification/complementary-certification/domain/usecases/send-target-profile-notifications.js';
+import { sendTargetProfileNotifications } from '../../../../../../src/certification/configuration/domain/usecases/send-target-profile-notifications.js';
 import { EmailingAttempt } from '../../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
