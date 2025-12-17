@@ -44,7 +44,7 @@
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "",
+                      "content": "a",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/biais-avances/2025-12-09-11_00_55-prog-_-explorateur-de-fichiers.png",
                         "alt": "Message de refus affiché par une IA générative"
