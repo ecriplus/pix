@@ -140,7 +140,7 @@
             {
               "type": "element",
               "element": {
-                "id": "e608bdea-cfaf-4aca-93e8-6668f4207158",
+                "id": "cfd8f2dd-1992-45ab-93e2-5b45a83af750",
                 "type": "text",
                 "content": "<p>Taper sur une touche, c’est <strong>appuyer une fois</strong> dessus et <strong>relâcher immédiatement</strong>.</p>"
               }
@@ -254,7 +254,7 @@
             {
               "type": "element",
               "element": {
-                "id": "ca6cabdb-6b85-45e1-b873-b809948eb628",
+                "id": "18d43580-47c8-4475-9680-248f91678a3c",
                 "type": "text",
                 "content": "<p>Une <strong>zone de texte</strong> est un endroit où on peut <strong>taper, modifier et effacer du texte</strong>. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"\\&quot;true\\&quot;\">🖱️</span><br></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
               }
@@ -297,7 +297,7 @@
             {
               "type": "element",
               "element": {
-                "id": "fdba280f-e339-4999-befd-33ab52885043",
+                "id": "2db275e3-b7e3-4fe9-b0af-54b4f92f5e85",
                 "type": "qrocm",
                 "instruction": "<p>À vous de jouer, la phrase ci-dessous comporte deux zones de texte. Complétez la phrase ainsi&nbsp;: «&nbsp;Le bocal de cornichons est vide.&nbsp;».</p>",
                 "proposals": [
