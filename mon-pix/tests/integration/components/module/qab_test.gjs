@@ -1,10 +1,12 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import ModuleQabElement, { NEXT_CARD_DELAY } from 'mon-pix/components/module/element/qab/qab';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | QAB', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -221,6 +223,88 @@ module('Integration | Component | Module | QAB', function (hooks) {
           ]);
         });
       });
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is enabled', function () {
+    test('should display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+      const qabElement = _getQabElement();
+      const onAnswerStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+
+      await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+      await clock.tickAsync(NEXT_CARD_DELAY);
+      await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+      await clock.tickAsync(NEXT_CARD_DELAY);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
+    });
+
+    module('when user clicks on report button', function () {
+      test('should display issue-report modal with a form inside', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+        const qabElement = _getQabElement();
+        const onAnswerStub = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <div id="modal-container"></div>
+            <ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} />
+          </template>,
+        );
+
+        await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+        await clock.tickAsync(NEXT_CARD_DELAY);
+        await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+        await clock.tickAsync(NEXT_CARD_DELAY);
+
+        /* Le runAllAsync permet de faire passer ce test, bloqué à cause du PixSelect présent dans la modale.
+        Le problème vient du modifier on-click-outside du PixSelect */
+        await clock.runAllAsync();
+
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+        await waitForDialog();
+
+        // then
+        assert.dom(screen.getByRole('dialog')).exists();
+        assert
+          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+          .exists();
+      });
+    });
+  });
+
+  module('when isModulixIssueReportDisplayed FT is disabled', function () {
+    test('should not display report button', async function (assert) {
+      // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
+      const qabElement = _getQabElement();
+      const onAnswerStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+
+      await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+      await clock.tickAsync(NEXT_CARD_DELAY);
+      await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+      await clock.tickAsync(NEXT_CARD_DELAY);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
     });
   });
 });
