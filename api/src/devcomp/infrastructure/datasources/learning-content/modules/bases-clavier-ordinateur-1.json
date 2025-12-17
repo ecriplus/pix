@@ -127,7 +127,7 @@
               "element": {
                 "id": "9b2e535b-e18d-47ba-bddd-0015c5064e35",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p><p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier</p>"
+                "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p><p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier.</p>"
               }
             }
           ]
@@ -193,7 +193,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/KosRqGF.png",
                 "alt": "",
-                "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>l’espace</li><li>les flêches directionnelles</li></ul>"
+                "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>l’espace</li><li>les flèches directionnelles</li></ul>"
               }
             }
           ]
