@@ -1,8 +1,8 @@
 import { service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
+import { jwtDecode } from 'jwt-decode';
 import ENV from 'pix-admin/config/environment';
-import { decodeToken } from 'pix-admin/helpers/jwt';
 
 export default class OidcAuthenticator extends BaseAuthenticator {
   @service session;
@@ -48,7 +48,7 @@ export default class OidcAuthenticator extends BaseAuthenticator {
       return Promise.reject(data);
     }
 
-    const decodedAccessToken = decodeToken(data.access_token);
+    const decodedAccessToken = jwtDecode(data.access_token);
 
     return {
       access_token: data.access_token,
