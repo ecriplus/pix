@@ -182,11 +182,7 @@ export default class OrganizationCreationForm extends Component {
             <PixInput
               @id="externalId"
               {{on "input" (fn this.handleInputChange "externalId")}}
-              placeholder={{concat
-                (t "common.words.example-abbr")
-                " "
-                (t "components.organizations.creation.external-id.placeholder")
-              }}
+              placeholder={{t "components.organizations.creation.external-id.placeholder"}}
             >
               <:label>{{t "components.organizations.creation.external-id.label"}}</:label>
             </PixInput>

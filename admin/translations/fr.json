@@ -680,7 +680,7 @@
         },
         "external-id": {
           "label": "Identifiant externe",
-          "placeholder": "Mon super idendifiant externe"
+          "placeholder": "Spécifier l'UAI, le SIRET etc"
         },
         "general-information": "Informations générales",
         "name": {

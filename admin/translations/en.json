@@ -678,7 +678,7 @@
         },
         "external-id": {
           "label": "External Identifier",
-          "placeholder": "My great external identifier"
+          "placeholder": "Specify the UAI, SIRET etc"
         },
         "general-information": "General information",
         "name": {
