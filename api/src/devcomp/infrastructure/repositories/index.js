@@ -2,6 +2,7 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import moduleDatasource from '../datasources/learning-content/module-datasource.js';
 import * as elementAnswerRepository from './element-answer-repository.js';
 import * as elementRepository from './element-repository.js';
+import * as moduleMetadataRepository from './module-metadata-repository.js';
 import * as moduleRepository from './module-repository.js';
 import * as passageEventRepository from './passage-event-repository.js';
 import * as passageRepository from './passage-repository.js';
@@ -16,6 +17,7 @@ const repositoriesWithoutInjectedDependencies = {
   elementAnswerRepository,
   elementRepository,
   moduleRepository,
+  moduleMetadataRepository,
   passageEventRepository,
   passageRepository,
   trainingRepository,
