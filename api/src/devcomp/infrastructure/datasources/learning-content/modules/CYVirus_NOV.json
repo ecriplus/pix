@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/CYVirus_NOV/picto_cyber_virus_nov.svg",
-    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.</p><p><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
+    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -124,7 +124,7 @@
               "element": {
                 "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
                 "type": "text",
-                "content": "<p><em>&gt;&gt;&gt; Plusieurs options possibles&nbsp;: flipcards, nouvelle modalité à trouver pour un genre de carrousel avec POI/Animation.</em></p><br><p><strong>Observez le fonctionnement des 3 ordinateurs ci-dessous. Certains ont été infectés par un logiciel malveillant, d’autres non.</strong></p>"
+                "content": "<p>Les <strong>trois ordinateurs</strong> ci-dessous ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leur fonctionnement puis répondez à la question.</p>"
               }
             },
             {
@@ -134,16 +134,15 @@
                   "elements": [
                     {
                       "id": "52263674-7a87-4b74-9b97-4633c9d844ab",
-                      "type": "custom-draft",
+                      "type": "short-video",
                       "title": "Ordinateur 1",
-                      "url": "https://1024pix.github.io/atelier-contenus/MCU/ralentissement.html",
-                      "instruction": "<p>Ordinateur 1</p>",
-                      "height": 400
+                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-lag.mp4",
+                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier est lent à réagir.</p>"
                     },
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
-                      "content": "<p>Le curseur bouge de manière saccadée et les pages web mettent très longtemps à charger.</p><br><p> ➜ <strong>Cet ordinateur n’a pas été infecté par un logiciel malveillant.</strong>&nbsp;</p><p>Ces ralentissements peuvent venir d’autres problèmes.</p>"
+                      "content": "<h5>Ordinateur n°1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong>&nbsp;</p>"
                     }
                   ]
                 },
@@ -151,16 +150,15 @@
                   "elements": [
                     {
                       "id": "4dfa2697-c551-4a54-94e6-07f93deb2c48",
-                      "type": "custom-draft",
+                      "type": "short-video",
                       "title": "Ordinateur 2",
-                      "url": "https://1024pix.github.io/atelier-contenus/MCU/fichiersmodifies.html",
-                      "instruction": "<p>Ordinateur 2</p>",
-                      "height": 400
+                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-rename.mp4",
+                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier est rapide. Les noms des fichiers ont été remplacés par des suites de caractères. Les extensions des fichiers ont été modifiées.</p>"
                     },
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
-                      "content": "<p>Certains fichiers ont été renommés avec des noms étranges et ne s’ouvrent plus.</p><br><p>➜ <strong>Cet ordinateur a été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur n°2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -168,8 +166,15 @@
                   "elements": [
                     {
                       "id": "931dee38-a756-44f9-98f9-d5e545d34c1e",
+                      "type": "short-video",
+                      "title": "Ordinateur 3",
+                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-normal2.mp4",
+                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier semble avoir un comportement normal.</p>"
+                    },
+                    {
+                      "id": "e1404c05-11b5-4531-a373-ede7492d4676",
                       "type": "text",
-                      "content": "<p><strong>Ordinateur 3</strong></p><br><p>Rien d’inhabituel&nbsp;: l’ordinateur fonctionne normalement. <em>(à montrer ?)</em></p><br><p>➜<strong> Cet ordinateur a aussi été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur n°3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 }
@@ -283,7 +288,7 @@
                   },
                   {
                     "id": "3ee045e5-4531-4d6b-a7bb-367a193d1c3e",
-                    "text": "Maxence télécharge sur un forum la version gratuite d’un logiciel connu.",
+                    "text": "Maxence télécharge sur un forum la version gratuite d’un logiciel payant connu.",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/cy_virus_nov/fichier-draft-forum.png",
                       "altText": ""
@@ -336,7 +341,7 @@
               "element": {
                 "id": "f13c6d5e-220d-48f4-8fc5-8b07ce0a7f31",
                 "type": "text",
-                "content": "<p>Mais en fait, d’où viennent ces logiciels malveillants ?</p>"
+                "content": "<p>Derrière ces <strong>pièges</strong>, il y a des <strong>pirates informatiques</strong>. </p><p>Les pirates <strong>cachent</strong> des logiciels malveillants dans des contenus ou des supports attirants.&nbsp;</p><p>Mais pourquoi les pirates veulent-ils vous piéger ?</p><br>"
               }
             }
           ]
@@ -351,7 +356,7 @@
               "element": {
                 "id": "3a24782c-14d5-4c2f-baf2-5da35f32694b",
                 "type": "text",
-                "content": "<p>Sans le savoir, vous avez peut-être des informations qui intéressent des personnes avec de mauvaises intentions&nbsp;: <strong>les pirates informatiques.</strong> Voyons cela ensemble.</p>"
+                "content": "<p>Sans le savoir, vous avez peut-être des informations qui intéressent <strong>les pirates informatiques.</strong></p><p><strong></strong> Voyons cela ensemble.</p>"
               }
             },
             {
@@ -377,7 +382,7 @@
               "element": {
                 "id": "e7efa1be-03f5-4844-830c-249636f8e122",
                 "type": "text",
-                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques.</strong> Le but des pirates est de <strong>nuire</strong> aux appareils et à leurs utilisateurs <strong>pour en tirer profit.</strong><br></p>"
+                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques.</strong> En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit.</strong><br></p>"
               }
             }
           ]
@@ -652,7 +657,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "<p>Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?&nbsp;</p><p>Pour le comprendre, prenons le cas d’Alice. </p><p>Alice a utilisé un ordinateur public à la bibliothèque, pour créer un document. Elle n’est pas allée sur Internet. Elle a enregistré son document sur sa clé USB pour pouvoir le rapporter chez elle.&nbsp;</p><p>En rentrant chez elle, elle découvre que les fichiers de sa clé USB ont changé de noms et certains ne s’ouvrent plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p><br>"
+                "content": "<p>Il existe plusieurs types de logiciels malveillants. Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?</p><p>Pour le comprendre, prenons le cas d’Alice. </p><p>Alice a utilisé un ordinateur public à la bibliothèque, pour rédiger un texte. Pour cela, elle a seulement créé un document et n’est pas allée sur Internet. Elle a enregistré son document sur sa clé USB pour pouvoir le rapporter chez elle.&nbsp;</p><p>En rentrant chez elle, elle découvre que son document a été renommé bizarrement et ne s’ouvre plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p><br>"
               }
             },
             {
@@ -660,14 +665,14 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "qrocm",
-                "instruction": "<p>À partir de cet exemple, complétez le texte suivant&nbsp;:</p>",
+                "instruction": "<p>Essayez de <strong>compléter le texte suivant</strong> pour décrire la situation d’Alice.<br></p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Un virus informatique est un </span>"
+                    "content": "<span>La clé USB d’Alice a été infectée par un virus informatique présent </span>"
                   },
                   {
-                    "input": "nature virus",
+                    "input": "origine virus",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
@@ -677,15 +682,71 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "ordinateur"
+                        "content": "sur l'ordinateur de la bibliothèque"
                       },
                       {
                         "id": "2",
-                        "content": "logiciel malveillant"
+                        "content": "dans le sac d'Alice"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>.</span>"
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Le virus s’est copié sur la clé USB </span>"
+                  },
+                  {
+                    "input": "action",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionner -",
+                    "defaultValue": "- Sélectionner -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "sans qu’Alice le voit"
                       },
                       {
-                        "id": "3",
-                        "content": "document"
+                        "id": "2",
+                        "content": "avec l’accord d’Alice"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>.</span>"
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Le document ne s’ouvre plus parce que </span>"
+                  },
+                  {
+                    "input": "problème",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionner -",
+                    "defaultValue": "- Sélectionner -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Alice l’a mal enregistré"
+                      },
+                      {
+                        "id": "2",
+                        "content": "le virus a modifié le fichier"
                       }
                     ],
                     "solutions": [
@@ -695,50 +756,16 @@
                   {
                     "type": "text",
                     "content": "<span>.</span>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>Il est capable de</span>"
-                  },
-                  {
-                    "input": "1",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "se propager d’un appareil à un autre"
-                      },
-                      {
-                        "id": "2",
-                        "content": "augmenter la vitesse d’un ordinateur"
-                      },
-                      {
-                        "id": "3",
-                        "content": "se connecter à Internet"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>, sans action de l’utilisateur.</span>"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Eh oui !</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est type particulier de logiciel malveillant. Il <strong>se propage seul</strong>, jusqu’à infecter des milliers d’appareils, et perturber leur fonctionnement.</p>"
+                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre</strong>, <strong>sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout-à-fait.</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est type particulier de logiciel malveillant. Il <strong>se propage seul</strong>, jusqu’à infecter des milliers d’appareils, et perturber leur fonctionnement.</p>"
+                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre, sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
                   }
                 }
               }
