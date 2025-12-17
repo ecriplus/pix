@@ -42,8 +42,8 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     await databaseBuilder.commit();
 
     const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""type"":""campaignParticipations"",""value"":${targetProfile.id}},{""type"":""passages"",""value"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a""},{""type"":""passages"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}
-${firstOrganizationId};"{""name"":""Combinix"",""combinedCourseContent"":[{""type"":""campaignParticipations"",""value"":${targetProfileWithTraining.id}},{""type"":""passages"",""value"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a""},{""type"":""passages"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}]}";${userId}
+${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluation"",""value"":${targetProfile.id}},{""type"":""module"",""value"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a""},{""type"":""module"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}
+${firstOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluation"",""value"":${targetProfileWithTraining.id}},{""type"":""module"",""value"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a""},{""type"":""module"",""value"":""f32a2238-4f65-4698-b486-15d51935d335""}]}";${userId}
 `;
 
     const payload = iconv.encode(input, 'UTF-8');
