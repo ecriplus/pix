@@ -794,4 +794,19 @@ function routes() {
     },
     200,
   );
+  this.post('/oidc/user/reconcile', (schema, request) => {
+    const params = parseQueryString(request.requestBody);
+    const identityProvider = params.identityProvider;
+    const foundUser = schema.prescribers.first();
+
+    return {
+      access_token:
+        'aaa.' +
+        btoa(
+          `{"user_id":${foundUser.id},"source":"oidc-externe","identity_provider":"${identityProvider}","iat":1545321469,"exp":4702193958}`,
+        ) +
+        '.bbb',
+      logout_url_uuid: null,
+    };
+  });
 }
