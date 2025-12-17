@@ -565,7 +565,7 @@ jobs:
 
   mon_pix_lint:
     executor:
-      name: node-docker
+      name: node-docker-medium
     working_directory: ~/pix/mon-pix
     steps:
       - attach_workspace:
