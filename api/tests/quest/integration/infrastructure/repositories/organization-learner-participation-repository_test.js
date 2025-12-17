@@ -1,11 +1,15 @@
+import dayjs from 'dayjs';
+import sinon from 'sinon';
+
+import { StatusesEnumValues } from '../../../../../src/devcomp/domain/models/module/UserModuleStatus.js';
 import {
   OrganizationLearnerParticipation,
   OrganizationLearnerParticipationStatuses,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import * as organizationLearnerParticipationPrescriptionRepository from '../../../../../src/quest/infrastructure/repositories/organization-learner-participation-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import * as organizationLearnerParticipationRepository from '../../../../../src/quest/infrastructure/repositories/organization-learner-participation-repository.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-describe('Quest | Integration | Infrastructure | repositories | organization learner passage participations', function () {
+describe('Quest | Integration | Infrastructure | repositories | organization learner participations', function () {
   describe('#findByOrganizationLearnerIdAndModuleIds', function () {
     it('should return participations given learner and modulesIds', async function () {
       // given
@@ -34,11 +38,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
 
       await databaseBuilder.commit();
 
-      const result =
-        await organizationLearnerParticipationPrescriptionRepository.findByOrganizationLearnerIdAndModuleIds({
-          organizationLearnerId: organizationLearner.id,
-          moduleIds: ['123-abcd', '456-abcd'],
-        });
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: ['123-abcd', '456-abcd'],
+      });
 
       expect(result).lengthOf(2);
       expect(result[0]).instanceOf(OrganizationLearnerParticipation);
@@ -46,11 +49,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
     });
 
     it('return null on empty result', async function () {
-      const result =
-        await organizationLearnerParticipationPrescriptionRepository.findByOrganizationLearnerIdAndModuleIds({
-          organizationLearnerId: 1234,
-          moduleIds: ['123-abcd'],
-        });
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
+        organizationLearnerId: 1234,
+        moduleIds: ['123-abcd'],
+      });
 
       expect(result).empty;
     });
@@ -65,11 +67,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       });
 
       await databaseBuilder.commit();
-      const result =
-        await organizationLearnerParticipationPrescriptionRepository.findByOrganizationLearnerIdAndModuleIds({
-          organizationLearnerId: organizationLearner.id,
-          moduleIds: ['123-abcd'],
-        });
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: ['123-abcd'],
+      });
 
       expect(result).empty;
     });
@@ -85,11 +86,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
 
       await databaseBuilder.commit();
 
-      const result =
-        await organizationLearnerParticipationPrescriptionRepository.findByOrganizationLearnerIdAndModuleIds({
-          organizationLearnerId: organizationLearner.id,
-          moduleIds: ['123-abcd'],
-        });
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: ['123-abcd'],
+      });
 
       expect(result[0].id).equal(passage.id);
       expect(result[0].organizationLearnerId).equal(passage.organizationLearnerId);
@@ -101,6 +101,189 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(result[0].status).equal(passage.status);
       expect(result[0].type).equal(passage.type);
       expect(result[0].referenceId).equal(passage.referenceId);
+    });
+  });
+  describe('#synchronize', function () {
+    let organizationLearner;
+    let modulesApi;
+    let organizationLearnerApi;
+    let clock;
+    const now = new Date('2022-11-28T12:00:00Z');
+
+    beforeEach(async function () {
+      organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
+
+      await databaseBuilder.commit();
+
+      modulesApi = {
+        getUserModuleStatuses: sinon.stub(),
+      };
+
+      organizationLearnerApi = {
+        get: sinon.stub(),
+      };
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
+    it('should create passage when participations does not exist', async function () {
+      //given
+      const moduleApiResponse = [
+        {
+          id: 1234,
+          status: 'COMPLETED',
+          createdAt: dayjs().subtract('30', 'days').toDate(),
+          updatedAt: now,
+          terminatedAt: null,
+        },
+      ];
+
+      const organizationLearnerApiResponse = {
+        id: organizationLearner.id,
+        firstName: organizationLearner.firstName,
+        lastName: organizationLearner.lastName,
+        isDisabled: organizationLearner.isDisabled,
+        userId: organizationLearner.userId,
+      };
+
+      organizationLearnerApi.get.withArgs(organizationLearner.id).resolves(organizationLearnerApiResponse);
+
+      modulesApi.getUserModuleStatuses
+        .withArgs({ userId: organizationLearner.userId, moduleIds: [1234] })
+        .resolves(moduleApiResponse);
+
+      // when
+      await organizationLearnerParticipationRepository.synchronize({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: [1234],
+        modulesApi,
+        organizationLearnerApi,
+      });
+
+      // then
+      const result = await knex('organization_learner_participations').where({
+        organizationLearnerId: organizationLearner.id,
+      });
+
+      expect(result).lengthOf(1);
+      expect(result[0].updatedAt).deep.equal(now);
+      expect(result[0].createdAt).deep.equal(dayjs().subtract('30', 'days').toDate());
+      expect(result[0].completedAt).equal(null);
+      expect(result[0].referenceId).deep.equal('1234');
+    });
+
+    it('should update passage when participation already exists', async function () {
+      const learnerParticipationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        status: 'STARTED',
+        organizationLearnerId: organizationLearner.id,
+        moduleId: '1234-abcdef',
+        createdAt: dayjs().subtract('40', 'days').toDate(),
+        updatedAt: dayjs().subtract('35', 'days').toDate(),
+        completedAt: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const moduleApiResponse = [
+        {
+          id: '1234-abcdef',
+          status: 'COMPLETED',
+          createdAt: dayjs().subtract('30', 'days').toDate(),
+          updatedAt: now,
+          terminatedAt: now,
+        },
+      ];
+      modulesApi.getUserModuleStatuses
+        .withArgs({ userId: organizationLearner.userId, moduleIds: ['1234-abcdef'] })
+        .resolves(moduleApiResponse);
+
+      const organizationLearnerApiResponse = {
+        id: organizationLearner.id,
+        firstName: organizationLearner.firstName,
+        lastName: organizationLearner.lastName,
+        isDisabled: organizationLearner.isDisabled,
+        userId: organizationLearner.userId,
+      };
+
+      organizationLearnerApi.get.withArgs(organizationLearner.id).resolves(organizationLearnerApiResponse);
+
+      // when
+      await organizationLearnerParticipationRepository.synchronize({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: ['1234-abcdef'],
+        modulesApi,
+        organizationLearnerApi,
+      });
+
+      // then
+      const result = await knex('organization_learner_participations')
+        .select(
+          'organization_learner_participations.id',
+          'updatedAt',
+          'createdAt',
+          'completedAt',
+          'status',
+          'referenceId',
+        )
+        .where({ organizationLearnerId: organizationLearner.id });
+
+      expect(result).lengthOf(1);
+      expect(result[0].id).equal(learnerParticipationId);
+      expect(result[0].status).deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
+      expect(result[0].updatedAt).deep.equal(now);
+      expect(result[0].referenceId).deep.equal('1234-abcdef');
+      expect(result[0].createdAt).deep.equal(dayjs().subtract('30', 'days').toDate());
+      expect(result[0].completedAt).deep.equal(now);
+    });
+
+    it('should insert more than one line when needed', async function () {
+      //given
+      const moduleApiResponse = [
+        {
+          id: '1234',
+          status: StatusesEnumValues.COMPLETED,
+          createdAt: dayjs().subtract('30', 'days').toDate(),
+          updatedAt: now,
+          terminatedAt: null,
+        },
+        {
+          id: '4567',
+          status: StatusesEnumValues.IN_PROGRESS,
+          createdAt: dayjs().subtract('50', 'days').toDate(),
+          updatedAt: dayjs().subtract('10', 'days').toDate(),
+          terminatedAt: null,
+        },
+      ];
+      modulesApi.getUserModuleStatuses
+        .withArgs({ userId: organizationLearner.userId, moduleIds: ['1234', '4567'] })
+        .resolves(moduleApiResponse);
+
+      const organizationLearnerApiResponse = {
+        id: organizationLearner.id,
+        firstName: organizationLearner.firstName,
+        lastName: organizationLearner.lastName,
+        isDisabled: organizationLearner.isDisabled,
+        userId: organizationLearner.userId,
+      };
+
+      organizationLearnerApi.get.withArgs(organizationLearner.id).resolves(organizationLearnerApiResponse);
+      // when
+      await organizationLearnerParticipationRepository.synchronize({
+        organizationLearnerId: organizationLearner.id,
+        moduleIds: ['1234', '4567'],
+        modulesApi,
+        organizationLearnerApi,
+      });
+
+      // then
+      const result = await knex('organization_learner_participations').where({
+        organizationLearnerId: organizationLearner.id,
+      });
+
+      expect(result).lengthOf(2);
     });
   });
 });

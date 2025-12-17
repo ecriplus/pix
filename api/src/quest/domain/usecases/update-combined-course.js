@@ -7,7 +7,7 @@ export async function updateCombinedCourse({
   combinedCourseRepository,
   combinedCourseParticipationRepository,
   organizationLearnerPrescriptionRepository,
-  organizationLearnerPassageParticipationRepository,
+  organizationLearnerParticipationRepository,
   combinedCourseDetailsService,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
@@ -33,7 +33,7 @@ export async function updateCombinedCourse({
     return null;
   }
 
-  await organizationLearnerPassageParticipationRepository.synchronize({
+  await organizationLearnerParticipationRepository.synchronize({
     organizationLearnerId,
     moduleIds: moduleToSynchronizeIds,
   });

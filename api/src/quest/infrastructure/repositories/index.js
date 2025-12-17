@@ -21,7 +21,6 @@ import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
 import * as organizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
-import * as organizationLearnerPassageParticipationRepository from './organization-learner-passage-participation-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as recommendedModuleRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
@@ -38,7 +37,7 @@ const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewar
 const repositoriesWithoutInjectedDependencies = {
   accessCodeRepository,
   eligibilityRepository,
-  organizationLearnerPassageParticipationRepository,
+  organizationLearnerParticipationRepository,
   moduleRepository,
   successRepository,
   rewardRepository,
@@ -55,7 +54,6 @@ const repositoriesWithoutInjectedDependencies = {
 };
 
 const dependencies = {
-  organizationLearnerParticipationRepository,
   organizationLearnerWithParticipationApi,
   knowledgeElementsApi,
   campaignsApi,
