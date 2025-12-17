@@ -1,5 +1,10 @@
 import Joi from 'joi';
 
+import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
+import { CombinedCourse } from './CombinedCourse.js';
+import { CRITERION_COMPARISONS, Quest, REQUIREMENT_COMPARISONS, REQUIREMENT_TYPES } from './Quest.js';
+import { buildRequirement } from './Requirement.js';
+
 export class CombinedCourseBlueprint {
   constructor({ id, name, internalName, description, illustration, content, createdAt, updatedAt }) {
     this.id = id;
@@ -12,6 +17,73 @@ export class CombinedCourseBlueprint {
     this.updatedAt = updatedAt;
   }
 
+  get targetProfileIds() {
+    return this.content
+      .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION)
+      .map(({ value }) => parseInt(value));
+  }
+
+  get moduleIds() {
+    return this.content
+      .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
+      .map(({ value }) => value);
+  }
+
+  toCombinedCourse(code, organizationId, campaigns) {
+    const successRequirements = this.content.map((requirement) => {
+      if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
+        const requirementTargetProfileId = requirement.value;
+        const campaignId = campaigns.find(({ targetProfileId }) => targetProfileId === requirementTargetProfileId).id;
+        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          campaignId,
+        });
+      } else if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
+        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          moduleId: requirement.value,
+        });
+      } else {
+        return requirement;
+      }
+    });
+
+    const createdAt = new Date();
+
+    const quest = new Quest({
+      createdAt: createdAt,
+      updatedAt: createdAt,
+      rewardType: null,
+      rewardId: null,
+      eligibilityRequirements: [],
+      successRequirements,
+    });
+
+    return new CombinedCourse(
+      { name: this.name, code, organizationId, description: this.description, illustration: this.illustration },
+      quest,
+    );
+  }
+
+  static buildRequirementForCombinedCourse({ campaignId, moduleId }) {
+    if (campaignId) {
+      return buildRequirement({
+        requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
+        data: {
+          campaignId: { data: campaignId, comparison: CRITERION_COMPARISONS.EQUAL },
+          status: { data: CampaignParticipationStatuses.SHARED, comparison: CRITERION_COMPARISONS.EQUAL },
+        },
+      });
+    } else if (moduleId) {
+      return buildRequirement({
+        requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
+        data: {
+          moduleId: { data: moduleId, comparison: CRITERION_COMPARISONS.EQUAL },
+          isTerminated: { data: true, comparison: CRITERION_COMPARISONS.EQUAL },
+        },
+      });
+    }
+  }
   static buildContentItems(items) {
     return items.map(({ moduleId, targetProfileId }) =>
       moduleId
