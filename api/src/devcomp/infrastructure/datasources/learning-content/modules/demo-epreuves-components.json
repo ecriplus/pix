@@ -9,9 +9,7 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement tous les composants Pix Épreuves.</p>",
     "duration": 2,
     "level": "novice",
-    "objectives": [
-      "<p>Non régression sur les composants Pix Épreuves.</p>"
-    ],
+    "objectives": ["<p>Non régression sur les composants Pix Épreuves.</p>"],
     "tabletSupport": "comfortable"
   },
   "sections": [
@@ -260,11 +258,7 @@
                   ],
                   "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                   "llmMessage": "On peut mettre du ",
-                  "wordsToAdd": [
-                    "beurre",
-                    "et",
-                    "du ?"
-                  ]
+                  "wordsToAdd": ["beurre", "et", "du"]
                 }
               }
             }
