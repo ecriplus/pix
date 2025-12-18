@@ -1,7 +1,7 @@
 {
   "id": "7ee3ef2d-b29d-4029-86cf-f88ceb4ddea2",
   "shortId": "e89cf72c",
-  "slug": "tmp-centre-de-donnees-mieux-faire",
+  "slug": "centre-de-donnees-mieux-faire",
   "title": "Centre de données : peut-on mieux faire ?",
   "isBeta": true,
   "details": {
@@ -372,7 +372,7 @@
                             }
                           },
                           {
-                            "label": "Elle reste stable.",
+                            "label": "Elle reste stable. ⚡",
                             "feedback": {
                               "type": "close",
                               "text": "Eh non ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d'avantage les serveurs."
@@ -383,6 +383,46 @@
                             "feedback": {
                               "type": "bad",
                               "text": "Bien vu ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d'avantage les serveurs."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "420482f8-f04b-441a-a8ed-9146b4787a71",
+                      "type": "text",
+                      "content": "<p>Bob choisit de supprimer une fonctionnalité peu utilisée.</p>"
+                    },
+                    {
+                      "id": "14580542-77e4-454a-9dea-991225bf4c73",
+                      "type": "custom",
+                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "Elle diminue. 🔋",
+                            "feedback": {
+                              "type": "good",
+                              "text": "Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs."
+                            }
+                          },
+                          {
+                            "label": "Elle reste stable. ⚡",
+                            "feedback": {
+                              "type": "close",
+                              "text": "Eh non ! Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs. "
+                            }
+                          },
+                          {
+                            "label": "Elle augmente. 🪫",
+                            "feedback": {
+                              "type": "neutral",
+                              "text": "Eh non ! Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs."
                             }
                           }
                         ]
