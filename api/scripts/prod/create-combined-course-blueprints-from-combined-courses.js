@@ -22,15 +22,22 @@ export class CreateCombinedCourseBlueprint extends Script {
     });
   }
 
-  async handle({ options }) {
+  async handle({ options, logger }) {
     const { dryRun } = options;
     const trx = await knex.transaction();
     const blueprintMap = new Map();
-
     const combinedCoursesWithoutBlueprint = await trx('combined_courses')
       .join('quests', 'questId', 'quests.id')
       .select('combined_courses.*', 'successRequirements')
       .whereNull('combinedCourseBlueprintId');
+
+    if (combinedCoursesWithoutBlueprint.length === 0) {
+      logger.info(`Nothing to update...`);
+      await trx.rollback();
+      return;
+    }
+
+    logger.info(`Try to update ${combinedCoursesWithoutBlueprint.length} combined_courses rows`);
 
     for (const combinedCourse of combinedCoursesWithoutBlueprint) {
       const details = new CombinedCourseDetails(combinedCourse, combinedCourse);
@@ -54,9 +61,14 @@ export class CreateCombinedCourseBlueprint extends Script {
       await trx('combined_courses').update({ combinedCourseBlueprintId: blueprintId }).where('id', combinedCourse.id);
     }
 
+    logger.info(`Created ${blueprintMap.size} combined_course_blueprints`);
+    logger.info(`Successfully updated ${combinedCoursesWithoutBlueprint.length} combined_courses`);
+
     if (dryRun) {
       await trx.rollback();
+      logger.info(`Rollback updates - use --dryRun true to persist changes`);
     } else {
+      logger.info(`Commit updates...`);
       await trx.commit();
     }
   }
