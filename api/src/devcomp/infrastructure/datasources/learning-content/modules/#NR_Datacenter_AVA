@@ -264,7 +264,7 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
-                "content": "<p>Bob travaille dans une entreprise qui crée des sites web.</p><p>Pour chaque action de Bob, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d'énergie des centre de données ?</p><p>Il veut limiter la sollicitation des centres de données lorsque les internautes utilisent le site web. </p><ul><li>1. Le format des fichiers&gt; choisit des images plutôt que des vidéos (augmente)</li><li>2. La taille des fichiers&gt; Compresser le fichier et choisir le plus léger (diminue)</li><li>3. Le player automatique&gt; Le désactiver (augmente)</li><li>4. Supprimer une fonctionnalité peu utilisée (diminue)<br><br></li></ul>"
+                "content": "<p>Bob travaille dans une entreprise qui crée des sites web.</p><p>Pour chaque action de Bob, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d'énergie des centre de données ?&nbsp;🤔</p>"
               }
             },
             {
@@ -343,6 +343,46 @@
                             "feedback": {
                               "type": "bad",
                               "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "523a1d70-ea60-498a-be0a-554d14e2907c",
+                      "type": "text",
+                      "content": "<p>Bob choisit d'activer le player automatique sur les vidéos.</p>"
+                    },
+                    {
+                      "id": "3e486e8b-cca0-45c5-b022-b40574eeb8bc",
+                      "type": "custom",
+                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "Elle diminue. 🔋",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Eh non ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d'avantage les serveurs."
+                            }
+                          },
+                          {
+                            "label": "Elle reste stable.",
+                            "feedback": {
+                              "type": "close",
+                              "text": "Eh non ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d'avantage les serveurs."
+                            }
+                          },
+                          {
+                            "label": "Elle augmente. 🪫",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Bien vu ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d'avantage les serveurs."
                             }
                           }
                         ]
