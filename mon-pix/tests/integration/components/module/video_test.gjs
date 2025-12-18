@@ -145,7 +145,7 @@ module('Integration | Component | Module | Video', function (hooks) {
       await render(<template><ModulixVideoElement @video={{videoElement}} /></template>);
 
       // then
-      assert.dom('video').hasAttribute('data-poster', 'https://example.org/modulix/video-poster.jpg');
+      assert.dom('video').hasAttribute('poster', 'https://example.org/modulix/video-poster.jpg');
     });
   });
 

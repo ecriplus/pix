@@ -59,6 +59,7 @@ export default class ModulixVideoElement extends Component {
           playsinline
           controls
           crossorigin
+          poster={{@video.poster}}
           {{on "play" this.onPlay}}
           data-poster={{@video.poster}}
         >
