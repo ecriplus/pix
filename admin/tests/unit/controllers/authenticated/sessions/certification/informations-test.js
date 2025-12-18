@@ -18,7 +18,6 @@ module('Unit | Controller | authenticated/sessions/certification/informations', 
     };
   };
 
-  const aNewCompetenceCode = '4.2';
   const anExistingCompetenceCode = '1.1';
   const anExistingCompetenceWithNoScoreCode = '1.2';
   const anExistingCompetenceWithNoLevelCode = '1.3';
@@ -127,88 +126,6 @@ module('Unit | Controller | authenticated/sessions/certification/informations', 
         { value: 'REJECTED', label: 'Rejetée' },
         { value: 'UNSET', label: 'En attente' },
       ]);
-    });
-  });
-
-  module('#onUpdateScore', () => {
-    module('when there is a given score', function () {
-      test('it replaces competence score correctly', async function (assert) {
-        // When
-        await controller.onUpdateScore(anExistingCompetenceCode, '55');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(anExistingCompetenceCode, competences);
-
-        assert.strictEqual(aCompetence.score, 55);
-      });
-    });
-
-    module('when there is no given score and competence has no level', function () {
-      test('it removes competence correctly (score)', async function (assert) {
-        // When
-        await controller.onUpdateScore(anExistingCompetenceWithNoLevelCode, '');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(anExistingCompetenceWithNoLevelCode, competences);
-
-        assert.notOk(aCompetence);
-      });
-    });
-
-    module('when the competence is not present', function () {
-      test('it creates competence score correctly', async function (assert) {
-        // When
-        await controller.onUpdateScore(aNewCompetenceCode, '55');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(aNewCompetenceCode, competences);
-
-        assert.strictEqual(aCompetence.score, 55);
-      });
-    });
-  });
-
-  module('#onUpdateLevel', () => {
-    module('when there is a given level', function () {
-      test('it replaces competence level correctly', async function (assert) {
-        // When
-        await controller.onUpdateLevel(anExistingCompetenceCode, '5');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(anExistingCompetenceCode, competences);
-
-        assert.strictEqual(aCompetence.level, 5);
-      });
-    });
-
-    module('when there is no given level and competence has no score', function () {
-      test('it removes competence correctly (level)', async function (assert) {
-        // When
-        await controller.onUpdateLevel(anExistingCompetenceWithNoScoreCode, '');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(anExistingCompetenceWithNoScoreCode, competences);
-
-        assert.notOk(aCompetence);
-      });
-    });
-
-    module('when the competence is not present', function () {
-      test('it creates competence level correctly', async function (assert) {
-        // When
-        await controller.onUpdateLevel(aNewCompetenceCode, '8');
-
-        // then
-        const competences = controller.certification.competencesWithMark;
-        const aCompetence = _getCompetenceWithMark(aNewCompetenceCode, competences);
-
-        assert.strictEqual(aCompetence.level, 8);
-      });
     });
   });
 
@@ -348,8 +265,4 @@ module('Unit | Controller | authenticated/sessions/certification/informations', 
       assert.ok(controller);
     });
   });
-
-  function _getCompetenceWithMark(code, competences = competencesWithMark) {
-    return competences.find((value) => value.competence_code === code);
-  }
 });

@@ -62,45 +62,6 @@ module('Integration | Component | certifications/competence-list', function (hoo
     assert.dom(within(rows[1]).getByRole('cell', { name: '3' })).exists();
   });
 
-  test('it should display 16 entries in edition mode', async function (assert) {
-    // given
-    const competences = [
-      { index: '1.1', score: '30', level: '3' },
-      { index: '2.1', score: '30', level: '3' },
-      { index: '5.2', score: '30', level: '3' },
-    ];
-
-    // when
-    const screen = await render(<template><CompetenceList @competences={{competences}} @edition="true" /></template>);
-
-    // then
-    assert.strictEqual(screen.getAllByLabelText('Informations de la compétence', { exact: false }).length, 16);
-  });
-
-  module('when certification is V2', function () {
-    test('it should display competence levels and scores at the right places in edition mode', async function (assert) {
-      // given
-      const competences = [
-        { index: '1.1', score: '30', level: '3' },
-        { index: '2.1', score: '16', level: '2' },
-        { index: '2.2', score: '42', level: '5' },
-      ];
-
-      // when
-      const screen = await render(<template><CompetenceList @competences={{competences}} @edition="true" /></template>);
-
-      // then
-      assert.dom(screen.getByRole('textbox', { name: '1.1' })).hasValue('30');
-      assert.dom(screen.getByRole('textbox', { name: '2.1' })).hasValue('16');
-      assert.dom(screen.getByRole('textbox', { name: '2.2' })).hasValue('42');
-
-      const certificationInfoLevelInputs = screen.getAllByRole('textbox', { name: 'Niveau:' });
-      assert.dom(certificationInfoLevelInputs[0]).hasValue('3');
-      assert.dom(certificationInfoLevelInputs[3]).hasValue('2');
-      assert.dom(certificationInfoLevelInputs[4]).hasValue('5');
-    });
-  });
-
   module('when certification is V3', function () {
     test('it should not display competence scores', async function (assert) {
       // given
@@ -112,8 +73,6 @@ module('Integration | Component | certifications/competence-list', function (hoo
       );
 
       // then
-      assert.dom(screen.queryByText('0 Pix')).doesNotExist();
-
       const table = screen.getByRole('table', { name: 'Détails du résultat par compétence' });
       const rows = await within(table).findAllByRole('row');
 

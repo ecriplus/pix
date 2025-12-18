@@ -118,9 +118,6 @@ import CertificationInformationState from './informations/state';
       <CertificationCompetenceList
         @competences={{@certification.competences}}
         @shouldDisplayPixScore={{@shouldDisplayPixScore}}
-        @edition={{false}}
-        @onUpdateScore={{@onUpdateScore}}
-        @onUpdateLevel={{@onUpdateLevel}}
       />
     </PixBlock>
   </div>
