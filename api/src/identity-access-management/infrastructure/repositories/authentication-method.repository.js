@@ -259,6 +259,22 @@ const anonymizeByUserIds = async function ({ userIds }) {
 };
 
 /**
+ *
+ * @param {number[]} userIds
+ * @param {string} identityProvider
+ * @returns {Promise<*>}
+ */
+const findByUserIdsAndIdentityProvider = async ({ userIds, identityProvider }) => {
+  const authenticationMethodDTOs = await knex
+    .select(COLUMNS)
+    .from(AUTHENTICATION_METHODS_TABLE)
+    .whereIn('userId', userIds)
+    .where({ identityProvider });
+
+  return authenticationMethodDTOs.map(_toDomain);
+};
+
+/**
  * @typedef {Object} AuthenticationMethodRepository
  * @property {function} batchUpsertPasswordThatShouldBeChanged
  * @property {function} create
@@ -271,6 +287,7 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} hasIdentityProviderGar
  * @property {function} removeAllAuthenticationMethodsByUserId
  * @property {function} removeByUserIdAndIdentityProvider
+ * @property {function} findByUserIdsAndIdentityProvider
  * @property {function} update
  * @property {function} updateAuthenticationComplementByUserIdAndIdentityProvider
  * @property {function} updateAuthenticationMethodUserId
@@ -283,6 +300,7 @@ export {
   create,
   createPasswordThatShouldBeChanged,
   findByUserId,
+  findByUserIdsAndIdentityProvider,
   findOneByExternalIdentifierAndIdentityProvider,
   findOneByUserIdAndIdentityProvider,
   getByIdAndUserId,

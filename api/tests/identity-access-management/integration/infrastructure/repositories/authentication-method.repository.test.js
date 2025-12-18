@@ -907,6 +907,39 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
+  describe('#findByUserIdsAndIdentityProvider', function () {
+    it('returns authentication methods for given user IDs and identity provider', async function () {
+      // given
+      const garIdProviderUser1 = databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+        externalIdentifier: 'firstUser',
+      });
+      const garIdProviderUser2 = databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+        externalIdentifier: 'secondUser',
+      });
+
+      // User with different identity provider (should not be returned)
+      const { userId: userWithPixIdProvider } =
+        databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword();
+
+      // User with requested identity provider but not in ids list (should not be returned)
+      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ externalIdentifier: 'thirdUser' });
+
+      await databaseBuilder.commit();
+
+      // when
+      const authenticationMethods = await authenticationMethodRepository.findByUserIdsAndIdentityProvider({
+        userIds: [garIdProviderUser1.userId, garIdProviderUser2.userId, userWithPixIdProvider],
+        identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+      });
+
+      // then
+      expect(authenticationMethods).to.have.lengthOf(2);
+      expect(authenticationMethods).to.deep.members(
+        [garIdProviderUser1, garIdProviderUser2].map(domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider),
+      );
+    });
+  });
+
   describe('#getByIdAndUserId', function () {
     it("returns the user's authentication method", async function () {
       // given
