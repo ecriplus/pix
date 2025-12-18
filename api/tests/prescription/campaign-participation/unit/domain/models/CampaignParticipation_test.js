@@ -43,11 +43,11 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
       expect(campaignParticipation.deletedBy).to.deep.equal(userId);
     });
 
-    it('remove userId on anomizationEnabled', function () {
+    it('remove userId if anonymisation is enabled', function () {
       const userId = 4567;
       const campaignParticipation = new CampaignParticipation({ userId: 666, deletedAt: null, deletedBy: null });
 
-      campaignParticipation.delete(userId, true);
+      campaignParticipation.delete(userId, { isAnonymizationWithDeletionEnabled: true });
 
       expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.DELETION);
       expect(campaignParticipation.userId).to.equal(null);
