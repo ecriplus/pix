@@ -46,6 +46,11 @@
 
 .element-qcu-discovery-feedback {
   &__report-button {
-    color: var(--pix-info-700);
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      color: var(--pix-info-700);
+    }
   }
 }

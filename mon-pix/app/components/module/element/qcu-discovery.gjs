@@ -103,13 +103,14 @@ export default class ModuleQcuDiscovery extends ModuleElement {
         {{htmlUnsafe this.selectedProposalFeedback}}
 
         {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-          <PixButton
-            @variant="tertiary"
-            @iconBefore="flag"
-            @triggerAction={{this.onReportClick}}
-            class="element-qcu-discovery-feedback__report-button"
-            aria-label={{t "pages.modulix.issue-report.aria-label"}}
-          >{{t "pages.modulix.issue-report.button"}}</PixButton>
+          <div class="element-qcu-discovery-feedback__report-button">
+            <PixButton
+              @variant="tertiary"
+              @iconBefore="flag"
+              @triggerAction={{this.onReportClick}}
+              aria-label={{t "pages.modulix.issue-report.aria-label"}}
+            >{{t "pages.modulix.issue-report.button"}}</PixButton>
+          </div>
 
           <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
         {{/if}}

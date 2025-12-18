@@ -48,7 +48,7 @@ export default class ModulixCustomDraft extends ModuleElement {
         </div>
       {{/if}}
 
-      <fieldset class="element-custom__container">
+      <fieldset class="element-custom-draft__container">
         <legend class="element-custom__legend">
           <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
           <span>{{t "pages.modulix.interactiveElement.label"}}</span>
@@ -64,6 +64,14 @@ export default class ModulixCustomDraft extends ModuleElement {
       </fieldset>
 
       <div class="element-custom-draft__buttons">
+        <PixButton
+          class="element-custom-draft-buttons__retry"
+          @iconBefore="refresh"
+          @variant="tertiary"
+          @triggerAction={{this.resetEmbed}}
+          aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
+        >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
+
         {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
           <PixButton
             @variant="tertiary"
@@ -74,14 +82,6 @@ export default class ModulixCustomDraft extends ModuleElement {
 
           <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
         {{/if}}
-
-        <PixButton
-          class="element-custom-draft-buttons__retry"
-          @iconBefore="refresh"
-          @variant="tertiary"
-          @triggerAction={{this.resetEmbed}}
-          aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
-        >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
       </div>
     </div>
   </template>

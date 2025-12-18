@@ -46,6 +46,15 @@
       margin-top: 0;
     }
   }
+
+  &__report-button {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      color: var(--pix-info-700);
+    }
+  }
 }
 
 .element-qab-cards {

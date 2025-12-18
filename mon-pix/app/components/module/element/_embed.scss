@@ -5,6 +5,16 @@
 .element-embed {
   &__container {
     position: relative;
+    padding: var(--pix-spacing-2x);
+    border: 2px dashed var(--pix-primary-700);
+
+    &--with-retry-button {
+      border-radius: 8px 8px 8px 0;
+    }
+
+    &--without-retry-button {
+      border-radius: 8px;
+    }
   }
 
   &__instruction {
@@ -12,7 +22,12 @@
     font-weight: var(--pix-font-bold);
   }
 
-  &__reset {
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
     display: flex;
     justify-content: flex-end;
   }
@@ -41,5 +56,14 @@
     height: 100%;
     background-color: var(--embed-overlay-color);
     border-radius: var(--modulix-radius-xs);
+  }
+}
+
+.element-embed-buttons {
+  &__retry {
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-primary-100);
+    border: none;
+    border-radius: 0 0 8px 8px;
   }
 }

@@ -34,13 +34,14 @@ export default class ModulixFeedback extends Component {
       {{htmlUnsafe @feedback.diagnosis}}
 
       {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-        <PixButton
-          class="feedback__report-button"
-          @variant="tertiary"
-          @iconBefore="flag"
-          aria-label={{t "pages.modulix.issue-report.aria-label"}}
-          @triggerAction={{this.onReportClick}}
-        >{{t "pages.modulix.issue-report.button"}}</PixButton>
+        <div class="feedback__report-button">
+          <PixButton
+            @variant="tertiary"
+            @iconBefore="flag"
+            aria-label={{t "pages.modulix.issue-report.aria-label"}}
+            @triggerAction={{this.onReportClick}}
+          >{{t "pages.modulix.issue-report.button"}}</PixButton>
+        </div>
 
         <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
       {{/if}}
