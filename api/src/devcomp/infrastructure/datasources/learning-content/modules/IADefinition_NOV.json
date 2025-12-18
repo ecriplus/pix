@@ -376,7 +376,7 @@
                         "x": -40,
                         "y": 0
                       },
-                      "info": "Lampe à ampoule basse consommation",
+                      "info": "Lampe : Ampoule basse consommation",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -390,7 +390,7 @@
                         "x": 0,
                         "y": -1
                       },
-                      "info": "Décoration en verre soufflé",
+                      "info": "Décoration : Sphère en verre soufflé",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -404,7 +404,7 @@
                         "x": -60,
                         "y": -450
                       },
-                      "info": "Plante en pot, de type oiseau de paradis",
+                      "info": "Plante en pot : Oiseau de paradis",
                       "tooltipPosition": "bottom"
                     }
                   ]
