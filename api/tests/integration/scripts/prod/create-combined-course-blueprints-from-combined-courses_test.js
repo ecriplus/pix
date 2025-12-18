@@ -84,6 +84,35 @@ describe('CreateCombinedCourseBlueprint', function () {
 
         expect(combinedCourseBlueprints).lengthOf(1);
       });
+
+      it('does not recreate blueprint with the same content', async function () {
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
+
+        databaseBuilder.factory.buildCombinedCourse({
+          code: 'AZERTY12',
+          combinedCourseContents: [{ campaignId: campaign.id }, { moduleId: 'module-id' }],
+        });
+
+        databaseBuilder.factory.buildCombinedCourse({
+          code: 'QWERTY12',
+          name: 'other Name',
+          description: 'but same content',
+          combinedCourseContents: [{ campaignId: campaign.id }, { moduleId: 'module-id' }],
+        });
+
+        await databaseBuilder.commit();
+
+        await script.handle({ options: { dryRun: false }, logger });
+
+        const combinedCourseBlueprints = await knex.select('*').from('combined_course_blueprints');
+        expect(combinedCourseBlueprints).to.have.lengthOf(1);
+
+        const updatedCombinedCourses = await knex('combined_courses').pluck('combinedCourseBlueprintId');
+
+        expect(updatedCombinedCourses[0]).to.equal(combinedCourseBlueprints[0].id);
+        expect(updatedCombinedCourses[1]).to.equal(combinedCourseBlueprints[0].id);
+      });
     });
 
     context('when dryRun is true', function () {

@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 import { knex } from '../../db/knex-database-connection.js';
 import { CombinedCourseDetails } from '../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../src/quest/domain/models/CombinedCourseBlueprint.js';
@@ -23,6 +25,7 @@ export class CreateCombinedCourseBlueprint extends Script {
   async handle({ options }) {
     const { dryRun } = options;
     const trx = await knex.transaction();
+    const blueprintMap = new Map();
 
     const combinedCoursesWithoutBlueprint = await trx('combined_courses')
       .join('quests', 'questId', 'quests.id')
@@ -41,9 +44,14 @@ export class CreateCombinedCourseBlueprint extends Script {
         content: JSON.stringify(this.buildCombinedCourseBlueprintContent(combinedCourse, campaigns)),
       };
 
-      const [blueprint] = await trx('combined_course_blueprints').insert(combinedCourseBlueprint).returning('id');
+      const contentHash = hash(combinedCourseBlueprint.content);
 
-      await trx('combined_courses').update({ combinedCourseBlueprintId: blueprint.id }).where('id', combinedCourse.id);
+      if (!blueprintMap.has(contentHash)) {
+        const [blueprint] = await trx('combined_course_blueprints').insert(combinedCourseBlueprint).returning('id');
+        blueprintMap.set(contentHash, blueprint.id);
+      }
+      const blueprintId = blueprintMap.get(contentHash);
+      await trx('combined_courses').update({ combinedCourseBlueprintId: blueprintId }).where('id', combinedCourse.id);
     }
 
     if (dryRun) {
@@ -68,5 +76,6 @@ export class CreateCombinedCourseBlueprint extends Script {
     );
   }
 }
+const hash = (content) => createHash('sha256').update(content).digest('hex');
 
 await ScriptRunner.execute(import.meta.url, CreateCombinedCourseBlueprint);
