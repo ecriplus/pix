@@ -27,7 +27,7 @@ module('Integration | Component | complementary-certifications/item/header', fun
       const expectedTitle = `${t('components.complementary-certifications.item.certification-framework')} ${complementaryCertification.label}`;
       assert.ok(screen.getByRole('heading', { name: expectedTitle, level: 1 }));
       const nav = screen.getByRole('navigation');
-      assert.ok(within(nav).getByRole('link', { name: t('components.complementary-certifications.title') }));
+      assert.ok(within(nav).getByRole('link', { name: t('components.layout.sidebar.certification-frameworks') }));
     });
   });
 
@@ -51,7 +51,7 @@ module('Integration | Component | complementary-certifications/item/header', fun
       const expectedTitle = `${t('components.complementary-certifications.item.target-profile')} ${complementaryCertification.label}`;
       assert.ok(screen.getByRole('heading', { name: expectedTitle, level: 1 }));
       const nav = screen.getByRole('navigation');
-      assert.ok(within(nav).getByRole('link', { name: t('components.complementary-certifications.title') }));
+      assert.ok(within(nav).getByRole('link', { name: t('components.layout.sidebar.certification-frameworks') }));
     });
   });
 });

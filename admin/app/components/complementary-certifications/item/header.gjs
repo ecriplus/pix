@@ -9,8 +9,8 @@ export default class Header extends Component {
   get links() {
     return [
       {
-        route: 'authenticated.complementary-certifications.list',
-        label: this.intl.t('components.complementary-certifications.title'),
+        route: 'authenticated.certification-frameworks',
+        label: this.intl.t('components.layout.sidebar.certification-frameworks'),
       },
       {
         label: this.args.complementaryCertification.label,

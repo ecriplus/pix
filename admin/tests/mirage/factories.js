@@ -4,6 +4,7 @@ import badge from './factories/badge';
 import certificationCandidate from './factories/certification-candidate';
 import certificationCenter from './factories/certification-center';
 import certificationCenterInvitation from './factories/certification-center-invitation';
+import certificationFramework from './factories/certification-framework';
 import featureToggle from './factories/feature-toggle';
 import organization from './factories/organization';
 import organizationInvitation from './factories/organization-invitation';
@@ -17,6 +18,7 @@ export default {
   certificationCandidate,
   certificationCenter,
   certificationCenterInvitation,
+  certificationFramework,
   featureToggle,
   organization,
   organizationInvitation,

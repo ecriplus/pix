@@ -21,6 +21,7 @@ import certificationCenterMembership from './models/certification-center-members
 import certificationChallengesForAdministration from './models/certification-challenges-for-administration';
 import certificationConsolidatedFramework from './models/certification-consolidated-framework';
 import certificationDetails from './models/certification-details';
+import certificationFramework from './models/certification-framework';
 import certificationIssueReport from './models/certification-issue-report';
 import certificationVersion from './models/certification-version';
 import certifiedArea from './models/certified-area';
@@ -94,6 +95,7 @@ export default {
   certificationChallengesForAdministration,
   certificationConsolidatedFramework,
   certificationDetails,
+  certificationFramework,
   certificationIssueReport,
   certificationVersion,
   certifiedArea,

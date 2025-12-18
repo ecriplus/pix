@@ -1,0 +1,62 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { LinkTo } from '@ember/routing';
+import Component from '@glimmer/component';
+import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
+
+export default class List extends Component {
+  get frameworks() {
+    return this.args.certificationFrameworks.map((framework) => {
+      const complementaryCertification = this.args.complementaryCertifications.find((cc) => cc.key === framework.id);
+
+      return {
+        id: framework.id,
+        name: framework.name,
+        label: `components.certification-frameworks.labels.${framework.id}`,
+        activeVersionStartDate: framework.activeVersionStartDate,
+        complementaryCertificationId: complementaryCertification?.id,
+      };
+    });
+  }
+
+  <template>
+    <PixTable
+      @variant="admin"
+      @data={{this.frameworks}}
+      @caption={{t "components.certification-frameworks.list.caption"}}
+    >
+      <:columns as |framework context|>
+        <PixTableColumn @context={{context}} class="table__column--wide">
+          <:header>
+            {{t "components.certification-frameworks.list.name"}}
+          </:header>
+          <:cell>
+            {{#if framework.complementaryCertificationId}}
+              <LinkTo
+                @route="authenticated.complementary-certifications.item"
+                @model={{framework.complementaryCertificationId}}
+              >
+                {{t framework.label}}
+              </LinkTo>
+            {{else}}
+              {{t framework.label}}
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "components.certification-frameworks.list.active-version-start-date"}}
+          </:header>
+          <:cell>
+            {{#if framework.activeVersionStartDate}}
+              {{formatDate framework.activeVersionStartDate}}
+            {{else}}
+              -
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
+  </template>
+}

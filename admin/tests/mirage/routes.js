@@ -116,6 +116,10 @@ export default function routes() {
     return certificationVersion.update(params.data.attributes);
   });
 
+  this.get('/admin/certification-frameworks', (schema) => {
+    return schema.certificationFrameworks.all();
+  });
+
   this.get('/admin/sessions', findPaginatedAndFilteredSessions);
   this.get('/admin/sessions/to-publish', getToBePublishedSessions);
   this.get('/admin/sessions/with-required-action', getWithRequiredActionSessions);
