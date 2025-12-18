@@ -736,7 +736,7 @@
                           "content": "<p>Chercher sur internet.</p>",
                           "feedback": {
                             "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Lancer une recherche web, internet n’est pas toujours la bonne solution.&nbsp;Réessayez&nbsp;!</p>"
+                            "diagnosis": "<p>Internet n’est pas toujours la bonne solution.&nbsp;Réessayez&nbsp;!</p>"
                           }
                         }
                       ],
