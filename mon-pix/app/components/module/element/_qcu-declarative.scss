@@ -61,8 +61,16 @@
     display: flex;
     justify-content: flex-end;
 
-    button {
+    button:not([aria-disabled="true"]) {
       color: var(--pix-neutral-0);
+
+      &:hover {
+        color: var(--pix-neutral-100);
+      }
+
+      &:focus, &:active {
+        color: var(--pix-neutral-0);
+      }
     }
   }
 }

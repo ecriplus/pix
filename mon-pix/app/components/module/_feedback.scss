@@ -6,12 +6,16 @@
 
   &--success {
     --modulix-feedback-state-color: var(--pix-success-700);
+    --modulix-feedback-hover-color: var(--pix-success-500);
+    --modulix-feedback-focus-color: var(--pix-success-900);
 
     background-color: var(--pix-success-50);
   }
 
   &--error {
     --modulix-feedback-state-color: var(--pix-warning-700);
+    --modulix-feedback-hover-color: var(--pix-warning-500);
+    --modulix-feedback-focus-color: var(--pix-warning-900);
 
     background-color: var(--pix-warning-50);
   }
@@ -25,8 +29,16 @@
     display: flex;
     justify-content: flex-end;
 
-    button {
+    button:not([aria-disabled="true"]) {
       color: var(--modulix-feedback-state-color);
+
+      &:hover {
+        color: var(--modulix-feedback-hover-color);
+      }
+
+      &:focus, &:active {
+        color: var(--modulix-feedback-focus-color);
+      }
     }
   }
 
