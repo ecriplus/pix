@@ -1,6 +1,6 @@
 import isUndefined from 'lodash/isUndefined.js';
 
-import { CombinedCourseTemplate } from '../../../src/quest/domain/models/CombinedCourseTemplate.js';
+import { CombinedCourseBlueprint } from '../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildOrganization } from './build-organization.js';
 import { buildQuestForCombinedCourse } from './build-quest.js';
@@ -19,7 +19,7 @@ const buildCombinedCourse = function ({
   organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
 
   const successRequirementsFromContents = combinedCourseContents.map((content) =>
-    CombinedCourseTemplate.buildRequirementForCombinedCourse(content).toDTO(),
+    CombinedCourseBlueprint.buildRequirementForCombinedCourse(content).toDTO(),
   );
 
   const questId = buildQuestForCombinedCourse({

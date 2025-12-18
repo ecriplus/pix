@@ -43,4 +43,38 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+
+  describe('POST /api/combined-course-blueprints', function () {
+    context('when user is admin ', function () {
+      it('should create a combined course blueprint', async function () {
+        // given
+        const adminUser = await insertUserWithRoleSuperAdmin();
+        const payload = {
+          data: {
+            type: 'combined-course-blueprints',
+            attributes: {
+              name: 'Mon parcours combiné',
+              'internal-name': 'Mon schéma de parcours combiné',
+              description: 'La description combinix',
+              illustration: 'illustration.svg',
+              content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'modulox' }]),
+            },
+          },
+        };
+        const options = {
+          method: 'POST',
+          url: `/api/combined-course-blueprints`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          payload,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(201);
+        expect(response.result.data.attributes.name).to.equal(payload.data.attributes.name);
+      });
+    });
+  });
 });

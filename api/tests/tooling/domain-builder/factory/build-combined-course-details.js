@@ -1,6 +1,6 @@
 import { Campaign } from '../../../../src/quest/domain/models/Campaign.js';
 import { CombinedCourse, CombinedCourseDetails } from '../../../../src/quest/domain/models/CombinedCourse.js';
-import { CombinedCourseTemplate } from '../../../../src/quest/domain/models/CombinedCourseTemplate.js';
+import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { DataForQuest } from '../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../src/quest/domain/models/Eligibility.js';
 import { Module } from '../../../../src/quest/domain/models/Module.js';
@@ -47,7 +47,7 @@ function buildCombinedCourseDetails({ name, code, organizationId, questId, combi
       );
     }
 
-    return CombinedCourseTemplate.buildRequirementForCombinedCourse(content).toDTO();
+    return CombinedCourseBlueprint.buildRequirementForCombinedCourse(content).toDTO();
   });
 
   const quest = new Quest({

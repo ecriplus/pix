@@ -705,6 +705,9 @@ export default function routes() {
     };
   });
 
+  this.get('/combined-course-blueprints');
+  this.post('/combined-course-blueprints');
+
   _configureOrganizationsRoutes(this);
 }
 

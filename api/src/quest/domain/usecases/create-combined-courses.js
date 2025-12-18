@@ -2,7 +2,7 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { COMBINED_COURSE_HEADER } from '../constants.js';
 import { Campaign } from '../models/Campaign.js';
-import { CombinedCourseTemplate } from '../models/CombinedCourseTemplate.js';
+import { CombinedCourseBlueprint } from '../models/CombinedCourseBlueprint.js';
 
 export const createCombinedCourses = withTransaction(
   async ({
@@ -23,8 +23,8 @@ export const createCombinedCourses = withTransaction(
       const { organizationIds: organizationIdsSeparatedByComma, creatorId, content } = row;
       const organizationIds = organizationIdsSeparatedByComma.split(',');
       const combinedCourseInformation = JSON.parse(content);
-      const combinedCourseTemplate = new CombinedCourseTemplate(combinedCourseInformation);
-      const targetProfileIds = combinedCourseTemplate.targetProfileIds;
+      const combinedCourseBlueprint = new CombinedCourseBlueprint(combinedCourseInformation);
+      const targetProfileIds = combinedCourseBlueprint.targetProfileIds;
       const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
 
       for (const organizationId of organizationIds) {
@@ -39,7 +39,9 @@ export const createCombinedCourses = withTransaction(
 
           const hasRecommendableModulesInTargetProfile =
             recommendableModules.length > 0 &&
-            Boolean(recommendableModules.filter(({ moduleId }) => combinedCourseTemplate.moduleIds.includes(moduleId)));
+            Boolean(
+              recommendableModules.filter(({ moduleId }) => combinedCourseBlueprint.moduleIds.includes(moduleId)),
+            );
 
           let combinedCourseUrl = '/parcours/' + combinedCourseCode;
 
@@ -61,7 +63,7 @@ export const createCombinedCourses = withTransaction(
 
         const createdCampaigns = await campaignRepository.save({ campaigns });
 
-        const combinedCourse = combinedCourseTemplate.toCombinedCourse(
+        const combinedCourse = combinedCourseBlueprint.toCombinedCourse(
           combinedCourseCode,
           organizationId,
           createdCampaigns,

@@ -5,3 +5,9 @@ export const findAll = async (request, _, dependencies = { combinedCourseBluepri
   const combinedCourseBlueprints = await usecases.findCombinedCourseBlueprints();
   return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprints);
 };
+
+export const save = async (request, h, dependencies = { combinedCourseBlueprintSerializer }) => {
+  const combinedCourseBlueprint = await dependencies.combinedCourseBlueprintSerializer.deserialize(request.payload);
+  const createdBlueprint = await usecases.createCombinedCourseBlueprint({ combinedCourseBlueprint });
+  return h.response(dependencies.combinedCourseBlueprintSerializer.serialize(createdBlueprint)).created();
+};

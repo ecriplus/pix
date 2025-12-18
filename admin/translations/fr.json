@@ -27,6 +27,7 @@
       "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
     "fields": {
+      "actions": "Actions",
       "createdAt": "Date de création",
       "id": "ID",
       "internalName": "Nom interne",
@@ -440,41 +441,42 @@
       }
     },
     "combined-course-blueprints": {
+      "create": {
+        "addItemButton": "Ajouter",
+        "contentFeedback": "Votre parcours n'a aucun élément ajouté.",
+        "courseContent": "Contenu du parcours",
+        "createButton": "Créer le schéma de parcours",
+        "fieldsetElement": "Choisissez le type d'élément à ajouter :",
+        "labels": {
+          "description": "Description",
+          "illustration": "Illustration",
+          "internal-name": "Nom du schéma",
+          "itemId": "Identifiant",
+          "module": "Module",
+          "name": "Nom du parcours",
+          "target-profile": "Profil cible"
+        },
+        "notifications": {
+          "error": "Oups. Une erreur est survenue lors de la création du schéma de parcours.",
+          "success": "Création du schéma de parcours réussi !"
+        },
+        "title": "Créer un schéma de parcours"
+      },
       "items": {
         "module": "Module",
         "targetProfile": "Profil Cible"
       },
       "list": {
         "content": "Contenu",
+        "downloadButton": "Télécharger le CSV",
+        "notifications": {
+          "error": "Oups. Une erreur est survenue lors du téléchargement du CSV.",
+          "success": "Téléchargement du schéma de parcours réussi !"
+        },
         "table": {
           "caption": "Liste des schémas de parcours combinés"
         },
         "title": "Tous les schémas de parcours combinés"
-      }
-    },
-    "combined-courses": {
-      "create-form": {
-        "addItemButton": "Ajouter",
-        "contentFeedback": "Votre parcours n'a aucun élément ajouté.",
-        "courseContent": "Contenu du parcours",
-        "downloadButton": "Télécharger le CSV",
-        "fieldsetElement": "Choisissez le type d'élément à ajouter :",
-        "labels": {
-          "creatorId": "Identifiant du créateur",
-          "description": " Description",
-          "illustration": "Illustration",
-          "itemId": "Identifiant",
-          "module": "Module",
-          "name": "Nom",
-          "organizationsList": "liste des organisations",
-          "organizationsListSubLabel": "(ids séparés par des virgules)",
-          "target-profile": "Profil cible"
-        },
-        "notifications": {
-          "error": "Oups. Une erreur est survenue lors du téléchargement du CSV.",
-          "success": "Téléchargement du CSV réussi ! En route pour la création des parcours."
-        },
-        "title": "Créateur de parcours"
       }
     },
     "complementary-certifications": {

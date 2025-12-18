@@ -1,6 +1,6 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
-const { Serializer } = jsonapiSerializer;
+const { Deserializer, Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourseBlueprint) {
   return new Serializer('combined-course-blueprints', {
@@ -8,4 +8,10 @@ const serialize = function (combinedCourseBlueprint) {
   }).serialize(combinedCourseBlueprint);
 };
 
-export { serialize };
+const deserialize = function (payload) {
+  return new Deserializer({
+    keyForAttribute: 'camelCase',
+  }).deserialize(payload);
+};
+
+export { deserialize, serialize };
