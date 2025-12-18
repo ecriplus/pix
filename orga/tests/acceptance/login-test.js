@@ -3,6 +3,7 @@ import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { Response } from 'miragejs';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -84,6 +85,25 @@ module('Acceptance | Login', function (hooks) {
         name: t('components.index.organization-information.title'),
       });
       assert.dom(homepageHeading).exists();
+    });
+  });
+
+  module('when user is not allowed to access Pix Orga', function () {
+    test('displays an "access not allowed" error message', async function (assert) {
+      // given
+      this.server.post('/token', () => {
+        return new Response(403, {}, { errors: [{ status: '403', code: 'PIX_ORGA_ACCESS_NOT_ALLOWED' }] });
+      });
+
+      // when
+      const screen = await visit('/connexion');
+      await fillByLabel(t('pages.login-form.email.label'), 'user-not-allowed@example.net');
+      await fillByLabel(t('pages.login-form.password'), 'secret');
+      await clickByName(t('pages.login-form.login'));
+
+      // then
+      const errorMessage = screen.getByText(t('pages.login-form.errors.access-not-allowed'));
+      assert.dom(errorMessage).exists();
     });
   });
 });
