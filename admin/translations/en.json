@@ -670,11 +670,11 @@
         },
         "documentation-link": "Link to the documentation",
         "dpo": {
+          "acronym": "DPO",
           "definition": "Data Protection Officer",
           "email": "E-mail address of ",
           "firstname": "Firstname of ",
-          "lastname": "Lastname of ",
-          "title": "DPO"
+          "lastname": "Lastname of "
         },
         "external-id": {
           "label": "External Identifier",
