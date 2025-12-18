@@ -630,11 +630,9 @@
         },
         "retry": "Improve myself",
         "see-more": "See more",
-        "send": "Submit my results",
         "stages": "{count} { count, plural, =0 {star} =1 {star} other {stars} } out of {total}",
         "started-at": "Started the {date}",
         "tag": {
-          "completed": "To be submitted",
           "deleted": "Inactive",
           "disabled": "Route deactivated by your organization.'<br>'You can no longer act on this route.",
           "finished": "Finished",

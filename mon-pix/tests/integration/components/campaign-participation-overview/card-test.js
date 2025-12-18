@@ -31,30 +31,6 @@ module('Integration | Component | CampaignParticipationOverview | Card', functio
     });
   });
 
-  module('when the participation status is TO_SHARE', function () {
-    test('should display CardToShare', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
-        isShared: false,
-        createdAt: '2020-12-10T15:16:20.109Z',
-        status: 'TO_SHARE',
-        campaignTitle: 'My campaign',
-        organizationName: 'My organization',
-      });
-
-      this.set('campaignParticipationOverview', campaignParticipationOverview);
-
-      // when
-      const screen = await render(
-        hbs`<CampaignParticipationOverview::Card @model={{this.campaignParticipationOverview}} />}`,
-      );
-
-      // then
-      assert.dom(screen.getByText('À envoyer')).exists();
-    });
-  });
-
   module('when the participation status is ENDED', function () {
     test('should display CardEnded', async function (assert) {
       // given

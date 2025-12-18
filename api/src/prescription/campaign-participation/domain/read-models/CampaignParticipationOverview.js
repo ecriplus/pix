@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { MAX_MASTERY_RATE, MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING } from '../../../../shared/domain/constants.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 
-const { SHARED } = CampaignParticipationStatuses;
+const { SHARED, TO_SHARE, STARTED } = CampaignParticipationStatuses;
 
 class CampaignParticipationOverview {
   constructor({
@@ -35,7 +35,7 @@ class CampaignParticipationOverview {
     this.isShared = status === SHARED;
     this.sharedAt = sharedAt;
     this.organizationName = organizationName;
-    this.status = status;
+    this.status = status === TO_SHARE ? STARTED : status; // TODO: remove this mapping once the status is migrated
     this.campaignId = campaignId;
     this.campaignCode = campaignCode;
     this.campaignTitle = campaignTitle;
