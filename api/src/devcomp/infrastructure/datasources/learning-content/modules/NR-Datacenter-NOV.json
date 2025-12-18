@@ -467,7 +467,7 @@
                     {
                       "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel demande le plus de travail aux serveurs ?</p><br><br>",
+                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel demande le plus de travail aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
