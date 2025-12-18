@@ -264,8 +264,93 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
-                "content": "<p>Bob travaille dans une entreprise qui crée des sites web [notamment PixCloud] Il veut limiter la sollicitation des centres de données lorsque les internautes utilisent le site web. </p><p>POI : Faites les bons choix pour limiter la sollicitation des serveurs. </p><ul><li>1. Le format des fichiers&gt; choisit des images plutôt que des vidéos&nbsp;</li><li>2. La taille des fichiers&gt; Compresser le fichier et choisir le plus léger</li><li>3. Le player automatique&gt; Le désactiver</li><li>4. Les fonctionnalités&nbsp;&gt; Supprimer les fonctionnalités non utiliséesPlusieurs choix : à chaque fois, on voit la jauge de sollicitation du serveur qui diminue ou reste stable.<br><br></li></ul>"
+                "content": "<p>Bob travaille dans une entreprise qui crée des sites web.</p><p>Pour chaque action de Bob, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d'énergie des centre de données ?</p><p>Il veut limiter la sollicitation des centres de données lorsque les internautes utilisent le site web. </p><ul><li>1. Le format des fichiers&gt; choisit des images plutôt que des vidéos (augmente)</li><li>2. La taille des fichiers&gt; Compresser le fichier et choisir le plus léger (diminue)</li><li>3. Le player automatique&gt; Le désactiver (augmente)</li><li>4. Supprimer une fonctionnalité peu utilisée (diminue)<br><br></li></ul>"
               }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "0ac5c76d-8698-40bf-9b6c-fd815931686c",
+                      "type": "text",
+                      "content": "<p>Bob choisit d'illustrer la page d'accueil avec une vidéo plutôt qu'avec une photo.</p>"
+                    },
+                    {
+                      "id": "7fb2c32e-586d-4a88-ad50-368a2292ae97",
+                      "type": "custom",
+                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "Elle diminue. 🔋",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "C'est faux. Une vidéo va d'avantage solliciter les serveurs d'une image."
+                            }
+                          },
+                          {
+                            "label": "Elle reste stable. ⚡",
+                            "feedback": {
+                              "type": "close",
+                              "text": "C'est faux. Une vidéo va d'avantage solliciter les serveurs d'une image."
+                            }
+                          },
+                          {
+                            "label": "Elle augmente. 🪫",
+                            "feedback": {
+                              "type": "neutral",
+                              "text": "C'est vrai. Une vidéo va d'avantage solliciter les serveurs d'une image."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "74fcdfad-ef31-48c6-be27-03c06cbc28f2",
+                      "type": "text",
+                      "content": "<p>Bob choisit de compresser les images présentes sur le site.</p>"
+                    },
+                    {
+                      "id": "f19dfdcb-c777-4448-ab61-29b0a212e489",
+                      "type": "custom",
+                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "Elle diminue. 🔋",
+                            "feedback": {
+                              "type": "good",
+                              "text": "Bien vu ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
+                            }
+                          },
+                          {
+                            "label": "Elle reste stable. ⚡",
+                            "feedback": {
+                              "type": "close",
+                              "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
+                            }
+                          },
+                          {
+                            "label": "Elle augmente. 🪫",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
