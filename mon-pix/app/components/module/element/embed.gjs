@@ -158,7 +158,14 @@ export default class ModulixEmbed extends ModuleElement {
         </div>
       {{/if}}
 
-      <div class="element-embed__container">
+      <div
+        class="element-embed__container
+          {{if
+            this.resetButtonDisplayed
+            'element-embed__container--with-retry-button'
+            'element-embed__container--without-retry-button'
+          }}"
+      >
         <iframe
           class="element-embed-container__iframe
             {{unless this.isSimulatorLaunched 'element-embed-container__iframe--blurred'}}"

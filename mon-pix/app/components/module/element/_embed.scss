@@ -5,6 +5,16 @@
 .element-embed {
   &__container {
     position: relative;
+    padding: var(--pix-spacing-2x);
+    border: 2px dashed var(--pix-primary-700);
+
+    &--with-retry-button {
+      border-radius: 8px 8px 8px 0;
+    }
+
+    &--without-retry-button {
+      border-radius: 8px;
+    }
   }
 
   &__instruction {
