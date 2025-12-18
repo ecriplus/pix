@@ -9,7 +9,7 @@ import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
 import { TrackedArray, TrackedMap } from 'tracked-built-ins';
 
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
-import ModulixIssueReportModal from '../../issue-report/issue-report-modal';
+import ModulixIssueReportBlock from '../../issue-report/issue-report-block';
 import ModuleElement from '../module-element';
 
 const NEXT_CARD_REMOVE_DELAY = 400;
@@ -25,10 +25,8 @@ export default class ModuleQab extends ModuleElement {
   @tracked displayedCards;
   @tracked cardStatuses = new TrackedMap();
   @tracked removedCards = new TrackedMap();
-  @tracked showModal = false;
 
   @service passageEvents;
-  @service featureToggles;
 
   constructor() {
     super(...arguments);
@@ -145,16 +143,6 @@ export default class ModuleQab extends ModuleElement {
     return this.removedCards.get(card.id) || false;
   }
 
-  @action
-  onReportClick() {
-    this.showModal = true;
-  }
-
-  @action
-  hideModal() {
-    this.showModal = false;
-  }
-
   <template>
     <form onSubmit={{this.onSubmit}} class="element-qab" aria-describedby="instruction-{{this.element.id}}">
       <fieldset class="element-qab__container">
@@ -195,18 +183,9 @@ export default class ModuleQab extends ModuleElement {
       <div class="feedback element-qab__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.feedback}}
 
-        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-          <div class="element-qab__report-button">
-            <PixButton
-              @variant="tertiary"
-              @iconBefore="flag"
-              @triggerAction={{this.onReportClick}}
-              aria-label={{t "pages.modulix.issue-report.aria-label"}}
-            >{{t "pages.modulix.issue-report.button"}}</PixButton>
-          </div>
-
-          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
-        {{/if}}
+        <div class="element-qab__report-button">
+          <ModulixIssueReportBlock />
+        </div>
       </div>
     {{/if}}
     {{#if this.shouldDisplayScore}}

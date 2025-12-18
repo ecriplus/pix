@@ -1,4 +1,3 @@
-import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
@@ -7,17 +6,15 @@ import ProposalButton from 'mon-pix/components/module/component/proposal-button'
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import { VERIFY_RESPONSE_DELAY } from '../component/element';
-import ModulixIssueReportModal from '../issue-report/issue-report-modal';
+import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModuleQcuDeclarative extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
-  @tracked showModal = false;
 
   @service passageEvents;
   @service modulixPreviewMode;
-  @service featureToggles;
 
   get selectedProposalFeedback() {
     return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
@@ -58,16 +55,6 @@ export default class ModuleQcuDeclarative extends ModuleElement {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
-  @action
-  onReportClick() {
-    this.showModal = true;
-  }
-
-  @action
-  hideModal() {
-    this.showModal = false;
-  }
-
   <template>
     <form class="element-qcu-declarative" onSubmit={{this.onAnswer}} aria-describedby="instruction-{{this.element.id}}">
       <fieldset>
@@ -100,18 +87,9 @@ export default class ModuleQcuDeclarative extends ModuleElement {
       <div class="element-qcu-declarative__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.selectedProposalFeedback}}
 
-        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-          <div class="element-qcu-declarative-feedback__report-button">
-            <PixButton
-              @variant="tertiary"
-              @iconBefore="flag"
-              @triggerAction={{this.onReportClick}}
-              aria-label={{t "pages.modulix.issue-report.aria-label"}}
-            >{{t "pages.modulix.issue-report.button"}}</PixButton>
-          </div>
-
-          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
-        {{/if}}
+        <div class="element-qcu-declarative-feedback__report-button">
+          <ModulixIssueReportBlock />
+        </div>
       </div>
     {{/if}}
   </template>
