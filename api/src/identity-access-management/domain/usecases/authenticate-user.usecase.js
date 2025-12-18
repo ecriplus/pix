@@ -1,6 +1,6 @@
-import { PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
+import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { config } from '../../../shared/config.js';
-import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
+import { ForbiddenAccess, PixOrgaAccessNotAllowedError, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../emails/create-warning-connection.email.js';
 import {
@@ -123,7 +123,7 @@ async function _updateUserLocaleIfNeeded({ user, locale, userRepository }) {
 
 async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
   if (requestedApplication.isPixOrga && !user.isLinkedToOrganizations()) {
-    throw new ForbiddenAccess(PIX_ORGA.NOT_LINKED_ORGANIZATION_MSG);
+    throw new PixOrgaAccessNotAllowedError();
   }
 
   if (requestedApplication.isPixAdmin) {
