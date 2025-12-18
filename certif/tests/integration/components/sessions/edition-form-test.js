@@ -266,4 +266,144 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       assert.dom(screen.getByRole('textbox', { name: 'Nom du site *' })).hasValue('Test Address');
     });
   });
+
+  module('Error handling', function (hooks) {
+    let session;
+
+    hooks.beforeEach(function () {
+      session = {
+        address: 'Test Address',
+        room: 'Test Room',
+        examiner: 'Test Examiner',
+        date: '2029-12-25',
+        time: '13:45',
+        save: sinon.stub(),
+      };
+
+      this.set('session', session);
+    });
+
+    test('it displays error message when error has a specific code', async function (assert) {
+      // given
+      session.save.rejects({
+        errors: [{ code: 'SESSION_ALREADY_EXISTS' }],
+      });
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
+
+      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Test Address');
+      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Test Room');
+      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Test Examiner');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
+
+      // when
+      await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
+
+      // then
+      assert.ok(
+        pixToastStub.sendErrorNotification.calledWithMatch({
+          message: sinon.match.string,
+        }),
+      );
+      assert.notOk(routerStub.transitionTo.called);
+    });
+
+    test('it displays internal-server-error for other errors', async function (assert) {
+      // given
+      session.save.rejects({
+        errors: [{ status: '500' }],
+      });
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
+
+      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Test Address');
+      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Test Room');
+      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Test Examiner');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
+
+      // when
+      await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
+
+      // then
+      assert.ok(
+        pixToastStub.sendErrorNotification.calledWithMatch({
+          message: sinon.match.string,
+        }),
+      );
+      assert.notOk(routerStub.transitionTo.called);
+    });
+  });
+
+  module('Submission behavior', function () {
+    test('it prevents double submission while form is being submitted', async function (assert) {
+      // given
+      let resolveSubmission;
+      const submissionPromise = new Promise((resolve) => {
+        resolveSubmission = resolve;
+      });
+
+      const session = {
+        address: 'Test Address',
+        room: 'Test Room',
+        examiner: 'Test Examiner',
+        date: '2029-12-25',
+        time: '13:45',
+        save: sinon.stub().returns(submissionPromise),
+      };
+      this.set('session', session);
+
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
+
+      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Test Address');
+      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Test Room');
+      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Test Examiner');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
+
+      // when
+      const submitButton = screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') });
+      await click(submitButton);
+      await click(submitButton);
+
+      // then
+      assert.dom(submitButton).hasAttribute('aria-disabled', 'true');
+      assert.ok(session.save.calledOnce);
+
+      resolveSubmission();
+    });
+
+    test('it allows resubmission after an error', async function (assert) {
+      // given
+      const session = {
+        id: 'session-id',
+        address: 'Test Address',
+        room: 'Test Room',
+        examiner: 'Test Examiner',
+        date: '2029-12-25',
+        time: '13:45',
+        save: sinon.stub(),
+      };
+
+      session.save.onFirstCall().rejects({ errors: [{ status: '500' }] });
+      session.save.onSecondCall().resolves();
+
+      this.set('session', session);
+
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
+
+      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Test Address');
+      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Test Room');
+      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Test Examiner');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
+
+      // when
+      const submitButton = screen.getByRole('button', { name: t('pages.sessions.update.actions.edit-session') });
+      await click(submitButton);
+      await click(submitButton);
+
+      // then
+      assert.ok(session.save.calledTwice);
+    });
+  });
 });

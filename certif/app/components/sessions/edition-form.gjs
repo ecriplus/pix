@@ -6,6 +6,7 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
 
@@ -13,6 +14,8 @@ export default class SessionEditionFormComponent extends Component {
   @service router;
   @service intl;
   @service pixToast;
+
+  @tracked isSubmitting = false;
 
   get todayDate() {
     return new Date().toISOString().split('T')[0];
@@ -26,13 +29,17 @@ export default class SessionEditionFormComponent extends Component {
   async submitSession(event) {
     event.preventDefault();
 
-    if (!event.target.checkValidity()) {
+    if (!event.target.checkValidity() || this.isSubmitting) {
       return;
     }
+
+    this.isSubmitting = true;
 
     try {
       await this.args.session.save();
     } catch (responseError) {
+      this.isSubmitting = false;
+
       const error = responseError?.errors?.[0];
 
       if (error?.code) {
@@ -200,7 +207,7 @@ export default class SessionEditionFormComponent extends Component {
             </PixButton>
           </li>
           <li>
-            <PixButton @type='submit'>
+            <PixButton @type='submit' @isLoading={{this.isSubmitting}}>
               {{t
                 (if
                   this.isUpdateMode
