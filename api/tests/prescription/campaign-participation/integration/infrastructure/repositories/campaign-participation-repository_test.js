@@ -392,19 +392,23 @@ describe('Integration | Repository | Campaign Participation', function () {
   });
 
   describe('#getByCampaignIds', function () {
-    it('should return participations', async function () {
+    let firstCampaignParticipationToUpdate, secondCampaignParticipationToUpdate, deletedParticipation;
+    beforeEach(async function () {
       // given
-      const firstCampaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        deletedAt: null,
-        deletedBy: null,
-      });
-      const secondCampaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        deletedAt: null,
-        deletedBy: null,
-      });
       databaseBuilder.factory.buildCampaignParticipation();
-      await databaseBuilder.commit();
+      firstCampaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
+        deletedAt: null,
+        deletedBy: null,
+      });
+      secondCampaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
+        deletedAt: null,
+        deletedBy: null,
+      });
 
+      await databaseBuilder.commit();
+    });
+
+    it('should return participations', async function () {
       // when
       const participations = await campaignParticipationRepository.getByCampaignIds([
         firstCampaignParticipationToUpdate.campaignId,
@@ -418,20 +422,44 @@ describe('Integration | Repository | Campaign Participation', function () {
       ]);
     });
 
-    it('should not return deleted participations', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const deletedParticipation = databaseBuilder.factory.buildCampaignParticipation({
-        deletedAt: new Date(),
-        deletedBy: userId,
+    describe('deletedParticipations', function () {
+      beforeEach(async function () {
+        const userId = databaseBuilder.factory.buildUser().id;
+        deletedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          deletedAt: new Date(),
+          deletedBy: userId,
+        });
+        await databaseBuilder.commit();
       });
-      await databaseBuilder.commit();
 
-      // when
-      const participations = await campaignParticipationRepository.getByCampaignIds([deletedParticipation.campaignId]);
+      it('should return all participations even deleted one on flag to true', async function () {
+        // when
+        const participations = await campaignParticipationRepository.getByCampaignIds(
+          [
+            firstCampaignParticipationToUpdate.campaignId,
+            secondCampaignParticipationToUpdate.campaignId,
+            deletedParticipation.campaignId,
+          ],
+          { withDeletedParticipation: true },
+        );
 
-      // then
-      expect(participations).to.have.lengthOf(0);
+        // then
+        expect(participations).to.be.deep.equal([
+          new CampaignParticipation(firstCampaignParticipationToUpdate),
+          new CampaignParticipation(secondCampaignParticipationToUpdate),
+          new CampaignParticipation(deletedParticipation),
+        ]);
+      });
+
+      it('should not return deleted participations', async function () {
+        // when
+        const participations = await campaignParticipationRepository.getByCampaignIds([
+          deletedParticipation.campaignId,
+        ]);
+
+        // then
+        expect(participations).to.have.lengthOf(0);
+      });
     });
   });
 

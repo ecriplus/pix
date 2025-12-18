@@ -83,11 +83,14 @@ const get = async function (id) {
   });
 };
 
-const getByCampaignIds = async function (campaignIds) {
+const getByCampaignIds = async function (campaignIds, { withDeletedParticipation = false } = {}) {
   const knexConn = DomainTransaction.getConnection();
-  const campaignParticipations = await knexConn('campaign-participations')
-    .whereNull('deletedAt')
-    .whereIn('campaignId', campaignIds);
+  const queryBuilder = knexConn('campaign-participations').whereIn('campaignId', campaignIds);
+
+  if (!withDeletedParticipation) queryBuilder.whereNull('deletedAt');
+
+  const campaignParticipations = await queryBuilder;
+
   return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
 };
 

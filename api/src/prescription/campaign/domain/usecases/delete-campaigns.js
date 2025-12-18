@@ -16,12 +16,19 @@ const deleteCampaigns = async ({
   campaignParticipationRepository,
   userRecommendedTrainingRepository,
   eventLoggingJobRepository,
+  client,
+  userRole,
+  keepPreviousDeletion = false,
 }) => {
   let membership;
-  const pixAdminMember = await adminMemberRepository.get({ userId });
+  let pixAdminRole = userRole;
 
-  if (!pixAdminMember) {
-    membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
+  if (!pixAdminRole) {
+    const pixAdminMember = await adminMemberRepository.get({ userId });
+    pixAdminRole = pixAdminMember?.role;
+    if (!pixAdminRole) {
+      membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
+    }
   }
 
   for (const campaignId of campaignIds) {
@@ -32,7 +39,9 @@ const deleteCampaigns = async ({
   }
 
   const campaignsToDelete = await campaignAdministrationRepository.findByIds(campaignIds);
-  const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds);
+  const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds, {
+    withDeletedParticipation: keepPreviousDeletion,
+  });
 
   const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
 
@@ -42,9 +51,9 @@ const deleteCampaigns = async ({
     userId,
     organizationId,
     membership,
-    pixAdminRole: pixAdminMember?.role,
+    pixAdminRole,
   });
-  campaignDestructor.delete(isAnonymizationWithDeletionEnabled);
+  campaignDestructor.delete({ isAnonymizationWithDeletionEnabled, keepPreviousDeletion });
 
   for (const campaignParticipation of campaignDestructor.campaignParticipations) {
     await campaignParticipationRepository.update(campaignParticipation);
@@ -52,9 +61,9 @@ const deleteCampaigns = async ({
     if (isAnonymizationWithDeletionEnabled) {
       await eventLoggingJobRepository.performAsync(
         EventLoggingJob.forUser({
-          client: 'PIX_ORGA',
+          client: client ?? 'PIX_ORGA',
           action: campaignParticipation.loggerContext,
-          role: 'ORGA_ADMIN',
+          role: userRole ?? 'ORGA_ADMIN',
           userId: campaignParticipation.id,
           updatedByUserId: userId,
           data: {},
