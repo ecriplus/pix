@@ -227,7 +227,7 @@
                   "slides": [
                     {
                       "title": "Après un usage intensif",
-                      "description": "Killian vient d’utiliser son smartphone pour jouer et regarder des vidéos, la batterie est quasi vide et il est chaud au toucher",
+                      "description": "Killian vient d’utiliser son smartphone pour jouer et regarder des vidéos, la batterie est quasi vide et il est chaud au toucher.",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-21-22.png",
@@ -240,8 +240,8 @@
                       }
                     },
                     {
-                      "title": "Killian met son smartphone en charge ",
-                      "description": "Il pose son téléphone pour cuisiner ",
+                      "title": "Killian part faire la cuisine ",
+                      "description": "Il n'utilise pas son téléphone quand il cuisine.",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-16-dec-2025-15_26_53.png",
