@@ -98,7 +98,7 @@ export default class Item extends Component {
     return ENV.APP.FT_FOCUS_CHALLENGE_ENABLED && this.args.challenge.focused;
   }
 
-  _isAssessmentEndedBySupervisorOrByFinalization(error) {
+  _isAssessmentEndedByInvigilatorOrByFinalization(error) {
     return (
       error?.errors?.[0]?.detail === 'Le surveillant a mis fin à votre test de certification.' ||
       error?.errors?.[0]?.detail === 'La session a été finalisée par votre centre de certification.'
@@ -140,7 +140,7 @@ export default class Item extends Component {
     } catch (error) {
       answer.rollbackAttributes();
 
-      if (this._isAssessmentEndedBySupervisorOrByFinalization(error)) {
+      if (this._isAssessmentEndedByInvigilatorOrByFinalization(error)) {
         this.router.transitionTo('authenticated.certifications.results', assessment.certificationCourse.get('id'));
         return;
       }

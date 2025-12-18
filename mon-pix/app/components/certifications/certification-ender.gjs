@@ -26,7 +26,7 @@ export default class CertificationEnder extends Component {
             {{this.currentUser.user.fullName}}
           </p>
           <h1 class="certification-ender-candidate__title">{{t "pages.certification-ender.candidate.title"}}</h1>
-          {{#if @isEndedBySupervisor}}
+          {{#if @isEndedByInvigilator}}
             <p class="certification-ender-candidate__message">
               {{t "pages.certification-ender.candidate.ended-by-supervisor"}}
             </p>

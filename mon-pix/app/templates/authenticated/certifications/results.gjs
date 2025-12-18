@@ -6,7 +6,7 @@ import CertificationEnder from 'mon-pix/components/certifications/certification-
 
   <CertificationEnder
     @certificationNumber={{@model.id}}
-    @isEndedBySupervisor={{@controller.isEndedBySupervisor}}
+    @isEndedByInvigilator={{@controller.isEndedByInvigilator}}
     @hasBeenEndedDueToFinalization={{@controller.hasBeenEndedDueToFinalization}}
   />
 </template>

@@ -68,7 +68,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
 
       // when
       const screen = await renderScreen(
-        hbs`<Certifications::CertificationEnder @certificationNumber={{this.certificationNumber}} @isEndedBySupervisor={{false}} />`,
+        hbs`<Certifications::CertificationEnder @certificationNumber={{this.certificationNumber}} @isEndedByInvigilator={{false}} />`,
       );
 
       // then
@@ -83,7 +83,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
 
       // when
       const screen = await renderScreen(
-        hbs`<Certifications::CertificationEnder @certificationNumber={{this.certificationNumber}} @isEndedBySupervisor={{true}} />`,
+        hbs`<Certifications::CertificationEnder @certificationNumber={{this.certificationNumber}} @isEndedByInvigilator={{true}} />`,
       );
 
       // then
