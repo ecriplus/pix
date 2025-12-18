@@ -36,10 +36,15 @@
                 "props": {
                   "title": "Noah rencontre la modération pour la première fois. Il en parle à Anouk qui elle n’est pas étonnée.",
                   "messages": [
+                     {
+                      "userName": "Noah",
+                      "direction": "incoming",
+                      "content": "Dis Anouk, ça t’est déjà arrivé qu’une IA refuse de répondre comme ça ?"
+                    },
                                    {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "Dis Anouk, ça t’est déjà arrivé qu’une IA refuse de répondre comme ça ?",
+                      "content": " ",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/biais-avances/2025-12-09-11_00_55-prog-_-explorateur-de-fichiers.png",
                         "alt": "Message de refus affiché par une IA générative"
