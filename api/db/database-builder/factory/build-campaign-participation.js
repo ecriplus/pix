@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { CampaignParticipationStatuses } from '../../../src/prescription/shared/domain/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildCampaign } from './build-campaign.js';
@@ -25,11 +23,11 @@ const buildCampaignParticipation = function ({
   deletedBy = null,
   isCertifiable = null,
 } = {}) {
-  userId = _.isUndefined(userId) ? buildUser().id : userId;
-  organizationLearnerId = _.isUndefined(organizationLearnerId)
-    ? buildOrganizationLearner({ userId }).id
-    : organizationLearnerId;
-  campaignId = _.isUndefined(campaignId) ? buildCampaign().id : campaignId;
+  userId = userId === undefined ? buildUser().id : userId;
+  organizationLearnerId =
+    organizationLearnerId === undefined ? buildOrganizationLearner({ userId }).id : organizationLearnerId;
+  campaignId = campaignId === undefined ? buildCampaign().id : campaignId;
+
   const isShared = status === SHARED;
   sharedAt = isShared ? sharedAt : null;
 
