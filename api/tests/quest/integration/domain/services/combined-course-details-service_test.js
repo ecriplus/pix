@@ -130,7 +130,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           participationStatus: undefined,
           isCompleted: false,
           isLocked: true,
-          duration: 10,
+          duration: 30,
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           totalStagesCount: null,
           validatedStagesCount: null,
