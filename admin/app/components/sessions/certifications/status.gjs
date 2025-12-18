@@ -7,7 +7,7 @@ export default class CertificationStatusComponent extends Component {
     const blockingStatuses = [
       assessmentStates.STARTED,
       assessmentResultStatus.ERROR,
-      assessmentStates.ENDED_BY_SUPERVISOR,
+      assessmentStates.ENDED_BY_INVIGILATOR,
     ];
     return includes(blockingStatuses, this.args.record.status) || this.args.record.isFlaggedAborted;
   }

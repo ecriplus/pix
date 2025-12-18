@@ -5,7 +5,7 @@ import find from 'lodash/find';
 import { assessmentStates, certificationStatuses } from './certification';
 
 export const juryCertificationSummaryStatuses = [
-  { value: assessmentStates.ENDED_BY_SUPERVISOR, label: 'Terminée par le surveillant' },
+  { value: assessmentStates.ENDED_BY_INVIGILATOR, label: 'Terminée par le surveillant' },
 ];
 
 const statuses = [...certificationStatuses, ...juryCertificationSummaryStatuses];

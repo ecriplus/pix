@@ -76,7 +76,7 @@ const assessmentResultStatusLabelAndColor = (status) => ({
 });
 
 const assessmentStateMap = {
-  [assessmentStates.ENDED_BY_SUPERVISOR]: {
+  [assessmentStates.ENDED_BY_INVIGILATOR]: {
     label: 'pages.certifications.certification.details.v3.assessment-state.ended-by-supervisor',
     color: secondaryColor,
   },
@@ -165,7 +165,7 @@ export default class DetailsV3 extends Component {
   }
 
   get completionDateTooltipContent() {
-    if (this.args.details.wasEndedBySupervisor) {
+    if (this.args.details.wasEndedByInvigilator) {
       return 'pages.certifications.certification.details.v3.completion-date-tooltip.ended-by-supervisor';
     }
     if (this.args.details.wasFinalized) {

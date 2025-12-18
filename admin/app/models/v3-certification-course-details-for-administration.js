@@ -35,8 +35,8 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     return this.assessmentState === assessmentStates.ENDED_DUE_TO_FINALIZATION;
   }
 
-  get wasEndedBySupervisor() {
-    return this.assessmentState === assessmentStates.ENDED_BY_SUPERVISOR;
+  get wasEndedByInvigilator() {
+    return this.assessmentState === assessmentStates.ENDED_BY_INVIGILATOR;
   }
 
   get wasCompleted() {
@@ -79,7 +79,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   }
 
   get hasNotBeenCompletedByCandidate() {
-    return [assessmentStates.ENDED_BY_SUPERVISOR, assessmentStates.ENDED_DUE_TO_FINALIZATION].includes(
+    return [assessmentStates.ENDED_BY_INVIGILATOR, assessmentStates.ENDED_DUE_TO_FINALIZATION].includes(
       this.assessmentState,
     );
   }
