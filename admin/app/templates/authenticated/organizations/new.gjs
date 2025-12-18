@@ -15,7 +15,6 @@ import CreationForm from 'pix-admin/components/organizations/creation-form';
 
   <main class="main-admin-form">
     <CreationForm
-      @organization={{@model.organization}}
       @administrationTeams={{@model.administrationTeams}}
       @countries={{@model.countries}}
       @onSubmit={{@controller.addOrganization}}

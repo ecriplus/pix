@@ -3,6 +3,7 @@ import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CreationForm from 'pix-admin/components/organizations/creation-form';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -29,14 +30,10 @@ module('Integration | Component | organizations/creation-form', function (hooks)
 
   module('Render', function () {
     test('it renders', async function (assert) {
-      //given
-      const organization = store.createRecord('organization', { type: '' });
-
       // when
       const screen = await render(
         <template>
           <CreationForm
-            @organization={{organization}}
             @administrationTeams={{administrationTeams}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
@@ -92,24 +89,22 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     });
   });
 
-  module('when filling form', function () {
-    test('should update organization model', async function (assert) {
+  module('when submitting form', function () {
+    test('should call onSubmit function with form as argument', async function (assert) {
       // given
-      const organization = store.createRecord('organization');
+      const handleSubmitStub = sinon.stub();
 
       const screen = await render(
         <template>
           <CreationForm
-            @organization={{organization}}
             @administrationTeams={{administrationTeams}}
             @countries={{countries}}
-            @onSubmit={{onSubmit}}
+            @onSubmit={{handleSubmitStub}}
             @onCancel={{onCancel}}
           />
         </template>,
       );
 
-      // when
       await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
 
       click(screen.getByRole('button', { name: `${t('components.organizations.creation.type.label')} *` }));
@@ -142,17 +137,24 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       await fillByLabel(`${t('components.organizations.creation.dpo.lastname')}DPO`, 'Ptipeu');
       await fillByLabel(`${t('components.organizations.creation.dpo.email')}DPO`, 'justin.ptipeu@example.net');
 
+      // when
+      await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
       // then
-      assert.strictEqual(organization.name, 'Organisation de Test');
-      assert.strictEqual(organization.type, 'SCO');
-      assert.strictEqual(organization.externalId, 'Mon identifiant externe');
-      assert.strictEqual(organization.administrationTeamId, 'team-2');
-      assert.strictEqual(organization.provinceCode, '78');
-      assert.strictEqual(organization.countryCode, '99100');
-      assert.strictEqual(organization.documentationUrl, 'www.documentation.fr');
-      assert.strictEqual(organization.dataProtectionOfficerFirstName, 'Justin');
-      assert.strictEqual(organization.dataProtectionOfficerLastName, 'Ptipeu');
-      assert.strictEqual(organization.dataProtectionOfficerEmail, 'justin.ptipeu@example.net');
+      const expectedForm = {
+        name: 'Organisation de Test',
+        type: 'SCO',
+        externalId: 'Mon identifiant externe',
+        administrationTeamId: 'team-2',
+        provinceCode: '78',
+        countryCode: '99100',
+        documentationUrl: 'www.documentation.fr',
+        dataProtectionOfficerFirstName: 'Justin',
+        dataProtectionOfficerLastName: 'Ptipeu',
+        dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
+      };
+
+      assert.ok(handleSubmitStub.calledWith(expectedForm));
     });
   });
 });

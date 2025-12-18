@@ -3,9 +3,9 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { concat, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import Card from '../card';
@@ -13,6 +13,8 @@ import Card from '../card';
 export default class OrganizationCreationForm extends Component {
   @service store;
   @service intl;
+
+  @tracked form = {};
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -48,58 +50,21 @@ export default class OrganizationCreationForm extends Component {
     return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
   }
 
-  @action
-  handleOrganizationTypeSelectionChange(value) {
-    this.args.organization.type = value;
-  }
+  handleInputChange = (key, event) => {
+    this.form = { ...this.form, [key]: event.target.value };
+  };
 
-  @action
-  handleOrganizationNameChange(event) {
-    this.args.organization.name = event.target.value;
-  }
+  handleSelectChange = (key, value) => {
+    this.form = { ...this.form, [key]: value };
+  };
 
-  @action
-  handleAdministrationTeamSelectionChange(value) {
-    this.args.organization.administrationTeamId = value;
-  }
-
-  @action
-  handleCountrySelectionChange(value) {
-    this.args.organization.countryCode = value;
-  }
-
-  @action
-  handleDocumentationUrlChange(event) {
-    this.args.organization.documentationUrl = event.target.value;
-  }
-
-  @action
-  handleCreditsChange(event) {
-    this.args.organization.credit = +event.target.value;
-  }
-
-  @action
-  handleDataProtectionOfficerFirstNameChange(event) {
-    this.args.organization.dataProtectionOfficerFirstName = event.target.value;
-  }
-
-  @action
-  handleDataProtectionOfficerLastNameChange(event) {
-    this.args.organization.dataProtectionOfficerLastName = event.target.value;
-  }
-
-  @action
-  handleDataProtectionOfficerEmailChange(event) {
-    this.args.organization.dataProtectionOfficerEmail = event.target.value;
-  }
-
-  @action
-  handleInputChange(key, event) {
-    this.args.organization[key] = event.target.value;
-  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.args.onSubmit(this.form);
+  };
 
   <template>
-    <form class="admin-form" {{on "submit" @onSubmit}}>
+    <form class="admin-form" {{on "submit" this.handleSubmit}}>
       <p class="admin-form__mandatory-text">
         {{t "common.forms.mandatory-fields" htmlSafe=true}}
       </p>
@@ -120,7 +85,7 @@ export default class OrganizationCreationForm extends Component {
           <div class="organization-creation-form__input--full">
             <PixInput
               @id="organizationName"
-              onchange={{this.handleOrganizationNameChange}}
+              {{on "change" (fn this.handleInputChange "name")}}
               required={{true}}
               aria-required={{true}}
               @requiredLabel={{t "common.fields.required-field"}}
@@ -135,11 +100,11 @@ export default class OrganizationCreationForm extends Component {
           </div>
 
           <PixSelect
-            @onChange={{this.handleOrganizationTypeSelectionChange}}
+            @onChange={{fn this.handleSelectChange "type"}}
             @options={{this.organizationTypes}}
             @placeholder={{t "components.organizations.creation.type.placeholder"}}
             @hideDefaultOption={{true}}
-            @value={{@organization.type}}
+            @value={{this.form.type}}
             required
             aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
@@ -149,11 +114,11 @@ export default class OrganizationCreationForm extends Component {
           </PixSelect>
 
           <PixSelect
-            @onChange={{this.handleAdministrationTeamSelectionChange}}
+            @onChange={{fn this.handleSelectChange "administrationTeamId"}}
             @options={{this.administrationTeamsOptions}}
             @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
             @hideDefaultOption={{true}}
-            @value={{@organization.administrationTeamId}}
+            @value={{this.form.administrationTeamId}}
             required
             aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
@@ -162,11 +127,11 @@ export default class OrganizationCreationForm extends Component {
           </PixSelect>
 
           <PixSelect
-            @onChange={{this.handleCountrySelectionChange}}
+            @onChange={{fn this.handleSelectChange "countryCode"}}
             @options={{this.countriesOptions}}
             @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
             @hideDefaultOption={{true}}
-            @value={{@organization.countryCode}}
+            @value={{this.form.countryCode}}
             required
             @aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
@@ -177,7 +142,7 @@ export default class OrganizationCreationForm extends Component {
 
           <PixInput
             @id="provinceCode"
-            {{on "input" (fn this.handleInputChange "provinceCode")}}
+            {{on "change" (fn this.handleInputChange "provinceCode")}}
             placeholder={{concat (t "common.words.example-abbr") " 078"}}
           >
             <:label>{{t "components.organizations.creation.province-code"}}</:label>
@@ -186,7 +151,7 @@ export default class OrganizationCreationForm extends Component {
           <div class="organization-creation-form__input--full">
             <PixInput
               @id="externalId"
-              {{on "input" (fn this.handleInputChange "externalId")}}
+              {{on "change" (fn this.handleInputChange "externalId")}}
               placeholder={{t "components.organizations.creation.external-id.placeholder"}}
             >
               <:label>{{t "components.organizations.creation.external-id.label"}}</:label>
@@ -201,7 +166,7 @@ export default class OrganizationCreationForm extends Component {
           <div class="organization-creation-form__input--full">
             <PixInput
               @id="documentationUrl"
-              onchange={{this.handleDocumentationUrlChange}}
+              {{on "change" (fn this.handleInputChange "documentationUrl")}}
               placeholder={{concat (t "common.words.example-abbr") " https://www.documentation.org"}}
             >
               <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
@@ -212,7 +177,7 @@ export default class OrganizationCreationForm extends Component {
         <Card class="admin-form__card organization-creation-form__card" @title={{this.dpoSectionTitle}}>
           <PixInput
             @id="dataProtectionOfficerLastName"
-            onchange={{this.handleDataProtectionOfficerLastNameChange}}
+            {{on "change" (fn this.handleInputChange "dataProtectionOfficerLastName")}}
             placeholder={{concat (t "common.words.example-abbr") " Dupont"}}
           >
             <:label>{{t "components.organizations.creation.dpo.lastname"}}
@@ -223,7 +188,7 @@ export default class OrganizationCreationForm extends Component {
 
           <PixInput
             @id="dataProtectionOfficerFirstName"
-            onchange={{this.handleDataProtectionOfficerFirstNameChange}}
+            {{on "change" (fn this.handleInputChange "dataProtectionOfficerFirstName")}}
             placeholder={{concat (t "common.words.example-abbr") " Jean"}}
           >
             <:label>{{t "components.organizations.creation.dpo.firstname"}}
@@ -235,7 +200,7 @@ export default class OrganizationCreationForm extends Component {
           <div class="organization-creation-form__input--full">
             <PixInput
               @id="dataProtectionOfficerEmail"
-              onchange={{this.handleDataProtectionOfficerEmailChange}}
+              {{on "change" (fn this.handleInputChange "dataProtectionOfficerEmail")}}
               placeholder={{concat (t "common.words.example-abbr") " jean-dupont@example.net"}}
             >
               <:label>{{t "components.organizations.creation.dpo.email"}}

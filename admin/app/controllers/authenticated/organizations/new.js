@@ -23,9 +23,8 @@ export default class NewController extends Controller {
   }
 
   @action
-  async addOrganization(event) {
-    event.preventDefault();
-    const { name, type, administrationTeamId, countryCode } = this.model.organization;
+  async addOrganization(form) {
+    const { name, type, administrationTeamId, countryCode } = form;
 
     if (!name || !type || !administrationTeamId || !countryCode) {
       this.pixToast.sendErrorNotification({
@@ -34,25 +33,24 @@ export default class NewController extends Controller {
       return;
     }
 
+    const organization = this.store.createRecord('organization', { ...form });
+
     if (this.parentOrganizationId) {
-      this.model.organization.setProperties({
+      organization.setProperties({
         parentOrganizationId: this.parentOrganizationId,
       });
     }
 
     try {
-      await this.model.organization.save();
+      await organization.save();
       this.pixToast.sendSuccessNotification({ message: 'L’organisation a été créée avec succès.' });
 
-      if (this.model.organization.parentOrganizationId) {
-        const parentOrganization = await this.store.findRecord(
-          'organization',
-          this.model.organization.parentOrganizationId,
-        );
+      if (organization.parentOrganizationId) {
+        const parentOrganization = await this.store.findRecord('organization', organization.parentOrganizationId);
         await parentOrganization.hasMany('children').reload();
       }
 
-      this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.organization.id);
+      this.router.transitionTo('authenticated.organizations.get.all-tags', organization.id);
     } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
