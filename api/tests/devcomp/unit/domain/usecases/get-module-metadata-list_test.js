@@ -82,20 +82,14 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
     modules = [firstModule, secondModule];
   });
 
-  it('should get and return a list of ModuleMetadata', async function () {
+  it('should return a list of ModuleMetadata', async function () {
     // given
     const ids = [modules[0].id, modules[1].id];
-    const moduleRepository = {
+    const moduleMetadataRepository = {
       getAllByIds: sinon.stub(),
     };
-    moduleRepository.getAllByIds.withArgs({ ids }).resolves(modules);
-
-    // when
-    const moduleMetadataList = await getModuleMetadataList({ ids, moduleRepository });
-
-    // then
-    const expectedModuleMetadataList = [
-      {
+    const moduleMetadataList = [
+      new ModuleMetadata({
         id: firstModule.id,
         shortId: firstModule.shortId,
         slug: firstModule.slug,
@@ -103,8 +97,8 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
         isBeta: firstModule.isBeta,
         duration: firstModule.details.duration,
         image: firstModule.details.image,
-      },
-      {
+      }),
+      new ModuleMetadata({
         id: secondModule.id,
         shortId: secondModule.shortId,
         slug: secondModule.slug,
@@ -112,24 +106,30 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
         isBeta: secondModule.isBeta,
         duration: secondModule.details.duration,
         image: secondModule.details.image,
-      },
+      }),
     ];
-    expect(moduleMetadataList).to.deep.equal(expectedModuleMetadataList);
-    expect(moduleMetadataList[0]).instanceOf(ModuleMetadata);
-    expect(moduleMetadataList[1]).instanceOf(ModuleMetadata);
+    moduleMetadataRepository.getAllByIds.withArgs({ ids }).resolves(moduleMetadataList);
+
+    // when
+    const result = await getModuleMetadataList({ ids, moduleMetadataRepository });
+
+    // then
+    expect(result).to.deep.equal(moduleMetadataList);
+    expect(result[0]).instanceOf(ModuleMetadata);
+    expect(result[1]).instanceOf(ModuleMetadata);
   });
 
   context('when a module id does not exist', function () {
     it('should throw the NotFoundError thrown by repository', async function () {
       // given
       const ids = ['notFoundModuleId1', 'notFoundModuleId2'];
-      const moduleRepository = {
+      const moduleMetadataRepository = {
         getAllByIds: sinon.stub(),
       };
-      moduleRepository.getAllByIds.withArgs({ ids }).throws(new NotFoundError());
+      moduleMetadataRepository.getAllByIds.withArgs({ ids }).throws(new NotFoundError());
 
       // when
-      const error = await catchErr(getModuleMetadataList)({ ids, moduleRepository });
+      const error = await catchErr(getModuleMetadataList)({ ids, moduleMetadataRepository });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);

@@ -1,12 +1,5 @@
-import { ModuleMetadata } from '../models/module/ModuleMetadata.js';
-
-async function getModuleMetadataList({ ids, moduleRepository }) {
-  const modules = await moduleRepository.getAllByIds({ ids });
-
-  return modules.map(
-    ({ id, shortId, slug, title, isBeta, details }) =>
-      new ModuleMetadata({ id, shortId, slug, title, isBeta, duration: details.duration, image: details.image }),
-  );
+async function getModuleMetadataList({ ids, moduleMetadataRepository }) {
+  return moduleMetadataRepository.getAllByIds({ ids });
 }
 
 export { getModuleMetadataList };

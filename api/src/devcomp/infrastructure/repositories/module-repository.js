@@ -5,21 +5,6 @@ import { LearningContentResourceNotFound } from '../../../shared/domain/errors.j
 import { ModuleDoesNotExistError } from '../../domain/errors.js';
 import { ModuleFactory } from '../factories/module-factory.js';
 
-async function getAllByIds({ ids, moduleDatasource }) {
-  try {
-    const modules = await moduleDatasource.getAllByIds(ids);
-
-    return await Promise.all(
-      modules.map(async (moduleData) => {
-        const version = _computeModuleVersion(moduleData);
-        return await ModuleFactory.build({ ...moduleData, version });
-      }),
-    );
-  } catch (error) {
-    throw new NotFoundError(error.message);
-  }
-}
-
 async function getById({ id, moduleDatasource }) {
   return await _getModule({ ref: 'id', moduleDatasource, query: id });
 }
@@ -37,7 +22,7 @@ async function list({ moduleDatasource }) {
   return Promise.all(modulesData.map(async (moduleData) => await ModuleFactory.build(moduleData)));
 }
 
-export { getAllByIds, getById, getByShortId, getBySlug, list };
+export { getById, getByShortId, getBySlug, list };
 
 function _computeModuleVersion(moduleData) {
   const hash = crypto.createHash('sha256');
