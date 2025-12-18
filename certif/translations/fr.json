@@ -225,7 +225,7 @@
         "extra-information": "Sessions de certification",
         "label": "Sessions"
       },
-      "supervisor": "Espace surveillant",
+      "invigilator": "Espace surveillant",
       "team": "Équipe"
     }
   },
