@@ -104,7 +104,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           participationStatus: undefined,
           isCompleted: false,
           isLocked: true,
-          duration: 10,
+          duration: 30,
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           validatedStagesCount: null,
           totalStagesCount: null,
