@@ -108,7 +108,7 @@ const completeByAssessmentId = function (assessmentId) {
   return this._updateStateById({ id: assessmentId, state: Assessment.states.COMPLETED });
 };
 
-const endBySupervisorByAssessmentId = function (assessmentId) {
+const endByInvigilatorByAssessmentId = function (assessmentId) {
   return this._updateStateById({ id: assessmentId, state: Assessment.states.ENDED_BY_INVIGILATOR });
 };
 
@@ -210,7 +210,7 @@ export {
   _updateStateById,
   abortByAssessmentId,
   completeByAssessmentId,
-  endBySupervisorByAssessmentId,
+  endByInvigilatorByAssessmentId,
   findLastCompletedAssessmentsForEachCompetenceByUser,
   findNotAbortedCampaignAssessmentsByUserId,
   get,

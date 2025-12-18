@@ -216,6 +216,7 @@
       },
       "documentation": "Documentation",
       "extra-information": "Main navigation",
+      "invigilator": "Invigilator’s Portal",
       "logout": "Log out",
       "menu-labels": {
         "close": "Close menu",
@@ -225,7 +226,6 @@
         "extra-information": "Certification sessions",
         "label": "Sessions"
       },
-      "invigilator": "Invigilator’s Portal",
       "team": "Team"
     }
   },

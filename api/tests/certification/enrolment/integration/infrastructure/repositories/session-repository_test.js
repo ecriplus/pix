@@ -206,9 +206,9 @@ describe('Integration | Repository | certification | enrolment | SessionEnrolmen
 
           // then
           const foundSession = await knex('sessions').select('id').where({ id: sessionId }).first();
-          const supervisorAccesses = await knex('invigilator_accesses').where({ sessionId });
+          const invigilatorAccesses = await knex('invigilator_accesses').where({ sessionId });
           expect(foundSession).to.be.undefined;
-          expect(supervisorAccesses).to.be.empty;
+          expect(invigilatorAccesses).to.be.empty;
         });
       });
 

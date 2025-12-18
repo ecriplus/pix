@@ -17,10 +17,10 @@ describe('Unit | Certification | Session | Domain | Models | InvigilatorSession'
   context('#checkPassword', function () {
     it('should return true when the invigilator password match', function () {
       // given
-      const invigilatorSession = new InvigilatorSession({ invigilatorPassword: 'MATCHING-SUPERVISOR_PASSWORD' });
+      const invigilatorSession = new InvigilatorSession({ invigilatorPassword: 'MATCHING-INVIGILATOR_PASSWORD' });
 
       // when
-      const checkPassword = invigilatorSession.checkPassword('MATCHING-SUPERVISOR_PASSWORD');
+      const checkPassword = invigilatorSession.checkPassword('MATCHING-INVIGILATOR_PASSWORD');
 
       // then
       expect(checkPassword).to.be.true;
@@ -28,10 +28,10 @@ describe('Unit | Certification | Session | Domain | Models | InvigilatorSession'
 
     it('should return false when the invigilator password does not match', function () {
       // given
-      const invigilatorSession = new InvigilatorSession({ invigilatorPassword: 'MATCHING-SUPERVISOR_PASSWORD' });
+      const invigilatorSession = new InvigilatorSession({ invigilatorPassword: 'MATCHING-INVIGILATOR_PASSWORD' });
 
       // when
-      const checkPassword = invigilatorSession.checkPassword('NOT_MATCHING-SUPERVISOR_PASSWORD');
+      const checkPassword = invigilatorSession.checkPassword('NOT_MATCHING-INVIGILATOR_PASSWORD');
 
       // then
       expect(checkPassword).to.be.false;

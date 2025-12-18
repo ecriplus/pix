@@ -13,6 +13,7 @@ module('Unit | Route | application', function (hooks) {
     sinon.stub(this.route.featureToggles, 'load').resolves();
     sinon.stub(this.route.currentUser, 'load').resolves();
   });
+
   hooks.afterEach(function () {
     sinon.restore();
   });

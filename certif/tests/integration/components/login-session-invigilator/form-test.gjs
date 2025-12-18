@@ -62,7 +62,9 @@ module('Integration | Component | Login session invigilator | Form', function (h
     module('when the certification center is archived', function () {
       test('it should display a specific error', async function (assert) {
         // given
-        const authenticateInvigilator = sinon.stub().rejects({ errors: [{ code: 'CERTIFICATION_CENTER_IS_ARCHIVED' }] });
+        const authenticateInvigilator = sinon
+          .stub()
+          .rejects({ errors: [{ code: 'CERTIFICATION_CENTER_IS_ARCHIVED' }] });
 
         // when
         const screen = await render(

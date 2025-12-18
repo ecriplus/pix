@@ -216,6 +216,7 @@
       },
       "documentation": "Documentation",
       "extra-information": "Navigation principale",
+      "invigilator": "Espace surveillant",
       "logout": "Se déconnecter",
       "menu-labels": {
         "close": "Fermer le menu",
@@ -225,7 +226,6 @@
         "extra-information": "Sessions de certification",
         "label": "Sessions"
       },
-      "invigilator": "Espace surveillant",
       "team": "Équipe"
     }
   },
