@@ -106,7 +106,7 @@
               "element": {
                 "id": "5b3d3352-284f-4520-80a2-fecf99a6fc14",
                 "type": "text",
-                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives&nbsp;: l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
+                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives : l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
               }
             },
             {
@@ -117,7 +117,7 @@
                     {
                       "id": "6dc7cc3b-9fba-498d-bd9d-9ec89d6f0869",
                       "type": "custom",
-                      "instruction": "<p>A votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de minerais ?<br>Déplacez la jauge entre 1kg et 800kg.</p>",
+                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de minerais ?<br>Déplacez la jauge entre 1kg et 800kg.</p>",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -159,7 +159,7 @@
                     {
                       "id": "10dbae70-c3ba-4cd6-a3a2-adf81cb60eba",
                       "type": "custom",
-                      "instruction": "<p>A votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et une&nbsp;1,5 tonne d’eau.</p>",
+                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et 1,5 tonne d’eau.</p>",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -201,7 +201,7 @@
                     {
                       "id": "c6d1cf5f-34f7-4875-8583-234d2bf092a9",
                       "type": "custom",
-                      "instruction": "<p>A votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos d’énergie fossile ?<br>Déplacez la jauge entre 1kg et&nbsp;240kg.</p>",
+                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos d’énergie fossile ?<br>Déplacez la jauge entre 1kg et 240kg.</p>",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -243,7 +243,7 @@
                     {
                       "id": "7e2ffcb2-a37f-4767-80ce-bee937eac2d8",
                       "type": "custom",
-                      "instruction": "<p>A votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de produits toxiques ?<br>Déplacez la jauge entre 1kg et 33kg.</p>",
+                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il de kilos de produits toxiques ?<br>Déplacez la jauge entre 1kg et 33kg.</p>",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -294,7 +294,7 @@
               "element": {
                 "id": "80b90a55-683b-4627-8538-5da724524046",
                 "type": "text",
-                "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle&nbsp;consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.&nbsp;<br><br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent&nbsp;: nous utilisons aujourd’hui <strong>plus de ressources naturelles</strong> que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.&nbsp;🌍</p>"
+                "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.<br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent : nous utilisons aujourd’hui <strong>plus de ressources naturelles</strong> que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.🌍</p>"
               }
             }
           ]
@@ -309,7 +309,7 @@
               "element": {
                 "id": "8773c280-9e0e-423d-a698-9043db500dd0",
                 "type": "text",
-                "content": "<p>Même si l’on est conscient de l’impact environnemental de la fabrication d’un nouvel appareil, garder ses appareils numériques plus longtemps n’est pas sans difficulté.&nbsp;</p>"
+                "content": "<p>Même si l’on est conscient de l’impact environnemental de la fabrication d’un nouvel appareil, garder ses appareils numériques plus longtemps n’est pas sans difficulté.</p>"
               }
             }
           ]
@@ -351,7 +351,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation&nbsp;: onglets nombreux ou applications en arrière plan.</p>",
+                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation : onglets nombreux ou applications en arrière plan.</p>",
                           "feedback": {
                             "diagnosis": "<p>Pas vraiment, même si ces pratiques utilisent de la batterie, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
                           }
@@ -398,23 +398,23 @@
                       "proposals": [
                         {
                           "id": "2",
-                          "content": "<p>Il faut changer de papier pour l’impression.<br></p>",
+                          "content": "<p>La cartouche a été mal reconnue après l’installation, la cartouche est à jeter.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ce n’est pas le papier qui est en cause ici, il s’agit en réalité&nbsp;d’un exemple d’<strong>obsolescence technique</strong>. La cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
+                            "diagnosis": "<p>La cartouche fonctionnait au préalable. Ici c'est un exemple d’<strong>obsolescence technique </strong>: la cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>Il s’agit malheureusement d’une limitation  qui oblige l’achat d’une nouvelle cartouche, même s’il reste de l’encre.</p>",
+                          "content": "<p>Le fabricant limite volontairement l’impression pour vendre de nouvelles cartouches</p>",
                           "feedback": {
                             "diagnosis": "<p>En effet, c’est un exemple d’<strong>obsolescence technique</strong>, la cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Il suffit de secouer la cartouche et de réinitialiser l’ordinateur.<br></p>",
+                          "content": "<p>Il suffit de secouer la cartouche et de réinitialiser l’ordinateur.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ca ne suffira pas ! Il s’agit en réalité&nbsp;d’un exemple d’<strong>obsolescence technique</strong>. La cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
+                            "diagnosis": "<p>Ca ne suffira pas ! Il s’agit en réalité d’un exemple d’<strong>obsolescence technique</strong>. La cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
                           }
                         },
                         {
@@ -443,14 +443,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ca semble peu probable, aucune batterie n’est collée à la colle.&nbsp;<br></p>",
+                          "content": "<p>Ca semble peu probable, aucune batterie n’est collée.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Malheureusement si, la pratique existe, il s’agit d’un cas de limitation à la réparabilité. Dans ce type de cas, l’appareil est physiquement difficile à réparer, les pièces détachées sont onéreuses ou ne sont pas proposées à la vente.</p>"
+                            "diagnosis": "<p>Malheureusement si, la pratique existe, il s’agit d’un cas de <strong>limitation à la réparabilité</strong>. Dans ce type de cas, l’appareil est physiquement difficile à réparer, les pièces détachées sont onéreuses ou ne sont pas proposées à la vente.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>La batterie est collée pour empêcher la réparation et limiter la réparabilité de l’appareil.</p>",
+                          "content": "<p>La batterie est collée pour empêcher la réparation.</p>",
                           "feedback": {
                             "diagnosis": "<p>Tout à fait ! Il s’agit d’un cas de <strong>limitation à la réparabilité</strong>. Dans ce type de cas, l’appareil est physiquement difficile à réparer, les pièces détachées sont onéreuses ou ne sont pas proposées à la vente.</p>"
                           }
@@ -472,7 +472,7 @@
                     {
                       "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
                       "type": "text",
-                      "content": "<p>J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?&nbsp;</p>"
+                      "content": "<p>J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?</p>"
                     },
                     {
                       "id": "5759eb75-ee53-4028-9c95-2a5a85b9e9ca",
@@ -483,28 +483,28 @@
                           "id": "1",
                           "content": "<p>Lors du lancement d’une nouvelle version, votre ancien téléphone devient alors obsolète, il vaut mieux changer avant qu’il ne soit trop dépassé.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Non ! Le simple lancement d’une nouvelle version ne rend pas votre modèle précédent obsolète. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence marketing.</strong></p>"
+                            "diagnosis": "<p>Non ! Le simple lancement d’une nouvelle version ne rend pas votre modèle précédent obsolète. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence psychologique.</strong></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Oui, car votre ancien écran de téléphone ne sera plus adapté aux nouvelles applications.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Non, le lancement de ce nouveau design d’écran n’aura pas d’impact sur votre téléphone actuel. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence marketing</strong>.</p>"
+                            "diagnosis": "<p>Non, le lancement de ce nouveau design d’écran n’aura pas d’impact sur votre téléphone actuel. Ici, le fabricant cherche à stimuler l’achat d’un nouveau modèle, même si votre appareil fonctionne encore très bien. On parle alors d’une stratégie d’<strong>obsolescence psychologique</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>A vous de voir, ces changements semblent surtout esthétiques ou marketing. Ils sont surtout là pour vous donner envie d’acheter du neuf.</p>",
+                          "content": "<p>À vous de voir, ces changements semblent surtout esthétiques ou marketing. Ils sont surtout là pour vous donner envie d’acheter du neuf.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence marketing</strong>.</p>"
+                            "diagnosis": "<p>Effectivement, ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence psychologique</strong>.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence marketing</strong>.</p>"
+                            "diagnosis": "<p>Ces changements sont principalement conçus pour inciter à l’achat du nouveau modèle. On parle alors d’une stratégie d’<strong>obsolescence psychologique</strong>.</p>"
                           }
                         }
                       ],
@@ -529,7 +529,7 @@
                     {
                       "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
                       "type": "text",
-                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
+                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom : l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir : </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
                     }
                   ]
                 },
@@ -538,7 +538,7 @@
                     {
                       "id": "dd7638c3-1e9e-4d37-8deb-96b03c33aab5",
                       "type": "text",
-                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies&nbsp;:</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.</li><li>L’<strong>obsolescence marketing</strong>. Cette stratégie est très puissante.&nbsp;🧠</li></ul>"
+                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies :</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.</li><li>L’<strong>obsolescence psychologique (ou par effet de mode)</strong>. Cette stratégie est très puissante. 🧠</li></ul>"
                     }
                   ]
                 }
@@ -556,7 +556,7 @@
               "element": {
                 "id": "b2b94d0c-976d-4326-b5d4-b2fcd916f89b",
                 "type": "text",
-                "content": "<p>Alors, comment sortir du modèle «&nbsp;extraire, produire, consommer, jeter&nbsp;», également appelé système linéaire ?<br><br>En changeant de réflexe. Découvrons les autres gestes possibles.</p>"
+                "content": "<p>Alors, comment sortir du modèle « extraire, produire, consommer, jeter », également appelé système linéaire ?<br><br>En changeant de réflexe. Découvrons les autres gestes possibles.</p>"
               }
             }
           ]
@@ -571,7 +571,7 @@
               "element": {
                 "id": "8975a87a-3103-4b3c-ab41-3b9d585d619a",
                 "type": "text",
-                "content": "<p>Voici un schéma représentant différentes étapes de vie d’un produit. Quatre verbes ont été volontairement effacés et remplacés par les chiffres 1, 2, 3, 4.&nbsp;</p>"
+                "content": "<p>Voici un schéma représentant différentes étapes de vie d’un produit. Quatre verbes ont été volontairement effacés et remplacés par les chiffres 1, 2, 3, 4.</p>"
               }
             },
             {
@@ -581,7 +581,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/schema-eco-circulaire.png",
                 "alt": "Description en détail ci-après ",
-                "alternativeText": "<p>Schéma représentant quatre niveaux de circularité appliqués au cycle de vie des appareils électroniques&nbsp;: fabrication, distribution, consommation et tri. Au-dessus du cycle linéaire apparaissent quatre boucles. La plus large (1) relie le tri à la fabrication avec l’étiquette “On utilise les matières premières”. Une boucle intermédiaire (2), partant du tri vers la distribution, indique “On remet en état, on revend”. Une boucle plus petite (3), partant de la consommation vers la distribution, est intitulée “On donne, on revend”. Enfin, la plus courte (4) relie la consommation à elle-même et porte la mention “On garde le même appareil”. Ces boucles illustrent les stratégies de réemploi, réparation et prolongation de durée de vie.</p>",
+                "alternativeText": "<p>Schéma représentant quatre niveaux de circularité appliqués au cycle de vie des appareils électroniques: fabrication, distribution, consommation et tri. Au-dessus du cycle linéaire apparaissent quatre boucles. La plus large (1) relie le tri à la fabrication avec l’étiquette “On utilise les matières premières”. Une boucle intermédiaire (2), partant du tri vers la distribution, indique “On remet en état, on revend”. Une boucle plus petite (3), partant de la consommation vers la distribution, est intitulée “On donne, on revend”. Enfin, la plus courte (4) relie la consommation à elle-même et porte la mention “On garde le même appareil”. Ces boucles illustrent les stratégies de réemploi, réparation et prolongation de durée de vie.</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -733,7 +733,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué !</p>",
-                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong>&nbsp;: vous avez ici les actions au coeur de l’économie circulaire !</p>"
+                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong> : vous avez ici les actions au coeur de l’économie circulaire !</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas vraiment.</p>",
@@ -757,7 +757,7 @@
                     {
                       "id": "12f35076-ff72-40f7-b41f-14a680bcb313",
                       "type": "text",
-                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong>&nbsp;: on extrait, on produit, on consomme, puis on <strong>jette</strong>.&nbsp;🚮 Chaque année, de nombreux appareils encore utilisables finissent à la poubelle. Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
+                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong> : on extrait, on produit, on consomme, puis on <strong>jette</strong>. 🚮 Chaque année, de nombreux appareils encore utilisables finissent à la poubelle. Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
                     }
                   ]
                 },
@@ -766,7 +766,7 @@
                     {
                       "id": "967c7ce3-bb66-4b23-a3a1-c8ccf5f1ea00",
                       "type": "text",
-                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles-mêmes énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques fabriqués&nbsp;: le meilleur déchet est celui que l’on ne produit pas.</p>"
+                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles-mêmes énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques fabriqués : le meilleur déchet est celui que l’on ne produit pas.</p>"
                     }
                   ]
                 },
@@ -775,7 +775,7 @@
                     {
                       "id": "81d82353-d909-48c0-8791-732999302eab",
                       "type": "text",
-                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui&nbsp;: l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
+                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui : l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
                     }
                   ]
                 }
@@ -799,7 +799,7 @@
               "element": {
                 "id": "fcffe15b-8162-4f23-bee7-aa81594b6e62",
                 "type": "text",
-                "content": "<ul><li>🌍 La <strong>fabrication des appareils numériques</strong> a des impacts environnementaux&nbsp;: émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.<br><br></li><li>⏳ Les pratiques d’<strong>obsolescence,&nbsp;</strong>qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements.&nbsp;<br><br></li><li>🔄 Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable.&nbsp;<br><br></li><li>⚖️ Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.&nbsp;</li></ul>"
+                "content": "<ul><li>🌍 La <strong>fabrication des appareils numériques</strong> a des impacts environnementaux : émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.<br><br></li><li>⏳ Les pratiques d’<strong>obsolescence</strong>, qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements.<br><br></li><li>🔄 Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. <br><br></li><li>⚖️ Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
               }
             }
           ]
@@ -850,8 +850,8 @@
                     "id": "4",
                     "content": "<p>L’étape de fabrication est aujourd’hui totalement automatisée, ce qui élimine la majorité des pollutions.</p>",
                     "feedback": {
-                      "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>L’automatisation des étapes de fabrication n’élimine pas les pollutions&nbsp;: les machines consomment de l’énergie et les procédés industriels génèrent toujours des émissions et des déchets.</p>"
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>L’automatisation des étapes de fabrication n’élimine pas les pollutions : les machines consomment de l’énergie et les procédés industriels génèrent toujours des émissions et des déchets.</p>"
                     }
                   }
                 ],
@@ -882,10 +882,10 @@
                       "proposals": [
                         {
                           "id": "3",
-                          "content": "<p>Obsolescence marketing</p>",
+                          "content": "<p>Obsolescence psychologique</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’obsolescence marketing repose sur le désir de changer d’appareil parce qu’il n’est plus à la mode, pas parce que la réparation est trop coûteuse.</p>"
+                            "diagnosis": "<p>L’obsolescence psychologique repose sur le désir de changer d’appareil parce qu’il n’est plus à la mode, pas parce que la réparation est trop coûteuse.</p>"
                           }
                         },
                         {
@@ -934,10 +934,10 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Obsolescence marketing</p>",
+                          "content": "<p>Obsolescence psychologique</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.<br></p>",
-                            "diagnosis": "<p>L’obsolescence marketing vient des tendances qui poussent à remplacer un appareil encore fonctionnel. Ici, le type d’obsolescence est directement lié au bon fonctionnement l’appareil.&nbsp;</p>"
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence psychologique vient des tendances qui poussent à remplacer un appareil encore fonctionnel. Ici, le type d’obsolescence est directement lié au bon fonctionnement l’appareil.</p>"
                           }
                         }
                       ],
@@ -956,7 +956,7 @@
                           "id": "1",
                           "content": "<p>Obsolescence technique</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>L’obsolescence technique renvoie bien à des limites matérielles de l’appareil (performances insuffisantes, composants vieillissants…).</p>"
                           }
                         },
@@ -970,10 +970,10 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Obsolescence marketing</p>",
+                          "content": "<p>Obsolescence psychologique</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.<br></p>",
-                            "diagnosis": "<p>L’obsolescence marketing vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel, ce qui n’est pas le cas ici.</p>"
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’obsolescence psychologique vient des tendances ou du marketing qui poussent à remplacer un appareil encore fonctionnel, ce qui n’est pas le cas ici.</p>"
                           }
                         }
                       ],
@@ -1006,7 +1006,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Obsolescence marketing</p>",
+                          "content": "<p>Obsolescence psychologique</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Il s’agit bien ici des leviers psychologiques qui poussent le consommateur à acheter du neuf.</p>"
@@ -1039,7 +1039,7 @@
               "element": {
                 "id": "b5bffb62-594d-407c-af81-fe7fa603379f",
                 "type": "qab",
-                "instruction": "<p>Identifiez si chaque proposition correspond à une logique d’économie <strong>circulaire</strong> ou à une logique&nbsp;<strong>linéaire</strong>.</p>",
+                "instruction": "<p>Identifiez si chaque proposition correspond à une logique d’économie <strong>circulaire</strong> ou à une logique <strong>linéaire</strong>.</p>",
                 "cards": [
                   {
                     "id": "d5fb3fcf-d7ff-48d0-901e-7fd884e434a4",
@@ -1109,7 +1109,7 @@
               "element": {
                 "id": "5baa2fa9-a281-4e00-bf0f-008790c17132",
                 "type": "text",
-                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes&nbsp;:&nbsp;</p>"
+                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes :</p>"
               }
             },
             {
