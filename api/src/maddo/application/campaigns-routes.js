@@ -41,6 +41,9 @@ const register = async function (server) {
                   Joi.object({
                     id: Joi.number().description('ID de la participation à la campagne'),
                     createdAt: Joi.date().description('Date de début de participation'),
+                    authenticationId: Joi.number().description(
+                      'Si le participant a du utiliser un service SSO externe pour accéder à la campagne, on retourne son identifiant',
+                    ),
                     participantId: Joi.number().description('ID du participant'),
                     participantFirstName: Joi.string().description('Prénom du participant'),
                     participantLastName: Joi.string().description('Nom du participant'),
