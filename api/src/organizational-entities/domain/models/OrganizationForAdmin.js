@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import differenceBy from 'lodash/differenceBy.js';
+import isEmpty from 'lodash/isEmpty.js';
 
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DataProtectionOfficer } from './DataProtectionOfficer.js';
@@ -61,8 +62,8 @@ class OrganizationForAdmin {
     this.externalId = externalId;
     this.provinceCode = provinceCode;
     this.credit = credit;
-    this.email = email;
-    this.documentationUrl = documentationUrl;
+    this.email = this.#sanitizeEmptyStrings(email);
+    this.documentationUrl = this.#sanitizeEmptyStrings(documentationUrl);
     this.createdBy = createdBy;
     this.createdAt = createdAt;
     this.archivedAt = archivedAt;
@@ -212,11 +213,11 @@ class OrganizationForAdmin {
     if (organization.name) this.name = organization.name;
     if (organization.type) this.type = organization.type;
     if (organization.logoUrl) this.logoUrl = organization.logoUrl;
-    this.email = organization.email;
+    this.email = isEmpty(organization.email) ? null : organization.email;
     this.credit = organization.credit;
     this.externalId = organization.externalId;
     this.provinceCode = organization.provinceCode;
-    this.documentationUrl = organization.documentationUrl;
+    this.documentationUrl = isEmpty(organization.documentationUrl) ? null : organization.documentationUrl;
     this.updateIsManagingStudents(organization.features);
     this.showSkills = organization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
     this.identityProviderForCampaigns = organization.identityProviderForCampaigns;
@@ -234,6 +235,10 @@ class OrganizationForAdmin {
 
   setCountryName(countryName) {
     this.countryName = countryName;
+  }
+
+  #sanitizeEmptyStrings(value) {
+    return value?.trim(' ') === '' ? null : value;
   }
 }
 

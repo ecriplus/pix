@@ -163,7 +163,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'DPOLastName' ||
           columnName === 'DPOEmail' ||
           columnName === 'parentOrganizationId' ||
-          columnName === 'provinceCode'
+          columnName === 'provinceCode' ||
+          columnName === 'emailForSCOActivation'
         ) {
           value = null;
         }

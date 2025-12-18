@@ -167,7 +167,7 @@ function _transformOrganizationsCsvData(organizationsCsvData) {
     const email =
       organizationCsvData.type === Organization.types.SCO || organizationCsvData.type === Organization.types.SCO1D
         ? organizationCsvData.emailForSCOActivation
-        : undefined;
+        : null;
     return {
       organization: new OrganizationForAdmin({
         ...organizationCsvData,
