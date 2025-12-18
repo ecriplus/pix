@@ -15,6 +15,7 @@ const buildCombinedCourse = function ({
   illustration = 'images/illustration.svg',
   createdAt = new Date(),
   updatedAt,
+  combinedCourseBlueprintId,
 } = {}) {
   organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
 
@@ -36,6 +37,7 @@ const buildCombinedCourse = function ({
     createdAt,
     updatedAt: updatedAt ?? createdAt,
     questId,
+    combinedCourseBlueprintId,
   };
 
   return databaseBuffer.pushInsertable({
