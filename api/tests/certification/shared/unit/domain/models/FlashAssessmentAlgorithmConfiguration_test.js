@@ -13,6 +13,28 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
       defaultCandidateCapacity: -3,
     };
     context('maximumAssessmentLength', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.maximumAssessmentLength;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+
+      it('should throw an EntityValidationError if it is null', function () {
+        // given
+        params.maximumAssessmentLength = null;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+
       it('should throw an EntityValidationError if it is not an integer', function () {
         // given
         params.maximumAssessmentLength = 1.5;
@@ -37,6 +59,17 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
     });
 
     context('challengesBetweenSameCompetence', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.challengesBetweenSameCompetence;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+
       it('should throw an EntityValidationError if it is not an integer', function () {
         // given
         params.challengesBetweenSameCompetence = 1.5;
@@ -122,6 +155,17 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
     });
 
     context('defaultCandidateCapacity', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.defaultCandidateCapacity;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+
       it('should throw an EntityValidationError if it is not a number', function () {
         // given
         params.defaultCandidateCapacity = 'not a number';
