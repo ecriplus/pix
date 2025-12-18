@@ -285,12 +285,15 @@ const findByUserId = async function ({ userId }) {
 const findOrganizationLearnersByOrganizationIdAndLearnerIds = async function ({
   organizationId,
   organizationLearnerIds = [],
+  keepPreviousDeletion = false,
 }) {
   if (organizationLearnerIds.length === 0) {
     return [];
   }
   const knexConnection = DomainTransaction.getConnection();
-  const organizationLearners = await knexConnection('view-active-organization-learners')
+  const organizationLearners = await knexConnection(
+    keepPreviousDeletion ? 'organization-learners' : 'view-active-organization-learners',
+  )
     .whereIn('id', organizationLearnerIds)
     .where({ organizationId });
   return organizationLearners.map((organizationLearner) => _toDomain(organizationLearner));

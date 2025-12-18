@@ -10,12 +10,13 @@ const deleteOrganizationLearners = withTransaction(async function ({
   client,
   organizationLearnerRepository,
   featureToggles,
-  campaignParticipationRepositoryfromBC,
+  campaignParticipationRepositoryFromBC,
   badgeAcquisitionRepository,
   assessmentRepository,
   eventLoggingJobRepository,
   userRecommendedTrainingRepository,
   organizationsProfileRewardRepository,
+  keepPreviousDeletion = false,
 }) {
   if (organizationLearnerIds.length === 0) {
     return;
@@ -25,6 +26,7 @@ const deleteOrganizationLearners = withTransaction(async function ({
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationIdAndLearnerIds({
       organizationId,
       organizationLearnerIds,
+      keepPreviousDeletion,
     });
 
   const organizationLearnerList = new OrganizationLearnerList({
@@ -45,7 +47,7 @@ const deleteOrganizationLearners = withTransaction(async function ({
     const organizationLearnerRewards = organizationProfileRewards.filter(
       (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
     );
-    organizationLearner.delete(userId, isAnonymizationWithDeletionEnabled);
+    organizationLearner.delete(userId, { isAnonymizationWithDeletionEnabled, keepPreviousDeletion });
     await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
     if (isAnonymizationWithDeletionEnabled) {
@@ -66,13 +68,13 @@ const deleteOrganizationLearners = withTransaction(async function ({
     }
 
     const campaignParticipations =
-      await campaignParticipationRepositoryfromBC.getAllCampaignParticipationsForOrganizationLearner({
+      await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearner({
         organizationLearnerId: organizationLearner.id,
       });
 
     for (const campaignParticipation of campaignParticipations) {
-      campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
-      await campaignParticipationRepositoryfromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+      campaignParticipation.delete(userId, { isAnonymizationWithDeletionEnabled });
+      await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
 
       if (isAnonymizationWithDeletionEnabled) {
         await eventLoggingJobRepository.performAsync(
