@@ -7,7 +7,7 @@ import { module, test } from 'qunit';
 
 import { authenticateSession } from '../helpers/test-init';
 
-module('Acceptance | Supervisor Portal', function (hooks) {
+module('Acceptance | Invigilator Portal', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -23,7 +23,7 @@ module('Acceptance | Supervisor Portal', function (hooks) {
     server.create('session-for-supervising', { id: '12345' });
   });
 
-  module('When supervisor authentication is successful', function () {
+  module('When invigilator authentication is successful', function () {
     test('it should redirect to supervising page', async function (assert) {
       // given
       const screen = await visitScreen('/connexion-espace-surveillant');
@@ -44,10 +44,10 @@ module('Acceptance | Supervisor Portal', function (hooks) {
     });
   });
 
-  module('When supervisor is supervising a session', function () {
+  module('When invigilator is supervising a session', function () {
     module('When quit button is clicked', function () {
       module('When action is confirmed through the modal', function () {
-        test('it should redirect to the supervisor authentication page', async function (assert) {
+        test('it should redirect to the invigilator authentication page', async function (assert) {
           // given
           const screen = await visitScreen('/connexion-espace-surveillant');
           await fillIn(

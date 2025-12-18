@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 
-export default class LoginSessionSupervisorController extends Controller {
+export default class LoginSessionInvigilatorController extends Controller {
   @service store;
   @service router;
   @service currentUser;
@@ -12,16 +12,16 @@ export default class LoginSessionSupervisorController extends Controller {
   }
 
   @action
-  async authenticateSupervisor({ sessionId, supervisorPassword }) {
-    const supervisorAuthentication = this.store.createRecord('supervisor-authentication', {
+  async authenticateInvigilator({ sessionId, invigilatorPassword }) {
+    const invigilatorAuthentication = this.store.createRecord('invigilator-authentication', {
       id: sessionId,
       sessionId,
-      supervisorPassword,
+      invigilatorPassword,
     });
     try {
-      await supervisorAuthentication.save();
+      await invigilatorAuthentication.save();
     } finally {
-      supervisorAuthentication.unloadRecord();
+      invigilatorAuthentication.unloadRecord();
     }
     return this.router.transitionTo('session-supervising', sessionId);
   }

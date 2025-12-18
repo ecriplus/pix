@@ -73,7 +73,7 @@
           <PixTooltip
             @id="tooltip-clipboard-button"
             @isInline={{true}}
-            @hide={{this.isSupervisorPasswordTooltipTextEmpty}}
+            @hide={{this.isInvigilatorPasswordTooltipTextEmpty}}
             class="session-details-content__clipboard-button"
           >
             <:triggerElement>
@@ -81,10 +81,10 @@
                 @ariaLabel={{t "pages.sessions.detail.parameters.password.copy-password"}}
                 @iconName="copy"
                 @plainIcon={{true}}
-                @triggerAction={{this.showSupervisorPasswordTooltip}}
+                @triggerAction={{this.showInvigilatorPasswordTooltip}}
               />
             </:triggerElement>
-            <:tooltip>{{this.supervisorPasswordTooltipText}}</:tooltip>
+            <:tooltip>{{this.invigilatorPasswordTooltipText}}</:tooltip>
           </PixTooltip>
         {{/if}}
       </div>

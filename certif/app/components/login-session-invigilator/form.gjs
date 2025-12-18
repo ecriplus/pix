@@ -13,7 +13,7 @@ import { t } from 'ember-intl';
 
 dayjs.extend(LocalizedFormat);
 
-export default class LoginSessionSupervisor extends Component {
+export default class LoginSessionInvigilator extends Component {
   @service intl;
 
   @tracked formError = null;
@@ -40,7 +40,7 @@ export default class LoginSessionSupervisor extends Component {
     }
 
     try {
-      await this.args.authenticateSupervisor({
+      await this.args.authenticateInvigilator({
         sessionId: this.sessionIdValue,
         invigilatorPassword: this.invigilatorPasswordValue,
       });
@@ -64,14 +64,14 @@ export default class LoginSessionSupervisor extends Component {
 
   <template>
     {{#if this.formError}}
-      <div class='login-session-supervisor__form-error' role='alert'>
+      <div class='login-session-invigilator__form-error' role='alert'>
         <PixNotificationAlert @type='error' @withIcon={{true}}>
           {{this.formError}}
         </PixNotificationAlert>
       </div>
     {{/if}}
     <form
-      class='login-session-supervisor__form'
+      class='login-session-invigilator__form'
       {{on 'submit' this.handleFormSubmit}}
       aria-label={{t 'pages.session-supervising.login.form.aria-label'}}
     >

@@ -128,7 +128,7 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
       assert.true(model.hasCompleted);
     });
 
-    test('returns true if assessmentStatus is endedBySupervisor', function (assert) {
+    test('returns true if assessmentStatus is endedByInvigilator', function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const data = { assessmentStatus: 'endedBySupervisor' };

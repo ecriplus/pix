@@ -13,7 +13,7 @@ export default class CurrentSessionService extends SessionService {
       this.currentUser.certificationPointOfContact.isMemberOfACertificationCenter;
     const routeAfterAuthentication = isCurrentUserMemberOfACertificationCenter
       ? 'authenticated'
-      : 'login-session-supervisor';
+      : 'login-session-invigilator';
     super.handleAuthentication(routeAfterAuthentication);
   }
 

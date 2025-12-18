@@ -11,7 +11,7 @@ export default class SessionParametersController extends Controller {
   @alias('model.certificationCandidates') certificationCandidates;
   @tracked sessionNumberTooltipText = '';
   @tracked accessCodeTooltipText = '';
-  @tracked supervisorPasswordTooltipText = '';
+  @tracked invigilatorPasswordTooltipText = '';
   @service currentUser;
   @service intl;
 
@@ -46,24 +46,24 @@ export default class SessionParametersController extends Controller {
   }
 
   @action
-  async showSupervisorPasswordTooltip() {
-    await navigator.clipboard.writeText(this.session.supervisorPassword);
-    this.supervisorPasswordTooltipText = this.intl.t('common.actions.copied');
+  async showInvigilatorPasswordTooltip() {
+    await navigator.clipboard.writeText(this.session.invigilatorPassword);
+    this.invigilatorPasswordTooltipText = this.intl.t('common.actions.copied');
     await _waitForSeconds(2);
-    this.removeSupervisorPasswordTooltip();
+    this.removeInvigilatorPasswordTooltip();
   }
 
   @action
-  removeSupervisorPasswordTooltip() {
-    this.supervisorPasswordTooltipText = '';
+  removeInvigilatorPasswordTooltip() {
+    this.invigilatorPasswordTooltipText = '';
   }
 
   get isAccessCodeTooltipTextEmpty() {
     return this.accessCodeTooltipText.length === 0;
   }
 
-  get isSupervisorPasswordTooltipTextEmpty() {
-    return this.supervisorPasswordTooltipText.length === 0;
+  get isInvigilatorPasswordTooltipTextEmpty() {
+    return this.invigilatorPasswordTooltipText.length === 0;
   }
 
   get isSessionNumberTooltipTextEmpty() {

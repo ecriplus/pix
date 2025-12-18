@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 
 import { authenticateSession } from '../helpers/test-init';
 
-module('Acceptance | Login session supervisor', function (hooks) {
+module('Acceptance | Login session invigilator', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -32,7 +32,7 @@ module('Acceptance | Login session supervisor', function (hooks) {
     assert.dom(screen.getByText('Changer de compte')).exists();
   });
 
-  module('When supervisor wants to change account', function () {
+  module('When invigilator wants to change account', function () {
     test('it should redirect to logout page', async function (assert) {
       // given
       const screen = await visitScreen('/connexion-espace-surveillant');

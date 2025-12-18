@@ -4,24 +4,24 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-import LoginSessionSupervisorForm from './form';
+import LoginSessionInvigilatorForm from './form';
 
-export default class LoginSessionSupervisor extends Component {
+export default class LoginSessionInvigilator extends Component {
   @service intl;
 
   <template>
-    <div class='login-session-supervisor'>
-      <main class='login-session-supervisor__main'>
-        <header class='login-session-supervisor__header'>
+    <div class='login-session-invigilator'>
+      <main class='login-session-invigilator__main'>
+        <header class='login-session-invigilator__header'>
           <img src='/illu-espace-surveillant.svg' alt='' />
           <h1>{{t 'pages.session-supervising.login.form.title'}}</h1>
           <h2>{{t 'pages.session-supervising.login.form.sub-title'}}</h2>
           <p>{{t 'common.form-errors.mandatory-all-fields'}}</p>
         </header>
 
-        <LoginSessionSupervisorForm @authenticateSupervisor={{@authenticateSupervisor}} />
+        <LoginSessionInvigilatorForm @authenticateInvigilator={{@authenticateInvigilator}} />
 
-        <footer class='login-session-supervisor__footer'>
+        <footer class='login-session-invigilator__footer'>
           <span class='user'>
             <PixIcon @name='userCircle' @plainIcon={{true}} class='footer-item__icon' @ariaHidden={{true}} />
             {{@currentUserEmail}}
