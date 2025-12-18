@@ -1185,11 +1185,11 @@
         "placeholder": "b.v. jan.jansen@email.com"
       },
       "errors": {
+        "access-not-allowed": "Toegang tot Pix Orga is beperkt tot uitgenodigde leden. Elke ruimte wordt beheerd door een Pix Orga-beheerder die specifiek is voor de organisatie die het gebruikt. Neem contact met hem/haar op om je uit te nodigen.",
         "empty-email": "Uw e-mailadres is niet ingevuld.",
         "empty-password": "Uw wachtwoord is niet ingevoerd.",
         "invalid-email": "Je e-mailadres is ongeldig.",
         "status": {
-          "403": "Toegang tot Pix Orga is beperkt tot uitgenodigde leden. Elke ruimte wordt beheerd door een Pix Orga-beheerder die specifiek is voor de organisatie die het gebruikt. Neem contact met hem/haar op om je uit te nodigen.",
           "404": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist.",
           "409": "Deze uitnodiging is al geaccepteerd of geannuleerd."
         }
@@ -1197,7 +1197,6 @@
       "forgot-password": "Wachtwoord vergeten?",
       "invitation-already-accepted": "Deze uitnodiging is al geaccepteerd. Log in of neem contact op met de beheerder van je Pix Orga-ruimte.",
       "invitation-was-cancelled": "Deze uitnodiging is niet langer geldig. Neem contact op met de beheerder van je Pix Orga-ruimte.",
-      "is-only-accessible": "Toegang tot Pix Orga is beperkt tot uitgenodigde leden. Neem contact op met de Pix Orga-beheerder van je organisatie om je uit te nodigen.",
       "login": "Ik log in",
       "only-for-admin": "Gereserveerd voor directiepersoneel van openbare en privéscholen onder contract.",
       "password": "Wachtwoord"
