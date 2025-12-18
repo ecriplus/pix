@@ -39,6 +39,7 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
         const organizationModelStub = {
           ...formWithParentOrganizationId,
           save: sinon.stub(),
+          rollbackAttributes: sinon.stub(),
         };
         createRecordStub.withArgs('organization', formWithParentOrganizationId).returns(organizationModelStub);
 
@@ -78,6 +79,7 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
         const organizationModelStub = {
           ...formWithoutParentOrganizationId,
           save: sinon.stub(),
+          rollbackAttributes: sinon.stub(),
         };
         createRecordStub.withArgs('organization', formWithoutParentOrganizationId).returns(organizationModelStub);
 

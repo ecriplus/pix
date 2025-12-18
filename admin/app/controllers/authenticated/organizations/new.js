@@ -53,6 +53,7 @@ export default class NewController extends Controller {
       this.router.transitionTo('authenticated.organizations.get.all-tags', organization.id);
     } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      organization.rollbackAttributes();
     }
   }
 }
