@@ -89,16 +89,19 @@ class Campaign {
     return !this.archivedAt && !this.deletedAt;
   }
 
-  delete(userId, isAnonymizationWithDeletionEnabled = false) {
-    if (this.deletedAt) {
+  delete(userId, { isAnonymizationWithDeletionEnabled = false, keepPreviousDeletion = false } = {}) {
+    if (this.deletedAt && !keepPreviousDeletion) {
       throw new DeletedCampaignError();
     }
+
     if (!userId) {
       throw new ObjectValidationError('userId Missing');
     }
 
-    this.deletedAt = new Date();
-    this.deletedBy = userId;
+    if (!this.isDeleted) {
+      this.deletedAt = new Date();
+      this.deletedBy = userId;
+    }
 
     if (isAnonymizationWithDeletionEnabled) {
       this.name = '(anonymized)';

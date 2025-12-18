@@ -57,7 +57,7 @@ describe('Campaign', function () {
       const isAnonymizationWithDeletionEnabled = false;
 
       // when
-      campaign.delete(777, isAnonymizationWithDeletionEnabled);
+      campaign.delete(777, { isAnonymizationWithDeletionEnabled });
 
       // then
       expect(campaign).to.deep.includes({
@@ -77,6 +77,14 @@ describe('Campaign', function () {
         const error = await catchErr(campaign.delete, campaign)(1);
 
         expect(error).to.be.an.instanceOf(DeletedCampaignError);
+      });
+
+      it('not throws when keepPreviousDeletion is true', async function () {
+        const campaign = new Campaign({ id: 1, code: 'ABC123', deletedAt: new Date('2023-01-01'), deletedBy: 2 });
+
+        campaign.delete(1, { isAnonymizationWithDeletionEnabled: true, keepPreviousDeletion: true });
+
+        expect(campaign.name).equal('(anonymized)');
       });
     });
 
@@ -106,7 +114,7 @@ describe('Campaign', function () {
         const isAnonymizationWithDeletionEnabled = true;
 
         // when
-        campaign.delete(1, isAnonymizationWithDeletionEnabled);
+        campaign.delete(1, { isAnonymizationWithDeletionEnabled });
 
         // then
         expect(campaign.name).to.equal('(anonymized)');

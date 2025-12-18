@@ -123,7 +123,7 @@ describe('CampaignsDestructor', function () {
         campaignParticipationsToDelete: participations,
       });
 
-      destructor.delete(isAnonymizationWithDeletionEnabled);
+      destructor.delete({ isAnonymizationWithDeletionEnabled });
 
       expect(destructor.campaigns[0].name).to.equal('(anonymized)');
       expect(destructor.campaigns[0].title).to.be.null;
