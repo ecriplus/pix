@@ -4,6 +4,28 @@ import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin', function () {
+  describe('constructor', function () {
+    context('when email is an empty string', function () {
+      it('should set email to null', function () {
+        // when
+        const organization = new OrganizationForAdmin({ email: ' ' });
+
+        // then
+        expect(organization.email).to.be.null;
+      });
+    });
+
+    context('when documentationUrl is an empty string', function () {
+      it('should set documentationUrl to null', function () {
+        // when
+        const organization = new OrganizationForAdmin({ documentationUrl: '   ' });
+
+        // then
+        expect(organization.documentationUrl).to.be.null;
+      });
+    });
+  });
+
   describe('features', function () {
     it('should throw an error if a feature format is not valid', function () {
       expect(() => {

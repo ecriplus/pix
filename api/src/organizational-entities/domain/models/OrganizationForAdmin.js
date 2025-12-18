@@ -62,8 +62,8 @@ class OrganizationForAdmin {
     this.externalId = externalId;
     this.provinceCode = provinceCode;
     this.credit = credit;
-    this.email = email;
-    this.documentationUrl = documentationUrl;
+    this.email = this.#sanitizeEmptyStrings(email);
+    this.documentationUrl = this.#sanitizeEmptyStrings(documentationUrl);
     this.createdBy = createdBy;
     this.createdAt = createdAt;
     this.archivedAt = archivedAt;
@@ -235,6 +235,10 @@ class OrganizationForAdmin {
 
   setCountryName(countryName) {
     this.countryName = countryName;
+  }
+
+  #sanitizeEmptyStrings(value) {
+    return value?.trim(' ') === '' ? null : value;
   }
 }
 
