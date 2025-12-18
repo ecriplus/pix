@@ -827,6 +827,76 @@
           ]
         }
       ]
+    },
+    {
+      "id": "a9874e16-5333-446f-92f2-b2c39fdfa04d",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "f230f240-a037-443f-83c4-b5060fb9fbdd",
+          "type": "activity",
+          "title": " Activité #3 : Connaître des solutions techniques qui visent à réduire ces impacts",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b29b9b11-f2d1-4acd-8877-cbed05f7cdea",
+                "type": "qab",
+                "instruction": "<p>Parmi ces propositions, lesquelles permettent de réduire les impacts environnementaux d’un centre de données ?</p>",
+                "cards": [
+                  {
+                    "id": "aeafa8b8-1f91-4fbc-a586-e19e77e7d2cc",
+                    "text": "Chauffer des habitations.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "101e1ba2-41a8-4d76-8ed1-bb456df4df9e",
+                    "text": " Installer les centres de données en Égypte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "5f03960c-7648-4f44-9341-1b75c608e2dd",
+                    "text": "Éteindre aléatoirement des serveurs après 18h. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "de1b2228-57cf-4a5d-9f7c-01678f72b467",
+                    "text": "Utiliser l’énergie d’un barrage hydroélectrique ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
