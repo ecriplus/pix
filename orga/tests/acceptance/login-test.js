@@ -106,4 +106,47 @@ module('Acceptance | Login', function (hooks) {
       assert.dom(errorMessage).exists();
     });
   });
+
+  module('when the Pix account does not exist or the password is incorrect', function () {
+    test('the login form displays a missing or invalid credentials error message', async function (assert) {
+      // given
+      domainService.getExtension.returns('fr');
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+
+      const screen = await visit('/connexion');
+
+      // when
+      await fillByLabel(t('pages.login-form.email.label'), user.email);
+      await fillByLabel(t('pages.login-form.password'), 'incorrect-password');
+      await clickByName(t('pages.login-form.login'));
+
+      // then
+      assert.dom(screen.getByText(t('common.api-error-messages.login-unauthorized-error'))).exists();
+    });
+  });
+
+  module('when there is an unexpected error', function () {
+    test('the login form displays a generic error message', async function (assert) {
+      // given
+      domainService.getExtension.returns('fr');
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+
+      this.server.post('/token', () => {
+        return new Response(500);
+      });
+
+      const screen = await visit('/connexion');
+
+      // when
+      await fillByLabel(t('pages.login-form.email.label'), user.email);
+      await fillByLabel(t('pages.login-form.password'), 'incorrect-password');
+      await clickByName(t('pages.login-form.login'));
+
+      // Translation common.api-error-messages.login-unexpected-error contains HTML
+      // so it’s not possible to use the translation key.
+      assert.dom(screen.getByText(new RegExp('Impossible de se connecter.'))).exists();
+    });
+  });
 });

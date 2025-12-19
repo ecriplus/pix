@@ -59,13 +59,7 @@ function routes() {
         user_id: foundUser.id,
       };
     } else {
-      return new Response([
-        {
-          status: '401',
-          title: 'Unauthorized',
-          detail: "L'adresse e-mail et/ou le mot de passe saisis sont incorrects.",
-        },
-      ]);
+      return new Response(401, {}, { errors: [{ status: '401', code: 'MISSING_OR_INVALID_CREDENTIALS' }] });
     }
   });
 
