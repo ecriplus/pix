@@ -865,7 +865,7 @@
                     {
                       "id": "4793a2cc-0044-4a58-a1b7-eb186ecc4243",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Écris une courte scène de théâtre pour 5 acteurs sur le thème de la Révolution française.</p>",
+                      "instruction": "<p>Écris un discours pour le mariage de mon frère.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -891,7 +891,7 @@
                     {
                       "id": "366e03b8-b1d7-4e99-a0b2-2e8c8da3e64c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quelle est la météo à Paris aujourd’hui ?</p>",
+                      "instruction": "<p>Quelle est la météo aujourd’hui ?</p>",
                       "proposals": [
                         {
                           "id": "1",
