@@ -742,7 +742,6 @@
         },
         "title": "Correspondentie tussen niveaus"
       },
-      "second-title": "Analyse van resultaten",
       "title": "Uitleg"
     },
     "campaign-creation": {
@@ -1803,7 +1802,7 @@
         "message": "{providerName} Je wordt doorgestuurd naar de \" \" inlogpagina om je te identificeren op Pix."
       },
       "signup": {
-          "button": "Registreren"
+        "button": "Registreren"
       },
       "title": "Kies een andere organisatie"
     },
