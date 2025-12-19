@@ -7,7 +7,7 @@ import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js'
 export class DeleteAndAnonymisePreviousOrganizationScript extends Script {
   constructor() {
     super({
-      description: 'Deletes organization-learners and anonymise their related data',
+      description: 'Parse Archived Organization before date to delete and anonymise their related data',
       permanent: false,
       options: {
         startArchiveDate: {
