@@ -73,15 +73,22 @@ export default class CombineCourseBluePrintForm extends Component {
   @action
   async save() {
     try {
-      this.blueprint.save();
+      await this.blueprint.save();
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('components.combined-course-blueprints.create.notifications.success'),
       });
       this.router.transitionTo('authenticated.combined-course-blueprints.list');
-    } catch {
-      this.pixToast.sendErrorNotification({
-        message: this.intl.t('components.combined-course-blueprints.create.notifications.error'),
-      });
+    } catch (responseError) {
+      if (responseError.errors) {
+        responseError.errors.forEach((error) => {
+          if (['400', '404', '412'].includes(error.status)) {
+            return this.pixToast.sendErrorNotification({ message: error.detail });
+          }
+          return this.pixToast.sendErrorNotification({
+            message: this.intl.t('components.combined-course-blueprints.create.notifications.error'),
+          });
+        });
+      }
     }
   }
 
