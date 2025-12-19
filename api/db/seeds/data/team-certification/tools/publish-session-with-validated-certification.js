@@ -9,7 +9,6 @@ import { usecases as sessionManagementUseCases } from '../../../../../src/certif
 import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationReport } from '../../../../../src/certification/shared/domain/models/CertificationReport.js';
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
-import { config } from '../../../../../src/shared/config.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 import { knex } from '../../../../knex-database-connection.js';
 
@@ -51,7 +50,7 @@ export default async function publishSessionWithValidatedCertification({
     });
     const pickAnswerStatus = pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
     const pickChallenge = pickChallengeService.getChallengePicker(
-      config.v3Certification.defaultProbabilityToPickChallenge,
+      version.challengesConfiguration.defaultProbabilityToPickChallenge,
     );
 
     // stopAtChallenge helps to simulate less answer to trigger degradation, and a check reports at finalization

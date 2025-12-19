@@ -1038,7 +1038,6 @@ jobs:
             AUTH_SECRET: 'secret'
             LCMS_API_RELEASE_ID: '2115?forCI'
             IS_RUNNING_PLAYWRIGHT: 'true'
-            V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE: '100'
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga

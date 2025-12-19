@@ -461,7 +461,6 @@ const configuration = (function () {
       expirationDelaySeconds: ms(process.env.ANONYMOUS_USER_TOKEN_TEMPORARY_STORAGE_LIFESPAN || '1d') / 1000,
     },
     v3Certification: {
-      defaultProbabilityToPickChallenge: parseInt(process.env.V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE, 10) || 51,
       scoring: {
         minimumAnswersRequiredToValidateACertification: 20,
         maximumReachableScore: 895,
