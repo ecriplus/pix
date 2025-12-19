@@ -5,7 +5,7 @@ import { badgeSerializer } from '../../infrastructure/serializers/jsonapi/badge-
 
 const updateBadge = async function (request, h) {
   const badgeId = request.params.id;
-  const badge = badgeSerializer.deserialize(request.payload);
+  const badge = await badgeSerializer.deserialize(request.payload);
 
   const updatedBadge = await evaluationUsecases.updateBadge({ badgeId, badge });
 
