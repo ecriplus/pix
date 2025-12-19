@@ -10,7 +10,7 @@ import {
 
 const { omit } = lodash;
 
-describe('Acceptance | Route | target-profiles', function () {
+describe('Acceptance | Route | badges', function () {
   let server;
 
   beforeEach(async function () {
@@ -223,6 +223,44 @@ describe('Acceptance | Route | target-profiles', function () {
         expect(response.statusCode).to.equal(422);
         expect(response.result).to.deep.equal(expectedError);
       });
+    });
+  });
+
+  describe('PATCH /api/admin/badges/{badgeId}', function () {
+    it('should update a badge', async function () {
+      const userId = databaseBuilder.factory.buildUser.withRole().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const badgeId = databaseBuilder.factory.buildBadge({ targetProfileId, title: 'ancien titre' }).id;
+      await databaseBuilder.commit();
+
+      const badgeToUpdate = {
+        key: '1',
+        title: 'titre du badge modifié',
+        message: 'Message modifié',
+        'alt-message': 'Message alternatif modifié',
+        'image-url': 'https://assets.pix.org/badges/new_badge_url.svg',
+        'is-certifiable': true,
+        'is-always-visible': true,
+      };
+
+      // when
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/admin/badges/${badgeId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        payload: {
+          data: {
+            type: 'badges',
+            attributes: badgeToUpdate,
+          },
+        },
+      });
+
+      // then
+      expect(response.statusCode).to.equal(204);
+
+      const badgeUpdated = await knex('badges').where('id', badgeId).first();
+      expect(badgeUpdated.title).to.deep.equal(badgeToUpdate.title);
     });
   });
 });
