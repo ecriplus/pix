@@ -41,9 +41,9 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacentermap.png",
                 "alt": "Une carte des centre de données dans le monde.",
-                "alternativeText": "<p>Une carte des centres de données dans le monde.</p>",
-                "legend": "Une carte des centre de données dans le monde.",
-                "licence": "image provisoire"
+                "alternativeText": "<p>Une carte des centre de données dans le monde.</p>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -112,10 +112,10 @@
                 "id": "64c85e42-6b34-4c04-be29-e1e550000b69",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenterconsequencesprimaires.png",
-                "alt": "Schéma des conséquences primaire de la fabrication et du fonctionnement d'un centre de données",
-                "alternativeText": "Schéma des conséquences primaire de la fabrication et du fonctionnement d'un centre de données",
-                "legend": "Schéma des conséquences primaire de la fabrication et du fonctionnement d'un centre de données",
-                "licence": "image provisoire"
+                "alt": "",
+                "alternativeText": "<p><br></p>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -126,7 +126,7 @@
                     {
                       "id": "b35bcf4a-abae-4162-ae50-2384367ed6f4",
                       "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de la consommation d’eau des centre des données ?</p>",
+                      "instruction": "<p>Quelles sont les conséquences de la consommation d’eau des centres des données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -167,7 +167,7 @@
                     {
                       "id": "2325603b-bf07-498a-bbdf-754cb4858782",
                       "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de la consommation de métaux pour la fabrication des centre des données ?</p>",
+                      "instruction": "<p>Quelles sont les conséquences de la consommation de métaux pour la fabrication des centres des données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -241,7 +241,7 @@
                         },
                         "invalid": {
                           "state": "<p>Malheureusement non...</p>",
-                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centre des données.</p>"
+                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres des données.</p>"
                         }
                       },
                       "solutions": [
@@ -311,14 +311,14 @@
                           {
                             "label": "Elle diminue. 🔋",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "C’est faux. Une vidéo va d’avantage solliciter les serveurs d’une image."
                             }
                           },
                           {
                             "label": "Elle reste stable. ⚡",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "C’est faux. Une vidéo va d’avantage solliciter les serveurs d’une image."
                             }
                           },
@@ -351,21 +351,21 @@
                           {
                             "label": "Elle diminue. 🔋",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Bien vu ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
                             }
                           },
                           {
                             "label": "Elle reste stable. ⚡",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
                             }
                           },
                           {
                             "label": "Elle augmente. 🪫",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
                             }
                           }
@@ -391,21 +391,21 @@
                           {
                             "label": "Elle diminue. 🔋",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "Eh non ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
                             }
                           },
                           {
                             "label": "Elle reste stable. ⚡",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "Eh non ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
                             }
                           },
                           {
                             "label": "Elle augmente. 🪫",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "Bien vu ! Avec un player automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
                             }
                           }
@@ -431,14 +431,14 @@
                           {
                             "label": "Elle diminue. 🔋",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs."
                             }
                           },
                           {
                             "label": "Elle reste stable. ⚡",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "Eh non ! Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs. "
                             }
                           },
@@ -471,7 +471,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
-                      "content": "<p>On appelle ces actions des pratiques d’éco-conception.  Elle désigne l’ensemble des pratiques visant à réduire l’empreinte environnementale des logiciels tout au long de leur cycle de vie&nbsp;: conception, développement, déploiement, utilisation et fin de vie. </p>"
+                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception</strong>.  Elle désigne l’ensemble des pratiques visant à réduire l’empreinte environnementale des logiciels <strong>tout au long de leur cycle de vie</strong>&nbsp;: conception, développement, déploiement, utilisation et fin de vie. </p>"
                     }
                   ]
                 },
@@ -524,7 +524,7 @@
                     {
                       "id": "6f22447e-a97e-4580-a161-8851edbdb611",
                       "type": "custom",
-                      "instruction": "Voici la conversation entre Dona et son équipe.",
+                      "instruction": "",
                       "tagName": "message-conversation",
                       "props": {
                         "title": "Donna & Boubacar",
@@ -1041,7 +1041,7 @@
                   },
                   {
                     "id": "5f03960c-7648-4f44-9341-1b75c608e2dd",
-                    "text": "Éteindre aléatoirement des serveurs après 18h.",
+                    "text": "Éteindre aléatoirement des serveurs après 18h. ",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1063,7 +1063,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "Eteindre les serveurs de façon aléatoire pourrait entraîner de grandes pertes de données."
+                  "diagnosis": ""
                 }
               }
             }
@@ -1104,7 +1104,7 @@
             {
               "type": "element",
               "element": {
-                "id": "ec340431-cb13-47ae-afee-2a3426f45a7c",
+                "id": "efee2fc9-aeeb-4a32-956f-3b4b943f5491",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-microsoft-queretaro.jpg",
                 "alt": "Des centres de données au Mexique.",
