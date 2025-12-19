@@ -12,6 +12,7 @@ import Card from '../card';
 
 export default class OrganizationCreationForm extends Component {
   @service store;
+  @service intl;
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -41,6 +42,10 @@ export default class OrganizationCreationForm extends Component {
     return this.args.parentOrganizationName
       ? 'components.organizations.creation.actions.add-child-organization'
       : 'common.actions.add';
+  }
+
+  get dpoSectionTitle() {
+    return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
   }
 
   @action
@@ -182,11 +187,7 @@ export default class OrganizationCreationForm extends Component {
             <PixInput
               @id="externalId"
               {{on "input" (fn this.handleInputChange "externalId")}}
-              placeholder={{concat
-                (t "common.words.example-abbr")
-                " "
-                (t "components.organizations.creation.external-id.placeholder")
-              }}
+              placeholder={{t "components.organizations.creation.external-id.placeholder"}}
             >
               <:label>{{t "components.organizations.creation.external-id.label"}}</:label>
             </PixInput>
@@ -208,10 +209,7 @@ export default class OrganizationCreationForm extends Component {
           </div>
         </Card>
 
-        <Card
-          class="admin-form__card organization-creation-form__card"
-          @title={{t "components.organizations.creation.dpo.title"}}
-        >
+        <Card class="admin-form__card organization-creation-form__card" @title={{this.dpoSectionTitle}}>
           <PixInput
             @id="dataProtectionOfficerLastName"
             onchange={{this.handleDataProtectionOfficerLastNameChange}}
@@ -219,7 +217,7 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.dpo.lastname"}}
               <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
-                  "components.organizations.creation.dpo.title"
+                  "components.organizations.creation.dpo.acronym"
                 }}</abbr></:label>
           </PixInput>
 
@@ -230,7 +228,7 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>{{t "components.organizations.creation.dpo.firstname"}}
               <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
-                  "components.organizations.creation.dpo.title"
+                  "components.organizations.creation.dpo.acronym"
                 }}</abbr></:label>
           </PixInput>
 
@@ -242,7 +240,7 @@ export default class OrganizationCreationForm extends Component {
             >
               <:label>{{t "components.organizations.creation.dpo.email"}}
                 <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
-                    "components.organizations.creation.dpo.title"
+                    "components.organizations.creation.dpo.acronym"
                   }}</abbr></:label>
             </PixInput>
           </div>

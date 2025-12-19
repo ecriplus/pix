@@ -672,15 +672,15 @@
         },
         "documentation-link": "Lien vers la documentation",
         "dpo": {
+          "acronym": "DPO",
           "definition": "Délégué à la protection des données",
           "email": "Adresse e-mail du ",
           "firstname": "Prénom du ",
-          "lastname": "Nom du ",
-          "title": "DPO"
+          "lastname": "Nom du "
         },
         "external-id": {
           "label": "Identifiant externe",
-          "placeholder": "Mon super idendifiant externe"
+          "placeholder": "Spécifier l'UAI, le SIRET etc"
         },
         "general-information": "Informations générales",
         "name": {
