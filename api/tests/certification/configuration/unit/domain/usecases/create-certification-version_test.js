@@ -175,6 +175,7 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
             maximumAssessmentLength: 32,
             variationPercent: 1,
             defaultCandidateCapacity: 0,
+            defaultProbabilityToPickChallenge: 51,
           }),
         }),
       );

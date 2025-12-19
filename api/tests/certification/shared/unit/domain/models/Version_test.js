@@ -14,6 +14,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
           defaultCandidateCapacity: 1,
+          defaultProbabilityToPickChallenge: 51,
         },
       };
 
@@ -28,6 +29,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
         challengesBetweenSameCompetence: 0,
         maximumAssessmentLength: 10,
         defaultCandidateCapacity: 1,
+        defaultProbabilityToPickChallenge: 51,
       });
     });
 
@@ -40,6 +42,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
           defaultCandidateCapacity: -3,
+          defaultProbabilityToPickChallenge: 51,
         },
       };
 
@@ -54,6 +57,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
         challengesBetweenSameCompetence: 0,
         maximumAssessmentLength: 10,
         defaultCandidateCapacity: -3,
+        defaultProbabilityToPickChallenge: 51,
       });
     });
 

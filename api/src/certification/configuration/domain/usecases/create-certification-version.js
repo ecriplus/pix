@@ -10,7 +10,10 @@ import dayjs from 'dayjs';
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
-import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../shared/domain/constants.js';
+import {
+  DEFAULT_PROBABILITY_TO_PICK_CHALLENGE,
+  DEFAULT_SESSION_DURATION_MINUTES,
+} from '../../../shared/domain/constants.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Version } from '../models/Version.js';
 
@@ -50,6 +53,7 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
         maximumAssessmentLength: 32,
         variationPercent: 1,
         defaultCandidateCapacity: 0,
+        defaultProbabilityToPickChallenge: DEFAULT_PROBABILITY_TO_PICK_CHALLENGE,
       }),
     });
   }

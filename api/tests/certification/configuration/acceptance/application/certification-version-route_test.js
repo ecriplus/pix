@@ -77,12 +77,12 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     it('should update a certification version and return 204', async function () {
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
-      const initialChallengesConfiguration = {
+      const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 20,
         challengesBetweenSameCompetence: 0,
         limitToOneQuestionPerTube: false,
         defaultCandidateCapacity: -3,
-      };
+      });
 
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Scopes.PIX_PLUS_DROIT,

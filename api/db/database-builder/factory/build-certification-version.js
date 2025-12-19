@@ -9,6 +9,7 @@ const defaultChallengesConfiguration = {
   enablePassageByAllCompetences: true,
   variationPercent: 0.5,
   defaultCandidateCapacity: -3,
+  defaultProbabilityToPickChallenge: 51,
 };
 
 const defaultGlobalScoringConfiguration = [

@@ -19,6 +19,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
           maximumAssessmentLength: 32,
           limitToOneQuestionPerTube: true,
           defaultCandidateCapacity: -3,
+          defaultProbabilityToPickChallenge: 51,
         },
       };
 
@@ -41,6 +42,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
               maximumAssessmentLength: 32,
               limitToOneQuestionPerTube: true,
               defaultCandidateCapacity: -3,
+              defaultProbabilityToPickChallenge: 51,
             },
           },
         },
@@ -68,6 +70,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
               defaultCandidateCapacity: -3,
               challengesBetweenSameCompetence: 0,
               variationPercent: 1,
+              defaultProbabilityToPickChallenge: 51,
             },
           },
         },
@@ -91,6 +94,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
         defaultCandidateCapacity: -3,
         challengesBetweenSameCompetence: 0,
         variationPercent: 1,
+        defaultProbabilityToPickChallenge: 51,
       });
     });
   });

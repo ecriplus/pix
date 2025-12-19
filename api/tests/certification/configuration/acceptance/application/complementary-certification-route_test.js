@@ -313,6 +313,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: false,
         enablePassageByAllCompetences: false,
+        defaultProbabilityToPickChallenge: 51,
       });
       expect(certificationVersion.startDate).to.exist;
 

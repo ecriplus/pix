@@ -177,5 +177,28 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
         expect(err).to.be.an.instanceOf(EntityValidationError);
       });
     });
+    context('defaultProbabilityToPickChallenge', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.defaultProbabilityToPickChallenge;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+
+      it('should throw an EntityValidationError if it is not a number', function () {
+        // given
+        params.defaultProbabilityToPickChallenge = 'not a number';
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
+    });
   });
 });

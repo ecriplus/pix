@@ -93,6 +93,7 @@ const register = async function (server) {
                   enablePassageByAllCompetences: Joi.boolean(),
                   variationPercent: Joi.number().min(0).max(1),
                   defaultCandidateCapacity: Joi.number().required(),
+                  defaultProbabilityToPickChallenge: Joi.number().min(0).max(100).required(),
                 }).required(),
               },
             },

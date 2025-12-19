@@ -10,6 +10,7 @@ export class FlashAssessmentAlgorithmConfiguration {
     enablePassageByAllCompetences: Joi.boolean(),
     variationPercent: Joi.number().min(0).max(1),
     defaultCandidateCapacity: Joi.number().required(),
+    defaultProbabilityToPickChallenge: Joi.number().min(0).max(100).required(),
   });
 
   /**
@@ -20,6 +21,7 @@ export class FlashAssessmentAlgorithmConfiguration {
    * @param {boolean} [props.enablePassageByAllCompetences] - enable or disable the passage through all competences
    * @param {number} props.variationPercent
    * @param {number} props.defaultCandidateCapacity - starting candidate capacity for first challenge
+   * @param {number} props.defaultProbabilityToPickChallenge - The probability (as a percentage, 0-100) that the ramdomizing function will pick a challenge from a list of possible challenges.
    */
   constructor({
     maximumAssessmentLength,
@@ -28,6 +30,7 @@ export class FlashAssessmentAlgorithmConfiguration {
     enablePassageByAllCompetences = false,
     variationPercent,
     defaultCandidateCapacity,
+    defaultProbabilityToPickChallenge,
   } = {}) {
     this.maximumAssessmentLength = maximumAssessmentLength;
     this.challengesBetweenSameCompetence = challengesBetweenSameCompetence;
@@ -35,6 +38,7 @@ export class FlashAssessmentAlgorithmConfiguration {
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
     this.variationPercent = variationPercent;
     this.defaultCandidateCapacity = defaultCandidateCapacity;
+    this.defaultProbabilityToPickChallenge = defaultProbabilityToPickChallenge;
     this.#validate();
   }
 
