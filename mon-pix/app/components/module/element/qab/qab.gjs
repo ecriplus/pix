@@ -25,6 +25,7 @@ export default class ModuleQab extends ModuleElement {
   @tracked displayedCards;
   @tracked cardStatuses = new TrackedMap();
   @tracked removedCards = new TrackedMap();
+  @tracked reportInfo = {};
 
   @service passageEvents;
 
@@ -98,6 +99,12 @@ export default class ModuleQab extends ModuleElement {
     this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
     window.setTimeout(async () => await this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
     const status = this.currentCardStatus === 'success' ? 'ok' : 'ko';
+
+    this.reportInfo = {
+      answer: event.submitter.value,
+      elementId: this.element.id,
+    };
+
     this.passageEvents.record({
       type: 'QAB_CARD_ANSWERED',
       data: {
@@ -184,7 +191,7 @@ export default class ModuleQab extends ModuleElement {
         {{htmlUnsafe this.feedback}}
 
         <div class="element-qab__report-button">
-          <ModulixIssueReportBlock />
+          <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
         </div>
       </div>
     {{/if}}

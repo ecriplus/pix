@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
@@ -9,6 +10,17 @@ import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModulixCustomDraft extends ModuleElement {
+  @tracked reportInfo = {};
+
+  constructor(...args) {
+    super(...args);
+
+    this.reportInfo = {
+      answer: null,
+      elementId: this.args.customDraft.id,
+    };
+  }
+
   get heightStyle() {
     return htmlUnsafe(`height: ${this.args.customDraft.height}px`);
   }
@@ -56,7 +68,7 @@ export default class ModulixCustomDraft extends ModuleElement {
           aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
         >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
 
-        <ModulixIssueReportBlock />
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>

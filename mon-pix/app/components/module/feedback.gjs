@@ -16,7 +16,7 @@ export default class ModulixFeedback extends Component {
       {{htmlUnsafe @feedback.diagnosis}}
 
       <div class="feedback__report-button">
-        <ModulixIssueReportBlock />
+        <ModulixIssueReportBlock @reportInfo={{@reportInfo}} />
       </div>
     </div>
   </template>

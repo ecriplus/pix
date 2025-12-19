@@ -20,6 +20,7 @@ export default class ModuleQcm extends ModuleElement {
   @tracked isAnswering = false;
   @tracked currentCorrection;
   @tracked answerIsValid = false;
+  @tracked reportInfo = {};
 
   selectedAnswerIds = new Set();
 
@@ -90,6 +91,12 @@ export default class ModuleQcm extends ModuleElement {
     }
     this.validAnswer();
     const status = this.answerIsValid ? 'ok' : 'ko';
+    const answers = this.userResponse.join(', ');
+    this.reportInfo = {
+      answer: answers,
+      elementId: this.element.id,
+    };
+
     this.currentCorrection = {
       status,
       feedback: this.answerIsValid ? this.element.feedbacks.valid : this.element.feedbacks.invalid,
@@ -174,7 +181,11 @@ export default class ModuleQcm extends ModuleElement {
 
       <div class="element-qcm__feedback" role="status" tabindex="-1">
         {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback @answerIsValid={{this.answerIsValid}} @feedback={{this.correction.feedback}} />
+          <ModulixFeedback
+            @answerIsValid={{this.answerIsValid}}
+            @feedback={{this.correction.feedback}}
+            @reportInfo={{this.reportInfo}}
+          />
         {{/if}}
       </div>
 

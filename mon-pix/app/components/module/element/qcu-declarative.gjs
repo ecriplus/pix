@@ -12,6 +12,7 @@ import ModuleElement from './module-element';
 export default class ModuleQcuDeclarative extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
+  @tracked reportInfo = {};
 
   @service passageEvents;
   @service modulixPreviewMode;
@@ -33,6 +34,10 @@ export default class ModuleQcuDeclarative extends ModuleElement {
   async onAnswer(event) {
     event.preventDefault();
     this.selectedProposalId = event.submitter.value;
+    this.reportInfo = {
+      answer: this.selectedProposalAnswer,
+      elementId: this.element.id,
+    };
 
     await this.waitFor(VERIFY_RESPONSE_DELAY);
     await this.args.onAnswer({ element: this.element });
@@ -88,7 +93,7 @@ export default class ModuleQcuDeclarative extends ModuleElement {
         {{htmlUnsafe this.selectedProposalFeedback}}
 
         <div class="element-qcu-declarative-feedback__report-button">
-          <ModulixIssueReportBlock />
+          <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
         </div>
       </div>
     {{/if}}

@@ -17,6 +17,11 @@ export default class ModulixEmbed extends ModuleElement {
     this.messageHandler = this._receiveEmbedMessage.bind(this);
     this.embedHeight = this.args.embed.height;
     window.addEventListener('message', this.messageHandler);
+
+    this.reportInfo = {
+      answer: null,
+      elementId: this.args.embed.id,
+    };
   }
 
   @service
@@ -36,6 +41,9 @@ export default class ModulixEmbed extends ModuleElement {
 
   @tracked
   embedHeight;
+
+  @tracked
+  reportInfo = {};
 
   iframe;
   messageHandler = null;
@@ -107,6 +115,11 @@ export default class ModulixEmbed extends ModuleElement {
     if (!this.args.embed.isCompletionRequired) return;
     if (message.type) return;
     if (!message.answer) return;
+
+    this.reportInfo = {
+      answer: message.answer,
+      elementId: this.args.embed.id,
+    };
 
     this.args.onAnswer({
       userResponse: [message.answer],
@@ -189,7 +202,7 @@ export default class ModulixEmbed extends ModuleElement {
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
         {{/if}}
 
-        <ModulixIssueReportBlock />
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>

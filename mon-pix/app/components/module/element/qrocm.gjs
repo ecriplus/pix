@@ -19,6 +19,7 @@ export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
   @tracked currentCorrection;
   @tracked isVerifying = false;
+  @tracked reportInfo = {};
   @service passageEvents;
   @service qrocmSolutionVerification;
   @service modulixPreviewMode;
@@ -107,6 +108,12 @@ export default class ModuleQrocm extends ModuleElement {
 
     const answerIsValid = this.answerIsValid;
     const status = answerIsValid ? 'ok' : 'ko';
+
+    const answers = this.userResponse.map(({ input, answer }) => `${input}: ${answer}`).join(', ');
+    this.reportInfo = {
+      answer: answers,
+      elementId: this.element.id,
+    };
 
     this.currentCorrection = {
       feedback: answerIsValid ? this.element.feedbacks.valid : this.element.feedbacks.invalid,
@@ -247,7 +254,11 @@ export default class ModuleQrocm extends ModuleElement {
 
       <div class="element-qrocm__feedback" role="status" tabindex="-1">
         {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback @answerIsValid={{this.answerIsValid}} @feedback={{this.correction.feedback}} />
+          <ModulixFeedback
+            @answerIsValid={{this.answerIsValid}}
+            @feedback={{this.correction.feedback}}
+            @reportInfo={{this.reportInfo}}
+          />
         {{/if}}
       </div>
 
