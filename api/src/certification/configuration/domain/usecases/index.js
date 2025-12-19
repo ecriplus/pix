@@ -54,6 +54,7 @@ import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
 import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
 import { createCertificationVersion } from './create-certification-version.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
+import { findCertificationFrameworks } from './find-certification-frameworks.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveVersionByScope } from './get-active-version-by-scope.js';
 import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
@@ -71,6 +72,7 @@ const usecasesWithoutInjectedDependencies = {
   catchingUpCandidateReconciliation,
   createCertificationVersion,
   exportScoWhitelist,
+  findCertificationFrameworks,
   findComplementaryCertifications,
   getCurrentFrameworkVersion,
   getActiveVersionByScope,
