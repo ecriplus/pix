@@ -261,7 +261,20 @@
           "id": "e3322cbb-6e25-4048-ae12-f58b166199d3",
           "type": "short-lesson",
           "title": "Lesson#1 - Les impacts environnementaux en cascade des centres de données",
-          "components": []
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/schema-impacts-datacenter.png",
+                "alt": "Schéma des impacts environnementaux des centres de données",
+                "alternativeText": "<p>Schéma des impacts environnementaux des centres de données : </p><p>Conséquences primaires :</p><p>-&nbsp; consommation d’eauconsommation d’énergie / électricité</p><p>- extractions des métaux et terres rare</p><p>- sartificialisation des sols</p><p>Conséquences secondaires :&nbsp;</p><p>- pénurie d’eau potable</p><p>- manque d’eau pour l’agriculture</p><p>- raréfaction des ressources</p><p>- génération des CO2</p><p>- production de déchets toxiques</p><p>Conséquences systémiques :&nbsp;&nbsp;</p><p>- santé et bien-être des populations humaines</p><p>- dérèglement climatique</p><p>- dégradations de la biodiversité et des écosystèmes</p>",
+                "legend": "Schéma des impacts environnementaux des centres de données",
+                "licence": "image provisoire"
+              }
+            }
+          ]
         },
         {
           "id": "bc79c9ca-cf77-4376-a25c-a84419ef866f",
