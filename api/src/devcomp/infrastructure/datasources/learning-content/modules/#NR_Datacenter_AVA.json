@@ -493,7 +493,7 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
-                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p><br>En pratique, elles sont encore très peu respectées, surtout dans les grands services numériques où la performance prime.<br>Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresse.<br><br></p>"
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p><br>En pratique, elles sont encore très peu respectées, surtout dans les grands services numériques où la performance prime.<br>Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresser.<br><br></p>"
                     }
                   ]
                 }
@@ -659,28 +659,28 @@
                           "id": "1",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! </p><p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Bien vu ! </p><p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Utiliser des techniques de refroidissement plus efficaces. <br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>  Il s’agit ici d<strong>’utiliser la chaleur fatale produite par le centre de données.</strong> C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>  Il s’agit ici d<strong>’utiliser la chaleur fatale produite par le centre de données.</strong> C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         }
                       ],
@@ -722,7 +722,7 @@
                             "content": "",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/9-fortis-construction-meta-sweden-campus-1.jpg",
-                              "alt": "Photo du centre de données de Méta (Facebook) en Suède"
+                              "alt": "Photo du centre de données de Meta (Facebook) en Suède"
                             }
                           }
                         ]
