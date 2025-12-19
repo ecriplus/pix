@@ -780,6 +780,15 @@
                               "src": "",
                               "alt": ""
                             }
+                          },
+                          {
+                            "userName": "Alaric",
+                            "direction": "outgoing",
+                            "content": "",
+                            "image": {
+                              "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/data-center-sous-marin-chine.jpg",
+                              "alt": ""
+                            }
                           }
                         ]
                       }
@@ -1090,7 +1099,7 @@
                 "props": {
                   "titleLevel": 0,
                   "title": "Les géants du web ouvrent des centres de données au Mexique.",
-                  "author": "La gazette des géants du web",
+                  "author": "La gazette des géants",
                   "date": "2026",
                   "paragraphs": [
                     "Plusieurs géants du web ont fait des investissements ou exploitent déjà des <strong>centres de données dans l'État de Querétaro</strong>, renforçant l’infrastructure numérique du pays. Ces installations s’inscrivent dans une démarche de <strong>développement durable</strong>, avec l’objectif d’être neutres en carbone, positifs en eau et zéro déchet d’ici 2030.",
