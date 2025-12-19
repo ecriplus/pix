@@ -724,28 +724,28 @@
                           "id": "1",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                            "diagnosis": "<p>Eh non !</p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Utiliser des techniques de refroidissement plus efficaces.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>  L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>  L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.]</p>"
+                            "diagnosis": "<p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
                         }
                       ],
@@ -1100,6 +1100,97 @@
                   "colorOfHighlightSentence": ""
                 }
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "efee2fc9-aeeb-4a32-956f-3b4b943f5491",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-microsoft-queretaro.jpg",
+                "alt": "Des centres de données au Mexique.",
+                "alternativeText": "<p>Des centres de données au Mexique.</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "9e2e22f4-e6fe-44a7-bfdc-d9412431174b",
+                      "type": "qcu",
+                      "instruction": "<p>D’après vous, quel est l’objectif de cet article ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Expliquer des technologies permettant de réduire les impacts des centres de données.</p>",
+                          "feedback": {
+                            "state": "<p>Pas du tout.</p>",
+                            "diagnosis": "<p> Cet article met en valeur les aspects positifs de la création de centres de données au Mexique. Il est grandement inspiré de la communication officielle des géants de la technologie (GAFAM).</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Informer le public de la création de nouveaux centres de données.</p>",
+                          "feedback": {
+                            "state": "<p>Certes mais cet article insiste sur le positif.</p>",
+                            "diagnosis": "<p>Cet article est grandement inspiré de la communication officielle des géants de la technologie (GAFAM).</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Mettre en valeur les effets positifs de la création de centres de données au Mexique.</p>",
+                          "feedback": {
+                            "state": "<p>Tout à fait.</p>",
+                            "diagnosis": "<p>Cet article est grandement inspiré de la communication officielle des géants de la technologie (GAFAM).</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "623a15cf-4b46-4ee2-a068-4bd0b1555022",
+                      "type": "qcm",
+                      "instruction": "<p>En faisant des recherches, que peut-on dire concernant les centres de données implanté dans la région du Quérato ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’état du Quérato est une région aride et subit parfois des sécheresses.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Les résidents voisins des centres de données ont vécu des coupures d’eau et de courant.<br></p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les exploitants des centres de données ne font pas preuve de transparence.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Malheureusement, c'est juste !</p>",
+                          "diagnosis": "<p>Toutes ces affirmations sont vraies.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas tout à fait...</p>",
+                          "diagnosis": "<p>Cherchez encore, c'est peut-être pire que ce que vous croyez...</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
