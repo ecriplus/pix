@@ -104,13 +104,11 @@ import { getCampaignByCode } from './get-campaign-by-code.js';
 import { getCampaignManagement } from './get-campaign-management.js';
 import { getCampaignOfCampaignParticipation } from './get-campaign-of-campaign-participation.js';
 import { getCampaignParticipations } from './get-campaign-participations.js';
-import { getKnowledgeElementSnapshotForParticipation } from './get-knowledge-element-snapshot-for-participation.js';
 import { getParticipantsDivision } from './get-participants-division.js';
 import { getParticipantsGroup } from './get-participants-group.js';
 import { getPresentationSteps } from './get-presentation-steps.js';
 import { getResultLevelsPerTubesAndCompetences } from './get-result-levels-per-tubes-and-competences.js';
 import { getTargetProfile } from './get-target-profile.js';
-import { saveKnowledgeElementSnapshotForParticipation } from './save-knowledge-element-snapshot-for-participation.js';
 import { startWritingCampaignAssessmentResultsToStream } from './start-writing-campaign-assessment-results-to-stream.js';
 import { startWritingCampaignProfilesCollectionResultsToStream } from './start-writing-campaign-profiles-collection-results-to-stream.js';
 import { getBadgeAcquisitionsStatistics } from './statistics/get-badge-acquisitions-statistics.js';
@@ -143,13 +141,11 @@ const usecasesWithoutInjectedDependencies = {
   getCampaignOfCampaignParticipation,
   getCampaignParticipations,
   getCampaign,
-  getKnowledgeElementSnapshotForParticipation,
   getParticipantsDivision,
   getParticipantsGroup,
   getPresentationSteps,
   getResultLevelsPerTubesAndCompetences,
   getTargetProfile,
-  saveKnowledgeElementSnapshotForParticipation,
   startWritingCampaignAssessmentResultsToStream,
   startWritingCampaignProfilesCollectionResultsToStream,
   swapCampaignCodes,

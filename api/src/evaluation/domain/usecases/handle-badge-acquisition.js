@@ -4,7 +4,7 @@ const handleBadgeAcquisition = async function ({
   assessment,
   badgeForCalculationRepository,
   badgeAcquisitionRepository,
-  knowledgeElementRepository,
+  knowledgeElementForParticipationService,
 }) {
   if (assessment.isCampaignParticipationAvailable()) {
     const campaignParticipationId = assessment.campaignParticipationId;
@@ -15,7 +15,7 @@ const handleBadgeAcquisition = async function ({
     if (_.isEmpty(associatedBadges)) {
       return;
     }
-    const knowledgeElements = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+    const knowledgeElements = await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
       userId: assessment.userId,
       campaignParticipationId,
     });

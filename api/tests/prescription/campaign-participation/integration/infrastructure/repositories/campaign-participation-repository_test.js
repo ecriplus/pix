@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { CampaignParticipationInfo } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
@@ -191,13 +190,17 @@ describe('Integration | Repository | Campaign Participation', function () {
       it('should left existing snapshot untouched', async function () {
         // given
         campaignParticipation.sharedAt = new Date();
-        const snapshotBefore = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipation.id);
+        const snapshotBefore = await knex('knowledge-element-snapshots')
+          .select('snapshot')
+          .where('campaignParticipationId', campaignParticipation.id);
 
         // when
         await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
 
         // then
-        const snapshotAfter = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipation.id);
+        const snapshotAfter = await knex('knowledge-element-snapshots')
+          .select('snapshot')
+          .where('campaignParticipationId', campaignParticipation.id);
         expect(snapshotBefore).to.deepEqualInstance(snapshotAfter);
       });
     });

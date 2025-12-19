@@ -5,7 +5,7 @@
  * @param campaignRepository
  * @param campaignSkillRepository
  * @param stageAcquisitionRepository
- * @param knowledgeElementRepository
+ * @param knowledgeElementForParticipationService
  * @param campaignParticipationRepository
  * @param getNewAcquiredStagesService
  * @param getMasteryPercentageService
@@ -19,7 +19,7 @@ const handleStageAcquisition = async function ({
   skillRepository,
   campaignRepository,
   stageAcquisitionRepository,
-  knowledgeElementRepository,
+  knowledgeElementForParticipationService,
   campaignParticipationRepository,
   getNewAcquiredStagesService,
   getMasteryPercentageService,
@@ -44,7 +44,7 @@ const handleStageAcquisition = async function ({
   }
 
   const [knowledgeElements, campaignSkillsIds] = await Promise.all([
-    knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+    knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
       userId: assessment.userId,
       campaignParticipationId: assessment.campaignParticipationId,
     }),

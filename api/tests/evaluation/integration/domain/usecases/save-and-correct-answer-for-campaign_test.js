@@ -1,7 +1,6 @@
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
 import { CompetenceEvaluation } from '../../../../../src/evaluation/domain/models/CompetenceEvaluation.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import * as knowledgeElementSnapshotApi from '../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.js';
@@ -311,26 +310,34 @@ describe('Evaluation | Integration | Usecase | Save and correct answer for campa
       });
 
       // then
-      const snapshot = await knowledgeElementSnapshotApi.getByParticipation(campaignParticipationId);
-      expect(snapshot.knowledgeElements.length).to.equal(3);
-      const orderedKnowledgeElements = snapshot.knowledgeElements.sort((keA, keB) =>
-        keA.skillId.localeCompare(keB.skillId),
-      );
-      sinon.assert.match(orderedKnowledgeElements[0], {
-        source: KnowledgeElement.SourceType.DIRECT,
-        status: KnowledgeElement.StatusType.VALIDATED,
-        skillId: skillIds[0],
+      const knowledgeElements = await knex('knowledge-element-snapshots')
+        .select('snapshot')
+        .where('campaignParticipationId', campaignParticipationId)
+        .first();
+
+      expect(knowledgeElements.snapshot).lengthOf(3);
+      const expectedKnowledgeElements = knowledgeElements.snapshot.map(({ source, status, skillId }) => {
+        return { source, status, skillId };
       });
-      sinon.assert.match(orderedKnowledgeElements[1], {
-        source: KnowledgeElement.SourceType.INFERRED,
-        status: KnowledgeElement.StatusType.VALIDATED,
-        skillId: skillIds[1],
-      });
-      sinon.assert.match(orderedKnowledgeElements[2], {
-        source: KnowledgeElement.SourceType.DIRECT,
-        status: KnowledgeElement.StatusType.VALIDATED,
-        skillId: skillIds[2],
-      });
+
+      expect(expectedKnowledgeElements).deep.members([
+        {
+          source: KnowledgeElement.SourceType.DIRECT,
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId: skillIds[0],
+        },
+        {
+          source: KnowledgeElement.SourceType.INFERRED,
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId: skillIds[1],
+        },
+        {
+          source: KnowledgeElement.SourceType.DIRECT,
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId: skillIds[2],
+        },
+      ]);
+
       sinon.assert.match(savedAnswer, {
         id: sinon.match.number,
         result: AnswerStatus.OK,

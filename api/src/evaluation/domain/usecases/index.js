@@ -5,6 +5,7 @@ import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { participationCompletedJobRepository } from '../../../prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
+import knowledgeElementForParticipationService from '../../../prescription/shared/domain/services/knowledge-element-for-participation-service.js';
 import * as targetProfileAdministrationRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import { fromDatasourceObject } from '../../../shared/infrastructure/adapters/solution-adapter.js';
@@ -15,7 +16,7 @@ import * as badgeForCalculationRepository from '../../../shared/infrastructure/r
 import * as challengeRepository from '../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../../../shared/infrastructure/repositories/course-repository.js';
-import { repositories as injectedSharedRepositories } from '../../../shared/infrastructure/repositories/index.js';
+import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { answerJobRepository } from '../../infrastructure/repositories/answer-job-repository.js';
@@ -66,7 +67,7 @@ const dependencies = {
   feedbackRepository,
   getCompetenceLevel,
   improvementService,
-  knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
+  knowledgeElementRepository,
   llmApi,
   pickChallengeService,
   scorecardService,
@@ -82,6 +83,7 @@ const dependencies = {
   convertLevelStagesIntoThresholdsService,
   getMasteryPercentageService,
   participationCompletedJobRepository,
+  knowledgeElementForParticipationService,
 };
 
 import { completeAssessment } from './complete-assessment.js';

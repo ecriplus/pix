@@ -27,7 +27,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     areaRepository,
     competenceEvaluationRepository,
     scorecardService,
-    knowledgeElementRepository,
+    knowledgeElementForParticipationService,
     campaignRepository,
     answerJobRepository;
 
@@ -50,9 +50,9 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       get: sinon.stub(),
       getCampaignIdByCampaignParticipationId: sinon.stub(),
     };
-    knowledgeElementRepository = {
-      findUniqByUserIdForCampaignParticipation: sinon.stub(),
-      saveForCampaignParticipation: sinon.stub(),
+    knowledgeElementForParticipationService = {
+      findUniqByUserOrCampaignParticipationId: sinon.stub(),
+      save: sinon.stub(),
     };
     answerJobRepository = {
       performAsync: sinon.stub(),
@@ -95,7 +95,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       challengeRepository,
       competenceEvaluationRepository,
       campaignRepository,
-      knowledgeElementRepository,
+      knowledgeElementForParticipationService,
       scorecardService,
       answerJobRepository,
       correctionService,
@@ -211,7 +211,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
       const skills = domainBuilder.buildSkillCollection();
       campaignRepository.findSkillsByCampaignParticipationId.resolves(skills);
-      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
         .resolves([]);
       KnowledgeElement.createKnowledgeElementsForAnswer.returns([]);
@@ -225,7 +225,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
       answerRepository.save.resolves(answerSaved);
-      knowledgeElementRepository.saveForCampaignParticipation.resolves();
+      knowledgeElementForParticipationService.save.resolves();
 
       // when
       const { result } = await saveAndCorrectAnswerForCampaign({
@@ -293,7 +293,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         });
         challengeRepository.get.resolves(challenge);
 
-        knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+        knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
           .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
           .resolves([knowledgeElement]);
         campaignRepository.findSkillsByCampaignParticipationId.resolves(skills);
@@ -329,7 +329,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     it('should call performAsync from answerJobRepository', async function () {
       // given
       KnowledgeElement.createKnowledgeElementsForAnswer.returns([]);
-      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
         .resolves([]);
       answerJobRepository.performAsync.resolves();
@@ -365,11 +365,11 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
       KnowledgeElement.createKnowledgeElementsForAnswer.returns([]);
-      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
         .resolves([]);
       answerRepository.save.resolves(answerSaved);
-      knowledgeElementRepository.saveForCampaignParticipation.resolves();
+      knowledgeElementForParticipationService.save.resolves();
 
       await saveAndCorrectAnswerForCampaign({
         answer,

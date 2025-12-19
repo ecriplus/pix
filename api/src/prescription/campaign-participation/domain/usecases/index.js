@@ -13,14 +13,15 @@ import * as areaRepository from '../../../../shared/infrastructure/repositories/
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
-import { repositories as injectedSharedRepositories } from '../../../../shared/infrastructure/repositories/index.js';
 import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import * as stageCollectionRepository from '../../../campaign/infrastructure/repositories/stage-collection-repository.js';
 import * as organizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
+import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as campaignAnalysisRepository from '../../infrastructure/repositories/campaign-analysis-repository.js';
 import * as campaignAssessmentParticipationRepository from '../../infrastructure/repositories/campaign-assessment-participation-repository.js';
@@ -62,7 +63,8 @@ const dependencies = {
   competenceRepository,
   eventLoggingJobRepository,
   featureToggles,
-  knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
+  knowledgeElementForParticipationService,
+  knowledgeElementRepository,
   knowledgeElementSnapshotRepository,
   learningContentRepository,
   organizationLearnerRepository,
