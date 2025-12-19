@@ -31,7 +31,19 @@
               "element": {
                 "id": "6395f495-5219-445d-9976-53710245da39",
                 "type": "text",
-                "content": "<p>Ces dernières années, le nombre de centres de données n’a fait que croître, et avec lui l’électricité consommée.</p><p><em>[A venir GIF avec un planisphère et l’apparition de points pour les centres de données dans le temps]</em></p>"
+                "content": "<p>Ces dernières années, le nombre de centres de données n’a fait que croître, et avec lui l’électricité consommée.</p><p><em>[A venir GIF - l’apparition de points pour les centres de données dans le temps]</em></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3c4c888c-acb8-4c70-b1d6-f67af2b0e5c3",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacentermap.png",
+                "alt": "Une carte des centre de données dans le monde.",
+                "alternativeText": "<p>Une carte des centre de données dans le monde.</p>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -91,7 +103,19 @@
               "element": {
                 "id": "6e45420c-8d9a-4fda-8b02-c6fd2123f9ac",
                 "type": "text",
-                "content": "<p>Un centre de données consomme chaque jour une grande quantité d’eau et d’énergie.</p><p>De plus, pour sa construction, le centre de données nécessite l’extraction de grandes quantités de métaux, de terre rare et artificialisation des sols. De plus, il génère de nombreux déchets toxiques.</p><p>[Illustré ?]</p>"
+                "content": "<p>Un centre de données consomme chaque jour une grande quantité d’eau et d’énergie.</p><p>De plus, pour sa construction, le centre de données nécessite l’extraction de grandes quantités de métaux, de terre rare et artificialisation des sols. De plus, il génère de nombreux déchets toxiques.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "64c85e42-6b34-4c04-be29-e1e550000b69",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenterconsequencesprimaires.png",
+                "alt": "",
+                "alternativeText": "<p><br></p>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -191,7 +215,7 @@
                     {
                       "id": "e3363973-52e7-4757-b9fc-4d820b7bb355",
                       "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de ces consommations d’eau, d’énergie, de métaux pour le fonctionenment des centre de données ?</p>",
+                      "instruction": "<p>Au global, quelles sont les conséquences de la fabrication et du fonctionnement des centres de données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
