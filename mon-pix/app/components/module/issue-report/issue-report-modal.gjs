@@ -37,8 +37,13 @@ export default class ModulixIssueReportModal extends Component {
     this.selectedCategory = value;
   }
 
-  @action onChangeComment(value) {
-    this.comment = value;
+  @action onChangeComment(event) {
+    this.comment = event?.target?.value;
+  }
+
+  @action
+  sendReport() {
+    this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
   }
 
   <template>
@@ -85,7 +90,7 @@ export default class ModulixIssueReportModal extends Component {
             <li><PixButton @variant="secondary" @triggerAction={{this.hideModal}}>{{t
                   "common.actions.cancel"
                 }}</PixButton></li>
-            <li><PixButton @triggerAction={{this.hideModal}}>{{t "common.actions.send"}}</PixButton></li>
+            <li><PixButton @triggerAction={{this.sendReport}}>{{t "common.actions.send"}}</PixButton></li>
           </ul>
         </:footer>
       </PixModal>
