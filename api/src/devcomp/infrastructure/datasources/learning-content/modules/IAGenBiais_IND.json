@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/IAGenBiais_IND/picto_moduleIA_biais.svg",
-    "description": "<p>Les logiciels d’IA générative donnent l’impression d’avoir réponse à tout. Parfois, leurs productions contiennent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.🔍</p>",
+    "description": "<p>Les productions des logiciels d’IA génératives contiennent parfois des maladresses. Ce ne sont pas toujours des erreurs, mais des raccourcis, des stéréotypes ou des discriminations.  On dit que ces résultats comportent des biais. </p><p>Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.<br></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -909,7 +909,10 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple ou vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": ["2", "4"]
+                "solutions": [
+                  "2",
+                  "4"
+                ]
               }
             }
           ]
