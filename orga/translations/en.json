@@ -1203,11 +1203,11 @@
         "placeholder": "e.g. john.smith@email.com"
       },
       "errors": {
+        "access-not-allowed": "Access to this Pix Orga space is limited to invited members. Each Pix Orga space is managed by an administrator specific to the organisation using it. Please contact your administrator to get invited.",
         "empty-email": "You have not entered your e-mail address.",
         "empty-password": "You have not entered your password.",
         "invalid-email": "Your email address is invalid.",
         "status": {
-          "403": "Access to this Pix Orga space is limited to invited members. Each Pix Orga space is managed by an administrator specific to the organisation using it. Please contact your administrator to get invited.",
           "404": "There was an error in the email address or password entered.",
           "409": "This invitation has been already accepted or cancelled."
         }
@@ -1215,7 +1215,6 @@
       "forgot-password": "Forgot your password?",
       "invitation-already-accepted": "This invitation has already been accepted. Please log in or contact the administrator of your Pix Orga space.",
       "invitation-was-cancelled": "This invitation is no longer valid. Please contact the administrator of your Pix Orga space.",
-      "is-only-accessible": "Pix Orga is only accessible to invited members. Please contact your Pix Orga administrator in order to be invited.",
       "login": "Log in",
       "only-for-admin": "only for school administrations",
       "password": "Password"

@@ -7,7 +7,7 @@ import {
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../../../../src/shared/config.js';
-import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
+import { ForbiddenAccess, PixOrgaAccessNotAllowedError } from '../../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | authenticate-user', function () {
@@ -360,7 +360,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
               // when & then
               await expect(
                 usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
-              ).to.be.rejectedWith(ForbiddenAccess);
+              ).to.be.rejectedWith(PixOrgaAccessNotAllowedError);
             });
           });
         });

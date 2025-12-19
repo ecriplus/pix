@@ -68,7 +68,7 @@ export default class LoginForm extends Component {
       if (isInvitationAlreadyAcceptedByAnotherUser) {
         this.globalError = this.intl.t('pages.login-form.errors.status.409');
       } else {
-        this.globalError = this.#getErrorMessage(extractedError);
+        this.globalError = this.authErrorMessages.getAuthenticationErrorMessage(extractedError);
       }
     } finally {
       this.isLoading = false;
@@ -91,14 +91,6 @@ export default class LoginForm extends Component {
   updateLogin(event) {
     this.login = event.target.value?.trim();
     this.validation.login.validate(this.login);
-  }
-
-  #getErrorMessage(error) {
-    // TODO: should be managed with a code instead of status only
-    if (error.status === 403 && !error.code) {
-      return this.intl.t('pages.login-form.errors.status.403');
-    }
-    return this.authErrorMessages.getAuthenticationErrorMessage(error);
   }
 
   <template>

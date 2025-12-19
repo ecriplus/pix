@@ -1191,11 +1191,11 @@
         "placeholder": "ex: jean.dupont@email.com"
       },
       "errors": {
+        "access-not-allowed": "L'accès à Pix Orga est limité aux membres invités. Chaque espace est géré par un administrateur Pix Orga propre à l'organisation qui l'utilise. Contactez-le pour qu'il vous y invite.",
         "empty-email": "Votre adresse e-mail n’est pas renseignée.",
         "empty-password": "Votre mot de passe n’est pas renseigné.",
         "invalid-email": "Votre adresse e-mail n’est pas valide.",
         "status": {
-          "403": "L'accès à Pix Orga est limité aux membres invités. Chaque espace est géré par un administrateur Pix Orga propre à l'organisation qui l'utilise. Contactez-le pour qu'il vous y invite.",
           "404": "L'adresse e-mail et/ou le mot de passe saisis sont incorrects.",
           "409": "Cette invitation a déjà été acceptée ou annulée."
         }
@@ -1203,7 +1203,6 @@
       "forgot-password": "Mot de passe oublié ?",
       "invitation-already-accepted": "Cette invitation a déjà été acceptée. Connectez-vous ou contactez l'administrateur de votre espace Pix Orga.",
       "invitation-was-cancelled": "Cette invitation n’est plus valide. Contactez l’administrateur de votre espace Pix Orga.",
-      "is-only-accessible": "L'accès à Pix Orga est limité aux membres invités. Contactez l’administrateur Pix Orga de votre organisation pour qu'il vous invite.",
       "login": "Je me connecte",
       "only-for-admin": "Réservé aux personnels de direction des établissements scolaires publics et privés sous contrat.",
       "password": "Mot de passe"
