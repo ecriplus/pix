@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Nos appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, découvrons deux méthodes complémentaires pour renforcer la protection de nos appareils face à ces logiciels. 🛡️</p>",
+    "description": "<p>Nos appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, découvrons deux méthodes complémentaires pour renforcer la protection de nos appareils face à ces logiciels. 🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -50,7 +50,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Un logiciel malveillant a profité d’une faille technique pour s’installer.</p>",
+                    "content": "<p>Un logiciel malveillant a profité d’une faille technique du système d’exploitation pour s’installer.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh oui. Adopter les bons gestes pour éviter d’installer des logiciels malveillants c’est déjà bien, mais ce n’est pas toujours suffisant pour être totalement protégé. <br>Il suffit d’une faille technique pour qu’un appareil numérique soit vulnérable.</p>"
                     }
@@ -178,7 +178,7 @@
               "element": {
                 "id": "024ea3ae-548b-4f85-8d3f-c09f0f6c8d37",
                 "type": "text",
-                "content": "<p>Les mises à jour des logiciels systèmes améliorent régulièrement la sécurité de nos appareils. <br>Mais pour compléter cette protection, il existe aussi des logiciels spécialisés&nbsp;: les logiciels antivirus.</p>"
+                "content": "<p>Les mises à jour des logiciels systèmes améliorent régulièrement la sécurité de nos appareils. <br>Mais pour compléter cette protection, il existe aussi des logiciels spécialisés. Découvrons cela ensemble.</p>"
               }
             }
           ]
@@ -425,7 +425,7 @@
               "element": {
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
-                "content": "<ul>    <li>Les pirates créent des <strong>logiciels </strong><strong>malveillants </strong>qui <strong>exploitent les failles techniques</strong> des appareils numériques.<br>Les <strong>mises à jour des logiciels systèmes</strong> corrigent ces failles et renforcent la sécurité des appareils.<br><br></li>    <li>Un<strong> logiciel antivirus</strong> est <strong>nécessaire </strong>pour compléter la <strong>protection </strong>des appareils.<br><br></li>    <li>L’<strong>antivirus</strong> surveille <strong>en continu </strong>l’activité d’un appareil pour<strong> détecter et bloquer</strong> les logiciels malveillants.<br><br></li>    <li>Pour rester protégé, il est recommandé d’<strong>activer les mises à jour automatiques</strong> de ses appareils et de son logiciel antivirus.</li></ul>"
+                "content": "<ul>    <li>Les pirates créent des <strong>logiciels malveillants </strong>qui <strong>exploitent les failles techniques</strong> des logiciels systèmes des appareils numériques.<br>Les <strong>mises à jour des logiciels systèmes</strong> corrigent ces failles et renforcent la sécurité des appareils.<br><br></li>    <li>Un<strong> logiciel antivirus</strong> est <strong>nécessaire </strong>pour compléter la <strong>protection </strong>des appareils.<br><br></li>    <li>L’<strong>antivirus</strong> surveille <strong>en continu </strong>l’activité d’un appareil pour<strong> détecter et bloquer</strong> les logiciels malveillants.<br><br></li>    <li>Pour rester protégé, il est recommandé d’<strong>activer les mises à jour automatiques</strong> de ses appareils et de son logiciel antivirus.</li></ul>"
               }
             }
           ]
@@ -537,7 +537,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Remplacer les mises à jour de sécurité de l’appareil.</p>"
+                    "content": "<p>Remplacer les mises à jour des logiciels systèmes de l’appareil.</p>"
                   },
                   {
                     "id": "3",
@@ -682,13 +682,6 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je préfère attendre un peu avant de changer mes habitudes.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Chacun avance à son rythme ! Quand vous le souhaiterez, un premier pas simple peut être d’activer les mises à jour automatiques ou installer un antivirus. Chaque geste compte pour améliorer votre sécurité numérique.</p>"
-                    }
-                  },
-                  {
-                    "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Quand vous le souhaiterez, un premier pas simple peut être d’activer les mises à jour automatiques ou installer un antivirus. Chaque geste compte pour améliorer votre sécurité numérique.</p>"
