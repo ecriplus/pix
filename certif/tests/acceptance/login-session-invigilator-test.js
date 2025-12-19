@@ -1,6 +1,7 @@
 import { visit as visitScreen } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -29,7 +30,7 @@ module('Acceptance | Login session invigilator', function (hooks) {
 
     // then
     assert.dom(screen.getByText('lara.pafromage@example.com')).exists();
-    assert.dom(screen.getByText('Changer de compte')).exists();
+    assert.dom(screen.getByText(t('pages.session-supervising.login.form.actions.switch-account'))).exists();
   });
 
   module('When invigilator wants to change account', function () {
@@ -38,7 +39,7 @@ module('Acceptance | Login session invigilator', function (hooks) {
       const screen = await visitScreen('/connexion-espace-surveillant');
 
       // when
-      await click(screen.getByRole('link', { name: 'Changer de compte' }));
+      await click(screen.getByRole('link', { name: t('pages.session-supervising.login.form.actions.switch-account') }));
 
       // then
       assert.strictEqual(currentURL(), '/logout');

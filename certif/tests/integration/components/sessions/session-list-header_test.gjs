@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import SessionListHeader from 'pix-certif/components/sessions/session-list-header';
 import { module, test } from 'qunit';
 
@@ -26,7 +27,7 @@ module('Integration | Component | panel-header', function (hooks) {
     const { getByRole } = await render(<template><SessionListHeader /></template>);
 
     // then
-    assert.dom(getByRole('link', { name: 'Créer une session' })).exists();
+    assert.dom(getByRole('link', { name: t('pages.sessions.list.actions.creation.label') })).exists();
   });
 
   module('when certification center is a type SCO which manages students', function () {
@@ -48,7 +49,9 @@ module('Integration | Component | panel-header', function (hooks) {
       const { queryByRole } = await render(<template><SessionListHeader /></template>);
 
       // then
-      assert.dom(queryByRole('link', { name: 'Créer/éditer plusieurs sessions' })).doesNotExist();
+      assert
+        .dom(queryByRole('link', { name: t('pages.sessions.list.actions.multiple-creation-edition.label') }))
+        .doesNotExist();
     });
   });
 
@@ -71,8 +74,12 @@ module('Integration | Component | panel-header', function (hooks) {
       const screen = await render(<template><SessionListHeader /></template>);
 
       // then
-      const createOneSessionButton = screen.getByRole('link', { name: 'Créer une session' });
-      const createOrEditMultipleSessionsButton = screen.getByRole('link', { name: 'Créer/éditer plusieurs sessions' });
+      const createOneSessionButton = screen.getByRole('link', {
+        name: t('pages.sessions.list.actions.creation.label'),
+      });
+      const createOrEditMultipleSessionsButton = screen.getByRole('link', {
+        name: t('pages.sessions.list.actions.multiple-creation-edition.label'),
+      });
       const buttonsInTheRightOrder = createOrEditMultipleSessionsButton.compareDocumentPosition(createOneSessionButton);
       assert.strictEqual(buttonsInTheRightOrder, Node.DOCUMENT_POSITION_FOLLOWING);
     });
