@@ -38,7 +38,6 @@
                 "instruction": "",
                 "tagName": "capacity-calculation",
                 "props": {
-                  "titleLevel": 2,
                   "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
                 }
               }
@@ -65,9 +64,7 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "calcul-impact",
-                "props": {
-                  "titleLevel": 2
-                }
+                "props": {}
               }
             }
           ]
@@ -101,7 +98,12 @@
                   },
                   "areas": [
                     {
-                      "coords": { "x1": 390, "y1": 120, "x2": 842, "y2": 400 },
+                      "coords": {
+                        "x1": 390,
+                        "y1": 120,
+                        "x2": 842,
+                        "y2": 400
+                      },
                       "spot": {
                         "x": 240,
                         "y": 130
@@ -109,11 +111,21 @@
                       "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
                     },
                     {
-                      "coords": { "x1": 510, "y1": 588, "x2": 702, "y2": 635 },
+                      "coords": {
+                        "x1": 510,
+                        "y1": 588,
+                        "x2": 702,
+                        "y2": 635
+                      },
                       "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
                     },
                     {
-                      "coords": { "x1": 248, "y1": 398, "x2": 325, "y2": 492 },
+                      "coords": {
+                        "x1": 248,
+                        "y1": 398,
+                        "x2": 325,
+                        "y2": 492
+                      },
                       "spot": {
                         "x": 34,
                         "y": -24
@@ -121,7 +133,12 @@
                       "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
                     },
                     {
-                      "coords": { "x1": 828, "y1": 560, "x2": 1042, "y2": 725 },
+                      "coords": {
+                        "x1": 828,
+                        "y1": 560,
+                        "x2": 1042,
+                        "y2": 725
+                      },
                       "spot": {
                         "x": 34,
                         "y": -24
@@ -130,7 +147,12 @@
                       "tooltipPosition": "bottom"
                     },
                     {
-                      "coords": { "x1": 122, "y1": 796, "x2": 318, "y2": 916 },
+                      "coords": {
+                        "x1": 122,
+                        "y1": 796,
+                        "x2": 318,
+                        "y2": 916
+                      },
                       "spot": {
                         "x": 34,
                         "y": -24
@@ -138,7 +160,12 @@
                       "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
                     },
                     {
-                      "coords": { "x1": 986, "y1": 148, "x2": 1100, "y2": 230 },
+                      "coords": {
+                        "x1": 986,
+                        "y1": 148,
+                        "x2": 1100,
+                        "y2": 230
+                      },
                       "spot": {
                         "x": 34,
                         "y": -24
@@ -173,7 +200,6 @@
                 "instruction": "",
                 "tagName": "complete-phrase",
                 "props": {
-                  "titleLevel": 2,
                   "listOfProbabilityBarsLists": [
                     [
                       {
@@ -420,6 +446,8 @@
                 "props": {
                   "name": "nouveau_motdepasse.name",
                   "maxChoicesPerLine": 2,
+                  "hideChoicesName": true,
+                  "orderChoices": false,
                   "imageChoicesSize": "large",
                   "choices": [
                     {
@@ -470,9 +498,7 @@
                       },
                       "response": "courant"
                     }
-                  ],
-                  "hideChoicesName": true,
-                  "orderChoices": false
+                  ]
                 }
               }
             }
@@ -907,6 +933,138 @@
           ]
         },
         {
+          "id": "1613420c-534d-4571-b0d1-88476b7f0dfd",
+          "type": "discovery",
+          "title": "phishing-message",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "042fbb51-6ffa-4c19-8ef9-aa88fc1c3046",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "phishing-message",
+                "props": {
+                  "messages": [
+                    {
+                      "senderName": "info ANTAI",
+                      "content": "Hello, la forme ? Tu as fais une petite infraction. \n Peux-tu me donner un peu d'argent pour que je t'oublie ?",
+                      "title": "Retard de paiement : ",
+                      "goodFeelings": ["fear", "emergency"],
+                      "victory": "Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.",
+                      "loose": "Eh non ! Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence."
+                    },
+                    {
+                      "senderName": "info ANTAI 2",
+                      "content": "Azy donne ta thune, là ! TOUSUITE !",
+                      "title": "Retard de paiement : ",
+                      "goodFeelings": ["hope"],
+                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue.",
+                      "loose": "Eh non ! Avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue."
+                    },
+                    {
+                      "senderName": "info ANTAI 3",
+                      "content": "Azy re-donne ta thune, là ! TOUSUITE !",
+                      "title": "Retard de paiement : ",
+                      "goodFeelings": ["fear", "emergency"],
+                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.",
+                      "loose": " Eh non, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger."
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1bb50299-97fa-49e9-93df-f95f27db7be5",
+          "type": "discovery",
+          "title": "phishing-notification",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "767e1591-dde0-434f-9f7d-e8ee2c54676e",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "phishing-notification",
+                "props": {
+                  "notifications": [
+                    {
+                      "icon": "bubble",
+                      "sender": "IMPOTS-GOUV",
+                      "content": "Remboursement fiscal de 500e",
+                      "category": "Service public",
+                      "time": {
+                        "minutes": -3
+                      }
+                    },
+                    {
+                      "icon": "letter",
+                      "sender": "service@enegie.com",
+                      "content": "Non paiement !!",
+                      "category": "Entreprise",
+                      "time": {
+                        "minutes": -9
+                      }
+                    },
+                    {
+                      "icon": "arobase",
+                      "sender": "Squizee",
+                      "content": "Viens à ma soirée d'influenceur",
+                      "category": "Célébrité",
+                      "time": {
+                        "minutes": -34
+                      }
+                    },
+                    {
+                      "icon": "bubble",
+                      "sender": "ANTAI",
+                      "content": "Amende plus chère",
+                      "category": "Service public",
+                      "time": {
+                        "minutes": -42
+                      }
+                    },
+                    {
+                      "icon": "letter",
+                      "sender": "service@fnac.com",
+                      "content": "Trop chère",
+                      "category": "Entreprise",
+                      "time": {
+                        "minutes": -128
+                      }
+                    }
+                  ],
+                  "categories": [
+                    {
+                      "name": "Célébrité",
+                      "icon": "celebrity"
+                    },
+                    {
+                      "name": "Commerce",
+                      "icon": "business"
+                    },
+                    {
+                      "name": "Particulier",
+                      "icon": "person"
+                    },
+                    {
+                      "name": "Service public",
+                      "icon": "publicService"
+                    },
+                    {
+                      "name": "Entreprise",
+                      "icon": "company"
+                    }
+                  ],
+                  "informationMessage": "Souvent, les escrocs envoient de faux messages qui semblent venir d’un proche, d’une célébrité ou d’un service connu pour gagner votre confiance."
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "6425a4f1-8fcf-4a03-9cef-fc298318e742",
           "type": "discovery",
           "title": "pix-article",
@@ -927,7 +1085,6 @@
                 "instruction": "",
                 "tagName": "pix-article",
                 "props": {
-                  "titleLevel": 2,
                   "title": "🔴 Une vidéo de la maire de la capitale crée la polémique",
                   "author": "Rédaction Locale",
                   "date": "14 mai 2025",
@@ -963,10 +1120,7 @@
                 "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
-                  "titleLevel": 2,
                   "type": "image",
-                  "randomSlides": false,
-                  "disableAnimation": false,
                   "slides": [
                     {
                       "title": "Situation A",
@@ -998,7 +1152,7 @@
                     },
                     {
                       "title": "Liste non ordonnée",
-                      "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zooma</li>\n         <li>Stela</li>\n       </ul>\n     ",
+                      "description": "  <ul><li>Ruben</li>       <li>Chase</li>         <li>Zooma</li>         <li>Stela</li>       </ul>     ",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
@@ -1012,7 +1166,7 @@
                     },
                     {
                       "title": "Liste ordonnée",
-                      "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zooma</li>\n         <li>Stela</li>\n       </ol>\n",
+                      "description": "<ol>   <li>Ruben</li> <li>Chase</li>  <li>Zooma</li>         <li>Stela</li>       </ol>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
@@ -1024,7 +1178,9 @@
                         "url": "url"
                       }
                     }
-                  ]
+                  ],
+                  "randomSlides": false,
+                  "disableAnimation": false
                 }
               }
             }
@@ -1107,11 +1263,53 @@
                 "instruction": "",
                 "tagName": "qcm-deepfake",
                 "props": {
-                  "titleLevel": 2,
                   "successImage": "https://epreuves.pix.fr/images/camtasia.png",
                   "failImage": "https://epreuves.pix.fr/images/icones/actu.jpg",
                   "infoImage": "https://epreuves.pix.fr/images/icones/avg.png",
                   "searchImage": "https://epreuves.pix.fr/images/icones/avira.svg"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "45928ed8-83c9-4dfe-b5fb-07f83e60477e",
+          "type": "discovery",
+          "title": "select-conversation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7ca2b948-d1a1-49c7-b2fb-5446ea2a4a10",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "select-conversation",
+                "props": {
+                  "incomingMessage": {
+                    "username": "Yvette",
+                    "content": "Ok, mais en cas de doute, je fais quoi ? La banque ça peut être urgent !",
+                    "time": {
+                      "minutes": -5
+                    }
+                  },
+                  "username": "Xavier",
+                  "responseChoices": [
+                    {
+                      "content": "Répond STOP au SMS, ça va le bloquer.",
+                      "goodIdea": false,
+                      "feedback": "Répondre STOP à un SMS d’arnaque ne permet pas de vérifier sa véracité ni de bloquer l’expéditeur.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    },
+                    {
+                      "content": "Contacte ta banque au numéro habituel ou via ton application bancaire.",
+                      "goodIdea": true,
+                      "feedback": "Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    },
+                    {
+                      "content": "Rappelle directement le numéro qui t’a envoyé le message.",
+                      "goodIdea": false,
+                      "feedback": "Rappeler le numéro, c’est prendre le risque de tomber sur un escroc qui vous manipulera.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    }
+                  ]
                 }
               }
             }
