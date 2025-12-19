@@ -18,6 +18,10 @@ export default class OidcLoginController extends Controller {
     return invitationStorage.get();
   }
 
+  get isWithInvitation() {
+    return Boolean(this.currentInvitation);
+  }
+
   get authenticationKey() {
     return oidcUserAuthenticationStorage.get()?.authenticationKey;
   }
@@ -48,6 +52,7 @@ export default class OidcLoginController extends Controller {
     const attributes = responseJson.data.attributes;
     const oidcAssociationConfirmationData = {
       email,
+      authenticationKey: this.authenticationKey,
       fullNameFromPix: attributes['full-name-from-pix'],
       fullNameFromExternalIdentityProvider: attributes['full-name-from-external-identity-provider'],
       authenticationMethods: attributes['authentication-methods'],

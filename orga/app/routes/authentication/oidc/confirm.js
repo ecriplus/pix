@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 import { SessionStorageEntry } from '../../../utils/session-storage-entry';
 
 const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
+const invitationStorage = new SessionStorageEntry('joinInvitationData');
 
 export default class ConfirmRoute extends Route {
   @service oidcIdentityProviders;
@@ -15,9 +16,17 @@ export default class ConfirmRoute extends Route {
       this.oidcIdentityProviders.findBySlug(identityProviderSlug).organizationName;
 
     const storedInformations = oidcAssociationConfirmationStorage.get();
+
+    const storedInvitation = invitationStorage.get() ?? {};
+    const invitationId = storedInvitation.invitationId;
+    const invitationCode = storedInvitation.code;
+
     return {
       identityProviderOrganizationName,
       identityProviderSlug,
+      invitationId,
+      invitationCode,
+      authenticationKey: storedInformations.authenticationKey,
       authenticationMethods: storedInformations.authenticationMethods,
       fullNameFromPix: storedInformations.fullNameFromPix,
       fullNameFromExternalIdentityProvider: storedInformations.fullNameFromExternalIdentityProvider,

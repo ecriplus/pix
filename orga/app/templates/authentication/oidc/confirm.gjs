@@ -19,6 +19,9 @@ import OidcAssociationConfirmation from '../../../components/authentication/oidc
         @fullNameFromPix={{@model.fullNameFromPix}}
         @fullNameFromExternalIdentityProvider={{@model.fullNameFromExternalIdentityProvider}}
         @email={{@model.email}}
+        @invitationId={{@model.invitationId}}
+        @invitationCode={{@model.invitationCode}}
+        @authenticationKey={{@model.authenticationKey}}
       />
     </:content>
   </AuthenticationLayout>
