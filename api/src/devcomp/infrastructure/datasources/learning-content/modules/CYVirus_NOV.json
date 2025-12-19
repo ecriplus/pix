@@ -142,7 +142,7 @@
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
-                      "content": "<h5>Ordinateur n°1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong>&nbsp;</p>"
+                      "content": "<h5>Ordinateur n°1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -191,21 +191,21 @@
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, pas toujours.  Certains logiciels malveillants peuvent causer des&nbsp;<strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>. D’autres agissent<strong> discrètement</strong> sans qu’on les voie.</p>"
+                      "diagnosis": "<p>Eh non, pas toujours. Certains logiciels malveillants peuvent causer des&nbsp;<strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>. D’autres agissent<strong> discrètement</strong> sans qu’on les voie.</p>"
+                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer <strong>des&nbsp;dysfonctionnements </strong>qui sont <strong>visibles</strong>. D’autres agissent <strong>discrètement</strong> sans qu’on les voie.</p>"
+                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer <strong>des&nbsp;dysfonctionnements </strong>qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   }
                 ],
@@ -341,7 +341,7 @@
               "element": {
                 "id": "f13c6d5e-220d-48f4-8fc5-8b07ce0a7f31",
                 "type": "text",
-                "content": "<p>Derrière ces <strong>pièges</strong>, il y a des <strong>pirates informatiques</strong>. </p><p>Les pirates <strong>cachent</strong> des logiciels malveillants dans des contenus ou des supports attirants.&nbsp;</p><p>Mais pourquoi les pirates veulent-ils vous piéger ?</p><br>"
+                "content": "<p>Derrière ces <strong>pièges</strong>, il y a des <strong>pirates informatiques</strong>. </p><p>Les pirates <strong>cachent</strong> des logiciels malveillants dans des contenus ou des supports attirants.&nbsp;</p><p>Mais pourquoi les pirates veulent-ils vous piéger ?</p>"
               }
             }
           ]
@@ -382,7 +382,7 @@
               "element": {
                 "id": "e7efa1be-03f5-4844-830c-249636f8e122",
                 "type": "text",
-                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques.</strong> En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit.</strong><br></p>"
+                "content": "<p>Les logiciels malveillants sont <strong>créés</strong> par des <strong>pirates informatiques.</strong> En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit.</strong></p>"
               }
             }
           ]
@@ -657,7 +657,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "<p>Il existe plusieurs types de logiciels malveillants. Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?</p><p>Pour le comprendre, prenons le cas d’Alice. </p><p>Alice a utilisé un ordinateur public à la bibliothèque, pour rédiger un texte. Pour cela, elle a seulement créé un document et n’est pas allée sur Internet. Elle a enregistré son document sur sa clé USB pour pouvoir le rapporter chez elle.&nbsp;</p><p>En rentrant chez elle, elle découvre que son document a été renommé bizarrement et ne s’ouvre plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p><br>"
+                "content": "<p>Il existe plusieurs types de logiciels malveillants. Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?</p><p>Pour le comprendre, prenons le cas d’Alice. </p><br><p>Alice a utilisé <strong>un ordinateur public à la bibliothèque</strong>, pour rédiger un texte. Pour cela, elle a seulement <strong>créé un document</strong> et n’est pas allée sur Internet. Elle a enregistré son document sur <strong>sa clé USB</strong> pour pouvoir le rapporter chez elle.</p><p>En rentrant chez elle, elle découvre que son document a été renommé bizarrement et ne s’ouvre plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p>"
               }
             },
             {
@@ -665,7 +665,7 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "qrocm",
-                "instruction": "<p>Essayez de <strong>compléter le texte suivant</strong> pour décrire la situation d’Alice.<br></p>",
+                "instruction": "<p>Essayez de <strong>compléter le texte suivant</strong> pour décrire la situation d’Alice.</p>",
                 "proposals": [
                   {
                     "type": "text",
