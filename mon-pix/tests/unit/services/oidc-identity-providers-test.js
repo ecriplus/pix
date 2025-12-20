@@ -7,6 +7,22 @@ import sinon from 'sinon';
 module('Unit | Service | oidc-identity-providers', function (hooks) {
   setupTest(hooks);
 
+  let oidcIdentityProvidersService;
+  let storeStub;
+
+  const oidcPartner = {
+    id: 'oidc-partner',
+    code: 'OIDC_PARTNER',
+    slug: 'partenaire-oidc',
+    organizationName: 'Partenaire OIDC',
+    shouldCloseSession: false,
+    source: 'oidc-externe',
+  };
+
+  hooks.beforeEach(function () {
+    oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
+  });
+
   module('load', function () {
     test('should contain identity providers by id and retrieve the whole list', async function (assert) {
       // given
@@ -119,6 +135,42 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
 
         // then
         assert.strictEqual(hasIdentityProviders, false);
+      });
+    });
+  });
+
+  module('findByCode', function () {
+    module('when the requested identity provider is available', function () {
+      test('returns the identity provider', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode(oidcPartner.code);
+
+        // then
+        assert.strictEqual(identityProvider.code, oidcPartner.code);
+      });
+    });
+
+    module('when the requested identity provider is not available', function () {
+      test('returns undefined', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode('not-existing-code');
+
+        // then
+        assert.strictEqual(identityProvider, undefined);
       });
     });
   });
