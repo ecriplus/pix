@@ -10,6 +10,7 @@ import ModulixIssueReportModal from './issue-report-modal';
 export default class ModulixIssueReportBlock extends Component {
   @service featureToggles;
   @tracked showModal = false;
+  @service moduleIssueReport;
 
   @action
   onReportClick() {
@@ -22,9 +23,13 @@ export default class ModulixIssueReportBlock extends Component {
   }
 
   @action
-  onSend() {
-    // appel API pour créer issue-report
-    // ferme la modale
+  onSend({ categoryKey, comment }) {
+    this.moduleIssueReport.record({
+      categoryKey,
+      comment,
+      elementId: this.args.reportInfo.elementId,
+      answer: this.args.reportInfo.answer,
+    });
   }
 
   <template>
@@ -37,7 +42,11 @@ export default class ModulixIssueReportBlock extends Component {
         @triggerAction={{this.onReportClick}}
       >{{t "pages.modulix.issue-report.button"}}</PixButton>
 
-      <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
+      <ModulixIssueReportModal
+        @showModal={{this.showModal}}
+        @hideModal={{this.hideModal}}
+        @onSendReport={{this.onSend}}
+      />
     {{/if}}
   </template>
 }
