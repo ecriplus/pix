@@ -11,6 +11,7 @@ const serialize = function (usersDetailsForAdmin) {
       record.participations = null;
       record.organizationMemberships = null;
       record.certificationCenterMemberships = null;
+      record.certificationCourses = null;
       return record;
     },
     attributes: [
@@ -39,6 +40,7 @@ const serialize = function (usersDetailsForAdmin) {
       'participations',
       'organizationMemberships',
       'certificationCenterMemberships',
+      'certificationCourses',
       'userLogin',
       'isPixAgent',
     ],
@@ -107,6 +109,15 @@ const serialize = function (usersDetailsForAdmin) {
       relationshipLinks: {
         related: function (record, current, parent) {
           return `/api/admin/users/${parent.id}/certification-center-memberships`;
+        },
+      },
+    },
+    certificationCourses: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      relationshipLinks: {
+        related: function (record, current, parent) {
+          return `/api/admin/users/${parent.id}/certification-courses`;
         },
       },
     },

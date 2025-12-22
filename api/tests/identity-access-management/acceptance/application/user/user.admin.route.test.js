@@ -299,6 +299,11 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
               related: `/api/admin/users/${user.id}/certification-center-memberships`,
             },
           },
+          'certification-courses': {
+            links: {
+              related: `/api/admin/users/${user.id}/certification-courses`,
+            },
+          },
           'organization-learners': {
             data: [],
           },
