@@ -30,11 +30,32 @@
         min-height: 100vh;
       }
 
+      .details-title>.error-title,
+      .details-title>.error-code {
+        display: inline;
+      }
+      .details-title>.error-title {
+        font-weight: bold;
+      }
+      .details-title>.hostname {
+        font-style: italic;
+      }
+      .details-title>.date::before {
+        content: "Date : ";
+      }
+      .details-body > .info-container {
+        font-family: monospace;
+      }
+      .details-body>.title,
+      .details-body>.description {
+        display: none;
+      }
+
       main,
       footer {
         display: flex;
         flex-direction: column;
-        gap: 64px;
+        gap: 16px;
         padding: 64px;
         max-width: 1280px;
       }
@@ -48,7 +69,7 @@
       section {
         background-color: #7d92f5;
         border-radius: 16px;
-        padding: 32px;
+        padding: 24px;
       }
 
       h1 {
@@ -114,7 +135,8 @@
     </main>
 
     <footer>
-      <p class="request-id">Request ID: _REQUEST_ID</p>
+      <div class="details-title">$TITLE$</div>
+      <div class="details-body">$BODY$</div>
     </footer>
   </body>
 </html>
