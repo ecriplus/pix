@@ -1,0 +1,63 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.oidc-signup-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 1250px;
+  margin-bottom: 32px;
+  padding: 25px 50px;
+
+  @include breakpoints.device-is('desktop') {
+    padding: 50px;
+  }
+
+  &__description {
+    @extend %pix-body-m;
+
+    margin: 0;
+    padding-bottom: 24px;
+    color: var(--pix-neutral-500);
+  }
+
+  &__description em {
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    color: var(--pix-neutral-900);
+    font-style: normal;
+  }
+
+  &__information {
+    @extend %pix-body-m;
+
+    margin-bottom: 2rem;
+    color: var(--pix-neutral-500);
+
+    li {
+      overflow-wrap: anywhere;
+      list-style: none;
+    }
+  }
+
+  &__cgu-container {
+    @extend %pix-body-s;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    padding: 0 0 24px;
+
+    label {
+      @extend %pix-body-s;
+    }
+
+    a {
+      font-weight: var(--pix-font-bold);
+      text-decoration: underline;
+    }
+  }
+
+  &__error {
+    margin-bottom: 20px;
+  }
+}
