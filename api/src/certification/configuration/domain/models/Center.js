@@ -12,8 +12,8 @@ export class Center {
   /**
    * @param {Object} props
    * @param {CenterTypes} props.type
-   * @param {number} props.[id]
-   * @param {string} props.[externalId]
+   * @param {number} [props.id]
+   * @param {string} [props.externalId]
    */
   constructor({ id, externalId, type }) {
     this.id = id;
