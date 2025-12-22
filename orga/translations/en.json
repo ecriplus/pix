@@ -1402,6 +1402,7 @@
     },
     "oidc": {
       "login": {
+        "signup-button": "I do not have an account, I am registering with my organisation",
         "sub-title": "to link it to your new access method",
         "title": "Use your Pix account"
       }

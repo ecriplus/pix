@@ -1384,6 +1384,7 @@
     },
     "oidc": {
       "login": {
+        "signup-button": "Ik heb geen account, ik meld me aan met mijn organisatie",
         "sub-title": "om te koppelen aan uw nieuwe aanmeldingsmethode",
         "title": "Gebruik uw Pix-account"
       }

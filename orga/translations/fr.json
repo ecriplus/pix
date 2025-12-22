@@ -1390,6 +1390,7 @@
     },
     "oidc": {
       "login": {
+        "signup-button": "Je n'ai pas de compte, je m'inscris avec mon organisation",
         "sub-title": "pour le lier à votre nouvelle méthode de connexion",
         "title": "Utilisez votre compte Pix"
       }
