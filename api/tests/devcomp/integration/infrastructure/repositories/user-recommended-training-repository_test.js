@@ -4,7 +4,7 @@ import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrati
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as userRecommendedTrainingRepository from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { deleteCampaignParticipationIds } from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | user-recommended-training-repository', function () {
   describe('#save', function () {
@@ -319,6 +319,15 @@ describe('Integration | Repository | user-recommended-training-repository', func
   });
 
   describe(deleteCampaignParticipationIds.name, function () {
+    let now, clock;
+    beforeEach(function () {
+      now = new Date('2025-01-01');
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+    afterEach(function () {
+      clock.restore();
+    });
+
     it('should set campaignParticipationId to null for given campaignParticipationIds', async function () {
       // given
       const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation();
@@ -328,14 +337,17 @@ describe('Integration | Repository | user-recommended-training-repository', func
       const userRecommendedTraining1 = databaseBuilder.factory.buildUserRecommendedTraining({
         campaignParticipationId: campaignParticipation1.id,
         userId: campaignParticipation1.userId,
+        updatedAt: new Date('2021-01-01'),
       });
       const userRecommendedTraining2 = databaseBuilder.factory.buildUserRecommendedTraining({
         campaignParticipationId: campaignParticipation2.id,
         userId: campaignParticipation2.userId,
+        updatedAt: new Date('2021-01-01'),
       });
       const userRecommendedTraining3 = databaseBuilder.factory.buildUserRecommendedTraining({
         campaignParticipationId: campaignParticipation3.id,
         userId: campaignParticipation3.userId,
+        updatedAt: new Date('2021-01-01'),
       });
       await databaseBuilder.commit();
 
@@ -345,21 +357,35 @@ describe('Integration | Repository | user-recommended-training-repository', func
       });
 
       // then
-      const updatedUserRecommendedTrainings = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME).whereIn('id', [
-        userRecommendedTraining1.id,
-        userRecommendedTraining2.id,
-      ]);
+      const updatedUserRecommendedTrainings = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+        .select('userId', 'campaignParticipationId')
+        .where('updatedAt', now);
 
       expect(updatedUserRecommendedTrainings).to.have.lengthOf(2);
-      updatedUserRecommendedTrainings.forEach((training) => {
-        expect(training.campaignParticipationId).to.be.null;
-      });
+      expect(updatedUserRecommendedTrainings).deep.members([
+        {
+          userId: campaignParticipation1.userId,
+          campaignParticipationId: null,
+        },
+        {
+          userId: campaignParticipation2.userId,
+          campaignParticipationId: null,
+        },
+      ]);
 
-      const otherRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-        .where('id', userRecommendedTraining3.id)
-        .first();
+      const otherRecommendedTrainings = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+        .select('userId', 'campaignParticipationId', 'updatedAt')
+        .where('updatedAt', '!=', now);
 
-      expect(otherRecommendedTraining.campaignParticipationId).to.equal(campaignParticipation3.id);
+      expect(otherRecommendedTrainings).lengthOf(1);
+
+      expect(otherRecommendedTrainings).deep.members([
+        {
+          userId: campaignParticipation3.userId,
+          campaignParticipationId: campaignParticipation3.id,
+          updatedAt: userRecommendedTraining3.updatedAt,
+        },
+      ]);
     });
   });
 });

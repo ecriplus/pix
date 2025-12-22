@@ -42,7 +42,7 @@ const hasRecommendedTrainings = async function ({ userId }) {
 const deleteCampaignParticipationIds = async ({ campaignParticipationIds }) => {
   const knexConn = DomainTransaction.getConnection();
   return knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-    .update({ campaignParticipationId: null })
+    .update({ campaignParticipationId: null, updatedAt: new Date() })
     .whereIn('campaignParticipationId', campaignParticipationIds);
 };
 
