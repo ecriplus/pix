@@ -532,20 +532,12 @@
                           {
                             "userName": "Dona",
                             "direction": "incoming",
-                            "content": " Alors, quelles solutions proposez-vous ?",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": " Alors, quelles solutions proposez-vous ?"
                           },
                           {
                             "userName": "Boubacar",
                             "direction": "outgoing",
-                            "content": "Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produites par des éoliennes ou par des panneaux solaires ? ☀️",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produites par des éoliennes ou par des panneaux solaires ? ☀️"
                           },
                           {
                             "userName": "Boubacar",
@@ -610,20 +602,12 @@
                           {
                             "userName": "Dona",
                             "direction": "incoming",
-                            "content": "C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !"
                           },
                           {
                             "userName": "Oscar",
                             "direction": "outgoing",
-                            "content": "Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊"
                           },
                           {
                             "userName": "Oscar",
@@ -688,20 +672,12 @@
                           {
                             "userName": "Dona",
                             "direction": "incoming",
-                            "content": "C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?"
                           },
                           {
                             "userName": "Amira",
                             "direction": "outgoing",
-                            "content": "Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides : par exemple en Suède ?❄️",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides : par exemple en Suède ?❄️"
                           },
                           {
                             "userName": "Amira",
@@ -766,20 +742,12 @@
                           {
                             "userName": "Dona",
                             "direction": "incoming",
-                            "content": "Pas mal… Une dernière suggestion ?",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "Pas mal… Une dernière suggestion ?"
                           },
                           {
                             "userName": "Alaric",
                             "direction": "outgoing",
-                            "content": "Pourquoi pas installer le centre de donnée sur une plateforme maritime, on pourrait utiliser l’eau de l’océan ?",
-                            "image": {
-                              "src": "",
-                              "alt": ""
-                            }
+                            "content": "Pourquoi pas installer le centre de donnée sur une plateforme maritime, on pourrait utiliser l’eau de l’océan ?"
                           },
                           {
                             "userName": "Alaric",
