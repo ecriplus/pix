@@ -1,14 +1,15 @@
+// @ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Candidate } from '../../domain/models/Candidate.js';
 
 /**
  * This function find candidates with a certification-course but no reconciledAt
  *
- * @param {Object} params
- * @param {number} [params.limit] - number of candidates to limit to
- * @returns {Array<Candidate>} - Candidates returned have a reconciledAt built from certification-course
+ * @param {Object} [params]
+ * @param {number} [params.limit=1] - number of candidates to limit to
+ * @returns {Promise<Array<Candidate>>} - Candidates returned have a reconciledAt built from certification-course
  */
-export const findCandidateWithoutReconciledAt = async function ({ limit } = { limit: 1 }) {
+export const findCandidateWithoutReconciledAt = async function ({ limit = 1 } = {}) {
   const knexConn = DomainTransaction.getConnection();
   const data = await knexConn('certification-candidates')
     .select('certification-candidates.id', 'certification-courses.createdAt')
@@ -32,7 +33,7 @@ export const findCandidateWithoutReconciledAt = async function ({ limit } = { li
 /**
  * @param {Object} params
  * @param {Candidate} params.candidate
- * @returns {number} - number of rows affected
+ * @returns {Promise<number>} - number of rows affected
  */
 export const update = async function ({ candidate }) {
   const knexConn = DomainTransaction.getConnection();
