@@ -29,6 +29,7 @@ import getScorecard from './routes/get-scorecard';
 import getScorecardsTutorials from './routes/get-scorecards-tutorials';
 import loadUserTutorialsRoutes from './routes/get-user-tutorials';
 import getVerifiedCodes from './routes/get-verified-codes';
+import loadModuleIssueReportsRoutes from './routes/module-issue-reports/index';
 import loadModuleRoutes from './routes/modules/index';
 import loadOrganizationLearnersRoutes from './routes/organization-learners/index';
 import loadPassageRoutes from './routes/passages/index';
@@ -82,6 +83,7 @@ function routes() {
   loadUserTutorialsRoutes(this);
   loadModuleRoutes(this);
   loadPassageRoutes(this);
+  loadModuleIssueReportsRoutes(this);
 
   this.get('/assessments/:id/competence-evaluations', getCompetenceEvaluationsByAssessment);
 
