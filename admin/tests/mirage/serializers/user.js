@@ -16,6 +16,9 @@ export default ApplicationSerializer.extend({
       participations: {
         related: `/api/admin/users/${user.id}/participations`,
       },
+      certificationCourses: {
+        related: `/api/admin/users/${user.id}/certification-courses`,
+      },
     };
   },
 });

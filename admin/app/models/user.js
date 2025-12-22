@@ -39,6 +39,7 @@ export default class User extends Model {
   @hasMany('authentication-method', { async: true, inverse: null }) authenticationMethods;
   @hasMany('last-application-connection', { async: false, inverse: null }) lastApplicationConnections;
   @hasMany('user-participation', { async: true, inverse: null }) participations;
+  @hasMany('user-certification-course', { async: true, inverse: null }) certificationCourses;
 
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
@@ -62,6 +63,10 @@ export default class User extends Model {
 
   get authenticationMethodCount() {
     return this.username && this.email ? this.authenticationMethods.length + 1 : this.authenticationMethods.length;
+  }
+
+  get certificationCoursesCount() {
+    return this.certificationCourses.length;
   }
 
   get orderedLastApplicationConnections() {

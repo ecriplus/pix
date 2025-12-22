@@ -32,6 +32,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     const expectedParticipationCount = 1;
     const expectedAuthenticationMethodCount = 3;
     const expectedCertificationCenterMembershipsCount = 3;
+    const expectedCertificationCoursesCount = 2;
     const connectionTabLabel = this.intl.t('pages.user-details.navbar.connections');
 
     // when
@@ -48,7 +49,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     assert.dom(userNavigation.getByRole('link', { name: 'Profil' })).exists();
     assert.dom(userNavigation.getByRole('link', { name: `Participations (${expectedParticipationCount})` })).exists();
     assert
-      .dom(userNavigation.getByLabelText('Organisations de l’utilisateur'))
+      .dom(userNavigation.getByRole('link', { name: 'Organisations de l’utilisateur' }))
       .hasText(`Pix Orga (${expectedOrganizationMembershipsCount})`);
     assert
       .dom(
@@ -58,7 +59,11 @@ module('Acceptance | authenticated/users/get', function (hooks) {
         `${this.intl.t('pages.user-details.navbar.certification-centers-list')} (${expectedCertificationCenterMembershipsCount})`,
       );
     assert
-      .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.certification-courses') }))
+      .dom(
+        userNavigation.getByRole('link', {
+          name: `${this.intl.t('pages.user-details.navbar.certification-courses')} (${expectedCertificationCoursesCount})`,
+        }),
+      )
       .exists();
     assert
       .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.cgu-aria-label') }))
@@ -371,7 +376,9 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       // when
       const userNavigation = within(screen.getByLabelText("Navigation de la section détails d'un utilisateur"));
       await click(
-        userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.certification-courses') }),
+        userNavigation.getByRole('link', {
+          name: `${this.intl.t('pages.user-details.navbar.certification-courses')} (0)`,
+        }),
       );
 
       // then
@@ -394,6 +401,8 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     const certificationCenterMembership2 = server.create('certification-center-membership');
     const certificationCenterMembership3 = server.create('certification-center-membership');
     const participation = server.create('user-participation');
+    const certificationCourse1 = server.create('user-certification-course');
+    const certificationCourse2 = server.create('user-certification-course');
     const user = server.create('user', {
       'first-name': 'john',
       'last-name': 'harry',
@@ -408,6 +417,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       certificationCenterMembership3,
     ];
     user.participations = [participation];
+    user.certificationCourses = [certificationCourse1, certificationCourse2];
     user.organizationLearners = [organizationLearner];
     user.authenticationMethods = [pixAuthenticationMethod, garAuthenticationMethod];
     user.save();

@@ -340,8 +340,10 @@ export default function routes() {
     return certificationCenterMembership;
   });
 
-  this.get('/admin/users/:id/certification-courses', () => {
-    return { data: [] };
+  this.get('/admin/users/:id/certification-courses', (schema, request) => {
+    const userId = request.params.id;
+    const user = schema.users.find(userId);
+    return user.certificationCourses;
   });
 
   this.post('/admin/memberships', createOrganizationMembership);

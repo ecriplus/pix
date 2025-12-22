@@ -52,6 +52,7 @@ import UserOverview from 'pix-admin/components/users/user-overview';
 
       <LinkTo @route="authenticated.users.get.certification-courses">
         {{t "pages.user-details.navbar.certification-courses"}}
+        ({{@model.certificationCoursesCount}})
       </LinkTo>
 
       <LinkTo
