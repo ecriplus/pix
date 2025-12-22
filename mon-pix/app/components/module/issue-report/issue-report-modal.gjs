@@ -35,6 +35,7 @@ export default class ModulixIssueReportModal extends Component {
 
   @action
   hideModal() {
+    this.resetForm();
     this.args.hideModal();
   }
 
@@ -53,8 +54,15 @@ export default class ModulixIssueReportModal extends Component {
       this.errorMessage = this.intl.t('pages.modulix.issue-report.error-messages.missing-comment');
       return;
     }
-
     this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
+    this.hideModal();
+  }
+
+  @action
+  resetForm() {
+    document.getElementById('module-issue-report-form').reset();
+    this.selectedCategory = categories[0].value;
+    this.comment = null;
   }
 
   <template>
@@ -70,7 +78,7 @@ export default class ModulixIssueReportModal extends Component {
             {{t "common.form.mandatory-all-fields"}}
           </p>
 
-          <form class="issue-report-modal-form">
+          <form class="issue-report-modal-form" id="module-issue-report-form">
             <fieldset class="issue-report-modal-form__fieldset">
               <legend class="sr-only">{{t "pages.modulix.issue-report.modal.legend"}}</legend>
               <PixSelect
