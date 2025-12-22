@@ -87,10 +87,6 @@ import { buildComplementaryCertificationForSupervising } from './build-complemen
 import { buildComplementaryCertificationForTargetProfileAttachment } from './build-complementary-certification-for-target-profile-attachment.js';
 import { buildComplementaryCertificationHabilitation } from './build-complementary-certification-habilitation.js';
 import { buildComplementaryCertificationTargetProfileHistory } from './build-complementary-certification-target-profile-history-for-admin.js';
-import {
-  buildComplementaryCertificationBadge as buildCertificationComplementaryCertificationBadge,
-  buildComplementaryCertificationVersioning,
-} from './build-complementary-certification-versioning.js';
 import { buildCountry } from './build-country.js';
 import { buildCourse } from './build-course.js';
 import { buildCpfCertificationResult } from './build-cpf-certification-result.js';
@@ -307,10 +303,6 @@ const certification = {
     buildJuryComment: buildJuryComment,
     buildComplementaryCertification: buildSharedComplementaryCertification,
     buildVersion: buildSharedVersion,
-  },
-  lib: {
-    buildComplementaryCertificationVersioning,
-    buildComplementaryCertificationBadge: buildCertificationComplementaryCertificationBadge,
   },
   results: {
     buildGlobalCertificationLevel,
