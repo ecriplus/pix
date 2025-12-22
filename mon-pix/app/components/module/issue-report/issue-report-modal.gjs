@@ -1,9 +1,11 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -27,6 +29,9 @@ const categories = [
 export default class ModulixIssueReportModal extends Component {
   @tracked selectedCategory = categories[0].value;
   @tracked comment = null;
+  @tracked errorMessage = null;
+
+  @service intl;
 
   @action
   hideModal() {
@@ -38,11 +43,17 @@ export default class ModulixIssueReportModal extends Component {
   }
 
   @action onChangeComment(event) {
-    this.comment = event?.target?.value;
+    this.errorMessage = null;
+    this.comment = event?.target?.value.trim();
   }
 
   @action
   sendReport() {
+    if (!this.comment) {
+      this.errorMessage = this.intl.t('pages.modulix.issue-report.error-messages.missing-comment');
+      return;
+    }
+
     this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
   }
 
@@ -73,17 +84,23 @@ export default class ModulixIssueReportModal extends Component {
               </PixSelect>
               <PixTextarea
                 class="issue-report-modal-form__comment"
-                required
                 @maxlength="200"
                 rows="5"
-                requiredLabel={{true}}
+                required
+                aria-required="true"
                 placeholder={{t "pages.modulix.issue-report.modal.textarea-placeholder"}}
-                {{on "change" this.onChangeComment}}
+                {{on "input" this.onChangeComment}}
               >
                 <:label>{{t "pages.modulix.issue-report.modal.textarea-label"}}</:label>
               </PixTextarea>
             </fieldset>
           </form>
+
+          {{#if this.errorMessage}}
+            <PixNotificationAlert @type="error" class="issue-report-modal__error-message">
+              {{this.errorMessage}}
+            </PixNotificationAlert>
+          {{/if}}
         </:content>
         <:footer>
           <ul class="issue-report-modal-form__action-buttons">

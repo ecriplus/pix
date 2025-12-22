@@ -65,4 +65,30 @@ module('Integration | Component | Module | Issue Report | Issue Report Modal', f
       assert.ok(true);
     });
   });
+
+  module('when user do not fill the comment section and clicks on send button', function () {
+    test('should display an error', async function (assert) {
+      // given
+      const hideModal = sinon.stub();
+      const onSendReport = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template>
+          <div id="modal-container">
+            <ModulixIssueReportModal @showModal={{true}} @hideModal={{hideModal}} @onSendReport={{onSendReport}} />
+          </div>
+        </template>,
+      );
+
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'La réponse' }));
+      await click(screen.getByRole('button', { name: t('common.actions.send') }));
+
+      // then
+      sinon.assert.notCalled(onSendReport);
+      assert.dom(screen.getByText(t('pages.modulix.issue-report.error-messages.missing-comment'))).exists();
+    });
+  });
 });

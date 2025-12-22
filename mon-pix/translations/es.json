@@ -1672,6 +1672,9 @@
       "issue-report": {
         "aria-label": "Enviar un problema o una sugerencia",
         "button": "Señalar",
+        "error-messages": {
+          "missing-comment": "Por favor, introduzca un comentario."
+        },
         "modal": {
           "legend": "Información necesaria para enviar una denuncia",
           "select-label": "Motivo de la notificación",
