@@ -334,12 +334,12 @@ describe('Integration | Repository | user-recommended-training-repository', func
       const campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipation();
       const campaignParticipation3 = databaseBuilder.factory.buildCampaignParticipation();
 
-      const userRecommendedTraining1 = databaseBuilder.factory.buildUserRecommendedTraining({
+      databaseBuilder.factory.buildUserRecommendedTraining({
         campaignParticipationId: campaignParticipation1.id,
         userId: campaignParticipation1.userId,
         updatedAt: new Date('2021-01-01'),
       });
-      const userRecommendedTraining2 = databaseBuilder.factory.buildUserRecommendedTraining({
+      databaseBuilder.factory.buildUserRecommendedTraining({
         campaignParticipationId: campaignParticipation2.id,
         userId: campaignParticipation2.userId,
         updatedAt: new Date('2021-01-01'),
