@@ -21,7 +21,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     // given
     const store = this.owner.lookup('service:store');
     const pixToast = this.owner.lookup('service:pixToast');
-    const blueprintStub = { save: sinon.stub(), content: [] };
+    const blueprintStub = { save: sinon.stub().resolves(), content: [] };
     const pixToastSuccessStub = sinon.stub(pixToast, 'sendSuccessNotification');
 
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
@@ -77,5 +77,110 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
         message: t('components.combined-course-blueprints.create.notifications.success'),
       }),
     );
+  });
+
+  module('error cases', function () {
+    test('it should display a generic error message', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = { save: sinon.stub().rejects(), content: [] };
+      const pixToastSuccessStub = sinon.stub(pixToast, 'sendSuccessNotification');
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await screen
+        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
+        .click();
+
+      //then
+      assert.ok(blueprintStub.save.calledOnce);
+      assert.ok(pixToastSuccessStub.notCalled);
+      assert.ok(
+        pixToastErrorStub.calledOnceWith({
+          message: t('components.combined-course-blueprints.create.notifications.error'),
+        }),
+      );
+    });
+
+    test('it should display validation error messages from API', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = {
+        save: sinon.stub().rejects({ errors: [{ status: '400', detail: 'Une donnée est invalide' }] }),
+        content: [],
+      };
+      const pixToastSuccessStub = sinon.stub(pixToast, 'sendSuccessNotification');
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await screen
+        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
+        .click();
+
+      //then
+      assert.ok(blueprintStub.save.calledOnce);
+      assert.ok(pixToastSuccessStub.notCalled);
+      assert.ok(
+        pixToastErrorStub.calledOnceWith({
+          message: 'Une donnée est invalide',
+        }),
+      );
+    });
+
+    test('it should display mutliple validation error messages from API', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = {
+        save: sinon.stub().rejects({
+          errors: [
+            { status: '400', detail: 'Une donnée est invalide' },
+            { status: '404', detail: "Une donnée n'existe pas" },
+            { status: '412', detail: 'Une erreur est survenue' },
+          ],
+        }),
+        content: [],
+      };
+      const pixToastSuccessStub = sinon.stub(pixToast, 'sendSuccessNotification');
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await screen
+        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
+        .click();
+
+      //then
+      assert.ok(blueprintStub.save.calledOnce);
+      assert.ok(pixToastSuccessStub.notCalled);
+      assert.ok(
+        pixToastErrorStub.calledWith({
+          message: 'Une donnée est invalide',
+        }),
+      );
+      assert.ok(
+        pixToastErrorStub.calledWith({
+          message: "Une donnée n'existe pas",
+        }),
+      );
+      assert.ok(
+        pixToastErrorStub.calledWith({
+          message: 'Une erreur est survenue',
+        }),
+      );
+    });
   });
 });
