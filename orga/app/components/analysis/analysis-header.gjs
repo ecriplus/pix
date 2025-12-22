@@ -33,7 +33,6 @@ export default class Analysis extends Component {
     });
   }
   <template>
-    <h2 class="result-analysis__title">{{t "pages.campaign-analysis.second-title"}}</h2>
     <div class="analysis-description">
       <b class="analysis-description__resume">{{t "pages.campaign-analysis.description.resume"}}</b>
       <p>{{t "pages.campaign-analysis.description.explanation"}}</p>

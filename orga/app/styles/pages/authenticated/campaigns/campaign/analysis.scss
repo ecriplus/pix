@@ -1,19 +1,11 @@
 @use 'pix-design-tokens/typography';
 
-
 .result-analysis {
-  &__title {
-    @extend %pix-title-s;
-
-    margin-bottom: var(--pix-spacing-1x);
-  }
-
   &__global-information {
     display: flex;
     flex-direction: row;
     gap: var(--pix-spacing-1x);
     margin-bottom: var(--pix-spacing-10x);
-
   }
 
   &__global-positioning-explanation {
@@ -22,7 +14,7 @@
     white-space: nowrap;
 
     ul {
-      padding-left:var(--pix-spacing-6x);
+      padding-left: var(--pix-spacing-6x);
       list-style-type: circle;
     }
   }
@@ -33,13 +25,10 @@
 
   margin-bottom: var(--pix-spacing-8x);
 
-
   &__resume {
     font-weight: var(--pix-font-bold);
   }
 }
-
-
 
 .analysis-per-tube-or-competence {
   &__header {
@@ -49,7 +38,6 @@
 
     h2 {
       @extend %pix-title-s;
-
     }
 
     margin-bottom: var(--pix-spacing-1x);
@@ -57,7 +45,6 @@
 }
 
 .analysis {
-
   &__description {
     @extend %pix-body-s;
 
@@ -76,7 +63,8 @@
     width: 10%;
   }
 
-  &__competence-title, &__tube-title {
+  &__competence-title,
+  &__tube-title {
     @extend %pix-body-s;
 
     display: block;
@@ -84,7 +72,8 @@
     font-weight: var(--pix-font-bold);
   }
 
-  &__competence-description, &__tube-description {
+  &__competence-description,
+  &__tube-description {
     @extend %pix-body-s;
 
     display: block;
@@ -95,5 +84,4 @@
 
     margin-bottom: var(--pix-spacing-3x);
   }
-
 }
