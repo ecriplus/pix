@@ -528,7 +528,7 @@
     },
     "main": {
       "aria-label": "Hoofdnavigatie",
-      "attestations": "certificaten",
+      "attestations": "Attesten",
       "campaigns": "Campagnes",
       "certifications": "Certificeringen",
       "close": "Sluit de navigatie",
@@ -611,13 +611,13 @@
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
       "basic-description": "Alle attesten exporteren",
       "download-attestations-button": "Downloaden (.pdf)",
-      "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
+      "no-attestations": "Er is geen attest beschikbaar voor uw selectie.",
       "section": {
         "download": "Downloaden",
         "list": "Opvolging : {attestationName}"
       },
-      "select-divisions-label": "Selecteer de certificaten voor een of meer klassen",
-      "select-label": "Certificat",
+      "select-divisions-label": "Selecteer de attesten voor een of meer klassen",
+      "select-label": "Attest",
       "table": {
         "column": {
           "division": "Klasse",
@@ -630,7 +630,7 @@
             "empty-option": "Klasse",
             "label": "Klasse"
           },
-          "legend": "Filters voor de tabel met certificaten: invoervelden kunnen worden gebruikt om de tabel te filteren op de voor- of achternaam van een leerling en op klas. Met knoppen kun je de behaalde certificaten filteren of niet.",
+          "legend": "Filters voor de tabel met attesten: invoervelden kunnen worden gebruikt om de tabel te filteren op de voor- of achternaam van een leerling en op klas. Met knoppen kun je de behaalde certificaten filteren of niet.",
           "results": "{total, plural, =0 {0 resultaat} =1 {1 resultaat} other {{total, number} resultaten}}",
           "status": {
             "empty-option": "Verkrijgen / Niet verkregen",
@@ -644,7 +644,7 @@
           "obtained": "Verkregen op {date}"
         }
       },
-      "title": "Certificaten"
+      "title": "Attesten"
     },
     "campaign": {
       "actions": {
