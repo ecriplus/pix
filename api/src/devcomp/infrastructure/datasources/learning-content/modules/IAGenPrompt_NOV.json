@@ -39,21 +39,25 @@
                     {
                       "userName": "Agnès",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J’aimerais créer mon association de yoga, mais je ne sais pas du tout par où commencer… 😵‍💫"
                     },
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tu devrais essayer avec un logiciel d’IA générative ! Il peut te donner les différentes étapes à suivre. 🤖"
                     },
                     {
                       "userName": "Agnès",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Vraiment ? 😮 Mais… Je fais comment ?"
                     },
                     {
                       "userName": "Maëlle",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "C’est super simple ! Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
                     }
                   ]

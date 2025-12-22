@@ -53,21 +53,25 @@
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J’ai testé une IA sur mon téléphone, c’est fou comme ça répond vite ! 🤯"
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "C’est bluffant hein ? Même ton vieux smartphone peut l’utiliser ! 😅"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oui ! J’ai l’impression qu’il est super puissant maintenant, il arrive à répondre à toutes mes demandes. "
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "🤦‍♀️C’est parce que c’est pas ton téléphone qui travaille !"
                     }
                   ]
@@ -341,21 +345,25 @@
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Ah, donc en fait… ce n’est pas mon téléphone qui est devenu puissant. 😞"
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Non, mais il te permet d’utiliser l’IA, ça suffit ! 😉"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "C’est vrai !"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mais maintenant, je suis curieux : comment fait le centre de données pour créer les réponses ? 🤔"
                     }
                   ]
@@ -541,16 +549,19 @@
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Alors en fait, quand j’utilise un logiciel d’IA, je consomme de l’énergie à l’autre bout du monde ! 😮"
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Exactement… Moi aussi quand je l’utilise."
                     },
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Et si on y pense, des milliers de personnes font pareil en même temps ! 😳"
                     }
                   ]
@@ -764,26 +775,31 @@
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "L’IA, c’est super pratique… Mais j’aimerais pas qu’elle épuise la planète."
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oui, moi aussi ça me fait réfléchir. Peut-être qu’il faudrait arrêter de l’utiliser ? 🤔"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oui… Mais en même temps, c’est quand même utile dans certains cas."
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Peut-être…"
                     },
                     {
                       "userName": "Alice",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tu penses à quoi par exemple ?"
                     }
                   ]

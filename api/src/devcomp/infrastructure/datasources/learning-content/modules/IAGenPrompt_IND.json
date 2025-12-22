@@ -54,21 +54,25 @@
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l’IA. Mais pour moi, ça ne marche pas !"
                     },
                     {
                       "userName": "Emma",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Ah bon ? Quel prompt tu as utilisé ? "
                     },
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
                     },
                     {
                       "userName": "Emma",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "C’est normal, ta demande est trop floue ! L’IA ne peut pas deviner ce que tu veux. 😉"
                     }
                   ]

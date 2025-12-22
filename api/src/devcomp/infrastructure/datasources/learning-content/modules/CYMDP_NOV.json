@@ -47,21 +47,25 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oh là là ! Mon compte Snapgram a été piraté. Je ne peux plus me connecter ! 😧"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oh zut ! Mais qu’est-ce qui s’est passé ? Tu avais mis un bon mot de passe ?"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Bah oui, je pense. C'était le prénom de mon fils et l'année de naissance de mon chat !"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"
                     }
                   ]
@@ -159,16 +163,19 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Ok, ok. Je vais choisir un nouveau mot de passe sans utiliser d’informations personnelles alors. "
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Finis les piratages de mon compte ! 🛡️"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "En fait, les pirates ont aussi d’autres techniques pour trouver les mots de passe. ..🥲"
                     }
                   ]
@@ -283,21 +290,25 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Bon, donc il me faut un mot de passe sans informations personnelles, pas trop courant…"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Et sans mots du dictionnaire… Si je mélange quelques lettres dans mon mot de passe, ça suffira non ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": " Alors… 🫣"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Quoi ? Il y a encore autre chose ? Ils sont forts ces pirates ! 😧"
                     }
                   ]
@@ -411,11 +422,13 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oh là là ! J’imaginais pas qu’il y avait tant de règles à suivre pour avoir un mot de passe fort. 😩"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Eh oui ! Le mieux, c'est même d’avoir un mot de passe différent pour chacun de tes services en ligne ! ☺️"
                     }
                   ]
@@ -731,31 +744,37 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tu as toujours du mal avec tes mots de passe ? 😅"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oui, je les oublie tout le temps 😭"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation.<br>2️⃣ Transforme-la pour en faire un mot de passe fort."
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré ! » ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Parfait ! Si tu prends les premières lettres et la ponctuation, ça donne B-Nel7nemcp! 🔒"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Trop malin 😍"
                     }
                   ]

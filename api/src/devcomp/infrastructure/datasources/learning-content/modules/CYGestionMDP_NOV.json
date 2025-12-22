@@ -46,16 +46,19 @@
                     {
                       "userName": "Max",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "C’est bon, je suis tranquille. J’ai un mot de passe ultra fort : 18 caractères avec des majuscules, minuscules, chiffres et caractères spéciaux. Impossible qu’on pirate mes comptes ! 💪"
                     },
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "C’est bien, mais tu utiliseras le même mot de passe sur tous tes comptes ?"
                     },
                     {
                       "userName": "Max",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎"
                     }
                   ]
@@ -441,11 +444,13 @@
                     {
                       "userName": "Max",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "T’avais raison j’étais loin du compte avec mon unique mot de passe ultra fort."
                     },
                     {
                       "userName": "Sonia",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Eh oui Max, il en faut bien plus pour protéger efficacement les comptes de ses services en ligne !"
                     }
                   ]

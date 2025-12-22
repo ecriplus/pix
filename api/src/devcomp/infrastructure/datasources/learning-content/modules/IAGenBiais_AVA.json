@@ -39,12 +39,13 @@
                      {
                       "userName": "Noah",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Dis Anouk, ça t’est déjà arrivé qu’une IA refuse de répondre comme ça ?"
                     },
                                    {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": " ",
+                      "type": "Image seule",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/biais-avances/2025-12-09-11_00_55-prog-_-explorateur-de-fichiers.png",
                         "alt": "Message de refus affiché par une IA générative"
@@ -53,16 +54,19 @@
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oui, ça arrive. Certaines demandes sont bloquées automatiquement, surtout quand ça touche à la santé ou à la sécurité."
                     },
                     {
                       "userName": "Noah",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mais je voulais juste me débrouiller… j’avais mal à la tête et plus de médicaments."
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Justement. L’IA ne sait pas si tu vas prendre un risque. Alors elle préfère refuser plutôt que de te donner un conseil potentiellement dangereux."
                     }
                   ]

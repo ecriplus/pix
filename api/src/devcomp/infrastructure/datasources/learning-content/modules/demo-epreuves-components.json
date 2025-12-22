@@ -375,46 +375,55 @@
                     {
                       "userName": "Mel",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Ouais c'est qui là ?"
                     },
                     {
                       "userName": "Vita",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mel, c'est Vi ouvre moi."
                     },
                     {
                       "userName": "Mel",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Ça va Vi ?"
                     },
                     {
                       "userName": "Mel",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
                     },
                     {
                       "userName": "Vita",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Non, ça va pas non."
                     },
                     {
                       "userName": "Mel",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Ben dis-moi, qu'est qu'il y a ?"
                     },
                     {
                       "userName": "Vita",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mel, assieds-toi faut que je te parle..."
                     },
                     {
                       "userName": "Vita",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J'ai passé ma journée dans le noir."
                     },
                     {
                       "userName": "Vita",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]

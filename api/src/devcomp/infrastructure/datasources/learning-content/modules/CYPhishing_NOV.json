@@ -46,16 +46,19 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J’ai reçu un message bizarre… Il dit que mon compte bancaire va être bloqué si je ne clique pas tout de suite sur un lien. Qu’est-ce que je dois faire ? 😰"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Ah ! Toi aussi, tu l’as reçu ?"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Moi, je l’ai reçu la semaine dernière. Ma sœur aussi, alors qu’elle n’a même pas de compte bancaire !"
                     }
                   ]
@@ -216,6 +219,7 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte + Image",
                       "content": "Alors, qu’est-ce que tu me conseilles de faire avec ce message ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/CYPhishingNov/msgyvette.svg",
@@ -225,16 +229,19 @@
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Attention à ce message ! Si tu leur donnes ce qu’ils demandent, tu risques de te faire arnaquer et de perdre de l’argent."
                     },
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Pourtant moi j’ai bien un compte dans cette banque, c’est bizarre."
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oui les escrocs sont forts, ils arrivent même à se faire passer pour une banque ! 🤯 "
                     }
                   ]
@@ -302,11 +309,13 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Du coup, comment je fais pour reconnaître un message d’arnaque ?"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Là, par exemple, le faux message de ta banque est très alarmiste. C’est pour te pousser à répondre."
                     }
                   ]
@@ -555,11 +564,13 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Bon, je fais quoi du coup avec le message de ma banque ? 😟"
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Déjà, tu m’en as parlé et c’est un bon réflexe."
                     }
                   ]
@@ -619,16 +630,19 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "C’est bon, j’ai appelé ma banque. C’était bien une arnaque, il n’y a pas de problème avec mon compte ! "
                     },
                     {
                       "userName": "Enzo",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Bien joué ! Tu n’es pas tombée dans le piège. 👏 "
                     },
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Merci Enzo ! Heureusement que tu étais là !"
                     }
                   ]

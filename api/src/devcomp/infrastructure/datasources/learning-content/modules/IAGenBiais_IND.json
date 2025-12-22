@@ -39,6 +39,7 @@
                     {
                       "userName": "Léane",
                       "direction": "outgoing",
+                      "type": "Texte + Image",
                       "content": "Ça m’énerve, je veux une image de juge mais l’IA me sort toujours la même chose : un homme blanc, âgé, avec une cravate, un vrai stéréotype. Regarde !",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-biais-independant/juge1et2.jpg",
@@ -48,6 +49,7 @@
                     {
                       "userName": "Adem",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Ah oui, il y a même le drapeau américain, haha ! Tu es tombée sur un biais."
                     }
                   ]

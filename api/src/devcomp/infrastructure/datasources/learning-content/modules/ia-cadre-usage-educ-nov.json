@@ -46,31 +46,37 @@
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tiens , j’ai préparé mon cours de français avec l’IA générative hier soir. "
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Quoi ! Moi j’ose pas, j’ai pas confiance."
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Franchement c’est quand même intéressant."
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Oui mais faut faire attention, t’as pas peur de sortir des clous ?"
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Heu, non j’ai fait attention, je me suis basée sur le cadre qui existe."
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Quel cadre ? Tu pourrais me le montrer je ne sais pas ce que je dois faire, ce que je peux faire ou pas."
                     }
                   ]
@@ -118,6 +124,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J’ai regardé le document. Je pensais utiliser l’IA pour proposer des exercices différenciés à mes élèves sur l’imparfait. Tu en penses quoi ?"
                     }
                   ]
@@ -211,11 +218,13 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "En effet les données personnelles ne doivent pas être saisies dans une IA grand public."
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Je pense aussi utiliser une œuvre littéraire pour la fin de ce cours. C’est possible ?"
                     }
                   ]
@@ -309,6 +318,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Puisque c’est un outil que j’utilise désormais, je pense faire une séance d’esprit critique avec les élèves, notamment sur les résultats obtenus."
                     }
                   ]
@@ -402,16 +412,19 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Tu as déjà fait utiliser une IA générative à tes élèves ?"
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oui avec mes 3ème pour la rédaction d’un prompt afin qu’ils sachent l’utiliser convenablement."
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Tu peux me donner ta séance pour que je la fasse avec mes 5ème."
                     }
                   ]
