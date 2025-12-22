@@ -155,10 +155,7 @@
                           "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "3"
-                      ]
+                      "solutions": ["1", "3"]
                     }
                   ]
                 },
@@ -196,12 +193,7 @@
                           "diagnosis": "\n<p>Toutes les propositions sont des impacts de l’extraction de métaux pour la construction de centre de données.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                      ]
+                      "solutions": ["1", "2", "3", "4"]
                     }
                   ]
                 },
@@ -244,12 +236,7 @@
                           "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres des données.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                      ]
+                      "solutions": ["1", "2", "3", "4"]
                     }
                   ]
                 }
@@ -265,7 +252,7 @@
             {
               "type": "element",
               "element": {
-                "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
+                "id": "150b2305-2988-4789-a01f-9bf7171c1666",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/schema-impacts-datacenter.png",
                 "alt": "Schéma des impacts environnementaux des centres de données",
@@ -1019,10 +1006,7 @@
                     "diagnosis": "<p>Essayer de vous demandez quelles pratiques sollicitent le moins les serveurs.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]
@@ -1126,7 +1110,7 @@
             {
               "type": "element",
               "element": {
-                "id": "efee2fc9-aeeb-4a32-956f-3b4b943f5491",
+                "id": "c75070b7-b9d6-4715-af9f-adf9203d8c93",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-microsoft-queretaro.jpg",
                 "alt": "Des centres de données au Mexique.",
@@ -1204,11 +1188,7 @@
                           "diagnosis": "<p>Cherchez encore, c'est peut-être pire que ce que vous croyez...</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
-                      ]
+                      "solutions": ["1", "2", "3"]
                     }
                   ]
                 }
