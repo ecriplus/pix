@@ -1,6 +1,6 @@
+// @ts-check
 /**
  * @typedef {import('../../../shared/domain/models/Scopes.js').Scopes} Scopes
- * @typedef {import('../../domain/models/Version.js').Version} Version
  * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
 import { knex } from '../../../../../db/knex-database-connection.js';
@@ -99,9 +99,12 @@ export async function create({ version, challenges }) {
     versionId: id,
   }));
 
-  await knex
-    .batchInsert('certification-frameworks-challenges', challengesDTO)
-    .transacting(knexConn.isTransaction ? knexConn : null);
+  const batchInsertQuery = knex.batchInsert('certification-frameworks-challenges', challengesDTO);
+
+  if (knexConn.isTransaction) {
+    batchInsertQuery.transacting(/** @type {import('knex').Knex.Transaction} */ (knexConn));
+  }
+  await batchInsertQuery;
 
   return id;
 }
