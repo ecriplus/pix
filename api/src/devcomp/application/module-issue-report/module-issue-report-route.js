@@ -20,7 +20,7 @@ const register = async function (server) {
                 'module-id': identifiersType.moduleId,
                 'element-id': identifiersType.elementId,
                 'passage-id': identifiersType.passageId,
-                answer: Joi.string().allow('').optional(),
+                answer: Joi.string().allow('').allow(null).optional(),
                 'category-key': Joi.string().required(),
                 comment: Joi.string().required(),
               }).required(),

@@ -1,5 +1,7 @@
+import Joi from 'joi';
+
 import * as moduleUnderTest from '../../../../../src/devcomp/application/module-issue-report/module-issue-report-route.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Devcomp | Application | Module | Router | module-issue-report-router', function () {
   describe('POST /api/module-issue-reports', function () {
@@ -35,6 +37,43 @@ describe('Integration | Devcomp | Application | Module | Router | module-issue-r
 
         // then
         expect(response.statusCode).to.equal(400);
+      });
+    });
+
+    describe('when answer is null', function () {
+      it('should return a HTTP 201 status code', async function () {
+        // given
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const passage = databaseBuilder.factory.buildPassage();
+        await databaseBuilder.commit();
+
+        const moduleIssueReport = {
+          'module-id': '6282925d-4775-4bca-b513-4c3009ec5886',
+          'element-id': '96e29215-3610-4bc6-b4a6-026bf13276b8',
+          'passage-id': passage.id,
+          answer: null,
+          'category-key': 'la coolitude',
+          comment: "Pix c'est génial.",
+        };
+
+        const payload = {
+          data: {
+            type: 'module-issue-reports',
+            attributes: moduleIssueReport,
+          },
+        };
+        const headers = {
+          'user-agent':
+            'Mozilla/5.0 (Linux; Android 10; MGA-AL00 Build/HUAWEIMGA-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4343 MMWEBSDK/20221011 Mobile Safari/537.36 MMWEBID/7309 MicroMessenger/8.0.30.2260(0x28001E3B) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
+        };
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/module-issue-reports', payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(201);
       });
     });
   });
