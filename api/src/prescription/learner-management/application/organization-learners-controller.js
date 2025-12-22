@@ -1,4 +1,4 @@
-import { CLIENT, PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
+import { CLIENTS, PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 
@@ -12,7 +12,7 @@ const deleteOrganizationLearners = async function (request, h) {
     userId: authenticatedUserId,
     organizationId,
     userRole: PIX_ORGA.ROLES.ADMIN,
-    client: CLIENT.PIX_ORGA,
+    client: CLIENTS.ORGA,
   });
   return h.response().code(200);
 };
@@ -27,7 +27,7 @@ const deleteOrganizationLearnerFromAdmin = async function (request, h) {
     userId: authenticatedUserId,
     organizationId,
     userRole: PIX_ADMIN.ROLES.SUPPORT,
-    client: CLIENT.PIX_ADMIN,
+    client: CLIENTS.ADMIN,
   });
 
   return h.response().code(200);
