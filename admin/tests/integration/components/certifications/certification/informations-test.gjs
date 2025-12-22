@@ -46,7 +46,7 @@ module('Integration | Component | Certifications | Certification | Informations'
     );
 
     // then
-    assert.dom(screen.getByRole('heading', { name: 'État' })).exists();
+    assert.dom(screen.getByRole('heading', { name: 'État Non publiée' })).exists();
   });
 
   test('should display the certification candidate card', async function (assert) {

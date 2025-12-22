@@ -333,7 +333,7 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
 
           await click(screen.getByRole('button', { name: 'Modifier le niveau du jury' }));
 
-          const finalResult = within(screen.getByText('NIVEAU FINAL').parentElement);
+          const finalResult = within(screen.getByText('Niveau final').parentElement);
 
           // then
           assert.dom(screen.getByText('Pix+ Édu Initiale 1er degré Confirmé')).exists();
@@ -369,7 +369,7 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
 
             complementaryCertificationCourseResultWithExternal.update({
               externalResult: 'En attente',
-              finalResult: 'En attente volet Jury',
+              finalResult: 'En attente Volet jury',
             });
 
             return schema.certifications.first();
@@ -386,12 +386,12 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
 
           await click(screen.getByRole('button', { name: 'Modifier le niveau du jury' }));
 
-          const finalResult = within(screen.getByText('NIVEAU FINAL').parentElement);
+          const finalResult = within(screen.getByText('Niveau final').parentElement);
 
           // then
           assert.dom(screen.getByText('En attente')).exists();
 
-          assert.dom(finalResult.getByText('En attente volet Jury')).exists();
+          assert.dom(finalResult.getByText('En attente Volet jury')).exists();
         });
 
         /**
@@ -499,8 +499,8 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
 
         // then
         assert.dom(screen.getByText('Certification complémentaire')).exists();
-        assert.dom(screen.queryByText('Résultats de la certification complémentaire Pix+ Edu :')).doesNotExist();
-        assert.dom(screen.getByText('CléA Numérique :')).exists();
+        assert.dom(screen.queryByText('Résultats de la certification complémentaire Pix+ Edu')).doesNotExist();
+        assert.dom(screen.getByText('CléA Numérique')).exists();
         assert.dom(screen.getByText('Annulée')).exists();
       });
 
@@ -524,10 +524,10 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
         const screen = await visit(`/sessions/certification/${certification.id}`);
 
         // then
-        assert.dom(screen.getByText('Résultats de la certification complémentaire Pix+ Edu :')).exists();
-        assert.dom(screen.getByText('VOLET PIX')).exists();
-        assert.dom(screen.getByText('VOLET JURY')).exists();
-        assert.dom(screen.getByText('NIVEAU FINAL')).exists();
+        assert.dom(screen.getByText('Résultats de la certification complémentaire Pix+ Edu')).exists();
+        assert.dom(screen.getByText('Volet Pix')).exists();
+        assert.dom(screen.getByText('Volet jury')).exists();
+        assert.dom(screen.getByText('Niveau final')).exists();
         assert.strictEqual(screen.getAllByText('Pix+ Édu Initié (entrée dans le métier)').length, 2);
         assert.strictEqual(screen.getAllByText('Pix+ Édu Avancé').length, 1);
       });
@@ -622,7 +622,7 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
           await clickByName('Modifier le commentaire jury');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Notes internes Jury Pix :' })).exists();
+          assert.dom(screen.getByRole('textbox', { name: 'Notes internes Jury Pix' })).exists();
           assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
           assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
         });
@@ -652,7 +652,7 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
             // when
             const screen = await visit(`/sessions/certification/${certification.id}`);
             await clickByName('Modifier le commentaire jury');
-            await fillByLabel('Notes internes Jury Pix :', 'Whatever jury said');
+            await fillByLabel('Notes internes Jury Pix', 'Whatever jury said');
 
             await clickByName('Enregistrer');
 
@@ -674,7 +674,7 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
             // when
             const screen = await visit(`/sessions/certification/${certification.id}`);
             await clickByName('Modifier le commentaire jury');
-            await fillByLabel('Notes internes Jury Pix :', 'Whatever jury said');
+            await fillByLabel('Notes internes Jury Pix', 'Whatever jury said');
 
             await clickByName('Enregistrer');
 

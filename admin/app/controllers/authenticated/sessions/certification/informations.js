@@ -2,8 +2,6 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import cloneDeep from 'lodash/cloneDeep';
-import find from 'lodash/find';
 import ENV from 'pix-admin/config/environment';
 
 export default class CertificationInformationsController extends Controller {
@@ -45,16 +43,6 @@ export default class CertificationInformationsController extends Controller {
 
   async saveCertificationCourse() {
     return await this.certification.save({ adapterOptions: { updateJuryComment: false } });
-  }
-
-  @action
-  onUpdateScore(code, value) {
-    this._updatePropForCompetence(code, value, 'score', 'level');
-  }
-
-  @action
-  onUpdateLevel(code, value) {
-    this._updatePropForCompetence(code, value, 'level', 'score');
   }
 
   @action
@@ -101,30 +89,5 @@ export default class CertificationInformationsController extends Controller {
 
   @action onCancelJuryLevelEditButtonClick() {
     this.displayJuryLevelSelect = false;
-  }
-
-  // Private methods
-  _updatePropForCompetence(competenceCode, value, propName, linkedPropName) {
-    const competences = cloneDeep(this.certification.competencesWithMark);
-    const competence = find(competences, { competence_code: competenceCode });
-    if (competence) {
-      if (value.trim().length === 0) {
-        if (competence[linkedPropName]) {
-          competence[propName] = null;
-        } else {
-          const index = competences.indexOf(competence);
-          competences.splice(index, 1);
-        }
-      } else {
-        competence[propName] = parseInt(value);
-      }
-    } else if (value.trim().length > 0) {
-      competences.push({
-        competence_code: competenceCode,
-        [propName]: parseInt(value),
-        area_code: competenceCode.substr(0, 1),
-      });
-    }
-    this.certification.competencesWithMark = competences;
   }
 }

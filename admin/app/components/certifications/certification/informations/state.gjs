@@ -1,24 +1,54 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
-
-import CertificationInfoField from '../../info-field';
+import { LinkTo } from '@ember/routing';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 <template>
-  <div class="certification-informations__card">
-    <h2 class="certification-informations__card__title certification-informations__card__title--state">
+  <PixBlock @variant="admin">
+    <h2 class="certification-information__title certification-information__title--state">
       État
       {{#if @certification.isPublished}}
         <PixTag @color="success">Publiée</PixTag>
+      {{else}}
+        <PixTag @color="info">Non publiée</PixTag>
       {{/if}}
     </h2>
-    <CertificationInfoField
-      @value={{@session.id}}
-      @edition={{false}}
-      @label="Session :"
-      @linkRoute="authenticated.sessions.session"
-    />
-    <CertificationInfoField @value={{@certification.statusLabelAndValue.label}} @edition={{false}} @label="Statut :" />
-    <CertificationInfoField @value={{@certification.creationDate}} @edition={{false}} @label="Créée le :" />
-    <CertificationInfoField @value={{@certification.completionDate}} @edition={{false}} @label="Terminée le :" />
-    <CertificationInfoField @value={{@certification.publishedText}} @edition={{false}} @label="Publiée :" />
-  </div>
+
+    <DescriptionList>
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Session">
+        <LinkTo @route="authenticated.sessions.session" @model={{@session.id}}>
+          {{@session.id}}
+        </LinkTo>
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Statut">
+        {{@certification.statusLabelAndValue.label}}
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Créée le">
+        {{@certification.creationDate}}
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Terminée le">
+        {{@certification.completionDate}}
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Score">
+        {{@certification.pixScore}}
+        Pix
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+    </DescriptionList>
+  </PixBlock>
 </template>

@@ -24,13 +24,13 @@ module('Integration | Component | Autonomous Courses | ViewAutonomousCourse', fu
     const screen = await render(<template><ViewAutonomousCourse @autonomousCourse={{autonomousCourse}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Date de création :')).exists();
+    assert.dom(screen.getByText('Date de création')).exists();
     assert.dom(screen.getByText('27/12/2023')).exists();
-    assert.dom(screen.getByText('Nom interne :')).exists();
+    assert.dom(screen.getByText('Nom interne')).exists();
     assert.dom(screen.getByText('Titre interne')).exists();
-    assert.dom(screen.getByText('Nom public :')).exists();
+    assert.dom(screen.getByText('Nom public')).exists();
     assert.dom(screen.getByText('Titre public')).exists();
-    assert.dom(screen.getByText("Texte de la page d'accueil :")).exists();
+    assert.dom(screen.getByText("Texte de la page d'accueil")).exists();
     assert.dom(screen.getByText("Texte de page d'accueil personnalisé")).exists();
   });
 

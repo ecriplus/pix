@@ -1,4 +1,4 @@
-import { clickByName, fillByLabel, fireEvent, render, within } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, fireEvent, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
@@ -42,37 +42,32 @@ module('Integration | Component | Certifications | Certification | Information |
     // then
     assert.dom(screen.getByRole('heading', { name: 'Candidat' })).exists();
 
-    const firstNameInfo = screen.getByText('Prénom :');
-    assert.dom(firstNameInfo).exists();
-    assert.dom(within(firstNameInfo.parentNode).getByText(certification.firstName)).exists();
+    const termsList = screen.getAllByRole('term');
+    const definitionsList = screen.getAllByRole('definition');
 
-    const lastNameInfo = screen.getByText('Nom de famille :');
-    assert.dom(lastNameInfo).exists();
-    assert.dom(within(lastNameInfo.parentNode).getByText(certification.lastName)).exists();
+    assert.strictEqual(termsList[0].textContent.trim(), 'Prénom');
+    assert.strictEqual(definitionsList[0].textContent.trim(), certification.firstName);
 
-    const birthdateInfo = screen.getByText('Date de naissance :');
-    assert.dom(birthdateInfo).exists();
-    assert.dom(within(birthdateInfo.parentNode).getByText(intl.formatDate(certification.birthdate))).exists();
+    assert.strictEqual(termsList[1].textContent.trim(), 'Nom de famille');
+    assert.strictEqual(definitionsList[1].textContent.trim(), certification.lastName);
 
-    const sexInfo = screen.getByText('Sexe :');
-    assert.dom(sexInfo).exists();
-    assert.dom(within(sexInfo.parentNode).getByText(certification.sex)).exists();
+    assert.strictEqual(termsList[2].textContent.trim(), 'Date de naissance');
+    assert.strictEqual(definitionsList[2].textContent.trim(), intl.formatDate(certification.birthdate));
 
-    const birthplaceInfo = screen.getByText('Commune de naissance :');
-    assert.dom(birthplaceInfo).exists();
-    assert.dom(within(birthplaceInfo.parentNode).getByText(certification.birthplace)).exists();
+    assert.strictEqual(termsList[3].textContent.trim(), 'Sexe');
+    assert.strictEqual(definitionsList[3].textContent.trim(), certification.sex);
 
-    const birthPostalCodeInfo = screen.getByText('Code postal de naissance :');
-    assert.dom(birthPostalCodeInfo).exists();
-    assert.dom(within(birthPostalCodeInfo.parentNode).getByText(certification.birthPostalCode)).exists();
+    assert.strictEqual(termsList[4].textContent.trim(), 'Commune de naissance');
+    assert.strictEqual(definitionsList[4].textContent.trim(), certification.birthplace);
 
-    const birthInseeCodeInfo = screen.getByText('Code INSEE de naissance :');
-    assert.dom(birthInseeCodeInfo).exists();
-    assert.dom(within(birthInseeCodeInfo.parentNode).getByText(certification.birthInseeCode)).exists();
+    assert.strictEqual(termsList[5].textContent.trim(), 'Code postal de naissance');
+    assert.strictEqual(definitionsList[5].textContent.trim(), certification.birthPostalCode);
 
-    const birthCountryInfo = screen.getByText('Pays de naissance :');
-    assert.dom(birthCountryInfo).exists();
-    assert.dom(within(birthCountryInfo.parentNode).getByText(certification.birthCountry)).exists();
+    assert.strictEqual(termsList[6].textContent.trim(), 'Code INSEE de naissance');
+    assert.strictEqual(definitionsList[6].textContent.trim(), certification.birthInseeCode);
+
+    assert.strictEqual(termsList[7].textContent.trim(), 'Pays de naissance');
+    assert.strictEqual(definitionsList[7].textContent.trim(), certification.birthCountry);
   });
 
   module('edit candidate info', function (hooks) {
@@ -132,8 +127,10 @@ module('Integration | Component | Certifications | Certification | Information |
 
       assert.dom(screen.queryByRole('button', { name: 'Enregistrer' })).doesNotExist();
 
-      const lastNameInfo = screen.getByText('Nom de famille :');
-      assert.dom(within(lastNameInfo.parentNode).getByText('Another name')).exists();
+      const termsList = screen.getAllByRole('term');
+      const definitionsList = screen.getAllByRole('definition');
+      assert.strictEqual(termsList[1].textContent.trim(), 'Nom de famille');
+      assert.strictEqual(definitionsList[1].textContent.trim(), 'Another name');
     });
 
     test('on error, should display an error notification', async function (assert) {

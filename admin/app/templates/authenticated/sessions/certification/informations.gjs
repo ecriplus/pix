@@ -14,7 +14,5 @@ import Informations from 'pix-admin/components/certifications/certification/info
     @editJury={{@controller.editJury}}
     @onJuryCommentSave={{@controller.onJuryCommentSave}}
     @shouldDisplayPixScore={{@controller.shouldDisplayPixScore}}
-    @onUpdateScore={{@controller.onUpdateScore}}
-    @onUpdateLevel={{@controller.onUpdateLevel}}
   />
 </template>

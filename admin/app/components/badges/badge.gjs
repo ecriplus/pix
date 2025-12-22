@@ -10,6 +10,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import Breadcrumb from '../target-profiles/breadcrumb';
@@ -135,54 +136,39 @@ export default class Badge extends Component {
 
         {{#if this.editMode}}
           <form class="form" {{on "submit" this.updateBadge}}>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.title}}
-                @requiredLabel={{true}}
-                {{on "input" (this.onFormInputChange "title")}}
-              ><:label>Titre</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.key}}
-                @requiredLabel={{true}}
-                {{on "input" (this.onFormInputChange "key")}}
-              ><:label>Clé</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixTextarea
-                class="form-control"
-                @value={{this.form.message}}
-                rows="4"
-                {{on "input" (this.onFormInputChange "message")}}
-              ><:label>Message</:label></PixTextarea>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.imageUrl}}
-                @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (this.onFormInputChange "imageUrl")}}
-              ><:label>Url de l'image (svg)</:label></PixInput>
-            </div>
-            <div class="badge-edit-form__field">
-              <PixInput
-                class="form-control"
-                @value={{this.form.altMessage}}
-                @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (this.onFormInputChange "altMessage")}}
-              ><:label>Message Alternatif</:label></PixInput>
-            </div>
+            <PixInput
+              @value={{this.form.title}}
+              @requiredLabel={{true}}
+              {{on "input" (this.onFormInputChange "title")}}
+            ><:label>Titre</:label></PixInput>
+
+            <PixInput
+              @value={{this.form.key}}
+              @requiredLabel={{true}}
+              {{on "input" (this.onFormInputChange "key")}}
+            ><:label>Clé</:label></PixInput>
+
+            <PixTextarea @value={{this.form.message}} rows="4" {{on "input" (this.onFormInputChange "message")}}><:label
+              >Message</:label></PixTextarea>
+
+            <PixInput
+              @value={{this.form.imageUrl}}
+              @requiredLabel={{t "common.forms.mandatory"}}
+              {{on "input" (this.onFormInputChange "imageUrl")}}
+            ><:label>Url de l'image (svg)</:label></PixInput>
+
+            <PixInput
+              @value={{this.form.altMessage}}
+              @requiredLabel={{t "common.forms.mandatory"}}
+              {{on "input" (this.onFormInputChange "altMessage")}}
+            ><:label>Message Alternatif</:label></PixInput>
+
             <div class="badge-edit-form__checkboxes">
-              <div>
-                <PixCheckbox
-                  @checked={{this.form.isCertifiable}}
-                  @variant="tile"
-                  {{on "change" (this.onFormCheckToggle "isCertifiable")}}
-                ><:label>Certifiable</:label></PixCheckbox>
-              </div>
+              <PixCheckbox
+                @checked={{this.form.isCertifiable}}
+                @variant="tile"
+                {{on "change" (this.onFormCheckToggle "isCertifiable")}}
+              ><:label>Certifiable</:label></PixCheckbox>
               <div>
                 <PixCheckbox
                   @type="checkbox"
@@ -202,53 +188,77 @@ export default class Badge extends Component {
             </div>
           </form>
         {{else}}
-          <div class="page-section__details badge-details">
-            <div class="badge-details__image">
-              <img src={{@badge.imageUrl}} alt="" width="90px" />
-              {{#if @badge.isCertifiable}}
-                <PixTag @color="success" class="badge-details__tag">
-                  {{this.isCertifiableText}}
-                </PixTag>
-              {{/if}}
-              {{#if @badge.isAlwaysVisible}}
-                <PixTag @color="tertiary" class="badge-details__tag">
-                  {{this.isAlwaysVisibleText}}
-                </PixTag>
-              {{/if}}
-            </div>
-            <div class="badge-details__content">
-              <dl class="page-details">
-                <dt class="page-details__label">ID&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.id}}</dd>
-                <dt class="page-details__label">Clé&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.key}}</dd>
-                <dt class="page-details__label">Nom du badge&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.title}}</dd>
-                <dt class="page-details__label">Url de l'image&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{this.imageUrl}}</dd>
-                <dt class="page-details__label">Message&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">
+
+          {{#if @badge.isCertifiable}}
+            <PixTag @color="success" class="badge-details__tag">
+              {{this.isCertifiableText}}
+            </PixTag>
+          {{/if}}
+          {{#if @badge.isAlwaysVisible}}
+            <PixTag @color="tertiary" class="badge-details__tag">
+              {{this.isAlwaysVisibleText}}
+            </PixTag>
+          {{/if}}
+
+          <div class="badge-details">
+            <div>
+              <DescriptionList>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="ID">
+                  {{@badge.id}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Clé">
+                  {{@badge.key}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Nom du badge">
+                  {{@badge.title}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Url de l'image">
+                  {{@badge.imageUrl}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Message">
                   <blockquote>
                     <SafeMarkdownToHtml @markdown={{@badge.message}} />
                   </blockquote>
-                </dd>
-                <dt class="page-details__label">Message alternatif&nbsp;:&nbsp;</dt>
-                <dd class="page-details__value">{{@badge.altMessage}}</dd>
-              </dl>
-              <PixButton
-                @variant="secondary"
-                class="badge-details__action"
-                @size="small"
-                @triggerAction={{this.toggleEditMode}}
-              >
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label="Message alternatif">
+                  {{@badge.altMessage}}
+                </DescriptionList.Item>
+
+                <DescriptionList.Divider />
+
+              </DescriptionList>
+
+              <PixButton @variant="secondary" @size="small" @triggerAction={{this.toggleEditMode}}>
                 Modifier les informations
               </PixButton>
+            </div>
+
+            <div class="badge-details__image">
+              <img src={{@badge.imageUrl}} alt="" />
             </div>
           </div>
         {{/if}}
       </section>
 
-      <section class="badge__criteria main-admin-form">
+      <section class="badge-criterion">
         <div class="admin-form__content">
           {{#if this.campaignScopeCriterion}}
             <CampaignCriterion
