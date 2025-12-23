@@ -134,15 +134,20 @@ const getCampaignParticipationsForOrganizationLearner = async function ({ organi
   );
 };
 
-const getAllCampaignParticipationsForOrganizationLearner = async function ({ organizationLearnerId }) {
+const getAllCampaignParticipationsForOrganizationLearner = async function ({
+  organizationLearnerId,
+  withDeletedParticipation = false,
+} = {}) {
   const knexConn = DomainTransaction.getConnection();
-  const campaignParticipations = await knexConn('campaign-participations')
+  const queryBuilder = knexConn('campaign-participations')
     .where({
       organizationLearnerId,
     })
-    .whereNull('deletedAt')
-    .whereNull('deletedBy')
     .orderBy('createdAt', 'desc');
+
+  if (!withDeletedParticipation) queryBuilder.whereNull('deletedAt');
+
+  const campaignParticipations = await queryBuilder;
 
   return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
 };
