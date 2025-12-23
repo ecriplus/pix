@@ -66,7 +66,7 @@ module('Integration | Component | Companion | check', function (hooks) {
               .exists();
             assert
               .dom(screen.getByRole('link', { name: 'Accéder à la documentation' }))
-              .hasAttribute('href', 'https://cloud.pix.fr/s/KocingDC4mFJ3R6');
+              .hasAttribute('href', 'https://cloud.pix.fr/s/g76RwDwsZmZPZZ6');
           });
         },
       );
