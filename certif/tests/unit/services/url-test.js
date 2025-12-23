@@ -154,7 +154,7 @@ module('Unit | Service | url', function (hooks) {
       const fraudReportUrl = service.fraudReportUrl;
 
       // then
-      assert.strictEqual(fraudReportUrl, 'https://cloud.pix.fr/s/LiXkoBq9GD5aLbN/download');
+      assert.strictEqual(fraudReportUrl, 'https://cloud.pix.fr/s/AgDytb8yHxrmjFk/download');
     });
   });
 
@@ -192,7 +192,7 @@ module('Unit | Service | url', function (hooks) {
       const urlToDownloadSessionV3IssueReportSheet = service.urlToDownloadSessionV3IssueReportSheet;
 
       // then
-      assert.strictEqual(urlToDownloadSessionV3IssueReportSheet, 'https://cloud.pix.fr/s/wJc6N3sZNZRC4MZ/download');
+      assert.strictEqual(urlToDownloadSessionV3IssueReportSheet, 'https://cloud.pix.fr/s/ff8sYPWPyCo3MrN/download');
     });
 
     test('should return the session V3 issue report sheet url in English', async function (assert) {
