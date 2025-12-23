@@ -1,4 +1,5 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
+import { CLIENTS, PIX_ORGA } from '../../../../../../src/authorization/domain/constants.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CampaignParticipationLoggerContext,
@@ -290,7 +291,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
       expect(otherParticipationFromDB.userId).not.null;
     });
 
-    it('should detach assessments for deleted campaignParticipations', async function () {
+    it('should detach assessments given campaignParticipations', async function () {
       // given
       const otherLearner = buildOrganizationLearner({ organizationId });
       const otherParticipation = buildCampaignParticipation({
@@ -327,13 +328,57 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
       });
 
       // then
-      const deletedLearners = await knex('organization-learners').whereNull('userId');
+      const deletedLearners = await knex('organization-learners').whereNull('userId').pluck('id');
       expect(deletedLearners).lengthOf(2);
-      expect(deletedLearners.map(({ id }) => id)).deep.equal([organizationLearner1.id, organizationLearner2.id]);
+      expect(deletedLearners).deep.equal([organizationLearner1.id, organizationLearner2.id]);
 
-      const assessments = await knex('assessments').whereNull('campaignParticipationId').orderBy('id');
+      const assessments = await knex('assessments').whereNull('campaignParticipationId').orderBy('id').pluck('id');
       expect(assessments).lengthOf(2);
-      expect(assessments.map(({ id }) => id)).deep.equal([assessment1.id, assessment2.id]);
+      expect(assessments).deep.equal([assessment1.id, assessment2.id]);
+    });
+
+    it('should detach assessments given deleted campaignParticipations', async function () {
+      // given
+      const deletedParticipation = buildCampaignParticipation({
+        organizationLearnerId: organizationLearner1.id,
+        participantExternalId,
+        userId: organizationLearner1.userId,
+        deletedAt: new Date('2023-01-01'),
+        deletedBy: databaseBuilder.factory.buildUser().id,
+      });
+      const assessment1 = buildAssessment({
+        id: 1,
+        campaignParticipationId: deletedParticipation.id,
+        isImproved: false,
+        type: Assessment.types.CAMPAIGN,
+      });
+      const assessment2 = buildAssessment({
+        id: 2,
+        campaignParticipationId: deletedParticipation.id,
+        isImproved: true,
+        type: Assessment.types.CAMPAIGN,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.deleteOrganizationLearners({
+        userId: adminUserId,
+        organizationLearnerIds: [organizationLearner1.id],
+        organizationId,
+        userRole: PIX_ORGA.ROLES.ADMIN,
+        client: CLIENTS.ORGA,
+        keepPreviousDeletion: true,
+      });
+
+      // then
+      const deletedLearners = await knex('organization-learners').whereNull('userId').pluck('id');
+      expect(deletedLearners).lengthOf(1);
+      expect(deletedLearners).deep.equal([organizationLearner1.id]);
+
+      const assessments = await knex('assessments').whereNull('campaignParticipationId').orderBy('id').pluck('id');
+      expect(assessments).lengthOf(2);
+      expect(assessments).deep.equal([assessment1.id, assessment2.id]);
     });
 
     it('should publish an event to historize action', async function () {
