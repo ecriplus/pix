@@ -160,7 +160,7 @@ module('Acceptance | Session Details', function (hooks) {
           // then
           assert
             .dom(screen.getByRole('link', { name: "Télécharger le PV d'incident" }))
-            .hasAttribute('href', 'https://cloud.pix.fr/s/wJc6N3sZNZRC4MZ/download');
+            .hasAttribute('href', 'https://cloud.pix.fr/s/ff8sYPWPyCo3MrN/download');
         });
       });
 
