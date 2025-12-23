@@ -56,7 +56,7 @@ export default class Sidebar extends Component {
 
         <PixNavigationButton
           class="sidebar__link"
-          @route="authenticated.complementary-certifications"
+          @route="authenticated.certification-frameworks"
           @icon="extension"
           aria-label={{t "components.layout.sidebar.certification-frameworks-label"}}
         >

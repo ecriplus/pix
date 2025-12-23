@@ -61,6 +61,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
         .exists();
     });
   });
+
   module('Complementary V2', function () {
     test('it should only display target profile history', async function (assert) {
       // given

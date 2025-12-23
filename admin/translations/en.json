@@ -395,6 +395,23 @@
         "roleLabel": "Role"
       }
     },
+    "certification-frameworks": {
+      "labels": {
+        "CLEA": "CléA Numérique",
+        "CORE": "Pix Core",
+        "DROIT": "Pix+ Law",
+        "EDU_1ER_DEGRE": "Pix+ Edu Primary School",
+        "EDU_2ND_DEGRE": "Pix+ Edu Secondary School",
+        "EDU_CPE": "Pix+ Edu CPE",
+        "PRO_SANTE": "Pix+ Pro Health"
+      },
+      "list": {
+        "active-version-start-date": "Active Version Start Date",
+        "caption": "List of certification frameworks, including name and active version start date",
+        "name": "Name"
+      },
+      "page-title": "Certification Frameworks"
+    },
     "certifications": {
       "external-jury-select-options": {
         "REJECTED": "Rejected",
@@ -510,11 +527,6 @@
           "aria-label": "Navigation of the complementary certification section"
         },
         "target-profile": "Target profile"
-      },
-      "list": {
-        "caption": "Liste des certifications complémentaires, comprenant l'identifiant unique et le nom.",
-        "id": "ID",
-        "name": "Nom"
       },
       "target-profiles": {
         "badges-list": {

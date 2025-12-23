@@ -1,5 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -9,11 +9,32 @@ module('Acceptance | Complementary certifications | Complementary certification 
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  test('it should display target profiles links and redirect to details page on click', async function (assert) {
+  test('it should render framework page when complementary has a complementary referential', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
     server.create('complementary-certification', {
       id: 1,
+      hasComplementaryReferential: true,
+      key: 'KEY',
+      label: 'MARIANNE CERTIF',
+    });
+    server.create('certification-consolidated-framework', {
+      id: 'KEY',
+    });
+
+    // when
+    await visit('/complementary-certifications/1');
+
+    // then
+    assert.strictEqual(currentURL(), '/complementary-certifications/1/framework');
+  });
+
+  test('it should render target profile page when complementary has no complementary referential', async function (assert) {
+    // given
+    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+    server.create('complementary-certification', {
+      id: 1,
+      hasComplementaryReferential: false,
       key: 'KEY',
       label: 'MARIANNE CERTIF',
       targetProfilesHistory: [
@@ -25,12 +46,11 @@ module('Acceptance | Complementary certifications | Complementary certification 
       id: 2,
       name: 'JEREM TARGET',
     });
-    const screen = await visit('/complementary-certifications/1/target-profile');
 
     // when
-    await click(screen.getByRole('link', { name: 'JEREM TARGET' }));
+    await visit('/complementary-certifications/1');
 
     // then
-    assert.strictEqual(currentURL(), '/target-profiles/2/details');
+    assert.strictEqual(currentURL(), '/complementary-certifications/1/target-profile');
   });
 });

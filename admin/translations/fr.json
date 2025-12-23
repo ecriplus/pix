@@ -396,6 +396,23 @@
         "roleLabel": "Rôle"
       }
     },
+    "certification-frameworks": {
+      "labels": {
+        "CLEA": "CléA Numérique",
+        "CORE": "Pix Cœur (transverse)",
+        "DROIT": "Pix+ Droit",
+        "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+        "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+        "EDU_CPE": "Pix+ Édu CPE",
+        "PRO_SANTE": "Pix+ Pro Santé"
+      },
+      "list": {
+        "active-version-start-date": "Date de début de la version active",
+        "caption": "Liste des référentiels de certification, comprenant le nom et la date de début de la dernière version active",
+        "name": "Nom"
+      },
+      "page-title": "Référentiels de certification"
+    },
     "certifications": {
       "external-jury-select-options": {
         "REJECTED": "Rejetée",
@@ -512,11 +529,6 @@
           "aria-label": "Navigation de la section certification complémentaire"
         },
         "target-profile": "Profil cible"
-      },
-      "list": {
-        "caption": "Liste des certifications complémentaires, comprenant l'identifiant unique et le nom.",
-        "id": "ID",
-        "name": "Nom"
       },
       "target-profiles": {
         "badges-list": {
