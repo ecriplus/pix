@@ -35,36 +35,43 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
                 {
                   userName: 'Naomi',
                   direction: 'outgoing',
+                  type: 'Texte',
                   content: 'Salut, tu peux me redonner ton adresse mail stp ? 😇',
                 },
                 {
                   userName: 'Mickaël',
                   direction: 'incoming',
+                  type: 'Texte',
                   content: 'Oui, c’est mickael.aubert123#laposte.net',
                 },
                 {
                   userName: 'Naomi',
                   direction: 'outgoing',
+                  type: 'Texte',
                   content: 'T’es sûr ? 😬',
                 },
                 {
                   userName: 'Naomi',
                   direction: 'outgoing',
+                  type: 'Texte',
                   content: 'Tu veux dire mickael.aubert123@laposte.net',
                 },
                 {
                   userName: 'Mickaël',
                   direction: 'incoming',
+                  type: 'Texte',
                   content: 'Ah oui désolé ! 😣',
                 },
                 {
                   userName: 'Mickaël',
                   direction: 'incoming',
+                  type: 'Texte',
                   content: 'comment tu as su ? ',
                 },
                 {
                   userName: 'Naomi',
                   direction: 'outgoing',
+                  type: 'Texte',
                   content: 'Dans une adresse mail, il y a toujours le symbole arobase !',
                 },
               ],

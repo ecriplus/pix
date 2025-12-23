@@ -46,36 +46,43 @@
                     {
                       "userName": "Arthur",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Dis, tu sais comment reconnaître de  l’ail des ours, toi ? 🌿"
                     },
                     {
                       "userName": "Lila",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Pas vraiment… Ce n’est pas si facile, ça ressemble à la colchique et au muguet, des plantes toxiques ! 🥴"
                     },
                     {
                       "userName": "Lila",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Mais tu tombes bien, justement, je viens de créer un logiciel d’IA qui reconnait différentes plantes pour nous aider à les distinguer !"
                     },
                     {
                       "userName": "Arthur",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Un logiciel ? Comment ça marche ?"
                     },
                     {
                       "userName": "Lila",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Il reconnaît en un clin d’œil les moindres détails des feuilles. Tu veux l’essayer ?"
                     },
                     {
                       "userName": "Arthur",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "J’hésite… Tu crois vraiment qu’on peut lui faire confiance ? "
                     },
                     {
                       "userName": "Lila",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Écoute, je t’explique comment ça marche, tu verras s’il est fiable."
                     }
                   ]

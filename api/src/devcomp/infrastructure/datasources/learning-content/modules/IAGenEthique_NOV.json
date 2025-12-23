@@ -39,21 +39,25 @@
                     {
                       "userName": "Asmae",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tu sais, je pense que quand tu as quelque chose à confier, le mieux est d’en parler à une IA. Elle ne risque pas de le répéter, et au moins elle ne te juge pas."
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
                     },
                     {
                       "userName": "Asmae",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Tu veux dire que des gens peuvent lire ce que je dis à mon IA ? "
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "C’est un peu plus compliqué que ça… Mais en résumé oui."
                     }
                   ]
@@ -281,6 +285,7 @@
                     {
                       "userName": "Sarah",
                       "direction": "outgoing",
+                      "type": "Texte + Image",
                       "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée J’ai demandé à ChatPix et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
@@ -290,6 +295,7 @@
                     {
                       "userName": "Maëlle",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Je n’en sais rien mais je ne vais pas m’amuser à l’appeler."
                     }
                   ]

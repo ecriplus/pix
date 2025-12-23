@@ -47,26 +47,31 @@
                     {
                       "userName": "Nathan",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Oh la la ! Je suis dégoûté… 😩"
                     },
                     {
                       "userName": "Asma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "Bah pourquoi ? Qu’est-ce qui t’arrive ? 😟"
                     },
                     {
                       "userName": "Nathan",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": "Je me suis servi de l’IA pour préparer la soirée d’anniversaire de ma sœur, mais ça a été la catastrophe... Elle veut plus me parler !"
                     },
                     {
                       "userName": "Asma",
                       "direction": "incoming",
+                      "type": "Texte",
                       "content": "À cause de l’IA? 🙁"
                     },
                     {
                       "userName": "Nathan",
                       "direction": "outgoing",
+                      "type": "Texte",
                       "content": " Oui ! Je lui ai demandé de trouver un bowling pour se retrouver là-bas samedi soir... Mais une fois arrivés à l’adresse donnée par l’IA, c’était une agence immobilière. 😤"
                     }
                   ]

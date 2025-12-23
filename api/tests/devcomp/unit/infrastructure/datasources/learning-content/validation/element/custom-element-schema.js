@@ -3,17 +3,21 @@ import Joi from 'joi';
 
 import { htmlSchema, uuidSchema } from '../utils.js';
 
-export const customElementSchema = Joi.object({
+const commonProps = {
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
   instruction: htmlSchema.allow('').required(),
-  tagName: Joi.string()
-    .valid(...Object.keys(componentsSchema))
-    .required(),
-  props: Joi.alternatives()
-    .conditional('tagName', {
-      switch: Object.entries(componentsSchema).map(([tagName, schema]) => ({ is: tagName, then: schema })),
-      otherwise: Joi.object().required(),
+};
+
+export const customElementSchema = Joi.alternatives().conditional('.tagName', {
+  switch: Object.entries(componentsSchema).map(([tagName, schema]) => ({
+    is: tagName,
+    then: Joi.object({
+      ...commonProps,
+      tagName: Joi.string().valid(tagName).required(),
+      props: schema,
     })
-    .required(),
-}).required();
+      .meta({ title: tagName })
+      .required(),
+  })),
+});
