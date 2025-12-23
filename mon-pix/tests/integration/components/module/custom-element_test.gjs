@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixCustomElement from 'mon-pix/components/module/element/custom-element';
@@ -129,6 +129,7 @@ module('Integration | Component | Module | Custom Element', function (hooks) {
               },
             ],
           },
+          type: 'custom',
         };
         const featureToggles = this.owner.lookup('service:featureToggles');
         sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
@@ -144,10 +145,10 @@ module('Integration | Component | Module | Custom Element', function (hooks) {
         await waitForDialog();
 
         // then
-        assert.dom(screen.getByRole('dialog')).exists();
-        assert
-          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
-          .exists();
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+        const listbox = await screen.findByRole('listbox');
+        const options = within(listbox).getAllByRole('option');
+        assert.strictEqual(options.length, 4);
       });
     });
   });

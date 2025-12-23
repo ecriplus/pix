@@ -14,7 +14,7 @@ export default class ModulixCustomElement extends ModuleElement {
   @tracked
   customElement;
 
-  @tracked reportInfo = { answer: null, elementId: this.args.component.id };
+  @tracked reportInfo = { answer: null, elementId: this.args.component.id, elementType: this.args.component.type };
 
   @tracked
   resetButtonDisplayed = false;

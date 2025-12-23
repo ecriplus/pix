@@ -18,6 +18,7 @@ export default class ModulixCustomDraft extends ModuleElement {
     this.reportInfo = {
       answer: null,
       elementId: this.args.customDraft.id,
+      elementType: this.args.customDraft.type,
     };
   }
 
