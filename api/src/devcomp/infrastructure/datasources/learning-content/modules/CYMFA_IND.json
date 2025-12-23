@@ -193,7 +193,7 @@
               "element": {
                 "id": "513eadab-7c62-4820-bfd2-835d4609afed",
                 "type": "text",
-                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. Ces facteurs d’authentification peuvent être de <strong>différents types</strong>.</p> <p><br><strong>Pour chacune des situations suivantes, classez le moyen utilisé dans la catégorie qui lui correspond&nbsp;:</strong></p>"
+                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. Ces facteurs d’authentification peuvent être de <strong>différents types</strong>.</p><p><br><strong>Pour chacune des situations suivantes, classez le moyen utilisé dans la catégorie qui lui correspond&nbsp;:</strong></p>"
               }
             },
             {
@@ -354,7 +354,7 @@
               "element": {
                 "id": "0c73ed69-90b6-442f-9aa1-716b7f7a2da3",
                 "type": "text",
-                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. </p><h4>Comment différencier les trois types de facteurs d’authentification ? </h4><ul><li>💬 Les facteurs de connaissance. Par exemple&nbsp;: un mot passe. </li><li>👜 Les facteurs de possession. Par exemple&nbsp;: un numéro de téléphone. </li><li>🙋 Les facteurs biométriques. Par exemple&nbsp;: une empreinte digitale.</li></ul>"
+                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. <br></p><h4>Comment différencier les trois types de facteurs d’authentification ? </h4><ul><li>💬 Les facteurs de connaissance. Par exemple&nbsp;: un mot passe. </li><li>👜 Les facteurs de possession. Par exemple&nbsp;: un numéro de téléphone. </li><li>🙋 Les facteurs biométriques. Par exemple&nbsp;: une empreinte digitale.</li></ul>"
               }
             }
           ]
@@ -674,7 +674,7 @@
               "element": {
                 "id": "c88354b1-ec04-4922-898c-15bbeba3cdd5",
                 "type": "text",
-                "content": "<ul><li>L’authentification multifacteur, c’est quand on vous demande <strong>au moins deux facteurs d’authentification</strong> pour prouver votre identité. 2️⃣</li><li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je sais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><li>Une authentification multifacteur est <strong>plus sécurisée si les types de facteurs demandés sont différents</strong>, car leurs limites sont différentes. 🔒🔒</li><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong>. ⚙️</li></ul>"
+                "content": "<ul><li>L’authentification multifacteur, c’est quand on vous demande <strong>au moins deux facteurs d’authentification</strong> pour prouver votre identité. 2️⃣</li><br><br><li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je sais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><br><br><li>Une authentification multifacteur est <strong>plus sécurisée si les types de facteurs demandés sont différents</strong>, car leurs limites sont différentes. 🔒🔒</li><br><br><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong>. ⚙️</li></ul>"
               }
             }
           ]
