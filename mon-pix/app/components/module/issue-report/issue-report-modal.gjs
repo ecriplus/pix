@@ -11,27 +11,70 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import InElement from 'mon-pix/components/in-element';
 
-const categories = [
+import { categoriesKey } from '../../../models/module-issue-report';
+
+const defaultCategories = [
   {
-    value: 'accessibility',
-    label: 'Accessibilité de l‘épreuve',
+    value: categoriesKey.ACCESSIBILITY_ISSUE,
+    label: 'pages.modulix.issue-report.modal.categories.default.accessibility-issue',
   },
   {
-    value: 'answer',
-    label: 'La réponse',
-  },
-  {
-    value: 'other',
-    label: 'Autre',
+    value: categoriesKey.OTHER,
+    label: 'pages.modulix.issue-report.modal.categories.default.other',
   },
 ];
 
+const feedbackCategories = [
+  {
+    value: categoriesKey.QUESTION_ISSUE,
+    label: 'pages.modulix.issue-report.modal.categories.feedback.question-issue',
+  },
+  {
+    value: categoriesKey.RESPONSE_ISSUE,
+    label: 'pages.modulix.issue-report.modal.categories.feedback.response-issue',
+  },
+  {
+    value: categoriesKey.IMPROVEMENT,
+    label: 'pages.modulix.issue-report.modal.categories.feedback.improvement',
+  },
+  ...defaultCategories,
+];
+
+const customAndEmbedTypes = ['custom', 'custom-draft', 'embed'];
+
+const customAndEmbedCategories = [
+  {
+    value: categoriesKey.INSTRUCTION_ISSUE,
+    label: 'pages.modulix.issue-report.modal.categories.custom-and-embed.instruction-issue',
+  },
+  {
+    value: categoriesKey.EMBED_NOT_WORKING,
+    label: 'pages.modulix.issue-report.modal.categories.custom-and-embed.embed-not-working',
+  },
+  ...defaultCategories,
+];
+
 export default class ModulixIssueReportModal extends Component {
-  @tracked selectedCategory = categories[0].value;
+  @service intl;
+
+  @tracked selectedCategory = this.categories[0].value;
   @tracked comment = null;
   @tracked errorMessage = null;
 
-  @service intl;
+  get categories() {
+    let categories;
+
+    if (customAndEmbedTypes.includes(this.args.elementType)) {
+      categories = customAndEmbedCategories;
+    } else {
+      categories = feedbackCategories;
+    }
+
+    return categories.map(({ value, label }) => ({
+      value,
+      label: this.intl.t(label),
+    }));
+  }
 
   @action
   hideModal() {
@@ -61,7 +104,7 @@ export default class ModulixIssueReportModal extends Component {
   @action
   resetForm() {
     document.getElementById('module-issue-report-form').reset();
-    this.selectedCategory = categories[0].value;
+    this.selectedCategory = this.categories[0].value;
     this.comment = null;
   }
 
@@ -83,7 +126,7 @@ export default class ModulixIssueReportModal extends Component {
               <legend class="sr-only">{{t "pages.modulix.issue-report.modal.legend"}}</legend>
               <PixSelect
                 @hideDefaultOption={{true}}
-                @options={{categories}}
+                @options={{this.categories}}
                 @value={{this.selectedCategory}}
                 @onChange={{this.onChangeCategory}}
                 required

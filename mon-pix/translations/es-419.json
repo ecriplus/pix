@@ -1676,6 +1676,21 @@
           "missing-comment": "Por favor, introduzca un comentario."
         },
         "modal": {
+          "categories": {
+            "custom-and-embed": {
+              "embed-not-working": "El simulador/la aplicación no funciona",
+              "instruction-issue": "No entiendo las instrucciones"
+            },
+            "default": {
+              "accessibility-issue": "Problema de accesibilidad",
+              "other": "Otro"
+            },
+            "feedback": {
+              "improvement": "Quiero proponer una mejora",
+              "question-issue": "No entiendo la pregunta",
+              "response-issue": "No estoy de acuerdo con la respuesta."
+            }
+          },
           "legend": "Información necesaria para enviar una denuncia",
           "select-label": "Motivo de la notificación",
           "textarea-label": "Comentario",

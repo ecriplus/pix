@@ -1688,6 +1688,21 @@
           "missing-comment": "Veuillez saisir un commentaire."
         },
         "modal": {
+          "categories": {
+            "custom-and-embed": {
+              "embed-not-working": "Le simulateur / l’application ne fonctionne pas",
+              "instruction-issue": "Je ne comprends pas la consigne"
+            },
+            "default": {
+              "accessibility-issue": "Problème d’accessibilité",
+              "other": "Autre"
+            },
+            "feedback": {
+              "improvement": "Je souhaite proposer une amélioration",
+              "question-issue": "Je ne comprends pas la question",
+              "response-issue": "Je ne suis pas d’accord avec la réponse"
+            }
+          },
           "legend": "Informations requises pour envoyer un signalement",
           "select-label": "Raison du signalement",
           "textarea-label": "Commentaire",
