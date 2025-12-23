@@ -163,7 +163,7 @@
               "element": {
                 "id": "8fb3840a-8724-404d-9c10-dc421fed314c",
                 "type": "text",
-                "content": "<p>Dans la suite de ce module, nous allons utiliser le terme «&nbsp;<strong>authentification multifacteur </strong>» parfois notée (<strong>MFA</strong>).</p>"
+                "content": "<p>Dans la suite de ce module, nous allons utiliser le terme «&nbsp;<strong>authentification multifacteur </strong>» parfois notée <strong>MFA</strong>.</p>"
               }
             }
           ]
@@ -674,7 +674,7 @@
               "element": {
                 "id": "c88354b1-ec04-4922-898c-15bbeba3cdd5",
                 "type": "text",
-                "content": "<ul><li>L’authentification multifacteur, c’est quand on vous demande <strong>au moins deux facteurs d’authentification</strong> pour prouver votre identité. 2️⃣</li><br><br><li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je sais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><br><br><li>Une authentification multifacteur est <strong>plus sécurisée si les types de facteurs demandés sont différents</strong>, car leurs limites sont différentes. 🔒🔒</li><br><br><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong>. ⚙️</li></ul>"
+                "content": "<ul><li>L’authentification multifacteur, c’est quand on vous demande <strong>au moins deux facteurs d’authentification</strong> pour prouver votre identité. 2️⃣</li><br><li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je sais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><br><li>Une authentification multifacteur est <strong>plus sécurisée si les types de facteurs demandés sont différents</strong>, car leurs limites sont différentes. 🔒🔒</li><br><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong>. ⚙️</li></ul>"
               }
             }
           ]
