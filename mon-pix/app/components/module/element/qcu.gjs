@@ -19,6 +19,7 @@ export default class ModuleQcu extends ModuleElement {
   @service passageEvents;
   @service modulixPreviewMode;
   @tracked displayFeedbackState = false;
+  @tracked reportInfo = {};
 
   @action
   radioClicked(proposalId) {
@@ -97,6 +98,8 @@ export default class ModuleQcu extends ModuleElement {
       type: 'QCU_ANSWERED',
       data: { answer: this.selectedAnswerId, elementId: this.element.id, status },
     });
+
+    this.reportInfo = { answer: this.selectedAnswerId, elementId: this.element.id };
 
     return new Promise((resolve, _) => {
       window.setTimeout(() => {
@@ -180,7 +183,11 @@ export default class ModuleQcu extends ModuleElement {
 
       <div class="element-qcu__feedback" role="status" tabindex="-1">
         {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback @answerIsValid={{this.answerIsValid}} @feedback={{this.correction.feedback}} />
+          <ModulixFeedback
+            @answerIsValid={{this.answerIsValid}}
+            @feedback={{this.correction.feedback}}
+            @reportInfo={{this.reportInfo}}
+          />
         {{/if}}
       </div>
 

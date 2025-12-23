@@ -13,9 +13,16 @@ const createModuleIssueReport = async function (request, h) {
   } = request.payload.data.attributes;
 
   const moduleIssueReport = { moduleId, passageId, elementId, answer, comment, categoryKey, userAgent };
-  await usecases.createModuleIssueReport({ moduleIssueReport });
+  const createdModuleIssueReportId = await usecases.createModuleIssueReport({ moduleIssueReport });
 
-  return h.response().created();
+  return h
+    .response({
+      data: {
+        id: createdModuleIssueReportId,
+        type: 'module-issue-reports',
+      },
+    })
+    .created();
 };
 
 const moduleIssueReportController = { createModuleIssueReport };

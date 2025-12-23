@@ -1,4 +1,3 @@
-import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
@@ -7,17 +6,16 @@ import ProposalButton from 'mon-pix/components/module/component/proposal-button'
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import { VERIFY_RESPONSE_DELAY } from '../component/element';
-import ModulixIssueReportModal from '../issue-report/issue-report-modal';
+import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModuleQcuDiscovery extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
-  @tracked showModal = false;
+  @tracked reportInfo = {};
 
   @service passageEvents;
   @service modulixPreviewMode;
-  @service featureToggles;
 
   get selectedProposalFeedback() {
     return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
@@ -36,6 +34,10 @@ export default class ModuleQcuDiscovery extends ModuleElement {
   async onAnswer(event) {
     event.preventDefault();
     this.selectedProposalId = event.submitter.value;
+    this.reportInfo = {
+      answer: this.selectedProposalId,
+      elementId: this.element.id,
+    };
 
     await this.waitFor(VERIFY_RESPONSE_DELAY);
     await this.args.onAnswer({ element: this.element });
@@ -57,16 +59,6 @@ export default class ModuleQcuDiscovery extends ModuleElement {
 
   waitFor(duration) {
     return new Promise((resolve) => setTimeout(resolve, duration));
-  }
-
-  @action
-  onReportClick() {
-    this.showModal = true;
-  }
-
-  @action
-  hideModal() {
-    this.showModal = false;
   }
 
   <template>
@@ -102,18 +94,9 @@ export default class ModuleQcuDiscovery extends ModuleElement {
       <div class="feedback element-qcu-discovery__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.selectedProposalFeedback}}
 
-        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-          <div class="element-qcu-discovery-feedback__report-button">
-            <PixButton
-              @variant="tertiary"
-              @iconBefore="flag"
-              @triggerAction={{this.onReportClick}}
-              aria-label={{t "pages.modulix.issue-report.aria-label"}}
-            >{{t "pages.modulix.issue-report.button"}}</PixButton>
-          </div>
-
-          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
-        {{/if}}
+        <div class="element-qcu-discovery-feedback__report-button">
+          <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+        </div>
       </div>
     {{/if}}
   </template>

@@ -7,7 +7,7 @@ import { t } from 'ember-intl';
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import didInsert from '../../../modifiers/modifier-did-insert';
 import { isEmbedAllowedOrigin } from '../../../utils/embed-allowed-origins';
-import ModulixIssueReportModal from '../issue-report/issue-report-modal';
+import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModulixEmbed extends ModuleElement {
@@ -17,6 +17,11 @@ export default class ModulixEmbed extends ModuleElement {
     this.messageHandler = this._receiveEmbedMessage.bind(this);
     this.embedHeight = this.args.embed.height;
     window.addEventListener('message', this.messageHandler);
+
+    this.reportInfo = {
+      answer: null,
+      elementId: this.args.embed.id,
+    };
   }
 
   @service
@@ -27,7 +32,6 @@ export default class ModulixEmbed extends ModuleElement {
 
   @service
   passageEvents;
-  @service featureToggles;
 
   @tracked
   isSimulatorLaunched = false;
@@ -37,7 +41,9 @@ export default class ModulixEmbed extends ModuleElement {
 
   @tracked
   embedHeight;
-  @tracked showModal = false;
+
+  @tracked
+  reportInfo = {};
 
   iframe;
   messageHandler = null;
@@ -110,6 +116,11 @@ export default class ModulixEmbed extends ModuleElement {
     if (message.type) return;
     if (!message.answer) return;
 
+    this.reportInfo = {
+      answer: message.answer,
+      elementId: this.args.embed.id,
+    };
+
     this.args.onAnswer({
       userResponse: [message.answer],
       element: this.args.embed,
@@ -138,16 +149,6 @@ export default class ModulixEmbed extends ModuleElement {
 
   willDestroy() {
     window.removeEventListener('message', this.messageHandler);
-  }
-
-  @action
-  onReportClick() {
-    this.showModal = true;
-  }
-
-  @action
-  hideModal() {
-    this.showModal = false;
   }
 
   <template>
@@ -201,16 +202,7 @@ export default class ModulixEmbed extends ModuleElement {
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
         {{/if}}
 
-        {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-          <PixButton
-            @variant="tertiary"
-            @iconBefore="flag"
-            @triggerAction={{this.onReportClick}}
-            aria-label={{t "pages.modulix.issue-report.aria-label"}}
-          >{{t "pages.modulix.issue-report.button"}}</PixButton>
-
-          <ModulixIssueReportModal @showModal={{this.showModal}} @hideModal={{this.hideModal}} />
-        {{/if}}
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>

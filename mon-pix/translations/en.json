@@ -1676,6 +1676,9 @@
       "issue-report": {
         "aria-label": "Send a problem or suggestion",
         "button": "Report",
+        "error-messages": {
+          "missing-comment": "Please enter a comment."
+        },
         "modal": {
           "legend": "Information required to send a report",
           "select-label": "Reason for reporting",

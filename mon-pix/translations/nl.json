@@ -1676,6 +1676,9 @@
       "issue-report": {
         "aria-label": "Een probleem of suggestie doorgeven",
         "button": "Melden",
+        "error-messages": {
+          "missing-comment": "Voer een opmerking in."
+        },
         "modal": {
           "legend": "Informatie die nodig is om een melding te versturen",
           "select-label": "Reden voor de melding",

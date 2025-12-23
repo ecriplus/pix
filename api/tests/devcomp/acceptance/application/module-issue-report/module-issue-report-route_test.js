@@ -44,6 +44,7 @@ describe('Acceptance | Route | module-issue-report', function () {
 
       // then
       expect(response.statusCode).to.equal(201);
+      expect(response.result.data.id).to.exist;
     });
   });
 });

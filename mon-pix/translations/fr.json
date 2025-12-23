@@ -1684,6 +1684,9 @@
       "issue-report": {
         "aria-label": "Envoyer un problème ou une suggestion",
         "button": "Signaler",
+        "error-messages": {
+          "missing-comment": "Veuillez saisir un commentaire."
+        },
         "modal": {
           "legend": "Informations requises pour envoyer un signalement",
           "select-label": "Raison du signalement",

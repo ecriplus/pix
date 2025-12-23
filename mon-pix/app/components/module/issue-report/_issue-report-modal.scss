@@ -16,6 +16,10 @@
     gap: var(--pix-spacing-2x);
     justify-content: flex-end;
   }
+
+  .pix-textarea, .pix-select {
+    width: 100%;
+  }
 }
 
 .issue-report-modal {
@@ -26,6 +30,9 @@
     color: var(--pix-neutral-800);
   }
 
+  &__error-message {
+    margin-top: var(--pix-spacing-2x);
+  }
 
   .pix-modal {
     &__header {
