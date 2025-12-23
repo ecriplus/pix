@@ -949,6 +949,14 @@
             {
               "type": "element",
               "element": {
+                "id": "8516b033-4b32-4906-b50d-730f8c0067c8",
+                "type": "text",
+                "content": "<p>phishing-message</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "042fbb51-6ffa-4c19-8ef9-aa88fc1c3046",
                 "type": "custom",
                 "instruction": "",
@@ -990,6 +998,14 @@
           "type": "discovery",
           "title": "phishing-notification",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5425a9e0-37a9-4afb-a3e2-b99d87a1181f",
+                "type": "text",
+                "content": "<p>phishing-notification</p>"
+              }
+            },
             {
               "type": "element",
               "element": {
@@ -1286,6 +1302,14 @@
           "type": "discovery",
           "title": "select-conversation",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1fbd4acb-1d70-49fa-ac73-446684b481b7",
+                "type": "text",
+                "content": "<p>select-conversation</p>"
+              }
+            },
             {
               "type": "element",
               "element": {
