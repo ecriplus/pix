@@ -37,8 +37,9 @@ describe('Unit | UseCase | get-certification-course', function () {
       getByScopeAndReconciliationDate: sinon.stub(),
     };
 
-    const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 42 });
-    version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration });
+    version = domainBuilder.certification.shared.buildVersion({
+      challengesConfiguration: { maximumAssessmentLength: 42 },
+    });
   });
 
   it('should get the certificationCourse with numberOfChallenges from version', async function () {

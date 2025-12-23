@@ -9,11 +9,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
   describe('#create', function () {
     it('should create a certification version and link challenges', async function () {
       // given
-      const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+      const challengesConfiguration = {
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
         defaultCandidateCapacity: -8,
-      });
+      };
       const version = domainBuilder.certification.configuration.buildVersion({
         scope: Scopes.PIX_PLUS_DROIT,
         startDate: new Date('2025-06-01'),
@@ -98,11 +98,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
-      const newChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+      const newChallengesConfiguration = {
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
         defaultCandidateCapacity: 1,
-      });
+      };
       const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
         id: existingVersion.id,
         scope: existingVersion.scope,
@@ -119,7 +119,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       const updatedVersion = await knex('certification_versions').where({ id: existingVersion.id }).first();
 
       expect(updatedVersion.expirationDate).to.deep.equal(newExpirationDate);
-      expect(updatedVersion.challengesConfiguration).to.deep.equal(newChallengesConfiguration);
+      expect(updatedVersion.challengesConfiguration).to.deep.equal(versionToUpdate.challengesConfiguration);
       expect(updatedVersion.scope).to.equal(existingVersion.scope);
       expect(updatedVersion.startDate).to.deep.equal(existingVersion.startDate);
     });

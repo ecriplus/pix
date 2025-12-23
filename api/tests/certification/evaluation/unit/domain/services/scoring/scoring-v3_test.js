@@ -207,8 +207,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           .withArgs({
             challenges,
             allAnswers: answers,
-            capacity: sinon.match.number,
-            variationPercent: undefined,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns({
             capacity: expectedCapacity,
@@ -218,8 +218,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           .withArgs({
             challenges: challengeCalibrationsWithoutLiveAlerts,
             allAnswers: answers,
-            capacity: sinon.match.number,
-            variationPercent: undefined,
+            capacity: version.challengesConfiguration.defaultCandidateCapacity,
+            variationPercent: version.challengesConfiguration.variationPercent,
           })
           .returns([
             {
@@ -377,8 +377,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -407,8 +407,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -521,8 +521,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({
                   challenges: answeredChallenges,
                   allAnswers: answers,
-                  capacity: sinon.match.number,
-                  variationPercent: undefined,
+                  capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                  variationPercent: version.challengesConfiguration.variationPercent,
                 })
                 .returns({
                   capacity: expectedCapacity,
@@ -531,8 +531,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({
                   challenges: challengeCalibrationsWithoutLiveAlerts,
                   allAnswers: answers,
-                  capacity: sinon.match.number,
-                  variationPercent: undefined,
+                  capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                  variationPercent: version.challengesConfiguration.variationPercent,
                 })
                 .returns([
                   {
@@ -647,8 +647,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({
                   challenges: allChallenges,
                   allAnswers: answers,
-                  capacity: sinon.match.number,
-                  variationPercent: undefined,
+                  capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                  variationPercent: version.challengesConfiguration.variationPercent,
                 })
                 .returns({
                   capacity: expectedCapacity,
@@ -658,8 +658,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({
                   challenges: challengeCalibrationsWithoutLiveAlerts,
                   allAnswers: answers,
-                  capacity: sinon.match.number,
-                  variationPercent: undefined,
+                  capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                  variationPercent: version.challengesConfiguration.variationPercent,
                 })
                 .returns([
                   {
@@ -815,8 +815,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -826,8 +826,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -938,8 +938,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -949,8 +949,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -1074,8 +1074,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1085,8 +1085,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -1205,8 +1205,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1215,8 +1215,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -1331,8 +1331,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1342,8 +1342,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -1459,8 +1459,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: answeredChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1470,8 +1470,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {
@@ -1585,8 +1585,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: allChallenges,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1596,8 +1596,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
                 allAnswers: answers,
-                capacity: sinon.match.number,
-                variationPercent: undefined,
+                capacity: version.challengesConfiguration.defaultCandidateCapacity,
+                variationPercent: version.challengesConfiguration.variationPercent,
               })
               .returns([
                 {

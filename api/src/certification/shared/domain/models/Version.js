@@ -15,6 +15,8 @@ export class Version {
       .valid(...Object.values(Scopes)),
     challengesConfiguration: Joi.object()
       .keys({
+        maximumAssessmentLength: Joi.number().integer().min(0).required(),
+        challengesBetweenSameCompetence: Joi.number().integer().min(0).required(),
         defaultCandidateCapacity: Joi.number().required(),
       })
       .unknown(true)
@@ -26,6 +28,8 @@ export class Version {
    * @param {number} params.id - version identifier
    * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
    * @param {Object} params.challengesConfiguration - Challenges configuration
+   * @param {number} params.challengesConfiguration.maximumAssessmentLength - limit for assessment length
+   * @param {number} params.challengesConfiguration.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
    * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
    */
   constructor({ id, scope, challengesConfiguration }) {
