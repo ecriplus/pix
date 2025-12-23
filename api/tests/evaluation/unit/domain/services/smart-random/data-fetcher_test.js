@@ -35,18 +35,19 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       };
     });
 
-    it('fetches answers, lastAnswer, targetsSkills challenges and knowledgeElements', async function () {
+    it('fetches answers, lastAnswer, targetsSkills challenges and filteredknowledgeElements on campaign by default', async function () {
       // given
       const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
         state: 'started',
         campaignParticipationId: 1,
         userId: 5678899,
+        isImproving: false,
       });
       const answer = Symbol('answer');
       const challenges = Symbol('challenge');
       const knowledgeElements = Symbol('knowledgeElements');
       const skills = Symbol('skills');
-      const isRetrying = Symbol('isRetrying');
+      const isRetrying = false;
       const filteredKnowledgeElements = Symbol('filteredKnowledgeElements');
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
@@ -61,7 +62,57 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(isRetrying);
       improvementService.filterKnowledgeElementsIfImproving
-        .withArgs({ knowledgeElements, assessment, isRetrying })
+        .withArgs({ knowledgeElements, assessment, isRetrying, keepRecentOrValidated: true })
+        .resolves(filteredKnowledgeElements);
+
+      // when
+      const data = await dataFetcher.fetchForCampaigns({
+        assessment,
+        answerRepository,
+        campaignRepository,
+        challengeRepository,
+        knowledgeElementForParticipationService,
+        knowledgeElementRepository,
+        campaignParticipationRepository,
+        improvementService,
+      });
+
+      // then
+      expect(data.allAnswers).to.deep.equal([answer]);
+      expect(data.lastAnswer).to.deep.equal(answer);
+      expect(data.targetSkills).to.deep.equal(skills);
+      expect(data.challenges).to.deep.equal(challenges);
+      expect(data.knowledgeElements).to.deep.equal(filteredKnowledgeElements);
+    });
+
+    it('fetches answers, lastAnswer, targetsSkills challenges and filteredknowledgeElements on campaign is Retrying', async function () {
+      // given
+      const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
+        state: 'started',
+        campaignParticipationId: 1,
+        userId: 5678899,
+        isImproving: false,
+      });
+      const answer = Symbol('answer');
+      const challenges = Symbol('challenge');
+      const knowledgeElements = Symbol('knowledgeElements');
+      const skills = Symbol('skills');
+      const isRetrying = true;
+      const filteredKnowledgeElements = Symbol('filteredKnowledgeElements');
+
+      answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
+      campaignRepository.findSkillsByCampaignParticipationId
+        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .resolves(skills);
+      challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
+      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
+        .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
+        .resolves(knowledgeElements);
+      campaignParticipationRepository.isRetrying
+        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .resolves(isRetrying);
+      improvementService.filterKnowledgeElementsIfImproving
+        .withArgs({ knowledgeElements, assessment, isRetrying, keepRecentOrValidated: true })
         .resolves(filteredKnowledgeElements);
 
       // when
@@ -127,7 +178,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       challengeRepository.findValidatedByCompetenceId.withArgs(assessment.competenceId).resolves(challenges);
       knowledgeElementRepository.findUniqByUserId.withArgs({ userId: assessment.userId }).resolves(knowledgeElements);
       improvementService.filterKnowledgeElementsIfImproving
-        .withArgs({ knowledgeElements, assessment, isRetrying: false })
+        .withArgs({ knowledgeElements, assessment, isRetrying: false, keepRecentOrValidated: false })
         .resolves(filteredKnowledgeElements);
 
       // when
