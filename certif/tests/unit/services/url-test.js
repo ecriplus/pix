@@ -154,7 +154,7 @@ module('Unit | Service | url', function (hooks) {
       const fraudReportUrl = service.fraudReportUrl;
 
       // then
-      assert.strictEqual(fraudReportUrl, 'https://cloud.pix.fr/s/LiXkoBq9GD5aLbN/download');
+      assert.strictEqual(fraudReportUrl, 'https://cloud.pix.fr/s/AgDytb8yHxrmjFk/download');
     });
   });
 
