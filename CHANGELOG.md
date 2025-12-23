@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## 5.287.0 (2025-12-23)
+
+* :recycle: api: add challengesBetweenSameCompetence and maximumAssessmentLength to Version model ([d0ab21b](https://github.com/1024pix/pix/commit/d0ab21b))
+* :recycle: api: remove numberOfChallengesPerCourse from config and make maximumAssessmentLength requi ([20aacd7](https://github.com/1024pix/pix/commit/20aacd7))
+* :white_check_mark: api: add test on required FlashAssessmentAlgorithmConfiguration propriety ([45424b3](https://github.com/1024pix/pix/commit/45424b3))
+* [BUMP] Upgrade @1024pix/epreuves-components to 2.4.6  ([f37e51a](https://github.com/1024pix/pix/commit/f37e51a)), closes [#14498](https://github.com/1024pix/pix/issues/14498)
+* [FEATURE] Afficher la liste complète des référentiels de certification dans Admin (PIX-20837).  ([1462c0c](https://github.com/1024pix/pix/commit/1462c0c)), closes [#14486](https://github.com/1024pix/pix/issues/14486)
+* [FEATURE] Afficher le compteur de certifs d'un utilisateur sur Admin (PIX-20910).  ([61a9d25](https://github.com/1024pix/pix/commit/61a9d25)), closes [#14496](https://github.com/1024pix/pix/issues/14496)
+* [FEATURE] Supprimer le titre redondant "Analyse de résultats" dans l'onglet analyse d'une campagne ( ([256d559](https://github.com/1024pix/pix/commit/256d559)), closes [#14491](https://github.com/1024pix/pix/issues/14491)
+* [TECH] Enlever de config.js le v3Certification.numberOfChallengesPerCourse (PIX-20656)  ([c0e68d9](https://github.com/1024pix/pix/commit/c0e68d9)), closes [#14397](https://github.com/1024pix/pix/issues/14397)
+* [TECH] Mettre à jour la page de blocage par le WAF (#14338) ([406a5e0](https://github.com/1024pix/pix/commit/406a5e0)), closes [#14338](https://github.com/1024pix/pix/issues/14338)
+* [TECH] Refactoriser la manière de remplir le formulaire de création d'orga (PIX-20854)  ([2054703](https://github.com/1024pix/pix/commit/2054703)), closes [#14479](https://github.com/1024pix/pix/issues/14479)
+* Merge branch 'dev' into pix-20678-update-unusual-activity-page ([50fd3a9](https://github.com/1024pix/pix/commit/50fd3a9))
+* sr(api): adds missing titles in demo-epreuves-components module ([9b579ec](https://github.com/1024pix/pix/commit/9b579ec))
+* sr(api): improves custom element’s schema for modulix-editor ([22cd16d](https://github.com/1024pix/pix/commit/22cd16d))
+* bump: upgrades @1024pix/epreuves-components to 2.4.6 ([2632452](https://github.com/1024pix/pix/commit/2632452))
+* refactor(admin): complementary-certification item handles its subpages ([6512fd3](https://github.com/1024pix/pix/commit/6512fd3))
+* refactor(admin): delete obsolete complementaries list code ([7479b00](https://github.com/1024pix/pix/commit/7479b00))
+* refactor(admin): use form tracked prop for orga creation instead of mutating record ([b972121](https://github.com/1024pix/pix/commit/b972121))
+* feat(admin): display certification-frameworks list ([6f1c0d1](https://github.com/1024pix/pix/commit/6f1c0d1))
+* feat(admin): display user certification-courses count ([0199c17](https://github.com/1024pix/pix/commit/0199c17))
+* feat(api): user-details-for-admin-serializer now has certificationCourses relationship ([5527682](https://github.com/1024pix/pix/commit/5527682))
+* feat(mon-pix): update unsual activity page for WAF ([5a8b0ac](https://github.com/1024pix/pix/commit/5a8b0ac))
+* feat(orga): remove redundant campaign analysis title in analysis tab ([e983164](https://github.com/1024pix/pix/commit/e983164))
+* tech(orga): remove unused css ([a9bad80](https://github.com/1024pix/pix/commit/a9bad80))
+* fix(admin): delete created record if submit is in error ([6481679](https://github.com/1024pix/pix/commit/6481679))
+
 ## 5.286.0 (2025-12-22)
 
 * :fire:(mon-pix): remove plyr dependency ([d7d3541](https://github.com/1024pix/pix/commit/d7d3541))
