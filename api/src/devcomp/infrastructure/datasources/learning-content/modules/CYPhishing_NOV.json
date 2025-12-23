@@ -267,11 +267,82 @@
               "type": "element",
               "element": {
                 "id": "02db90dd-7977-43cd-bcd9-5b63343fc5ef",
-                "type": "custom-draft",
-                "title": "Notifications mobile",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/notifications.html",
+                "type": "custom",
                 "instruction": "<p>Classez les notifications de message en fonction de l’expéditeur pour lequel se fait passer l’escroc.</p>",
-                "height": 550
+                "tagName": "phishing-notification",
+                "props": {
+                  "notifications": [
+                    {
+                      "icon": "bubble",
+                      "sender": "Votre CAF",
+                      "content": "Votre remboursement de 500€... ",
+                      "category": "Service public",
+                      "time": {
+                        "minutes": 75
+                      }
+                    },
+                    {
+                      "icon": "letter",
+                      "sender": "LeDiscount",
+                      "content": "Gagnant du GRAND JEU de l'été...",
+                      "category": "Entreprise",
+                      "time": {
+                        "minutes": 27
+                      }
+                    },
+                    {
+                      "icon": "arobase",
+                      "sender": "Squizee",
+                      "content": "Concours pour mes abonnés ! ",
+                      "category": "Célébrité",
+                      "time": {
+                        "minutes": -24
+                      }
+                    },
+                    {
+                      "icon": "bubble",
+                      "sender": "06 39 98 65 47",
+                      "content": "Coucou c'est Clément, j'ai besoin...",
+                      "category": "Service public",
+                      "time": {
+                        "minutes": -42
+                      }
+                    },
+                    {
+                      "icon": "letter",
+                      "sender": "service@bouygues.com",
+                      "content": "Alerte facture impayée ! ",
+                      "category": "Entreprise",
+                      "time": {
+                        "minutes": -128
+                      }
+                    }
+                  ],
+                  "categories": [
+                    {
+                      "name": "Célébrité",
+                      "icon": "celebrity"
+                    },
+                    {
+                      "name": "Commerce",
+                      "icon": "business"
+                    },
+                    {
+                      "name": "Particulier",
+                      "icon": "person"
+                    },
+                    {
+                      "name": "Service public",
+                      "icon": "publicService"
+                    },
+                    {
+                      "name": "Entreprise",
+                      "icon": "company"
+                    }
+                  ],
+                  "informationMessage": "Souvent, les escrocs envoient de faux messages qui semblent venir d’un proche, d’une célébrité ou d’un service connu pour gagner votre confiance.",
+                  "titleLevel": 0
+                }
               }
             }
           ]
@@ -330,200 +401,50 @@
           "title": "Activité de découverte #3",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
+              "type": "element",
+              "element": {
+                "id": "24101a5e-9303-49eb-9210-c208f79cb90c",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "phishing-message",
+                "props": {
+                  "titleLevel": 0,
+                  "messages": [
                     {
-                      "id": "d3bc02bb-5ad9-47c2-9af4-e598b58a5cd8",
-                      "type": "text",
-                      "content": "<p>Pour chacun des cas ci-dessous&nbsp;:</p><ul><li>Ouvrez et lisez le <strong>message d’arnaque</strong>.</li><li>Puis répondez à la question.</li></ul>"
-                    },
-                    {
-                      "id": "c0c8222d-2081-405f-94cb-47802c983eba",
-                      "type": "custom-draft",
-                      "title": "Message ANTAI",
-                      "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/notifmessageantai.html",
-                      "instruction": "",
-                      "height": 550
-                    },
-                    {
-                      "id": "d24cd05f-d826-4a48-9ca5-534c81a4c09d",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Qu’avez-vous ressenti en lisant ce message ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Un sentiment de peur</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.&nbsp;<br></p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Un sentiment d’urgence</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Un sentiment d’espoir</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Un sentiment de colère</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "<p>Aucun de ces sentiments</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.</p>"
-                          }
-                        },
-                        {
-                          "id": "6",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence.&nbsp;</p>"
-                          }
-                        }
+                      "senderName": " Info ANTAI",
+                      "content": "Amende impayée de 35€.  Consultez votre dossier ANTAI avant majoration via : dossier-amende-gouv.antai",
+                      "title": "Retard de paiement : ",
+                      "goodFeelings": [
+                        "fear",
+                        "emergency"
                       ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "86cdec67-e50e-471e-b075-1768dee8f640",
-                      "type": "custom-draft",
-                      "title": "Message impôts",
-                      "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/notifmessagerembour.html",
-                      "instruction": "",
-                      "height": 550
+                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence. ",
+                      "loose": "En réalité, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence. "
                     },
                     {
-                      "id": "28f9ee95-d68c-48f9-843b-c0d5d28a3dc2",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Qu’avez-vous ressenti en lisant ce message ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Un sentiment de peur</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Un sentiment d’urgence</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Un sentiment d’espoir</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Un sentiment de colère</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "<p>Aucun de ces sentiments</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "6",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
-                          }
-                        }
+                      "senderName": "IMPOT",
+                      "content": "Vous avez un remboursement disponible de 826€.  Référence 125489 : accédez à votre formulaire de remboursement impot.gouv-remboursement.nt",
+                      "title": "Remboursement disponible :",
+                      "goodFeelings": [
+                        "hope"
                       ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "4dc0d154-53db-4e61-8cd7-bfa7c7d2befa",
-                      "type": "custom-draft",
-                      "title": "Message cousine",
-                      "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/notifmessageproche.html",
-                      "instruction": "",
-                      "height": 550
+                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue. ",
+                      "loose": "En réalité, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue. "
                     },
                     {
-                      "id": "d8f0ec7a-67d7-4ab4-aa7b-2819fe640250",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Qu’avez-vous ressenti en lisant ce message ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Un sentiment de peur</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment de peur et d’urgence pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Un sentiment d’urgence</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Un sentiment d’espoir</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Un sentiment de colère</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "<p>Aucun de ces sentiments</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "6",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
-                          }
-                        }
+                      "senderName": " +33789542312",
+                      "content": "Salut, c'est ta cousine, j'ai besoin de ton aide, je suis coincée à l'étranger et j'ai perdu mes papiers.  Pour pouvoir rentrer, j'ai besoin que tu m'envoies 300€ ici : dT23.bitly.com Il n'y a que toi qui peut m'aider !",
+                      "title": "",
+                      "goodFeelings": [
+                        "fear",
+                        "emergency"
                       ],
-                      "solution": "1"
+                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment de peur et d’urgence pour cette cousine bloquée à l’étranger. ",
+                      "loose": "En réalité avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger. "
                     }
                   ]
                 }
-              ]
+              }
             }
           ]
         },
@@ -588,11 +509,37 @@
               "type": "element",
               "element": {
                 "id": "5ddd8478-25ef-4d49-9671-e841d2c0692d",
-                "type": "custom-draft",
-                "title": "Sélection du bon message",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/message-conversation-select.html",
+                "type": "custom",
                 "instruction": "<p>Aidez Enzo à répondre à Yvette.</p>",
-                "height": 550
+                "tagName": "select-conversation",
+                "props": {
+                  "titleLevel": 0,
+                  "incomingMessage": {
+                    "username": "Yvette",
+                    "content": "Ok, mais en cas de doute, je fais quoi ? La banque ça peut être urgent !",
+                    "time": {
+                      "minutes": -5
+                    }
+                  },
+                  "username": "Xavier",
+                  "responseChoices": [
+                    {
+                      "content": "Répond STOP au SMS, ça va le bloquer.",
+                      "goodIdea": false,
+                      "feedback": "Répondre STOP à un SMS d’arnaque ne permet pas de vérifier sa véracité ni de bloquer l’expéditeur.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    },
+                    {
+                      "content": "Contacte ta banque au numéro habituel ou via ton application bancaire.",
+                      "goodIdea": true,
+                      "feedback": "Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    },
+                    {
+                      "content": "Rappelle directement le numéro qui t’a envoyé le message.",
+                      "goodIdea": false,
+                      "feedback": "Rappeler le numéro, c’est prendre le risque de tomber sur un escroc qui vous manipulera.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -991,7 +938,7 @@
               }
             },
             {
-               "type": "element",
+              "type": "element",
               "element": {
                 "id": "def10793-84be-42cf-acc2-85c7ed3aa629",
                 "type": "qcu-discovery",
