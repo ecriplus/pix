@@ -268,7 +268,7 @@
               "element": {
                 "id": "02db90dd-7977-43cd-bcd9-5b63343fc5ef",
                 "type": "custom",
-                "instruction": "<p>Classez les notifications de message en fonction de l’expéditeur pour lequel se fait passer l’escroc.</p>",
+                "instruction": "<p>Pour chaque notification de message ci-dessous, devinez pour qui l'escroc essaye de se faire passer.</p>",
                 "tagName": "phishing-notification",
                 "props": {
                   "notifications": [
@@ -460,7 +460,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/CYPhishingNov/infographie-lecon3.svg",
                 "alt": "image décrite en détail dans l’alternative textuelle",
-                "alternativeText": "<p>Infographie sur les messages d’arnaque. Titre : « Les messages d’arnaque vous poussent toujours à agir rapidement et sans réfléchir ».<br> Trois exemples illustrés par des pictogrammes violets :</p><ul><li>en cliquant sur un lien,</li><li>en appelant un numéro de téléphone,</li><li>en répondant au message plus vite.</li></ul>",
+                "alternativeText": "<p>Infographie sur les messages d’arnaque. Titre : « Les messages d’arnaque vous poussent toujours à agir rapidement et sans réfléchir ».<br> Trois exemples :</p><ul><li>en cliquant sur un lien,</li><li>en appelant un numéro de téléphone,</li><li>en répondant au message plus vite.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
