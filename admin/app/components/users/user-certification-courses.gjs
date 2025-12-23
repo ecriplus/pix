@@ -3,27 +3,11 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 
 export default class UserCertificationCourses extends Component {
   @service intl;
-  @service router;
-  @service store;
-
-  @tracked userCertificationCourses = [];
-
-  constructor() {
-    super(...arguments);
-
-    this.loadUserCertificationCourses();
-  }
-
-  async loadUserCertificationCourses() {
-    const userId = this.router.currentRoute.parent.params.user_id;
-    this.userCertificationCourses = await this.store.query('user-certification-course', { userId });
-  }
 
   <template>
     <header class="page-section__header">
@@ -32,10 +16,10 @@ export default class UserCertificationCourses extends Component {
       </h2>
     </header>
 
-    {{#if this.userCertificationCourses.length}}
+    {{#if @certificationCourses.length}}
       <PixTable
         @variant="admin"
-        @data={{this.userCertificationCourses}}
+        @data={{@certificationCourses}}
         @caption={{t "components.users.certification-centers.certification-courses.table-caption"}}
       >
         <:columns as |certificationCourse context|>

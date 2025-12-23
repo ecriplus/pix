@@ -24,10 +24,12 @@ module('Integration | Component | Users | User certification courses', function 
   module('When user has no certification course', function () {
     test('displays a title and an info', async function (assert) {
       // given
-      sinon.stub(store, 'query').resolves([]);
+      const certificationCourses = [];
 
       // when
-      const screen = await render(<template><UserCertificationCourses /></template>);
+      const screen = await render(
+        <template><UserCertificationCourses @certificationCourses={{certificationCourses}} /></template>,
+      );
 
       // then
       assert
@@ -54,14 +56,19 @@ module('Integration | Component | Users | User certification courses', function 
         isPublished: true,
       });
       const certificationCourse2 = store.createRecord('user-certification-course', {
+        id: '2',
+        sessionId: 24,
+        createdAt: new Date('2025-04-02'),
         isPublished: false,
       });
       const certificationCourseCreatedAt = intl.formatDate(certificationCourse.createdAt);
 
-      sinon.stub(store, 'query').resolves([certificationCourse, certificationCourse2]);
+      const certificationCourses = [certificationCourse, certificationCourse2];
 
       // when
-      const screen = await render(<template><UserCertificationCourses /></template>);
+      const screen = await render(
+        <template><UserCertificationCourses @certificationCourses={{certificationCourses}} /></template>,
+      );
 
       // then
       assert

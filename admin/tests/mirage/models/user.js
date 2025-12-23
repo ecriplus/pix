@@ -9,4 +9,5 @@ export default Model.extend({
   authenticationMethods: hasMany('authenticationMethod'),
   lastApplicationConnections: hasMany('lastApplicationConnection'),
   participations: hasMany('userParticipation'),
+  certificationCourses: hasMany('userCertificationCourse'),
 });
