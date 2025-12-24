@@ -725,6 +725,32 @@ describe('Integration | Repository | Campaign Participation', function () {
           campaignParticipationToDelete.id,
         ]);
       });
+
+      it('should return all deleted participations given options to true', async function () {
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaignParticipationToDelete = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          organizationLearnerId,
+        });
+        const deletedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          organizationLearnerId,
+          deletedBy: userId,
+          deletedAt: new Date('2021-06-07'),
+        });
+
+        await databaseBuilder.commit();
+
+        const participations = await DomainTransaction.execute(() => {
+          return campaignParticipationRepository.getAllCampaignParticipationsInCampaignForASameLearner({
+            campaignId,
+            campaignParticipationId: campaignParticipationToDelete.id,
+            keepPreviousDeleted: true,
+          });
+        });
+
+        expect(participations.map((participation) => participation.id)).to.deep.members([deletedParticipation.id]);
+      });
     });
 
     context('When the participant has participations for differents campaigns', function () {
