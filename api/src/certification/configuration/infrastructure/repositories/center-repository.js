@@ -1,11 +1,12 @@
+// @ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Center } from '../../domain/models/Center.js';
 import { CenterTypes } from '../../domain/models/CenterTypes.js';
 
 /**
  * @param {Object} params
- * @param {Array<number>} params.externalIds
- * @returns {Array<number>} - number of rows affected
+ * @param {Array<string>} params.externalIds
+ * @returns {Promise<Array<number>>} - number of rows affected
  */
 export const addToWhitelistByExternalIds = async ({ externalIds }) => {
   const knexConn = DomainTransaction.getConnection();
@@ -26,7 +27,7 @@ export const addToWhitelistByExternalIds = async ({ externalIds }) => {
 };
 
 /**
- * @returns {Promise<void>}
+ * @returns {Promise<number>}
  */
 export const resetWhitelist = async () => {
   const knexConn = DomainTransaction.getConnection();
@@ -47,6 +48,13 @@ export const getWhitelist = async () => {
   return data.map(_toDomain);
 };
 
+/**
+ * @param {Object} data
+ * @param {number} data.id
+ * @param {string} data.externalId
+ * @param {CenterTypes} data.type
+ * @returns {Center}
+ */
 const _toDomain = ({ id, externalId, type }) => {
   return new Center({ id, externalId, type });
 };

@@ -8,7 +8,6 @@ import * as organizationRepository from '../../../complementary-certification/in
 import * as targetProfileHistoryRepository from '../../../shared/infrastructure/repositories/target-profile-history-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
-import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
 import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
@@ -42,7 +41,6 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
 const dependencies = {
   activeCalibratedChallengeRepository,
   attachableTargetProfileRepository,
-  candidateRepository,
   centerRepository,
   ScoBlockedAccessDatesRepository,
   challengeRepository,
@@ -61,7 +59,6 @@ const dependencies = {
 
 import { attachBadges } from './attach-badges.js';
 import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
-import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
 import { createCertificationVersion } from './create-certification-version.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findCertificationFrameworks } from './find-certification-frameworks.js';
@@ -81,7 +78,6 @@ import { updateScoBlockedAccessDate } from './update-sco-blocked-access-date.js'
 const usecasesWithoutInjectedDependencies = {
   attachBadges,
   calibrateFrameworkVersion,
-  catchingUpCandidateReconciliation,
   createCertificationVersion,
   exportScoWhitelist,
   findCertificationFrameworks,

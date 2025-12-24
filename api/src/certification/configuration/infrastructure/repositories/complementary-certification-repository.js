@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  */
@@ -7,12 +8,22 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
 
+/**
+ * @param {Object} row
+ * @param {number} row.id
+ * @param {string} row.label
+ * @param {ComplementaryCertificationKeys} row.key
+ * @returns {ComplementaryCertification}
+ */
 function _toDomain(row) {
   return new ComplementaryCertification({
     ...row,
   });
 }
 
+/**
+ * @returns {Promise<Array<ComplementaryCertification>>}
+ */
 const findAll = async function () {
   const result = await knex.from('complementary-certifications').select('id', 'label', 'key').orderBy('id', 'asc');
 
@@ -20,7 +31,7 @@ const findAll = async function () {
 };
 
 /**
- * @param {ComplementaryCertificationKey} key
+ * @param {ComplementaryCertificationKeys} key
  * @returns {Promise<ComplementaryCertification>}
  */
 const getByKey = async function (key) {
@@ -34,6 +45,11 @@ const getByKey = async function (key) {
   return _toDomain(complementaryCertification);
 };
 
+/**
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<ComplementaryCertification>}
+ */
 const getById = async function ({ id }) {
   const complementaryCertification = await knex.from('complementary-certifications').where({ id }).first();
 

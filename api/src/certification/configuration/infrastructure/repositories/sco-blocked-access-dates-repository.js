@@ -1,3 +1,4 @@
+// @ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ScoBlockedAccessDate } from '../../domain/models/ScoBlockedAccessDate.js';

@@ -1,7 +1,13 @@
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { _ } from '../../../../shared/infrastructure/utils/lodash-utils.js';
+import { isBlank } from '../../../../shared/infrastructure/utils/lodash-utils.js';
 import { AttachableTargetProfile } from '../../domain/models/AttachableTargetProfile.js';
 
+/**
+ * @param {Object} params
+ * @param {string} [params.searchTerm]
+ * @returns {Promise<Array<AttachableTargetProfile>>}
+ */
 const find = async function ({ searchTerm } = {}) {
   const targetProfiles = await knex('target-profiles')
     .select('target-profiles.id', 'target-profiles.name')
@@ -20,7 +26,7 @@ const find = async function ({ searchTerm } = {}) {
 export { find };
 
 function _searchByCriteria({ builder, searchTerm }) {
-  if (!_.isBlank(searchTerm)) {
+  if (!isBlank(searchTerm)) {
     const filteredBuilder = _searchByTargetProfileName({ builder, searchTerm });
     const isNumberOnly = /^\d+$/.test(searchTerm);
     if (isNumberOnly) {

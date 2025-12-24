@@ -21,7 +21,7 @@ class DomainTransaction {
   }
 
   /**
-   * @returns {knex}
+   * @returns {import('knex').Knex | import('knex').Knex.Transaction}
    */
   static getConnection() {
     const store = asyncLocalStorage.getStore();
