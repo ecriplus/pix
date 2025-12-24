@@ -1384,8 +1384,28 @@
     },
     "oidc": {
       "login": {
+        "signup-button": "Ik heb geen account, ik meld me aan met mijn organisatie",
         "sub-title": "om te koppelen aan uw nieuwe aanmeldingsmethode",
         "title": "Gebruik uw Pix-account"
+      },
+      "signup": {
+        "claims": {
+          "FrEduFonctAdm": "Administratieve functie",
+          "FrEduNumenHash": "Technische identificatiecode",
+          "discipline": "Discipline",
+          "employeeNumber": "Werknemersnummer",
+          "first-name-label-and-value": "Voornaam: {firstName}",
+          "last-name-label-and-value": "Naam: {lastName}",
+          "population": "Bevolking",
+          "rne": "Toewijzingsinstelling",
+          "title": "rol"
+        },
+        "description": "Er wordt een account aangemaakt met de informatie die door de organisatie is verstrekt",
+        "error": "We konden uw identiteitsgegevens niet ophalen bij de gebruikte dienst. Neem contact op met de IT-ondersteuning van deze organisatie.",
+        "login-button": "Ik heb al een account, ik log in",
+        "signup-button": "Ik maak mijn account aan",
+        "sub-title": "om toegang te krijgen tot uw Pix Orga-werkruimte",
+        "title": "Registreer u bij Pix"
       }
     },
     "organization-learner": {

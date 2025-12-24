@@ -1,3 +1,40 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import t from 'ember-intl/helpers/t';
+import pageTitle from 'ember-page-title/helpers/page-title';
+import OidcSignupForm from 'pix-orga/components/authentication/oidc-signup-form';
+import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
+
 <template>
-  <div>SIGNUP PAGE TO BE DONE</div>
+  {{pageTitle (t "pages.oidc.signup.title")}}
+
+  <AuthenticationLayout class="signin-page-layout">
+    <:content>
+      {{#if @controller.currentInvitation}}
+        <PixNotificationAlert @type="communication-orga">
+          {{t "pages.login.join-invitation" organizationName=@controller.currentInvitation.organizationName}}
+        </PixNotificationAlert>
+      {{/if}}
+
+      <div>
+        <h1 class="pix-title-m">{{t "pages.oidc.signup.title"}}</h1>
+        <h2 class="pix-body-l">{{t "pages.oidc.signup.sub-title"}}</h2>
+      </div>
+      {{#if @controller.userClaims}}
+
+        <OidcSignupForm
+          @userClaims={{@controller.userClaims}}
+          @identityProviderSlug={{@model.identity_provider_slug}}
+        />
+
+        <PixButtonLink @variant="secondary" @route="authentication.oidc.login" @model={{@model.identity_provider_slug}}>
+          {{t "pages.oidc.signup.login-button"}}
+        </PixButtonLink>
+      {{else}}
+        <PixNotificationAlert @type="error" class="oidc-signup-form__error">
+          {{t "pages.oidc.signup.error"}}
+        </PixNotificationAlert>
+      {{/if}}
+    </:content>
+  </AuthenticationLayout>
 </template>

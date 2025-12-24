@@ -1,3 +1,4 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
@@ -24,11 +25,16 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
       </div>
 
       <LoginForm
-        @isWithInvitation={{@controller.isWithInvitation}}
+        @isWithInvitation={{true}}
         @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
         @onSubmit={{@controller.redirectToAssociationConfirmation}}
       />
+
+      <PixButtonLink @variant="secondary" @route="authentication.oidc.signup" @model={{@model.identity_provider_slug}}>
+        {{t "pages.oidc.login.signup-button"}}
+      </PixButtonLink>
+
     </:content>
   </AuthenticationLayout>
 </template>
