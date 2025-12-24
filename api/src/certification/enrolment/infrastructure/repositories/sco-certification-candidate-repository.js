@@ -1,6 +1,18 @@
+// @ts-check
+/**
+ * @typedef {import ('../../domain/models/SCOCertificationCandidate.js').SCOCertificationCandidate} SCOCertificationCandidate
+ */
+
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.sessionId
+ * @param {Array<SCOCertificationCandidate>} params.scoCertificationCandidates
+ * @returns {Promise<void>}
+ */
 const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertificationCandidates }) {
   await knex.transaction(async (trx) => {
     const organizationLearnerIds = scoCertificationCandidates.map((candidate) => candidate.organizationLearnerId);
@@ -18,24 +30,43 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
     const scoCandidateToDTO = _scoCandidateToDTOForSession(sessionId);
     const candidatesToBeEnrolledDTOs = scoCertificationCandidates
       .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.includes(candidate.organizationLearnerId))
-      .map(scoCandidateToDTO);
+      .map((candidate) => scoCandidateToDTO(candidate));
 
     for (const candidateDTO of candidatesToBeEnrolledDTOs) {
-      const subscriptions = candidateDTO.subscriptions;
-      delete candidateDTO.subscriptions;
+      const { subscriptions, ...candidateToInsert } = candidateDTO;
 
-      const [{ id }] = await trx('certification-candidates').insert(candidateDTO).returning('id');
+      const [{ id }] = await trx('certification-candidates').insert(candidateToInsert).returning('id');
 
       subscriptions[0].certificationCandidateId = id;
-      delete subscriptions[0].complementaryCertificationKey;
+      // eslint-disable-next-line no-unused-vars
+      const { complementaryCertificationKey, ...subscriptionToInsert } = subscriptions[0];
 
-      await trx('certification-subscriptions').insert(subscriptions[0]);
+      await trx('certification-subscriptions').insert(subscriptionToInsert);
     }
   });
 };
 
 export { addNonEnrolledCandidatesToSession };
 
+/**
+ * @typedef {Object} SCOCertificationCandidateDTO
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {Date} birthdate
+ * @property {string} organizationLearnerId
+ * @property {string} sex
+ * @property {string} birthINSEECode
+ * @property {string} birthCity
+ * @property {string} birthCountry
+ * @property {number} sessionId
+ * @property {Array<Subscription>} subscriptions
+ */
+
+/**
+ * @function
+ * @param {number} sessionId
+ * @returns {function(SCOCertificationCandidate): SCOCertificationCandidateDTO}
+ */
 function _scoCandidateToDTOForSession(sessionId) {
   return (scoCandidate) => {
     return {
