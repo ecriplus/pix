@@ -26,8 +26,31 @@ message-conversation::part(conversation) {
     color: var(--pix-primary-700);
   }
 
-  &__reset {
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
     display: flex;
     justify-content: flex-end;
+  }
+
+  &--reset-state{
+    background-color: var(--pix-primary-10);
+    border-radius: 16px 16px 16px 0;
+  }
+
+  &--reset-intercative-state{
+    border-radius: 16px 16px 16px 0;
+  }
+}
+
+.element-custom-buttons {
+  &__reset {
+    padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+    background-color: var(--pix-primary-100);
+    border: none;
+    border-radius: 0 0 8px 8px;
   }
 }

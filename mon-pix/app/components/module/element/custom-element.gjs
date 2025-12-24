@@ -7,11 +7,14 @@ import { t } from 'ember-intl';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 
+import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModulixCustomElement extends ModuleElement {
   @tracked
   customElement;
+
+  @tracked reportInfo = { answer: null, elementId: this.args.component.id };
 
   @tracked
   resetButtonDisplayed = false;
@@ -56,7 +59,10 @@ export default class ModulixCustomElement extends ModuleElement {
       {{/if}}
 
       {{#if this.isInteractive}}
-        <fieldset class="element-custom__container">
+        <fieldset
+          class="element-custom__container
+            {{if this.resetButtonDisplayed 'element-custom--reset-intercative-state' ''}}"
+        >
           <legend class="element-custom__legend">
             <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
             <span>{{t "pages.modulix.interactiveElement.label"}}</span>
@@ -64,19 +70,25 @@ export default class ModulixCustomElement extends ModuleElement {
           <div {{didInsert this.mountCustomElement}} />
         </fieldset>
       {{else}}
-        <div {{didInsert this.mountCustomElement}} />
+        <div
+          class={{if this.resetButtonDisplayed "element-custom--reset-state" ""}}
+          {{didInsert this.mountCustomElement}}
+        />
       {{/if}}
 
-      {{#if this.resetButtonDisplayed}}
-        <div class="element-custom__reset">
+      <div class={{if this.resetButtonDisplayed "element-custom__buttons" "element-custom__button"}}>
+        {{#if this.resetButtonDisplayed}}
           <PixButton
+            class="element-custom-buttons__reset"
             @iconBefore="refresh"
             @variant="tertiary"
             @triggerAction={{this.resetCustomElement}}
             aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
-        </div>
-      {{/if}}
+        {{/if}}
+
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+      </div>
     </div>
   </template>
 }
