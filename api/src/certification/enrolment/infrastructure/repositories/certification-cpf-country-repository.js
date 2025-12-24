@@ -1,6 +1,13 @@
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CertificationCpfCountry } from '../../../shared/domain/models/CertificationCpfCountry.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {string} params.matcher
+ * @returns {Promise<CertificationCpfCountry | null> }
+ */
 const getByMatcher = async function ({ matcher }) {
   const COLUMNS = ['id', 'code', 'commonName', 'originalName', 'matcher'];
 
