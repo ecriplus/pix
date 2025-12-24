@@ -13,6 +13,7 @@ const deleteCampaignParticipation = withTransaction(async function ({
   eventLoggingJobRepository,
   assessmentRepository,
   userRecommendedTrainingRepository,
+  keepPreviousDeleted = false,
 }) {
   const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
 
@@ -20,6 +21,7 @@ const deleteCampaignParticipation = withTransaction(async function ({
     await campaignParticipationRepository.getAllCampaignParticipationsInCampaignForASameLearner({
       campaignId,
       campaignParticipationId,
+      keepPreviousDeleted,
     });
 
   for (const campaignParticipation of campaignParticipations) {

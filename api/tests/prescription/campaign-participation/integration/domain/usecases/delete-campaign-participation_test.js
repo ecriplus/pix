@@ -247,6 +247,48 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
       });
     });
 
+    it('should update deleted campaignParticipations only with anonymization', async function () {
+      // given
+
+      const deletedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        isImproved: true,
+        participantExternalId: 'email olala',
+        organizationLearnerId,
+        userId,
+        deletedAt: new Date('2024-01-01'),
+        deletedBy: databaseBuilder.factory.buildUser().id,
+        campaignId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.deleteCampaignParticipation({
+        userId: adminUserId,
+        campaignId,
+        campaignParticipationId,
+        userRole: 'ORGA_ADMIN',
+        client: 'PIX_ORGA',
+        keepPreviousDeleted: true,
+      });
+
+      // then
+      const results = await knex('campaign-participations')
+        .select('userId', 'participantExternalId', 'deletedAt', 'deletedBy')
+        .where({ organizationLearnerId });
+
+      expect(results).to.have.lengthOf(2);
+      expect(results).deep.members([
+        { userId, participantExternalId: 'email olala', deletedAt: null, deletedBy: null },
+        {
+          userId: null,
+          participantExternalId: null,
+          deletedAt: deletedParticipation.deletedAt,
+          deletedBy: deletedParticipation.deletedBy,
+        },
+      ]);
+    });
+
     it('should publish an event to historize action', async function () {
       // when
       await usecases.deleteCampaignParticipation({
