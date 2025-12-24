@@ -1,0 +1,835 @@
+{
+  "id": "5b9c6c6b-3cfa-4004-8769-ac745616d540",
+  "shortId": "9c41e513",
+  "slug": "mfa-authentification-multifacteur",
+  "title": "Plus puissante qu’un mot de passe : l’authentification multifacteur.",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/CYMFA_IND/picto_cyber_mfa_ind.svg",
+    "description": "<p>Pour accéder à un compte en ligne ou déverrouiller ses appareils numériques, il faut s’authentifier, c’est-à-dire prouver qu’on est bien la personne que l’on prétend être. 🕵️ </p><p>En plus de donner son mot de passe, une seconde étape est parfois nécessaire. Dans ce module, découvrez pourquoi et comment on ajoute cette étape de sécurité supplémentaire. 🔒</p><p><br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em><br><br></p>",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "<p>Comprendre le principe de l’authentification multifacteur</p>",
+      "<p>Différencier les trois types de facteurs d’authentification</p>",
+      "<p>Connaître les limites des trois types de facteurs d’authentification</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "87e8a784-f6d8-4023-b719-a1e0d944cd5b",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "c930a9c4-5499-4429-96bc-03208c3ca008",
+          "type": "discovery",
+          "title": "Introduction",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3d3e6e44-26b7-4ab5-a3a5-1cb0258d57fb",
+                "type": "text",
+                "content": "<p>Giulia a saisi son <strong>identifiant </strong>et son <strong>mot de passe</strong> pour se connecter à son compte sur le site AlloVéto pour prendre rendez-vous pour son chien. 🐶 </p><p>Le site AlloVéto indique à Giulia qu’un code à 6 chiffres vient de lui être envoyé par SMS sur son téléphone. Giulia doit saisir ce code sur le site pour pouvoir poursuivre sa visite. 📱<br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "69a1ce4b-e852-4fc1-a406-cc749c7d8591",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/alloveto.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "eea253df-c9c7-42bb-9e9a-b32391d6df4a",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, pourquoi le site AlloVéto demande ce code ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le site AlloVéto a été attaqué par des pirates informatiques.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp; <br>Le site AlloVéto demande une deuxième fois à Giulia de <strong>prouver qu’elle est bien la personne qu’elle déclare être</strong>. C’est une deuxième <strong>authentification</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le mot de passe de Giulia n’est plus valide.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp; <br>Le site AlloVéto demande une deuxième fois à Giulia de <strong>prouver qu’elle est bien la personne qu’elle déclare être</strong>. C’est une deuxième <strong>authentification</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Le site AlloVéto demande à Giulia de prouver son identité.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement&nbsp;! <br>Le site AlloVéto demande une deuxième fois à Giulia de <strong>prouver qu’elle est bien la personne qu’elle déclare être</strong>. C’est une deuxième <strong>authentification</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Le site AlloVéto demande une deuxième fois à Giulia de <strong>prouver qu’elle est bien la personne qu’elle déclare être</strong>. C’est une deuxième <strong>authentification</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e5d5644d-9009-4d6b-ba63-6a9b6fcd0595",
+          "type": "transition",
+          "title": "transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a6c452a3-3979-422c-99bb-571b92a7595b",
+                "type": "text",
+                "content": "<p>Demander plusieurs preuves, c’est renforcer la sécurité des accès. 🔒<br>Découvrez pourquoi et comment on ajoute une étape de sécurité supplémentaire.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "79e5e6b4-5b1a-40db-b59c-b95995d2738b",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "2433c91e-9cf9-45a7-b9eb-bfb42368387e",
+          "type": "discovery",
+          "title": "Découverte 1 : Synonymes et définition d’authentification multifacteur",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b3974328-a664-4a04-98df-4da773b4b831",
+                "type": "qcu-declarative",
+                "instruction": "<p>Comme Giulia, vous avez probablement déjà rencontré cette méthode d’authentification. Quel terme était utilisé pour désigner cette méthode ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L’authentification multifacteur</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Oui…mais pas seulement ! <br>Ces trois noms sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La double authentification</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Oui…mais pas seulement ! <br>Ces trois noms sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La validation en deux étapes</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Oui…mais pas seulement ! <br>Ces trois noms sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ces trois noms sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "f274a503-36a6-456a-8903-f6abf43bc9dd",
+          "type": "short-lesson",
+          "title": "Leçon 1 : Authentification multifacteur",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8fb3840a-8724-404d-9c10-dc421fed314c",
+                "type": "text",
+                "content": "<p>Dans la suite de ce module, nous allons utiliser le terme «&nbsp;<strong>authentification multifacteur </strong>» parfois notée <strong>MFA</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9fd904a4-e463-4158-8233-202364ce3864",
+          "type": "transition",
+          "title": "transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2cfcd0ad-673c-42f4-b77c-f53613b885c3",
+                "type": "text",
+                "content": "<p>Mais ça veut dire quoi «&nbsp;facteur&nbsp;» dans «&nbsp;multifacteur&nbsp;» ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "48080459-6e32-494b-942e-442229c81344",
+          "type": "discovery",
+          "title": "Découverte 2 : Quels facteurs d’authentification ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "513eadab-7c62-4820-bfd2-835d4609afed",
+                "type": "text",
+                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. Ces facteurs d’authentification peuvent être de <strong>différents types</strong>.</p><p><br><strong>Pour chacune des situations suivantes, classez le moyen utilisé dans la catégorie qui lui correspond&nbsp;:</strong></p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "cf7202ab-bb5d-4fe9-801b-f6c64832043b",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/solveig.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "890e31a1-dcc5-40e4-8b97-9304e225ac16",
+                      "type": "text",
+                      "content": "<p>Solveig dessine un schéma de déverrouillage pour utiliser sa tablette.</p>"
+                    },
+                    {
+                      "id": "90245348-9eaa-4192-8ada-23c4acd2c1cf",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel est le moyen utilisé pour prouver son identité ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Quelque chose qu’elle sait.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement !<br>Ce schéma de déverrouillage correspond à <strong>quelque chose qu’elle est la seule personne à connaître</strong>. C’est comme un mot de passe, un code PIN ou la réponse à une question secrète.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Quelque chose qu’elle possède.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non.<br>Ce schéma de déverrouillage correspond à <strong>quelque chose qu’elle est la seule personne à connaître</strong>. C’est comme un mot de passe, un code PIN ou la réponse à une question secrète.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Quelque chose qu’elle est.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non.<br>Ce schéma de déverrouillage correspond à <strong>quelque chose qu’elle est la seule personne à connaître</strong>. C’est comme un mot de passe, un code PIN ou la réponse à une question secrète.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "97af4dbc-08bd-4b79-8be2-deca187a834f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/otis.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "ff89e18a-7596-4a87-bdaa-8db47d7f419d",
+                      "type": "text",
+                      "content": "<p>Otis a reçu un code sur son téléphone pour accéder à la vidéo à la demande sur sa télévision.</p>"
+                    },
+                    {
+                      "id": "36c6b727-9149-4b9a-8d11-c850ba4b47c2",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel est le moyen utilisé pour prouver son identité ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Quelque chose qu’il sait.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non. <br>Le code envoyé par message utilise <strong>un objet que personne d’autre ne possède </strong>à part Otis. Ici c’est un smartphone, mais cela pourrait être une montre ou un ordinateur. Le numéro ou l’adresse mail qui reçoit le code est unique à Otis.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Quelque chose qu’il possède.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement ! <br>Le code envoyé par message utilise<strong> un objet que personne d’autre ne possède</strong> à part Otis. Ici c’est un smartphone, mais cela pourrait être une montre ou un ordinateur. Le numéro ou l’adresse mail qui reçoit le code est unique à Otis.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Quelque chose qu’il est.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non. <br>Le code envoyé par message utilise <strong>un objet que personne d’autre ne possède </strong>à part Otis. Ici c’est un smartphone, mais cela pourrait être une montre ou un ordinateur. Le numéro ou l’adresse mail qui reçoit le code est unique à Otis.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5b60aa73-5002-4965-94dd-0faf6536cb86",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/kathy.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "271ed3c4-8718-42a0-8861-5bda30537359",
+                      "type": "text",
+                      "content": "<p>Kathy montre son visage à son smartphone pour le déverrouiller.</p>"
+                    },
+                    {
+                      "id": "fa8e4888-c2b8-4d83-ba47-2cfa04ff219c",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel est le moyen utilisé pour prouver son identité ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Quelque chose qu’elle sait.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non. <br>Le visage de Kathy est <strong>une caractéristique physique ou biologique qui lui est unique</strong>. Cette méthode s’applique souvent au visage ou à l’empreinte digitale et, beaucoup plus rarement, à la reconnaissance vocale ou à l’iris de l’œil.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Quelque chose qu’elle possède.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et non. <br>Le visage de Kathy est <strong>une caractéristique physique ou biologique qui lui est unique</strong>. Cette méthode s’applique souvent au visage ou à l’empreinte digitale et, beaucoup plus rarement, à la reconnaissance vocale ou à l’iris de l’œil.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Quelque chose qu’elle est.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement !<br>Le visage de Kathy est <strong>une caractéristique physique ou biologique qui lui est unique</strong>. Cette méthode s’applique souvent au visage ou à l’empreinte digitale et, beaucoup plus rarement, à la reconnaissance vocale ou à l’iris de l’œil.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b2fce5e6-cb7a-4909-82e5-4eb8f488a357",
+          "type": "short-lesson",
+          "title": "Leçon 2 : Trois facteurs d’authentification  ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0c73ed69-90b6-442f-9aa1-716b7f7a2da3",
+                "type": "text",
+                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. <br></p><h4>Comment différencier les trois types de facteurs d’authentification ? </h4><ul><li>💬 Les facteurs de connaissance. Par exemple&nbsp;: un mot passe. </li><li>👜 Les facteurs de possession. Par exemple&nbsp;: un numéro de téléphone. </li><li>🙋 Les facteurs biométriques. Par exemple&nbsp;: une empreinte digitale.</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "90723491-4836-4287-bf9b-496ba0e83331",
+          "type": "transition",
+          "title": "Transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d9af8cc9-89a6-4154-bcd2-0b30e13dd911",
+                "type": "text",
+                "content": "<p>Tous ces facteurs d’authentification ont chacun des avantages et des inconvénients.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3cfca97d-ddb6-4a2a-9783-7f40c6313203",
+          "type": "discovery",
+          "title": "Découverte 3 :  Quelles limites aux 3 facteurs ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "643b2f24-1c97-4e2a-8b3e-9205f5cc3fd2",
+                "type": "text",
+                "content": "<p><strong>À votre avis, quels sont les inconvénients de chacun des facteurs d’authentification suivants ?</strong></p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "8193967a-9428-4ca5-ae79-f56681457750",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-mdp.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "b281e5bd-649f-4bc2-9336-ed5125db9faa",
+                      "type": "qcm",
+                      "instruction": "<p>Le mot de passe associé à un compte en ligne.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Il peut être identique pour plusieurs utilisateurs.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Il peut être perdu, volé ou oublié.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Il peut devenir inutilisable dans certaines situations.</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Il est difficile à modifier en cas de perte ou vol.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Exactement !</p>",
+                          "diagnosis": "<p>Un mot de passe peut être partagé, deviné ou réutilisé par plusieurs personnes. Il peut aussi être oublié, mais il reste généralement facile à modifier.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas tout à fait.</p>",
+                          "diagnosis": "<p>Un mot de passe peut être partagé, deviné ou réutilisé par plusieurs personnes. Il peut aussi être oublié, mais il reste généralement facile à modifier.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "178a6210-9ccd-4469-b67e-ac0099ee9fa5",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-sms.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "8ab9c319-eec5-4352-afe4-bd40225ff3b1",
+                      "type": "qcm",
+                      "instruction": "<p>Une ligne téléphonique qui reçoit un SMS.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Elle peut être identique pour plusieurs utilisateurs.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Elle peut être perdue, volée ou oubliée.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Elle peut devenir inutilisable dans certaines situations.</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Elle est difficile à modifier en cas de perte ou vol.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Exactement !</p>",
+                          "diagnosis": "<p>Un code SMS dépend du téléphone et du réseau. En cas de perte ou de vol du téléphone, une autre personne peut recevoir le code, mais ce moyen peut être remplacé.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas exactement.</p>",
+                          "diagnosis": "<p>Un code SMS dépend du téléphone et du réseau. En cas de perte ou de vol du téléphone, une autre personne peut recevoir le code, mais ce moyen peut être remplacé.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "2",
+                        "3"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "ca7faf8e-5e4f-4a27-b2a4-d4d8f5d517b4",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-empreinte.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "8ff0e26d-860c-4d3b-8edd-e116b4d18b26",
+                      "type": "qcm",
+                      "instruction": "<p>Une empreinte digitale.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Elle peut être identique pour plusieurs utilisateurs.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Elle peut être perdue, volée ou oubliée.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Elle peut devenir inutilisable dans certaines situations.</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Elle est difficile à modifier en cas de perte ou vol.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Exactement !</p>",
+                          "diagnosis": "<p>Une empreinte digitale est propre à la personne et ne peut pas être oubliée, mais elle peut devenir inutilisable en cas de blessure par exemple, et reste difficile à changer en cas de compromission.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas exactement.</p>",
+                          "diagnosis": "<p>Une empreinte digitale est propre à la personne et ne peut pas être oubliée, mais elle peut devenir inutilisable en cas de blessure par exemple, et reste difficile à changer en cas de compromission.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "553b0d84-cf57-4722-9ba9-7b0a61e644c9",
+          "type": "short-lesson",
+          "title": "Leçon 3 :Limites des facteurs d’authentification et sécurité renforcée",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "10d652ae-fb1f-4e20-8e2e-08686f539a7d",
+                "type": "text",
+                "content": "<p>Chaque type de facteur a des avantages et des inconvénients.<strong> Ils ont tous des limites</strong> en matière de sécurité.</p><p><br>🤔<strong>Bon à savoir</strong> </p><p>Certaines méthodes d’authentification sont <strong>complexes et coûteuses à mettre en place</strong>. C’est pour ça que l’authentification par iris de l’œil n’est pas répandue, elle coûte très cher. 💶</p><h4><br>Malgré ces limites, comment réduire les risques d’usurpation d’identité ?&nbsp; </h4><p>En demandant des facteurs d’authentification de natures différentes. 🔒🔒</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3d9fe787-e3f9-4b27-b02d-4db93f0911ed",
+          "type": "transition",
+          "title": "Transition 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4c089ab6-8fbd-48ff-9362-cf44b8ee4b28",
+                "type": "text",
+                "content": "<p>Pourquoi certains services proposent l’authentification multifacteur et d’autres non ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "700d9c1a-e017-4949-8376-dd66a4012c6b",
+          "type": "discovery",
+          "title": "Découverte 4 : Quels services imposent la MFA ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f74ef229-fadd-4346-a7b5-284057332d4c",
+                "type": "qcm",
+                "instruction": "<p>Sur quels services avez-vous déjà rencontré une authentification multifacteur pour vous connecter ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Une messagerie professionnelle</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Une plateforme de réservation ( terrains de tennis, restaurants, etc.)</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Un site d’actualités</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Un site de jeux en ligne</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Une banque en ligne</p>"
+                  },
+                  {
+                    "id": "6",
+                    "content": "<p>Un réseau social</p>"
+                  },
+                  {
+                    "id": "7",
+                    "content": "<p>Un site de suivi médical</p>"
+                  },
+                  {
+                    "id": "8",
+                    "content": "<p>Un autre service</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>&nbsp;&nbsp;</p>",
+                    "diagnosis": "<p>Beaucoup de services en ligne imposent l’authentification multifacteur. Ce sont notamment des services qui comportent <strong>des données personnelles ou des informations sensibles</strong> (informations bancaires, médicales, administratives, etc.)</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>&nbsp;&nbsp;</p>",
+                    "diagnosis": "<p>Beaucoup de services en ligne imposent l’authentification multifacteur. Ce sont notamment des services qui comportent des données personnelles ou des informations sensibles (informations bancaires, médicales, administratives, etc.)</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "820b7c6d-539c-4a7d-ae7f-226e62bd44e2",
+          "type": "short-lesson",
+          "title": "Leçon 4 : Activer l’authentification multifacteur",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c10935b1-81bb-41fd-b911-97d09ec4f67e",
+                "type": "text",
+                "content": "<h4>Et si l’authentification multifacteur n’est pas activée ?</h4><ul><li>⚙️Si le service <strong>propose </strong>la MFA, vous pouvez la configurer <strong>vous-même dans les paramètres</strong> de votre compte.&nbsp;</li><li>‼️Si le service <strong>impose </strong>désormais la MFA, vous serez invité à la <strong>configurer </strong>lors de votre <strong>prochaine connexion</strong>.</li><li>📅 Certains services ne proposent pas la MFA, ou pas encore.</li></ul><p><br>Activer l’authentification multifacteur soi-même ou quand on vous le propose, c’est <strong>protéger votre compte</strong> et les informations qu’il contient. 🔒</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cd50b7ab-dea4-41f4-aa11-423fe1b30300",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "63e1ad0d-548d-4194-b006-34e72170e72c",
+          "type": "summary",
+          "title": "Récapitulatif ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c88354b1-ec04-4922-898c-15bbeba3cdd5",
+                "type": "text",
+                "content": "<ul><li>L’authentification multifacteur, c’est quand on vous demande <strong>au moins deux facteurs d’authentification</strong> pour prouver votre identité. 2️⃣</li><br><li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je sais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><br><li>Une authentification multifacteur est <strong>plus sécurisée si les types de facteurs demandés sont différents</strong>, car leurs limites sont différentes. 🔒🔒</li><br><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong>. ⚙️</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4b9e74e3-3a35-4add-aa6b-297d1ee3d88b",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "e4e06d07-a797-4603-a9b7-c99893ba0bf8",
+          "type": "activity",
+          "title": "Définition authentification multifacteur",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "94d9a539-eb01-4c2a-9389-83151c24a622",
+                "type": "qcu",
+                "instruction": "<p>Complétez la phrase suivante&nbsp;: Dans le cas d’une authentification multifacteur, pour se connecter, il faut…</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>entrer plusieurs fois son mot de passe.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Entrer plusieurs fois son mot de passe ne correspond pas à une authentification multifacteur. Cela revient à remplir deux fois le même facteur d’authentification. N’hésitez pas à réessayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>fournir plusieurs preuves d’identité.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p>Dans le cas d’une authentification multifacteur, pour se connecter, il faut fournir plusieurs preuves d’identité.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>fournir un mot de passe contenant plusieurs types de caractères.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Fournir un mot de passe est un facteur d’authentification simple. Un facteur est un moyen de s’authentifier, une authentification multifacteur signifie donc plusieurs facteurs. N’hésitez pas à réessayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>posséder plusieurs comptes.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>L’authentification multifacteur ne nécessite pas d’avoir plusieurs comptes. Un facteur est un moyen de s’authentifier, une authentification multifacteur signifie donc plusieurs facteurs. N’hésitez pas à réessayer.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "565663a6-d1e3-4cc8-bd7e-9f01ddad7133",
+          "type": "activity",
+          "title": "Typologie de facteurs",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "63394140-acf8-402f-bf33-0c30f603521a",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "Classification",
+                "url": "https://epreuves.pix.fr/fr/tableau-double-entree/example_qcu.html",
+                "instruction": "<p>Classez les facteurs d’authentification ci-dessous selon leur catégorie&nbsp;:</p>",
+                "solution": " { \"from\": \"pix\", \"answer\": \"1 : 1 / 2 : 3 / 3 : 2 / 4 : 2\" }",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "04a30819-895d-4283-8396-6d4e4838616a",
+          "type": "activity",
+          "title": " Sécurité des associations de facteurs",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "660f48bc-5ad8-40a8-b13f-9b4a3b0b67a4",
+                "type": "qcu",
+                "instruction": "<p>Dans la liste ci-dessous, indiquez quelle association de facteurs d’authentification est la plus sécurisée.</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Code PIN + schéma de déverrouillage</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Ce sont deux facteurs de connaissance, leurs limites sont donc similaires (oublié, partagé, deviné, utilisé par d’autres, etc.). Vous pouvez réessayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Mot de passe + question secrète</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Ce sont deux facteurs de connaissance, leurs limites sont donc similaires (oublié, partagé, deviné, utilisé par d’autres, etc.). Vous pouvez réessayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Code PIN + code reçu par SMS</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p>On associe ici un facteur de connaissance et un facteur de possession, c’est plus sécurisé car ces deux facteurs ont des limites différentes.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Détection du visage&nbsp; + empreinte digitale</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Ce sont deux facteurs biométriques, leurs limites sont donc similaires (peut devenir inutilisable en cas de blessure ou d’accident, difficile à changer, etc.). Vous pouvez réessayer.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8c7544ea-add5-4de4-8936-7a2e56350b40",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "aa617854-121d-40e7-ae70-94326fd4eb8d",
+          "type": "challenge",
+          "title": "défi : Activer l’authentification multifacteur sur un compte en ligne.",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1309371a-0747-4353-a0a2-f22184f4e012",
+                "type": "custom-draft",
+                "title": "Activer l’authentification multifacteur sur un compte en ligne.",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_MFA_IND-defi-changer-MFA.html",
+                "instruction": "<p>Ambre souhaite activer l’authentification multifacteur de son compte sur hotelsreservations.com.<br>Dans le simulateur suivant, aidez Ambre à paramétrer son compte.</p>",
+                "height": 430
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
