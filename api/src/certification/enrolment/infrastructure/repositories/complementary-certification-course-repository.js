@@ -1,6 +1,12 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { ComplementaryCertificationCourseWithResults } from '../../domain/models/ComplementaryCertificationCourseWithResults.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.userId
+ * @returns {Promise<Array<ComplementaryCertificationCourseWithResults>>}
+ */
 const findByUserId = async function ({ userId }) {
   const results = await knex
     .select({
