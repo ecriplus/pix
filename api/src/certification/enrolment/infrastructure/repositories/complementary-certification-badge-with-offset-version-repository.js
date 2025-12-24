@@ -1,6 +1,13 @@
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { ComplementaryCertificationBadgeWithOffsetVersion } from '../../domain/models/ComplementaryCertificationBadge.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.complementaryCertificationBadgeId
+ * @returns {Promise<Array<ComplementaryCertificationBadgeWithOffsetVersion>>}
+ */
 export async function getAllWithSameTargetProfile({ complementaryCertificationBadgeId }) {
   const results = await knex('complementary-certification-badges')
     .select(
@@ -29,6 +36,22 @@ export async function getAllWithSameTargetProfile({ complementaryCertificationBa
   return results.map(_toDomain);
 }
 
+/**
+ * @typedef {Object} ComplementaryCertificationBadgeWithOffsetVersionDTO
+ * @property {number} id
+ * @property {number} minimumEarnedPix
+ * @property {number} offsetVersion
+ * @property {number} level
+ * @property {string} label
+ * @property {string} imageUrl
+ * @property {Date} detachedAt
+ */
+
+/**
+ * @function
+ * @param {ComplementaryCertificationBadgeWithOffsetVersionDTO} data
+ * @returns {ComplementaryCertificationBadgeWithOffsetVersion}
+ */
 function _toDomain(data) {
   return new ComplementaryCertificationBadgeWithOffsetVersion({
     id: data.id,
