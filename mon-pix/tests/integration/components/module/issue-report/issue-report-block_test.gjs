@@ -55,7 +55,7 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
           const recordStub = sinon.stub(issueReportService, 'record');
           const elementId = 'b37e8e8d-9875-4b15-85c0-0373ffbb0805';
           const answer = 42;
-          const categoryKey = 'accessibility';
+          const categoryKey = 'ACCESSIBILITY_ISSUE';
           const comment = 'Mon super commentaire de Noel et de joie';
           const reportInfo = { elementId, answer };
 
@@ -70,7 +70,7 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
 
           await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
           await screen.findByRole('listbox');
-          await click(screen.getByRole('option', { name: 'Accessibilité de l‘épreuve' }));
+          await click(screen.getByRole('option', { name: 'Problème d’accessibilité' }));
 
           await fillIn(
             screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }),
@@ -111,7 +111,7 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
 
           await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
           await screen.findByRole('listbox');
-          await click(screen.getByRole('option', { name: 'La réponse' }));
+          await click(screen.getByRole('option', { name: 'Autre' }));
 
           await fillIn(
             screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }),
@@ -125,7 +125,7 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
           await waitForDialog();
 
           // then
-          const allAccessibilityOptions = screen.getAllByText('Accessibilité de l‘épreuve');
+          const allAccessibilityOptions = screen.getAllByText('Je ne comprends pas la question');
           assert.strictEqual(allAccessibilityOptions.length, 2);
           assert
             .dom(screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }))
