@@ -11,7 +11,7 @@ describe('Unit | UseCase | get-complementary-certification-target-profile-histor
       getDetachedTargetProfilesHistoryByComplementaryCertificationId: sinon.stub(),
     };
     complementaryCertificationForTargetProfileAttachmentRepository = {
-      getById: sinon.stub(),
+      getByKey: sinon.stub().resolves(domainBuilder.buildComplementaryCertificationForTargetProfileAttachment()),
     };
   });
 
@@ -19,9 +19,6 @@ describe('Unit | UseCase | get-complementary-certification-target-profile-histor
     // given
     const complementaryCertification = domainBuilder.buildComplementaryCertificationForTargetProfileAttachment();
     const complementaryCertificationId = complementaryCertification.id;
-    complementaryCertificationForTargetProfileAttachmentRepository.getById
-      .withArgs({ complementaryCertificationId })
-      .resolves(complementaryCertification);
 
     const attachedTargetProfileHistoryForAdmin = domainBuilder.buildTargetProfileHistoryForAdmin({
       detachedAt: null,
