@@ -112,7 +112,7 @@ Router.map(function () {
     });
 
     this.route('complementary-certifications', function () {
-      this.route('item', { path: '/:complementary_certification_id' }, function () {
+      this.route('item', { path: '/:complementary_certification_key' }, function () {
         this.route('framework', function () {
           this.route('new');
         });

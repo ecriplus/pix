@@ -1,7 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import TargetProfile from 'pix-admin/components/complementary-certifications/item/target-profile';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
@@ -12,7 +11,6 @@ module('Integration | Component | complementary-certifications/item/target-profi
     test('it should display target profile information, badge list and history', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const serviceRouter = this.owner.lookup('service:router');
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
@@ -33,12 +31,10 @@ module('Integration | Component | complementary-certifications/item/target-profi
         ],
       });
 
-      sinon
-        .stub(serviceRouter, 'currentRoute')
-        .value({ parent: { parent: { params: { complementary_certification_id: complementaryCertification.id } } } });
-
       // when
-      const screen = await render(<template><TargetProfile /></template>);
+      const screen = await render(
+        <template><TargetProfile @complementaryCertification={{complementaryCertification}} /></template>,
+      );
 
       // then
       assert.dom(screen.getByText('Rattacher un nouveau profil cible')).exists();
@@ -66,7 +62,6 @@ module('Integration | Component | complementary-certifications/item/target-profi
     test('it should only display target profile history', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const serviceRouter = this.owner.lookup('service:router');
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.adminMember = { isSuperAdmin: true };
       const complementaryCertification = store.createRecord('complementary-certification', {
@@ -87,12 +82,10 @@ module('Integration | Component | complementary-certifications/item/target-profi
         ],
       });
 
-      sinon
-        .stub(serviceRouter, 'currentRoute')
-        .value({ parent: { parent: { params: { complementary_certification_id: complementaryCertification.id } } } });
-
       // when
-      const screen = await render(<template><TargetProfile /></template>);
+      const screen = await render(
+        <template><TargetProfile @complementaryCertification={{complementaryCertification}} /></template>,
+      );
 
       // then
       assert.dom(screen.queryByText('Rattacher un nouveau profil cible')).doesNotExist();

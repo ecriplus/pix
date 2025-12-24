@@ -13,7 +13,6 @@ import History from './target-profile/history';
 export default class ComplementaryCertificationFramework extends Component {
   @service currentUser;
   @service store;
-  @service router;
   @tracked targetProfilesHistory;
   @tracked currentConsolidatedFramework;
   @tracked frameworkHistory;
@@ -25,12 +24,8 @@ export default class ComplementaryCertificationFramework extends Component {
   }
 
   async #onMount() {
-    const routeParams = this.router.currentRoute.parent.parent.params;
-
-    const complementaryCertification = await this.store.peekRecord(
-      'complementary-certification',
-      routeParams.complementary_certification_id,
-    );
+    const complementaryCertification = this.args.complementaryCertification;
+    await complementaryCertification.reload();
 
     this.targetProfilesHistory = complementaryCertification.targetProfilesHistory;
 

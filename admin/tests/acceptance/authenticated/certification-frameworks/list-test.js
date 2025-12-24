@@ -79,7 +79,7 @@ module('Acceptance | Certification frameworks | list', function (hooks) {
       await click(screen.getByRole('link', { name: 'Pix+ Droit' }));
 
       // then
-      assert.strictEqual(currentURL(), '/complementary-certifications/1/framework');
+      assert.strictEqual(currentURL(), '/complementary-certifications/DROIT/framework');
     });
   });
 });

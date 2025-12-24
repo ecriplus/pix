@@ -106,7 +106,7 @@ module('Integration | Component | certification-frameworks/list', function (hook
     // then
     const link = screen.getByRole('link', { name: t('components.certification-frameworks.labels.DROIT') });
     assert.dom(link).exists();
-    assert.dom(link).hasAttribute('href', '/complementary-certifications/123');
+    assert.dom(link).hasAttribute('href', '/complementary-certifications/DROIT');
   });
 
   test('it should display plain text when complementary certification does not exist', async function (assert) {

@@ -15,22 +15,6 @@ module('Integration | Component | complementary-certifications/item/framework', 
     currentUser.adminMember = { isCertif: true };
 
     store = this.owner.lookup('service:store');
-
-    const serviceRouter = this.owner.lookup('service:router');
-    sinon.stub(serviceRouter, 'currentRoute').value({
-      parent: {
-        parent: {
-          params: {
-            complementary_certification_id: 'complementary-certification-id',
-          },
-        },
-      },
-    });
-
-    store.peekRecord = sinon.stub().resolves({
-      key: 'complementary-certification-key',
-      targetProfilesHistory: [],
-    });
     store.queryRecord = sinon.stub().resolves({});
   });
 
@@ -42,10 +26,17 @@ module('Integration | Component | complementary-certifications/item/framework', 
 
     test('it should display a framework creation button', async function (assert) {
       // given
+      const complementaryCertification = {
+        key: 'complementary-certification-key',
+        targetProfilesHistory: [],
+        reload: sinon.stub().resolves(),
+      };
       store.findRecord = sinon.stub().returns();
 
       // when
-      const screen = await render(<template><Framework /></template>);
+      const screen = await render(
+        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+      );
 
       // then
       assert.dom(screen.getByText(t('components.complementary-certifications.item.framework.create-button'))).exists();
@@ -54,10 +45,17 @@ module('Integration | Component | complementary-certifications/item/framework', 
     module('when there is no current consolidated framework', function () {
       test('it should display the information and not the details component', async function (assert) {
         // given
+        const complementaryCertification = {
+          key: 'complementary-certification-key',
+          targetProfilesHistory: [],
+          reload: sinon.stub().resolves(),
+        };
         store.findRecord = sinon.stub().returns();
 
         // when
-        const screen = await render(<template><Framework /></template>);
+        const screen = await render(
+          <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        );
 
         // then
         assert
@@ -78,10 +76,17 @@ module('Integration | Component | complementary-certifications/item/framework', 
   module('when user has another accepted role', function () {
     test('it should not display a framework creation button', async function (assert) {
       // given
+      const complementaryCertification = {
+        key: 'complementary-certification-key',
+        targetProfilesHistory: [],
+        reload: sinon.stub().resolves(),
+      };
       store.findRecord = sinon.stub().returns();
 
       // when
-      const screen = await render(<template><Framework /></template>);
+      const screen = await render(
+        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+      );
 
       // then
       assert
@@ -94,6 +99,11 @@ module('Integration | Component | complementary-certifications/item/framework', 
     module('when a current consolidated framework exists', function () {
       test('it should display the details component', async function (assert) {
         // given
+        const complementaryCertification = {
+          key: 'complementary-certification-key',
+          targetProfilesHistory: [],
+          reload: sinon.stub().resolves(),
+        };
         store.findRecord = sinon.stub().resolves({
           hasMany: sinon.stub().returns({
             value: sinon.stub().returns([]),
@@ -101,7 +111,9 @@ module('Integration | Component | complementary-certifications/item/framework', 
         });
 
         // when
-        const screen = await render(<template><Framework /></template>);
+        const screen = await render(
+          <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        );
 
         // then
         assert
@@ -118,6 +130,11 @@ module('Integration | Component | complementary-certifications/item/framework', 
       module('when there is no existing framework history', function () {
         test('it should not display the framework history', async function (assert) {
           // given
+          const complementaryCertification = {
+            key: 'complementary-certification-key',
+            targetProfilesHistory: [],
+            reload: sinon.stub().resolves(),
+          };
           store.findRecord = sinon.stub().resolves({
             hasMany: sinon.stub().returns({
               value: sinon.stub().returns([]),
@@ -126,7 +143,9 @@ module('Integration | Component | complementary-certifications/item/framework', 
           store.queryRecord = sinon.stub().resolves({ history: [] });
 
           // when
-          const screen = await render(<template><Framework /></template>);
+          const screen = await render(
+            <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+          );
 
           // then
           assert
@@ -142,6 +161,11 @@ module('Integration | Component | complementary-certifications/item/framework', 
       module('when there are existing framework versions', function () {
         test('it should display the framework history', async function (assert) {
           // given
+          const complementaryCertification = {
+            key: 'complementary-certification-key',
+            targetProfilesHistory: [],
+            reload: sinon.stub().resolves(),
+          };
           store.findRecord = sinon.stub().resolves({
             hasMany: sinon.stub().returns({
               value: sinon.stub().returns([]),
@@ -152,7 +176,9 @@ module('Integration | Component | complementary-certifications/item/framework', 
             .resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
 
           // when
-          const screen = await render(<template><Framework /></template>);
+          const screen = await render(
+            <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+          );
 
           // then
           assert
