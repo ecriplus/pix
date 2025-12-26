@@ -121,7 +121,7 @@ export async function createUsernameByUser({ user: { firstName, lastName, birthd
   return await generateUsernameUntilAvailable({ firstPart, secondPart, userRepository });
 }
 
-export async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepository }) {
+async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepository }) {
   let randomPart = secondPart;
 
   let username;

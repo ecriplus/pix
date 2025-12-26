@@ -567,59 +567,6 @@ describe('Unit | Service | user-reconciliation-service', function () {
     });
   });
 
-  describe('#generateUsernameUntilAvailable', function () {
-    let userRepository;
-
-    beforeEach(function () {
-      userRepository = {
-        isUsernameAvailable: sinon.stub(),
-      };
-    });
-
-    it('should generate a username with original inputs', async function () {
-      // given
-      const firstPart = 'firstname.lastname';
-      const secondPart = '0101';
-
-      userRepository.isUsernameAvailable.resolves();
-      const expectedUsername = firstPart + secondPart;
-
-      // when
-      const result = await userReconciliationService.generateUsernameUntilAvailable({
-        firstPart,
-        secondPart,
-        userRepository,
-      });
-
-      // then
-      expect(result).to.equal(expectedUsername);
-    });
-
-    it('should generate an other username when exist with original inputs', async function () {
-      // given
-      const firstPart = 'firstname.lastname';
-      const secondPart = '0101';
-
-      userRepository.isUsernameAvailable
-        .onFirstCall()
-        .rejects(new AlreadyRegisteredUsernameError())
-        .onSecondCall()
-        .resolves();
-
-      const originalUsername = firstPart + secondPart;
-
-      // when
-      const result = await userReconciliationService.generateUsernameUntilAvailable({
-        firstPart,
-        secondPart,
-        userRepository,
-      });
-
-      // then
-      expect(result).to.not.equal(originalUsername);
-    });
-  });
-
   describe('#createUsernameByUserAndStudentId', function () {
     const user = {
       firstName: 'fakeFirst-Name',
