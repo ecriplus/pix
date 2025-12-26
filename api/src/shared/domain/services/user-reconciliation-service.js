@@ -20,7 +20,7 @@ import { areTwoStringsCloseEnough } from './string-comparison-service.js';
 
 const STRICT_MATCH_RATIO = 0;
 
-function findMatchingCandidateIdForGivenUser(matchingUserCandidates, user) {
+export function findMatchingCandidateIdForGivenUser(matchingUserCandidates, user) {
   const standardizedUser = _standardizeUser(user);
   const standardizedMatchingUserCandidates = lodash.map(matchingUserCandidates, _standardizeMatchingCandidate);
 
@@ -35,7 +35,7 @@ function findMatchingCandidateIdForGivenUser(matchingUserCandidates, user) {
   );
 }
 
-async function findMatchingSupOrganizationLearnerIdForGivenOrganizationIdAndUser({
+export async function findMatchingSupOrganizationLearnerIdForGivenOrganizationIdAndUser({
   organizationId,
   reconciliationInfo: { studentNumber, firstName, lastName, birthdate },
   supOrganizationLearnerRepository,
@@ -61,7 +61,7 @@ async function findMatchingSupOrganizationLearnerIdForGivenOrganizationIdAndUser
   return organizationLearner;
 }
 
-async function findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
+export async function findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
   organizationId,
   reconciliationInfo: { firstName, lastName, birthdate },
   organizationLearnerRepository,
@@ -83,7 +83,7 @@ async function findMatchingOrganizationLearnerForGivenOrganizationIdAndReconcili
   return lodash.find(organizationLearners, { id: organizationLearnerId });
 }
 
-async function assertStudentHasAnAlreadyReconciledAccount(
+export async function assertStudentHasAnAlreadyReconciledAccount(
   organizationLearner,
   userRepository,
   obfuscationService,
@@ -109,6 +109,41 @@ async function assertStudentHasAnAlreadyReconciledAccount(
       obfuscationService,
     );
   }
+}
+
+export async function createUsernameByUser({ user: { firstName, lastName, birthdate }, userRepository }) {
+  const standardizeUser = _standardizeUser({ firstName, lastName });
+  const [, month, day] = birthdate.split('-');
+
+  const firstPart = standardizeUser.firstName + '.' + standardizeUser.lastName;
+  const secondPart = day + month;
+
+  return await generateUsernameUntilAvailable({ firstPart, secondPart, userRepository });
+}
+
+export async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepository }) {
+  let randomPart = secondPart;
+
+  let username;
+  let isUsernameAvailable;
+
+  do {
+    username = firstPart + randomPart;
+    isUsernameAvailable = true;
+
+    try {
+      await userRepository.isUsernameAvailable(username);
+    } catch (error) {
+      if (error instanceof AlreadyRegisteredUsernameError) {
+        isUsernameAvailable = false;
+        randomPart = _generateCode();
+      } else {
+        throw error;
+      }
+    }
+  } while (!isUsernameAvailable);
+
+  return username;
 }
 
 async function _buildStudentReconciliationError(userId, errorContext, userRepository, obfuscationService) {
@@ -194,48 +229,4 @@ function _candidateHasSimilarLastName({ lastName }, maxAcceptableRatio = LEVENSH
 // TODO Export all functions generating random codes to an appropriate service
 const _generateCode = () => {
   return randomString.generate({ length: 4, charset: 'numeric' });
-};
-
-async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepository }) {
-  let randomPart = secondPart;
-
-  let username;
-  let isUsernameAvailable;
-
-  do {
-    username = firstPart + randomPart;
-    isUsernameAvailable = true;
-
-    try {
-      await userRepository.isUsernameAvailable(username);
-    } catch (error) {
-      if (error instanceof AlreadyRegisteredUsernameError) {
-        isUsernameAvailable = false;
-        randomPart = _generateCode();
-      } else {
-        throw error;
-      }
-    }
-  } while (!isUsernameAvailable);
-
-  return username;
-}
-
-async function createUsernameByUser({ user: { firstName, lastName, birthdate }, userRepository }) {
-  const standardizeUser = _standardizeUser({ firstName, lastName });
-  const [, month, day] = birthdate.split('-');
-
-  const firstPart = standardizeUser.firstName + '.' + standardizeUser.lastName;
-  const secondPart = day + month;
-
-  return await generateUsernameUntilAvailable({ firstPart, secondPart, userRepository });
-}
-
-export {
-  assertStudentHasAnAlreadyReconciledAccount,
-  createUsernameByUser,
-  findMatchingCandidateIdForGivenUser,
-  findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo,
-  findMatchingSupOrganizationLearnerIdForGivenOrganizationIdAndUser,
-  generateUsernameUntilAvailable,
 };
