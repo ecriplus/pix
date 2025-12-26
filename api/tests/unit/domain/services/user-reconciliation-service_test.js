@@ -583,30 +583,34 @@ describe('Unit | Service | user-reconciliation-service', function () {
       };
     });
 
-    it('should generate a username with original user properties', async function () {
-      // given
-      userRepository.isUsernameAvailable.resolves();
+    context('when no other username based on user properties is already present in userRepository', function () {
+      it('generates a username based on user properties', async function () {
+        // given
+        userRepository.isUsernameAvailable.resolves();
 
-      // when
-      const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
+        // when
+        const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
 
-      // then
-      expect(result).to.equal(originaldUsername);
+        // then
+        expect(result).to.equal(originaldUsername);
+      });
     });
 
-    it('should generate a other username when exist whith original inputs', async function () {
-      // given
-      userRepository.isUsernameAvailable
-        .onFirstCall()
-        .rejects(new AlreadyRegisteredUsernameError())
-        .onSecondCall()
-        .resolves();
+    context('when another username based on user properties is already present in userRepository', function () {
+      it('generates another username with a random part', async function () {
+        // given
+        userRepository.isUsernameAvailable
+          .onFirstCall()
+          .rejects(new AlreadyRegisteredUsernameError())
+          .onSecondCall()
+          .resolves();
 
-      // when
-      const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
+        // when
+        const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
 
-      // then
-      expect(result).to.not.equal(originaldUsername);
+        // then
+        expect(result).to.not.equal(originaldUsername);
+      });
     });
   });
 
