@@ -567,7 +567,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
     });
   });
 
-  describe('#createUsernameByUserAndStudentId', function () {
+  describe('#createUsernameByUser', function () {
     const user = {
       firstName: 'fakeFirst-Name',
       lastName: 'fake LastName',
