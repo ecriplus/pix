@@ -573,10 +573,8 @@ describe('Unit | Service | user-reconciliation-service', function () {
       lastName: 'fake LastName',
       birthdate: '2008-03-01',
     };
-    const originaldUsername = 'fakefirstname.fakelastname0103';
 
     let userRepository;
-
     beforeEach(function () {
       userRepository = {
         isUsernameAvailable: sinon.stub(),
@@ -592,24 +590,32 @@ describe('Unit | Service | user-reconciliation-service', function () {
         const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
 
         // then
-        expect(result).to.equal(originaldUsername);
+        expect(result).to.equal('fakefirstname.fakelastname0103');
       });
     });
 
     context('when another username based on user properties is already present in userRepository', function () {
       it('generates another username with a random part', async function () {
         // given
-        userRepository.isUsernameAvailable
-          .onFirstCall()
-          .rejects(new AlreadyRegisteredUsernameError())
-          .onSecondCall()
-          .resolves();
+        const defaultUsername = 'fakefirstname.fakelastname0103';
+
+        userRepository.isUsernameAvailable.callsFake(async function (username) {
+          if (userRepository.isUsernameAvailable.callCount == 1) {
+            throw new AlreadyRegisteredUsernameError();
+          }
+
+          if (username == defaultUsername) {
+            throw new AlreadyRegisteredUsernameError();
+          }
+
+          return username;
+        });
 
         // when
         const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
 
         // then
-        expect(result).to.not.equal(originaldUsername);
+        expect(result).to.not.equal(defaultUsername);
       });
     });
   });
