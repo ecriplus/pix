@@ -25,7 +25,6 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
       </div>
 
       <LoginForm
-        @isWithInvitation={{true}}
         @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
         @onSubmit={{@controller.redirectToAssociationConfirmation}}
