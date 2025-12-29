@@ -13,10 +13,10 @@ export async function buildCertificationCenters(databaseBuilder) {
     secondUserWithInvitation,
   ] = [
     {
-      firstName: 'Maude',
-      lastName: 'Erateur',
-      email: 'maude.erateur@example.net',
-      username: 'maude.erateur',
+      firstName: 'Certifs',
+      lastName: 'Accès',
+      email: 'certacces@example.net',
+      username: 'certacces',
     },
     {
       firstName: 'Otto',
