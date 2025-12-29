@@ -12,12 +12,24 @@ export async function findIdsByTagNames(tagNames) {
     .orderBy('organization-tags.organizationId');
 }
 
+export async function findIdentityProviderForCampaignsByCampaignId(campaignId) {
+  const { identityProviderForCampaigns } = await knex
+    .select('organizations.identityProviderForCampaigns')
+    .from('organizations')
+    .join('campaigns', 'campaigns.organizationId', 'organizations.id')
+    .where('campaigns.id', campaignId)
+    .first();
+
+  return identityProviderForCampaigns;
+}
+
 export async function findByIds(organizationIds) {
   const rawOrganizations = await knex
     .select('id', 'name', 'externalId')
     .from('organizations')
     .whereIn('id', organizationIds)
     .orderBy('id');
+
   return rawOrganizations.map(toDomain);
 }
 

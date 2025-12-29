@@ -1,6 +1,8 @@
+import { POLE_EMPLOI } from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { Organization } from '../../../../../src/maddo/domain/models/Organization.js';
 import {
   findByIds,
+  findIdentityProviderForCampaignsByCampaignId,
   findIdsByTagNames,
 } from '../../../../../src/maddo/infrastructure/repositories/organization-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
@@ -60,6 +62,38 @@ describe('Maddo | Infrastructure | Repositories | Integration | organization', f
           externalId: 'external-id2',
         }),
       ]);
+    });
+  });
+
+  describe('#findIdentityProviderForCampaignsByCampaignId', function () {
+    it('returns the identity provider for campaigns associated with the given campaign', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization({
+        identityProviderForCampaigns: POLE_EMPLOI.code,
+      });
+      const campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      await databaseBuilder.commit();
+
+      // when
+      const identityProviderForCampaigns = await findIdentityProviderForCampaignsByCampaignId(campaign.id);
+
+      // then
+      expect(identityProviderForCampaigns).to.equal(POLE_EMPLOI.code);
+    });
+
+    it('returns null when the organization has no identity provider for campaigns', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization({
+        identityProviderForCampaigns: null,
+      });
+      const campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      await databaseBuilder.commit();
+
+      // when
+      const identityProviderForCampaigns = await findIdentityProviderForCampaignsByCampaignId(campaign.id);
+
+      // then
+      expect(identityProviderForCampaigns).to.be.null;
     });
   });
 });

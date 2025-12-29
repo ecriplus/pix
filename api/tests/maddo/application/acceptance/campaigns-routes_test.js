@@ -18,7 +18,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
 
   describe('GET /api/campaigns/{campaignId}/participations', function () {
     context('when campaign type is ASSESSMENT', function () {
-      it('returns the list of all participations of campaign with tubes and masteryRate with an HTTP status code 200', async function () {
+      it('returns the list of all participations of campaign with tubes, stages and masteryRate with an HTTP status code 200', async function () {
         // given
         const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
         databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
