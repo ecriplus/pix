@@ -1,8 +1,3 @@
-import {
-  CORE_CERTIFICATION,
-  DOUBLE_CORE_CLEA_CERTIFICATION,
-  JuryCertificationSummary,
-} from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import * as juryCertificationSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
 import {
   CertificationIssueReportCategory,
@@ -11,7 +6,7 @@ import {
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | JuryCertificationSummary', function () {
@@ -72,7 +67,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           certificationCourseId: manyAsrCertification.id,
           assessmentId: manyAsrAssessmentId,
           createdAt: new Date('2018-04-15T00:00:00Z'),
-          status: assessmentResultStatuses.VALIDATED,
+          status: AssessmentResult.status.VALIDATED,
         });
 
         return databaseBuilder.commit();
@@ -117,7 +112,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
           // then
           expect(juryCertificationSummaries[0].pixScore).to.equal(latestAssessmentResult.pixScore);
-          expect(juryCertificationSummaries[0].status).to.equal(JuryCertificationSummary.statuses.VALIDATED);
+          expect(juryCertificationSummaries[0].status).to.equal(AssessmentResult.status.VALIDATED);
           expect(juryCertificationSummaries[0].firstName).to.equal(manyAsrCertification.firstName);
           expect(juryCertificationSummaries[0].lastName).to.equal(manyAsrCertification.lastName);
           expect(juryCertificationSummaries[0].createdAt).to.deep.equal(manyAsrCertification.createdAt);
@@ -133,10 +128,10 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
           // then
           expect(juryCertificationSummaries[1].id).to.equal(startedCertification.id);
-          expect(juryCertificationSummaries[1].status).to.equal(JuryCertificationSummary.statuses.STARTED);
+          expect(juryCertificationSummaries[1].status).to.equal(Assessment.states.STARTED);
 
           expect(juryCertificationSummaries[2].id).to.equal(otherStartedCertification.id);
-          expect(juryCertificationSummaries[2].status).to.equal(JuryCertificationSummary.statuses.STARTED);
+          expect(juryCertificationSummaries[2].status).to.equal(Assessment.states.STARTED);
         });
       });
     });
@@ -200,7 +195,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         dbf.buildAssessmentResult({
           assessmentId: manyAsrAssessmentId,
           createdAt: new Date('2018-04-15T00:00:00Z'),
-          status: assessmentResultStatuses.VALIDATED,
+          status: AssessmentResult.status.VALIDATED,
         });
 
         await databaseBuilder.commit();
@@ -311,7 +306,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         // then
         expect(juryCertificationSummaries).to.have.lengthOf(1);
-        expect(juryCertificationSummaries[0].certificationObtained).to.equal(DOUBLE_CORE_CLEA_CERTIFICATION);
+        expect(juryCertificationSummaries[0].certificationObtained).to.equal('DOUBLE_CORE_CLEA');
       });
     });
 
@@ -331,7 +326,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         // then
         expect(juryCertificationSummaries).to.have.lengthOf(1);
-        expect(juryCertificationSummaries[0].certificationObtained).to.equal(CORE_CERTIFICATION);
+        expect(juryCertificationSummaries[0].certificationObtained).to.equal('CORE');
       });
     });
   });
@@ -373,7 +368,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           certificationCourseId: manyAsrCertification.id,
           assessmentId: manyAsrAssessmentId,
           createdAt: new Date('2018-04-15T00:00:00Z'),
-          status: assessmentResultStatuses.VALIDATED,
+          status: AssessmentResult.status.VALIDATED,
         });
 
         const categoryId = dbf.buildIssueReportCategory({
@@ -426,7 +421,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         // then
         expect(juryCertificationSummary.pixScore).to.equal(latestAssessmentResult.pixScore);
-        expect(juryCertificationSummary.status).to.equal(JuryCertificationSummary.statuses.VALIDATED);
+        expect(juryCertificationSummary.status).to.equal(AssessmentResult.status.VALIDATED);
         expect(juryCertificationSummary.firstName).to.equal(manyAsrCertification.firstName);
         expect(juryCertificationSummary.lastName).to.equal(manyAsrCertification.lastName);
         expect(juryCertificationSummary.createdAt).to.deep.equal(manyAsrCertification.createdAt);

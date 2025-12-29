@@ -8,18 +8,12 @@ const Joi = BaseJoi.extend(JoiDate);
 import _ from 'lodash';
 
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { validateEntity } from '../../../../shared/domain/validators/entity-validator.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { ChallengeToBeDeneutralizedNotFoundError, ChallengeToBeNeutralizedNotFoundError } from '../errors.js';
 import { CertificationAnswerStatusChangeAttempt } from './CertificationAnswerStatusChangeAttempt.js';
 import { NeutralizationAttempt } from './NeutralizationAttempt.js';
-
-const states = {
-  COMPLETED: 'completed',
-  STARTED: 'started',
-  ENDED_BY_INVIGILATOR: 'endedBySupervisor',
-  ENDED_DUE_TO_FINALIZATION: 'endedDueToFinalization',
-};
 
 const certificationAssessmentSchema = Joi.object({
   id: Joi.number().integer().required(),
@@ -29,7 +23,12 @@ const certificationAssessmentSchema = Joi.object({
   completedAt: Joi.date().allow(null),
   endedAt: Joi.date().allow(null),
   state: Joi.string()
-    .valid(states.COMPLETED, states.STARTED, states.ENDED_BY_INVIGILATOR, states.ENDED_DUE_TO_FINALIZATION)
+    .valid(
+      Assessment.states.COMPLETED,
+      Assessment.states.STARTED,
+      Assessment.states.ENDED_BY_INVIGILATOR,
+      Assessment.states.ENDED_DUE_TO_FINALIZATION,
+    )
     .required(),
   version: Joi.number()
     .integer()
@@ -40,7 +39,7 @@ const certificationAssessmentSchema = Joi.object({
   certificationAnswersByDate: Joi.array().required(),
 });
 
-class CertificationAssessment {
+export class CertificationAssessment {
   /**
    * @param {object} params
    * @param {Date} params.createdAt certification course creation date
@@ -91,14 +90,14 @@ class CertificationAssessment {
   }
 
   endDueToFinalization() {
-    if (this.state === states.STARTED) {
-      this.state = states.ENDED_DUE_TO_FINALIZATION;
+    if (this.state === Assessment.states.STARTED) {
+      this.state = Assessment.states.ENDED_DUE_TO_FINALIZATION;
       this.endedAt = this._getLastChallenge()?.createdAt || this.createdAt;
     }
   }
 
   endByInvigilator({ now }) {
-    this.state = states.ENDED_BY_INVIGILATOR;
+    this.state = Assessment.states.ENDED_BY_INVIGILATOR;
     this.endedAt = now;
   }
 
@@ -155,7 +154,7 @@ class CertificationAssessment {
   }
 
   isCompleted() {
-    return this.state === states.COMPLETED;
+    return this.state === Assessment.states.COMPLETED;
   }
 
   getChallengeRecIdByQuestionNumber(questionNumber) {
@@ -187,7 +186,11 @@ class CertificationAssessment {
   }
 
   static get uncompletedAssessmentStates() {
-    return [states.STARTED, states.ENDED_BY_INVIGILATOR, states.ENDED_DUE_TO_FINALIZATION];
+    return [
+      Assessment.states.STARTED,
+      Assessment.states.ENDED_BY_INVIGILATOR,
+      Assessment.states.ENDED_DUE_TO_FINALIZATION,
+    ];
   }
 
   _getLastChallenge() {
@@ -201,6 +204,4 @@ function _isAnswerKoOrSkipped(answerStatus) {
   return isKo || isSkipped;
 }
 
-CertificationAssessment.states = states;
-
-export { CertificationAssessment, states };
+CertificationAssessment.states = Assessment.states;

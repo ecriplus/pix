@@ -1,5 +1,5 @@
-import { states } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import * as serializer from '../../../../../../src/certification/session-management/infrastructure/serializers/certification-details-serializer.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Infrastructure | Serializers | certification-details-serializer', function () {
@@ -11,7 +11,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
         userId: 456,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-03-03'),
-        status: states.COMPLETED,
+        status: Assessment.states.COMPLETED,
         totalScore: 555,
         percentageCorrectAnswers: 75,
         competencesWithMark: [
@@ -45,7 +45,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
             'user-id': 456,
             'created-at': new Date('2020-01-01'),
             'completed-at': new Date('2020-03-03'),
-            status: states.COMPLETED,
+            status: Assessment.states.COMPLETED,
             'total-score': 555,
             'percentage-correct-answers': 75,
             'competences-with-mark': [

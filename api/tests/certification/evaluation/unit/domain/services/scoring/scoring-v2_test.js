@@ -7,16 +7,13 @@ import {
   calculateCertificationAssessmentScore,
   handleV2CertificationScoring,
 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v2.js';
-// TODO : cross-bounded context violation
-import {
-  CertificationAssessment,
-  states,
-} from '../../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
+import { CertificationAssessment } from '../../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import * as scoringService from '../../../../../../../src/evaluation/domain/services/scoring/scoring-service.js';
 import CertificationCancelled from '../../../../../../../src/shared/domain/events/CertificationCancelled.js';
+import { Assessment } from '../../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 
@@ -443,7 +440,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           certificationCourseId: certificationCourse.getId(),
           createdAt: new Date('2020-01-01'),
           completedAt: new Date('2020-01-01'),
-          state: CertificationAssessment.states.STARTED,
+          state: Assessment.states.STARTED,
           version: 2,
           certificationChallenges: [
             domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -516,7 +513,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             certificationCourseId: 789,
             createdAt: new Date('2020-01-01'),
             completedAt: new Date('2020-01-01'),
-            state: CertificationAssessment.states.STARTED,
+            state: Assessment.states.STARTED,
             version: 2,
             certificationChallenges: [
               domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -632,7 +629,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             certificationCourseId: 789,
             createdAt: new Date('2020-01-01'),
             completedAt: new Date('2020-01-01'),
-            state: CertificationAssessment.states.STARTED,
+            state: Assessment.states.STARTED,
             version: 2,
             certificationChallenges: [
               domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -704,7 +701,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               certificationCourseId: 789,
               createdAt: new Date('2020-01-01'),
               completedAt: new Date('2020-01-01'),
-              state: CertificationAssessment.states.STARTED,
+              state: Assessment.states.STARTED,
               version: 2,
               certificationChallenges: [
                 domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -770,7 +767,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               certificationCourseId: 789,
               createdAt: new Date('2020-01-01'),
               completedAt: new Date('2020-01-01'),
-              state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+              state: Assessment.states.ENDED_BY_INVIGILATOR,
               version: 2,
               certificationChallenges: [
                 domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
@@ -837,7 +834,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
                 certificationCourseId: 789,
                 createdAt: new Date('2020-01-01'),
                 completedAt: new Date('2020-01-01'),
-                state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+                state: Assessment.states.ENDED_BY_INVIGILATOR,
                 version: 2,
                 certificationChallenges: [domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false })],
                 certificationAnswersByDate: ['answer'],
@@ -906,7 +903,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
         certificationCourseId: 111,
         createdAt: '2020-02-01T00:00:00Z',
         completedAt: '2020-02-01T00:00:00Z',
-        state: states.COMPLETED,
+        state: Assessment.states.COMPLETED,
         version: 2,
       };
       competenceWithMarks_1_1 = domainBuilder.buildCompetenceMark({
@@ -1231,7 +1228,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           startedCertificationAssessment = domainBuilder.buildCertificationAssessment({
             ...certificationAssessment,
             completedAt: null,
-            state: states.STARTED,
+            state: Assessment.states.STARTED,
           });
         });
 

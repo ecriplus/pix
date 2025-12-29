@@ -1,6 +1,6 @@
-import { states as CertificationAssessmentStates } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
 import { getCertificationDetails } from '../../../../../../src/certification/session-management/domain/usecases/get-certification-details.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | get-certification-details', function () {
@@ -33,7 +33,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | get-ce
         certificationCourseId,
         certificationChallenges: [certificationChallenge],
         certificationAnswersByDate: [answer],
-        state: CertificationAssessmentStates.COMPLETED,
+        state: Assessment.states.COMPLETED,
       });
 
       const competenceMark = domainBuilder.buildCompetenceMark({

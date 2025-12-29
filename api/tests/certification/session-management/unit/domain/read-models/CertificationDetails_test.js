@@ -1,5 +1,5 @@
-import { states } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | Read-models | CertificationDetails', function () {
@@ -25,7 +25,7 @@ describe('Certification | Session-management | Unit | Domain | Read-models | Cer
         userId: 456,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-03-03'),
-        state: states.COMPLETED,
+        state: Assessment.states.COMPLETED,
         certificationChallenges: [certificationChallenge1, certificationChallenge2],
         certificationAnswersByDate: [answer1, answer2],
       });
@@ -64,7 +64,7 @@ describe('Certification | Session-management | Unit | Domain | Read-models | Cer
         userId: 456,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-03-03'),
-        status: states.COMPLETED,
+        status: Assessment.states.COMPLETED,
         totalScore: 22,
         percentageCorrectAnswers: 50,
         competencesWithMark: [
@@ -291,7 +291,7 @@ describe('Certification | Session-management | Unit | Domain | Read-models | Cer
         userId: 456,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-03-03'),
-        status: states.COMPLETED,
+        status: Assessment.states.COMPLETED,
         totalScore: 45,
         percentageCorrectAnswers: 12,
         competencesWithMark,
@@ -307,7 +307,7 @@ describe('Certification | Session-management | Unit | Domain | Read-models | Cer
         userId: 456,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-03-03'),
-        status: states.COMPLETED,
+        status: Assessment.states.COMPLETED,
         totalScore: 45,
         percentageCorrectAnswers: 12,
         competencesWithMark: [...competencesWithMark],

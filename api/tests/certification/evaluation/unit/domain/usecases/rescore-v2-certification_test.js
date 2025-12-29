@@ -5,6 +5,7 @@ import { SessionAlreadyPublishedError } from '../../../../../../src/certificatio
 import { CertificationCourseRejected } from '../../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -99,7 +100,7 @@ describe('Unit | Certification | Evaluation | UseCases | rescore-v2-certificatio
           certificationCourseId: 789,
           createdAt: new Date('2020-01-01'),
           completedAt: new Date('2020-01-01'),
-          state: CertificationAssessment.states.STARTED,
+          state: Assessment.states.STARTED,
           version: 2,
           certificationChallenges: [
             domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),

@@ -1,5 +1,4 @@
 import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
-import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { processAutoJury } from '../../../../../../src/certification/session-management/domain/usecases/process-auto-jury.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -10,6 +9,7 @@ import {
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | process-auto-jury', function () {
@@ -570,7 +570,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
-          certificationState: CertificationAssessment.states.STARTED,
+          certificationState: Assessment.states.STARTED,
           certificationAssessmentRepository,
           certificationCourseRepository,
           certificationIssueReportRepository,
@@ -687,7 +687,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
-          certificationState: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+          certificationState: Assessment.states.ENDED_BY_INVIGILATOR,
           certificationAssessmentRepository,
           certificationCourseRepository,
           certificationIssueReportRepository,
@@ -724,7 +724,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       it('scores the certification', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
-          certificationState: CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
+          certificationState: Assessment.states.ENDED_DUE_TO_FINALIZATION,
           certificationAssessmentRepository,
           certificationCourseRepository,
           certificationIssueReportRepository,

@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { states } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { CertificationOfficer } from '../../../../../../src/certification/session-management/domain/models/CertificationOfficer.js';
 import {
   JurySession,
@@ -606,7 +605,7 @@ describe('Integration | Repository | JurySession', function () {
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
           type: Assessment.types.CERTIFICATION,
-          state: i % 2 ? states.STARTED : states.COMPLETED,
+          state: i % 2 ? Assessment.states.STARTED : Assessment.states.COMPLETED,
         });
       }
 
@@ -628,7 +627,7 @@ describe('Integration | Repository | JurySession', function () {
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
           type: Assessment.types.CERTIFICATION,
-          state: states.COMPLETED,
+          state: Assessment.states.COMPLETED,
         });
 
         const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
@@ -661,7 +660,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithoutReport.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.COMPLETED,
+        state: Assessment.states.COMPLETED,
       });
 
       const certificationCourseWithReportNotImpactfulOne = databaseBuilder.factory.buildCertificationCourse({
@@ -670,7 +669,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_INVIGILATOR,
+        state: Assessment.states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -684,7 +683,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulTwo.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_INVIGILATOR,
+        state: Assessment.states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -698,7 +697,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_DUE_TO_FINALIZATION,
+        state: Assessment.states.ENDED_DUE_TO_FINALIZATION,
       });
       databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
@@ -725,7 +724,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithoutReport.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.COMPLETED,
+        state: Assessment.states.COMPLETED,
       });
 
       const certificationCourseWithReportNotImpactfulOne = databaseBuilder.factory.buildCertificationCourse({
@@ -734,7 +733,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_INVIGILATOR,
+        state: Assessment.states.ENDED_BY_INVIGILATOR,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
@@ -748,7 +747,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_DUE_TO_FINALIZATION,
+        state: Assessment.states.ENDED_DUE_TO_FINALIZATION,
       });
       databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
@@ -761,7 +760,7 @@ describe('Integration | Repository | JurySession', function () {
       databaseBuilder.factory.buildAssessment({
         certificationCourseId: certificationCourseWithImpactfulSubCategory.id,
         type: Assessment.types.CERTIFICATION,
-        state: states.ENDED_BY_INVIGILATOR,
+        state: Assessment.states.ENDED_BY_INVIGILATOR,
       });
       databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulSubCategory.id,

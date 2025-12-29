@@ -1,9 +1,9 @@
-import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { SessionManagement } from '../../../../../../src/certification/session-management/domain/models/SessionManagement.js';
 import * as sessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-repository.js';
 import { SESSION_STATUSES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Certification | session | SessionManagement', function () {
@@ -528,7 +528,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 97,
-          state: CertificationAssessment.states.STARTED,
+          state: Assessment.states.STARTED,
         });
 
         const userId2 = databaseBuilder.factory.buildUser().id;
@@ -541,7 +541,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 98,
-          state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+          state: Assessment.states.ENDED_BY_INVIGILATOR,
         });
 
         const userId3 = databaseBuilder.factory.buildUser().id;
@@ -554,7 +554,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 99,
-          state: CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
+          state: Assessment.states.ENDED_DUE_TO_FINALIZATION,
         });
 
         const userId4 = databaseBuilder.factory.buildUser().id;
@@ -567,7 +567,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 100,
-          state: CertificationAssessment.states.COMPLETED,
+          state: Assessment.states.COMPLETED,
         });
 
         await databaseBuilder.commit();
@@ -596,7 +596,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         });
         databaseBuilder.factory.buildAssessment({
           certificationCourseId: 97,
-          state: CertificationAssessment.states.COMPLETED,
+          state: Assessment.states.COMPLETED,
         });
 
         await databaseBuilder.commit();
