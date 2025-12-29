@@ -61,6 +61,7 @@
 @use 'pages/sign-form' as *;
 @use 'pages/join' as *;
 @use 'pages/join-request' as *;
+@use 'pages/authentication/login' as *;
 @use 'pages/authentication/sso-selection' as *;
 @use 'pages/authenticated' as *;
 @use 'pages/authenticated/index' as *;

@@ -4,7 +4,6 @@ import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -18,7 +17,6 @@ const VALIDATION_ERRORS = {
 };
 
 export default class LoginForm extends Component {
-  @service currentDomain;
   @service url;
   @service intl;
   @service authErrorMessages;
@@ -38,11 +36,6 @@ export default class LoginForm extends Component {
       error: VALIDATION_ERRORS.password,
     },
   });
-
-  get displayRecoveryLink() {
-    if (!this.currentDomain.isFranceDomain) return false;
-    return !this.args.isWithInvitation;
-  }
 
   @action
   async submit(event) {
@@ -157,20 +150,6 @@ export default class LoginForm extends Component {
       <PixButton @type="submit" @isLoading={{this.isLoading}}>
         {{t "pages.login-form.login"}}
       </PixButton>
-
-      {{#if this.displayRecoveryLink}}
-        <div class="authentication-login-form__recover-access">
-          <p class="authentication-login-form__recover-access__question">
-            {{t "pages.login-form.admin-role-question"}}
-          </p>
-          <LinkTo class="link link--black link--underlined" @route="join-request">
-            {{t "pages.login-form.active-or-retrieve"}}
-          </LinkTo>
-          <div class="authentication-login-form__recover-access__message">
-            ({{t "pages.login-form.only-for-admin"}})
-          </div>
-        </div>
-      {{/if}}
     </form>
   </template>
 }

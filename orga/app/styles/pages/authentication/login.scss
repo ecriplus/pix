@@ -1,0 +1,22 @@
+@use 'pix-design-tokens/typography';
+
+.authentication-login {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+
+  &__recover-access {
+    @extend %pix-body-s;
+
+    padding-top: var(--pix-spacing-8x);
+    text-align: left;
+
+    &__question {
+      font-weight: var(--pix-font-bold);
+    }
+
+    &__message {
+      color: var(--pix-neutral-500);
+    }
+  }
+}
