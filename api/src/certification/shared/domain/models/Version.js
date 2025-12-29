@@ -18,6 +18,7 @@ export class Version {
         maximumAssessmentLength: Joi.number().integer().min(0).required(),
         challengesBetweenSameCompetence: Joi.number().integer().min(0).required(),
         defaultCandidateCapacity: Joi.number().required(),
+        defaultProbabilityToPickChallenge: Joi.number().min(0).max(100).required(),
       })
       .unknown(true)
       .required(),
@@ -31,6 +32,7 @@ export class Version {
    * @param {number} params.challengesConfiguration.maximumAssessmentLength - limit for assessment length
    * @param {number} params.challengesConfiguration.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
    * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
+   * @param {number} params.challengesConfiguration.defaultProbabilityToPickChallenge - The probability (as a percentage, 0-100) that the ramdomizing function will pick a challenge from a list of possible challenges.
    */
   constructor({ id, scope, challengesConfiguration }) {
     this.id = id;

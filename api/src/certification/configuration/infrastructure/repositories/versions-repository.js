@@ -162,6 +162,7 @@ const _toDomain = ({
       enablePassageByAllCompetences: challengesConfiguration.enablePassageByAllCompetences,
       variationPercent: challengesConfiguration.variationPercent,
       defaultCandidateCapacity: challengesConfiguration.defaultCandidateCapacity,
+      defaultProbabilityToPickChallenge: challengesConfiguration.defaultProbabilityToPickChallenge,
     }),
   });
 };

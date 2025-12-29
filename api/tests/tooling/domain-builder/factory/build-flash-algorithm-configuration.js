@@ -7,6 +7,7 @@ export const buildFlashAlgorithmConfiguration = ({
   enablePassageByAllCompetences = false,
   variationPercent = 0.25,
   defaultCandidateCapacity = -3,
+  defaultProbabilityToPickChallenge = 51,
 } = {}) => {
   return new FlashAssessmentAlgorithmConfiguration({
     maximumAssessmentLength,
@@ -15,5 +16,6 @@ export const buildFlashAlgorithmConfiguration = ({
     enablePassageByAllCompetences,
     variationPercent,
     defaultCandidateCapacity,
+    defaultProbabilityToPickChallenge,
   });
 };

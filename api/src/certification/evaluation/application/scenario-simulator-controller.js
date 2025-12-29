@@ -3,6 +3,7 @@ import { Readable } from 'node:stream';
 import _ from 'lodash';
 
 import { random } from '../../../shared/infrastructure/utils/random.js';
+import { DEFAULT_PROBABILITY_TO_PICK_CHALLENGE } from '../../shared/domain/constants.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
 import pickChallengeService from '../domain/services/pick-challenge-service.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -21,7 +22,7 @@ async function simulateFlashAssessmentScenario(
   const {
     initialCapacity,
     numberOfIterations = 1,
-    challengePickProbability,
+    challengePickProbability = DEFAULT_PROBABILITY_TO_PICK_CHALLENGE,
     variationPercent,
     capacity,
     accessibilityAdjustmentNeeded,

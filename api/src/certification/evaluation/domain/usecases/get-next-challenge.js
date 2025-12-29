@@ -113,7 +113,9 @@ const getNextChallenge = async function ({
     throw new AssessmentEndedError();
   }
 
-  const challenge = pickChallengeService.getChallengePicker()({ possibleChallenges });
+  const challenge = pickChallengeService.getChallengePicker(
+    version.challengesConfiguration.defaultProbabilityToPickChallenge,
+  )({ possibleChallenges });
 
   const certificationChallenge = new CertificationChallenge({
     associatedSkillName: challenge.skill.name,

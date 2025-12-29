@@ -62,6 +62,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
                 maximumAssessmentLength: 32,
                 challengesBetweenSameCompetence: 0,
                 defaultCandidateCapacity: -3,
+                defaultProbabilityToPickChallenge: 51,
               },
             },
           },

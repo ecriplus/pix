@@ -240,6 +240,7 @@ const CHALLENGES_CONFIGURATION = {
   enablePassageByAllCompetences: true,
   variationPercent: 0.5,
   defaultCandidateCapacity: -3,
+  defaultProbabilityToPickChallenge: 51,
 };
 
 const GLOBAL_SCORING_CONFIGURATION = [

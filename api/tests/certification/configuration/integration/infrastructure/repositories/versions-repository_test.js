@@ -137,6 +137,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         enablePassageByAllCompetences: false,
         variationPercent: 0.25,
         defaultCandidateCapacity: -1,
+        defaultProbabilityToPickChallenge: 10,
       };
       databaseBuilder.factory.buildCertificationVersion({
         scope,
@@ -155,6 +156,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         enablePassageByAllCompetences: false,
         variationPercent: 0.25,
         defaultCandidateCapacity: -2,
+        defaultProbabilityToPickChallenge: 20,
       };
       databaseBuilder.factory.buildCertificationVersion({
         scope,
@@ -173,6 +175,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         enablePassageByAllCompetences: false,
         variationPercent: 0.25,
         defaultCandidateCapacity: -3,
+        defaultProbabilityToPickChallenge: 30,
       };
       const expectedVersionId = databaseBuilder.factory.buildCertificationVersion({
         scope,
@@ -191,6 +194,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         enablePassageByAllCompetences: false,
         variationPercent: 0.25,
         defaultCandidateCapacity: -8,
+        defaultProbabilityToPickChallenge: 40,
       };
       const aScopeWeAreNotInterestedIn = Scopes.CORE;
       databaseBuilder.factory.buildCertificationVersion({
@@ -257,6 +261,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         enablePassageByAllCompetences: false,
         variationPercent: 0.25,
         defaultCandidateCapacity: 1,
+        defaultProbabilityToPickChallenge: 51,
       };
       const versionId = databaseBuilder.factory.buildCertificationVersion({
         scope,

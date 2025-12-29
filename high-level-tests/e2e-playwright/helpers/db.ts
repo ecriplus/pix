@@ -287,6 +287,7 @@ async function buildBaseDataForCertification() {
         enablePassageByAllCompetences: true,
         variationPercent: 0.5,
         defaultCandidateCapacity: -3,
+        defaultProbabilityToPickChallenge: 100,
       }),
     })
     .returning('id');

@@ -30,6 +30,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         enablePassageByAllCompetences: false,
         variationPercent: 0.5,
         defaultCandidateCapacity: -3,
+        defaultProbabilityToPickChallenge: 51,
       },
     });
 
