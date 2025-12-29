@@ -128,7 +128,7 @@
     "examiner-information": {
       "invigilated-by": "Bewaakt door :",
       "signature": "Handtekening(en) :",
-      "title": "De supervisor(s)"
+      "title": "De toezichthouder(s)"
     },
     "file-name": "registratie-sessieblad-",
     "header": {
@@ -237,7 +237,7 @@
       "room-name": "Naam van de kamer",
       "session-certification": "De certificeringssessie",
       "session-invigilates-by": "Sessie begeleid door :",
-      "session-invigilators": "Handtekening van supervisor(s) :",
+      "session-invigilators": "Handtekening van toezichthouder(s) :",
       "session-number": "Sessienummer",
       "site-name": "Naam van de site"
     },
@@ -427,7 +427,7 @@
     "comment": {
       "CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON": {
         "candidate": "Een of meer technische problemen die tijdens de certificeringssessie aan uw surveillant zijn gemeld, hebben de kwaliteit van de certificeringstest beïnvloed. Helaas zijn we door het grote aantal vragen dat u niet goed kon beantwoorden niet in staat om een betrouwbare score te berekenen en een certificaat uit te reiken. De certificering wordt geannuleerd en de voorschrijver van uw certificering (indien van toepassing) wordt hiervan op de hoogte gesteld.",
-        "organization": "Een of meer technische problemen, gemeld door deze kandidaat aan de supervisor van de certificeringssessie, hebben het vlotte verloop van de certificeringstest beïnvloed. We kunnen de kandidaat niet certificeren en zijn/haar certificering is daarom geannuleerd. Deze informatie moet in aanmerking worden genomen en kan ertoe leiden dat u een nieuwe certificeringssessie voor deze kandidaat voorstelt."
+        "organization": "Een of meer technische problemen, gemeld door deze kandidaat aan de toezichthouder van de certificeringssessie, hebben het vlotte verloop van de certificeringstest beïnvloed. We kunnen de kandidaat niet certificeren en zijn/haar certificering is daarom geannuleerd. Deze informatie moet in aanmerking worden genomen en kan ertoe leiden dat u een nieuwe certificeringssessie voor deze kandidaat voorstelt."
       },
       "CANCELLED_DUE_TO_NEUTRALIZATION": {
         "candidate": "Ten minste één technisch probleem, gemeld aan je surveillant tijdens de certificeringssessie, heeft de kwaliteit van het certificeringsexamen beïnvloed. Vanwege het aantal vragen dat u niet heeft kunnen beantwoorden, kunnen we geen certificering afgeven. Het is geannuleerd, de specificeerder van uw certificeringsexamen (indien van toepassing) is op de hoogte gesteld.",

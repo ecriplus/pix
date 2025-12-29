@@ -128,7 +128,7 @@
     "examiner-information": {
       "invigilated-by": "Supervisado por :",
       "signature": "Firma(s) :",
-      "title": "El supervisor o supervisores"
+      "title": "El vigilante o vigilantes"
     },
     "file-name": "hoja de inscripción-sesión-",
     "header": {
@@ -237,7 +237,7 @@
       "room-name": "Nombre de la sala",
       "session-certification": "La sesión de certificación",
       "session-invigilates-by": "Sesión supervisada por :",
-      "session-invigilators": "Firma del supervisor o supervisores :",
+      "session-invigilators": "Firma del vigilante o vigilantes :",
       "session-number": "Número de sesión",
       "site-name": "Nombre del sitio"
     },
@@ -426,11 +426,11 @@
   "jury": {
     "comment": {
       "CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON": {
-        "candidate": "Uno o varios problemas técnicos comunicados a su supervisor durante la sesión de certificación afectaron a la calidad de la prueba de certificación. Lamentablemente, debido al gran número de preguntas que no pudo responder correctamente, no podemos calcular una puntuación fiable ni emitir un certificado. Se anulará la certificación y se informará al prescriptor de su certificación (si procede).",
-        "organization": "Uno o varios problemas técnicos, comunicados por este candidato al supervisor de la sesión de certificación, han afectado al buen desarrollo de la prueba de certificación. No podemos certificar al candidato y, por lo tanto, su certificación queda anulada. Esta información debe tenerse en cuenta y puede llevarle a proponer una nueva sesión de certificación para este candidato."
+        "candidate": "Uno o varios problemas técnicos comunicados a su vigilante durante la sesión de certificación afectaron a la calidad de la prueba de certificación. Lamentablemente, debido al gran número de preguntas que no pudo responder correctamente, no podemos calcular una puntuación fiable ni emitir un certificado. Se anulará la certificación y se informará al prescriptor de su certificación (si procede).",
+        "organization": "Uno o varios problemas técnicos, comunicados por este candidato al vigilante de la sesión de certificación, han afectado al buen desarrollo de la prueba de certificación. No podemos certificar al candidato y, por lo tanto, su certificación queda anulada. Esta información debe tenerse en cuenta y puede llevarle a proponer una nueva sesión de certificación para este candidato."
       },
       "CANCELLED_DUE_TO_NEUTRALIZATION": {
-        "candidate": "Uno o varios problemas técnicos comunicados a su supervisor durante la sesión de certificación han afectado a la calidad de la prueba de certificación. Debido a que no se pudieron responder demasiadas preguntas, no podemos expedir la certificación. Se anulará su certificación y se informará al prescriptor de la misma (si procede).",
+        "candidate": "Uno o varios problemas técnicos comunicados a su vigilante durante la sesión de certificación han afectado a la calidad de la prueba de certificación. Debido a que no se pudieron responder demasiadas preguntas, no podemos expedir la certificación. Se anulará su certificación y se informará al prescriptor de la misma (si procede).",
         "organization": "Uno o varios problemas técnicos han afectado a la prueba de certificación. No podemos entregar la certificación y, por lo tanto, queda anulada. Esta información puede llevarle a proponer una nueva sesión de certificación para este candidato."
       },
       "FRAUD": {
