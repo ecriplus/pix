@@ -5,7 +5,6 @@ function _buildUsers(databaseBuilder) {
   databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Salvor',
     lastName: 'Hardin',
-    username: 'salvor.hardin',
     email: 'salvor.hardin@example.net',
   });
 
@@ -13,7 +12,6 @@ function _buildUsers(databaseBuilder) {
   const userWithLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Gaal',
     lastName: 'Dornick',
-    username: 'gaal.dornick',
     email: 'gaal.dornick@example.net',
   });
   databaseBuilder.factory.buildUserLogin({ userId: userWithLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
@@ -22,7 +20,6 @@ function _buildUsers(databaseBuilder) {
   databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Chrono',
     lastName: 'Post',
-    username: 'chrono.post',
     email: 'chrono.post@example.net',
     createdAt: new Date('2000-12-31'),
   });
