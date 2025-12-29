@@ -117,7 +117,7 @@ module('Integration | Component | SessionSupervising::Header', function (hooks) 
   });
 
   module('when confirmation modal confirmation button is clicked', function () {
-    test('it closes the confirmation modal and redirect to "login-session-supervisor"', async function (assert) {
+    test('it closes the confirmation modal and redirect to "login-session-invigilator"', async function (assert) {
       // given
       const sessionForSupervising = store.createRecord('session-for-supervising', {
         id: '12345',

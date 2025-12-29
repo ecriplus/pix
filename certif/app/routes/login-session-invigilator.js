@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import get from 'lodash/get';
 
-export default class LoginSessionSupervisorRoute extends Route {
+export default class LoginSessionInvigilatorRoute extends Route {
   @service currentUser;
   @service router;
   @service session;

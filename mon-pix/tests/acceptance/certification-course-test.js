@@ -399,7 +399,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           this.server.create('assessment', {
             type: 'CERTIFICATION',
             certificationCourseId: certificationCourse.id,
-            state: assessmentStates.ENDED_BY_SUPERVISOR,
+            state: assessmentStates.ENDED_BY_INVIGILATOR,
           });
 
           // when
@@ -461,7 +461,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
             // when
-            assessment.update({ state: assessmentStates.ENDED_BY_SUPERVISOR });
+            assessment.update({ state: assessmentStates.ENDED_BY_INVIGILATOR });
             this.server.post('/answers', generate400Error('Le surveillant a mis fin à votre test de certification.'));
 
             await click(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' }));

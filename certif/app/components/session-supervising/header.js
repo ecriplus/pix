@@ -34,7 +34,7 @@ export default class Header extends Component {
   @action
   actionConfirmation() {
     this.closeConfirmationModal();
-    return this.router.replaceWith('login-session-supervisor');
+    return this.router.replaceWith('login-session-invigilator');
   }
 
   get invigilatorDocumentationUrl() {

@@ -363,10 +363,10 @@ async function _createUser({ firstName, lastName, birthdate, email, organization
 }
 
 function _buildInvigilatorAccess({ databaseBuilder, sessionId }) {
-  const supervisor = databaseBuilder.factory.buildUser({ firstName: `supervisor${sessionId}` });
+  const invigilator = databaseBuilder.factory.buildUser({ firstName: `invigilator${sessionId}` });
   databaseBuilder.factory.buildInvigilatorAccess({
     sessionId,
-    userId: supervisor.id,
+    userId: invigilator.id,
     authorizedAt: new Date(),
   });
 }

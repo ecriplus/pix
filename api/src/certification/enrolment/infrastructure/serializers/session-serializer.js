@@ -7,7 +7,7 @@ const { Serializer } = jsonapiSerializer;
 const serialize = function (session) {
   return new Serializer('session-enrolment', {
     transform: function (session) {
-      return { ...session, status: session.status, supervisorPassword: session.invigilatorPassword };
+      return { ...session, status: session.status, invigilatorPassword: session.invigilatorPassword };
     },
     attributes: [
       'address',
@@ -20,7 +20,7 @@ const serialize = function (session) {
       'accessCode',
       'certificationCenterId',
       'certificationCandidates',
-      'supervisorPassword',
+      'invigilatorPassword',
     ],
     certificationCandidates: {
       ref: 'id',

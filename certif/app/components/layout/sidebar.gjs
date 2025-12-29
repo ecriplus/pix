@@ -76,8 +76,8 @@ export default class Sidebar extends Component {
               </PixNavigationButton>
             </li>
             <li>
-              <PixNavigationButton @route='login-session-supervisor' @icon='eye' @ariaHidden={{true}} @target='_blank'>
-                {{t 'navigation.sidebar.supervisor'}}
+              <PixNavigationButton @route='login-session-invigilator' @icon='eye' @ariaHidden={{true}} @target='_blank'>
+                {{t 'navigation.sidebar.invigilator'}}
               </PixNavigationButton>
             </li>
           {{/if}}

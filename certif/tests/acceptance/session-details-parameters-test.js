@@ -105,23 +105,23 @@ module('Acceptance | Session Details Parameters', function (hooks) {
             assert.dom(finalizeButton).doesNotExist();
           });
 
-          test('it should display supervisor password', async function (assert) {
+          test('it should display invigilator password', async function (assert) {
             // given
-            const sessionWithSupervisorPassword = server.create('session-enrolment', {
-              supervisorPassword: 'SOWHAT',
+            const sessionWithInvigilatorPassword = server.create('session-enrolment', {
+              invigilatorPassword: 'SOWHAT',
               status: CREATED,
               certificationCenterId: allowedCertificationCenterAccess.id,
             });
             server.create('session-management', {
-              id: sessionWithSupervisorPassword.id,
+              id: sessionWithInvigilatorPassword.id,
             });
 
             // when
-            const screen = await visit(`/sessions/${sessionWithSupervisorPassword.id}`);
+            const screen = await visit(`/sessions/${sessionWithInvigilatorPassword.id}`);
 
             // then
-            const supervisorPasswordElement = screen.getByText('C-SOWHAT');
-            assert.dom(supervisorPasswordElement).exists();
+            const invigilatorPasswordElement = screen.getByText('C-SOWHAT');
+            assert.dom(invigilatorPasswordElement).exists();
           });
 
           module('when finalize button is clicked', function () {

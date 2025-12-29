@@ -132,7 +132,7 @@ module('Acceptance | Session supervising', function (hooks) {
     });
   });
 
-  test('when supervisor checks the candidate, it should update authorizedToStart', async function (assert) {
+  test('when invigilator checks the candidate, it should update authorizedToStart', async function (assert) {
     // given
     const sessionId = 12345;
     this.sessionForSupervising = server.create('session-for-supervising', {
@@ -191,7 +191,7 @@ module('Acceptance | Session supervising', function (hooks) {
     assert.dom(secondVisit.queryByRole('button', { name: "Confirmer la présence de l'élève John Doe" })).doesNotExist();
   });
 
-  test('when supervisor cancel the presence of the candidate, it should update authorizedToStart', async function (assert) {
+  test('when invigilator cancel the presence of the candidate, it should update authorizedToStart', async function (assert) {
     // given
     const sessionId = 12345;
     this.sessionForSupervising = server.create('session-for-supervising', {
@@ -228,7 +228,7 @@ module('Acceptance | Session supervising', function (hooks) {
     assert.false(server.schema.certificationCandidateForSupervisings.find(123).authorizedToStart);
   });
 
-  test('when supervisor allow to resume test, it should display a success notification', async function (assert) {
+  test('when invigilator allow to resume test, it should display a success notification', async function (assert) {
     // given
     const sessionId = 12345;
     this.sessionForSupervising = server.create('session-for-supervising', {
@@ -307,7 +307,7 @@ module('Acceptance | Session supervising', function (hooks) {
 
   module('when the invigilator handles a live alert', () => {
     module('when this is a challenge live alert', function () {
-      module('when supervisor dismisses a live alert', function () {
+      module('when invigilator dismisses a live alert', function () {
         module('when there is no error', function () {
           test('it dismisses the live alert', async function (assert) {
             // given
@@ -409,7 +409,7 @@ module('Acceptance | Session supervising', function (hooks) {
         });
       });
 
-      module('when supervisor validates a live alert', function () {
+      module('when invigilator validates a live alert', function () {
         module('when there is no error', function () {
           test('it validates the live alert', async function (assert) {
             // given

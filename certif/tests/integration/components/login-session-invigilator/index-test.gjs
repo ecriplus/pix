@@ -1,24 +1,24 @@
 import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import LoginSessionSupervisor from 'pix-certif/components/login-session-supervisor';
+import LoginSessionInvigilator from 'pix-certif/components/login-session-invigilator';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Login session supervisor', function (hooks) {
+module('Integration | Component | Login session invigilator', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should render supervisor login page', async function (assert) {
+  test('it should render invigilator login page', async function (assert) {
     // given
-    const authenticateSupervisor = sinon.stub();
+    const authenticateInvigilator = sinon.stub();
     const currentUserEmail = 'lara.pafromage@example.net';
 
     // when
     const screen = await render(
       <template>
-        <LoginSessionSupervisor
-          @authenticateSupervisor={{authenticateSupervisor}}
+        <LoginSessionInvigilator
+          @authenticateInvigilator={{authenticateInvigilator}}
           @currentUserEmail={{currentUserEmail}}
         />
       </template>,

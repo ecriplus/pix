@@ -1,6 +1,6 @@
 import ApplicationAdapter from './application';
 
-export default class SupervisorAuthenticationAdapter extends ApplicationAdapter {
+export default class InvigilatorAuthenticationAdapter extends ApplicationAdapter {
   urlForCreateRecord() {
     return `${this.host}/${this.namespace}/sessions/supervise`;
   }

@@ -13,12 +13,12 @@ import { t } from 'ember-intl';
 
 dayjs.extend(LocalizedFormat);
 
-export default class LoginSessionSupervisor extends Component {
+export default class LoginSessionInvigilator extends Component {
   @service intl;
 
   @tracked formError = null;
   @tracked sessionIdValue = null;
-  @tracked supervisorPasswordValue = null;
+  @tracked invigilatorPasswordValue = null;
 
   @action
   setSessionIdValue(event) {
@@ -26,23 +26,23 @@ export default class LoginSessionSupervisor extends Component {
   }
 
   @action
-  setSupervisorPasswordValue(event) {
-    this.supervisorPasswordValue = event.target.value;
+  setInvigilatorPasswordValue(event) {
+    this.invigilatorPasswordValue = event.target.value;
   }
 
   @action
   async handleFormSubmit(event) {
     event.preventDefault();
 
-    if (!this.sessionIdValue || !this.supervisorPasswordValue) {
+    if (!this.sessionIdValue || !this.invigilatorPasswordValue) {
       this.formError = this.intl.t('pages.session-supervising.login.form.errors.mandatory-fields');
       return;
     }
 
     try {
-      await this.args.authenticateSupervisor({
+      await this.args.authenticateInvigilator({
         sessionId: this.sessionIdValue,
-        supervisorPassword: this.supervisorPasswordValue,
+        invigilatorPassword: this.invigilatorPasswordValue,
       });
     } catch ({ errors }) {
       const error = errors[0];
@@ -64,14 +64,14 @@ export default class LoginSessionSupervisor extends Component {
 
   <template>
     {{#if this.formError}}
-      <div class='login-session-supervisor__form-error' role='alert'>
+      <div class='login-session-invigilator__form-error' role='alert'>
         <PixNotificationAlert @type='error' @withIcon={{true}}>
           {{this.formError}}
         </PixNotificationAlert>
       </div>
     {{/if}}
     <form
-      class='login-session-supervisor__form'
+      class='login-session-invigilator__form'
       {{on 'submit' this.handleFormSubmit}}
       aria-label={{t 'pages.session-supervising.login.form.aria-label'}}
     >
@@ -91,7 +91,7 @@ export default class LoginSessionSupervisor extends Component {
         @subLabel={{t 'pages.session-supervising.login.form.description'}}
         @prefix='C-'
         placeholder='XXXXXX'
-        {{on 'input' this.setSupervisorPasswordValue}}
+        {{on 'input' this.setInvigilatorPasswordValue}}
       >
         <:label>{{t 'pages.session-supervising.login.form.session-password.label'}}</:label>
       </PixInputPassword>

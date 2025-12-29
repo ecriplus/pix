@@ -539,7 +539,7 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
     });
   });
 
-  describe('#endBySupervisorByAssessmentId', function () {
+  describe('#endByInvigilatorByAssessmentId', function () {
     it('should end an assessment', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
@@ -553,7 +553,7 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
       await databaseBuilder.commit();
 
       // when
-      await assessmentRepository.endBySupervisorByAssessmentId(assessmentId);
+      await assessmentRepository.endByInvigilatorByAssessmentId(assessmentId);
 
       // then
       const { state } = await knex('assessments').where('id', assessmentId).first('state');

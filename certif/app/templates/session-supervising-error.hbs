@@ -3,13 +3,13 @@
 <div class="session-supervising-error-page">
   <div class="session-supervising-error-page__panel">
     {{! template-lint-disable no-redundant-role }}
-    <img src="/images/supervisor_no-access.svg" alt="" role="presentation" />
+    <img src="/images/invigilator_no-access.svg" alt="" role="presentation" />
     <h1 class="session-supervising-error-page__panel__title">{{t "pages.session-supervising-error.title"}}</h1>
     <p class="session-supervising-error-page__panel__subtitle">
       {{t "pages.session-supervising-error.description"}}
     </p>
 
-    <PixButtonLink @route="login-session-supervisor" class="session-supervising-error-page__panel__button">
+    <PixButtonLink @route="login-session-invigilator" class="session-supervising-error-page__panel__button">
       {{t "pages.session-supervising.login.form.sub-title"}}
     </PixButtonLink>
   </div>

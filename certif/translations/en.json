@@ -216,6 +216,7 @@
       },
       "documentation": "Documentation",
       "extra-information": "Main navigation",
+      "invigilator": "Invigilator’s Portal",
       "logout": "Log out",
       "menu-labels": {
         "close": "Close menu",
@@ -225,7 +226,6 @@
         "extra-information": "Certification sessions",
         "label": "Sessions"
       },
-      "supervisor": "Invigilator’s Portal",
       "team": "Team"
     }
   },
@@ -915,7 +915,7 @@
           "row": {
             "session-and-id": "Session {sessionId}"
           },
-          "session-caption": "Table listing the sessions of the certification centre. It includes the name and the room of the site where the certification will take place, the unique identifier, the status, the date and time of the session, the name of the supervisor, the number of candidates registered for this session, the certifications passed and the action of being able to delete this session."
+          "session-caption": "Table listing the sessions of the certification centre. It includes the name and the room of the site where the certification will take place, the unique identifier, the status, the date and time of the session, the name of the invigilator, the number of candidates registered for this session, the certifications passed and the action of being able to delete this session."
         },
         "title": "Certification sessions"
       },

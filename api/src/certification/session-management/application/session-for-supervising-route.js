@@ -20,7 +20,7 @@ const register = async function (server) {
         pre: [
           {
             method: assessmentInvigilatorAuthorization.verifyBySessionId,
-            assign: 'isSupervisorForSession',
+            assign: 'isInvigilatorForSession',
           },
         ],
         handler: sessionForSupervisingController.get,

@@ -66,14 +66,14 @@
       </h3>
       <div class="session-details-content__clipboard">
         <span class="content-text content-text--bold session-details-content__text">
-          C-{{this.session.supervisorPassword}}
+          C-{{this.session.invigilatorPassword}}
         </span>
         {{! template-lint-disable no-duplicate-id }}
         {{#if (is-clipboard-supported)}}
           <PixTooltip
             @id="tooltip-clipboard-button"
             @isInline={{true}}
-            @hide={{this.isSupervisorPasswordTooltipTextEmpty}}
+            @hide={{this.isInvigilatorPasswordTooltipTextEmpty}}
             class="session-details-content__clipboard-button"
           >
             <:triggerElement>
@@ -81,10 +81,10 @@
                 @ariaLabel={{t "pages.sessions.detail.parameters.password.copy-password"}}
                 @iconName="copy"
                 @plainIcon={{true}}
-                @triggerAction={{this.showSupervisorPasswordTooltip}}
+                @triggerAction={{this.showInvigilatorPasswordTooltip}}
               />
             </:triggerElement>
-            <:tooltip>{{this.supervisorPasswordTooltipText}}</:tooltip>
+            <:tooltip>{{this.invigilatorPasswordTooltipText}}</:tooltip>
           </PixTooltip>
         {{/if}}
       </div>

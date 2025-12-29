@@ -65,7 +65,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.sessions.extra-information') })).exists();
-    assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.supervisor') })).exists();
+    assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.invigilator') })).exists();
     assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.team') })).exists();
     assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.documentation') })).exists();
     assert.dom(screen.getByRole('link', { name: t('navigation.sidebar.logout') })).exists();
@@ -211,7 +211,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
       assert
         .dom(screen.queryByRole('link', { name: t('navigation.sidebar.sessions.extra-information') }))
         .doesNotExist();
-      assert.dom(screen.queryByRole('link', { name: t('navigation.sidebar.supervisor') })).doesNotExist();
+      assert.dom(screen.queryByRole('link', { name: t('navigation.sidebar.invigilator') })).doesNotExist();
     });
   });
 

@@ -23,7 +23,7 @@ export default class SessionSupervisingRoute extends Route {
       } catch (response) {
         this.#stopPolling();
         if (response?.errors?.[0]?.status === '401') {
-          this.router.replaceWith('login-session-supervisor');
+          this.router.replaceWith('login-session-invigilator');
         }
 
         if (response.message === NO_INTERNET_MESSAGE) {

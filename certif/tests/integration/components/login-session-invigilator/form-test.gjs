@@ -1,18 +1,18 @@
 import { render, within } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import LoginSessionSupervisorForm from 'pix-certif/components/login-session-supervisor/form';
+import LoginSessionInvigilatorForm from 'pix-certif/components/login-session-invigilator/form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Login session supervisor | Form', function (hooks) {
+module('Integration | Component | Login session invigilator | Form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should render supervisor login form', async function (assert) {
+  test('it should render invigilator login form', async function (assert) {
     // when
-    const screen = await render(<template><LoginSessionSupervisorForm /></template>);
+    const screen = await render(<template><LoginSessionInvigilatorForm /></template>);
 
     // then
     assert
@@ -30,11 +30,11 @@ module('Integration | Component | Login session supervisor | Form', function (ho
     module('on session or password error', function () {
       test('it should display an error', async function (assert) {
         // given
-        const authenticateSupervisor = sinon.stub().rejects({ errors: [{ code: 'SESSION_NOT_FOUND' }] });
+        const authenticateInvigilator = sinon.stub().rejects({ errors: [{ code: 'SESSION_NOT_FOUND' }] });
 
         // when
         const screen = await render(
-          <template><LoginSessionSupervisorForm @authenticateSupervisor={{authenticateSupervisor}} /></template>,
+          <template><LoginSessionInvigilatorForm @authenticateInvigilator={{authenticateInvigilator}} /></template>,
         );
 
         await fillIn(
@@ -48,7 +48,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         await click(screen.getByRole('button', { name: t('pages.session-supervising.login.form.actions.invigilate') }));
 
         // then
-        assert.ok(authenticateSupervisor.called);
+        assert.ok(authenticateInvigilator.called);
         assert
           .dom(
             within(screen.getByRole('alert')).getByText(
@@ -62,11 +62,13 @@ module('Integration | Component | Login session supervisor | Form', function (ho
     module('when the certification center is archived', function () {
       test('it should display a specific error', async function (assert) {
         // given
-        const authenticateSupervisor = sinon.stub().rejects({ errors: [{ code: 'CERTIFICATION_CENTER_IS_ARCHIVED' }] });
+        const authenticateInvigilator = sinon
+          .stub()
+          .rejects({ errors: [{ code: 'CERTIFICATION_CENTER_IS_ARCHIVED' }] });
 
         // when
         const screen = await render(
-          <template><LoginSessionSupervisorForm @authenticateSupervisor={{authenticateSupervisor}} /></template>,
+          <template><LoginSessionInvigilatorForm @authenticateInvigilator={{authenticateInvigilator}} /></template>,
         );
 
         await fillIn(
@@ -80,7 +82,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         await click(screen.getByRole('button', { name: t('pages.session-supervising.login.form.actions.invigilate') }));
 
         // then
-        assert.ok(authenticateSupervisor.called);
+        assert.ok(authenticateInvigilator.called);
         assert
           .dom(
             within(screen.getByRole('alert')).getByText(
@@ -95,13 +97,13 @@ module('Integration | Component | Login session supervisor | Form', function (ho
       test('it should display an error with the blocked access date', async function (assert) {
         // given
         const blockedAccessDate = '2025-09-01';
-        const authenticateSupervisor = sinon
+        const authenticateInvigilator = sinon
           .stub()
           .rejects({ errors: [{ code: 'SESSION_NOT_ACCESSIBLE', meta: { blockedAccessDate } }] });
 
         // when
         const screen = await render(
-          <template><LoginSessionSupervisorForm @authenticateSupervisor={{authenticateSupervisor}} /></template>,
+          <template><LoginSessionInvigilatorForm @authenticateInvigilator={{authenticateInvigilator}} /></template>,
         );
 
         await fillIn(
@@ -115,7 +117,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         await click(screen.getByRole('button', { name: t('pages.session-supervising.login.form.actions.invigilate') }));
 
         // then
-        assert.ok(authenticateSupervisor.called);
+        assert.ok(authenticateInvigilator.called);
         assert
           .dom(
             within(screen.getByRole('alert')).getByText(
@@ -129,11 +131,11 @@ module('Integration | Component | Login session supervisor | Form', function (ho
     module('on success', function () {
       test('it should not display an error', async function (assert) {
         // given
-        const authenticateSupervisor = sinon.stub();
+        const authenticateInvigilator = sinon.stub();
 
         // when
         const screen = await render(
-          <template><LoginSessionSupervisorForm @authenticateSupervisor={{authenticateSupervisor}} /></template>,
+          <template><LoginSessionInvigilatorForm @authenticateInvigilator={{authenticateInvigilator}} /></template>,
         );
 
         await fillIn(
@@ -147,7 +149,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         await click(screen.getByRole('button', { name: t('pages.session-supervising.login.form.actions.invigilate') }));
 
         // then
-        assert.ok(authenticateSupervisor.called);
+        assert.ok(authenticateInvigilator.called);
         assert.notOk(screen.queryByRole('alert'));
       });
     });

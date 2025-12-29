@@ -46,12 +46,12 @@ async function checkUserHaveInvigilatorAccessForSession(request, h, dependencies
   const sessionId = request.params.sessionId;
 
   try {
-    const isSupervisorForSession = await dependencies.invigilatorAccessRepository.isUserInvigilatorForSession({
+    const isInvigilatorForSession = await dependencies.invigilatorAccessRepository.isUserInvigilatorForSession({
       sessionId,
       userId,
     });
 
-    if (!isSupervisorForSession) {
+    if (!isInvigilatorForSession) {
       throw new ForbiddenAccess(FORBIDDEN_ERROR_MESSAGE);
     }
     return h.response(true);

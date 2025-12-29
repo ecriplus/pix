@@ -34,7 +34,7 @@ export function register(server) {
         pre: [
           {
             method: assessmentInvigilatorAuthorization.verifyBySessionId,
-            assign: 'isSupervisorForSession',
+            assign: 'isInvigilatorForSession',
           },
         ],
         handler: companionAlertController.clear,

@@ -74,7 +74,7 @@ module('Unit | Route | session-supervising', function (hooks) {
           await clock.tickAsync(250);
 
           // then
-          assert.ok(route.router.replaceWith.calledWith('login-session-supervisor'));
+          assert.ok(route.router.replaceWith.calledWith('login-session-invigilator'));
         });
       });
 

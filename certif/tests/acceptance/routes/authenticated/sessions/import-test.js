@@ -1,7 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, settled, triggerEvent } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { setupIntl } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'miragejs';
 import { module, test } from 'qunit';
@@ -16,7 +16,6 @@ import {
 module('Acceptance | Routes | Authenticated | Sessions | import', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
-  setupIntl(hooks, 'fr');
 
   module('When certificationPointOfContact is not authenticated', function () {
     test('it should not be accessible', async function (assert) {
@@ -45,11 +44,11 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
         server.create('session-summary', { certificationCenterId: certificationCenter.id });
 
         // when
-        const screen = await visit(`/sessions/import`);
+        const screen = await visit('/sessions/import');
 
         // then
         assert.strictEqual(currentURL(), '/sessions');
-        assert.dom(screen.getByText('Sessions de certification')).exists();
+        assert.dom(screen.getByText(t('pages.sessions.list.title'))).exists();
       });
     });
 
@@ -80,14 +79,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
       test('it should transition to sessions import page', async function (assert) {
         // given
-        const screen = await visit(`/`);
+        const screen = await visit('/sessions/');
 
         // when
-        await click(screen.getByRole('link', { name: 'Créer/éditer plusieurs sessions' }));
+        await click(
+          screen.getByRole('link', { name: t('pages.sessions.list.actions.multiple-creation-edition.label') }),
+        );
 
         // then
         assert.strictEqual(currentURL(), '/sessions/import');
-        assert.dom(screen.getByRole('heading', { name: 'Créer/éditer plusieurs sessions' })).exists();
+        assert.dom(screen.getByRole('heading', { name: t('pages.sessions.import.title') })).exists();
       });
 
       module('Template download', function () {
@@ -98,14 +99,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
             this.server.get('/certification-centers/:id/sessions/import', () => {
               return new Response(500, {}, { errors: [{ status: '500' }] });
             });
-            const importButton = screen.getByRole('button', { name: 'Télécharger le modèle vierge' });
+            const importButton = screen.getByRole('button', {
+              name: t('pages.sessions.import.step-one.actions.session-import-template.extra-information'),
+            });
 
             // when
             await click(importButton);
             await settled();
 
             // then
-            assert.dom(screen.getByText("Une erreur s'est produite pendant le téléchargement")).exists();
+            assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.download'))).exists();
           });
         });
       });
@@ -119,9 +122,11 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
             // when
             const screen = await visit('/sessions/import');
-            const importButton = screen.getByRole('button', { name: 'Continuer' });
+            const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
             assert.dom(importButton).hasAttribute('aria-disabled');
-            const input = await screen.findByLabelText('Importer le modèle complété');
+            const input = await screen.findByLabelText(
+              t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+            );
             await triggerEvent(input, 'change', { files: [file] });
             assert.dom(importButton).doesNotHaveAttribute('disabled');
             await click(importButton);
@@ -137,29 +142,41 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
             // when
             const screen = await visit('/sessions/import');
-            const input = await screen.findByLabelText('Importer le modèle complété');
+            const input = await screen.findByLabelText(
+              t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+            );
             await triggerEvent(input, 'change', { files: [file] });
 
             // then
             assert.dom(await screen.getByLabelText('fichier.csv')).exists();
           });
 
-          module('when leaving page and coming back', function () {
+          module('when leaving page and coming back', function (hooks) {
+            hooks.beforeEach(async function () {
+              await authenticateSession(certificationPointOfContact.id);
+            });
+
             test('it should get back to step 1', async function (assert) {
               // given
               server.create('session-summary', { certificationCenterId: certificationCenter.id });
               const blob = new Blob(['foo']);
               const file = new File([blob], 'fichier.csv', { type: 'text/csv' });
+
               const { getByLabelText, getByRole, queryByLabelText } = await visit('/sessions/import');
-              const importButton = getByLabelText('Importer le modèle complété');
+
+              const importButton = getByLabelText(
+                t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+              );
               await triggerEvent(importButton, 'change', { files: [file] });
-              const importConfirmationButton = getByRole('button', { name: 'Continuer' });
+              const importConfirmationButton = getByRole('button', { name: t('common.actions.continue') });
               await click(importConfirmationButton);
 
               // when
-              const outLink = getByRole('link', { name: 'Revenir à la liste des sessions' });
+              const outLink = getByRole('link', { name: t('pages.sessions.actions.return') });
               await click(outLink);
-              await click(getByRole('link', { name: 'Créer/éditer plusieurs sessions' }));
+              await click(
+                getByRole('link', { name: t('pages.sessions.list.actions.multiple-creation-edition.label') }),
+              );
 
               // then
               assert.dom(importButton).exists();
@@ -175,10 +192,14 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
               // when
               const screen = await visit('/sessions/import');
-              const input = await screen.findByLabelText('Importer le modèle complété');
+              const input = await screen.findByLabelText(
+                t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+              );
               await triggerEvent(input, 'change', { files: [file] });
               await settled();
-              const cancelButton = await screen.getByRole('button', { name: "Annuler l'import" });
+              const cancelButton = await screen.getByRole('button', {
+                name: t('pages.sessions.import.step-one.actions.cancel.label'),
+              });
               await click(cancelButton);
               await settled();
 
@@ -207,15 +228,28 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
               // when
               const { getByLabelText, getByRole, getByText, queryByLabelText } = await visit('/sessions/import');
-              const input = getByLabelText('Importer le modèle complété');
+              const input = getByLabelText(
+                t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+              );
               await triggerEvent(input, 'change', { files: [file] });
-              const importButton = getByRole('button', { name: 'Continuer' });
+              const importButton = getByRole('button', { name: t('common.actions.continue') });
               await click(importButton);
               await settled();
 
               // then
-              assert.dom(getByText('2 sessions dont 1 session sans candidat')).exists();
-              assert.dom(getByText('3 candidats')).exists();
+              assert
+                .dom(
+                  getByText(
+                    t('pages.sessions.import.step-two.sessions-and-empty-sessions-count', {
+                      sessionsCount: 2,
+                      sessionsWithoutCandidatesCount: 1,
+                    }),
+                  ),
+                )
+                .exists();
+              assert
+                .dom(getByText(t('pages.sessions.import.step-two.candidates-count', { candidatesCount: 3 })))
+                .exists();
               assert.dom(queryByLabelText('fichier.csv')).doesNotExist();
             });
 
@@ -239,14 +273,22 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = screen.getByLabelText('Importer le modèle complété');
+                const input = screen.getByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
                 await settled();
 
                 // then
-                assert.dom(screen.getByRole('button', { name: 'Créer/éditer les sessions' })).exists();
+                assert
+                  .dom(
+                    screen.getByRole('button', {
+                      name: t('pages.sessions.import.step-two.actions.confirm-with-warning.label'),
+                    }),
+                  )
+                  .exists();
               });
             });
 
@@ -268,21 +310,37 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                   );
                 });
                 const screen = await visit('/sessions/import');
-                const inputInStepOne = screen.getByLabelText('Importer le modèle complété');
+                const inputInStepOne = screen.getByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.label'),
+                );
                 await triggerEvent(inputInStepOne, 'change', { files: [file] });
-                const importInStepOne = screen.getByRole('button', { name: 'Continuer' });
+                const importInStepOne = screen.getByRole('button', { name: t('common.actions.continue') });
 
                 // when
                 await click(importInStepOne);
                 await settled();
 
                 // then
-                assert.dom(screen.getByRole('button', { name: 'Point d’attention non bloquant 1 erreur' })).exists();
-                assert.dom(screen.getByRole('heading', { name: 'Importer à nouveau' })).exists();
+                assert
+                  .dom(
+                    screen.getByRole('button', {
+                      name: `${t('pages.sessions.import.step-two.non-blocking-errors.title', { nonBlockingErrorReportsCount: 1 })} ${t('pages.sessions.import.step-two.non-blocking-errors.tag-information', { nonBlockingErrorReportsCount: 1 })}`,
+                    }),
+                  )
+                  .exists();
+                assert
+                  .dom(
+                    screen.getByRole('heading', {
+                      name: t('pages.sessions.import.step-two.actions.import-again.title'),
+                    }),
+                  )
+                  .exists();
 
                 //given
-                const importInStepTwo = screen.getByRole('button', { name: 'Continuer' });
-                const inputInStepTwo = screen.getByLabelText('Importer le modèle complété');
+                const importInStepTwo = screen.getByRole('button', { name: t('common.actions.continue') });
+                const inputInStepTwo = screen.getByLabelText(
+                  t('pages.sessions.import.step-two.actions.import-again.label'),
+                );
                 await triggerEvent(inputInStepTwo, 'change', { files: [file] });
                 this.server.post('/certification-centers/:id/sessions/validate-for-mass-import', () => {
                   return new Response(
@@ -305,8 +363,14 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                 await settled();
 
                 // then
-                await screen.findByRole('heading', { name: 'Récapitulatif' });
-                assert.dom(screen.getByRole('button', { name: 'Points d’attention non bloquants 2 erreurs' })).exists();
+                await screen.findByRole('heading', { name: t('pages.sessions.import.step-two.title') });
+                assert
+                  .dom(
+                    screen.getByRole('button', {
+                      name: `${t('pages.sessions.import.step-two.non-blocking-errors.title', { nonBlockingErrorReportsCount: 2 })} ${t('pages.sessions.import.step-two.non-blocking-errors.tag-information', { nonBlockingErrorReportsCount: 2 })}`,
+                    }),
+                  )
+                  .exists();
               });
             });
 
@@ -333,12 +397,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = screen.getByLabelText('Importer le modèle complété');
+                const input = screen.getByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
                 await settled();
-                const confirmButton = screen.getByRole('button', { name: 'Finaliser la création/édition' });
+                const confirmButton = screen.getByRole('button', {
+                  name: t('pages.sessions.import.step-two.actions.confirm.label'),
+                });
                 await click(confirmButton);
                 await settled();
 
@@ -369,12 +437,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                   // when
                   const screen = await visit('/sessions/import');
-                  const input = screen.getByLabelText('Importer le modèle complété');
+                  const input = screen.getByLabelText(
+                    t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                  );
                   await triggerEvent(input, 'change', { files: [file] });
-                  const importButton = screen.getByRole('button', { name: 'Continuer' });
+                  const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                   await click(importButton);
                   await settled();
-                  const confirmButton = screen.getByRole('button', { name: 'Finaliser la création/édition' });
+                  const confirmButton = screen.getByRole('button', {
+                    name: t('pages.sessions.import.step-two.actions.confirm.label'),
+                  });
                   await click(confirmButton);
                   await settled();
 
@@ -382,7 +454,11 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                   assert
                     .dom(
                       screen.getByText(
-                        'Succès ! 1 session dont 0 session sans candidat créée et 1 candidat créé ou édité',
+                        t('pages.sessions.import.success', {
+                          sessionsCount: 1,
+                          sessionsWithoutCandidatesCount: 0,
+                          candidatesCount: 1,
+                        }),
                       ),
                     )
                     .exists();
@@ -412,12 +488,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                   // when
                   const screen = await visit('/sessions/import');
-                  const input = screen.getByLabelText('Importer le modèle complété');
+                  const input = screen.getByLabelText(
+                    t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                  );
                   await triggerEvent(input, 'change', { files: [file] });
-                  const importButton = screen.getByRole('button', { name: 'Continuer' });
+                  const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                   await click(importButton);
                   await settled();
-                  const confirmButton = screen.getByRole('button', { name: 'Finaliser la création/édition' });
+                  const confirmButton = screen.getByRole('button', {
+                    name: t('pages.sessions.import.step-two.actions.confirm.label'),
+                  });
                   await click(confirmButton);
                   await settled();
 
@@ -425,7 +505,11 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                   assert
                     .dom(
                       screen.getByText(
-                        'Succès ! 2 sessions dont 0 session sans candidat créées et 3 candidats créés ou édités',
+                        t('pages.sessions.import.success', {
+                          sessionsCount: 2,
+                          sessionsWithoutCandidatesCount: 0,
+                          candidatesCount: 3,
+                        }),
                       ),
                     )
                     .exists();
@@ -459,14 +543,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = await screen.findByLabelText('Importer le modèle complété');
+                const input = await screen.findByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
                 await settled();
 
                 // then
-                assert.dom(screen.getByText('Le modèle a été altéré, merci de le télécharger à nouveau')).exists();
+                assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.CSV_HEADERS_NOT_VALID'))).exists();
               });
 
               test('it should not go to step two', async function (assert) {
@@ -493,13 +579,21 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = await screen.findByLabelText('Importer le modèle complété');
+                const input = await screen.findByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
 
                 // then
-                assert.dom(screen.getByRole('button', { name: 'Télécharger le modèle vierge' })).exists();
+                assert
+                  .dom(
+                    screen.getByRole('button', {
+                      name: t('pages.sessions.import.step-one.actions.session-import-template.extra-information'),
+                    }),
+                  )
+                  .exists();
               });
             });
 
@@ -526,14 +620,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = await screen.findByLabelText('Importer le modèle complété');
+                const input = await screen.findByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
                 await settled();
 
                 // then
-                assert.dom(screen.getByText('Le modèle a été altéré, merci de le télécharger à nouveau')).exists();
+                assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.CSV_HEADERS_NOT_VALID'))).exists();
               });
             });
 
@@ -560,20 +656,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                 // when
                 const screen = await visit('/sessions/import');
-                const input = await screen.findByLabelText('Importer le modèle complété');
+                const input = await screen.findByLabelText(
+                  t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                );
                 await triggerEvent(input, 'change', { files: [file] });
-                const importButton = screen.getByRole('button', { name: 'Continuer' });
+                const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                 await click(importButton);
                 await settled();
 
                 // then
-                assert
-                  .dom(
-                    screen.getByText(
-                      "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-                    ),
-                  )
-                  .exists();
+                assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.CSV_DATA_REQUIRED'))).exists();
               });
             });
 
@@ -600,33 +692,27 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                   );
 
                   const screen = await visit('/sessions/import');
-                  const input = screen.getByLabelText('Importer le modèle complété');
+                  const input = screen.getByLabelText(
+                    t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                  );
                   await triggerEvent(input, 'change', { files: [file] });
 
                   // when
-                  await click(screen.getByRole('button', { name: 'Continuer' }));
+                  await click(screen.getByRole('button', { name: t('common.actions.continue') }));
                   await settled();
 
                   // then
-                  assert
-                    .dom(
-                      screen.getByText(
-                        "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-                      ),
-                    )
-                    .exists();
+                  assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.CSV_DATA_REQUIRED'))).exists();
 
                   // when
-                  await click(screen.getByRole('button', { name: "Annuler l'import" }));
+                  await click(
+                    screen.getByRole('button', { name: t('pages.sessions.import.step-one.actions.cancel.label') }),
+                  );
                   await settled();
 
                   // then
                   assert
-                    .dom(
-                      screen.queryByText(
-                        "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-                      ),
-                    )
+                    .dom(screen.queryByText(t('pages.sessions.import.step-one.errors.CSV_DATA_REQUIRED')))
                     .doesNotExist();
                 });
               });
@@ -653,32 +739,24 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
                   );
 
                   const screen = await visit('/sessions/import');
-                  const input = screen.getByLabelText('Importer le modèle complété');
+                  const input = screen.getByLabelText(
+                    t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                  );
                   await triggerEvent(input, 'change', { files: [file] });
 
                   // when
-                  await click(screen.getByRole('button', { name: 'Continuer' }));
+                  await click(screen.getByRole('button', { name: t('common.actions.continue') }));
                   await settled();
 
                   // then
-                  assert
-                    .dom(
-                      screen.getByText(
-                        "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-                      ),
-                    )
-                    .exists();
+                  assert.dom(screen.getByText(t('pages.sessions.import.step-one.errors.CSV_DATA_REQUIRED'))).exists();
 
                   // when
                   await triggerEvent(input, 'change', { files: [file] });
 
                   // then
                   assert
-                    .dom(
-                      screen.queryByText(
-                        "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-                      ),
-                    )
+                    .dom(screen.queryByText(t('pages.sessions.import.step-one.errors.CSV_DATA_REQUIRED')))
                     .doesNotExist();
                 });
               });
@@ -695,20 +773,16 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
 
                   // when
                   const screen = await visit('/sessions/import');
-                  const input = await screen.findByLabelText('Importer le modèle complété');
+                  const input = await screen.findByLabelText(
+                    t('pages.sessions.import.step-one.actions.session-import-upload.extra-information'),
+                  );
                   await triggerEvent(input, 'change', { files: [file] });
-                  const importButton = screen.getByRole('button', { name: 'Continuer' });
+                  const importButton = screen.getByRole('button', { name: t('common.actions.continue') });
                   await click(importButton);
                   await settled();
 
                   // then
-                  assert
-                    .dom(
-                      screen.getByText(
-                        'Une erreur interne est survenue, nos équipes sont en train de résoudre le problème. Veuillez réessayer ultérieurement.',
-                      ),
-                    )
-                    .exists();
+                  assert.dom(screen.getByText(t('common.api-error-messages.internal-server-error'))).exists();
                 });
               });
             });

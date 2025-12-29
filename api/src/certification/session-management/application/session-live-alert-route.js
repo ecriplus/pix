@@ -35,7 +35,7 @@ const register = async function (server) {
         pre: [
           {
             method: assessmentInvigilatorAuthorization.verifyBySessionId,
-            assign: 'isSupervisorForSession',
+            assign: 'isInvigilatorForSession',
           },
         ],
         handler: sessionLiveAlertController.dismissLiveAlert,
@@ -74,7 +74,7 @@ const register = async function (server) {
         pre: [
           {
             method: assessmentInvigilatorAuthorization.verifyBySessionId,
-            assign: 'isSupervisorForSession',
+            assign: 'isInvigilatorForSession',
           },
         ],
         handler: sessionLiveAlertController.validateLiveAlert,

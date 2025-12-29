@@ -220,7 +220,7 @@ describe('Acceptance | API | Certification Center', function () {
             room: 'salle',
             status: null,
             'examiner-global-comment': null,
-            'supervisor-password': null,
+            'invigilator-password': null,
             'has-some-clea-acquired': false,
             'has-incident': false,
             'has-joining-issue': false,
