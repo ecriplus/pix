@@ -1,4 +1,4 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -103,6 +103,7 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
           url: 'https://example.org',
           instruction: '<p>Instruction du POIC</p>',
           height: 400,
+          type: 'custom-draft',
         };
         const featureToggles = this.owner.lookup('service:featureToggles');
         sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
@@ -118,10 +119,10 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
         await waitForDialog();
 
         // then
-        assert.dom(screen.getByRole('dialog')).exists();
-        assert
-          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
-          .exists();
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+        const listbox = await screen.findByRole('listbox');
+        const options = within(listbox).getAllByRole('option');
+        assert.strictEqual(options.length, 4);
       });
     });
   });

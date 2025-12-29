@@ -21,6 +21,7 @@ export default class ModulixEmbed extends ModuleElement {
     this.reportInfo = {
       answer: null,
       elementId: this.args.embed.id,
+      elementType: this.args.embed.type,
     };
   }
 

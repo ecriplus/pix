@@ -43,6 +43,7 @@ export default class ModulixIssueReportBlock extends Component {
       >{{t "pages.modulix.issue-report.button"}}</PixButton>
 
       <ModulixIssueReportModal
+        @elementType={{@reportInfo.elementType}}
         @showModal={{this.showModal}}
         @hideModal={{this.hideModal}}
         @onSendReport={{this.onSend}}

@@ -69,7 +69,7 @@ module('Acceptance | Module | Routes | sendIssueReport', function (hooks) {
 
       await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: 'Accessibilité de l‘épreuve' }));
+      await click(screen.getByRole('option', { name: 'Problème d’accessibilité' }));
 
       await fillIn(
         screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }),

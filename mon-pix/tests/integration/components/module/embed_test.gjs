@@ -1,4 +1,4 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
@@ -617,6 +617,7 @@ module('Integration | Component | Module | Embed', function (hooks) {
           isCompletionRequired: false,
           url: 'https://example.org',
           height: 800,
+          type: 'embed',
         };
 
         // when
@@ -630,10 +631,10 @@ module('Integration | Component | Module | Embed', function (hooks) {
         await waitForDialog();
 
         // then
-        assert.dom(screen.getByRole('dialog')).exists();
-        assert
-          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
-          .exists();
+        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+        const listbox = await screen.findByRole('listbox');
+        const options = within(listbox).getAllByRole('option');
+        assert.strictEqual(options.length, 4);
       });
     });
   });

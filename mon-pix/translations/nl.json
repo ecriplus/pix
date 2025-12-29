@@ -1680,6 +1680,21 @@
           "missing-comment": "Voer een opmerking in."
         },
         "modal": {
+          "categories": {
+            "custom-and-embed": {
+              "embed-not-working": "De simulator/app werkt niet",
+              "instruction-issue": "Ik begrijp de instructie niet"
+            },
+            "default": {
+              "accessibility-issue": "Probleem met toegankelijkheid",
+              "other": "Ander"
+            },
+            "feedback": {
+              "improvement": "Ik wil een verbetering voorstellen",
+              "question-issue": "Ik begrijp de vraag niet",
+              "response-issue": "Ik ben het niet eens met het antwoord"
+            }
+          },
           "legend": "Informatie die nodig is om een melding te versturen",
           "select-label": "Reden voor de melding",
           "textarea-label": "Opmerking",
