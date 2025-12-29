@@ -13,6 +13,7 @@ export const createCombinedCourses = withTransaction(
     accessCodeRepository,
     combinedCourseRepository,
     recommendedModuleRepository,
+    moduleRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER);
     const csvData = csvParser.parse();
@@ -32,6 +33,10 @@ export const createCombinedCourses = withTransaction(
         const combinedCourseCode = await codeGenerator.generate(accessCodeRepository, pendingCodes);
         pendingCodes.push(combinedCourseCode);
 
+        const modules = await moduleRepository.getByShortIds({
+          moduleShortIds: combinedCourseBlueprint.moduleShortIds,
+        });
+
         for (const targetProfile of targetProfiles) {
           const recommendableModules = await recommendedModuleRepository.findIdsByTargetProfileIds({
             targetProfileIds: [targetProfile.id],
@@ -39,9 +44,7 @@ export const createCombinedCourses = withTransaction(
 
           const hasRecommendableModulesInTargetProfile =
             recommendableModules.length > 0 &&
-            Boolean(
-              recommendableModules.filter(({ moduleId }) => combinedCourseBlueprint.moduleIds.includes(moduleId)),
-            );
+            Boolean(recommendableModules.filter(({ moduleId }) => modules.map(({ id }) => id).includes(moduleId)));
 
           let combinedCourseUrl = '/parcours/' + combinedCourseCode;
 
@@ -67,6 +70,7 @@ export const createCombinedCourses = withTransaction(
           combinedCourseCode,
           organizationId,
           createdCampaigns,
+          Object.groupBy(modules, ({ shortId }) => shortId),
         );
         combinedCourses.push(combinedCourse);
       }

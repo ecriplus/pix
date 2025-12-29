@@ -204,4 +204,41 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
       });
     });
   });
+
+  describe('#getModulesByShortIds', function () {
+    it('should return a list of Modules', async function () {
+      // given
+      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
+      const existingModuleShortId1 = 'ecc13f55';
+      const existingModuleShortId2 = 'e074af34';
+      const moduleShortIds = [existingModuleShortId1, existingModuleShortId2];
+
+      // when
+      const result = await modulesApi.getModulesByShortIds({ moduleShortIds });
+
+      // then
+      // then
+      const expectedResult = [
+        {
+          duration: undefined,
+          id: '5df14039-803b-4db4-9778-67e4b84afbbd',
+          shortId: existingModuleShortId1,
+          slug: 'adresse-ip-publique-et-vous',
+          title: "L'adresse IP publique : ce qu'elle révèle sur vous !",
+          image: undefined,
+        },
+        {
+          id: '9beb922f-4d8e-495d-9c85-0e7265ca78d6',
+          shortId: existingModuleShortId2,
+          slug: 'au-dela-des-mots-de-passe',
+          title: 'Au-delà des mots de passe : comment s’authentifier ?',
+          duration: undefined,
+          image: undefined,
+        },
+      ];
+
+      expect(result).deep.equal(expectedResult);
+      expect(result[0]).instanceOf(Module);
+    });
+  });
 });

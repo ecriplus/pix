@@ -14,7 +14,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
         illustration: 'illustration/ia.svg',
         createdAt: new Date(),
         updatedAt: new Date(),
-        content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'modulix' }]),
+        content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'modulix' }]),
       };
 
       // when
@@ -36,7 +36,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
         illustration: 'illustration/ia.svg',
         createdAt: new Date(),
         updatedAt: new Date(),
-        content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'modulix' }]),
+        content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'modulix' }]),
       };
 
       // when
