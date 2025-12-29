@@ -9,7 +9,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
   it('#serialize', function () {
     // given
     const combinedCourseBlueprint = domainBuilder.buildCombinedCourseBlueprint({
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'mon-module' }, { targetProfileId: 123 }]),
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }, { targetProfileId: 123 }]),
     });
 
     // when

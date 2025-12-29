@@ -38,7 +38,7 @@ export class CombinedCourseBlueprint {
           campaignId,
         });
       } else if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
-        const module = modulesByShortId[requirement.value];
+        const [module] = modulesByShortId[requirement.value];
         return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
           moduleId: module.id,
         });
@@ -86,9 +86,9 @@ export class CombinedCourseBlueprint {
     }
   }
   static buildContentItems(items) {
-    return items.map(({ moduleId, targetProfileId }) =>
-      moduleId
-        ? { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleId }
+    return items.map(({ moduleShortId, targetProfileId }) =>
+      moduleShortId
+        ? { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleShortId }
         : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId },
     );
   }

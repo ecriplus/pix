@@ -3,6 +3,7 @@ import {
   COMBINED_COURSE_BLUEPRINT_ITEMS,
   CombinedCourseBlueprint,
 } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import {
   CRITERION_COMPARISONS,
   Quest,
@@ -21,7 +22,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         internalName: 'internaleName',
         description: 'description',
         illustration: 'illustration',
-        content: CombinedCourseBlueprint.buildContentItems([{ moduleId: '123' }]),
+        content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '123' }]),
         createdAt: new Date('2024-01-25'),
         updatedAt: new Date('2024-01-26'),
       };
@@ -36,7 +37,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
     it('should build blueprint content items for targetProfileId and moduleId', function () {
       const requirements = CombinedCourseBlueprint.buildContentItems([
         { targetProfileId: 123 },
-        { moduleId: 'az-123' },
+        { moduleShortId: 'az-123' },
       ]);
 
       expect(requirements).deep.equal([
@@ -52,8 +53,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
     });
   });
 
-  describe('#moduleIds', function () {
-    it('should return module ids from passages success requirements', async function () {
+  describe('#moduleShortIds', function () {
+    it('should return module short ids from passages success requirements', async function () {
       const combinedCourseContent = [
         {
           type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
@@ -72,7 +73,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         name: 'combinix',
         content: combinedCourseContent,
       });
-      expect(combinedCourseBlueprint.moduleIds).to.deep.equal(['abcdef-555', 'abcdef-777']);
+      expect(combinedCourseBlueprint.moduleShortIds).to.deep.equal(['abcdef-555', 'abcdef-777']);
     });
 
     it('should return empty list of ids if template has not any campaignParticipations success requirements', async function () {
@@ -86,7 +87,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         name: 'combinix',
         content: combinedCourseContent,
       });
-      expect(combinedCourseBlueprint.moduleIds).to.deep.equal([]);
+      expect(combinedCourseBlueprint.moduleShortIds).to.deep.equal([]);
     });
   });
 
@@ -143,6 +144,9 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
           targetProfileId: secondTargetProfileId,
         },
       ];
+      const modulesByShortId = {
+        ecc13f55: [new Module({ id: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' })],
+      };
       const combinedCourseContent = [
         {
           type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
@@ -154,7 +158,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         },
         {
           type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
-          value: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+          value: 'ecc13f55',
         },
       ];
       const description = 'bla bla bla';
@@ -167,7 +171,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         description,
         illustration,
       });
-      const combinedCourse = combinedCourseBlueprint.toCombinedCourse(code, organizationId, campaigns);
+      const combinedCourse = combinedCourseBlueprint.toCombinedCourse(
+        code,
+        organizationId,
+        campaigns,
+        modulesByShortId,
+      );
 
       // then
       const quest = new Quest({

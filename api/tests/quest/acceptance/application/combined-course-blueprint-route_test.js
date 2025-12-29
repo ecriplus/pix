@@ -21,10 +21,10 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const adminUser = await insertUserWithRoleSuperAdmin();
 
         databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'mon-module' }]),
+          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }]),
         });
         databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'mon-module-abc' }]),
+          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module-abc' }]),
         });
         await databaseBuilder.commit();
 
@@ -57,7 +57,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
               'internal-name': 'Mon schéma de parcours combiné',
               description: 'La description combinix',
               illustration: 'illustration.svg',
-              content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'modulox' }]),
+              content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'modulox' }]),
             },
           },
         };

@@ -14,7 +14,7 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'abc-123' }, { targetProfileId }]),
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'abc-123' }, { targetProfileId }]),
     };
 
     await usecases.createCombinedCourseBlueprint({ combinedCourseBlueprint });
@@ -36,7 +36,7 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleId: 'abc-123' }, { targetProfileId: 123 }]),
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'abc-123' }, { targetProfileId: 123 }]),
     };
 
     const error = await catchErr(usecases.createCombinedCourseBlueprint)({ combinedCourseBlueprint });
