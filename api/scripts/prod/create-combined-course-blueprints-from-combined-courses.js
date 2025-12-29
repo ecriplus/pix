@@ -1,9 +1,11 @@
 import { createHash } from 'node:crypto';
 
 import { knex } from '../../db/knex-database-connection.js';
+import * as modulesApi from '../../src/devcomp/application/api/modules-api.js';
 import { CombinedCourseDetails } from '../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { REQUIREMENT_TYPES } from '../../src/quest/domain/models/Quest.js';
+import * as questModuleRepository from '../../src/quest/infrastructure/repositories/module-repository.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
@@ -13,7 +15,7 @@ export class CreateCombinedCourseBlueprint extends Script {
   constructor(moduleRepository) {
     super({
       description: 'Create combined course blueprint based on existing combined courses',
-      permanent: true,
+      permanent: false,
       options: {
         dryRun: {
           type: 'boolean',
@@ -22,7 +24,7 @@ export class CreateCombinedCourseBlueprint extends Script {
         },
       },
     });
-    this.#moduleRepository = moduleRepository;
+    this.#moduleRepository = moduleRepository ?? questModuleRepository;
   }
 
   async handle({ options, logger }) {
@@ -84,7 +86,10 @@ export class CreateCombinedCourseBlueprint extends Script {
         items.push({ targetProfileId: campaign.targetProfileId });
       }
       if (successRequirement.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES) {
-        const [module] = await this.#moduleRepository.getByIds([successRequirement.data.moduleId.data]);
+        const [module] = await this.#moduleRepository.getByIds({
+          moduleIds: [successRequirement.data.moduleId.data],
+          modulesApi,
+        });
         items.push({ moduleShortId: module.shortId });
       }
     }
