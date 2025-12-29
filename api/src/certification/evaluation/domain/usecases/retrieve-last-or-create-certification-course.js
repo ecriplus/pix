@@ -28,8 +28,6 @@ import { CertificationCourse } from '../../../shared/domain/models/Certification
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { Scopes } from '../../../shared/domain/models/Scopes.js';
 
-const { features } = config;
-
 /**
  * @param {Object} params
  * @param {AssessmentRepository} params.assessmentRepository
@@ -285,7 +283,7 @@ async function _createCertificationCourse({
 
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
-    maxReachableLevelOnCertificationDate: features.maxReachableLevel,
+    maxReachableLevelOnCertificationDate: config.v3Certification.maxReachableLevel,
     complementaryCertificationCourse,
     verificationCode,
     algorithmEngineVersion: AlgorithmEngineVersion.V3,
