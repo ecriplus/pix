@@ -23,13 +23,13 @@ export class CombinedCourseBlueprint {
       .map(({ value }) => parseInt(value));
   }
 
-  get moduleIds() {
+  get moduleShortIds() {
     return this.content
       .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
       .map(({ value }) => value);
   }
 
-  toCombinedCourse(code, organizationId, campaigns) {
+  toCombinedCourse(code, organizationId, campaigns, modulesByShortId) {
     const successRequirements = this.content.map((requirement) => {
       if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
         const requirementTargetProfileId = requirement.value;
@@ -38,8 +38,9 @@ export class CombinedCourseBlueprint {
           campaignId,
         });
       } else if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
+        const module = modulesByShortId[requirement.value];
         return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
-          moduleId: requirement.value,
+          moduleId: module.id,
         });
       } else {
         return requirement;
