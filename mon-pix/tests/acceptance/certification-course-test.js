@@ -391,7 +391,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
         assert.dom(screen.getByRole('heading', { name: 'Test terminé !' })).exists();
       });
 
-      module('when test was ended by supervisor', function () {
+      module('when test was ended by invigilator', function () {
         test('should display "Votre surveillant a mis fin…"', async function (assert) {
           // given
           const user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
@@ -418,7 +418,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
       });
 
       module('when user has already started the certification', function () {
-        module('when test was ended by supervisor', function () {
+        module('when test was ended by invigilator', function () {
           test('should redirect to "Votre surveillant a mis fin…"', async function (assert) {
             // given
             user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });

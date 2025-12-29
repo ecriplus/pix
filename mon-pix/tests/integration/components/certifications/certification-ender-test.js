@@ -61,8 +61,8 @@ module('Integration | Component | Certifications | CertificationEnder', function
     assert.ok(screen.getByText(t('pages.certification-ender.candidate.remote-certification')));
   });
 
-  module('when the assessment status is not ended by supervisor', function () {
-    test('should not display the ended by supervisor text', async function (assert) {
+  module('when the assessment status is not ended by invigilator', function () {
+    test('should not display the ended by invigilator text', async function (assert) {
       // given
       stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 
@@ -76,8 +76,8 @@ module('Integration | Component | Certifications | CertificationEnder', function
     });
   });
 
-  module('when the assessment status is ended by supervisor', function () {
-    test('should display the ended by supervisor text', async function (assert) {
+  module('when the assessment status is ended by invigilator', function () {
+    test('should display the ended by invigilator text', async function (assert) {
       // given
       stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 

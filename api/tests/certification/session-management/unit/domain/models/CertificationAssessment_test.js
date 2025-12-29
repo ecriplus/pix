@@ -483,7 +483,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
     });
   });
 
-  describe('#endBySupervisor', function () {
+  describe('#endByInvigilator', function () {
     it('should change the assessment state to "endBySupervisor"', function () {
       // given
       const now = new Date('2020-12-31');
