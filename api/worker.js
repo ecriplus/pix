@@ -1,7 +1,7 @@
+import { glob } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { glob } from 'glob';
 import _ from 'lodash';
 import PgBoss from 'pg-boss';
 
@@ -92,7 +92,7 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss, cr
   const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
   logger.info(`Search for job handlers in ${globPattern}`);
-  const jobFiles = await glob(globPattern, { ignore: '**/job-controller.js' });
+  const jobFiles = await Array.fromAsync(glob(globPattern, { exclude: ['**/job-controller.js'] }));
   logger.info(`${jobFiles.length} job handlers files found.`);
 
   let jobModules = {};

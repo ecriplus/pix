@@ -1,10 +1,10 @@
 /* eslint-disable no-sync */
 import fs from 'node:fs';
+import { glob } from 'node:fs/promises';
 import { builtinModules } from 'node:module';
 import path from 'node:path';
 
 import { init, parse } from 'es-module-lexer';
-import { glob } from 'glob';
 
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
@@ -142,11 +142,9 @@ function getExcludedApisPath(config) {
 async function checkDependencyViolations(basePath, entryPath, excludedModules, excludedPath) {
   const entryAbsolutePath = path.resolve(basePath, entryPath);
   const globPath = path.join(entryAbsolutePath, '**/*.js');
-  const files = await glob(globPath);
-
   const violationsByFile = {};
 
-  for (const file of files) {
+  for await (const file of glob(globPath)) {
     const source = fs.readFileSync(file, { encoding: 'utf-8' });
     const [dependencies] = parse(source);
 
