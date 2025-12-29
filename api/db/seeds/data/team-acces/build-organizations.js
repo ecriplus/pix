@@ -15,9 +15,9 @@ function _buildOrganizationWithoutAdmins(databaseBuilder) {
   const tag1 = databaseBuilder.factory.buildTag({ name: 'tag1' });
   const tag2 = databaseBuilder.factory.buildTag({ name: 'tag2' });
   databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
-    firstName: 'justin',
-    lastName: 'instant',
-    email: 'justin-instant@example.net',
+    firstName: 'Claire',
+    lastName: 'Voyance',
+    email: 'claire.voyance@example.net',
     organizationId: organization.id,
   });
   databaseBuilder.factory.buildOrganizationTag({

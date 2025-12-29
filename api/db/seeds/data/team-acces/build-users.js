@@ -3,41 +3,44 @@ import { OIDC_PROVIDER_EXAMPLE_NET_IDENTITY_PROVIDER } from './constants.js';
 function _buildUsers(databaseBuilder) {
   // User bare
   databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Salvor',
-    lastName: 'Hardin',
-    email: 'salvor.hardin@example.net',
+    firstName: 'Justin',
+    lastName: 'Compte',
+    email: 'justin.compte@example.net',
   });
 
-  // User with a specific lastLoggedAt
+  // User with a recent lastLoggedAt and email confirmed
   const userWithLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Gaal',
-    lastName: 'Dornick',
-    email: 'gaal.dornick@example.net',
+    firstName: 'Justin',
+    lastName: 'Instant',
+    email: 'justin.instant@example.net',
+    emailConfirmedAt: new Date(),
   });
-  databaseBuilder.factory.buildUserLogin({ userId: userWithLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
+  databaseBuilder.factory.buildUserLogin({ userId: userWithLastLoggedAt.id, lastLoggedAt: new Date() });
 
-  // User with a specific createdAt
+  // User with an old createdAt (>1 year) and no email confirmation date
   databaseBuilder.factory.buildUser.withRawPassword({
+    createdAt: new Date('1985-10-26'),
     firstName: 'Chrono',
-    lastName: 'Post',
-    email: 'chrono.post@example.net',
-    createdAt: new Date('2000-12-31'),
+    lastName: 'Scaphe',
+    email: 'old-created-at@example.net',
+    emailConfirmedAt: null,
   });
 
   // User with an old lastLoggedAt (>1 year) and no email confirmation date
   const userWithOldLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Old',
-    lastName: 'Connexion',
-    email: 'old-connexion@example.net',
+    createdAt: new Date('1985-10-26'),
+    firstName: 'Chrono',
+    lastName: 'Gyre',
+    email: 'old-last-logged-at@example.net',
     emailConfirmedAt: null,
   });
-  databaseBuilder.factory.buildUserLogin({ userId: userWithOldLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
+  databaseBuilder.factory.buildUserLogin({ userId: userWithOldLastLoggedAt.id, lastLoggedAt: new Date('1985-10-26') });
 
-  // User without lastLoggedAt
+  // User with a userLogin but without lastLoggedAt
   const userWithoutLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'without',
-    lastName: 'LastLoggedAt',
-    email: 'without-lastlogged@example.net',
+    firstName: 'Justin',
+    lastName: 'Login',
+    email: 'without-last-logged-at@example.net',
     emailConfirmedAt: null,
   });
   databaseBuilder.factory.buildUserLogin({ userId: userWithoutLastLoggedAt.id, lastLoggedAt: null });

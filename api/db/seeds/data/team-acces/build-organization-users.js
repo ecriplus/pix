@@ -8,8 +8,8 @@ export function buildOrganizationUsers(databaseBuilder) {
   [
     {
       id: PIX_ORGA_ALL_ORGA_ID,
-      firstName: 'Rhaenyra',
-      lastName: 'Targaryen',
+      firstName: 'Jean',
+      lastName: 'Registre',
       email: 'allorga@example.net',
       cguVersion: 'v2',
     },

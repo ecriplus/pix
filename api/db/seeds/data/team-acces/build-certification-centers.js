@@ -13,28 +13,22 @@ export async function buildCertificationCenters(databaseBuilder) {
     secondUserWithInvitation,
   ] = [
     {
-      firstName: 'James',
-      lastName: 'Palédroits',
-      email: 'james-paledroits@example.net',
-      username: 'james.paledroits',
+      firstName: 'Maude',
+      lastName: 'Erateur',
+      email: 'maude.erateur@example.net',
+      username: 'maude.erateur',
     },
     {
-      firstName: 'Agathe',
-      lastName: 'Zeublouse',
-      email: 'agathe-zeublouse@example.net',
-      username: 'agathe.zeublouse',
+      firstName: 'Otto',
+      lastName: 'Graf',
+      email: 'otto.graf@example.net',
+      username: 'otto.graf',
     },
     {
-      firstName: 'Marc-Alex',
-      lastName: 'Terrieur',
-      email: 'marc-alex-terrieur@example.net',
-      username: 'marc-alex-terrieur',
-    },
-    {
-      firstName: 'Harry',
-      lastName: 'Cover',
-      email: 'harry-cover@example.net',
-      username: 'harry.cover',
+      firstName: 'Édith',
+      lastName: 'Orial',
+      email: 'edith.orial@example.net',
+      username: 'edith.orial',
     },
     {
       firstName: 'Renée',
@@ -43,17 +37,22 @@ export async function buildCertificationCenters(databaseBuilder) {
       username: 'renee.sens',
     },
     {
-      firstName: 'Camille',
-      lastName: 'Onette',
-      email: 'camille-onette@example.net',
-      username: 'camille.onette',
+      firstName: 'Harry',
+      lastName: 'Cover',
+      email: 'harry-cover@example.net',
+      username: 'harry.cover',
     },
-
     {
-      firstName: 'Lee',
-      lastName: 'Tige',
-      email: 'lee-tige@example.net',
-      username: 'lee.tige',
+      firstName: 'Vivien',
+      lastName: 'Chezmoi',
+      email: 'vivien.chezmoi@example.net',
+      username: 'vivien.chezmoi',
+    },
+    {
+      firstName: 'Agathe',
+      lastName: 'Zeublouse',
+      email: 'agathe-zeublouse@example.net',
+      username: 'agathe.zeublouse',
     },
   ].map((user) => _buildUsersWithDefaultPassword({ databaseBuilder, ...user }));
 
