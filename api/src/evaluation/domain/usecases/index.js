@@ -4,7 +4,6 @@ import * as certificationChallengeLiveAlertRepository from '../../../certificati
 import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
-import { participationCompletedJobRepository } from '../../../prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import knowledgeElementForParticipationService from '../../../prescription/shared/domain/services/knowledge-element-for-participation-service.js';
 import * as targetProfileAdministrationRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
@@ -82,7 +81,6 @@ const dependencies = {
   getNewAcquiredStagesService,
   convertLevelStagesIntoThresholdsService,
   getMasteryPercentageService,
-  participationCompletedJobRepository,
   knowledgeElementForParticipationService,
 };
 
