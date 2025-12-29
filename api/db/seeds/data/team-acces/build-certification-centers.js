@@ -58,7 +58,7 @@ export async function buildCertificationCenters(databaseBuilder) {
   ].map((user) => _buildUsersWithDefaultPassword({ databaseBuilder, ...user }));
 
   const { certificationCenterId } = await createCertificationCenter({
-    name: 'Accèssorium',
+    name: 'Accessorium',
     certificationCenterId: CERTIFICATION_CENTER_OFFSET_ID,
     databaseBuilder,
     members: [
@@ -72,7 +72,7 @@ export async function buildCertificationCenters(databaseBuilder) {
   });
 
   await createCertificationCenter({
-    name: 'Accèssovolt',
+    name: 'Accessovolt',
     certificationCenterId: CERTIFICATION_CENTER_OFFSET_ID + 1,
     databaseBuilder,
     members: [{ id: userWithAdminRole1.id }],
@@ -80,7 +80,7 @@ export async function buildCertificationCenters(databaseBuilder) {
   });
 
   await createCertificationCenter({
-    name: 'Accèstral',
+    name: 'Accestral',
     certificationCenterId: CERTIFICATION_CENTER_OFFSET_ID + 2,
     databaseBuilder,
     members: [{ id: userWithAdminRole1.id, role: 'ADMIN' }],

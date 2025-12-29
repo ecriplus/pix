@@ -7,7 +7,7 @@ export function buildOrganizations(databaseBuilder) {
 function _buildOrganizationWithoutAdmins(databaseBuilder) {
   const organization = databaseBuilder.factory.buildOrganization({
     type: 'PRO',
-    name: 'Accis',
+    name: 'Accessorama',
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
     countryCode: COUNTRY_CANADA_CODE,
   });
