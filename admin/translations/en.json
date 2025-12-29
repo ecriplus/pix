@@ -1110,11 +1110,11 @@
               "validated": "Validated"
             },
             "assessment-state": {
-              "ended-by-supervisor": "The invigilator",
+              "ended-by-invigilator": "The invigilator",
               "ended-due-to-finalization": "Session finalised"
             },
             "completion-date-tooltip": {
-              "ended-by-supervisor": "Date et heure à laquelle le test de certification a été terminé par le surveillant.",
+              "ended-by-invigilator": "Date et heure à laquelle le test de certification a été terminé par le surveillant.",
               "ended-due-to-finalization": "Date et heure d'affichage de la dernière question proposée au candidat."
             },
             "general-informations": {

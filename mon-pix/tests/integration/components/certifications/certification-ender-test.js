@@ -72,7 +72,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
       );
 
       // then
-      assert.notOk(screen.queryByText(t('pages.certification-ender.candidate.ended-by-supervisor')));
+      assert.notOk(screen.queryByText(t('pages.certification-ender.candidate.ended-by-invigilator')));
     });
   });
 
@@ -87,7 +87,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
       );
 
       // then
-      assert.ok(screen.getByText(t('pages.certification-ender.candidate.ended-by-supervisor')));
+      assert.ok(screen.getByText(t('pages.certification-ender.candidate.ended-by-invigilator')));
     });
   });
 
