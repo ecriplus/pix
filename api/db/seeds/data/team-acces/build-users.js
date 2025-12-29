@@ -41,14 +41,14 @@ function _buildUsers(databaseBuilder) {
     firstName: 'Salvor',
     lastName: 'Hardin',
     username: 'salvor.hardin',
-    email: 'salvor.hardin@foundation.verse',
+    email: 'salvor.hardin@example.net',
   });
 
   const userWithLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Gaal',
     lastName: 'Dornick',
     username: 'gaal.dornick',
-    email: 'gaal.dornick@foundation.verse',
+    email: 'gaal.dornick@example.net',
   });
   databaseBuilder.factory.buildUserLogin({ userId: userWithLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
 
