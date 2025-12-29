@@ -6,17 +6,23 @@ import { ComplementaryCertificationTargetProfileHistory } from '../models/Comple
 
 /**
  * @param {Object} params
- * @param {number} params.complementaryCertificationId
+ * @param {string} params.complementaryCertificationKey
  * @param {TargetProfileHistoryRepository} params.targetProfileHistoryRepository
  * @param {ComplementaryCertificationForTargetProfileAttachmentRepository} params.complementaryCertificationForTargetProfileAttachmentRepository
  *
  * @returns {Promise<ComplementaryCertificationTargetProfileHistory>} all target profiles than were applicable for this complementary certification
  */
 const getComplementaryCertificationTargetProfileHistory = async function ({
-  complementaryCertificationId,
+  complementaryCertificationKey,
   targetProfileHistoryRepository,
   complementaryCertificationForTargetProfileAttachmentRepository,
 }) {
+  const complementaryCertification = await complementaryCertificationForTargetProfileAttachmentRepository.getByKey({
+    complementaryCertificationKey,
+  });
+
+  const complementaryCertificationId = complementaryCertification.id;
+
   const currentsTargetProfileHistoryWithBadgesByComplementaryCertification =
     await targetProfileHistoryRepository.getCurrentTargetProfilesHistoryWithBadgesByComplementaryCertificationId({
       complementaryCertificationId,
@@ -26,10 +32,6 @@ const getComplementaryCertificationTargetProfileHistory = async function ({
     await targetProfileHistoryRepository.getDetachedTargetProfilesHistoryByComplementaryCertificationId({
       complementaryCertificationId,
     });
-
-  const complementaryCertification = await complementaryCertificationForTargetProfileAttachmentRepository.getById({
-    complementaryCertificationId,
-  });
 
   return new ComplementaryCertificationTargetProfileHistory({
     ...complementaryCertification,

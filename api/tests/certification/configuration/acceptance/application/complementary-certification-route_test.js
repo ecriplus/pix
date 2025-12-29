@@ -152,17 +152,11 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
     });
   });
 
-  describe('GET /api/admin/complementary-certifications/{complementaryCertificationId}/target-profiles', function () {
+  describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/target-profiles', function () {
     it('should return 200 HTTP status code', async function () {
       // given
       const server = await createServer();
-      const complementaryCertificationId = 1;
       const superAdmin = await insertUserWithRoleSuperAdmin();
-      const options = {
-        method: 'GET',
-        url: '/api/admin/complementary-certifications/' + complementaryCertificationId + '/target-profiles',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
-      };
       const attachedAt = new Date('2019-01-01');
 
       databaseBuilder.factory.buildComplementaryCertification({
@@ -173,11 +167,17 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       });
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-        id: complementaryCertificationId,
+        id: 1,
         label: 'Pix+ Édu 2nd degré',
         hasExternalJury: true,
         key: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
       });
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/complementary-certifications/${complementaryCertification.key}/target-profiles`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
 
       const targetProfile = databaseBuilder.factory.buildTargetProfile({ id: 999, name: 'Target' });
 

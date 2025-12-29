@@ -15,7 +15,7 @@ export default class List extends Component {
         name: framework.name,
         label: `components.certification-frameworks.labels.${framework.id}`,
         activeVersionStartDate: framework.activeVersionStartDate,
-        complementaryCertificationId: complementaryCertification?.id,
+        complementaryCertificationKey: complementaryCertification?.key,
       };
     });
   }
@@ -32,10 +32,10 @@ export default class List extends Component {
             {{t "components.certification-frameworks.list.name"}}
           </:header>
           <:cell>
-            {{#if framework.complementaryCertificationId}}
+            {{#if framework.complementaryCertificationKey}}
               <LinkTo
                 @route="authenticated.complementary-certifications.item"
-                @model={{framework.complementaryCertificationId}}
+                @model={{framework.complementaryCertificationKey}}
               >
                 {{t framework.label}}
               </LinkTo>

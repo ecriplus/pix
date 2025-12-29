@@ -224,7 +224,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
     });
   });
 
-  describe('/api/admin/complementary-certifications/{id}/target-profiles', function () {
+  describe('/api/admin/complementary-certifications/{complementaryCertificationKey}/target-profiles', function () {
     context('when user is an admin member', function () {
       it('should return a response with an HTTP status code 200', async function () {
         // given
@@ -238,7 +238,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         // when
         const { statusCode } = await httpTestServer.request(
           'GET',
-          '/api/admin/complementary-certifications/1/target-profiles',
+          `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/target-profiles`,
         );
 
         // then
@@ -264,7 +264,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         // when
         const { statusCode } = await httpTestServer.request(
           'GET',
-          '/api/admin/complementary-certifications/1/target-profiles',
+          `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/target-profiles`,
         );
 
         // then

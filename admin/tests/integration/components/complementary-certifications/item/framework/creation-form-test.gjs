@@ -25,7 +25,7 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     const serviceRouter = this.owner.lookup('service:router');
     sinon
       .stub(serviceRouter, 'currentRoute')
-      .value({ parent: { parent: { params: { complementary_certification_id: complementaryCertification.id } } } });
+      .value({ parent: { parent: { params: { complementary_certification_key: complementaryCertification.key } } } });
 
     // when
     const screen = await render(<template><CreationForm /></template>);

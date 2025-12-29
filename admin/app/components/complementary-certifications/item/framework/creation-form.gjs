@@ -29,9 +29,9 @@ export default class CreationForm extends Component {
     this.frameworks = foundFrameworks.map((framework) => framework);
 
     const routeParams = this.router.currentRoute.parent.parent.params;
-    this.complementaryCertification = await this.store.peekRecord(
-      'complementary-certification',
-      routeParams.complementary_certification_id,
+    const complementaryCertifications = this.store.peekAll('complementary-certification');
+    this.complementaryCertification = complementaryCertifications.find(
+      (cc) => cc.key === routeParams.complementary_certification_key,
     );
   }
 

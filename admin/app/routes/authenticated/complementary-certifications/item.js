@@ -10,9 +10,8 @@ export default class ItemRoute extends Route {
   }
 
   model(params) {
-    return this.store.findRecord('complementary-certification', params.complementary_certification_id, {
-      reload: true,
-    });
+    const complementaryCertifications = this.store.peekAll('complementary-certification');
+    return complementaryCertifications.find((cc) => cc.key === params.complementary_certification_key);
   }
 
   redirect(model, transition) {

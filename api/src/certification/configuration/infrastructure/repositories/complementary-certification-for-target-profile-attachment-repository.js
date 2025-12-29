@@ -19,4 +19,25 @@ const getById = async function ({ complementaryCertificationId }) {
   return _toDomain(complementaryCertification);
 };
 
-export { getById };
+/**
+ * @function
+ * @param {object} params
+ * @param {string} params.complementaryCertificationKey
+ *
+ * @returns {Promise<ComplementaryCertificationForTargetProfileAttachment>}
+ * @throws {NotFoundError}
+ */
+const getByKey = async function ({ complementaryCertificationKey }) {
+  const complementaryCertification = await knex
+    .from('complementary-certifications')
+    .where({ key: complementaryCertificationKey })
+    .first();
+
+  if (!complementaryCertification) {
+    throw new NotFoundError('The complementary certification does not exist');
+  }
+
+  return _toDomain(complementaryCertification);
+};
+
+export { getById, getByKey };

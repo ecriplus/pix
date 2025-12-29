@@ -533,8 +533,8 @@ export default function routes() {
     return schema.complementaryCertifications.all();
   });
 
-  this.get('admin/complementary-certifications/:id/target-profiles', (schema, request) => {
-    return schema.complementaryCertifications.find(request.params.id);
+  this.get('admin/complementary-certifications/:key/target-profiles', (schema, request) => {
+    return schema.complementaryCertifications.findBy({ key: request.params.key });
   });
 
   this.get('admin/complementary-certifications/attachable-target-profiles', (schema, request) => {

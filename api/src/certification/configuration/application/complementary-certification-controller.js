@@ -59,9 +59,9 @@ const getFrameworkHistory = async function (request) {
 };
 
 const getComplementaryCertificationTargetProfileHistory = async function (request) {
-  const complementaryCertificationId = request.params.complementaryCertificationId;
+  const complementaryCertificationKey = request.params.complementaryCertificationKey;
   const complementaryCertification = await usecases.getComplementaryCertificationTargetProfileHistory({
-    complementaryCertificationId,
+    complementaryCertificationKey,
   });
   return complementaryCertificationSerializer.serializeForAdmin(complementaryCertification);
 };

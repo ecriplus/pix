@@ -188,11 +188,11 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/admin/complementary-certifications/{complementaryCertificationId}/target-profiles',
+      path: '/api/admin/complementary-certifications/{complementaryCertificationKey}/target-profiles',
       config: {
         validate: {
           params: Joi.object({
-            complementaryCertificationId: identifiersType.complementaryCertificationId,
+            complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
           }),
         },
         pre: [
