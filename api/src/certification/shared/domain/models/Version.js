@@ -5,6 +5,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Scopes } from './Scopes.js';
 
 export class Version {
@@ -13,26 +14,14 @@ export class Version {
     scope: Joi.string()
       .required()
       .valid(...Object.values(Scopes)),
-    challengesConfiguration: Joi.object()
-      .keys({
-        maximumAssessmentLength: Joi.number().integer().min(0).required(),
-        challengesBetweenSameCompetence: Joi.number().integer().min(0).required(),
-        defaultCandidateCapacity: Joi.number().required(),
-        defaultProbabilityToPickChallenge: Joi.number().min(0).max(100).required(),
-      })
-      .unknown(true)
-      .required(),
+    challengesConfiguration: Joi.object().instance(FlashAssessmentAlgorithmConfiguration).required(),
   });
 
   /**
    * @param {object} params
    * @param {number} params.id - version identifier
    * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
-   * @param {object} params.challengesConfiguration - Challenges configuration
-   * @param {number} params.challengesConfiguration.maximumAssessmentLength - limit for assessment length
-   * @param {number} params.challengesConfiguration.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
-   * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined
-   * @param {number} params.challengesConfiguration.defaultProbabilityToPickChallenge - The probability (as a percentage, 0-100) that the ramdomizing function will pick a challenge from a list of possible challenges.
+   * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
    */
   constructor({ id, scope, challengesConfiguration }) {
     this.id = id;

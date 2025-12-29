@@ -1,3 +1,4 @@
+import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Version } from '../../../../../../src/certification/shared/domain/models/Version.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
@@ -10,12 +11,15 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 123,
         scope: Scopes.CORE,
-        challengesConfiguration: {
+        challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
           defaultCandidateCapacity: 1,
           defaultProbabilityToPickChallenge: 51,
-        },
+          limitToOneQuestionPerTube: false,
+          enablePassageByAllCompetences: false,
+          variationPercent: 0.5,
+        }),
       };
 
       // when
@@ -25,12 +29,17 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(123);
       expect(version.scope).to.equal(Scopes.CORE);
-      expect(version.challengesConfiguration).to.deep.equal({
-        challengesBetweenSameCompetence: 0,
-        maximumAssessmentLength: 10,
-        defaultCandidateCapacity: 1,
-        defaultProbabilityToPickChallenge: 51,
-      });
+      expect(version.challengesConfiguration).to.deep.equal(
+        new FlashAssessmentAlgorithmConfiguration({
+          challengesBetweenSameCompetence: 0,
+          maximumAssessmentLength: 10,
+          defaultCandidateCapacity: 1,
+          defaultProbabilityToPickChallenge: 51,
+          limitToOneQuestionPerTube: false,
+          enablePassageByAllCompetences: false,
+          variationPercent: 0.5,
+        }),
+      );
     });
 
     it('should build a Version with PIX_PLUS_DROIT scope', function () {
@@ -38,12 +47,15 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       const versionData = {
         id: 456,
         scope: Scopes.PIX_PLUS_DROIT,
-        challengesConfiguration: {
+        challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
           defaultCandidateCapacity: -3,
           defaultProbabilityToPickChallenge: 51,
-        },
+          limitToOneQuestionPerTube: false,
+          enablePassageByAllCompetences: false,
+          variationPercent: 0.5,
+        }),
       };
 
       // when
@@ -53,12 +65,17 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(456);
       expect(version.scope).to.equal(Scopes.PIX_PLUS_DROIT);
-      expect(version.challengesConfiguration).to.deep.equal({
-        challengesBetweenSameCompetence: 0,
-        maximumAssessmentLength: 10,
-        defaultCandidateCapacity: -3,
-        defaultProbabilityToPickChallenge: 51,
-      });
+      expect(version.challengesConfiguration).to.deep.equal(
+        new FlashAssessmentAlgorithmConfiguration({
+          challengesBetweenSameCompetence: 0,
+          maximumAssessmentLength: 10,
+          defaultCandidateCapacity: -3,
+          defaultProbabilityToPickChallenge: 51,
+          limitToOneQuestionPerTube: false,
+          enablePassageByAllCompetences: false,
+          variationPercent: 0.5,
+        }),
+      );
     });
 
     it('should throw an EntityValidationError when id is missing', function () {
