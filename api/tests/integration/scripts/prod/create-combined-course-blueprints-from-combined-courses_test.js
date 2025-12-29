@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { CreateCombinedCourseBlueprint } from '../../../../scripts/prod/create-combined-course-blueprints-from-combined-courses.js';
+import { Module } from '../../../../src/quest/domain/models/Module.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
 describe('CreateCombinedCourseBlueprint', function () {
@@ -21,9 +22,13 @@ describe('CreateCombinedCourseBlueprint', function () {
   describe('Handle', function () {
     let script;
     let logger;
+    let moduleRepository;
 
     beforeEach(function () {
-      script = new CreateCombinedCourseBlueprint();
+      moduleRepository = {
+        getByIds: sinon.stub().resolves([new Module({ id: 'module-id', shortId: 'short-module-id' })]),
+      };
+      script = new CreateCombinedCourseBlueprint(moduleRepository);
       logger = { info: sinon.spy(), error: sinon.spy() };
     });
 
@@ -46,7 +51,7 @@ describe('CreateCombinedCourseBlueprint', function () {
         expect(combinedCourseBlueprints[0].illustration).to.equal('images/illustration.svg');
         expect(combinedCourseBlueprints[0].content).to.deep.equal([
           { type: 'evaluation', value: targetProfile.id },
-          { type: 'module', value: 'module-id' },
+          { type: 'module', value: 'short-module-id' },
         ]);
       });
 

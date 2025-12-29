@@ -8,7 +8,9 @@ import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
 export class CreateCombinedCourseBlueprint extends Script {
-  constructor() {
+  #moduleRepository;
+
+  constructor(moduleRepository) {
     super({
       description: 'Create combined course blueprint based on existing combined courses',
       permanent: true,
@@ -20,6 +22,7 @@ export class CreateCombinedCourseBlueprint extends Script {
         },
       },
     });
+    this.#moduleRepository = moduleRepository;
   }
 
   async handle({ options, logger }) {
@@ -48,7 +51,7 @@ export class CreateCombinedCourseBlueprint extends Script {
         internalName: `Modèle de ${combinedCourse.name}`,
         description: combinedCourse.description,
         illustration: combinedCourse.illustration,
-        content: JSON.stringify(this.buildCombinedCourseBlueprintContent(combinedCourse, campaigns)),
+        content: JSON.stringify(await this.buildCombinedCourseBlueprintContent(combinedCourse, campaigns)),
       };
 
       const contentHash = hash(combinedCourseBlueprint.content);
@@ -73,19 +76,19 @@ export class CreateCombinedCourseBlueprint extends Script {
     }
   }
 
-  buildCombinedCourseBlueprintContent(combinedCourse, campaigns) {
-    return CombinedCourseBlueprint.buildContentItems(
-      combinedCourse.successRequirements.map((successRequirement) => {
-        if (successRequirement.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-          const campaign = campaigns.find(({ id }) => id === successRequirement.data.campaignId.data);
-
-          return { targetProfileId: campaign.targetProfileId };
-        }
-        if (successRequirement.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES) {
-          return { moduleId: successRequirement.data.moduleId.data };
-        }
-      }),
-    );
+  async buildCombinedCourseBlueprintContent(combinedCourse, campaigns) {
+    const items = [];
+    for (const successRequirement of combinedCourse.successRequirements) {
+      if (successRequirement.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
+        const campaign = campaigns.find(({ id }) => id === successRequirement.data.campaignId.data);
+        items.push({ targetProfileId: campaign.targetProfileId });
+      }
+      if (successRequirement.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES) {
+        const [module] = await this.#moduleRepository.getByIds([successRequirement.data.moduleId.data]);
+        items.push({ moduleShortId: module.shortId });
+      }
+    }
+    return CombinedCourseBlueprint.buildContentItems(items);
   }
 }
 const hash = (content) => createHash('sha256').update(content).digest('hex');
