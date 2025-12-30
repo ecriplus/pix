@@ -56,6 +56,7 @@ export default class NewAutonomousCourse extends Component {
 
   @action
   async onSubmit(event) {
+    event.preventDefault();
     const autonomousCourse = {
       internalTitle: this.args.autonomousCourse.internalTitle,
       publicTitle: this.args.autonomousCourse.publicTitle,
@@ -64,7 +65,7 @@ export default class NewAutonomousCourse extends Component {
     };
     try {
       this.submitting = true;
-      await this.args.onSubmit(event, autonomousCourse);
+      await this.args.onSubmit(autonomousCourse);
     } finally {
       this.submitting = false;
     }

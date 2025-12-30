@@ -61,12 +61,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
         sendSuccessNotification: sinon.stub(),
       };
 
-      const event = {
-        preventDefault: sinon.stub(),
-      };
-
       // when
-      await controller.createAutonomousCourse(event, autonomousCourse);
+      await controller.createAutonomousCourse(autonomousCourse);
 
       // then
       assert.ok(saveStub.called);
@@ -93,12 +89,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       controller.store.createRecord = sinon.stub().returns({ save: saveStub });
 
-      const event = {
-        preventDefault: sinon.stub(),
-      };
-
       // when
-      await controller.createAutonomousCourse(event, autonomousCourse);
+      await controller.createAutonomousCourse(autonomousCourse);
 
       // then
       assert.ok(saveStub.called);
@@ -122,12 +114,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       controller.store.createRecord = sinon.stub().returns({ save: saveStub });
 
-      const event = {
-        preventDefault: sinon.stub(),
-      };
-
       // when
-      await controller.createAutonomousCourse(event, autonomousCourse);
+      await controller.createAutonomousCourse(autonomousCourse);
 
       // then
       assert.ok(saveStub.called);
@@ -147,12 +135,9 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
       };
       const saveStub = sinon.stub().rejects(errors);
       controller.store.createRecord = sinon.stub().returns({ save: saveStub });
-      const event = {
-        preventDefault: sinon.stub(),
-      };
 
       // when
-      await controller.createAutonomousCourse(event, autonomousCourse);
+      await controller.createAutonomousCourse(autonomousCourse);
 
       // then
       assert.ok(saveStub.called);
@@ -180,12 +165,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       controller.store.createRecord = sinon.stub().returns({ save: saveStub });
 
-      const event = {
-        preventDefault: sinon.stub(),
-      };
-
       // when
-      await controller.createAutonomousCourse(event, autonomousCourse);
+      await controller.createAutonomousCourse(autonomousCourse);
 
       // then
       assert.ok(saveStub.called);
