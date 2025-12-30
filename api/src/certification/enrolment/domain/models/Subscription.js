@@ -1,5 +1,7 @@
+// @ts-check
 /**
  * @typedef {import ('../../../shared/domain/constants.js').SUBSCRIPTION_TYPES} SUBSCRIPTION_TYPES
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  */
 
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
@@ -8,9 +10,9 @@ import { validate } from '../../../shared/domain/validators/subscription-validat
 class Subscription {
   /**
    * @param {Object} params
-   * @param {number} params.certificationCandidateId - identifier of the certification candidate
+   * @param {number | null} params.certificationCandidateId - identifier of the certification candidate
    * @param {SUBSCRIPTION_TYPES} params.type
-   * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
+   * @param {ComplementaryCertificationKeys | null} params.complementaryCertificationKey
    */
   constructor({ certificationCandidateId, type, complementaryCertificationKey }) {
     this.certificationCandidateId = certificationCandidateId;
@@ -21,7 +23,7 @@ class Subscription {
 
   /**
    * @param {Object} params
-   * @param {number} params.certificationCandidateId  - identifier of the certification candidate
+   * @param {number | null} params.certificationCandidateId   - identifier of the certification candidate
    */
   static buildCore({ certificationCandidateId }) {
     return new Subscription({

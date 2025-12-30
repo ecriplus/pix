@@ -1,13 +1,46 @@
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 import { EnrolledCandidate } from '../../domain/read-models/EnrolledCandidate.js';
 
+/**
+ * @typedef {Object} EnrolledCandidateQueryResult
+ * @property {number} id
+ * @property {number} sessionId
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} email
+ * @property {Array<Object>} subscriptions
+ * @property {string} subscriptions.type
+ * @property {string} subscriptions.complementaryCertificationKey
+ * @property {number} subscriptions.certificationCandidateId
+ */
+/**
+
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.sessionId
+ * @returns {Promise<Array<EnrolledCandidate>>}
+ */
 export async function findBySessionId({ sessionId }) {
   const candidatesData = await buildBaseReadQuery(knex).where({ 'certification-candidates.sessionId': sessionId });
 
   return candidatesData.map(toDomain).sort(sortAlphabeticallyByLastNameThenFirstName);
 }
 
+/**
+ * @typedef {Object} CandidateForComparison
+ * @property {string} firstName
+ * @property {string} lastName
+ */
+
+/**
+ * @function
+ * @param {CandidateForComparison} params
+ * @param {CandidateForComparison} params
+ * @returns {number}
+ */
 function sortAlphabeticallyByLastNameThenFirstName(
   { firstName: firstName1, lastName: lastName1 },
   { firstName: firstName2, lastName: lastName2 },
@@ -17,6 +50,10 @@ function sortAlphabeticallyByLastNameThenFirstName(
   return compareRes;
 }
 
+/**
+ * @param {EnrolledCandidateQueryResult} candidateData
+ * @returns {EnrolledCandidate}
+ */
 function toDomain(candidateData) {
   const subscriptions = candidateData.subscriptions.map((subscription) => new Subscription(subscription));
   return new EnrolledCandidate({
@@ -25,6 +62,10 @@ function toDomain(candidateData) {
   });
 }
 
+/**
+ * @param {import('knex').Knex} knexConnection
+ * @returns {import('knex').Knex.QueryBuilder}
+ */
 function buildBaseReadQuery(knexConnection) {
   return knexConnection
     .select('certification-candidates.*')

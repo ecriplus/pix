@@ -1,3 +1,8 @@
+/**
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
+
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
@@ -10,7 +15,7 @@ import { Subscription } from '../../domain/models/Subscription.js';
  * @param {Object} params
  * @param {number} params.certificationCandidateId
  *
- * @return {Promise<Candidate>}
+ * @returns {Promise<Candidate | null>}
  */
 export async function get({ certificationCandidateId }) {
   const candidateData = await buildBaseReadQuery(knex)
@@ -26,7 +31,7 @@ export async function get({ certificationCandidateId }) {
  * @param {Object} params
  * @param {number} params.sessionId
  *
- * @return {Promise<Array<Candidate>>}
+ * @returns {Promise<Array<Candidate>>}
  */
 export async function findBySessionId({ sessionId }) {
   const candidatesData = await buildBaseReadQuery(knex)
@@ -41,7 +46,7 @@ export async function findBySessionId({ sessionId }) {
  * @param {Object} params
  * @param {number} params.userId
  *
- * @return {Promise<Array<Candidate>>}
+ * @returns {Promise<Array<Candidate>>}
  */
 export async function findByUserId({ userId }) {
   const knexTransaction = DomainTransaction.getConnection();
@@ -51,8 +56,9 @@ export async function findByUserId({ userId }) {
 
 /**
  * @function
- * @param {Object} candidate
+ * @param {Candidate} candidate
  *
+ * @returns {Promise<void>}
  * @throws {CertificationCandidateNotFoundError} Certification candidate not found
  */
 export async function update(candidate) {
@@ -98,9 +104,9 @@ export async function update(candidate) {
 
 /**
  * @function
- * @param {Object} candidate
+ * @param {Candidate} candidate
  *
- * @return {Promise<number>}
+ * @returns {Promise<number>}
  */
 export async function insert(candidate) {
   const candidateDataToSave = adaptModelToDb(candidate);
@@ -135,7 +141,8 @@ export async function insert(candidate) {
 
 /**
  * @function
- * @param sessionId
+ * @@param {Object} params
+ * @param {number} params.sessionId
  * @returns {Promise<void>}
  */
 export async function deleteBySessionId({ sessionId }) {
@@ -149,8 +156,9 @@ export async function deleteBySessionId({ sessionId }) {
 
 /**
  * @function
- * @param candidate
- * @param sessionId
+ * @param {Object} params
+ * @param {Candidate} params.candidate
+ * @param {number} params.sessionId
  * @returns {Promise<number>} return saved candidate id
  */
 export async function saveInSession({ candidate, sessionId }) {
@@ -186,7 +194,8 @@ export async function saveInSession({ candidate, sessionId }) {
 
 /**
  * @function
- * @param id
+ * @param {Object} params
+ * @param {number} params.id
  * @returns {Promise<boolean>}
  */
 export async function remove({ id }) {
@@ -198,6 +207,10 @@ export async function remove({ id }) {
   return true;
 }
 
+/**
+ * @param {import('knex').Knex} knexConnection
+ * @returns {import('knex').Knex.QueryBuilder}
+ */
 function buildBaseReadQuery(knexConnection) {
   return knexConnection('certification-candidates')
     .select('certification-candidates.*')
@@ -226,6 +239,38 @@ function buildBaseReadQuery(knexConnection) {
     .groupBy('certification-candidates.id');
 }
 
+/**
+ * @typedef {Object} CandidateDBModel
+ * @property {number} userId
+ * @property {number} sessionId
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} email
+ * @property {Date} birthdate
+ * @property {string} sex
+ * @property {string} birthCity
+ * @property {string} birthProvinceCode
+ * @property {string} birthCountry
+ * @property {number} birthPostalCode
+ * @property {number} birthINSEECode
+ * @property {string} externalId
+ * @property {string} resultRecipientEmail
+ * @property {string} billingMode
+ * @property {string} prepaymentCode
+ * @property {number} organizationLearnerId
+ * @property {boolean} authorizedToStart
+ * @property {boolean} hasSeenCertificationInstructions
+ * @property {boolean} accessibilityAdjustmentNeeded
+ * @property {number | null} extraTimePercentage
+ * @property {Date} reconciledAt
+ }
+ */
+
+/**
+ * @function
+ * @param {Candidate} candidate
+ * @returns {CandidateDBModel}
+ */
 function adaptModelToDb(candidate) {
   return {
     firstName: candidate.firstName,
@@ -253,6 +298,47 @@ function adaptModelToDb(candidate) {
   };
 }
 
+/**
+ * @typedef {Object} CandidateDTO
+ * @property {number} id
+ * @property {number} userId
+ * @property {number} sessionId
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} email
+ * @property {Date} birthdate
+ * @property {string} sex
+ * @property {string} birthCity
+ * @property {string} birthProvinceCode
+ * @property {string} birthCountry
+ * @property {number} birthPostalCode
+ * @property {number} birthINSEECode
+ * @property {string} externalId
+ * @property {string} resultRecipientEmail
+ * @property {string} billingMode
+ * @property {string} prepaymentCode
+ * @property {number} organizationLearnerId
+ * @property {boolean} authorizedToStart
+ * @property {boolean} hasSeenCertificationInstructions
+ * @property {boolean} accessibilityAdjustmentNeeded
+ * @property {number | null} extraTimePercentage
+ * @property {Array<SubscriptionDTO>} subscriptions
+ * @property {Date} reconciledAt
+ * @property {Date} createdAt
+ */
+
+/**
+ * @typedef {Object} SubscriptionDTO
+ * @property {string} type
+ * @property {ComplementaryCertificationKeys} complementaryCertificationKey
+ * @property {number} certificationCandidateId
+ */
+
+/**
+ * @function
+ * @param {CandidateDTO} candidateData
+ * @returns {Candidate}
+ */
 function toDomain(candidateData) {
   const subscriptions = candidateData.subscriptions.map((subscription) => new Subscription(subscription));
   return new Candidate({

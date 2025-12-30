@@ -1,3 +1,4 @@
+// @ts-check
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
@@ -5,6 +6,12 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionEnrolment } from '../../domain/models/SessionEnrolment.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {SessionEnrolment} params.session
+ * @returns {Promise<SessionEnrolment>}
+ */
 export async function save({ session }) {
   const knexConn = DomainTransaction.getConnection();
   const [savedSession] = await knexConn('sessions')
@@ -27,6 +34,13 @@ export async function save({ session }) {
   return new SessionEnrolment(savedSession);
 }
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<SessionEnrolment>}
+ * @throws {NotFoundError}
+ */
 export async function get({ id }) {
   const foundSession = await knex
     .select('sessions.*')
@@ -41,16 +55,38 @@ export async function get({ id }) {
   return new SessionEnrolment({ ...foundSession, certificationCandidates: [] });
 }
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {string} params.address
+ * @param {string} params.room
+ * @param {Date} params.date
+ * @param {Date} params.time
+ * @param {number} params.certificationCenterId
+ * @returns {Promise<boolean>}
+ */
 export async function isSessionExistingByCertificationCenterId({ address, room, date, time, certificationCenterId }) {
   const sessions = await knex('sessions').where({ address, room, date, time }).andWhere({ certificationCenterId });
   return sessions.length > 0;
 }
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.sessionId
+ * @param {number} params.certificationCenterId
+ * @returns {Promise<boolean>}
+ */
 export async function isSessionExistingBySessionAndCertificationCenterIds({ sessionId, certificationCenterId }) {
   const [session] = await knex('sessions').where({ id: sessionId, certificationCenterId });
   return Boolean(session);
 }
 
+/**
+ * @function
+ * @param {SessionEnrolment} session
+ * @returns {Promise<void>}
+ */
 export async function update(session) {
   const sessionDataToUpdate = _.pick(session, [
     'address',
@@ -62,9 +98,16 @@ export async function update(session) {
     'description',
   ]);
 
-  await knex('sessions').where({ id: session.id }).update(sessionDataToUpdate).returning('*');
+  await knex('sessions').where({ id: session.id }).update(sessionDataToUpdate);
 }
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<void>}
+ * @throws {NotFoundError}
+ */
 export async function remove({ id }) {
   await knex.transaction(async (trx) => {
     const certificationCandidateIdsInSession = await knex('certification-candidates')

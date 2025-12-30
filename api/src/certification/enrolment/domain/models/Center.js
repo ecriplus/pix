@@ -10,9 +10,11 @@ export class Center {
   /**
    * @param {Object} props
    * @param {number} props.id
+   * @param {string} props.name
+   * @param {string} props.externalId
    * @param {CenterTypes} props.type
    * @param {Array<Habilitation>} props.habilitations center habilitations
-   * @param externalId
+   * @param {MatchingOrganization | null} props.matchingOrganization
    */
   constructor({ id, name, externalId, type, habilitations, matchingOrganization }) {
     this.id = id;

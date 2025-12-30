@@ -1,3 +1,7 @@
+// @ts-check
+/**
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { Organization } from '../../../../organizational-entities/domain/models/Organization.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../shared/domain/constants.js';
@@ -6,6 +10,13 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Center, MatchingOrganization } from '../../domain/models/Center.js';
 import { Habilitation } from '../../domain/models/Habilitation.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<Center>}
+ * @throws {NotFoundError}
+ */
 export async function getById({ id }) {
   const knexConn = DomainTransaction.getConnection();
   const center = await knexConn
@@ -54,6 +65,30 @@ export async function getById({ id }) {
   return toDomain(center, matchingOrganization);
 }
 
+/**
+ * @typedef {Object} CenterDTO
+ * @property {number} id
+ * @property {string} name
+ * @property {string} type
+ * @property {string} externalId
+ * @property {Array<HabilitationDTO>} habilitations
+ * @property {Date} createdAt
+ * @property {Date} updatedAt
+ */
+
+/**
+ * @typedef {Object} HabilitationDTO
+ * @property {number} complementaryCertificationId
+ * @property {ComplementaryCertificationKeys} key
+ * @property {string} label
+ */
+
+/**
+ * @function
+ * @param {CenterDTO} row
+ * @param {MatchingOrganization | null} matchingOrganization
+ * @returns {Center}
+ */
 function toDomain(row, matchingOrganization) {
   return new Center({
     id: row.id,
@@ -65,6 +100,11 @@ function toDomain(row, matchingOrganization) {
   });
 }
 
+/**
+ * @function
+ * @param {Array<HabilitationDTO>} complementaryCertificationHabilitations
+ * @returns {Array<Habilitation>}
+ */
 function _toDomainHabilitation(complementaryCertificationHabilitations = []) {
   return complementaryCertificationHabilitations
     .filter((data) => !!data.complementaryCertificationId)

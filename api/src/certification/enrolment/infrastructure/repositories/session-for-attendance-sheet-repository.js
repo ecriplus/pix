@@ -3,6 +3,13 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCandidateForAttendanceSheet } from '../../domain/read-models/CertificationCandidateForAttendanceSheet.js';
 import { SessionForAttendanceSheet } from '../../domain/read-models/SessionForAttendanceSheet.js';
 
+/**
+ * @function
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<SessionForAttendanceSheet>}
+ * @throws {NotFoundError}
+ */
 const getWithCertificationCandidates = async function ({ id }) {
   const results = await knex
     .select(
@@ -55,6 +62,35 @@ const getWithCertificationCandidates = async function ({ id }) {
 
 export { getWithCertificationCandidates };
 
+/**
+ * @typedef {Object} Results
+ * @property {number} id
+ * @property {Date} date
+ * @property {Date} time
+ * @property {string} address
+ * @property {string} room
+ * @property {string} examiner
+ * @property {string} certificationCenterName
+ * @property {string} certificationCenterType
+ * @property {boolean} isManagingStudents
+ * @property {Array<CertificationCandidateDTO>} certificationCandidates
+ */
+
+/**
+ * @typedef {Object} CertificationCandidateDTO
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {Date} birthdate
+ * @property {string} externalId
+ * @property {number} extraTimePercentage
+ * @property {string} division
+ */
+
+/**
+ * @function
+ * @param {Results} results
+ * @returns {SessionForAttendanceSheet}
+ */
 function _toDomain(results) {
   const toDomainCertificationCandidates = results.certificationCandidates.map((candidate) => {
     return new CertificationCandidateForAttendanceSheet({ ...candidate });
