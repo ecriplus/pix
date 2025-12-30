@@ -18,8 +18,7 @@ export default class NewController extends Controller {
   }
 
   @action
-  async createAutonomousCourse(event, autonomousCourse) {
-    event.preventDefault();
+  async createAutonomousCourse(autonomousCourse) {
     try {
       const { id: autonomousCourseId } = await this.store.createRecord('autonomous-course', autonomousCourse).save();
       this.pixToast.sendSuccessNotification({ message: 'Le parcours autonome a été créé avec succès.' });
