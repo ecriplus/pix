@@ -16,333 +16,156 @@
 - [#14521](https://github.com/1024pix/pix/pull/14521) Supprime les tests (flacky) e2e d'accessibilité de modulix. 
 - [#14506](https://github.com/1024pix/pix/pull/14506) Utiliser la clé de complémentaire dans la route de récupération des profils-cibles (PIX-20856).
 
-## 5.289.0 (2025-12-29)
+# [5.289.0](https://github.com/1024pix/pix/compare/v5.288.0...v5.289.0) (2025-12-29)
 
-* :fire: api: remove defaultProbabilityToPickChallenge from config.js ([e001038](https://github.com/1024pix/pix/commit/e001038))
-* :recycle: api: add defaultProbabilityToPickChallenge to FlashAssessmentAlgorithmConfiguration model ([db38602](https://github.com/1024pix/pix/commit/db38602))
-* :recycle: refactor(admin) rename supervisor to invigilator ([d775d3d](https://github.com/1024pix/pix/commit/d775d3d))
-* :recycle: refactor(api & certif) rename supervisor with invigilator ([7b9c62d](https://github.com/1024pix/pix/commit/7b9c62d))
-* :recycle: refactor(api) rename supervisor to invigilator ([dc6b994](https://github.com/1024pix/pix/commit/dc6b994))
-* :recycle: refactor(certif) add translation change and svg file ([fce9bc0](https://github.com/1024pix/pix/commit/fce9bc0))
-* :recycle: refactor(certif) rename supervisor to invigilator ([8d9bcf3](https://github.com/1024pix/pix/commit/8d9bcf3))
-* :recycle: refactor(certif) use i18n key instead of text ([ca8f73b](https://github.com/1024pix/pix/commit/ca8f73b))
-* :recycle: refactor(mon-pix) rename supervisor to invigilator ([8c3467b](https://github.com/1024pix/pix/commit/8c3467b))
-* :white_check_mark: api: fix tests ([dcb3461](https://github.com/1024pix/pix/commit/dcb3461))
-* [FEATURE] Afficher différentes catégories de signalement selon l'élément dans un module (PIX-20830). ([7a4744a](https://github.com/1024pix/pix/commit/7a4744a)), closes [#14503](https://github.com/1024pix/pix/issues/14503)
-* [FEATURE] Ajout des identifiants SSO dans l'API MADDO (PIX-20797)  ([171698e](https://github.com/1024pix/pix/commit/171698e)), closes [#14474](https://github.com/1024pix/pix/issues/14474)
-* [FEATURE] Ajouter le signalement pour la modalité Custom (PIX-20886)  ([6a0c334](https://github.com/1024pix/pix/commit/6a0c334)), closes [#14504](https://github.com/1024pix/pix/issues/14504)
-* [FEATURE] defaultProbabilityToPickChallenge - Versioner la probabilité par défaut de sélection des c ([d10bf4c](https://github.com/1024pix/pix/commit/d10bf4c)), closes [#14488](https://github.com/1024pix/pix/issues/14488)
-* [TECH] :recycle: Renomme l'attribut `supervisor-password` pour utiliser le terme `invigilator` (PIX- ([634618c](https://github.com/1024pix/pix/commit/634618c)), closes [#14439](https://github.com/1024pix/pix/issues/14439)
-* [TECH] Remplacer le paquet glob par le builtin fs.glob  ([a912ba5](https://github.com/1024pix/pix/commit/a912ba5)), closes [#14508](https://github.com/1024pix/pix/issues/14508)
-* ♻️(mon-pix): rename css class ([6ba5735](https://github.com/1024pix/pix/commit/6ba5735))
-* ✅(mon-pix): update categories labels in tests ([f6162f7](https://github.com/1024pix/pix/commit/f6162f7))
-* ✨️ (mon-pix): fill elementType to issue-report modal ([565b37b](https://github.com/1024pix/pix/commit/565b37b))
-* ✨(mon-pix): add issue-report button for custom module element ([2487a02](https://github.com/1024pix/pix/commit/2487a02))
-* ✨(mon-pix): add new categories ([596081f](https://github.com/1024pix/pix/commit/596081f))
-* feat(api): add authenticationId field to MADDO CampaignParticipation model ([bc121a7](https://github.com/1024pix/pix/commit/bc121a7))
-* feat(api): add findByUserIdsAndIdentityProvider to authentication-method repository ([ebedcc5](https://github.com/1024pix/pix/commit/ebedcc5))
-* feat(api): add findIdentityProviderForCampaignsByCampaignId to MADDO organization repository ([30869be](https://github.com/1024pix/pix/commit/30869be))
-* feat(api): add integration tests for authenticationId enrichment in MADDO ([8a7f0cf](https://github.com/1024pix/pix/commit/8a7f0cf))
-* feat(api): enrich campaign participations with SSO authentication IDs ([891bab3](https://github.com/1024pix/pix/commit/891bab3))
-* feat(api): update MADDO acceptance tests to handle authenticationId ([a89f136](https://github.com/1024pix/pix/commit/a89f136))
-* docs(api): document authenticationId in MADDO campaigns API route ([d30b90d](https://github.com/1024pix/pix/commit/d30b90d))
-* refactor(api): remove now useless glob package ([1e54154](https://github.com/1024pix/pix/commit/1e54154))
-* refactor(api): remove unused campaign-participation repository from MADDO ([b40a97c](https://github.com/1024pix/pix/commit/b40a97c))
-* refactor(api): replace glob package by builtin fs.glob ([8dd782f](https://github.com/1024pix/pix/commit/8dd782f))
+### :rocket: Amélioration
 
-## 5.288.0 (2025-12-24)
+- [#14503](https://github.com/1024pix/pix/pull/14503) Afficher différentes catégories de signalement selon l'élément dans un module (PIX-20830).
+- [#14474](https://github.com/1024pix/pix/pull/14474) Ajout des identifiants SSO dans l'API MADDO (PIX-20797)                               
+- [#14504](https://github.com/1024pix/pix/pull/14504) Ajouter le signalement pour la modalité Custom (PIX-20886)                                
+- [#14488](https://github.com/1024pix/pix/pull/14488) defaultProbabilityToPickChallenge - Versioner la probabilité par défaut de sélection des challenges (PIX-20658)
 
-* :sparkles: (mon-pix): add module issue report service ([12125c2](https://github.com/1024pix/pix/commit/12125c2))
-* :sparkles: (mon-pix): call module issue report ([20ae0ac](https://github.com/1024pix/pix/commit/20ae0ac))
-* :sparkles: handle form send event ([679c8a4](https://github.com/1024pix/pix/commit/679c8a4))
-* [BUGFIX] Mise à jour des URLs de documentation (PIX-20923).  ([06dceea](https://github.com/1024pix/pix/commit/06dceea)), closes [#14500](https://github.com/1024pix/pix/issues/14500)
-* [FEATURE] Ajouter la page de création de compte lors d'une connexion SSO (PIX-20540)  ([85e39cb](https://github.com/1024pix/pix/commit/85e39cb)), closes [#14465](https://github.com/1024pix/pix/issues/14465)
-* [FEATURE] Creation module cy_mfa_ind  ([6ad24a5](https://github.com/1024pix/pix/commit/6ad24a5)), closes [#14499](https://github.com/1024pix/pix/issues/14499)
-* [FEATURE] Permettre d'envoyer un signalement dans les modules sur Pix App (PIX-20994).  ([2274ee0](https://github.com/1024pix/pix/commit/2274ee0)), closes [#14481](https://github.com/1024pix/pix/issues/14481)
-* [TECH] Ajout et MAJ de JSDoc dans le sous-domaine configuration (certif) (PIX-20912).  ([8a9b973](https://github.com/1024pix/pix/commit/8a9b973)), closes [#14494](https://github.com/1024pix/pix/issues/14494)
-* ♻️ (mon-pix): use issueReportBlock in components ([f6e6417](https://github.com/1024pix/pix/commit/f6e6417))
-* ♻️(api): convert integration to unit test for route test ([ae411e6](https://github.com/1024pix/pix/commit/ae411e6))
-* ✅(mon-pix): add send-issue-report test ([de5a2be](https://github.com/1024pix/pix/commit/de5a2be))
-* ✨(api): allow null value for answer ([2124438](https://github.com/1024pix/pix/commit/2124438))
-* ✨(api): return id of created module-issue-report ([4040409](https://github.com/1024pix/pix/commit/4040409))
-* ✨(mon-pix): call issue-report-service ([0c08837](https://github.com/1024pix/pix/commit/0c08837))
-* ✨(mon-pix): create issueReportBlock component ([af3b811](https://github.com/1024pix/pix/commit/af3b811))
-* ✨(mon-pix): create ModuleIssueReport model ([fcf9cf1](https://github.com/1024pix/pix/commit/fcf9cf1))
-* ✨(mon-pix): displays specific error message when user do not fill the comment section ([93a8b9c](https://github.com/1024pix/pix/commit/93a8b9c))
-* ✨(mon-pix): pass through reportInfo ([d0f7fac](https://github.com/1024pix/pix/commit/d0f7fac))
-* ✨(mon-pix): resets form ([dee7e04](https://github.com/1024pix/pix/commit/dee7e04))
-* feat(api) : sauts de lignes ([437cd94](https://github.com/1024pix/pix/commit/437cd94))
-* feat(api):crea module MF_IND ([67ee629](https://github.com/1024pix/pix/commit/67ee629))
-* feat(api):retours review ([b34ea6d](https://github.com/1024pix/pix/commit/b34ea6d))
-* refactor(api): add @ts-check to framework-challenges-repository ([707c85d](https://github.com/1024pix/pix/commit/707c85d))
-* refactor(api): add @ts-check to sco-blocked-access-dates-repository ([62bcd09](https://github.com/1024pix/pix/commit/62bcd09))
-* refactor(api): add JSDoc to attachable-target-profiles-repository ([9b85326](https://github.com/1024pix/pix/commit/9b85326))
-* refactor(api): add JSDoc to candidate-repository ([960f86b](https://github.com/1024pix/pix/commit/960f86b))
-* refactor(api): add JSDoc to center-repository ([118fe0f](https://github.com/1024pix/pix/commit/118fe0f))
-* refactor(api): add JSDoc to complementary-certification-repository ([abb86de](https://github.com/1024pix/pix/commit/abb86de))
-* refactor(api): add JSDoc to versions-repository ([a8357a8](https://github.com/1024pix/pix/commit/a8357a8))
-* refactor(api): remove unused catching-up-candidate-reconciliation usecase ([15666f4](https://github.com/1024pix/pix/commit/15666f4))
-* feat(orga): add redirect to signup button to login template ([3a0e05a](https://github.com/1024pix/pix/commit/3a0e05a))
-* feat(orga): create OIDC signup form component ([9fa90dd](https://github.com/1024pix/pix/commit/9fa90dd))
-* feat(orga): create OIDC signup page ([ff969ea](https://github.com/1024pix/pix/commit/ff969ea))
-* fix(orga): fix select another organization button wording ([6159afc](https://github.com/1024pix/pix/commit/6159afc))
-* refacto(certif): update fraud report download link ([d7cd2d3](https://github.com/1024pix/pix/commit/d7cd2d3))
-* refacto(certif): update incident report download link ([0500ec8](https://github.com/1024pix/pix/commit/0500ec8))
-* refacto(mon-pix): update pix companion install link ([d8fbd24](https://github.com/1024pix/pix/commit/d8fbd24))
+### :building_construction: Tech
 
-## 5.287.0 (2025-12-23)
+- [#14439](https://github.com/1024pix/pix/pull/14439) :recycle: Renomme l'attribut `supervisor-password` pour utiliser le terme `invigilator` (PIX-20790)
+- [#14508](https://github.com/1024pix/pix/pull/14508) Remplacer le paquet glob par le builtin fs.glob
 
-* :recycle: api: add challengesBetweenSameCompetence and maximumAssessmentLength to Version model ([d0ab21b](https://github.com/1024pix/pix/commit/d0ab21b))
-* :recycle: api: remove numberOfChallengesPerCourse from config and make maximumAssessmentLength requi ([20aacd7](https://github.com/1024pix/pix/commit/20aacd7))
-* :white_check_mark: api: add test on required FlashAssessmentAlgorithmConfiguration propriety ([45424b3](https://github.com/1024pix/pix/commit/45424b3))
-* [BUMP] Upgrade @1024pix/epreuves-components to 2.4.6  ([f37e51a](https://github.com/1024pix/pix/commit/f37e51a)), closes [#14498](https://github.com/1024pix/pix/issues/14498)
-* [FEATURE] Afficher la liste complète des référentiels de certification dans Admin (PIX-20837).  ([1462c0c](https://github.com/1024pix/pix/commit/1462c0c)), closes [#14486](https://github.com/1024pix/pix/issues/14486)
-* [FEATURE] Afficher le compteur de certifs d'un utilisateur sur Admin (PIX-20910).  ([61a9d25](https://github.com/1024pix/pix/commit/61a9d25)), closes [#14496](https://github.com/1024pix/pix/issues/14496)
-* [FEATURE] Supprimer le titre redondant "Analyse de résultats" dans l'onglet analyse d'une campagne ( ([256d559](https://github.com/1024pix/pix/commit/256d559)), closes [#14491](https://github.com/1024pix/pix/issues/14491)
-* [TECH] Enlever de config.js le v3Certification.numberOfChallengesPerCourse (PIX-20656)  ([c0e68d9](https://github.com/1024pix/pix/commit/c0e68d9)), closes [#14397](https://github.com/1024pix/pix/issues/14397)
-* [TECH] Mettre à jour la page de blocage par le WAF (#14338) ([406a5e0](https://github.com/1024pix/pix/commit/406a5e0)), closes [#14338](https://github.com/1024pix/pix/issues/14338)
-* [TECH] Refactoriser la manière de remplir le formulaire de création d'orga (PIX-20854)  ([2054703](https://github.com/1024pix/pix/commit/2054703)), closes [#14479](https://github.com/1024pix/pix/issues/14479)
-* Merge branch 'dev' into pix-20678-update-unusual-activity-page ([50fd3a9](https://github.com/1024pix/pix/commit/50fd3a9))
-* sr(api): adds missing titles in demo-epreuves-components module ([9b579ec](https://github.com/1024pix/pix/commit/9b579ec))
-* sr(api): improves custom element’s schema for modulix-editor ([22cd16d](https://github.com/1024pix/pix/commit/22cd16d))
-* bump: upgrades @1024pix/epreuves-components to 2.4.6 ([2632452](https://github.com/1024pix/pix/commit/2632452))
-* refactor(admin): complementary-certification item handles its subpages ([6512fd3](https://github.com/1024pix/pix/commit/6512fd3))
-* refactor(admin): delete obsolete complementaries list code ([7479b00](https://github.com/1024pix/pix/commit/7479b00))
-* refactor(admin): use form tracked prop for orga creation instead of mutating record ([b972121](https://github.com/1024pix/pix/commit/b972121))
-* feat(admin): display certification-frameworks list ([6f1c0d1](https://github.com/1024pix/pix/commit/6f1c0d1))
-* feat(admin): display user certification-courses count ([0199c17](https://github.com/1024pix/pix/commit/0199c17))
-* feat(api): user-details-for-admin-serializer now has certificationCourses relationship ([5527682](https://github.com/1024pix/pix/commit/5527682))
-* feat(mon-pix): update unsual activity page for WAF ([5a8b0ac](https://github.com/1024pix/pix/commit/5a8b0ac))
-* feat(orga): remove redundant campaign analysis title in analysis tab ([e983164](https://github.com/1024pix/pix/commit/e983164))
-* tech(orga): remove unused css ([a9bad80](https://github.com/1024pix/pix/commit/a9bad80))
-* fix(admin): delete created record if submit is in error ([6481679](https://github.com/1024pix/pix/commit/6481679))
+# [5.288.0](https://github.com/1024pix/pix/compare/v5.287.0...v5.288.0) (2025-12-24)
 
-## 5.286.0 (2025-12-22)
+### :rocket: Amélioration
 
-* :fire:(mon-pix): remove plyr dependency ([d7d3541](https://github.com/1024pix/pix/commit/d7d3541))
-* :sparkles:(mon-pix): use native video player ([2674f4c](https://github.com/1024pix/pix/commit/2674f4c))
-* :truck: move error to confif context ([7106bb9](https://github.com/1024pix/pix/commit/7106bb9))
-* :truck: refactor(api) move repo to configuration context ([28149fa](https://github.com/1024pix/pix/commit/28149fa))
-* :truck: refactor(api): move usecase to configuration ([371cd6e](https://github.com/1024pix/pix/commit/371cd6e))
-* [BUGFIX] Les badges ne peuvent plus être mis à jour (PIX-20881).  ([97b753f](https://github.com/1024pix/pix/commit/97b753f)), closes [#14485](https://github.com/1024pix/pix/issues/14485)
-* [BUMP] Upgrade @1024pix/epreuves-components to 2.4.1  ([b1f7755](https://github.com/1024pix/pix/commit/b1f7755)), closes [#14484](https://github.com/1024pix/pix/issues/14484)
-* [FEATURE] Améliorer l'affichage dans Pix Admin (suite) (PIX-20879).  ([e2ce03d](https://github.com/1024pix/pix/commit/e2ce03d)), closes [#14428](https://github.com/1024pix/pix/issues/14428)
-* [FEATURE] Corriger quelques textes et titres dans le formulaire de création d'orga (PIX-20840)  ([3b431d4](https://github.com/1024pix/pix/commit/3b431d4)), closes [#14472](https://github.com/1024pix/pix/issues/14472)
-* [FEATURE] Iframe de visionnage de tuto Youtube (PIX-20897)  ([e765098](https://github.com/1024pix/pix/commit/e765098)), closes [#14489](https://github.com/1024pix/pix/issues/14489)
-* [FEATURE] MDX-17 Biais_AVA integration retours relecture ([a496e3c](https://github.com/1024pix/pix/commit/a496e3c))
-* [FEATURE] MDX-17 Biais_AVA integration retours relecture  ([f92b3f9](https://github.com/1024pix/pix/commit/f92b3f9)), closes [#14427](https://github.com/1024pix/pix/issues/14427)
-* [FEATURE] MDX-32 Integration retours NR_Datacenter_NOV ([7a17c6e](https://github.com/1024pix/pix/commit/7a17c6e))
-* [FEATURE] MDX-32 Integration retours NR_Datacenter_NOV  ([fcc9e49](https://github.com/1024pix/pix/commit/fcc9e49)), closes [#14445](https://github.com/1024pix/pix/issues/14445)
-* [FEATURE] Mettre à jour les traductions néerlandaises du mot "Attestation" (PIX-18677)  ([7fb993c](https://github.com/1024pix/pix/commit/7fb993c)), closes [#14493](https://github.com/1024pix/pix/issues/14493)
-* [FEATURE] modifis relecture interne antivirus ind ([f05764d](https://github.com/1024pix/pix/commit/f05764d))
-* [FEATURE] modifis relecture interne antivirus ind  ([fd18b08](https://github.com/1024pix/pix/commit/fd18b08)), closes [#14480](https://github.com/1024pix/pix/issues/14480)
-* [FEATURE] modifs gestionmdp nov relecture experts ([f747992](https://github.com/1024pix/pix/commit/f747992))
-* [FEATURE] modifs gestionmdp nov relecture experts  ([9afdef1](https://github.com/1024pix/pix/commit/9afdef1)), closes [#14487](https://github.com/1024pix/pix/issues/14487)
-* [FEATURE] modifs virus nov ([d9d15ed](https://github.com/1024pix/pix/commit/d9d15ed))
-* [FEATURE] modifs virus nov  ([d57088a](https://github.com/1024pix/pix/commit/d57088a)), closes [#14483](https://github.com/1024pix/pix/issues/14483)
-* [FEATURE] Permettre à un utilisateur invité de se connecter par un SSO (pix-20665)  ([15e22de](https://github.com/1024pix/pix/commit/15e22de)), closes [#14394](https://github.com/1024pix/pix/issues/14394)
-* [FEATURE] Valider l'existence du profil cible au moment de la création de schéma parcours combiné (P ([2980e90](https://github.com/1024pix/pix/commit/2980e90)), closes [#14490](https://github.com/1024pix/pix/issues/14490)
-* [TECH] :truck: Déplace les derniers cas d'utilisation du contexte `complementary-certification` vers ([1eace98](https://github.com/1024pix/pix/commit/1eace98)), closes [#14460](https://github.com/1024pix/pix/issues/14460)
-* [TECH] Remplacer le lecteur video utilisé dans les modules(PIX-20531).   ([98ace45](https://github.com/1024pix/pix/commit/98ace45)), closes [#14402](https://github.com/1024pix/pix/issues/14402)
-* [TECH] Séparer les insertions des Ke et des KeSnapshot du repository knowledgeElementRepository (PIX ([a36a560](https://github.com/1024pix/pix/commit/a36a560)), closes [#14425](https://github.com/1024pix/pix/issues/14425)
-* ♻️ (admin): clean classes ([7af9990](https://github.com/1024pix/pix/commit/7af9990))
-* ♻️ (admin): Remove useless div on badge form ([ea819e1](https://github.com/1024pix/pix/commit/ea819e1))
-* ✨(admin): improve autonomous course information ([79057eb](https://github.com/1024pix/pix/commit/79057eb))
-* ✨(admin): improve badge information ([0dba48d](https://github.com/1024pix/pix/commit/0dba48d))
-* ✨(admin): improve candidate information (certif) ([917bf2d](https://github.com/1024pix/pix/commit/917bf2d))
-* ✨(admin): improve comment information (certif) ([f315f27](https://github.com/1024pix/pix/commit/f315f27))
-* ✨(admin): improve complementary certification information (certif) ([034be6c](https://github.com/1024pix/pix/commit/034be6c))
-* ✨(admin): improve issue reports information (certif) ([a018a4b](https://github.com/1024pix/pix/commit/a018a4b))
-* ✨(admin): improve results information (certif) ([6c324fb](https://github.com/1024pix/pix/commit/6c324fb))
-* ✨(admin): improve session state information (certif) ([cda6625](https://github.com/1024pix/pix/commit/cda6625))
-* ✨(admin): move pix score on state section ([8e376cc](https://github.com/1024pix/pix/commit/8e376cc))
-* ✨(mon-pix): add subtitle for galerie video ([e59baf9](https://github.com/1024pix/pix/commit/e59baf9))
-* 🎨 (admin): move tags on the top of page and improve image ([0c1b09c](https://github.com/1024pix/pix/commit/0c1b09c))
-* 🎨 (admin): remove spacing on badge criterion section ([1dbbed7](https://github.com/1024pix/pix/commit/1dbbed7))
-* 🐛 (api): fix badge update ([92631d2](https://github.com/1024pix/pix/commit/92631d2))
-* 🔥(admin): remove unused CertificationInfoField component ([7efa772](https://github.com/1024pix/pix/commit/7efa772))
-* 🔥(admin): remove unused code on competence-list (certif) ([c8494b3](https://github.com/1024pix/pix/commit/c8494b3))
-* 🔥(admin): remove unused css ([837042b](https://github.com/1024pix/pix/commit/837042b))
-* suppression<br> en trop ([5bab22b](https://github.com/1024pix/pix/commit/5bab22b))
-* Update CYAntivirus_IND.json ([1516fe5](https://github.com/1024pix/pix/commit/1516fe5))
-* Update IAGenBiais_AVA.json ([a9bb28c](https://github.com/1024pix/pix/commit/a9bb28c))
-* Update IAGenBiais_AVA.json ([4f0a73d](https://github.com/1024pix/pix/commit/4f0a73d))
-* Update IAGenBiais_AVA.json ([e81e1f5](https://github.com/1024pix/pix/commit/e81e1f5))
-* Update IAGenBiais_AVA.json ([63ebe11](https://github.com/1024pix/pix/commit/63ebe11))
-* Update IAGenBiais_AVA.json ([7dab954](https://github.com/1024pix/pix/commit/7dab954))
-* Update IAGenBiais_AVA.json ([1b6a735](https://github.com/1024pix/pix/commit/1b6a735))
-* Update NR-Datacenter-NOV.json ([e16233a](https://github.com/1024pix/pix/commit/e16233a))
-* Update NR-Datacenter-NOV.json ([d749a55](https://github.com/1024pix/pix/commit/d749a55))
-* Update NR-Datacenter-NOV.json ([12db181](https://github.com/1024pix/pix/commit/12db181))
-* Update NR-Datacenter-NOV.json ([9bc9664](https://github.com/1024pix/pix/commit/9bc9664))
-* api: add missing dependencies ([f9c3817](https://github.com/1024pix/pix/commit/f9c3817))
-* feat(api): call knowledge element for participation service in right usecase ([d903635](https://github.com/1024pix/pix/commit/d903635))
-* feat(api): checks if target profile exists before creating combined course blueprint ([c592252](https://github.com/1024pix/pix/commit/c592252))
-* feat(api): create knowledge element for participation service ([ddb14c6](https://github.com/1024pix/pix/commit/ddb14c6))
-* feat(mon-pix): adds a public page to watch Youtube tutorials ([5ea6bc7](https://github.com/1024pix/pix/commit/5ea6bc7))
-* feat(mon-pix): displays specific error message if targetProfileId is not found ([6cfa18d](https://github.com/1024pix/pix/commit/6cfa18d))
-* feat(orga):  update attestations nl translations ([75744bf](https://github.com/1024pix/pix/commit/75744bf))
-* feat(orga): add acceptance tests for flow ([cb2975c](https://github.com/1024pix/pix/commit/cb2975c))
-* feat(orga): add required parameters in route and controller ([6da84c2](https://github.com/1024pix/pix/commit/6da84c2))
-* feat(orga): add required parameters in template to handle invitation acceptation and authentication ([ee78cee](https://github.com/1024pix/pix/commit/ee78cee))
-* feat(orga): display information message for already authorized orga users only ([38eced9](https://github.com/1024pix/pix/commit/38eced9))
-* tests(admin): cover error cases when creating a combined course blueprint ([3932286](https://github.com/1024pix/pix/commit/3932286))
-* bump: upgrades @1024pix/epreuves-components to 2.4.3 ([5d91a4c](https://github.com/1024pix/pix/commit/5d91a4c))
-* fix(admin): wording for DPO section title ([c79a0ca](https://github.com/1024pix/pix/commit/c79a0ca))
-* fix(admin): wording for external id placeholder ([178a7e0](https://github.com/1024pix/pix/commit/178a7e0))
-* tech(api): remove unecessary method function ([0920748](https://github.com/1024pix/pix/commit/0920748))
+- [#14465](https://github.com/1024pix/pix/pull/14465) Ajouter la page de création de compte lors d'une connexion SSO (PIX-20540)
+- [#14499](https://github.com/1024pix/pix/pull/14499) Creation module cy_mfa_ind
+- [#14481](https://github.com/1024pix/pix/pull/14481) Permettre d'envoyer un signalement dans les modules sur Pix App (PIX-20994). 
 
-## 5.285.0 (2025-12-19)
+### :bug: Correction
 
-* [BUGFIX] Message d'erreur incorrecte quand l'accès à Pix Orga n'est pas autorisé (PIX-20846)  ([18e0ba8](https://github.com/1024pix/pix/commit/18e0ba8)), closes [#14475](https://github.com/1024pix/pix/issues/14475)
-* [BUMP] Mise à jour de epreuves-components en 2.3.0  ([1f605e6](https://github.com/1024pix/pix/commit/1f605e6)), closes [#14468](https://github.com/1024pix/pix/issues/14468)
-* [FEATURE] Ajouter des boutons de signalement pour les embed et QAB dans Pix App (PIX-20792).  ([8e2a662](https://github.com/1024pix/pix/commit/8e2a662)), closes [#14466](https://github.com/1024pix/pix/issues/14466)
-* [FEATURE] Ajouter un lien vers le schema de parcours combiné pour un parcours combiné (PIX-20849)"  ([24b4e17](https://github.com/1024pix/pix/commit/24b4e17)), closes [#14476](https://github.com/1024pix/pix/issues/14476)
-* [FEATURE] Ajouter une route récupérant la liste des référentiels de certif (PIX-20771).  ([3308561](https://github.com/1024pix/pix/commit/3308561)), closes [#14455](https://github.com/1024pix/pix/issues/14455)
-* [FEATURE] Gérer la couleur du bouton de signalement en cas de hover/focus (PIX-20828).  ([63bc1da](https://github.com/1024pix/pix/commit/63bc1da)), closes [#14473](https://github.com/1024pix/pix/issues/14473)
-* [FEATURE] Modification IAGenImpact_NOV pour internationalisation ([0fbac7f](https://github.com/1024pix/pix/commit/0fbac7f))
-* [FEATURE] Modification IAGenImpact_NOV pour internationalisation  ([0afd65c](https://github.com/1024pix/pix/commit/0afd65c)), closes [#14459](https://github.com/1024pix/pix/issues/14459)
-* [FEATURE] modifications-post-relectures  ([27245e0](https://github.com/1024pix/pix/commit/27245e0)), closes [#14477](https://github.com/1024pix/pix/issues/14477)
-* [TECH] Correction des routes Mirage /token dans Pix Certif et Pix Orga, et ajout de tests d’erreur a ([24eac03](https://github.com/1024pix/pix/commit/24eac03)), closes [#14471](https://github.com/1024pix/pix/issues/14471)
-* [TECH] Harmoniser les champs vides des organisations en base (PIX-20776)  ([6754cd0](https://github.com/1024pix/pix/commit/6754cd0)), closes [#14437](https://github.com/1024pix/pix/issues/14437)
-* [TECH] Supprimer le statut TO_SHARE des cartes de parcours (PIX-20709)  ([5ad2c37](https://github.com/1024pix/pix/commit/5ad2c37)), closes [#14436](https://github.com/1024pix/pix/issues/14436)
-* ✨ (mon-pix): trigger issue modal on embed ([ad10375](https://github.com/1024pix/pix/commit/ad10375))
-* ✨ (mon-pix): trigger issue modal on qab ([a92e998](https://github.com/1024pix/pix/commit/a92e998))
-* 🎨 (mon-pix): add border on embed ([516980b](https://github.com/1024pix/pix/commit/516980b))
-* 🎨 (mon-pix): add hover and focus color on report buttons ([50a9d9a](https://github.com/1024pix/pix/commit/50a9d9a))
-* 🎨 (mon-pix): move report button to the right ([f5dea13](https://github.com/1024pix/pix/commit/f5dea13))
-* 🎨 (mon-pix): switch retry and report buttons on custom draft ([56830b3](https://github.com/1024pix/pix/commit/56830b3))
-* modifications-post-relectures ([bb37a51](https://github.com/1024pix/pix/commit/bb37a51))
-* rectification-modifs-retours-review ([c53b687](https://github.com/1024pix/pix/commit/c53b687))
-* Update IAGenImpact_NOV.json ([5c171cc](https://github.com/1024pix/pix/commit/5c171cc))
-* test(certif): fix mirage route /token ([1d7e44e](https://github.com/1024pix/pix/commit/1d7e44e))
-* test(orga): add tests for errors on login ([e7f8586](https://github.com/1024pix/pix/commit/e7f8586))
-* test(orga): fix mirage route /token ([2b02dc5](https://github.com/1024pix/pix/commit/2b02dc5))
-* feat(api): add certification Frameworks model ([cd6f874](https://github.com/1024pix/pix/commit/cd6f874))
-* feat(api): add combinedCourseBlueprintId in combined_courses ([968c8e7](https://github.com/1024pix/pix/commit/968c8e7))
-* feat(api): add find-certification-frameworks usecase ([3b28787](https://github.com/1024pix/pix/commit/3b28787))
-* feat(api): add GET /api/admin/certification-frameworks route ([385a680](https://github.com/1024pix/pix/commit/385a680))
-* feat(api): replace default empty string value by null for documentationUrl in #updateWithDataProtect ([1da5ce9](https://github.com/1024pix/pix/commit/1da5ce9)), closes [#updateWithDataProtectionOfficerAndTags](https://github.com/1024pix/pix/issues/updateWithDataProtectionOfficerAndTags)
-* feat(api): replace default empty string value by null for email in #updateWithDataProtectionOfficerA ([08aea98](https://github.com/1024pix/pix/commit/08aea98)), closes [#updateWithDataProtectionOfficerAndTags](https://github.com/1024pix/pix/issues/updateWithDataProtectionOfficerAndTags)
-* feat(api): sanitize empty email and documentationUrl in OrganizationForAdmin ([31fc73f](https://github.com/1024pix/pix/commit/31fc73f))
-* feat(api): use null when emailForScoActivation is not defined or empty string in csv serializer ([c97dc50](https://github.com/1024pix/pix/commit/c97dc50))
-* feat(mon-pix): remove TO_SHARE status from campaign participation overview ([960c951](https://github.com/1024pix/pix/commit/960c951))
-* feat(orga): add acceptance test when login access is not allowed ([3955591](https://github.com/1024pix/pix/commit/3955591))
-* refactor(api): add code in error when user not allowed to access Pix Orga ([9cbe9d1](https://github.com/1024pix/pix/commit/9cbe9d1))
-* refactor(orga): manage Pix Orga access not allowed with error code ([964c185](https://github.com/1024pix/pix/commit/964c185))
-* bump: upgrade epreuves-components to 2.3.0 ([68a18f3](https://github.com/1024pix/pix/commit/68a18f3))
+- [#14500](https://github.com/1024pix/pix/pull/14500) Mise à jour des URLs de documentation (PIX-20923).
 
-## 5.284.0 (2025-12-18)
+### :building_construction: Tech
 
-* :coffin: (api): remove getAllByIds function ([bce1ac8](https://github.com/1024pix/pix/commit/bce1ac8))
-* :recycle: move buildVersion to shared ([b24ffd6](https://github.com/1024pix/pix/commit/b24ffd6))
-* :sparkles: (api): add module metadata repository ([4fa82e5](https://github.com/1024pix/pix/commit/4fa82e5))
-* :sparkles: (api): update get module metadata usecase ([454d4f6](https://github.com/1024pix/pix/commit/454d4f6))
-* :sparkles: api: defaultCandidateCapacity removed from config ! ([9c04877](https://github.com/1024pix/pix/commit/9c04877))
-* :sparkles: api: enforce configuration domain so that version relies on FlashAssessmentAlgorithmConfi ([372880a](https://github.com/1024pix/pix/commit/372880a))
-* :sparkles: api: enforce shared version to rely on FlashAlgorithmConfiguration ([63ce83c](https://github.com/1024pix/pix/commit/63ce83c))
-* :sparkles: api: making defaultCandidateCapacity in config required ([2e96fd9](https://github.com/1024pix/pix/commit/2e96fd9))
-* :sparkles: api: support defaultCandidateCapacity from database for platform configuration ([e9ca15c](https://github.com/1024pix/pix/commit/e9ca15c))
-* [BUGFIX] Empêcher de multiples soumissions du form d'édition de session (PIX-20827).  ([478895d](https://github.com/1024pix/pix/commit/478895d)), closes [#14461](https://github.com/1024pix/pix/issues/14461)
-* [FEATURE] Afficher une modale lorsque l'utilisateur clique sur un bouton de signalement dans les mod ([d0ca92f](https://github.com/1024pix/pix/commit/d0ca92f)), closes [#14448](https://github.com/1024pix/pix/issues/14448)
-* [FEATURE] Créer des schéma de parcours combiné (PIX-20734)  ([3128f2e](https://github.com/1024pix/pix/commit/3128f2e)), closes [#14446](https://github.com/1024pix/pix/issues/14446)
-* [FEATURE] defaultCandidateCapacity - Versioner la capacité par défaut d'un candidat (PIX-20659).  ([58d5876](https://github.com/1024pix/pix/commit/58d5876)), closes [#14408](https://github.com/1024pix/pix/issues/14408)
-* [FEATURE] FRI Update CYVirus_NOV suite relecture interne  ([3da9abe](https://github.com/1024pix/pix/commit/3da9abe)), closes [#14467](https://github.com/1024pix/pix/issues/14467)
-* [FEATURE] Modif Clavier 1 suite comité qualité ([c4a57f8](https://github.com/1024pix/pix/commit/c4a57f8))
-* [FEATURE] Modif Clavier 1 suite comité qualité  ([b8155a6](https://github.com/1024pix/pix/commit/b8155a6)), closes [#14464](https://github.com/1024pix/pix/issues/14464)
-* [FEATURE] Vider le champ mot de passe du formulaire de connexion SCO suite à une erreur (PIX-20773). ([c6248de](https://github.com/1024pix/pix/commit/c6248de)), closes [#14430](https://github.com/1024pix/pix/issues/14430)
-* [TECH] Améliorer les performances des API internes des modules (PIX-20687)  ([82a8799](https://github.com/1024pix/pix/commit/82a8799)), closes [#14463](https://github.com/1024pix/pix/issues/14463)
-* [TECH] Augmenter la taille du conteneur du job de lint de mon-pix  ([465e2b3](https://github.com/1024pix/pix/commit/465e2b3)), closes [#14469](https://github.com/1024pix/pix/issues/14469)
-* [TECH] Augmenter le nombre d'auto-reruns sur les tests d'acceptance  ([20dc5ab](https://github.com/1024pix/pix/commit/20dc5ab)), closes [#14470](https://github.com/1024pix/pix/issues/14470)
-* [TECH] Nettoyage de code non utilisé dans Pix Admin  ([49e6031](https://github.com/1024pix/pix/commit/49e6031)), closes [#14462](https://github.com/1024pix/pix/issues/14462)
-* [TECH] Retirer les références à organization_learner_passage_participations (PIX-20812)  ([3680768](https://github.com/1024pix/pix/commit/3680768)), closes [#14453](https://github.com/1024pix/pix/issues/14453)
-* ✨ (mon-pix): create issue report modal ([d7f0113](https://github.com/1024pix/pix/commit/d7f0113))
-* ✨ (mon-pix): trigger issue modal on custom-draft ([0e587df](https://github.com/1024pix/pix/commit/0e587df))
-* ✨ (mon-pix): trigger issue modal on feedbacks ([8575314](https://github.com/1024pix/pix/commit/8575314))
-* ✨ (mon-pix): trigger issue modal on qcu-declarative ([0a4b63f](https://github.com/1024pix/pix/commit/0a4b63f))
-* ✨ (mon-pix): trigger issue modal on qcu-discovery ([f2e9550](https://github.com/1024pix/pix/commit/f2e9550))
-* ✨(mon-pix): adjust design issue report modal ([721373a](https://github.com/1024pix/pix/commit/721373a))
-* 💚(mon-pix): use node-docker-medium for min_pix_lint job ([c94feba](https://github.com/1024pix/pix/commit/c94feba))
-* 🧪(api): update tests ([c959b9c](https://github.com/1024pix/pix/commit/c959b9c))
-* feat(api) : duration 30 ([f3a7ab8](https://github.com/1024pix/pix/commit/f3a7ab8))
-* feat(api) coquille ([63dec8f](https://github.com/1024pix/pix/commit/63dec8f))
-* Update CYVirus_NOV.json ([2aaa935](https://github.com/1024pix/pix/commit/2aaa935))
-* Update CYVirus_NOV.json ([ec4d486](https://github.com/1024pix/pix/commit/ec4d486))
-* Update CYVirus_NOV.json ([d7575c8](https://github.com/1024pix/pix/commit/d7575c8))
-* Update CYVirus_NOV.json ([dd98f50](https://github.com/1024pix/pix/commit/dd98f50))
-* feat(admin): adapt combined course blueprint creation form ([283121f](https://github.com/1024pix/pix/commit/283121f))
-* feat(admin): download csv from combined-course-blueprint-list ([5445a3a](https://github.com/1024pix/pix/commit/5445a3a))
-* feat(api): add a joi schema for combined course blueprint success requirements ([2816680](https://github.com/1024pix/pix/commit/2816680))
-* feat(api): add create combined course blue print route ([aa2ce11](https://github.com/1024pix/pix/commit/aa2ce11))
-* feat(api): add deserialize combined course blueprint ([5e70f47](https://github.com/1024pix/pix/commit/5e70f47))
-* feat(api): add save combined course blueprint ([1be6835](https://github.com/1024pix/pix/commit/1be6835))
-* feat(api): add toCombinedCourse method on CombinedCourseBlueprint model ([c38c4aa](https://github.com/1024pix/pix/commit/c38c4aa))
-* feat(api): adds usecase createCombinedCourseBlueprint ([cfe5ed0](https://github.com/1024pix/pix/commit/cfe5ed0))
-* feat(api): deletes organization-learner-passage-participation and moves synchronize method ([156507e](https://github.com/1024pix/pix/commit/156507e))
-* feat(api): espace en trop ([88c910c](https://github.com/1024pix/pix/commit/88c910c))
-* feat(api): modif uuid doublons ([6e56541](https://github.com/1024pix/pix/commit/6e56541))
-* feat(api): removes references to organization_learner_passage_participations ([51a2f9e](https://github.com/1024pix/pix/commit/51a2f9e))
-* feat(mon-pix): empty password input on login error ([66c160f](https://github.com/1024pix/pix/commit/66c160f))
-* refactor(admin): move combined-course-creator to combined-course-blueprints ([0eb8bdb](https://github.com/1024pix/pix/commit/0eb8bdb))
-* refactor(admin): remove unused contains helper ([5831633](https://github.com/1024pix/pix/commit/5831633))
-* refactor(admin): remove unused list=select-all.js component ([bbc2723](https://github.com/1024pix/pix/commit/bbc2723))
-* refactor(admin): replace jwtDecode because not a component helper ([7daab0c](https://github.com/1024pix/pix/commit/7daab0c))
-* refactor(api): remove all CombinedCourseTemplate usages ([877467d](https://github.com/1024pix/pix/commit/877467d))
-* refactor(api): replace CombinedCourseTemplate with CombinedCourseBlueprint ([a374118](https://github.com/1024pix/pix/commit/a374118))
-* refactor(api): replace Frameworks by Scope in tests ([e9d0f20](https://github.com/1024pix/pix/commit/e9d0f20))
-* fix(certif): prevent multiple session creation/edition submissions ([a54106f](https://github.com/1024pix/pix/commit/a54106f))
-* chore(admin): reorder translation keys ([b32d59c](https://github.com/1024pix/pix/commit/b32d59c))
-* test(admin): add acceptance test to verify combined-course-blueprint transition ([4045b63](https://github.com/1024pix/pix/commit/4045b63))
-* test(e2e): fix certification config in e2e tests ([d466ec9](https://github.com/1024pix/pix/commit/d466ec9))
-* tech(ci): adds max autoreruns on acceptance tests ([e95d7ec](https://github.com/1024pix/pix/commit/e95d7ec))
+- [#14494](https://github.com/1024pix/pix/pull/14494) Ajout et MAJ de JSDoc dans le sous-domaine configuration (certif) (PIX-20912).
 
-## 5.283.0 (2025-12-17)
+# [5.287.0](https://github.com/1024pix/pix/compare/v5.286.0...v5.287.0) (2025-12-23)
 
-* :recycle: refactor(api) rename dbBuilder with invigilator ([8e600f7](https://github.com/1024pix/pix/commit/8e600f7))
-* [BUGFIX] Impossible de modifier un utilisateur dans Pix Admin (PIX-20796)  ([0c75a39](https://github.com/1024pix/pix/commit/0c75a39)), closes [#14443](https://github.com/1024pix/pix/issues/14443)
-* [BUGFIX] Rajout de l'éligibilité dans l'historique du candidat (PIX-20622).  ([bbc774b](https://github.com/1024pix/pix/commit/bbc774b)), closes [#14372](https://github.com/1024pix/pix/issues/14372)
-* [BUGFIX] Supprimer la valeur par défaut de INFORMATION_BANNER_POLLING_TIME dans le scope 'test' (PIX ([03fa549](https://github.com/1024pix/pix/commit/03fa549)), closes [#14450](https://github.com/1024pix/pix/issues/14450)
-* [BUMP] Update node to v24 ([f67a392](https://github.com/1024pix/pix/commit/f67a392))
-* [BUMP] Update node to v24 (major)  ([b0b8363](https://github.com/1024pix/pix/commit/b0b8363)), closes [#14128](https://github.com/1024pix/pix/issues/14128)
-* [FEATURE] : WIP module cyber antivirus ind ([c420e02](https://github.com/1024pix/pix/commit/c420e02))
-* [FEATURE] : WIP module cyber antivirus ind  ([0d0f530](https://github.com/1024pix/pix/commit/0d0f530)), closes [#14431](https://github.com/1024pix/pix/issues/14431)
-* [Feature] MDX-9 IAGenFonction_NOV, correction coquille POI ([8da1d0a](https://github.com/1024pix/pix/commit/8da1d0a))
-* [FEATURE] MDX-9 IAGenFonction_NOV, correction coquille POI  ([7e857a4](https://github.com/1024pix/pix/commit/7e857a4)), closes [#14426](https://github.com/1024pix/pix/issues/14426)
-* [FEATURE] Renommer et traduire les champs du formulaire de création d'organisation (PIX-20698)  ([ccf0a50](https://github.com/1024pix/pix/commit/ccf0a50)), closes [#14422](https://github.com/1024pix/pix/issues/14422)
-* [TECH] :recycle: Renomme le constructeur `buildSupervisorAccess` pour utiliser le terme `invigilator ([d5cb99b](https://github.com/1024pix/pix/commit/d5cb99b)), closes [#14435](https://github.com/1024pix/pix/issues/14435)
-* [TECH] Renommer le modèle Frameworks en Scopes (PIX-20774).  ([1682945](https://github.com/1024pix/pix/commit/1682945)), closes [#14414](https://github.com/1024pix/pix/issues/14414)
-* [TECH] Retirer des champs de la table quête (PIX-20736)  ([de3d217](https://github.com/1024pix/pix/commit/de3d217)), closes [#14403](https://github.com/1024pix/pix/issues/14403)
-* [TECH] Supprimer les décorateurs computed dans Pix Admin  ([e3498b5](https://github.com/1024pix/pix/commit/e3498b5)), closes [#14434](https://github.com/1024pix/pix/issues/14434)
-* 🐛(mon-pix): erase default value for INFORMATION_BANNER_POLLING_TIME ([60a20e0](https://github.com/1024pix/pix/commit/60a20e0))
-* feat : activités ([1ebe177](https://github.com/1024pix/pix/commit/1ebe177))
-* feat : br ([c5587bb](https://github.com/1024pix/pix/commit/c5587bb))
-* feat : leçon 1 ([b38bb9d](https://github.com/1024pix/pix/commit/b38bb9d))
-* feat : question accroche ([da3b644](https://github.com/1024pix/pix/commit/da3b644))
-* Update content description for malware explanationfeat(api): modif prop1 qcu accorche ([1496930](https://github.com/1024pix/pix/commit/1496930))
-* Update CYAntivirus_IND.json ([3010543](https://github.com/1024pix/pix/commit/3010543))
-* Update CYAntivirus_IND.json ([d6786bd](https://github.com/1024pix/pix/commit/d6786bd))
-* Update CYAntivirus_IND.json ([77dea1f](https://github.com/1024pix/pix/commit/77dea1f))
-* Update CYAntivirus_IND.json ([12213d5](https://github.com/1024pix/pix/commit/12213d5))
-* Update CYAntivirus_IND.json ([c3c0bc4](https://github.com/1024pix/pix/commit/c3c0bc4))
-* refactor(admin): modernize neutralization reactivity ([11e0667](https://github.com/1024pix/pix/commit/11e0667))
-* refactor(admin): remove computed decorator in Pix Admin ([dc59b42](https://github.com/1024pix/pix/commit/dc59b42))
-* refactor(admin): replace alias from @ember/object/computed by getter ([931ec7a](https://github.com/1024pix/pix/commit/931ec7a))
-* refactor(admin): replace equal from @ember/object/computed by getter ([3afe829](https://github.com/1024pix/pix/commit/3afe829))
-* refactor(api): create service for user certificability check ([12ac520](https://github.com/1024pix/pix/commit/12ac520))
-* refactor(api): removes duplicate columns from quests table ([4235390](https://github.com/1024pix/pix/commit/4235390))
-* refactor(api): take returns into account ([58c98fc](https://github.com/1024pix/pix/commit/58c98fc))
-* refactor(api): update JSDoc in candidate-repository ([1307628](https://github.com/1024pix/pix/commit/1307628))
-* chore: use --no-experimental-strip-types ([b8fac64](https://github.com/1024pix/pix/commit/b8fac64))
-* chore: use import type ([e76ca4c](https://github.com/1024pix/pix/commit/e76ca4c))
-* chore(playwright): fix type export ([4cf768d](https://github.com/1024pix/pix/commit/4cf768d))
-* tech(api): rename certification Frameworks model to Scopes ([9c5697a](https://github.com/1024pix/pix/commit/9c5697a))
-* feat(admin): translate and improve wording in orga creation form ([7897818](https://github.com/1024pix/pix/commit/7897818))
-* feat(admin): translate breadcrumbs ([1486499](https://github.com/1024pix/pix/commit/1486499))
-* feat(api): modifs diverses ([754bb25](https://github.com/1024pix/pix/commit/754bb25))
-* bugfix(admin): return real eligibility status ([05ca3ec](https://github.com/1024pix/pix/commit/05ca3ec))
-* bugfix(api): return certification eligibility status ([0f2e66c](https://github.com/1024pix/pix/commit/0f2e66c))
-* fix(admin): impossible to edit user ([6020a48](https://github.com/1024pix/pix/commit/6020a48))
-* fix(api): modif uuid en double ([b41a5eb](https://github.com/1024pix/pix/commit/b41a5eb))
+### :rocket: Amélioration
+
+- [#14486](https://github.com/1024pix/pix/pull/14486) Afficher la liste complète des référentiels de certification dans Admin (PIX-20837).
+- [#14496](https://github.com/1024pix/pix/pull/14496) Afficher le compteur de certifs d'un utilisateur sur Admin (PIX-20910).
+- [#14491](https://github.com/1024pix/pix/pull/14491) Supprimer le titre redondant "Analyse de résultats" dans l'onglet analyse d'une campagne (PIX-20853)
+
+### :building_construction: Tech
+
+- [#14397](https://github.com/1024pix/pix/pull/14397) Enlever de config.js le v3Certification.numberOfChallengesPerCourse (PIX-20656)
+- [#14338](https://github.com/1024pix/pix/pull/14338) Mettre à jour la page de blocage par le WAF (#14338)
+- [#14479](https://github.com/1024pix/pix/pull/14479) Refactoriser la manière de remplir le formulaire de création d'orga (PIX-20854) 
+
+### :arrow_up: Montée de version
+
+- [#14498](https://github.com/1024pix/pix/pull/14498) Upgrade @1024pix/epreuves-components to 2.4.6
+
+# [5.286.0](https://github.com/1024pix/pix/compare/v5.285.0...v5.286.0) (2025-12-22)
+
+### :rocket: Amélioration
+
+- [#14428](https://github.com/1024pix/pix/pull/14428) Améliorer l'affichage dans Pix Admin (suite) (PIX-20879).
+- [#14472](https://github.com/1024pix/pix/pull/14472) Corriger quelques textes et titres dans le formulaire de création d'orga (PIX-20840)
+- [#14489](https://github.com/1024pix/pix/pull/14489) Iframe de visionnage de tuto Youtube (PIX-20897)
+- [#14427](https://github.com/1024pix/pix/pull/14427) MDX-17 Biais_AVA integration retours relecture
+- [#14445](https://github.com/1024pix/pix/pull/14445) MDX-32 Integration retours NR_Datacenter_NOV
+- [#14493](https://github.com/1024pix/pix/pull/14493) Mettre à jour les traductions néerlandaises du mot "Attestation" (PIX-18677)
+- [#14480](https://github.com/1024pix/pix/pull/14480) modifis relecture interne antivirus ind
+- [#14487](https://github.com/1024pix/pix/pull/14487) modifs gestionmdp nov relecture experts
+- [#14483](https://github.com/1024pix/pix/pull/14483) modifs virus nov
+- [#14394](https://github.com/1024pix/pix/pull/14394) Permettre à un utilisateur invité de se connecter par un SSO (pix-20665)
+- [#14490](https://github.com/1024pix/pix/pull/14490) Valider l'existence du profil cible au moment de la création de schéma parcours combiné (PIX-20811)
+
+### :bug: Correction
+
+- [#14485](https://github.com/1024pix/pix/pull/14485) Les badges ne peuvent plus être mis à jour (PIX-20881).
+
+### :building_construction: Tech
+
+- [#14460](https://github.com/1024pix/pix/pull/14460) :truck: Déplace les derniers cas d'utilisation du contexte `complementary-certification`
+- [#14402](https://github.com/1024pix/pix/pull/14402) Remplacer le lecteur video utilisé dans les modules(PIX-20531).
+- [#14425](https://github.com/1024pix/pix/pull/14425) Séparer les insertions des Ke et des KeSnapshot du repository knowledgeElementRepository (PIX-20855).
+
+### :arrow_up: Montée de version
+
+- [#14484](https://github.com/1024pix/pix/pull/14484) Upgrade @1024pix/epreuves-components to 2.4.1
+
+# [5.285.0](https://github.com/1024pix/pix/compare/v5.284.0...v5.285.0) (2025-12-19)
+
+### :rocket: Amélioration
+
+- [#14466](https://github.com/1024pix/pix/pull/14466) Ajouter des boutons de signalement pour les embed et QAB dans Pix App (PIX-20792).
+- [#14476](https://github.com/1024pix/pix/pull/14476) Ajouter un lien vers le schema de parcours combiné pour un parcours combiné (PIX-20849)"
+- [#14455](https://github.com/1024pix/pix/pull/14455) Ajouter une route récupérant la liste des référentiels de certif (PIX-20771).
+- [#14473](https://github.com/1024pix/pix/pull/14473) Gérer la couleur du bouton de signalement en cas de hover/focus (PIX-20828).
+- [#14459](https://github.com/1024pix/pix/pull/14459) Modification IAGenImpact_NOV pour internationalisation
+- [#14477](https://github.com/1024pix/pix/pull/14477) modifications-post-relectures
+
+### :bug: Correction
+
+- [#14475](https://github.com/1024pix/pix/pull/14475) Message d'erreur incorrecte quand l'accès à Pix Orga n'est pas autorisé (PIX-20846)
+
+### :building_construction: Tech
+
+- [#14471](https://github.com/1024pix/pix/pull/14471) Correction des routes Mirage /token dans Pix Certif et Pix Orga, et ajout de tests d’erreur au login de Pix Orga
+- [#14437](https://github.com/1024pix/pix/pull/14437) Harmoniser les champs vides des organisations en base (PIX-20776)
+- [#14436](https://github.com/1024pix/pix/pull/14436) Supprimer le statut TO_SHARE des cartes de parcours (PIX-20709)
+
+### :arrow_up: Montée de version
+
+- [#14468](https://github.com/1024pix/pix/pull/14468) Mise à jour de epreuves-components en 2.3.0
+
+# [5.284.0](https://github.com/1024pix/pix/compare/v5.283.0...v5.284.0) (2025-12-18)
+
+### :rocket: Amélioration
+
+- [#14448](https://github.com/1024pix/pix/pull/14448) Afficher une modale lorsque l'utilisateur clique sur un bouton de signalement dans les modules (PIX-20493). 
+- [#14446](https://github.com/1024pix/pix/pull/14446) Créer des schéma de parcours combiné (PIX-20734)
+- [#14408](https://github.com/1024pix/pix/pull/14408) defaultCandidateCapacity - Versioner la capacité par défaut d'un candidat (PIX-20659)
+- [#14467](https://github.com/1024pix/pix/pull/14467) FRI Update CYVirus_NOV suite relecture interne
+- [#14464](https://github.com/1024pix/pix/pull/14464) Modif Clavier 1 suite comité qualité
+- [#14430](https://github.com/1024pix/pix/pull/14430) Vider le champ mot de passe du formulaire de connexion SCO suite à une erreur (PIX-20773).
+
+### :bug: Correction
+
+- [#14461](https://github.com/1024pix/pix/pull/14461) Empêcher de multiples soumissions du form d'édition de session (PIX-20827). 
+
+### :building_construction: Tech
+
+- [#14463](https://github.com/1024pix/pix/pull/14463) Améliorer les performances des API internes des modules (PIX-20687) 
+- [#14469](https://github.com/1024pix/pix/pull/14469) Augmenter la taille du conteneur du job de lint de mon-pix
+- [#14470](https://github.com/1024pix/pix/pull/14470) Augmenter le nombre d'auto-reruns sur les tests d'acceptance
+- [#14462](https://github.com/1024pix/pix/pull/14462) Nettoyage de code non utilisé dans Pix Admin
+- [#14453](https://github.com/1024pix/pix/pull/14453) Retirer les références à organization_learner_passage_participations (PIX-20812) 
+
+# [5.283.0](https://github.com/1024pix/pix/compare/v5.282.0...v5.283.0) (2025-12-17)
+
+### :rocket: Amélioration
+
+- [#14431](https://github.com/1024pix/pix/pull/14431) WIP module cyber antivirus ind
+- [#14426](https://github.com/1024pix/pix/pull/14426) MDX-9 IAGenFonction_NOV, correction coquille POI 
+- [#14422](https://github.com/1024pix/pix/pull/14422) Renommer et traduire les champs du formulaire de création d'organisation (PIX-20698) 
+
+### :bug: Correction
+
+- [#14443](https://github.com/1024pix/pix/pull/14443) Impossible de modifier un utilisateur dans Pix Admin (PIX-20796) 
+- [#14372](https://github.com/1024pix/pix/pull/14372) Rajout de l'éligibilité dans l'historique du candidat (PIX-20622).
+- [#14450](https://github.com/1024pix/pix/pull/14450) Supprimer la valeur par défaut de INFORMATION_BANNER_POLLING_TIME dans le scope 'test' (PIX-20809)
+
+### :building_construction: Tech
+
+- [#14435](https://github.com/1024pix/pix/pull/14435) :recycle: Renomme le constructeur `buildSupervisorAccess` pour utiliser le terme `invigilator` (pix-20789)
+- [#14414](https://github.com/1024pix/pix/pull/14414) Renommer le modèle Frameworks en Scopes (PIX-20774).
+- [#14403](https://github.com/1024pix/pix/pull/14403) Retirer des champs de la table quête (PIX-20736) 
+- [#14434](https://github.com/1024pix/pix/pull/14434) Supprimer les décorateurs computed dans Pix Admin 
+
+### :arrow_up: Montée de version
+
+- [#14128](https://github.com/1024pix/pix/pull/14128) Update node to v24 (major)
 
 # [5.282.0](https://github.com/1024pix/pix/compare/v5.281.0...v5.282.0) (2025-12-16)
 
