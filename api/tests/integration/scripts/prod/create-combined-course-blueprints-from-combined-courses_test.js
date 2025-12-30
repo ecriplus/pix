@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { CreateCombinedCourseBlueprint } from '../../../../scripts/prod/create-combined-course-blueprints-from-combined-courses.js';
+import { COMBINED_COURSE_BLUEPRINT_ITEMS } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { Module } from '../../../../src/quest/domain/models/Module.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
@@ -50,8 +51,8 @@ describe('CreateCombinedCourseBlueprint', function () {
         expect(combinedCourseBlueprints[0].description).to.equal('Le but de ma quête');
         expect(combinedCourseBlueprints[0].illustration).to.equal('images/illustration.svg');
         expect(combinedCourseBlueprints[0].content).to.deep.equal([
-          { type: 'evaluation', value: targetProfile.id },
-          { type: 'module', value: 'short-module-id' },
+          { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfile.id },
+          { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: 'short-module-id' },
         ]);
       });
 
