@@ -1,6 +1,8 @@
-import { oidcAuthenticationServiceRegistry } from '../../../../../lib/domain/usecases/index.js';
 import { OidcAuthenticationService } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
-import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import {
+  oidcAuthenticationServiceRegistry,
+  usecases,
+} from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 

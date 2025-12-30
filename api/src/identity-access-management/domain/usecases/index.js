@@ -1,4 +1,6 @@
-import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
+// eslint-disable-next-line simple-import-sort/imports -- import userRepository first to avoid circular dependency ("Cannot access 'campaignRepositories' before initialization")
+import * as userRepository from '../../infrastructure/repositories/user.repository.js';
+
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
@@ -39,15 +41,17 @@ import * as privacyUsersApiRepository from '../../infrastructure/repositories/pr
 import { refreshTokenRepository } from '../../infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../infrastructure/repositories/reset-password-demand.repository.js';
 import { revokedUserAccessRepository } from '../../infrastructure/repositories/revoked-user-access.repository.js';
-import * as userRepository from '../../infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../infrastructure/repositories/user-email.repository.js';
 import { userToCreateRepository } from '../../infrastructure/repositories/user-to-create.repository.js';
 import { authenticationSessionService } from '../services/authentication-session.service.js';
+import { OidcAuthenticationServiceRegistry } from '../services/oidc-authentication-service-registry.js';
 import * as passwordGeneratorService from '../services/password-generator.service.js';
 import { pixAuthenticationService } from '../services/pix-authentication-service.js';
 import { resetPasswordService } from '../services/reset-password.service.js';
 import { scoAccountRecoveryService } from '../services/sco-account-recovery.service.js';
 import { addOidcProviderValidator } from '../validators/add-oidc-provider.validator.js';
+
+const oidcAuthenticationServiceRegistry = new OidcAuthenticationServiceRegistry({ oidcProviderRepository });
 
 const repositories = {
   accountRecoveryDemandRepository,
@@ -68,6 +72,7 @@ const repositories = {
   legalDocumentApiRepository,
   ltiPlatformRegistrationRepository,
   membershipRepository,
+  oidcAuthenticationServiceRegistry,
   oidcProviderRepository,
   organizationLearnerRepository,
   organizationRepository,
@@ -227,4 +232,4 @@ const usecasesWithoutInjectedDependencies = {
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
-export { usecases };
+export { oidcAuthenticationServiceRegistry, usecases };

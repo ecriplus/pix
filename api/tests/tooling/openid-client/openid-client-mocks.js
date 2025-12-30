@@ -1,5 +1,5 @@
-import { oidcAuthenticationServiceRegistry } from '../../../lib/domain/usecases/index.js';
 import { OidcAuthenticationService } from '../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
+import { oidcAuthenticationServiceRegistry } from '../../../src/identity-access-management/domain/usecases/index.js';
 import { sinon } from '../../test-helper.js';
 
 const clientId = 'client';
