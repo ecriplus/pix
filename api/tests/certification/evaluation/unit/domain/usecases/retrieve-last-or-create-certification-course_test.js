@@ -5,7 +5,7 @@ import { CenterHabilitationError } from '../../../../../../src/certification/sha
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { MAX_REACHABLE_LEVEL } from '../../../../../../src/shared/domain/constants.js';
+import { config } from '../../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
@@ -34,6 +34,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const verifyCertificateCodeService = {};
   const userRepository = {};
   const versionRepository = {};
+
+  const MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;
 
   const injectables = {
     assessmentRepository,
