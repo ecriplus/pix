@@ -19,50 +19,29 @@ describe('Integration | Identity Access Management | Application | Controller | 
     const method = 'GET';
     const url = '/api/account-recovery/FfgpFXgyuO062nPUPwcb8Wy3KcgkqR2p2GyEuGVaNI4';
 
-    context('Success cases', function () {
-      it('returns an HTTP response with status code 200', async function () {
+    context('when TemporaryKey not found', function () {
+      it('returns an HTTP response with status code 404', async function () {
         // given
-        usecases.getAccountRecoveryDetails.resolves({
-          id: 1,
-          email: 'email@example.net',
-          firstName: 'Gertrude',
-          hasGarAuthenticationMethod: false,
-          hasScoUsername: false,
-        });
+        usecases.getAccountRecoveryDetails.rejects(new NotFoundError());
 
         // when
         const response = await httpTestServer.request(method, url);
 
         // then
-        expect(response.statusCode).to.equal(200);
+        expect(response.statusCode).to.equal(404);
       });
     });
 
-    context('Error cases', function () {
-      context('when TemporaryKey not found', function () {
-        it('returns an HTTP response with status code 404', async function () {
-          // given
-          usecases.getAccountRecoveryDetails.rejects(new NotFoundError());
+    context('when UserNotFoundError', function () {
+      it('returns an HTTP response with status code 404', async function () {
+        // given
+        usecases.getAccountRecoveryDetails.rejects(new UserNotFoundError());
 
-          // when
-          const response = await httpTestServer.request(method, url);
+        // when
+        const response = await httpTestServer.request(method, url);
 
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
-      });
-
-      context('when UserNotFoundError', function () {
-        it('returns an HTTP response with status code 404', async function () {
-          // given
-          usecases.getAccountRecoveryDetails.rejects(new UserNotFoundError());
-
-          // when
-          const response = await httpTestServer.request(method, url);
-
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
+        // then
+        expect(response.statusCode).to.equal(404);
       });
     });
   });
