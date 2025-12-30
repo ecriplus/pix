@@ -5,7 +5,7 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 
-describe('Integration | Identity Access Management | Application | Controller | account-recovery', function () {
+describe('Integration | Identity Access Management | Application | Route | account-recovery', function () {
   let httpTestServer;
 
   beforeEach(async function () {
@@ -15,7 +15,7 @@ describe('Integration | Identity Access Management | Application | Controller | 
     await httpTestServer.register(routesUnderTest);
   });
 
-  describe('#checkAccountRecoveryDemand', function () {
+  describe('GET /api/account-recovery/', function () {
     const method = 'GET';
     const url = '/api/account-recovery/FfgpFXgyuO062nPUPwcb8Wy3KcgkqR2p2GyEuGVaNI4';
 
