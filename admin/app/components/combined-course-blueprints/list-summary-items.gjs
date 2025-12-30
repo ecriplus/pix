@@ -26,7 +26,7 @@ export default class CombineCourseBluePrintList extends Component {
       });
       const exportedData = [
         ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
-        ['', this.currentUser.adminMember.id, jsonParsed],
+        ['', this.currentUser.adminMember.userId.toString(), jsonParsed],
       ];
 
       const csvContent = exportedData
