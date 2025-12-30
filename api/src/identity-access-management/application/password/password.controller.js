@@ -7,6 +7,7 @@ const checkResetDemand = async function (request, h, dependencies = { userSerial
   const user = await usecases.getUserByResetPasswordDemand({ temporaryKey });
   return dependencies.userSerializer.serialize(user);
 };
+
 const createResetPasswordDemand = async function (request, h) {
   const email = request.payload.email;
   const locale = getUserLocale(request);
