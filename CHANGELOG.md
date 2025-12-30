@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.290.0](https://github.com/1024pix/pix/compare/v5.289.0...v5.290.0) (2025-12-30)
+
+### :rocket: Amélioration
+
+- [#14514](https://github.com/1024pix/pix/pull/14514) Utiliser des shorts ids au lieu des ids de modules pour créer un schéma de parcours combiné (PIX-20863) 
+
+### :bug: Correction
+
+- [#14519](https://github.com/1024pix/pix/pull/14519) Corrige l'identifiant du créateur des campagnes dans le csv exporté depuis les schémas de parcours. 
+
+### :building_construction: Tech
+
+- [#14482](https://github.com/1024pix/pix/pull/14482) Créer des blueprints à partir des combined_courses déjà existants et les rattacher (PIX-20848) 
+- [#14521](https://github.com/1024pix/pix/pull/14521) Supprime les tests (flacky) e2e d'accessibilité de modulix. 
+- [#14506](https://github.com/1024pix/pix/pull/14506) Utiliser la clé de complémentaire dans la route de récupération des profils-cibles (PIX-20856).
+
 ## 5.289.0 (2025-12-29)
 
 * :fire: api: remove defaultProbabilityToPickChallenge from config.js ([e001038](https://github.com/1024pix/pix/commit/e001038))
