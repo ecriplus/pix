@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## [5.290.1](https://github.com/1024pix/pix/compare/v5.290.0...v5.290.1) (2025-12-30)
+
+### :bug: Correction
+
+- [#14523](https://github.com/1024pix/pix/pull/14523) Corriger le fichier CHANGELOG.md 
+
+### :building_construction: Tech
+
+- [#14511](https://github.com/1024pix/pix/pull/14511) Ajout et MAJ de JSDoc dans les repositories du sous contexte `enrolment` (PIX-20948).
+
 # [5.290.0](https://github.com/1024pix/pix/compare/v5.289.0...v5.290.0) (2025-12-30)
 
 ### :rocket: Amélioration
