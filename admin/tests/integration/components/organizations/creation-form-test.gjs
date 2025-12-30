@@ -1,6 +1,6 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
+import { click, triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CreationForm from 'pix-admin/components/organizations/creation-form';
 import { module, test } from 'qunit';
@@ -426,6 +426,83 @@ module('Integration | Component | organizations/creation-form', function (hooks)
           assert.ok(nonValidDPOEmailErrorMessage);
         });
       });
+
+      test('should make error messages disappear when updating fields in error with correct values', async function (assert) {
+        // given
+        const screen = await render(
+          <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+        );
+
+        await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+
+        click(screen.getByRole('button', { name: `${t('components.organizations.creation.type.label')} *` }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Établissement scolaire' }));
+
+        click(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.creation.administration-team.selector.label')} *`,
+          }),
+        );
+        await screen.findByRole('listbox');
+        await click(await screen.findByRole('option', { name: 'Équipe 2' }));
+
+        const dpoEmailLabel = `${t('components.organizations.creation.dpo.email')}DPO`;
+        const dpoEmailInput = screen.getByRole('textbox', { name: dpoEmailLabel });
+        await fillByLabel(dpoEmailLabel, 'invalid-email');
+        await triggerEvent(dpoEmailInput, 'focusout');
+
+        await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+        // when
+        click(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.creation.country.selector.label')} *`,
+          }),
+        );
+        await screen.findByRole('listbox');
+        await click(await screen.findByRole('option', { name: 'France (99100)' }));
+
+        await fillByLabel(dpoEmailLabel, 'justin.ptipeu@example.net');
+        await triggerEvent(dpoEmailInput, 'focusout');
+
+        //then
+        assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.country')));
+        assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.dpo-email')));
+      });
+    });
+  });
+
+  module('when filling form', function () {
+    test("should display error messages 'on the go' when filling form with non-valid information", async function (assert) {
+      // given
+      const screen = await render(
+        <template>
+          <CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} @onCancel={{onCancel}} />
+        </template>,
+      );
+
+      // when
+      const nameInputLabel = `${t('components.organizations.creation.name.label')} *`;
+      const nameInput = screen.getByRole('textbox', { name: nameInputLabel });
+      await fillByLabel(nameInputLabel, 'Organisation de Test');
+      await fillByLabel(nameInputLabel, '');
+      await triggerEvent(nameInput, 'focusout');
+
+      const documentationUrlLabel = t('components.organizations.creation.documentation-link');
+      const documentationUrlInput = screen.getByRole('textbox', { name: documentationUrlLabel });
+      await fillByLabel(documentationUrlLabel, 'invalid-documentation-url');
+      await triggerEvent(documentationUrlInput, 'focusout');
+
+      const dpoEmailLabel = `${t('components.organizations.creation.dpo.email')}DPO`;
+      const dpoEmailInput = screen.getByRole('textbox', { name: dpoEmailLabel });
+      await fillByLabel(dpoEmailLabel, 'invalid-email');
+      await triggerEvent(dpoEmailInput, 'focusout');
+
+      //then
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.name')));
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.documentation-url')));
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.dpo-email')));
     });
   });
 });

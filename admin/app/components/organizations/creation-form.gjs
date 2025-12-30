@@ -81,10 +81,13 @@ export default class OrganizationCreationForm extends Component {
   }
 
   handleInputChange = (key, event) => {
-    this.form = { ...this.form, [key]: event.target.value };
+    const { value } = event.target;
+    this.validator.validateField(key, value);
+    this.form = { ...this.form, [key]: value };
   };
 
   handleSelectChange = (key, value) => {
+    this.validator.validateField(key, value);
     this.form = { ...this.form, [key]: value };
   };
 
