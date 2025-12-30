@@ -712,7 +712,6 @@
         },
         "parent-organization-name": "Parent organization: {parentOrganizationName}",
         "province-code": "Province code (3 digits)",
-        "required-fields-error": "Please fill in all required fields.",
         "type": {
           "label": "Type of the organization",
           "placeholder": "Select one type"

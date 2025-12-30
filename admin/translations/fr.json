@@ -714,7 +714,6 @@
         },
         "parent-organization-name": "Organisation mère : {parentOrganizationName}",
         "province-code": "Département (en 3 chiffres)",
-        "required-fields-error": "Veuillez remplir tous les champs obligatoires.",
         "type": {
           "label": "Type de l'organisation",
           "placeholder": "Sélectionner un type"
