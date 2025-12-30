@@ -584,8 +584,8 @@ export default function routes() {
     return new Response(204);
   });
 
-  this.get('admin/complementary-certifications/:key/current-consolidated-framework', (schema, request) => {
-    return schema.certificationConsolidatedFrameworks.find(request.params.key);
+  this.get('admin/certification-frameworks/:scope/active-consolidated-framework', (schema, request) => {
+    return schema.certificationConsolidatedFrameworks.find(request.params.scope);
   });
 
   this.get('admin/complementary-certifications/:key/framework-history', (schema, request) => {

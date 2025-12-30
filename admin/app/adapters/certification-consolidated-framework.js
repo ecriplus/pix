@@ -20,8 +20,8 @@ export default class CertificationConsolidatedFrameworkAdapter extends Applicati
     return this.ajax(url, 'POST', payload);
   }
 
-  findRecord(store, type, complementaryCertificationKey) {
-    const url = `${this.buildURL('complementary-certifications', complementaryCertificationKey)}/current-consolidated-framework`;
+  findRecord(store, type, scope) {
+    const url = `${this.host}/${this.namespace}/certification-frameworks/${scope}/active-consolidated-framework`;
 
     return this.ajax(url, 'GET');
   }
