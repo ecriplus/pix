@@ -86,11 +86,11 @@ export class CombinedCourseBlueprint {
     }
   }
   static buildContentItems(items) {
-    return items.map(({ moduleShortId, targetProfileId }) =>
-      moduleShortId
+    return items.map(({ moduleShortId, targetProfileId }) => {
+      return moduleShortId
         ? { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleShortId }
-        : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId },
-    );
+        : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId };
+    });
   }
 }
 
