@@ -1,4 +1,5 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CreationForm from 'pix-admin/components/organizations/creation-form';
@@ -12,7 +13,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
   const onSubmit = () => {};
   const onCancel = () => {};
 
-  let store;
+  let store, errorNotificationStub;
 
   const countries = [
     { code: '99100', name: 'France' },
@@ -26,6 +27,12 @@ module('Integration | Component | organizations/creation-form', function (hooks)
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+
+    errorNotificationStub = sinon.stub();
+    class NotificationsStub extends Service {
+      sendErrorNotification = errorNotificationStub;
+    }
+    this.owner.register('service:pixToast', NotificationsStub);
   });
 
   module('Render', function () {
@@ -310,7 +317,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       await screen.findByRole('listbox');
       click(await screen.findByRole('option', { name: 'France (99100)' }));
 
-      await fillByLabel(t('components.organizations.creation.documentation-link'), 'www.documentation.fr');
+      await fillByLabel(t('components.organizations.creation.documentation-link'), 'https://www.documentation.fr');
 
       await fillByLabel(`${t('components.organizations.creation.dpo.firstname')}DPO`, 'Justin');
       await fillByLabel(`${t('components.organizations.creation.dpo.lastname')}DPO`, 'Ptipeu');
@@ -327,13 +334,98 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         administrationTeamId: 'team-2',
         provinceCode: '78',
         countryCode: '99100',
-        documentationUrl: 'www.documentation.fr',
+        documentationUrl: 'https://www.documentation.fr',
         dataProtectionOfficerFirstName: 'Justin',
         dataProtectionOfficerLastName: 'Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
       };
 
       assert.ok(handleSubmitStub.calledWith(expectedForm));
+    });
+
+    module('errors', function () {
+      module('when required fields are not filled (except for name)', function () {
+        test('should not submit form', async function (assert) {
+          // given
+          const handleSubmitStub = sinon.stub();
+
+          const screen = await render(
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @countries={{countries}}
+                @onSubmit={{handleSubmitStub}}
+              />
+            </template>,
+          );
+
+          // name validation cannot be included in the tests because it is handled by native HTML required validation
+          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          assert.ok(handleSubmitStub.notCalled);
+        });
+
+        test('should display error toast and display specific error messages on required fields', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          // name validation cannot be included in the tests because it is handled by native HTML required validation
+          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          const typeErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.type'));
+          const administrationTeamErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.administration-team'),
+          );
+          const countryErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.country'));
+
+          assert.ok(typeErrorMessage);
+          assert.ok(administrationTeamErrorMessage);
+          assert.ok(countryErrorMessage);
+          assert.ok(
+            errorNotificationStub.calledWithExactly({
+              message: t('components.organizations.creation.error-messages.error-toast'),
+            }),
+          );
+        });
+      });
+
+      module('validation for optional fields', function () {
+        test('should display specific error if documentation link or DPO email are not valid', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+          await fillByLabel(t('components.organizations.creation.documentation-link'), 'non-valid-documentation-url');
+          await fillByLabel(`${t('components.organizations.creation.dpo.email')}DPO`, 'non-valid-email');
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          const nonValidDocumentationUrlErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.documentation-url'),
+          );
+
+          const nonValidDPOEmailErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.dpo-email'),
+          );
+
+          assert.ok(nonValidDocumentationUrlErrorMessage);
+          assert.ok(nonValidDPOEmailErrorMessage);
+        });
+      });
     });
   });
 });

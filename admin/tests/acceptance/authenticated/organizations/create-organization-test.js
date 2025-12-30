@@ -141,7 +141,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
       await clickByName(t('common.actions.add'));
 
       // then
-      assert.dom(screen.getByText(t('components.organizations.creation.required-fields-error'))).exists();
+      assert.dom(screen.getByText(t('components.organizations.creation.error-messages.error-toast'))).exists();
     });
   });
 });
