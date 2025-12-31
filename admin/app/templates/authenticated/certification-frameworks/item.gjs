@@ -6,7 +6,7 @@ import Header from 'pix-admin/components/certification-frameworks/item/header';
   <div class="page">
     <Header @complementaryCertification={{@model}} />
 
-    <section class="page-body complementary-certification complementary-certification__header">
+    <section class="page-body certification-framework certification-framework__header">
       {{outlet}}
     </section>
   </div>

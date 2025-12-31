@@ -1,0 +1,32 @@
+@use 'pix-design-tokens/typography';
+
+.certification-framework-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__badges-title,
+  &__history-title {
+    padding-bottom: var(--pix-spacing-4x);
+
+    @extend %pix-title-xs;
+  }
+}
+
+
+.certification-framework-details-target-profile {
+  &__attach-button {
+    width: fit-content;
+  }
+}
+
+.certification-framework-details-table {
+
+  &__certification-framework-badge-name {
+    width: 50%;
+  }
+
+  &__certification-framework-badge-image-url {
+    width: 80px;
+  }
+}

@@ -1,0 +1,21 @@
+.certification-framework-attach-badges {
+  &__description, &__error, &__section {
+    margin-top: var(--pix-spacing-4x);
+  }
+}
+
+.certification-framework-attach-badges-section {
+
+  &__table {
+    display: flex;
+    flex-direction: column-reverse;
+
+    table {
+      height: 100%;
+
+      tbody {
+        vertical-align: top;
+      }
+    }
+  }
+}
