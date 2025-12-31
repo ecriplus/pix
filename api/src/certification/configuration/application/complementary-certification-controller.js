@@ -1,7 +1,6 @@
 import { usecases } from '../domain/usecases/index.js';
 import * as attachableTargetProfilesSerializer from '../infrastructure/serializers/attachable-target-profiles-serializer.js';
 import * as complementaryCertificationSerializer from '../infrastructure/serializers/complementary-certification-serializer.js';
-import * as certificationConsolidatedFrameworkSerializer from '../infrastructure/serializers/consolidated-framework-serializer.js';
 import * as frameworkHistorySerializer from '../infrastructure/serializers/framework-history-serializer.js';
 
 const findComplementaryCertifications = async function () {
@@ -38,16 +37,6 @@ const calibrateFrameworkVersion = async function (request, h) {
   return h.response().code(200);
 };
 
-const getCurrentFrameworkVersion = async function (request) {
-  const { complementaryCertificationKey } = request.params;
-
-  const currentFrameworkVersion = await usecases.getCurrentFrameworkVersion({
-    complementaryCertificationKey,
-  });
-
-  return certificationConsolidatedFrameworkSerializer.serialize(currentFrameworkVersion);
-};
-
 const getFrameworkHistory = async function (request) {
   const { complementaryCertificationKey } = request.params;
 
@@ -71,7 +60,6 @@ const complementaryCertificationController = {
   createCertificationVersion,
   findComplementaryCertifications,
   getComplementaryCertificationTargetProfileHistory,
-  getCurrentFrameworkVersion,
   getFrameworkHistory,
   searchAttachableTargetProfilesForComplementaryCertifications,
 };
