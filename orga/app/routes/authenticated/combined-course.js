@@ -13,8 +13,7 @@ export default class CombinedCourseRoute extends Route {
   }
 
   model(params) {
-    return this.store.findRecord('combined-course', params.combined_course_id).catch((error) => {
-      console.error(error);
+    return this.store.findRecord('combined-course', params.combined_course_id).catch(() => {
       this.router.replaceWith('not-found');
     });
   }

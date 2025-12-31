@@ -34,8 +34,7 @@ export default class CombinedCourseRoute extends Route {
           groups: params.groups,
         },
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         this.router.replaceWith('not-found');
       });
 
