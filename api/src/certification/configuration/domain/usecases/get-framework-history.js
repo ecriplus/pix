@@ -5,9 +5,9 @@
 
 /**
  * @param {object} params
- * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
+ * @param {scope} params.scope
  * @param {VersionsRepository} params.versionsRepository
  */
-export const getFrameworkHistory = async ({ complementaryCertificationKey, versionsRepository }) => {
-  return versionsRepository.getFrameworkHistory({ scope: complementaryCertificationKey });
+export const getFrameworkHistory = async ({ scope, versionsRepository }) => {
+  return versionsRepository.getFrameworkHistory({ scope });
 };

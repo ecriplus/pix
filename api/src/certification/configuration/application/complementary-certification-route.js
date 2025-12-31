@@ -130,35 +130,6 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
-          }),
-        },
-        handler: complementaryCertificationController.getFrameworkHistory,
-        tags: ['api', 'admin'],
-        notes: [
-          'Cette route est restreinte aux utilisateurs authentifiés avec un rôle Super Admin, Certif, Support ou Métier',
-          "Elle permet de récupérer l'historique des référentiels d'une complémentaire",
-        ],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/admin/complementary-certifications/{complementaryCertificationKey}/target-profiles',
       config: {
         validate: {
