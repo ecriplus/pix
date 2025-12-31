@@ -78,7 +78,6 @@ export default class BadgeForm extends Component {
       this.router.transitionTo('authenticated.target-profiles.target-profile.insights');
       return badge;
     } catch (error) {
-      console.error(error);
       this._handleResponseError(error);
     }
   }

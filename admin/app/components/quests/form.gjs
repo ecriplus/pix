@@ -97,13 +97,11 @@ export default class QuestForm extends Component {
         successRequirements: successRequirements,
       });
 
-      console.log(questToJson);
       await navigator.clipboard.writeText(questToJson);
       this.pixToast.sendSuccessNotification({
         message: 'Votre quête a été copié dans votre presse papier ou presque.',
       });
-    } catch (error) {
-      console.log(error);
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Votre quête a une erreur quelque part.' });
     }
   }

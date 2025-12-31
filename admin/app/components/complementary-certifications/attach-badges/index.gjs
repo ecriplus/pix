@@ -114,8 +114,7 @@ export default class AttachBadges extends Component {
       this.pixToast.sendSuccessNotification({
         message: `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
       });
-    } catch (error) {
-      console.error({ error });
+    } catch {
       await this.onError("Une erreur est survenue lors de l'enregistrement du profil cible.");
     } finally {
       this.isSubmitting = false;
