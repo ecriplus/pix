@@ -273,7 +273,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
           data: { organizationName: 'Oidc Example' },
-          error: { name: errorThrown.name },
+          error: {
+            name: errorThrown.name,
+            message: errorThrown.message,
+            stack: sinon.match.string,
+          },
           event: 'get-redirect-logout-url',
           message: errorThrown.message,
           team: 'acces',
@@ -383,6 +387,8 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           },
           error: {
             name: errorThrown.name,
+            message: errorThrown.message,
+            stack: sinon.match.string,
             errorUri: '/oauth2/token',
             response: 'api call response here',
           },
@@ -468,7 +474,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
           data: { organizationName: 'Oidc Example' },
-          error: { name: errorThrown.name },
+          error: {
+            name: errorThrown.name,
+            message: errorThrown.message,
+            stack: sinon.match.string,
+          },
           event: 'generate-authorization-url',
           message: errorThrown.message,
           team: 'acces',
@@ -759,7 +769,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           message: errorThrown.message,
           context: 'oidc',
           data: { organizationName: 'Oidc Example' },
-          error: { name: errorThrown.name },
+          error: {
+            name: errorThrown.name,
+            message: errorThrown.message,
+            stack: sinon.match.string,
+          },
           event: 'get-user-info-from-endpoint',
           team: 'acces',
         });
