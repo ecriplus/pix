@@ -24,7 +24,6 @@ export default class RequirementForm extends Component {
   @tracked formFields = null;
 
   get requirementTypeOptions() {
-    console.log(Object.values(objectConfigurations));
     return Object.values(objectConfigurations).map(({ name, label }) => ({ value: name, label }));
   }
 
@@ -106,8 +105,7 @@ export default class RequirementForm extends Component {
 
       this.selectedRequirementType = null;
       this.resetRequirement();
-    } catch (error) {
-      console.log(error);
+    } catch {
       this.pixToast.sendErrorNotification({ message: "Le requirement n'a pas pu être ajouté." });
     }
   }
