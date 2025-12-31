@@ -26,20 +26,10 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   module('load', function () {
     test('should contain identity providers by id and retrieve the whole list', async function (assert) {
       // given
-      const oidcPartner = {
-        id: 'oidc-partner',
-        code: 'OIDC_PARTNER',
-        organizationName: 'Partenaire OIDC',
-        slug: 'partenaire-oidc',
-        shouldCloseSession: false,
-        source: 'oidc-externe',
-      };
-      const oidcPartnerObject = Object.create(oidcPartner);
-      const storeStub = Service.create({
-        findAll: sinon.stub().resolves([oidcPartnerObject]),
-        peekAll: sinon.stub().returns([oidcPartnerObject]),
+      storeStub = Service.create({
+        findAll: sinon.stub().resolves([oidcPartner]),
+        peekAll: sinon.stub().returns([oidcPartner]),
       });
-      const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
       oidcIdentityProvidersService.set('store', storeStub);
 
       // when
@@ -63,28 +53,27 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   module('getIdentityProviderNamesByAuthenticationMethods', function () {
     test('should return identity provider names for methods', function (assert) {
       // given
-      const methods = [{ identityProvider: 'FRANCE_CONNECT' }, { identityProvider: 'IMPOTS_GOUV' }];
-      const oidcPartnerObject = Object.create({
+      const oidcPartner2 = Object.create({
         id: 'france-connect',
         code: 'FRANCE_CONNECT',
         organizationName: 'France Connect',
         shouldCloseSession: false,
         source: 'france-connect',
       });
-      const otherOidcPartnerObject = Object.create({
+      const oidcPartner3 = Object.create({
         id: 'impots-gouv',
         code: 'IMPOTS_GOUV',
         organizationName: 'Impots.gouv',
         shouldCloseSession: false,
         source: 'impots-gouv',
       });
-      const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
-      oidcIdentityProvidersService.set(
-        'store',
-        Service.create({
-          peekAll: sinon.stub().returns([oidcPartnerObject, otherOidcPartnerObject]),
-        }),
-      );
+      storeStub = Service.create({
+        findAll: sinon.stub().resolves([oidcPartner2, oidcPartner3]),
+        peekAll: sinon.stub().returns([oidcPartner2, oidcPartner3]),
+      });
+      oidcIdentityProvidersService.set('store', storeStub);
+
+      const methods = [{ identityProvider: 'FRANCE_CONNECT' }, { identityProvider: 'IMPOTS_GOUV' }];
 
       // when
       const names = oidcIdentityProvidersService.getIdentityProviderNamesByAuthenticationMethods(methods);
@@ -98,19 +87,10 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     module('when there is some identity providers', function () {
       test('returns true', async function () {
         // given
-        const oidcPartner = {
-          id: 'oidc-partner',
-          code: 'OIDC_PARTNER',
-          organizationName: 'Partenaire OIDC',
-          slug: 'partenaire-oidc',
-          shouldCloseSession: false,
-          source: 'oidc-externe',
-        };
-        const oidcPartnerObject = Object.create(oidcPartner);
-        const storeStub = Service.create({
-          peekAll: sinon.stub().returns([oidcPartnerObject]),
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([oidcPartner]),
+          peekAll: sinon.stub().returns([oidcPartner]),
         });
-        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
         oidcIdentityProvidersService.set('store', storeStub);
 
         // when
@@ -125,6 +105,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       test('returns false', async function () {
         // given
         const storeStub = Service.create({
+          findAll: sinon.stub().resolves([]),
           peekAll: sinon.stub().returns([]),
         });
         const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
@@ -182,7 +163,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
         const currentDomainService = this.owner.lookup('service:currentDomain');
         sinon.stub(currentDomainService, 'isFranceDomain').value(false);
 
-        const oidcPartner = {
+        const oidcFwb = {
           id: 'fwb',
           code: 'FWB',
           organizationName: 'FWB',
@@ -190,42 +171,32 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
           shouldCloseSession: false,
           source: 'fwb',
         };
-        const oidcPartnerObject = Object.create(oidcPartner);
-        const storeStub = Service.create({
-          peekAll: sinon.stub().returns([oidcPartnerObject]),
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcFwb)]),
+          peekAll: sinon.stub().returns([Object.create(oidcFwb)]),
         });
-        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
         oidcIdentityProvidersService.set('store', storeStub);
 
         // when
         const featuredIdentityProvider = await oidcIdentityProvidersService.featuredIdentityProvider;
 
         // then
-        assert.strictEqual(featuredIdentityProvider.id, oidcPartner.id);
-        assert.strictEqual(featuredIdentityProvider.code, oidcPartner.code);
-        assert.strictEqual(featuredIdentityProvider.organizationName, oidcPartner.organizationName);
-        assert.strictEqual(featuredIdentityProvider.slug, oidcPartner.slug);
-        assert.strictEqual(featuredIdentityProvider.shouldCloseSession, oidcPartner.shouldCloseSession);
-        assert.strictEqual(featuredIdentityProvider.source, oidcPartner.source);
+        assert.strictEqual(featuredIdentityProvider.id, oidcFwb.id);
+        assert.strictEqual(featuredIdentityProvider.code, oidcFwb.code);
+        assert.strictEqual(featuredIdentityProvider.organizationName, oidcFwb.organizationName);
+        assert.strictEqual(featuredIdentityProvider.slug, oidcFwb.slug);
+        assert.strictEqual(featuredIdentityProvider.shouldCloseSession, oidcFwb.shouldCloseSession);
+        assert.strictEqual(featuredIdentityProvider.source, oidcFwb.source);
       });
     });
 
     module('when there is some identity providers but no featured one', function () {
       test('returns undefined', async function () {
         // given
-        const oidcPartner = {
-          id: 'oidc-partner',
-          code: 'OIDC_PARTNER',
-          organizationName: 'Partenaire OIDC',
-          slug: 'partenaire-oidc',
-          shouldCloseSession: false,
-          source: 'oidc-externe',
-        };
-        const oidcPartnerObject = Object.create(oidcPartner);
-        const storeStub = Service.create({
-          peekAll: sinon.stub().returns([oidcPartnerObject]),
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
         });
-        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
         oidcIdentityProvidersService.set('store', storeStub);
 
         // when
@@ -240,6 +211,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       test('returns undefined', async function () {
         // given
         const storeStub = Service.create({
+          findAll: sinon.stub().resolves([]),
           peekAll: sinon.stub().returns([]),
         });
         const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
@@ -264,19 +236,10 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       module('when there is some other identity providers', function () {
         test('returns true', async function () {
           // given
-          const oidcPartner = {
-            id: 'oidc-partner',
-            code: 'OIDC_PARTNER',
-            organizationName: 'Partenaire OIDC',
-            slug: 'partenaire-oidc',
-            shouldCloseSession: false,
-            source: 'oidc-externe',
-          };
-          const oidcPartnerObject = Object.create(oidcPartner);
-          const storeStub = Service.create({
-            peekAll: sinon.stub().returns([oidcPartnerObject]),
+          storeStub = Service.create({
+            findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+            peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
           });
-          const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
           oidcIdentityProvidersService.set('store', storeStub);
 
           // when
@@ -291,9 +254,9 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
         test('returns false', async function () {
           // given
           const storeStub = Service.create({
+            findAll: sinon.stub().resolves([]),
             peekAll: sinon.stub().returns([]),
           });
-          const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
           oidcIdentityProvidersService.set('store', storeStub);
 
           // when
@@ -305,27 +268,16 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       });
     });
 
-    module('when not in France domain', function (hooks) {
-      hooks.beforeEach(function () {
-        const currentDomainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(currentDomainService, 'isFranceDomain').value(false);
-      });
-
+    module('when not in France domain', function () {
       test('returns false', async function () {
         // given
-        const oidcPartner = {
-          id: 'oidc-partner',
-          code: 'OIDC_PARTNER',
-          organizationName: 'Partenaire OIDC',
-          slug: 'partenaire-oidc',
-          shouldCloseSession: false,
-          source: 'oidc-externe',
-        };
-        const oidcPartnerObject = Object.create(oidcPartner);
-        const storeStub = Service.create({
-          peekAll: sinon.stub().returns([oidcPartnerObject]),
+        const currentDomainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(currentDomainService, 'isFranceDomain').value(false);
+
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
         });
-        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
         oidcIdentityProvidersService.set('store', storeStub);
 
         // when
@@ -339,9 +291,6 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
 
   module('shouldDisplayAccountRecoveryBanner', function () {
     test('returns true if SSO code is in USER_ACCOUNT_RECOVERY_FOR_IDENTITY_PROVIDER_CODES', async function (assert) {
-      // given
-      const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
-
       // when
       const shouldDisplayAccountRecoveryBanner =
         await oidcIdentityProvidersService.shouldDisplayAccountRecoveryBanner('FER');
