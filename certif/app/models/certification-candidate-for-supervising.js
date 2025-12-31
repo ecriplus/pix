@@ -5,7 +5,7 @@ const assessmentStates = {
   COMPLETED: 'completed',
   STARTED: 'started',
   ABORTED: 'aborted',
-  ENDED_BY_INVIGILATOR: 'endedBySupervisor',
+  ENDED_BY_INVIGILATOR: 'endedByInvigilator',
 };
 
 export default class CertificationCandidateForSupervising extends Model {

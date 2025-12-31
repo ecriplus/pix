@@ -131,7 +131,7 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
     test('returns true if assessmentStatus is endedByInvigilator', function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const data = { assessmentStatus: 'endedBySupervisor' };
+      const data = { assessmentStatus: 'endedByInvigilator' };
 
       // when
       const model = store.createRecord('certification-candidate-for-supervising', data);
@@ -150,12 +150,12 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
           const challengeLiveAlert = { type: 'challenge', status: 'ongoing' };
 
           // when
-          const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+          const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
             challengeLiveAlert,
           });
 
           // then
-          assert.true(certificationCandidateForSupervising.hasOngoingChallengeLiveAlert);
+          assert.true(certificationCandidateForInvigilating.hasOngoingChallengeLiveAlert);
         });
       });
 
@@ -166,12 +166,12 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
           const challengeLiveAlert = { status: 'validated' };
 
           // when
-          const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+          const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
             challengeLiveAlert,
           });
 
           // then
-          assert.false(certificationCandidateForSupervising.hasOngoingChallengeLiveAlert);
+          assert.false(certificationCandidateForInvigilating.hasOngoingChallengeLiveAlert);
         });
       });
 
@@ -183,13 +183,13 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
           const companionLiveAlert = { status: 'ONGOING' };
 
           // when
-          const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+          const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
             challengeLiveAlert,
             companionLiveAlert,
           });
 
           // then
-          assert.false(certificationCandidateForSupervising.hasOngoingChallengeLiveAlert);
+          assert.false(certificationCandidateForInvigilating.hasOngoingChallengeLiveAlert);
         });
       });
     });
@@ -204,13 +204,13 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
         const companionLiveAlert = { type: 'companion', status: 'ONGOING' };
 
         // when
-        const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+        const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
           challengeLiveAlert,
           companionLiveAlert,
         });
 
         // then
-        assert.deepEqual(certificationCandidateForSupervising.currentLiveAlert, companionLiveAlert);
+        assert.deepEqual(certificationCandidateForInvigilating.currentLiveAlert, companionLiveAlert);
       });
     });
   });
@@ -224,12 +224,12 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
           const companionLiveAlert = { type: 'companion', status: 'ONGOING' };
 
           // when
-          const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+          const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
             companionLiveAlert,
           });
 
           // then
-          assert.true(certificationCandidateForSupervising.hasOngoingCompanionLiveAlert);
+          assert.true(certificationCandidateForInvigilating.hasOngoingCompanionLiveAlert);
         });
       });
 
@@ -240,12 +240,12 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
           const companionLiveAlert = { type: 'companion', status: 'CLEARED' };
 
           // when
-          const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+          const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
             companionLiveAlert,
           });
 
           // then
-          assert.false(certificationCandidateForSupervising.hasOngoingCompanionLiveAlert);
+          assert.false(certificationCandidateForInvigilating.hasOngoingCompanionLiveAlert);
         });
       });
     });
@@ -258,13 +258,13 @@ module('Unit | Model | certification-candidate-for-supervising', function (hooks
         const companionLiveAlert = null;
 
         // when
-        const certificationCandidateForSupervising = store.createRecord('certification-candidate-for-supervising', {
+        const certificationCandidateForInvigilating = store.createRecord('certification-candidate-for-supervising', {
           challengeLiveAlert,
           companionLiveAlert,
         });
 
         // then
-        assert.false(certificationCandidateForSupervising.hasOngoingCompanionLiveAlert);
+        assert.false(certificationCandidateForInvigilating.hasOngoingCompanionLiveAlert);
       });
     });
   });
