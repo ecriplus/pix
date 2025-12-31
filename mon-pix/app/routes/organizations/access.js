@@ -29,7 +29,7 @@ export default class AccessRoute extends Route {
 
     if (identityProviderToVisit) {
       this.session.setAttemptedTransition(transition);
-      return this.router.replaceWith('authentication.login-oidc', identityProviderToVisit.id);
+      return this.router.replaceWith('authentication.login-oidc', identityProviderToVisit.slug);
     } else if (this._shouldLoginToAccessSCORestrictedCampaign(organizationToJoin)) {
       this.authenticationRoute = 'organizations.join.student-sco';
     } else if (this._shouldJoinFromMediacentre(organizationToJoin)) {
