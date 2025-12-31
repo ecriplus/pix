@@ -567,99 +567,56 @@ describe('Unit | Service | user-reconciliation-service', function () {
     });
   });
 
-  describe('#generateUsernameUntilAvailable', function () {
-    let userRepository;
-
-    beforeEach(function () {
-      userRepository = {
-        isUsernameAvailable: sinon.stub(),
-      };
-    });
-
-    it('should generate a username with original inputs', async function () {
-      // given
-      const firstPart = 'firstname.lastname';
-      const secondPart = '0101';
-
-      userRepository.isUsernameAvailable.resolves();
-      const expectedUsername = firstPart + secondPart;
-
-      // when
-      const result = await userReconciliationService.generateUsernameUntilAvailable({
-        firstPart,
-        secondPart,
-        userRepository,
-      });
-
-      // then
-      expect(result).to.equal(expectedUsername);
-    });
-
-    it('should generate an other username when exist with original inputs', async function () {
-      // given
-      const firstPart = 'firstname.lastname';
-      const secondPart = '0101';
-
-      userRepository.isUsernameAvailable
-        .onFirstCall()
-        .rejects(new AlreadyRegisteredUsernameError())
-        .onSecondCall()
-        .resolves();
-
-      const originalUsername = firstPart + secondPart;
-
-      // when
-      const result = await userReconciliationService.generateUsernameUntilAvailable({
-        firstPart,
-        secondPart,
-        userRepository,
-      });
-
-      // then
-      expect(result).to.not.equal(originalUsername);
-    });
-  });
-
-  describe('#createUsernameByUserAndStudentId', function () {
+  describe('#createUsernameByUser', function () {
     const user = {
       firstName: 'fakeFirst-Name',
       lastName: 'fake LastName',
       birthdate: '2008-03-01',
     };
-    const originaldUsername = 'fakefirstname.fakelastname0103';
 
     let userRepository;
-
     beforeEach(function () {
       userRepository = {
         isUsernameAvailable: sinon.stub(),
       };
     });
 
-    it('should generate a username with original user properties', async function () {
-      // given
-      userRepository.isUsernameAvailable.resolves();
+    context('when no other username based on user properties is already present in userRepository', function () {
+      it('generates a username based on user properties', async function () {
+        // given
+        userRepository.isUsernameAvailable.resolves();
 
-      // when
-      const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
+        // when
+        const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
 
-      // then
-      expect(result).to.equal(originaldUsername);
+        // then
+        expect(result).to.equal('fakefirstname.fakelastname0103');
+      });
     });
 
-    it('should generate a other username when exist whith original inputs', async function () {
-      // given
-      userRepository.isUsernameAvailable
-        .onFirstCall()
-        .rejects(new AlreadyRegisteredUsernameError())
-        .onSecondCall()
-        .resolves();
+    context('when another username based on user properties is already present in userRepository', function () {
+      it('generates another username with a random part', async function () {
+        // given
+        const defaultUsername = 'fakefirstname.fakelastname0103';
 
-      // when
-      const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
+        userRepository.isUsernameAvailable.callsFake(async function (username) {
+          if (userRepository.isUsernameAvailable.callCount == 1) {
+            throw new AlreadyRegisteredUsernameError();
+          }
 
-      // then
-      expect(result).to.not.equal(originaldUsername);
+          if (username == defaultUsername) {
+            throw new AlreadyRegisteredUsernameError();
+          }
+
+          return username;
+        });
+
+        // when
+        const result = await userReconciliationService.createUsernameByUser({ user, userRepository });
+
+        // then
+        expect(result).to.not.equal(defaultUsername);
+      });
     });
   });
 
