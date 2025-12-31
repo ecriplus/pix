@@ -29,6 +29,7 @@ export default async function globalSetup() {
     await saveStorageState(PIX_ORGA_MEMBER_CREDENTIALS);
     await saveStorageState(PIX_CERTIF_PRO_CREDENTIALS);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('❌ Global setup failed:', error);
     process.exit(1);
   }
@@ -38,6 +39,7 @@ async function saveStorageState(creds: Credentials) {
   const filePath = path.join(AUTH_DIR, `${creds.label}.json`);
   const storageState = generateStorageState(creds.id, creds.appUrl);
   await fs.writeFile(filePath, JSON.stringify(storageState, null, 2));
+  // eslint-disable-next-line no-console
   console.log(`✅ User auth state for ${creds.label} saved to ${filePath}`);
 }
 
