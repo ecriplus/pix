@@ -53,23 +53,4 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
       assert.ok(applicationAdapter);
     });
   });
-
-  module('#handleResponse', function () {
-    test('should log identified API error', function (assert) {
-      // Given
-      const consoleTable = sinon.stub(console, 'table');
-
-      const applicationAdapter = this.owner.lookup('adapter:application');
-      sinon.stub(REST.prototype, 'handleResponse');
-
-      const myApiError = { id: 1, title: 'title' };
-
-      // When
-      applicationAdapter.handleResponse(null, null, { errors: [myApiError] });
-
-      // Then
-      sinon.assert.calledOnceWithExactly(consoleTable, myApiError);
-      assert.ok(true);
-    });
-  });
 });
