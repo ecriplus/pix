@@ -498,8 +498,8 @@ export default function routes() {
     return new Response(204);
   });
 
-  this.patch('/cache', () => { });
-  this.post('/lcms/releases', () => { });
+  this.patch('/cache', () => {});
+  this.post('/lcms/releases', () => {});
 
   this.patch('/admin/certification-courses/:id', (schema, request) => {
     const certificationId = request.params.id;
