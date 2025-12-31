@@ -1,0 +1,195 @@
+import { render } from '@1024pix/ember-testing-library';
+import Framework from 'pix-admin/components/certification-frameworks/item/framework';
+import { module, test } from 'qunit';
+import sinon from 'sinon';
+
+import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
+
+module('Integration | Component | complementary-certifications/item/framework', function (hooks) {
+  setupIntlRenderingTest(hooks);
+
+  let store;
+
+  hooks.beforeEach(function () {
+    const currentUser = this.owner.lookup('service:currentUser');
+    currentUser.adminMember = { isCertif: true };
+
+    store = this.owner.lookup('service:store');
+    store.queryRecord = sinon.stub().resolves({});
+  });
+
+  module('when user has a super admin role', function (hooks) {
+    hooks.beforeEach(function () {
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.adminMember = { isSuperAdmin: true, isCertif: false };
+    });
+
+    test('it should display a framework creation button', async function (assert) {
+      // given
+      const complementaryCertification = {
+        key: 'complementary-certification-key',
+        targetProfilesHistory: [],
+        reload: sinon.stub().resolves(),
+      };
+      store.findRecord = sinon.stub().returns();
+
+      // when
+      const screen = await render(
+        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByText(t('components.complementary-certifications.item.framework.create-button'))).exists();
+    });
+
+    module('when there is no current consolidated framework', function () {
+      test('it should display the information and not the details component', async function (assert) {
+        // given
+        const complementaryCertification = {
+          key: 'complementary-certification-key',
+          targetProfilesHistory: [],
+          reload: sinon.stub().resolves(),
+        };
+        store.findRecord = sinon.stub().returns();
+
+        // when
+        const screen = await render(
+          <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        );
+
+        // then
+        assert
+          .dom(screen.getByText(t('components.complementary-certifications.item.framework.no-current-framework')))
+          .exists();
+
+        assert
+          .dom(
+            screen.queryByRole('heading', {
+              name: t('components.complementary-certifications.item.framework.details.title'),
+            }),
+          )
+          .doesNotExist();
+      });
+    });
+  });
+
+  module('when user has another accepted role', function () {
+    test('it should not display a framework creation button', async function (assert) {
+      // given
+      const complementaryCertification = {
+        key: 'complementary-certification-key',
+        targetProfilesHistory: [],
+        reload: sinon.stub().resolves(),
+      };
+      store.findRecord = sinon.stub().returns();
+
+      // when
+      const screen = await render(
+        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(screen.queryByText(t('components.complementary-certifications.item.framework.create-button')))
+        .doesNotExist();
+    });
+  });
+
+  module('for all accepted roles', function () {
+    module('when a current consolidated framework exists', function () {
+      test('it should display the details component', async function (assert) {
+        // given
+        const complementaryCertification = {
+          key: 'complementary-certification-key',
+          targetProfilesHistory: [],
+          reload: sinon.stub().resolves(),
+        };
+        store.findRecord = sinon.stub().resolves({
+          hasMany: sinon.stub().returns({
+            value: sinon.stub().returns([]),
+          }),
+        });
+
+        // when
+        const screen = await render(
+          <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        );
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: t('components.complementary-certifications.item.framework.details.title'),
+            }),
+          )
+          .exists();
+      });
+    });
+
+    module('#frameworkHistory', function () {
+      module('when there is no existing framework history', function () {
+        test('it should not display the framework history', async function (assert) {
+          // given
+          const complementaryCertification = {
+            key: 'complementary-certification-key',
+            targetProfilesHistory: [],
+            reload: sinon.stub().resolves(),
+          };
+          store.findRecord = sinon.stub().resolves({
+            hasMany: sinon.stub().returns({
+              value: sinon.stub().returns([]),
+            }),
+          });
+          store.queryRecord = sinon.stub().resolves({ history: [] });
+
+          // when
+          const screen = await render(
+            <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+          );
+
+          // then
+          assert
+            .dom(
+              screen.queryByRole('heading', {
+                name: t('components.complementary-certifications.item.framework.history.title'),
+              }),
+            )
+            .doesNotExist();
+        });
+      });
+
+      module('when there are existing framework versions', function () {
+        test('it should display the framework history', async function (assert) {
+          // given
+          const complementaryCertification = {
+            key: 'complementary-certification-key',
+            targetProfilesHistory: [],
+            reload: sinon.stub().resolves(),
+          };
+          store.findRecord = sinon.stub().resolves({
+            hasMany: sinon.stub().returns({
+              value: sinon.stub().returns([]),
+            }),
+          });
+          store.queryRecord = sinon
+            .stub()
+            .resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
+
+          // when
+          const screen = await render(
+            <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+          );
+
+          // then
+          assert
+            .dom(
+              screen.getByRole('heading', {
+                name: t('components.complementary-certifications.item.framework.history.title'),
+              }),
+            )
+            .exists();
+        });
+      });
+    });
+  });
+});

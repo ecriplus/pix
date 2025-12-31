@@ -51,7 +51,7 @@ export default class MenuBar extends Component {
           />
         {{/if}}
         <MenuBarEntry
-          @path="authenticated.complementary-certifications"
+          @path="authenticated.certification-frameworks"
           @icon="extension"
           @title={{t "components.layout.menu-bar.entries.complementary-certifications"}}
           @inline={{true}}

@@ -34,7 +34,7 @@ export default class List extends Component {
           <:cell>
             {{#if framework.complementaryCertificationKey}}
               <LinkTo
-                @route="authenticated.complementary-certifications.item"
+                @route="authenticated.certification-frameworks.item"
                 @model={{framework.complementaryCertificationKey}}
               >
                 {{t framework.label}}
