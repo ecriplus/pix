@@ -87,7 +87,7 @@
       },
       "install-documentation-url": "https://cloud.pix.fr/s/KocingDC4mFJ3R6",
       "not-detected": {
-        "description": "Es posible que la extensión no esté instalada o activada. Consulte el siguiente documento para reanudar la sesión de certificación.  Si es necesario, póngase en contacto con el supervisor.",
+        "description": "Es posible que la extensión no esté instalada o activada. Consulte el siguiente documento para reanudar la sesión de certificación.  Si es necesario, póngase en contacto con el vigilante.",
         "link": "Acceder a la documentación",
         "title": "La extensión Pix Companion<br /> no se detecta"
       }
@@ -713,7 +713,7 @@
       "candidate": {
         "disconnect": "Desconectar mi cuenta",
         "disconnect-tip": "Si no es tu ordenador, recuerda desconectarte.",
-        "ended-by-supervisor": "El supervisor ha dado por terminada la prueba de certificación. Ya no puedes continuar respondiendo a las preguntas.",
+        "ended-by-invigilator": "El vigilante ha dado por terminada la prueba de certificación. Ya no puedes continuar respondiendo a las preguntas.",
         "ended-due-to-finalization": "Tu centro de certificación ha finalizado la sesión. Ya no puedes continuar respondiendo a las preguntas.",
         "remote-certification": "Si estás realizando tu certificación Pix de forma remota, asegúrate de desconectarte de la herramienta de supervisión una vez que hayas finalizado la prueba.",
         "title": "¡Prueba finalizada!"
@@ -785,7 +785,7 @@
             "1": "Ir al final de la página",
             "2": "Seleccione \"Informar de un problema con la pregunta\".",
             "3": "Haga clic en \"Sí, estoy seguro\".",
-            "4": "Llama al supervisor que intervendrá para ayudarte"
+            "4": "Llama al vigilante que intervendrá para ayudarte"
           },
           "text": "'<strong>'En caso de problema técnico'</strong>' (por ejemplo, la imagen se niega a mostrarse), sigue estos pasos:",
           "title": "¿Qué hacer en caso de problema?"
@@ -822,7 +822,7 @@
       },
       "error-messages": {
         "generic": {
-          "check-personal-info": "Comprueba con el supervisor que tus datos personales coinciden con los de la hoja de inscripción.",
+          "check-personal-info": "Comprueba con el vigilante que tus datos personales coinciden con los de la hoja de inscripción.",
           "check-session-number": "Comprueba el número de sesión.",
           "disclaimer": "La información introducida no corresponde a ningún candidato inscrito en la sesión."
         },
@@ -831,7 +831,7 @@
         "missing-center-habilitation": "No puede unirse a la sesión. El centro de certificación no está autorizado para realizar esta certificación.",
         "session-not-accessible": "La sesión a la que intentas unirte ya no está disponible.",
         "wrong-account": "La información introducida corresponde a un candidato inscrito en la sesión y que ya está conectado con otra cuenta. Comprueba que te has conectado con la cuenta que inició la certificación.",
-        "wrong-account-sco": "Actualmente estás utilizando una cuenta que no está vinculada a tu centro. Conéctate a la cuenta con la que completaste tus tests o pide ayuda al supervisor.",
+        "wrong-account-sco": "Actualmente estás utilizando una cuenta que no está vinculada a tu centro. Conéctate a la cuenta con la que completaste tus tests o pide ayuda al vigilante.",
         "wrong-account-sco-link": {
           "label": "¿Cómo encuentro la cuenta vinculada al establecimiento?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
@@ -850,7 +850,7 @@
           "birth-year": "año de nacimiento (AAAA)",
           "first-name": "Nombre",
           "session-number": "Número de sesión",
-          "session-number-information": "Comunicado únicamente por el supervisor al inicio de la sesión"
+          "session-number-information": "Comunicado únicamente por el vigilante al inicio de la sesión"
         },
         "fields-validation": {
           "session-number-error": "El número de sesión se compone únicamente de dígitos."
@@ -870,7 +870,7 @@
       "action": {
         "back": "Volver a la página de inicio"
       },
-      "text": "Para que tu perfil esté certificado, debes haber alcanzado un nivel superior a 0 en al menos 5 competencias.",
+      "text": "Para que tu perfil esté certificado, debes haber alcanzado un nivel vigilante a 0 en al menos 5 competencias.",
       "title": "Tu perfil todavía no se puede certificar."
     },
     "certification-results": {
@@ -887,7 +887,7 @@
       "title": "Prueba finalizada"
     },
     "certification-start": {
-      "access-code": "Código de acceso comunicado por el supervisor",
+      "access-code": "Código de acceso comunicado por el vigilante",
       "actions": {
         "submit": "Empezar mi prueba"
       },
@@ -896,13 +896,13 @@
           "email": "dpo@pix.fr",
           "info": "De conformidad con la Ley francesa de «Informática y libertades», puedes ejercer tu derecho de acceso y rectificación de tus datos personales enviando un correo electrónico a "
         },
-        "info": "Al hacer clic en «Empezar mi prueba», acepto que mis datos de identidad, el número de certificación y las circunstancias de la prueba introducidos por el supervisor se transmitan a Pix. Pix utilizará esta información durante las deliberaciones del tribunal para elaborar y archivar mis resultados y expedir mi certificado. Si esta certificación ha sido prescrita por una organización, acepto que Pix pueda comunicarle mis resultados."
+        "info": "Al hacer clic en «Empezar mi prueba», acepto que mis datos de identidad, el número de certificación y las circunstancias de la prueba introducidos por el vigilante se transmitan a Pix. Pix utilizará esta información durante las deliberaciones del tribunal para elaborar y archivar mis resultados y expedir mi certificado. Si esta certificación ha sido prescrita por una organización, acepto que Pix pueda comunicarle mis resultados."
       },
       "core-and-complementary-subscriptions": "Además de la certificación Pix, estás inscrito en la siguiente certificación complementaria:",
       "error-messages": {
         "access-code-error": "Este código no existe o ya no es válido.",
-        "candidate-not-authorized-to-resume": "Ponte en contacto con el supervisor para que autorice la reanudación de tu examen.",
-        "candidate-not-authorized-to-start": "El supervisor no ha confirmado tu presencia en la sala de prueba. Por lo tanto, aún no puedes empezar la prueba de certificación. Por favor, informa al supervisor.",
+        "candidate-not-authorized-to-resume": "Ponte en contacto con el vigilante para que autorice la reanudación de tu examen.",
+        "candidate-not-authorized-to-start": "El vigilante no ha confirmado tu presencia en la sala de prueba. Por lo tanto, aún no puedes empezar la prueba de certificación. Por favor, informa al vigilante.",
         "generic": "Acaba de producirse un error inesperado en el servidor.",
         "missing-code": "You have not entered your access code.",
         "session-not-accessible": "La sesión de certificación ya no está disponible.",
@@ -946,7 +946,7 @@
         "skip-go-to-next": "Paso y voy a la siguiente pregunta",
         "validate": "Valido",
         "validate-go-to-next": "Valido y voy a la siguiente pregunta",
-        "wait-for-invigilator": "Las acciones se detienen hasta que llegue el supervisor"
+        "wait-for-invigilator": "Las acciones se detienen hasta que llegue el vigilante"
       },
       "already-answered": "Ya has respondido a esta pregunta",
       "answer-input": {
@@ -965,7 +965,7 @@
           "send-feedback": "Sí, estoy seguro/a"
         },
         "description": "¿Estás seguro/a de que quieres informar de un problema?",
-        "information": "Al informar de un problema, tu certificación se pausa hasta que el supervisor intervenga para validar o invalidar tu informe."
+        "information": "Al informar de un problema, tu certificación se pausa hasta que el vigilante intervenga para validar o invalidar tu informe."
       },
       "embed-simulator": {
         "actions": {
@@ -1012,7 +1012,7 @@
                 "download": {
                   "edit-failure": {
                     "label": "No puedo modificar el archivo",
-                    "solution": "Es probable que el archivo esté abierto en «Sólo lectura» o «Modo protegido». '<br>'Haz clic en «Activar modificación» o «Editar documento» en el banner de la parte superior del archivo si aparece. '<br>'Si no es así, guarda el archivo con otro nombre y abre este nuevo archivo."
+                    "solution": "Es probable que el archivo esté abierto en «Sólo lectura» o «Modo protegido». '<br>'Haz clic en «Activar modificación» o «Editar documento» en el banner de la parte vigilante del archivo si aparece. '<br>'Si no es así, guarda el archivo con otro nombre y abre este nuevo archivo."
                   },
                   "lost": {
                     "label": "No encuentro el archivo descargado",
@@ -1077,10 +1077,10 @@
         }
       },
       "has-focused-out-of-window": {
-        "certification": "Hemos detectado un cambio de página. Tu respuesta se contabilizará como incorrecta. Si te has visto obligado a cambiar de página, informa al supervisor y responde a la pregunta en su presencia.",
+        "certification": "Hemos detectado un cambio de página. Tu respuesta se contabilizará como incorrecta. Si te has visto obligado a cambiar de página, informa al vigilante y responde a la pregunta en su presencia.",
         "default": "Hemos detectado un cambio de página.",
         "v3-accessible-certification": "Hemos detectado un cambio de página. Si has tenido que cambiar de página para utilizar una herramienta de accesibilidad digital (como un lector de pantalla o un teclado virtual), responde a la pregunta de todos modos.",
-        "v3-certification": "Hemos detectado un cambio de página. Tu respuesta se contabilizará como incorrecta. Si te has visto obligado a cambiar de página, informa al supervisor para que pueda constatarlo e informar de ello, dado el caso."
+        "v3-certification": "Hemos detectado un cambio de página. Tu respuesta se contabilizará como incorrecta. Si te has visto obligado a cambiar de página, informa al vigilante para que pueda constatarlo e informar de ello, dado el caso."
       },
       "illustration": {
         "placeholder": "Cargando la imagen"
@@ -1094,13 +1094,13 @@
       },
       "live-alerts": {
         "challenge": {
-          "message": "Avisa al supervisor para que identifique el problema."
+          "message": "Avisa al vigilante para que identifique el problema."
         },
         "companion": {
-          "message": "Póngase en contacto con su supervisor para confirmar la presencia de la extensión."
+          "message": "Póngase en contacto con su vigilante para confirmar la presencia de la extensión."
         },
         "refresh": "Actualizar la página",
-        "waiting-information": "Esperando al supervisor..."
+        "waiting-information": "Esperando al vigilante..."
       },
       "parts": {
         "answer-input": "Tu respuesta",

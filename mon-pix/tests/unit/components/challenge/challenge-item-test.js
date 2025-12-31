@@ -314,7 +314,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
           });
       });
     });
-    module('when assessment has been ended by supervisor', function () {
+    module('when assessment has been ended by invigilator', function () {
       test('should redirect candidate to end test screen when trying to answer', async function (assert) {
         // given
         const error = {
