@@ -344,7 +344,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     });
 
     module('errors', function () {
-      module('when required fields are not filled (except for name)', function () {
+      module('when required fields are not filled in', function () {
         test('should not submit form', async function (assert) {
           // given
           const handleSubmitStub = sinon.stub();
@@ -359,9 +359,6 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             </template>,
           );
 
-          // name validation cannot be included in the tests because it is handled by native HTML required validation
-          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
-
           // when
           await click(screen.getByRole('button', { name: t('common.actions.add') }));
 
@@ -375,19 +372,18 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
           );
 
-          // name validation cannot be included in the tests because it is handled by native HTML required validation
-          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
-
           // when
           await click(screen.getByRole('button', { name: t('common.actions.add') }));
 
           // then
+          const nameErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.name'));
           const typeErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.type'));
           const administrationTeamErrorMessage = screen.getByText(
             t('components.organizations.creation.error-messages.administration-team'),
           );
           const countryErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.country'));
 
+          assert.ok(nameErrorMessage);
           assert.ok(typeErrorMessage);
           assert.ok(administrationTeamErrorMessage);
           assert.ok(countryErrorMessage);
@@ -406,7 +402,6 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
           );
 
-          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
           await fillByLabel(t('components.organizations.creation.documentation-link'), 'non-valid-documentation-url');
           await fillByLabel(`${t('components.organizations.creation.dpo.email')}DPO`, 'non-valid-email');
 

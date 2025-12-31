@@ -126,14 +126,13 @@ export default class OrganizationCreationForm extends Component {
             <PixInput
               @id="organizationName"
               {{on "change" (fn this.handleInputChange "name")}}
-              required={{true}}
-              aria-required={{true}}
               @requiredLabel={{t "common.fields.required-field"}}
               placeholder={{concat
                 (t "common.words.example-abbr")
                 " "
                 (t "components.organizations.creation.name.placeholder")
               }}
+              required={{false}}
               @validationStatus={{if this.validator.errors.name "error"}}
               @errorMessage={{if this.validator.errors.name (t this.validator.errors.name)}}
             >
@@ -147,8 +146,6 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.type.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.type}}
-            required
-            aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
             @errorMessage={{if this.validator.errors.type (t this.validator.errors.type)}}
           >
@@ -162,8 +159,6 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.administrationTeamId}}
-            required
-            aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
             @errorMessage={{if
               this.validator.errors.administrationTeamId
@@ -179,8 +174,6 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.countryCode}}
-            required
-            @aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
             @isSearchable={{true}}
             @errorMessage={{if this.validator.errors.countryCode (t this.validator.errors.countryCode)}}

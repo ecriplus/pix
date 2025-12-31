@@ -135,7 +135,6 @@ module('Acceptance | Organizations | Create', function (hooks) {
     test('it shows validation errors if form is not correctly filled', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
-      await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Stark Corp.');
 
       // when
       await clickByName(t('common.actions.add'));
