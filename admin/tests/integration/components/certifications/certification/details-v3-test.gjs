@@ -335,7 +335,7 @@ module('Integration | Component | Certifications | certification > details v3', 
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
-              assessmentState: 'endedBySupervisor',
+              assessmentState: 'endedByInvigilator',
               completedAt: null,
               // eslint-disable-next-line no-restricted-syntax
               endedAt: new Date('2023-01-13T08:05:00'),
@@ -361,7 +361,7 @@ module('Integration | Component | Certifications | certification > details v3', 
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
-              assessmentState: 'endedBySupervisor',
+              assessmentState: 'endedByInvigilator',
               completedAt: null,
               // eslint-disable-next-line no-restricted-syntax
               endedAt: new Date('2023-01-13T08:05:00'),
