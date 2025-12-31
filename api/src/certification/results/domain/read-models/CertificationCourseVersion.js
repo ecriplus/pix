@@ -2,7 +2,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
 
 class CertificationCourseVersion {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.version
    */
   constructor({ version }) {

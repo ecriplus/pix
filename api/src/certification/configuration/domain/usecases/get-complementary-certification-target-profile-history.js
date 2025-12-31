@@ -5,7 +5,7 @@
 import { ComplementaryCertificationTargetProfileHistory } from '../models/ComplementaryCertificationTargetProfileHistory.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.complementaryCertificationKey
  * @param {TargetProfileHistoryRepository} params.targetProfileHistoryRepository
  * @param {ComplementaryCertificationForTargetProfileAttachmentRepository} params.complementaryCertificationForTargetProfileAttachmentRepository

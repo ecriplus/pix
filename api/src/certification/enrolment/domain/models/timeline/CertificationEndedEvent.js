@@ -6,7 +6,7 @@ import { TimelineEvent } from './TimelineEvent.js';
 
 export class CertificationEndedEvent extends TimelineEvent {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {Date} props.when
    * @param {states} props.assessmentState
    */

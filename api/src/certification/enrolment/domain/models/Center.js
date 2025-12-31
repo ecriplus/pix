@@ -8,7 +8,7 @@ import { CenterTypes } from './CenterTypes.js';
 
 export class Center {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.name
    * @param {string} props.externalId

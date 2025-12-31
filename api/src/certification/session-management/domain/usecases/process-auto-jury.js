@@ -12,7 +12,7 @@ import { CertificationIssueReportResolutionAttempt } from '../models/Certificati
 import { CertificationIssueReportResolutionStrategies } from '../models/CertificationIssueReportResolutionStrategies.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
@@ -51,7 +51,7 @@ export async function processAutoJury({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  */
@@ -98,7 +98,7 @@ async function _handleAutoJuryV2({
 
 const _handleAutoJuryV3 = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {CertificationRescoringRepository} params.certificationRescoringRepository
    * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
    */

@@ -6,7 +6,7 @@
 import { NoCertificationResultForDivision } from '../errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationResultRepository} params.certificationResultRepository
  * @param {ScoCertificationCandidateRepository} params.scoCertificationCandidateRepository
  */

@@ -18,7 +18,7 @@ import { CertificationChallenge } from '../../../shared/domain/models/Certificat
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Assessment} params.assessment
  * @param {string} params.locale
  * @param {AnswerRepository} params.answerRepository

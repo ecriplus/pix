@@ -28,7 +28,7 @@ const CANDIDATE_TABLE_HEADER_ROW = 11;
 const CANDIDATE_TABLE_FIRST_ROW = 12;
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionManagement} params.session
  * @param {Array<EnrolledCandidate>} params.enrolledCandidates
  * @param {Array<ComplementaryCertification>} params.certificationCenterHabilitations
@@ -150,7 +150,7 @@ function _addComplementaryCertificationColumns({ odsBuilder, certificationCenter
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {OdsUtilsBuilder} params.odsBuilder
  */
 function _addCandidateRows({ odsBuilder, enrolledCandidates, certificationCenterHabilitations, i18n }) {

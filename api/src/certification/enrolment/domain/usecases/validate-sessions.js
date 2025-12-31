@@ -8,7 +8,7 @@ import { SessionEnrolment } from '../models/SessionEnrolment.js';
 import { SessionMassImportReport } from '../models/SessionMassImportReport.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {deps["sessionRepository"]} params.sessionRepository
  * @param {deps["certificationCpfCountryRepository"]} params.certificationCpfCountryRepository
  * @param {deps["certificationCpfCityRepository"]} params.certificationCpfCityRepository

@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @param {CandidateRepository} params.candidateRepository
  */

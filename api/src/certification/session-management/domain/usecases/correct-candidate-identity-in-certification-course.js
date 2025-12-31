@@ -7,7 +7,7 @@ import { CertificationCandidatesError } from '../../../../../src/shared/domain/e
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationCpfService} params.certificationCpfService
  * @param {CertificationCpfCountryRepository} params.certificationCpfCountryRepository

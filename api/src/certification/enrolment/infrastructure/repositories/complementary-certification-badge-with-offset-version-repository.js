@@ -4,7 +4,7 @@ import { ComplementaryCertificationBadgeWithOffsetVersion } from '../../domain/m
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.complementaryCertificationBadgeId
  * @returns {Promise<Array<ComplementaryCertificationBadgeWithOffsetVersion>>}
  */
@@ -37,7 +37,7 @@ export async function getAllWithSameTargetProfile({ complementaryCertificationBa
 }
 
 /**
- * @typedef {Object} ComplementaryCertificationBadgeWithOffsetVersionDTO
+ * @typedef {object} ComplementaryCertificationBadgeWithOffsetVersionDTO
  * @property {number} id
  * @property {number} minimumEarnedPix
  * @property {number} offsetVersion

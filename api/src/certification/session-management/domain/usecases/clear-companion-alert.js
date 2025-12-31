@@ -2,7 +2,7 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 
 export const clearCompanionAlert = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.sessionId
    * @param {number} params.userId
    * @param {import('./index.js').CertificationCompanionAlertRepository} params.certificationCompanionAlertRepository

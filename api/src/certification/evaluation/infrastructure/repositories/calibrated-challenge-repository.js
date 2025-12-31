@@ -14,7 +14,7 @@ const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.locale
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>} challenges with validated LCMS status
@@ -60,7 +60,7 @@ export async function findActiveFlashCompatible({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<string>} params.ids - array of challenge ids
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
@@ -105,7 +105,7 @@ export async function getMany({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
  */

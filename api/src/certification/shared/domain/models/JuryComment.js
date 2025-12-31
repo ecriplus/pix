@@ -27,7 +27,7 @@ const AutoJuryCommentKeys = Object.freeze({
 
 class JuryComment {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {AutoJuryCommentKey} [props.commentByAutoJury]
    * @param {string} [props.fallbackComment]
    * @param {JuryCommentContext} props.context mandatory if AutoJuryCommentKeys given

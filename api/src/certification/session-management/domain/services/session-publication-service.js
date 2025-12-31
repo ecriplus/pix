@@ -18,7 +18,7 @@ import { AssessmentResult } from '../../../../shared/domain/models/AssessmentRes
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationRepository} params.certificationRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
  * @param {SessionRepository} params.sessionRepository
@@ -55,11 +55,11 @@ async function publishSession({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {certificationCenterRepository} params.certificationCenterRepository
  * @param {sessionRepository} params.sessionRepository
  * @param {Array<number>} params.startedCertificationCoursesUserIds
- * @param {Object} params.dependencies
+ * @param {object} params.dependencies
  * @param {mailService} params.dependencies.mailService
  */
 async function manageEmails({
@@ -102,7 +102,7 @@ async function manageEmails({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {SessionRepository} params.sessionRepository
  * @param {MailService} params.mailService
@@ -134,10 +134,10 @@ async function _manageCleaEmails({ session, certificationCenterRepository, sessi
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<number>} params.startedCertificationCoursesUserIds
  * @param {MailService} params.mailService
- * @return {Object}
+ * @return {object}
  */
 async function _managePrescriberEmails({ session, startedCertificationCoursesUserIds, mailService }) {
   const recipientEmails = _distinctCandidatesResultRecipientEmails(

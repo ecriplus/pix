@@ -70,7 +70,7 @@ class SessionEnrolment {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Array<Candidate>} params.candidates
    */
   hasReconciledCandidate({ candidates }) {
@@ -78,7 +78,7 @@ class SessionEnrolment {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Array<Candidate>} params.candidates
    * @param {number} params.user
    */

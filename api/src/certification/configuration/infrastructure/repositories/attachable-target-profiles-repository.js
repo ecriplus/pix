@@ -4,7 +4,7 @@ import { isBlank } from '../../../../shared/infrastructure/utils/lodash-utils.js
 import { AttachableTargetProfile } from '../../domain/models/AttachableTargetProfile.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} [params.searchTerm]
  * @returns {Promise<Array<AttachableTargetProfile>>}
  */

@@ -9,7 +9,7 @@ import { validate } from '../../../shared/domain/validators/subscription-validat
 
 class Subscription {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number | null} params.certificationCandidateId - identifier of the certification candidate
    * @param {SUBSCRIPTION_TYPES} params.type
    * @param {ComplementaryCertificationKeys | null} params.complementaryCertificationKey
@@ -22,7 +22,7 @@ class Subscription {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number | null} params.certificationCandidateId   - identifier of the certification candidate
    */
   static buildCore({ certificationCandidateId }) {
@@ -34,7 +34,7 @@ class Subscription {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.certificationCandidateId - identifier of the certification candidate
    * @param {string} params.complementaryCertificationKey
    */

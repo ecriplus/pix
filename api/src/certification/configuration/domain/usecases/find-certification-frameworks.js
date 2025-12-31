@@ -1,7 +1,7 @@
 import { Frameworks } from '../models/Frameworks.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {VersionsRepository} params.versionsRepository
  * @returns {Promise<Array<{id: string, name: string, versionStartDate: Date|null}>>}
  */

@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @param {string} params.juryComment
  * @param {number} params.juryCommentAuthorId

@@ -9,7 +9,7 @@ import { FinalizedSession } from '../models/FinalizedSession.js';
 
 export const registerPublishableSession = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {SessionFinalized} params.sessionFinalized
    * @param {JuryCertificationSummaryRepository} params.juryCertificationSummaryRepository
    * @param {FinalizedSessionRepository} params.finalizedSessionRepository

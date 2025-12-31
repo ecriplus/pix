@@ -4,7 +4,7 @@ import { CertificationCpfCountry } from '../../../shared/domain/models/Certifica
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.matcher
  * @returns {Promise<CertificationCpfCountry | null> }
  */

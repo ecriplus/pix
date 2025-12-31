@@ -3,7 +3,7 @@ import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/
 
 class JuryCertification {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.certificationCourseId
    * @param {number} props.sessionId
    * @param {number} props.userId
@@ -26,8 +26,8 @@ class JuryCertification {
    * @param {JuryComment} props.commentForOrganization
    * @param {string} props.commentByJury
    * @param {Array<string>} props.certificationIssueReports
-   * @param {Object} props.complementaryCertificationCourseResultWithExternal
-   * @param {Object} props.commonComplementaryCertificationCourseResult
+   * @param {object} props.complementaryCertificationCourseResultWithExternal
+   * @param {object} props.commonComplementaryCertificationCourseResult
    * @param {string} props.version
    */
   constructor({

@@ -8,7 +8,7 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository
  * @param {LearningContentRepository} params.learningContentRepository

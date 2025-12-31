@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} [params.searchTerm]
  * @param {AttachableTargetProfileRepository} params.attachableTargetProfileRepository
  */

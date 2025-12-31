@@ -5,7 +5,7 @@
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {EnrolledCandidateRepository} params.enrolledCandidateRepository
  * @returns {Promise<Array<EnrolledCandidate>>}
  */

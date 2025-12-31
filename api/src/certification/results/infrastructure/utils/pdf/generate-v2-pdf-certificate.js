@@ -7,7 +7,7 @@ import { generateV2AttestationTemplate } from './templates/certificate.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
- * @param {Object} params
+ * @param {object} params
  */
 const generate = ({ certificates, i18n, isFrenchDomainExtension }) => {
   const doc = new PDFDocument({

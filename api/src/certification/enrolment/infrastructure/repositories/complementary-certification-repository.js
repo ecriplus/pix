@@ -18,7 +18,7 @@ const findAll = async function () {
 export { findAll };
 
 /**
- * @typedef {Object} ComplementaryCertificationDTO
+ * @typedef {object} ComplementaryCertificationDTO
  * @property {number} id
  * @property {string} label
  * @property {ComplementaryCertificationKeys} key

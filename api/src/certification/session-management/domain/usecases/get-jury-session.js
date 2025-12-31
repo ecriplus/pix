@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {JurySessionRepository} params.jurySessionRepository
  * @returns {JurySession}
  */

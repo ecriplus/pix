@@ -1,6 +1,6 @@
 export class ActiveCalibratedChallenge {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {ComplementaryCertificationKey} params.scope
    * @param {number} params.discriminant
    * @param {number} params.difficulty

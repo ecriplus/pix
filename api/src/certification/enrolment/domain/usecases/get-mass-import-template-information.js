@@ -6,7 +6,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.centerId
  * @param {CenterRepository} params.centerRepository
  *

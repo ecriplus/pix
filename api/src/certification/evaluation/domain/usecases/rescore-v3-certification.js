@@ -31,7 +31,7 @@ const eventTypes = [
 
 export const rescoreV3Certification = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
    * @param {EvaluationSessionRepository} params.evaluationSessionRepository
    * @param {Services} services
@@ -62,7 +62,7 @@ export const rescoreV3Certification = withTransaction(
 );
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  *
@@ -83,11 +83,11 @@ const _verifySessionIsPublishable = async ({ certificationCourseId, evaluationSe
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationAssessment} params.certificationAssessment
  * @param {CertificationRescoredEvent} params.event
  * @param {string} params.locale
- * @param {Object} params.services
+ * @param {object} params.services
  * @param {HandleV3CertificationScoringService} params.services.handleV3CertificationScoring
  * @param {FindByCertificationCourseAndVersionService} params.services.findByCertificationCourseAndVersionService
  * @param {ScoreDoubleCertificationV3Service} params.services.scoreDoubleCertificationV3

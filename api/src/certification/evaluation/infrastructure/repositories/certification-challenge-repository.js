@@ -6,7 +6,7 @@
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.assessmentId - certification assessment id
  * @param {string} params.locale - candidate locale
  * @param {CertificationEvaluationApi} params.certificationEvaluationApi

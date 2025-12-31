@@ -19,7 +19,7 @@ import { Version } from '../models/Version.js';
 
 export const createCertificationVersion = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Scopes} params.scope
    * @param {Array<string>} params.tubeIds
    * @param {TubeRepository} params.tubeRepository
@@ -35,7 +35,7 @@ export const createCertificationVersion = withTransaction(
 );
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Scopes} params.scope
  * @param {VersionsRepository} params.versionsRepository
  */
@@ -76,7 +76,7 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<string>} params.tubeIds
  * @param {TubeRepository} params.tubeRepository
  * @param {SkillRepository} params.skillRepository

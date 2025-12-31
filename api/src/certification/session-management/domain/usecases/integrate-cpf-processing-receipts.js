@@ -8,7 +8,7 @@ import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CpfReceiptsStorage} params.cpfReceiptsStorage
  * @param {CpfCertificationResultRepository} params.cpfCertificationResultRepository
  */
@@ -35,7 +35,7 @@ const integrateCpfProccessingReceipts = async function ({ cpfReceiptsStorage, cp
 export { integrateCpfProccessingReceipts };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CpfReceiptsStorage} params.cpfReceiptsStorage
  * @param {CpfCertificationResultRepository} params.cpfCertificationResultRepository
  */

@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Candidate} params.candidate
  * @param {number} params.userId
  * @param {CandidateRepository} params.candidateRepository

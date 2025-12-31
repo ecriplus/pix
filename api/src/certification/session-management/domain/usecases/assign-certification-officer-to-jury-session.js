@@ -5,7 +5,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {JurySessionRepository} params.jurySessionRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
  * @param {CertificationOfficerRepository} params.certificationOfficerRepository

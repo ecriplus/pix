@@ -7,7 +7,7 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Scopes} params.scope
  * @param {VersionsRepository} params.versionsRepository
  * @returns {Promise<Version>}

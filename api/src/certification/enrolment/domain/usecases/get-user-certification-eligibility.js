@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {EligibilityService} params.eligibilityService
  */
 const getUserCertificationEligibility = async function ({

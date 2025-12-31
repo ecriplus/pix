@@ -8,7 +8,7 @@ import { UserNotAuthorizedToCertifyError } from '../../../../shared/domain/error
 import { CenterHabilitationError } from '../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Candidate} params.candidate
  * @param {number} params.sessionId
  * @param {PlacementProfileService} params.placementProfileService

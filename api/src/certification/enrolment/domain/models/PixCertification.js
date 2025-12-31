@@ -1,7 +1,7 @@
 export class PixCertification {
   constructor({ pixScore, status, isRejectedForFraud }) {
     /**
-     * @param {Object} props
+     * @param {object} props
      * @param {number} props.pixScore
      * @param {string} props.status
      * @param {boolean} props.isRejectedForFraud

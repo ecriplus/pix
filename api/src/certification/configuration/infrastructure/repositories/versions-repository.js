@@ -10,7 +10,7 @@ import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/mo
 import { Version } from '../../domain/models/Version.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<Version>}
  * @throws {NotFoundError}
@@ -40,7 +40,7 @@ export async function getById({ id }) {
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Scopes} params.scope
  * @returns {Promise<Version|null>}
  */
@@ -70,7 +70,7 @@ export async function findActiveByScope({ scope }) {
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Version} params.version
  * @param {Array<Challenge>} params.challenges
  * @returns {Promise<number>} versionId
@@ -110,7 +110,7 @@ export async function create({ version, challenges }) {
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Version} params.version
  * @returns {Promise<void>}
  */
@@ -124,7 +124,7 @@ export async function update({ version }) {
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Scopes} params.scope
  * @returns {Promise<Array<number>>}
  */

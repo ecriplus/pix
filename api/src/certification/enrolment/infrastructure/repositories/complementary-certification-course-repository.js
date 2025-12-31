@@ -3,7 +3,7 @@ import { ComplementaryCertificationCourseWithResults } from '../../domain/models
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @returns {Promise<Array<ComplementaryCertificationCourseWithResults>>}
  */

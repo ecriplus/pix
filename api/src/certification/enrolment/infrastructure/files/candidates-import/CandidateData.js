@@ -13,7 +13,7 @@ const FRANCE_COUNTRY_CODE = '99100';
 
 class CandidateData {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {ComplementaryCertification|null} params.complementaryCertification
    */
   constructor({
@@ -122,7 +122,7 @@ class CandidateData {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {EnrolledCandidate} params.enrolledCandidate
    * @param {Array<Habilitation>} params.certificationCenterHabilitations
    * @param {number} params.number

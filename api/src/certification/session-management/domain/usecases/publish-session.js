@@ -5,7 +5,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationRepository} params.certificationRepository
  * @param {certificationCenterRepository} params.certificationCenterRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository

@@ -12,7 +12,7 @@ import { Habilitation } from '../../domain/models/Habilitation.js';
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<Center>}
  * @throws {NotFoundError}
@@ -66,7 +66,7 @@ export async function getById({ id }) {
 }
 
 /**
- * @typedef {Object} CenterDTO
+ * @typedef {object} CenterDTO
  * @property {number} id
  * @property {string} name
  * @property {string} type
@@ -77,7 +77,7 @@ export async function getById({ id }) {
  */
 
 /**
- * @typedef {Object} HabilitationDTO
+ * @typedef {object} HabilitationDTO
  * @property {number} complementaryCertificationId
  * @property {ComplementaryCertificationKeys} key
  * @property {string} label

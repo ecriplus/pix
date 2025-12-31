@@ -1,5 +1,5 @@
 /**
- * @typedef {Object} LiveAlert
+ * @typedef {object} LiveAlert
  * @property {string} status
  * @property {boolean} hasImage
  * @property {boolean} hasAttachment
@@ -8,14 +8,14 @@
  */
 
 /**
- * @typedef {Object} ComplementaryCertification
+ * @typedef {object} ComplementaryCertification
  * @property {string} key
  * @property {string} label
  * @property {number} certificationExtraTime
  */
 
 /**
- * @typedef {Object} CertificationCandidateForSupervising
+ * @typedef {object} CertificationCandidateForSupervising
  * @property {number} id
  * @property {number} userId
  * @property {date} birthdate
@@ -30,7 +30,7 @@
 
 class SessionForSupervising {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id
    * @param {date} params.date
    * @param {string} params.time

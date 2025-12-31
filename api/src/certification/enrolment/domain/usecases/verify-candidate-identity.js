@@ -17,7 +17,7 @@ import {
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CandidateRepository} params.candidateRepository
  * @param {CenterRepository} params.centerRepository
  * @param {SessionRepository} params.sessionRepository
@@ -81,7 +81,7 @@ export const verifyCandidateIdentity = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<Candidate>} params.candidatesInSession
  */
 function findMatchingEnrolledCandidate({

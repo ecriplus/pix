@@ -12,10 +12,10 @@ export class TimelineEvent {
   });
 
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {string} props.code
    * @param {Date} props.when
-   * @param {Object} [props.metadata]
+   * @param {object} [props.metadata]
    */
   constructor({ code, when, metadata = null }) {
     this.code = code;

@@ -5,7 +5,7 @@
 import { CertificationCandidateNotFoundError } from '../errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCandidateId
  * @param {CandidateRepository} params.candidateRepository
  * @returns {Candidate}

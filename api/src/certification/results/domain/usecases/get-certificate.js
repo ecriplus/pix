@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificateRepository} params.certificateRepository
  */
 export const getCertificate = async function ({ certificationCourseId, locale, certificateRepository }) {

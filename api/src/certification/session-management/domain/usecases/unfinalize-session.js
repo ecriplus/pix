@@ -7,7 +7,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { SessionAlreadyPublishedError } from '../errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
  */

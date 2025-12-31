@@ -15,7 +15,7 @@ import { ComplementaryCertificationScoringWithComplementaryReferential } from '.
 import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  * @param {ComplementaryCertificationCourseResultRepository} params.complementaryCertificationCourseResultRepository

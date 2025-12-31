@@ -15,7 +15,7 @@ export class CandidateTimeline {
   });
 
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.certificationCandidateId
    */
   constructor({ certificationCandidateId }) {

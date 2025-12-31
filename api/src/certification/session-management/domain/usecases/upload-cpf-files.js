@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CpfExportsStorage} params.cpfExportsStorage
  */
 const uploadCpfFiles = async function ({ filename, readableStream, logger, cpfExportsStorage }) {

@@ -5,7 +5,7 @@ import { CertificationCandidate } from '../../../shared/domain/models/Certificat
 import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @param {number} params.userId
  * @returns {Promise<CertificationCandidate | undefined>}

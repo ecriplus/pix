@@ -9,7 +9,7 @@ import { validate } from '../validators/candidate-validator.js';
 
 export class Candidate {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Array<Subscription>} [params.subscriptions=[]]
    */
   constructor({

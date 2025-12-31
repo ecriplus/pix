@@ -5,7 +5,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {SessionValidator} params.sessionValidator
  */

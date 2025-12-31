@@ -9,7 +9,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
 
 /**
- * @param {Object} row
+ * @param {object} row
  * @param {number} row.id
  * @param {string} row.label
  * @param {ComplementaryCertificationKeys} row.key
@@ -46,7 +46,7 @@ const getByKey = async function (key) {
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<ComplementaryCertification>}
  */

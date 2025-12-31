@@ -15,7 +15,7 @@ const status = Object.freeze({
 
 class PrivateCertificate {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.firstName
    * @param {string} props.lastName
@@ -29,7 +29,7 @@ class PrivateCertificate {
    * @param {status} props.status
    * @param {JuryComment} props.commentForCandidate
    * @param {Array<string>} props.certifiedBadgeImages
-   * @param {Object} props.resultCompetenceTree
+   * @param {object} props.resultCompetenceTree
    * @param {string} props.verificationCode
    * @param {Date} props.maxReachableLevelOnCertificationDate
    * @param {number} props.version
@@ -78,7 +78,7 @@ class PrivateCertificate {
   }
 
   /**
-   * @param {Object} props
+   * @param {object} props
    */
   static buildFrom({
     id,

@@ -17,7 +17,7 @@ const PROBABILITY_TO_PICK_THE_MOST_USEFUL_CHALLENGE_FOR_CANDIDATE_EVALUATION = 1
 /**
  * Downgrades the given capacity based on the flash assessment algorithm configuration and remaining challenges.
  *
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationAlgorithm} params.algorithm - The certification algorithm.
  * @param {number} params.capacity - The current capacity.
  * @param {Challenge[]} params.allChallenges - All available challenges.

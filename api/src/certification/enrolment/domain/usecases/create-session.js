@@ -8,7 +8,7 @@
 import { SessionEnrolment } from '../models/SessionEnrolment.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CenterRepository} params.centerRepository
  * @param {SessionRepository} params.sessionRepository
  * @param {SessionValidator} params.sessionValidator

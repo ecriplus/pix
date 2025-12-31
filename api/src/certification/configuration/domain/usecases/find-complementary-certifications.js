@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationRepository} params.complementaryCertificationRepository
  */
 const findComplementaryCertifications = function ({ complementaryCertificationRepository }) {

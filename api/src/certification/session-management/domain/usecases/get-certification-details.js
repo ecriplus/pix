@@ -7,7 +7,7 @@
 import { CertificationDetails } from '../read-models/CertificationDetails.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository

@@ -8,7 +8,7 @@ import { AllowedCertificationCenterAccess } from '../../domain/read-models/Allow
  * @function
  * @name getCertificationCenterAccess
  *
- * @param {Object} params
+ * @param {object} params
  * @param {Number} params.certificationCenterId
  * @param {CertificationCenterAccessApi} [params.certificationCenterAccessApi]
  * @returns {Promise<AllowedCertificationCenterAccess>}
@@ -20,7 +20,7 @@ export const getCertificationCenterAccess = async ({ certificationCenterId, cert
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  */
 const _toDomain = (dto) => {
   return new AllowedCertificationCenterAccess(dto);

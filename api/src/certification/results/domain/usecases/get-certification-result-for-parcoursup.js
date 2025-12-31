@@ -7,7 +7,7 @@
 import { MoreThanOneMatchingCertificationError } from '../errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.ine
  * @param {string} params.organizationUai
  * @param {string} params.lastName

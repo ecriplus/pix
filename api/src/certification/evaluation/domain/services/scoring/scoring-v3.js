@@ -3,7 +3,7 @@
  */
 
 /**
- * @typedef {Object} ScoringV3Dependencies
+ * @typedef {object} ScoringV3Dependencies
  * @property {FindByCertificationCourseAndVersion} findByCertificationCourseAndVersion
  */
 
@@ -32,7 +32,7 @@ import { CompetenceMark } from '../../../../shared/domain/models/CompetenceMark.
 
 export const handleV3CertificationScoring = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {AssessmentResultRepository} params.assessmentResultRepository
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {CompetenceMarkRepository} params.competenceMarkRepository
@@ -204,7 +204,7 @@ function _createV3AssessmentResult({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  */

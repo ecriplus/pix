@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {string} params.locale
  * @param {CertificateRepository} params.certificateRepository

@@ -32,7 +32,7 @@ const eventTypes = [
 ];
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  * @param {ComplementaryCertificationScoringCriteriaRepository} params.complementaryCertificationScoringCriteriaRepository
@@ -72,7 +72,7 @@ export const rescoreV2Certification = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  *

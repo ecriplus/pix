@@ -3,7 +3,7 @@
  */
 export class AllowedCertificationCenterAccess {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {boolean} params.isAccessBlockedCollege
    * @param {boolean} params.isAccessBlockedLycee
    * @param {boolean} params.isAccessBlockedAEFE

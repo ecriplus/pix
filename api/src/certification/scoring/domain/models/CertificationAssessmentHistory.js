@@ -10,7 +10,7 @@ export class CertificationAssessmentHistory {
     this.capacityHistory = capacityHistory;
   }
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {FlashAssessmentAlgorithm } params.algorithm
    * @param {Array<ChallengeCalibration>} params.challenges
    * @param {Array<Answer>} params.allAnswers

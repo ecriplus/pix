@@ -4,7 +4,7 @@ import { Center } from '../../domain/models/Center.js';
 import { CenterTypes } from '../../domain/models/CenterTypes.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<string>} params.externalIds
  * @returns {Promise<Array<number>>} - number of rows affected
  */
@@ -49,7 +49,7 @@ export const getWhitelist = async () => {
 };
 
 /**
- * @param {Object} data
+ * @param {object} data
  * @param {number} data.id
  * @param {string} data.externalId
  * @param {CenterTypes} data.type

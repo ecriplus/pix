@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Version} params.updatedVersion
  * @param {VersionsRepository} params.versionsRepository
  * @returns {Promise<Version>}

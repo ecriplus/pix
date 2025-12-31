@@ -42,7 +42,7 @@ const certificationAssessmentSchema = Joi.object({
 
 class CertificationAssessment {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Date} params.createdAt certification course creation date
    * @param {Array<CertificationChallengeWithType>} params.certificationChallenges
    * @param {Array<Answer>} params.certificationAnswersByDate

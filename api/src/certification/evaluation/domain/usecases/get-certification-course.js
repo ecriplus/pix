@@ -5,7 +5,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
