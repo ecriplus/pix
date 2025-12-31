@@ -12,7 +12,7 @@ module('Acceptance | Certification frameworks | list', function (hooks) {
   module('When admin member is not logged in', function () {
     test('it should not be accessible by an unauthenticated user', async function (assert) {
       // when
-      await visit('/complementary-certifications');
+      await visit('/certification-frameworks');
 
       // then
       assert.strictEqual(currentURL(), '/login');
@@ -79,7 +79,7 @@ module('Acceptance | Certification frameworks | list', function (hooks) {
       await click(screen.getByRole('link', { name: 'Pix+ Droit' }));
 
       // then
-      assert.strictEqual(currentURL(), '/complementary-certifications/DROIT/framework');
+      assert.strictEqual(currentURL(), '/certification-frameworks/DROIT/framework');
     });
   });
 });

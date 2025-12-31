@@ -23,10 +23,10 @@ module('Acceptance | Complementary certifications | Complementary certification 
     });
 
     // when
-    await visit('/complementary-certifications/KEY');
+    await visit('/certification-frameworks/KEY');
 
     // then
-    assert.strictEqual(currentURL(), '/complementary-certifications/KEY/framework');
+    assert.strictEqual(currentURL(), '/certification-frameworks/KEY/framework');
   });
 
   test('it should render target profile page when complementary has no complementary referential', async function (assert) {
@@ -48,9 +48,9 @@ module('Acceptance | Complementary certifications | Complementary certification 
     });
 
     // when
-    await visit('/complementary-certifications/KEY');
+    await visit('/certification-frameworks/KEY');
 
     // then
-    assert.strictEqual(currentURL(), '/complementary-certifications/KEY/target-profile');
+    assert.strictEqual(currentURL(), '/certification-frameworks/KEY/target-profile');
   });
 });

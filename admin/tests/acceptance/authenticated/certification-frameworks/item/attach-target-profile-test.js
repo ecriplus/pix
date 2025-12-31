@@ -25,7 +25,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             id: 3,
             name: 'ALEX TARGET',
           });
-          const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
 
           // then
           assert
@@ -52,7 +52,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               id: 3,
               name: 'ALEX TARGET',
             });
-            const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
 
             const currentTargetProfileLinks = screen.getAllByRole('link', { name: 'ALEX TARGET' });
 
@@ -75,7 +75,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [],
           });
-          const screen = await visit('/complementary-certifications/KEY/target-profile/-1');
+          const screen = await visit('/certification-frameworks/KEY/target-profile/-1');
 
           // then
           assert
@@ -108,7 +108,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [],
           });
-          const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '3');
 
@@ -147,7 +147,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               name: 'ALEX TARGET',
               badges: [badge],
             });
-            const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
             const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
             await fillIn(input, '5');
             await screen.findByRole('listbox');
@@ -191,7 +191,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               name: 'ALEX TARGET',
               badges: [badge],
             });
-            const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
             const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
             await fillIn(input, '5');
             await screen.findByRole('listbox');
@@ -237,7 +237,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [badge],
           });
-          const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '5');
           await screen.findByRole('listbox');
@@ -284,7 +284,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               ),
             )
             .exists();
-          assert.strictEqual(currentURL(), '/complementary-certifications/KEY/target-profile');
+          assert.strictEqual(currentURL(), '/certification-frameworks/KEY/target-profile');
         });
       });
 
@@ -313,7 +313,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [badge],
           });
-          const screen = await visit('/complementary-certifications/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '5');
           await screen.findByRole('listbox');
@@ -368,10 +368,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           id: 3,
           name: 'ALEX TARGET',
         });
-        await visit('/complementary-certifications/KEY/target-profile/3');
+        await visit('/certification-frameworks/KEY/target-profile/3');
 
         // then
-        assert.strictEqual(currentURL(), '/complementary-certifications/KEY/target-profile');
+        assert.strictEqual(currentURL(), '/certification-frameworks/KEY/target-profile');
       });
     });
   });
