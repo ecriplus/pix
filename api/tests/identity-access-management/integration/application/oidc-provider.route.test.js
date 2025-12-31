@@ -7,7 +7,10 @@ import {
   DifferentExternalIdentifierError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
-import { oidcAuthenticationServiceRegistry } from '../../../../src/identity-access-management/domain/usecases/index.js';
+import {
+  oidcAuthenticationServiceRegistry,
+  usecases,
+} from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
@@ -76,6 +79,23 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
       // then
       expect(response2.statusCode).to.deep.equal(response1.statusCode);
       expect(response2.result.data).to.deep.equal(response1.result.data);
+    });
+
+    context('when an unexpected error occurs', function () {
+      it('does not break and returns an empty array', async function () {
+        // given
+        const headers = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };
+
+        const error = new Error('BOOM!');
+        sinon.stub(usecases, 'getReadyIdentityProviders').rejects(error);
+
+        // when
+        const response = await httpTestServer.request('GET', '/api/oidc/identity-providers', null, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.equal({ data: [] });
+      });
     });
   });
 
