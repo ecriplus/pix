@@ -1,6 +1,7 @@
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import List from 'pix-admin/components/certification-frameworks/list';
+
 <template>
   {{pageTitle (t "components.certification-frameworks.page-title")}}
 
