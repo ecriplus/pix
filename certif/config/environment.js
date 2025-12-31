@@ -1,5 +1,4 @@
 'use strict';
-const _ = require('lodash');
 
 function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue, minValue }) {
   const valueToValidate = process.env[environmentVariableName] || defaultValue;
@@ -15,8 +14,6 @@ function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue
 function _isFeatureEnabled(environmentVariable) {
   return environmentVariable === 'true';
 }
-
-const ACTIVE_FEATURE_TOGGLES = [];
 
 module.exports = function (environment) {
   const ENV = {
@@ -146,13 +143,6 @@ module.exports = function (environment) {
       usingProxy: false,
     };
   }
-
-  // Warn for unknown feature toggles
-  _.each(process.env, (value, key) => {
-    if (key.startsWith('FT_') && _.indexOf(ACTIVE_FEATURE_TOGGLES, key) === -1) {
-      console.warn(`Unknown feature toggle ${key}. Please remove it from your environment variables.`);
-    }
-  });
 
   return ENV;
 };

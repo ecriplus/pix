@@ -25,11 +25,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     return this.ajaxQueue.add(() => super.ajax(...arguments));
   }
 
-  handleResponse(status, headers, errors) {
-    if (errors?.errors?.[0]?.id) {
-      console.table(errors.errors[0]);
-    }
-
+  handleResponse() {
     return super.handleResponse(...arguments);
   }
 }
