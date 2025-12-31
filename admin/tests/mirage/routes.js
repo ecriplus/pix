@@ -498,8 +498,8 @@ export default function routes() {
     return new Response(204);
   });
 
-  this.patch('/cache', () => {});
-  this.post('/lcms/releases', () => {});
+  this.patch('/cache', () => { });
+  this.post('/lcms/releases', () => { });
 
   this.patch('/admin/certification-courses/:id', (schema, request) => {
     const certificationId = request.params.id;
@@ -588,10 +588,10 @@ export default function routes() {
     return schema.certificationConsolidatedFrameworks.find(request.params.scope);
   });
 
-  this.get('admin/complementary-certifications/:key/framework-history', (schema, request) => {
+  this.get('admin/certification-frameworks/:scope/framework-history', (_, request) => {
     return {
       data: {
-        id: request.params.key,
+        id: request.params.scope,
         type: 'framework-histories',
         attributes: {
           history: [],
