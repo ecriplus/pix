@@ -129,7 +129,11 @@ export class OidcAuthenticationService {
         metadata,
       );
     } catch (error) {
-      logger.error(`OIDC Provider "${this.identityProvider}" is UNAVAILABLE: ${error}`);
+      _monitorOidcError(`Failed init for OIDC Provider "${this.identityProvider}"`, {
+        data: { organizationName: this.organizationName },
+        error,
+        event: 'initialize-client-config',
+      });
     }
   }
 
