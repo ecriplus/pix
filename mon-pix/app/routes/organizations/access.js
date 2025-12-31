@@ -17,13 +17,13 @@ export default class AccessRoute extends Route {
 
   async beforeModel(transition) {
     const { organizationToJoin, verifiedCode } = this.modelFor('organizations');
-    const identityProviderToVisit = this.oidcIdentityProviders.list.find((identityProvider) => {
-      const isUserLoggedInToIdentityProvider =
-        get(this.session, 'data.authenticated.identityProviderCode') === identityProvider.code;
-      return (
-        organizationToJoin.isRestrictedByIdentityProvider(identityProvider.code) && !isUserLoggedInToIdentityProvider
-      );
-    });
+    const organizationToJoinIdentityProviderCode = organizationToJoin.identityProvider;
+    const authenticatedIdentityProviderCode = get(this.session, 'data.authenticated.identityProviderCode');
+    const organizationToJoinIdentityProvider = this.oidcIdentityProviders.findByCode(
+      organizationToJoinIdentityProviderCode,
+    );
+    const identityProviderToVisit =
+      authenticatedIdentityProviderCode != organizationToJoinIdentityProviderCode && organizationToJoinIdentityProvider;
 
     this.authenticationRoute = 'inscription';
 

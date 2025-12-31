@@ -1,9 +1,8 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import { stubSessionService } from '../../../helpers/service-stubs.js';
+import { stubOidcIdentityProvidersService, stubSessionService } from '../../../helpers/service-stubs.js';
 
 module('Unit | Route | Access', function (hooks) {
   setupTest(hooks);
@@ -19,7 +18,6 @@ module('Unit | Route | Access', function (hooks) {
       },
       organizationToJoin: {
         id: 1,
-        isRestrictedByIdentityProvider: sinon.stub(),
       },
     };
     route = this.owner.lookup('route:organizations.access');
@@ -27,11 +25,7 @@ module('Unit | Route | Access', function (hooks) {
     route.accessStorage = { hasUserSeenJoinPage: sinon.stub() };
     route.router = { replaceWith: sinon.stub(), transitionTo: sinon.stub() };
 
-    class OidcIdentityProvidersStub extends Service {
-      list = [];
-    }
-
-    this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
+    stubOidcIdentityProvidersService(this.owner);
   });
 
   module('#beforeModel', function () {
@@ -64,16 +58,30 @@ module('Unit | Route | Access', function (hooks) {
 
       module('when campaign belongs to an oidc provider', function (hooks) {
         hooks.beforeEach(function () {
-          const oidcProviderService = this.owner.lookup('service:oidcIdentityProviders');
-          const oidcPartner = { id: 'oidc-partner', code: 'OIDC_PARTNER' };
-          oidcProviderService['oidc-partner'] = oidcPartner;
-          oidcProviderService.list = [oidcPartner];
+          stubOidcIdentityProvidersService(this.owner, {
+            oidcIdentityProviders: [
+              {
+                id: 'oidc-partner',
+                slug: 'oidc-partner',
+                code: 'OIDC_PARTNER',
+                organizationName: 'OIDC Partner',
+              },
+              {
+                id: 'oidc-partner-different',
+                slug: 'oidc-partner-different',
+                code: 'OIDC_PARTNER_DIFFERENT',
+                organizationName: 'OIDC Partner Different',
+              },
+            ],
+          });
+
+          organization.organizationToJoin.identityProvider = 'OIDC_PARTNER';
         });
 
         module('and user is not connected with that provider', function () {
           test('should use provider route', async function (assert) {
             // given
-            organization.organizationToJoin.isRestrictedByIdentityProvider.withArgs('OIDC_PARTNER').returns(true);
+            route.session.data.authenticated.identityProviderCode = 'OIDC_PARTNER_DIFFERENT';
 
             // when
             await route.beforeModel();
@@ -87,9 +95,7 @@ module('Unit | Route | Access', function (hooks) {
         module('and user is connected with that provider', function () {
           test('should not use provider route', async function (assert) {
             // given
-            const OIDC_PARTNER = 'OIDC_PARTNER';
-            route.session.data.authenticated.identityProviderCode = OIDC_PARTNER;
-            organization.organizationToJoin.isRestrictedByIdentityProvider.withArgs(OIDC_PARTNER).returns(true);
+            route.session.data.authenticated.identityProviderCode = 'OIDC_PARTNER';
 
             // when
             await route.beforeModel();
