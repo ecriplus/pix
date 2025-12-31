@@ -10,9 +10,7 @@ const findCertificationFrameworks = async function () {
 
 const getActiveConsolidatedFramework = async function (request) {
   const scope = request.params.scope;
-  const consolidatedFramework = await usecases.getCurrentFrameworkVersion({
-    complementaryCertificationKey: scope,
-  });
+  const consolidatedFramework = await usecases.getCurrentFrameworkVersion({ scope });
   return certificationConsolidatedFrameworkSerializer.serialize(consolidatedFramework);
 };
 

@@ -5,7 +5,7 @@
 
 /**
  * @param {object} params
- * @param {scope} params.scope
+ * @param {Scope} params.scope
  * @param {VersionsRepository} params.versionsRepository
  */
 export const getFrameworkHistory = async ({ scope, versionsRepository }) => {

@@ -1,5 +1,5 @@
 import { getCurrentFrameworkVersion } from '../../../../../../src/certification/configuration/domain/usecases/get-current-framework-version.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -22,11 +22,11 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
 
   it('should return the current framework', async function () {
     // given
-    const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
+    const scope = Scopes.PIX_PLUS_DROIT;
     const versionId = 123;
     const version = domainBuilder.certification.configuration.buildVersion({
       id: versionId,
-      scope: complementaryCertificationKey,
+      scope,
     });
 
     const challenges = [
@@ -36,7 +36,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
       }),
     ];
 
-    versionsRepository.findActiveByScope.withArgs({ scope: complementaryCertificationKey }).resolves(version);
+    versionsRepository.findActiveByScope.withArgs({ scope }).resolves(version);
 
     frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
@@ -45,16 +45,14 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
 
     // when
     const results = await getCurrentFrameworkVersion({
-      complementaryCertificationKey,
+      scope,
       versionsRepository,
       frameworkChallengesRepository,
       learningContentRepository,
     });
 
     // then
-    expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({
-      scope: complementaryCertificationKey,
-    });
+    expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
 
     expect(frameworkChallengesRepository.getByVersionId).to.have.been.calledOnceWithExactly({ versionId });
 
@@ -62,20 +60,20 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
       challengeIds: ['rec1'],
     });
 
-    expect(results.scope).to.equal(complementaryCertificationKey);
+    expect(results.scope).to.equal(scope);
     expect(results.versionId).to.equal(versionId);
     expect(results.areas).to.deep.equal([area]);
   });
 
   it('should throw NotFoundError when no active version exists', async function () {
     // given
-    const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
+    const scope = Scopes.PIX_PLUS_DROIT;
 
-    versionsRepository.findActiveByScope.withArgs({ scope: complementaryCertificationKey }).resolves(null);
+    versionsRepository.findActiveByScope.withArgs({ scope }).resolves(null);
 
     // when
     const error = await catchErr(getCurrentFrameworkVersion)({
-      complementaryCertificationKey,
+      scope,
       versionsRepository,
       frameworkChallengesRepository,
       learningContentRepository,
@@ -83,6 +81,6 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
 
     // then
     expect(error).to.be.instanceOf(NotFoundError);
-    expect(error.message).to.equal(`There is no framework for complementary ${complementaryCertificationKey}`);
+    expect(error.message).to.equal(`There is no framework for complementary ${scope}`);
   });
 });
