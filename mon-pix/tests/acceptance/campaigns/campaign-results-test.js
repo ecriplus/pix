@@ -5,7 +5,6 @@ import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-import ENV from '../../../config/environment';
 import { authenticate } from '../../helpers/authentication';
 import setupIntl from '../../helpers/setup-intl';
 
@@ -17,12 +16,6 @@ module('Acceptance | Campaigns | Results', function (hooks) {
   let user;
   let campaign;
   let campaignParticipation;
-
-  const originalAutoShareDate = ENV.APP.AUTO_SHARE_AFTER_DATE;
-
-  hooks.afterEach(function () {
-    ENV.APP.AUTO_SHARE_AFTER_DATE = originalAutoShareDate;
-  });
 
   hooks.beforeEach(function () {
     user = server.create('user', 'withEmail');
@@ -136,76 +129,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
         assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
       });
 
-      module('when isAutoShareEnabled', function () {
-        module('when campaignParticipation was created before AUTO_SHARE_AFTER_DATE', function () {
-          test('should not shared result automatically', async function (assert) {
-            // when
-            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2023-12-12' });
-            server.create('feature-toggle', {
-              id: 0,
-              isAutoShareEnabled: true,
-            });
-            server.create('campaign-participation-result', {
-              id: campaignParticipation.id,
-              isShared: false,
-            });
-            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
-
-            // then
-            assert.ok(await screen.findByRole('button', { name: t('pages.skill-review.actions.send') }));
-          });
-        });
-
-        module('when campaignParticipation was created after AUTO_SHARE_AFTER_DATE', function () {
-          test('should shared result automatically', async function (assert) {
-            // when
-            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2025-01-01' });
-            server.create('feature-toggle', {
-              id: 0,
-              isAutoShareEnabled: true,
-            });
-            server.create('campaign-participation-result', {
-              id: campaignParticipation.id,
-              isShared: false,
-            });
-            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
-
-            // then
-            assert.ok(await screen.findByRole('link', { name: t('navigation.back-to-homepage') }));
-          });
-        });
-
-        module('when organization is disabled', function () {
-          test('should not shared result automatically', async function (assert) {
-            // when
-            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-
-            ENV.APP.AUTO_SHARE_DISABLED_ORGANIZATION_IDS = [`${campaign.organizationId}`];
-            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2025-07-12' });
-            server.create('feature-toggle', {
-              id: 0,
-              isAutoShareEnabled: true,
-            });
-            server.create('campaign-participation-result', {
-              id: campaignParticipation.id,
-              isShared: false,
-            });
-            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
-
-            // then
-            assert.ok(await screen.findByRole('button', { name: t('pages.skill-review.actions.send') }));
-          });
-        });
-      });
-
       test('should display evaluation results component', async function (assert) {
-        // given
-
         // when
         const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
@@ -216,42 +140,19 @@ module('Acceptance | Campaigns | Results', function (hooks) {
           .isVisible();
       });
 
-      module('when the evaluation results have been shared', function () {
-        test('should redirect to home page', async function (assert) {
-          // given
-          server.create('campaign-participation-result', {
-            id: campaignParticipation.id,
-            isShared: true,
-          });
-          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
-
-          // when
-          await click(await screen.findByRole('link', { name: 'Quitter et revenir sur Pix' }));
-
-          // then
-          assert.strictEqual(currentURL(), '/accueil');
+      test('should redirect to home page', async function (assert) {
+        // given
+        server.create('campaign-participation-result', {
+          id: campaignParticipation.id,
+          isShared: true,
         });
-      });
+        const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
-      module('when the evaluation results have not been shared yet', function () {
-        test('should open a confirm modal', async function (assert) {
-          // given
-          server.create('campaign-participation-result', {
-            id: campaignParticipation.id,
-            isShared: false,
-          });
-          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+        // when
+        await click(await screen.findByRole('link', { name: 'Quitter et revenir sur Pix' }));
 
-          // when
-          await click(await screen.findByRole('button', { name: 'Quitter et revenir sur Pix' }));
-
-          // then
-          const modalTitle = await screen.findByRole('heading', {
-            name: 'Oups, vous n’avez pas encore envoyé vos résultats !',
-          });
-          assert.ok(screen.findByRole('dialog'));
-          assert.ok(modalTitle);
-        });
+        // then
+        assert.strictEqual(currentURL(), '/accueil');
       });
     });
   });

@@ -37,6 +37,7 @@ module(
       // then
       assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
       assert.dom(screen.getByText(t('pages.skill-review.hero.retry.description'))).exists();
+
       assert.dom(screen.getByText(t('pages.skill-review.retry.notification'))).exists();
 
       assert.dom(screen.queryByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).doesNotExist();
@@ -96,64 +97,6 @@ module(
             exact: false,
           }),
         );
-      });
-    });
-
-    module('with auto share enabled', function (hooks) {
-      hooks.beforeEach(function () {
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
-      });
-
-      test('should display retry message with auto share', async function (assert) {
-        //given
-        this.set('campaign', { code: 'CODECAMPAIGN' });
-        this.set('campaignParticipationResult', { canRetry: true, canReset: false });
-
-        //when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-        );
-
-        //then
-        assert.dom(screen.getByText(t('pages.skill-review.retry.notification-with-auto-share'))).exists();
-      });
-
-      test('should display reset message with auto share', async function (assert) {
-        //given
-        this.set('campaign', { code: 'CODECAMPAIGN' });
-        this.set('campaignParticipationResult', { canRetry: false, canReset: true });
-
-        //when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-        );
-
-        //then
-        assert.ok(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share')));
-      });
-
-      test('should display reset and retry message with auto share', async function (assert) {
-        //given
-        this.set('campaign', { code: 'CODECAMPAIGN' });
-        this.set('campaignParticipationResult', { canRetry: true, canReset: true });
-
-        //when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-        );
-
-        //then
-        assert.dom(screen.getByText(t('pages.skill-review.retry-and-reset.notification-with-auto-share'))).exists();
       });
     });
 

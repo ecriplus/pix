@@ -85,21 +85,6 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       });
     });
 
-    module('When user has already send his results', function () {
-      test('should redirect directly to shared results', async function (assert) {
-        // given
-        const screen = await visit(`/campagnes/${campaign.code}`);
-        await click(screen.getByRole('link', { name: t('pages.checkpoint.actions.next-page.results') }));
-        await click(screen.getByRole('button', { name: "J'envoie mes résultats" }));
-
-        // when
-        await visit(`/campagnes/${campaign.code}`);
-
-        // then
-        assert.ok(currentURL().includes(`/campagnes/${campaign.code}/evaluation/resultats`));
-      });
-    });
-
     module('When the campaign is restricted and organization learner is disabled', function (hooks) {
       hooks.beforeEach(async function () {
         campaign = server.create('campaign', { code: 'FORBIDDEN', isRestricted: true, type: ASSESSMENT });

@@ -22,7 +22,11 @@ export default class CheckpointController extends Controller {
   }
 
   get displayShareResultsBanner() {
-    return this.finalCheckpoint && new Date(this.model.createdAt) <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE);
+    return (
+      this.finalCheckpoint &&
+      this.model.isForCampaign &&
+      new Date(this.model.createdAt) <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE)
+    );
   }
 
   get nextPageButtonText() {

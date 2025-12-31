@@ -12,14 +12,9 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
   setupIntl(hooks);
 
   let controller;
-  const originalAutoShareDate = ENV.APP.AUTO_SHARE_AFTER_DATE;
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:assessments/checkpoint');
-  });
-
-  hooks.afterEach(function () {
-    ENV.APP.AUTO_SHARE_AFTER_DATE = originalAutoShareDate;
   });
 
   module('#nextPageButtonText', function () {
@@ -149,10 +144,21 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
   });
 
   module('#displayShareResultsBanner', function () {
+    test('should return false when assessment is not for campaign', function (assert) {
+      // given
+      ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+      const model = { isForCampaign: false, createdAt: new Date('2023-01-01') };
+      controller.model = model;
+      controller.finalCheckpoint = true;
+
+      // then
+      assert.false(controller.displayShareResultsBanner);
+    });
+
     test('should return true when it is final checkpoint and when assessment created is before auto share date', function (assert) {
       // given
       ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-      const model = { createdAt: new Date('2023-01-01') };
+      const model = { createdAt: new Date('2023-01-01'), isForCampaign: true };
       controller.model = model;
       controller.finalCheckpoint = true;
 
@@ -163,7 +169,7 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
     test('should return false when assessment created is after auto share date', function (assert) {
       // given
       ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-      const model = { createdAt: new Date('2025-01-01') };
+      const model = { createdAt: new Date('2025-01-01'), isForCampaign: true };
       controller.model = model;
       controller.finalCheckpoint = true;
 
@@ -174,7 +180,7 @@ module('Unit | Controller | Assessments | Checkpoint', function (hooks) {
     test('should return false when it is not final checkpoint', function (assert) {
       // given
       ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
-      const model = { createdAt: new Date('2023-01-01') };
+      const model = { createdAt: new Date('2023-01-01'), isForCampaign: true };
       controller.model = model;
       controller.finalCheckpoint = false;
 
