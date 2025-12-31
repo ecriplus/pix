@@ -1,8 +1,9 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { SessionStorageEntry } from 'mon-pix/utils/session-storage-entry.js';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
+
+import { stubOidcIdentityProvidersService } from '../../helpers/service-stubs.js';
 
 module('Unit | Services | session', function (hooks) {
   setupTest(hooks);
@@ -66,20 +67,16 @@ module('Unit | Services | session', function (hooks) {
 
   module('#handleAuthentication', function (hooks) {
     hooks.beforeEach(function () {
-      const oidcPartner = {
-        id: 'oidc-partner',
-        code: 'OIDC_PARTNER',
-        organizationName: 'Partenaire OIDC',
-        shouldCloseSession: false,
-        source: 'oidc-externe',
-      };
-
-      class OidcIdentityProvidersStub extends Service {
-        'oidc-partner' = oidcPartner;
-        list = [oidcPartner];
-      }
-
-      this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
+      stubOidcIdentityProvidersService(this.owner, {
+        oidcIdentityProviders: [
+          {
+            id: 'oidc-partner',
+            slug: 'oidc-partner',
+            code: 'OIDC_PARTNER',
+            organizationName: 'OIDC Partner',
+          },
+        ],
+      });
     });
 
     test('loads current user', async function (assert) {

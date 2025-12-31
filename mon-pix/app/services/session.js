@@ -25,13 +25,9 @@ export default class CurrentSessionService extends SessionService {
     await this.currentUser.load();
 
     const nextURL = this.data.nextURL;
-    const isFromIdentityProviderLoginPage = this.oidcIdentityProviders.list.some((identityProvider) => {
-      const isUserLoggedInToIdentityProvider =
-        get(this, 'data.authenticated.identityProviderCode') === identityProvider.code;
-      return nextURL && isUserLoggedInToIdentityProvider;
-    });
-
-    if (isFromIdentityProviderLoginPage) {
+    const authenticatedIdentityProviderCode = get(this, 'data.authenticated.identityProviderCode');
+    const identityProvider = this.oidcIdentityProviders.findByCode(authenticatedIdentityProviderCode);
+    if (nextURL && identityProvider) {
       // eslint-disable-next-line ember/classic-decorator-no-classic-methods
       this.set('data.nextURL', undefined);
       this.router.replaceWith(nextURL);
