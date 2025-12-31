@@ -37,7 +37,7 @@ export const getScoBlockedAccessDateByKey = async (scoOrganizationTagName) => {
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ScoBlockedAccessDate} params.scoBlockedAccessDate
  */
 export const updateScoBlockedAccessDate = async (scoBlockedAccessDate) => {

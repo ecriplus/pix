@@ -10,7 +10,7 @@ import { generateV3AttestationTemplate } from './templates/certificate.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<Certificate>} params.certificates
  */
 const generate = ({ certificates, i18n }) => {

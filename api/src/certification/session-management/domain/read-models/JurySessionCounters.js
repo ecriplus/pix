@@ -1,6 +1,6 @@
 /**
  * @typedef IssueReport
- * @type {Object}
+ * @type {object}
  * @property {string} category
  * @property {string} subcategory
  * @property {Date} resolvedAt
@@ -37,7 +37,7 @@ export class JurySessionCounters {
   impactfullIssueReports = 0;
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.startedCertifications
    * @param {number} params.certificationsWithScoringError
    * @param {Array<IssueReport>} params.issueReports

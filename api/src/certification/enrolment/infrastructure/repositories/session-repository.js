@@ -8,7 +8,7 @@ import { SessionEnrolment } from '../../domain/models/SessionEnrolment.js';
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {SessionEnrolment} params.session
  * @returns {Promise<SessionEnrolment>}
  */
@@ -36,7 +36,7 @@ export async function save({ session }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<SessionEnrolment>}
  * @throws {NotFoundError}
@@ -57,7 +57,7 @@ export async function get({ id }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.address
  * @param {string} params.room
  * @param {Date} params.date
@@ -72,7 +72,7 @@ export async function isSessionExistingByCertificationCenterId({ address, room, 
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @param {number} params.certificationCenterId
  * @returns {Promise<boolean>}
@@ -103,7 +103,7 @@ export async function update(session) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<void>}
  * @throws {NotFoundError}

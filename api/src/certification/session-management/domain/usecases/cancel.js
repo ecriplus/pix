@@ -10,7 +10,7 @@ import { CertificationCancelNotAllowedError, NotFinalizedSessionError } from '..
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SessionRepository} params.sessionRepository

@@ -2,7 +2,7 @@ import { GlobalCertificationLevel } from '../../models/v3/GlobalCertificationLev
 
 export class CertificationResult {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {string} props.[ine]
    * @param {string} props.[organizationUai]
    * @param {string} props.lastName

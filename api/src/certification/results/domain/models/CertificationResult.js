@@ -18,7 +18,7 @@ const status = {
 
 class CertificationResult {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.firstName
    * @param {string} props.lastName

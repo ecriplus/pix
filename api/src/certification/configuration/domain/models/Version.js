@@ -23,14 +23,14 @@ export class Version {
   });
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} [params.id] - version identifier (optional for new versions)
    * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
    * @param {Date} params.startDate - When this version becomes active
    * @param {Date|null} [params.expirationDate] - When this version expires (null if current)
    * @param {number} params.assessmentDuration - Assessment duration in minutes
-   * @param {Array<Object>} [params.globalScoringConfiguration] - Global scoring configuration
-   * @param {Array<Object>} [params.competencesScoringConfiguration] - Competences scoring configuration
+   * @param {Array<object>} [params.globalScoringConfiguration] - Global scoring configuration
+   * @param {Array<object>} [params.competencesScoringConfiguration] - Competences scoring configuration
    * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
    */
   constructor({

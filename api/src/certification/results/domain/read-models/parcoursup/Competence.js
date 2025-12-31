@@ -1,6 +1,6 @@
 export class Competence {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {string} props.code
    * @param {string} props.name
    * @param {string} props.areaName

@@ -11,7 +11,7 @@ export class CertificationFrameworksChallenge {
   });
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.versionId
    * @param {string} params.challengeId
    * @param {number} [params.discriminant]

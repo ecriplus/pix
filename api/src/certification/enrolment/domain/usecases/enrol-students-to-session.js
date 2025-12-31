@@ -15,7 +15,7 @@ import { Subscription } from '../models/Subscription.js';
 const INSEE_PREFIX_CODE = '99';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ScoCertificationCandidateRepository} params.scoCertificationCandidateRepository
  * @param {OrganizationLearnerRepository} params.organizationLearnerRepository
  * @param {CenterRepository} params.centerRepository

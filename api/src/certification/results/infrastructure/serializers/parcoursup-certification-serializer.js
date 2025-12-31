@@ -4,10 +4,10 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationResult} params.certificationResult
  * @param {GlobalCertificationLevel} params.globalMeshLevel
- * @param {Object} params.translate
+ * @param {object} params.translate
  */
 const serialize = ({ certificationResult, translate }) => {
   return {

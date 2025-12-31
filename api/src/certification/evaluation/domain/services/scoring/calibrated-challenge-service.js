@@ -12,7 +12,7 @@
  * @typedef {import('../../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
  */
 /**
- * @typedef {Object} FindByCertificationCourseAndVersionResult
+ * @typedef {object} FindByCertificationCourseAndVersionResult
  * @property {Array<CalibratedChallenge>} allChallenges - All calibrated challenges for the version no matter the locale
  * @property {Array<CalibratedChallenge>} askedChallengesWithoutLiveAlerts - Calibrated challenges presented to the candidate, excluding those with validated live alerts.
  * @property {Array<ChallengeCalibration>} challengeCalibrationsWithoutLiveAlerts - Calibrations of challenges presented to the candidate, excluding those with validated live alerts.
@@ -21,7 +21,7 @@ import { withTransaction } from '../../../../../shared/domain/DomainTransaction.
 
 export const findByCertificationCourseAndVersion = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {CertificationCourse} params.certificationCourse
    * @param {Version} params.version
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
@@ -58,14 +58,14 @@ export const findByCertificationCourseAndVersion = withTransaction(
 );
 
 /**
- * @typedef {Object} FindByCertificationCourseIdObject
+ * @typedef {object} FindByCertificationCourseIdObject
  * @property {Array<CalibratedChallenge>} allChallenges - all challenges data + calibration for this version
  * @property {Array<CalibratedChallenge>} askedChallenges - all challenges data + calibrations PRESENTED to candidate
  * @property {Array<ChallengeCalibration>} challengesCalibrations - only calibrations of challenges PRESENTED to candidate
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Array<CalibratedChallenge>} params.compatibleChallenges
  * @param {number} params.certificationCourseId
  * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository

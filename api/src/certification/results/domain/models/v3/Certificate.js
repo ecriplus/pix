@@ -7,7 +7,7 @@ import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
 export class Certificate {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id - certification course id
    * @param {string} props.firstName
    * @param {string} props.lastName

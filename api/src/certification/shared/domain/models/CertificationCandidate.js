@@ -6,7 +6,7 @@ const { isNil } = lodash;
 
 class CertificationCandidate {
   /**
-   * @param {Object} param
+   * @param {object} param
    * @param {Array<Subscription>} param.subscriptions {@link Subscription>}
    */
   constructor({

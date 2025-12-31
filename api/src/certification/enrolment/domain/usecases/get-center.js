@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CenterRepository} params.centerRepository
  */
 const getCenter = function ({ id, centerRepository }) {

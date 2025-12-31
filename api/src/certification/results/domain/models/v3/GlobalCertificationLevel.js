@@ -12,7 +12,7 @@ export class GlobalCertificationLevel {
   });
 
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.score - certification score in Pix
    * @param {MeshConfiguration} props.[configuration] - certification score in Pix
    */

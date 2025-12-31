@@ -4,13 +4,13 @@ import { Subscription } from '../../domain/models/Subscription.js';
 import { EnrolledCandidate } from '../../domain/read-models/EnrolledCandidate.js';
 
 /**
- * @typedef {Object} EnrolledCandidateQueryResult
+ * @typedef {object} EnrolledCandidateQueryResult
  * @property {number} id
  * @property {number} sessionId
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} email
- * @property {Array<Object>} subscriptions
+ * @property {Array<object>} subscriptions
  * @property {string} subscriptions.type
  * @property {string} subscriptions.complementaryCertificationKey
  * @property {number} subscriptions.certificationCandidateId
@@ -19,7 +19,7 @@ import { EnrolledCandidate } from '../../domain/read-models/EnrolledCandidate.js
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @returns {Promise<Array<EnrolledCandidate>>}
  */
@@ -30,7 +30,7 @@ export async function findBySessionId({ sessionId }) {
 }
 
 /**
- * @typedef {Object} CandidateForComparison
+ * @typedef {object} CandidateForComparison
  * @property {string} firstName
  * @property {string} lastName
  */

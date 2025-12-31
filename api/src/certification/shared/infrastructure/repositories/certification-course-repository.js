@@ -150,7 +150,7 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @returns {Promise<Array<CertificationCourse>>}
  */
@@ -206,7 +206,7 @@ async function findCertificationCoursesBySessionId({ sessionId }) {
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.courseId
  * @returns {Promise<Scopes>}
  */

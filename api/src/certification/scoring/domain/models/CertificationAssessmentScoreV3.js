@@ -30,7 +30,7 @@ export class CertificationAssessmentScoreV3 {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {FlashAssessmentAlgorithm} params.algorithm
    * @param {CalibratedChallenge[]} params.challenges
    * @param {Answer[]} params.allAnswers

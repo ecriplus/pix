@@ -5,7 +5,7 @@
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {string} params.certificationCourseId
  * @param {string} params.challengeRecId
  * @param {string} params.juryId

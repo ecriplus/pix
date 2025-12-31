@@ -4,7 +4,7 @@
 
 export class ComplementaryCertification {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.label
    * @param {ComplementaryCertificationKeys|string} props.key identifier key

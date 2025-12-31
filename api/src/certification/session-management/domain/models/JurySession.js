@@ -7,7 +7,7 @@ import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
 
 class JurySession {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.certificationCenterName
    * @param {string} props.certificationCenterType

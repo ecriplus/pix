@@ -2,7 +2,7 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 
 export class CertificationRescoringByScriptJob {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.certificationCourseId - certification course that will be rescored
    */
   constructor({ certificationCourseId }) {

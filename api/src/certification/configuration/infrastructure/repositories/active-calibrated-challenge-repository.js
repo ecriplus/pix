@@ -6,7 +6,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibratedChallenge.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationKeys} params.scope
  * @param {number} params.calibrationId
  * @returns {Promise<Array<ActiveCalibratedChallenge>>}

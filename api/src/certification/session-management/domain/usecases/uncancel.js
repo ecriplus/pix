@@ -9,7 +9,7 @@ import CertificationUncancelled from '../../../../shared/domain/events/Certifica
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {number} params.juryId
  * @param {CertificationCourseRepository} params.certificationCourseRepository

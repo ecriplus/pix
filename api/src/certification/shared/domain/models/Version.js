@@ -25,10 +25,10 @@ export class Version {
   });
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id - version identifier
    * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
-   * @param {Object} params.challengesConfiguration - Challenges configuration
+   * @param {object} params.challengesConfiguration - Challenges configuration
    * @param {number} params.challengesConfiguration.maximumAssessmentLength - limit for assessment length
    * @param {number} params.challengesConfiguration.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
    * @param {number} params.challengesConfiguration.defaultCandidateCapacity - capacity when none has been yet determined

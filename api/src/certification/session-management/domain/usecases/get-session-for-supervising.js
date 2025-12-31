@@ -10,7 +10,7 @@ import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../shared/domain/constan
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionForSupervisingRepository} params.sessionForSupervisingRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
  */

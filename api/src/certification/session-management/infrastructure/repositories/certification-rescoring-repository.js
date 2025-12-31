@@ -5,7 +5,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
  * @param {CertificationEvaluationApi} params.certificationEvaluationApi
  * @returns {Promise<void>}
@@ -17,7 +17,7 @@ export const rescoreV3Certification = async ({ event, certificationEvaluationApi
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ChallengeNeutralized|ChallengeDeneutralized|CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
  * @param {CertificationEvaluationApi} params.certificationEvaluationApi
  * @returns {Promise<void>}

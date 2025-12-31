@@ -3,7 +3,7 @@ import { TimelineEvent } from './TimelineEvent.js';
 
 export class CandidateCertifiableEvent extends TimelineEvent {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {Date} props.when
    */
   constructor({ when }) {

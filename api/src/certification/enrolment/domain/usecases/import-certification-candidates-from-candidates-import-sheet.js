@@ -7,7 +7,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { CandidateAlreadyLinkedToUserError } from '../../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CandidateRepository} params.candidateRepository
  * @param {SessionRepository} params.sessionRepository
  */

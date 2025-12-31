@@ -8,7 +8,7 @@ import { Subscription } from '../../domain/models/Subscription.js';
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @param {Array<SCOCertificationCandidate>} params.scoCertificationCandidates
  * @returns {Promise<void>}
@@ -49,7 +49,7 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
 export { addNonEnrolledCandidatesToSession };
 
 /**
- * @typedef {Object} SCOCertificationCandidateDTO
+ * @typedef {object} SCOCertificationCandidateDTO
  * @property {string} firstName
  * @property {string} lastName
  * @property {Date} birthdate

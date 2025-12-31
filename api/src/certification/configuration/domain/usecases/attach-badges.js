@@ -13,7 +13,7 @@ import { BadgeToAttach } from '../models/BadgeToAttach.js';
 const { isNil, uniq } = lodash;
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertification} params.complementaryCertification
  * @param {number} params.userId
  * @param {number|null} params.targetProfileIdToDetach
@@ -82,7 +82,7 @@ function _isRequiredInformationMissing(complementaryCertificationBadgesToAttachD
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationBadgesRepository} params.complementaryCertificationBadgesRepository
  */
 async function _attachNewComplementaryCertificationBadges({
@@ -95,7 +95,7 @@ async function _attachNewComplementaryCertificationBadges({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationBadgesRepository} params.complementaryCertificationBadgesRepository
  */
 async function _detachExistingComplementaryCertificationBadge({
@@ -145,7 +145,7 @@ function _verifyThatLevelsAreConsistent({ complementaryCertificationBadgesToAtta
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ComplementaryCertificationBadgesRepository} params.complementaryCertificationBadgesRepository
  */
 async function _verifyThatBadgesToAttachExist({

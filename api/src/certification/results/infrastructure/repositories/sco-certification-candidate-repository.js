@@ -1,7 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.organizationId
  * @param {string} params.division
  * @returns {Promise<Array<number>>} candidates identifiers of active students participants to certification sessions within given division

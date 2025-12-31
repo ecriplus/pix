@@ -29,7 +29,7 @@ import { ComplementaryCertificationKeys } from '../../../shared/domain/models/Co
 import { Scopes } from '../../../shared/domain/models/Scopes.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {CertificationCandidateRepository} params.sharedCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
@@ -159,7 +159,7 @@ async function _blockCandidateFromRestartingWithoutExplicitValidation(
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Session} params.session
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationCenterRepository} params.certificationCenterRepository
@@ -244,7 +244,7 @@ async function _startNewCertification({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {UserId} params.userId
  * @param {SessionId} params.sessionId
@@ -258,7 +258,7 @@ async function _getCertificationCourseIfCreatedMeanwhile(certificationCourseRepo
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService

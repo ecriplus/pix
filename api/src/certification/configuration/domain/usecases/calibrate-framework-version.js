@@ -11,7 +11,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 export const calibrateFrameworkVersion = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.versionId
    * @param {number} params.calibrationId
    * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository

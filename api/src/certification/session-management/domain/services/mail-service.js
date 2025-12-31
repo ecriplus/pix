@@ -100,7 +100,7 @@ const mailService = {
 };
 
 /**
- * @typedef {Object} MailService
+ * @typedef {object} MailService
  * @property {function} sendCertificationResultEmail
  * @property {function} sendNotificationToCertificationCenterRefererForCleaResults
  */

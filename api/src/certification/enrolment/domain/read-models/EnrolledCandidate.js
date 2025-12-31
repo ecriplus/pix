@@ -12,7 +12,7 @@ import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
  */
 export class EnrolledCandidate {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Array<Subscription>} params.subscriptions
    */
   constructor({

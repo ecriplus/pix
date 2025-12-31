@@ -1,6 +1,6 @@
 class CertificationCandidate {
   /**
-   * @param {Object} param
+   * @param {object} param
    * @param {number} param.userId
    * @param {Date} param.reconciledAt
    */

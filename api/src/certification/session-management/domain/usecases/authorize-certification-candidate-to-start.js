@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationCandidateForSupervisingRepository} params.certificationCandidateForSupervisingRepository
  */
 const authorizeCertificationCandidateToStart = async function ({

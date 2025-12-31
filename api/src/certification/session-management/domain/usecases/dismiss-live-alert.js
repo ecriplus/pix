@@ -5,7 +5,7 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  */
 export const dismissLiveAlert = async ({ userId, sessionId, certificationChallengeLiveAlertRepository }) => {

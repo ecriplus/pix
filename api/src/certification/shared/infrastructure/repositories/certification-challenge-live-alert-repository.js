@@ -23,7 +23,7 @@ const getByAssessmentId = async ({ assessmentId }) => {
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.assessmentId
  * @returns {Array<string>} array of challengeId with validated live alert raised for that assessment
  */

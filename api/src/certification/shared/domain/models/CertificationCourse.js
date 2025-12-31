@@ -23,7 +23,7 @@ const V3_CERTIFICATION_AVAILABLE_LANGUAGES = ['fr', 'en'];
 
 export class CertificationCourse {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.id
    * @param {string} props.firstName
    * @param {string} props.lastName

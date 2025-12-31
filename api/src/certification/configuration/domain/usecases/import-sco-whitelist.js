@@ -9,7 +9,7 @@ const INDEX_SHIFT_AND_CSV_HEADER = 2;
 
 export const importScoWhitelist = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {CenterRepository} params.centerRepository
    */
   async ({ externalIds = [], centerRepository }) => {

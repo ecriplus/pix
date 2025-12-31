@@ -8,7 +8,7 @@ import { Candidate } from '../models/Candidate.js';
 import { SessionEnrolment } from '../models/SessionEnrolment.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {deps["candidateRepository"]} params.candidateRepository
  * @param {deps["sessionRepository"]} params.sessionRepository
  * @param {deps["temporarySessionsStorageForMassImportService"]} params.temporarySessionsStorageForMassImportService

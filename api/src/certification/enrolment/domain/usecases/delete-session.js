@@ -6,7 +6,7 @@ import { SessionStartedDeletionError } from '../errors.js';
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {SessionManagementRepository} params.sessionManagementRepository
  */

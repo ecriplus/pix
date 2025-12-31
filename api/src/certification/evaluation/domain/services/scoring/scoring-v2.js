@@ -23,7 +23,7 @@ import { CertifiedLevel } from '../../models/CertifiedLevel.js';
 import { CertificationContract } from '../CertificationContract.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {{juryId: number}} params.[event]
  * @param {CertificationAssessment} params.certificationAssessment
  * @param {AssessmentResultRepository} params.assessmentResultRepository
@@ -33,7 +33,7 @@ import { CertificationContract } from '../CertificationContract.js';
  * @param {PlacementProfileService} params.placementProfileService
  * @param {ScoringService} params.scoringService
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
- * @param {Object} params.dependencies
+ * @param {object} params.dependencies
  * @param {calculateCertificationAssessmentScore} params.dependencies.calculateCertificationAssessmentScore
  */
 export const handleV2CertificationScoring = async ({
@@ -81,7 +81,7 @@ export const handleV2CertificationScoring = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationAssessment} params.certificationAssessment
  * @param {ScoringService} params.scoringService
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
@@ -119,7 +119,7 @@ export const calculateCertificationAssessmentScore = async function ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {PlacementProfileService} params.placementProfileService
  */
 async function _getTestedCompetences({ userId, limitDate, version, placementProfileService }) {
@@ -245,7 +245,7 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationAssessment} params.certificationAssessment
  */
 function _createV2AssessmentResult({
@@ -310,7 +310,7 @@ function _createV2AssessmentResult({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  */

@@ -6,7 +6,7 @@ import {
 
 export const createCompanionAlert = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.assessmentId
    * @param {import('./index.js').CertificationCompanionAlertRepository} params.certificationCompanionAlertRepository
    **/

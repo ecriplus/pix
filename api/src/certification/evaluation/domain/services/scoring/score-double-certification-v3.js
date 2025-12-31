@@ -12,7 +12,7 @@ import { DoubleCertificationScoring } from '../../models/DoubleCertificationScor
 
 export const scoreDoubleCertificationV3 = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.certificationCourseId
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {AssessmentResultRepository} params.assessmentResultRepository

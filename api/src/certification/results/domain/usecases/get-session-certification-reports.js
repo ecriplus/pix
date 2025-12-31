@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationReportRepository} params.certificationReportRepository
  */
 const getSessionCertificationReports = async function ({ sessionId, certificationReportRepository }) {

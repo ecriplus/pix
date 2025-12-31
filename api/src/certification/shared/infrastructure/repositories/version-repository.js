@@ -27,7 +27,7 @@ export const getById = async (versionId) => {
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Scopes} params.scope
  * @param {Date} params.reconciliationDate
  * @returns {Promise<Version>}

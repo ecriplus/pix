@@ -13,7 +13,7 @@ export class Candidate {
   });
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {Date} params.reconciledAt
    * @param {boolean} [params.accessibilityAdjustmentNeeded]
    * @param {Scopes} params.subscriptionScope

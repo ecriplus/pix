@@ -2,7 +2,7 @@ import { validate } from '../validators/habilitation-validator.js';
 
 export class Habilitation {
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.complementaryCertificationId - complementary certification id
    * @param {string} props.key - complementary certification key
    * @param {string} props.label - complementary certification label

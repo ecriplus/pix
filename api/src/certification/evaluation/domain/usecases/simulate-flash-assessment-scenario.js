@@ -9,7 +9,7 @@ import { AssessmentSimulatorSingleMeasureStrategy } from '../models/AssessmentSi
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionRepository} params.versionRepository
@@ -44,7 +44,7 @@ export async function simulateFlashAssessmentScenario({
 }
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CalibratedChallengeRepository} params.challengeRepository
  */
 async function _simulateCertificationScenario({

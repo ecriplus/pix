@@ -6,7 +6,7 @@ const COLUMNS = ['id', 'name', 'postalCode', 'INSEECode', 'isActualName'];
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.INSEECode
  * @returns {Promise<Array<CertificationCpfCity>> }
  */
@@ -23,7 +23,7 @@ const findByINSEECode = async function ({ INSEECode }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.postalCode
  * @returns {Promise<Array<CertificationCpfCity>> }
  */

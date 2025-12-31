@@ -1,7 +1,7 @@
 /**
  * @typedef {('PIX'|'EXTERNAL')} Source
  *
- * @typedef {Object} Results
+ * @typedef {object} Results
  * @property {number} id The id of the complementary certification badge for this result
  * @property {number} complementaryCertificationBadgeId The id of the complementary certification badge for this result
  * @property {number} level The level for this result
@@ -13,7 +13,7 @@ import { ChallengesReferential } from '../../../shared/domain/models/ChallengesR
 
 class ComplementaryCertificationCourseWithResults {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id
    * @param {boolean} params.hasExternalJury
    * @param {Array<Results>} params.results
@@ -35,7 +35,7 @@ class ComplementaryCertificationCourseWithResults {
   }
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id
    * @param {boolean} params.hasExternalJury
    * @param {Array<Results>} params.results

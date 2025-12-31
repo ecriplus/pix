@@ -1,6 +1,6 @@
 class ComplementaryCertificationBadgeForAdmin {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id - Pix core badge identifier
    * @param {number} params.complementaryCertificationBadgeId - Complementary certification badge identifier
    * @param {string} params.label

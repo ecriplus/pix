@@ -10,7 +10,7 @@ export class Center {
   });
 
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {CenterTypes} props.type
    * @param {number} [props.id]
    * @param {string} [props.externalId]

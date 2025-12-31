@@ -7,7 +7,7 @@
 import { CpfImportStatus } from '../models/CpfImportStatus.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CpfExportsStorage} params.cpfExportsStorage
  * @param {CpfExportRepository} params.cpfExportRepository
  */

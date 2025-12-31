@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {ScoBlockedAccessDatesRepository} paramsScoBlockedAccessDatesRepository
  * @returns {Promise<Array<ScoBlockedAccessDate>>}
  */

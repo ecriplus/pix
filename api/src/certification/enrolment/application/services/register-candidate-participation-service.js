@@ -6,7 +6,7 @@ import { usecases } from '../../domain/usecases/index.js';
 
 /**
  * Candidate entry to a certification is a multi step process
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @param {number} params.sessionId
  * @param {string} params.firstName

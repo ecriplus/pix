@@ -1,5 +1,5 @@
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @param {import('./index.js').sharedCertificationCourseRepository} params.sharedCertificationCourseRepository
  **/

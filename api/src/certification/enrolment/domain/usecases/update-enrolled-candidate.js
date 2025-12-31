@@ -9,7 +9,7 @@ import {
 } from '../../../../shared/domain/errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {EditedCandidate} params.editedCandidate
  * @param {CandidateRepository} params.candidateRepository
  */

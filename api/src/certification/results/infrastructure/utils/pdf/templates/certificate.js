@@ -12,7 +12,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url));
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Certificate} params.data
  */
 const generateV3AttestationTemplate = function ({ pdf, data, translate }) {

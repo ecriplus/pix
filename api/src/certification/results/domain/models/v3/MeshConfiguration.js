@@ -3,7 +3,7 @@ import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
 
 export class MeshConfiguration {
   /**
-   * @typedef {Object} Mesh
+   * @typedef {object} Mesh
    * @property {number} weight - every mesh gives a certain number of pix, called weight
    * @property {number} coefficient - the higher the capacity associated to a mesh, the higher the coefficient
    */

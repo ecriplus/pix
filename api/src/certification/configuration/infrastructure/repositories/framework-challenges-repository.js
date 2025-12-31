@@ -4,7 +4,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationFrameworksChallenge } from '../../domain/models/CertificationFrameworksChallenge.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.versionId
  * @returns {Promise<Array<CertificationFrameworksChallenge>>}
  * @throws {NotFoundError}

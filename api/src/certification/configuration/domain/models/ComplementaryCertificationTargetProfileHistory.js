@@ -4,7 +4,7 @@
 
 class ComplementaryCertificationTargetProfileHistory {
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.id - identifier of the complementary certification
    * @param {string} params.key
    * @param {string} params.label

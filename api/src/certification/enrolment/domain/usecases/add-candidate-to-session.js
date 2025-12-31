@@ -18,7 +18,7 @@ import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constant
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {CandidateRepository} params.candidateRepository
  * @param {CertificationCpfService} params.certificationCpfService

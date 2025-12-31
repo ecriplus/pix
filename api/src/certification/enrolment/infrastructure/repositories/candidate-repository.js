@@ -12,7 +12,7 @@ import { Subscription } from '../../domain/models/Subscription.js';
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.certificationCandidateId
  *
  * @returns {Promise<Candidate | null>}
@@ -28,7 +28,7 @@ export async function get({ certificationCandidateId }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  *
  * @returns {Promise<Array<Candidate>>}
@@ -43,7 +43,7 @@ export async function findBySessionId({ sessionId }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  *
  * @returns {Promise<Array<Candidate>>}
@@ -141,7 +141,7 @@ export async function insert(candidate) {
 
 /**
  * @function
- * @@param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @returns {Promise<void>}
  */
@@ -156,7 +156,7 @@ export async function deleteBySessionId({ sessionId }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {Candidate} params.candidate
  * @param {number} params.sessionId
  * @returns {Promise<number>} return saved candidate id
@@ -194,7 +194,7 @@ export async function saveInSession({ candidate, sessionId }) {
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<boolean>}
  */
@@ -240,7 +240,7 @@ function buildBaseReadQuery(knexConnection) {
 }
 
 /**
- * @typedef {Object} CandidateDBModel
+ * @typedef {object} CandidateDBModel
  * @property {number} userId
  * @property {number} sessionId
  * @property {string} firstName
@@ -299,7 +299,7 @@ function adaptModelToDb(candidate) {
 }
 
 /**
- * @typedef {Object} CandidateDTO
+ * @typedef {object} CandidateDTO
  * @property {number} id
  * @property {number} userId
  * @property {number} sessionId
@@ -328,7 +328,7 @@ function adaptModelToDb(candidate) {
  */
 
 /**
- * @typedef {Object} SubscriptionDTO
+ * @typedef {object} SubscriptionDTO
  * @property {string} type
  * @property {ComplementaryCertificationKeys} complementaryCertificationKey
  * @property {number} certificationCandidateId

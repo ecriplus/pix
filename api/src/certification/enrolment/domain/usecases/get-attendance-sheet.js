@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {SessionForAttendanceSheetRepository} params.sessionForAttendanceSheetRepository
  * @param {AttendanceSheetPdfUtils} params.attendanceSheetPdfUtils
  */

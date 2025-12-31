@@ -28,8 +28,8 @@ const findLatestBadgeAcquisitions = async function ({
 };
 
 /**
- * @param {Object} params
- * @param {Object} params.dependencies
+ * @param {object} params
+ * @param {object} params.dependencies
  * @param {certifiableBadgeAcquisitionRepository} params.dependencies.certifiableBadgeAcquisitionRepository
  * @param {knowledgeElementRepository} params.dependencies.knowledgeElementRepository
  * @param {badgeForCalculationRepository} params.dependencies.badgeForCalculationRepository

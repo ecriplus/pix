@@ -16,7 +16,7 @@ import { SessionFinalized } from '../read-models/SessionFinalized.js';
 
 const finalizeSession = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {SessionRepository} params.sessionRepository
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {CertificationReportRepository} params.certificationReportRepository

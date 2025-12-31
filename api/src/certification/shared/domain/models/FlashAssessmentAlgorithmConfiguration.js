@@ -14,7 +14,7 @@ export class FlashAssessmentAlgorithmConfiguration {
   });
 
   /**
-   * @param {Object} props
+   * @param {object} props
    * @param {number} props.maximumAssessmentLength - limit for assessment length
    * @param {number} props.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
    * @param {boolean} [props.limitToOneQuestionPerTube] - limits questions to one per tube

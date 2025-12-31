@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CandidateRepository} params.candidateRepository
  */
 export async function getCandidate({ certificationCandidateId, candidateRepository }) {

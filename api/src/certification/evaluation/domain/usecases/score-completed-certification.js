@@ -10,7 +10,7 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 
 export const scoreCompletedCertification = withTransaction(
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {number} params.certificationCourseId
    * @param {string} params.locale
    * @param {CertificationCourseRepository} params.certificationCourseRepository

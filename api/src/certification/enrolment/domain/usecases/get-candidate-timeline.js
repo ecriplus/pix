@@ -29,7 +29,7 @@ import { CertificationEndedEvent } from '../models/timeline/CertificationEndedEv
 import { CertificationStartedEvent } from '../models/timeline/CertificationStartedEvent.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.sessionId
  * @param {number} params.certificationCandidateId
  * @param {CandidateRepository} params.candidateRepository
@@ -110,7 +110,7 @@ export const getCandidateTimeline = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Candidate} params.candidate
  * @param {PlacementProfileService} params.placementProfileService
  * @param {CertificationBadgesService} params.certificationBadgesService
@@ -142,7 +142,7 @@ const _whenCandidateDidNotStartCertification = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {Candidate} params.candidate
  * @param {CertificationCourse} params.certificationCourse
  * @param {CertificationBadgesService} params.certificationBadgesService
@@ -176,7 +176,7 @@ const _whenCandidateHasStartedTheTest = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.userId
  * @param {Candidate} params.candidate
  * @param {Date} params.atDate
@@ -210,7 +210,7 @@ const _getCertificabilityEvent = async ({
 };
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {UserCertificationEligibility} params.userEligibility
  * @param {Date} params.atDate
  * @param {Candidate} params.candidate

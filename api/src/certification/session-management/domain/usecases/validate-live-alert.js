@@ -11,7 +11,7 @@ import { CertificationIssueReport } from '../../../shared/domain/models/Certific
 import { CertificationIssueReportCategory } from '../../../shared/domain/models/CertificationIssueReportCategory.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {IssueReportCategoryRepository} params.issueReportCategoryRepository

@@ -16,7 +16,7 @@ export class ScoBlockedAccessDate {
   });
 
   /**
-   * @param {Object} params
+   * @param {object} params
    * @param {ScoOrganizationTagName} params.scoOrganizationTagName
    * @param {Date} params.reopeningDate
    */

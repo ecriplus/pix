@@ -6,7 +6,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCandidateForbiddenDeletionError } from '../errors.js';
 
 /**
- * @param {Object} params
+ * @param {object} params
  * @param {CandidateRepository} params.candidateRepository
  */
 const deleteUnlinkedCertificationCandidate = async function ({ candidateId, candidateRepository }) {

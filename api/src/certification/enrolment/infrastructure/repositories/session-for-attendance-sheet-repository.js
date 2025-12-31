@@ -5,7 +5,7 @@ import { SessionForAttendanceSheet } from '../../domain/read-models/SessionForAt
 
 /**
  * @function
- * @param {Object} params
+ * @param {object} params
  * @param {number} params.id
  * @returns {Promise<SessionForAttendanceSheet>}
  * @throws {NotFoundError}
@@ -63,7 +63,7 @@ const getWithCertificationCandidates = async function ({ id }) {
 export { getWithCertificationCandidates };
 
 /**
- * @typedef {Object} Results
+ * @typedef {object} Results
  * @property {number} id
  * @property {Date} date
  * @property {Date} time
@@ -77,7 +77,7 @@ export { getWithCertificationCandidates };
  */
 
 /**
- * @typedef {Object} CertificationCandidateDTO
+ * @typedef {object} CertificationCandidateDTO
  * @property {string} firstName
  * @property {string} lastName
  * @property {Date} birthdate
