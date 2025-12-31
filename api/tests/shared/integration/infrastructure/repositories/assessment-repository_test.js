@@ -539,28 +539,6 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
     });
   });
 
-  describe('#endByInvigilatorByAssessmentId', function () {
-    it('should end an assessment', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      const assessmentId = databaseBuilder.factory.buildAssessment({
-        userId,
-        type: Assessment.types.COMPETENCE_EVALUATION,
-        state: Assessment.states.STARTED,
-      }).id;
-
-      await databaseBuilder.commit();
-
-      // when
-      await assessmentRepository.endByInvigilatorByAssessmentId(assessmentId);
-
-      // then
-      const { state } = await knex('assessments').where('id', assessmentId).first('state');
-      expect(state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
-    });
-  });
-
   describe('#ownedByUser', function () {
     let user;
     let userWithNoAssessment;
