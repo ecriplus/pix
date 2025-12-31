@@ -1,6 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken';
 
-import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import { oidcProviderController } from '../../../../src/identity-access-management/application/oidc-provider/oidc-provider.controller.js';
 import { identityAccessManagementRoutes } from '../../../../src/identity-access-management/application/routes.js';
 import {
@@ -8,6 +7,7 @@ import {
   DifferentExternalIdentifierError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
+import { oidcAuthenticationServiceRegistry } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
