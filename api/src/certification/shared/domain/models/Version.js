@@ -1,26 +1,22 @@
-/**
- * @typedef {import('./Scopes.js').Scopes} Scopes
- */
-
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
-import { Scopes } from './Scopes.js';
+import { SCOPES } from './Scopes.js';
 
 export class Version {
   static #schema = Joi.object({
     id: Joi.number().required(),
     scope: Joi.string()
       .required()
-      .valid(...Object.values(Scopes)),
+      .valid(...Object.values(SCOPES)),
     challengesConfiguration: Joi.object().instance(FlashAssessmentAlgorithmConfiguration).required(),
   });
 
   /**
    * @param {object} params
    * @param {number} params.id - version identifier
-   * @param {Scopes} params.scope - Certification scope (CORE, DROIT, etc.)
+   * @param {SCOPES} params.scope - Certification scope (CORE, DROIT, etc.)
    * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
    */
   constructor({ id, scope, challengesConfiguration }) {

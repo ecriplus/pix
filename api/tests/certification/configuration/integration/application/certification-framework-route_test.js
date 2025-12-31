@@ -1,6 +1,6 @@
 import { certificationFrameworkController } from '../../../../../src/certification/configuration/application/certification-framework-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/certification-framework-route.js';
-import { Scopes } from '../../../../../src/certification/shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
@@ -23,7 +23,7 @@ describe('Integration | Certification | Configuration | Application | Router | c
 
         const response = await httpTestServer.request(
           'GET',
-          `/api/admin/certification-frameworks/${Scopes.CORE}/active-consolidated-framework`,
+          `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
         );
 
         expect(response.statusCode).to.equal(404);

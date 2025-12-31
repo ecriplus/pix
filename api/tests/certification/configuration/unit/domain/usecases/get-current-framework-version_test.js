@@ -1,5 +1,5 @@
 import { getCurrentFrameworkVersion } from '../../../../../../src/certification/configuration/domain/usecases/get-current-framework-version.js';
-import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -22,7 +22,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
 
   it('should return the current framework', async function () {
     // given
-    const scope = Scopes.PIX_PLUS_DROIT;
+    const scope = SCOPES.PIX_PLUS_DROIT;
     const versionId = 123;
     const version = domainBuilder.certification.configuration.buildVersion({
       id: versionId,
@@ -67,7 +67,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
 
   it('should throw NotFoundError when no active version exists', async function () {
     // given
-    const scope = Scopes.PIX_PLUS_DROIT;
+    const scope = SCOPES.PIX_PLUS_DROIT;
 
     versionsRepository.findActiveByScope.withArgs({ scope }).resolves(null);
 

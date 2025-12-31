@@ -1,6 +1,6 @@
 import { certificationFrameworkController } from '../../../../../src/certification/configuration/application/certification-framework-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/certification-framework-route.js';
-import { Scopes } from '../../../../../src/certification/shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
@@ -70,7 +70,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
         // when
         const response = await httpTestServer.request(
           'GET',
-          `/api/admin/certification-frameworks/${Scopes.CORE}/active-consolidated-framework`,
+          `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
         );
 
         // then
@@ -93,7 +93,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
           // when
           const response = await httpTestServer.request(
             'GET',
-            `/api/admin/certification-frameworks/${Scopes.CORE}/active-consolidated-framework`,
+            `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
           );
 
           // then
@@ -118,7 +118,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
         // when
         const response = await httpTestServer.request(
           'GET',
-          `/api/admin/certification-frameworks/${Scopes.CORE}/framework-history`,
+          `/api/admin/certification-frameworks/${SCOPES.CORE}/framework-history`,
         );
 
         // then
@@ -141,7 +141,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
           // when
           const response = await httpTestServer.request(
             'GET',
-            `/api/admin/certification-frameworks/${Scopes.PIX_PLUS_DROIT}/framework-history`,
+            `/api/admin/certification-frameworks/${SCOPES.PIX_PLUS_DROIT}/framework-history`,
           );
 
           // then
