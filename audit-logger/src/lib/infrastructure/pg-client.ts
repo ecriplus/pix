@@ -1,5 +1,7 @@
 import pg from 'pg';
 
+import { logger } from './logger.js';
+
 const { Client } = pg;
 
 export default class PgClient {
@@ -14,10 +16,10 @@ export default class PgClient {
   }
 
   async queryAndLog(query: string | pg.QueryConfig): Promise<unknown> {
-    console.log(`query: ${query}`);
+    logger.info(`query: ${query}`);
     return await this.client.query(query).then((result) => {
       const { command, rowCount, rows } = result;
-      console.log(`result: command ${command} (rowCount ${rowCount}) = ${JSON.stringify(rows)}`);
+      logger.info(`result: command ${command} (rowCount ${rowCount}) = ${JSON.stringify(rows)}`);
       return result;
     });
   }
@@ -28,7 +30,7 @@ export default class PgClient {
     try {
       await instance.client.connect();
     } catch (error) {
-      console.error('Database error', error);
+      logger.error('Database error', error);
     }
 
     return instance;
