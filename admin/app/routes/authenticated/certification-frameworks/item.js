@@ -11,15 +11,15 @@ export default class ItemRoute extends Route {
 
   model(params) {
     const complementaryCertifications = this.store.peekAll('complementary-certification');
-    return complementaryCertifications.find((cc) => cc.key === params.complementary_certification_key);
+    return complementaryCertifications.find((cc) => cc.key === params.certification_framework_key);
   }
 
   redirect(model, transition) {
-    if (transition.to.name === 'authenticated.complementary-certifications.item.index') {
+    if (transition.to.name === 'authenticated.certification-frameworks.item.index') {
       if (model.hasComplementaryReferential) {
-        this.router.transitionTo('authenticated.complementary-certifications.item.framework');
+        this.router.transitionTo('authenticated.certification-frameworks.item.framework');
       } else {
-        this.router.transitionTo('authenticated.complementary-certifications.item.target-profile');
+        this.router.transitionTo('authenticated.certification-frameworks.item.target-profile');
       }
     }
   }

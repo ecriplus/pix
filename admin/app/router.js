@@ -111,8 +111,8 @@ Router.map(function () {
       this.route('timeline', { path: '/:candidate_id/timeline' });
     });
 
-    this.route('complementary-certifications', function () {
-      this.route('item', { path: '/:complementary_certification_key' }, function () {
+    this.route('certification-frameworks', function () {
+      this.route('item', { path: '/:certification_framework_key' }, function () {
         this.route('framework', function () {
           this.route('new');
         });
@@ -122,8 +122,6 @@ Router.map(function () {
         });
       });
     });
-
-    this.route('certification-frameworks');
 
     this.route('target-profiles', function () {
       this.route('list');
