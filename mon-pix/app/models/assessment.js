@@ -8,7 +8,7 @@ export const assessmentStates = {
   COMPLETED: 'completed',
   STARTED: 'started',
   ABORTED: 'aborted',
-  ENDED_BY_INVIGILATOR: 'endedBySupervisor',
+  ENDED_BY_INVIGILATOR: 'endedByInvigilator',
   ENDED_DUE_TO_FINALIZATION: 'endedDueToFinalization',
 };
 export default class Assessment extends Model {
