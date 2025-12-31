@@ -40,8 +40,7 @@ export default class CombinedCourseParticipationDetailsRoute extends Route {
       .then(({ items, participation }) => {
         return { combinedCourse, participation, itemsBySteps: this.sortItemsByStep(items) };
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         this.router.replaceWith('not-found');
       });
   }
