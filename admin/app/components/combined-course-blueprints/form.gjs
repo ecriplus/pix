@@ -42,7 +42,6 @@ export default class CombineCourseBluePrintForm extends Component {
     } else {
       this.addModule();
     }
-
     document.getElementsByName('itemType')[0].focus();
   }
 
@@ -111,6 +110,11 @@ export default class CombineCourseBluePrintForm extends Component {
       this.setItemValue(event);
       this.addItem(event);
     }
+  }
+
+  @action
+  removeRequirement({ type, value }) {
+    this.blueprint.content = this.blueprint.content.filter((item) => item.value !== value || item.type !== type);
   }
 
   <template>
@@ -223,7 +227,7 @@ export default class CombineCourseBluePrintForm extends Component {
         {{#if (gt this.blueprint.content.length 0)}}
           <ul class="combined-course-page__list">
             {{#each this.blueprint.content as |item|}}
-              <li><RequirementTag @type={{item.type}} @value={{item.value}} />
+              <li><RequirementTag @type={{item.type}} @value={{item.value}} @onRemove={{this.removeRequirement}} />
               </li>
             {{/each}}
           </ul>
