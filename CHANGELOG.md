@@ -1,5 +1,29 @@
 # Pix Changelog
 
+## [5.290.2](https://github.com/1024pix/pix/compare/v5.290.1...v5.290.2) (2025-12-31)
+
+### :building_construction: Tech
+
+- [#14507](https://github.com/1024pix/pix/pull/14507) Corriger des tests flaky de userReconciliationService (PIX-20945) 
+- [#14526](https://github.com/1024pix/pix/pull/14526) Corriger un problème de reload dans les tests front sur Pix Admin sous Firefox 
+- [#14527](https://github.com/1024pix/pix/pull/14527) Migrer le singleton oidcAuthenticationServiceRegistry de api/lib/domain/usecases/index.js  vers src/ (PIX-20960) 
+- [#14540](https://github.com/1024pix/pix/pull/14540) Remplacement de `Object` par `object` dans la JSDoc du domaine certification 
+- [#14525](https://github.com/1024pix/pix/pull/14525) Supprime la dépendance à `ember-fetch` dans Pix Junior. 
+- [#14522](https://github.com/1024pix/pix/pull/14522) Utiliser une nouvelle API pour récupérer la version active d'un référentiel de certif (PIX-20954). 
+- [#14517](https://github.com/1024pix/pix/pull/14517) Utiliser uniquement la valeur dans config.v3certification de maxReachableLevel dans le scope certif (PIX-20956) 
+
+### :arrow_up: Montée de version
+
+- [#14303](https://github.com/1024pix/pix/pull/14303) Update actions/checkout action to v6 (workflows) 
+- [#14532](https://github.com/1024pix/pix/pull/14532) Update adobe/s3mock Docker tag to v4.11.0 (.circleci) 
+- [#14533](https://github.com/1024pix/pix/pull/14533) Update adobe/s3mock Docker tag to v4.11.0 (docker) 
+- [#14534](https://github.com/1024pix/pix/pull/14534) Update adobe/s3mock Docker tag to v4.11.0 (dossier racine) 
+- [#14531](https://github.com/1024pix/pix/pull/14531) Update dependency @1024pix/pix-ui to ^55.33.0 (admin) 
+- [#14536](https://github.com/1024pix/pix/pull/14536) Update dependency @1024pix/pix-ui to ^55.33.0 (junior) 
+- [#14509](https://github.com/1024pix/pix/pull/14509) Update dependency ember-exam to v10.0.1 (certif) 
+- [#14529](https://github.com/1024pix/pix/pull/14529) Update dependency ember-exam to v10.0.1 (junior) 
+- [#14530](https://github.com/1024pix/pix/pull/14530) Update dependency ember-exam to v10.0.1 (orga)
+
 ## [5.290.1](https://github.com/1024pix/pix/compare/v5.290.0...v5.290.1) (2025-12-30)
 
 ### :bug: Correction
