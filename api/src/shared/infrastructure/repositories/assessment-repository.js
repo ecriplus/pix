@@ -101,15 +101,11 @@ async function _getAssociatedCampaign(campaignParticipationId) {
 }
 
 const abortByAssessmentId = function (assessmentId) {
-  return this._updateStateById({ id: assessmentId, state: Assessment.states.ABORTED });
+  return _updateStateById({ id: assessmentId, state: Assessment.states.ABORTED });
 };
 
 const completeByAssessmentId = function (assessmentId) {
-  return this._updateStateById({ id: assessmentId, state: Assessment.states.COMPLETED });
-};
-
-const endByInvigilatorByAssessmentId = function (assessmentId) {
-  return this._updateStateById({ id: assessmentId, state: Assessment.states.ENDED_BY_INVIGILATOR });
+  return _updateStateById({ id: assessmentId, state: Assessment.states.COMPLETED });
 };
 
 const getByCertificationCandidateId = async function (certificationCandidateId) {
@@ -207,10 +203,8 @@ const updateCampaignParticipationId = async function (assessment) {
 };
 
 export {
-  _updateStateById,
   abortByAssessmentId,
   completeByAssessmentId,
-  endByInvigilatorByAssessmentId,
   findLastCompletedAssessmentsForEachCompetenceByUser,
   findNotAbortedCampaignAssessmentsByUserId,
   get,
