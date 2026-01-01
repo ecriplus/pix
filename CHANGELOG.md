@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## [5.290.3](https://github.com/1024pix/pix/compare/v5.290.2...v5.290.3) (2026-01-01)
+
+### :building_construction: Tech
+
+- [#14539](https://github.com/1024pix/pix/pull/14539) :broom: Suppression d'une fonction inutilisé dans le `assessement-repository` (PIX-20963) 
+- [#14510](https://github.com/1024pix/pix/pull/14510) :recycle: Utilise le terme `invigilator` plutôt que `supervisor` dans les traduction (Pix-20947) 
+- [#14546](https://github.com/1024pix/pix/pull/14546) Migrer les routes d'Admin "complementary-certifications" (PIX-20958). 
+
+### :arrow_up: Montée de version
+
+- [#14541](https://github.com/1024pix/pix/pull/14541) Update dependency @1024pix/eslint-plugin to ^2.1.15 (admin) 
+- [#14542](https://github.com/1024pix/pix/pull/14542) Update dependency @1024pix/eslint-plugin to ^2.1.15 (api) 
+- [#14544](https://github.com/1024pix/pix/pull/14544) Update dependency @1024pix/eslint-plugin to ^2.1.15 (audit-logger) 
+- [#14545](https://github.com/1024pix/pix/pull/14545) Update dependency @1024pix/eslint-plugin to ^2.1.15 (certif) 
+- [#14548](https://github.com/1024pix/pix/pull/14548) Update dependency @1024pix/eslint-plugin to ^2.1.15 (dossier racine) 
+- [#14549](https://github.com/1024pix/pix/pull/14549) Update dependency @1024pix/eslint-plugin to ^2.1.15 (e2e-playwright) 
+- [#14550](https://github.com/1024pix/pix/pull/14550) Update dependency @1024pix/eslint-plugin to ^2.1.15 (junior) 
+- [#14551](https://github.com/1024pix/pix/pull/14551) Update dependency @1024pix/eslint-plugin to ^2.1.15 (mon-pix) 
+- [#14555](https://github.com/1024pix/pix/pull/14555) Update dependency @1024pix/eslint-plugin to ^2.1.15 (orga) 
+- [#14535](https://github.com/1024pix/pix/pull/14535) Update dependency @1024pix/pix-ui to ^55.33.0 (certif) 
+- [#14556](https://github.com/1024pix/pix/pull/14556) Update dependency @1024pix/pix-ui to ^55.33.0 (mon-pix) 
+- [#14558](https://github.com/1024pix/pix/pull/14558) Update dependency ember-cli to ~6.9.0 (admin)
+
 ## [5.290.2](https://github.com/1024pix/pix/compare/v5.290.1...v5.290.2) (2025-12-31)
 
 ### :building_construction: Tech
