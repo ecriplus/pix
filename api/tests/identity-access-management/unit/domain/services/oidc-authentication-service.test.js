@@ -1089,7 +1089,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
     });
 
-    it('creates an openid client with extra meatadata', async function () {
+    it('creates an openid client with extra metadata', async function () {
       // given
       const clientId = 'clientId';
       const clientSecret = 'clientSecret';
