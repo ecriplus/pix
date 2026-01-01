@@ -243,7 +243,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     });
 
     context('when openIdClient endSessionUrl fails', function () {
-      it('throws an error and logs a message in datadog', async function () {
+      it('throws an error and logs monitoring data', async function () {
         // given
         const idToken = 'some_dummy_id_token';
         const userId = 'some_dummy_user_id';
@@ -335,7 +335,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     });
 
     context('when openIdClient callback fails', function () {
-      it('throws an error and logs a message in datadog', async function () {
+      it('throws an error and logs monitoring data', async function () {
         const clientId = 'clientId';
         const clientSecret = 'clientSecret';
         const identityProvider = 'identityProvider';
@@ -441,7 +441,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     });
 
     context('when generating the authorization url fails', function () {
-      it('throws an error and logs a message in datadog', async function () {
+      it('throws an error and logs monitoring data', async function () {
         // given
         const clientId = 'clientId';
         const clientSecret = 'clientSecret';
@@ -736,7 +736,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     });
 
     context('when openIdClient userinfo fails', function () {
-      it('throws an error and logs a message in datadog', async function () {
+      it('throws an error and logs monitoring data', async function () {
         const clientId = 'OIDC_CLIENT_ID';
         const clientSecret = 'OIDC_CLIENT_SECRET';
         const identityProvider = 'identityProvider';
