@@ -242,7 +242,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       );
     });
 
-    context('when OpenId Client endSessionUrl fails', function () {
+    context('when openIdClient endSessionUrl fails', function () {
       it('throws an error and logs a message in datadog', async function () {
         // given
         const idToken = 'some_dummy_id_token';
@@ -334,7 +334,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       expect(result).to.deep.equal(oidcAuthenticationSessionContent);
     });
 
-    context('when OpenId Client callback fails', function () {
+    context('when openIdClient callback fails', function () {
       it('throws an error and logs a message in datadog', async function () {
         const clientId = 'clientId';
         const clientSecret = 'clientSecret';
@@ -735,7 +735,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
     });
 
-    context('when OpenId Client userinfo fails', function () {
+    context('when openIdClient userinfo fails', function () {
       it('throws an error and logs a message in datadog', async function () {
         const clientId = 'OIDC_CLIENT_ID';
         const clientSecret = 'OIDC_CLIENT_SECRET';
@@ -1061,7 +1061,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
   });
 
   describe('#initializeClientConfig', function () {
-    it('creates an openid client', async function () {
+    it('creates an openIdClient', async function () {
       // given
       const clientId = 'clientId';
       const clientSecret = 'clientSecret';
@@ -1089,7 +1089,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
     });
 
-    it('creates an openid client with extra metadata', async function () {
+    it('creates an openIdClient with extra metadata', async function () {
       // given
       const clientId = 'clientId';
       const clientSecret = 'clientSecret';
