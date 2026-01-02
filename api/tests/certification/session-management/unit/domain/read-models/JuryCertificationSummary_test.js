@@ -53,7 +53,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         const juryCertificationSummary = new JuryCertificationSummary({ isEndedByInvigilator: true });
 
         // then
-        expect(juryCertificationSummary.status).equal('endedBySupervisor');
+        expect(juryCertificationSummary.status).equal('endedByInvigilator');
       });
     });
 

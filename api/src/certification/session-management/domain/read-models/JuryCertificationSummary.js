@@ -1,7 +1,7 @@
 import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 const STARTED = 'started';
-const ENDED_BY_INVIGILATOR = 'endedBySupervisor';
+const ENDED_BY_INVIGILATOR = 'endedByInvigilator';
 const CORE_CERTIFICATION = 'CORE';
 const DOUBLE_CORE_CLEA_CERTIFICATION = 'DOUBLE_CORE_CLEA';
 
