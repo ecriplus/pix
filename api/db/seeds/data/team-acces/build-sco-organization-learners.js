@@ -17,14 +17,14 @@ function _buildScoOrganizationLearnerWithAllConnectionTypes(databaseBuilder) {
   const scoUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Eliza',
     lastName: 'Delajungle',
-    email: 'eliza-dlj@school.net',
+    email: 'eliza-dlj@example.net',
     username: 'eliza.delajungle.0101',
   });
 
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Kelly',
     lastName: 'Coptere',
-    email: 'kelly-coptere@school.net',
+    email: 'kelly-coptere@example.net',
     username: 'kelly.coptere.0101',
   });
 
@@ -89,14 +89,14 @@ function _buildScoOrganizationLearnerWithUsernameAndEmail(databaseBuilder) {
   const scoUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Naruto',
     lastName: 'Uzumaki',
-    email: 'hokage@school.net',
+    email: 'hokage@example.net',
     username: 'naruto.uzumaki.0303',
   });
 
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Jean',
     lastName: 'Serien',
-    email: 'jean.serien@school.net',
+    email: 'jean.serien@example.net',
     username: 'jean.serien.0303',
   });
 
@@ -123,21 +123,21 @@ function _buildScoOrganizationLearnerWithEmailAndMediacentre(databaseBuilder) {
   const scoUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Bart',
     lastName: 'Simpson',
-    email: 'bart@school.net',
+    email: 'bart@example.net',
     username: null,
   });
 
   const scoOtherUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Chihiro',
     lastName: 'Ogino',
-    email: 'chihiro.ogino@miyazaki.net',
+    email: 'chihiro.ogino@example.net',
     username: null,
   });
 
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Emma',
     lastName: 'Gnolia',
-    email: 'emma.gnolia@school.net',
+    email: 'emma.gnolia@example.net',
     username: null,
   });
 
@@ -174,14 +174,14 @@ function _buildScoOrganizationLearnerWithEmail(databaseBuilder) {
   const scoUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Hermione',
     lastName: 'Granger',
-    email: 'hermione@school.net',
+    email: 'hermione@example.net',
     username: null,
   });
 
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Melanie',
     lastName: 'Croche',
-    email: 'melanie.croche@school.net',
+    email: 'melanie.croche@example.net',
     username: null,
   });
 
