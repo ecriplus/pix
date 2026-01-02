@@ -30,19 +30,4 @@
       width: 100%;
     }
   }
-
-  &__recover-access {
-    @extend %pix-body-s;
-
-    padding-top: var(--pix-spacing-8x);
-    text-align: left;
-
-    &__question {
-      font-weight: var(--pix-font-bold);
-    }
-
-    &__message {
-      color: var(--pix-neutral-500);
-    }
-  }
 }

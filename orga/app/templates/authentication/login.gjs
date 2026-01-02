@@ -1,3 +1,4 @@
+import { LinkTo } from '@ember/routing';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AuthenticationIdentityProviders from 'pix-orga/components/authentication/authentication-identity-providers';
@@ -18,11 +19,23 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
       </div>
 
       <LoginForm
-        @isWithInvitation={{false}}
         @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
         @onSubmit={{@controller.authenticate}}
       />
+      {{#if @controller.displayRecoveryLink}}
+        <div class="authentication-login__recover-access">
+          <p class="authentication-login__recover-access__question">
+            {{t "pages.login-form.admin-role-question"}}
+          </p>
+          <LinkTo class="link link--black link--underlined" @route="join-request">
+            {{t "pages.login-form.active-or-retrieve"}}
+          </LinkTo>
+          <div class="authentication-login__recover-access__message">
+            ({{t "pages.login-form.only-for-admin"}})
+          </div>
+        </div>
+      {{/if}}
 
       <AuthenticationIdentityProviders />
     </:content>

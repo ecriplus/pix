@@ -69,40 +69,4 @@ module('Integration | Component | LoginForm', function (hooks) {
       assert.dom(screen.getByText(t('pages.login-form.invitation-was-cancelled'))).exists();
     });
   });
-
-  module('recovery link', function () {
-    module('when domain is pix.org', function () {
-      test('does not display recovery link', async function (assert) {
-        // given
-        const onSubmitStub = sinon.stub();
-        const domainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(domainService, 'getExtension').returns('org');
-
-        // when
-        await render(<template><LoginForm @onSubmit={{onSubmitStub}} /></template>);
-
-        // then
-        assert.dom('.authentication-login-form__recover-access__question').doesNotExist();
-        assert.dom('.authentication-login-form__recover-access .link--underlined').doesNotExist();
-        assert.dom('.authentication-login-form__recover-access__message').doesNotExist();
-      });
-    });
-
-    module('when domain is pix.fr', function () {
-      test('displays recovery link', async function (assert) {
-        // given
-        const onSubmitStub = sinon.stub();
-        const domainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(domainService, 'getExtension').returns('fr');
-
-        // when
-        await render(<template><LoginForm @onSubmit={{onSubmitStub}} /></template>);
-
-        // then
-        assert.dom('.authentication-login-form__recover-access__question').exists();
-        assert.dom('.authentication-login-form__recover-access .link--underlined').exists();
-        assert.dom('.authentication-login-form__recover-access__message').exists();
-      });
-    });
-  });
 });
