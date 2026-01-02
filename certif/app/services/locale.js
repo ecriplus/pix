@@ -100,11 +100,13 @@ export default class LocaleService extends Service {
     this.__currentLocale = nearestLocale;
 
     const language = this.#getLanguageFromLocale(nearestLocale);
-    this.intl.setLocale(language);
+
+    this.intl.setLocale([nearestLocale, language, DEFAULT_LANGUAGE]);
 
     // dayjsService may not be available for the different front apps
     const dayjsService = getOwner(this).lookup('service:dayjs');
     if (dayjsService) {
+      // dayjs supports locale fallback to baseLocale, but dayjsService does not
       dayjsService.setLocale(language);
     }
 
