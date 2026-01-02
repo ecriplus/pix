@@ -29,6 +29,10 @@ export default class OidcIdentityProviders extends Service {
     return this.list.length > 0;
   }
 
+  findByCode(identityProviderCode) {
+    return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
+  }
+
   // TODO: Manage this through the API
   get featuredIdentityProvider() {
     return this.list.find((identityProvider) => {

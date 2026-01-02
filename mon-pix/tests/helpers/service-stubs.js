@@ -185,6 +185,10 @@ export function stubOidcIdentityProvidersService(owner, { oidcIdentityProviders,
       return this.list.length > 0;
     }
 
+    findByCode(identityProviderCode) {
+      return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
+    }
+
     get featuredIdentityProvider() {
       return this.list.find((identityProvider) => {
         return identityProvider.code === this.featuredIdentityProviderCode;

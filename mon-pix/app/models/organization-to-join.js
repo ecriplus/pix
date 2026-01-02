@@ -9,8 +9,4 @@ export default class OrganizationToJoin extends Model {
   @attr('boolean') isReconciliationRequired;
   @attr('boolean') hasReconciliationFields;
   @attr() reconciliationFields;
-
-  isRestrictedByIdentityProvider(identityProviderCode) {
-    return this.identityProvider === identityProviderCode;
-  }
 }

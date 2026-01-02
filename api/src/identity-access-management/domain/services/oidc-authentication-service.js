@@ -129,7 +129,11 @@ export class OidcAuthenticationService {
         metadata,
       );
     } catch (error) {
-      logger.error(`OIDC Provider "${this.identityProvider}" is UNAVAILABLE: ${error}`);
+      _monitorOidcError(`Failed init for OIDC Provider "${this.identityProvider}"`, {
+        data: { organizationName: this.organizationName },
+        error,
+        event: 'initialize-client-config',
+      });
     }
   }
 
@@ -329,9 +333,13 @@ function _monitorOidcError(message, { data, error, event }) {
   };
 
   if (error) {
-    monitoringData.error = { name: error.constructor.name };
-    error.error_uri && Object.assign(monitoringData.error, { errorUri: error.error_uri });
-    error.response && Object.assign(monitoringData.error, { response: error.response });
+    monitoringData.error = {
+      name: error.constructor.name,
+      message: error.message,
+      stack: error.stack,
+      ...(error.error_uri && { errorUri: error.error_uri }),
+      ...(error.response && { response: error.response }),
+    };
   }
 
   logger.error(monitoringData);
