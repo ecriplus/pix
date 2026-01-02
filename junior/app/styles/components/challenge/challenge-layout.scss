@@ -6,34 +6,34 @@
   border-radius: 24px;
 
   &--default {
-    background-color: rgba(var(--pix-primary-500-inline), 10%);
+    background-color: rgb(var(--pix-primary-500-inline), 10%);
   }
 
   &--error {
-    background-color: rgba(var(--pix-error-500-inline), 10%);
+    background-color: rgb(var(--pix-error-500-inline), 10%);
     border: 2px solid var(--pix-error-500);
   }
 
   &--success {
-    background-color: rgba(var(--pix-success-500-inline), 10%);
+    background-color: rgb(var(--pix-success-500-inline), 10%);
     border: 2px solid var(--pix-success-500);
   }
 
   &--feedback {
-    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-color: rgb(var(--pix-secondary-500-inline), 10%);
   }
 
   &--feedback--success {
-    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-color: rgb(var(--pix-secondary-500-inline), 10%);
     background-image: url("/images/background-stars-success.svg");
   }
 
   &--result {
-    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-color: rgb(var(--pix-secondary-500-inline), 10%);
   }
 
   &--result--success {
-    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-color: rgb(var(--pix-secondary-500-inline), 10%);
     background-image: url("/images/background-success-result-page.svg");
   }
 }

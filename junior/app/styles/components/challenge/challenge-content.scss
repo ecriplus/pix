@@ -2,11 +2,11 @@
 
 .challenge-content {
   display: grid;
-  grid-row-gap: var(--pix-spacing-4x);
-  grid-column-gap: var(--pix-spacing-6x);
   grid-template-columns: 1fr;
   margin: 16px 140px 0;
+  column-gap: var(--pix-spacing-6x);
   transition: all 0.4s;
+  row-gap: var(--pix-spacing-4x);
 
   @include breakpoints.device-is('tablet') {
     margin: 16px 120px 0;
