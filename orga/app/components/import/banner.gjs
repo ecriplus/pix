@@ -35,9 +35,9 @@ export default class ImportBanner extends Component {
   get displayBanner() {
     return Boolean(
       this.args.isLoading ||
-        this.args.organizationImportDetail?.inProgress ||
-        this.args.organizationImportDetail?.hasError ||
-        this.args.organizationImportDetail?.hasWarning,
+      this.args.organizationImportDetail?.inProgress ||
+      this.args.organizationImportDetail?.hasError ||
+      this.args.organizationImportDetail?.hasWarning,
     );
   }
 
