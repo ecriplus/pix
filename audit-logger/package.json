@@ -42,7 +42,7 @@
     "@1024pix/eslint-plugin": "^2.1.15",
     "@babel/eslint-parser": "^7.28.0",
     "@eslint/compat": "^2.0.0",
-    "@tsconfig/node20": "^20.1.6",
+    "@tsconfig/node22": "^22.0.0",
     "@types/bcrypt": "^6.0.0",
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.0.14",
