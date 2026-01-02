@@ -20,7 +20,7 @@ export default class CurrentUserService extends Service {
   get canAccessImportPage() {
     return Boolean(
       (this.isSCOManagingStudents || this.isSUPManagingStudents || this.hasLearnerImportFeature) &&
-        this.isAdminInOrganization,
+      this.isAdminInOrganization,
     );
   }
 

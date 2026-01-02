@@ -95,7 +95,7 @@
     height: 1px;
     overflow: hidden;
     border: 0;
-    clip: rect(0, 0, 0, 0);
+    clip-path: rect(0, 0, 0, 0);
 
     &:focus-visible + .campaign-filters__tab {
       z-index: 1;
