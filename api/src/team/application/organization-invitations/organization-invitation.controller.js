@@ -8,14 +8,14 @@ import { serializer as scoOrganizationInvitationSerializer } from '../../infrast
 
 const acceptOrganizationInvitation = async function (request) {
   const organizationInvitationId = request.params.id;
-  const { code, email: rawEmail } = request.payload.data.attributes;
+  const { code, email, 'user-id': userId } = request.payload.data.attributes;
   const locale = getUserLocale(request);
-  const email = rawEmail?.trim().toLowerCase();
 
   const membership = await usecases.acceptOrganizationInvitation({
     organizationInvitationId,
     code,
     email,
+    userId,
     locale,
   });
   await usecases.createCertificationCenterMembershipForScoOrganizationAdminMember({ membership });

@@ -42,7 +42,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
         status: organizationInvitation.status,
       });
       organizationInvitedUserRepository.get
-        .withArgs({ organizationInvitationId: organizationInvitation.id, email })
+        .withArgs({ organizationInvitationId: organizationInvitation.id, email, userId: undefined })
         .resolves(organizationInvitedUser);
 
       // when
@@ -164,7 +164,9 @@ function createContext({ organizationInvitedUserRepository, userRepository, user
     userId: user.id,
     invitation: { code, id: organizationInvitationId },
   });
-  organizationInvitedUserRepository.get.withArgs({ organizationInvitationId, email }).resolves(organizationInvitedUser);
+  organizationInvitedUserRepository.get
+    .withArgs({ organizationInvitationId, email, userId: undefined })
+    .resolves(organizationInvitedUser);
 
   sinon.stub(organizationInvitedUser, 'acceptInvitation').resolves();
 

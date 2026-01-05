@@ -17,6 +17,7 @@ const acceptOrganizationInvitation = async function ({
   organizationInvitationId,
   code,
   email,
+  userId,
   locale,
   organizationInvitationRepository,
   organizationInvitedUserRepository,
@@ -24,7 +25,7 @@ const acceptOrganizationInvitation = async function ({
 }) {
   let organizationInvitedUser;
   try {
-    organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, email });
+    organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, email, userId });
     organizationInvitedUser.acceptInvitation({ code });
   } catch (error) {
     if (error instanceof AlreadyExistingMembershipError) {
