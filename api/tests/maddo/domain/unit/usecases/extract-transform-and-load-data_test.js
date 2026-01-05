@@ -170,9 +170,10 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
           { datawarehouseKnex, datamartKnex, foo: 'foo', bar: 'bar' },
           [2, 3],
         );
-        expect(toFunction).to.have.been.calledWithExactly({ datawarehouseKnex, datamartKnex, foo: 'foo', bar: 'bar' }, [
-          4,
-        ]);
+        expect(toFunction).to.have.been.calledWithExactly(
+          { datawarehouseKnex, datamartKnex, foo: 'foo', bar: 'bar' },
+          [4],
+        );
 
         expect(toQueryBuilder.connection).to.have.been.calledThrice;
       });
