@@ -30,7 +30,7 @@ export default class PgClient {
     try {
       await instance.client.connect();
     } catch (error) {
-      logger.error('Database error', error);
+      logger.error(error, 'Database error');
     }
 
     return instance;

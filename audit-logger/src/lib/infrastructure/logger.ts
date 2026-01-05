@@ -20,10 +20,8 @@ if (logging.logForHumans) {
     translateTime: omitDay,
     ignore: 'pid,hostname',
   });
-  // @ts-expect-error library types definitions are not correct
   logger = pino(loggerOptions, prettyPrint);
 } else {
-  // @ts-expect-error library types definitions are not correct
   logger = pino(loggerOptions);
 }
 
