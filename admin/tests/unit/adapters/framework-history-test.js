@@ -17,7 +17,7 @@ module('Unit | Adapter | framework-history', function (hooks) {
       adapter.queryRecord(store, 'framework-history', 'DROIT');
 
       // then
-      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/complementary-certifications/DROIT/framework-history`;
+      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/certification-frameworks/DROIT/framework-history`;
       assert.ok(adapter.ajax.calledWith(expectedUrl, 'GET'));
     });
   });

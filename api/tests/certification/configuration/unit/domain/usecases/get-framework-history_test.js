@@ -4,7 +4,7 @@ import { expect, sinon } from '../../../../../test-helper.js';
 describe('Certification | Configuration | Unit | UseCase | get-framework-history', function () {
   it('should return the framework history', async function () {
     // given
-    const complementaryCertificationKey = Symbol('complementaryCertificationKey');
+    const scope = Symbol('Scopes');
 
     const versionsRepository = {
       getFrameworkHistory: sinon.stub(),
@@ -17,14 +17,12 @@ describe('Certification | Configuration | Unit | UseCase | get-framework-history
 
     // when
     const frameworkHistory = await getFrameworkHistory({
-      complementaryCertificationKey,
+      scope,
       versionsRepository,
     });
 
     // then
-    expect(versionsRepository.getFrameworkHistory).to.have.been.calledOnceWithExactly({
-      scope: complementaryCertificationKey,
-    });
+    expect(versionsRepository.getFrameworkHistory).to.have.been.calledOnceWithExactly({ scope });
 
     expect(frameworkHistory).to.deep.equal([currentVersion, previousVersion]);
   });

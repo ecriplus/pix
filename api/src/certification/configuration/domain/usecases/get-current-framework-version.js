@@ -9,21 +9,21 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
  * @param {object} params
- * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
+ * @param {Scope} params.scope
  * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository
  * @param {LearningContentRepository} params.learningContentRepository
  * @param {VersionsRepository} params.versionsRepository
  */
 export const getCurrentFrameworkVersion = async ({
-  complementaryCertificationKey,
+  scope,
   frameworkChallengesRepository,
   learningContentRepository,
   versionsRepository,
 }) => {
-  const activeVersion = await versionsRepository.findActiveByScope({ scope: complementaryCertificationKey });
+  const activeVersion = await versionsRepository.findActiveByScope({ scope });
 
   if (!activeVersion) {
-    throw new NotFoundError(`There is no framework for complementary ${complementaryCertificationKey}`);
+    throw new NotFoundError(`There is no framework for complementary ${scope}`);
   }
 
   const challenges = await frameworkChallengesRepository.getByVersionId({

@@ -188,4 +188,47 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       expect(response.result.included).to.have.lengthOf(5);
     });
   });
+  describe('GET /api/admin/certification-frameworks/{scope}/framework-history', function () {
+    it('should return the framework history for given scope ordered by start date descending', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const newerVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: Scopes.CORE,
+        startDate: new Date('2025-01-11'),
+        expirationDate: null,
+      });
+
+      const olderVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: Scopes.CORE,
+        startDate: new Date('2024-01-11'),
+        expirationDate: newerVersion.expirationDate,
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/certification-frameworks/${Scopes.CORE}/framework-history`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.deep.equal({
+        id: Scopes.CORE,
+        type: 'framework-histories',
+        attributes: {
+          scope: Scopes.CORE,
+          history: [
+            { id: newerVersion.id, startDate: newerVersion.startDate, expirationDate: newerVersion.expirationDate },
+            { id: olderVersion.id, startDate: olderVersion.startDate, expirationDate: olderVersion.expirationDate },
+          ],
+        },
+      });
+    });
+  });
 });

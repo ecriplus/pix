@@ -41,4 +41,26 @@ describe('Integration | Certification | Configuration | Application | Router | c
       });
     });
   });
+  describe('GET /api/admin/certification-frameworks/{scope}/framework-history', function () {
+    describe('Error cases', function () {
+      let httpTestServer;
+
+      beforeEach(async function () {
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+        httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+      });
+
+      it('should return 400 when scope parameter is not valid', async function () {
+        sinon.stub(certificationFrameworkController, 'getFrameworkHistory').returns('ok');
+
+        const response = await httpTestServer.request(
+          'GET',
+          '/api/admin/certification-frameworks/INVALID_SCOPE/framework-history',
+        );
+
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+  });
 });
