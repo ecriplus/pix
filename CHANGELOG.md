@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## [5.291.1](https://github.com/1024pix/pix/compare/v5.291.0...v5.291.1) (2026-01-05)
+
+### :building_construction: Tech
+
+- [#14600](https://github.com/1024pix/pix/pull/14600) Corriger les erreurs de type d'audit logger 
+
+### :arrow_up: Montée de version
+
+- [#14593](https://github.com/1024pix/pix/pull/14593) Lock file maintenance (api)
+
 # [5.291.0](https://github.com/1024pix/pix/compare/v5.290.3...v5.291.0) (2026-01-05)
 
 ### :rocket: Amélioration
