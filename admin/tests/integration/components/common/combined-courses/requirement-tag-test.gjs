@@ -45,4 +45,17 @@ module('Integration | Component |  common/combined-courses/requirement-tag', fun
 
     assert.ok(removeStub.calledOnceWith(item));
   });
+
+  test('should hide remove button when onRemove is not provided', async function (assert) {
+    const item = {
+      type: 'module',
+      value: 'abc-123',
+    };
+
+    const screen = await renderScreen(
+      <template><RequirementTag @type={{item.type}} @value={{item.value}} /></template>,
+    );
+
+    assert.notOk(screen.queryByRole('button'));
+  });
 });

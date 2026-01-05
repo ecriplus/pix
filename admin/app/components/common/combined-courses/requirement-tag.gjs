@@ -15,8 +15,12 @@ export default class RequirementTag extends Component {
     this.args.onRemove?.({ type: this.args.type, value: this.args.value });
   }
 
+  get displayRemoveButton() {
+    return this.args.onRemove;
+  }
+
   <template>
-    <PixTag @color={{getItemColor @type}} @displayRemoveButton={{true}} @onRemove={{this.onRemove}}>
+    <PixTag @color={{getItemColor @type}} @displayRemoveButton={{this.displayRemoveButton}} @onRemove={{this.onRemove}}>
       {{t (getItemType @type)}}
       -
       {{@value}}
