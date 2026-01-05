@@ -409,7 +409,7 @@
               "element": {
                 "id": "46999db8-c96c-42e8-93ac-a558c72a55f2",
                 "type": "text",
-                "content": "<p>Martin a reçu un message de Jérôme sur le groupe de parents de l'équipe de rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
+                "content": "<p>Djibril a reçu un message de Brian sur le groupe de parents de l'équipe de rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
               }
             },
             {
@@ -417,9 +417,9 @@
               "element": {
                 "id": "6e6af05b-b933-4022-baa9-6194fdb63584",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/IAInfox_NOV/telephone_deepfake_entraineurjolieville.png",
+                "url": "https://assets.pix.org/modules/IAInfox_NOV/entraineurjolieville.png",
                 "alt": "",
-                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanée nommé « Parents du rugby »:&nbsp;<br>Jérôme partage une photo d'un homme avec une veste où est indiqué le mot « Jolieville ». Cet homme est en train de donner une enveloppe à un autre homme qui porte une veste indiquant le mot « Calmeville ». Sous la photo, Jérôme a écrit le message suivant&nbsp;:«&nbsp;Alerte corruption ! L’entraîneur de l’équipe de Jolieville a été aperçu en train de donner une enveloppe à l’entraîneur de l’équipe de Calmeville. Comme par hasard, Calmeville a perdu le lendemain !»</p>",
+                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanée nommé « Parents du rugby »:&nbsp;<br>Brian partage une photo d'un homme avec une veste où est indiqué le mot « Jolieville ». Cet homme est en train de donner une enveloppe à un autre homme qui porte une veste indiquant le mot « Calmeville ». Sous la photo, Brian a écrit le message suivant&nbsp;:«&nbsp;Alerte corruption ! L’entraîneur de l’équipe de Jolieville a été aperçu en train de donner une enveloppe à l’entraîneur de l’équipe de Calmeville. Comme par hasard, Calmeville a perdu le lendemain !»</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -429,11 +429,11 @@
               "element": {
                 "id": "35425bd8-df9b-402d-a576-2f0fe96d35ad",
                 "type": "qcu-discovery",
-                "instruction": "<p>Qu’est-ce que Martin devrait faire avec ce message ?</p><p></p>",
+                "instruction": "<p>Qu’est-ce que Djibril devrait faire avec ce message ?</p><p></p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Liker le message de Jérôme.</p>",
+                    "content": "<p>Liker le message de Brian.</p>",
                     "feedback": {
                       "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le <strong>bon réflexe</strong>, c’est de vérifier <strong>d’où l’image vient</strong> et <strong>si elle est vraie</strong>. <br>Liker de fausses informations peut alimenter des situations de <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
@@ -447,7 +447,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Demander à Jérôme d’où vient cette photo.</p>",
+                    "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> ! <br>La partager, en revanche, pourrait alimenter des situations de <strong>cyberharcèlement</strong>.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
