@@ -754,12 +754,19 @@ function routes() {
   this.post('/oidc/users', (schema, request) => {
     const payload = JSON.parse(request.requestBody);
     const identityProvider = payload.data.attributes.identity_provider;
-    const profile = schema.profiles.create({ pixScore: 1 });
     const createdUser = schema.users.create({
       firstName: 'Lloyd',
       lastName: 'Cé',
       lang: 'fr',
-      profile,
+    });
+    schema.prescribers.create({
+      id: createdUser.id,
+      lang: createdUser.lang,
+      firstName: createdUser.firstName,
+      lastName: createdUser.lastName,
+      features: {
+        PLACES_MANAGEMENT: { active: false },
+      },
     });
 
     return {
