@@ -527,6 +527,9 @@ jobs:
           name: Lint
           command: npm run lint
       - run:
+          name: Type checking
+          command: npm run tsc
+      - run:
           name: Test
           command: npm run test
           environment:
