@@ -10,6 +10,15 @@ export async function getAllByIds({ ids, moduleDatasource }) {
   }
 }
 
+export async function getBySlug({ slug, moduleDatasource }) {
+  try {
+    const module = await moduleDatasource.getBySlug(slug);
+    return _toDomain(module);
+  } catch (error) {
+    throw new NotFoundError(error.message);
+  }
+}
+
 function _toDomain(module) {
   const { id, shortId, slug, title, isBeta, details } = module;
   return new ModuleMetadata({ id, shortId, slug, title, isBeta, duration: details.duration, image: details.image });
