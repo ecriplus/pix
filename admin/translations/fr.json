@@ -474,8 +474,11 @@
           "target-profile": "Profil cible"
         },
         "notifications": {
+          "addItemError": "Oups. Une erreur est survenue lors de l'ajout de la ressource.",
           "error": "Oups. Une erreur est survenue lors de la création du schéma de parcours.",
-          "success": "Création du schéma de parcours réussi !"
+          "moduleNotFound": "Il n'existe pas de module avec l'identifiant saisi",
+          "success": "Création du schéma de parcours réussi !",
+          "targetProfileNotFound": "Il n'existe pas de profil cible avec l'identifiant saisi"
         },
         "title": "Créer un schéma de parcours"
       },

@@ -35,17 +35,25 @@ export default class CombineCourseBluePrintForm extends Component {
   }
 
   @action
-  addItem(event) {
+  async addItem(event) {
     event.preventDefault();
-    if (this.itemType === 'targetProfile') {
-      this.addTargetProfile();
-    } else {
-      this.addModule();
+    try {
+      if (this.itemType === 'targetProfile') {
+        await this.addTargetProfile();
+      } else {
+        await this.addModule();
+      }
+    } catch (responseError) {
+      this.#handleErrorForResource(this.itemType, responseError);
+    } finally {
+      this.itemValue = null;
+      document.getElementsByName('itemType')[0].focus();
     }
-    document.getElementsByName('itemType')[0].focus();
   }
 
-  addTargetProfile() {
+  async addTargetProfile() {
+    await this.store.findRecord('target-profile', this.itemValue);
+
     this.blueprint.content = [
       ...this.blueprint.content,
       {
@@ -53,11 +61,11 @@ export default class CombineCourseBluePrintForm extends Component {
         value: Number(this.itemValue),
       },
     ];
-
-    this.itemValue = null;
   }
 
-  addModule() {
+  async addModule() {
+    await this.store.findRecord('module', this.itemValue);
+
     this.blueprint.content = [
       ...this.blueprint.content,
       {
@@ -65,8 +73,18 @@ export default class CombineCourseBluePrintForm extends Component {
         value: this.itemValue,
       },
     ];
+  }
 
-    this.itemValue = null;
+  #handleErrorForResource(resourceName, responseError) {
+    if (responseError.errors?.some(({ status }) => status === '404')) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t(`components.combined-course-blueprints.create.notifications.${resourceName}NotFound`),
+      });
+    } else {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.combined-course-blueprints.create.notifications.addItemError'),
+      });
+    }
   }
 
   @action

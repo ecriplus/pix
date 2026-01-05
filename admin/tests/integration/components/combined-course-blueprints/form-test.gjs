@@ -26,6 +26,9 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     const pixToastSuccessStub = sinon.stub(pixToast, 'sendSuccessNotification');
 
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+    const findRecordStub = sinon.stub(store, 'findRecord');
+    findRecordStub.withArgs('module').resolves();
+    findRecordStub.withArgs('target-profile').resolves();
 
     //when
 
@@ -35,13 +38,13 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
       1,
     );
-    await screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }).click();
-    await screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')).click();
+    await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
+    await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
     await fillIn(
       screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
       'module-123',
     );
-    await screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }).click();
+    await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
     await fillIn(
       screen.getByLabelText(t('components.combined-course-blueprints.create.labels.name'), { exact: false }),
       'name',
@@ -61,9 +64,10 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       'description',
     );
 
-    await screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }).click();
+    await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
     //then
+    assert.ok(findRecordStub.calledTwice);
     assert.ok(blueprintStub.save.calledOnce);
     assert.strictEqual(blueprintStub.name, 'name');
     assert.strictEqual(blueprintStub.internalName, 'internalName');
@@ -83,8 +87,12 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
   test('it should remove item when user clicks on remove button', async function (assert) {
     // given
     const pixToast = this.owner.lookup('service:pixToast');
-    sinon.stub(pixToast, 'sendSuccessNotification');
+    const store = this.owner.lookup('service:store');
 
+    sinon.stub(pixToast, 'sendSuccessNotification');
+    const findRecordStub = sinon.stub(store, 'findRecord');
+
+    findRecordStub.withArgs('target-profile').resolves();
     //when
 
     const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
@@ -117,9 +125,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-      await screen
-        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
-        .click();
+      await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
       //then
       assert.ok(blueprintStub.save.calledOnce);
@@ -147,9 +153,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-      await screen
-        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
-        .click();
+      await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
       //then
       assert.ok(blueprintStub.save.calledOnce);
@@ -183,9 +187,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-      await screen
-        .getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') })
-        .click();
+      await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
       //then
       assert.ok(blueprintStub.save.calledOnce);
@@ -203,6 +205,99 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       assert.ok(
         pixToastErrorStub.calledWith({
           message: 'Une erreur est survenue',
+        }),
+      );
+    });
+
+    test('it should display an error if target profile does not exist', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = { save: sinon.stub().resolves(), content: [] };
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+      const findRecordStub = sinon.stub(store, 'findRecord');
+      findRecordStub
+        .withArgs('target-profile')
+        .rejects({ errors: [{ status: '404', detail: 'Le profil cible est introuvable' }] });
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        1,
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+
+      //then
+      assert.ok(
+        pixToastErrorStub.calledOnceWith({
+          message: t('components.combined-course-blueprints.create.notifications.targetProfileNotFound'),
+        }),
+      );
+    });
+
+    test('it should display an error if module does not exist', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = { save: sinon.stub().resolves(), content: [] };
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+      const findRecordStub = sinon.stub(store, 'findRecord');
+      findRecordStub.withArgs('module').rejects({ errors: [{ status: '404', detail: 'Le module est introuvable' }] });
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        'module-123',
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+
+      //then
+      assert.ok(
+        pixToastErrorStub.calledOnceWith({
+          message: t('components.combined-course-blueprints.create.notifications.moduleNotFound'),
+        }),
+      );
+    });
+
+    test('it should display an error if fetching ressource failed', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const pixToast = this.owner.lookup('service:pixToast');
+      const blueprintStub = { save: sinon.stub().resolves(), content: [] };
+      const pixToastErrorStub = sinon.stub(pixToast, 'sendErrorNotification');
+
+      sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
+      const findRecordStub = sinon.stub(store, 'findRecord');
+      findRecordStub.withArgs('target-profile').rejects();
+
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        1,
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+
+      //then
+      assert.ok(
+        pixToastErrorStub.calledOnceWith({
+          message: t('components.combined-course-blueprints.create.notifications.addItemError'),
         }),
       );
     });
