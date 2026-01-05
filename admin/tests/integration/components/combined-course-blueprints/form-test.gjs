@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { fillIn } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CombinedCourseBlueprintForm from 'pix-admin/components/combined-course-blueprints/form';
 import { module, test } from 'qunit';
@@ -17,6 +17,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     // then
     assert.ok(screen.getByRole('heading', { level: 1, name: t('components.combined-course-blueprints.create.title') }));
   });
+
   test('it should save blueprint in store and transition to combined course blueprint screen when data is valid', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
@@ -77,6 +78,29 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
         message: t('components.combined-course-blueprints.create.notifications.success'),
       }),
     );
+  });
+
+  test('it should remove item when user clicks on remove button', async function (assert) {
+    // given
+    const pixToast = this.owner.lookup('service:pixToast');
+    sinon.stub(pixToast, 'sendSuccessNotification');
+
+    //when
+
+    const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+    await fillIn(
+      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+      1,
+    );
+    await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
+
+    assert.ok(screen.getByText(/Profil Cible - 1/));
+
+    await click(screen.getByRole('button', { name: 'Supprimer' }));
+
+    //then
+    assert.notOk(screen.queryByText(/Profil Cible - 1/));
   });
 
   module('error cases', function () {
