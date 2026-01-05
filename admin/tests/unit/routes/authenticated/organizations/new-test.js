@@ -172,5 +172,28 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
         }),
       );
     });
+
+    module('when parentOrganizationId is provided', function () {
+      test('it should fetch the parent organization', async function (assert) {
+        // given
+        const transition = {
+          to: {
+            queryParams: {
+              parentOrganizationId: '1',
+            },
+          },
+        };
+        const store = route.store;
+        sinon.stub(store, 'findAll').resolves([]);
+        const findRecordStub = sinon.stub(store, 'findRecord').resolves({ id: '1', name: 'Parent Org' });
+
+        // when
+        const model = await route.model(undefined, transition);
+
+        // then
+        assert.ok(findRecordStub.calledWith('organization', '1'));
+        assert.deepEqual(model.parentOrganization, { id: '1', name: 'Parent Org' });
+      });
+    });
   });
 });

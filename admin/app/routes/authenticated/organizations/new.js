@@ -26,12 +26,18 @@ export default class NewRoute extends Route {
     }
   }
 
-  async model() {
+  async model(_, transition) {
     const administrationTeams = await this.store.findAll('administration-team');
     const countries = await this.store.findAll('country');
+    let parentOrganization = null;
+    const { parentOrganizationId } = transition.to.queryParams;
+    if (parentOrganizationId) {
+      parentOrganization = await this.store.findRecord('organization', parentOrganizationId);
+    }
     return RSVP.hash({
       administrationTeams,
       countries,
+      parentOrganization,
     });
   }
 
