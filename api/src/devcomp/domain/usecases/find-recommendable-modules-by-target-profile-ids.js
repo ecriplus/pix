@@ -4,7 +4,7 @@ import moduleService from '../services/module-service.js';
 const findRecommendableModulesByTargetProfileIds = async function ({
   targetProfileIds,
   trainingRepository,
-  moduleRepository,
+  moduleMetadataRepository,
   logger,
 }) {
   const recommendedTrainings = await trainingRepository.findModulesByTargetProfileIds({ targetProfileIds });
@@ -12,7 +12,7 @@ const findRecommendableModulesByTargetProfileIds = async function ({
   const recommendedModules = await Promise.all(
     recommendedTrainings.map(async ({ id, link, targetProfileIds }) => {
       try {
-        const module = await moduleService.getModuleByLink({ link, moduleRepository });
+        const module = await moduleService.getModuleByLink({ link, moduleMetadataRepository });
         return { id, moduleId: module.id, shortId: module.shortId, targetProfileIds };
       } catch {
         logger.error({ message: `Erreur sur le lien de la ressource : ${link}` });
