@@ -86,11 +86,12 @@ export class CombinedCourseBlueprint {
     }
   }
   static buildContentItems(items) {
-    return items.map(({ moduleShortId, targetProfileId }) => {
+    const data = items.map(({ moduleShortId, targetProfileId }) => {
       return moduleShortId
         ? { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleShortId }
         : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId };
     });
+    return Joi.attempt(data, contentSchema);
   }
 }
 
@@ -105,18 +106,20 @@ export const contentSchema = Joi.array()
       type: Joi.string()
         .valid(COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
         .required(),
-      value: Joi.alternatives().conditional('type', {
-        switch: [
-          {
-            is: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
-            then: Joi.number().integer().required(),
-          },
-          {
-            is: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
-            then: Joi.string().required(),
-          },
-        ],
-      }),
+      value: Joi.alternatives()
+        .conditional('type', {
+          switch: [
+            {
+              is: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
+              then: Joi.number().integer(),
+            },
+            {
+              is: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
+              then: Joi.string(),
+            },
+          ],
+        })
+        .required(),
     }),
   )
   .required()

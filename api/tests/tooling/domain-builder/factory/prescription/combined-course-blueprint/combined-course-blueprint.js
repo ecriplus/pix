@@ -8,7 +8,7 @@ export const buildCombinedCourseBlueprint = function ({
   illustration = 'images/illustration.svg',
   createdAt = new Date(),
   updatedAt,
-  content = [CombinedCourseBlueprint.buildContentItems([{ moduleId: 'module-id' }, { targetProfileId: 123 }])],
+  content = [CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'module-id' }, { targetProfileId: 123 }])],
 } = {}) {
   return new CombinedCourseBlueprint({
     id,
