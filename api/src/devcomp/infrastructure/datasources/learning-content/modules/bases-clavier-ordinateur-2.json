@@ -6,13 +6,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps : les majuscules ou la ponctuation par exemple.</p>",
-    "duration": 10,
+    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps&nbsp;: les majuscules ou la ponctuation par exemple.</p>",
+    "duration": 30,
     "level": "novice",
     "objectives": [
       "<p>Taper du texte comprenant des majuscules, chiffres et caractères spéciaux</p>",
       "<p>Comprendre la place des caractères sur les touches</p>",
-      "<p>Taper des caractères qui nécessitent d'utiliser plusieurs touches</p>"
+      "<p>Taper des caractères qui nécessitent d’utiliser plusieurs touches</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -54,7 +54,7 @@
               "element": {
                 "id": "f78cb6e8-3a9e-430b-b40e-b1a2f1221512",
                 "type": "qrocm",
-                "instruction": "<p>Utilisez votre clavier pour taper «&nbsp;voilà le zèbre déçu&nbsp;» dans la zone de texte ci-dessous :</p>",
+                "instruction": "<p>Dans la zone de texte ci-dessous, utilisez votre clavier pour taper&nbsp;&nbsp;:<br>voilà le zèbre déçu</p>",
                 "proposals": [
                   {
                     "input": "zebre-decu",
@@ -68,14 +68,14 @@
                     "tolerances": [],
                     "solutions": [
                       "voilà le zèbre déçu",
-                      "« voilà le zèbre déçu »"
+                      "« voilà le zèbre déçu »"
                     ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bonne réponse ! 🎉",
-                    "diagnosis": "<p>Bravo ! 🦓 Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>"
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>Bravo ! 🦓 Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>"
                   },
                   "invalid": {
                     "state": "Mauvaise réponse.",
@@ -89,7 +89,7 @@
               "element": {
                 "id": "0b771dad-3e31-4e0a-809e-6abd65653adb",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous :</p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
               }
             },
             {
@@ -107,7 +107,7 @@
                 "id": "8c18c2f0-b9f0-4ca6-8a77-92fb0604dbb9",
                 "type": "expand",
                 "title": "Indice 2",
-                "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><img src=\"https://assets.pix.org/draft/modules/KosRqGF.png\" alt=\"Les touches essentielles du clavier. Les lettres, les accents, effacer et entrée, l'espace et les flèches directionelles.\">"
+                "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><p><img src=\"https://assets.pix.org/draft/modules/KosRqGF.png\" alt=\"Les touches essentielles du clavier. Les lettres, les accents, effacer et entrée, l’espace et les flèches directionelles.\"></p>"
               }
             }
           ]
@@ -122,7 +122,7 @@
               "element": {
                 "id": "5cd44b4e-0534-4181-9478-101073d3a9b1",
                 "type": "text",
-                "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
+                "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
               }
             }
           ]
@@ -137,7 +137,7 @@
               "element": {
                 "id": "c176da55-aad3-4dc2-a7fa-e680abd27ebd",
                 "type": "text",
-                "content": "<p>Pour taper certains caractères, il faut <strong>appuyer sur plusieurs touches en même temps</strong>. </p> <p>C'est le cas pour taper des lettres majuscules.</p>"
+                "content": "<p>Pour taper certains caractères, il faut <strong>appuyer sur plusieurs touches en même temps</strong>. </p> <p>C’est le cas pour taper des lettres majuscules.</p>"
               }
             },
             {
@@ -153,8 +153,8 @@
                 "id": "e7cd9a3d-1632-41e8-82ce-b41995b8ca36",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/odFZeVB.png",
-                "alt": "Schéma d'un clavier, les deux touches majuscules sont en couleur.",
-                "alternativeText": "<p>Il y a deux touches majuscules sur le clavier, une à gauche, et une à droite. Chacune comporte le symbole d'une flèche vers le haut.</p>",
+                "alt": "Schéma d’un clavier, les deux touches majuscules sont en couleur.",
+                "alternativeText": "<p>Il y a deux touches majuscules sur le clavier, une à gauche, et une à droite. Chacune comporte le symbole d’une flèche vers le haut.</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -164,7 +164,7 @@
               "element": {
                 "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
                 "type": "text",
-                "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><strong><span aria-hidden=\"true\">💡</span>&nbsp;Astuce</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
+                "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><strong><span aria-hidden=\"true\">💡</span>&nbsp;Astuce</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
               }
             },
             {
@@ -179,7 +179,7 @@
               "element": {
                 "id": "00987892-9248-401d-94a2-f9418c8ff5e6",
                 "type": "text",
-                "content": "<p>Par exemple, pour taper un P, gardez un doigt appuyé sur la <strong>touche majuscule ⇧</strong> et appuyez brièvement sur la touche P avec un autre doigt.</p><p><br>Dès que vous relâchez la touche majuscule ⇧, les lettres que vous tapez sont en minuscules.</p>"
+                "content": "<p>Par exemple, pour taper un P, gardez un doigt appuyé sur la <strong>touche majuscule ⇧</strong> et appuyez brièvement sur la touche P avec un autre doigt.</p><p><br>Dès que vous relâchez la touche majuscule ⇧, les lettres que vous tapez sont en minuscules.</p>"
               }
             },
             {
@@ -188,7 +188,7 @@
                 "id": "1eeb0af4-2f24-42fc-a051-8c0dc46ac17f",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/uO0tdrA.jpeg",
-                "alt": "Dessin d'un clavier, une main appuie sur majuscule, l'autre main appuie sur le touche P.",
+                "alt": "Dessin d’un clavier, une main appuie sur majuscule, l’autre main appuie sur le touche P.",
                 "alternativeText": "",
                 "legend": "",
                 "licence": ""
@@ -199,7 +199,7 @@
               "element": {
                 "id": "04fe4d77-15c4-475d-915f-ba04f69f9674",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">💡</span><strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
+                "content": "<p><span aria-hidden=\"true\">💡</span><strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
               }
             }
           ]
@@ -214,7 +214,7 @@
               "element": {
                 "id": "f27292d8-b444-41ca-ad80-165307e201d6",
                 "type": "text",
-                "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
+                "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
               }
             }
           ]
@@ -231,7 +231,7 @@
                 "type": "custom-draft",
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-majuscules/index.html",
-                "instruction": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule :</strong></p>",
+                "instruction": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule&nbsp;:</strong></p>",
                 "height": 445
               }
             }
@@ -271,8 +271,8 @@
                 "id": "8825fd1b-f7d3-4ace-bf5e-8637f8c308e4",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/54F0jFf.jpeg",
-                "alt": "Schéma d'une touche comportant deux caractères. ",
-                "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c'est le 1 (qui est présent en haut de la touche) qui est tapé à l'écran.</li><li>Quand on appuie seulement sur cette touche, c'est le &amp; (qui est présent en bas de la touche) qui est tapé à l'écran.</li></ul>",
+                "alt": "Schéma d’une touche comportant deux caractères. ",
+                "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c’est le 1 (qui est présent en haut de la touche) qui est tapé à l’écran.</li><li>Quand on appuie seulement sur cette touche, c’est le &amp; (qui est présent en bas de la touche) qui est tapé à l’écran.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -282,7 +282,7 @@
               "element": {
                 "id": "02d17109-d2df-4b5f-83a0-dde1f1fd4e8b",
                 "type": "text",
-                "content": "<p>Comme pour les lettres majuscules, pour taper le caractère du haut d’une touche, restez appuyé sur la<strong> touche majuscule ⇧ </strong>et appuyez sur la touche du caractère.</p>"
+                "content": "<p>Comme pour les lettres majuscules, pour taper le caractère du haut d’une touche, restez appuyé sur la<strong> touche majuscule ⇧ </strong>et appuyez sur la touche du caractère.</p>"
               }
             },
             {
@@ -291,7 +291,7 @@
                 "id": "27c7290b-825a-4ee6-ab05-2cbab46a891f",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/AJIoLZu.jpeg",
-                "alt": "Dessin d'un clavier, une main appuie sur la touche majuscule, l'autre sur la touche du point d'interrogation et de la virgule.",
+                "alt": "Dessin d’un clavier, une main appuie sur la touche majuscule, l’autre sur la touche du point d’interrogation et de la virgule.",
                 "alternativeText": "",
                 "legend": "",
                 "licence": ""
@@ -318,7 +318,7 @@
               "element": {
                 "id": "4bbe20be-c9b0-41f3-bf95-fce480aa8348",
                 "type": "text",
-                "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
+                "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
               }
             }
           ]
@@ -334,8 +334,8 @@
                 "id": "425252e0-7cf9-4031-8e28-6079d0d147a7",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/CqlU8D0.jpeg",
-                "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes à cet endroit ?\" est écrite",
-                "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes à cet endroit ?</p>",
+                "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes à cet endroit ?\" est écrite",
+                "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes à cet endroit ?</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -345,7 +345,7 @@
               "element": {
                 "id": "e9c4bdc5-dc03-49cd-9ee9-6527af8f52bc",
                 "type": "qrocm",
-                "instruction": "<p>Recopiez la phrase ci-dessus dans la zone de texte :</p>",
+                "instruction": "<p>Recopiez la phrase ci-dessus dans la zone de texte&nbsp;:</p>",
                 "proposals": [
                   {
                     "input": "pommes-la",
@@ -360,18 +360,18 @@
                       "t1"
                     ],
                     "solutions": [
-                      "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
+                      "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
                     ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bonne réponse ! 🍏🍏🍏",
-                    "diagnosis": "<p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>"
+                    "state": "<p>Bonne réponse ! 🍏🍏🍏</p>",
+                    "diagnosis": "<p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>"
                   },
                   "invalid": {
-                    "state": "Mauvaise réponse. 🍎🍎🍎",
-                    "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
+                    "state": "<p>Mauvaise réponse. 🍎🍎🍎</p>",
+                    "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
                   }
                 }
               }
@@ -479,7 +479,7 @@
                 "type": "custom-draft",
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-AltGr/index.html",
-                "instruction": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr :</strong></p>",
+                "instruction": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr&nbsp;:</strong></p>",
                 "height": 445
               }
             }
@@ -519,8 +519,8 @@
                 "id": "2db48eb5-d71e-4050-9aeb-0aab60d10da6",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/dH03MS3.png",
-                "alt": "Carte d'identité de Jean-Tobias Piéchaud",
-                "alternativeText": "<p>Carte d'identité contenant les informations suivantes :</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone : 06 39 98 12 74</li><li>mail : j-t.piechaud@pixmail.org</li></ul>",
+                "alt": "Carte d’identité de Jean-Tobias Piéchaud",
+                "alternativeText": "<p>Carte d’identité contenant les informations suivantes&nbsp;:</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone&nbsp;: 06 39 98 12 74</li><li>mail&nbsp;: j-t.piechaud@pixmail.org</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -550,7 +550,7 @@
               "element": {
                 "id": "e9e14b7b-9ef5-442d-9f30-e10cda3ec5c7",
                 "type": "text",
-                "content": "<p>Résumons l'essentiel. <span aria-hidden=\"true\">🎯</span></p>"
+                "content": "<p>Résumons l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
               }
             }
           ]
@@ -558,7 +558,7 @@
         {
           "id": "bf9b4d7e-5d6a-4fc9-9f63-0bfc71d18982",
           "type": "summary",
-          "title": "Recap schéma d'une touche",
+          "title": "Recap schéma d’une touche",
           "components": [
             {
               "type": "element",
@@ -575,7 +575,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/ta6lSjJ.jpeg",
                 "alt": "",
-                "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche,&nbsp; il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
+                "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche,&nbsp; il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -617,7 +617,7 @@
                 "type": "custom-draft",
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-jeuautomatisationtimerlong/index.html",
-                "instruction": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>",
+                "instruction": "<p><strong>Dans l’espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>",
                 "height": 445
               }
             }
