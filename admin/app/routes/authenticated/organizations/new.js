@@ -9,21 +9,10 @@ export default class NewRoute extends Route {
 
   queryParams = {
     parentOrganizationId: { refreshModel: true },
-    parentOrganizationName: { refreshModel: true },
   };
 
-  beforeModel(transition) {
+  beforeModel() {
     this.accessControl.restrictAccessTo(['isSuperAdmin', 'isSupport', 'isMetier'], 'authenticated');
-    const queryParams = transition.to.queryParams;
-
-    if (_hasParentOrganizationQueryParamsAndOneIsMissing(queryParams)) {
-      this.router.replaceWith('authenticated', {
-        queryParams: {
-          parentOrganizationId: null,
-          parentOrganizationName: null,
-        },
-      });
-    }
   }
 
   async model(_, transition) {
@@ -44,15 +33,6 @@ export default class NewRoute extends Route {
   resetController(controller, isExiting) {
     if (isExiting) {
       controller.parentOrganizationId = null;
-      controller.parentOrganizationName = null;
     }
   }
-}
-
-function _hasParentOrganizationQueryParamsAndOneIsMissing(queryParams) {
-  return (
-    Object.keys(queryParams).length > 0 &&
-    (Boolean(!queryParams.parentOrganizationName && queryParams.parentOrganizationId) ||
-      Boolean(queryParams.parentOrganizationName && !queryParams.parentOrganizationId))
-  );
 }

@@ -121,7 +121,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
     });
 
     module('when creating child organization from parent page', function () {
-      test('it should redirect to New organization page, with parent infos in query params', async function (assert) {
+      test('it should redirect to New organization page, with parent id in query params', async function (assert) {
         // given
         const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
         const screen = await visit(`/organizations/${parentOrganization.id}/children`);
@@ -131,7 +131,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
           screen.getByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
         );
 
-        const expectedQueryParams = `?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(parentOrganization.name)}`;
+        const expectedQueryParams = `?parentOrganizationId=${parentOrganization.id}`;
 
         // then
         assert.strictEqual(currentURL(), `/organizations/new${expectedQueryParams}`);

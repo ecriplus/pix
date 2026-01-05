@@ -60,11 +60,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
     test('it shows the creation form with parent organization name', async function (assert) {
       // when
-      const screen = await visit(
-        `/organizations/new?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(
-          parentOrganization.name,
-        )}`,
-      );
+      const screen = await visit(`/organizations/new?parentOrganizationId=${parentOrganization.id}`);
 
       // then
       assert
@@ -89,11 +85,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
     test('it redirects the user to parent organization page when cancelling', async function (assert) {
       // given
-      const screen = await visit(
-        `/organizations/new?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(
-          parentOrganization.name,
-        )}`,
-      );
+      const screen = await visit(`/organizations/new?parentOrganizationId=${parentOrganization.id}`);
       // when
       const cancelButton = await screen.getByRole('button', { name: t('common.actions.cancel') });
       await click(cancelButton);

@@ -112,13 +112,12 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
       }
       this.owner.register('service:access-control', AccessControlStub);
     });
-    test('it should allow parentOrganizationId and parentOrganizationName query params', async function (assert) {
+    test('it should allow parentOrganizationId query param', async function (assert) {
       // given
       const transition = {
         to: {
           queryParams: {
             parentOrganizationId: '1',
-            parentOrganizationName: 'Orga Name',
           },
         },
       };
@@ -128,72 +127,6 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
 
       // then
       assert.ok(router.replaceWith.notCalled);
-    });
-
-    test('it should allow any other query params', async function (assert) {
-      // given
-      const transition = {
-        to: {
-          queryParams: {
-            otherQueryParam: 'A random query param',
-          },
-        },
-      };
-
-      // when
-      route.beforeModel(transition);
-
-      // then
-      assert.ok(router.replaceWith.notCalled);
-    });
-
-    test('it should redirect to home page and set query params to null if one of parentOrganizationId and parentOrganizationName is provided but the other is missing', async function (assert) {
-      // given
-      const routeToRedirect = 'authenticated';
-
-      const transition = {
-        to: {
-          queryParams: {
-            parentOrganizationId: '1',
-          },
-        },
-      };
-
-      // when
-      route.beforeModel(transition);
-
-      // then
-      assert.ok(
-        router.replaceWith.calledWith(routeToRedirect, {
-          queryParams: {
-            parentOrganizationId: null,
-            parentOrganizationName: null,
-          },
-        }),
-      );
-    });
-
-    module('when parentOrganizationId is provided', function () {
-      test('it should fetch the parent organization', async function (assert) {
-        // given
-        const transition = {
-          to: {
-            queryParams: {
-              parentOrganizationId: '1',
-            },
-          },
-        };
-        const store = route.store;
-        sinon.stub(store, 'findAll').resolves([]);
-        const findRecordStub = sinon.stub(store, 'findRecord').resolves({ id: '1', name: 'Parent Org' });
-
-        // when
-        const model = await route.model(undefined, transition);
-
-        // then
-        assert.ok(findRecordStub.calledWith('organization', '1'));
-        assert.deepEqual(model.parentOrganization, { id: '1', name: 'Parent Org' });
-      });
     });
   });
 });
