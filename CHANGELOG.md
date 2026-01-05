@@ -1,5 +1,58 @@
 # Pix Changelog
 
+# [5.291.0](https://github.com/1024pix/pix/compare/v5.290.3...v5.291.0) (2026-01-05)
+
+### :rocket: Amélioration
+
+- [#14524](https://github.com/1024pix/pix/pull/14524) modif-relecture-jennifer 
+- [#14543](https://github.com/1024pix/pix/pull/14543) Permet de supprimer un élément du schéma de parcours (PIX-20862). 
+- [#14478](https://github.com/1024pix/pix/pull/14478) Qualité Module clavier 2 
+
+### :building_construction: Tech
+
+- [#14538](https://github.com/1024pix/pix/pull/14538) Ajouter des informations de monitoring supplémentaires sur les appels de l’openIdClient (PIX-20681) 
+- [#14512](https://github.com/1024pix/pix/pull/14512) Corriger et améliorer les seeds de l’équipe Accès (PIX-20946) 
+- [#14513](https://github.com/1024pix/pix/pull/14513) Déplacer le message destiné aux chefs d'établissement du composant vers le template login (PIX-20894) 
+- [#14571](https://github.com/1024pix/pix/pull/14571) Modifier encore quelques points sur les seeds de l’équipe Accès (PIX-20968) 
+- [#14599](https://github.com/1024pix/pix/pull/14599) Utiliser les shortIds dans les seeds de parcours combinés (pix-20969) 
+
+### :arrow_up: Montée de version
+
+- [#14592](https://github.com/1024pix/pix/pull/14592) Lock file maintenance (admin) 
+- [#14594](https://github.com/1024pix/pix/pull/14594) Lock file maintenance (audit-logger) 
+- [#14595](https://github.com/1024pix/pix/pull/14595) Lock file maintenance (certif) 
+- [#14596](https://github.com/1024pix/pix/pull/14596) Lock file maintenance (dossier racine) 
+- [#14597](https://github.com/1024pix/pix/pull/14597) Lock file maintenance (e2e-playwright) 
+- [#14583](https://github.com/1024pix/pix/pull/14583) Lock file maintenance (junior) 
+- [#14584](https://github.com/1024pix/pix/pull/14584) Lock file maintenance (load-testing) 
+- [#14585](https://github.com/1024pix/pix/pull/14585) Lock file maintenance (mon-pix) 
+- [#14586](https://github.com/1024pix/pix/pull/14586) Lock file maintenance (orga) 
+- [#14557](https://github.com/1024pix/pix/pull/14557) Update dependency @1024pix/pix-ui to ^55.33.0 (orga) 
+- [#14569](https://github.com/1024pix/pix/pull/14569) Update dependency @1024pix/pix-ui to ^55.33.1 (admin) 
+- [#14570](https://github.com/1024pix/pix/pull/14570) Update dependency @1024pix/pix-ui to ^55.33.1 (certif) 
+- [#14572](https://github.com/1024pix/pix/pull/14572) Update dependency @1024pix/pix-ui to ^55.33.1 (junior) 
+- [#14573](https://github.com/1024pix/pix/pull/14573) Update dependency @1024pix/pix-ui to ^55.33.1 (mon-pix) 
+- [#14579](https://github.com/1024pix/pix/pull/14579) Update dependency @1024pix/pix-ui to ^55.33.1 (orga) 
+- [#14560](https://github.com/1024pix/pix/pull/14560) Update dependency @eslint/compat to v2 (audit-logger) 
+- [#14561](https://github.com/1024pix/pix/pull/14561) Update dependency @eslint/compat to v2 (dossier racine) 
+- [#14562](https://github.com/1024pix/pix/pull/14562) Update dependency @formatjs/intl to v4 (certif) 
+- [#14563](https://github.com/1024pix/pix/pull/14563) Update dependency @formatjs/intl to v4 (mon-pix) 
+- [#14564](https://github.com/1024pix/pix/pull/14564) Update dependency ember-cli-deprecation-workflow to v4 (certif) 
+- [#14565](https://github.com/1024pix/pix/pull/14565) Update dependency ember-cli-deprecation-workflow to v4 (mon-pix) 
+- [#14566](https://github.com/1024pix/pix/pull/14566) Update dependency ember-cli-htmlbars to v7 (certif) 
+- [#14567](https://github.com/1024pix/pix/pull/14567) Update dependency ember-cli-htmlbars to v7 (junior) 
+- [#14591](https://github.com/1024pix/pix/pull/14591) Update dependency ember-cli-htmlbars to v7 (mon-pix) 
+- [#14587](https://github.com/1024pix/pix/pull/14587) Update dependency ember-cli-htmlbars to v7 (orga) 
+- [#14575](https://github.com/1024pix/pix/pull/14575) Update dependency eslint-plugin-unicorn to v62 (api) 
+- [#14576](https://github.com/1024pix/pix/pull/14576) Update dependency eslint-plugin-unicorn to v62 (audit-logger) 
+- [#14578](https://github.com/1024pix/pix/pull/14578) Update dependency eslint-plugin-unicorn to v62 (dossier racine) 
+- [#14580](https://github.com/1024pix/pix/pull/14580) Update dependency html-validate to v10 (api) 
+- [#14581](https://github.com/1024pix/pix/pull/14581) Update dependency joi to v18 (audit-logger) 
+- [#14588](https://github.com/1024pix/pix/pull/14588) Update dependency pino to v10 (api) 
+- [#14589](https://github.com/1024pix/pix/pull/14589) Update dependency pino to v10 (audit-logger) 
+- [#14559](https://github.com/1024pix/pix/pull/14559) Update dependency webpack to v5.104.1 (junior) 
+- [#14590](https://github.com/1024pix/pix/pull/14590) Update dependency xmlbuilder2 to v4 (api)
+
 ## [5.290.3](https://github.com/1024pix/pix/compare/v5.290.2...v5.290.3) (2026-01-01)
 
 ### :building_construction: Tech
