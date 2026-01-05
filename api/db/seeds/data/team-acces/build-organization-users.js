@@ -8,7 +8,7 @@ export function buildOrganizationUsers(databaseBuilder) {
   [
     {
       id: PIX_ORGA_ADMIN_ID,
-      firstName: 'Orgas',
+      firstName: 'Ornella',
       lastName: 'Accès',
       email: 'orgacces@example.net',
       cguVersion: 'v2',
