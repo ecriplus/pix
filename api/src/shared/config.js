@@ -570,7 +570,7 @@ const configuration = (function () {
           accessKeyId: 'cpfExports.accessKeyId',
           secretAccessKey: 'cpfExports.secretAccessKey',
           endpoint: 'http://cpf-exports.fake.endpoint.example.net',
-          region: 'cpfExports.region',
+          region: 'eu-west-par',
           bucket: 'cpfExports.bucket',
         },
         commands: {
@@ -582,7 +582,7 @@ const configuration = (function () {
           accessKeyId: 'cpfReceipts.accessKeyId',
           secretAccessKey: 'cpfReceipts.secretAccessKey',
           endpoint: 'http://cpf-receipts.fake.endpoint.example.net',
-          region: 'cpfReceipts.region',
+          region: 'eu-west-par',
           bucket: 'cpfReceipts.bucket',
         },
       },
