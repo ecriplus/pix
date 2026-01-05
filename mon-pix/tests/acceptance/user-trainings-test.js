@@ -46,7 +46,7 @@ module('Acceptance | mes-formations', function (hooks) {
           'Continuez à progresser grâce aux formations recommandées à l’issue de vos parcours d’évaluation.',
         ),
       );
-      assert.dom('.user-trainings-content__container').exists();
+      assert.dom('.user-trainings-content').exists();
       assert.dom('.user-trainings-content-list__item').exists();
       assert.dom('.user-trainings-content-list__item').exists({ count: 2 });
 
