@@ -1,7 +1,7 @@
-import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-
+const STARTED = 'started';
+const ENDED_BY_INVIGILATOR = 'endedBySupervisor';
 const CORE_CERTIFICATION = 'CORE';
 const DOUBLE_CORE_CLEA_CERTIFICATION = 'DOUBLE_CORE_CLEA';
 
@@ -46,7 +46,7 @@ export class JuryCertificationSummary {
   }
 
   hasCompletedAssessment() {
-    return this.status !== Assessment.states.STARTED;
+    return this.status !== STARTED;
   }
 
   getCertificationLabel(translate) {
@@ -66,11 +66,11 @@ export class JuryCertificationSummary {
 
 function _getStatus({ status, isEndedByInvigilator }) {
   if (isEndedByInvigilator) {
-    return Assessment.states.ENDED_BY_INVIGILATOR;
+    return ENDED_BY_INVIGILATOR;
   }
 
   if (!Object.values(assessmentResultStatuses).includes(status)) {
-    return Assessment.states.STARTED;
+    return STARTED;
   }
 
   return status;
