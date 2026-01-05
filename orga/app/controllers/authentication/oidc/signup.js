@@ -12,4 +12,16 @@ export default class OidcSignupController extends Controller {
   get userClaims() {
     return oidcUserAuthenticationStorage.get()?.userClaims;
   }
+
+  get authenticationKey() {
+    return oidcUserAuthenticationStorage.get()?.authenticationKey;
+  }
+
+  get invitationId() {
+    return invitationStorage.get()?.invitationId;
+  }
+
+  get invitationCode() {
+    return invitationStorage.get()?.code;
+  }
 }

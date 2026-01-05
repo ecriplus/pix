@@ -25,8 +25,10 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         <OidcSignupForm
           @userClaims={{@controller.userClaims}}
           @identityProviderSlug={{@model.identity_provider_slug}}
+          @authenticationKey={{@controller.authenticationKey}}
+          @invitationId={{@controller.invitationId}}
+          @invitationCode={{@controller.invitationCode}}
         />
-
         <PixButtonLink @variant="secondary" @route="authentication.oidc.login" @model={{@model.identity_provider_slug}}>
           {{t "pages.oidc.signup.login-button"}}
         </PixButtonLink>
