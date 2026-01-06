@@ -131,6 +131,29 @@ module('Integration | Component | organizations/creation-form', function (hooks)
           'Établissement scolaire',
         );
       });
+
+      test("it prefills the country selector with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', { countryCode: '99101' });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: 'Pays (code INSEE) *' }).innerText,
+          'Danemark (99101)',
+        );
+      });
     });
 
     module('when there is no parent organization', function () {
@@ -173,6 +196,27 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         assert.strictEqual(
           await screen.getByRole('button', { name: "Type de l'organisation *" }).innerText,
           'Sélectionner un type',
+        );
+      });
+
+      test('it does not prefill the country selector', async function (assert) {
+        // given - when
+        const screen = await render(
+        <template>
+          <CreationForm
+            @parentOrganization={{null}}
+            @administrationTeams={{administrationTeams}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
+        </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: "Pays (code INSEE) *" }).innerText,
+          'Sélectionner un pays',
         );
       });
     });

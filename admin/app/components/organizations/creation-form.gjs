@@ -17,6 +17,7 @@ export default class OrganizationCreationForm extends Component {
   @tracked form = {
     administrationTeamId: this.parentOrganizationAdministrationTeamId,
     type: this.parentOrganizationType,
+    countryCode: this.parentOrganizationCountryCode
   };
 
   organizationTypes = [
@@ -61,6 +62,10 @@ export default class OrganizationCreationForm extends Component {
 
   get parentOrganizationType() {
     return this.args.parentOrganization?.type ? `${this.args.parentOrganization.type}` : undefined;
+  }
+
+  get parentOrganizationCountryCode() {
+    return this.args.parentOrganization?.countryCode ? `${this.args.parentOrganization.countryCode}` : undefined;
   }
 
   handleInputChange = (key, event) => {
