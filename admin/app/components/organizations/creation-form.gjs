@@ -14,7 +14,9 @@ export default class OrganizationCreationForm extends Component {
   @service store;
   @service intl;
 
-  @tracked form = {};
+  @tracked form = {
+    administrationTeamId: this.parentOrganizationAdministrationTeamId,
+  };
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -48,6 +50,12 @@ export default class OrganizationCreationForm extends Component {
 
   get dpoSectionTitle() {
     return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
+  }
+
+  get parentOrganizationAdministrationTeamId() {
+    return this.args.parentOrganization?.administrationTeamId
+      ? `${this.args.parentOrganization.administrationTeamId}`
+      : undefined;
   }
 
   handleInputChange = (key, event) => {
