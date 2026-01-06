@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { currentURL, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
@@ -34,25 +34,27 @@ module('Acceptance | mes-formations', function (hooks) {
 
       // when
       await authenticate(user);
-      await visit('/mes-formations');
+      const screen = await visit('/mes-formations');
 
       // then
       assert.strictEqual(currentURL(), '/mes-formations');
-      assert.dom('.global-page-header__title').exists();
-      assert.ok(find('.global-page-header__title').textContent.includes('Mes formations'));
-      assert.dom('.global-page-header__description').exists();
-      assert.ok(
-        find('.global-page-header__description').textContent.includes(
-          'Continuez à progresser grâce aux formations recommandées à l’issue de vos parcours d’évaluation.',
-        ),
-      );
-      assert.dom('.user-trainings-content').exists();
-      assert.dom('.user-trainings-content-list__item').exists();
-      assert.dom('.user-trainings-content-list__item').exists({ count: 2 });
+      assert.dom('h1').hasText('Mes formations');
+      assert
+        .dom(
+          screen.getByText(
+            'Continuez à progresser grâce aux formations recommandées à l’issue de vos parcours d’évaluation.',
+          ),
+        )
+        .exists();
 
-      const pixPaginationTextContent = find('.pix-pagination__navigation').textContent;
-      assert.ok(pixPaginationTextContent.includes('2 éléments'));
-      assert.ok(pixPaginationTextContent.includes('Page 1 / 1'));
+      const mainContent = find('main');
+      const trainings = within(mainContent).getAllByRole('listitem');
+      assert.ok(trainings.length, 2);
+      assert.dom(screen.getByText('Devenir tailleur de citrouille')).exists();
+      assert.dom(screen.getByText('Apprendre à piloter des chauves-souris')).exists();
+
+      assert.dom(screen.getByText('2 éléments')).exists();
+      assert.dom(screen.getByText('Page 1 / 1')).exists();
     });
   });
 });
