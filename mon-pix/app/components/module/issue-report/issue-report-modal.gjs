@@ -113,7 +113,7 @@ export default class ModulixIssueReportModal extends Component {
   @action
   resetForm() {
     const moduleIssueReportForm = document.getElementById('module-issue-report-form');
-    if(moduleIssueReportForm) {
+    if (moduleIssueReportForm) {
       moduleIssueReportForm.reset();
       this.selectedCategory = this.categories[0].value;
       this.comment = null;
@@ -121,7 +121,7 @@ export default class ModulixIssueReportModal extends Component {
   }
 
   <template>
-    <InElement @destinationId="modal-container">
+    <InElement @destinationId="modal-container" @waitForElement={{true}}>
       <PixModal
         class="issue-report-modal"
         @title={{t "pages.modulix.issue-report.modal.title"}}
@@ -178,10 +178,12 @@ export default class ModulixIssueReportModal extends Component {
             </div>
           {{else}}
             <ul class="issue-report-modal-form__action-buttons">
-              <li><PixButton @variant="secondary" @triggerAction={{this.hideModal}}>{{t
+              <li>
+                <PixButton @variant="secondary" @triggerAction={{this.hideModal}}>{{t
                     "common.actions.cancel"
                   }}</PixButton></li>
-              <li><PixButton @triggerAction={{this.sendReport}}>{{t "common.actions.send"}}</PixButton></li>
+              <li>
+                <PixButton @triggerAction={{this.sendReport}}>{{t "common.actions.send"}}</PixButton></li>
             </ul>
           {{/if}}
         </:footer>
