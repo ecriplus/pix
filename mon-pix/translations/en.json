@@ -1694,6 +1694,10 @@
               "response-issue": "I don't agree with the answer"
             }
           },
+          "confirmation-message": {
+            "error": "An error occurred when sending the comment.",
+            "success": "Thank you for your comment."
+          },
           "legend": "Information required to send a report",
           "select-label": "Reason for reporting",
           "textarea-label": "Comment",

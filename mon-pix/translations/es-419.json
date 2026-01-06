@@ -1690,6 +1690,10 @@
               "response-issue": "No estoy de acuerdo con la respuesta."
             }
           },
+          "confirmation-message": {
+            "error": "Se ha producido un error al enviar el comentario.",
+            "success": "Gracias, hemos tomado nota de su comentario."
+          },
           "legend": "Información necesaria para enviar una denuncia",
           "select-label": "Motivo de la notificación",
           "textarea-label": "Comentario",

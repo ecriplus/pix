@@ -10,11 +10,13 @@ import ModulixIssueReportModal from './issue-report-modal';
 export default class ModulixIssueReportBlock extends Component {
   @service featureToggles;
   @tracked showModal = false;
+  @tracked sentStatus = null;
   @service moduleIssueReport;
 
   @action
   onReportClick() {
     this.showModal = true;
+    this.sentStatus = null;
   }
 
   @action
@@ -23,13 +25,18 @@ export default class ModulixIssueReportBlock extends Component {
   }
 
   @action
-  onSend({ categoryKey, comment }) {
-    this.moduleIssueReport.record({
-      categoryKey,
-      comment,
-      elementId: this.args.reportInfo.elementId,
-      answer: this.args.reportInfo.answer,
-    });
+  async onSend({ categoryKey, comment }) {
+    try {
+      await this.moduleIssueReport.record({
+        categoryKey,
+        comment,
+        elementId: this.args.reportInfo.elementId,
+        answer: this.args.reportInfo.answer,
+      });
+      this.sentStatus = 'success';
+    } catch {
+      this.sentStatus = 'error';
+    }
   }
 
   <template>
@@ -47,6 +54,7 @@ export default class ModulixIssueReportBlock extends Component {
         @showModal={{this.showModal}}
         @hideModal={{this.hideModal}}
         @onSendReport={{this.onSend}}
+        @sentStatus={{this.sentStatus}}
       />
     {{/if}}
   </template>

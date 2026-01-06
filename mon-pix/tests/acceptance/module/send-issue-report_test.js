@@ -77,6 +77,8 @@ module('Acceptance | Module | Routes | sendIssueReport', function (hooks) {
       );
 
       await click(screen.getByRole('button', { name: t('common.actions.send') }));
+      const closeButtons = screen.getAllByRole('button', { name: t('common.actions.close') });
+      await click(closeButtons[1]);
       await waitForDialogClose();
 
       // then

@@ -1694,6 +1694,10 @@
               "response-issue": "Ik ben het niet eens met het antwoord"
             }
           },
+          "confirmation-message": {
+            "error": "Er is een fout opgetreden bij het verzenden van de opmerking.",
+            "success": "Bedankt, uw opmerking is genoteerd."
+          },
           "legend": "Informatie die nodig is om een melding te versturen",
           "select-label": "Reden voor de melding",
           "textarea-label": "Opmerking",
