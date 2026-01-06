@@ -5,9 +5,11 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 import set from 'lodash/set';
 
 import { optionsLocaleList, optionsTypeList } from '../../models/training';
@@ -42,6 +44,8 @@ class Form {
 }
 
 export default class CreateOrUpdateTrainingForm extends Component {
+  @service featureToggles;
+
   @tracked submitting = false;
 
   constructor() {
@@ -125,15 +129,31 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
 
           {{#if this.form.type}}
-            <PixInput
-              @id="trainingLink"
-              required={{true}}
-              aria-required={{true}}
-              @value={{this.form.link}}
-              {{on "change" (fn this.updateForm "link")}}
-            >
-              <:label>Lien</:label>
-            </PixInput>
+            {{#if this.featureToggles.featureToggles.isModuleSelectionForTrainingEnabled}}
+              {{#if (eq this.form.type "modulix")}}
+                <p>Todo : Ajouter un Pix Select "Lien" listant les modules</p>
+              {{else}}
+                <PixInput
+                  @id="trainingLink"
+                  required={{true}}
+                  aria-required={{true}}
+                  @value={{this.form.link}}
+                  {{on "change" (fn this.updateForm "link")}}
+                >
+                  <:label>Lien</:label>
+                </PixInput>
+              {{/if}}
+            {{else}}
+              <PixInput
+                @id="trainingLink"
+                required={{true}}
+                aria-required={{true}}
+                @value={{this.form.link}}
+                {{on "change" (fn this.updateForm "link")}}
+              >
+                <:label>Lien</:label>
+              </PixInput>
+            {{/if}}
           {{/if}}
 
           <div class="admin-form--training__duration">
