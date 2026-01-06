@@ -1,12 +1,12 @@
-import { states } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 
 const buildCertificationDetails = function ({
   id = 123,
   userId = 456,
   createdAt = new Date('2020-01-01'),
   completedAt = new Date('2020-03-03'),
-  status = states.COMPLETED,
+  status = Assessment.states.COMPLETED,
   totalScore = 555,
   percentageCorrectAnswers = 75,
   competencesWithMark = [

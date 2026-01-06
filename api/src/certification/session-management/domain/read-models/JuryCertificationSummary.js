@@ -5,7 +5,7 @@ const ENDED_BY_INVIGILATOR = 'endedBySupervisor';
 const CORE_CERTIFICATION = 'CORE';
 const DOUBLE_CORE_CLEA_CERTIFICATION = 'DOUBLE_CORE_CLEA';
 
-class JuryCertificationSummary {
+export class JuryCertificationSummary {
   constructor({
     id,
     firstName,
@@ -42,11 +42,11 @@ class JuryCertificationSummary {
   }
 
   hasScoringError() {
-    return this.status === JuryCertificationSummary.statuses.ERROR;
+    return this.status === assessmentResultStatuses.ERROR;
   }
 
   hasCompletedAssessment() {
-    return this.status !== JuryCertificationSummary.statuses.STARTED;
+    return this.status !== STARTED;
   }
 
   getCertificationLabel(translate) {
@@ -85,9 +85,3 @@ function _getCertificationObtained({ complementaryCertificationLabelObtained, co
   }
   return complementaryCertificationLabelObtained;
 }
-
-const statuses = { ...assessmentResultStatuses, STARTED, ENDED_BY_INVIGILATOR };
-
-JuryCertificationSummary.statuses = statuses;
-
-export { CORE_CERTIFICATION, DOUBLE_CORE_CLEA_CERTIFICATION, JuryCertificationSummary, statuses };

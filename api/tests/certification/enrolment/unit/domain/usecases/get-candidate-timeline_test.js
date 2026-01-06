@@ -9,7 +9,7 @@ import { CertificationEndedEvent } from '../../../../../../src/certification/enr
 import { CertificationStartedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationStartedEvent.js';
 import { UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 import { getCandidateTimeline } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate-timeline.js';
-import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-timeline', function () {
@@ -375,7 +375,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           expect(candidateTimeline.events).to.deep.includes(
             new CertificationEndedEvent({
               when: assessment.endedAt,
-              assessmentState: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+              assessmentState: Assessment.states.ENDED_BY_INVIGILATOR,
             }),
           );
         });
@@ -418,7 +418,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           expect(candidateTimeline.events).to.deep.includes(
             new CertificationEndedEvent({
               when: assessment.endedAt,
-              assessmentState: CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
+              assessmentState: Assessment.states.ENDED_DUE_TO_FINALIZATION,
             }),
           );
         });

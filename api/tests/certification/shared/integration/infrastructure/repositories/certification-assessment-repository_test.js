@@ -100,7 +100,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       let secondAnswerInTime;
 
       beforeEach(function () {
-        expectedState = CertificationAssessment.states.COMPLETED;
+        expectedState = Assessment.states.COMPLETED;
         expectedCreatedAt = new Date('2020-01-01T00:00:00Z');
         expectedEndedAt = new Date('2020-01-02T00:00:00Z');
         expectedCompletedAt = new Date('2020-01-03T00:00:00Z');
@@ -377,7 +377,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
         certificationCourseId,
       });
-      certificationAssessmentToBeSaved.state = CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION;
+      certificationAssessmentToBeSaved.state = Assessment.states.ENDED_DUE_TO_FINALIZATION;
 
       // when
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
@@ -386,9 +386,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
         certificationCourseId,
       });
-      expect(persistedCertificationAssessment.state).to.deep.equal(
-        CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
-      );
+      expect(persistedCertificationAssessment.state).to.deep.equal(Assessment.states.ENDED_DUE_TO_FINALIZATION);
     });
 
     it('persists the mutation of endedAt', async function () {

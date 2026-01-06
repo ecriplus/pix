@@ -1,5 +1,5 @@
-import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { endAssessmentByInvigilator } from '../../../../../../src/certification/session-management/domain/usecases/end-assessment-by-invigilator.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | end-assessment-by-invigilator', function () {
@@ -19,7 +19,7 @@ describe('Unit | UseCase | end-assessment-by-invigilator', function () {
         subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
       }).id;
       const completedCertificationAssessment = domainBuilder.buildCertificationAssessment({
-        state: CertificationAssessment.states.COMPLETED,
+        state: Assessment.states.COMPLETED,
       });
 
       certificationAssessmentRepository.getByCertificationCandidateId
@@ -43,7 +43,7 @@ describe('Unit | UseCase | end-assessment-by-invigilator', function () {
         subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
       }).id;
       const startedCertificationAssessment = domainBuilder.buildCertificationAssessment({
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
       });
 
       certificationAssessmentRepository.getByCertificationCandidateId
@@ -57,7 +57,7 @@ describe('Unit | UseCase | end-assessment-by-invigilator', function () {
 
       // then
       expect(startedCertificationAssessment.endedAt).to.be.instanceOf(Date);
-      expect(startedCertificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
+      expect(startedCertificationAssessment.state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
       expect(certificationAssessmentRepository.save).to.have.been.calledWithExactly(startedCertificationAssessment);
     });
   });

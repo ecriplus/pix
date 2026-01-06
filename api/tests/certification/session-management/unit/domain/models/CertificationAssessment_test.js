@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import {
   ChallengeToBeDeneutralizedNotFoundError,
   ChallengeToBeNeutralizedNotFoundError,
@@ -9,6 +7,7 @@ import { CertificationAssessment } from '../../../../../../src/certification/ses
 import { NeutralizationAttempt } from '../../../../../../src/certification/session-management/domain/models/NeutralizationAttempt.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationAssessment', function () {
@@ -22,7 +21,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [],
         certificationAnswersByDate: ['answer'],
@@ -67,7 +66,12 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       );
     });
 
-    _.forIn(CertificationAssessment.states, (value) => {
+    [
+      Assessment.states.COMPLETED,
+      Assessment.states.STARTED,
+      Assessment.states.ENDED_BY_INVIGILATOR,
+      Assessment.states.ENDED_DUE_TO_FINALIZATION,
+    ].forEach((value) => {
       it(`should not throw an ObjectValidationError when state is ${value}`, function () {
         // when
         expect(() => new CertificationAssessment({ ...validArguments, state: value })).not.to.throw(
@@ -153,7 +157,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
           challengeToBeNeutralized,
@@ -185,7 +189,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
           domainBuilder.buildCertificationChallengeWithType({ challengeId: 'rec2', isNeutralized: false }),
@@ -215,7 +219,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
           challengeToBeDeneutralized,
@@ -247,7 +251,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
           domainBuilder.buildCertificationChallengeWithType({ challengeId: 'rec2', isNeutralized: false }),
@@ -277,7 +281,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeKoToBeNeutralized],
         certificationAnswersByDate: [
@@ -310,7 +314,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeSkippedToBeNeutralized],
         certificationAnswersByDate: [
@@ -343,7 +347,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeNotToBeNeutralized],
         certificationAnswersByDate: [
@@ -371,7 +375,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-01'),
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
           domainBuilder.buildCertificationChallengeWithType({ challengeId: 'rec2', isNeutralized: false }),
@@ -412,7 +416,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
           createdAt: lastChallengeDate,
         });
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          state: CertificationAssessment.states.STARTED,
+          state: Assessment.states.STARTED,
           certificationChallenges: [lastCertificationChallenge, certificationChallenge],
         });
 
@@ -420,7 +424,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationAssessment.endDueToFinalization();
 
         // then
-        expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION);
+        expect(certificationAssessment.state).to.equal(Assessment.states.ENDED_DUE_TO_FINALIZATION);
       });
 
       describe('where there are challenges', function () {
@@ -435,7 +439,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
             createdAt: lastChallengeDate,
           });
           const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            state: CertificationAssessment.states.STARTED,
+            state: Assessment.states.STARTED,
             certificationChallenges: [lastCertificationChallenge, certificationChallenge],
           });
 
@@ -453,7 +457,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
           const certificationCourseCreatedAt = new Date('2020-01-01');
 
           const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            state: CertificationAssessment.states.STARTED,
+            state: Assessment.states.STARTED,
             createdAt: certificationCourseCreatedAt,
             certificationChallenges: [],
           });
@@ -471,14 +475,14 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       it('should NOT change the assessment state"', function () {
         // given
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          state: CertificationAssessment.states.ENDED_BY_INVIGILATOR,
+          state: Assessment.states.ENDED_BY_INVIGILATOR,
         });
 
         // when
         certificationAssessment.endDueToFinalization();
 
         // when then
-        expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
+        expect(certificationAssessment.state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
       });
     });
   });
@@ -488,14 +492,14 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       // given
       const now = new Date('2020-12-31');
       const certificationAssessment = domainBuilder.buildCertificationAssessment({
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
       });
 
       // when
       certificationAssessment.endByInvigilator({ now });
 
       // then
-      expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_BY_INVIGILATOR);
+      expect(certificationAssessment.state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
       expect(certificationAssessment.endedAt).to.deep.equal(now);
     });
   });
@@ -575,7 +579,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
     it('returns true when completed', function () {
       // given
       const certificationAssessment = domainBuilder.buildCertificationAssessment({
-        state: CertificationAssessment.states.COMPLETED,
+        state: Assessment.states.COMPLETED,
       });
       // when / then
       expect(certificationAssessment.isCompleted()).to.be.true;
@@ -584,7 +588,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
     it('returns false when only started', function () {
       // given
       const certificationAssessment = domainBuilder.buildCertificationAssessment({
-        state: CertificationAssessment.states.STARTED,
+        state: Assessment.states.STARTED,
       });
       // when / then
       expect(certificationAssessment.isCompleted()).to.be.false;
@@ -917,9 +921,9 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
 
       // then
       expect(result).to.deep.equal([
-        CertificationAssessment.states.STARTED,
-        CertificationAssessment.states.ENDED_BY_INVIGILATOR,
-        CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
+        Assessment.states.STARTED,
+        Assessment.states.ENDED_BY_INVIGILATOR,
+        Assessment.states.ENDED_DUE_TO_FINALIZATION,
       ]);
     });
   });

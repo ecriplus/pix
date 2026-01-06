@@ -1,14 +1,9 @@
-import lodash from 'lodash';
-
-import {
-  CORE_CERTIFICATION,
-  JuryCertificationSummary,
-} from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
-const { forIn } = lodash;
 
 describe('Unit | Domain | Models | JuryCertificationSummary', function () {
   describe('#constructor', function () {
@@ -35,7 +30,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       // then
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
-        certificationObtained: CORE_CERTIFICATION,
+        certificationObtained: 'CORE',
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -50,25 +45,13 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
   });
 
   describe('#validate', function () {
-    context('when a status is given', function () {
-      forIn(AssessmentResult.status, (status, key) => {
-        it(`should returns "${status}" status`, function () {
-          // when
-          const juryCertificationSummary = new JuryCertificationSummary({ status });
-
-          // then
-          expect(juryCertificationSummary.status).equal(JuryCertificationSummary.statuses[key]);
-        });
-      });
-    });
-
     context('when assessment is ended by invigilator', function () {
       it(`should returns "endedByInvigilator" status`, function () {
         // when
         const juryCertificationSummary = new JuryCertificationSummary({ isEndedByInvigilator: true });
 
         // then
-        expect(juryCertificationSummary.status).equal(JuryCertificationSummary.statuses['ENDED_BY_INVIGILATOR']);
+        expect(juryCertificationSummary.status).equal('endedBySupervisor');
       });
     });
 
@@ -78,7 +61,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         const juryCertificationSummary = new JuryCertificationSummary({ status: null });
 
         // then
-        expect(juryCertificationSummary.status).equal(JuryCertificationSummary.statuses.STARTED);
+        expect(juryCertificationSummary.status).equal(Assessment.states.STARTED);
       });
     });
   });

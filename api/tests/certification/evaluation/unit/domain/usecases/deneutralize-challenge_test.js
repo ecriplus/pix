@@ -1,6 +1,7 @@
 import { ChallengeDeneutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { deneutralizeChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/deneutralize-challenge.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | deneutralize-challenge', function () {
@@ -62,7 +63,7 @@ describe('Unit | UseCase | deneutralize-challenge', function () {
       certificationCourseId: 1,
       createdAt: new Date('2020-01-01'),
       completedAt: new Date('2020-01-01'),
-      state: CertificationAssessment.states.STARTED,
+      state: Assessment.states.STARTED,
       version: 2,
       certificationChallenges: [
         challengeToBeDeneutralized,
