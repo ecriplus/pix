@@ -14,7 +14,7 @@ import { injectDependencies } from '../../../../shared/infrastructure/utils/depe
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import * as membershipRepository from '../../../../team/infrastructure/repositories/membership.repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
-import * as campaignParticipationRepositoryfromBC from '../../../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import * as campaignParticipationRepositoryFromBC from '../../../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as libOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
@@ -40,7 +40,7 @@ const dependencies = {
   assessmentRepository,
   badgeAcquisitionRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
-  campaignParticipationRepositoryfromBC,
+  campaignParticipationRepositoryFromBC,
   campaignRepository,
   eventLoggingJobRepository,
   featureToggles,

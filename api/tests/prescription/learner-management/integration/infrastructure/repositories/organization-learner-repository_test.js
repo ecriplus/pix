@@ -212,7 +212,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // when
       const organizationLearner = domainBuilder.buildOrganizationLearner(organizationLearnerFromDB);
-      organizationLearner.delete(adminUserId, true);
+      organizationLearner.delete(adminUserId, { isAnonymizationWithDeletionEnabled: true });
 
       await remove(organizationLearner.dataToUpdateOnDeletion);
 

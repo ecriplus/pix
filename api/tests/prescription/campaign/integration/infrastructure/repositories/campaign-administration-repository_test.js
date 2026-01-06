@@ -830,7 +830,7 @@ describe('Integration | Repository | Campaign Administration', function () {
     it('should remove the correct campaign', async function () {
       // given
       const isAnonymizationWithDeletionEnabled = true;
-      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+      campaign.delete(userId, { isAnonymizationWithDeletionEnabled });
 
       const anotherCampaign = databaseBuilder.factory.buildCampaign({
         name: 'Another Campaign',
@@ -858,7 +858,7 @@ describe('Integration | Repository | Campaign Administration', function () {
       // given
       const isAnonymizationWithDeletionEnabled = true;
 
-      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+      campaign.delete(userId, { isAnonymizationWithDeletionEnabled });
 
       // when
       await campaignAdministrationRepository.remove([campaign]);

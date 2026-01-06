@@ -421,6 +421,117 @@ describe('Integration | UseCases | delete-campaign', function () {
           });
         });
 
+        it('should update deleted participation', async function () {
+          const deletedAt = new Date('2024-01-01');
+          const deletedBy = databaseBuilder.factory.buildUser().id;
+
+          const participationId = databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: true,
+            participantExternalId: 'email olala',
+            organizationLearnerId,
+            userId,
+            deletedAt,
+            deletedBy,
+            campaignId,
+          }).id;
+
+          await databaseBuilder.commit();
+
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          const deletedCampaignParticipation = await knex('campaign-participations')
+            .where({ id: participationId })
+            .first();
+
+          expect(deletedCampaignParticipation.participantExternalId).not.to.equal(null);
+          expect(deletedCampaignParticipation.userId).to.equal(userId);
+          expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
+          expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+        });
+
+        it('should update delete participation', async function () {
+          const deletedAt = new Date('2024-01-01');
+          const deletedBy = databaseBuilder.factory.buildUser().id;
+
+          const participationId = databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: true,
+            participantExternalId: 'email olala',
+            organizationLearnerId,
+            userId,
+            deletedAt,
+            deletedBy,
+            campaignId,
+          }).id;
+
+          await databaseBuilder.commit();
+
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+            keepPreviousDeletion: true,
+          });
+
+          const deletedCampaignParticipation = await knex('campaign-participations')
+            .where({ id: participationId })
+            .first();
+
+          expect(deletedCampaignParticipation.participantExternalId).null;
+          expect(deletedCampaignParticipation.userId).null;
+          expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
+          expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+        });
+
+        it('should delete all campaignParticipations even already deleted', async function () {
+          // given
+          const deletedUserId = databaseBuilder.factory.buildUser().id;
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: true,
+            participantExternalId: 'email olala',
+            organizationLearnerId,
+            userId,
+            deletedAt: new Date('2024-01-01'),
+            deletedBy: deletedUserId,
+            campaignId,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+            keepPreviousDeletion: true,
+          });
+
+          // then
+          const results = await knex('campaign-participations')
+            .select('userId', 'participantExternalId', 'deletedAt', 'deletedBy')
+            .where({ organizationLearnerId });
+
+          expect(results).to.have.lengthOf(2);
+          expect(results).deep.members([
+            {
+              userId: null,
+              participantExternalId: null,
+              deletedAt: now,
+              deletedBy: adminUserId,
+            },
+            {
+              userId: null,
+              participantExternalId: null,
+              deletedAt: new Date('2024-01-01'),
+              deletedBy: deletedUserId,
+            },
+          ]);
+        });
+
         it('should publish an event to historize action', async function () {
           // when
           // when

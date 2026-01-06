@@ -72,7 +72,7 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
         });
 
         // when
-        organizationLearner.delete(adminUserId, false);
+        organizationLearner.delete(adminUserId, { isAnonymizationWithDeletionEnabled: false });
 
         // then
         expect(organizationLearner.updatedAt).to.deep.equal(now);
@@ -116,7 +116,7 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
         });
 
         // when
-        organizationLearner.delete(adminUserId, true);
+        organizationLearner.delete(adminUserId, { isAnonymizationWithDeletionEnabled: true });
 
         // then
         expect(organizationLearner.MEFCode).to.equal(organizationLearner.MEFCode);

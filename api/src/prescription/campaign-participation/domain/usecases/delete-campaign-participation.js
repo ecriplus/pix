@@ -23,7 +23,7 @@ const deleteCampaignParticipation = withTransaction(async function ({
     });
 
   for (const campaignParticipation of campaignParticipations) {
-    campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
+    campaignParticipation.delete(userId, { isAnonymizationWithDeletionEnabled });
     await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
 
     if (isAnonymizationWithDeletionEnabled) {
