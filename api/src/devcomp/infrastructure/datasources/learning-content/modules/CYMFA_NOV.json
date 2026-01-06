@@ -136,7 +136,7 @@
               "element": {
                 "id": "a66d621e-344c-485e-bee0-139650302d47",
                 "type": "text",
-                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.&nbsp;</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous. </p>"
+                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.&nbsp;</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous.</p>"
               }
             }
           ]
@@ -174,7 +174,7 @@
               "element": {
                 "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
                 "type": "text",
-                "content": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.<br></p>"
+                "content": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.</p>"
               }
             },
             {
@@ -295,7 +295,7 @@
               "element": {
                 "id": "c4060b9a-1bd7-4e63-8cb7-42ac0d335f4e",
                 "type": "text",
-                "content": "<p>Il existe de plus en plus de<strong> vols d’identifiants et de mots de passe</strong>.</p><p>Le site internet Toutélectro a subi une attaque par des pirates informatiques. <br>Les pirates ont réussi à voler des identifiants et les mots de passe qui vont avec.<br><br>Richard et Sabrina font partie des utilisateurs dont les identifiants et mots de passe ont été volés.<br><br><br></p>"
+                "content": "<p>Il existe de plus en plus de<strong> vols d’identifiants et de mots de passe</strong>.</p><p>Le site internet Toutélectro a subi une attaque par des pirates informatiques. <br>Les pirates ont réussi à voler des identifiants et les mots de passe qui vont avec.<br><br>Richard et Sabrina font partie des utilisateurs dont les identifiants et mots de passe ont été volés.</p>"
               }
             },
             {
@@ -341,34 +341,34 @@
               "element": {
                 "id": "e2e1ac97-9094-4f0b-b4d8-59d93a5a492d",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, quel compte est le mieux protégé face à un vol d’identifiant et de mot de passe ?<br></p>",
+                "instruction": "<p>D’après vous, quel compte est le mieux protégé face à un vol d’identifiant et de mot de passe ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Le compte de Richard</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, le compte de Paul est mieux protégé. <br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom.&nbsp;<br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                      "diagnosis": "<p>Effectivement, le compte de Paul est mieux protégé. <br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom.&nbsp;<br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le compte de Sabrina</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Les deux comptes sont protégés de la même manière.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                      "diagnosis": "<p>C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   }
                 ],
@@ -600,7 +600,7 @@
                           "content": "<p>oui</p>",
                           "feedback": {
                             "state": "<p><strong>Bonne réponse ! 🎉</strong></p>",
-                            "diagnosis": "<p>Ici, Lucie doit prouver son identité avec un second moyen, différent du mot de passe&nbsp;: une notification sur son téléphone. C’est exactement le principe de la double authentification.<br></p>"
+                            "diagnosis": "<p>Ici, Lucie doit prouver son identité avec un second moyen, différent du mot de passe&nbsp;: une notification sur son téléphone. C’est exactement le principe de la double authentification.</p>"
                           }
                         },
                         {
@@ -633,7 +633,7 @@
                           "content": "<p>oui</p>",
                           "feedback": {
                             "state": "<p><strong>Mauvaise réponse.</strong><br></p>",
-                            "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.<br></p>"
+                            "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.</p>"
                           }
                         },
                         {
@@ -735,7 +735,7 @@
               "element": {
                 "id": "8435269a-1ee0-4e0c-8f25-c004643dea87",
                 "type": "text",
-                "content": "<p>Vous recevez sur votre smartphone une demande d’authentification de connexion à votre boîte mail. Pourtant vous n’êtes pas en train d’essayer de vous connecter.&nbsp;<br></p>"
+                "content": "<p>Vous recevez sur votre smartphone une demande d’authentification de connexion à votre boîte mail. Pourtant vous n’êtes pas en train d’essayer de vous connecter.&nbsp;</p>"
               }
             },
             {
