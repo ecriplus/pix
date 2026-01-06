@@ -123,15 +123,19 @@ export default class CreateOrUpdateTrainingForm extends Component {
           >
             <:label>Format</:label>
           </PixSelect>
-          <PixInput
-            @id="trainingLink"
-            required={{true}}
-            aria-required={{true}}
-            @value={{this.form.link}}
-            {{on "change" (fn this.updateForm "link")}}
-          >
-            <:label>Lien</:label>
-          </PixInput>
+
+          {{#if this.form.type}}
+            <PixInput
+              @id="trainingLink"
+              required={{true}}
+              aria-required={{true}}
+              @value={{this.form.link}}
+              {{on "change" (fn this.updateForm "link")}}
+            >
+              <:label>Lien</:label>
+            </PixInput>
+          {{/if}}
+
           <div class="admin-form--training__duration">
             <PixInput
               @id="trainingDaysDuration"

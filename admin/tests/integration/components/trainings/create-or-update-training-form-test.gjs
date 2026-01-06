@@ -23,7 +23,6 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     // then
     assert.dom(screen.getByLabelText(t('pages.trainings.training.details.title'))).exists();
     assert.dom(screen.getByLabelText(t('pages.trainings.training.details.internalTitle'))).exists();
-    assert.dom(screen.getByLabelText('Lien')).exists();
     assert.dom(screen.getByLabelText('Format')).exists();
     assert.dom(screen.getByLabelText('Jours (JJ)')).exists();
     assert.dom(screen.getByLabelText('Heures (HH)')).exists();
@@ -66,6 +65,27 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
     // then
     assert.ok(onCancel.called);
+  });
+
+  module('when type is provided', function () {
+    test('it should display the link field', async function (assert) {
+      // given
+      // when
+      const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
+
+      //then
+      assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
+
+      // when
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Webinaire' }));
+
+      // then
+      assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
+    });
   });
 
   module('when model is provided', function () {
