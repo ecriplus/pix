@@ -154,7 +154,7 @@
                     {
                       "id": "5c25263f-14ec-4407-a1cf-ab2b97275476",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours2.jpg",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/plante1.jpg",
                       "alt": "Une photo d’une plante",
                       "alternativeText": "",
                       "legend": "",
@@ -189,9 +189,9 @@
                     {
                       "id": "9d5cc2dd-24fc-49b7-9eb9-fa20228d04a2",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet2.jpg",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/plante2.jpg",
                       "alt": "Une photo d’une plante",
-                      "alternativeText": "",
+                      "alternativeText": "<p><br></p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -224,7 +224,7 @@
                     {
                       "id": "84204059-07f5-4303-a6e5-a48c484a2919",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet4.jpg",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/plante3.jpg",
                       "alt": "Une photo d’une feuille",
                       "alternativeText": "",
                       "legend": "",
@@ -259,7 +259,7 @@
                     {
                       "id": "799d55e3-6f85-4480-b1e5-bc6bc80eb9bf",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours4.jpg",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/plante4.jpg",
                       "alt": "Une photo d’une plante",
                       "alternativeText": "",
                       "legend": "",
