@@ -53,6 +53,7 @@ import { findTutorials } from './find-tutorials.js';
 import { getModule } from './get-module.js';
 import { getModuleByShortId } from './get-module-by-short-id.js';
 import { getModuleMetadataList } from './get-module-metadata-list.js';
+import { getModuleMetadataListByShortIds } from './get-module-metadata-list-by-short-ids.js';
 import { getTraining } from './get-training.js';
 import { getUserModuleStatuses } from './get-user-module-statuses.js';
 import { handleTrainingRecommendation } from './handle-training-recommendation.js';
@@ -84,6 +85,7 @@ const usecasesWithoutInjectedDependencies = {
   findTargetProfileSummariesForTraining,
   findTutorials,
   getModuleMetadataList,
+  getModuleMetadataListByShortIds,
   getModule,
   getModuleByShortId,
   getTraining,
