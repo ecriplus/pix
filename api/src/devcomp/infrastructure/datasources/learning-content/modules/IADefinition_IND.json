@@ -427,29 +427,22 @@
             {
               "type": "element",
               "element": {
-                "id": "9e2e1178-89e5-4c87-beb1-b7548e6d3937",
-                "type": "text",
-                "content": "<p>Aidez le logiciel d’IA à améliorer ces prédictions.<br></p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "e5badfae-bca4-421a-ae72-299891ef31da",
                 "type": "text",
-                "content": "<p>Cette photo montre une plante d’ail des ours.🌱 </p><p>Au départ, les calculs de l’IA ne sont pas bien réglés et la prédiction n’est pas correcte. </p><p> Ajustez les réglages pour obtenir la prédiction “ail des ours”.</p><p><em>[Le simulatur est en cours de création]</em></p>"
+                "content": "<p>La photo donnée à l'IA ci-dessous&nbsp;est une photographie d’ail des ours.🌱 </p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "bfd4c766-52aa-449d-876e-8970972999c9",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-def-ind/MaquettePoi.png",
-                "alt": "futur POI",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Un réseau de neurone",
+                "url": "https://epreuves.pix.fr/neural-network/neural-network.html?lang=fr",
+                "instruction": "<p>Ajustez les réglages pour obtenir la prédiction “ail des ours”.</p>",
+                "solution": "",
+                "height": 500
               }
             }
           ]
