@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Youtube | Pix</title>
+    <title>Youtube video player | Pix</title>
     <style>
       body {
         margin: 0;
@@ -20,10 +20,26 @@
     </style>
   </head>
   <body>
-    <iframe title="Youtube"></iframe>
+    <iframe
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
     <script>
-      const videoId = new URL(document.location).searchParams.get('v');
-      document.querySelector('iframe').src = `https://yout-ube.com/watch?v=${videoId}`;
+      const { searchParams } = new URL(document.location);
+
+      const url = new URL(searchParams.get('v'), 'https://www.youtube-nocookie.com/embed/');
+      searchParams.delete('v');
+
+      searchParams.entries().forEach(([key, value]) => {
+        url.searchParams.set(key, value);
+      });
+
+      url.searchParams.set('iv_load_policy', '3');
+
+      document.querySelector('iframe').src = url;
     </script>
   </body>
 </html>
