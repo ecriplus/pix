@@ -52,25 +52,26 @@ export default class CombineCourseBluePrintForm extends Component {
   }
 
   async addTargetProfile() {
-    await this.store.findRecord('target-profile', this.itemValue);
-
+    const targetProfile = await this.store.findRecord('target-profile', this.itemValue);
     this.blueprint.content = [
       ...this.blueprint.content,
       {
         type: 'evaluation',
         value: Number(this.itemValue),
+        label: targetProfile.internalName,
       },
     ];
   }
 
   async addModule() {
-    await this.store.findRecord('module', this.itemValue);
+    const module = await this.store.findRecord('module', this.itemValue);
 
     this.blueprint.content = [
       ...this.blueprint.content,
       {
         type: 'module',
         value: this.itemValue,
+        label: module.title,
       },
     ];
   }
@@ -245,7 +246,12 @@ export default class CombineCourseBluePrintForm extends Component {
         {{#if (gt this.blueprint.content.length 0)}}
           <ul class="combined-course-page__list">
             {{#each this.blueprint.content as |item|}}
-              <li><RequirementTag @type={{item.type}} @value={{item.value}} @onRemove={{this.removeRequirement}} />
+              <li><RequirementTag
+                  @type={{item.type}}
+                  @value={{item.value}}
+                  @label={{item.label}}
+                  @onRemove={{this.removeRequirement}}
+                />
               </li>
             {{/each}}
           </ul>

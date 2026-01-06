@@ -27,8 +27,8 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
     const findRecordStub = sinon.stub(store, 'findRecord');
-    findRecordStub.withArgs('module').resolves();
-    findRecordStub.withArgs('target-profile').resolves();
+    findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
+    findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
 
     //when
 
@@ -72,8 +72,8 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     assert.strictEqual(blueprintStub.name, 'name');
     assert.strictEqual(blueprintStub.internalName, 'internalName');
     assert.deepEqual(blueprintStub.content, [
-      { type: 'evaluation', value: 1 },
-      { type: 'module', value: 'module-123' },
+      { type: 'evaluation', value: 1, label: 'super pc' },
+      { type: 'module', value: 'module-123', label: 'module 123' },
     ]);
     assert.strictEqual(blueprintStub.illustration, 'illustrations/hello.svg');
     assert.strictEqual(blueprintStub.description, 'description');
@@ -82,33 +82,6 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
         message: t('components.combined-course-blueprints.create.notifications.success'),
       }),
     );
-  });
-
-  test('it should remove item when user clicks on remove button', async function (assert) {
-    // given
-    const pixToast = this.owner.lookup('service:pixToast');
-    const store = this.owner.lookup('service:store');
-
-    sinon.stub(pixToast, 'sendSuccessNotification');
-    const findRecordStub = sinon.stub(store, 'findRecord');
-
-    findRecordStub.withArgs('target-profile').resolves();
-    //when
-
-    const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
-
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
-      1,
-    );
-    await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
-
-    assert.ok(screen.getByText(/Profil Cible - 1/));
-
-    await click(screen.getByRole('button', { name: 'Supprimer' }));
-
-    //then
-    assert.notOk(screen.queryByText(/Profil Cible - 1/));
   });
 
   module('error cases', function () {
@@ -300,6 +273,62 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
           message: t('components.combined-course-blueprints.create.notifications.addItemError'),
         }),
       );
+    });
+  });
+
+  module('combined course blueprint items', function () {
+    test('should display tag for item when added', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const findRecordStub = sinon.stub(store, 'findRecord');
+      findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
+      findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
+      //when
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        1,
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+      await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        'module-123',
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+
+      assert.ok(screen.getByText(/Profil Cible - super pc/));
+      assert.ok(screen.getByText(/Module - module 123/));
+    });
+    test('it should remove item when user clicks on remove button', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const findRecordStub = sinon.stub(store, 'findRecord');
+
+      findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
+      //when
+
+      const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+
+      await fillIn(
+        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        1,
+      );
+      await click(
+        screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
+      );
+
+      assert.ok(screen.getByText(/Profil Cible - super pc/));
+      await click(screen.getByRole('button', { name: 'Supprimer' }));
+
+      //then
+      assert.notOk(screen.queryByText(/Profil Cible - super pc/));
     });
   });
 });

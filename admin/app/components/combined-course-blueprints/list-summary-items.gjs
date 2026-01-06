@@ -74,7 +74,11 @@ export default class CombineCourseBluePrintList extends Component {
               <details>
                 <summary>{{t "components.combined-course-blueprints.list.content"}}</summary>
                 {{#each blueprint.content as |requirement|}}
-                  <RequirementTag @type={{requirement.type}} @value={{requirement.value}} />
+                  <RequirementTag
+                    @type={{requirement.type}}
+                    @value={{requirement.value}}
+                    @label={{requirement.value}}
+                  />
                 {{/each}}
               </details>
             </:cell>
