@@ -172,20 +172,44 @@
             {
               "type": "element",
               "element": {
-                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
-                "type": "custom-draft",
-                "title": "Conenxion",
-                "url": "https://epreuves.pix.fr/papotix/papotix.html?lang=fr&mode=example",
-                "instruction": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><em>Simulateur à venir à partir de celui de l’évaluation.<br>(à tester avec \"se conencter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")</em></p>",
-                "height": 550
+                "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
+                "type": "text",
+                "content": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.<br></p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
+                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
                 "type": "text",
-                "content": "<p>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.<br></p>"
+                "content": "<p>Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
+                "type": "expand",
+                "title": "🗝️ Indice 1",
+                "content": "<p>Commencez par entrer l’identifiant et le mot de passe dans l’application Mail.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6e086f72-b417-4952-906a-45451a21190f",
+                "type": "expand",
+                "title": "🗝️ Indice 2 ",
+                "content": "<p>Un code a été reçu dans l’application Message, copiez-le.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b0f2ce58-dd06-4890-a4ff-0ad53e9f3adb",
+                "type": "expand",
+                "title": "🗝️ Indice 3",
+                "content": "<p>Collez le code dans l’application Mail.</p>"
               }
             }
           ]
