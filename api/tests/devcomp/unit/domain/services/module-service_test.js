@@ -16,20 +16,20 @@ describe('#getModuleByLink', function () {
 
   describe('with slug', function () {
     it('should throw an error if link slug does not match any module', async function () {
-      const moduleRepository = { getBySlug: sinon.stub() };
-      moduleRepository.getBySlug.withArgs({ slug: 'wrong-slug' }).rejects(new NotFoundError());
-      const error = await catchErr(getModuleByLink)({ link: '/modules/wrong-slug', moduleRepository });
+      const moduleMetadataRepository = { getBySlug: sinon.stub() };
+      moduleMetadataRepository.getBySlug.withArgs({ slug: 'wrong-slug' }).rejects(new NotFoundError());
+      const error = await catchErr(getModuleByLink)({ link: '/modules/wrong-slug', moduleMetadataRepository });
       expect(error).to.be.instanceOf(ModuleDoesNotExistError);
     });
 
     it('should return module if link slug matches a module', async function () {
       // given
-      const moduleRepository = { getBySlug: sinon.stub() };
+      const moduleMetadataRepository = { getBySlug: sinon.stub() };
       const expectedModule = Symbol('module');
-      moduleRepository.getBySlug.withArgs({ slug: 'good-slug' }).resolves(expectedModule);
+      moduleMetadataRepository.getBySlug.withArgs({ slug: 'good-slug' }).resolves(expectedModule);
 
       // when
-      const module = await getModuleByLink({ link: '/modules/good-slug', moduleRepository });
+      const module = await getModuleByLink({ link: '/modules/good-slug', moduleMetadataRepository });
 
       // then
       expect(module).to.equal(expectedModule);
@@ -37,12 +37,12 @@ describe('#getModuleByLink', function () {
 
     it('should return module if absolute link slug matches a module', async function () {
       // given
-      const moduleRepository = { getBySlug: sinon.stub() };
+      const moduleMetadataRepository = { getBySlug: sinon.stub() };
       const expectedModule = Symbol('module');
-      moduleRepository.getBySlug.withArgs({ slug: 'good-slug' }).resolves(expectedModule);
+      moduleMetadataRepository.getBySlug.withArgs({ slug: 'good-slug' }).resolves(expectedModule);
 
       // when
-      const module = await getModuleByLink({ link: 'https://app.pix.fr/modules/good-slug', moduleRepository });
+      const module = await getModuleByLink({ link: 'https://app.pix.fr/modules/good-slug', moduleMetadataRepository });
 
       // then
       expect(module).to.equal(expectedModule);
@@ -51,27 +51,30 @@ describe('#getModuleByLink', function () {
 
   describe('with short id', function () {
     it('should throw an error if link slug does not match any module', async function () {
-      const moduleRepository = { getByShortId: sinon.stub() };
-      moduleRepository.getByShortId.withArgs({ shortId: 'wrong-short-id' }).rejects(new NotFoundError());
-      const error = await catchErr(getModuleByLink)({ link: '/modules/wrong-short-id/wrong-slug', moduleRepository });
+      const moduleMetadataRepository = { getByShortId: sinon.stub() };
+      moduleMetadataRepository.getByShortId.withArgs({ shortId: 'wrong-short-id' }).rejects(new NotFoundError());
+      const error = await catchErr(getModuleByLink)({
+        link: '/modules/wrong-short-id/wrong-slug',
+        moduleMetadataRepository,
+      });
       expect(error).to.be.instanceOf(ModuleDoesNotExistError);
     });
 
     it('should throw an error if short id does not match expected format', async function () {
-      const moduleRepository = { getByShortId: sinon.stub() };
-      moduleRepository.getByShortId.withArgs({ shortId: 'wrong-short-id' }).rejects(new NotFoundError());
-      const error = await catchErr(getModuleByLink)({ link: '/modules/bac-a-sable/details', moduleRepository });
+      const moduleMetadataRepository = { getByShortId: sinon.stub() };
+      moduleMetadataRepository.getByShortId.withArgs({ shortId: 'wrong-short-id' }).rejects(new NotFoundError());
+      const error = await catchErr(getModuleByLink)({ link: '/modules/bac-a-sable/details', moduleMetadataRepository });
       expect(error).to.be.instanceOf(ModuleDoesNotExistError);
     });
 
     it('should return module if link slug matches a module', async function () {
       // given
-      const moduleRepository = { getByShortId: sinon.stub() };
+      const moduleMetadataRepository = { getByShortId: sinon.stub() };
       const expectedModule = Symbol('module');
-      moduleRepository.getByShortId.withArgs({ shortId: 'abcd1234' }).resolves(expectedModule);
+      moduleMetadataRepository.getByShortId.withArgs({ shortId: 'abcd1234' }).resolves(expectedModule);
 
       // when
-      const module = await getModuleByLink({ link: '/modules/abcd1234/good-slug', moduleRepository });
+      const module = await getModuleByLink({ link: '/modules/abcd1234/good-slug', moduleMetadataRepository });
 
       // then
       expect(module).to.equal(expectedModule);
@@ -79,14 +82,14 @@ describe('#getModuleByLink', function () {
 
     it('should return module if absolute link slug matches a module', async function () {
       // given
-      const moduleRepository = { getByShortId: sinon.stub() };
+      const moduleMetadataRepository = { getByShortId: sinon.stub() };
       const expectedModule = Symbol('module');
-      moduleRepository.getByShortId.withArgs({ shortId: 'edfg5678' }).resolves(expectedModule);
+      moduleMetadataRepository.getByShortId.withArgs({ shortId: 'edfg5678' }).resolves(expectedModule);
 
       // when
       const module = await getModuleByLink({
         link: 'https://app.pix.fr/modules/edfg5678/good-slug',
-        moduleRepository,
+        moduleMetadataRepository,
       });
 
       // then

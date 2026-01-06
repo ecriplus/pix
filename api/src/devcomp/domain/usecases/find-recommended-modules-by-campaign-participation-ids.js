@@ -3,7 +3,7 @@ import moduleService from '../services/module-service.js';
 
 export const findRecommendedModulesByCampaignParticipationIds = async function ({
   campaignParticipationIds,
-  moduleRepository,
+  moduleMetadataRepository,
   userRecommendedTrainingRepository,
   logger,
 }) {
@@ -13,7 +13,7 @@ export const findRecommendedModulesByCampaignParticipationIds = async function (
   const userRecommendedModules = await Promise.all(
     userRecommendedTrainings.map(async ({ id, link }) => {
       try {
-        const module = await moduleService.getModuleByLink({ link, moduleRepository });
+        const module = await moduleService.getModuleByLink({ link, moduleMetadataRepository });
         return { id, moduleId: module.id, shortId: module.shortId };
       } catch {
         logger.error({ message: `Erreur sur le lien de la ressource : ${link}` });

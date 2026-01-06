@@ -31,7 +31,7 @@ export class UpdateModulixTrainingsLink extends Script {
         const splittedLink = training.link.split('modules');
         const module = await moduleService.getModuleByLink({
           link: training.link,
-          moduleRepository: repositories.moduleRepository,
+          moduleMetadataRepository: repositories.moduleMetadataRepository,
         });
         const tmpSlug = splittedLink[1].split('tmp-');
         const newLink = `${splittedLink[0]}modules/${module.shortId}${tmpSlug.join('')}`;
