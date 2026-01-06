@@ -41,7 +41,7 @@ export default class OrganizationCreationForm extends Component {
   }
 
   get submitButtonText() {
-    return this.args.parentOrganizationName
+    return this.args.parentOrganization?.name
       ? 'components.organizations.creation.actions.add-child-organization'
       : 'common.actions.add';
   }
@@ -73,11 +73,11 @@ export default class OrganizationCreationForm extends Component {
           class="admin-form__card organization-creation-form__card"
           @title={{t "components.organizations.creation.general-information"}}
         >
-          {{#if @parentOrganizationName}}
+          {{#if @parentOrganization}}
             <h2 class="admin-form__content title organization-creation-form__parent-name--full">
               {{t
                 "components.organizations.creation.parent-organization-name"
-                parentOrganizationName=@parentOrganizationName
+                parentOrganizationName=@parentOrganization.name
               }}
             </h2>
           {{/if}}

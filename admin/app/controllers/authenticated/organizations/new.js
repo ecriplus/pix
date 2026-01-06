@@ -13,10 +13,6 @@ export default class NewController extends Controller {
 
   @tracked parentOrganizationId = null;
 
-  get parentOrganizationName() {
-    return this.model.parentOrganization ? this.model.parentOrganization.name : null;
-  }
-
   @action
   redirectOnCancel() {
     if (this.parentOrganizationId) {
