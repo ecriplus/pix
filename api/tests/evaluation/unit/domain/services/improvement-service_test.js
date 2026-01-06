@@ -17,6 +17,7 @@ describe('Unit | Service | ImprovementService', function () {
           assessment,
           knowledgeElements,
           isRetrying: false,
+          keepRecentOrValidated: false,
         });
 
         // then
@@ -35,7 +36,8 @@ describe('Unit | Service | ImprovementService', function () {
 
         assessment = domainBuilder.buildAssessment.ofTypeCampaign({
           state: 'started',
-          isImproving: true,
+          isImproving: false,
+          keepRecentOrValidated: false,
           createdAt: assessmentDate,
         });
 
@@ -56,6 +58,24 @@ describe('Unit | Service | ImprovementService', function () {
           assessment,
           knowledgeElements,
           isRetrying: true,
+          keepRecentOrValidated: false,
+        });
+
+        // then
+        expect(_.map(listOfKnowledgeElements, 'createdAt')).to.exactlyContain([
+          '2020-07-26',
+          '2020-07-27',
+          '2020-07-28',
+        ]);
+      });
+
+      it('should return the list of knowledge-elements filtered if keepRecentOrValidated is true', function () {
+        // when
+        const listOfKnowledgeElements = improvementService.filterKnowledgeElementsIfImproving({
+          assessment,
+          knowledgeElements,
+          isRetrying: false,
+          keepRecentOrValidated: true,
         });
 
         // then
@@ -110,6 +130,7 @@ describe('Unit | Service | ImprovementService', function () {
           assessment,
           knowledgeElements,
           isRetrying: false,
+          keepRecentOrValidated: false,
         });
 
         // then
