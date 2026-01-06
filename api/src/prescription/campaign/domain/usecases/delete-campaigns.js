@@ -1,3 +1,4 @@
+import { CLIENTS, PIX_ORGA } from '../../../../authorization/domain/constants.js';
 import * as CombinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
@@ -63,9 +64,9 @@ const deleteCampaigns = withTransaction(
       if (isAnonymizationWithDeletionEnabled) {
         await eventLoggingJobRepository.performAsync(
           EventLoggingJob.forUser({
-            client: client ?? 'PIX_ORGA',
+            client: client ?? CLIENTS.ORGA,
             action: campaignParticipation.loggerContext,
-            role: userRole ?? 'ORGA_ADMIN',
+            role: userRole ?? PIX_ORGA.ROLES.ADMIN,
             userId: campaignParticipation.id,
             updatedByUserId: userId,
             data: {},

@@ -1,4 +1,4 @@
-import { CLIENT, PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
+import { CLIENTS, PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { organizationLearnersController } from '../../../../../src/prescription/learner-management/application/organization-learners-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
@@ -89,7 +89,7 @@ describe('Unit | Prescription | Learner Management | Application | organization-
           organizationLearnerIds: [organizationLearnerId],
           organizationId,
           userRole: PIX_ADMIN.ROLES.SUPPORT,
-          client: CLIENT.PIX_ADMIN,
+          client: CLIENTS.ADMIN,
         }),
         'deleteOrganizationLearners',
       ).to.be.true;

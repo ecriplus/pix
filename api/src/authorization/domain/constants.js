@@ -14,9 +14,10 @@ const PIX_ORGA = {
   },
 };
 
-const CLIENT = {
-  PIX_ADMIN: 'PIX_ADMIN',
-  PIX_ORGA: 'PIX_ORGA',
+const CLIENTS = {
+  SCRIPT: 'SCRIPT',
+  ADMIN: 'PIX_ADMIN',
+  ORGA: 'PIX_ORGA',
 };
 
-export { CLIENT, PIX_ADMIN, PIX_ORGA };
+export { CLIENTS, PIX_ADMIN, PIX_ORGA };
