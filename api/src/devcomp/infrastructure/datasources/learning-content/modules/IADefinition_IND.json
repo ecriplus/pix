@@ -617,7 +617,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<ul><li><strong>\"L’ail des ours peut se manger en ____\" </strong></li></ul>"
+                    "content": "<p><strong>\"L’ail des ours peut se manger en ____\" </strong></p>"
                   },
                   {
                     "input": "627e8063-9059-4bd6-9492-396cfb983c48",
@@ -643,7 +643,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<ul><li><strong>Salade</strong><br></li></ul>"
+                    "content": "<p><strong>Salade</strong><br></p>"
                   },
                   {
                     "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
@@ -671,11 +671,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien vu !</p>",
-                    "diagnosis": ""
+                    "diagnosis": "<p>En apprentissage supervisé,<strong> la donnée</strong>&nbsp;est ce que le modèle reçoit en entrée. Ici, il s'agit du texte à trou. </p><p>L'<strong>étiquette</strong> est la réponse correcte associée à la donnée, que le modèle doit apprendre à prédire. Dans cet exemple, il s'agit du mot manquant.</p><p>Pour que le logiciel fonctionne, il faudra lui donner des milliers de textes à trou.</p>"
                   },
                   "invalid": {
                     "state": "<p>Et non !</p>",
-                    "diagnosis": ""
+                    "diagnosis": "<p>En apprentissage supervisé, la <strong>donnée&nbsp;</strong>est ce que le modèle reçoit en entrée. Ici, il s'agit du texte à trou.  L'<strong>étiquette</strong> est la réponse correcte associée à la donnée, que le modèle doit apprendre à prédire. Dans cet exemple, il s'agit du mot manquant.</p><p>Pour que le logiciel fonctionne, il faudra lui donner des milliers de textes à trou.</p>"
                   }
                 }
               }
