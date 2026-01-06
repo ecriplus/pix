@@ -320,7 +320,7 @@
                     {
                       "title": "Sabrina",
                       "description": "",
-                      "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand il se connecte à son compte Toutélectro, elle entre son identifiant, son mot de passe.",
+                      "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand elle se connecte à son compte Toutélectro, elle entre son identifiant, son mot de passe.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/sabrina.png",
                         "alt": "Illustration montrant une connexion : un utilisateur saisi son identifiant et son mot de passe sur un ordinateur et valide sa connexion."
@@ -456,7 +456,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>L’adresse mail est un moyen de</p>"
+                    "content": "<span>L’adresse mail est un moyen de</span>"
                   },
                   {
                     "input": "un",
@@ -482,7 +482,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.<br>Le mot de passe est un moyen de </p>"
+                    "content": "<span>.<br>Le mot de passe est un moyen de </span>"
                   },
                   {
                     "input": "deux",
@@ -508,7 +508,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p>"
+                    "content": "<span>.</spanp>"
                   }
                 ],
                 "feedbacks": {
