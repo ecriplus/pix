@@ -113,15 +113,6 @@ export default class CreateOrUpdateTrainingForm extends Component {
           >
             <:label>{{t "pages.trainings.training.details.internalTitle"}}</:label>
           </PixInput>
-          <PixInput
-            @id="trainingLink"
-            required={{true}}
-            aria-required={{true}}
-            @value={{this.form.link}}
-            {{on "change" (fn this.updateForm "link")}}
-          >
-            <:label>Lien</:label>
-          </PixInput>
           <PixSelect
             @placeholder="-- Sélectionnez un format --"
             @value={{this.form.type}}
@@ -132,6 +123,15 @@ export default class CreateOrUpdateTrainingForm extends Component {
           >
             <:label>Format</:label>
           </PixSelect>
+          <PixInput
+            @id="trainingLink"
+            required={{true}}
+            aria-required={{true}}
+            @value={{this.form.link}}
+            {{on "change" (fn this.updateForm "link")}}
+          >
+            <:label>Lien</:label>
+          </PixInput>
           <div class="admin-form--training__duration">
             <PixInput
               @id="trainingDaysDuration"

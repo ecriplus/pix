@@ -82,8 +82,8 @@ module('Acceptance | Trainings | Training', function (hooks) {
 
         await fillByLabel(t('pages.trainings.training.details.title'), 'Nouveau contenu formatif');
         await fillByLabel(t('pages.trainings.training.details.internalTitle'), 'Mon titre interne');
-        await fillByLabel('Lien', 'http://www.example.net');
         await click(screen.getByText('Webinaire'));
+        await fillByLabel('Lien', 'http://www.example.net');
 
         await fillByLabel('Jours (JJ)', 1);
         await fillByLabel('Heures (HH)', 0);
