@@ -18,6 +18,8 @@ module('Integration | Component |  common/combined-courses/requirement-tag', fun
       <template><RequirementTag @type={{item.type}} @value={{item.value}} /></template>,
     );
     assert.ok(screen.getByText(t('components.combined-course-blueprints.items.module'), { exact: false }));
+    const link = screen.getByRole('link');
+    assert.ok(link.getAttribute('href').endsWith('modules/abc-123/slug/details'));
   });
   test('should display a target profile item when type is evaluation', async function (assert) {
     const item = {
@@ -27,7 +29,9 @@ module('Integration | Component |  common/combined-courses/requirement-tag', fun
     const screen = await renderScreen(
       <template><RequirementTag @type={{item.type}} @value={{item.value}} /></template>,
     );
+    const link = screen.getByRole('link');
     assert.ok(screen.getByText(t('components.combined-course-blueprints.items.targetProfile'), { exact: false }));
+    assert.ok(link.getAttribute('href').endsWith(`/target-profiles/${item.value}/details`));
   });
 
   test('should call onRemove with value and type when remove button is clicked', async function (assert) {

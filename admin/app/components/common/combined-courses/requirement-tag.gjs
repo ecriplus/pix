@@ -1,7 +1,9 @@
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 
 const getItemColor = (type) => (type === 'evaluation' ? 'purple' : 'blue');
 const getItemType = (type) =>
@@ -21,9 +23,23 @@ export default class RequirementTag extends Component {
 
   <template>
     <PixTag @color={{getItemColor @type}} @displayRemoveButton={{this.displayRemoveButton}} @onRemove={{this.onRemove}}>
-      {{t (getItemType @type)}}
-      -
-      {{@value}}
+      {{#if (eq @type "evaluation")}}
+        <LinkTo
+          @route="authenticated.target-profiles.target-profile.details"
+          @model={{@value}}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{t (getItemType @type)}}
+          -
+          {{@value}}</LinkTo>
+      {{else}}
+        <a target="_blank" rel="noopener noreferrer" href="https://app.recette.pix.fr/modules/{{@value}}/slug/details">
+          {{t (getItemType @type)}}
+          -
+          {{@value}}
+        </a>
+      {{/if}}
     </PixTag>
   </template>
 }
