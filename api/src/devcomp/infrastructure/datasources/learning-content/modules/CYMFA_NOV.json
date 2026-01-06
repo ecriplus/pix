@@ -1,0 +1,760 @@
+{
+  "id": "ddaa2f81-4855-4606-bcae-d21e40ac9969",
+  "shortId": "ea6796a0",
+  "slug": "cyber-double-authentification",
+  "title": "Protéger ses données en ligne avec la double authentification",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/CY_MFA_NOV/picto_cyber_mfa_nov.svg",
+    "description": "<p>Pour vous connectez à vos différents services en ligne, vous devez entrer votre identifiant puis votre mot de passe... et parfois un code en plus 🔐 <br>Dans ce module, vous allez voir pourquoi ces étapes sont importantes et comment la double authentification renforce votre sécurité en ligne.<br> <br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em><br></p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Différencier le rôle d’un identifiant et le rôle d’un mot de passe</p>",
+      "<p>Comprendre à quoi sert la double authentification</p>",
+      "<p>Identifier des situations où la double authentification est utilisée</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "3f3683ee-a17c-4a54-a2b0-de916c27af12",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "41842069-2343-45b4-97ee-b416f540ae41",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6c6416ff-196c-4bb5-bc13-7a7400b360f9",
+                "type": "text",
+                "content": "<p>Philomène est la nouvelle présidente d’une association.&nbsp;<br>Elle vient de récupérer le mot de passe et l’identifiant pour se connecter à la boîte mail de l’association.&nbsp;📧<br>Mais au moment de se connecter, Impossible ! Philomène est bloquée.<br><br>Voici l’écran qui s’affiche&nbsp;:&nbsp;<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "21de2b19-c6cb-472f-a487-8ea582aba05f",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/CY_MFA_NOV/notifasso.png",
+                "alt": "Capture d’écran décrite en détail dans l’alternative textuelle.",
+                "alternativeText": "<p>Page de vérification de connexion demandant un code à six chiffres envoyé par SMS à un numéro se terminant par 60 pour se connecter au compte lassociation@gmail.com. Champ de saisie du code et bouton «&nbsp;Suivant&nbsp;».<br></p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "09f1f6bb-bcc4-44b6-9761-ea223845c149",
+                "type": "qcu-discovery",
+                "instruction": "<p>Selon vous, pourquoi Philomène ne peut pas accéder à la boîte mail ?<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Philomène s’est trompé en tapant le mot de passe de la boîte mail.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le service de mail demande une vérification supplémentaire pour se connecter.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh oui ! Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La boîte mail de l’association a été supprimée.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br></p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1cb4c1cd-d9bc-4fa2-9d4d-1659ed95e5f0",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5a44d403-1c9e-4f3b-8ca6-e09ba42dfb77",
+                "type": "text",
+                "content": "<p>Avant de comprendre à quoi sert cette étape de vérification supplémentaire, il faut d’abord savoir à quoi servent l’identifiant et le mot de passe lors d’une connexion.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4162c04-21b0-4902-b08e-d0e553ed563d",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "3d584b80-ff21-4686-a2d1-7754fe7c789f",
+          "type": "discovery",
+          "title": "Découverte-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b6d0a765-5207-4321-b21a-a1807be1d0e5",
+                "type": "custom-draft",
+                "title": "Champs de connexion",
+                "url": "https://1024pix.github.io/atelier-contenus/LSI/MFA_Nov/connexion.html",
+                "instruction": "",
+                "height": 550
+              }
+            }
+          ]
+        },
+        {
+          "id": "025e96aa-dbdc-455b-9daf-4203b3ba16fa",
+          "type": "short-lesson",
+          "title": "Notion-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a66d621e-344c-485e-bee0-139650302d47",
+                "type": "text",
+                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.&nbsp;</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous. </p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b1de181b-552d-414e-a4e5-d46034ee65d9",
+          "type": "transition",
+          "title": "Transition-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2afec4e6-acd9-4719-badf-877a49253e4f",
+                "type": "text",
+                "content": "<p>Parfois, en plus du mot de passe, une étape supplémentaire est demandée pour valider la connexion. Voyons ça ensemble avec le cas de Philomène et de la boîte mail de son association.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4b7dde7a-2ed4-4e00-97bf-2593a0f7926b",
+          "type": "discovery",
+          "title": "Découvert-2a",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ea9dfc1a-89c1-4d04-a807-5213a6cf9df9",
+                "type": "text",
+                "content": "<p>Grâce à Nicolas, l’ancien président de l’association Philomène a rattaché son numéro de téléphone à la boîte mail de l’association.<br>C’est à présent Philomène qui recevra le code de vérification quand elle se connectera.<br><br>Voici les informations pour se connecter à la boîte mail&nbsp;:</p><ul><li> lassociation@pixmail.org</li><li>mdp&nbsp;: Asso12Aniw0!</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
+                "type": "custom-draft",
+                "title": "Conenxion",
+                "url": "https://epreuves.pix.fr/papotix/papotix.html?lang=fr&mode=example",
+                "instruction": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><em>Simulateur à venir à partir de celui de l’évaluation.<br>(à tester avec \"se conencter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")</em></p>",
+                "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
+                "type": "text",
+                "content": "<p>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d69a5bcb-dc7a-4247-85a6-941b0b5bc7db",
+          "type": "short-lesson",
+          "title": "Notion-2a",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1828132d-14ee-4724-b7df-6835cfc89ff6",
+                "type": "text",
+                "content": "<p>Lors d’une connexion à un service en ligne, le code reçu par SMS sert de <strong>deuxième moyen pour vérifier votre identité</strong>.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "98281c1d-5f2f-49ae-b1be-9c52678a2bf7",
+          "type": "discovery",
+          "title": "Découverte-2b",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2ab37e14-affd-4917-b78a-73ee24f6f836",
+                "type": "custom-draft",
+                "title": "",
+                "url": "https://1024pix.github.io/atelier-contenus/LSI/MFA_Nov/qcmimg.html",
+                "instruction": "<p>À votre avis, quels sont les autres moyens de vérification possibles ?</p>",
+                "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "33c65867-a99d-4ee8-88df-9c9d3d368fb4",
+                "type": "text",
+                "content": "<p>La double authentification, ce n’est pas toujours un code reçu par SMS.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b077604e-e6b5-4cb8-abc8-dcddb18074bf",
+          "type": "short-lesson",
+          "title": "Notion-2b",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "219b3c9e-33f9-4ce7-9b4a-5eaed1af77ec",
+                "type": "text",
+                "content": "<p>Certains services en ligne demandent une double authentification à chaque <strong>nouvelle connexion</strong>.&nbsp;🔐<br>D’autres services la demandent uniquement lors de la <strong>connexion depuis un nouvel appareil</strong>.&nbsp;🖥️📱</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4a03ede6-60c4-43cb-8afb-cdaaa59c61ba",
+          "type": "transition",
+          "title": "Transition-2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6feb5e9a-884f-416d-8c6c-65a76430e8a6",
+                "type": "text",
+                "content": "<p>Avoir une étape de vérification en plus pour se connecter peut sembler long. Mais alors à quoi sert la double authentification ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4a2ecd1c-e7cf-4f2a-b4a4-def4b62a35ca",
+          "type": "discovery",
+          "title": "Découverte-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c4060b9a-1bd7-4e63-8cb7-42ac0d335f4e",
+                "type": "text",
+                "content": "<p>Il existe de plus en plus de<strong> vols d’identifiants et de mots de passe</strong>.</p><p>Le site internet Toutélectro a subi une attaque par des pirates informatiques. <br>Les pirates ont réussi à voler des identifiants et les mots de passe qui vont avec.<br><br>Richard et Sabrina font partie des utilisateurs dont les identifiants et mots de passe ont été volés.<br><br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4c95a902-e17b-4875-9003-ca39fa175950",
+                "type": "custom",
+                "instruction": "<p>Observer les informations suivantes puis répondez à la question.</p>",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image-text",
+                  "slides": [
+                    {
+                      "title": "Richard",
+                      "description": "",
+                      "text": "La double authentification est activée sur le compte de Richard. Quand il se connecte à son compte Toutélectro, il entre son identifiant, son mot de passe puis un code envoyé sur son téléphone sur son téléphone.",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/richard.png",
+                        "alt": "Illustration montrant une connexion : un utilisateur saisit son identifiant, son mot de passe sur un ordinateur et valide la connexion avec un code affiché sur son téléphone."
+                      }
+                    },
+                    {
+                      "title": "Sabrina",
+                      "description": "",
+                      "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand il se connecte à son compte Toutélectro, elle entre son identifiant, son mot de passe.",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/sabrina.png",
+                        "alt": "Illustration montrant une connexion : un utilisateur saisi son identifiant et son mot de passe sur un ordinateur et valide sa connexion."
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableStyleAroundImage": false,
+                  "enableLoop": false,
+                  "imageTextDisplay": ""
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e2e1ac97-9094-4f0b-b4d8-59d93a5a492d",
+                "type": "qcu-discovery",
+                "instruction": "<p>D’après vous, quel compte est le mieux protégé face à un vol d’identifiant et de mot de passe ?<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le compte de Richard</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, le compte de Paul est mieux protégé. <br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom.&nbsp;<br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le compte de Sabrina</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Les deux comptes sont protégés de la même manière.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.<br></p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d4517990-4865-4f4b-b7a7-47e02419906b",
+          "type": "short-lesson",
+          "title": "Notion-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4835a35e-7f73-4774-9bf3-a6fb6c1ed873",
+                "type": "text",
+                "content": "<h4>⚠️ Que faire si vous recevez une demande d’authentification alors que vous n’essayez pas de vous connecter ?</h4><p>C’est peut-être qu’une personne tente d’accéder à votre compte sur un service en ligne. Si c’est la cas, réagissez vite&nbsp;: </p><ul><li><strong>Ne validez pas la demande d’authentification.&nbsp;</strong></li><li><strong>Changez immédiatement votre mot de passe.</strong></li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2505ead9-871b-41fe-b3be-dc59de3f6494",
+          "type": "transition",
+          "title": "Transition-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7ae52344-ccb6-4dfa-b6df-a04b757dc30a",
+                "type": "text",
+                "content": "<p>La double authentification n’est pas automatiquement activée sur tous les services en ligne. Pour être mieux protégé, activez la dès que c’est possible !</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8ddcd74c-52a1-408c-b84f-f9d509285dc9",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "f2adbfba-5b69-400f-a8cd-155d45b64649",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4b3376cc-ab7c-4d22-b6f4-95b83fc0e68e",
+                "type": "text",
+                "content": "<ul>    <li><strong>Pour accéder à un service en ligne il faut</strong>&nbsp;:&nbsp;<ul>            <li><strong>S’identifier</strong>, dire qui l’on est, avec une adresse mail, par exemple.</li>            <li><strong>S’authentifier</strong>, prouver qui l’on est, avec un mot de passe par exemple.</li>        </ul>    </li></ul><ul>    <li>La <strong>double authentification</strong> permet de mieux<strong> protéger l’accès à vos services en ligne</strong>.</li></ul><ul>    <li>Elle ajoute un<strong> second moyen de vérifier votre identité</strong> lors de vos connexions, en plus de votre mot de passe.&nbsp;✔️Par exemple&nbsp;: un code à usage unique ou une notification.</li></ul><ul>    <li>Si une personne mal intentionnée vole votre identifiant et votre mot de passe, la <strong>double authentification peut l’empêcher de se connecter</strong>. 🛡️</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "be291f1d-aeab-46eb-ae6f-6c48105fb08a",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "9de0d74c-eb79-4b4e-bad6-cfa1aefe489e",
+          "type": "activity",
+          "title": "Activité-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a1a81751-c328-4813-91c4-a5e1408045a9",
+                "type": "text",
+                "content": "<p><strong>Voyons si vous avez retenu l’essentiel.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "61071c75-77be-4c9a-bcb4-2e3ecd312684",
+                "type": "qrocm",
+                "instruction": "<p>Complétez les phrases suivantes en choisissant le terme approprié.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>L’adresse mail est un moyen de</p>"
+                  },
+                  {
+                    "input": "un",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "-Sélectionnez-",
+                    "ariaLabel": "-Sélectionnez-",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "s’authentifier"
+                      },
+                      {
+                        "id": "2",
+                        "content": "s’identifier"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.<br>Le mot de passe est un moyen de </p>"
+                  },
+                  {
+                    "input": "deux",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "-Sélectionnez-",
+                    "ariaLabel": "-Sélectionnez-",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "s’authentifier"
+                      },
+                      {
+                        "id": "2",
+                        "content": "s’identifier"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p><strong>Bonne réponse ! 🎉</strong><br></p>",
+                    "diagnosis": "<p>L’identifiant et le mot de passe sont les deux éléments nécessaires pour pouvoir se connecter à un service en ligne.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Lors d’une connexion, certaines informations servent à dire qui souhaite se connecter, tandis que d’autres servent à prouver que c’est bien cette personne.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "4cfa4b7b-af95-43e4-84f9-dcc4b93f633b",
+          "type": "activity",
+          "title": "Activité-2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4c939859-058b-4cfd-9bae-d5aeaa6f340c",
+                "type": "qcu",
+                "instruction": "<p>À quoi sert la double authentification ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>À compliquer la connexion pour les utilisateurs.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>La double authentification n’a pas pour but de compliquer la connexion, même si c’est parfois le cas.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>À remplacer le mot de passe par un code aléatoire.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>La double authentification n’a pas pour but de remplacer le mot de passe, mais d’ajouter une étape supplémentaire.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>À mieux protéger l’accès à un compte de service en ligne.</p>",
+                    "feedback": {
+                      "state": "<p><strong>Bonne réponse ! 🎉</strong></p>",
+                      "diagnosis": "<p>La double authentification ajoute une protection supplémentaire lors de la connexion à un service en ligne.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "52f0a8d2-24ed-4095-9fbb-89a08fef687a",
+          "type": "activity",
+          "title": "Activité-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7f0ec015-51f8-4e17-a61e-2c2b777d6818",
+                "type": "text",
+                "content": "<p>Pour chaque situation suivante, indiquez si elle correspond à une&nbsp;double authentification.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d74b7749-466e-4b1f-b631-7985050f79f0",
+                      "type": "text",
+                      "content": "<p>Lucie se connecte à son compte de messagerie depuis un ordinateur de la bibliothèque.<br>Après avoir tapé son mot de passe, une fenêtre lui indique qu’une notification vient d’être envoyée sur son téléphone.</p>"
+                    },
+                    {
+                      "id": "11b8ec47-45f7-4249-94db-f7cdc6275352",
+                      "type": "qcu",
+                      "instruction": "<p>Cette situation correspond-elle à une double authentification ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>oui</p>",
+                          "feedback": {
+                            "state": "<p><strong>Bonne réponse ! 🎉</strong></p>",
+                            "diagnosis": "<p>Ici, Lucie doit prouver son identité avec un second moyen, différent du mot de passe&nbsp;: une notification sur son téléphone. C’est exactement le principe de la double authentification.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>non</p>",
+                          "feedback": {
+                            "state": "<p><strong>Mauvaise réponse.</strong></p>",
+                            "diagnosis": "<p>Ici, Lucie doit prouver son identité avec un second moyen, différent du mot de passe&nbsp;: une notification sur son téléphone. C’est exactement le principe de la double authentification.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "68a4bcdc-7fc6-4373-87b8-19b163b4c9c8",
+                      "type": "text",
+                      "content": "<p>Nassim ne se souvient plus du mot de passe de son compte sur un réseau social. Il tente de se connecter puis il clique sur «mot de passe oublié». <br>Il reçoit un mail pour réinitialiser son mot de passe.</p>"
+                    },
+                    {
+                      "id": "61d47fe7-7a71-45f8-92d5-d7f5d1708a55",
+                      "type": "qcu",
+                      "instruction": "<p>Cette situation correspond-elle à une double authentification ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>oui</p>",
+                          "feedback": {
+                            "state": "<p><strong>Mauvaise réponse.</strong><br></p>",
+                            "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>non</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "444a5114-9d77-4e5b-ac64-3beae20a6114",
+                      "type": "text",
+                      "content": "<p>Lilian se connecte à son espace client sur un site de vente en ligne depuis le smartphone qu’il utilise tous les jours. Il entre son mot de passe et accède directement à son espace client.</p>"
+                    },
+                    {
+                      "id": "45a88079-5b10-453d-a927-9d201227413c",
+                      "type": "qcu",
+                      "instruction": "<p>Cette situation correspond-elle à une double authentification ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>oui</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Dans cette situation, Lilian n’utilise qu’un mot de passe pour accéder à son compte. Aucun code, notification ou autre preuve supplémentaire n’est demandé.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>non</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "0b153c7a-a61b-4bbf-aef3-07f6e157e8de",
+                      "type": "text",
+                      "content": "<p>Pour accéder à son espace administratif en ligne, Clara entre son identifiant et son mot de passe. Elle doit ensuite saisir un code reçu par e-mail.</p>"
+                    },
+                    {
+                      "id": "213f93cd-a44b-4b5c-a022-6355a1a259e6",
+                      "type": "qcu",
+                      "instruction": "<p>Cette situation correspond-elle à une double authentification ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>oui</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Clara doit fournir une seconde preuve d’identité après son mot de passe&nbsp;: un code reçu par e-mail. C’est une forme classique de double authentification.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>non</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Clara doit fournir une seconde preuve d’identité après son mot de passe&nbsp;: un code reçu par e-mail. C’est une forme classique de double authentification.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ebd60191-fc1a-49b4-ad47-928885c7df6c",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "011da191-16a4-4c76-9135-9a5f591381f1",
+          "type": "challenge",
+          "title": "Transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8435269a-1ee0-4e0c-8f25-c004643dea87",
+                "type": "text",
+                "content": "<p>Vous recevez sur votre smartphone une demande d’authentification de connexion à votre boîte mail. Pourtant vous n’êtes pas en train d’essayer de vous connecter.&nbsp;<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9ea08f13-2472-4fa8-80e3-4b2b6f673db9",
+                "type": "qcu-declarative",
+                "instruction": "<p>Que faites vous ?&nbsp;</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Je change rapidement le mot de passe du compte concerné.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Je valide la demande pour vérifier ce qu’il se passe.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe, surtout pas de valider la connexion.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>J’ignore le message.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Ignorer la notification, ce n’est pas suffisant. Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
