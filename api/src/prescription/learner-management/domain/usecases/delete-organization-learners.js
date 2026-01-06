@@ -70,6 +70,7 @@ const deleteOrganizationLearners = withTransaction(async function ({
     const campaignParticipations =
       await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearner({
         organizationLearnerId: organizationLearner.id,
+        withDeletedParticipation: keepPreviousDeletion,
       });
 
     for (const campaignParticipation of campaignParticipations) {

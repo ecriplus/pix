@@ -936,6 +936,22 @@ describe('Integration | Repository | Campaign Participation', function () {
         status: SHARED,
       });
     });
+
+    it('returns deleted participation when options set to true', async function () {
+      databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        deletedAt: new Date('2022-05-01'),
+      });
+
+      await databaseBuilder.commit();
+
+      const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner({
+        organizationLearnerId,
+        withDeletedParticipation: true,
+      });
+
+      expect(participations).lengthOf(1);
+    });
   });
 
   describe('#findInfoByCampaignId', function () {
