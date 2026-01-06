@@ -409,7 +409,7 @@
               "element": {
                 "id": "46999db8-c96c-42e8-93ac-a558c72a55f2",
                 "type": "text",
-                "content": "<p>Djibril a reçu un message de son ami Brian sur le groupe de sa classe. <br>Consultez le message puis répondez à la question.</p>"
+                "content": "<p>Djibril a reçu un message de Brian sur le groupe de parents de l'équipe de rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
               }
             },
             {
@@ -417,9 +417,9 @@
               "element": {
                 "id": "6e6af05b-b933-4022-baa9-6194fdb63584",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/deepfakes/telephone_deepfake.png",
+                "url": "https://assets.pix.org/modules/IAInfox_NOV/entraineurjolieville.png",
                 "alt": "",
-                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les collègues du taff\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE VACANCES !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée !»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
+                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanée nommé « Parents du rugby »:&nbsp;<br>Brian partage une photo d'un homme avec une veste où est indiqué le mot « Jolieville ». Cet homme est en train de donner une enveloppe à un autre homme qui porte une veste indiquant le mot « Calmeville ». Sous la photo, Brian a écrit le message suivant&nbsp;:«&nbsp;Alerte corruption ! L’entraîneur de l’équipe de Jolieville a été aperçu en train de donner une enveloppe à l’entraîneur de l’équipe de Calmeville. Comme par hasard, Calmeville a perdu le lendemain !»</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -435,35 +435,35 @@
                     "id": "1",
                     "content": "<p>Liker le message de Brian.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le <strong>bon réflexe</strong>, c’est de vérifier <strong>d’où l’image vient</strong> et <strong>si elle est vraie</strong>. <br>Liker de fausses informations peut alimenter des situations de <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Partager la photo à ses contacts.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le <strong>bon réflexe</strong>, c’est de vérifier <strong>d’où l’image vient</strong> et <strong>si elle est vraie</strong>. <br>Partager de fausses informations peut alimenter des situations de <strong>cyberharcèlement</strong>.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> ! <br>La partager, en revanche, pourrait alimenter des situations de <strong>cyberharcèlement</strong>.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Chercher la source de l'image sur internet.</p>",
+                    "content": "<p>Chercher à savoir d'où vient l’information.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> !<br>La partager, en revanche, pourrait alimenter des situations de <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Chercher à savoir <strong>d'où vient une information</strong> avant de la partager, c'est le <strong>bon réflexe</strong> !<br>La partager, en revanche, pourrait alimenter des situations de <strong>cyberharcèlement</strong>. La diffusion de cette image pourrait avoir de graves conséquences pour l’entraîneur de l’équipe de Jolieville. Il pourrait porter plainte.</p>"
                     }
                   }
                 ],
@@ -786,34 +786,27 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>J'aurais partagé la vidéo.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Attention à ne pas partager de deepfakes !</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
                     "content": "<p>J'aurais signalé la vidéo.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, quand on repère un deepfake sur un réseau social, on peut le signaler.</p>"
                     }
                   },
                   {
-                    "id": "3",
+                    "id": "2",
                     "content": "<p>J'aurais cherché la source.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bon réflexe !&nbsp;</p>"
                     }
                   },
                   {
-                    "id": "4",
+                    "id": "3",
                     "content": "<p> J'aurais discuté de la vidéo avec des amis.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, lorsqu'on a un doute sur un contenu en ligne, on peut demander l'avis de ses amis.</p>"
                     }
                   },
                   {
-                    "id": "5",
+                    "id": "4",
                     "content": "<p>Rien de spécial.</p>",
                     "feedback": {
                       "diagnosis": "<p>Passer son chemin face à un contenu en ligne qu'on soupçonne d'être un deepfake, c'est bien ! Le signaler, c'est mieux !</p>"
