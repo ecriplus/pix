@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.292.0](https://github.com/1024pix/pix/compare/v5.291.1...v5.292.0) (2026-01-06)
+
+### :rocket: Amélioration
+
+- [#14601](https://github.com/1024pix/pix/pull/14601) Accéder rapidement au profil cible ou module depuis les tags du schéma d'un parcours combiné (PIX-20868). 
+- [#14610](https://github.com/1024pix/pix/pull/14610) Améliorations page vidéo Youtube (PIX-20983) 
+- [#14447](https://github.com/1024pix/pix/pull/14447) Créer un script pour rattrapper l'archivage des anciennes organisations avant la suppression automatique des campagnes / participations etc.... (PIX-17863). 
+- [#14501](https://github.com/1024pix/pix/pull/14501) Permettre de retenter les acquis préalablement échoué au démarrage d'une campagne (PIX-20839). 
+- [#14492](https://github.com/1024pix/pix/pull/14492) Tmp modif descriptions Module "J'améliore mes prompts" et "Les biais" 
+- [#14451](https://github.com/1024pix/pix/pull/14451) WIP Deepfake - Nouvel exemple activite 4 et amelioration defi 
+
+### :building_construction: Tech
+
+- [#14516](https://github.com/1024pix/pix/pull/14516) :recycle: Utilise les status de l'`Assessment` uniquement (pix-20953) 
+- [#14602](https://github.com/1024pix/pix/pull/14602) Afficher les logs des appels mirage durant les tests dans la console sur PixAdmin 
+- [#11431](https://github.com/1024pix/pix/pull/11431) Amélioration de PGBoss (reprise de la PR 11308). 
+- [#14552](https://github.com/1024pix/pix/pull/14552) Utiliser une nouvelle API pour récupérer l'historique d'un référentiel de certif (PIX-20959) 
+
+### :arrow_up: Montée de version
+
+- [#14604](https://github.com/1024pix/pix/pull/14604) MàJ de @1024pix/epreuves-components en 2.4.7
+
 ## [5.291.1](https://github.com/1024pix/pix/compare/v5.291.0...v5.291.1) (2026-01-05)
 
 ### :building_construction: Tech
