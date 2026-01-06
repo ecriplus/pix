@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.294.0](https://github.com/1024pix/pix/compare/v5.293.0...v5.294.0) (2026-01-06)
+
+### :rocket: Amélioration
+
+- [#14614](https://github.com/1024pix/pix/pull/14614) Ajouter un feature toggle isModuleSelectionForTrainingEnabled (PIX-20920) 
+- [#14497](https://github.com/1024pix/pix/pull/14497) Ajouter un script pour mettre en conformité les anciennes données supprimées des learners (PIX-20887). 
+
+### :bug: Correction
+
+- [#14623](https://github.com/1024pix/pix/pull/14623) Evite les crashs du client ioredis en revenant à la version 5.8.0. 
+
+### :building_construction: Tech
+
+- [#14605](https://github.com/1024pix/pix/pull/14605) Améliorer les performances des apis de recommandation de modules (PIX-20875) 
+
+### :arrow_up: Montée de version
+
+- [#14615](https://github.com/1024pix/pix/pull/14615) Update dependency @1024pix/pix-ui to ^55.34.0 (admin) 
+- [#14616](https://github.com/1024pix/pix/pull/14616) Update dependency @1024pix/pix-ui to ^55.34.0 (certif) 
+- [#14617](https://github.com/1024pix/pix/pull/14617) Update dependency @1024pix/pix-ui to ^55.34.0 (junior) 
+- [#14618](https://github.com/1024pix/pix/pull/14618) Update dependency @1024pix/pix-ui to ^55.34.0 (mon-pix) 
+- [#14619](https://github.com/1024pix/pix/pull/14619) Update dependency @1024pix/pix-ui to ^55.34.0 (orga) 
+- [#14577](https://github.com/1024pix/pix/pull/14577) Update dependency eslint-plugin-unicorn to v62 (certif)
+
 # [5.293.0](https://github.com/1024pix/pix/compare/v5.292.0...v5.293.0) (2026-01-06)
 
 ### :rocket: Amélioration
