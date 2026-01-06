@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.293.0](https://github.com/1024pix/pix/compare/v5.292.0...v5.293.0) (2026-01-06)
+
+### :rocket: Amélioration
+
+- [#14495](https://github.com/1024pix/pix/pull/14495) Ajouter un script pour rattrapper les campagnes supprimés des organizations non archivés après une date données (Pix-20884). 
+
+### :building_construction: Tech
+
+- [#14515](https://github.com/1024pix/pix/pull/14515) Supprimer l'envoi des participations terminées pour France Travail (Ne pas merger avant d'avoir prévenu France Travail) (PIX-20950)
+
 # [5.292.0](https://github.com/1024pix/pix/compare/v5.291.1...v5.292.0) (2026-01-06)
 
 ### :rocket: Amélioration
