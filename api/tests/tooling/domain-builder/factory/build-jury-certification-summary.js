@@ -12,7 +12,8 @@ const buildJuryCertificationSummary = function ({
   abortReason = null,
   isPublished = true,
   isEndedByInvigilator = false,
-  certificationObtained,
+  complementaryCertificationLabelObtained,
+  complementaryCertificationKeyObtained,
   certificationIssueReports = [],
 } = {}) {
   return new JuryCertificationSummary({
@@ -26,7 +27,8 @@ const buildJuryCertificationSummary = function ({
     abortReason,
     isPublished,
     isEndedByInvigilator,
-    certificationObtained,
+    complementaryCertificationLabelObtained,
+    complementaryCertificationKeyObtained,
     certificationIssueReports,
   });
 };

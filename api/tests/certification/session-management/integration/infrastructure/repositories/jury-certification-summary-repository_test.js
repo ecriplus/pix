@@ -98,7 +98,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
               hasBeenAutomaticallyResolved: null,
             }),
           ],
-          certificationObtained: null,
+          complementaryCertificationKeyObtained: null,
         });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);
