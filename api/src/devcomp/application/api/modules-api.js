@@ -73,10 +73,8 @@ const getUserModuleStatuses = async ({ userId, moduleIds }) => {
 };
 
 const getModulesByShortIds = async ({ moduleShortIds }) => {
-  const modules = [];
-  for (const shortId of moduleShortIds) {
-    modules.push(await usecases.getModuleByShortId({ shortId }));
-  }
-  return modules.map((module) => new Module(module));
+  const modulesMetadata = await usecases.getModuleMetadataListByShortIds({ shortIds: moduleShortIds });
+
+  return modulesMetadata.map((module) => new Module(module));
 };
 export { getModulesByIds, getModulesByShortIds, getUserModuleStatuses };
