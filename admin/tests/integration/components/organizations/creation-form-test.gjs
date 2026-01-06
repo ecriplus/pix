@@ -154,6 +154,30 @@ module('Integration | Component | organizations/creation-form', function (hooks)
           'Danemark (99101)',
         );
       });
+
+      test("it prefills the documentation url with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', {
+          documentationUrl: 'https://example-documentation.com',
+        });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('textbox', { name: 'Lien vers la documentation' }))
+          .hasValue('https://example-documentation.com');
+      });
     });
 
     module('when there is no parent organization', function () {
@@ -202,21 +226,43 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       test('it does not prefill the country selector', async function (assert) {
         // given - when
         const screen = await render(
-        <template>
-          <CreationForm
-            @parentOrganization={{null}}
-            @administrationTeams={{administrationTeams}}
-            @countries={{countries}}
-            @onSubmit={{onSubmit}}
-            @onCancel={{onCancel}}
-          />
-        </template>,
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
         );
 
         // then
         assert.strictEqual(
-          await screen.getByRole('button', { name: "Pays (code INSEE) *" }).innerText,
+          await screen.getByRole('button', { name: 'Pays (code INSEE) *' }).innerText,
           'Sélectionner un pays',
+        );
+      });
+
+      test('it does not prefill the documentation url input', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Lien vers la documentation' })).hasValue('');
+        assert.strictEqual(
+          screen.getByRole('textbox', { name: 'Lien vers la documentation' }).placeholder,
+          'ex: https://www.documentation.org',
         );
       });
     });

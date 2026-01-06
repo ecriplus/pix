@@ -17,7 +17,8 @@ export default class OrganizationCreationForm extends Component {
   @tracked form = {
     administrationTeamId: this.parentOrganizationAdministrationTeamId,
     type: this.parentOrganizationType,
-    countryCode: this.parentOrganizationCountryCode
+    countryCode: this.parentOrganizationCountryCode,
+    documentationUrl: this.parentOrganizationDocumentationUrl,
   };
 
   organizationTypes = [
@@ -66,6 +67,12 @@ export default class OrganizationCreationForm extends Component {
 
   get parentOrganizationCountryCode() {
     return this.args.parentOrganization?.countryCode ? `${this.args.parentOrganization.countryCode}` : undefined;
+  }
+
+  get parentOrganizationDocumentationUrl() {
+    return this.args.parentOrganization?.documentationUrl
+      ? `${this.args.parentOrganization.documentationUrl}`
+      : undefined;
   }
 
   handleInputChange = (key, event) => {
@@ -186,6 +193,7 @@ export default class OrganizationCreationForm extends Component {
               @id="documentationUrl"
               {{on "change" (fn this.handleInputChange "documentationUrl")}}
               placeholder={{concat (t "common.words.example-abbr") " https://www.documentation.org"}}
+              @value="{{this.form.documentationUrl}}"
             >
               <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
             </PixInput>
