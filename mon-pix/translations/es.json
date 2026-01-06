@@ -601,8 +601,7 @@
           "description": "Deberás realizar búsquedas en internet, utilizar tu entorno de trabajo digital, poner a prueba tus conocimientos, etc.",
           "title": "Medir tus competencias digitales con retos lúdicos y de aprendizaje que se adaptan a tu nivel de competencia (mediante un algoritmo adaptativo)."
         },
-        "legal": "Al hacer clic en «Empiezo» te conectarás a la plataforma y se enviará la información sobre tu progreso en el test al organizador del mismo para que pueda ayudarte si es necesario. Al final del test, haciendo clic en el botón «Envío mis resultados», se enviarán tus resultados al organizador.",
-        "legal-with-auto-share": "Al hacer clic en «Empiezo» te conectarás a la plataforma y se enviará la información sobre tu progreso en el test al organizador del mismo para que pueda ayudarte si es necesario. Al final del test, sus resultados se enviarán automáticamente al organizador.",
+        "legal": "Al hacer clic en «Empiezo» te conectarás a la plataforma y se enviará la información sobre tu progreso en el test al organizador del mismo para que pueda ayudarte si es necesario. Al final del test, sus resultados se enviarán automáticamente al organizador.",
         "title": "Empieza tu test Pix",
         "title-with-username": "'<span>'¿{userFirstName}'</span>','<br>' Listo para evaluar tus habilidades?"
       },
@@ -2107,18 +2106,15 @@
           "text": "Estás a punto de poner a cero el test <strong>{targetProfileName}</strong>, para intentar mejorar tu nivel. Al final del curso, podrás volver a enviar tus resultados.",
           "warning-text": "Tus Pix, niveles y certificabilidad obtenidos durante este test se van a eliminar."
         },
-        "notification": "Si pones a cero para volver a intentarlo todo, tu organización ya no podrá ver tu último resultado. Para que el organizador de la prueba contabilice tu resultado, tendrás que volver a enviarlo.",
-        "notification-with-auto-share": "Vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
+        "notification": "Vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
       },
       "retry": {
         "button": "Repetir el test",
         "message": "{organizationName} te invita a repetir este test para mejorar tus resultados y seguir progresando.",
-        "notification": "Vuelva a realizar las preguntas fallidas para mejorar su resultado y seguir progresando. Deberá enviar de nuevo sus resultados para que el organizador pueda contabilizarlos. El organizador seguirá teniendo acceso a tus resultados enviados anteriormente.",
-        "notification-with-auto-share": "Repite las preguntas fallidas para mejorar tu resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
+        "notification": "Repite las preguntas fallidas para mejorar tu resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
       },
       "retry-and-reset": {
-        "notification": "Si vuelves a intentar las preguntas fallidas o pones a cero para volver a intentarlo todo, tu organización ya no podrá ver tu último resultado. Para que el organizador de la prueba contabilice tu resultado, tendrás que volver a enviarlo.",
-        "notification-with-auto-share": "Repita las preguntas fallidas o vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
+        "notification": "Repita las preguntas fallidas o vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
       },
       "send-results": "No olvides enviar tus resultados al organizador del test.",
       "send-status": {

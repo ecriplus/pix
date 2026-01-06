@@ -72,8 +72,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   get retryOrResetExplanation() {
     const { canRetry, canReset } = this.args.campaignParticipationResult;
-    const isAutoShareEnabled = this.featureToggles?.featureToggles?.isAutoShareEnabled || false;
-    const suffix = isAutoShareEnabled ? 'notification-with-auto-share' : 'notification';
+    const suffix = 'notification';
 
     if (canReset && canRetry) {
       return this.intl.t(`pages.skill-review.retry-and-reset.${suffix}`);

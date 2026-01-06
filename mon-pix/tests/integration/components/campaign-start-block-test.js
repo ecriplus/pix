@@ -11,11 +11,6 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 module('Integration | Component | campaign-start-block', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    const featureToggles = this.owner.lookup('service:featureToggles');
-    sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: false });
-  });
-
   module('When the organization has a logo and landing page text', function () {
     test('should display organization logo and landing page text', async function (assert) {
       // given
@@ -157,18 +152,14 @@ module('Integration | Component | campaign-start-block', function (hooks) {
         assert.dom(screen.getByText(t('pages.campaign-landing.assessment.legal'))).exists();
       });
 
-      test('should display legal with auto share', async function (assert) {
-        // given
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
-
+      test('should display legal', async function (assert) {
         // when
         const screen = await render(
           hbs`<CampaignStartBlock @campaign={{this.campaign}} @startCampaignParticipation={{this.startCampaignParticipation}} />`,
         );
 
         // then
-        assert.ok(screen.getByText(t('pages.campaign-landing.assessment.legal-with-auto-share')));
+        assert.ok(screen.getByText(t('pages.campaign-landing.assessment.legal')));
       });
 
       test('should display the userName', async function (assert) {

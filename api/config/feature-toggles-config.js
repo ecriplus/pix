@@ -55,13 +55,6 @@ export default {
     defaultValue: false,
     tags: ['modulix', 'team-contenu', 'llm', 'embed', 'pix-app'],
   },
-  isAutoShareEnabled: {
-    type: 'boolean',
-    description: 'Enable automatic campaign sharing.',
-    defaultValue: true,
-    devDefaultValues: { test: true, reviewApp: true },
-    tags: ['frontend', 'team-prescription', 'pix-app'],
-  },
   isSurveyEnabledForCombinedCourses: {
     type: 'boolean',
     description: 'Enables survey button at the end of the combined courses',

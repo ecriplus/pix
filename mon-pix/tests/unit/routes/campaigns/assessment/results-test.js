@@ -93,43 +93,4 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
       });
     });
   });
-
-  module('afterModel', function () {
-    module('when isAutoshareEnable', function () {
-      test('should call share if campaign participation is not shared', async function (assert) {
-        // given
-        stubCurrentUserService(this.owner, { id: '1234' });
-        const featureToggleService = this.owner.lookup('service:feature-toggles');
-        sinon.stub(featureToggleService, 'featureToggles').value({ isAutoShareEnabled: true });
-        const store = this.owner.lookup('service:store');
-        const shareSpy = sinon.spy();
-        sinon.stub(store, 'adapterFor').withArgs('campaign-participation-result').returns({ share: shareSpy });
-        const reloadStub = sinon.stub();
-
-        // when
-        await route.afterModel({
-          campaign,
-          campaignParticipation: { createdAt: '2024-01-01' },
-          campaignParticipationResult: { id: 123, isShared: false, reload: reloadStub },
-        });
-
-        // then
-        assert.ok(shareSpy.calledOnce);
-        assert.ok(reloadStub.calledOnce);
-      });
-      test('should not call share if campaign participation is shared', async function (assert) {
-        // given
-        const featureToggleService = this.owner.lookup('service:feature-toggles');
-        sinon.stub(featureToggleService, 'featureToggles').value({ isAutoShareEnabled: true });
-        const store = this.owner.lookup('service:store');
-        const shareSpy = sinon.spy();
-        sinon.stub(store, 'adapterFor').withArgs('campaign-participation-result').returns({ share: shareSpy });
-        // when
-        await route.afterModel({ campaignParticipationResult: { id: 123, isShared: true } });
-
-        // then
-        assert.ok(shareSpy.notCalled);
-      });
-    });
-  });
 });

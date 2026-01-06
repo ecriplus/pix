@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import ENV from 'mon-pix/config/environment';
 
 export default class ResultsRoute extends Route {
   @service currentUser;
@@ -31,7 +30,6 @@ export default class ResultsRoute extends Route {
       }
 
       const trainings = await campaignParticipation.hasMany('trainings').reload();
-
       // Reload the user to display my trainings link on the navbar menu
       if (trainings?.length > 0 && !user.hasRecommendedTrainings) {
         await this.currentUser.load();
@@ -53,20 +51,9 @@ export default class ResultsRoute extends Route {
   }
 
   async afterModel(model) {
-    if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
-      return;
-    }
     if (model.campaignParticipationResult.isShared) {
       return;
     }
-    const disabledOrganizationIds = ENV.APP.AUTO_SHARE_DISABLED_ORGANIZATION_IDS.map(Number);
-    if (
-      model.campaignParticipation.createdAt <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE) ||
-      disabledOrganizationIds.includes(model.campaign.organizationId)
-    ) {
-      return;
-    }
-
     await this.store.adapterFor('campaign-participation-result').share(model.campaignParticipationResult.id);
     await model.campaignParticipationResult.reload({
       adapterOptions: { userId: this.currentUser.user.id, campaignId: model.campaign.id },
