@@ -89,4 +89,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
   },
+  isModuleSelectionForTrainingEnabled: {
+    type: 'boolean',
+    description: 'Enable module selection on training form',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
+    tags: ['frontend', 'team-devcomp', 'modulix', 'admin'],
+  },
 };
