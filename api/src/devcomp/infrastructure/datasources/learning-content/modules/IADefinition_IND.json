@@ -123,10 +123,10 @@
                     {
                       "id": "fa51f717-e730-4296-ad83-ed91814c29ff",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/PlusieursAilOurs.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/ails.jpg",
                       "alt": "Plusieurs photographies d’ail des ours",
-                      "alternativeText": "",
-                      "legend": "",
+                      "alternativeText": "<p>Plusieurs photographies d’ail des ours</p>",
+                      "legend": "Plusieurs photographies d’ail des ours",
                       "licence": ""
                     }
                   ]
@@ -141,7 +141,7 @@
                     {
                       "id": "39681dab-c586-4194-bdf2-fe570b088714",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/PlusieursMuguet.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/muguets.jpg",
                       "alt": "Plusieurs photographies de muguet",
                       "alternativeText": "",
                       "legend": "",
