@@ -269,7 +269,7 @@
               "element": {
                 "id": "8dba133c-906f-4793-939f-015df7d2acce",
                 "type": "text",
-                "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Survolez l’image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d’intelligence artificielle.</strong></p>"
+                "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Explorez son salon en survolant l’image. Parmi les appareils et les services, identifiez lesquels utilisent des logiciels d’intelligence artificielle.</strong></p>"
               }
             },
             {
@@ -297,7 +297,7 @@
                       "spot": {
                         "y": -10
                       },
-                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                      "info": "Pixvidéo : vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
                     },
                     {
                       "coords": {
@@ -322,7 +322,7 @@
                       "spot": {
                         "x": 5
                       },
-                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                      "info": "Enceinte connectée : paramètre activé « Reconnaissance vocale »"
                     },
                     {
                       "coords": {
@@ -349,7 +349,7 @@
                         "x": 0,
                         "y": 0
                       },
-                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                      "info": "Robot aspirateur : paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
                     },
                     {
                       "coords": {
@@ -362,7 +362,7 @@
                         "x": 0,
                         "y": 0
                       },
-                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "info": "Thermostat mural : paramètre activé « Température idéale et économie d’énergie »",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -376,7 +376,7 @@
                         "x": -40,
                         "y": 0
                       },
-                      "info": "Lampe : Ampoule basse consommation",
+                      "info": "Lampe : ampoule basse consommation",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -390,7 +390,7 @@
                         "x": 0,
                         "y": -1
                       },
-                      "info": "Décoration : Sphère en verre soufflé",
+                      "info": "Décoration : sphère en verre soufflé",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -404,7 +404,7 @@
                         "x": -60,
                         "y": -450
                       },
-                      "info": "Plante en pot : Oiseau de paradis",
+                      "info": "Plante en pot : oiseau de paradis",
                       "tooltipPosition": "bottom"
                     }
                   ]
