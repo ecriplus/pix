@@ -108,6 +108,29 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         // then
         assert.strictEqual(await screen.getByRole('button', { name: 'Équipe en charge *' }).innerText, 'Équipe 1');
       });
+
+      test("it prefills the type selector with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', { type: 'SCO' });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: "Type de l'organisation *" }).innerText,
+          'Établissement scolaire',
+        );
+      });
     });
 
     module('when there is no parent organization', function () {
@@ -129,6 +152,27 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         assert.strictEqual(
           await screen.getByRole('button', { name: 'Équipe en charge *' }).innerText,
           'Sélectionner une équipe',
+        );
+      });
+
+      test('it does not prefill the type selector', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: "Type de l'organisation *" }).innerText,
+          'Sélectionner un type',
         );
       });
     });
