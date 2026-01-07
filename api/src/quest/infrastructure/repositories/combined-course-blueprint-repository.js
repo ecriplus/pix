@@ -24,9 +24,9 @@ export async function save(combinedCourseBlueprint) {
   return new CombinedCourseBlueprint(insertedValues);
 }
 
-export async function findById(combinedCourseBlueprintId) {
+export async function findById({ combinedCourseBlueprintId }) {
   const knexConn = DomainTransaction.getConnection();
-  const result = await knexConn('combined_course_blueprints').where({ id: combinedCourseBlueprintId }).first();
+  const result = await knexConn('combined_course_blueprints').where('id', combinedCourseBlueprintId).first();
   if (!result) {
     return null;
   }

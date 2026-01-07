@@ -29,7 +29,7 @@ export class CombinedCourseBlueprint {
       .map(({ value }) => value);
   }
 
-  toCombinedCourse(code, organizationId, campaigns, modulesByShortId) {
+  toCombinedCourse({ code, organizationId, campaigns, modulesByShortId, name, illustration, description }) {
     const successRequirements = this.content.map((requirement) => {
       if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
         const requirementTargetProfileId = requirement.value;
@@ -59,7 +59,13 @@ export class CombinedCourseBlueprint {
     });
 
     return new CombinedCourse(
-      { name: this.name, code, organizationId, description: this.description, illustration: this.illustration },
+      {
+        name: name ?? this.name,
+        code,
+        organizationId,
+        description: description ?? this.description,
+        illustration: illustration ?? this.illustration,
+      },
       quest,
     );
   }
