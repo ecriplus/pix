@@ -6,7 +6,7 @@ import {
 } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { expect } from '../../../../../../test-helper.js';
 
-const { SHARED } = CampaignParticipationStatuses;
+const { SHARED, TO_SHARE, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializer', function () {
   describe('#serialize', function () {
@@ -101,6 +101,26 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
 
       // then
       expect(json.data.attributes['can-retry']).to.be.false;
+    });
+
+    it('should map TO_SHARE status to STARTED in serialized output', function () {
+      // given
+      const campaignParticipationOverview = new CampaignParticipationOverview({
+        id: 8,
+        status: TO_SHARE,
+        createdAt: new Date('2018-02-05T14:12:44Z'),
+        sharedAt: null,
+        organizationName: 'My organization',
+        campaignCode: '1234',
+        campaignTitle: 'My campaign',
+        campaignType: CampaignTypes.ASSESSMENT,
+      });
+
+      // when
+      const json = serializer.serialize(campaignParticipationOverview);
+
+      // then
+      expect(json.data.attributes.status).to.equal(STARTED);
     });
   });
 });

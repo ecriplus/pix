@@ -68,7 +68,7 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
       {
         targetProfileId: 654,
         id: 456,
-        status: CampaignParticipationStatuses.STARTED,
+        status: CampaignParticipationStatuses.TO_SHARE,
         campaignName: 'Mon nom 2',
         campaignId: 77,
         masteryRate: 80,
