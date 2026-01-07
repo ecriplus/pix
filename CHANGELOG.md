@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.295.0](https://github.com/1024pix/pix/compare/v5.294.0...v5.295.0) (2026-01-07)
+
+### :rocket: Amélioration
+
+- [#14626](https://github.com/1024pix/pix/pull/14626) Masquer le champ Lien si le champ Format d'un contenu formatif n'est pas renseigné sur Pix Admin (PIX-20918). 
+- [#14630](https://github.com/1024pix/pix/pull/14630) Modifs module CYAntivirus IND 
+- [#14632](https://github.com/1024pix/pix/pull/14632) Modulix CY_MFA_IND remplacement par POI 
+- [#14608](https://github.com/1024pix/pix/pull/14608) Valider l'existence des items de schéma de parcours combiné au moment de leur ajout (PIX-20891) 
+- [#14456](https://github.com/1024pix/pix/pull/14456) WIP IA vous avez dit IA spot image cliquable et distracteurs 
+
+### :bug: Correction
+
+- [#14606](https://github.com/1024pix/pix/pull/14606) Les cartes de formation se chevauchent dans pix app (PIX-20712). 
+
+### :building_construction: Tech
+
+- [#14609](https://github.com/1024pix/pix/pull/14609) Afficher le nom de l'orga mère sur le formulaire sans utiliser les queryParams (PIX-20728) 
+- [#14611](https://github.com/1024pix/pix/pull/14611) Améliorer les perfs de l'api récupérant une liste de modules par son shortId (PIX-20982) 
+- [#14518](https://github.com/1024pix/pix/pull/14518) Rendre required l'ensemble des attributs de FlashAssessmentAlgorithmConfiguration (PIX-20955) 
+- [#14553](https://github.com/1024pix/pix/pull/14553) Supprimer le feature toggle de partage automatique (PIX-20962) 
+
+### :arrow_up: Montée de version
+
+- [#14621](https://github.com/1024pix/pix/pull/14621) Update dependency ember-intl to v8 (junior)
+
 # [5.294.0](https://github.com/1024pix/pix/compare/v5.293.0...v5.294.0) (2026-01-06)
 
 ### :rocket: Amélioration
