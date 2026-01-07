@@ -8,24 +8,22 @@ import Header from 'mon-pix/components/training/header';
 
   <main id="main" class="main" role="main">
     <Header />
-    <div class="user-trainings-content">
-      {{#if @model.trainings.meta.pagination.rowCount}}
-        <div class="user-trainings-content__container">
-          <ul class="user-trainings-content__list">
-            {{#each @model.trainings as |training|}}
-              <li class="user-trainings-content-list__item">
-                <Card @training={{training}} />
-              </li>
-            {{/each}}
-          </ul>
-          <PixPagination
-            @pagination={{@model.trainings.meta.pagination}}
-            @pageOptions={{@controller.pageOptions}}
-            @locale={{@controller.locale.currentLanguage}}
-            @isCondensed="true"
-          />
-        </div>
-      {{/if}}
-    </div>
+    {{#if @model.trainings.meta.pagination.rowCount}}
+      <div class="user-trainings-content">
+        <ul class="user-trainings-content__list">
+          {{#each @model.trainings as |training|}}
+            <li class="user-trainings-content-list__item">
+              <Card @training={{training}} />
+            </li>
+          {{/each}}
+        </ul>
+        <PixPagination
+          @pagination={{@model.trainings.meta.pagination}}
+          @pageOptions={{@controller.pageOptions}}
+          @locale={{@controller.locale.currentLanguage}}
+          @isCondensed="true"
+        />
+      </div>
+    {{/if}}
   </main>
 </template>

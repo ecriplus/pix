@@ -29,8 +29,6 @@
 .user-trainings-content {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: inherit;
   margin: 0 auto;
   padding: var(--pix-spacing-6x) 20px 0;
   color: var(--pix-neutral-900);
@@ -43,41 +41,27 @@
     margin: 0 0 32px;
   }
 
-  &__container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-
-    @include breakpoints.device-is('desktop') {
-      max-width: 1280px;
-    }
-  }
-
   &__list {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--pix-spacing-6x);
     margin-bottom: var(--pix-spacing-8x);
-    padding: 0;
     list-style: none;
-
-    @include breakpoints.device-is('tablet') {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @include breakpoints.device-is('desktop') {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
   }
 }
 
 .user-trainings-content-list {
   &__item {
+    flex-basis: 100%;
+
+    @include breakpoints.device-is('desktop') {
+      flex-basis: 30%;
+    }
+
     &:hover {
       border-radius: var(--pix-spacing-2x);
-      box-shadow:
-        0 7px 14px 0 var(--pix-neutral-100),
-        0 3px 6px 0 var(--pix-neutral-500);
+      box-shadow: 0 7px 14px 0 var(--pix-neutral-100),
+      0 3px 6px 0 var(--pix-neutral-500);
     }
   }
 }
