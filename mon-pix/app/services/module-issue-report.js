@@ -9,7 +9,7 @@ export default class ModuleIssueReport extends Service {
     this.passageId = passageId;
   }
 
-  record({ elementId, answer, categoryKey, comment }) {
+  async record({ elementId, answer, categoryKey, comment }) {
     const moduleIssueReport = {
       'module-id': this.moduleId,
       'passage-id': this.passageId,
@@ -19,7 +19,7 @@ export default class ModuleIssueReport extends Service {
       comment,
     };
 
-    this.requestManager.request({
+    await this.requestManager.request({
       url: `${ENV.APP.API_HOST}/api/module-issue-reports`,
       method: 'POST',
       body: JSON.stringify({ data: { attributes: moduleIssueReport, type: 'module-issue-reports' } }),

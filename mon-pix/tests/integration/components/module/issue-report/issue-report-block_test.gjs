@@ -46,7 +46,7 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
           .exists();
       });
 
-      module('when user clicks on send report button', function () {
+      module('when user clicks on send button', function () {
         test('should send a report', async function (assert) {
           // given
           const featureToggles = this.owner.lookup('service:featureToggles');
@@ -87,6 +87,90 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
             comment,
           });
           assert.ok(true);
+        });
+
+        test('should display a confirmation message', async function (assert) {
+          // given
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+          const issueReportService = this.owner.lookup('service:moduleIssueReport');
+          const elementId = 'b37e8e8d-9875-4b15-85c0-0373ffbb0805';
+          const answer = 42;
+          const comment = 'Mon super commentaire de Noel et de joie';
+          const reportInfo = { elementId, answer };
+
+          sinon.stub(issueReportService, 'record').resolves();
+
+          // when
+          const screen = await render(
+            <template>
+              <div id="modal-container"></div><ModuleIssueReportBlock @reportInfo={{reportInfo}} />
+            </template>,
+          );
+          await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+          await waitForDialog();
+
+          await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+          await screen.findByRole('listbox');
+          await click(screen.getByRole('option', { name: 'Problème d’accessibilité' }));
+
+          await fillIn(
+            screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }),
+            comment,
+          );
+
+          await click(screen.getByRole('button', { name: t('common.actions.send') }));
+
+          // then
+          const buttons = screen.getAllByRole('button', { name: t('common.actions.close') });
+          assert.strictEqual(buttons.length, 2);
+          assert.dom(screen.getByText(t('pages.modulix.issue-report.modal.confirmation-message.success')));
+
+          const closeButtons = screen.getAllByRole('button', { name: t('common.actions.close') });
+          await click(closeButtons[0]);
+          await waitForDialogClose();
+
+          assert
+            .dom(screen.queryByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
+            .doesNotExist();
+        });
+
+        test('should display an error message when api call has failed', async function (assert) {
+          // given
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+          const issueReportService = this.owner.lookup('service:moduleIssueReport');
+          const elementId = 'b37e8e8d-9875-4b15-85c0-0373ffbb0805';
+          const answer = 42;
+          const comment = 'Mon super commentaire de Noel et de joie';
+          const reportInfo = { elementId, answer };
+
+          sinon.stub(issueReportService, 'record').rejects();
+
+          // when
+          const screen = await render(
+            <template>
+              <div id="modal-container"></div><ModuleIssueReportBlock @reportInfo={{reportInfo}} />
+            </template>,
+          );
+          await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+          await waitForDialog();
+
+          await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+          await screen.findByRole('listbox');
+          await click(screen.getByRole('option', { name: 'Problème d’accessibilité' }));
+
+          await fillIn(
+            screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }),
+            comment,
+          );
+
+          await click(screen.getByRole('button', { name: t('common.actions.send') }));
+
+          // then
+          const buttons = screen.getAllByRole('button', { name: t('common.actions.close') });
+          assert.strictEqual(buttons.length, 2);
+          assert.dom(screen.getByText(t('pages.modulix.issue-report.modal.confirmation-message.error')));
         });
       });
 
