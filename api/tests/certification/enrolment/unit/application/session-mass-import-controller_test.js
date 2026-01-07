@@ -1,6 +1,6 @@
 import { sessionMassImportController } from '../../../../../src/certification/enrolment/application/session-mass-import-controller.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | mass-import-controller', function () {
@@ -12,6 +12,7 @@ describe('Unit | Controller | mass-import-controller', function () {
         params: { certificationCenterId: 123 },
         auth: { credentials: { userId: 2 } },
       };
+      const i18n = getI18nFromRequest(request);
       const cachedValidatedSessionsKey = 'uuid';
 
       const csvHelpersStub = {
@@ -37,7 +38,7 @@ describe('Unit | Controller | mass-import-controller', function () {
         sessionsData: ['session'],
         certificationCenterId: 123,
         userId: 2,
-        i18n: getI18n(),
+        i18n,
       });
     });
 
