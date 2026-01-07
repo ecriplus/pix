@@ -90,7 +90,7 @@
               "element": {
                 "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
                 "type": "text",
-                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone.Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
+                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone. Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
               }
             }
           ]
@@ -600,7 +600,7 @@
                   },
                   {
                     "id": "8e854d9d-3639-46e8-928e-3cc000d3748e",
-                    "text": "Un appel en vidéo demande autant de travail au serveur qu’un appel en ligne avec seulement le son. ",
+                    "text": "Un appel en vidéo demande autant de travail au serveur qu’un appel en ligne avec seulement le son.",
                     "image": {
                       "url": "",
                       "altText": ""
