@@ -7,7 +7,7 @@ import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 
-export const PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS = [3652, 3739, 3740, 3923, 3924, 3925];
+export const TARGET_PROFILE_IDS = [6078, 6079, 6080, 6081, 6082, 6083, 6155];
 
 const options = {
   start: {
@@ -26,15 +26,12 @@ const options = {
   },
 };
 
-/**
- * Script to reward sixth-grade students who have already completed a campaign linked to a specific target profile.
- */
-export class SixthGradeAttestationRewardScript extends Script {
+export class AttestationRewardRecoveryScript extends Script {
   constructor() {
     super({
       description:
         'This script process attestations rewards for users who have already completed a campaign linked to specific target profiles.',
-      permanent: false,
+      permanent: true,
       options,
     });
   }
@@ -91,7 +88,7 @@ export class SixthGradeAttestationRewardScript extends Script {
       .where('campaign-participations.createdAt', '>=', formatedStartDate)
       .where('campaign-participations.createdAt', '<=', formatedEndDate)
       .where('campaign-participations.status', '<>', CampaignParticipationStatuses.STARTED)
-      .whereIn('campaigns.targetProfileId', PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS);
+      .whereIn('campaigns.targetProfileId', TARGET_PROFILE_IDS);
 
     return users.map(({ userId }) => userId);
   }
@@ -116,4 +113,4 @@ export class SixthGradeAttestationRewardScript extends Script {
   }
 }
 
-await ScriptRunner.execute(import.meta.url, SixthGradeAttestationRewardScript);
+await ScriptRunner.execute(import.meta.url, AttestationRewardRecoveryScript);
