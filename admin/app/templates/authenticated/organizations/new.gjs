@@ -6,7 +6,7 @@ import CreationForm from 'pix-admin/components/organizations/creation-form';
 <template>
   {{pageTitle "Nouvelle orga"}}
   <header class="page-header">
-    {{#if @controller.parentOrganizationName}}
+    {{#if @model.parentOrganization}}
       <Breadcrumb @currentPageLabel={{t "pages.organizations.breadcrumb.new-child-organization-page"}} />
     {{else}}
       <Breadcrumb @currentPageLabel={{t "pages.organizations.breadcrumb.new-organization-page"}} />
@@ -19,7 +19,7 @@ import CreationForm from 'pix-admin/components/organizations/creation-form';
       @countries={{@model.countries}}
       @onSubmit={{@controller.addOrganization}}
       @onCancel={{@controller.redirectOnCancel}}
-      @parentOrganizationName={{@controller.parentOrganizationName}}
+      @parentOrganization={{@model.parentOrganization}}
     />
   </main>
 </template>

@@ -87,6 +87,185 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       assert.strictEqual(options[0].title, 'France (99100)');
       assert.strictEqual(options[1].title, 'Danemark (99101)');
     });
+
+    module('when there is a parent organization', function () {
+      test("it prefills the administration team selector with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', { administrationTeamId: 'team-1' });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(await screen.getByRole('button', { name: 'Équipe en charge *' }).innerText, 'Équipe 1');
+      });
+
+      test("it prefills the type selector with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', { type: 'SCO' });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: "Type de l'organisation *" }).innerText,
+          'Établissement scolaire',
+        );
+      });
+
+      test("it prefills the country selector with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', { countryCode: '99101' });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: 'Pays (code INSEE) *' }).innerText,
+          'Danemark (99101)',
+        );
+      });
+
+      test("it prefills the documentation url with its parent's", async function (assert) {
+        // given - when
+        const organization = store.createRecord('organization', {
+          documentationUrl: 'https://example-documentation.com',
+        });
+
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{organization}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('textbox', { name: 'Lien vers la documentation' }))
+          .hasValue('https://example-documentation.com');
+      });
+    });
+
+    module('when there is no parent organization', function () {
+      test('it does not prefill the administration team selector', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: 'Équipe en charge *' }).innerText,
+          'Sélectionner une équipe',
+        );
+      });
+
+      test('it does not prefill the type selector', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: "Type de l'organisation *" }).innerText,
+          'Sélectionner un type',
+        );
+      });
+
+      test('it does not prefill the country selector', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.strictEqual(
+          await screen.getByRole('button', { name: 'Pays (code INSEE) *' }).innerText,
+          'Sélectionner un pays',
+        );
+      });
+
+      test('it does not prefill the documentation url input', async function (assert) {
+        // given - when
+        const screen = await render(
+          <template>
+            <CreationForm
+              @parentOrganization={{null}}
+              @administrationTeams={{administrationTeams}}
+              @countries={{countries}}
+              @onSubmit={{onSubmit}}
+              @onCancel={{onCancel}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Lien vers la documentation' })).hasValue('');
+        assert.strictEqual(
+          screen.getByRole('textbox', { name: 'Lien vers la documentation' }).placeholder,
+          'ex: https://www.documentation.org',
+        );
+      });
+    });
   });
 
   module('when submitting form', function () {

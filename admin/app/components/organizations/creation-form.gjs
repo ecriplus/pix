@@ -14,7 +14,12 @@ export default class OrganizationCreationForm extends Component {
   @service store;
   @service intl;
 
-  @tracked form = {};
+  @tracked form = {
+    administrationTeamId: this.parentOrganizationAdministrationTeamId,
+    type: this.parentOrganizationType,
+    countryCode: this.parentOrganizationCountryCode,
+    documentationUrl: this.parentOrganizationDocumentationUrl,
+  };
 
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
@@ -41,13 +46,33 @@ export default class OrganizationCreationForm extends Component {
   }
 
   get submitButtonText() {
-    return this.args.parentOrganizationName
+    return this.args.parentOrganization?.name
       ? 'components.organizations.creation.actions.add-child-organization'
       : 'common.actions.add';
   }
 
   get dpoSectionTitle() {
     return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
+  }
+
+  get parentOrganizationAdministrationTeamId() {
+    return this.args.parentOrganization?.administrationTeamId
+      ? `${this.args.parentOrganization.administrationTeamId}`
+      : undefined;
+  }
+
+  get parentOrganizationType() {
+    return this.args.parentOrganization?.type ? `${this.args.parentOrganization.type}` : undefined;
+  }
+
+  get parentOrganizationCountryCode() {
+    return this.args.parentOrganization?.countryCode ? `${this.args.parentOrganization.countryCode}` : undefined;
+  }
+
+  get parentOrganizationDocumentationUrl() {
+    return this.args.parentOrganization?.documentationUrl
+      ? `${this.args.parentOrganization.documentationUrl}`
+      : undefined;
   }
 
   handleInputChange = (key, event) => {
@@ -73,11 +98,11 @@ export default class OrganizationCreationForm extends Component {
           class="admin-form__card organization-creation-form__card"
           @title={{t "components.organizations.creation.general-information"}}
         >
-          {{#if @parentOrganizationName}}
+          {{#if @parentOrganization}}
             <h2 class="admin-form__content title organization-creation-form__parent-name--full">
               {{t
                 "components.organizations.creation.parent-organization-name"
-                parentOrganizationName=@parentOrganizationName
+                parentOrganizationName=@parentOrganization.name
               }}
             </h2>
           {{/if}}
@@ -168,6 +193,7 @@ export default class OrganizationCreationForm extends Component {
               @id="documentationUrl"
               {{on "change" (fn this.handleInputChange "documentationUrl")}}
               placeholder={{concat (t "common.words.example-abbr") " https://www.documentation.org"}}
+              @value="{{this.form.documentationUrl}}"
             >
               <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
             </PixInput>
