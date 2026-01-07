@@ -123,7 +123,7 @@ export default class OrganizationInformationSection extends Component {
         </PixButtonLink>
       </div>
 
-      <div class="organization__information">
+      <div class="organization__information {{if this.isEditMode 'organization__information--editing'}}">
         {{#if this.isEditMode}}
           <InformationSectionEdit
             @organization={{@organization}}

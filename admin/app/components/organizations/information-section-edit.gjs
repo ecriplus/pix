@@ -16,6 +16,8 @@ import lodashSet from 'lodash/set';
 import Organization from 'pix-admin/models/organization';
 import { FormValidator } from 'pix-admin/utils/form-validator';
 
+import Card from '../card';
+
 export default class OrganizationInformationSectionEditionMode extends Component {
   @service accessControl;
   @service store;
@@ -101,6 +103,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return options;
   }
 
+  get dpoSectionTitle() {
+    return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
+  }
+
   @action
   closeAndResetForm() {
     this.args.toggleEditMode();
@@ -169,45 +175,28 @@ export default class OrganizationInformationSectionEditionMode extends Component
   }
 
   <template>
-    <div class="organization__edit-form">
-      <form class="form" {{on "submit" this.updateOrganization}}>
+    <form class="admin-form" {{on "submit" this.updateOrganization}}>
+      <p class="admin-form__mandatory-text">
+        {{t "common.forms.mandatory-fields" htmlSafe=true}}
+      </p>
+      <section class="admin-form__content organization-creation-form">
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.general-information"}}
+        >
+          <div class="organization-creation-form__input--full">
+            <PixInput
+              required={{true}}
+              @requiredLabel={{t "common.forms.mandatory"}}
+              @errorMessage={{this.validator.errors.name}}
+              @validationStatus={{if this.validator.errors.name "error"}}
+              @value={{this.form.name}}
+              {{on "input" (fn this.updateFormValue "name")}}
+            ><:label>
+                {{t "components.organizations.editing.name.label"}}
+              </:label></PixInput>
+          </div>
 
-        <span class="form__instructions">
-          {{t "common.forms.mandatory-fields" htmlSafe=true}}
-        </span>
-
-        <div class="form-field">
-          <PixInput
-            required={{true}}
-            @requiredLabel={{t "common.forms.mandatory"}}
-            @errorMessage={{this.validator.errors.name}}
-            @validationStatus={{if this.validator.errors.name "error"}}
-            @value={{this.form.name}}
-            {{on "input" (fn this.updateFormValue "name")}}
-          ><:label>
-              {{t "components.organizations.editing.name.label"}}
-            </:label></PixInput>
-        </div>
-
-        <div class="form-field">
-          <PixInput
-            @errorMessage={{this.validator.errors.externalId}}
-            @validationStatus={{if this.validator.errors.externalId "error"}}
-            @value={{this.form.externalId}}
-            {{on "input" (fn this.updateFormValue "externalId")}}
-          ><:label>{{t "components.organizations.information-section-view.external-id"}}</:label></PixInput>
-        </div>
-
-        <div class="form-field">
-          <PixInput
-            @errorMessage={{this.validator.errors.provinceCode}}
-            @validationStatus={{if this.validator.errors.provinceCode "error"}}
-            @value={{this.form.provinceCode}}
-            {{on "input" (fn this.updateFormValue "provinceCode")}}
-          ><:label>{{t "components.organizations.editing.province-code.label"}}</:label></PixInput>
-        </div>
-
-        <div class="form-field">
           <PixSelect
             required
             @aria-required={{true}}
@@ -226,9 +215,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
           >
             <:label>{{t "components.organizations.editing.administration-team.selector.label"}}</:label>
           </PixSelect>
-        </div>
 
-        <div class="form-field">
           <PixSelect
             required
             @aria-required={{true}}
@@ -245,55 +232,37 @@ export default class OrganizationInformationSectionEditionMode extends Component
           >
             <:label>{{t "components.organizations.editing.country.selector.label"}}</:label>
           </PixSelect>
-        </div>
 
-        <div class="form-field">
           <PixInput
-            @errorMessage={{this.validator.errors.dataProtectionOfficerFirstName}}
-            @validationStatus={{if this.validator.errors.dataProtectionOfficerFirstName "error"}}
-            @value={{this.form.dataProtectionOfficerFirstName}}
-            {{on "input" (fn this.updateFormValue "dataProtectionOfficerFirstName")}}
-          ><:label>{{t "components.organizations.information-section-view.dpo-firstname"}}</:label></PixInput>
-        </div>
+            @errorMessage={{this.validator.errors.provinceCode}}
+            @validationStatus={{if this.validator.errors.provinceCode "error"}}
+            @value={{this.form.provinceCode}}
+            {{on "input" (fn this.updateFormValue "provinceCode")}}
+          ><:label>{{t "components.organizations.editing.province-code.label"}}</:label></PixInput>
 
-        <div class="form-field">
-          <PixInput
-            @errorMessage={{this.validator.errors.dataProtectionOfficerLastName}}
-            @validationStatus={{if this.validator.errors.dataProtectionOfficerLastName "error"}}
-            @value={{this.form.dataProtectionOfficerLastName}}
-            {{on "input" (fn this.updateFormValue "dataProtectionOfficerLastName")}}
-          ><:label>{{t "components.organizations.information-section-view.dpo-lastname"}}</:label></PixInput>
-        </div>
+          <div class="organization-creation-form__input--full">
+            <PixInput
+              @errorMessage={{this.validator.errors.externalId}}
+              @validationStatus={{if this.validator.errors.externalId "error"}}
+              @value={{this.form.externalId}}
+              {{on "input" (fn this.updateFormValue "externalId")}}
+            ><:label>{{t "components.organizations.information-section-view.external-id"}}</:label></PixInput>
+          </div>
+        </Card>
 
-        <div class="form-field">
-          <PixInput
-            @errorMessage={{this.validator.errors.dataProtectionOfficerEmail}}
-            @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
-            @value={{this.form.dataProtectionOfficerEmail}}
-            {{on "input" (fn this.updateFormValue "dataProtectionOfficerEmail")}}
-          ><:label>{{t "components.organizations.information-section-view.dpo-email"}}</:label></PixInput>
-        </div>
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.configuration"}}
+        >
+          <div class="organization-creation-form__input--full">
+            <PixInput
+              @errorMessage={{this.validator.errors.documentationUrl}}
+              @validationStatus={{if this.validator.errors.documentationUrl "error"}}
+              @value={{this.form.documentationUrl}}
+              {{on "input" (fn this.updateFormValue "documentationUrl")}}
+            ><:label>{{t "components.organizations.information-section-view.documentation-link"}}</:label></PixInput>
+          </div>
 
-        <div class="form-field">
-          <PixInput
-            type="number"
-            @errorMessage={{this.validator.errors.credit}}
-            @validationStatus={{if this.validator.errors.credit "error"}}
-            @value={{this.form.credit}}
-            {{on "input" (fn this.updateFormValue "credit")}}
-          ><:label>{{t "components.organizations.information-section-view.credits"}}</:label></PixInput>
-        </div>
-
-        <div class="form-field">
-          <PixInput
-            @errorMessage={{this.validator.errors.documentationUrl}}
-            @validationStatus={{if this.validator.errors.documentationUrl "error"}}
-            @value={{this.form.documentationUrl}}
-            {{on "input" (fn this.updateFormValue "documentationUrl")}}
-          ><:label>{{t "components.organizations.information-section-view.documentation-link"}}</:label></PixInput>
-        </div>
-
-        <div class="form-field">
           <PixSelect
             @options={{this.identityProviderOptions}}
             @value={{this.form.identityProviderForCampaigns}}
@@ -303,34 +272,70 @@ export default class OrganizationInformationSectionEditionMode extends Component
           >
             <:label>{{t "components.organizations.information-section-view.sso"}}</:label>
           </PixSelect>
-        </div>
 
-        <div class="form-field">
           <PixInput
             @errorMessage={{this.validator.errors.email}}
             @validationStatus={{if this.validator.errors.email "error"}}
             @value={{this.form.email}}
             {{on "input" (fn this.updateFormValue "email")}}
           ><:label>{{t "components.organizations.information-section-view.sco-activation-email"}}</:label></PixInput>
-        </div>
 
-        <FeaturesForm
-          @features={{this.form.features}}
-          @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
-          @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
-          @toggleLockPlaces={{this.toggleLockPlaces}}
-        />
+          <PixInput
+            type="number"
+            @errorMessage={{this.validator.errors.credit}}
+            @validationStatus={{if this.validator.errors.credit "error"}}
+            @value={{this.form.credit}}
+            {{on "input" (fn this.updateFormValue "credit")}}
+          ><:label>{{t "components.organizations.information-section-view.credits"}}</:label></PixInput>
+        </Card>
 
-        <div class="form-actions">
-          <PixButton @size="small" @variant="secondary" @triggerAction={{this.closeAndResetForm}}>
-            {{t "common.actions.cancel"}}
-          </PixButton>
-          <PixButton @type="submit" @size="small" @variant="success">
-            {{t "common.actions.save"}}
-          </PixButton>
-        </div>
-      </form>
-    </div>
+        <Card
+          class="admin-form__card organization-creation-form__card"
+          @title={{t "components.organizations.creation.features"}}
+        >
+          <FeaturesForm
+            @features={{this.form.features}}
+            @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
+            @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
+            @toggleLockPlaces={{this.toggleLockPlaces}}
+          />
+        </Card>
+
+        <Card class="admin-form__card organization-creation-form__card" @title={{this.dpoSectionTitle}}>
+          <PixInput
+            @errorMessage={{this.validator.errors.dataProtectionOfficerLastName}}
+            @validationStatus={{if this.validator.errors.dataProtectionOfficerLastName "error"}}
+            @value={{this.form.dataProtectionOfficerLastName}}
+            {{on "input" (fn this.updateFormValue "dataProtectionOfficerLastName")}}
+          ><:label>{{t "components.organizations.information-section-view.dpo-lastname"}}</:label></PixInput>
+
+          <PixInput
+            @errorMessage={{this.validator.errors.dataProtectionOfficerFirstName}}
+            @validationStatus={{if this.validator.errors.dataProtectionOfficerFirstName "error"}}
+            @value={{this.form.dataProtectionOfficerFirstName}}
+            {{on "input" (fn this.updateFormValue "dataProtectionOfficerFirstName")}}
+          ><:label>{{t "components.organizations.information-section-view.dpo-firstname"}}</:label></PixInput>
+
+          <div class="organization-creation-form__input--full">
+            <PixInput
+              @errorMessage={{this.validator.errors.dataProtectionOfficerEmail}}
+              @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
+              @value={{this.form.dataProtectionOfficerEmail}}
+              {{on "input" (fn this.updateFormValue "dataProtectionOfficerEmail")}}
+            ><:label>{{t "components.organizations.information-section-view.dpo-email"}}</:label></PixInput>
+          </div>
+        </Card>
+      </section>
+
+      <section class="admin-form__actions">
+        <PixButton @size="small" @variant="secondary" @triggerAction={{this.closeAndResetForm}}>
+          {{t "common.actions.cancel"}}
+        </PixButton>
+        <PixButton @type="submit" @size="small" @variant="success">
+          {{t "common.actions.save"}}
+        </PixButton>
+      </section>
+    </form>
   </template>
 }
 
