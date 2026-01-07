@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, vous allez découvrir deux méthodes complémentaires pour renforcer la protection des appareils numériques (smartphones, tablettes, ordinateurs) face à ces logiciels.🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
+    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, vous allez découvrir deux méthodes complémentaires pour renforcer la protection des appareils numériques (smartphones, tablettes, ordinateurs) face à ces logiciels.&nbsp;🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -163,7 +163,7 @@
               "element": {
                 "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
                 "type": "text",
-                "content": "<p>Pour renforcer la protection d’un appareil, il faut<strong> accepter une mise à jour quand une notification le demande</strong>, sur tous les appareils numériques (ordinateur, smartphone, tablette).&nbsp;🔄<br>Ces mises à jour entraînent souvent le redémarrage de l’appareil, il faut les accepter quand même.&nbsp;<br></p><p>💡Activer les <strong>mises à jour automatiques</strong> permet de ne plus avoir besoin d’y penser.</p>"
+                "content": "<p>Pour renforcer la protection d’un appareil, il faut<strong> accepter une mise à jour quand une notification le demande</strong>, sur tous les appareils numériques (ordinateur, smartphone, tablette).&nbsp;🔄<br>Ces mises à jour entraînent souvent le redémarrage de l’appareil, il faut les accepter quand même.&nbsp;<br></p><p><br>💡Activer les <strong>mises à jour automatiques</strong> permet de ne plus avoir besoin d’y penser.</p>"
               }
             }
           ]
@@ -193,7 +193,7 @@
               "element": {
                 "id": "ae2cfed2-9fde-45d3-bded-8ceb6feb7f99",
                 "type": "text",
-                "content": "<p>Même si l’ordinateur de Philippe intègre déjà certaines protections, il se demande ce qu’il peut faire de plus pour le protéger des logiciels malveillants.<br>Un ami lui conseille d’<strong>installer un logiciel antivirus</strong>.<br><br></p>"
+                "content": "<p>Même si l’ordinateur de Philippe intègre déjà certaines protections, il se demande ce qu’il peut faire de plus pour le protéger des logiciels malveillants.<br>Un ami lui conseille d’<strong>installer un logiciel antivirus</strong>.</p>"
               }
             },
             {
@@ -348,7 +348,7 @@
               "element": {
                 "id": "09624e99-41b4-4988-b697-5339222362cd",
                 "type": "text",
-                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, MacAfee, Trend, Lenovo, CyRadar, Avira, AVG, BitdeFender, ReasonLabs, ClamAV.&nbsp;</p><p>Choisissez-en <strong>un seul</strong>, c’est <strong>suffisant </strong>! <br><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p>"
+                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, MacAfee, Trend, Lenovo, CyRadar, Avira, AVG, BitdeFender, ReasonLabs, ClamAV.&nbsp;</p><p>☝️ Choisissez-en <strong>un seul</strong>, c’est <strong>suffisant </strong>! <br><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p>"
               }
             }
           ]
@@ -481,7 +481,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>. Pour améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
+                    "content": "<span>.<br>Pour améliorer la protection des appareils, il est essentiel d’installer régulièrement les </span>"
                   },
                   {
                     "input": "2",
