@@ -22,7 +22,10 @@ const schema = Joi.object({
 export class CombinedCourse {
   #quest;
 
-  constructor({ id, code, organizationId, name, description, illustration, participations = [], questId } = {}, quest) {
+  constructor(
+    { id, code, organizationId, name, description, illustration, participations = [], questId, blueprintId } = {},
+    quest,
+  ) {
     this.id = id;
     this.code = code;
     this.organizationId = organizationId;
@@ -31,6 +34,7 @@ export class CombinedCourse {
     this.illustration = illustration;
     this.participations = participations;
     this.questId = questId;
+    this.blueprintId = blueprintId;
 
     this.#validate({ id, code, organizationId, name, description, illustration });
 

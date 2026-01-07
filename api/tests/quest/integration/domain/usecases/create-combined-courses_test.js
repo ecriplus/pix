@@ -196,6 +196,7 @@ ${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
 
     // 1st Organization
     // Quest
+    expect(firstCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
     expect(firstCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(firstCreatedQuestForFirstOrganization.name).to.equal(expectedFirstQuestForFirstOrganization.name);
     expect(firstCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
@@ -214,14 +215,17 @@ ${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
     expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
 
     // Quest
+    expect(secondCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint2.id);
     expect(secondCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(secondCreatedQuestForFirstOrganization.name).to.equal(expectedSecondQuestForFirstOrganization.name);
     expect(secondCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
       secondCreatedQuestForFirstOrganization.successRequirements,
     );
+    // TODO: voir avec Gégé si c'est ok
     // expect(secondCreatedQuestForFirstOrganization.description).null;
     expect(secondCreatedQuestForFirstOrganization.description).to.equal(blueprint2.description);
 
+    // TODO: voir avec Gégé si c'est ok
     // expect(secondCreatedQuestForFirstOrganization.illustration).null;
     expect(secondCreatedQuestForFirstOrganization.illustration).to.equal(blueprint2.illustration);
     //Campaign
@@ -232,6 +236,7 @@ ${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
 
     // 2nd Organization
     // Quest
+    expect(createdQuestForSecondOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
     expect(createdQuestForSecondOrganization.code).not.to.be.null;
     expect(createdQuestForSecondOrganization.name).to.equal(expectedQuestForSecondOrganization.name);
     expect(createdQuestForSecondOrganization.successRequirements).to.deep.equal(

@@ -66,6 +66,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
         illustration: combinedCourse1.illustration,
         participations: [],
         questId: combinedCourse1.questId,
+        blueprintId: null,
       },
       {
         id: combinedCourse2.id,
@@ -76,6 +77,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
         illustration: combinedCourse2.illustration,
         participations: [],
         questId: combinedCourse2.questId,
+        blueprintId: null,
       },
     ]);
   });

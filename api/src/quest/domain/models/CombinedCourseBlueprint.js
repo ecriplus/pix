@@ -60,6 +60,7 @@ export class CombinedCourseBlueprint {
 
     return new CombinedCourse(
       {
+        blueprintId: this.id,
         name: name ?? this.name,
         code,
         organizationId,

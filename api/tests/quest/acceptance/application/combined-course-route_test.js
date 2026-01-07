@@ -34,11 +34,12 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
       it('creates combined courses', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
 
         await databaseBuilder.commit();
 
-        const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}`;
+        const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*;Identifiant du schéma de parcours*
+${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId};${combinedCourseBlueprint.id}`;
 
         const options = {
           method: 'POST',

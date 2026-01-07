@@ -90,6 +90,7 @@ const _toDTO = (combinedCourse) => {
       successRequirements: JSON.stringify(questDTO.successRequirements),
     },
     combinedCourse: {
+      combinedCourseBlueprintId: combinedCourse.blueprintId,
       organizationId: combinedCourse.organizationId,
       code: combinedCourse.code,
       name: combinedCourse.name,
@@ -110,6 +111,7 @@ const findByModuleIdAndOrganizationIds = async ({ moduleId, organizationIds }) =
       'combined_courses.description',
       'combined_courses.illustration',
       'combined_courses.questId',
+      'combined_courses.combinedCourseBlueprintId',
     )
     .join('quests', 'combined_courses.questId', 'quests.id')
     .whereIn('combined_courses.organizationId', organizationIds)
@@ -126,6 +128,7 @@ const _toDomain = ({
   description,
   illustration,
   questId,
+  combinedCourseBlueprintId,
 }) => {
   return new CombinedCourse({
     id,
@@ -135,6 +138,7 @@ const _toDomain = ({
     description,
     illustration,
     questId,
+    blueprintId: combinedCourseBlueprintId,
   });
 };
 
