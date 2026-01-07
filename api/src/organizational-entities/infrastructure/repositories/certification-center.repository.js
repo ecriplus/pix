@@ -83,7 +83,7 @@ const _toDomain = ({ certificationCenter, habilitationsDTO }) => {
 };
 
 const _setSearchFiltersForQueryBuilder = (filters, queryBuilder) => {
-  const { id, name, type, externalId } = filters;
+  const { id, name, type, externalId, hideArchived } = filters;
 
   if (id) {
     queryBuilder.whereRaw('CAST(id as TEXT) LIKE ?', `%${id.toString().toLowerCase()}%`);
@@ -96,5 +96,8 @@ const _setSearchFiltersForQueryBuilder = (filters, queryBuilder) => {
   }
   if (externalId) {
     queryBuilder.whereILike('externalId', `%${externalId}%`);
+  }
+  if (hideArchived) {
+    queryBuilder.whereNull('archivedAt');
   }
 };

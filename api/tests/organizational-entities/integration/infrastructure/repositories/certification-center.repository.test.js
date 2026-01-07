@@ -408,6 +408,28 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       },
     );
 
+    context('when there are archived certification centers', function () {
+      it('returns only non archived certification centers if given in filters', async function () {
+        // given
+        databaseBuilder.factory.buildCertificationCenter({ name: 'name_ok_1', archivedAt: null });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'name_ko_2', archivedAt: new Date('2020-01-01') });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'name_ok_3', archivedAt: null });
+        await databaseBuilder.commit();
+
+        const filter = { hideArchived: true };
+        const page = { number: 1, size: 10 };
+
+        // when
+        const { models: matchingCertificationCenters } = await certificationCenterRepository.findPaginatedFiltered({
+          filter,
+          page,
+        });
+
+        // then
+        expect(_.map(matchingCertificationCenters, 'name')).to.have.members(['name_ok_1', 'name_ok_3']);
+      });
+    });
+
     context('when there are filters that should be ignored', function () {
       it('ignores the filters and retrieve all certificationCenters', async function () {
         // given

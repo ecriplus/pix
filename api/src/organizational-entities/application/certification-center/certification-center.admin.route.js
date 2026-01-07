@@ -40,6 +40,7 @@ const register = async function (server) {
               name: Joi.string().trim().empty('').allow(null).optional(),
               type: Joi.string().trim().empty('').allow(null).optional(),
               externalId: Joi.string().trim().empty('').allow(null).optional(),
+              hideArchived: Joi.boolean().optional(),
             }).default({}),
           }),
         },

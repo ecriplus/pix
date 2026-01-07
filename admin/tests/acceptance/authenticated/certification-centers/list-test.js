@@ -40,17 +40,47 @@ module('Acceptance | Certification Centers | List', function (hooks) {
       assert.dom(screen.getByRole('link', { name: 'Centres de certifications' })).hasClass('active');
     });
 
-    test('it should display the current filter when certification-centers are filtered', async function (assert) {
-      // given
-      server.createList('certification-center', 1, { type: 'PRO' });
-      server.createList('certification-center', 2, { type: 'SCO' });
-      server.createList('certification-center', 3, { type: 'SUP' });
+    module('when filters are used', function (hooks) {
+      hooks.beforeEach(async () => {
+        server.create('certification-center', { name: 'center-1', type: 'PRO' });
+        server.create('certification-center', { name: 'center-2', type: 'SCO' });
+        server.create('certification-center', { name: 'center-3', type: 'SUP' });
+      });
 
-      // when
-      const screen = await visit('/certification-centers/list?type=sup');
+      test('it should display the current filter when certification centers are filtered by name', async function (assert) {
+        // when
+        const screen = await visit('/certification-centers/list?name=clea-center');
 
-      // then
-      assert.dom(screen.getByRole('textbox', { name: 'Type' })).hasValue('sup');
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Nom' })).hasValue('clea-center');
+      });
+
+      test('it should display the current filter when certification centers are filtered by type', async function (assert) {
+        // when
+        const screen = await visit('/certification-centers/list?type=SCO');
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Type' })).hasValue('SCO');
+      });
+
+      test('it should display the current filter when certification centers are filtered by externalId', async function (assert) {
+        // when
+        const screen = await visit('/certification-centers/list?externalId=1234567A');
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'ID externe' })).hasValue('1234567A');
+      });
+
+      test('it displays non archived certification centers', async function (assert) {
+        // given
+        const screen = await visit('/certification-centers/list');
+
+        // when
+        await click(screen.getByRole('button', { name: 'Masquer les centres archivés' }));
+
+        // then
+        assert.strictEqual(currentURL(), '/certification-centers/list?hideArchived=true');
+      });
     });
 
     test('should go to certification center page when line is clicked', async function (assert) {
