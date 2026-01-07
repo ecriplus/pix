@@ -9,10 +9,13 @@ export default class NewController extends Controller {
   @service intl;
   @service store;
 
-  queryParams = ['parentOrganizationId', 'parentOrganizationName'];
+  queryParams = ['parentOrganizationId'];
 
   @tracked parentOrganizationId = null;
-  @tracked parentOrganizationName = null;
+
+  get parentOrganizationName() {
+    return this.model.parentOrganization ? this.model.parentOrganization.name : null;
+  }
 
   @action
   redirectOnCancel() {
