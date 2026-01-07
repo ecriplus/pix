@@ -176,6 +176,8 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
             variationPercent: 1,
             defaultCandidateCapacity: 0,
             defaultProbabilityToPickChallenge: 51,
+            limitToOneQuestionPerTube: true,
+            enablePassageByAllCompetences: true,
           }),
         }),
       );

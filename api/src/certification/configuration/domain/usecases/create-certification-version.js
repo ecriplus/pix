@@ -54,6 +54,8 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
         variationPercent: 1,
         defaultCandidateCapacity: 0,
         defaultProbabilityToPickChallenge: DEFAULT_PROBABILITY_TO_PICK_CHALLENGE,
+        limitToOneQuestionPerTube: true,
+        enablePassageByAllCompetences: true,
       }),
     });
   }

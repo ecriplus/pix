@@ -11,7 +11,9 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
       enablePassageByAllCompetences: false,
       variationPercent: 0.2,
       defaultCandidateCapacity: -3,
+      defaultProbabilityToPickChallenge: 100,
     };
+
     context('maximumAssessmentLength', function () {
       it('should throw an EntityValidationError if it is missing', function () {
         // given
@@ -94,6 +96,16 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
     });
 
     context('limitToOneQuestionPerTube', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.limitToOneQuestionPerTube;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
       it('should throw an EntityValidationError if it is not a boolean', function () {
         // given
         params.limitToOneQuestionPerTube = 'string';
@@ -107,6 +119,16 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', funct
     });
 
     context('enablePassageByAllCompetences', function () {
+      it('should throw an EntityValidationError if it is missing', function () {
+        // given
+        delete params.enablePassageByAllCompetences;
+
+        // when
+        const err = catchErrSync(() => new FlashAssessmentAlgorithmConfiguration(params))();
+
+        // then
+        expect(err).to.be.an.instanceOf(EntityValidationError);
+      });
       it('should throw an EntityValidationError if it is not a boolean', function () {
         // given
         params.enablePassageByAllCompetences = 'string';

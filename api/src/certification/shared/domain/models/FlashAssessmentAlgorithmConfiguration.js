@@ -6,9 +6,9 @@ export class FlashAssessmentAlgorithmConfiguration {
   static #schema = Joi.object({
     maximumAssessmentLength: Joi.number().integer().min(0).required(),
     challengesBetweenSameCompetence: Joi.number().integer().min(0).required(),
-    limitToOneQuestionPerTube: Joi.boolean(),
-    enablePassageByAllCompetences: Joi.boolean(),
-    variationPercent: Joi.number().min(0).max(1),
+    limitToOneQuestionPerTube: Joi.boolean().required(),
+    enablePassageByAllCompetences: Joi.boolean().required(),
+    variationPercent: Joi.number().min(0).max(1).required(),
     defaultCandidateCapacity: Joi.number().required(),
     defaultProbabilityToPickChallenge: Joi.number().min(0).max(100).required(),
   });
@@ -17,8 +17,8 @@ export class FlashAssessmentAlgorithmConfiguration {
    * @param {object} props
    * @param {number} props.maximumAssessmentLength - limit for assessment length
    * @param {number} props.challengesBetweenSameCompetence - define a number of questions before getting another one on the same competence
-   * @param {boolean} [props.limitToOneQuestionPerTube] - limits questions to one per tube
-   * @param {boolean} [props.enablePassageByAllCompetences] - enable or disable the passage through all competences
+   * @param {boolean} props.limitToOneQuestionPerTube - limits questions to one per tube
+   * @param {boolean} props.enablePassageByAllCompetences - enable or disable the passage through all competences
    * @param {number} props.variationPercent
    * @param {number} props.defaultCandidateCapacity - starting candidate capacity for first challenge
    * @param {number} props.defaultProbabilityToPickChallenge - The probability (as a percentage, 0-100) that the ramdomizing function will pick a challenge from a list of possible challenges.
@@ -26,8 +26,8 @@ export class FlashAssessmentAlgorithmConfiguration {
   constructor({
     maximumAssessmentLength,
     challengesBetweenSameCompetence,
-    limitToOneQuestionPerTube = false,
-    enablePassageByAllCompetences = false,
+    limitToOneQuestionPerTube,
+    enablePassageByAllCompetences,
     variationPercent,
     defaultCandidateCapacity,
     defaultProbabilityToPickChallenge,

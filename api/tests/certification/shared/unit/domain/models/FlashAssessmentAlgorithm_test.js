@@ -8,6 +8,7 @@ const baseFlashAssessmentAlgorithmConfig = {
   enablePassageByAllCompetences: false,
   defaultCandidateCapacity: -3,
   defaultProbabilityToPickChallenge: 51,
+  variationPercent: 0.5,
 };
 
 describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
@@ -171,6 +172,7 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
             flashAlgorithmImplementation,
             configuration: _getAlgorithmConfig({
               maximumAssessmentLength: alreadyAnsweredChallengesCount + remainingAnswersToGive,
+              limitToOneQuestionPerTube: false,
             }),
           });
 
@@ -247,6 +249,6 @@ const _getAlgorithmConfig = (options) => {
 };
 
 const _getCapacityAndErrorRateParams = (params) => ({
-  variationPercent: undefined,
+  variationPercent: baseFlashAssessmentAlgorithmConfig.variationPercent,
   ...params,
 });

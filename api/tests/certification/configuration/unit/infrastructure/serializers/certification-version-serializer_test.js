@@ -20,6 +20,8 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
           limitToOneQuestionPerTube: true,
           defaultCandidateCapacity: -3,
           defaultProbabilityToPickChallenge: 51,
+          variationPercent: 0.5,
+          enablePassageByAllCompetences: false,
         },
       };
 
@@ -43,6 +45,8 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
               limitToOneQuestionPerTube: true,
               defaultCandidateCapacity: -3,
               defaultProbabilityToPickChallenge: 51,
+              variationPercent: 0.5,
+              enablePassageByAllCompetences: false,
             },
           },
         },
@@ -71,6 +75,8 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
               challengesBetweenSameCompetence: 0,
               variationPercent: 1,
               defaultProbabilityToPickChallenge: 51,
+              limitToOneQuestionPerTube: false,
+              enablePassageByAllCompetences: false,
             },
           },
         },
