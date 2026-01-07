@@ -23,9 +23,6 @@ module('Integration | Component | Authentication | authentication-identity-provi
         const screen = await render(<template><AuthenticationIdentityProviders /></template>);
 
         // then
-        const heading = t('components.authentication.authentication-identity-providers.login.heading');
-        assert.dom(screen.getByRole('heading', { name: heading })).exists();
-
         const link = await screen.findByRole('link', {
           name: t('components.authentication.authentication-identity-providers.select-another-organization-link'),
         });
@@ -42,9 +39,6 @@ module('Integration | Component | Authentication | authentication-identity-provi
         );
 
         // then
-        const heading = t('components.authentication.authentication-identity-providers.login.heading');
-        assert.dom(screen.getByRole('heading', { name: heading })).exists();
-
         const link = await screen.findByRole('link', {
           name: t('components.authentication.authentication-identity-providers.select-another-organization-link'),
         });
@@ -59,9 +53,6 @@ module('Integration | Component | Authentication | authentication-identity-provi
         const screen = await render(<template><AuthenticationIdentityProviders @isForSignup={{true}} /></template>);
 
         // then
-        const heading = t('components.authentication.authentication-identity-providers.signup.heading');
-        assert.dom(screen.getByRole('heading', { name: heading })).exists();
-
         const link = await screen.findByRole('link', {
           name: t('components.authentication.authentication-identity-providers.select-another-organization-link'),
         });
@@ -80,9 +71,6 @@ module('Integration | Component | Authentication | authentication-identity-provi
         );
 
         // then
-        const heading = t('components.authentication.authentication-identity-providers.signup.heading');
-        assert.dom(screen.getByRole('heading', { name: heading })).exists();
-
         const link = await screen.findByRole('link', {
           name: t('components.authentication.authentication-identity-providers.select-another-organization-link'),
         });

@@ -29,13 +29,9 @@ export default class AuthenticationIdentityProviders extends Component {
   <template>
     {{#if this.oidcIdentityProviders.hasIdentityProviders}}
       <section class="authentication-identity-providers-authentication-section">
-        <h2 class="authentication-identity-providers-authentication-section__heading">
-          {{#if @isForSignup}}
-            {{t "components.authentication.authentication-identity-providers.signup.heading"}}
-          {{else}}
-            {{t "components.authentication.authentication-identity-providers.login.heading"}}
-          {{/if}}
-        </h2>
+        <p class="authentication-identity-providers-authentication-section__spacer">
+          {{t "components.authentication.authentication-identity-providers.spacer.or"}}
+        </p>
 
         <PixButtonLink
           @route="authentication.sso-selection"

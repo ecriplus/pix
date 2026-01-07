@@ -338,12 +338,9 @@
     },
     "authentication": {
       "authentication-identity-providers": {
-        "login": {
-          "heading": "Autres méthodes de connexion"
-        },
         "select-another-organization-link": "Choisir une autre méthode de connexion",
-        "signup": {
-          "heading": "Autres méthodes d’inscription"
+        "spacer": {
+          "or": "ou"
         }
       },
       "oidc-association-confirmation": {
