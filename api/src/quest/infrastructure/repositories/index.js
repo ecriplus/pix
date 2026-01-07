@@ -13,7 +13,6 @@ import { temporaryStorage } from '../../../shared/infrastructure/key-value-stora
 import * as accessCodeRepository from '../../../shared/infrastructure/repositories/access-code-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import * as campaignRepository from './campaign-repository.js';
-import * as combinedCourseBlueprintRepository from './combined-course-blueprint-repository.js';
 import * as combinedCourseDetailsRepository from './combined-course-details-repository.js';
 import * as combinedCourseParticipantRepository from './combined-course-participant-repository.js';
 import * as combinedCourseParticipationRepository from './combined-course-participation-repository.js';
@@ -27,10 +26,6 @@ import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
 import * as targetProfileRepository from './target-profile-repository.js';
 import * as userRepository from './user-repository.js';
-
-/**
- * @typedef {combinedCourseBlueprintRepository} combinedCourseBlueprintRepository;
- * **/
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
@@ -50,7 +45,6 @@ const repositoriesWithoutInjectedDependencies = {
   userRepository,
   recommendedModuleRepository,
   targetProfileRepository,
-  combinedCourseBlueprintRepository,
 };
 
 const dependencies = {

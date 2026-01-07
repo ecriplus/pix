@@ -2,6 +2,7 @@ import * as organizationLearnerPrescriptionRepository from '../../../prescriptio
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import * as combinedCourseBlueprintRepository from '../../infrastructure/repositories/combined-course-blueprint-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import combinedCourseDetailsService from '../services/combined-course-details-service.js';
@@ -37,7 +38,7 @@ const dependencies = {
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
-  combinedCourseBlueprintRepository: repositories.combinedCourseBlueprintRepository,
+  combinedCourseBlueprintRepository,
   codeGenerator,
   logger,
 };

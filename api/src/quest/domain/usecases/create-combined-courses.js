@@ -2,7 +2,6 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { COMBINED_COURSE_HEADER } from '../constants.js';
 import { Campaign } from '../models/Campaign.js';
-import { CombinedCourseBlueprint } from '../models/CombinedCourseBlueprint.js';
 
 export const createCombinedCourses = withTransaction(
   async ({
@@ -12,6 +11,7 @@ export const createCombinedCourses = withTransaction(
     codeGenerator,
     accessCodeRepository,
     combinedCourseRepository,
+    combinedCourseBlueprintRepository,
     recommendedModuleRepository,
     moduleRepository,
   }) => {
@@ -21,10 +21,13 @@ export const createCombinedCourses = withTransaction(
     const combinedCourses = [];
     const pendingCodes = [];
     for (const row of csvData) {
-      const { organizationIds: organizationIdsSeparatedByComma, creatorId, content } = row;
+      const { organizationIds: organizationIdsSeparatedByComma, creatorId, content, combinedCourseBlueprintId } = row;
       const organizationIds = organizationIdsSeparatedByComma.split(',');
       const combinedCourseInformation = JSON.parse(content);
-      const combinedCourseBlueprint = new CombinedCourseBlueprint(combinedCourseInformation);
+      const combinedCourseBlueprint = await combinedCourseBlueprintRepository.findById({
+        id: combinedCourseBlueprintId,
+      });
+
       const targetProfileIds = combinedCourseBlueprint.targetProfileIds;
       const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
 
@@ -66,12 +69,15 @@ export const createCombinedCourses = withTransaction(
 
         const createdCampaigns = await campaignRepository.save({ campaigns });
 
-        const combinedCourse = combinedCourseBlueprint.toCombinedCourse(
-          combinedCourseCode,
+        const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
+          name: combinedCourseInformation.name,
+          description: combinedCourseInformation.description,
+          illustration: combinedCourseInformation.illustration,
+          code: combinedCourseCode,
           organizationId,
-          createdCampaigns,
-          Object.groupBy(modules, ({ shortId }) => shortId),
-        );
+          campaigns: createdCampaigns,
+          modulesByShortId: Object.groupBy(modules, ({ shortId }) => shortId),
+        });
         combinedCourses.push(combinedCourse);
       }
     }

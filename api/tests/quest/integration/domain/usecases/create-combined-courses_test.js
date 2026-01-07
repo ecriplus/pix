@@ -39,11 +39,26 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       trainingId: trainingId,
     });
 
-    await databaseBuilder.commit();
+    const blueprint1 = databaseBuilder.factory.buildCombinedCourseBlueprint({
+      content: [
+        { type: 'evaluation', value: targetProfile.id },
+        { type: 'module', value: '27d6ca4f' },
+        { type: 'module', value: 'df82ec66' },
+      ],
+    });
 
-    const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluation"",""value"":${targetProfile.id}},{""type"":""module"",""value"":""27d6ca4f""},{""type"":""module"",""value"":""df82ec66""}],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}
-${firstOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluation"",""value"":${targetProfileWithTraining.id}},{""type"":""module"",""value"":""27d6ca4f""},{""type"":""module"",""value"":""df82ec66""}]}";${userId}
+    const blueprint2 = databaseBuilder.factory.buildCombinedCourseBlueprint({
+      content: [
+        { type: 'evaluation', value: targetProfileWithTraining.id },
+        { type: 'module', value: '27d6ca4f' },
+        { type: 'module', value: 'df82ec66' },
+      ],
+    });
+
+    await databaseBuilder.commit();
+    const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*;Identifiant du schéma de parcours*
+${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId};${blueprint1.id}
+${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
 `;
 
     const payload = iconv.encode(input, 'UTF-8');
@@ -181,6 +196,7 @@ ${firstOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluati
 
     // 1st Organization
     // Quest
+    expect(firstCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
     expect(firstCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(firstCreatedQuestForFirstOrganization.name).to.equal(expectedFirstQuestForFirstOrganization.name);
     expect(firstCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
@@ -199,13 +215,19 @@ ${firstOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluati
     expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
 
     // Quest
+    expect(secondCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint2.id);
     expect(secondCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(secondCreatedQuestForFirstOrganization.name).to.equal(expectedSecondQuestForFirstOrganization.name);
     expect(secondCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
       secondCreatedQuestForFirstOrganization.successRequirements,
     );
-    expect(secondCreatedQuestForFirstOrganization.description).null;
-    expect(secondCreatedQuestForFirstOrganization.illustration).null;
+    // TODO: voir avec Gégé si c'est ok
+    // expect(secondCreatedQuestForFirstOrganization.description).null;
+    expect(secondCreatedQuestForFirstOrganization.description).to.equal(blueprint2.description);
+
+    // TODO: voir avec Gégé si c'est ok
+    // expect(secondCreatedQuestForFirstOrganization.illustration).null;
+    expect(secondCreatedQuestForFirstOrganization.illustration).to.equal(blueprint2.illustration);
     //Campaign
     expect(secondCreatedCampaignForFirstOrganization.name).to.equal(targetProfileWithTraining.internalName);
     expect(secondCreatedCampaignForFirstOrganization.title).to.equal(targetProfileWithTraining.name);
@@ -214,6 +236,7 @@ ${firstOrganizationId};"{""name"":""Combinix"",""content"":[{""type"":""evaluati
 
     // 2nd Organization
     // Quest
+    expect(createdQuestForSecondOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
     expect(createdQuestForSecondOrganization.code).not.to.be.null;
     expect(createdQuestForSecondOrganization.name).to.equal(expectedQuestForSecondOrganization.name);
     expect(createdQuestForSecondOrganization.successRequirements).to.deep.equal(

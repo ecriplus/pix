@@ -171,12 +171,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         description,
         illustration,
       });
-      const combinedCourse = combinedCourseBlueprint.toCombinedCourse(
+      const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
         code,
         organizationId,
         campaigns,
         modulesByShortId,
-      );
+      });
 
       // then
       const quest = new Quest({

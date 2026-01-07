@@ -282,6 +282,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           },
         },
       ];
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
       await databaseBuilder.commit();
 
       const quest = new Quest({
@@ -303,6 +304,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           name: 'secondCombinedCourse',
           code: 'secondCode',
           organizationId: secondOrganizationId,
+          blueprintId: combinedCourseBlueprint.id,
         },
         quest,
       );
@@ -318,11 +320,13 @@ describe('Quest | Integration | Repository | combined-course', function () {
         .where('combined_courses.organizationId', secondOrganizationId)
         .first();
 
+      expect(firstSavedCombinedCourse.combinedCourseBlueprintId).to.be.null;
       expect(firstSavedCombinedCourse.name).to.equal('firstCombinedCourse');
       expect(firstSavedCombinedCourse.description).equal('ma description');
       expect(firstSavedCombinedCourse.illustration).equal('mon_illu.svg');
       expect(firstSavedCombinedCourse.code).equal('firstCode');
 
+      expect(secondSavedCombinedCourse.combinedCourseBlueprintId).to.equal(combinedCourseBlueprint.id);
       expect(secondSavedCombinedCourse.name).to.equal('secondCombinedCourse');
       expect(secondSavedCombinedCourse.description).null;
       expect(secondSavedCombinedCourse.illustration).null;
@@ -387,6 +391,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModule.illustration,
           participations: [],
           questId: combinedCourseWithModule.questId,
+          blueprintId: null,
         },
         {
           id: otherCombinedCourseWithModule.id,
@@ -397,6 +402,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: otherCombinedCourseWithModule.illustration,
           participations: [],
           questId: otherCombinedCourseWithModule.questId,
+          blueprintId: null,
         },
       ]);
     });
@@ -450,6 +456,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModule.illustration,
           participations: [],
           questId: combinedCourseWithModule.questId,
+          blueprintId: null,
         },
         {
           id: combinedCourseWithModuleAndOtherOrga.id,
@@ -460,6 +467,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModuleAndOtherOrga.illustration,
           participations: [],
           questId: combinedCourseWithModuleAndOtherOrga.questId,
+          blueprintId: null,
         },
       ]);
     });
