@@ -766,32 +766,28 @@
               "element": {
                 "id": "056c8078-a480-4baa-8a5d-1ebb8a9d4d45",
                 "type": "qrocm",
-                "instruction": "<p>Trouvez les mots manquants dans la phrase suivante pour retrouver le trajet de votre demande. <br></p>",
+                "instruction": "<p>Trouvez les mots manquants pour reconstituer le trajet d’une demande sur internet.</p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>La demande d’information part &nbsp;</p>"
+                    "content": "<p>La demande d’information part&nbsp;</p>"
                   },
                   {
                     "input": "a",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "a faire",
+                    "ariaLabel": "départ de la demande",
                     "defaultValue": "",
-                    "tolerances": [
-                      "un centre de données",
-                      "de votre appareil",
-                      "un serveur"
-                    ],
+                    "tolerances": [],
                     "options": [
                       {
                         "id": "1",
-                        "content": "un centre de données"
+                        "content": "d’un centre de données"
                       },
                       {
                         "id": "2",
-                        "content": "un serveur"
+                        "content": "d’un serveur"
                       },
                       {
                         "id": "3",
@@ -807,51 +803,13 @@
                     "content": "<p>pour aller dans&nbsp;</p>"
                   },
                   {
-                    "input": "z",
+                    "input": "b",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "a faire",
+                    "ariaLabel": "lieu de traitement",
                     "defaultValue": "",
-                    "tolerances": [
-                      "un serveur",
-                      "un centre de données",
-                      "de votre appareil"
-                    ],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "serveurs"
-                      },
-                      {
-                        "id": "2",
-                        "content": "smartphones"
-                      },
-                      {
-                        "id": "3",
-                        "content": "un centre de données"
-                      }
-                    ],
-                    "solutions": [
-                      "3"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>où sont rangés des</p>"
-                  },
-                  {
-                    "input": "zdad",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "a faire",
-                    "defaultValue": "10",
-                    "tolerances": [
-                      "votre appareil",
-                      "serveurs",
-                      "centre de donnée"
-                    ],
+                    "tolerances": [],
                     "options": [
                       {
                         "id": "1",
@@ -859,11 +817,71 @@
                       },
                       {
                         "id": "2",
+                        "content": "un centre de données"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un autre smartphone"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>où se trouvent des&nbsp;</p>"
+                  },
+                  {
+                    "input": "c",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "éléments de traitement",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "appareils numériques"
+                      },
+                      {
+                        "id": "2",
                         "content": "serveurs"
                       },
                       {
                         "id": "3",
-                        "content": "centre de donnée"
+                        "content": "applications"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>. Une fois la demande traitée, la réponse revient vers&nbsp;</p>"
+                  },
+                  {
+                    "input": "d",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "retour de la réponse",
+                    "defaultValue": "retour de la réponse",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Le centre de données"
+                      },
+                      {
+                        "id": "2",
+                        "content": "votre appareil"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un autre serveur"
                       }
                     ],
                     "solutions": [
@@ -873,12 +891,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bien vu !&nbsp;</p>",
-                    "diagnosis": "<p>L’information que vous demandez part de votre appareil et la demande est envoyée dans un centre de donnée où se situe le serveur qui répondra à votre demande.</p>"
+                    "state": "<p>Bien vu !</p>",
+                    "diagnosis": "<p>La demande part de votre appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur votre appareil.</p>"
                   },
                   "invalid": {
-                    "state": "<p>Eh non !</p>",
-                    "diagnosis": "<p>L’information que vous demandez part de votre appareil et la demande est envoyée dans un centre de donnée où se situe le serveur qui répondra à votre demande.</p>"
+                    "state": "<p>Eh non !</p>",
+                    "diagnosis": "<p>La demande part de votre appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur votre appareil.</p>"
                   }
                 }
               }
