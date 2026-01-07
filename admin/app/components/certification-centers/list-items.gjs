@@ -3,14 +3,22 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import PixToggleButton from '@1024pix/pix-ui/components/pix-toggle-button';
 import { fn } from '@ember/helper';
+import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 export default class CertificationCenterListItems extends Component {
   get isClearFiltersButtonDisabled() {
-    return !this.args.id && !this.args.name && !this.args.type && !this.args.externalId;
+    return !this.args.id && !this.args.name && !this.args.type && !this.args.externalId && !this.args.hideArchived;
+  }
+
+  @action
+  filterHideArchived(value) {
+    const event = { target: { value } };
+    this.args.triggerFiltering('hideArchived', event);
   }
 
   <template>
@@ -33,6 +41,11 @@ export default class CertificationCenterListItems extends Component {
         <PixInput value={{@externalId}} oninput={{fn @triggerFiltering "externalId"}}>
           <:label>ID externe</:label>
         </PixInput>
+        <PixToggleButton @onChange={{this.filterHideArchived}} @toggled={{@hideArchived}}>
+          <:label>Masquer les centres archivés</:label>
+          <:viewA>Oui</:viewA>
+          <:viewB>Non</:viewB>
+        </PixToggleButton>
       </PixFilterBanner>
 
       {{#if @certificationCenters}}

@@ -9,6 +9,7 @@ export default class ListRoute extends Route {
     pageSize: { refreshModel: true },
     id: { refreshModel: true },
     name: { refreshModel: true },
+    hideArchived: { refreshModel: true },
     type: { refreshModel: true },
     externalId: { refreshModel: true },
   };
@@ -23,6 +24,7 @@ export default class ListRoute extends Route {
           name: params.name ? params.name.trim() : '',
           type: params.type ? params.type.trim() : '',
           externalId: params.externalId ? params.externalId.trim() : '',
+          hideArchived: params.hideArchived,
         },
         page: {
           number: params.pageNumber,

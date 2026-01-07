@@ -25,7 +25,7 @@ module('Unit | Route | authenticated/certification-centers/list', function (hook
     });
 
     module('when queryParams filters are falsy', function () {
-      test('it should call store.query with no filters on name, type and externalId', async function (assert) {
+      test('it should call store.query with no filters on name, type and externalId and hideArchived', async function (assert) {
         // when
         await route.model(params);
         expectedQueryArgs.filter = {
@@ -33,6 +33,7 @@ module('Unit | Route | authenticated/certification-centers/list', function (hook
           name: '',
           type: '',
           externalId: '',
+          hideArchived: undefined,
         };
 
         // then
@@ -48,11 +49,13 @@ module('Unit | Route | authenticated/certification-centers/list', function (hook
         params.name = ' someName';
         params.type = 'someType ';
         params.externalId = ' someExternalId ';
+        params.hideArchived = true;
         expectedQueryArgs.filter = {
           id: '123456',
           name: 'someName',
           type: 'someType',
           externalId: 'someExternalId',
+          hideArchived: true,
         };
 
         // when
