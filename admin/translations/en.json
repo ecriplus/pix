@@ -473,8 +473,11 @@
           "target-profile": "Target profile"
         },
         "notifications": {
-          "error": "Oups. Something went wrong. Please try again.",
-          "success": "Combined course blueprint created successfully!"
+          "addItemError": "Oops. Resource not found.",
+          "error": "Oops. Something went wrong. Please try again.",
+          "moduleNotFound": "No module found with given short id",
+          "success": "Combined course blueprint created successfully!",
+          "targetProfileNotFound": "No target profile found with given id"
         },
         "title": "Create a combined course blueprint"
       },

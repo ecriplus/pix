@@ -35,38 +35,57 @@ export default class CombineCourseBluePrintForm extends Component {
   }
 
   @action
-  addItem(event) {
+  async addItem(event) {
     event.preventDefault();
-    if (this.itemType === 'targetProfile') {
-      this.addTargetProfile();
-    } else {
-      this.addModule();
+    try {
+      if (this.itemType === 'targetProfile') {
+        await this.addTargetProfile();
+      } else {
+        await this.addModule();
+      }
+    } catch (responseError) {
+      this.#handleErrorForResource(this.itemType, responseError);
+    } finally {
+      this.itemValue = null;
+      document.getElementsByName('itemType')[0].focus();
     }
-    document.getElementsByName('itemType')[0].focus();
   }
 
-  addTargetProfile() {
+  async addTargetProfile() {
+    const targetProfile = await this.store.findRecord('target-profile', this.itemValue);
     this.blueprint.content = [
       ...this.blueprint.content,
       {
         type: 'evaluation',
         value: Number(this.itemValue),
+        label: targetProfile.internalName,
       },
     ];
-
-    this.itemValue = null;
   }
 
-  addModule() {
+  async addModule() {
+    const module = await this.store.findRecord('module', this.itemValue);
+
     this.blueprint.content = [
       ...this.blueprint.content,
       {
         type: 'module',
         value: this.itemValue,
+        label: module.title,
       },
     ];
+  }
 
-    this.itemValue = null;
+  #handleErrorForResource(resourceName, responseError) {
+    if (responseError.errors?.some(({ status }) => status === '404')) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t(`components.combined-course-blueprints.create.notifications.${resourceName}NotFound`),
+      });
+    } else {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.combined-course-blueprints.create.notifications.addItemError'),
+      });
+    }
   }
 
   @action
@@ -227,7 +246,12 @@ export default class CombineCourseBluePrintForm extends Component {
         {{#if (gt this.blueprint.content.length 0)}}
           <ul class="combined-course-page__list">
             {{#each this.blueprint.content as |item|}}
-              <li><RequirementTag @type={{item.type}} @value={{item.value}} @onRemove={{this.removeRequirement}} />
+              <li><RequirementTag
+                  @type={{item.type}}
+                  @value={{item.value}}
+                  @label={{item.label}}
+                  @onRemove={{this.removeRequirement}}
+                />
               </li>
             {{/each}}
           </ul>
