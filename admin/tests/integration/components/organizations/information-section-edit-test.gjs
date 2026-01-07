@@ -537,3 +537,63 @@ module('Integration | Component | organizations/information-section-edit', funct
     });
   });
 });
+
+module('Rendering', function (hooks) {
+  setupIntlRenderingTest(hooks);
+  hooks.beforeEach(function () {
+    const store = this.owner.lookup('service:store');
+    const findAllStub = sinon.stub(store, 'findAll');
+
+    findAllStub
+      .withArgs('administration-team')
+      .resolves([
+        store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
+        store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
+      ]);
+
+    findAllStub
+      .withArgs('country')
+      .resolves([
+        store.createRecord('country', { code: '99101', name: 'Danemark' }),
+        store.createRecord('country', { code: '99100', name: 'France' }),
+      ]);
+
+    class AccessControlStub extends Service {
+      hasAccessToOrganizationActionsScope = true;
+    }
+    this.owner.register('service:access-control', AccessControlStub);
+  });
+
+  test('it should render the organization edit form with all sections', async function (assert) {
+    // given
+    const organization = EmberObject.create({
+      id: 1,
+      name: 'Organization SCO',
+      externalId: 'VELIT',
+      provinceCode: 'h50',
+      email: 'sco.generic.account@example.net',
+      administrationTeamId: '123',
+      isOrganizationSCO: true,
+      credit: 0,
+      documentationUrl: 'https://pix.fr/',
+      features: {},
+    });
+
+    // when
+    const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+    // then
+    assert.dom(screen.getByText(t('components.organizations.creation.general-information'))).exists();
+    assert.dom(screen.getByText(t('components.organizations.creation.configuration'))).exists();
+    assert.dom(screen.getByText(t('components.organizations.creation.features'))).exists();
+    assert
+      .dom(
+        screen.getByText(
+          `${t('components.organizations.creation.dpo.definition')} (${t('components.organizations.creation.dpo.acronym')})`,
+        ),
+      )
+      .exists();
+    assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
+    assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+  });
+});

@@ -695,6 +695,7 @@
           "label": "External Identifier",
           "placeholder": "Specify the UAI, SIRET etc"
         },
+        "features": "Features",
         "general-information": "General information",
         "name": {
           "label": "Name of the organization",

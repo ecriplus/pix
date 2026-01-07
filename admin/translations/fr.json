@@ -697,6 +697,7 @@
           "label": "Identifiant externe",
           "placeholder": "Spécifier l'UAI, le SIRET etc"
         },
+        "features": "Fonctionnalités",
         "general-information": "Informations générales",
         "name": {
           "label": "Nom de l'organisation",
