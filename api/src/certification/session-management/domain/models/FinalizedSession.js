@@ -1,3 +1,5 @@
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+
 class FinalizedSession {
   constructor({
     sessionId,
@@ -38,7 +40,8 @@ class FinalizedSession {
         !hasExaminerGlobalComment &&
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
         _hasNoScoringError(juryCertificationSummaries) &&
-        _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries),
+        _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) &&
+        _hasOnlyCoreScopeCertifications(juryCertificationSummaries),
       publishedAt: null,
     });
   }
@@ -75,4 +78,13 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
   return juryCertificationSummaries
     .filter((certificationSummary) => !certificationSummary.completedAt)
     .every((unfinishedCertificationSummary) => unfinishedCertificationSummary.isFlaggedAborted);
+}
+
+function _hasOnlyCoreScopeCertifications(juryCertificationSummaries) {
+  return juryCertificationSummaries.every((certification) => {
+    return (
+      !certification.complementaryCertificationKeyObtained ||
+      certification.complementaryCertificationKeyObtained == ComplementaryCertificationKeys.CLEA
+    );
+  });
 }
