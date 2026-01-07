@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.296.0](https://github.com/1024pix/pix/compare/v5.295.0...v5.296.0) (2026-01-07)
+
+### :rocket: Amélioration
+
+- [#14624](https://github.com/1024pix/pix/pull/14624) Après envoi du signalement, afficher un message de confirmation (PIX-20913) 
+
+### :rewind: Retour en arrière
+
+- [#14636](https://github.com/1024pix/pix/pull/14636) Revert "[TECH] Supprimer l'envoi des participations terminées pour France Travail (Ne pas merger avant d'avoir prévenu France Travail) (PIX-20950)"
+
+### :building_construction: Tech
+
+- [#14635](https://github.com/1024pix/pix/pull/14635) Déplacer le mapping de statut TO_SHARE vers la couche de sérialisation (PIX-21015)
+
 # [5.295.0](https://github.com/1024pix/pix/compare/v5.294.0...v5.295.0) (2026-01-07)
 
 ### :rocket: Amélioration
