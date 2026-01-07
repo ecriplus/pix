@@ -744,13 +744,11 @@
               "type": "element",
               "element": {
                 "id": "63394140-acf8-402f-bf33-0c30f603521a",
-                "type": "embed",
-                "isCompletionRequired": true,
+                "type": "custom-draft",
                 "title": "Classification",
-                "url": "https://epreuves.pix.fr/fr/tableau-double-entree/example_qcu.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_MFA_IND-tableau-double-entreeV2.html",
                 "instruction": "<p>Classez les facteurs d’authentification ci-dessous selon leur catégorie&nbsp;:</p>",
-                "solution": " { \"from\": \"pix\", \"answer\": \"1 : 1 / 2 : 3 / 3 : 2 / 4 : 2\" }",
-                "height": 500
+                "height": 550
               }
             }
           ]
