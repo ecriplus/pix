@@ -12,9 +12,9 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | part
 
       await expect(ParticipationSharedJob.name).to.have.been.performed.withJob({
         name: ParticipationSharedJob.name,
-        retryLimit: 0,
-        retryDelay: 0,
-        retryBackoff: false,
+        retrylimit: 0,
+        retrydelay: 0,
+        retrybackoff: false,
         data: { campaignParticipationId: 2 },
       });
     });
