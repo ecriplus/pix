@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import OidcSignupForm from 'pix-orga/components/authentication/oidc-signup-form';
 import { module, test } from 'qunit';
@@ -43,5 +44,32 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
 
     const title = await screen.findByText(t('pages.oidc.signup.claims.title'));
     assert.dom(title).exists();
+  });
+
+  module('when the user does not accept terms of service before signing up', function () {
+    test('does not sign up and displays cgu error', async function (assert) {
+      // given
+      const oidcIdentityProviders = this.owner.lookup('service:oidcIdentityProviders');
+      sinon
+        .stub(oidcIdentityProviders, 'list')
+        .value([{ id: 'sc', slug: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true }]);
+
+      const userClaims = {
+        firstName: 'John',
+        lastName: 'Doe',
+        title: 'Proviseur',
+      };
+
+      // when
+      const screen = await render(
+        <template><OidcSignupForm @identityProviderSlug="sc" @userClaims={{userClaims}} /></template>,
+      );
+      const signup = await screen.findByRole('button', { name: t('pages.oidc.signup.signup-button') });
+      await click(signup);
+
+      // then
+      const cguErrorMessage = await screen.findByText(t('pages.oidc.signup.error.cgu'));
+      assert.dom(cguErrorMessage).exists();
+    });
   });
 });

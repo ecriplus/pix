@@ -1419,7 +1419,10 @@
           "title": "Title"
         },
         "description": "An account will be created based on the information sent by the organisation",
-        "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+        "error": {
+          "cgu": "You must accept to the Pix terms of use and personal data protection policy to create an account.",
+          "claims": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support."
+        },
         "login-button": "I already have an account, I'm logging in",
         "signup-button": "Create my account",
         "sub-title": "to access your Pix Orga workspace",

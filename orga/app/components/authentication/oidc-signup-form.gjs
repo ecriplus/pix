@@ -9,15 +9,10 @@ import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import get from 'lodash/get';
 
-const ERROR_INPUT_MESSAGE_MAP = {
-  termsOfServiceNotSelected: 'pages.oidc-signup-or-login.error.error-message',
-};
-
 export default class OidcSignupForm extends Component {
   @service oidcIdentityProviders;
   @service intl;
   @service url;
-  @service locale;
   @service authErrorMessages;
   @service store;
   @service session;
@@ -25,7 +20,6 @@ export default class OidcSignupForm extends Component {
   @tracked isTermsOfServiceValidated = false;
   @tracked signupErrorMessage = null;
   @tracked isLoading = false;
-  @tracked globalError = null;
 
   get userClaimsToDisplay() {
     const { userClaims } = this.args;
@@ -63,7 +57,7 @@ export default class OidcSignupForm extends Component {
   @action
   async signup() {
     if (!this.isTermsOfServiceValidated) {
-      this.signupErrorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['termsOfServiceNotSelected']);
+      this.signupErrorMessage = this.intl.t('pages.oidc.signup.error.cgu');
       return;
     }
 

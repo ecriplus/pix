@@ -34,7 +34,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         </PixButtonLink>
       {{else}}
         <PixNotificationAlert @type="error" class="oidc-signup-form__error">
-          {{t "pages.oidc.signup.error"}}
+          {{t "pages.oidc.signup.error.claims"}}
         </PixNotificationAlert>
       {{/if}}
     </:content>
