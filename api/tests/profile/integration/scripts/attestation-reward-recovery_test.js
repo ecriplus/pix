@@ -2,9 +2,9 @@ import sinon from 'sinon';
 
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import {
-  PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS,
-  SixthGradeAttestationRewardScript,
-} from '../../../../src/profile/scripts/sixth-grade-attestation-reward.js';
+  AttestationRewardRecoveryScript,
+  TARGET_PROFILE_IDS,
+} from '../../../../src/profile/scripts/attestation-reward-recovery.js';
 import { catchErr, databaseBuilder, expect } from '../../../test-helper.js';
 
 describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', function () {
@@ -12,7 +12,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
     it('parses dates correctly', function () {
       const startDate = '2024-01-01';
       const endDate = { whut: 'idontknow' };
-      const script = new SixthGradeAttestationRewardScript();
+      const script = new AttestationRewardRecoveryScript();
       const { options } = script.metaInfo;
       const parsedDate = options.start.coerce(startDate);
       expect(parsedDate).to.be.a.instanceOf(Date);
@@ -24,12 +24,12 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
     let script;
 
     beforeEach(async function () {
-      script = new SixthGradeAttestationRewardScript();
+      script = new AttestationRewardRecoveryScript();
     });
 
     it('should not return the user if the participation date is not included between the start date and the end date ', async function () {
       const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
       const { userId } = databaseBuilder.factory.buildCampaignParticipation({
@@ -56,7 +56,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
 
     it('should only return the user if participation status is different than started', async function () {
       const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
       const { userId } = databaseBuilder.factory.buildCampaignParticipation({
@@ -83,13 +83,13 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
 
     it('should not return the user if the campaign target profile is not included in targeted target profiles', async function () {
       const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const { id: targetProfileId2 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[1],
+        id: TARGET_PROFILE_IDS[1],
       });
       const { id: targetProfileId3 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[2],
+        id: TARGET_PROFILE_IDS[2],
       });
       const { id: targetProfileId4 } = databaseBuilder.factory.buildTargetProfile();
       const campaign1 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId1 });
@@ -123,13 +123,13 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
 
     it('should return a user only once if the user has several participations for several campaigns including the targeted target profiles', async function () {
       const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const { id: targetProfileId2 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[1],
+        id: TARGET_PROFILE_IDS[1],
       });
       const { id: targetProfileId3 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[2],
+        id: TARGET_PROFILE_IDS[2],
       });
 
       const user = databaseBuilder.factory.buildUser();
@@ -168,13 +168,13 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
 
     it('should return expected users', async function () {
       const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const { id: targetProfileId2 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[1],
+        id: TARGET_PROFILE_IDS[1],
       });
       const { id: targetProfileId3 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[2],
+        id: TARGET_PROFILE_IDS[2],
       });
       const campaign1 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId1 });
       const campaign2 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId2 });
@@ -214,13 +214,13 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
   describe('#handle', function () {
     it('should log information for each userId', async function () {
       const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[2],
+        id: TARGET_PROFILE_IDS[2],
       });
       const { id: targetProfileId2 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[0],
+        id: TARGET_PROFILE_IDS[0],
       });
       const { id: targetProfileId3 } = databaseBuilder.factory.buildTargetProfile({
-        id: PRODUCTION_SIXTH_GRADE_TARGET_PROFILE_IDS[1],
+        id: TARGET_PROFILE_IDS[1],
       });
       const campaign1 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId1 });
       const campaign2 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId2 });
@@ -243,7 +243,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
 
       await databaseBuilder.commit();
 
-      const script = new SixthGradeAttestationRewardScript();
+      const script = new AttestationRewardRecoveryScript();
       const logger = { info: sinon.spy(), error: sinon.spy() };
       const usecases = { rewardUser: sinon.stub() };
 
@@ -260,7 +260,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
     });
 
     it('should throw an error if end comes before start.', async function () {
-      const script = new SixthGradeAttestationRewardScript();
+      const script = new AttestationRewardRecoveryScript();
       const logger = { info: sinon.spy(), error: sinon.spy() };
       const usecases = { rewardUser: sinon.stub() };
 
@@ -277,7 +277,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
     });
 
     it('should stop execution if there are no users', async function () {
-      const script = new SixthGradeAttestationRewardScript();
+      const script = new AttestationRewardRecoveryScript();
       const logger = { info: sinon.spy(), error: sinon.spy() };
       const usecases = { rewardUser: sinon.stub() };
 
