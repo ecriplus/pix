@@ -11,3 +11,8 @@ export const save = async (request, h, dependencies = { combinedCourseBlueprintS
   const createdBlueprint = await usecases.createCombinedCourseBlueprint({ combinedCourseBlueprint });
   return h.response(dependencies.combinedCourseBlueprintSerializer.serialize(createdBlueprint)).created();
 };
+
+export const getById = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
+  const combinedCourseBlueprint = await usecases.getCombinedCourseBlueprintById({ id: request.params.blueprintId });
+  return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
+};

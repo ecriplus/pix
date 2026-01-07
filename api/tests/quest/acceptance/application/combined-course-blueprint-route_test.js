@@ -77,4 +77,48 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+
+  describe('GET /api/combined-course-blueprints/:id', function () {
+    context('when user is admin ', function () {
+      it('should return combined course blueprint for given id', async function () {
+        // given
+        const adminUser = await insertUserWithRoleSuperAdmin();
+
+        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
+          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }]),
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-course-blueprints/${combinedCourseBlueprint.id}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data).to.deep.equal({
+          attributes: {
+            content: [
+              {
+                type: 'module',
+                value: 'mon-module',
+              },
+            ],
+            'created-at': combinedCourseBlueprint.createdAt,
+            description: 'Le but de ma quête',
+            illustration: 'images/illustration.svg',
+            'internal-name': 'Mon schéma de parcours combiné',
+            name: 'Mon parcours combiné',
+            'updated-at': combinedCourseBlueprint.updatedAt,
+          },
+          id: '100002',
+          type: 'combined-course-blueprints',
+        });
+      });
+    });
+  });
 });
