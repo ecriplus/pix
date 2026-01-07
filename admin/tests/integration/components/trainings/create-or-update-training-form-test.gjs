@@ -23,7 +23,6 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     // then
     assert.dom(screen.getByLabelText(t('pages.trainings.training.details.title'))).exists();
     assert.dom(screen.getByLabelText(t('pages.trainings.training.details.internalTitle'))).exists();
-    assert.dom(screen.getByLabelText('Lien')).exists();
     assert.dom(screen.getByLabelText('Format')).exists();
     assert.dom(screen.getByLabelText('Jours (JJ)')).exists();
     assert.dom(screen.getByLabelText('Heures (HH)')).exists();
@@ -189,6 +188,72 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       assert.ok(onSubmitStub.called);
       const submittedData = onSubmitStub.getCall(0).firstArg;
       assert.true(submittedData.isDisabled);
+    });
+  });
+
+  module('when isModuleSelectionForTrainingEnabled FT is enabled', function () {
+    module('when type provided is modulix', function () {
+      test('it should display the todo link selector', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+
+        // when
+        const screen = await render(
+          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        );
+
+        await click(screen.getByRole('button', { name: 'Format' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+        // then
+        assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
+        assert.dom(screen.getByText('Todo : Ajouter un Pix Select "Lien" listant les modules')).exists();
+      });
+    });
+
+    module('when type provided is not modulix', function () {
+      test('it should display the link field', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+
+        // when
+        const screen = await render(
+          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        );
+
+        await click(screen.getByRole('button', { name: 'Format' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Webinaire' }));
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
+      });
+    });
+  });
+
+  module('when isModuleSelectionForTrainingEnabled FT is disabled', function () {
+    module('when type is provided', function () {
+      test('it should display the link field', async function (assert) {
+        // given
+        // when
+        const screen = await render(
+          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        );
+
+        //then
+        assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
+
+        // when
+        await click(screen.getByRole('button', { name: 'Format' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
+      });
     });
   });
 });
