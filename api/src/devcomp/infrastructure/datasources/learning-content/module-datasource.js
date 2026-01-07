@@ -20,6 +20,18 @@ const moduleDatasource = {
 
     return modules;
   },
+  getAllByShortIds: async (shortIds) => {
+    const modules = referential.modules.filter((module) => shortIds.includes(module.shortId));
+
+    const foundModulesIds = modules.map((module) => module.shortId);
+    const notFoundModulesShortIds = shortIds.filter((shortId) => !foundModulesIds.includes(shortId));
+
+    if (notFoundModulesShortIds.length > 0) {
+      throw new ModuleDoesNotExistError(`Short ids with no module: ${notFoundModulesShortIds}`);
+    }
+
+    return modules;
+  },
   getById: async (id) => {
     const foundModule = referential.modules.find((module) => module.id === id);
 

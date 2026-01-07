@@ -220,20 +220,20 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
       // then
       const expectedResult = [
         {
-          duration: undefined,
+          duration: 10,
           id: '5df14039-803b-4db4-9778-67e4b84afbbd',
           shortId: existingModuleShortId1,
           slug: 'adresse-ip-publique-et-vous',
           title: "L'adresse IP publique : ce qu'elle révèle sur vous !",
-          image: undefined,
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
         },
         {
           id: '9beb922f-4d8e-495d-9c85-0e7265ca78d6',
           shortId: existingModuleShortId2,
           slug: 'au-dela-des-mots-de-passe',
           title: 'Au-delà des mots de passe : comment s’authentifier ?',
-          duration: undefined,
-          image: undefined,
+          duration: 5,
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
         },
       ];
 

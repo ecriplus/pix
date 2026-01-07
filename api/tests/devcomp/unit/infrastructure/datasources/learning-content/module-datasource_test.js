@@ -43,6 +43,37 @@ describe('Unit | Infrastructure | Datasources | Learning Content | ModuleDatasou
     });
   });
 
+  describe('#getAllByShortIds', function () {
+    it('should return all modules with shortIds list in parameters', async function () {
+      // Given
+      const shortIds = ['6a68bf32', '9d4dcab8'];
+
+      // When
+      const modules = await moduleDatasource.getAllByShortIds(shortIds);
+
+      // Then
+      const moduleShortIds = modules.map((module) => module.shortId);
+      expect(moduleShortIds).to.have.lengthOf(2);
+      expect(moduleShortIds).to.deep.contains.members(shortIds);
+    });
+
+    context('when modules in the shortIds list do not exist', function () {
+      it('should throw a "ModuleDoesNotExistError" error', async function () {
+        // Given
+        const notExistingModuleShortIds = ['not-existing-module-short-id-1', 'not-existing-module-short-id-2'];
+
+        const shortIds = ['6a68bf32', '9d4dcab8', ...notExistingModuleShortIds];
+
+        // When
+        const error = await catchErr(moduleDatasource.getAllByShortIds)(shortIds);
+
+        // Then
+        expect(error).to.be.instanceOf(ModuleDoesNotExistError);
+        expect(error.message).to.equal(`Short ids with no module: ${notExistingModuleShortIds}`);
+      });
+    });
+  });
+
   describe('#getByShortId', function () {
     describe('when a module with the given shortId exist', function () {
       it('should return a module', async function () {

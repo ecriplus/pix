@@ -10,6 +10,15 @@ async function getAllByIds({ ids, moduleDatasource }) {
   }
 }
 
+async function getAllByShortIds({ shortIds, moduleDatasource }) {
+  try {
+    const modules = await moduleDatasource.getAllByShortIds(shortIds);
+    return modules.map(_toDomain);
+  } catch (error) {
+    throw new NotFoundError(error.message);
+  }
+}
+
 async function getByShortId({ shortId, moduleDatasource }) {
   try {
     const module = await moduleDatasource.getByShortId(shortId);
@@ -33,4 +42,4 @@ function _toDomain(module) {
   return new ModuleMetadata({ id, shortId, slug, title, isBeta, duration: details.duration, image: details.image });
 }
 
-export { getAllByIds, getByShortId, getBySlug };
+export { getAllByIds, getAllByShortIds, getByShortId, getBySlug };
