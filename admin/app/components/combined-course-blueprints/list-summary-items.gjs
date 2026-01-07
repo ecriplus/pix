@@ -1,7 +1,6 @@
-import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
-import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -16,36 +15,23 @@ export default class CombineCourseBluePrintList extends Component {
   @service currentUser;
 
   @action
-  downloadCSV(blueprint) {
-    try {
-      const jsonParsed = JSON.stringify({
-        name: blueprint.name,
-        description: blueprint.description,
-        illustration: blueprint.illustration,
-        content: blueprint.content,
-      });
-      const exportedData = [
-        ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
-        ['', this.currentUser.adminMember.userId.toString(), jsonParsed],
-      ];
+  makeHref(blueprint) {
+    const jsonParsed = JSON.stringify({
+      name: blueprint.name,
+      description: blueprint.description,
+      illustration: blueprint.illustration,
+      content: blueprint.content,
+    });
+    const exportedData = [
+      ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
+      ['', this.currentUser.adminMember.userId.toString(), jsonParsed],
+    ];
 
-      const csvContent = exportedData
-        .map((line) => line.map((data) => `"${data.replaceAll('"', '""').replaceAll('\\""', '\\"')}"`).join(';'))
-        .join('\n');
+    const csvContent = exportedData
+      .map((line) => line.map((data) => `"${data.replaceAll('"', '""').replaceAll('\\""', '\\"')}"`).join(';'))
+      .join('\n');
 
-      const exportLink = document.createElement('a');
-      exportLink.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent));
-      exportLink.setAttribute('download', `${blueprint.name}.csv`);
-      exportLink.click();
-
-      this.pixToast.sendSuccessNotification({
-        message: this.intl.t('components.combined-course-blueprints.create.notifications.success'),
-      });
-    } catch {
-      this.pixToast.sendErrorNotification({
-        message: this.intl.t('components.combined-course-blueprints.create.notifications.error'),
-      });
-    }
+    return 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent);
   }
 
   <template>
@@ -97,12 +83,9 @@ export default class CombineCourseBluePrintList extends Component {
               {{t "common.fields.actions"}}
             </:header>
             <:cell>
-              <PixIconButton
-                @ariaLabel={{t "components.combined-course-blueprints.list.downloadButton"}}
-                @iconName="download"
-                @size="small"
-                @triggerAction={{fn this.downloadCSV blueprint}}
-              />
+              <PixButtonLink @href={{this.makeHref blueprint}} download="{{blueprint.name}}.csv" @iconBefore="download">
+                {{t "components.combined-course-blueprints.list.downloadButton"}}
+              </PixButtonLink>
             </:cell>
           </PixTableColumn>
         </:columns>
