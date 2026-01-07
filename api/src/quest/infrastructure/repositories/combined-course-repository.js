@@ -14,7 +14,7 @@ const getByCode = async ({ code }) => {
     throw new NotFoundError(`Le parcours combiné portant le code ${code} n'existe pas`);
   }
 
-  return new CombinedCourse(combinedCourse);
+  return _toDomain(combinedCourse);
 };
 
 const getById = async ({ id }) => {
@@ -30,7 +30,7 @@ const getById = async ({ id }) => {
     throw new NotFoundError(`Le parcours combiné pour l'id ${id} n'existe pas`);
   }
 
-  return new CombinedCourse(combinedCourse);
+  return _toDomain(combinedCourse);
 };
 
 const findByOrganizationId = async ({ organizationId, page, size }) => {
@@ -47,7 +47,7 @@ const findByOrganizationId = async ({ organizationId, page, size }) => {
   });
 
   return {
-    combinedCourses: results.map((quest) => new CombinedCourse(quest)),
+    combinedCourses: results.map(_toDomain),
     meta: pagination,
   };
 };
@@ -67,7 +67,7 @@ const findByCampaignId = async ({ campaignId }) => {
     .join('quests', 'quests.id', 'combined_courses.questId')
     .whereJsonSupersetOf('quests.successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
 
-  return combinedCourses.map((quest) => new CombinedCourse(quest));
+  return combinedCourses.map(_toDomain);
 };
 
 const saveInBatch = async ({ combinedCourses }) => {
@@ -115,7 +115,27 @@ const findByModuleIdAndOrganizationIds = async ({ moduleId, organizationIds }) =
     .whereIn('combined_courses.organizationId', organizationIds)
     .whereJsonSupersetOf('quests.successRequirements', [{ data: { moduleId: { data: moduleId } } }]);
 
-  return combinedCourses.map((quest) => new CombinedCourse(quest));
+  return combinedCourses.map(_toDomain);
+};
+
+const _toDomain = ({
+  id,
+  organizationId,
+  code,
+  name,
+  description,
+  illustration,
+  questId,
+}) => {
+  return new CombinedCourse({
+    id,
+    organizationId,
+    code,
+    name,
+    description,
+    illustration,
+    questId,
+  });
 };
 
 export { findByCampaignId, findByModuleIdAndOrganizationIds, findByOrganizationId, getByCode, getById, saveInBatch };
