@@ -38,5 +38,10 @@ export const COMBINED_COURSE_HEADER = {
       name: 'Identifiant du createur des campagnes*',
       isRequired: false,
     }),
+    new CsvColumn({
+      property: 'combinedCourseBlueprintId',
+      name: 'Identifiant du schéma de parcours*',
+      isRequired: true,
+    }),
   ],
 };
