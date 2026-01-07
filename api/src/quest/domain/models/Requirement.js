@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../shared/domain/errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { Criterion } from './Criterion.js';
 
 export const COMPARISONS = {
@@ -97,7 +98,18 @@ export class ComposedRequirement extends BaseRequirement {
    */
   isFulfilled(dataInput) {
     const comparisonFunction = getComparisonFunction(this.comparison);
-    return this.#subRequirements[comparisonFunction]((subRequirement) => subRequirement.isFulfilled(dataInput));
+
+    const isFulfilled = this.#subRequirements[comparisonFunction]((subRequirement) =>
+      subRequirement.isFulfilled(dataInput),
+    );
+
+    logger.debug({
+      name: this.requirement_type,
+      comparisonFunction,
+      isFulfilled,
+    });
+
+    return isFulfilled;
   }
 
   /**
@@ -153,12 +165,30 @@ export class ObjectRequirement extends BaseRequirement {
     const comparisonFunction = getComparisonFunction(this.comparison);
 
     if (Array.isArray(dataInput[this.requirement_type])) {
-      return dataInput[this.requirement_type].some((item) => {
+      const isFulfilled = dataInput[this.requirement_type].some((item) => {
         return this.#criterion.check({ item, comparisonFunction });
       });
+
+      logger.debug({
+        name: this.requirement_type,
+        dataInput: dataInput[this.requirement_type],
+        comparisonFunction,
+        isFulfilled,
+      });
+
+      return isFulfilled;
     }
 
-    return this.#criterion.check({ item: dataInput[this.requirement_type], comparisonFunction });
+    const isFulfilled = this.#criterion.check({ item: dataInput[this.requirement_type], comparisonFunction });
+
+    logger.debug({
+      name: this.requirement_type,
+      dataInput: dataInput[this.requirement_type],
+      comparisonFunction,
+      isFulfilled,
+    });
+
+    return isFulfilled;
   }
 
   toDTO() {
@@ -195,7 +225,10 @@ export class SkillProfileRequirement extends BaseRequirement {
    */
   isFulfilled(dataInput) {
     const masteryPercentage = dataInput.getMasteryPercentageForSkills(this.#skillIds);
-    return masteryPercentage >= this.#threshold;
+
+    const isFulfilled = masteryPercentage >= this.#threshold;
+    logger.debug({ name: SkillProfileRequirement.name, masteryPercentage, threshold: this.#threshold, isFulfilled });
+    return isFulfilled;
     // la comparaison ici pourrait être celle du requirement ? pour pouvoir avoir de la flexi sur =<>=
   }
 
@@ -259,7 +292,9 @@ export class CappedTubesRequirement extends BaseRequirement {
    */
   isFulfilled(dataInput) {
     const masteryPercentage = dataInput.getMasteryPercentageForCappedTubes(this.#cappedTubes);
-    return masteryPercentage >= this.#threshold;
+    const isFulfilled = masteryPercentage >= this.#threshold;
+    logger.debug({ name: CappedTubesRequirement.name, masteryPercentage, threshold: this.#threshold, isFulfilled });
+    return isFulfilled;
   }
 
   /**
