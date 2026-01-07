@@ -20,11 +20,15 @@ export default class CombineCourseBluePrintList extends Component {
       name: blueprint.name,
       description: blueprint.description,
       illustration: blueprint.illustration,
-      content: blueprint.content,
     });
     const exportedData = [
-      ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
-      ['', this.currentUser.adminMember.userId.toString(), jsonParsed],
+      [
+        'Identifiant des organisations*',
+        'Identifiant du createur des campagnes*',
+        'Json configuration for quest*',
+        'Identifiant du schéma de parcours*',
+      ],
+      ['', this.currentUser.adminMember.userId.toString(), jsonParsed, blueprint.id.toString()],
     ];
 
     const csvContent = exportedData

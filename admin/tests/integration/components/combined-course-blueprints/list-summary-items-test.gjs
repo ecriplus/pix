@@ -69,12 +69,16 @@ function getHref(blueprint, creatorId) {
     name: blueprint.name,
     description: blueprint.description,
     illustration: blueprint.illustration,
-    content: blueprint.content,
   });
 
   const exportedData = [
-    ['Identifiant des organisations*', 'Identifiant du createur des campagnes*', 'Json configuration for quest*'],
-    ['', creatorId.toString(), jsonParsed],
+    [
+      'Identifiant des organisations*',
+      'Identifiant du createur des campagnes*',
+      'Json configuration for quest*',
+      'Identifiant du schéma de parcours*',
+    ],
+    ['', creatorId.toString(), jsonParsed, blueprint.id.toString()],
   ];
 
   const csvContent = exportedData
