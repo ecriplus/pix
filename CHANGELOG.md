@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.297.0](https://github.com/1024pix/pix/compare/v5.296.0...v5.297.0) (2026-01-07)
+
+### :rocket: Amélioration
+
+- [#14638](https://github.com/1024pix/pix/pull/14638) Ajout d'un filtre sur les centres archivés dans pix-admin (PIX-20021). 
+- [#14639](https://github.com/1024pix/pix/pull/14639) Faire le lien entre un schéma de parcours et un parcours combiné (PIX-20993). 
+- [#14620](https://github.com/1024pix/pix/pull/14620) Pré-remplissage de champs lors de la création d'une organisation fille (PIX-20729). 
+
+### :rewind: Retour en arrière
+
+- [#14644](https://github.com/1024pix/pix/pull/14644) Revert "[TECH] Amélioration de PGBoss (reprise de la PR 11308)."
+
+### :building_construction: Tech
+
+- [#14628](https://github.com/1024pix/pix/pull/14628) Ajouter la table combined_course_blueprint_shares (PIX-20994) 
+- [#14633](https://github.com/1024pix/pix/pull/14633) Refonte graphique de la page de modification d'une organisation (PIX-20731) 
+- [#14637](https://github.com/1024pix/pix/pull/14637) Renommer le script d'attestation et mettre à jour les profils cibles (PIX-21015)
+
 # [5.296.0](https://github.com/1024pix/pix/compare/v5.295.0...v5.296.0) (2026-01-07)
 
 ### :rocket: Amélioration
