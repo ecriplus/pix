@@ -1,4 +1,5 @@
-import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { mailService } from '../../../../../src/shared/domain/services/mail-service.js';
+import { createServer, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Application | Route | account-recovery', function () {
   let server;
@@ -105,7 +106,7 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
 
   describe('GET /api/account-recovery/{temporaryKey}', function () {
     context('when account recovery demand found', function () {
-      it('returns 200 http status code', async function () {
+      it('returns 200 http status code with serialized account recovery details', async function () {
         // given
         const temporaryKey = 'FfgpFXgyuO062nPUPwcb8Wy3KcgkqR2p2GyEuGVaNI4=';
         const userId = 1234;
@@ -187,6 +188,8 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
 
     it('returns 204 HTTP status code', async function () {
       // given
+      const sendAccountRecoveryEmailSpy = sinon.spy(mailService, 'sendAccountRecoveryEmail');
+
       await createUserWithSeveralOrganizationLearners();
       const newEmail = 'new_email@example.net';
 
@@ -211,6 +214,11 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
 
       // then
       expect(response.statusCode).to.equal(204);
+      expect(sendAccountRecoveryEmailSpy).to.have.been.calledWithExactly({
+        firstName: 'Jude',
+        email: 'new_email@example.net',
+        temporaryKey: sinon.match.string,
+      });
     });
 
     it('returns 422 if email already exists', async function () {
