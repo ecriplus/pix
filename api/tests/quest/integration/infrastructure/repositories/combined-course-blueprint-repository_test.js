@@ -62,4 +62,20 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       expect(result).lengthOf(0);
     });
   });
+  describe('#findById', function () {
+    it('should return combined course blueprint by its id', async function () {
+      const expectedCombinedCourseBlueprint = domainBuilder.buildCombinedCourseBlueprint();
+      databaseBuilder.factory.buildCombinedCourseBlueprint(expectedCombinedCourseBlueprint);
+      await databaseBuilder.commit();
+
+      const result = await combinedCourseBluePrintRepository.findById(expectedCombinedCourseBlueprint.id);
+      expect(result).to.be.instanceOf(CombinedCourseBlueprint);
+      expect(result).to.deep.equal(expectedCombinedCourseBlueprint);
+    });
+
+    it('should return null when no results are found', async function () {
+      const result = await combinedCourseBluePrintRepository.findById(123);
+      expect(result).null;
+    });
+  });
 });
