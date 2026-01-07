@@ -256,7 +256,7 @@ async function createAssessmentCampaign({
     ),
   );
 
-  return { campaignId: realCampaignId };
+  return { campaignId: realCampaignId, targetProfileId };
 }
 
 function _numberOfDaysBetweenNowAndCreationDate(date) {
