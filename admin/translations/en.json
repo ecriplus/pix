@@ -463,15 +463,6 @@
         "courseContent": "Course content",
         "createButton": "Create combined course blueprint",
         "fieldsetElement": "Choose the element type you want to add :",
-        "labels": {
-          "description": " Description",
-          "illustration": "Illustration",
-          "internal-name": "Blueprint name",
-          "itemId": "Id",
-          "module": "Module",
-          "name": "Course name",
-          "target-profile": "Target profile"
-        },
         "notifications": {
           "addItemError": "Oops. Resource not found.",
           "error": "Oops. Something went wrong. Please try again.",
@@ -484,6 +475,16 @@
       "items": {
         "module": "Module",
         "targetProfile": "Target profile"
+      },
+      "labels": {
+        "created-at": "Date de création",
+        "description": " Description",
+        "illustration": "Illustration",
+        "internal-name": "Internal name",
+        "itemId": "Id",
+        "module": "Module",
+        "name": "External name",
+        "target-profile": "Target profile"
       },
       "list": {
         "content": "Content",

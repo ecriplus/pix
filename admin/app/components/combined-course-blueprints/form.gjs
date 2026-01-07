@@ -154,7 +154,7 @@ export default class CombineCourseBluePrintForm extends Component {
                 checked={{if (eq this.itemType "targetProfile") "checked"}}
                 {{on "change" this.setItemType}}
               >
-                <:label>{{t "components.combined-course-blueprints.create.labels.target-profile"}}</:label>
+                <:label>{{t "components.combined-course-blueprints.labels.target-profile"}}</:label>
               </PixRadioButton>
               <PixRadioButton
                 name="itemType"
@@ -162,7 +162,7 @@ export default class CombineCourseBluePrintForm extends Component {
                 @value="module"
                 {{on "change" this.setItemType}}
               >
-                <:label>{{t "components.combined-course-blueprints.create.labels.module"}}</:label>
+                <:label>{{t "components.combined-course-blueprints.labels.module"}}</:label>
               </PixRadioButton>
             </div>
           </:content>
@@ -178,7 +178,7 @@ export default class CombineCourseBluePrintForm extends Component {
             class="combined-course-page__input"
           >
             <:label>
-              {{t "components.combined-course-blueprints.create.labels.itemId"}}
+              {{t "components.combined-course-blueprints.labels.itemId"}}
             </:label>
           </PixInput>
 
@@ -196,7 +196,7 @@ export default class CombineCourseBluePrintForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            {{t "components.combined-course-blueprints.create.labels.internal-name"}}
+            {{t "components.combined-course-blueprints.labels.internal-name"}}
           </:label>
         </PixInput>
 
@@ -208,7 +208,7 @@ export default class CombineCourseBluePrintForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            {{t "components.combined-course-blueprints.create.labels.name"}}
+            {{t "components.combined-course-blueprints.labels.name"}}
           </:label>
         </PixInput>
 
@@ -219,7 +219,7 @@ export default class CombineCourseBluePrintForm extends Component {
           class="combined-course-page__input"
         >
           <:label>
-            {{t "components.combined-course-blueprints.create.labels.illustration"}}
+            {{t "components.combined-course-blueprints.labels.illustration"}}
 
           </:label>
         </PixInput>
@@ -232,7 +232,7 @@ export default class CombineCourseBluePrintForm extends Component {
           rows="10"
         >
           <:label>
-            {{t "components.combined-course-blueprints.create.labels.description"}}
+            {{t "components.combined-course-blueprints.labels.description"}}
 
           </:label>
         </PixTextarea>
