@@ -21,6 +21,7 @@ import ListItems from 'pix-admin/components/certification-centers/list-items';
         @type={{@controller.type}}
         @externalId={{@controller.externalId}}
         @triggerFiltering={{@controller.triggerFiltering}}
+        @onResetFilter={{@controller.onResetFilter}}
       />
     </section>
   </main>

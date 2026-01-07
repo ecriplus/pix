@@ -9,24 +9,28 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 export default class CertificationCenterListItems extends Component {
-  searchedId = this.args.id;
-  searchedName = this.args.name;
-  searchedType = this.args.type;
-  searchedExternalId = this.args.externalId;
+  get isClearFiltersButtonDisabled() {
+    return !this.args.id && !this.args.name && !this.args.type && !this.args.externalId;
+  }
 
   <template>
     <div class="certification-centers-list">
-      <PixFilterBanner @title={{t "common.filters.title"}}>
-        <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}} type="number">
+      <PixFilterBanner
+        @title={{t "common.filters.title"}}
+        @clearFiltersLabel={{t "common.filters.actions.clear"}}
+        @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
+        @onClearFilters={{@onResetFilter}}
+      >
+        <PixInput value={{@id}} oninput={{fn @triggerFiltering "id"}} type="number">
           <:label>Identifiant</:label>
         </PixInput>
-        <PixInput value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}}>
+        <PixInput value={{@name}} oninput={{fn @triggerFiltering "name"}}>
           <:label>Nom</:label>
         </PixInput>
-        <PixInput value={{this.searchedType}} oninput={{fn @triggerFiltering "type"}}>
+        <PixInput value={{@type}} oninput={{fn @triggerFiltering "type"}}>
           <:label>Type</:label>
         </PixInput>
-        <PixInput value={{this.searchedExternalId}} oninput={{fn @triggerFiltering "externalId"}}>
+        <PixInput value={{@externalId}} oninput={{fn @triggerFiltering "externalId"}}>
           <:label>ID externe</:label>
         </PixInput>
       </PixFilterBanner>
