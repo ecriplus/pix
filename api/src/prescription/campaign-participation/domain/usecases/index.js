@@ -102,6 +102,7 @@ import { getUserCampaignAssessmentResult } from './get-user-campaign-assessment-
 import { getUserCampaignParticipationToCampaign } from './get-user-campaign-participation-to-campaign.js';
 import { hasCampaignParticipations } from './has-campaign-participations.js';
 import { saveComputedCampaignParticipationResult } from './save-computed-campaign-participation-result.js';
+import { sendCompletedParticipationResultsToPoleEmploi } from './send-completed-participation-results-to-pole-emploi.js';
 import { sendSharedParticipationResultsToPoleEmploi } from './send-shared-participation-results-to-pole-emploi.js';
 import { sendStartedParticipationResultsToPoleEmploi } from './send-started-participation-results-to-pole-emploi.js';
 import { shareCampaignResult } from './share-campaign-result.js';
@@ -125,6 +126,7 @@ const usecasesWithoutInjectedDependencies = {
   getUserCampaignParticipationToCampaign,
   hasCampaignParticipations,
   saveComputedCampaignParticipationResult,
+  sendCompletedParticipationResultsToPoleEmploi,
   sendSharedParticipationResultsToPoleEmploi,
   sendStartedParticipationResultsToPoleEmploi,
   shareCampaignResult,

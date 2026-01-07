@@ -1,4 +1,5 @@
 import { CertificationCompletedJob } from '../../../certification/evaluation/domain/events/CertificationCompleted.js';
+import { ParticipationCompletedJob } from '../../../prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
 import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
 import { AlreadyRatedAssessmentError } from '../errors.js';
 
@@ -7,6 +8,7 @@ const completeAssessment = async function ({
   campaignParticipationRepository,
   assessmentRepository,
   certificationCompletedJobRepository,
+  participationCompletedJobRepository,
   locale,
 }) {
   const assessment = await assessmentRepository.get(assessmentId);
@@ -21,6 +23,10 @@ const completeAssessment = async function ({
     const { TO_SHARE } = CampaignParticipationStatuses;
 
     await campaignParticipationRepository.update({ id: assessment.campaignParticipationId, status: TO_SHARE });
+
+    await participationCompletedJobRepository.performAsync(
+      new ParticipationCompletedJob({ campaignParticipationId: assessment.campaignParticipationId }),
+    );
   }
 
   if (assessment.certificationCourseId) {

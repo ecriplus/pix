@@ -1,7 +1,9 @@
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { certificationCompletedJobRepository } from '../../../../../src/certification/evaluation/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
+import { ParticipationCompletedJob } from '../../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
 import * as campaignParticipationRepository from '../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { participationCompletedJobRepository } from '../../../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
@@ -43,6 +45,7 @@ describe('Integration | Usecase | Complete Assessment', function () {
             campaignParticipationRepository,
             assessmentRepository,
             certificationCompletedJobRepository,
+            participationCompletedJobRepository,
           });
 
           // then
@@ -59,6 +62,8 @@ describe('Integration | Usecase | Complete Assessment', function () {
             .first();
           expect(realAssessment).to.deep.equal({ id: campaignParticipationId, status: STARTED });
         });
+
+        await expect(ParticipationCompletedJob.name).to.have.been.performed.withJobsCount(1);
       });
     });
 
@@ -96,6 +101,7 @@ describe('Integration | Usecase | Complete Assessment', function () {
           campaignParticipationRepository,
           assessmentRepository,
           certificationCompletedJobRepository,
+          participationCompletedJobRepository,
         });
 
         // then
