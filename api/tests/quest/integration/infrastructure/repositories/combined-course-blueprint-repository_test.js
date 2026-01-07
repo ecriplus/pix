@@ -6,7 +6,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
   describe('#save', function () {
     it('should save a combined course blueprint', async function () {
       // given
-      const values = {
+      const combinedCourseBlueprint = {
         id: 1,
         name: 'Combined course IA',
         internalName: 'Ia combined course blueprint',
@@ -18,17 +18,17 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       };
 
       // when
-      await combinedCourseBluePrintRepository.save(values);
+      await combinedCourseBluePrintRepository.save({ combinedCourseBlueprint });
 
       // then
       const results = await combinedCourseBluePrintRepository.findAll();
       expect(results).lengthOf(1);
-      expect(results[0]).deep.equal(values);
+      expect(results[0]).deep.equal(combinedCourseBlueprint);
     });
 
     it('should return created combined course blueprint', async function () {
       // given
-      const values = {
+      const combinedCourseBlueprint = {
         id: 1,
         name: 'Combined course IA',
         internalName: 'Ia combined course blueprint',
@@ -40,9 +40,9 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       };
 
       // when
-      const result = await combinedCourseBluePrintRepository.save(values);
+      const result = await combinedCourseBluePrintRepository.save({ combinedCourseBlueprint });
 
-      expect(result).deep.equal(values);
+      expect(result).deep.equal(combinedCourseBlueprint);
     });
   });
 
@@ -68,13 +68,13 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       databaseBuilder.factory.buildCombinedCourseBlueprint(expectedCombinedCourseBlueprint);
       await databaseBuilder.commit();
 
-      const result = await combinedCourseBluePrintRepository.findById(expectedCombinedCourseBlueprint.id);
+      const result = await combinedCourseBluePrintRepository.findById({ id: expectedCombinedCourseBlueprint.id });
       expect(result).to.be.instanceOf(CombinedCourseBlueprint);
       expect(result).to.deep.equal(expectedCombinedCourseBlueprint);
     });
 
     it('should return null when no results are found', async function () {
-      const result = await combinedCourseBluePrintRepository.findById(123);
+      const result = await combinedCourseBluePrintRepository.findById({ id: 123 });
       expect(result).null;
     });
   });

@@ -12,7 +12,7 @@ export async function findAll() {
   return results.map((data) => new CombinedCourseBlueprint(data));
 }
 
-export async function save(combinedCourseBlueprint) {
+export async function save({ combinedCourseBlueprint }) {
   const knexConn = DomainTransaction.getConnection();
   const [insertedValues] = await knexConn('combined_course_blueprints')
     .insert({
@@ -24,9 +24,9 @@ export async function save(combinedCourseBlueprint) {
   return new CombinedCourseBlueprint(insertedValues);
 }
 
-export async function findById({ combinedCourseBlueprintId }) {
+export async function findById({ id }) {
   const knexConn = DomainTransaction.getConnection();
-  const result = await knexConn('combined_course_blueprints').where('id', combinedCourseBlueprintId).first();
+  const result = await knexConn('combined_course_blueprints').where({ id }).first();
   if (!result) {
     return null;
   }

@@ -9,5 +9,5 @@ export const createCombinedCourseBlueprint = async ({
     .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION)
     .map(({ value }) => value);
   await targetProfileRepository.findByIds({ ids: targetProfileIds });
-  return combinedCourseBlueprintRepository.save(combinedCourseBlueprint);
+  return combinedCourseBlueprintRepository.save({ combinedCourseBlueprint });
 };
