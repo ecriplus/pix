@@ -4,7 +4,7 @@ import { scoOrganizationManagementController } from '../../../../../src/prescrip
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
@@ -108,6 +108,8 @@ describe('Unit | Application | Organizations | organization-controller', functio
       const userId = 1;
       request.auth = { credentials: { userId } };
       request.query.format = 'csv';
+      const i18n = getI18nFromRequest(request);
+
       hFake.request = {
         path: '/api/organizations/145/sco-organization-learners/import-siecle',
       };
@@ -121,7 +123,7 @@ describe('Unit | Application | Organizations | organization-controller', functio
         organizationId,
         type: 'FREGATA',
         payload,
-        i18n: getI18n(),
+        i18n,
       });
     });
 
