@@ -14,7 +14,7 @@ const getModulesByIds = async ({ moduleIds }) => {
     return [];
   }
 
-  const modules = await usecases.getModuleMetadataList({ ids: moduleIds });
+  const modules = await usecases.getModuleMetadataListByIds({ ids: moduleIds });
   return modules.map((module) => new Module(module));
 };
 
@@ -46,7 +46,7 @@ const getUserModuleStatuses = async ({ userId, moduleIds }) => {
     return [];
   }
 
-  const moduleMetadataList = await usecases.getModuleMetadataList({ ids: moduleIds });
+  const moduleMetadataList = await usecases.getModuleMetadataListByIds({ ids: moduleIds });
   const userModuleStatus = await usecases.getUserModuleStatuses({ userId, moduleIds });
 
   const moduleMetadataId = new Map();
