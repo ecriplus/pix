@@ -23,10 +23,7 @@ module('Acceptance | Combined course blueprint | New', function (hooks) {
     // when
     const screen = await visit('/combined-course-blueprints/new');
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
-      1,
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }), 1);
     await screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }).click();
     await screen.getByLabelText(t('components.combined-course-blueprints.labels.module')).click();
     await fillIn(
@@ -48,10 +45,7 @@ module('Acceptance | Combined course blueprint | New', function (hooks) {
       'illustrations/hello.svg',
     );
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.labels.description')),
-      'description',
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.description')), 'description');
 
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 

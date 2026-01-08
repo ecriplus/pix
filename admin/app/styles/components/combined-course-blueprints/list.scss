@@ -1,4 +1,6 @@
-.combinedCourseBlueprint {
+@use 'pix-design-tokens/breakpoints';
+
+.combined-course-blueprints {
   &__column {
     &--compact {
       width: 1px;
@@ -7,10 +9,24 @@
     }
   }
 }
+.combined-course-blueprint {
+  &__container {
+    display: flex;
+    flex-direction: column;
 
-details {
-  & > summary {
-    width: fit-content;
-    cursor: pointer;
+    @include breakpoints.device-is('tablet') {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--pix-spacing-4x);
+  }
+  &__breadcrumb {
+    margin-bottom: var(--pix-spacing-8x);
   }
 }
