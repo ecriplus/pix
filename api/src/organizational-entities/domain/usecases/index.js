@@ -15,6 +15,8 @@ import * as complementaryCertificationHabilitationRepository from '../../infrast
 import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer.repository.js';
 import { repositories as organizationalEntitiesRepositories } from '../../infrastructure/repositories/index.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
+import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner.repository.js';
+import * as organizationPlacesLotRepository from '../../infrastructure/repositories/organization-places-lot.repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
@@ -31,6 +33,8 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../infrastructure/repositories/complementary-certification-habilitation-repository.js')} ComplementaryCertificationHabilitationRepository
  * @typedef {import ('../../infrastructure/repositories/data-protection-officer-repository.js')} DataProtectionOfficerRepository
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-places-lot.repository.js')} OrganizationPlacesLotRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-learner.repository.js')} OrganizationLearnerRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
  * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
@@ -57,6 +61,8 @@ const repositories = {
   complementaryCertificationHabilitationRepository,
   organizationForAdminRepository: organizationalEntitiesRepositories.organizationForAdminRepository,
   organizationFeatureRepository,
+  organizationLearnerRepository,
+  organizationPlacesLotRepository,
   schoolRepository,
   learnersApi,
   organizationRepository,
@@ -88,6 +94,7 @@ import { findPaginatedFilteredOrganizations } from './find-paginated-filtered-or
 import { getCenterForAdmin } from './get-center-for-admin.usecase.js';
 import { getOrganizationById } from './get-organization-by-id.js';
 import { getOrganizationDetails } from './get-organization-details.usecase.js';
+import { getOrganizationPlacesStatistics } from './get-organization-places-statistics.usecase.js';
 import { getRecentlyUsedTags } from './get-recently-used-tags.usecase.js';
 import { updateCertificationCenter } from './update-certification-center.usecase.js';
 import { updateCertificationCenterDataProtectionOfficerInformation } from './update-certification-center-data-protection-officer-information.usecase.js';
@@ -116,6 +123,7 @@ const usecasesWithoutInjectedDependencies = {
   getCenterForAdmin,
   getOrganizationById,
   getOrganizationDetails,
+  getOrganizationPlacesStatistics,
   getRecentlyUsedTags,
   updateCertificationCenterDataProtectionOfficerInformation,
   updateCertificationCenter,

@@ -3,6 +3,7 @@ import lodash from 'lodash';
 
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,
@@ -1548,6 +1549,46 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         // then
         expect(response.statusCode).to.equal(204);
       });
+    });
+  });
+
+  describe('GET /api/organizations/{id}/places-statistics', function () {
+    it('should return statistics of organization places and http code 200', async function () {
+      // given
+      const server = await createServer();
+
+      const { userId, organizationId } = databaseBuilder.factory.buildMembership({
+        organizationRole: Membership.roles.ADMIN,
+      });
+      const placesManagementFeatureId = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+      }).id;
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId,
+        featureId: placesManagementFeatureId,
+      });
+      databaseBuilder.factory.buildOrganizationPlace({
+        organizationId,
+        count: 10,
+        activationDate: new Date('2023-01-01'),
+        expirationDate: new Date('2023-12-12'),
+        category: 'T0',
+        createdBy: userId,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/organizations/${organizationId}/places-statistics`,
+        headers: generateAuthenticatedUserRequestHeaders({ superAdmin }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data.type).to.equal('organization-places-statistics');
     });
   });
 });

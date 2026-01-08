@@ -201,4 +201,36 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
       expect(response.source).to.deep.equal(serializedOrganization);
     });
   });
+
+  describe('#getOrganizationPlacesStatistics', function () {
+    it('should call the usecase and serialize the response', async function () {
+      // given
+      const organizationId = 1234;
+      const request = { params: { organizationId } };
+
+      const organizationPlacesStatistics = Symbol('organizationPlaces');
+      const organizationPlacesStatisticsSerialized = Symbol('organizationPlacesSerialized');
+      sinon
+        .stub(usecases, 'getOrganizationPlacesStatistics')
+        .withArgs({ organizationId })
+        .resolves(organizationPlacesStatistics);
+      const organizationPlacesStatisticsSerializerStub = {
+        serialize: sinon.stub(),
+      };
+
+      organizationPlacesStatisticsSerializerStub.serialize
+        .withArgs(organizationPlacesStatistics)
+        .returns(organizationPlacesStatisticsSerialized);
+
+      const dependencies = {
+        organizationPlacesStatisticsSerializer: organizationPlacesStatisticsSerializerStub,
+      };
+
+      // when
+      const result = await organizationAdminController.getOrganizationPlacesStatistics(request, hFake, dependencies);
+
+      // then
+      expect(result).to.equal(organizationPlacesStatisticsSerialized);
+    });
+  });
 });

@@ -7,6 +7,7 @@ import { usecases } from '../../domain/usecases/index.js';
 import { organizationTagCsvParser } from '../../infrastructure/parsers/csv/organization-tag-csv.parser.js';
 import * as organizationSerializer from '../../infrastructure/serializers/jsonapi/organization-serializer.js';
 import { organizationForAdminSerializer } from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
+import * as organizationPlacesStatisticsSerializer from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-places-statistics.serializer.js';
 
 const ADD_TAGS_TO_ORGANIZATIONS_HEADER = organizationTagCsvParser.CSV_HEADER;
 
@@ -125,6 +126,16 @@ const getOrganizationDetails = async function (request, h, dependencies = { orga
   return dependencies.organizationForAdminSerializer.serialize(organizationDetails);
 };
 
+const getOrganizationPlacesStatistics = async function (
+  request,
+  h,
+  dependencies = { organizationPlacesStatisticsSerializer },
+) {
+  const organizationId = request.params.organizationId;
+  const organizationPlacesStatistics = await usecases.getOrganizationPlacesStatistics({ organizationId });
+  return dependencies.organizationPlacesStatisticsSerializer.serialize(organizationPlacesStatistics);
+};
+
 const getTemplateForUpdateOrganizationsInBatch = async function (request, h) {
   const fields = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name);
   const csvTemplateFileContent = generateCSVTemplate(fields);
@@ -184,6 +195,7 @@ const organizationAdminController = {
   archiveOrganization,
   getTemplateForArchiveOrganizationsInBatch,
   archiveInBatch,
+  getOrganizationPlacesStatistics,
   attachChildOrganization,
   detachParentOrganization,
   getTemplateForAddOrganizationFeatureInBatch,
