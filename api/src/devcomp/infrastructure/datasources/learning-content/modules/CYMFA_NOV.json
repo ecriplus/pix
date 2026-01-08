@@ -292,7 +292,7 @@
                     {
                       "title": "Richard",
                       "description": "",
-                      "text": "La double authentification est activée sur le compte de Richard. Quand il se connecte à son compte Toutélectro, il entre son identifiant, son mot de passe puis un code envoyé sur son téléphone sur son téléphone.",
+                      "text": "La double authentification est activée sur le compte de Richard. Quand il se connecte à son compte Toutélectro, il entre son identifiant, son mot de passe puis un code envoyé sur son téléphone.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/richard.png",
                         "alt": "Illustration montrant une connexion : un utilisateur saisit son identifiant, son mot de passe sur un ordinateur et valide la connexion avec un code affiché sur son téléphone."
@@ -301,7 +301,7 @@
                     {
                       "title": "Sabrina",
                       "description": "",
-                      "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand elle se connecte à son compte Toutélectro, elle entre son identifiant, son mot de passe.",
+                      "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand elle se connecte à son compte Toutélectro, elle entre son identifiant et son mot de passe.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/sabrina.png",
                         "alt": "Illustration montrant une connexion : un utilisateur saisi son identifiant et son mot de passe sur un ordinateur et valide sa connexion."
