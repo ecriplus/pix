@@ -1,41 +1,16 @@
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
-import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
+import DownloadCombinedCourseBlueprint from 'pix-admin/components/combined-course-blueprints/download-combined-course-blueprint';
 
 export default class CombineCourseBluePrintList extends Component {
   @service pixToast;
   @service intl;
   @service currentUser;
-
-  @action
-  makeHref(blueprint) {
-    const jsonParsed = JSON.stringify({
-      name: blueprint.name,
-      description: blueprint.description,
-      illustration: blueprint.illustration,
-    });
-    const exportedData = [
-      [
-        'Identifiant des organisations*',
-        'Identifiant du createur des campagnes*',
-        'Json configuration for quest*',
-        'Identifiant du schéma de parcours*',
-      ],
-      ['', this.currentUser.adminMember.userId.toString(), jsonParsed, blueprint.id.toString()],
-    ];
-
-    const csvContent = exportedData
-      .map((line) => line.map((data) => `"${data.replaceAll('"', '""').replaceAll('\\""', '\\"')}"`).join(';'))
-      .join('\n');
-
-    return 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent);
-  }
 
   <template>
     {{#if @summaries}}
@@ -80,9 +55,10 @@ export default class CombineCourseBluePrintList extends Component {
               {{t "common.fields.actions"}}
             </:header>
             <:cell>
-              <PixButtonLink @href={{this.makeHref blueprint}} download="{{blueprint.name}}.csv" @iconBefore="download">
-                {{t "components.combined-course-blueprints.list.downloadButton"}}
-              </PixButtonLink>
+              <DownloadCombinedCourseBlueprint
+                @blueprint={{blueprint}}
+                @creatorId={{this.currentUser.adminMember.userId}}
+              />
             </:cell>
           </PixTableColumn>
         </:columns>

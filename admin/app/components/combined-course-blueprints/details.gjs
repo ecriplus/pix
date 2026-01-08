@@ -1,10 +1,10 @@
 import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
-import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 import { pageTitle } from 'ember-page-title';
+import DownloadCombinedCourseBlueprint from 'pix-admin/components/combined-course-blueprints/download-combined-course-blueprint';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 import RequirementTag from '../common/combined-courses/requirement-tag';
@@ -12,6 +12,7 @@ import SafeMarkdownToHtml from '../safe-markdown-to-html';
 
 export default class Details extends Component {
   @service intl;
+  @service currentUser;
 
   <template>
     {{pageTitle "Profil " @model.id " | Pix Admin" replace=true}}
@@ -22,9 +23,11 @@ export default class Details extends Component {
           <h1>{{@model.internalName}}</h1>
         </div>
         <div class="page-actions">
-          <PixButton @triggerAction={{this.downloadCSV}} @size="small" @variant="success">
-            Télécharger le schéma (CSV)
-          </PixButton>
+          <DownloadCombinedCourseBlueprint
+            @variant="success"
+            @blueprint={{@model}}
+            @creatorId={{this.currentUser.adminMember.userId}}
+          />
         </div>
       </header>
 

@@ -38,6 +38,7 @@ module('Integration | Component | CombinedCourseBlueprints::Details', function (
     assert.ok(screen.getByText('Mon super parcours apprenant'));
     assert.ok(screen.getByText('Module - abc-123', { exact: false }));
     assert.ok(screen.getByText('Profil cible - 123', { exact: false }));
+    assert.ok(screen.getByRole('link', { name: t('components.combined-course-blueprints.list.downloadButton') }));
   });
 
   test('should hide description and illustration if not provided', async function (assert) {
