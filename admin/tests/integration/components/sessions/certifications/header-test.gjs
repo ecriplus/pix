@@ -130,9 +130,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
 
           fireEvent.mouseOver(screen.getByRole('button', { name: 'Publier la session' }));
-          const tooltipText =
-            "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée ou qu'il reste des certifications en erreur.";
-          assert.dom(screen.getByText(tooltipText)).exists();
+          assert.dom(screen.getByText(t('pages.certifications.actions.publish-session.warning-information'))).exists();
         });
       });
 
@@ -194,6 +192,65 @@ module('Integration | Component | certifications/header', function (hooks) {
             // then
             assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
           });
+        });
+      });
+
+      module('when a certification the jury certification summaries is not with a Core scope', function () {
+        test('should display a disabled publication button', async function (assert) {
+          // given
+          const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+
+          const juryCertificationSummaries = [
+            store.createRecord('jury-certification-summary', {
+              complementaryCertificationKeyObtained: 'PIX_PLUS_DROIT',
+              status: 'validated',
+            }),
+            store.createRecord('jury-certification-summary', {
+              complementaryCertificationKeyObtained: 'CLEA',
+              status: 'validated',
+            }),
+            store.createRecord('jury-certification-summary', {
+              complementaryCertificationKeyObtained: null,
+              status: 'validated',
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            <template>
+              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
+        });
+      });
+
+      module('when every certification in the jury certification summaries is scope CORE', function () {
+        test('should display a disabled publication button', async function (assert) {
+          // given
+          const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+
+          const juryCertificationSummaries = [
+            store.createRecord('jury-certification-summary', {
+              complementaryCertificationKeyObtained: 'CLEA',
+              status: 'validated',
+            }),
+            store.createRecord('jury-certification-summary', {
+              complementaryCertificationKeyObtained: null,
+              status: 'validated',
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            <template>
+              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+            </template>,
+          );
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).doesNotHaveAttribute('aria-disabled');
         });
       });
 

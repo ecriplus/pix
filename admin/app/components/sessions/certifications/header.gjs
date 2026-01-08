@@ -20,9 +20,11 @@ export default class CertificationsHeader extends Component {
 
   get canPublish() {
     return (
-      !this.args.juryCertificationSummaries.some(
-        (certification) => certification.status === assessmentResultStatus.ERROR,
-      ) && this.args.session.isFinalized
+      !this.args.juryCertificationSummaries.some((certification) => {
+        const certificationOnError = certification.status === assessmentResultStatus.ERROR;
+
+        return certificationOnError || !certification.isCertificationWithCoreScope;
+      }) && this.args.session.isFinalized
     );
   }
 

@@ -21,6 +21,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() isPublished;
   @attr() examinerComment;
   @attr() certificationObtained;
+  @attr() complementaryCertificationKeyObtained;
   @attr() numberOfCertificationIssueReports;
   @attr() isFlaggedAborted;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
@@ -50,5 +51,9 @@ export default class JuryCertificationSummary extends Model {
 
   get isCertificationInError() {
     return this.status === 'error';
+  }
+
+  get isCertificationWithCoreScope() {
+    return !this.complementaryCertificationKeyObtained || this.complementaryCertificationKeyObtained == 'CLEA';
   }
 }

@@ -12,7 +12,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       const notImpactfulIssueReport = domainBuilder.buildCertificationIssueReport.notImpactful({ resolvedAt: null });
       const data = {
         certificationIssueReports: [notImpactfulIssueReport],
-        certificationObtained: 'Pix+ Droit Expert',
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -22,6 +21,8 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         isPublished: false,
         pixScore: 751,
         status: 'started',
+        complementaryCertificationLabelObtained: null,
+        complementaryCertificationKeyObtained: null,
       };
 
       // when
@@ -31,6 +32,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
         certificationObtained: 'CORE',
+        complementaryCertificationKeyObtained: null,
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',

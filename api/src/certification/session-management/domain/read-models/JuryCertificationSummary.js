@@ -31,6 +31,7 @@ export class JuryCertificationSummary {
       complementaryCertificationLabelObtained,
       complementaryCertificationKeyObtained,
     });
+    this.complementaryCertificationKeyObtained = complementaryCertificationKeyObtained;
     this.createdAt = createdAt;
     this.completedAt = completedAt;
     this.isPublished = isPublished;

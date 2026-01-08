@@ -1088,7 +1088,7 @@
         },
         "publish-session": {
           "label": "Publier la session",
-          "warning-information": "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée ou qu'il reste des certifications en erreur."
+          "warning-information": "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée, qu'il reste des certifications en erreur, ou qu'elle contient des certifications Pix Plus."
         },
         "unpublish-session": "Dépublier la session"
       },

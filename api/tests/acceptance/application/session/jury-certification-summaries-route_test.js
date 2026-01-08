@@ -104,6 +104,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'number-of-certification-issue-reports': 0,
           'number-of-certification-issue-reports-with-required-action': 0,
           'certification-obtained': 'Double Certification Pix/CléA Numérique',
+          'complementary-certification-key-obtained': 'CLEA',
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
         };
@@ -117,6 +118,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'number-of-certification-issue-reports': 0,
           'number-of-certification-issue-reports-with-required-action': 0,
           'certification-obtained': 'Certification Pix',
+          'complementary-certification-key-obtained': null,
           'completed-at': certificationCourse2.completedAt,
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
