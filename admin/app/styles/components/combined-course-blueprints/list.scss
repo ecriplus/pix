@@ -1,16 +1,34 @@
-.combinedCourseBlueprint {
+@use 'pix-design-tokens/breakpoints';
+
+.combined-course-blueprints {
   &__column {
     &--compact {
       width: 1px;
       white-space: nowrap;
-      vertical-align: top;
     }
   }
 }
 
-details {
-  & > summary {
-    width: fit-content;
-    cursor: pointer;
+.combined-course-blueprint {
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoints.device-is('tablet') {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+    align-items: flex-start;
+  }
+
+  &__breadcrumb {
+    margin-bottom: var(--pix-spacing-8x);
   }
 }

@@ -34,35 +34,29 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
-      1,
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }), 1);
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
-    await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
+    await click(screen.getByLabelText(t('components.combined-course-blueprints.labels.module')));
     await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+      screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
       'module-123',
     );
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
     await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.name'), { exact: false }),
+      screen.getByLabelText(t('components.combined-course-blueprints.labels.name'), { exact: false }),
       'name',
     );
     await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.internal-name'), { exact: false }),
+      screen.getByLabelText(t('components.combined-course-blueprints.labels.internal-name'), { exact: false }),
       'internalName',
     );
 
     await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.illustration')),
+      screen.getByLabelText(t('components.combined-course-blueprints.labels.illustration')),
       'illustrations/hello.svg',
     );
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.create.labels.description')),
-      'description',
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.description')), 'description');
 
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
@@ -199,7 +193,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         1,
       );
       await click(
@@ -228,9 +222,9 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-      await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
+      await click(screen.getByLabelText(t('components.combined-course-blueprints.labels.module')));
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         'module-123',
       );
       await click(
@@ -260,7 +254,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         1,
       );
       await click(
@@ -287,15 +281,15 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         1,
       );
       await click(
         screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
       );
-      await click(screen.getByLabelText(t('components.combined-course-blueprints.create.labels.module')));
+      await click(screen.getByLabelText(t('components.combined-course-blueprints.labels.module')));
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         'module-123',
       );
       await click(
@@ -317,7 +311,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
       await fillIn(
-        screen.getByLabelText(t('components.combined-course-blueprints.create.labels.itemId'), { exact: false }),
+        screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
         1,
       );
       await click(

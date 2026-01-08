@@ -1,0 +1,100 @@
+import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
+import { pageTitle } from 'ember-page-title';
+import DownloadCombinedCourseBlueprint from 'pix-admin/components/combined-course-blueprints/download-combined-course-blueprint';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
+
+import RequirementTag from '../common/combined-courses/requirement-tag';
+import SafeMarkdownToHtml from '../safe-markdown-to-html';
+
+export default class Details extends Component {
+  @service intl;
+  @service currentUser;
+
+  <template>
+    {{pageTitle "Profil " @model.id " | Pix Admin" replace=true}}
+    <div class="page">
+      <header>
+        <div>
+          <PixBreadcrumb @links={{this.links}} class="combined-course-blueprint__breadcrumb" />
+          <h1>{{@model.internalName}}</h1>
+        </div>
+        <div class="page-actions">
+          <DownloadCombinedCourseBlueprint
+            @variant="success"
+            @blueprint={{@model}}
+            @creatorId={{this.currentUser.adminMember.userId}}
+          />
+        </div>
+      </header>
+
+      <main class="page-body">
+        <section class="page-section">
+          <div class="combined-course-blueprint__container">
+
+            <DescriptionList>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.itemId"}}>
+                {{@model.id}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.internal-name"}}>
+                {{@model.internalName}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.name"}}>
+                {{@model.name}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.created-at"}}>
+                {{formatDate @model.createdAt}}
+              </DescriptionList.Item>
+
+              {{#if @model.description}}
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.description"}}>
+                  <SafeMarkdownToHtml @markdown={{@model.description}} />
+                </DescriptionList.Item>
+              {{/if}}
+
+              {{#if @model.illustration}}
+                <DescriptionList.Divider />
+                <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.illustration"}}>
+                  <img src={{@model.illustration}} alt="" />
+                </DescriptionList.Item>
+                <DescriptionList.Divider />
+              {{/if}}
+            </DescriptionList>
+            <div class="combined-course-blueprint__content">
+              {{#each @model.content as |requirement|}}
+                <RequirementTag @type={{requirement.type}} @value={{requirement.value}} @label={{requirement.value}} />
+              {{/each}}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </template>
+
+  get links() {
+    return [
+      {
+        route: 'authenticated.combined-course-blueprints.list',
+        label: this.intl.t('components.combined-course-blueprints.list.title'),
+      },
+      {
+        label: this.args.model.internalName,
+      },
+    ];
+  }
+}

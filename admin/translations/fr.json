@@ -464,15 +464,6 @@
         "courseContent": "Contenu du parcours",
         "createButton": "Créer le schéma de parcours",
         "fieldsetElement": "Choisissez le type d'élément à ajouter :",
-        "labels": {
-          "description": "Description",
-          "illustration": "Illustration",
-          "internal-name": "Nom du schéma",
-          "itemId": "Identifiant",
-          "module": "Module",
-          "name": "Nom du parcours",
-          "target-profile": "Profil cible"
-        },
         "notifications": {
           "addItemError": "Oups. Une erreur est survenue lors de l'ajout de la ressource.",
           "error": "Oups. Une erreur est survenue lors de la création du schéma de parcours.",
@@ -485,6 +476,16 @@
       "items": {
         "module": "Module",
         "targetProfile": "Profil Cible"
+      },
+      "labels": {
+        "created-at": "Date de création",
+        "description": "Description",
+        "illustration": "Illustration",
+        "internal-name": "Nom interne",
+        "itemId": "Identifiant",
+        "module": "Module",
+        "name": "Nom externe",
+        "target-profile": "Profil cible"
       },
       "list": {
         "content": "Contenu",

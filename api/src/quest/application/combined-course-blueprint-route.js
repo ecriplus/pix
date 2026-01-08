@@ -66,6 +66,27 @@ const register = async function (server) {
         tags: ['api', 'combined-course'],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/combined-course-blueprints/{blueprintId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: combinedCourseBlueprintController.getById,
+        notes: ['- Récupération d‘un schémas de parcours combinés pour un identifiant donné'],
+        tags: ['api', 'combined-course'],
+      },
+    },
   ]);
 };
 
