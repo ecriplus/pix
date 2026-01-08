@@ -14,9 +14,10 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const sections = [Symbol('text')];
       const details = Symbol('details');
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
 
       // when
-      const module = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
+      const module = new Module({ id, shortId, slug, title, isBeta, sections, details, version, visibility });
 
       // then
       expect(module.id).to.equal(id);
@@ -27,6 +28,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       expect(module.sections).to.have.lengthOf(sections.length);
       expect(module.details).to.deep.equal(details);
       expect(module.version).to.deep.equal(version);
+      expect(module.visibility).to.deep.equal(visibility);
     });
 
     describe('if a module does not have an id', function () {
@@ -153,6 +155,28 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
         expect(error.message).to.equal('The details are required for a module');
       });
     });
+
+    describe('if a module does not have visibility', function () {
+      it('should throw an error', function () {
+        // when
+        const error = catchErrSync(
+          () =>
+            new Module({
+              id: 'id_module_1',
+              shortId: 'e074af34',
+              slug: 'bien-ecrire-son-adresse-mail',
+              title: 'Bien écrire son adresse mail',
+              isBeta: true,
+              sections: [Symbol('text')],
+              details: Symbol('details'),
+            }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The visibility is required for a module');
+      });
+    });
   });
 
   describe('#setRedirectionUrl', function () {
@@ -167,8 +191,9 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const sections = [Symbol('text')];
       const details = Symbol('details');
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
 
-      module = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
+      module = new Module({ id, shortId, slug, title, isBeta, sections, details, version, visibility });
     });
 
     it('should set redirectionUrl', function () {
