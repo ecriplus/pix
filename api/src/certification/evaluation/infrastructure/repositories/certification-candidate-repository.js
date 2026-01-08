@@ -1,9 +1,24 @@
+// @ts-check
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
 import { Candidate } from '../../../evaluation/domain/models/Candidate.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { Scopes } from '../../../shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../shared/domain/models/Scopes.js';
 
+/**
+ * @typedef {object} RawCertificationCandidateResult
+ * @property {boolean} accessibilityAdjustmentNeeded
+ * @property {Date} reconciledAt
+ * @property {ComplementaryCertificationKeys | null} complementaryCertificationKey
+ */
+
+/**
+ * @function
+ * @param {object} params
+ * @param {number} params.assessmentId
+ * @returns {Promise<Candidate>}
+ * @throws {CertificationCandidateNotFoundError}
+ */
 export const findByAssessmentId = async function ({ assessmentId }) {
   const result = await knex('certification-candidates')
     .select('certification-candidates.accessibilityAdjustmentNeeded', 'certification-candidates.reconciledAt', {
@@ -37,6 +52,11 @@ export const findByAssessmentId = async function ({ assessmentId }) {
   return _toDomain(result);
 };
 
+/**
+ * @function
+ * @param {RawCertificationCandidateResult} params
+ * @returns {Candidate}
+ */
 const _toDomain = ({ accessibilityAdjustmentNeeded, reconciledAt, complementaryCertificationKey }) => {
   return new Candidate({
     accessibilityAdjustmentNeeded,
@@ -45,9 +65,14 @@ const _toDomain = ({ accessibilityAdjustmentNeeded, reconciledAt, complementaryC
   });
 };
 
+/**
+ * @function
+ * @param {ComplementaryCertificationKeys | null} complementaryCertificationKey
+ * @returns {SCOPES}
+ */
 const _determineScope = (complementaryCertificationKey) => {
   if (complementaryCertificationKey && complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA) {
     return complementaryCertificationKey;
   }
-  return Scopes.CORE;
+  return SCOPES.CORE;
 };

@@ -1,5 +1,5 @@
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
-import { Scopes } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Version } from '../../../../../../src/certification/shared/domain/models/Version.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
@@ -10,7 +10,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // given
       const versionData = {
         id: 123,
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
@@ -28,7 +28,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // then
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(123);
-      expect(version.scope).to.equal(Scopes.CORE);
+      expect(version.scope).to.equal(SCOPES.CORE);
       expect(version.challengesConfiguration).to.deep.equal(
         new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
@@ -46,7 +46,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // given
       const versionData = {
         id: 456,
-        scope: Scopes.PIX_PLUS_DROIT,
+        scope: SCOPES.PIX_PLUS_DROIT,
         challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
           maximumAssessmentLength: 10,
@@ -64,7 +64,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // then
       expect(version).to.be.instanceOf(Version);
       expect(version.id).to.equal(456);
-      expect(version.scope).to.equal(Scopes.PIX_PLUS_DROIT);
+      expect(version.scope).to.equal(SCOPES.PIX_PLUS_DROIT);
       expect(version.challengesConfiguration).to.deep.equal(
         new FlashAssessmentAlgorithmConfiguration({
           challengesBetweenSameCompetence: 0,
@@ -81,7 +81,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
     it('should throw an EntityValidationError when id is missing', function () {
       // given
       const invalidData = {
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
       };
 
       // when
@@ -122,7 +122,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // given
       const invalidData = {
         id: 'not-a-number',
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         challengesConfiguration: { config: 'test' },
       };
 
@@ -137,7 +137,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // given
       const invalidData = {
         id: 123,
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
       };
 
       // when
@@ -151,7 +151,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | Version', functi
       // given
       const invalidData = {
         id: 123,
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         challengesConfiguration: { defaultCandidateCapacity: 'not-a-number' },
       };
 

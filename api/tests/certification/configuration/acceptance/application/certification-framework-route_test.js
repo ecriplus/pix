@@ -1,5 +1,5 @@
 import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
-import { Scopes } from '../../../../../src/certification/shared/domain/models/Scopes.js';
+import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import {
   createServer,
   databaseBuilder,
@@ -30,7 +30,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       const coreStartDate = new Date('2025-01-15');
 
       databaseBuilder.factory.buildCertificationVersion({
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         startDate: coreStartDate,
         expirationDate: null,
       });
@@ -136,7 +136,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       await mockLearningContent(learningContentObjects);
 
       const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         startDate: new Date('2025-01-15'),
         expirationDate: null,
       });
@@ -151,14 +151,14 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
 
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         challengeId: 'anotherScopeChallenge',
-        versionId: databaseBuilder.factory.buildCertificationVersion({ scope: Scopes.DROIT }).id,
+        versionId: databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.DROIT }).id,
       });
 
       await databaseBuilder.commit();
 
       const options = {
         method: 'GET',
-        url: `/api/admin/certification-frameworks/${Scopes.CORE}/active-consolidated-framework`,
+        url: `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
@@ -168,10 +168,10 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data).to.deep.equal({
-        id: Scopes.CORE,
+        id: SCOPES.CORE,
         type: 'certification-consolidated-frameworks',
         attributes: {
-          'complementary-certification-key': Scopes.CORE,
+          'complementary-certification-key': SCOPES.CORE,
           version: String(certificationVersion.id),
         },
         relationships: {
@@ -194,13 +194,13 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const newerVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         startDate: new Date('2025-01-11'),
         expirationDate: null,
       });
 
       const olderVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: Scopes.CORE,
+        scope: SCOPES.CORE,
         startDate: new Date('2024-01-11'),
         expirationDate: newerVersion.expirationDate,
       });
@@ -209,7 +209,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
 
       const options = {
         method: 'GET',
-        url: `/api/admin/certification-frameworks/${Scopes.CORE}/framework-history`,
+        url: `/api/admin/certification-frameworks/${SCOPES.CORE}/framework-history`,
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
@@ -219,10 +219,10 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data).to.deep.equal({
-        id: Scopes.CORE,
+        id: SCOPES.CORE,
         type: 'framework-histories',
         attributes: {
-          scope: Scopes.CORE,
+          scope: SCOPES.CORE,
           history: [
             { id: newerVersion.id, startDate: newerVersion.startDate, expirationDate: newerVersion.expirationDate },
             { id: olderVersion.id, startDate: olderVersion.startDate, expirationDate: olderVersion.expirationDate },

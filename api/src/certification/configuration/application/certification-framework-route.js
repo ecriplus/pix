@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { Scopes } from '../../shared/domain/models/Scopes.js';
+import { SCOPES } from '../../shared/domain/models/Scopes.js';
 import { certificationFrameworkController } from './certification-framework-controller.js';
 
 const register = async function (server) {
@@ -50,7 +50,7 @@ const register = async function (server) {
           params: Joi.object({
             scope: Joi.string()
               .required()
-              .valid(...Object.values(Scopes)),
+              .valid(...Object.values(SCOPES)),
           }),
         },
         handler: certificationFrameworkController.getActiveConsolidatedFramework,
@@ -82,7 +82,7 @@ const register = async function (server) {
           params: Joi.object({
             scope: Joi.string()
               .required()
-              .valid(...Object.values(Scopes)),
+              .valid(...Object.values(SCOPES)),
           }),
         },
         handler: certificationFrameworkController.getFrameworkHistory,

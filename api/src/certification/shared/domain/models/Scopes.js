@@ -5,7 +5,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
  * @readonly
  * @enum {string}
  */
-const SCOPES = Object.freeze({
+export const SCOPES = Object.freeze({
   CORE: 'CORE',
   PIX_PLUS_DROIT: 'DROIT',
   PIX_PLUS_EDU_1ER_DEGRE: 'EDU_1ER_DEGRE',
@@ -20,15 +20,10 @@ const SCOPES = Object.freeze({
  * @returns {string} The scope value.
  * @throws {NotFoundError} If the scope is not found.
  */
-function getByName(name) {
+export function getScopeByName(name) {
   const scope = Object.values(SCOPES).find((value) => value === name);
   if (!scope) {
     throw new NotFoundError(`Scope with name "${name}" not found.`);
   }
   return scope;
 }
-
-export const Scopes = {
-  ...SCOPES,
-  getByName,
-};
