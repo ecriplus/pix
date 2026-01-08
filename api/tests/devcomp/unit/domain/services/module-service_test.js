@@ -63,7 +63,7 @@ describe('#getModuleByLink', function () {
     it('should throw an error if short id does not match expected format', async function () {
       const moduleMetadataRepository = { getByShortId: sinon.stub() };
       moduleMetadataRepository.getByShortId.withArgs({ shortId: 'wrong-short-id' }).rejects(new NotFoundError());
-      const error = await catchErr(getModuleByLink)({ link: '/modules/bac-a-sable/details', moduleMetadataRepository });
+      const error = await catchErr(getModuleByLink)({ link: '/modules/bac-a-sable', moduleMetadataRepository });
       expect(error).to.be.instanceOf(ModuleDoesNotExistError);
     });
 
