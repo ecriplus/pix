@@ -29,6 +29,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       isRecommendable: true,
       isDisabled: false,
     });
+    store.createRecord('module-metadata', { title: 'Bac à sable', link: '/modules/bac-a-sable' });
 
     class AccessControlStub extends Service {
       hasAccessToTrainingsActionsScope = true;

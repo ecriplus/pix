@@ -1,4 +1,4 @@
-import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, render, within } from '@1024pix/ember-testing-library';
 import { click, fillIn, triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CreateOrUpdateTrainingForm from 'pix-admin/components/trainings/create-or-update-training-form';
@@ -13,6 +13,12 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
   const onSubmit = sinon.stub();
   const onCancel = sinon.stub();
+
+  hooks.beforeEach(async function () {
+    const store = this.owner.lookup('service:store');
+    store.createRecord('module-metadata', { title: 'Faire un clic droit', link: '/modules/r2d2droi/clic-droit' });
+    store.createRecord('module-metadata', { title: 'Utiliser un LLM', link: '/modules/k2000tro/use-llm' });
+  });
 
   test('it should display the items', async function (assert) {
     // when
@@ -192,8 +198,8 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
   });
 
   module('when isModuleSelectionForTrainingEnabled FT is enabled', function () {
-    module('when type provided is modulix', function () {
-      test('it should display the todo link selector', async function (assert) {
+    module('when provided type is modulix', function () {
+      test('it should display the link selector', async function (assert) {
         // given
         const featureToggles = this.owner.lookup('service:featureToggles');
         sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
@@ -209,7 +215,38 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
         // then
         assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
-        assert.dom(screen.getByText('Todo : Ajouter un Pix Select "Lien" listant les modules')).exists();
+        assert.dom(screen.getByRole('button', { name: 'Module' })).exists();
+      });
+
+      module('when model is provided', function () {
+        test('it should display correct module on editing form', async function (assert) {
+          // given
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+
+          const model = {
+            title: 'Un contenu formatif',
+            internalTitle: 'Mon titre interne',
+            link: '/modules/k2000tro/use-llm',
+            type: 'modulix',
+            duration: { days: 0, hours: 0, minutes: 0 },
+            locale: 'fr-fr',
+            editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
+            editorName: 'Pix',
+            isDisabled: false,
+          };
+
+          // when
+          const screen = await render(
+            <template>
+              <CreateOrUpdateTrainingForm @model={{model}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+            </template>,
+          );
+
+          // then
+          const moduleButton = await screen.findByRole('button', { name: 'Module' });
+          assert.dom(within(moduleButton).getByText('Utiliser un LLM')).exists();
+        });
       });
     });
 

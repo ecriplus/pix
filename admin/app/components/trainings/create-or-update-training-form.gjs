@@ -45,14 +45,31 @@ class Form {
 
 export default class CreateOrUpdateTrainingForm extends Component {
   @service featureToggles;
+  @service store;
 
   @tracked submitting = false;
+  @tracked modules = [];
 
   constructor() {
     super(...arguments);
     this.optionsTypeList = optionsTypeList;
     this.optionsLocaleList = optionsLocaleList;
     this.form = new Form(this.args.model);
+    this.loadModules();
+  }
+
+  get formattedSortedModuleValues() {
+    const selectValues = this.modules.map((modules) => ({
+      value: modules.link,
+      label: modules.title,
+    }));
+
+    return selectValues.sort((moduleA, moduleB) => moduleA.label.localeCompare(moduleB.label));
+  }
+
+  async loadModules() {
+    const modulesMetadata = this.store.peekAll('module-metadata');
+    this.modules = modulesMetadata?.length ? modulesMetadata : await this.store.findAll('module-metadata');
   }
 
   @action
@@ -131,7 +148,20 @@ export default class CreateOrUpdateTrainingForm extends Component {
           {{#if this.form.type}}
             {{#if this.featureToggles.featureToggles.isModuleSelectionForTrainingEnabled}}
               {{#if (eq this.form.type "modulix")}}
-                <p>Todo : Ajouter un Pix Select "Lien" listant les modules</p>
+                <PixSelect
+                  @id="trainingModule"
+                  @placeholder="-- Sélectionnez un module --"
+                  @options={{this.formattedSortedModuleValues}}
+                  @value={{this.form.link}}
+                  @onChange={{fn this.updateSelect "link"}}
+                  @hideDefaultOption={{true}}
+                  @isSearchable={{true}}
+                  @searchLabel="Module à rechercher"
+                  required={{true}}
+                  aria-required={{true}}
+                >
+                  <:label>Module</:label>
+                </PixSelect>
               {{else}}
                 <PixInput
                   @id="trainingLink"
