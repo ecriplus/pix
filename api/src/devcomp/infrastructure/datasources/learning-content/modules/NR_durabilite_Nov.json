@@ -70,7 +70,7 @@
         },
         {
           "id": "4332e568-76ab-4fbc-ae91-6369a9149464",
-          "type": "activity",
+          "type": "discovery",
           "title": "D’où viennent les métaux ?",
           "components": [
             {
@@ -79,7 +79,7 @@
                 "id": "62b4e1dc-725f-4d09-b0b3-e78281fb1368",
                 "type": "flashcards",
                 "instruction": "<p>Voici quelques métaux que vous trouvez dans votre smartphone. Savez-vous d’où ils viennent ? Retournez les cartes pour en savoir plus.</p>",
-                "title": "",
+                "title": "D’où viennent les métaux ?",
                 "introImage": {
                   "url": ""
                 },
@@ -181,7 +181,7 @@
         },
         {
           "id": "73607635-a3ef-418e-81fc-8433473aa197",
-          "type": "activity",
+          "type": "discovery",
           "title": "Les voyages des matériaux",
           "components": [
             {
@@ -273,7 +273,7 @@
         },
         {
           "id": "0e509e06-79fd-48b2-9935-08a3a51a9f85",
-          "type": "activity",
+          "type": "discovery",
           "title": "Des gestes responsables",
           "components": [
             {
@@ -389,7 +389,7 @@
         },
         {
           "id": "d6c3e004-1d48-440f-a1cb-1a982512c76e",
-          "type": "activity",
+          "type": "discovery",
           "title": "Nouveau smartphone… Et l’ancien, on en fait quoi ?",
           "components": [
             {
