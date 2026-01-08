@@ -13,7 +13,7 @@ import { getChallengeLocale } from '../utils/request-response-utils.js';
 const __dirname = import.meta.dirname;
 const translationsFolder = path.resolve(path.join(__dirname, '../../../../translations'));
 
-export const options = {
+export const defaultSettings = {
   locales: ['en', 'fr', 'es', 'es-419', 'nl'],
   fallbacks: { 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl' },
   defaultLocale: 'fr', // default locale must match an existing translation file (fr => fr.json)
@@ -34,12 +34,12 @@ const i18nInstances = {};
  * @param {string} locale a locale (language or BCP 47 format)
  * @returns i18n instance correctly setup with the language
  */
-export function getI18n(locale) {
+export function getI18n(locale, settings = defaultSettings) {
   const supportedLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
   const baseLocale = getBaseLocale(supportedLocale);
 
   if (!i18nInstances[baseLocale]) {
-    const i18n = new I18n(options);
+    const i18n = new I18n(settings);
     i18n.setLocale(baseLocale);
     // we freeze the setLocale to avoid changing i18n locale for an instance
     i18n.setLocale = () => {

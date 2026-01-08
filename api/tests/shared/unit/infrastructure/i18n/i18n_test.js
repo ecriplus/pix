@@ -1,4 +1,4 @@
-import { getI18n, options } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { defaultSettings, getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Infrastucture | i18n', function () {
