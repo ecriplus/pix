@@ -64,12 +64,12 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
     });
 
     module('when the wanted OIDC Provider is enabled and ready', function () {
-      test('the user is redirected to the Pix login form', async function (assert) {
+      test('the user is redirected to the Pix signup form', async function (assert) {
         // when
         await visit('/connexion/oidc-partner?code=code&state=state');
 
         // then
-        assert.strictEqual(currentURL(), '/connexion/oidc-partner/login');
+        assert.strictEqual(currentURL(), '/connexion/oidc-partner/signup');
       });
 
       module('when the user submits Pix login form', function () {
@@ -81,12 +81,13 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             });
 
             const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+            await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
 
             // when
             await fillIn(await screen.getByRole('textbox', { name: t('pages.login-form.email.label') }), user.email);
             await fillIn(await screen.getByLabelText(t('pages.login-form.password')), 'pix123');
-
-            await click(await screen.getByRole('button', { name: 'Je me connecte' }));
+            const loginButton = screen.getByRole('button', { name: t('pages.login-form.login') });
+            await click(loginButton);
 
             // then
             assert.ok(
@@ -130,6 +131,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
               401,
             );
             const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+            await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
 
             // when
             await fillIn(
@@ -153,6 +155,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             this.server.post('/oidc/user/check-reconciliation', undefined, 500);
 
             const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+            await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
 
             // when
             await fillIn(
@@ -211,6 +214,8 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
               createPrescriberByUser({ user });
 
               const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+              await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
+
               await fillInAndSubmitLoginForm(screen);
               await settled();
 
@@ -233,6 +238,8 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
               const user = createUserWithMembership();
               createPrescriberByUser({ user });
               screen = await visit('/connexion/oidc-partner?code=code&state=state');
+              await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
+
               await fillInAndSubmitLoginForm(screen);
             });
 

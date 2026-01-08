@@ -55,7 +55,7 @@ export default class LoginOidcRoute extends Route {
     const { identityProviderSlug, shouldCreateUserAccount } = model;
 
     if (shouldCreateUserAccount) {
-      this.router.transitionTo('authentication.oidc.login', identityProviderSlug);
+      this.router.transitionTo('authentication.oidc.signup', identityProviderSlug);
     }
   }
 
