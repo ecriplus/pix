@@ -10,13 +10,20 @@ export default class ItemRoute extends Route {
   }
 
   model(params) {
+    this.certificationFrameworkKey = params.certification_framework_key;
     const complementaryCertifications = this.store.peekAll('complementary-certification');
-    return complementaryCertifications.find((cc) => cc.key === params.certification_framework_key);
+    const currentComplementaryCertification = complementaryCertifications.find(
+      (cc) => cc.key === params.certification_framework_key,
+    );
+    return {
+      frameworkKey: this.certificationFrameworkKey,
+      currentComplementaryCertification,
+    };
   }
 
   redirect(model, transition) {
     if (transition.to.name === 'authenticated.certification-frameworks.item.index') {
-      if (model.hasComplementaryReferential) {
+      if (this.certificationFrameworkKey !== 'CLEA') {
         this.router.transitionTo('authenticated.certification-frameworks.item.framework');
       } else {
         this.router.transitionTo('authenticated.certification-frameworks.item.target-profile');

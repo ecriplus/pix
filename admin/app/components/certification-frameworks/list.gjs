@@ -8,14 +8,12 @@ import formatDate from 'ember-intl/helpers/format-date';
 export default class List extends Component {
   get frameworks() {
     return this.args.certificationFrameworks.map((framework) => {
-      const complementaryCertification = this.args.complementaryCertifications.find((cc) => cc.key === framework.id);
-
       return {
         id: framework.id,
         name: framework.name,
         label: `components.certification-frameworks.labels.${framework.id}`,
         activeVersionStartDate: framework.activeVersionStartDate,
-        complementaryCertificationKey: complementaryCertification?.key,
+        frameworkKey: framework.id,
       };
     });
   }
@@ -32,16 +30,9 @@ export default class List extends Component {
             {{t "components.certification-frameworks.list.name"}}
           </:header>
           <:cell>
-            {{#if framework.complementaryCertificationKey}}
-              <LinkTo
-                @route="authenticated.certification-frameworks.item"
-                @model={{framework.complementaryCertificationKey}}
-              >
-                {{t framework.label}}
-              </LinkTo>
-            {{else}}
+            <LinkTo @route="authenticated.certification-frameworks.item" @model={{framework.frameworkKey}}>
               {{t framework.label}}
-            {{/if}}
+            </LinkTo>
           </:cell>
         </PixTableColumn>
         <PixTableColumn @context={{context}}>
