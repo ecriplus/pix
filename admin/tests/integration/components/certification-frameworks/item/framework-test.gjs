@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | complementary-certifications/item/framework', function (hooks) {
+module('Integration | Component | certification-frameworks/item/framework', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let store;
@@ -33,7 +33,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.findRecord = sinon.stub().returns();
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert.dom(screen.getByText(t('components.complementary-certifications.item.framework.create-button'))).exists();
@@ -48,7 +53,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.findRecord = sinon.stub().returns();
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert
@@ -75,7 +85,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.findRecord = sinon.stub().returns();
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert
@@ -98,7 +113,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       });
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert
@@ -126,7 +146,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.queryRecord = sinon.stub().resolves({ history: [] });
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert
@@ -152,7 +177,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.queryRecord = sinon.stub().resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert
@@ -174,7 +204,7 @@ module('Integration | Component | complementary-certifications/item/framework', 
       });
       store.queryRecord = sinon.stub().resolves({ history: [] });
 
-      const screen = await render(<template><Framework /></template>);
+      const screen = await render(<template><Framework @frameworkKey="CORE" /></template>);
 
       assert.ok(
         store.findRecord.calledWith('certification-consolidated-framework', 'CORE'),
@@ -197,7 +227,7 @@ module('Integration | Component | complementary-certifications/item/framework', 
       });
       store.queryRecord = sinon.stub().resolves({ history: [] });
 
-      const screen = await render(<template><Framework /></template>);
+      const screen = await render(<template><Framework @frameworkKey="CORE" /></template>);
 
       assert
         .dom(
@@ -224,7 +254,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.queryRecord = sinon.stub().resolves({ history: [] });
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert.ok(
@@ -254,7 +289,12 @@ module('Integration | Component | complementary-certifications/item/framework', 
       store.queryRecord = sinon.stub().resolves({ history: [] });
 
       const screen = await render(
-        <template><Framework @complementaryCertification={{complementaryCertification}} /></template>,
+        <template>
+          <Framework
+            @complementaryCertification={{complementaryCertification}}
+            @frameworkKey={{complementaryCertification.key}}
+          />
+        </template>,
       );
 
       assert

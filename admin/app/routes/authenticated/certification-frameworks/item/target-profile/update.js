@@ -9,13 +9,17 @@ export default class AttachTargetProfileRoute extends Route {
   }
 
   model(params) {
-    const complementaryCertification = this.modelFor('authenticated.certification-frameworks.item.target-profile');
+    const { currentComplementaryCertification } = this.modelFor(
+      'authenticated.certification-frameworks.item.target-profile',
+    );
 
     const targetProfileId = parseInt(params.target_profile_id);
 
     return {
-      complementaryCertification,
-      currentTargetProfile: complementaryCertification.currentTargetProfiles?.find(({ id }) => id === targetProfileId),
+      complementaryCertification: currentComplementaryCertification,
+      currentTargetProfile: currentComplementaryCertification.currentTargetProfiles?.find(
+        ({ id }) => id === targetProfileId,
+      ),
     };
   }
 }
