@@ -151,7 +151,7 @@
         },
         {
           "id": "5141c2d6-31cc-43f1-957f-9622b5061d43",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Les impacts de l’extraction minière ",
           "components": [
             {
@@ -239,7 +239,7 @@
         },
         {
           "id": "675e3c4e-391b-402f-b497-d24b300f6328",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Le transport entre chaque étape, ça pollue !",
           "components": [
             {
@@ -355,7 +355,7 @@
         },
         {
           "id": "6e0b5610-ec90-467e-ba1e-3af446cddb7e",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Réduire les impacts",
           "components": [
             {
@@ -458,7 +458,7 @@
         },
         {
           "id": "dceb2521-43bc-4dff-9fd8-fc91c8298bb8",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": " Un ancien/vieux smartphone, une mine de ressources.",
           "components": [
             {
