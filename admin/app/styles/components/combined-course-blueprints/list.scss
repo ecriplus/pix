@@ -5,10 +5,10 @@
     &--compact {
       width: 1px;
       white-space: nowrap;
-      vertical-align: top;
     }
   }
 }
+
 .combined-course-blueprint {
   &__container {
     display: flex;
@@ -20,12 +20,14 @@
       gap: 2rem;
     }
   }
+
   &__content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: var(--pix-spacing-4x);
+    align-items: flex-start;
   }
+
   &__breadcrumb {
     margin-bottom: var(--pix-spacing-8x);
   }

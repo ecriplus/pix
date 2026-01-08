@@ -31,10 +31,8 @@ module('Integration | Component | CombinedCourseBlueprints::ListSummaryItems', f
 
     // then
     assert.dom(screen.getByText('123')).exists();
-    assert.dom(screen.getByText('Modèle de parcours apprenant')).exists();
+    assert.dom(screen.getByRole('link', { name: 'Modèle de parcours apprenant' })).exists();
     assert.dom(screen.getByText('25/12/2025')).exists();
-    assert.dom(screen.getByText('Module', { exact: false })).exists();
-    assert.dom(screen.getByText('abc-123', { exact: false })).exists();
     assert.ok(screen.getByRole('link', { name: t('components.combined-course-blueprints.list.downloadButton') }));
   });
 

@@ -34,10 +34,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
-      1,
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }), 1);
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
     await click(screen.getByLabelText(t('components.combined-course-blueprints.labels.module')));
     await fillIn(
@@ -59,10 +56,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       'illustrations/hello.svg',
     );
 
-    await fillIn(
-      screen.getByLabelText(t('components.combined-course-blueprints.labels.description')),
-      'description',
-    );
+    await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.description')), 'description');
 
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 

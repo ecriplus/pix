@@ -2,12 +2,11 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
-
-import RequirementTag from '../common/combined-courses/requirement-tag';
 
 export default class CombineCourseBluePrintList extends Component {
   @service pixToast;
@@ -47,7 +46,7 @@ export default class CombineCourseBluePrintList extends Component {
         class="table"
       >
         <:columns as |blueprint context|>
-          <PixTableColumn @context={{context}} class="combinedCourseBlueprint__column--compact">
+          <PixTableColumn @context={{context}} class="combined-course-blueprints__column--compact">
             <:header>
               {{t "common.fields.id"}}
             </:header>
@@ -60,20 +59,14 @@ export default class CombineCourseBluePrintList extends Component {
               {{t "common.fields.internalName"}}
             </:header>
             <:cell>
-              {{blueprint.internalName}}
-              <details>
-                <summary>{{t "components.combined-course-blueprints.list.content"}}</summary>
-                {{#each blueprint.content as |requirement|}}
-                  <RequirementTag
-                    @type={{requirement.type}}
-                    @value={{requirement.value}}
-                    @label={{requirement.value}}
-                  />
-                {{/each}}
-              </details>
+              <LinkTo
+                @route="authenticated.combined-course-blueprints.details"
+                @model={{blueprint}}
+              >{{blueprint.internalName}}</LinkTo>
+
             </:cell>
           </PixTableColumn>
-          <PixTableColumn @context={{context}} class="combinedCourseBlueprint__column--compact">
+          <PixTableColumn @context={{context}} class="combined-course-blueprints__column--compact">
             <:header>
               {{t "common.fields.createdAt"}}
             </:header>
@@ -82,7 +75,7 @@ export default class CombineCourseBluePrintList extends Component {
             </:cell>
           </PixTableColumn>
 
-          <PixTableColumn @context={{context}} class="combinedCourseBlueprint__column--compact">
+          <PixTableColumn @context={{context}} class="combined-course-blueprints__column--compact">
             <:header>
               {{t "common.fields.actions"}}
             </:header>

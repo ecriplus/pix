@@ -15,85 +15,72 @@ export default class Details extends Component {
 
   <template>
     {{pageTitle "Profil " @model.id " | Pix Admin" replace=true}}
-    <header class="page-header">
-      <PixBreadcrumb @links={{this.links}} />
-    </header>
-
-    <main class="page-body">
-      <section class="page-section">
-        <div class="combined-course-blueprint__container">
-
-          <DescriptionList>
-
-            <DescriptionList.Divider />
-
-            <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.itemId"}}>
-              {{@model.id}}
-            </DescriptionList.Item>
-
-            <DescriptionList.Divider />
-
-            <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.internal-name"}}>
-              {{@model.internalName}}
-            </DescriptionList.Item>
-
-            <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.name"}}>
-              {{@model.name}}
-            </DescriptionList.Item>
-
-            <DescriptionList.Divider />
-
-            <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.created-at"}}>
-              {{formatDate @model.createdAt}}
-            </DescriptionList.Item>
-
-            {{#if @model.description}}
-              <DescriptionList.Divider />
-
-              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.description"}}>
-                <SafeMarkdownToHtml @markdown={{@model.description}} />
-              </DescriptionList.Item>
-            {{/if}}
-
-            {{#if @model.illustration}}
-              <DescriptionList.Divider />
-              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.illustration"}}>
-                <img src={{@model.illustration}} alt="" />
-              </DescriptionList.Item>
-              <DescriptionList.Divider />
-            {{/if}}
-
-            <div class="combined-course-blueprint__content">
-              <DescriptionList.Item>
-                {{#each @model.content as |requirement|}}
-                  <RequirementTag
-                    @type={{requirement.type}}
-                    @value={{requirement.value}}
-                    @label={{requirement.value}}
-                  />
-                {{/each}}
-              </DescriptionList.Item>
-              <DescriptionList.Divider />
-            </div>
-
-          </DescriptionList>
-
-          {{#if @model.illustration}}
-            <div class="target-profile-section__image">
-              <img src={{@model.illustration}} alt="" />
-            </div>
-          {{/if}}
-
+    <div class="page">
+      <header>
+        <div>
+          <PixBreadcrumb @links={{this.links}} class="combined-course-blueprint__breadcrumb" />
+          <h1>{{@model.internalName}}</h1>
         </div>
-        <div class="target-profile__actions">
-
+        <div class="page-actions">
           <PixButton @triggerAction={{this.downloadCSV}} @size="small" @variant="success">
             Télécharger le schéma (CSV)
           </PixButton>
-
         </div>
-      </section>
-    </main>
+      </header>
+
+      <main class="page-body">
+        <section class="page-section">
+          <div class="combined-course-blueprint__container">
+
+            <DescriptionList>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.itemId"}}>
+                {{@model.id}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.internal-name"}}>
+                {{@model.internalName}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.name"}}>
+                {{@model.name}}
+              </DescriptionList.Item>
+
+              <DescriptionList.Divider />
+
+              <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.created-at"}}>
+                {{formatDate @model.createdAt}}
+              </DescriptionList.Item>
+
+              {{#if @model.description}}
+                <DescriptionList.Divider />
+
+                <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.description"}}>
+                  <SafeMarkdownToHtml @markdown={{@model.description}} />
+                </DescriptionList.Item>
+              {{/if}}
+
+              {{#if @model.illustration}}
+                <DescriptionList.Divider />
+                <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.illustration"}}>
+                  <img src={{@model.illustration}} alt="" />
+                </DescriptionList.Item>
+                <DescriptionList.Divider />
+              {{/if}}
+            </DescriptionList>
+            <div class="combined-course-blueprint__content">
+              {{#each @model.content as |requirement|}}
+                <RequirementTag @type={{requirement.type}} @value={{requirement.value}} @label={{requirement.value}} />
+              {{/each}}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </template>
 
   get links() {
