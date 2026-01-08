@@ -7,12 +7,79 @@
     margin-top: var(--pix-spacing-3x);
   }
 
+  &__card {
+    &--general {
+      .card__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--pix-spacing-6x);
+      }
+    }
+
+    &--side {
+      flex: 1;
+    }
+
+    &:not(&--general) {
+      .card__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--pix-spacing-6x);
+      }
+    }
+
+    .card__content > * + * {
+      margin-top: 0;
+    }
+  }
+
+  &__left-block,
+  &__right-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+  }
+
+  &__side-by-side {
+    display: flex;
+    gap: var(--pix-spacing-6x);
+
+    @include breakpoints.device-is('mobile') {
+      flex-direction: column;
+    }
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      padding-bottom: var(--pix-spacing-3x);
+      border-bottom: 1px solid var(--pix-neutral-100);
+    }
+  }
+
+  &__label {
+    color: var(--pix-neutral-900);
+    font-weight: bold;
+  }
+
+  &__value {
+    color: var(--pix-neutral-700);
+
+    a {
+      color: var(--pix-primary-500);
+      text-decoration: underline;
+    }
+  }
+
   &__features {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--pix-spacing-1x);
+    gap: var(--pix-spacing-6x) 80px;
 
-    @include breakpoints.device-is('mobile'){
+    @include breakpoints.device-is('mobile') {
       display: flex;
       flex-direction: column;
       gap: 0;
@@ -20,12 +87,16 @@
 
     &--enabled {
       svg {
-        color: var(--pix-success-300);
+        color: var(--pix-success-500);
       }
     }
 
     &--disabled {
       color: var(--pix-neutral-500);
+
+      svg {
+        color: var(--pix-error-500);
+      }
     }
 
     li {
@@ -34,9 +105,18 @@
       gap: var(--pix-spacing-2x);
       align-items: center;
 
+      &:not(:last-child) {
+        padding-bottom: var(--pix-spacing-3x);
+        border-bottom: 1px solid var(--pix-neutral-100);
+      }
+
       > svg {
         flex-shrink: 0;
       }
     }
   }
+}
+
+.organization-information__actions {
+  margin-top: var(--pix-spacing-6x);
 }

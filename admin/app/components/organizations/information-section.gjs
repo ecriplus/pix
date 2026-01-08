@@ -113,6 +113,7 @@ export default class OrganizationInformationSection extends Component {
         </div>
 
         <PixButtonLink
+          class="organization__dashboard-button"
           @variant="secondary"
           @href={{this.externalURL}}
           @size="small"
