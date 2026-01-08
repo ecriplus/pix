@@ -5,7 +5,7 @@ import Header from 'pix-admin/components/certification-frameworks/item/header';
   {{pageTitle "Référentiel " @model.label " | Pix Admin" replace=true}}
 
   <div class="page">
-    <Header @complementaryCertification={{@model}} />
+    <Header @complementaryCertification={{@model.currentComplementaryCertification}} />
 
     <section class="page-body certification-framework certification-framework__header">
       {{outlet}}

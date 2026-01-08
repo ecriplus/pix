@@ -10,7 +10,7 @@ import FrameworkDetails from './framework/framework-details';
 import FrameworkHistory from './framework/framework-history';
 import History from './target-profile/history';
 
-export default class ComplementaryCertificationFramework extends Component {
+export default class CertificationFramework extends Component {
   @service currentUser;
   @service store;
   @tracked targetProfilesHistory;
@@ -24,17 +24,20 @@ export default class ComplementaryCertificationFramework extends Component {
   }
 
   async #onMount() {
+    const frameworkKey = this.args.frameworkKey;
     const complementaryCertification = this.args.complementaryCertification;
-    await complementaryCertification.reload();
 
-    this.targetProfilesHistory = complementaryCertification.targetProfilesHistory;
+    if (complementaryCertification) {
+      await complementaryCertification.reload();
+      this.targetProfilesHistory = complementaryCertification.targetProfilesHistory;
+    }
 
     this.currentConsolidatedFramework = await this.store.findRecord(
       'certification-consolidated-framework',
-      complementaryCertification.key,
+      frameworkKey,
     );
 
-    const frameworkHistory = await this.store.queryRecord('framework-history', complementaryCertification.key);
+    const frameworkHistory = await this.store.queryRecord('framework-history', frameworkKey);
     this.frameworkHistory = frameworkHistory?.history;
   }
 
@@ -61,7 +64,7 @@ export default class ComplementaryCertificationFramework extends Component {
       <FrameworkDetails @currentConsolidatedFramework={{this.currentConsolidatedFramework}} />
     {{/if}}
 
-    {{#if this.frameworkHistory.length}}
+    {{#if this.frameworkHistory}}
       <FrameworkHistory @history={{this.frameworkHistory}} />
     {{/if}}
 

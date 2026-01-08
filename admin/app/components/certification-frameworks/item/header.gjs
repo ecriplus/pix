@@ -6,6 +6,10 @@ import { t } from 'ember-intl';
 export default class Header extends Component {
   @service intl;
 
+  get isComplementaryCertification() {
+    return this.args.complementaryCertification;
+  }
+
   get links() {
     return [
       {
@@ -13,7 +17,8 @@ export default class Header extends Component {
         label: this.intl.t('components.layout.sidebar.certification-frameworks'),
       },
       {
-        label: this.args.complementaryCertification.label,
+        label:
+          this.args.complementaryCertification?.label || this.intl.t('components.certification-frameworks.labels.CORE'),
       },
     ];
   }
@@ -26,13 +31,23 @@ export default class Header extends Component {
     <div class="certification-framework-header">
       <h1 class="certification-framework-header__title">
         <small>
-          {{#if @complementaryCertification.hasComplementaryReferential}}
-            {{t "components.complementary-certifications.item.certification-framework"}}
+          {{#if this.isComplementaryCertification}}
+            {{#if @complementaryCertification.hasComplementaryReferential}}
+              {{t "components.complementary-certifications.item.certification-framework"}}
+            {{else}}
+              {{t "components.complementary-certifications.item.target-profile"}}
+            {{/if}}
           {{else}}
-            {{t "components.complementary-certifications.item.target-profile"}}
+            {{t "components.complementary-certifications.item.certification-framework"}}
           {{/if}}
         </small>
-        <span>{{@complementaryCertification.label}}</span>
+        <span>
+          {{#if this.isComplementaryCertification}}
+            {{@complementaryCertification.label}}
+          {{else}}
+            {{t "components.certification-frameworks.labels.CORE"}}
+          {{/if}}
+        </span>
       </h1>
     </div>
   </template>

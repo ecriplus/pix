@@ -1,5 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -49,37 +50,27 @@ module('Acceptance | Certification frameworks | list', function (hooks) {
       const screen = await visit('/certification-frameworks');
 
       // then
-      assert.dom(screen.getByText('Nom')).exists({ count: 1 });
-      assert.dom(screen.getByRole('link', { name: 'Pix+ Droit' })).exists({ count: 1 });
-      assert.dom(screen.getByText('Date de début de la version active')).exists({ count: 1 });
+      assert.dom(screen.getByText(t('components.certification-frameworks.list.name'))).exists({ count: 1 });
+      assert
+        .dom(screen.getByRole('link', { name: t('components.certification-frameworks.labels.DROIT') }))
+        .exists({ count: 1 });
+      assert
+        .dom(screen.getByText(t('components.certification-frameworks.list.active-version-start-date')))
+        .exists({ count: 1 });
     });
 
-    test('it should redirect to certification framework details on click', async function (assert) {
+    test('it should redirect to the certification framework details on click', async function (assert) {
       // given
-      server.create('certification-framework', { id: 'DROIT' });
-      server.create('complementary-certification', {
-        id: 1,
-        key: 'DROIT',
-        label: 'Pix+ Droit',
-        hasComplementaryReferential: true,
-        targetProfilesHistory: [
-          {
-            id: 52,
-            name: 'Stephen target',
-            badges: [],
-          },
-        ],
-      });
-
-      server.create('certification-consolidated-framework', { id: 'DROIT' });
+      server.create('certification-framework', { id: 'CORE' });
+      server.create('certification-consolidated-framework', { id: 'CORE' });
 
       const screen = await visit('/certification-frameworks');
 
       // when
-      await click(screen.getByRole('link', { name: 'Pix+ Droit' }));
+      await click(screen.getByRole('link', { name: t('components.certification-frameworks.labels.CORE') }));
 
       // then
-      assert.strictEqual(currentURL(), '/certification-frameworks/DROIT/framework');
+      assert.strictEqual(currentURL(), '/certification-frameworks/CORE/framework');
     });
   });
 });

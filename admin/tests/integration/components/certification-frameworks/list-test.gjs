@@ -77,7 +77,7 @@ module('Integration | Component | certification-frameworks/list', function (hook
     assert.dom(screen.getByText('-')).exists();
   });
 
-  test('it should display a link to item route when complementary certification exists', async function (assert) {
+  test('it should display a link to item route when the framework exists', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const certificationFrameworks = [
@@ -107,33 +107,5 @@ module('Integration | Component | certification-frameworks/list', function (hook
     const link = screen.getByRole('link', { name: t('components.certification-frameworks.labels.DROIT') });
     assert.dom(link).exists();
     assert.dom(link).hasAttribute('href', '/certification-frameworks/DROIT');
-  });
-
-  test('it should display plain text when complementary certification does not exist', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const certificationFrameworks = [
-      store.createRecord('certification-framework', {
-        id: 'CORE',
-        name: 'Pix',
-      }),
-    ];
-    const complementaryCertifications = [];
-
-    // when
-    const screen = await render(
-      <template>
-        <List
-          @certificationFrameworks={{certificationFrameworks}}
-          @complementaryCertifications={{complementaryCertifications}}
-        />
-      </template>,
-    );
-
-    // then
-    assert
-      .dom(screen.queryByRole('link', { name: t('components.certification-frameworks.labels.CORE') }))
-      .doesNotExist();
-    assert.dom(screen.getByText(t('components.certification-frameworks.labels.CORE'))).exists();
   });
 });
