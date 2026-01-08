@@ -1,8 +1,9 @@
-import { visit } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { clickByName, visit } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { currentSession } from 'ember-simple-auth/test-support';
 import { Response } from 'miragejs';
 import Location from 'pix-orga/utils/location';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
@@ -20,7 +21,14 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
 
   hooks.beforeEach(function () {
     sinon.stub(Location, 'assign');
-
+    const organization = server.create('organization', { name: 'Super orga avec SSO' });
+    server.create('organizationInvitation', {
+      id: '123',
+      code: 'ABC',
+      status: 'pending',
+      organizationId: organization.id,
+      organizationName: 'Super orga avec SSO',
+    });
     invitationStorage.set({ invitationId: '123', code: 'ABC', organizationName: 'Super orga avec SSO' });
   });
 
@@ -57,6 +65,20 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
     );
     assert.dom(firstName).exists();
     assert.dom(lastName).exists();
+
+    // when
+    await clickByName(t('common.cgu.label'));
+    const signup = await screen.findByRole('button', { name: t('pages.oidc.signup.signup-button') });
+    await click(signup);
+    const acceptPixOrgaTermsOfService = await screen.findByRole('button', {
+      name: t('components.terms-of-service.actions.accept'),
+    });
+    await click(acceptPixOrgaTermsOfService);
+
+    // then
+    await screen.findByText('Lloyd Cé');
+    assert.strictEqual(currentURL(), '/');
+    assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
   });
 
   module('When there are no user claims returned by the identity provider', function () {
@@ -90,7 +112,7 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
       const signUpTitle = await screen.findByRole('heading', { name: t('pages.oidc.signup.title') });
       assert.dom(signUpTitle).exists();
 
-      const claimErrorMessage = await screen.findByText(t('pages.oidc.signup.error'));
+      const claimErrorMessage = await screen.findByText(t('pages.oidc.signup.error.claims'));
       assert.dom(claimErrorMessage).exists();
     });
   });

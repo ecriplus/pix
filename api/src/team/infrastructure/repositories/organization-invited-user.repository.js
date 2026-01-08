@@ -2,15 +2,28 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { InvitationNotFoundError, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { OrganizationInvitedUser } from '../../domain/models/OrganizationInvitedUser.js';
 
-const get = async function ({ organizationInvitationId, email }) {
+const get = async function ({ organizationInvitationId, email, userId }) {
+  if (!email && !userId) {
+    throw new UserNotFoundError();
+  }
   const invitation = await knex('organization-invitations')
     .select('id', 'organizationId', 'code', 'role', 'status')
     .where({ id: organizationInvitationId })
     .first();
   if (!invitation) throw new InvitationNotFoundError();
 
-  const user = await knex('users').select('id').where({ email }).first();
-  if (!user) throw new UserNotFoundError();
+  let user;
+
+  if (email) {
+    const normalizedEmail = email.trim().toLowerCase();
+    user = await knex('users').select('id').where({ email: normalizedEmail }).first();
+  } else {
+    user = await knex('users').select('id').where({ id: userId }).first();
+  }
+
+  if (!user) {
+    throw new UserNotFoundError();
+  }
 
   const memberships = await knex('memberships')
     .select('id', 'userId', 'organizationRole')

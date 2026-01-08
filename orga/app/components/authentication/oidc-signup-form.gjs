@@ -7,11 +7,15 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
+import get from 'lodash/get';
 
 export default class OidcSignupForm extends Component {
   @service oidcIdentityProviders;
   @service intl;
   @service url;
+  @service authErrorMessages;
+  @service store;
+  @service session;
 
   @tracked isTermsOfServiceValidated = false;
   @tracked signupErrorMessage = null;
@@ -51,8 +55,43 @@ export default class OidcSignupForm extends Component {
   }
 
   @action
-  signup() {
-    //TODO signup user
+  async signup() {
+    if (!this.isTermsOfServiceValidated) {
+      this.signupErrorMessage = this.intl.t('pages.oidc.signup.error.cgu');
+      return;
+    }
+
+    this.isLoading = true;
+    this.signupErrorMessage = null;
+    try {
+      this.session.set('skipAuthentication', true);
+      await this.session.authenticate('authenticator:oidc', {
+        authenticationKey: this.args.authenticationKey,
+        identityProviderSlug: this.args.identityProviderSlug,
+        hostSlug: 'users',
+      });
+      const createdUserId = this.session.data.authenticated.user_id;
+      await this._acceptOrganizationInvitation(this.args.invitationId, this.args.invitationCode, createdUserId);
+
+      this.session.set('skipAuthentication', false);
+      await this.session.handleAuthentication();
+    } catch (responseError) {
+      const error = get(responseError, 'errors[0]');
+      this.signupErrorMessage = this.authErrorMessages.getAuthenticationErrorMessage(error);
+    } finally {
+      this.isLoading = false;
+      this.session.set('skipAuthentication', false);
+    }
+  }
+
+  _acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, createdUserId) {
+    return this.store
+      .createRecord('organization-invitation-response', {
+        id: organizationInvitationId + '_' + organizationInvitationCode,
+        code: organizationInvitationCode,
+        userId: createdUserId,
+      })
+      .save({ adapterOptions: { organizationInvitationId } });
   }
 
   <template>

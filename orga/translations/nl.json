@@ -1401,7 +1401,10 @@
           "title": "rol"
         },
         "description": "Er wordt een account aangemaakt met de informatie die door de organisatie is verstrekt",
-        "error": "We konden uw identiteitsgegevens niet ophalen bij de gebruikte dienst. Neem contact op met de IT-ondersteuning van deze organisatie.",
+        "error": {
+          "cgu": "Je moet de gebruiksvoorwaarden en het privacybeleid van Pix accepteren om een account aan te maken.",
+          "claims": "We konden uw identiteitsgegevens niet ophalen bij de gebruikte dienst. Neem contact op met de IT-ondersteuning van deze organisatie."
+        },
         "login-button": "Ik heb al een account, ik log in",
         "signup-button": "Ik maak mijn account aan",
         "sub-title": "om toegang te krijgen tot uw Pix Orga-werkruimte",
