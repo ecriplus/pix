@@ -1,4 +1,5 @@
 import { ModuleDoesNotExistError } from '../../../../src/devcomp/domain/errors.js';
+import { Module } from '../../../../src/devcomp/domain/models/module/Module.js';
 import { ModuleMetadata } from '../../../../src/devcomp/domain/models/module/ModuleMetadata.js';
 import moduleDatasource from '../../../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import * as moduleMetadataRepository from '../../../../src/devcomp/infrastructure/repositories/module-metadata-repository.js';
@@ -16,6 +17,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'getAllByIdsModuleSlug1',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -60,6 +62,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'getAllByIdsModuleSlug2',
         title: 'Bac à sable',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description:
@@ -116,6 +119,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           isBeta: firstModule.isBeta,
           duration: firstModule.details.duration,
           image: firstModule.details.image,
+          visibility: firstModule.visibility,
         }),
         new ModuleMetadata({
           id: secondModule.id,
@@ -125,6 +129,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           isBeta: secondModule.isBeta,
           duration: secondModule.details.duration,
           image: secondModule.details.image,
+          visibility: secondModule.visibility,
         }),
       ];
       expect(modules).to.have.lengthOf(2);
@@ -164,6 +169,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'getAllByIdsModuleSlug1',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -208,6 +214,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'getAllByIdsModuleSlug2',
         title: 'Bac à sable',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description:
@@ -264,6 +271,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           isBeta: firstModule.isBeta,
           duration: firstModule.details.duration,
           image: firstModule.details.image,
+          visibility: firstModule.visibility,
         }),
         new ModuleMetadata({
           id: secondModule.id,
@@ -273,6 +281,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           isBeta: secondModule.isBeta,
           duration: secondModule.details.duration,
           image: secondModule.details.image,
+          visibility: secondModule.visibility,
         }),
       ];
       expect(modules).to.have.lengthOf(2);
@@ -311,6 +320,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'slug',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -370,6 +380,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         isBeta: stubModule.isBeta,
         duration: stubModule.details.duration,
         image: stubModule.details.image,
+        visibility: stubModule.visibility,
       });
 
       expect(moduleMetadata).to.be.instanceOf(ModuleMetadata);
@@ -400,6 +411,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -459,6 +471,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         isBeta: stubModule.isBeta,
         duration: stubModule.details.duration,
         image: stubModule.details.image,
+        visibility: stubModule.visibility,
       });
 
       expect(moduleMetadata).to.be.instanceOf(ModuleMetadata);
@@ -488,6 +501,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -532,6 +546,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'bac-a-sable',
         title: 'Bac à sable',
         isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description:
@@ -786,6 +801,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           duration: emailModule.details.duration,
           image: emailModule.details.image,
           link: `/modules/${emailModule.shortId}/${emailModule.slug}`,
+          visibility: emailModule.visibility,
         },
         {
           id: bacASableModule.id,
@@ -796,6 +812,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           duration: bacASableModule.details.duration,
           image: bacASableModule.details.image,
           link: `/modules/${bacASableModule.shortId}/${bacASableModule.slug}`,
+          visibility: bacASableModule.visibility,
         },
       ];
 

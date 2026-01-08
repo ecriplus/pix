@@ -43,8 +43,17 @@ async function list({ moduleDatasource }) {
 }
 
 function _toDomain(module) {
-  const { id, shortId, slug, title, isBeta, details } = module;
-  return new ModuleMetadata({ id, shortId, slug, title, isBeta, duration: details.duration, image: details.image });
+  const { id, shortId, slug, title, isBeta, details, visibility } = module;
+  return new ModuleMetadata({
+    id,
+    shortId,
+    slug,
+    title,
+    isBeta,
+    duration: details.duration,
+    image: details.image,
+    visibility,
+  });
 }
 
 export { getAllByIds, getAllByShortIds, getByShortId, getBySlug, list };
