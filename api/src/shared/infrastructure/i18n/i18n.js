@@ -2,11 +2,7 @@ import path from 'node:path';
 
 import { I18n } from 'i18n';
 
-import {
-  getBaseLocale,
-  getDefaultLocale,
-  getNearestSupportedLocale,
-} from '../../../shared/domain/services/locale-service.js';
+import { getDefaultLocale, getNearestSupportedLocale } from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../utils/logger.js';
 import { getChallengeLocale } from '../utils/request-response-utils.js';
 
@@ -35,12 +31,11 @@ const i18nInstances = {};
  * @returns i18n instance correctly setup with the language
  */
 export function getI18n(locale, settings = defaultSettings) {
-  const supportedLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
-  const baseLocale = getBaseLocale(supportedLocale);
+  const nearestLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
 
-  if (!i18nInstances[baseLocale]) {
+  if (!i18nInstances[nearestLocale]) {
     const i18n = new I18n(settings);
-    i18n.setLocale(baseLocale);
+    i18n.setLocale(nearestLocale);
     // we freeze the setLocale to avoid changing i18n locale for an instance
     i18n.setLocale = () => {
       logger.warn('Cannot change i18n locale instance, use getI18n(locale) instead.');
@@ -48,20 +43,20 @@ export function getI18n(locale, settings = defaultSettings) {
     const originalI18nTranslate = i18n.__;
     i18n.__ = (param1, param2) => {
       if (_isTranslationKeyOnly(param1, param2)) {
-        return originalI18nTranslate({ phrase: param1, locale: baseLocale });
+        return originalI18nTranslate({ phrase: param1, locale: nearestLocale });
       }
 
       if (_hasTranslationParameter(param1, param2)) {
-        return originalI18nTranslate({ phrase: param1, locale: baseLocale }, param2);
+        return originalI18nTranslate({ phrase: param1, locale: nearestLocale }, param2);
       }
 
       return originalI18nTranslate(param1, param2);
     };
 
-    i18nInstances[baseLocale] = i18n;
+    i18nInstances[nearestLocale] = i18n;
   }
 
-  return i18nInstances[baseLocale];
+  return i18nInstances[nearestLocale];
 }
 
 /**

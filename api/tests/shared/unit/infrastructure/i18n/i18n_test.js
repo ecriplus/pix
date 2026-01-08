@@ -8,23 +8,35 @@ describe('Unit | Shared | Infrastucture | i18n', function () {
       expect(i18n.getLocale()).to.equal('fr');
     });
 
-    it('returns an instance of i18n with the specified locale', function () {
-      const locale = 'es';
-      const i18n = getI18n(locale);
-      expect(i18n.getLocale()).to.equal(locale);
+    context('when the locale is supported and is a base locale', function () {
+      it('returns an instance of i18n with the specified locale', function () {
+        const locale = 'es';
+        const i18n = getI18n(locale);
+        expect(i18n.getLocale()).to.equal('es');
+      });
     });
 
-    it('returns the same instance for same base language', function () {
-      const i18n_fr = getI18n('fr');
-      const i18n_fr_fr = getI18n('fr-FR');
-
-      expect(i18n_fr.getLocale()).to.equal('fr');
-      expect(i18n_fr_fr.getLocale()).to.equal('fr');
-      expect(i18n_fr).to.equal(i18n_fr_fr);
+    context('when the locale is supported and is a BCP 47 format locale, not a base locale', function () {
+      it('returns an instance of i18n with the specified locale', function () {
+        // staticCatalog option is used to test the es-419 locale without having a .json file
+        const settings = {
+          ...defaultSettings,
+          staticCatalog: {
+            en: {},
+            fr: {},
+            es: {},
+            'es-419': {},
+            nl: {},
+          },
+        };
+        const locale = 'es-419';
+        const i18n = getI18n(locale, settings);
+        expect(i18n.getLocale()).to.equal('es-419');
+      });
     });
 
-    context('when the locale is BCP 47 format', function () {
-      it('returns the correct locale instance of i18n', function () {
+    context('when the locale is supported but has no translation file', function () {
+      it('returns the corresponding fallback locale', function () {
         const locale = 'nl-BE';
         const i18n = getI18n(locale);
         expect(i18n.getLocale()).to.equal('nl');
