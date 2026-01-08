@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/nr_durabilite-nov/picto-durab.jpg",
-    "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication entraîne une forte pollution, des impacts écologiques importants et même des conditions humaines difficiles. </p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts.<br><br></p>",
+    "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication entraîne une forte pollution, des impacts écologiques importants et même des conditions humaines difficiles. </p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts.</p>",
     "duration": 0,
     "level": "novice",
     "objectives": [
@@ -174,7 +174,7 @@
               "element": {
                 "id": "065435d0-7dca-4a4b-9c0e-7c9fce5ff797",
                 "type": "text",
-                "content": "<p>On sait désormais d’où viennent certains matériaux. Mais où vont-ils avant d’arriver dans nos mains ? Découvrons-le ensemble.<br><br></p>"
+                "content": "<p>On sait désormais d’où viennent certains matériaux. Mais où vont-ils avant d’arriver dans nos mains ? Découvrons-le ensemble.</p>"
               }
             }
           ]
@@ -201,34 +201,34 @@
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
                 "type": "qcu-discovery",
-                "instruction": "<p>Combien de tours de la Terre pour la fabrication d’un smartphone ?<br><br></p>",
+                "instruction": "<p>Combien de tours de la Terre pour la fabrication d’un smartphone ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>1</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
+                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>2</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
+                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>3</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
+                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>4</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
+                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
                     }
                   }
                 ],
@@ -347,7 +347,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Pour faire durer son smartphone, il faut en prendre soin ! Le protéger avec une coque et un film protecteur, mais aussi l’eloigner des sources de chaleur et des objets qui pourraient l’abîmer. Il faut aussi prendre soin de la baterie et pour cela, pas besoin de recharger votre smartphone tous les soirs ou d’attendre que la baterie soit complémtement à plat !&nbsp;<br></p>"
+                  "diagnosis": "<p>Pour faire durer son smartphone, il faut en prendre soin ! Le protéger avec une coque et un film protecteur, mais aussi l’eloigner des sources de chaleur et des objets qui pourraient l’abîmer. Il faut aussi prendre soin de la baterie et pour cela, pas besoin de recharger votre smartphone tous les soirs ou d’attendre que la baterie soit complémtement à plat !&nbsp;</p>"
                 }
               }
             }
@@ -396,7 +396,7 @@
                     {
                       "id": "f8126634-8250-49d3-b599-07e380e0c1a2",
                       "type": "text",
-                      "content": "<p>Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ? </p><p> <br><br></p>"
+                      "content": "<p>Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ? </p>"
                     }
                   ]
                 },
@@ -409,16 +409,16 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Le garder dans un tiroir au cas où elle en aurait besoin<br></p>",
+                          "content": "<p>Le garder dans un tiroir au cas où elle en aurait besoin</p>",
                           "feedback": {
-                            "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.<br></p>"
+                            "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Le donner ou le vendre</p>",
                           "feedback": {
-                            "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.&nbsp;<br><br></p>"
+                            "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.&nbsp;</p>"
                           }
                         }
                       ],
@@ -469,7 +469,7 @@
                     {
                       "id": "da5b7905-7192-43d5-a7e5-7a196ea69a48",
                       "type": "text",
-                      "content": "<p>Si vous achetez un nouveau smartphone, pensez à donner ou vendre l’ancien. Moins on multiplie les appareils, moins on pollue. Surtout, ne le&nbsp; gardez pas dans un tiroir !&nbsp;<br><br></p>"
+                      "content": "<p>Si vous achetez un nouveau smartphone, pensez à donner ou vendre l’ancien. Moins on multiplie les appareils, moins on pollue. Surtout, ne le&nbsp; gardez pas dans un tiroir !&nbsp;</p>"
                     }
                   ]
                 },
@@ -478,7 +478,7 @@
                     {
                       "id": "2cb2eb55-f652-4003-9706-5a79cb427db0",
                       "type": "text",
-                      "content": "<p>Si l’ancien smartphone ne fonctionne plus, surtout, ne le jetez pas dans une poubelle quelconque. </p><p>On retrouve ce logo sur les smartphones, comme sur la plupart des appareils électroniques&nbsp;: (image poubelle barrée)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>Il indique que ces appareils ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes.&nbsp;<br><br></p>"
+                      "content": "<p>Si l’ancien smartphone ne fonctionne plus, surtout, ne le jetez pas dans une poubelle quelconque. </p><p>On retrouve ce logo sur les smartphones, comme sur la plupart des appareils électroniques&nbsp;: (image poubelle barrée)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>Il indique que ces appareils ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes.&nbsp;</p>"
                     }
                   ]
                 },
@@ -487,7 +487,7 @@
                     {
                       "id": "d96098f4-08a5-4317-b1f4-7b79fd1b45a0",
                       "type": "text",
-                      "content": "<p>Que faire alors ? Vous pouvez déposer votre smartphone dans un point de collecte pour que les composants soient récupérés ou recyclés.&nbsp;<br><br></p>"
+                      "content": "<p>Que faire alors ? Vous pouvez déposer votre smartphone dans un point de collecte pour que les composants soient récupérés ou recyclés.&nbsp;</p>"
                     }
                   ]
                 }
@@ -505,7 +505,7 @@
               "element": {
                 "id": "a38ed311-0b93-4b45-a1d7-94390e2b6c93",
                 "type": "text",
-                "content": "<p>Désormais, vous savez qu’utiliser un smartphone a des impacts, mais aussi qu’il est possible de les réduire avec de bons gestes.<br><br></p>"
+                "content": "<p>Désormais, vous savez qu’utiliser un smartphone a des impacts, mais aussi qu’il est possible de les réduire avec de bons gestes.</p>"
               }
             }
           ]
