@@ -1,6 +1,7 @@
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -164,6 +165,22 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       // then
       expect(finalizedSession.isPublishable).to.be.true;
     });
+
+    it('is not publishable when session has some Pix Plus scope certification', function () {
+      // given / when
+      const finalizedSession = FinalizedSession.from({
+        sessionId: 1234,
+        certificationCenterName: 'a certification center',
+        sessionDate: '2021-01-29',
+        sessionTime: '16:00',
+        hasExaminerGlobalComment: false,
+        juryCertificationSummaries: _someWithPixPlusScopeCertification(),
+        finalizedAt: new Date('2020-01-01T00:00:00Z'),
+      });
+
+      // then
+      expect(finalizedSession.isPublishable).to.be.false;
+    });
   });
 
   context('#assignCertificationOfficer', function () {
@@ -251,7 +268,6 @@ function _noneWithRequiredActionNorError() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -273,7 +289,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -290,7 +305,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -312,7 +326,6 @@ function _noneWithRequiredActionButSomeErrorStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.SIGNATURE_ISSUE,
@@ -333,7 +346,6 @@ function _noneWithRequiredActionButSomeStartedStatus() {
       createdAt: new Date(),
       completedAt: null,
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.SIGNATURE_ISSUE,
@@ -354,7 +366,6 @@ function _someWithUnresolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -377,7 +388,6 @@ function _someWithResolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -401,7 +411,6 @@ function _someWhichAreUnfinishedButHaveNoAbortReason() {
       completedAt: null,
       isPublished: false,
       abortReason: null,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -424,8 +433,46 @@ function _noneWithRequiredActionButHasNoScore() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [],
+    }),
+  ];
+}
+
+function _someWithPixPlusScopeCertification() {
+  return [
+    new JuryCertificationSummary({
+      id: 1,
+      firstName: 'firstName',
+      lastName: 'lastName',
+      status: assessmentResultStatuses.VALIDATED,
+      pixScore: 120,
+      createdAt: new Date(),
+      completedAt: new Date(),
+      isPublished: false,
+      complementaryCertificationKeyObtained: null,
+      certificationIssueReports: [
+        domainBuilder.buildCertificationIssueReport({
+          category: 'NON_IMPACTFUL_CATEGORY',
+          subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
+        }),
+      ],
+    }),
+    new JuryCertificationSummary({
+      id: 1,
+      firstName: 'firstName',
+      lastName: 'lastName',
+      status: assessmentResultStatuses.VALIDATED,
+      pixScore: 120,
+      createdAt: new Date(),
+      completedAt: new Date(),
+      isPublished: false,
+      complementaryCertificationKeyObtained: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+      certificationIssueReports: [
+        domainBuilder.buildCertificationIssueReport({
+          category: 'NON_IMPACTFUL_CATEGORY',
+          subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
+        }),
+      ],
     }),
   ];
 }
