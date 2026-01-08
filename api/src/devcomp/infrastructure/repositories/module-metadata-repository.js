@@ -37,9 +37,14 @@ async function getBySlug({ slug, moduleDatasource }) {
   }
 }
 
+async function list({ moduleDatasource }) {
+  const modules = await moduleDatasource.list();
+  return modules.map(_toDomain);
+}
+
 function _toDomain(module) {
   const { id, shortId, slug, title, isBeta, details } = module;
   return new ModuleMetadata({ id, shortId, slug, title, isBeta, duration: details.duration, image: details.image });
 }
 
-export { getAllByIds, getAllByShortIds, getByShortId, getBySlug };
+export { getAllByIds, getAllByShortIds, getByShortId, getBySlug, list };

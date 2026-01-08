@@ -19,6 +19,7 @@ export class ModuleMetadata {
     this.isBeta = isBeta;
     this.duration = Number(duration);
     this.image = image;
+    this.link = `/modules/${this.shortId}/${this.slug}`;
   }
 
   #assertDurationHasPositiveValue(duration) {

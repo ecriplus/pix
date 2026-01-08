@@ -27,6 +27,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     expect(module.isBeta).to.equal(isBeta);
     expect(module.duration).to.equal(duration);
     expect(module.image).to.equal(image);
+    expect(module.link).to.equal(`/modules/${shortId}/${slug}`);
   });
 
   describe('if a module does not have an id', function () {
