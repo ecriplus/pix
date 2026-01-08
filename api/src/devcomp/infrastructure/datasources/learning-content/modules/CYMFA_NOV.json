@@ -6,7 +6,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/CY_MFA_NOV/picto_cyber_mfa_nov.svg",
-    "description": "<p>Pour vous connectez à vos différents services en ligne, vous devez entrer votre identifiant puis votre mot de passe... et parfois un code en plus 🔐 <br>Dans ce module, vous allez voir pourquoi ces étapes sont importantes et comment la double authentification renforce votre sécurité en ligne.<br> <br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em><br></p>",
+    "description": "<p>Pour vous connectez à vos différents services en ligne, vous devez entrer votre identifiant puis votre mot de passe... et parfois un code en plus 🔐 <br>Dans ce module, vous allez voir pourquoi ces étapes sont importantes et comment la double authentification renforce votre sécurité en ligne.<br> <br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -29,60 +29,48 @@
             {
               "type": "element",
               "element": {
-                "id": "6c6416ff-196c-4bb5-bc13-7a7400b360f9",
+                "id": "7cd92f4e-8c09-4339-9b61-352f11a8b343",
                 "type": "text",
-                "content": "<p>Philomène est la nouvelle présidente d’une association.&nbsp;<br>Elle vient de récupérer le mot de passe et l’identifiant pour se connecter à la boîte mail de l’association.&nbsp;📧<br>Mais au moment de se connecter, Impossible ! Philomène est bloquée.<br><br>Voici l’écran qui s’affiche&nbsp;:&nbsp;<br></p>"
+                "content": "<p>Philomène est la nouvelle présidente d’une association de protection animale.&nbsp;🐾<br>Elle doit reprendre l’utilisation de la boîte mail de l’association.</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "21de2b19-c6cb-472f-a487-8ea582aba05f",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/CY_MFA_NOV/notifasso.png",
-                "alt": "Capture d’écran décrite en détail dans l’alternative textuelle.",
-                "alternativeText": "<p>Page de vérification de connexion demandant un code à six chiffres envoyé par SMS à un numéro se terminant par 60 pour se connecter au compte lassociation@gmail.com. Champ de saisie du code et bouton «&nbsp;Suivant&nbsp;».<br></p>",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "09f1f6bb-bcc4-44b6-9761-ea223845c149",
+                "id": "0a2184ea-295d-44f1-8573-7fc9f6fec505",
                 "type": "qcu-discovery",
-                "instruction": "<p>Selon vous, pourquoi Philomène ne peut pas accéder à la boîte mail ?<br></p>",
+                "instruction": "<p>Selon vous, de quels éléments va avoir besoin Philomène pour se connecter à la boîte mail de l’association ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Philomène s’est trompé en tapant le mot de passe de la boîte mail.</p>",
+                    "content": "<p>de l’adresse mail et du nom de l’ancien président de l’association</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.</p>"
+                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.&nbsp;</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Le service de mail demande une vérification supplémentaire pour se connecter.</p>",
+                    "content": "<p>du mot de passe de la boîte mail et du nom de l’ancien président de l’association</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui ! Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br><br></p>"
+                      "diagnosis": "<p>Effectivement, pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>La boîte mail de l’association a été supprimée.</p>",
+                    "content": "<p>de l’adresse mail et du mot de passe de la boîte mail</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br></p>"
+                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe. </p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Lors de certaines connexions, certains services en ligne demandent une étape supplémentaire pour vérifier l’identité de la personne qui se connecte.<br>Ici, un code de vérification a été envoyé sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas.<br></p>"
+                      "diagnosis": "<p>Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "3"
               }
             }
           ]
@@ -97,7 +85,7 @@
               "element": {
                 "id": "5a44d403-1c9e-4f3b-8ca6-e09ba42dfb77",
                 "type": "text",
-                "content": "<p>Avant de comprendre à quoi sert cette étape de vérification supplémentaire, il faut d’abord savoir à quoi servent l’identifiant et le mot de passe lors d’une connexion.</p>"
+                "content": "<p>Voyons à quoi servent l’identifiant et le mot de passe lors d’une connexion à un service en ligne.</p>"
               }
             }
           ]
@@ -164,67 +152,60 @@
             {
               "type": "element",
               "element": {
-                "id": "ea9dfc1a-89c1-4d04-a807-5213a6cf9df9",
+                "id": "6c6416ff-196c-4bb5-bc13-7a7400b360f9",
                 "type": "text",
-                "content": "<p>Grâce à Nicolas, l’ancien président de l’association Philomène a rattaché son numéro de téléphone à la boîte mail de l’association.<br>C’est à présent Philomène qui recevra le code de vérification quand elle se connectera.<br><br>Voici les informations pour se connecter à la boîte mail&nbsp;:</p><ul><li> lassociation@pixmail.org</li><li>mdp&nbsp;: Asso12Aniw0!</li></ul>"
+                "content": "<p>Philomène vient de récupérer l’adresse mail et&nbsp;le mot de passe de&nbsp;la boîte mail de l’association.&nbsp;📧<br>Mais au moment de se connecter, Impossible ! Philomène est bloquée.<br>Voici l’écran qui s’affiche&nbsp;:&nbsp;</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
-                "type": "text",
-                "content": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.</p>"
+                "id": "21de2b19-c6cb-472f-a487-8ea582aba05f",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/CY_MFA_NOV/notifasso.png",
+                "alt": "Capture d’écran décrite en détail dans l’alternative textuelle.",
+                "alternativeText": "<p>Page de vérification de connexion demandant un code à six chiffres envoyé par SMS à un numéro se terminant par 60 pour se connecter au compte lassociation@gmail.com. Champ de saisie du code et bouton «&nbsp;Suivant&nbsp;».</p>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "2f7cd547-07b2-4134-a827-5025359d7fe1",
-                "type": "text",
-                "content": "<p>Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
-                "type": "expand",
-                "title": "🗝️ Indice 1",
-                "content": "<p>Commencez par entrer l’identifiant et le mot de passe dans l’application Mail.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "6e086f72-b417-4952-906a-45451a21190f",
-                "type": "expand",
-                "title": "🗝️ Indice 2 ",
-                "content": "<p>Un code a été reçu dans l’application Message, copiez-le.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "b0f2ce58-dd06-4890-a4ff-0ad53e9f3adb",
-                "type": "expand",
-                "title": "🗝️ Indice 3",
-                "content": "<p>Collez le code dans l’application Mail.</p>"
-              }
-            }
-          ]
-        },
-        {
-          "id": "d69a5bcb-dc7a-4247-85a6-941b0b5bc7db",
-          "type": "short-lesson",
-          "title": "Notion-2a",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "1828132d-14ee-4724-b7df-6835cfc89ff6",
-                "type": "text",
-                "content": "<p>Lors d’une connexion à un service en ligne, le code reçu par SMS sert de <strong>deuxième moyen pour vérifier votre identité</strong>.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p>"
+                "id": "09f1f6bb-bcc4-44b6-9761-ea223845c149",
+                "type": "qcu-discovery",
+                "instruction": "<p>Selon vous, pourquoi Philomène ne peut pas accéder à la boîte mail ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Philomène s’est trompé en tapant le mot de passe de la boîte mail.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une <strong>étape supplémentaire pour vérifier l’identité</strong> de la personne qui se connecte.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p><p>Ici, un<strong> code de vérification a été envoyé par SMS</strong> sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas, l’ancien président de l’association.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le service de mail demande une vérification supplémentaire pour se connecter.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh oui ! Lors de certaines connexions, certains services en ligne demandent une <strong>étape supplémentaire pour vérifier l’identité </strong>de la personne qui se connecte.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p><p>Ici, un<strong> code de vérification a été envoyé par SMS</strong> sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas, l’ancien président de l’association.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La boîte mail de l’association a été supprimée.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Lors de certaines connexions, certains services en ligne demandent une <strong>étape supplémentaire pour vérifier l’identité</strong> de la personne qui se connecte.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p><p>Ici, un<strong> code de vérification a été envoyé par SMS</strong> sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas, l’ancien président de l’association.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Lors de certaines connexions, certains services en ligne demandent une <strong>étape supplémentaire pour vérifier l’identité </strong>de la personne qui se connecte.&nbsp;🪪<br>Cela s’appelle la <strong>double authentification</strong>.</p><p>Ici, un<strong> code de vérification a été envoyé par SMS</strong> sur le numéro de téléphone lié à la boîte mail&nbsp;: le numéro de de Nicolas, l’ancien président de l’association.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
               }
             }
           ]
@@ -237,20 +218,20 @@
             {
               "type": "element",
               "element": {
+                "id": "33c65867-a99d-4ee8-88df-9c9d3d368fb4",
+                "type": "text",
+                "content": "<p>La double authentification, ce n’est pas toujours un code reçu par SMS.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "2ab37e14-affd-4917-b78a-73ee24f6f836",
                 "type": "custom-draft",
                 "title": "Moyen de double authentification",
                 "url": "https://1024pix.github.io/atelier-contenus/LSI/MFA_Nov/qcmimg.html",
                 "instruction": "<p>À votre avis, quels sont les autres moyens de vérification possibles ?</p>",
                 "height": 550
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "33c65867-a99d-4ee8-88df-9c9d3d368fb4",
-                "type": "text",
-                "content": "<p>La double authentification, ce n’est pas toujours un code reçu par SMS.</p>"
               }
             }
           ]
@@ -345,30 +326,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Le compte de Richard</p>",
+                    "content": "<p>Le compte de Richard.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, le compte de Paul est mieux protégé. <br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom.&nbsp;<br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
+                      "diagnosis": "<p>Effectivement, le compte de Richard est mieux protégé. <br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Richard.&nbsp;<br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Le compte de Sabrina</p>",
+                    "content": "<p>Le compte de Sabrina.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
+                      "diagnosis": "<p>Eh non ! C’est le compte de Richard qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Richard. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Les deux comptes sont protégés de la même manière.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
+                      "diagnosis": "<p>Eh non ! C’est le compte de Richard qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Richard. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est le compte de Paul qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Tom. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
+                      "diagnosis": "<p>C’est le compte de Richard qui est le mieux protégé.<br>Grâce à la double authentification, connaître l’identifiant et le mot de passe ne suffit plus pour accéder au compte de Richard. Par contre les pirates pourront facilement se connecter au compte de Sabrina avec son identifiant et son mot de passe.<br><br>La <strong>double authentification</strong> est une<strong> protection supplémentaire</strong> contre les connexions malveillantes.</p>"
                     }
                   }
                 ],
@@ -423,7 +404,7 @@
               "element": {
                 "id": "4b3376cc-ab7c-4d22-b6f4-95b83fc0e68e",
                 "type": "text",
-                "content": "<ul>    <li><strong>Pour accéder à un service en ligne il faut</strong>&nbsp;:&nbsp;<ul>            <li><strong>S’identifier</strong>, dire qui l’on est, avec une adresse mail, par exemple.</li>            <li><strong>S’authentifier</strong>, prouver qui l’on est, avec un mot de passe par exemple.</li>        </ul>    </li></ul><ul>    <li>La <strong>double authentification</strong> permet de mieux<strong> protéger l’accès à vos services en ligne</strong>.</li></ul><ul>    <li>Elle ajoute un<strong> second moyen de vérifier votre identité</strong> lors de vos connexions, en plus de votre mot de passe.&nbsp;✔️Par exemple&nbsp;: un code à usage unique ou une notification.</li></ul><ul>    <li>Si une personne mal intentionnée vole votre identifiant et votre mot de passe, la <strong>double authentification peut l’empêcher de se connecter</strong>. 🛡️</li></ul>"
+                "content": "<ul>    <li><strong>Pour accéder à un service en ligne il faut</strong>&nbsp;:&nbsp;<ul>            <li><strong>S’identifier</strong>, dire qui l’on est, avec une adresse mail, par exemple.</li>            <li><strong>S’authentifier</strong>, prouver qui l’on est, avec un mot de passe par exemple.</li>        </ul>    </li></ul><ul>    <li>La <strong>double authentification</strong> permet de mieux<strong> protéger l’accès à vos services en ligne</strong>.</li></ul><ul>    <li>Elle ajoute un<strong> second moyen de vérifier votre identité</strong> lors de vos connexions, en plus de votre mot de passe.&nbsp;<br>✔️Par exemple&nbsp;: un code à usage unique ou une notification.</li></ul><ul>    <li>Si une personne mal intentionnée vole votre identifiant et votre mot de passe, la <strong>double authentification peut l’empêcher de se connecter</strong>. 🛡️</li></ul>"
               }
             }
           ]
@@ -508,12 +489,12 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>.</spanp>"
+                    "content": "<span>.</span>"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p><strong>Bonne réponse ! 🎉</strong><br></p>",
+                    "state": "<p><strong>Bonne réponse ! 🎉</strong></p>",
                     "diagnosis": "<p>L’identifiant et le mot de passe sont les deux éléments nécessaires pour pouvoir se connecter à un service en ligne.</p>"
                   },
                   "invalid": {
@@ -632,7 +613,7 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "state": "<p><strong>Mauvaise réponse.</strong><br></p>",
+                            "state": "<p><strong>Mauvaise réponse.</strong></p>",
                             "diagnosis": "<p>Ici, Nassim ne tente pas d’accéder à son réseau social à l’aide d’une seconde preuve d’identité. Il effectue une action différente&nbsp;: réinitialiser un mot de passe.</p>"
                           }
                         },
@@ -733,47 +714,52 @@
             {
               "type": "element",
               "element": {
-                "id": "8435269a-1ee0-4e0c-8f25-c004643dea87",
+                "id": "ea9dfc1a-89c1-4d04-a807-5213a6cf9df9",
                 "type": "text",
-                "content": "<p>Vous recevez sur votre smartphone une demande d’authentification de connexion à votre boîte mail. Pourtant vous n’êtes pas en train d’essayer de vous connecter.&nbsp;</p>"
+                "content": "<p>Grâce à Nicolas, l’ancien président de l’association Philomène a rattaché son numéro de téléphone à la boîte mail de l’association.<br>C’est à présent Philomène qui recevra le code de vérification quand elle se connectera.<br><br>Voici les informations pour se connecter à la boîte mail&nbsp;:</p><ul><li> lassociation@pixmail.org</li><li>mdp&nbsp;: Asso12Aniw0!</li></ul>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "9ea08f13-2472-4fa8-80e3-4b2b6f673db9",
-                "type": "qcu-declarative",
-                "instruction": "<p>Que faites vous ?&nbsp;</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>Je change rapidement le mot de passe du compte concerné.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>Je valide la demande pour vérifier ce qu’il se passe.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe, surtout pas de valider la connexion.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>J’ignore le message.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Ignorer la notification, ce n’est pas suffisant. Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Je ne sais pas.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Recevoir une demande d’authentification sans être à l’origine de la connexion peut indiquer une tentative de connexion malveillante.</p><p>Le bon réflexe est de <strong>sécuriser rapidement le compte</strong> en changeant le mot de passe.</p>"
-                    }
-                  }
-                ]
+                "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
+                "type": "text",
+                "content": "<p>Aidez là à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2f7cd547-07b2-4134-a827-5025359d7fe1",
+                "type": "text",
+                "content": "<p>Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d52702a-0de3-4758-9418-0452e2fd5b5b",
+                "type": "expand",
+                "title": "🗝️ Indice 1",
+                "content": "<p>Commencez par entrer l’identifiant et le mot de passe dans l’application Mail.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6e086f72-b417-4952-906a-45451a21190f",
+                "type": "expand",
+                "title": "🗝️ Indice 2 ",
+                "content": "<p>Un code a été reçu dans l’application Message, copiez-le.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b0f2ce58-dd06-4890-a4ff-0ad53e9f3adb",
+                "type": "expand",
+                "title": "🗝️ Indice 3",
+                "content": "<p>Collez le code dans l’application Mail.</p>"
               }
             }
           ]
