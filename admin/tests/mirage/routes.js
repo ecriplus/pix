@@ -711,8 +711,8 @@ export default function routes() {
     };
   });
 
-  this.get('/combined-course-blueprints');
-  this.post('/combined-course-blueprints');
+  this.get('/admin/combined-course-blueprints');
+  this.post('/admin/combined-course-blueprints');
 
   _configureOrganizationsRoutes(this);
 }
