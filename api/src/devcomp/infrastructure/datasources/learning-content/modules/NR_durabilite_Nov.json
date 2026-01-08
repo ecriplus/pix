@@ -5,6 +5,7 @@
   "title": "Smartphones : pourquoi les conserver plus longtemps ?",
   "isBeta": true,
   "details": {
+    "image": "",
     "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication entraîne une forte pollution, des impacts écologiques importants et même des conditions humaines difficiles. </p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts.<br><br></p>",
     "duration": 0,
     "level": "novice",
@@ -36,10 +37,12 @@
               "type": "element",
               "element": {
                 "id": "f26b642c-4ffc-431f-b561-c6be35452d42",
-                "type": "custom-draft",
-                "title": "Radiographie d’un smartphone",
-                "instruction": "<p>Survolez l’imageet observez ce que vous avez dans la main quand vous tenez votre smartphone.</p>",
-                "height": 0
+                "type": "image",
+                "url": "https://assets.pix.org/modules/nr_durabilite-nov/chat-gpt-image-nov-5-2025-03_51_38-pm.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
@@ -76,19 +79,22 @@
                 "id": "62b4e1dc-725f-4d09-b0b3-e78281fb1368",
                 "type": "flashcards",
                 "instruction": "<p>Voici quelques métaux que vous trouvez dans votre smartphone. Savez-vous d’où ils viennent ? Retournez les cartes pour en savoir plus.</p>",
-                "title": "cartes à retourner",
+                "title": "",
                 "introImage": {
+                  "url": ""
                 },
                 "cards": [
                   {
                     "id": "fa66cbed-cd1f-4c50-96f7-1a84e7aae868",
                     "recto": {
                       "image": {
+                        "url": ""
                       },
                       "text": "Mon extraction pollue localement. Je suis très présent dans les batteries. Qui suis-je ? "
                     },
                     "verso": {
                       "image": {
+                        "url": ""
                       },
                       "text": "<p>Le lithium</p>"
                     }
@@ -97,11 +103,13 @@
                     "id": "31a0ea74-14ac-4b62-8c42-5b0d77263714",
                     "recto": {
                       "image": {
+                        "url": ""
                       },
                       "text": "je blablabla qui suis-je ?"
                     },
                     "verso": {
                       "image": {
+                        "url": ""
                       },
                       "text": "<p>L’argent</p>"
                     }
@@ -110,11 +118,13 @@
                     "id": "3725c8af-f3ff-4265-8ee3-5e1ce1ac2297",
                     "recto": {
                       "image": {
+                        "url": ""
                       },
                       "text": "Je suis précieux. Qui suis-je ?"
                     },
                     "verso": {
                       "image": {
+                        "url": ""
                       },
                       "text": "<p>L’or</p>"
                     }
@@ -123,11 +133,13 @@
                     "id": "596ac67b-4282-448b-a51b-6cb3a1f8c015",
                     "recto": {
                       "image": {
+                        "url": ""
                       },
                       "text": "Des enfants travaillent dans les mines pour m’extraire. Les conditions de travail sont si précaire qu’il y a souvent des accidents qui font de nombreux morts. Qui suis-je ?"
                     },
                     "verso": {
                       "image": {
+                        "url": ""
                       },
                       "text": "<p>Le cobalt</p>"
                     }
@@ -176,10 +188,12 @@
               "type": "element",
               "element": {
                 "id": "fc032754-5808-49ef-86e3-9a2909583467",
-                "type": "custom-draft",
-                "title": "Carte interactive",
-                "instruction": "Cliquez sur les boutons pour connaître les trajets effectués à chaque étape",
-                "height": 0
+                "type": "image",
+                "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -273,6 +287,8 @@
                     "id": "4cbc176e-d10f-480a-ba7a-2f54352d512b",
                     "text": "Mettre une coque",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -282,6 +298,8 @@
                     "id": "9f2d0d1a-0655-4728-aa7e-10e2013f088a",
                     "text": "Laisser le téléphone en plein soleil ou près d’une source de chaleur",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -291,6 +309,8 @@
                     "id": "c494c557-d38e-4ee5-97ed-5772415a490e",
                     "text": "Le charger toute la nuit tous les jours",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -300,6 +320,8 @@
                     "id": "7c31a22e-5b87-4f66-93a7-f4e26dfad379",
                     "text": "Nettoyer l’écran doucement ",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -309,6 +331,8 @@
                     "id": "b78fa095-e37e-411b-b6cf-9fa1d30cbaaf",
                     "text": "Poser un film de protection",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -318,6 +342,8 @@
                     "id": "8e062fe2-4588-4dae-97b9-87ec3e5e923c",
                     "text": "Mettre son téléphone dans une poche avec des clés",
                     "image": {
+                      "url": "",
+                      "altText": ""
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
@@ -375,13 +401,6 @@
                       "id": "f8126634-8250-49d3-b599-07e380e0c1a2",
                       "type": "text",
                       "content": "<p>Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ? </p><p> <br><br></p>"
-                    },
-                    {
-                      "id": "37271b5a-a2cb-42a4-a94c-cb9117d120da",
-                      "type": "custom-draft",
-                      "title": "POI Découvrir l’impact des actions",
-                      "instruction": "Cliquer sur les options pour découvrir les impacts de chaque action",
-                      "height": 0
                     }
                   ]
                 },
@@ -521,16 +540,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "03f88321-f803-4fca-9a52-f736b480d999",
-      "type": "practise",
-      "grains": []
-    },
-    {
-      "id": "adca2e70-3f65-469d-8b2b-f31d3a090807",
-      "type": "go-further",
-      "grains": []
     }
   ]
 }
