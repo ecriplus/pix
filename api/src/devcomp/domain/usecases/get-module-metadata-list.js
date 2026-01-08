@@ -1,5 +1,5 @@
-async function getModuleMetadataList({ ids, moduleMetadataRepository }) {
-  return moduleMetadataRepository.getAllByIds({ ids });
+async function getModuleMetadataList({ moduleMetadataRepository }) {
+  return moduleMetadataRepository.list();
 }
 
 export { getModuleMetadataList };
