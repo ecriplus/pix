@@ -14,6 +14,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
         isBeta: false,
         duration: 10,
         image: 'https://example.net',
+        visibility: 'public',
       });
 
       const secondModuleMetadata = new ModuleMetadata({
@@ -24,6 +25,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
         isBeta: false,
         duration: 20,
         image: 'https://example.net',
+        visibility: 'private',
       });
 
       const expectedJson = {
@@ -39,6 +41,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
               duration: firstModuleMetadata.duration,
               image: firstModuleMetadata.image,
               link: `/modules/${firstModuleMetadata.shortId}/${firstModuleMetadata.slug}`,
+              visibility: firstModuleMetadata.visibility,
             },
           },
           {
@@ -52,6 +55,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
               duration: secondModuleMetadata.duration,
               image: secondModuleMetadata.image,
               link: `/modules/${secondModuleMetadata.shortId}/${secondModuleMetadata.slug}`,
+              visibility: secondModuleMetadata.visibility,
             },
           },
         ],
