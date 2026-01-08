@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.298.0](https://github.com/1024pix/pix/compare/v5.297.0...v5.298.0) (2026-01-08)
+
+### :rocket: Amélioration
+
+- [#14646](https://github.com/1024pix/pix/pull/14646) Créer la route permettant de récupérer la liste des modules pour Pix Admin (PIX-20919). 
+- [#14598](https://github.com/1024pix/pix/pull/14598) Créer le compte et connecter l'utilisateur via SSO Pix Orga (PIX-20666) 
+- [#14629](https://github.com/1024pix/pix/pull/14629) Filtrer les sessions avec certifications Pix+ terminées de la liste des sessions à publier (PIX-21006) 
+- [#14625](https://github.com/1024pix/pix/pull/14625) MDX-32 Retours editos NR-Datacenter-NOV 
+- [#14537](https://github.com/1024pix/pix/pull/14537) Mettre en place une validation plus spécifique sur le formulaire de création d'organisation (PIX-20697) 
+- [#14502](https://github.com/1024pix/pix/pull/14502) Module Phishing_NOV ajout POI 
+
+### :building_construction: Tech
+
+- [#14554](https://github.com/1024pix/pix/pull/14554) Ajout de JSDoc dans le `certification-candidate-repository` 
+- [#14648](https://github.com/1024pix/pix/pull/14648) Suppression du script UpdateModulixTrainingsLink (PIX-21028). 
+
+### :coffee: Autre
+
 # [5.297.0](https://github.com/1024pix/pix/compare/v5.296.0...v5.297.0) (2026-01-07)
 
 ### :rocket: Amélioration
