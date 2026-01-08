@@ -5,9 +5,11 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
+import setupIntl from '../../../helpers/setup-intl';
 
 module('Unit | Component | session-supervising/candidate-in-list', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks, 'fr');
 
   module('validateLiveAlert', function () {
     module('when there is no error', function () {
