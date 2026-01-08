@@ -691,6 +691,15 @@
           "firstname": "Firstname of ",
           "lastname": "Lastname of "
         },
+        "error-messages": {
+          "administration-team": "Administration team is required",
+          "country": "Country is required",
+          "documentation-url": "The link to the documentation is not in the correct format",
+          "dpo-email": "The email adress is not in the correct format",
+          "error-toast": "Please correct the fields with errors.",
+          "name": "Name is required",
+          "type": "Organization type is required"
+        },
         "external-id": {
           "label": "External Identifier",
           "placeholder": "Specify the UAI, SIRET etc"
@@ -703,7 +712,6 @@
         },
         "parent-organization-name": "Parent organization: {parentOrganizationName}",
         "province-code": "Province code (3 digits)",
-        "required-fields-error": "Please fill in all required fields.",
         "type": {
           "label": "Type of the organization",
           "placeholder": "Select one type"

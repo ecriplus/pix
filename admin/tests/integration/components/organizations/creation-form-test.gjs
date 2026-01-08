@@ -1,5 +1,6 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import Service from '@ember/service';
+import { click, triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CreationForm from 'pix-admin/components/organizations/creation-form';
 import { module, test } from 'qunit';
@@ -12,7 +13,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
   const onSubmit = () => {};
   const onCancel = () => {};
 
-  let store;
+  let store, errorNotificationStub;
 
   const countries = [
     { code: '99100', name: 'France' },
@@ -26,6 +27,12 @@ module('Integration | Component | organizations/creation-form', function (hooks)
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+
+    errorNotificationStub = sinon.stub();
+    class NotificationsStub extends Service {
+      sendErrorNotification = errorNotificationStub;
+    }
+    this.owner.register('service:pixToast', NotificationsStub);
   });
 
   module('Render', function () {
@@ -310,7 +317,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       await screen.findByRole('listbox');
       click(await screen.findByRole('option', { name: 'France (99100)' }));
 
-      await fillByLabel(t('components.organizations.creation.documentation-link'), 'www.documentation.fr');
+      await fillByLabel(t('components.organizations.creation.documentation-link'), 'https://www.documentation.fr');
 
       await fillByLabel(`${t('components.organizations.creation.dpo.firstname')}DPO`, 'Justin');
       await fillByLabel(`${t('components.organizations.creation.dpo.lastname')}DPO`, 'Ptipeu');
@@ -327,13 +334,170 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         administrationTeamId: 'team-2',
         provinceCode: '78',
         countryCode: '99100',
-        documentationUrl: 'www.documentation.fr',
+        documentationUrl: 'https://www.documentation.fr',
         dataProtectionOfficerFirstName: 'Justin',
         dataProtectionOfficerLastName: 'Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
       };
 
       assert.ok(handleSubmitStub.calledWith(expectedForm));
+    });
+
+    module('errors', function () {
+      module('when required fields are not filled in', function () {
+        test('should not submit form', async function (assert) {
+          // given
+          const handleSubmitStub = sinon.stub();
+
+          const screen = await render(
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @countries={{countries}}
+                @onSubmit={{handleSubmitStub}}
+              />
+            </template>,
+          );
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          assert.ok(handleSubmitStub.notCalled);
+        });
+
+        test('should display error toast and display specific error messages on required fields', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          const nameErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.name'));
+          const typeErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.type'));
+          const administrationTeamErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.administration-team'),
+          );
+          const countryErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.country'));
+
+          assert.ok(nameErrorMessage);
+          assert.ok(typeErrorMessage);
+          assert.ok(administrationTeamErrorMessage);
+          assert.ok(countryErrorMessage);
+          assert.ok(
+            errorNotificationStub.calledWithExactly({
+              message: t('components.organizations.creation.error-messages.error-toast'),
+            }),
+          );
+        });
+      });
+
+      module('validation for optional fields', function () {
+        test('should display specific error if documentation link or DPO email are not valid', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          await fillByLabel(t('components.organizations.creation.documentation-link'), 'non-valid-documentation-url');
+          await fillByLabel(`${t('components.organizations.creation.dpo.email')}DPO`, 'non-valid-email');
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          // then
+          const nonValidDocumentationUrlErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.documentation-url'),
+          );
+
+          const nonValidDPOEmailErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.dpo-email'),
+          );
+
+          assert.ok(nonValidDocumentationUrlErrorMessage);
+          assert.ok(nonValidDPOEmailErrorMessage);
+        });
+      });
+
+      test('should make error messages disappear when updating fields in error with correct values', async function (assert) {
+        // given
+        const screen = await render(
+          <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+        );
+
+        await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+
+        click(screen.getByRole('button', { name: `${t('components.organizations.creation.type.label')} *` }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Établissement scolaire' }));
+
+        click(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.creation.administration-team.selector.label')} *`,
+          }),
+        );
+        await screen.findByRole('listbox');
+        await click(await screen.findByRole('option', { name: 'Équipe 2' }));
+
+        const dpoEmailLabel = `${t('components.organizations.creation.dpo.email')}DPO`;
+        const dpoEmailInput = screen.getByRole('textbox', { name: dpoEmailLabel });
+        await fillByLabel(dpoEmailLabel, 'invalid-email');
+        await triggerEvent(dpoEmailInput, 'focusout');
+
+        await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+        // when
+        click(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.creation.country.selector.label')} *`,
+          }),
+        );
+        await screen.findByRole('listbox');
+        await click(await screen.findByRole('option', { name: 'France (99100)' }));
+
+        await fillByLabel(dpoEmailLabel, 'justin.ptipeu@example.net');
+        await triggerEvent(dpoEmailInput, 'focusout');
+
+        //then
+        assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.country')));
+        assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.dpo-email')));
+      });
+    });
+  });
+
+  module('when filling form', function () {
+    test("should display error messages 'on the go' when filling form with non-valid information", async function (assert) {
+      // given
+      const screen = await render(
+        <template>
+          <CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} @onCancel={{onCancel}} />
+        </template>,
+      );
+
+      // when
+      const nameInputLabel = `${t('components.organizations.creation.name.label')} *`;
+      const nameInput = screen.getByRole('textbox', { name: nameInputLabel });
+      await fillByLabel(nameInputLabel, 'Organisation de Test');
+      await fillByLabel(nameInputLabel, '');
+      await triggerEvent(nameInput, 'focusout');
+
+      const documentationUrlLabel = t('components.organizations.creation.documentation-link');
+      const documentationUrlInput = screen.getByRole('textbox', { name: documentationUrlLabel });
+      await fillByLabel(documentationUrlLabel, 'invalid-documentation-url');
+      await triggerEvent(documentationUrlInput, 'focusout');
+
+      const dpoEmailLabel = `${t('components.organizations.creation.dpo.email')}DPO`;
+      const dpoEmailInput = screen.getByRole('textbox', { name: dpoEmailLabel });
+      await fillByLabel(dpoEmailLabel, 'invalid-email');
+      await triggerEvent(dpoEmailInput, 'focusout');
+
+      //then
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.name')));
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.documentation-url')));
+      assert.ok(screen.getByText(t('components.organizations.creation.error-messages.dpo-email')));
     });
   });
 });

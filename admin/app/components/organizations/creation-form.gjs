@@ -7,12 +7,15 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import Joi from 'joi';
+import { FormValidator } from 'pix-admin/utils/form-validator';
 
 import Card from '../card';
 
 export default class OrganizationCreationForm extends Component {
   @service store;
   @service intl;
+  @service pixToast;
 
   @tracked form = {
     administrationTeamId: this.parentOrganizationAdministrationTeamId,
@@ -27,6 +30,8 @@ export default class OrganizationCreationForm extends Component {
     { value: 'SUP', label: 'Établissement supérieur' },
     { value: 'SCO-1D', label: 'Établissement scolaire du premier degré' },
   ];
+
+  validator = new FormValidator(ORGANIZATION_CREATION_FORM_VALIDATION_SCHEMA);
 
   get administrationTeamsOptions() {
     const options = this.args.administrationTeams.map((administrationTeam) => ({
@@ -76,15 +81,25 @@ export default class OrganizationCreationForm extends Component {
   }
 
   handleInputChange = (key, event) => {
-    this.form = { ...this.form, [key]: event.target.value };
+    const { value } = event.target;
+    this.validator.validateField(key, value);
+    this.form = { ...this.form, [key]: value };
   };
 
   handleSelectChange = (key, value) => {
+    this.validator.validateField(key, value);
     this.form = { ...this.form, [key]: value };
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const isFormValid = this.validator.validate(this.form);
+    if (!isFormValid) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.organizations.creation.error-messages.error-toast'),
+      });
+      return;
+    }
     this.args.onSubmit(this.form);
   };
 
@@ -111,14 +126,15 @@ export default class OrganizationCreationForm extends Component {
             <PixInput
               @id="organizationName"
               {{on "change" (fn this.handleInputChange "name")}}
-              required={{true}}
-              aria-required={{true}}
               @requiredLabel={{t "common.fields.required-field"}}
               placeholder={{concat
                 (t "common.words.example-abbr")
                 " "
                 (t "components.organizations.creation.name.placeholder")
               }}
+              required={{false}}
+              @validationStatus={{if this.validator.errors.name "error"}}
+              @errorMessage={{if this.validator.errors.name (t this.validator.errors.name)}}
             >
               <:label>{{t "components.organizations.creation.name.label"}}</:label>
             </PixInput>
@@ -130,9 +146,8 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.type.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.type}}
-            required
-            aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
+            @errorMessage={{if this.validator.errors.type (t this.validator.errors.type)}}
           >
             <:label>{{t "components.organizations.creation.type.label"}}</:label>
             <:default as |organizationType|>{{organizationType.label}}</:default>
@@ -144,9 +159,11 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.administrationTeamId}}
-            required
-            aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
+            @errorMessage={{if
+              this.validator.errors.administrationTeamId
+              (t this.validator.errors.administrationTeamId)
+            }}
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
@@ -157,10 +174,9 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{this.form.countryCode}}
-            required
-            @aria-required={{true}}
             @requiredLabel={{t "common.fields.required-field"}}
             @isSearchable={{true}}
+            @errorMessage={{if this.validator.errors.countryCode (t this.validator.errors.countryCode)}}
           >
             <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
           </PixSelect>
@@ -194,6 +210,8 @@ export default class OrganizationCreationForm extends Component {
               {{on "change" (fn this.handleInputChange "documentationUrl")}}
               placeholder={{concat (t "common.words.example-abbr") " https://www.documentation.org"}}
               @value="{{this.form.documentationUrl}}"
+              @validationStatus={{if this.validator.errors.documentationUrl "error"}}
+              @errorMessage={{if this.validator.errors.documentationUrl (t this.validator.errors.documentationUrl)}}
             >
               <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
             </PixInput>
@@ -228,6 +246,11 @@ export default class OrganizationCreationForm extends Component {
               @id="dataProtectionOfficerEmail"
               {{on "change" (fn this.handleInputChange "dataProtectionOfficerEmail")}}
               placeholder={{concat (t "common.words.example-abbr") " jean-dupont@example.net"}}
+              @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
+              @errorMessage={{if
+                this.validator.errors.dataProtectionOfficerEmail
+                (t this.validator.errors.dataProtectionOfficerEmail)
+              }}
             >
               <:label>{{t "components.organizations.creation.dpo.email"}}
                 <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
@@ -249,3 +272,33 @@ export default class OrganizationCreationForm extends Component {
     </form>
   </template>
 }
+
+const ORGANIZATION_CREATION_FORM_VALIDATION_SCHEMA = Joi.object({
+  name: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.creation.error-messages.name',
+    'string.empty': 'components.organizations.creation.error-messages.name',
+  }),
+  type: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.creation.error-messages.type',
+    'string.empty': 'components.organizations.creation.error-messages.type',
+  }),
+  administrationTeamId: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.creation.error-messages.administration-team',
+    'string.empty': 'components.organizations.creation.error-messages.administration-team',
+  }),
+  countryCode: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.creation.error-messages.country',
+    'string.empty': 'components.organizations.creation.error-messages.country',
+  }),
+  provinceCode: Joi.string().empty(['', null]).optional(),
+  externalId: Joi.string().empty(['', null]).optional(),
+  documentationUrl: Joi.string().uri().empty(['', null]).optional().messages({
+    'string.uri': 'components.organizations.creation.error-messages.documentation-url',
+  }),
+  dataProtectionOfficerLastName: Joi.string().empty(['', null]).optional(),
+  dataProtectionOfficerFirstName: Joi.string().empty(['', null]).optional(),
+
+  dataProtectionOfficerEmail: Joi.string().email().empty(['', null]).optional().messages({
+    'string.email': 'components.organizations.creation.error-messages.dpo-email',
+  }),
+});

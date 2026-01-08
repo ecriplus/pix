@@ -23,15 +23,6 @@ export default class NewController extends Controller {
 
   @action
   async addOrganization(form) {
-    const { name, type, administrationTeamId, countryCode } = form;
-
-    if (!name || !type || !administrationTeamId || !countryCode) {
-      this.pixToast.sendErrorNotification({
-        message: this.intl.t('components.organizations.creation.required-fields-error'),
-      });
-      return;
-    }
-
     const organization = this.store.createRecord('organization', { ...form });
 
     if (this.parentOrganizationId) {

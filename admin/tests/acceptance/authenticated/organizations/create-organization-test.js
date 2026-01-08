@@ -135,13 +135,12 @@ module('Acceptance | Organizations | Create', function (hooks) {
     test('it shows validation errors if form is not correctly filled', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
-      await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Stark Corp.');
 
       // when
       await clickByName(t('common.actions.add'));
 
       // then
-      assert.dom(screen.getByText(t('components.organizations.creation.required-fields-error'))).exists();
+      assert.dom(screen.getByText(t('components.organizations.creation.error-messages.error-toast'))).exists();
     });
   });
 });

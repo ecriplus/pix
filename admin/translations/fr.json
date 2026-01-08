@@ -693,6 +693,15 @@
           "firstname": "Prénom du ",
           "lastname": "Nom du "
         },
+        "error-messages": {
+          "administration-team": "L'équipe en charge est requise",
+          "country": "Le pays est requis",
+          "documentation-url": "Le lien vers la documentation n'est pas au bon format",
+          "dpo-email": "L'adresse e-mail n'est pas au bon format",
+          "error-toast": "Veuillez corriger les champs en erreur.",
+          "name": "Le nom est requis",
+          "type": "Le type d'organisation est requis"
+        },
         "external-id": {
           "label": "Identifiant externe",
           "placeholder": "Spécifier l'UAI, le SIRET etc"
@@ -705,7 +714,6 @@
         },
         "parent-organization-name": "Organisation mère : {parentOrganizationName}",
         "province-code": "Département (en 3 chiffres)",
-        "required-fields-error": "Veuillez remplir tous les champs obligatoires.",
         "type": {
           "label": "Type de l'organisation",
           "placeholder": "Sélectionner un type"

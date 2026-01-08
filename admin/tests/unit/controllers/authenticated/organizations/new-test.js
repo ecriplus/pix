@@ -90,32 +90,5 @@ module('Unit | Controller | authenticated/organizations/new', function (hooks) {
         assert.true(findParentOrganizationModelStub.notCalled);
       });
     });
-
-    module('Mandatory fields', function (hooks) {
-      const mandatoryFields = { name: 'New Orga', type: 'SCO', administrationTeamId: '456', countryCode: '99100' };
-
-      const form = {
-        name: mandatoryFields.name,
-        type: mandatoryFields.type,
-        administrationTeamId: mandatoryFields.administrationTeamId,
-        countryCode: mandatoryFields.countryCode,
-      };
-
-      Object.keys(mandatoryFields).forEach(function (mandatoryField) {
-        hooks.afterEach(function () {
-          form[mandatoryField] = mandatoryFields[mandatoryField];
-        });
-        test(`should not create model if ${mandatoryField} property is missing`, async function (assert) {
-          // given
-          form[mandatoryField] = undefined;
-
-          // when
-          await controller.addOrganization(form);
-
-          // then
-          assert.true(createRecordStub.notCalled);
-        });
-      });
-    });
   });
 });
