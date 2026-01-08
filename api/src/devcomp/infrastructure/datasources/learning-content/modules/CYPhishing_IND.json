@@ -4,6 +4,7 @@
   "slug": "anatomie-message-arnaque",
   "title": "Anatomie d’un message d’arnaque",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/draft/modules/cy_phishing_ind/picto_cyber_phishing_ind.svg",
     "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi des réflexes pour vous protéger et protéger les autres. 🕵️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",

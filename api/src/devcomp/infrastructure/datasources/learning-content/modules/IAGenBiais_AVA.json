@@ -4,6 +4,7 @@
   "slug": "iagenbiais-avance",
   "title": "IA génératives : Qui programme la morale ?",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les IA génératives peuvent fournir des réponses utiles, mais aussi des erreurs ou des biais. Leur entraînement repose sur d’immenses ensembles de textes sélectionnés par des humains, ce qui influence profondément ce que l’IA juge acceptable ou non. Or ces choix reflètent des normes différentes selon les pays. Ce module vous aide à comprendre comment ces règles sont définies et qui programme la «&nbsp;morale&nbsp;» suivie par l’IA.</p>",

@@ -4,6 +4,7 @@
   "slug": "comment-envoyer-un-mail",
   "title": "Comment envoyer un mail ? ",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg",
     "description": "En contexte professionnel et associatif ou pour communiquer avec des proches, envoyer des mails est indispensable.<br>Dans ce module, découvrez les étapes pour envoyer un mail simplement et le rôle des champs dans un mail.",

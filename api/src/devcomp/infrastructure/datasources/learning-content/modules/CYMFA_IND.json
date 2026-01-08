@@ -4,6 +4,7 @@
   "slug": "mfa-authentification-multifacteur",
   "title": "Plus puissante qu’un mot de passe : l’authentification multifacteur",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYMFA_IND/picto_cyber_mfa_ind.svg",
     "description": "<p>Pour accéder à un compte en ligne ou déverrouiller ses appareils numériques, il faut s’authentifier, c’est-à-dire prouver qu’on est bien la personne que l’on prétend être. 🕵️ </p><p>En plus de donner son mot de passe, une seconde étape est parfois nécessaire. Dans ce module, découvrez pourquoi et comment on ajoute cette étape de sécurité supplémentaire. 🔒</p><p><br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em><br><br></p>",

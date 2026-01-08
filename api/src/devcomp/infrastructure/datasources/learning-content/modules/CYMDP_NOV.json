@@ -4,6 +4,7 @@
   "slug": "cyber-mdp-fort",
   "title": "Un mot de passe fort, c’est quoi ?",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒</p>",

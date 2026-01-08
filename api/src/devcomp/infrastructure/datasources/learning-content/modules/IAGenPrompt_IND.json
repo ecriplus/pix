@@ -4,6 +4,7 @@
   "slug": "prompt-intermediaire",
   "title": "J’améliore mes prompts !",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
     "description": "<p>Les logiciels d’IA générative permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne. Dans ce module, vous allez apprendre à formuler des prompts efficaces et à ajuster vos demandes pour améliorer le résultat proposé par le logiciel d’IA générative.&nbsp;<br></p>",

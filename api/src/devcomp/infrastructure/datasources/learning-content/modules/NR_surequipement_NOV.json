@@ -4,6 +4,7 @@
   "slug": "surequipement",
   "title": "30 milliards d’appareils numériques :  et moi dans tout ça ?",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Une nouvelle télévision, un ordinateur plus puissant, un ancien téléphone oublié dans un tiroir… Sans toujours nous en rendre compte, nous accumulons au fil des années de plus en plus d’appareils numériques. </p><p>Dans ce module, vous comprendrez ce qu’est concrètement le suréquipement numérique. Vous allez découvrir comment vos appareils consomment même lorsqu’ils semblent “à l’arrêt” et comment certains gestes peuvent faire la différence.&nbsp;<br></p>",

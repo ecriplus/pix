@@ -4,6 +4,7 @@
   "slug": "nr-coulisses-centre-donnees",
   "title": "Dans les coulisses d’un centre de données",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Hébergeant l’ensemble des données et services en ligne, les centres de données sont devenus indispensables à nos usages numériques. <br><br>Dans ce module, vous allez être plongé dans le fonctionnement d’un centre de données et allez découvrir comment les évolutions technologiques successives amènent à des usages toujours plus consommateurs d’énergie.<br></p>",

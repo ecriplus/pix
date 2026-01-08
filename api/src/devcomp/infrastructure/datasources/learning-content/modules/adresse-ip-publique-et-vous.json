@@ -4,6 +4,7 @@
   "slug": "adresse-ip-publique-et-vous",
   "title": "L'adresse IP publique : ce qu'elle révèle sur vous !",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Quand vous naviguez sur internet, vous partagez des informations et laissez ainsi de nombreuses traces : adresse IP, cookies, historique, etc. Dans ce module, découvrez ce qu'est une adresse IP publique et ce qu’elle dévoile sur vous.</p>",

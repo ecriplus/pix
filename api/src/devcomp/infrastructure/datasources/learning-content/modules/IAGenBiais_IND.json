@@ -4,6 +4,7 @@
   "slug": "ia-bias-ind",
   "title": "Les biais des IA génératives",
   "isBeta": false,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenBiais_IND/picto_moduleIA_biais.svg",
     "description": "<p>Les productions des logiciels d’IA génératives contiennent parfois des maladresses. Ce ne sont pas toujours des erreurs, mais des raccourcis, des stéréotypes ou des discriminations.  On dit que ces résultats comportent des biais. </p><p>Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.<br></p>",
