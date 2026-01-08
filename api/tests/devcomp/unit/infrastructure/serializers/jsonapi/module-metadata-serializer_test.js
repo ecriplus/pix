@@ -31,7 +31,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
       const expectedJson = {
         data: [
           {
-            type: 'module-metadata',
+            type: 'module-metadatas',
             id: firstModuleMetadata.id,
             attributes: {
               'short-id': firstModuleMetadata.shortId,
@@ -45,7 +45,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleMetada
             },
           },
           {
-            type: 'module-metadata',
+            type: 'module-metadatas',
             id: secondModuleMetadata.id,
             attributes: {
               'short-id': secondModuleMetadata.shortId,
