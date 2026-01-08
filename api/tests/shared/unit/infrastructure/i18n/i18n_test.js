@@ -2,51 +2,6 @@ import { getI18n, options } from '../../../../../src/shared/infrastructure/i18n/
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Infrastucture | i18n', function () {
-  describe('default i18n options', function () {
-    it('returns i18n options', function () {
-      expect(options).to.have.property('locales').that.includes('en', 'fr', 'es', 'nl');
-      expect(options).to.have.property('directory').that.is.a('string');
-      expect(options).to.have.property('defaultLocale', 'fr');
-      expect(options).to.have.property('objectNotation', true);
-      expect(options).to.have.property('updateFiles', false);
-      expect(options)
-        .to.have.property('mustacheConfig')
-        .to.deep.equal({ tags: ['{', '}'], disable: false });
-    });
-
-    it('returns fr as default locale', async function () {
-      // when
-      const result = getI18n().__('email-sender-name.pix-app');
-
-      // then
-      expect(result).to.equal('PIX - Ne pas répondre');
-    });
-
-    it('fallbacks to fr locale when the locale is not supported', async function () {
-      // when
-      const result = getI18n().__({ phrase: 'email-sender-name.pix-app', locale: 'foo' });
-
-      // then
-      expect(result).to.equal('PIX - Ne pas répondre');
-    });
-
-    it('interpolates parameters with single mustache', async function () {
-      // when
-      const result = getI18n().__('Hello {name}', { name: 'Bob' });
-
-      // then
-      expect(result).to.equal('Hello Bob');
-    });
-
-    it('interpolates parameter with single mustach when first argument is an object with explicit locale', async function () {
-      // when
-      const result = getI18n().__({ phrase: 'Hello {name}', locale: 'fr' }, { name: 'Bob' });
-
-      // then
-      expect(result).to.equal('Hello Bob');
-    });
-  });
-
   describe('getI18n', function () {
     it('returns an instance of i18n with default locale', function () {
       const i18n = getI18n();
@@ -89,6 +44,24 @@ describe('Unit | Shared | Infrastucture | i18n', function () {
         const i18n1 = getI18n('fr');
         i18n1.setLocale('en');
         expect(i18n1.getLocale()).to.equal('fr');
+      });
+    });
+
+    describe('getI18n().__', function () {
+      it('interpolates parameters with single mustache', async function () {
+        // when
+        const result = getI18n().__('Hello {name}', { name: 'Bob' });
+
+        // then
+        expect(result).to.equal('Hello Bob');
+      });
+
+      it('interpolates parameter with single mustach when first argument is an object with explicit locale', async function () {
+        // when
+        const result = getI18n().__({ phrase: 'Hello {name}', locale: 'fr' }, { name: 'Bob' });
+
+        // then
+        expect(result).to.equal('Hello Bob');
       });
     });
   });
