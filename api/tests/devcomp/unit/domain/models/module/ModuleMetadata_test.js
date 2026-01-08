@@ -3,7 +3,7 @@ import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function () {
-  let id, isBeta, slug, title, duration, image, shortId;
+  let id, isBeta, slug, title, duration, image, shortId, visibility;
 
   beforeEach(function () {
     id = '12a3a2b4-e873-4789-ae1c-57f6f2b99890';
@@ -13,11 +13,12 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     isBeta = false;
     duration = 10;
     image = 'emile';
+    visibility = Symbol('visibility');
   });
 
   it('should init and keep attributes', function () {
     // when
-    const module = new ModuleMetadata({ id, shortId, slug, title, isBeta, duration, image });
+    const module = new ModuleMetadata({ id, shortId, slug, title, isBeta, duration, image, visibility });
 
     // then
     expect(module.id).to.equal(id);
@@ -28,6 +29,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     expect(module.duration).to.equal(duration);
     expect(module.image).to.equal(image);
     expect(module.link).to.equal(`/modules/${shortId}/${slug}`);
+    expect(module.visibility).to.equal(visibility);
   });
 
   describe('if a module does not have an id', function () {
@@ -171,6 +173,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             isBeta,
             image,
             shortId,
+            visibility,
           }),
       )();
 
@@ -196,6 +199,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             isBeta,
             image,
             shortId,
+            visibility,
           }),
       )();
 
@@ -223,6 +227,28 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The image is required for a module metadata');
+    });
+  });
+
+  describe('if the module does not have a visibility', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () =>
+          new ModuleMetadata({
+            duration,
+            id,
+            title,
+            slug,
+            isBeta,
+            shortId,
+            image,
+          }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The visibility is required for a module metadata');
     });
   });
 });
