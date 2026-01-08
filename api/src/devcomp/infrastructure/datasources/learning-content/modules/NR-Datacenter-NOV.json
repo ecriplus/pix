@@ -58,21 +58,21 @@
                     "id": "1",
                     "content": "<p>Le message passe directement de son&nbsp;téléphone à celui de la personne qui l’accompagne, sans quitter la salle d’attente.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne passe pas directement du téléphone de Killian à celui de son ami</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Le message est également <strong>traité informatiquement. </strong>Il&nbsp;est coupé en petits morceaux, envoyés très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le message passe par plusieurs appareils en parcourant des centaines, voire des milliers, de kilomètres.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne passe pas directement du téléphone de Killian à celui de son ami</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Le message est également <strong>traité informatiquement. </strong>Il&nbsp;est coupé en petits morceaux, envoyés très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne passe pas directement du téléphone de Killian à celui de son ami</strong>. Il peut voyager sur des milliers de kilomètres avant de revenir en une fraction de seconde.</p><p>Le message est également <strong>traité informatiquement. </strong>Il&nbsp;est coupé en petits morceaux, envoyés très loin, puis remis dans le bon ordre pour arriver sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   }
                 ],
@@ -91,7 +91,7 @@
               "element": {
                 "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
                 "type": "text",
-                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone. Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
+                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone.Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
               }
             }
           ]
@@ -120,7 +120,7 @@
               "element": {
                 "id": "0c6f4d09-1eb4-4b35-acf6-e82b70cefd0e",
                 "type": "qcu-discovery",
-                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p><p>Question&nbsp;: Quand Killian appuie sur «&nbsp;J’aime&nbsp;», où part cette information ?</p>",
+                "instruction": "<p><em>Image de la situation ou une personne like la photo d’une autre.</em></p><p>Sera transformé si possible en QCU-image quand la modalité fonctionnera.&nbsp;</p><p>Question&nbsp;: Quand Killian appuie sur «&nbsp;J’aime&nbsp;», où cette information est-elle enregistrée et traitée ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -138,9 +138,16 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Image de la personne qui l’a postée&nbsp;<em>(on le reconnait grâce à l’image de contexte)</em></p>",
+                    "content": "<p>Image d’une box internet</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !</p><p>Le «&nbsp;J’aime&nbsp;» part vers ce grand bâtiment appelé <strong>centre de données</strong> où sont stockées et gérées les informations. C’est là que l’action est enregistrée.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Le «&nbsp;J’aime&nbsp;» part vers ce grand bâtiment appelé <strong>centre de données</strong> où sont stockées et gérées les informations. C’est là que l’action est enregistrée.</p>"
                     }
                   }
                 ],
@@ -162,7 +169,7 @@
                     {
                       "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
                       "type": "text",
-                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.<br><strong>Un serveur est un ordinateur très puissant</strong> qui travaille quand vous utilisez internet.<br>Il reçoit votre demande, fait des calculs informatiques, stocke l’information, puis envoie ce que vous avez demandé sur votre appareil.</p><p>L’image ci-dessous est une illustration de l’intérieur d’un centre de données.&nbsp;</p>"
+                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> Il travaille quand on utilise internet.</p><p>Il reçoit <strong>nos demandes</strong>, fait des calculs, <strong>stocke des informations</strong>, puis envoie <strong>la réponse</strong> sur <strong>nos appareils</strong>.</p><p>L’image ci-dessous est une illustration de l’intérieur d’un centre de données.</p>"
                     },
                     {
                       "id": "929770b6-cc52-407e-a324-30b3cc48807b",
@@ -180,7 +187,7 @@
                     {
                       "id": "01a90945-8314-4fcd-9a06-013424c40d99",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi a-t-on besoin de si grands centres de données ? </h5><p>En ligne, le nombre de demandes est<strong> énorme.</strong> Des millions de personnes utilisent&nbsp;les serveurs <strong>en même temps</strong>.</p>"
+                      "content": "<h5>🤔 Pourquoi a-t-on besoin de centres de données aussi grands ?</h5><p>Sur internet, il y a <strong>énormément  d’informations échangées</strong>. Des millions de personnes <strong>utilisent les serveurs en même temps</strong>, partout dans le monde. </p>"
                     }
                   ]
                 }
@@ -213,68 +220,18 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
-                "content": "<p><strong>Un smartphone et un serveur sont tous les deux des ordinateurs</strong>. Voyons comment le smartphone de Killian peut nous apprendre ce qu’il se passe dans un centre de données !&nbsp;</p>"
+                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet.\nObservons l’effet du nombre d’utilisateurs.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "4ac11755-c95e-4e5f-b3a8-66f89b452c66",
-                "type": "custom",
+                "type": "custom-draft",
+                "title": "",
+                "url": "https://1024pix.github.io/atelier-contenus/JBO/POICdatacenternov.html",
                 "instruction": "",
-                "tagName": "pix-carousel",
-                "props": {
-                  "type": "image",
-                  "slides": [
-                    {
-                      "title": "Après un usage intensif.",
-                      "description": "Killian vient d’utiliser son smartphone pendant un long moment pour jouer et regarder des vidéos, la batterie est quasi vide et il est chaud au toucher.",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-21-22.png",
-                        "alt": "a"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "Killian part cuisiner.",
-                      "description": "Il n’utilise pas son téléphone quand il cuisine.",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-16-dec-2025-15_26_53.png",
-                        "alt": "aaa"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "La batterie n’a quasiment pas bougé",
-                      "description": "Quand il revient, le téléphone est à peine chaud et la batterie n’a perdu que quelques pourcents !",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-1-dec-2025-17-36-30.png",
-                        "alt": "aaaa"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    }
-                  ],
-                  "randomSlides": false,
-                  "titleLevel": 2,
-                  "disableAnimation": false,
-                  "enableLoop": true,
-                  "imageTextDisplay": "1:1"
-                }
+                "height": 500
               }
             },
             {
@@ -282,34 +239,34 @@
               "element": {
                 "id": "af91e3cb-2dc1-42d4-95be-92e251c54c14",
                 "type": "qcu-discovery",
-                "instruction": "<p>Que pouvez-vous dire de la consommation électrique et de la température du smartphone ?</p>",
+                "instruction": "<p>D’après ce que vous venez de voir. Que se passe-t-il quand <strong>beaucoup de serveurs</strong> travaillent en même temps ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Les changements de température n’ont rien à voir avec la consommation électrique.</p>",
+                    "content": "<p>La température et la consommation électrique ne changent pas, même si beaucoup de serveurs travaillent.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non&nbsp;! </p><p>Quand un appareil numérique <strong>travaille</strong>, il <strong>chauffe</strong> et il <strong>utilise plus d’électricité</strong>.<br>    Même quand il travaille peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.<br>    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>il n’y a peu ou pas de demandes</strong>.</p>"
+                      "diagnosis": "<p>Eh non !</p><p>Quand <strong>beaucoup de serveurs</strong> travaillent en même temps, ils <strong>chauffent plus</strong> et <strong>consomment plus d’électricité</strong>. Même quand l’activité baisse, des serveurs <strong>restent allumés</strong> et <strong>consomment quand même</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Quand le smartphone travaille, la température augmente et la consommation électrique aussi.</p>",
+                    "content": "<p>La température augmente et la consommation électrique augmente aussi.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !  </p><p>Quand un appareil numérique <strong>fonctionne beaucoup</strong>, il <strong>chauffe</strong> et <strong>il consomme plus d’électricité</strong>.    Même quand il fonctionne peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>il n’y a peu ou pas de demandes</strong>.</p>"
+                      "diagnosis": "<p>Bien vu !</p><p>Plus il y a de serveurs qui <strong>travaillent</strong> en même temps, plus la <strong>température</strong> et la <strong>consommation d’électricité</strong> augmentent. Dans un centre de données, beaucoup de serveurs sont <strong>allumés en permanence</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>La consommation électrique est toujours la même, peu importe ce que fait l’appareil.</p>",
+                    "content": "<p>La température augmente, mais la consommation électrique reste la même.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !</p><p>Quand un appareil numérique <strong>fonctionne beaucoup</strong>, il <strong>chauffe</strong> et <strong>il consomme plus d’électricité</strong>.    Même quand il fonctionne peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>il n’y a peu ou pas de demandes</strong>.</p>"
+                      "diagnosis": "<p>Eh non !</p><p>Quand <strong>beaucoup de serveurs</strong> travaillent, ils <strong>chauffent</strong> et ils <strong>consomment plus d’électricité</strong>. Les deux augmentent.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je ne sais pas.&nbsp;</p>",
+                    "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Quand un appareil numérique <strong>fonctionne beaucoup</strong>, il <strong>chauffe</strong> et <strong>il consomme plus d’électricité</strong>.    Même quand il fonctionne peu, il <strong>reste un peu chaud</strong> et <strong>consomme quand même</strong>.    C’est <strong>la même chose pour les serveurs</strong>. Et dans un centre de données, ils sont <strong>allumés en permanence,&nbsp;</strong>même quand <strong>il n’y a peu ou pas de demandes</strong>.</p>"
+                      "diagnosis": "<p>Quand <strong>beaucoup de serveurs</strong> travaillent en même temps, la <strong>température</strong> et la <strong>consommation d’électricité</strong> augmentent. Et même avec peu de demandes, des serveurs <strong>restent allumés</strong>.</p>"
                     }
                   }
                 ],
@@ -358,7 +315,7 @@
               "element": {
                 "id": "8b07744b-4b36-4bf0-9c39-d806a6987b64",
                 "type": "text",
-                "content": "<p>Répondez aux questions suivantes en indiquant l’usage qui sollicite le plus les&nbsp;serveurs.</p>"
+                "content": "<p>Répondez aux questions suivantes en indiquant l’usage qui <strong>demande le plus de calculs, de stockage et d’envoi d’informations</strong> aux serveurs.</p>"
               }
             },
             {
@@ -369,27 +326,27 @@
                     {
                       "id": "4f9237bf-e0d3-42ec-990c-a869600f336b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel sollicite le plus les serveurs ?</p>",
+                      "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel <strong>demande le plus de calculs, de stockage et d’envoi d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Envoyer un message vocal.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations à stocker et traiter pour les serveurs.<br></p>"
+                            "diagnosis": "<p>Bien vu ! Un message vocal est un fichier audio. Les serveurs doivent <strong>stocker</strong> et <strong>envoyer plus d’informations</strong> que pour un simple texte.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Envoyer un message texte.&nbsp;</p>",
+                          "content": "<p>Envoyer un message texte.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations à stocker et traiter pour les serveurs.</p>"
+                            "diagnosis": "<p>Eh non ! Un message texte contient très peu d’informations. Il demande peu de stockage et peu d’envoi aux serveurs.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Un message texte envoie très peu de données. Un message vocal est un petit fichier audio&nbsp;: c’est beaucoup plus d’informations à stocker et traiter pour les serveurs.</p>"
+                            "diagnosis": "<p>Un message vocal contient plus d’informations qu’un texte. Les serveurs doivent donc <strong>gérer plus de données</strong>.</p>"
                           }
                         }
                       ],
@@ -402,27 +359,27 @@
                     {
                       "id": "a01a88a1-9c44-44cb-9b13-750c89592f58",
                       "type": "qcu-discovery",
-                      "instruction": "<p>L’artiste préféré de Solène a sorti une nouvelle chanson. Solène veut l’écouter pour la première fois. Parmi les usages suivants, lequel sollicite le plus les serveurs ?</p>",
+                      "instruction": "<p>L’artiste préféré de Solène a sorti une nouvelle chanson. Solène veut l’écouter pour la première fois. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de gestion d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Écouter une musique en streaming.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Pas tout à fait. Le son demande moins de données que la vidéo.</p>"
+                            "diagnosis": "<p>Pas tout à fait. Le son contient moins d’informations que la vidéo.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Regarder le clip vidéo de la musique en streaming.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exact ! La vidéo en streaming demande beaucoup plus de données. Les serveurs doivent envoyer beaucoup d’informations&nbsp;: c’est un usage lourd.</p>"
+                            "diagnosis": "<p>Exact ! La vidéo contient beaucoup plus d’informations. Les serveurs doivent <strong>envoyer et gérer beaucoup plus de données</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La vidéo en streaming demande beaucoup plus de données. Les serveurs doivent envoyer beaucoup d’informations&nbsp;: c’est un usage lourd.</p>"
+                            "diagnosis": "<p>La vidéo contient plus d’informations que le son seul. Les serveurs ont donc <strong>plus de données à envoyer</strong>.</p>"
                           }
                         }
                       ],
@@ -435,27 +392,27 @@
                     {
                       "id": "55985477-3b47-4d7c-b7eb-f25c4b05bd7b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Nathan organise une soirée cinéma pour fêter les 10 ans de son film préféré. Parmi les usages suivants, lequel sollicite le plus les serveurs ?</p>",
+                      "instruction": "<p>Nathan organise une soirée cinéma pour fêter les 10 ans de son film préféré. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de traitement d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Regarder une vidéo en qualité standard.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Mais la qualité standard nécessite moins de données que la haute définition (HD), donc les serveurs sont moins sollicités.</p>"
+                            "diagnosis": "<p>Eh non ! La qualité standard contient moins d’informations que la haute définition.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Regarder une vidéo en haute définition (HD).</p>",
                           "feedback": {
-                            "diagnosis": "<p>Oui ! Plus la qualité de la vidéo est élevée, plus il faut transférer de données. Les serveurs sont donc plus fortement sollicités.</p>"
+                            "diagnosis": "<p>Oui ! Une vidéo en HD contient beaucoup plus d’informations. Les serveurs doivent <strong>en envoyer et en traiter davantage</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Plus la qualité de la vidéo est élevée, plus il faut transférer de données. Les serveurs sont donc plus fortement sollicités.</p>"
+                            "diagnosis": "<p>La haute définition demande plus d’envoi et de traitement d’informations côté serveurs.</p>"
                           }
                         }
                       ],
@@ -468,27 +425,27 @@
                     {
                       "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel sollicite le plus les serveurs ?</p>",
+                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel <strong>demande le plus de calculs informatiques</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Faire une demande à un logiciel d’IA générative.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exact ! L’IA générative demande énormément de calcul. C’est aujourd’hui l’un des usages qui consomme le plus d’énergie côté serveurs.</p>"
+                            "diagnosis": "<p>Exact ! Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. C’est très gourmand en énergie.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Faire une recherche sur internet</p>",
+                          "content": "<p>Faire une recherche sur internet.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Une recherche web est légère&nbsp;: elle mobilise peu de données et peu de calcul par rapport à une IA générative.</p>"
+                            "diagnosis": "<p>Eh non ! Une recherche web demande peu de calculs et peu d’envoi d’informations.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Une recherche web est légère&nbsp;: elle mobilise peu de données et peu de calcul par rapport à une IA générative.</p>"
+                            "diagnosis": "<p>Une IA générative demande beaucoup plus de calculs que les autres usages.</p>"
                           }
                         }
                       ],
@@ -513,7 +470,7 @@
                     {
                       "id": "a91021ec-28c2-47b3-97b0-aec23096593e",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi certains usages font plus travailler les serveurs ?</h5><p> <strong>Tous les usages</strong> font consommer les serveurs, <strong>mais pas pour les mêmes raisons</strong>.</p><ul>    <li>Certains demandent surtout <strong>d’envoyer beaucoup de données</strong> <em>(comme la vidéo)</em>. </li>    <li>D’autres demandent surtout <strong>de faire des calculs informatiques complexes</strong> <em>(comme l’IA)</em>. </li>    <li>Et certains demandent <strong>les deux à la fois</strong>, <em>comme les vidéos en direct</em>. </li></ul>"
+                      "content": "<p> <strong>Tous les usages</strong> font consommer les serveurs, <strong>mais pas pour les mêmes raisons</strong>.</p><ul>    <li>Certains demandent surtout <strong>d’envoyer beaucoup de données</strong> <em>(comme la vidéo)</em>. </li>    <li>D’autres demandent surtout <strong>de faire des calculs informatiques complexes</strong> <em>(comme l’IA)</em>. </li>    <li>Et certains demandent <strong>les deux à la fois</strong>, <em>comme les vidéos en direct</em>. </li></ul>"
                     }
                   ]
                 },
@@ -546,7 +503,7 @@
               "element": {
                 "id": "065ea5c0-8fc9-4014-9c87-49133966943d",
                 "type": "text",
-                "content": "<ul>    <li>🗄️ Les informations consultées en ligne sont stockées, calculées et envoyées par des <strong>serveurs</strong>, eux-mêmes situés dans de grands bâtiments appelés <strong>centres de données</strong>.</li>    <li>⚡ <strong>Les serveurs consomment beaucoup d’énergie</strong>&nbsp;: ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li>    <li>🎥 <strong>Les serveurs consomment plus ou moins selon les usages en ligne</strong>&nbsp;: envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li>    <li>🌱 <strong>Il est possible d’agir</strong>&nbsp;: choisir des usages qui consomment moins d’énergie ou se déconnecter quand on n’en a plus besoin réduit l’énergie utilisée.</li>    </ul>"
+                "content": "<ul>    <li>🗄️ Les informations consultées en ligne sont stockées, calculées et envoyées par des <strong>serveurs</strong>, eux-mêmes situés dans de grands bâtiments appelés <strong>centres de données</strong>.</li>    <li>⚡ <strong>Les serveurs consomment beaucoup d’énergie</strong>&nbsp;: ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li>    <li>🎥 <strong>Les serveurs consomment plus ou moins selon les usages en ligne</strong>&nbsp;: envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li>    <li>🌱 <strong>Il est possible d’agir</strong>&nbsp;: choisir des usages qui demandent moins de calculs et de données, ou se déconnecter, permet de réduire l’énergie utilisée.</li>    </ul>"
               }
             }
           ]
@@ -601,7 +558,7 @@
                   },
                   {
                     "id": "8e854d9d-3639-46e8-928e-3cc000d3748e",
-                    "text": "Un appel en vidéo demande autant de travail au serveur qu’un appel en ligne avec seulement le son.",
+                    "text": "Un appel en vidéo demande autant de travail au serveur qu’un appel en ligne avec seulement le son. ",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -714,7 +671,7 @@
                     {
                       "id": "d9b81d92-b66f-4cc5-b47a-9ceaffd40b69",
                       "type": "qcu",
-                      "instruction": "<p>Vous voulez savoir combien font 15 fois 32. Quel choix est le plus léger pour les serveurs ?</p>",
+                      "instruction": "<p>Vous voulez diviser une addition au restaurant. Quel choix est le plus léger pour les serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -771,7 +728,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>La demande d’information part&nbsp;</span>"
+                    "content": "<p>La demande d’information part&nbsp;</p>"
                   },
                   {
                     "input": "a",
@@ -801,7 +758,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>pour aller dans&nbsp;</span>"
+                    "content": "<p>pour aller dans&nbsp;</p>"
                   },
                   {
                     "input": "b",
@@ -831,7 +788,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>où se trouvent des&nbsp;</span>"
+                    "content": "<p>où se trouvent des&nbsp;</p>"
                   },
                   {
                     "input": "c",
@@ -861,7 +818,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>. Une fois la demande traitée, la réponse revient vers&nbsp;</span>"
+                    "content": "<p>. Une fois la demande traitée, la réponse revient vers&nbsp;</p>"
                   },
                   {
                     "input": "d",
