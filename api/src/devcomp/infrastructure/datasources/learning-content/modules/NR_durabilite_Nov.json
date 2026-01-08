@@ -79,7 +79,7 @@
                 "id": "62b4e1dc-725f-4d09-b0b3-e78281fb1368",
                 "type": "flashcards",
                 "instruction": "<p>Voici quelques métaux que vous trouvez dans votre smartphone. Savez-vous d’où ils viennent ? Retournez les cartes pour en savoir plus.</p>",
-                "title": "D’où viennent les métaux ?",
+                "title": "D’où viennent les métaux ?",
                 "introImage": {
                   "url": ""
                 },
@@ -200,14 +200,13 @@
               "type": "element",
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
-                "type": "qcu",
+                "type": "qcu-discovery",
                 "instruction": "<p>Combien de tours de la Terre pour la fabrication d’un smartphone ?<br><br></p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>1</p>",
                     "feedback": {
-                      "state": "<p>Eh non !&nbsp;</p>",
                       "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
                     }
                   },
@@ -215,7 +214,6 @@
                     "id": "2",
                     "content": "<p>2</p>",
                     "feedback": {
-                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
                     }
                   },
@@ -223,7 +221,6 @@
                     "id": "3",
                     "content": "<p>3</p>",
                     "feedback": {
-                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
                     }
                   },
@@ -231,7 +228,6 @@
                     "id": "4",
                     "content": "<p>4</p>",
                     "feedback": {
-                      "state": "<p>Bien vu !</p>",
                       "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;<br><br></p>"
                     }
                   }
@@ -408,14 +404,13 @@
                   "elements": [
                     {
                       "id": "d8578db9-9592-407b-844b-7885d6981806",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Quelle est la meilleure option si le smartphone marche encore ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Le garder dans un tiroir au cas où on en aurait besoin<br></p>",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
                             "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.<br></p>"
                           }
                         },
@@ -423,7 +418,6 @@
                           "id": "2",
                           "content": "<p>Le donner ou le vendre</p>",
                           "feedback": {
-                            "state": "<p>Bien vu !</p>",
                             "diagnosis": "<p>Moins on multiplie les appareils, moins on pollue. Quelqu’un d’autre pourrait avoir besoin d’un smatphone de 2e main.&nbsp;<br><br></p>"
                           }
                         }
@@ -436,14 +430,13 @@
                   "elements": [
                     {
                       "id": "d58d9cb1-edc3-400f-9201-ec5faa67c2c6",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Quelle est la meilleure option si le smartphone ne marche plus ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Le jeter à la poubelle</p>",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
                             "diagnosis": "<p>La plupart des appareils électroniques ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes. Il&nbsp; faut donc déposer un vieux smartphone dans un point de collecte.</p>"
                           }
                         },
@@ -451,7 +444,6 @@
                           "id": "2",
                           "content": "<p>Le déposer dans un point de collecte.</p>",
                           "feedback": {
-                            "state": "<p>Bien vu !</p>",
                             "diagnosis": "<p>La plupart des appareils électroniques ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes. Il faut donc déposer un vieux smartphone dans un point de collecte.</p>"
                           }
                         }
