@@ -53,6 +53,7 @@
     "@babel/plugin-proposal-decorators": "^7.24.7",
     "@ember-data/json-api": "^5.3.8",
     "@ember-data/model": "^5.3.8",
+    "@ember-intl/v1-compat": "^1.0.2",
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^5.2.1",
