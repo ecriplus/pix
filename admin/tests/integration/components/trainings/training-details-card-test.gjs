@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -104,6 +105,36 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
         // then
         assert.dom(screen.getByText(expectedResult)).exists();
       });
+    });
+  });
+
+  module('when training type is modulix', function () {
+    test('should display a link to a Pix App module', async function (assert) {
+      // given
+      const domainService = this.owner.lookup('service:current-domain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
+
+      const training = {
+        title: 'Un contenu formatif',
+        internalTitle: 'Mon titre interne',
+        link: '/modules/123/soleil',
+        type: 'modulix',
+        locale: 'fr-fr',
+        editorName: 'Un éditeur de contenu formatif',
+        editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
+        duration: {
+          days: 2,
+        },
+        isRecommendable: true,
+      };
+
+      // when
+      const screen = await render(<template><TrainingDetailsCard @training={{training}} /></template>);
+
+      // then
+      assert
+        .dom(screen.getByRole('link', { name: 'https://app.pix.fr/modules/123/soleil (nouvelle fenêtre)' }))
+        .exists();
     });
   });
 });

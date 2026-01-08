@@ -1,3 +1,4 @@
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
@@ -6,6 +7,8 @@ import { localeCategories } from '../../models/training';
 import StateTag from './state-tag';
 
 export default class TrainingDetailsCard extends Component {
+  @service url;
+
   get formattedDuration() {
     const days = this.args.training.duration.days ? `${this.args.training.duration.days}j ` : '';
     const hours = this.args.training.duration.hours ? `${this.args.training.duration.hours}h ` : '';
@@ -15,6 +18,12 @@ export default class TrainingDetailsCard extends Component {
 
   get formattedLocale() {
     return localeCategories[this.args.training.locale];
+  }
+
+  get trainingLink() {
+    return this.args.training.type === 'modulix'
+      ? `${this.url.pixAppUrl}${this.args.training.link}`
+      : this.args.training.link;
   }
 
   <template>
@@ -31,12 +40,12 @@ export default class TrainingDetailsCard extends Component {
 
         <DescriptionList.Item @label={{t "pages.trainings.training.details.publishedOn"}}>
           <a
-            href={{@training.link}}
+            href={{this.trainingLink}}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="{{@training.link}} (nouvelle fenêtre)"
+            aria-label="{{this.trainingLink}} (nouvelle fenêtre)"
           >
-            {{@training.link}}
+            {{this.trainingLink}}
           </a>
         </DescriptionList.Item>
 
