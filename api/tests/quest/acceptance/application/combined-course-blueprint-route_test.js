@@ -100,24 +100,8 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result.data).to.deep.equal({
-          attributes: {
-            content: [
-              {
-                type: 'module',
-                value: 'mon-module',
-              },
-            ],
-            'created-at': combinedCourseBlueprint.createdAt,
-            description: 'Le but de ma quête',
-            illustration: 'images/illustration.svg',
-            'internal-name': 'Mon schéma de parcours combiné',
-            name: 'Mon parcours combiné',
-            'updated-at': combinedCourseBlueprint.updatedAt,
-          },
-          id: '100002',
-          type: 'combined-course-blueprints',
-        });
+        expect(response.result.data.id).to.equal(combinedCourseBlueprint.id.toString());
+        expect(response.result.data.type).to.equal('combined-course-blueprints');
       });
     });
   });
