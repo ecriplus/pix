@@ -8,7 +8,7 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/combined-course-blueprints',
+      path: '/api/admin/combined-course-blueprints',
       config: {
         pre: [
           {
@@ -29,7 +29,7 @@ const register = async function (server) {
     },
     {
       method: 'POST',
-      path: '/api/combined-course-blueprints',
+      path: '/api/admin/combined-course-blueprints',
       config: {
         pre: [
           {
@@ -68,7 +68,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/combined-course-blueprints/{blueprintId}',
+      path: '/api/admin/combined-course-blueprints/{blueprintId}',
       config: {
         pre: [
           {

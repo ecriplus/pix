@@ -14,7 +14,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     server = await createServer();
   });
 
-  describe('GET /api/combined-course-blueprints', function () {
+  describe('GET /api/admin/combined-course-blueprints', function () {
     context('when user is admin ', function () {
       it('should return the list of combined course blueprints', async function () {
         // given
@@ -30,7 +30,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
 
         const options = {
           method: 'GET',
-          url: `/api/combined-course-blueprints`,
+          url: `/api/admin/combined-course-blueprints`,
           headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
         };
 
@@ -44,7 +44,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     });
   });
 
-  describe('POST /api/combined-course-blueprints', function () {
+  describe('POST /api/admin/combined-course-blueprints', function () {
     context('when user is admin ', function () {
       it('should create a combined course blueprint', async function () {
         // given
@@ -63,7 +63,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         };
         const options = {
           method: 'POST',
-          url: `/api/combined-course-blueprints`,
+          url: `/api/admin/combined-course-blueprints`,
           headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
           payload,
         };
@@ -78,7 +78,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     });
   });
 
-  describe('GET /api/combined-course-blueprints/:id', function () {
+  describe('GET /api/admin/combined-course-blueprints/:id', function () {
     context('when user is admin ', function () {
       it('should return combined course blueprint for given id', async function () {
         // given
@@ -91,7 +91,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
 
         const options = {
           method: 'GET',
-          url: `/api/combined-course-blueprints/${combinedCourseBlueprint.id}`,
+          url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprint.id}`,
           headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
         };
 
