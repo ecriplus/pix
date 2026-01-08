@@ -43,23 +43,23 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>de l’adresse mail et du nom de l’ancien président de l’association</p>",
+                    "content": "<p>L’adresse mail et le nom de l’ancien président de l’association.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.&nbsp;</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>du mot de passe de la boîte mail et du nom de l’ancien président de l’association</p>",
+                    "content": "<p>Le mot de passe de la boîte mail et le nom de l’ancien président de l’association.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
+                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>de l’adresse mail et du mot de passe de la boîte mail</p>",
+                    "content": "<p>L’adresse mail et le mot de passe de la boîte mail.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe. </p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
+                      "diagnosis": "<p>Effectivement ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un identifiant et d’un mot de passe. </p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
