@@ -65,6 +65,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
 
     const title = 'Les adresses email';
     const isBeta = false;
+    const visibility = Symbol('visibility');
     const sections = [Symbol('text')];
     const details = Symbol('details');
     const version = Symbol('version');
@@ -77,6 +78,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       sections,
       details,
       version,
+      visibility,
     });
 
     const passageCreatedAt = new Date('2025-03-05');

@@ -128,6 +128,7 @@ const moduleSchema = Joi.object({
     .required(),
   title: htmlNotAllowedSchema.required(),
   isBeta: Joi.boolean().required(),
+  visibility: Joi.string().valid('private', 'public').required(),
   details: moduleDetailsSchema.required(),
   sections: Joi.array().items(moduleSectionSchema).required(),
 }).required();

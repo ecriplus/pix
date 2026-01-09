@@ -37,6 +37,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             slug: 'title',
             title: 'title',
             isBeta: true,
+            visibility: 'public',
             details: {
               image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
@@ -93,6 +94,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             slug: 'title',
             title: 'title',
             isBeta: true,
+            visibility: 'public',
             details: {
               image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
@@ -149,6 +151,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             slug: 'title',
             title: 'title',
             isBeta: true,
+            visibility: 'public',
             details: {
               image: 'https://assets.pix.org/modules/placeholder-details.svg',
               description: 'Description',
@@ -215,6 +218,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         title: 'title',
         version,
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',
@@ -272,6 +276,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -371,6 +376,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -423,6 +429,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -475,6 +482,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -527,6 +535,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -575,6 +584,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -637,6 +647,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -695,6 +706,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -748,6 +760,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -799,6 +812,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -861,6 +875,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -932,6 +947,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1015,6 +1031,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1091,6 +1108,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1183,6 +1201,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1254,6 +1273,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1311,6 +1331,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1390,6 +1411,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1448,6 +1470,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1503,6 +1526,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1560,6 +1584,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1620,6 +1645,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1678,6 +1704,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1739,6 +1766,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1799,6 +1827,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1870,6 +1899,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -1949,6 +1979,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2033,6 +2064,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2131,6 +2163,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2208,6 +2241,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2271,6 +2305,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2336,6 +2371,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           slug: 'title',
           title: 'title',
           isBeta: true,
+          visibility: 'public',
           details: {
             image: 'https://assets.pix.org/modules/placeholder-details.svg',
             description: 'Description',
@@ -2392,6 +2428,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         slug: 'title',
         title: 'title',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',
@@ -2451,6 +2488,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         slug: 'title',
         title: 'title',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Description',

@@ -32,8 +32,9 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-by-short-id', function
       const sections = [Symbol('text')];
       const details = Symbol('details');
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
 
-      const expectedModule = new Module({ id, shortId, slug, title, isBeta, sections, details, version });
+      const expectedModule = new Module({ id, shortId, slug, title, isBeta, sections, details, version, visibility });
       const moduleRepository = {
         getByShortId: sinon.stub(),
       };
