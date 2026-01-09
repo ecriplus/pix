@@ -2,7 +2,7 @@
   "id": "5b9c6c6b-3cfa-4004-8769-ac745616d540",
   "shortId": "9c41e513",
   "slug": "mfa-authentification-multifacteur",
-  "title": "Plus puissante qu’un mot de passe : l’authentification multifacteur.",
+  "title": "Plus puissante qu’un mot de passe : l’authentification multifacteur",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/CYMFA_IND/picto_cyber_mfa_ind.svg",
@@ -814,6 +814,14 @@
           "type": "challenge",
           "title": "défi : Activer l’authentification multifacteur sur un compte en ligne.",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1506d9b4-ae81-4810-bc05-c5c0f075ab6b",
+                "type": "text",
+                "content": "Pour terminer ce module, passons à la pratique."
+              }
+            },
             {
               "type": "element",
               "element": {
