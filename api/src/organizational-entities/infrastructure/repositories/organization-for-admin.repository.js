@@ -383,7 +383,16 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
     qb.where('organizations.id', id);
   }
   if (name) {
-    qb.where(knex.raw('unaccent(organizations.name) ILIKE unaccent(?)', [`%${name}%`]));
+    qb.where(
+      knex.raw(
+        `
+      regexp_replace(unaccent(organizations.name), '[^[:alnum:]]', '', 'g')
+      ILIKE
+      '%' || regexp_replace(unaccent(?), '[^[:alnum:]]', '', 'g') || '%'
+      `,
+        [name],
+      ),
+    );
   }
   if (type) {
     qb.where('type', type);

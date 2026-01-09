@@ -124,14 +124,14 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     context('when there are multiple Organizations matching the same "name" search pattern', function () {
       it('should return only Organizations matching "name" if given in filters', async function () {
         // given
-        databaseBuilder.factory.buildOrganization({ name: 'Dragon & co' });
-        databaseBuilder.factory.buildOrganization({ name: 'Dragonades & co' });
+        databaseBuilder.factory.buildOrganization({ name: 'Dragonades co' });
         databaseBuilder.factory.buildOrganization({ name: 'Broca & co' });
+        databaseBuilder.factory.buildOrganization({ name: 'Dragonades & co+' });
         databaseBuilder.factory.buildOrganization({ name: 'Donnie & co' });
 
         await databaseBuilder.commit();
 
-        const filter = { name: 'dra' };
+        const filter = { name: 'dragonadesCo' };
         const page = { number: 1, size: 10 };
         const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
 
@@ -144,7 +144,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // then
         expect(matchingOrganizations).to.have.lengthOf(2);
-        expect(_.map(matchingOrganizations, 'name')).to.have.members(['Dragon & co', 'Dragonades & co']);
+        expect(_.map(matchingOrganizations, 'name')).to.have.members(['Dragonades co', 'Dragonades & co+']);
         expect(pagination).to.deep.equal(expectedPagination);
       });
 
