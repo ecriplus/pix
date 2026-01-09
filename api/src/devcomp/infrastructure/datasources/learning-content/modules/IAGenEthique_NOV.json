@@ -159,7 +159,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p>\n<h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5>\n<p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
+                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
               }
             }
           ]
@@ -212,7 +212,7 @@
                           "isAnonymizable": true
                         },
                         {
-                          "content": "Peux-tu me faire une carte de visite professionnelle et originale ?"
+                          "content": "Peux-tu me faire une carte de visite professionnelle et originale ?"
                         }
                       ],
                       "rephrase": "Je suis maçon et j’aimerais une idée de carte de visite professionnelle et originale. Peux-tu me proposer un modèle que je pourrais compléter avec mes informations ?",
