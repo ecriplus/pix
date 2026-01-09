@@ -392,6 +392,7 @@ const configuration = (function () {
     },
     metrics: {
       prometheus: {
+        enabled: toBoolean(process.env.PROMETHEUS_ENABLED),
         prefix: process.env.PROMETHEUS_PREFIX ?? 'pix_api',
         pushgateway: {
           pushInterval: ms(process.env.PROMETHEUS_PUSHGATEWAY_PUSH_INTERVAL ?? '15s'),

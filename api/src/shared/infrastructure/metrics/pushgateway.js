@@ -16,6 +16,9 @@ async function pushMetrics() {
 let pushMetricsInterval;
 
 export function startPushingMetrics() {
+  if (!config.metrics.prometheus.enabled) return;
+  logger.info('Start pushing metrics to Prometheus pushgateway');
+
   if (pushMetricsInterval !== undefined) return;
   pushMetricsInterval = setInterval(() => {
     pushMetrics().catch((err) => logger.error({ err }, 'error while pushing metrics'));
@@ -23,6 +26,9 @@ export function startPushingMetrics() {
 }
 
 export async function stopPushingMetrics() {
+  if (!config.metrics.prometheus.enabled) return;
+  logger.info('Flush and stop pushing metrics to Prometheus pushgateway');
+
   if (pushMetricsInterval === undefined) return;
   clearInterval(pushMetricsInterval);
   await pushMetrics();
