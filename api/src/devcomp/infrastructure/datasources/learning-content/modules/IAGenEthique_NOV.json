@@ -190,7 +190,7 @@
               "element": {
                 "id": "1c479a77-fcc8-4056-9459-6aa9ba1bc6b2",
                 "type": "custom",
-                "instruction": "Voici plusieurs prompts. Certains donnent des détails sur des personnes. Repérez-les et sélectionnez-les.",
+                "instruction": "Voici plusieurs prompts. Certains donnent des informations privées ou secrètes. Repérez-les et sélectionnez-les.",
                 "tagName": "pix-anonymisation",
                 "props": {
                   "titleLevel": 2,
@@ -266,7 +266,7 @@
                         }
                       ],
                       "rephrase": "Peux-tu me proposer un exemple de mail expliquant à une équipe comment se connecter au WiFi d’une organisation ? Je compléterai moi-même ensuite les informations sensibles (mot de passe, lien interne, instructions).",
-                      "feedback": "Ce prompt divulgue des informations confidentielles (mot de passe, lien interne) : elles doivent être ajoutées hors IA."
+                      "feedback": "Ce prompt divulgue des informations confidentielles (mot de passe, lien interne)."
                     }
                   ]
                 }
