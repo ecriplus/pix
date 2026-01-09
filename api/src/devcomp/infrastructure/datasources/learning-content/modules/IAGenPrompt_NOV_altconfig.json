@@ -198,7 +198,7 @@
             {
               "type": "element",
               "element": {
-                "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddg",
+                "id": "27ab53eb-55ae-4135-a616-efefc87c70ac",
                 "type": "text",
                 "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d’IA générative, nous allons voir comment rédiger un prompt !📝</p>"
               }
@@ -284,7 +284,7 @@
           ]
         },
         {
-          "id": "2f0b42f0-02a3-4133-8401-ec270f2ca36",
+          "id": "7188fca9-af55-4a05-a9ff-e0d6a4b1781f",
           "type": "short-lesson",
           "title": "Leçon 2",
           "components": [
@@ -306,7 +306,7 @@
             {
               "type": "element",
               "element": {
-                "id": "1ad822c8-cf06-43b8-adf4-9acc12f22ffg",
+                "id": "79257774-2b63-4621-a118-39ae047dc22f",
                 "type": "text",
                 "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas.😅 Il faut aussi donner des éléments qui décrivent le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
               }
@@ -488,7 +488,7 @@
       "type": "retain-the-essentials",
       "grains": [
         {
-          "id": "1ec0a8c6-ed7a-4e91-b886-7dc192490b8",
+          "id": "7f1f7925-0dd6-48db-a0e2-6a2b495514c4",
           "type": "summary",
           "title": "Recap",
           "components": [
@@ -570,7 +570,7 @@
                 {
                   "elements": [
                     {
-                      "id": "6913b0ac-2a75-4c6a-9f6a-f8d230dd211g",
+                      "id": "effbb9cd-8879-48e0-b6f6-0d4b069d0e0e",
                       "type": "qcu",
                       "instruction": "<p>On parle en langage courant avec un logiciel d’IA, avec des phrases simples et claires.</p>",
                       "proposals": [
@@ -770,7 +770,7 @@
             {
               "type": "element",
               "element": {
-                "id": "2d39db49-0ab2-4222-8911-abb459b16feg",
+                "id": "af7ce49a-a370-46e5-9210-9cb890a374d3",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
