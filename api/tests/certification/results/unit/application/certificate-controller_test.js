@@ -4,7 +4,7 @@ import { certificateController } from '../../../../../src/certification/results/
 import { CertificationCourseVersion } from '../../../../../src/certification/results/domain/read-models/CertificationCourseVersion.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Application | certificate-controller', function () {
@@ -108,7 +108,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         await certificateController.getCertificate(request, hFake, dependencies);
 
         // then
-        const translate = getI18n().__;
+        const translate = getI18nFromRequest(request).__;
         expect(dependencies.privateCertificateSerializer.serialize).to.have.been.calledWithExactly(certificate, {
           translate,
         });
@@ -147,7 +147,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         await certificateController.getCertificate(request, hFake, dependencies);
 
         // then
-        const translate = getI18n().__;
+        const translate = getI18nFromRequest(request).__;
         expect(dependencies.certificateSerializer.serialize).to.have.been.calledWithExactly({
           translate,
           certificate,
@@ -250,7 +250,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3CertificationAttestation],
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -291,7 +291,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [certificationAttestation],
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);
@@ -335,7 +335,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3CertificationAttestation, v3CertificationAttestation],
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -397,7 +397,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [certification1, certification2, certification3],
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);
@@ -461,7 +461,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3Certificate, v3Certificate],
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -510,7 +510,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates,
-          i18n: getI18n(),
+          i18n: getI18nFromRequest(request),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);

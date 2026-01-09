@@ -2,18 +2,14 @@ import path from 'node:path';
 
 import { I18n } from 'i18n';
 
-import {
-  getBaseLocale,
-  getDefaultLocale,
-  getNearestSupportedLocale,
-} from '../../../shared/domain/services/locale-service.js';
+import { getDefaultLocale, getNearestSupportedLocale } from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../utils/logger.js';
 import { getChallengeLocale } from '../utils/request-response-utils.js';
 
 const __dirname = import.meta.dirname;
 const translationsFolder = path.resolve(path.join(__dirname, '../../../../translations'));
 
-export const options = {
+export const defaultSettings = {
   locales: ['en', 'fr', 'es', 'es-419', 'nl'],
   fallbacks: { 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl' },
   defaultLocale: 'fr', // default locale must match an existing translation file (fr => fr.json)
@@ -34,13 +30,12 @@ const i18nInstances = {};
  * @param {string} locale a locale (language or BCP 47 format)
  * @returns i18n instance correctly setup with the language
  */
-export function getI18n(locale) {
-  const supportedLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
-  const baseLocale = getBaseLocale(supportedLocale);
+export function getI18n(locale, settings = defaultSettings) {
+  const nearestLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
 
-  if (!i18nInstances[baseLocale]) {
-    const i18n = new I18n(options);
-    i18n.setLocale(baseLocale);
+  if (!i18nInstances[nearestLocale]) {
+    const i18n = new I18n(settings);
+    i18n.setLocale(nearestLocale);
     // we freeze the setLocale to avoid changing i18n locale for an instance
     i18n.setLocale = () => {
       logger.warn('Cannot change i18n locale instance, use getI18n(locale) instead.');
@@ -48,20 +43,20 @@ export function getI18n(locale) {
     const originalI18nTranslate = i18n.__;
     i18n.__ = (param1, param2) => {
       if (_isTranslationKeyOnly(param1, param2)) {
-        return originalI18nTranslate({ phrase: param1, locale: baseLocale });
+        return originalI18nTranslate({ phrase: param1, locale: nearestLocale });
       }
 
       if (_hasTranslationParameter(param1, param2)) {
-        return originalI18nTranslate({ phrase: param1, locale: baseLocale }, param2);
+        return originalI18nTranslate({ phrase: param1, locale: nearestLocale }, param2);
       }
 
       return originalI18nTranslate(param1, param2);
     };
 
-    i18nInstances[baseLocale] = i18n;
+    i18nInstances[nearestLocale] = i18n;
   }
 
-  return i18nInstances[baseLocale];
+  return i18nInstances[nearestLocale];
 }
 
 /**

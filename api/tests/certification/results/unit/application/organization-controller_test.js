@@ -1,6 +1,6 @@
 import { organizationController } from '../../../../../src/certification/results/application/organization-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Course | Unit | Application | Organizations | organization-controller', function () {
@@ -40,7 +40,7 @@ describe('Certification | Course | Unit | Application | Organizations | organiza
 
       const dependencies = { getDivisionCertificationResultsCsv: sinon.stub() };
       dependencies.getDivisionCertificationResultsCsv
-        .withArgs({ division: '3èmeA', certificationResults, i18n: getI18n() })
+        .withArgs({ division: '3èmeA', certificationResults, i18n: getI18nFromRequest(request) })
         .resolves({ content: 'csv-string', filename: '20190101_resultats_3èmeA.csv' });
 
       // when

@@ -2,7 +2,7 @@ import { certificationResultsController } from '../../../../../src/certification
 import { CertificationResultsLinkByEmailToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkByEmailToken.js';
 import { CertificationResultsLinkToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkToken.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Controller | certification results', function () {
@@ -52,7 +52,8 @@ describe('Certification | Results | Unit | Controller | certification results', 
   describe('#getSessionResultsByRecipientEmail ', function () {
     it('should return csv content and fileName', async function () {
       // given
-      const i18n = getI18n();
+      const request = {};
+      const i18n = getI18nFromRequest(request);
       const session = { id: 1, date: '2020/01/01', time: '12:00' };
       const dependencies = { getSessionCertificationResultsCsv: sinon.stub() };
 
@@ -101,11 +102,13 @@ describe('Certification | Results | Unit | Controller | certification results', 
         payload: { token },
         auth: { credentials: { userId } },
       };
+      const i18n = getI18nFromRequest(request);
+
       const dependencies = {
         getSessionCertificationResultsCsv: sinon.stub(),
       };
       dependencies.getSessionCertificationResultsCsv
-        .withArgs({ session, certificationResults, i18n: getI18n() })
+        .withArgs({ session, certificationResults, i18n })
         .returns({ content: 'csv-string', filename: fileName });
       sinon.stub(usecases, 'getSessionResults').withArgs({ sessionId }).resolves({ session, certificationResults });
       sinon.stub(CertificationResultsLinkToken, 'decode').withArgs(token).returns({ sessionId });

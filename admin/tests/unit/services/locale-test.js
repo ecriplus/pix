@@ -185,7 +185,7 @@ module('Unit | Services | locale', function (hooks) {
       const currentLocale = localeService.currentLocale;
       assert.strictEqual(currentLocale, 'nl-BE');
       sinon.assert.calledWith(cookiesService.write, 'locale', 'nl-BE');
-      sinon.assert.calledWith(intlService.setLocale, 'nl');
+      sinon.assert.calledWith(intlService.setLocale, ['nl-BE', 'nl', 'fr']);
       sinon.assert.calledWith(dayjsService.setLocale, 'nl');
       assert.strictEqual(metricsService.context.locale, 'nl-BE');
     });
