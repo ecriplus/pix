@@ -3,7 +3,7 @@
   "shortId": "163b520e",
   "slug": "ia-bias-ind",
   "title": "Les biais des IA génératives",
-  "isBeta": true,
+  "isBeta": false,
   "details": {
     "image": "https://assets.pix.org/modules/IAGenBiais_IND/picto_moduleIA_biais.svg",
     "description": "<p>Les productions des logiciels d’IA génératives contiennent parfois des maladresses. Ce ne sont pas toujours des erreurs, mais des raccourcis, des stéréotypes ou des discriminations.  On dit que ces résultats comportent des biais. </p><p>Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.<br></p>",
@@ -89,6 +89,13 @@
                     "content": "<p>C’est quand l’IA refuse de répondre à une question.</p>",
                     "feedback": {
                       "diagnosis": "<p> <strong>Eh non. </strong></p><p>Un  <strong>biais</strong>, c’est quand l’IA donne des <strong>réponses qui ne représentent pas bien la diversité de la réalité.</strong></p><p> Ici, l’IA donne bien une réponse mais qui donne l’impression que tous les procès ont lieu aux États-Unis ou que tous les juges sont âgés alors que ce n’est pas toujours le cas ! </p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Un  <strong>biais</strong>, c’est quand l’IA donne des <strong>réponses qui ne représentent pas bien la diversité de la réalité.</strong></p><p> Ici, l’IA donne bien une réponse mais qui donne l’impression que tous les procès ont lieu aux États-Unis ou que tous les juges sont âgés alors que ce n’est pas toujours le cas !</p>"
                     }
                   }
                 ],
