@@ -597,74 +597,7 @@
               "element": {
                 "id": "dd2cf906-b77f-4c4d-8f11-9aa53a606d03",
                 "type": "text",
-                "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée, à sa manière,<strong> une publication</strong> pour le site internet du gymnase…</p><p>Il n’a pas encore écrit le texte pour le tournoi de l’été et a besoin de votre aide.</p><p>Ses précédentes publications et l<strong>’illustration de la prochaine publication</strong> se trouvent ci-dessous.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "pix-carousel",
-                "props": {
-                  "type": "image",
-                  "slides": [
-                    {
-                      "title": "Le tournoi de l’automne 🍂",
-                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les <strong>Patata Smash</strong> sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br>Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.png",
-                        "alt": "Bravo à l’équipe Patata Smash !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "Le tournoi du printemps 🌷",
-                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les <strong>Filets Mignons</strong>. <br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers <strong>Filets Mignons</strong>.</p>",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.png",
-                        "alt": "Félicitations à l’équipe Filets mignons !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "Le tournoi de l’été ☀️",
-                      "description": "Ce texte est manquant... C’est à vous de le générer avec l’IA ci-dessous.",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.png",
-                        "alt": "Une affiche concernant le tournoi de Volley.  Elle annonce l’équipe des volley-raptors vainqueur !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    }
-                  ],
-                  "randomSlides": false,
-                  "titleLevel": 0,
-                  "disableAnimation": false
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "52c9f208-8f95-4926-a64e-214041a834d2",
-                "type": "text",
-                "content": "<p>À votre tour d’écrire <strong>la publication</strong><strong>&nbsp;du tournoi de l’été</strong> à la façon des <strong>précédentes publications</strong> d’actualités de Gustave et en vous basant sur l’image illustrant le tournoi de l’été.</p>"
+                "content": "Le tournoi approche mais Gustave a du mal à trouver un lieu pour le tournoi.<br><br>Il cherche un endroit à Jolieville, avec au moins 4 terrains.&nbsp;<br>Il a un budget maximal de 300 pixmoney, il est à la recherche d’un bon plan.&nbsp;"
               }
             },
             {
@@ -674,8 +607,8 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l’IA</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
+                "instruction": "<p>Utilisez&nbsp;<strong>l’IA</strong>&nbsp;mise en place par Jolievile pour trouver un terrain adapté.</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -683,9 +616,42 @@
             {
               "type": "element",
               "element": {
-                "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
-                "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details>"
+                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "type": "qrocm",
+                "instruction": "Quel gymnase devrait contacter Gustave ?",
+                "proposals": [
+                  {
+                    "input": "NomGymnase",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "Nom du gymnase",
+                    "ariaLabel": "Nom du gymnase",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Le gymnase des 3 sapins",
+                      "gymnase des 3 sapins",
+                      "gymnase des trois sapins",
+                      "le gymnase des trois sapins"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bien joué !",
+                    "diagnosis": "Le gymnase des 3 sapins correspond aux critères de Gustave."
+                  },
+                  "invalid": {
+                    "state": "Eh non...",
+                    "diagnosis": "Avez-vous vérifié que tous les critères étaient respectés ?"
+                  }
+                }
               }
             },
             {
@@ -693,8 +659,26 @@
               "element": {
                 "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
                 "type": "expand",
-                "title": "🙈 Solution",
-                "content": "<p>Voici les critères de réussite pour cet exercice : </p><ul><li>Le résultat doit être un <strong>court poème.</strong></li><li>Ce poème doit faire l'<strong>éloge d'une équipe de volleyball qui a gagné un tournoi</strong>.</li><li> Le nom de l'équipe, les <strong>Volley-Raptors</strong>, doit être inclus.</li></ul><p>Si vous avez réussi à obtenir ce résultat avec ChatPix, votre réponse devrait être validée.✅</p>"
+                "title": "🗝️ Indice 1 ",
+                "content": "Avez-vous demandé à l’IA des gymnases permettant de faire du <strong>volley-ball </strong>?<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "type": "expand",
+                "title": "🗝️ Indice 2",
+                "content": "Avez-vous vérifié le <strong>nombre de terrain</strong> de volley-ball disponibles ?"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "type": "expand",
+                "title": "🗝️ Indice 3",
+                "content": "Avez-vous vérifié le <strong>coût </strong>du gymnase ?"
               }
             }
           ]
