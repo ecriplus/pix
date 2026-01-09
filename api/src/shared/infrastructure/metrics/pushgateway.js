@@ -6,7 +6,13 @@ import { register } from './register.js';
 
 const logger = child('metrics:pushgateway', { event: 'metrics' });
 
-const pushgateway = new Pushgateway(config.metrics.prometheus.pushgateway.url, {}, register);
+const headers = {};
+
+if (config.metrics.prometheus.pushgateway.basicAuth) {
+  headers.authorization = `Basic ${Buffer.from(config.metrics.prometheus.pushgateway.basicAuth).toString('base64')}`;
+}
+
+const pushgateway = new Pushgateway(config.metrics.prometheus.pushgateway.url, { headers }, register);
 
 async function pushMetrics() {
   logger.debug('pushing metrics');

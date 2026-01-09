@@ -397,6 +397,7 @@ const configuration = (function () {
         pushgateway: {
           pushInterval: ms(process.env.PROMETHEUS_PUSHGATEWAY_PUSH_INTERVAL ?? '15s'),
           url: process.env.PROMETHEUS_PUSHGATEWAY_URL,
+          basicAuth: process.env.PROMETHEUS_PUSHGATEWAY_BASIC_AUTH,
         },
       },
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
