@@ -146,6 +146,7 @@ class OtherAttestations extends Component {
 class SixthGrade extends Component {
   @tracked selectedDivisions = [];
   @tracked isLoading = false;
+  @service locale;
 
   @action
   async onSubmit() {
@@ -167,6 +168,7 @@ class SixthGrade extends Component {
     <div class="attestations-page__action">
       <PixMultiSelect
         @isSearchable={{true}}
+        @locale={{this.locale.currentLocale}}
         @options={{@divisions}}
         @values={{this.selectedDivisions}}
         @onChange={{this.onSelectDivision}}

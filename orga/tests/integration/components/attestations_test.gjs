@@ -54,8 +54,7 @@ module('Integration | Component | Attestations', function (hooks) {
 
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
-      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') }));
-      assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
+      assert.ok(screen.getByRole('button', { name: t('pages.attestations.select-divisions-label') }));
       assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
     });
 
@@ -88,7 +87,7 @@ module('Integration | Component | Attestations', function (hooks) {
         <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
       );
 
-      const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') });
+      const multiSelect = await screen.getByRole('button', { name: t('pages.attestations.select-divisions-label') });
       await click(multiSelect);
 
       const firstDivisionOption = await screen.findByRole('checkbox', { name: 'division1' });
@@ -113,11 +112,13 @@ module('Integration | Component | Attestations', function (hooks) {
       const divisions = undefined;
 
       // when
+
       const screen = await render(
         <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
       );
       // then
-      assert.notOk(screen.queryByRole('textbox', { name: t('pages.attestations.select-label') }));
+      assert.notOk(screen.queryByRole('button', { name: t('pages.attestations.select-divisions-label') }));
+      assert.ok(screen.queryByRole('button', { name: t('pages.attestations.select-label') }));
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
       assert.ok(screen.getByText(t('pages.attestations.basic-description')));
       assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
