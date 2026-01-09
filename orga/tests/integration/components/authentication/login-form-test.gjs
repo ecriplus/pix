@@ -39,34 +39,16 @@ module('Integration | Component | LoginForm', function (hooks) {
     });
   });
 
-  module('when there is an invitation error', function () {
-    module('when invitation has already been accepted', function () {
-      test('it displays an error message', async function (assert) {
-        // given & when
-        const onSubmitStub = sinon.stub();
-        const screen = await render(
-          <template>
-            <LoginForm @onSubmit={{onSubmitStub}} @isWithInvitation="true" @hasInvitationAlreadyBeenAccepted="true" />
-          </template>,
-        );
-
-        // then
-        assert.dom(screen.getByText(t('pages.login-form.invitation-already-accepted'))).exists();
-      });
-    });
-
-    module('when invitation is cancelled', function () {});
+  module('when an error message is given', function () {
     test('it displays an error message', async function (assert) {
       // given & when
       const onSubmitStub = sinon.stub();
       const screen = await render(
-        <template>
-          <LoginForm @onSubmit={{onSubmitStub}} @isWithInvitation="true" @isInvitationCancelled="true" />
-        </template>,
+        <template><LoginForm @onSubmit={{onSubmitStub}} @errorMessage="This is an error" /></template>,
       );
 
       // then
-      assert.dom(screen.getByText(t('pages.login-form.invitation-was-cancelled'))).exists();
+      assert.dom(screen.getByText('This is an error')).exists();
     });
   });
 });

@@ -68,6 +68,10 @@ export default class LoginForm extends Component {
     }
   }
 
+  get globalErrorMessage() {
+    return this.globalError || this.args.errorMessage;
+  }
+
   get pixAppForgottenPasswordUrlWithEmail() {
     const url = new URL(this.url.pixAppForgottenPasswordUrl);
     if (this.login) url.searchParams.set('email', this.login);
@@ -88,21 +92,9 @@ export default class LoginForm extends Component {
 
   <template>
     <form class="authentication-login-form" {{on "submit" this.submit}}>
-      {{#if @hasInvitationAlreadyBeenAccepted}}
+      {{#if this.globalErrorMessage}}
         <PixNotificationAlert @type="error" role="alert">
-          {{t "pages.login-form.invitation-already-accepted"}}
-        </PixNotificationAlert>
-      {{/if}}
-
-      {{#if @isInvitationCancelled}}
-        <PixNotificationAlert @type="error" role="alert">
-          {{t "pages.login-form.invitation-was-cancelled"}}
-        </PixNotificationAlert>
-      {{/if}}
-
-      {{#if this.globalError}}
-        <PixNotificationAlert @type="error" role="alert">
-          {{this.globalError}}
+          {{this.globalErrorMessage}}
         </PixNotificationAlert>
       {{/if}}
 

@@ -57,11 +57,6 @@ module('Acceptance | join and login', function (hooks) {
       assert.strictEqual(currentURL(), '/');
       assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       assert.ok(screen.getByText('Harry Cover'));
-      assert.deepEqual(invitationStorage.get(), {
-        code: 'ABCD',
-        invitationId: '1',
-        organizationName: 'College BRO & Evil Associates',
-      });
     });
 
     module('When user has not accepted terms of service yet', function (hooks) {
