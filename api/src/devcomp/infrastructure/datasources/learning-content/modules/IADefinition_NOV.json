@@ -402,8 +402,8 @@
                         "y2": 743
                       },
                       "spot": {
-                        "x": -60,
-                        "y": -450
+                        "x": 0,
+                        "y": 0
                       },
                       "info": "Plante en pot : oiseau de paradis",
                       "tooltipPosition": "bottom"
