@@ -24,6 +24,7 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
 
   describe('#handle', function () {
     let script;
+    let logger;
     let organization1Id;
     let organization2Id;
     let organizationWithoutAttestationId;
@@ -322,6 +323,110 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
 
       // then
       expect(organizationProfileReward).lengthOf(0);
+    });
+
+    it('should not process profileReward outside date range', async function () {
+      // given
+      const { id: learner1Id, userId } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization1Id,
+      });
+      const { id: learner2Id } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization2Id,
+        userId: userId,
+      });
+      const { id: campaign1Id } = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+        organizationId: organization1Id,
+        targetProfileId: targetProfile1Id,
+      });
+      const { id: campaign2Id } = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+        organizationId: organization2Id,
+        targetProfileId: targetProfile2Id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign1Id,
+        organizationLearnerId: learner1Id,
+        userId: userId,
+        status: CampaignParticipationStatuses.SHARED,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign2Id,
+        organizationLearnerId: learner2Id,
+        userId: userId,
+        status: CampaignParticipationStatuses.SHARED,
+      });
+      databaseBuilder.factory.buildProfileReward({
+        userId: userId,
+        rewardId: attestation1Id,
+        createdAt: new Date('2023-01-01'),
+      });
+      databaseBuilder.factory.buildProfileReward({
+        userId: userId,
+        rewardId: attestation2Id,
+        createdAt: new Date('2025-06-01'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await script.handle({ logger, options: { dryRun: false, startDate: '2024-01-01', endDate: '2025-01-01' } });
+
+      const organizationProfileReward = await knex('organizations-profile-rewards');
+
+      // then
+      expect(organizationProfileReward).lengthOf(0);
+    });
+
+    it('should process profileReward inside date range', async function () {
+      // given
+      const { id: learner1Id, userId } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization1Id,
+      });
+      const { id: learner2Id } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization2Id,
+        userId: userId,
+      });
+      const { id: campaign1Id } = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+        organizationId: organization1Id,
+        targetProfileId: targetProfile1Id,
+      });
+      const { id: campaign2Id } = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+        organizationId: organization2Id,
+        targetProfileId: targetProfile2Id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign1Id,
+        organizationLearnerId: learner1Id,
+        userId: userId,
+        status: CampaignParticipationStatuses.SHARED,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign2Id,
+        organizationLearnerId: learner2Id,
+        userId: userId,
+        status: CampaignParticipationStatuses.SHARED,
+      });
+      databaseBuilder.factory.buildProfileReward({
+        userId: userId,
+        rewardId: attestation1Id,
+        createdAt: new Date('2024-01-01'),
+      });
+      databaseBuilder.factory.buildProfileReward({
+        userId: userId,
+        rewardId: attestation2Id,
+        createdAt: new Date('2024-12-01'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await script.handle({ logger, options: { dryRun: false, startDate: '2024-01-01', endDate: '2025-01-01' } });
+
+      const organizationProfileReward = await knex('organizations-profile-rewards');
+
+      // then
+      expect(organizationProfileReward).lengthOf(2);
     });
   });
 });
