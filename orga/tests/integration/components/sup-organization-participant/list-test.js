@@ -418,7 +418,9 @@ module('Integration | Component | SupOrganizationParticipant::List', function (h
 />`,
       );
 
-      const select = await screen.getByPlaceholderText('Rechercher par groupe');
+      const select = await screen.getByRole('button', {
+        name: t('pages.sup-organization-participants.filter.group.label'),
+      });
       await click(select);
 
       await screen.findByRole('menu');

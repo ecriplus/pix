@@ -1,9 +1,11 @@
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class GroupsFilter extends Component {
+  @service locale;
   @tracked isLoading;
   @tracked groups;
 
@@ -30,6 +32,7 @@ export default class GroupsFilter extends Component {
         @emptyMessage={{t "common.filters.groups.empty"}}
         @screenReaderOnly={{true}}
         @isSearchable={{true}}
+        @locale={{this.locale.currentLocale}}
         @onChange={{@onSelect}}
         @values={{@selectedGroups}}
         @options={{this.options}}

@@ -75,11 +75,10 @@ module('Integration | Component | Ui::DivisionsFilter', function (hooks) {
       this.campaign = store.createRecord('campaign', { id: '1', divisions: [division1, division2, division3] });
       this.selected = ['d1', 'd2'];
 
-      const { getByPlaceholderText } = await render(
+      const { getByRole } = await render(
         hbs`<Ui::DivisionsFilter @model={{this.campaign}} @selected={{this.selected}} />`,
       );
-
-      assert.ok(getByPlaceholderText('d1, d2'));
+      assert.ok(getByRole('button', { name: t('common.filters.divisions.label') }));
     });
   });
 });

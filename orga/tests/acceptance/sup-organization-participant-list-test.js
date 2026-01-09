@@ -56,7 +56,7 @@ module('Acceptance | Sup Organization Participant List', function (hooks) {
 
         // when
 
-        const select = await screen.getByRole('textbox', { name: 'Entrer un groupe' });
+        const select = await screen.getByRole('button', { name: 'Entrer un groupe' });
         await click(select);
 
         await screen.findByRole('menu');

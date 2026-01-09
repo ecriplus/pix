@@ -1,9 +1,11 @@
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class DivisionsFilter extends Component {
+  @service locale;
   @tracked isLoading;
   @tracked divisions;
 
@@ -33,6 +35,7 @@ export default class DivisionsFilter extends Component {
         @onChange={{@onSelect}}
         @options={{this.options}}
         @isSearchable={{true}}
+        @locale={{this.locale.currentLocale}}
         ...attributes
       >
         <:label>{{t "common.filters.divisions.label"}}</:label>

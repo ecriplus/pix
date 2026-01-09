@@ -1,8 +1,11 @@
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
 export default class MultiSelectFilter extends Component {
+  @service locale;
+
   @action
   onSelect(value) {
     const { onSelect, field } = this.args;
@@ -18,6 +21,7 @@ export default class MultiSelectFilter extends Component {
         @screenReaderOnly={{true}}
         @emptyMessage={{@emptyMessage}}
         @isSearchable={{true}}
+        @locale={{this.locale.currentLocale}}
         @onChange={{this.onSelect}}
         @values={{@selectedOption}}
         @options={{@options}}

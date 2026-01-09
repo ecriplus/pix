@@ -418,7 +418,9 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 />`);
 
       // when
-      const select = await screen.getByPlaceholderText('Rechercher par classe');
+      const select = await screen.getByRole('button', {
+        name: t('pages.sco-organization-participants.filter.division.label'),
+      });
       await click(select);
 
       await screen.findByRole('menu');
