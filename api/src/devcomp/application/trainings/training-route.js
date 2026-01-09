@@ -125,7 +125,11 @@ const register = async function (server) {
           payload: Joi.object({
             data: Joi.object({
               attributes: Joi.object({
-                link: Joi.string().uri().required(),
+                link: Joi.when('type', {
+                  is: 'modulix',
+                  then: Joi.string().required(),
+                  otherwise: Joi.string().uri().required(),
+                }),
                 title: Joi.string().required(),
                 'internal-title': Joi.string().required(),
                 duration: Joi.object({
