@@ -220,7 +220,7 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
-                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet.\nObservons l’effet du nombre d’utilisateurs.</p>"
+                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet. Observons l’effet du nombre d’utilisateurs.</p>"
               }
             },
             {
@@ -228,7 +228,7 @@
               "element": {
                 "id": "4ac11755-c95e-4e5f-b3a8-66f89b452c66",
                 "type": "custom-draft",
-                "title": "",
+                "title": "Draft, simulateur conso data center",
                 "url": "https://1024pix.github.io/atelier-contenus/JBO/POICdatacenternov.html",
                 "instruction": "",
                 "height": 500
@@ -326,20 +326,20 @@
                     {
                       "id": "4f9237bf-e0d3-42ec-990c-a869600f336b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel <strong>demande le plus de calculs, de stockage et d’envoi d’informations</strong> aux serveurs ?</p>",
+                      "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel <strong>demande le plus de calculs, de stockage et d’envoi d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Envoyer un message vocal.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! Un message vocal est un fichier audio. Les serveurs doivent <strong>stocker</strong> et <strong>envoyer plus d’informations</strong> que pour un simple texte.</p>"
+                            "diagnosis": "<p>Bien vu ! Un message vocal est un fichier audio. Les serveurs doivent <strong>stocker</strong> et <strong>envoyer plus d’informations</strong> que pour un simple texte.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Envoyer un message texte.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Un message texte contient très peu d’informations. Il demande peu de stockage et peu d’envoi aux serveurs.</p>"
+                            "diagnosis": "<p>Eh non ! Un message texte contient très peu d’informations. Il demande peu de stockage et peu d’envoi aux serveurs.</p>"
                           }
                         },
                         {
@@ -359,7 +359,7 @@
                     {
                       "id": "a01a88a1-9c44-44cb-9b13-750c89592f58",
                       "type": "qcu-discovery",
-                      "instruction": "<p>L’artiste préféré de Solène a sorti une nouvelle chanson. Solène veut l’écouter pour la première fois. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de gestion d’informations</strong> aux serveurs ?</p>",
+                      "instruction": "<p>L’artiste préféré de Solène a sorti une nouvelle chanson. Solène veut l’écouter pour la première fois. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de gestion d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -372,7 +372,7 @@
                           "id": "2",
                           "content": "<p>Regarder le clip vidéo de la musique en streaming.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exact ! La vidéo contient beaucoup plus d’informations. Les serveurs doivent <strong>envoyer et gérer beaucoup plus de données</strong>.</p>"
+                            "diagnosis": "<p>Exact ! La vidéo contient beaucoup plus d’informations. Les serveurs doivent <strong>envoyer et gérer beaucoup plus de données</strong>.</p>"
                           }
                         },
                         {
@@ -392,20 +392,20 @@
                     {
                       "id": "55985477-3b47-4d7c-b7eb-f25c4b05bd7b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Nathan organise une soirée cinéma pour fêter les 10 ans de son film préféré. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de traitement d’informations</strong> aux serveurs ?</p>",
+                      "instruction": "<p>Nathan organise une soirée cinéma pour fêter les 10 ans de son film préféré. Parmi les usages suivants, lequel <strong>demande le plus d’envoi et de traitement d’informations</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Regarder une vidéo en qualité standard.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! La qualité standard contient moins d’informations que la haute définition.</p>"
+                            "diagnosis": "<p>Eh non ! La qualité standard contient moins d’informations que la haute définition.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Regarder une vidéo en haute définition (HD).</p>",
                           "feedback": {
-                            "diagnosis": "<p>Oui ! Une vidéo en HD contient beaucoup plus d’informations. Les serveurs doivent <strong>en envoyer et en traiter davantage</strong>.</p>"
+                            "diagnosis": "<p>Oui ! Une vidéo en HD contient beaucoup plus d’informations. Les serveurs doivent <strong>en envoyer et en traiter davantage</strong>.</p>"
                           }
                         },
                         {
@@ -425,20 +425,20 @@
                     {
                       "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel <strong>demande le plus de calculs informatiques</strong> aux serveurs ?</p>",
+                      "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel <strong>demande le plus de calculs informatiques</strong> aux serveurs ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Faire une demande à un logiciel d’IA générative.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exact ! Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. C’est très gourmand en énergie.</p>"
+                            "diagnosis": "<p>Exact ! Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. C’est très gourmand en énergie.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faire une recherche sur internet.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Une recherche web demande peu de calculs et peu d’envoi d’informations.</p>"
+                            "diagnosis": "<p>Eh non ! Une recherche web demande peu de calculs et peu d’envoi d’informations.</p>"
                           }
                         },
                         {
