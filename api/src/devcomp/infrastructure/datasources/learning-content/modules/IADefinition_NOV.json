@@ -481,7 +481,7 @@
               "element": {
                 "id": "aeeaae8f-72c4-4940-8163-49036e578b1e",
                 "type": "custom",
-                "instruction": "Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d’image est utilisée dans différents secteurs d'activité.",
+                "instruction": "Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d’image est utilisée dans différents secteurs d’activité.",
                 "tagName": "flip-cards",
                 "props": {
                   "name": "flip card ia dit ia ",
