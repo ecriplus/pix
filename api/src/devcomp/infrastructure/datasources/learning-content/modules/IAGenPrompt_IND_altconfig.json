@@ -29,7 +29,7 @@
             {
               "type": "element",
               "element": {
-                "id": "06a8a38c-5995-4632-87a5-ce1ec83e82b8",
+                "id": "52854613-a34d-4f96-a3b4-ec7f4f0373b9",
                 "type": "text",
                 "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l'aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
               }
@@ -37,14 +37,14 @@
           ]
         },
         {
-          "id": "92f571ad-1a64-4b64-ba8f-782337e61713",
+          "id": "3118fd2d-f980-4440-a334-7e68b95fda21",
           "type": "discovery",
           "title": "Conversation d’introduction",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "06a8a38c-5995-4632-87a5-ce1ec83e82b8",
+                "id": "204d4072-197b-474e-956a-dcead7707bd9",
                 "type": "custom",
                 "instruction": "",
                 "tagName": "message-conversation",
@@ -82,14 +82,14 @@
           ]
         },
         {
-          "id": "63688f5c-ca96-4b64-8cd4-db99e08b6767",
+          "id": "37ebcd24-d40b-4e56-8692-1492247905a6",
           "type": "transition",
           "title": "Transition",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "d715d4e1-fc44-4f12-98e6-48bd428e55cb",
+                "id": "a974dcca-849d-43ed-bdb2-9b2be61b144b",
                 "type": "text",
                 "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si  on explique les choses clairement.<br><br></p>"
               }
@@ -103,7 +103,7 @@
       "type": "explore-to-understand",
       "grains": [
         {
-          "id": "0f187da9-1bbc-407f-bb5d-c29b09f2c950",
+          "id": "1bfe7226-b4dd-4719-8e0b-8f5362d557ca",
           "type": "discovery",
           "title": "Améliore le prompt de Gustave",
           "components": [
@@ -167,7 +167,7 @@
             {
               "type": "element",
               "element": {
-                "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
+                "id": "2f4fd9da-37d1-4bb0-b9e2-b241bb0d11c0",
                 "type": "text",
                 "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>… </p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
@@ -182,7 +182,7 @@
             {
               "type": "element",
               "element": {
-                "id": "d0929d7f-98c7-4922-a3ab-5397de53bef1",
+                "id": "db2bec02-3bfe-4378-ab39-5cf22045615e",
                 "type": "text",
                 "content": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p>"
               }
@@ -280,7 +280,7 @@
           ]
         },
         {
-          "id": "1fbe2256-2436-497e-815e-374021a81b20",
+          "id": "aaffe6e1-decd-453b-be28-a285c8b69550",
           "type": "discovery",
           "title": "Prompter avec le bon format",
           "components": [
@@ -424,7 +424,7 @@
       "type": "practise",
       "grains": [
         {
-          "id": "b6a9f4ed-057a-490f-9d81-a0687b5ee269",
+          "id": "acc7d321-8440-4b86-a5ae-833065436267",
           "type": "activity",
           "title": "Analyse les prompts",
           "components": [
@@ -584,18 +584,18 @@
       ]
     },
     {
-      "id": "a20e85e6-6ab6-4b08-b9b7-8d4dcf2a9e94",
+      "id": "d1515253-32fc-434e-b573-c247ed481637",
       "type": "go-further",
       "grains": [
         {
-          "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
+          "id": "28462ad7-6fe1-458d-8c75-1542b987073a",
           "type": "challenge",
           "title": "Défi : le lieu du tournoi",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "dd2cf906-b77f-4c4d-8f11-9aa53a606d03",
+                "id": "6def9ef6-ae83-4fc7-923f-a6a0714c7a15",
                 "type": "text",
                 "content": "Le tournoi approche mais Gustave a du mal à trouver un lieu pour le tournoi.<br><br>Il cherche un endroit à Jolieville, avec au moins 4 terrains.&nbsp;<br>Il a un budget maximal de 300 pixmoney, il est à la recherche d’un bon plan.&nbsp;"
               }
@@ -603,7 +603,7 @@
             {
               "type": "element",
               "element": {
-                "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
+                "id": "5f424fe8-b996-4934-9af9-200e6ed5ed68",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
@@ -616,7 +616,7 @@
             {
               "type": "element",
               "element": {
-                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "id": "378e9d85-a52b-44ab-837b-0697fa865402",
                 "type": "qrocm",
                 "instruction": "Quel gymnase devrait contacter Gustave ?",
                 "proposals": [
@@ -657,7 +657,7 @@
             {
               "type": "element",
               "element": {
-                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "id": "76b8a58f-b92a-40f9-b95e-02e8f6dcd4e0",
                 "type": "expand",
                 "title": "🗝️ Indice 1 ",
                 "content": "Avez-vous demandé à l’IA des gymnases permettant de faire du <strong>volley-ball </strong>?<br>"
