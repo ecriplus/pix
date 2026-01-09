@@ -1,6 +1,6 @@
 {
   "name": "pix-audit-logger",
-  "version": "5.298.0",
+  "version": "5.299.0",
   "description": "",
   "scripts": {
     "build": "tsc --project tsconfig.production.json",

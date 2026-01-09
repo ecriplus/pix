@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.299.0](https://github.com/1024pix/pix/compare/v5.298.0...v5.299.0) (2026-01-09)
+
+### :rocket: Amélioration
+
+- [#14645](https://github.com/1024pix/pix/pull/14645) Afficher le détail du référentiel coeur/transverse (PIX-20903). 
+- [#14651](https://github.com/1024pix/pix/pull/14651) Ajoute une page de détails pour les schémas de parcours combiné (PIX-20995) 
+- [#14665](https://github.com/1024pix/pix/pull/14665) Ajouter une bordure aux POI non interactifs dans les modules (PIX-20761). 
+- [#14657](https://github.com/1024pix/pix/pull/14657) Construire le lien pour les détails d'un contenu formatif modulix sur Pix Admin (PIX-21019). 
+- [#14669](https://github.com/1024pix/pix/pull/14669) creation-module-surequipement 
+- [#14658](https://github.com/1024pix/pix/pull/14658) Recherche d'un nom d'orga malgré l'utilisation de caractères spéciaux (PIX-20770). 
+- [#14622](https://github.com/1024pix/pix/pull/14622) Update IADefinition_IND.json 
+- [#14641](https://github.com/1024pix/pix/pull/14641) WIP creation module durabilite nov 
+
+### :bug: Correction
+
+- [#14568](https://github.com/1024pix/pix/pull/14568) Faire que les fichiers de traduction correspondant à une locale composée (xxx-YYY) soient utilisés (PIX-20242) 
+
+### :building_construction: Tech
+
+- [#14662](https://github.com/1024pix/pix/pull/14662) Préfixer les routes des schémas de parcours combinés par /admin (PIX) 
+- [#14661](https://github.com/1024pix/pix/pull/14661) Tentative de stabiliser le test E2E portant sur le passage d'un test de certification 
+
+### :arrow_up: Montée de version
+
+- [#14655](https://github.com/1024pix/pix/pull/14655) Lock file maintenance (admin) 
+- [#14656](https://github.com/1024pix/pix/pull/14656) Lock file maintenance (api) 
+- [#14458](https://github.com/1024pix/pix/pull/14458) Replace dependency @tsconfig/node20 with @tsconfig/node22 (audit-logger) 
+- [#14607](https://github.com/1024pix/pix/pull/14607) Update dependency ember-intl to v8 (certif) 
+- [#14653](https://github.com/1024pix/pix/pull/14653) Update dependency ember-intl to v8 (orga) 
+- [#14650](https://github.com/1024pix/pix/pull/14650) Update nginx Docker tag to v1.29.4 
+- [#14670](https://github.com/1024pix/pix/pull/14670) Upgrade @1024pix/epreuves-components to 2.5.1
+
 # [5.298.0](https://github.com/1024pix/pix/compare/v5.297.0...v5.298.0) (2026-01-08)
 
 ### :rocket: Amélioration
