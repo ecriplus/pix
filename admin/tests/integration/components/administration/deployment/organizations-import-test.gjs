@@ -31,7 +31,9 @@ module('Integration | Component |  administration/organizations-import', functio
         sendSuccessNotification = notificationSuccessStub;
       }
       this.owner.register('service:pixToast', NotificationsStub);
-      saveAdapterStub.withArgs(file).resolves();
+      saveAdapterStub.withArgs([file]).resolves({
+        data: [{ id: '1' }, { id: '2' }, { id: '3' }],
+      });
 
       // when
       const screen = await render(<template><OrganizationsImport /></template>);
@@ -41,7 +43,7 @@ module('Integration | Component |  administration/organizations-import', functio
       // then
       assert.true(
         notificationSuccessStub.calledWith({
-          message: t('components.administration.organizations-import.notifications.success'),
+          message: t('components.administration.organizations-import.notifications.success', { count: 3 }),
         }),
       );
     });
