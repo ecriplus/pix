@@ -382,24 +382,24 @@
                     },
                     {
                       "coords": {
-                        "x1": 565,
-                        "y1": 500,
-                        "x2": 607,
-                        "y2": 528
+                        "x1": 1320,
+                        "y1": 335,
+                        "x2": 1437,
+                        "y2": 524
                       },
                       "spot": {
                         "x": 0,
                         "y": -1
                       },
-                      "info": "Décoration : sphère en verre soufflé",
+                      "info": "Décoration : coussin avec housse en velours bleu ciel et bleu nuit",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 105,
-                        "y1": 761,
-                        "x2": 4,
-                        "y2": 91
+                        "x1": 0,
+                        "y1": 95,
+                        "x2": 98,
+                        "y2": 743
                       },
                       "spot": {
                         "x": -60,
@@ -481,7 +481,7 @@
               "element": {
                 "id": "aeeaae8f-72c4-4940-8163-49036e578b1e",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d’image est utilisée dans différents secteurs d'activité.",
                 "tagName": "flip-cards",
                 "props": {
                   "name": "flip card ia dit ia ",
