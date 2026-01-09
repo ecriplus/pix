@@ -7,8 +7,12 @@ import {
   DifferentExternalIdentifierError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
-import { oidcAuthenticationServiceRegistry } from '../../../../src/identity-access-management/domain/usecases/index.js';
+import {
+  oidcAuthenticationServiceRegistry,
+  usecases,
+} from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
+import * as serverSideCookieSession from '../../../../src/shared/infrastructure/plugins/yar.js';
 import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
@@ -19,6 +23,7 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
   beforeEach(async function () {
     httpTestServer = new HttpTestServer();
     httpTestServer.setupDeserialization();
+    await httpTestServer.register(serverSideCookieSession);
     await httpTestServer.register(routesUnderTest);
   });
 
@@ -76,6 +81,49 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
       // then
       expect(response2.statusCode).to.deep.equal(response1.statusCode);
       expect(response2.result.data).to.deep.equal(response1.result.data);
+    });
+
+    context('when an unexpected error occurs', function () {
+      it('does not break and returns an empty array', async function () {
+        // given
+        const headers = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };
+
+        const error = new Error('BOOM!');
+        sinon.stub(usecases, 'getReadyIdentityProviders').rejects(error);
+
+        // when
+        const response = await httpTestServer.request('GET', '/api/oidc/identity-providers', null, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.equal({ data: [] });
+      });
+    });
+  });
+
+  describe('POST /api/oidc/token', function () {
+    context('when state is missing in session', function () {
+      it('returns a BadRequestError', async function () {
+        // given
+        const headers = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };
+        const payload = {
+          data: {
+            attributes: {
+              identity_provider: 'OIDC_EXAMPLE_NET',
+              code: 'some code',
+              state: 'some state',
+            },
+          },
+        };
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/oidc/token', payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+        expect(response.result.errors[0].code).to.equal('MISSING_OIDC_STATE');
+        expect(response.result.errors[0].detail).to.equal('Required "state" is missing in session');
+      });
     });
   });
 
