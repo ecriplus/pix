@@ -1,4 +1,5 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { Module } from '../../domain/models/module/Module.js';
 import { ModuleMetadata } from '../../domain/models/module/ModuleMetadata.js';
 
 async function getAllByIds({ ids, moduleDatasource }) {
@@ -37,9 +38,10 @@ async function getBySlug({ slug, moduleDatasource }) {
   }
 }
 
-async function list({ moduleDatasource }) {
+async function listPublic({ moduleDatasource }) {
   const modules = await moduleDatasource.list();
-  return modules.map(_toDomain);
+  const publicModules = modules.filter((module) => module.visibility === Module.VISIBILITY.PUBLIC);
+  return publicModules.map(_toDomain);
 }
 
 function _toDomain(module) {
@@ -56,4 +58,4 @@ function _toDomain(module) {
   });
 }
 
-export { getAllByIds, getAllByShortIds, getByShortId, getBySlug, list };
+export { getAllByIds, getAllByShortIds, getByShortId, getBySlug, listPublic };

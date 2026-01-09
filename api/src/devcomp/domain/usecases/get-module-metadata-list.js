@@ -1,5 +1,5 @@
 async function getModuleMetadataList({ moduleMetadataRepository }) {
-  return moduleMetadataRepository.list();
+  return moduleMetadataRepository.listPublic();
 }
 
 export { getModuleMetadataList };

@@ -493,7 +493,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
     });
   });
 
-  describe('#list', function () {
+  describe('#listPublic', function () {
     it('should return a list of modules metadata', async function () {
       const emailModule = {
         id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
@@ -788,7 +788,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       moduleDatasourceStub.list.resolves([emailModule, bacASableModule]);
 
       // when
-      const modulesMetadata = await moduleMetadataRepository.list({ moduleDatasource: moduleDatasourceStub });
+      const modulesMetadata = await moduleMetadataRepository.listPublic({ moduleDatasource: moduleDatasourceStub });
 
       // then
       const expectedResult = [
@@ -813,6 +813,119 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           image: bacASableModule.details.image,
           link: `/modules/${bacASableModule.shortId}/${bacASableModule.slug}`,
           visibility: bacASableModule.visibility,
+        },
+      ];
+
+      expect(modulesMetadata).to.deep.equal(expectedResult);
+    });
+    it('should return only modules metadata for public modules', async function () {
+      // given
+      const publicModule = {
+        id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+        shortId: 'gbsri73s',
+        slug: 'bien-ecrire-son-adresse-mail',
+        title: 'Bien écrire son adresse mail',
+        isBeta: true,
+        visibility: Module.VISIBILITY.PUBLIC,
+        details: {
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+          description:
+            'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
+          duration: 12,
+          level: 'novice',
+          tabletSupport: 'comfortable',
+          objectives: [
+            'Écrire une adresse mail correctement, en évitant les erreurs courantes',
+            'Connaître les parties d’une adresse mail et les identifier sur des exemples',
+            'Comprendre les fonctions des parties d’une adresse mail',
+          ],
+        },
+        sections: [
+          {
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
+              {
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h4 class='screen-reader-only'>L'arobase</h4><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+
+      const privateModule = {
+        id: 'f730dc0c-9653-492b-a1b6-8978dbac0782',
+        shortId: 'absdi73s',
+        slug: 'test-module',
+        title: 'Des données de test pour le dev',
+        isBeta: true,
+        visibility: Module.VISIBILITY.PRIVATE,
+        details: {
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+          description: 'Des données de test pour le dev',
+          duration: 12,
+          level: 'novice',
+          tabletSupport: 'comfortable',
+          objectives: ['Du test', 'Du test et encore du test', 'Du test, du test et encore du test'],
+        },
+        sections: [
+          {
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
+              {
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : Comment tester',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h4 class='screen-reader-only'>Le test</h4><p>Le test c'est tester encore et toujours</p>",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+      const moduleDatasourceStub = {
+        list: sinon.stub(),
+      };
+      moduleDatasourceStub.list.resolves([publicModule, privateModule]);
+
+      // when
+      const modulesMetadata = await moduleMetadataRepository.listPublic({ moduleDatasource: moduleDatasourceStub });
+
+      // then
+      const expectedResult = [
+        {
+          id: publicModule.id,
+          shortId: publicModule.shortId,
+          slug: publicModule.slug,
+          title: publicModule.title,
+          isBeta: publicModule.isBeta,
+          duration: publicModule.details.duration,
+          image: publicModule.details.image,
+          link: `/modules/${publicModule.shortId}/${publicModule.slug}`,
+          visibility: publicModule.visibility,
         },
       ];
 
