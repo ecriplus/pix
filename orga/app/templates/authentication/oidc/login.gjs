@@ -24,11 +24,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         <h3 class="pix-body-l">{{t "pages.oidc.login.sub-title"}}</h3>
       </div>
 
-      <LoginForm
-        @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
-        @isInvitationCancelled={{@controller.isInvitationCancelled}}
-        @onSubmit={{@controller.redirectToAssociationConfirmation}}
-      />
+      <LoginForm @onSubmit={{@controller.redirectToAssociationConfirmation}} />
 
       <PixButtonLink @variant="secondary" @route="authentication.oidc.signup" @model={{@model.identity_provider_slug}}>
         {{t "pages.oidc.login.signup-button"}}

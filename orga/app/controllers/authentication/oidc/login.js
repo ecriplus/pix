@@ -5,17 +5,15 @@ import ENV from 'pix-orga/config/environment';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 
 const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
-const invitationStorage = new SessionStorageEntry('joinInvitationData');
 const oidcAssociationConfirmationStorage = new SessionStorageEntry('oidcAssociationConfirmation');
 
 export default class OidcLoginController extends Controller {
-  @service store;
   @service oidcIdentityProviders;
-  @service session;
   @service router;
+  @service joinInvitation;
 
   get currentInvitation() {
-    return invitationStorage.get();
+    return this.joinInvitation.invitation;
   }
 
   get authenticationKey() {
