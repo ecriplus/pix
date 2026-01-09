@@ -4,6 +4,7 @@
   "slug": "cyber-virus-nov",
   "title": "Mon ordinateur a attrapé un virus : comment est-ce possible ?",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYVirus_NOV/picto_cyber_virus_nov.svg",
     "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir comment ces programmes arrivent, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",

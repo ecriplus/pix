@@ -4,6 +4,7 @@
   "slug": "cyber-antivirus",
   "title": "Renforcez la protection de vos appareils contre les logiciels malveillants",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants.<br>Dans ce module, vous allez découvrir deux méthodes complémentaires pour renforcer la protection des appareils numériques (smartphones, tablettes, ordinateurs) face à ces logiciels.&nbsp;🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",

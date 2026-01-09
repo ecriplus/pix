@@ -2,7 +2,7 @@ import { DomainError } from '../../../../shared/domain/errors.js';
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 
 export class ModuleMetadata {
-  constructor({ id, shortId, slug, title, isBeta, duration, image }) {
+  constructor({ id, shortId, slug, title, isBeta, duration, image, visibility }) {
     assertNotNullOrUndefined(id, 'The id is required for a module metadata');
     assertNotNullOrUndefined(shortId, 'The short id is required for a module metadata');
     assertNotNullOrUndefined(slug, 'The slug is required for a module metadata');
@@ -10,6 +10,7 @@ export class ModuleMetadata {
     assertNotNullOrUndefined(isBeta, 'Field isBeta is required for a module metadata');
     assertNotNullOrUndefined(duration, 'The duration is required for a module metadata');
     assertNotNullOrUndefined(image, 'The image is required for a module metadata');
+    assertNotNullOrUndefined(visibility, 'The visibility is required for a module metadata');
     this.#assertDurationHasPositiveValue(Number(duration));
 
     this.id = id;
@@ -20,6 +21,7 @@ export class ModuleMetadata {
     this.duration = Number(duration);
     this.image = image;
     this.link = `/modules/${this.shortId}/${this.slug}`;
+    this.visibility = visibility;
   }
 
   #assertDurationHasPositiveValue(duration) {

@@ -4,6 +4,7 @@
   "slug": "cyber-proteger-mdp",
   "title": "Protéger ses mots de passe",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Même si vous choisissez des mots de passe forts, ce n’est pas toujours suffisant pour protéger vos nombreux services en ligne. Dans ce module, découvrez comment garder vos mots de passe secrets, réagir en cas d’oubli et éviter les erreurs courantes.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",

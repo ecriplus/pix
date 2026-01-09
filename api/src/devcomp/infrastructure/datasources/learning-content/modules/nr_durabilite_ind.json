@@ -4,6 +4,7 @@
   "slug": "metaux-eau-reemploi",
   "title": "Le numérique : pourquoi privilégier le réemploi ?",
   "isBeta": false,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Nos smartphones et ordinateurs contiennent de nombreux métaux (lithium, cobalt, terres rares) dont l’extraction consomme beaucoup d’eau et de produits chimiques, avec des impacts sur l’environnement et la santé. 🌍</p><p>Ce module vous montre les impacts de la fabrication des appareils numériques et montre comment le réemploi et le reconditionnement permettent d’en réduire l’empreinte. 🔁</p>",

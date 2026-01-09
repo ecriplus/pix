@@ -44,6 +44,7 @@ export class ModuleFactory {
         title: moduleData.title,
         version: moduleData.version,
         isBeta: moduleData.isBeta,
+        visibility: moduleData.visibility,
         details: new Details(moduleData.details),
         sections: await Promise.all(
           await Promise.all(

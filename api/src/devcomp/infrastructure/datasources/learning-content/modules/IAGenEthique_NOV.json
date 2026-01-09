@@ -4,6 +4,7 @@
   "slug": "iagenethique",
   "title": "Ce qu’il faut éviter de dire à une IA générative",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenEthique_NOV/picto-ia-ethique-vector-1.svg",
     "description": "<p>Quand vous discutez avec un logiciel d’intelligence artificielle (IA) générative, la conversation n’est pas privée.</p><p>Tout ce que vous écrivez peut être enregistré et parfois réutilisé pour améliorer l’IA.</p><p>Dans ce module, vous allez comprendre pourquoi les échanges avec une IA générative ne sont pas totalement privés et quelles informations il vaut mieux éviter d’écrire dans vos instructions (prompts).</p>",

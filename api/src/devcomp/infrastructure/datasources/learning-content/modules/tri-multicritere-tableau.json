@@ -4,6 +4,7 @@
   "slug": "tri-multicritere-tableau",
   "title": "Trier un tableau selon plusieurs critères",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Trier des données dans une feuille de calcul peut permettre de trouver efficacement des informations. Parfois, un tri sur une seule colonne ne suffit pas. <br>Dans ce module, vous allez apprendre à trier vos données en combinant plusieurs critères.<br></p>",

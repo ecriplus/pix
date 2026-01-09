@@ -4,6 +4,7 @@
   "slug": "centre-de-donnee-novice",
   "title": "L’impact caché de nos usages numériques en ligne",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Chaque message envoyé, chaque vidéo regardée ou chaque «&nbsp;J’aime&nbsp;» mobilise des centres de données, souvent invisibles pour les utilisateurs. Ces lieux abritent des serveurs qui stockent, traitent et transmettent les informations, tout en consommant de l’électricité et parfois de l’eau. Dans ce module, vous allez comprendre le rôle des centres de données, pourquoi certains usages numériques consomment plus d’énergie que d’autres, et comment adopter des gestes simples pour réduire ces consommations au quotidien.</p>",

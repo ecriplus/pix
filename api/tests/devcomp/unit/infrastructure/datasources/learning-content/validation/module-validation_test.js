@@ -667,6 +667,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         slug: 'bac-a-sable',
         title: '<h1>Bac à sable</h1>',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',

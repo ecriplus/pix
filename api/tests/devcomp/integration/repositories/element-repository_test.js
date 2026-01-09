@@ -268,6 +268,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
         slug: 'bac-a-sable',
         title: 'Bac à sable',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',

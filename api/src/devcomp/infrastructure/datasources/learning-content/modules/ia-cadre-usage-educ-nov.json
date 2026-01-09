@@ -4,6 +4,7 @@
   "slug": "ia-cadre-usage-educ-nov",
   "title": "IA et éducation, découverte du cadre d’usage",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>L’usage des IA génératives par les élèves et par certains enseignants est déjà largement répandu. Ce développement rapide pose question, et a mené le ministère de l’Éducation nationale à élaborer des recommandations.&nbsp;</p><p>Vous allez en découvrir dans ce module les grandes lignes.</p>",

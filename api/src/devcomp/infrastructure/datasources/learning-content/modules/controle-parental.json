@@ -4,6 +4,7 @@
   "slug": "controle-parental",
   "title": "Le contrôle parental",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les enfants et les adolescents utilisent le numérique au quotidien. Pour les protéger sur internet, le contrôle parental fait partie des solutions à la disposition des parents.&nbsp;🧑‍🧒<br>Dans ce module, découvrez le contrôle parental et ses fonctionnalités.</p>",

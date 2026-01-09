@@ -31,6 +31,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const redirectionUrl = 'https://app.pix.fr/parcours/COMBINIX1';
       const isBeta = true;
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
       const details = {
         image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -43,7 +44,17 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ id, shortId, details, slug, title, sections: [], isBeta, version });
+      const moduleFromDomain = new Module({
+        id,
+        shortId,
+        details,
+        slug,
+        title,
+        sections: [],
+        isBeta,
+        version,
+        visibility,
+      });
       moduleFromDomain.setRedirectionUrl(redirectionUrl);
       const expectedJson = {
         data: {
@@ -81,6 +92,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
       const details = {
         image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -102,6 +114,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         sections: [],
         isBeta,
         version,
+        visibility,
       });
       const expectedJson = {
         data: {
@@ -138,6 +151,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
       const details = {
         image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -159,6 +173,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         sections: [{ id: 'section1', type: 'none', grains: [] }],
         isBeta,
         version,
+        visibility,
       });
       const expectedJson = {
         data: {
@@ -210,6 +225,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
       const version = Symbol('version');
+      const visibility = Symbol('visibility');
       const details = {
         image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -230,6 +246,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         isBeta,
         version,
         details,
+        visibility,
         sections: [
           {
             id: 'section1',

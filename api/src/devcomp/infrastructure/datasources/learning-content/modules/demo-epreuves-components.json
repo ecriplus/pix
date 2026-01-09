@@ -4,6 +4,7 @@
   "slug": "demo-epreuves-components",
   "title": "Démonstration des composants Pix Épreuves",
   "isBeta": true,
+  "visibility": "private",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement tous les composants Pix Épreuves.</p>",

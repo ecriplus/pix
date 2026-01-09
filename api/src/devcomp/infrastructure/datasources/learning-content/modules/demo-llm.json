@@ -4,6 +4,7 @@
   "slug": "demo-llm",
   "title": "Démo LLM",
   "isBeta": true,
+  "visibility": "private",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient un exemple d’intégration de ChatPix.</p>",

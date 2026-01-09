@@ -4,6 +4,7 @@
   "slug": "cyber-double-authentification",
   "title": "Protéger ses données en ligne avec la double authentification",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CY_MFA_NOV/picto_cyber_mfa_nov.svg",
     "description": "<p>Pour vous connectez à vos différents services en ligne, vous devez entrer votre identifiant puis votre mot de passe... et parfois un code en plus 🔐 <br>Dans ce module, vous allez voir pourquoi ces étapes sont importantes et comment la double authentification renforce votre sécurité en ligne.<br> <br> <em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",

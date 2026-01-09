@@ -52,6 +52,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: 'existingModuleSlug',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -209,6 +210,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:
@@ -358,6 +360,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
         isBeta: true,
+        visibility: 'public',
         details: {
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
           description:

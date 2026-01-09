@@ -4,6 +4,7 @@
   "slug": "ia-hallu",
   "title": "Elles hallucinent, ces IA génératives ! ",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/tmp-ia-hallu/picto_moduleIA_hallu.svg",
     "description": "<p>Les logiciels d’IA générative sont de plus en plus utilisés au quotidien. Mais leurs réponses sont-elles toujours correctes ?&nbsp;Et quand il y a des erreurs, d’où viennent-elles ?<br>C’est ce que nous allons découvrir dans ce module.&nbsp;</p>",

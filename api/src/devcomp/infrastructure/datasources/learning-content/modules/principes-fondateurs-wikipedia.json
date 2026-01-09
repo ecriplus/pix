@@ -4,6 +4,7 @@
   "slug": "principes-fondateurs-wikipedia",
   "title": "Les principes fondateurs de Wikipédia",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "Wikipédia est un site très connu, que vous avez sans doute déjà utilisé. Dans ce module, vous trouverez des explications sur les principes de Wikipédia. Vous découvrirez aussi des méthodes pour l'utiliser.",

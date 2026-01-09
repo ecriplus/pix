@@ -1,7 +1,12 @@
 import { assertIsArray, assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 
 class Module {
-  constructor({ id, shortId, slug, title, isBeta, sections, details, version }) {
+  static VISIBILITY = Object.freeze({
+    PUBLIC: 'public',
+    PRIVATE: 'private',
+  });
+
+  constructor({ id, shortId, slug, title, isBeta, sections, details, version, visibility }) {
     assertNotNullOrUndefined(id, 'The id is required for a module');
     assertNotNullOrUndefined(shortId, 'The shortId is required for a module');
     assertNotNullOrUndefined(slug, 'The slug is required for a module');
@@ -9,6 +14,7 @@ class Module {
     assertNotNullOrUndefined(isBeta, 'isBeta value is required for a module');
     assertIsArray(sections, 'A list of sections is required for a module');
     assertNotNullOrUndefined(details, 'The details are required for a module');
+    assertNotNullOrUndefined(visibility, 'The visibility is required for a module');
 
     this.id = id;
     this.shortId = shortId;
@@ -18,6 +24,7 @@ class Module {
     this.sections = sections;
     this.details = details;
     this.version = version;
+    this.visibility = visibility;
   }
 
   setRedirectionUrl(url) {
