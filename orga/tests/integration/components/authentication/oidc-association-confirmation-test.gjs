@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import OidcAssociationConfirmation from 'pix-orga/components/authentication/oidc-association-confirmation';
@@ -11,44 +10,28 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Oidc-association-confirmation', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let router;
-
-  const identityProviderOrganizationName = 'Nouveau Partenaire';
+  const identityProviderSlug = 'new-oidc-partner';
+  const identityProviderName = 'Nouveau Partenaire';
+  const oidcAuthenticationMethodNames = ['France Connect', 'Impots.gouv'];
+  const email = 'lloyidce@example.net';
   const fullNameFromPix = 'Lloyd Pix';
   const fullNameFromExternalIdentityProvider = 'Lloyd Cé';
-  const email = 'lloyidce@example.net';
-  const identityProviderSlug = 'new-oidc-partner';
-  const authenticationMethods = [{ identityProvider: 'France Connect' }, { identityProvider: 'Impots.gouv' }];
-  const invitationId = 123;
-  const invitationCode = 'ABCD';
-  const authenticationKey = '123456azerty';
-
-  hooks.beforeEach(function () {
-    class OidcIdentityProvidersStub extends Service {
-      list = [
-        { organizationName: 'France Connect' },
-        { organizationName: 'Impots.gouv' },
-        { organizationName: 'Nouveau partenaire' },
-      ];
-      getIdentityProviderNamesByAuthenticationMethods = sinon.stub().returns(['France Connect', 'Impots.gouv']);
-    }
-    this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
-  });
 
   test('displays association confirmation page elements', async function (assert) {
+    // given
+    const onSubmitStub = sinon.stub();
+
     //  when
     const screen = await render(
       <template>
         <OidcAssociationConfirmation
-          @identityProviderOrganizationName={{identityProviderOrganizationName}}
+          @onSubmit={{onSubmitStub}}
           @identityProviderSlug={{identityProviderSlug}}
-          @authenticationMethods={{authenticationMethods}}
+          @identityProviderName={{identityProviderName}}
+          @oidcAuthenticationMethodNames={{oidcAuthenticationMethodNames}}
+          @email={{email}}
           @fullNameFromPix={{fullNameFromPix}}
           @fullNameFromExternalIdentityProvider={{fullNameFromExternalIdentityProvider}}
-          @email={{email}}
-          @invitationId={{invitationId}}
-          @invitationCode={{invitationCode}}
-          @authenticationKey={{authenticationKey}}
         />
       </template>,
     );
@@ -88,21 +71,20 @@ module('Integration | Component | Oidc-association-confirmation', function (hook
 
   test('redirects to /login if user goes back', async function (assert) {
     // given
-    router = this.owner.lookup('service:router');
+    const onSubmitStub = sinon.stub();
+    const router = this.owner.lookup('service:router');
     sinon.stub(router, 'transitionTo').resolves();
 
     const screen = await render(
       <template>
         <OidcAssociationConfirmation
-          @identityProviderOrganizationName={{identityProviderOrganizationName}}
+          @onSubmit={{onSubmitStub}}
           @identityProviderSlug={{identityProviderSlug}}
-          @authenticationMethods={{authenticationMethods}}
+          @identityProviderName={{identityProviderName}}
+          @oidcAuthenticationMethodNames={{oidcAuthenticationMethodNames}}
+          @email={{email}}
           @fullNameFromPix={{fullNameFromPix}}
           @fullNameFromExternalIdentityProvider={{fullNameFromExternalIdentityProvider}}
-          @email={{email}}
-          @invitationId={{invitationId}}
-          @invitationCode={{invitationCode}}
-          @authenticationKey={{authenticationKey}}
         />
       </template>,
     );

@@ -13,15 +13,13 @@ import OidcAssociationConfirmation from '../../../components/authentication/oidc
 
     <:content>
       <OidcAssociationConfirmation
-        @identityProviderOrganizationName={{@model.identityProviderOrganizationName}}
-        @identityProviderSlug={{@model.identityProviderSlug}}
-        @authenticationMethods={{@model.authenticationMethods}}
-        @fullNameFromPix={{@model.fullNameFromPix}}
-        @fullNameFromExternalIdentityProvider={{@model.fullNameFromExternalIdentityProvider}}
-        @email={{@model.email}}
-        @invitationId={{@model.invitationId}}
-        @invitationCode={{@model.invitationCode}}
-        @authenticationKey={{@model.authenticationKey}}
+        @onSubmit={{@controller.joinAndLinkAccount}}
+        @identityProviderSlug={{@model.identity_provider_slug}}
+        @identityProviderName={{@controller.identityProviderName}}
+        @oidcAuthenticationMethodNames={{@controller.oidcAuthenticationMethodNames}}
+        @email={{@controller.email}}
+        @fullNameFromPix={{@controller.fullNameFromPix}}
+        @fullNameFromExternalIdentityProvider={{@controller.fullNameFromExternalIdentityProvider}}
       />
     </:content>
   </AuthenticationLayout>
