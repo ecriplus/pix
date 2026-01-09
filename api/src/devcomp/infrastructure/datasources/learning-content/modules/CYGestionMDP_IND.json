@@ -250,7 +250,7 @@
                     {
                       "id": "9e8f5cc7-66f4-4006-87d6-409dc2583c0b",
                       "type": "text",
-                      "content": "<p>Elio est connecté à son gestionnaire de mots de passe. Il est en train d’y créer une nouvelle entrée.<br>Il a déjà renseigné le nom du site et son email.&nbsp;<br>Il lui reste à choisir un mot de passe.<br></p>"
+                      "content": "<p>Elio est connecté à son gestionnaire de mots de passe. Il est en train d’y créer une nouvelle entrée.<br>Il a déjà renseigné le nom du site et son email.&nbsp;<br>Il lui reste à choisir un mot de passe.</p>"
                     },
                     {
                       "id": "83b0d3c0-a54d-43ca-9e5b-11c5c1d4da6d",
@@ -293,7 +293,7 @@
               "element": {
                 "id": "710476f2-0e7c-4367-8b23-6075b313d91b",
                 "type": "text",
-                "content": "<p><strong>🤔 Bon à savoir</strong><br>Pour garder vos informations en sécurité, le gestionnaire de mots de passe les sauvegarde dans un <strong>format codé </strong>(chiffré). Ainsi, même si des pirates informatiques accèdent aux données de votre gestionnaire, vos mots de passe sont <strong>illisibles </strong>et donc <strong>inutilisables </strong>pour les attaquants.<br></p>"
+                "content": "<p><strong>🤔 Bon à savoir</strong><br>Pour garder vos informations en sécurité, le gestionnaire de mots de passe les sauvegarde dans un <strong>format codé </strong>(chiffré). Ainsi, même si des pirates informatiques accèdent aux données de votre gestionnaire, vos mots de passe sont <strong>illisibles </strong>et donc <strong>inutilisables </strong>pour les attaquants.</p>"
               }
             },
             {
@@ -335,7 +335,7 @@
               "element": {
                 "id": "bbc8a820-c3fa-4553-8cb4-21c7438e8b72",
                 "type": "text",
-                "content": "<p>Il existe deux grands types de gestionnaires de mots de passe recommandés&nbsp;: les <strong>gestionnaires locaux</strong> et les <strong>gestionnaires en ligne </strong>(cloud).<br>Pour chacun des exemples ci-dessous, indiquez quel  type de gestionnaire est utilisé.<br></p>"
+                "content": "<p>Il existe deux grands types de gestionnaires de mots de passe recommandés&nbsp;: les <strong>gestionnaires locaux</strong> et les <strong>gestionnaires en ligne </strong>(cloud).<br>Pour chacun des exemples ci-dessous, indiquez quel  type de gestionnaire est utilisé.</p>"
               }
             },
             {
@@ -389,7 +389,7 @@
                     {
                       "id": "2bc21a54-ff74-4e31-a273-98943be1745c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel est le type de gestionnaire utilisé ?<br></p>",
+                      "instruction": "<p>Quel est le type de gestionnaire utilisé ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -407,7 +407,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Je ne sais pas.<br></p>",
+                          "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>Oumar utilise un gestionnaire en ligne. Son gestionnaire permet un <strong>accès multi-appareils </strong>grâce à la <strong>synchronisation</strong>, pratique pour ceux qui naviguent sur plusieurs supports.</p>"
                           }
