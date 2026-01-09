@@ -755,17 +755,16 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       this.set('participants', participants);
       this.deleteParticipants = sinon.stub();
-
+      this.certificabilityFilter = [];
       //when
       const screen = await render(hbs`<OrganizationParticipant::List
   @participants={{this.participants}}
   @triggerFiltering={{this.triggerFiltering}}
   @onClickLearner={{this.noop}}
-  @certificabilityFilter={{this.noop}}
+  @certificabilityFilter={{this.certificabilityFilter}}
   @fullName={{this.fullNameFilter}}
   @deleteParticipants={{this.deleteParticipants}}
 />`);
-
       //then
       assert
         .dom(

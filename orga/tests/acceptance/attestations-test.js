@@ -69,8 +69,8 @@ module('Acceptance | Attestations', function (hooks) {
       const screen = await visit('/attestations');
 
       // then
-      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.table.filter.divisions.label') }));
-      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.table.filter.status.label') }));
+      assert.ok(screen.getByRole('button', { name: t('pages.attestations.table.filter.divisions.label') }));
+      assert.ok(screen.getByRole('button', { name: t('pages.attestations.table.filter.status.label') }));
       assert.ok(screen.getByRole('textbox', { name: t('common.filters.fullname.label') }));
       assert.ok(screen.getByRole('columnheader', { name: t('pages.attestations.table.column.first-name') }));
       assert.ok(screen.getByRole('columnheader', { name: t('pages.attestations.table.column.last-name') }));

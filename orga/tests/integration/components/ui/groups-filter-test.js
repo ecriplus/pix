@@ -32,7 +32,7 @@ module('Integration | Component | Ui::GroupsFilter', function (hooks) {
 
       const screen = await render(hbs`<Ui::GroupsFilter @campaign={{this.campaign}} />`);
 
-      assert.ok(screen.getByRole('textbox', { name: t('common.filters.groups.label') }));
+      assert.ok(screen.getByRole('button', { name: t('common.filters.groups.label') }));
       assert.ok(screen.getByLabelText('d1'));
     });
 
@@ -44,7 +44,7 @@ module('Integration | Component | Ui::GroupsFilter', function (hooks) {
       const screen = await render(
         hbs`<Ui::GroupsFilter @campaign={{this.campaign}} @onSelect={{this.onSelect}} @placeholder='Groupes' />`,
       );
-      await click(await screen.findByRole('textbox', { name: t('common.filters.groups.label') }));
+      await click(await screen.findByRole('button', { name: t('common.filters.groups.label') }));
       await click(await screen.findByRole('checkbox', { name: 'L1' }));
 
       assert.ok(this.onSelect.calledWith(['L1']));
@@ -63,7 +63,7 @@ module('Integration | Component | Ui::GroupsFilter', function (hooks) {
         hbs`<Ui::GroupsFilter @campaign={{this.campaign}} @selectedGroups={{this.selected}} @placeholder='Groupes' />`,
       );
 
-      assert.ok(screen.getByPlaceholderText('L1, L2'));
+      assert.ok(screen.getByRole('button', { name: t('common.filters.groups.label') }));
     });
   });
 });

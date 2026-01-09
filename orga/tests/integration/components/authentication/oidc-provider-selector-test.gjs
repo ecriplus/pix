@@ -30,7 +30,7 @@ module('Integration | Component | Authentication | oidc-provider-selector', func
 
     // then
     assert.dom(screen.getAllByText(t(I18N_KEYS.selectPlaceholder))[0]).exists();
-    assert.dom(screen.getByText(t(I18N_KEYS.searchLabel))).exists();
+    assert.dom(screen.getByPlaceholderText(t(I18N_KEYS.searchLabel))).exists();
     assert.dom(screen.getByText('ConnectEtMoi')).isVisible();
   });
 

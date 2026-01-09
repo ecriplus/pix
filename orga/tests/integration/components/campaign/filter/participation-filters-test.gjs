@@ -1069,7 +1069,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           </template>,
         );
         // then
-        assert.ok(screen.getByRole('textbox', { name: 'Rechercher par classes' }));
+        assert.ok(screen.getByRole('button', { name: 'Rechercher par classes' }));
         assert.ok(screen.getByLabelText('d1'));
       });
 
@@ -1220,7 +1220,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           </template>,
         );
         // then
-        assert.ok(screen.getByRole('textbox', { name: t('common.filters.groups.label') }));
+        assert.ok(screen.getByRole('button', { name: t('common.filters.groups.label') }));
         assert.ok(screen.getByLabelText('d1'));
       });
 

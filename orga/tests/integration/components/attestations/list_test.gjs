@@ -35,7 +35,7 @@ module('Integration | Component | Attestations | List', function (hooks) {
     );
 
     // then
-    assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.table.filter.divisions.label') }));
+    assert.ok(screen.getByRole('button', { name: t('pages.attestations.table.filter.divisions.label') }));
     assert.ok(screen.getByRole('columnheader', { name: t('pages.attestations.table.column.division') }));
   });
 
@@ -65,7 +65,7 @@ module('Integration | Component | Attestations | List', function (hooks) {
     );
 
     // then
-    assert.notOk(screen.queryByRole('textbox', { name: t('pages.attestations.table.filter.divisions.label') }));
+    assert.notOk(screen.queryByRole('button', { name: t('pages.attestations.table.filter.divisions.label') }));
     assert.notOk(screen.queryByRole('columnheader', { name: t('pages.attestations.table.column.division') }));
   });
 });
