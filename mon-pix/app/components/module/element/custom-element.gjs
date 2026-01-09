@@ -61,7 +61,7 @@ export default class ModulixCustomElement extends ModuleElement {
       {{#if this.isInteractive}}
         <fieldset
           class="element-custom__container
-            {{if this.resetButtonDisplayed 'element-custom--reset-intercative-state' ''}}"
+            {{if this.resetButtonDisplayed 'element-custom--reset-interactive-state' ''}}"
         >
           <legend class="element-custom__legend">
             <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
@@ -71,7 +71,7 @@ export default class ModulixCustomElement extends ModuleElement {
         </fieldset>
       {{else}}
         <div
-          class={{if this.resetButtonDisplayed "element-custom--reset-state" ""}}
+          class="element-custom__container {{if this.resetButtonDisplayed 'element-custom--reset-state'}}"
           {{didInsert this.mountCustomElement}}
         />
       {{/if}}
