@@ -15,7 +15,10 @@ npx playwright install --with-deps chromium
 
 ## Pré-requis
 
-Vous devez avoir démarré les conteneurs Docker Pix au préalable : `docker compose up` (à la racine du monorepo)
+- Démarrer les conteneurs Docker Pix au préalable : `docker compose up` (à la racine du monorepo)
+- Copier le fichier `sample.env.e2e` dans le dossier `e2e-playwright` sous le nom `.env.e2e`
+- Renseigner les variables d'environnement `LCMS_API_KEY` et `LCMS_API_URL` (NINA)
+- Installer les dépendances de l'API et des front : `npm run ci:all` (à la racine du monorepo)
 
 ## Exécuter en mode Headless
 
