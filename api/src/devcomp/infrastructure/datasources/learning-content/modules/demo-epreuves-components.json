@@ -1090,6 +1090,108 @@
           ]
         },
         {
+          "id": "b592e5da-8e4c-49b3-a04a-00a825363693",
+          "type": "discovery",
+          "title": "pix-anonymisation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "597659ac-e0d6-4a6b-b61d-9a9e2fc7b921",
+                "type": "text",
+                "content": "<p>pix-anonymisation</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fbe5e7df-f3b5-4d85-b23f-e98d3b07955a",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-anonymisation",
+                "props": {
+                  "titleLevel": 2,
+                  "steps": [
+                    {
+                      "fullSentence": [
+                        {
+                          "content": "J'habite au 12 rue des Lilas, Joliville,",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "je m'appelle Cédric Fostabley,",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "je suis maçon"
+                        },
+                        {
+                          "content": "mon numéro est le 06 12 34 56 78.",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "Peux-tu me faire une carte de visite professionnelle et originale?"
+                        }
+                      ],
+                      "rephrase": "Je suis maçon et j’aimerai une idée de carte de visite professionnelle et originale. Peux tu me proposer un modèle que je pourrais compléter avec mes informations ?",
+                      "feedback": "On reformule ici afin d’éviter de donner des informations perso à une IA, c’est pas bieng faut pas le faire"
+                    },
+                    {
+                      "fullSentence": [
+                        {
+                          "content": "Peux-tu écrire une lettre"
+                        },
+                        {
+                          "content": "pour le docteur Vanderbrooke",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "lui demandant de soigner"
+                        },
+                        {
+                          "content": "Madame Sarfati",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "suivie pour son diabète"
+                        },
+                        {
+                          "content": "depuis 5 ans ?"
+                        }
+                      ],
+                      "rephrase": "Peux-tu écrire une lettre pour un collègue médecin lui demandant de prendre en charge une patiente que je suis pour son diabète depuis 5 ans déjà ?",
+                      "feedback": "On reformule ici afin d’éviter de donner des informations perso à une IA, c’est pas bieng faut pas le faire"
+                    },
+                    {
+                      "fullSentence": [
+                        {
+                          "content": "Peux-tu rédiger un mail pour mon équipe"
+                        },
+                        {
+                          "content": "afin de lui rappeler que le mot de passe du wifi est AzErTy2024!",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "et qu’ils doivent suivre le mode d’emploi suivant :"
+                        },
+                        {
+                          "content": " http://intranet.example.invalid/procedure-connexion",
+                          "isAnonymizable": true
+                        },
+                        {
+                          "content": "pour s’y connecter ?"
+                        }
+                      ],
+                      "rephrase": "Peux-tu me proposer un exemple de mail expliquant à une équipe comment se connecter au WiFi d’une organisation ?Je compléterai moi-même ensuite les informations sensibles (mot de passe, lien interne, instructions).",
+                      "feedback": "On reformule ici afin d’éviter de donner des informations perso à une IA, c’est pas bieng faut pas le faire"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "6425a4f1-8fcf-4a03-9cef-fc298318e742",
           "type": "discovery",
           "title": "pix-article",
