@@ -23,6 +23,7 @@ import PixFieldset from '../ui/pix-fieldset';
 export default class CreateForm extends Component {
   @service currentUser;
   @service intl;
+  @service locale;
 
   @tracked wantIdPix = Boolean(this.args.campaign.externalIdLabel);
 
@@ -213,7 +214,7 @@ export default class CreateForm extends Component {
             @value="{{@campaign.ownerId}}"
             @isSearchable={{true}}
             @placeholder={{t "pages.campaign-creation.owner.placeholder"}}
-            @searchLabel={{t "pages.campaign-creation.owner.search-placeholder"}}
+            @locale={{this.locale.currentLocale}}
             @searchPlaceholder={{t "pages.campaign-creation.owner.search-placeholder"}}
             @requiredLabel={{t "common.form.mandatory-fields-title"}}
             @hideDefaultOption={{true}}
@@ -324,6 +325,7 @@ export default class CreateForm extends Component {
                 (t "api-error-messages.campaign-creation.target-profile-required")
               }}
               @isSearchable={{true}}
+              @locale={{this.locale.currentLocale}}
               @searchLabel={{t "pages.campaign-creation.target-profiles-search-placeholder"}}
             >
               <:label>{{t "pages.campaign-creation.target-profiles-list-label"}}</:label>

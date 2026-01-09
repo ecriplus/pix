@@ -17,6 +17,7 @@ import displayCampaignErrors from '../../helpers/display-campaign-errors';
 export default class UpdateForm extends Component {
   @service notifications;
   @service intl;
+  @service locale;
 
   @tracked name;
   @tracked title;
@@ -119,7 +120,7 @@ export default class UpdateForm extends Component {
           @value={{this.ownerIdOption}}
           @isSearchable={{true}}
           @placeholder={{t "pages.campaign-creation.owner.placeholder"}}
-          @searchLabel={{t "pages.campaign-creation.owner.search-placeholder"}}
+          @locale={{this.locale.currentLocale}}
           @searchPlaceholder={{t "pages.campaign-creation.owner.search-placeholder"}}
           @requiredLabel={{t "common.form.mandatory-fields-title"}}
           @hideDefaultOption={{true}}
