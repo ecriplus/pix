@@ -27,10 +27,7 @@ import SignupForm from '../../components/authentication/signup-form/index';
         <h3 class="pix-body-l">{{t "pages.join.signup.subtitle"}}</h3>
       </div>
 
-      <SignupForm
-        @organizationInvitationId={{@controller.invitationId}}
-        @organizationInvitationCode={{@controller.code}}
-      />
+      <SignupForm @onSubmit={{@controller.joinAndSignup}} />
 
       <AuthenticationIdentityProviders
         @isForSignup={{true}}
