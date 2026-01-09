@@ -12,7 +12,7 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ userId }).id;
       const trainingId = databaseBuilder.factory.buildTraining({
         type: 'modulix',
-        link: '/modules/adresse-ip-publique-et-vous/details',
+        link: '/modules/adresse-ip-publique-et-vous',
       }).id;
       databaseBuilder.factory.buildUserRecommendedTraining({
         userId,
@@ -60,13 +60,13 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const trainingId = databaseBuilder.factory.buildTraining({
         type: 'modulix',
-        link: '/modules/adresse-ip-publique-et-vous/details',
+        link: '/modules/adresse-ip-publique-et-vous',
       }).id;
       databaseBuilder.factory.buildTargetProfileTraining({ trainingId, targetProfileId });
       const targetProfileId2 = databaseBuilder.factory.buildTargetProfile().id;
       const trainingId2 = databaseBuilder.factory.buildTraining({
         type: 'modulix',
-        link: '/modules/au-dela-des-mots-de-passe/details',
+        link: '/modules/au-dela-des-mots-de-passe',
       }).id;
       databaseBuilder.factory.buildTargetProfileTraining({
         trainingId: trainingId2,

@@ -11,7 +11,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
     const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
     const training = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: '/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous',
     });
 
     databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfileId1, trainingId: training.id });
@@ -37,7 +37,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
     const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
     const training = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: 'http://app.pix.fr/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous',
     });
 
     databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfileId1, trainingId: training.id });
@@ -71,7 +71,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesBy
 
     const training2 = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: 'http://app.pix.fr/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous',
     });
 
     databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfileId1, trainingId: training.id });

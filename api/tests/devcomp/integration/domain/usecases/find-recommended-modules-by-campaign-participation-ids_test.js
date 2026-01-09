@@ -11,12 +11,12 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
     const training = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: '/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous',
     });
     const secondModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
     const secondTraining = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: '/modules/9d4dcab8/bien-ecrire-son-adresse-mail/details',
+      link: '/modules/9d4dcab8/bien-ecrire-son-adresse-mail',
     });
 
     databaseBuilder.factory.buildUserRecommendedTraining({
@@ -55,7 +55,7 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
     const training = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: '/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous',
     });
     const secondTraining = databaseBuilder.factory.buildTraining({
       type: 'modulix',
