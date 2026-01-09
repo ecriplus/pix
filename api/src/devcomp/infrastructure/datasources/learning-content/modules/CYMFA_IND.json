@@ -817,6 +817,14 @@
             {
               "type": "element",
               "element": {
+                "id": "1506d9b4-ae81-4810-bc05-c5c0f075ab6b",
+                "type": "text",
+                "content": "Pour terminer ce module, passons à la pratique."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "1309371a-0747-4353-a0a2-f22184f4e012",
                 "type": "custom-draft",
                 "title": "Activer l’authentification multifacteur sur un compte en ligne.",
