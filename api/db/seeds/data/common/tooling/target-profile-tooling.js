@@ -66,7 +66,7 @@ async function createTargetProfile({
     );
     frameworkNames = Object.keys(tubeIdsByFramework);
   }
-  _createTargetProfile({
+  const { targetProfileId: realTargetProfileId } = _createTargetProfile({
     databaseBuilder,
     targetProfileId,
     name,
@@ -80,11 +80,15 @@ async function createTargetProfile({
     areKnowledgeElementsResettable,
     attachedOrganizationIds,
   });
-  const cappedTubesDTO = _createTargetProfileTubes({ databaseBuilder, targetProfileId, configTargetProfile });
+  const cappedTubesDTO = _createTargetProfileTubes({
+    databaseBuilder,
+    targetProfileId: realTargetProfileId,
+    configTargetProfile,
+  });
 
   await databaseBuilder.commit();
   return {
-    targetProfileId,
+    targetProfileId: realTargetProfileId,
     cappedTubesDTO,
   };
 }
@@ -230,7 +234,7 @@ function _createTargetProfile({
   areKnowledgeElementsResettable,
   attachedOrganizationIds,
 }) {
-  databaseBuilder.factory.buildTargetProfile({
+  const { id: realTargetProfileId } = databaseBuilder.factory.buildTargetProfile({
     id: targetProfileId,
     name,
     category,
@@ -244,10 +248,12 @@ function _createTargetProfile({
   });
   attachedOrganizationIds.map((organizationId) =>
     databaseBuilder.factory.buildTargetProfileShare({
-      targetProfileId,
+      targetProfileId: realTargetProfileId,
       organizationId,
     }),
   );
+
+  return { targetProfileId: realTargetProfileId };
 }
 
 function _createBadge({

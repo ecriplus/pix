@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
@@ -9,6 +11,7 @@ import {
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
+import { knex } from '../../../knex-database-connection.js';
 import {
   ADMINISTRATION_TEAM_SOLO_ID,
   AEFE_TAG,
@@ -19,20 +22,34 @@ import {
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
+import { createAssessmentCampaign } from '../common/tooling/campaign-tooling.js';
+import { createTargetProfile } from '../common/tooling/target-profile-tooling.js';
 import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
-function buildParenthoodQuest(databaseBuilder) {
+async function buildParenthoodQuest(databaseBuilder) {
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
     templateName: 'parenthood-attestation-template',
     key: ATTESTATIONS.PARENTHOOD,
   });
 
+  const cappedTubes = await knex('target-profile_tubes')
+    .select('tubeId', 'level')
+    .where('targetProfileId', TARGET_PROFILE_NO_BADGES_NO_STAGES_ID);
+
   databaseBuilder.factory.buildQuest({
     rewardType: REWARD_TYPES.ATTESTATION,
     rewardId,
-    successRequirements: [],
+    successRequirements: [
+      {
+        requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+        data: {
+          cappedTubes,
+          threshold: 50,
+        },
+      },
+    ],
     eligibilityRequirements: [
       {
         requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
@@ -93,57 +110,37 @@ const ORGANIZATION = {
   countryCode: COUNTRY_FRANCE_CODE,
 };
 
-const CAMPAIGN = [
-  { code: 'ATTEST001', multipleSendings: true, name: 'campagne attestation 1' },
-  { code: 'ATTEST002', multipleSendings: true, name: 'campagne attestation 2' },
-  { code: 'ATTEST003', multipleSendings: true, name: 'campagne attestation 3' },
-];
-
-const TARGET_PROFILE_TUBES = [
-  [
-    {
-      id: 'tube2e715GxaaWzNK6',
-      level: 2,
-    },
-    {
-      id: 'recs1vdbHxX8X55G9',
-      level: 2,
-    },
-    {
-      id: 'recBbCIEKgrQi7eb6',
-      level: 2,
-    },
-    {
-      id: 'recpe7Y8Wq2D56q6I',
-      level: 2,
-    },
-  ],
-  [
-    {
-      id: 'tube2e715GxaaWzNK6',
-      level: 2,
-    },
-    {
-      id: 'recs1vdbHxX8X55G9',
-      level: 2,
-    },
-  ],
-  [
-    {
-      id: 'recBbCIEKgrQi7eb6',
-      level: 2,
-    },
-    {
-      id: 'recpe7Y8Wq2D56q6I',
-      level: 2,
-    },
-  ],
-];
-
-const CAMPAIGN_SKILLS = [
-  ['reczOCGv8pz976Acl', 'skill1QAVccgLO16Rx8', 'skill2wQfMYrOHlL6HI', 'skillX5Rpk2rucNfnF'],
-  ['skill1QAVccgLO16Rx8', 'skill2wQfMYrOHlL6HI', 'skillX5Rpk2rucNfnF'],
-  ['reczOCGv8pz976Acl'],
+const TARGET_PROFILE_CONFIG = [
+  {
+    frameworks: [
+      {
+        chooseCoreFramework: true,
+        countTubes: 4,
+        minLevel: 2,
+        maxLevel: 2,
+      },
+    ],
+  },
+  {
+    frameworks: [
+      {
+        chooseCoreFramework: true,
+        countTubes: 2,
+        minLevel: 2,
+        maxLevel: 2,
+      },
+    ],
+  },
+  {
+    frameworks: [
+      {
+        chooseCoreFramework: true,
+        countTubes: 2,
+        minLevel: 2,
+        maxLevel: 2,
+      },
+    ],
+  },
 ];
 
 const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
@@ -183,11 +180,7 @@ const buildCampaignParticipations = (databaseBuilder, users) =>
     });
   });
 
-const buildSixthGradeQuests = (
-  databaseBuilder,
-  rewardId,
-  [firstTargetProfile, secondTargetProfile, thirdTargetProfile],
-) => {
+const buildSixthGradeQuests = async (databaseBuilder, rewardId, campaigns) => {
   const questEligibilityRequirements = [
     {
       requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
@@ -220,7 +213,7 @@ const buildSixthGradeQuests = (
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           data: {
             targetProfileId: {
-              data: firstTargetProfile.id,
+              data: campaigns[0].targetProfileId,
               comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
@@ -233,7 +226,7 @@ const buildSixthGradeQuests = (
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
               data: {
                 targetProfileId: {
-                  data: thirdTargetProfile.id,
+                  data: campaigns[2].targetProfileId,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
@@ -243,7 +236,7 @@ const buildSixthGradeQuests = (
               requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
               data: {
                 targetProfileId: {
-                  data: secondTargetProfile.id,
+                  data: campaigns[1].targetProfileId,
                   comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
@@ -259,11 +252,28 @@ const buildSixthGradeQuests = (
 
   const questSuccessRequirements = [
     {
-      requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-      data: {
-        skillIds: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
-        threshold: 50,
-      },
+      requirement_type: REQUIREMENT_TYPES.COMPOSE,
+      data: [
+        {
+          requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+          data: {
+            cappedTubes: campaigns[0].cappedTubesDTO.map((tube) => {
+              return { tubeId: tube.id, level: tube.level };
+            }),
+            threshold: 50,
+          },
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+          data: {
+            cappedTubes: [campaigns[2].cappedTubesDTO, campaigns[1].cappedTubesDTO].flat().map((tube) => {
+              return { tubeId: tube.id, level: tube.level };
+            }),
+            threshold: 50,
+          },
+        },
+      ],
+      comparison: REQUIREMENT_COMPARISONS.ONE_OF,
     },
   ];
 
@@ -275,44 +285,38 @@ const buildSixthGradeQuests = (
   });
 };
 
-const buildTargetProfile = (databaseBuilder, organization, index, tubes) => {
-  const targetProfile = databaseBuilder.factory.buildTargetProfile({
-    description: `parcours attestation 6 eme numero ${index + 1}`,
-    name: `parcours attestation 6 eme numero ${index + 1}`,
-    ownerOrganizationId: organization.id,
-  });
-  tubes.map(({ id, level }) =>
-    databaseBuilder.factory.buildTargetProfileTube({
-      targetProfileId: targetProfile.id,
-      tubeId: id,
-      level,
-    }),
-  );
+const buildCampaigns = async (databaseBuilder, organization) => {
+  let index = 0;
 
-  return targetProfile;
-};
+  const campaigns = [];
 
-const buildTargetProfiles = (databaseBuilder, organization) =>
-  TARGET_PROFILE_TUBES.map((tubes, index) => buildTargetProfile(databaseBuilder, organization, index, tubes));
-
-const buildCampaigns = (databaseBuilder, organization, targetProfiles) =>
-  targetProfiles.map((targetProfile, index) => {
-    const { id: campaignId } = databaseBuilder.factory.buildCampaign({
-      ...CAMPAIGN[index],
-      targetProfileId: targetProfile.id,
-      organizationId: organization.id,
-      title: `Attestation 6ème ${index + 1}`,
+  for (const configTargetProfile of TARGET_PROFILE_CONFIG) {
+    const { targetProfileId, cappedTubesDTO } = await createTargetProfile({
+      databaseBuilder,
+      ownerOrganizationId: organization.id,
+      name: `parcours attestation 6 eme numero ${index + 1}`,
+      isSimplifiedAccess: false,
+      description: `parcours attestation 6 eme numero ${index + 1}`,
+      configTargetProfile,
     });
 
-    CAMPAIGN_SKILLS[index].map((skillId) =>
-      databaseBuilder.factory.buildCampaignSkill({
-        campaignId,
-        skillId,
-      }),
-    );
+    const campaign = await createAssessmentCampaign({
+      databaseBuilder,
+      targetProfileId,
+      organizationId: organization.id,
+      code: `ATTEST00${index}`,
+      ownerId: USER_ID_ADMIN_ORGANIZATION,
+      name: `Attestation 6ème ${index + 1}`,
+      multipleSendings: true,
+      createdAt: dayjs().subtract(30, 'days').toDate(),
+    });
 
-    return campaignId;
-  });
+    index += 1;
+    campaigns.push({ ...campaign, cappedTubesDTO });
+  }
+
+  return campaigns;
+};
 
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
@@ -369,53 +373,50 @@ export const buildQuests = async (databaseBuilder) => {
     disabledOrganizationLearner,
   ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
-  // Create target profile
-  const targetProfiles = buildTargetProfiles(databaseBuilder, organization);
-
   // Create campaigns
-  const campaigns = buildCampaigns(databaseBuilder, organization, targetProfiles);
+  const campaigns = await buildCampaigns(databaseBuilder, organization);
 
   // Create campaignParticipations
   buildCampaignParticipations(databaseBuilder, [
     {
       user: successUser,
-      campaignId: campaigns[0],
+      campaignId: campaigns[0].campaignId,
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successUser,
-      campaignId: campaigns[1],
+      campaignId: campaigns[1].campaignId,
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successUser,
-      campaignId: campaigns[2],
+      campaignId: campaigns[2].campaignId,
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successSharedUser,
-      campaignId: campaigns[0],
+      campaignId: campaigns[0].campaignId,
       organizationLearner: successSharedOrganizationLearner,
     },
     {
       user: failedUser,
-      campaignId: campaigns[0],
+      campaignId: campaigns[0].campaignId,
       organizationLearner: failedOrganizationLearner,
     },
     {
       user: pendingUser,
-      campaignId: campaigns[0],
+      campaignId: campaigns[0].campaignId,
       organizationLearner: pendingOrganizationLearner,
     },
     {
       user: disabledUser,
-      campaignId: campaigns[0],
+      campaignId: campaigns[0].campaignId,
       organizationLearner: disabledOrganizationLearner,
     },
   ]);
@@ -427,8 +428,8 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   // Create quests
-  buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
-  const parenthoodAttestationId = buildParenthoodQuest(databaseBuilder);
+  await buildSixthGradeQuests(databaseBuilder, rewardId, campaigns);
+  const parenthoodAttestationId = await buildParenthoodQuest(databaseBuilder);
 
   // Create reward for success user
   databaseBuilder.factory.buildProfileReward({

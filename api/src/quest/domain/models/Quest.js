@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../shared/domain/errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { COMPARISONS as _CRITERION_COMPARISONS } from './CriterionProperty.js';
 import {
   COMPARISONS as _REQUIREMENT_COMPARISONS,
@@ -137,14 +138,18 @@ class Quest {
    * @param {DataForQuest} data
    */
   isEligible(data) {
-    return this.#eligibilityRequirements.isFulfilled(data);
+    const isFulfilled = this.#eligibilityRequirements.isFulfilled(data);
+    logger.debug({ name: `QuestId: ${this.id} isEligible`, isFulfilled });
+    return isFulfilled;
   }
 
   /**
    * @param {DataForQuest} data
    */
   isSuccessful(data) {
-    return this.#successRequirements.isFulfilled(data);
+    const isFulfilled = this.#successRequirements.isFulfilled(data);
+    logger.debug({ name: `QuestId: ${this.id} isSuccessFul`, isFulfilled });
+    return isFulfilled;
   }
 
   toDTO() {

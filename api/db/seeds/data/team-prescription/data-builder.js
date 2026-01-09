@@ -15,6 +15,7 @@ async function teamPrescriptionDataBuilder({ databaseBuilder }) {
   await buildCombinedCourses(databaseBuilder);
   await buildCombinedCourseBlueprints(databaseBuilder);
   await buildOrganizationLearnersWithMultipleParticipations(databaseBuilder);
+  await databaseBuilder.commit();
 }
 
 export { teamPrescriptionDataBuilder };
