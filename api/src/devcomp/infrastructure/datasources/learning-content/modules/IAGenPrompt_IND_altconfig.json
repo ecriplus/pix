@@ -644,8 +644,8 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bien joué !",
-                    "diagnosis": "Le gymnase des 3 sapins correspond aux critères de Gustave."
+                    "state": "Bravo !",
+                    "diagnosis": "Grâce à vous, le tournoi va pouvoir avoir lieu !"
                   },
                   "invalid": {
                     "state": "Eh non...",
