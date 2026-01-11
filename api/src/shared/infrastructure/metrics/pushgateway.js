@@ -12,6 +12,10 @@ if (config.metrics.prometheus.pushgateway.basicAuth) {
   headers.authorization = `Basic ${Buffer.from(config.metrics.prometheus.pushgateway.basicAuth).toString('base64')}`;
 }
 
+register.setDefaultLabels({
+  instance: config.infra.containerName ?? 'localhost',
+});
+
 const pushgateway = new Pushgateway(config.metrics.prometheus.pushgateway.url, { headers }, register);
 
 async function pushMetrics() {
