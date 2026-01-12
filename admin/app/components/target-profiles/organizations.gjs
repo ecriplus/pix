@@ -191,7 +191,8 @@ export default class Organizations extends Component {
         @triggerFiltering={{@triggerFiltering}}
         @goToOrganizationPage={{@goToOrganizationPage}}
         @detachOrganizations={{@detachOrganizations}}
-        @targetProfileName={{@targetProfile.internalName}}
+        @entityName={{@targetProfile.internalName}}
+        @confirmationLabel="components.target-profiles.organizations.detach-organization"
         @hideArchived={{@hideArchived}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
         @administrationTeamId={{@administrationTeamId}}
