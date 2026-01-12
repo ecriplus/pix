@@ -142,15 +142,15 @@
     font-weight: var(--pix-font-bold);
 
     &__yes {
-      color: var(--pix-success-500);
+      color: var(--pix-success-700);
     }
 
     &__almost {
-      color: var(--pix-warning-500);
+      color: var(--pix-warning-700);
     }
 
     &__no {
-      color: var(--pix-error-500);
+      color: var(--pix-error-700);
     }
   }
 }
