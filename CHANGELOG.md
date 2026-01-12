@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.301.0](https://github.com/1024pix/pix/compare/v5.300.0...v5.301.0) (2026-01-12)
+
+### :rocket: Amélioration
+
+- [#14666](https://github.com/1024pix/pix/pull/14666) MDX-32 modification Decouverte 2 NR_Datacenter_NOV 
+- [#14667](https://github.com/1024pix/pix/pull/14667) Supprimer l'avatar sur la page de confirmation d'association de SSO (PIX-21014) 
+
+### :building_construction: Tech
+
+- [#14663](https://github.com/1024pix/pix/pull/14663) Modifier la page de details pour s'aligner avec la nouvelle maquette (PIX-20802) 
+
+### :coffee: Autre
+
+- [#14647](https://github.com/1024pix/pix/pull/14647) Modifier le libellé et la mise en page autour des méthodes de connexion SSO à la connexion et à l'invitation (PIX-21009)
+
 # [5.300.0](https://github.com/1024pix/pix/compare/v5.299.0...v5.300.0) (2026-01-12)
 
 ### :rocket: Amélioration
