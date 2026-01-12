@@ -6,6 +6,7 @@ import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 module('Acceptance | Trainings | Training', function (hooks) {
   setupApplicationTest(hooks);
@@ -75,31 +76,52 @@ module('Acceptance | Trainings | Training', function (hooks) {
         assert.dom(screen.getByRole('link', { name: 'Contenus formatifs' })).hasClass('active');
       });
 
-      test('should be redirected to training detail page after training creation', async function (assert) {
-        // when
-        await visit(`/trainings/list`);
-        await clickByName('Nouveau contenu formatif');
+      module('when isModuleSelectionForTrainingEnabled FT is enabled', function () {
+        module('when type provided is modulix', function () {
+          test('should be redirected to training detail page after training creation', async function (assert) {
+            //given
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+            const domainService = this.owner.lookup('service:current-domain');
+            sinon.stub(domainService, 'getExtension').returns('fr');
 
-        await fillByLabel(t('pages.trainings.training.details.title'), 'Nouveau contenu formatif');
-        await fillByLabel(t('pages.trainings.training.details.internalTitle'), 'Mon titre interne');
-        await click(screen.getByText('Webinaire'));
-        await fillByLabel('Lien', 'http://www.example.net');
+            const screen = await visit(`/trainings/list`);
+            await clickByName('Nouveau contenu formatif');
+            await _fillTrainingForm({ screen, type: 'Module Pix' });
 
-        await fillByLabel('Jours (JJ)', 1);
-        await fillByLabel('Heures (HH)', 0);
-        await fillByLabel('Minutes (MM)', 0);
-        await click(screen.getByText('Francophone (fr)'));
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
-          }),
-          'https://assets.pix.org/contenu-formatif/editeur/logo.svg',
-        );
-        await fillByLabel("Nom de l'éditeur", 'Editeur', { exact: false });
-        await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
+            // when
+            await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
 
-        // then
-        assert.strictEqual(currentURL(), `/trainings/3/triggers`);
+            // then
+            assert.strictEqual(currentURL(), `/trainings/3/triggers`);
+            assert
+              .dom(
+                screen.getByRole('link', {
+                  name: 'https://app.pix.fr/modules/6a68bf32/bac-a-sable (nouvelle fenêtre)',
+                }),
+              )
+              .exists();
+          });
+        });
+
+        module('when type provided is not modulix', function () {
+          test('should be redirected to training detail page after training creation', async function (assert) {
+            //given
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+
+            await visit(`/trainings/list`);
+            await clickByName('Nouveau contenu formatif');
+
+            await _fillTrainingForm({ screen, type: 'Webinaire' });
+
+            // when
+            await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
+
+            // then
+            assert.strictEqual(currentURL(), `/trainings/3/triggers`);
+          });
+        });
       });
 
       test('should be redirected to training list when user click on cancel button', async function (assert) {
@@ -212,4 +234,44 @@ module('Acceptance | Trainings | Training', function (hooks) {
       });
     });
   });
+
+  async function _fillTrainingForm({ screen, type }) {
+    await fillIn(
+      screen.getByRole('textbox', { name: t('pages.trainings.training.details.title') }),
+      'Nouveau contenu formatif',
+    );
+    await fillIn(
+      screen.getByRole('textbox', { name: t('pages.trainings.training.details.internalTitle') }),
+      'Mon titre interne',
+    );
+
+    await click(screen.getByRole('button', { name: 'Format' }));
+    await screen.findByRole('listbox');
+    await click(screen.getByRole('option', { name: type }));
+
+    if (type === 'Module Pix') {
+      await click(screen.getByRole('button', { name: 'Module' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByText('Bac à sable'));
+    } else {
+      await fillByLabel('Lien', 'http://www.example.net');
+    }
+
+    await fillIn(screen.getByRole('spinbutton', { name: 'Jours (JJ)' }), 1);
+    await fillIn(screen.getByRole('spinbutton', { name: 'Heures (HH)' }), 0);
+    await fillIn(screen.getByRole('spinbutton', { name: 'Minutes (MM)' }), 0);
+    await click(screen.getByText('Francophone (fr)'));
+    await fillIn(
+      screen.getByRole('textbox', {
+        name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+      }),
+      'https://assets.pix.org/contenu-formatif/editeur/logo.svg',
+    );
+    await fillIn(
+      screen.getByRole('textbox', {
+        name: "Nom de l'éditeur Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
+      }),
+      'Editeur',
+    );
+  }
 });

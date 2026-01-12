@@ -219,6 +219,33 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         expect(response.statusCode).to.equal(201);
       });
 
+      context('when training type is modulix', function () {
+        it('should return 201 when the payload is valid', async function () {
+          // given
+          validPayload.type = 'modulix';
+          validPayload.link = '/modules/azazazaz/bac-a-sable';
+
+          sinon.stub(trainingController, 'create').callsFake((request, h) => h.response().created());
+
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request('POST', '/api/admin/trainings', validPayload);
+
+          // then
+          expect(response.statusCode).to.equal(201);
+        });
+      });
+
       it('should return 400 if the editorLogoUrl is not a valid url', async function () {
         // given
         const invalidPayload = {
@@ -258,42 +285,86 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         expect(response.statusCode).to.equal(400);
       });
 
-      it('should return 400 if the link is not a valid url', async function () {
-        // given
-        const invalidPayload = {
-          data: {
-            attributes: {
-              link: 'example',
-              title: 'ma formation',
-              'internal-title': 'Ma formation',
-              duration: { days: 2, hours: 2, minutes: 2 },
-              type: 'webinaire',
-              locale: 'fr-fr',
-              'editor-name': 'ministère',
-              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+      context("when payload type is 'modulix'", function () {
+        it('should return 400 if link attribute is empty', async function () {
+          // given
+          const invalidPayload = {
+            data: {
+              attributes: {
+                link: '',
+                title: 'ma formation',
+                'internal-title': 'Ma formation',
+                duration: { days: 2, hours: 2, minutes: 2 },
+                type: 'modulix',
+                locale: 'fr-fr',
+                'editor-name': 'ministère',
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+              },
             },
-          },
-        };
-        sinon.stub(trainingController, 'create').callsFake((request, h) => h.response().created());
+          };
+          sinon.stub(trainingController, 'create').callsFake((request, h) => h.response().created());
 
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
 
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
 
-        // when
-        const response = await httpTestServer.request('POST', '/api/admin/trainings', invalidPayload);
+          // when
+          const response = await httpTestServer.request('POST', '/api/admin/trainings', invalidPayload);
 
-        // then
+          // then
 
-        expect(JSON.parse(response.payload).errors[0].detail).to.equal('"data.attributes.link" must be a valid uri');
-        expect(response.statusCode).to.equal(400);
+          expect(JSON.parse(response.payload).errors[0].detail).to.equal(
+            '"data.attributes.link" is not allowed to be empty',
+          );
+          expect(response.statusCode).to.equal(400);
+        });
+      });
+
+      context("when payload type is not 'modulix'", function () {
+        it('should return 400 if link attribute is not an uri', async function () {
+          // given
+          const invalidPayload = {
+            data: {
+              attributes: {
+                link: '/modules/azazazaz/not-an-uri',
+                title: 'ma formation',
+                'internal-title': 'Ma formation',
+                duration: { days: 2, hours: 2, minutes: 2 },
+                type: 'webinaire',
+                locale: 'fr-fr',
+                'editor-name': 'ministère',
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+              },
+            },
+          };
+          sinon.stub(trainingController, 'create').callsFake((request, h) => h.response().created());
+
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request('POST', '/api/admin/trainings', invalidPayload);
+
+          // then
+
+          expect(JSON.parse(response.payload).errors[0].detail).to.equal('"data.attributes.link" must be a valid uri');
+          expect(response.statusCode).to.equal(400);
+        });
       });
 
       it('should return 400 if in the payload there is no link', async function () {

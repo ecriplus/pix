@@ -714,6 +714,26 @@ export default function routes() {
   this.get('/admin/combined-course-blueprints');
   this.post('/admin/combined-course-blueprints');
 
+  this.get('/admin/modules-metadata', () => {
+    return {
+      data: [
+        {
+          type: 'module-metadatas',
+          id: '6282925d',
+          attributes: {
+            'short-id': '6a68bf32',
+            slug: 'bac-a-sable',
+            title: 'Bac à sable',
+            'is-beta': true,
+            duration: 5,
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
+            link: '/modules/6a68bf32/bac-a-sable',
+          },
+        },
+      ],
+    };
+  });
+
   _configureOrganizationsRoutes(this);
 }
 
