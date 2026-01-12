@@ -94,7 +94,11 @@ const getByCampaignIds = async function (campaignIds, { withDeletedParticipation
   return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
 };
 
-const getAllCampaignParticipationsInCampaignForASameLearner = async function ({ campaignId, campaignParticipationId }) {
+const getAllCampaignParticipationsInCampaignForASameLearner = async function ({
+  campaignId,
+  campaignParticipationId,
+  keepPreviousDeleted = false,
+}) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn('campaign-participations')
     .select('organizationLearnerId')
@@ -107,13 +111,15 @@ const getAllCampaignParticipationsInCampaignForASameLearner = async function ({ 
     );
   }
 
-  const campaignParticipations = await knexConn('campaign-participations')
-    .where({
-      campaignId,
-      organizationLearnerId: result.organizationLearnerId,
-    })
-    .whereNull('deletedAt')
-    .whereNull('deletedBy');
+  const queryBuilder = knexConn('campaign-participations').where({
+    campaignId,
+    organizationLearnerId: result.organizationLearnerId,
+  });
+
+  if (!keepPreviousDeleted) queryBuilder.whereNull('deletedAt').whereNull('deletedBy');
+  else queryBuilder.whereNotNull('deletedAt');
+
+  const campaignParticipations = await queryBuilder;
 
   return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
 };
