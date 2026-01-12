@@ -22,19 +22,7 @@
     border-radius: var(--pix-spacing-2x);
   }
 
-  &__avatar {
-    display: flex;
-    gap: var(--pix-spacing-4x);
-    align-items: center;
-    justify-items: center;
-    padding: var(--pix-spacing-4x);
-
-    svg {
-      min-width: 48px;
-      height: 48px;
-      color: var(--pix-neutral-100);
-    }
-
+  &__user-fullname {
     p {
       @extend %pix-title-xs;
     }

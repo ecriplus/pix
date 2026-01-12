@@ -354,7 +354,7 @@
         "external-connection": "Connexion externe",
         "external-connection-via": "Connexion via",
         "return": "Retour",
-        "title": "Un nouveau moyen de connexion est sur le point d'être ajouté à votre compte Pix",
+        "title": "Une nouvelle méthode de connexion est sur le point d'être ajoutée à votre compte Pix",
         "username": "Identifiant"
       },
       "oidc-provider-selector": {

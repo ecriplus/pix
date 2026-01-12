@@ -17,8 +17,7 @@ export default class OidcAssociationConfirmation extends Component {
     <div class="oidc-association__container">
 
       <div class="oidc-association__user-information">
-        <div class="oidc-association__avatar">
-          <PixIcon @name="userCircle" @plainIcon={{true}} @ariaHidden={{true}} />
+        <div class="oidc-association__user-fullname">
           <p>{{@fullNameFromPix}}</p>
         </div>
 

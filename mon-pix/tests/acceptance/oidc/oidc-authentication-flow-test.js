@@ -90,7 +90,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
           // then
           assert.ok(
             screen.getByRole('heading', {
-              name: "Attention ! Un nouveau moyen de connexion est sur le point d'être ajouté à votre compte Pix",
+              name: "Attention ! Une nouvelle méthode de connexion est sur le point d'être ajoutée à votre compte Pix",
             }),
           );
         });
