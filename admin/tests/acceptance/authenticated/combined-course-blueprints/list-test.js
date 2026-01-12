@@ -41,6 +41,6 @@ module('Acceptance | Combined course blueprint | List', function (hooks) {
     // when
     await click(link);
     // then
-    assert.strictEqual(currentURL(), '/combined-course-blueprints/1');
+    assert.strictEqual(currentURL(), '/combined-course-blueprints/1/organizations');
   });
 });

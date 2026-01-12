@@ -83,7 +83,7 @@ export default class Sidebar extends Component {
         {{#if this.currentUser.adminMember.isSuperAdmin}}
           <PixNavigationButton
             class="sidebar__link"
-            @route="authenticated.combined-course-blueprints.list"
+            @route="authenticated.combined-course-blueprints"
             @icon="studyLesson"
           >
             {{t "components.layout.sidebar.combined-course-blueprints"}}

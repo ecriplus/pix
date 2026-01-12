@@ -35,8 +35,8 @@ export default class CombineCourseBluePrintList extends Component {
             </:header>
             <:cell>
               <LinkTo
-                @route="authenticated.combined-course-blueprints.details"
-                @model={{blueprint}}
+                @route="authenticated.combined-course-blueprints.combined-course-blueprint"
+                @model={{blueprint.id}}
               >{{blueprint.internalName}}</LinkTo>
 
             </:cell>
