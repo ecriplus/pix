@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.300.0](https://github.com/1024pix/pix/compare/v5.299.0...v5.300.0) (2026-01-12)
+
+### :rocket: Amélioration
+
+- [#14660](https://github.com/1024pix/pix/pull/14660) Ajouter un attribut de visibilité pour les modules (PIX-21022). 
+- [#14671](https://github.com/1024pix/pix/pull/14671) IAGenBiais_IND IsBeta false 
+- [#14681](https://github.com/1024pix/pix/pull/14681) MDX-18 Integration du POI et correction typo 
+- [#14686](https://github.com/1024pix/pix/pull/14686) MDX-18 modification consigne 
+- [#14680](https://github.com/1024pix/pix/pull/14680) Modif Module CY_GestionMDP_IND 
+- [#14673](https://github.com/1024pix/pix/pull/14673) Module CY_MFA_IND ajout phrase transition défi 
+- [#14659](https://github.com/1024pix/pix/pull/14659) Permuter les écrans d'inscription et d'association quand on rejoint une orga par SSO (PIX-21011) 
+- [#14668](https://github.com/1024pix/pix/pull/14668) Version alternative de IAGenPrompt_NOV.json pour tester nouvelle config 
+- [#14679](https://github.com/1024pix/pix/pull/14679) WIP IA vous avez dit IA correction plante et flip cards 
+- [#14612](https://github.com/1024pix/pix/pull/14612) WIP Module MFA NOV 
+
+### :building_construction: Tech
+
+- [#14547](https://github.com/1024pix/pix/pull/14547) :recycle: Rendre possible la migration de donnée des status d'`Assessment` (Pix-20965) 
+- [#14640](https://github.com/1024pix/pix/pull/14640) Ajouter des log debug dans les models des Requirement des quêtes (PIX-21043). 
+- [#14678](https://github.com/1024pix/pix/pull/14678) Mettre à jour les PixSelect suite à l'évolution du DS (PIX-21044). 
+- [#14528](https://github.com/1024pix/pix/pull/14528) Supprimer des tests de controllers inutiles et rangement (PIX-20961) 
+
+### :arrow_up: Montée de version
+
+- [#14672](https://github.com/1024pix/pix/pull/14672) Replace dependency @tsconfig/node22 with @tsconfig/node24 (audit-logger) 
+- [#14677](https://github.com/1024pix/pix/pull/14677) Update dependency es-module-lexer to v2 (api)
+
 # [5.299.0](https://github.com/1024pix/pix/compare/v5.298.0...v5.299.0) (2026-01-09)
 
 ### :rocket: Amélioration
