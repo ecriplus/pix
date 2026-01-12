@@ -1151,7 +1151,7 @@
                           "content": "<p>Mettre en valeur les effets positifs de la création de centres de données au Mexique.</p>",
                           "feedback": {
                             "state": "<p>Tout à fait.</p>",
-                            "diagnosis": "<p>Cet article est grandement inspiré de la communication officielle des géants de la technologie (GAFAM).</p>"
+                            "diagnosis": "<p>Cet article est grandement inspiré de la communication officielle des géants de la technologie (GAFAM). </p>"
                           }
                         }
                       ],
@@ -1182,11 +1182,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureusement, c’est juste !</p>",
-                          "diagnosis": "<p>Toutes ces affirmations sont vraies.</p>"
+                          "diagnosis": "Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour<strong> f</strong><strong>aire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif."
                         },
                         "invalid": {
                           "state": "<p>Pas tout à fait...</p>",
-                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...</p>"
+                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif.</p>"
                         }
                       },
                       "solutions": [
