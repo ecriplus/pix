@@ -58,7 +58,7 @@
                     "id": "1",
                     "content": "<p>Leur consommation d’énergie va diminuer. ↘️</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.<br></strong>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. <br><br></p>"
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.<br></strong>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
@@ -72,14 +72,14 @@
                     "id": "3",
                     "content": "<p>Leur consommation d’énergie va augmenter de 20%. ↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br>\n</p><p>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. <br><br></p>"
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br>\n</p>\n<p>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Leur consommation d’énergie va doubler. ↗️↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. <br><br></p>"
+                      "diagnosis": "<p>Effectivement ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d'<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surout à l'essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   }
                 ],
@@ -104,7 +104,7 @@
               "element": {
                 "id": "6e45420c-8d9a-4fda-8b02-c6fd2123f9ac",
                 "type": "text",
-                "content": "<p>Un centre de données consomme chaque jour une grande quantité d’eau et d’énergie.</p><p>De plus, pour sa construction, le centre de données nécessite l’extraction de grandes quantités de métaux, de terre rare et artificialisation des sols. De plus, il génère de nombreux déchets toxiques.</p>"
+                "content": "<p>Pour sa <strong>construction</strong>, un centre de données nécessite l’extraction de grandes quantités de <strong>métaux</strong>, de <strong>terre rare</strong> et artificialisation des sols.<br>De plus, le centre de données <strong>consomme </strong>chaque jour une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets </strong>toxiques.</p>"
               }
             },
             {
@@ -122,47 +122,6 @@
             {
               "type": "stepper",
               "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "b35bcf4a-abae-4162-ae50-2384367ed6f4",
-                      "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de la consommation d’eau des centres des données ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>l’augmentation du risque de pénurie d’eau potable<br></p>"
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>la génération de gaz à effet de serre</p>"
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>des difficultés pour l’irrigation de l’agriculture<br></p>"
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>l’artificialisation des sols</p>"
-                        }
-                      ],
-                      "feedbacks": {
-                        "valid": {
-                          "state": "<p>Bien vu !</p>",
-                          "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
-                        },
-                        "invalid": {
-                          "state": "<p>Pas vraiment<br></p>",
-                          "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
-                        }
-                      },
-                      "solutions": [
-                        "1",
-                        "3"
-                      ]
-                    }
-                  ]
-                },
                 {
                   "elements": [
                     {
@@ -202,6 +161,47 @@
                         "2",
                         "3",
                         "4"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b35bcf4a-abae-4162-ae50-2384367ed6f4",
+                      "type": "qcm",
+                      "instruction": "<p>Quelles sont les conséquences de la consommation d’eau des centres des données ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>l’augmentation du risque de pénurie d’eau potable<br></p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>la génération de gaz à effet de serre</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>des difficultés pour l’irrigation de l’agriculture<br></p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>l’artificialisation des sols</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien vu !</p>",
+                          "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas vraiment<br></p>",
+                          "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "3"
                       ]
                     }
                   ]
@@ -266,6 +266,14 @@
             {
               "type": "element",
               "element": {
+                "id": "16b59faf-6643-4a22-a2e2-55a664a2702d",
+                "type": "text",
+                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contriubuent<em> </em>au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "150b2305-2988-4789-a01f-9bf7171c1666",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/schema-impacts-datacenter.png",
@@ -287,7 +295,7 @@
               "element": {
                 "id": "b3276727-321b-4cb2-baa8-fa8483d36bc6",
                 "type": "text",
-                "content": "<p>Avec la multiplication de nos usages numériques, et donc la construction de nouveaux centres de données, ces multiples impacts environnementaux vont s’amplifier. Que peuvent faire les entreprises du numérique ?<br></p>"
+                "content": "<p>Avec la multiplication de nos usages numériques, et donc la construction de nouveaux centres de données, ces multiples impacts environnementaux vont s’amplifier.<br>Que peuvent faire les entreprises du numérique pour limiter ces impacts ?<br></p>"
               }
             }
           ]
