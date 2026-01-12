@@ -49,7 +49,7 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
     await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
     await click(screen.getByLabelText('Homme'));
-    await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+    await fillIn(screen.getByLabelText('Date de naissance *'), '2000-01-01');
     await click(screen.getByLabelText('Pays de naissance *'));
     await click(screen.getByText('Portugal'));
     await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
@@ -73,7 +73,7 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
     await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
     await click(screen.getByLabelText('Homme'));
-    await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+    await fillIn(screen.getByLabelText('Date de naissance *'), '2000-01-01');
     await click(screen.getByLabelText('Pays de naissance *'));
     await click(screen.getByText('Portugal'));
     await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');

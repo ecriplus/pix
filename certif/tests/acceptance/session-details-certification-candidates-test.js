@@ -450,7 +450,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
           await fillIn(screen.getByLabelText('Nom de naissance *'), 'BackStreet');
           await fillIn(screen.getByLabelText('Prénom *'), 'Boys');
           await click(screen.getByLabelText('Homme'));
-          await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+          await fillIn(screen.getByLabelText('Date de naissance *'), '2000-01-01');
           await fillIn(screen.getByLabelText('Pays de naissance *'), '99100');
           await click(screen.getByLabelText('Code INSEE'));
           await fillIn(screen.getByLabelText('Identifiant externe'), '44AA3355');
@@ -634,7 +634,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
               await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
               await fillIn(screen.getByLabelText('Prénom *'), 'Guybrush');
               await fillIn(screen.getByLabelText('Nom de naissance *'), 'Threepwood');
-              await fillIn(screen.getByLabelText('Date de naissance *'), '28/04/2019');
+              await fillIn(screen.getByLabelText('Date de naissance *'), '2019-04-28');
               await click(screen.getByLabelText('Homme'));
               await fillIn(screen.getByLabelText('Pays de naissance *'), '99100');
               await click(screen.getByLabelText('Code INSEE'));
@@ -668,7 +668,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
   async function _fillFormWithCorrectData(screen) {
     await fillIn(screen.getByRole('textbox', { name: 'Prénom *' }), 'Guybrush');
     await fillIn(screen.getByRole('textbox', { name: 'Nom de naissance *' }), 'Threepwood');
-    await fillIn(screen.getByRole('textbox', { name: 'Date de naissance *' }), '28/04/2019');
+    await fillIn(screen.getByLabelText('Date de naissance *'), '2019-04-28');
     await click(screen.getByRole('radio', { name: 'Homme' }));
     await fillIn(screen.getByRole('button', { name: 'Pays de naissance *' }), '99100');
     await click(screen.getByRole('radio', { name: 'Code INSEE' }));
