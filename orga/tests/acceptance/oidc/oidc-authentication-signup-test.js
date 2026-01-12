@@ -38,15 +38,8 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
   });
 
   test('the user signs up', async function (assert) {
-    // given
-    const screen = await visit('/connexion/oidc-partner?code=code&state=state');
-
     // when
-    const loginTitle = await screen.findByRole('heading', { name: t('pages.oidc.login.title') });
-    assert.dom(loginTitle).exists();
-
-    const signupButton = await screen.findByRole('link', { name: t('pages.oidc.login.signup-button') });
-    await click(signupButton);
+    const screen = await visit('/connexion/oidc-partner?code=code&state=state');
 
     // then
     const signUpTitle = await screen.findByRole('heading', { name: t('pages.oidc.signup.title') });
@@ -99,14 +92,8 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
         );
       });
 
-      const screen = await visit('/connexion/oidc-partner?code=code&state=state');
-
       // when
-      const loginTitle = await screen.findByRole('heading', { name: t('pages.oidc.login.title') });
-      assert.dom(loginTitle).exists();
-
-      const signupButton = await screen.findByRole('link', { name: t('pages.oidc.login.signup-button') });
-      await click(signupButton);
+      const screen = await visit('/connexion/oidc-partner?code=code&state=state');
 
       // then
       const signUpTitle = await screen.findByRole('heading', { name: t('pages.oidc.signup.title') });
