@@ -8,11 +8,11 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
     const secondModule = Symbol('secondModule');
 
     const moduleMetadataRepository = {
-      list: sinon.stub(),
+      listPublic: sinon.stub(),
     };
 
     const moduleMetadataList = [firstModule, secondModule];
-    moduleMetadataRepository.list.withArgs().resolves(moduleMetadataList);
+    moduleMetadataRepository.listPublic.withArgs().resolves(moduleMetadataList);
 
     // when
     const result = await getModuleMetadataList({ moduleMetadataRepository });
