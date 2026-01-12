@@ -4,6 +4,7 @@
   "slug": "prompt-intermediaire-alt",
   "title": "J’améliore mes prompts !",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
     "description": "<p>Les logiciels d’IA générative permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne. Dans ce module, vous allez apprendre à formuler des prompts efficaces et à ajuster vos demandes pour améliorer le résultat proposé par le logiciel d’IA générative.&nbsp;<br></p>",
@@ -31,7 +32,7 @@
               "element": {
                 "id": "52854613-a34d-4f96-a3b4-ec7f4f0373b9",
                 "type": "text",
-                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l'aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
+                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l’aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
               }
             }
           ]
@@ -67,7 +68,7 @@
                       "userName": "Gustave",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
+                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
                     },
                     {
                       "userName": "Emma",
@@ -124,19 +125,19 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>le type de sport : « de volley-ball »</p>"
+                    "content": "<p>le type de sport&nbsp;: «&nbsp;de volley-ball&nbsp;»</p>"
                   },
                   {
                     "id": "2",
-                    "content": "<p>le public : « pour les membres du club »</p>"
+                    "content": "<p>le public&nbsp;: «&nbsp;pour les membres du club&nbsp;»</p>"
                   },
                   {
                     "id": "3",
-                    "content": "<p>le contexte : «  organisé par des bénévoles »</p>"
+                    "content": "<p>le contexte&nbsp;: «&nbsp; organisé par des bénévoles&nbsp;»</p>"
                   },
                   {
                     "id": "4",
-                    "content": "<p>l’objectif&nbsp;: « l'organisation logistique&nbsp;»</p>"
+                    "content": "<p>l’objectif&nbsp;: «&nbsp;l’organisation logistique&nbsp;»</p>"
                   }
                 ],
                 "feedbacks": {
@@ -184,7 +185,7 @@
               "element": {
                 "id": "db2bec02-3bfe-4378-ab39-5cf22045615e",
                 "type": "text",
-                "content": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p>"
+                "content": "<p>Gustave a écrit un message d’invitation au tournoi et a demandé à l’IA de le corriger.</p>"
               }
             },
             {
@@ -192,23 +193,23 @@
               "element": {
                 "id": "e47863e4-6cd6-4089-892a-2e2c0b2935bd",
                 "type": "custom",
-                "instruction": "<p>Vous pouvez changer le ton de ce message avec l'aide de l'IA.</p>",
+                "instruction": "<p>Vous pouvez changer le ton de ce message avec l’aide de l’IA.</p>",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J'ai écrit ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu'à vendredi. »"
+                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu’à vendredi. »"
                     },
                     {
                       "direction": "inbound",
-                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong>  Il vous reste jusqu'à vendredi. »"
+                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong>  Il vous reste jusqu’à vendredi. »"
                     }
                   ],
                   "prompts": [
                     {
-                      "prompt": "Rends le plus festif !",
+                      "prompt": "Rends le plus festif !",
                       "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l’ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t’es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t’attend sur le terrain ! 💪"
                     },
                     {
@@ -216,7 +217,7 @@
                       "response": "Madame, Monsieur,<br> Nous n’avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                     },
                     {
-                      "prompt": "Et en plus drôle ?",
+                      "prompt": "Et en plus drôle ?",
                       "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
@@ -274,7 +275,7 @@
               "element": {
                 "id": "ce3fd4f5-b9ee-40a4-b61f-64b65dbf3b34",
                 "type": "text",
-                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer (« en tant que coach sportif&nbsp;», « comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -305,7 +306,7 @@
         {
           "id": "89b72cc3-56e0-4563-aa33-2e149be886db",
           "type": "discovery",
-          "title": "Découverte : Aide Gustave avec son prompt",
+          "title": "Découverte : Aide Gustave avec son prompt",
           "components": [
             {
               "type": "element",
@@ -343,7 +344,7 @@
                 "id": "62fa6f3f-7c88-4435-a8b9-22c1923d9e6c",
                 "type": "expand",
                 "title": "🗝️ Indice 1",
-                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
+                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
               }
             },
             {
@@ -352,7 +353,7 @@
                 "id": "d9910c34-350e-4276-a9d0-f509d651c1b1",
                 "type": "expand",
                 "title": "🗝️ Indice 2",
-                "content": "Avez-vous vérifié que le tableau obtenu comporte des <strong>exercices </strong>sur les <strong>manchettes </strong>pour différents niveaux, dont le <strong>niveau expert</strong> ?<br>"
+                "content": "Avez-vous vérifié que le tableau obtenu comporte des <strong>exercices </strong>sur les <strong>manchettes </strong>pour différents niveaux, dont le <strong>niveau expert</strong> ?<br>"
               }
             },
             {
@@ -361,7 +362,7 @@
                 "id": "5f9859b2-6b36-49d6-9bd2-ca932cffca79",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "La bonne réponse doit :&nbsp;<br><ul><li>être structurée sous la forme d’un <strong>tableau</strong>,</li><li>contenir des exercices s’améliorer aux <strong>manchettes </strong>au <strong>volley</strong>,&nbsp;</li><li>avec un ou des <strong>nouveaux exercices </strong>pour les joueurs <strong>experts</strong>.</li></ul>Si ces conditions sont remplies, votre réponse devrait être validée.&nbsp;✅<br>"
+                "content": "La bonne réponse doit&nbsp;:&nbsp;<br><ul><li>être structurée sous la forme d’un <strong>tableau</strong>,</li><li>contenir des exercices s’améliorer aux <strong>manchettes </strong>au <strong>volley</strong>,&nbsp;</li><li>avec un ou des <strong>nouveaux exercices </strong>pour les joueurs <strong>experts</strong>.</li></ul>Si ces conditions sont remplies, votre réponse devrait être validée.&nbsp;✅<br>"
               }
             }
           ]
@@ -379,7 +380,7 @@
                     {
                       "id": "815dc23a-526f-48f7-ad29-fa857b366d15",
                       "type": "text",
-                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(« en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(« fais 2 parties et 2 sous-parties...»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
+                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties...»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
                 },
@@ -405,7 +406,7 @@
         {
           "id": "777cd62c-aa30-4c04-9ac4-010bdcce45a3",
           "type": "summary",
-          "title": "Récap’ : l’essentiel pour faire des bons prompts",
+          "title": "Récap’ : l’essentiel pour faire des bons prompts",
           "components": [
             {
               "type": "element",
@@ -576,7 +577,7 @@
                 "id": "a380152f-7f57-4432-8f62-393dd54417b3",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si le logiciel d'IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Si le logiciel d’IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s’agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
@@ -590,14 +591,14 @@
         {
           "id": "28462ad7-6fe1-458d-8c75-1542b987073a",
           "type": "challenge",
-          "title": "Défi : le lieu du tournoi",
+          "title": "Défi : le lieu du tournoi",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "6def9ef6-ae83-4fc7-923f-a6a0714c7a15",
                 "type": "text",
-                "content": "Le tournoi approche mais Gustave a du mal à trouver un lieu pour le tournoi.<br><br>Il cherche un endroit à Jolieville, avec au moins 4 terrains.&nbsp;<br>Il a un budget maximal de 300 pixmoney, il est à la recherche d’un bon plan.&nbsp;"
+                "content": "Gustave a du mal à trouver un lieu pour le tournoi de volley-ball qui approche à grands pas.<br>Pour le tournoi, Gustave recherche un endroit à Jolieville, avec au moins 4 terrains. <br>Il a un budget maximal de 300 pixmoney. Il est à la recherche d’un bon plan.<br><br>"
               }
             },
             {
@@ -608,7 +609,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
-                "instruction": "<p>Utilisez&nbsp;<strong>l’IA</strong>&nbsp;mise en place par Jolievile pour trouver un terrain adapté.</p>",
+                "instruction": "<p>À partir des critères de recherche de Gustave, utilisez le logiciel d'IA générative ci-dessous, utilisée par Jolieville, pour trouver un lieu adapté.</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -618,7 +619,7 @@
               "element": {
                 "id": "378e9d85-a52b-44ab-837b-0697fa865402",
                 "type": "qrocm",
-                "instruction": "Quel gymnase devrait contacter Gustave ?",
+                "instruction": "Quel gymnase devrait contacter Gustave ?",
                 "proposals": [
                   {
                     "input": "NomGymnase",
@@ -644,12 +645,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bravo !",
-                    "diagnosis": "Grâce à vous, le tournoi va pouvoir avoir lieu !"
+                    "state": "Bravo !",
+                    "diagnosis": "Grâce à vous, le tournoi va pouvoir avoir lieu !"
                   },
                   "invalid": {
                     "state": "Eh non...",
-                    "diagnosis": "Avez-vous vérifié que tous les critères étaient respectés ?"
+                    "diagnosis": "Avez-vous vérifié que tous les critères étaient respectés ?"
                   }
                 }
               }
@@ -660,7 +661,7 @@
                 "id": "76b8a58f-b92a-40f9-b95e-02e8f6dcd4e0",
                 "type": "expand",
                 "title": "🗝️ Indice 1 ",
-                "content": "Avez-vous demandé à l’IA des gymnases permettant de faire du <strong>volley-ball </strong>?<br>"
+                "content": "Avez-vous demandé au logiciel d'IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
               }
             },
             {
@@ -669,7 +670,7 @@
                 "id": "ced51117-7bc4-42f7-9892-656470699472",
                 "type": "expand",
                 "title": "🗝️ Indice 2",
-                "content": "Avez-vous vérifié le <strong>nombre de terrain</strong> de volley-ball disponibles ?"
+                "content": "Avez-vous vérifié le <strong>nombre de terrains</strong> de volley-ball disponibles ?"
               }
             },
             {
@@ -678,7 +679,7 @@
                 "id": "6728241a-aea8-4cff-8102-62dc278d8b95",
                 "type": "expand",
                 "title": "🗝️ Indice 3",
-                "content": "Avez-vous vérifié le <strong>coût </strong>du gymnase ?"
+                "content": "Avez-vous vérifié le <strong>coût </strong>du gymnase ?"
               }
             }
           ]
