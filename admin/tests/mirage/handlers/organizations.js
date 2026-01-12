@@ -22,6 +22,22 @@ function getOrganizationPlacesCapacity() {
   };
 }
 
+function getOrganizationPlacesStatistics() {
+  return {
+    data: {
+      id: '1_places_statistics',
+      type: 'organization-places-statistics',
+      attributes: {
+        total: 10,
+        occupied: 1,
+        available: 9,
+        'anonymous-seat': 1,
+        'has-reached-maximum-places-limit': false,
+      },
+    },
+  };
+}
+
 function getOrganizationInvitations(schema, request) {
   const organizationId = request.params.id;
   return schema.organizationInvitations.where({ organizationId });
@@ -93,4 +109,5 @@ export {
   getOrganizationInvitations,
   getOrganizationPlaces,
   getOrganizationPlacesCapacity,
+  getOrganizationPlacesStatistics,
 };

@@ -1,6 +1,6 @@
 import Model, { attr } from '@ember-data/model';
 
-export default class PlaceStatistics extends Model {
+export default class PlacesStatistics extends Model {
   @attr('number') available;
   @attr('number') total;
   @attr('number') occupied;
