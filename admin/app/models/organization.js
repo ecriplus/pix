@@ -90,6 +90,10 @@ export default class Organization extends Model {
     return !!this.archivedAt;
   }
 
+  get isPlacesManagementEnabled() {
+    return this.features[Organization.featureList.PLACES_MANAGEMENT].active;
+  }
+
   get dataProtectionOfficerFullName() {
     const fullName = [];
 
