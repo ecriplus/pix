@@ -88,7 +88,7 @@ module('Unit | Model | v3-certification-course-details-for-administration', func
         endedAt: null,
       },
       {
-        assessmentState: 'endedBySupervisor',
+        assessmentState: 'endedByInvigilator',
         endedAt: new Date('2023-01-13T08:05:00Z'),
         completedAt: null,
       },

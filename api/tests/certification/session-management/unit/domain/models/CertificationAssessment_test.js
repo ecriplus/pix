@@ -924,6 +924,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         Assessment.states.STARTED,
         Assessment.states.ENDED_BY_INVIGILATOR,
         Assessment.states.ENDED_DUE_TO_FINALIZATION,
+        'endedBySupervisor',
       ]);
     });
   });
