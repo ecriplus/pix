@@ -4,7 +4,6 @@
   "slug": "prompt-intermediaire-alt",
   "title": "J’améliore mes prompts !",
   "isBeta": true,
-  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
     "description": "<p>Les logiciels d’IA générative permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne. Dans ce module, vous allez apprendre à formuler des prompts efficaces et à ajuster vos demandes pour améliorer le résultat proposé par le logiciel d’IA générative.&nbsp;<br></p>",
@@ -150,7 +149,12 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -293,7 +297,7 @@
               "element": {
                 "id": "9266eb55-fab5-4482-a325-8e2de5701886",
                 "type": "text",
-                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette</td>        </tr>    </tbody></table>"
+                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette.</td>        </tr>    </tbody></table>"
               }
             }
           ]
@@ -308,7 +312,7 @@
               "element": {
                 "id": "5024da18-e779-4383-a240-9b14ed6f1044",
                 "type": "text",
-                "content": "Quelques temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau experts mais n’a plus idée… <br>Utilisez l’IA de Pix pour l’aider à compléter son tableau.<br>"
+                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus idée… <br>Utilisez l’IA de Pix pour l’aider à compléter son tableau.<br>"
               }
             },
             {
@@ -327,10 +331,19 @@
             {
               "type": "element",
               "element": {
+                "id": "d602142b-5683-4914-9b39-f570005ae4e6",
+                "type": "expand",
+                "title": "💡 L’astuce pratique",
+                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "62fa6f3f-7c88-4435-a8b9-22c1923d9e6c",
                 "type": "expand",
                 "title": "🗝️ Indice 1",
-                "content": "Avez-vous demandé fourni à l’IA le <strong>tableau </strong>existant ou bien demandé à l’IA de faire un tableau d’entraînement pour <strong>progresser au volley-ball </strong>?"
+                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
               }
             },
             {
@@ -339,7 +352,7 @@
                 "id": "d9910c34-350e-4276-a9d0-f509d651c1b1",
                 "type": "expand",
                 "title": "🗝️ Indice 2",
-                "content": "Le tableau réalisé contient des exercices sur les <strong>manchettes </strong>pour <strong>différents niveaux, </strong>dont le niveau <strong>expert</strong> ?"
+                "content": "Avez-vous vérifié que le tableau obtenu comporte des <strong>exercices </strong>sur les <strong>manchettes </strong>pour différents niveaux, dont le <strong>niveau expert</strong> ?<br>"
               }
             },
             {
@@ -349,15 +362,6 @@
                 "type": "expand",
                 "title": "🙈 Solution",
                 "content": "La bonne réponse doit :&nbsp;<br><ul><li>être structurée sous la forme d’un <strong>tableau</strong>,</li><li>contenir des exercices s’améliorer aux <strong>manchettes </strong>au <strong>volley</strong>,&nbsp;</li><li>avec un ou des <strong>nouveaux exercices </strong>pour les joueurs <strong>experts</strong>.</li></ul>Si ces conditions sont remplies, votre réponse devrait être validée.&nbsp;✅<br>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "d602142b-5683-4914-9b39-f570005ae4e6",
-                "type": "expand",
-                "title": "💡 L’astuce pratique",
-                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
               }
             }
           ]
@@ -470,7 +474,10 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -509,7 +516,11 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
@@ -564,7 +575,7 @@
               "element": {
                 "id": "a380152f-7f57-4432-8f62-393dd54417b3",
                 "type": "expand",
-                "title": "🙊 Solution",
+                "title": "🙈 Solution",
                 "content": "<p>Si le logiciel d'IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
@@ -618,7 +629,11 @@
                     "placeholder": "Nom du gymnase",
                     "ariaLabel": "Nom du gymnase",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Le gymnase des 3 sapins",
                       "gymnase des 3 sapins",
