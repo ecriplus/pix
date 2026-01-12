@@ -148,11 +148,11 @@ module('Acceptance | join and login', function (hooks) {
   module('when the invitation does not exist', function () {
     test('redirects user to /connexion', async function (assert) {
       // when
-      await visit('/rejoindre?invitationId=123456&code=FAKE999');
+      const screen = await visit('/rejoindre?invitationId=123456&code=FAKE999');
 
       // then
       assert.strictEqual(currentURL(), '/connexion');
-      assert.strictEqual(invitationStorage.get(), undefined);
+      assert.ok(screen.getByText(t('pages.login-form.invitation-not-found')));
     });
   });
 

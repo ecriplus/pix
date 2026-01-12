@@ -24,14 +24,14 @@ export default class JoinInvitationService extends Service {
 
       return invitation;
     } catch (errorResponse) {
-      errorResponse.errors.forEach((error) => {
-        if (error.status === '403') {
-          this.error = 'INVITATION_CANCELLED';
-        }
-        if (error.status === '412') {
-          this.error = 'INVITATION_ALREADY_ACCEPTED';
-        }
-      });
+      const error = errorResponse?.errors[0];
+      if (error.status === '403') {
+        this.error = 'INVITATION_CANCELLED';
+      } else if (error.status === '412') {
+        this.error = 'INVITATION_ALREADY_ACCEPTED';
+      } else if (error.status === '404') {
+        this.error = 'INVITATION_NOT_FOUND';
+      }
     }
   }
 

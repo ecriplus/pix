@@ -1198,6 +1198,7 @@
       },
       "forgot-password": "Mot de passe oublié ?",
       "invitation-already-accepted": "Cette invitation a déjà été acceptée. Connectez-vous ou contactez l'administrateur de votre espace Pix Orga.",
+      "invitation-not-found": "Cette invitation n'a pas été trouvée. Contactez l’administrateur de votre espace Pix Orga.",
       "invitation-was-cancelled": "Cette invitation n’est plus valide. Contactez l’administrateur de votre espace Pix Orga.",
       "login": "Je me connecte",
       "only-for-admin": "Réservé aux personnels de direction des établissements scolaires publics et privés sous contrat.",

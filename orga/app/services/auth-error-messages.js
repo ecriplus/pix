@@ -65,6 +65,9 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
   INVITATION_ALREADY_ACCEPTED: {
     i18nKey: 'pages.login-form.invitation-already-accepted',
   },
+  INVITATION_NOT_FOUND: {
+    i18nKey: 'pages.login-form.invitation-not-found',
+  },
 };
 
 export default class AuthErrorMessagesService extends Service {
