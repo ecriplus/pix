@@ -98,7 +98,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
-                "content": "<p>Consigne&nbsp;: Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</p>"
+                "content": "<p><strong>Consigne&nbsp;: Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</strong></p>"
               }
             },
             {
@@ -160,7 +160,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
+                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises aux autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
               }
             }
           ]
@@ -175,7 +175,7 @@
               "element": {
                 "id": "5f0b926f-aadb-4d87-a9d1-f95424766291",
                 "type": "text",
-                "content": "<p>Maintenant que nous savons que vos prompts sont conservés et pourquoi.&nbsp;Voyons ce qu’il ne vaut mieux éviter de mettre dans vos instructions.</p>"
+                "content": "<p>Maintenant que nous savons que vos prompts sont conservés et pourquoi.&nbsp;Voyons ce qu’il vaut mieux éviter de mettre dans vos instructions.</p>"
               }
             }
           ]
