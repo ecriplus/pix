@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## [5.301.1](https://github.com/1024pix/pix/compare/v5.301.0...v5.301.1) (2026-01-12)
+
+### :building_construction: Tech
+
+- [#14694](https://github.com/1024pix/pix/pull/14694) Supprimer l'envoi des participations terminées pour France Travail (Ne pas merger avant d'avoir prévenu France Travail) (PIX-20950) 
+- [#14683](https://github.com/1024pix/pix/pull/14683) Supprimer la table certification-data-active-calibrated-challenges (PIX-20641).
+
 # [5.301.0](https://github.com/1024pix/pix/compare/v5.300.0...v5.301.0) (2026-01-12)
 
 ### :rocket: Amélioration
