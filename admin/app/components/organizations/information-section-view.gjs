@@ -6,8 +6,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { formatList, t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
-import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import Organization from 'pix-admin/models/organization';
+
+import Card from '../card';
 
 export default class OrganizationInformationSection extends Component {
   @service accessControl;
@@ -36,7 +37,7 @@ export default class OrganizationInformationSection extends Component {
         <OrganizationDescription @organization={{@organization}} />
 
         {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-          <div class="form-actions">
+          <div class="form-actions organization-information__actions">
             <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
               {{t "common.actions.edit"}}
             </PixButton>
@@ -66,6 +67,10 @@ class OrganizationDescription extends Component {
     return identityProviderName || this.intl.t('common.words.none');
   }
 
+  get dpoSectionTitle() {
+    return `${this.intl.t('components.organizations.creation.dpo.definition')} (${this.intl.t('components.organizations.creation.dpo.acronym')})`;
+  }
+
   get country() {
     //TODO: remove condition based on countryCode when it becomes not nullable at the end of Epix
     if (!this.args.organization.countryCode && !this.args.organization.countryName) {
@@ -82,89 +87,145 @@ class OrganizationDescription extends Component {
   }
 
   <template>
-    <DescriptionList>
-      <DescriptionList.Divider />
+    <section class="admin-form__content">
+      <Card
+        class="admin-form__card organization-information-section__card organization-information-section__card--general"
+        @title={{t "components.organizations.creation.general-information"}}
+      >
+        <div class="organization-information-section__left-block">
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.type"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.type}}</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.created-by"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.creatorFullName}}
+              ({{@organization.createdBy}})</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.created-at"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.createdAtFormattedDate}}</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.administration-team"
+              }}</span>
+            <span class="organization-information-section__value">{{if
+                @organization.administrationTeamName
+                @organization.administrationTeamName
+                (t "common.not-specified")
+              }}</span>
+          </div>
+        </div>
+        <div class="organization-information-section__right-block">
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.country.label"
+              }}</span>
+            <span class="organization-information-section__value">{{this.country}}</span>
+          </div>
+          {{#if @organization.provinceCode}}
+            <div class="organization-information-section__field">
+              <span class="organization-information-section__label">{{t
+                  "components.organizations.information-section-view.province-code"
+                }}</span>
+              <span class="organization-information-section__value">{{@organization.provinceCode}}</span>
+            </div>
+          {{/if}}
+          {{#if @organization.externalId}}
+            <div class="organization-information-section__field">
+              <span class="organization-information-section__label">{{t
+                  "components.organizations.information-section-view.external-id"
+                }}</span>
+              <span class="organization-information-section__value">{{@organization.externalId}}</span>
+            </div>
+          {{/if}}
+        </div>
+      </Card>
 
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.type"}}>
-        {{@organization.type}}
-      </DescriptionList.Item>
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.created-by"}}>
-        {{@organization.creatorFullName}}
-        ({{@organization.createdBy}})
-      </DescriptionList.Item>
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.created-at"}}>
-        {{@organization.createdAtFormattedDate}}
-      </DescriptionList.Item>
-      {{#if @organization.externalId}}
-        <DescriptionList.Item @label={{t "components.organizations.information-section-view.external-id"}}>
-          {{@organization.externalId}}
-        </DescriptionList.Item>
-      {{/if}}
-      {{#if @organization.provinceCode}}
-        <DescriptionList.Item @label={{t "components.organizations.information-section-view.province-code"}}>
-          {{@organization.provinceCode}}
-        </DescriptionList.Item>
-      {{/if}}
+      <div class="organization-information-section__side-by-side">
+        <Card
+          class="admin-form__card organization-information-section__card organization-information-section__card--side"
+          @title={{t "components.organizations.creation.configuration"}}
+        >
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.credits"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.credit}}</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.documentation-link"
+              }}</span>
+            <span class="organization-information-section__value">
+              {{#if @organization.documentationUrl}}
+                <a href="{{@organization.documentationUrl}}" target="_blank" rel="noopener noreferrer">
+                  {{@organization.documentationUrl}}
+                </a>
+              {{else}}
+                {{t "common.not-specified"}}
+              {{/if}}
+            </span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.sso"
+              }}</span>
+            <span class="organization-information-section__value">{{this.identityProviderName}}</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.sco-activation-email"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.email}}</span>
+          </div>
+          {{#if @organization.code}}
+            <div class="organization-information-section__field">
+              <span class="organization-information-section__label">{{t
+                  "components.organizations.information-section-view.code"
+                }}</span>
+              <span class="organization-information-section__value">{{@organization.code}}</span>
+            </div>
+          {{/if}}
+        </Card>
 
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.country.label"}}>
-        {{this.country}}
-      </DescriptionList.Item>
+        <Card
+          class="admin-form__card organization-information-section__card organization-information-section__card--side"
+          @title={{this.dpoSectionTitle}}
+        >
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.dpo-name"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.dataProtectionOfficerFullName}}</span>
+          </div>
+          <div class="organization-information-section__field">
+            <span class="organization-information-section__label">{{t
+                "components.organizations.information-section-view.dpo-email"
+              }}</span>
+            <span class="organization-information-section__value">{{@organization.dataProtectionOfficerEmail}}</span>
+          </div>
+        </Card>
+      </div>
 
-      <DescriptionList.Divider />
-
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.administration-team"}}>
-        {{if @organization.administrationTeamName @organization.administrationTeamName (t "common.not-specified")}}
-      </DescriptionList.Item>
-
-      <DescriptionList.Divider />
-
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.dpo-name"}}>
-        {{@organization.dataProtectionOfficerFullName}}
-      </DescriptionList.Item>
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.dpo-email"}}>
-        {{@organization.dataProtectionOfficerEmail}}
-      </DescriptionList.Item>
-
-      <DescriptionList.Divider />
-
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.credits"}}>
-        {{@organization.credit}}
-      </DescriptionList.Item>
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.documentation-link"}}>
-        {{#if @organization.documentationUrl}}
-          <a href="{{@organization.documentationUrl}}" target="_blank" rel="noopener noreferrer">
-            {{@organization.documentationUrl}}
-          </a>
-        {{else}}
-          {{t "common.not-specified"}}
-        {{/if}}
-      </DescriptionList.Item>
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.sso"}}>
-        {{this.identityProviderName}}
-      </DescriptionList.Item>
-
-      <DescriptionList.Divider />
-
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.sco-activation-email"}}>
-        {{@organization.email}}
-      </DescriptionList.Item>
-
-      {{#if @organization.code}}
-        <DescriptionList.Divider />
-
-        <DescriptionList.Item @label={{t "components.organizations.information-section-view.code"}}>
-          {{@organization.code}}
-        </DescriptionList.Item>
-      {{/if}}
-
-      <DescriptionList.Divider />
-
-      <DescriptionList.Item @label={{t "components.organizations.information-section-view.features.title"}}>
-        <FeaturesSection @features={{@organization.features}} />
-      </DescriptionList.Item>
-
-      <DescriptionList.Divider />
-    </DescriptionList>
+      <Card
+        class="admin-form__card organization-information-section__card"
+        @title={{t "components.organizations.creation.features"}}
+      >
+        <div class="organization-information-section__field">
+          <span class="organization-information-section__value">
+            <FeaturesSection @features={{@organization.features}} />
+          </span>
+        </div>
+      </Card>
+    </section>
   </template>
 }
 

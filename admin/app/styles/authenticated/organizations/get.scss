@@ -4,6 +4,9 @@
   .organization__header {
     display: flex;
     align-items: flex-start;
+    max-width: 1400px;
+    margin-bottom: var(--pix-spacing-3x);
+    margin-left: 0;
 
     .organization__logo {
       margin-right: 20px;
@@ -63,6 +66,10 @@
           text-decoration: underline;
         }
       }
+    }
+
+    .organization__dashboard-button {
+      align-self: center;
     }
   }
 
