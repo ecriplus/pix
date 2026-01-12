@@ -3,16 +3,16 @@
   flex-direction: column;
   gap: var(--pix-spacing-4x);
 
-  &__heading {
+  &__spacer {
     display: flex;
     gap: var(--pix-spacing-6x);
-    margin-top: var(--pix-spacing-10x);
-    margin-bottom: var(--pix-spacing-10x);
+    margin-top: var(--pix-spacing-6x);
+    margin-bottom: var(--pix-spacing-6x);
     color: var(--pix-neutral-500);
   }
 
-  &__heading::before,
-  &__heading::after {
+  &__spacer::before,
+  &__spacer::after {
     flex: 1 1;
     margin: auto;
     border-bottom: 1px solid var(--pix-neutral-100);

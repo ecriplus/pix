@@ -23,6 +23,9 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         @isInvitationCancelled={{@controller.isInvitationCancelled}}
         @onSubmit={{@controller.authenticate}}
       />
+
+      <AuthenticationIdentityProviders />
+
       {{#if @controller.displayRecoveryLink}}
         <div class="authentication-login__recover-access">
           <p class="authentication-login__recover-access__question">
@@ -37,7 +40,6 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         </div>
       {{/if}}
 
-      <AuthenticationIdentityProviders />
     </:content>
   </AuthenticationLayout>
 </template>

@@ -337,12 +337,9 @@
     },
     "authentication": {
       "authentication-identity-providers": {
-        "login": {
-          "heading": "Andere inlogmethodes"
-        },
         "select-another-organization-link": "Kies een andere organisatie",
-        "signup": {
-          "heading": "Andere registratiemethodes"
+        "spacer": {
+          "or": "of"
         }
       },
       "oidc-association-confirmation": {
