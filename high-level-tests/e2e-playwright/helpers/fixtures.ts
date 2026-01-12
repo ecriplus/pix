@@ -11,6 +11,7 @@ import {
   PIX_CERTIF_PRO_CREDENTIALS,
   PIX_ORGA_ADMIN_CREDENTIALS,
   PIX_ORGA_MEMBER_CREDENTIALS,
+  PIX_SUPER_ADMIN_CREDENTIALS,
 } from './auth.js';
 
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
@@ -23,6 +24,7 @@ export const test = base.extend<{
   pixOrgaAdminContext: BrowserContext;
   pixOrgaMemberContext: BrowserContext;
   pixCertifProContext: BrowserContext;
+  pixSuperAdminContext: BrowserContext;
   snapshotHandler: SnapshotHandler;
 }>({
   // eslint-disable-next-line no-empty-pattern
@@ -101,6 +103,22 @@ export const test = base.extend<{
     const harFilePath = path.join(
       HAR_DIR,
       `${sanitizeFilename(testInfo.title)}-${PIX_CERTIF_PRO_CREDENTIALS.label}.har`,
+    );
+    const recordHar = shouldRecordHAR
+      ? {
+          path: harFilePath,
+          content: 'omit' as const,
+        }
+      : undefined;
+    const context = await browser.newContext({ storageState: authFilePath, recordHar });
+    await use(context);
+    await context.close();
+  },
+  pixSuperAdminContext: async ({ browser }, use, testInfo) => {
+    const authFilePath = path.join(AUTH_DIR, `${PIX_SUPER_ADMIN_CREDENTIALS.label}.json`);
+    const harFilePath = path.join(
+      HAR_DIR,
+      `${sanitizeFilename(testInfo.title)}-${PIX_SUPER_ADMIN_CREDENTIALS.label}.har`,
     );
     const recordHar = shouldRecordHAR
       ? {

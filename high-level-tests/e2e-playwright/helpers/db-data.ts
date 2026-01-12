@@ -52,12 +52,21 @@ export const PIX_ORGA_MEMBER_DATA = {
 
 export const PIX_CERTIF_PRO_DATA = {
   id: 1_000_005,
-  firstName: 'PixOrga',
-  lastName: 'SupIsManagingPrescripteur',
+  firstName: 'PixCertif',
+  lastName: 'CentrePRO',
   email: 'pix-certif_pro@example.net',
   rawPassword: 'pix123',
   certificationCenter: {
     type: 'PRO',
     externalId: 'CERTIFPRO',
   },
+};
+
+export const PIX_SUPER_ADMIN_DATA = {
+  id: 1_000_006,
+  firstName: 'PixAdmin',
+  lastName: 'SuperAdmin',
+  email: 'pix-admin_superadmin@example.net',
+  rawPassword: 'pix123',
+  role: 'SUPER_ADMIN',
 };

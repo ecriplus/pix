@@ -51,6 +51,7 @@ test(
     const sessionManagementPage = new SessionManagementPage(pixCertifPage);
     const { sessionNumber, accessCode, invigilatorCode } = await sessionManagementPage.getSessionData();
     await test.step('adds a candidate', async () => {
+      await sessionManagementPage.goToEnrollCandidateForm();
       await sessionManagementPage.addCandidate({
         sex: 'F',
         firstName: 'Buffy',

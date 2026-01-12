@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class StartCampaignPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async goToFirstChallenge(campaignCode: string) {
     await this.page.getByLabel('Saisir votre code pour').fill(campaignCode);

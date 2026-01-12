@@ -3,7 +3,7 @@ import * as path from 'node:path';
 import * as fs from 'fs/promises';
 import ms from 'ms';
 
-import type { Credentials } from './helpers/auth.ts';
+import { Credentials, PIX_SUPER_ADMIN_CREDENTIALS } from './helpers/auth.ts';
 import {
   AUTH_DIR,
   getTokenForPixUser,
@@ -28,6 +28,7 @@ export default async function globalSetup() {
     await saveStorageState(PIX_ORGA_ADMIN_CREDENTIALS);
     await saveStorageState(PIX_ORGA_MEMBER_CREDENTIALS);
     await saveStorageState(PIX_CERTIF_PRO_CREDENTIALS);
+    await saveStorageState(PIX_SUPER_ADMIN_CREDENTIALS);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('❌ Global setup failed:', error);

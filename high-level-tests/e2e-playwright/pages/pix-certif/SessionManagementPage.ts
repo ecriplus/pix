@@ -1,9 +1,12 @@
 import type { Page } from '@playwright/test';
+
+import { SessionFinalizationPage } from './SessionFinalizationPage.ts';
 export class SessionManagementPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async getSessionData() {
     await this.page.getByRole('link', { name: 'Détails' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+$/);
     const sessionNumber = (
       await this.page
         .locator('h3:has-text("Numéro de session")')
@@ -35,6 +38,22 @@ export class SessionManagementPage {
     };
   }
 
+  async goToEnrollCandidateForm() {
+    await this.page.getByRole('link', { name: 'Candidats' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/candidats$/);
+    await this.page.getByRole('button', { name: 'Inscrire un candidat' }).click();
+  }
+
+  async goToFinalizeSession() {
+    await this.page.getByRole('link', { name: 'Détails' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+$/);
+    await this.page.reload();
+    await this.page.getByRole('link', { name: 'Finaliser la session' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/finalisation$/);
+
+    return new SessionFinalizationPage(this.page);
+  }
+
   async addCandidate({
     sex,
     firstName,
@@ -52,8 +71,6 @@ export class SessionManagementPage {
     birthCity: string;
     postalCode: string;
   }) {
-    await this.page.getByRole('link', { name: 'Candidats' }).click();
-    await this.page.getByRole('button', { name: 'Inscrire un candidat' }).click();
     if (sex === 'F') {
       await this.page.getByRole('radio', { name: 'Femme' }).check();
     } else {
@@ -69,6 +86,12 @@ export class SessionManagementPage {
     await this.page.getByLabel('Commune de naissance').fill(birthCity);
     await this.page.getByRole('button', { name: 'Tarification part Pix *' }).click();
     await this.page.getByRole('option', { name: 'Gratuite' }).click();
+    const radio = this.page.getByRole('radio', { name: 'Certification Pix' });
+
+    if (await radio.isVisible()) {
+      await radio.check();
+    }
     await this.page.getByRole('button', { name: 'Inscrire le candidat' }).click();
+    await this.page.getByText('Le candidat a été inscrit avec succès.').waitFor({ state: 'visible' });
   }
 }

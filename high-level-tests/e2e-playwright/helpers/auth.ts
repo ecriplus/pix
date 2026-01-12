@@ -3,7 +3,13 @@ import path from 'node:path';
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
 
-import { PIX_APP_USER_DATA, PIX_CERTIF_PRO_DATA, PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA } from './db-data.js';
+import {
+  PIX_APP_USER_DATA,
+  PIX_CERTIF_PRO_DATA,
+  PIX_ORGA_ADMIN_DATA,
+  PIX_ORGA_MEMBER_DATA,
+  PIX_SUPER_ADMIN_DATA,
+} from './db-data.js';
 
 export const AUTH_DIR = path.resolve(import.meta.dirname, '../.auth');
 
@@ -52,6 +58,15 @@ export const PIX_CERTIF_PRO_CREDENTIALS: Credentials = {
   email: PIX_CERTIF_PRO_DATA.email,
   rawPassword: PIX_CERTIF_PRO_DATA.rawPassword,
   appUrl: process.env.PIX_CERTIF_URL as string,
+};
+export const PIX_SUPER_ADMIN_CREDENTIALS: Credentials = {
+  id: PIX_SUPER_ADMIN_DATA.id,
+  label: 'pix-admin_super',
+  firstName: PIX_SUPER_ADMIN_DATA.firstName,
+  lastName: PIX_SUPER_ADMIN_DATA.lastName,
+  email: PIX_SUPER_ADMIN_DATA.email,
+  rawPassword: PIX_SUPER_ADMIN_DATA.rawPassword,
+  appUrl: process.env.PIX_ADMIN_URL as string,
 };
 
 export function getGarTokenForNewUser(firstName: string, lastName: string, expiresIn: ms.StringValue = '1h') {

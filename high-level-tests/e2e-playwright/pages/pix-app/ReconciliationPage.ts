@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class ReconciliationPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   /**
    * Fill reconciation form

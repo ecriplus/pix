@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class ReconciliationLoginPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async login(emailOrUsername: string, rawPassword: string) {
     await this.page.getByLabel('Adresse e-mail ou identifiant').fill(emailOrUsername);

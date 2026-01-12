@@ -15,9 +15,13 @@
     "node": "^24.11.1"
   },
   "scripts": {
+    "codegen": "playwright codegen",
     "test": "playwright test",
     "test:snapshot": "UPDATE_SNAPSHOTS=true playwright test --grep @snapshot",
     "test:ui": "playwright test --ui",
+    "test:certif": "playwright test --config playwright.config.certif.ts",
+    "test:certif:snapshot": "UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --grep @snapshot",
+    "test:certif:ui": "playwright test --config playwright.config.certif.ts --ui",
     "lint": "eslint .",
     "tsc": "tsc -b"
   },

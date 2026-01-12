@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class CompetenceResultPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async getLevel() {
     const levelLocator = this.page.locator('.competence-card__level .score-value');

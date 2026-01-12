@@ -1,4 +1,6 @@
 import type { Page } from '@playwright/test';
+
+import { HomePage } from './index.ts';
 export class LoginPage {
   constructor(public readonly page: Page) {}
 
@@ -7,9 +9,8 @@ export class LoginPage {
     await this.page.getByLabel('Mot de passe').fill(rawPassword);
 
     await this.page.getByRole('button', { name: 'Je me connecte' }).click();
-  }
+    await this.page.waitForURL(/\/organizations\/list$/);
 
-  async acceptCGU() {
-    await this.page.getByRole('button', { name: 'J’accepte les conditions d’utilisation' }).click();
+    return new HomePage(this.page);
   }
 }
