@@ -16,6 +16,7 @@ export default class OrganizationCreationForm extends Component {
   @service store;
   @service intl;
   @service pixToast;
+  @service locale;
 
   @tracked form = {
     administrationTeamId: this.parentOrganizationAdministrationTeamId,
@@ -176,6 +177,7 @@ export default class OrganizationCreationForm extends Component {
             @value={{this.form.countryCode}}
             @requiredLabel={{t "common.fields.required-field"}}
             @isSearchable={{true}}
+            @locale={{this.locale.currentLocale}}
             @errorMessage={{if this.validator.errors.countryCode (t this.validator.errors.countryCode)}}
           >
             <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
