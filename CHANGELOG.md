@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.303.0](https://github.com/1024pix/pix/compare/v5.302.0...v5.303.0) (2026-01-13)
+
+### :rocket: Amélioration
+
+- [#14699](https://github.com/1024pix/pix/pull/14699) Retours panels internes IA botaniste 
+- [#14697](https://github.com/1024pix/pix/pull/14697) Update IAGenPrompt_NOV_altconfig.json 
+
+### :bug: Correction
+
+- [#14703](https://github.com/1024pix/pix/pull/14703) La mauvaise clé de cache est utilisée dans une des méthodes pour récupérer des épreuves depuis le cache mémoire 
+
+### :building_construction: Tech
+
+- [#14687](https://github.com/1024pix/pix/pull/14687) Afficher le nombre total d'orgas créées en masse (PIX-7425) 
+
+### :arrow_up: Montée de version
+
+- [#14692](https://github.com/1024pix/pix/pull/14692) Update dependency @1024pix/pix-ui to v56 (admin)
+
 # [5.302.0](https://github.com/1024pix/pix/compare/v5.301.1...v5.302.0) (2026-01-13)
 
 ### :rocket: Amélioration
