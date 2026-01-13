@@ -46,7 +46,6 @@ import { copyTargetProfile } from './copy-target-profile.js';
 import { createTargetProfile } from './create-target-profile.js';
 import { detachOrganizationsFromTargetProfile } from './detach-organizations-from-target-profile.js';
 import { findOrganizationTargetProfileSummariesForAdmin } from './find-organization-target-profile-summaries-for-admin.js';
-import { findPaginatedFilteredOrganizationByTargetProfileId } from './find-paginated-filtered-target-profile-organizations.js';
 import { findPaginatedFilteredTargetProfileSummariesForAdmin } from './find-paginated-filtered-target-profile-summaries-for-admin.js';
 import { findSkillsByTargetProfileIds } from './find-skills-by-target-profile-ids.js';
 import { getAvailableTargetProfilesForOrganization } from './get-available-target-profiles-for-organization.js';
@@ -67,7 +66,6 @@ const usecasesWithoutInjectedDependencies = {
   createTargetProfile,
   detachOrganizationsFromTargetProfile,
   findOrganizationTargetProfileSummariesForAdmin,
-  findPaginatedFilteredOrganizationByTargetProfileId,
   findPaginatedFilteredTargetProfileSummariesForAdmin,
   findSkillsByTargetProfileIds,
   getAvailableTargetProfilesForOrganization,
