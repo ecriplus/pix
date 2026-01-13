@@ -1,5 +1,18 @@
 # Pix Changelog
 
+# [5.302.0](https://github.com/1024pix/pix/compare/v5.301.1...v5.302.0) (2026-01-13)
+
+### :rocket: Amélioration
+
+- [#14505](https://github.com/1024pix/pix/pull/14505) Ajouter un script pour rattraper les participations supprimées avant l'activation de l'anonymization (Pix-20885). 
+- [#14691](https://github.com/1024pix/pix/pull/14691) Permettre de sélectionner un module lors de la création/mise à jour d'un contenu formatif (PIX-20921) 
+- [#14690](https://github.com/1024pix/pix/pull/14690) Récupérer uniquement les metadatas des modules publics (PIX-21029). 
+- [#14675](https://github.com/1024pix/pix/pull/14675) Script de rattachement des profile rewards non partagées aux organisations (PIX-21016) 
+
+### :building_construction: Tech
+
+- [#14689](https://github.com/1024pix/pix/pull/14689) Ajout de logs de debug pour le usecase reward user (PIX-21004)
+
 ## [5.301.1](https://github.com/1024pix/pix/compare/v5.301.0...v5.301.1) (2026-01-12)
 
 ### :building_construction: Tech
