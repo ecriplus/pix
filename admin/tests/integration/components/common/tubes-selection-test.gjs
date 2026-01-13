@@ -162,7 +162,7 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
   module('#import tubes preselection or target profile export', function () {
     test('it should display a button to import JSON file', async function (assert) {
       // then
-      assert.dom(await screen.findByPlaceholderText('Pix')).exists();
+      assert.dom(await screen.getByRole('button', { name: 'Référentiels :' })).exists();
       assert.dom(await screen.findByText('Importer un fichier JSON')).exists();
     });
 
@@ -190,7 +190,6 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
         });
 
         // then
-        assert.dom(await screen.findByPlaceholderText('Pix plus')).exists();
         assert.dom(await screen.findByText('2/3 sujet(s) sélectionné(s)')).exists();
       });
     });

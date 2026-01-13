@@ -13,6 +13,7 @@ const MAX_TUBE_LEVEL = 8;
 
 export default class TubesSelection extends Component {
   @service pixToast;
+  @service locale;
 
   @tracked selectedFrameworkIds = [];
 
@@ -228,6 +229,7 @@ export default class TubesSelection extends Component {
             @placeholder="Sélectionner les référentiels souhaités"
             @id="framework-list"
             @isSearchable={{true}}
+            @locale={{this.locale.currentLocale}}
             @inlineLabel={{true}}
             @showOptionsOnInput={{true}}
             @onChange={{this.setSelectedFrameworkIds}}
