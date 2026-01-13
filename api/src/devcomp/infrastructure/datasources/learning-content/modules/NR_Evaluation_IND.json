@@ -4,6 +4,7 @@
   "slug": "evaluation-impacts-environnementaux-numerique",
   "title": "Comment sont évalués les impacts environnementaux du numérique ?",
   "isBeta": true,
+  "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module vous aide à comprendre la méthode utilisée pour évaluer les impacts environnementaux du secteur du numérique. <br>Vous découvrirez comment définir le périmètre d’une étude, pourquoi on raisonne sur tout le cycle de vie des équipements et pourquoi plusieurs indicateurs sont nécessaires. <br>Une base claire pour lire, comparer et questionner les chiffres clés du numérique.</p>",
@@ -542,14 +543,14 @@
         {
           "id": "3aa484f2-7742-4cb0-96f9-441fbbf3cab1",
           "type": "activity",
-          "title": "Activité 1 : Périmètre — ce qui compte / ce qui ne compte pas",
+          "title": "Activité 1",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "a266c379-06be-400f-b5b0-78e1bfd5c0d0",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p><p>Objectif : entraîner l’apprenant à repérer ce qui est inclus/exclu d’un périmètre d’étude (ex. inclut smartphones + box + data centers, exclut câbles sous-marins, etc.).</p><p>Format suggéré : QCU/QROCM avec 6–8 items « inclus / exclu » + feedback expliquant pourquoi le périmètre change les résultats.</p>"
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
               }
             }
           ]
@@ -557,32 +558,29 @@
         {
           "id": "76cc531a-a816-421d-a92f-b6a33befe486",
           "type": "activity",
-          "title": "Activité 2 : Cycle de vie — remettre les étapes dans l’ordre",
+          "title": "Activité 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": []
-                },
-                {
-                  "elements": []
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "e393cd8a-1a83-4533-a809-9b7c6bcd1e41",
+                "type": "text",
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
+              }
             }
           ]
         },
         {
           "id": "b3b03583-9e13-49f4-a01e-a2e5a4458460",
           "type": "activity",
-          "title": "Activité 3 : Indicateurs — choisir le bon indicateur selon la question",
+          "title": "Activité 3",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "67881400-f14b-4e8f-a773-c993c44e7404",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p><p>Objectif : comprendre que « bon indicateur » dépend de la question (climat, ressources, santé…).</p><p>Format suggéré : QCU en série (5 situations) : « on s’inquiète du climat » → GWP ; « tension sur métaux » → ADPe ; « particules fines » → PM ; etc.</p>"
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p><p><br></p>"
               }
             }
           ]
