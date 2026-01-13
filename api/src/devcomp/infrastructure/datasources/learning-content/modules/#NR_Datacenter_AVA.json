@@ -641,7 +641,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/piscine-butte.jpg",
-                              "alt": ""
+                              "alt": "Image d'une piscine"
                             }
                           }
                         ]
@@ -785,7 +785,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/data-center-sous-marin-chine.jpg",
-                              "alt": ""
+                              "alt": "Photographie d'un centre de données sous-marin"
                             }
                           }
                         ]
@@ -953,7 +953,7 @@
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/images-hd.png",
-                        "alt": ""
+                        "alt": "Image"
                       },
                       "license": {
                         "name": "",
