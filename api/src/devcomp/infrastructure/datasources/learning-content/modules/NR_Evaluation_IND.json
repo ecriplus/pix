@@ -189,7 +189,7 @@
                 "instruction": "qsfqzfqzfdqzefqzfq",
                 "tagName": "pix-carousel",
                 "props": {
-                  "type": "image-text",
+                  "type": "image",
                   "slides": [
                     {
                       "title": "Première étape : La fabrication ",
