@@ -18,7 +18,7 @@ const register = async function (server) {
         handler: learnerParticipationController.shareCampaignResult,
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            '- Partage de résultat de la campagne d‘un utilisateur, à son organisation',
+            "- Partage d'une collecte de profil à son organisation",
         ],
         tags: ['api', 'campaign-participation'],
       },

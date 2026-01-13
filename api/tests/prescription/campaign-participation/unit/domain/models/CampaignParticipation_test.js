@@ -1,8 +1,5 @@
 import { ArchivedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
-import {
-  CampaignParticipationDeletedError,
-  CampaignParticipationInvalidStatus,
-} from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
+import { CampaignParticipationDeletedError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import {
   CampaignParticipationLoggerContext,
@@ -14,9 +11,9 @@ import {
   AssessmentNotCompletedError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-const { SHARED, STARTED } = CampaignParticipationStatuses;
+const { SHARED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Models | CampaignParticipation', function () {
   describe('delete', function () {
@@ -118,28 +115,6 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       afterEach(function () {
         clock.restore();
-      });
-
-      context('when the campaign is started', function () {
-        it('share profile collection campaignParticipation', function () {
-          const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
-          const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
-
-          campaignParticipation.share();
-
-          expect(campaignParticipation.isShared).to.be.true;
-          expect(campaignParticipation.sharedAt).to.deep.equals(now);
-          expect(campaignParticipation.status).to.equals(CampaignParticipationStatuses.SHARED);
-        });
-
-        it('do not share assessment campaignParticipation', function () {
-          const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-          const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
-
-          const error = catchErrSync(campaignParticipation.share, campaignParticipation)();
-
-          expect(error).to.be.an.instanceOf(CampaignParticipationInvalidStatus);
-        });
       });
 
       context('when the campaign is already shared', function () {

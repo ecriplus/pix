@@ -6,7 +6,7 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { ArchivedCampaignError } from '../../../campaign/domain/errors.js';
 import { CampaignParticipationLoggerContext, CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
-import { CampaignParticipationDeletedError, CampaignParticipationInvalidStatus } from '../errors.js';
+import { CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
   #loggerContext;
@@ -117,9 +117,6 @@ class CampaignParticipation {
   }
 
   _canBeShared() {
-    if (this.status === CampaignParticipationStatuses.STARTED && this.campaign.isProfilesCollection === false) {
-      throw new CampaignParticipationInvalidStatus(this.id, CampaignParticipationStatuses.STARTED);
-    }
     if (this.isShared) {
       throw new AlreadySharedCampaignParticipationError();
     }
