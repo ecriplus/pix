@@ -49,14 +49,4 @@ export default class ResultsRoute extends Route {
       } else throw error;
     }
   }
-
-  async afterModel(model) {
-    if (model.campaignParticipationResult.isShared) {
-      return;
-    }
-    await this.store.adapterFor('campaign-participation-result').share(model.campaignParticipationResult.id);
-    await model.campaignParticipationResult.reload({
-      adapterOptions: { userId: this.currentUser.user.id, campaignId: model.campaign.id },
-    });
-  }
 }
