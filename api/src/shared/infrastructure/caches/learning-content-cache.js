@@ -6,7 +6,7 @@ const logger = child('learningcontent:cache', { event: SCOPES.LEARNING_CONTENT }
 
 const metrics = {
   cacheSize: new Gauge({
-    name: 'lc_cache_size',
+    name: 'lc_cachesize',
     help: 'Learning content cache size',
     labelNames: ['table', 'cache'],
   }),
