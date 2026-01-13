@@ -87,7 +87,7 @@ export async function findValidatedByCompetenceId(competenceId, locale) {
 export async function findOperativeBySkills(skills, locale) {
   _assertLocaleIsDefined(locale);
   const skillIds = skills.map((skill) => skill.id);
-  const cacheKey = `findOperativeBySkillIds([${skillIds.sort()}], ${locale})`;
+  const cacheKey = `findOperativeBySkills([${skillIds.sort()}], ${locale})`;
   const findOperativeByLocaleBySkillIdsCallback = (knex) =>
     knex
       .whereRaw('?=ANY(??)', [locale, 'locales'])
@@ -102,7 +102,7 @@ export async function findOperativeBySkills(skills, locale) {
 export async function findValidatedBySkills(skills, locale) {
   _assertLocaleIsDefined(locale);
   const skillIds = skills.map((skill) => skill.id);
-  const cacheKey = `findOperativeBySkillIds([${skillIds.sort()}], ${locale})`;
+  const cacheKey = `findValidatedBySkills([${skillIds.sort()}], ${locale})`;
   const findOperativeByLocaleBySkillIdsCallback = (knex) =>
     knex
       .whereRaw('?=ANY(??)', [locale, 'locales'])
