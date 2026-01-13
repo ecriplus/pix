@@ -55,6 +55,9 @@ module('Integration | Component | BadgeForm', function (hooks) {
     // then
     assert.dom(screen.getByRole('checkbox', { name: "sur l'ensemble du profil cible" })).exists();
     assert.dom(screen.getByRole('checkbox', { name: 'sur une sélection de sujets du profil cible' })).exists();
+    assert
+      .dom(screen.getByRole('link', { name: 'Voir la liste des badges' }))
+      .hasAttribute('href', 'https://example-assets.net/list/badges');
   });
 
   test('it should stop creation and display error message if no criteria is selected', async function (assert) {
