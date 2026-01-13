@@ -17,6 +17,7 @@ const register = async function (server) {
                 securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
                 securityPreHandlers.checkAdminMemberHasRoleCertif,
                 securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
               ])(request, h),
             assign: 'hasAuthorizationToAccessAdminScope',
           },
@@ -28,7 +29,7 @@ const register = async function (server) {
         },
         handler: userController.findAllCertificationCourses,
         notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés sur PixAdmin avec le rôle Super Admin, Certif et Support',
+          '- **Cette route est restreinte aux utilisateurs authentifiés sur PixAdmin avec le rôle SuperAdmin, Certif, Support et Métier',
           "- Récupération de liste des passages en certification d'un utilisateur spécifique",
         ],
         tags: ['api', 'admin', 'user', 'certification-courses'],
