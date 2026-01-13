@@ -1,11 +1,13 @@
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class OidcProviderSelector extends Component {
   @tracked selectedProvider;
+  @service locale;
 
   get providerOptions() {
     const { providers = [] } = this.args;
@@ -28,9 +30,10 @@ export default class OidcProviderSelector extends Component {
 
   <template>
     <PixSelect
-      @hideDefaultOption="true"
+      @hideDefaultOption={{true}}
       @id="oidc-provider-selector"
-      @isSearchable="true"
+      @isSearchable={{true}}
+      @locale={{this.locale.currentLocale}}
       @onChange={{this.onProviderChange}}
       @options={{this.providerOptions}}
       @placeholder={{t "components.authentication.oidc-provider-selector.placeholder"}}

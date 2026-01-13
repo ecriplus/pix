@@ -25,12 +25,12 @@ module('Integration | Component | Authentication | oidc-provider-selector', func
 
     // when
     const screen = await render(<template><OidcProviderSelector @providers={{providers}} /></template>);
+
     await click(screen.getByRole('button', { name: t(I18N_KEYS.selectLabel) }));
     await screen.findByRole('listbox');
 
     // then
-    assert.dom(screen.getAllByText(t(I18N_KEYS.selectPlaceholder))[0]).exists();
-    assert.dom(screen.getByText(t(I18N_KEYS.searchLabel))).exists();
+    assert.dom(screen.getByPlaceholderText(t(I18N_KEYS.searchLabel))).exists();
     assert.dom(screen.getByText('ConnectEtMoi')).isVisible();
   });
 
