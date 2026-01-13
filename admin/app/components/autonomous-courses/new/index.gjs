@@ -13,6 +13,7 @@ import UserInformations from './user-informations';
 
 export default class NewAutonomousCourse extends Component {
   @service intl;
+  @service locale;
   @tracked submitting = false;
 
   constructor() {
@@ -89,6 +90,7 @@ export default class NewAutonomousCourse extends Component {
             @targetProfileListOptions={{this.targetProfileListOptions}}
             @selectTargetProfile={{this.selectTargetProfile}}
             @autonomousCourse={{@autonomousCourse}}
+            @locale={{this.locale.currentLocale}}
             @errors={{@errors}}
           />
           <UserInformations @updateAutonomousCourseValue={{this.updateAutonomousCourseValue}} />

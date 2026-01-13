@@ -26,6 +26,7 @@ import Card from 'pix-admin/components/card';
       @requiredLabel={{t "common.forms.mandatory"}}
       @errorMessage={{if @errors.autonomousCourse (t "api-error-messages.campaign-creation.target-profile-required")}}
       @isSearchable={{true}}
+      @locale={{@locale}}
       @searchLabel={{t "components.autonomous-courses.new.target-profile.search-label"}}
       @subLabel={{t "components.autonomous-courses.new.target-profile.sub-label"}}
       required={{true}}
