@@ -35,7 +35,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "Voici une discussion entre Fred et Ombeline",
                   "messages": [
                     {
                       "userName": "Fred",
@@ -197,7 +197,7 @@
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
-                        "alt": ""
+                        "alt": "a"
                       },
                       "license": {
                         "name": "",
@@ -208,10 +208,10 @@
                     {
                       "title": "Deuxième étape : La distribution (transport)",
                       "description": "Le transport international du smartphone et de ses composants génère du CO₂, mais reste limité par rapport à la phase de production.",
-                      "displayWidth": 600,
+                      "displayWidth": 100,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
-                        "alt": ""
+                        "alt": "a"
                       },
                       "license": {
                         "name": "",
@@ -225,7 +225,7 @@
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
-                        "alt": ""
+                        "alt": "a"
                       },
                       "license": {
                         "name": "",
@@ -239,7 +239,7 @@
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
-                        "alt": ""
+                        "alt": "a"
                       },
                       "license": {
                         "name": "",
