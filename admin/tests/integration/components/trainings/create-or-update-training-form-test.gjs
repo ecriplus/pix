@@ -51,6 +51,9 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       .exists();
     assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Créer le contenu formatif' })).exists();
+    assert
+      .dom(screen.getByRole('link', { name: 'Voir la liste des logos éditeur' }))
+      .hasAttribute('href', 'https://example-assets.net/list/contenu-formatif/editeur');
   });
 
   test('it should call onSubmit when form is valid', async function (assert) {
