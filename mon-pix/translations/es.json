@@ -1192,7 +1192,7 @@
         "label": "'<p class=\"sr-only\">'Has completado el '</p>'{completionPercentage}%'<p class=\"sr-only\">' del test.'</p>'"
       },
       "sharing-results": {
-        "information-banner": "Al hacer clic en el botón «Enviar mis resultados», sus resultados se enviarán al organizador."
+        "information-banner": "Al hacer clic en el botón «Ver mis resultados», sus resultados se enviarán al organizador."
       },
       "title": {
         "assessment-progress": "Progreso",

@@ -30,7 +30,6 @@ module('Integration | Template | Assessments | Checkpoint', function (hooks) {
     });
   });
 
-  // module('display existing participation page', function () {
   module('sharing results banner', function () {
     test('it should display share results information banner', async function (assert) {
       // given
