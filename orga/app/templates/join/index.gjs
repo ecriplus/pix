@@ -1,10 +1,10 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AuthenticationIdentityProviders from 'pix-orga/components/authentication/authentication-identity-providers';
 import LoginForm from 'pix-orga/components/authentication/login-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
+import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 
 <template>
   {{pageTitle (t "pages.login-or-register.title" organizationName=@model.organizationName)}}
@@ -17,9 +17,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
     </:header>
 
     <:content>
-      <PixNotificationAlert @type="communication-orga">
-        {{t "pages.login.join-invitation" organizationName=@model.organizationName}}
-      </PixNotificationAlert>
+      <InvitationBanner @organizationName={{@model.organizationName}} />
 
       <div>
         <h1 class="pix-title-m">{{t "pages.login.title"}}</h1>
