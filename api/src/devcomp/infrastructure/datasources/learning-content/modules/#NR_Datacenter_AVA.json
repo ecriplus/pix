@@ -1130,8 +1130,8 @@
                     "Plusieurs géants du web ont fait des investissements ou exploitent déjà des <strong>centres de données dans l’État de Querétaro</strong>, renforçant l’infrastructure numérique du pays. Ces installations s’inscrivent dans une démarche de <strong>développement durable</strong>, avec l’objectif d’être neutres en carbone, positifs en eau et zéro déchet d’ici 2030.",
                     "Ces entreprises contribuent également à la <strong>création d’emplois locaux</strong>, au développement des compétences numériques. Elles affirment agir en <strong>partenariat avec les communautés</strong>, dans le respect de l’environnement et du tissu local."
                   ],
-                  "highlightedSentence": "",
-                  "colorOfHighlightSentence": ""
+                  "highlightedSentence": "centres de données",
+                  "colorOfHighlightSentence": "#6B2518"
                 }
               }
             },
