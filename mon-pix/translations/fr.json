@@ -1197,7 +1197,7 @@
         "label": "'<p class=\"sr-only\">'Vous avez effectué '</p>'{completionPercentage}%'<p class=\"sr-only\">' de votre parcours.'</p>'"
       },
       "sharing-results": {
-        "information-banner": "En cliquant sur le bouton \"J'envoie mes résultats\", vos résultats seront transmis à l'organisateur."
+        "information-banner": "En cliquant sur le bouton \"Voir mes résultats\", vos résultats seront transmis à l'organisateur."
       },
       "title": {
         "assessment-progress": "Avancement",
