@@ -1,7 +1,7 @@
 import Dataloader from 'dataloader';
-import { exponentialBuckets } from 'prom-client';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import { config } from '../../config.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
 import { Counter } from '../metrics/counter.js';
 import { Histogram } from '../metrics/histogram.js';
@@ -19,13 +19,13 @@ const metrics = {
     name: 'lc_loadcachemiss',
     help: 'Histogram of load cache misses when reading from learning content',
     labelNames: ['table'],
-    buckets: exponentialBuckets(0.01, 2, 5),
+    buckets: config.metrics.prometheus.buckets.lc_loadcachemiss,
   }),
   findCacheMiss: new Histogram({
     name: 'lc_findcachemiss',
     help: 'Histogram of find cache misses when reading from learning content',
     labelNames: ['table'],
-    buckets: exponentialBuckets(0.01, 2, 5),
+    buckets: config.metrics.prometheus.buckets.lc_findcachemiss,
   }),
 };
 
