@@ -10,19 +10,20 @@ import { child, SCOPES } from '../utils/logger.js';
 const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 const metrics = {
-  loadTotal: new Counter({
-    name: 'lc_load_total',
-    help: 'Total count of entities loaded from learning content',
-    labelNames: ['table'],
+  read: new Counter({
+    name: 'lc_read',
+    help: 'Total count of reads from learning content',
+    labelNames: ['type', 'table'],
   }),
-  loadCacheMiss: new Counter({
-    name: 'lc_load_cache_miss',
-    help: 'Count of cache misses when loading entities from learning content',
+  loadCacheMiss: new Histogram({
+    name: 'lc_loadcachemiss',
+    help: 'Histogram of load cache misses when reading from learning content',
     labelNames: ['table'],
+    buckets: exponentialBuckets(0.01, 2, 5),
   }),
   findCacheMiss: new Histogram({
-    name: 'lc_find_cache_miss',
-    help: 'Histogram of cache misses when finding entities in learning content',
+    name: 'lc_findcachemiss',
+    help: 'Histogram of find cache misses when reading from learning content',
     labelNames: ['table'],
     buckets: exponentialBuckets(0.01, 2, 5),
   }),
@@ -64,7 +65,8 @@ export class LearningContentRepository {
 
     const table = this.#tableName.split('.').at(-1);
     this.#metrics = {
-      loadTotal: metrics.loadTotal.labels({ table }),
+      loadRead: metrics.read.labels({ type: 'load', table }),
+      findRead: metrics.read.labels({ type: 'find', table }),
       loadCacheMiss: metrics.loadCacheMiss.labels({ table }),
       findCacheMiss: metrics.findCacheMiss.labels({ table }),
     };
@@ -85,11 +87,11 @@ export class LearningContentRepository {
     dtos = this.#findCacheMiss.get(cacheKey);
     if (dtos) return dtos;
 
-    const stopFindCacheMissTimer = this.#metrics.findCacheMiss.startTimer();
+    const stopFindCachemissTimer = this.#metrics.findCacheMiss.startTimer();
 
     dtos = this.#loadDtos(callback, cacheKey).finally(() => {
       this.#findCacheMiss.delete(cacheKey);
-      stopFindCacheMissTimer();
+      stopFindCachemissTimer();
     });
     this.#findCacheMiss.set(cacheKey, dtos);
 
@@ -102,7 +104,7 @@ export class LearningContentRepository {
    * @returns {Promise<object|null>}
    */
   async load(id) {
-    this.#metrics.loadTotal.inc();
+    this.#metrics.loadRead.inc();
     return this.#dataloader.load(id);
   }
 
@@ -138,7 +140,7 @@ export class LearningContentRepository {
    * @returns {Promise<(object|null)[]>}
    */
   async #loadMany(ids, cacheKey) {
-    this.#metrics.loadTotal.inc(ids.length);
+    this.#metrics.loadRead.inc(ids.length);
 
     const dtos = await this.#dataloader.loadMany(ids);
 
@@ -176,16 +178,20 @@ export class LearningContentRepository {
    * @returns {Promise<(object|null)[]>}
    */
   async #batchLoad(ids) {
-    this.#metrics.loadCacheMiss.inc(ids.length);
-
     logger.debug({ tableName: this.#tableName, count: ids.length }, 'loading from PG');
-    const dtos = await knex
-      .select(`${this.#tableName}.*`)
-      .from(knex.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
-      .leftJoin(this.#tableName, `${this.#tableName}.id`, 'ids.id')
-      .orderBy('ids.idx');
 
-    return dtos.map((dto) => (dto.id ? dto : null));
+    const stopLoadCachemissTimer = this.#metrics.loadCacheMiss.startTimer();
+
+    try {
+      const dtos = await knex
+        .select(`${this.#tableName}.*`)
+        .from(knex.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
+        .leftJoin(this.#tableName, `${this.#tableName}.id`, 'ids.id')
+        .orderBy('ids.idx');
+      return dtos.map((dto) => (dto.id ? dto : null));
+    } finally {
+      stopLoadCachemissTimer();
+    }
   }
 
   /**
