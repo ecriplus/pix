@@ -194,56 +194,56 @@
                     {
                       "title": "Première étape : La fabrication ",
                       "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très énergivores et souvent réalisées avec une électricité carbonée.",
-                      "displayWidth": 600,
+                      "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
                         "alt": "a"
                       },
                       "license": {
-                        "name": "",
-                        "attribution": "",
+                        "name": "a",
+                        "attribution": "a",
                         "url": ""
                       }
                     },
                     {
                       "title": "Deuxième étape : La distribution (transport)",
                       "description": "Le transport international du smartphone et de ses composants génère du CO₂, mais reste limité par rapport à la phase de production.",
-                      "displayWidth": 100,
+                      "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
                         "alt": "a"
                       },
                       "license": {
-                        "name": "",
-                        "attribution": "",
+                        "name": "a",
+                        "attribution": "a",
                         "url": ""
                       }
                     },
                     {
                       "title": "Troisième étape : L’utilisation ",
                       "description": "Les émissions sont liées à la recharge du téléphone et surtout à l’usage des réseaux et des data centers nécessaires aux services numériques.",
-                      "displayWidth": 600,
+                      "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
                         "alt": "a"
                       },
                       "license": {
-                        "name": "",
-                        "attribution": "",
+                        "name": "a",
+                        "attribution": "a",
                         "url": ""
                       }
                     },
                     {
                       "title": "Quatrième étape : La fin de vie ",
                       "description": "La fin de vie émet peu de CO₂, mais un recyclage insuffisant oblige à produire de nouveaux smartphones, augmentant indirectement les émissions.",
-                      "displayWidth": 600,
+                      "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
                         "alt": "a"
                       },
                       "license": {
-                        "name": "",
-                        "attribution": "",
+                        "name": "a",
+                        "attribution": "a",
                         "url": ""
                       }
                     }
@@ -253,7 +253,7 @@
                   "disableAnimation": false,
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
-                  "imageTextDisplay": "2"
+                  "imageTextDisplay": "1:2"
                 }
               }
             }
