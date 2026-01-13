@@ -78,6 +78,7 @@ module.exports = function (environment) {
       TARGET_PROFILE_DASHBOARD_URL: process.env.TARGET_PROFILE_DASHBOARD_URL,
       CERTIFICATION_CENTER_DASHBOARD_URL: process.env.CERTIFICATION_CENTER_DASHBOARD_URL,
       USER_DASHBOARD_URL: process.env.USER_DASHBOARD_URL,
+      PIX_ASSETS_MANAGER_URL: process.env.PIX_ASSETS_MANAGER_URL,
       MAX_LEVEL: 8,
       MAX_REACHABLE_LEVEL: _getEnvironmentVariableAsNumber({
         environmentVariableName: 'MAX_REACHABLE_LEVEL',
@@ -136,7 +137,7 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
-
+    ENV.APP.PIX_ASSETS_MANAGER_URL = 'https://example-assets.net';
     ENV['ember-cli-notifications'] = {
       clearDuration: 300,
     };
