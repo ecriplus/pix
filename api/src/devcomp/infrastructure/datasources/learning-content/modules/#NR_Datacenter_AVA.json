@@ -125,6 +125,15 @@
                 {
                   "elements": [
                     {
+                      "id": "441b12dd-254c-4cd3-87dd-5c4318fcc104",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-extraction-meteaux.png",
+                      "alt": "Schéma des conséquences d'un centre de données",
+                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur l'extraction des métaux.",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
                       "id": "2325603b-bf07-498a-bbdf-754cb4858782",
                       "type": "qcm",
                       "instruction": "<p>Quelles sont les conséquences de la consommation de métaux pour la fabrication des centres des données ?</p>",
@@ -167,6 +176,15 @@
                 },
                 {
                   "elements": [
+                    {
+                      "id": "6d1f048a-c1a5-4021-bce9-0799d7754fbf",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-consomation-eau.png",
+                      "alt": "Schéma des conséquences d'un centre de données.",
+                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur la consommation d'eau.",
+                      "legend": "",
+                      "licence": ""
+                    },
                     {
                       "id": "b35bcf4a-abae-4162-ae50-2384367ed6f4",
                       "type": "qcm",
@@ -212,6 +230,15 @@
                       "id": "755cd426-f67f-4d3c-b54f-9921d19a3d20",
                       "type": "text",
                       "content": "<p>En plus de la consommation d’eau et de métaux, les centres de données consomment aussi de l’énergie et participent à l’artificialisaiton des sols.</p>"
+                    },
+                    {
+                      "id": "74d11d84-eee4-4347-a4b4-baa07086af27",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-etape3.png",
+                      "alt": "Schéma des conséquences d'un centre de données",
+                      "alternativeText": "Schéma des conséquences d'un centre de données avec les conséquences secondaires.",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "e3363973-52e7-4757-b9fc-4d820b7bb355",
