@@ -23,6 +23,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @service store;
   @service oidcIdentityProviders;
   @service intl;
+  @service locale;
   @service pixToast;
 
   @tracked isEditMode = false;
@@ -227,6 +228,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @onChange={{fn this.updateValue "countryCode"}}
             @hideDefaultOption={{true}}
             @isSearchable={{true}}
+            @locale={{this.locale.currentLocale}}
             class="admin-form__select"
             @placeholder={{t "components.organizations.editing.country.selector.placeholder"}}
           >
