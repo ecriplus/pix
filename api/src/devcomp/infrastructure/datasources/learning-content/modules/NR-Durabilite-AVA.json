@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/NR_Durabilite_AVA/picto_nr_durabilite_ava.svg",
     "description": "<p>Extraction, fabrication, distribution, consommation… Produire de nouveaux appareils numériques a des impacts environnementaux importants. Le renouvellement toujours plus rapide des équipements accentue cette pression sur l’environnement. </p><p><br>Dans ce module, vous découvrirez les mécanismes d’obsolescence qui raccourcissent la durée de vie des appareils numériques et comprendrez comment s’amorce la transition vers une économie circulaire plus durable.</p>",
     "duration": 10,
     "level": "advanced",
@@ -336,7 +336,16 @@
                     {
                       "id": "9d1ebcab-8f6d-475a-be06-6d388214c8de",
                       "type": "text",
-                      "content": "<p>\"Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !\"</p>"
+                      "content": "<p>« Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !&nbsp;»</p>"
+                    },
+                    {
+                      "id": "b734598e-99d6-4160-98ba-fb06488c8ca5",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_telephone.png",
+                      "alt": "une femme tenant un téléphone à la ain, demandant conseil à un vendeur",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "223c4351-1768-45f6-bea4-b62167da8601",
@@ -381,13 +390,13 @@
                     {
                       "id": "1dc7dcad-7cd0-439b-97bd-85a2fbb9d127",
                       "type": "text",
-                      "content": "<p>\"Mon imprimante refuse d’imprimer. Elle affiche le message “cartouche vide” alors qu’il reste clairement de l’encre\".</p>"
+                      "content": "<p>\n\n\n\n\n<title></title>\n\n\n<style type=\"text/css\">\np.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}\n«</style>\n\n\n\n« Mon imprimante refuse d’imprimer. Elle affiche le message « cartouche vide&nbsp;» alors qu’il reste clairement de l’encre.&nbsp;»</p>"
                     },
                     {
                       "id": "cfa55f35-7071-4469-8668-1f1fd84aef22",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/imprimante-cassee-durabilite.png",
-                      "alt": "Une femme avec une imprimante cassée",
+                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_imprimante.png",
+                      "alt": "Une femme avec une imprimante cassée demandant conseil à un vendeur",
                       "alternativeText": "",
                       "legend": "",
                       "licence": ""
@@ -406,7 +415,7 @@
                         },
                         {
                           "id": "1",
-                          "content": "<p>Le fabricant limite volontairement l’impression pour vendre de nouvelles cartouches</p>",
+                          "content": "<p>Le fabricant limite volontairement l’impression pour vendre de nouvelles cartouches.</p>",
                           "feedback": {
                             "diagnosis": "<p>En effet, c’est un exemple d’<strong>obsolescence technique</strong>, la cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
                           }
@@ -435,7 +444,16 @@
                     {
                       "id": "d60b233d-a77e-4f31-bdef-dc12422d1741",
                       "type": "text",
-                      "content": "<p>\"J’ai voulu changer la batterie de mon ordinateur, mais je me suis aperçu qu’elle est collée et je suis incapable de le faire. Pourquoi ?\"</p>"
+                      "content": "<p>« J’ai voulu changer la batterie de mon ordinateur, mais je me suis aperçu qu’elle est collée et je suis incapable de le faire. Pourquoi ?&nbsp;»</p>"
+                    },
+                    {
+                      "id": "bd9c91ed-1128-437b-b01f-1eac6f5e9385",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                      "alt": "Femme tenant un ordinateur portable à la main, demandant conseil à un vendeur",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "264ca995-c4c9-4601-b49e-a2f976f80c52",
@@ -473,7 +491,16 @@
                     {
                       "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
                       "type": "text",
-                      "content": "<p>J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?</p>"
+                      "content": "<p>« J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ? »&nbsp;</p>"
+                    },
+                    {
+                      "id": "b2ef4b37-7c08-4344-94fa-dbe3773b91e7",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_telephone2.png",
+                      "alt": "Homme demandant conseil à un vendeur",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "5759eb75-ee53-4028-9c95-2a5a85b9e9ca",
@@ -580,7 +607,7 @@
               "element": {
                 "id": "b43a0e76-a868-44d3-8cef-48095d234f07",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/schema-eco-circulaire.png",
+                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/schema_eco_media.png",
                 "alt": "Description en détail ci-après ",
                 "alternativeText": "<p>Schéma représentant quatre niveaux de circularité appliqués au cycle de vie des appareils électroniques: fabrication, distribution, consommation et tri. Au-dessus du cycle linéaire apparaissent quatre boucles. La plus large (1) relie le tri à la fabrication avec l’étiquette “On utilise les matières premières”. Une boucle intermédiaire (2), partant du tri vers la distribution, indique “On remet en état, on revend”. Une boucle plus petite (3), partant de la consommation vers la distribution, est intitulée “On donne, on revend”. Enfin, la plus courte (4) relie la consommation à elle-même et porte la mention “On garde le même appareil”. Ces boucles illustrent les stratégies de réemploi, réparation et prolongation de durée de vie.</p>",
                 "legend": "",
@@ -1049,8 +1076,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Economie circulaire",
-                    "proposalB": "Economie linéaire",
+                    "proposalA": "Économie circulaire",
+                    "proposalB": "Économie linéaire",
                     "solution": "A"
                   },
                   {
@@ -1060,8 +1087,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Economie circulaire",
-                    "proposalB": "Economie linéaire",
+                    "proposalA": "Économie circulaire",
+                    "proposalB": "Économie linéaire",
                     "solution": "A"
                   },
                   {
@@ -1071,8 +1098,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Economie circulaire",
-                    "proposalB": "Economie linéaire",
+                    "proposalA": "Économie circulaire",
+                    "proposalB": "Économie linéaire",
                     "solution": "B"
                   },
                   {
@@ -1082,8 +1109,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Economie circulaire",
-                    "proposalB": "Economie linéaire",
+                    "proposalA": "Économie circulaire",
+                    "proposalB": "Économie linéaire",
                     "solution": "B"
                   }
                 ],
@@ -1118,9 +1145,9 @@
               "element": {
                 "id": "5a19a0c7-b684-4b84-93b2-4788da82376c",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Durabilite_AVA/tablette-1.png",
-                "alt": "Une tablette (à modifier)",
-                "alternativeText": "",
+                "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_tablette1.png",
+                "alt": "Description en détail ci-après ",
+                "alternativeText": "Tablette tactile « Idea Pro Tab Plus » présentée avec un clavier détachable et un stylet.&nbsp;À droite de l’image figure l’étiquette énergie européenne indiquant une classe énergétique F sur une échelle de A à G. L’autonomie annoncée est de 112 heures et 43 minutes. L’étiquette mentionne une charge USB Power Delivery de 15 à 45 W, une durabilité de l’appareil classée E, une réparabilité classée A, une endurance de la batterie de 1000 cycles, ainsi qu’une certification IP52 indiquant une résistance limitée à la poussière et aux éclaboussures.",
                 "legend": "",
                 "licence": ""
               }
@@ -1146,7 +1173,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>La première tablette.</p>",
+                    "content": "<p>La première tablette</p>",
                     "feedback": {
                       "state": "<p>C’est exact ! </p>",
                       "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes  de clé à molette et de tournevis. Cette tablette étant en classe \"A\", elle est  mieux notée et donc plus facilement réparable que l’autre tablette.</p>"
@@ -1154,7 +1181,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>La deuxième tablette.</p>",
+                    "content": "<p>La deuxième tablette</p>",
                     "feedback": {
                       "state": "<p>C’est l’inverse ! </p>",
                       "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes  de clé à molette et de tournevis. Ici, le smartphone est en classe C contre une classe A pour l’autre tablette, c’est donc l’autre tablette qui est plus facilement réparable.</p>"
