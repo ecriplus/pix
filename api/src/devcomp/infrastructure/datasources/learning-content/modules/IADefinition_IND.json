@@ -400,7 +400,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<h5>Et que va faire le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombres représentant l’image, le logiciel d’IA va pouvoir faire des <strong>calculs</strong>. C'est ce qui va lui permettre de traiter.</p>"
+                "content": "<h5>Et que va faire le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombres représentant l’image, le logiciel d’IA va pouvoir faire des <strong>calculs</strong>. C'est ce qui va lui permettre de traiter cette image.</p>"
               }
             }
           ]
@@ -606,7 +606,7 @@
               "element": {
                 "id": "5ec6e39a-0852-4ee9-b892-5a4b66b890e3",
                 "type": "text",
-                "content": "<p>Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨</p><p>On entraîne le logiciel d’intelligence artificielle avec des phrases où certains mots sont manquants, et le logiciel s’entraîne à prédire quel est ce mot.&nbsp;</p><p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.&nbsp;🥗</p>"
+                "content": "<p>Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨</p><p>On entraîne le logiciel d’intelligence artificielle avec des phrases où un mot est manquant, et le logiciel s’entraîne à prédire quel est ce mot.&nbsp;</p><p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.&nbsp;🥗</p>"
               }
             },
             {
