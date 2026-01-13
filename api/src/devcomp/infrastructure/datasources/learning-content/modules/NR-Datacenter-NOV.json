@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/NR_Datacenter_NOV/picto_nr_durabilite_ind.svg",
     "description": "<p>Chaque message envoyé, chaque vidéo regardée ou chaque «&nbsp;J’aime&nbsp;» mobilise des centres de données, souvent invisibles pour les utilisateurs. Ces lieux abritent des serveurs qui stockent, traitent et transmettent les informations, tout en consommant de l’électricité et parfois de l’eau. Dans ce module, vous allez comprendre le rôle des centres de données, pourquoi certains usages numériques consomment plus d’énergie que d’autres, et comment adopter des gestes simples pour réduire ces consommations au quotidien.</p>",
     "duration": 10,
     "level": "novice",
@@ -58,21 +58,21 @@
                     "id": "1",
                     "content": "<p>Le message passe directement de son&nbsp;téléphone à celui de la personne qui l’accompagne, sans quitter la salle d’attente.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement de son téléphone à l’aute téléphone</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Le message passe par plusieurs appareils en parcourant des centaines, voire des milliers, de kilomètres.</p>",
+                    "content": "<p>Le message passe par plusieurs appareils en parcourant des centaines, voire des milliers de kilomètres.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement de son téléphone à l’aute téléphone</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement d’un téléphone à l’autre</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
+                      "diagnosis": "<p>Même si la personne est juste à côté, <strong>le message ne va pas directement de son téléphone à l’aute téléphone</strong>.</p><p>Il <strong>voyage très loin</strong>, est <strong>découpé en petits morceaux</strong>, puis <strong>remis dans le bon ordre</strong> pour arriver <strong>presque instantanément</strong> sur l’autre téléphone.</p>"
                     }
                   }
                 ],
@@ -91,7 +91,7 @@
               "element": {
                 "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
                 "type": "text",
-                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone.Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
+                "content": "<p>Quand on utilise internet, les informations ne restent pas dans le téléphone. Regardons <strong>où elles vont</strong>, <strong>où elles sont stockées</strong> et <strong>comment elles sont traitées</strong>.</p>"
               }
             }
           ]
@@ -220,7 +220,7 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
-                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet. Observons l’effet du nombre d’utilisateurs.</p>"
+                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet. Observons l’effet du nombre de serveurs.</p>"
               }
             },
             {
@@ -229,7 +229,7 @@
                 "id": "4ac11755-c95e-4e5f-b3a8-66f89b452c66",
                 "type": "custom-draft",
                 "title": "Draft, simulateur conso data center",
-                "url": "https://1024pix.github.io/atelier-contenus/JBO/POICdatacenternov.html",
+                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIDatacenter.html",
                 "instruction": "",
                 "height": 500
               }
