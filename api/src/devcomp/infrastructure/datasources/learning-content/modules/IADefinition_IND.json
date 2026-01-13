@@ -400,7 +400,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<h5>Et que va faire le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombre représentant l’image, le logiciel d’IA va pouvoir faire des <strong>calculs</strong>. C'est ce qui va lui permettre de traiter.</p>"
+                "content": "<h5>Et que va faire le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombres représentant l’image, le logiciel d’IA va pouvoir faire des <strong>calculs</strong>. C'est ce qui va lui permettre de traiter.</p>"
               }
             }
           ]
@@ -546,7 +546,7 @@
                     {
                       "id": "4f15ba33-8b56-49de-a277-be097b576d94",
                       "type": "text",
-                      "content": "<p>Le <strong>but </strong>du logiciel est d’<strong>attribuer la bonne étiquette à des exemples</strong> qu’il n’a jamais vus pendant son entraînement : c’est la <strong>généralisation</strong>. 🚀</p><h5><strong>Comment bien généraliser ?</strong></h5><p>On doit <strong>fournit au logiciel d'IA des exemples variés et représentatifs</strong> de tous les cas typiques, afin de réduire les erreurs. Mais même avec un bon entraînement, le monde réel contient toujours des cas nouveaux ou limites ; un <strong>risque d’erreur</strong> existe donc toujours.⚠️</p>"
+                      "content": "<p>Le <strong>but </strong>du logiciel est d’<strong>attribuer la bonne étiquette à des exemples</strong> qu’il n’a jamais vus pendant son entraînement : c’est la <strong>généralisation</strong>. 🚀</p><h5><strong>Comment bien généraliser ?</strong></h5><p>On doit <strong>fournir au logiciel d'IA des exemples variés et représentatifs</strong> de tous les cas typiques, afin de réduire les erreurs. Mais même avec un bon entraînement, le monde réel contient toujours des cas nouveaux ou limites ; un <strong>risque d’erreur</strong> existe donc toujours.⚠️</p>"
                     }
                   ]
                 },
