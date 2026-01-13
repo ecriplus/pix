@@ -493,7 +493,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
-                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception</strong>.  Elle désigne l’ensemble des pratiques visant à réduire l’empreinte environnementale des logiciels <strong>tout au long de leur cycle de vie</strong>&nbsp;: conception, développement, déploiement, utilisation et fin de vie. </p>"
+                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit : conception, développement, utilisation et fin de vie. </p>"
                     }
                   ]
                 },
@@ -502,7 +502,7 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
-                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p><br>En pratique, elles sont encore peu respectées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresser.<br></p>"
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p>En pratique, elles sont encore peu respectées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresser.<br></p>"
                     }
                   ]
                 }
@@ -520,7 +520,7 @@
               "element": {
                 "id": "6379f16a-320d-4217-8b85-e5190f6bc29b",
                 "type": "text",
-                "content": "<p>Mais, il n’y a pas que les concepteurs de site web qui peuvent agir, il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
+                "content": "<p>Mais, il n’y a pas que les concepteurs de site web qui peuvent agir.&nbsp;Il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
               }
             }
           ]
