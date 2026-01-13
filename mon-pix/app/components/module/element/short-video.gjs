@@ -37,7 +37,7 @@ export default class ModulixShortVideoElement extends ModuleElement {
 
   <template>
     <div class="element-short-video">
-      <video class="element-short-video__video" autoplay loop muted src={{@element.url}}></video>
+      <video class="element-short-video__video" autoplay loop muted={{true}} src={{@element.url}}></video>
       <PixButton @variant="tertiary" @triggerAction={{this.showModal}}>
         {{t "pages.modulix.buttons.element.transcription"}}
       </PixButton>
