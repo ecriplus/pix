@@ -107,7 +107,7 @@
               "element": {
                 "id": "5b3d3352-284f-4520-80a2-fecf99a6fc14",
                 "type": "text",
-                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives : l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
+                "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives&nbsp;: l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
               }
             },
             {
@@ -295,7 +295,7 @@
               "element": {
                 "id": "80b90a55-683b-4627-8538-5da724524046",
                 "type": "text",
-                "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.<br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent : nous utilisons aujourd’hui <strong>plus de ressources naturelles</strong> que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.🌍</p>"
+                "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.<br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent&nbsp;: nous utilisons aujourd’hui <strong>plus de ressources naturelles</strong> que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.🌍</p>"
               }
             }
           ]
@@ -336,7 +336,7 @@
                     {
                       "id": "9d1ebcab-8f6d-475a-be06-6d388214c8de",
                       "type": "text",
-                      "content": "<p>« Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !&nbsp;»</p>"
+                      "content": "<p>«&nbsp;Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !&nbsp;»</p>"
                     },
                     {
                       "id": "b734598e-99d6-4160-98ba-fb06488c8ca5",
@@ -361,7 +361,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation : onglets nombreux ou applications en arrière plan.</p>",
+                          "content": "<p>L’utilisateur a certainement changé ses habitudes de navigation&nbsp;: onglets nombreux ou applications en arrière plan.</p>",
                           "feedback": {
                             "diagnosis": "<p>Pas vraiment, même si ces pratiques utilisent de la batterie, ici le problème apparaît directement suite à l’installation de la mise à jour. On parle alors d’<strong>obsolescence logicielle</strong> puisque la mise à jour rend volontairement ce modèle de téléphone moins performant.</p>"
                           }
@@ -390,7 +390,7 @@
                     {
                       "id": "1dc7dcad-7cd0-439b-97bd-85a2fbb9d127",
                       "type": "text",
-                      "content": "<p>\n\n\n\n\n<title></title>\n\n\n<style type=\"text/css\">\np.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}\n«</style>\n\n\n\n« Mon imprimante refuse d’imprimer. Elle affiche le message « cartouche vide&nbsp;» alors qu’il reste clairement de l’encre.&nbsp;»</p>"
+                      "content": "<p>«&nbsp;Mon imprimante refuse d’imprimer. Elle affiche le message «&nbsp;cartouche vide&nbsp;» alors qu’il reste clairement de l’encre.&nbsp;»</p>"
                     },
                     {
                       "id": "cfa55f35-7071-4469-8668-1f1fd84aef22",
@@ -410,7 +410,7 @@
                           "id": "2",
                           "content": "<p>La cartouche a été mal reconnue après l’installation, la cartouche est à jeter.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La cartouche fonctionnait au préalable. Ici c'est un exemple d’<strong>obsolescence technique </strong>: la cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
+                            "diagnosis": "<p>La cartouche fonctionnait au préalable. Ici c’est un exemple d’<strong>obsolescence technique </strong>: la cartouche est délibérément conçue pour ne plus fonctionner alors qu’elle contient encore de l’encre.</p>"
                           }
                         },
                         {
@@ -444,7 +444,7 @@
                     {
                       "id": "d60b233d-a77e-4f31-bdef-dc12422d1741",
                       "type": "text",
-                      "content": "<p>« J’ai voulu changer la batterie de mon ordinateur, mais je me suis aperçu qu’elle est collée et je suis incapable de le faire. Pourquoi ?&nbsp;»</p>"
+                      "content": "<p>«&nbsp;J’ai voulu changer la batterie de mon ordinateur, mais je me suis aperçu qu’elle est collée et je suis incapable de le faire. Pourquoi ?&nbsp;»</p>"
                     },
                     {
                       "id": "bd9c91ed-1128-437b-b01f-1eac6f5e9385",
@@ -491,7 +491,7 @@
                     {
                       "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
                       "type": "text",
-                      "content": "<p>« J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ? »&nbsp;</p>"
+                      "content": "<p>«&nbsp;J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?&nbsp;»&nbsp;</p>"
                     },
                     {
                       "id": "b2ef4b37-7c08-4344-94fa-dbe3773b91e7",
@@ -557,7 +557,7 @@
                     {
                       "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
                       "type": "text",
-                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom : l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir : </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
+                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile.</p>"
                     }
                   ]
                 },
@@ -566,7 +566,7 @@
                     {
                       "id": "dd7638c3-1e9e-4d37-8deb-96b03c33aab5",
                       "type": "text",
-                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies :</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.</li><li>L’<strong>obsolescence psychologique (ou par effet de mode)</strong>. Cette stratégie est très puissante. 🧠</li></ul>"
+                      "content": "<h5>Comment font les fabricants pour réduire la durée de vie des produits ?</h5><p>Ils utilisent différentes stratégies&nbsp;:</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.</li><li>L’<strong>obsolescence psychologique (ou par effet de mode)</strong>. Cette stratégie est très puissante. 🧠</li></ul>"
                     }
                   ]
                 }
@@ -584,7 +584,7 @@
               "element": {
                 "id": "b2b94d0c-976d-4326-b5d4-b2fcd916f89b",
                 "type": "text",
-                "content": "<p>Alors, comment sortir du modèle « extraire, produire, consommer, jeter », également appelé système linéaire ?<br><br>En changeant de réflexe. Découvrons les autres gestes possibles.</p>"
+                "content": "<p>Alors, comment sortir du modèle «&nbsp;extraire, produire, consommer, jeter&nbsp;», également appelé système linéaire ?<br><br>En changeant de réflexe. Découvrons les autres gestes possibles.</p>"
               }
             }
           ]
@@ -761,7 +761,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué !</p>",
-                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong> : vous avez ici les actions au coeur de l’économie circulaire !</p>"
+                    "diagnosis": "<p><strong>Réemployer</strong>, <strong>recycler</strong>, <strong>refabriquer</strong> et <strong>réparer</strong>&nbsp;: vous avez ici les actions au coeur de l’économie circulaire !</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas vraiment.</p>",
@@ -785,7 +785,7 @@
                     {
                       "id": "12f35076-ff72-40f7-b41f-14a680bcb313",
                       "type": "text",
-                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong> : on extrait, on produit, on consomme, puis on <strong>jette</strong>. 🚮 Chaque année, de nombreux appareils encore utilisables finissent à la poubelle. Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
+                      "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong>&nbsp;: on extrait, on produit, on consomme, puis on <strong>jette</strong>. 🚮 Chaque année, de nombreux appareils encore utilisables finissent à la poubelle. Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
                     }
                   ]
                 },
@@ -794,7 +794,7 @@
                     {
                       "id": "967c7ce3-bb66-4b23-a3a1-c8ccf5f1ea00",
                       "type": "text",
-                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles-mêmes énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques fabriqués : le meilleur déchet est celui que l’on ne produit pas.</p>"
+                      "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles-mêmes énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques fabriqués&nbsp;: le meilleur déchet est celui que l’on ne produit pas.</p>"
                     }
                   ]
                 },
@@ -803,7 +803,7 @@
                     {
                       "id": "81d82353-d909-48c0-8791-732999302eab",
                       "type": "text",
-                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui : l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
+                      "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui&nbsp;: l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
                     }
                   ]
                 }
@@ -827,7 +827,7 @@
               "element": {
                 "id": "fcffe15b-8162-4f23-bee7-aa81594b6e62",
                 "type": "text",
-                "content": "<ul><li>🌍 La <strong>fabrication des appareils numériques</strong> a des impacts environnementaux : émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.<br><br></li><li>⏳ Les pratiques d’<strong>obsolescence</strong>, qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements.<br><br></li><li>🔄 Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. <br><br></li><li>⚖️ Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
+                "content": "<ul><li>🌍 La <strong>fabrication des appareils numériques</strong> a des impacts environnementaux&nbsp;: émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.<br><br></li><li>⏳ Les pratiques d’<strong>obsolescence</strong>, qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements.<br><br></li><li>🔄 Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. <br><br></li><li>⚖️ Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
               }
             }
           ]
@@ -879,7 +879,7 @@
                     "content": "<p>L’étape de fabrication est aujourd’hui totalement automatisée, ce qui élimine la majorité des pollutions.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>L’automatisation des étapes de fabrication n’élimine pas les pollutions : les machines consomment de l’énergie et les procédés industriels génèrent toujours des émissions et des déchets.</p>"
+                      "diagnosis": "<p>L’automatisation des étapes de fabrication n’élimine pas les pollutions&nbsp;: les machines consomment de l’énergie et les procédés industriels génèrent toujours des émissions et des déchets.</p>"
                     }
                   }
                 ],
@@ -1137,7 +1137,7 @@
               "element": {
                 "id": "5baa2fa9-a281-4e00-bf0f-008790c17132",
                 "type": "text",
-                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes :</p>"
+                "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes&nbsp;:</p>"
               }
             },
             {
@@ -1147,7 +1147,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_tablette1.png",
                 "alt": "Description en détail ci-après ",
-                "alternativeText": "Tablette tactile « Idea Pro Tab Plus » présentée avec un clavier détachable et un stylet.&nbsp;À droite de l’image figure l’étiquette énergie européenne indiquant une classe énergétique F sur une échelle de A à G. L’autonomie annoncée est de 112 heures et 43 minutes. L’étiquette mentionne une charge USB Power Delivery de 15 à 45 W, une durabilité de l’appareil classée E, une réparabilité classée A, une endurance de la batterie de 1000 cycles, ainsi qu’une certification IP52 indiquant une résistance limitée à la poussière et aux éclaboussures.",
+                "alternativeText": "Tablette tactile «&nbsp;Idea Pro Tab Plus&nbsp;» présentée avec un clavier détachable et un stylet.&nbsp;À droite de l’image figure l’étiquette énergie européenne indiquant une classe énergétique F sur une échelle de A à G. L’autonomie annoncée est de 112 heures et 43 minutes. L’étiquette mentionne une charge USB Power Delivery de 15 à 45 W, une durabilité de l’appareil classée E, une réparabilité classée A, une endurance de la batterie de 1000 cycles, ainsi qu’une certification IP52 indiquant une résistance limitée à la poussière et aux éclaboussures.",
                 "legend": "",
                 "licence": ""
               }
