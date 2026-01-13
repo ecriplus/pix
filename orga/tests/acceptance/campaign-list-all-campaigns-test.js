@@ -231,7 +231,7 @@ module('Acceptance | campaigns/all-campaigns', function (hooks) {
           // when
           await fillByLabel('Rechercher une campagne', campaignName1);
           await fillByLabel('Rechercher un propriétaire', owner.firstName);
-          await clickByName(t('pages.campaigns-list.action.campaign.label'));
+          await clickByName(t('pages.campaigns-list.action.campaign.archived'));
           await clickByName(t('common.filters.actions.clear'));
 
           //then

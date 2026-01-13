@@ -1,10 +1,9 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
-import PixToggleButton from '@1024pix/pix-ui/components/pix-toggle-button';
+import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
-import { not } from 'ember-truth-helpers';
 import GlobalPositioning from 'pix-orga/components/analysis/global-positioning';
 
 const levels = [
@@ -18,15 +17,15 @@ export default class Analysis extends Component {
   @service intl;
   @service router;
 
-  get displayAnalysisPerTube() {
+  get isToggleSwitched() {
     return this.router.currentRouteName.endsWith('competences');
   }
 
   @action
-  toggleDisplayAnalysisPerTube() {
-    const targetRoute = this.displayAnalysisPerTube
-      ? 'authenticated.campaigns.campaign.analysis.tubes'
-      : 'authenticated.campaigns.campaign.analysis.competences';
+  toggleDisplayAnalysisPerCompetences(displayPerCompetence) {
+    const targetRoute = displayPerCompetence
+      ? 'authenticated.campaigns.campaign.analysis.competences'
+      : 'authenticated.campaigns.campaign.analysis.tubes';
 
     this.router.transitionTo(targetRoute).then(() => {
       window.location.hash = 'details';
@@ -64,15 +63,16 @@ export default class Analysis extends Component {
         {{t "components.analysis-per-tube-or-competence.title"}}
       </h2>
 
-      <PixToggleButton
+      <PixSegmentedControl
         @inlineLabel={{true}}
-        @onChange={{this.toggleDisplayAnalysisPerTube}}
-        @toggled={{not this.displayAnalysisPerTube}}
+        @onChange={{this.toggleDisplayAnalysisPerCompetences}}
+        @variant="orga"
+        @toggled={{this.isToggleSwitched}}
       >
         <:label>{{t "components.analysis-per-tube-or-competence.toggle.label"}}</:label>
         <:viewA>{{t "components.analysis-per-tube-or-competence.toggle.label-tubes"}}</:viewA>
         <:viewB>{{t "components.analysis-per-tube-or-competence.toggle.label-competences"}}</:viewB>
-      </PixToggleButton>
+      </PixSegmentedControl>
     </div>
   </template>
 }

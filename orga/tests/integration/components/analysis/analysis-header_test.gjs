@@ -21,7 +21,9 @@ module('Integration | Component | analysis-header', function (hooks) {
     const screen = await render(<template><AnalysisHeader /></template>);
 
     // then
-    await click(screen.getByLabelText(t('components.analysis-per-tube-or-competence.toggle.label')));
+    await click(
+      screen.getByRole('radio', { name: t('components.analysis-per-tube-or-competence.toggle.label-competences') }),
+    );
     assert.ok(router.transitionTo.calledOnceWithExactly('authenticated.campaigns.campaign.analysis.competences'));
   });
 
@@ -35,7 +37,7 @@ module('Integration | Component | analysis-header', function (hooks) {
     const screen = await render(<template><AnalysisHeader /></template>);
 
     // then
-    await click(screen.getByLabelText(t('components.analysis-per-tube-or-competence.toggle.label')));
+    await click(screen.getByLabelText(t('components.analysis-per-tube-or-competence.toggle.label-tubes')));
     assert.ok(router.transitionTo.calledOnceWithExactly('authenticated.campaigns.campaign.analysis.tubes'));
   });
 });
