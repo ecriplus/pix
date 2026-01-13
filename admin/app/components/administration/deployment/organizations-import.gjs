@@ -17,9 +17,12 @@ export default class OrganizationsImport extends Component {
   async importOrganizations(files) {
     const adapter = this.store.adapterFor('organizations-import');
     try {
-      await adapter.addOrganizationsCsv(files);
+      const savedOrganizations = await adapter.addOrganizationsCsv(files);
+
       this.pixToast.sendSuccessNotification({
-        message: this.intl.t('components.administration.organizations-import.notifications.success'),
+        message: this.intl.t('components.administration.organizations-import.notifications.success', {
+          count: savedOrganizations.data.length,
+        }),
       });
     } catch (errorResponse) {
       const errors = errorResponse.errors;

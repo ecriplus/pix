@@ -96,7 +96,7 @@ const createInBatch = async function (request, h) {
 
   const createdOrganizations = await usecases.createOrganizationsWithTagsAndTargetProfiles({ organizations });
 
-  return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(204);
+  return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(201);
 };
 
 const getTemplateForArchiveOrganizationsInBatch = async function (request, h) {

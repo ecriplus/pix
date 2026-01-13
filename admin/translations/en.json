@@ -198,7 +198,7 @@
       "organizations-import": {
         "description": "Existing organizations will not be changed.",
         "notifications": {
-          "success": "The organizations have been created."
+          "success": "{ count, plural, one {One organization has been successfully created.} other {{ count } organizations have been successfully created.}}"
         },
         "title": "Mass creation of organizations",
         "upload-button": "Import CSV file"

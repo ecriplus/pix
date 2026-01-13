@@ -78,7 +78,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       });
 
       // then
-      expect(response.statusCode).to.equal(204);
+      expect(response.statusCode).to.equal(201);
 
       const organizations = await knex('organizations');
       expect(organizations).to.have.lengthOf(4);
