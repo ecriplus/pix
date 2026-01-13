@@ -28,9 +28,9 @@ export function buildTrainings(databaseBuilder) {
 
   const frTrainingId2 = databaseBuilder.factory.buildTraining({
     id: trainingId++,
-    title: 'Apprendre à faire du snow dans Paris à Montmartre quand il a beaucoup neigé',
-    internalTitle: 'Apprendre à faire du snow dans Paris à Montmartre quand il a beaucoup neigé',
-    link: '/modules/6a68bf32/bac-a-sable',
+    title: 'Ce qu’il faut éviter de dire à une IA générative',
+    internalTitle: 'Ce qu’il faut éviter de dire à une IA générative',
+    link: '/modules/e71a9bdd/iagenethique',
     duration: '00:10:00',
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
@@ -57,10 +57,10 @@ export function buildTrainings(databaseBuilder) {
 
   const frTrainingId3 = databaseBuilder.factory.buildTraining({
     id: trainingId++,
-    title: 'Apprendre à faire de la frangipane pour régaler ses convives',
-    internalTitle: 'Apprendre à faire de la frangipane pour régaler ses convives',
-    link: '/modules/6a68bf32/bac-a-sable',
-    duration: '00:10:00',
+    title: 'Des mots de passe solides',
+    internalTitle: 'Des mots de passe solides',
+    link: '/modules/3e5fa7fc/mots-de-passe-securises',
+    duration: '00:12:00',
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
@@ -110,9 +110,9 @@ export function buildTrainings(databaseBuilder) {
 
   const frFrTrainingId2 = databaseBuilder.factory.buildTraining({
     id: trainingId++,
-    title: 'Bac à sable Pix',
-    internalTitle: 'Bac à sable Pix',
-    link: '/modules/6a68bf32/bac-a-sable',
+    title: 'Ce qu’il faut éviter de dire à une IA générative',
+    internalTitle: 'Ce qu’il faut éviter de dire à une IA générative',
+    link: '/modules/e71a9bdd/iagenethique',
     duration: '00:10:00',
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
