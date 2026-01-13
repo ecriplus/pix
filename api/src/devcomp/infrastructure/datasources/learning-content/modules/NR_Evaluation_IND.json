@@ -2,7 +2,7 @@
   "id": "3f7c9a42-0d2c-4c91-bf8a-7e6b8f8d8f1a",
   "shortId": "da86e4a7",
   "slug": "evaluation-impacts-environnementaux-numerique",
-  "title": "Comment sont évalués les impacts environnementaux du numérique ?",
+  "title": "Comment sont évalués les impacts environnementaux du numérique ?",
   "isBeta": true,
   "visibility": "public",
   "details": {
@@ -53,13 +53,13 @@
                       "userName": "Fred",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Exactement. On parle d’empreinte carbone, d’énergie, de ressources… mais comment tu veux t’y retrouver ?"
+                      "content": "Exactement. On parle d’empreinte carbone, d’énergie, de ressources… mais comment tu veux t’y retrouver ?"
                     },
                     {
                       "userName": "Ombeline",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Bonne question. On n’y connaît pas grand-chose, mais je suis sûre qu’il existe une méthode pour évaluer nos impacts. On cherche ensemble ?"
+                      "content": "Bonne question. On n’y connaît pas grand-chose, mais je suis sûre qu’il existe une méthode pour évaluer nos impacts. On cherche ensemble ?"
                     }
                   ]
                 }
@@ -68,7 +68,7 @@
           ]
         },
         {
-          "id": "a1600733-0174-45b5-9e62-2030e2661e84",
+          "id": "f1013b6e-4a6c-48f1-af51-883decf3d2f1",
           "type": "transition",
           "title": "Transition 0",
           "components": [
@@ -77,7 +77,7 @@
               "element": {
                 "id": "b4e9a6c2-7d1f-4b3e-8a5c-0f9d2e6c1b88",
                 "type": "text",
-                "content": "<p>Pour s’y retrouver, le plus simple est de comprendre d’abord ce que recouvre exactement <strong>« le numérique »</strong>. Découvrons comment il se compose dans notre quotidien.</p>"
+                "content": "<p>Pour s’y retrouver, le plus simple est de comprendre d’abord ce que recouvre exactement <strong>«&nbsp;le numérique&nbsp;»</strong>. Découvrons comment il se compose dans notre quotidien.</p>"
               }
             }
           ]
@@ -91,14 +91,14 @@
         {
           "id": "6c5a4f9e-3d2b-4c1a-8e7f-b0d9a2c1e333",
           "type": "discovery",
-          "title": "Découverte 1 : Les 3 composantes du numérique",
+          "title": "Découverte 1 : Les 3 composantes du numérique",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "1e4b7c8a-9f0d-4a3e-b2c5-6d1f9e8a0b99",
                 "type": "text",
-                "content": "<p>Avant de mesurer des impacts, il faut savoir <strong>de quoi on parle</strong>. Le numérique n’est pas seulement des applications : il repose sur des <strong>équipements physiques</strong> organisés en grandes catégories.</p>"
+                "content": "<p>Avant de mesurer des impacts, il faut savoir <strong>de quoi on parle</strong>. Le numérique n’est pas seulement des applications&nbsp;: il repose sur des <strong>équipements physiques</strong> organisés en grandes catégories.</p>"
               }
             },
             {
@@ -115,9 +115,9 @@
           ]
         },
         {
-          "id": "5412a16b-122a-4b35-a033-478b1fb550f9",
+          "id": "936523b8-8b46-4e69-9df9-b91fc3713a2b",
           "type": "short-lesson",
-          "title": "Leçon 1 : Périmètre d’une étude",
+          "title": "Leçon 1 : Périmètre d’une étude",
           "components": [
             {
               "type": "stepper",
@@ -125,18 +125,18 @@
                 {
                   "elements": [
                     {
-                      "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
+                      "id": "a1400c7a-2e2e-470c-8a5e-8ea34441d423",
                       "type": "text",
-                      "content": "<h5><strong>🤔</strong>Pourquoi faut-il définir précisément le périmètre d’une étude ?</h5><p>Parce qu’une étude doit clairement dire <strong>ce qu’elle inclut</strong>. On ne peut pas tout mesurer. Sans savoir précisément ce qui est étudié, les résultats sont <strong>difficiles à comprendre</strong> ou <strong>à comparer</strong>.</p>"
+                      "content": "<h5><strong>🤔</strong>Pourquoi faut-il définir précisément le périmètre d’une étude ?</h5><p>Parce qu’une étude doit clairement dire <strong>ce qu’elle inclut</strong>. On ne peut pas tout mesurer. Sans savoir précisément ce qui est étudié, les résultats sont <strong>difficiles à comprendre</strong> ou <strong>à comparer</strong>.</p>"
                     }
                   ]
                 },
                 {
                   "elements": [
                     {
-                      "id": "01a90945-8314-4fcd-9a06-013424c40d99",
+                      "id": "e4841527-8dc3-45de-b59d-84795cb7912b",
                       "type": "text",
-                      "content": "<h5>🤔Un exemple dans le numérique ?</h5><p>Deux études peuvent donner des résultats différents si elles n’incluent pas les mêmes éléments (par exemple : certains réseaux, certaines infrastructures, ou des équipements spécifiques comme des câbles sous-marins).</p><p><strong>Selon le périmètre choisi, les résultats peuvent varier sans se contredire.</strong></p>"
+                      "content": "<h5>🤔Un exemple dans le numérique ?</h5><p>Deux études peuvent donner des résultats différents si elles n’incluent pas les mêmes éléments (par exemple&nbsp;: certains réseaux, certaines infrastructures, ou des équipements spécifiques comme des câbles sous-marins).</p><p><strong>Selon le périmètre choisi, les résultats peuvent varier sans se contredire.</strong></p>"
                     }
                   ]
                 },
@@ -145,7 +145,7 @@
                     {
                       "id": "a4289de7-f282-4271-96c9-5dbd1a276c4d",
                       "type": "text",
-                      "content": "<p><strong>PLACEHOLDER – Ressource manquante</strong> : infographie récapitulant les 3 composantes (équipements utilisateurs / réseaux / centres de données) + exemples concrets d’éléments inclus/exclus selon le périmètre.</p>"
+                      "content": "<p><strong>PLACEHOLDER – Ressource manquante</strong>&nbsp;: infographie récapitulant les 3 composantes (équipements utilisateurs / réseaux / centres de données) + exemples concrets d’éléments inclus/exclus selon le périmètre.</p>"
                     }
                   ]
                 }
@@ -154,31 +154,31 @@
           ]
         },
         {
-          "id": "dc4b2dc1-8eba-40ec-8bb1-8dcfa325f725",
+          "id": "ab367ef9-5af1-4bb3-a8df-8978401b689a",
           "type": "transition",
           "title": "Transition 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "0f1152d5-7aca-44d0-9515-1816c4991258",
+                "id": "67c0f575-419e-4d3f-b872-ebc3aa9ba9ea",
                 "type": "text",
-                "content": "<p>Toutes les composantes n’ont pas le même poids et n'impactent pas les même choses. Pour le découvrir, regardons maintenant <strong>comment on évalue leurs impacts</strong>.</p>"
+                "content": "<p>Toutes les composantes n’ont pas le même poids et n’impactent pas les même choses. Pour le découvrir, regardons maintenant <strong>comment on évalue leurs impacts</strong>.</p>"
               }
             }
           ]
         },
         {
-          "id": "dd58482c-96e9-451a-a99b-b107267700e0",
+          "id": "cd35c742-7b49-47c4-a78c-b3fa5cf04cd1",
           "type": "discovery",
-          "title": "Découverte 2 : Le cycle de vie et l’ACV",
+          "title": "Découverte 2 : Le cycle de vie et l’ACV",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
+                "id": "7262fc2e-baa1-451c-b039-2c64a7ac8376",
                 "type": "text",
-                "content": "<p>Beaucoup d’impacts viennent d’étapes qu’on ne voit pas : extraction de ressources, fabrication, transports… Pour comprendre, on raisonne sur <strong>tout le cycle de vie&nbsp;</strong>de l'appareil.</p>"
+                "content": "<p>Beaucoup d’impacts viennent d’étapes qu’on ne voit pas&nbsp;: extraction de ressources, fabrication, transports… Pour comprendre, on raisonne sur <strong>tout le cycle de vie&nbsp;</strong>de l’appareil.</p>"
               }
             },
             {
@@ -192,7 +192,7 @@
                   "type": "image-text",
                   "slides": [
                     {
-                      "title": "Première étape : La fabrication ",
+                      "title": "Première étape : La fabrication ",
                       "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très énergivores et souvent réalisées avec une électricité carbonée.",
                       "displayWidth": 600,
                       "image": {
@@ -206,7 +206,7 @@
                       }
                     },
                     {
-                      "title": "Deuxième étape : La distribution (transport)",
+                      "title": "Deuxième étape : La distribution (transport)",
                       "description": "Le transport international du smartphone et de ses composants génère du CO₂, mais reste limité par rapport à la phase de production.",
                       "displayWidth": 600,
                       "image": {
@@ -220,7 +220,7 @@
                       }
                     },
                     {
-                      "title": "Troisième étape : L'utilisation ",
+                      "title": "Troisième étape : L’utilisation ",
                       "description": "Les émissions sont liées à la recharge du téléphone et surtout à l’usage des réseaux et des data centers nécessaires aux services numériques.",
                       "displayWidth": 600,
                       "image": {
@@ -234,7 +234,7 @@
                       }
                     },
                     {
-                      "title": "Quatrième étape : La fin de vie ",
+                      "title": "Quatrième étape : La fin de vie ",
                       "description": "La fin de vie émet peu de CO₂, mais un recyclage insuffisant oblige à produire de nouveaux smartphones, augmentant indirectement les émissions.",
                       "displayWidth": 600,
                       "image": {
@@ -260,46 +260,46 @@
           ]
         },
         {
-          "id": "7e2e2720-6e05-48c8-9af9-99b290deeb41",
+          "id": "100560cc-d415-4e52-9892-dae2bf2821ef",
           "type": "short-lesson",
-          "title": "Leçon 2 : L’Analyse du Cycle de Vie (ACV)",
+          "title": "Leçon 2 : L’Analyse du Cycle de Vie (ACV)",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "6d057f84-d3aa-4965-8552-9c6b55710c17",
+                "id": "5523c5df-0559-42e0-a7c2-d8a695962c10",
                 "type": "text",
-                "content": "<h5>🤔 Comment évalue-t-on l’impact d’un objet numérique ?</h5><p>Avec l’<strong>Analyse de Cycle de Vie (ACV)</strong>. Elle oblige à regarder toutes les étapes : fabrication, usage, transports, fin de vie… même si certaines sont peu documentées.</p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales : même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
+                "content": "<h5>🤔 Comment évalue-t-on l’impact d’un objet numérique ?</h5><p>Avec l’<strong>Analyse de Cycle de Vie (ACV)</strong>. Elle oblige à regarder toutes les étapes&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées.</p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
               }
             }
           ]
         },
         {
-          "id": "e6b6c65e-0ca9-46a6-87d7-ac3aa1b75fc2",
+          "id": "ec7ce074-a43c-4f9d-b004-51d6c01c19d1",
           "type": "transition",
           "title": "Transition 2",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "be64a075-5cfa-493d-be0b-6cdb99698cc3",
+                "id": "b4c10c8f-76f9-4e09-b64a-d049bef9c047",
                 "type": "text",
-                "content": "<p>La méthode est claire : analyser l’ensemble du cycle de vie d’un objet selon des règles communes. Reste une question centrale : quels impacts mesurer ? Les indicateurs sont multiples et ne reflètent pas les mêmes problématiques.</p>\n"
+                "content": "<p>La méthode est claire&nbsp;: analyser l’ensemble du cycle de vie d’un objet selon des règles communes. Reste une question centrale&nbsp;: quels impacts mesurer ? Les indicateurs sont multiples et ne reflètent pas les mêmes problématiques.</p>"
               }
             }
           ]
         },
         {
-          "id": "41c909dc-2f70-4ba8-b215-3683d4e138f9",
+          "id": "0bf84b1d-c273-4301-a022-3e6ca54aac0d",
           "type": "discovery",
-          "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
+          "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "8b07744b-4b36-4bf0-9c39-d806a6987b64",
+                "id": "d1b8002d-cf25-48d7-85c5-7245263de052",
                 "type": "text",
-                "content": "<p>Deux services numériques peuvent avoir des impacts très différents selon l’indicateur observé : climat, ressources, santé… C’est pourquoi les études s’appuient sur <strong>plusieurs indicateurs</strong>.</p>"
+                "content": "<p>Deux services numériques peuvent avoir des impacts très différents selon l’indicateur observé&nbsp;: climat, ressources, santé… C’est pourquoi les études s’appuient sur <strong>plusieurs indicateurs</strong>.</p>"
               }
             },
             {
@@ -371,7 +371,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "ordre de grandeur de la part de l'utilisation pour PM",
+                    "ariaLabel": "ordre de grandeur de la part de l’utilisation pour PM",
                     "defaultValue": "",
                     "tolerances": [],
                     "options": [
@@ -405,7 +405,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "tier le plus contributif à l'étape utilisation pour PM",
+                    "ariaLabel": "tier le plus contributif à l’étape utilisation pour PM",
                     "defaultValue": "",
                     "tolerances": [],
                     "options": [
@@ -463,12 +463,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bien vu !</p>",
+                    "state": "<p>Bien vu !</p>",
                     "diagnosis": "<p>Pour <strong>PM</strong>, l’<strong>Utilisation</strong> domine (≈ <strong>80%</strong> du total). À l’étape utilisation, le Tier le plus contributif est le <strong>Tier I</strong>. Le <strong>Transport</strong> reste très faible (≈ 0–1%).</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait.</p>",
-                    "diagnosis": "<p>Revenez dans l’outil : pour <strong>PM</strong>, l’<strong>Utilisation</strong> domine (≈ <strong>80%</strong> du total). À l’étape utilisation, le Tier le plus contributif est le <strong>Tier I</strong>. Le <strong>Transport</strong> reste très faible (≈ 0–1%).</p>"
+                    "diagnosis": "<p>Revenez dans l’outil&nbsp;: pour <strong>PM</strong>, l’<strong>Utilisation</strong> domine (≈ <strong>80%</strong> du total). À l’étape utilisation, le Tier le plus contributif est le <strong>Tier I</strong>. Le <strong>Transport</strong> reste très faible (≈ 0–1%).</p>"
                   }
                 }
               }
@@ -476,9 +476,9 @@
           ]
         },
         {
-          "id": "1c30817b-6fcd-4023-9b6c-ea820420bdcb",
+          "id": "d9fbee7e-c5c6-4bc3-9af4-6000ccf39c8a",
           "type": "short-lesson",
-          "title": "Leçon 3 : Les indicateurs environnementaux",
+          "title": "Leçon 3 : Les indicateurs environnementaux",
           "components": [
             {
               "type": "stepper",
@@ -488,7 +488,7 @@
                     {
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que l’impact environnemental ne se résume pas au carbone. Voici les impacts environnementaux en fonction de la l'indicateur étudié !&nbsp;<br>"
+                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que l’impact environnemental ne se résume pas au carbone. Voici les impacts environnementaux en fonction de la l’indicateur étudié !&nbsp;<br>"
                     }
                   ]
                 },
@@ -497,7 +497,7 @@
                     {
                       "id": "ad88b67b-755d-4a36-b480-e479146811fb",
                       "type": "text",
-                      "content": "<p>Voici un tableau récapitulatif (version courte) des principaux indicateurs d’impact environnemental.</p>\n\n<table>\n    <caption class=\"sr-only\">Résumé des indicateurs d’impact environnemental (simplifié)</caption>\n    <thead>\n        <tr>\n            <th scope=\"col\"><br></th>\n            <th scope=\"col\">À quoi celà correspond</th>\n            <th scope=\"col\">Impact environnemental</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th scope=\"row\">Réchauffement climatique (GWP)</th>\n            <td>Gaz à effet de serre sur tout le cycle de vie</td>\n            <td>Changement climatique</td>\n        </tr>\n\n        <tr>\n            <th scope=\"row\">Ressources minérales &amp; métaux (ADPe)</th>\n            <td>Extraction de minerais et métaux non renouvelables</td>\n            <td>Épuisement des ressources (métaux critiques)</td>\n        </tr>\n\n        <tr>\n            <th scope=\"row\">Ressources fossiles (ADPf)</th>\n            <td>Consommation de pétrole, gaz, charbon</td>\n            <td>Raréfaction + émissions indirectes</td>\n        </tr>\n\n        <tr>\n            <th scope=\"row\">Particules fines – santé (PM)</th>\n            <td>Émissions de particules liées aux activités</td>\n            <td>Impacts santé (respiratoire, cardio…)</td>\n        </tr>\n\n        <tr>\n            <th scope=\"row\">Acidification (AP)</th>\n            <td>Substances acidifiantes rejetées dans l’air</td>\n            <td>Dégradation sols, forêts, eaux douces</td>\n        </tr>\n\n        <tr>\n            <th scope=\"row\">Eutrophisation eau douce (EPf)</th>\n            <td>Rejets d’azote et de phosphore dans l’eau</td>\n            <td>Algues + déséquilibres + perte biodiversité</td>\n        </tr>\n    </tbody>\n</table>"
+                      "content": "<p>Voici un tableau récapitulatif (version courte) des principaux indicateurs d’impact environnemental.</p><table>    <caption class=\"sr-only\">Résumé des indicateurs d’impact environnemental (simplifié)</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">À quoi celà correspond</th>            <th scope=\"col\">Impact environnemental</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Réchauffement climatique (GWP)</th>            <td>Gaz à effet de serre sur tout le cycle de vie</td>            <td>Changement climatique</td>        </tr>        <tr>            <th scope=\"row\">Ressources minérales &amp; métaux (ADPe)</th>            <td>Extraction de minerais et métaux non renouvelables</td>            <td>Épuisement des ressources (métaux critiques)</td>        </tr>        <tr>            <th scope=\"row\">Ressources fossiles (ADPf)</th>            <td>Consommation de pétrole, gaz, charbon</td>            <td>Raréfaction + émissions indirectes</td>        </tr>        <tr>            <th scope=\"row\">Particules fines – santé (PM)</th>            <td>Émissions de particules liées aux activités</td>            <td>Impacts santé (respiratoire, cardio…)</td>        </tr>        <tr>            <th scope=\"row\">Acidification (AP)</th>            <td>Substances acidifiantes rejetées dans l’air</td>            <td>Dégradation sols, forêts, eaux douces</td>        </tr>        <tr>            <th scope=\"row\">Eutrophisation eau douce (EPf)</th>            <td>Rejets d’azote et de phosphore dans l’eau</td>            <td>Algues + déséquilibres + perte biodiversité</td>        </tr>    </tbody></table>"
                     }
                   ]
                 }
@@ -508,7 +508,7 @@
               "element": {
                 "id": "26abf1bc-fe15-4c04-add5-cb00430d6dd6",
                 "type": "text",
-                "content": "<h5>🤔Ces résultats prédisent-ils l’avenir ?</h5><p>Non. Ils décrivent une situation à un instant donné. Les indicateurs peuvent évoluer, mais <strong>sans action</strong>, les impacts du numérique peuvent continuer d’augmenter.</p>"
+                "content": "<h5>🤔Ces résultats prédisent-ils l’avenir ?</h5><p>Non. Ils décrivent une situation à un instant donné. Les indicateurs peuvent évoluer, mais <strong>sans action</strong>, les impacts du numérique peuvent continuer d’augmenter.</p>"
               }
             }
           ]
@@ -516,20 +516,20 @@
       ]
     },
     {
-      "id": "c9fa05f8-6f99-45e0-be12-0f7828bf0e0f",
+      "id": "507c8399-a94a-4440-b688-5acd0c1a17cb",
       "type": "retain-the-essentials",
       "grains": [
         {
-          "id": "bf637ca3-ee20-45c0-bc0e-df672f4dfdf3",
+          "id": "f5a1596d-9193-4e8d-afca-896e0706182b",
           "type": "summary",
           "title": "Récap",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "065ea5c0-8fc9-4014-9c87-49133966943d",
+                "id": "ed97ea10-9ed8-4c2d-ad35-35c528d3d08d",
                 "type": "text",
-                "content": "<ul>\n    <li>Le numérique repose sur <strong>trois composantes</strong> : équipements utilisateurs, réseaux, centres de données.</li>\n    <li>Ses impacts se mesurent avec l’<strong>ACV</strong>, une méthode <strong>normalisée</strong> et <strong>multicritère</strong>.</li>\n    <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats via des <strong>indicateurs → impacts</strong> (climat, ressources, santé…).</li>\n    <li>Les impacts <strong>varient selon l’indicateur, le périmètre et les usages</strong> : les équipements pèsent souvent, mais réseaux et data centers peuvent aussi compter (et sont parfois sous-estimés).</li>\n    \n</ul>"
+                "content": "<ul>    <li>Le numérique repose sur <strong>trois composantes</strong>&nbsp;: équipements utilisateurs, réseaux, centres de données.</li>    <li>Ses impacts se mesurent avec l’<strong>ACV</strong>, une méthode <strong>normalisée</strong> et <strong>multicritère</strong>.</li>    <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats via des <strong>indicateurs → impacts</strong> (climat, ressources, santé…).</li>    <li>Les impacts <strong>varient selon l’indicateur, le périmètre et les usages</strong>&nbsp;: les équipements pèsent souvent, mais réseaux et data centers peuvent aussi compter (et sont parfois sous-estimés).</li>    </ul>"
               }
             }
           ]
@@ -537,26 +537,26 @@
       ]
     },
     {
-      "id": "4079a85f-60c9-4d2b-8b0d-5fa56a53cbc9",
+      "id": "ac720e16-f23b-43d0-8b6a-35ede8d091d6",
       "type": "practise",
       "grains": [
         {
-          "id": "3aa484f2-7742-4cb0-96f9-441fbbf3cab1",
+          "id": "582fed97-0d17-4f0c-a229-405fd8078598",
           "type": "activity",
           "title": "Activité 1",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "a266c379-06be-400f-b5b0-78e1bfd5c0d0",
+                "id": "ba0c3aeb-8e2b-4429-a312-0b0402c4611d",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
               }
             }
           ]
         },
         {
-          "id": "76cc531a-a816-421d-a92f-b6a33befe486",
+          "id": "2dfea6e7-59bc-485f-ba0d-eb56920444c7",
           "type": "activity",
           "title": "Activité 2",
           "components": [
@@ -565,22 +565,22 @@
               "element": {
                 "id": "e393cd8a-1a83-4533-a809-9b7c6bcd1e41",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
               }
             }
           ]
         },
         {
-          "id": "b3b03583-9e13-49f4-a01e-a2e5a4458460",
+          "id": "6e71e51a-8e61-4d16-8795-6da69a166db6",
           "type": "activity",
           "title": "Activité 3",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "67881400-f14b-4e8f-a773-c993c44e7404",
+                "id": "7d437b14-66b3-4106-aeb2-41f225057ca3",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p><p><br></p>"
+                "content": "<p><strong>PLACEHOLDER – Activité à compléter</strong></p>"
               }
             }
           ]
@@ -588,32 +588,32 @@
       ]
     },
     {
-      "id": "4389bd1a-7331-4937-8006-90a723b64994",
+      "id": "bf6af043-b191-4889-8236-7e0a6f318fb1",
       "type": "go-further",
       "grains": [
         {
-          "id": "5915d9c5-40ec-475c-881d-669fc1455d55",
+          "id": "8f482072-8f80-48b1-9804-a48782fda656",
           "type": "challenge",
-          "title": "Défi : lire un chiffre du numérique avec esprit critique",
+          "title": "Défi : lire un chiffre du numérique avec esprit critique",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
+                "id": "6d1f5bd5-de96-476d-81f9-d3905a21e03e",
                 "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Défi à compléter</strong></p><p>Objectif : transférer la méthode : quand l’apprenant voit un chiffre (« le numérique représente X%… »), il doit poser les bonnes questions.</p><p>Suggestion de consigne : « Choisissez un chiffre (article, post, rapport). Répondez à 3 questions : (1) Quel périmètre ? (2) Quelle méthode (ACV ou autre) ? (3) Quel(s) indicateur(s) ? »</p>"
+                "content": "<p><strong>PLACEHOLDER – Défi à compléter</strong></p><p>Objectif&nbsp;: transférer la méthode&nbsp;: quand l’apprenant voit un chiffre («&nbsp;le numérique représente X%…&nbsp;»), il doit poser les bonnes questions.</p><p>Suggestion de consigne&nbsp;: «&nbsp;Choisissez un chiffre (article, post, rapport). Répondez à 3 questions&nbsp;: (1) Quel périmètre ? (2) Quelle méthode (ACV ou autre) ? (3) Quel(s) indicateur(s) ?&nbsp;»</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "85753fa4-13df-4941-8610-8c508233ee61",
+                "id": "23b9bb23-e338-453f-91bc-5b582d2ce809",
                 "type": "qcu-declarative",
-                "instruction": "<p>Quel réflexe vous semble le plus utile pour lire un chiffre sur l’impact du numérique ?</p>",
+                "instruction": "<p>Quel réflexe vous semble le plus utile pour lire un chiffre sur l’impact du numérique ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Vérifier le périmètre : ce qui est inclus et exclu.</p>",
+                    "content": "<p>Vérifier le périmètre&nbsp;: ce qui est inclus et exclu.</p>",
                     "feedback": {
                       "diagnosis": "<p>Très bon réflexe. Sans périmètre clair, on compare parfois des études qui ne parlent pas de la même chose.</p>"
                     }
