@@ -10,13 +10,14 @@ import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
 import unicorn from 'eslint-plugin-unicorn';
 
 export default defineConfig([
-  // Loads plugins with global rules
+  // Loads plugins and apply their rules
   ...pixRecommendedConfig,
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
   chaiExpect.configs['recommended-flat'],
-  { plugins: { knex: fixupPluginRules(knex) } },
+  // Loads plugins only (rules not applied yet)
   { plugins: { unicorn } },
+  { plugins: { knex: fixupPluginRules(knex) } },
   // Overridden rules for "js" files
   {
     files: ['**/*.{js,mjs}'],
