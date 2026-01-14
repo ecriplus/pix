@@ -3,7 +3,10 @@ import { assessmentStates } from 'mon-pix/models/assessment';
 
 export default class CertificationResultsController extends Controller {
   get isEndedByInvigilator() {
-    return this.model.assessment.get('state') === assessmentStates.ENDED_BY_INVIGILATOR;
+    return (
+      this.model.assessment.get('state') === assessmentStates.ENDED_BY_INVIGILATOR ||
+      this.model.assessment.get('state') === 'endedBySupervisor'
+    );
   }
 
   get hasBeenEndedDueToFinalization() {
