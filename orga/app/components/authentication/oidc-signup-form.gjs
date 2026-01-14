@@ -10,12 +10,9 @@ import t from 'ember-intl/helpers/t';
 import get from 'lodash/get';
 
 export default class OidcSignupForm extends Component {
-  @service oidcIdentityProviders;
   @service intl;
   @service url;
   @service authErrorMessages;
-  @service store;
-  @service session;
 
   @tracked isTermsOfServiceValidated = false;
   @tracked signupErrorMessage = null;
@@ -45,10 +42,6 @@ export default class OidcSignupForm extends Component {
     return result;
   }
 
-  get identityProviderOrganizationName() {
-    return this.oidcIdentityProviders.findBySlug(this.args.identityProviderSlug)?.organizationName;
-  }
-
   @action
   onChange(event) {
     this.isTermsOfServiceValidated = !!event.target.checked;
@@ -64,41 +57,20 @@ export default class OidcSignupForm extends Component {
     this.isLoading = true;
     this.signupErrorMessage = null;
     try {
-      this.session.set('skipAuthentication', true);
-      await this.session.authenticate('authenticator:oidc', {
-        authenticationKey: this.args.authenticationKey,
-        identityProviderSlug: this.args.identityProviderSlug,
-        hostSlug: 'users',
-      });
-      const createdUserId = this.session.data.authenticated.user_id;
-      await this._acceptOrganizationInvitation(this.args.invitationId, this.args.invitationCode, createdUserId);
-
-      this.session.set('skipAuthentication', false);
-      await this.session.handleAuthentication();
+      await this.args.onSubmit();
     } catch (responseError) {
       const error = get(responseError, 'errors[0]');
       this.signupErrorMessage = this.authErrorMessages.getAuthenticationErrorMessage(error);
     } finally {
       this.isLoading = false;
-      this.session.set('skipAuthentication', false);
     }
-  }
-
-  _acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, createdUserId) {
-    return this.store
-      .createRecord('organization-invitation-response', {
-        id: organizationInvitationId + '_' + organizationInvitationCode,
-        code: organizationInvitationCode,
-        userId: createdUserId,
-      })
-      .save({ adapterOptions: { organizationInvitationId } });
   }
 
   <template>
     <div>
       <p class="oidc-signup-form__description">
         {{t "pages.oidc.signup.description"}}
-        <em>{{this.identityProviderOrganizationName}}</em>&nbsp;:
+        <em>{{@identityProviderName}}</em>&nbsp;:
       </p>
       <div class="oidc-signup-form__information">
         <ul>

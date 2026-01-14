@@ -28,10 +28,7 @@ const EMAIL_API_ERRORS = {
 };
 
 export default class SignupForm extends Component {
-  @service session;
   @service locale;
-  @service url;
-  @service pixMetrics;
   @service store;
   @service intl;
   @service authErrorMessages;
@@ -99,15 +96,7 @@ export default class SignupForm extends Component {
     }
 
     try {
-      await user.save();
-
-      await this.#acceptOrganizationInvitation(
-        this.args.organizationInvitationId,
-        this.args.organizationInvitationCode,
-        this.email,
-      );
-
-      await this.session.authenticate('authenticator:oauth2', this.email, this.password);
+      await this.args.onSubmit(user);
 
       this.password = null;
     } catch (errorResponse) {
@@ -124,16 +113,6 @@ export default class SignupForm extends Component {
     // EmberAdapter and EmberSimpleAuth use different error formats, so we manage both cases below
     const error = get(errorResponse, errorResponse?.isAdapterError ? 'errors[0]' : 'responseJSON.errors[0]');
     return this.authErrorMessages.getAuthenticationErrorMessage(error);
-  }
-
-  #acceptOrganizationInvitation(organizationInvitationId, organizationInvitationCode, createdUserEmail) {
-    return this.store
-      .createRecord('organization-invitation-response', {
-        id: organizationInvitationId + '_' + organizationInvitationCode,
-        code: organizationInvitationCode,
-        email: createdUserEmail,
-      })
-      .save({ adapterOptions: { organizationInvitationId } });
   }
 
   <template>

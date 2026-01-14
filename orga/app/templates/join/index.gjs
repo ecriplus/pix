@@ -26,11 +26,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         <h2 class="pix-body-l">{{t "pages.login.with-pix-account"}}</h2>
       </div>
 
-      <LoginForm
-        @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
-        @isInvitationCancelled={{@controller.isInvitationCancelled}}
-        @onSubmit={{@controller.joinAndAuthenticate}}
-      />
+      <LoginForm @onSubmit={{@controller.joinAndAuthenticate}} />
 
       <AuthenticationIdentityProviders
         @invitationId={{@controller.invitationId}}

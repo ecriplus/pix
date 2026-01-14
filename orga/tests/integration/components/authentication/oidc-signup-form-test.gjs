@@ -12,11 +12,8 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
 
   test('it renders the component', async function (assert) {
     // given
-    const oidcIdentityProviders = this.owner.lookup('service:oidcIdentityProviders');
-    sinon
-      .stub(oidcIdentityProviders, 'list')
-      .value([{ id: 'sc', slug: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true }]);
-
+    const onSubmitStub = sinon.stub();
+    const identityProviderName = 'StarConnect';
     const userClaims = {
       firstName: 'John',
       lastName: 'Doe',
@@ -25,11 +22,17 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
 
     // when
     const screen = await render(
-      <template><OidcSignupForm @identityProviderSlug="sc" @userClaims={{userClaims}} /></template>,
+      <template>
+        <OidcSignupForm
+          @onSubmit={{onSubmitStub}}
+          @identityProviderName={{identityProviderName}}
+          @userClaims={{userClaims}}
+        />
+      </template>,
     );
 
     // then
-    const providerName = await screen.findByText('StarConnect');
+    const providerName = await screen.findByText(identityProviderName);
     assert.dom(providerName).exists();
 
     const firstName = await screen.findByText(
@@ -49,11 +52,8 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
   module('when the user does not accept terms of service before signing up', function () {
     test('does not sign up and displays cgu error', async function (assert) {
       // given
-      const oidcIdentityProviders = this.owner.lookup('service:oidcIdentityProviders');
-      sinon
-        .stub(oidcIdentityProviders, 'list')
-        .value([{ id: 'sc', slug: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true }]);
-
+      const onSubmitStub = sinon.stub();
+      const identityProviderName = 'StarConnect';
       const userClaims = {
         firstName: 'John',
         lastName: 'Doe',
@@ -62,7 +62,13 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
 
       // when
       const screen = await render(
-        <template><OidcSignupForm @identityProviderSlug="sc" @userClaims={{userClaims}} /></template>,
+        <template>
+          <OidcSignupForm
+            @onSubmit={{onSubmitStub}}
+            @identityProviderName={{identityProviderName}}
+            @userClaims={{userClaims}}
+          />
+        </template>,
       );
       const signup = await screen.findByRole('button', { name: t('pages.oidc.signup.signup-button') });
       await click(signup);

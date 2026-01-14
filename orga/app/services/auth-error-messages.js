@@ -59,6 +59,15 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
   PIX_ORGA_ACCESS_NOT_ALLOWED: {
     i18nKey: 'pages.login-form.errors.access-not-allowed',
   },
+  INVITATION_CANCELLED: {
+    i18nKey: 'pages.login-form.invitation-was-cancelled',
+  },
+  INVITATION_ALREADY_ACCEPTED: {
+    i18nKey: 'pages.login-form.invitation-already-accepted',
+  },
+  INVITATION_NOT_FOUND: {
+    i18nKey: 'pages.login-form.invitation-not-found',
+  },
 };
 
 export default class AuthErrorMessagesService extends Service {

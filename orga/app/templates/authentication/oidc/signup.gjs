@@ -20,14 +20,12 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
         <h1 class="pix-title-m">{{t "pages.oidc.signup.title"}}</h1>
         <h2 class="pix-body-l">{{t "pages.oidc.signup.sub-title"}}</h2>
       </div>
-      {{#if @controller.userClaims}}
 
+      {{#if @controller.userClaims}}
         <OidcSignupForm
+          @onSubmit={{@controller.joinAndSignup}}
+          @identityProviderName={{@controller.identityProviderName}}
           @userClaims={{@controller.userClaims}}
-          @identityProviderSlug={{@model.identity_provider_slug}}
-          @authenticationKey={{@controller.authenticationKey}}
-          @invitationId={{@controller.invitationId}}
-          @invitationCode={{@controller.invitationCode}}
         />
         <PixButtonLink @variant="secondary" @route="authentication.oidc.login" @model={{@model.identity_provider_slug}}>
           {{t "pages.oidc.signup.login-button"}}

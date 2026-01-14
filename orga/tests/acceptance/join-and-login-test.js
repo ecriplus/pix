@@ -57,11 +57,6 @@ module('Acceptance | join and login', function (hooks) {
       assert.strictEqual(currentURL(), '/');
       assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       assert.ok(screen.getByText('Harry Cover'));
-      assert.deepEqual(invitationStorage.get(), {
-        code: 'ABCD',
-        invitationId: '1',
-        organizationName: 'College BRO & Evil Associates',
-      });
     });
 
     module('When user has not accepted terms of service yet', function (hooks) {
@@ -153,11 +148,11 @@ module('Acceptance | join and login', function (hooks) {
   module('when the invitation does not exist', function () {
     test('redirects user to /connexion', async function (assert) {
       // when
-      await visit('/rejoindre?invitationId=123456&code=FAKE999');
+      const screen = await visit('/rejoindre?invitationId=123456&code=FAKE999');
 
       // then
       assert.strictEqual(currentURL(), '/connexion');
-      assert.strictEqual(invitationStorage.get(), undefined);
+      assert.ok(screen.getByText(t('pages.login-form.invitation-not-found')));
     });
   });
 

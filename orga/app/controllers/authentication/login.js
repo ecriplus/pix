@@ -5,6 +5,8 @@ import { service } from '@ember/service';
 export default class LoginController extends Controller {
   @service session;
   @service currentDomain;
+  @service joinInvitation;
+  @service authErrorMessages;
 
   @action
   async authenticate(login, password) {
@@ -13,5 +15,15 @@ export default class LoginController extends Controller {
 
   get displayRecoveryLink() {
     return this.currentDomain.isFranceDomain;
+  }
+
+  get errorMessage() {
+    if (this.error) {
+      return this.authErrorMessages.getAuthenticationErrorMessage({ code: this.error });
+    }
+    if (this.joinInvitation.error) {
+      return this.authErrorMessages.getAuthenticationErrorMessage({ code: this.joinInvitation.error });
+    }
+    return null;
   }
 }
