@@ -295,18 +295,6 @@
                 "type": "text",
                 "content": "<p><strong>🤔 Bon à savoir</strong><br>Pour garder vos informations en sécurité, le gestionnaire de mots de passe les sauvegarde dans un <strong>format codé </strong>(chiffré). Ainsi, même si des pirates informatiques accèdent aux données de votre gestionnaire, vos mots de passe sont <strong>illisibles </strong>et donc <strong>inutilisables </strong>pour les attaquants.</p>"
               }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "1b46e144-3f63-4517-ba15-6473b360d539",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy-gestionmdp-ind/chiffrage.png",
-                "alt": "Image décrite dans l’alternative textuelle",
-                "alternativeText": "<p>Exemple de chiffrage&nbsp;:</p><ul><li>Le texte «&nbsp;iencli&nbsp;» devient 1de8867684e45d941ab8a7c768c7dc9b (algorithme MD5).</li><li>Le texte «&nbsp;iencli1&nbsp;» devient 463f91836fbc39a6857e34775162b706 (algorithme MD5).</li></ul>",
-                "legend": "",
-                "licence": ""
-              }
             }
           ]
         },
