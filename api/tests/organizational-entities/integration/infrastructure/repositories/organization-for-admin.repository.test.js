@@ -408,6 +408,43 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });
+    context('when there are organization matching combined-course-blueprint-id filter', function () {
+      let blueprint;
+
+      beforeEach(function () {
+        blueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
+        const orgaA = databaseBuilder.factory.buildOrganization({ name: 'Org A1' });
+        const orgaB = databaseBuilder.factory.buildOrganization({ name: 'Org B1' });
+        databaseBuilder.factory.buildOrganization({ name: 'Org C1' });
+        databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+          combinedCourseBlueprintId: blueprint.id,
+          organizationId: orgaA.id,
+        });
+        databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+          combinedCourseBlueprintId: blueprint.id,
+          organizationId: orgaB.id,
+        });
+
+        return databaseBuilder.commit();
+      });
+
+      it('return only Organizations matching "combinedCourseBlueprintId" if given in filters', async function () {
+        // given
+        const filter = { combinedCourseBlueprintId: blueprint.id };
+        const page = { number: 1, size: 10 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
+        // when
+        const { models: matchingOrganizations, pagination } =
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
+            filter,
+            page,
+          });
+
+        // then
+        expect(_.map(matchingOrganizations, 'name')).to.have.members(['Org A1', 'Org B1']);
+        expect(pagination).to.deep.equal(expectedPagination);
+      });
+    });
   });
 
   describe('#archive', function () {

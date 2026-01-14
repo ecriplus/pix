@@ -378,12 +378,18 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
 }
 
 function _setSearchFiltersForQueryBuilder(qb, filter) {
-  const { id, name, type, externalId, hideArchived, administrationTeamId, targetProfileId } = filter;
+  const { id, name, type, externalId, hideArchived, administrationTeamId, targetProfileId, combinedCourseBlueprintId } =
+    filter;
   if (id) {
     qb.where('organizations.id', id);
   }
   if (targetProfileId) {
     qb.join('target-profile-shares', 'organizationId', 'organizations.id').where({ targetProfileId });
+  }
+  if (combinedCourseBlueprintId) {
+    qb.join('combined_course_blueprint_shares', 'organizationId', 'organizations.id').where({
+      combinedCourseBlueprintId,
+    });
   }
   if (name) {
     qb.where(
