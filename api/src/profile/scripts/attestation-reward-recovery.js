@@ -7,7 +7,11 @@ import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 
-export const TARGET_PROFILE_IDS = [6078, 6079, 6080, 6081, 6082, 6083, 6155];
+export const TARGET_PROFILE_IDS = [
+  6078, 6079, 6080, 6081, 6082, 6083, 6155, 6230, 6231, 6239, 6247, 6255, 6223, 6232, 6240, 6248, 6256, 6224, 6233,
+  6241, 6249, 6257, 6225, 6234, 6242, 6250, 6258, 6226, 6235, 6243, 6251, 6259, 6227, 6236, 6244, 6252, 6260, 6228,
+  6237, 6245, 6253, 6261, 6229, 6238, 6246, 6254, 6262,
+];
 
 const options = {
   start: {
