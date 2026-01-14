@@ -1,5 +1,5 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { visit } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -79,12 +79,27 @@ module('Acceptance | combined course blueprint Organizations', function (hooks) 
 
       test('it should redirect to organization details on click', async function (assert) {
         // given
-        await visit('/combined-course-blueprints/1');
+        const screen = await visit('/combined-course-blueprints/1');
         // when
-        await clickByName('456');
+        await click(screen.getByRole('link', { name: '456' }));
 
         // then
         assert.deepEqual(currentURL(), '/organizations/456/team');
+      });
+
+      test('it should redirect to combined course blueprint details after detach', async function (assert) {
+        // given
+        const screen = await visit('/combined-course-blueprints/1');
+
+        const detachButton = screen.getAllByRole('button', { name: 'Détacher' })[0];
+
+        // when
+        await click(detachButton);
+
+        const confirmButton = await screen.findByRole('button', { name: 'Confirmer' });
+        await click(confirmButton);
+
+        assert.deepEqual(currentURL(), '/combined-course-blueprints/1/organizations');
       });
     });
   });
