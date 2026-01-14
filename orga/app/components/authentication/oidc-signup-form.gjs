@@ -4,6 +4,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
@@ -18,15 +19,18 @@ export default class OidcSignupForm extends Component {
   @tracked signupErrorMessage = null;
   @tracked isLoading = false;
 
-  get userClaimsToDisplay() {
+  get formattedUserClaims() {
     const { userClaims } = this.args;
 
     const result = [];
 
     if (userClaims) {
       const { firstName, lastName, ...rest } = userClaims;
-      result.push(this.intl.t('pages.oidc.signup.claims.first-name-label-and-value', { firstName }));
-      result.push(this.intl.t('pages.oidc.signup.claims.last-name-label-and-value', { lastName }));
+
+      result.push(
+        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.first-name-label')}<b>${firstName}</b>`),
+        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.last-name-label')}<b>${lastName}</b>`),
+      );
 
       Object.entries(rest).map(([key, _value]) => {
         let label = `${this.intl.t(`pages.oidc.signup.claims.${key}`)}`;
@@ -70,12 +74,12 @@ export default class OidcSignupForm extends Component {
     <div>
       <p class="oidc-signup-form__description">
         {{t "pages.oidc.signup.description"}}
-        <em>{{@identityProviderName}}</em>&nbsp;:
+        <span class="oidc-signup-form__description__provider-name">{{@identityProviderName}}</span>&nbsp;:
       </p>
       <div class="oidc-signup-form__information">
         <ul>
-          {{#each this.userClaimsToDisplay as |userClaimToDisplay|}}
-            <li>{{userClaimToDisplay}}</li>
+          {{#each this.formattedUserClaims as |formattedUserClaim|}}
+            <li>{{formattedUserClaim}}</li>
           {{/each}}
         </ul>
       </div>

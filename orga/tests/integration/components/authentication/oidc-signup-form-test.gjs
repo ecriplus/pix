@@ -35,15 +35,17 @@ module('Integration | Component | Authentication | OidcSignupForm', function (ho
     const providerName = await screen.findByText(identityProviderName);
     assert.dom(providerName).exists();
 
-    const firstName = await screen.findByText(
-      t('pages.oidc.signup.claims.first-name-label-and-value', { firstName: 'John' }),
+    const expectedFirstNameLabelAndValue = `${t('pages.oidc.signup.claims.first-name-label')}John`;
+    const foundFirstNameLabelAndValue = await screen.findByText(
+      (_, el) => el.textContent === expectedFirstNameLabelAndValue,
     );
-    assert.dom(firstName).exists();
+    assert.dom(foundFirstNameLabelAndValue).exists();
 
-    const lastName = await screen.findByText(
-      t('pages.oidc.signup.claims.last-name-label-and-value', { lastName: 'Doe' }),
+    const expectedLastNameLabelAndValue = `${t('pages.oidc.signup.claims.last-name-label')}Doe`;
+    const foundLastNameLabelAndValue = await screen.findByText(
+      (_, el) => el.textContent === expectedLastNameLabelAndValue,
     );
-    assert.dom(lastName).exists();
+    assert.dom(foundLastNameLabelAndValue).exists();
 
     const title = await screen.findByText(t('pages.oidc.signup.claims.title'));
     assert.dom(title).exists();
