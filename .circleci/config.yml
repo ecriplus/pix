@@ -380,6 +380,10 @@ jobs:
       - attach_workspace:
           at: ~/pix
       - run:
+          name: Lint dependencies
+          command: npm run lint:dependencies
+          when: always
+      - run:
           name: Lint
           command: npm run lint:ci
           environment:
