@@ -1,5 +1,4 @@
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
-import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import chaiExpect from 'eslint-plugin-chai-expect';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
@@ -28,21 +27,6 @@ export default [
   },
   {
     files: ['**/*.{js,mjs}'],
-    languageOptions: {
-      parser: babelParser,
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        requireConfigFile: false,
-        babelOptions: {
-          configFile: false,
-          babelrc: false,
-          parserOpts: {
-            plugins: ['importAttributes'],
-          },
-        },
-      },
-    },
     rules: {
       'no-console': 'error',
       'no-sync': 'error',
