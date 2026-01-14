@@ -1,5 +1,6 @@
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import { fixupPluginRules } from '@eslint/compat';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import chaiExpect from 'eslint-plugin-chai-expect';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import _import from 'eslint-plugin-import-x';
@@ -11,7 +12,8 @@ import unicorn from 'eslint-plugin-unicorn';
 
 const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
 
-export default [
+export default defineConfig([
+  // Loads plugins with global rules
   ...pixRecommendedConfig,
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
@@ -19,12 +21,7 @@ export default [
   { plugins: { import: _import } },
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },
-  {
-    files: ['**/*.cjs'],
-    languageOptions: {
-      globals: { module: 'readonly', require: 'readonly' },
-    },
-  },
+  // Overridden rules for "js" files
   {
     files: ['**/*.{js,mjs}'],
     rules: {
@@ -38,6 +35,12 @@ export default [
       'n/no-unpublished-import': 'off',
     },
   },
+  // Overridden rules for "scripts" files
+  {
+    files: ['scripts/**/*.js'],
+    rules: { 'no-console': 'off' },
+  },
+  // Overridden rules for "tests" files
   {
     ...mocha.configs.recommended,
     files: ['tests/**/*.js'],
@@ -53,9 +56,7 @@ export default [
   },
   {
     files: ['tests/integration/**/*.js'],
-    rules: {
-      'no-restricted-modules': ['error', { paths: ['@hapi/hapi'] }],
-    },
+    rules: { 'no-restricted-modules': ['error', { paths: ['@hapi/hapi'] }] },
   },
   {
     files: ['tests/integration/application/**/*.js'],
@@ -71,10 +72,7 @@ export default [
       ],
     },
   },
-  {
-    files: ['scripts/**/*.js'],
-    rules: { 'no-console': 'off' },
-  },
+  // Overridden rules for "translations" files
   {
     files: nonPhraseGeneratedFiles,
     plugins: { 'i18n-json': i18nJsonPlugin },
@@ -86,4 +84,6 @@ export default [
       ...i18nJsonPlugin.configs.recommended.rules,
     },
   },
-];
+  // Ignored files
+  globalIgnores(['tests/integration/tooling/db-schemalint.cjs']),
+]);
