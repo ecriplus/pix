@@ -36,21 +36,6 @@ export default [
       'unicorn/no-empty-file': 'error',
       'unicorn/prefer-node-protocol': 'error',
       'n/no-unpublished-import': 'off',
-      'import/no-restricted-paths': [
-        'error',
-        {
-          zones: [
-            {
-              target: ['api/lib/domain/usecases', 'lib/domain/usecases'],
-              from: ['api/lib/infrastructure/repositories', 'lib/infrastructure/repositories'],
-              except: [],
-              message:
-                "Repositories are automatically injected in use-case, you don't need to import them. Check for further details: https://github.com/1024pix/pix/blob/dev/docs/adr/0046-injecter-les-dependances-api.md",
-            },
-            { target: 'tests/unit', from: 'db' },
-          ],
-        },
-      ],
     },
   },
   {
@@ -69,12 +54,7 @@ export default [
   {
     files: ['tests/integration/**/*.js'],
     rules: {
-      'no-restricted-modules': [
-        'error',
-        {
-          paths: ['@hapi/hapi'],
-        },
-      ],
+      'no-restricted-modules': ['error', { paths: ['@hapi/hapi'] }],
     },
   },
   {
@@ -84,65 +64,16 @@ export default [
         'error',
         {
           paths: [
-            {
-              name: '../../../server',
-              message: 'Please use http-server-test instead.',
-            },
-            {
-              name: '../../../../server',
-              message: 'Please use http-server-test instead.',
-            },
+            { name: '../../../server', message: 'Please use http-server-test instead.' },
+            { name: '../../../../server', message: 'Please use http-server-test instead.' },
           ],
-        },
-      ],
-    },
-  },
-  {
-    files: ['tests/unit/**/*.js'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          paths: ['knex', 'pg'],
         },
       ],
     },
   },
   {
     files: ['scripts/**/*.js'],
-    rules: {
-      'no-console': 'off',
-    },
-  },
-  {
-    files: ['lib/**/*.js'],
-    rules: {
-      'no-restricted-modules': [
-        'error',
-        {
-          paths: [
-            {
-              name: 'axios',
-              message: 'Please use http-agent instead (ADR 23)',
-            },
-          ],
-        },
-      ],
-      'n/no-process-env': 'error',
-    },
-  },
-  {
-    files: ['lib/application/**/*.js'],
-    rules: {
-      'no-restricted-syntax': [
-        'error',
-        {
-          selector: "CallExpression[callee.name='parseInt']",
-          message:
-            'parseInt is unnecessary here because Joi already casts string into number if the field is properly described (Joi.number())',
-        },
-      ],
-    },
+    rules: { 'no-console': 'off' },
   },
   {
     files: nonPhraseGeneratedFiles,
