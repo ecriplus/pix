@@ -196,11 +196,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
     >
       <:content>
         <p>
-          Etes-vous sûr de vouloir détacher l'organisation
-          <strong>{{this.organizationToDetach.name}}</strong>
-          du profil cible
-          <strong>{{@targetProfileName}}</strong>
-          ?
+          {{t @confirmationLabel htmlSafe=true organizationName=this.organizationToDetach.name name=@entityName}}
         </p>
       </:content>
       <:footer>

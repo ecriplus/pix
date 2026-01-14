@@ -497,6 +497,9 @@
           "caption": "List of combined course blueprints"
         },
         "title": "All learner courses"
+      },
+       "organizations": {
+        "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from combined course blueprint <strong>{name}</strong>"
       }
     },
     "complementary-certifications": {
@@ -834,6 +837,9 @@
         "table": {
           "caption": "Liste des profil cibles. Contient l'identifiant, le nom interne, la catégorie, la date de création et le statut."
         }
+      },
+       "organizations": {
+        "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from target profile <strong>{name}</strong>"
       }
     },
     "users": {

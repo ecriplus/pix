@@ -3,6 +3,13 @@ import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/Com
 import { OrganizationLearnerParticipationTypes } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { buildCombinedCourseBlueprint } from '../../../database-builder/factory/build-combined-course-blueprint.js';
+import { buildCombinedCourseBlueprintShare } from '../../../database-builder/factory/build-combined-course-blueprint-share.js';
+import {
+  PRO_ORGANIZATION_ID,
+  SCO_MANAGING_ORGANIZATION_ID,
+  SCO_ORGANIZATION_ID,
+  SUP_ORGANIZATION_ID,
+} from '../common/constants.js';
 import { PRO_COMBINED_COURSE } from './fixtures/pro-combined-course.js';
 import { COMBINED_COURSE_WITHOUT_CAMPAIGN } from './fixtures/pro-combined-course-without-campaign.js';
 import { COMBINED_COURSE_WITHOUT_MODULES } from './fixtures/pro-combined-course-without-modules.js';
@@ -184,11 +191,19 @@ export const buildCombinedCourseBlueprints = (databaseBuilder) => {
   }).id;
   const moduleShortId = '27d6ca4f';
 
-  buildCombinedCourseBlueprint({
+  const combinedCourseBlueprintId = buildCombinedCourseBlueprint({
     name: 'Mon parcours combiné 2',
     internalName: 'Mon schéma de parcours combiné 2',
     content: CombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { moduleShortId }]),
-  });
+    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
+    description:
+      "Un parcours pour découvrir l’essentiel sur l'intelligence artificielle : comprendre sa définition, ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
+  }).id;
+
+  buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: PRO_ORGANIZATION_ID });
+  buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: SCO_ORGANIZATION_ID });
+  buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: SCO_MANAGING_ORGANIZATION_ID });
+  buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: SUP_ORGANIZATION_ID });
 };
 
 export const buildCombinedCourses = (databaseBuilder) => {
