@@ -24,12 +24,12 @@ export default defineConfig([
     files: ['**/*.{js,mjs}'],
     rules: {
       'no-console': 'error',
-      'no-sync': 'error',
-      'knex/avoid-injections': 'error',
       'no-empty-function': 'error',
-      'n/no-process-exit': 'error',
+      'knex/avoid-injections': 'error',
       'unicorn/no-empty-file': 'error',
       'unicorn/prefer-node-protocol': 'error',
+      'n/no-sync': ['error', { ignores: ['catchErrSync'] }],
+      'n/no-process-exit': 'error',
       'n/no-unpublished-import': 'off',
     },
   },
@@ -54,19 +54,17 @@ export default defineConfig([
   },
   {
     files: ['tests/integration/**/*.js'],
-    rules: { 'no-restricted-modules': ['error', { paths: ['@hapi/hapi'] }] },
+    rules: { 'n/no-restricted-import': ['error', ['@hapi/hapi']] },
   },
   {
     files: ['tests/integration/application/**/*.js'],
     rules: {
-      'no-restricted-modules': [
+      'n/no-restricted-import': [
         'error',
-        {
-          paths: [
-            { name: '../../../server', message: 'Please use http-server-test instead.' },
-            { name: '../../../../server', message: 'Please use http-server-test instead.' },
-          ],
-        },
+        [
+          { name: '../../../server', message: 'Please use http-server-test instead.' },
+          { name: '../../../../server', message: 'Please use http-server-test instead.' },
+        ],
       ],
     },
   },

@@ -8,7 +8,7 @@ import { AuthenticationMethod } from '../../../../src/identity-access-management
 import { User } from '../../../../src/identity-access-management/domain/models/User.js';
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
 
-// eslint-disable-next-line no-sync
+// eslint-disable-next-line n/no-sync
 const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
 function _buildUser() {
@@ -158,7 +158,7 @@ function _getHashedPassword(password) {
   if (password === DEFAULT_PASSWORD) {
     return DEFAULT_HASHED_PASSWORD;
   }
-  // eslint-disable-next-line no-sync
+  // eslint-disable-next-line n/no-sync
   return cryptoService.hashPasswordSync(password);
 }
 

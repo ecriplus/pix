@@ -2,7 +2,7 @@ import { cryptoService } from '../../../src/shared/domain/services/crypto-servic
 import { databaseBuffer } from '../database-buffer.js';
 
 const DEFAULT_CLIENT_SECRET = 'super-secret';
-// eslint-disable-next-line no-sync
+// eslint-disable-next-line n/no-sync
 const DEFAULT_CLIENT_SECRET_HASH = cryptoService.hashPasswordSync(DEFAULT_CLIENT_SECRET);
 
 export function buildClientApplication({
@@ -34,6 +34,6 @@ function _getHashedSecret(clientSecret) {
   if (clientSecret === DEFAULT_CLIENT_SECRET) {
     return DEFAULT_CLIENT_SECRET_HASH;
   }
-  // eslint-disable-next-line no-sync
+  // eslint-disable-next-line n/no-sync
   return cryptoService.hashPasswordSync(clientSecret);
 }

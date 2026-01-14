@@ -11,7 +11,7 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
       it('should resolve to undefined', async function () {
         // given
         const password = 'my-real-password';
-        // eslint-disable-next-line no-sync
+        // eslint-disable-next-line n/no-sync
         const passwordHash = bcrypt.hashSync(password, 1);
 
         // when
@@ -46,7 +46,7 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
       it('should reject, but not a PasswordNotMatching error ', async function () {
         // given
         const password = undefined;
-        // eslint-disable-next-line no-sync
+        // eslint-disable-next-line n/no-sync
         const passwordHash = bcrypt.hashSync('my-real-password', 1);
 
         try {
