@@ -121,7 +121,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les deepfakes (hypertrucages) : c’est quoi ?',
-        link: '/modules/05b24fee/ia-deepfakes/passage',
+        link: '/modules/05b24fee/ia-deepfakes',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr-fr',
@@ -154,7 +154,7 @@ export const MAXI_COMBINED_COURSE = {
       },
       {
         title: 'Les deepfakes : c’est quoi ?',
-        link: '/modules/05b24fee/ia-deepfakes/passage',
+        link: '/modules/05b24fee/ia-deepfakes',
         type: 'modulix',
         duration: '0 years 0 mons 0 days 0 hours 10 mins 0.0 secs',
         locale: 'fr',
