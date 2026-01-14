@@ -48,7 +48,6 @@ import organizationInvitation from './models/organization-invitation';
 import organizationLearner from './models/organization-learner';
 import organizationMembership from './models/organization-membership';
 import organizationPlace from './models/organization-place';
-import organizationPlacesCapacity from './models/organization-places-capacity';
 import profile from './models/profile';
 import scorecard from './models/scorecard';
 import session from './models/session';
@@ -122,7 +121,6 @@ export default {
   organizationLearner,
   organizationMembership,
   organizationPlace,
-  organizationPlacesCapacity,
   profile,
   scorecard,
   session,

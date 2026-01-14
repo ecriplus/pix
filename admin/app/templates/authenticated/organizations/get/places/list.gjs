@@ -5,7 +5,6 @@ import Places from 'pix-admin/components/organizations/places';
   <Places
     @places={{@model.places}}
     @organizationId={{@model.organization.id}}
-    @placesCapacity={{@model.placesCapacity}}
     @placesStatistics={{@model.placesStatistics}}
     @refreshModel={{@controller.refresh}}
   />

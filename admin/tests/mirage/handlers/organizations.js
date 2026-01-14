@@ -4,24 +4,6 @@ function getOrganizationPlaces(schema) {
   return schema.organizationPlaces.all();
 }
 
-function getOrganizationPlacesCapacity() {
-  return {
-    data: {
-      id: '1_places_capacity',
-      type: 'organization-places-capacities',
-      attributes: {
-        categories: [
-          { count: 7777, category: 'FREE_RATE' },
-          { count: 0, category: 'PUBLIC_RATE' },
-          { count: 0, category: 'REDUCE_RATE' },
-          { count: 0, category: 'SPECIAL_REDUCE_RATE' },
-          { count: 0, category: 'FULL_RATE' },
-        ],
-      },
-    },
-  };
-}
-
 function getOrganizationPlacesStatistics() {
   return {
     data: {
@@ -108,6 +90,5 @@ export {
   findPaginatedOrganizationMemberships,
   getOrganizationInvitations,
   getOrganizationPlaces,
-  getOrganizationPlacesCapacity,
   getOrganizationPlacesStatistics,
 };
