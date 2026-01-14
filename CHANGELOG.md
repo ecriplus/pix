@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.304.0](https://github.com/1024pix/pix/compare/v5.303.0...v5.304.0) (2026-01-14)
+
+### :rocket: Amélioration
+
+- [#14722](https://github.com/1024pix/pix/pull/14722) Ajouter des ids de profils cibles dans le tableau du script de rattrapage (PIX-21091) 
+- [#14674](https://github.com/1024pix/pix/pull/14674) Create IAGenPrompt_IND_altconfig.json pour tester nouvelles configs et activité de transfert 
+- [#14682](https://github.com/1024pix/pix/pull/14682) modif-IAGenFonction_IND 
+
+### :bug: Correction
+
+- [#14719](https://github.com/1024pix/pix/pull/14719) Les vidéos courtes ne se lancent pas en preview 🔮 (PIX-20985) 
+
+### :building_construction: Tech
+
+- [#14709](https://github.com/1024pix/pix/pull/14709) Mettre à jour les seeds des contenus formatifs (PIX-21051). 
+- [#14705](https://github.com/1024pix/pix/pull/14705) Mise à jour du wording du bandeau d'information d'envoi automatique des résultats (PIX-20964) 
+- [#14704](https://github.com/1024pix/pix/pull/14704) Modifier le domaine de Pix Assets Manager dans les liens sur Pix Admin (PIX-21053). 
+
+### :arrow_up: Montée de version
+
+- [#14710](https://github.com/1024pix/pix/pull/14710) Update dependency @1024pix/pix-ui to ^56.1.0 (admin) 
+- [#14712](https://github.com/1024pix/pix/pull/14712) Update dependency @1024pix/pix-ui to ^56.1.0 (orga) 
+- [#14706](https://github.com/1024pix/pix/pull/14706) Update dependency @1024pix/pix-ui to v56 (mon-pix) 
+- [#14652](https://github.com/1024pix/pix/pull/14652) Update dependency ember-intl to v8 (mon-pix)
+
 # [5.303.0](https://github.com/1024pix/pix/compare/v5.302.0...v5.303.0) (2026-01-13)
 
 ### :rocket: Amélioration
