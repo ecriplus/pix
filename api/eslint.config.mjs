@@ -21,20 +21,13 @@ export default [
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },
   {
-    files: ['eslint.config.mjs'],
-    languageOptions: {},
-    rules: {
-      'n/no-unpublished-import': 'off',
-    },
-  },
-  {
     files: ['**/*.cjs'],
     languageOptions: {
       globals: { module: 'readonly', require: 'readonly' },
     },
   },
   {
-    files: ['**/*.js'],
+    files: ['**/*.{js,mjs}'],
     languageOptions: {
       parser: babelParser,
       parserOptions: {
