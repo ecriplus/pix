@@ -3,15 +3,6 @@ import ApplicationAdapter from './application';
 export default class OrganizationAdapter extends ApplicationAdapter {
   namespace = 'api/admin';
 
-  urlForQuery(query) {
-    if (query.targetProfileId) {
-      const { targetProfileId } = query;
-      delete query.targetProfileId;
-      return `${this.host}/${this.namespace}/target-profiles/${targetProfileId}/organizations`;
-    }
-    return super.urlForQuery(...arguments);
-  }
-
   findHasMany(store, snapshot, url, relationship) {
     url = this.urlPrefix(url, this.buildURL(snapshot.modelName, snapshot.id, null, 'findHasMany'));
 

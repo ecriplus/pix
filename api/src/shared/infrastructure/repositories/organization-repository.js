@@ -4,7 +4,6 @@ import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
-import { fetchPage } from '../utils/knex-utils.js';
 
 const ORGANIZATIONS_TABLE_NAME = 'organizations';
 
@@ -32,25 +31,6 @@ function _toDomain(rawOrganization) {
   organization.tags = rawOrganization.tags || [];
 
   return organization;
-}
-
-function _setSearchFiltersForQueryBuilder(qb, filter) {
-  const { id, name, type, externalId, hideArchived } = filter;
-  if (id) {
-    qb.where('organizations.id', id);
-  }
-  if (name) {
-    qb.whereILike('name', `%${name}%`);
-  }
-  if (type) {
-    qb.where('type', type);
-  }
-  if (externalId) {
-    qb.whereILike('externalId', `%${externalId}%`);
-  }
-  if (hideArchived) {
-    qb.whereNull('archivedAt');
-  }
 }
 
 const get = async function (id) {
@@ -96,18 +76,6 @@ const findActiveScoOrganizationsByExternalId = async function (externalId) {
   return organizationsDB.map((model) => _toDomain(model));
 };
 
-const findPaginatedFilteredByTargetProfile = async function ({ targetProfileId, filter, page }) {
-  const query = knex(ORGANIZATIONS_TABLE_NAME)
-    .select('organizations.*')
-    .innerJoin('target-profile-shares', 'organizations.id', 'target-profile-shares.organizationId')
-    .where({ 'target-profile-shares.targetProfileId': targetProfileId })
-    .modify(_setSearchFiltersForQueryBuilder, filter);
-
-  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
-  const organizations = results.map((model) => _toDomain(model));
-  return { models: organizations, pagination };
-};
-
 const getOrganizationsWithPlacesManagementFeatureEnabled = async function () {
   const knexConn = DomainTransaction.getConnection();
   const placesManagementFeature = await knexConn('features')
@@ -134,7 +102,6 @@ const getOrganizationsWithPlacesManagementFeatureEnabled = async function () {
 
 export {
   findActiveScoOrganizationsByExternalId,
-  findPaginatedFilteredByTargetProfile,
   get,
   getIdByCertificationCenterId,
   getOrganizationsWithPlacesManagementFeatureEnabled,

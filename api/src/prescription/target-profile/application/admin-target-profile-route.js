@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { filterType } from '../../shared/domain/types/identifiers-type.js';
 import { targetProfileController } from './admin-target-profile-controller.js';
 
@@ -366,47 +366,6 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
             '- Elle permet de dupliquer un profil cible',
-        ],
-      },
-    },
-    {
-      method: 'GET',
-      path: '/api/admin/target-profiles/{targetProfileId}/organizations',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            targetProfileId: identifiersType.targetProfileId,
-          }),
-          query: Joi.object({
-            filter: Joi.object({
-              id: optionalIdentifiersType.organizationId,
-              name: Joi.string().empty('').allow(null).optional(),
-              type: Joi.string().empty('').allow(null).optional(),
-              'external-id': Joi.string().empty('').allow(null).optional(),
-              hideArchived: Joi.boolean().optional(),
-            }).default({}),
-            page: {
-              number: Joi.number().integer().empty('').allow(null).optional(),
-              size: Joi.number().integer().empty('').allow(null).optional(),
-            },
-          }).options({ allowUnknown: true }),
-        },
-        handler: targetProfileController.findPaginatedFilteredTargetProfileOrganizations,
-        tags: ['api', 'admin', 'target-profiles', 'organizations'],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            '- Elle permet de récupérer les organisations auxquelles est rattaché le profil cible',
         ],
       },
     },

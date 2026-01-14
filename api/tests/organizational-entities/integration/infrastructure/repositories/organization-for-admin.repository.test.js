@@ -68,7 +68,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
     });
 
-    context('when there are lots of Organizations (> 10) in the database', function () {
+    context('when there are more Organizations  than pagination pageSize in the database', function () {
       beforeEach(function () {
         _.times(12, databaseBuilder.factory.buildOrganization);
         return databaseBuilder.commit();
@@ -367,6 +367,44 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // then
         expect(_.map(matchingOrganizations, 'name')).to.have.members(['Org A1', 'Org A2']);
+        expect(pagination).to.deep.equal(expectedPagination);
+      });
+    });
+
+    context('when there are organization matching target-profilte-id filter', function () {
+      let targetProfile;
+
+      beforeEach(function () {
+        targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const orgaA = databaseBuilder.factory.buildOrganization({ name: 'Org A1' });
+        const orgaB = databaseBuilder.factory.buildOrganization({ name: 'Org B1' });
+        databaseBuilder.factory.buildOrganization({ name: 'Org C1' });
+        databaseBuilder.factory.buildTargetProfileShare({
+          targetProfileId: targetProfile.id,
+          organizationId: orgaA.id,
+        });
+        databaseBuilder.factory.buildTargetProfileShare({
+          targetProfileId: targetProfile.id,
+          organizationId: orgaB.id,
+        });
+
+        return databaseBuilder.commit();
+      });
+
+      it('return only Organizations matching "targetProfileId" if given in filters', async function () {
+        // given
+        const filter = { targetProfileId: targetProfile.id };
+        const page = { number: 1, size: 10 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
+        // when
+        const { models: matchingOrganizations, pagination } =
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
+            filter,
+            page,
+          });
+
+        // then
+        expect(_.map(matchingOrganizations, 'name')).to.have.members(['Org A1', 'Org B1']);
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });

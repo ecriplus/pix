@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
-import * as organizationSerializer from '../../../organizational-entities/infrastructure/serializers/jsonapi/organization-serializer.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -139,19 +138,6 @@ const markTargetProfileAsSimplifiedAccess = async function (request, h) {
   return h.response(targetProfileSerializer.serialize(targetProfile));
 };
 
-const findPaginatedFilteredTargetProfileOrganizations = async function (request) {
-  const targetProfileId = request.params.targetProfileId;
-  const { filter, page } = request.query;
-
-  const { models: organizations, pagination } =
-    await prescriptionTargetProfileUsecases.findPaginatedFilteredOrganizationByTargetProfileId({
-      targetProfileId,
-      filter,
-      page,
-    });
-  return organizationSerializer.serialize(organizations, pagination);
-};
-
 const copyTargetProfile = withTransaction(async (request) => {
   const targetProfileIdToCopy = request.params.targetProfileId;
   const copiedTargetProfileId = await prescriptionTargetProfileUsecases.copyTargetProfile({
@@ -223,7 +209,6 @@ const targetProfileController = {
   copyTargetProfile,
   createTargetProfile,
   detachOrganizations,
-  findPaginatedFilteredTargetProfileOrganizations,
   findPaginatedFilteredTargetProfileSummariesForAdmin,
   findTargetProfileSummariesForAdmin,
   getContentAsJsonFile,

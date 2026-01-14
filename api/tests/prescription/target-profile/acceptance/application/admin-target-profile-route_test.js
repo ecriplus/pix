@@ -669,50 +669,6 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
     });
   });
 
-  describe('GET /api/admin/target-profiles/{id}/organizations', function () {
-    let user;
-    let targetProfileId;
-    let organizationId;
-
-    beforeEach(async function () {
-      const learningContent = [
-        {
-          id: 'recArea0',
-          competences: [
-            {
-              id: 'recNv8qhaY887jQb2',
-              index: '1.3',
-              name: 'Traiter des données',
-            },
-          ],
-        },
-      ];
-      const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
-      targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-      user = databaseBuilder.factory.buildUser.withRole();
-      organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
-      await databaseBuilder.commit();
-    });
-
-    it('should return 200', async function () {
-      const options = {
-        method: 'GET',
-        url: `/api/admin/target-profiles/${targetProfileId}/organizations`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(response.result.data).to.be.instanceOf(Array);
-      expect(response.result.data[0].id).to.equal(organizationId.toString());
-    });
-  });
-
   describe('POST /api/admin/target-profiles/{id}/copy', function () {
     let user;
 

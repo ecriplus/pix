@@ -378,9 +378,12 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
 }
 
 function _setSearchFiltersForQueryBuilder(qb, filter) {
-  const { id, name, type, externalId, hideArchived, administrationTeamId } = filter;
+  const { id, name, type, externalId, hideArchived, administrationTeamId, targetProfileId } = filter;
   if (id) {
     qb.where('organizations.id', id);
+  }
+  if (targetProfileId) {
+    qb.join('target-profile-shares', 'organizationId', 'organizations.id').where({ targetProfileId });
   }
   if (name) {
     qb.where(

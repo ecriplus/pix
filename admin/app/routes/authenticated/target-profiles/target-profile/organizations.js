@@ -24,7 +24,6 @@ export default class TargetProfileOrganizationsRoute extends Route {
     let organizations, administrationTeams;
     const targetProfile = this.modelFor('authenticated.target-profiles.target-profile');
     const queryParams = {
-      targetProfileId: targetProfile.id,
       page: {
         size: params.pageSize,
         number: params.pageNumber,
@@ -36,6 +35,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
         externalId: params.externalId,
         hideArchived: params.hideArchived,
         administrationTeamId: params.administrationTeamId,
+        targetProfileId: targetProfile.id,
       },
     };
     try {
