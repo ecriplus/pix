@@ -57,35 +57,35 @@
                     "id": "1",
                     "content": "<p>Il n’a presque plus de batterie.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Il a un virus informatique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Il a un logiciel malveillant.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Il a eu une mise à jour.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   }
                 ],
@@ -125,7 +125,7 @@
               "element": {
                 "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
                 "type": "text",
-                "content": "<p>Les <strong>trois ordinateurs</strong> ci-dessous ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leur fonctionnement puis répondez à la question.</p>"
+                "content": "<p><strong>Trois ordinateurs</strong> ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leurs écrans puis répondez à la question.</p>"
               }
             },
             {
@@ -186,27 +186,27 @@
               "element": {
                 "id": "479ea9aa-0b30-4c3b-8262-31547f1a089a",
                 "type": "qcu-discovery",
-                "instruction": "<p>Selon vous, un logiciel malveillant, ça se voit toujours ?</p>",
+                "instruction": "<p>Selon ce que vous avez pu observer, un logiciel malveillant, est-ce que ça se voit toujours ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, pas toujours. Certains logiciels malveillants peuvent causer des&nbsp;<strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Eh non, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer <strong>des&nbsp;dysfonctionnements </strong>qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   }
                 ],
@@ -311,7 +311,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>Une publicit</strong><strong>é </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante.</li><li><strong>Un fichier</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.).</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>Une publicit</strong><strong>é </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante. 🌐</li><li><strong>Un fichier</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.). ✉️</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
                 }
               }
             }
@@ -327,7 +327,7 @@
               "element": {
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
-                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des </strong><strong>gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et officiels</strong> pour télécharger un logiciel ou regarder un film.&nbsp;</li><li><strong>Ne pas cliquer sur des fichiers </strong>ou <strong>des pièces jointes</strong> dans des <strong>messages inconnus</strong>.</li><li><strong>Brancher uniquement des appareils de confiance</strong>.</li><li><strong>Charger son appareil sur une prise électrique.</strong></li></ul>"
+                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des </strong><strong>gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et officiels</strong> pour télécharger un logiciel ou regarder un film. 🌐</li><li><strong>Ne pas cliquer sur des fichiers </strong>ou <strong>des pièces jointes</strong> dans des <strong>messages inconnus</strong>. ✉️</li><li><strong>Brancher uniquement des appareils de confiance</strong>.</li><li><strong>Charger son appareil sur une prise électrique. 🔌</strong></li></ul>"
               }
             }
           ]
@@ -541,7 +541,7 @@
                           "id": "1",
                           "content": "<p>Brancher sur un ordinateur une clé USB trouvée dans un parking pour voir ce qu’elle contient.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une clé USB inconnue.</p>"
                           }
                         },
@@ -593,7 +593,7 @@
                           "id": "3",
                           "content": "<p>Regarder un film sur un site de streaming gratuit  illégal.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une page web illégale.</p>"
                           }
                         }
@@ -629,7 +629,7 @@
                           "id": "3",
                           "content": "<p>Télécharger un jeu gratuit depuis un forum de discussion.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans un lien de téléchargement&nbsp;sur un site non officiel, ou dans un fichier à télécharger dans un message trompeur.</p>"
                           }
                         }
