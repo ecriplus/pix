@@ -48,6 +48,8 @@ describe('Integration | Application | campaign-api', function () {
   describe('#getCampaignParticipations', function () {
     it('should return an array of campaign participations', async function () {
       // given
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const badge = databaseBuilder.factory.buildBadge({ targetProfileId });
       const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
       const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
       const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
@@ -63,7 +65,7 @@ describe('Integration | Application | campaign-api', function () {
         firstName: 'firstname 1',
         lastName: 'lastname 1',
       });
-      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
+      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT, targetProfileId });
       databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
       const participation1 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
@@ -81,6 +83,11 @@ describe('Integration | Application | campaign-api', function () {
         status: KnowledgeElement.StatusType.VALIDATED,
         skillId,
         userId: participation1.userId,
+      });
+      databaseBuilder.factory.buildBadgeAcquisition({
+        userId: organizationLearner1.userId,
+        campaignParticipationId: participation1.id,
+        badgeId: badge.id,
       });
 
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
@@ -126,7 +133,7 @@ describe('Integration | Application | campaign-api', function () {
       // then
       expect(result.models[0]).instanceOf(CampaignParticipation);
       expect(result.models[1]).instanceOf(CampaignParticipation);
-      expect(result.models).to.deep.equal([
+      expect(result.models).to.deep.members([
         {
           campaignParticipationId: participation2.id,
           participantFirstName: organizationLearner2.firstName,
@@ -142,7 +149,16 @@ describe('Integration | Application | campaign-api', function () {
             numberOfStages: 0,
             reachedStage: 0,
           },
-          badges: [],
+          badges: [
+            {
+              altMessage: badge.altMessage,
+              id: badge.id,
+              imageUrl: badge.imageUrl,
+              key: badge.key,
+              title: badge.title,
+              isAcquired: false,
+            },
+          ],
         },
         {
           campaignParticipationId: participation1.id,
@@ -168,7 +184,16 @@ describe('Integration | Application | campaign-api', function () {
             numberOfStages: 0,
             reachedStage: 0,
           },
-          badges: [],
+          badges: [
+            {
+              altMessage: badge.altMessage,
+              id: badge.id,
+              imageUrl: badge.imageUrl,
+              key: badge.key,
+              title: badge.title,
+              isAcquired: true,
+            },
+          ],
         },
       ]);
       expect(result.meta).to.deep.equal({

@@ -18,10 +18,9 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
 
   describe('GET /api/campaigns/{campaignId}/participations', function () {
     context('when campaign type is ASSESSMENT', function () {
-      it('returns the list of all participations of campaign with tubes, stages and masteryRate with an HTTP status code 200', async function () {
+      it('returns the list of all participations of campaign with tubes, stages, masteryRate and badges with an HTTP status code 200', async function () {
         // given
         const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
-        databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
 
         const tag = databaseBuilder.factory.buildTag();
         databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
@@ -32,6 +31,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
         });
 
+        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+        const badge = databaseBuilder.factory.buildBadge({ targetProfileId });
         const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
         const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
         const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
@@ -51,6 +52,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         const campaign = databaseBuilder.factory.buildCampaign({
           type: CampaignTypes.ASSESSMENT,
           organizationId: orgaInJurisdiction.id,
+          targetProfileId,
         });
         databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
         const participation1 = databaseBuilder.factory.buildCampaignParticipation({
@@ -84,6 +86,11 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           organizationLearnerId: organizationLearner2.id,
           userId: organizationLearner2.userId,
           masteryRate: null,
+        });
+        databaseBuilder.factory.buildBadgeAcquisition({
+          userId: organizationLearner2.userId,
+          campaignParticipationId: participation2.id,
+          badgeId: badge.id,
         });
 
         await databaseBuilder.commit();
@@ -125,7 +132,16 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               numberOfStages: 0,
               reachedStage: 0,
             },
-            badges: [],
+            badges: [
+              {
+                altMessage: badge.altMessage,
+                id: badge.id,
+                imageUrl: badge.imageUrl,
+                key: badge.key,
+                title: badge.title,
+                isAcquired: false,
+              },
+            ],
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation2,
@@ -137,7 +153,16 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               reachedStage: 0,
             },
             tubes: undefined,
-            badges: [],
+            badges: [
+              {
+                altMessage: badge.altMessage,
+                id: badge.id,
+                imageUrl: badge.imageUrl,
+                key: badge.key,
+                title: badge.title,
+                isAcquired: true,
+              },
+            ],
           }),
         ]);
         expect(response.result.page).to.deep.equal({
