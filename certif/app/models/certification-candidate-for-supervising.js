@@ -33,7 +33,9 @@ export default class CertificationCandidateForSupervising extends Model {
   }
 
   get hasCompleted() {
-    return [assessmentStates.COMPLETED, assessmentStates.ENDED_BY_INVIGILATOR].includes(this.assessmentStatus);
+    return [assessmentStates.COMPLETED, assessmentStates.ENDED_BY_INVIGILATOR, 'endedBySupervisor'].includes(
+      this.assessmentStatus,
+    );
   }
 
   get hasOngoingChallengeLiveAlert() {

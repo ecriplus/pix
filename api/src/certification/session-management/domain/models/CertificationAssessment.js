@@ -28,6 +28,7 @@ const certificationAssessmentSchema = Joi.object({
       Assessment.states.STARTED,
       Assessment.states.ENDED_BY_INVIGILATOR,
       Assessment.states.ENDED_DUE_TO_FINALIZATION,
+      'endedBySupervisor',
     )
     .required(),
   version: Joi.number()

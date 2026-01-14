@@ -80,6 +80,10 @@ const assessmentStateMap = {
     label: 'pages.certifications.certification.details.v3.assessment-state.ended-by-invigilator',
     color: secondaryColor,
   },
+  ['endedBySupervisor']: {
+    label: 'pages.certifications.certification.details.v3.assessment-state.ended-by-invigilator',
+    color: secondaryColor,
+  },
   [assessmentStates.ENDED_DUE_TO_FINALIZATION]: {
     label: 'pages.certifications.certification.details.v3.assessment-state.ended-due-to-finalization',
     color: tertiaryColor,

@@ -139,7 +139,9 @@ function _toDomain(juryCertificationSummaryDTO) {
   return new JuryCertificationSummary({
     ...juryCertificationSummaryDTO,
     status: juryCertificationSummaryDTO.assessmentResultStatus,
-    isEndedByInvigilator: juryCertificationSummaryDTO.assessmentState === Assessment.states.ENDED_BY_INVIGILATOR,
+    isEndedByInvigilator:
+      juryCertificationSummaryDTO.assessmentState === Assessment.states.ENDED_BY_INVIGILATOR ||
+      juryCertificationSummaryDTO.assessmentState === 'endedBySupervisor',
     certificationIssueReports,
   });
 }
