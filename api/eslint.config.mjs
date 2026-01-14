@@ -1,7 +1,7 @@
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
-import chai from 'eslint-plugin-chai-expect';
+import chaiExpect from 'eslint-plugin-chai-expect';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import _import from 'eslint-plugin-import-x';
 import knex from 'eslint-plugin-knex';
@@ -16,7 +16,7 @@ export default [
   ...pixRecommendedConfig,
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
-  { plugins: { 'chai-expect': fixupPluginRules(chai) } },
+  chaiExpect.configs['recommended-flat'],
   { plugins: { import: _import } },
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },

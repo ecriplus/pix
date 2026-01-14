@@ -189,7 +189,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(attributes['last-name']).to.equal(lastName);
       expect(attributes.email).to.equal(email);
       expect(attributes.cgu).to.be.true;
-      expect(attributes.locale);
+      expect(attributes.locale).to.equal('fr');
       expect(attributes['is-anonymous']).to.be.false;
     });
 
