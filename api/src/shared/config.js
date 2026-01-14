@@ -302,6 +302,7 @@ const configuration = (function () {
     infra: {
       appName: process.env.APP,
       containerName: process.env.CONTAINER,
+      hostname: process.env.HOSTNAME,
       concurrencyForHeavyOperations: _getNumber(process.env.INFRA_CONCURRENCY_HEAVY_OPERATIONS, 2),
       chunkSizeForCampaignResultProcessing: _getNumber(process.env.INFRA_CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING, 10),
       chunkSizeForOrganizationLearnerDataProcessing: _getNumber(

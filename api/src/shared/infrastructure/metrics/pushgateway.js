@@ -20,7 +20,7 @@ const pushgateway = new Pushgateway(config.metrics.prometheus.pushgateway.url, {
 
 async function pushMetrics() {
   logger.debug('pushing metrics');
-  await pushgateway.pushAdd({ jobName: config.infra.appName ?? 'pix-api-localhost' });
+  await pushgateway.pushAdd({ jobName: config.infra.hostname ?? 'pix-api-localhost' });
 }
 
 let pushMetricsInterval;
