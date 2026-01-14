@@ -3,7 +3,6 @@ import { fixupPluginRules } from '@eslint/compat';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import chaiExpect from 'eslint-plugin-chai-expect';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
-import _import from 'eslint-plugin-import-x';
 import knex from 'eslint-plugin-knex';
 import mocha from 'eslint-plugin-mocha';
 import nRecommendedConfig from 'eslint-plugin-n';
@@ -16,7 +15,6 @@ export default defineConfig([
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
   chaiExpect.configs['recommended-flat'],
-  { plugins: { import: _import } },
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },
   // Overridden rules for "js" files
