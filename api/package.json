@@ -163,7 +163,7 @@
     "lint:fix": "run-p --continue-on-error lint:*:fix",
     "lint:dependencies": "knip -n",
     "lint:file-and-directory-names": "ls-lint",
-    "lint:database": "NODE_ENV=test npm run db:prepare && schemalint --config tests/acceptance/database/configuration.cjs",
+    "lint:database": "schemalint --config tests/integration/tooling/db-schemalint.cjs",
     "lint:js": "eslint . --cache --cache-strategy content",
     "lint:js:fix": "npm run lint:js -- --fix",
     "lint:js:uncached": "eslint .",
