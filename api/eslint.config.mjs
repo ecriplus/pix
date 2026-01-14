@@ -10,8 +10,6 @@ import nRecommendedConfig from 'eslint-plugin-n';
 import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
 import unicorn from 'eslint-plugin-unicorn';
 
-const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
-
 export default defineConfig([
   // Loads plugins with global rules
   ...pixRecommendedConfig,
@@ -74,7 +72,7 @@ export default defineConfig([
   },
   // Overridden rules for "translations" files
   {
-    files: nonPhraseGeneratedFiles,
+    files: ['translations/*.json'],
     plugins: { 'i18n-json': i18nJsonPlugin },
     processor: {
       meta: { name: '.json' },

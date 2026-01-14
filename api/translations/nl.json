@@ -11,111 +11,6 @@
       "signing": "- Het Pix-team"
     }
   },
-  "certification": {
-    "certificate": {
-      "file-name": "certificering-pix-{deliveredAt}.pdf",
-      "file-metadata": {
-        "title": "Pix certificering"
-      },
-      "v2": {
-        "competences-content": {
-          "level": "Niveau",
-          "title": "Gecertificeerde vaardigheden (niveaus op {maxReachableLevelOnCertificationDate})"
-        },
-        "complementary-certification-title": "Andere behaalde certificering",
-        "description": "Dit document verklaart dat Pix",
-        "main-content": {
-          "from-birthplace": " naar ",
-          "birth": "Geboortedatum en -plaats : ",
-          "certification-center": "Certificeringscentrum : ",
-          "delivered-at": "Uitgegeven op : ",
-          "first-and-last-names": "Voornaam en achternaam : ",
-          "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
-        },
-        "not-a-certificate": "Dit document is geen certificaat",
-        "qr-code-content": {
-          "link": {
-            "description": "Gebruik deze code op de website :",
-            "label": "app.pix.org/verification-certificat?lang=nl",
-            "url": "https://app.pix.org/verification-certificat?lang=nl"
-          },
-          "title": "Controleer de echtheid van de certificering",
-          "verification-code": "Verificatiecode"
-        },
-        "score-content": {
-          "absolute-max-level-indication": "Als de 8 niveaus van de Pix-opslagplaats beschikbaar zijn, zal dit maximumaantal 1024 pixels zijn.",
-          "max-reachable-level-indication": "* Op de datum waarop deze certificering werd behaald, was het maximaal haalbare aantal pix { maxReachableScore }, wat overeenkomt met het niveau { maxReachableLevelOnCertificationDate }."
-        },
-        "signature": "Benjamin Marteau, directeur van GIP Pix",
-        "title": "Getuigschrift"
-      },
-      "v3": {
-        "main-content": {
-          "birth": "né(e) le : {birthdate} à {birthplace}",
-          "certification-center": "Centre de certification : {certificationCenter}",
-          "delivered-at": {
-            "date": "le {deliveredAt}",
-            "label": "délivrée à"
-          },
-          "signature": "Benjamin Marteau, directeur du GIP Pix",
-          "title": "Certification Pix"
-        },
-        "qr-code-content": {
-          "explanation": "Pour vérifier l’authenticité de cette attestation, utilisez ce code sur ",
-          "link": {
-            "label": "app.pix.fr/verification-certificat",
-            "url": "https://app.pix.fr/verification-certificat"
-          }
-        },
-        "score-content": {
-          "global-level": "Niveau global",
-          "level-explanation": "Votre niveau signifie que :"
-        },
-        "complementary-content": {
-          "title": "Certification complémentaire obtenue :"
-        }
-      }
-    },
-    "global": {
-      "meshlevel": {
-        "LEVEL_ADVANCED_5": {
-          "description": "You are able to use specialist tools to search for reliable information, manage social networks and edit images and videos. You know how to produce data analyses and appropriate graphic representations. You know how to set up a digital environment (installation and configuration). You are familiar with the issues surrounding tracking and data collection. You understand the environmental and societal impacts of digital usage and know how to adapt your practices",
-          "label": "Advanced 1",
-          "summary": "You have advanced digital skills and sound knowledge enabling you to deal with new situations on your own. You can help others."
-        },
-        "LEVEL_ADVANCED_6": {
-          "description": "You have full control over your digital environment so that you can create and distribute content, communicate and collaborate. You know how to manage your online presence and choose the right settings for your broadcasts. You can programme and automate certain tasks (data processing, backup, updating, etc.). You can help others to secure their practices, and in particular limit their environmental and health impact.",
-          "label": "Advanced 2",
-          "summary": "You have advanced digital skills and in-depth knowledge that you can put to good use, for yourself or others, in a creative and secure way. You can help other people develop their skills."
-        },
-        "LEVEL_BEGINNER_1": {
-          "description": "You can find your way around the interfaces of the digital tools you've already used (phone, tablet, computer). With occasional support, you can visit a website, read and reply to messages (text messages, emails, etc.), use simple applications on your phone or tablet and access online services.",
-          "label": "Beginner 1",
-          "summary": "You have simple digital practices and often need help"
-        },
-        "LEVEL_BEGINNER_2": {
-          "description": "In your usual digital environment, you know how to search for information on the web, download a file and find it again, consult and send electronic messages and connect your devices to the internet (computers, tablets, phones). You can enter text with simple formatting and save it. You know that some information published online is false and that it is important to protect your accounts with secure passwords.",
-          "label": "Beginner 2",
-          "summary": "You have simple digital practices, with help when the going gets tough."
-        },
-        "LEVEL_EXPERT_7": {
-          "description": "You will be able to analyse a need, consult documentation, even technical documentation, and evaluate digital solutions in order to implement the most optimal solution, or even develop tools yourself. You will understand the economic, social and ethical issues associated with digital technologies and be able to think critically about your digital practices. You will be able to train in new techniques and have a good grasp of the most recent technological advances, such as those made possible by artificial intelligence.",
-          "label": "Expert 1",
-          "summary": "You have optimised digital practices and expert knowledge enabling you to tackle complex and new situations methodically."
-        },
-        "LEVEL_INDEPENDENT_3": {
-          "description": "You know how to surf the Web to carry out in-depth research using relevant information. You can take part in collaborative activities (e-mail, shared diary, video meetings, shared documents). You know how to use the most common functions of standard software (word processing and spreadsheets). You are aware of the risks associated with your digital practices and the need to secure them, as well as the environmental impact of your digital uses. You know how to solve common problems (password, connection).",
-          "label": "Independent 1",
-          "summary": "You will be able to carry out simple digital tasks independently in most everyday situations."
-        },
-        "LEVEL_INDEPENDENT_4": {
-          "description": "You know how to set up an information search strategy on the web and via social networks and check the reliability of the information you find. You can use the main functions of collaborative tools and create documents using different software (word processing, spreadsheets, slideshows, images). You can implement secure practices in terms of personal data and device protection. You can adapt your digital practices to limit their impact on the environment and on your health.",
-          "label": "Independent 2",
-          "summary": "You are at ease in all common digital situations and have a good command of the vocabulary associated with digital technologies."
-        }
-      }
-    }
-  },
   "attendance-sheet": {
     "certification-information": {
       "date": "Datum :",
@@ -259,6 +154,111 @@
     "yes": "Ja",
     "yes-or-empty": "(\"ja\" of blanco laten)"
   },
+  "certification": {
+    "certificate": {
+      "file-metadata": {
+        "title": "Pix certificering"
+      },
+      "file-name": "certificering-pix-{deliveredAt}.pdf",
+      "v2": {
+        "competences-content": {
+          "level": "Niveau",
+          "title": "Gecertificeerde vaardigheden (niveaus op {maxReachableLevelOnCertificationDate})"
+        },
+        "complementary-certification-title": "Andere behaalde certificering",
+        "description": "Dit document verklaart dat Pix",
+        "main-content": {
+          "birth": "Geboortedatum en -plaats : ",
+          "certification-center": "Certificeringscentrum : ",
+          "delivered-at": "Uitgegeven op : ",
+          "first-and-last-names": "Voornaam en achternaam : ",
+          "from-birthplace": " naar ",
+          "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
+        },
+        "not-a-certificate": "Dit document is geen certificaat",
+        "qr-code-content": {
+          "link": {
+            "description": "Gebruik deze code op de website :",
+            "label": "app.pix.org/verification-certificat?lang=nl",
+            "url": "https://app.pix.org/verification-certificat?lang=nl"
+          },
+          "title": "Controleer de echtheid van de certificering",
+          "verification-code": "Verificatiecode"
+        },
+        "score-content": {
+          "absolute-max-level-indication": "Als de 8 niveaus van de Pix-opslagplaats beschikbaar zijn, zal dit maximumaantal 1024 pixels zijn.",
+          "max-reachable-level-indication": "* Op de datum waarop deze certificering werd behaald, was het maximaal haalbare aantal pix { maxReachableScore }, wat overeenkomt met het niveau { maxReachableLevelOnCertificationDate }."
+        },
+        "signature": "Benjamin Marteau, directeur van GIP Pix",
+        "title": "Getuigschrift"
+      },
+      "v3": {
+        "complementary-content": {
+          "title": "Certification complémentaire obtenue :"
+        },
+        "main-content": {
+          "birth": "né(e) le : {birthdate} à {birthplace}",
+          "certification-center": "Centre de certification : {certificationCenter}",
+          "delivered-at": {
+            "date": "le {deliveredAt}",
+            "label": "délivrée à"
+          },
+          "signature": "Benjamin Marteau, directeur du GIP Pix",
+          "title": "Certification Pix"
+        },
+        "qr-code-content": {
+          "explanation": "Pour vérifier l’authenticité de cette attestation, utilisez ce code sur ",
+          "link": {
+            "label": "app.pix.fr/verification-certificat",
+            "url": "https://app.pix.fr/verification-certificat"
+          }
+        },
+        "score-content": {
+          "global-level": "Niveau global",
+          "level-explanation": "Votre niveau signifie que :"
+        }
+      }
+    },
+    "global": {
+      "meshlevel": {
+        "LEVEL_ADVANCED_5": {
+          "description": "You are able to use specialist tools to search for reliable information, manage social networks and edit images and videos. You know how to produce data analyses and appropriate graphic representations. You know how to set up a digital environment (installation and configuration). You are familiar with the issues surrounding tracking and data collection. You understand the environmental and societal impacts of digital usage and know how to adapt your practices",
+          "label": "Advanced 1",
+          "summary": "You have advanced digital skills and sound knowledge enabling you to deal with new situations on your own. You can help others."
+        },
+        "LEVEL_ADVANCED_6": {
+          "description": "You have full control over your digital environment so that you can create and distribute content, communicate and collaborate. You know how to manage your online presence and choose the right settings for your broadcasts. You can programme and automate certain tasks (data processing, backup, updating, etc.). You can help others to secure their practices, and in particular limit their environmental and health impact.",
+          "label": "Advanced 2",
+          "summary": "You have advanced digital skills and in-depth knowledge that you can put to good use, for yourself or others, in a creative and secure way. You can help other people develop their skills."
+        },
+        "LEVEL_BEGINNER_1": {
+          "description": "You can find your way around the interfaces of the digital tools you've already used (phone, tablet, computer). With occasional support, you can visit a website, read and reply to messages (text messages, emails, etc.), use simple applications on your phone or tablet and access online services.",
+          "label": "Beginner 1",
+          "summary": "You have simple digital practices and often need help"
+        },
+        "LEVEL_BEGINNER_2": {
+          "description": "In your usual digital environment, you know how to search for information on the web, download a file and find it again, consult and send electronic messages and connect your devices to the internet (computers, tablets, phones). You can enter text with simple formatting and save it. You know that some information published online is false and that it is important to protect your accounts with secure passwords.",
+          "label": "Beginner 2",
+          "summary": "You have simple digital practices, with help when the going gets tough."
+        },
+        "LEVEL_EXPERT_7": {
+          "description": "You will be able to analyse a need, consult documentation, even technical documentation, and evaluate digital solutions in order to implement the most optimal solution, or even develop tools yourself. You will understand the economic, social and ethical issues associated with digital technologies and be able to think critically about your digital practices. You will be able to train in new techniques and have a good grasp of the most recent technological advances, such as those made possible by artificial intelligence.",
+          "label": "Expert 1",
+          "summary": "You have optimised digital practices and expert knowledge enabling you to tackle complex and new situations methodically."
+        },
+        "LEVEL_INDEPENDENT_3": {
+          "description": "You know how to surf the Web to carry out in-depth research using relevant information. You can take part in collaborative activities (e-mail, shared diary, video meetings, shared documents). You know how to use the most common functions of standard software (word processing and spreadsheets). You are aware of the risks associated with your digital practices and the need to secure them, as well as the environmental impact of your digital uses. You know how to solve common problems (password, connection).",
+          "label": "Independent 1",
+          "summary": "You will be able to carry out simple digital tasks independently in most everyday situations."
+        },
+        "LEVEL_INDEPENDENT_4": {
+          "description": "You know how to set up an information search strategy on the web and via social networks and check the reliability of the information you find. You can use the main functions of collaborative tools and create documents using different software (word processing, spreadsheets, slideshows, images). You can implement secure practices in terms of personal data and device protection. You can adapt your digital practices to limit their impact on the environment and on your health.",
+          "label": "Independent 2",
+          "summary": "You are at ease in all common digital situations and have a good command of the vocabulary associated with digital technologies."
+        }
+      }
+    }
+  },
   "certification-center-invitation-email": {
     "params": {
       "acceptInvitation": "Uitnodiging accepteren",
@@ -336,7 +336,6 @@
   "csv-import-values": {
     "sup-organization-learner": {
       "diplomas": {
-        "other": "Andere",
         "bts": "BTS onder staatscontrole",
         "classe-preparatoire": "Door de staat gecontroleerde voorbereidende klas",
         "dcg ": "Door de staat gecontroleerde DCG",
@@ -352,12 +351,13 @@
         "license-grade": "Door de staat gecontroleerde graad die de graad van licentie verleent",
         "master": "Door de staat gecontroleerd nationaal masterdiploma",
         "master-grade": "Door de staat gecontroleerde master",
+        "other": "Andere",
         "vise": "Staatsdiploma"
       },
       "study-schemes": {
-        "other": "Andere",
         "continuous-training": "Voortgezette opleiding",
         "initial-training": "Initiële opleiding exclusief stages",
+        "other": "Andere",
         "training": "Leren"
       },
       "unknown": "Niet erkend"
@@ -437,13 +437,13 @@
         "candidate": "De Pix-certificeringsexamenvoorwaarden zijn niet nageleefd. Je certificeringsexamen is gerapporteerd wegens fraude en daardoor ongeldig verklaard.",
         "organization": "Er is fraude ontdekt: na analyse hebben we besloten om dit certificeringsexamen af te wijzen."
       },
-      "REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS": {
-        "candidate": "Je hebt meer dan 50% van de vragen fout beantwoord, waardoor je hele certificering ongeldig wordt en je een score van 0 pix krijgt.",
-        "organization": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg."
-      },
       "LOWER_LEVEL_COMPLEMENTARY_CERTIFICATION_ACQUIRED": {
         "candidate": "Gefeliciteerd, met je score heb je je aanvullende certificering goedgekeurd! Het behaalde niveau is het niveau dat lager is dan waarvoor je in aanmerking kwam.",
         "organization": "De score van de kandidaat was niet voldoende om zijn aanvullende certificering te valideren op het niveau waarvoor hij in aanmerking kwam. Toch heeft hij het direct lagere niveau van deze aanvullende certificering gevalideerd. Het is dus gecertificeerd."
+      },
+      "REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS": {
+        "candidate": "Je hebt meer dan 50% van de vragen fout beantwoord, waardoor je hele certificering ongeldig wordt en je een score van 0 pix krijgt.",
+        "organization": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg."
       },
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
         "candidate": "Het aantal beantwoorde vragen tijdens je certificeringstoets is onvoldoende en staat ons niet toe om je een Pix-certificering te geven.",
