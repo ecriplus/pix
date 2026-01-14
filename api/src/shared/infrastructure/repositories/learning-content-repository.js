@@ -3,25 +3,24 @@ import Dataloader from 'dataloader';
 import { knex } from '../../../../db/knex-database-connection.js';
 import { config } from '../../config.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
-import { Counter } from '../metrics/counter.js';
-import { Histogram } from '../metrics/histogram.js';
+import { createCounter, createHistogram } from '../metrics/metrics.js';
 import { child, SCOPES } from '../utils/logger.js';
 
 const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 const metrics = {
-  read: new Counter({
+  read: createCounter({
     name: 'lc_read',
     help: 'Total count of reads from learning content',
     labelNames: ['type', 'table'],
   }),
-  loadCacheMiss: new Histogram({
+  loadCacheMiss: createHistogram({
     name: 'lc_loadcachemiss',
     help: 'Histogram of load cache misses when reading from learning content',
     labelNames: ['table'],
     buckets: config.metrics.prometheus.buckets.lc_loadcachemiss,
   }),
-  findCacheMiss: new Histogram({
+  findCacheMiss: createHistogram({
     name: 'lc_findcachemiss',
     help: 'Histogram of find cache misses when reading from learning content',
     labelNames: ['table'],
