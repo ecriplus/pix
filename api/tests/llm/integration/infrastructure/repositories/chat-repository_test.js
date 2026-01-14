@@ -6,7 +6,7 @@ import { get, save } from '../../../../../src/llm/infrastructure/repositories/ch
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
-  describe('save', function () {
+  describe('#save', function () {
     let clock, now;
 
     beforeEach(function () {
@@ -201,6 +201,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           emitter: 'user',
           content: thirdMessage.content,
           wasModerated: null,
+          requestId: null,
         });
       });
     });
