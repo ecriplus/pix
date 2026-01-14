@@ -25,6 +25,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '123' }]),
         createdAt: new Date('2024-01-25'),
         updatedAt: new Date('2024-01-26'),
+        organizationIds: [],
       };
       // when
       const blueprint = new CombinedCourseBlueprint(values);
@@ -235,6 +236,25 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
       expect(combinedCourse.illustration).to.equal(illustration);
       expect(combinedCourse.code).to.equal(code);
       expect(combinedCourse.organizationId).to.equal(organizationId);
+    });
+  });
+
+  describe('#detachOrganization', function () {
+    it('should retrieve organization id from model instance', async function () {
+      //given
+      const combinedCourseBlueprint = new CombinedCourseBlueprint({
+        name: 'Blueprint1',
+        content: [],
+        description: '',
+        illustration: '',
+        organizationIds: [1],
+      });
+
+      //when
+      combinedCourseBlueprint.detachOrganization({ organizationId: 1 });
+
+      //then
+      expect(combinedCourseBlueprint.organizationIds).empty;
     });
   });
 });

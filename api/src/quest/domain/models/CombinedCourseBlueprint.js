@@ -6,7 +6,17 @@ import { CRITERION_COMPARISONS, Quest, REQUIREMENT_COMPARISONS, REQUIREMENT_TYPE
 import { buildRequirement } from './Requirement.js';
 
 export class CombinedCourseBlueprint {
-  constructor({ id, name, internalName, description, illustration, content, createdAt, updatedAt }) {
+  constructor({
+    id,
+    name,
+    internalName,
+    description,
+    illustration,
+    content,
+    createdAt,
+    updatedAt,
+    organizationIds = [],
+  }) {
     this.id = id;
     this.name = name;
     this.internalName = internalName;
@@ -15,6 +25,7 @@ export class CombinedCourseBlueprint {
     this.content = content;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.organizationIds = organizationIds;
   }
 
   get targetProfileIds() {
@@ -99,6 +110,9 @@ export class CombinedCourseBlueprint {
         : { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId };
     });
     return Joi.attempt(data, contentSchema);
+  }
+  detachOrganization({ organizationId }) {
+    this.organizationIds = this.organizationIds.filter((id) => id !== organizationId);
   }
 }
 
