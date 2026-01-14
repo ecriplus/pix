@@ -9,6 +9,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import ENV from 'pix-admin/config/environment';
 
 import Card from '../card';
 import Criteria from './badge-form/criteria';
@@ -95,6 +96,10 @@ export default class BadgeForm extends Component {
     });
   }
 
+  get badgeListUrl() {
+    return ENV.APP.PIX_ASSETS_MANAGER_URL + '/list/badges';
+  }
+
   <template>
     <form class="admin-form admin-form--badge-form" {{on "submit" this.submitBadgeCreation}}>
       <h2 class="badge-form__title">Création d'un badge</h2>
@@ -114,7 +119,7 @@ export default class BadgeForm extends Component {
             <p class="badge-form__information">
               <a
                 class="badge-form__information--link"
-                href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/badges"
+                href={{this.badgeListUrl}}
                 target="_blank"
                 rel="noopener noreferrer"
               >

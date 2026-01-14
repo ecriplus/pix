@@ -11,6 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import set from 'lodash/set';
+import ENV from 'pix-admin/config/environment';
 
 import { optionsLocaleList, optionsTypeList } from '../../models/training';
 import Card from '../card';
@@ -109,6 +110,10 @@ export default class CreateOrUpdateTrainingForm extends Component {
     } finally {
       this.submitting = false;
     }
+  }
+
+  get trainingEditorLogoUrl() {
+    return ENV.APP.PIX_ASSETS_MANAGER_URL + '/list/contenu-formatif/editeur';
   }
 
   <template>
@@ -245,7 +250,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
             <:label>Url du logo de l'éditeur (.svg)</:label>
           </PixInput>
           <a
-            href="https://pix-assets-manager-tmp-poc.osc-fr1.scalingo.io/list/contenu-formatif/editeur"
+            href={{this.trainingEditorLogoUrl}}
             target="_blank"
             rel="noopener noreferrer"
             class="training__logo-url-link"
