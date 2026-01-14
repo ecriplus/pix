@@ -28,7 +28,7 @@ const getStagesAndStageAcquisitions = async (
   return { stages, acquiredStagesByParticipation };
 };
 
-const getBadgesAndBadesAcquisitions = async (
+const getBadgesAndBadgesAcquisitions = async (
   badgeRepository,
   campaignId,
   badgeAcquisitionRepository,
@@ -104,7 +104,7 @@ export const getCampaignParticipations = async function ({
     participationIds,
   );
 
-  const { badges, acquiredBadgesByParticipation } = await getBadgesAndBadesAcquisitions(
+  const { badges, acquiredBadgesByParticipation } = await getBadgesAndBadgesAcquisitions(
     badgeRepository,
     campaignId,
     badgeAcquisitionRepository,
