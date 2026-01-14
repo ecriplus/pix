@@ -16,7 +16,7 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     // then
     assert.dom('video').hasAttribute('autoplay');
     assert.dom('video').hasAttribute('loop');
-    assert.dom('video').hasAttribute('muted');
+    assert.dom('video').doesNotHaveAttribute('muted');
   });
 
   test('it should display a video element with src attribute', async function (assert) {
