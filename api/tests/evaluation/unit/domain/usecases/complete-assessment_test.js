@@ -3,13 +3,11 @@ import _ from 'lodash';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { AlreadyRatedAssessmentError } from '../../../../../src/evaluation/domain/errors.js';
 import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | complete-assessment', function () {
   let assessmentRepository;
-  let campaignParticipationRepository;
   let certificationCompletedJobRepository;
   const now = new Date('2019-01-01T05:06:07Z');
   let clock;
@@ -18,11 +16,6 @@ describe('Unit | UseCase | complete-assessment', function () {
     assessmentRepository = {
       get: _.noop,
       completeByAssessmentId: _.noop,
-    };
-
-    campaignParticipationRepository = {
-      get: _.noop,
-      update: _.noop,
     };
 
     certificationCompletedJobRepository = {
@@ -52,7 +45,6 @@ describe('Unit | UseCase | complete-assessment', function () {
       const err = await catchErr(completeAssessment)({
         assessmentId,
         assessmentRepository,
-        campaignParticipationRepository,
       });
 
       // then
@@ -75,7 +67,6 @@ describe('Unit | UseCase | complete-assessment', function () {
             await completeAssessment({
               assessmentId: assessment.id,
               assessmentRepository,
-              campaignParticipationRepository,
               certificationCompletedJobRepository,
             });
 
@@ -86,38 +77,12 @@ describe('Unit | UseCase | complete-assessment', function () {
       },
     );
 
-    context('when assessment is of type CAMPAIGN', function () {
-      it('should call update campaign participation status', async function () {
-        const assessment = _buildCampaignAssessment();
-        const { TO_SHARE } = CampaignParticipationStatuses;
-
-        sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
-        sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-        sinon.stub(campaignParticipationRepository, 'update').resolves();
-        // when
-        await completeAssessment({
-          assessmentId: assessment.id,
-          assessmentRepository,
-          campaignParticipationRepository,
-        });
-
-        // then
-        expect(
-          campaignParticipationRepository.update.calledWithExactly({
-            id: assessment.campaignParticipationId,
-            status: TO_SHARE,
-          }),
-        ).to.be.true;
-      });
-    });
-
     context('when assessment is of type CERTIFICATION', function () {
       it('should trigger the certification completed job', async function () {
         const assessment = _buildCertificationAssessment();
 
         sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
         sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-        sinon.stub(campaignParticipationRepository, 'update').resolves();
         sinon
           .stub(certificationCompletedJobRepository, 'performAsync')
           .withArgs(
@@ -132,12 +97,10 @@ describe('Unit | UseCase | complete-assessment', function () {
         await completeAssessment({
           assessmentId: assessment.id,
           assessmentRepository,
-          campaignParticipationRepository,
           certificationCompletedJobRepository,
         });
 
         // then
-        expect(campaignParticipationRepository.update).to.not.have.been.called;
         expect(certificationCompletedJobRepository.performAsync).to.have.been.called;
       });
     });

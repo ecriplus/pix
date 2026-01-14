@@ -12,16 +12,4 @@ class CantCalculateCampaignParticipationResultError extends DomainError {
   }
 }
 
-class CampaignParticipationInvalidStatus extends DomainError {
-  constructor(campaignParticipationId, acceptedStatus) {
-    super(
-      `Campaign participation: ${campaignParticipationId} status do not fulfill requirement. Accepted Status : ${acceptedStatus}`,
-    );
-  }
-}
-
-export {
-  CampaignParticipationDeletedError,
-  CampaignParticipationInvalidStatus,
-  CantCalculateCampaignParticipationResultError,
-};
+export { CampaignParticipationDeletedError, CantCalculateCampaignParticipationResultError };

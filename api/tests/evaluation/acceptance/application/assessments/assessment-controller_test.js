@@ -460,6 +460,8 @@ describe('Acceptance | Controller | assessment-controller', function () {
             organizationLearnerId,
             userId,
             campaignId,
+            status: 'TO_SHARE',
+            sharedAt: null,
           }).id;
           const assessment = databaseBuilder.factory.buildAssessment({
             userId,
@@ -964,6 +966,8 @@ async function _createAndCompleteCampaignParticipation({ user, campaign, badge, 
   const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign.id,
     userId: user.id,
+    status: 'TO_SHARE',
+    sharedAt: null,
   });
   const campaignAssessment = databaseBuilder.factory.buildAssessment({
     type: 'CAMPAIGN',
@@ -971,13 +975,12 @@ async function _createAndCompleteCampaignParticipation({ user, campaign, badge, 
     userId: user.id,
     campaignParticipationId: campaignParticipation.id,
   });
-  const anyDateBeforeCampaignParticipation = new Date(campaignParticipation.sharedAt.getTime() - 60 * 1000);
   databaseBuilder.factory.buildKnowledgeElement({
     skillId: 'recSkill0_0',
     assessmentId: campaignAssessment.id,
     userId: user.id,
     competenceId: 'recCompetence0',
-    createdAt: anyDateBeforeCampaignParticipation,
+    createdAt: new Date('2020-01-01'),
   });
   databaseBuilder.factory.buildBadgeCriterion({
     threshold: 75,

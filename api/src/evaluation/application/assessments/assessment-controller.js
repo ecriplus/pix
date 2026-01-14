@@ -1,28 +1,61 @@
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
+import { usecases as prescriptionUsecases } from '../../../prescription/campaign-participation/domain/usecases/index.js';
+import { usecases as profileUsecases } from '../../../profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
 import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 
-const completeAssessment = async function (request) {
+const shareProfileRewardWithOrganization = async (campaignParticipationId, userId) => {
+  const questResults = await questUsecases.getQuestResultsForCampaignParticipation({
+    userId,
+    campaignParticipationId,
+  });
+
+  const lastResult = questResults.at(-1);
+  const profileRewardId = lastResult?.profileRewardId;
+
+  if (profileRewardId) {
+    await profileUsecases.shareProfileReward({
+      userId,
+      profileRewardId,
+      campaignParticipationId,
+    });
+  }
+};
+
+const completeAssessment = withTransaction(async function (request) {
   const assessmentId = request.params.id;
   const locale = getChallengeLocale(request);
 
-  await DomainTransaction.execute(async () => {
-    const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });
-    await evaluationUsecases.handleBadgeAcquisition({ assessment });
-    await evaluationUsecases.handleStageAcquisition({ assessment });
-    if (assessment.userId && (await featureToggles.get('isQuestEnabled'))) {
-      await questUsecases.rewardUser({ userId: assessment.userId });
-    }
+  const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });
 
-    await devcompUsecases.handleTrainingRecommendation({ assessment, locale });
-  });
+  await evaluationUsecases.handleBadgeAcquisition({ assessment });
+  await evaluationUsecases.handleStageAcquisition({ assessment });
+
+  const isQuestEnabled = await featureToggles.get('isQuestEnabled');
+
+  if (assessment.userId && assessment.isCampaignParticipationAvailable()) {
+    await prescriptionUsecases.shareCampaignResult({
+      userId: assessment.userId,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
+  }
+
+  if (assessment.userId && isQuestEnabled) {
+    await questUsecases.rewardUser({ userId: assessment.userId });
+  }
+
+  if (assessment.userId && assessment.isCampaignParticipationAvailable() && isQuestEnabled) {
+    await shareProfileRewardWithOrganization(assessment.campaignParticipationId, assessment.userId);
+  }
+
+  await devcompUsecases.handleTrainingRecommendation({ assessment, locale });
 
   return null;
-};
+});
 
 const startEmbedLlmChat = async function (request, h, { usecases } = { usecases: evaluationUsecases }) {
   const { configId } = request.payload;

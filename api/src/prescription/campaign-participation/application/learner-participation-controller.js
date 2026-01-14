@@ -1,6 +1,4 @@
-import { usecases as profileUsecases } from '../../../profile/domain/usecases/index.js';
-import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
@@ -18,34 +16,17 @@ const save = async function (request, h, dependencies = { campaignParticipationS
   return h.response(dependencies.campaignParticipationSerializer.serialize(campaignParticipationCreated)).created();
 };
 
-const shareCampaignResult = async function (request, _, dependencies = { profileUsecases, questUsecases }) {
+const shareCampaignResult = withTransaction(async function (request, _) {
   const userId = request.auth.credentials.userId;
   const campaignParticipationId = request.params.campaignParticipationId;
 
-  return DomainTransaction.execute(async () => {
-    await usecases.shareCampaignResult({
-      userId,
-      campaignParticipationId,
-    });
-    const questResults = await dependencies.questUsecases.getQuestResultsForCampaignParticipation({
-      userId,
-      campaignParticipationId,
-    });
-
-    const lastResult = questResults.at(-1);
-    const profileRewardId = lastResult?.profileRewardId;
-
-    if (profileRewardId) {
-      await dependencies.profileUsecases.shareProfileReward({
-        userId,
-        profileRewardId,
-        campaignParticipationId,
-      });
-    }
-
-    return null;
+  await usecases.shareCampaignResult({
+    userId,
+    campaignParticipationId,
   });
-};
+
+  return null;
+});
 
 const getSharedCampaignParticipationProfile = async function (
   request,

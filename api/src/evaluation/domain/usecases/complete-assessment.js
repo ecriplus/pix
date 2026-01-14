@@ -1,10 +1,8 @@
 import { CertificationCompletedJob } from '../../../certification/evaluation/domain/events/CertificationCompleted.js';
-import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
 import { AlreadyRatedAssessmentError } from '../errors.js';
 
 const completeAssessment = async function ({
   assessmentId,
-  campaignParticipationRepository,
   assessmentRepository,
   certificationCompletedJobRepository,
   locale,
@@ -16,12 +14,6 @@ const completeAssessment = async function ({
   }
 
   await assessmentRepository.completeByAssessmentId(assessmentId);
-
-  if (assessment.campaignParticipationId) {
-    const { TO_SHARE } = CampaignParticipationStatuses;
-
-    await campaignParticipationRepository.update({ id: assessment.campaignParticipationId, status: TO_SHARE });
-  }
 
   if (assessment.certificationCourseId) {
     await certificationCompletedJobRepository.performAsync(

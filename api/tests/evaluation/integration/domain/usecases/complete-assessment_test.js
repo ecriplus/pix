@@ -1,67 +1,14 @@
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { certificationCompletedJobRepository } from '../../../../../src/certification/evaluation/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
-import * as campaignParticipationRepository from '../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-const { TO_SHARE, STARTED } = CampaignParticipationStatuses;
-
 describe('Integration | Usecase | Complete Assessment', function () {
-  let userId, assessmentId, campaignParticipationId;
+  let userId, assessmentId;
 
   describe('#completeAssessment', function () {
-    context('when assessment is linked to a campaign participation', function () {
-      beforeEach(async function () {
-        userId = databaseBuilder.factory.buildUser().id;
-        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-
-        const campaignId = databaseBuilder.factory.buildCampaign({ targetProfileId }).id;
-        campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId,
-          userId,
-          status: STARTED,
-        }).id;
-
-        assessmentId = databaseBuilder.factory.buildAssessment({
-          userId,
-          campaignParticipationId,
-          state: Assessment.states.STARTED,
-        }).id;
-
-        return databaseBuilder.commit();
-      });
-
-      it('should update campaign participation status from `STARTED` to `TO_SHARE` in one and only transaction', async function () {
-        await DomainTransaction.execute(async (domainTransaction) => {
-          // when
-          await completeAssessment({
-            assessmentId,
-            campaignParticipationRepository,
-            assessmentRepository,
-            certificationCompletedJobRepository,
-          });
-
-          // then
-          const transactionAssessment = await domainTransaction
-            .knexTransaction('campaign-participations')
-            .select('id', 'status')
-            .where({ id: campaignParticipationId })
-            .first();
-          expect(transactionAssessment).to.deep.equal({ id: campaignParticipationId, status: TO_SHARE });
-
-          const realAssessment = await knex('campaign-participations')
-            .select('id', 'status')
-            .where({ id: campaignParticipationId })
-            .first();
-          expect(realAssessment).to.deep.equal({ id: campaignParticipationId, status: STARTED });
-        });
-      });
-    });
-
     context('when assessment is linked to a certification course', function () {
       let sessionId;
 
@@ -93,7 +40,6 @@ describe('Integration | Usecase | Complete Assessment', function () {
         // when
         await completeAssessment({
           assessmentId,
-          campaignParticipationRepository,
           assessmentRepository,
           certificationCompletedJobRepository,
         });

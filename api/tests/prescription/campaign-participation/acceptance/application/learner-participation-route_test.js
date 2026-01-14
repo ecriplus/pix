@@ -18,7 +18,7 @@ import {
 } from '../../../../test-helper.js';
 import { buildLearningContent } from '../../../../tooling/learning-content-builder/build-learning-content.js';
 
-const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Acceptance | Routes | Campaign Participations', function () {
   let server, options, user;
@@ -72,7 +72,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
         id: campaignParticipationId,
         userId: user.id,
-        status: TO_SHARE,
+        status: STARTED,
         sharedAt: null,
         campaignId: campaign.id,
       });
