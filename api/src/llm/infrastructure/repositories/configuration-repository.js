@@ -8,9 +8,6 @@ import { Configuration } from '../../domain/models/Configuration.js';
 const logger = child('llm:api', { event: SCOPES.LLM });
 
 /**
- * @function
- * @name get
- *
  * @param {string} id
  * @returns {Promise<Configuration>}
  */
@@ -18,6 +15,7 @@ export async function get(id) {
   if (!id) {
     throw new ConfigurationNotFoundError(id);
   }
+
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
   try {
@@ -27,22 +25,53 @@ export async function get(id) {
       },
     });
   } catch (err) {
-    logger.error({ err }, 'error when trying to reach LLM API');
+    logger.error(
+      {
+        err,
+        context: 'fetch-configuration',
+        data: {
+          configurationId: id,
+        },
+      },
+      'fetch error when trying to reach LLM API',
+    );
     throw new LLMApiError(err.toString());
   }
-  const contentType = response.headers.get('Content-Type');
+
   if (response.ok) {
-    if (contentType === 'application/json') {
-      const configurationDTO = await response.json();
-      return Configuration.fromDTO(configurationDTO);
+    const contentType = response.headers.get('Content-Type');
+    if (contentType !== 'application/json') {
+      logger.error({
+        err: `received unexpected response Content-Type when fetching configuration`,
+        context: 'fetch-configuration',
+        data: {
+          configurationId: id,
+          responseContentType: contentType,
+          responseBody: await response.text().catch(() => 'Unreadable response body'),
+        },
+      });
+      throw new LLMApiError('Unexpected response Content-Type');
     }
-    throw new LLMApiError('unexpected content-type response');
+
+    const configurationDTO = await response.json();
+    return Configuration.fromDTO(configurationDTO);
   }
+
   const { status, err } = await handleFetchErrors(response);
   if (status === 404) {
     throw new ConfigurationNotFoundError(id);
   } else {
-    logger.error({ err }, `error when reaching LLM API : code ${status}`);
+    logger.error(
+      {
+        err,
+        context: 'fetch-configuration',
+        data: {
+          configurationId: id,
+          responseStatus: status,
+        },
+      },
+      `error when reaching LLM API : code ${status}`,
+    );
     throw new LLMApiError(err);
   }
 }

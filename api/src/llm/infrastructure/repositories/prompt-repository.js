@@ -25,18 +25,20 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @param {Object} params
  * @param {MessageForInference[]} params.messages
  * @param {Configuration} params.configuration
+ * @param {string=} params.chatId
  * @returns {Promise<ReadableStream>}
  */
-export async function prompt({ messages, configuration }) {
+export async function prompt({ messages, configuration, chatId }) {
   const lastMessage = messages.pop();
+  const configurationDTO = configuration.toDTO();
   const payload = JSON.stringify({
     prompt: lastMessage.content,
-    configuration: configuration.toDTO(),
+    configuration: configurationDTO,
     history: messages,
   });
-  let response;
   const url = config.llm.postPromptUrl;
 
+  let response;
   let currentRetryCount = 0;
   const MAX_RETRY_COUNT = 2;
   do {
@@ -58,7 +60,18 @@ export async function prompt({ messages, configuration }) {
         body: payload,
       });
     } catch (err) {
-      logger.error(`error when trying to reach LLM API : ${err}`);
+      logger.error(
+        {
+          err,
+          context: 'prompt-llm',
+          data: {
+            chatId,
+            configurationContext: configuration.context,
+            configurationName: configurationDTO.name,
+          },
+        },
+        'fetch error when trying to reach LLM API',
+      );
       throw new LLMApiError(err.toString());
     }
     if (response.ok) {
@@ -66,7 +79,19 @@ export async function prompt({ messages, configuration }) {
     }
 
     const { status, err } = await handleFetchErrors(response);
-    logger.error({ err }, `error when reaching LLM API : code ${status}`);
+    logger.error(
+      {
+        err,
+        context: 'prompt-llm',
+        data: {
+          chatId,
+          configurationContext: configuration.context,
+          configurationName: configurationDTO.name,
+          responseStatus: status,
+        },
+      },
+      `could not reach LLM API after ${currentRetryCount + 1} attempt(s) : code ${status}`,
+    );
 
     if (status !== 502 || currentRetryCount >= MAX_RETRY_COUNT) {
       throw new LLMApiError(err);

@@ -1809,8 +1809,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       expect(logger.error).to.have.been.calledOnceWith(
         {
           err: sinon.match.instanceOf(LLMApiError),
-          message: sinon.match.object,
-          llmResponseMetadata: sinon.match.object,
+          context: 'prompt-chat',
+          data: {
+            chatId,
+            lastUserMessage: sinon.match.object,
+            llmResponseMetadata: sinon.match.object,
+          },
         },
         'error in runFlow',
       );
