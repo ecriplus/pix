@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.305.0](https://github.com/1024pix/pix/compare/v5.304.0...v5.305.0) (2026-01-15)
+
+### :rocket: Amélioration
+
+- [#14731](https://github.com/1024pix/pix/pull/14731) : Coquille Module CY MDP_Nov 
+- [#14733](https://github.com/1024pix/pix/pull/14733) : Module GestionMDP IND retrait img iencli 
+- [#14693](https://github.com/1024pix/pix/pull/14693) Afficher la liste des organisations pour lesquelles un schéma de parcours combiné est à disposition (PIX-20996) 
+- [#14336](https://github.com/1024pix/pix/pull/14336) Create #NR_Datacenter_AVA 
+- [#14688](https://github.com/1024pix/pix/pull/14688) Récupérer les statistiques de places côté Admin (PIX-21032). 
+
+### :bug: Correction
+
+- [#14520](https://github.com/1024pix/pix/pull/14520) Autoriser le rôle métier à accéder à la page de détails d'une certification (PIX-20949). 
+- [#14727](https://github.com/1024pix/pix/pull/14727) La rétrocompatibilité de la migration du statut endedBySupervisor vers endedByInvigilator n'était pas complète (PIX-21096) 
+
+### :building_construction: Tech
+
+- [#14717](https://github.com/1024pix/pix/pull/14717) Ajouter les codeowners pour les dossiers de seeds 
+- [#14716](https://github.com/1024pix/pix/pull/14716) Corriger le filtre équipe dans la liste des orga d'un profil cible (PIX-21082) 
+- [#14676](https://github.com/1024pix/pix/pull/14676) Gérer les invitations Pix Orga via un service (PIX-21065) 
+- [#14702](https://github.com/1024pix/pix/pull/14702) Partager automatiquement les résultats de campagne à la fin de l'évaluation (PIX-20952) 
+- [#14720](https://github.com/1024pix/pix/pull/14720) Remplacer depcheck par knip  
+- [#14724](https://github.com/1024pix/pix/pull/14724) Revoir l'utilisation de schemalint dans la CI 
+
+### :arrow_up: Montée de version
+
+- [#14721](https://github.com/1024pix/pix/pull/14721) Update dependency ember-source to ~6.10.0 (admin) 
+- [#14736](https://github.com/1024pix/pix/pull/14736) Update dependency ember-source to ~6.10.0 (junior)
+
 # [5.304.0](https://github.com/1024pix/pix/compare/v5.303.0...v5.304.0) (2026-01-14)
 
 ### :rocket: Amélioration
