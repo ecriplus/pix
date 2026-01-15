@@ -19,7 +19,8 @@
     padding-bottom: 1rem;
     color: var(--pix-neutral-800);
 
-    &__provider-name {
+    em {
+      font-style: normal;
       font-weight: var(--pix-font-bold);
     }
   }

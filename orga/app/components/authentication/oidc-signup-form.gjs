@@ -28,8 +28,8 @@ export default class OidcSignupForm extends Component {
       const { firstName, lastName, ...rest } = userClaims;
 
       result.push(
-        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.first-name-label')}<b>${firstName}</b>`),
-        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.last-name-label')}<b>${lastName}</b>`),
+        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.first-name-label')}<strong>${firstName}</strong>`),
+        htmlSafe(`${this.intl.t('pages.oidc.signup.claims.last-name-label')}<strong>${lastName}</strong>`),
       );
 
       Object.entries(rest).map(([key, _value]) => {
@@ -74,7 +74,7 @@ export default class OidcSignupForm extends Component {
     <div>
       <p class="oidc-signup-form__description">
         {{t "pages.oidc.signup.description"}}
-        <span class="oidc-signup-form__description__provider-name">{{@identityProviderName}}</span>&nbsp;:
+        <em>{{@identityProviderName}}</em>&nbsp;:
       </p>
       <div class="oidc-signup-form__information">
         <ul>
