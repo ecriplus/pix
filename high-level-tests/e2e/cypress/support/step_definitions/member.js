@@ -6,7 +6,7 @@ When(`je saisis l'URL de l'invitation`, () => {
 });
 
 Then(`je suis redirigé vers la page pour rejoindre l'organisation`, () => {
-  cy.get(".pix-notification-alert").should("contain", "Vous êtes invité(e) à rejoindre");
+  cy.get(".invitation-banner").should("contain", "Vous êtes invité(e) à rejoindre");
 });
 
 When(`je clique sur s'inscrire sur Pix`, () => {

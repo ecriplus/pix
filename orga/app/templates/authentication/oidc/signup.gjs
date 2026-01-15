@@ -4,16 +4,14 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import OidcSignupForm from 'pix-orga/components/authentication/oidc-signup-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
-
+import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 <template>
   {{pageTitle (t "pages.oidc.signup.title")}}
 
   <AuthenticationLayout class="signin-page-layout">
     <:content>
       {{#if @controller.currentInvitation}}
-        <PixNotificationAlert @type="communication-orga">
-          {{t "pages.login.join-invitation" organizationName=@controller.currentInvitation.organizationName}}
-        </PixNotificationAlert>
+        <InvitationBanner @organizationName={{@controller.currentInvitation.organizationName}} />
       {{/if}}
 
       <div>

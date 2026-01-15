@@ -1,9 +1,9 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import SsoSelectionForm from 'pix-orga/components/authentication/sso-selection-form';
 import AuthenticationLayout from 'pix-orga/components/authentication-layout/index';
+import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 
 <template>
   {{#if @controller.isForSignup}}
@@ -21,9 +21,7 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
 
     <:content>
       {{#if @model.organizationName}}
-        <PixNotificationAlert @type="communication-orga">
-          {{t "pages.login.join-invitation" organizationName=@model.organizationName}}
-        </PixNotificationAlert>
+        <InvitationBanner @organizationName={{@model.organizationName}} />
       {{/if}}
 
       {{#if @controller.isForSignup}}
