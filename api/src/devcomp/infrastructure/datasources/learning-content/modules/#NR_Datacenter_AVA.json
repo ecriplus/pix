@@ -295,7 +295,7 @@
               "element": {
                 "id": "16b59faf-6643-4a22-a2e2-55a664a2702d",
                 "type": "text",
-                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contriubuent<em> </em>au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
+                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contribuentau <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
               }
             },
             {
@@ -873,7 +873,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
-                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts plutôt que par la réduction des impacts environnementaux.<br><br></p>"
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts que par la réduction des impacts environnementaux.<br><br></p>"
                     }
                   ]
                 },
@@ -917,6 +917,91 @@
       "id": "a9874e16-5333-446f-92f2-b2c39fdfa04d",
       "type": "practise",
       "grains": [
+        {
+          "id": "c792086b-77f6-4685-afb4-5e6d0b0e1202",
+          "type": "activity",
+          "title": "Les impacts environnementaux en cascade des centres de données",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d041ad34-1d9a-444c-816f-c42313619932",
+                "type": "qrocm",
+                "instruction": "Citez au moins 2 conséquences environnmentales des centres de données.",
+                "proposals": [
+                  {
+                    "input": "consequencedatacenter1",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "champs à remplir",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": []
+                  },
+                  {
+                    "input": "consequencedatacenter2",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "champs à remplir",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "champs à remplir",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Consommation d’eau",
+                      "la consommation d'eau",
+                      "la consommation d’énergie",
+                      "Consommation d’énergie",
+                      "la consommation d'électricité",
+                      "Consommation d’électricité",
+                      "Extraction de métaux et terres rares",
+                      "Extraction de métaux",
+                      "Extraction de terres rares",
+                      "Artificialisation des sols",
+                      "Génération de Co²",
+                      "Génération de gaz à effet de serre",
+                      "gaz à effet de serre",
+                      "Co²",
+                      "Production de déchets toxiques",
+                      "déchets toxiques",
+                      "déchets",
+                      "Dégradation de la santé des populations",
+                      "Dégradation de la santé",
+                      "Destruction des habitats",
+                      "Détérioration des habitats",
+                      "Dégradation de la biodiversité",
+                      "Disparition de la biodiversité",
+                      "Dérèglement climatique",
+                      "Réchauffement climatique"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bien vu !",
+                    "diagnosis": "Et il y en a beaucoup d'autres...."
+                  },
+                  "invalid": {
+                    "state": "Êtes-vous sûr ?",
+                    "diagnosis": "Vous pouvez retourner consulter le<strong> schéma explicatif </strong>au début du module pour trouver la réponse. (Si vous êtes relecteur et que votre réponse n'a pas été prise en compte, dites-là nous pour qu'on l'ajoute)"
+                  }
+                }
+              }
+            }
+          ]
+        },
         {
           "id": "1cd7472e-26e2-4a23-9857-3195ba38acf7",
           "type": "activity",
@@ -1018,7 +1103,7 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Choisir la meilleure qualité possible pour les médias.</p>"
+                    "content": " Les médias sont présentées dans la meilleure qualité possible."
                   }
                 ],
                 "feedbacks": {
