@@ -4,19 +4,17 @@ function getOrganizationPlaces(schema) {
   return schema.organizationPlaces.all();
 }
 
-function getOrganizationPlacesCapacity() {
+function getOrganizationPlacesStatistics() {
   return {
     data: {
-      id: '1_places_capacity',
-      type: 'organization-places-capacities',
+      id: '1_places_statistics',
+      type: 'organization-places-statistics',
       attributes: {
-        categories: [
-          { count: 7777, category: 'FREE_RATE' },
-          { count: 0, category: 'PUBLIC_RATE' },
-          { count: 0, category: 'REDUCE_RATE' },
-          { count: 0, category: 'SPECIAL_REDUCE_RATE' },
-          { count: 0, category: 'FULL_RATE' },
-        ],
+        total: 10,
+        occupied: 1,
+        available: 9,
+        'anonymous-seat': 1,
+        'has-reached-maximum-places-limit': false,
       },
     },
   };
@@ -92,5 +90,5 @@ export {
   findPaginatedOrganizationMemberships,
   getOrganizationInvitations,
   getOrganizationPlaces,
-  getOrganizationPlacesCapacity,
+  getOrganizationPlacesStatistics,
 };

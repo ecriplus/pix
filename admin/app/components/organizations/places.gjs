@@ -4,9 +4,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import Capacity from './places/capacity';
 import DeleteModal from './places/delete-modal';
 import List from './places/list';
+import Statistics from './places/statistics';
 
 export default class Places extends Component {
   @service accessControl;
@@ -30,10 +30,8 @@ export default class Places extends Component {
       <header class="page-section__header">
         <h2 class="page-section__title">Places</h2>
       </header>
+      <Statistics @statistics={{@placesStatistics}} />
       <div class="places__resume">
-        <h3 class="page-section__title page-section__title--sub">Nombre de places actives</h3>
-        <Capacity @placesCapacity={{@placesCapacity}} />
-
         {{#if this.accessControl.hasAccessToOrganizationPlacesActionsScope}}
           <PixButtonLink
             class="places__button"

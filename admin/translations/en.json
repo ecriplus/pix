@@ -816,6 +816,19 @@
       "member-items": {
         "no-last-connection-date-info": "Has not been connected since 03/2025"
       },
+      "places": {
+        "statistics": {
+          "available-seats-count": {
+            "title": "Seats available",
+            "value": "/{total} seats"
+          },
+          "occupied-seats-count": {
+            "anonymous": "including {count, plural, =1 {1 seat} other {{count, number} seats}} with no-account access",
+            "title": "Seats occupied",
+            "value": "/{total} seats"
+          }
+        }
+      },
       "target-profiles-section": {
         "table": {
           "caption": "Liste des profils cibles rattachés à l'organisation. Contient son identifiant et son nom interne. Une action permet de détacher le profil cible quand cela est possible."

@@ -66,34 +66,6 @@ const register = async (server) => {
       },
     },
     {
-      method: 'GET',
-      path: '/api/admin/organizations/{id}/places/capacity',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.organizationId,
-          }),
-        },
-        handler: organizationPlaceController.getOrganizationPlacesCapacity,
-        tags: ['api', 'organizations'],
-        notes: [
-          `- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n- Elle retourne la capacité en places par catégorie pour une organisation`,
-        ],
-      },
-    },
-    {
       method: 'POST',
       path: '/api/admin/organizations/{id}/places',
       config: {

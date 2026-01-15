@@ -1,4 +1,5 @@
 import { clickByText, render } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import Places from 'pix-admin/components/organizations/places';
 import { module, test } from 'qunit';
 
@@ -13,6 +14,19 @@ module('Integration | Component | Organizations | Places', function (hooks) {
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
     currentUser = this.owner.lookup('service:currentUser');
+  });
+
+  test('displays the places statistics', async function (assert) {
+    // given
+    currentUser.adminMember = { isSuperAdmin: false };
+    const places = [];
+
+    // when
+    const screen = await render(<template><Places @places={{places}} /></template>);
+
+    // then
+    assert.dom(screen.getByText(t('components.organizations.places.statistics.available-seats-count.title'))).exists();
+    assert.dom(screen.getByText(t('components.organizations.places.statistics.occupied-seats-count.title'))).exists();
   });
 
   module('When user is superAdmin', function (hooks) {
