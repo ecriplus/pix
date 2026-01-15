@@ -235,7 +235,7 @@
               "element": {
                 "id": "de075231-8d4b-4c1d-bce5-bd24860a150c",
                 "type": "qab",
-                "instruction": "<p>Pour aider Max à ne pas oublier ses mots de passe, choisissez si chaque méthode est bonne ou mauvaise.</p>",
+                "instruction": "<p>Pour aider Max à ne pas oublier ses mots de passe, choisissez si chaque méthode est sécurisée ou non.</p>",
                 "cards": [
                   {
                     "id": "dcd3d82b-b34a-4ee0-aadf-d32a0d381afe",
@@ -310,7 +310,7 @@
               "element": {
                 "id": "6f69f7d9-5de2-4994-96ed-b4b9891c97b7",
                 "type": "text",
-                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣Choisir une phrase facile à retrouver.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j’</strong>étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqj’p.</strong></blockquote>"
+                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣&nbsp;Choisir une phrase facile à retrouver.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j’</strong>étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣&nbsp;Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqj’p.</strong></blockquote>"
               }
             }
           ]
