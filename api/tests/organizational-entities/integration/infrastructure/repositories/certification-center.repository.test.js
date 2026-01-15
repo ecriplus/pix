@@ -339,7 +339,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('should return certification centers matching "name" with accents ignored', async function () {
         // given
         databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification College' });
-        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Collège' });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Collège+' });
         databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Broca & co' });
         databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Donnie & co' });
 
@@ -360,7 +360,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         // then
         expect(_.map(matchingOrganizations, 'name')).to.have.members([
           'Centre de certification College',
-          'Centre de certification Collège',
+          'Centre de certification Collège+',
         ]);
         expect(pagination).to.deep.equal(expectedPagination);
       });
