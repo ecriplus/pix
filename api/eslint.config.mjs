@@ -18,6 +18,8 @@ export default defineConfig([
   // Loads plugins only (rules not applied yet)
   { plugins: { unicorn } },
   { plugins: { knex: fixupPluginRules(knex) } },
+  // Setup global language options
+  { languageOptions: { ecmaVersion: 2025, sourceType: 'module' } },
   // Overridden rules for "js" files
   {
     files: ['**/*.{js,mjs}'],
