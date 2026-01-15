@@ -128,8 +128,8 @@
                       "id": "441b12dd-254c-4cd3-87dd-5c4318fcc104",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-extraction-meteaux.png",
-                      "alt": "Schéma des conséquences d'un centre de données",
-                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur l'extraction des métaux.",
+                      "alt": "Schéma des conséquences d’un centre de données",
+                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur l’extraction des métaux.",
                       "legend": "",
                       "licence": ""
                     },
@@ -180,8 +180,8 @@
                       "id": "6d1f048a-c1a5-4021-bce9-0799d7754fbf",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-consomation-eau.png",
-                      "alt": "Schéma des conséquences d'un centre de données.",
-                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur la consommation d'eau.",
+                      "alt": "Schéma des conséquences d’un centre de données.",
+                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur la consommation d’eau.",
                       "legend": "",
                       "licence": ""
                     },
@@ -235,8 +235,8 @@
                       "id": "74d11d84-eee4-4347-a4b4-baa07086af27",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-etape3.png",
-                      "alt": "Schéma des conséquences d'un centre de données",
-                      "alternativeText": "Schéma des conséquences d'un centre de données avec les conséquences secondaires.",
+                      "alt": "Schéma des conséquences d’un centre de données",
+                      "alternativeText": "Schéma des conséquences d’un centre de données avec les conséquences secondaires.",
                       "legend": "",
                       "licence": ""
                     },
@@ -520,7 +520,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
-                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit : conception, développement, utilisation et fin de vie. </p>"
+                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie. </p>"
                     }
                   ]
                 },
@@ -668,7 +668,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/piscine-butte.jpg",
-                              "alt": "Image d'une piscine"
+                              "alt": "Image d’une piscine"
                             }
                           }
                         ]
@@ -812,7 +812,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/data-center-sous-marin-chine.jpg",
-                              "alt": "Photographie d'un centre de données sous-marin"
+                              "alt": "Photographie d’un centre de données sous-marin"
                             }
                           }
                         ]
@@ -945,10 +945,10 @@
                     ],
                     "solutions": [
                       "Consommation d’eau",
-                      "la consommation d'eau",
+                      "la consommation d’eau",
                       "la consommation d’énergie",
                       "Consommation d’énergie",
-                      "la consommation d'électricité",
+                      "la consommation d’électricité",
                       "Consommation d’électricité",
                       "Extraction de métaux et terres rares",
                       "Extraction de métaux",
@@ -1034,10 +1034,10 @@
                     ],
                     "solutions": [
                       "Consommation d’eau",
-                      "la consommation d'eau",
+                      "la consommation d’eau",
                       "la consommation d’énergie",
                       "Consommation d’énergie",
-                      "la consommation d'électricité",
+                      "la consommation d’électricité",
                       "Consommation d’électricité",
                       "Extraction de métaux et terres rares",
                       "Extraction de métaux",
@@ -1113,12 +1113,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bien vu !",
-                    "diagnosis": "Et il y en a beaucoup d'autres...."
+                    "state": "Bien vu !",
+                    "diagnosis": "Et il y en a beaucoup d’autres...."
                   },
                   "invalid": {
-                    "state": "Êtes-vous sûr ?",
-                    "diagnosis": "Vous pouvez retourner consulter le<strong> schéma explicatif </strong>au début du module pour trouver la réponse. (Si vous êtes relecteur et que votre réponse n'a pas été prise en compte, dites-là nous pour qu'on l'ajoute)"
+                    "state": "Êtes-vous sûr ?",
+                    "diagnosis": "Vous pouvez retourner consulter le<strong> schéma explicatif </strong>au début du module pour trouver la réponse. (Si vous êtes relecteur et que votre réponse n’a pas été prise en compte, dites-là nous pour qu’on l’ajoute)"
                   }
                 }
               }
@@ -1417,11 +1417,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureusement, c’est juste !</p>",
-                          "diagnosis": "Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour<strong> f</strong><strong>aire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif."
+                          "diagnosis": "Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour<strong> f</strong><strong>aire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif."
                         },
                         "invalid": {
                           "state": "<p>Pas tout à fait...</p>",
-                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif.</p>"
+                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif.</p>"
                         }
                       },
                       "solutions": [
