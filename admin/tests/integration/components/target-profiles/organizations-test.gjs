@@ -115,7 +115,6 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       </template>,
     );
     await fillByLabel('Rattacher une ou plusieurs organisation(s)', '1, 2');
-    await clickByName('Valider le rattachement');
 
     assert.dom('[placeholder="1, 2"]').hasValue('1, 2');
   });
@@ -137,7 +136,6 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       </template>,
     );
     await fillByLabel("Rattacher les organisations d'un profil cible existant", 1);
-    await clickByName('Valider le rattachement à partir de ce profil cible');
 
     assert.dom('[placeholder="1135"]').hasValue('1');
   });
@@ -292,6 +290,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       const attachOrganizationsStub = sinon.stub(adapter, 'attachOrganizations').resolves({
         data: { attributes: { 'duplicated-ids': [], 'attached-ids': [1, 2] } },
       });
+      const router = this.owner.lookup('service:router');
+      const replaceWithStub = sinon.stub(router, 'replaceWith').resolves();
 
       // when
       await render(
@@ -311,6 +311,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
 
       // then
       assert.ok(attachOrganizationsStub.calledWith({ organizationIds: [1, 2], targetProfileId: 56 }));
+      assert.ok(replaceWithStub.calledWith('authenticated.target-profiles.target-profile.organizations'));
     });
 
     test('it should enable button for existing target profile attachment', async function (assert) {

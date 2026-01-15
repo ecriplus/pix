@@ -8,6 +8,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { debounceTask } from 'ember-lifeline';
 import uniq from 'lodash/uniq';
+import AttachOrganizationsForm from 'pix-admin/components/organizations/attach-organizations-form';
 import config from 'pix-admin/config/environment';
 
 import ListItems from '../organizations/list-items';
@@ -19,7 +20,6 @@ export default class Organizations extends Component {
   @service currentUser;
   @service intl;
 
-  @tracked organizationsToAttach = '';
   @tracked existingTargetProfile = '';
 
   get isSuperAdminOrMetier() {
@@ -30,60 +30,31 @@ export default class Organizations extends Component {
     return this.existingTargetProfile === '';
   }
 
-  get isDisabledAttachOrganizations() {
-    return this.organizationsToAttach === '';
-  }
-
-  @action
-  onOrganizationsToAttachChange(event) {
-    this.organizationsToAttach = event.target.value;
-  }
-
   @action
   onExistingTargetProfileChange(event) {
     this.existingTargetProfile = event.target.value;
   }
 
   @action
-  async attachOrganizations(e) {
-    e.preventDefault();
-    if (this.isDisabledAttachOrganizations) return;
-
+  async attachOrganizations(organizationsToAttach) {
     const targetProfile = this.args.targetProfile;
     const adapter = this.store.adapterFor('target-profile');
     try {
       const response = await adapter.attachOrganizations({
-        organizationIds: this._getUniqueOrganizations(),
+        organizationIds: organizationsToAttach,
         targetProfileId: targetProfile.id,
       });
 
       const { 'attached-ids': attachedIds, 'duplicated-ids': duplicatedIds } = response.data.attributes;
-
-      this.organizationsToAttach = '';
-      const hasInsertedOrganizations = attachedIds.length > 0;
-      const hasDuplicatedOrgnizations = duplicatedIds.length > 0;
-      const message = [];
-
-      if (hasInsertedOrganizations) {
-        message.push('Organisation(s) rattaché(es) avec succès.');
-      }
-
-      if (hasInsertedOrganizations && hasDuplicatedOrgnizations) {
-        message.push('<br/>');
-      }
-
-      if (hasDuplicatedOrgnizations) {
-        message.push(
-          `Le(s) organisation(s) suivantes étai(en)t déjà rattachée(s) à ce profil cible : ${duplicatedIds.join(', ')}`,
-        );
-      }
-
-      await this.pixToast.sendSuccessNotification({ message: message.join('') });
-
-      return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
+      return { attachedIds, duplicatedIds };
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
+  }
+
+  @action
+  async reloadCurrentPage() {
+    return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
   }
 
   @action
@@ -100,7 +71,7 @@ export default class Organizations extends Component {
       });
       this.existingTargetProfile = '';
       await this.pixToast.sendSuccessNotification({ message: 'Organisation(s) rattaché(es) avec succès.' });
-      return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
+      await this.reloadCurrentPage();
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
@@ -160,28 +131,10 @@ export default class Organizations extends Component {
   <template>
     <section class="page-section target-profile-organizations">
       <div class="organization__forms-section">
-        <form class="organization__form" {{on "submit" this.attachOrganizations}}>
-          <label for="attach-organizations">Rattacher une ou plusieurs organisation(s)</label>
-          <div class="organization__sub-form">
-            <PixInput
-              id="attach-organizations"
-              @value={{this.organizationsToAttach}}
-              class="form-field__text form-control"
-              placeholder="1, 2"
-              aria-describedby="attach-organizations-info"
-              {{on "input" this.onOrganizationsToAttachChange}}
-            />
-            <p id="attach-organizations-info" hidden>Ids des organisations, séparés par une virgule</p>
-            <PixButton
-              @type="submit"
-              @size="small"
-              aria-label="Valider le rattachement"
-              @isDisabled={{this.isDisabledAttachOrganizations}}
-            >
-              {{t "common.actions.validate"}}
-            </PixButton>
-          </div>
-        </form>
+        <AttachOrganizationsForm
+          @attachOrganizations={{this.attachOrganizations}}
+          @reloadAfterSuccess={{this.reloadCurrentPage}}
+        />
 
         <form class="organization__form" {{on "submit" this.organizationsFromExistingTargetProfileToAttach}}>
           <label for="attach-organizations-from-existing-target-profile">Rattacher les organisations d'un profil cible

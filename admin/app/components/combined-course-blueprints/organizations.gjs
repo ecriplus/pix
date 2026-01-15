@@ -1,5 +1,6 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import AttachOrganizationsForm from 'pix-admin/components/organizations/attach-organizations-form';
 import ListItems from 'pix-admin/components/organizations/list-items';
 
 export default class Organizations extends Component {
