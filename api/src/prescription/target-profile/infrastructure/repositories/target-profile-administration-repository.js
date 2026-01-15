@@ -14,9 +14,9 @@ import * as competenceRepository from '../../../../shared/infrastructure/reposit
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { StageCollection } from '../../domain/models/StageCollection.js';
 import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileSummaryForAdmin.js';
-
 const TARGET_PROFILE_TABLE = 'target-profiles';
 
 const get = async function ({ id, locale = FRENCH_FRANCE }) {
@@ -47,11 +47,16 @@ const get = async function ({ id, locale = FRENCH_FRANCE }) {
     .select('tubeId', 'level')
     .where('targetProfileId', targetProfileDTO.id);
 
-  const targetProfileEstimatedTimes = await datamartKnex('target_profiles_course_duration')
-    .select('quantile_75')
-    .where({ targetProfileId: id })
-    .first();
-
+  let targetProfileEstimatedTimes = null;
+  try {
+    targetProfileEstimatedTimes = await datamartKnex
+      .select('quantile_75')
+      .from('target_profiles_course_duration')
+      .where({ targetProfileId: id })
+      .first();
+  } catch {
+    logger.warn('Datamart is not available, target profile estimated times cannot be defined');
+  }
   return _toDomain(targetProfileDTO, tubesData, targetProfileEstimatedTimes?.quantile_75, locale);
 };
 
