@@ -666,7 +666,7 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "flashcards",
-                "instruction": "Pour chaque carte :&nbsp; <br><ul><li>Lisez le nom.&nbsp;</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
+                "instruction": "Pour chaque carte : <br><ul><li>Lisez le nom.&nbsp;</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
                 "title": "Les types de logiciels malveillants",
                 "introImage": {
                   "url": ""
@@ -714,7 +714,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Un rançongiciel est un logiciel malveillant qui bloque l’accès aux fichiers ou à l’appareil. <br>Il demande ensuite de l’argent (rançon) pour tenter de rendre l’accès à nouveau possible. Payer ne garantit pas que l’accès sera réellement rendu.<br>"
+                      "text": "Un rançongiciel est un logiciel malveillant qui bloque l’accès aux fichiers ou à l’appareil. <br>Il demande ensuite de l’argent (rançon) pour tenter de rendre l’accès à nouveau possible. Payer ne garantit pas que l’accès sera réellement rendu."
                     }
                   },
                   {
@@ -729,7 +729,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Un logiciel espion est un logiciel malveillant qui peut surveiller l’activité de l’utilisateur afin de collecter des informations.<br>"
+                      "text": "Un logiciel espion est un logiciel malveillant qui peut surveiller l’activité de l’utilisateur afin de collecter des informations."
                     }
                   }
                 ]
