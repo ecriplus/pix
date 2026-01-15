@@ -1,3 +1,4 @@
+import { knex as datamartKnex } from '../../../../../../datamart/knex-database-connection.js';
 import { TargetProfileForAdmin } from '../../../../../../src/prescription/target-profile/domain/models/TargetProfileForAdmin.js';
 import * as targetProfileAdministrationRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
@@ -646,6 +647,90 @@ describe('Integration | Repository | Target-profile', function () {
           stageCollection: expectedStageCollection,
         });
         expect(actualTargetProfile).to.deepEqualInstance(expectedTargetProfile);
+      });
+
+      context('when datamart is not available', function () {
+        it('should return target profile with undefined duration', async function () {
+          // given
+          sinon.stub(datamartKnex, 'select').rejects(new Error('Datamart is down'));
+          databaseBuilder.factory.buildOrganization({ id: 66 });
+          const targetProfileDB = databaseBuilder.factory.buildTargetProfile();
+
+          databaseBuilder.factory.buildTargetProfileTube({
+            targetProfileId: targetProfileDB.id,
+            tubeId: 'recTube1',
+            level: 4,
+          });
+          await databaseBuilder.commit();
+
+          const learningContent = {
+            areas: [
+              {
+                id: 'recAreaA',
+                title_i18n: {
+                  fr: 'titleFRA',
+                },
+                color: 'colorA',
+                code: 'codeA',
+                frameworkId: 'fmk1',
+                competenceIds: ['recCompA'],
+              },
+            ],
+            competences: [
+              {
+                id: 'recCompA',
+                name_i18n: {
+                  fr: 'nameFRA',
+                },
+                index: '1',
+                areaId: 'recAreaA',
+                origin: 'Pix',
+                thematicIds: ['recThemA'],
+              },
+            ],
+            thematics: [
+              {
+                id: 'recThemA',
+                name_i18n: {
+                  fr: 'nameFRA',
+                },
+                index: '1',
+                competenceId: 'recCompA',
+                tubeIds: ['recTube1'],
+              },
+            ],
+            tubes: [
+              {
+                id: 'recTube1',
+                competenceId: 'recCompA',
+                thematicId: 'recThemA',
+                name: 'tubeName1',
+                practicalTitle_i18n: {
+                  fr: 'practicalTitleFR1',
+                },
+                isMobileCompliant: false,
+                isTabletCompliant: true,
+                skillIds: ['recSkillTube1'],
+              },
+            ],
+            skills: [
+              {
+                id: 'recSkillTube1',
+                tubeId: 'recTube1',
+                status: 'actif',
+                level: 1,
+              },
+            ],
+          };
+          await mockLearningContent(learningContent);
+
+          // when
+          const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: targetProfileDB.id });
+
+          // then
+          expect(actualTargetProfile.id).to.equal(targetProfileDB.id);
+          expect(actualTargetProfile.estimatedTime).to.be.null;
+        });
       });
     });
 
