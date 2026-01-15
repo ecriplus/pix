@@ -78,7 +78,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     });
   });
 
-  describe('GET /api/admin/combined-course-blueprints/:id', function () {
+  describe('GET /api/admin/combined-course-blueprints/:blueprintId', function () {
     context('when user is admin ', function () {
       it('should return combined course blueprint for given id', async function () {
         // given
@@ -102,6 +102,31 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         expect(response.statusCode).to.equal(200);
         expect(response.result.data.id).to.equal(combinedCourseBlueprint.id.toString());
         expect(response.result.data.type).to.equal('combined-course-blueprints');
+      });
+    });
+  });
+
+  describe('DELETE /api/admin/combined-course-blueprints/:blueprintId/organizations/:organizationId', function () {
+    context('when user is admin ', function () {
+      it('should detach a combined course blueprint from organization', async function () {
+        // given
+        const adminUser = await insertUserWithRoleSuperAdmin();
+
+        const { combinedCourseBlueprintId, organizationId } =
+          databaseBuilder.factory.buildCombinedCourseBlueprintShare();
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'DELETE',
+          url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprintId}/organizations/${organizationId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(204);
       });
     });
   });

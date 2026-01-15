@@ -35,6 +35,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
       createdAt: now,
       updatedAt: now,
       content: [],
+      organizationIds: [],
     });
   });
 

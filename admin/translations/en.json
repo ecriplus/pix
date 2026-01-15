@@ -499,7 +499,8 @@
         "title": "All learner courses"
       },
        "organizations": {
-        "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from combined course blueprint <strong>{name}</strong>"
+        "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from combined course blueprint <strong>{name}</strong>",
+        "detach-organization-success": "Blueprint is not shared with organization {name} anymore."
       }
     },
     "complementary-certifications": {

@@ -16,3 +16,11 @@ export const getById = async (request, _, dependencies = { combinedCourseBluepri
   const combinedCourseBlueprint = await usecases.getCombinedCourseBlueprintById({ id: request.params.blueprintId });
   return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
 };
+
+export const detachOrganization = async (request, h) => {
+  await usecases.detachOrganizationFromCombinedCourseBlueprint({
+    combinedCourseBlueprintId: request.params.blueprintId,
+    organizationId: request.params.organizationId,
+  });
+  return h.response().code(204);
+};

@@ -12,6 +12,7 @@ function buildCombinedCourseBlueprint({
   createdAt = new Date(),
   updatedAt = new Date(),
   content = [{ type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: 'module-123' }],
+  organizationIds = [],
 } = {}) {
   return new CombinedCourseBlueprint({
     id,
@@ -22,6 +23,7 @@ function buildCombinedCourseBlueprint({
     content,
     createdAt,
     updatedAt,
+    organizationIds,
   });
 }
 

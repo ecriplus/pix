@@ -14,5 +14,6 @@ import Organizations from 'pix-admin/components/combined-course-blueprints/organ
     @externalId={{@controller.externalId}}
     @hideArchived={{@controller.hideArchived}}
     @administrationTeamId={{@controller.administrationTeamId}}
+    @detachOrganizations={{@controller.detachOrganizations}}
   />
 </template>

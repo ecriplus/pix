@@ -13,6 +13,7 @@ export default class CombinedCourseBlueprintOrganizationsController extends Cont
   @service router;
   @service pixToast;
   @service store;
+  @service intl;
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked pageSize = 10;
@@ -38,6 +39,25 @@ export default class CombinedCourseBlueprintOrganizationsController extends Cont
   @action
   goToOrganizationPage(organizationId) {
     this.router.transitionTo('authenticated.organizations.get', organizationId);
+  }
+
+  @action
+  async detachOrganizations(organizationId) {
+    const adapter = this.store.adapterFor('combined-course-blueprint');
+    const organization = await this.store.findRecord('organization', organizationId);
+
+    try {
+      await adapter.detachOrganizations(this.model.blueprint.id, organizationId);
+
+      await this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.combined-course-blueprints.organizations.detach-organization-success', {
+          name: organization.name,
+        }),
+      });
+      this.router.transitionTo('authenticated.combined-course-blueprints.combined-course-blueprint.organizations');
+    } catch {
+      return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
+    }
   }
 
   @action

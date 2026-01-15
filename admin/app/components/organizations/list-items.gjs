@@ -14,7 +14,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-export default class ActionsOnUsersRoleInOrganization extends Component {
+export default class OrganizationListItems extends Component {
   @tracked showModal = false;
   @tracked organizationToDetach;
 

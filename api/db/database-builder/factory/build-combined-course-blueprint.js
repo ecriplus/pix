@@ -8,7 +8,7 @@ const buildCombinedCourseBlueprint = function ({
   illustration = 'images/illustration.svg',
   createdAt = new Date(),
   updatedAt,
-  content,
+  content = [],
 } = {}) {
   const values = {
     id,
