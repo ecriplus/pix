@@ -587,7 +587,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "nom du gestionnaire",
-                    "defaultValue": "- Sélectionner -",
+                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
