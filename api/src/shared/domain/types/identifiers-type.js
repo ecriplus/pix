@@ -61,6 +61,7 @@ const typesPositiveInteger32bits = [
   'certificationIssueReportId',
   'certificationVersionId',
   'combinedCourseId',
+  'combinedCourseBlueprintId',
   'complementaryCertificationBadgeId',
   'complementaryCertificationCourseId',
   'complementaryCertificationId',
