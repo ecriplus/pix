@@ -920,7 +920,7 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "retour de la réponse",
-                    "defaultValue": "retour de la réponse",
+                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
