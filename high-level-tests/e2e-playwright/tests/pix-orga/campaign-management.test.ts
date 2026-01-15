@@ -61,10 +61,11 @@ test('Assessment campaign', async ({ page }) => {
     await page.getByRole('link', { name: 'Paramètres' }).click();
     await page.getByRole('button', { name: 'Archiver' }).click();
     await page.getByLabel('Navigation principale').getByRole('link', { name: 'Campagnes' }).click();
-    await expect(page.getByRole('link', { name: 'campagne pro 2' })).not.toBeVisible();
-    await page.getByRole('button', { name: 'Afficher les campagnes' }).click();
     await expect(page.getByRole('link', { name: 'campagne pro' })).toBeVisible();
-    await page.getByRole('link', { name: 'campagne pro' }).click();
+    await expect(page.getByRole('link', { name: 'campagne pro 2' })).not.toBeVisible();
+    await page.getByRole('radio', { name: 'Archivées' }).check({ force: true });
+    await expect(page.getByRole('link', { name: 'campagne pro 2' })).toBeVisible();
+    await page.getByRole('link', { name: 'campagne pro 2' }).click();
     await page.getByRole('button', { name: 'Désarchiver la campagne' }).click();
     await page.getByLabel('Navigation principale').getByRole('link', { name: 'Campagnes' }).click();
     await expect(page.getByRole('link', { name: 'campagne pro 2' })).toBeVisible();

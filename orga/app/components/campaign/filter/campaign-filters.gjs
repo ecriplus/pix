@@ -1,6 +1,6 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
-import PixToggleButton from '@1024pix/pix-ui/components/pix-toggle-button';
+import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -10,7 +10,7 @@ const debounceTime = ENV.pagination.debounce;
 
 export default class CampaignFilters extends Component {
   get isToggleSwitched() {
-    return this.args.statusFilter !== 'archived';
+    return this.args.statusFilter === 'archived';
   }
 
   get isClearFiltersButtonDisabled() {
@@ -22,9 +22,8 @@ export default class CampaignFilters extends Component {
   }
 
   @action
-  onToggle() {
-    const status = this.isToggleSwitched ? 'archived' : null;
-    this.args.onFilter('status', status);
+  onToggle(value) {
+    this.args.onFilter('status', value ? 'archived' : null);
   }
 
   <template>
@@ -60,11 +59,16 @@ export default class CampaignFilters extends Component {
         </PixSearchInput>
       {{/unless}}
 
-      <PixToggleButton @toggled={{this.isToggleSwitched}} @onChange={{this.onToggle}} @screenReaderOnly={{true}}>
+      <PixSegmentedControl
+        @toggled={{this.isToggleSwitched}}
+        @onChange={{this.onToggle}}
+        @screenReaderOnly={{true}}
+        @variant="orga"
+      >
         <:label>{{t "pages.campaigns-list.action.campaign.label"}}</:label>
         <:viewA>{{t "pages.campaigns-list.action.campaign.ongoing"}}</:viewA>
         <:viewB>{{t "pages.campaigns-list.action.campaign.archived"}}</:viewB>
-      </PixToggleButton>
+      </PixSegmentedControl>
     </PixFilterBanner>
   </template>
 }

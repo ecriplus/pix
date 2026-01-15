@@ -75,6 +75,7 @@ export default defineConfig({
           command: 'npm run db:prepare && npm run cache:refresh && npm run start',
           url: `http://localhost:${process.env.PIX_API_PORT}`,
           reuseExistingServer: false,
+          timeout: 180 * 1000,
           stdout: 'ignore',
           stderr: 'pipe',
           env: {
@@ -93,6 +94,7 @@ export default defineConfig({
         },
         {
           cwd: '../../mon-pix',
+          timeout: 180 * 1000,
           command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
           url: process.env.PIX_APP_URL,
           reuseExistingServer: false,
@@ -104,6 +106,7 @@ export default defineConfig({
         },
         {
           cwd: '../../orga',
+          timeout: 180 * 1000,
           command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
           url: process.env.PIX_ORGA_URL,
           reuseExistingServer: false,
@@ -115,6 +118,7 @@ export default defineConfig({
         },
         {
           cwd: '../../certif',
+          timeout: 180 * 1000,
           command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
           url: process.env.PIX_CERTIF_URL,
           reuseExistingServer: false,

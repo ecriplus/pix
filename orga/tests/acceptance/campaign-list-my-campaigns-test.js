@@ -159,7 +159,7 @@ module('Acceptance | /campaigns/list/my-campaigns ', function (hooks) {
 
             // when
             await fillByLabel('Rechercher une campagne', 'ma super campagne');
-            await clickByName(t('pages.campaigns-list.action.campaign.label'));
+            await clickByName(t('pages.campaigns-list.action.campaign.archived'));
             await clickByName(t('common.filters.actions.clear'));
 
             //then
