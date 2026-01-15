@@ -658,117 +658,81 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "<p>Il existe plusieurs types de logiciels malveillants. Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?</p><p>Pour le comprendre, prenons le cas d’Alice. </p><br><p>Alice a utilisé <strong>un ordinateur public à la bibliothèque</strong>, pour rédiger un texte. Pour cela, elle a seulement <strong>créé un document</strong> et n’est pas allée sur Internet. Elle a enregistré son document sur <strong>sa clé USB</strong> pour pouvoir le rapporter chez elle.</p><p>En rentrant chez elle, elle découvre que son document a été renommé bizarrement et ne s’ouvre plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p>"
+                "content": "Il existe plusieurs types de logiciels malveillant avec des focntionnements différents. En connaissez-vous ?"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
-                "type": "qrocm",
-                "instruction": "<p>Essayez de <strong>compléter le texte suivant</strong> pour décrire la situation d’Alice.</p>",
-                "proposals": [
+                "type": "flashcards",
+                "instruction": "Pour chaque carte :&nbsp; <br><ul><li>Lisez le nom.&nbsp;</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
+                "title": "",
+                "introImage": {
+                  "url": "Les types de logiciels malveillants"
+                },
+                "cards": [
                   {
-                    "type": "text",
-                    "content": "<span>La clé USB d’Alice a été infectée par un virus informatique présent </span>"
-                  },
-                  {
-                    "input": "origine virus",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "sur l'ordinateur de la bibliothèque"
+                    "id": "c2a46a7e-8ac0-4df5-bd7d-4826ffdf03f7",
+                    "recto": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "dans le sac d'Alice"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>.</span>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>Le virus s’est copié sur la clé USB </span>"
-                  },
-                  {
-                    "input": "action",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "sans qu’Alice le voit"
+                      "text": "Le virus informatique est-il un logiciel malveillant ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "avec l’accord d’Alice"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
+                      "text": "Un virus informatique est un logiciel malveillant qu peut se propager d’un appareil à un autre quand on  ouvre un fichier infecté par exemple."
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<span>.</span>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>Le document ne s’ouvre plus parce que </span>"
-                  },
-                  {
-                    "input": "problème",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Alice l’a mal enregistré"
+                    "id": "2957c00c-3f5d-463a-8193-31af41a32608",
+                    "recto": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "le virus a modifié le fichier"
-                      }
-                    ],
-                    "solutions": [
-                      "2"
-                    ]
+                      "text": "Le cheval de Troie est-il un logiciel malveillant ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Un cheval de Troie est un logiciel malveillant déguisé en programme informatique normal (jeu, application, fichier…).&nbsp;Une fois ouvert, il peut donner accès à l’appareil ou voler des informations"
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<span>.</span>"
+                    "id": "6f45f731-3113-46b3-bd2d-d328aa65e384",
+                    "recto": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Le rançongiciel (ransomware) est-il un logiciel malveillant ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Un rançongiciel est un logiciel malveillant qui bloque l’accès aux fichiers ou à l’appareil. <br>Il demande ensuite de l’argent (rançon) pour tenter de rendre l’accès à nouveau possible. Payer ne garantit pas que l’accès sera réellement rendu.<br>"
+                    }
+                  },
+                  {
+                    "id": "cf6b61ee-eaee-4e93-afdb-3e5a8c4cc468",
+                    "recto": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Le logiciel espion (spyware) est-il un logiciel malveillant ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Un logiciel espion est un logiciel malveillant qui peut surveiller l’activité de l’utilisateur afin de collecter des informations.<br>"
+                    }
                   }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Eh oui !</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre</strong>, <strong>sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas tout-à-fait.</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre, sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
-                  }
-                }
+                ]
               }
             }
           ]
