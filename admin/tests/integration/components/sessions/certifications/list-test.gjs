@@ -15,6 +15,9 @@ module('Integration | Component | certifications/list', function (hooks) {
 
   test('should display number of certification issue reports with required action', async function (assert) {
     // given
+    const currentUser = this.owner.lookup('service:currentUser');
+    currentUser.adminMember = { isSuperAdmin: true };
+
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
         id: '1',
@@ -38,6 +41,9 @@ module('Integration | Component | certifications/list', function (hooks) {
 
   test('should display the complementary certification', async function (assert) {
     // given
+    const currentUser = this.owner.lookup('service:currentUser');
+    currentUser.adminMember = { isSuperAdmin: true };
+
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
         certificationObtained: 'Pix+ Droit',
@@ -54,5 +60,56 @@ module('Integration | Component | certifications/list', function (hooks) {
 
     // then
     assert.dom(screen.getByText('Pix+ Droit', { exact: false })).exists();
+  });
+
+  module('when user has a SuperAdmin, Certif or Support role', function () {
+    test('it displays certification IDs as clickable links', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.adminMember = { isSuperAdmin: true };
+
+      const juryCertificationSummaries = [
+        store.createRecord('jury-certification-summary', {
+          id: '1234',
+        }),
+      ];
+      const pagination = {};
+
+      // when
+      const screen = await render(
+        <template>
+          <List @juryCertificationSummaries={{juryCertificationSummaries}} @pagination={{pagination}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('link', { name: '1234' })).exists();
+    });
+  });
+
+  module('when user has a metier role', function () {
+    test('it displays certification IDs as plain text', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.adminMember = { isMetier: true };
+
+      const juryCertificationSummaries = [
+        store.createRecord('jury-certification-summary', {
+          id: '1234',
+        }),
+      ];
+      const pagination = {};
+
+      // when
+      const screen = await render(
+        <template>
+          <List @juryCertificationSummaries={{juryCertificationSummaries}} @pagination={{pagination}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByText('1234')).exists();
+      assert.dom(screen.queryByRole('link', { name: '1234' })).doesNotExist();
+    });
   });
 });

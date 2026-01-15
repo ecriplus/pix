@@ -2,12 +2,16 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import sortBy from 'lodash/sortBy';
 
 import CertificationStatus from './status';
+
 export default class CertificationsHeader extends Component {
+  @service accessControl;
+
   get sortedCertificationJurySummaries() {
     return sortBy(
       this.args.juryCertificationSummaries,
@@ -28,9 +32,13 @@ export default class CertificationsHeader extends Component {
               {{t "pages.certifications.table.headers.id"}}
             </:header>
             <:cell>
-              <LinkTo @route="authenticated.sessions.certification.informations" @model={{certification.id}}>
+              {{#if this.accessControl.hasAccessToCertificationDetailLinks}}
+                <LinkTo @route="authenticated.sessions.certification.informations" @model={{certification.id}}>
+                  {{certification.id}}
+                </LinkTo>
+              {{else}}
                 {{certification.id}}
-              </LinkTo>
+              {{/if}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

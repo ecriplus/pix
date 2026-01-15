@@ -8,6 +8,7 @@ import formatDate from 'ember-intl/helpers/format-date';
 
 export default class UserCertificationCourses extends Component {
   @service intl;
+  @service accessControl;
 
   <template>
     <header class="page-section__header">
@@ -28,9 +29,13 @@ export default class UserCertificationCourses extends Component {
               {{t "components.users.certification-centers.certification-courses.table-headers.id"}}
             </:header>
             <:cell>
-              <LinkTo @route="authenticated.sessions.certification.informations" @model={{certificationCourse.id}}>
+              {{#if this.accessControl.hasAccessToCertificationDetailLinks}}
+                <LinkTo @route="authenticated.sessions.certification.informations" @model={{certificationCourse.id}}>
+                  {{certificationCourse.id}}
+                </LinkTo>
+              {{else}}
                 {{certificationCourse.id}}
-              </LinkTo>
+              {{/if}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
