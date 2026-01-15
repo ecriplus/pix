@@ -248,7 +248,7 @@
                       "props": {
                         "image": {
                           "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-15-janv-2026-15_39_34.png",
-                          "alt": "",
+                          "alt": "a",
                           "width": 500,
                           "height": 500
                         },
@@ -296,7 +296,7 @@
                       "props": {
                         "image": {
                           "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-15-janv-2026-15_48_06.png",
-                          "alt": "",
+                          "alt": "aa",
                           "width": 500,
                           "height": 500
                         },
