@@ -41,7 +41,7 @@
                       "userName": "Asmae",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "J’utilise de plus en plus une IA générative pour réfléchir, écrire ou même parler des mes problèmes. Au fond, je me dis que c’est pratique : on peut tout lui dire, sans jugement."
+                      "content": "J’utilise de plus en plus une IA générative pour réfléchir, écrire ou même parler des mes problèmes. Au fond, je me dis que c’est pratique : on peut tout lui dire, sans jugement."
                     },
                     {
                       "userName": "Quentin",
@@ -106,7 +106,7 @@
               "element": {
                 "id": "0599e61c-c78e-4018-841f-0ac051284bb7",
                 "type": "text",
-                "content": "<blockquote>« <strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services. [...]&nbsp;Nous nous appuyons sur des systèmes automatisés et des contrôles humains pour identifier et traiter les contenus qui enfreignent nos Conditions, y compris nos Politiques d’utilisation. »</blockquote>\n<p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
+                "content": "<blockquote>«&nbsp;<strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services. [...]&nbsp;Nous nous appuyons sur des systèmes automatisés et des contrôles humains pour identifier et traiter les contenus qui enfreignent nos Conditions, y compris nos Politiques d’utilisation.&nbsp;»</blockquote><p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
               }
             },
             {
@@ -681,7 +681,7 @@
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "💻 Un logiciel d'IA générative pointé du doigt pour des fuites de mots de passe",
+                  "title": "💻 Un logiciel d’IA générative pointé du doigt pour des fuites de mots de passe",
                   "author": "Rédaction Tech",
                   "date": "6 octobre 2025",
                   "paragraphs": [
