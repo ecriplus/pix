@@ -1098,7 +1098,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
           // then
           expect(result.pagination.rowCount).to.equal(1);
-          expect(result.attestationParticipantsStatus[0].organizationLearnerId);
+          expect(result.attestationParticipantsStatus[0].organizationLearnerId).to.equal(organizationLearner1.id);
         });
       });
     });

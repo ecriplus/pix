@@ -8,7 +8,7 @@ import { DEFAULT_PASSWORD } from '../../constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildUser } from './build-user.js';
 
-// eslint-disable-next-line no-sync
+// eslint-disable-next-line n/no-sync
 const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
 const buildAuthenticationMethod = {};
@@ -208,7 +208,7 @@ function getUserHashedPassword(password) {
   if (password === DEFAULT_PASSWORD) {
     return DEFAULT_HASHED_PASSWORD;
   }
-  // eslint-disable-next-line no-sync
+  // eslint-disable-next-line n/no-sync
   return cryptoService.hashPasswordSync(password);
 }
 

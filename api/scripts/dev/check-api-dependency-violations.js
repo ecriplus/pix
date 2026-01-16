@@ -1,4 +1,4 @@
-/* eslint-disable no-sync */
+/* eslint-disable n/no-sync */
 import fs from 'node:fs';
 import { glob } from 'node:fs/promises';
 import { builtinModules } from 'node:module';
@@ -217,4 +217,4 @@ function reportToMarkdown(stats, violationsByEntry) {
 }
 
 await ScriptRunner.execute(import.meta.url, CheckApiDependencyViolations);
-/* eslint-enable no-sync */
+/* eslint-enable n/no-sync */

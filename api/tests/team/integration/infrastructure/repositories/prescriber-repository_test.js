@@ -23,7 +23,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
     lastName: 'popopo',
     email: 'estelle.popopo@example.net',
     lang: 'fr',
-    /* eslint-disable-next-line no-sync */
+    /* eslint-disable-next-line n/no-sync */
     password: bcrypt.hashSync('A124B2C3#!', 1),
     cgu: true,
     samlId: 'some-saml-id',

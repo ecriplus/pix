@@ -31,7 +31,7 @@ const hashPassword = function (password) {
 };
 
 const hashPasswordSync = function (password) {
-  // eslint-disable-next-line no-sync
+  // eslint-disable-next-line n/no-sync
   return bcrypt.hashSync(password, bcryptNumberOfSaltRounds);
 };
 
