@@ -611,7 +611,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<br>Vous pensiez que c’était simple ?",
+                    "content": "Vous pensiez que c’était simple ?",
                     "feedback": {
                       "state": "Mauvaise réponse.",
                       "diagnosis": "Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;»."
