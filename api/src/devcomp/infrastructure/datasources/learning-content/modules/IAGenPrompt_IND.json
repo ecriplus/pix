@@ -336,7 +336,7 @@
             {
               "type": "element",
               "element": {
-                "id": "62fa6f3f-7c88-4435-a8b9-22c1923d9e6c",
+                "id": "52a47dfc-5c8d-49b8-a08e-c771c3a1c8d7",
                 "type": "expand",
                 "title": "🗝️ Indice 1",
                 "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
@@ -345,7 +345,7 @@
             {
               "type": "element",
               "element": {
-                "id": "d9910c34-350e-4276-a9d0-f509d651c1b1",
+                "id": "b613ef28-7dc7-44cb-8a24-58c111c29046",
                 "type": "expand",
                 "title": "🗝️ Indice 2",
                 "content": "Avez-vous vérifié que le tableau obtenu comporte des <strong>exercices </strong>sur les <strong>manchettes </strong>pour différents niveaux, dont le <strong>niveau expert</strong> ?<br>"
@@ -354,7 +354,7 @@
             {
               "type": "element",
               "element": {
-                "id": "5f9859b2-6b36-49d6-9bd2-ca932cffca79",
+                "id": "bdf81670-c888-4ec7-b678-00b3f9c0c75c",
                 "type": "expand",
                 "title": "🙈 Solution",
                 "content": "La bonne réponse doit&nbsp;:&nbsp;<br><ul><li>être structurée sous la forme d’un <strong>tableau</strong>,</li><li>contenir des exercices s’améliorer aux <strong>manchettes </strong>au <strong>volley</strong>,&nbsp;</li><li>avec un ou des <strong>nouveaux exercices </strong>pour les joueurs <strong>experts</strong>.</li></ul>Si ces conditions sont remplies, votre réponse devrait être validée.&nbsp;✅<br>"
@@ -577,14 +577,14 @@
       "type": "go-further",
       "grains": [
         {
-          "id": "28462ad7-6fe1-458d-8c75-1542b987073a",
+          "id": "676be066-993d-4720-8283-2ad49ce9be2d",
           "type": "challenge",
           "title": "Défi : le lieu du tournoi",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "6def9ef6-ae83-4fc7-923f-a6a0714c7a15",
+                "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
                 "content": "Gustave a du mal à trouver un lieu pour le tournoi de volley-ball qui approche à grands pas.<br>Pour le tournoi, Gustave recherche un endroit à Jolieville, avec au moins 4 terrains. <br>Il a un budget maximal de 300 pixmoney. Il est à la recherche d’un bon plan.<br><br>"
               }
@@ -592,7 +592,7 @@
             {
               "type": "element",
               "element": {
-                "id": "5f424fe8-b996-4934-9af9-200e6ed5ed68",
+                "id": "71fbe79a-2134-4ae3-977d-af3a719e183f",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
@@ -605,7 +605,7 @@
             {
               "type": "element",
               "element": {
-                "id": "378e9d85-a52b-44ab-837b-0697fa865402",
+                "id": "0ccbd3b1-b27d-46d7-9b8c-d2fffc76b8e3",
                 "type": "qrocm",
                 "instruction": "Quel gymnase devrait contacter Gustave ?",
                 "proposals": [
@@ -642,7 +642,7 @@
             {
               "type": "element",
               "element": {
-                "id": "76b8a58f-b92a-40f9-b95e-02e8f6dcd4e0",
+                "id": "abc605f3-ba2d-4ce3-a233-02a086bdf970",
                 "type": "expand",
                 "title": "🗝️ Indice 1 ",
                 "content": "Avez-vous demandé au logiciel d'IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
@@ -651,7 +651,7 @@
             {
               "type": "element",
               "element": {
-                "id": "ced51117-7bc4-42f7-9892-656470699472",
+                "id": "b8132b23-3fb4-4ddb-8bc3-b9e18c8c80b5",
                 "type": "expand",
                 "title": "🗝️ Indice 2",
                 "content": "Avez-vous vérifié le <strong>nombre de terrains</strong> de volley-ball disponibles ?"
@@ -660,7 +660,7 @@
             {
               "type": "element",
               "element": {
-                "id": "6728241a-aea8-4cff-8102-62dc278d8b95",
+                "id": "a7cad48f-9e11-4649-bc62-9386ba18c61f",
                 "type": "expand",
                 "title": "🗝️ Indice 3",
                 "content": "Avez-vous vérifié le <strong>coût</strong> du gymnase ?"
