@@ -1410,8 +1410,8 @@
           "FrEduNumenHash": "Technical identifier",
           "discipline": "School subject",
           "employeeNumber": "Employee number",
-          "first-name-label-and-value": "First name: {firstName}",
-          "last-name-label-and-value": "Last name: {lastName}",
+          "first-name-label": "First name: ",
+          "last-name-label": "Last name: ",
           "population": "Population",
           "rne": "Establishment of assignment",
           "title": "Title"
@@ -1421,7 +1421,7 @@
           "cgu": "You must accept to the Pix terms of use and personal data protection policy to create an account.",
           "claims": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support."
         },
-        "login-button": "I already have an account, I'm logging in",
+        "login-button": "I already have a Pix account, I'm logging in",
         "signup-button": "Create my account",
         "sub-title": "to access your Pix Orga workspace",
         "title": "Create your Account"

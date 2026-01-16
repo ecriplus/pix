@@ -49,15 +49,18 @@ module('Acceptance | OIDC | authentication signup', function (hooks) {
       t('pages.login.join-invitation', { organizationName: 'Super orga avec SSO' }),
     );
     assert.dom(invitationText).exists();
+    const expectedFirstNameLabelAndValue = `${t('pages.oidc.signup.claims.first-name-label')}test`;
+    const expectedLastNameLabelAndValue = `${t('pages.oidc.signup.claims.last-name-label')}PIX`;
 
-    const firstName = await screen.findByText(
-      t('pages.oidc.signup.claims.first-name-label-and-value', { firstName: 'test' }),
+    const foundFirstNameLabelAndValue = await screen.findByText(
+      (_, el) => el.textContent === expectedFirstNameLabelAndValue,
     );
-    const lastName = await screen.findByText(
-      t('pages.oidc.signup.claims.last-name-label-and-value', { lastName: 'PIX' }),
+    const foundLastNameLabelAndValue = await screen.findByText(
+      (_, el) => el.textContent === expectedLastNameLabelAndValue,
     );
-    assert.dom(firstName).exists();
-    assert.dom(lastName).exists();
+
+    assert.dom(foundFirstNameLabelAndValue).exists();
+    assert.dom(foundLastNameLabelAndValue).exists();
 
     // when
     await clickByName(t('common.cgu.label'));

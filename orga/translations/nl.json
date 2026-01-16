@@ -1392,8 +1392,8 @@
           "FrEduNumenHash": "Technische identificatiecode",
           "discipline": "Discipline",
           "employeeNumber": "Werknemersnummer",
-          "first-name-label-and-value": "Voornaam: {firstName}",
-          "last-name-label-and-value": "Naam: {lastName}",
+          "first-name-label": "Voornaam: ",
+          "last-name-label": "Naam: ",
           "population": "Bevolking",
           "rne": "Toewijzingsinstelling",
           "title": "rol"
@@ -1403,7 +1403,7 @@
           "cgu": "Je moet de gebruiksvoorwaarden en het privacybeleid van Pix accepteren om een account aan te maken.",
           "claims": "We konden uw identiteitsgegevens niet ophalen bij de gebruikte dienst. Neem contact op met de IT-ondersteuning van deze organisatie."
         },
-        "login-button": "Ik heb al een account, ik log in",
+        "login-button": "Ik heb al een Pix-account, ik log in",
         "signup-button": "Ik maak mijn account aan",
         "sub-title": "om toegang te krijgen tot uw Pix Orga-werkruimte",
         "title": "Registreer u bij Pix"
