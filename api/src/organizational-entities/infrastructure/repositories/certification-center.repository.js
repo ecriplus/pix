@@ -89,7 +89,14 @@ const _setSearchFiltersForQueryBuilder = (filters, queryBuilder) => {
     queryBuilder.whereRaw('CAST(id as TEXT) LIKE ?', `%${id.toString().toLowerCase()}%`);
   }
   if (name) {
-    queryBuilder.whereILike('name', `%${name}%`);
+    queryBuilder.whereRaw(
+      `
+      regexp_replace(unaccent(name), '[^[:alnum:]]', '', 'g')
+      ILIKE
+      '%' || regexp_replace(unaccent(?), '[^[:alnum:]]', '', 'g') || '%'
+      `,
+      [name],
+    );
   }
   if (type) {
     queryBuilder.whereILike('type', `%${type}%`);

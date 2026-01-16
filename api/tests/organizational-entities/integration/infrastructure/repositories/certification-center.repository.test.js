@@ -335,6 +335,35 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         ]);
         expect(pagination).to.deep.equal(expectedPagination);
       });
+
+      it('should return certification centers matching "name" with accents ignored', async function () {
+        // given
+        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification College' });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Collège+' });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Broca & co' });
+        databaseBuilder.factory.buildCertificationCenter({ name: 'Centre de certification Donnie & co' });
+
+        await databaseBuilder.commit();
+
+        const filter = { name: 'college' };
+        const page = { number: 1, size: 10 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
+
+        // when
+        const { models: matchingOrganizations, pagination } = await certificationCenterRepository.findPaginatedFiltered(
+          {
+            filter,
+            page,
+          },
+        );
+
+        // then
+        expect(_.map(matchingOrganizations, 'name')).to.have.members([
+          'Centre de certification College',
+          'Centre de certification Collège+',
+        ]);
+        expect(pagination).to.deep.equal(expectedPagination);
+      });
     });
 
     context('when there are multiple CertificationCenters matching the same "type" search pattern', function () {
