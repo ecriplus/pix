@@ -57,35 +57,35 @@
                     "id": "1",
                     "content": "<p>Il n’a presque plus de batterie.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Il a un virus informatique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>C’est possible. En tout cas, il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Il a un logiciel malveillant.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Effectivement. Il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Il a eu une mise à jour.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Pas vraiment. Il semble plutôt qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Il semble qu’un logiciel malveillant entraîne des dysfonctionnements.</p>"
+                      "diagnosis": "<p>Il semble qu’un logiciel malveillant entraîne des problèmes de fonctionnement.</p>"
                     }
                   }
                 ],
@@ -125,7 +125,7 @@
               "element": {
                 "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
                 "type": "text",
-                "content": "<p>Les <strong>trois ordinateurs</strong> ci-dessous ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leur fonctionnement puis répondez à la question.</p>"
+                "content": "<p><strong>Trois ordinateurs</strong> ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leurs écrans puis répondez à la question.</p>"
               }
             },
             {
@@ -186,27 +186,27 @@
               "element": {
                 "id": "479ea9aa-0b30-4c3b-8262-31547f1a089a",
                 "type": "qcu-discovery",
-                "instruction": "<p>Selon vous, un logiciel malveillant, ça se voit toujours ?</p>",
+                "instruction": "<p>Selon ce que vous avez pu observer, un logiciel malveillant, est-ce que ça se voit toujours ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, pas toujours. Certains logiciels malveillants peuvent causer des&nbsp;<strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Eh non, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>dysfonctionnements</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer <strong>des&nbsp;dysfonctionnements </strong>qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
+                      "diagnosis": "<p>Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres agissent<strong> discrètement</strong> sans qu’on les voie : l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté.</p>"
                     }
                   }
                 ],
@@ -311,7 +311,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>Une publicit</strong><strong>é </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante.</li><li><strong>Un fichier</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.).</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>Une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante. 🌐</li><li><strong>Un fichier</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.). ✉️</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
                 }
               }
             }
@@ -327,7 +327,7 @@
               "element": {
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
-                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des </strong><strong>gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et officiels</strong> pour télécharger un logiciel ou regarder un film.&nbsp;</li><li><strong>Ne pas cliquer sur des fichiers </strong>ou <strong>des pièces jointes</strong> dans des <strong>messages inconnus</strong>.</li><li><strong>Brancher uniquement des appareils de confiance</strong>.</li><li><strong>Charger son appareil sur une prise électrique.</strong></li></ul>"
+                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et officiels</strong> pour télécharger un logiciel ou regarder un film. 🌐</li><li><strong>Ne pas cliquer sur des fichiers </strong>ou <strong>des pièces jointes</strong> dans des <strong>messages inconnus</strong>. ✉️</li><li><strong>Brancher uniquement des appareils de confiance</strong>.</li><li><strong>Charger son appareil sur une prise électrique. 🔌</strong></li></ul>"
               }
             }
           ]
@@ -541,7 +541,7 @@
                           "id": "1",
                           "content": "<p>Brancher sur un ordinateur une clé USB trouvée dans un parking pour voir ce qu’elle contient.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une clé USB inconnue.</p>"
                           }
                         },
@@ -593,7 +593,7 @@
                           "id": "3",
                           "content": "<p>Regarder un film sur un site de streaming gratuit  illégal.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une page web illégale.</p>"
                           }
                         }
@@ -629,7 +629,7 @@
                           "id": "3",
                           "content": "<p>Télécharger un jeu gratuit depuis un forum de discussion.</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans un lien de téléchargement&nbsp;sur un site non officiel, ou dans un fichier à télécharger dans un message trompeur.</p>"
                           }
                         }
@@ -658,117 +658,81 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "<p>Il existe plusieurs types de logiciels malveillants. Mais alors, quand on parle de <strong>virus informatique</strong>, de quoi s’agit-il exactement ?</p><p>Pour le comprendre, prenons le cas d’Alice. </p><br><p>Alice a utilisé <strong>un ordinateur public à la bibliothèque</strong>, pour rédiger un texte. Pour cela, elle a seulement <strong>créé un document</strong> et n’est pas allée sur Internet. Elle a enregistré son document sur <strong>sa clé USB</strong> pour pouvoir le rapporter chez elle.</p><p>En rentrant chez elle, elle découvre que son document a été renommé bizarrement et ne s’ouvre plus. </p><p><strong>Sa clé USB a été infectée par un virus !🦠</strong></p>"
+                "content": "Il existe <strong>plusieurs types de logiciels malveillants</strong> avec des fonctionnements différents. Par exemple, il y a : le virus informatique, le rançongiciel, le logiciel espion ou encore le cheval de Troie. Saurez vous trouvez les reconnaître à partir de leur définition ?"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
-                "type": "qrocm",
-                "instruction": "<p>Essayez de <strong>compléter le texte suivant</strong> pour décrire la situation d’Alice.</p>",
-                "proposals": [
+                "type": "flashcards",
+                "instruction": "Pour chaque carte : <br><ul><li>Lisez la question.</li><li>Essayez de trouver le type de logiciel malveillant dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
+                "title": "Les types de logiciels malveillants",
+                "introImage": {
+                  "url": ""
+                },
+                "cards": [
                   {
-                    "type": "text",
-                    "content": "<span>La clé USB d’Alice a été infectée par un virus informatique présent </span>"
-                  },
-                  {
-                    "input": "origine virus",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "sur l'ordinateur de la bibliothèque"
+                    "id": "c2a46a7e-8ac0-4df5-bd7d-4826ffdf03f7",
+                    "recto": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "dans le sac d'Alice"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>.</span>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>Le virus s’est copié sur la clé USB </span>"
-                  },
-                  {
-                    "input": "action",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "sans qu’Alice le voit"
+                      "text": "Quel logiciel malveillant se propage d’un appareil à un autre quand on ouvre un fichier infecté par exemple ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "avec l’accord d’Alice"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
+                      "text": "Le virus informatique"
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<span>.</span>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>Le document ne s’ouvre plus parce que </span>"
-                  },
-                  {
-                    "input": "problème",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "- Sélectionner -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Alice l’a mal enregistré"
+                    "id": "2957c00c-3f5d-463a-8193-31af41a32608",
+                    "recto": {
+                      "image": {
+                        "url": ""
                       },
-                      {
-                        "id": "2",
-                        "content": "le virus a modifié le fichier"
-                      }
-                    ],
-                    "solutions": [
-                      "2"
-                    ]
+                      "text": "Quel logiciel malveillant se déguise en programme informatique normal pour tromper l'utilisateur ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Le cheval de Troie"
+                    }
                   },
                   {
-                    "type": "text",
-                    "content": "<span>.</span>"
+                    "id": "6f45f731-3113-46b3-bd2d-d328aa65e384",
+                    "recto": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Quel logiciel malveillant empêche l’accès à un ordinateur ou à des fichiers puis demande de l’argent à l'utilisateur pour les débloquer ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Un rançongiciel (ou ransomware en anglais)"
+                    }
+                  },
+                  {
+                    "id": "cf6b61ee-eaee-4e93-afdb-3e5a8c4cc468",
+                    "recto": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Quel logiciel surveille ce que fait l’utilisateur sur son ordinateur pour récupérer des informations ?"
+                    },
+                    "verso": {
+                      "image": {
+                        "url": ""
+                      },
+                      "text": "Le logiciel espion (ou spyware en anglais)"
+                    }
                   }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Eh oui !</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre</strong>, <strong>sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas tout-à-fait.</p>",
-                    "diagnosis": "<p>Un <strong>virus informatique</strong> est un type de logiciel malveillant capable de <strong>se propager d’un appareil à un autre, sans autorisation</strong>, via des supports ou encore des fichiers.</p>"
-                  }
-                }
+                ]
               }
             }
           ]
