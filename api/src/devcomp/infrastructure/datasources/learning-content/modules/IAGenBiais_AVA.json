@@ -616,7 +616,7 @@
                     "display": "inline",
                     "placeholder": "Nom du pays",
                     "ariaLabel": "Nom du pays",
-                    "defaultValue": "Nom du pays",
+                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",

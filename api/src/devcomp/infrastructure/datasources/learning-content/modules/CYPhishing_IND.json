@@ -495,7 +495,7 @@
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
-                    "defaultValue": "-Sélectionner-",
+                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -525,7 +525,7 @@
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
-                    "defaultValue": "-Sélectionner-",
+                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -555,7 +555,7 @@
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
-                    "defaultValue": "-Sélectionner-",
+                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -618,7 +618,7 @@
                     "display": "inline",
                     "placeholder": "tapez le nom",
                     "ariaLabel": "tapez le nom",
-                    "defaultValue": "tapez le nom",
+                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],
