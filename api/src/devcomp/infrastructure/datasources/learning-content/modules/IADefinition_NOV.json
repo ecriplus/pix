@@ -3,7 +3,7 @@
   "shortId": "cc0cbab7",
   "slug": "ia-dit-ia",
   "title": "IA, vous avez dit IA ? ",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/ia-dit-ia/picto-ia-dit-ia.svg",
