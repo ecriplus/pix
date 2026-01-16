@@ -1,6 +1,4 @@
-
-
-
+import Joi from 'joi';
 
 import { competenceEvaluationController } from './competence-evaluation-controller.js';
 
@@ -10,6 +8,11 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/competence-evaluations/start-or-resume',
       config: {
+        validate: {
+          payload: Joi.object({
+            competenceId: Joi.string().required(),
+          }).required(),
+        },
         handler: competenceEvaluationController.startOrResume,
         notes: [
           '- **Route nécessitant une authentification**\n' +
@@ -23,6 +26,11 @@ const register = async function (server) {
       method: 'PUT',
       path: '/api/competence-evaluations/improve',
       config: {
+        validate: {
+          payload: Joi.object({
+            competenceId: Joi.string().required(),
+          }).required(),
+        },
         handler: competenceEvaluationController.improve,
         notes: [
           '- **Route nécessitant une authentification**\n' +
