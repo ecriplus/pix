@@ -275,7 +275,7 @@
                 "id": "57d7453d-58a9-43f0-830c-f5f392b06f9e",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-DeplacerCurseur/index.html",
                 "instruction": "",
                 "height": 432
               }
@@ -316,7 +316,7 @@
                 "id": "564448dc-6485-4918-a2c1-4452b2552650",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-3boutonsouris/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-boutonsouris/index.html",
                 "instruction": "<p><strong>👉Dans l’image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong><br>Trois mots vont apparaître. Ce sont les noms des boutons de la souris.</p>",
                 "height": 432
               }
@@ -453,7 +453,7 @@
                 "id": "73b6a6d3-8c76-46e9-ae1f-d208d5bf1960",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erclicsgauchesV2/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-clicsouris/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu’il apparait.</strong></p>",
                 "height": 432
               }
