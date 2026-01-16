@@ -12,6 +12,7 @@ import { featureToggles } from '../../../../shared/infrastructure/feature-toggle
 import * as accessCodeRepository from '../../../../shared/infrastructure/repositories/access-code-repository.js';
 import { adminMemberRepository } from '../../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
+import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
@@ -44,6 +45,7 @@ import * as campaignUpdateValidator from '../validators/campaign-update-validato
 const dependencies = {
   assessmentRepository,
   adminMemberRepository,
+  badgeForCalculationRepository,
   badgeAcquisitionRepository,
   badgeRepository,
   campaignAdministrationRepository,

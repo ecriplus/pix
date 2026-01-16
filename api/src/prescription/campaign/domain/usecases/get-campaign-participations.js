@@ -28,13 +28,15 @@ const getStagesAndStageAcquisitions = async (
   return { stages, acquiredStagesByParticipation };
 };
 
-const getBadgesAndBadgesAcquisitions = async (
-  badgeRepository,
+const getBadgesWithBadgesCalculationAndBadgesAcquisitions = async ({
   campaignId,
-  badgeAcquisitionRepository,
   participationIds,
-) => {
+  badgeRepository,
+  badgeForCalculationRepository,
+  badgeAcquisitionRepository,
+}) => {
   const badges = await badgeRepository.findByCampaignId(campaignId);
+  const badgesForCalculation = await badgeForCalculationRepository.findByCampaignId({ campaignId });
   const badgeAcquisitions =
     await badgeAcquisitionRepository.getAcquiredBadgesForCampaignParticipations(participationIds);
   const acquiredBadgesByParticipation = badgeAcquisitions.reduce((acquiredBadgesByParticipation, acquisition) => {
@@ -44,7 +46,7 @@ const getBadgesAndBadgesAcquisitions = async (
     acquiredBadgesByParticipation[acquisition.campaignParticipationId].push(acquisition);
     return acquiredBadgesByParticipation;
   }, {});
-  return { badges, acquiredBadgesByParticipation };
+  return { badges, badgesForCalculation, acquiredBadgesByParticipation };
 };
 
 const computeTubes = (campaignId, campaignParticipation, learningContent, knowledgeElementsByParticipation) => {
@@ -74,6 +76,7 @@ export const getCampaignParticipations = async function ({
   since,
   campaignRepository,
   badgeRepository,
+  badgeForCalculationRepository,
   badgeAcquisitionRepository,
   stageRepository,
   stageAcquisitionRepository,
@@ -104,12 +107,14 @@ export const getCampaignParticipations = async function ({
     participationIds,
   );
 
-  const { badges, acquiredBadgesByParticipation } = await getBadgesAndBadgesAcquisitions(
-    badgeRepository,
-    campaignId,
-    badgeAcquisitionRepository,
-    participationIds,
-  );
+  const { badges, badgesForCalculation, acquiredBadgesByParticipation } =
+    await getBadgesWithBadgesCalculationAndBadgesAcquisitions({
+      campaignId,
+      badgeRepository,
+      badgeForCalculationRepository,
+      badgeAcquisitionRepository,
+      participationIds,
+    });
 
   const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
   const knowledgeElementsByParticipations = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(
@@ -138,15 +143,40 @@ export const getCampaignParticipations = async function ({
           reachedStage: reachedStageNumber === 0 ? 0 : reachedStageNumber - 1, // exclude stage 0
           numberOfStages: stages.length === 0 ? 0 : stages.length - 1, // exclude stage 0
         },
-        badges: badges.map(
-          (badge) =>
-            new Badge({
-              ...badge,
-              isAcquired: badgesAcquisitionsForParticipation.some(({ badgeId }) => badgeId === badge.id),
-            }),
-        ),
+        badges: badges.map((badge) => {
+          // TODO PIX-21173 Create dedicated repository or service for badges to remove logic duplication for acquisition percentage
+          const isAcquired = badgesAcquisitionsForParticipation.some(({ badgeId }) => badgeId === badge.id);
+
+          const acquisitionPercentage = getAcquisitionPercentage(
+            participation,
+            badge,
+            isAcquired,
+            badgesForCalculation,
+            knowledgeElementsByParticipations,
+          );
+
+          return new Badge({
+            ...badge,
+            isAcquired,
+            acquisitionPercentage,
+          });
+        }),
       });
     }),
     meta,
   };
 };
+
+function getAcquisitionPercentage(
+  participation,
+  badge,
+  isAcquired,
+  badgesForCalculation,
+  knowledgeElementsByParticipations,
+) {
+  if (participation.status !== CampaignParticipationStatuses.SHARED) return 0;
+  if (isAcquired) return 100;
+  return badgesForCalculation
+    .find((badgeForCalculation) => badgeForCalculation.id === badge.id)
+    .getAcquisitionPercentage(knowledgeElementsByParticipations[participation.id] ?? []);
+}
