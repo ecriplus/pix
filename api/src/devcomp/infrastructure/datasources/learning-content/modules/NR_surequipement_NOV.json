@@ -2,16 +2,18 @@
   "id": "0850d77c-a846-41a4-bf10-d6bd82e2f31e",
   "shortId": "144ee2d7",
   "slug": "surequipement",
-  "title": "30 milliards d’appareils numériques :  et moi dans tout ça ?",
+  "title": "30 milliards d'appareils numériques : la folie du suréquipement",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Une nouvelle télévision, un ordinateur plus puissant, un ancien téléphone oublié dans un tiroir… Sans toujours nous en rendre compte, nous accumulons au fil des années de plus en plus d’appareils numériques. </p><p>Dans ce module, vous comprendrez ce qu’est concrètement le suréquipement numérique. Vous allez découvrir comment vos appareils consomment même lorsqu’ils semblent “à l’arrêt” et comment certains gestes peuvent faire la différence.&nbsp;<br></p>",
+    "description": "<p>Une nouvelle télévision, un ordinateur plus puissant, un ancien téléphone oublié dans un tiroir… Nous accumulons au fil des années de plus en plus d’appareils numériques. </p><p>Dans ce module, vous comprendrez ce qu’est concrètement le suréquipement numérique. Vous allez découvrir comment vos appareils consomment même lorsqu’ils semblent “à l’arrêt” et comment certains gestes peuvent faire la différence.&nbsp;<br></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
-      "<p>Connaître le phénomène de suréquipement numérique.<br>Savoir que les équipements numériques consomment de l’électricité, même en veille.<br>Connaître le juste besoin et des gestes pour limiter le gaspillage d’énergie des appareils numériques</p>"
+      "<p>Connaître le phénomène de suréquipement numérique.</p>",
+      "<p>Savoir que les équipements numériques consomment de l’électricité, même en veille.</p>",
+      "<p>Connaître le juste besoin et des gestes pour limiter le gaspillage d’énergie des appareils numériques.</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -30,7 +32,7 @@
               "element": {
                 "id": "72b66795-8050-4a97-903c-c3a4f0545efa",
                 "type": "text",
-                "content": "<p>Pour commencer, prenez une minute pour calculer le nombre d’appareils numériques que vous possédez.&nbsp;</p>"
+                "content": "<p>Pour commencer, prenez une minute pour calculer le nombre d’appareils numériques que vous avez chez vous.&nbsp;</p>"
               }
             },
             {
@@ -94,13 +96,13 @@
                     {
                       "id": "61649840-71c7-4a75-b3b7-27f30e069bd5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Que doit-elle faire de son ancien ordinateur?&nbsp;</p>",
+                      "instruction": "<p>Que doit-elle faire de son ancien ordinateur ?&nbsp;</p>",
                       "proposals": [
                         {
                           "id": "2",
                           "content": "<p>Pour ne pas se faire voler ses données, il vaut mieux qu’elle le garde dans un tiroir.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Rien ne sert de stocker, il y existe des&nbsp;solutions pour s’en débarasser en toute sécurité. Thelma pourrait déposer l’ordinateur en point de collecte pour le recycler.</p>"
+                            "diagnosis": "<p>Rien ne sert de stocker, il existe des&nbsp;solutions pour s’en débarrasser en toute sécurité. Thelma pourrait déposer l’ordinateur en point de collecte pour le recycler.</p>"
                           }
                         },
                         {
@@ -152,7 +154,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Se demander si ses écouteurs actuels sont adaptés pour courir.</p>",
+                          "content": "<p>Tester si ses écouteurs actuels sont adaptés pour courir avant d'acheter.</p>",
                           "feedback": {
                             "diagnosis": "<p>Exactement ! Avant d’acheter un nouvel appareil, il est important de se demander si celui que l’on possède déjà ne suffit pas. Il est très courant d’avoir plusieurs appareils qui servent à la même chose.<br></p>"
                           }
@@ -338,7 +340,7 @@
                         "x": 0,
                         "y": 0
                       },
-                      "info": "En “veille permanente” cette enceinte connectée fonctionne en continu et donc consomme.",
+                      "info": "En « veille permanente » cette enceinte connectée fonctionne en continu et donc consomme.",
                       "tooltipPosition": "bottom"
                     },
                     {
@@ -418,7 +420,7 @@
               "element": {
                 "id": "28c33c92-ee3e-4b5b-ac60-3f3a63217b5d",
                 "type": "text",
-                "content": "<h5><strong>Pourquoi mon salon consomme-t-il autant d’électricité ?&nbsp;🤔</strong></h5><p>Parce que de nombreux appareils restent branchés en permanence&nbsp;: box internet, télévision, console de jeux, objets connectés…<br><br>Ces équipements consomment de l’électricité lorsqu’ils sont utilisés ou en charge, mais aussi… <strong>lorsqu’ils sont en veille</strong>. On parle alors de <strong>consommation statique</strong>&nbsp;: un gaspillage souvent sous-estimé mais pourtant bien réel.<br></p>"
+                "content": "<h5><strong>🤔 Pourquoi mon salon consomme-t-il autant d’électricité ?&nbsp;</strong></h5><p>Parce que de nombreux appareils restent branchés en permanence&nbsp;: box internet, télévision, console de jeux, objets connectés…<br><br>Ces équipements consomment de l’électricité lorsqu’ils sont utilisés ou en charge, mais aussi… <strong>lorsqu’ils sont en veille</strong>. On parle alors de <strong>consommation statique</strong>&nbsp;: un gaspillage souvent sous-estimé mais pourtant bien réel.<br></p>"
               }
             }
           ]
@@ -517,20 +519,20 @@
                     {
                       "id": "4ec51b96-64ee-4989-8caf-08d8e845a3cb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Divin en a marre de chercher son chargeur de téléphone chaque soir. Il aimerait acheter un  chargeur sans fil pour son salon afin de pouvoir laisser son chargeur branché près de son lit. Que pouvez-vous lui conseiller ?&nbsp;</p>",
+                      "instruction": "Divin en a marre de chercher son chargeur de téléphone chaque soir. Que pouvez-vous lui conseiller ?",
                       "proposals": [
                         {
                           "id": "2",
-                          "content": "<p>Multiplier chargeurs est toujours utile pour éviter de les chercher partout.</p>",
+                          "content": "<p>Acheter un nouveau chargeur sans fil à laisser branché dans son salon.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Pas vraiment, derrière ce sentiment de confort, Divin utilise plus d’appareils que nécessaire, ce qui a un impact sur sa consommation&nbsp;d’énergie.</p>"
+                            "diagnosis": "<p>Pas vraiment.&nbsp;En achetant, Divin aura&nbsp;plus d’appareils et multiplier le nombre d'appareils numériques, c'est risqué de multiplier sa consommation d’énergie.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>Il vaut mieux se demander si cet achat est vraiment utile.&nbsp;Plus on a d’appareils, plus on consomme d’énergie.</p>",
+                          "content": "<p>Trouver une solution sans acheter :  laisser son chargeur à la même place chaque jour par exemple.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exactement ! En limitant ses équipements à son besoin, on limite sa consommation énergétique.&nbsp;</p>"
+                            "diagnosis": "<p>Exactement ! En limitant ses équipements à son besoin, on limite sa consommation énergétique. Plus on a d’appareils, plus on consomme d’énergie.&nbsp;</p>"
                           }
                         },
                         {
@@ -571,7 +573,7 @@
                     {
                       "id": "5d4b20c7-0eb5-4cfa-b9ff-0c57de69fa8d",
                       "type": "text",
-                      "content": "<h5><strong>Et lorsque l’on utilise nos appareils ?&nbsp;</strong> </h5><p>Restons <strong>sobres</strong> ! Baisser la luminosité d’un appareil ou éviter des usages «&nbsp;combinés&nbsp;» comme allumer la télévision pour finalement jouer sur sa tablette  sont aussi de bons réflexes !</p>"
+                      "content": "<h5><strong>Et lorsque l’on utilise nos appareils ?&nbsp;</strong> </h5><p>Restons <strong>sobres</strong> ! Baisser la luminosité d’un appareil ou éviter des usages «&nbsp;combinés&nbsp;» (comme allumer la télévision pour finalement jouer sur sa tablette)&nbsp; sont aussi de bons réflexes !</p>"
                     }
                   ]
                 }
@@ -595,7 +597,7 @@
               "element": {
                 "id": "a60794da-ef3b-4850-b058-2717382e1a08",
                 "type": "text",
-                "content": "<ul><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. Il y a plus de 30 milliards d’appareils numériques dans le monde. Fabriquer et utiliser autant d’appareils numériques à un coût environnemental fort.&nbsp;🌍<br><br></li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille</strong>, les mises à jour et les connexions permanentes créent une consommation électrique <strong>sous-estimée mais bien réelle</strong>.⚡<br><br></li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés ou encore avoir un usage sobre de ces appareils numériques au quotidien.&nbsp;🔌</li></ul>"
+                "content": "<ul><em>A noter à la relecture : sera (surement) transformé en infographie<br><br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. Il y a plus de 30 milliards d’appareils numériques dans le monde. Fabriquer et utiliser autant d’appareils numériques à un coût environnemental fort.&nbsp;🌍<br><br></li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille</strong>, les mises à jour et les connexions permanentes créent une consommation électrique <strong>sous-estimée mais bien réelle</strong>. ⚡<br><br></li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
               }
             }
           ]
@@ -642,7 +644,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Il faut faire la distinction entre ce qui permet de se séparer d’appareils non utilisés et ce augmente le nombre d’appareils.</p>"
+                    "diagnosis": "<p>Il faut faire la distinction entre ce qui permet de se séparer d’appareils non utilisés et ce qui augmente le nombre d’appareils.</p>"
                   }
                 },
                 "solutions": [
