@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.306.0](https://github.com/1024pix/pix/compare/v5.305.0...v5.306.0) (2026-01-16)
+
+### :rocket: Amélioration
+
+- [#14698](https://github.com/1024pix/pix/pull/14698) Affichage des infos de places dans Pix-Admin (PIX-21033). 
+- [#14715](https://github.com/1024pix/pix/pull/14715) ajout-media-durabilite-ava 
+- [#14735](https://github.com/1024pix/pix/pull/14735) Détacher une organization d'un schéma de parcours combiné (PIX-21094) 
+- [#14754](https://github.com/1024pix/pix/pull/14754) IAGen_fonc_IND_modifs_relecture 
+- [#14714](https://github.com/1024pix/pix/pull/14714) MDX-32 modification Decouverte 2 NR_Datacenter_NOV 
+- [#14726](https://github.com/1024pix/pix/pull/14726) retours jennifer relecture 1 
+- [#14749](https://github.com/1024pix/pix/pull/14749) Tmp datacenter ava ajout 
+
+### :bug: Correction
+
+- [#14751](https://github.com/1024pix/pix/pull/14751) Erreur 500 au (re)démarrage d’une compétence (PIX-21127) 
+
+### :building_construction: Tech
+
+- [#14729](https://github.com/1024pix/pix/pull/14729) Ajouter le champ `requestId` dans la table `chat_messages` (PIX-20362) 
+- [#14750](https://github.com/1024pix/pix/pull/14750) Améliorer l'autocomplétion des usecases 
+- [#14738](https://github.com/1024pix/pix/pull/14738) Masquer certains modules qui ont le même titre (PIX-21113) 
+- [#14711](https://github.com/1024pix/pix/pull/14711) Mettre à jour PixOrga pour utiliser le PixSegmentControl (PIX-21103). 
+- [#14732](https://github.com/1024pix/pix/pull/14732) Nettoyer la config eslint de l'API 
+- [#14746](https://github.com/1024pix/pix/pull/14746) Permettre la consultation des profils cibles quand Maddo n'est pas en route. 
+
+### :coffee: Autre
+
+- [#14708](https://github.com/1024pix/pix/pull/14708) Modifier le style du bloc d'invitation (PIX-21013)
+
 # [5.305.0](https://github.com/1024pix/pix/compare/v5.304.0...v5.305.0) (2026-01-15)
 
 ### :rocket: Amélioration
