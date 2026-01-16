@@ -3,7 +3,7 @@
   "shortId": "05b24fee",
   "slug": "ia-deepfakes",
   "title": "Les deepfakes (hypertrucages) : c’est quoi ?",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/deepfakes/picto-deepfakes.svg",
