@@ -41,13 +41,13 @@
                       "userName": "Asmae",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Tu sais, je pense que quand tu as quelque chose à confier, le mieux est d’en parler à une IA. Elle ne risque pas de le répéter, et au moins elle ne te juge pas."
+                      "content": "J’utilise de plus en plus une IA générative pour réfléchir, écrire ou même parler des mes problèmes. Au fond, je me dis que c’est pratique : on peut tout lui dire, sans jugement."
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
+                      "content": "Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
                     },
                     {
                       "userName": "Asmae",
@@ -98,7 +98,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
-                "content": "<p><strong>Consigne&nbsp;: Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</strong></p>"
+                "content": "<p><strong>Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</strong></p>"
               }
             },
             {
@@ -106,7 +106,7 @@
               "element": {
                 "id": "0599e61c-c78e-4018-841f-0ac051284bb7",
                 "type": "text",
-                "content": "<p>«<em> <strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services.&nbsp;»</em></p><p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
+                "content": "<blockquote>« <strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services. [...]&nbsp;Nous nous appuyons sur des systèmes automatisés et des contrôles humains pour identifier et traiter les contenus qui enfreignent nos Conditions, y compris nos Politiques d’utilisation. »</blockquote>\n<p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
               }
             },
             {
@@ -331,7 +331,7 @@
               "element": {
                 "id": "cdb5615e-b4b2-4c39-b3be-655db6596bac",
                 "type": "text",
-                "content": "<p>Vous connaissez maintenant les informations à ne pas partager. Voyons ce qui peut se passer si vous le faites.</p>"
+                "content": "Vous connaissez maintenant les informations à ne pas partager. Voyons quels effets cela peut produire lorsqu’on les confie malgré tout à une IA."
               }
             }
           ]
@@ -346,7 +346,7 @@
               "element": {
                 "id": "80ee8557-53ba-42e3-a7cf-ed977cac9a27",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Voici une discussion entre Sarah et Maëlle. Sarah remarque que l’IA a généré des informations qui ressemblent fortement à des informations réelles.",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
@@ -355,7 +355,7 @@
                       "userName": "Sarah",
                       "direction": "outgoing",
                       "type": "Texte + Image",
-                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à ChatPix de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
+                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
                         "alt": "Image draft"
@@ -611,8 +611,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   },
                   {
@@ -622,8 +622,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "B"
                   },
                   {
@@ -633,8 +633,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   },
                   {
@@ -644,8 +644,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "B"
                   },
                   {
@@ -655,8 +655,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   }
                 ],
@@ -670,18 +670,18 @@
         {
           "id": "42850024-2a3a-4e13-983d-ec4839ef6ca8",
           "type": "activity",
-          "title": "Activité : Le cas GitHub Copilot",
+          "title": "Activité : Quand une IA fait fuiter des données sensibles",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "935a2724-84d4-4cd0-b320-9a79ab743547",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Lisez attentivement l’article suivant, puis répondez à la question. Appuyez-vous sur l’exemple présenté pour identifier le risque évoqué.",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "💻 GitHub Copilot pointé du doigt pour des fuites de mots de passe",
+                  "title": "💻 Un logiciel d'IA générative pointé du doigt pour des fuites de mots de passe",
                   "author": "Rédaction Tech",
                   "date": "6 octobre 2025",
                   "paragraphs": [
