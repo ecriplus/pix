@@ -1056,7 +1056,7 @@
     },
     "certifications": {
       "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les certificats (.pdf).\n Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.",
-      "documentation-link": "https://cloud.pix.fr/s/8pJqgNNntwDtsDY",
+      "documentation-link": "https://cloud.pix.fr/s/oqnYJWHoSXz8LJk",
       "documentation-link-label": "Interprétation des résultats",
       "documentation-link-notice": "Vous trouverez en suivant ce lien quelques éléments pour interpréter les résultats : ",
       "download-attestations-button": "Télécharger les certificats",
