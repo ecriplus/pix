@@ -8,7 +8,7 @@
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n’avez jamais utilisé de souris, nous vous conseillons d’être accompagné pour ce module.</p><br>",
-    "duration": "30",
+    "duration": 30,
     "level": "novice",
     "objectives": [
       "<p>Reconnaître une souris et connaître son utilité</p>",
@@ -234,7 +234,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Carte à gratter",
-                "url": "https://epreuves.pix.fr/fr/puzzle/example.html",
+                "url": "https://epreuves.pix.fr/fr/puzzle/carte-modulix-souris.html",
                 "instruction": "Pour découvrir l’image cachée, passez le pointeur de votre souris dans toute la zone.",
                 "height": 445
               }
@@ -378,10 +378,10 @@
               "type": "element",
               "element": {
                 "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/8DuRmCV.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "clic",
+                "url": "https://assets.pix.org/draft/modules/souris1/gif_souris_clic_illustre.mp4",
+                "transcription": ""
               }
             },
             {
@@ -411,10 +411,10 @@
               "type": "element",
               "element": {
                 "id": "4cd1c225-f5da-43c2-af29-7d2bfa340b07",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/y23SQFf.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "premier clic",
+                "url": "https://assets.pix.org/draft/modules/souris1/main_gif_deplacer-sa-souris_0110.mp4",
+                "transcription": ""
               }
             },
             {
