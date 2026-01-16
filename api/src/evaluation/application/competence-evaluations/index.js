@@ -1,3 +1,7 @@
+
+
+
+
 import { competenceEvaluationController } from './competence-evaluation-controller.js';
 
 const register = async function (server) {
