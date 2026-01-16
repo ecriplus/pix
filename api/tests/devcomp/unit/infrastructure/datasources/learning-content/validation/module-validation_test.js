@@ -609,7 +609,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         display: 'block',
         placeholder: '<br> hello',
         ariaLabel: "Remplir avec le <span>caractère</span> qui permet de séparer les deux parties d'une adresse mail",
-        defaultValue: '<div>cassé</div>',
+        defaultValue: '-Sélectionner-',
         tolerances: [],
         options: [
           {
@@ -624,7 +624,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         '"input" failed custom validation because HTML is not allowed in this field',
         '"placeholder" failed custom validation because HTML is not allowed in this field',
         '"ariaLabel" failed custom validation because HTML is not allowed in this field',
-        '"defaultValue" failed custom validation because HTML is not allowed in this field',
+        '"defaultValue" must be an empty string when type is select, but you provided -Sélectionner-',
         '"options[0].content" failed custom validation because HTML is not allowed in this field',
       ];
 
