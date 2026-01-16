@@ -533,21 +533,21 @@
                           "id": "1",
                           "content": "<p>Faire une demande à un logiciel d’IA générative.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exact ! <br>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Celà entraîne plus de consommation d’électricité pour les serveurs.</p>"
+                            "diagnosis": "<p>Exact ! <br>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Cela entraîne plus de consommation d’électricité pour les serveurs.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faire une recherche sur internet.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! <br>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Celà entraîne plus de consommation d’électricité pour les serveurs.</p>"
+                            "diagnosis": "<p>Eh non ! <br>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Cela entraîne plus de consommation d’électricité pour les serveurs.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Celà entraîne plus de consommation d’électricité pour les serveurs.</p>"
+                            "diagnosis": "<p>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Cela entraîne plus de consommation d’électricité pour les serveurs.</p>"
                           }
                         }
                       ],
