@@ -658,7 +658,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "Il existe plusieurs types de logiciels malveillants avec des fonctionnements différents : virus informatique, rançongiciel, logiciel espion et cheval de Troie. Saurez vous trouvez lequel correspond à quelle définition ?"
+                "content": "Il existe <strong>plusieurs types de logiciels malveillants</strong> avec des fonctionnements différents. Par exemple, il y a : le virus informatique, le rançongiciel, le logiciel espion ou encore le cheval de Troie. Saurez vous trouvez les reconnaître à partir de leur définition ?"
               }
             },
             {
@@ -666,7 +666,7 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "flashcards",
-                "instruction": "Pour chaque carte : <br><ul><li>Lisez la question.</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
+                "instruction": "Pour chaque carte : <br><ul><li>Lisez la question.</li><li>Essayez de trouver le type de logiciel malveillant dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
                 "title": "Les types de logiciels malveillants",
                 "introImage": {
                   "url": ""
@@ -714,7 +714,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Un rançongiciel (ou <em>ransomware</em>)"
+                      "text": "Un rançongiciel (ou ransomware en anglais)"
                     }
                   },
                   {
@@ -729,7 +729,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Le logiciel espion (ou <em>spyware</em>)"
+                      "text": "Le logiciel espion (ou spyware en anglais)"
                     }
                   }
                 ]
