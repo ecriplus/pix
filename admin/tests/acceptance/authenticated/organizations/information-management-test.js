@@ -83,6 +83,42 @@ module('Acceptance | Organizations | Information management', function (hooks) {
     });
   });
 
+  module('when PLACES_MANAGEMENT feature is enabled', function () {
+    test('should display Places menu item', async function (assert) {
+      // given
+      const organization = this.server.create('organization', {
+        name: 'organizationName',
+        features: {
+          PLACES_MANAGEMENT: { active: true },
+        },
+      });
+
+      // when
+      const screen = await visit(`/organizations/${organization.id}`);
+
+      // then
+      assert.dom(screen.getByRole('link', { name: t('pages.organization.navbar.places') })).exists();
+    });
+  });
+
+  module('when PLACES_MANAGEMENT feature is disabled', function () {
+    test('should not display Places menu item', async function (assert) {
+      // given
+      const organization = this.server.create('organization', {
+        name: 'organizationName',
+        features: {
+          PLACES_MANAGEMENT: { active: false },
+        },
+      });
+
+      // when
+      const screen = await visit(`/organizations/${organization.id}`);
+
+      // then
+      assert.dom(screen.queryByRole('link', { name: t('pages.organization.navbar.places') })).doesNotExist();
+    });
+  });
+
   module('when organization is archived', function () {
     test('should redirect to organization target profiles page', async function (assert) {
       // given

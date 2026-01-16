@@ -37,14 +37,18 @@ import InformationSection from 'pix-admin/components/organizations/information-s
         {{t "pages.organization.navbar.campaigns"}}
       </LinkTo>
 
-      <LinkTo @route="authenticated.organizations.get.places" @model={{@model}}>
-        {{t "pages.organization.navbar.places"}}
-      </LinkTo>
+      {{#if @model.isPlacesManagementEnabled}}
+        <LinkTo @route="authenticated.organizations.get.places" @model={{@model}}>
+          {{t "pages.organization.navbar.places"}}
+        </LinkTo>
+      {{/if}}
+
       {{#if @controller.accessControl.hasAccessToOrganizationActionsScope}}
         <LinkTo @route="authenticated.organizations.get.all-tags" @model={{@model}}>
           {{t "pages.organization.navbar.tags"}}
         </LinkTo>
       {{/if}}
+
       <LinkTo @route="authenticated.organizations.get.children" @model={{@model}}>
         {{t "pages.organization.navbar.children"}}
         ({{@model.children.length}})
