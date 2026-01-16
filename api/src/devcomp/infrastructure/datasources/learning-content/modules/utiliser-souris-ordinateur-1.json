@@ -581,7 +581,7 @@
             {
               "type": "element",
               "element": {
-                "id": "72a98ef7-1052-4f70-bfe8-a77ff4279f61",
+                "id": "cf2d139c-39dc-4e7b-b24c-960e3e52e6cf",
                 "type": "text",
                 "content": "Dans le quiz ci-dessous, cliquez sur une réponse puis cliquez sur «&nbsp;Vérifier ma réponse»."
               }
@@ -589,7 +589,7 @@
             {
               "type": "element",
               "element": {
-                "id": "3480a769-41ea-47e8-990b-c5f8089542e7",
+                "id": "17b6f525-05eb-4349-b84f-dc3790652b80",
                 "type": "qcu",
                 "instruction": "Une phrase a été dite dans la vidéo. <br>Quelle est cette phrase ?",
                 "proposals": [
@@ -624,14 +624,14 @@
             {
               "type": "element",
               "element": {
-                "id": "5fb7bb57-aa01-4427-80cb-4e2bc5c0434a",
+                "id": "6a8af216-fe85-4106-aa5a-3a07329cb76e",
                 "type": "separator"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "85ac9805-09f8-456b-8b5f-f26fe19ca618",
+                "id": "d0644a95-013c-4160-b8df-6414366e533e",
                 "type": "text",
                 "content": "Quand vous avez terminé l’activité, faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;»."
               }
