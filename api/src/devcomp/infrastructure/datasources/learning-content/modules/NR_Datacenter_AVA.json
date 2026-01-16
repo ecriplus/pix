@@ -128,8 +128,8 @@
                       "id": "441b12dd-254c-4cd3-87dd-5c4318fcc104",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-extraction-meteaux.png",
-                      "alt": "Schéma des conséquences d'un centre de données",
-                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur l'extraction des métaux.",
+                      "alt": "Schéma des conséquences d’un centre de données",
+                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur l’extraction des métaux.",
                       "legend": "",
                       "licence": ""
                     },
@@ -180,8 +180,8 @@
                       "id": "6d1f048a-c1a5-4021-bce9-0799d7754fbf",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-consomation-eau.png",
-                      "alt": "Schéma des conséquences d'un centre de données.",
-                      "alternativeText": "Schéma des conséquences d'un centre de données - focus sur la consommation d'eau.",
+                      "alt": "Schéma des conséquences d’un centre de données.",
+                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur la consommation d’eau.",
                       "legend": "",
                       "licence": ""
                     },
@@ -235,8 +235,8 @@
                       "id": "74d11d84-eee4-4347-a4b4-baa07086af27",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-etape3.png",
-                      "alt": "Schéma des conséquences d'un centre de données",
-                      "alternativeText": "Schéma des conséquences d'un centre de données avec les conséquences secondaires.",
+                      "alt": "Schéma des conséquences d’un centre de données",
+                      "alternativeText": "Schéma des conséquences d’un centre de données avec les conséquences secondaires.",
                       "legend": "",
                       "licence": ""
                     },
@@ -295,7 +295,7 @@
               "element": {
                 "id": "16b59faf-6643-4a22-a2e2-55a664a2702d",
                 "type": "text",
-                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contriubuent<em> </em>au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
+                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contribuent au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
               }
             },
             {
@@ -520,7 +520,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
-                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit : conception, développement, utilisation et fin de vie. </p>"
+                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie. </p>"
                     }
                   ]
                 },
@@ -668,7 +668,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/piscine-butte.jpg",
-                              "alt": "Image d'une piscine"
+                              "alt": "Image d’une piscine"
                             }
                           }
                         ]
@@ -812,7 +812,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/data-center-sous-marin-chine.jpg",
-                              "alt": "Photographie d'un centre de données sous-marin"
+                              "alt": "Photographie d’un centre de données sous-marin"
                             }
                           }
                         ]
@@ -873,7 +873,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
-                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts plutôt que par la réduction des impacts environnementaux.<br><br></p>"
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts que par la réduction des impacts environnementaux.<br><br></p>"
                     }
                   ]
                 },
@@ -917,6 +917,214 @@
       "id": "a9874e16-5333-446f-92f2-b2c39fdfa04d",
       "type": "practise",
       "grains": [
+        {
+          "id": "c792086b-77f6-4685-afb4-5e6d0b0e1202",
+          "type": "activity",
+          "title": "Les impacts environnementaux en cascade des centres de données",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7e3b5f25-be22-4e0b-a43a-1c823fabcf8e",
+                "type": "qrocm",
+                "instruction": "Citez 2 conséquences environnementales des centres de données.",
+                "proposals": [
+                  {
+                    "input": "consequencedatacenter1",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "block",
+                    "placeholder": "champs à remplir",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Consommation d’eau",
+                      "la consommation d’eau",
+                      "la consommation d’énergie",
+                      "Consommation d’énergie",
+                      "la consommation d’électricité",
+                      "Consommation d’électricité",
+                      "Extraction de métaux et terres rares",
+                      "Extraction de métaux",
+                      "Extraction de terres rares",
+                      "Artificialisation des sols",
+                      "Co²",
+                      "Émissions de dioxyde de carbone",
+                      "Gaz à effet de serre",
+                      "Rejets de CO2",
+                      "Empreinte carbone",
+                      "Pollution carbone",
+                      "Pollution",
+                      "Production de déchets toxiques",
+                      "Génération de déchets dangereux",
+                      "Rejets de substances toxiques",
+                      "Création de déchets nocifs",
+                      "Accumulation de déchets toxiques",
+                      "déchets toxiques",
+                      "résidus dangereux",
+                      "polluants nocifs",
+                      "substances dangereuses",
+                      "matières toxiques",
+                      "déchets",
+                      "ordures",
+                      "résidus",
+                      "débris",
+                      "rebuts",
+                      "Dégradation de la santé des populations",
+                      "Atteinte à la santé des populations",
+                      "Détérioration de la santé publique",
+                      "Altération de la santé des populations",
+                      "Déclin de la santé collective",
+                      "Dégradation de la santé",
+                      "Altération de la santé",
+                      "Détérioration sanitaire",
+                      "Affaiblissement de l’état de santé",
+                      "Déclin sanitaire",
+                      "Destruction des habitats",
+                      "Anéantissement des habitats naturels",
+                      "Perte des habitats",
+                      "Élimination des habitats",
+                      "Dévastation des milieux naturels",
+                      "Détérioration des habitats",
+                      "Dégradation des milieux naturels",
+                      "Altération des habitats",
+                      "Fragmentation des habitats",
+                      "Appauvrissement des habitats",
+                      "Dégradation de la biodiversité",
+                      "Érosion de la biodiversité",
+                      "Affaiblissement de la biodiversité",
+                      "Appauvrissement de la biodiversité",
+                      "Déclin de la biodiversité",
+                      "Disparition de la biodiversité",
+                      "Perte de biodiversité",
+                      "Extinction des espèces",
+                      "Disparition des espèces",
+                      "Régression de la biodiversité",
+                      "Dérèglement climatique",
+                      "Perturbation du climat",
+                      "Déséquilibre climatique",
+                      "Instabilité climatique",
+                      "Modification du climat",
+                      "Réchauffement climatique",
+                      "Augmentation des températures globales",
+                      "Changement climatique",
+                      "Réchauffement global",
+                      "Hausse des températures moyennes"
+                    ]
+                  },
+                  {
+                    "input": "consequencedatacenter2",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "block",
+                    "placeholder": "champs à remplir",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "champs à remplir",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Consommation d’eau",
+                      "la consommation d’eau",
+                      "la consommation d’énergie",
+                      "Consommation d’énergie",
+                      "la consommation d’électricité",
+                      "Consommation d’électricité",
+                      "Extraction de métaux et terres rares",
+                      "Extraction de métaux",
+                      "Extraction de terres rares",
+                      "Artificialisation des sols",
+                      "Génération de Co²",
+                      "Génération de gaz à effet de serre",
+                      "gaz à effet de serre",
+                      "Co²",
+                      "Émissions de dioxyde de carbone",
+                      "Gaz à effet de serre",
+                      "Rejets de CO2",
+                      "Empreinte carbone",
+                      "Pollution carbone",
+                      "Pollution",
+                      "Production de déchets toxiques",
+                      "Génération de déchets dangereux",
+                      "Rejets de substances toxiques",
+                      "Création de déchets nocifs",
+                      "Accumulation de déchets toxiques",
+                      "déchets toxiques",
+                      "résidus dangereux",
+                      "polluants nocifs",
+                      "substances dangereuses",
+                      "matières toxiques",
+                      "déchets",
+                      "ordures",
+                      "résidus",
+                      "débris",
+                      "rebuts",
+                      "Dégradation de la santé des populations",
+                      "Atteinte à la santé des populations",
+                      "Détérioration de la santé publique",
+                      "Altération de la santé des populations",
+                      "Déclin de la santé collective",
+                      "Dégradation de la santé",
+                      "Altération de la santé",
+                      "Détérioration sanitaire",
+                      "Affaiblissement de l’état de santé",
+                      "Déclin sanitaire",
+                      "Destruction des habitats",
+                      "Anéantissement des habitats naturels",
+                      "Perte des habitats",
+                      "Élimination des habitats",
+                      "Dévastation des milieux naturels",
+                      "Détérioration des habitats",
+                      "Dégradation des milieux naturels",
+                      "Altération des habitats",
+                      "Fragmentation des habitats",
+                      "Appauvrissement des habitats",
+                      "Dégradation de la biodiversité",
+                      "Érosion de la biodiversité",
+                      "Affaiblissement de la biodiversité",
+                      "Appauvrissement de la biodiversité",
+                      "Déclin de la biodiversité",
+                      "Disparition de la biodiversité",
+                      "Perte de biodiversité",
+                      "Extinction des espèces",
+                      "Disparition des espèces",
+                      "Régression de la biodiversité",
+                      "Dérèglement climatique",
+                      "Perturbation du climat",
+                      "Déséquilibre climatique",
+                      "Instabilité climatique",
+                      "Modification du climat",
+                      "Réchauffement climatique",
+                      "Augmentation des températures globales",
+                      "Changement climatique",
+                      "Réchauffement global",
+                      "Hausse des températures moyennes"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bien vu !",
+                    "diagnosis": "Et il y en a beaucoup d’autres...."
+                  },
+                  "invalid": {
+                    "state": "Êtes-vous sûr ?",
+                    "diagnosis": "Vous pouvez retourner consulter le<strong> schéma explicatif </strong>au début du module pour trouver la réponse. (Si vous êtes relecteur et que votre réponse n’a pas été prise en compte, dites-là nous pour qu’on l’ajoute)"
+                  }
+                }
+              }
+            }
+          ]
+        },
         {
           "id": "1cd7472e-26e2-4a23-9857-3195ba38acf7",
           "type": "activity",
@@ -1018,7 +1226,7 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Choisir la meilleure qualité possible pour les médias.</p>"
+                    "content": " Les médias sont présentées dans la meilleure qualité possible."
                   }
                 ],
                 "feedbacks": {
@@ -1209,11 +1417,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureusement, c’est juste !</p>",
-                          "diagnosis": "Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour<strong> f</strong><strong>aire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif."
+                          "diagnosis": "Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour<strong> f</strong><strong>aire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif."
                         },
                         "invalid": {
                           "state": "<p>Pas tout à fait...</p>",
-                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c'est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l'environnement alors que son impact réel est négatif.</p>"
+                          "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif.</p>"
                         }
                       },
                       "solutions": [
