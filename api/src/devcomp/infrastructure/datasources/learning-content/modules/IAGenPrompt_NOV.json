@@ -745,18 +745,18 @@
       ]
     },
     {
-      "id": "5e77e81a-7af6-4fd4-9123-213200333b9d",
+      "id": "ca0cac66-3bde-498b-a339-a69b139f8b64",
       "type": "go-further",
       "grains": [
         {
-          "id": "cea108c3-9bab-406c-be58-dd976b1680bd",
+          "id": "3f2d710e-6e37-4922-814b-520bd0fdfca1",
           "type": "transition",
           "title": "texte de transition 5",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "bd373d86-9859-4f63-a693-bec98c2e7301",
+                "id": "8508c24d-493a-499d-b336-6e8f61680b32",
                 "type": "text",
                 "content": "<p>Vous avez appris à parler avec un logiciel d’IA générative.👏 Maintenant, place à la pratique : voyons si vous pouvez obtenir la réponse souhaitée !</p>"
               }
@@ -771,7 +771,7 @@
             {
               "type": "element",
               "element": {
-                "id": "af7ce49a-a370-46e5-9210-9cb890a374d3",
+                "id": "f3a8bd3b-a753-4867-abae-5091f07954cb",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
@@ -784,7 +784,7 @@
             {
               "type": "element",
               "element": {
-                "id": "979e52dc-c299-46b3-9df4-211259263b57",
+                "id": "3cd4e9f5-d74d-48ba-bd6e-1c8a19fbd206",
                 "type": "expand",
                 "title": "Indice 1",
                 "content": "<p>Avez-vous&nbsp;vérifié la recette produite par l'IA ?&nbsp;</p>"
@@ -793,7 +793,7 @@
             {
               "type": "element",
               "element": {
-                "id": "be5ec822-0cb7-405b-b390-646f57fcde51",
+                "id": "424be1fc-caa2-4839-a809-6109238af1ee",
                 "type": "expand",
                 "title": "Indice 2",
                 "content": "<p>Avez-vous demandé à l’IA de corriger sa proposition ?     <br></p>"
@@ -802,7 +802,7 @@
             {
               "type": "element",
               "element": {
-                "id": "4c108ecc-0d87-447a-87b3-eb090b3bd578",
+                "id": "b3b789aa-6d69-402e-bd2d-822c581628d9",
                 "type": "expand",
                 "title": "🙈 Solution",
                 "content": "<p>Si le logiciel d'IA a bien produit une recette, il a sûrement fait une&nbsp;<strong>erreur </strong>et ajouté des<strong> insectes.</strong></p><p> Si vous avez réussi à obtenir un <strong>recette&nbsp;</strong><strong>avec un fruit, sans insecte</strong> votre réponse devrait être validée.&nbsp;✅</p>"
