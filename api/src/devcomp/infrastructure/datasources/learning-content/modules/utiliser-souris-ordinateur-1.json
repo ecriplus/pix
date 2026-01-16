@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/draft/modules/souris1/picto-1eremarche_souris1.svg",
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n’avez jamais utilisé de souris, nous vous conseillons d’être accompagné pour ce module.</p><br>",
     "duration": 30,
     "level": "novice",
@@ -508,7 +508,7 @@
               "element": {
                 "id": "1ad8190f-46b6-43b5-82b1-cd81640b1700",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/G6t4f0c.png",
+                "url": "https://assets.pix.org/draft/modules/souris1/curseurs-avec-noms.png",
                 "alt": "",
                 "alternativeText": "<p>image des 4 formes de pointeur les plus courantes&nbsp;: la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
               }
