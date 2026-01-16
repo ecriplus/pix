@@ -16,8 +16,6 @@ export class CombinedCourseBlueprint {
     createdAt,
     updatedAt,
     organizationIds = [],
-    duplicatedOrganizationIds = [],
-    attachedOrganizationIds = [],
   }) {
     this.id = id;
     this.name = name;
@@ -28,8 +26,6 @@ export class CombinedCourseBlueprint {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.organizationIds = organizationIds;
-    this.duplicatedOrganizationIds = duplicatedOrganizationIds;
-    this.attachedOrganizationIds = attachedOrganizationIds;
   }
 
   get targetProfileIds() {
@@ -93,7 +89,10 @@ export class CombinedCourseBlueprint {
         comparison: REQUIREMENT_COMPARISONS.ALL,
         data: {
           campaignId: { data: campaignId, comparison: CRITERION_COMPARISONS.EQUAL },
-          status: { data: CampaignParticipationStatuses.SHARED, comparison: CRITERION_COMPARISONS.EQUAL },
+          status: {
+            data: CampaignParticipationStatuses.SHARED,
+            comparison: CRITERION_COMPARISONS.EQUAL,
+          },
         },
       });
     } else if (moduleId) {
@@ -119,15 +118,18 @@ export class CombinedCourseBlueprint {
     this.organizationIds = this.organizationIds.filter((id) => id !== organizationId);
   }
   attachOrganizations({ organizationIds }) {
+    const duplicatedOrganizationIds = [];
+    const attachedOrganizationIds = [];
     organizationIds.map((organizationId) => {
       if (this.organizationIds.includes(organizationId)) {
-        this.duplicatedOrganizationIds.push(organizationId);
+        duplicatedOrganizationIds.push(organizationId);
       } else {
-        this.attachedOrganizationIds.push(organizationId);
+        attachedOrganizationIds.push(organizationId);
       }
     });
 
-    this.organizationIds.push(...this.attachedOrganizationIds);
+    this.organizationIds.push(...attachedOrganizationIds);
+    return { duplicatedOrganizationIds, attachedOrganizationIds };
   }
 }
 

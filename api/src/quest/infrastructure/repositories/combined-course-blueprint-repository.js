@@ -35,8 +35,6 @@ export async function save({ combinedCourseBlueprint }) {
   return new CombinedCourseBlueprint({
     ...updatedValues,
     organizationIds: combinedCourseBlueprint.organizationIds,
-    duplicatedOrganizationIds: combinedCourseBlueprint.duplicatedOrganizationIds,
-    attachedOrganizationIds: combinedCourseBlueprint.attachedOrganizationIds,
   });
 }
 

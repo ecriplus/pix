@@ -63,14 +63,14 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
         id: combinedCourseBlueprintShare.combinedCourseBlueprintId,
       });
 
-      combinedCourseBlueprint.attachOrganizations({ organizationIds: [organization1.id, organization2.id] });
+      combinedCourseBlueprint.attachOrganizations({
+        organizationIds: [organization1.id, organization2.id],
+      });
 
       // when
       const result = await combinedCourseBluePrintRepository.save({ combinedCourseBlueprint });
 
       expect(result.organizationIds).deep.equal([organization1.id, organization2.id]);
-      expect(result.duplicatedOrganizationIds).deep.equal([organization1.id]);
-      expect(result.attachedOrganizationIds).deep.equal([organization2.id]);
     });
 
     it('should throw a NotFound error when combined course blueprint does not exist', async function () {

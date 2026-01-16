@@ -43,6 +43,7 @@ const dependencies = {
   logger,
 };
 
+import { attachOrganizationsToCombinedCourseBlueprint } from './attach-organizations-to-combined-course-blueprint.js';
 import { checkUserQuest } from './check-user-quest-success.js';
 import { createCombinedCourseBlueprint } from './create-combined-course-blueprint.js';
 import { createCombinedCourses } from './create-combined-courses.js';
@@ -65,6 +66,7 @@ import { startCombinedCourse } from './start-combined-course.js';
 import { updateCombinedCourse } from './update-combined-course.js';
 
 const usecasesWithoutInjectedDependencies = {
+  attachOrganizationsToCombinedCourseBlueprint,
   checkUserQuest,
   createOrUpdateQuestsInBatch,
   detachOrganizationFromCombinedCourseBlueprint,
