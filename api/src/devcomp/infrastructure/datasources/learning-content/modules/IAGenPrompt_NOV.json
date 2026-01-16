@@ -3,7 +3,7 @@
   "shortId": "4920d56c",
   "slug": "ia-premier-prompt",
   "title": "Mon premier prompt !",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
