@@ -1268,7 +1268,13 @@
     },
     "organization": {
       "navbar": {
-        "children": "Children organisations"
+        "campaigns": "Campaigns",
+        "children": "Children organisations",
+        "invitations": "Invitations",
+        "places": "Places",
+        "tags": "Tags",
+        "target-profiles": "Target profiles",
+        "team": "Team"
       }
     },
     "organization-children": {
