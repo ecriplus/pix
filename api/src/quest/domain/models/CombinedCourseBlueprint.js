@@ -16,6 +16,8 @@ export class CombinedCourseBlueprint {
     createdAt,
     updatedAt,
     organizationIds = [],
+    duplicatedOrganizationIds = [],
+    attachedOrganizationIds = [],
   }) {
     this.id = id;
     this.name = name;
@@ -26,6 +28,8 @@ export class CombinedCourseBlueprint {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.organizationIds = organizationIds;
+    this.duplicatedOrganizationIds = duplicatedOrganizationIds;
+    this.attachedOrganizationIds = attachedOrganizationIds;
   }
 
   get targetProfileIds() {
@@ -113,6 +117,17 @@ export class CombinedCourseBlueprint {
   }
   detachOrganization({ organizationId }) {
     this.organizationIds = this.organizationIds.filter((id) => id !== organizationId);
+  }
+  attachOrganizations({ organizationIds }) {
+    organizationIds.map((organizationId) => {
+      if (this.organizationIds.includes(organizationId)) {
+        this.duplicatedOrganizationIds.push(organizationId);
+      } else {
+        this.attachedOrganizationIds.push(organizationId);
+      }
+    });
+
+    this.organizationIds.push(...this.attachedOrganizationIds);
   }
 }
 
