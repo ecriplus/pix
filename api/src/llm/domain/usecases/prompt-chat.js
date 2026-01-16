@@ -61,6 +61,7 @@ export async function promptChat({
       llmResponseHandler.llmResponseStream = await promptRepository.prompt({
         messages: chat.messagesForInference,
         configuration: chat.configuration,
+        chatId: chat.id,
       });
     }
 
@@ -132,7 +133,18 @@ async function runFlow({ chat, chatRepository, llmResponseHandler, logger = defa
 
     await chatRepository.save(chat);
   } catch (err) {
-    logger.error({ err, message: chat.lastUserMessage, llmResponseMetadata }, 'error in runFlow');
+    logger.error(
+      {
+        err,
+        context: 'prompt-chat',
+        data: {
+          chatId: chat.id,
+          lastUserMessage: chat.lastUserMessage,
+          llmResponseMetadata,
+        },
+      },
+      'error in runFlow',
+    );
     await llmResponseHandler.finish();
   } finally {
     await redisMutex.release(chat.id);

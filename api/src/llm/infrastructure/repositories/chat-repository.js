@@ -1,4 +1,5 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { getCorrelationContext } from '../../../shared/infrastructure/monitoring-tools.js';
 import { Chat } from '../../domain/models/Chat.js';
 
 /**
@@ -104,5 +105,6 @@ function _buildDatabaseMessage({ chatId, message }) {
     emitter,
     index,
     wasModerated: wasModerated ?? null,
+    requestId: getCorrelationContext().request_id,
   };
 }
