@@ -658,7 +658,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "Il existe plusieurs types de logiciels malveillant avec des focntionnements différents. En connaissez-vous ?"
+                "content": "Il existe plusieurs types de logiciels malveillant avec des focntionnements différents : virus informatique, rançongiciel, logiciel espion et cheval de Troie. Saurez vous trouvez lequel correspond à quelle définition ?"
               }
             },
             {
@@ -666,7 +666,7 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "flashcards",
-                "instruction": "Pour chaque carte : <br><ul><li>Lisez le nom.&nbsp;</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
+                "instruction": "Pour chaque carte : <br><ul><li>Lisez la question.</li><li>Essayez de trouver la réponse dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
                 "title": "Les types de logiciels malveillants",
                 "introImage": {
                   "url": ""
@@ -678,13 +678,13 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Le virus informatique est-il un logiciel malveillant ?"
+                      "text": "Quel logiciel malveillant se propage d’un appareil à un autre quand on ouvre un fichier infecté par exemple. ?"
                     },
                     "verso": {
                       "image": {
                         "url": ""
                       },
-                      "text": "Un virus informatique est un logiciel malveillant qui peut se propager d’un appareil à un autre quand on  ouvre un fichier infecté par exemple."
+                      "text": "Le virus informatique"
                     }
                   },
                   {
@@ -693,13 +693,13 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Le cheval de Troie est-il un logiciel malveillant ?"
+                      "text": "Quel logiciel malveillant se déguise en programme informatique normal (jeu, application, fichier, etc.) pour tromper l'utilisateur ?"
                     },
                     "verso": {
                       "image": {
                         "url": ""
                       },
-                      "text": "Un cheval de Troie est un logiciel malveillant déguisé en programme informatique normal (jeu, application, fichier…).&nbsp;Une fois ouvert, il peut donner accès à l’appareil ou voler des informations"
+                      "text": "Le cheval de Troie"
                     }
                   },
                   {
@@ -708,13 +708,13 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Le rançongiciel (ransomware) est-il un logiciel malveillant ?"
+                      "text": "Quel logiciel malveillant empêche l’accès à un ordinateur ou à des fichiers puis demande de l’argent à l'utilisateur pour les débloquer ?"
                     },
                     "verso": {
                       "image": {
                         "url": ""
                       },
-                      "text": "Un rançongiciel est un logiciel malveillant qui bloque l’accès aux fichiers ou à l’appareil. <br>Il demande ensuite de l’argent (rançon) pour tenter de rendre l’accès à nouveau possible. Payer ne garantit pas que l’accès sera réellement rendu."
+                      "text": "Un rançongiciel (ou <em>ransomware</em>). Payer ne garantit pas que l’accès sera réellement rendu."
                     }
                   },
                   {
@@ -723,13 +723,13 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Le logiciel espion (spyware) est-il un logiciel malveillant ?"
+                      "text": "Quel logiciel surveille ce que fait l’utilisateur sur son ordinateur pour récupérer des informations ? ?"
                     },
                     "verso": {
                       "image": {
                         "url": ""
                       },
-                      "text": "Un logiciel espion est un logiciel malveillant qui peut surveiller l’activité de l’utilisateur afin de collecter des informations."
+                      "text": "Le logiciel espion (ou <em>spyware>/em>)"
                     }
                   }
                 ]
