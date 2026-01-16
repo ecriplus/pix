@@ -3,7 +3,7 @@
   "shortId": "4eacd0c3",
   "slug": "prompt-intermediaire",
   "title": "J’améliore mes prompts !",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
@@ -32,7 +32,7 @@
               "element": {
                 "id": "339e443a-9eb7-476c-8689-9a7714c31607",
                 "type": "text",
-                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l'aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
+                "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l’aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
               }
             }
           ]
@@ -68,7 +68,7 @@
                       "userName": "Gustave",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
+                      "content": "Mon prompt, c’était : « Aide-moi à organiser le tournoi. »"
                     },
                     {
                       "userName": "Emma",
@@ -125,19 +125,19 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>le type de sport : « de volley-ball »</p>"
+                    "content": "<p>le type de sport&nbsp;: «&nbsp;de volley-ball&nbsp;»</p>"
                   },
                   {
                     "id": "2",
-                    "content": "<p>le public : « pour les membres du club »</p>"
+                    "content": "<p>le public&nbsp;: «&nbsp;pour les membres du club&nbsp;»</p>"
                   },
                   {
                     "id": "3",
-                    "content": "<p>le contexte : «  organisé par des bénévoles »</p>"
+                    "content": "<p>le contexte&nbsp;: «&nbsp; organisé par des bénévoles&nbsp;»</p>"
                   },
                   {
                     "id": "4",
-                    "content": "<p>l’objectif&nbsp;: « l'organisation logistique&nbsp;»</p>"
+                    "content": "<p>l’objectif&nbsp;: «&nbsp;l’organisation logistique&nbsp;»</p>"
                   }
                 ],
                 "feedbacks": {
@@ -150,12 +150,7 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2",
-                  "3",
-                  "4"
-                ]
+                "solutions": ["1", "2", "3", "4"]
               }
             }
           ]
@@ -185,7 +180,7 @@
               "element": {
                 "id": "d0929d7f-98c7-4922-a3ab-5397de53bef1",
                 "type": "text",
-                "content": "<p>Gustave a écrit un message d'invitation au tournoi et a demandé à l'IA de le corriger.</p>"
+                "content": "<p>Gustave a écrit un message d’invitation au tournoi et a demandé à l’IA de le corriger.</p>"
               }
             },
             {
@@ -193,23 +188,23 @@
               "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
-                "instruction": "<p>Vous pouvez changer le ton de ce message avec l'aide de l'IA.</p>",
+                "instruction": "<p>Vous pouvez changer le ton de ce message avec l’aide de l’IA.</p>",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J'ai écrit ce message d'invitation au tournoi. Peux-tu vérifier s'il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu'à vendredi. »"
+                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu’à vendredi. »"
                     },
                     {
                       "direction": "inbound",
-                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong>  Il vous reste jusqu'à vendredi. »"
+                      "content": "Voici une version corrigée du message :  <br> « Salut à tous,<br> Petit rappel <strong>amical</strong> pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour <strong>longtemps !</strong>  Il vous reste jusqu’à vendredi. »"
                     }
                   ],
                   "prompts": [
                     {
-                      "prompt": "Rends le plus festif !",
+                      "prompt": "Rends le plus festif !",
                       "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l’ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t’es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t’attend sur le terrain ! 💪"
                     },
                     {
@@ -217,7 +212,7 @@
                       "response": "Madame, Monsieur,<br> Nous n’avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                     },
                     {
-                      "prompt": "Et en plus drôle ?",
+                      "prompt": "Et en plus drôle ?",
                       "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
@@ -275,7 +270,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer (« en tant que coach sportif&nbsp;», « comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -290,7 +285,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement sous la forme d’un <strong>tableau</strong>.</p>"
+                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement sous la forme d’un <strong>tableau</strong>.<br></p>"
               }
             },
             {
@@ -298,7 +293,7 @@
               "element": {
                 "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
-                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette</td>        </tr>    </tbody></table>"
+                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette.</td>        </tr>    </tbody></table>"
               }
             }
           ]
@@ -306,14 +301,14 @@
         {
           "id": "2649a70b-3c92-4be4-b729-f27784225c40",
           "type": "discovery",
-          "title": "Découverte : Aide Gustave avec son prompt",
+          "title": "Découverte : Aide Gustave avec son prompt",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite à présent faire un autre&nbsp;<strong>tableau </strong>similaire au premier, cette fois-ci, pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>e logiciel d’IA générative</strong> pour répondre à sa demande. N’hésitez pas à préciser au fur et à mesure.</p>"
+                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus idée… <br>Utilisez l’IA de Pix pour l’aider à compléter son tableau.<br>"
               }
             },
             {
@@ -323,7 +318,7 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmix2593q00013v0195p6ayta",
                 "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
@@ -341,10 +336,28 @@
             {
               "type": "element",
               "element": {
-                "id": "cfc970e9-4fc4-49af-8ef7-c7b670d1a12a",
+                "id": "52a47dfc-5c8d-49b8-a08e-c771c3a1c8d7",
+                "type": "expand",
+                "title": "🗝️ Indice 1",
+                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b613ef28-7dc7-44cb-8a24-58c111c29046",
+                "type": "expand",
+                "title": "🗝️ Indice 2",
+                "content": "Avez-vous vérifié que le tableau obtenu comporte des <strong>exercices </strong>sur les <strong>manchettes </strong>pour différents niveaux, dont le <strong>niveau expert</strong> ?<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "bdf81670-c888-4ec7-b678-00b3f9c0c75c",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Voici les critères de réussite pour cet exercice :</p><ul><li>Le résultat doit contenir&nbsp;<strong>des exercices de différents niveaux.</strong></li><li>Ces exercices doivent permettre de progresser en <strong>smash </strong>au <strong>volleyball.</strong></li><li>Ils doivent être présentés sous la forme d'un <strong>tableau.</strong></li></ul><p>Si vous avez réussi à obtenir ce résultat avec ChatPix, votre réponse devrait être validée.✅<br></p>"
+                "content": "La bonne réponse doit&nbsp;:&nbsp;<br><ul><li>être structurée sous la forme d’un <strong>tableau</strong>,</li><li>contenir des exercices s’améliorer aux <strong>manchettes </strong>au <strong>volley</strong>,&nbsp;</li><li>avec un ou des <strong>nouveaux exercices </strong>pour les joueurs <strong>experts</strong>.</li></ul>Si ces conditions sont remplies, votre réponse devrait être validée.&nbsp;✅<br>"
               }
             }
           ]
@@ -362,7 +375,7 @@
                     {
                       "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
                       "type": "text",
-                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(« en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(« fais 2 parties et 2 sous-parties...»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
+                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties...»)</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
                 },
@@ -388,7 +401,7 @@
         {
           "id": "97606a38-68e2-427e-b8e5-65411cd7d5d5",
           "type": "summary",
-          "title": "Récap’ : l’essentiel pour faire des bons prompts",
+          "title": "Récap’ : l’essentiel pour faire des bons prompts",
           "components": [
             {
               "type": "element",
@@ -457,10 +470,7 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2"
-                      ]
+                      "solutions": ["1", "2"]
                     }
                   ]
                 },
@@ -499,11 +509,7 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
-                      ]
+                      "solutions": ["1", "2", "3"]
                     }
                   ]
                 }
@@ -539,7 +545,7 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur de LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmk6rk3fm00003u01qywbbyz4",
                 "instruction": "<p>Vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
@@ -558,8 +564,8 @@
               "element": {
                 "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
                 "type": "expand",
-                "title": "🙊 Solution",
-                "content": "<p>Si le logiciel d'IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s'agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "title": "🙈 Solution",
+                "content": "<p>Si le logiciel d’IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s’agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
@@ -571,94 +577,27 @@
       "type": "go-further",
       "grains": [
         {
-          "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
+          "id": "676be066-993d-4720-8283-2ad49ce9be2d",
           "type": "challenge",
-          "title": "Défi : l’actualité du tournoi",
+          "title": "Défi : le lieu du tournoi",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "dd2cf906-b77f-4c4d-8f11-9aa53a606d03",
+                "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
-                "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée, à sa manière,<strong> une publication</strong> pour le site internet du gymnase…</p><p>Il n’a pas encore écrit le texte pour le tournoi de l’été et a besoin de votre aide.</p><p>Ses précédentes publications et l<strong>’illustration de la prochaine publication</strong> se trouvent ci-dessous.</p>"
+                "content": "Gustave a du mal à trouver un lieu pour le tournoi de volley-ball qui approche à grands pas.<br>Pour le tournoi, Gustave recherche un endroit à Jolieville, avec au moins 4 terrains. <br>Il a un budget maximal de 300 pixmoney. Il est à la recherche d’un bon plan.<br><br>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "pix-carousel",
-                "props": {
-                  "type": "image",
-                  "slides": [
-                    {
-                      "title": "Le tournoi de l’automne 🍂",
-                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les <strong>Patata Smash</strong> sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br>Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.png",
-                        "alt": "Bravo à l’équipe Patata Smash !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "Le tournoi du printemps 🌷",
-                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les <strong>Filets Mignons</strong>. <br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers <strong>Filets Mignons</strong>.</p>",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.png",
-                        "alt": "Félicitations à l’équipe Filets mignons !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "Le tournoi de l’été ☀️",
-                      "description": "Ce texte est manquant... C’est à vous de le générer avec l’IA ci-dessous.",
-                      "displayWidth": 0,
-                      "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.png",
-                        "alt": "Une affiche concernant le tournoi de Volley.  Elle annonce l’équipe des volley-raptors vainqueur !"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    }
-                  ],
-                  "randomSlides": false,
-                  "titleLevel": 0,
-                  "disableAnimation": false
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "52c9f208-8f95-4926-a64e-214041a834d2",
-                "type": "text",
-                "content": "<p>À votre tour d’écrire <strong>la publication</strong><strong>&nbsp;du tournoi de l’été</strong> à la façon des <strong>précédentes publications</strong> d’actualités de Gustave et en vous basant sur l’image illustrant le tournoi de l’été.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
+                "id": "71fbe79a-2134-4ae3-977d-af3a719e183f",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l’IA</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
+                "instruction": "<p>À partir des critères de recherche de Gustave, utilisez le logiciel d'IA générative ci-dessous, utilisée par Jolieville, pour trouver un lieu adapté.</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -666,18 +605,65 @@
             {
               "type": "element",
               "element": {
-                "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
-                "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details>"
+                "id": "0ccbd3b1-b27d-46d7-9b8c-d2fffc76b8e3",
+                "type": "qrocm",
+                "instruction": "Quel gymnase devrait contacter Gustave ?",
+                "proposals": [
+                  {
+                    "input": "NomGymnase",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "Nom du gymnase",
+                    "ariaLabel": "Nom du gymnase",
+                    "defaultValue": "",
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": [
+                      "Le gymnase des 3 sapins",
+                      "gymnase des 3 sapins",
+                      "gymnase des trois sapins",
+                      "le gymnase des trois sapins"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bravo !",
+                    "diagnosis": "Grâce à vous, le tournoi va pouvoir avoir lieu !"
+                  },
+                  "invalid": {
+                    "state": "Eh non...",
+                    "diagnosis": "Avez-vous vérifié que tous les critères étaient respectés ?"
+                  }
+                }
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "9499fd64-f8b4-4c28-be7e-b51a30c72e21",
+                "id": "abc605f3-ba2d-4ce3-a233-02a086bdf970",
                 "type": "expand",
-                "title": "🙈 Solution",
-                "content": "<p>Voici les critères de réussite pour cet exercice : </p><ul><li>Le résultat doit être un <strong>court poème.</strong></li><li>Ce poème doit faire l'<strong>éloge d'une équipe de volleyball qui a gagné un tournoi</strong>.</li><li> Le nom de l'équipe, les <strong>Volley-Raptors</strong>, doit être inclus.</li></ul><p>Si vous avez réussi à obtenir ce résultat avec ChatPix, votre réponse devrait être validée.✅</p>"
+                "title": "🗝️ Indice 1 ",
+                "content": "Avez-vous demandé au logiciel d'IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b8132b23-3fb4-4ddb-8bc3-b9e18c8c80b5",
+                "type": "expand",
+                "title": "🗝️ Indice 2",
+                "content": "Avez-vous vérifié le <strong>nombre de terrains</strong> de volley-ball disponibles ?"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a7cad48f-9e11-4649-bc62-9386ba18c61f",
+                "type": "expand",
+                "title": "🗝️ Indice 3",
+                "content": "Avez-vous vérifié le <strong>coût</strong> du gymnase ?"
               }
             }
           ]
