@@ -10,9 +10,7 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il permet de visualiser tous les modules existants.</p>",
     "duration": 1,
     "level": "novice",
-    "objectives": [
-      "<p>Découvrir les éléments de la galerie Modulix</p>"
-    ],
+    "objectives": ["<p>Découvrir les éléments de la galerie Modulix</p>"],
     "tabletSupport": "comfortable"
   },
   "sections": [
@@ -60,72 +58,45 @@
               "element": {
                 "id": "496a2f21-ea99-41ac-9d0a-84133c1f42ce",
                 "type": "text",
-                "content": "<p><strong>custom</strong></p>\n<p>Il permet d'afficher un POIP.</p>"
+                "content": "<p><strong>custom</strong></p>\n<p>Il permet d'afficher un POI.</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "fe68ec1f-acca-4bb5-902b-9f9a6a5b3ca9",
+                "id": "8b29cafe-f978-4e3c-967d-6b32660eb273",
                 "type": "custom",
                 "instruction": "",
-                "tagName": "message-conversation",
+                "tagName": "llm-messages",
                 "props": {
-                  "title": "Confessions nocturnes",
                   "messages": [
                     {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ouais c'est qui là ?"
+                      "direction": "outbound",
+                      "content": "Bonjour"
                     },
                     {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, c'est Vi ouvre moi."
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
                     },
                     {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ça va Vi ?"
+                      "direction": "outbound",
+                      "content": "Pourquoi pas..."
                     },
                     {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
+                      "direction": "inbound",
+                      "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
                     },
                     {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Non, ça va pas non."
+                      "direction": "outbound",
+                      "content": "Elle est bizarre ta recette."
                     },
                     {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ben dis-moi, qu'est qu'il y a ?"
+                      "direction": "inbound",
+                      "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
                     },
                     {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, assieds-toi faut que je te parle..."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "J'ai passé ma journée dans le noir."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
+                      "direction": "outbound",
+                      "content": "Non, je m'en vais."
                     }
                   ]
                 }
@@ -199,9 +170,9 @@
                 "id": "f36ee13e-cd41-4aef-97fa-4e1e0ade5169",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "Simulateur de visioconférence",
-                "url": "https://epreuves.pix.fr/visio/visio.html?mode=visio3",
-                "instruction": "<p>Vous participez à la visioconférence ci-dessous.</p>",
+                "title": "QCM image",
+                "url": "https://epreuves.pix.fr/fr/qcm_image/example.html",
+                "instruction": "<p>Un QCM avec des images</p>",
                 "height": 600
               }
             }
@@ -501,6 +472,53 @@
           ]
         },
         {
+          "id": "3e553e69-d451-4a2a-b6e8-8bc70917f2b7",
+          "type": "challenge",
+          "title": "qcu-discovery",
+        "components": [
+          {
+            "type": "element",
+            "element": {
+              "id": "cc995548-b3d4-4fd6-a974-d5c969c920d6",
+              "type": "text",
+              "content": "<p><strong>qcu-discovery</strong></p><p>Il permet d'afficher une question à choix unique pour découvrir une notion pédagogique.</p>"
+            }
+          },
+          {
+            "type": "element",
+            "element": {
+              "id": "f40e5a81-271b-492c-9f63-9f4a50829279",
+              "type": "qcu-discovery",
+              "instruction": "<p>Pourquoi ce module galerie est très pertinent ?</p>",
+              "proposals": [
+                {
+                  "id": "1",
+                  "content": "Pour connaître l'ensemble des modalités disponibles pour rédiger un module",
+                  "feedback": {
+                    "diagnosis": "<p>Exactement ! En une page, on a accès à toutes les possibilités de modalités que propose Modulix.</p>"
+                  }
+                },
+                {
+                  "id": "2",
+                  "content": "Pour faire semblant de travailler quand je suis sur mon ordinateur",
+                  "feedback": {
+                    "diagnosis": "<p>Eh non, tout le monde verra quand même que vous ne travaillez pas.</p>"
+                  }
+                },
+                {
+                  "id": "3",
+                  "content": "Pour améliorer mes compétences numériques",
+                  "feedback": {
+                    "diagnosis": "<p>Eh non, il n'y a aucune notion pédagogique dans ce module !</p>"
+                  }
+                }
+              ],
+              "solution": "1"
+            }
+          }
+        ]
+        },
+        {
           "id": "3003eabf-e49a-43c9-8962-332bf989149a",
           "type": "challenge",
           "title": "qcm",
@@ -551,11 +569,7 @@
                     "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3",
-                  "4"
-                ]
+                "solutions": ["1", "3", "4"]
               }
             }
           ]
@@ -593,13 +607,8 @@
                     "placeholder": "",
                     "ariaLabel": "Mot à trouver",
                     "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "Groupement"
-                    ]
+                    "tolerances": ["t1", "t3"],
+                    "solutions": ["Groupement"]
                   },
                   {
                     "type": "text",
@@ -615,9 +624,7 @@
                     "ariaLabel": "Année à trouver",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [
-                      2016
-                    ]
+                    "solutions": [2016]
                   }
                 ],
                 "feedbacks": {
