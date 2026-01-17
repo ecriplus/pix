@@ -1,6 +1,5 @@
 import { glob, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Readable } from 'node:stream';
 
 import type { BrowserContext } from '@playwright/test';
 import { test as base } from '@playwright/test';
@@ -205,12 +204,6 @@ class SnapshotHandler {
         test.expect(diffRatio).toBeLessThan(0.05); // < 5% pixels différents
       }
     }
-  }
-
-  async streamToBuffer(stream: Readable) {
-    const chunks = [];
-    for await (const chunk of stream) chunks.push(chunk);
-    return Buffer.concat(chunks);
   }
 
   async #convertPDFIntoPNGs(buffer: Buffer) {

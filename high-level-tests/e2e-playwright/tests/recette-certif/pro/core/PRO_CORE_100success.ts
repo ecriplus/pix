@@ -1,6 +1,7 @@
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
+  checkCoreCertificationResultAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/index.ts';
 import { PIX_CERTIF_PRO_DATA, PIX_SUPER_ADMIN_DATA } from '../../../../helpers/db-data.ts';
@@ -11,6 +12,8 @@ import { InvigilatorLoginPage, SessionListPage, SessionManagementPage } from '..
 import data from '../../data.json' with { type: 'json' };
 
 const testRef = 'PRO_CORE_100success';
+const snapshotPath = `recette-certif/${testRef}.json`;
+const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
 test(
   `user takes a certification test for a PRO certification center, only CORE subscription. 100% success. REF : ${testRef}`,
@@ -34,7 +37,8 @@ test(
 
     let sessionNumber = '',
       accessCode = '',
-      invigilatorCode = '';
+      invigilatorCode = '',
+      certificationNumber = '';
 
     await test.step('Enrollment', async () => {
       const sessionManagementPage = await test.step('creates a certification session', async () => {
@@ -148,6 +152,7 @@ test(
         const certificationInformationPage = await sessionPage.goToCertificationInfoPage(
           data.certifiableUser.firstName,
         );
+        certificationNumber = certificationInformationPage.getCertificationNumber();
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
@@ -171,25 +176,13 @@ test(
     await test.step('User checks their certification result', async () => {
       await pixAppPage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppPage);
-      await homePage.goToMyCertifications();
+      const certificationsListPage = await homePage.goToMyCertifications();
+      const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
+      await checkCoreCertificationResultAndExpectSuccess(pixAppPage, { pixScore: '881', pixLevelReached: 'Expert 1' });
+      const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
-      // todo define page objects
-      await pixAppPage.getByRole('link', { name: /Voir le détail/ }).click();
-      await expect(pixAppPage.getByText('pix 881 certifiés')).toBeVisible();
-      await expect(
-        pixAppPage.getByText('Vous avez atteint le niveau Expert 1 de la Certification Pix !'),
-      ).toBeVisible();
-
-      const [download] = await Promise.all([
-        pixAppPage.waitForEvent('download'),
-        pixAppPage.getByRole('button', { name: 'Télécharger mon certificat' }).click(),
-      ]);
-      const stream = await download.createReadStream();
-      const pdfBuffer = await snapshotHandler.streamToBuffer(stream);
-
-      const artifactBasePath = `recette-certif/${testRef}.certificat`;
-      await snapshotHandler.comparePdfOrRecord(pdfBuffer, artifactBasePath);
+      await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
     });
-    await snapshotHandler.expectOrRecord(`recette-certif/${testRef}.json`);
+    await snapshotHandler.expectOrRecord(snapshotPath);
   },
 );

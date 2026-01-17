@@ -4,6 +4,12 @@ import { getNumberValueFromDescriptionList, getStringValueFromDescriptionList } 
 export class CertificationInformationPage {
   constructor(public readonly page: Page) {}
 
+  getCertificationNumber() {
+    const match = this.page.url().match(/\/sessions\/certification\/(\d+)/);
+    if (!match) throw new Error('Certification id not found in URL');
+    return match[1];
+  }
+
   async getGeneralInfo() {
     await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
     await this.page.waitForURL(/\/sessions\/certification\/\d+$/);

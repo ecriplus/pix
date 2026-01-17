@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 import { CertificationInformationPage, CertificationSessionPage } from '../../pages/pix-admin/index.ts';
 
@@ -61,4 +61,17 @@ export async function checkCertificationDetailsAndExpectSuccess(
   expect(data.nbQuestionsKO).toBe(certificationDetails.nbQuestionsKO);
   expect(data.nbQuestionsAband).toBe(certificationDetails.nbQuestionsAband);
   expect(data.nbValidatedTechnicalIssues).toBe(certificationDetails.nbValidatedTechnicalIssues);
+}
+
+export async function checkCoreCertificationResultAndExpectSuccess(
+  pixAppPage: Page,
+  data: {
+    pixScore: string;
+    pixLevelReached: string;
+  },
+) {
+  await expect(pixAppPage.getByText(`pix ${data.pixScore} certifiés`)).toBeVisible();
+  await expect(
+    pixAppPage.getByText(`Vous avez atteint le niveau ${data.pixLevelReached} de la Certification Pix !`),
+  ).toBeVisible();
 }

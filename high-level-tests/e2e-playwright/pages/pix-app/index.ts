@@ -1,5 +1,7 @@
 export * from './CampaignResultsPage.ts';
 export * from './CertificationAccessCodePage.ts';
+export * from './CertificationResultPage.ts';
+export * from './CertificationsListPage.ts';
 export * from './CertificationStartPage.ts';
 export * from './ChallengePage.ts';
 export * from './CompetenceResultPage.ts';

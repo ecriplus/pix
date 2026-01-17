@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 
-import { CertificationStartPage } from './index.ts';
+import { CertificationsListPage, CertificationStartPage } from './index.ts';
 export class HomePage {
   constructor(public readonly page: Page) {}
 
@@ -16,6 +16,6 @@ export class HomePage {
     await this.page.getByRole('link', { name: 'Mes certifications' }).click();
     await this.page.waitForURL(/\/mes-certifications$/);
 
-    return new CertificationStartPage(this.page);
+    return new CertificationsListPage(this.page);
   }
 }
