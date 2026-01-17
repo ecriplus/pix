@@ -1,9 +1,14 @@
+import { glob, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { Readable } from 'node:stream';
 
 import type { BrowserContext } from '@playwright/test';
 import { test as base } from '@playwright/test';
 import crypto from 'crypto';
 import * as fs from 'fs/promises';
+import { PDFParse } from 'pdf-parse';
+import pixelmatch from 'pixelmatch';
+import { PNG } from 'pngjs';
 
 import {
   AUTH_DIR,
@@ -167,5 +172,61 @@ class SnapshotHandler {
         test.expect(this.results[i]).toStrictEqual(expectedResults[i]);
       }
     }
+  }
+
+  async comparePdfOrRecord(pdfBuffer: Buffer, baseFileName: string) {
+    const resultDir = path.resolve(import.meta.dirname, '../snapshots');
+    const resultFilePath = path.join(resultDir, baseFileName as string);
+    const currentPNGs = await this.#convertPDFIntoPNGs(pdfBuffer);
+    if (this.shouldUpdateSnapshots) {
+      for (const [index, currentPNG] of currentPNGs.entries()) {
+        await writeFile(resultFilePath + `_page${index}.png`, currentPNG);
+      }
+    } else {
+      const referencePngFiles = await this.#getAllPNGFiles(resultFilePath);
+      test.expect(referencePngFiles.length).toBe(currentPNGs.length);
+
+      for (let i = 0; i < referencePngFiles.length; i++) {
+        const referencePngFile = referencePngFiles[i];
+        const currentPNGData = currentPNGs[i];
+        const referencePngDecoded = PNG.sync.read(await readFile(referencePngFile));
+        const currentPNGDecoded = PNG.sync.read(Buffer.from(currentPNGData));
+        test.expect(currentPNGDecoded.width).toBe(referencePngDecoded.width);
+        test.expect(currentPNGDecoded.height).toBe(referencePngDecoded.height);
+
+        const { width, height } = referencePngDecoded;
+        const diff = new PNG({ width, height });
+        const diffPixels = pixelmatch(currentPNGDecoded.data, referencePngDecoded.data, diff.data, width, height, {
+          threshold: 0.1,
+          includeAA: false,
+        });
+        const diffRatio = diffPixels / (width * height);
+        // data différente entre deux runs : code de vérification du certificat et date de délivrance
+        test.expect(diffRatio).toBeLessThan(0.05); // < 5% pixels différents
+      }
+    }
+  }
+
+  async streamToBuffer(stream: Readable) {
+    const chunks = [];
+    for await (const chunk of stream) chunks.push(chunk);
+    return Buffer.concat(chunks);
+  }
+
+  async #convertPDFIntoPNGs(buffer: Buffer) {
+    const parser = new PDFParse({ data: buffer });
+    const result = await parser.getScreenshot({ scale: 1 });
+    await parser.destroy();
+    return result.pages.map((page) => page.data);
+  }
+
+  async #getAllPNGFiles(basePath: string) {
+    const referencePngFiles = [];
+    const filesIter = glob(basePath + '*.png');
+    for await (const file of filesIter) {
+      referencePngFiles.push(file);
+    }
+    referencePngFiles.sort();
+    return referencePngFiles;
   }
 }

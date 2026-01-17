@@ -179,7 +179,17 @@ test(
       await expect(
         pixAppPage.getByText('Vous avez atteint le niveau Expert 1 de la Certification Pix !'),
       ).toBeVisible();
+
+      const [download] = await Promise.all([
+        pixAppPage.waitForEvent('download'),
+        pixAppPage.getByRole('button', { name: 'Télécharger mon certificat' }).click(),
+      ]);
+      const stream = await download.createReadStream();
+      const pdfBuffer = await snapshotHandler.streamToBuffer(stream);
+
+      const artifactBasePath = `recette-certif/${testRef}.certificat`;
+      await snapshotHandler.comparePdfOrRecord(pdfBuffer, artifactBasePath);
     });
-    await snapshotHandler.expectOrRecord(`recette-certif_${testRef}.json`);
+    await snapshotHandler.expectOrRecord(`recette-certif/${testRef}.json`);
   },
 );
