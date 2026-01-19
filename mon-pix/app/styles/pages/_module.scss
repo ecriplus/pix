@@ -1,7 +1,7 @@
 @use 'pix-design-tokens/typography';
 
 .modulix {
-  @extend %pix-body-l;
+  @extend %pix-body-m;
 
   --modulix-max-content-width: 820px;
   --modulix-radius-xs: 4px;
