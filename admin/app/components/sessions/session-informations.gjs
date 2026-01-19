@@ -17,7 +17,7 @@ import JuryComment from './jury-comment';
         <span>{{@sessionModel.assignedCertificationOfficer.fullName}}</span>
       </div>
 
-      <DescriptionList data-testid="session-info-description-list">
+      <DescriptionList data-testid="pw-session-info-description-list">
 
         <DescriptionList.Item @label={{t "pages.sessions.informations.labels.certification-center"}}>
           <LinkTo @route="authenticated.certification-centers.get" @model={{@sessionModel.certificationCenterId}}>

@@ -14,7 +14,7 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
       {{/if}}
     </h2>
 
-    <DescriptionList data-testid="certification-state-description-list">
+    <DescriptionList data-testid="pw-certification-state-description-list">
       <DescriptionList.Divider />
 
       <DescriptionList.Item @label="Session">

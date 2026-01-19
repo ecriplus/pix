@@ -12,35 +12,35 @@ export class CertificationSessionPage {
     return {
       certificationCenter: await getStringValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Centre de certification',
       ),
-      address: await getStringValueFromDescriptionList(this.page, 'session-info-description-list', 'Nom du site'),
-      room: await getStringValueFromDescriptionList(this.page, 'session-info-description-list', 'Nom de la salle'),
+      address: await getStringValueFromDescriptionList(this.page, 'pw-session-info-description-list', 'Nom du site'),
+      room: await getStringValueFromDescriptionList(this.page, 'pw-session-info-description-list', 'Nom de la salle'),
       invigilatorName: await getStringValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Surveillant',
       ),
-      status: await getStringValueFromDescriptionList(this.page, 'session-info-description-list', 'Statut'),
+      status: await getStringValueFromDescriptionList(this.page, 'pw-session-info-description-list', 'Statut'),
       nbStartedCertifications: await getNumberValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Nombre de certification(s) démarrée(s)',
       ),
       nbIssueReportsUnsolved: await getNumberValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Nombre de signalement(s) impactant(s) non résolu(s)',
       ),
       nbIssueReports: await getNumberValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Nombre de signalement(s)',
       ),
       nbCertificationsInError: await getNumberValueFromDescriptionList(
         this.page,
-        'session-info-description-list',
+        'pw-session-info-description-list',
         'Nombre de certification(s) en erreur',
       ),
     };

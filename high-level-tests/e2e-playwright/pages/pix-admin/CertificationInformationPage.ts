@@ -16,11 +16,11 @@ export class CertificationInformationPage {
     return {
       sessionNumber: await getStringValueFromDescriptionList(
         this.page,
-        'certification-state-description-list',
+        'pw-certification-state-description-list',
         'Session',
       ),
-      status: await getStringValueFromDescriptionList(this.page, 'certification-state-description-list', 'Statut'),
-      score: await getStringValueFromDescriptionList(this.page, 'certification-state-description-list', 'Score'),
+      status: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Statut'),
+      score: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Score'),
     };
   }
 
@@ -30,27 +30,27 @@ export class CertificationInformationPage {
     return {
       nbAnsweredQuestionsOverTotal: await getStringValueFromDescriptionList(
         this.page,
-        'certification-more-information-description-list',
+        'pw-certification-more-information-description-list',
         'Nombre de question répondues / Nombre total de questions',
       ),
       nbQuestionsOK: await getNumberValueFromDescriptionList(
         this.page,
-        'certification-more-information-description-list',
+        'pw-certification-more-information-description-list',
         'Nombre de question OK :',
       ),
       nbQuestionsKO: await getNumberValueFromDescriptionList(
         this.page,
-        'certification-more-information-description-list',
+        'pw-certification-more-information-description-list',
         'Nombre de question KO :',
       ),
       nbQuestionsAband: await getNumberValueFromDescriptionList(
         this.page,
-        'certification-more-information-description-list',
+        'pw-certification-more-information-description-list',
         'Nombre de question abandonnées :',
       ),
       nbValidatedTechnicalIssues: await getNumberValueFromDescriptionList(
         this.page,
-        'certification-more-information-description-list',
+        'pw-certification-more-information-description-list',
         'Nombre de problèmes techniques validés :',
       ),
     };

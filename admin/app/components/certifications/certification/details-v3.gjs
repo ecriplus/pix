@@ -282,7 +282,7 @@ export default class DetailsV3 extends Component {
           class="certification-details-v3__list"
           aria-labelledby="more-informations"
           role="list"
-          data-testid="certification-more-information-description-list"
+          data-testid="pw-certification-more-information-description-list"
         >
           <dt>
             {{t "pages.certifications.certification.details.v3.more-informations.labels.numberof-answered-questions"}}
