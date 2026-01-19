@@ -77,6 +77,10 @@ const register = async function (server) {
                           key: Joi.string().description('Clé unique du badge'),
                           title: Joi.string().description('Titre du badge'),
                           isAcquired: Joi.boolean().description('Indique si le badge a été obtenu'),
+                          acquisitionPercentage: Joi.number()
+                            .min(0)
+                            .max(100)
+                            .description("Le pourcentage d'obtention du badge"),
                         }).label('CampaignParticipationBadge'),
                       )
                       .description(
