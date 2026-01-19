@@ -213,9 +213,8 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
 
   _receiveEmbedMessage(event) {
     const message = this._getMessageFromEventData(event);
-    if (message && message.answer && message.from === 'pix') {
-      this.autoReplyAnswer = message.answer;
-    }
+    if (message == null || message.answer == null || message.from !== 'pix') return;
+    this.autoReplyAnswer = message.answer;
   }
 
   _getMessageFromEventData(event) {
