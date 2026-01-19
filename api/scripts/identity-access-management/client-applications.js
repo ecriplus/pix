@@ -3,7 +3,7 @@ import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { cryptoService } from '../../src/shared/domain/services/crypto-service.js';
 
-class ClientApplicationsScript extends Script {
+export class ClientApplicationsScript extends Script {
   constructor() {
     super({
       description: 'Manage client applications',
