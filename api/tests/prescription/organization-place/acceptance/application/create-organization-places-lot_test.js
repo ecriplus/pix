@@ -35,14 +35,13 @@ describe('Acceptance | Route | Create Organization Places Lot', function () {
         payload: {
           data: {
             attributes: {
-              'organization-id': organizationId,
               count: 10,
               'activation-date': '2022-01-02',
               'expiration-date': '2023-01-01',
               reference: 'abc123',
               category: organizationPlacesCategories.FREE_RATE,
-              'created-by': adminUser.id,
             },
+            type: 'organization-place-lot',
           },
         },
       };
@@ -51,6 +50,7 @@ describe('Acceptance | Route | Create Organization Places Lot', function () {
 
       // when
       const response = await server.inject(options);
+
       // then
       expect(response.statusCode).to.equal(201);
     });
