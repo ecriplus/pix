@@ -45,7 +45,7 @@ module('Integration | Component | add-student-list', function (hooks) {
         hbs`<AddStudentList @studentList={{this.students}} @certificationCenterDivisions={{this.divisions}} />`,
       );
       await click(
-        screen.getByRole('textbox', { name: 'Filtrer la liste des élèves en cochant la ou les classes souhaitées' }),
+        screen.getByRole('button', { name: 'Filtrer la liste des élèves en cochant la ou les classes souhaitées' }),
       );
       await screen.findByRole('menu');
 

@@ -8,6 +8,7 @@ export default class AddStudentList extends Component {
   @service pixToast;
   @service store;
   @service router;
+  @service locale;
 
   emptyMessage = 'Aucune classe trouvée';
 
