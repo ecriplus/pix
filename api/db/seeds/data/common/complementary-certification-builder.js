@@ -595,7 +595,7 @@ function _createComplementaryWithHasComplementaryReferential(databaseBuilder) {
     badgeId: PIX_DROIT_INITIE_CERTIFIABLE_BADGE_ID,
     complementaryCertificationId: PIX_DROIT_COMPLEMENTARY_CERTIFICATION_ID,
     level: 1,
-    imageUrl: 'https://images.pix.fr/badges-certifies/pix-droit/initie.svg',
+    imageUrl: 'https://assets.pix.org/badges-certifies/pix-droit/initie.svg',
     label: 'Pix+ Droit Initié',
     certificateMessage: null,
     temporaryCertificateMessage: null,
