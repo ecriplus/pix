@@ -86,7 +86,7 @@
   },
   "devDependencies": {
     "@1024pix/epreuves-components": "^2.5.1",
-    "@1024pix/eslint-plugin": "^2.1.16",
+    "@1024pix/eslint-plugin": "^2.1.17",
     "@eslint/compat": "^2.0.1",
     "@ls-lint/ls-lint": "^2.3.1",
     "chai": "^6.0.0",
