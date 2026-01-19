@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { DomainTransaction } from '../../../domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../domain/errors.js';
 import { pgBoss } from './pg-boss.js';
 
@@ -47,18 +48,35 @@ export class JobRepository {
     return {
       name: this.name,
       data,
-      retryLimit: this.retry.retryLimit,
-      retryDelay: this.retry.retryDelay,
-      retryBackoff: this.retry.retryBackoff,
-      expireInSeconds: this.expireIn,
-      onComplete: true,
-      priority: this.priority,
+      options: {
+        retryLimit: this.retry.retryLimit,
+        retryDelay: this.retry.retryDelay,
+        retryBackoff: this.retry.retryBackoff,
+        expireInSeconds: this.expireIn,
+        onComplete: true,
+        priority: this.priority,
+      },
     };
   }
 
   async #send(jobs) {
-    await pgBoss.insert(jobs);
-    return { rowCount: jobs.length };
+    const knexConn = DomainTransaction.getConnection();
+    const connection = await knexConn.client.acquireConnection();
+
+    try {
+      const db = {
+        executeSql: (sql, values) => {
+          return connection.query(sql, values);
+        },
+      };
+
+      for (const job of jobs) {
+        await pgBoss.send(job.name, job.data, { ...job.options, db });
+      }
+      return { rowCount: jobs.length };
+    } finally {
+      await knexConn.client.releaseConnection(connection);
+    }
   }
 
   async performAsync(...datas) {

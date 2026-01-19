@@ -1,3 +1,4 @@
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import {
   JobExpireIn,
@@ -5,7 +6,7 @@ import {
   JobRepository,
   JobRetry,
 } from '../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { catchErr, catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repositories | Jobs | job-repository', function () {
   it('create one job db with given config', async function () {
@@ -61,6 +62,27 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
 
     // then
     expect(jobsInserted.rowCount).to.equal(2);
+  });
+
+  it('should not insert job on transaction error', async function () {
+    // given
+    const name = 'JobTest';
+    const expectedParams = [{ jobParam: 1 }];
+    const retry = JobRetry.STANDARD_RETRY;
+    const expireIn = JobExpireIn.INFINITE;
+    const priority = JobPriority.HIGH;
+
+    const job = new JobRepository({ name, retry, expireIn, priority });
+
+    // when
+    await catchErr(async ({ job, expectedParams }) => {
+      await DomainTransaction.execute(async () => {
+        await job.performAsync(...expectedParams);
+        throw new Error('oups');
+      });
+    })({ job, expectedParams });
+
+    await expect(name).to.have.been.performed.withJobsCount(0);
   });
 
   describe('JobExpireIn', function () {

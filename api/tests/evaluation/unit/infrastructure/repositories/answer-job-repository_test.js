@@ -1,4 +1,5 @@
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { pgBoss } from '../../../../../src/shared/infrastructure/repositories/jobs/pg-boss.js';
 import { expect, sinon } from '../../../../test-helper.js';
@@ -7,7 +8,10 @@ describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepositor
   beforeEach(async function () {
     await featureToggles.set('isQuestEnabled', true);
     await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', true);
-    sinon.stub(pgBoss, 'insert').resolves([]);
+    sinon.stub(pgBoss, 'send').resolves([]);
+    sinon.stub(DomainTransaction, 'getConnection').returns({
+      client: { acquireConnection: sinon.stub().resolves({ query: sinon.stub() }), releaseConnection: sinon.stub() },
+    });
   });
 
   describe('#performAsync', function () {
