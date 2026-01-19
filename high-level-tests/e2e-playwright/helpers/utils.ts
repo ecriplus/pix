@@ -27,6 +27,9 @@ export async function getNumberValueFromDescriptionList(page: Page, dataTestId: 
   return Number(val);
 }
 
+/* This util method is tightly coupled to the expectations that the description list has a datatest-id
+ It could be a more maintainable and a11y friendly way to read data from it, if you find it be our guests !
+ */
 async function getLocatorFromDescriptionList(page: Page, dataTestId: string, dtLabel: string) {
   const dts = page.getByTestId(dataTestId).locator('dt');
   const count = await dts.count();
