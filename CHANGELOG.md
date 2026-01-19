@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.307.0](https://github.com/1024pix/pix/compare/v5.306.0...v5.307.0) (2026-01-19)
+
+### :rocket: Amélioration
+
+- [#14761](https://github.com/1024pix/pix/pull/14761) coquilles-transcript-IAGen_Fonction_IND 
+- [#14739](https://github.com/1024pix/pix/pull/14739) CY_GestionMDP_NOV Modifs suite à relecture finale Marine 
+- [#14757](https://github.com/1024pix/pix/pull/14757) mdx-11 retrait bandeau beta 
+- [#14730](https://github.com/1024pix/pix/pull/14730) Modification de la page d'inscription via SSO (PIX-21012) 
+- [#14747](https://github.com/1024pix/pix/pull/14747) modifs-relecture-datacenter-ind 
+- [#14742](https://github.com/1024pix/pix/pull/14742) Recevoir les réponses vides des embeds (PIX-21115) 
+- [#14744](https://github.com/1024pix/pix/pull/14744) Renommer la fonctionnalité "Afficher la page places" (PIX-20908) 
+- [#14756](https://github.com/1024pix/pix/pull/14756) retrait-bandeau-beta-IA-Definition_NOV 
+- [#14758](https://github.com/1024pix/pix/pull/14758) retrait-bandeau-deepfake 
+- [#14755](https://github.com/1024pix/pix/pull/14755) surequipement-v2 
+- [#14753](https://github.com/1024pix/pix/pull/14753) Update IAGenPrompt_IND.json 
+- [#14763](https://github.com/1024pix/pix/pull/14763) Update IAGenPrompt_NOV.json - nouvelle config 
+
+### :bug: Correction
+
+- [#14760](https://github.com/1024pix/pix/pull/14760) Corriger les liens cassés vers le doc "Interprétation des résultats" (PIX-21129). 
+- [#14743](https://github.com/1024pix/pix/pull/14743) Réparer les QROCM des modules qui renseignent du valeur par défaut (PIX-21079). 
+
+### :building_construction: Tech
+
+- [#14684](https://github.com/1024pix/pix/pull/14684) Ajout de metrics pour le cache LCMS (PIX-21118) 
+- [#14740](https://github.com/1024pix/pix/pull/14740) Création d'un script pour la modification des urls des badges de complémentaire pour qu'ils pointent sur assets (PIX-21109). 
+- [#14725](https://github.com/1024pix/pix/pull/14725) Créer test e2e d'accessibilité d'un module, avec playwright (PIX-20984) 
+- [#14741](https://github.com/1024pix/pix/pull/14741) Rechercher un centre de certif sans tenir compte des accents ET des caractères spéciaux (PIX-20416) 
+- [#14745](https://github.com/1024pix/pix/pull/14745) Réparer la fin d'exécution de redis au refresh cache 
+- [#14768](https://github.com/1024pix/pix/pull/14768) Revert Créer test e2e d'accessibilité d'un module, avec playwright (PIX-20984)
+
 # [5.306.0](https://github.com/1024pix/pix/compare/v5.305.0...v5.306.0) (2026-01-16)
 
 ### :rocket: Amélioration
