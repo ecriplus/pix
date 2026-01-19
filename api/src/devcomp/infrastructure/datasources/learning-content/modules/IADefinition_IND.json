@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenDef_IND/picto_moduleIA_img.svg",
-    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage : de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
+    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>À travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage , de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
