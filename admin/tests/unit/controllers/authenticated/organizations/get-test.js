@@ -14,6 +14,7 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
       test('displays a success notification', async function (assert) {
         // Given
         const controller = this.owner.lookup('controller:authenticated.organizations.get');
+        controller.router = { transitionTo: sinon.stub() };
         controller.model = {
           id: 3,
           save: sinon.stub(),

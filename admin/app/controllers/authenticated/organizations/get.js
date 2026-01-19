@@ -14,6 +14,7 @@ export default class GetController extends Controller {
     try {
       await this.model.save();
       this.pixToast.sendSuccessNotification({ message: "L'organisation a bien été modifiée." });
+      this.router.transitionTo('authenticated.organizations.get');
     } catch (responseError) {
       this.model.rollbackAttributes();
       const error = get(responseError, 'errors[0]');
