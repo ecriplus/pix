@@ -13,7 +13,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
     script = new RevertCampaignParticipationsToStartedScript();
     logger = {
       info: sinon.stub(),
-      warning: sinon.stub(),
+      warn: sinon.stub(),
       error: sinon.stub(),
     };
   });
@@ -222,7 +222,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
             // then
             const updatedAssessment = await knex('assessments').where({ id: assessment.id }).first();
             expect(updatedAssessment.state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
-            expect(logger.warning).to.have.been.calledWithMatch(
+            expect(logger.warn).to.have.been.calledWithMatch(
               `Last assessment id: ${assessment.id} for participation id: ${participation.id} is not in completed state (current state: ${assessment.state}), skipping`,
             );
           });
@@ -250,7 +250,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
             // then
             const updatedParticipation = await knex('campaign-participations').where({ id: participation.id }).first();
             expect(updatedParticipation.status).to.equal(CampaignParticipationStatuses.STARTED);
-            expect(logger.warning).to.have.been.calledWithMatch(/No assessment found for participation id/);
+            expect(logger.warn).to.have.been.calledWithMatch(/No assessment found for participation id/);
           });
         });
 
