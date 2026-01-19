@@ -30,13 +30,6 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['team-prescription', 'pix-api', 'backend'],
   },
-  isModulixIssueReportDisplayed: {
-    type: 'boolean',
-    description: 'Enable issue report in modules',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
-  },
   isSelfAccountDeletionEnabled: {
     description: 'Toggle self account deletion feature',
     type: 'boolean',
