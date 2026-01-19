@@ -1,4 +1,5 @@
 import * as organizationPlacesCategories from '../../../../../src/prescription/organization-place/domain/constants/organization-places-categories.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   createServer,
   databaseBuilder,
@@ -14,7 +15,18 @@ describe('Acceptance | Route | Create Organization Places Lot', function () {
       const server = await createServer();
 
       const adminUser = await insertUserWithRoleSuperAdmin();
+      const placeManagementFeature = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+      });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId,
+        featureId: placeManagementFeature.id,
+        params: {
+          enableMaximumPlacesLimit: false,
+        },
+      });
 
       const options = {
         method: 'POST',

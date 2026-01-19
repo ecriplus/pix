@@ -77,6 +77,10 @@ const register = async (server) => {
                 securityPreHandlers.checkAdminMemberHasRoleMetier,
               ])(request, h),
           },
+          {
+            method: securityPreHandlers.makeCheckOrganizationHasFeature(ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key),
+            assign: 'checkOrganizationHasPlacesFeature',
+          },
         ],
         handler: organizationPlaceController.createOrganizationPlacesLot,
         validate: {
