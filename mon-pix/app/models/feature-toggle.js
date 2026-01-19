@@ -5,5 +5,4 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isQuestEnabled;
   @attr('boolean') isSurveyEnabledForCombinedCourses;
   @attr('boolean') areModuleShortIdUrlsEnabled;
-  @attr('boolean') isModulixIssueReportDisplayed;
 }
