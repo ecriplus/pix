@@ -3,11 +3,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import ENV from 'mon-pix/config/environment';
 
 import EvaluationResultsHero from '../../../campaigns/assessment/results/evaluation-results-hero';
 import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
-import EvaluationSharedResultsModal from '../../../campaigns/assessment/results/evaluation-shared-results-modal';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 
 export default class EvaluationResults extends Component {
@@ -15,17 +13,8 @@ export default class EvaluationResults extends Component {
   // eslint-disable-next-line ember/no-tracked-properties-from-args
   @tracked showEvaluationResultsModal = this.args.model.showTrainings;
 
-  get isResultsSharedModalEnabled() {
-    return this.hasTrainings;
-  }
-
   get hasTrainings() {
     return Boolean(this.trainings.length);
-  }
-
-  get isSharableCampaign() {
-    const isAutonomousCourse = this.args.model.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
-    return !isAutonomousCourse && !this.args.model.campaign.isForAbsoluteNovice;
   }
 
   get trainingsForModal() {
@@ -75,10 +64,7 @@ export default class EvaluationResults extends Component {
           <span>{{@model.campaign.title}}</span>
           <span class="sr-only">{{t "pages.skill-review.abstract-title"}}</span>
         </h1>
-        <QuitResults
-          @isCampaignShared={{@model.campaignParticipationResult.isShared}}
-          @isSharableCampaign={{this.isSharableCampaign}}
-        />
+        <QuitResults />
       </header>
       <EvaluationResultsHero
         @campaign={{@model.campaign}}
@@ -86,24 +72,13 @@ export default class EvaluationResults extends Component {
         @questResults={{@model.questResults}}
         @hasTrainings={{this.hasTrainings}}
         @showTrainings={{this.showTrainings}}
-        @isSharableCampaign={{this.isSharableCampaign}}
-        @onResultsShared={{this.shareResults}}
       />
       <EvaluationResultsTabs
         @campaign={{@model.campaign}}
         @campaignParticipationResult={{@model.campaignParticipationResult}}
         @questResults={{@model.questResults}}
-        @isSharableCampaign={{this.isSharableCampaign}}
         @trainings={{this.trainings}}
-        @onResultsShared={{this.shareResults}}
       />
-      {{#if this.isResultsSharedModalEnabled}}
-        <EvaluationSharedResultsModal
-          @trainings={{this.trainingsForModal}}
-          @showModal={{this.showEvaluationResultsModal}}
-          @onCloseButtonClick={{this.closeModal}}
-        />
-      {{/if}}
     </main>
   </template>
 }
