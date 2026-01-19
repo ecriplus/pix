@@ -4,7 +4,6 @@ import { module, test } from 'qunit';
 
 import { setupApplicationTest, t } from '../../tests/helpers';
 import identifyLearner from '../helpers/identify-learner';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 module('Acceptance | School', function (hooks) {
   setupApplicationTest(hooks);
@@ -15,7 +14,7 @@ module('Acceptance | School', function (hooks) {
   module('When the user is not identified', function () {
     test('should redirect to organization-code', async function (assert) {
       // when
-      await unabortedVisit('/');
+      await visit('/');
 
       // then
       assert.strictEqual(currentURL(), '/organization-code');
@@ -138,7 +137,7 @@ module('Acceptance | School', function (hooks) {
         this.server.create('school');
 
         // when
-        await unabortedVisit('/schools/MINIPIXOU/students');
+        await visit('/schools/MINIPIXOU/students');
 
         // then
         assert.strictEqual(currentURL(), '/schools/MINIPIXOU');
@@ -152,7 +151,7 @@ module('Acceptance | School', function (hooks) {
       identifyLearner(this.owner);
 
       // when
-      await unabortedVisit('/');
+      await visit('/');
 
       // then
       assert.strictEqual(currentURL(), '/');
