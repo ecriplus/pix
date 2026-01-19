@@ -91,7 +91,7 @@ module('Acceptance | Certifications page', function (hooks) {
         // then
         assert
           .dom(screen.getByRole('link', { name: 'Interprétation des résultats Ouverture dans une nouvelle fenêtre' }))
-          .hasAttribute('href', 'https://cloud.pix.fr/s/8pJqgNNntwDtsDY');
+          .hasAttribute('href', 'https://cloud.pix.fr/s/oqnYJWHoSXz8LJk');
       });
 
       test('should display attestation download button', async function (assert) {
