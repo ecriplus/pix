@@ -548,7 +548,7 @@
             {
               "type": "element",
               "element": {
-                "id": "e76bdb47-cc56-4987-91d3-3d1e028a7911",
+                "id": "00a60201-eed2-47cc-89c9-625a92b64d41",
                 "type": "text",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
@@ -622,7 +622,7 @@
               "element": {
                 "id": "f0ee88fb-f1d9-4c04-afed-01ddc6e76ab2",
                 "type": "text",
-                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias :<br>\n<blockquote>« Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre. »</blockquote><br>\nAvant de conclure, vous devez vérifier si ce chiffre est bien interprétable."
+                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote><br>Avant de conclure, vous devez vérifier si ce chiffre est bien interprétable."
               }
             },
             {
@@ -630,40 +630,40 @@
               "element": {
                 "id": "e393cd8a-1a83-4533-a809-9b7c6bcd1e41",
                 "type": "qcm",
-                "instruction": "Quest sont les trois élements essentils à connaître pour interpréter correctement ce chiffre ?&nbsp;",
+                "instruction": "Quest sont les trois élements essentils à connaître pour interpréter correctement ce chiffre ?&nbsp;",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Le périmètre de l'étude (ce qui inclus / exclus)"
+                    "content": "Le périmètre de l’étude (ce qui inclus / exclus)"
                   },
                   {
                     "id": "2",
-                    "content": "L'âge moyen des équipements utilisés"
+                    "content": "L’âge moyen des équipements utilisés"
                   },
                   {
                     "id": "3",
-                    "content": "La méthodes d'évaluation (ACV ou autre)"
+                    "content": "La méthodes d’évaluation (ACV ou autre)"
                   },
                   {
                     "id": "4",
-                    "content": "L'indicateur environnement étudié"
+                    "content": "L’indicateur environnement étudié"
                   },
                   {
                     "id": "5",
-                    "content": "Le pays dans lequel l'étude a été réalisée"
+                    "content": "Le pays dans lequel l’étude a été réalisée"
                   },
                   {
                     "id": "6",
-                    "content": "Le nombre total d'utilisateurs du numérique"
+                    "content": "Le nombre total d’utilisateurs du numérique"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bien vu !",
-                    "diagnosis": "Vous avez identifié les bons réflexes d’analyse.<br>\nUn chiffre sur l’impact du numérique n’a de sens que si l’on connaît ce qui est mesuré, comment et dans quel cadre."
+                    "state": "Bien vu !",
+                    "diagnosis": "Vous avez identifié les bons réflexes d’analyse.<br>Un chiffre sur l’impact du numérique n’a de sens que si l’on connaît ce qui est mesuré, comment et dans quel cadre."
                   },
                   "invalid": {
-                    "state": "Pas tout à fait !&nbsp;",
+                    "state": "Pas tout à fait !&nbsp;",
                     "diagnosis": "Certains éléments peuvent être intéressants, mais ils ne suffisent pas à interpréter un chiffre environnemental. Réessayez.&nbsp;"
                   }
                 },
@@ -707,13 +707,13 @@
               "element": {
                 "id": "eac5211b-c09a-417b-91a1-c134728a2d47",
                 "type": "qcu",
-                "instruction": "D’après l’article, les data centers peuvent être présentés comme neutres en carbone.<br>\nCependant, cette affirmation peut être discutée car…",
+                "instruction": "D’après l’article, les data centers peuvent être présentés comme neutres en carbone.<br>Cependant, cette affirmation peut être discutée car…",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "… elle repose uniquement sur des opinions personnelles et non sur des données mesurées.",
                     "feedback": {
-                      "state": "Eh non !&nbsp;",
+                      "state": "Eh non !&nbsp;",
                       "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
                     }
                   },
@@ -721,15 +721,15 @@
                     "id": "2",
                     "content": "… elle ne prend en compte que certaines phases, comme le fonctionnement énergétique, sans considérer l’ensemble du cycle de vie des infrastructures.",
                     "feedback": {
-                      "state": "Bien vu !&nbsp;",
-                      "diagnosis": "Vous avez identifié un point clé :<strong> un chiffre ou une affirmation environnementale dépend du périmètre étudié</strong>. Ici, l’article met l’accent sur la phase d’usage (énergie, émissions), mais <strong>ne traite pas l’ensemble du cycle de vie</strong> (fabrication, construction, fin de vie)."
+                      "state": "Bien vu !&nbsp;",
+                      "diagnosis": "Vous avez identifié un point clé&nbsp;:<strong> un chiffre ou une affirmation environnementale dépend du périmètre étudié</strong>. Ici, l’article met l’accent sur la phase d’usage (énergie, émissions), mais <strong>ne traite pas l’ensemble du cycle de vie</strong> (fabrication, construction, fin de vie)."
                     }
                   },
                   {
                     "id": "3",
                     "content": "… les data centers n’utilisent pas réellement d’énergies renouvelables.",
                     "feedback": {
-                      "state": "Eh non !",
+                      "state": "Eh non !",
                       "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
                     }
                   },
@@ -737,7 +737,7 @@
                     "id": "4",
                     "content": "… les certifications environnementales n’existent pas pour ce type d’infrastructure.",
                     "feedback": {
-                      "state": "Eh non !",
+                      "state": "Eh non !",
                       "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
                     }
                   }
