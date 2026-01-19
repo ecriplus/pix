@@ -8,7 +8,6 @@ import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
 import { startCampaignByCode, startCampaignByCodeAndExternalId } from '../helpers/campaign';
 import setupIntl from '../helpers/setup-intl';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 const ASSESSMENT = 'ASSESSMENT';
 
@@ -164,7 +163,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             isForAbsoluteNovice: true,
             organizationId: 1,
           });
-          await unabortedVisit(`/campagnes/${campaign.code}`);
+          await visit(`/campagnes/${campaign.code}`);
 
           // then
           assert.ok(currentURL().includes('/inscription'));

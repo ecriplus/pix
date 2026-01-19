@@ -11,7 +11,6 @@ import { module, test } from 'qunit';
 import { authenticate, authenticateByGAR } from '../helpers/authentication';
 import { startCampaignByCode, startCampaignByCodeAndExternalId } from '../helpers/campaign';
 import setupIntl from '../helpers/setup-intl';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 const AUTHENTICATED_SOURCE_FROM_GAR = ENV.APP.AUTHENTICATED_SOURCE_FROM_GAR;
 
@@ -459,7 +458,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course' });
 
           // when
-          await unabortedVisit('/campagnes/COMBINIX1');
+          await visit('/campagnes/COMBINIX1');
 
           // then
           assert.strictEqual(currentURL(), '/parcours/COMBINIX1');

@@ -8,7 +8,6 @@ import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
 import { startCampaignByCode, startCampaignByCodeAndExternalId } from '../helpers/campaign';
 import setupIntl from '../helpers/setup-intl';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 const EXAM = 'EXAM';
 
@@ -156,7 +155,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Exam', function (hook
         test('should redirect to signup page when starting a campaign', async function (assert) {
           // given & when
           campaign = server.create('campaign', { externalIdLabel: null, type: EXAM, isForAbsoluteNovice: true });
-          await unabortedVisit(`/campagnes/${campaign.code}`);
+          await visit(`/campagnes/${campaign.code}`);
 
           // then
           assert.ok(currentURL().includes('/inscription'));
