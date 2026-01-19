@@ -1422,15 +1422,6 @@
           "content-information": "If you leave this course without registering, you will not be able to keep your progress.",
           "content-instruction": "Would you like to continue?",
           "title": "Leave and return to Pix?"
-        },
-        "send-result-modal": {
-          "actions": {
-            "cancel-to-share": "Stay to send",
-            "quit-without-sharing": "Quit without sending"
-          },
-          "content-information": "Sending your results to the course organiser is essential for your support. Stay on this page and click on “Send my results” to send them.",
-          "content-instruction": "Do you really want to leave without sending them?",
-          "title": "Oops, you haven't sent your results yet!"
         }
       }
     },
@@ -2059,8 +2050,7 @@
       "abstract-title": "Your result for this customised test",
       "actions": {
         "back-to-pix": "Leave and return to Pix",
-        "continue": "Continue my Pix experience",
-        "send": "Submit my results"
+        "continue": "Continue my Pix experience"
       },
       "already-shared": "Thank you, your results have been submitted!",
       "badge-card": {
@@ -2081,12 +2071,10 @@
         "result": "Overall result",
         "title": "Your results by competence"
       },
-      "disabled-share": "This customised test has been deactivated by the organiser. It is no longer possible to submit results.",
       "error": "Oops, an error occurred!",
       "hero": {
         "acquired-badges-title": "Awards received",
         "explanations": {
-          "send-results": "Send your results to the customised test organiser and continue with the recommended training.",
           "trainings": "To help you progress, discover our training recommendations and find the ones that suit you best."
         },
         "mastery-rate": "of success in questions",
@@ -2133,11 +2121,9 @@
       "retry-and-reset": {
         "notification": "Retry the failed questions to improve your result or reset and restart from the beginning. The organiser will continue to have access to your previously submitted results."
       },
-      "send-results": "Don't forget to submit your results.",
       "send-status": {
         "in-progress": "Results are being shared..."
       },
-      "send-title": "Submit your results",
       "stage": {
         "caption": "Details of your results in percentage and stars according to competences",
         "masteryPercentage": "Success rate: {rate, number, ::percent}",
@@ -2158,15 +2144,6 @@
         },
         "trainings": {
           "description": "Get personalized training recommendations to continue progressing and feed your curiosity to help you achieve your full potential.",
-          "modal": {
-            "content": "Send us your results to enable the customised test organizer to support you.'<br />'After sharing, you'll have access to these training customised tests!",
-            "share-error": "There was an error sending your results. Please try again."
-          },
-          "shared-results-modal": {
-            "return-results-action": "Close and return to results",
-            "subtitle": "Ready to expand your skills? 🎓",
-            "title": "Shared results"
-          },
           "tab-label": "Trainings",
           "title": "Want to learn more?"
         }
