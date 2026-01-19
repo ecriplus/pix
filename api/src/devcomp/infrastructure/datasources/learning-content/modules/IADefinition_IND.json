@@ -591,7 +591,7 @@
               "element": {
                 "id": "f071912a-b067-4d03-8217-cc087d3cdbff",
                 "type": "text",
-                "content": "<p>Avec beaucoup de nouvelles données, et quelques corrections, le logiciel est prêt ! 🎉</p>"
+                "content": "Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨<br>On entraîne le logiciel d’intelligence artificielle avec des phrases où un mot est manquant, et le logiciel s’entraîne à prédire quel est ce mot."
               }
             }
           ]
@@ -606,7 +606,19 @@
               "element": {
                 "id": "5ec6e39a-0852-4ee9-b892-5a4b66b890e3",
                 "type": "text",
-                "content": "<p>Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨</p><p>On entraîne le logiciel d’intelligence artificielle avec des phrases où un mot est manquant, et le logiciel s’entraîne à prédire quel est ce mot.&nbsp;</p><p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.&nbsp;🥗</p>"
+                "content": "<p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.<br>Elle veut que le logiciel d'IA soit capable de reconstituer la phrase :<br> <strong>\"L’ail des ours peut se manger en salade.\"&nbsp;</strong>🥗</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8b0f4458-2e22-4bae-a328-aacea4151d65",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-def-ind/generalisation-au-texte-activite-4.png",
+                "alt": "Un réseau de neurone ",
+                "alternativeText": "On voit le morceau de phrase \"L’ail des ours peut se manger en ____\"<br>Puis le réseau de neuronne, puis en résultat : \"salade\" (0.2) et \"plantation\" (0.8)",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -614,7 +626,7 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Dans ce cas&nbsp;: quel serait un exemple de donnée d’entrée ? et l’exemple d’étiquette associé ?</p>",
+                "instruction": "<p>Dans ce cas, quel est l'exemple de donnée d’entrée ? Et quel est l’exemple d’étiquette associée ?</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -624,7 +636,7 @@
                     "input": "627e8063-9059-4bd6-9492-396cfb983c48",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "Sélectionner",
+                    "placeholder": "- Sélectionner - ",
                     "ariaLabel": "Sélectionner",
                     "tolerances": [],
                     "options": [
@@ -649,7 +661,7 @@
                     "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "Sélectionner",
+                    "placeholder": "- Sélectionner -",
                     "ariaLabel": "Sélectionner",
                     "tolerances": [],
                     "options": [
@@ -691,7 +703,7 @@
               "element": {
                 "id": "136e86b1-cc7d-4e9c-a5f4-a3f1e5808757",
                 "type": "text",
-                "content": "<p>Lila peut maintenant entraîner son nouveau logiciel d’intelligence artificielle.</p><p>Plus rien ne l’arrête !🚀</p>"
+                "content": "<p>Lila peut maintenant entraîner son nouveau logiciel d’intelligence artificielle.🚀</p>"
               }
             }
           ]
