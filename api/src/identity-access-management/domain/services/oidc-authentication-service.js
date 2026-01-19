@@ -23,8 +23,8 @@ const defaultSessionTemporaryStorage = temporaryStorage.withPrefix('oidc-session
 export class OidcAuthenticationService {
   #isReady = false;
   #isReadyForPixAdmin = false;
-  #openIdClient;
-  #openIdClientConfig;
+  #openidClient;
+  #openidClientConfig;
 
   constructor(
     {
@@ -52,7 +52,7 @@ export class OidcAuthenticationService {
       isVisible = true,
       claimMapping,
     },
-    { sessionTemporaryStorage = defaultSessionTemporaryStorage, openIdClient = client } = {},
+    { sessionTemporaryStorage = defaultSessionTemporaryStorage, openidClient = client } = {},
   ) {
     this.accessTokenLifespanMs = ms(accessTokenLifespan);
     this.additionalRequiredProperties = additionalRequiredProperties;
@@ -76,7 +76,7 @@ export class OidcAuthenticationService {
     this.slug = slug;
     this.source = source;
     this.isVisible = isVisible;
-    this.#openIdClient = openIdClient;
+    this.#openidClient = openidClient;
 
     claimMapping = claimMapping || DEFAULT_CLAIM_MAPPING;
 
@@ -115,7 +115,7 @@ export class OidcAuthenticationService {
   }
 
   async initializeClientConfig() {
-    if (this.#openIdClientConfig) return;
+    if (this.#openidClientConfig) return;
 
     try {
       const metadata = {
@@ -123,7 +123,7 @@ export class OidcAuthenticationService {
         ...this.openidClientExtraMetadata,
       };
 
-      this.#openIdClientConfig = await this.#openIdClient.discovery(
+      this.#openidClientConfig = await this.#openidClient.discovery(
         new URL(this.openidConfigurationUrl),
         this.clientId,
         metadata,
@@ -167,8 +167,8 @@ export class OidcAuthenticationService {
 
       const checks = { expectedNonce: nonce, expectedState: sessionState };
 
-      const tokenResponse = await this.#openIdClient.authorizationCodeGrant(
-        this.#openIdClientConfig,
+      const tokenResponse = await this.#openidClient.authorizationCodeGrant(
+        this.#openidClientConfig,
         currentUrl,
         checks,
       );
@@ -201,7 +201,7 @@ export class OidcAuthenticationService {
         ...this.extraAuthorizationUrlParameters,
       };
 
-      const redirectTarget = this.#openIdClient.buildAuthorizationUrl(this.#openIdClientConfig, parameters);
+      const redirectTarget = this.#openidClient.buildAuthorizationUrl(this.#openidClientConfig, parameters);
 
       return { redirectTarget, state, nonce };
     } catch (error) {
@@ -271,7 +271,7 @@ export class OidcAuthenticationService {
     }
 
     try {
-      const endSessionUrl = this.#openIdClient.buildEndSessionUrl(this.#openIdClientConfig, parameters);
+      const endSessionUrl = this.#openidClient.buildEndSessionUrl(this.#openidClientConfig, parameters);
 
       await this.sessionTemporaryStorage.delete(key);
 
@@ -290,7 +290,7 @@ export class OidcAuthenticationService {
     let userInfo;
 
     try {
-      userInfo = await this.#openIdClient.fetchUserInfo(this.#openIdClientConfig, accessToken, expectedSubject);
+      userInfo = await this.#openidClient.fetchUserInfo(this.#openidClientConfig, accessToken, expectedSubject);
     } catch (error) {
       _monitorOidcError(error.message, {
         data: { organizationName: this.organizationName },

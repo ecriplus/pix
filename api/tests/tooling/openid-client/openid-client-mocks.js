@@ -58,15 +58,15 @@ async function createMockedTestOidcProvider({
 }) {
   oidcAuthenticationServiceRegistry.testOnly_reset();
 
-  const openIdClientMock = createOpenIdClientMock(openIdConfigurationResponse);
+  const openidClientMock = createOpenIdClientMock(openIdConfigurationResponse);
 
   const redirectUri = `https://${application}.dev.pix${applicationTld}/connexion/oidc-example-net`;
 
   const authorizationUrl = `${openIdConfigurationResponse.authorization_endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=state&nonce=nonce`;
-  openIdClientMock.buildAuthorizationUrl.returns(authorizationUrl);
+  openidClientMock.buildAuthorizationUrl.returns(authorizationUrl);
 
   const endSessionUrl = `${openIdConfigurationResponse.end_session_endpoint}?client_id=${clientId}`;
-  openIdClientMock.buildEndSessionUrl.returns(endSessionUrl);
+  openidClientMock.buildEndSessionUrl.returns(endSessionUrl);
 
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices([
     new OidcAuthenticationService(
@@ -88,11 +88,11 @@ async function createMockedTestOidcProvider({
         slug: 'oidc-example-net',
         source: 'oidcexamplenet',
       },
-      { openIdClient: openIdClientMock },
+      { openidClient: openidClientMock },
     ),
   ]);
 
-  return openIdClientMock;
+  return openidClientMock;
 }
 
 export { createMockedTestOidcProvider, createOpenIdClientMock };
