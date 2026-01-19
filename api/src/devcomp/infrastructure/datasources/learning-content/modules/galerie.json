@@ -49,6 +49,23 @@
           ]
         },
         {
+          "id": "898768e1-3643-4c82-bfa9-2c9df8abb00c",
+          "type": "challenge",
+          "title": "audio",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dcd0ef70-e34e-496f-9cd0-529b3168a14f",
+                "type": "audio",
+                "title": "Audio de ronron de chat",
+                "url": "https://assets.pix.org/test/ronron.mp3",
+                "transcription": "<p>ron... ron...</p>"
+              }
+            }
+          ]
+        },
+        {
           "id": "53a06209-b581-4023-be5f-f194a4668ff0",
           "type": "challenge",
           "title": "custom",
@@ -475,48 +492,48 @@
           "id": "3e553e69-d451-4a2a-b6e8-8bc70917f2b7",
           "type": "challenge",
           "title": "qcu-discovery",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "cc995548-b3d4-4fd6-a974-d5c969c920d6",
-              "type": "text",
-              "content": "<p><strong>qcu-discovery</strong></p><p>Il permet d'afficher une question à choix unique pour découvrir une notion pédagogique.</p>"
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cc995548-b3d4-4fd6-a974-d5c969c920d6",
+                "type": "text",
+                "content": "<p><strong>qcu-discovery</strong></p><p>Il permet d'afficher une question à choix unique pour découvrir une notion pédagogique.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f40e5a81-271b-492c-9f63-9f4a50829279",
+                "type": "qcu-discovery",
+                "instruction": "<p>Pourquoi ce module galerie est très pertinent ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Pour connaître l'ensemble des modalités disponibles pour rédiger un module",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement ! En une page, on a accès à toutes les possibilités de modalités que propose Modulix.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Pour faire semblant de travailler quand je suis sur mon ordinateur",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non, tout le monde verra quand même que vous ne travaillez pas.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Pour améliorer mes compétences numériques",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non, il n'y a aucune notion pédagogique dans ce module !</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
             }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "f40e5a81-271b-492c-9f63-9f4a50829279",
-              "type": "qcu-discovery",
-              "instruction": "<p>Pourquoi ce module galerie est très pertinent ?</p>",
-              "proposals": [
-                {
-                  "id": "1",
-                  "content": "Pour connaître l'ensemble des modalités disponibles pour rédiger un module",
-                  "feedback": {
-                    "diagnosis": "<p>Exactement ! En une page, on a accès à toutes les possibilités de modalités que propose Modulix.</p>"
-                  }
-                },
-                {
-                  "id": "2",
-                  "content": "Pour faire semblant de travailler quand je suis sur mon ordinateur",
-                  "feedback": {
-                    "diagnosis": "<p>Eh non, tout le monde verra quand même que vous ne travaillez pas.</p>"
-                  }
-                },
-                {
-                  "id": "3",
-                  "content": "Pour améliorer mes compétences numériques",
-                  "feedback": {
-                    "diagnosis": "<p>Eh non, il n'y a aucune notion pédagogique dans ce module !</p>"
-                  }
-                }
-              ],
-              "solution": "1"
-            }
-          }
-        ]
+          ]
         },
         {
           "id": "3003eabf-e49a-43c9-8962-332bf989149a",
