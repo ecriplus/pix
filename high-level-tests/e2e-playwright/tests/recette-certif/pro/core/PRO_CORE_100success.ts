@@ -4,7 +4,7 @@ import {
   checkCoreCertificationResultAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/index.ts';
-import { PIX_CERTIF_PRO_DATA, PIX_SUPER_ADMIN_DATA } from '../../../../helpers/db-data.ts';
+import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
 import { expect, test } from '../../../../helpers/fixtures.ts';
 import { LoginPage as AdminLoginPage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage, LoginPage } from '../../../../pages/pix-app/index.ts';
@@ -126,7 +126,7 @@ test(
     const pixAdminPage = await pixSuperAdminContext.newPage();
     await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
     const adminLoginPage = new AdminLoginPage(pixAdminPage);
-    const adminHomepage = await adminLoginPage.login(PIX_SUPER_ADMIN_DATA.email, PIX_SUPER_ADMIN_DATA.rawPassword);
+    const adminHomepage = await adminLoginPage.login(PIX_ADMIN_CERTIF_DATA.email, PIX_ADMIN_CERTIF_DATA.rawPassword);
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();

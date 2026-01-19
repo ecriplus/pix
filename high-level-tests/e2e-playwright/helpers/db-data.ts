@@ -62,11 +62,11 @@ export const PIX_CERTIF_PRO_DATA = {
   },
 };
 
-export const PIX_SUPER_ADMIN_DATA = {
+export const PIX_ADMIN_CERTIF_DATA = {
   id: 1_000_006,
   firstName: 'PixAdmin',
-  lastName: 'SuperAdmin',
-  email: 'pix-admin_superadmin@example.net',
+  lastName: 'RoleCertif',
+  email: 'pix-admin_rolecertif@example.net',
   rawPassword: 'pix123',
-  role: 'SUPER_ADMIN',
+  role: 'CERTIF',
 };

@@ -7,11 +7,11 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../api/src/identity-access-ma
 // @ts-expect-error AuthenticationMethod from API project
 import { AuthenticationMethod } from '../../../api/src/identity-access-management/domain/models/AuthenticationMethod.js';
 import {
+  PIX_ADMIN_CERTIF_DATA,
   PIX_APP_USER_DATA,
   PIX_CERTIF_PRO_DATA,
   PIX_ORGA_ADMIN_DATA,
   PIX_ORGA_MEMBER_DATA,
-  PIX_SUPER_ADMIN_DATA,
 } from './db-data.js';
 
 export const knex = Knex({ client: 'postgresql', connection: process.env.DATABASE_URL });
@@ -242,11 +242,11 @@ async function buildAuthenticatedUsers() {
 
   // PIX-ADMIN
   await buildFreshPixAdminUser(
-    PIX_SUPER_ADMIN_DATA.firstName,
-    PIX_SUPER_ADMIN_DATA.lastName,
-    PIX_SUPER_ADMIN_DATA.email,
-    PIX_SUPER_ADMIN_DATA.rawPassword,
-    PIX_SUPER_ADMIN_DATA.role,
+    PIX_ADMIN_CERTIF_DATA.firstName,
+    PIX_ADMIN_CERTIF_DATA.lastName,
+    PIX_ADMIN_CERTIF_DATA.email,
+    PIX_ADMIN_CERTIF_DATA.rawPassword,
+    PIX_ADMIN_CERTIF_DATA.role,
   );
 }
 

@@ -182,13 +182,13 @@ class SnapshotHandler {
         await writeFile(resultFilePath + `_page${index}.png`, currentPNG);
       }
     } else {
-      const referencePngFiles = await this.#getAllPNGFiles(resultFilePath);
-      test.expect(referencePngFiles.length).toBe(currentPNGs.length);
+      const referencePngFilenames = await this.#getAllPNGFilenames(resultFilePath);
+      test.expect(referencePngFilenames.length).toBe(currentPNGs.length);
 
-      for (let i = 0; i < referencePngFiles.length; i++) {
-        const referencePngFile = referencePngFiles[i];
+      for (let i = 0; i < referencePngFilenames.length; i++) {
+        const referencePngFilename = referencePngFilenames[i];
         const currentPNGData = currentPNGs[i];
-        const referencePngDecoded = PNG.sync.read(await readFile(referencePngFile));
+        const referencePngDecoded = PNG.sync.read(await readFile(referencePngFilename));
         const currentPNGDecoded = PNG.sync.read(Buffer.from(currentPNGData));
         test.expect(currentPNGDecoded.width).toBe(referencePngDecoded.width);
         test.expect(currentPNGDecoded.height).toBe(referencePngDecoded.height);
@@ -213,13 +213,13 @@ class SnapshotHandler {
     return result.pages.map((page) => page.data);
   }
 
-  async #getAllPNGFiles(basePath: string) {
-    const referencePngFiles = [];
-    const filesIter = glob(basePath + '*.png');
-    for await (const file of filesIter) {
-      referencePngFiles.push(file);
+  async #getAllPNGFilenames(basePath: string) {
+    const referencePngFilenames = [];
+    const filenamesIter = glob(basePath + '*.png');
+    for await (const filename of filenamesIter) {
+      referencePngFilenames.push(filename);
     }
-    referencePngFiles.sort();
-    return referencePngFiles;
+    referencePngFilenames.sort();
+    return referencePngFilenames;
   }
 }
