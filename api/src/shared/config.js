@@ -479,7 +479,6 @@ const configuration = (function () {
         maximumReachableScore: 895,
       },
       maxReachableLevel: 7,
-      latestCalibrationDate: new Date(process.env.LATEST_CERTIFICATION_CALIBRATION_DATE || '2021-12-31'),
     },
     version: process.env.CONTAINER_VERSION || 'development',
     autonomousCourse: {
@@ -645,8 +644,6 @@ const configuration = (function () {
     config.apiManager.url = 'http://external-partners-access/';
 
     config.infra.engineeringUserId = 800;
-
-    config.v3Certification.latestCalibrationDate = '2020-01-01';
   }
 
   return config;

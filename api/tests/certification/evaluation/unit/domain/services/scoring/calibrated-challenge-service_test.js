@@ -8,10 +8,7 @@ const { minimumAnswersRequiredToValidateACertification } = config.v3Certificatio
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
   context('#findByCertificationCourseAndVersion', function () {
-    let challengeCalibrationRepository,
-      calibratedChallengeRepository,
-      certificationChallengeLiveAlertRepository,
-      originalLatestCalibrationDate;
+    let challengeCalibrationRepository, calibratedChallengeRepository, certificationChallengeLiveAlertRepository;
 
     let challengeList;
 
@@ -33,11 +30,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
       calibratedChallengeRepository = {
         getAllCalibratedChallenges: sinon.stub().rejects(new Error('Args mismatch')),
       };
-      originalLatestCalibrationDate = config.v3Certification.latestCalibrationDate;
-    });
-
-    afterEach(function () {
-      config.v3Certification.latestCalibrationDate = originalLatestCalibrationDate;
     });
 
     context('when there are no validated live alerts', function () {
