@@ -302,6 +302,7 @@ const configuration = (function () {
     infra: {
       appName: process.env.APP,
       containerName: process.env.CONTAINER,
+      hostname: process.env.HOSTNAME,
       concurrencyForHeavyOperations: _getNumber(process.env.INFRA_CONCURRENCY_HEAVY_OPERATIONS, 2),
       chunkSizeForCampaignResultProcessing: _getNumber(process.env.INFRA_CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING, 10),
       chunkSizeForOrganizationLearnerDataProcessing: _getNumber(
@@ -391,6 +392,19 @@ const configuration = (function () {
       },
     },
     metrics: {
+      prometheus: {
+        enabled: toBoolean(process.env.PROMETHEUS_ENABLED),
+        prefix: process.env.PROMETHEUS_PREFIX ?? 'pix_api',
+        pushgateway: {
+          pushInterval: ms(process.env.PROMETHEUS_PUSHGATEWAY_PUSH_INTERVAL ?? '15s'),
+          url: process.env.PROMETHEUS_PUSHGATEWAY_URL,
+          basicAuth: process.env.PROMETHEUS_PUSHGATEWAY_BASIC_AUTH,
+        },
+        buckets: Object.assign(
+          { lc_loadcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16], lc_findcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16] },
+          parseJSONEnv('PROMETHEUS_METRICS_BUCKETS'),
+        ),
+      },
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
       isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),

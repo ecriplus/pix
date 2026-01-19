@@ -15,6 +15,7 @@ describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
       set: sinon.stub(),
       delete: sinon.stub(),
       clear: sinon.stub(),
+      size: 0,
     };
 
     learningContentCache = new LearningContentCache({ name: 'test', pubSub, map });

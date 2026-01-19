@@ -1,10 +1,32 @@
 import Dataloader from 'dataloader';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import { config } from '../../config.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
+import { createCounter, createHistogram } from '../metrics/metrics.js';
 import { child, SCOPES } from '../utils/logger.js';
 
 const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
+
+const metrics = {
+  read: createCounter({
+    name: 'lc_read',
+    help: 'Total count of reads from learning content',
+    labelNames: ['type', 'table'],
+  }),
+  loadCacheMiss: createHistogram({
+    name: 'lc_loadcachemiss',
+    help: 'Histogram of load cache misses when reading from learning content',
+    labelNames: ['table'],
+    buckets: config.metrics.prometheus.buckets.lc_loadcachemiss,
+  }),
+  findCacheMiss: createHistogram({
+    name: 'lc_findcachemiss',
+    help: 'Histogram of find cache misses when reading from learning content',
+    labelNames: ['table'],
+    buckets: config.metrics.prometheus.buckets.lc_findcachemiss,
+  }),
+};
 
 /**
  * @typedef {(knex: import('knex').QueryBuilder) => Promise<string[]|number[]>} QueryBuilderCallback
@@ -20,6 +42,7 @@ export class LearningContentRepository {
   #dataloader;
   #findCache;
   #findCacheMiss;
+  #metrics;
 
   /**
    * @param {{
@@ -38,6 +61,14 @@ export class LearningContentRepository {
     this.#findCache = new LearningContentCache({ name: `${tableName}:results` });
 
     this.#findCacheMiss = new Map();
+
+    const table = this.#tableName.split('.').at(-1);
+    this.#metrics = {
+      loadRead: metrics.read.labels({ type: 'load', table }),
+      findRead: metrics.read.labels({ type: 'find', table }),
+      loadCacheMiss: metrics.loadCacheMiss.labels({ table }),
+      findCacheMiss: metrics.findCacheMiss.labels({ table }),
+    };
   }
 
   /**
@@ -55,8 +86,11 @@ export class LearningContentRepository {
     dtos = this.#findCacheMiss.get(cacheKey);
     if (dtos) return dtos;
 
+    const stopFindCachemissTimer = this.#metrics.findCacheMiss.startTimer();
+
     dtos = this.#loadDtos(callback, cacheKey).finally(() => {
       this.#findCacheMiss.delete(cacheKey);
+      stopFindCachemissTimer();
     });
     this.#findCacheMiss.set(cacheKey, dtos);
 
@@ -69,6 +103,7 @@ export class LearningContentRepository {
    * @returns {Promise<object|null>}
    */
   async load(id) {
+    this.#metrics.loadRead.inc();
     return this.#dataloader.load(id);
   }
 
@@ -104,6 +139,8 @@ export class LearningContentRepository {
    * @returns {Promise<(object|null)[]>}
    */
   async #loadMany(ids, cacheKey) {
+    this.#metrics.loadRead.inc(ids.length);
+
     const dtos = await this.#dataloader.loadMany(ids);
 
     if (dtos[0] instanceof Error) {
@@ -141,12 +178,19 @@ export class LearningContentRepository {
    */
   async #batchLoad(ids) {
     logger.debug({ tableName: this.#tableName, count: ids.length }, 'loading from PG');
-    const dtos = await knex
-      .select(`${this.#tableName}.*`)
-      .from(knex.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
-      .leftJoin(this.#tableName, `${this.#tableName}.id`, 'ids.id')
-      .orderBy('ids.idx');
-    return dtos.map((dto) => (dto.id ? dto : null));
+
+    const stopLoadCachemissTimer = this.#metrics.loadCacheMiss.startTimer();
+
+    try {
+      const dtos = await knex
+        .select(`${this.#tableName}.*`)
+        .from(knex.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
+        .leftJoin(this.#tableName, `${this.#tableName}.id`, 'ids.id')
+        .orderBy('ids.idx');
+      return dtos.map((dto) => (dto.id ? dto : null));
+    } finally {
+      stopLoadCachemissTimer();
+    }
   }
 
   /**
