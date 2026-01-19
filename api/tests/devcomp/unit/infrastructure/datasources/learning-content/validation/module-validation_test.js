@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
 import { expect } from '../../../../../../test-helper.js';
+import { audioElementSchema } from './element/audio-schema.js';
 import { customDraftElementSchema } from './element/custom-draft-element-schema.js';
 import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
@@ -499,6 +500,25 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         expect(joiError).to.equal(undefined, formattedError);
       }
     });
+
+    it('should validate sample audio structure', async function () {
+      try {
+        const sample = {
+          id: randomUUID(),
+          type: 'audio',
+          title: 'Un audio',
+          url: 'https://assets.pix.org/modules/placeholder-audio.mp3',
+          transcription: '<p>Audio manquant</p>',
+        };
+
+        await audioElementSchema.validateAsync(sample, {
+          abortEarly: false,
+        });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
   });
 
   describe('when element contains not allowed HTML', function () {
@@ -520,6 +540,28 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
       } catch (joiError) {
         expect(joiError.message).to.deep.equal(
           '"alt" failed custom validation because HTML is not allowed in this field',
+        );
+      }
+    });
+
+    it('should throw htmlNotAllowedSchema custom error for audio.title field', async function () {
+      // given
+      const invalidAudio = {
+        id: '73ac3644-7637-4cee-86d4-1a75f53f0b9c',
+        type: 'audio',
+        title: '<h1>Un audio</h1>',
+        url: 'https://assets.pix.fr/modulix/placeholder-audio.mp3',
+        transcription: '<p>Audio manquante</p>',
+      };
+
+      try {
+        await audioElementSchema.validateAsync(invalidAudio, {
+          abortEarly: false,
+        });
+        throw new Error('Joi validation should have thrown');
+      } catch (joiError) {
+        expect(joiError.message).to.deep.equal(
+          '"title" failed custom validation because HTML is not allowed in this field',
         );
       }
     });
