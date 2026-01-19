@@ -778,6 +778,24 @@
                 "solution": "pix-llm-success",
                 "height": 600
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "250665b5-6504-420f-8cdd-f8c130583f7f",
+                "type": "expand",
+                "title": "Indice 1",
+                "content": "Ne mettez pas de noms, même fictifs, vous pouvez trouver une autre solution pour parler des clients."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a492a9ab-6e17-4a3a-80ff-6acf299e1415",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "Avez vous bien demandé un plan marketing ?&nbsp;"
+              }
             }
           ]
         }
