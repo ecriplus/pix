@@ -586,77 +586,50 @@ module('Integration | Component | Module | Embed', function (hooks) {
     });
   });
 
-  module('when isModulixIssueReportDisplayed FT is enabled', function () {
-    test('should display report button', async function (assert) {
-      // given
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
-      const embed = {
-        id: 'id',
-        title: 'title',
-        isCompletionRequired: false,
-        url: 'https://example.org',
-        height: 800,
-      };
+  test('should display report button', async function (assert) {
+    // given
+    const embed = {
+      id: 'id',
+      title: 'title',
+      isCompletionRequired: false,
+      url: 'https://example.org',
+      height: 800,
+    };
 
-      // when
-      const screen = await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+    // when
+    const screen = await render(<template><ModulixEmbed @embed={{embed}} /></template>);
 
-      // then
-      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
-    });
-
-    module('when user clicks on report button', function () {
-      test('should display issue-report modal with a form inside', async function (assert) {
-        // given
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
-        const embed = {
-          id: 'id',
-          title: 'title',
-          isCompletionRequired: false,
-          url: 'https://example.org',
-          height: 800,
-          type: 'embed',
-        };
-
-        // when
-        const screen = await render(
-          <template>
-            <div id="modal-container"></div>
-            <ModulixEmbed @embed={{embed}} />
-          </template>,
-        );
-        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
-        await waitForDialog();
-
-        // then
-        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
-        const listbox = await screen.findByRole('listbox');
-        const options = within(listbox).getAllByRole('option');
-        assert.strictEqual(options.length, 4);
-      });
-    });
+    // then
+    assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
   });
 
-  module('when isModulixIssueReportDisplayed FT is disabled', function () {
-    test('should not display report button', async function (assert) {
+  module('when user clicks on report button', function () {
+    test('should display issue-report modal with a form inside', async function (assert) {
       // given
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
       const embed = {
         id: 'id',
         title: 'title',
         isCompletionRequired: false,
         url: 'https://example.org',
         height: 800,
+        type: 'embed',
       };
 
       // when
-      const screen = await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+      const screen = await render(
+        <template>
+          <div id="modal-container"></div>
+          <ModulixEmbed @embed={{embed}} />
+        </template>,
+      );
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+      await waitForDialog();
 
       // then
-      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+      const listbox = await screen.findByRole('listbox');
+      const options = within(listbox).getAllByRole('option');
+      assert.strictEqual(options.length, 4);
     });
   });
 });

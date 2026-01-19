@@ -22,7 +22,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
           attributes: {
             'dynamic-feature-toggle-system': false,
             'is-async-quest-rewarding-calculation-enabled': false,
-            'is-modulix-issue-report-displayed': false,
             'is-survey-enabled-for-combined-courses': true,
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,

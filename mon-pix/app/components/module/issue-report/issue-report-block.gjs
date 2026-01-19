@@ -8,7 +8,6 @@ import { t } from 'ember-intl';
 import ModulixIssueReportModal from './issue-report-modal';
 
 export default class ModulixIssueReportBlock extends Component {
-  @service featureToggles;
   @tracked showModal = false;
   @tracked sentStatus = null;
   @service moduleIssueReport;
@@ -40,22 +39,19 @@ export default class ModulixIssueReportBlock extends Component {
   }
 
   <template>
-    {{#if this.featureToggles.featureToggles.isModulixIssueReportDisplayed}}
-      <PixButton
-        class="feedback__report-button"
-        @variant="tertiary"
-        @iconBefore="flag"
-        aria-label={{t "pages.modulix.issue-report.aria-label"}}
-        @triggerAction={{this.onReportClick}}
-      >{{t "pages.modulix.issue-report.button"}}</PixButton>
-
-      <ModulixIssueReportModal
-        @elementType={{@reportInfo.elementType}}
-        @showModal={{this.showModal}}
-        @hideModal={{this.hideModal}}
-        @onSendReport={{this.onSend}}
-        @sentStatus={{this.sentStatus}}
-      />
-    {{/if}}
+    <PixButton
+      class="feedback__report-button"
+      @variant="tertiary"
+      @iconBefore="flag"
+      aria-label={{t "pages.modulix.issue-report.aria-label"}}
+      @triggerAction={{this.onReportClick}}
+    >{{t "pages.modulix.issue-report.button"}}</PixButton>
+    <ModulixIssueReportModal
+      @elementType={{@reportInfo.elementType}}
+      @showModal={{this.showModal}}
+      @hideModal={{this.hideModal}}
+      @onSendReport={{this.onSend}}
+      @sentStatus={{this.sentStatus}}
+    />
   </template>
 }

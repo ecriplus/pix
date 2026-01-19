@@ -3,7 +3,6 @@ import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog } from '../../../helpers/wait-for';
@@ -42,71 +41,43 @@ module('Integration | Component | Module | Feedback', function (hooks) {
     assert.dom(screen.getByText("C'est la bonne réponse !")).exists();
   });
 
-  module('when isModulixIssueReportDisplayed FT is enabled', function () {
-    test('should display report button', async function (assert) {
-      // given
-      const feedback = {
-        state: 'Correct !',
-        diagnosis: "<p>C'est la bonne réponse !</p>",
-      };
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+  test('should display report button', async function (assert) {
+    // given
+    const feedback = {
+      state: 'Correct !',
+      diagnosis: "<p>C'est la bonne réponse !</p>",
+    };
 
-      // when
-      const screen = await render(
-        <template><ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} /></template>,
-      );
+    // when
+    const screen = await render(
+      <template><ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} /></template>,
+    );
 
-      // then
-      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
-    });
-
-    module('when user clicks on report button', function () {
-      test('should display issue-report modal with a form inside', async function (assert) {
-        // given
-        const feedback = {
-          state: 'Correct !',
-          diagnosis: "<p>C'est la bonne réponse !</p>",
-        };
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
-
-        // when
-        const screen = await render(
-          <template>
-            <div id="modal-container"></div>
-            <ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} />
-          </template>,
-        );
-        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
-        await waitForDialog();
-
-        // then
-        assert.dom(screen.getByRole('dialog')).exists();
-        assert
-          .dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
-          .exists();
-      });
-    });
+    // then
+    assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
   });
 
-  module('when isModulixIssueReportDisplayed FT is disabled', function () {
-    test('should not display report button', async function (assert) {
+  module('when user clicks on report button', function () {
+    test('should display issue-report modal with a form inside', async function (assert) {
       // given
       const feedback = {
         state: 'Correct !',
         diagnosis: "<p>C'est la bonne réponse !</p>",
       };
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
 
       // when
       const screen = await render(
-        <template><ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} /></template>,
+        <template>
+          <div id="modal-container"></div>
+          <ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} />
+        </template>,
       );
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+      await waitForDialog();
 
       // then
-      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
+      assert.dom(screen.getByRole('dialog')).exists();
+      assert.dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 })).exists();
     });
   });
 });

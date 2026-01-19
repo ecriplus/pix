@@ -4,7 +4,6 @@ import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixCustomDraft from 'mon-pix/components/module/element/custom-draft';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog } from '../../../helpers/wait-for';
@@ -74,61 +73,25 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
     });
   });
 
-  module('when isModulixIssueReportDisplayed FT is enabled', function () {
-    test('should display report button', async function (assert) {
-      // given
-      const customDraft = {
-        id: 'id',
-        title: 'title',
-        url: 'https://example.org',
-        instruction: '<p>Instruction du POIC</p>',
-        height: 400,
-      };
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
+  test('should display report button', async function (assert) {
+    // given
+    const customDraft = {
+      id: 'id',
+      title: 'title',
+      url: 'https://example.org',
+      instruction: '<p>Instruction du POIC</p>',
+      height: 400,
+    };
 
-      // when
-      const screen = await render(<template><ModulixCustomDraft @customDraft={{customDraft}} /></template>);
+    // when
+    const screen = await render(<template><ModulixCustomDraft @customDraft={{customDraft}} /></template>);
 
-      // then
-      assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
-    });
-
-    module('when user clicks on report button', function () {
-      test('should display issue-report modal with a form inside', async function (assert) {
-        // given
-        const customDraft = {
-          id: 'id',
-          title: 'title',
-          url: 'https://example.org',
-          instruction: '<p>Instruction du POIC</p>',
-          height: 400,
-          type: 'custom-draft',
-        };
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: true });
-
-        // when
-        const screen = await render(
-          <template>
-            <div id="modal-container"></div>
-            <ModulixCustomDraft @customDraft={{customDraft}} />
-          </template>,
-        );
-        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
-        await waitForDialog();
-
-        // then
-        await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
-        const listbox = await screen.findByRole('listbox');
-        const options = within(listbox).getAllByRole('option');
-        assert.strictEqual(options.length, 4);
-      });
-    });
+    // then
+    assert.dom(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).exists();
   });
 
-  module('when isModulixIssueReportDisplayed FT is disabled', function () {
-    test('should not display report button', async function (assert) {
+  module('when user clicks on report button', function () {
+    test('should display issue-report modal with a form inside', async function (assert) {
       // given
       const customDraft = {
         id: 'id',
@@ -136,15 +99,24 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
         url: 'https://example.org',
         instruction: '<p>Instruction du POIC</p>',
         height: 400,
+        type: 'custom-draft',
       };
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isModulixIssueReportDisplayed: false });
 
       // when
-      const screen = await render(<template><ModulixCustomDraft @customDraft={{customDraft}} /></template>);
+      const screen = await render(
+        <template>
+          <div id="modal-container"></div>
+          <ModulixCustomDraft @customDraft={{customDraft}} />
+        </template>,
+      );
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
+      await waitForDialog();
 
       // then
-      assert.dom(screen.queryByRole('button', { name: t('pages.modulix.issue-report.aria-label') })).doesNotExist();
+      await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.modal.select-label') }));
+      const listbox = await screen.findByRole('listbox');
+      const options = within(listbox).getAllByRole('option');
+      assert.strictEqual(options.length, 4);
     });
   });
 });
