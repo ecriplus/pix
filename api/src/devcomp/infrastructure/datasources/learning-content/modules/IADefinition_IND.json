@@ -626,7 +626,7 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Dans ce cas, quel est l'exemple de donnée d’entrée ? Et quel est l’exemple d’étiquette associée ?</p>",
+                "instruction": "<p>Dans cet exemple, quelle est la donnée d’entrée ? Et  l’exemple d’étiquette associée ?</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -754,7 +754,7 @@
               "element": {
                 "id": "c68dc04d-69b2-4ca6-9635-e38fea109723",
                 "type": "text",
-                "content": "<ul><li>L’a<strong>pprentissage automatique</strong> est une branche de l’intelligence artificielle qui permet aux machines d’apprendre à réaliser des tâches à partir de données, sans programmation explicite.&nbsp;🦾</li><li>L’apprentissage automatique<strong> supervisé</strong> repose sur l’utilisation de <strong>données étiquetées</strong> : le logiciel apprend durant une phase d’entraînement à associer des entrées aux bonnes réponses, puis est évalué sur de nouvelles données lors d’une phase de test, afin de vérifier sa capacité de <strong>généralisation</strong>.&nbsp;🏷️</li><li>\nLa fiabilité du modèle dépend fortement de la qualité des données, et un <strong>risque d’erreur</strong> subsiste toujours.&nbsp;⚠️</li><li>Cette méthode est largement<strong> utilisée dans des domaines variés</strong> comme la reconnaissance vocale, la prévision météo, la génération de texte ou la détection médicale.&nbsp;🌦️</li></ul>"
+                "content": "<ul><li>L’a<strong>pprentissage automatique</strong> est une branche de l’intelligence artificielle qui permet aux machines d’apprendre à réaliser des tâches à partir de données.&nbsp;🦾</li><li>L’apprentissage automatique<strong> supervisé</strong> repose sur l’utilisation de <strong>données étiquetées</strong> : le logiciel apprend durant une phase d’entraînement à associer des entrées aux bonnes réponses, puis est évalué sur de nouvelles données lors d’une phase de test, afin de vérifier sa capacité de <strong>généralisation</strong>.&nbsp;🏷️</li><li>\nLa fiabilité du modèle dépend fortement de la qualité des données, et un <strong>risque d’erreur</strong> subsiste toujours.&nbsp;⚠️</li><li>Cette méthode est largement<strong> utilisée dans des domaines variés</strong> comme la reconnaissance vocale, la prévision météo, la génération de texte ou la détection médicale.&nbsp;🌦️</li></ul>"
               }
             }
           ]
@@ -779,7 +779,7 @@
                 "cards": [
                   {
                     "id": "393892dc-10cc-465d-992e-ff624049ba76",
-                    "text": "L’apprentissage supervisé est une technique d’intelligence artificielle.",
+                    "text": "L’apprentissage supervisé est une des techniques d’intelligence artificielle.",
                     "image": {
                       "url": "",
                       "altText": ""
