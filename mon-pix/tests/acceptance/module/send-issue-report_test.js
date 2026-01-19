@@ -50,11 +50,6 @@ module('Acceptance | Module | Routes | sendIssueReport', function (hooks) {
         sections: [section],
       });
 
-      server.create('feature-toggle', {
-        id: 0,
-        isModulixIssueReportDisplayed: true,
-      });
-
       // when
       const screen = await visit('/modules/3r7cl7m3/bien-ecrire-son-adresse-mail/passage');
       await click(screen.getByLabelText('I am the right answer!'));
