@@ -109,7 +109,7 @@ export default class PlacesLotCreationForm extends Component {
               type="date"
               class={{if @errors.activationDate "form-control is-invalid" "form-control"}}
               @value={{this.activationDate}}
-              @requiredLabel={{true}}
+              @requiredLabel={{t "common.forms.mandatory"}}
               {{on "input" this.onActivationDateChange}}
             ><:label>Date d'activation</:label></PixInput>
 
@@ -124,7 +124,7 @@ export default class PlacesLotCreationForm extends Component {
               class={{if @errors.expirationDate "form-control is-invalid" "form-control"}}
               type="date"
               @value={{this.expirationDate}}
-              @requiredLabel="Champ obligatoire"
+              @requiredLabel={{t "common.forms.mandatory"}}
               {{on "input" this.onExpirationDateChange}}
             ><:label>Date d'expiration</:label></PixInput>
 
@@ -141,7 +141,7 @@ export default class PlacesLotCreationForm extends Component {
               @onChange={{this.selectCategory}}
               @value={{this.category}}
               @errorMessage={{get @errors.category "0.message"}}
-              @requiredLabel="Champs obligatoire"
+              @requiredLabel={{t "common.forms.mandatory"}}
             >
               <:label>Catégorie</:label>
             </PixSelect>
@@ -151,7 +151,7 @@ export default class PlacesLotCreationForm extends Component {
               @value={{this.reference}}
               class={{if @errors.reference "form-control is-invalid" "form-control"}}
               maxlength="255"
-              @requiredLabel={{true}}
+              @requiredLabel={{t "common.forms.mandatory"}}
               {{on "input" this.onReferenceChange}}
             ><:label>Référence</:label></PixInput>
 
