@@ -8,20 +8,21 @@ export default class CurrentSessionService extends SessionService {
   @service router;
 
   routeAfterAuthentication = 'authenticated';
+  routeAfterInvalidation = null;
 
   async handleAuthentication() {
     super.handleAuthentication(this.routeAfterAuthentication);
   }
 
   async invalidateWithError(errorCode) {
-    this.alternativeRootURL = this.router.urlFor('authentication.login', { queryParams: { error: errorCode } });
+    this.routeAfterInvalidation = this.router.urlFor('authentication.login', { queryParams: { error: errorCode } });
     await this.invalidate();
   }
 
   handleInvalidation() {
     this.store.clear();
-    const routeAfterInvalidation = this._getRouteAfterInvalidation();
-    super.handleInvalidation(routeAfterInvalidation);
+    super.handleInvalidation(this.routeAfterInvalidation || this.url.homeUrl);
+    this.routeAfterInvalidation = null;
   }
 
   waitBeforeInvalidation(millisecondsToWait) {
@@ -33,12 +34,5 @@ export default class CurrentSessionService extends SessionService {
   @action
   updateDataAttribute(attribute, value) {
     this.data[attribute] = value;
-  }
-
-  _getRouteAfterInvalidation() {
-    const alternativeRootURL = this.alternativeRootURL;
-    this.alternativeRootURL = null;
-
-    return alternativeRootURL ? alternativeRootURL : this.url.homeUrl;
   }
 }

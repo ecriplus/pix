@@ -165,7 +165,7 @@ module('Unit | Authenticator | oidc', function (hooks) {
 
   module('#invalidate', function () {
     module('when user has logout url in their session', function () {
-      test('should set alternativeRootURL with the redirect logout url', async function (assert) {
+      test('should set routeAfterInvalidation with the redirect logout url', async function (assert) {
         // given
         const sessionStub = Service.create({
           isAuthenticated: true,
@@ -191,7 +191,7 @@ module('Unit | Authenticator | oidc', function (hooks) {
         });
 
         // then
-        assert.strictEqual(authenticator.session.alternativeRootURL, redirectLogoutUrl);
+        assert.strictEqual(authenticator.session.routeAfterInvalidation, redirectLogoutUrl);
         sinon.restore();
       });
     });

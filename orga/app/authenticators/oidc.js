@@ -89,6 +89,6 @@ export default class OidcAuthenticator extends BaseAuthenticator {
     );
     const { redirectLogoutUrl } = await response.json();
 
-    this.session.alternativeRootURL = redirectLogoutUrl;
+    this.session.routeAfterInvalidation = redirectLogoutUrl;
   }
 }

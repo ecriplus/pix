@@ -711,7 +711,7 @@ module('Unit | Service | current-user', function (hooks) {
         isAuthenticated: true,
         data: { authenticated: { user_id: 1 } },
         invalidate: () => resolve('invalidate'),
-        alternativeRootURL: null,
+        routeAfterInvalidation: null,
       });
       const storeStub = Service.create({
         findRecord: () => Promise.reject({ errors: [{ code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP' }] }),
