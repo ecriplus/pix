@@ -80,6 +80,8 @@ export class LearningContentRepository {
    * @returns {Promise<object[]>}
    */
   async find(cacheKey, callback) {
+    this.#metrics.findRead.inc();
+
     let dtos = this.#findCache.get(cacheKey);
     if (dtos) return dtos;
 
