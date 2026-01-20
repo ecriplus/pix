@@ -17,9 +17,6 @@ export default class SignupController extends Controller {
   @action
   async joinAndSignup(userRecord) {
     await userRecord.save();
-
-    await this.joinInvitation.acceptInvitationByEmail(userRecord.email);
-
     await this.session.authenticate('authenticator:oauth2', userRecord.email, userRecord.password);
   }
 }

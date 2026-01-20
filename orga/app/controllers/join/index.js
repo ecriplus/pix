@@ -16,8 +16,7 @@ export default class JoinController extends Controller {
   }
 
   @action
-  async joinAndAuthenticate(email, password) {
-    await this.joinInvitation.acceptInvitationByEmail(email);
+  async authenticate(email, password) {
     await this.session.authenticate('authenticator:oauth2', email, password);
   }
 }

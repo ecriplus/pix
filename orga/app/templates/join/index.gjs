@@ -24,7 +24,7 @@ import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
         <h2 class="pix-body-l">{{t "pages.login.with-pix-account"}}</h2>
       </div>
 
-      <LoginForm @onSubmit={{@controller.joinAndAuthenticate}} />
+      <LoginForm @onSubmit={{@controller.authenticate}} />
 
       <AuthenticationIdentityProviders
         @invitationId={{@controller.invitationId}}

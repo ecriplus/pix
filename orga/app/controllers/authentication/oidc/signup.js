@@ -27,22 +27,10 @@ export default class OidcSignupController extends Controller {
   async joinAndSignup() {
     const { identity_provider_slug } = this.model;
     const { authenticationKey } = oidcUserAuthenticationStorage.get() || {};
-
-    try {
-      this.session.set('skipAuthentication', true);
-      await this.session.authenticate('authenticator:oidc', {
-        authenticationKey,
-        identityProviderSlug: identity_provider_slug,
-        hostSlug: 'users',
-      });
-      const createdUserId = this.session.data.authenticated.user_id;
-
-      await this.joinInvitation.acceptInvitationByUserId(createdUserId);
-
-      this.session.set('skipAuthentication', false);
-      await this.session.handleAuthentication();
-    } finally {
-      this.session.set('skipAuthentication', false);
-    }
+    await this.session.authenticate('authenticator:oidc', {
+      authenticationKey,
+      identityProviderSlug: identity_provider_slug,
+      hostSlug: 'users',
+    });
   }
 }
