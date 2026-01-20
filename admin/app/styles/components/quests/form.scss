@@ -18,6 +18,11 @@
     gap: 24px;
     justify-content: center;
   }
+
+// obligé de passer par ça puisque le composant n'a pas de ...attributes :)
+  .pix-segmented-control {
+    width: max-content;
+  }
 }
 
 .quest-requirement-form {
