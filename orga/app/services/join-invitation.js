@@ -35,16 +35,8 @@ export default class JoinInvitationService extends Service {
     }
   }
 
-  async acceptInvitationByEmail(email) {
-    await this.#acceptInvitation({ email });
-  }
-
+  /** Accepts an invitation from a userId. */
   async acceptInvitationByUserId(userId) {
-    await this.#acceptInvitation({ userId });
-  }
-
-  /** Accepts an invitation from either an email or a userId. */
-  async #acceptInvitation({ email, userId }) {
     if (!this.invitation) return;
 
     let record;
@@ -54,7 +46,7 @@ export default class JoinInvitationService extends Service {
       const organizationInvitationRecord = this.store.peekRecord('organization-invitation-response', id);
       if (organizationInvitationRecord) return;
 
-      record = this.store.createRecord('organization-invitation-response', { id, code, email, userId });
+      record = this.store.createRecord('organization-invitation-response', { id, code, userId });
       await record.save({ adapterOptions: { organizationInvitationId: invitationId } });
     } catch (responseError) {
       record?.deleteRecord();
