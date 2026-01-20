@@ -1,5 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { click, currentURL, visit as visitWithAbort } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -223,7 +223,7 @@ module('Acceptance | Session Details Parameters', function (hooks) {
 
           // then
           assert.rejects(
-            visit(`/sessions/${sessionFinalized.id}/finalisation`),
+            visitWithAbort(`/sessions/${sessionFinalized.id}/finalisation`),
             transitionError,
             'error raised when visiting finalisation route',
           );

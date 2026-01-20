@@ -1,10 +1,9 @@
-import { clickByText } from '@1024pix/ember-testing-library';
+import { clickByText, visit } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
 import { setupApplicationTest, t } from '../helpers';
 import identifyLearner from '../helpers/identify-learner';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 module('Acceptance | Start mission', function (hooks) {
   setupApplicationTest(hooks);
@@ -17,7 +16,7 @@ module('Acceptance | Start mission', function (hooks) {
       this.server.create('challenge');
 
       // when
-      await unabortedVisit(`/missions/${mission.id}`);
+      await visit(`/missions/${mission.id}`);
       await clickByText(t('pages.missions.start-page.start-mission'));
 
       // then
@@ -37,7 +36,7 @@ module('Acceptance | Start mission', function (hooks) {
       this.server.create('challenge');
 
       // when
-      await unabortedVisit(`/missions/${mission.id}`);
+      await visit(`/missions/${mission.id}`);
       await clickByText(t('pages.missions.start-page.start-mission'));
 
       // then
@@ -54,7 +53,7 @@ module('Acceptance | Start mission', function (hooks) {
       this.server.create('challenge');
 
       // when
-      await unabortedVisit(`/missions/${mission.id}/introduction`);
+      await visit(`/missions/${mission.id}/introduction`);
       await clickByText(t('pages.missions.introduction-page.start-mission'));
 
       // then

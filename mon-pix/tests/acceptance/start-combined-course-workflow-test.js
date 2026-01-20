@@ -7,7 +7,6 @@ import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
 import setupIntl from '../helpers/setup-intl';
-import { unabortedVisit } from '../helpers/unaborted-visit';
 
 module('Acceptance | Combined course | Start Combined course workflow', function (hooks) {
   setupApplicationTest(hooks);
@@ -79,7 +78,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
         //given
         const user = server.create('user', 'withEmail', { hasSeenAssessmentInstructions: false });
         // when
-        const screen = await unabortedVisit('/parcours/COMBINIX1');
+        const screen = await visit('/parcours/COMBINIX1');
         await _loginUser(screen, user);
 
         assert.strictEqual(currentURL(), '/parcours/COMBINIX1');
@@ -130,7 +129,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
       module('When association is not already done', function () {
         test('should redirect to reconciliation page', async function (assert) {
           //when
-          await unabortedVisit('/parcours/COMBINIX1');
+          await visit('/parcours/COMBINIX1');
 
           //then
           assert.strictEqual(currentURL(), '/organisations/COMBINIX1/prescrit/eleve');
@@ -139,7 +138,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
         module('when using fill in code page', function () {
           test('should redirect to sco reconciliation page', async function (assert) {
             //given
-            const screen = await unabortedVisit('/campagnes');
+            const screen = await visit('/campagnes');
 
             //when
             await fillByLabel(`${t('pages.fill-in-campaign-code.label')} *`, 'COMBINIX1');
@@ -159,7 +158,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
               organizationId: 1,
             });
 
-            const screen = await unabortedVisit('/parcours/COMBINIX1');
+            const screen = await visit('/parcours/COMBINIX1');
 
             //when
             await click(screen.getByText(combinedCourseCampaignItem.title));
@@ -177,7 +176,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
               organizationId: 1,
             });
 
-            const screen = await unabortedVisit('/parcours/COMBINIX1');
+            const screen = await visit('/parcours/COMBINIX1');
 
             //when
             await click(screen.getByText(combinedCourseModuleItem.title));
@@ -196,7 +195,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
           });
 
           // when
-          await unabortedVisit('/parcours/CAMPAIGN');
+          await visit('/parcours/CAMPAIGN');
 
           // then
           assert.strictEqual(currentURL(), '/campagnes/CAMPAIGN/evaluation/didacticiel');

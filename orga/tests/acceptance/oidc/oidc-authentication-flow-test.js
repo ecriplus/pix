@@ -15,7 +15,6 @@ import {
   createUserWithMembership,
   createUserWithMembershipAndTermsOfServiceAccepted,
 } from '../../helpers/test-init';
-import { unabortedVisit } from '../../helpers/unaborted-visit';
 
 module('Acceptance | OIDC | authentication flow', function (hooks) {
   setupApplicationTest(hooks);
@@ -34,7 +33,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
     module('when the wanted OIDC Provider is not enabled/ready/existing', function () {
       test('it redirects the user to the login page', async function (assert) {
         // when
-        await unabortedVisit('/connexion/some-oidc-provider-not-enabled-ready-existing');
+        await visit('/connexion/some-oidc-provider-not-enabled-ready-existing');
 
         // then
         assert.strictEqual(currentURL(), '/connexion');
@@ -44,7 +43,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
     module('when the wanted OIDC Provider is enabled and ready', function () {
       test('it redirects the user to the OIDC provider authentication page', async function (assert) {
         // when
-        await unabortedVisit('/connexion/oidc-partner');
+        await visit('/connexion/oidc-partner');
 
         // then
         assert.ok(Location.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
@@ -56,7 +55,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
     module('when the wanted OIDC Provider is not enabled/ready/existing', function () {
       test('it redirects the user to the login page', async function (assert) {
         // when
-        await unabortedVisit('/connexion/some-oidc-provider-not-enabled-ready-existing?code=code&state=state');
+        await visit('/connexion/some-oidc-provider-not-enabled-ready-existing?code=code&state=state');
 
         // then
         assert.strictEqual(currentURL(), '/connexion');
