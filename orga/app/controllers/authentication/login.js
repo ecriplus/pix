@@ -8,6 +8,9 @@ export default class LoginController extends Controller {
   @service joinInvitation;
   @service authErrorMessages;
 
+  queryParams = ['error'];
+  error = null;
+
   @action
   async authenticate(login, password) {
     await this.session.authenticate('authenticator:oauth2', login, password);

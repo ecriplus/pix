@@ -4,7 +4,6 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
-import { Response } from 'miragejs';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 import { module, test } from 'qunit';
 
@@ -168,30 +167,6 @@ module('Acceptance | join and login', function (hooks) {
       // then
       assert.strictEqual(currentURL(), '/connexion');
       assert.ok(screen.getByText(t('pages.login-form.invitation-already-accepted')));
-    });
-  });
-
-  module('when the invitation has been accepted while user is authenticating', function () {
-    test('displays an error message', async function (assert) {
-      // given
-      const user = createUserWithMembership();
-      createPrescriberByUser({ user });
-      const invitationCode = 'ABCDEFGH01';
-      const invitationId = server.create('organizationInvitation', { status: 'pending', code: invitationCode }).id;
-      server.post(
-        `/organization-invitations/${invitationId}/response`,
-        () => new Response(409, {}, { errors: [{ status: '409' }] }),
-      );
-
-      // when
-      const screen = await visit(`/rejoindre?invitationId=${invitationId}&code=${invitationCode}`);
-      await fillByLabel(t('pages.login-form.email.label'), user.email);
-      await fillByLabel(t('pages.login-form.password'), 'secret');
-      await clickByName(t('pages.login-form.login'));
-
-      // then
-      assert.strictEqual(currentURL(), `/rejoindre?invitationId=${invitationId}&code=${invitationCode}`);
-      assert.ok(screen.getByText(t('pages.login-form.errors.status.409')));
     });
   });
 

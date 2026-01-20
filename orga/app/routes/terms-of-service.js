@@ -6,12 +6,13 @@ export default class TermsOfServiceRoute extends Route {
   @service router;
   @service session;
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     this.session.requireAuthentication(transition, 'authentication.login');
 
     if (transition.isAborted) {
       return;
     }
+    await this.currentUser.load();
 
     const pixOrgaTermsOfServiceStatus = this.currentUser?.prescriber?.pixOrgaTermsOfServiceStatus;
     if (pixOrgaTermsOfServiceStatus === 'accepted') {

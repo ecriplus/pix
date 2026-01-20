@@ -5,16 +5,17 @@ import SessionService from 'ember-simple-auth/services/session';
 export default class CurrentSessionService extends SessionService {
   @service currentUser;
   @service url;
+  @service router;
 
   routeAfterAuthentication = 'authenticated';
 
   async handleAuthentication() {
-    if (this.skipAuthentication) {
-      return;
-    }
-    await this.currentUser.load();
-
     super.handleAuthentication(this.routeAfterAuthentication);
+  }
+
+  async invalidateWithError(errorCode) {
+    this.alternativeRootURL = this.router.urlFor('authentication.login', { queryParams: { error: errorCode } });
+    await this.invalidate();
   }
 
   handleInvalidation() {

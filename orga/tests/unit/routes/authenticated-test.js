@@ -1,18 +1,31 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
+import { AuthorizationError, InvitationError } from 'pix-orga/utils/errors';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Route | authenticated', function (hooks) {
   setupTest(hooks);
 
+  let route;
+  let sessionService;
+  let routerService;
+  let joinInvitationService;
+  let currentUserService;
+
+  hooks.beforeEach(function () {
+    route = this.owner.lookup('route:authenticated');
+    sessionService = this.owner.lookup('service:session');
+    routerService = this.owner.lookup('service:router');
+    joinInvitationService = this.owner.lookup('service:join-invitation');
+    currentUserService = this.owner.lookup('service:current-user');
+  });
+
   module('beforeModel', function () {
-    test('should abort transition if user not logged in', async function (assert) {
+    test('aborts transition if user not logged in', async function (assert) {
       // given
-      const route = this.owner.lookup('route:authenticated');
       const transition = { isAborted: true };
-      const requireAuthenticationStub = sinon.stub(route.session, 'requireAuthentication');
-      const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+      const requireAuthenticationStub = sinon.stub(sessionService, 'requireAuthentication');
+      const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
       // when
       route.beforeModel(transition);
@@ -22,61 +35,73 @@ module('Unit | Route | authenticated', function (hooks) {
       assert.notOk(replaceWithStub.called);
     });
 
-    test('should redirect towards cgu if not accepted yet', async function (assert) {
-      // given
-      const organizationId = Symbol('organizationId');
+    module('When user is not authorized', function () {
+      test('invalidates user session', async function (assert) {
+        // given
+        sinon.stub(sessionService, 'requireAuthentication');
+        sinon.stub(currentUserService, 'load').rejects(new AuthorizationError());
+        const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
-      class CurrentUserStub extends Service {
-        prescriber = { placesManagement: true, pixOrgaTermsOfServiceStatus: 'requested' };
-        organization = {
-          id: organizationId,
-        };
-      }
+        // when
+        await route.beforeModel({ isAborted: false });
 
-      const route = this.owner.lookup('route:authenticated');
-      const transition = { isAborted: false };
-
-      sinon.stub(route.session, 'requireAuthentication');
-
-      const replaceWithStub = sinon.stub(route.router, 'replaceWith');
-
-      this.owner.register('service:current-user', CurrentUserStub);
-
-      // when
-      route.beforeModel(transition);
-
-      // then
-      assert.ok(replaceWithStub.calledWithExactly('terms-of-service'));
+        // then
+        assert.ok(invalidateStub.calledWithExactly('PIX_ORGA_ACCESS_NOT_ALLOWED'));
+      });
     });
 
-    test('should not redirect towards cgu if already accepted yet', async function (assert) {
-      // given
-      const organizationId = Symbol('organizationId');
+    module('When invitation is not valid', function () {
+      test('invalidates user session', async function (assert) {
+        // given
+        sinon.stub(sessionService, 'requireAuthentication');
+        sinon.stub(joinInvitationService, 'invitation').value({ invitationId: 1, code: '123' });
+        sinon.stub(joinInvitationService, 'acceptInvitationByUserId').rejects(new InvitationError());
+        const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
-      class CurrentUserStub extends Service {
-        prescriber = {
-          placesManagement: true,
-          pixOrgaTermsOfServiceStatus: 'accepted',
-        };
-        organization = {
-          id: organizationId,
-        };
-      }
+        // when
+        await route.beforeModel({ isAborted: false });
 
-      const route = this.owner.lookup('route:authenticated');
-      const transition = { isAborted: false };
+        // then
+        assert.ok(invalidateStub.calledWithExactly('INVITATION_INVALID'));
+      });
+    });
 
-      sinon.stub(route.session, 'requireAuthentication');
+    module('When CGU not accepted yet', function () {
+      test('redirects towards cgu', async function (assert) {
+        // given
+        sinon.stub(sessionService, 'requireAuthentication');
+        sinon.stub(currentUserService, 'load').resolves();
+        sinon.stub(currentUserService, 'organization').value({ id: 123 });
+        sinon
+          .stub(currentUserService, 'prescriber')
+          .value({ placesManagement: true, pixOrgaTermsOfServiceStatus: 'requested' });
+        const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
-      const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+        // when
+        await route.beforeModel({ isAborted: false });
 
-      this.owner.register('service:current-user', CurrentUserStub);
+        // then
+        assert.ok(replaceWithStub.calledWithExactly('terms-of-service'));
+      });
+    });
 
-      // when
-      route.beforeModel(transition);
+    module('When CGU already accepted', function () {
+      test('does not redirect towards cgu ', async function (assert) {
+        // given
+        sinon.stub(sessionService, 'requireAuthentication');
+        sinon.stub(currentUserService, 'load').resolves();
+        sinon.stub(currentUserService, 'organization').value({ id: 123 });
+        sinon
+          .stub(currentUserService, 'prescriber')
+          .value({ placesManagement: true, pixOrgaTermsOfServiceStatus: 'accepted' });
+        const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
-      // then
-      assert.notOk(replaceWithStub.calledWithExactly('terms-of-service'));
+        // when
+        await route.beforeModel({ isAborted: false });
+
+        // then
+        assert.notOk(replaceWithStub.calledWithExactly('terms-of-service'));
+      });
     });
   });
 });

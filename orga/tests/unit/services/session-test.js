@@ -19,17 +19,6 @@ module('Unit | Service | session', function (hooks) {
     service.currentUser = { load: sinon.stub(), prescriber: user };
   });
 
-  module('#handleAuthentication', function () {
-    test('loads current user', async function (assert) {
-      // when
-      await service.handleAuthentication();
-
-      // then
-      sinon.assert.calledOnce(service.currentUser.load);
-      assert.ok(true);
-    });
-  });
-
   module('#handleInvalidation', function () {
     test('overrides handleInvalidation method', function (assert) {
       // then

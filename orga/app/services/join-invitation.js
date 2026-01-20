@@ -1,5 +1,6 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { InvitationError } from 'pix-orga/utils/errors';
 import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 
 const invitationStorage = new SessionStorageEntry('joinInvitationData');
@@ -51,9 +52,10 @@ export default class JoinInvitationService extends Service {
     } catch (responseError) {
       record?.deleteRecord();
       const error = responseError?.errors[0];
+
       const isUserAlreadyOrganizationMember = error?.status === '412';
       if (isUserAlreadyOrganizationMember) return;
-      throw responseError;
+      throw new InvitationError();
     } finally {
       this.#reset();
     }

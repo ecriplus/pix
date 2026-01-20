@@ -1,5 +1,6 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { AuthorizationError } from 'pix-orga/utils/errors';
 
 export default class CurrentUserService extends Service {
   @service session;
@@ -91,24 +92,25 @@ export default class CurrentUserService extends Service {
   }
 
   async load() {
-    if (this.session.isAuthenticated) {
-      try {
-        this.prescriber = await this.store.findRecord('prescriber', this.session.data.authenticated.user_id, {
-          reload: true,
-        });
-        this.memberships = await this.prescriber.memberships;
-        const userOrgaSettings = await this.prescriber.userOrgaSettings;
-        const membership = await this._getMembershipByUserOrgaSettings(this.memberships.slice(), userOrgaSettings);
-        await this._setOrganizationProperties(membership);
+    if (!this.session.isAuthenticated) return;
 
-        await membership.save({
-          adapterOptions: { updateLastAccessedAt: true },
-        });
-      } catch {
-        this.prescriber = null;
-        this.memberships = null;
-        return this.session.invalidate();
-      }
+    try {
+      this.prescriber = await this.store.findRecord('prescriber', this.session.data.authenticated.user_id, {
+        reload: true,
+      });
+      this.memberships = await this.prescriber.memberships;
+      const userOrgaSettings = await this.prescriber.userOrgaSettings;
+      const membership = await this._getMembershipByUserOrgaSettings(this.memberships.slice(), userOrgaSettings);
+      await this._setOrganizationProperties(membership);
+
+      await membership.save({
+        adapterOptions: { updateLastAccessedAt: true },
+      });
+    } catch (responseError) {
+      this.prescriber = null;
+      this.memberships = null;
+      const error = responseError?.errors[0];
+      throw new AuthorizationError(error?.code);
     }
   }
 
