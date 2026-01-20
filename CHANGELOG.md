@@ -1,5 +1,47 @@
 # Pix Changelog
 
+# [5.308.0](https://github.com/1024pix/pix/compare/v5.307.0...v5.308.0) (2026-01-20)
+
+### :rocket: Amélioration
+
+- [#14767](https://github.com/1024pix/pix/pull/14767) Editer l'ordre des types de grain dans le schema d'un module (PIX-21069) 
+- [#14700](https://github.com/1024pix/pix/pull/14700) MDX-57 integration NR_Evaluation_IND 
+- [#14723](https://github.com/1024pix/pix/pull/14723) Supprimer les mécaniques d'envoi sur le front (PIX-20951)  
+- [#14791](https://github.com/1024pix/pix/pull/14791) Update IAGenPrompt_IND.json 
+
+### :bug: Correction
+
+- [#14790](https://github.com/1024pix/pix/pull/14790) Metrics learning content : Incrémenter le compteur de lecture type "find" 
+
+### :building_construction: Tech
+
+- [#14762](https://github.com/1024pix/pix/pull/14762) Autoriser le champs ownerOrganizationId à devenir nullable (PIX-21130). 
+- [#14783](https://github.com/1024pix/pix/pull/14783) Mise à jour de ember-testing-library 
+- [#14766](https://github.com/1024pix/pix/pull/14766) Supprimer le feature toggle isModulixIssueReportDisplayed (PIX-21067) 
+
+### :arrow_up: Montée de version
+
+- [#14805](https://github.com/1024pix/pix/pull/14805) Lock file maintenance (dossier racine) 
+- [#14801](https://github.com/1024pix/pix/pull/14801) Lock file maintenance (e2e-playwright) 
+- [#14797](https://github.com/1024pix/pix/pull/14797) Lock file maintenance (load-testing) 
+- [#14774](https://github.com/1024pix/pix/pull/14774) Update dependency @1024pix/eslint-plugin to ^2.1.17 (admin) 
+- [#14775](https://github.com/1024pix/pix/pull/14775) Update dependency @1024pix/eslint-plugin to ^2.1.17 (api) 
+- [#14776](https://github.com/1024pix/pix/pull/14776) Update dependency @1024pix/eslint-plugin to ^2.1.17 (audit-logger) 
+- [#14777](https://github.com/1024pix/pix/pull/14777) Update dependency @1024pix/eslint-plugin to ^2.1.17 (certif) 
+- [#14778](https://github.com/1024pix/pix/pull/14778) Update dependency @1024pix/eslint-plugin to ^2.1.17 (dossier racine) 
+- [#14779](https://github.com/1024pix/pix/pull/14779) Update dependency @1024pix/eslint-plugin to ^2.1.17 (e2e-playwright) 
+- [#14780](https://github.com/1024pix/pix/pull/14780) Update dependency @1024pix/eslint-plugin to ^2.1.17 (junior) 
+- [#14781](https://github.com/1024pix/pix/pull/14781) Update dependency @1024pix/eslint-plugin to ^2.1.17 (mon-pix) 
+- [#14782](https://github.com/1024pix/pix/pull/14782) Update dependency @1024pix/eslint-plugin to ^2.1.17 (orga) 
+- [#14737](https://github.com/1024pix/pix/pull/14737) Update dependency @1024pix/pix-ui to v56 (certif) 
+- [#14786](https://github.com/1024pix/pix/pull/14786) Update dependency globals to v17 (admin) 
+- [#14787](https://github.com/1024pix/pix/pull/14787) Update dependency globals to v17 (audit-logger) 
+- [#14788](https://github.com/1024pix/pix/pull/14788) Update dependency globals to v17 (certif) 
+- [#14789](https://github.com/1024pix/pix/pull/14789) Update dependency globals to v17 (e2e-playwright) 
+- [#14802](https://github.com/1024pix/pix/pull/14802) Update dependency globals to v17 (junior) 
+- [#14803](https://github.com/1024pix/pix/pull/14803) Update dependency globals to v17 (mon-pix) 
+- [#14804](https://github.com/1024pix/pix/pull/14804) Update dependency globals to v17 (orga)
+
 # [5.307.0](https://github.com/1024pix/pix/compare/v5.306.0...v5.307.0) (2026-01-19)
 
 ### :rocket: Amélioration
