@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -36,7 +35,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @trainings={{this.trainings}}
   @onResultsShared={{this.onResultsShared}}
-  @isSharableCampaign={{true}}
+  @isCampaignNotAutonomousCourseOrAbsoluteNovice={{true}}
 />`,
       );
     });
@@ -53,23 +52,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     test('it should display the rewards tab first', async function (assert) {
       // then
       assert.dom(screen.getByRole('heading', { name: t('pages.skill-review.tabs.rewards.title') })).isVisible();
-    });
-
-    module('when clicking on shared results button', function () {
-      test('it should call onResultsShared', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        sinon.stub(store, 'adapterFor');
-        const shareStub = sinon.stub();
-        store.adapterFor.returns({ share: shareStub });
-
-        // when
-        await click(screen.queryByRole('tab', { name: 'Formations' }));
-        await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-        // then
-        assert.true(shareStub.calledOnce);
-      });
     });
   });
 
@@ -189,7 +171,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @trainings={{this.trainings}}
   @onResultsShared={{this.onResultsShared}}
-  @isSharableCampaign={{true}}
+  @isCampaignNotAutonomousCourseOrAbsoluteNovice={{true}}
 />`,
       );
     });

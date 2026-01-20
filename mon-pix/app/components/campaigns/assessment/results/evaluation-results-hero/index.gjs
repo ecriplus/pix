@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 import CustomParseFormat from 'dayjs/plugin/customParseFormat';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
 import or from 'ember-truth-helpers/helpers/or';
+import ENV from 'mon-pix/config/environment';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 import AcquiredBadges from './acquired-badges';
@@ -53,11 +53,12 @@ export default class EvaluationResultsHero extends Component {
     };
   }
 
+  get isCampaignAutonomousCourse() {
+    return this.args.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
+  }
+
   get showCustomOrganizationBlock() {
-    const hasCustomContent = this.args.campaign.customResultPageText || this.args.campaign.hasCustomResultPageButton;
-    return (
-      hasCustomContent && (this.args.campaign.isSimplifiedAccess || this.args.campaignParticipationResult.isShared)
-    );
+    return this.args.campaign.customResultPageText || this.args.campaign.hasCustomResultPageButton;
   }
 
   get displayQuestResult() {
@@ -85,34 +86,6 @@ export default class EvaluationResultsHero extends Component {
   @action
   handleSeeTrainingsClick() {
     this.args.showTrainings();
-  }
-
-  @action
-  async handleShareResultsClick() {
-    if (this.isButtonLoading) return;
-
-    try {
-      this.hasGlobalError = false;
-      this.isButtonLoading = true;
-
-      const campaignParticipationResult = this.args.campaignParticipationResult;
-
-      await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
-      await campaignParticipationResult.reload({
-        adapterOptions: { userId: this.currentUser.user.id, campaignId: this.args.campaign.id },
-      });
-      this.args.onResultsShared();
-
-      this.pixMetrics.trackEvent("Envoi des résultats depuis l'en-tête", {
-        disabled: true,
-        category: 'Fin de parcours',
-        action: 'Envoi des résultats',
-      });
-    } catch {
-      this.hasGlobalError = true;
-    } finally {
-      this.isButtonLoading = false;
-    }
   }
 
   @action
@@ -189,65 +162,24 @@ export default class EvaluationResultsHero extends Component {
           </div>
         {{/if}}
 
-        {{#if @isSharableCampaign}}
-          {{#if @campaignParticipationResult.isShared}}
-            <PixNotificationAlert
-              class="evaluation-results-hero-results__shared-message"
-              @type="success"
-              @withIcon={{true}}
-            >
-              {{t "pages.skill-review.hero.shared-message" date=this.sharedAtDate time=this.sharedAtTime}}
-            </PixNotificationAlert>
+        {{#unless (or @campaign.isForAbsoluteNovice this.isCampaignAutonomousCourse)}}
+          <PixNotificationAlert
+            class="evaluation-results-hero-results__shared-message"
+            @type="success"
+            @withIcon={{true}}
+          >
+            {{t "pages.skill-review.hero.shared-message" date=this.sharedAtDate time=this.sharedAtTime}}
+          </PixNotificationAlert>
 
-            {{#if @hasTrainings}}
-              <p class="evaluation-results-hero-details__explanations">
-                {{t "pages.skill-review.hero.explanations.trainings"}}
-              </p>
-            {{/if}}
-          {{else if (not @campaignParticipationResult.isDisabled)}}
+          {{#if @hasTrainings}}
             <p class="evaluation-results-hero-details__explanations">
-              {{t "pages.skill-review.hero.explanations.send-results"}}
+              {{t "pages.skill-review.hero.explanations.trainings"}}
             </p>
           {{/if}}
-        {{/if}}
+        {{/unless}}
 
         <div class="evaluation-results-hero-details__actions">
-          {{#if @isSharableCampaign}}
-            {{#if @campaignParticipationResult.isShared}}
-              {{#if this.isUserAnonymous}}
-                <p>{{t "pages.signup.save-progress-message"}}</p>
-                <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
-                  {{t "pages.signup.actions.sign-up-on-pix"}}
-                </PixButtonLink>
-              {{/if}}
-              {{#if @hasTrainings}}
-                <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">
-                  {{t "pages.skill-review.hero.see-trainings"}}
-                </PixButton>
-              {{else}}
-                {{#unless (or @campaign.hasCustomResultPageButton this.isUserAnonymous)}}
-                  {{this.handleBackToHomepageDisplay}}
-                  <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
-                    {{t "navigation.back-to-homepage"}}
-                  </PixButtonLink>
-                {{/unless}}
-              {{/if}}
-            {{else}}
-              {{#if @campaignParticipationResult.isDisabled}}
-                <PixNotificationAlert @type="warning" @withIcon={{true}}>
-                  {{t "pages.skill-review.disabled-share"}}
-                </PixNotificationAlert>
-              {{else}}
-                <PixButton
-                  @triggerAction={{this.handleShareResultsClick}}
-                  @size="large"
-                  @isLoading={{this.isButtonLoading}}
-                >
-                  {{t "pages.skill-review.actions.send"}}
-                </PixButton>
-              {{/if}}
-            {{/if}}
-          {{else}}
+          {{#if (or @campaign.isForAbsoluteNovice this.isCampaignAutonomousCourse)}}
             {{#unless @campaign.hasCustomResultPageButton}}
               {{#if this.isUserAnonymous}}
                 <p>{{t "pages.signup.save-progress-message"}}</p>
@@ -261,6 +193,26 @@ export default class EvaluationResultsHero extends Component {
                 </PixButtonLink>
               {{/if}}
             {{/unless}}
+          {{else}}
+
+            {{#if this.isUserAnonymous}}
+              <p>{{t "pages.signup.save-progress-message"}}</p>
+              <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
+                {{t "pages.signup.actions.sign-up-on-pix"}}
+              </PixButtonLink>
+            {{/if}}
+            {{#if @hasTrainings}}
+              <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">
+                {{t "pages.skill-review.hero.see-trainings"}}
+              </PixButton>
+            {{else}}
+              {{#unless (or @campaign.hasCustomResultPageButton this.isUserAnonymous)}}
+                {{this.handleBackToHomepageDisplay}}
+                <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
+                  {{t "navigation.back-to-homepage"}}
+                </PixButtonLink>
+              {{/unless}}
+            {{/if}}
           {{/if}}
 
           {{#if this.hasGlobalError}}

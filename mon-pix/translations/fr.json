@@ -1430,15 +1430,6 @@
           "content-information": "En quittant ce parcours sans vous inscrire, vous ne pourrez pas conserver votre progression.",
           "content-instruction": "Voulez-vous continuer ?",
           "title": "Quitter et revenir sur pix.fr ?"
-        },
-        "send-result-modal": {
-          "actions": {
-            "cancel-to-share": "Rester pour envoyer",
-            "quit-without-sharing": "Quitter sans envoyer"
-          },
-          "content-information": "Envoyer vos résultats à l’organisateur du parcours est essentiel pour votre accompagnement. Restez sur cette page et cliquez sur ‘Envoyer mes résultats’ pour les transmettre.",
-          "content-instruction": "Voulez-vous vraiment quitter sans les envoyer ?",
-          "title": "Oups, vous n’avez pas encore envoyé vos résultats !"
         }
       }
     },
@@ -2067,8 +2058,7 @@
       "abstract-title": "Votre résultat pour ce parcours",
       "actions": {
         "back-to-pix": "Quitter et revenir sur Pix",
-        "continue": "Continuez votre expérience Pix",
-        "send": "J'envoie mes résultats"
+        "continue": "Continuez votre expérience Pix"
       },
       "already-shared": "Merci, vos résultats ont bien été envoyés !",
       "badge-card": {
@@ -2089,12 +2079,10 @@
         "result": "Résultat global",
         "title": "Vos résultats par compétence"
       },
-      "disabled-share": "Ce parcours a été désactivé par l'organisateur. L'envoi des résultats n'est plus possible.",
       "error": "Oups, une erreur est survenue !",
       "hero": {
         "acquired-badges-title": "Récompenses obtenues",
         "explanations": {
-          "send-results": "Envoyez vos résultats à l’organisateur du parcours et continuez à progresser avec les formations recommandées.",
           "trainings": "Pour progresser, découvrez nos recommandations de formations et trouvez celles qui vous conviennent le mieux."
         },
         "mastery-rate": "de réussite aux questions",
@@ -2141,11 +2129,9 @@
       "retry-and-reset": {
         "notification": "Repassez les questions échouées ou remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
       },
-      "send-results": "N'oubliez pas d'envoyer vos résultats à l'organisateur du parcours.",
       "send-status": {
         "in-progress": "Envoi en cours"
       },
-      "send-title": "Envoyez vos résultats",
       "stage": {
         "caption": "Détails de vos résultats sous forme de pourcentage et d'étoiles en fonction des compétences",
         "masteryPercentage": "{rate, number, ::percent} de réussite",
@@ -2166,15 +2152,6 @@
         },
         "trainings": {
           "description": "Obtenez des recommandations de formations personnalisées pour continuer à progresser et nourrir votre curiosité pour vous aider à réaliser votre plein potentiel.",
-          "modal": {
-            "content": "Envoyez vos résultats pour permettre à l’organisateur du parcours de vous accompagner.'<br />'Après avoir partagé, vous bénéficierez d'un accès à ces formations&nbsp;!",
-            "share-error": "Il y a eu une erreur lors de l'envoi de vos résultats. Veuillez réessayer."
-          },
-          "shared-results-modal": {
-            "return-results-action": "Fermer et revenir aux résultats",
-            "subtitle": "Prêt à développer vos compétences ?  🎓",
-            "title": "Résultats partagés"
-          },
           "tab-label": "Formations",
           "title": "Vous souhaitez en apprendre plus ?"
         }

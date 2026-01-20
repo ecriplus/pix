@@ -1,6 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
 import dayjs from 'dayjs';
 import CustomParseFormat from 'dayjs/plugin/customParseFormat';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
@@ -14,14 +13,6 @@ import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-renderi
 
 dayjs.extend(LocalizedFormat);
 dayjs.extend(CustomParseFormat);
-
-function sharedAtDate(date) {
-  return dayjs(date).format('LL');
-}
-
-function sharedAtTime(date) {
-  return dayjs(date).format('LT');
-}
 
 module('Integration | Components | Campaigns | Assessment | Results | Evaluation Results Hero', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -38,11 +29,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       // when
       screen = await render(
         <template>
-          <EvaluationResultsHero
-            @campaign={{campaign}}
-            @campaignParticipationResult={{campaignParticipationResult}}
-            @isSharableCampaign={{true}}
-          />
+          <EvaluationResultsHero @campaign={{campaign}} @campaignParticipationResult={{campaignParticipationResult}} />
         </template>,
       );
     });
@@ -79,8 +66,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           };
           const campaignParticipationResult = {
             campaignParticipationBadges: [],
-            isShared: false,
-
             masteryRate: 0.75,
             reachedStage: { acquired: 4, total: 5 },
           };
@@ -99,7 +84,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
                 @campaign={{campaign}}
                 @questResults={{questResults}}
                 @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
               />
             </template>,
           );
@@ -128,8 +112,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             };
             const campaignParticipationResult = {
               campaignParticipationBadges: [],
-              isShared: false,
-
               masteryRate: 0.75,
               reachedStage: { acquired: 4, total: 5 },
             };
@@ -148,7 +130,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
                   @campaign={{campaign}}
                   @questResults={{questResults}}
                   @campaignParticipationResult={{campaignParticipationResult}}
-                  @isSharableCampaign={{true}}
                 />
               </template>,
             );
@@ -169,8 +150,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
             const campaignParticipationResult = {
               campaignParticipationBadges: [],
-              isShared: false,
-
               masteryRate: 0.75,
               reachedStage: { acquired: 4, total: 5 },
             };
@@ -189,7 +168,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
                   @campaign={{campaign}}
                   @questResults={{questResults}}
                   @campaignParticipationResult={{campaignParticipationResult}}
-                  @isSharableCampaign={{true}}
                 />
               </template>,
             );
@@ -202,427 +180,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     });
   });
 
-  module('results sharing', function (hooks) {
-    let clock, now;
-
-    hooks.beforeEach(function () {
-      now = new Date('2024-01-01T14:03:00Z');
-      clock = sinon.useFakeTimers(now, { toFake: ['Date'] });
-
-      stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
-    });
-
-    hooks.afterEach(function () {
-      clock.restore();
-    });
-
-    module('when results are not shared', function () {
-      test('it should display specific explanation and button', async function (assert) {
-        // given
-        const campaign = {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        };
-
-        const campaignParticipationResult = {
-          campaignParticipationBadges: [],
-          isShared: false,
-
-          masteryRate: 0.75,
-          reachedStage: { acquired: 4, total: 5 },
-        };
-
-        // when
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-              @isSharableCampaign={{true}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.send-results'))).exists();
-        assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.send') })).exists();
-      });
-
-      test('it should display disabled notation', async function (assert) {
-        // given
-        const campaign = {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        };
-
-        const campaignParticipationResult = {
-          campaignParticipationBadges: [],
-          isShared: false,
-          isDisabled: true,
-
-          masteryRate: 0.75,
-          reachedStage: { acquired: 4, total: 5 },
-        };
-
-        // when
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-              @isSharableCampaign={{true}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.ok(screen.getByText(t('pages.skill-review.disabled-share')));
-        assert.notOk(screen.queryByText(t('pages.skill-review.hero.explanations.send-results')));
-        assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
-      });
-
-      module('when user is anonymous', function () {
-        test('it should not display a sign in button', async function (assert) {
-          //given
-          stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
-          const campaign = {
-            customResultPageText: 'My custom result page text',
-            organizationId: 1,
-          };
-
-          const campaignParticipationResult = {
-            campaignParticipationBadges: [],
-            isShared: false,
-
-            masteryRate: 0.75,
-            reachedStage: { acquired: 4, total: 5 },
-          };
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @questResults={{this.questResults}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-              />
-            </template>,
-          );
-
-          // then
-          assert.ok(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-          assert.notOk(screen.queryByText(t('pages.signup.save-progress-message')));
-          assert.notOk(screen.queryByText(t('pages.signup.actions.sign-up-on-pix')));
-        });
-      });
-
-      module('on click on the share button', function () {
-        let shareStub;
-
-        const campaign = {
-          id: 1,
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        };
-
-        test('on success, it should display a notification and hide improve elements', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const adapter = store.adapterFor('campaign-participation-result');
-          shareStub = sinon.stub(adapter, 'share');
-          const onResultsSharedStub = sinon.stub().resolves();
-          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
-            campaignParticipationBadges: [],
-            isShared: true,
-
-            masteryRate: 0.75,
-            sharedAt: now,
-            id: 'campaignParticipationResultId',
-          });
-          sinon.stub(campaignParticipationResult, 'reload').resolves();
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-                @onResultsShared={{onResultsSharedStub}}
-              />
-            </template>,
-          );
-
-          // then
-          assert.ok(
-            screen.queryByText(
-              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
-            ),
-          );
-          assert.dom(screen.queryByText(t('pages.skill-review.error'))).doesNotExist();
-        });
-
-        test('on success, it should call the onResultsShared function', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const adapter = store.adapterFor('campaign-participation-result');
-          shareStub = sinon.stub(adapter, 'share');
-          const onResultsSharedStub = sinon.stub().resolves();
-          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
-            campaignParticipationBadges: [],
-            isShared: false,
-            masteryRate: 0.75,
-            id: 'campaignParticipationResultId',
-          });
-          sinon.stub(campaignParticipationResult, 'reload').resolves();
-          shareStub.resolves();
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-                @onResultsShared={{onResultsSharedStub}}
-              />
-            </template>,
-          );
-          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-          // then
-          assert.true(onResultsSharedStub.calledOnce);
-        });
-
-        test('on fail, it should display an error', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const adapter = store.adapterFor('campaign-participation-result');
-          shareStub = sinon.stub(adapter, 'share');
-          const onResultsSharedStub = sinon.stub().resolves();
-          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
-            campaignParticipationBadges: [],
-            isShared: false,
-            masteryRate: 0.75,
-            id: 'campaignParticipationResultId',
-          });
-          sinon.stub(campaignParticipationResult, 'reload').resolves();
-          shareStub.rejects();
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-                @onResultsShared={{onResultsSharedStub}}
-              />
-            </template>,
-          );
-          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-          // then
-          assert.dom(screen.queryByText(t('pages.skill-review.error'))).exists();
-        });
-      });
-    });
-
-    module('when results are shared', function () {
-      test('it should not display disabled notation', async function (assert) {
-        // given
-        const campaign = {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        };
-        const campaignParticipationResult = {
-          campaignParticipationBadges: [],
-          isShared: true,
-          isDisabled: true,
-
-          masteryRate: 0.75,
-          reachedStage: { acquired: 4, total: 5 },
-        };
-
-        // when
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-              @isSharableCampaign={{true}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.notOk(screen.queryByText(t('pages.skill-review.disabled-share')));
-      });
-
-      test('it should display the shared date', async function (assert) {
-        // given
-        const campaign = {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        };
-
-        const campaignParticipationResult = {
-          campaignParticipationBadges: [],
-          isShared: true,
-          sharedAt: now,
-        };
-
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-              @isSharableCampaign={{true}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.ok(
-          screen.queryByText(
-            t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
-          ),
-        );
-      });
-
-      module('when there are no trainings and no custom link', function () {
-        test('it should display a message and a homepage link', async function (assert) {
-          // given
-          const campaign = { organizationId: 1 };
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-              />
-            </template>,
-          );
-
-          // the
-          assert.ok(
-            screen.queryByText(
-              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
-            ),
-          );
-          assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
-        });
-      });
-
-      module('when there are no trainings and a custom link', function () {
-        test('it should display a message but no homepage link', async function (assert) {
-          // given
-          const campaign = {
-            organizationId: 1,
-            hasCustomResultPageButton: true,
-          };
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-              />
-            </template>,
-          );
-
-          // then
-          assert.ok(
-            screen.queryByText(
-              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
-            ),
-          );
-          assert.dom(screen.queryByRole('link', { name: t('navigation.back-to-homepage') })).doesNotExist();
-        });
-      });
-
-      module('when there are trainings', function (hooks) {
-        let screen;
-        const showTrainingsStub = sinon.stub();
-
-        hooks.beforeEach(async function () {
-          // given
-          const hasTrainings = true;
-          const campaign = { organizationId: 1 };
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
-
-          // when
-          screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @hasTrainings={{hasTrainings}}
-                @showTrainings={{showTrainingsStub}}
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-              />
-            </template>,
-          );
-        });
-
-        test('it should display specific explanation and a see trainings button', async function (assert) {
-          // then
-          assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.trainings'))).exists();
-          assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).exists();
-        });
-
-        test('on see trainings click, it should trigger a specific action', async function (assert) {
-          // then
-          await click(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') }));
-
-          sinon.assert.calledOnce(showTrainingsStub);
-          assert.ok(true);
-        });
-      });
-
-      module('when user is anonymous', function () {
-        test('it should display a sign in button', async function (assert) {
-          // given
-          stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
-          const campaign = {
-            customResultPageText: 'My custom result page text',
-            organizationId: 1,
-          };
-          const campaignParticipationResult = {
-            campaignParticipationBadges: [],
-            isShared: true,
-
-            masteryRate: 0.75,
-            reachedStage: { acquired: 4, total: 5 },
-          };
-
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHero
-                @campaign={{campaign}}
-                @questResults={{this.questResults}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{true}}
-              />
-            </template>,
-          );
-          // then
-          assert.ok(screen.queryByText(t('pages.signup.save-progress-message')));
-          assert.ok(screen.queryByText(t('pages.signup.actions.sign-up-on-pix')));
-        });
-      });
-    });
-  });
-
-  module('when campaign results should not be shared', function () {
+  module('when campaign is for absolute novice or is an autonomous course', function () {
     module('when there is no custom link', function () {
       module('when user is anonymous', function () {
         test('it should display only an inscription link', async function (assert) {
@@ -638,7 +196,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               <EvaluationResultsHero
                 @campaign={{campaign}}
                 @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{false}}
               />
             </template>,
           );
@@ -666,7 +223,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               <EvaluationResultsHero
                 @campaign={{campaign}}
                 @campaignParticipationResult={{campaignParticipationResult}}
-                @isSharableCampaign={{false}}
               />
             </template>,
           );
@@ -694,7 +250,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             <EvaluationResultsHero
               @campaign={{campaign}}
               @campaignParticipationResult={{campaignParticipationResult}}
-              @isSharableCampaign={{false}}
             />
           </template>,
         );
@@ -874,7 +429,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             organizationId: 1,
             isSimplifiedAccess: true,
           };
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: false };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
@@ -900,7 +455,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             customResultPageButtonText: 'Custom result page button text',
             organizationId: 1,
           });
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
@@ -921,7 +476,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         test('no display the organization block', async function (assert) {
           // given
           const campaign = { organizationId: 1 };
-          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
@@ -970,7 +525,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               organizationId: 1,
             };
 
-            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
+            const campaignParticipationResult = { masteryRate: 0.75 };
 
             // when
             const screen = await render(
@@ -996,7 +551,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               customResultPageButtonText: 'Custom result page button text',
               organizationId: 1,
             });
-            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
+            const campaignParticipationResult = { masteryRate: 0.75 };
 
             // when
             const screen = await render(
@@ -1017,7 +572,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           test('no display the organization block', async function (assert) {
             // given
             const campaign = { organizationId: 1 };
-            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
+            const campaignParticipationResult = { masteryRate: 0.75 };
 
             // when
             const screen = await render(

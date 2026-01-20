@@ -1422,15 +1422,6 @@
           "content-information": "Als je deze cursus verlaat zonder je te registreren, kun je je voortgang niet bijhouden.",
           "content-instruction": "Wil je doorgaan?",
           "title": "Vertrekken en terugkeren naar Pix?"
-        },
-        "send-result-modal": {
-          "actions": {
-            "cancel-to-share": "Blijf om te verzenden",
-            "quit-without-sharing": "Stoppen zonder te verzenden"
-          },
-          "content-information": "Het opsturen van je resultaten naar de cursusorganisator is essentieel voor je ondersteuning. Blijf op deze pagina en klik op 'Verstuur mijn resultaten' om ze te versturen.",
-          "content-instruction": "Wil je echt weggaan zonder ze te sturen?",
-          "title": "Oeps, je hebt je resultaten nog niet ingestuurd!"
         }
       }
     },
@@ -2050,8 +2041,7 @@
       "abstract-title": "Je resultaat voor deze route",
       "actions": {
         "back-to-pix": "Vertrekken en terugkeren naar Pix",
-        "continue": "Zet je Pix-ervaring voort",
-        "send": "Ik stuur mijn resultaten"
+        "continue": "Zet je Pix-ervaring voort"
       },
       "already-shared": "Bedankt, je resultaten zijn verzonden!",
       "badge-card": {
@@ -2072,12 +2062,10 @@
         "result": "Algemeen resultaat",
         "title": "Je resultaten per vaardigheid"
       },
-      "disabled-share": "Deze route is gedeactiveerd door de organisator. Het is niet langer mogelijk om resultaten te versturen.",
       "error": "Oeps, er is een fout gemaakt!",
       "hero": {
         "acquired-badges-title": "Gewonnen prijzen",
         "explanations": {
-          "send-results": "Stuur je resultaten naar de cursusorganisator en ga verder met de aanbevolen cursussen.",
           "trainings": "Om je verder te helpen, kun je onze aanbevolen opleidingen bekijken en de opleidingen vinden die het beste bij je passen."
         },
         "mastery-rate": "van succes in vragen",
@@ -2124,11 +2112,9 @@
       "retry-and-reset": {
         "notification": "Herhaal mislukte vragen of stel in op nul om het opnieuw te proberen. De organisator blijft toegang houden tot je eerder ingediende resultaten."
       },
-      "send-results": "Vergeet niet je resultaten naar de cursusorganisator te sturen.",
       "send-status": {
         "in-progress": "Verzenden"
       },
-      "send-title": "Stuur ons uw resultaten",
       "stage": {
         "caption": "Details van je resultaten in de vorm van percentages en sterren volgens vaardigheden",
         "masteryPercentage": "{rate, number, ::percent} succes",
@@ -2149,15 +2135,6 @@
         },
         "trainings": {
           "description": "Ontvang gepersonaliseerde trainingsaanbevelingen om je vooruit te helpen en je nieuwsgierigheid te voeden zodat je je volledige potentieel kunt benutten.",
-          "modal": {
-            "content": "Stuur je resultaten op zodat de cursusorganisator je kan ondersteunen.'<br />'Zodra je je resultaten hebt gedeeld, heb je toegang tot deze trainingen!",
-            "share-error": "Er is een fout opgetreden bij het verzenden van uw resultaten. Probeer het opnieuw."
-          },
-          "shared-results-modal": {
-            "return-results-action": "Sluiten en terugkeren naar resultaten",
-            "subtitle": "Klaar om je vaardigheden te ontwikkelen? 🎓",
-            "title": "Verdeelde resultaten!"
-          },
           "tab-label": "Training",
           "title": "Wil je meer weten?"
         }

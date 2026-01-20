@@ -1,5 +1,4 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -14,20 +13,10 @@ export default class QuitResults extends Component {
   @service router;
   @service session;
 
-  @tracked showSendResultModal = false;
   @tracked showLeaveWithoutSignupModal = false;
-
-  get shouldShareCampaignResults() {
-    return this.args.isSharableCampaign && !this.args.isCampaignShared;
-  }
 
   get isUserAnonymous() {
     return Boolean(this.currentUser.user?.isAnonymous);
-  }
-
-  @action
-  toggleSendResultModal() {
-    this.showSendResultModal = !this.showSendResultModal;
   }
 
   @action
@@ -43,45 +32,15 @@ export default class QuitResults extends Component {
   }
 
   <template>
-    {{#if this.shouldShareCampaignResults}}
-      <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleSendResultModal}}>
+    {{#if this.isUserAnonymous}}
+      <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleSignUpModal}}>
         {{t "pages.skill-review.actions.back-to-pix"}}
       </button>
     {{else}}
-      {{#if this.isUserAnonymous}}
-        <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleSignUpModal}}>
-          {{t "pages.skill-review.actions.back-to-pix"}}
-        </button>
-      {{else}}
-        <LinkTo @route="authenticated" class="evaluation-results-header__back-link">
-          {{t "pages.skill-review.actions.back-to-pix"}}
-        </LinkTo>
-      {{/if}}
+      <LinkTo @route="authenticated" class="evaluation-results-header__back-link">
+        {{t "pages.skill-review.actions.back-to-pix"}}
+      </LinkTo>
     {{/if}}
-    <PixModal
-      @title={{t "pages.evaluation-results.quit-results.send-result-modal.title"}}
-      @onCloseButtonClick={{this.toggleSendResultModal}}
-      @showModal={{this.showSendResultModal}}
-    >
-      <:content>
-        <p class="quit-results__first-paragraph">{{t
-            "pages.evaluation-results.quit-results.send-result-modal.content-information"
-          }}</p>
-        <p><strong>{{t "pages.evaluation-results.quit-results.send-result-modal.content-instruction"}}</strong></p>
-      </:content>
-
-      <:footer>
-        <div class="quit-results__footer">
-          <PixButton @variant="secondary" @triggerAction={{this.toggleSendResultModal}}>
-            {{t "pages.evaluation-results.quit-results.send-result-modal.actions.cancel-to-share"}}
-          </PixButton>
-
-          <PixButtonLink @route="authenticated" @variant="primary">
-            {{t "pages.evaluation-results.quit-results.send-result-modal.actions.quit-without-sharing"}}
-          </PixButtonLink>
-        </div>
-      </:footer>
-    </PixModal>
 
     <PixModal
       @title={{t "pages.evaluation-results.quit-results.leave-without-signup-modal.title"}}
