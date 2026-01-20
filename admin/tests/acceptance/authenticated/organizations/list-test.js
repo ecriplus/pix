@@ -112,7 +112,10 @@ module('Acceptance | Organizations | List', function (hooks) {
         const screen = await visit('/organizations/list');
 
         // when
-        await click(screen.getByRole('button', { name: 'Masquer les organisations archivées' }));
+        const archivedSegmentedControls = screen.getByRole('radiogroup', {
+          name: 'Masquer les organisations archivées',
+        });
+        await click(within(archivedSegmentedControls).getByRole('radio', { name: 'Oui' }));
 
         // then
         assert.strictEqual(currentURL(), '/organizations/list?hideArchived=true');
