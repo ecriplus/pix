@@ -232,7 +232,7 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
-                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet. Observons l’effet du nombre de serveurs.</p>"
+                "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet.<br>Cliquez sur les icônes de température et d’énergie pour voir leur évolution en fonction du nombre de serveurs.</p>"
               }
             },
             {
@@ -572,7 +572,7 @@
                     {
                       "id": "a91021ec-28c2-47b3-97b0-aec23096593e",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi certains usages font plus consommer les serveurs ?<br></h5>Parce que ce qui est envoyé ou demandé (son, calculs, texte, vidéo...), ne demande pas la même quantité de travail au serveur."
+                      "content": "<h5>🤔 Pourquoi certains usages font consommer davantage d’énergie aux serveurs ?<br></h5>Parce que ce qui est envoyé ou demandé (son, calculs, texte, vidéo...), ne demande pas la même quantité de travail au serveur."
                     }
                   ]
                 },
