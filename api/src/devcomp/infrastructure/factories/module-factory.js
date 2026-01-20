@@ -1,6 +1,7 @@
 import { getAssetInfos } from '../../../shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { ModuleInstantiationError } from '../../domain/errors.js';
+import { Audio } from '../../domain/models/element/Audio.js';
 import { BlockInput } from '../../domain/models/block/BlockInput.js';
 import { BlockSelect } from '../../domain/models/block/BlockSelect.js';
 import { BlockSelectOption } from '../../domain/models/block/BlockSelectOption.js';
@@ -118,6 +119,8 @@ export class ModuleFactory {
 
   static async #buildElement(element) {
     switch (element.type) {
+      case 'audio':
+        return ModuleFactory.#buildAudio(element);
       case 'custom':
         return ModuleFactory.#buildCustom(element);
       case 'custom-draft':
@@ -159,6 +162,14 @@ export class ModuleFactory {
         });
         return undefined;
     }
+  }
+  static #buildAudio(element) {
+    return new Audio({
+      id: element.id,
+      title: element.title,
+      url: element.url,
+      transcription: element.transcription,
+    });
   }
 
   static #buildCustom(element) {
