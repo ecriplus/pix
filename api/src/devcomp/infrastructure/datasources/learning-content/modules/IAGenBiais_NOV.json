@@ -3,7 +3,7 @@
   "shortId": "9be9cfae",
   "slug": "ia-hallu",
   "title": "Elles hallucinent, ces IA génératives ! ",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/tmp-ia-hallu/picto_moduleIA_hallu.svg",
