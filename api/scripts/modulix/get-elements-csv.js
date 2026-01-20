@@ -36,6 +36,7 @@ if (import.meta.url.startsWith('file:')) {
 
 export function getElements(modules) {
   const ELEMENT_TYPES = [
+    'audio',
     'download',
     'embed',
     'expand',
