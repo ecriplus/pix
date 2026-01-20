@@ -18,7 +18,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
     // when
     await fillByLabel('Nombre :', '10');
     await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
-    await fillByLabel("Date d'expiration", '2022-12-20');
+    await fillIn(screen.getByLabelText("Date d'expiration *", { exact: false }), '2022-10-20');
 
     const select = screen.getByRole('button', { name: /Catégorie/ });
 
@@ -42,7 +42,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
     // when
     await fillByLabel('Nombre :', '10');
     await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
-    await fillByLabel("Date d'expiration", '2022-12-20');
+    await fillIn(screen.getByLabelText("Date d'expiration *", { exact: false }), '2022-12-20');
 
     const select = screen.getByRole('button', { name: /Catégorie/ });
 

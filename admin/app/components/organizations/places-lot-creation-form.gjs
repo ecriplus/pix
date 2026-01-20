@@ -124,6 +124,7 @@ export default class PlacesLotCreationForm extends Component {
               class={{if @errors.expirationDate "form-control is-invalid" "form-control"}}
               type="date"
               @value={{this.expirationDate}}
+              @requiredLabel="Champ obligatoire"
               {{on "input" this.onExpirationDateChange}}
             ><:label>Date d'expiration</:label></PixInput>
 
