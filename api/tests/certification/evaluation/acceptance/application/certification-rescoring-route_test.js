@@ -14,21 +14,18 @@ import {
 
 describe('Certification | Evaluation | Acceptance | Application |  certification rescoring', function () {
   describe('GET /api/admin/certifications/{certificationCourseId}/rescore', function () {
-    let server, originalConfigValue, originalCalibrationDateValue, calibrationId;
+    let server, originalConfigValue, calibrationId;
 
     beforeEach(async function () {
       calibrationId = 1;
       originalConfigValue = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification;
-      originalCalibrationDateValue = config.v3Certification.latestCalibrationDate;
       config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = 1;
-      config.v3Certification.latestCalibrationDate = new Date('2024-07-23');
 
       server = await createServer();
     });
 
     afterEach(function () {
       config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = originalConfigValue;
-      config.v3Certification.latestCalibrationDate = originalCalibrationDateValue;
     });
 
     describe('when scoring from the current framework', function () {
