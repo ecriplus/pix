@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.308.1](https://github.com/1024pix/pix/compare/v5.308.0...v5.308.1) (2026-01-20)
+
+### :bug: Correction
+
+- [#14806](https://github.com/1024pix/pix/pull/14806) Impossible de retenter une compétence (PIX-21157)
+
 # [5.308.0](https://github.com/1024pix/pix/compare/v5.307.0...v5.308.0) (2026-01-20)
 
 ### :rocket: Amélioration
