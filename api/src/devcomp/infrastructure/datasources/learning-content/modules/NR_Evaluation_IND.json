@@ -9,7 +9,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module vous aide à comprendre la méthode utilisée pour évaluer les impacts environnementaux du secteur du numérique. <br>Vous découvrirez comment définir le périmètre d’une étude, pourquoi on raisonne sur tout le cycle de vie des équipements et pourquoi plusieurs indicateurs sont nécessaires. <br>Une base claire pour lire, comparer et questionner les chiffres clés du numérique.</p>",
     "duration": 10,
-    "level": "novice",
+    "level": "independent",
     "objectives": [
       "<p>Identifier les trois composantes du secteur numérique</p>",
       "<p>Lister des critères pour évaluer les impacts environnementaux du secteur numérique</p>",
@@ -295,179 +295,270 @@
           "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "d1b8002d-cf25-48d7-85c5-7245263de052",
-                "type": "text",
-                "content": "<p>Deux services numériques peuvent avoir des impacts très différents selon l’indicateur observé&nbsp;: climat, ressources, santé… C’est pourquoi les études s’appuient sur <strong>plusieurs indicateurs</strong>.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "cd9960dc-9a59-4145-81f5-373a43129cd3",
-                "type": "custom-draft",
-                "title": "POI Data Green IT",
-                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIDataGreenIT.html",
-                "instruction": "Explorez les données puis répondez à la question.&nbsp;",
-                "height": 500
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "e6a1a6b0-7a3a-4d2d-9d6d-2f7e3c4c2c7d",
-                "type": "text",
-                "content": "<p>Dans l’outil, sélectionnez l’indicateur <strong>PM</strong> (particules fines / occurrence de maladie). Explorez ensuite les contributions par <strong>Tier</strong> et par <strong>étape ACV</strong>.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c4d6a7f3-0f2f-4f6e-9d8d-2b1b9f3c8c1a",
-                "type": "qrocm",
-                "instruction": "<p>Complétez le texte à trous pour résumer ce que montrent les données <strong>PM</strong>.</p>",
-                "proposals": [
-                  {
-                    "type": "text",
-                    "content": "<p>Pour l’indicateur <strong>PM</strong>, l’étape la plus contributrice est&nbsp;</p>"
-                  },
-                  {
-                    "input": "a",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "étape la plus contributrice pour PM",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Fabrication"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Transport"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Utilisation"
-                      },
-                      {
-                        "id": "4",
-                        "content": "Fin de vie"
-                      }
-                    ],
-                    "solutions": [
-                      "3"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>, car elle représente environ&nbsp;</p>"
-                  },
-                  {
-                    "input": "b",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "ordre de grandeur de la part de l’utilisation pour PM",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "10%"
-                      },
-                      {
-                        "id": "2",
-                        "content": "50%"
-                      },
-                      {
-                        "id": "3",
-                        "content": "80%"
-                      },
-                      {
-                        "id": "4",
-                        "content": "100%"
-                      }
-                    ],
-                    "solutions": [
-                      "3"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>du total. À cette étape, le Tier le plus contributif est&nbsp;</p>"
-                  },
-                  {
-                    "input": "c",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "tier le plus contributif à l’étape utilisation pour PM",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Tier I (équipements utilisateur·rices)"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Tier II (réseaux)"
-                      },
-                      {
-                        "id": "3",
-                        "content": "Tier III (centres informatiques)"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>. En comparaison, l’étape <strong>Transport</strong> a une contribution&nbsp;</p>"
-                  },
-                  {
-                    "input": "d",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "importance relative du transport pour PM",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "relativement faible (≈ 0–1%)"
-                      },
-                      {
-                        "id": "2",
-                        "content": "modérée (≈ 10–20%)"
-                      },
-                      {
-                        "id": "3",
-                        "content": "majoritaire (≈ 50%+)"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>.</p>"
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bien vu !</p>",
-                    "diagnosis": "<p>Pour <strong>PM</strong>, l’<strong>Utilisation</strong> domine (≈ <strong>80%</strong> du total). À l’étape utilisation, le Tier le plus contributif est le <strong>Tier I</strong>. Le <strong>Transport</strong> reste très faible (≈ 0–1%).</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas tout à fait.</p>",
-                    "diagnosis": "<p>Revenez dans l’outil&nbsp;: pour <strong>PM</strong>, l’<strong>Utilisation</strong> domine (≈ <strong>80%</strong> du total). À l’étape utilisation, le Tier le plus contributif est le <strong>Tier I</strong>. Le <strong>Transport</strong> reste très faible (≈ 0–1%).</p>"
-                  }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "8f9e1cd3-31dd-4f1b-8612-3303b8b2de24",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>GWP</strong> mesure les émissions de <strong>gaz à effet de serre</strong>.<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’épuisement des ressources fossiles.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Les impacts sur la santé humaine liés aux particules fines.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le réchauffement climatique.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>L’acidification des milieux (sols, forêts, eaux).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "6",
+                          "content": "<p>L’épuisement des ressources minérales et métalliques.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "7",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le <strong>GWP</strong> sert à évaluer l’impact du numérique sur le <strong>réchauffement climatique</strong>, via les émissions de gaz à effet de serre sur tout le cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "2a001ae4-66b0-4763-a739-28e7d301275c",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>ADPe</strong> mesure l’extraction et l’utilisation de <strong>minéraux et métaux non renouvelables</strong>.<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’épuisement des ressources minérales et métalliques.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>L’épuisement des ressources fossiles.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Les impacts sur la santé humaine liés aux particules fines.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>L’acidification des milieux (sols, forêts, eaux).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "6",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPe</strong> permet d’évaluer l’<strong>épuisement des ressources minérales et métalliques</strong> (métaux, minerais), liées notamment aux matières premières des équipements.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>, très largement.<br><strong>Étape ACV dominante</strong> : surtout la <strong>fabrication</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f4947471-e7e9-47eb-a3df-36e858ca081c",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>PM</strong> mesure les émissions de <strong>particules fine&nbsp;</strong>dans l'air.<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’acidification des milieux (sols, forêts, eaux).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>PM</strong> permet d’évaluer les <strong>impacts sur la santé humaine</strong> liés aux <strong>particules fines</strong>.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’épuisement des ressources fossiles.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>PM</strong> permet d’évaluer les <strong>impacts sur la santé humaine</strong> liés aux <strong>particules fines</strong>.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les impacts sur la santé humaine liés aux particules fines.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>Le <strong>PM</strong> permet d’évaluer les <strong>impacts sur la santé humaine</strong> liés aux <strong>particules fines</strong>.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>PM</strong> permet d’évaluer les <strong>impacts sur la santé humaine</strong> liés aux <strong>particules fines</strong>.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>PM</strong> permet d’évaluer les <strong>impacts sur la santé humaine</strong> liés aux <strong>particules fines</strong>.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "de6ef6d5-6b3e-40d0-9b61-df1aac3b75a6",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>ADPf</strong> mesure la consommation de <strong>ressources fossiles</strong> (pétrole, gaz, charbon).<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPf</strong> permet d’évaluer l’<strong>épuisement des ressources fossiles</strong> (pétrole, gaz, charbon) mobilisées par le numérique sur son cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’acidification des milieux (sols, forêts, eaux).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPf</strong> permet d’évaluer l’<strong>épuisement des ressources fossiles</strong> (pétrole, gaz, charbon) mobilisées par le numérique sur son cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>L’épuisement des ressources fossiles.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>Le <strong>ADPf</strong> permet d’évaluer l’<strong>épuisement des ressources fossiles</strong> (pétrole, gaz, charbon) mobilisées par le numérique sur son cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>Le <strong>ADPf</strong> permet d’évaluer l’<strong>épuisement des ressources fossiles</strong> (pétrole, gaz, charbon) mobilisées par le numérique sur son cycle de vie.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5abb8aa7-71b3-4a73-b779-29ac9fe0d05b",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>AP</strong> mesure les émissions de substances qui contribuent à l’<strong>acidification</strong> de l’air, des sols et des eaux.<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>L’indicateur <strong>AP</strong> permet d’évaluer l’<strong>acidification</strong>, qui peut dégrader les sols, les forêts et les eaux.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’acidification des milieux (sols, forêts, eaux).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>L’indicateur <strong>AP</strong> permet d’évaluer l’<strong>acidification</strong>, qui peut dégrader les sols, les forêts et les eaux.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!<br><br>L’indicateur <strong>AP</strong> permet d’évaluer l’<strong>acidification</strong>, qui peut dégrader les sols, les forêts et les eaux.<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong>.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b6779edc-7894-46e7-8f14-0a7ba5bad08f",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>L’indicateur <strong>EPf</strong> mesure l’<strong>eutrophisation de l’eau douce</strong> : des rejets (azote, phosphore…) qui peuvent déséquilibrer les milieux aquatiques, par exemple en favorisant la prolifération d’algues.<br><br>Quel impact environnemental principal cela permet-il d’évaluer&nbsp;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>L’eutrophisation de l’eau douce (déséquilibre des milieux aquatiques).</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;!<br><br>Le <strong>EPf</strong> permet d’évaluer l’impact du numérique sur l’<strong>eutrophisation de l’eau douce</strong> (déséquilibre des milieux aquatiques).<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong> arrivent légèrement en tête, mais les réseaux et les centres de données comptent aussi fortement.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>&nbsp;<strong>Ep</strong><strong>f</strong> permet d’évaluer l’impact du numérique sur l’<strong>eutrophisation de l’eau douce</strong> (déséquilibre des milieux aquatiques).<br><br><strong>Ce qui pèse le plus</strong> : les <strong>équipements terminaux</strong> arrivent légèrement en tête, mais les réseaux et les centres de données comptent aussi fortement.<br><strong>Étape ACV dominante</strong> : à l’échelle mondiale, surtout <strong>l’utilisation</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
                 }
-              }
+              ]
             }
           ]
         },
