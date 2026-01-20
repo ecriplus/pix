@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class PixOrgaPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async login(email: string, rawPassword: string) {
     await this.page.getByLabel('Adresse e-mail').fill(email);

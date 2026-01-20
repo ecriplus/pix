@@ -1,6 +1,8 @@
 import type { Page } from '@playwright/test';
+
+import { SessionManagementPage } from './SessionManagementPage.ts';
 export class SessionCreationPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async createSession({
     address,
@@ -26,5 +28,7 @@ export class SessionCreationPage {
 
     await this.page.getByLabel('Surveillant(s)').fill(examiner);
     await this.page.getByRole('button', { name: 'Créer la session' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+$/);
+    return new SessionManagementPage(this.page);
   }
 }

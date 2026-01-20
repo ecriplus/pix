@@ -50,18 +50,11 @@ test('Accept the new terms of service', async ({ page, globalTestId }: { page: P
 
   await page.goto(process.env.PIX_APP_URL as string);
 
-  await test.step('Login', async () => {
+  await test.step('Login and revalidate terms of service', async () => {
     await expect(page).toHaveTitle('Connexion | Pix');
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(email, 'Coucoulesdevs66');
-  });
-
-  await test.step('Revalidate terms of service', async function () {
-    await expect(page.getByText("Nous avons mis à jour nos conditions d'utilisation")).toBeVisible();
-
-    await page.getByRole('checkbox', { name: "J'accepte les conditions" }).check();
-    await page.getByRole('button', { name: 'Je continue' }).click();
+    await loginPage.login(email, 'Coucoulesdevs66', true);
 
     await expect(page.locator('#main')).toContainText('Bonjour Buffy');
     await expect(page).toHaveTitle('Accueil | Pix');

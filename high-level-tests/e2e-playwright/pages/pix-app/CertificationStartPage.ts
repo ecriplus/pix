@@ -1,6 +1,8 @@
 import type { Page } from '@playwright/test';
+
+import { CertificationAccessCodePage } from './CertificationAccessCodePage.ts';
 export class CertificationStartPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async fillSessionInfoAndNavigateIntro({
     sessionNumber,
@@ -24,11 +26,17 @@ export class CertificationStartPage {
     await this.page.getByRole('spinbutton', { name: 'mois de naissance (MM)' }).fill(birthMonth);
     await this.page.getByRole('spinbutton', { name: 'année de naissance (AAAA)' }).fill(birthYear);
     await this.page.getByRole('button', { name: 'Continuer' }).click();
+    await this.page.waitForURL(/\/certifications\/candidat\/\d+\/informations$/);
+
     await this.page.getByRole('button', { name: "Continuer vers l'écran suivant" }).click();
     await this.page.getByRole('button', { name: "Continuer vers l'écran suivant" }).click();
     await this.page.getByRole('button', { name: "Continuer vers l'écran suivant" }).click();
     await this.page.getByRole('button', { name: "Continuer vers l'écran suivant" }).click();
     await this.page.getByRole('checkbox', { name: 'En cochant cette case' }).check();
     await this.page.getByRole('button', { name: "Continuer vers la page d'entrée" }).click();
+    await this.page.waitForURL(/\/certifications\/candidat\/\d+$/);
+    await this.page.getByText('Vous allez commencer votre test de certification').waitFor({ state: 'visible' });
+
+    return new CertificationAccessCodePage(this.page);
   }
 }

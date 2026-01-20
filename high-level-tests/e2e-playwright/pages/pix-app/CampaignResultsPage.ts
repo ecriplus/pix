@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class CampaignResultsPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async getGlobalMasteryPercentage() {
     const strongText = (await this.page.locator('div.evaluation-results-hero__results strong').textContent()) as string;

@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 export class IntermediateCheckpointPage {
-  constructor(private readonly page: Page) {}
+  constructor(public readonly page: Page) {}
 
   async goNext() {
     const currentUrl = this.page.url();
