@@ -7,7 +7,7 @@ const shortVideoElementSchema = Joi.object({
   type: Joi.string().valid('short-video').required(),
   title: htmlNotAllowedSchema.required(),
   url: Joi.string().uri().required(),
-  transcription: htmlSchema.required(),
+  transcription: htmlSchema.optional(),
 }).required();
 
 export { shortVideoElementSchema };
