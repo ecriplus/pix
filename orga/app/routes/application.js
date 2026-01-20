@@ -4,13 +4,11 @@ import { service } from '@ember/service';
 import ENV from 'pix-orga/config/environment';
 
 export default class ApplicationRoute extends Route {
-  @service('store') store;
+  @service store;
   @service featureToggles;
   @service currentDomain;
-  @service currentUser;
   @service session;
   @service locale;
-  @service intl;
   @service oidcIdentityProviders;
   @service pixMetrics;
   @service router;
@@ -33,7 +31,6 @@ export default class ApplicationRoute extends Route {
     await this.session.setup();
     await this.featureToggles.load();
     await this.oidcIdentityProviders.load().catch();
-    await this.currentUser.load();
   }
 
   async model() {
