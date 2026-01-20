@@ -12,9 +12,10 @@ const ERRORS = {
 };
 
 class CsvParser {
-  constructor(input, header) {
+  constructor(input, header, options = {}) {
     this._input = input;
     this._columns = header.columns;
+    this._options = options;
   }
 
   _checkColumns(parsedColumns) {
@@ -72,6 +73,7 @@ class CsvParser {
           return value.trim();
         },
         preview: 1,
+        ...this._options,
       });
       if (fields.some((value) => checkedColumns.includes(value))) {
         inputEncoding = encoding;
@@ -135,6 +137,7 @@ class CsvParser {
 
         return value;
       },
+      ...this._options,
     });
 
     return { lines, fields, errors };

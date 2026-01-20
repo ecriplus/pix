@@ -15,7 +15,7 @@ export const createCombinedCourses = withTransaction(
     recommendedModuleRepository,
     moduleRepository,
   }) => {
-    const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER);
+    const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER, { delimiter: ';' });
     const csvData = csvParser.parse();
 
     const combinedCourses = [];

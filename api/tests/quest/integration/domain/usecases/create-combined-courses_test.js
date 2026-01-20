@@ -7,7 +7,8 @@ import {
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { CsvImportError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Combined course | Domain | UseCases | create-combined-courses', function () {
   it('should create combined course for given payload', async function () {
@@ -249,5 +250,20 @@ ${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
     expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
     expect(createdCampaignForSecondOrganization.customResultPageButtonUrl.endsWith('/chargement')).false;
     expect(createdCampaignForSecondOrganization.customResultPageButtonText).to.equal('Continuer');
+  });
+
+  it('should not throw encoding error with more than 6 organization ids', async function () {
+    // given
+    const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*;Identifiant du schéma de parcours*
+1,2,3,4,5,6;"{""name"":""Combinix"",""description"":""ma description"", ""illustration"":""mon_illu.svg""}";123;456
+`;
+
+    const payload = iconv.encode(input, 'UTF-8');
+
+    // when
+    const error = await catchErr(usecases.createCombinedCourses)({ payload });
+
+    // then
+    expect(error).not.instanceOf(CsvImportError);
   });
 });
