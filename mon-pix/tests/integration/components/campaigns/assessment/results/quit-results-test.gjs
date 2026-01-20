@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import QuitResults from 'mon-pix/components/campaigns/assessment/results/quit-results';
 import { module, test } from 'qunit';
 
 import { stubCurrentUserService } from '../../../../../helpers/service-stubs';
@@ -15,7 +15,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
 
   test('it should display a quit button link', async function (assert) {
     // when
-    const screen = await render(hbs`<Campaigns::Assessment::Results::QuitResults />`);
+    const screen = await render(<template><QuitResults /></template>);
 
     // then
     assert.ok(

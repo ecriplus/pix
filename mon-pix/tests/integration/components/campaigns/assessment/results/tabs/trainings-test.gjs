@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Trainings from 'mon-pix/components/campaigns/assessment/results/evaluation-results-tabs/trainings';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
@@ -11,30 +11,28 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
   test('it should display the trainings list', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
-    const training1 = store.createRecord('training', {
-      title: 'Mon super training',
-      link: 'https://exemple.net/',
-      duration: { days: 2 },
-    });
-    const training2 = store.createRecord('training', {
-      title: 'Mon autre super training',
-      link: 'https://exemple.net/',
-      duration: { days: 2 },
-    });
+    const trainings = [
+      store.createRecord('training', {
+        title: 'Mon super training',
+        link: 'https://exemple.net/',
+        duration: { days: 2 },
+      }),
+      store.createRecord('training', {
+        title: 'Mon autre super training',
+        link: 'https://exemple.net/',
+        duration: { days: 2 },
+      }),
+    ];
 
     const campaignParticipationResult = {
       isDisabled: false,
     };
 
-    this.set('campaignParticipationResult', campaignParticipationResult);
-    this.set('trainings', [training1, training2]);
-
     // when
     const screen = await render(
-      hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs::Trainings
-  @trainings={{this.trainings}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+      <template>
+        <Trainings @trainings={{trainings}} @campaignParticipationResult={{campaignParticipationResult}} />
+      </template>,
     );
 
     // then
