@@ -1,6 +1,6 @@
 import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { config } from '../../../shared/config.js';
-import { ForbiddenAccess, PixOrgaAccessNotAllowedError, UserNotFoundError } from '../../../shared/domain/errors.js';
+import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../emails/create-warning-connection.email.js';
 import {
@@ -66,7 +66,7 @@ const authenticateUser = async function ({
       throw new UserShouldChangePasswordError(undefined, passwordExpirationToken);
     }
 
-    await _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository });
+    await _assertAccessToRequestedApplication({ requestedApplication, user, adminMemberRepository });
 
     const refreshToken = RefreshToken.generate({ userId: user.id, source, audience });
     await refreshTokenRepository.save({ refreshToken });
@@ -121,11 +121,7 @@ async function _updateUserLocaleIfNeeded({ user, locale, userRepository }) {
   }
 }
 
-async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
-  if (requestedApplication.isPixOrga && !user.isLinkedToOrganizations()) {
-    throw new PixOrgaAccessNotAllowedError();
-  }
-
+async function _assertAccessToRequestedApplication({ requestedApplication, user, adminMemberRepository }) {
   if (requestedApplication.isPixAdmin) {
     const adminMember = await adminMemberRepository.get({ userId: user.id });
     if (!adminMember?.hasAccessToAdminScope) {
