@@ -84,4 +84,5 @@ export const createCombinedCourses = withTransaction(
 
     await combinedCourseRepository.saveInBatch({ combinedCourses });
   },
+  { isolationLevel: 'repeatable read' },
 );
