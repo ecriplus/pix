@@ -35,6 +35,14 @@ class UserNotMemberOfOrganizationError extends DomainError {
     super(message);
   }
 }
+class UserHasNoOrganizationMembershipError extends DomainError {
+  constructor(
+    message = "L'utilisateur n'est membre d'aucune organisation.",
+    code = 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+  ) {
+    super(message, code);
+  }
+}
 
 class MembershipNotFound extends DomainError {}
 
@@ -51,5 +59,6 @@ export {
   OrganizationArchivedError,
   UncancellableCertificationCenterInvitationError,
   UncancellableOrganizationInvitationError,
+  UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 };
