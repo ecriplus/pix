@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
@@ -76,7 +76,8 @@ module('Acceptance | Certification Centers | List', function (hooks) {
         const screen = await visit('/certification-centers/list');
 
         // when
-        await click(screen.getByRole('button', { name: 'Masquer les centres archivés' }));
+        const archivedSegmentedControls = screen.getByRole('radiogroup', { name: 'Masquer les centres archivés' });
+        await click(within(archivedSegmentedControls).getByRole('radio', { name: 'Oui' }));
 
         // then
         assert.strictEqual(currentURL(), '/certification-centers/list?hideArchived=true');
