@@ -1,4 +1,4 @@
-import { InvitationNotFoundError, NotFoundError, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { InvitationNotFoundError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { OrganizationInvitedUser } from '../../../../../src/team/domain/models/OrganizationInvitedUser.js';
 import { organizationInvitedUserRepository } from '../../../../../src/team/infrastructure/repositories/organization-invited-user.repository.js';
@@ -6,69 +6,24 @@ import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test
 
 describe('Integration | Team | Infrastructure | Repository | OrganizationInvitedUserRepository', function () {
   describe('#get', function () {
-    describe('when an email is passed as parameter', function () {
-      it('returns an OrganizationInvitedUser with same id as the user found by email', async function () {
-        // given
-        const expectedUserId = 123;
-        const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation().id;
-        databaseBuilder.factory.buildUser({
-          email: 'wrongUser@example.net',
-        });
-        const user = databaseBuilder.factory.buildUser({
-          id: expectedUserId,
-          email: 'user@example.net',
-        });
+    it('returns an OrganizationInvitedUser with same userId as the user found by id', async function () {
+      // given
+      const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation().id;
+      const user = databaseBuilder.factory.buildUser();
 
-        await databaseBuilder.commit();
+      await databaseBuilder.commit();
 
-        // when
-        const organizationInvitedUser = await organizationInvitedUserRepository.get({
-          organizationInvitationId,
-          email: user.email,
-        });
-
-        // then
-        expect(organizationInvitedUser.userId).to.equal(expectedUserId);
+      // when
+      const organizationInvitedUser = await organizationInvitedUserRepository.get({
+        organizationInvitationId,
+        userId: user.id,
       });
-    });
 
-    describe('when a userId is passed as parameter', function () {
-      it('returns an OrganizationInvitedUser with same userId as the user found by id', async function () {
-        // given
-        const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation().id;
-        const user = databaseBuilder.factory.buildUser();
-
-        await databaseBuilder.commit();
-
-        // when
-        const organizationInvitedUser = await organizationInvitedUserRepository.get({
-          organizationInvitationId,
-          userId: user.id,
-        });
-
-        // then
-        expect(organizationInvitedUser.userId).to.equal(user.id);
-      });
+      // then
+      expect(organizationInvitedUser.userId).to.equal(user.id);
     });
 
     describe('userNotFound errors', function () {
-      describe('when no user was found by email', function () {
-        it('throws userNotFound error', async function () {
-          // given
-          const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation().id;
-          await databaseBuilder.commit();
-
-          // when
-          const error = await catchErr(organizationInvitedUserRepository.get)({
-            organizationInvitationId,
-            email: 'wrong@email.net',
-          });
-
-          // then
-          expect(error).to.be.an.instanceOf(NotFoundError);
-        });
-      });
-
       describe('when no user was found by id', function () {
         it('throws userNotFound error', async function () {
           // given
@@ -85,30 +40,12 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
           expect(error).to.be.an.instanceOf(NotFoundError);
         });
       });
-
-      describe('when neither email or id are provided as parameters', function () {
-        it('throws userNotFound error', async function () {
-          // given
-          const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation().id;
-          await databaseBuilder.commit();
-
-          // when
-          const error = await catchErr(organizationInvitedUserRepository.get)({
-            organizationInvitationId,
-          });
-
-          // then
-          expect(error).to.be.an.instanceOf(UserNotFoundError);
-        });
-      });
     });
 
     it('returns the invitation of the invited user', async function () {
       // given
       const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation();
-      const user = databaseBuilder.factory.buildUser({
-        email: 'user@example.net',
-      });
+      const user = databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
 
       const expectedOrganizationInvitation = {
@@ -122,7 +59,7 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
       // when
       const organizationInvitedUser = await organizationInvitedUserRepository.get({
         organizationInvitationId: organizationInvitation.id,
-        email: user.email,
+        userId: user.id,
       });
 
       // then
@@ -153,9 +90,7 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
       it('returns the current role of the invited user', async function () {
         // given
         const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation();
-        const user = databaseBuilder.factory.buildUser({
-          email: 'user@example.net',
-        });
+        const user = databaseBuilder.factory.buildUser();
         databaseBuilder.factory.buildMembership({
           userId: user.id,
           organizationId: organizationInvitation.organizationId,
@@ -166,7 +101,7 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
         // when
         const organizationInvitedUser = await organizationInvitedUserRepository.get({
           organizationInvitationId: organizationInvitation.id,
-          email: user.email,
+          userId: user.id,
         });
 
         // then
@@ -198,16 +133,14 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
       it('returns `undefined` on current membership id', async function () {
         // given
         const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation();
-        const user = databaseBuilder.factory.buildUser({
-          email: 'user@example.net',
-        });
+        const user = databaseBuilder.factory.buildUser();
 
         await databaseBuilder.commit();
 
         // when
         const organizationInvitedUser = await organizationInvitedUserRepository.get({
           organizationInvitationId: organizationInvitation.id,
-          email: user.email,
+          userId: user.id,
         });
 
         // then
@@ -240,7 +173,7 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
       // when
       const error = await catchErr(organizationInvitedUserRepository.get)({
         organizationInvitationId: 3256,
-        email: user.email,
+        userId: user.id,
       });
 
       // then

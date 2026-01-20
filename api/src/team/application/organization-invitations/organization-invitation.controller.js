@@ -8,13 +8,12 @@ import { serializer as scoOrganizationInvitationSerializer } from '../../infrast
 
 const acceptOrganizationInvitation = async function (request) {
   const organizationInvitationId = request.params.id;
-  const { code, email, 'user-id': userId } = request.payload.data.attributes;
+  const { code, 'user-id': userId } = request.payload.data.attributes;
   const locale = getUserLocale(request);
 
   const membership = await usecases.acceptOrganizationInvitation({
     organizationInvitationId,
     code,
-    email,
     userId,
     locale,
   });

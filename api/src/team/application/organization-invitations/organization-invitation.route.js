@@ -41,16 +41,13 @@ export const organizationInvitationRoutes = [
             type: Joi.string().required(),
             attributes: Joi.object({
               code: Joi.string().required(),
-              'user-id': Joi.number().integer().allow(null).empty(null),
-              email: Joi.string().email().allow(null).empty(null),
-            })
-              .xor('user-id', 'email')
-              .required(),
+              'user-id': Joi.number().integer().required(),
+            }),
           }),
         }),
       },
       notes: [
-        "- Cette route permet d'accepter l'invitation à rejoindre une organisation, via un **code** et un **email** ou via un **code** et un **userId**",
+        "- Cette route permet d'accepter l'invitation à rejoindre une organisation, via un **code** et un **userId**",
       ],
       tags: ['api', 'invitations'],
     },

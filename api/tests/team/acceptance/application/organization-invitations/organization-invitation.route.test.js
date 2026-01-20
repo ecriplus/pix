@@ -120,354 +120,177 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
   });
 
   describe('POST /api/organization-invitations/{id}/response', function () {
-    describe('When user is looked up by email', function () {
-      context('Success cases', function () {
-        let organizationId;
-        let options;
+    context('Success cases', function () {
+      let organizationId;
+      let options;
 
-        beforeEach(async function () {
-          organizationId = databaseBuilder.factory.buildOrganization().id;
-          const adminOrganizationUserId = databaseBuilder.factory.buildUser().id;
+      beforeEach(async function () {
+        organizationId = databaseBuilder.factory.buildOrganization().id;
+        const adminOrganizationUserId = databaseBuilder.factory.buildUser().id;
 
-          databaseBuilder.factory.buildMembership({
-            userId: adminOrganizationUserId,
-            organizationId,
-            organizationRole: Membership.roles.ADMIN,
-          });
+        databaseBuilder.factory.buildMembership({
+          userId: adminOrganizationUserId,
+          organizationId,
+          organizationRole: Membership.roles.ADMIN,
+        });
 
-          const userToInviteEmail = databaseBuilder.factory.buildUser().email;
-          const code = 'ABCDEFGH01';
+        const userToInviteId = databaseBuilder.factory.buildUser().id;
+        const code = 'ABCDEFGH01';
 
-          const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation({
-            organizationId,
-            status: OrganizationInvitation.StatusType.PENDING,
-            code: code,
-          }).id;
+        const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation({
+          organizationId,
+          status: OrganizationInvitation.StatusType.PENDING,
+          code: code,
+        }).id;
 
-          options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitationId}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code,
-                  email: userToInviteEmail.toUpperCase(),
-                },
+        options = {
+          method: 'POST',
+          url: `/api/organization-invitations/${organizationInvitationId}/response`,
+          payload: {
+            data: {
+              id: '100047_DZWMP7L5UM',
+              type: 'organization-invitation-responses',
+              attributes: {
+                code,
+                'user-id': userToInviteId,
               },
             },
-          };
+          },
+        };
 
-          await databaseBuilder.commit();
-        });
-
-        it('should return 204 HTTP status code', async function () {
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(204);
-        });
+        await databaseBuilder.commit();
       });
-      context('Error cases', function () {
-        it('should respond with a 404 if organization-invitation does not exist with id and code', async function () {
-          // given
-          const user = databaseBuilder.factory.buildUser({ email: 'user@example.net' });
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({});
-          await databaseBuilder.commit();
 
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: 'notExistCode',
-                  email: user.email,
-                },
-              },
-            },
-          };
+      it('should return 204 HTTP status code', async function () {
+        // when
+        const response = await server.inject(options);
 
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
-
-        it('should respond with a 409 if organization-invitation is already accepted', async function () {
-          // given
-          const user = databaseBuilder.factory.buildUser({ email: 'user@example.net' });
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
-            status: OrganizationInvitation.StatusType.ACCEPTED,
-            code: 'DEFRTG123',
-          });
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: organizationInvitation.code,
-                  email: user.email,
-                },
-              },
-            },
-          };
-
-          await databaseBuilder.commit();
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(409);
-        });
-
-        it('should respond with a 401 if given email is not linked to an existing user', async function () {
-          // given
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
-            status: OrganizationInvitation.StatusType.PENDING,
-          });
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: organizationInvitation.code,
-                  email: 'random@email.com',
-                },
-              },
-            },
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(401);
-          expect(response.result.errors[0].code).to.equal('MISSING_OR_INVALID_CREDENTIALS');
-        });
-
-        it('should respond with a 412 if membership already exist with userId and OrganizationId', async function () {
-          // given
-          const organization = databaseBuilder.factory.buildOrganization();
-          const { id: userId, email } = databaseBuilder.factory.buildUser();
-          databaseBuilder.factory.buildMembership({ userId, organizationId: organization.id });
-          const { id: organizationInvitationId, code } = databaseBuilder.factory.buildOrganizationInvitation({
-            organizationId: organization.id,
-            status: OrganizationInvitation.StatusType.PENDING,
-          });
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitationId}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: code,
-                  email: email,
-                },
-              },
-            },
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(412);
-        });
+        // then
+        expect(response.statusCode).to.equal(204);
       });
     });
-    describe('When user is looked up by id', function () {
-      context('Success cases', function () {
-        let organizationId;
-        let options;
+    context('Error cases', function () {
+      it('should respond with a 404 if organization-invitation does not exist with id and code', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser();
+        const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({});
+        await databaseBuilder.commit();
 
-        beforeEach(async function () {
-          organizationId = databaseBuilder.factory.buildOrganization().id;
-          const adminOrganizationUserId = databaseBuilder.factory.buildUser().id;
-
-          databaseBuilder.factory.buildMembership({
-            userId: adminOrganizationUserId,
-            organizationId,
-            organizationRole: Membership.roles.ADMIN,
-          });
-
-          const userToInviteId = databaseBuilder.factory.buildUser().id;
-          const code = 'ABCDEFGH01';
-
-          const organizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation({
-            organizationId,
-            status: OrganizationInvitation.StatusType.PENDING,
-            code: code,
-          }).id;
-
-          options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitationId}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code,
-                  'user-id': userToInviteId,
-                },
+        const options = {
+          method: 'POST',
+          url: `/api/organization-invitations/${organizationInvitation.id}/response`,
+          payload: {
+            data: {
+              id: '100047_DZWMP7L5UM',
+              type: 'organization-invitation-responses',
+              attributes: {
+                code: 'notExistCode',
+                'user-id': user.id,
               },
             },
-          };
+          },
+        };
 
-          await databaseBuilder.commit();
-        });
+        // when
+        const response = await server.inject(options);
 
-        it('should return 204 HTTP status code', async function () {
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(204);
-        });
+        // then
+        expect(response.statusCode).to.equal(404);
       });
-      context('Error cases', function () {
-        it('should respond with a 404 if organization-invitation does not exist with id and code', async function () {
-          // given
-          const user = databaseBuilder.factory.buildUser();
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({});
-          await databaseBuilder.commit();
 
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: 'notExistCode',
-                  'user-id': user.id,
-                },
-              },
-            },
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.statusCode).to.equal(404);
+      it('should respond with a 409 if organization-invitation is already accepted', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser();
+        const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+          status: OrganizationInvitation.StatusType.ACCEPTED,
+          code: 'DEFRTG123',
         });
 
-        it('should respond with a 409 if organization-invitation is already accepted', async function () {
-          // given
-          const user = databaseBuilder.factory.buildUser();
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
-            status: OrganizationInvitation.StatusType.ACCEPTED,
-            code: 'DEFRTG123',
-          });
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: organizationInvitation.code,
-                  'user-id': user.id,
-                },
+        const options = {
+          method: 'POST',
+          url: `/api/organization-invitations/${organizationInvitation.id}/response`,
+          payload: {
+            data: {
+              id: '100047_DZWMP7L5UM',
+              type: 'organization-invitation-responses',
+              attributes: {
+                code: organizationInvitation.code,
+                'user-id': user.id,
               },
             },
-          };
+          },
+        };
 
-          await databaseBuilder.commit();
+        await databaseBuilder.commit();
 
-          // when
-          const response = await server.inject(options);
+        // when
+        const response = await server.inject(options);
 
-          // then
-          expect(response.statusCode).to.equal(409);
+        // then
+        expect(response.statusCode).to.equal(409);
+      });
+
+      it('should respond with a 401 if user does not exist', async function () {
+        // given
+        const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+          status: OrganizationInvitation.StatusType.PENDING,
         });
+        await databaseBuilder.commit();
 
-        it('should respond with a 401 if user does not exist', async function () {
-          // given
-          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
-            status: OrganizationInvitation.StatusType.PENDING,
-          });
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitation.id}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: organizationInvitation.code,
-                  'user-id': '123',
-                },
+        const options = {
+          method: 'POST',
+          url: `/api/organization-invitations/${organizationInvitation.id}/response`,
+          payload: {
+            data: {
+              id: '100047_DZWMP7L5UM',
+              type: 'organization-invitation-responses',
+              attributes: {
+                code: organizationInvitation.code,
+                'user-id': '123',
               },
             },
-          };
+          },
+        };
 
-          // when
-          const response = await server.inject(options);
+        // when
+        const response = await server.inject(options);
 
-          // then
-          expect(response.statusCode).to.equal(401);
-          expect(response.result.errors[0].code).to.equal('MISSING_OR_INVALID_CREDENTIALS');
+        // then
+        expect(response.statusCode).to.equal(401);
+        expect(response.result.errors[0].code).to.equal('MISSING_OR_INVALID_CREDENTIALS');
+      });
+
+      it('should respond with a 412 if membership already exist with userId and OrganizationId', async function () {
+        // given
+        const organization = databaseBuilder.factory.buildOrganization();
+        const { id: userId } = databaseBuilder.factory.buildUser();
+        databaseBuilder.factory.buildMembership({ userId, organizationId: organization.id });
+        const { id: organizationInvitationId, code } = databaseBuilder.factory.buildOrganizationInvitation({
+          organizationId: organization.id,
+          status: OrganizationInvitation.StatusType.PENDING,
         });
+        await databaseBuilder.commit();
 
-        it('should respond with a 412 if membership already exist with userId and OrganizationId', async function () {
-          // given
-          const organization = databaseBuilder.factory.buildOrganization();
-          const { id: userId } = databaseBuilder.factory.buildUser();
-          databaseBuilder.factory.buildMembership({ userId, organizationId: organization.id });
-          const { id: organizationInvitationId, code } = databaseBuilder.factory.buildOrganizationInvitation({
-            organizationId: organization.id,
-            status: OrganizationInvitation.StatusType.PENDING,
-          });
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/organization-invitations/${organizationInvitationId}/response`,
-            payload: {
-              data: {
-                id: '100047_DZWMP7L5UM',
-                type: 'organization-invitation-responses',
-                attributes: {
-                  code: code,
-                  'user-id': userId,
-                },
+        const options = {
+          method: 'POST',
+          url: `/api/organization-invitations/${organizationInvitationId}/response`,
+          payload: {
+            data: {
+              id: '100047_DZWMP7L5UM',
+              type: 'organization-invitation-responses',
+              attributes: {
+                code: code,
+                'user-id': userId,
               },
             },
-          };
+          },
+        };
 
-          // when
-          const response = await server.inject(options);
+        // when
+        const response = await server.inject(options);
 
-          // then
-          expect(response.statusCode).to.equal(412);
-        });
+        // then
+        expect(response.statusCode).to.equal(412);
       });
     });
   });

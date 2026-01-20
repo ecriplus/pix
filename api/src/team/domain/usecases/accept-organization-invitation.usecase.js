@@ -6,7 +6,7 @@ import { AlreadyExistingMembershipError, UserNotFoundError } from '../../../shar
  * @param {Object} params
  * @param {string} params.organizationInvitationId
  * @param {string} params.code
- * @param {string} params.email
+ * @param {string} params.userId
  * @param {string} [params.locale]
  * @param {OrganizationInvitationRepository} params.organizationInvitationRepository
  * @param {OrganizationInvitedUserRepository} params.organizationInvitedUserRepository
@@ -16,7 +16,6 @@ import { AlreadyExistingMembershipError, UserNotFoundError } from '../../../shar
 const acceptOrganizationInvitation = async function ({
   organizationInvitationId,
   code,
-  email,
   userId,
   locale,
   organizationInvitationRepository,
@@ -25,7 +24,7 @@ const acceptOrganizationInvitation = async function ({
 }) {
   let organizationInvitedUser;
   try {
-    organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, email, userId });
+    organizationInvitedUser = await organizationInvitedUserRepository.get({ organizationInvitationId, userId });
     organizationInvitedUser.acceptInvitation({ code });
   } catch (error) {
     if (error instanceof AlreadyExistingMembershipError) {

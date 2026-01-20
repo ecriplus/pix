@@ -38,124 +38,62 @@ describe('Integration | Team | Application | Controller | Organization invitatio
   });
 
   describe('#acceptOrganizationInvitation', function () {
-    describe('when user has an email', function () {
-      const payload = {
-        data: {
-          id: '100047_DZWMP7L5UM',
-          type: 'organization-invitation-responses',
-          attributes: {
-            code: 'DZWMP7L5UM',
-            email: 'USER@example.net',
-          },
+    const payload = {
+      data: {
+        id: '100047_DZWMP7L5UM',
+        type: 'organization-invitation-responses',
+        attributes: {
+          code: 'DZWMP7L5UM',
+          'user-id': '123',
         },
-      };
-      context('Success cases', function () {
-        it('should return an HTTP response with status code 204', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.resolves();
-          usecases.createCertificationCenterMembershipForScoOrganizationAdminMember.resolves();
+      },
+    };
+    context('Success cases', function () {
+      it('should return an HTTP response with status code 204', async function () {
+        // given
+        usecases.acceptOrganizationInvitation.resolves();
+        usecases.createCertificationCenterMembershipForScoOrganizationAdminMember.resolves();
 
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
+        // when
+        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
 
-          // then
-          expect(response.statusCode).to.equal(204);
-        });
-      });
-
-      context('Error cases', function () {
-        it('responses an HTTP response with status code 412 when AlreadyExistingInvitationError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new AlreadyExistingInvitationError());
-
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-          // then
-          expect(response.statusCode).to.equal(412);
-        });
-
-        it('responses an HTTP response with status code 404 when NotFoundError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new NotFoundError());
-
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
-
-        it('responses an HTTP response with status code 404 when UserNotFoundError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new UserNotFoundError());
-
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
+        // then
+        expect(response.statusCode).to.equal(204);
       });
     });
-    describe('when user has an id', function () {
-      const payload = {
-        data: {
-          id: '100047_DZWMP7L5UM',
-          type: 'organization-invitation-responses',
-          attributes: {
-            code: 'DZWMP7L5UM',
-            'user-id': '123',
-          },
-        },
-      };
-      context('Success cases', function () {
-        it('should return an HTTP response with status code 204', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.resolves();
-          usecases.createCertificationCenterMembershipForScoOrganizationAdminMember.resolves();
 
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
+    context('Error cases', function () {
+      it('responses an HTTP response with status code 412 when AlreadyExistingInvitationError', async function () {
+        // given
+        usecases.acceptOrganizationInvitation.rejects(new AlreadyExistingInvitationError());
 
-          // then
-          expect(response.statusCode).to.equal(204);
-        });
+        // when
+        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
+
+        // then
+        expect(response.statusCode).to.equal(412);
       });
 
-      context('Error cases', function () {
-        it('responses an HTTP response with status code 412 when AlreadyExistingInvitationError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new AlreadyExistingInvitationError());
+      it('responses an HTTP response with status code 404 when NotFoundError', async function () {
+        // given
+        usecases.acceptOrganizationInvitation.rejects(new NotFoundError());
 
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
+        // when
+        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
 
-          // then
-          expect(response.statusCode).to.equal(412);
-        });
+        // then
+        expect(response.statusCode).to.equal(404);
+      });
 
-        it('responses an HTTP response with status code 404 when NotFoundError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new NotFoundError());
+      it('responses an HTTP response with status code 404 when UserNotFoundError', async function () {
+        // given
+        usecases.acceptOrganizationInvitation.rejects(new UserNotFoundError());
 
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
+        // when
+        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
 
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
-
-        it('responses an HTTP response with status code 404 when UserNotFoundError', async function () {
-          // given
-          usecases.acceptOrganizationInvitation.rejects(new UserNotFoundError());
-
-          // when
-          const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-          // then
-          expect(response.statusCode).to.equal(404);
-        });
+        // then
+        expect(response.statusCode).to.equal(404);
       });
     });
   });

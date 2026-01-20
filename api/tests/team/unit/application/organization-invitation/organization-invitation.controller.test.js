@@ -7,74 +7,36 @@ import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../../../te
 
 describe('Unit | Team | Application | Controller | organization-invitation', function () {
   describe('#acceptOrganizationInvitation', function () {
-    describe('When the provider parameter is an email', function () {
-      it('calls acceptOrganizationInvitation usecase to accept invitation with organizationInvitationId and code', async function () {
-        // given
-        const code = 'ABCDEFGH01';
-        const email = 'random@email.com';
-        const locale = 'fr-FR';
-        const organizationInvitation = domainBuilder.buildOrganizationInvitation({ code, email });
-        const request = {
-          params: { id: organizationInvitation.id },
-          payload: {
-            data: {
-              type: 'organization-invitation-responses',
-              attributes: { code, email },
-            },
+    it('calls acceptOrganizationInvitation usecase to accept invitation with organizationInvitationId and code', async function () {
+      // given
+      const code = 'ABCDEFGH01';
+      const userId = 1;
+      const locale = 'fr-FR';
+      const email = 'random@email.com';
+      const organizationInvitation = domainBuilder.buildOrganizationInvitation({ code, email });
+      const request = {
+        params: { id: organizationInvitation.id },
+        payload: {
+          data: {
+            type: 'organization-invitation-responses',
+            attributes: { code, 'user-id': userId },
           },
-          state: { locale },
-        };
+        },
+        state: { locale },
+      };
 
-        sinon.stub(usecases, 'acceptOrganizationInvitation').resolves();
-        sinon.stub(usecases, 'createCertificationCenterMembershipForScoOrganizationAdminMember').resolves();
+      sinon.stub(usecases, 'acceptOrganizationInvitation').resolves();
+      sinon.stub(usecases, 'createCertificationCenterMembershipForScoOrganizationAdminMember').resolves();
 
-        // when
-        await organizationInvitationController.acceptOrganizationInvitation(request);
+      // when
+      await organizationInvitationController.acceptOrganizationInvitation(request);
 
-        // then
-        expect(usecases.acceptOrganizationInvitation).to.have.been.calledWithExactly({
-          organizationInvitationId: organizationInvitation.id,
-          code,
-          email,
-          locale,
-          userId: undefined,
-        });
-      });
-    });
-
-    describe('When the provider parameter is a user id', function () {
-      it('calls acceptOrganizationInvitation usecase to accept invitation with organizationInvitationId and code', async function () {
-        // given
-        const code = 'ABCDEFGH01';
-        const userId = 1;
-        const locale = 'fr-FR';
-        const email = 'random@email.com';
-        const organizationInvitation = domainBuilder.buildOrganizationInvitation({ code, email });
-        const request = {
-          params: { id: organizationInvitation.id },
-          payload: {
-            data: {
-              type: 'organization-invitation-responses',
-              attributes: { code, 'user-id': userId },
-            },
-          },
-          state: { locale },
-        };
-
-        sinon.stub(usecases, 'acceptOrganizationInvitation').resolves();
-        sinon.stub(usecases, 'createCertificationCenterMembershipForScoOrganizationAdminMember').resolves();
-
-        // when
-        await organizationInvitationController.acceptOrganizationInvitation(request);
-
-        // then
-        expect(usecases.acceptOrganizationInvitation).to.have.been.calledWithExactly({
-          organizationInvitationId: organizationInvitation.id,
-          code,
-          userId,
-          locale,
-          email: undefined,
-        });
+      // then
+      expect(usecases.acceptOrganizationInvitation).to.have.been.calledWithExactly({
+        organizationInvitationId: organizationInvitation.id,
+        code,
+        userId,
+        locale,
       });
     });
 
@@ -89,7 +51,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
         payload: {
           data: {
             type: 'organization-invitation-responses',
-            attributes: { code, email },
+            attributes: { code, 'user-id': 1234 },
           },
         },
       };

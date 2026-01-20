@@ -26,7 +26,6 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
     it('should mark the invitation as accepted', async function () {
       // given
       const code = '123AZE';
-      const email = 'user@example.net';
       const organization = domainBuilder.buildOrganization();
       const organizationInvitation = domainBuilder.buildOrganizationInvitation({
         organizationId: organization.id,
@@ -42,14 +41,14 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
         status: organizationInvitation.status,
       });
       organizationInvitedUserRepository.get
-        .withArgs({ organizationInvitationId: organizationInvitation.id, email, userId: undefined })
+        .withArgs({ organizationInvitationId: organizationInvitation.id, userId: user.id })
         .resolves(organizationInvitedUser);
 
       // when
       const error = await catchErr(acceptOrganizationInvitation)({
         organizationInvitationId: organizationInvitation.id,
         code,
-        email,
+        userId: user.id,
         organizationInvitationRepository,
         organizationInvitedUserRepository,
       });
@@ -64,7 +63,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
     context('when the user does not have a locale cookie', function () {
       it('returns the membership id and role and does not update the user’s locale', async function () {
         // given
-        const { organizationInvitationId, organizationInvitedUser, organization, code, email, user } = createContext({
+        const { organizationInvitationId, organizationInvitedUser, organization, code, user } = createContext({
           organizationInvitedUserRepository,
           userRepository,
           userLocale: null,
@@ -78,7 +77,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
         const result = await acceptOrganizationInvitation({
           organizationInvitationId,
           code,
-          email,
+          userId: user.id,
           locale: undefined,
           organizationInvitationRepository,
           organizationInvitedUserRepository,
@@ -99,7 +98,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
       context('when the user already has a locale', function () {
         it('must not update the user’s locale', async function () {
           // given
-          const { organizationInvitationId, code, email, locale } = createContext({
+          const { organizationInvitationId, code, user, locale } = createContext({
             organizationInvitedUserRepository,
             userRepository,
             userLocale: 'fr-BE',
@@ -109,7 +108,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
           await acceptOrganizationInvitation({
             organizationInvitationId,
             code,
-            email,
+            userId: user.id,
             locale,
             organizationInvitationRepository,
             organizationInvitedUserRepository,
@@ -124,7 +123,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
       context('when the user does not already have a locale', function () {
         it('updates the user’s locale', async function () {
           // given
-          const { organizationInvitationId, code, email, locale, user } = createContext({
+          const { organizationInvitationId, code, locale, user } = createContext({
             organizationInvitedUserRepository,
             userRepository,
             userLocale: null,
@@ -134,7 +133,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
           await acceptOrganizationInvitation({
             organizationInvitationId,
             code,
-            email,
+            userId: user.id,
             locale,
             organizationInvitationRepository,
             organizationInvitedUserRepository,
@@ -151,7 +150,6 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
 
 function createContext({ organizationInvitedUserRepository, userRepository, userLocale }) {
   const code = '123AZE';
-  const email = 'user@example.net';
   const locale = 'fr-BE';
   const organization = domainBuilder.buildOrganization();
   const organizationInvitationId = domainBuilder.buildOrganizationInvitation({
@@ -165,11 +163,11 @@ function createContext({ organizationInvitedUserRepository, userRepository, user
     invitation: { code, id: organizationInvitationId },
   });
   organizationInvitedUserRepository.get
-    .withArgs({ organizationInvitationId, email, userId: undefined })
+    .withArgs({ organizationInvitationId, userId: user.id })
     .resolves(organizationInvitedUser);
 
   sinon.stub(organizationInvitedUser, 'acceptInvitation').resolves();
 
   userRepository.get.withArgs(user.id).resolves(user);
-  return { organizationInvitationId, organizationInvitedUser, organization, code, email, locale, user };
+  return { organizationInvitationId, organizationInvitedUser, organization, code, locale, user };
 }
