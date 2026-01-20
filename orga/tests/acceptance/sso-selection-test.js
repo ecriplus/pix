@@ -3,6 +3,7 @@ import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 import { module, test } from 'qunit';
 
 import setupIntl from '../helpers/setup-intl';
@@ -11,6 +12,12 @@ module('Acceptance | SSO selection', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+
+  const invitationStorage = new SessionStorageEntry('joinInvitationData');
+
+  hooks.afterEach(function () {
+    invitationStorage.remove();
+  });
 
   module('When the user logs in through SSO', function () {
     test('it displays the sso selection page for login', async function (assert) {
