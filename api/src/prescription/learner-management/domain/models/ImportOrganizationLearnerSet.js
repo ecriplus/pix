@@ -108,7 +108,11 @@ class ImportOrganizationLearnerSet {
       if (column.config?.property) {
         learnerAttributes[column.config.property] = value;
       } else {
-        learnerAttributes[column.name] = this.#formatLearnerAttribute({ attribute: value, columnName: column.name });
+        const columnName = column.config?.mappingColumn ?? column.name;
+        learnerAttributes[columnName] = this.#formatLearnerAttribute({
+          attribute: value,
+          columnName,
+        });
       }
     });
 
