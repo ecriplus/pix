@@ -40,11 +40,15 @@ export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Scri
           .where('archivedAt', '<', options.startArchiveDate)
           .pluck('id');
 
+        logger.info(`archived OrganizationId to exclude ${organizationIds.length}`);
+
         const campaignIds = await knexConn('campaigns')
           .select('id')
           .whereNull('deletedAt')
           .whereNotIn('organizationId', organizationIds)
           .pluck('id');
+
+        logger.info(`active campaignIds to include ${campaignIds.length}`);
 
         const campaignParticipationIdsOnCampaigns = await knexConn('campaign-participations')
           .select({
@@ -97,6 +101,10 @@ export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Scri
         );
       } catch (error) {
         await knexConn.rollback();
+        logger.error(
+          `ERROR: anonymise deleted participations... not related to archived organization before  or deleted learner`,
+          error,
+        );
         throw error;
       }
     });
