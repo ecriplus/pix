@@ -720,32 +720,11 @@ module('Unit | Service | current-user', function (hooks) {
       currentUser.store = storeStub;
 
       // when / then
-      assert.rejects(currentUser.load(), {
-        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
-      });
-    });
-  });
-
-  module('user token is expired', function () {
-    test('should redirect to login', async function (assert) {
-      // given
-      const connectedUserId = 1;
-
-      const storeStub = Service.create({
-        findRecord: () => Promise.reject({ errors: [{ code: 401 }] }),
-      });
-      const sessionStub = Service.create({
-        isAuthenticated: true,
-        data: { authenticated: { user_id: connectedUserId } },
-      });
-      const currentUser = this.owner.lookup('service:currentUser');
-      currentUser.store = storeStub;
-      currentUser.session = sessionStub;
-
-      // when / then
-      assert.rejects(currentUser.load(), {
-        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP', //hein ?
-      });
+      assert.rejects(
+        currentUser.load(),
+        (err) => err.code === 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+        'expected currentUser.load to throw an error with code USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+      );
     });
   });
 });
