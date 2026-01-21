@@ -16,13 +16,12 @@ class Audio extends Element {
       throw new DomainError('The URL must be a valid URL for an audio');
     }
 
-    this.url = url;
-    this.title = title;
-    this.transcription = transcription;
-
     if (URL.parse(url).hostname !== Audio.#VALID_HOSTNAME) {
       throw new DomainError('The audio URL must be from "assets.pix.org"');
     }
+    this.url = url;
+    this.title = title;
+    this.transcription = transcription;
   }
 }
 
