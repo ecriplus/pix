@@ -1,5 +1,4 @@
 import { setupTest } from 'ember-qunit';
-import { AuthorizationError, InvitationError } from 'pix-orga/utils/errors';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -39,14 +38,16 @@ module('Unit | Route | authenticated', function (hooks) {
       test('invalidates user session', async function (assert) {
         // given
         sinon.stub(sessionService, 'requireAuthentication');
-        sinon.stub(currentUserService, 'load').rejects(new AuthorizationError());
+        sinon.stub(currentUserService, 'load').rejects({
+          code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+        });
         const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
         // when
         await route.beforeModel({ isAborted: false });
 
         // then
-        assert.ok(invalidateStub.calledWithExactly('PIX_ORGA_ACCESS_NOT_ALLOWED'));
+        assert.ok(invalidateStub.calledWithExactly('USER_HAS_NO_ORGANIZATION_MEMBERSHIP'));
       });
     });
 
@@ -55,14 +56,17 @@ module('Unit | Route | authenticated', function (hooks) {
         // given
         sinon.stub(sessionService, 'requireAuthentication');
         sinon.stub(joinInvitationService, 'invitation').value({ invitationId: 1, code: '123' });
-        sinon.stub(joinInvitationService, 'acceptInvitationByUserId').rejects(new InvitationError());
+        sinon.stub(joinInvitationService, 'acceptInvitationByUserId').rejects({
+          status: '409',
+          code: 'INVITATION_ALREADY_ACCEPTED_OR_CANCELLED',
+        });
         const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
         // when
         await route.beforeModel({ isAborted: false });
 
         // then
-        assert.ok(invalidateStub.calledWithExactly('INVITATION_INVALID'));
+        assert.ok(invalidateStub.calledWithExactly('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED'));
       });
     });
 

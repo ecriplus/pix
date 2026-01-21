@@ -1,7 +1,6 @@
 import Object from '@ember/object';
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import { AuthorizationError } from 'pix-orga/utils/errors';
 import { module, test } from 'qunit';
 import { resolve } from 'rsvp';
 import sinon from 'sinon';
@@ -721,7 +720,9 @@ module('Unit | Service | current-user', function (hooks) {
       currentUser.store = storeStub;
 
       // when / then
-      assert.rejects(currentUser.load(), AuthorizationError);
+      assert.rejects(currentUser.load(), {
+        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+      });
     });
   });
 
@@ -742,7 +743,9 @@ module('Unit | Service | current-user', function (hooks) {
       currentUser.session = sessionStub;
 
       // when / then
-      assert.rejects(currentUser.load(), AuthorizationError);
+      assert.rejects(currentUser.load(), {
+        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',//hein ?
+      });
     });
   });
 });

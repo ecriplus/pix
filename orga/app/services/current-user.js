@@ -1,6 +1,5 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import { AuthorizationError } from 'pix-orga/utils/errors';
 
 export default class CurrentUserService extends Service {
   @service session;
@@ -110,7 +109,7 @@ export default class CurrentUserService extends Service {
       this.prescriber = null;
       this.memberships = null;
       const error = responseError?.errors[0];
-      throw new AuthorizationError(error?.code);
+      throw error;
     }
   }
 
