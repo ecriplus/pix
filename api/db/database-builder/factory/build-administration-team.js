@@ -2,7 +2,7 @@ import { databaseBuffer } from '../database-buffer.js';
 
 const buildAdministrationTeam = function ({
   id = databaseBuffer.getNextId(),
-  name = 'Équipe Alpha',
+  name = `Équipe ${id}`,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
 } = {}) {
