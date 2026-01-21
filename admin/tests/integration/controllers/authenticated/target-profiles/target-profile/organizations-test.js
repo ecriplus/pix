@@ -66,25 +66,4 @@ module('Integration | Controller | authenticated/target-profiles/target-profile/
       assert.true(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
     });
   });
-
-  module('#onResetFilter', function () {
-    test('resets all filters', async function (assert) {
-      // given
-      controller.id = 123;
-      controller.name = 'name';
-      controller.type = 'PRO';
-      controller.externalId = 'abc';
-      controller.hideArchived = true;
-
-      // when
-      controller.onResetFilter();
-
-      // then
-      assert.strictEqual(controller.id, null);
-      assert.strictEqual(controller.name, null);
-      assert.strictEqual(controller.type, null);
-      assert.strictEqual(controller.externalId, null);
-      assert.false(controller.hideArchived);
-    });
-  });
 });

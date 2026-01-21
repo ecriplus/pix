@@ -12,10 +12,8 @@ import Organizations from 'pix-admin/components/target-profiles/organizations';
     @type={{@controller.type}}
     @externalId={{@controller.externalId}}
     @hideArchived={{@controller.hideArchived}}
-    @triggerFiltering={{@controller.triggerFiltering}}
     @goToOrganizationPage={{@controller.goToOrganizationPage}}
     @detachOrganizations={{@controller.detachOrganizations}}
     @administrationTeamId={{@controller.administrationTeamId}}
-    @onResetFilter={{@controller.onResetFilter}}
   />
 </template>

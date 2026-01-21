@@ -33,7 +33,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
         name: params.name,
         type: params.type,
         externalId: params.externalId,
-        hideArchived: params.hideArchived,
+        hideArchived: params.hideArchived || false,
         administrationTeamId: params.administrationTeamId,
         targetProfileId: targetProfile.id,
       },

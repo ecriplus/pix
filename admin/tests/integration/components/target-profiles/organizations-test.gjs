@@ -1,5 +1,7 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
+import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import Organizations from 'pix-admin/components/target-profiles/organizations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -9,10 +11,8 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | target-profiles | Organizations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  const triggerFiltering = () => {};
   const goToOrganizationPage = () => {};
   const detachOrganizations = () => {};
-  const resetFilters = () => {};
   const queryParams = { hideArchived: false };
   const administrationTeam = EmberObject.create({ id: 1, name: 'Admin Team 1' });
   const administrationTeam2 = EmberObject.create({ id: 2, name: 'Admin Team 2' });
@@ -38,10 +38,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -65,10 +63,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -93,10 +89,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -115,10 +109,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -139,10 +131,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -166,10 +156,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -195,10 +183,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -224,10 +210,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -249,10 +233,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           @organizations={{organizations}}
           @administrationTeams={{administrationTeams}}
           @goToOrganizationPage={{goToOrganizationPage}}
-          @triggerFiltering={{triggerFiltering}}
           @hideArchived={{queryParams.hideArchived}}
           @detachOrganizations={{detachOrganizations}}
-          @onResetFilter={{resetFilters}}
         />
       </template>,
     );
@@ -288,10 +270,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
-            @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
-            @onResetFilter={{resetFilters}}
           />
         </template>,
       );
@@ -321,10 +301,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
-            @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
-            @onResetFilter={{resetFilters}}
           />
         </template>,
       );
@@ -351,10 +329,8 @@ module('Integration | Component | target-profiles | Organizations', function (ho
             @administrationTeams={{administrationTeams}}
             @targetProfile={{targetProfile}}
             @goToOrganizationPage={{goToOrganizationPage}}
-            @triggerFiltering={{triggerFiltering}}
             @hideArchived={{queryParams.hideArchived}}
             @detachOrganizations={{detachOrganizations}}
-            @onResetFilter={{resetFilters}}
           />
         </template>,
       );
@@ -364,6 +340,123 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       assert
         .dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible'))
         .doesNotHaveAttribute('aria-disabled');
+    });
+  });
+
+  module('#triggerFiltering', function () {
+    [
+      {
+        fieldName: 'id',
+        fieldInteraction: async function () {
+          await fillByLabel('Identifiant', '1');
+        },
+        value: '1',
+      },
+      {
+        fieldName: 'name',
+        fieldInteraction: async function () {
+          await fillByLabel('Nom', 'Test');
+        },
+        value: 'Test',
+      },
+      {
+        fieldName: 'type',
+        fieldInteraction: async function (screen) {
+          await click(screen.getByLabelText('Type'));
+          await click(await screen.findByRole('option', { name: 'SCO' }));
+        },
+        value: 'SCO',
+      },
+      {
+        fieldName: 'administrationTeamId',
+        fieldInteraction: async function (screen) {
+          await click(
+            screen.getByLabelText(t('components.organizations.list-items.table.header.administration-team-name')),
+          );
+          await click(await screen.findByRole('option', { name: administrationTeam.name }));
+        },
+        value: administrationTeam.id,
+      },
+      {
+        fieldName: 'externalId',
+        fieldInteraction: async function () {
+          await fillByLabel('Identifiant externe', 'UAI1');
+        },
+        value: 'UAI1',
+      },
+      {
+        fieldName: 'hideArchived',
+        fieldInteraction: async function (screen) {
+          await click(screen.getByLabelText('Oui'));
+        },
+        value: true,
+      },
+    ].forEach((testData) => {
+      test(`should set a filter on ${testData.fieldName} selection`, async function (assert) {
+        // given
+        const router = this.owner.lookup('service:router');
+        const transitionToStub = sinon.stub(router, 'transitionTo');
+        const organizations = [];
+
+        organizations.meta = { page: 1, pageSize: 1 };
+
+        // when
+        const screen = await render(
+          <template>
+            <Organizations
+              @organizations={{organizations}}
+              @administrationTeams={{administrationTeams}}
+              @goToOrganizationPage={{goToOrganizationPage}}
+              @hideArchived={{queryParams.hideArchived}}
+              @detachOrganizations={{detachOrganizations}}
+            />
+          </template>,
+        );
+        await testData.fieldInteraction(screen);
+
+        // then
+        sinon.assert.calledWith(transitionToStub, { queryParams: { [testData.fieldName]: testData.value } });
+        assert.ok(true);
+      });
+    });
+  });
+
+  module('#onResetFilters', function () {
+    test('should reset all filters', async function (assert) {
+      // given
+      const router = this.owner.lookup('service:router');
+      const transitionToStub = sinon.stub(router, 'transitionTo');
+      const organizations = [];
+
+      organizations.meta = { page: 1, pageSize: 1 };
+
+      // when
+      const screen = await render(
+        <template>
+          <Organizations
+            @type="SCO"
+            @organizations={{organizations}}
+            @administrationTeams={{administrationTeams}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @hideArchived={{queryParams.hideArchived}}
+            @detachOrganizations={{detachOrganizations}}
+          />
+        </template>,
+      );
+      await click(screen.getByRole('button', { name: 'Effacer les filtres', exact: false }));
+
+      // then
+      sinon.assert.calledWith(transitionToStub, {
+        queryParams: {
+          id: null,
+          name: null,
+          type: null,
+          externalId: null,
+          hideArchived: null,
+          administrationTeamId: null,
+        },
+      });
+      assert.ok(true);
     });
   });
 });

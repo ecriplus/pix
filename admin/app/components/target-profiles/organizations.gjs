@@ -6,7 +6,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { debounceTask } from 'ember-lifeline';
 import uniq from 'lodash/uniq';
+import config from 'pix-admin/config/environment';
 
 import ListItems from '../organizations/list-items';
 
@@ -125,6 +127,36 @@ export default class Organizations extends Component {
     return uniq(targetProfileIds);
   }
 
+  updateQueryParams({ param, value }) {
+    this.router.transitionTo({
+      queryParams: { [param]: value },
+    });
+  }
+
+  @action
+  triggerFiltering(fieldName, event) {
+    debounceTask(
+      this,
+      'updateQueryParams',
+      { param: fieldName, value: event.target.value },
+      config.pagination.debounce,
+    );
+  }
+
+  @action
+  onResetFilter() {
+    this.router.transitionTo({
+      queryParams: {
+        id: null,
+        name: null,
+        type: null,
+        externalId: null,
+        hideArchived: null,
+        administrationTeamId: null,
+      },
+    });
+  }
+
   <template>
     <section class="page-section target-profile-organizations">
       <div class="organization__forms-section">
@@ -188,7 +220,7 @@ export default class Organizations extends Component {
         @name={{@name}}
         @type={{@type}}
         @externalId={{@externalId}}
-        @triggerFiltering={{@triggerFiltering}}
+        @triggerFiltering={{this.triggerFiltering}}
         @goToOrganizationPage={{@goToOrganizationPage}}
         @detachOrganizations={{@detachOrganizations}}
         @entityName={{@targetProfile.internalName}}
@@ -196,7 +228,7 @@ export default class Organizations extends Component {
         @hideArchived={{@hideArchived}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
         @administrationTeamId={{@administrationTeamId}}
-        @onResetFilter={{@onResetFilter}}
+        @onResetFilter={{this.onResetFilter}}
       />
     </section>
   </template>
