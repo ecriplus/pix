@@ -7,7 +7,7 @@ const audioElementSchema = Joi.object({
   type: Joi.string().valid('audio').required(),
   title: htmlNotAllowedSchema.required(),
   url: Joi.string().uri().required(),
-  transcription: htmlSchema.allow(''),
+  transcription: htmlSchema.required(),
 }).required();
 
 export { audioElementSchema };
