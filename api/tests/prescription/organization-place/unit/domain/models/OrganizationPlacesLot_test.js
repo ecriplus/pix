@@ -235,7 +235,6 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           const attributes = {
             ...initialAttributes,
             activationDate: undefined,
-            expirationDate: undefined,
           };
 
           //when
@@ -251,7 +250,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           expect(error.invalidAttributes).to.deep.equals([
             {
               attribute: 'activationDate',
-              message: `La date d'activation est obligatoire.`,
+              message: `Les dates d'activation et d'expiration sont obligatoires.`,
             },
           ]);
         });
@@ -304,7 +303,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           expect(error.invalidAttributes).to.deep.equals([
             {
               attribute: 'expirationDate',
-              message: `La date d'expiration doit être supérieur à la date d'activation.`,
+              message: `La date d'expiration doit être supérieure à la date d'activation.`,
             },
           ]);
         });
@@ -329,7 +328,32 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           expect(error.invalidAttributes).to.deep.equals([
             {
               attribute: 'expirationDate',
-              message: `La date d'expiration doit être supérieur à la date d'activation.`,
+              message: `La date d'expiration doit être supérieure à la date d'activation.`,
+            },
+          ]);
+        });
+
+        it('it should throw an exception when expirationDate is missing', function () {
+          //given
+          const attributes = {
+            ...initialAttributes,
+            expirationDate: undefined,
+          };
+
+          //when
+          let error;
+          try {
+            new OrganizationPlacesLotForManagement(attributes);
+          } catch (e) {
+            error = e;
+          }
+
+          //then
+          expect(error).to.be.instanceOf(EntityValidationError);
+          expect(error.invalidAttributes).to.deep.equals([
+            {
+              attribute: 'expirationDate',
+              message: `Les dates d'activation et d'expiration sont obligatoires.`,
             },
           ]);
         });

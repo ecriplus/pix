@@ -21,6 +21,7 @@ describe('Integration | Scripts | create-organization-places-lot', function () {
         organizationId: '654',
         reference: 'Some reference bis',
         activationDate: '31/10/2021',
+        expirationDate: '31/10/2022',
       };
 
       // when
@@ -45,7 +46,7 @@ describe('Integration | Scripts | create-organization-places-lot', function () {
           category: organizationPlacesLotData2.category,
           count: null,
           createdBy: organizationPlacesLotData2.createdBy,
-          expirationDate: null,
+          expirationDate: '2022-10-31',
           organizationId: organizationPlacesLotData2.organizationId,
           reference: organizationPlacesLotData2.reference,
         },
