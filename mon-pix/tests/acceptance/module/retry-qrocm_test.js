@@ -25,7 +25,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
           display: 'block',
           placeholder: '',
           ariaLabel: 'Réponse 1',
-          defaultValue: '',
           options: [
             {
               id: '1',
@@ -150,7 +149,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
           display: 'block',
           placeholder: '',
           ariaLabel: 'Réponse 1',
-          defaultValue: '',
           solutions: ['@'],
         },
         {
@@ -159,7 +157,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
           display: 'block',
           placeholder: '',
           ariaLabel: 'Réponse 2',
-          defaultValue: '',
           options: [
             {
               id: '1',

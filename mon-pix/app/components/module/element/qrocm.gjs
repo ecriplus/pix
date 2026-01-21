@@ -26,12 +26,6 @@ export default class ModuleQrocm extends ModuleElement {
 
   constructor() {
     super(...arguments);
-
-    this.element.proposals.forEach((proposal) => {
-      if (proposal.defaultValue) {
-        this.selectedValues[proposal.input] = proposal.defaultValue;
-      }
-    });
   }
 
   get correction() {
