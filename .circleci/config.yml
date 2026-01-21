@@ -451,9 +451,8 @@ jobs:
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
             MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
             MOCHA_REPORTER: mocha-junit-reporter
+            MOCHA_RETRIES: 2
           when: always
-          max_auto_reruns: 3
-          auto_rerun_delay: 10s
       - store_test_results:
           path: /home/circleci/test-results
       - store_artifacts:
@@ -501,9 +500,8 @@ jobs:
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
             MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
             MOCHA_REPORTER: mocha-junit-reporter
+            MOCHA_RETRIES: 2
           when: always
-          max_auto_reruns: 3
-          auto_rerun_delay: 10s
       - store_test_results:
           path: /home/circleci/test-results
       - store_artifacts:
