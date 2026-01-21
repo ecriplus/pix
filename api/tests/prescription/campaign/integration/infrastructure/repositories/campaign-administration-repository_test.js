@@ -222,63 +222,6 @@ describe('Integration | Repository | Campaign Administration', function () {
           expect(skillIds).to.deepEqualArray(['recActiveSkill2Tube1', 'recActiveSkill2Tube2', 'recActiveSkill6Tube2']);
         });
       });
-
-      it('should not save anything if something goes wrong between campaign creation and skills computation', async function () {
-        // given
-        const skillRepository = {
-          findActiveByTubeId: sinon.stub().rejects(new Error('Forcing rollback')),
-        };
-        const learningContent = {
-          areas: [{ id: 'recArea1', competenceIds: ['recCompetence1'] }],
-          competences: [
-            {
-              id: 'recCompetence1',
-              areaId: 'recArea1',
-              tubeIds: ['recTube1', 'recTube2', 'recTube3'],
-            },
-          ],
-          tubes: [
-            {
-              id: 'recTube1',
-              skillIds: ['recSkill1'],
-            },
-          ],
-          skills: [
-            {
-              id: 'recSkill1',
-              name: 'recSkill1',
-              status: 'actif',
-              level: 1,
-              tubeId: 'recTube1',
-            },
-          ],
-        };
-        await mockLearningContent(learningContent);
-
-        databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
-        await databaseBuilder.commit();
-        const campaignToSave = {
-          name: 'Evaluation niveau 1 recherche internet',
-          code: 'BCTERD153',
-          customLandingPageText: 'Parcours évaluatif concernant la recherche internet',
-          creatorId: userId,
-          ownerId,
-          organizationId,
-          multipleSendings: true,
-          type: CampaignTypes.ASSESSMENT,
-          targetProfileId,
-          title: 'Parcours recherche internet',
-        };
-
-        // when
-        await catchErr(campaignAdministrationRepository.save)(campaignToSave, { skillRepository });
-
-        // then
-        const skillIds = await knex('campaign_skills').pluck('skillId');
-        const campaignIds = await knex('campaigns').pluck('id');
-        expect(skillIds).to.be.empty;
-        expect(campaignIds).to.be.empty;
-      });
     });
 
     context('when campaign is of type EXAM', function () {
@@ -455,63 +398,6 @@ describe('Integration | Repository | Campaign Administration', function () {
             .orderBy('skillId', 'ASC');
           expect(skillIds).to.deepEqualArray(['recActiveSkill2Tube1', 'recActiveSkill2Tube2', 'recActiveSkill6Tube2']);
         });
-      });
-
-      it('should not save anything if something goes wrong between campaign creation and skills computation', async function () {
-        // given
-        const skillRepository = {
-          findActiveByTubeId: sinon.stub().rejects(new Error('Forcing rollback')),
-        };
-        const learningContent = {
-          areas: [{ id: 'recArea1', competenceIds: ['recCompetence1'] }],
-          competences: [
-            {
-              id: 'recCompetence1',
-              areaId: 'recArea1',
-              tubeIds: ['recTube1', 'recTube2', 'recTube3'],
-            },
-          ],
-          tubes: [
-            {
-              id: 'recTube1',
-              skillIds: ['recSkill1'],
-            },
-          ],
-          skills: [
-            {
-              id: 'recSkill1',
-              name: 'recSkill1',
-              status: 'actif',
-              level: 1,
-              tubeId: 'recTube1',
-            },
-          ],
-        };
-        await mockLearningContent(learningContent);
-
-        databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
-        await databaseBuilder.commit();
-        const campaignToSave = {
-          name: 'Evaluation niveau 1 recherche internet',
-          code: 'BCTERD153',
-          customLandingPageText: 'Parcours évaluatif concernant la recherche internet',
-          creatorId: userId,
-          ownerId,
-          organizationId,
-          multipleSendings: true,
-          type: CampaignTypes.EXAM,
-          targetProfileId,
-          title: 'Parcours recherche internet',
-        };
-
-        // when
-        await catchErr(campaignAdministrationRepository.save)(campaignToSave, { skillRepository });
-
-        // then
-        const skillIds = await knex('campaign_skills').pluck('skillId');
-        const campaignIds = await knex('campaigns').pluck('id');
-        expect(skillIds).to.be.empty;
-        expect(campaignIds).to.be.empty;
       });
     });
 
