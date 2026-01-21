@@ -24,7 +24,7 @@ export default class ModulixAudio extends Component {
   <template>
     <div class="element-audio">
       <div class="element-audio__container">
-        <div class="element-audio__container__title">{{@audio.title}}</div>
+        <p class="element-audio__container__title">{{@audio.title}}</p>
         {{! template-lint-disable require-media-caption }}
         <audio ref="audio" class="pix-audio-player" controls src="{{@audio.url}}"></audio>
 

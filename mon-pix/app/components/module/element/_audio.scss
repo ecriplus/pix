@@ -5,11 +5,11 @@
     border-radius: 8px;
 
     &__title {
-      margin: 0 10px 0 0;
+      margin: var(--pix-spacing-3x) 0;
     }
   }
 }
 
 .pix-audio-player {
-  width: 50%;
+  width: 100%;
 }
