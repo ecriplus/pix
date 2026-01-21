@@ -353,12 +353,6 @@ class ForbiddenAccess extends DomainError {
   }
 }
 
-class PixOrgaAccessNotAllowedError extends ForbiddenAccess {
-  constructor() {
-    super('Pix Orga access not allowed', 'PIX_ORGA_ACCESS_NOT_ALLOWED');
-  }
-}
-
 class InvalidInputDataError extends DomainError {
   constructor({ code = 'INVALID_INPUT_DATA', message = 'Provided input data is invalid', meta } = {}) {
     super(message);
@@ -1116,7 +1110,6 @@ export {
   OrganizationNotFoundError,
   OrganizationTagNotFound,
   OrganizationWithoutEmailError,
-  PixOrgaAccessNotAllowedError,
   SendingEmailError,
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
