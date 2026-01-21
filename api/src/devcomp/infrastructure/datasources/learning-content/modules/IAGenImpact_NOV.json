@@ -856,7 +856,7 @@
                     {
                       "id": "8e89075a-83e7-4c13-8673-8573438c65c3",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Résume en français un document en finlandais de 25 pages.</p>",
+                      "instruction": "<p>Résume en français un document en suédois de 25 pages.</p>",
                       "proposals": [
                         {
                           "id": "1",
