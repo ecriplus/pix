@@ -65,7 +65,6 @@
                     "display": "inline",
                     "placeholder": "Tapez ici",
                     "ariaLabel": "zone de saisie",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "voilà le zèbre déçu",
@@ -356,7 +355,6 @@
                     "display": "inline",
                     "placeholder": "recopiez la phrase ",
                     "ariaLabel": "zone de saisie",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],

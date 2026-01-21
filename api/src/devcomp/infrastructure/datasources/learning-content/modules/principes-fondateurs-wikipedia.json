@@ -466,7 +466,6 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Remplir le nom de la cinquième section du sommaire de l'article Wikipédia proposé",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],
@@ -514,7 +513,6 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Remplir avec le nombre de notes et références",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],
@@ -560,7 +558,6 @@
                     "display": "block",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "Choisir le niveau de qualité estimé",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {

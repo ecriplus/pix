@@ -338,7 +338,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "étape la plus contributrice pour PM",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -372,7 +371,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "ordre de grandeur de la part de l’utilisation pour PM",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -406,7 +404,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "tier le plus contributif à l’étape utilisation pour PM",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -436,7 +433,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "importance relative du transport pour PM",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {

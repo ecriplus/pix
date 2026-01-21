@@ -196,7 +196,6 @@
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour le lithium",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -226,7 +225,6 @@
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour les terres rares",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -256,7 +254,6 @@
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour l’or, le cuivre et l’argent",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -868,7 +865,6 @@
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat d’un appareil neuf",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -902,7 +898,6 @@
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat reconditionné alors que l’appareil fonctionne encore",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -936,7 +931,6 @@
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat reconditionné après fin de vie",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -970,7 +964,6 @@
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour la réparation",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {

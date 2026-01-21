@@ -439,7 +439,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "Nom du pays :",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],

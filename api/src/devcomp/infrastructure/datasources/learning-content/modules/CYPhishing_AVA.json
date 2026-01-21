@@ -150,7 +150,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -184,7 +183,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -218,7 +216,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -252,7 +249,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -934,7 +930,6 @@
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
-                          "defaultValue": "",
                           "tolerances": [
                             "t1",
                             "t2",

@@ -623,7 +623,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "Mot à trouver",
-                    "defaultValue": "",
                     "tolerances": ["t1", "t3"],
                     "solutions": ["Groupement"]
                   },
@@ -639,7 +638,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "Année à trouver",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [2016]
                   }

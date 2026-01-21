@@ -57,7 +57,6 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Mot de passe",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],
@@ -192,7 +191,6 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Mot de passe d'Austin",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1"
                     ],

@@ -830,7 +830,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "départ de la demande",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -860,7 +859,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "lieu de traitement",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -890,7 +888,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "éléments de traitement",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -920,7 +917,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "retour de la réponse",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
