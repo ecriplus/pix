@@ -746,7 +746,7 @@
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
                 "type": "text",
-                "content": "<p><strong>Le prompt suivant a été écrit par Ismaël.</strong></p>"
+                "content": "<p><strong>Le prompt suivant a été écrit par Nadia.</strong></p>"
               }
             },
             {
@@ -760,7 +760,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Fais une analyse de ces clients et propose un plan marketing adapté : <ul><li>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, téléphone : 06 39 98 33 45, e-mail : marie.dubois@pix.com <li> Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de l’ouest, téléphone : 04 65 71 68 37, e-mail : ahmed.ouali@pix.fr</ul>"
+                      "content": "Rédige un message au service client : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali et mon numéro de téléphone est le 06 39 98 44 77, je voudrai être rappellée."
                     }
                   ]
                 }
@@ -773,8 +773,8 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Corrige le prompt",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg7tpodh00001t01ygol69a8",
-                "instruction": "<p>Corrigez le prompt d’Ismaël jusqu’à obtenir une version qui décrit une situation générale, sans inclure de données personnelles, sensibles ou confidentielles. </p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmkgtl7mv00031w01zo9vqe14",
+                "instruction": "<p>Corrigez le prompt de Nadia jusqu’à obtenir une version qui décrit une situation générale, sans inclure de données personnelles, sensibles ou confidentielles. </p>",
                 "solution": "pix-llm-success",
                 "height": 600
               }
@@ -785,7 +785,7 @@
                 "id": "250665b5-6504-420f-8cdd-f8c130583f7f",
                 "type": "expand",
                 "title": "Indice 1",
-                "content": "Ne mettez pas de noms, même fictifs, vous pouvez trouver une autre solution pour parler des clients."
+                "content": "Ne mettez pas de noms, même fictifs, vous pouvez trouver une autre solution."
               }
             },
             {
@@ -794,7 +794,7 @@
                 "id": "a492a9ab-6e17-4a3a-80ff-6acf299e1415",
                 "type": "expand",
                 "title": "Indice 2",
-                "content": "Avez-vous bien demandé un plan marketing ?&nbsp;"
+                "content": "Avez-vous bien demandé à ChatPix de vous écrire un mail pour un service client ?&nbsp;"
               }
             }
           ]
