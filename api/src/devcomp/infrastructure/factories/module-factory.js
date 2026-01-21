@@ -8,6 +8,7 @@ import { BlockText } from '../../domain/models/block/BlockText.js';
 import { ComponentElement } from '../../domain/models/component/ComponentElement.js';
 import { ComponentStepper } from '../../domain/models/component/ComponentStepper.js';
 import { Step } from '../../domain/models/component/Step.js';
+import { Audio } from '../../domain/models/element/Audio.js';
 import { CustomDraft } from '../../domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../domain/models/element/CustomElement.js';
 import { Download } from '../../domain/models/element/Download.js';
@@ -118,6 +119,8 @@ export class ModuleFactory {
 
   static async #buildElement(element) {
     switch (element.type) {
+      case 'audio':
+        return ModuleFactory.#buildAudio(element);
       case 'custom':
         return ModuleFactory.#buildCustom(element);
       case 'custom-draft':
@@ -159,6 +162,14 @@ export class ModuleFactory {
         });
         return undefined;
     }
+  }
+  static #buildAudio(element) {
+    return new Audio({
+      id: element.id,
+      title: element.title,
+      url: element.url,
+      transcription: element.transcription,
+    });
   }
 
   static #buildCustom(element) {

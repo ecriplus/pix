@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { audioElementSchema } from './element/audio-schema.js';
 import { customDraftElementSchema } from './element/custom-draft-element-schema.js';
 import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
@@ -20,6 +21,7 @@ import { videoElementSchema } from './element/video-schema.js';
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from './utils.js';
 
 const ALLOWED_ELEMENTS_SCHEMA = [
+  { is: 'audio', then: audioElementSchema },
   { is: 'custom', then: customElementSchema },
   { is: 'custom-draft', then: customDraftElementSchema },
   { is: 'download', then: downloadElementSchema },

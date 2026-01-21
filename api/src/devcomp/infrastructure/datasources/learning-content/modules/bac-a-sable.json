@@ -26,6 +26,16 @@
             {
               "type": "element",
               "element": {
+                "id": "d1ece1a1-aed8-4293-9042-40984a90a670",
+                "type": "audio",
+                "title": "Audio de ronron de chat",
+                "url": "https://assets.pix.org/test/ronron.mp3",
+                "transcription": "<p>ron... ron...</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "96e29215-3610-4bc6-b4a6-026bf13276b8",
                 "type": "short-video",
                 "title": "Exemple de vidéo courte",

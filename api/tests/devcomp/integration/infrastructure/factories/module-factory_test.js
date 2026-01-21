@@ -1,6 +1,7 @@
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { ComponentStepper } from '../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js';
+import { Audio } from '../../../../../src/devcomp/domain/models/element/Audio.js';
 import { CustomDraft } from '../../../../../src/devcomp/domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../../../../src/devcomp/domain/models/element/CustomElement.js';
 import { Download } from '../../../../../src/devcomp/domain/models/element/Download.js';
@@ -574,6 +575,64 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Text);
+      });
+      it('should instantiate a Module with a ComponentElement which contains a Audio Element', async function () {
+        // given
+        const moduleData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: 'giedjc7f3',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          visibility: 'public',
+          details: {
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'novice',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          sections: [
+            {
+              id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+              type: 'practise',
+              grains: [
+                {
+                  id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                  type: 'lesson',
+                  title: 'title',
+                  components: [
+                    {
+                      type: 'element',
+                      element: {
+                        id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
+                        type: 'audio',
+                        title: 'Le pouvoir du ronronnement',
+                        url: 'https://assets.pix.org/modules/chat.mp3',
+                        transcription: 'Insert transcription here',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = await ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Audio);
+        expect(module.sections[0].grains[0].components[0].element).to.deep.equal({
+          id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
+          type: 'audio',
+          title: 'Le pouvoir du ronronnement',
+          url: 'https://assets.pix.org/modules/chat.mp3',
+          transcription: 'Insert transcription here',
+          isAnswerable: false,
+        });
       });
 
       it('should instantiate a Module with a ComponentElement which contains a Video Element', async function () {

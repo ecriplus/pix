@@ -115,7 +115,8 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"f00133f5-0653-425b-a25f-3c9604820529"\t"custom-draft"\t"Elément custom"\t1\t9\t17\t"<p>Retournez les cartes.</p>"
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"0e3315fd-98ad-492f-9046-4aa867495d85"\t"custom"\t"Elément custom"\t1\t9\t18\t"Voici un extrait de conversation"
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"cf436761-f56d-4b01-83f9-942afe9ce72c"\t"ed795d29-5f04-499c-a9c8-4019125c5cb1"\t"qab"\t"test qab"\t1\t10\t19\t"<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t"test qcu-discovery"\t1\t11\t20\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"`);
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t"test qcu-discovery"\t1\t11\t20\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"5bf1c672-3746-4480-b9ac-1f0af9c7c509"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t"42260c2a-31a9-4d71-86d9-d38ccf408579"\t"audio"\t"test qcu-discovery"\t1\t11\t21\t`);
     });
   });
 });
