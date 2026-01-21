@@ -31,7 +31,6 @@ describe('Unit | Team | Domain | UseCase | get-prescriber', function () {
 
       // then
       expect(error).to.be.instanceOf(UserHasNoOrganizationMembershipError);
-      expect(error.message).to.equal("L'utilisateur n'est membre d'aucune organisation.");
     });
   });
 

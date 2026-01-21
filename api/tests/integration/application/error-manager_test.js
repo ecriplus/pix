@@ -271,7 +271,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(CONFLICT_ERROR);
-      expect(responseDetail(response)).to.equal("L'invitation a déjà été acceptée ou annulée.");
+      expect(responseDetail(response)).to.equal('The invitation has already been accepted or cancelled');
     });
   });
 
