@@ -10,6 +10,7 @@ module('Unit | Route | authenticated', function (hooks) {
   let routerService;
   let joinInvitationService;
   let currentUserService;
+  let transition;
 
   hooks.beforeEach(function () {
     route = this.owner.lookup('route:authenticated');
@@ -17,12 +18,15 @@ module('Unit | Route | authenticated', function (hooks) {
     routerService = this.owner.lookup('service:router');
     joinInvitationService = this.owner.lookup('service:join-invitation');
     currentUserService = this.owner.lookup('service:current-user');
+    transition = {
+      isAborted: false,
+      abort: sinon.stub(),
+    };
   });
 
   module('beforeModel', function () {
     test('aborts transition if user not logged in', async function (assert) {
       // given
-      const transition = { isAborted: true };
       const requireAuthenticationStub = sinon.stub(sessionService, 'requireAuthentication');
       const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
@@ -44,7 +48,7 @@ module('Unit | Route | authenticated', function (hooks) {
         const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
         // when
-        await route.beforeModel({ isAborted: false });
+        await route.beforeModel(transition);
 
         // then
         assert.ok(invalidateStub.calledWithExactly('USER_HAS_NO_ORGANIZATION_MEMBERSHIP'));
@@ -63,7 +67,7 @@ module('Unit | Route | authenticated', function (hooks) {
         const invalidateStub = sinon.stub(sessionService, 'invalidateWithError');
 
         // when
-        await route.beforeModel({ isAborted: false });
+        await route.beforeModel(transition);
 
         // then
         assert.ok(invalidateStub.calledWithExactly('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED'));
@@ -82,7 +86,7 @@ module('Unit | Route | authenticated', function (hooks) {
         const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
         // when
-        await route.beforeModel({ isAborted: false });
+        await route.beforeModel(transition);
 
         // then
         assert.ok(replaceWithStub.calledWithExactly('terms-of-service'));
@@ -101,7 +105,7 @@ module('Unit | Route | authenticated', function (hooks) {
         const replaceWithStub = sinon.stub(routerService, 'replaceWith');
 
         // when
-        await route.beforeModel({ isAborted: false });
+        await route.beforeModel(transition);
 
         // then
         assert.notOk(replaceWithStub.calledWithExactly('terms-of-service'));

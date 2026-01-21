@@ -744,7 +744,7 @@ module('Unit | Service | current-user', function (hooks) {
 
       // when / then
       assert.rejects(currentUser.load(), {
-        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',//hein ?
+        code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP', //hein ?
       });
     });
   });

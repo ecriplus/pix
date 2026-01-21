@@ -20,6 +20,7 @@ export default class AuthenticatedRoute extends Route {
 
       await this.currentUser.load();
     } catch (error) {
+      transition.abort();
       await this.session.invalidateWithError(error?.code);
       return;
     }
