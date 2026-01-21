@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import * as userRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { createCampaign } from '../../../../../../src/prescription/campaign/domain/usecases/create-campaign.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
@@ -66,6 +67,75 @@ describe('Integration | UseCases | create-campaign', function () {
     expect(_.pick(result, expectedAttributes)).to.deep.equal(_.pick(campaign, expectedAttributes));
     expect(result.code).to.have.lengthOf.above(0);
   });
+  it('should throw an error if creator is not from organization', async function () {
+    // given
+    const user = databaseBuilder.factory.buildUser();
+    databaseBuilder.factory.buildUser({ id: 14 });
+    const owner = databaseBuilder.factory.buildUser({ id: 15 });
+
+    const organization = databaseBuilder.factory.buildOrganization();
+    const userOrganization = databaseBuilder.factory.buildOrganization();
+    databaseBuilder.factory.buildMembership({
+      organizationId: userOrganization.id,
+      userId: user.id,
+    });
+
+    databaseBuilder.factory.buildMembership({
+      organizationId: organization.id,
+      userId: owner.id,
+    });
+
+    const campaignData = {
+      creatorId: 14,
+      ownerId: 15,
+      organizationId: organization.id,
+    };
+
+    await databaseBuilder.commit();
+    // when
+    const error = await catchErr(createCampaign)({
+      campaign: campaignData,
+      userRepository,
+    });
+
+    // then
+    expect(error).to.be.instanceOf(UserNotAuthorizedToCreateCampaignError);
+  });
+  it('should throw an error if owner is not from organization', async function () {
+    // given
+    const user = databaseBuilder.factory.buildUser();
+    const creator = databaseBuilder.factory.buildUser({ id: 14 });
+    databaseBuilder.factory.buildUser({ id: 15 });
+
+    const organization = databaseBuilder.factory.buildOrganization();
+    const userOrganization = databaseBuilder.factory.buildOrganization();
+    databaseBuilder.factory.buildMembership({
+      organizationId: userOrganization.id,
+      userId: user.id,
+    });
+
+    databaseBuilder.factory.buildMembership({
+      organizationId: organization.id,
+      userId: creator.id,
+    });
+
+    const campaignData = {
+      creatorId: 14,
+      ownerId: 15,
+      organizationId: organization.id,
+    };
+
+    await databaseBuilder.commit();
+    // when
+    const error = await catchErr(createCampaign)({
+      campaign: campaignData,
+      userRepository,
+    });
+
+    // then
+    expect(error).to.be.instanceOf(UserNotAuthorizedToCreateCampaignError);
+  });
+
   describe('type ASSESSMENT', function () {
     it('should not save anything if something goes wrong between campaign creation and skills computation', async function () {
       // given
