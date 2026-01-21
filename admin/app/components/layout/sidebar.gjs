@@ -1,4 +1,3 @@
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNavigation from '@1024pix/pix-ui/components/pix-navigation';
 import PixNavigationButton from '@1024pix/pix-ui/components/pix-navigation-button';
 import { LinkTo } from '@ember/routing';
@@ -120,7 +119,9 @@ export default class Sidebar extends Component {
       </:navElements>
       <:footer>
         <p class="sidebar-footer__full-name">{{this.userFullName}}</p>
-        <PixButtonLink @variant="tertiary" @route="logout">{{t "components.layout.sidebar.logout"}}</PixButtonLink>
+        <PixNavigationButton @route="logout" @icon="power" class="sidebar-footer__logout-button">
+          {{t "components.layout.sidebar.logout"}}
+        </PixNavigationButton>
       </:footer>
     </PixNavigation>
   </template>
