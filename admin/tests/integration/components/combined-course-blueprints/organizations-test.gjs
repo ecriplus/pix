@@ -72,7 +72,11 @@ module('Integration | Component | CombinedCourseBlueprints::Organizations', func
       assert.ok(within(screen.getByLabelText('Type')).getByText('SCO'));
       assert.ok(within(screen.getByLabelText('Équipe')).getByText('Team Rocket'));
       assert.ok(screen.getByDisplayValue('abc'));
-      assert.ok(screen.getByRole('button', { name: 'Masquer les organisations archivées', pressed: true }));
+
+      const archivedSegmentedControls = screen.getByRole('radiogroup', {
+        name: 'Masquer les organisations archivées',
+      });
+      assert.dom(within(archivedSegmentedControls).getByRole('radio', { name: 'Oui' })).isChecked();
     });
   });
 });
