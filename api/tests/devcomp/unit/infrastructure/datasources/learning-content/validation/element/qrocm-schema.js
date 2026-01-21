@@ -11,7 +11,6 @@ const blockInputSchema = Joi.object({
   display: Joi.string().valid('inline', 'block').required(),
   placeholder: htmlNotAllowedSchema.allow('').required(),
   ariaLabel: htmlNotAllowedSchema.required(),
-  defaultValue: htmlNotAllowedSchema.allow('').required(),
   tolerances: Joi.array()
     .unique()
     .items(Joi.string().valid('t1', 't2', 't3'))
@@ -27,9 +26,6 @@ const blockSelectSchema = Joi.object({
   display: Joi.string().valid('inline', 'block').required(),
   placeholder: htmlNotAllowedSchema.allow('').required(),
   ariaLabel: htmlNotAllowedSchema.required(),
-  defaultValue: Joi.string().valid('').required().messages({
-    'any.only': '"defaultValue" must be an empty string when type is select, but you provided {#value}',
-  }),
   tolerances: Joi.array().empty().required(),
   options: Joi.array()
     .items(
