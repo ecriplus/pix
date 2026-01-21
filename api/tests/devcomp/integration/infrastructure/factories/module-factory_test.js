@@ -1206,7 +1206,6 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             display: 'inline',
                             placeholder: '',
                             ariaLabel: 'Réponse 1',
-                            defaultValue: '',
                             tolerances: ['t1'],
                             solutions: ['@'],
                           },
@@ -1216,7 +1215,6 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             display: 'inline',
                             placeholder: '',
                             ariaLabel: 'Réponse 2',
-                            defaultValue: '',
                             tolerances: [],
                             options: [
                               {
@@ -2164,7 +2162,6 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                                   display: 'inline',
                                   placeholder: '',
                                   ariaLabel: 'Mot à trouver',
-                                  defaultValue: '',
                                   tolerances: ['t1', 't3'],
                                   solutions: ['Groupement'],
                                 },
@@ -2180,7 +2177,6 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                                   display: 'inline',
                                   placeholder: '',
                                   ariaLabel: 'Année à trouver',
-                                  defaultValue: '',
                                   tolerances: [],
                                   solutions: ['2016'],
                                 },

@@ -626,7 +626,6 @@
                     "display": "inline",
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -652,7 +651,6 @@
                     "display": "inline",
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {

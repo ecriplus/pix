@@ -11,7 +11,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
         display: 'inline',
         placeholder: 'a placeholder',
         ariaLabel: 'Réponse 1',
-        defaultValue: 'default',
         tolerances: ['t1'],
         options: [Symbol('option')],
         solutions: ['@'],
@@ -26,7 +25,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
       expect(select.display).to.equal(constructor.display);
       expect(select.placeholder).to.equal(constructor.placeholder);
       expect(select.ariaLabel).to.equal(constructor.ariaLabel);
-      expect(select.defaultValue).to.equal(constructor.defaultValue);
       expect(select.tolerances).to.equal(constructor.tolerances);
       expect(select.options).to.equal(constructor.options);
       expect(select.solutions).to.equal(constructor.solutions);
@@ -79,25 +77,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
     });
   });
 
-  describe('If defaultValue is missing', function () {
-    it('should throw an error', function () {
-      // when
-      const error = catchErrSync(
-        () =>
-          new BlockSelect({
-            input: 'symbole',
-            display: 'inline',
-            placeholder: 'a placeholder',
-            ariaLabel: 'Réponse 1',
-          }),
-      )();
-
-      // then
-      expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal('The default value is required for a select block');
-    });
-  });
-
   describe('If tolerances are missing', function () {
     it('should throw an error', function () {
       // when
@@ -108,7 +87,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
             display: 'inline',
             placeholder: 'a placeholder',
             ariaLabel: 'Réponse 1',
-            defaultValue: 'default',
           }),
       )();
 
@@ -128,7 +106,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
             display: 'inline',
             placeholder: 'a placeholder',
             ariaLabel: 'Réponse 1',
-            defaultValue: 'default',
             tolerances: ['t1'],
           }),
       )();
@@ -149,7 +126,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockSelect', function () {
             display: 'inline',
             placeholder: 'a placeholder',
             ariaLabel: 'Réponse 1',
-            defaultValue: 'default',
             tolerances: ['t1'],
             options: [Symbol('option')],
           }),

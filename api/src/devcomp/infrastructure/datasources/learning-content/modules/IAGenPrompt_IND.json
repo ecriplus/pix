@@ -617,7 +617,6 @@
                     "display": "inline",
                     "placeholder": "Nom du gymnase",
                     "ariaLabel": "Nom du gymnase",
-                    "defaultValue": "",
                     "tolerances": ["t1", "t2", "t3"],
                     "solutions": [
                       "Le gymnase des 3 sapins",

@@ -469,7 +469,6 @@
                     "display": "inline",
                     "placeholder": "- deux mots manquants -",
                     "ariaLabel": "deux mots",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -492,7 +491,6 @@
                     "display": "inline",
                     "placeholder": "- trois mots manquants -",
                     "ariaLabel": "trois mots manquants",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",

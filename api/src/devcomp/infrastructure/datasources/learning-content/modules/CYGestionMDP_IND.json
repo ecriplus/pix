@@ -143,7 +143,6 @@
                     "display": "inline",
                     "placeholder": "nombre de comptes",
                     "ariaLabel": "nombre de comptes",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       3
@@ -587,7 +586,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "nom du gestionnaire",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",

@@ -375,7 +375,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
               display: 'inline',
               placeholder: '',
               ariaLabel: "Remplir avec le caractère qui permet de séparer les deux parties d'une adresse mail",
-              defaultValue: '',
               tolerances: ['t1'],
               solutions: ['@'],
             },
@@ -389,7 +388,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
               display: 'block',
               placeholder: '',
               ariaLabel: "Choisir l'adjectif le plus adapté",
-              defaultValue: '',
               tolerances: [],
               options: [
                 {
@@ -621,7 +619,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         display: 'inline',
         placeholder: '<br> hello',
         ariaLabel: "Remplir avec le <span>caractère</span> qui permet de séparer les deux parties d'une adresse mail",
-        defaultValue: '<div>cassé</div>',
         tolerances: ['t1'],
         solutions: ['@'],
       };
@@ -630,7 +627,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         '"input" failed custom validation because HTML is not allowed in this field',
         '"placeholder" failed custom validation because HTML is not allowed in this field',
         '"ariaLabel" failed custom validation because HTML is not allowed in this field',
-        '"defaultValue" failed custom validation because HTML is not allowed in this field',
       ];
 
       try {
@@ -651,7 +647,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         display: 'block',
         placeholder: '<br> hello',
         ariaLabel: "Remplir avec le <span>caractère</span> qui permet de séparer les deux parties d'une adresse mail",
-        defaultValue: '-Sélectionner-',
         tolerances: [],
         options: [
           {
@@ -666,7 +661,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         '"input" failed custom validation because HTML is not allowed in this field',
         '"placeholder" failed custom validation because HTML is not allowed in this field',
         '"ariaLabel" failed custom validation because HTML is not allowed in this field',
-        '"defaultValue" must be an empty string when type is select, but you provided -Sélectionner-',
         '"options[0].content" failed custom validation because HTML is not allowed in this field',
       ];
 

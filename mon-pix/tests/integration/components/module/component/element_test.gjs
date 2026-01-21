@@ -340,7 +340,6 @@ module('Integration | Component | Module | Element', function (hooks) {
           size: 1,
           placeholder: '',
           ariaLabel: 'input-aria',
-          defaultValue: '',
           type: 'input',
         },
         {
@@ -349,7 +348,6 @@ module('Integration | Component | Module | Element', function (hooks) {
           display: 'inline',
           placeholder: '',
           ariaLabel: 'select-aria',
-          defaultValue: '',
           options: [
             {
               id: '1',

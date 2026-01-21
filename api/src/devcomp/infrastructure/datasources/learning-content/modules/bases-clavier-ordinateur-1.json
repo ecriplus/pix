@@ -314,7 +314,6 @@
                     "display": "inline",
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "cornichons"
@@ -332,7 +331,6 @@
                     "display": "inline",
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "vide"
@@ -634,7 +632,6 @@
                     "display": "inline",
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "céleri"
@@ -675,7 +672,6 @@
                     "display": "inline",
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "pastèque"
@@ -716,7 +712,6 @@
                     "display": "inline",
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "bac à glaçons"

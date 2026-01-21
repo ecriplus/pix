@@ -13,7 +13,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
         display: 'inline',
         placeholder: 'a placeholder',
         ariaLabel: 'Réponse 1',
-        defaultValue: 'default',
         tolerances: ['t1'],
         solutions: ['@'],
       };
@@ -29,7 +28,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       expect(input.display).to.equal(constructor.display);
       expect(input.placeholder).to.equal(constructor.placeholder);
       expect(input.ariaLabel).to.equal(constructor.ariaLabel);
-      expect(input.defaultValue).to.equal(constructor.defaultValue);
       expect(input.tolerances).to.equal(constructor.tolerances);
       expect(input.solutions).to.equal(constructor.solutions);
     });
@@ -105,27 +103,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
     });
   });
 
-  describe('If defaultValue is missing', function () {
-    it('should throw an error', function () {
-      // when
-      const error = catchErrSync(
-        () =>
-          new BlockInput({
-            input: 'symbole',
-            inputType: 'text',
-            size: 1,
-            display: 'inline',
-            placeholder: '',
-            ariaLabel: 'Réponse 1',
-          }),
-      )();
-
-      // then
-      expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal('The default value is required for an input block');
-    });
-  });
-
   describe('If tolerances are missing', function () {
     it('should throw an error', function () {
       // when
@@ -138,7 +115,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
             display: 'inline',
             placeholder: '',
             ariaLabel: 'Réponse 1',
-            defaultValue: '',
           }),
       )();
 
@@ -160,7 +136,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
             display: 'inline',
             placeholder: '',
             ariaLabel: 'Réponse 1',
-            defaultValue: '',
             tolerances: ['t1'],
           }),
       )();

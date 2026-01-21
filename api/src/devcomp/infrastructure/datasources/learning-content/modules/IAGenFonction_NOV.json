@@ -198,7 +198,6 @@
                           "display": "inline",
                           "placeholder": "votre mot",
                           "ariaLabel": "zone de saisie",
-                          "defaultValue": "",
                           "tolerances": [
                             "t1",
                             "t2",

@@ -937,7 +937,6 @@
                     "display": "block",
                     "placeholder": "champs à remplir",
                     "ariaLabel": "champs à remplir",
-                    "defaultValue": "",
                     "tolerances": [
                       "t1",
                       "t2",
@@ -1026,7 +1025,6 @@
                     "display": "block",
                     "placeholder": "champs à remplir",
                     "ariaLabel": "champs à remplir",
-                    "defaultValue": "champs à remplir",
                     "tolerances": [
                       "t1",
                       "t2",

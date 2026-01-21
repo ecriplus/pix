@@ -329,7 +329,6 @@ function getComponents() {
         display: 'inline',
         placeholder: '',
         ariaLabel: 'Adresse mail de Naomi',
-        defaultValue: '',
         tolerances: [],
         solutions: ['naomizao@yahoo.com', 'naomizao@yahoo.fr'],
       }),
@@ -338,7 +337,6 @@ function getComponents() {
         display: 'inline',
         placeholder: '',
         ariaLabel: 'Réponse 3',
-        defaultValue: '',
         tolerances: [],
         options: [
           new BlockSelectOption({
@@ -503,7 +501,6 @@ function getAttributesComponents() {
       },
       {
         ariaLabel: 'Adresse mail de Naomi',
-        defaultValue: '',
         display: 'inline',
         input: 'email',
         inputType: 'text',
@@ -515,7 +512,6 @@ function getAttributesComponents() {
       },
       {
         ariaLabel: 'Réponse 3',
-        defaultValue: '',
         display: 'inline',
         input: 'seconde-partie',
         options: [

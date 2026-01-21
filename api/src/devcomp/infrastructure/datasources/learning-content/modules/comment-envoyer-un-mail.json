@@ -389,7 +389,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "expéditeur mail",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -423,7 +422,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner - ",
                     "ariaLabel": "destinaire mail",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -457,7 +455,6 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "objet mail",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {

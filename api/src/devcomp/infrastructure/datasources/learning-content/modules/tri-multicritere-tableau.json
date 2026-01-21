@@ -338,7 +338,6 @@
                     "display": "inline",
                     "placeholder": "prénom",
                     "ariaLabel": "écrivez le prénom ici",
-                    "defaultValue": "",
                     "tolerances": [
                       "t3"
                     ],
@@ -358,7 +357,6 @@
                     "display": "inline",
                     "placeholder": "lot",
                     "ariaLabel": "écrivez le lot ici",
-                    "defaultValue": "",
                     "tolerances": [
                       "t3"
                     ],
@@ -541,7 +539,6 @@
                     "display": "inline",
                     "placeholder": "prénom",
                     "ariaLabel": "écrivez ici le prénom",
-                    "defaultValue": "",
                     "tolerances": [
                       "t3"
                     ],
@@ -561,7 +558,6 @@
                     "display": "inline",
                     "placeholder": "trésor",
                     "ariaLabel": "écrivez ici le contenu du trésor",
-                    "defaultValue": "",
                     "tolerances": [
                       "t3"
                     ],

@@ -816,7 +816,6 @@
                     "display": "inline",
                     "placeholder": "taper ici",
                     "ariaLabel": "taper le mot de passe ici",
-                    "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
                       "Ls,jbdlsadcem3t!",

@@ -359,7 +359,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "choisir le mot dans le menu déroulant",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -389,7 +388,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "choisir le mot dans le menu déroulant",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
@@ -419,7 +417,6 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "choisir le mot dans le menu déroulant",
-                    "defaultValue": "",
                     "tolerances": [],
                     "options": [
                       {
