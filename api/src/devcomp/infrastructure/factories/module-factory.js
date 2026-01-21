@@ -1,7 +1,6 @@
 import { getAssetInfos } from '../../../shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { ModuleInstantiationError } from '../../domain/errors.js';
-import { Audio } from '../../domain/models/element/Audio.js';
 import { BlockInput } from '../../domain/models/block/BlockInput.js';
 import { BlockSelect } from '../../domain/models/block/BlockSelect.js';
 import { BlockSelectOption } from '../../domain/models/block/BlockSelectOption.js';
@@ -9,6 +8,7 @@ import { BlockText } from '../../domain/models/block/BlockText.js';
 import { ComponentElement } from '../../domain/models/component/ComponentElement.js';
 import { ComponentStepper } from '../../domain/models/component/ComponentStepper.js';
 import { Step } from '../../domain/models/component/Step.js';
+import { Audio } from '../../domain/models/element/Audio.js';
 import { CustomDraft } from '../../domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../domain/models/element/CustomElement.js';
 import { Download } from '../../domain/models/element/Download.js';

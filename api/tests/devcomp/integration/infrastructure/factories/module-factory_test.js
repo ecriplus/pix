@@ -1,7 +1,7 @@
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
-import { Audio } from '../../../../../src/devcomp/domain/models/element/Audio.js';
 import { ComponentStepper } from '../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js';
+import { Audio } from '../../../../../src/devcomp/domain/models/element/Audio.js';
 import { CustomDraft } from '../../../../../src/devcomp/domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../../../../src/devcomp/domain/models/element/CustomElement.js';
 import { Download } from '../../../../../src/devcomp/domain/models/element/Download.js';
