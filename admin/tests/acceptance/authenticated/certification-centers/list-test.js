@@ -37,7 +37,7 @@ module('Acceptance | Certification Centers | List', function (hooks) {
       const screen = await visit('/certification-centers/list');
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Centres de certifications' })).hasClass('active');
+      assert.dom(screen.getByRole('link', { name: 'Centres de certification' })).hasClass('active');
     });
 
     module('when filters are used', function (hooks) {

@@ -41,24 +41,14 @@ export default class Sidebar extends Component {
         <PixNavigationButton class="sidebar__link" @route="authenticated.users" @icon="infoUser">
           {{t "components.layout.sidebar.users"}}
         </PixNavigationButton>
-        <PixNavigationButton
-          class="sidebar__link"
-          @route="authenticated.certification-centers"
-          @icon="mapPin"
-          aria-label={{t "components.layout.sidebar.certification-centers-label"}}
-        >
+        <PixNavigationButton class="sidebar__link" @route="authenticated.certification-centers" @icon="mapPin">
           {{t "components.layout.sidebar.certification-centers"}}
         </PixNavigationButton>
         <PixNavigationButton class="sidebar__link" @route="authenticated.sessions" @icon="session">
           {{t "components.layout.sidebar.sessions"}}
         </PixNavigationButton>
 
-        <PixNavigationButton
-          class="sidebar__link"
-          @route="authenticated.certification-frameworks"
-          @icon="extension"
-          aria-label={{t "components.layout.sidebar.certification-frameworks-label"}}
-        >
+        <PixNavigationButton class="sidebar__link" @route="authenticated.certification-frameworks" @icon="extension">
           {{t "components.layout.sidebar.certification-frameworks"}}
         </PixNavigationButton>
         {{#if this.accessControl.hasAccessToTargetProfilesActionsScope}}
