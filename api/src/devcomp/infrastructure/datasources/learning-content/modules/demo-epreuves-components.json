@@ -962,34 +962,7 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "phishing-message",
-                "props": {
-                  "messages": [
-                    {
-                      "senderName": "info ANTAI",
-                      "content": "Hello, la forme ? Tu as fais une petite infraction. \n Peux-tu me donner un peu d'argent pour que je t'oublie ?",
-                      "title": "Retard de paiement : ",
-                      "goodFeelings": ["fear", "emergency"],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.",
-                      "loose": "Eh non ! Avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence."
-                    },
-                    {
-                      "senderName": "info ANTAI 2",
-                      "content": "Azy donne ta thune, là ! TOUSUITE !",
-                      "title": "Retard de paiement : ",
-                      "goodFeelings": ["hope"],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue.",
-                      "loose": "Eh non ! Avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue."
-                    },
-                    {
-                      "senderName": "info ANTAI 3",
-                      "content": "Azy re-donne ta thune, là ! TOUSUITE !",
-                      "title": "Retard de paiement : ",
-                      "goodFeelings": ["fear", "emergency"],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.",
-                      "loose": " Eh non, avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger."
-                    }
-                  ]
-                }
+                "props": {}
               }
             }
           ]

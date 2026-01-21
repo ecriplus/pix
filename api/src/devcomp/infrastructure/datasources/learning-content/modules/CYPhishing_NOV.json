@@ -408,43 +408,7 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "phishing-message",
-                "props": {
-                  "titleLevel": 0,
-                  "messages": [
-                    {
-                      "senderName": " Info ANTAI",
-                      "content": "Amende impayée de 35€.  Consultez votre dossier ANTAI avant majoration via : dossier-amende-gouv.antai",
-                      "title": "Retard de paiement : ",
-                      "goodFeelings": [
-                        "fear",
-                        "emergency"
-                      ],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence. ",
-                      "loose": "En réalité, avec ce message, l’escroc veut que vous ressentiez de la peur et un sentiment d’urgence. "
-                    },
-                    {
-                      "senderName": "IMPOT",
-                      "content": "Vous avez un remboursement disponible de 826€.  Référence 125489 : accédez à votre formulaire de remboursement impot.gouv-remboursement.nt",
-                      "title": "Remboursement disponible :",
-                      "goodFeelings": [
-                        "hope"
-                      ],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue. ",
-                      "loose": "En réalité, avec ce message, l’escroc veut que vous ressentiez de l’espoir : recevoir une somme d’argent inattendue. "
-                    },
-                    {
-                      "senderName": " +33789542312",
-                      "content": "Salut, c'est ta cousine, j'ai besoin de ton aide, je suis coincée à l'étranger et j'ai perdu mes papiers.  Pour pouvoir rentrer, j'ai besoin que tu m'envoies 300€ ici : dT23.bitly.com Il n'y a que toi qui peut m'aider !",
-                      "title": "Un service à te demander",
-                      "goodFeelings": [
-                        "fear",
-                        "emergency"
-                      ],
-                      "victory": "Effectivement, avec ce message, l’escroc veut que vous ressentiez un sentiment de peur et d’urgence pour cette cousine bloquée à l’étranger. ",
-                      "loose": "En réalité avec ce message, l’escroc veut que vous ressentiez un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger. "
-                    }
-                  ]
-                }
+                "props": {}
               }
             }
           ]
