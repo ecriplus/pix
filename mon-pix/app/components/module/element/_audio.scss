@@ -1,0 +1,15 @@
+.element-audio{
+  &__container {
+    padding: var(--pix-spacing-4x);
+    border: 1px solid var(--pix-neutral-100);
+    border-radius: 8px;
+
+    &__title {
+      margin: var(--pix-spacing-3x) 0;
+    }
+  }
+}
+
+.pix-audio-player {
+  width: 100%;
+}
