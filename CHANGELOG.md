@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.309.0](https://github.com/1024pix/pix/compare/v5.308.1...v5.309.0) (2026-01-21)
+
+### :rocket: Amélioration
+
+- [#14784](https://github.com/1024pix/pix/pull/14784) Créer un élément Audio pour Modulix dans l'API (PIX-20534) 
+- [#14764](https://github.com/1024pix/pix/pull/14764) MDX-32 modification consigne datacenter_nov 
+- [#14809](https://github.com/1024pix/pix/pull/14809) Update IAGenBiais_NOV.json - bandeau beta off 
+
+### :building_construction: Tech
+
+- [#14701](https://github.com/1024pix/pix/pull/14701) Ajout de tests Playwright non intégrés dans la pipeline CI/CD pour de la recette certification (PIX-21047) 
+- [#14814](https://github.com/1024pix/pix/pull/14814) Ajouter du log sur le script des anonymisation des participations supprimées (PIX-21167). 
+- [#14772](https://github.com/1024pix/pix/pull/14772) Ne pas avoir des équipes en charge en double dans les seeds (PIX-20803) 
+- [#14770](https://github.com/1024pix/pix/pull/14770) Supprimer la variable d'env LATEST_CERTIFICATION_CALIBRATION_DATE (PIX-20642). 
+
+### :arrow_up: Montée de version
+
+- [#14795](https://github.com/1024pix/pix/pull/14795) Update dependency @1024pix/pix-ui to v57 (admin)
+
 ## [5.308.1](https://github.com/1024pix/pix/compare/v5.308.0...v5.308.1) (2026-01-20)
 
 ### :bug: Correction
