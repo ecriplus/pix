@@ -86,17 +86,4 @@ describe('Unit | Devcomp | Domain | Models | Element | ShortVideo', function () 
       expect(error.message).to.equal('The short video URL must be from "assets.pix.org"');
     });
   });
-
-  describe('A short video without a transcription', function () {
-    it('should throw an error', function () {
-      // when
-      const error = catchErrSync(
-        () => new ShortVideo({ id: 'id', title: 'title', url: 'http://assets.pix.org/modules/short-video.mp4' }),
-      )();
-
-      // then
-      expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal('The transcription is required for a short video');
-    });
-  });
 });

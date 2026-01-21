@@ -10,7 +10,6 @@ class ShortVideo extends Element {
 
     assertNotNullOrUndefined(title, 'The title is required for a short video');
     assertNotNullOrUndefined(url, 'The URL is required for a short video');
-    assertNotNullOrUndefined(transcription, 'The transcription is required for a short video');
 
     if (!URL.canParse(url)) {
       throw new DomainError('The URL must be a valid URL for a short video');
