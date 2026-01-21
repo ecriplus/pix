@@ -56,9 +56,6 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
     },
     getOptions: (error) => ({ remainingAttempts: error.meta?.remainingAttempts, htmlSafe: true }),
   },
-  PIX_ORGA_ACCESS_NOT_ALLOWED: {
-    i18nKey: 'pages.login-form.errors.access-not-allowed',
-  },
   USER_HAS_NO_ORGANIZATION_MEMBERSHIP: {
     i18nKey: 'pages.login-form.errors.access-not-allowed',
   },
