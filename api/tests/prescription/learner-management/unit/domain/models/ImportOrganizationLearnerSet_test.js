@@ -83,7 +83,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
               },
               {
                 name: 'category',
-                config: { mappingColumn: 'group' },
+                config: { mappingColumn: 'group', mappingValues: { Solo: 'PreviousMappedValue_SOLO' } },
               },
               {
                 name: 'TonNomCommun',
@@ -114,7 +114,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
             lastName: 'Katana',
             organizationId,
             "nom d'usage": 'Yolo',
-            group: 'Solo',
+            group: 'PreviousMappedValue_SOLO',
           }),
         ]);
       });
@@ -159,7 +159,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
         expect(learners.list).lengthOf(1);
       });
 
-      it('map new learner into previous config', function () {
+      it('updates existing learner into previous config', function () {
         const importFormat = {
           config: {
             unicityColumns: ['prénom'],
@@ -174,7 +174,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
               },
               {
                 name: 'category',
-                config: { mappingColumn: 'group' },
+                config: { mappingColumn: 'group', mappingValues: { Solo: 'PreviousMappedValue_SOLO' } },
               },
               {
                 name: 'TonNomCommun',

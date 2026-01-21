@@ -104,7 +104,12 @@ class ImportOrganizationLearnerSet {
     const learnerAttributes = { organizationId: this.#organizationId };
 
     this.#columnMapping.forEach((column) => {
-      const value = learner[column.name];
+      let value = learner[column.name];
+
+      if (column.config?.mappingValues && column.config.mappingValues[value]) {
+        value = column.config.mappingValues[value];
+      }
+
       if (column.config?.property) {
         learnerAttributes[column.config.property] = value;
       } else {
