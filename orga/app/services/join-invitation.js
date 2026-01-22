@@ -35,7 +35,6 @@ export default class JoinInvitationService extends Service {
     }
   }
 
-  /** Accepts an invitation from a userId. */
   async acceptInvitationByUserId(userId) {
     if (!this.invitation) return;
 
