@@ -137,24 +137,29 @@ export class OidcAuthenticationService {
     }
   }
 
-  createAccessToken({ userId, audience }) {
-    return jsonwebtoken.sign(
-      { user_id: userId, aud: audience },
-      config.authentication.secret,
-      this.accessTokenJwtOptions,
-    );
-  }
+  getAuthorizationUrl() {
+    try {
+      const state = randomUUID();
+      const nonce = randomUUID();
+      const parameters = {
+        nonce,
+        redirect_uri: this.redirectUri,
+        scope: this.scope,
+        state,
+        ...this.extraAuthorizationUrlParameters,
+      };
 
-  async saveIdToken({ idToken, userId }) {
-    const uuid = randomUUID();
+      const redirectTarget = this.#openidClient.buildAuthorizationUrl(this.#openidClientConfig, parameters);
 
-    await this.sessionTemporaryStorage.save({
-      key: `${userId}:${uuid}`,
-      value: idToken,
-      expirationDelaySeconds: this.sessionDurationSeconds,
-    });
-
-    return uuid;
+      return { redirectTarget, state, nonce };
+    } catch (error) {
+      _monitorOidcError(error.message, {
+        data: { organizationName: this.organizationName },
+        error,
+        event: 'generate-authorization-url',
+      });
+      throw new OidcError({ message: error.message });
+    }
   }
 
   async exchangeCodeForTokens({ code, state, iss, nonce, sessionState }) {
@@ -189,29 +194,24 @@ export class OidcAuthenticationService {
     }
   }
 
-  getAuthorizationUrl() {
-    try {
-      const state = randomUUID();
-      const nonce = randomUUID();
-      const parameters = {
-        nonce,
-        redirect_uri: this.redirectUri,
-        scope: this.scope,
-        state,
-        ...this.extraAuthorizationUrlParameters,
-      };
+  createAccessToken({ userId, audience }) {
+    return jsonwebtoken.sign(
+      { user_id: userId, aud: audience },
+      config.authentication.secret,
+      this.accessTokenJwtOptions,
+    );
+  }
 
-      const redirectTarget = this.#openidClient.buildAuthorizationUrl(this.#openidClientConfig, parameters);
+  async saveIdToken({ idToken, userId }) {
+    const uuid = randomUUID();
 
-      return { redirectTarget, state, nonce };
-    } catch (error) {
-      _monitorOidcError(error.message, {
-        data: { organizationName: this.organizationName },
-        error,
-        event: 'generate-authorization-url',
-      });
-      throw new OidcError({ message: error.message });
-    }
+    await this.sessionTemporaryStorage.save({
+      key: `${userId}:${uuid}`,
+      value: idToken,
+      expirationDelaySeconds: this.sessionDurationSeconds,
+    });
+
+    return uuid;
   }
 
   async getUserInfo({ idToken, accessToken }) {
