@@ -1,5 +1,47 @@
 # Pix Changelog
 
+# [5.310.0](https://github.com/1024pix/pix/compare/v5.309.0...v5.310.0) (2026-01-22)
+
+### :rocket: Amélioration
+
+- [#14813](https://github.com/1024pix/pix/pull/14813) Ajout de l'élément Audio pour Modulix coté front (PIX-21110) 
+- [#14707](https://github.com/1024pix/pix/pull/14707) Ajuster les tailles de textes et les marges sur les modules (PIX-21076) 
+- [#14807](https://github.com/1024pix/pix/pull/14807) Le champ transcription de short-video devient facultatif (PIX-21139) 
+- [#14818](https://github.com/1024pix/pix/pull/14818) MDX-11 #IAGen_Impact_NOV Changer "finlandais" en "suédois" dans qcu-stepper découverte 
+- [#14824](https://github.com/1024pix/pix/pull/14824) MDX-13 IADefinition_NOV intégration relecture JRO 
+- [#14696](https://github.com/1024pix/pix/pull/14696) MDX-18 modifications suite panels 
+- [#14846](https://github.com/1024pix/pix/pull/14846) MDX-32 modification NR_Datacenter_NOV changement de virgule 
+- [#14838](https://github.com/1024pix/pix/pull/14838) Module CY MFA NOV - relectures 1 
+- [#14816](https://github.com/1024pix/pix/pull/14816) Supprimer les valeurs par défaut pour les inputs et les selects des QROCM (PIX-21150) 
+- [#14836](https://github.com/1024pix/pix/pull/14836) Tmp iagenpromtind relecture jro 
+- [#14811](https://github.com/1024pix/pix/pull/14811) Tmp suppr modules alt newconfig 
+- [#14841](https://github.com/1024pix/pix/pull/14841) Update description IAGenBiais_IND.json 
+- [#14840](https://github.com/1024pix/pix/pull/14840) Update IAGenFonction_NOV.json 
+- [#14810](https://github.com/1024pix/pix/pull/14810) Update IAGenFonction_NOV.json - bandeau beta off 
+- [#14844](https://github.com/1024pix/pix/pull/14844) Update IAGenPrompt_IND.json - coquille 
+
+### :bug: Correction
+
+- [#14845](https://github.com/1024pix/pix/pull/14845) MDX-164 ia gen prompt nov retours jro 
+- [#14837](https://github.com/1024pix/pix/pull/14837) MDX-167 #IAInfox_NOV Retours JRO 
+
+### :building_construction: Tech
+
+- [#14748](https://github.com/1024pix/pix/pull/14748) Déplace la logique de filtres de la page organisations des profil cibles vers le composant 
+- [#14817](https://github.com/1024pix/pix/pull/14817) Éviter de les rééssais de toute la suite de test de l'API en cas d'erreur 
+- [#14823](https://github.com/1024pix/pix/pull/14823) Mettre à jour les snapshots des tests E2E suite aux changements effectués sur Nina 
+- [#14794](https://github.com/1024pix/pix/pull/14794) Review App pour tester la création en masse de parcours combiné (PIX-21093). 
+- [#14765](https://github.com/1024pix/pix/pull/14765) Séparer la gestion des autorisations de celle de l'authentification (PIX-21128) 
+
+### :arrow_up: Montée de version
+
+- [#14820](https://github.com/1024pix/pix/pull/14820) @1024pix/epreuves-components 2.6.0 
+- [#14826](https://github.com/1024pix/pix/pull/14826) Lock file maintenance (api) 
+- [#14827](https://github.com/1024pix/pix/pull/14827) Lock file maintenance (audit-logger) 
+- [#14819](https://github.com/1024pix/pix/pull/14819) Update dependency @1024pix/pix-ui to ^57.3.0 (admin) 
+
+### :coffee: Autre
+
 # [5.309.0](https://github.com/1024pix/pix/compare/v5.308.1...v5.309.0) (2026-01-21)
 
 ### :rocket: Amélioration
