@@ -11,9 +11,9 @@
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Repérer des biais ou des stéréotypes présents dans les contenus. </p>",
-      "<p>Expliquer comment une IA générative reproduit des biais présents dans les données de son entraînement.</p>",
-      "<p>Utiliser l’IA en étant vigilant sur ses propres biais, comme le biais de confirmation.</p>"
+      "<p>Repérer des biais ou des stéréotypes présents dans les contenus</p>",
+      "<p>Expliquer comment une IA générative reproduit des biais présents dans les données de son entraînement</p>",
+      "<p>Utiliser l’IA en étant vigilant sur ses propres biais, comme le biais de confirmation</p>"
     ],
     "tabletSupport": "comfortable"
   },
