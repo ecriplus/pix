@@ -1,7 +1,7 @@
 {
   "id": "8266f923-4255-46ba-97c5-61cbdbe18986",
   "shortId": "e71a9bdd",
-  "slug": "iagenethique",
+  "slug": "iagenethiquenov",
   "title": "Ce qu’il faut éviter de dire à une IA générative",
   "isBeta": true,
   "visibility": "public",
@@ -41,13 +41,13 @@
                       "userName": "Asmae",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Tu sais, je pense que quand tu as quelque chose à confier, le mieux est d’en parler à une IA. Elle ne risque pas de le répéter, et au moins elle ne te juge pas."
+                      "content": "J’utilise de plus en plus une IA générative pour réfléchir, écrire ou même parler des mes problèmes. Au fond, je me dis que c’est pratique : on peut tout lui dire, sans jugement."
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
+                      "content": "Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
                     },
                     {
                       "userName": "Asmae",
@@ -98,7 +98,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
-                "content": "<p>Consigne&nbsp;: Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</p>"
+                "content": "<p><strong>Lisez cet extrait des conditions d’utilisation de ChatGPT, puis répondez à la question pour interpréter ce qu’il signifie.</strong></p>"
               }
             },
             {
@@ -106,7 +106,7 @@
               "element": {
                 "id": "0599e61c-c78e-4018-841f-0ac051284bb7",
                 "type": "text",
-                "content": "<p>«<em> <strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services.&nbsp;»</em></p><p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
+                "content": "<blockquote>«&nbsp;<strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services. [...]&nbsp;Nous nous appuyons sur des systèmes automatisés et des contrôles humains pour identifier et traiter les contenus qui enfreignent nos Conditions, y compris nos Politiques d’utilisation.&nbsp;»</blockquote><p><em>Source&nbsp;: <a href=\"https://openai.com/fr-FR/policies/terms-of-use/\" target=\"_blank\">Conditions d’utilisation de ChatGPT</a><br></em><br></p>"
               }
             },
             {
@@ -160,7 +160,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises à d’autres autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
+                "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mes données peuvent-elles être transmises aux autorités ?</h5><p>Oui. Une entreprise d’IA peut être contrainte de les fournir à la justice ou aux services de renseignement d’un pays.</p>"
               }
             }
           ]
@@ -175,7 +175,7 @@
               "element": {
                 "id": "5f0b926f-aadb-4d87-a9d1-f95424766291",
                 "type": "text",
-                "content": "<p>Maintenant que nous savons que vos prompts sont conservés et pourquoi.&nbsp;Voyons ce qu’il ne vaut mieux éviter de mettre dans vos instructions.</p>"
+                "content": "<p>Maintenant que nous savons que vos prompts sont conservés et pourquoi.&nbsp;Voyons ce qu’il vaut mieux éviter de mettre dans vos instructions.</p>"
               }
             }
           ]
@@ -331,7 +331,7 @@
               "element": {
                 "id": "cdb5615e-b4b2-4c39-b3be-655db6596bac",
                 "type": "text",
-                "content": "<p>Vous connaissez maintenant les informations à ne pas partager. Voyons ce qui peut se passer si vous le faites.</p>"
+                "content": "Vous connaissez maintenant les informations à ne pas partager. Voyons quels effets cela peut produire lorsqu’on les confie malgré tout à une IA."
               }
             }
           ]
@@ -346,7 +346,7 @@
               "element": {
                 "id": "80ee8557-53ba-42e3-a7cf-ed977cac9a27",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Voici une discussion entre Sarah et Maëlle. Sarah remarque que l’IA a généré des informations qui ressemblent fortement à des informations réelles.",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
@@ -355,7 +355,7 @@
                       "userName": "Sarah",
                       "direction": "outgoing",
                       "type": "Texte + Image",
-                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à ChatPix de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
+                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
                         "alt": "Image draft"
@@ -611,8 +611,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   },
                   {
@@ -622,8 +622,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "B"
                   },
                   {
@@ -633,8 +633,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   },
                   {
@@ -644,8 +644,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "B"
                   },
                   {
@@ -655,8 +655,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
                     "solution": "A"
                   }
                 ],
@@ -670,18 +670,18 @@
         {
           "id": "42850024-2a3a-4e13-983d-ec4839ef6ca8",
           "type": "activity",
-          "title": "Activité : Le cas GitHub Copilot",
+          "title": "Activité : Quand une IA fait fuiter des données sensibles",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "935a2724-84d4-4cd0-b320-9a79ab743547",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Lisez attentivement l’article suivant, puis répondez à la question. Appuyez-vous sur l’exemple présenté pour identifier le risque évoqué.",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "💻 GitHub Copilot pointé du doigt pour des fuites de mots de passe",
+                  "title": "💻 Un logiciel d’IA générative pointé du doigt pour des fuites de mots de passe",
                   "author": "Rédaction Tech",
                   "date": "6 octobre 2025",
                   "paragraphs": [
@@ -746,7 +746,7 @@
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
                 "type": "text",
-                "content": "<p><strong>Le prompt suivant a été écrit par Ismaël.</strong></p>"
+                "content": "<p><strong>Le prompt suivant a été écrit par Nadia.</strong></p>"
               }
             },
             {
@@ -760,7 +760,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Fais une analyse de ces clients et propose un plan marketing adapté : <ul><li>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, téléphone : 06 39 98 33 45, e-mail : marie.dubois@pix.com <li> Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de l’ouest, téléphone : 04 65 71 68 37, e-mail : ahmed.ouali@pix.fr</ul>"
+                      "content": "Rédige un message au service client : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali et mon numéro de téléphone est le 06 39 98 44 77, je voudrai être rappellée."
                     }
                   ]
                 }
@@ -773,10 +773,28 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Corrige le prompt",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg7tpodh00001t01ygol69a8",
-                "instruction": "<p>Corrigez le prompt d’Ismaël jusqu’à obtenir une version qui décrit une situation générale, sans inclure de données personnelles, sensibles ou confidentielles. </p>",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmkgtl7mv00031w01zo9vqe14",
+                "instruction": "<p>Corrigez le prompt de Nadia jusqu’à obtenir une version qui décrit une situation générale, sans inclure de données personnelles, sensibles ou confidentielles. </p>",
                 "solution": "pix-llm-success",
                 "height": 600
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "250665b5-6504-420f-8cdd-f8c130583f7f",
+                "type": "expand",
+                "title": "Indice 1",
+                "content": "Ne mettez pas de noms, même fictifs, vous pouvez trouver une autre solution."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a492a9ab-6e17-4a3a-80ff-6acf299e1415",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "Avez-vous bien demandé à ChatPix de vous écrire un mail pour un service client ?&nbsp;"
               }
             }
           ]
