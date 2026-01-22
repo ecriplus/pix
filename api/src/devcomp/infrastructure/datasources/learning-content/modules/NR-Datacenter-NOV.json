@@ -341,7 +341,7 @@
               "element": {
                 "id": "af91e3cb-2dc1-42d4-95be-92e251c54c14",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après ce que vous venez de voir. Que se passe-t-il quand <strong>beaucoup de serveurs</strong> travaillent en même temps ?</p>",
+                "instruction": "<p>D’après ce que vous venez de voir, que se passe-t-il quand <strong>beaucoup de serveurs</strong> travaillent en même temps ?</p>",
                 "proposals": [
                   {
                     "id": "1",
