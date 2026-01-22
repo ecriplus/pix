@@ -71,7 +71,7 @@ buildComplementaryCertification.pixEdu1erDegre = function ({
   minimumReproducibilityRateLowerLevel = 60,
   hasExternalJury = true,
   certificationExtraTime = 45,
-}) {
+} = {}) {
   return buildComplementaryCertification({
     id,
     label: 'Pix+ Édu 1er degré',
@@ -90,7 +90,7 @@ buildComplementaryCertification.pixEdu2ndDegre = function ({
   minimumReproducibilityRateLowerLevel = 60,
   hasExternalJury = true,
   certificationExtraTime = 45,
-}) {
+} = {}) {
   return buildComplementaryCertification({
     id,
     label: 'Pix+ Édu 2nd degré',
