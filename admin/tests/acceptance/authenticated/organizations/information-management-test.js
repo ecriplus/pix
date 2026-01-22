@@ -210,6 +210,39 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           assert.dom(screen.getByText('Archivée le 02/02/2022 par Clément Tine.')).exists();
         });
 
+        module('when organization has at least one active places lot', function () {
+          test('should display an error notification', async function (assert) {
+            // given
+            const organization = this.server.create('organization', {
+              name: 'Aude Javel Company',
+            });
+            this.server.post(
+              '/admin/organizations/:id/archive',
+              () => ({
+                errors: [
+                  {
+                    code: 'ARCHIVE_ORGANIZATION_ERROR',
+                    status: '422',
+                  },
+                ],
+              }),
+              422,
+            );
+            const screen = await visit(`/organizations/${organization.id}`);
+            await clickByName("Archiver l'organisation");
+
+            await screen.findByRole('dialog');
+            // when
+            await clickByName('Confirmer');
+
+            // then
+            assert
+              .dom(screen.getByText("Impossible d'archiver une organisation ayant au moins 1 lot de places actif."))
+              .exists();
+            assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
+          });
+        });
+
         test('should display error notification when archiving was not successful', async function (assert) {
           // given
           const organization = this.server.create('organization', {
