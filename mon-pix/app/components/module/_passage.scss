@@ -26,12 +26,12 @@
   &__title {
     @extend %pix-title-m;
 
-    margin: var(--pix-spacing-12x) var(--pix-spacing-2x);
+    margin: var(--pix-spacing-8x) 0;
     text-align: center;
   }
 
   &__content {
-    --modulix-grains-gap: 56px;
+    --modulix-grains-gap: var(--pix-spacing-8x);
 
     display: flex;
     flex-direction: column;
