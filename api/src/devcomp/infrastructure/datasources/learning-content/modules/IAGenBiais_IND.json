@@ -7,13 +7,13 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenBiais_IND/picto_moduleIA_biais.svg",
-    "description": "<p>Les productions des logiciels d’IA génératives contiennent parfois des maladresses. Ce ne sont pas toujours des erreurs, mais des raccourcis, des stéréotypes ou des discriminations.  On dit que ces résultats comportent des biais. </p><p>Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.<br></p>",
+    "description": "<p>Les productions des logiciels d’IA générative contiennent parfois des maladresses. Ce ne sont pas toujours des erreurs, mais des raccourcis, des stéréotypes ou des discriminations.  On dit que ces productions comportent des biais. </p><p>Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.<br></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Repérer des biais ou des stéréotypes présents dans les contenus. </p>",
-      "<p>Expliquer comment une IA générative reproduit les biais présents dans les données de son entraînement.</p>",
-      "<p>Utiliser l’IA en étant vigilant sur ses propres biais, comme le biais de confirmation.</p>"
+      "<p>Repérer des biais ou des stéréotypes présents dans les contenus</p>",
+      "<p>Expliquer comment une IA générative reproduit des biais présents dans les données de son entraînement</p>",
+      "<p>Utiliser l’IA en étant vigilant sur ses propres biais, comme le biais de confirmation</p>"
     ],
     "tabletSupport": "comfortable"
   },
