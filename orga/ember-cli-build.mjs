@@ -40,6 +40,10 @@ export default function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
   return compatBuild(app, Webpack, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    staticModifiers: true,
+    staticEmberSource: true,
     packagerOptions: {
       webpackConfig: {
         devtool: sourceMapConfig[process.env.CI ? 'test' : (process.env.NODE_ENV ?? 'default')],
