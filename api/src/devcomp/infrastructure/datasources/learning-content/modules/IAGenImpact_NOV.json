@@ -97,7 +97,7 @@
               "element": {
                 "id": "fdf4e875-c31c-4637-b9e1-62a9b77046e7",
                 "type": "text",
-                "content": "<p>Même avec un smartphone basique, ou un ordinateur peu puissant, on peut obtenir des réponses à beaucoup de nos demandes grâce à l’IA. </p><p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ? <br></p>"
+                "content": "<p>Même avec un smartphone basique, ou un ordinateur peu puissant, on peut obtenir des réponses à beaucoup de nos demandes grâce à l’IA. </p><p>Que se passe-t-il quand on fait une requête à un logiciel d’IA générative (une instruction envoyée pour obtenir une réponse) ?</p>"
               }
             }
           ]
@@ -112,7 +112,7 @@
               "element": {
                 "id": "926790dc-f2f3-43bf-a6d4-d20f3b39c5cb",
                 "type": "text",
-                "content": "<p> Découvrez <strong>le trajet d‘une demande</strong> à un logiciel d‘IA générative en ligne.</p>"
+                "content": "<p> Observez ce qu’il se passe lorsque Enzo fait une requête à un logiciel d’IA générative.</p>"
               }
             },
             {
@@ -126,12 +126,12 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Enzo écrit et envoie sa demande au logiciel d‘IA générative en ligne.",
+                      "title": "Enzo écrit et envoie sa requête au logiciel d‘IA générative en ligne.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape1.png",
-                        "alt": "Enzo rédige et envoie sa demande au logiciel d‘IA générative."
+                        "alt": "Enzo rédige et envoie sa requête au logiciel d‘IA générative."
                       },
                       "license": {
                         "name": "",
@@ -140,12 +140,12 @@
                       }
                     },
                     {
-                      "title": "La demande est envoyée sur le réseau WiFi jusqu‘à sa box.",
+                      "title": "La requête est envoyée sur le réseau WiFi jusqu‘à sa box.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape2.png",
-                        "alt": "La demande est envoyée sur le réseau WiFi jusqu‘à sa box."
+                        "alt": "La requête est envoyée sur le réseau WiFi jusqu‘à sa box."
                       },
                       "license": {
                         "name": "",
@@ -154,12 +154,12 @@
                       }
                     },
                     {
-                      "title": "La demande d‘Enzo voyage sur le réseau internet mondial.",
+                      "title": "La requête d‘Enzo voyage sur le réseau internet mondial.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape3.png",
-                        "alt": "La demande d‘Enzo voyage sur le réseau internet mondial."
+                        "alt": "La requête d‘Enzo voyage sur le réseau internet mondial."
                       },
                       "license": {
                         "name": "",
@@ -168,12 +168,12 @@
                       }
                     },
                     {
-                      "title": "La demande d’Enzo parvient à un centre de données.",
+                      "title": "La requête d’Enzo parvient à un centre de données.",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape4.png",
-                        "alt": "La demande d’Enzo parvient à un centre de données."
+                        "alt": "La requête d’Enzo parvient à un centre de données."
                       },
                       "license": {
                         "name": "",
@@ -182,12 +182,12 @@
                       }
                     },
                     {
-                      "title": "La demande est envoyée à l’ordinateur très puissant qui fait fonctionner l’IA générative. ",
+                      "title": "La requête est envoyée à l’ordinateur très puissant qui fait fonctionner l’IA générative. ",
                       "description": "",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-voyage/etape5.png",
-                        "alt": "La demande est envoyée à l’ordinateur très puissant qui fait fonctionner l’IA générative. "
+                        "alt": "La requête est envoyée à l’ordinateur très puissant qui fait fonctionner l’IA générative. "
                       },
                       "license": {
                         "name": "",
@@ -277,7 +277,7 @@
               "element": {
                 "id": "6a585a2a-9d17-4307-befd-906559ec80b1",
                 "type": "qcu-discovery",
-                "instruction": "<p>Lorsqu’on fait une demande à un logiciel d’IA générative en ligne, la réponse est calculée&nbsp;:</p>",
+                "instruction": "<p>Lorsqu’on fait une requête à un logiciel d’IA générative en ligne, la réponse est calculée&nbsp;:</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -411,12 +411,12 @@
                       }
                     },
                     {
-                      "title": "Elle est transmise à des ordinateurs très puissants spécialisés pour l‘IA.",
+                      "title": "Elle est transmise à des ordinateurs très puissants spécialisés dans l‘IA.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel2.png",
-                        "alt": "Elle est transmise à des ordinateurs très puissants spécialisés pour l‘IA."
+                        "alt": "Elle est transmise à des ordinateurs très puissants spécialisés dans l‘IA."
                       },
                       "license": {
                         "name": "",
@@ -609,14 +609,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "<p>Oui.</p>",
                           "feedback": {
                             "diagnosis": "<p>En effet !</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le centre de données peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "<p>Non.</p>",
                           "feedback": {
                             "diagnosis": "<p>En fait, si.</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le centre de données peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
@@ -638,27 +638,27 @@
                     {
                       "id": "541dc2cc-dd98-43cd-ba10-a81adb041750",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Si on envoie <strong> 25 000 demandes</strong> de <strong>création de dessin</strong>, le centre de données peut-il les traiter ?</p>",
+                      "instruction": "<p>Si on envoie <strong> 25&nbsp;000 demandes</strong> de <strong>création de dessin</strong>, le centre de données peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "<p>Oui.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25&nbsp;000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "<p>Non.</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25&nbsp;000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le centre de données ne peut pas créer 25&nbsp;000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25&nbsp;000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -675,14 +675,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "<p>Oui.</p>",
                           "feedback": {
                             "diagnosis": "<p>En effet !</p><p>Le <strong>centre de données</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "<p>Non.</p>",
                           "feedback": {
                             "diagnosis": "<p>En fait, si.</p><p>Le <strong>centre de données</strong> a une capacité de calcul suffisante pour <strong>créer des dizaines de milliers de textes</strong> en même temps.</p>"
                           }
@@ -946,7 +946,7 @@
                     {
                       "id": "4744f347-e7e6-48c7-a443-4cea2bb9dfd0",
                       "type": "text",
-                      "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul>"
+                      "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les requêtes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul>"
                     }
                   ]
                 },
@@ -979,7 +979,7 @@
               "element": {
                 "id": "d705c485-ea6d-4109-a7c7-b236684b8330",
                 "type": "text",
-                "content": "<ul>    <li>Chaque <strong>question </strong>posée à une <strong>IA</strong> <strong>générative </strong>demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres requêtes</strong>.</li>    <li>Ces calculs sont effectués par des <strong>ordinateurs très puissants</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> <strong>et d’eau</strong> pour leur refroidissement.</li>    <li>Les <strong>demandes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie&nbsp;</strong>que les demandes de texte.</li><li>On peut <strong>réduire la consommation</strong> <strong>d’énergie </strong><strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
+                "content": "<ul>    <li>Chaque <strong>question </strong>posée à une <strong>IA</strong> <strong>générative </strong>demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres requêtes</strong>.</li>    <li>Ces calculs sont effectués par des <strong>ordinateurs très puissants</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> <strong>et d’eau</strong> pour leur refroidissement.</li>    <li>Les <strong>requêtes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie&nbsp;</strong>que les requêtes de texte.</li><li>On peut <strong>réduire la consommation</strong> <strong>d’énergie </strong><strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
               }
             }
           ]
@@ -1041,7 +1041,7 @@
                   },
                   {
                     "id": "e30055c9-16ef-4c03-a78e-d531edb9062b",
-                    "text": "Pour répondre à une demande, l’IA effectue un grand nombre de calculs.",
+                    "text": "Pour répondre à une requête, l’IA effectue un grand nombre de calculs.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1136,7 +1136,7 @@
                     "content": "<p>Créer&nbsp;<strong>une</strong> <strong>vidéo de 15 secondes</strong>.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse ! 🎉</p>",
-                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>, et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
+                      "diagnosis": "<p>Tout à fait, c’est bien la création de vidéo qui demande le plus de <strong>puissance de calcul</strong>, et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
                     }
                   },
                   {
@@ -1188,14 +1188,14 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Limiter les demandes lourdes comme les images ou les vidéos quand ce n’est pas indispensable.</p>",
+                    "content": "<p>Limiter les requêtes lourdes comme les images ou les vidéos quand ce n’est pas indispensable.</p>",
                     "feedback": {
                       "diagnosis": "<p>Très bon choix ! Limiter les requêtes lourdes est un geste efficace pour économiser de l’énergie. Et bien sûr, les autres propositions vont aussi dans le bon sens.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Avoir des demandes précises au logiciel d’IA générative pour éviter des demandes répétées.</p>",
+                    "content": "<p>Faire des requêtes précises au logiciel d’IA générative pour éviter des demandes répétées.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bonne idée ! Regrouper vos requêtes permet vraiment d’éviter des calculs inutiles. Les autres actions proposées sont tout aussi utiles pour réduire la consommation globale.</p>"
                     }
