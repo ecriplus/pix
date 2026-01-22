@@ -183,7 +183,7 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
-                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.<code><br>« Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du ... »</code></p>"
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.<code><br>« Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du&nbsp;...&nbsp;»</code></p>"
                     },
                     {
                       "id": "5aef88e6-f410-4636-b0e6-aa3eee7d2280",
