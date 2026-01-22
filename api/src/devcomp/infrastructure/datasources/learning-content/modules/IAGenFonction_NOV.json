@@ -142,7 +142,7 @@
               "element": {
                 "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
                 "type": "text",
-                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine…).</p>"
+                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine, etc.).</p>"
               }
             },
             {
@@ -183,7 +183,7 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
-                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p><code>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du ...\"</code></p>"
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.<code><br>« Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du ... »</code></p>"
                     },
                     {
                       "id": "5aef88e6-f410-4636-b0e6-aa3eee7d2280",
@@ -239,21 +239,21 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Un mot au hasard.</p>",
+                          "content": "<p>J'ai choisi un mot au hasard.</p>",
                           "feedback": {
                             "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p>Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables<strong> selon le contexte de la conversation.</strong></p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Un mot très probable.</p>",
+                          "content": "<p>J'ai choisi un mot très probable.</p>",
                           "feedback": {
                             "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p>Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong></p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Un mot que je préfère.</p>",
+                          "content": "<p>J'ai choisi un mot que je préfère.</p>",
                           "feedback": {
                             "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n’êtes pas une IA. </p><p> Un logiciel d’IA générative lui, utilise toujours la même méthode&nbsp;: ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong><br></p>"
                           }
@@ -636,7 +636,7 @@
                     "content": "<p>Un programme qui connaît&nbsp;à l’avance toutes les réponses aux questions des utilisateurs.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Contrairement à une FAQ classique, avec un logiciel d’IA générative, pas besoin de programmer à l’avance toutes les questions que vont poser les utilisateurs.</p>"
+                      "diagnosis": "<p>Contrairement à une foire aux questions (FAQ) classique, avec un logiciel d’IA générative, pas besoin de programmer à l’avance toutes les questions que vont poser les utilisateurs.</p>"
                     }
                   },
                   {
@@ -755,7 +755,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres…).</p>",
+                    "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres, etc.).</p>",
                     "feedback": {
                       "diagnosis": "<p><strong>Oui, c’est important !</strong> </p><p>Un logiciel d’IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d’autres sources.</p>"
                     }
@@ -764,7 +764,7 @@
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d’IA générative peut faire des erreurs. Il faut donc toujours vérifier ses réponses.</p>"
+                      "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d’IA générative peut faire des erreurs. Il faut donc toujours vérifier les réponses qu'il donne.</p>"
                     }
                   }
                 ]
