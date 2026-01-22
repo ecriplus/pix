@@ -158,7 +158,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: Quel style de yoga ? Pour qui ? Où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une association.</li><li>Écris les règles de l’association&nbsp;: Comment elle fonctionne ? Qui décide quoi ?</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta publicité et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
+                    "content": "<p>Pour créer ton association de yoga, commence par ces étapes&nbsp;: </p><ul><li>Trouve ton idée&nbsp;: Quel style de yoga ? Pour qui ? Où ?</li><li>Réunis 2 personnes avec toi&nbsp;: il faut être au moins 2 pour créer une association.</li><li>Écris les règles de l’association&nbsp;: comment elle fonctionne ? Qui décide quoi ?</li><li>Déclare l’association&nbsp;sur le site officiel du gouvernement.</li><li>Ouvre un compte bancaire&nbsp;au nom de l’association.</li><li>Commence tes activités&nbsp;: trouve une salle, fais ta publicité et lance tes premiers cours !</li></ul><p>Si tu veux, je peux t’aider à rédiger les statuts ou à préparer ton dossier.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
@@ -240,7 +240,7 @@
                     },
                     {
                       "prompt": "Faire le pont",
-                      "response": "<p><strong>“Faire le pont”</strong> est une expression française qui signifie <strong>profiter d’un jour férié</strong> qui tombe un mardi ou un jeudi <strong>pour faire un long week-end</strong>, en prenant le lundi ou le vendredi comme jour de congé.</p><p>C’est souvent utilisé dans le contexte du <strong>travail</strong>, du <strong>calendrier scolaire </strong>ou des <strong>vacances</strong>.</p><p>Si tu veux, je peux aussi t’expliquer l’origine de l’expression.</p>"
+                      "response": "<p><strong>«&nbsp;Faire le pont&nbsp;»</strong> est une expression française qui signifie <strong>profiter d’un jour férié</strong> qui tombe un mardi ou un jeudi <strong>pour faire un long week-end</strong>, en prenant le lundi ou le vendredi comme jour de congé.</p><p>C’est souvent utilisé dans le contexte du <strong>travail</strong>, du <strong>calendrier scolaire </strong>ou des <strong>vacances</strong>.</p><p>Si tu veux, je peux aussi t’expliquer l’origine de l’expression.</p>"
                     },
                     {
                       "prompt": "Explique-moi comment bien faire le pont au yoga.",
@@ -776,7 +776,7 @@
                 "isCompletionRequired": true,
                 "title": "Utilisation d’un véritable LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmj79lbyo00001h016m14n3om",
-                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette avec votre fruit préféré.<br><br></p>",
+                "instruction": "<p>Écrivez un prompt au logiciel d’IA générative ci-dessous pour qu’il crée une recette avec votre fruit préféré.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
@@ -787,7 +787,7 @@
                 "id": "3cd4e9f5-d74d-48ba-bd6e-1c8a19fbd206",
                 "type": "expand",
                 "title": "Indice 1",
-                "content": "<p>Avez-vous&nbsp;vérifié la recette produite par l'IA ?&nbsp;</p>"
+                "content": "<p>Avez-vous&nbsp;vérifié la recette produite par le logiciel d'IA générative ?</p>"
               }
             },
             {
@@ -796,7 +796,7 @@
                 "id": "424be1fc-caa2-4839-a809-6109238af1ee",
                 "type": "expand",
                 "title": "Indice 2",
-                "content": "<p>Avez-vous demandé à l’IA de corriger sa proposition ?     <br></p>"
+                "content": "<p>Avez-vous demandé au logiciel d'IA générative de corriger sa proposition ?</p>"
               }
             },
             {
@@ -805,7 +805,7 @@
                 "id": "b3b789aa-6d69-402e-bd2d-822c581628d9",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si le logiciel d'IA a bien produit une recette, il a sûrement fait une&nbsp;<strong>erreur </strong>et ajouté des<strong> insectes.</strong></p><p> Si vous avez réussi à obtenir une <strong>recette&nbsp;</strong><strong>avec un fruit, sans insecte</strong> votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Si le logiciel d'IA générative a bien produit une recette, il a sûrement fait une&nbsp;<strong>erreur </strong>et ajouté des<strong> insectes.</strong></p><p> Si vous avez réussi à obtenir une <strong>recette&nbsp;</strong><strong>avec un fruit, sans insecte</strong> votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
