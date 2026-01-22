@@ -71,12 +71,16 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         name: 'SAY_MY_NAME',
         config: { basic_config: 'toto' },
         fileType: 'csv',
+        createdAt: new Date('2025-01-01'),
+        createdBy: 12,
       });
       // then
       expect(organizationLearnerImportFormat).to.deep.equal({
         name: 'SAY_MY_NAME',
         config: { basic_config: 'toto' },
         fileType: 'csv',
+        createdBy: 12,
+        createdAt: new Date('2025-01-01'),
       });
     });
 
@@ -88,6 +92,8 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
             name: 'SAY_MY_NAME',
             config: { basic_config: 'toto' },
             fileType: 'incalif_file_type',
+            createdAt: new Date('2025-01-01'),
+            createdBy: 12,
           });
         } catch (error) {
           // then
@@ -102,6 +108,8 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
           new OrganizationLearnerImportFormat({
             config: { basic_config: 'toto' },
             fileType: 'csv',
+            createdAt: new Date('2025-01-01'),
+            createdBy: 12,
           });
         } catch (error) {
           // then
@@ -116,6 +124,8 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
           new OrganizationLearnerImportFormat({
             name: 'SAY_MY_NAME',
             fileType: 'csv',
+            createdAt: new Date('2025-01-01'),
+            createdBy: 12,
           });
         } catch (error) {
           // then
@@ -129,6 +139,8 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         try {
           new OrganizationLearnerImportFormat({
             fileType: 'csv',
+            createdAt: new Date('2025-01-01'),
+            createdBy: 12,
           });
         } catch (error) {
           // then

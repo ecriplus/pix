@@ -33,6 +33,8 @@ describe('Unit | Domain | Read-Models | OrganizationToJoin', function () {
             },
           ],
         },
+        createdAt: new Date('2025-01-01'),
+        createdBy: 12,
       });
       const organizationToJoin = new OrganizationToJoin({
         id: 1,

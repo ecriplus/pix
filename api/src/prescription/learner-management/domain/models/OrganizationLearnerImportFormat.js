@@ -6,6 +6,8 @@ const organizationLearnerImportFormatSchame = Joi.object({
   name: Joi.string().required(),
   config: Joi.object().required(),
   fileType: Joi.string().valid('csv', 'xml'),
+  createdAt: Joi.date().required(),
+  createdBy: Joi.number().required(),
 });
 class OrganizationLearnerImportFormat {
   /**
@@ -13,11 +15,15 @@ class OrganizationLearnerImportFormat {
    * @param {string} data.name
    * @param {string} data.fileType
    * @param {Object} data.config
+   * @param {Object} data.createdAt
+   * @param {Object} data.createdBy
    */
-  constructor({ name, fileType, config } = {}) {
+  constructor({ name, fileType, config, createdAt, createdBy } = {}) {
     this.name = name;
     this.fileType = fileType;
     this.config = config;
+    this.createdAt = createdAt;
+    this.createdBy = createdBy;
 
     this.#validate();
   }

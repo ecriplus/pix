@@ -33,6 +33,8 @@ describe('Unit | Repository | organization-to-join-repository', function () {
           },
         ],
       },
+      createdAt: new Date('2025-01-01'),
+      createdBy: 12,
     });
 
     const organizationId = 1;
