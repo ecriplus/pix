@@ -1,6 +1,48 @@
 import { PassageEventWithElement } from './PassageEventWithElement.js';
 
 /**
+ * @class AudioPlayedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user plays an audio.
+ *
+ * */
+class AudioPlayedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'AUDIO_PLAYED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+/**
+ * @class AudioTranscriptionOpenedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user displays an audio transcription.
+ *
+ * */
+class AudioTranscriptionOpenedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'AUDIO_TRANSCRIPTION_OPENED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+/**
  * @class ExpandClosedEvent
  * See PassageEventWithElement for more info.
  *
@@ -146,6 +188,8 @@ class FileDownloadedEvent extends PassageEventWithElement {
 }
 
 export {
+  AudioPlayedEvent,
+  AudioTranscriptionOpenedEvent,
   ExpandClosedEvent,
   ExpandOpenedEvent,
   FileDownloadedEvent,
