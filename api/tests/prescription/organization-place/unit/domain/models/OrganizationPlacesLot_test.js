@@ -303,7 +303,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           expect(error.invalidAttributes).to.deep.equals([
             {
               attribute: 'expirationDate',
-              message: `La date d'expiration doit être supérieure à la date d'activation.`,
+              message: `La date d'expiration doit être postérieure à la date d'activation.`,
             },
           ]);
         });
@@ -328,7 +328,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           expect(error.invalidAttributes).to.deep.equals([
             {
               attribute: 'expirationDate',
-              message: `La date d'expiration doit être supérieure à la date d'activation.`,
+              message: `La date d'expiration doit être postérieure à la date d'activation.`,
             },
           ]);
         });

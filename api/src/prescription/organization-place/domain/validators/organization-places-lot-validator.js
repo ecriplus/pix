@@ -28,7 +28,7 @@ const schema = Joi.object({
     .messages({
       'any.required': `Les dates d'activation et d'expiration sont obligatoires.`,
       'date.base': `Les dates d'activation et d'expiration sont obligatoires.`,
-      'date.greater': `La date d'expiration doit être supérieure à la date d'activation.`,
+      'date.greater': `La date d'expiration doit être postérieure à la date d'activation.`,
       'date.format': `Le format de La date n'est pas correct.`,
     }),
   reference: Joi.string().trim().required().messages({
