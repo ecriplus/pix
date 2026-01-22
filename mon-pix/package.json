@@ -56,7 +56,7 @@
     "@ember-intl/v1-compat": "^1.0.2",
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^3.1.1",
-    "@ember/test-helpers": "^5.2.1",
+    "@ember/test-helpers": "^5.4.1",
     "@embroider/compat": "^3.0.0",
     "@embroider/core": "^3.0.0",
     "@embroider/legacy-inspector-support": "^0.1.3",
@@ -88,7 +88,7 @@
     "ember-element-helper": "^0.8.6",
     "ember-eslint-parser": "^0.5.0",
     "ember-exam": "^10.0.0",
-    "ember-intl": "^8.0.0",
+    "ember-intl": "^8.0.3",
     "ember-keyboard": "^9.0.0",
     "ember-lifeline": "^7.0.0",
     "ember-load-initializers": "^3.0.0",
@@ -128,24 +128,14 @@
     "sass": "^1.56.0",
     "showdown": "^2.1.0",
     "sinon": "^21.0.0",
-    "stylelint": "^16.0.0",
+    "stylelint": "^17.0.0",
     "stylelint-order": "^7.0.0",
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.95.0",
     "xss": "^1.0.13"
   },
   "overrides": {
-    "ember-eslint-parser": "$ember-eslint-parser",
-    "ember-intl": {
-      "@ember/test-helpers": "$@ember/test-helpers"
-    },
-    "ember-data": {
-      "@ember/test-helpers": "$@ember/test-helpers"
-    },
     "ember-dayjs": {
-      "ember-source": "$ember-source"
-    },
-    "@ember/render-modifiers": {
       "ember-source": "$ember-source"
     }
   },
