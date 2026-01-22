@@ -7,7 +7,6 @@
     "no-descending-specificity": null,
     "number-max-precision": null,
     "property-no-vendor-prefix": null,
-    "scss/at-import-partial-extension": null,
     "scss/no-global-function-names": null,
     "selector-no-vendor-prefix": null,
     "selector-pseudo-element-colon-notation": null,

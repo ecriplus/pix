@@ -24,9 +24,8 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
     const screen = await render(<template><ImportInformationBanner /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('components.import-information-banner.success')));
-    assert.notOk(screen.queryByText(t('components.import-information-banner.error')));
-    assert.notOk(screen.queryByText(t('components.import-information-banner.in-progress')));
+    const banner = screen.queryByRole('paragraph');
+    assert.dom(banner).doesNotExist();
   });
 
   test('it show nothing when there is no import since 14 days', async function (assert) {
@@ -41,10 +40,10 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
     const screen = await render(<template><ImportInformationBanner @importDetail={{importDetail}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('components.import-information-banner.success')));
-    assert.notOk(screen.queryByText(t('components.import-information-banner.error')));
-    assert.notOk(screen.queryByText(t('components.import-information-banner.in-progress')));
+    const banner = screen.queryByRole('paragraph');
+    assert.dom(banner).doesNotExist();
   });
+
   ['UPLOADING', 'UPLOADED', 'VALIDATED'].forEach(async function (status) {
     test(`display import in progress banner when status is ${status}`, async function (assert) {
       //given
@@ -61,6 +60,10 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
           exact: false,
         }),
       );
+
+      // then
+      const banner = screen.queryByRole('paragraph');
+      assert.dom(banner).exists();
 
       assert.ok(
         screen.getByRole(
