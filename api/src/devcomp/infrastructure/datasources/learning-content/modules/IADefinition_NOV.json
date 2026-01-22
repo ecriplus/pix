@@ -427,7 +427,7 @@
                     "display": "inline",
                     "placeholder": " ",
                     "ariaLabel": "nombre d’utilisation de l’IA",
-                    "defaultValue": "1",
+                    "defaultValue": "nombre d’utilisation de l’IA",
                     "tolerances": [],
                     "solutions": [
                       6
