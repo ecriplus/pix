@@ -46,21 +46,21 @@
                     "id": "1",
                     "content": "<p>L’adresse mail et le nom de l’ancien président de l’association</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.&nbsp;</p>"
+                      "diagnosis": "<p>Eh non ! Pour <strong>accéder à un compte de service en ligne</strong>, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.&nbsp;</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le mot de passe de la boîte mail et le nom de l’ancien président de l’association</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
+                      "diagnosis": "<p>Eh non ! Pour <strong>accéder à un compte de service en ligne</strong>, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>L’adresse mail et le mot de passe de la boîte mail</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! Pour accéder à un compte de service en ligne, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
+                      "diagnosis": "<p>Effectivement ! Pour <strong>accéder à un compte de service en ligne</strong>, l’utilisateur à besoin d’un <strong>identifiant </strong>et d’un <strong>mot de passe</strong>.</p><p>Dans le cas de Philomène, les deux éléments indispensables sont l’adresse mail, qui sert d’identifiant, et le mot de passe de la boîte mail.</p>"
                     }
                   },
                   {
@@ -125,7 +125,7 @@
               "element": {
                 "id": "a66d621e-344c-485e-bee0-139650302d47",
                 "type": "text",
-                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.<br>✔️Par exemple&nbsp;: un identifiant ou une adresse mail.</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous.<br>✔️Par exemple&nbsp;: un mot de passe.v</p>"
+                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.<br>✔️Par exemple&nbsp;: un identifiant ou une adresse mail.</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous.<br>✔️Par exemple&nbsp;: un mot de passe.</p>"
               }
             }
           ]
