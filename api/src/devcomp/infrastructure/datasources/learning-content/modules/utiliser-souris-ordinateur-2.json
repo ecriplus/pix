@@ -2,16 +2,16 @@
   "id": "1f425bc6-7a35-4ceb-9634-a25da1e36233",
   "shortId": "f59200bf",
   "slug": "utiliser-souris-ordinateur-2",
-  "title": "Utiliser une souris d'ordinateur - 2",
+  "title": "Utiliser une souris d’ordinateur - 2",
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>La souris est composée de trois boutons : le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
-    "duration": 10,
+    "image": "https://assets.pix.org/modules/1emarche-souris2/picto-1eremarche_souris2.svg",
+    "description": "<p>La souris est composée de trois boutons&nbsp;: le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
+    "duration": 30,
     "level": "novice",
     "objectives": [
-      "<p>Connaître l'utilité des principaux boutons de la souris</p>",
+      "<p>Connaître l’utilité des principaux boutons de la souris</p>",
       "<p>Utiliser la molette de la souris</p>",
       "<p>Effectuer ses premiers clics droit et double-clics</p>"
     ],
@@ -25,7 +25,7 @@
         {
           "id": "89e43bc8-a579-428a-8e58-56dbf5f1cf93",
           "type": "transition",
-          "title": "",
+          "title": "introduction",
           "components": [
             {
               "type": "element",
@@ -47,7 +47,7 @@
               "element": {
                 "id": "7724ff4d-de21-4fe3-9eab-5c9e6a18a010",
                 "type": "text",
-                "content": "<p>Pour commencer, faites un clic gauche sur « Continuer» 👇</p>"
+                "content": "<p>Pour commencer, faites un clic gauche sur «&nbsp;Continuer» 👇</p>"
               }
             }
           ]
@@ -55,14 +55,14 @@
         {
           "id": "c942f3a1-52e4-41c4-8172-b7df7509b9f8",
           "type": "transition",
-          "title": "",
+          "title": "transition 1",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "36044495-821b-4126-b687-b8a17c505b8e",
                 "type": "text",
-                "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
+                "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
               }
             }
           ]
@@ -77,17 +77,34 @@
               "element": {
                 "id": "6b8d384f-c15e-4abd-b392-bff1e17aee7a",
                 "type": "text",
-                "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details><p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
+                "content": "<p>La molette est le bouton central de la souris. Elle sert à faire <strong>défiler une page à l’écran </strong>vers le bas, ou vers le haut.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "af198f43-e280-4ad7-bb27-253eb5ae18f8",
+                "type": "expand",
+                "title": "Si jamais votre souris n’a pas de molette",
+                "content": "Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "98952c1e-2dbe-4b62-9d8f-7cba4171e734",
+                "type": "text",
+                "content": "Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut."
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "0d588342-d473-4fd7-b995-f127177b493d",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/17Ab5i5.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "Molette",
+                "url": "https://assets.pix.org/modules/1emarche-souris2/gif-video-molette.mp4",
+                "transcription": ""
               }
             },
             {
@@ -95,7 +112,7 @@
               "element": {
                 "id": "695d7b72-e982-4e45-a8dd-deac2ae73c59",
                 "type": "text",
-                "content": "<p>Dans l'exemple ci-dessus : la molette roule vers le bas, donc on descend dans la page. </p><p>C’est comme si nos yeux descendaient sur une page de journal papier. 📰</p>"
+                "content": "<p>Dans l’exemple ci-dessus&nbsp;: la molette roule vers le bas, donc on descend dans la page. </p><p>C’est comme si nos yeux descendaient sur une page de journal papier. 📰</p>"
               }
             }
           ]
@@ -103,14 +120,14 @@
         {
           "id": "1d98eca4-0217-45bf-95f9-7e5d19e0c921",
           "type": "transition",
-          "title": "",
+          "title": "transition 2",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "56cb8b5c-4a25-4960-a7cf-6b86b13375a5",
                 "type": "text",
-                "content": "<p>À vous de jouer. 🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
+                "content": "<p>À vous de jouer. 🕹️🕹️🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
               }
             }
           ]
@@ -118,79 +135,75 @@
         {
           "id": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
           "type": "activity",
-          "title": "La molette de la souris",
+          "title": "Utiliser la molette dans un exercice",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
-                      "type": "text",
-                      "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question&nbsp;:</p><ul> <li>Étape 1: Placez le pointeur sur l'image</li> <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li> </ul>"
-                    },
-                    {
-                      "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
-                      "type": "custom-draft",
-                      "title": "Élément interactif",
-                      "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test%20image%20scroll-02-02.jpg",
-                      "instruction": "",
-                      "height": 340
+              "type": "element",
+              "element": {
+                "id": "6802e654-4c8d-470c-bd51-e17f08c63784",
+                "type": "text",
+                "content": "👉 <strong>Dans la zone ci-dessous, utilisez la molette pour découvir toute l’image. Vous devrez ensuite répondre à une question&nbsp;:</strong> <br><ul><li>Étape 1: Placez le pointeur sur l’image </li><li>Étape 2&nbsp;: Faites rouler la molette de votre souris vers le haut et vers le bas. </li><li>Étape 3&nbsp;: Déplacez l’image jusqu’à trouver le balcon le plus bas de l’immeuble.</li></ul><br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c07ed0e2-b515-40c9-80ef-b7f55e6d270c",
+                "type": "custom-draft",
+                "title": "Exercice molette",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-molette/Modulix_Immeuble_souris_v2.jpg",
+                "instruction": "Utilisez la molette pour découvir toute l’image.",
+                "height": 350
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "42059af8-c1dd-4542-a980-87caf18178df",
+                "type": "qcu",
+                "instruction": "Dans l’image ci-dessus, que fait la personne sur le balcon le plus bas ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Elle se détend au soleil.",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "Ce personnage n’est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l’image."
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "6c768c45-998a-4769-8dcf-18f72a15bab8",
-                      "type": "qcu",
-                      "instruction": "<p>Dans l'image ci-dessus, que fait la personne sur le balcon le plus bas ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Elle se détend au soleil.</p>",
-                          "feedback": {
-                            "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Elle arrose ses plantes.</p>",
-                          "feedback": {
-                            "state": "Bonne réponse !",
-                            "diagnosis": "<p>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.<span aria-hidden=\"true\">🏢 </span></p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Elle étend son linge.</p>",
-                          "feedback": {
-                            "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Cette activité est celle du personnage du premier balcon de l'immeuble. Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
+                  },
+                  {
+                    "id": "2",
+                    "content": "Elle arrose ses plantes.",
+                    "feedback": {
+                      "state": "Bonne réponse !",
+                      "diagnosis": "Vous avez réussi à descendre dans toute l’image jusqu’au dernier balcon.🏢"
                     }
-                  ]
-                }
-              ]
+                  },
+                  {
+                    "id": "3",
+                    "content": "Elle étend son linge.",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "Cette activité est celle du personnage du premier balcon de l’immeuble. Utilisez la molette de votre souris quand votre pointeur est sur l’image. Faites défiler l’image pour découvrir les autres fenêtres et balcons de l’immeuble."
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
             }
           ]
         },
         {
           "id": "466421d6-62c3-4817-a116-0ac8d0de0d84",
           "type": "transition",
-          "title": "",
+          "title": "transition 3",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "989decd1-926a-4db7-88bb-b31862131f8b",
                 "type": "text",
-                "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
+                "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
               }
             }
           ]
@@ -198,14 +211,14 @@
         {
           "id": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
           "type": "activity",
-          "title": "Utilisation de la molette dans le module",
+          "title": "Utiliser la molette dans le module",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "f8226449-d41d-4650-aa7a-001fbc5773a8",
                 "type": "text",
-                "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant le symbole « 📰 ». <br><br> Voici les étapes que vous allez suivre :&nbsp; </p><ul><li>Faire rouler la molette pour remonter jusqu'à l'image animée de la molette.</li><li>Trouver le mot qui se trouve avant le symbole « 📰 ».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
+                "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant les 3 symboles « 🕹️🕹️🕹️&nbsp;». <br><br> Voici les étapes que vous allez suivre&nbsp;:&nbsp; </p><ul><li>Faire rouler la molette pour remonter  au-dessus de l’exercice des balcons.</li><li>Trouver le mot qui se trouve avant le symbole « 🕹️🕹️🕹️&nbsp;».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
               }
             },
             {
@@ -213,30 +226,30 @@
               "element": {
                 "id": "dda12023-7164-4f7b-ac7c-dfcef120aca7",
                 "type": "qcu",
-                "instruction": "<p>Quel est le mot juste avant ce symbole «📰» ?</p>",
+                "instruction": "<p>Quel est le mot juste avant ce symbole «🕹️🕹️🕹️» ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>journal</p>",
+                    "content": "<p>manette</p>",
                     "feedback": {
                       "state": "Mauvaise réponse.",
-                      "diagnosis": "<p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                      "diagnosis": "<p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un grand encadré violet clair.&nbsp;Les symboles que vous cherchez se trouve sous l’encadré violet.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>papier</p>",
+                    "content": "<p>jouer</p>",
                     "feedback": {
-                      "state": "Bonne réponse !",
+                      "state": "Bonne réponse !",
                       "diagnosis": "<p>Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>page</p>",
+                    "content": "<p>molette</p>",
                     "feedback": {
                       "state": "Mauvaise réponse.",
-                      "diagnosis": "<p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                      "diagnosis": "Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un grand encadré violet clair.&nbsp;Les symboles que vous cherchez se trouve sous l’encadré violet."
                     }
                   }
                 ],
@@ -248,14 +261,14 @@
         {
           "id": "3a2933a2-0026-4a80-8db4-3f8773983215",
           "type": "transition",
-          "title": "",
+          "title": "transition 4",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "b42906c3-b340-40c0-852a-4ae733c7fb9e",
                 "type": "text",
-                "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
+                "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
               }
             }
           ]
@@ -277,10 +290,10 @@
               "type": "element",
               "element": {
                 "id": "fc75b4ab-d92d-4ae9-8387-8bb3d683a99c",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/Vm7UCzY.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "Double clic",
+                "url": "https://assets.pix.org/modules/1emarche-souris2/gif-video_souris_doubleclic_fond.mp4",
+                "transcription": ""
               }
             },
             {
@@ -304,10 +317,10 @@
                 "id": "daced261-0ad6-43e1-b826-d43d89ca926b",
                 "type": "video",
                 "title": "Effectuer un double-clic avec la souris",
-                "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_double_clic.mp4",
-                "poster": "https://assets.pix.org/draft/modules/N51HDsO.jpeg",
-                "subtitles": "",
-                "transcription": ""
+                "url": "https://assets.pix.org/modules/1emarche-souris2/video-effectuer-un-double-clic.mp4",
+                "poster": "https://assets.pix.org/modules/1emarche-souris2/video-effectuer-un-double-clic-vignette.jpg",
+                "subtitles": "https://assets.pix.org/modules/1emarche-souris2/video-effectuer-un-double-clic-subtitles.vtt",
+                "transcription": "<strong>Faire un double-clic avec la souris.</strong><br><br>Pour le réaliser, déplacez le pointeur de votre souris sur l’élément. Sans bouger la souris, appuyez maintenant deux fois de manière rapprochée sur le bouton gauche de la souris avec votre index, comme ceci. Le résultat apparaît alors à l’écran. Un double-clic sur un dossier permet aussi de l’ouvrir. On découvre son contenu, ici plusieurs fichiers. Comme pour le clic gauche, le doigt de la main qui effectue le double-clic peut être positionné de différentes façons.<br><br>À vous de trouver le plus confortable. Le doigt peut être allongé et détendu sur la souris ou être recourbé pour appuyer avec la pulpe du doigt. Si maintenir la souris et faire le double-clic en même temps est compliqué, n’hésitez pas à vous aider de votre deuxième main pour bien stabiliser la souris. Un double-clic doit être assez rapide. Si les deux clics gauche sont trop espacés, l’ordinateur va considérer cela comme deux clics gauche et non un double-clic."
               }
             }
           ]
@@ -315,14 +328,14 @@
         {
           "id": "efc2abce-4d88-4251-8c15-9430891824b8",
           "type": "transition",
-          "title": "",
+          "title": "transition 5",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "3b975cca-22b4-444a-8aa5-801af949536f",
                 "type": "text",
-                "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
+                "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
               }
             }
           ]
@@ -338,9 +351,9 @@
                 "id": "be1b5866-6475-4bed-a775-e07be73f156e",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-doubleclic/index.html",
                 "instruction": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -348,14 +361,14 @@
         {
           "id": "9d1dd3cb-5a58-43d7-9e5f-fa9dd62ac59b",
           "type": "transition",
-          "title": "",
+          "title": "transition 6",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "e295a2ca-a6ba-45e2-8805-12ef13bcab53",
                 "type": "text",
-                "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
+                "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
               }
             }
           ]
@@ -370,7 +383,7 @@
               "element": {
                 "id": "3528708a-ba19-49c2-97a2-08be8f961124",
                 "type": "text",
-                "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul>"
+                "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre&nbsp;:</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul>"
               }
             },
             {
@@ -390,14 +403,14 @@
               "element": {
                 "id": "e2e63f1e-7260-4404-9a09-614c24236fc2",
                 "type": "qcu",
-                "instruction": "<p>Dans le dossier «80 ans Mamie», combien est-ce qu'il y a de photos ?</p>",
+                "instruction": "<p>Dans le dossier «80 ans Mamie», combien est-ce qu’il y a de photos ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>4</p>",
                     "feedback": {
                       "state": "Bonne réponse.",
-                      "diagnosis": "<p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>"
+                      "diagnosis": "<p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>"
                     }
                   },
                   {
@@ -405,7 +418,7 @@
                     "content": "<p>5</p>",
                     "feedback": {
                       "state": "Mauvaise réponse.",
-                      "diagnosis": "<p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
+                      "diagnosis": "<p><strong>Vous avez répondu au questionnaire, mais vous n’avez pas cliqué sur la bonne réponse.</strong><br>Si vous n’avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;»&nbsp;:</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s’appellent «&nbsp;Photo&nbsp;».</li></ul>"
                     }
                   },
                   {
@@ -413,7 +426,7 @@
                     "content": "<p>6</p>",
                     "feedback": {
                       "state": "Mauvaise réponse.",
-                      "diagnosis": "<p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
+                      "diagnosis": "<p><strong>Vous avez répondu au questionnaire, mais vous n’avez pas cliqué sur la bonne réponse.</strong><br>Si vous n’avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;»&nbsp;:</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s’appellent «&nbsp;Photo&nbsp;».</li></ul>"
                     }
                   }
                 ],
@@ -425,14 +438,14 @@
         {
           "id": "2c13664d-dbe8-42e7-a4bf-f6a67be2916e",
           "type": "transition",
-          "title": "",
+          "title": "transition 7",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "66c9055e-c74a-4cf4-af83-70833210c86e",
                 "type": "text",
-                "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
+                "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris&nbsp;: le bouton droit.</p>"
               }
             }
           ]
@@ -450,14 +463,14 @@
                     {
                       "id": "f986b4fa-fa9d-45ae-8ccd-ca4e834f050d",
                       "type": "text",
-                      "content": "<p>Le bouton droit permet de faire des <strong>clics droit</strong>. <br>Le clic droit sert à afficher une liste d'actions à l'écran. <br>Par exemple, avec un dossier, on a le choix de supprimer le dossier, de renommer le dossier, etc.</p>"
+                      "content": "<p>Le bouton droit permet de faire des <strong>clics droit</strong>. <br>Le clic droit sert à afficher une liste d’actions à l’écran. <br>Par exemple, avec un dossier, on a le choix de supprimer le dossier, de renommer le dossier, etc.</p>"
                     },
                     {
-                      "id": "d3a9fae5-986c-4710-b53f-6775474bab4c",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/aNtakNA.gif",
-                      "alt": "",
-                      "alternativeText": ""
+                      "id": "0065644e-4b31-451e-83ba-c2e2dc0ef42a",
+                      "type": "short-video",
+                      "title": "Clic-droit",
+                      "url": "https://assets.pix.org/modules/1emarche-souris2/gif-video-clic-droit.mp4",
+                      "transcription": ""
                     }
                   ]
                 },
@@ -472,10 +485,10 @@
                       "id": "e1ba101d-f98c-4938-938f-31e1362a4db3",
                       "type": "video",
                       "title": "Utiliser le clic droit de la souris",
-                      "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_clic_droit.mp4",
-                      "poster": "https://assets.pix.org/draft/modules/Fxj4UcZ.jpeg",
-                      "subtitles": "",
-                      "transcription": ""
+                      "url": "https://assets.pix.org/modules/1emarche-souris2/video-utiliser-le-clic-droit.mp4",
+                      "poster": "https://assets.pix.org/modules/1emarche-souris2/video-utiliser-le-clic-droit-vignette.jpg",
+                      "subtitles": "https://assets.pix.org/modules/1emarche-souris2/video-utiliser-clic-droit-subtitles.vtt",
+                      "transcription": "Le clic droit permet de faire apparaître une liste de choix, comme celle-ci. Le clic droit s’utilise aussi bien sur un dossier qu’un document texte, une image, une vidéo ou même, à côté de tout ça, sur une zone vide de l’écran. On peut voir que la liste d’actions proposées change selon l’élément sur lequel on fait le clic droit. C’est normal, on ne fait pas la même chose avec une image ou un document texte. Les actions proposées sont donc différentes. Mais alors, comment utiliser la liste d’actions qui s’affiche ?<br><br>Prenons l’exemple de l’image. Je place le pointeur de ma souris au-dessus de l’image. Je fais un clic droit et la liste d’actions apparaît. Je déplace le pointeur sur l’action que je souhaite déclencher et je fais un clic gauche dessus. L’action se déclenche. Si, dans la liste qui s’affiche, je ne trouve pas l’action que je veux faire, alors il y a deux possibilités.<br><br>La première possibilité est d’ouvrir une sous-liste. Pour ça, je passe le pointeur de ma souris sur une des lignes de la liste qui a une petite flèche sur la droite. Cette petite flèche ouvre une sous-liste. Je garde le pointeur de ma souris sur la sous-liste pour ne pas la fermer et je fais un clic gauche sur l’action que je souhaite déclencher. Si je ne trouve pas ce que je veux faire, la deuxième possibilité est de fermer la liste. Pour ça, rien de plus simple.<br><br>Je fais un clic gauche ailleurs dans l’écran pour que la liste se ferme. Finalement, on peut retenir que le clic droit sert uniquement à faire apparaître une liste d’actions et que c’est le clic gauche qui déclenche ces actions."
                     }
                   ]
                 }
@@ -486,14 +499,14 @@
         {
           "id": "aaaa5676-f865-4d85-8d95-7329e2716511",
           "type": "transition",
-          "title": "",
+          "title": "transition 8",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "a609018d-fd04-460f-b574-b5107b3f4f73",
                 "type": "text",
-                "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droits. 👇</p>"
+                "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droit. 👇</p>"
               }
             }
           ]
@@ -501,7 +514,7 @@
         {
           "id": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
           "type": "activity",
-          "title": "Premiers clics droits",
+          "title": "Premiers clics droit",
           "components": [
             {
               "type": "element",
@@ -509,9 +522,9 @@
                 "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-clicdroit/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -519,14 +532,14 @@
         {
           "id": "eb055116-5d70-42ac-8d7b-3bdf2f6acef9",
           "type": "transition",
-          "title": "",
+          "title": "transition 9",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "7f49b2c6-8488-4868-9454-6a92b4cc7643",
                 "type": "text",
-                "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’action.</p>"
+                "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’actions.</p>"
               }
             }
           ]
@@ -544,7 +557,7 @@
                 "isCompletionRequired": false,
                 "title": "Gestionnaire de fichiers - supprimer photos",
                 "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
-                "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
+                "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier «&nbsp;Photos&nbsp;».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’actions, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
                 "height": 400
               }
             }
@@ -553,14 +566,14 @@
         {
           "id": "e4ef316d-3d48-46ce-8bb5-90ba92a113a1",
           "type": "transition",
-          "title": "",
+          "title": "transition 10",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "07c245c1-73e8-4968-bb7b-99aac6590f2c",
                 "type": "text",
-                "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
+                "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
               }
             }
           ]
@@ -576,9 +589,9 @@
                 "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html",
-                "instruction": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p>",
-                "height": 445
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-3boutonrecap/index.html",
+                "instruction": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l’image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p>",
+                "height": 405
               }
             },
             {
@@ -593,7 +606,7 @@
               "element": {
                 "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
                 "type": "text",
-                "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/utiliser-souris-ordinateur-2/pix-fiche-revision-premieres-marches-souris-2.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+                "content": "<p>📌 Les points à retenir&nbsp;: <br> </p><ul>    <li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li>    <li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li>    <li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/1emarche-souris2/pix-fiche-revision-premieres-marches-souris-2.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
               }
             }
           ]
