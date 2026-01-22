@@ -2,13 +2,13 @@ import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import PlacesLotsAlert from 'pix-orga/components/places/places-lot-alert';
 import { STATUSES } from 'pix-orga/models/organization-places-lot';
+import setupIntlRenderingTest from 'pix-orga/tests/helpers/setup-intl-rendering';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-
 module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
   setupIntlRenderingTest(hooks);
+
   let store, clock;
   const now = new Date('2021-11-03');
 
@@ -36,8 +36,11 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const banner = screen.getByText(t('banners.last-places-lot-available.message', { days: 27 }));
 
     // then
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).exists();
     assert.strictEqual(banner.outerText, t('banners.last-places-lot-available.message', { days: 27 }));
   });
+
   test('it should not show an alert if there is one active lot that has an expiration date in more than 1 month', async function (assert) {
     // given
     const placesLots = [
@@ -54,12 +57,15 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
         status: STATUSES.ACTIVE,
       }),
     ];
+
     // when
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).doesNotExist();
   });
+
   test('it should not show an alert if remaining days before places lot expires in more than 30 days', async function (assert) {
     // given
     const placesLots = [
@@ -74,8 +80,10 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).doesNotExist();
   });
+
   test('it should not show alert if there is `PENDING` placesLots', async function (assert) {
     // given
     const placesLots = [
@@ -96,8 +104,10 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).doesNotExist();
   });
+
   test('it should not show alert if there is no ACTIVE placesLots', async function (assert) {
     // given
     const placesLots = [
@@ -112,8 +122,10 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).doesNotExist();
   });
+
   test('it should not show alert if there is no placesLots', async function (assert) {
     // given
     const placesLots = [];
@@ -121,6 +133,7 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
+    const alert = screen.queryByRole('paragraph');
+    assert.dom(alert).doesNotExist();
   });
 });
