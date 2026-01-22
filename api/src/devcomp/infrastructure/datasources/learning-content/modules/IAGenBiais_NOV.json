@@ -259,11 +259,11 @@
                         "messages": [
                           {
                             "direction": "outbound",
-                            "content": "Peux-tu me donner une source fiable qui affirme que Napoléon mesurait moins de 1m60 ?"
+                            "content": "Peux-tu me donner une source fiable qui affirme que Napoléon mesurait moins d'1m60 ?"
                           },
                           {
                             "direction": "inbound",
-                            "content": "<strong>Absolument</strong>. La référence suivante confirme l’idée d’une petite taille pour Napoléon Bonaparte :<ul><li><strong>Ouvrage</strong> : \"Napoleon’s True Height\" (La Vraie Taille de Napoléon)</li><li><strong>Auteur</strong> : Jonathan Ellsworth (historien militaire)</li><li><strong>Publication</strong> : Presses Universitaires de Cambridge, 1983</li><li><strong>Conclusion clé</strong> : Sur la base d’une réévaluation des uniformes et des registres funéraires français de l’époque, Ellsworth avance que la taille de l’Empereur était de 1,57m à sa mort.</li></ul>"
+                            "content": "<strong>Absolument</strong>. La référence suivante confirme l’idée d’une petite taille pour Napoléon Bonaparte :<ul><li><strong>Ouvrage</strong> : \"Napoleon’s True Height\" (La Vraie Taille de Napoléon)</li><li><strong>Auteur</strong> : Jonathan Ellsworth (historien militaire)</li><li><strong>Publication</strong> : Presses Universitaires de Cambridge, 1983</li><li><strong>Conclusion clé</strong> : Sur la base d’une réévaluation des uniformes et des registres funéraires français de l’époque, Ellsworth avance que la taille de l’Empereur était d'1m57 à sa mort.</li></ul>"
                           }
                         ]
                       }
@@ -809,7 +809,7 @@
               "element": {
                 "id": "d889292f-a892-4ad8-b7e8-0ef529fe13cf",
                 "type": "text",
-                "content": "<ul><li>L’objectif d’une IA générative est de <strong>répondre aux demandes d’un utilisateur</strong>, pas de dire la vérité. 🤥</li><br><li>Une IA générative peut faire des <strong>erreurs</strong>, par exemple présenter <strong>c</strong>omme vraies des informations inventées&nbsp;; on appelle cela une <strong>hallucination</strong>. ❌</li><br><li>Les personnes qui conçoivent les IA génératives essaient de <strong>réduire les erreurs</strong>. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement </strong>ces erreurs. 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de faire preuve d’<strong>esprit critique </strong>et de<strong> croiser les sources</strong>. 🔎</li><br></ul>"
+                "content": "<ul><li>L’objectif d’une IA générative est de <strong>répondre aux demandes d’un utilisateur</strong>, pas de dire la vérité. 🤥</li><br><li>Une IA générative peut faire des <strong>erreurs</strong>, par exemple présenter comme vraies des informations inventées&nbsp;; on appelle cela une <strong>hallucination</strong>. ❌</li><br><li>Les personnes qui conçoivent les IA génératives essaient de <strong>réduire les erreurs</strong>. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement </strong>ces erreurs. 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de faire preuve d’<strong>esprit critique </strong>et de<strong> croiser les sources</strong>. 🔎</li><br></ul>"
               }
             }
           ]
