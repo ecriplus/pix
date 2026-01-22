@@ -13,7 +13,7 @@
     "objectives": [
       "<p>Reconnaître une souris et connaître son utilité</p>",
       "<p>Prendre en main une souris et la déplacer</p>",
-      "<p>Effectuer ses premiers clics gauches</p>"
+      "<p>Effectuer ses premiers clics gauche</p>"
     ],
     "tabletSupport": "obstructed"
   },
@@ -445,7 +445,7 @@
         {
           "id": "b491a99e-2774-469e-a63e-e2d0fb1120f2",
           "type": "activity",
-          "title": "Premiers clics gauches",
+          "title": "Premiers clics gauche",
           "components": [
             {
               "type": "element",
