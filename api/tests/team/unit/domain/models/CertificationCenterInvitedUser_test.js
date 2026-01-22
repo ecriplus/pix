@@ -68,7 +68,6 @@ describe('Unit | Domain | Models | CertificationCenterInvitedUser', function () 
 
           // then
           expect(error).to.be.an.instanceof(AlreadyAcceptedOrCancelledInvitationError);
-          expect(error.message).to.equal("L'invitation a déjà été acceptée ou annulée.");
         });
       });
     });

@@ -8,9 +8,8 @@ export default class JoinWhenAuthenticatedRoute extends Route {
     this.session.requireAuthentication(transition, 'authentication.login');
 
     const { queryParams } = transition.to;
-    const alternativeRootURL = transition.router.generate('join', { queryParams });
 
-    this.session.alternativeRootURL = alternativeRootURL;
+    this.session.routeAfterInvalidation = transition.router.generate('join', { queryParams });
     this.session.invalidate();
   }
 }

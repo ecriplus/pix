@@ -40,8 +40,6 @@ export default class ConfirmController extends Controller {
   async joinAndLinkAccount() {
     const { identity_provider_slug } = this.model;
 
-    await this.joinInvitation.acceptInvitationByEmail(this.email);
-
     await this.session.authenticate('authenticator:oidc', {
       authenticationKey: this.authenticationKey,
       identityProviderSlug: identity_provider_slug,

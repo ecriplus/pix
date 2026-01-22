@@ -4,6 +4,7 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
+import { SessionStorageEntry } from 'pix-orga/utils/session-storage-entry';
 import { module, test } from 'qunit';
 
 import setupIntl from '../helpers/setup-intl';
@@ -12,6 +13,12 @@ module('Acceptance | join and signup', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+
+  const invitationStorage = new SessionStorageEntry('joinInvitationData');
+
+  hooks.afterEach(function () {
+    invitationStorage.remove();
+  });
 
   module('When the invitation is valid', function (hooks) {
     let invitationId;

@@ -1,4 +1,4 @@
-import { UserNotMemberOfOrganizationError } from '../../../../../src/team/domain/errors.js';
+import { UserHasNoOrganizationMembershipError } from '../../../../../src/team/domain/errors.js';
 import { getPrescriber } from '../../../../../src/team/domain/usecases/get-prescriber.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -19,7 +19,7 @@ describe('Unit | Team | Domain | UseCase | get-prescriber', function () {
   context('When user is not a member of any organization', function () {
     it('should throw UserNotMemberOfOrganizationError', async function () {
       // given
-      sharedMembershipRepository.findByUserId.withArgs({ userId }).resolves([]);
+      sharedMembershipRepository.findByUserId.resolves([]);
 
       // when
       const error = await catchErr(getPrescriber)({
@@ -30,8 +30,7 @@ describe('Unit | Team | Domain | UseCase | get-prescriber', function () {
       });
 
       // then
-      expect(error).to.be.instanceOf(UserNotMemberOfOrganizationError);
-      expect(error.message).to.equal('L’utilisateur 1 n’est membre d’aucune organisation.');
+      expect(error).to.be.instanceOf(UserHasNoOrganizationMembershipError);
     });
   });
 

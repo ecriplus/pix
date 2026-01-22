@@ -88,25 +88,6 @@ module('Acceptance | Login', function (hooks) {
     });
   });
 
-  module('when user is not allowed to access Pix Orga', function () {
-    test('displays an "access not allowed" error message', async function (assert) {
-      // given
-      this.server.post('/token', () => {
-        return new Response(403, {}, { errors: [{ status: '403', code: 'PIX_ORGA_ACCESS_NOT_ALLOWED' }] });
-      });
-
-      // when
-      const screen = await visit('/connexion');
-      await fillByLabel(t('pages.login-form.email.label'), 'user-not-allowed@example.net');
-      await fillByLabel(t('pages.login-form.password'), 'secret');
-      await clickByName(t('pages.login-form.login'));
-
-      // then
-      const errorMessage = screen.getByText(t('pages.login-form.errors.access-not-allowed'));
-      assert.dom(errorMessage).exists();
-    });
-  });
-
   module('when the Pix account does not exist or the password is incorrect', function () {
     test('the login form displays a missing or invalid credentials error message', async function (assert) {
       // given

@@ -7,7 +7,7 @@ import {
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../../../../src/shared/config.js';
-import { ForbiddenAccess, PixOrgaAccessNotAllowedError } from '../../../../../src/shared/domain/errors.js';
+import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | authenticate-user', function () {
@@ -345,26 +345,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
       });
 
       describe('user access to applications', function () {
-        context('when requestedApplication is Pix Orga', function () {
-          context('when user is not linked to any organization', function () {
-            it('throws a ForbiddenAccess', async function () {
-              // given
-              const email = 'user_wants_to_go_to_orga@example.net';
-              const password = 'some password';
-              databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
-              await databaseBuilder.commit();
-
-              const audience = 'https://orga.pix.fr';
-              const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-              // when & then
-              await expect(
-                usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
-              ).to.be.rejectedWith(PixOrgaAccessNotAllowedError);
-            });
-          });
-        });
-
         context('when requestedApplication is Pix Admin', function () {
           context('when user has no admin member role', function () {
             it('throws a ForbiddenAccess', async function () {

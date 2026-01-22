@@ -56,7 +56,7 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
     },
     getOptions: (error) => ({ remainingAttempts: error.meta?.remainingAttempts, htmlSafe: true }),
   },
-  PIX_ORGA_ACCESS_NOT_ALLOWED: {
+  USER_HAS_NO_ORGANIZATION_MEMBERSHIP: {
     i18nKey: 'pages.login-form.errors.access-not-allowed',
   },
   INVITATION_CANCELLED: {
@@ -67,6 +67,9 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
   },
   INVITATION_NOT_FOUND: {
     i18nKey: 'pages.login-form.invitation-not-found',
+  },
+  INVITATION_ALREADY_ACCEPTED_OR_CANCELLED: {
+    i18nKey: 'pages.login-form.errors.status.409',
   },
 };
 

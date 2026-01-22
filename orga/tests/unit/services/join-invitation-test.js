@@ -69,70 +69,6 @@ module('Unit | Service | join invitation', function (hooks) {
     });
   });
 
-  module('acceptInvitationByEmail', function () {
-    test('accepts an invitation', async function (assert) {
-      // Given
-      const saveStub = sinon.stub();
-      const deleteStub = sinon.stub();
-      sinon.stub(store, 'queryRecord').resolves({ organizationName: 'My awesome organization' });
-      sinon.stub(store, 'peekRecord').returns();
-      sinon.stub(store, 'createRecord').returns({ save: saveStub, deleteRecord: deleteStub });
-      const joinInvitation = this.owner.lookup('service:joinInvitation');
-      await joinInvitation.load({ invitationId: '123', code: '456' });
-
-      // When
-      await joinInvitation.acceptInvitationByEmail('test@example.net');
-
-      // Then
-      assert.ok(saveStub.calledWith({ adapterOptions: { organizationInvitationId: '123' } }));
-      assert.strictEqual(joinInvitation.invitation, undefined);
-    });
-
-    module('when user is already member of the organization', function () {
-      test('does not throw error', async function (assert) {
-        // Given
-        const saveStub = sinon.stub().rejects({ errors: [{ status: '412' }] });
-        const deleteStub = sinon.stub();
-        sinon.stub(store, 'queryRecord').resolves({ organizationName: 'My awesome organization' });
-        sinon.stub(store, 'peekRecord').returns();
-        sinon.stub(store, 'createRecord').returns({ save: saveStub, deleteRecord: deleteStub });
-        const joinInvitation = this.owner.lookup('service:joinInvitation');
-        await joinInvitation.load({ invitationId: '123', code: '456' });
-
-        // When
-        await joinInvitation.acceptInvitationByEmail('test@example.net');
-
-        // Then
-        assert.ok(saveStub.calledWith({ adapterOptions: { organizationInvitationId: '123' } }));
-        assert.ok(deleteStub.calledOnce);
-        assert.strictEqual(joinInvitation.invitation, undefined);
-      });
-    });
-
-    module('when an error occured', function () {
-      test('throws the error', async function (assert) {
-        // Given
-        const saveStub = sinon.stub().rejects({ errors: [{ status: '404' }] });
-        const deleteStub = sinon.stub();
-        sinon.stub(store, 'queryRecord').resolves({ organizationName: 'My awesome organization' });
-        sinon.stub(store, 'peekRecord').returns();
-        sinon.stub(store, 'createRecord').returns({ save: saveStub, deleteRecord: deleteStub });
-        const joinInvitation = this.owner.lookup('service:joinInvitation');
-        await joinInvitation.load({ invitationId: '123', code: '456' });
-
-        // When
-        try {
-          await joinInvitation.acceptInvitationByEmail('test@example.net');
-          assert.ok(false, 'Expect an error to be thrown when invitation response accepted');
-        } catch (error) {
-          assert.deepEqual(error, { errors: [{ status: '404' }] });
-          assert.ok(deleteStub.calledOnce);
-          assert.strictEqual(joinInvitation.invitation, undefined);
-        }
-      });
-    });
-  });
-
   module('acceptInvitationByUserId', function () {
     test('accepts an invitation', async function (assert) {
       // Given
@@ -145,7 +81,7 @@ module('Unit | Service | join invitation', function (hooks) {
       await joinInvitation.load({ invitationId: '123', code: '456' });
 
       // When
-      await joinInvitation.acceptInvitationByEmail(1234);
+      await joinInvitation.acceptInvitationByUserId(1234);
 
       // Then
       assert.ok(saveStub.calledWith({ adapterOptions: { organizationInvitationId: '123' } }));

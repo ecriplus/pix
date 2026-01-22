@@ -12,7 +12,6 @@ module('Unit | Route | application', function (hooks) {
     sinon.stub(this.route.featureToggles, 'load').resolves();
     sinon.stub(this.route.oidcIdentityProviders, 'load').resolves();
     sinon.stub(this.route.locale, 'setBestLocale').resolves();
-    sinon.stub(this.route.currentUser, 'load').resolves();
   });
   hooks.afterEach(function () {
     sinon.restore();
@@ -52,14 +51,6 @@ module('Unit | Route | application', function (hooks) {
 
       // then
       assert.ok(this.route.oidcIdentityProviders.load.called);
-    });
-
-    test('loads current user', async function (assert) {
-      // when
-      await this.route.beforeModel();
-
-      // then
-      assert.ok(this.route.currentUser.load.called);
     });
   });
 });

@@ -17,6 +17,7 @@ import { AggregateImportError, SiecleXmlImportError } from '../../prescription/l
 import { OrganizationCantGetPlacesStatisticsError } from '../../prescription/organization-place/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
+  UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 } from '../../team/domain/errors.js';
 import * as SharedDomainErrors from '../domain/errors.js';
@@ -338,7 +339,7 @@ function _mapToHttpError(error) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
   if (error instanceof AlreadyAcceptedOrCancelledInvitationError) {
-    return new HttpErrors.ConflictError(error.message);
+    return new HttpErrors.ConflictError(error.message, error.code);
   }
   if (error instanceof SharedDomainErrors.AlreadyExistingCampaignParticipationError) {
     return new HttpErrors.PreconditionFailedError(error.message);
@@ -412,6 +413,9 @@ function _mapToHttpError(error) {
   }
   if (error instanceof UserNotMemberOfOrganizationError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
+  }
+  if (error instanceof UserHasNoOrganizationMembershipError) {
+    return new HttpErrors.ForbiddenError(error.message, error.code);
   }
   if (error instanceof SharedDomainErrors.TargetProfileInvalidError) {
     return new HttpErrors.PreconditionFailedError(error.message);

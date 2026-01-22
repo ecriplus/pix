@@ -2,7 +2,7 @@ import Object from '@ember/object';
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { reject, resolve } from 'rsvp';
+import { resolve } from 'rsvp';
 import sinon from 'sinon';
 
 module('Unit | Service | current-user', function (hooks) {
@@ -88,7 +88,7 @@ module('Unit | Service | current-user', function (hooks) {
     test('should load the organization', async function (assert) {
       // given
       const organization = Object.create({ id: 9 });
-      connectedUser.memberships = [Object.create({ organization })];
+      connectedUser.memberships = [Object.create({ organization, save: sinon.stub().resolves() })];
       connectedUser.userOrgaSettings = Object.create({ organization });
 
       // when
@@ -102,7 +102,12 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isAdminInOrganization to false', async function (assert) {
         // given
         const organization = Object.create({ id: 9 });
-        const membership = Object.create({ organization, organizationRole: 'MEMBER', isAdmin: false });
+        const membership = Object.create({
+          organization,
+          organizationRole: 'MEMBER',
+          isAdmin: false,
+          save: sinon.stub().resolves(),
+        });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -118,7 +123,12 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isAdminInOrganization to true', async function (assert) {
         // given
         const organization = Object.create({ id: 9 });
-        const membership = Object.create({ organization, organizationRole: 'ADMIN', isAdmin: true });
+        const membership = Object.create({
+          organization,
+          organizationRole: 'ADMIN',
+          isAdmin: true,
+          save: sinon.stub().resolves(),
+        });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -134,7 +144,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSCOManagingStudents to true', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SCO', isManagingStudents: true, isSco: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -148,7 +158,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSUPManagingStudents to false', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SCO', isManagingStudents: true, isSup: false, isSco: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -164,7 +174,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSCOManagingStudents to false', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SUP', isManagingStudents: true, isSco: false, isSup: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -178,7 +188,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSUPManagingStudents to true', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SUP', isManagingStudents: true, isSup: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -194,7 +204,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSCOManagingStudents to false with PRO organization', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'PRO', isManagingStudents: true, isPro: true, isSco: false });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -208,7 +218,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSUPManagingStudents to false with PRO organization', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'PRO', isManagingStudents: true, isPro: true, isSup: false });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -224,7 +234,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSCOManagingStudents to false when organization is SCO', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SCO', isManagingStudents: false, isSco: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -238,7 +248,7 @@ module('Unit | Service | current-user', function (hooks) {
       test('should set isSUPManagingStudents to false when organization is SUP', async function (assert) {
         // given
         const organization = Object.create({ id: 9, type: 'SUP', isManagingStudents: false, isSup: true });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -255,8 +265,8 @@ module('Unit | Service | current-user', function (hooks) {
         // given
         const organization1 = Object.create({ id: 9 });
         const organization2 = Object.create({ id: 10 });
-        const membership1 = Object.create({ organization: organization1 });
-        const membership2 = Object.create({ organization: organization2 });
+        const membership1 = Object.create({ organization: organization1, save: sinon.stub().resolves() });
+        const membership2 = Object.create({ organization: organization2, save: sinon.stub().resolves() });
         const userOrgaSettings = Object.create({ organization: organization2 });
         connectedUser.memberships = [membership1, membership2];
         connectedUser.userOrgaSettings = userOrgaSettings;
@@ -279,7 +289,7 @@ module('Unit | Service | current-user', function (hooks) {
           isSup: true,
           identityProviderForCampaigns: 'GAR',
         });
-        const membership = Object.create({ organization });
+        const membership = Object.create({ organization, save: sinon.stub().resolves() });
         connectedUser.memberships = [membership];
         connectedUser.userOrgaSettings = Object.create({ organization });
 
@@ -681,9 +691,7 @@ module('Unit | Service | current-user', function (hooks) {
   module('user is not authenticated', function () {
     test('should do nothing', async function (assert) {
       // given
-      const sessionStub = Service.create({
-        isAuthenticated: false,
-      });
+      const sessionStub = Service.create({ isAuthenticated: false });
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.session = sessionStub;
 
@@ -695,51 +703,28 @@ module('Unit | Service | current-user', function (hooks) {
     });
   });
 
-  module('user is not a prescriber anymore', function () {
-    test('should redirect to login because not a prescriber', async function (assert) {
+  module('user is not a prescriber', function () {
+    test('throws an error', async function (assert) {
       // given
-      const connectedUserId = 1;
       const sessionStub = Service.create({
         isAuthenticated: true,
-        data: { authenticated: { user_id: connectedUserId } },
+        data: { authenticated: { user_id: 1 } },
         invalidate: () => resolve('invalidate'),
+        routeAfterInvalidation: null,
       });
       const storeStub = Service.create({
-        queryRecord: () => reject([{ code: 403 }]),
+        findRecord: () => Promise.reject({ errors: [{ code: 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP' }] }),
       });
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.session = sessionStub;
       currentUser.store = storeStub;
 
-      // when
-      await currentUser.load();
-
-      // then
-      assert.strictEqual(currentUser.prescriber, null);
-    });
-  });
-
-  module('user token is expired', function () {
-    test('should redirect to login', async function (assert) {
-      // given
-      const connectedUserId = 1;
-      const storeStub = Service.create({
-        queryRecord: () => reject({ errors: [{ code: 401 }] }),
-      });
-      const sessionStub = Service.create({
-        isAuthenticated: true,
-        data: { authenticated: { user_id: connectedUserId } },
-        invalidate: () => resolve('invalidate'),
-      });
-      const currentUser = this.owner.lookup('service:currentUser');
-      currentUser.store = storeStub;
-      currentUser.session = sessionStub;
-
-      // when
-      const result = await currentUser.load();
-
-      // then
-      assert.strictEqual(result, 'invalidate');
+      // when / then
+      assert.rejects(
+        currentUser.load(),
+        (err) => err.code === 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+        'expected currentUser.load to throw an error with code USER_HAS_NO_ORGANIZATION_MEMBERSHIP',
+      );
     });
   });
 });

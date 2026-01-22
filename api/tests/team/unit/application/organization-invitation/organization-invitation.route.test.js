@@ -58,7 +58,7 @@ describe('Unit | Team | Application | Route | organization-invitation', function
   });
 
   describe('POST /api/organization-invitations/{id}/response', function () {
-    it('should exists', async function () {
+    it('exists', async function () {
       // given
       sinon
         .stub(organizationInvitationController, 'acceptOrganizationInvitation')
@@ -74,7 +74,7 @@ describe('Unit | Team | Application | Route | organization-invitation', function
           type: 'organization-invitation-responses',
           attributes: {
             code: 'DZWMP7L5UM',
-            email: 'user@example.net',
+            'user-id': 1234,
           },
         },
       };

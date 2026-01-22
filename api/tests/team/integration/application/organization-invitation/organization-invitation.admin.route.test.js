@@ -38,29 +38,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
       await httpTestServer.register(teamRoutes[0]);
     });
 
-    describe('when user has an email in a valid payload', function () {
-      it('returns 204', async function () {
-        // given
-        const payload = {
-          data: {
-            id: '100047_DZWMP7L5UM',
-            type: 'organization-invitation-responses',
-            attributes: {
-              code: 'DZWMP7L5UM',
-              email: 'user@example.net',
-            },
-          },
-        };
-
-        // when
-        const response = await httpTestServer.request(method, url, payload);
-
-        // then
-        expect(response.statusCode).to.equal(204);
-      });
-    });
-
-    describe('when user has an id in a valid payload', function () {
+    describe('when user has a valid payload', function () {
       it('returns 204', async function () {
         // given
         const payload = {
@@ -90,7 +68,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
       expect(response.statusCode).to.equal(400);
     });
 
-    it('returns 400 when payload violates xor constraint (user-id and email both provided)', async function () {
+    it('returns 400 when payload violates required userId constraint', async function () {
       // given
       const payload = {
         data: {
@@ -98,8 +76,6 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitation-responses',
           attributes: {
             code: 'DZWMP7L5UM',
-            email: 'user@example.net',
-            'user-id': 123,
           },
         },
       };
@@ -109,9 +85,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
 
       // then
       expect(response.statusCode).to.equal(400);
-      expect(response.result.errors[0].detail).to.equal(
-        '"data.attributes" contains a conflict between exclusive peers [user-id, email]',
-      );
+      expect(response.result.errors[0].detail).to.equal('"data.attributes.user-id" is required');
     });
   });
 

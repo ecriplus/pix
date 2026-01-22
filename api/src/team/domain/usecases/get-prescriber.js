@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { UserNotMemberOfOrganizationError } from '../errors.js';
+import { UserHasNoOrganizationMembershipError } from '../errors.js';
 
 /**
  * @param {{
@@ -10,7 +10,7 @@ import { UserNotMemberOfOrganizationError } from '../errors.js';
  * userOrgaSettingsRepository: UserOrgaSettingsRepository
  * }} params
  * @return {Promise<Prescriber>}
- * @throws {UserNotMemberOfOrganizationError}
+ * @throws {UserHasNoOrganizationMembershipError}
  */
 export const getPrescriber = async function ({
   userId,
@@ -20,7 +20,7 @@ export const getPrescriber = async function ({
 }) {
   const memberships = await sharedMembershipRepository.findByUserId({ userId });
   if (_.isEmpty(memberships)) {
-    throw new UserNotMemberOfOrganizationError(`L’utilisateur ${userId} n’est membre d’aucune organisation.`);
+    throw new UserHasNoOrganizationMembershipError();
   }
 
   const userOrgaSettings = await userOrgaSettingsRepository.findOneByUserId(userId);

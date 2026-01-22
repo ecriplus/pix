@@ -1,8 +1,8 @@
 import { DomainError } from '../../shared/domain/errors.js';
 
 class AlreadyAcceptedOrCancelledInvitationError extends DomainError {
-  constructor(message = "L'invitation a déjà été acceptée ou annulée.") {
-    super(message);
+  constructor() {
+    super('The invitation has already been accepted or cancelled', 'INVITATION_ALREADY_ACCEPTED_OR_CANCELLED');
   }
 }
 
@@ -36,6 +36,12 @@ class UserNotMemberOfOrganizationError extends DomainError {
   }
 }
 
+class UserHasNoOrganizationMembershipError extends DomainError {
+  constructor() {
+    super('User is not member of any organization', 'USER_HAS_NO_ORGANIZATION_MEMBERSHIP');
+  }
+}
+
 class MembershipNotFound extends DomainError {}
 
 class OrganizationArchivedError extends DomainError {
@@ -51,5 +57,6 @@ export {
   OrganizationArchivedError,
   UncancellableCertificationCenterInvitationError,
   UncancellableOrganizationInvitationError,
+  UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 };
