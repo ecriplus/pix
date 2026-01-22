@@ -241,15 +241,11 @@ export default class ScorecardDetails extends Component {
             }}
           {{/if}}
         </h2>
-        <div class="scorecard-details-reset-modal__warning">
+        <div>
           <p>{{t "pages.competence-details.actions.reset.modal.warning.header"}}</p>
-          <ul class="scorecard-details-reset-modal__list">
-            <li class="scorecard-details-reset-modal-list__item">{{t
-                "pages.competence-details.actions.reset.modal.warning.ongoing-assessment"
-              }}</li>
-            <li class="scorecard-details-reset-modal-list__item">{{t
-                "pages.competence-details.actions.reset.modal.warning.certification"
-              }}</li>
+          <ul>
+            <li>{{t "pages.competence-details.actions.reset.modal.warning.ongoing-assessment"}}</li>
+            <li>{{t "pages.competence-details.actions.reset.modal.warning.certification"}}</li>
           </ul>
         </div>
       </:content>
