@@ -13,6 +13,7 @@ import { CampaignParticipationDeletedError } from '../../../src/prescription/cam
 import * as DomainErrors from '../../../src/shared/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
+  UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 } from '../../../src/team/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../test-helper.js';
@@ -374,6 +375,16 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal("L'invitation à cette organisation a été annulée.");
+      expect(responseTitle(response)).to.equal('Forbidden');
+    });
+
+    it('responds Forbidden when a UserHasNoOrganizationMembershipError error occurs', async function () {
+      routeHandler.throws(new UserHasNoOrganizationMembershipError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('User is not member of any organization');
+      expect(responseCode(response)).to.equal('USER_HAS_NO_ORGANIZATION_MEMBERSHIP');
       expect(responseTitle(response)).to.equal('Forbidden');
     });
   });
