@@ -313,7 +313,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus idée… <br>Utilisez l’IA de Pix pour l’aider à compléter son tableau.<br>"
+                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus idée… <br>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à compléter son tableau.<br>"
               }
             },
             {
@@ -380,7 +380,7 @@
                     {
                       "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
                       "type": "text",
-                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties...»).</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
+                      "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>, etc.</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties»).</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
                 },
@@ -434,7 +434,7 @@
               "element": {
                 "id": "bfd964cd-dcb6-4bf6-8bde-182a05b75795",
                 "type": "text",
-                "content": "<p>Gustave a précisé ses prompts et a amélioré sa manière de parler avec le logiciel d’IA générative.&nbsp;</p><p>Pour chaque prompt, sélectionnez tous les éléments qui rendent le prompt clair.</p>"
+                "content": "<p>Gustave a précisé ses prompts et a amélioré sa manière de parler avec le logiciel d’IA générative.&nbsp;</p><p>Pour chaque prompt, sélectionnez tous les éléments qui le rendent&nbsp;clair.</p>"
               }
             },
             {
@@ -487,7 +487,7 @@
                     {
                       "id": "5176e4d0-394a-4e27-a754-f675ee325595",
                       "type": "text",
-                      "content": "<p>«&nbsp;En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville. Inclus ses grandes qualités (humour, adresse, leadership) et ses petits défauts (impatient et bavard).&nbsp;»</p>"
+                      "content": "<p>«&nbsp;En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville. Inclus ses grandes qualités (humour, adresse, franchise) et ses petits défauts (impatient et bavard).&nbsp;»</p>"
                     },
                     {
                       "id": "bf5ec9f6-31ce-44ad-b880-5694072cd0e4",
