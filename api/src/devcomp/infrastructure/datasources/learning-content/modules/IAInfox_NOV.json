@@ -57,21 +57,21 @@
                     "id": "1",
                     "content": "<p>Oui.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Eh non ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong>&nbsp;ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong>&nbsp;ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   }
                 ],
