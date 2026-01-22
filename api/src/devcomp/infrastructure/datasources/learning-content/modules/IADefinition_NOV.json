@@ -420,7 +420,18 @@
                 "instruction": "<p>Combien avez-vous trouvé d’utilisations de l’IA ?</p>",
                 "proposals": [
                   {
-                    "type": "text"
+                    "input": "1",
+                    "type": "input",
+                    "inputType": "number",
+                    "size": 1,
+                    "display": "inline",
+                    "placeholder": " ",
+                    "ariaLabel": "nombre d'utilisation de l'IA",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
