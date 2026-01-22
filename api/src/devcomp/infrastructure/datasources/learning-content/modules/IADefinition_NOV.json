@@ -426,7 +426,7 @@
                     "size": 1,
                     "display": "inline",
                     "placeholder": " ",
-                    "ariaLabel": "nombre d'utilisation de l'IA",
+                    "ariaLabel": "nombre d’utilisation de l’IA",
                     "defaultValue": "",
                     "tolerances": [],
                     "solutions": [
@@ -437,11 +437,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p><strong>C’est ça ! </strong></p>\n<p>L’IA est présente dans de nombreux appareils et services du quotidien, comme ici&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
+                    "diagnosis": "<p><strong>C’est ça ! </strong></p><p>L’IA est présente dans de nombreux appareils et services du quotidien, comme ici&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p><strong>Eh non. </strong></p>\n<p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d’IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
+                    "diagnosis": "<p><strong>Eh non. </strong></p><p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d’IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
                   }
                 }
               }
