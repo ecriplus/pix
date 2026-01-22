@@ -125,7 +125,7 @@
               "element": {
                 "id": "a66d621e-344c-485e-bee0-139650302d47",
                 "type": "text",
-                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.<br>✔️Par exemple&nbsp;: un identifiant ou une adresse mail.</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous.<br>✔️Par exemple&nbsp;: un mot de passe.</p>"
+                "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><p><strong>👤 S’identifier</strong>, c’est indiquer qui l’on est.<br>      ✔️Par exemple&nbsp;: un identifiant ou une adresse mail.</p><p><strong>🔑 S’authentifier</strong>, c’est prouver que c’est bien nous.<br>      ✔️Par exemple&nbsp;: un mot de passe.</p>"
               }
             }
           ]
