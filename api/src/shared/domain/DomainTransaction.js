@@ -14,10 +14,17 @@ class DomainTransaction {
     if (existingConn.isTransaction) {
       return lambda();
     }
-    return knex.transaction((trx) => {
-      const domainTransaction = new DomainTransaction(trx);
-      return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
-    }, transactionConfig);
+    return (
+      knex
+        .transaction((trx) => {
+          const domainTransaction = new DomainTransaction(trx);
+          return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
+        }, transactionConfig)
+        // Need to re-throw otherwise the error goes silent
+        .catch((err) => {
+          throw err;
+        })
+    );
   }
 
   /**

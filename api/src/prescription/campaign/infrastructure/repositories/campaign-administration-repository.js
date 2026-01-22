@@ -93,52 +93,46 @@ const _update = async function (campaign, attributes) {
 };
 
 const save = async function (campaigns, dependencies = { skillRepository }) {
-  const trx = await knex.transaction();
+  const trx = DomainTransaction.getConnection();
   const campaignsToCreate = _.isArray(campaigns) ? campaigns : [campaigns];
   const createdCampaigns = [];
-  try {
-    let latestCreatedCampaign;
-    for (const campaign of campaignsToCreate) {
-      const campaignAttributes = _.pick(campaign, CAMPAIGN_ATTRIBUTES);
-      const [createdCampaignDTO] = await trx('campaigns').insert(campaignAttributes).returning('*');
-      latestCreatedCampaign = new Campaign(createdCampaignDTO);
+  let latestCreatedCampaign;
+  for (const campaign of campaignsToCreate) {
+    const campaignAttributes = _.pick(campaign, CAMPAIGN_ATTRIBUTES);
+    const [createdCampaignDTO] = await trx('campaigns').insert(campaignAttributes).returning('*');
+    latestCreatedCampaign = new Campaign(createdCampaignDTO);
 
-      if (campaign.externalIdLabel) {
-        const feature = await trx('features').where({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).first();
-        const [{ params }] = await trx('campaign-features')
-          .insert({
-            campaignId: latestCreatedCampaign.id,
-            featureId: feature.id,
-            params: { label: campaign.externalIdLabel, type: campaign.externalIdType },
-          })
-          .returning('*');
-        latestCreatedCampaign.externalIdLabel = params.label;
-        latestCreatedCampaign.externalIdType = params.type;
-      }
-
-      if (latestCreatedCampaign.isAssessment || latestCreatedCampaign.isExam) {
-        const cappedTubes = await trx('target-profile_tubes')
-          .select('tubeId', 'level')
-          .where('targetProfileId', campaignAttributes.targetProfileId);
-        const skillData = [];
-        for (const cappedTube of cappedTubes) {
-          const allLevelSkills = await dependencies.skillRepository.findActiveByTubeId(cappedTube.tubeId);
-          const rightLevelSkills = allLevelSkills.filter((skill) => skill.difficulty <= cappedTube.level);
-          skillData.push(
-            ...rightLevelSkills.map((skill) => ({ skillId: skill.id, campaignId: latestCreatedCampaign.id })),
-          );
-        }
-        await knex.batchInsert('campaign_skills', skillData).transacting(trx);
-      }
-
-      createdCampaigns.push(latestCreatedCampaign);
+    if (campaign.externalIdLabel) {
+      const feature = await trx('features').where({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).first();
+      const [{ params }] = await trx('campaign-features')
+        .insert({
+          campaignId: latestCreatedCampaign.id,
+          featureId: feature.id,
+          params: { label: campaign.externalIdLabel, type: campaign.externalIdType },
+        })
+        .returning('*');
+      latestCreatedCampaign.externalIdLabel = params.label;
+      latestCreatedCampaign.externalIdType = params.type;
     }
-    await trx.commit();
-    return Array.isArray(campaigns) ? createdCampaigns : createdCampaigns[0];
-  } catch (err) {
-    await trx.rollback();
-    throw err;
+
+    if (latestCreatedCampaign.isAssessment || latestCreatedCampaign.isExam) {
+      const cappedTubes = await trx('target-profile_tubes')
+        .select('tubeId', 'level')
+        .where('targetProfileId', campaignAttributes.targetProfileId);
+      const skillData = [];
+      for (const cappedTube of cappedTubes) {
+        const allLevelSkills = await dependencies.skillRepository.findActiveByTubeId(cappedTube.tubeId);
+        const rightLevelSkills = allLevelSkills.filter((skill) => skill.difficulty <= cappedTube.level);
+        skillData.push(
+          ...rightLevelSkills.map((skill) => ({ skillId: skill.id, campaignId: latestCreatedCampaign.id })),
+        );
+      }
+      await knex.batchInsert('campaign_skills', skillData).transacting(trx);
+    }
+
+    createdCampaigns.push(latestCreatedCampaign);
   }
+  return Array.isArray(campaigns) ? createdCampaigns : createdCampaigns[0];
 };
 
 const swapCampaignCodes = async function ({ firstCampaignId, secondCampaignId }) {

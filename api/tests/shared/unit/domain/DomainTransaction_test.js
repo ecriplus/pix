@@ -34,7 +34,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
       const domainTransaction = new DomainTransaction(transactionStub);
       sinon.stub(asyncLocalStorage, 'run');
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake((fn) => fn(transactionStub));
+      knex.transaction.callsFake(async (fn) => fn(transactionStub));
 
       await DomainTransaction.execute(function () {
         // Something
@@ -47,7 +47,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
       const transactionConfiguration = { isolationLevel: 'read committed' };
       const expectedResult = Symbol('return');
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake((fn) => fn({}));
+      knex.transaction.callsFake(async (fn) => fn({}));
 
       await DomainTransaction.execute(() => expectedResult, transactionConfiguration);
 
@@ -59,7 +59,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
       const domainTransaction = new DomainTransaction(transactionStub);
       sinon.stub(asyncLocalStorage, 'run');
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake((fn) => fn(transactionStub));
+      knex.transaction.callsFake(async (fn) => fn(transactionStub));
 
       await DomainTransaction.execute(function () {
         // Something
@@ -73,7 +73,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
     it('should get transaction from store', async function () {
       const transactionStub = { commit: sinon.stub() };
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake(() => transactionStub);
+      knex.transaction.callsFake(async () => transactionStub);
       const myUseCase = withTransaction(() => {
         return DomainTransaction.getConnection();
       });
@@ -87,7 +87,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
       const domainTransaction = new DomainTransaction(transactionStub);
       sinon.stub(asyncLocalStorage, 'run');
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake((fn) => fn(transactionStub));
+      knex.transaction.callsFake(async (fn) => fn(transactionStub));
 
       const myUseCase = withTransaction(function () {
         // Something
