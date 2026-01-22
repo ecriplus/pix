@@ -187,15 +187,15 @@ describe('Unit | Router | organization-import-router', function () {
   });
 
   describe('POST /api/admin/import-organization-learners-format', function () {
-    let hasAtLeastOneAccessOfStub, updateOrganizationLearnerImportFormatsStub;
+    let hasAtLeastOneAccessOfStub, saveOrganizationLearnerImportFormatsStub;
 
     beforeEach(function () {
       hasAtLeastOneAccessOfStub = sinon
         .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
         .withArgs([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin]);
 
-      updateOrganizationLearnerImportFormatsStub = sinon
-        .stub(organizationImportController, 'updateOrganizationLearnerImportFormats')
+      saveOrganizationLearnerImportFormatsStub = sinon
+        .stub(organizationImportController, 'saveOrganizationLearnerImportFormats')
         .resolves(null);
     });
 
@@ -215,7 +215,7 @@ describe('Unit | Router | organization-import-router', function () {
 
       await httpTestServer.request(method, url);
 
-      expect(updateOrganizationLearnerImportFormatsStub.notCalled).to.be.true;
+      expect(saveOrganizationLearnerImportFormatsStub.notCalled).to.be.true;
     });
 
     it('should called controller when user is super admin', async function () {
@@ -228,7 +228,7 @@ describe('Unit | Router | organization-import-router', function () {
 
       await httpTestServer.request(method, url);
 
-      expect(updateOrganizationLearnerImportFormatsStub.called).to.be.true;
+      expect(saveOrganizationLearnerImportFormatsStub.called).to.be.true;
     });
   });
 });
