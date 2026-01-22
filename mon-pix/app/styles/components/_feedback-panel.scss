@@ -193,12 +193,10 @@
 /* Submit modal
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-.feedback-panel__submit-modal > [class$='__footer'] {
-  display: flex;
-  justify-content: flex-end;
-  padding-bottom: var(--pix-spacing-4x);
-
-  & > :not(:first-child) {
-    margin-left: var(--pix-spacing-2x);
+.feedback-panel-submit-modal {
+  &__action-buttons {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    justify-content: flex-end
   }
 }

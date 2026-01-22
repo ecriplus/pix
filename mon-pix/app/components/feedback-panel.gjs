@@ -125,7 +125,6 @@ export default class FeedbackPanel extends Component {
     </div>
 
     <PixModal
-      class="feedback-panel__submit-modal"
       @title={{t "pages.challenge.feedback-panel.modal.title"}}
       @showModal={{this.isModalVisible}}
       @onCloseButtonClick={{this.toggleModalVisibility}}
@@ -134,10 +133,16 @@ export default class FeedbackPanel extends Component {
         {{t "pages.challenge.feedback-panel.modal.content" htmlSafe=true}}
       </:content>
       <:footer>
-        <PixButton @triggerAction={{this.toggleModalVisibility}} @variant="secondary">
-          {{t "common.actions.cancel"}}
-        </PixButton>
-        <PixButton @type="submit" form="feedback-form">{{t "common.actions.validate"}}</PixButton>
+        <ul class="feedback-panel-submit-modal__action-buttons">
+          <li>
+            <PixButton @triggerAction={{this.toggleModalVisibility}} @variant="secondary">
+              {{t "common.actions.cancel"}}
+            </PixButton>
+          </li>
+          <li>
+            <PixButton @type="submit" form="feedback-form">{{t "common.actions.validate"}}</PixButton>
+          </li>
+        </ul>
       </:footer>
     </PixModal>
   </template>
