@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { EntityValidationError, FileValidationError } from '../../../../shared/domain/errors.js';
 import { OrganizationLearnerImportFormat } from '../models/OrganizationLearnerImportFormat.js';
 /**
@@ -8,7 +9,8 @@ import { OrganizationLearnerImportFormat } from '../models/OrganizationLearnerIm
  * @param {OrganizationLearnerImportFormatRepository} params.organizationLearnerImportFormatRepository
  * @returns {Promise<void>}
  */
-const updateOrganizationLearnerImportFormats = async function ({
+const saveOrganizationLearnerImportFormats = withTransaction(async function ({
+  userId,
   payload,
   organizationLearnerImportFormatRepository,
   dependencies = { readFile, jsonParse: JSON.parse },
@@ -24,7 +26,7 @@ const updateOrganizationLearnerImportFormats = async function ({
 
   const organizationLearnerImportFormats = rawImportFormats.flatMap((rawImportFormat) => {
     try {
-      return new OrganizationLearnerImportFormat(rawImportFormat);
+      return new OrganizationLearnerImportFormat({ ...rawImportFormat, createdAt: new Date(), createdBy: userId });
     } catch (error) {
       errors.push(error);
       return null;
@@ -35,7 +37,7 @@ const updateOrganizationLearnerImportFormats = async function ({
     throw EntityValidationError.fromMultipleEntityValidationErrors(errors);
   }
 
-  return organizationLearnerImportFormatRepository.updateAllByName({ organizationLearnerImportFormats });
-};
+  return organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
+});
 
-export { updateOrganizationLearnerImportFormats };
+export { saveOrganizationLearnerImportFormats };

@@ -9,8 +9,11 @@ import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-hel
 // Get __dirname in ESM
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-describe('Integration | Organizational Entities | Domain | UseCase | update-organization-learner-import-formats', function () {
+describe('Integration | Organizational Entities | Domain | UseCase | save-organization-learner-import-formats', function () {
+  let userId;
+
   beforeEach(function () {
+    userId = databaseBuilder.factory.buildUser().id;
     databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: 'FIRST_FORMAT',
       fileType: 'xml',
@@ -31,7 +34,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       // given
       const payload = fs.createReadStream(path.join(__dirname, 'test-file/import-format-file', 'ok.json'));
       // when
-      await usecases.updateOrganizationLearnerImportFormats({
+      await usecases.saveOrganizationLearnerImportFormats({
+        userId,
         payload,
       });
 
@@ -48,7 +52,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       // given && when
       const payload = fs.createReadStream(path.join(__dirname, 'test-file/import-format-file', 'ko.json'));
 
-      const error = await catchErr(usecases.updateOrganizationLearnerImportFormats)({
+      const error = await catchErr(usecases.saveOrganizationLearnerImportFormats)({
+        userId,
         payload,
       });
 
@@ -74,7 +79,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       // given && when
       const payload = fs.createReadStream(path.join(__dirname, 'test-file/import-format-file', 'not-a-json.json'));
 
-      const error = await catchErr(usecases.updateOrganizationLearnerImportFormats)({
+      const error = await catchErr(usecases.saveOrganizationLearnerImportFormats)({
+        userId,
         payload,
       });
 
