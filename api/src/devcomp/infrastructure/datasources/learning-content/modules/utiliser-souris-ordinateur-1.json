@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/draft/modules/souris1/picto-1eremarche_souris1.svg",
+    "image": "https://assets.pix.org/modules/1eMarche-souris1/picto-1eremarche_souris1.svg",
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n’avez jamais utilisé de souris, nous vous conseillons d’être accompagné pour ce module.</p><br>",
     "duration": 30,
     "level": "novice",
@@ -55,7 +55,7 @@
               "element": {
                 "id": "c849cbc5-931e-4a00-ae6a-083e2ff0614d",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/souris1/differentes-souris_v2.png",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/illu-differentes-souris.png",
                 "alt": "-",
                 "alternativeText": "<ul><li>Les souris avec un fil&nbsp;: photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil&nbsp;: photographies de 4&nbsp;souris sans fil différentes reliées par des connecteurs USB Bluetooth. L’une d’elle est une souris ergonomique.</li></ul>"
               }
@@ -104,9 +104,9 @@
                 "id": "56541ee2-cf5f-4966-b17b-96a1b7266868",
                 "type": "video",
                 "title": "Prendre en main la souris",
-                "url": "https://assets.pix.org/draft/modules/souris1/video-prise-en-main.mp4",
-                "poster": "https://assets.pix.org/draft/modules/souris1/video-prise-en-main-vignette.jpg",
-                "subtitles": "https://assets.pix.org/draft/modules/souris1/video-prise-en-main-subtitles.vtt",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main.mp4",
+                "poster": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main-vignette.jpg",
+                "subtitles": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main-subtitles.vtt",
                 "transcription": "<strong>Prendre en main une souris d’ordinateur</strong><br>Je place ma main entière sur la souris, comme pour la recouvrir. Je pose mon avant-bras et mon poignet à plat sur la table. Je baisse et je détends mes épaules. <br>Je place mon pouce sur le côté gauche de la souris. Je pose mon index sur le bouton gauche et mon majeur sur le bouton droit, sans appuyer. En fonction de la taille de ma main et de celle de la souris, les deux derniers doigts peuvent être sur la souris ou sur le côté de la souris. <br>L’important est d’être à l’aise et détendu au niveau du poignet et des doigts. Maintenant, ma main est correctement posée sur la souris.Je fais glisser la souris doucement sur la table en bougeant ma main. Seul mon poignet bouge. Mon avant-bras reste en contact avec la table. Je guide la souris sans appuyer dessus ni la serrer. Je fais de petits mouvements. Encore une fois, j’essaie d’être le plus relâché possible."
               }
             }
@@ -191,9 +191,9 @@
                 "id": "abe223ab-ad36-4b14-b349-abc8590eb94e",
                 "type": "video",
                 "title": "Déplacer la souris",
-                "url": "https://assets.pix.org/draft/modules/souris1/video-deplacer-la-souris.mp4",
-                "poster": "https://assets.pix.org/draft/modules/souris1/video-deplacer-la-souris-vignette.jpg",
-                "subtitles": "https://assets.pix.org/draft/modules/souris1/video-deplacer-la-souris-subtitles.vtt",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris.mp4",
+                "poster": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris-vignette.jpg",
+                "subtitles": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris-subtitles.vtt",
                 "transcription": "Quand je déplace la souris sur la table, une flèche se déplace sur l’écran. Cette flèche s’appelle le pointeur. Quand j’utilise un smartphone, j’utilise mon doigt pour pointer à l’écran. Sur un ordinateur, c’est la souris qui permet de faire cela.<br>Pour déplacer le pointeur sur l’écran, je glisse la souris dans la même direction sur la table. Je fais glisser la souris avec ma main sans trop la serrer. De petits mouvements sont suffisants. Si je déplace tout mon bras, je risque d’aller trop loin.<br>Voici deux astuces&nbsp;: <br><ul><li>Si j’ai un tapis de souris, je place le pointeur au centre de l’écran. Je lève la souris pour la placer au centre du tapis de souris et, ensuite, je déplace ma souris sans sortir du tapis. </li><li>Pour finir, voici une astuce si je déplace la souris trop loin sur la table&nbsp;: dans ce cas-là, je n’hésite pas à soulever la souris et, ensuite, je replace la souris à sa position de départ sur la table.</li></ul>"
               }
             }
@@ -380,7 +380,7 @@
                 "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
                 "type": "short-video",
                 "title": "clic",
-                "url": "https://assets.pix.org/draft/modules/souris1/gif-video_souris_clic_fond.mp4",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/gif-video_souris_clic_fond.mp4",
                 "transcription": "   "
               }
             },
@@ -413,7 +413,7 @@
                 "id": "4cd1c225-f5da-43c2-af29-7d2bfa340b07",
                 "type": "short-video",
                 "title": "premier clic",
-                "url": "https://assets.pix.org/draft/modules/souris1/main_gif_deplacer-sa-souris_0110.mp4",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/gif-video_deplacer-sa-souris.mp4",
                 "transcription": "   "
               }
             },
@@ -508,7 +508,7 @@
               "element": {
                 "id": "1ad8190f-46b6-43b5-82b1-cd81640b1700",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/souris1/curseurs-avec-noms.png",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/curseurs-avec-noms.png",
                 "alt": "",
                 "alternativeText": "<p>image des 4 formes de pointeur les plus courantes&nbsp;: la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
               }
