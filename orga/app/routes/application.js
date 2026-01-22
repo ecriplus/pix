@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'pix-orga/config/environment';
+import { formats } from 'pix-orga/ember-intl';
 
 export default class ApplicationRoute extends Route {
   @service store;
@@ -12,6 +13,7 @@ export default class ApplicationRoute extends Route {
   @service oidcIdentityProviders;
   @service pixMetrics;
   @service router;
+  @service intl;
 
   constructor() {
     super(...arguments);
@@ -27,6 +29,7 @@ export default class ApplicationRoute extends Route {
 
   async beforeModel(transition) {
     const queryParams = transition?.to?.queryParams;
+    this.intl.setFormats(formats);
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load();
