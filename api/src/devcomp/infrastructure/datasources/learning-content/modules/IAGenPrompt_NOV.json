@@ -230,7 +230,7 @@
                   "messages": [
                     {
                       "direction": "inbound",
-                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je t'aider aujourd’hui ?"
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je t’aider aujourd’hui ?"
                     }
                   ],
                   "prompts": [
@@ -787,7 +787,7 @@
                 "id": "3cd4e9f5-d74d-48ba-bd6e-1c8a19fbd206",
                 "type": "expand",
                 "title": "Indice 1",
-                "content": "<p>Avez-vous&nbsp;vérifié la recette produite par le logiciel d'IA générative ?</p>"
+                "content": "<p>Avez-vous&nbsp;vérifié la recette produite par le logiciel d’IA générative ?</p>"
               }
             },
             {
@@ -796,7 +796,7 @@
                 "id": "424be1fc-caa2-4839-a809-6109238af1ee",
                 "type": "expand",
                 "title": "Indice 2",
-                "content": "<p>Avez-vous demandé au logiciel d'IA générative de corriger sa proposition ?</p>"
+                "content": "<p>Avez-vous demandé au logiciel d’IA générative de corriger sa proposition ?</p>"
               }
             },
             {
@@ -805,7 +805,7 @@
                 "id": "b3b789aa-6d69-402e-bd2d-822c581628d9",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si le logiciel d'IA générative a bien produit une recette, il a sûrement fait une&nbsp;<strong>erreur </strong>et ajouté des<strong> insectes.</strong></p><p> Si vous avez réussi à obtenir une <strong>recette&nbsp;</strong><strong>avec un fruit, sans insecte</strong> votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Si le logiciel d’IA générative a bien produit une recette, il a sûrement fait une&nbsp;<strong>erreur </strong>et ajouté des<strong> insectes.</strong></p><p> Si vous avez réussi à obtenir une <strong>recette&nbsp;</strong><strong>avec un fruit, sans insecte</strong> votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
