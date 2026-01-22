@@ -22,6 +22,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
     const organization = this.server.create('organization', {
       name: 'Aude Javel Company',
+      features: { PLACES_MANAGEMENT: { active: true } },
     });
 
     // when
@@ -39,6 +40,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
     await authenticateAdminMemberWithRole({ isCertif: true })(server);
     const organization = this.server.create('organization', {
       name: 'Aude Javel Company',
+      features: { PLACES_MANAGEMENT: { active: true } },
     });
 
     // when
@@ -55,6 +57,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
       const organization = this.server.create('organization', {
         id: 5,
         name: 'Kabuki',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
       this.server.create('organization-invitation', {
         email: 'kabuki@example.net',
@@ -79,6 +82,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
         const organization = this.server.create('organization', {
           id: 5,
           name: 'Kabuki',
+          features: { PLACES_MANAGEMENT: { active: true } },
         });
         const organizationInvitation = this.server.create('organization-invitation', {
           id: 10,

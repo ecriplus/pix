@@ -26,7 +26,11 @@ module('Acceptance | combined course blueprint Organizations', function (hooks) 
       module('when admin member has role "SUPER_ADMIN", "CERTIF", "SUPPORT" or "METIER"', function (hooks) {
         hooks.beforeEach(async function () {
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          server.create('organization', { id: 456, name: 'My organization' });
+          server.create('organization', {
+            id: 456,
+            name: 'My organization',
+            features: { PLACES_MANAGEMENT: { active: false } },
+          });
           server.create('combined-course-blueprint', {
             id: 1,
             name: 'le blueprint ia',
@@ -67,8 +71,16 @@ module('Acceptance | combined course blueprint Organizations', function (hooks) 
 
     module('with multiple organizations', function (hooks) {
       hooks.beforeEach(async function () {
-        server.create('organization', { id: 456, name: 'My organization' });
-        server.create('organization', { id: 789, name: 'My other organization' });
+        server.create('organization', {
+          id: 456,
+          name: 'My organization',
+          features: { PLACES_MANAGEMENT: { active: false } },
+        });
+        server.create('organization', {
+          id: 789,
+          name: 'My other organization',
+          features: { PLACES_MANAGEMENT: { active: false } },
+        });
       });
 
       test('should list organizations', async function (assert) {

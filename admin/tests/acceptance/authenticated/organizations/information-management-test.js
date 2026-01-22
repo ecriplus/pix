@@ -32,7 +32,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         administrationTeamId: 456,
         countryCode: 99100,
       });
-      this.server.create('organization', { id: '1234' });
+      this.server.create('organization', { id: '1234', features: { PLACES_MANAGEMENT: { active: true } } });
 
       const screen = await visit(`/organizations/${organization.id}`);
 
@@ -69,7 +69,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         administrationTeamId: null,
       });
 
-      this.server.create('organization', { id: '1234' });
+      this.server.create('organization', { id: '1234', features: { PLACES_MANAGEMENT: { active: true } } });
 
       const screen = await visit(`/organizations/${organization.id}`);
 
@@ -126,6 +126,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         name: 'oldOrganizationName',
         archivedAt: '2022-12-25',
         archivistFullName: 'Clément Tine',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
 
       // when
@@ -141,6 +142,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         name: 'oldOrganizationName',
         archivedAt: '2022-12-25',
         archivistFullName: 'Clément Tine',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
 
       // when
@@ -157,6 +159,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         name: 'oldOrganizationName',
         archivedAt: '2022-12-25',
         archivistFullName: 'Clément Tine',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
 
       // when
@@ -174,6 +177,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         // given
         const organization = this.server.create('organization', {
           name: 'Aude Javel Company',
+          features: { PLACES_MANAGEMENT: { active: true } },
         });
         const screen = await visit(`/organizations/${organization.id}`);
 
@@ -191,6 +195,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // given
           const organization = this.server.create('organization', {
             name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
           await clickByName("Archiver l'organisation");
@@ -207,6 +212,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // given
           const organization = this.server.create('organization', {
             name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
           await clickByName("Archiver l'organisation");
@@ -225,6 +231,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       // given
       const organization = this.server.create('organization', {
         name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
       const screen = await visit(`/organizations/${organization.id}`);
       await clickByName("Archiver l'organisation");
@@ -242,6 +249,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       // given
       const organization = this.server.create('organization', {
         name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
       this.server.post(
         '/admin/organizations/:id/archive',
@@ -270,6 +278,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       // given
       const organization = this.server.create('organization', {
         name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
       this.server.post(
         '/admin/organizations/:id/archive',
