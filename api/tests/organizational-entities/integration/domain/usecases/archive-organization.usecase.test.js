@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { ArchiveOrganizationError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
@@ -31,7 +32,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
     });
 
     context('when there are active places lots', function () {
-      it('throws an error', async function () {
+      it('throws an ArchiveOrganizationError', async function () {
         // given
         const superAdminUser = databaseBuilder.factory.buildUser.withRole();
         const organization = databaseBuilder.factory.buildOrganization();
@@ -50,8 +51,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         });
 
         // then
-        expect(error).to.be.instanceOf(Error);
-        clock.restore();
+        expect(error).to.be.instanceOf(ArchiveOrganizationError);
+        expect(error.message).to.equal('Organization with active lots cannot be archived');
       });
     });
   });

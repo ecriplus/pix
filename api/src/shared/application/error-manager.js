@@ -10,7 +10,10 @@ import {
 } from '../../certification/session-management/domain/errors.js';
 import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../evaluation/domain/errors.js';
 import * as LLMDomainErrors from '../../llm/domain/errors.js';
-import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../organizational-entities/domain/errors.js';
+import {
+  ArchiveOrganizationError,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../../organizational-entities/domain/errors.js';
 import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
 import { AggregateImportError, SiecleXmlImportError } from '../../prescription/learner-management/domain/errors.js';
@@ -529,6 +532,10 @@ function _mapToHttpError(error) {
 
   if (error instanceof LLMDomainErrors.IncorrectMessagesOrderingError) {
     return new HttpErrors.InternalServerError(error.message);
+  }
+
+  if (error instanceof ArchiveOrganizationError) {
+    return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }
 
   return new HttpErrors.BaseHttpError(error.message);

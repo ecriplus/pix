@@ -1,4 +1,5 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { ArchiveOrganizationError } from '../errors.js';
 
 const archiveOrganization = withTransaction(async function ({
   organizationId,
@@ -11,7 +12,7 @@ const archiveOrganization = withTransaction(async function ({
   });
 
   if (_arePlacesLotsActive(organizationPlacesLots)) {
-    throw new Error();
+    throw new ArchiveOrganizationError({ message: 'Organization with active lots cannot be archived' });
   }
 
   await organizationForAdminRepository.archive({ id: organizationId, archivedBy: userId });
@@ -19,7 +20,7 @@ const archiveOrganization = withTransaction(async function ({
 });
 
 const _arePlacesLotsActive = (organizationPlacesLots) => {
-  return Boolean(organizationPlacesLots.find((organizationPlacesLot) => organizationPlacesLot.isActive()));
+  return Boolean(organizationPlacesLots.find((organizationPlacesLot) => organizationPlacesLot.isActive));
 };
 
 export { archiveOrganization };
