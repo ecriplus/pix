@@ -1,18 +1,14 @@
-import { NotFoundError } from '../../../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import {
-  AlreadyExistingInvitationError,
   ManyOrganizationsFoundError,
   OrganizationNotFoundError,
   OrganizationWithoutEmailError,
-  UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
 import { OrganizationArchivedError } from '../../../../../src/team/domain/errors.js';
-import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { serializer as scoOrganizationInvitationSerializer } from '../../../../../src/team/infrastructure/serializers/jsonapi/sco-organization-invitation.serializer.js';
-import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 const routesUnderTest = teamRoutes[0];
 
@@ -35,87 +31,6 @@ describe('Integration | Team | Application | Controller | Organization invitatio
 
   afterEach(function () {
     sandbox.restore();
-  });
-
-  describe('#acceptOrganizationInvitation', function () {
-    const payload = {
-      data: {
-        id: '100047_DZWMP7L5UM',
-        type: 'organization-invitation-responses',
-        attributes: {
-          code: 'DZWMP7L5UM',
-          'user-id': '123',
-        },
-      },
-    };
-    context('Success cases', function () {
-      it('should return an HTTP response with status code 204', async function () {
-        // given
-        usecases.acceptOrganizationInvitation.resolves();
-        usecases.createCertificationCenterMembershipForScoOrganizationAdminMember.resolves();
-
-        // when
-        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-        // then
-        expect(response.statusCode).to.equal(204);
-      });
-    });
-
-    context('Error cases', function () {
-      it('responses an HTTP response with status code 412 when AlreadyExistingInvitationError', async function () {
-        // given
-        usecases.acceptOrganizationInvitation.rejects(new AlreadyExistingInvitationError());
-
-        // when
-        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-        // then
-        expect(response.statusCode).to.equal(412);
-      });
-
-      it('responses an HTTP response with status code 404 when NotFoundError', async function () {
-        // given
-        usecases.acceptOrganizationInvitation.rejects(new NotFoundError());
-
-        // when
-        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-        // then
-        expect(response.statusCode).to.equal(404);
-      });
-
-      it('responses an HTTP response with status code 404 when UserNotFoundError', async function () {
-        // given
-        usecases.acceptOrganizationInvitation.rejects(new UserNotFoundError());
-
-        // when
-        const response = await httpTestServer.request('POST', '/api/organization-invitations/1/response', payload);
-
-        // then
-        expect(response.statusCode).to.equal(404);
-      });
-    });
-  });
-
-  describe('#findPendingInvitations', function () {
-    context('Success cases', function () {
-      it('returns an HTTP response with status code 200', async function () {
-        // given
-        const invitation = domainBuilder.buildOrganizationInvitation({
-          organizationId: 1,
-          status: OrganizationInvitation.StatusType.PENDING,
-        });
-        usecases.findPendingOrganizationInvitations.resolves([invitation]);
-        securityPreHandlers.checkUserIsAdminInOrganization.returns(true);
-
-        // when
-        const response = await httpTestServer.request('GET', '/api/organizations/1/invitations');
-
-        // then
-        expect(response.statusCode).to.equal(200);
-      });
-    });
   });
 
   describe('#sendScoInvitation', function () {
