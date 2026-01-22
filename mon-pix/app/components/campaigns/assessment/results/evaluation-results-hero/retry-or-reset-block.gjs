@@ -141,20 +141,24 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
                 </p>
               </:content>
               <:footer>
-                <div class="reset-campaign-participation-modal__footer">
-                  <PixButton @variant="secondary" @triggerAction={{this.toggleResetModalVisibility}}>
-                    {{t "common.actions.cancel"}}
-                  </PixButton>
-                  <PixButtonLink
-                    @route="campaigns.entry-point"
-                    @model={{@campaign.code}}
-                    @query={{this.resetQueryParams}}
-                    @variant="error"
-                    onclick={{this.handleResetClick}}
-                  >
-                    {{t "common.actions.confirm"}}
-                  </PixButtonLink>
-                </div>
+                <ul class="reset-campaign-participation-modal__footer">
+                  <li>
+                    <PixButton @variant="secondary" @triggerAction={{this.toggleResetModalVisibility}}>
+                      {{t "common.actions.cancel"}}
+                    </PixButton>
+                  </li>
+                  <li>
+                    <PixButtonLink
+                      @route="campaigns.entry-point"
+                      @model={{@campaign.code}}
+                      @query={{this.resetQueryParams}}
+                      @variant="error"
+                      onclick={{this.handleResetClick}}
+                    >
+                      {{t "common.actions.confirm"}}
+                    </PixButtonLink>
+                  </li>
+                </ul>
               </:footer>
             </PixModal>
           {{/if}}
