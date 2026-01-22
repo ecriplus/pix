@@ -20,11 +20,14 @@ export default class FillInParticipantExternalId extends Component {
 
   @tracked participantExternalId = this.previousParticipantExternalId || null;
   @tracked isLoading = false;
-  @tracked errorMessage = ERROR_MESSAGE[this.previousError] ? this.intl.t(ERROR_MESSAGE[this.previousError]) : null;
+  @tracked errorMessage = this.previousError;
 
   get previousError() {
-    return this.campaignStorage.get(this.args.campaign.code, 'error');
+    const error = this.campaignStorage.get(this.args.campaign.code, 'error');
+    if (!error || !ERROR_MESSAGE[error]) return null;
+    return this.intl.t(ERROR_MESSAGE[error], { externalIdLabel: this.args.campaign.externalIdLabel });
   }
+
   get previousParticipantExternalId() {
     return this.campaignStorage.get(this.args.campaign.code, 'previousParticipantExternalId');
   }
