@@ -13,7 +13,7 @@
 
   &__action-buttons {
     display: flex;
-    gap: var(--pix-spacing-2x);
+    gap: var(--pix-spacing-4x);
     justify-content: flex-end;
   }
 
@@ -32,16 +32,5 @@
 
   &__error-message {
     margin-top: var(--pix-spacing-2x);
-  }
-
-  .pix-modal {
-    &__header {
-      border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
-    }
-
-    &__footer {
-      padding-bottom: var(--pix-spacing-4x);
-      border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
-    }
   }
 }
