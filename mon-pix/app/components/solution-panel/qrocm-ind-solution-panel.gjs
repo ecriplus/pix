@@ -18,7 +18,7 @@ import solutionsAsObject from 'mon-pix/utils/solution-as-object';
 
 export default class QrocmIndSolutionPanel extends Component {
   <template>
-    <div class="qrocm-solution-panel qrocm-solution-panel--ind rounded-panel">
+    <div class="qrocm-solution-panel qrocm-solution-panel--ind">
       <div class="rounded-panel__row correction-qrocm__text">
         {{#each this.blocks as |block|}}
           {{#if block.showText}}

@@ -11,7 +11,7 @@ import valueAsArrayOfBoolean from 'mon-pix/utils/value-as-array-of-boolean';
 
 export default class QcuSolutionPanel extends Component {
   <template>
-    <div class="qcu-solution-panel rounded-panel rounded-panel__row">
+    <div class="qcu-solution-panel rounded-panel__row">
       {{#each this.labeledRadios as |labeledItemRadio|}}
         <p class="qcu-solution-panel__proposal-item">
           <span class="qcu-solution-panel__radio-button">
