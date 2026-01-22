@@ -57,21 +57,21 @@
                     "id": "1",
                     "content": "<p>Oui.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Eh non ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong>&nbsp;ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong>&nbsp;ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
+                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>.</p>"
                     }
                   }
                 ],
@@ -420,7 +420,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/IAInfox_NOV/entraineurjolieville.png",
                 "alt": "",
-                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanée nommé « Parents du rugby »:&nbsp;<br>Brian partage une photo d'un homme avec une veste où est indiqué le mot « Jolieville ». Cet homme est en train de donner une enveloppe à un autre homme qui porte une veste indiquant le mot « Calmeville ». Sous la photo, Brian a écrit le message suivant&nbsp;:«&nbsp;Alerte corruption ! L’entraîneur de l’équipe de Jolieville a été aperçu en train de donner une enveloppe à l’entraîneur de l’équipe de Calmeville. Comme par hasard, Calmeville a perdu le lendemain !»</p>",
+                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanée nommé «&nbsp;Parents du rugby&nbsp;»&nbsp;:&nbsp;<br>Brian partage une photo d'un homme avec une veste où est indiqué le mot « Jolieville ». Cet homme est en train de donner une enveloppe à un autre homme qui porte une veste indiquant le mot « Calmeville ». Sous la photo, Brian a écrit le message suivant&nbsp;:&nbsp;«&nbsp;Alerte corruption ! L’entraîneur de l’équipe de Jolieville a été aperçu en train de donner une enveloppe à l’entraîneur de l’équipe de Calmeville. Comme par hasard, Calmeville a perdu le lendemain !»</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -519,7 +519,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> est un média hyperréaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande peu de matériel et de compétence pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> <strong>en ligne. </strong>⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, il ne faut pas le partager immédiatement. <strong>Vérifiez</strong> d'abord sa source et sa fiabilité. ℹ️</li></ul>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyperréaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande peu de matériel et de compétences pour être créé. Voilà pourquoi <strong>beaucoup de deepfakes circulent en ligne.</strong> ⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, il ne faut pas le partager immédiatement. <strong>Vérifiez</strong> d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
           ]
