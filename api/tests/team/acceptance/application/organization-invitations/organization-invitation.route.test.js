@@ -169,6 +169,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
         expect(response.statusCode).to.equal(204);
       });
     });
+
     context('Error cases', function () {
       it('should respond with a 404 if organization-invitation does not exist with id and code', async function () {
         // given
@@ -228,6 +229,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
 
         // then
         expect(response.statusCode).to.equal(409);
+        expect(response.result.errors[0].code).to.equal('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED');
       });
 
       it('should respond with a 401 if user does not exist', async function () {
