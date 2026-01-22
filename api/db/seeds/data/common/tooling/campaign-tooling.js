@@ -250,11 +250,9 @@ async function createAssessmentCampaign({
   await databaseBuilder.commit();
 
   // Create stage acquisitions for each participation
-  await Promise.all(
-    createdAssessments.map((assessment) =>
-      evaluationUsecases.handleStageAcquisition({ assessment: new Assessment(assessment) }),
-    ),
-  );
+  for (const assessment of createdAssessments) {
+    await evaluationUsecases.handleStageAcquisition({ assessment: new Assessment(assessment) });
+  }
 
   return { campaignId: realCampaignId, targetProfileId };
 }
