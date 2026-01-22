@@ -237,7 +237,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
             // then
             assert
-              .dom(screen.getByText("Impossible d'archiver une organisation ayant au moins 1 lot de places actif."))
+              .dom(screen.getByText(t('pages.organization.get.archiving.notifications.active-places-lot-error')))
               .exists();
             assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
           });

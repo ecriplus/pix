@@ -44,7 +44,7 @@ export default class GetController extends Controller {
       const errorCode = get(responseError, 'errors[0].code');
       if (errorCode === 'ARCHIVE_ORGANIZATION_ERROR') {
         return this.pixToast.sendErrorNotification({
-          message: "Impossible d'archiver une organisation ayant au moins 1 lot de places actif.",
+          message: this.intl.t('pages.organization.get.archiving.notifications.active-places-lot-error'),
         });
       }
       if (status === '422') {

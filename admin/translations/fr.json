@@ -499,7 +499,7 @@
         },
         "title": "Tous les schémas de parcours combinés"
       },
-       "organizations": {
+      "organizations": {
         "detach-organization": "Etes-vous sûr de vouloir détacher l'organisation <strong>{organizationName}</strong> du schéma de parcours <strong>{name}</strong>",
         "detach-organization-success": "Le schéma de parcours n'est plus partagé avec l'organisation {name}."
       }
@@ -1270,6 +1270,13 @@
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },
     "organization": {
+      "get": {
+        "archiving": {
+          "notifications": {
+            "active-places-lot-error": "Impossible d'archiver une organisation ayant au moins 1 lot de places actif."
+          }
+        }
+      },
       "navbar": {
         "campaigns": "Campagnes",
         "children": "Organisations filles",
