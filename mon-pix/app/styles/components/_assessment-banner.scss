@@ -86,11 +86,8 @@
 
 .assessment-banner-closing-modal__footer {
   display: flex;
+  gap: var(--pix-spacing-4x);
   justify-content: flex-end;
-
-  & > * + * {
-    margin-left: var(--pix-spacing-2x);
-  }
 }
 
 .assessment-banner__actions {

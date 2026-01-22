@@ -50,18 +50,22 @@ export default class AssessmentBanner extends Component {
                 <p>{{t "pages.assessment-banner.modal.content"}}</p>
               </:content>
               <:footer>
-                <div class="assessment-banner-closing-modal__footer">
-                  <PixButton @variant="secondary" @triggerAction={{this.toggleClosingModal}}>
-                    {{t "common.actions.stay"}}
-                  </PixButton>
-                  <ButtonLinkWithHistory
-                    @redirectionUrl={{this.redirectionUrl}}
-                    @defaultRoute="authenticated"
-                    aria-label={{t "pages.assessment-banner.modal.actions.quit.extra-information"}}
-                  >
-                    {{t "common.actions.quit"}}
-                  </ButtonLinkWithHistory>
-                </div>
+                <ul class="assessment-banner-closing-modal__footer">
+                  <li>
+                    <PixButton @variant="secondary" @triggerAction={{this.toggleClosingModal}}>
+                      {{t "common.actions.stay"}}
+                    </PixButton>
+                  </li>
+                  <li>
+                    <ButtonLinkWithHistory
+                      @redirectionUrl={{this.redirectionUrl}}
+                      @defaultRoute="authenticated"
+                      aria-label={{t "pages.assessment-banner.modal.actions.quit.extra-information"}}
+                    >
+                      {{t "common.actions.quit"}}
+                    </ButtonLinkWithHistory>
+                  </li>
+                </ul>
               </:footer>
             </PixModal>
           {{/if}}
