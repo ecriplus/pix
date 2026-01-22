@@ -168,6 +168,7 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
   @service intl;
 
   @tracked autoReplyAnswer = '';
+  @tracked autoReplyErrorMessage = '';
   @tracked qrocProposalAnswerValue = '';
   postMessageHandler = null;
 
@@ -195,15 +196,11 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
   }
 
   _getErrorMessage() {
-    let errorMessage;
-    if (this.args.challenge.autoReply) {
-      errorMessage = 'pages.challenge.skip-error-message.qroc-auto-reply';
-    } else if (this.args.challenge.format === 'nombre') {
-      errorMessage = 'pages.challenge.skip-error-message.qroc-positive-number';
-    } else {
-      errorMessage = 'pages.challenge.skip-error-message.qroc';
-    }
-    return this.intl.t(errorMessage);
+    if (this.autoReplyErrorMessage) return this.autoReplyErrorMessage;
+    if (this.args.challenge.autoReply) return this.intl.t('pages.challenge.skip-error-message.qroc-auto-reply');
+    if (this.args.challenge.format === 'nombre')
+      return this.intl.t('pages.challenge.skip-error-message.qroc-positive-number');
+    return this.intl.t('pages.challenge.skip-error-message.qroc');
   }
 
   _addEventListener() {
@@ -213,7 +210,11 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
 
   _receiveEmbedMessage(event) {
     const message = this._getMessageFromEventData(event);
-    if (message == null || message.answer == null || message.from !== 'pix') return;
+    if (message == null || message.from !== 'pix') return;
+
+    if (message.validity != null) this.autoReplyErrorMessage = message.validity;
+
+    if (message.answer == null) return;
     this.autoReplyAnswer = message.answer;
   }
 
