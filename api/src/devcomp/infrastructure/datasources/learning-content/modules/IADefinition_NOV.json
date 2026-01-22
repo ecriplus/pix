@@ -416,7 +416,23 @@
               "type": "element",
               "element": {
                 "id": "658f3722-cf66-4fe0-9dcc-ee4ce1b6a673",
-                "type": "text"
+                "type": "qrocm",
+                "instruction": "<p>Combien avez-vous trouvé d’utilisations de l’IA ?</p>",
+                "proposals": [
+                  {
+                    "type": "text"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "",
+                    "diagnosis": "<p><strong>C’est ça ! </strong></p>\n<p>L’IA est présente dans de nombreux appareils et services du quotidien, comme ici&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
+                  },
+                  "invalid": {
+                    "state": "",
+                    "diagnosis": "<p><strong>Eh non. </strong></p>\n<p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d’IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d’IA générative sur l’ordinateur, le robot aspirateur, l’enceinte connectée et le jeu vidéo sur la console.</p>"
+                  }
+                }
               }
             }
           ]
