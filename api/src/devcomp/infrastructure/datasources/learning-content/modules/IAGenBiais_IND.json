@@ -910,7 +910,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                    "diagnosis": "<p>Vous avez repéré les biais du logiciel d’IA. Il suppose que le terme «&nbsp;indien&nbsp;» désigne une personne native d’Amérique, qu’il représente de façon stéréotypée.</p><p>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre. En effet,&nbsp;l’IA a proposé&nbsp;des sports traditionnellement considérés comme plus féminins (danse, gymnastique…) seulement aux filles et pas aux garçons, alors que ces sports sont adaptés à tous.</p>"
+                    "diagnosis": "<p>Vous avez repéré les biais du logiciel d’IA. Il suppose que le terme «&nbsp;indien&nbsp;» désigne une personne native d’Amérique, qu’il représente de façon stéréotypée.</p><p>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre. En effet,&nbsp;l’IA a proposé&nbsp;des sports traditionnellement considérés comme plus féminins (danse, gymnastique, etc.) seulement aux filles et pas aux garçons, alors que ces sports sont adaptés à tous.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
@@ -1031,9 +1031,9 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Formuler les plus prompts neutres possible.</p>",
+                    "content": "<p>Formuler les prompts les plus neutres possible.<p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre …&nbsp;»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre… ?»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
@@ -1047,7 +1047,7 @@
                     "id": "3",
                     "content": "<p>Vérifier les réponses de l’IA avec d’autres sources.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée ! </p><p>Vous pouvez faire une recherche sur internet ou dans des documents papiers (livres, journaux, magazines…)<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée ! </p><p>Vous pouvez faire une recherche sur internet ou dans des documents papiers (livres, journaux, magazines, etc.)<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
