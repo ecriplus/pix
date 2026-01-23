@@ -43,8 +43,8 @@ module('Acceptance | Organizations | List', function (hooks) {
 
     test('it should list the organizations', async function (assert) {
       // given
-      server.create('organization', { name: 'Tic' });
-      server.create('organization', { name: 'Tac' });
+      server.create('organization', { name: 'Tic', features: { PLACES_MANAGEMENT: { active: false } } });
+      server.create('organization', { name: 'Tac', features: { PLACES_MANAGEMENT: { active: false } } });
 
       // when
       const screen = await visit('/organizations/list');
@@ -57,8 +57,8 @@ module('Acceptance | Organizations | List', function (hooks) {
 
     test('it should not show an Actions column', async function (assert) {
       // given
-      server.create('organization', { name: 'Tic' });
-      server.create('organization', { name: 'Tac' });
+      server.create('organization', { name: 'Tic', features: { PLACES_MANAGEMENT: { active: false } } });
+      server.create('organization', { name: 'Tac', features: { PLACES_MANAGEMENT: { active: false } } });
 
       // when
       const screen = await visit('/organizations/list');
@@ -124,7 +124,7 @@ module('Acceptance | Organizations | List', function (hooks) {
 
     test('it should redirect to organization details on click', async function (assert) {
       // given
-      server.create('organization', { id: 1, name: 'Orga name' });
+      server.create('organization', { id: 1, name: 'Orga name', features: { PLACES_MANAGEMENT: { active: false } } });
       const screen = await visit('/organizations/list');
 
       // when

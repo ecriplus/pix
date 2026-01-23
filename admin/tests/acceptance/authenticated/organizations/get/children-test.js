@@ -21,7 +21,10 @@ module('Acceptance | Organizations | Children', function (hooks) {
 
     test('"Organisations filles" tab exists', async function (assert) {
       // given
-      const organizationId = this.server.create('organization', { name: 'Orga name' }).id;
+      const organizationId = this.server.create('organization', {
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      }).id;
 
       // when
       const screen = await visit(`/organizations/${organizationId}/children`);
@@ -33,8 +36,17 @@ module('Acceptance | Organizations | Children', function (hooks) {
 
     test('Displays the number of child organisations in tab name', async function (assert) {
       // given
-      const parentOrganizationId = this.server.create('organization', { id: 1, name: 'Orga name' }).id;
-      this.server.create('organization', { id: 2, parentOrganizationId: 1, name: 'Child' });
+      const parentOrganizationId = this.server.create('organization', {
+        id: 1,
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      }).id;
+      this.server.create('organization', {
+        id: 2,
+        parentOrganizationId: 1,
+        name: 'Child',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
 
       // when
       const screen = await visit(`/organizations/${parentOrganizationId}/children`);
@@ -46,7 +58,10 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when there is no child organization', function () {
       test('displays a message', async function (assert) {
         // given
-        const organizationId = this.server.create('organization', { name: 'Orga name' }).id;
+        const organizationId = this.server.create('organization', {
+          name: 'Orga name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        }).id;
         this.server.get(`/admin/organizations/${organizationId}/children`, () => ({ data: [] }));
 
         // when
@@ -61,8 +76,17 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when there is at least one child organization', function () {
       test('displays a list of child organizations', async function (assert) {
         // given
-        const parentOrganizationId = this.server.create('organization', { id: 1, name: 'Orga name' }).id;
-        this.server.create('organization', { id: 2, parentOrganizationId: 1, name: 'Child' });
+        const parentOrganizationId = this.server.create('organization', {
+          id: 1,
+          name: 'Orga name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        }).id;
+        this.server.create('organization', {
+          id: 2,
+          parentOrganizationId: 1,
+          name: 'Child',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        });
 
         // when
         const screen = await visit(`/organizations/${parentOrganizationId}/children`);
@@ -76,8 +100,16 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when attaching child organization', function () {
       test('attaches child organization to parent organization and displays success notification', async function (assert) {
         // given
-        const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
-        this.server.create('organization', { id: 2, name: 'Child Organization Name' });
+        const parentOrganization = this.server.create('organization', {
+          id: 1,
+          name: 'Parent Organization Name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        });
+        this.server.create('organization', {
+          id: 2,
+          name: 'Child Organization Name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        });
         const screen = await visit(`/organizations/${parentOrganization.id}/children`);
         await fillByLabel(`Ajouter une ou plusieurs organisations filles ID d'organisation(s) à ajouter`, '2');
 
@@ -93,7 +125,11 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when detaching child organization', function () {
       test('it should display success notification and remove child organization from list', async function (assert) {
         // given
-        const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
+        const parentOrganization = this.server.create('organization', {
+          id: 1,
+          name: 'Parent Organization Name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        });
         this.server.create('organization', {
           id: 2,
           name: 'Child Organization Name',
@@ -123,7 +159,11 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when creating child organization from parent page', function () {
       test('it should redirect to New organization page, with parent id in query params', async function (assert) {
         // given
-        const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
+        const parentOrganization = this.server.create('organization', {
+          id: 1,
+          name: 'Parent Organization Name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        });
         const screen = await visit(`/organizations/${parentOrganization.id}/children`);
 
         // when
@@ -148,7 +188,10 @@ module('Acceptance | Organizations | Children', function (hooks) {
 
       hooks.beforeEach(async function () {
         await authenticateAdminMemberWithRole(role.authData)(server);
-        parentOrganizationId = this.server.create('organization', { name: 'Parent Orga name' }).id;
+        parentOrganizationId = this.server.create('organization', {
+          name: 'Parent Orga name',
+          features: { PLACES_MANAGEMENT: { active: true } },
+        }).id;
       });
 
       test('it displays actions section with create child organization button', async function (assert) {
@@ -166,8 +209,15 @@ module('Acceptance | Organizations | Children', function (hooks) {
   module('when user has role "CERTIF"', function () {
     test('it should not display actions section', async function (assert) {
       await authenticateAdminMemberWithRole({ isCertif: true })(server);
-      const parentOrganizationId = this.server.create('organization', { name: 'Parent Orga name' }).id;
-      this.server.create('organization', { name: 'Child Orga name', parentOrganizationId });
+      const parentOrganizationId = this.server.create('organization', {
+        name: 'Parent Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      }).id;
+      this.server.create('organization', {
+        name: 'Child Orga name',
+        parentOrganizationId,
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
 
       // when
       const screen = await visit(`/organizations/${parentOrganizationId}/children`);

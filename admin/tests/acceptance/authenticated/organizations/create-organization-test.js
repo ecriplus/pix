@@ -55,7 +55,10 @@ module('Acceptance | Organizations | Create', function (hooks) {
     let parentOrganization;
 
     hooks.beforeEach(function () {
-      parentOrganization = server.create('organization', { name: 'Wayne Enterprises' });
+      parentOrganization = server.create('organization', {
+        name: 'Wayne Enterprises',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
     });
 
     test('it shows the creation form with parent organization name', async function (assert) {

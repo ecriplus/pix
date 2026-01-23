@@ -378,6 +378,9 @@ export default function routes() {
       dataProtectionOfficerFirstName: attributes['data-protection-officer-first-name'],
       dataProtectionOfficerLastName: attributes['data-protection-officer-last-name'],
       dataProtectionOfficerEmail: attributes['data-protection-officer-email'],
+      features: {
+        PLACES_MANAGEMENT: { active: false },
+      },
     };
 
     return schema.create('organization', organization);

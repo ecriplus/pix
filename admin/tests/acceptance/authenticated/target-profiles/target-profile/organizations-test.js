@@ -25,7 +25,11 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
       module('when admin member has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function (hooks) {
         hooks.beforeEach(async function () {
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          server.create('organization', { id: 456, name: 'My organization' });
+          server.create('organization', {
+            id: 456,
+            name: 'My organization',
+            features: { PLACES_MANAGEMENT: { active: false } },
+          });
           server.create('target-profile', { id: 1, ownerOrganizationId: 456, name: 'Mon super profil cible' });
         });
 
@@ -50,7 +54,11 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
         test('it should be redirected to Organizations page', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isCertif: true })(server);
-          server.create('organization', { id: 456, name: 'My organization' });
+          server.create('organization', {
+            id: 456,
+            name: 'My organization',
+            features: { PLACES_MANAGEMENT: { active: false } },
+          });
           server.create('target-profile', { id: 2, ownerOrganizationId: 456 });
 
           // when
@@ -71,8 +79,16 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
 
     module('with multiple organizations', function (hooks) {
       hooks.beforeEach(async function () {
-        server.create('organization', { id: 456, name: 'My organization' });
-        server.create('organization', { id: 789, name: 'My other organization' });
+        server.create('organization', {
+          id: 456,
+          name: 'My organization',
+          features: { PLACES_MANAGEMENT: { active: false } },
+        });
+        server.create('organization', {
+          id: 789,
+          name: 'My other organization',
+          features: { PLACES_MANAGEMENT: { active: false } },
+        });
       });
 
       test('should list organizations', async function (assert) {

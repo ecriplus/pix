@@ -21,30 +21,34 @@ import InformationSection from 'pix-admin/components/organizations/information-s
 
       {{#unless @model.isArchived}}
         <LinkTo @route="authenticated.organizations.get.team" @model={{@model}}>
-          Équipe
+          {{t "pages.organization.navbar.team"}}
         </LinkTo>
 
         <LinkTo @route="authenticated.organizations.get.invitations" @model={{@model}}>
-          Invitations
+          {{t "pages.organization.navbar.invitations"}}
         </LinkTo>
       {{/unless}}
 
       <LinkTo @route="authenticated.organizations.get.target-profiles" @model={{@model}}>
-        Profils cibles
+        {{t "pages.organization.navbar.target-profiles"}}
       </LinkTo>
 
       <LinkTo @route="authenticated.organizations.get.campaigns" @model={{@model}}>
-        Campagnes
+        {{t "pages.organization.navbar.campaigns"}}
       </LinkTo>
 
-      <LinkTo @route="authenticated.organizations.get.places" @model={{@model}}>
-        Places
-      </LinkTo>
-      {{#if @controller.accessControl.hasAccessToOrganizationActionsScope}}
-        <LinkTo @route="authenticated.organizations.get.all-tags" @model={{@model}}>
-          Tags
+      {{#if @model.isPlacesManagementEnabled}}
+        <LinkTo @route="authenticated.organizations.get.places" @model={{@model}}>
+          {{t "pages.organization.navbar.places"}}
         </LinkTo>
       {{/if}}
+
+      {{#if @controller.accessControl.hasAccessToOrganizationActionsScope}}
+        <LinkTo @route="authenticated.organizations.get.all-tags" @model={{@model}}>
+          {{t "pages.organization.navbar.tags"}}
+        </LinkTo>
+      {{/if}}
+
       <LinkTo @route="authenticated.organizations.get.children" @model={{@model}}>
         {{t "pages.organization.navbar.children"}}
         ({{@model.children.length}})

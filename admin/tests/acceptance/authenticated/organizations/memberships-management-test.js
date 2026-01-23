@@ -14,7 +14,10 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
 
   hooks.beforeEach(async function () {
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    organization = this.server.create('organization', { name: 'Orga name' });
+    organization = this.server.create('organization', {
+      name: 'Orga name',
+      features: { PLACES_MANAGEMENT: { active: true } },
+    });
   });
 
   test('should redirect to organization team page', async function (assert) {
@@ -182,6 +185,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       await authenticateAdminMemberWithRole({ isCertif: true })(server);
       const organization = this.server.create('organization', {
         name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
       });
 
       // when

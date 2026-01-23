@@ -9,17 +9,56 @@ module('Acceptance | Organizations | places lot creation form', function (hooks)
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  test('should go to places listing page', async function (assert) {
-    // given
-    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
+  module('when cancelling action', function () {
+    test('should go to places listing page', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const ownerOrganizationId = this.server.create('organization', {
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      }).id;
 
-    const screen = await visit(`/organizations/${ownerOrganizationId}/places/new`);
+      const screen = await visit(`/organizations/${ownerOrganizationId}/places/new`);
 
-    // when
-    await click(screen.getByRole('link', { name: 'Annuler' }));
+      // when
+      await click(screen.getByRole('link', { name: 'Annuler' }));
 
-    // then
-    assert.strictEqual(currentURL(), `/organizations/${ownerOrganizationId}/places`);
+      // then
+      assert.strictEqual(currentURL(), `/organizations/${ownerOrganizationId}/places`);
+    });
+  });
+
+  module('when PLACES_MANAGEMENT feature is not enabled', function () {
+    test('should go to organization team', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const ownerOrganizationId = this.server.create('organization', {
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: false } },
+      }).id;
+
+      // when
+      await visit(`/organizations/${ownerOrganizationId}/places/new`);
+
+      // then
+      assert.strictEqual(currentURL(), `/organizations/${ownerOrganizationId}/team`);
+    });
+  });
+
+  module('when PLACES_MANAGEMENT feature is enabled', function () {
+    test('should allow place creation form', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const ownerOrganizationId = this.server.create('organization', {
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      }).id;
+
+      // when
+      await visit(`/organizations/${ownerOrganizationId}/places/new`);
+
+      // then
+      assert.strictEqual(currentURL(), `/organizations/${ownerOrganizationId}/places/new`);
+    });
   });
 });

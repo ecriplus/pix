@@ -1271,7 +1271,13 @@
     },
     "organization": {
       "navbar": {
-        "children": "Organisations filles"
+        "campaigns": "Campagnes",
+        "children": "Organisations filles",
+        "invitations": "Invitations",
+        "places": "Places",
+        "tags": "Tags",
+        "target-profiles": "Profils cibles",
+        "team": "Équipe"
       }
     },
     "organization-children": {
