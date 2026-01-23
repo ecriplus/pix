@@ -244,7 +244,7 @@
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-prenoms/index.html",
                 "instruction": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule&nbsp;:</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -491,7 +491,7 @@
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-altgr/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr&nbsp;:</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -629,7 +629,7 @@
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-jeu-automatisation-scoring/index.html",
                 "instruction": "<p><strong>Dans l’espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
