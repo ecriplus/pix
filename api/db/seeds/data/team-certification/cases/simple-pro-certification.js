@@ -49,25 +49,20 @@ export class ProSeed {
     await this.#initCertificationReferentials();
     const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
 
-    await Promise.all(
-      certifiableUsers.map((certifiableUser) =>
-        this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart }),
-      ),
-    );
+    for (const certifiableUser of certifiableUsers) {
+      await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+    }
 
     /**
      * Session with a published certification
      */
     const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
 
-    const candidatesToPublish = await Promise.all(
-      certifiableUsers.map(async (certifiableUser) => {
-        return this.#addCandidateToSession({
-          pixAppUser: certifiableUser,
-          session: sessionToPublish,
-        });
-      }),
-    );
+    const candidatesToPublish = [];
+    for (const user of certifiableUsers) {
+      const candidate = await this.#addCandidateToSession({ pixAppUser: user, session: sessionToPublish });
+      candidatesToPublish.push(candidate);
+    }
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,

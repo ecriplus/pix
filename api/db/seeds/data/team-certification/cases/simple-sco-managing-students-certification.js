@@ -51,11 +51,9 @@ export class ScoManagingStudent {
       certificationCenter,
     });
 
-    await Promise.all(
-      organizationLearners.map((organizationLearner) =>
-        this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart }),
-      ),
-    );
+    for (const organizationLearner of organizationLearners) {
+      await this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart });
+    }
 
     /**
      * Session with a published certification
@@ -65,14 +63,11 @@ export class ScoManagingStudent {
       certificationCenter,
     });
 
-    const candidatesToPublish = await Promise.all(
-      organizationLearners.map((organizationLearner) =>
-        this.#addCandidateToSession({
-          organizationLearner,
-          session: sessionToPublish,
-        }),
-      ),
-    );
+    const candidatesToPublish = [];
+    for (const organizationLearner of organizationLearners) {
+      const candidate = await this.#addCandidateToSession({ organizationLearner, session: sessionToPublish });
+      candidatesToPublish.push(candidate);
+    }
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,

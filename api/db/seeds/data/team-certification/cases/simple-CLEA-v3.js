@@ -65,23 +65,20 @@ export class CleaV3Seed {
     await this.#initCertificationReferentials();
     const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
 
-    await Promise.all(
-      certifiableUsers.map((user) => this.#addCandidateToSession({ pixAppUser: user, session: sessionReadyToStart })),
-    );
+    for (const user of certifiableUsers) {
+      await this.#addCandidateToSession({ pixAppUser: user, session: sessionReadyToStart });
+    }
 
     /**
      * Session with a published certification
      */
     const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
 
-    const candidatesToPublish = await Promise.all(
-      certifiableUsers.map((user) =>
-        this.#addCandidateToSession({
-          pixAppUser: user,
-          session: sessionToPublish,
-        }),
-      ),
-    );
+    const candidatesToPublish = [];
+    for (const user of certifiableUsers) {
+      const candidate = await this.#addCandidateToSession({ pixAppUser: user, session: sessionToPublish });
+      candidatesToPublish.push(candidate);
+    }
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,
