@@ -166,7 +166,7 @@
         "upload-button": "Import JSON file"
       },
       "organization-import-format": {
-        "description": "Only existing format imports will be updated. If the name does not match, no format import will be created.",
+        "description": "Insert new import format. It will update existing import format with same name.",
         "notifications": {
           "success": "Format imports are updated correctly"
         },

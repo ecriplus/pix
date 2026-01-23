@@ -34,6 +34,8 @@ describe('Unit | UseCase | get-organization-learners-csv-template', function () 
               { name: 'Date de naissance', required: true },
             ],
           },
+          createdAt: new Date('2025-01-01'),
+          createdBy: 12,
         }),
       );
 

@@ -1,6 +1,5 @@
 import { organizationImportController } from '../../../../../src/prescription/learner-management/application/organization-import-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Learner Management | organization-import-controller', function () {
@@ -30,20 +29,21 @@ describe('Unit | Application | Learner Management | organization-import-controll
     });
   });
 
-  describe('#updateOrganizationLearnerImportFormats', function () {
-    let request, payload;
+  describe('#saveOrganizationLearnerImportFormats', function () {
+    let request, payload, userId;
 
     beforeEach(function () {
       payload = Symbol('Payload');
+      userId = Symbol('userId');
       request = {
+        auth: {
+          credentials: { userId },
+        },
         payload,
       };
 
-      sinon.stub(DomainTransaction, 'execute');
-      DomainTransaction.execute.callsFake((callback) => callback());
-
-      sinon.stub(usecases, 'updateOrganizationLearnerImportFormats');
-      usecases.updateOrganizationLearnerImportFormats.resolves(null);
+      sinon.stub(usecases, 'saveOrganizationLearnerImportFormats');
+      usecases.saveOrganizationLearnerImportFormats.resolves(null);
     });
 
     afterEach(function () {
@@ -51,8 +51,9 @@ describe('Unit | Application | Learner Management | organization-import-controll
     });
 
     it('should update organization import format', async function () {
-      await organizationImportController.updateOrganizationLearnerImportFormats(request);
-      expect(usecases.updateOrganizationLearnerImportFormats).to.have.been.calledOnceWithExactly({
+      await organizationImportController.saveOrganizationLearnerImportFormats(request);
+      expect(usecases.saveOrganizationLearnerImportFormats).to.have.been.calledOnceWithExactly({
+        userId,
         payload,
       });
     });

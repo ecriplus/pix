@@ -68,6 +68,57 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
         ]);
       });
 
+      it('should add a learner with previous configuration', function () {
+        const importFormat = {
+          config: {
+            unicityColumns: ['prénom'],
+            headers: [
+              {
+                name: 'prénom',
+                config: { property: 'firstName' },
+              },
+              {
+                name: 'nom',
+                config: { property: 'lastName' },
+              },
+              {
+                name: 'category',
+                config: { mappingColumn: 'group', mappingValues: { Solo: 'PreviousMappedValue_SOLO' } },
+              },
+              {
+                name: 'TonNomCommun',
+                config: { mappingColumn: "nom d'usage" },
+              },
+            ],
+          },
+        };
+
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        const newLearnerAttributes = {
+          prénom: 'Tomie',
+          nom: 'Katana',
+          TonNomCommun: 'Yolo',
+          category: 'Solo',
+        };
+
+        learnerSet.addLearners([newLearnerAttributes]);
+
+        const learners = learnerSet.learners;
+
+        expect(learners.list).to.lengthOf(1);
+        expect(learners.list[0]).to.be.an.instanceOf(CommonOrganizationLearner);
+        expect(learners.list).to.deep.equal([
+          new CommonOrganizationLearner({
+            firstName: 'Tomie',
+            lastName: 'Katana',
+            organizationId,
+            "nom d'usage": 'Yolo',
+            group: 'PreviousMappedValue_SOLO',
+          }),
+        ]);
+      });
+
       it('should return multiple learners', function () {
         const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
 
@@ -106,6 +157,71 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
         const learners = learnerSet.learners;
 
         expect(learners.list).lengthOf(1);
+      });
+
+      it('updates existing learner into previous config', function () {
+        const importFormat = {
+          config: {
+            unicityColumns: ['prénom'],
+            headers: [
+              {
+                name: 'prénom',
+                config: { property: 'firstName' },
+              },
+              {
+                name: 'nom',
+                config: { property: 'lastName' },
+              },
+              {
+                name: 'category',
+                config: { mappingColumn: 'group', mappingValues: { Solo: 'PreviousMappedValue_SOLO' } },
+              },
+              {
+                name: 'TonNomCommun',
+                config: { mappingColumn: "nom d'usage" },
+              },
+            ],
+          },
+        };
+
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        const newLearnerAttributes = {
+          prénom: 'Tomie',
+          nom: 'Katana',
+          TonNomCommun: 'Yalalala',
+          category: 'Sola',
+        };
+
+        learnerSet.addLearners([newLearnerAttributes]);
+
+        const learnerFromDB1 = new CommonOrganizationLearner({
+          id: 666,
+          userId: 24,
+          firstName: 'Tomie',
+          lastName: 'Katana',
+          "nom d'usage": 'YoYo',
+          group: 'Solo',
+          organizationId,
+        });
+
+        learnerSet.setExistingLearners([learnerFromDB1]);
+
+        const learners = learnerSet.learners;
+
+        expect(learners.list).to.lengthOf(1);
+        expect(learners.list[0]).to.be.an.instanceOf(CommonOrganizationLearner);
+        expect(learners.list).to.deep.equal([
+          new CommonOrganizationLearner({
+            firstName: 'Tomie',
+            lastName: 'Katana',
+            id: 666,
+            userId: 24,
+            organizationId,
+            "nom d'usage": 'Yalalala',
+            group: 'Sola',
+          }),
+        ]);
       });
 
       it('return distinct list of learner to create or update', function () {

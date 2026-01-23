@@ -93,7 +93,7 @@ import { reconcileCommonOrganizationLearner } from './reconcile-common-organizat
 import { reconcileScoOrganizationLearnerAutomatically } from './reconcile-sco-organization-learner-automatically.js';
 import { reconcileScoOrganizationLearnerManually } from './reconcile-sco-organization-learner-manually.js';
 import { reconcileSupOrganizationLearner } from './reconcile-sup-organization-learner.js';
-import { updateOrganizationLearnerImportFormats } from './update-organization-learner-import-formats.js';
+import { saveOrganizationLearnerImportFormats } from './save-organization-learner-import-formats.js';
 import { updateOrganizationLearnerName } from './update-organization-learner-name.js';
 import { updateStudentNumber } from './update-student-number.js';
 import { uploadCsvFile } from './upload-csv-file.js';
@@ -123,7 +123,7 @@ const usecasesWithoutInjectedDependencies = {
   reconcileScoOrganizationLearnerAutomatically,
   reconcileScoOrganizationLearnerManually,
   reconcileSupOrganizationLearner,
-  updateOrganizationLearnerImportFormats,
+  saveOrganizationLearnerImportFormats,
   updateOrganizationLearnerName,
   updateStudentNumber,
   uploadCsvFile,

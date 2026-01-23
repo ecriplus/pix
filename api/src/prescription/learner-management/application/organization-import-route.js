@@ -70,10 +70,10 @@ const register = async (server) => {
             );
           },
         },
-        handler: organizationImportController.updateOrganizationLearnerImportFormats,
+        handler: organizationImportController.saveOrganizationLearnerImportFormats,
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés en tant qu'administrateur de l'organisation**\n" +
-            "- Elle permet de mettre à jour la liste des participants de l'organisation.",
+            "- Elle permet d'ajouter/modifier des imports à format.",
         ],
         tags: ['api', 'organization-learners'],
       },

@@ -48,7 +48,10 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       expect(result).to.be.an.instanceOf(OrganizationLearnerImportFormat);
-      expect(result).to.be.deep.equal(new OrganizationLearnerImportFormat(importConfig));
+
+      expect(result.config).to.be.deep.equal(importConfig.config);
+      expect(result.name).to.be.deep.equal(importConfig.name);
+      expect(result.fileType).to.be.deep.equal(importConfig.fileType);
     });
 
     it('should return null if nothing was found', async function () {
@@ -58,8 +61,8 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     });
   });
 
-  describe('#updateAllByName', function () {
-    let clock;
+  describe('#save', function () {
+    let clock, userId;
     const now = new Date('2022-02-02');
     const updatedAt = new Date('2020-01-01');
 
@@ -70,6 +73,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     beforeEach(async function () {
       clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
 
+      userId = databaseBuilder.factory.buildUser().id;
       // First format
       databaseBuilder.factory.buildOrganizationLearnerImportFormat({
         name: 'FIRST_FORMAT',
@@ -103,15 +107,19 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
+          createdBy: userId,
+          createdAt: now,
         }),
         new OrganizationLearnerImportFormat({
           name: 'SECOND_FORMAT',
           fileType: 'csv',
           config: { new_config: 'not_bad' },
+          createdBy: userId,
+          createdAt: now,
         }),
       ];
       // when
-      await organizationLearnerImportFormatRepository.updateAllByName({ organizationLearnerImportFormats });
+      await organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
 
       // then
       const fistLearnerImportFormat = await knex('organization-learner-import-formats')
@@ -140,10 +148,12 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
+          createdBy: userId,
+          createdAt: now,
         }),
       ];
       // when
-      await organizationLearnerImportFormatRepository.updateAllByName({ organizationLearnerImportFormats });
+      await organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
 
       // then
       const fistLearnerImportFormat = await knex('organization-learner-import-formats')
@@ -155,6 +165,31 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       expect(fistLearnerImportFormat.updatedAt).to.deep.equal(now);
     });
 
+    it('should not update createdAt createdBy fields', async function () {
+      // given
+      const organizationLearnerImportFormats = [
+        new OrganizationLearnerImportFormat({
+          name: 'FIRST_FORMAT',
+          fileType: 'csv',
+          config: { new_config: 'awesome' },
+          createdBy: userId,
+          createdAt: now,
+        }),
+      ];
+      // when
+      await organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
+
+      // then
+      const fistLearnerImportFormat = await knex('organization-learner-import-formats')
+        .where({
+          name: 'FIRST_FORMAT',
+        })
+        .first();
+
+      expect(fistLearnerImportFormat.createdAt).not.deep.equal(now);
+      expect(fistLearnerImportFormat.createdBy).not.equal(userId);
+    });
+
     it('should not update other import format', async function () {
       // given
       const organizationLearnerImportFormats = [
@@ -162,10 +197,12 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
+          createdBy: userId,
+          createdAt: now,
         }),
       ];
       // when
-      await organizationLearnerImportFormatRepository.updateAllByName({ organizationLearnerImportFormats });
+      await organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
 
       // then
       const fistLearnerImportFormat = await knex('organization-learner-import-formats')
@@ -177,6 +214,33 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       expect(fistLearnerImportFormat.fileType).to.be.equal('xml');
       expect(fistLearnerImportFormat.config).to.deep.equal({ basic_config: 'second_format' });
       expect(fistLearnerImportFormat.updatedAt).to.deep.equal(updatedAt);
+    });
+
+    it('should insert new import format', async function () {
+      // given
+      const organizationLearnerImportFormats = [
+        new OrganizationLearnerImportFormat({
+          name: 'NEW_FORMAT',
+          fileType: 'csv',
+          config: { new_config: 'awesome' },
+          createdBy: userId,
+          createdAt: now,
+        }),
+      ];
+      // when
+      await organizationLearnerImportFormatRepository.save({ organizationLearnerImportFormats });
+
+      // then
+      const fistLearnerImportFormat = await knex('organization-learner-import-formats')
+        .where({
+          name: 'NEW_FORMAT',
+        })
+        .first();
+
+      expect(fistLearnerImportFormat.fileType).to.be.equal('csv');
+      expect(fistLearnerImportFormat.config).to.deep.equal({ new_config: 'awesome' });
+      expect(fistLearnerImportFormat.createdAt).to.deep.equal(now);
+      expect(fistLearnerImportFormat.createdBy).equal(userId);
     });
   });
 });

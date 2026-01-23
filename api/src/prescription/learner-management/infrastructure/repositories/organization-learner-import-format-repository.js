@@ -36,15 +36,16 @@ const get = async function (organizationId) {
  * @param {Array|Object} params.organizationLearnerImportFormats
  * @return {Promise<void>}
  */
-const updateAllByName = async function ({ organizationLearnerImportFormats }) {
+const save = async function ({ organizationLearnerImportFormats }) {
   const knexConn = DomainTransaction.getConnection();
   const updatedAt = new Date();
 
   for (const organizationLearnerImport of organizationLearnerImportFormats) {
     await knexConn('organization-learner-import-formats')
-      .where({ name: organizationLearnerImport.name })
-      .update({ fileType: organizationLearnerImport.fileType, config: organizationLearnerImport.config, updatedAt });
+      .insert({ ...organizationLearnerImport, updatedAt })
+      .onConflict('name')
+      .merge(['config', 'fileType', 'updatedAt']);
   }
 };
 
-export { get, updateAllByName };
+export { get, save };

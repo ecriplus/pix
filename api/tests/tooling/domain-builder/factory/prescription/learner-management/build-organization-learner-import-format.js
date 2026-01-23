@@ -26,10 +26,14 @@ export const buildOrganizationLearnerImportFormat = function ({
       },
     ],
   },
+  createdAt = new Date('2025-01-01'),
+  createdBy = 12,
 } = {}) {
   return new OrganizationLearnerImportFormat({
     name,
     fileType,
     config,
+    createdAt,
+    createdBy,
   });
 };
