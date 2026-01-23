@@ -292,7 +292,7 @@
         {
           "id": "0bf84b1d-c273-4301-a022-3e6ca54aac0d",
           "type": "discovery",
-          "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
+          "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
           "components": [
             {
               "type": "element",
@@ -306,7 +306,7 @@
                   "slides": [
                     {
                       "title": "Emission de gaz à effet de serre",
-                      "description": "Mesure l’impact du numérique sur l’émission de gaz à effet de serre. Ici, la phase de l'ACV qui prédomine est celle de l'utilisation. C'est lié à la pollution engendré par la production d'électricité.",
+                      "description": "Mesure l’impact du numérique sur l’émission de gaz à effet de serre. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation. C’est lié à la pollution engendré par la production d’électricité.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -320,7 +320,7 @@
                     },
                     {
                       "title": "Épuisement des ressources minérales et métalliques",
-                      "description": "Mesure l’impact du numérique sur la consommation de métaux et de minéraux. Ici, la phase de l’ACV qui prédomine est celle de la fabrication. ⛏️.",
+                      "description": "Mesure l’impact du numérique sur la consommation de métaux et de minéraux. Ici, la phase de l’ACV qui prédomine est celle de la fabrication. ⛏️.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-2.png",
@@ -334,7 +334,7 @@
                     },
                     {
                       "title": "Particules fines ",
-                      "description": "Mesure l’impact du numérique sur l’émission de particules fines, nocives pour la santé. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation, en raison de la production d’électricité et des activités industrielles associées 🌫️.",
+                      "description": "Mesure l’impact du numérique sur l’émission de particules fines, nocives pour la santé. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation, en raison de la production d’électricité et des activités industrielles associées 🌫️.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -364,20 +364,20 @@
                     {
                       "id": "a641a706-fb51-4356-9f17-0b0ab4c7cdc0",
                       "type": "qcu-discovery",
-                      "instruction": "Pour la consommation de ressources minérales et métalliques, quelle phase du cycle de vie prédomine ?",
+                      "instruction": "Pour la consommation de ressources minérales et métalliques, quelle phase du cycle de vie prédomine ?",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "L’utilisation, à cause des réparations",
                           "feedback": {
-                            "diagnosis": "Eh non ! <br>La fabrication domine car elle nécessite l’extraction et la transformation de nombreux métaux et minéraux pour produire les équipements."
+                            "diagnosis": "Eh non ! <br>La fabrication domine car elle nécessite l’extraction et la transformation de nombreux métaux et minéraux pour produire les équipements."
                           }
                         },
                         {
                           "id": "2",
                           "content": "La fabrication des équipements numériques",
                           "feedback": {
-                            "diagnosis": "Bien vu ! <br>La fabrication domine car elle nécessite l’extraction et la transformation de nombreux métaux et minéraux pour produire les équipements."
+                            "diagnosis": "Bien vu ! <br>La fabrication domine car elle nécessite l’extraction et la transformation de nombreux métaux et minéraux pour produire les équipements."
                           }
                         },
                         {
@@ -397,27 +397,27 @@
                     {
                       "id": "baa7a3a1-c6cc-4d07-9689-d10b914d2df2",
                       "type": "qcu-discovery",
-                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique et à quoi cela est-il principalement lié ?",
+                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique et à quoi cela est-il principalement lié ?",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "La fin de vie",
                           "feedback": {
-                            "diagnosis": "Eh non !<br>C'est l'utilisation qui prédomine. Celà est du à la production d'électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "Eh non !<br>C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
                           }
                         },
                         {
                           "id": "2",
                           "content": "L’utilisation",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>C'est l'utilisation qui prédomine. Celà est du à la production d'électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "Bien vu !&nbsp;<br>C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
                           }
                         },
                         {
                           "id": "3",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "C'est l'utilisation qui prédomine. Celà est du à la production d'électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
                           }
                         }
                       ],
@@ -430,34 +430,34 @@
                     {
                       "id": "26a4ad76-5345-406f-8b36-e006afbb5ab8",
                       "type": "qcu-discovery",
-                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?",
+                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "les équipements utilisateurs",
                           "feedback": {
-                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l'impact.<br>"
+                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Les centres de données",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l'impact.<br><br>"
+                            "diagnosis": "Bien vu !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br><br>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "les réseaux",
                           "feedback": {
-                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l'impact.<br>"
+                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l'impact.<br>"
+                            "diagnosis": "Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
                           }
                         }
                       ],
