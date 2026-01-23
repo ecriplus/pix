@@ -5,10 +5,10 @@ import { expect, sinon } from '../../../../test-helper.js';
 import { createOpenIdClientMock } from '../../../../tooling/openid-client/openid-client-mocks.js';
 
 describe('Unit | Identity Access Management | Domain | Services | pole-emploi-oidc-authentication-service', function () {
-  let openIdClient;
+  let openidClient;
 
   beforeEach(function () {
-    openIdClient = createOpenIdClientMock();
+    openidClient = createOpenIdClientMock();
   });
 
   describe('#constructor', function () {
@@ -24,7 +24,7 @@ describe('Unit | Identity Access Management | Domain | Services | pole-emploi-oi
             slug: 'pole-emploi',
             source: 'pole_emploi_connect',
           },
-          { openIdClient },
+          { openidClient },
         );
 
         // then
@@ -48,14 +48,14 @@ describe('Unit | Identity Access Management | Domain | Services | pole-emploi-oi
           slug: 'pole-emploi',
           source: 'pole_emploi_connect',
         },
-        { openIdClient },
+        { openidClient },
       );
 
       // when
       await poleEmploiOidcAuthenticationService.initializeClientConfig();
 
       // then
-      expect(openIdClient.discovery).to.have.been.calledWithExactly(
+      expect(openidClient.discovery).to.have.been.calledWithExactly(
         new URL('https://oidc.example.net/.well-known/openid-configuration'),
         'client',
         { client_secret: 'secret' },
@@ -82,7 +82,7 @@ describe('Unit | Identity Access Management | Domain | Services | pole-emploi-oi
           slug: 'pole-emploi',
           source: 'pole_emploi_connect',
         },
-        { openIdClient },
+        { openidClient },
       );
 
       // when

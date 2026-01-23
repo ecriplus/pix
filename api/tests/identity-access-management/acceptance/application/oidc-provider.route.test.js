@@ -17,7 +17,7 @@ import { createMockedTestOidcProvider } from '../../../tooling/openid-client/ope
 const UUID_PATTERN = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 
 describe('Acceptance | Identity Access Management | Application | Route | oidc-provider', function () {
-  let server, openIdClientMock;
+  let server, openidClientMock;
 
   describe('GET /api/oidc/identity-providers', function () {
     beforeEach(async function () {
@@ -152,7 +152,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           // given
           const idToken = jsonwebtoken.sign({ given_name: 'John', family_name: 'Doe', sub: 'sub' }, 'secret');
 
-          openIdClientMock.authorizationCodeGrant.resolves({
+          openidClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
@@ -217,7 +217,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             'secret',
           );
 
-          openIdClientMock.authorizationCodeGrant.resolves({
+          openidClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
@@ -237,7 +237,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           });
 
           // then
-          expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+          expect(openidClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.result.access_token).to.exist;
 
           const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
@@ -296,7 +296,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             'secret',
           );
 
-          openIdClientMock.authorizationCodeGrant.resolves({
+          openidClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
@@ -316,7 +316,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           });
 
           // then
-          expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+          expect(openidClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.statusCode).to.equal(403);
         });
       });
@@ -341,7 +341,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             'secret',
           );
 
-          openIdClientMock.authorizationCodeGrant.resolves({
+          openidClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
@@ -361,7 +361,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           });
 
           // then
-          expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+          expect(openidClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.result.access_token).to.exist;
 
           const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
@@ -626,7 +626,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             // given
             const idToken = jsonwebtoken.sign({ given_name: 'John', family_name: 'Doe', sub: 'sub' }, 'secret');
 
-            openIdClientMock.authorizationCodeGrant.resolves({
+            openidClientMock.authorizationCodeGrant.resolves({
               access_token: 'access_token',
               id_token: idToken,
               expires_in: 60,
@@ -691,7 +691,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
               'secret',
             );
 
-            openIdClientMock.authorizationCodeGrant.resolves({
+            openidClientMock.authorizationCodeGrant.resolves({
               access_token: 'access_token',
               id_token: idToken,
               expires_in: 60,
@@ -711,7 +711,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             });
 
             // then
-            expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
+            expect(openidClientMock.authorizationCodeGrant).to.have.been.calledOnce;
             expect(response.result.access_token).to.exist;
 
             const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
@@ -851,7 +851,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     identityProvider,
     connectionMethodCode,
   }) {
-    openIdClientMock = await createMockedTestOidcProvider({
+    openidClientMock = await createMockedTestOidcProvider({
       application,
       applicationTld,
       identityProvider,

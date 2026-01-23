@@ -18,10 +18,10 @@ const uuidV4Regex = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-
 const MOCK_OIDC_PROVIDER_CONFIG = Symbol('config');
 
 describe('Unit | Domain | Services | oidc-authentication-service', function () {
-  let openIdClient;
+  let openidClient;
 
   beforeEach(function () {
-    openIdClient = createOpenIdClientMock(MOCK_OIDC_PROVIDER_CONFIG);
+    openidClient = createOpenIdClientMock(MOCK_OIDC_PROVIDER_CONFIG);
     sinon.stub(logger, 'error');
   });
 
@@ -32,7 +32,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const args = {};
 
         // when
-        const oidcAuthenticationService = new OidcAuthenticationService(args, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService(args, { openidClient });
 
         // then
         expect(oidcAuthenticationService.shouldCloseSession).to.be.false;
@@ -47,7 +47,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const args = { claimMapping: null, claimsToStore: null };
 
         // when
-        const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
+        const { claimManager } = new OidcAuthenticationService(args, { openidClient });
         const claims = claimManager.getMissingMandatoryClaims();
 
         // then
@@ -61,7 +61,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const args = { claimMapping: { firstName: ['hello'] }, claimsToStore: null };
 
         // when
-        const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
+        const { claimManager } = new OidcAuthenticationService(args, { openidClient });
         const claims = claimManager.getMissingMandatoryClaims();
 
         // then
@@ -75,7 +75,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const args = { claimMapping: { firstName: ['hello'] }, claimsToStore: 'employeeNumber,studentGroup' };
 
         // when
-        const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
+        const { claimManager } = new OidcAuthenticationService(args, { openidClient });
         const claims = claimManager.getMissingMandatoryClaims();
 
         // then
@@ -99,7 +99,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl: 'https://example.net/.well-known/openid-configuration',
             redirectUri: 'https://example.net/connexion/redirect',
           },
-          { openIdClient },
+          { openidClient },
         );
 
         // when
@@ -113,7 +113,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     context('when not enabled in config', function () {
       it('returns false', function () {
         // given
-        const oidcAuthenticationService = new OidcAuthenticationService({}, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService({}, { openidClient });
 
         // when
         const result = oidcAuthenticationService.isReady;
@@ -137,7 +137,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         .withArgs(payload, settings.authentication.secret, jwtOptions)
         .returns(accessToken);
 
-      const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, { openIdClient });
+      const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, { openidClient });
 
       // when
       const result = oidcAuthenticationService.createAccessToken({ userId, audience });
@@ -153,7 +153,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         // given
         const userInfo = {};
         const identityProvider = 'genericOidcProviderCode';
-        const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openidClient });
 
         // when
         const result = oidcAuthenticationService.createAuthenticationComplement({ userInfo });
@@ -174,7 +174,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const identityProvider = 'genericOidcProviderCode';
         const oidcAuthenticationService = new OidcAuthenticationService(
           { identityProvider, claimsToStore },
-          { openIdClient },
+          { openidClient },
         );
 
         // when
@@ -197,7 +197,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
       const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, {
         sessionTemporaryStorage,
-        openIdClient,
+        openidClient,
       });
       await oidcAuthenticationService.initializeClientConfig();
 
@@ -221,11 +221,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       };
       const postLogoutRedirectUriEncoded = encodeURIComponent(settings.oidcExampleNet.postLogoutRedirectUri);
       const endSessionUrl = `https://example.net/logout?post_logout_redirect_uri=${postLogoutRedirectUriEncoded}&id_token_hint=some_dummy_id_token`;
-      openIdClient.buildEndSessionUrl.resolves(endSessionUrl);
+      openidClient.buildEndSessionUrl.resolves(endSessionUrl);
 
       const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, {
         sessionTemporaryStorage,
-        openIdClient,
+        openidClient,
       });
       await oidcAuthenticationService.initializeClientConfig();
 
@@ -233,7 +233,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       const result = await oidcAuthenticationService.getRedirectLogoutUrl({ userId, logoutUrlUUID });
 
       // then
-      expect(openIdClient.buildEndSessionUrl).to.have.been.calledWith(MOCK_OIDC_PROVIDER_CONFIG, {
+      expect(openidClient.buildEndSessionUrl).to.have.been.calledWith(MOCK_OIDC_PROVIDER_CONFIG, {
         id_token_hint: idToken,
         post_logout_redirect_uri: settings.oidcExampleNet.postLogoutRedirectUri,
       });
@@ -242,7 +242,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       );
     });
 
-    context('when openIdClient endSessionUrl fails', function () {
+    context('when openidClient endSessionUrl fails', function () {
       it('throws an error and logs monitoring data', async function () {
         // given
         const idToken = 'some_dummy_id_token';
@@ -253,11 +253,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           delete: sinon.stub().resolves(),
         };
         const errorThrown = new Error('Fails to generate endSessionUrl');
-        openIdClient.buildEndSessionUrl.throws(errorThrown);
+        openidClient.buildEndSessionUrl.throws(errorThrown);
 
         const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, {
           sessionTemporaryStorage,
-          openIdClient,
+          openidClient,
         });
         await oidcAuthenticationService.initializeClientConfig();
 
@@ -307,7 +307,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         expiresIn,
         refreshToken,
       });
-      openIdClient.authorizationCodeGrant.resolves({
+      openidClient.authorizationCodeGrant.resolves({
         access_token: accessToken,
         expires_in: expiresIn,
         id_token: idToken,
@@ -322,7 +322,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           openidConfigurationUrl,
           tokenUrl,
         },
-        { openIdClient },
+        { openidClient },
       );
       await oidcAuthenticationService.initializeClientConfig();
 
@@ -334,7 +334,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       expect(result).to.deep.equal(oidcAuthenticationSessionContent);
     });
 
-    context('when openIdClient callback fails', function () {
+    context('when openidClient callback fails', function () {
       it('throws an error and logs monitoring data', async function () {
         const clientId = 'clientId';
         const clientSecret = 'clientSecret';
@@ -351,7 +351,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         errorThrown.error_uri = '/oauth2/token';
         errorThrown.response = 'api call response here';
 
-        openIdClient.authorizationCodeGrant.rejects(errorThrown);
+        openidClient.authorizationCodeGrant.rejects(errorThrown);
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -362,7 +362,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl,
             organizationName: 'Oidc Example',
           },
-          { openIdClient },
+          { openidClient },
         );
         await oidcAuthenticationService.initializeClientConfig();
 
@@ -409,7 +409,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       const redirectUri = 'https://example.org/please-redirect-to-me';
       const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-      openIdClient.buildAuthorizationUrl.returns('');
+      openidClient.buildAuthorizationUrl.returns('');
 
       const oidcAuthenticationService = new OidcAuthenticationService(
         {
@@ -420,7 +420,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           openidConfigurationUrl,
           organizationName: 'Oidc Example',
         },
-        { openIdClient },
+        { openidClient },
       );
 
       await oidcAuthenticationService.initializeClientConfig();
@@ -432,7 +432,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       expect(nonce).to.match(uuidV4Regex);
       expect(state).to.match(uuidV4Regex);
 
-      expect(openIdClient.buildAuthorizationUrl).to.have.been.calledWithExactly(MOCK_OIDC_PROVIDER_CONFIG, {
+      expect(openidClient.buildAuthorizationUrl).to.have.been.calledWithExactly(MOCK_OIDC_PROVIDER_CONFIG, {
         nonce,
         redirect_uri: 'https://example.org/please-redirect-to-me',
         scope: 'openid profile',
@@ -450,7 +450,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
         const errorThrown = new Error('Fails to generate authorization url');
 
-        openIdClient.buildAuthorizationUrl.throws(errorThrown);
+        openidClient.buildAuthorizationUrl.throws(errorThrown);
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -461,7 +461,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl,
             organizationName: 'Oidc Example',
           },
-          { openIdClient },
+          { openidClient },
         );
         await oidcAuthenticationService.initializeClientConfig();
 
@@ -500,7 +500,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         'secret',
       );
 
-      const oidcAuthenticationService = new OidcAuthenticationService({}, { openIdClient });
+      const oidcAuthenticationService = new OidcAuthenticationService({}, { openidClient });
 
       // when
       const result = await oidcAuthenticationService.getUserInfo({
@@ -532,7 +532,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           { claimsToStore: 'employeeNumber' },
-          { openIdClient },
+          { openidClient },
         );
 
         // when
@@ -569,7 +569,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           lastName: ['usual_name'],
           externalIdentityId: ['sub'],
         };
-        const oidcAuthenticationService = new OidcAuthenticationService({ claimMapping }, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService({ claimMapping }, { openidClient });
 
         // when
         const result = await oidcAuthenticationService.getUserInfo({
@@ -607,7 +607,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         };
         const oidcAuthenticationService = new OidcAuthenticationService(
           { claimMapping, claimsToStore: 'employeeNumber' },
-          { openIdClient },
+          { openidClient },
         );
 
         // when
@@ -637,7 +637,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           'secret',
         );
 
-        const oidcAuthenticationService = new OidcAuthenticationService({}, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService({}, { openidClient });
         sinon.stub(oidcAuthenticationService, '_getUserInfoFromEndpoint').resolves({});
 
         // when
@@ -666,7 +666,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           { claimsToStore: 'employeeNumber' },
-          { openIdClient },
+          { openidClient },
         );
         sinon.stub(oidcAuthenticationService, '_getUserInfoFromEndpoint').resolves({});
 
@@ -694,7 +694,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       const redirectUri = 'https://example.org/please-redirect-to-me';
       const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-      openIdClient.fetchUserInfo.returns({
+      openidClient.fetchUserInfo.returns({
         sub: 'sub-id',
         given_name: 'givenName',
         family_name: 'familyName',
@@ -709,7 +709,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           openidConfigurationUrl,
           organizationName: 'Oidc Example',
         },
-        { openIdClient },
+        { openidClient },
       );
 
       await oidcAuthenticationService.initializeClientConfig();
@@ -723,7 +723,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
 
       // then
-      expect(openIdClient.fetchUserInfo).to.have.been.calledOnceWithExactly(
+      expect(openidClient.fetchUserInfo).to.have.been.calledOnceWithExactly(
         MOCK_OIDC_PROVIDER_CONFIG,
         accessToken,
         'sub-id',
@@ -735,7 +735,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
     });
 
-    context('when openIdClient userinfo fails', function () {
+    context('when openidClient userinfo fails', function () {
       it('throws an error and logs monitoring data', async function () {
         const clientId = 'OIDC_CLIENT_ID';
         const clientSecret = 'OIDC_CLIENT_SECRET';
@@ -744,7 +744,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
         const errorThrown = new Error('Fails to get user info');
 
-        openIdClient.fetchUserInfo.rejects(errorThrown);
+        openidClient.fetchUserInfo.rejects(errorThrown);
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -755,7 +755,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl,
             organizationName: 'Oidc Example',
           },
-          { openIdClient },
+          { openidClient },
         );
         await oidcAuthenticationService.initializeClientConfig();
 
@@ -789,7 +789,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-        openIdClient.fetchUserInfo.returns({
+        openidClient.fetchUserInfo.returns({
           sub: 'sub-id',
           given_name: 'givenName',
           family_name: undefined,
@@ -804,7 +804,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl,
             organizationName: 'Oidc Example',
           },
-          { openIdClient },
+          { openidClient },
         );
 
         await oidcAuthenticationService.initializeClientConfig();
@@ -848,7 +848,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-        openIdClient.fetchUserInfo.returns({
+        openidClient.fetchUserInfo.returns({
           sub: 'sub-id',
           given_name: 'givenName',
           family_name: 'familyName',
@@ -865,7 +865,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             openidConfigurationUrl,
             organizationName: 'Oidc Example',
           },
-          { openIdClient },
+          { openidClient },
         );
         await oidcAuthenticationService.initializeClientConfig();
 
@@ -921,7 +921,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         externalIdentifier: externalIdentityId,
         userId,
       });
-      const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openIdClient });
+      const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openidClient });
 
       // when
       const result = await oidcAuthenticationService.createUserAccount({
@@ -957,7 +957,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           { identityProvider, connectionMethodCode },
-          { openIdClient },
+          { openidClient },
         );
         const expectedAuthenticationMethod = new AuthenticationMethod({
           identityProvider: connectionMethodCode,
@@ -999,7 +999,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           externalIdentifier: externalIdentityId,
           userId,
         });
-        const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openIdClient });
+        const oidcAuthenticationService = new OidcAuthenticationService({ identityProvider }, { openidClient });
 
         // when
         await oidcAuthenticationService.createUserAccount({
@@ -1040,7 +1040,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         });
         const oidcAuthenticationService = new OidcAuthenticationService(
           { identityProvider, claimsToStore },
-          { openIdClient },
+          { openidClient },
         );
 
         // when
@@ -1061,7 +1061,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
   });
 
   describe('#initializeClientConfig', function () {
-    it('creates an openIdClient', async function () {
+    it('creates an openidClient', async function () {
       // given
       const clientId = 'clientId';
       const clientSecret = 'clientSecret';
@@ -1077,19 +1077,19 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           redirectUri,
           openidConfigurationUrl,
         },
-        { openIdClient },
+        { openidClient },
       );
 
       // when
       await oidcAuthenticationService.initializeClientConfig();
 
       // then
-      expect(openIdClient.discovery).to.have.been.calledWithExactly(new URL(openidConfigurationUrl), clientId, {
+      expect(openidClient.discovery).to.have.been.calledWithExactly(new URL(openidConfigurationUrl), clientId, {
         client_secret: clientSecret,
       });
     });
 
-    it('creates an openIdClient with extra metadata', async function () {
+    it('creates an openidClient with extra metadata', async function () {
       // given
       const clientId = 'clientId';
       const clientSecret = 'clientSecret';
@@ -1107,14 +1107,14 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           openidConfigurationUrl,
           openidClientExtraMetadata,
         },
-        { openIdClient },
+        { openidClient },
       );
 
       // when
       await oidcAuthenticationService.initializeClientConfig();
 
       // then
-      expect(openIdClient.discovery).to.have.been.calledWithExactly(new URL(openidConfigurationUrl), clientId, {
+      expect(openidClient.discovery).to.have.been.calledWithExactly(new URL(openidConfigurationUrl), clientId, {
         client_secret: clientSecret,
         token_endpoint_auth_method: 'client_secret_post',
       });
