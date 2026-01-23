@@ -60,20 +60,18 @@ export class SupWithHabilitationsSeed {
       forceSessionId: STARTED_PIX_EDU_1ER_DEGRE_CERTIFICATION_SESSION,
     });
 
-    await Promise.all(
-      certifiableUsers.map((certifiableUser) =>
-        this.#addCandidateToSession({
-          pixAppUser: certifiableUser,
-          session: sessionDroitReadyToStart,
-          subscriptions: [
-            Subscription.buildComplementary({
-              certificationCandidateId: null,
-              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-            }),
-          ],
-        }),
-      ),
-    );
+    for (const certifiableUser of certifiableUsers) {
+      await this.#addCandidateToSession({
+        pixAppUser: certifiableUser,
+        session: sessionDroitReadyToStart,
+        subscriptions: [
+          Subscription.buildComplementary({
+            certificationCandidateId: null,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+          }),
+        ],
+      });
+    }
 
     /**
      * Session Pix+Droit with candidate ready to start his certification
@@ -85,20 +83,19 @@ export class SupWithHabilitationsSeed {
       description: 'Pix+Droit session with candidate ready to start',
       forceSessionId: STARTED_PIX_DROIT_CERTIFICATION_SESSION,
     });
-    await Promise.all(
-      certifiableUsers.map((certifiableUser) =>
-        this.#addCandidateToSession({
-          pixAppUser: certifiableUser,
-          session: sessionEduReadyToStart,
-          subscriptions: [
-            Subscription.buildComplementary({
-              certificationCandidateId: null,
-              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-            }),
-          ],
-        }),
-      ),
-    );
+
+    for (const certifiableUser of certifiableUsers) {
+      await this.#addCandidateToSession({
+        pixAppUser: certifiableUser,
+        session: sessionEduReadyToStart,
+        subscriptions: [
+          Subscription.buildComplementary({
+            certificationCandidateId: null,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          }),
+        ],
+      });
+    }
   }
 
   async #initCertificationReferentials() {

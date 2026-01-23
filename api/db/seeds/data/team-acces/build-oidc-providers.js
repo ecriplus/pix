@@ -127,10 +127,8 @@ async function _buildOidcProvidersFromEnv(databaseBuilder) {
 
   const oidcProviders = JSON.parse(oidcProvidersJson);
 
-  await Promise.all(
-    oidcProviders.map(async (oidcProviderProperties) => {
-      debugOidcProvidersSeeds(`Loading configuration for OIDC provider "${oidcProviderProperties.identityProvider}"…`);
-      return databaseBuilder.factory.buildOidcProvider(oidcProviderProperties);
-    }),
-  );
+  for (const oidcProviderProperties of oidcProviders) {
+    debugOidcProvidersSeeds(`Loading configuration for OIDC provider "${oidcProviderProperties.identityProvider}"…`);
+    await databaseBuilder.factory.buildOidcProvider(oidcProviderProperties);
+  }
 }
