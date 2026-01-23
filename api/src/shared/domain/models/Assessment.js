@@ -71,11 +71,6 @@ class Assessment {
     challengeLiveAlerts,
     companionLiveAlerts,
   } = {}) {
-    // Hack during transition to rename to invigilator
-    if (state === 'endedBySupervisor') {
-      state = Assessment.states.ENDED_BY_INVIGILATOR;
-    }
-
     this.id = id;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
@@ -108,11 +103,8 @@ class Assessment {
     return this.state === Assessment.states.STARTED;
   }
 
-  /**
-   * Add `endedBySupervisor` condition for transition to rename state to `invigilator`
-   */
   isEndedByInvigilator() {
-    return this.state === Assessment.states.ENDED_BY_INVIGILATOR || this.state === 'endedBySupervisor';
+    return this.state === Assessment.states.ENDED_BY_INVIGILATOR;
   }
 
   hasBeenEndedDueToFinalization() {

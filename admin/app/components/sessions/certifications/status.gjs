@@ -8,7 +8,6 @@ export default class CertificationStatusComponent extends Component {
       assessmentStates.STARTED,
       assessmentResultStatus.ERROR,
       assessmentStates.ENDED_BY_INVIGILATOR,
-      'endedBySupervisor',
     ];
     return includes(blockingStatuses, this.args.record.status) || this.args.record.isFlaggedAborted;
   }
