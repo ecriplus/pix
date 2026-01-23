@@ -52,7 +52,7 @@
               "element": {
                 "id": "f2665813-82bb-4427-a9a0-14a6a5f3df8f",
                 "type": "qcu-discovery",
-                "instruction": "<p>Des projections ont été faites concernant la consommation d’énergie par les centre de données.<br>À votre avis, que disent ces projections pour la période 2025 à 2030 ?<br></p>",
+                "instruction": "<p>L'agence internationale de l'energie (IAE) a fait des projections concernant la consommation d’énergie par les centre de données.<br>À votre avis, que disent ces projections pour la période 2025 à 2030 ?<br></p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -95,22 +95,22 @@
       "type": "explore-to-understand",
       "grains": [
         {
-          "id": "7260fc78-af23-46f9-ad3c-11ee75a44905",
-          "type": "discovery",
-          "title": "Activité#1 - Les impacts environnementaux en cascade des centres de données",
+          "id": "f592f48b-2cad-4167-976e-deeaf05eb720",
+          "type": "short-lesson",
+          "title": "Introduction",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "6e45420c-8d9a-4fda-8b02-c6fd2123f9ac",
+                "id": "7ef3df37-d12b-4d80-bfba-fdf3bf1f10b1",
                 "type": "text",
-                "content": "<p>La <strong>construction </strong>d'un centre de données nécessite l’extraction de grandes quantités de <strong>métaux </strong>et&nbsp;de <strong>terre rare.&nbsp;</strong> artificialisation des sols. Elle contribue également à l'<strong>artificialisation des sols</strong>.<br>De plus, le centre de données <strong>consomme</strong> une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets </strong>toxiques.</p>"
+                "content": "La <strong>construction </strong>d'un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle contribue également à l'<strong>artificialisation des sols</strong>.<br>De plus, le centre de données consomme une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets</strong> toxiques."
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "64c85e42-6b34-4c04-be29-e1e550000b69",
+                "id": "7ef3df37-d12b-4d80-bfba-fdf3bf1f10b1",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenterconsequencesprimaires.png",
                 "alt": "",
@@ -118,7 +118,14 @@
                 "legend": "",
                 "licence": ""
               }
-            },
+            }
+          ]
+        },
+        {
+          "id": "7260fc78-af23-46f9-ad3c-11ee75a44905",
+          "type": "discovery",
+          "title": "Activité#1 - Les impacts environnementaux en cascade des centres de données",
+          "components": [
             {
               "type": "stepper",
               "steps": [
@@ -243,7 +250,7 @@
                     {
                       "id": "e3363973-52e7-4757-b9fc-4d820b7bb355",
                       "type": "qcm",
-                      "instruction": "<p>Au global, quelles sont les conséquences de la fabrication et du fonctionnement des centres de données ?</p>",
+                      "instruction": "<p>Au global, quelles sont les conséquences de la construction et du fonctionnement des centres de données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -295,7 +302,7 @@
               "element": {
                 "id": "16b59faf-6643-4a22-a2e2-55a664a2702d",
                 "type": "text",
-                "content": "Les <strong>conséquences </strong>de la fabrication et de la consommation des<strong> centres de données</strong> produisent des conséquences en cascades, qui contribuent au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
+                "content": "La construction&nbsp;des<strong> centres de données</strong>&nbsp;et leur fonctionnement produisent des conséquences en cascades, qui contribuent au <strong>déréglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
               }
             },
             {
@@ -322,7 +329,7 @@
               "element": {
                 "id": "b3276727-321b-4cb2-baa8-fa8483d36bc6",
                 "type": "text",
-                "content": "<p>Avec la multiplication de nos usages numériques, et donc la construction de nouveaux centres de données, ces multiples impacts environnementaux vont s’amplifier.<br>Que peuvent faire les entreprises du numérique pour limiter ces impacts ?<br></p>"
+                "content": "<p>Que peuvent faire les entreprises du numérique pour limiter ces impacts ?<br></p>"
               }
             }
           ]
@@ -337,7 +344,7 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
-                "content": "<p>Malo travaille dans une entreprise qui crée des sites web.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centre de données ?&nbsp;🤔</p>"
+                "content": "<p>Malo est concepteur de site web dans une entreprise, il est en train d'améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centre de données ?&nbsp;🤔</p>"
               }
             },
             {
@@ -353,26 +360,26 @@
                     {
                       "id": "7fb2c32e-586d-4a88-ad50-368a2292ae97",
                       "type": "custom",
-                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
                           {
-                            "label": "Elle diminue. 🔋",
+                            "label": "Elle diminue. 📉",
                             "feedback": {
                               "type": "neutral",
                               "text": "C’est faux. Une vidéo va d’avantage solliciter les serveurs d’une image."
                             }
                           },
                           {
-                            "label": "Elle reste stable. ⚡",
+                            "label": "Elle reste stable. ",
                             "feedback": {
                               "type": "neutral",
                               "text": "C’est faux. Une vidéo va d’avantage solliciter les serveurs d’une image."
                             }
                           },
                           {
-                            "label": "Elle augmente. 🪫",
+                            "label": "Elle augmente. 📈",
                             "feedback": {
                               "type": "neutral",
                               "text": "C’est vrai. Une vidéo va d’avantage solliciter les serveurs d’une image."
@@ -393,26 +400,26 @@
                     {
                       "id": "f19dfdcb-c777-4448-ab61-29b0a212e489",
                       "type": "custom",
-                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
                           {
-                            "label": "Elle diminue. 🔋",
+                            "label": "Elle diminue. 📉",
                             "feedback": {
                               "type": "neutral",
                               "text": "Bien vu ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
                             }
                           },
                           {
-                            "label": "Elle reste stable. ⚡",
+                            "label": "Elle reste stable. ",
                             "feedback": {
                               "type": "neutral",
                               "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
                             }
                           },
                           {
-                            "label": "Elle augmente. 🪫",
+                            "label": "Elle augmente. 📈",
                             "feedback": {
                               "type": "neutral",
                               "text": "Eh non ! En réduisant la taille du fichier, on réduit la sollicitation des serveurs."
@@ -433,26 +440,26 @@
                     {
                       "id": "3e486e8b-cca0-45c5-b022-b40574eeb8bc",
                       "type": "custom",
-                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
                           {
-                            "label": "Elle diminue. 🔋",
+                            "label": "Elle diminue. 📉",
                             "feedback": {
                               "type": "neutral",
                               "text": "Eh non ! Avec la lecture automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
                             }
                           },
                           {
-                            "label": "Elle reste stable. ⚡",
+                            "label": "Elle reste stable. ",
                             "feedback": {
                               "type": "neutral",
                               "text": "Eh non ! Avec la lecture automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
                             }
                           },
                           {
-                            "label": "Elle augmente. 🪫",
+                            "label": "Elle augmente. 📈",
                             "feedback": {
                               "type": "neutral",
                               "text": "Bien vu ! Avec la lecture automatique, les utilisateurs du site risque de regarder plus de vidéo et donc solliciter d’avantage les serveurs."
@@ -468,31 +475,31 @@
                     {
                       "id": "420482f8-f04b-441a-a8ed-9146b4787a71",
                       "type": "text",
-                      "content": "<p>Malo se rend compte que le forum du site web est très peu d’activités.<br>Comme la fonctionnalité est peu  utilisée, il décide de la supprimer.</p>"
+                      "content": "<p>Malo se rend compte que le forum du site web est très peu d’activités.<br>Comme le forum est peu  utilisée, il décide de le supprimer.</p>"
                     },
                     {
                       "id": "14580542-77e4-454a-9dea-991225bf4c73",
                       "type": "custom",
-                      "instruction": "<p>Quelle va être la conséquence sur la sollicitation des serveurs ?</p>",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
                           {
-                            "label": "Elle diminue. 🔋",
+                            "label": "Elle diminue. 📉",
                             "feedback": {
                               "type": "neutral",
                               "text": "Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs."
                             }
                           },
                           {
-                            "label": "Elle reste stable. ⚡",
+                            "label": "Elle reste stable. ",
                             "feedback": {
                               "type": "neutral",
                               "text": "Pas tout à fait ! Une fonctionnalité en moins permet moins de sollicitation des serveurs. "
                             }
                           },
                           {
-                            "label": "Elle augmente. 🪫",
+                            "label": "Elle augmente. 📈",
                             "feedback": {
                               "type": "neutral",
                               "text": "Eh non ! Bien vu ! Une fonctionnalité en moins permet moins de sollicitation des serveurs."
