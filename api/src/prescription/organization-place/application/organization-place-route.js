@@ -1,4 +1,7 @@
-import Joi from 'joi';
+import JoiDate from '@joi/date';
+import BaseJoi from 'joi';
+
+const Joi = BaseJoi.extend(JoiDate);
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
@@ -86,6 +89,18 @@ const register = async (server) => {
         validate: {
           params: Joi.object({
             id: identifiersType.organizationId,
+          }),
+          payload: Joi.object({
+            data: Joi.object({
+              attributes: Joi.object({
+                count: Joi.number().integer().min(0).allow(null),
+                category: Joi.string().required(),
+                reference: Joi.string().required(),
+                'activation-date': Joi.date().required(),
+                'expiration-date': Joi.date().required(),
+              }).options({ stripUnknown: true }),
+              type: Joi.string().required(),
+            }),
           }),
         },
         notes: [
