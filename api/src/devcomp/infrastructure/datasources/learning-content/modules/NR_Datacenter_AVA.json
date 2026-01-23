@@ -527,7 +527,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
-                      "content": "<p>On appelle ces actions des pratiques d’<strong>éco-conception.</strong><br> Elle désigne l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie. </p>"
+                      "content": "<p>Malo a donc parfois contribué à solliciter d'avantage les serveurs, mais parfois il a permis de réduire leurs charges.<br></p>"
                     }
                   ]
                 },
@@ -536,7 +536,16 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
-                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles respectées ?</h5><p>En pratique, elles sont encore peu respectées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels (GR491) poussent les entreprises à s’y intéresser.<br></p>"
+                      "content": "On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie.<p><br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b2328855-4a62-4909-b3cd-dd89682f43c2",
+                      "type": "text",
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5>\n<p>En pratique, elles sont encore peu appliquées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
                     }
                   ]
                 }
@@ -880,7 +889,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
-                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple être plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts que par la réduction des impacts environnementaux.<br><br></p>"
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. <br>Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts. Une solution plus économe en énergie peut être plus coûteuse en eau.&nbsp;Aucune solution n’est parfaite.&nbsp;🤔<br>Et une conception <strong>plus responsable</strong> peut entraîner des <strong>coûts économiques</strong> importants. 💶<br></p>"
                     }
                   ]
                 },
@@ -889,7 +898,13 @@
                     {
                       "id": "75e9088f-97d4-45de-8631-5a84e7399b08",
                       "type": "text",
-                      "content": "<h5>Alors, comment inciter les acteurs du numérique à adopter des pratiques plus vertueuses ?</h5><p>La <strong>loi </strong>joue un rôle important pour encourager ces changements de pratiques. Depuis 2019, un règlement de l’Union européenne définit des exigences d’éco-conception applicables aux exploitants de centres de données. </p><p>En France, la loi REEN vise également à inciter les centres de données à être moins consommateurs en leur accordant une réduction d’une taxe s’ils respectent des critères environnementaux.<br></p>"
+                      "content": "<h5>Alors, comment inciter les acteurs du numérique à adopter des pratiques plus vertueuses ?</h5><p>La <strong>loi </strong>joue un rôle important pour encourager ces changements de pratiques.&nbsp;<br>Depuis 2019, un <strong>règlement de l’Union européenne</strong> définit des exigences d’<strong>éco-conception</strong> applicables aux exploitants de <strong>centres de données</strong>.&nbsp;♻️</p>"
+                    },
+                    {
+                      "id": "331b8252-cd22-4713-af75-212a5b912302",
+                      "type": "expand",
+                      "title": "💡 Et en France ?",
+                      "content": "En France, la <strong>loi REEN</strong> vise également à inciter les <strong>centres de données </strong>à être moins consommateurs en leur accordant une réduction d’une taxe s’ils respectent des <strong>critères environnementaux</strong>."
                     }
                   ]
                 }
@@ -913,7 +928,7 @@
               "element": {
                 "id": "8dde623f-d573-4782-925b-f3c0e50bf780",
                 "type": "text",
-                "content": "<ul><li><strong>L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>En tant qu’utilisateur ou que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
+                "content": "<ul><li><strong>📈L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>📉En tant que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>💡Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>⚖️ La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
               }
             }
           ]
@@ -1140,18 +1155,18 @@
               "element": {
                 "id": "d041ad34-1d9a-444c-816f-c42313619932",
                 "type": "custom",
-                "instruction": "<p>Faites défiler ces 4 exemples puis répondez à la question.<br></p>",
+                "instruction": "<p>Faites défiler ces 4 exemples de sites web puis répondez à la question.<br></p>",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Le moteur de recherche fait appel à de l’Intelligence artificielle.",
+                      "title": "Le moteur de recherche de TrouveTout fait appel à de l’Intelligence artificielle.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/moteuravec-ia.jpg",
-                        "alt": "Le moteur de recherche fait appel à de l’Intelligence artificielle."
+                        "alt": "Le moteur de recherche de TrouveTout fait appel à de l’Intelligence artificielle."
                       },
                       "license": {
                         "name": "",
@@ -1160,12 +1175,12 @@
                       }
                     },
                     {
-                      "title": "Le lecteur vidéo adapte automatiquement la qualité selon le contexte.",
+                      "title": "Le lecteur vidéo de PixVideo adapte automatiquement la qualité selon la largeur de l'écran de l'utilisateur.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/lecteur-video.webp",
-                        "alt": "Le lecteur vidéo adapte automatiquement la qualité selon le contexte."
+                        "alt": "Le lecteur vidéo de PixVidéo adapte automatiquement la qualité selon la largeur de l'écran de l'utilisateur."
                       },
                       "license": {
                         "name": "",
@@ -1174,12 +1189,12 @@
                       }
                     },
                     {
-                      "title": "Toutes les pages sont statiques.",
+                      "title": "Toutes les pages de RecetteSuzette sont statiques.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/pagestatique.png",
-                        "alt": "Toutes les pages sont statiques."
+                        "alt": "Toutes les pages de RecetteSuzette sont statiques."
                       },
                       "license": {
                         "name": "",
@@ -1188,7 +1203,7 @@
                       }
                     },
                     {
-                      "title": " Les médias sont présentées dans la meilleure qualité possible.",
+                      "title": " Les médias de Youpix sont présentées dans la meilleure qualité possible.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
@@ -1215,23 +1230,23 @@
               "element": {
                 "id": "b040a865-2b7f-4729-958b-bad07815a8b5",
                 "type": "qcm",
-                "instruction": "<p>Parmi ces exemples, lesquels respectent des pratiques d’éco-conception ?</p>",
+                "instruction": "<p>Parmi ces exemples de site web, lesquels respectent des pratiques d’éco-conception ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Le moteur de recherche fait appel à de l’Intelligence artificielle.</p>"
+                    "content": "TrouveTout"
                   },
                   {
                     "id": "2",
-                    "content": "<p>Le lecteur vidéo adapte automatiquement la qualité selon le contexte.</p>"
+                    "content": "PixVidéo"
                   },
                   {
                     "id": "3",
-                    "content": "<p>Toutes les pages sont statiques.</p>"
+                    "content": "RecetteSuzette"
                   },
                   {
                     "id": "4",
-                    "content": " Les médias sont présentées dans la meilleure qualité possible."
+                    "content": "Youpix"
                   }
                 ],
                 "feedbacks": {
@@ -1262,7 +1277,7 @@
               "element": {
                 "id": "b29b9b11-f2d1-4acd-8877-cbed05f7cdea",
                 "type": "qab",
-                "instruction": "<p>Parmi ces propositions, lesquelles permettent de réduire les impacts environnementaux d’un centre de données ?</p>",
+                "instruction": "Vrai ou Faux : dites si chaque proposition permet de réduire l’impact environnemental d’un centre de données sans gêner son fonctionnement.",
                 "cards": [
                   {
                     "id": "aeafa8b8-1f91-4fbc-a586-e19e77e7d2cc",
@@ -1277,7 +1292,7 @@
                   },
                   {
                     "id": "101e1ba2-41a8-4d76-8ed1-bb456df4df9e",
-                    "text": " Installer les centres de données en Égypte.",
+                    "text": "Installer les centres de données en Égypte plutôt qu'au Canada.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1299,7 +1314,7 @@
                   },
                   {
                     "id": "de1b2228-57cf-4a5d-9f7c-01678f72b467",
-                    "text": "Utiliser l’énergie d’un barrage hydroélectrique ",
+                    "text": "Utiliser l’énergie d’un barrage hydroélectrique pour alimenter le centre de données.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1310,7 +1325,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": ""
+                  "diagnosis": "<ul>\n    <li>Éteindre aléatoirement les serveurs n'est pas une bonne idée car les données contenues dessus deviendraient inacessibles.</li>\n    <li>Installer les centres de données en Égypte plutôt qu'au Canada n'est pas une bonne idée car il s'agit d'un pays chaud qui souffre de stress hydrique.</li>\n</ul>"
                 }
               }
             }
