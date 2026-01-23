@@ -1,5 +1,5 @@
-export default {
-  time: {
+export const formats = {
+  formatTime: {
     hhmm: {
       hour: 'numeric',
       minute: 'numeric',
@@ -10,7 +10,7 @@ export default {
       second: 'numeric',
     },
   },
-  date: {
+  formatDate: {
     hhmmss: {
       hour: 'numeric',
       minute: 'numeric',
@@ -27,7 +27,7 @@ export default {
       year: 'numeric',
     },
   },
-  number: {
+  formatNumber: {
     EUR: {
       style: 'currency',
       currency: 'EUR',

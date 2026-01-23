@@ -46,6 +46,7 @@ module.exports = function (defaults) {
     staticAddonTestSupportTrees: true,
     staticAddonTrees: true,
     staticModifiers: true,
+    staticEmberSource: true,
     staticHelpers: app.env === 'production',
     staticComponents: app.env === 'production',
     packagerOptions: {

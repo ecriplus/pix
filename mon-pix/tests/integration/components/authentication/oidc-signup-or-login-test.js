@@ -104,14 +104,14 @@ module('Integration | Component | authentication | oidc-signup-or-login', functi
         assert.notOk(screen.queryByRole('button', { name: t('pages.oidc-signup-or-login.signup-form.button') }));
         assert.notOk(screen.queryByText('Partenaire OIDC'));
         assert.notOk(
-          screen.queryByText(t('pages.oidc-signup-or-login.signup-form.first-name-label-and-value'), {
-            firstName: 'Mélusine',
-          }),
+          screen.queryByText(
+            t('pages.oidc-signup-or-login.signup-form.first-name-label-and-value', { firstName: 'Mélusine' }),
+          ),
         );
         assert.notOk(
-          screen.queryByText(t('pages.oidc-signup-or-login.signup-form.last-name-label-and-value'), {
-            lastName: 'TITEGOUTTE',
-          }),
+          screen.queryByText(
+            t('pages.oidc-signup-or-login.signup-form.last-name-label-and-value', { lastName: 'TITEGOUTTE' }),
+          ),
         );
         assert.notOk(screen.queryByRole('checkbox', { name: t('common.cgu.label') }));
         assert.notOk(screen.queryByRole('link', { name: t('common.cgu.cgu') }));

@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
+import { formats } from 'mon-pix/ember-intl';
 
 export default class ApplicationRoute extends Route {
   @service authentication;
@@ -34,6 +35,7 @@ export default class ApplicationRoute extends Route {
 
   async beforeModel(transition) {
     const queryParams = transition?.to?.queryParams;
+    this.intl.setFormats(formats);
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load().catch();
