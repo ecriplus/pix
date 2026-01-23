@@ -104,7 +104,7 @@
               "element": {
                 "id": "6e45420c-8d9a-4fda-8b02-c6fd2123f9ac",
                 "type": "text",
-                "content": "<p>Pour sa <strong>construction</strong>, un centre de données nécessite l’extraction de grandes quantités de <strong>métaux</strong>, de <strong>terre rare</strong> et artificialisation des sols.<br>De plus, le centre de données <strong>consomme </strong>chaque jour une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets </strong>toxiques.</p>"
+                "content": "<p>La <strong>construction </strong>d'un centre de données nécessite l’extraction de grandes quantités de <strong>métaux </strong>et&nbsp;de <strong>terre rare.&nbsp;</strong> artificialisation des sols. Elle contribue également à l'<strong>artificialisation des sols</strong>.<br>De plus, le centre de données <strong>consomme</strong> une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets </strong>toxiques.</p>"
               }
             },
             {
@@ -136,7 +136,7 @@
                     {
                       "id": "2325603b-bf07-498a-bbdf-754cb4858782",
                       "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de la consommation de métaux pour la fabrication des centres des données ?</p>",
+                      "instruction": "<p>Quelles sont les conséquences de l'extraction de métaux pour la construction des centres des données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -265,11 +265,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureusement oui...</p>",
-                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centre des données.</p>"
+                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centre des données, sur l'environnement et la santé humaine.</p>"
                         },
                         "invalid": {
                           "state": "<p>Malheureusement non...</p>",
-                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres des données.</p>"
+                          "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centre des données, sur l'environnement et la santé humaine."
                         }
                       },
                       "solutions": [
@@ -582,7 +582,7 @@
                             "userName": "Dona",
                             "direction": "incoming",
                             "type": "Texte",
-                            "content": " Alors, quelles solutions proposez-vous ?"
+                            "content": "Bonjour à tous ! J'espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?"
                           },
                           {
                             "userName": "Boubacar",
@@ -596,7 +596,7 @@
                             "type": "Image seule",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/panneau_solaire.jpg",
-                              "alt": "Des panneaux solaires sur le toi d’un centre de données"
+                              "alt": "Des panneaux solaires sur le toit d’un centre de données"
                             }
                           }
                         ]
@@ -827,28 +827,28 @@
                           "id": "1",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a été  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a été  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Utiliser des techniques de refroidissement plus efficaces.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a été  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a été  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
                           }
                         }
                       ],
@@ -873,7 +873,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
-                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts que par la réduction des impacts environnementaux.<br><br></p>"
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres des données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts…. Une solution plus économe en énergie peut par exemple être plus coûteuse en eau. Aucune solution n’est parfaite. Et les fabricants de centre de données sont plus motivés par la réduction des coûts que par la réduction des impacts environnementaux.<br><br></p>"
                     }
                   ]
                 },
@@ -906,7 +906,7 @@
               "element": {
                 "id": "8dde623f-d573-4782-925b-f3c0e50bf780",
                 "type": "text",
-                "content": "<ul><li><strong>L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>En tant qu’utilisateur ou que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>La <strong>loi </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
+                "content": "<ul><li><strong>L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>En tant qu’utilisateur ou que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
               }
             }
           ]
