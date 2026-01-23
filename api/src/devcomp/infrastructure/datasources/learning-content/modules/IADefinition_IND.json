@@ -2,7 +2,7 @@
   "id": "bc6d164f-26bd-4f58-9925-8cf5365e2ca6",
   "shortId": "43e420e6",
   "slug": "ia-def-ind",
-  "title": "Une IA apprentie botaniste : un cas d’apprentissage supervisé.",
+  "title": "Une IA botaniste : un cas d’apprentissage supervisé.",
   "isBeta": true,
   "visibility": "public",
   "details": {
@@ -441,7 +441,7 @@
                     {
                       "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step1-v2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step1-v2.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -476,7 +476,7 @@
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step1-v2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step2-v2.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -511,7 +511,7 @@
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step3-v2.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -546,7 +546,7 @@
                     {
                       "id": "f89da7a4-d84c-4213-8dcf-91712068c0b9",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step3-v2.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -586,7 +586,7 @@
                     {
                       "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step4-v2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step4.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -608,7 +608,22 @@
               "element": {
                 "id": "d14cf5f8-6d3f-4e77-abb2-033f8d13b062",
                 "type": "text",
-                "content": "<p>Le logiciel dispose de plusieurs paramètres pour faire des calculs sur ces valeurs. </p><p>Au départ, les paramètres sont ajustés au hasard, produisant une prédiction qui est le résultat de ses calculs.🎲 </p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue. </p><p>Ainsi, par essai erreur, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.</p>"
+                "content": "<h5>Si l'on résume, comment se passe l'entraînement d'un logiciel de reconnaissance d'image ?</h5>\n<p>Le logiciel dispose de plusieurs <strong>paramètres </strong>pour faire des calculs sur les <strong>valeurs </strong>d'une image.</p>\n<p><strong>Au départ</strong>, les paramètres sont fixés&nbsp;<strong>au hasard</strong>.🎰<br>En fonction de ces paramètres, le <strong>résultat </strong>des calculs donne une <strong>prédiction</strong>.</p>\n<p>À chaque nouvelle tentative, le logiciel compare sa prédiction à la réponse attendue.&nbsp;🔄</p>\n<p>Ainsi, par<strong> essai erreur</strong>, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.&nbsp;✅<br>Une fois l'entraînement terminé sur une image, l'entraînement est <strong>répété </strong>sur des<strong> milliers d'autres images.</strong><br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bc8f825f-f2b9-422e-a8ef-53df04d58740",
+          "type": "transition",
+          "title": "transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aa0e2963-70cd-4773-96da-af9b01878583",
+                "type": "text",
+                "content": "Mais comment savoir si cet entraînement est suffisant ?<br>C'est ce que nous allons voir avec le logiciel de Lila."
               }
             }
           ]
@@ -734,7 +749,7 @@
         {
           "id": "e41f6414-5ef6-44ee-8501-31077ec9d258",
           "type": "transition",
-          "title": "Transition 3",
+          "title": "Transition 4",
           "components": [
             {
               "type": "element",
@@ -775,70 +790,7 @@
               "type": "element",
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
-                "type": "qrocm",
-                "instruction": "<p>Dans cet exemple, quelle est la donnée d’entrée ? Et  l’exemple d’étiquette associée ?</p>",
-                "proposals": [
-                  {
-                    "type": "text",
-                    "content": "<p><strong>\"L’ail des ours peut se manger en ____\" </strong></p>"
-                  },
-                  {
-                    "input": "627e8063-9059-4bd6-9492-396cfb983c48",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner - ",
-                    "ariaLabel": "Sélectionner",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Donnée"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Etiquette"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p><strong>Salade</strong><br></p>"
-                  },
-                  {
-                    "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionner -",
-                    "ariaLabel": "Sélectionner",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "1",
-                        "content": "Donnée"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Etiquette"
-                      }
-                    ],
-                    "solutions": [
-                      "2"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bien vu !</p>",
-                    "diagnosis": "<p>En apprentissage supervisé,<strong> la donnée</strong>&nbsp;est ce que le modèle reçoit en entrée. Ici, il s'agit du texte à trou. </p><p>L'<strong>étiquette</strong> est la réponse correcte associée à la donnée, que le modèle doit apprendre à prédire. Dans cet exemple, il s'agit du mot manquant.</p><p>Pour que le logiciel fonctionne, il faudra lui donner des milliers de textes à trou.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Et non !</p>",
-                    "diagnosis": "<p>En apprentissage supervisé, la <strong>donnée&nbsp;</strong>est ce que le modèle reçoit en entrée. Ici, il s'agit du texte à trou.  L'<strong>étiquette</strong> est la réponse correcte associée à la donnée, que le modèle doit apprendre à prédire. Dans cet exemple, il s'agit du mot manquant.</p><p>Pour que le logiciel fonctionne, il faudra lui donner des milliers de textes à trou.</p>"
-                  }
-                }
+                "type": "text"
               }
             }
           ]
