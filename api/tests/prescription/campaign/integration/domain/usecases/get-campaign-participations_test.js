@@ -19,6 +19,7 @@ const {
   learningContent,
   buildCampaignSkill,
   buildTargetProfile,
+  buildBadgeCriterion,
   buildBadgeAcquisition,
   buildKnowledgeElement,
   buildStageAcquisition,
@@ -35,7 +36,20 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       const areaId = learningContent.buildArea({ frameworkId }).id;
       const competence = learningContent.buildCompetence({ areaId });
       const tube = learningContent.buildTube({ competenceId: competence.id });
-      const skillId = learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+      const skillId = learningContent.buildSkill({
+        id: 'recSkillId1',
+        tubeId: tube.id,
+        status: 'actif',
+        level: 1,
+        competenceId: competence.id,
+      }).id;
+      const skillId2 = learningContent.buildSkill({
+        id: 'recSkillId2',
+        tubeId: tube.id,
+        status: 'actif',
+        level: 2,
+        competenceId: competence.id,
+      }).id;
       const organizationLearner1 = buildOrganizationLearner({ lastName: 'Albert' });
 
       const targetProfile = buildTargetProfile();
@@ -49,8 +63,22 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       const badge1 = buildBadge({ targetProfileId: targetProfile.id, key: 'BADGE1' });
       const badge2 = buildBadge({ targetProfileId: targetProfile.id, key: 'BADGE2' });
 
+      buildBadgeCriterion({
+        badgeId: badge1.id,
+        threshold: 50,
+        cappedTubes: JSON.stringify([{ tubeId: tube.id, level: 1 }]),
+      });
+      buildBadgeCriterion({
+        badgeId: badge2.id,
+        threshold: 100,
+        cappedTubes: JSON.stringify([{ tubeId: tube.id, level: 2 }]),
+      });
+
       const campaign = buildCampaign({ type: CampaignTypes.ASSESSMENT, targetProfileId: targetProfile.id });
+
       buildCampaignSkill({ campaignId: campaign.id, skillId });
+      buildCampaignSkill({ campaignId: campaign.id, skillId: skillId2 });
+
       const participation1 = buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.SHARED,
@@ -72,10 +100,15 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         skillId,
         userId: participation1.userId,
       });
+      const ke2 = buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.INVALIDATED,
+        skillId: skillId2,
+        userId: participation1.userId,
+      });
 
       buildKnowledgeElementSnapshot({
         campaignParticipationId: participation1.id,
-        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        snapshot: new KnowledgeElementCollection([ke, ke2]).toSnapshot(),
       });
 
       const organizationLearner2 = buildOrganizationLearner({
@@ -138,7 +171,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
               competenceId: competence.id,
               competenceName: competence.name_i18n[FRENCH_SPOKEN],
               maxLevel: 2,
-              reachedLevel: 2,
+              reachedLevel: 1,
               description: tube.practicalDescription_i18n[FRENCH_SPOKEN],
               title: tube.practicalTitle_i18n[FRENCH_SPOKEN],
             },
@@ -155,6 +188,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
               imageUrl: badge1.imageUrl,
               altMessage: badge1.altMessage,
               isAcquired: true,
+              acquisitionPercentage: 100,
             },
             {
               id: badge2.id,
@@ -163,6 +197,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
               imageUrl: badge2.imageUrl,
               altMessage: badge2.altMessage,
               isAcquired: false,
+              acquisitionPercentage: 50,
             },
           ],
         }),

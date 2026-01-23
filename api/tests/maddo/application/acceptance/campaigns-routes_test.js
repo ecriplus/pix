@@ -18,10 +18,9 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
 
   describe('GET /api/campaigns/{campaignId}/participations', function () {
     context('when campaign type is ASSESSMENT', function () {
-      it('returns the list of all participations of campaign with tubes, stages and masteryRate with an HTTP status code 200', async function () {
+      it('returns the list of all participations of campaign with tubes, stages, masteryRate and badges with an HTTP status code 200', async function () {
         // given
         const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
-        databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
 
         const tag = databaseBuilder.factory.buildTag();
         databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
@@ -32,11 +31,32 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
         });
 
+        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+        const badge = databaseBuilder.factory.buildBadge({ targetProfileId });
         const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
         const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
         const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
         const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
-        const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+        const skillId = databaseBuilder.factory.learningContent.buildSkill({
+          id: 'recSkillId1',
+          tubeId: tube.id,
+          status: 'actif',
+          level: 1,
+          competenceId: competenceId,
+        }).id;
+        const skillId2 = databaseBuilder.factory.learningContent.buildSkill({
+          id: 'recSkillId2',
+          tubeId: tube.id,
+          status: 'actif',
+          level: 2,
+          competenceId: competenceId,
+        }).id;
+
+        databaseBuilder.factory.buildBadgeCriterion({
+          badgeId: badge.id,
+          threshold: 100,
+          cappedTubes: JSON.stringify([{ tubeId: tube.id, level: 2 }]),
+        });
 
         const { id: userId } = databaseBuilder.factory.buildUser({
           firstName: 'user firstname 1',
@@ -51,8 +71,11 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         const campaign = databaseBuilder.factory.buildCampaign({
           type: CampaignTypes.ASSESSMENT,
           organizationId: orgaInJurisdiction.id,
+          targetProfileId,
         });
         databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: skillId2 });
+
         const participation1 = databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           status: CampaignParticipationStatuses.SHARED,
@@ -69,10 +92,15 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           skillId,
           userId: participation1.userId,
         });
+        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+          status: KnowledgeElement.StatusType.INVALIDATED,
+          skillId: skillId2,
+          userId: participation1.userId,
+        });
 
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           campaignParticipationId: participation1.id,
-          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+          snapshot: new KnowledgeElementCollection([ke, ke2]).toSnapshot(),
         });
 
         const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
@@ -116,7 +144,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
                 id: tube.id,
                 competenceId,
                 maxLevel: 2,
-                reachedLevel: 2,
+                reachedLevel: 1,
                 practicalDescription: tube.practicalDescription_i18n['fr'],
                 practicalTitle: tube.practicalTitle_i18n['fr'],
               }),
@@ -125,7 +153,17 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               numberOfStages: 0,
               reachedStage: 0,
             },
-            badges: [],
+            badges: [
+              {
+                altMessage: badge.altMessage,
+                id: badge.id,
+                imageUrl: badge.imageUrl,
+                key: badge.key,
+                title: badge.title,
+                isAcquired: false,
+                acquisitionPercentage: 50,
+              },
+            ],
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation2,
@@ -137,7 +175,17 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               reachedStage: 0,
             },
             tubes: undefined,
-            badges: [],
+            badges: [
+              {
+                altMessage: badge.altMessage,
+                id: badge.id,
+                imageUrl: badge.imageUrl,
+                key: badge.key,
+                title: badge.title,
+                isAcquired: false,
+                acquisitionPercentage: 0,
+              },
+            ],
           }),
         ]);
         expect(response.result.page).to.deep.equal({

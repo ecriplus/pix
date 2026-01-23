@@ -48,11 +48,32 @@ describe('Integration | Application | campaign-api', function () {
   describe('#getCampaignParticipations', function () {
     it('should return an array of campaign participations', async function () {
       // given
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const badge = databaseBuilder.factory.buildBadge({ targetProfileId });
       const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
       const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
       const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
       const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
-      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+      const skillId = databaseBuilder.factory.learningContent.buildSkill({
+        id: 'recSkillId1',
+        tubeId: tube.id,
+        status: 'actif',
+        level: 1,
+        competenceId: competenceId,
+      }).id;
+      const skillId2 = databaseBuilder.factory.learningContent.buildSkill({
+        id: 'recSkillId2',
+        tubeId: tube.id,
+        status: 'actif',
+        level: 2,
+        competenceId: competenceId,
+      }).id;
+
+      databaseBuilder.factory.buildBadgeCriterion({
+        badgeId: badge.id,
+        threshold: 100,
+        cappedTubes: JSON.stringify([{ tubeId: tube.id, level: 2 }]),
+      });
 
       const { id: userId } = databaseBuilder.factory.buildUser({
         firstName: 'user firstname 1',
@@ -63,8 +84,10 @@ describe('Integration | Application | campaign-api', function () {
         firstName: 'firstname 1',
         lastName: 'lastname 1',
       });
-      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
+      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT, targetProfileId });
       databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: skillId2 });
+
       const participation1 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.SHARED,
@@ -77,15 +100,21 @@ describe('Integration | Application | campaign-api', function () {
         createdAt: new Date('2025-01-02'),
         sharedAt: new Date('2025-01-03'),
       });
-      const ke = databaseBuilder.factory.buildKnowledgeElement({
+
+      const validatedKe = databaseBuilder.factory.buildKnowledgeElement({
         status: KnowledgeElement.StatusType.VALIDATED,
         skillId,
+        userId: participation1.userId,
+      });
+      const invalidatedKe = databaseBuilder.factory.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.INVALIDATED,
+        skillId: skillId2,
         userId: participation1.userId,
       });
 
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         campaignParticipationId: participation1.id,
-        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        snapshot: new KnowledgeElementCollection([validatedKe, invalidatedKe]).toSnapshot(),
       });
 
       const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
@@ -103,7 +132,6 @@ describe('Integration | Application | campaign-api', function () {
         organizationId: organizationLearner1.organizationId,
         lastName: 'zoé',
       });
-
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.STARTED,
@@ -126,7 +154,7 @@ describe('Integration | Application | campaign-api', function () {
       // then
       expect(result.models[0]).instanceOf(CampaignParticipation);
       expect(result.models[1]).instanceOf(CampaignParticipation);
-      expect(result.models).to.deep.equal([
+      expect(result.models).to.deep.members([
         {
           campaignParticipationId: participation2.id,
           participantFirstName: organizationLearner2.firstName,
@@ -142,7 +170,17 @@ describe('Integration | Application | campaign-api', function () {
             numberOfStages: 0,
             reachedStage: 0,
           },
-          badges: [],
+          badges: [
+            {
+              altMessage: badge.altMessage,
+              id: badge.id,
+              imageUrl: badge.imageUrl,
+              key: badge.key,
+              title: badge.title,
+              isAcquired: false,
+              acquisitionPercentage: 0,
+            },
+          ],
         },
         {
           campaignParticipationId: participation1.id,
@@ -159,7 +197,7 @@ describe('Integration | Application | campaign-api', function () {
               competenceId: 'competenceIdA',
               id: 'tubeIdA',
               maxLevel: 2,
-              reachedLevel: 2,
+              reachedLevel: 1,
               practicalDescription: 'practicalDescription FR Tube A',
               practicalTitle: 'practicalTitle FR Tube A',
             },
@@ -168,7 +206,17 @@ describe('Integration | Application | campaign-api', function () {
             numberOfStages: 0,
             reachedStage: 0,
           },
-          badges: [],
+          badges: [
+            {
+              altMessage: badge.altMessage,
+              id: badge.id,
+              imageUrl: badge.imageUrl,
+              key: badge.key,
+              title: badge.title,
+              isAcquired: false,
+              acquisitionPercentage: 50,
+            },
+          ],
         },
       ]);
       expect(result.meta).to.deep.equal({

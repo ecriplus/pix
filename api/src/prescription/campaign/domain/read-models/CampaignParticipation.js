@@ -90,13 +90,14 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
 }
 
 class Badge {
-  constructor({ id, key, title, imageUrl, altMessage, isAcquired }) {
+  constructor({ id, key, title, imageUrl, altMessage, isAcquired, acquisitionPercentage }) {
     this.id = id;
     this.key = key;
     this.title = title;
     this.imageUrl = imageUrl;
     this.altMessage = altMessage;
     this.isAcquired = isAcquired;
+    this.acquisitionPercentage = acquisitionPercentage;
   }
 }
 
