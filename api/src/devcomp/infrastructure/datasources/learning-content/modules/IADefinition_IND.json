@@ -444,7 +444,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step1-v2.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "",
+                      "legend": "statique",
                       "licence": ""
                     },
                     {
@@ -456,14 +456,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "Eh non !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : “muguet” a un meilleur score, alors que le résultat attendu est “ail des ours”<br>"
+                            "diagnosis": "Eh non !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : « muguet » a un meilleur score, alors que le résultat attendu est « ail des ours ».<br>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "Effectivement !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : “muguet” a un meilleur score, alors que le résultat attendu est “ail des ours”.<br>"
+                            "diagnosis": "Effectivement !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : « muguet » a un meilleur score, alors que le résultat attendu est « ail des ours ».<br>"
                           }
                         }
                       ],
@@ -479,7 +479,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step2-v2.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "",
+                      "legend": "Animation où l'on voit les paramètres bouger",
                       "licence": ""
                     },
                     {
@@ -491,14 +491,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "Eh non, pas encore.<br> Même si le score de l’ail des ours a augmenté, il reste inférieur à celui du Muguet.&nbsp;<br>"
+                            "diagnosis": "Eh non, pas encore.<br> Même si le score de l’« ail des ours » a augmenté, il reste inférieur à celui du « muguet ».&nbsp;<br>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>Même si le score de l’ail des ours a augmenté, il reste inférieur à celui du Muguet.&nbsp;<br>"
+                            "diagnosis": "Bien vu !&nbsp;<br>Même si le score de l’« ail des ours » a augmenté, il reste inférieur à celui du « muguet ».&nbsp;<br>"
                           }
                         }
                       ],
@@ -514,7 +514,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "",
+                      "legend": "Animation où l'on voit les paramètres bouger",
                       "licence": ""
                     },
                     {
@@ -526,14 +526,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": " Bien vu !<br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
+                            "diagnosis": " Bien vu !<br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit « ail des ours »."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non, toujours pas",
                           "feedback": {
-                            "diagnosis": "Eh si ! <br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
+                            "diagnosis": "Eh si ! <br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit « ail des ours »."
                           }
                         }
                       ],
@@ -549,7 +549,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "",
+                      "legend": "Statique",
                       "licence": ""
                     },
                     {
@@ -561,14 +561,14 @@
                           "id": "1",
                           "content": "Oui, enfin !",
                           "feedback": {
-                            "diagnosis": "Pas encore !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’images d’'entraînement."
+                            "diagnosis": "Pas encore !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’images d’entraînement."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Pas si vite !<br>",
                           "feedback": {
-                            "diagnosis": "Bien vu !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’ images d’'entraînement.<br>"
+                            "diagnosis": "Bien vu !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’ images d’entraînement.<br>"
                           }
                         }
                       ],
@@ -589,7 +589,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step4.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "",
+                      "legend": "Avec une animation en accéléré avec plein d'images qui se superpose et avec lesquelles le logiciel s'entraîne",
                       "licence": ""
                     }
                   ]
