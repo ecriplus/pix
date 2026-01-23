@@ -295,6 +295,68 @@
           "title": "Découverte 3 : Plusieurs indicateurs, plusieurs lectures",
           "components": [
             {
+              "type": "element",
+              "element": {
+                "id": "f12856b3-74b4-4e72-9079-1aceab56bc35",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Emission de gaz à effet de serre",
+                      "description": "Mesure l’impact du numérique sur l’émission de gaz à effet de serre. Ici, la phase de l'ACV qui prédomine est celle de l'utilisation. C'est lié à la pollution engendré par la production d'électricité.",
+                      "displayWidth": 600,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
+                        "alt": "a"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Épuisement des ressources minérales et métalliques",
+                      "description": "Mesure l’impact du numérique sur la consommation de métaux et de minéraux. Ici, la phase de l’ACV qui prédomine est celle de la fabrication. ⛏️.",
+                      "displayWidth": 600,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-2.png",
+                        "alt": "aaa"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Particules fines ",
+                      "description": "Mesure l’impact du numérique sur l’émission de particules fines, nocives pour la santé. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation, en raison de la production d’électricité et des activités industrielles associées 🌫️.",
+                      "displayWidth": 600,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
+                        "alt": "aa"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 1,
+                  "disableAnimation": false,
+                  "disableStyleAroundImage": false,
+                  "enableLoop": false,
+                  "imageTextDisplay": "1:1"
+                }
+              }
+            },
+            {
               "type": "stepper",
               "steps": [
                 {
