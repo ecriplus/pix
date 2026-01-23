@@ -49,6 +49,10 @@ module.exports = function (defaults) {
 
   const { Webpack } = require('@embroider/webpack');
   return require('@embroider/compat').compatBuild(app, Webpack, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    staticModifiers: true,
+    staticEmberSource: true,
     packagerOptions: {
       webpackConfig: {
         devtool: sourceMapConfig[process.env.CI ? 'test' : (process.env.NODE_ENV ?? 'default')],
