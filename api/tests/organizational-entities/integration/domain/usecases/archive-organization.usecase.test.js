@@ -52,7 +52,32 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
 
         // then
         expect(error).to.be.instanceOf(ArchiveOrganizationError);
-        expect(error.message).to.equal('Organization with active lots cannot be archived');
+        expect(error.message).to.equal('Organization with either active or pending lots cannot be archived');
+      });
+    });
+
+    context('when there are pending places lots', function () {
+      it('throws an ArchiveOrganizationError', async function () {
+        // given
+        const superAdminUser = databaseBuilder.factory.buildUser.withRole();
+        const organization = databaseBuilder.factory.buildOrganization();
+        databaseBuilder.factory.buildOrganizationPlace({
+          organizationId: organization.id,
+          activationDate: dayjs(new Date()).add(1, 'day').toDate(),
+          expirationDate: dayjs(new Date()).add(2, 'day').toDate(),
+          count: 1,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(await usecases.archiveOrganization)({
+          organizationId: organization.id,
+          userId: superAdminUser.id,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(ArchiveOrganizationError);
+        expect(error.message).to.equal('Organization with either active or pending lots cannot be archived');
       });
     });
   });
