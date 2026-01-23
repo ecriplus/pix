@@ -1270,7 +1270,7 @@
       "get": {
         "archiving": {
           "notifications": {
-            "active-places-lot-error": "An organization with at least 1 active places lot cannot be archived"
+            "active-places-lot-error": "An organization with at either active or pending places lots cannot be archived"
           }
         }
       },

@@ -1273,7 +1273,7 @@
       "get": {
         "archiving": {
           "notifications": {
-            "active-places-lot-error": "Impossible d'archiver une organisation ayant au moins 1 lot de places actif."
+            "active-places-lot-error": "Impossible d'archiver une organisation ayant au moins 1 lot de places actif ou à venir."
           }
         }
       },
