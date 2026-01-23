@@ -149,7 +149,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenBiais_IND/pix-modulix-ia-biais-sources-web-forum-v2.png",
                       "alt": "extrait d’un forum, décrit dans l’alternative textuelle.",
-                      "alternativeText": "<p><strong>Utilisatrice Laure-Ange-Ajus</strong>  <br>Le lait c’est bon pour les chats, c’est pour ça que c’est présent dans tous les films, les dessins animés, les chansons, les comptines, les contes populaires, etc. Ça ne sort pas de nulle part. <br><em>Publié il y a 24min</em> ▪︎ 520 ⬇️ 680 ⬆️ <br><br><strong>Utilisateur Charles_Otofraise</strong>  <br>Exactement ! Et si c’était pas bon pour eux, mon chat ne finirait pas mon pot de yaourt tous les soirs. Ils savent ce qui est bon ou pas bon pour eux d’instinct. 😸 <br><em>Publié il y a 12min</em> ▪︎ 12 ⬇️ 24 ⬆️<br><br></p>",
+                      "alternativeText": "<p><strong>Forum sur les chats<br><br>Utilisatrice Laure-Ange-Ajus</strong>  <br>Le lait c’est bon pour les chats, c’est pour ça que c’est présent dans tous les films, les dessins animés, les chansons, les comptines, les contes populaires, etc. Ça ne sort pas de nulle part. <br><em>Publié il y a 24min</em> ▪︎ 520 ⬇️ 680 ⬆️ <br><br><strong>Utilisateur Charles_Otofraise</strong>  <br>Exactement ! Et si c’était pas bon pour eux, mon chat ne finirait pas mon pot de yaourt tous les soirs. Ils savent ce qui est bon ou pas bon pour eux d’instinct. 😸 <br><em>Publié il y a 12min</em> ▪︎ 12 ⬇️ 24 ⬆️<br><br></p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -232,8 +232,8 @@
                       "id": "62696b7c-23ac-45de-bee9-62bdbd1fd48f",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenBiais_IND/poster-des-nobel.png",
-                      "alt": "",
-                      "alternativeText": "",
+                      "alt": "Croquis des lauréats des prix Nobel français",
+                      "alternativeText": "Article représentant sous forme de croquis les lauréats des prix Nobel français à travers les années. Ceux-ci sont principalement des hommes, blancs et âgés.",
                       "legend": "Source : nobelprize.org ",
                       "licence": ""
                     },
@@ -490,55 +490,55 @@
                     {
                       "id": "286f56ef-fce5-4f34-a322-462fea5a7e75",
                       "type": "text",
-                      "content": "<p>Sato n’a jamais été en France. Il pense que les français portent souvent des bérets.</p>"
+                      "content": "<p>Sato n’a jamais été en France. Il pense que les Français portent souvent des bérets.</p>"
                     },
                     {
                       "id": "274394d5-c33a-4e93-9889-c770f5e039d9",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenBiais_IND/pix-modulix-ia-biais-conversation-ia-gen-v2-img2.png",
-                      "alt": "Conversation entre Satô et une IA générative, détaillée dans l’alternative textuelle",
-                      "alternativeText": "<p>Satô&nbsp;:&nbsp;<br>Génère deux images d’un couple français.</p><p>Réponse de l’IA générative&nbsp;:</p><ul><li>Première image&nbsp;:&nbsp;Illustration de style vintage représentant un couple français caricatural devant la tour Eiffel. L’homme porte un béret noir, une marinière à rayures bleues et blanches, un foulard rouge autour du cou et tient une baguette sous le bras. La femme, coiffée d’un béret noir, porte une robe rouge. L’homme tient un verre de vin rouge à la main. Ils sourient, côte à côte, avec la tour Eiffel en arrière-plan.</li><li>Seconde image&nbsp;:&nbsp;Photographie d’un jeune couple qui se tient ensemble dans une rue de Paris, avec la tour Eiffel en arrière-plan. L’homme porte un trench beige, un béret bleu marine. La femme, à ses côtés, sourit et porte un manteau crème clair. Tous deux posent côte à côte, l’air complice, devant la Tour Eiffel.</li></ul><p>Satô&nbsp;:&nbsp;<br>C’est parfait, merci !</p>",
+                      "alt": "Conversation entre Sato et une IA générative, détaillée dans l’alternative textuelle",
+                      "alternativeText": "<p>Sato&nbsp;:&nbsp;<br>Génère deux images d’un couple français.</p><p>Réponse de l’IA générative&nbsp;:</p><ul><li>Première image&nbsp;:&nbsp;Illustration de style vintage représentant un couple français caricatural devant la tour Eiffel. L’homme porte un béret noir, une marinière à rayures bleues et blanches, un foulard rouge autour du cou et tient une baguette sous le bras. La femme, coiffée d’un béret noir, porte une robe rouge. L’homme tient un verre de vin rouge à la main. Ils sourient, côte à côte, avec la tour Eiffel en arrière-plan.</li><li>Seconde image&nbsp;:&nbsp;Photographie d’un jeune couple qui se tient ensemble dans une rue de Paris, avec la tour Eiffel en arrière-plan. L’homme porte un trench beige, un béret bleu marine. La femme, à ses côtés, sourit et porte un manteau crème clair. Tous deux posent côte à côte, l’air complice, devant la Tour Eiffel.</li></ul><p>Sato&nbsp;:&nbsp;<br>C’est parfait, merci !</p>",
                       "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "2969727b-55aa-4661-a720-9749780b3924",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Pourquoi Satô est d’accord avec la réponse de l’IA ?</p>",
+                      "instruction": "<p>Pourquoi Sato est d’accord avec la réponse de l’IA ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la création de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Satô n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Sato n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Car l’IA a confirmé ce que Satô pensait déjà.</p>",
+                          "content": "<p>Car l’IA a confirmé ce que Sato pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong><br></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Satô n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.<br></p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong><br></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Sato n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.<br></p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Car la création de l’IA est réaliste, ça a convaincu Satô.<br></p>",
+                          "content": "<p>Car la création de l’IA est réaliste, ça a convaincu Sato.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Satô n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Sato n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "<p>Car la demande de Satô comportait déjà un biais.<br></p>",
+                          "content": "<p>Car la demande de Sato comportait déjà un biais.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Satô n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Sato n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         },
                         {
                           "id": "5",
-                          "content": "<p>Je ne sais pas</p>",
+                          "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Satô n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des Français avec un couple à Paris, portant des bérets. Si Sato n’a jamais rencontré de Français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         }
                       ],
@@ -579,35 +579,35 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant, il y a bien un biais.</strong><br></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système... C’est ce qu’on appelle un <strong>biais de genre.</strong> </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.<br></p>"
+                            "diagnosis": "<p><strong>Et pourtant, il y a bien un biais.</strong><br></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système, etc. C’est ce qu’on appelle un <strong>biais de genre.</strong> </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.<br></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Car l’IA a confirmé ce qu’Enora pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C’est possible ! Et pourtant, il y a un biais.</strong></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système... C’est ce qu’on appelle un <strong>biais de genre.</strong></p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.<br></p>"
+                            "diagnosis": "<p><strong>C’est possible ! Et pourtant, il y a un biais.</strong></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système, etc. C’est ce qu’on appelle un <strong>biais de genre.</strong></p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.<br></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Car la réponse de l’IA est claire et structurée, ça a convaincu Enora.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Cela a pu contribuer.</strong></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système... C’est ce qu’on appelle un <strong>biais de genre</strong>. </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p><strong>Cela a pu contribuer.</strong></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système, etc. C’est ce qu’on appelle un <strong>biais de genre</strong>. </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Eh non, pourtant la réponse en comporte un.</strong><br></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système... C’est ce qu’on appelle un<strong> biais de genre</strong>. </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p><strong>Eh non, pourtant la réponse en comporte un.</strong><br></p><p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système, etc. C’est ce qu’on appelle un<strong> biais de genre</strong>. </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p><strong></strong>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système... C’est ce qu’on appelle un <strong>biais de genre.</strong> </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p>Cette IA a proposé à Enora des métiers souvent considérés comme «&nbsp;féminins&nbsp;» dans les clichés, en oubliant d’autres professions du numérique comme développeuse, experte en cybersécurité, ingénieure système, etc. C’est ce qu’on appelle un <strong>biais de genre.</strong> </p><p> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         }
                       ],
