@@ -215,6 +215,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             // given
             const organization = this.server.create('organization', {
               name: 'Aude Javel Company',
+              features: { PLACES_MANAGEMENT: { active: true } },
             });
             this.server.post(
               '/admin/organizations/:id/archive',
@@ -276,7 +277,8 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // given
           const organization = this.server.create('organization', {
             name: 'Aude Javel Company',
-          features: { PLACES_MANAGEMENT: { active: true } },});
+            features: { PLACES_MANAGEMENT: { active: true } },
+          });
           this.server.post(
             '/admin/organizations/:id/archive',
             () => ({
@@ -306,6 +308,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // given
           const organization = this.server.create('organization', {
             name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
           await clickByName("Archiver l'organisation");
@@ -323,6 +326,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // given
           const organization = this.server.create('organization', {
             name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
           await clickByName("Archiver l'organisation");
