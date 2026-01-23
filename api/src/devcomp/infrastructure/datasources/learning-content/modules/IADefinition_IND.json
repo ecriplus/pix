@@ -441,7 +441,7 @@
                     {
                       "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step2.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step1.png",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -473,6 +473,15 @@
                 },
                 {
                   "elements": [
+                    {
+                      "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
                     {
                       "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
                       "type": "qcu-discovery",
@@ -517,14 +526,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "Non, toujours pas. <br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
+                            "diagnosis": " Bien vu !<br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non, toujours pas",
                           "feedback": {
-                            "diagnosis": "Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
+                            "diagnosis": "Eh si ! <br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit “Ail des ours”."
                           }
                         }
                       ],
@@ -552,7 +561,7 @@
                           "id": "1",
                           "content": "Oui, enfin !",
                           "feedback": {
-                            "diagnosis": "Pas encore !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’ images d’'entraînement."
+                            "diagnosis": "Pas encore !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’images d’'entraînement."
                           }
                         },
                         {
@@ -564,6 +573,24 @@
                         }
                       ],
                       "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "c921068f-9d95-410f-84e0-d00dce15b202",
+                      "type": "text",
+                      "content": "L'entraînement recommence sur des milliers d’images."
+                    },
+                    {
+                      "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step4.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
                     }
                   ]
                 }
