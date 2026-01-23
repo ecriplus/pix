@@ -44,6 +44,9 @@ module('Integration | Component | Module | Audio', function (hooks) {
 
     const passageEventRecordStub = sinon.stub(passageEventService, 'record');
 
+    const metricsService = this.owner.lookup('service:pix-metrics');
+    const trackEventStub = sinon.stub(metricsService, 'trackEvent');
+
     //  when
     const screen = await render(<template><ModulixAudioElement @audio={{audioElement}} /></template>);
 
@@ -61,6 +64,10 @@ module('Integration | Component | Module | Audio', function (hooks) {
       data: {
         elementId: audioElement.id,
       },
+    });
+    sinon.assert.calledWithExactly(trackEventStub, 'Clic sur le bouton transcription d’un audio', {
+      category: 'Modulix',
+      elementId: audioElement.id,
     });
   });
 

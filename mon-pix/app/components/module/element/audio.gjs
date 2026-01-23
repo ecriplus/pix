@@ -7,10 +7,12 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { htmlUnsafe } from 'mon-pix/helpers/html-unsafe';
+
 export default class ModulixAudio extends Component {
   @tracked modalIsOpen = false;
 
   @service passageEvents;
+  @service pixMetrics;
 
   @action
   onPlay() {
@@ -32,12 +34,18 @@ export default class ModulixAudio extends Component {
         elementId: this.args.audio.id,
       },
     });
+
+    this.pixMetrics.trackEvent('Clic sur le bouton transcription d’un audio', {
+      category: 'Modulix',
+      elementId: this.args.audio.id,
+    });
   }
 
   @action
   closeModal() {
     this.modalIsOpen = false;
   }
+
   get hasTranscription() {
     return this.args.audio.transcription.length > 0;
   }
