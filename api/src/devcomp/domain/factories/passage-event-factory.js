@@ -8,6 +8,8 @@ import {
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
+  AudioPlayedEvent,
+  AudioTranscriptionOpenedEvent,
   ExpandClosedEvent,
   ExpandOpenedEvent,
   FileDownloadedEvent,
@@ -31,6 +33,10 @@ import { StepperNextStepEvent } from '../models/passage-events/stepper-events.js
 class PassageEventFactory {
   static build(eventData) {
     switch (eventData.type) {
+      case 'AUDIO_TRANSCRIPTION_OPENED':
+        return new AudioTranscriptionOpenedEvent(eventData);
+      case 'AUDIO_PLAYED':
+        return new AudioPlayedEvent(eventData);
       case 'EMBED_ANSWERED':
         return new EmbedAnsweredEvent(eventData);
       case 'EXPAND_OPENED':

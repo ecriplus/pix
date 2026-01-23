@@ -10,6 +10,8 @@ import {
   QROCMAnsweredEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import {
+  AudioPlayedEvent,
+  AudioTranscriptionOpenedEvent,
   ExpandClosedEvent,
   ExpandOpenedEvent,
   FileDownloadedEvent,
@@ -60,6 +62,44 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
         // then
         expect(error).to.be.instanceof(DomainError);
         expect(error.message).to.equal('Passage event with type UNKNOWN does not exist');
+      });
+    });
+
+    describe('when given an AUDIO_PLAYED', function () {
+      it('should return an AudioPlayedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 102,
+          sequenceNumber: 34,
+          elementId: '1e3940ef-c557-415d-b5ef-6f9f77b527f4',
+          type: 'AUDIO_PLAYED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(AudioPlayedEvent);
+      });
+    });
+
+    describe('when given an AUDIO_TRANSCRIPTION_OPENED', function () {
+      it('should return an AudioTranscriptionOpenedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 102,
+          sequenceNumber: 34,
+          elementId: '46eaf84c-eac8-4cb5-b984-4307dde46ea7',
+          type: 'AUDIO_TRANSCRIPTION_OPENED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(AudioTranscriptionOpenedEvent);
       });
     });
 
