@@ -66,8 +66,16 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
       // then
       expect(applications).to.have.lengthOf(2);
-      expect(applications[0]).to.deepEqualInstance(domainBuilder.buildClientApplication(application1));
-      expect(applications[1]).to.deepEqualInstance(domainBuilder.buildClientApplication(application2));
+
+      // eslint-disable-next-line no-unused-vars -- extract clientSecret so that it's not returned/displayed
+      const { clientSecret: _1, ...application1WithoutClientSecret } =
+        domainBuilder.buildClientApplication(application1);
+      expect(applications[0]).to.deep.equal(application1WithoutClientSecret);
+
+      // eslint-disable-next-line no-unused-vars -- extract clientSecret so that it's not returned/displayed
+      const { clientSecret: _2, ...application2WithoutClientSecret } =
+        domainBuilder.buildClientApplication(application2);
+      expect(applications[1]).to.deep.equal(application2WithoutClientSecret);
     });
   });
 

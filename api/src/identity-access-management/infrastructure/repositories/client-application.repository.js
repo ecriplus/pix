@@ -15,7 +15,12 @@ export const clientApplicationRepository = {
 
   async list() {
     const dtos = await knex.select().from(TABLE_NAME).orderBy('name');
-    return dtos.map(toDomain);
+    return dtos.map((dto) => {
+      const clientApplication = toDomain(dto);
+      // eslint-disable-next-line no-unused-vars -- extract clientSecret so that it's not returned/displayed
+      const { clientSecret, ...clientApplicationWithoutClientSecret } = clientApplication;
+      return clientApplicationWithoutClientSecret;
+    });
   },
 
   async create({ name, clientId, clientSecret, scopes, jurisdiction }) {

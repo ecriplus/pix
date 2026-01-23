@@ -74,6 +74,11 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
 
 async function validateClientApplication(decodedAccessToken) {
   if (!decodedAccessToken.client_id) {
+    logger.warn({
+      message: 'decodedAccessToken has no client_id',
+      decodedAccessToken,
+    });
+
     return { isValid: false };
   }
 
@@ -91,16 +96,28 @@ function authenticateJWT({ key, validate }) {
   return async (request, h) => {
     const authorizationHeader = request.headers.authorization;
     if (!authorizationHeader) {
+      logger.warn({
+        message: 'request has no authorizationHeader',
+      });
+
       return boom.unauthorized(null, 'jwt');
     }
 
     const accessToken = tokenService.extractTokenFromAuthChain(authorizationHeader);
     if (!accessToken) {
+      logger.warn({
+        message: 'authorizationHeader has no accessToken',
+      });
+
       return boom.unauthorized();
     }
 
     const decodedAccessToken = tokenService.getDecodedToken(accessToken, key);
     if (!decodedAccessToken) {
+      logger.warn({
+        message: 'accessToken invalid wrt tokenService',
+      });
+
       return boom.unauthorized();
     }
 
