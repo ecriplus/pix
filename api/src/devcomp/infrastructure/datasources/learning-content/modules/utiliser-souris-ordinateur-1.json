@@ -2,18 +2,18 @@
   "id": "e8cee13e-1d4d-47eb-bd26-d7ea6a10b1e6",
   "shortId": "3858d191",
   "slug": "utiliser-souris-ordinateur-1",
-  "title": "Utiliser une souris d'ordinateur - 1",
+  "title": "Utiliser une souris d’ordinateur - 1",
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n'avez jamais utilisé de souris, nous vous conseillons d'être accompagné pour ce module.</p><br>",
-    "duration": 10,
+    "image": "https://assets.pix.org/modules/1eMarche-souris1/picto-1eremarche_souris1.svg",
+    "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n’avez jamais utilisé de souris, nous vous conseillons d’être accompagné pour ce module.</p><br>",
+    "duration": 30,
     "level": "novice",
     "objectives": [
       "<p>Reconnaître une souris et connaître son utilité</p>",
       "<p>Prendre en main une souris et la déplacer</p>",
-      "<p>Effectuer ses premiers clics gauches</p>"
+      "<p>Effectuer ses premiers clics gauche</p>"
     ],
     "tabletSupport": "obstructed"
   },
@@ -25,14 +25,14 @@
         {
           "id": "9c323a6c-2ae3-4257-af10-7711cebe6442",
           "type": "transition",
-          "title": "",
+          "title": "Introduction",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "91ba6701-243c-4f07-bd0d-9019a1c85b4d",
                 "type": "text",
-                "content": "<p>Dans ce module vous allez prendre en main une souris pour interagir avec l'ordinateur.</p>"
+                "content": "<p>Dans ce module vous allez prendre en main une souris pour interagir avec l’ordinateur.</p>"
               }
             }
           ]
@@ -47,7 +47,7 @@
               "element": {
                 "id": "48708070-39c3-4af4-8914-ab61d61dfee8",
                 "type": "text",
-                "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris : </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
+                "content": "<p>La souris fait partie de l’équipement de base d’un ordinateur, avec le clavier.</p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris&nbsp;: </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
               }
             },
             {
@@ -55,9 +55,9 @@
               "element": {
                 "id": "c849cbc5-931e-4a00-ae6a-083e2ff0614d",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/GHeUZvS.jpeg",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/illu-differentes-souris.png",
                 "alt": "-",
-                "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
+                "alternativeText": "<ul><li>Les souris avec un fil&nbsp;: photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil&nbsp;: photographies de 4&nbsp;souris sans fil différentes reliées par des connecteurs USB Bluetooth. L’une d’elle est une souris ergonomique.</li></ul>"
               }
             },
             {
@@ -65,7 +65,7 @@
               "element": {
                 "id": "c785bfd1-e8b8-42a0-8354-333d5acf6555",
                 "type": "text",
-                "content": "<h4><span aria-hidden=\"true\">🔎</span> Observez : votre souris a-t-elle un fil ?</h4>"
+                "content": "<h4><span aria-hidden=\"true\">🔎</span> Observez&nbsp;: votre souris a-t-elle un fil ?</h4>"
               }
             }
           ]
@@ -73,14 +73,14 @@
         {
           "id": "2099c733-4be9-4063-8584-e854a6d9ee2f",
           "type": "transition",
-          "title": "",
+          "title": "transition1",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "b4727513-47b5-4850-bde5-263795c63f46",
                 "type": "text",
-                "content": "<p>Dans la vidéo suivante, vous allez voir comment prendre en main une souris d'ordinateur pour ensuite la déplacer.&nbsp;📺</p>"
+                "content": "<p>Dans la vidéo suivante, vous allez voir comment prendre en main une souris d’ordinateur pour ensuite la déplacer.&nbsp;📺</p>"
               }
             }
           ]
@@ -104,10 +104,10 @@
                 "id": "56541ee2-cf5f-4966-b17b-96a1b7266868",
                 "type": "video",
                 "title": "Prendre en main la souris",
-                "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
-                "poster": "https://assets.pix.org/draft/modules/lA2jUAY.jpeg",
-                "subtitles": "",
-                "transcription": ""
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main.mp4",
+                "poster": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main-vignette.jpg",
+                "subtitles": "https://assets.pix.org/modules/1eMarche-souris1/video-prise-en-main-subtitles.vtt",
+                "transcription": "<strong>Prendre en main une souris d’ordinateur</strong><br>Je place ma main entière sur la souris, comme pour la recouvrir. Je pose mon avant-bras et mon poignet à plat sur la table. Je baisse et je détends mes épaules. <br>Je place mon pouce sur le côté gauche de la souris. Je pose mon index sur le bouton gauche et mon majeur sur le bouton droit, sans appuyer. En fonction de la taille de ma main et de celle de la souris, les deux derniers doigts peuvent être sur la souris ou sur le côté de la souris. <br>L’important est d’être à l’aise et détendu au niveau du poignet et des doigts. Maintenant, ma main est correctement posée sur la souris.Je fais glisser la souris doucement sur la table en bougeant ma main. Seul mon poignet bouge. Mon avant-bras reste en contact avec la table. Je guide la souris sans appuyer dessus ni la serrer. Je fais de petits mouvements. Encore une fois, j’essaie d’être le plus relâché possible."
               }
             }
           ]
@@ -115,7 +115,7 @@
         {
           "id": "4d381d79-1edf-426c-876a-fcc0fc783fc0",
           "type": "transition",
-          "title": "",
+          "title": "transition2",
           "components": [
             {
               "type": "element",
@@ -137,7 +137,7 @@
               "element": {
                 "id": "6b6eeef4-bb9b-4769-906d-47e72db93543",
                 "type": "text",
-                "content": "<p>Pour l'instant, regardez votre souris. Ne regardez pas ce qu'il se passe à l'écran.<br></p><h4><span aria-hidden=\"true\">👉</span> Déplacez votre souris, en suivant ces étapes :</h4><ul><li>Étape 1 : Posez votre main confortablement sur la souris.</li><li>Étape 2 : Faites glissez la souris doucement sur la table.</li></ul>"
+                "content": "<p>Pour l’instant, regardez votre souris. Ne regardez pas ce qu’il se passe à l’écran.<br></p><h4><span aria-hidden=\"true\">👉</span> Déplacez votre souris, en suivant ces étapes&nbsp;:</h4><ul><li>Étape 1&nbsp;: Posez votre main confortablement sur la souris.</li><li>Étape 2&nbsp;: Faites glissez la souris doucement sur la table.</li></ul>"
               }
             },
             {
@@ -152,7 +152,7 @@
               "element": {
                 "id": "d1dd9768-1b88-4a76-af7c-4290c3fe5a2f",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️</span>N'hésitez pas à demandez conseil à la personne qui vous accompagne. Elle vous aidera à trouver une position confortable pour vous.</p>"
+                "content": "<p><span aria-hidden=\"true\">🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️</span>N’hésitez pas à demander conseil à la personne qui vous accompagne. Elle vous aidera à trouver une position confortable pour vous.</p>"
               }
             }
           ]
@@ -160,7 +160,7 @@
         {
           "id": "2c2abead-9b97-4dc5-8ad4-876c21cd9797",
           "type": "transition",
-          "title": "",
+          "title": "transition3",
           "components": [
             {
               "type": "element",
@@ -182,7 +182,7 @@
               "element": {
                 "id": "7dad11c9-fafd-4e94-bd81-003e3944ff6d",
                 "type": "text",
-                "content": "<p>Après cette vidéo, vous devrez déplacez votre souris dans une situation simple.</p>"
+                "content": "<p>Après cette vidéo, vous devrez déplacer votre souris dans une situation simple.</p>"
               }
             },
             {
@@ -191,10 +191,10 @@
                 "id": "abe223ab-ad36-4b14-b349-abc8590eb94e",
                 "type": "video",
                 "title": "Déplacer la souris",
-                "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
-                "poster": "https://assets.pix.org/draft/modules/jC8keAF.jpeg",
-                "subtitles": "",
-                "transcription": ""
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris.mp4",
+                "poster": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris-vignette.jpg",
+                "subtitles": "https://assets.pix.org/modules/1eMarche-souris1/video-deplacer-la-souris-subtitles.vtt",
+                "transcription": "Quand je déplace la souris sur la table, une flèche se déplace sur l’écran. Cette flèche s’appelle le pointeur. Quand j’utilise un smartphone, j’utilise mon doigt pour pointer à l’écran. Sur un ordinateur, c’est la souris qui permet de faire cela.<br>Pour déplacer le pointeur sur l’écran, je glisse la souris dans la même direction sur la table. Je fais glisser la souris avec ma main sans trop la serrer. De petits mouvements sont suffisants. Si je déplace tout mon bras, je risque d’aller trop loin.<br>Voici deux astuces&nbsp;: <br><ul><li>Si j’ai un tapis de souris, je place le pointeur au centre de l’écran. Je lève la souris pour la placer au centre du tapis de souris et, ensuite, je déplace ma souris sans sortir du tapis. </li><li>Pour finir, voici une astuce si je déplace la souris trop loin sur la table&nbsp;: dans ce cas-là, je n’hésite pas à soulever la souris et, ensuite, je replace la souris à sa position de départ sur la table.</li></ul>"
               }
             }
           ]
@@ -202,7 +202,7 @@
         {
           "id": "4925daa0-167c-4afd-83da-8435680992fd",
           "type": "transition",
-          "title": "",
+          "title": "transition4",
           "components": [
             {
               "type": "element",
@@ -224,7 +224,7 @@
               "element": {
                 "id": "0dc90047-776b-48cd-944e-72ca51c69cfc",
                 "type": "text",
-                "content": "<h4><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur de votre souris.</h4><p>Pour découvrir l'image cachée, passez le pointeur de votre souris dans toute la zone.</p>"
+                "content": "<h4><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur de votre souris.</h4><p>Pour découvrir l’image cachée, passez le pointeur de votre souris dans toute la zone.</p>"
               }
             },
             {
@@ -234,8 +234,8 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Carte à gratter",
-                "url": "https://epreuves.pix.fr/fr/puzzle/example.html",
-                "instruction": "<p>Instruction</p>",
+                "url": "https://epreuves.pix.fr/fr/puzzle/carte-modulix-souris.html",
+                "instruction": "Pour découvrir l’image cachée, passez le pointeur de votre souris dans toute la zone.",
                 "height": 445
               }
             }
@@ -244,14 +244,14 @@
         {
           "id": "e81935e3-4188-4b6b-b641-127eb1f1cb74",
           "type": "transition",
-          "title": "",
+          "title": "transition5",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "2c5368e9-7d85-4132-bafe-53f198099b57",
                 "type": "text",
-                "content": "<p>Vous savez déplacer le pointeur de la souris à l'écran. Maintenant, entraînez-vous à être précis dans vos mouvements. 🎯</p>"
+                "content": "<p>Vous savez déplacer le pointeur de la souris à l’écran. Maintenant, entraînez-vous à être précis dans vos mouvements. 🎯</p>"
               }
             }
           ]
@@ -275,9 +275,9 @@
                 "id": "57d7453d-58a9-43f0-830c-f5f392b06f9e",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-DeplacerCurseur/index.html",
                 "instruction": "",
-                "height": 445
+                "height": 432
               }
             },
             {
@@ -285,7 +285,7 @@
               "element": {
                 "id": "9c1c4342-96a6-4c14-a5b0-5ed0d202fb8f",
                 "type": "text",
-                "content": "<h4> <span aria-hidden=\"true\">💡</span> Astuce si vous ne voyez plus le pointeur sur votre écran :&nbsp;</h4> <p> Bougez de gauche à droite votre souris doucement sur la table.<br> Vous verrez le pointeur bouger à l'écran.</p>"
+                "content": "<h4> <span aria-hidden=\"true\">💡</span> Astuce si vous ne voyez plus le pointeur sur votre écran&nbsp;:&nbsp;</h4> <p> Bougez de gauche à droite votre souris doucement sur la table.<br> Vous verrez le pointeur bouger à l’écran.</p>"
               }
             }
           ]
@@ -293,14 +293,14 @@
         {
           "id": "aa183b1e-2c91-45d8-b796-778e43fa7ce3",
           "type": "transition",
-          "title": "",
+          "title": "transition6",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "a11dc8fa-9030-4f70-b6d8-86af6ff66e30",
                 "type": "text",
-                "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris ! 🖱️️</p>"
+                "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris ! 🖱️️</p>"
               }
             }
           ]
@@ -316,9 +316,9 @@
                 "id": "564448dc-6485-4918-a2c1-4452b2552650",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-3boutonsouris/index.html",
-                "instruction": "<p><strong>👉Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong><br>Trois mots vont apparaître. Ce sont les noms des boutons de la souris.</p>",
-                "height": 445
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-boutonsouris/index.html",
+                "instruction": "<p><strong>👉Dans l’image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong><br>Trois mots vont apparaître. Ce sont les noms des boutons de la souris.</p>",
+                "height": 432
               }
             },
             {
@@ -326,7 +326,7 @@
               "element": {
                 "id": "d9e4718d-a15a-4e62-a967-19971e1a611e",
                 "type": "text",
-                "content": "<p>Sur la souris, on trouve toujours deux boutons : un bouton gauche et un bouton droit.<br>En général, il y a aussi une molette.</p>"
+                "content": "<p>Sur la souris, on trouve toujours deux boutons&nbsp;: un bouton gauche et un bouton droit.<br>En général, il y a aussi une molette.</p>"
               }
             },
             {
@@ -341,7 +341,7 @@
               "element": {
                 "id": "98a59942-5506-4c18-b16a-97ce2010103b",
                 "type": "text",
-                "content": "<p><strong><span aria-hidden=\"true\">🔎</span> Observez : combien de boutons a votre souris d’ordinateur ?</strong></p>"
+                "content": "<p><strong><span aria-hidden=\"true\">🔎</span> Observez&nbsp;: combien de boutons a votre souris d’ordinateur ?</strong></p>"
               }
             }
           ]
@@ -349,14 +349,14 @@
         {
           "id": "e0c2934c-fbe0-466a-94d9-f1a4e83719fc",
           "type": "transition",
-          "title": "",
+          "title": "transition7",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "4d997b51-9404-42d3-87fc-8a9d31b0d905",
                 "type": "text",
-                "content": "<p>Vous avez découvert le nom des boutons d'une souris.</p><p>Voyons à présent comment cliquer avec votre souris !<br></p>"
+                "content": "<p>Vous avez découvert le nom des boutons d’une souris.</p><p>Voyons à présent comment cliquer avec votre souris !<br></p>"
               }
             }
           ]
@@ -371,17 +371,17 @@
               "element": {
                 "id": "e45a32cf-2ab9-4464-85d0-ae4f0ca897cb",
                 "type": "text",
-                "content": "<h4>D'abord, pourquoi est-ce qu'on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h4><p>C'est le bruit que fait une souris d'ordinateur quand on appuie sur un de ses boutons.</p>"
+                "content": "<h4>D’abord, pourquoi est-ce qu’on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h4><p>C’est le bruit que fait une souris d’ordinateur quand on appuie sur un de ses boutons.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/8DuRmCV.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "clic",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/gif-video_souris_clic_fond.mp4",
+                "transcription": "   "
               }
             },
             {
@@ -411,10 +411,10 @@
               "type": "element",
               "element": {
                 "id": "4cd1c225-f5da-43c2-af29-7d2bfa340b07",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/y23SQFf.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "premier clic",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/gif-video_deplacer-sa-souris.mp4",
+                "transcription": "   "
               }
             },
             {
@@ -422,7 +422,7 @@
               "element": {
                 "id": "4f9d39e4-5687-43fa-881d-8904d63023c8",
                 "type": "text",
-                "content": "<p><strong>Étape 1&nbsp;:</strong> On déplace le pointeur à l'écran.</p><p><strong>Étape 2 : </strong>On appuie sur le bouton gauche de la souris</p><p><br></p><p>💡Pour réussir un clic : </p><ul><li>Il faut appuyer avec l’index sans faire bouger la souris.</li><li>On doit entendre le son « clic ».</li><li>Relâcher immédiatement après l’appui. C’est comme pour un bouton de télécommande !</li></ul>"
+                "content": "<p><strong>Étape 1&nbsp;:</strong> On déplace le pointeur à l’écran.</p><p><strong>Étape 2&nbsp;: </strong>On appuie sur le bouton gauche de la souris</p><p>💡Pour réussir un clic&nbsp;: </p><ul><li>Il faut appuyer avec l’index sans faire bouger la souris.</li><li>On doit entendre le son «&nbsp;clic&nbsp;».</li><li>Relâcher immédiatement après l’appui. C’est comme pour un bouton de télécommande !</li></ul>"
               }
             }
           ]
@@ -430,14 +430,14 @@
         {
           "id": "1f8a8389-645d-4756-87a2-d30acf24eafd",
           "type": "transition",
-          "title": "",
+          "title": "transition8",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "7b083f7d-3e44-42ad-9822-8999a4e65ba4",
                 "type": "text",
-                "content": "<p>Vous allez maintenant passer à la pratique. 👇</p>"
+                "content": "<p>Vous allez maintenant passer à la pratique. 👇</p>"
               }
             }
           ]
@@ -445,7 +445,7 @@
         {
           "id": "b491a99e-2774-469e-a63e-e2d0fb1120f2",
           "type": "activity",
-          "title": "Premiers clics gauches",
+          "title": "Premiers clics gauche",
           "components": [
             {
               "type": "element",
@@ -453,9 +453,9 @@
                 "id": "73b6a6d3-8c76-46e9-ae1f-d208d5bf1960",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erclicsgauchesV2/index.html",
-                "instruction": "<p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu'il apparait.</strong></p>",
-                "height": 445
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris1-clicsouris/index.html",
+                "instruction": "<p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu’il apparait.</strong></p>",
+                "height": 432
               }
             },
             {
@@ -470,7 +470,7 @@
               "element": {
                 "id": "930a995c-2b29-474a-97a3-c90d5e03ad80",
                 "type": "text",
-                "content": "<p>👏Bravo ! Vous savez maintenant déplacer le pointeur de votre souris et cliquer.</p><p>Faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;» pour passer à l'étape suivante en autonomie.</p>"
+                "content": "<p>👏Bravo ! Vous savez maintenant déplacer le pointeur de votre souris et cliquer.</p><p>Faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;» pour passer à l’étape suivante en autonomie.</p>"
               }
             }
           ]
@@ -478,7 +478,7 @@
         {
           "id": "bbd5c08b-1701-4e29-8648-71eac9793379",
           "type": "transition",
-          "title": "",
+          "title": "transition9",
           "components": [
             {
               "type": "element",
@@ -500,7 +500,7 @@
               "element": {
                 "id": "af44ed34-f3a3-46f1-813d-c801a6e0b073",
                 "type": "text",
-                "content": "<p>Quand vous déplacez votre souris sur un élément, le pointeur peut changer de forme. Cela signifie qu'une action est possible.</p><p>Découvrez les trois formes de pointeur les plus courantes et leur utilité.</p>"
+                "content": "<p>Quand vous déplacez votre souris sur un élément, le pointeur peut changer de forme. Cela signifie qu’une action est possible.</p><p>Découvrez les trois formes de pointeur les plus courantes et leur utilité.</p>"
               }
             },
             {
@@ -508,9 +508,9 @@
               "element": {
                 "id": "1ad8190f-46b6-43b5-82b1-cd81640b1700",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/G6t4f0c.png",
+                "url": "https://assets.pix.org/modules/1eMarche-souris1/curseurs-avec-noms.png",
                 "alt": "",
-                "alternativeText": "<p>image des 4 formes de pointeur les plus courantes : la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
+                "alternativeText": "<p>image des 4 formes de pointeur les plus courantes&nbsp;: la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
               }
             },
             {
@@ -526,14 +526,14 @@
         {
           "id": "7e9abfc9-6512-4f12-8aa4-a3692207e939",
           "type": "transition",
-          "title": "",
+          "title": "transition10",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "ccc4bf26-0610-4598-a91f-49a3c2e8dd02",
                 "type": "text",
-                "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p><p>🖱️À vous de jouer !</p>"
+                "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p><p>🖱️À vous de jouer !</p>"
               }
             }
           ]
@@ -544,82 +544,97 @@
           "title": "Clics gauche de navigation dans le module",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "734ef21d-3850-40db-840e-e16253d8817b",
-                      "type": "text",
-                      "content": "<h4>Faites un clic gauche sur «&nbsp;Play&nbsp;» <span aria-hidden=\"true\">▶️</span> au centre de l'image ci-dessous.</h4><br><p> Ce clic gauche va faire démarrer la vidéo.</p>"
-                    },
-                    {
-                      "id": "b0f296c2-a295-4424-8eb1-76e3fbcc1ebb",
-                      "type": "video",
-                      "title": "Bravo, vous êtes sur internet",
-                      "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.mp4",
-                      "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.jpg",
-                      "subtitles": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.vtt",
-                      "transcription": "<p>Bravo, vous avez lancé la vidéo. Vous pouvez continuer le module.</p><p>Vous allez voir, c'est facile.</p>"
-                    },
-                    {
-                      "id": "06cd1e83-06ce-4ca2-a648-1184ca6700f3",
-                      "type": "text",
-                      "content": "<p>Pour accéder à la suite, faites un clic gauche sur le bouton «&nbsp;Suivant&nbsp;».</p>"
+              "type": "element",
+              "element": {
+                "id": "fb3ecb38-4367-4d9e-a86d-bfb5c66082c2",
+                "type": "text",
+                "content": "<strong>Faites un clic gauche sur «&nbsp;Play&nbsp;» ▶️ au centre de l’image ci-dessous.</strong>   <br>Ce clic gauche va faire démarrer la vidéo.<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "90d9cd7f-b631-4004-b6c2-35ab3498750d",
+                "type": "video",
+                "title": "Bravo",
+                "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.mp4",
+                "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.jpg",
+                "subtitles": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.vtt",
+                "transcription": "Bravo, vous avez lancé la vidéo. Vous pouvez continuer le module. Vous allez voir, c’est facile."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "885bb39e-77a6-4cbb-9456-63660e0ecb6f",
+                "type": "text",
+                "content": "Pour accéder à la suite, faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "a6c0bc7a-87c1-4c3d-b4e4-cccbcae73167",
+          "type": "activity",
+          "title": "Clic gauche navigation dans le module - 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cf2d139c-39dc-4e7b-b24c-960e3e52e6cf",
+                "type": "text",
+                "content": "Dans le quiz ci-dessous, cliquez sur une réponse puis cliquez sur «&nbsp;Vérifier ma réponse»."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "17b6f525-05eb-4349-b84f-dc3790652b80",
+                "type": "qcu",
+                "instruction": "Une phrase a été dite dans la vidéo. <br>Quelle est cette phrase ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Vous allez voir, c’est facile !",
+                    "feedback": {
+                      "state": "Bonne réponse&nbsp;! 🎉",
+                      "diagnosis": "Vous avez lancé la vidéo et trouvé la bonne réponse."
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "35e0ae32-980e-45fc-bb69-b94da529d6fb",
-                      "type": "text",
-                      "content": "Dans le quiz ci-dessous, cliquez sur une réponse puis cliquez sur «&nbsp;Vérifier&nbsp;»."
-                    },
-                    {
-                      "id": "7253ded2-df17-4926-930d-0b0947f7de82",
-                      "type": "qcu",
-                      "instruction": "<p>Une phrase a été dite dans la vidéo.</p><br><p>Quelle est cette phrase ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Vous allez voir, c'est facile !</p>",
-                          "feedback": {
-                            "state": "Bonne réponse&nbsp;! 🎉",
-                            "diagnosis": "<p>Vous avez lancé la vidéo et trouvé la bonne réponse.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Vous verrez, c'est plié !",
-                          "feedback": {
-                            "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;».</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "Vous pensiez que c'était simple ?",
-                          "feedback": {
-                            "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;».</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    },
-                    {
-                      "id": "4b559769-3f0d-43ee-8b7d-c1aa3e0927c6",
-                      "type": "separator"
-                    },
-                    {
-                      "id": "4c2ce336-aa9a-49b5-ba4f-84530e21b52d",
-                      "type": "text",
-                      "content": "<p>Quand vous avez terminé l'activité, faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;».</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "Vous verrez, c’est plié !",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;»."
                     }
-                  ]
-                }
-              ]
+                  },
+                  {
+                    "id": "3",
+                    "content": "Vous pensiez que c’était simple ?",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;»."
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6a8af216-fe85-4106-aa5a-3a07329cb76e",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d0644a95-013c-4160-b8df-6414366e533e",
+                "type": "text",
+                "content": "Quand vous avez terminé l’activité, faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;»."
+              }
             }
           ]
         },
@@ -641,7 +656,7 @@
               "element": {
                 "id": "3480a769-41ea-47e8-990b-c5f8089542e7",
                 "type": "text",
-                "content": "<ul> <li><span aria-hidden=\"true\">🖐️</span>La souris glisse sur la table grâce à votre main.</li> <li><span aria-hidden=\"true\">🖥️</span> À l'écran, le pointeur suit le mouvement de la souris.</li> <li><span aria-hidden=\"true\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li> <li><span aria-hidden=\"true\">▶️</span> Cliquer permet d'interagir avec l’ordinateur.</li> <li><span aria-hidden=\"true\">🖱️Le pointeur de la souris change de forme quand on peut cliquer.</span></li></ul>"
+                "content": "<ul> <li><span aria-hidden=\"true\">🖐️</span>La souris glisse sur la table grâce à votre main.</li> <li><span aria-hidden=\"true\">🖥️</span> À l’écran, le pointeur suit le mouvement de la souris.</li> <li><span aria-hidden=\"true\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li> <li><span aria-hidden=\"true\">▶️</span> Cliquer permet d’interagir avec l’ordinateur.</li> <li><span aria-hidden=\"true\">🖱️Le pointeur de la souris change de forme quand on peut cliquer.</span></li></ul>"
               }
             },
             {
@@ -656,7 +671,7 @@
               "element": {
                 "id": "85ac9805-09f8-456b-8b5f-f26fe19ca618",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/utiliser-souris-ordinateur-1/pix-fiche-revision-premieres-marches-souris-1.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+                "content": "<p><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/1eMarche-souris1/pix-fiche-revision-premieres-marches-souris-1.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
               }
             }
           ]
