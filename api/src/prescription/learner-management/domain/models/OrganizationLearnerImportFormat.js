@@ -80,24 +80,28 @@ class OrganizationLearnerImportFormat {
   }
 
   get columnsToDisplay() {
-    return this.orderedDisplayableColumns.map((column) => column.name);
+    return this.orderedDisplayableColumns.map((column) => column?.config?.mappingColumn ?? column.name);
   }
 
   get filtersToDisplay() {
-    return this.orderedFilterableColumns.map((column) => column.name);
+    return this.orderedFilterableColumns.map((column) => column?.config?.mappingColumn ?? column.name);
   }
 
   get extraColumns() {
     return this.#displayable.map((header) => {
+      const key = header.config.mappingColumn ?? header.name;
+
       return {
         name: header.config.displayable.name,
-        key: header.name,
+        key,
       };
     });
   }
 
   get exportableColumns() {
-    return this.config.headers.flatMap(({ name, config }) => (config?.exportable ? { columnName: name } : []));
+    return this.config.headers.flatMap(({ name, config }) =>
+      config?.exportable ? { columnName: config.mappingColumn ?? name } : [],
+    );
   }
 
   /**

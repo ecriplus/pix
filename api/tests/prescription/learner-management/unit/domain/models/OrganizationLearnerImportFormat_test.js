@@ -34,9 +34,10 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
             required: true,
           },
           {
-            name: 'catégorie',
+            name: 'CATEGORY',
             required: true,
             config: {
+              mappingColumn: 'catégorie',
               displayable: {
                 position: 2,
                 name: IMPORT_KEY_FIELD.COMMON_DIVISION,
@@ -343,7 +344,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
       expect(organizationLearnerImportFormat.headersName).to.deep.equal([
         { name: 'Nom apprenant' },
         { name: 'Prénom apprenant' },
-        { name: 'catégorie' },
+        { name: 'CATEGORY' },
         { name: 'Date de naissance' },
         { name: 'unicity key' },
       ]);
