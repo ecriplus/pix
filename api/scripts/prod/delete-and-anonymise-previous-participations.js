@@ -36,19 +36,14 @@ export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Scri
       );
 
       try {
-        const organizationIds = await knexConn('organizations')
-          .where('archivedAt', '<', options.startArchiveDate)
-          .pluck('id');
+        const subQueryOrganizationIds = knexConn('organizations')
+          .select('id')
+          .where('archivedAt', '<', options.startArchiveDate);
 
-        logger.info(`archived OrganizationId to exclude ${organizationIds.length}`);
-
-        const campaignIds = await knexConn('campaigns')
+        const subQueryCampaignIds = knexConn('campaigns')
           .select('id')
           .whereNull('deletedAt')
-          .whereNotIn('organizationId', organizationIds)
-          .pluck('id');
-
-        logger.info(`active campaignIds to include ${campaignIds.length}`);
+          .whereNotIn('organizationId', subQueryOrganizationIds);
 
         const campaignParticipationIdsOnCampaigns = await knexConn('campaign-participations')
           .select({
@@ -63,7 +58,7 @@ export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Scri
               knex.raw('NULL'),
             );
           })
-          .whereIn('campaignId', campaignIds)
+          .whereIn('campaignId', subQueryCampaignIds)
           .where('campaign-participations.deletedAt', '<', options.startArchiveDate)
           .where('isImproved', false)
           .whereNotNull('campaign-participations.deletedAt');
