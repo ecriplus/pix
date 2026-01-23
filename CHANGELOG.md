@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.311.0](https://github.com/1024pix/pix/compare/v5.310.0...v5.311.0) (2026-01-23)
+
+### :rocket: Amélioration
+
+- [#14843](https://github.com/1024pix/pix/pull/14843) MDX-11 IAGenImpact_NOV intégration retours JRO 
+- [#14759](https://github.com/1024pix/pix/pull/14759) Modifs qualite module souris1 
+- [#14853](https://github.com/1024pix/pix/pull/14853) Modifs qualité souris2 
+- [#14785](https://github.com/1024pix/pix/pull/14785) Remonter le pourcentage d'acquisition des badges des participations aux campagnes sur Maddo (PIX-20799) 
+
+### :building_construction: Tech
+
+- [#14855](https://github.com/1024pix/pix/pull/14855) Corriger les seeds lors du deploiement de la RA API 
+- [#14848](https://github.com/1024pix/pix/pull/14848) Corriger les warnings de résolution de dépendances de PixApp 
+- [#14835](https://github.com/1024pix/pix/pull/14835) Corriger les warnings de résolution de dépendances de PixOrga
+
 # [5.310.0](https://github.com/1024pix/pix/compare/v5.309.0...v5.310.0) (2026-01-22)
 
 ### :rocket: Amélioration
