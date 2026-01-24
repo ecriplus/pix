@@ -36,7 +36,8 @@ async function getLocatorFromDescriptionList(page: Page, dataTestId: string, dtL
 
   for (let i = 0; i < count; i++) {
     const dt = dts.nth(i);
-    const text = await dt.evaluate((el) => el.textContent!.replace(/\s+/g, ' ').trim());
+    const raw = await dt.textContent();
+    const text = normalizeWhitespace(raw ?? '');
 
     if (text === dtLabel) {
       return dt.locator('xpath=following-sibling::dd[1]');
@@ -44,4 +45,8 @@ async function getLocatorFromDescriptionList(page: Page, dataTestId: string, dtL
   }
 
   throw new Error(`No dt found with label: "${dtLabel}"`);
+}
+
+export function normalizeWhitespace(str: string): string {
+  return str.replace(/\s+/g, ' ').trim();
 }
