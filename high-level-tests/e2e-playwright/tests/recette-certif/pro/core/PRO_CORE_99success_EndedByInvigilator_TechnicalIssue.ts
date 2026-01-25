@@ -15,7 +15,7 @@ const snapshotPath = `recette-certif/${testRef}.json`;
 const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
 test(
-  `user takes a certification test for a PRO certification center, only CORE subscription. one challenge missing. Ended by invigilator. REF : ${testRef}`,
+  `user takes a certification test for a PRO certification center, only CORE subscription. one challenge missing. Ended by invigilator for technical issue. REF : ${testRef}`,
   {
     tag: ['@snapshot'],
     annotation: [

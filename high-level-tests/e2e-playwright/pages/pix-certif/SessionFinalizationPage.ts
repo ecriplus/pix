@@ -24,4 +24,12 @@ export class SessionFinalizationPage {
     await row.locator('.pix-select-button').click();
     await this.page.getByRole('option', { name: 'Problème technique' }).click();
   }
+
+  async markAbandonmentFor(lastName: string) {
+    const row = this.page.locator('tbody tr', {
+      has: this.page.getByText(lastName),
+    });
+    await row.locator('.pix-select-button').click();
+    await this.page.getByRole('option', { name: 'Abandon : Manque de temps ou départ prématuré' }).click();
+  }
 }
