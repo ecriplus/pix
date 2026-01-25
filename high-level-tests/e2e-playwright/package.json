@@ -20,7 +20,9 @@
     "test:snapshot": "UPDATE_SNAPSHOTS=true playwright test --grep @snapshot",
     "test:ui": "playwright test --ui",
     "test:certif": "playwright test --config playwright.config.certif.ts",
+    "test:certif:testref": "ts-node scripts/recette-certif/run-by-test-ref.ts",
     "test:certif:snapshot": "UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --grep @snapshot",
+    "test:certif:snapshot:testref": "ts-node scripts/recette-certif/run-by-test-ref.ts --snapshot",
     "test:certif:ui": "playwright test --config playwright.config.certif.ts --ui",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -46,6 +48,7 @@
     "pg": "^8.13.3",
     "pixelmatch": "^7.1.0",
     "pngjs": "^7.0.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript-eslint": "^8.25.0"
   }
