@@ -23,6 +23,7 @@
     "test:certif:snapshot": "UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --grep @snapshot",
     "test:certif:ui": "playwright test --config playwright.config.certif.ts --ui",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "tsc": "tsc -b"
   },
   "devDependencies": {

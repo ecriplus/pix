@@ -1,7 +1,6 @@
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
-  checkCoreCertificationResultAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/index.ts';
 import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
@@ -177,8 +176,12 @@ test(
       await pixAppPage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppPage);
       const certificationsListPage = await homePage.goToMyCertifications();
+      const status = await certificationsListPage.getCertificationStatus(certificationNumber);
+      expect(status).toBe('Obtenue');
       const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
-      await checkCoreCertificationResultAndExpectSuccess(pixAppPage, { pixScore: '881', pixLevelReached: 'Expert 1' });
+      const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
+      expect(pixScoreObtained).toEqual('PIX 881 CERTIFIÉS');
+      expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
       const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
       await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);

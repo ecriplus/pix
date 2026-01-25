@@ -210,7 +210,11 @@ export default class DetailsV3 extends Component {
             <PixTag @color={{this.detailStatusColor}}>{{t this.detailStatusLabel}}</PixTag>
           {{/if}}
         </div>
-        <dl class="certification-details-v3__list" aria-labelledby="general-informations">
+        <dl
+          class="certification-details-v3__list"
+          aria-labelledby="general-informations"
+          data-testid="pw-certification-general-information-description-list"
+        >
           <dt id="creation-date">
             {{t "pages.certifications.certification.details.v3.general-informations.labels.created-at"}}
             :

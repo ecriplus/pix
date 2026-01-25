@@ -12,6 +12,16 @@ export class SessionFinalizationPage {
       .getByText('Les informations de la session ont été transmises avec succès.')
       .waitFor({ state: 'visible' });
 
+    await this.page.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
+
     return new SessionManagementPage(this.page);
+  }
+
+  async markTechnicalIssueFor(lastName: string) {
+    const row = this.page.locator('tbody tr', {
+      has: this.page.getByText(lastName),
+    });
+    await row.locator('.pix-select-button').click();
+    await this.page.getByRole('option', { name: 'Problème technique' }).click();
   }
 }

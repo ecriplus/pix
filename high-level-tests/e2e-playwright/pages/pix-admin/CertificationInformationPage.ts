@@ -53,6 +53,18 @@ export class CertificationInformationPage {
         'pw-certification-more-information-description-list',
         'Nombre de problèmes techniques validés :',
       ),
+      testEndedBy: await getStringValueFromDescriptionList(
+        this.page,
+        'pw-certification-general-information-description-list',
+        'Certification terminée par :',
+        { optional: true },
+      ),
+      abortReason: await getStringValueFromDescriptionList(
+        this.page,
+        'pw-certification-general-information-description-list',
+        "Raison de l'abandon :",
+        { optional: true },
+      ),
     };
   }
 }
