@@ -171,35 +171,47 @@ export class ClientApplicationsScript extends Script {
   }
 
   async addScope({ clientId, scope: newScopes }, logger) {
-    const udpated = await clientApplicationRepository.addScopes(clientId, newScopes);
-
-    if (udpated) {
-      logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+
+    for (const scope of newScopes) {
+      application.addScope(scope);
+    }
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
   }
 
   async removeScope({ clientId, scope: scopesToRemove }, logger) {
-    const removed = await clientApplicationRepository.removeScopes(clientId, scopesToRemove);
-
-    if (removed) {
-      logger.info({ clientId, scopes: scopesToRemove }, 'removed scopes from client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+
+    for (const scope of scopesToRemove) {
+      application.removeScope(scope);
+    }
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId, scopes: scopesToRemove }, 'removed scopes from client application');
   }
 
   async setClientSecret({ clientId, clientSecret }, logger) {
     const hashedClientSecret = await cryptoService.hashPassword(clientSecret);
-
-    const updated = await clientApplicationRepository.setClientSecret(clientId, hashedClientSecret);
-
-    if (updated) {
-      logger.info({ clientId }, 'set client secret for client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+    application.clientSecret = hashedClientSecret;
+
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId }, 'set client secret for client application');
   }
 
   async addJurisdictionTags({ clientId, tags }, logger) {

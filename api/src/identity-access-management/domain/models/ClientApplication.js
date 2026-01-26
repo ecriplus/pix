@@ -8,8 +8,19 @@ export class ClientApplication {
     this.name = name;
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-    this.scopes = scopes;
+    this.scopes = [...new Set(scopes)];
     this.jurisdiction = Joi.attempt(jurisdiction, jurisdictionSchema);
+  }
+
+  addScope(scope) {
+    if (!this.scopes.includes(scope)) this.scopes.push(scope);
+  }
+
+  removeScope(scope) {
+    if (this.scopes.length === 1 && this.scopes.includes(scope)) {
+      throw new MissingClientApplicationScopesError();
+    }
+    this.scopes = this.scopes.filter((s) => s !== scope);
   }
 
   addJurisdictionTag(tag) {

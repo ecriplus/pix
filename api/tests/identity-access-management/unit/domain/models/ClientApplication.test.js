@@ -43,6 +43,32 @@ describe('Unit | Identity Access Management | Domain | Model | ClientApplication
     });
   });
 
+  context('scopes', function () {
+    describe('addScope', function () {
+      it('should add a scope', function () {
+        const clientApp = buildClientApplication({ scopes: ['scope1'] });
+        clientApp.addScope('scope2');
+        expect(clientApp.scopes).members(['scope2', 'scope1']);
+      });
+      it('should not add a duplicate scope', function () {
+        const clientApp = buildClientApplication({ scopes: ['scope1'] });
+        clientApp.addScope('scope1');
+        expect(clientApp.scopes).members(['scope1']);
+      });
+    });
+    describe('removeScope', function () {
+      it('should remove a scope', function () {
+        const clientApp = buildClientApplication({ scopes: ['scope1', 'scope2'] });
+        clientApp.removeScope('scope2');
+        expect(clientApp.scopes).members(['scope1']);
+      });
+      it('should throw if scopes are empty', function () {
+        const clientApp = buildClientApplication({ scopes: ['scope1'] });
+        expect(() => clientApp.removeScope('scope1')).throw();
+      });
+    });
+  });
+
   context('jurisdiction', function () {
     describe('addJurisdictionTag', function () {
       context('when there is no jurisdiction', function () {
