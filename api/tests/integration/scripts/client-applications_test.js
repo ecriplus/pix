@@ -104,6 +104,36 @@ describe('ClientApplicationsScript', function () {
             },
           },
         },
+        addJurisdictionTags: {
+          description: 'Add one or more jurisdiction tag to client application',
+          options: {
+            clientId: {
+              demandOption: true,
+              description: 'Client ID',
+              type: 'string',
+            },
+            tags: {
+              demandOption: true,
+              description: 'Jurisdiction tag (repeatable)',
+              type: 'array',
+            },
+          },
+        },
+        removeJurisdictionTags: {
+          description: 'Remove one or more jurisdiction tag from client application',
+          options: {
+            clientId: {
+              demandOption: true,
+              description: 'Client ID',
+              type: 'string',
+            },
+            tags: {
+              demandOption: true,
+              description: 'Jurisdiction tag (repeatable)',
+              type: 'array',
+            },
+          },
+        },
       });
     });
   });
@@ -153,7 +183,7 @@ describe('ClientApplicationsScript', function () {
         const clientApp = {
           name: 'app 1',
           clientSecret: 'secret',
-          jurisdiction: { rules: [{ name: 'tags', value: ['TAG'] }] },
+          jurisdiction: { rules: [{ name: 'tags', value: ['test'] }] },
           clientId: 'app1',
           scopes: ['scopeA'],
         };
@@ -179,7 +209,7 @@ describe('ClientApplicationsScript', function () {
           id: 123,
           clientSecret: 'secret',
           scopes: ['scope1'],
-          jurisdiction: JSON.stringify({ rules: [{ name: 'tags', value: 'test' }] }),
+          jurisdiction: JSON.stringify({ rules: [{ name: 'tags', value: ['test'] }] }),
           clientId: 'app1',
           name: 'app 1',
         });
@@ -258,6 +288,59 @@ describe('ClientApplicationsScript', function () {
         //then
         const clientAppInDb = await knex('client_applications').first();
         expect(clientAppInDb.clientSecret).equal('new_secret');
+      });
+    });
+
+    describe('jurisdiction', function () {
+      describe('add jurisdiction tag', function () {
+        it('should add jurisdictions to a clientId', async function () {
+          // given
+          databaseBuilder.factory.buildClientApplication({
+            id: 123,
+            clientSecret: 'secret',
+            scopes: ['scope1'],
+            jurisdiction: { rules: [{ name: 'tags', value: ['tag1'] }] },
+            clientId: 'app1',
+            name: 'app 1',
+          });
+          await databaseBuilder.commit();
+
+          // when
+          await script.handle({
+            command: 'addJurisdictionTags',
+            options: { clientId: 'app1', tags: ['tag2'] },
+            logger,
+          });
+
+          //then
+          const clientAppInDb = await knex('client_applications').first();
+          expect(clientAppInDb.jurisdiction.rules).deep.members([{ name: 'tags', value: ['tag1', 'tag2'] }]);
+        });
+      });
+      describe('remove jurisdiction tag', function () {
+        it('should remove jurisdictions to a clientId', async function () {
+          // given
+          databaseBuilder.factory.buildClientApplication({
+            id: 123,
+            clientSecret: 'secret',
+            scopes: ['scope1'],
+            jurisdiction: { rules: [{ name: 'tags', value: ['tag1', 'tag2'] }] },
+            clientId: 'app1',
+            name: 'app 1',
+          });
+          await databaseBuilder.commit();
+
+          // when
+          await script.handle({
+            command: 'removeJurisdictionTags',
+            options: { clientId: 'app1', tags: ['tag1'] },
+            logger,
+          });
+
+          //then
+          const clientAppInDb = await knex('client_applications').first();
+          expect(clientAppInDb.jurisdiction.rules).deep.members([{ name: 'tags', value: ['tag2'] }]);
+        });
       });
     });
   });

@@ -98,6 +98,36 @@ export class ClientApplicationsScript extends Script {
             },
           },
         },
+        addJurisdictionTags: {
+          description: 'Add one or more jurisdiction tag to client application',
+          options: {
+            clientId: {
+              description: 'Client ID',
+              demandOption: true,
+              type: 'string',
+            },
+            tags: {
+              description: 'Jurisdiction tag (repeatable)',
+              demandOption: true,
+              type: 'array',
+            },
+          },
+        },
+        removeJurisdictionTags: {
+          description: 'Remove one or more jurisdiction tag from client application',
+          options: {
+            clientId: {
+              description: 'Client ID',
+              demandOption: true,
+              type: 'string',
+            },
+            tags: {
+              description: 'Jurisdiction tag (repeatable)',
+              demandOption: true,
+              type: 'array',
+            },
+          },
+        },
       },
       permanent: true,
     });
@@ -170,6 +200,39 @@ export class ClientApplicationsScript extends Script {
     } else {
       logger.error({ clientId }, 'did not find client application');
     }
+  }
+
+  async addJurisdictionTags({ clientId, tags }, logger) {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
+      logger.error({ clientId }, 'did not find client application');
+      return;
+    }
+
+    for (const tag of tags) {
+      application.addJurisdictionTag(tag);
+    }
+
+    await clientApplicationRepository.save(application);
+    logger.info({ clientId, jurisdictionTags: tags }, 'added jurisdiction tags to client application');
+  }
+
+  async removeJurisdictionTags({ clientId, tags }, logger) {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
+      logger.error({ clientId }, 'did not find client application');
+      return;
+    }
+
+    for (const tag of tags) {
+      try {
+        application.removeJurisdictionTag(tag);
+      } catch (error) {
+        logger.error({ tag, error }, 'error while removing tag for client application');
+      }
+    }
+    await clientApplicationRepository.save(application);
+    logger.info({ clientId, jurisdictionTags: tags }, 'removed jurisdiction tags from client application');
   }
 }
 

@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingClientApplicationScopesError } from '../../domain/errors.js';
 import { ClientApplication } from '../../domain/models/ClientApplication.js';
 
@@ -39,6 +40,15 @@ export const clientApplicationRepository = {
       await jurisdictionSchema.validateAsync(jurisdiction);
     }
     await knex.insert({ name, clientId, clientSecret, scopes, jurisdiction }).into(TABLE_NAME);
+  },
+
+  async save(clientApplication) {
+    const knexConn = DomainTransaction.getConnection();
+    const updated = await knexConn('client_applications')
+      .update({ ...toDto(clientApplication), updatedAt: knex.fn.now() })
+      .where('id', clientApplication.id);
+
+    return updated === 1;
   },
 
   async removeByClientId(clientId) {
@@ -106,4 +116,13 @@ export const clientApplicationRepository = {
 
 function toDomain(dto) {
   return new ClientApplication(dto);
+}
+
+function toDto(model) {
+  return {
+    name: model.name,
+    clientSecret: model.clientSecret,
+    scopes: model.scopes,
+    jurisdiction: model.jurisdiction,
+  };
 }

@@ -145,6 +145,33 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
+  describe('#save', function () {
+    it('should update client application', async function () {
+      // given
+      databaseBuilder.factory.buildClientApplication({
+        clientId: 'app1',
+        scopes: ['scope1'],
+        jurisdiction: { rules: [{ name: 'tags', value: ['tag1'] }] },
+      });
+      await databaseBuilder.commit();
+      const application = await clientApplicationRepository.findByClientId('app1');
+
+      // when
+      application.addScope('scope2');
+      application.clientSecret = 'my-secret';
+      application.addJurisdictionTag('my-tag');
+      const updated = await clientApplicationRepository.save(application);
+
+      // then
+      expect(updated).true;
+
+      const applicationInDb = await knex.select().from('client_applications').where({ clientId: 'app1' }).first();
+      expect(applicationInDb.scopes).members(['scope1', 'scope2']);
+      expect(applicationInDb.jurisdiction).deep.equal({ rules: [{ name: 'tags', value: ['tag1', 'my-tag'] }] });
+      expect(applicationInDb.clientSecret).equal('my-secret');
+    });
+  });
+
   describe('#removeByClientId', function () {
     context('when application clientId is found', function () {
       it('should remove the corresponding application and return true', async function () {
