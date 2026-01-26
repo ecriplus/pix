@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'pix-certif/config/environment';
+import { formats } from 'pix-certif/ember-intl';
 
 export default class ApplicationRoute extends Route {
   @service featureToggles;
@@ -10,9 +11,11 @@ export default class ApplicationRoute extends Route {
   @service locale;
   @service session;
   @service store;
+  @service intl;
 
   async beforeModel(transition) {
     const queryParams = transition?.to?.queryParams;
+    this.intl.setFormats(formats);
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load();

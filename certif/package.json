@@ -42,11 +42,6 @@
     "test:watch": "ember exam --serve --reporter dot"
   },
   "overrides": {
-    "ember-eslint-parser": "$ember-eslint-parser",
-    "ember-source": "$ember-source",
-    "@ember/render-modifiers": {
-      "ember-source": "$ember-source"
-    },
     "ember-dayjs": {
       "ember-source": "$ember-source"
     }
@@ -64,7 +59,7 @@
     "@ember-intl/v1-compat": "^1.0.2",
     "@ember/optional-features": "^2.2.0",
     "@ember/string": "^4.0.0",
-    "@ember/test-helpers": "^4.0.0",
+    "@ember/test-helpers": "^5.4.1",
     "@embroider/compat": "^3.7.1",
     "@embroider/core": "^3.4.20",
     "@embroider/macros": "^1.16.10",
@@ -92,7 +87,7 @@
     "ember-eslint-parser": "^0.5.7",
     "ember-exam": "10.0.1",
     "ember-file-upload": "^9.3.0",
-    "ember-intl": "^8.0.0",
+    "ember-intl": "^8.0.3",
     "ember-keyboard": "^9.0.1",
     "ember-lifeline": "^7.0.0",
     "ember-load-initializers": "^3.0.1",
@@ -130,7 +125,7 @@
     "qunit-dom": "^3.4.0",
     "sass": "^1.89.0",
     "sinon": "^21.0.0",
-    "stylelint": "^16.19.1",
+    "stylelint": "^17.0.0",
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.99.8"
   }
