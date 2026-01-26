@@ -9,6 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 import InElement from 'mon-pix/components/in-element';
 
 import { categoriesKey } from '../../../models/module-issue-report';
@@ -76,6 +77,11 @@ export default class ModulixIssueReportModal extends Component {
     }));
   }
 
+  get errorMessageDisplayed() {
+    if (this.args.sentStatus === 'error') return this.sentStatusMessage;
+    return this.errorMessage;
+  }
+
   get sentStatusMessage() {
     if (!this.args.sentStatus) {
       return '';
@@ -101,13 +107,15 @@ export default class ModulixIssueReportModal extends Component {
   }
 
   @action
-  sendReport() {
+  async sendReport() {
     if (!this.comment) {
       this.errorMessage = this.intl.t('pages.modulix.issue-report.error-messages.missing-comment');
       return;
     }
-    this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
-    this.resetForm();
+    await this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
+    if (this.args.sentStatus === 'success') {
+      this.resetForm();
+    }
   }
 
   @action
@@ -129,15 +137,14 @@ export default class ModulixIssueReportModal extends Component {
         @showModal={{@showModal}}
       >
         <:content>
-          {{#if @sentStatus}}
+          <p class="issue-report-modal__mandatory">
+            {{t "common.form.mandatory-all-fields"}}
+          </p>
+          {{#if (eq @sentStatus "success")}}
             <PixNotificationAlert @type={{@sentStatus}} @withIcon={{true}}>
               {{this.sentStatusMessage}}
             </PixNotificationAlert>
           {{else}}
-            <p class="issue-report-modal__mandatory">
-              {{t "common.form.mandatory-all-fields"}}
-            </p>
-
             <form class="issue-report-modal-form" id="module-issue-report-form">
               <fieldset class="issue-report-modal-form__fieldset">
                 <legend class="sr-only">{{t "pages.modulix.issue-report.modal.legend"}}</legend>
@@ -164,9 +171,9 @@ export default class ModulixIssueReportModal extends Component {
               </fieldset>
             </form>
 
-            {{#if this.errorMessage}}
+            {{#if this.errorMessageDisplayed}}
               <PixNotificationAlert @type="error" class="issue-report-modal__error-message">
-                {{this.errorMessage}}
+                {{this.errorMessageDisplayed}}
               </PixNotificationAlert>
             {{/if}}
           {{/if}}
