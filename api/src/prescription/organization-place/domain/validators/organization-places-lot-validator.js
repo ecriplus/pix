@@ -1,8 +1,11 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
+
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import * as categories from '../constants/organization-places-categories.js';
+
+const MINIMUM_DATE_FOR_PLACES_LOT_CREATION = '2015-01-01';
 
 const schema = Joi.object({
   organizationId: Joi.number().integer().required().messages({
@@ -14,8 +17,9 @@ const schema = Joi.object({
     'number.positive': `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
     'number.integer': `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
   }),
-  activationDate: Joi.date().format('YYYY-MM-DD').required().messages({
+  activationDate: Joi.date().format('YYYY-MM-DD').greater(MINIMUM_DATE_FOR_PLACES_LOT_CREATION).required().messages({
     'any.required': `Les dates d'activation et d'expiration sont obligatoires.`,
+    'date.greater': `La date d'activation est trop ancienne.`,
     'date.format': `Le format de La date n'est pas correct.`,
   }),
   expirationDate: Joi.date()

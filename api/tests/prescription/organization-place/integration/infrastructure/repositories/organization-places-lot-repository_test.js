@@ -294,7 +294,7 @@ describe('Integration | Repository | Organization Places Lot', function () {
         count: 66,
         category: categories.FREE_RATE,
         reference: 'Godzilla',
-        activationDate: new Date('2014-05-13'),
+        activationDate: new Date('2020-05-13'),
         expirationDate: new Date('2021-07-01'),
         createdBy: user.id,
       });
