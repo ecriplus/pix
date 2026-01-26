@@ -92,12 +92,12 @@ export class RevertCampaignParticipationsToStartedScript extends Script {
         const lastAssessment = await this.#fetchLastAssessmentForParticipation(knexConn, participation.id);
 
         if (!lastAssessment) {
-          logger.warning(`No assessment found for participation id: ${participation.id}, skipping`);
+          logger.warn(`No assessment found for participation id: ${participation.id}, skipping`);
           continue;
         }
 
         if (lastAssessment.state !== Assessment.states.COMPLETED) {
-          logger.warning(
+          logger.warn(
             `Last assessment id: ${lastAssessment.id} for participation id: ${participation.id} is not in completed state (current state: ${lastAssessment.state}), skipping`,
           );
           continue;
