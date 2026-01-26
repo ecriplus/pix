@@ -201,7 +201,7 @@ class SnapshotHandler {
         });
         const diffRatio = diffPixels / (width * height);
         // data différente entre deux runs : code de vérification du certificat et date de délivrance
-        test.expect(diffRatio).toBeLessThan(0.05); // < 5% pixels différents
+        test.expect(diffRatio).toBeLessThan(0.03); // < 3% pixels différents
       }
     }
   }

@@ -6,7 +6,7 @@ import { t } from 'ember-intl';
 <template>
   <PixBlock class="candidate-information">
     <div class="candidate-information__score">
-      <div class="candidate-information-score__hexagon">
+      <div data-testid="pw-candidate-certificate-pix-score" class="candidate-information-score__hexagon">
         <span class="candidate-information-score-hexagon__pix">{{t "common.pix"}}</span>
         <span class="candidate-information-score-hexagon__score">{{@certificate.pixScore}}</span>
         <span class="candidate-information-score-hexagon__certified">{{t

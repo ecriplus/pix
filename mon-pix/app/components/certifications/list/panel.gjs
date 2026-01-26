@@ -6,7 +6,7 @@ import Item from 'mon-pix/components/certifications/list/item';
   {{#if @certifications}}
     <div class="certifications-panel">
       {{#each @certifications as |certification|}}
-        <PixBlock class="certifications-panel-item">
+        <PixBlock data-testid="pw-certification-card-{{certification.id}}" class="certifications-panel-item">
           <Item @certification={{certification}} />
         </PixBlock>
       {{/each}}
