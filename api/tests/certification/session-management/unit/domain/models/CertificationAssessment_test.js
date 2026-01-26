@@ -488,7 +488,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
   });
 
   describe('#endByInvigilator', function () {
-    it('should change the assessment state to "endBySupervisor"', function () {
+    it('should change the assessment state to "endedByInvigilator"', function () {
       // given
       const now = new Date('2020-12-31');
       const certificationAssessment = domainBuilder.buildCertificationAssessment({
@@ -924,7 +924,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         Assessment.states.STARTED,
         Assessment.states.ENDED_BY_INVIGILATOR,
         Assessment.states.ENDED_DUE_TO_FINALIZATION,
-        'endedBySupervisor',
       ]);
     });
   });

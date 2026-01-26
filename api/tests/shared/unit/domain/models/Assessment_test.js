@@ -44,17 +44,6 @@ describe('Unit | Domain | Models | Assessment', function () {
   });
 
   describe('#isEndedByInvigilator', function () {
-    it('should return true when its state is endedBySupervisor (to remove after transition to endedByInvigilator)', function () {
-      // given
-      const assessment = new Assessment({ state: 'endedBySupervisor' });
-
-      // when
-      const isEndedByInvigilator = assessment.isEndedByInvigilator();
-
-      // then
-      expect(isEndedByInvigilator).to.be.true;
-    });
-
     it('should return true when its state is endedByInvigilator', function () {
       // given
       const assessment = new Assessment({ state: Assessment.states.ENDED_BY_INVIGILATOR });

@@ -28,7 +28,6 @@ const certificationAssessmentSchema = Joi.object({
       Assessment.states.STARTED,
       Assessment.states.ENDED_BY_INVIGILATOR,
       Assessment.states.ENDED_DUE_TO_FINALIZATION,
-      'endedBySupervisor',
     )
     .required(),
   version: Joi.number()
@@ -186,17 +185,11 @@ export class CertificationAssessment {
     });
   }
 
-  /**
-   * Added `endedBySupervisor` during transition to rename this value to `endedByInvigilator`
-   * This function is used in SessionRepository to count uncompletedCertificationAssessment
-   * to be compared with abortReason in finalizationUseCase
-   */
   static get uncompletedAssessmentStates() {
     return [
       Assessment.states.STARTED,
       Assessment.states.ENDED_BY_INVIGILATOR,
       Assessment.states.ENDED_DUE_TO_FINALIZATION,
-      'endedBySupervisor',
     ];
   }
 
