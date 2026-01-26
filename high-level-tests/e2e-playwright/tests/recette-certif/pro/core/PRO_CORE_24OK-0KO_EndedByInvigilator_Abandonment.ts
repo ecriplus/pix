@@ -10,12 +10,12 @@ import { HomePage, LoginPage } from '../../../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, SessionListPage, SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 import data from '../../data.json' with { type: 'json' };
 
-const testRef = 'PRO_CORE_100success';
+const testRef = 'PRO_CORE_24OK-0KO_EndedByInvigilator_Abandonment';
 const snapshotPath = `recette-certif/${testRef}.json`;
 const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
 test(
-  `user takes a certification test for a PRO certification center, only CORE subscription. 100% success. REF : ${testRef}`,
+  `user takes a certification test for a PRO certification center, only CORE subscription. answers until 25th question. Ended by invigilator for abandonment. REF : ${testRef}`,
   {
     tag: ['@snapshot'],
     annotation: [
@@ -33,6 +33,7 @@ test(
     test.slow();
 
     const pixCertifPage = await pixCertifProContext.newPage();
+    const invigilatorPage = await pixCertifProContext.newPage();
 
     let sessionNumber = '',
       accessCode = '',
@@ -78,23 +79,22 @@ test(
         });
       });
 
+      const invigilatorLoginPage = await InvigilatorLoginPage.goto(invigilatorPage);
+      const invigilatorOverviewPage = await invigilatorLoginPage.login(sessionNumber, invigilatorCode);
       await test.step('invigilator authorizes user to access the certification session', async () => {
-        const invigilatorPage = await pixCertifProContext.newPage();
-        const invigilatorLoginPage = await InvigilatorLoginPage.goto(invigilatorPage);
-        const invigilatorOverviewPage = await invigilatorLoginPage.login(sessionNumber, invigilatorCode);
         await invigilatorOverviewPage.authorizeCandidateToStart(
           data.certifiableUser.firstName,
           data.certifiableUser.lastName,
         );
       });
 
-      await test.step('user run the test and answers everything correctly', async () => {
+      await test.step('user run the test and answers everything correctly but stop at last question', async () => {
         const challengePage = await certificationAccessCodePage.fillAccessCodeAndStartCertificationTest(accessCode);
 
-        await test.step(`answering always right`, async () => {
+        await test.step(`answering always right until the 25th challenge`, async () => {
           let challengeIndex = 0;
 
-          while (!pixAppPage.url().endsWith('/results')) {
+          while (challengeIndex !== 25 - 1) {
             const challengeImprint = await challengePage.getChallengeImprint();
             snapshotHandler.push('challenge imprint to have value', challengeImprint);
             await expect(pixAppPage.getByLabel('Votre progression')).toContainText(`${challengeIndex + 1} / 32`);
@@ -104,21 +104,23 @@ test(
           }
         });
 
-        await test.step(`reaches end of certification test`, async () => {
-          await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
-          await expect(pixAppPage.locator('h2')).toContainText(
-            'Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix',
-          );
-        });
+        // stopping at last challenge
+        await expect(pixAppPage.getByLabel('Votre progression')).toContainText('25 / 32');
+      });
+
+      await test.step('invigilator ends the certification test', async () => {
+        await invigilatorOverviewPage.endCertificationTest(
+          data.certifiableUser.firstName,
+          data.certifiableUser.lastName,
+        );
       });
     });
-    await pixAppPage.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
 
-    await test.step('Finalization and scoring', async () => {
+    await test.step('Finalization by marking a technical issue and scoring', async () => {
       const sessionManagementPage = new SessionManagementPage(pixCertifPage);
       const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-      await expect(pixCertifPage.getByText(data.certifiableUser.firstName)).toBeVisible();
-
+      await expect(pixCertifPage.getByText(data.certifiableUser.lastName)).toBeVisible();
+      await sessionFinalizationPage.markAbandonmentFor(data.certifiableUser.lastName);
       await sessionFinalizationPage.finalizeSession();
     });
 
@@ -155,14 +157,16 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: '881 Pix',
+          score: '808 Pix',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 32,
+          nbAnsweredQuestionsOverTotal: '24/32',
+          nbQuestionsOK: 24,
           nbQuestionsKO: 0,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
+          testEndedBy: 'Le surveillant',
+          abortReason: 'Abandon : Manque de temps ou départ prématuré',
         });
       });
     });
@@ -180,7 +184,7 @@ test(
       expect(status).toBe('Obtenue');
       const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
       const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
-      expect(pixScoreObtained).toEqual('PIX 881 CERTIFIÉS');
+      expect(pixScoreObtained).toEqual('PIX 808 CERTIFIÉS');
       expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
       const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 

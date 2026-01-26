@@ -10,12 +10,11 @@ import { HomePage, LoginPage } from '../../../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, SessionListPage, SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 import data from '../../data.json' with { type: 'json' };
 
-const testRef = 'PRO_CORE_99success_EndedByInvigilator_TechnicalIssue';
+const testRef = 'PRO_CORE_1OK-0KO_EndedByInvigilator_Abandonment';
 const snapshotPath = `recette-certif/${testRef}.json`;
-const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
 test(
-  `user takes a certification test for a PRO certification center, only CORE subscription. one challenge missing. Ended by invigilator for technical issue. REF : ${testRef}`,
+  `user takes a certification test for a PRO certification center, only CORE subscription. one challenge only answered. Ended by invigilator for abandonment. REF : ${testRef}`,
   {
     tag: ['@snapshot'],
     annotation: [
@@ -91,21 +90,16 @@ test(
       await test.step('user run the test and answers everything correctly but stop at last question', async () => {
         const challengePage = await certificationAccessCodePage.fillAccessCodeAndStartCertificationTest(accessCode);
 
-        await test.step(`answering always right until the last challenge`, async () => {
-          let challengeIndex = 0;
-
-          while (challengeIndex !== 32 - 1) {
-            const challengeImprint = await challengePage.getChallengeImprint();
-            snapshotHandler.push('challenge imprint to have value', challengeImprint);
-            await expect(pixAppPage.getByLabel('Votre progression')).toContainText(`${challengeIndex + 1} / 32`);
-            ++challengeIndex;
-            await challengePage.setRightOrWrongAnswer(true);
-            await challengePage.validateAnswer();
-          }
+        await test.step(`answering one only challenge`, async () => {
+          const challengeImprint = await challengePage.getChallengeImprint();
+          snapshotHandler.push('challenge imprint to have value', challengeImprint);
+          await expect(pixAppPage.getByLabel('Votre progression')).toContainText('1 / 32');
+          await challengePage.setRightOrWrongAnswer(true);
+          await challengePage.validateAnswer();
         });
 
-        // stopping at last challenge
-        await expect(pixAppPage.getByLabel('Votre progression')).toContainText('32 / 32');
+        // stopping at second challenge
+        await expect(pixAppPage.getByLabel('Votre progression')).toContainText('2 / 32');
       });
 
       await test.step('invigilator ends the certification test', async () => {
@@ -120,7 +114,7 @@ test(
       const sessionManagementPage = new SessionManagementPage(pixCertifPage);
       const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
       await expect(pixCertifPage.getByText(data.certifiableUser.lastName)).toBeVisible();
-      await sessionFinalizationPage.markTechnicalIssueFor(data.certifiableUser.lastName);
+      await sessionFinalizationPage.markAbandonmentFor(data.certifiableUser.lastName);
       await sessionFinalizationPage.finalizeSession();
     });
 
@@ -156,17 +150,17 @@ test(
         certificationNumber = certificationInformationPage.getCertificationNumber();
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
-          status: 'Validée',
-          score: '881 Pix',
+          status: 'Rejetée',
+          score: '56 Pix',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          nbAnsweredQuestionsOverTotal: '31/32',
-          nbQuestionsOK: 31,
+          nbAnsweredQuestionsOverTotal: '1/32',
+          nbQuestionsOK: 1,
           nbQuestionsKO: 0,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
-          abortReason: 'Problème technique',
+          abortReason: 'Abandon : Manque de temps ou départ prématuré',
         });
       });
     });
@@ -181,14 +175,7 @@ test(
       const homePage = new HomePage(pixAppPage);
       const certificationsListPage = await homePage.goToMyCertifications();
       const status = await certificationsListPage.getCertificationStatus(certificationNumber);
-      expect(status).toBe('Obtenue');
-      const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
-      const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
-      expect(pixScoreObtained).toEqual('PIX 881 CERTIFIÉS');
-      expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
-      const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
-
-      await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
+      expect(status).toBe('Non-obtenue');
     });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },

@@ -321,14 +321,13 @@ async function buildBaseDataForCertification() {
     .returning('id');
   const challenges = await knex('learningcontent.challenges')
     .whereRaw('?=ANY(??)', ['fr', 'locales'])
-    .where('status', 'validé')
-    .limit(500);
+    .where('status', 'validé');
 
   for (const challenge of challenges) {
     await knex('certification-frameworks-challenges').insert({
       challengeId: challenge.id,
-      discriminant: 1.0,
-      difficulty: 2.1,
+      discriminant: challenge.alpha,
+      difficulty: challenge.delta,
       versionId,
     });
   }
