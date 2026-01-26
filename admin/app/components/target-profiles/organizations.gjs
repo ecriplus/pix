@@ -30,6 +30,20 @@ export default class Organizations extends Component {
     return this.existingTargetProfile === '';
   }
 
+  get isDisabledAttachOrganizations() {
+    return this.organizationsToAttach === '';
+  }
+
+  @action
+  goToOrganizationPage(organizationId) {
+    this.router.transitionTo('authenticated.organizations.get', organizationId);
+  }
+
+  @action
+  onOrganizationsToAttachChange(event) {
+    this.organizationsToAttach = event.target.value;
+  }
+
   @action
   onExistingTargetProfileChange(event) {
     this.existingTargetProfile = event.target.value;
@@ -46,6 +60,7 @@ export default class Organizations extends Component {
       });
 
       const { 'attached-ids': attachedIds, 'duplicated-ids': duplicatedIds } = response.data.attributes;
+
       return { attachedIds, duplicatedIds };
     } catch (responseError) {
       this._handleResponseError(responseError);
@@ -54,7 +69,7 @@ export default class Organizations extends Component {
 
   @action
   async reloadCurrentPage() {
-    return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
+    return this.router.refresh();
   }
 
   @action
@@ -71,9 +86,27 @@ export default class Organizations extends Component {
       });
       this.existingTargetProfile = '';
       await this.pixToast.sendSuccessNotification({ message: 'Organisation(s) rattaché(es) avec succès.' });
-      await this.reloadCurrentPage();
+      return this.router.refresh();
     } catch (responseError) {
       this._handleResponseError(responseError);
+    }
+  }
+
+  @action
+  async detachOrganizations(organizationId) {
+    const adapter = this.store.adapterFor('target-profile');
+
+    try {
+      const detachedOrganizationIds = await adapter.detachOrganizations(this.args.targetProfile.id, [organizationId]);
+      const hasDetachedOrganizations = detachedOrganizationIds.length > 0;
+
+      if (hasDetachedOrganizations) {
+        const message = 'Organisation(s) détachée(s) avec succès : ' + detachedOrganizationIds.join(', ');
+        await this.pixToast.sendSuccessNotification({ message });
+        this.router.refresh();
+      }
+    } catch {
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 
@@ -174,8 +207,8 @@ export default class Organizations extends Component {
         @type={{@type}}
         @externalId={{@externalId}}
         @triggerFiltering={{this.triggerFiltering}}
-        @goToOrganizationPage={{@goToOrganizationPage}}
-        @detachOrganizations={{@detachOrganizations}}
+        @goToOrganizationPage={{this.goToOrganizationPage}}
+        @detachOrganizations={{this.detachOrganizations}}
         @entityName={{@targetProfile.internalName}}
         @confirmationLabel="components.target-profiles.organizations.detach-organization"
         @hideArchived={{@hideArchived}}

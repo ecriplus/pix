@@ -7,13 +7,12 @@ import Organizations from 'pix-admin/components/target-profiles/organizations';
     @organizations={{@model.organizations}}
     @administrationTeams={{@model.administrationTeams}}
     @targetProfile={{@model.targetProfile}}
-    @id={{@controller.id}}
-    @name={{@controller.name}}
-    @type={{@controller.type}}
-    @externalId={{@controller.externalId}}
-    @hideArchived={{@controller.hideArchived}}
-    @goToOrganizationPage={{@controller.goToOrganizationPage}}
+    @id={{@model.params.id}}
+    @name={{@model.params.name}}
+    @type={{@model.params.type}}
+    @externalId={{@model.params.externalId}}
+    @hideArchived={{@model.params.hideArchived}}
     @detachOrganizations={{@controller.detachOrganizations}}
-    @administrationTeamId={{@controller.administrationTeamId}}
+    @administrationTeamId={{@model.params.administrationTeamId}}
   />
 </template>
