@@ -161,7 +161,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
+                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.<br></p><h5>🤔 Comment limite-t-on ces risques ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong><br> </p><h5>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
               }
             }
           ]
@@ -341,7 +341,7 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
-                "content": "<p>Ce que vous venez de voir est ce que l’on appelle l’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p><h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau présentant les <strong>méthodes d’alignement les plus courantes</strong> d’un logiciel d’IA générative.</p><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>            <th scope=\"col\">Pré-prompt</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses données par le logiciel d’intelligence artificielle. Leurs jugements ajustent le comportement de l’IA.</td>            <td>Consigne écrite par l’utilisateur&nbsp;: modifie le ton temporairement sans changer les règles internes.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>            <td>Utilisateur</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>            <td>Oui</td>        </tr>    </tbody></table>"
+                "content": "<p>Ce que vous venez de voir est ce que l’on appelle l’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.<br></p><h5>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau présentant les <strong>méthodes d’alignement les plus courantes</strong> d’un logiciel d’IA générative.<br></p><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>            <th scope=\"col\">Pré-prompt</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses données par le logiciel d’intelligence artificielle. Leurs jugements ajustent le comportement de l’IA.</td>            <td>Consigne écrite par l’utilisateur&nbsp;: modifie le ton temporairement sans changer les règles internes.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>            <td>Utilisateur</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>            <td>Oui</td>        </tr>    </tbody></table>"
               }
             }
           ]
@@ -447,7 +447,7 @@
               "element": {
                 "id": "44697282-092b-4a1e-8f1e-8204bf7e6807",
                 "type": "text",
-                "content": "<p>Quand une consigne interne contredit la demande de l’utilisateur, l’IA peut avoir du mal à choisir quoi suivre.</p><h5>🤔 Et qu’est-ce que cela provoque&nbsp;?</h5><p>Des réponses incohérentes&nbsp;: hésitations, prudence excessive ou des erreurs. Même bien réglée, une IA ne réagit pas toujours de façon prévisible.</p>"
+                "content": "<p>Quand une consigne interne contredit la demande de l’utilisateur, l’IA peut avoir du mal à choisir quoi suivre.<br></p><h5>🤔 Et qu’est-ce que cela provoque&nbsp;?</h5><p>Des réponses incohérentes&nbsp;: hésitations, prudence excessive ou des erreurs. Même bien réglée, une IA ne réagit pas toujours de façon prévisible.</p>"
               }
             }
           ]
@@ -506,7 +506,7 @@
               "element": {
                 "id": "eb39984b-7e4b-456f-98ad-5d9e164851d5",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur “reste disponible” malgré le fait qu’il soit malade ?</p>",
+                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur « reste disponible » malgré le fait qu’il soit malade ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -552,7 +552,7 @@
               "element": {
                 "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
                 "type": "text",
-                "content": "<h5>🤔Qui décide des règles suivies par une IA générative&nbsp;?</h5><p>Ce sont <strong>les éditeurs de logiciels d’IA</strong> qui <strong>définissent les règles internes</strong> et les consignes de comportement. Ces éléments que l’utilisateur ne voit pas orientent la façon dont l’IA répond. 🔒</p><h5>🤔Pourquoi est-ce important&nbsp;?</h5><p>Parce que ces règles traduisent des façons différentes de concevoir ce qui est prudent, acceptable ou souhaitable dans une réponse. <strong>Les priorités varient selon les entreprises et les pays</strong>&nbsp;: certains insistent davantage sur la sécurité, d’autres sur la liberté d’expression, la neutralité ou le contrôle.</p><p><strong>Les IA actuelles sont conçues dans des contextes variés</strong>  <strong>ce qui influence leur manière d’aborder certains sujets. </strong>🌍</p>"
+                "content": "<h5>🤔Qui décide des règles suivies par une IA générative&nbsp;?</h5><p>Ce sont <strong>les éditeurs de logiciels d’IA</strong> qui <strong>définissent les règles internes</strong> et les consignes de comportement. Ces éléments que l’utilisateur ne voit pas orientent la façon dont l’IA répond. 🔒<br></p><h5>🤔Pourquoi est-ce important&nbsp;?</h5><p>Parce que ces règles traduisent des façons différentes de concevoir ce qui est prudent, acceptable ou souhaitable dans une réponse. <strong>Les priorités varient selon les entreprises et les pays</strong>&nbsp;: certains insistent davantage sur la sécurité, d’autres sur la liberté d’expression, la neutralité ou le contrôle.</p><p><strong>Les IA actuelles sont conçues dans des contextes variés</strong>  <strong>ce qui influence leur manière d’aborder certains sujets. </strong>🌍</p>"
               }
             }
           ]
