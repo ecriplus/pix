@@ -2,12 +2,12 @@
   "id": "bc6d164f-26bd-4f58-9925-8cf5365e2ca6",
   "shortId": "43e420e6",
   "slug": "ia-def-ind",
-  "title": "Une IA apprentie botaniste : un cas d’apprentissage supervisé.",
+  "title": "Une IA botaniste : un cas d’apprentissage supervisé.",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenDef_IND/picto_moduleIA_img.svg",
-    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage : de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
+    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>À travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage , de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -434,17 +434,167 @@
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "bfd4c766-52aa-449d-876e-8970972999c9",
-                "type": "embed",
-                "isCompletionRequired": false,
-                "title": "Un réseau de neurone",
-                "url": "https://epreuves.pix.fr/neural-network/neural-network.html?lang=fr",
-                "instruction": "<p>Ajustez les réglages pour obtenir la prédiction “ail des ours”.</p>",
-                "solution": "",
-                "height": 500
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step1-v2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "statique",
+                      "licence": ""
+                    },
+                    {
+                      "id": "6f9e6061-a524-4827-aa1e-aba8d579d91c",
+                      "type": "qcu-discovery",
+                      "instruction": "A votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "Eh non !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : « muguet » a un meilleur score, alors que le résultat attendu est « ail des ours ».<br>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non",
+                          "feedback": {
+                            "diagnosis": "Effectivement !<br>Au départ, les calculs de l’IA ne sont pas bien réglés.&nbsp; Le résultat n’est pas correcte : « muguet » a un meilleur score, alors que le résultat attendu est « ail des ours ».<br>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step2-v2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "Animation où l'on voit les paramètres bouger",
+                      "licence": ""
+                    },
+                    {
+                      "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
+                      "type": "qcu-discovery",
+                      "instruction": "Et maintenant, est-ce que la prédiction est correcte ?<br>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "Eh non, pas encore.<br> Même si le score de l’« ail des ours » a augmenté, il reste inférieur à celui du « muguet ».&nbsp;<br>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non",
+                          "feedback": {
+                            "diagnosis": "Bien vu !&nbsp;<br>Même si le score de l’« ail des ours » a augmenté, il reste inférieur à celui du « muguet ».&nbsp;<br>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5945d819-75d1-46eb-b802-1370d31f79de",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "Animation où l'on voit les paramètres bouger",
+                      "licence": ""
+                    },
+                    {
+                      "id": "ecb6c63b-ec65-4339-8e19-66fed405fa04",
+                      "type": "qcu-discovery",
+                      "instruction": "Et maintenant, est-ce que la prédiction est correcte ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": " Bien vu !<br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit « ail des ours »."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non, toujours pas",
+                          "feedback": {
+                            "diagnosis": "Eh si ! <br>Progressivement, par essai et erreur, le logiciel ajuste ses paramètres jusqu’à ce que la prédiction soit « ail des ours »."
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f89da7a4-d84c-4213-8dcf-91712068c0b9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "Statique",
+                      "licence": ""
+                    },
+                    {
+                      "id": "5f341bbe-d409-4923-a987-065977a1da50",
+                      "type": "qcu-discovery",
+                      "instruction": "Alors, à votre avis, maintenant, l’entraînement est terminé ?<br>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui, enfin !",
+                          "feedback": {
+                            "diagnosis": "Pas encore !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’images d’entraînement."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Pas si vite !<br>",
+                          "feedback": {
+                            "diagnosis": "Bien vu !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’ images d’entraînement.<br>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "c921068f-9d95-410f-84e0-d00dce15b202",
+                      "type": "text",
+                      "content": "L'entraînement recommence sur des milliers d’images."
+                    },
+                    {
+                      "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step4.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "Avec une animation en accéléré avec plein d'images qui se superpose et avec lesquelles le logiciel s'entraîne",
+                      "licence": ""
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -458,7 +608,22 @@
               "element": {
                 "id": "d14cf5f8-6d3f-4e77-abb2-033f8d13b062",
                 "type": "text",
-                "content": "<p>Le logiciel dispose de plusieurs paramètres pour faire des calculs sur ces valeurs. </p><p>Au départ, les paramètres sont ajustés au hasard, produisant une prédiction qui est le résultat de ses calculs.🎲 </p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue. </p><p>Ainsi, par essai erreur, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.</p>"
+                "content": "<h5>Si l'on résume, comment se passe l'entraînement d'un logiciel de reconnaissance d'image ?</h5>\n<p>Le logiciel dispose de plusieurs <strong>paramètres </strong>pour faire des calculs sur les <strong>valeurs </strong>d'une image.</p>\n<p><strong>Au départ</strong>, les paramètres sont fixés&nbsp;<strong>au hasard</strong>.🎰<br>En fonction de ces paramètres, le <strong>résultat </strong>des calculs donne une <strong>prédiction</strong>.</p>\n<p>À chaque nouvelle tentative, le logiciel compare sa prédiction à la réponse attendue.&nbsp;🔄</p>\n<p>Ainsi, par<strong> essai erreur</strong>, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.&nbsp;✅<br>Une fois l'entraînement terminé sur une image, l'entraînement est <strong>répété </strong>sur des<strong> milliers d'autres images.</strong><br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bc8f825f-f2b9-422e-a8ef-53df04d58740",
+          "type": "transition",
+          "title": "transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aa0e2963-70cd-4773-96da-af9b01878583",
+                "type": "text",
+                "content": "Mais comment savoir si cet entraînement est suffisant ?<br>C'est ce que nous allons voir avec le logiciel de Lila."
               }
             }
           ]
@@ -584,14 +749,14 @@
         {
           "id": "e41f6414-5ef6-44ee-8501-31077ec9d258",
           "type": "transition",
-          "title": "Transition 3",
+          "title": "Transition 4",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "f071912a-b067-4d03-8217-cc087d3cdbff",
                 "type": "text",
-                "content": "<p>Avec beaucoup de nouvelles données, et quelques corrections, le logiciel est prêt ! 🎉</p>"
+                "content": "Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨<br>On entraîne le logiciel d’intelligence artificielle avec des phrases où un mot est manquant, et le logiciel s’entraîne à prédire quel est ce mot."
               }
             }
           ]
@@ -606,14 +771,26 @@
               "element": {
                 "id": "5ec6e39a-0852-4ee9-b892-5a4b66b890e3",
                 "type": "text",
-                "content": "<p>Saviez-vous que la génération de texte, avec ChatGPT ou Mistral par exemple, repose sur un principe similaire ?&nbsp;✨</p><p>On entraîne le logiciel d’intelligence artificielle avec des phrases où un mot est manquant, et le logiciel s’entraîne à prédire quel est ce mot.&nbsp;</p><p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.&nbsp;🥗</p>"
+                "content": "<p>Imaginons que Lila entraîne une autre IA pour générer un petit texte de description des plantes.<br>Elle veut que le logiciel d'IA soit capable de reconstituer la phrase :<br> <strong>\"L’ail des ours peut se manger en salade.\"&nbsp;</strong>🥗</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8b0f4458-2e22-4bae-a328-aacea4151d65",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-def-ind/generalisation-au-texte-activite-4.png",
+                "alt": "Un réseau de neurone ",
+                "alternativeText": "On voit le morceau de phrase \"L’ail des ours peut se manger en ____\"<br>Puis le réseau de neuronne, puis en résultat : \"salade\" (0.2) et \"plantation\" (0.8)",
+                "legend": "",
+                "licence": ""
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
-                "type": "qrocm",
+                 "type": "qrocm",
                 "instruction": "<p>Dans ce cas&nbsp;: quel serait un exemple de donnée d’entrée ? et l’exemple d’étiquette associé ?</p>",
                 "proposals": [
                   {
@@ -691,7 +868,7 @@
               "element": {
                 "id": "136e86b1-cc7d-4e9c-a5f4-a3f1e5808757",
                 "type": "text",
-                "content": "<p>Lila peut maintenant entraîner son nouveau logiciel d’intelligence artificielle.</p><p>Plus rien ne l’arrête !🚀</p>"
+                "content": "<p>Lila peut maintenant entraîner son nouveau logiciel d’intelligence artificielle.🚀</p>"
               }
             }
           ]
@@ -742,7 +919,7 @@
               "element": {
                 "id": "c68dc04d-69b2-4ca6-9635-e38fea109723",
                 "type": "text",
-                "content": "<ul><li>L’a<strong>pprentissage automatique</strong> est une branche de l’intelligence artificielle qui permet aux machines d’apprendre à réaliser des tâches à partir de données, sans programmation explicite.&nbsp;🦾</li><li>L’apprentissage automatique<strong> supervisé</strong> repose sur l’utilisation de <strong>données étiquetées</strong> : le logiciel apprend durant une phase d’entraînement à associer des entrées aux bonnes réponses, puis est évalué sur de nouvelles données lors d’une phase de test, afin de vérifier sa capacité de <strong>généralisation</strong>.&nbsp;🏷️</li><li>\nLa fiabilité du modèle dépend fortement de la qualité des données, et un <strong>risque d’erreur</strong> subsiste toujours.&nbsp;⚠️</li><li>Cette méthode est largement<strong> utilisée dans des domaines variés</strong> comme la reconnaissance vocale, la prévision météo, la génération de texte ou la détection médicale.&nbsp;🌦️</li></ul>"
+                "content": "<ul><li>L’a<strong>pprentissage automatique</strong> est une branche de l’intelligence artificielle qui permet aux machines d’apprendre à réaliser des tâches à partir de données.&nbsp;🦾</li><li>L’apprentissage automatique<strong> supervisé</strong> repose sur l’utilisation de <strong>données étiquetées</strong> : le logiciel apprend durant une phase d’entraînement à associer des entrées aux bonnes réponses, puis est évalué sur de nouvelles données lors d’une phase de test, afin de vérifier sa capacité de <strong>généralisation</strong>.&nbsp;🏷️</li><li>\nLa fiabilité du modèle dépend fortement de la qualité des données, et un <strong>risque d’erreur</strong> subsiste toujours.&nbsp;⚠️</li><li>Cette méthode est largement<strong> utilisée dans des domaines variés</strong> comme la reconnaissance vocale, la prévision météo, la génération de texte ou la détection médicale.&nbsp;🌦️</li></ul>"
               }
             }
           ]
@@ -767,7 +944,7 @@
                 "cards": [
                   {
                     "id": "393892dc-10cc-465d-992e-ff624049ba76",
-                    "text": "L’apprentissage supervisé est une technique d’intelligence artificielle.",
+                    "text": "L’apprentissage supervisé est une des techniques d’intelligence artificielle.",
                     "image": {
                       "url": "",
                       "altText": ""
