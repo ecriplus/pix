@@ -190,6 +190,119 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         assert.dom(screen.getByRole('heading', { name: "Archiver l'organisation Aude Javel Company" })).exists();
         assert.dom(screen.getByText('Êtes-vous sûr de vouloir archiver cette organisation ?')).exists();
       });
+
+      module('when user confirms archiving', function () {
+        test('should archive organization and display archiving details', async function (assert) {
+          // given
+          const organization = this.server.create('organization', {
+            name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
+          });
+          const screen = await visit(`/organizations/${organization.id}`);
+          await clickByName("Archiver l'organisation");
+
+          await screen.findByRole('dialog');
+          // when
+          await clickByName('Confirmer');
+
+          // then
+          assert.dom(screen.getByText('Cette organisation a bien été archivée.')).exists();
+          assert.dom(screen.getByText('Archivée le 02/02/2022 par Clément Tine.')).exists();
+        });
+
+        module('when organization has at least one active places lot', function () {
+          test('should display an error notification', async function (assert) {
+            // given
+            const organization = this.server.create('organization', {
+              name: 'Aude Javel Company',
+              features: { PLACES_MANAGEMENT: { active: true } },
+            });
+            this.server.post(
+              '/admin/organizations/:id/archive',
+              () => ({
+                errors: [
+                  {
+                    code: 'ARCHIVE_ORGANIZATION_ERROR',
+                    status: '422',
+                  },
+                ],
+              }),
+              422,
+            );
+            const screen = await visit(`/organizations/${organization.id}`);
+            await clickByName("Archiver l'organisation");
+
+            await screen.findByRole('dialog');
+            // when
+            await clickByName('Confirmer');
+
+            // then
+            assert
+              .dom(screen.getByText(t('pages.organization.get.archiving.notifications.active-places-lot-error')))
+              .exists();
+            assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
+          });
+        });
+
+        test('should display error notification when archiving was not successful', async function (assert) {
+          // given
+          const organization = this.server.create('organization', {
+            name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
+          });
+          this.server.post(
+            '/admin/organizations/:id/archive',
+            () => ({
+              errors: [
+                {
+                  status: '422',
+                },
+              ],
+            }),
+            422,
+          );
+          const screen = await visit(`/organizations/${organization.id}`);
+          await clickByName("Archiver l'organisation");
+
+          await screen.findByRole('dialog');
+          // when
+          await clickByName('Confirmer');
+
+          // then
+          assert.dom(screen.getByText("L'organisation n'a pas pu être archivée.")).exists();
+          assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
+        });
+
+        test('should display error notification for other errors', async function (assert) {
+          // given
+          const organization = this.server.create('organization', {
+            name: 'Aude Javel Company',
+            features: { PLACES_MANAGEMENT: { active: true } },
+          });
+          this.server.post(
+            '/admin/organizations/:id/archive',
+            () => ({
+              errors: [
+                {
+                  status: '500',
+                },
+              ],
+            }),
+            500,
+          );
+          const screen = await visit(`/organizations/${organization.id}`);
+          await clickByName("Archiver l'organisation");
+
+          await screen.findByRole('dialog');
+          // when
+          await clickByName('Confirmer');
+
+          // then
+          assert.dom(screen.getByText('Une erreur est survenue.')).exists();
+          assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
+        });
+      });
+
       module('when user click on cancel actions', function () {
         test('should close confirmation modal with cancel button', async function (assert) {
           // given
@@ -208,6 +321,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           // then
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
         });
+
         test('should close confirmation modal with modal close button', async function (assert) {
           // given
           const organization = this.server.create('organization', {
@@ -225,82 +339,6 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
         });
       });
-    });
-
-    test('should archive organization and display archiving details', async function (assert) {
-      // given
-      const organization = this.server.create('organization', {
-        name: 'Aude Javel Company',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      });
-      const screen = await visit(`/organizations/${organization.id}`);
-      await clickByName("Archiver l'organisation");
-
-      await screen.findByRole('dialog');
-      // when
-      await clickByName('Confirmer');
-
-      // then
-      assert.dom(screen.getByText('Cette organisation a bien été archivée.')).exists();
-      assert.dom(screen.getByText('Archivée le 02/02/2022 par Clément Tine.')).exists();
-    });
-
-    test('should display error notification when archiving was not successful', async function (assert) {
-      // given
-      const organization = this.server.create('organization', {
-        name: 'Aude Javel Company',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      });
-      this.server.post(
-        '/admin/organizations/:id/archive',
-        () => ({
-          errors: [
-            {
-              status: '422',
-            },
-          ],
-        }),
-        422,
-      );
-      const screen = await visit(`/organizations/${organization.id}`);
-      await clickByName("Archiver l'organisation");
-
-      await screen.findByRole('dialog');
-      // when
-      await clickByName('Confirmer');
-
-      // then
-      assert.dom(screen.getByText("L'organisation n'a pas pu être archivée.")).exists();
-      assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
-    });
-
-    test('should display error notification for other errors', async function (assert) {
-      // given
-      const organization = this.server.create('organization', {
-        name: 'Aude Javel Company',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      });
-      this.server.post(
-        '/admin/organizations/:id/archive',
-        () => ({
-          errors: [
-            {
-              status: '500',
-            },
-          ],
-        }),
-        500,
-      );
-      const screen = await visit(`/organizations/${organization.id}`);
-      await clickByName("Archiver l'organisation");
-
-      await screen.findByRole('dialog');
-      // when
-      await clickByName('Confirmer');
-
-      // then
-      assert.dom(screen.getByText('Une erreur est survenue.')).exists();
-      assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
     });
   });
 });

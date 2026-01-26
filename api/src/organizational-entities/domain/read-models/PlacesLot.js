@@ -12,7 +12,7 @@ const validationSchema = Joi.object({
   deletedAt: Joi.date().required().allow(null),
 });
 
-const statuses = {
+export const statuses = {
   ACTIVE: 'ACTIVE',
   EXPIRED: 'EXPIRED',
   PENDING: 'PENDING',

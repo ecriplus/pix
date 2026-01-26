@@ -498,7 +498,7 @@
         },
         "title": "All learner courses"
       },
-       "organizations": {
+      "organizations": {
         "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from combined course blueprint <strong>{name}</strong>",
         "detach-organization-success": "Blueprint is not shared with organization {name} anymore."
       }
@@ -852,7 +852,7 @@
           "caption": "Liste des profil cibles. Contient l'identifiant, le nom interne, la catégorie, la date de création et le statut."
         }
       },
-       "organizations": {
+      "organizations": {
         "detach-organization": "Are you sure you want to detach <strong>{organizationName}</strong> from target profile <strong>{name}</strong>"
       }
     },
@@ -1267,6 +1267,13 @@
       "title": "Access to this Pix Admin space is limited to administrators."
     },
     "organization": {
+      "get": {
+        "archiving": {
+          "notifications": {
+            "active-places-lot-error": "An organization with at either active or pending places lots cannot be archived"
+          }
+        }
+      },
       "navbar": {
         "campaigns": "Campaigns",
         "children": "Children organisations",

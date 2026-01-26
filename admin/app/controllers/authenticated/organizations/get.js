@@ -41,6 +41,12 @@ export default class GetController extends Controller {
       this.router.transitionTo('authenticated.organizations.get');
     } catch (responseError) {
       const status = get(responseError, 'errors[0].status');
+      const errorCode = get(responseError, 'errors[0].code');
+      if (errorCode === 'ARCHIVE_ORGANIZATION_ERROR') {
+        return this.pixToast.sendErrorNotification({
+          message: this.intl.t('pages.organization.get.archiving.notifications.active-places-lot-error'),
+        });
+      }
       if (status === '422') {
         return this.pixToast.sendErrorNotification({ message: "L'organisation n'a pas pu être archivée." });
       }

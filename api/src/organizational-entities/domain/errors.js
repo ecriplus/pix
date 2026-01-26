@@ -28,6 +28,15 @@ class ArchiveCertificationCentersInBatchError extends DomainError {
   }
 }
 
+class ArchiveOrganizationError extends DomainError {
+  constructor({ code = 'ARCHIVE_ORGANIZATION_ERROR', message = 'Error during organization archiving', meta } = {}) {
+    super(message);
+    this.code = code;
+    this.message = message;
+    this.meta = meta;
+  }
+}
+
 class ArchiveOrganizationsInBatchError extends DomainError {
   constructor({ meta } = {}) {
     super('Error during organizations batch archiving', 'ARCHIVE_ORGANIZATIONS_IN_BATCH_ERROR');
@@ -104,6 +113,7 @@ class UnableToDetachParentOrganizationFromChildOrganization extends DomainError 
 export {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
+  ArchiveOrganizationError,
   ArchiveOrganizationsInBatchError,
   CountryNotFoundError,
   DpoEmailInvalid,
