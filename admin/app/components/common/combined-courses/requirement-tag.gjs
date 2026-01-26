@@ -32,10 +32,14 @@ export default class RequirementTag extends Component {
         >
           {{t (getItemType @type)}}
           -
+          {{@value}}
+          -
           {{@label}}</LinkTo>
       {{else}}
         <a target="_blank" rel="noopener noreferrer" href="https://app.recette.pix.fr/modules/{{@value}}/slug/details">
           {{t (getItemType @type)}}
+          -
+          {{@value}}
           -
           {{@label}}
         </a>

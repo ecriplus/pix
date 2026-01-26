@@ -275,7 +275,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       // given
       const store = this.owner.lookup('service:store');
       const findRecordStub = sinon.stub(store, 'findRecord');
-      findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
+      findRecordStub.withArgs('module', 'module123').resolves({ title: 'module 123' });
       findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
@@ -290,14 +290,14 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       await click(screen.getByLabelText(t('components.combined-course-blueprints.labels.module')));
       await fillIn(
         screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }),
-        'module-123',
+        'module123',
       );
       await click(
         screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
       );
 
-      assert.ok(screen.getByText(/Profil Cible - super pc/));
-      assert.ok(screen.getByText(/Module - module 123/));
+      assert.ok(screen.getByText(/Profil Cible - 1 - super pc/));
+      assert.ok(screen.getByText('Module - module123 - module 123'));
     });
     test('it should remove item when user clicks on remove button', async function (assert) {
       // given
@@ -318,11 +318,11 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
         screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }),
       );
 
-      assert.ok(screen.getByText(/Profil Cible - super pc/));
+      assert.ok(screen.getByText(/Profil Cible - 1 - super pc/));
       await click(screen.getByRole('button', { name: 'Supprimer' }));
 
       //then
-      assert.notOk(screen.queryByText(/Profil Cible - super pc/));
+      assert.notOk(screen.queryByText(/Profil Cible - 1 - super pc/));
     });
   });
 });

@@ -13,11 +13,14 @@ module('Integration | Component |  common/combined-courses/requirement-tag', fun
     const item = {
       type: 'module',
       value: 'abc-123',
+      label: 'Mon module',
     };
     const screen = await renderScreen(
-      <template><RequirementTag @type={{item.type}} @value={{item.value}} /></template>,
+      <template><RequirementTag @type={{item.type}} @value={{item.value}} @label={{item.label}} /></template>,
     );
     assert.ok(screen.getByText(t('components.combined-course-blueprints.items.module'), { exact: false }));
+    assert.ok(screen.getByText(item.value, { exact: false }));
+    assert.ok(screen.getByText(item.label, { exact: false }));
     const link = screen.getByRole('link');
     assert.ok(link.getAttribute('href').endsWith('modules/abc-123/slug/details'));
   });
@@ -25,12 +28,15 @@ module('Integration | Component |  common/combined-courses/requirement-tag', fun
     const item = {
       type: 'evaluation',
       value: 1,
+      label: 'Ma campagne',
     };
     const screen = await renderScreen(
-      <template><RequirementTag @type={{item.type}} @value={{item.value}} /></template>,
+      <template><RequirementTag @type={{item.type}} @value={{item.value}} @label={{item.label}} /></template>,
     );
     const link = screen.getByRole('link');
     assert.ok(screen.getByText(t('components.combined-course-blueprints.items.targetProfile'), { exact: false }));
+    assert.ok(screen.getByText(item.value, { exact: false }));
+    assert.ok(screen.getByText(item.label, { exact: false }));
     assert.ok(link.getAttribute('href').endsWith(`/target-profiles/${item.value}/details`));
   });
 

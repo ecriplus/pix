@@ -85,7 +85,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const adminUser = await insertUserWithRoleSuperAdmin();
 
         const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }]),
+          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
         });
         await databaseBuilder.commit();
 
