@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.312.0](https://github.com/1024pix/pix/compare/v5.311.0...v5.312.0) (2026-01-26)
+
+### :rocket: Amélioration
+
+- [#14862](https://github.com/1024pix/pix/pull/14862) Ajouter une metrique plausible pour la transcription d'un élement audio (PIX-21114) 
+- [#14864](https://github.com/1024pix/pix/pull/14864) Améliorer le diagnostique et les actions liés aux client_applications 
+- [#14773](https://github.com/1024pix/pix/pull/14773) Empêcher la possibilité d'ajouter un lot de places si la fonctionnalité "places" n'est pas activée sur une orga (PIX-20907) 
+- [#14793](https://github.com/1024pix/pix/pull/14793) Faire du retry des appels réseau en échec de openid-client (PIX-20978) 
+- [#14868](https://github.com/1024pix/pix/pull/14868) Modifs qualité clavier2 
+- [#14821](https://github.com/1024pix/pix/pull/14821) Permettre de faire évoluer le fichier d'import des apprenants en conservant l'historique (PIX-20989). 
+- [#14808](https://github.com/1024pix/pix/pull/14808) Rendre le champ date d'expiration obligatoire dans les lots de places (PIX-20905). 
+- [#14856](https://github.com/1024pix/pix/pull/14856) Update IAGenBiais_IND.json 
+
+### :building_construction: Tech
+
+- [#14860](https://github.com/1024pix/pix/pull/14860) Ajout d'un raccourci pour installer facilement le package pix-epreuves-components là où c'est nécessaire 
+- [#14851](https://github.com/1024pix/pix/pull/14851) Ajouter les traces d'apprentissages sur l'élément audio (PIX-21112) 
+- [#14857](https://github.com/1024pix/pix/pull/14857) Ajouter un script pour calculer les capacités des certifications Pix+ v3 (PIX-21162). 
+- [#14858](https://github.com/1024pix/pix/pull/14858) Corriger les warnings de résolution de dépendances de PixCertif 
+- [#14839](https://github.com/1024pix/pix/pull/14839) Créer un script pour modifier le statut des participations de campagne à partager (PIX-21134) 
+- [#14863](https://github.com/1024pix/pix/pull/14863) Retirer la présence de la notion de "superviseur" partout dans le code de certification (PIX-21211) 
+- [#14859](https://github.com/1024pix/pix/pull/14859) Utiliser des sous requêtes plutôt que des résultats de requêtes précedente (PIX-21212). 
+- [#14771](https://github.com/1024pix/pix/pull/14771) Utiliser Pgboss pour insérer les jobs plutôt que knex
+
 # [5.311.0](https://github.com/1024pix/pix/compare/v5.310.0...v5.311.0) (2026-01-23)
 
 ### :rocket: Amélioration
