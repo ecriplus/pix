@@ -52,7 +52,7 @@ export default class Organizations extends Component {
   }
 
   <template>
-    <section class="page-section organizations-list">
+    <section class="page-section combined-course-blueprint-organizations organizations-list">
       <header class="page-section__header">
         <h2 class="page-section__title">Organisations</h2>
       </header>
