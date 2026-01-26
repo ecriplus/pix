@@ -77,18 +77,24 @@ export default class ModulixIssueReportModal extends Component {
     }));
   }
 
-  get errorMessageDisplayed() {
-    if (this.args.sentStatus === 'error') return this.sentStatusMessage;
-    return this.errorMessage;
+  get statusMessage() {
+    if (!this.args.sentStatus) {
+      return this.errorMessage ?? '';
+    }
+
+    if (this.args.sentStatus === 'error') {
+      return this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error');
+    }
+
+    return this.intl.t('pages.modulix.issue-report.modal.confirmation-message.success');
   }
 
-  get sentStatusMessage() {
-    if (!this.args.sentStatus) {
-      return '';
+  get notificationStatusType() {
+    if (this.errorMessage || this.args.sentStatus === 'error') {
+      return 'error';
     }
-    return this.args.sentStatus === 'success'
-      ? this.intl.t('pages.modulix.issue-report.modal.confirmation-message.success')
-      : this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error');
+
+    return 'success';
   }
 
   @action
@@ -124,7 +130,8 @@ export default class ModulixIssueReportModal extends Component {
     if (moduleIssueReportForm) {
       moduleIssueReportForm.reset();
       this.selectedCategory = this.categories[0].value;
-      this.comment = null;
+      this.comment = '';
+      this.errorMessage = null;
     }
   }
 
@@ -137,14 +144,10 @@ export default class ModulixIssueReportModal extends Component {
         @showModal={{@showModal}}
       >
         <:content>
-          <p class="issue-report-modal__mandatory">
-            {{t "common.form.mandatory-all-fields"}}
-          </p>
-          {{#if (eq @sentStatus "success")}}
-            <PixNotificationAlert @type={{@sentStatus}} @withIcon={{true}}>
-              {{this.sentStatusMessage}}
-            </PixNotificationAlert>
-          {{else}}
+          {{#unless (eq @sentStatus "success")}}
+            <p class="issue-report-modal__mandatory">
+              {{t "common.form.mandatory-all-fields"}}
+            </p>
             <form class="issue-report-modal-form" id="module-issue-report-form">
               <fieldset class="issue-report-modal-form__fieldset">
                 <legend class="sr-only">{{t "pages.modulix.issue-report.modal.legend"}}</legend>
@@ -170,16 +173,19 @@ export default class ModulixIssueReportModal extends Component {
                 </PixTextarea>
               </fieldset>
             </form>
-
-            {{#if this.errorMessageDisplayed}}
-              <PixNotificationAlert @type="error" class="issue-report-modal__error-message">
-                {{this.errorMessageDisplayed}}
-              </PixNotificationAlert>
-            {{/if}}
+          {{/unless}}
+          {{#if this.statusMessage}}
+            <PixNotificationAlert
+              @type={{this.notificationStatusType}}
+              @withIcon={{true}}
+              @class="{{if (eq this.notificationStatusType 'error') 'issue-report-modal__error-message'}}"
+            >
+              {{this.statusMessage}}
+            </PixNotificationAlert>
           {{/if}}
         </:content>
         <:footer>
-          {{#if @sentStatus}}
+          {{#if (eq @sentStatus "success")}}
             <div class="issue-report-modal-form__action-buttons">
               <PixButton @triggerAction={{this.hideModal}}>{{t "common.actions.close"}}</PixButton>
             </div>
