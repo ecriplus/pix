@@ -95,6 +95,7 @@ export default class PlacesLotCreationForm extends Component {
             <PixInput
               class={{if @errors.count "form-control is-invalid" "form-control"}}
               @value={{this.count}}
+              @requiredLabel={{t "common.forms.mandatory"}}
               {{on "input" this.onCountChange}}
             ><:label>Nombre :</:label></PixInput>
 
