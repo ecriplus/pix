@@ -110,14 +110,16 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
 
           await click(screen.getByRole('button', { name: t('common.actions.send') }));
 
-        // then
-        const buttons = screen.getAllByRole('button', { name: t('common.actions.close') });
-        assert.strictEqual(buttons.length, 2);
-        assert.dom(screen.getByText(t('pages.modulix.issue-report.modal.confirmation-message.success')));
+          // then
+          assert
+            .dom(screen.queryByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }))
+            .doesNotExist();
+          const closeButtons = screen.getAllByRole('button', { name: t('common.actions.close') });
+          assert.strictEqual(closeButtons.length, 2);
+          assert.dom(screen.getByText(t('pages.modulix.issue-report.modal.confirmation-message.success')));
 
-        const closeButtons = screen.getAllByRole('button', { name: t('common.actions.close') });
-        await click(closeButtons[0]);
-        await waitForDialogClose();
+          await click(closeButtons[0]);
+          await waitForDialogClose();
 
           assert
             .dom(screen.queryByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 }))
