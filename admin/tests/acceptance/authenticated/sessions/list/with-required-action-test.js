@@ -51,7 +51,7 @@ module('Acceptance | authenticated/sessions/list/with required action', function
       const screen = await visit('/sessions/list/with-required-action');
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Sessions de certif' })).hasClass('active');
+      assert.dom(screen.getByRole('link', { name: 'Sessions de certification' })).hasClass('active');
     });
 
     module('when clicking on the sessions to be treated tab', function () {
