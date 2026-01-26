@@ -6,10 +6,38 @@ import { CampaignParticipantActivity } from '../../domain/read-models/CampaignPa
 const campaignParticipantActivityRepository = {
   async findPaginatedByCampaignId({ page = { size: 25 }, campaignId, filters = {} }) {
     const query = knex
-      .with('campaign_participants_activities_ordered', (qb) =>
-        _buildCampaignParticipationByParticipant(qb, campaignId, filters),
+      .select(
+        'campaign-participations.id AS campaignParticipationId',
+        'campaign-participations.userId',
+        'view-active-organization-learners.firstName',
+        'view-active-organization-learners.lastName',
+        'campaign-participations.participantExternalId',
+        'campaign-participations.sharedAt',
+        'campaign-participations.status',
+        'campaigns.type AS campaignType',
+        knex('campaign-participations')
+          .select('id')
+          .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
+          .and.whereNull('campaign-participations.deletedAt')
+          .and.where('campaignId', campaignId)
+          .orderBy('createdAt', 'desc')
+          .limit(1)
+          .as('lastCampaignParticipationId'),
+        knex('campaign-participations')
+          .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
+          .and.whereNull('campaign-participations.deletedAt')
+          .and.where('campaignId', campaignId)
+          .count('id')
+          .as('participationCount'),
       )
-      .from('campaign_participants_activities_ordered')
+      .from('campaign-participations')
+      .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
+      .join(
+        'view-active-organization-learners',
+        'view-active-organization-learners.id',
+        'campaign-participations.organizationLearnerId',
+      )
+      .modify(_filterParticipations, filters, campaignId)
       .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 
     const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
@@ -24,42 +52,6 @@ const campaignParticipantActivityRepository = {
     };
   },
 };
-
-function _buildCampaignParticipationByParticipant(queryBuilder, campaignId, filters) {
-  queryBuilder
-    .select(
-      'campaign-participations.id AS campaignParticipationId',
-      'campaign-participations.userId',
-      'view-active-organization-learners.firstName',
-      'view-active-organization-learners.lastName',
-      'campaign-participations.participantExternalId',
-      'campaign-participations.sharedAt',
-      'campaign-participations.status',
-      'campaigns.type AS campaignType',
-      knex('campaign-participations')
-        .select('id')
-        .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
-        .and.whereNull('campaign-participations.deletedAt')
-        .and.where('campaignId', campaignId)
-        .orderBy('createdAt', 'desc')
-        .limit(1)
-        .as('lastCampaignParticipationId'),
-      knex('campaign-participations')
-        .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
-        .and.whereNull('campaign-participations.deletedAt')
-        .and.where('campaignId', campaignId)
-        .count('id')
-        .as('participationCount'),
-    )
-    .from('campaign-participations')
-    .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
-    .join(
-      'view-active-organization-learners',
-      'view-active-organization-learners.id',
-      'campaign-participations.organizationLearnerId',
-    )
-    .modify(_filterParticipations, filters, campaignId);
-}
 
 function _filterParticipations(queryBuilder, filters, campaignId) {
   queryBuilder
