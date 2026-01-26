@@ -9,7 +9,7 @@ const schema = Joi.object({
     'any.required': `L'organisationId est obligatoire.`,
     'number.base': `L'identifiant de l'organisation doit être un nombre.`,
   }),
-  count: Joi.number().integer().positive().allow(null).messages({
+  count: Joi.number().integer().positive().required().messages({
     'number.base': `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
     'number.positive': `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
     'number.integer': `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
