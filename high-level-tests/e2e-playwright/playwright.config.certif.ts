@@ -23,19 +23,28 @@ export default defineConfig({
       dependencies: ['recette certif - création utilisateur certifiable'],
     },
   ],
-  webServer: [
-    ...(sharedConfig.webServer as []),
-    {
-      cwd: '../../admin',
-      timeout: 180 * 1000,
-      command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
-      url: process.env.PIX_ADMIN_URL,
-      reuseExistingServer: false,
-      stdout: 'ignore',
-      stderr: 'pipe',
-      env: {
-        DEFAULT_LOCALE: 'fr',
-      },
-    },
-  ],
+  webServer: isCI
+    ? [
+        ...(sharedConfig.webServer as []),
+        {
+          command: 'while true; do echo "Wait for PixAdmin to start"; sleep 300; done',
+          url: process.env.PIX_ADMIN_URL,
+          reuseExistingServer: true,
+        },
+      ]
+    : [
+        ...(sharedConfig.webServer as []),
+        {
+          cwd: '../../admin',
+          timeout: 180 * 1000,
+          command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
+          url: process.env.PIX_ADMIN_URL,
+          reuseExistingServer: false,
+          stdout: 'ignore',
+          stderr: 'pipe',
+          env: {
+            DEFAULT_LOCALE: 'fr',
+          },
+        },
+      ],
 });

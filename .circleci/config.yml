@@ -219,18 +219,18 @@ workflows:
           requires:
             - certif_build
 
-      - admin_install:
+      - admin_build:
           context: Pix
           requires:
             - checkout
       - admin_lint:
           context: Pix
           requires:
-            - admin_install
+            - admin_build
       - admin_test:
           context: Pix
           requires:
-            - admin_install
+            - admin_build
 
       - junior_install:
           context: Pix
@@ -251,6 +251,17 @@ workflows:
             - mon_pix_build
             - orga_build
             - certif_build
+
+      - e2e_playwright_test_recette_certif:
+          context: Pix
+          requires:
+            - mon_pix_build
+            - orga_build
+            - certif_build
+            - admin_build
+          filters:
+            branches:
+              only: dev
 
 jobs:
   checkout:
@@ -773,7 +784,7 @@ jobs:
       - store_artifacts:
           path: /home/circleci/test-results/certif
 
-  admin_install:
+  admin_build:
     executor:
       name: node-docker
     working_directory: ~/pix/admin
@@ -785,6 +796,13 @@ jobs:
           keys:
             - v7-admin-npm-{{ checksum "cachekey" }}
       - run: npm ci
+      - run:
+          name: Build Pix Admin
+          command: npm run build
+          environment:
+            BUILD_ENVIRONMENT: development
+            DEFAULT_LOCALE: fr
+            JOBS: 2
       - save_cache:
           key: v7-admin-npm-{{ checksum "cachekey" }}
           paths:
@@ -1097,6 +1115,113 @@ jobs:
             PIX_API_PORT: 3000
             PIX_APP_URL: http://localhost:4200
             PIX_ORGA_URL: http://localhost:4201
+            PIX_CERTIF_URL: http://localhost:4203
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            AUTH_SECRET: 'secret'
+            REDIRECTION_URL_SECRET: 'secret'
+            NODE_OPTIONS: '--no-experimental-strip-types'
+      - store_test_results:
+          path: ./node_modules/.playwright/junit
+      - store_artifacts:
+          path: ./node_modules/.playwright/output
+          destination: screenshots
+
+  e2e_playwright_test_recette_certif:
+    executor:
+      name: node-redis-postgres-s3-docker-medium
+    working_directory: ~/pix/high-level-tests/e2e-playwright
+    parallelism: 4
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - run: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-playwright-npm-{{ checksum "cachekey" }}
+      - run: npm ci
+      - run:
+          working_directory: ~/pix/api
+          command: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+      - run:
+          name: Install Playwright Browser
+          command: npx playwright install --with-deps chromium
+      - run:
+          name: Install Pix API
+          working_directory: ~/pix/api
+          command: npm ci
+      - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          command: npm start
+          background: true
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            PIX_AUDIT_LOGGER_ENABLED: 'false'
+            MAILING_ENABLED: 'false'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+            PIX_ADMIN_LOGIN_FROM_PASSWORD_ENABLED: 'true'
+      - run:
+          name: Start Pix Orga
+          working_directory: ~/pix/orga
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix App
+          working_directory: ~/pix/mon-pix
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix Certif
+          working_directory: ~/pix/certif
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix Admin
+          working_directory: ~/pix/admin
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            PIX_AUDIT_LOGGER_ENABLED: 'false'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          command: npm run db:prepare
+      - run:
+          name: Refresh cache
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          working_directory: ~/pix/api
+          command: npm run cache:refresh
+      - run:
+          name: Run E2E tests for certif recette
+          command: |
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"
+            echo "Shard $SHARD of $CIRCLE_NODE_TOTAL"
+            npx playwright test --config playwright.config.certif.ts --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          environment:
+            PIX_API_PORT: 3000
+            PIX_APP_URL: http://localhost:4200
+            PIX_ORGA_URL: http://localhost:4201
+            PIX_ADMIN_URL: http://localhost:4202
             PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
