@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.313.0](https://github.com/1024pix/pix/compare/v5.312.0...v5.313.0) (2026-01-27)
+
+### :rocket: Amélioration
+
+- [#14847](https://github.com/1024pix/pix/pull/14847) Empêcher l'archivage d'une organisation avec un/des lots de places actifs ou à venir (PIX-20906). 
+- [#14867](https://github.com/1024pix/pix/pull/14867) MDX-17 Biais_AVA integration retours relecture 
+- [#14769](https://github.com/1024pix/pix/pull/14769) Tmp modif iabotaniste panelint 
+- [#14865](https://github.com/1024pix/pix/pull/14865) Update NR_Datacenter_AVA.json - Relectures Nico + équipe cyber 
+
+### :building_construction: Tech
+
+- [#14870](https://github.com/1024pix/pix/pull/14870) Ajout de nouveaux tests Playwright pour la recette certif concernant le déclenchement des scorings (PIX-21242) 
+- [#14878](https://github.com/1024pix/pix/pull/14878) Correction d' un test E2E pour la recette de certification 
+- [#14872](https://github.com/1024pix/pix/pull/14872) Corriger l'appel au logger (PIX-21421) 
+- [#14866](https://github.com/1024pix/pix/pull/14866) Corriger les warnings de résolution de dépendances de PixJunior 
+
+### :arrow_up: Montée de version
+
+- [#14822](https://github.com/1024pix/pix/pull/14822) Update dependency @1024pix/pix-ui to v58 (admin) 
+- [#14834](https://github.com/1024pix/pix/pull/14834) Update dependency @1024pix/pix-ui to v58 (mon-pix)
+
 # [5.312.0](https://github.com/1024pix/pix/compare/v5.311.0...v5.312.0) (2026-01-26)
 
 ### :rocket: Amélioration
