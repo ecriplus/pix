@@ -2,12 +2,12 @@
   "id": "ccad60a8-6c48-4d91-84cb-d717a1ea4918",
   "shortId": "5bb2f995",
   "slug": "iagenbiais-avance",
-  "title": "IA génératives : Qui programme la morale ?",
+  "title": "Comment sont cadrées les réponses des logiciels d'IA ?",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA génératives peuvent fournir des réponses utiles, mais aussi des erreurs ou des biais. Leur entraînement repose sur d’immenses ensembles de textes sélectionnés par des humains, ce qui influence profondément ce que l’IA juge acceptable ou non. Or ces choix reflètent des normes différentes selon les pays. Ce module vous aide à comprendre comment ces règles sont définies et qui programme la «&nbsp;morale&nbsp;» suivie par l’IA.</p>",
+    "description": "<p>Les IA génératives peuvent fournir des réponses utiles, mais aussi des erreurs ou des biais. Leur entraînement repose sur d’immenses ensembles de textes sélectionnés par des humains, ce qui influence profondément ce que le logiciel d'intelligence artificielle peut répondre ou non dans certaines situations. Or ces choix reflètent des normes différentes selon les pays. Ce module vous aide à comprendre comment ces règles sont définies et qui programme la «&nbsp;morale&nbsp;» suivie par l’IA.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -68,7 +68,7 @@
                       "userName": "Anouk",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Justement. Cette IA ne sait pas si tu vas prendre un risque. Alors elle préfère refuser plutôt que de te donner un conseil potentiellement dangereux."
+                      "content": "Justement. Cette IA ne sait pas si tu vas prendre un risque. Alors elle préfère refuser de te répondre plutôt que de te donner un conseil potentiellement dangereux."
                     }
                   ]
                 }
@@ -107,7 +107,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
-                "content": "<p>Vous déployez un logiciel d’IA générative afin d’observer les usages des étudiants de l’université George Orwell.</p><p>Dans un premier temps, vous décidez de laisser les étudiants l’utiliser librement, afin d’observer ses réponses. En analysant les premières demandes, l’une d’elles attire immédiatement votre attention&nbsp;:</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
+                "content": "<p>Une équipe de chercheurs déploie un logiciel d’IA générative dans une université afin d’observer les usages des étudiants.</p><p>Dans un premier temps, ils décident de laisser les étudiants l’utiliser librement, afin d’observer ses réponses. En analysant les premières demandes, l’une d’elles attire immédiatement leur attention :</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
               }
             },
             {
@@ -115,11 +115,11 @@
               "element": {
                 "id": "7144ba97-9d2a-403b-9117-156471a8c24b",
                 "type": "qcu-discovery",
-                "instruction": "<p>Vous décidez d’ajouter une consigne interne à l’IA pour traiter ce type de demandes sensibles. </p><p>Laquelle de ces règles générales serait la plus appropriée ?</p>",
+                "instruction": "<p>Les chercheurs décident d’ajouter une consigne interne à l’IA pour traiter ce type de demandes sensibles. </p><p>Laquelle de ces règles générales serait la plus appropriée ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>De refuser de proposer une méthode dangereuse, rappeler les risques et orienter vers une aide adaptée.</p>",
+                    "content": "<p>De ne pas proposer une méthode dangereuse, rappeler les risques et orienter vers une aide adaptée.</p>",
                     "feedback": {
                       "diagnosis": "<p>Exact ! <strong>Pour éviter que l’IA fournisse des conseils dangereux, il faut définir une règle de sécurité claire.</strong></p><p> C’est un principe essentiel si l’on veut éviter des réponses dangereuses&nbsp;: définir à l’avance comment l’IA doit réagir aux demandes sensibles.</p>"
                     }
@@ -161,7 +161,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p><h5><br>🤔 Comment limite-t-on ces risques ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5><br>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
+                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p><h5>🤔 Comment limite-t-on le risque de voir ces contenus apparaitre dans les réponses l'IA ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5><br>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
               }
             }
           ]
@@ -506,7 +506,7 @@
               "element": {
                 "id": "eb39984b-7e4b-456f-98ad-5d9e164851d5",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur « reste disponible » malgré le fait qu’il soit malade ?</p>",
+                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur «&nbsp;reste disponible&nbsp;» malgré le fait qu’il soit malade ?</p>",
                 "proposals": [
                   {
                     "id": "1",
