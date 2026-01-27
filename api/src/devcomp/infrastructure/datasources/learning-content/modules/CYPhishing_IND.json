@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/draft/modules/cy_phishing_ind/picto_cyber_phishing_ind.svg",
+    "image": "https://assets.pix.org/modules/CYPhishingInd/picto_cyber_phishing_ind.svg",
     "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi des réflexes pour vous protéger et protéger les autres. 🕵️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
     "duration": 10,
     "level": "independent",
@@ -110,9 +110,9 @@
                     {
                       "id": "5a60d1c3-1f52-435c-bb16-cd48f82f9af3",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-ca.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/phishing-qcu-exemple-1.svg",
                       "alt": "Mail détaillé dans l’alternative textuelle",
-                      "alternativeText": "<h5>Boîte de réception</h5><p><strong>Date de reception&nbsp;:</strong> mar 9 fev. 2025 - 09h12</p><p><strong>Expéditeur&nbsp;:</strong>&nbsp;Crédit Agricole - hotlinesbo@resepku.online</p><p><strong>Objet du mail&nbsp;: </strong>Information&nbsp;: nous venons de désactiver votre carte de crédit</p><p><strong>Corps du mail&nbsp;:&nbsp;</strong><br><strong>Logo&nbsp;: </strong>Crédit Agricole-CA«&nbsp;Bonjour,<br>Nous venons de désactiver votre carte de crédit.<br>Nous avons détecté plusieurs IP connectons à votre compte CRÉDIT AGRICOLE banque crédit agricole et des erreurs de mots de passe avant<br>session.<br>Pour le réactiver, vous devez vous connecter sur le site de La<br>Banque Crédit Agricole et accéder à votre espace sécurisé via le lien ci-dessous&nbsp;:<br>La procédure est simple:</p><ul><li>Cliquez sur le lien pour ouvrir une fenêtre sécurisée.</li><li> Suivre les instructions.</li></ul><p>Lien cliquable&nbsp;: Accéder à votre compte»</p>",
+                      "alternativeText": "<h5>Boîte de réception</h5><p><strong>Date de reception&nbsp;:</strong> mar 9 fev. 2025 - 09h12</p><p><strong>Objet du mail&nbsp;: </strong>Information&nbsp;: nous venons de désactiver votre carte de crédit</p><p><strong>Expéditeur&nbsp;:</strong>&nbsp;Crédit Agricole - hotlinesbo@resepku.online</p><p><strong>Corps du mail&nbsp;:&nbsp;</strong><br><strong>Logo&nbsp;: </strong>Crédit Agricole-CA«&nbsp;Bonjour,<br>Nous venons de désactiver votre carte de crédit.<br>Nous avons détecté plusieurs IP connexions à votre compte et des erreurs de mots de passe avant session.<br>Pour la réactiver, vous devez vous connecter sur le site de La Banque Crédit Agricole et accéder à votre espace sécurisé via le lien ci-dessous&nbsp;:<br>La procédure est simple:</p><ul><li>Cliquez sur le lien pour ouvrir une fenêtre sécurisée.</li><li> Suivez les instructions.</li></ul><p>Lien cliquable&nbsp;: «&nbsp;Accéder à votre compte&nbsp;»</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -152,9 +152,9 @@
                     {
                       "id": "46c75561-e9b8-4aaa-84cb-212a128bf4cb",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-lidl.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/phishing-qcu-exemple-2.svg",
                       "alt": "Mail détaillé dans l’alternative textuelle",
-                      "alternativeText": "<h5>Boite de reception</h5><p><strong>Date de reception&nbsp;:</strong> mar 9 fev. 2025 - 09h12</p><p><strong>Objet du mail&nbsp;:&nbsp;</strong> [FELICITATIONS] Vous avez gagné un Monsieur Cuisine Boîte de réception</p><p><strong>Expediteur&nbsp;: </strong>LIDL-marie-tarte@unknow.po.org</p><p><strong>Corps du mail&nbsp;:</strong></p><p>Logo&nbsp;: LIDL</p><p>Félicitations ! Vous avez été choisi pour recevoir le tout nouveau Monsieur Cuisine Connect. Remplissez vite le formulaire pour le recevoir dès demain&nbsp;:<br>Bouton&nbsp;: CLIQUER ICI<br>Photographie d’un appareil electromenager Monsieur Cuisine.</p>",
+                      "alternativeText": "<h5>Boite de reception</h5><p><strong>Date de reception&nbsp;:</strong> mar 9 fev. 2025 - 09h12</p><p><strong>Objet du mail&nbsp;:&nbsp;</strong> [FELICITATIONS] Vous avez gagné un Monsieur Cuisine Boîte de réception</p><p><strong>Expediteur&nbsp;: </strong>Darty-marie-tarte@unknow.po.org</p><p><strong>Corps du mail&nbsp;:</strong></p><p>Logo&nbsp;: Darty</p><p>Félicitations ! Vous avez été choisi pour recevoir le tout nouveau Monsieur Cuisine Connect. Remplissez vite le formulaire pour le recevoir dès demain&nbsp;:<br>Bouton&nbsp;: CLIQUER ICI<br>Photographie d’un appareil électromenager Monsieur Cuisine.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -194,9 +194,9 @@
                     {
                       "id": "9c3c5320-4e60-477f-9bd5-d38c2adb47ac",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-c4-f.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/phishing-qcu-exemple-3.svg",
                       "alt": "SMS détaillé dans l’alternative textuelle",
-                      "alternativeText": "<p>reçu à&nbsp;8:30</p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;La C4F<br>Vous avez 300 euros d’aide disponible sur votre compte Caf. Pour les recevoir, remplissez le formulaire sur https://cutt.ly/sejiodFE et donnez nous votre RIB.&nbsp;»</p>",
+                      "alternativeText": "<p>reçu à&nbsp;8:30</p><p><strong>Expediteur&nbsp;: </strong>La C4F</p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;Vous avez 300 euros d’aide disponible sur votre compte Caf. Pour les recevoir, remplissez le formulaire sur https://cutt.ly/sejiodFE et donnez nous votre RIB.&nbsp;»</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -236,9 +236,9 @@
                     {
                       "id": "3021d1d6-b49f-45ec-8aa8-0d191fd8c602",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-top-chaussures.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/phishing-qcu-exemple-4.svg",
                       "alt": "SMS détaillé dans l’alternative textuelle",
-                      "alternativeText": "<p>reçu à&nbsp;8:30 </p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;Pour identifier votre achat de 120 EUR sur le site&nbsp;TopChaussures, veuillez saisir le code 445147.&nbsp;»</p>",
+                      "alternativeText": "<p>reçu à&nbsp;8:30 </p><p><strong>Expediteur&nbsp;: </strong>Banque</p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;Pour identifier votre achat de 120 EUR sur le site Intersport, veuillez saisir le code 445147.&nbsp;»</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -450,7 +450,7 @@
               "element": {
                 "id": "2d596aa9-c13a-4800-8378-f0257024e173",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/recap-cy-phishing-ind.png",
+                "url": "https://assets.pix.org/modules/CYPhishingInd/recap1.svg",
                 "alt": "infographie présentant les indices à repérer, détaillés dans l’alternative textuelle.",
                 "alternativeText": "<ul><li>Un sentiment d’urgence qui vous pousse à agir rapidement 🚨</li><li>Un expéditeur imité de façon imparfaite 👺</li><li>Un lien suspect qui est mal orthographié ou pas en lien avec l’expéditeur ou le sujet du mail 🔗</li><br></ul>",
                 "legend": "",
@@ -460,9 +460,13 @@
             {
               "type": "element",
               "element": {
-                "id": "72f816fc-c3dc-4dfb-9cd9-16f08a4d2a34",
-                "type": "text",
-                "content": "<h5>Pour vous protéger&nbsp;:</h5><ul>    <li><strong>Ne pas cliquer</strong> sur les liens</li>    <li><strong>Bloquer</strong> l’expéditeur</li></ul><h5>Pour protéger les autres&nbsp;:</h5><ul>    <li><strong>Ne pas transférer</strong> ce message</li>    <li>Marquer le message comme <strong>courrier indésirable</strong>.</li></ul>"
+                "id": "2dc3e18d-c1fe-42a8-b0b6-65e7ed1518af",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/CYPhishingInd/recap2.svg",
+                "alt": "infographie des bonnes pratiques, détaillées dans l’alternative textuelle.",
+                "alternativeText": "<h5>Pour vous protéger&nbsp;:</h5><ul>    <li><strong>Ne pas cliquer</strong> sur les liens</li>    <li><strong>Bloquer</strong> l’expéditeur</li></ul><h5>Pour protéger les autres&nbsp;:</h5><ul>    <li><strong>Ne pas transférer</strong> ce message</li>    <li>Marquer le message comme <strong>courrier indésirable</strong>.</li></ul>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
