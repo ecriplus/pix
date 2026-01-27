@@ -12,6 +12,7 @@ import {
 import { updateBadgeCriterion } from './handlers/badge-criteria';
 import { findPaginatedFilteredCampaignParticipations } from './handlers/campaign-participations';
 import { findPaginatedFilteredCertificationCenters } from './handlers/certification-centers';
+import { attachCombinedCourseBlueprintToOrganizations } from './handlers/combined-course-blueprint.js';
 import { findPaginatedAndFilteredSessions } from './handlers/find-paginated-and-filtered-sessions';
 import { findFrameworkAreas } from './handlers/frameworks';
 import { getPaginatedJuryCertificationSummariesBySessionId } from './handlers/get-jury-certification-summaries-by-session-id';
@@ -716,6 +717,10 @@ export default function routes() {
 
   this.get('/admin/combined-course-blueprints');
   this.post('/admin/combined-course-blueprints');
+  this.post(
+    '/admin/combined-course-blueprints/:combinedCourseBlueprintId/organizations',
+    attachCombinedCourseBlueprintToOrganizations,
+  );
 
   this.get('/admin/modules-metadata', () => {
     return {

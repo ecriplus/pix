@@ -32,7 +32,10 @@ export async function save({ combinedCourseBlueprint }) {
     .returning('*');
   await updateShares({ combinedCourseBlueprint, knexConn });
 
-  return new CombinedCourseBlueprint({ ...updatedValues, organizationIds: combinedCourseBlueprint.organizationIds });
+  return new CombinedCourseBlueprint({
+    ...updatedValues,
+    organizationIds: combinedCourseBlueprint.organizationIds,
+  });
 }
 
 async function updateShares({ combinedCourseBlueprint, knexConn }) {
@@ -46,8 +49,22 @@ async function updateShares({ combinedCourseBlueprint, knexConn }) {
     combinedCourseBlueprint.organizationIds,
   );
 
+  const organizationIdsToAdd = difference(
+    combinedCourseBlueprint.organizationIds,
+    currentCombinedCourseBlueprint.organizationIds,
+  );
+
   if (organizationIdsToRemove.length > 0) {
     await knexConn('combined_course_blueprint_shares').delete().whereIn('organizationId', organizationIdsToRemove);
+  }
+
+  if (organizationIdsToAdd.length > 0) {
+    for (const organizationId of organizationIdsToAdd) {
+      await knexConn('combined_course_blueprint_shares').insert({
+        organizationId,
+        combinedCourseBlueprintId: currentCombinedCourseBlueprint.id,
+      });
+    }
   }
 }
 

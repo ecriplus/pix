@@ -1,4 +1,5 @@
 import { usecases } from '../domain/usecases/index.js';
+import * as combinedCourseBlueprintOrganizationSerializer from '../infrastructure/serializers/combined-course-blueprint-organization-serializer.js';
 import * as combinedCourseBlueprintSerializer from '../infrastructure/serializers/combined-course-blueprint-serializer.js';
 
 export const findAll = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
@@ -23,4 +24,21 @@ export const detachOrganization = async (request, h) => {
     organizationId: request.params.organizationId,
   });
   return h.response().code(204);
+};
+
+export const attachOrganizations = async (
+  request,
+  h,
+  dependencies = { combinedCourseBlueprintOrganizationSerializer },
+) => {
+  const combinedCourseBlueprintId = request.params.blueprintId;
+  const results = await usecases.attachOrganizationsToCombinedCourseBlueprint({
+    combinedCourseBlueprintId,
+    organizationIds: request.payload['organization-ids'],
+  });
+  return h
+    .response(
+      dependencies.combinedCourseBlueprintOrganizationSerializer.serialize({ ...results, combinedCourseBlueprintId }),
+    )
+    .code(201);
 };

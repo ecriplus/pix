@@ -130,4 +130,50 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+  describe('POST /api/admin/combined-course-blueprints/:blueprintId/organizations', function () {
+    context('when user is admin ', function () {
+      it('should attach a combined course blueprint to one or several organizations', async function () {
+        // given
+        const adminUser = await insertUserWithRoleSuperAdmin();
+
+        const combinedCourseBlueprintId = databaseBuilder.factory.buildCombinedCourseBlueprint().id;
+        const alreadyAttachedOrganization = databaseBuilder.factory.buildOrganization();
+
+        databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+          combinedCourseBlueprintId,
+          organizationId: alreadyAttachedOrganization.id,
+        });
+
+        const organizationNotYetAttached = databaseBuilder.factory.buildOrganization();
+        const otherOrganizationNotYetAttached = databaseBuilder.factory.buildOrganization();
+
+        await databaseBuilder.commit();
+
+        const payload = {
+          'organization-ids': [
+            alreadyAttachedOrganization.id,
+            organizationNotYetAttached.id,
+            otherOrganizationNotYetAttached.id,
+          ],
+        };
+
+        const options = {
+          method: 'POST',
+          url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprintId}/organizations`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          payload,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(201);
+        expect(response.result.data.attributes).to.deep.equal({
+          'attached-ids': [organizationNotYetAttached.id, otherOrganizationNotYetAttached.id],
+          'duplicated-ids': [alreadyAttachedOrganization.id],
+        });
+      });
+    });
+  });
 });

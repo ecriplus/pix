@@ -257,4 +257,42 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
       expect(combinedCourseBlueprint.organizationIds).empty;
     });
   });
+  describe('#attachOrganizations', function () {
+    it('should add organization ids to the model instance', async function () {
+      //given
+      const combinedCourseBlueprint = new CombinedCourseBlueprint({
+        name: 'Blueprint1',
+        content: [],
+        description: '',
+        illustration: '',
+        organizationIds: [1],
+      });
+
+      //when
+      combinedCourseBlueprint.attachOrganizations({ organizationIds: [2, 3] });
+
+      //then
+      expect(combinedCourseBlueprint.organizationIds).to.deep.equal([1, 2, 3]);
+    });
+
+    it('should return attached organization ids and duplicated ids', async function () {
+      //given
+      const combinedCourseBlueprint = new CombinedCourseBlueprint({
+        name: 'Blueprint1',
+        content: [],
+        description: '',
+        illustration: '',
+        organizationIds: [1],
+      });
+
+      //when
+      const { attachedOrganizationIds, duplicatedOrganizationIds } = combinedCourseBlueprint.attachOrganizations({
+        organizationIds: [1, 2, 3],
+      });
+
+      //then
+      expect(attachedOrganizationIds).to.deep.equal([2, 3]);
+      expect(duplicatedOrganizationIds).to.deep.equal([1]);
+    });
+  });
 });

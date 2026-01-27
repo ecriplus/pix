@@ -2,7 +2,7 @@ import Organizations from 'pix-admin/components/combined-course-blueprints/organ
 
 <template>
   <Organizations
-    @blueprint={{@model.blueprint}}
+    @combinedCourseBlueprint={{@model.blueprint}}
     @organizations={{@model.organizations}}
     @administrationTeams={{@model.administrationTeams}}
     @triggerFiltering={{@controller.triggerFiltering}}
