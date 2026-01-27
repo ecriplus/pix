@@ -11,6 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import InElement from 'mon-pix/components/in-element';
+import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 import { categoriesKey } from '../../../models/module-issue-report';
 
@@ -83,7 +84,9 @@ export default class ModulixIssueReportModal extends Component {
     }
 
     if (this.args.sentStatus === 'error') {
-      return this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error');
+      const errorInfo = this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error.info');
+      const errorRetry = this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error.retry');
+      return `${errorInfo}<br>${errorRetry}`;
     }
 
     return this.intl.t('pages.modulix.issue-report.modal.confirmation-message.success');
@@ -180,7 +183,7 @@ export default class ModulixIssueReportModal extends Component {
               @withIcon={{true}}
               @class="{{if (eq this.notificationStatusType 'error') 'issue-report-modal__error-message'}}"
             >
-              {{this.statusMessage}}
+              {{htmlUnsafe this.statusMessage}}
             </PixNotificationAlert>
           {{/if}}
         </:content>

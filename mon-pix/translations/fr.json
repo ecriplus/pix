@@ -1694,7 +1694,10 @@
             }
           },
           "confirmation-message": {
-            "error": "Une erreur est survenue lors de l‘envoi du commentaire.",
+            "error": {
+              "info": "Une erreur est survenue lors de l‘envoi du commentaire.",
+              "retry": "Veuillez réessayer plus tard."
+            },
             "success": "Merci votre commentaire a été bien pris en compte."
           },
           "legend": "Informations requises pour envoyer un signalement",

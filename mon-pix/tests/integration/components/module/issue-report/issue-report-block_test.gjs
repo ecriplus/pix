@@ -160,7 +160,12 @@ module('Integration | Component | Module | Issue Report | Issue Report Block', f
           await click(screen.getByRole('button', { name: t('common.actions.send') }));
 
           // then
-          assert.dom(screen.getByText(t('pages.modulix.issue-report.modal.confirmation-message.error')));
+          const content = screen.getByText(
+            (content) =>
+              content.startsWith('Une erreur est survenue lors de l‘envoi du commentaire.') &&
+              content.endsWith('Veuillez réessayer plus tard.'),
+          );
+          assert.dom(content).exists();
           assert
             .dom(screen.getByRole('textbox', { name: t('pages.modulix.issue-report.modal.textarea-label') }))
             .hasValue(comment);
