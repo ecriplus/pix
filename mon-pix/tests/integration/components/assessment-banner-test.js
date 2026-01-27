@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
-import { waitForDialog } from '../../helpers/wait-for';
+import { waitForDialog, waitForDialogClose } from '../../helpers/wait-for';
 
 module('Integration | Component | assessment-banner', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -58,6 +58,7 @@ module('Integration | Component | assessment-banner', function (hooks) {
       await click(screen.getByText('Rester'));
 
       // then
+      await waitForDialogClose();
       assert.dom(screen.queryByRole('dialog', { name: "Besoin d'une pause ?" })).doesNotExist();
     });
 
