@@ -8,12 +8,12 @@ export default defineConfig({
     {
       name: 'recette certif - création utilisateur certifiable',
       testDir: 'tests/recette-certif',
-      testMatch: '**/create-certifiable-user.ts',
+      testMatch: '**/create-certifiable-user.spec.ts',
     },
     {
       name: 'recette certif - passage de certif PRO coeur',
       testDir: 'tests/recette-certif',
-      testMatch: '**/pro/**/*.ts',
+      testMatch: '**/pro/**/*.spec.ts',
       dependencies: ['recette certif - création utilisateur certifiable'],
     },
   ],
