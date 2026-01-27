@@ -7,6 +7,7 @@ const playwrightFolder = './node_modules/.playwright';
 
 export const isCI = Boolean(process.env.CI);
 if (!isCI) dotenv.config({ path: path.resolve(import.meta.dirname, '.env.e2e') });
+export const reuseExistingApps = Boolean(process.env.REUSE_EXISTING_APPS);
 
 // See https://playwright.dev/docs/test-configuration
 export default defineConfig({

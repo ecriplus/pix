@@ -1,6 +1,6 @@
 import { defineConfig } from '@playwright/test';
 
-import sharedConfig, { App, isCI, setupWebServer } from './playwright.config.shared.ts';
+import sharedConfig, { App, isCI, reuseExistingApps, setupWebServer } from './playwright.config.shared.ts';
 
 export default defineConfig({
   ...sharedConfig,
@@ -36,8 +36,8 @@ export default defineConfig({
     ? [setupWebServer(App.PIX_APP, true), setupWebServer(App.PIX_ORGA, true), setupWebServer(App.PIX_CERTIF, true)]
     : [
         setupWebServer(App.PIX_API, false),
-        setupWebServer(App.PIX_APP, false),
-        setupWebServer(App.PIX_ORGA, false),
-        setupWebServer(App.PIX_CERTIF, false),
+        setupWebServer(App.PIX_APP, reuseExistingApps),
+        setupWebServer(App.PIX_ORGA, reuseExistingApps),
+        setupWebServer(App.PIX_CERTIF, reuseExistingApps),
       ],
 });
