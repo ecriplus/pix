@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## [5.314.1](https://github.com/1024pix/pix/compare/v5.314.0...v5.314.1) (2026-01-27)
+
+### :bug: Correction
+
+- [#14849](https://github.com/1024pix/pix/pull/14849) MDX-170 Comment -> comment + « Faire le pont » 
+
+### :building_construction: Tech
+
+- [#14894](https://github.com/1024pix/pix/pull/14894) :recycle: Créé un index dans la table quests que s'il n'existe pas déjà 
+
+### :arrow_up: Montée de version
+
+- [#14886](https://github.com/1024pix/pix/pull/14886) Update dependency @1024pix/pix-ui to ^58.4.2 (admin) 
+- [#14887](https://github.com/1024pix/pix/pull/14887) Update dependency @1024pix/pix-ui to ^58.4.2 (mon-pix) 
+- [#14882](https://github.com/1024pix/pix/pull/14882) Update dependency @1024pix/pix-ui to v58 (junior) 
+- [#14883](https://github.com/1024pix/pix/pull/14883) Update dependency @1024pix/pix-ui to v58 (orga)
+
 # [5.314.0](https://github.com/1024pix/pix/compare/v5.313.0...v5.314.0) (2026-01-27)
 
 ### :rocket: Amélioration
