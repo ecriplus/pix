@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.314.0](https://github.com/1024pix/pix/compare/v5.313.0...v5.314.0) (2026-01-27)
+
+### :rocket: Amélioration
+
+- [#14852](https://github.com/1024pix/pix/pull/14852) Message d’erreur de validation spécifique pour certains embeds (PIX-21154) 
+- [#14877](https://github.com/1024pix/pix/pull/14877) Modifs de relecture édito finale sur le module Souris1 
+
+### :bug: Correction
+
+- [#14842](https://github.com/1024pix/pix/pull/14842) MDX-166 d'1m60 + d'1m57 + 'c' en gras 
+
+### :building_construction: Tech
+
+- [#14881](https://github.com/1024pix/pix/pull/14881) :card_file_box: Ajoute un index sur la colonne `rewardId` dans la table `quests` 
+- [#14879](https://github.com/1024pix/pix/pull/14879) Suppression du feature toggle isModuleSelectionForTrainingEnabled (PIX-20922)
+
 # [5.313.0](https://github.com/1024pix/pix/compare/v5.312.0...v5.313.0) (2026-01-27)
 
 ### :rocket: Amélioration
