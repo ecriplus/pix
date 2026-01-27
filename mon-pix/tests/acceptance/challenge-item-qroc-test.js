@@ -53,13 +53,33 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         // when
         const event = document.createEvent('Event');
         event.initEvent('message', true, true);
-        event.data = 'custom answer from embed';
+        event.data = { answer: 'custom answer from embed', validity: '', from: 'pix' };
         event.origin = 'https://epreuves.pix.fr';
         find('.embed__iframe').dispatchEvent(event);
 
         // then
         await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
         assert.strictEqual(currentURL(), `/assessments/${assessment.id}/challenges/2`);
+      });
+
+      test('should display custom alert box when user validates without respecting embed validation', async function (assert) {
+        // given
+        const event = document.createEvent('Event');
+        event.initEvent('message', true, true);
+        event.data = { answer: '', validity: 'C’est l’embed qui décide quand vous pouvez valider.', from: 'pix' };
+        event.origin = 'https://epreuves.pix.fr';
+        find('.embed__iframe').dispatchEvent(event);
+
+        // when
+        assert.dom('.challenge-response__alert').doesNotExist();
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
+
+        // then
+        assert.dom('.challenge-response__alert[role="alert"]').exists();
+        assert.strictEqual(
+          find('.challenge-response__alert').textContent.trim(),
+          'C’est l’embed qui décide quand vous pouvez valider.',
+        );
       });
     });
 
