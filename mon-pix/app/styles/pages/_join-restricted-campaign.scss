@@ -95,33 +95,17 @@
 }
 
 .join-error-modal {
-  position: absolute;
-  top: 230px;
-  max-width: 500px;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    height: 78px;
-    padding: 20px;
-    background-color: var(--pix-neutral-0);
-  }
 
   &__body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--pix-neutral-20);
   }
 
   &__footer {
     display: flex;
-    justify-content: center;
-    background-color: var(--pix-neutral-20);
-
-    > button {
-      margin: 0 8px;
-    }
+    gap: var(--pix-spacing-4x);
+    justify-content: flex-end;
   }
 }
 

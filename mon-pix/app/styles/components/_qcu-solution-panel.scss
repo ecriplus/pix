@@ -7,6 +7,8 @@
 @use '../globals/a11y' as *;
 
 .qcu-solution-panel {
+  margin-bottom: var(--pix-spacing-4x);
+
   a {
     color: var(--pix-primary-500);
     text-decoration: underline;

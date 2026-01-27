@@ -75,7 +75,7 @@ export default class QrocSolutionPanel extends Component {
 
   <template>
     {{#if this.hasCorrection}}
-      <div class="rounded-panel rounded-panel__row correction-qroc-box">
+      <div class="rounded-panel__row correction-qroc-box">
         {{#if @solution}}
           <div class="correction-qroc-box__answer">
             {{#if (eq @answer.challenge.format "paragraphe")}}

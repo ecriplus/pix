@@ -1,5 +1,9 @@
 @use 'pix-design-tokens/typography';
 
+.qrocm-solution-panel {
+  margin-bottom: var(--pix-spacing-4x);
+}
+
 .correction-qrocm__answer {
   &--paragraph {
     display: block;

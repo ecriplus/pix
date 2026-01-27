@@ -18,7 +18,7 @@ const CHALLENGE_OK_FLAG = 'ok';
 
 export default class QrocmDepSolutionPanel extends Component {
   <template>
-    <div class="qrocm-solution-panel qrocm-solution-panel--dep rounded-panel">
+    <div class="qrocm-solution-panel qrocm-solution-panel--dep">
       <div class="rounded-panel__row correction-qrocm__text">
         {{#each this.blocks as |block|}}
           {{#if block.text}}

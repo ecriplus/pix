@@ -120,12 +120,20 @@ export default class DeleteAccountSection extends Component {
         </:content>
 
         <:footer>
-          <PixButton @variant="secondary" @isBorderVisible={{true}} @triggerAction={{this.closeModal}}>
-            {{t "common.actions.cancel"}}
-          </PixButton>
-          <PixButton @variant="error" @triggerAction={{this.selfDeleteUserAccount}} @isLoading={{this.isLoading}}>{{t
-              "pages.user-account.delete-account.actions.delete"
-            }}</PixButton>
+          <ul class="delete-account-modal__footer">
+            <li>
+              <PixButton @variant="secondary" @isBorderVisible={{true}} @triggerAction={{this.closeModal}}>
+                {{t "common.actions.cancel"}}
+              </PixButton>
+            </li>
+            <li>
+              <PixButton
+                @variant="error"
+                @triggerAction={{this.selfDeleteUserAccount}}
+                @isLoading={{this.isLoading}}
+              >{{t "pages.user-account.delete-account.actions.delete"}}</PixButton>
+            </li>
+          </ul>
         </:footer>
       </PixModal>
     </section>

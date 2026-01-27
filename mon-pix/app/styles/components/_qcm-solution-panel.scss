@@ -1,6 +1,6 @@
 .qcm-panel {
   &__proposals {
-    margin: 0 0 15px;
+    margin-bottom: var(--pix-spacing-4x);
     font-size: 1rem;
 
     .rounded-panel__row label {

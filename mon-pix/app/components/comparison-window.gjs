@@ -44,7 +44,7 @@ export default class ComparisonWindow extends Component {
       <:content>
         <div class="comparison-window-content__body">
 
-          <div class="rounded-panel comparison-window-content-body__instruction">
+          <div class="comparison-window-content-body__instruction">
             <div class="rounded-panel__row">
               <MarkdownToHtmlUnsafe
                 @class="challenge-statement-instruction__text"

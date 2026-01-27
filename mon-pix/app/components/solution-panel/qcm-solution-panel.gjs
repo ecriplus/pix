@@ -11,7 +11,7 @@ import valueAsArrayOfBoolean from 'mon-pix/utils/value-as-array-of-boolean';
 
 export default class QcmSolutionPanel extends Component {
   <template>
-    <div class="qcm-solution-panel qcm-panel__proposals rounded-panel">
+    <div class="qcm-solution-panel qcm-panel__proposals">
       <div class="rounded-panel__row">
         {{#each this.labeledCheckboxes as |labeledCheckbox index|}}
           <p class="qcm-panel__proposal-item">

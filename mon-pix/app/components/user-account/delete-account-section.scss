@@ -23,15 +23,8 @@
   }
 
   .delete-account-modal {
-    width: 560px;
-    border-radius: var(--pix-spacing-2x);
-
     &__error {
       margin-top: var(--pix-spacing-4x);
-    }
-
-    .pix-modal__header {
-      align-items: center;
     }
 
     .pix-modal__content {
@@ -40,11 +33,10 @@
       gap: var(--pix-spacing-2x);
     }
 
-    .pix-modal__footer {
+    &__footer {
       display: flex;
-      gap: var(--pix-spacing-2x);
+      gap: var(--pix-spacing-4x);
       justify-content: end;
-      padding-bottom: var(--pix-spacing-4x);
     }
   }
 }
