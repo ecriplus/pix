@@ -151,33 +151,21 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
 
           {{#if this.form.type}}
-            {{#if this.featureToggles.featureToggles.isModuleSelectionForTrainingEnabled}}
-              {{#if (eq this.form.type "modulix")}}
-                <PixSelect
-                  @id="trainingModule"
-                  @placeholder="-- Sélectionnez un module --"
-                  @options={{this.formattedSortedModuleValues}}
-                  @value={{this.form.link}}
-                  @onChange={{fn this.updateSelect "link"}}
-                  @hideDefaultOption={{true}}
-                  @isSearchable={{true}}
-                  @searchLabel="Module à rechercher"
-                  required={{true}}
-                  aria-required={{true}}
-                >
-                  <:label>Module</:label>
-                </PixSelect>
-              {{else}}
-                <PixInput
-                  @id="trainingLink"
-                  required={{true}}
-                  aria-required={{true}}
-                  @value={{this.form.link}}
-                  {{on "change" (fn this.updateForm "link")}}
-                >
-                  <:label>Lien</:label>
-                </PixInput>
-              {{/if}}
+            {{#if (eq this.form.type "modulix")}}
+              <PixSelect
+                @id="trainingModule"
+                @placeholder="-- Sélectionnez un module --"
+                @options={{this.formattedSortedModuleValues}}
+                @value={{this.form.link}}
+                @onChange={{fn this.updateSelect "link"}}
+                @hideDefaultOption={{true}}
+                @isSearchable={{true}}
+                @searchLabel="Module à rechercher"
+                required={{true}}
+                aria-required={{true}}
+              >
+                <:label>Module</:label>
+              </PixSelect>
             {{else}}
               <PixInput
                 @id="trainingLink"

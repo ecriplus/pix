@@ -200,100 +200,65 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     });
   });
 
-  module('when isModuleSelectionForTrainingEnabled FT is enabled', function () {
-    module('when provided type is modulix', function () {
-      test('it should display the link selector', async function (assert) {
-        // given
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+  module('when provided type is modulix', function () {
+    test('it should display the link selector', async function (assert) {
+      // given
+      // when
+      const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
 
-        // when
-        const screen = await render(
-          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-        );
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Module Pix' }));
 
-        await click(screen.getByRole('button', { name: 'Format' }));
-        await screen.findByRole('listbox');
-        await click(screen.getByRole('option', { name: 'Module Pix' }));
-
-        // then
-        assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
-        assert.dom(screen.getByRole('button', { name: 'Module' })).exists();
-      });
-
-      module('when model is provided', function () {
-        test('it should display correct module on editing form', async function (assert) {
-          // given
-          const featureToggles = this.owner.lookup('service:featureToggles');
-          sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
-
-          const model = {
-            title: 'Un contenu formatif',
-            internalTitle: 'Mon titre interne',
-            link: '/modules/k2000tro/use-llm',
-            type: 'modulix',
-            duration: { days: 0, hours: 0, minutes: 0 },
-            locale: 'fr-fr',
-            editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
-            editorName: 'Pix',
-            isDisabled: false,
-          };
-
-          // when
-          const screen = await render(
-            <template>
-              <CreateOrUpdateTrainingForm @model={{model}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
-            </template>,
-          );
-
-          // then
-          const moduleButton = await screen.findByRole('button', { name: 'Module' });
-          assert.dom(within(moduleButton).getByText('Utiliser un LLM')).exists();
-        });
-      });
+      // then
+      assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
+      assert.dom(screen.getByRole('button', { name: 'Module' })).exists();
     });
 
-    module('when type provided is not modulix', function () {
-      test('it should display the link field', async function (assert) {
-        // given
-        const featureToggles = this.owner.lookup('service:featureToggles');
-        sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+    module('when model is provided', function () {
+      test('it should display correct module on editing form', async function (assert) {
+        // given & when
+        const model = {
+          title: 'Un contenu formatif',
+          internalTitle: 'Mon titre interne',
+          link: '/modules/k2000tro/use-llm',
+          type: 'modulix',
+          duration: { days: 0, hours: 0, minutes: 0 },
+          locale: 'fr-fr',
+          editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
+          editorName: 'Pix',
+          isDisabled: false,
+        };
 
         // when
         const screen = await render(
-          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+          <template>
+            <CreateOrUpdateTrainingForm @model={{model}} @onSubmit={{onSubmit}} @onCancel={{onCancel}} />
+          </template>,
         );
 
-        await click(screen.getByRole('button', { name: 'Format' }));
-        await screen.findByRole('listbox');
-        await click(screen.getByRole('option', { name: 'Webinaire' }));
-
         // then
-        assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
+        const moduleButton = await screen.findByRole('button', { name: 'Module' });
+        assert.dom(within(moduleButton).getByText('Utiliser un LLM')).exists();
       });
     });
   });
 
-  module('when isModuleSelectionForTrainingEnabled FT is disabled', function () {
-    module('when type is provided', function () {
-      test('it should display the link field', async function (assert) {
-        // given
-        // when
-        const screen = await render(
-          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-        );
+  module('when type provided is not modulix', function () {
+    test('it should display the link field', async function (assert) {
+      // given & when
+      const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
 
-        //then
-        assert.dom(screen.queryByRole('textbox', { name: 'Lien' })).doesNotExist();
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Webinaire' }));
 
-        // when
-        await click(screen.getByRole('button', { name: 'Format' }));
-        await screen.findByRole('listbox');
-        await click(screen.getByRole('option', { name: 'Module Pix' }));
-
-        // then
-        assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
-      });
+      // then
+      assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
     });
   });
 });
