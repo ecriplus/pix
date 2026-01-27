@@ -6,9 +6,7 @@ const COLUMN_NAME = 'rewardId';
  * @returns { Promise<void> }
  */
 const up = async function (knex) {
-  return knex.schema.table(TABLE_NAME, function (table) {
-    table.index(COLUMN_NAME);
-  });
+  return knex.raw('create index if not exists "quests_rewardid_index" on quests ("rewardId")');
 };
 
 /**
