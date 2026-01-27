@@ -1,0 +1,42 @@
+import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import t from 'ember-intl/helpers/t';
+<template>
+  <div tabindex='0' class='file-import-block'>
+    <PixIcon @name='upload' @ariaHidden={{true}} class='file-import-block__icon' />
+    <div class='file-import-section'>
+      <div>
+        <h3 class='import-download-section__title'>{{t
+            'pages.sessions.import.step-one.actions.session-import-upload.extra-information'
+          }}</h3>
+        <p>{{t 'pages.sessions.import.step-one.actions.session-import-upload.information'}}</p>
+
+        {{#if @file}}
+          <div class='file-import-section__filename' aria-label={{@filename}}>
+            {{@filename}}
+            <PixIconButton
+              @ariaLabel={{t 'pages.sessions.import.step-one.actions.cancel.label'}}
+              @iconName='cancel'
+              @plainIcon={{true}}
+              @triggerAction={{@removeImport}}
+              class='import-page-filename__cancel'
+            />
+          </div>
+        {{/if}}
+      </div>
+      <div class='file-import-section__button'>
+        <PixButtonUpload
+          @variant='secondary'
+          @isBorderVisible='{{true}}'
+          @id='file-upload'
+          @onChange={{@preImportSessions}}
+          aria-label={{t 'pages.sessions.import.step-one.actions.session-import-upload.extra-information'}}
+          accept='.csv'
+        >
+          {{@buttonLabel}}
+        </PixButtonUpload>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,37 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import t from 'ember-intl/helpers/t';
+<template>
+  <PixModal
+    @class='pix-modal-dialog'
+    @title={{@title}}
+    @onCloseButtonClick={{@closeConfirmationModal}}
+    @showModal={{@showModal}}
+  >
+    <:content>
+      <div class='app-modal-body__warning'>
+        <p>
+          {{yield to='description'}}
+        </p>
+      </div>
+    </:content>
+    <:footer>
+      <PixButton
+        data-test-id='finalize-session-modal__confirm-button'
+        @triggerAction={{@actionOnConfirmation}}
+        @variant='primary-bis'
+      >
+        {{@modalConfirmationButtonText}}
+      </PixButton>
+      <PixButton
+        data-test-id='finalize-session-modal__cancel-button'
+        @triggerAction={{@closeConfirmationModal}}
+        @variant='secondary'
+        @isBorderVisible={{true}}
+        aria-label={{t 'pages.session-supervising.candidate-in-list.resume-test-modal.cancel-label'}}
+      >
+        {{@modalCancelText}}
+      </PixButton>
+    </:footer>
+  </PixModal>
+</template>

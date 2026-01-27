@@ -1,0 +1,13 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import t from 'ember-intl/helpers/t';
+<template>
+  <div class='panel'>
+    <div class='certification-candidates-sco-actions'>
+      <img src='/images/adding_candidate.svg' alt role='none' />
+      <p>{{t 'pages.sco.enrol-candidates-in-session.certification-candidates-sco.information'}}</p>
+      <PixButtonLink @route='authenticated.sessions.add-student' @model={{@sessionId}}>
+        {{t 'pages.sco.enrol-candidates-in-session.certification-candidates-sco.actions.enrol-candidates'}}
+      </PixButtonLink>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,54 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
+import t from 'ember-intl/helpers/t';
+<template>
+  <fieldset class='non-blocking-technical-issue-certification-issue-report-fields'>
+    <div class='non-blocking-technical-issue-certification-issue-report-fields__radio-button__tooltip'>
+      <input
+        id='input-radio-for-category-technical-issue'
+        type='radio'
+        name='technical-issue'
+        checked={{@nonBlockingTechnicalIssueCategory.isChecked}}
+        {{on 'click' (fn @toggleOnCategory @nonBlockingTechnicalIssueCategory)}}
+      />
+      <label for='input-radio-for-category-technical-issue'>
+        <span>{{@nonBlockingTechnicalIssueCategory.categoryCode}}&nbsp;</span>
+        {{@nonBlockingTechnicalIssueCategory.categoryLabel}}
+      </label>
+      <PixTooltip @id='tooltip-technical-issue' @position='right' @isWide={{true}}>
+        <:triggerElement>
+          <PixIcon
+            @name='info'
+            @plainIcon={{true}}
+            @title={{t 'pages.session-finalization.add-issue-modal.errors.technical-issue'}}
+            tabindex='0'
+            aria-describedby='tooltip-technical-issue'
+          />
+        </:triggerElement>
+        <:tooltip>
+          <span>{{t 'pages.session-finalization.add-issue-modal.non-blocking-issues.technical-examples'}}</span>
+        </:tooltip>
+      </PixTooltip>
+    </div>
+    {{#if @nonBlockingTechnicalIssueCategory.isChecked}}
+      <PixNotificationAlert @type='info' @withIcon={{true}}>
+        {{t 'pages.session-finalization.add-issue-modal.non-blocking-issues.technical-information'}}
+      </PixNotificationAlert>
+      <div class='non-blocking-technical-issue-certification-issue-report-fields__details'>
+        <PixTextarea
+          id='text-area-for-category-technical-issue'
+          @value={{@nonBlockingTechnicalIssueCategory.description}}
+          @maxlength={{@maxlength}}
+          required='true'
+          {{on 'change' @updateNonBlockingTechnicalIssueCategoryDescription}}
+        >
+          <:label>{{t 'pages.session-finalization.add-issue-modal.actions.describe'}}</:label>
+        </PixTextarea>
+      </div>
+    {{/if}}
+  </fieldset>
+</template>

@@ -1,0 +1,78 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { fn } from '@ember/helper';
+import t from 'ember-intl/helpers/t';
+import FileImportBlock from 'pix-certif/components/import/file-import-block';
+<template>
+  <section class='import-page__section--download panel'>
+    <div class='import-page__title'>
+      <PixIcon @name='upload' @ariaHidden={{true}} />
+      <h2>{{t 'pages.sessions.import.step-one.title'}}</h2>
+    </div>
+    <div class='import-page__section--download__instruction'>
+      {{t 'pages.sessions.import.step-one.instructions.creation.list'}}
+      <ul aria-label={{t 'pages.sessions.import.step-one.instructions.creation.list'}}>
+        <li>{{t 'pages.sessions.import.step-one.instructions.creation.list-with-candidates' htmlSafe=true}}</li>
+        <li>{{t 'pages.sessions.import.step-one.instructions.creation.list-without-candidates' htmlSafe=true}}</li>
+      </ul>
+    </div>
+    <div class='import-page__section--download__instruction'>
+      {{t 'pages.sessions.import.step-one.instructions.edition.title'}}
+      <ul aria-label={{t 'pages.sessions.import.step-one.instructions.edition.title'}}>
+        <li>{{t 'pages.sessions.import.step-one.instructions.edition.replace' htmlSafe=true}}</li>
+        <li>{{t 'pages.sessions.import.step-one.instructions.edition.subscription' htmlSafe=true}}</li>
+      </ul>
+      <PixNotificationAlert @type='warning' @withIcon={{true}}>
+        {{t 'pages.sessions.import.step-one.instructions.edition.warning'}}
+      </PixNotificationAlert>
+    </div>
+    <div class='import-download-block'>
+      <PixIcon @name='download' @ariaHidden={{true}} class='import-download-block__icon' />
+      <div class='import-download-section'>
+        <div>
+          <h3 class='import-download-section__title'>{{t
+              'pages.sessions.import.step-one.actions.session-import-template.extra-information'
+            }}</h3>
+          <p>{{t 'pages.sessions.import.step-one.actions.session-import-template.information' htmlSafe=true}}</p>
+        </div>
+        <div class='import-download-section__button'>
+          <PixButton
+            @variant='secondary'
+            @isBorderVisible='{{true}}'
+            aria-label={{t 'pages.sessions.import.step-one.actions.session-import-template.extra-information'}}
+            @triggerAction={{@downloadSessionImportTemplate}}
+          >
+            {{t 'pages.sessions.import.step-one.actions.session-import-template.label'}}
+          </PixButton>
+        </div>
+      </div>
+    </div>
+
+    <FileImportBlock
+      @file={{@file}}
+      @filename={{@filename}}
+      @removeImport={{@removeImport}}
+      @preImportSessions={{@preImportSessions}}
+      @buttonLabel={{t 'pages.sessions.import.step-one.actions.session-import-upload.label'}}
+    />
+
+    {{#if @importErrorMessage}}
+      <PixNotificationAlert @type='error' @withIcon={{true}}>{{@importErrorMessage}}</PixNotificationAlert>
+    {{/if}}
+
+    <ul class='import-page__section--link-buttons'>
+      <li>
+        <PixButton @triggerAction={{fn @validateSessions true}} @isDisabled={{@isImportDisabled}}>
+          {{t 'common.actions.continue'}}
+        </PixButton>
+      </li>
+      <li>
+        <PixButtonLink @route='authenticated.sessions' @variant='secondary' @isBorderVisible={{true}}>
+          {{t 'common.actions.cancel'}}
+        </PixButtonLink>
+      </li>
+    </ul>
+  </section>
+</template>
