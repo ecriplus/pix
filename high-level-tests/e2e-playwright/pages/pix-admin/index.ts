@@ -3,3 +3,7 @@ export * from './CertificationSessionPage.ts';
 export * from './CertificationSessionsMainPage.ts';
 export * from './HomePage.ts';
 export * from './LoginPage.ts';
+export * from './OrganizationDetailsPage.ts';
+export * from './OrganizationsListPage.ts';
+export * from './UserDetailsPage.ts';
+export * from './UsersListPage.ts';

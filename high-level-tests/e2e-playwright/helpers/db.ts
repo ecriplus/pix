@@ -8,6 +8,7 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../api/src/identity-access-ma
 import { AuthenticationMethod } from '../../../api/src/identity-access-management/domain/models/AuthenticationMethod.js';
 import {
   PIX_ADMIN_CERTIF_DATA,
+  PIX_ADMIN_SUPPORT_DATA,
   PIX_APP_USER_DATA,
   PIX_CERTIF_PRO_DATA,
   PIX_ORGA_ADMIN_DATA,
@@ -20,7 +21,7 @@ export async function buildStaticData() {
   const hasDataAlreadyBeenBuilt = await knex('users').select({ id: PIX_APP_USER_DATA.id }).first();
   if (!hasDataAlreadyBeenBuilt) {
     await buildAuthenticatedUsers();
-    await buildTargetProfile();
+    await buildTargetProfiles();
     await buildBaseDataForCertification();
   }
 }
@@ -248,9 +249,16 @@ async function buildAuthenticatedUsers() {
     PIX_ADMIN_CERTIF_DATA.rawPassword,
     PIX_ADMIN_CERTIF_DATA.role,
   );
+  await buildFreshPixAdminUser(
+    PIX_ADMIN_SUPPORT_DATA.firstName,
+    PIX_ADMIN_SUPPORT_DATA.lastName,
+    PIX_ADMIN_SUPPORT_DATA.email,
+    PIX_ADMIN_SUPPORT_DATA.rawPassword,
+    PIX_ADMIN_SUPPORT_DATA.role,
+  );
 }
 
-async function buildTargetProfile() {
+async function buildTargetProfiles() {
   const tubeDTOs: { competenceId: string; tubeId: string }[] = await knex('learningcontent.tubes')
     .distinct()
     .select({
@@ -276,13 +284,17 @@ async function buildTargetProfile() {
     tubeDTOs,
     (tubeDTO: { competenceId: string }) => tubeDTO.competenceId,
   ) as Record<string, { competenceId: string; tubeId: string }[]>;
-  const tubeIds = [];
+  const tubesForBigTargetProfileIds = [];
   for (const tubesForCompetence of Object.values(tubesByCompetenceId)) {
     if (!tubesForCompetence) continue;
-    tubeIds.push(...tubesForCompetence.slice(0, 2).map((tubeDTO) => tubeDTO.tubeId));
+    tubesForBigTargetProfileIds.push(...tubesForCompetence.slice(0, 2).map((tubeDTO) => tubeDTO.tubeId));
   }
-  const targetProfileId = await createTargetProfileInDB('PC pour Playwright');
-  await createTargetProfileTubesInDB(targetProfileId, 3, tubeIds);
+  const bigTargetProfileId = await createTargetProfileInDB('PC pour Playwright');
+  await createTargetProfileTubesInDB(bigTargetProfileId, 3, tubesForBigTargetProfileIds);
+
+  const tubeForSmallTargetProfileId = [tubesForBigTargetProfileIds[0]];
+  const smallTargetProfileId = await createTargetProfileInDB('petit Profile Cible');
+  await createTargetProfileTubesInDB(smallTargetProfileId, 4, tubeForSmallTargetProfileId);
 }
 
 async function buildBaseDataForCertification() {
