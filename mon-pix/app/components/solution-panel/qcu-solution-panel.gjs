@@ -67,6 +67,7 @@ export default class QcuSolutionPanel extends Component {
             'pages.comparison-window.results.feedback.wrong'
             htmlSafe=true
           }} {{this.solutionAsText}}"
+          @isMarkdown={{true}}
         />
       {{/if}}
     </div>
