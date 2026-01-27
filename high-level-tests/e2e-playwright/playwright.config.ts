@@ -1,14 +1,7 @@
-import path from 'node:path';
-
 import { defineConfig } from '@playwright/test';
-import dotenv from 'dotenv';
 
-import sharedConfig from './playwright.config.shared.ts';
+import sharedConfig, { App, isCI, setupWebServer } from './playwright.config.shared.ts';
 
-const isCI = Boolean(process.env.CI);
-if (!isCI) dotenv.config({ path: path.resolve(import.meta.dirname, '.env.e2e') });
-
-// See https://playwright.dev/docs/test-configuration
 export default defineConfig({
   ...sharedConfig,
   projects: [
@@ -38,4 +31,13 @@ export default defineConfig({
       testMatch: '**/*.ts',
     },
   ],
+
+  webServer: isCI
+    ? [setupWebServer(App.PIX_APP, true), setupWebServer(App.PIX_ORGA, true), setupWebServer(App.PIX_CERTIF, true)]
+    : [
+        setupWebServer(App.PIX_API, false),
+        setupWebServer(App.PIX_APP, false),
+        setupWebServer(App.PIX_ORGA, false),
+        setupWebServer(App.PIX_CERTIF, false),
+      ],
 });

@@ -1,12 +1,6 @@
-import path from 'node:path';
-
 import { defineConfig } from '@playwright/test';
-import dotenv from 'dotenv';
 
-import sharedConfig from './playwright.config.shared.ts';
-
-const isCI = Boolean(process.env.CI);
-if (!isCI) dotenv.config({ path: path.resolve(import.meta.dirname, '.env.e2e') });
+import sharedConfig, { App, isCI, setupWebServer } from './playwright.config.shared.ts';
 
 export default defineConfig({
   ...sharedConfig,
@@ -23,28 +17,19 @@ export default defineConfig({
       dependencies: ['recette certif - création utilisateur certifiable'],
     },
   ],
+
   webServer: isCI
     ? [
-        ...(sharedConfig.webServer as []),
-        {
-          command: 'while true; do echo "Wait for PixAdmin to start"; sleep 300; done',
-          url: process.env.PIX_ADMIN_URL,
-          reuseExistingServer: true,
-        },
+        setupWebServer(App.PIX_APP, true),
+        setupWebServer(App.PIX_ORGA, true),
+        setupWebServer(App.PIX_CERTIF, true),
+        setupWebServer(App.PIX_ADMIN, true),
       ]
     : [
-        ...(sharedConfig.webServer as []),
-        {
-          cwd: '../../admin',
-          timeout: 180 * 1000,
-          command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
-          url: process.env.PIX_ADMIN_URL,
-          reuseExistingServer: false,
-          stdout: 'ignore',
-          stderr: 'pipe',
-          env: {
-            DEFAULT_LOCALE: 'fr',
-          },
-        },
+        setupWebServer(App.PIX_API, false),
+        setupWebServer(App.PIX_APP, false),
+        setupWebServer(App.PIX_ORGA, false),
+        setupWebServer(App.PIX_CERTIF, false),
+        setupWebServer(App.PIX_ADMIN, false),
       ],
 });
