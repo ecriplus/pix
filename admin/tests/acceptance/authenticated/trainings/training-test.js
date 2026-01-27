@@ -76,51 +76,44 @@ module('Acceptance | Trainings | Training', function (hooks) {
         assert.dom(screen.getByRole('link', { name: 'Contenus formatifs' })).hasClass('active');
       });
 
-      module('when isModuleSelectionForTrainingEnabled FT is enabled', function () {
-        module('when type provided is modulix', function () {
-          test('should be redirected to training detail page after training creation', async function (assert) {
-            //given
-            const featureToggles = this.owner.lookup('service:featureToggles');
-            sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
-            const domainService = this.owner.lookup('service:current-domain');
-            sinon.stub(domainService, 'getExtension').returns('fr');
+      module('when type provided is modulix', function () {
+        test('should be redirected to training detail page after training creation', async function (assert) {
+          //given
+          const domainService = this.owner.lookup('service:current-domain');
+          sinon.stub(domainService, 'getExtension').returns('fr');
 
-            const screen = await visit(`/trainings/list`);
-            await clickByName('Nouveau contenu formatif');
-            await _fillTrainingForm({ screen, type: 'Module Pix' });
+          const screen = await visit(`/trainings/list`);
+          await clickByName('Nouveau contenu formatif');
+          await _fillTrainingForm({ screen, type: 'Module Pix' });
 
-            // when
-            await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
+          // when
+          await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
 
-            // then
-            assert.strictEqual(currentURL(), `/trainings/3/triggers`);
-            assert
-              .dom(
-                screen.getByRole('link', {
-                  name: 'https://app.pix.fr/modules/6a68bf32/bac-a-sable (nouvelle fenêtre)',
-                }),
-              )
-              .exists();
-          });
+          // then
+          assert.strictEqual(currentURL(), `/trainings/3/triggers`);
+          assert
+            .dom(
+              screen.getByRole('link', {
+                name: 'https://app.pix.fr/modules/6a68bf32/bac-a-sable (nouvelle fenêtre)',
+              }),
+            )
+            .exists();
         });
+      });
 
-        module('when type provided is not modulix', function () {
-          test('should be redirected to training detail page after training creation', async function (assert) {
-            //given
-            const featureToggles = this.owner.lookup('service:featureToggles');
-            sinon.stub(featureToggles, 'featureToggles').value({ isModuleSelectionForTrainingEnabled: true });
+      module('when type provided is not modulix', function () {
+        test('should be redirected to training detail page after training creation', async function (assert) {
+          //given
+          await visit(`/trainings/list`);
+          await clickByName('Nouveau contenu formatif');
 
-            await visit(`/trainings/list`);
-            await clickByName('Nouveau contenu formatif');
+          await _fillTrainingForm({ screen, type: 'Webinaire' });
 
-            await _fillTrainingForm({ screen, type: 'Webinaire' });
+          // when
+          await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
 
-            // when
-            await click(screen.getByRole('button', { name: 'Créer le contenu formatif' }));
-
-            // then
-            assert.strictEqual(currentURL(), `/trainings/3/triggers`);
-          });
+          // then
+          assert.strictEqual(currentURL(), `/trainings/3/triggers`);
         });
       });
 
