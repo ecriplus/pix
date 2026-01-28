@@ -47,7 +47,7 @@ export const test = sharedTest.extend<
 >({
   testRef: ['', { option: true }],
   rightWrongAnswersSequence: [[], { option: true }],
-  candidateData: [{} as never, { option: true }],
+  candidateData: [{} as z.infer<typeof CandidateSchema>, { option: true }],
   preparedCertificationTest: async (
     { page: pixAppPage, pixCertifProContext, snapshotHandler, testRef, rightWrongAnswersSequence, candidateData },
     use,
