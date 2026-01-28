@@ -92,6 +92,12 @@ export default class OrganizationCreationForm extends Component {
     this.form = { ...this.form, [key]: value };
   };
 
+  focusOnFirstFieldInError = () => {
+    const fieldsInError = Object.keys(this.validator.errors);
+    const firstHtmlElementInError = document.getElementById(fieldsInError[0]);
+    firstHtmlElementInError.focus();
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     const isFormValid = this.validator.validate(this.form);
@@ -99,6 +105,7 @@ export default class OrganizationCreationForm extends Component {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('components.organizations.creation.error-messages.error-toast'),
       });
+      this.focusOnFirstFieldInError();
       return;
     }
     this.args.onSubmit(this.form);
