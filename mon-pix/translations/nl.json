@@ -1686,7 +1686,10 @@
             }
           },
           "confirmation-message": {
-            "error": "Er is een fout opgetreden bij het verzenden van de opmerking.",
+            "error": {
+              "info": "Er is een fout opgetreden bij het verzenden van de opmerking.",
+              "retry": "Probeer het later nog eens."
+            },
             "success": "Bedankt, uw opmerking is genoteerd."
           },
           "legend": "Informatie die nodig is om een melding te versturen",

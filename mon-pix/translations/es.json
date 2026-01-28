@@ -1682,7 +1682,10 @@
             }
           },
           "confirmation-message": {
-            "error": "Se ha producido un error al enviar el comentario.",
+            "error": {
+              "info": "Se ha producido un error al enviar el comentario.",
+              "retry": "Vuelva a intentarlo más tarde."
+            },
             "success": "Gracias, hemos tomado nota de su comentario."
           },
           "legend": "Información necesaria para enviar una denuncia",

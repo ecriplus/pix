@@ -1686,7 +1686,10 @@
             }
           },
           "confirmation-message": {
-            "error": "An error occurred when sending the comment.",
+            "error": {
+              "info": "An error occurred when sending the comment.",
+              "retry": "Please retry later."
+            },
             "success": "Thank you for your comment."
           },
           "legend": "Information required to send a report",

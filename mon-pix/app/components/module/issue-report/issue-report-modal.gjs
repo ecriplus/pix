@@ -9,7 +9,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 import InElement from 'mon-pix/components/in-element';
+import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 import { categoriesKey } from '../../../models/module-issue-report';
 
@@ -76,13 +78,26 @@ export default class ModulixIssueReportModal extends Component {
     }));
   }
 
-  get sentStatusMessage() {
+  get statusMessage() {
     if (!this.args.sentStatus) {
-      return '';
+      return this.errorMessage ?? '';
     }
-    return this.args.sentStatus === 'success'
-      ? this.intl.t('pages.modulix.issue-report.modal.confirmation-message.success')
-      : this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error');
+
+    if (this.args.sentStatus === 'error') {
+      const errorInfo = this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error.info');
+      const errorRetry = this.intl.t('pages.modulix.issue-report.modal.confirmation-message.error.retry');
+      return `${errorInfo}<br>${errorRetry}`;
+    }
+
+    return this.intl.t('pages.modulix.issue-report.modal.confirmation-message.success');
+  }
+
+  get notificationStatusType() {
+    if (this.errorMessage || this.args.sentStatus === 'error') {
+      return 'error';
+    }
+
+    return 'success';
   }
 
   @action
@@ -101,13 +116,15 @@ export default class ModulixIssueReportModal extends Component {
   }
 
   @action
-  sendReport() {
+  async sendReport() {
     if (!this.comment) {
       this.errorMessage = this.intl.t('pages.modulix.issue-report.error-messages.missing-comment');
       return;
     }
-    this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
-    this.resetForm();
+    await this.args.onSendReport({ categoryKey: this.selectedCategory, comment: this.comment });
+    if (this.args.sentStatus === 'success') {
+      this.resetForm();
+    }
   }
 
   @action
@@ -116,7 +133,8 @@ export default class ModulixIssueReportModal extends Component {
     if (moduleIssueReportForm) {
       moduleIssueReportForm.reset();
       this.selectedCategory = this.categories[0].value;
-      this.comment = null;
+      this.comment = '';
+      this.errorMessage = null;
     }
   }
 
@@ -129,15 +147,10 @@ export default class ModulixIssueReportModal extends Component {
         @showModal={{@showModal}}
       >
         <:content>
-          {{#if @sentStatus}}
-            <PixNotificationAlert @type={{@sentStatus}} @withIcon={{true}}>
-              {{this.sentStatusMessage}}
-            </PixNotificationAlert>
-          {{else}}
+          {{#unless (eq @sentStatus "success")}}
             <p class="issue-report-modal__mandatory">
               {{t "common.form.mandatory-all-fields"}}
             </p>
-
             <form class="issue-report-modal-form" id="module-issue-report-form">
               <fieldset class="issue-report-modal-form__fieldset">
                 <legend class="sr-only">{{t "pages.modulix.issue-report.modal.legend"}}</legend>
@@ -163,16 +176,19 @@ export default class ModulixIssueReportModal extends Component {
                 </PixTextarea>
               </fieldset>
             </form>
-
-            {{#if this.errorMessage}}
-              <PixNotificationAlert @type="error" class="issue-report-modal__error-message">
-                {{this.errorMessage}}
-              </PixNotificationAlert>
-            {{/if}}
+          {{/unless}}
+          {{#if this.statusMessage}}
+            <PixNotificationAlert
+              @type={{this.notificationStatusType}}
+              @withIcon={{true}}
+              @class="{{if (eq this.notificationStatusType 'error') 'issue-report-modal__error-message'}}"
+            >
+              {{htmlUnsafe this.statusMessage}}
+            </PixNotificationAlert>
           {{/if}}
         </:content>
         <:footer>
-          {{#if @sentStatus}}
+          {{#if (eq @sentStatus "success")}}
             <div class="issue-report-modal-form__action-buttons">
               <PixButton @triggerAction={{this.hideModal}}>{{t "common.actions.close"}}</PixButton>
             </div>
