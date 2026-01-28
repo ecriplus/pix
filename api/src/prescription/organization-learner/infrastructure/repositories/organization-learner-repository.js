@@ -331,25 +331,6 @@ const findByOrganizationIdAndBirthdate = async function ({ organizationId, birth
   );
 };
 
-const dissociateAllStudentsByUserId = async function ({ userId }) {
-  const knexConn = DomainTransaction.getConnection();
-  await _queryBuilderDissociation(knexConn)
-    .where({ userId })
-    .whereIn(
-      'organization-learners.organizationId',
-      knex.select('id').from('organizations').where({ isManagingStudents: true }),
-    );
-};
-
-function _queryBuilderDissociation(knexConn) {
-  return knexConn('organization-learners').update({
-    userId: null,
-    certifiableAt: null,
-    isCertifiable: null,
-    updatedAt: new Date(),
-  });
-}
-
 const getLatestOrganizationLearner = async function ({ nationalStudentId, birthdate }) {
   const organizationLearner = await knex
     .where({ nationalStudentId, birthdate })
@@ -522,7 +503,6 @@ const findAllLearnerWithAtLeastOneParticipationByOrganizationIds = async functio
 
 export {
   countByOrganizationsWhichNeedToComputeCertificability,
-  dissociateAllStudentsByUserId,
   findAllLearnerWithAtLeastOneParticipationByOrganizationId,
   findAllLearnerWithAtLeastOneParticipationByOrganizationIds,
   findByIds,

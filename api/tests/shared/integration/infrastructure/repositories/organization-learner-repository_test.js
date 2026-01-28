@@ -6,7 +6,7 @@ import * as organizationLearnerRepository from '../../../../../src/prescription/
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repository | organization-learner-repository', function () {
   describe('#findByIds', function () {
@@ -607,94 +607,6 @@ describe('Integration | Infrastructure | Repository | organization-learner-repos
 
       // then
       expect(result.length).to.be.equal(0);
-    });
-  });
-
-  context('Organizationlearners to dissocate', function () {
-    let clock;
-
-    beforeEach(async function () {
-      clock = sinon.useFakeTimers({
-        now: new Date('2023-10-12'),
-        toFake: ['Date'],
-      });
-    });
-
-    afterEach(async function () {
-      clock.restore();
-    });
-
-    describe('#dissociateAllStudentsByUserId', function () {
-      it('should delete association between user and organization learner in a managing student organization', async function () {
-        // given
-        const notManagingStudentOrganization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
-        const managingStudentOrganization = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
-        const otherManagingStudentOrganization = databaseBuilder.factory.buildOrganization({
-          isManagingStudents: true,
-        });
-
-        const otherUser = databaseBuilder.factory.buildUser();
-        const userIdToDissociate = databaseBuilder.factory.buildUser().id;
-
-        const initialDate = new Date('2023-01-01');
-
-        const otherOrganizationLearnerToNotDissociate = databaseBuilder.factory.buildOrganizationLearner({
-          userId: otherUser.id,
-          organizationId: managingStudentOrganization.id,
-          updatedAt: initialDate,
-        });
-        const organizationLearnerToNotDissociate = databaseBuilder.factory.buildOrganizationLearner({
-          userId: userIdToDissociate,
-          organizationId: notManagingStudentOrganization.id,
-          updatedAt: initialDate,
-        });
-        const firstOrganizationLearnerToDissociate = databaseBuilder.factory.buildOrganizationLearner({
-          userId: userIdToDissociate,
-          organizationId: managingStudentOrganization.id,
-          updatedAt: initialDate,
-        });
-        const secondOrganizationLearnerToDissociate = databaseBuilder.factory.buildOrganizationLearner({
-          userId: userIdToDissociate,
-          organizationId: otherManagingStudentOrganization.id,
-          updatedAt: initialDate,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        await organizationLearnerRepository.dissociateAllStudentsByUserId({ userId: userIdToDissociate });
-
-        // then
-        const allDissociatedOrganizationLearners = await knex('organization-learners').whereNull('userId');
-        const dissociatedUserIds = [];
-        const dissociatedUpdatedAt = [];
-
-        allDissociatedOrganizationLearners.forEach((organizationLearner) => {
-          dissociatedUserIds.push(organizationLearner.id);
-          dissociatedUpdatedAt.push(organizationLearner.updatedAt);
-        });
-
-        expect(allDissociatedOrganizationLearners.length).to.be.equal(2);
-        expect(dissociatedUserIds).to.be.members([
-          firstOrganizationLearnerToDissociate.id,
-          secondOrganizationLearnerToDissociate.id,
-        ]);
-        expect(dissociatedUpdatedAt).to.be.deep.members([new Date('2023-10-12'), new Date('2023-10-12')]);
-
-        const allNonDissociatedOrganizationLearners = await knex('organization-learners').whereNotNull('userId');
-        const nonDissociatedUserIds = [];
-        const nonDissociatedUpdatedAt = [];
-
-        allNonDissociatedOrganizationLearners.forEach((organizationLearner) => {
-          nonDissociatedUserIds.push(organizationLearner.id);
-          nonDissociatedUpdatedAt.push(organizationLearner.updatedAt);
-        });
-        expect(allNonDissociatedOrganizationLearners.length).to.be.equal(2);
-        expect(nonDissociatedUserIds).to.be.members([
-          otherOrganizationLearnerToNotDissociate.id,
-          organizationLearnerToNotDissociate.id,
-        ]);
-        expect(nonDissociatedUpdatedAt).to.be.deep.members([initialDate, initialDate]);
-      });
     });
   });
 
