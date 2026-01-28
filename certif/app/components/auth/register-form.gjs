@@ -49,92 +49,6 @@ class SignupFormValidation {
 }
 
 export default class RegisterForm extends Component {
-  <template>
-    <form class='register-form' {{on 'submit' this.register}}>
-      <p class='register-form__information'>{{t 'common.form-errors.mandatory-all-fields'}}</p>
-
-      <PixInput
-        @id='register-firstName'
-        name='firstName'
-        {{on 'change' this.validateFirstName}}
-        required={{true}}
-        aria-required={{true}}
-        autocomplete='given-name'
-        @validationStatus={{this.validation.firstName.status}}
-        @errorMessage={{this.validation.firstName.message}}
-      >
-        <:label>{{t 'common.labels.candidate.firstname'}}</:label>
-      </PixInput>
-
-      <PixInput
-        @id='register-lastName'
-        name='lastName'
-        {{on 'change' this.validateLastName}}
-        required={{true}}
-        aria-required={{true}}
-        autocomplete='family-name'
-        @validationStatus={{this.validation.lastName.status}}
-        @errorMessage={{this.validation.lastName.message}}
-      >
-        <:label>{{t 'common.labels.candidate.lastname'}}</:label>
-      </PixInput>
-
-      <PixInput
-        @id='register-email'
-        name='email'
-        type='email'
-        {{on 'change' this.validateEmail}}
-        required={{true}}
-        aria-required={{true}}
-        autocomplete='email'
-        @validationStatus={{this.validation.email.status}}
-        @errorMessage={{this.validation.email.message}}
-      >
-        <:label>{{t 'common.forms.login.email'}}</:label>
-      </PixInput>
-
-      <PixInputPassword
-        @id='register-password'
-        name='password'
-        autocomplete='current-password'
-        required={{true}}
-        aria-required={{true}}
-        {{on 'change' this.validatePassword}}
-        @validationStatus={{this.validation.password.status}}
-        @errorMessage={{this.validation.password.message}}
-      >
-        <:label>{{t 'common.forms.login.password'}}</:label>
-      </PixInputPassword>
-
-      <PixCheckbox @size='small' required={{true}} aria-required={{true}} {{on 'click' this.validateCgu}}>
-        <:label>
-          <p class='register-form__cgu-label'>
-            {{t 'pages.login-or-register.register-form.fields.cgu.accept'}}
-            <a href={{this.cguUrl}} class='link' target='_blank' rel='noopener noreferrer'>
-              {{t 'pages.login-or-register.register-form.fields.cgu.terms-of-use'}}
-            </a>
-            {{t 'pages.login-or-register.register-form.fields.cgu.and'}}
-            <a href={{this.dataProtectionPolicyUrl}} class='link' target='_blank' rel='noopener noreferrer'>
-              {{t 'pages.login-or-register.register-form.fields.cgu.data-protection-policy'}}
-            </a>
-          </p>
-        </:label>
-      </PixCheckbox>
-      {{#if this.cguValidationMessage}}
-        <p class='register-form__cgu-error' role='alert'>{{this.cguValidationMessage}}</p>
-      {{/if}}
-
-      {{#if this.errorMessage}}
-        <PixNotificationAlert @type='error'>
-          {{this.errorMessage}}
-        </PixNotificationAlert>
-      {{/if}}
-
-      <PixButton @type='submit' @isLoading={{this.isLoading}}>
-        {{t 'pages.login-or-register.register-form.actions.login-button'}}
-      </PixButton>
-    </form>
-  </template>
   @service intl;
   @service locale;
   @service session;
@@ -300,4 +214,91 @@ export default class RegisterForm extends Component {
   _authenticate(email, password) {
     return this.session.authenticate('authenticator:oauth2', email, password);
   }
+
+  <template>
+    <form class='register-form' {{on 'submit' this.register}}>
+      <p class='register-form__information'>{{t 'common.form-errors.mandatory-all-fields'}}</p>
+
+      <PixInput
+        @id='register-firstName'
+        name='firstName'
+        {{on 'change' this.validateFirstName}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='given-name'
+        @validationStatus={{this.validation.firstName.status}}
+        @errorMessage={{this.validation.firstName.message}}
+      >
+        <:label>{{t 'common.labels.candidate.firstname'}}</:label>
+      </PixInput>
+
+      <PixInput
+        @id='register-lastName'
+        name='lastName'
+        {{on 'change' this.validateLastName}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='family-name'
+        @validationStatus={{this.validation.lastName.status}}
+        @errorMessage={{this.validation.lastName.message}}
+      >
+        <:label>{{t 'common.labels.candidate.lastname'}}</:label>
+      </PixInput>
+
+      <PixInput
+        @id='register-email'
+        name='email'
+        type='email'
+        {{on 'change' this.validateEmail}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='email'
+        @validationStatus={{this.validation.email.status}}
+        @errorMessage={{this.validation.email.message}}
+      >
+        <:label>{{t 'common.forms.login.email'}}</:label>
+      </PixInput>
+
+      <PixInputPassword
+        @id='register-password'
+        name='password'
+        autocomplete='current-password'
+        required={{true}}
+        aria-required={{true}}
+        {{on 'change' this.validatePassword}}
+        @validationStatus={{this.validation.password.status}}
+        @errorMessage={{this.validation.password.message}}
+      >
+        <:label>{{t 'common.forms.login.password'}}</:label>
+      </PixInputPassword>
+
+      <PixCheckbox @size='small' required={{true}} aria-required={{true}} {{on 'click' this.validateCgu}}>
+        <:label>
+          <p class='register-form__cgu-label'>
+            {{t 'pages.login-or-register.register-form.fields.cgu.accept'}}
+            <a href={{this.cguUrl}} class='link' target='_blank' rel='noopener noreferrer'>
+              {{t 'pages.login-or-register.register-form.fields.cgu.terms-of-use'}}
+            </a>
+            {{t 'pages.login-or-register.register-form.fields.cgu.and'}}
+            <a href={{this.dataProtectionPolicyUrl}} class='link' target='_blank' rel='noopener noreferrer'>
+              {{t 'pages.login-or-register.register-form.fields.cgu.data-protection-policy'}}
+            </a>
+          </p>
+        </:label>
+      </PixCheckbox>
+      {{#if this.cguValidationMessage}}
+        <p class='register-form__cgu-error' role='alert'>{{this.cguValidationMessage}}</p>
+      {{/if}}
+
+      {{#if this.errorMessage}}
+        <PixNotificationAlert @type='error'>
+          {{this.errorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+
+      <PixButton @type='submit' @isLoading={{this.isLoading}}>
+        {{t 'pages.login-or-register.register-form.actions.login-button'}}
+      </PixButton>
+    </form>
+  </template>
 }

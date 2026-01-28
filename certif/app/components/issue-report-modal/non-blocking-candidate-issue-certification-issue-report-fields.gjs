@@ -5,6 +5,7 @@ import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <fieldset class='non-blocking-candidate-issue-certification-issue-report-fields'>
     <div class='non-blocking-candidate-issue-certification-issue-report-fields__radio-button__tooltip'>

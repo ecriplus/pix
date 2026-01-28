@@ -7,6 +7,15 @@ import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 
 export default class LiveAlertHandledModal extends Component {
+  @service intl;
+
+  @action
+  title() {
+    return this.intl.t('pages.session-supervising.candidate-in-list.handle-live-alert-modal.title', {
+      candidateFullName: this.args.candidateFullName,
+    });
+  }
+
   <template>
     <PixModal
       @class='pix-modal-dialog live-alert-handled-modal'
@@ -43,12 +52,4 @@ export default class LiveAlertHandledModal extends Component {
       </:footer>
     </PixModal>
   </template>
-  @service intl;
-
-  @action
-  title() {
-    return this.intl.t('pages.session-supervising.candidate-in-list.handle-live-alert-modal.title', {
-      candidateFullName: this.args.candidateFullName,
-    });
-  }
 }

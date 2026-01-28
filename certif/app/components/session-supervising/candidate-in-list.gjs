@@ -38,184 +38,6 @@ const PIX_PLUS_DURATIONS = {
 };
 
 export default class CandidateInList extends Component {
-  <template>
-    <li class='session-supervising-candidate-in-list'>
-      <div class='session-supervising-candidate-in-list__candidate-data'>
-        <div class='session-supervising-candidate-in-list__status'>
-          {{#if @candidate.hasStarted}}
-            {{#if @candidate.currentLiveAlert}}
-              <PixTag @color='error'>
-                {{this.currentLiveAlertLabel}}
-              </PixTag>
-              <PixTag @color='yellow'>
-                {{t 'common.forms.certification-labels.candidate-status.on-hold'}}
-              </PixTag>
-            {{else}}
-              <PixTag @color='green'>
-                {{t 'common.forms.certification-labels.candidate-status.ongoing'}}
-              </PixTag>
-            {{/if}}
-          {{/if}}
-          {{#if @candidate.hasCompleted}}
-            <PixTag @color='blue'>{{t 'common.forms.certification-labels.candidate-status.finished'}}</PixTag>
-          {{/if}}
-        </div>
-        <div class='session-supervising-candidate-in-list__infos'>
-          <div class='session-supervising-candidate-in-list__top-information'>
-            <div class='session-supervising-candidate-in-list__full-name'>
-              {{@candidate.lastName}}
-              {{@candidate.firstName}}
-            </div>
-          </div>
-
-          <div class='session-supervising-candidate-in-list__middle-information'>
-            <p>{{dayjsFormat @candidate.birthdate 'DD/MM/YYYY'}}</p>
-            {{#if this.shouldDisplayEnrolledComplementaryCertification}}
-              <p class='session-supervising-candidate-in-list-details__enrolment'>
-                <PixIcon
-                  @name='awards'
-                  @ariaHidden={{true}}
-                  class='session-supervising-candidate-in-list-details-enrolment__icon'
-                />
-                {{t
-                  'pages.session-supervising.candidate-in-list.complementary-certification-enrolment'
-                  complementaryCertification=this.enrolledCertificationLabel
-                }}
-              </p>
-            {{/if}}
-            {{#if this.shouldDisplayNonEligibilityWarning}}
-              <PixNotificationAlert @type='warning' @withIcon={{true}}>
-                {{t 'pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'}}
-              </PixNotificationAlert>
-            {{/if}}
-          </div>
-
-          {{#if @candidate.hasStarted}}
-            <div class='session-supervising-candidate-in-list__bottom-information'>
-              <div class='session-supervising-candidate-in-list-details-time'>
-                <div class='session-supervising-candidate-in-list-details-time__text'>
-                  <PixIcon
-                    @name='time'
-                    @ariaHidden={{true}}
-                    class='session-supervising-candidate-in-list-details-time__clock'
-                  />
-                  <span>
-                    {{t 'pages.session-supervising.candidate-in-list.start-date-time'}}
-                    <time>{{this.candidateStartTime}}</time>
-                  </span>
-                  <span class='session-supervising-candidate-in-list-details-time__text__end-date-time'>
-                    {{t 'pages.session-supervising.candidate-in-list.end-date-time'}}
-                    <time>{{this.candidateTheoricalEndDateTime}}</time>
-                  </span>
-                </div>
-                {{#if @candidate.extraTimePercentage}}
-                  <PixTag @color='grey'>
-                    {{t
-                      'pages.session-supervising.candidate-in-list.extratime'
-                      extraTimePercentage=(formatPercentage @candidate.extraTimePercentage)
-                    }}
-                  </PixTag>
-                {{/if}}
-              </div>
-            </div>
-          {{/if}}
-
-          {{#if @candidate.hasOngoingChallengeLiveAlert}}
-            <PixButton
-              @triggerAction={{this.askUserToHandleLiveAlert}}
-              @variant='error'
-              class='session-supervising-candidate-in-list__live-alert-button'
-            >
-              {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge'}}
-            </PixButton>
-          {{/if}}
-
-          {{#if this.isConfirmButtonToBeDisplayed}}
-            <PixButton
-              aria-label={{this.authorizationButtonAriaLabel}}
-              @triggerAction={{fn this.toggleCandidate @candidate}}
-              @variant={{this.authorizationButtonBackgroundColor}}
-              @isBorderVisible={{@candidate.authorizedToStart}}
-              class='session-supervising-candidate-in-list__confirm-button'
-            >
-              {{this.authorizationButtonLabel}}
-            </PixButton>
-          {{/if}}
-        </div>
-      </div>
-
-      {{#if this.optionsMenuShouldBeDisplayed}}
-        <div class='session-supervising-candidate-in-list__menu'>
-          <PixIconButton
-            @size='small'
-            @iconName='moreVert'
-            @ariaLabel={{t 'pages.session-supervising.candidate-in-list.display-candidate-options'}}
-            @triggerAction={{this.toggleMenu}}
-          />
-          <Content
-            @display={{this.isMenuOpen}}
-            @close={{this.closeMenu}}
-            aria-label={{t 'pages.session-supervising.candidate-in-list.candidate-options'}}
-          >
-            {{#if @candidate.hasOngoingCompanionLiveAlert}}
-              <Item @onClick={{this.askUserToHandleCompanionLiveAlert}}>
-                {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-companion'}}
-              </Item>
-            {{/if}}
-
-            <Item @onClick={{this.askUserToConfirmTestResume}}>
-              {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.allow-test-resume'}}
-            </Item>
-
-            <Item @onClick={{this.askUserToConfirmTestEnd}}>
-              {{t 'pages.session-supervising.candidate-in-list.test-end-modal.end-assessment'}}
-            </Item>
-          </Content>
-        </div>
-      {{/if}}
-
-      <ConfirmationModal
-        @showModal={{this.isConfirmationModalDisplayed}}
-        @closeConfirmationModal={{this.closeConfirmationModal}}
-        @actionOnConfirmation={{this.actionMethod}}
-        @candidate={{this.candidate}}
-        @modalCancelText={{this.modalCancelText}}
-        @modalConfirmationButtonText={{this.modalConfirmationText}}
-        @title={{this.modalInstructionText}}
-      >
-        <:description>
-          {{this.modalDescriptionText}}
-        </:description>
-      </ConfirmationModal>
-
-      {{#if @candidate.hasOngoingChallengeLiveAlert}}
-        <HandleLiveAlertModal
-          @showModal={{this.isHandleLiveAlertModalDisplayed}}
-          @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
-          @title={{this.candidateFullName}}
-          @rejectLiveAlert={{this.rejectLiveAlert}}
-          @validateLiveAlert={{this.validateLiveAlert}}
-          @candidateId={{@candidate.id}}
-          @liveAlert={{@candidate.challengeLiveAlert}}
-        />
-      {{/if}}
-
-      <LiveAlertHandledModal
-        @showModal={{this.isLiveAlertHandledModalDisplayed}}
-        @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
-        @candidateFullName={{this.candidateFullName}}
-        @isLiveAlertValidated={{this.isLiveAlertValidated}}
-      />
-
-      <CompanionLiveAlertModal
-        @showModal={{this.isHandleCompanionLiveAlertModalDisplayed}}
-        @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
-        @candidateFullName={{this.candidateFullName}}
-        @clearedLiveAlert={{this.clearedLiveAlert}}
-      />
-
-    </li>
-  </template>
   @service pixToast;
   @service intl;
   @service store;
@@ -255,21 +77,11 @@ export default class CandidateInList extends Component {
     return this._isReconciliated() && this._isNotEligibleToEnrolledDoubleCertification();
   }
 
-  _isNotEligibleToEnrolledDoubleCertification() {
-    return (
-      !this.args.candidate.isStillEligibleToDoubleCertification && this.args.candidate.enrolledDoubleCertificationLabel
-    );
-  }
-
   get enrolledCertificationLabel() {
     return (
       this.args.candidate.enrolledComplementaryCertificationLabel ??
       this.args.candidate.enrolledDoubleCertificationLabel
     );
-  }
-
-  _isReconciliated() {
-    return this.args.candidate.userId;
   }
 
   get authorizationButtonLabel() {
@@ -299,6 +111,74 @@ export default class CandidateInList extends Component {
 
   get authorizationButtonBackgroundColor() {
     return this.args.candidate.authorizedToStart ? 'transparent-dark' : 'primary';
+  }
+
+  get isConfirmationModalDisplayed() {
+    return this.displayedModal === Modals.Confirmation;
+  }
+
+  get isHandleLiveAlertModalDisplayed() {
+    return this.displayedModal === Modals.HandleLiveAlert;
+  }
+
+  get isHandleCompanionLiveAlertModalDisplayed() {
+    return this.displayedModal === Modals.HandleCompanionLiveAlert;
+  }
+
+  get isLiveAlertHandledModalDisplayed() {
+    return this.displayedModal === Modals.HandledLiveAlertSuccess;
+  }
+
+  get actionMethod() {
+    return this.actionOnConfirmation;
+  }
+
+  get candidateStartTime() {
+    const startTime = dayjs(this.args.candidate.startDateTime).format('HH:mm');
+    return startTime;
+  }
+
+  get candidateTheoricalEndDateTime() {
+    const pixPlusDuration = this._getPixPlusDurationInMinutes();
+
+    if (pixPlusDuration !== null) {
+      const endTime = dayjs(this.args.candidate.startDateTime).add(pixPlusDuration, 'minute').format('HH:mm');
+      return endTime;
+    }
+
+    const theoricalEndDateTime = dayjs(this.args.candidate.theoricalEndDateTime).format('HH:mm');
+    return theoricalEndDateTime;
+  }
+
+  get currentLiveAlertLabel() {
+    const alertType = this.args.candidate.currentLiveAlert?.type;
+
+    return this.intl.t(`common.forms.certification-labels.candidate-status.live-alerts.${alertType}.ongoing`);
+  }
+
+  _isNotEligibleToEnrolledDoubleCertification() {
+    return (
+      !this.args.candidate.isStillEligibleToDoubleCertification && this.args.candidate.enrolledDoubleCertificationLabel
+    );
+  }
+
+  _isReconciliated() {
+    return this.args.candidate.userId;
+  }
+
+  _getPixPlusDurationInMinutes() {
+    const label = this.enrolledCertificationLabel?.toLowerCase() || '';
+
+    switch (true) {
+      case label.includes('droit'):
+        return PIX_PLUS_DURATIONS.DROIT;
+      case label.includes('pro') && label.includes('santé'):
+        return PIX_PLUS_DURATIONS.PRO_SANTE;
+      case label.includes('édu'):
+        return PIX_PLUS_DURATIONS.EDU;
+      default:
+        return null;
+    }
   }
 
   @action
@@ -495,61 +375,182 @@ export default class CandidateInList extends Component {
     this.displayedModal = null;
   }
 
-  get isConfirmationModalDisplayed() {
-    return this.displayedModal === Modals.Confirmation;
-  }
+  <template>
+    <li class='session-supervising-candidate-in-list'>
+      <div class='session-supervising-candidate-in-list__candidate-data'>
+        <div class='session-supervising-candidate-in-list__status'>
+          {{#if @candidate.hasStarted}}
+            {{#if @candidate.currentLiveAlert}}
+              <PixTag @color='error'>
+                {{this.currentLiveAlertLabel}}
+              </PixTag>
+              <PixTag @color='yellow'>
+                {{t 'common.forms.certification-labels.candidate-status.on-hold'}}
+              </PixTag>
+            {{else}}
+              <PixTag @color='green'>
+                {{t 'common.forms.certification-labels.candidate-status.ongoing'}}
+              </PixTag>
+            {{/if}}
+          {{/if}}
+          {{#if @candidate.hasCompleted}}
+            <PixTag @color='blue'>{{t 'common.forms.certification-labels.candidate-status.finished'}}</PixTag>
+          {{/if}}
+        </div>
+        <div class='session-supervising-candidate-in-list__infos'>
+          <div class='session-supervising-candidate-in-list__top-information'>
+            <div class='session-supervising-candidate-in-list__full-name'>
+              {{@candidate.lastName}}
+              {{@candidate.firstName}}
+            </div>
+          </div>
 
-  get isHandleLiveAlertModalDisplayed() {
-    return this.displayedModal === Modals.HandleLiveAlert;
-  }
+          <div class='session-supervising-candidate-in-list__middle-information'>
+            <p>{{dayjsFormat @candidate.birthdate 'DD/MM/YYYY'}}</p>
+            {{#if this.shouldDisplayEnrolledComplementaryCertification}}
+              <p class='session-supervising-candidate-in-list-details__enrolment'>
+                <PixIcon
+                  @name='awards'
+                  @ariaHidden={{true}}
+                  class='session-supervising-candidate-in-list-details-enrolment__icon'
+                />
+                {{t
+                  'pages.session-supervising.candidate-in-list.complementary-certification-enrolment'
+                  complementaryCertification=this.enrolledCertificationLabel
+                }}
+              </p>
+            {{/if}}
+            {{#if this.shouldDisplayNonEligibilityWarning}}
+              <PixNotificationAlert @type='warning' @withIcon={{true}}>
+                {{t 'pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'}}
+              </PixNotificationAlert>
+            {{/if}}
+          </div>
 
-  get isHandleCompanionLiveAlertModalDisplayed() {
-    return this.displayedModal === Modals.HandleCompanionLiveAlert;
-  }
+          {{#if @candidate.hasStarted}}
+            <div class='session-supervising-candidate-in-list__bottom-information'>
+              <div class='session-supervising-candidate-in-list-details-time'>
+                <div class='session-supervising-candidate-in-list-details-time__text'>
+                  <PixIcon
+                    @name='time'
+                    @ariaHidden={{true}}
+                    class='session-supervising-candidate-in-list-details-time__clock'
+                  />
+                  <span>
+                    {{t 'pages.session-supervising.candidate-in-list.start-date-time'}}
+                    <time>{{this.candidateStartTime}}</time>
+                  </span>
+                  <span class='session-supervising-candidate-in-list-details-time__text__end-date-time'>
+                    {{t 'pages.session-supervising.candidate-in-list.end-date-time'}}
+                    <time>{{this.candidateTheoricalEndDateTime}}</time>
+                  </span>
+                </div>
+                {{#if @candidate.extraTimePercentage}}
+                  <PixTag @color='grey'>
+                    {{t
+                      'pages.session-supervising.candidate-in-list.extratime'
+                      extraTimePercentage=(formatPercentage @candidate.extraTimePercentage)
+                    }}
+                  </PixTag>
+                {{/if}}
+              </div>
+            </div>
+          {{/if}}
 
-  get isLiveAlertHandledModalDisplayed() {
-    return this.displayedModal === Modals.HandledLiveAlertSuccess;
-  }
+          {{#if @candidate.hasOngoingChallengeLiveAlert}}
+            <PixButton
+              @triggerAction={{this.askUserToHandleLiveAlert}}
+              @variant='error'
+              class='session-supervising-candidate-in-list__live-alert-button'
+            >
+              {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge'}}
+            </PixButton>
+          {{/if}}
 
-  get actionMethod() {
-    return this.actionOnConfirmation;
-  }
+          {{#if this.isConfirmButtonToBeDisplayed}}
+            <PixButton
+              aria-label={{this.authorizationButtonAriaLabel}}
+              @triggerAction={{fn this.toggleCandidate @candidate}}
+              @variant={{this.authorizationButtonBackgroundColor}}
+              @isBorderVisible={{@candidate.authorizedToStart}}
+              class='session-supervising-candidate-in-list__confirm-button'
+            >
+              {{this.authorizationButtonLabel}}
+            </PixButton>
+          {{/if}}
+        </div>
+      </div>
 
-  get candidateStartTime() {
-    const startTime = dayjs(this.args.candidate.startDateTime).format('HH:mm');
-    return startTime;
-  }
+      {{#if this.optionsMenuShouldBeDisplayed}}
+        <div class='session-supervising-candidate-in-list__menu'>
+          <PixIconButton
+            @size='small'
+            @iconName='moreVert'
+            @ariaLabel={{t 'pages.session-supervising.candidate-in-list.display-candidate-options'}}
+            @triggerAction={{this.toggleMenu}}
+          />
+          <Content
+            @display={{this.isMenuOpen}}
+            @close={{this.closeMenu}}
+            aria-label={{t 'pages.session-supervising.candidate-in-list.candidate-options'}}
+          >
+            {{#if @candidate.hasOngoingCompanionLiveAlert}}
+              <Item @onClick={{this.askUserToHandleCompanionLiveAlert}}>
+                {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-companion'}}
+              </Item>
+            {{/if}}
 
-  get candidateTheoricalEndDateTime() {
-    const pixPlusDuration = this._getPixPlusDurationInMinutes();
+            <Item @onClick={{this.askUserToConfirmTestResume}}>
+              {{t 'pages.session-supervising.candidate-in-list.resume-test-modal.allow-test-resume'}}
+            </Item>
 
-    if (pixPlusDuration !== null) {
-      const endTime = dayjs(this.args.candidate.startDateTime).add(pixPlusDuration, 'minute').format('HH:mm');
-      return endTime;
-    }
+            <Item @onClick={{this.askUserToConfirmTestEnd}}>
+              {{t 'pages.session-supervising.candidate-in-list.test-end-modal.end-assessment'}}
+            </Item>
+          </Content>
+        </div>
+      {{/if}}
 
-    const theoricalEndDateTime = dayjs(this.args.candidate.theoricalEndDateTime).format('HH:mm');
-    return theoricalEndDateTime;
-  }
+      <ConfirmationModal
+        @showModal={{this.isConfirmationModalDisplayed}}
+        @closeConfirmationModal={{this.closeConfirmationModal}}
+        @actionOnConfirmation={{this.actionMethod}}
+        @candidate={{this.candidate}}
+        @modalCancelText={{this.modalCancelText}}
+        @modalConfirmationButtonText={{this.modalConfirmationText}}
+        @title={{this.modalInstructionText}}
+      >
+        <:description>
+          {{this.modalDescriptionText}}
+        </:description>
+      </ConfirmationModal>
 
-  _getPixPlusDurationInMinutes() {
-    const label = this.enrolledCertificationLabel?.toLowerCase() || '';
+      {{#if @candidate.hasOngoingChallengeLiveAlert}}
+        <HandleLiveAlertModal
+          @showModal={{this.isHandleLiveAlertModalDisplayed}}
+          @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
+          @title={{this.candidateFullName}}
+          @rejectLiveAlert={{this.rejectLiveAlert}}
+          @validateLiveAlert={{this.validateLiveAlert}}
+          @candidateId={{@candidate.id}}
+          @liveAlert={{@candidate.challengeLiveAlert}}
+        />
+      {{/if}}
 
-    switch (true) {
-      case label.includes('droit'):
-        return PIX_PLUS_DURATIONS.DROIT;
-      case label.includes('pro') && label.includes('santé'):
-        return PIX_PLUS_DURATIONS.PRO_SANTE;
-      case label.includes('édu'):
-        return PIX_PLUS_DURATIONS.EDU;
-      default:
-        return null;
-    }
-  }
+      <LiveAlertHandledModal
+        @showModal={{this.isLiveAlertHandledModalDisplayed}}
+        @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
+        @candidateFullName={{this.candidateFullName}}
+        @isLiveAlertValidated={{this.isLiveAlertValidated}}
+      />
 
-  get currentLiveAlertLabel() {
-    const alertType = this.args.candidate.currentLiveAlert?.type;
+      <CompanionLiveAlertModal
+        @showModal={{this.isHandleCompanionLiveAlertModalDisplayed}}
+        @closeConfirmationModal={{this.closeHandleLiveAlertModal}}
+        @candidateFullName={{this.candidateFullName}}
+        @clearedLiveAlert={{this.clearedLiveAlert}}
+      />
 
-    return this.intl.t(`common.forms.certification-labels.candidate-status.live-alerts.${alertType}.ongoing`);
-  }
+    </li>
+  </template>
 }

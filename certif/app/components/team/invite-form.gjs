@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <form {{on 'submit' @onSubmit}} class='form' ...attributes>
 

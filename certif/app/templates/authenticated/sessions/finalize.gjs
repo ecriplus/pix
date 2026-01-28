@@ -8,6 +8,7 @@ import CompletedReportsInformationStep from 'pix-certif/components/session-final
 import FinalizationConfirmationModal from 'pix-certif/components/session-finalization/finalization-confirmation-modal';
 import UncompletedReportsInformationStep from 'pix-certif/components/session-finalization/uncompleted-reports-information-step';
 import SessionFinalizationStepContainer from 'pix-certif/components/session-finalization-step-container';
+
 <template>
   {{pageTitle @controller.pageTitle replace=true}}
   <div class='finalize'>

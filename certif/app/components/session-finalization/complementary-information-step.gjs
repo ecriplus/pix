@@ -8,6 +8,27 @@ import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 
 export default class CompletedReportsInformationStep extends Component {
+  @service url;
+
+  @tracked displayIncidentDuringCertificationSession = false;
+  @tracked displayJoiningIssue = false;
+
+  @action
+  onCheckIncidentDuringCertificationSession(event) {
+    this.displayIncidentDuringCertificationSession = event.target.checked;
+    this.args.toggleIncidentDuringCertificationSession(this.displayIncidentDuringCertificationSession);
+  }
+
+  @action
+  onCheckIssueWithJoiningSession(event) {
+    this.displayJoiningIssue = event.target.checked;
+    this.args.toggleSessionJoiningIssue(this.displayJoiningIssue);
+  }
+
+  get joiningIssueSheetUrl() {
+    return this.url.joiningIssueSheetUrl;
+  }
+
   <template>
     <div class='session-finalization-complementary-information-step'>
       <div class='session-finalization-complementary-information-step__content'>
@@ -40,24 +61,4 @@ export default class CompletedReportsInformationStep extends Component {
       </div>
     </div>
   </template>
-  @service url;
-
-  @tracked displayIncidentDuringCertificationSession = false;
-  @tracked displayJoiningIssue = false;
-
-  @action
-  onCheckIncidentDuringCertificationSession(event) {
-    this.displayIncidentDuringCertificationSession = event.target.checked;
-    this.args.toggleIncidentDuringCertificationSession(this.displayIncidentDuringCertificationSession);
-  }
-
-  @action
-  onCheckIssueWithJoiningSession(event) {
-    this.displayJoiningIssue = event.target.checked;
-    this.args.toggleSessionJoiningIssue(this.displayJoiningIssue);
-  }
-
-  get joiningIssueSheetUrl() {
-    return this.url.joiningIssueSheetUrl;
-  }
 }

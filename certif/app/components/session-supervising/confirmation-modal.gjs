@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <PixModal
     @class='pix-modal-dialog'

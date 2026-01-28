@@ -5,6 +5,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
 import FileImportBlock from 'pix-certif/components/import/file-import-block';
+
 <template>
   <section class='import-page__section--download panel'>
     <div class='import-page__title'>

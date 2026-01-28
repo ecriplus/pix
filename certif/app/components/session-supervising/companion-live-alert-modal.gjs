@@ -6,6 +6,25 @@ import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 
 export default class CompanionLiveAlertModal extends Component {
+  @service intl;
+
+  @action
+  title() {
+    return this.intl.t('pages.session-supervising.candidate-in-list.modals.live-alerts.companion.title', {
+      candidateFullName: this.args.candidateFullName,
+    });
+  }
+
+  @action
+  onClose() {
+    this.args.closeConfirmationModal();
+  }
+
+  @action
+  onSubmit() {
+    this.args.clearedLiveAlert();
+  }
+
   <template>
     <PixModal @title={{this.title}} @onCloseButtonClick={{@closeConfirmationModal}} @showModal={{@showModal}}>
       <:content>
@@ -25,22 +44,4 @@ export default class CompanionLiveAlertModal extends Component {
       </:footer>
     </PixModal>
   </template>
-  @service intl;
-
-  @action
-  title() {
-    return this.intl.t('pages.session-supervising.candidate-in-list.modals.live-alerts.companion.title', {
-      candidateFullName: this.args.candidateFullName,
-    });
-  }
-
-  @action
-  onClose() {
-    this.args.closeConfirmationModal();
-  }
-
-  @action
-  onSubmit() {
-    this.args.clearedLiveAlert();
-  }
 }

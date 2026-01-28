@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <PixModal
     class='select-referer-modal'

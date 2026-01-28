@@ -2,6 +2,7 @@ import pageTitle from 'ember-page-title/helpers/page-title';
 import CertificationCandidatesSco from 'pix-certif/components/certification-candidates-sco';
 import ImportCandidates from 'pix-certif/components/import-candidates';
 import EnrolledCandidates from 'pix-certif/components/sessions/session-details/enrolled-candidates/index';
+
 <template>
   {{pageTitle @controller.pageTitle replace=true}}
   {{#if @controller.shouldDisplayScoStudentRegistration}}

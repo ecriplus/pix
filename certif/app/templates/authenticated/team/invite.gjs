@@ -1,6 +1,7 @@
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import InviteForm from 'pix-certif/components/team/invite-form';
+
 <template>
   {{pageTitle (t 'pages.team-invite.title')}}
 

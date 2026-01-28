@@ -1,5 +1,6 @@
 import pageTitle from 'ember-page-title/helpers/page-title';
 import InvitationsList from 'pix-certif/components/team/invitations-list';
+
 <template>
   {{pageTitle 'Invitations'}}
 

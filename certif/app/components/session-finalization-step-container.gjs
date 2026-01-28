@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+
 <template>
   <div class='panel session-finalization-step-container'>
     <div class='session-finalization-step-container__header'>

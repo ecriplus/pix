@@ -11,6 +11,18 @@ import t from 'ember-intl/helpers/t';
 import eq from 'ember-truth-helpers/helpers/eq';
 
 export default class IssueReportsModal extends Component {
+  @tracked showDeletionError = false;
+
+  @action
+  async handleClickOnDeleteButton(issueReport) {
+    this.showDeletionError = false;
+    try {
+      await this.args.onClickDeleteIssueReport(issueReport);
+    } catch {
+      this.showDeletionError = true;
+    }
+  }
+
   <template>
     <PixModal
       @showModal={{@showModal}}
@@ -67,15 +79,4 @@ export default class IssueReportsModal extends Component {
       </:content>
     </PixModal>
   </template>
-  @tracked showDeletionError = false;
-
-  @action
-  async handleClickOnDeleteButton(issueReport) {
-    this.showDeletionError = false;
-    try {
-      await this.args.onClickDeleteIssueReport(issueReport);
-    } catch {
-      this.showDeletionError = true;
-    }
-  }
 }

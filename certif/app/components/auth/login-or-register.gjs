@@ -10,6 +10,19 @@ import ToggableLoginForm from 'pix-certif/components/auth/toggable-login-form';
 import LocaleSwitcher from 'pix-certif/components/locale-switcher';
 
 export default class LoginOrRegister extends Component {
+  @service currentDomain;
+
+  @tracked displayRegisterForm = true;
+
+  get isInternationalDomain() {
+    return !this.currentDomain.isFranceDomain;
+  }
+
+  @action
+  toggleFormsVisibility() {
+    this.displayRegisterForm = !this.displayRegisterForm;
+  }
+
   <template>
     <div class='login-or-register'>
       <div class='panel login-or-register__panel'>
@@ -87,16 +100,4 @@ export default class LoginOrRegister extends Component {
       {{/if}}
     </div>
   </template>
-  @service currentDomain;
-
-  @tracked displayRegisterForm = true;
-
-  get isInternationalDomain() {
-    return !this.currentDomain.isFranceDomain;
-  }
-
-  @action
-  toggleFormsVisibility() {
-    this.displayRegisterForm = !this.displayRegisterForm;
-  }
 }

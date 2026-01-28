@@ -15,6 +15,56 @@ import AddIssueReportModal from 'pix-certif/components/issue-report-modal/add-is
 import IssueReportsModal from 'pix-certif/components/issue-report-modal/issue-reports-modal';
 
 export default class UncompletedReportsInformationStep extends Component {
+  @tracked reportToEdit = null;
+  @tracked showAddIssueReportModal = false;
+  @tracked showIssueReportsModal = false;
+  @service intl;
+
+  get certificationReportsAreNotEmpty() {
+    return this.args.certificationReports.length !== 0;
+  }
+
+  get abortOptions() {
+    return [
+      {
+        label: this.intl.t(
+          'pages.session-finalization.reporting.uncompleted-reports-information.table.labels.abandonment',
+        ),
+        value: 'candidate',
+      },
+      {
+        label: this.intl.t(
+          'pages.session-finalization.reporting.uncompleted-reports-information.table.labels.technical-problem',
+        ),
+        value: 'technical',
+      },
+    ];
+  }
+
+  @action
+  openAddIssueReportModal(report) {
+    this.showIssueReportsModal = false;
+    this.showAddIssueReportModal = true;
+    this.reportToEdit = report;
+  }
+
+  @action
+  openIssueReportsModal(report) {
+    this.showAddIssueReportModal = false;
+    this.showIssueReportsModal = true;
+    this.reportToEdit = report;
+  }
+
+  @action
+  closeAddIssueReportModal() {
+    this.showAddIssueReportModal = false;
+  }
+
+  @action
+  closeIssueReportsModal() {
+    this.showIssueReportsModal = false;
+  }
+
   <template>
     <div class='table session-finalization-reports'>
       <PixNotificationAlert @type='warning' @withIcon={{true}} class='session-finalization-reports__information'>
@@ -175,53 +225,4 @@ export default class UncompletedReportsInformationStep extends Component {
       {{/if}}
     </div>
   </template>
-  @tracked reportToEdit = null;
-  @tracked showAddIssueReportModal = false;
-  @tracked showIssueReportsModal = false;
-  @service intl;
-
-  get certificationReportsAreNotEmpty() {
-    return this.args.certificationReports.length !== 0;
-  }
-
-  get abortOptions() {
-    return [
-      {
-        label: this.intl.t(
-          'pages.session-finalization.reporting.uncompleted-reports-information.table.labels.abandonment',
-        ),
-        value: 'candidate',
-      },
-      {
-        label: this.intl.t(
-          'pages.session-finalization.reporting.uncompleted-reports-information.table.labels.technical-problem',
-        ),
-        value: 'technical',
-      },
-    ];
-  }
-
-  @action
-  openAddIssueReportModal(report) {
-    this.showIssueReportsModal = false;
-    this.showAddIssueReportModal = true;
-    this.reportToEdit = report;
-  }
-
-  @action
-  openIssueReportsModal(report) {
-    this.showAddIssueReportModal = false;
-    this.showIssueReportsModal = true;
-    this.reportToEdit = report;
-  }
-
-  @action
-  closeAddIssueReportModal() {
-    this.showAddIssueReportModal = false;
-  }
-
-  @action
-  closeIssueReportsModal() {
-    this.showIssueReportsModal = false;
-  }
 }

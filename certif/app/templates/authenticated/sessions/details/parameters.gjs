@@ -3,6 +3,7 @@ import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import isClipboardSupported from 'ember-cli-clipboard/helpers/is-clipboard-supported';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <div class='panel session-details-container'>
     <div class='session-details-row'>

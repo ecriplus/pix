@@ -10,6 +10,43 @@ import t from 'ember-intl/helpers/t';
 import ConfirmationModal from 'pix-certif/components/session-supervising/confirmation-modal';
 
 export default class Header extends Component {
+  @service router;
+  @service intl;
+  @service url;
+  @service featureToggles;
+
+  @tracked modalDescriptionText;
+  @tracked modalCancelText;
+  @tracked modalConfirmationText = this.intl.t('common.actions.confirm');
+  @tracked modalInstructionText = this.intl.t('pages.session-supervising.candidate-in-list.default-modal-title');
+  @tracked isConfirmationModalDisplayed = false;
+
+  get invigilatorDocumentationUrl() {
+    return this.url.invigilatorDocumentationUrl;
+  }
+
+  @action
+  askUserToConfirmLeaving() {
+    this.modalDescriptionText = this.intl.t('pages.session-supervising.header.information');
+    this.modalCancelText = this.intl.t('common.actions.cancel');
+    this.modalConfirmationText = this.intl.t('pages.session-supervising.header.actions.confirmation');
+    this.modalInstructionText = this.intl.t('pages.session-supervising.header.actions.exit-extra-information', {
+      sessionId: this.args.session.id,
+    });
+    this.isConfirmationModalDisplayed = true;
+  }
+
+  @action
+  closeConfirmationModal() {
+    this.isConfirmationModalDisplayed = false;
+  }
+
+  @action
+  actionConfirmation() {
+    this.closeConfirmationModal();
+    return this.router.replaceWith('login-session-invigilator');
+  }
+
   <template>
     <div class='session-supervising-header'>
       <PixButton
@@ -109,40 +146,4 @@ export default class Header extends Component {
 
     </div>
   </template>
-  @service router;
-  @service intl;
-  @service url;
-  @service featureToggles;
-
-  @tracked modalDescriptionText;
-  @tracked modalCancelText;
-  @tracked modalConfirmationText = this.intl.t('common.actions.confirm');
-  @tracked modalInstructionText = this.intl.t('pages.session-supervising.candidate-in-list.default-modal-title');
-  @tracked isConfirmationModalDisplayed = false;
-
-  @action
-  askUserToConfirmLeaving() {
-    this.modalDescriptionText = this.intl.t('pages.session-supervising.header.information');
-    this.modalCancelText = this.intl.t('common.actions.cancel');
-    this.modalConfirmationText = this.intl.t('pages.session-supervising.header.actions.confirmation');
-    this.modalInstructionText = this.intl.t('pages.session-supervising.header.actions.exit-extra-information', {
-      sessionId: this.args.session.id,
-    });
-    this.isConfirmationModalDisplayed = true;
-  }
-
-  @action
-  closeConfirmationModal() {
-    this.isConfirmationModalDisplayed = false;
-  }
-
-  @action
-  actionConfirmation() {
-    this.closeConfirmationModal();
-    return this.router.replaceWith('login-session-invigilator');
-  }
-
-  get invigilatorDocumentationUrl() {
-    return this.url.invigilatorDocumentationUrl;
-  }
 }

@@ -8,39 +8,6 @@ import LeaveCertificationCenter from 'pix-certif/components/team/modal/leave-cer
 import RemoveMemberModal from 'pix-certif/components/team/modal/remove-member-modal';
 
 export default class MembersList extends Component {
-  <template>
-    <div role='tabpanel'>
-      <MembersTable
-        @members={{@members}}
-        @hasCleaHabilitation={{@hasCleaHabilitation}}
-        @onLeaveCertificationCenterButtonClicked={{this.openLeaveCertificationCenterModal}}
-        @onRemoveMemberButtonClicked={{this.openRemoveMemberModal}}
-        @onChangeMemberRoleButtonClicked={{this.openChangeMemberRoleModal}}
-      />
-    </div>
-
-    <LeaveCertificationCenter
-      @certificationCenterName={{this.currentUser.currentAllowedCertificationCenterAccess.name}}
-      @isOpen={{this.isLeaveCertificationCenterModalOpen}}
-      @onClose={{this.closeLeaveCertificationCenterModal}}
-      @onSubmit={{this.leaveCertificationCenter}}
-    />
-
-    <RemoveMemberModal
-      @firstName={{this.removingMember.firstName}}
-      @lastName={{this.removingMember.lastName}}
-      @isOpen={{this.isRemoveMemberModalOpen}}
-      @onSubmit={{this.removeMember}}
-      @onClose={{this.closeRemoveMemberModal}}
-    />
-
-    <ChangeMemberRoleModal
-      @member={{this.member}}
-      @isOpen={{this.isChangeMemberRoleModalOpen}}
-      @onSubmit={{this.changeMemberRole}}
-      @onClose={{this.closeChangeMemberRoleModal}}
-    />
-  </template>
   @service currentUser;
   @service intl;
   @service pixToast;
@@ -141,4 +108,38 @@ export default class MembersList extends Component {
       this.isChangeMemberRoleModalOpen = false;
     }
   }
+
+  <template>
+    <div role='tabpanel'>
+      <MembersTable
+        @members={{@members}}
+        @hasCleaHabilitation={{@hasCleaHabilitation}}
+        @onLeaveCertificationCenterButtonClicked={{this.openLeaveCertificationCenterModal}}
+        @onRemoveMemberButtonClicked={{this.openRemoveMemberModal}}
+        @onChangeMemberRoleButtonClicked={{this.openChangeMemberRoleModal}}
+      />
+    </div>
+
+    <LeaveCertificationCenter
+      @certificationCenterName={{this.currentUser.currentAllowedCertificationCenterAccess.name}}
+      @isOpen={{this.isLeaveCertificationCenterModalOpen}}
+      @onClose={{this.closeLeaveCertificationCenterModal}}
+      @onSubmit={{this.leaveCertificationCenter}}
+    />
+
+    <RemoveMemberModal
+      @firstName={{this.removingMember.firstName}}
+      @lastName={{this.removingMember.lastName}}
+      @isOpen={{this.isRemoveMemberModalOpen}}
+      @onSubmit={{this.removeMember}}
+      @onClose={{this.closeRemoveMemberModal}}
+    />
+
+    <ChangeMemberRoleModal
+      @member={{this.member}}
+      @isOpen={{this.isChangeMemberRoleModalOpen}}
+      @onSubmit={{this.changeMemberRole}}
+      @onClose={{this.closeChangeMemberRoleModal}}
+    />
+  </template>
 }

@@ -5,6 +5,7 @@ import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
+
 <template>
   {{#if @invitations}}
     <PixTable @data={{@invitations}} @variant='certif' @caption={{t 'pages.team-invitations.table.caption'}}>

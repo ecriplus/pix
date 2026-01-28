@@ -1,5 +1,6 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <div class='panel'>
     <div class='certification-candidates-sco-actions'>

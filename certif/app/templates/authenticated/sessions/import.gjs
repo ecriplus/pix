@@ -3,6 +3,7 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import StepOneSection from 'pix-certif/components/import/step-one-section';
 import StepTwoSection from 'pix-certif/components/import/step-two-section';
+
 <template>
   {{! template-lint-disable link-href-attributes }}
   {{pageTitle (t 'pages.sessions.import.title')}}

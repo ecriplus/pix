@@ -2,6 +2,7 @@ import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <fieldset>
     <div>

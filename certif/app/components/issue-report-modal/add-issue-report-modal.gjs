@@ -116,87 +116,6 @@ export class RadioButtonCategoryWithSubcategoryAndQuestionNumber extends RadioBu
 }
 
 export default class AddIssueReportModal extends Component {
-  <template>
-    <PixModal
-      @showModal={{@showModal}}
-      class='add-issue-report-modal'
-      @title='{{t "pages.session-finalization.add-issue-modal.title"}} {{@report.firstName}} {{@report.lastName}}'
-      @onCloseButtonClick={{@closeModal}}
-    >
-      <:content>
-        <form
-          id='add-issue-report-form'
-          {{on 'submit' this.submitReport}}
-          class='pix-modal__container pix-modal__container--white'
-        >
-          <div class='add-issue-report-modal-content'>
-            <CandidateInformationChangeCertificationIssueReportFields
-              @candidateInformationChangeCategory={{this.candidateInformationChangeCategory}}
-              @toggleOnCategory={{this.toggleOnCategory}}
-              @maxlength={{@maxlength}}
-              @updateCandidateInformationChangeCategoryDescription={{this.updateCandidateInformationChangeCategory}}
-            />
-
-            <SignatureIssueReportFields
-              @signatureIssueCategory={{this.signatureIssueCategory}}
-              @toggleOnCategory={{this.toggleOnCategory}}
-              @maxlength={{@maxlength}}
-              @updateSignatureIssueCategoryDescription={{this.updateSignatureIssueCategory}}
-            />
-
-            <FraudCertificationIssueReportFields
-              @fraudCategory={{this.fraudCategory}}
-              @toggleOnCategory={{this.toggleOnCategory}}
-            />
-
-            <NonBlockingTechnicalIssueCertificationIssueReportFields
-              @nonBlockingTechnicalIssueCategory={{this.nonBlockingTechnicalIssueCategory}}
-              @toggleOnCategory={{this.toggleOnCategory}}
-              @maxlength={{@maxlength}}
-              @updateNonBlockingTechnicalIssueCategoryDescription={{this.updateNonBlockingTechnicalIssueCategory}}
-            />
-
-            <NonBlockingCandidateIssueCertificationIssueReportFields
-              @nonBlockingCandidateIssueCategory={{this.nonBlockingCandidateIssueCategory}}
-              @toggleOnCategory={{this.toggleOnCategory}}
-              @maxlength={{@maxlength}}
-              @updateNonBlockingCandidateIssueCategoryDescription={{this.updateNonBlockingCandidateIssueCategory}}
-            />
-
-            {{#if (eq @version 2)}}
-              <InChallengeCertificationIssueReportFields
-                @changeQuestionNumber={{this.changeQuestionNumber}}
-                @inChallengeCategory={{this.inChallengeCategory}}
-                @toggleOnCategory={{this.toggleOnCategory}}
-                @maxlength={{@maxlength}}
-              />
-            {{/if}}
-          </div>
-
-          {{#if this.showCategoryMissingError}}
-            <PixNotificationAlert @type='error'>{{t
-                'pages.session-finalization.add-issue-modal.actions.select-category'
-              }}</PixNotificationAlert>
-          {{/if}}
-
-          {{#if this.showIssueReportSubmitError}}
-            <PixNotificationAlert @type='error'>{{t
-                'pages.session-finalization.add-issue-modal.errors.add-reporting'
-              }}</PixNotificationAlert>
-          {{/if}}
-        </form>
-      </:content>
-      <:footer>
-        <PixButton @triggerAction={{@closeModal}} @variant='secondary' @isBorderVisible={{true}}>
-          {{t 'common.actions.cancel'}}</PixButton>
-        <PixButton
-          form='add-issue-report-form'
-          @type='submit'
-          aria-label={{t 'pages.session-finalization.add-issue-modal.actions.add-reporting'}}
-        >{{t 'common.actions.validate'}}</PixButton>
-      </:footer>
-    </PixModal>
-  </template>
   @service store;
   @service intl;
 
@@ -292,4 +211,86 @@ export default class AddIssueReportModal extends Component {
       this.showIssueReportSubmitError = true;
     }
   }
+
+  <template>
+    <PixModal
+      @showModal={{@showModal}}
+      class='add-issue-report-modal'
+      @title='{{t "pages.session-finalization.add-issue-modal.title"}} {{@report.firstName}} {{@report.lastName}}'
+      @onCloseButtonClick={{@closeModal}}
+    >
+      <:content>
+        <form
+          id='add-issue-report-form'
+          {{on 'submit' this.submitReport}}
+          class='pix-modal__container pix-modal__container--white'
+        >
+          <div class='add-issue-report-modal-content'>
+            <CandidateInformationChangeCertificationIssueReportFields
+              @candidateInformationChangeCategory={{this.candidateInformationChangeCategory}}
+              @toggleOnCategory={{this.toggleOnCategory}}
+              @maxlength={{@maxlength}}
+              @updateCandidateInformationChangeCategoryDescription={{this.updateCandidateInformationChangeCategory}}
+            />
+
+            <SignatureIssueReportFields
+              @signatureIssueCategory={{this.signatureIssueCategory}}
+              @toggleOnCategory={{this.toggleOnCategory}}
+              @maxlength={{@maxlength}}
+              @updateSignatureIssueCategoryDescription={{this.updateSignatureIssueCategory}}
+            />
+
+            <FraudCertificationIssueReportFields
+              @fraudCategory={{this.fraudCategory}}
+              @toggleOnCategory={{this.toggleOnCategory}}
+            />
+
+            <NonBlockingTechnicalIssueCertificationIssueReportFields
+              @nonBlockingTechnicalIssueCategory={{this.nonBlockingTechnicalIssueCategory}}
+              @toggleOnCategory={{this.toggleOnCategory}}
+              @maxlength={{@maxlength}}
+              @updateNonBlockingTechnicalIssueCategoryDescription={{this.updateNonBlockingTechnicalIssueCategory}}
+            />
+
+            <NonBlockingCandidateIssueCertificationIssueReportFields
+              @nonBlockingCandidateIssueCategory={{this.nonBlockingCandidateIssueCategory}}
+              @toggleOnCategory={{this.toggleOnCategory}}
+              @maxlength={{@maxlength}}
+              @updateNonBlockingCandidateIssueCategoryDescription={{this.updateNonBlockingCandidateIssueCategory}}
+            />
+
+            {{#if (eq @version 2)}}
+              <InChallengeCertificationIssueReportFields
+                @changeQuestionNumber={{this.changeQuestionNumber}}
+                @inChallengeCategory={{this.inChallengeCategory}}
+                @toggleOnCategory={{this.toggleOnCategory}}
+                @maxlength={{@maxlength}}
+              />
+            {{/if}}
+          </div>
+
+          {{#if this.showCategoryMissingError}}
+            <PixNotificationAlert @type='error'>{{t
+                'pages.session-finalization.add-issue-modal.actions.select-category'
+              }}</PixNotificationAlert>
+          {{/if}}
+
+          {{#if this.showIssueReportSubmitError}}
+            <PixNotificationAlert @type='error'>{{t
+                'pages.session-finalization.add-issue-modal.errors.add-reporting'
+              }}</PixNotificationAlert>
+          {{/if}}
+        </form>
+      </:content>
+      <:footer>
+        <PixButton @triggerAction={{@closeModal}} @variant='secondary' @isBorderVisible={{true}}>
+          {{t 'common.actions.cancel'}}</PixButton>
+        <PixButton
+          form='add-issue-report-form'
+          @type='submit'
+          aria-label={{t 'pages.session-finalization.add-issue-modal.actions.add-reporting'}}
+        >{{t 'common.actions.validate'}}</PixButton>
+      </:footer>
+    </PixModal>
+  </template>
 }

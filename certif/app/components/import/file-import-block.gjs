@@ -2,6 +2,7 @@ import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import t from 'ember-intl/helpers/t';
+
 <template>
   <div tabindex='0' class='file-import-block'>
     <PixIcon @name='upload' @ariaHidden={{true}} class='file-import-block__icon' />

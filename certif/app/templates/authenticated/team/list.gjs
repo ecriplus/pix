@@ -8,6 +8,7 @@ import pageTitle from 'ember-page-title/helpers/page-title';
 import not from 'ember-truth-helpers/helpers/not';
 import MembersList from 'pix-certif/components/members-list';
 import SelectRefererModal from 'pix-certif/components/select-referer-modal';
+
 <template>
   {{pageTitle (t 'pages.team.title')}}
 

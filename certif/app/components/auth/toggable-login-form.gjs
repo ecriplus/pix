@@ -35,58 +35,6 @@ class SignupFormValidation {
 }
 
 export default class ToggableLoginForm extends Component {
-  <template>
-    <form class='login-form' {{on 'submit' this.authenticate}}>
-      <p class='login-form__information'>{{t 'common.form-errors.mandatory-all-fields'}}</p>
-
-      <PixInput
-        @id='login-email'
-        name='login'
-        type='email'
-        {{on 'focusout' this.validateEmail}}
-        {{on 'input' this.updateEmail}}
-        required={{true}}
-        aria-required={{true}}
-        autocomplete='email'
-        @validationStatus={{this.validation.email.status}}
-        @errorMessage={{this.validation.email.message}}
-      >
-        <:label>{{t 'common.forms.login.email'}}</:label>
-      </PixInput>
-
-      <PixInputPassword
-        @id='login-password'
-        name='password'
-        autocomplete='current-password'
-        required={{true}}
-        aria-required={{true}}
-        {{on 'focusout' this.validatePassword}}
-        {{on 'input' this.validatePassword}}
-        @validationStatus={{this.validation.password.status}}
-        @errorMessage={{this.validation.password.message}}
-      >
-        <:label>{{t 'common.forms.login.password'}}</:label>
-      </PixInputPassword>
-
-      {{#if this.isErrorMessagePresent}}
-        <PixNotificationAlert @type='error'>
-          {{this.errorMessage}}
-        </PixNotificationAlert>
-      {{/if}}
-
-      <PixButton @type='submit' @isLoading={{this.isLoading}}>
-        {{t 'pages.login-or-register.login-form.login'}}
-      </PixButton>
-
-      <div>
-        <div class='login-form__forgotten-password'>
-          <a href={{this.forgottenPasswordUrl}} target='_blank' rel='noopener noreferrer' class='link'>
-            {{t 'common.forms.login.forgot-password'}}
-          </a>
-        </div>
-      </div>
-    </form>
-  </template>
   @service intl;
   @service url;
   @service store;
@@ -234,4 +182,57 @@ export default class ToggableLoginForm extends Component {
       return this.ERROR_MESSAGES.DEFAULT;
     }
   }
+
+  <template>
+    <form class='login-form' {{on 'submit' this.authenticate}}>
+      <p class='login-form__information'>{{t 'common.form-errors.mandatory-all-fields'}}</p>
+
+      <PixInput
+        @id='login-email'
+        name='login'
+        type='email'
+        {{on 'focusout' this.validateEmail}}
+        {{on 'input' this.updateEmail}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='email'
+        @validationStatus={{this.validation.email.status}}
+        @errorMessage={{this.validation.email.message}}
+      >
+        <:label>{{t 'common.forms.login.email'}}</:label>
+      </PixInput>
+
+      <PixInputPassword
+        @id='login-password'
+        name='password'
+        autocomplete='current-password'
+        required={{true}}
+        aria-required={{true}}
+        {{on 'focusout' this.validatePassword}}
+        {{on 'input' this.validatePassword}}
+        @validationStatus={{this.validation.password.status}}
+        @errorMessage={{this.validation.password.message}}
+      >
+        <:label>{{t 'common.forms.login.password'}}</:label>
+      </PixInputPassword>
+
+      {{#if this.isErrorMessagePresent}}
+        <PixNotificationAlert @type='error'>
+          {{this.errorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+
+      <PixButton @type='submit' @isLoading={{this.isLoading}}>
+        {{t 'pages.login-or-register.login-form.login'}}
+      </PixButton>
+
+      <div>
+        <div class='login-form__forgotten-password'>
+          <a href={{this.forgottenPasswordUrl}} target='_blank' rel='noopener noreferrer' class='link'>
+            {{t 'common.forms.login.forgot-password'}}
+          </a>
+        </div>
+      </div>
+    </form>
+  </template>
 }

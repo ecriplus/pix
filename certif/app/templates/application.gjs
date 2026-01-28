@@ -3,6 +3,7 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import CommunicationBanner from 'pix-certif/components/communication-banner';
 import InformationBanners from 'pix-certif/components/information-banners';
+
 <template>
   {{pageTitle @controller.model.title}}
   {{#in-element @controller.model.headElement insertBefore=null}}

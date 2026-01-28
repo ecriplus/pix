@@ -3,6 +3,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AddStudentList from 'pix-certif/components/add-student-list';
+
 <template>
   {{pageTitle @controller.pageTitle replace=true}}
   <div class='add-student'>

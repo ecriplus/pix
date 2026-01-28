@@ -14,6 +14,33 @@ import {
 } from 'pix-certif/models/certification-issue-report';
 
 export default class InChallengeCertificationIssueReportFields extends Component {
+  @service intl;
+
+  @action
+  onChangeSubcategory(option) {
+    this.args.inChallengeCategory.subcategory = option;
+  }
+
+  @action
+  onChangeQuestionNumber(event) {
+    this.args.changeQuestionNumber(event.target.value);
+  }
+
+  get categoryCode() {
+    return this.args.inChallengeCategory.categoryCode;
+  }
+
+  options = inChallengeIssueReportSubCategories
+    .map((subcategoryKey) => {
+      const subcategory = certificationIssueReportSubcategories[subcategoryKey];
+      const labelForSubcategory = subcategoryToLabel[subcategory];
+      return {
+        value: certificationIssueReportSubcategories[subcategory],
+        label: `${subcategoryToCode[subcategory]} ${this.intl.t(labelForSubcategory)}`,
+      };
+    })
+    .filter(Boolean);
+
   <template>
     <fieldset class='candidate-information-change-certification-issue-report-fields'>
       <div class='candidate-information-change-certification-issue-report-fields__radio-button'>
@@ -58,30 +85,4 @@ export default class InChallengeCertificationIssueReportFields extends Component
       {{/if}}
     </fieldset>
   </template>
-  @service intl;
-
-  @action
-  onChangeSubcategory(option) {
-    this.args.inChallengeCategory.subcategory = option;
-  }
-
-  @action
-  onChangeQuestionNumber(event) {
-    this.args.changeQuestionNumber(event.target.value);
-  }
-
-  get categoryCode() {
-    return this.args.inChallengeCategory.categoryCode;
-  }
-
-  options = inChallengeIssueReportSubCategories
-    .map((subcategoryKey) => {
-      const subcategory = certificationIssueReportSubcategories[subcategoryKey];
-      const labelForSubcategory = subcategoryToLabel[subcategory];
-      return {
-        value: certificationIssueReportSubcategories[subcategory],
-        label: `${subcategoryToCode[subcategory]} ${this.intl.t(labelForSubcategory)}`,
-      };
-    })
-    .filter(Boolean);
 }

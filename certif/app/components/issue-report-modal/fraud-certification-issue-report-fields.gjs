@@ -6,6 +6,12 @@ import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 
 export default class FraudCertificationIssueReportFields extends Component {
+  @service url;
+
+  get fraudFormUrl() {
+    return this.url.fraudFormUrl;
+  }
+
   <template>
     <fieldset class='fraud-certification-issue-report-fields'>
       <div class='fraud-certification-issue-report-fields__radio-button'>
@@ -33,9 +39,4 @@ export default class FraudCertificationIssueReportFields extends Component {
       {{/if}}
     </fieldset>
   </template>
-  @service url;
-
-  get fraudFormUrl() {
-    return this.url.fraudFormUrl;
-  }
 }

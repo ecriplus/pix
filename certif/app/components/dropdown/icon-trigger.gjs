@@ -5,6 +5,19 @@ import { tracked } from '@glimmer/tracking';
 import Content from 'pix-certif/components/dropdown/content';
 
 export default class IconTrigger extends Component {
+  @tracked display = false;
+
+  @action
+  toggle(event) {
+    event.stopPropagation();
+    this.display = !this.display;
+  }
+
+  @action
+  close() {
+    this.display = false;
+  }
+
   <template>
     <div id='icon-trigger' class='dropdown' ...attributes>
       <PixIconButton
@@ -20,16 +33,4 @@ export default class IconTrigger extends Component {
       </Content>
     </div>
   </template>
-  @tracked display = false;
-
-  @action
-  toggle(event) {
-    event.stopPropagation();
-    this.display = !this.display;
-  }
-
-  @action
-  close() {
-    this.display = false;
-  }
 }
