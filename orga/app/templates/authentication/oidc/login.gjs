@@ -24,9 +24,15 @@ import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 
       <LoginForm @onSubmit={{@controller.redirectToAssociationConfirmation}} />
 
-      <PixButtonLink @variant="secondary" @route="authentication.oidc.signup" @model={{@model.identity_provider_slug}}>
-        {{t "pages.oidc.login.signup-button"}}
-      </PixButtonLink>
+      {{#if @controller.currentInvitation}}
+        <PixButtonLink
+          @variant="secondary"
+          @route="authentication.oidc.signup"
+          @model={{@model.identity_provider_slug}}
+        >
+          {{t "pages.oidc.login.signup-button"}}
+        </PixButtonLink>
+      {{/if}}
 
     </:content>
   </AuthenticationLayout>
