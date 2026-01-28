@@ -1,5 +1,5 @@
+import { expect, test } from '../../fixtures/index.ts';
 import { knex } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { ChallengePage } from '../../pages/pix-app/index.ts';
 
 let PREVIEW_CHALLENGE_ID: string;

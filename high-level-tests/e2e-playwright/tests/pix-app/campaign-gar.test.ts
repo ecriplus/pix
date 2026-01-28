@@ -1,5 +1,5 @@
+import { expect, test } from '../../fixtures/index.ts';
 import { getGarTokenForNewUser } from '../../helpers/auth.js';
-import { expect, test } from '../../helpers/fixtures.js';
 import { PixOrgaPage } from '../../pages/pix-orga/index.js';
 
 test('creates an account from GAR', async ({ page, pixOrgaMemberContext }) => {

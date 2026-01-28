@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import { CampaignResultsPage } from '../../pages/pix-app/CampaignResultsPage.ts';
 import { ChallengePage } from '../../pages/pix-app/ChallengePage.ts';

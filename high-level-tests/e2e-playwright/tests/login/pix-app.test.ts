@@ -1,9 +1,9 @@
 import type { Page } from '@playwright/test';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
 import { buildFreshPixAppUser } from '../../helpers/db.js';
 import { PIX_APP_USER_DATA } from '../../helpers/db-data.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.js';
 
 test('Signup, logout and login', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {

@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUserWithGenericImport } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
 

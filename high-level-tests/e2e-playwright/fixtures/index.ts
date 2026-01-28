@@ -16,7 +16,7 @@ import {
   PIX_ORGA_ADMIN_CREDENTIALS,
   PIX_ORGA_MEMBER_CREDENTIALS,
   PIX_SUPER_ADMIN_CREDENTIALS,
-} from './auth.js';
+} from '../helpers/auth.js';
 
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
 const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import type { BrowserContext } from '@playwright/test';
 
-import { expect, test } from '../../helpers/fixtures.ts';
+import { expect, test } from '../../fixtures/index.ts';
 
 const routes = [
   // { path: '/accueil', title: 'Accueil | Pix' }, -> TODO FAILING

@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixCertifUser } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-certif/index.js';
 
 test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {

@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/index.js';
 
 test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {

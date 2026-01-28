@@ -1,10 +1,10 @@
+import { expect, test } from '../../../../fixtures/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/index.ts';
 import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
-import { expect, test } from '../../../../helpers/fixtures.ts';
 import { LoginPage as AdminLoginPage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage, LoginPage } from '../../../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, SessionListPage, SessionManagementPage } from '../../../../pages/pix-certif/index.ts';

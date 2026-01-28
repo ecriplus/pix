@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUser, knex } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/LoginPage.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 

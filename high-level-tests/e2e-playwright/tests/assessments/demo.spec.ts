@@ -1,5 +1,5 @@
+import { test } from '../../fixtures/index.ts';
 import { knex } from '../../helpers/db.ts';
-import { test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import { ChallengePage } from '../../pages/pix-app/index.ts';
 
