@@ -20,9 +20,9 @@ describe('Integration | Repository | Jobs | CertificationCompletedJobRepository'
 
       // then
       await expect(CertificationCompletedJob.name).to.have.been.performed.withJob({
-        retryLimit: 10,
-        retryDelay: 30,
-        retryBackoff: true,
+        retrylimit: 10,
+        retrydelay: 30,
+        retrybackoff: true,
         priority: JobPriority.HIGH,
         data,
       });
