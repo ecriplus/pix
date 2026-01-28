@@ -103,10 +103,8 @@ class CampaignParticipation {
     this.#loggerContext = CampaignParticipationLoggerContext.ANONYMIZATION;
   }
 
-  delete(userId, { isAnonymizationWithDeletionEnabled = false } = {}) {
-    if (isAnonymizationWithDeletionEnabled) {
-      this.anonymize();
-    }
+  delete(userId) {
+    this.anonymize();
 
     if (!this.isDeleted) {
       this.deletedAt = new Date();
