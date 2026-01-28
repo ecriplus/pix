@@ -62,7 +62,7 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
           firstName: 'Jean',
           lastName: 'La fripouille',
           id: 12345,
-          status: 'TO_SHARE',
+          status: 'STARTED',
         };
         const anotherParticipation = {
           firstName: 'Jean',
@@ -107,7 +107,7 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
           firstName: 'Jean',
           lastName: 'La fripouille',
           id: 12345,
-          status: 'TO_SHARE',
+          status: 'STARTED',
         };
         const anotherParticipation = {
           firstName: 'Jean',

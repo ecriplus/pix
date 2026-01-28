@@ -22,7 +22,7 @@ module('Integration | Component | Campaign::Activity::DeleteParticipationModal',
           id: '56',
           firstName: 'Joe',
           lastName: 'La frite',
-          status: 'TO_SHARE',
+          status: 'STARTED',
           participantExternalId: 'patate',
         };
 

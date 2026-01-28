@@ -70,7 +70,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       {
         firstName: 'Joe',
         lastName: 'La frite',
-        status: 'TO_SHARE',
+        status: 'STARTED',
         participantExternalId: 'patate',
       },
     ];
@@ -101,7 +101,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         id: '123',
         firstName: 'Joe',
         lastName: 'La frite',
-        status: 'TO_SHARE',
+        status: 'STARTED',
         participantExternalId: 'patate',
         lastCampaignParticipationId: '456',
       },
@@ -123,7 +123,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       id: '123',
       firstName: 'Joe',
       lastName: 'La frite',
-      status: 'TO_SHARE',
+      status: 'STARTED',
       participantExternalId: 'patate',
       lastCampaignParticipationId: '456',
     });
@@ -142,7 +142,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         id: '123',
         firstName: 'Joe',
         lastName: 'La frite',
-        status: 'TO_SHARE',
+        status: 'STARTED',
         participantExternalId: 'patate',
         lastCampaignParticipationId: '456',
         participationCount: 2,
@@ -177,7 +177,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         id: '123',
         firstName: 'Joe',
         lastName: 'La frite',
-        status: 'TO_SHARE',
+        status: 'STARTED',
         participantExternalId: 'patate',
         lastCampaignParticipationId: '456',
         participationCount: 1,
@@ -209,7 +209,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       {
         firstName: 'Joe',
         lastName: 'La frite',
-        status: 'TO_SHARE',
+        status: 'STARTED',
         participantExternalId: 'patate',
       },
     ];
@@ -243,7 +243,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           {
             firstName: 'Joe',
             lastName: 'La frite',
-            status: 'TO_SHARE',
+            status: 'STARTED',
             participantExternalId: 'patate',
           },
         ];
@@ -275,7 +275,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           {
             firstName: 'Joe',
             lastName: 'La frite',
-            status: 'TO_SHARE',
+            status: 'STARTED',
             participantExternalId: 'patate',
             lastCampaignParticipationId: 18,
           },
@@ -340,7 +340,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           {
             firstName: 'Joe',
             lastName: 'La frite',
-            status: 'TO_SHARE',
+            status: 'STARTED',
             participantExternalId: 'patate',
             lastCampaignParticipationId: 18,
           },
@@ -405,7 +405,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           {
             firstName: 'Joe',
             lastName: 'La frite',
-            status: 'TO_SHARE',
+            status: 'STARTED',
             participantExternalId: 'patate',
           },
         ];
