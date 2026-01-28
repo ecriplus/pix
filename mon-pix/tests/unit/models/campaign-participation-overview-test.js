@@ -55,7 +55,7 @@ module('Unit | Model | Campaign-Participation-Overview', function (hooks) {
       test('should return the status "DISABLED" if campaign not "SHARED"', function (assert) {
         // given
         const model = store.createRecord('campaign-participation-overview', {
-          status: 'TO_SHARE',
+          status: 'STARTED',
           isShared: false,
           disabledAt: new Date('2021-01-01'),
         });
