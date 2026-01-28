@@ -4,3 +4,8 @@
   gap: var(--pix-spacing-4x);
   padding-top: var(--pix-spacing-6x);
 }
+
+.back-button {
+  align-self: flex-end;
+  width: fit-content;
+}

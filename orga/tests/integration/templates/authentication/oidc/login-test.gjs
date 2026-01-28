@@ -13,7 +13,7 @@ module('Integration | Template | Authentication | OIDC | login', function (hooks
   };
 
   module('When user is invited', function () {
-    test('it displays the login template with invitation banner, login form component and link to signup form', async function (assert) {
+    test('it displays the login template with an invitation banner, a login form component and a link to signup form', async function (assert) {
       // given
       const controller = {
         currentInvitation: {
@@ -58,7 +58,7 @@ module('Integration | Template | Authentication | OIDC | login', function (hooks
   });
 
   module('When user is not invited', function () {
-    test('it displays the login template with login form component but no invitation banner and no link to signup form', async function (assert) {
+    test('it displays the login template with a login form component, no invitation banner, and a link to authentication/login instead of the signup form link', async function (assert) {
       // when
       const screen = await render(<template><Login />@model={{model}}</template>);
 
@@ -79,6 +79,7 @@ module('Integration | Template | Authentication | OIDC | login', function (hooks
         .exists();
       assert.dom('.invitation-banner').doesNotExist();
       assert.dom(screen.queryByRole('link', { name: t('pages.oidc.login.signup-button') })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: t('common.actions.back') })).exists();
     });
   });
 });

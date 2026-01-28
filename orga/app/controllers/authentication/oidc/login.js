@@ -61,4 +61,10 @@ export default class OidcLoginController extends Controller {
   goToOidcProviderLoginPage() {
     this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress = true;
   }
+
+  @action
+  goBack() {
+    oidcUserAuthenticationStorage.remove();
+    return this.router.transitionTo('authentication.login');
+  }
 }
