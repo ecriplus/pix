@@ -19,7 +19,7 @@ export const snapshotFixtures = base.extend<{
   },
 });
 
-class SnapshotHandler {
+export class SnapshotHandler {
   private readonly results: { label: string; value: number | string }[];
   private readonly shouldUpdateSnapshots: boolean;
   constructor({ shouldUpdateSnapshots }: { shouldUpdateSnapshots: boolean }) {
