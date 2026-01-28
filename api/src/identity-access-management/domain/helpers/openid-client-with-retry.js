@@ -10,10 +10,11 @@ export class OpenidClientWithRetry {
   #maxRetryCount;
   #waitDurationInMs;
 
-  constructor({ openidClient, maxRetryCount, durationInMs } = {}) {
+  constructor({ identityProvider, openidClient, maxRetryCount, durationInMs } = {}) {
     this.#openidClient = openidClient ?? originalOpenidClient;
     this.#maxRetryCount = maxRetryCount ?? MAX_RETRY_COUNT;
     this.#waitDurationInMs = durationInMs ?? WAIT_DURATION_IN_MS;
+    this.identityProvider = identityProvider;
   }
 
   /**
@@ -59,7 +60,7 @@ export class OpenidClientWithRetry {
         throw error;
       }
 
-      _monitorError(error, f, retryCount);
+      _monitorError(this.identityProvider, error, f, retryCount);
 
       await new Promise((resolve) => setTimeout(() => resolve(), this.#waitDurationInMs));
 
@@ -68,9 +69,9 @@ export class OpenidClientWithRetry {
   }
 }
 
-function _monitorError(error, f, retryCount) {
+function _monitorError(identityProvider, error, f, retryCount) {
   const monitoringData = {
-    message: `Error executing ${f.name}, retry = ${retryCount}`,
+    message: `Error for identityProvider ${identityProvider} executing ${f.name}, retry = ${retryCount}`,
     context: 'oidc',
     team: 'acces',
   };
@@ -85,5 +86,3 @@ function _monitorError(error, f, retryCount) {
 
   logger.info(monitoringData);
 }
-
-export const openidClientWithRetry = new OpenidClientWithRetry();
