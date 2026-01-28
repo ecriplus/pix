@@ -22,7 +22,7 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
-    sinon.stub(localeService, 'supportedLocales').value(['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
+    sinon.stub(localeService, 'availableLocales').value(['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
 
     currentDomainService = this.owner.lookup('service:currentDomain');
     sinon.stub(currentDomainService, 'getExtension');
