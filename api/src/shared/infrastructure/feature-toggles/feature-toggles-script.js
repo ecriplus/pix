@@ -51,6 +51,8 @@ export class FeatureToggleScript extends Script {
         convertedValue = value === 'true';
       } else if (featureToggle.type === 'number') {
         convertedValue = Number(value);
+      } else if (featureToggle.type === 'array') {
+        convertedValue = value.split(',').filter((element) => element != '');
       } else {
         convertedValue = value;
       }

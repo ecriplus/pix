@@ -4,7 +4,7 @@ const ConfigSchema = Joi.object().pattern(
   Joi.string(),
   Joi.object({
     description: Joi.string().required(),
-    type: Joi.string().valid('boolean', 'number', 'string').required(),
+    type: Joi.string().valid('boolean', 'number', 'string', 'array').required(),
     defaultValue: Joi.any().required(),
     devDefaultValues: Joi.object({
       test: Joi.any().optional(),
@@ -86,6 +86,7 @@ export class FeatureTogglesClient {
     if (!featureToggle) {
       throw new FeatureToggleNotFoundError(key);
     }
+
     await this.storage.save({ key, value });
   }
 
