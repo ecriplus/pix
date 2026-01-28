@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.316.0](https://github.com/1024pix/pix/compare/v5.315.0...v5.316.0) (2026-01-28)
+
+### :rocket: Amélioration
+
+- [#14876](https://github.com/1024pix/pix/pull/14876) Ajoute les ids des pré-requis de parcours combinés (PIX-21131) 
+
+### :rewind: Retour en arrière
+
+- [#14905](https://github.com/1024pix/pix/pull/14905) Revert "[TECH] Utiliser Pgboss pour insérer les jobs plutôt que knex"
+
+### :building_construction: Tech
+
+- [#14891](https://github.com/1024pix/pix/pull/14891) Remplacer les hbs par du gjs sur PixCertif  (PIX-21261).
+
 # [5.315.0](https://github.com/1024pix/pix/compare/v5.314.1...v5.315.0) (2026-01-28)
 
 ### :rocket: Amélioration
