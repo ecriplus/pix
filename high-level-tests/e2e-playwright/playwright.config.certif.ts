@@ -1,12 +1,6 @@
-import path from 'node:path';
-
 import { defineConfig } from '@playwright/test';
-import dotenv from 'dotenv';
 
-import sharedConfig from './playwright.config.shared.ts';
-
-const isCI = Boolean(process.env.CI);
-if (!isCI) dotenv.config({ path: path.resolve(import.meta.dirname, '.env.e2e') });
+import sharedConfig, { App, isCI, reuseExistingApps, setupWebServer } from './playwright.config.shared.ts';
 
 export default defineConfig({
   ...sharedConfig,
@@ -14,37 +8,28 @@ export default defineConfig({
     {
       name: 'recette certif - création utilisateur certifiable',
       testDir: 'tests/recette-certif',
-      testMatch: '**/create-certifiable-user.ts',
+      testMatch: '**/create-certifiable-user.spec.ts',
     },
     {
       name: 'recette certif - passage de certif PRO coeur',
       testDir: 'tests/recette-certif',
-      testMatch: '**/pro/**/*.ts',
+      testMatch: '**/pro/**/*.spec.ts',
       dependencies: ['recette certif - création utilisateur certifiable'],
     },
   ],
+
   webServer: isCI
     ? [
-        ...(sharedConfig.webServer as []),
-        {
-          command: 'while true; do echo "Wait for PixAdmin to start"; sleep 300; done',
-          url: process.env.PIX_ADMIN_URL,
-          reuseExistingServer: true,
-        },
+        setupWebServer(App.PIX_APP, true),
+        setupWebServer(App.PIX_ORGA, true),
+        setupWebServer(App.PIX_CERTIF, true),
+        setupWebServer(App.PIX_ADMIN, true),
       ]
     : [
-        ...(sharedConfig.webServer as []),
-        {
-          cwd: '../../admin',
-          timeout: 180 * 1000,
-          command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
-          url: process.env.PIX_ADMIN_URL,
-          reuseExistingServer: false,
-          stdout: 'ignore',
-          stderr: 'pipe',
-          env: {
-            DEFAULT_LOCALE: 'fr',
-          },
-        },
+        setupWebServer(App.PIX_API, false),
+        setupWebServer(App.PIX_APP, reuseExistingApps),
+        setupWebServer(App.PIX_ORGA, reuseExistingApps),
+        setupWebServer(App.PIX_CERTIF, reuseExistingApps),
+        setupWebServer(App.PIX_ADMIN, reuseExistingApps),
       ],
 });
