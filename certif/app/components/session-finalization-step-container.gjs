@@ -1,0 +1,16 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+
+<template>
+  <div class='panel session-finalization-step-container'>
+    <div class='session-finalization-step-container__header'>
+      <PixIcon @name={{@iconName}} @ariaHidden={{true}} class='session-finalization-step-header__icon' />
+      <div>
+        <h2 class='session-finalization-step-container__page-title'>{{@title}}</h2>
+        <p>{{@subtitle}}</p>
+      </div>
+    </div>
+    <div class='session-finalization-step-container__border'>
+      {{yield}}
+    </div>
+  </div>
+</template>

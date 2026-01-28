@@ -128,5 +128,9 @@
     "stylelint": "^17.0.0",
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.99.8"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
   }
 }

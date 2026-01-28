@@ -1,0 +1,54 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
+import t from 'ember-intl/helpers/t';
+
+<template>
+  <fieldset class='non-blocking-candidate-issue-certification-issue-report-fields'>
+    <div class='non-blocking-candidate-issue-certification-issue-report-fields__radio-button__tooltip'>
+      <input
+        id='input-radio-for-category-candidate-issue'
+        type='radio'
+        name='candidate-issue'
+        checked={{@nonBlockingCandidateIssueCategory.isChecked}}
+        {{on 'click' (fn @toggleOnCategory @nonBlockingCandidateIssueCategory)}}
+      />
+      <label for='input-radio-for-category-candidate-issue'><span
+        >{{@nonBlockingCandidateIssueCategory.categoryCode}}&nbsp;</span>{{@nonBlockingCandidateIssueCategory.categoryLabel}}</label>
+      <PixTooltip @id='tooltip-candidate-issue' @position='right' @isWide={{true}}>
+        <:triggerElement>
+          <PixIcon
+            @name='info'
+            @plainIcon={{true}}
+            @ariaHidden={{false}}
+            @title='Incident technique'
+            tabindex='0'
+            aria-describedby='tooltip-candidate-issue'
+          />
+        </:triggerElement>
+        <:tooltip>
+          <span>{{t 'pages.session-finalization.add-issue-modal.non-blocking-issues.candidate-examples'}}</span>
+        </:tooltip>
+      </PixTooltip>
+    </div>
+    {{#if @nonBlockingCandidateIssueCategory.isChecked}}
+      <PixNotificationAlert @type='info' @withIcon={{true}}>
+        {{t 'pages.session-finalization.add-issue-modal.non-blocking-issues.candidate-information'}}
+      </PixNotificationAlert>
+      <div class='non-blocking-candidate-issue-certification-issue-report-fields__details'>
+        <PixTextarea
+          id='text-area-for-category-candidate-issue'
+          @value={{@nonBlockingCandidateIssueCategory.description}}
+          @maxlength={{@maxlength}}
+          required='true'
+          {{on 'change' @updateNonBlockingCandidateIssueCategoryDescription}}
+        >
+          <:label>{{t 'pages.session-finalization.add-issue-modal.actions.describe'}}</:label>
+        </PixTextarea>
+      </div>
+    {{/if}}
+  </fieldset>
+</template>

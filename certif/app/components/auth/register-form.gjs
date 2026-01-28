@@ -1,0 +1,304 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import t from 'ember-intl/helpers/t';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
+
+import isEmailValid from '../../utils/email-validator';
+import isPasswordValid from '../../utils/password-validator';
+
+const STATUSES = {
+  DEFAULT: 'default',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
+class LastName {
+  @tracked status = STATUSES.DEFAULT;
+  @tracked message = null;
+}
+
+class FirstName {
+  @tracked status = STATUSES.DEFAULT;
+  @tracked message = null;
+}
+
+class Email {
+  @tracked status = STATUSES.DEFAULT;
+  @tracked message = null;
+}
+
+class Password {
+  @tracked status = STATUSES.DEFAULT;
+  @tracked message = null;
+}
+
+class SignupFormValidation {
+  lastName = new LastName();
+  firstName = new FirstName();
+  email = new Email();
+  password = new Password();
+}
+
+export default class RegisterForm extends Component {
+  @service intl;
+  @service locale;
+  @service session;
+  @service store;
+  @service url;
+
+  @tracked isLoading = false;
+  @tracked firstName = null;
+  @tracked lastName = null;
+  @tracked email = null;
+  @tracked password = null;
+  @tracked isTermsOfServiceValidated = false;
+  @tracked cguValidationMessage = null;
+  @tracked errorMessage = null;
+  @tracked validation = new SignupFormValidation();
+
+  get cguUrl() {
+    return this.url.cguUrl;
+  }
+
+  get dataProtectionPolicyUrl() {
+    return this.url.dataProtectionPolicyUrl;
+  }
+
+  @action
+  async register(event) {
+    event.preventDefault();
+    this.errorMessage = null;
+
+    if (!this._isFormValid()) {
+      return;
+    }
+    this.isLoading = true;
+
+    let certificationCenterInvitationResponseRecord;
+    const userRecord = this.store.createRecord('user', {
+      lastName: this.lastName,
+      firstName: this.firstName,
+      email: this.email,
+      lang: this.locale.currentLanguage,
+      password: this.password,
+      cgu: true,
+    });
+
+    try {
+      await userRecord.save();
+
+      certificationCenterInvitationResponseRecord = this.store.createRecord(
+        'certification-center-invitation-response',
+        {
+          id: this.args.certificationCenterInvitationId,
+          code: this.args.certificationCenterInvitationCode,
+          email: this.email,
+        },
+      );
+      await certificationCenterInvitationResponseRecord.save({
+        adapterOptions: { certificationCenterInvitationId: this.args.certificationCenterInvitationId },
+      });
+
+      const invitationToDelete = this.store.peekRecord(
+        'certification-center-invitation',
+        this.args.certificationCenterInvitationId,
+      );
+      invitationToDelete.unloadRecord();
+
+      await this._authenticate(this.email, this.password);
+    } catch (response) {
+      const status = get(response, 'errors[0].status');
+
+      if (status === '422') {
+        this.errorMessage = this.intl.t('common.form-errors.email.invalid-or-already-used-email');
+      } else {
+        this.errorMessage = this.intl.t('common.form-errors.default');
+      }
+
+      await userRecord?.deleteRecord();
+      await certificationCenterInvitationResponseRecord?.deleteRecord();
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  @action
+  validatePassword(event) {
+    this.validation.password.status = STATUSES.DEFAULT;
+    this.validation.password.message = null;
+    this.password = event.target.value;
+    const isInvalidInput = !isPasswordValid(this.password);
+
+    if (isInvalidInput) {
+      this.validation.password.status = STATUSES.ERROR;
+      this.validation.password.message = this.intl.t('common.form-errors.password.format');
+    } else {
+      this.validation.password.status = STATUSES.SUCCESS;
+    }
+  }
+
+  @action
+  validateEmail(event) {
+    this.validation.email.status = STATUSES.DEFAULT;
+    this.validation.email.message = null;
+    this.email = event.target.value?.trim().toLowerCase();
+    const isInvalidInput = !isEmailValid(this.email);
+
+    if (isInvalidInput) {
+      this.validation.email.status = STATUSES.ERROR;
+      this.validation.email.message = this.intl.t('common.form-errors.email.format');
+    } else {
+      this.validation.email.status = STATUSES.SUCCESS;
+    }
+  }
+
+  @action
+  validateFirstName(event) {
+    this.validation.firstName.status = STATUSES.DEFAULT;
+    this.validation.firstName.message = null;
+    this.firstName = event.target.value?.trim();
+    const isInvalidInput = isEmpty(this.firstName);
+
+    if (isInvalidInput) {
+      this.validation.firstName.status = STATUSES.ERROR;
+      this.validation.firstName.message = this.intl.t('common.form-errors.firstname.mandatory');
+    } else {
+      this.validation.firstName.status = STATUSES.SUCCESS;
+    }
+  }
+
+  @action
+  validateLastName(event) {
+    this.validation.lastName.status = STATUSES.DEFAULT;
+    this.validation.lastName.message = null;
+    this.lastName = event.target.value?.trim();
+    const isInvalidInput = isEmpty(this.lastName);
+
+    if (isInvalidInput) {
+      this.validation.lastName.status = STATUSES.ERROR;
+      this.validation.lastName.message = this.intl.t('common.form-errors.lastname.mandatory');
+    } else {
+      this.validation.lastName.status = STATUSES.SUCCESS;
+    }
+  }
+
+  @action
+  validateCgu(event) {
+    this.isTermsOfServiceValidated = !!event.target.checked;
+    this.cguValidationMessage = null;
+
+    if (!this.isTermsOfServiceValidated) {
+      this.cguValidationMessage = this.intl.t('pages.login-or-register.register-form.fields.cgu.error');
+    }
+  }
+
+  _isFormValid() {
+    return (
+      !isEmpty(this.lastName) &&
+      !isEmpty(this.firstName) &&
+      isEmailValid(this.email) &&
+      isPasswordValid(this.password) &&
+      Boolean(this.isTermsOfServiceValidated)
+    );
+  }
+
+  _authenticate(email, password) {
+    return this.session.authenticate('authenticator:oauth2', email, password);
+  }
+
+  <template>
+    <form class='register-form' {{on 'submit' this.register}}>
+      <p class='register-form__information'>{{t 'common.form-errors.mandatory-all-fields'}}</p>
+
+      <PixInput
+        @id='register-firstName'
+        name='firstName'
+        {{on 'change' this.validateFirstName}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='given-name'
+        @validationStatus={{this.validation.firstName.status}}
+        @errorMessage={{this.validation.firstName.message}}
+      >
+        <:label>{{t 'common.labels.candidate.firstname'}}</:label>
+      </PixInput>
+
+      <PixInput
+        @id='register-lastName'
+        name='lastName'
+        {{on 'change' this.validateLastName}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='family-name'
+        @validationStatus={{this.validation.lastName.status}}
+        @errorMessage={{this.validation.lastName.message}}
+      >
+        <:label>{{t 'common.labels.candidate.lastname'}}</:label>
+      </PixInput>
+
+      <PixInput
+        @id='register-email'
+        name='email'
+        type='email'
+        {{on 'change' this.validateEmail}}
+        required={{true}}
+        aria-required={{true}}
+        autocomplete='email'
+        @validationStatus={{this.validation.email.status}}
+        @errorMessage={{this.validation.email.message}}
+      >
+        <:label>{{t 'common.forms.login.email'}}</:label>
+      </PixInput>
+
+      <PixInputPassword
+        @id='register-password'
+        name='password'
+        autocomplete='current-password'
+        required={{true}}
+        aria-required={{true}}
+        {{on 'change' this.validatePassword}}
+        @validationStatus={{this.validation.password.status}}
+        @errorMessage={{this.validation.password.message}}
+      >
+        <:label>{{t 'common.forms.login.password'}}</:label>
+      </PixInputPassword>
+
+      <PixCheckbox @size='small' required={{true}} aria-required={{true}} {{on 'click' this.validateCgu}}>
+        <:label>
+          <p class='register-form__cgu-label'>
+            {{t 'pages.login-or-register.register-form.fields.cgu.accept'}}
+            <a href={{this.cguUrl}} class='link' target='_blank' rel='noopener noreferrer'>
+              {{t 'pages.login-or-register.register-form.fields.cgu.terms-of-use'}}
+            </a>
+            {{t 'pages.login-or-register.register-form.fields.cgu.and'}}
+            <a href={{this.dataProtectionPolicyUrl}} class='link' target='_blank' rel='noopener noreferrer'>
+              {{t 'pages.login-or-register.register-form.fields.cgu.data-protection-policy'}}
+            </a>
+          </p>
+        </:label>
+      </PixCheckbox>
+      {{#if this.cguValidationMessage}}
+        <p class='register-form__cgu-error' role='alert'>{{this.cguValidationMessage}}</p>
+      {{/if}}
+
+      {{#if this.errorMessage}}
+        <PixNotificationAlert @type='error'>
+          {{this.errorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+
+      <PixButton @type='submit' @isLoading={{this.isLoading}}>
+        {{t 'pages.login-or-register.register-form.actions.login-button'}}
+      </PixButton>
+    </form>
+  </template>
+}

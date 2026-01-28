@@ -1,0 +1,8 @@
+<template>
+  <div class='page restricted-access-page'>
+    <img class='restricted-access-content__image' src='/images/calendar_blocked_access_sco.svg' alt role='none' />
+    <h1 class='restricted-access-content__opening-title'>
+      {{@controller.certificationOpeningDate}}
+    </h1>
+  </div>
+</template>

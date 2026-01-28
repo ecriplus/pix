@@ -1,0 +1,33 @@
+import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
+import t from 'ember-intl/helpers/t';
+
+<template>
+  <fieldset>
+    <div>
+      <input
+        id='input-radio-for-category-signature-issue'
+        type='radio'
+        name='signature-issue'
+        checked={{@signatureIssueCategory.isChecked}}
+        {{on 'click' (fn @toggleOnCategory @signatureIssueCategory)}}
+      />
+      <label for='input-radio-for-category-signature-issue'><span
+        >{{@signatureIssueCategory.categoryCode}}&nbsp;</span>{{@signatureIssueCategory.categoryLabel}}</label>
+    </div>
+    {{#if @signatureIssueCategory.isChecked}}
+      <div>
+        <PixTextarea
+          @id='text-area-for-category-signature-issue'
+          @value={{@signatureIssueCategory.description}}
+          @maxlength={{@maxlength}}
+          required='true'
+          {{on 'change' @updateSignatureIssueCategoryDescription}}
+        >
+          <:label>{{t 'pages.session-finalization.add-issue-modal.actions.specify'}}</:label>
+        </PixTextarea>
+      </div>
+    {{/if}}
+  </fieldset>
+</template>
