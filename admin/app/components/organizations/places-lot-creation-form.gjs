@@ -2,12 +2,16 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import get from 'lodash/get';
+import Joi from 'joi';
+
+import { FormValidator } from '../../utils/form-validator';
 
 const categories = [
   { value: 'FULL_RATE', label: 'Tarif plein' },
@@ -18,71 +22,56 @@ const categories = [
 ];
 
 export default class PlacesLotCreationForm extends Component {
-  @tracked selectedCategory = null;
+  @service pixToast;
+  @service intl;
 
-  @tracked count;
-  @tracked activationDate;
-  @tracked expirationDate;
-  @tracked category;
-  @tracked reference;
+  @tracked selectedCategory = null;
+  @tracked form = {};
   @tracked isLoading = false;
+
+  validator = new FormValidator(PLACES_LOT_FORM_SCHEMA);
 
   constructor() {
     super(...arguments);
     this.categories = categories;
-    this.activationDate = new Date().toISOString().split('T')[0];
+    this.form = {
+      count: undefined,
+      reference: undefined,
+      activationDate: new Date().toISOString().split('T')[0],
+      category: undefined,
+      expirationDate: undefined,
+    };
   }
 
   @action
   async onSubmit(event) {
-    event.preventDefault();
-
     if (this.isLoading) return;
 
-    this.isLoading = true;
+    event.preventDefault();
 
-    await this.args.create({
-      count: this.count,
-      activationDate: this.activationDate,
-      expirationDate: this.expirationDate ? this.expirationDate : null,
-      category: this.category,
-      reference: this.reference,
-    });
+    const isFormValid = this.validator.validate(this.form);
+    if (!isFormValid) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.organizations.places.creation.error-messages.submit'),
+      });
+      return;
+    }
+
+    this.isLoading = true;
+    await this.args.create(this.form);
     this.isLoading = false;
   }
 
-  @action
-  selectCategory(value) {
-    const newValue = value || null;
-    this.category = newValue;
-  }
+  handleInputChange = (key, event) => {
+    const { value } = event.target;
+    this.validator.validateField(key, value);
+    this.form = { ...this.form, [key]: value };
+  };
 
-  @action
-  onCountChange(event) {
-    this.count = event.target.value;
-  }
-
-  @action
-  onActivationDateChange(event) {
-    this.activationDate = event.target.value;
-  }
-
-  @action
-  onExpirationDateChange(event) {
-    this.expirationDate = event.target.value;
-  }
-
-  @action
-  onReferenceChange(event) {
-    this.reference = event.target.value;
-  }
-
-  getCategoryByValue(value) {
-    if (value) {
-      return find(this.categories, { value });
-    }
-    return this.categories[0];
-  }
+  handleSelectChange = (key, value) => {
+    this.validator.validateField(key, value);
+    this.form = { ...this.form, [key]: value };
+  };
 
   <template>
     <section class="page-section">
@@ -93,56 +82,45 @@ export default class PlacesLotCreationForm extends Component {
           </span>
           <div class="form-field">
             <PixInput
-              class={{if @errors.count "form-control is-invalid" "form-control"}}
-              @value={{this.count}}
+              @value={{this.form.count}}
               type="number"
               @requiredLabel={{t "common.forms.mandatory"}}
-              {{on "input" this.onCountChange}}
+              required={{false}}
+              {{on "change" (fn this.handleInputChange "count")}}
+              @validationStatus={{if this.validator.errors.count "error"}}
+              @errorMessage={{if this.validator.errors.count (t this.validator.errors.count)}}
             ><:label>Nombre :</:label></PixInput>
-
-            {{#if @errors.count}}
-              <div class="form-field__error">
-                {{get @errors.count "0.message"}}
-              </div>
-            {{/if}}
           </div>
           <div class="form-field">
             <PixInput
               type="date"
-              class={{if @errors.activationDate "form-control is-invalid" "form-control"}}
-              @value={{this.activationDate}}
+              @value={{this.form.activationDate}}
               @requiredLabel={{t "common.forms.mandatory"}}
-              {{on "input" this.onActivationDateChange}}
+              required={{false}}
+              {{on "change" (fn this.handleInputChange "activationDate")}}
+              @validationStatus={{if this.validator.errors.activationDate "error"}}
+              @errorMessage={{if this.validator.errors.activationDate (t this.validator.errors.activationDate)}}
             ><:label>Date d'activation</:label></PixInput>
-
-            {{#if @errors.activationDate}}
-              <div class="form-field__error">
-                {{get @errors.activationDate "0.message"}}
-              </div>
-            {{/if}}
           </div>
           <div class="form-field">
             <PixInput
-              class={{if @errors.expirationDate "form-control is-invalid" "form-control"}}
               type="date"
-              @value={{this.expirationDate}}
+              @value={{this.form.expirationDate}}
               @requiredLabel={{t "common.forms.mandatory"}}
-              {{on "input" this.onExpirationDateChange}}
+              required={{false}}
+              {{on "change" (fn this.handleInputChange "expirationDate")}}
+              @validationStatus={{if this.validator.errors.expirationDate "error"}}
+              @errorMessage={{if this.validator.errors.expirationDate (t this.validator.errors.expirationDate)}}
             ><:label>Date d'expiration</:label></PixInput>
-
-            {{#if @errors.expirationDate}}
-              <div class="form-field__error">
-                {{get @errors.expirationDate "0.message"}}
-              </div>
-            {{/if}}
           </div>
           <div class="form-field">
             <PixSelect
               @options={{this.categories}}
               @placeholder="Sélectionnez une catégorie"
-              @onChange={{this.selectCategory}}
-              @value={{this.category}}
-              @errorMessage={{get @errors.category "0.message"}}
+              @onChange={{fn this.handleSelectChange "category"}}
+              @value={{this.form.category}}
+              @validationStatus={{if this.validator.errors.category "error"}}
+              @errorMessage={{if this.validator.errors.category (t this.validator.errors.category)}}
               @requiredLabel={{t "common.forms.mandatory"}}
             >
               <:label>Catégorie</:label>
@@ -150,18 +128,14 @@ export default class PlacesLotCreationForm extends Component {
           </div>
           <div class="form-field">
             <PixInput
-              @value={{this.reference}}
-              class={{if @errors.reference "form-control is-invalid" "form-control"}}
+              @value={{this.form.reference}}
               maxlength="255"
+              required={{false}}
               @requiredLabel={{t "common.forms.mandatory"}}
-              {{on "input" this.onReferenceChange}}
+              {{on "change" (fn this.handleInputChange "reference")}}
+              @validationStatus={{if this.validator.errors.reference "error"}}
+              @errorMessage={{if this.validator.errors.reference (t this.validator.errors.reference)}}
             ><:label>Référence</:label></PixInput>
-
-            {{#if @errors.reference}}
-              <div class="form-field__error">
-                {{get @errors.reference "0.message"}}
-              </div>
-            {{/if}}
           </div>
 
           <div class="form-actions">
@@ -182,3 +156,25 @@ export default class PlacesLotCreationForm extends Component {
     </section>
   </template>
 }
+
+const PLACES_LOT_FORM_SCHEMA = Joi.object({
+  count: Joi.number().integer().positive().required().messages({
+    'any.required': 'components.organizations.places.creation.error-messages.count',
+    'number.base': 'components.organizations.places.creation.error-messages.count',
+    'number.positive': 'components.organizations.places.creation.error-messages.count',
+    'number.integer': 'components.organizations.places.creation.error-messages.count',
+  }),
+  activationDate: Joi.date().required().messages({
+    'any.required': 'components.organizations.places.creation.error-messages.activation-date',
+  }),
+  expirationDate: Joi.date().required().messages({
+    'any.required': 'components.organizations.places.creation.error-messages.expiration-date',
+  }),
+  reference: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.places.creation.error-messages.reference',
+    'string.empty': 'components.organizations.places.creation.error-messages.reference',
+  }),
+  category: Joi.string().required().messages({
+    'any.required': 'components.organizations.places.creation.error-messages.category',
+  }),
+});
