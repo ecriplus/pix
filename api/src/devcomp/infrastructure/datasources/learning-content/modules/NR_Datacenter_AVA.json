@@ -974,7 +974,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
@@ -995,7 +995,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
@@ -1050,7 +1050,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
@@ -1071,7 +1071,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
@@ -1126,7 +1126,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
@@ -1147,7 +1147,7 @@
                           "size": 15,
                           "display": "inline",
                           "placeholder": "à compléter",
-                          "ariaLabel": "",
+                          "ariaLabel": "à compléter",
                           "tolerances": [
                             "t1",
                             "t2",
