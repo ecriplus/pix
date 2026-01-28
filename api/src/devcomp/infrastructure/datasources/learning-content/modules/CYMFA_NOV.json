@@ -404,8 +404,12 @@
               "type": "element",
               "element": {
                 "id": "4b3376cc-ab7c-4d22-b6f4-95b83fc0e68e",
-                "type": "text",
-                "content": "<ul>    <li><strong>Pour accéder à un service en ligne il faut</strong>&nbsp;:&nbsp;<ul>            <li><strong>S’identifier</strong>, dire qui on est, avec une adresse mail, par exemple.</li>            <li><strong>S’authentifier</strong>, prouver qui on est, avec un mot de passe par exemple.</li>        </ul>    </li></ul><ul>    <li>La <strong>double authentification</strong> permet de mieux<strong> protéger l’accès à vos services en ligne</strong>.</li></ul><ul>    <li>Elle ajoute un<strong> second moyen de vérifier votre identité</strong> lors de vos connexions, en plus de votre mot de passe.&nbsp;<br>✔️Par exemple&nbsp;: un code à usage unique ou une notification.</li></ul><ul>    <li>Si une personne mal intentionnée vole votre identifiant et votre mot de passe, la <strong>double authentification peut l’empêcher de se connecter</strong>. 🛡️</li></ul>"
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/CY_MFA_NOV/recap.png",
+                "alt": "Infographie du récapitulatif",
+                "alternativeText": "<ul><li>Pour accéder à un service en ligne il faut :&nbsp;<ul><li>S’identifier, dire qui on est, avec une adresse mail, par exemple.</li><li>S’authentifier, prouver qui on est, avec un mot de passe par exemple.</li></ul></li><li>La double authentification permet de mieux protéger l’accès à vos services en ligne.</li><li>Elle ajoute un second moyen de vérifier votre identité lors de vos connexions, en plus de votre mot de passe.&nbsp;<br>Par exemple : un code à usage unique ou une notification.</li><li>Si une personne mal intentionnée vole votre identifiant et votre mot de passe, la double authentification peut l’empêcher de se connecter. 🛡️<br></li></ul><br>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
@@ -446,7 +450,6 @@
                     "display": "inline",
                     "placeholder": "-Sélectionnez-",
                     "ariaLabel": "-Sélectionnez-",
-
                     "tolerances": [],
                     "options": [
                       {
