@@ -125,7 +125,7 @@ export default class OrganizationCreationForm extends Component {
 
           <div class="organization-creation-form__input--full">
             <PixInput
-              @id="organizationName"
+              @id="name"
               {{on "change" (fn this.handleInputChange "name")}}
               @requiredLabel={{t "common.fields.required-field"}}
               placeholder={{concat
@@ -142,6 +142,7 @@ export default class OrganizationCreationForm extends Component {
           </div>
 
           <PixSelect
+            @id="type"
             @onChange={{fn this.handleSelectChange "type"}}
             @options={{this.organizationTypes}}
             @placeholder={{t "components.organizations.creation.type.placeholder"}}
@@ -155,6 +156,7 @@ export default class OrganizationCreationForm extends Component {
           </PixSelect>
 
           <PixSelect
+            @id="administrationTeamId"
             @onChange={{fn this.handleSelectChange "administrationTeamId"}}
             @options={{this.administrationTeamsOptions}}
             @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
@@ -170,6 +172,7 @@ export default class OrganizationCreationForm extends Component {
           </PixSelect>
 
           <PixSelect
+            @id="countryCode"
             @onChange={{fn this.handleSelectChange "countryCode"}}
             @options={{this.countriesOptions}}
             @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
