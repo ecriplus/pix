@@ -62,13 +62,47 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
       });
     });
 
-    module('when the wanted OIDC Provider is enabled and ready', function () {
-      test('the user is redirected to the Pix signup form', async function (assert) {
-        // when
-        await visit('/connexion/oidc-partner?code=code&state=state');
+    module('when the wanted OIDC Provider is enabled and ready', function (hooks) {
+      const invitationStorage = new SessionStorageEntry('joinInvitationData');
+      let invitation;
 
-        // then
-        assert.strictEqual(currentURL(), '/connexion/oidc-partner/signup');
+      hooks.beforeEach(() => {
+        invitation = server.create('organizationInvitation', {
+          status: 'pending',
+          code: 'ABCD',
+          organizationName: 'College BRO & Evil Associates',
+        });
+
+        invitationStorage.set({
+          invitationId: String(invitation.id),
+          code: invitation.code,
+          organizationName: invitation.organizationName,
+        });
+      });
+
+      hooks.afterEach(function () {
+        invitationStorage.remove();
+      });
+
+      module('when the user is invited', function () {
+        test('the user is redirected to the Pix signup form', async function (assert) {
+          // when
+          await visit('/connexion/oidc-partner?code=code&state=state');
+
+          // then
+          assert.strictEqual(currentURL(), '/connexion/oidc-partner/signup');
+        });
+      });
+
+      module('when the user is not invited', function () {
+        test('the user is redirected to the Pix login form', async function (assert) {
+          // when
+          invitationStorage.remove();
+          await visit('/connexion/oidc-partner?code=code&state=state');
+
+          // then
+          assert.strictEqual(currentURL(), '/connexion/oidc-partner/login');
+        });
       });
 
       module('when the user submits Pix login form', function () {
@@ -175,28 +209,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
       });
 
       module('when the user confirms the addition of a new authentication method', function () {
-        module('when the user is invited', function (hooks) {
-          const invitationStorage = new SessionStorageEntry('joinInvitationData');
-          let invitation;
-
-          hooks.beforeEach(() => {
-            invitation = server.create('organizationInvitation', {
-              status: 'pending',
-              code: 'ABCD',
-              organizationName: 'College BRO & Evil Associates',
-            });
-
-            invitationStorage.set({
-              invitationId: String(invitation.id),
-              code: invitation.code,
-              organizationName: invitation.organizationName,
-            });
-          });
-
-          hooks.afterEach(function () {
-            invitationStorage.remove();
-          });
-
+        module('when the user is invited', function () {
           async function fillInAndSubmitLoginForm(screen) {
             await fillIn(
               await screen.getByRole('textbox', { name: t('pages.login-form.email.label') }),

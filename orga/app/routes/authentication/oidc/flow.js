@@ -13,6 +13,7 @@ export default class LoginOidcRoute extends Route {
   @service oidcIdentityProviders;
   @service router;
   @service session;
+  @service joinInvitation;
 
   async beforeModel(transition) {
     const queryParams = transition.to.queryParams;
@@ -55,7 +56,11 @@ export default class LoginOidcRoute extends Route {
     const { identityProviderSlug, shouldCreateUserAccount } = model;
 
     if (shouldCreateUserAccount) {
-      this.router.transitionTo('authentication.oidc.signup', identityProviderSlug);
+      if (this.joinInvitation.invitation) {
+        this.router.transitionTo('authentication.oidc.signup', identityProviderSlug);
+      } else {
+        this.router.transitionTo('authentication.oidc.login', identityProviderSlug);
+      }
     }
   }
 
