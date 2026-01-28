@@ -128,12 +128,10 @@ class OrganizationLearner {
     this.lastName = lastName;
   }
 
-  delete(userId, { isAnonymizationWithDeletionEnabled }) {
+  delete(userId) {
     const date = new Date();
-    if (isAnonymizationWithDeletionEnabled) {
-      this.anonymize();
-      this.#loggerContext = OrganizationLearnerLoggerContext.DELETION;
-    }
+    this.anonymize();
+    this.#loggerContext = OrganizationLearnerLoggerContext.DELETION;
 
     if (!this.deletedAt) {
       this.deletedAt = date;
