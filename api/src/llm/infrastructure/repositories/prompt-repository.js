@@ -36,7 +36,7 @@ export async function prompt({ messages, configuration, chatId }) {
     configuration: configurationDTO,
     history: messages,
   });
-  const url = config.llm.postPromptUrl;
+  const url = config.llm.inferenceApi.postPromptUrl;
 
   let response;
   let currentRetryCount = 0;
@@ -54,7 +54,7 @@ export async function prompt({ messages, configuration, chatId }) {
               client_id: 'pix-api',
               scope: 'api',
             },
-            config.llm.authSecret,
+            config.llm.inferenceApi.authSecret,
           )}`,
         },
         body: payload,

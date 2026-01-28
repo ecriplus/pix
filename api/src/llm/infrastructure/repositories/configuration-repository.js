@@ -16,12 +16,12 @@ export async function get(id) {
     throw new ConfigurationNotFoundError(id);
   }
 
-  const url = config.llm.getConfigurationUrl + '/' + id;
+  const url = config.llm.configurationEditorApi.getConfigurationUrl + '/' + id;
   let response;
   try {
     response = await fetch(url, {
       headers: {
-        authorization: `Bearer ${jwt.sign('foo', config.llm.authSecret)}`,
+        authorization: `Bearer ${jwt.sign('foo', config.llm.configurationEditorApi.authSecret)}`,
       },
     });
   } catch (err) {
