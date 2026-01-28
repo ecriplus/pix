@@ -10,7 +10,6 @@ const deleteCampaigns = withTransaction(
     userId,
     organizationId,
     campaignIds,
-    featureToggles,
     adminMemberRepository,
     assessmentRepository,
     badgeAcquisitionRepository,
@@ -46,8 +45,6 @@ const deleteCampaigns = withTransaction(
       withDeletedParticipation: keepPreviousDeletion,
     });
 
-    const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
-
     const campaignDestructor = new CampaignsDestructor({
       campaignsToDelete,
       campaignParticipationsToDelete,
@@ -56,44 +53,40 @@ const deleteCampaigns = withTransaction(
       membership,
       pixAdminRole,
     });
-    campaignDestructor.delete({ isAnonymizationWithDeletionEnabled, keepPreviousDeletion });
+    campaignDestructor.delete({ keepPreviousDeletion });
 
     for (const campaignParticipation of campaignDestructor.campaignParticipations) {
       await campaignParticipationRepository.update(campaignParticipation);
 
-      if (isAnonymizationWithDeletionEnabled) {
-        await eventLoggingJobRepository.performAsync(
-          EventLoggingJob.forUser({
-            client: client ?? CLIENTS.ORGA,
-            action: campaignParticipation.loggerContext,
-            role: userRole ?? PIX_ORGA.ROLES.ADMIN,
-            userId: campaignParticipation.id,
-            updatedByUserId: userId,
-            data: {},
-          }),
-        );
-      }
-    }
-
-    if (isAnonymizationWithDeletionEnabled) {
-      const campaignParticipationIds = campaignParticipationsToDelete.map(({ id }) => id);
-
-      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
-        campaignParticipationIds,
-      });
-      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-        campaignParticipationIds,
+      await eventLoggingJobRepository.performAsync(
+        EventLoggingJob.forUser({
+          client: client ?? CLIENTS.ORGA,
+          action: campaignParticipation.loggerContext,
+          role: userRole ?? PIX_ORGA.ROLES.ADMIN,
+          userId: campaignParticipation.id,
+          updatedByUserId: userId,
+          data: {},
+        }),
       );
-      const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
-      for (const assessment of assessments) {
-        assessment.detachCampaignParticipation();
-        await assessmentRepository.updateCampaignParticipationId(assessment);
-      }
-
-      const campaignIdsToDelete = campaignDestructor.campaigns.map(({ id }) => id);
-
-      await campaignAdministrationRepository.deleteExternalIdLabelFromCampaigns(campaignIdsToDelete);
     }
+
+    const campaignParticipationIds = campaignParticipationsToDelete.map(({ id }) => id);
+
+    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
+      campaignParticipationIds,
+    });
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      campaignParticipationIds,
+    );
+    const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
+    for (const assessment of assessments) {
+      assessment.detachCampaignParticipation();
+      await assessmentRepository.updateCampaignParticipationId(assessment);
+    }
+
+    const campaignIdsToDelete = campaignDestructor.campaigns.map(({ id }) => id);
+
+    await campaignAdministrationRepository.deleteExternalIdLabelFromCampaigns(campaignIdsToDelete);
 
     await campaignAdministrationRepository.remove(campaignsToDelete);
   },
