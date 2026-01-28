@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.315.0](https://github.com/1024pix/pix/compare/v5.314.1...v5.315.0) (2026-01-28)
+
+### :rocket: Amélioration
+
+- [#14869](https://github.com/1024pix/pix/pull/14869) Afficher un message d'erreur quand l'utilisateur n'a pas de droits Pix Orga (PIX-20977) 
+- [#14899](https://github.com/1024pix/pix/pull/14899) ajout illu draft MFA NOV 
+- [#14880](https://github.com/1024pix/pix/pull/14880) Ajout images definitives sur module CY_Phishing_IND 
+- [#14874](https://github.com/1024pix/pix/pull/14874) Gérer le reset du formulaire selon s'il a pu être transmis ou non à l'API (PIX-21010) 
+
+### :bug: Correction
+
+- [#14892](https://github.com/1024pix/pix/pull/14892) Réparer des tests flakys 
+
+### :building_construction: Tech
+
+- [#14898](https://github.com/1024pix/pix/pull/14898) Permettre de lancer Playwright localement en réutilisant les applis front déjà lancées
+
 ## [5.314.1](https://github.com/1024pix/pix/compare/v5.314.0...v5.314.1) (2026-01-27)
 
 ### :bug: Correction
