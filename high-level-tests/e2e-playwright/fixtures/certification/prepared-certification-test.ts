@@ -2,7 +2,7 @@ import { BrowserContext, expect, Page, test as base } from '@playwright/test';
 import { z } from 'zod';
 
 import { LoginPage } from '../../pages/pix-app/index.ts';
-import { InvigilatorLoginPage, SessionListPage } from '../../pages/pix-certif/index.ts';
+import { InvigilatorLoginPage, InvigilatorOverviewPage, SessionListPage } from '../../pages/pix-certif/index.ts';
 import { SnapshotHandler } from '../snapshot.ts';
 
 const CandidateSchema = z.object({
@@ -35,7 +35,7 @@ type PreparedCertificationTestParams = DataParams & {
 
 type PreparedCertificationTestResult = {
   sessionNumber: string;
-  invigilatorPage: Page;
+  invigilatorOverviewPage: InvigilatorOverviewPage;
   pixCertifPage: Page;
   snapshotHandler: SnapshotHandler;
 };
@@ -106,7 +106,7 @@ export const test = base.extend<
       });
     });
 
-    const invigilatorPage = await test.step('Evaluation', async () => {
+    const invigilatorOverviewPage = await test.step('Evaluation', async () => {
       await pixAppPage.goto(process.env.PIX_APP_URL!);
 
       const certificationAccessCodePage =
@@ -120,12 +120,12 @@ export const test = base.extend<
           });
         });
 
-      const invigilatorPage = await test.step('Invigilator authorized candidate to start', async () => {
+      const invigilatorOverviewPage = await test.step('Invigilator authorized candidate to start', async () => {
         const invigilatorPage = await authentifiedPixCertifContext.newPage();
         const invigLogin = await InvigilatorLoginPage.goto(invigilatorPage);
         const invigOverview = await invigLogin.login(sessionNumber, invigilatorCode);
         await invigOverview.authorizeCandidateToStart(candidateData.firstName, candidateData.lastName);
-        return invigilatorPage;
+        return invigOverview;
       });
 
       await test.step('Candidate takes the test', async () => {
@@ -138,12 +138,12 @@ export const test = base.extend<
           await challengePage.validateAnswer();
         }
       });
-      return invigilatorPage;
+      return invigilatorOverviewPage;
     });
 
     const preparedCertificationTestResult: PreparedCertificationTestResult = {
       sessionNumber,
-      invigilatorPage,
+      invigilatorOverviewPage,
       pixCertifPage,
       snapshotHandler,
     };

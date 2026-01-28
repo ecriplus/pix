@@ -48,8 +48,7 @@ test.describe(testRef, () => {
       test.slow();
 
       let certificationNumber = '';
-      const { sessionNumber, invigilatorPage, pixCertifPage, snapshotHandler } = preparedCertificationTest;
-      await invigilatorPage.close();
+      const { sessionNumber, pixCertifPage, snapshotHandler } = preparedCertificationTest;
 
       await test.step(`reaches end of certification test`, async () => {
         await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
