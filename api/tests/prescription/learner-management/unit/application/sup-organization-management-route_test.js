@@ -144,4 +144,134 @@ describe('Unit | Router | sup-organization-management-route', function () {
       });
     });
   });
+
+  describe('PATCH /api/organizations/{organizationId}/sup-organization-learners/{organizationLearnerId}', function () {
+    beforeEach(function () {
+      sinon.stub(supOrganizationManagementController, 'updateStudentNumber');
+      sinon.stub(securityPreHandlers, 'checkUserIsAdminInSUPOrganizationManagingStudents');
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToLearnersOrganization');
+      supOrganizationManagementController.updateStudentNumber.resolves('ok');
+    });
+
+    context(
+      'when the user is an admin for the organization and the organization is SUP and manages student',
+      function () {
+        it('responds 200', async function () {
+          securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.resolves(true);
+          securityPreHandlers.checkUserBelongsToLearnersOrganization.resolves(true);
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          const method = 'PATCH';
+          const url = '/api/organizations/2/sup-organization-learners/1';
+
+          const response = await httpTestServer.request(method, url, {
+            data: { attributes: { 'student-number': '125ABC18' } },
+          });
+
+          expect(response.statusCode).to.equal(200);
+          expect(supOrganizationManagementController.updateStudentNumber.called).true;
+        });
+      },
+    );
+
+    context('when the user is not admin for the organization', function () {
+      it('responds 403', async function () {
+        securityPreHandlers.checkUserBelongsToLearnersOrganization.resolves(true);
+        securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.callsFake((request, h) =>
+          h.response().code(403).takeover(),
+        );
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const method = 'PATCH';
+        const url = '/api/organizations/2/sup-organization-learners/1';
+
+        const response = await httpTestServer.request(method, url, {
+          data: { attributes: { 'student-number': '125ABC18' } },
+        });
+
+        expect(response.statusCode).to.equal(403);
+        expect(supOrganizationManagementController.updateStudentNumber.called).false;
+      });
+    });
+
+    context('when the user is not member of learner organization', function () {
+      it('responds 403', async function () {
+        securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.resolves(true);
+        securityPreHandlers.checkUserBelongsToLearnersOrganization.callsFake((request, h) =>
+          h.response().code(403).takeover(),
+        );
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const method = 'PATCH';
+        const url = '/api/organizations/2/sup-organization-learners/1';
+
+        const response = await httpTestServer.request(method, url, {
+          data: { attributes: { 'student-number': '125ABC18' } },
+        });
+
+        expect(response.statusCode).to.equal(403);
+        expect(supOrganizationManagementController.updateStudentNumber.called).false;
+      });
+    });
+
+    context('when the organizationId is not an id', function () {
+      it('responds 400', async function () {
+        securityPreHandlers.checkUserBelongsToLearnersOrganization.resolves(true);
+        securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.resolves(true);
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const method = 'PATCH';
+        const url = '/api/organizations/abcdef/sup-organization-learners/1';
+
+        const response = await httpTestServer.request(method, url, {
+          data: { attributes: { 'student-number': '125ABC18' } },
+        });
+
+        expect(response.statusCode).to.equal(400);
+        expect(supOrganizationManagementController.updateStudentNumber.called).false;
+      });
+    });
+
+    context('when the student number is not an string', function () {
+      it('responds 400', async function () {
+        securityPreHandlers.checkUserBelongsToLearnersOrganization.resolves(true);
+        securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.resolves(true);
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const method = 'PATCH';
+        const url = '/api/organizations/2/sup-organization-learners/1';
+
+        const response = await httpTestServer.request(method, url, {
+          data: { attributes: { 'student-number': { data: 'pouet' } } },
+        });
+
+        expect(response.statusCode).to.equal(400);
+        expect(supOrganizationManagementController.updateStudentNumber.called).false;
+      });
+    });
+
+    context('when the organizationLearnerId is not an id', function () {
+      it('responds 400', async function () {
+        securityPreHandlers.checkUserBelongsToLearnersOrganization.resolves(true);
+        securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents.resolves(true);
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const method = 'PATCH';
+        const url = '/api/organizations/2/sup-organization-learners/abcdef';
+
+        const response = await httpTestServer.request(method, url, {
+          data: { attributes: { 'student-number': '125ABC18' } },
+        });
+
+        expect(response.statusCode).to.equal(400);
+        expect(supOrganizationManagementController.updateStudentNumber.called).false;
+      });
+    });
+  });
 });

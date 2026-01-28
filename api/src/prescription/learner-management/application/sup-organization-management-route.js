@@ -3,7 +3,6 @@ import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
 import {
-  NotFoundError,
   PayloadTooLargeError,
   sendJsonApiError,
   UnprocessableEntityError,
@@ -154,6 +153,9 @@ const register = async function (server) {
           {
             method: securityPreHandlers.checkUserIsAdminInSUPOrganizationManagingStudents,
           },
+          {
+            method: securityPreHandlers.checkUserBelongsToLearnersOrganization,
+          },
         ],
         handler: supOrganizationManagementController.updateStudentNumber,
         validate: {
@@ -171,13 +173,6 @@ const register = async function (server) {
               },
             },
           }),
-          failAction: (request, h, err) => {
-            const isStudentNumber = err.details[0].path.includes('student-number');
-            if (isStudentNumber) {
-              return sendJsonApiError(new UnprocessableEntityError('Un des champs saisis n’est pas valide.'), h);
-            }
-            return sendJsonApiError(new NotFoundError('Ressource non trouvée'), h);
-          },
         },
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés et admin au sein de l'orga**\n" +
