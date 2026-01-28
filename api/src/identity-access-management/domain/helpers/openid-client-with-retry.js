@@ -2,7 +2,7 @@ import * as originalOpenidClient from 'openid-client';
 
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 
-const MAX_RETRY_COUNT = 4;
+const MAX_RETRY_COUNT = 10;
 const WAIT_DURATION_IN_MS = 2000;
 
 export class OpenidClientWithRetry {
