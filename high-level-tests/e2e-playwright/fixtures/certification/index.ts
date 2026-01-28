@@ -1,9 +1,9 @@
-import { BrowserContext, expect, Page, test as base } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { z } from 'zod';
 
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, InvigilatorOverviewPage, SessionListPage } from '../../pages/pix-certif/index.ts';
-import { SnapshotHandler } from '../snapshot.ts';
+import { test as sharedTest } from '../index.ts';
 
 const CandidateSchema = z.object({
   firstName: z.string().min(1),
@@ -25,22 +25,15 @@ const ParamsSchema = z.object({
   candidateData: CandidateSchema,
 });
 
-type DataParams = z.infer<typeof ParamsSchema>;
-
-type PreparedCertificationTestParams = DataParams & {
-  pixAppPage: Page;
-  authentifiedPixCertifContext: BrowserContext;
-  snapshotHandler: SnapshotHandler;
-};
+type PreparedCertificationTestParams = z.infer<typeof ParamsSchema>;
 
 type PreparedCertificationTestResult = {
   sessionNumber: string;
   invigilatorOverviewPage: InvigilatorOverviewPage;
   pixCertifPage: Page;
-  snapshotHandler: SnapshotHandler;
 };
 
-function validateParams(params: DataParams) {
+function validateParams(params: PreparedCertificationTestParams) {
   const validation = ParamsSchema.safeParse(params);
 
   if (!validation.success) {
@@ -49,23 +42,14 @@ function validateParams(params: DataParams) {
   }
 }
 
-export const test = base.extend<
+export const test = sharedTest.extend<
   PreparedCertificationTestParams & { preparedCertificationTest: PreparedCertificationTestResult }
 >({
   testRef: ['', { option: true }],
   rightWrongAnswersSequence: [[], { option: true }],
   candidateData: [{} as never, { option: true }],
-  authentifiedPixCertifContext: [{} as never, { option: true }],
-  pixAppPage: [{} as never, { option: true }],
   preparedCertificationTest: async (
-    {
-      pixAppPage,
-      authentifiedPixCertifContext,
-      snapshotHandler,
-      testRef,
-      rightWrongAnswersSequence,
-      candidateData,
-    }: PreparedCertificationTestParams,
+    { page: pixAppPage, pixCertifProContext, snapshotHandler, testRef, rightWrongAnswersSequence, candidateData },
     use,
   ) => {
     validateParams({
@@ -74,7 +58,7 @@ export const test = base.extend<
       candidateData,
     });
 
-    const pixCertifPage = await authentifiedPixCertifContext.newPage();
+    const pixCertifPage = await pixCertifProContext.newPage();
     let sessionNumber = '',
       accessCode = '',
       invigilatorCode = '';
@@ -121,7 +105,7 @@ export const test = base.extend<
         });
 
       const invigilatorOverviewPage = await test.step('Invigilator authorized candidate to start', async () => {
-        const invigilatorPage = await authentifiedPixCertifContext.newPage();
+        const invigilatorPage = await pixCertifProContext.newPage();
         const invigLogin = await InvigilatorLoginPage.goto(invigilatorPage);
         const invigOverview = await invigLogin.login(sessionNumber, invigilatorCode);
         await invigOverview.authorizeCandidateToStart(candidateData.firstName, candidateData.lastName);
@@ -145,8 +129,9 @@ export const test = base.extend<
       sessionNumber,
       invigilatorOverviewPage,
       pixCertifPage,
-      snapshotHandler,
     };
     await use(preparedCertificationTestResult);
   },
 });
+
+export const expect = test.expect;

@@ -1,4 +1,4 @@
-import { expect, test } from '../../../../fixtures/index.ts';
+import { expect, test } from '../../../../fixtures/certification/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
@@ -19,15 +19,6 @@ test.describe(testRef, () => {
     testRef,
     rightWrongAnswersSequence: Array(32).fill(true),
     candidateData: data.certifiableUser,
-    pixAppPage: async ({ page }, use) => {
-      await use(page);
-    },
-    authentifiedPixCertifContext: async ({ pixCertifProContext }, use) => {
-      await use(pixCertifProContext);
-    },
-    snapshotHandler: async ({ snapshotHandler }, use) => {
-      await use(snapshotHandler);
-    },
   });
 
   test(
@@ -45,11 +36,11 @@ test.describe(testRef, () => {
         },
       ],
     },
-    async ({ page: pixAppPage, preparedCertificationTest, pixSuperAdminContext }) => {
+    async ({ page: pixAppPage, preparedCertificationTest, pixSuperAdminContext, snapshotHandler }) => {
       test.slow();
 
       let certificationNumber = '';
-      const { sessionNumber, pixCertifPage, snapshotHandler } = preparedCertificationTest;
+      const { sessionNumber, pixCertifPage } = preparedCertificationTest;
 
       await test.step(`reaches end of certification test`, async () => {
         await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
