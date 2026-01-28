@@ -1,4 +1,4 @@
-import { fillByLabel, render } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import PlacesLotCreationForm from 'pix-admin/components/organizations/places-lot-creation-form';
 import { module, test } from 'qunit';
@@ -16,7 +16,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
     const screen = await render(<template><PlacesLotCreationForm @create={{create}} /></template>);
 
     // when
-    await fillByLabel('Nombre :', '10');
+    await fillIn(screen.getByLabelText('Nombre : *', { exact: false }), 10);
     await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
     await fillIn(screen.getByLabelText("Date d'expiration *", { exact: false }), '2022-10-20');
 
@@ -40,7 +40,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
     const screen = await render(<template><PlacesLotCreationForm @create={{create}} /></template>);
 
     // when
-    await fillByLabel('Nombre :', '10');
+    await fillIn(screen.getByLabelText('Nombre : *', { exact: false }), 10);
     await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
     await fillIn(screen.getByLabelText("Date d'expiration *", { exact: false }), '2022-12-20');
 

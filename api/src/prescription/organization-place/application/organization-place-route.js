@@ -93,7 +93,7 @@ const register = async (server) => {
           payload: Joi.object({
             data: Joi.object({
               attributes: Joi.object({
-                count: Joi.number().integer().min(0).allow(null),
+                count: Joi.number().integer().min(0).required(),
                 category: Joi.string().required(),
                 reference: Joi.string().required(),
                 'activation-date': Joi.date().required(),

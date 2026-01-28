@@ -202,6 +202,31 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
             },
           ]);
         });
+
+        it('it should throw an exception when count is missing', function () {
+          //given
+          const attributes = {
+            ...initialAttributes,
+            count: undefined,
+          };
+
+          //when
+          let error;
+          try {
+            new OrganizationPlacesLotForManagement(attributes);
+          } catch (e) {
+            error = e;
+          }
+
+          //then
+          expect(error).to.be.instanceOf(EntityValidationError);
+          expect(error.invalidAttributes).to.deep.equals([
+            {
+              attribute: 'count',
+              message: `Le nombre de places doit être un nombre sans virgule supérieur à 0.`,
+            },
+          ]);
+        });
       });
 
       context('#activationDate', function () {
@@ -251,6 +276,31 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
             {
               attribute: 'activationDate',
               message: `Les dates d'activation et d'expiration sont obligatoires.`,
+            },
+          ]);
+        });
+
+        it('it should throw an exception when activationDate is too ancient', function () {
+          //given
+          const attributes = {
+            ...initialAttributes,
+            activationDate: '1999-10-10',
+          };
+
+          //when
+          let error;
+          try {
+            new OrganizationPlacesLotForManagement(attributes);
+          } catch (e) {
+            error = e;
+          }
+
+          //then
+          expect(error).to.be.instanceOf(EntityValidationError);
+          expect(error.invalidAttributes).to.deep.equals([
+            {
+              attribute: 'activationDate',
+              message: `La date d'activation est trop ancienne.`,
             },
           ]);
         });
