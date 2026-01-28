@@ -775,7 +775,7 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
           campaignId,
           organizationLearnerId,
           userId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
         await databaseBuilder.commit();
 
@@ -787,7 +787,7 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
         });
 
         // then
-        expect(participationStatus).to.deep.equal(CampaignParticipationStatuses.TO_SHARE);
+        expect(participationStatus).to.deep.equal(CampaignParticipationStatuses.STARTED);
       });
 
       it('should return null when there is no participation', async function () {

@@ -17,7 +17,7 @@ import {
   getEligibleCampaignParticipations,
 } from '../prod/generate-knowledge-element-snapshots-for-campaigns.js';
 
-const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 const firstKECreatedAt = new Date('2020-05-01');
 const secondKECreatedAt = new Date('2020-05-02');
@@ -366,7 +366,7 @@ async function _createCampaignParticipations({ campaignId, trx, organizationLear
     participationData.push({
       campaignId,
       createdAt,
-      status: isShared ? SHARED : TO_SHARE,
+      status: isShared ? SHARED : STARTED,
       sharedAt,
       userId,
       organizationLearnerId,

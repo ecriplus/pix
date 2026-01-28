@@ -74,7 +74,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       });
 
       context('date comparaison', function () {
-        it('throw an error when startDate after  endDate', async function () {
+        it('throw an error when startDate after endDate', async function () {
           const error = await catchErr(insertMissingPoleEmploiSendingFromDate)('2024-01-01', '2020-01-01');
 
           expect(error).to.be.instanceOf(Error);
@@ -172,7 +172,6 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
           const createdAt = new Date('2024-02-03');
 
           const firstParticipation = _buildLearnerWithStartedParticipation(otherCampaign, createdAt);
-          const secondParticipation = _buildLearnerWithToShareParticipation(otherCampaign, createdAt);
           const thirdParticipation = _buildLearnerWithSharedParticipation(otherCampaign, createdAt, createdAt);
 
           await databaseBuilder.commit();
@@ -181,7 +180,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
           const result = await knex('pole-emploi-sendings')
             .select('type')
-            .whereIn('campaignParticipationId', [firstParticipation.id, secondParticipation.id, thirdParticipation.id])
+            .whereIn('campaignParticipationId', [firstParticipation.id, thirdParticipation.id])
             .where({ responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
 
           expect(result).lengthOf(0);
@@ -189,8 +188,6 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
         it('should return no event to create for participation outside the interval', async function () {
           const firstParticipation = _buildLearnerWithStartedParticipation(campaign, new Date('2024-02-01'));
-
-          const secondParticipation = _buildLearnerWithToShareParticipation(campaign, new Date('2024-02-05'));
 
           const thirdParticipation = _buildLearnerWithSharedParticipation(
             campaign,
@@ -204,7 +201,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
           const result = await knex('pole-emploi-sendings')
             .select('type')
-            .whereIn('campaignParticipationId', [firstParticipation.id, secondParticipation.id, thirdParticipation.id])
+            .whereIn('campaignParticipationId', [firstParticipation.id, thirdParticipation.id])
             .where({ responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
 
           expect(result).lengthOf(0);
@@ -254,75 +251,8 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         });
       });
 
-      context('Status TO_SHARE', function () {
-        it('should return started / completion event participation to create inside date interval', async function () {
-          const createdAt = new Date('2024-02-03');
-
-          const participation = _buildLearnerWithToShareParticipation(campaign, createdAt);
-
-          await databaseBuilder.commit();
-
-          await insertMissingPoleEmploiSendingFromDate('2024-02-02', '2024-02-04', campaignCode);
-
-          const result = await knex('pole-emploi-sendings')
-            .select('type')
-            .where({
-              campaignParticipationId: participation.id,
-
-              responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
-            })
-            .whereIn('type', [
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-            ]);
-
-          expect(result).lengthOf(2);
-        });
-
-        it('should return completion event participation to create inside date interval when started already exists', async function () {
-          const createdAt = new Date('2024-02-03');
-
-          const participation = _buildLearnerWithToShareParticipation(campaign, createdAt);
-          _buildPoleEmploiSendingsForStartedParticipation(participation);
-
-          await databaseBuilder.commit();
-
-          await insertMissingPoleEmploiSendingFromDate('2024-02-02', '2024-02-04', campaignCode);
-
-          const result = await knex('pole-emploi-sendings')
-            .select('type')
-            .where({
-              campaignParticipationId: participation.id,
-
-              responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
-            })
-            .whereIn('type', [PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION]);
-
-          expect(result).lengthOf(1);
-        });
-
-        it('should return no event participation to create inside date interval when started / completion already exists', async function () {
-          const createdAt = new Date('2024-02-03');
-
-          const participation = _buildLearnerWithToShareParticipation(campaign, createdAt);
-          _buildPoleEmploiSendingsForToShareParticipation(participation);
-
-          await databaseBuilder.commit();
-
-          await insertMissingPoleEmploiSendingFromDate('2024-02-02', '2024-02-04', campaignCode);
-
-          const result = await knex('pole-emploi-sendings').select('type').where({
-            campaignParticipationId: participation.id,
-
-            responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
-          });
-
-          expect(result).lengthOf(0);
-        });
-      });
-
       context('Status SHARED', function () {
-        it('should return started / completion / shared event participation inside date interval', async function () {
+        it('should return started / shared event participation inside date interval', async function () {
           const createdAt = new Date('2024-02-01');
           const sharedAt = new Date('2024-02-03');
 
@@ -341,14 +271,13 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             })
             .whereIn('type', [
               PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
               PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING,
             ]);
 
-          expect(result).lengthOf(3);
+          expect(result).lengthOf(2);
         });
 
-        it('should return started / completion / shared event participation inside date interval even if is Improved', async function () {
+        it('should return started / shared event participation inside date interval even if is Improved', async function () {
           const createdAt = new Date('2024-02-01');
           const sharedAt = new Date('2024-02-03');
           const isImproved = true;
@@ -368,14 +297,13 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             })
             .whereIn('type', [
               PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
               PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING,
             ]);
 
-          expect(result).lengthOf(3);
+          expect(result).lengthOf(2);
         });
 
-        it('should return completion / shared event participation to create inside date interval when started already exists', async function () {
+        it('should return shared event participation to create inside date interval when started already exists', async function () {
           const createdAt = new Date('2024-02-01');
           const sharedAt = new Date('2024-02-03');
 
@@ -393,38 +321,12 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
-            .whereIn('type', [
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-              PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING,
-            ]);
-
-          expect(result).lengthOf(2);
-        });
-
-        it('should return shared event participation to create inside date interval when started/completion already exists', async function () {
-          const createdAt = new Date('2024-02-01');
-          const sharedAt = new Date('2024-02-03');
-
-          const participation = _buildLearnerWithSharedParticipation(campaign, createdAt, sharedAt);
-          _buildPoleEmploiSendingsForToShareParticipation(participation);
-
-          await databaseBuilder.commit();
-
-          await insertMissingPoleEmploiSendingFromDate('2024-02-02', '2024-02-04', campaignCode);
-
-          const result = await knex('pole-emploi-sendings')
-            .select('type')
-            .where({
-              campaignParticipationId: participation.id,
-
-              responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
-            })
-            .whereIn('type', [PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING]);
+            .where('type', PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING);
 
           expect(result).lengthOf(1);
         });
 
-        it('should return no event participation to create inside date interval when started/completion/shared already exists', async function () {
+        it('should return no event participation to create inside date interval when started/shared already exists', async function () {
           const createdAt = new Date('2024-02-01');
           const sharedAt = new Date('2024-02-03');
 
@@ -463,34 +365,6 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         userId,
         campaignParticipationId: participation.id,
         state: Assessment.states.STARTED,
-        createdAt,
-      });
-
-      return participation;
-    }
-
-    function _buildLearnerWithToShareParticipation(campaign, createdAt) {
-      const { id: organizationLearnerId, userId } = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId: campaign.organizationId,
-      });
-
-      const participation = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-        organizationLearnerId,
-        userId,
-        createdAt,
-        status: CampaignParticipationStatuses.TO_SHARE,
-      });
-
-      const assessment = databaseBuilder.factory.buildAssessment({
-        userId,
-        campaignParticipationId: participation.id,
-        state: Assessment.states.COMPLETED,
-        createdAt,
-      });
-
-      databaseBuilder.factory.buildAnswer({
-        assessmentId: assessment.id,
         createdAt,
       });
 
@@ -541,34 +415,11 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       });
     }
 
-    function _buildPoleEmploiSendingsForToShareParticipation(participation) {
-      databaseBuilder.factory.buildPoleEmploiSending({
-        campaignParticipationId: participation.id,
-        createdAt: participation.createdAt,
-        type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-      });
-      databaseBuilder.factory.buildPoleEmploiSending({
-        campaignParticipationId: participation.id,
-        createdAt: participation.createdAt,
-        type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-      });
-      databaseBuilder.factory.buildPoleEmploiSending({
-        campaignParticipationId: participation.id,
-        createdAt: participation.createdAt,
-        type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-      });
-    }
-
     function _buildPoleEmploiSendingsForSharedParticipation(participation) {
       databaseBuilder.factory.buildPoleEmploiSending({
         campaignParticipationId: participation.id,
         createdAt: participation.createdAt,
         type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-      });
-      databaseBuilder.factory.buildPoleEmploiSending({
-        campaignParticipationId: participation.id,
-        createdAt: participation.sharedAt,
-        type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
       });
       databaseBuilder.factory.buildPoleEmploiSending({
         campaignParticipationId: participation.id,

@@ -14,13 +14,13 @@ const getUserCampaignAssessmentResult = async function ({
   compareStagesAndAcquiredStages,
   campaignParticipationRepository,
 }) {
-  const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
+  const { SHARED } = CampaignParticipationStatuses;
   const campaignParticipation = await campaignParticipationRepository.findOneByCampaignIdAndUserId({
     campaignId,
     userId,
   });
 
-  if (![TO_SHARE, SHARED].includes(campaignParticipation.status)) {
+  if (campaignParticipation.status !== SHARED) {
     throw new NoCampaignParticipationForUserAndCampaign();
   }
   try {

@@ -60,7 +60,7 @@ async function buildParenthoodQuest(databaseBuilder) {
             comparison: CRITERION_COMPARISONS.EQUAL,
           },
           status: {
-            data: [CampaignParticipationStatuses.SHARED, CampaignParticipationStatuses.TO_SHARE],
+            data: [CampaignParticipationStatuses.SHARED, CampaignParticipationStatuses.STARTED],
             comparison: CRITERION_COMPARISONS.ONE_OF,
           },
         },
@@ -173,6 +173,7 @@ const buildCampaignParticipations = (databaseBuilder, users) =>
       userId: user.id,
       type: Assessment.types.CAMPAIGN,
       campaignParticipationId: participationId,
+      state: Assessment.states.COMPLETED,
     });
 
     databaseBuilder.factory.buildStageAcquisition({
@@ -382,42 +383,50 @@ export const buildQuests = async (databaseBuilder) => {
       user: successUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: successOrganizationLearner,
-      sharedAt: null,
-      status: CampaignParticipationStatuses.TO_SHARE,
+      sharedAt: new Date('2024-01-10'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: successUser,
       campaignId: campaigns[1].campaignId,
       organizationLearner: successOrganizationLearner,
-      sharedAt: null,
-      status: CampaignParticipationStatuses.TO_SHARE,
+      sharedAt: new Date('2024-01-11'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: successUser,
       campaignId: campaigns[2].campaignId,
       organizationLearner: successOrganizationLearner,
-      sharedAt: null,
-      status: CampaignParticipationStatuses.TO_SHARE,
+      sharedAt: new Date('2024-01-12'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: successSharedUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: successSharedOrganizationLearner,
+      sharedAt: new Date('2024-01-13'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: failedUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: failedOrganizationLearner,
+      sharedAt: new Date('2024-01-14'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: pendingUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: pendingOrganizationLearner,
+      sharedAt: new Date('2024-01-15'),
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: disabledUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: disabledOrganizationLearner,
+      sharedAt: new Date('2024-01-16'),
+      status: CampaignParticipationStatuses.SHARED,
     },
   ]);
 

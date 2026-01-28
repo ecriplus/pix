@@ -9,7 +9,7 @@ import {
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
-const { SHARED, TO_SHARE, STARTED } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign-Management', function () {
   describe('#get', function () {
@@ -234,7 +234,7 @@ describe('Integration | Repository | Campaign-Management', function () {
 
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId: campaign.id,
-            status: TO_SHARE,
+            status: STARTED,
           });
 
           databaseBuilder.factory.buildCampaignParticipation({
@@ -262,7 +262,7 @@ describe('Integration | Repository | Campaign-Management', function () {
 
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId: campaign.id,
-            status: TO_SHARE,
+            status: STARTED,
             deletedAt: new Date(),
           });
 

@@ -2,7 +2,7 @@ import { CampaignAssessmentParticipationResult } from '../../../../../../src/pre
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Models | CampaignAssessmentParticipationResult', function () {
   describe('constructor', function () {
@@ -21,7 +21,7 @@ describe('Unit | Domain | Models | CampaignAssessmentParticipationResult', funct
         const campaignAssessmentParticipationResult = new CampaignAssessmentParticipationResult({
           campaignParticipationId: 1,
           campaignId: 2,
-          status: TO_SHARE,
+          status: STARTED,
         });
 
         expect(campaignAssessmentParticipationResult.isShared).equal(false);

@@ -310,7 +310,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 5,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-02'),
   });
   const campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign2.campaignId,
@@ -320,7 +321,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 5,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-03'),
   });
   const campaignParticipation3 = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign3.campaignId,
@@ -330,7 +332,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 2,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-04'),
     createdAt: dayjs(),
   });
   const campaignParticipation4 = databaseBuilder.factory.buildCampaignParticipation({
@@ -341,7 +344,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 5,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-05'),
   });
   const campaignParticipation5 = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign5.campaignId,
@@ -351,7 +355,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 5,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-06'),
   });
   const campaignParticipation6 = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign6.campaignId,

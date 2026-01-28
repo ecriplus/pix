@@ -237,7 +237,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         userId,
         organizationLearnerId,
         campaignId,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       });
       databaseBuilder.factory.buildAssessment({
         userId,
@@ -263,7 +263,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         organizationLearnerId,
       });
 
-      expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
+      expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.STARTED);
     });
 
     it('retrieves the delete date', async function () {
@@ -280,7 +280,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         userId,
         organizationLearnerId,
         campaignId,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
         deletedAt,
       });
       databaseBuilder.factory.buildAssessment({
@@ -312,7 +312,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         userId,
         organizationLearnerId,
         campaignId,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       });
       databaseBuilder.factory.buildAssessment({
         userId,
@@ -546,7 +546,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
         databaseBuilder.factory.buildAssessment({
           campaignParticipationId: participationId,
@@ -569,7 +569,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           userId,
         });
 
-        expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
+        expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.STARTED);
       });
 
       it('retrieves the delete date', async function () {
@@ -581,7 +581,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
           deletedAt,
         });
         databaseBuilder.factory.buildAssessment({
@@ -607,7 +607,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
         databaseBuilder.factory.buildAssessment({
           campaignParticipationId: participationId,
@@ -625,14 +625,13 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
     context('when there are filters', function () {
       let onGoingParticipation;
-      let toShareParticipation;
       let endedParticipation;
       let archivedParticipation;
       let deletedParticipation;
 
       beforeEach(async function () {
         const { id: campaign1Id } = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-        const { id: campaign2Id } = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
+        databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
         const { id: campaign3Id } = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
         const { id: campaign4Id } = databaseBuilder.factory.buildCampaign({
           targetProfileId: targetProfile.id,
@@ -644,12 +643,6 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           assessmentState: Assessment.states.STARTED,
           sharedAt: null,
           campaignId: campaign1Id,
-        });
-        toShareParticipation = campaignParticipationOverviewFactory.build({
-          userId,
-          assessmentState: Assessment.states.COMPLETED,
-          sharedAt: null,
-          campaignId: campaign2Id,
         });
         endedParticipation = campaignParticipationOverviewFactory.build({
           userId,
@@ -680,19 +673,6 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           });
 
           expect(campaignParticipationOverviews[0].id).to.equal(onGoingParticipation.id);
-          expect(campaignParticipationOverviews).to.have.lengthOf(1);
-        });
-      });
-
-      context('the filter is TO_SHARE', function () {
-        it('returns participation with a completed assessment', async function () {
-          const states = ['TO_SHARE'];
-          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
-            userId,
-            states,
-          });
-
-          expect(campaignParticipationOverviews[0].id).to.equal(toShareParticipation.id);
           expect(campaignParticipationOverviews).to.have.lengthOf(1);
         });
       });
@@ -728,7 +708,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
       context('when there are several statuses given for the status filter', function () {
         it('returns only participations which matches with the given statuses', async function () {
-          const states = ['ONGOING', 'TO_SHARE'];
+          const states = ['ONGOING', 'ENDED'];
           const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
             userId,
             states,
@@ -736,7 +716,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
           expect(_.map(campaignParticipationOverviews, 'id')).to.exactlyContain([
             onGoingParticipation.id,
-            toShareParticipation.id,
+            endedParticipation.id,
           ]);
         });
       });
@@ -757,10 +737,6 @@ describe('Integration | Repository | Campaign Participation Overview', function 
             userId,
             campaignSkills: ['recSkillId1'],
           });
-          const { id: participationToShareId } = campaignParticipationOverviewFactory.buildToShare({
-            userId,
-            campaignSkills: ['recSkillId1'],
-          });
           await databaseBuilder.commit();
 
           const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
@@ -769,7 +745,6 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           const campaignParticipationIds = _.map(campaignParticipationOverviews, 'id');
 
           expect(campaignParticipationIds).to.exactlyContainInOrder([
-            participationToShareId,
             participationOnGoingId,
             participationEndedId,
             participationArchived,

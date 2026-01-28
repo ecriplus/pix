@@ -94,11 +94,7 @@ class CampaignParticipant {
       );
     }
 
-    if (
-      [CampaignParticipationStatuses.STARTED, CampaignParticipationStatuses.TO_SHARE].includes(
-        this.previousCampaignParticipationForUser?.status,
-      )
-    ) {
+    if (this.previousCampaignParticipationForUser?.status === CampaignParticipationStatuses.STARTED) {
       throw new ForbiddenAccess(couldNotRetryCampaignErrorMessage);
     }
 

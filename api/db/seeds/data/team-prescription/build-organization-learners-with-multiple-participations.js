@@ -70,8 +70,8 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     userId: firstUser.id,
     campaignId: CAMPAIGN_PROASSMUL_ID,
     isImproved: false,
-    status: CampaignParticipationStatuses.TO_SHARE,
-    sharedAt: null,
+    status: CampaignParticipationStatuses.SHARED,
+    sharedAt: '2024-06-10T15:07:57.376Z',
     createdAt: '2024-06-01T15:07:57.376Z',
   });
 

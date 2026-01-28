@@ -7,7 +7,7 @@ import {
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
-const { STARTED, TO_SHARE, SHARED } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Profiles Collection Participation Summary repository', function () {
   describe('#findPaginatedByCampaignId', function () {
@@ -243,7 +243,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           isImproved: false,
           sharedAt: null,
           createdAt: new Date('2022-01-02'),
-          status: TO_SHARE,
+          status: STARTED,
           campaignId,
           userId: organizationLearner.userId,
           organizationLearnerId: organizationLearner.id,
@@ -303,7 +303,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
             isImproved: false,
             sharedAt: null,
             createdAt: new Date('2022-01-02'),
-            status: TO_SHARE,
+            status: STARTED,
             campaignId,
             userId: organizationLearner.userId,
             organizationLearnerId: organizationLearner.id,
@@ -337,7 +337,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
             isImproved: false,
             sharedAt: null,
             createdAt: new Date('2022-01-02'),
-            status: TO_SHARE,
+            status: STARTED,
             campaignId,
             userId: organizationLearner.userId,
             organizationLearnerId: organizationLearner.id,
@@ -455,7 +455,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           isImproved: false,
           createdAt: new Date('2024-01-07'),
           sharedAt: null,
-          status: TO_SHARE,
+          status: STARTED,
         });
 
         await databaseBuilder.commit();

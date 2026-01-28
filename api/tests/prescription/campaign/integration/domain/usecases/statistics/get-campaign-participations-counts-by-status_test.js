@@ -3,7 +3,7 @@ import { CampaignParticipationStatuses } from '../../../../../../../src/prescrip
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../../test-helper.js';
 
-const { STARTED, TO_SHARE } = CampaignParticipationStatuses;
+const { STARTED } = CampaignParticipationStatuses;
 
 describe('Integration | UseCase | get-campaign-participations-counts-by-status', function () {
   let organizationId;
@@ -36,7 +36,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-status',
 
   it('should return participations counts by status', async function () {
     databaseBuilder.factory.buildCampaignParticipation({ campaignId });
-    databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE });
+    databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED });
     databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED });
 
     await databaseBuilder.commit();

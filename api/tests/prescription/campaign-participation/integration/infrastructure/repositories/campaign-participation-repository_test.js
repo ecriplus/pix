@@ -19,7 +19,7 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
-const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Participation', function () {
   describe('#updateWithSnapshot', function () {
@@ -1651,7 +1651,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION' });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         deletedAt: new Date(),
         userId,
       });
@@ -1669,7 +1669,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'ASSESSMENT' });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         userId,
       });
       await databaseBuilder.commit();
@@ -1687,7 +1687,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION' });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         userId: otherUser.id,
       });
       await databaseBuilder.commit();
@@ -1705,7 +1705,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', archivedAt: new Date() });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         userId,
         createdAt: new Date(),
       });
@@ -1726,13 +1726,13 @@ describe('Integration | Repository | Campaign Participation', function () {
       const thirdCampaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: 'BADTOO' });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: secondCampaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         createdAt: new Date(Date.parse('10/11/2011')),
         userId,
       });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: thirdCampaign.id,
-        status: TO_SHARE,
+        status: STARTED,
         userId,
         createdAt: new Date(Date.parse('11/11/2011')),
       });
@@ -1898,7 +1898,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       it('should return an empty array', async function () {
         // given
         const participation = databaseBuilder.factory.buildCampaignParticipation({
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
         databaseBuilder.factory.buildCampaignParticipation({
           campaignId: participation.campaignId,

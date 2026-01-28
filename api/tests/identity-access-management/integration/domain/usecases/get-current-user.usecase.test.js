@@ -32,7 +32,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | get-curr
       const campaign = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', code: 'SOMECODE' });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
         userId: user.id,
       });
       await databaseBuilder.commit();

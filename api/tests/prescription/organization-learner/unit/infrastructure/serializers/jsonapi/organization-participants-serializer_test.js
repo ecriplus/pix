@@ -16,7 +16,7 @@ describe('Unit | Serializer | JSONAPI | organization-participants-serializer', f
           lastParticipationDate: '2021-03-05',
           campaignName: 'King Karam',
           campaignType: 'ASSESSMENT',
-          participationStatus: campaignParticipationsStatuses.TO_SHARE,
+          participationStatus: campaignParticipationsStatuses.STARTED,
           'my.awesome.custom.field': 'genki',
           isCertifiableFromCampaign: null,
           certifiableAtFromCampaign: null,

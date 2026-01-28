@@ -16,7 +16,7 @@ import { KnowledgeElementCollection } from '../../../shared/domain/models/Knowle
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../domain/read-models/AvailableCampaignParticipation.js';
 
-const { STARTED, TO_SHARE, SHARED } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 const { pick } = lodash;
 
@@ -277,7 +277,7 @@ const getCodeOfLastParticipationToProfilesCollectionCampaignForUser = async func
     .where({ userId })
     .whereNull('campaign-participations.deletedAt')
     .whereNull('archivedAt')
-    .whereIn('status', [TO_SHARE, STARTED])
+    .where('status', STARTED)
     .andWhere({ 'campaigns.type': CampaignTypes.PROFILES_COLLECTION })
     .orderBy('campaign-participations.createdAt', 'desc')
     .first();

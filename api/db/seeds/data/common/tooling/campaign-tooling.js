@@ -49,7 +49,6 @@ export { createAssessmentCampaign, createProfilesCollectionCampaign };
  *  participantCount: number,
  *  completionDistribution: {
  *    started: number,
- *    to_share: number,
  *    shared: number,
  *    shared_one_validated_skill: number,
  *    shared_perfect: number,
@@ -127,7 +126,6 @@ async function createAssessmentCampaign({
 
     const completionDistribution = [
       ...Array(configCampaign.completionDistribution?.started || 0).fill('STARTED'),
-      ...Array(configCampaign.completionDistribution?.to_share || 0).fill('TO_SHARE'),
       ...Array(configCampaign.completionDistribution?.shared || 0).fill('SHARED'),
       ...Array(configCampaign.completionDistribution?.shared_one_validated_skill || 0).fill(
         'SHARED_ONE_VALIDATED_SKILL',
@@ -664,10 +662,6 @@ async function _getCompletionCampaignParticipationData(
     case 'STARTED':
       answersAndKnowledgeElements = [];
       status = CampaignParticipationStatuses.STARTED;
-      break;
-    case 'TO_SHARE':
-      answersAndKnowledgeElements = await _getKnowledgeElementFromSkills(campaignSkills, randomValidatedSkill);
-      status = CampaignParticipationStatuses.TO_SHARE;
       break;
     case 'SHARED':
       answersAndKnowledgeElements = await _getKnowledgeElementFromSkills(campaignSkills, randomValidatedSkill);

@@ -14,7 +14,7 @@ describe('Unit | Domain | Read-Models | OrganizationLearnerActivity', function (
       }),
       domainBuilder.buildOrganizationLearnerParticipation({
         campaignType: CampaignTypes.ASSESSMENT,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       }),
       domainBuilder.buildOrganizationLearnerParticipation({
         campaignType: CampaignTypes.ASSESSMENT,
@@ -22,7 +22,7 @@ describe('Unit | Domain | Read-Models | OrganizationLearnerActivity', function (
       }),
       domainBuilder.buildOrganizationLearnerParticipation({
         campaignType: CampaignTypes.PROFILES_COLLECTION,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       }),
       domainBuilder.buildOrganizationLearnerParticipation({
         campaignType: CampaignTypes.PROFILES_COLLECTION,

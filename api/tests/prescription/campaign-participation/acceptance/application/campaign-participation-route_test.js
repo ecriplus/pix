@@ -777,10 +777,6 @@ describe('Acceptance | Campaign Participation | Application | Route', function (
         userId,
         campaignSkills: ['recSkillId1'],
       });
-      const sharableCampaignParticipation = databaseBuilder.factory.campaignParticipationOverviewFactory.buildToShare({
-        userId,
-        campaignSkills: ['recSkillId1'],
-      });
       databaseBuilder.factory.campaignParticipationOverviewFactory.buildEnded({
         userId,
         campaignSkills: ['recSkillId1'],
@@ -789,7 +785,7 @@ describe('Acceptance | Campaign Participation | Application | Route', function (
       await databaseBuilder.commit();
       options = {
         method: 'GET',
-        url: `/api/users/${userId}/campaign-participation-overviews?filter[states][]=ONGOING&filter[states][]=TO_SHARE`,
+        url: `/api/users/${userId}/campaign-participation-overviews?filter[states][]=ONGOING&filter[states][]=STARTED`,
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
@@ -799,7 +795,7 @@ describe('Acceptance | Campaign Participation | Application | Route', function (
       // then
       expect(response.statusCode).to.equal(200);
       const participationIds = response.result.data.map(({ id }) => Number(id));
-      expect(participationIds).to.deep.equals([sharableCampaignParticipation.id, startedCampaignParticipation.id]);
+      expect(participationIds).to.deep.equals([startedCampaignParticipation.id]);
     });
 
     it('should not return participation related to combined course', async function () {

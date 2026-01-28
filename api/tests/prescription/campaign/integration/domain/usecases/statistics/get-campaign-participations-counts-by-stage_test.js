@@ -136,7 +136,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
       // this participation should not be taken into account
       const toShareParticipation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       });
 
       // this participation should not be taken into account

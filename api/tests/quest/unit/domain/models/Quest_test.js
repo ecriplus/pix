@@ -27,7 +27,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             {
               data: {
                 status: {
-                  data: ['SHARED', 'TO_SHARE'],
+                  data: ['SHARED', 'STARTED'],
                   comparison: CRITERION_COMPARISONS.ONE_OF,
                 },
                 targetProfileId: {

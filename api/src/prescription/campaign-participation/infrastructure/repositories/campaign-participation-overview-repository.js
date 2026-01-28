@@ -150,7 +150,6 @@ function _computeCampaignParticipationState(knexConn) {
     WHEN "campaign-participations"."deletedAt" IS NOT NULL THEN 'DISABLED'
     WHEN "campaign-participations"."status" = ? THEN 'ONGOING'
     WHEN "campaign-participations"."status" = ? THEN 'ENDED'
-    ELSE 'TO_SHARE'
   END`,
     [CampaignParticipationStatuses.STARTED, CampaignParticipationStatuses.SHARED],
   );
@@ -170,10 +169,9 @@ function _computeCombinedCourseParticipationState(knexConn) {
 function _computeCampaignParticipationOrder() {
   return `
   CASE
-    WHEN "participationState" = 'TO_SHARE' THEN 1
-    WHEN "participationState" = 'ONGOING'  THEN 2
-    WHEN "participationState" = 'ENDED'    THEN 3
-    WHEN "participationState" = 'DISABLED' THEN 4
+    WHEN "participationState" = 'ONGOING'  THEN 1
+    WHEN "participationState" = 'ENDED'    THEN 2
+    WHEN "participationState" = 'DISABLED' THEN 3
   END`;
 }
 
