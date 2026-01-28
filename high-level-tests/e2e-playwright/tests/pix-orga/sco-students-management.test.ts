@@ -20,7 +20,7 @@ test.beforeEach(async () => {
     isManagingStudents: true,
   });
 
-  let file = (await readFile(path.join(import.meta.dirname, '..', '..', 'fixtures', 'sco-ok.xml'))).toString();
+  let file = (await readFile(path.join(import.meta.dirname, '..', '..', 'data', 'sco-ok.xml'))).toString();
   let count = 1;
   file = file
     .replace(/<UAJ>.*<\/UAJ>/, `<UAJ>SCO_MANAGING-${UAJ}</UAJ>`)
