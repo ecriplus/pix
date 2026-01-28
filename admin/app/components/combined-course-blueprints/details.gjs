@@ -77,7 +77,7 @@ export default class Details extends Component {
             </DescriptionList>
             <div class="combined-course-blueprint__content">
               {{#each @model.content as |requirement|}}
-                <RequirementTag @type={{requirement.type}} @value={{requirement.value}} @label={{requirement.value}} />
+                <RequirementTag @type={{requirement.type}} @value={{requirement.value}} @label={{requirement.label}} />
               {{/each}}
             </div>
           </div>

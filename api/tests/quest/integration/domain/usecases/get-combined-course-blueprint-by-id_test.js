@@ -1,4 +1,7 @@
-import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import {
+  COMBINED_COURSE_BLUEPRINT_ITEMS,
+  CombinedCourseBlueprint,
+} from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
@@ -17,7 +20,15 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
 
   it('should return a combined course blueprint for a given id', async function () {
     //given
-    await databaseBuilder.factory.buildCombinedCourseBlueprint({ id: 1, content: [] });
+    const targetProfile = await databaseBuilder.factory.buildTargetProfile({ name: 'Mon profil cible' });
+
+    await databaseBuilder.factory.buildCombinedCourseBlueprint({
+      id: 1,
+      content: [
+        { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfile.id },
+        { type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: 'e074af34' },
+      ],
+    });
 
     await databaseBuilder.commit();
 
@@ -34,7 +45,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
       illustration: 'images/illustration.svg',
       createdAt: now,
       updatedAt: now,
-      content: [],
+      content: [
+        { type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfile.id, label: targetProfile.name },
+        {
+          type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
+          value: 'e074af34',
+          label: 'Au-delà des mots de passe : comment s’authentifier ?',
+        },
+      ],
       organizationIds: [],
     });
   });
