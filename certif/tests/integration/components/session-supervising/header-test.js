@@ -179,6 +179,6 @@ module('Integration | Component | SessionSupervising::Header', function (hooks) 
           name: 'Documentation sur la gestion des signalements Ouverture dans une nouvelle fenêtre',
         }),
       )
-      .hasAttribute('href', 'https://cloud.pix.fr/s/s4H9x4PD4eKokqX');
+      .hasAttribute('href', 'https://cloud.pix.fr/s/8xB82zdPKYSZzaM');
   });
 });

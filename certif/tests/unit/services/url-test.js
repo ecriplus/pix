@@ -141,7 +141,7 @@ module('Unit | Service | url', function (hooks) {
       const invigilatorDocumentationUrl = service.invigilatorDocumentationUrl;
 
       // then
-      assert.strictEqual(invigilatorDocumentationUrl, 'https://cloud.pix.fr/s/s4H9x4PD4eKokqX');
+      assert.strictEqual(invigilatorDocumentationUrl, 'https://cloud.pix.fr/s/8xB82zdPKYSZzaM');
     });
   });
 
