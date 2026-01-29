@@ -1,12 +1,11 @@
-import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { removeByOrganizationLearnerIds } from '../../src/prescription/learner-management/infrastructure/repositories/campaign-participation-repository.js';
-import { removeByIds } from '../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
+import { knex } from '../../db/knex-database-connection.js';
+import { CLIENTS, PIX_ADMIN } from '../../src/authorization/domain/constants.js';
+import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
 import { commaSeparatedNumberParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 // Définition du script
-export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
+export class DeleteAndAnonymiseOrganizationLearnerScript extends Script {
   constructor() {
     super({
       description: 'Deletes organization-learners and anonymise their related data',
@@ -22,65 +21,36 @@ export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
     });
   }
 
-  async handle({
-    options,
-    logger,
-    campaignParticipationRepository = { removeByOrganizationLearnerIds },
-    organizationLearnerRepository = { removeByIds },
-  }) {
+  async handle({ options, logger }) {
     const engineeringUserId = process.env.ENGINEERING_USER_ID;
-    logger.info(`Anonymise ${options.organizationLearnerIds.length} learners`);
-    await DomainTransaction.execute(async () => {
-      const updatedAt = new Date();
-      await campaignParticipationRepository.removeByOrganizationLearnerIds({
-        organizationLearnerIds: options.organizationLearnerIds,
+
+    logger.info(`Anonymize ${options.organizationLearnerIds.length} learners`);
+
+    const organizationLearnerOfOrganizationIds = await knex('view-active-organization-learners')
+      .select({
+        organizationId: 'organizationId',
+        organizationLearnerIds: knex.raw('array_agg("view-active-organization-learners".id)'),
+      })
+      .whereIn('id', options.organizationLearnerIds)
+      .groupBy('organizationId');
+
+    logger.info(`Anonymize learners from ${organizationLearnerOfOrganizationIds.length} organizations`);
+    for (const organizationLearnerOfOrganizationId of organizationLearnerOfOrganizationIds) {
+      logger.info(
+        `START : Anonymize ${organizationLearnerOfOrganizationId.organizationLearnerIds.length} learners from organization :${organizationLearnerOfOrganizationId.organizationId}`,
+      );
+      await usecases.deleteOrganizationLearners({
+        organizationLearnerIds: organizationLearnerOfOrganizationId.organizationLearnerIds,
+        organizationId: organizationLearnerOfOrganizationId.organizationId,
         userId: engineeringUserId,
+        userRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+        client: CLIENTS.SCRIPT,
       });
-
-      await organizationLearnerRepository.removeByIds({
-        organizationLearnerIds: options.organizationLearnerIds,
-        userId: engineeringUserId,
-      });
-
-      await anonymizeDeletedOrganizationLearners(options.organizationLearnerIds);
-
-      const participations = await anonymizeDeletedOrganizationLearnersParticipations(options.organizationLearnerIds);
-      const participationsIds = participations.map((participation) => participation.id);
-      await detachAssessments(participationsIds, updatedAt);
-      await detachRecommendedTrainings(participationsIds, updatedAt);
-    });
+      logger.info(
+        `END : Anonymize ${organizationLearnerOfOrganizationId.organizationLearnerIds.length} learners from organization :${organizationLearnerOfOrganizationId.organizationId}`,
+      );
+    }
   }
 }
 
-async function anonymizeDeletedOrganizationLearners(organizationLearnerIds) {
-  const knexConnection = DomainTransaction.getConnection();
-  await knexConnection('organization-learners')
-    .update({ firstName: '', lastName: '', userId: null, updatedAt: new Date() })
-    .whereIn('id', organizationLearnerIds)
-    .whereNotNull('deletedAt');
-}
-
-async function anonymizeDeletedOrganizationLearnersParticipations(organizationLearnerIds) {
-  const knexConnection = DomainTransaction.getConnection();
-  return knexConnection('campaign-participations')
-    .update({ participantExternalId: null, userId: null })
-    .whereIn('organizationLearnerId', organizationLearnerIds)
-    .whereNotNull('deletedAt')
-    .returning('id');
-}
-
-async function detachAssessments(participationIds, updatedAt) {
-  const knexConnection = DomainTransaction.getConnection();
-  await knexConnection('assessments')
-    .update({ campaignParticipationId: null, updatedAt })
-    .whereIn('campaignParticipationId', participationIds);
-}
-
-async function detachRecommendedTrainings(participationIds, updatedAt) {
-  const knexConnection = DomainTransaction.getConnection();
-  await knexConnection(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-    .update({ campaignParticipationId: null, updatedAt })
-    .whereIn('campaignParticipationId', participationIds);
-}
-
-await ScriptRunner.execute(import.meta.url, DeleteAndAnonymiseOrgnizationLearnerScript);
+await ScriptRunner.execute(import.meta.url, DeleteAndAnonymiseOrganizationLearnerScript);
