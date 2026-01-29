@@ -1,4 +1,6 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 import { htmlUnsafe } from '../../helpers/html-unsafe';
 import ModulixIssueReportBlock from './issue-report/issue-report-block';
@@ -9,13 +11,15 @@ export default class ModulixFeedback extends Component {
   }
 
   <template>
-    <div class="feedback feedback--{{this.type}}">
-      {{#if @feedback.state}}
-        <p class="feedback__state">{{htmlUnsafe @feedback.state}}</p>
-      {{/if}}
-      {{htmlUnsafe @feedback.diagnosis}}
+    <div class="feedback feedback-{{this.type}}">
+      <div class="feedback__content">
+        {{#if @feedback.state}}
+          <p class="feedback-content__state">{{htmlUnsafe @feedback.state}}</p>
+        {{/if}}
+        {{htmlUnsafe @feedback.diagnosis}}
 
-      <div class="feedback__report-button">
+      </div>
+      <div class="feedback__buttons">
         <ModulixIssueReportBlock @reportInfo={{@reportInfo}} />
       </div>
     </div>
