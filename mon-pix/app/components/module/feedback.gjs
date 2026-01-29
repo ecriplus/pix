@@ -11,7 +11,7 @@ export default class ModulixFeedback extends Component {
   <template>
     <div class="feedback feedback--{{this.type}}">
       {{#if @feedback.state}}
-        <div class="feedback__state">{{htmlUnsafe @feedback.state}}</div>
+        <p class="feedback__state">{{htmlUnsafe @feedback.state}}</p>
       {{/if}}
       {{htmlUnsafe @feedback.diagnosis}}
 
