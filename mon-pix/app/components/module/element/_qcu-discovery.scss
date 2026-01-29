@@ -18,47 +18,4 @@
     gap: var(--pix-spacing-3x);
     margin: var(--pix-spacing-4x) 0;
   }
-
-  &__feedback {
-    color: var(--pix-neutral-800);
-    background: var(--pix-info-100);
-
-    @media (not (prefers-reduced-motion: reduce)) {
-      animation: 0.75s zoom-in-zoom-out ease;
-
-      @keyframes zoom-in-zoom-out {
-        0% {
-          scale: 100%;
-          overflow: hidden;
-        }
-
-        50% {
-          scale: 110%;
-        }
-
-        100% {
-          scale: 100%;
-        }
-      }
-    }
-  }
-}
-
-.element-qcu-discovery-feedback {
-  &__report-button {
-    display: flex;
-    justify-content: flex-end;
-
-    button:not([aria-disabled="true"]) {
-      color: var(--pix-info-700);
-
-      &:hover {
-        color: var(--pix-info-500);
-      }
-
-      &:focus, &:active {
-        color: var(--pix-info-900);
-      }
-    }
-  }
 }

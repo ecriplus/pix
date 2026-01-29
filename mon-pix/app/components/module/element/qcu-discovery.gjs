@@ -3,10 +3,10 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ProposalButton from 'mon-pix/components/module/component/proposal-button';
+import ModulixFeedback from 'mon-pix/components/module/feedback';
 
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import { VERIFY_RESPONSE_DELAY } from '../component/element';
-import ModulixIssueReportBlock from '../issue-report/issue-report-block';
 import ModuleElement from './module-element';
 
 export default class ModuleQcuDiscovery extends ModuleElement {
@@ -18,7 +18,7 @@ export default class ModuleQcuDiscovery extends ModuleElement {
   @service modulixPreviewMode;
 
   get selectedProposalFeedback() {
-    return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
+    return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback;
   }
 
   get selectedProposalAnswer() {
@@ -82,22 +82,15 @@ export default class ModuleQcuDiscovery extends ModuleElement {
               @isDiscoveryVariant={{true}}
             />
             {{#if this.modulixPreviewMode.isEnabled}}
-              <div class="element-qcu-discovery__feedback" role="status" tabindex="-1">
-                {{htmlUnsafe proposal.feedback.diagnosis}}
-              </div>
+              <ModulixFeedback @feedback={{proposal.feedback}} />
             {{/if}}
           {{/each}}
         </div>
       </fieldset>
     </form>
-    {{#if this.shouldDisplayFeedback}}
-      <div class="feedback element-qcu-discovery__feedback" role="status" tabindex="-1">
-        {{htmlUnsafe this.selectedProposalFeedback}}
 
-        <div class="element-qcu-discovery-feedback__report-button">
-          <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
-        </div>
-      </div>
+    {{#if this.shouldDisplayFeedback}}
+      <ModulixFeedback @feedback={{this.selectedProposalFeedback}} @reportInfo={{this.reportInfo}} />
     {{/if}}
   </template>
 }
