@@ -101,7 +101,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
     await click(retryButton);
 
     // then
-    assert.strictEqual(screen.queryByRole('status').innerText, '');
     assert.false(qrocmForm.disabled);
     await clickByName('Réponse 1');
     await screen.findByRole('listbox');

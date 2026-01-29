@@ -179,24 +179,18 @@ export default class ModuleQcm extends ModuleElement {
         </PixButton>
       {{/unless}}
 
-      <div class="element-qcm__feedback" role="status" tabindex="-1">
-        {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback
-            @answerIsValid={{this.answerIsValid}}
-            @feedback={{this.correction.feedback}}
-            @reportInfo={{this.reportInfo}}
-          />
-        {{/if}}
-      </div>
+      {{#if this.shouldDisplayFeedback}}
+        <ModulixFeedback
+          @answerIsValid={{this.answerIsValid}}
+          @feedback={{this.correction.feedback}}
+          @reportInfo={{this.reportInfo}}
+        />
+      {{/if}}
 
       {{#if this.modulixPreviewMode.isEnabled}}
-        <div role="status" tabindex="-1">
-          {{#each this.previewFeedbacks as |feedback|}}
-            <div class="element-qcm__feedback">
-              <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
-            </div>
-          {{/each}}
-        </div>
+        {{#each this.previewFeedbacks as |feedback|}}
+          <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
+        {{/each}}
       {{/if}}
 
       {{#if this.shouldDisplayRetryButton}}

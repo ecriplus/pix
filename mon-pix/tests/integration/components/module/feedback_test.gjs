@@ -22,6 +22,7 @@ module('Integration | Component | Module | Feedback', function (hooks) {
     );
 
     // then
+    assert.dom(screen.getByRole('status')).exists();
     assert.dom(screen.getByText('Correct !')).exists();
     assert.dom(screen.getByText("C'est la bonne réponse !")).exists();
   });
