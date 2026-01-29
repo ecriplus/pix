@@ -280,7 +280,7 @@ describe('Unit | Controller | answer-controller', function () {
           expect(questUsecases.rewardUser).to.have.not.been.called;
         });
 
-        it('should call rewardUser if async is not enabled', async function () {
+        it.skip('should call rewardUser if async is not enabled', async function () {
           // given
           await featureToggles.set('isQuestEnabled', true);
           await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', false);

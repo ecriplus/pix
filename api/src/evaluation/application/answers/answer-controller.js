@@ -39,13 +39,14 @@ const save = async function (request, h, dependencies = { answerSerializer, asse
       locale,
     });
   }
-  if (
-    userId &&
-    !(await featureToggles.get('isAsyncQuestRewardingCalculationEnabled')) &&
-    (await featureToggles.get('isQuestEnabled'))
-  ) {
-    await questUsecases.rewardUser({ userId });
-  }
+  // INFO: On désactive temporairement ce code pour vérifier un problème de production
+  // if (
+  //   userId &&
+  //   !(await featureToggles.get('isAsyncQuestRewardingCalculationEnabled')) &&
+  //   (await featureToggles.get('isQuestEnabled'))
+  // ) {
+  //   await questUsecases.rewardUser({ userId });
+  // }
 
   return h.response(dependencies.answerSerializer.serialize(correctedAnswer)).created();
 };
