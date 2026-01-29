@@ -113,4 +113,12 @@ export class CertificationInformationPage {
       )
       .waitFor({ state: 'detached' });
   }
+
+  async rescoreCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Re-scorer la certification' }).click();
+
+    await this.page.getByText('La certification a bien été rescorée').waitFor({ state: 'visible' });
+  }
 }
