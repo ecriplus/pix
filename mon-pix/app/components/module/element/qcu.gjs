@@ -184,20 +184,9 @@ export default class ModuleQcu extends ModuleElement {
           @answerIsValid={{this.answerIsValid}}
           @feedback={{this.correction.feedback}}
           @reportInfo={{this.reportInfo}}
+          @shouldDisplayRetryButton={{this.shouldDisplayRetryButton}}
+          @retry={{this.retry}}
         />
-      {{/if}}
-
-      {{#if this.shouldDisplayRetryButton}}
-        <PixButton
-          class="element-qcu__retry-button"
-          @variant="tertiary"
-          @size="small"
-          @type="button"
-          @triggerAction={{this.retry}}
-          @iconBefore="refresh"
-        >
-          {{t "pages.modulix.buttons.activity.retry"}}
-        </PixButton>
       {{/if}}
     </form>
   </template>

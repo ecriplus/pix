@@ -251,6 +251,8 @@ export default class ModuleQrocm extends ModuleElement {
           @answerIsValid={{this.answerIsValid}}
           @feedback={{this.correction.feedback}}
           @reportInfo={{this.reportInfo}}
+          @shouldDisplayRetryButton={{this.shouldDisplayRetryButton}}
+          @retry={{this.retry}}
         />
       {{/if}}
 
@@ -258,19 +260,6 @@ export default class ModuleQrocm extends ModuleElement {
         {{#each this.previewFeedbacks as |feedback|}}
           <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
         {{/each}}
-      {{/if}}
-
-      {{#if this.shouldDisplayRetryButton}}
-        <PixButton
-          class="element-qrocm__retry-button"
-          @variant="tertiary"
-          @size="small"
-          @type="button"
-          @triggerAction={{this.retry}}
-          @iconBefore="refresh"
-        >
-          {{t "pages.modulix.buttons.activity.retry"}}
-        </PixButton>
       {{/if}}
     </form>
   </template>

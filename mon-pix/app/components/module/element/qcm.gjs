@@ -184,6 +184,8 @@ export default class ModuleQcm extends ModuleElement {
           @answerIsValid={{this.answerIsValid}}
           @feedback={{this.correction.feedback}}
           @reportInfo={{this.reportInfo}}
+          @shouldDisplayRetryButton={{this.shouldDisplayRetryButton}}
+          @retry={{this.retry}}
         />
       {{/if}}
 
@@ -191,19 +193,6 @@ export default class ModuleQcm extends ModuleElement {
         {{#each this.previewFeedbacks as |feedback|}}
           <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
         {{/each}}
-      {{/if}}
-
-      {{#if this.shouldDisplayRetryButton}}
-        <PixButton
-          class="element-qcm__retry-button"
-          @variant="tertiary"
-          @size="small"
-          @type="button"
-          @triggerAction={{this.retry}}
-          @iconBefore="refresh"
-        >
-          {{t "pages.modulix.buttons.activity.retry"}}
-        </PixButton>
       {{/if}}
     </form>
   </template>

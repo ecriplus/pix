@@ -12,7 +12,7 @@ export default class ModulixFeedback extends Component {
 
   <template>
     <div class="feedback feedback--{{this.type}}" role="status" tabindex="-1">
-      <div class="feedback__content">
+      <div class="feedback__content {{if @shouldDisplayRetryButton 'feedback__content--with-retry-button'}}">
         {{#if @feedback.state}}
           <p class="feedback-content__state">{{htmlUnsafe @feedback.state}}</p>
         {{/if}}
@@ -21,6 +21,16 @@ export default class ModulixFeedback extends Component {
       </div>
       <div class="feedback__buttons">
         <ModulixIssueReportBlock @reportInfo={{@reportInfo}} />
+        {{#if @shouldDisplayRetryButton}}
+          <PixButton
+            class="feedback-buttons__retry"
+            @variant="tertiary"
+            @triggerAction={{@retry}}
+            @iconBefore="refresh"
+          >
+            {{t "pages.modulix.buttons.activity.retry"}}
+          </PixButton>
+        {{/if}}
       </div>
     </div>
   </template>

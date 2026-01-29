@@ -81,4 +81,23 @@ module('Integration | Component | Module | Feedback', function (hooks) {
       assert.dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 })).exists();
     });
   });
+
+  test('should display retry button', async function (assert) {
+    // given
+    const feedback = {
+      state: 'Correct !',
+      diagnosis: "<p>C'est la bonne réponse !</p>",
+    };
+    const shouldDisplayRetryButton = true;
+
+    // when
+    const screen = await render(
+      <template>
+        <ModulixFeedback @feedback={{feedback}} @shouldDisplayRetryButton={{shouldDisplayRetryButton}} />
+      </template>,
+    );
+
+    // then
+    assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') })).exists();
+  });
 });
