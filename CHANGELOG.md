@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.317.1](https://github.com/1024pix/pix/compare/v5.317.0...v5.317.1) (2026-01-29)
+
+### :building_construction: Tech
+
+- [#14920](https://github.com/1024pix/pix/pull/14920) Remettre certaines dependences de l'API
+
 # [5.317.0](https://github.com/1024pix/pix/compare/v5.316.0...v5.317.0) (2026-01-29)
 
 ### :rocket: Amélioration
