@@ -52,7 +52,7 @@ export const getLatestByVersionAndLocale = async ({ version, locale }) => {
 
 export const saveCompetenceForScoringConfiguration = async ({ configuration }) => {
   const knexConn = DomainTransaction.getConnection();
-  return knexConn('certification-configurations')
+  return knexConn('certification_versions')
     .where({
       expirationDate: null,
     })
@@ -64,7 +64,7 @@ export const saveCompetenceForScoringConfiguration = async ({ configuration }) =
 export const saveCertificationScoringConfiguration = async ({ configuration }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  return knexConn('certification-configurations')
+  return knexConn('certification_versions')
     .where({
       expirationDate: null,
     })
