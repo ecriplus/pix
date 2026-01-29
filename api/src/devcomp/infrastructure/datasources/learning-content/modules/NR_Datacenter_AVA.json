@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Tous nos usages numériques mobilisent des serveurs, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à toutes les échelles&nbsp;: celle de l’utilisateur, celle des entreprises et enfin celle des législateurs.<br><br></p>",
+    "description": "<p>Tous nos usages numériques mobilisent des serveurs, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à l’échelle des entreprises et des législateurs.<br><br></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -52,7 +52,7 @@
               "element": {
                 "id": "f2665813-82bb-4427-a9a0-14a6a5f3df8f",
                 "type": "qcu-discovery",
-                "instruction": "<p>L'agence internationale de l'énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données.<br>À votre avis, que disent ces projections pour la période 2025 à 2030 ?<br></p>",
+                "instruction": "<p>L’agence internationale de l’énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données.<br>À votre avis, que disent ces projections pour la période 2025 à 2030 ?<br></p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -104,7 +104,7 @@
               "element": {
                 "id": "1ec87fee-69c4-4062-8a25-89da3a479c2f",
                 "type": "text",
-                "content": "La <strong>construction </strong>d'un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle contribue également à l'<strong>artificialisation des sols</strong>.<br>De plus, le centre de données consomme une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets</strong> toxiques."
+                "content": "La <strong>construction </strong>d’un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle contribue également à l’<strong>artificialisation des sols</strong>.<br>De plus, le centre de données consomme une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets</strong> toxiques."
               }
             },
             {
@@ -143,7 +143,7 @@
                     {
                       "id": "2325603b-bf07-498a-bbdf-754cb4858782",
                       "type": "qcm",
-                      "instruction": "<p>Quelles sont les conséquences de l'extraction de métaux pour la construction des centres des données ?</p>",
+                      "instruction": "<p>Quelles sont les conséquences de l’extraction de métaux pour la construction des centres des données ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -272,11 +272,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureusement oui...</p>",
-                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l'environnement et la santé humaine.</p>"
+                          "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine.</p>"
                         },
                         "invalid": {
                           "state": "<p>Malheureusement non...</p>",
-                          "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l'environnement et la santé humaine."
+                          "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine."
                         }
                       },
                       "solutions": [
@@ -344,7 +344,7 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
-                "content": "<p>Malo est concepteur de site web dans une entreprise, il est en train d'améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centres de données ?&nbsp;🤔</p>"
+                "content": "<p>Malo est concepteur de site web dans une entreprise, il est en train d’améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centres de données ?&nbsp;🤔</p>"
               }
             },
             {
@@ -360,7 +360,7 @@
                     {
                       "id": "7fb2c32e-586d-4a88-ad50-368a2292ae97",
                       "type": "custom",
-                      "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -400,7 +400,7 @@
                     {
                       "id": "f19dfdcb-c777-4448-ab61-29b0a212e489",
                       "type": "custom",
-                      "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -440,7 +440,7 @@
                     {
                       "id": "3e486e8b-cca0-45c5-b022-b40574eeb8bc",
                       "type": "custom",
-                      "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -480,7 +480,7 @@
                     {
                       "id": "14580542-77e4-454a-9dea-991225bf4c73",
                       "type": "custom",
-                      "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "instruction": "Comment évolue la sollicitation des serveurs ?",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -536,7 +536,7 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
-                      "content": "On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie.<p><br></p>"
+                      "content": "On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie."
                     }
                   ]
                 },
@@ -545,7 +545,7 @@
                     {
                       "id": "b2328855-4a62-4909-b3cd-dd89682f43c2",
                       "type": "text",
-                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5>\n<p>En pratique, elles sont encore peu appliquées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5><p>En pratique, elles sont encore peu appliquées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
                     }
                   ]
                 }
@@ -598,7 +598,7 @@
                             "userName": "Dona",
                             "direction": "incoming",
                             "type": "Texte",
-                            "content": "Bonjour à tous ! J'espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?"
+                            "content": "Bonjour à tous ! J’espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?"
                           },
                           {
                             "userName": "Boubacar",
@@ -889,7 +889,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
-                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres de données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. <br>Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts. Une solution plus économe en énergie peut être plus coûteuse en eau.&nbsp;Aucune solution n’est parfaite.&nbsp;🤔<br>Et une conception <strong>plus responsable</strong> peut entraîner des <strong>coûts économiques</strong> importants. 💶<br></p>"
+                      "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres de données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. <br>Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts. Une solution plus économe en énergie peut être plus coûteuse en eau.&nbsp;Aucune solution n’est parfaite.&nbsp;🤔<br>Et une conception <strong>plus responsable</strong> peut entraîner des <strong>coûts économiques</strong> importants. 💶<br></p>"
                     }
                   ]
                 },
@@ -903,7 +903,7 @@
                     {
                       "id": "331b8252-cd22-4713-af75-212a5b912302",
                       "type": "expand",
-                      "title": "💡 Et en France ?",
+                      "title": "💡 Et en France ?",
                       "content": "En France, la <strong>loi REEN</strong> vise également à inciter les <strong>centres de données </strong>à être moins consommateurs en leur accordant la réduction d’une taxe s’ils respectent des <strong>critères environnementaux</strong>."
                     }
                   ]
@@ -945,203 +945,238 @@
           "title": "Les impacts environnementaux en cascade des centres de données",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "7e3b5f25-be22-4e0b-a43a-1c823fabcf8e",
-                "type": "qrocm",
-                "instruction": "Citez 2 conséquences environnementales des centres de données.",
-                "proposals": [
-                  {
-                    "input": "consequencedatacenter1",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 20,
-                    "display": "block",
-                    "placeholder": "champs à remplir",
-                    "ariaLabel": "champs à remplir",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "Consommation d’eau",
-                      "la consommation d’eau",
-                      "la consommation d’énergie",
-                      "Consommation d’énergie",
-                      "la consommation d’électricité",
-                      "Consommation d’électricité",
-                      "Extraction de métaux et terres rares",
-                      "Extraction de métaux",
-                      "Extraction de terres rares",
-                      "Artificialisation des sols",
-                      "Co²",
-                      "Émissions de dioxyde de carbone",
-                      "Gaz à effet de serre",
-                      "Rejets de CO2",
-                      "Empreinte carbone",
-                      "Pollution carbone",
-                      "Pollution",
-                      "Production de déchets toxiques",
-                      "Génération de déchets dangereux",
-                      "Rejets de substances toxiques",
-                      "Création de déchets nocifs",
-                      "Accumulation de déchets toxiques",
-                      "déchets toxiques",
-                      "résidus dangereux",
-                      "polluants nocifs",
-                      "substances dangereuses",
-                      "matières toxiques",
-                      "déchets",
-                      "ordures",
-                      "résidus",
-                      "débris",
-                      "rebuts",
-                      "Dégradation de la santé des populations",
-                      "Atteinte à la santé des populations",
-                      "Détérioration de la santé publique",
-                      "Altération de la santé des populations",
-                      "Déclin de la santé collective",
-                      "Dégradation de la santé",
-                      "Altération de la santé",
-                      "Détérioration sanitaire",
-                      "Affaiblissement de l’état de santé",
-                      "Déclin sanitaire",
-                      "Destruction des habitats",
-                      "Anéantissement des habitats naturels",
-                      "Perte des habitats",
-                      "Élimination des habitats",
-                      "Dévastation des milieux naturels",
-                      "Détérioration des habitats",
-                      "Dégradation des milieux naturels",
-                      "Altération des habitats",
-                      "Fragmentation des habitats",
-                      "Appauvrissement des habitats",
-                      "Dégradation de la biodiversité",
-                      "Érosion de la biodiversité",
-                      "Affaiblissement de la biodiversité",
-                      "Appauvrissement de la biodiversité",
-                      "Déclin de la biodiversité",
-                      "Disparition de la biodiversité",
-                      "Perte de biodiversité",
-                      "Extinction des espèces",
-                      "Disparition des espèces",
-                      "Régression de la biodiversité",
-                      "Dérèglement climatique",
-                      "Perturbation du climat",
-                      "Déséquilibre climatique",
-                      "Instabilité climatique",
-                      "Modification du climat",
-                      "Réchauffement climatique",
-                      "Augmentation des températures globales",
-                      "Changement climatique",
-                      "Réchauffement global",
-                      "Hausse des températures moyennes"
-                    ]
-                  },
-                  {
-                    "input": "consequencedatacenter2",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 20,
-                    "display": "block",
-                    "placeholder": "champs à remplir",
-                    "ariaLabel": "champs à remplir",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "Consommation d’eau",
-                      "la consommation d’eau",
-                      "la consommation d’énergie",
-                      "Consommation d’énergie",
-                      "la consommation d’électricité",
-                      "Consommation d’électricité",
-                      "Extraction de métaux et terres rares",
-                      "Extraction de métaux",
-                      "Extraction de terres rares",
-                      "Artificialisation des sols",
-                      "Génération de Co²",
-                      "Génération de gaz à effet de serre",
-                      "gaz à effet de serre",
-                      "Co²",
-                      "Émissions de dioxyde de carbone",
-                      "Gaz à effet de serre",
-                      "Rejets de CO2",
-                      "Empreinte carbone",
-                      "Pollution carbone",
-                      "Pollution",
-                      "Production de déchets toxiques",
-                      "Génération de déchets dangereux",
-                      "Rejets de substances toxiques",
-                      "Création de déchets nocifs",
-                      "Accumulation de déchets toxiques",
-                      "déchets toxiques",
-                      "résidus dangereux",
-                      "polluants nocifs",
-                      "substances dangereuses",
-                      "matières toxiques",
-                      "déchets",
-                      "ordures",
-                      "résidus",
-                      "débris",
-                      "rebuts",
-                      "Dégradation de la santé des populations",
-                      "Atteinte à la santé des populations",
-                      "Détérioration de la santé publique",
-                      "Altération de la santé des populations",
-                      "Déclin de la santé collective",
-                      "Dégradation de la santé",
-                      "Altération de la santé",
-                      "Détérioration sanitaire",
-                      "Affaiblissement de l’état de santé",
-                      "Déclin sanitaire",
-                      "Destruction des habitats",
-                      "Anéantissement des habitats naturels",
-                      "Perte des habitats",
-                      "Élimination des habitats",
-                      "Dévastation des milieux naturels",
-                      "Détérioration des habitats",
-                      "Dégradation des milieux naturels",
-                      "Altération des habitats",
-                      "Fragmentation des habitats",
-                      "Appauvrissement des habitats",
-                      "Dégradation de la biodiversité",
-                      "Érosion de la biodiversité",
-                      "Affaiblissement de la biodiversité",
-                      "Appauvrissement de la biodiversité",
-                      "Déclin de la biodiversité",
-                      "Disparition de la biodiversité",
-                      "Perte de biodiversité",
-                      "Extinction des espèces",
-                      "Disparition des espèces",
-                      "Régression de la biodiversité",
-                      "Dérèglement climatique",
-                      "Perturbation du climat",
-                      "Déséquilibre climatique",
-                      "Instabilité climatique",
-                      "Modification du climat",
-                      "Réchauffement climatique",
-                      "Augmentation des températures globales",
-                      "Changement climatique",
-                      "Réchauffement global",
-                      "Hausse des températures moyennes"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "Bien vu !",
-                    "diagnosis": "Et il y en a beaucoup d’autres...."
-                  },
-                  "invalid": {
-                    "state": "Êtes-vous sûr ?",
-                    "diagnosis": "Vous pouvez retourner consulter le<strong> schéma explicatif </strong>au début du module pour trouver la réponse. (Si vous êtes relecteur et que votre réponse n’a pas été prise en compte, dites-là nous pour qu’on l’ajoute)"
-                  }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "00980dc6-6072-4a42-b077-75c9d9f310d7",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter.png",
+                      "alt": "Un bâtiment avec beaucoup de matériel informatique et des cables",
+                      "alternativeText": "Un bâtiment avec beaucoup de matériel informatique et des cables.",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "aa68678f-3038-41eb-a70e-e3b73c314ce6",
+                      "type": "qrocm",
+                      "instruction": "Complétez la légende de cette photo.",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "Un "
+                        },
+                        {
+                          "input": "123",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "centre de données"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "contient des centaines de"
+                        },
+                        {
+                          "input": "456",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "serveurs"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "qui sont sollicités pour permettre notre utilisation d’internet et de l’intelligence artificielle.<br>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse.",
+                          "diagnosis": "Ce sont des infrastructures de plus en plus nombreuses."
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse.",
+                          "diagnosis": "N’hésitez pas à remonter dans le module pour trouver les réponses."
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5e08157b-c1ec-4d41-9b66-14976a4d9cf8",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/mine.png",
+                      "alt": "Une photo de mine",
+                      "alternativeText": "Des travaux dans une mine. L’homme au premier plan porte une combinaison et un casque. A l’arrière-plan, 2 hommes sur un engin de chantier.",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "7f95712c-ce12-4e11-8d3f-e4a196dc4135",
+                      "type": "qrocm",
+                      "instruction": "Complétez la légende de cette photo.",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "Cette mine a pour objectif l’extraction de"
+                        },
+                        {
+                          "input": "15627325",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "métaux"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "précieux et de"
+                        },
+                        {
+                          "input": "89319421",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "terres"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "rares qui sont nécessaires à la construction de ces infrastructures.<br>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse.",
+                          "diagnosis": "Ces métaux et de terres rares sont nécessaires à la fabrication des serveurs."
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse.",
+                          "diagnosis": "N’hésitez pas à remonter dans le module pour trouver les réponses."
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3830f7bb-c900-4268-87d7-7ccf52ddb501",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/secheresse.png",
+                      "alt": "Une photo d’un robinet qui ne coule pas.",
+                      "alternativeText": "On voit sur la photo des mains qui essayent d’ouvrir un robinet mais l’eau ne coule pas.",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "93876f4b-a4fb-426a-a9a7-5add44922991",
+                      "type": "qrocm",
+                      "instruction": "Complétez la légende de cette photo.",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "Ces infrastructure consomme de l’eau"
+                        },
+                        {
+                          "input": "103432",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "douce"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "qui peuvent aggraver les"
+                        },
+                        {
+                          "input": "19432423",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "à compléter",
+                          "ariaLabel": "à compléter",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "pénuries",
+                            "manques"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "d’eau en cas de sécheresse."
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse.",
+                          "diagnosis": "Cette eau est notamment utilisée pour refroidir les serveurs et éviter des surchauffes."
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse.",
+                          "diagnosis": "N’hésitez pas à remonter dans le module pour trouver les réponses."
+                        }
+                      }
+                    }
+                  ]
                 }
-              }
+              ]
             }
           ]
         },
@@ -1175,12 +1210,12 @@
                       }
                     },
                     {
-                      "title": "Le lecteur vidéo de PixVideo adapte automatiquement la qualité selon la largeur de l'écran de l'utilisateur.",
+                      "title": "Le lecteur vidéo de PixVideo adapte automatiquement la qualité selon la largeur de l’écran de l’utilisateur.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/lecteur-video.webp",
-                        "alt": "Le lecteur vidéo de PixVidéo adapte automatiquement la qualité selon la largeur de l'écran de l'utilisateur."
+                        "alt": "Le lecteur vidéo de PixVidéo adapte automatiquement la qualité selon la largeur de l’écran de l’utilisateur."
                       },
                       "license": {
                         "name": "",
@@ -1277,7 +1312,7 @@
               "element": {
                 "id": "b29b9b11-f2d1-4acd-8877-cbed05f7cdea",
                 "type": "qab",
-                "instruction": "Vrai ou Faux : dites si chaque proposition permet de réduire l’impact environnemental d’un centre de données sans gêner son fonctionnement.",
+                "instruction": "Vrai ou Faux&nbsp;: dites si chaque proposition permet de réduire l’impact environnemental d’un centre de données sans gêner son fonctionnement.",
                 "cards": [
                   {
                     "id": "aeafa8b8-1f91-4fbc-a586-e19e77e7d2cc",
@@ -1292,7 +1327,7 @@
                   },
                   {
                     "id": "101e1ba2-41a8-4d76-8ed1-bb456df4df9e",
-                    "text": "Installer les centres de données en Égypte plutôt qu'au Canada.",
+                    "text": "Installer les centres de données en Égypte plutôt qu’au Canada.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1325,7 +1360,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<ul>\n    <li>Éteindre aléatoirement les serveurs n'est pas une bonne idée car les données contenues dessus deviendraient inacessibles.</li>\n    <li>Installer les centres de données en Égypte plutôt qu'au Canada n'est pas une bonne idée car il s'agit d'un pays chaud qui souffre de stress hydrique.</li>\n</ul>"
+                  "diagnosis": "<ul>    <li>Éteindre aléatoirement les serveurs n’est pas une bonne idée car les données contenues dessus deviendraient inacessibles.</li>    <li>Installer les centres de données en Égypte plutôt qu’au Canada n’est pas une bonne idée car il s’agit d’un pays chaud qui souffre de stress hydrique.</li></ul>"
                 }
               }
             }
