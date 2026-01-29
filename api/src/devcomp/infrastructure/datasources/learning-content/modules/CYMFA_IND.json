@@ -146,7 +146,7 @@
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les trois termes proposés ici sont  <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
+                      "diagnosis": "<p>Les trois termes proposés ici sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
                     }
                   }
                 ]
