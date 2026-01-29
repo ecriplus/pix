@@ -7,6 +7,9 @@ import ModulixIssueReportBlock from './issue-report/issue-report-block';
 
 export default class ModulixFeedback extends Component {
   get type() {
+    if (this.args.answerIsValid === undefined) {
+      return 'info';
+    }
     return this.args.answerIsValid ? 'success' : 'error';
   }
 

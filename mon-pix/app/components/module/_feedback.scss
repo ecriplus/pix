@@ -32,6 +32,15 @@
     --modulix-feedback-focus-retry-content-color: var(--pix-warning-500);
   }
 
+  &--info {
+    --modulix-feedback-background-color: var(--pix-info-100);
+    --modulix-feedback-state-color: var(--pix-info-700);
+    --modulix-feedback-retry-content-color: var(--pix-info-900);
+    --modulix-feedback-retry-background-color: var(--pix-info-300-inline);
+    --modulix-feedback-hover-retry-background-color: var(--pix-info-500-inline);
+    --modulix-feedback-focus-retry-content-color: var(--pix-info-500);
+  }
+
   &__content {
     position: relative;
     height: 100%;
