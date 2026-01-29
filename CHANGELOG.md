@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.317.0](https://github.com/1024pix/pix/compare/v5.316.0...v5.317.0) (2026-01-29)
+
+### :rocket: Amélioration
+
+- [#14916](https://github.com/1024pix/pix/pull/14916) MFA_IND_Traitements_Relectures_Internes 
+- [#14875](https://github.com/1024pix/pix/pull/14875) Rendre obligatoire le nombre de places pour la création de lots (PIX-21188). 
+- [#14901](https://github.com/1024pix/pix/pull/14901) Update NR_Datacenter_AVA.json 
+
+### :bug: Correction
+
+- [#14895](https://github.com/1024pix/pix/pull/14895) Solutions interprétées en markdown à tort (PIX-21172) 
+
+### :building_construction: Tech
+
+- [#14871](https://github.com/1024pix/pix/pull/14871) Ajouter un pre handler sur la route de modification des numéros étudiants (PIX-19093). 
+- [#14917](https://github.com/1024pix/pix/pull/14917) Désactive rewardUser au niveau de la réponse à une question 
+- [#14903](https://github.com/1024pix/pix/pull/14903) Suppression du script de modification du domaines des badges complémentaires (PIX-21256) 
+- [#14873](https://github.com/1024pix/pix/pull/14873) Supprime le controller de la section organisations de la page d'un profil cible. 
+- [#14889](https://github.com/1024pix/pix/pull/14889) Utiliser des fichiers .gjs pour le templates sur PixJunior (PIX-21262). 
+
+### :arrow_up: Montée de version
+
+- [#14909](https://github.com/1024pix/pix/pull/14909) Update dependency @1024pix/pix-ui to v57 (certif) 
+- [#14910](https://github.com/1024pix/pix/pull/14910) Update dependency @1024pix/pix-ui to v58 (certif)
+
 # [5.316.0](https://github.com/1024pix/pix/compare/v5.315.0...v5.316.0) (2026-01-28)
 
 ### :rocket: Amélioration
