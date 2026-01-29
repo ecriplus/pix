@@ -7,7 +7,6 @@ const deleteCampaignParticipation = withTransaction(async function ({
   campaignParticipationId,
   userRole,
   client,
-  featureToggles,
   badgeAcquisitionRepository,
   campaignParticipationRepository,
   eventLoggingJobRepository,
@@ -15,8 +14,6 @@ const deleteCampaignParticipation = withTransaction(async function ({
   userRecommendedTrainingRepository,
   keepPreviousDeleted = false,
 }) {
-  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
-
   const campaignParticipations =
     await campaignParticipationRepository.getAllCampaignParticipationsInCampaignForASameLearner({
       campaignId,
@@ -25,34 +22,30 @@ const deleteCampaignParticipation = withTransaction(async function ({
     });
 
   for (const campaignParticipation of campaignParticipations) {
-    campaignParticipation.delete(userId, { isAnonymizationWithDeletionEnabled });
+    campaignParticipation.delete(userId);
     await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
 
-    if (isAnonymizationWithDeletionEnabled) {
-      await eventLoggingJobRepository.performAsync(
-        EventLoggingJob.forUser({
-          client,
-          action: campaignParticipation.loggerContext,
-          role: userRole,
-          userId: campaignParticipation.id,
-          updatedByUserId: userId,
-          data: {},
-        }),
-      );
-    }
-  }
-  if (isAnonymizationWithDeletionEnabled) {
-    const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-      campaignParticipationIds,
+    await eventLoggingJobRepository.performAsync(
+      EventLoggingJob.forUser({
+        client,
+        action: campaignParticipation.loggerContext,
+        role: userRole,
+        userId: campaignParticipation.id,
+        updatedByUserId: userId,
+        data: {},
+      }),
     );
-    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
+  }
+  const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+  await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+    campaignParticipationIds,
+  );
+  await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
 
-    const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
-    for (const assessment of assessments) {
-      assessment.detachCampaignParticipation();
-      await assessmentRepository.updateCampaignParticipationId(assessment);
-    }
+  const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
+  for (const assessment of assessments) {
+    assessment.detachCampaignParticipation();
+    await assessmentRepository.updateCampaignParticipationId(assessment);
   }
 });
 

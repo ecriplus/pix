@@ -89,7 +89,7 @@ class Campaign {
     return !this.archivedAt && !this.deletedAt;
   }
 
-  delete(userId, { isAnonymizationWithDeletionEnabled = false, keepPreviousDeletion = false } = {}) {
+  delete(userId, { keepPreviousDeletion = false } = {}) {
     if (this.deletedAt && !keepPreviousDeletion) {
       throw new DeletedCampaignError();
     }
@@ -103,16 +103,14 @@ class Campaign {
       this.deletedBy = userId;
     }
 
-    if (isAnonymizationWithDeletionEnabled) {
-      this.name = '(anonymized)';
-      this.title = null;
-      this.customLandingPageText = null;
-      this.externalIdHelpImageUrl = null;
-      this.alternativeTextToExternalIdHelpImage = null;
-      this.customResultPageText = null;
-      this.customResultPageButtonText = null;
-      this.customResultPageButtonUrl = null;
-    }
+    this.name = '(anonymized)';
+    this.title = null;
+    this.customLandingPageText = null;
+    this.externalIdHelpImageUrl = null;
+    this.alternativeTextToExternalIdHelpImage = null;
+    this.customResultPageText = null;
+    this.customResultPageButtonText = null;
+    this.customResultPageButtonUrl = null;
   }
 
   archive(archivedAt, archivedBy) {

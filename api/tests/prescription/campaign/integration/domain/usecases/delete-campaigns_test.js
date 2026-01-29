@@ -8,7 +8,6 @@ import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
-import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
@@ -90,7 +89,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       });
     });
 
-    it('should delete campaign for given id', async function () {
+    it('should delete campaign for given id and anonymize', async function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;
@@ -101,38 +100,6 @@ describe('Integration | UseCases | delete-campaign', function () {
         name: 'nom de campagne',
         title: 'titre de campagne',
       }).id;
-
-      await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
-
-      await databaseBuilder.commit();
-
-      // when
-      await usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] });
-
-      const updatedCampaign = await campaignAdministrationRepository.get(campaignId);
-
-      // then
-      expect(updatedCampaign.deletedAt).to.deep.equal(now);
-      expect(updatedCampaign.deletedBy).to.equal(userId);
-      expect(updatedCampaign.name).to.equal('nom de campagne');
-      expect(updatedCampaign.title).to.equal('titre de campagne');
-
-      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
-    });
-
-    it('should also anonymize campaign when flag is true', async function () {
-      // given
-      const userId = buildUser().id;
-      const organizationId = buildOrganization().id;
-      buildMembership({ userId, organizationId, organizationRole: Membership.roles.MEMBER });
-      const campaignId = buildCampaign({
-        ownerId: userId,
-        organizationId,
-        name: 'nom de campagne',
-        title: 'titre de campagne',
-      }).id;
-
-      await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
 
       await databaseBuilder.commit();
 
@@ -164,46 +131,20 @@ describe('Integration | UseCases | delete-campaign', function () {
         await databaseBuilder.commit();
       });
 
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
-        it('should delete campaignParticipationId', async function () {
-          //given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-
-          //when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          //then
-          const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-            .where('id', userRecommendedTrainingId)
-            .first();
-
-          expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
+      it('should delete campaignParticipationId', async function () {
+        //when
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
         });
-      });
 
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
-        it('should not delete campaignParticipationId', async function () {
-          //given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
 
-          //when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          //then
-          const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-            .where('id', userRecommendedTrainingId)
-            .first();
-
-          expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.equal(campaignParticipationId);
-        });
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
       });
     });
 
@@ -237,269 +178,262 @@ describe('Integration | UseCases | delete-campaign', function () {
         await databaseBuilder.commit();
       });
 
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
-        beforeEach(async function () {
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+      it('should delete all campaignParticipations with anonymization', async function () {
+        // given
+
+        databaseBuilder.factory.buildCampaignParticipation({
+          isImproved: true,
+          participantExternalId: 'email olala',
+          organizationLearnerId,
+          userId,
+          deletedAt: null,
+          deletedBy: null,
+          campaignId,
         });
 
-        it('should delete all campaignParticipations', async function () {
-          // given
+        await databaseBuilder.commit();
 
-          databaseBuilder.factory.buildCampaignParticipation({
-            isImproved: true,
-            participantExternalId: 'email olala',
-            organizationLearnerId,
-            userId,
-            deletedAt: null,
-            deletedBy: null,
-            campaignId,
-          });
-
-          await databaseBuilder.commit();
-
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          // then
-          const results = await knex('campaign-participations').where({ organizationLearnerId });
-
-          expect(results).to.have.lengthOf(2);
-          results.forEach((campaignParticipaton) => {
-            expect(campaignParticipaton.participantExternalId).not.to.equal(null);
-            expect(campaignParticipaton.userId).to.equal(userId);
-            expect(campaignParticipaton.deletedAt).to.deep.equal(now);
-            expect(campaignParticipaton.deletedBy).to.equal(adminUserId);
-          });
+        // when
+        // when
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
         });
 
-        context('when there are badges linked to the campaign participations', function () {
-          let badgesAcquisitions;
-          let certifiableBadge;
-          let nonCertifiableBadge;
+        // then
+        const results = await knex('campaign-participations').where({ organizationLearnerId });
 
-          beforeEach(async function () {
-            // given
-
-            nonCertifiableBadge = buildBadge({
-              targetProfileId,
-              isCertifiable: false,
-            });
-            certifiableBadge = buildBadge({
-              targetProfileId,
-              isCertifiable: true,
-            });
-
-            buildBadgeAcquisition({
-              badgeId: certifiableBadge.id,
-              campaignParticipationId,
-              userId,
-            });
-            buildBadgeAcquisition({
-              badgeId: nonCertifiableBadge.id,
-              campaignParticipationId,
-              userId,
-            });
-
-            await databaseBuilder.commit();
-          });
-
-          it('should not delete userId on non certifiable badgesAcquisitions', async function () {
-            // given
-            await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
-
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            badgesAcquisitions = await knex('badge-acquisitions').where({
-              campaignParticipationId,
-            });
-            const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
-              (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
-            );
-            expect(nonCertifiableBadgeAcquisition.userId).to.equal(userId);
-          });
-
-          it('should not delete userId on certifiable badgesAcquisitions', async function () {
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            badgesAcquisitions = await knex('badge-acquisitions').where({
-              campaignParticipationId,
-            });
-
-            const certifiableBadgeAcquisition = badgesAcquisitions.find(
-              (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
-            );
-            expect(certifiableBadgeAcquisition.userId).to.equal(userId);
-          });
-        });
-
-        context('when there is assessment linked to campaign participation', function () {
-          it('should not detach assesmment', async function () {
-            // given
-            const assessment1 = buildAssessment({ userId, campaignParticipationId, type: Assessment.types.CAMPAIGN });
-
-            await databaseBuilder.commit();
-
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            const assessmentInDb = await knex('assessments').where({ id: assessment1.id }).first();
-            expect(assessmentInDb.campaignParticipationId).equal(campaignParticipationId);
-          });
-        });
-
-        it('should not publish an event to historize action', async function () {
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          // then
-          await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
+        expect(results).to.have.lengthOf(2);
+        results.forEach((campaignParticipaton) => {
+          expect(campaignParticipaton.userId).to.equal(null);
+          expect(campaignParticipaton.participantExternalId).to.equal(null);
+          expect(campaignParticipaton.deletedAt).to.deep.equal(now);
+          expect(campaignParticipaton.deletedBy).to.equal(adminUserId);
         });
       });
 
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
-        beforeEach(async function () {
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+      it('should update deleted participation', async function () {
+        const deletedAt = new Date('2024-01-01');
+        const deletedBy = databaseBuilder.factory.buildUser().id;
+
+        const participationId = databaseBuilder.factory.buildCampaignParticipation({
+          isImproved: true,
+          participantExternalId: 'email olala',
+          organizationLearnerId,
+          userId,
+          deletedAt,
+          deletedBy,
+          campaignId,
+        }).id;
+
+        await databaseBuilder.commit();
+
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
         });
 
-        it('should delete all campaignParticipations with anonymization', async function () {
-          // given
+        const deletedCampaignParticipation = await knex('campaign-participations')
+          .where({ id: participationId })
+          .first();
 
-          databaseBuilder.factory.buildCampaignParticipation({
-            isImproved: true,
-            participantExternalId: 'email olala',
-            organizationLearnerId,
-            userId,
-            deletedAt: null,
-            deletedBy: null,
-            campaignId,
-          });
+        expect(deletedCampaignParticipation.participantExternalId).not.to.equal(null);
+        expect(deletedCampaignParticipation.userId).to.equal(userId);
+        expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
+        expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+      });
 
-          await databaseBuilder.commit();
+      it('should update delete participation', async function () {
+        const deletedAt = new Date('2024-01-01');
+        const deletedBy = databaseBuilder.factory.buildUser().id;
 
-          // when
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
+        const participationId = databaseBuilder.factory.buildCampaignParticipation({
+          isImproved: true,
+          participantExternalId: 'email olala',
+          organizationLearnerId,
+          userId,
+          deletedAt,
+          deletedBy,
+          campaignId,
+        }).id;
 
-          // then
-          const results = await knex('campaign-participations').where({ organizationLearnerId });
+        await databaseBuilder.commit();
 
-          expect(results).to.have.lengthOf(2);
-          results.forEach((campaignParticipaton) => {
-            expect(campaignParticipaton.userId).to.equal(null);
-            expect(campaignParticipaton.participantExternalId).to.equal(null);
-            expect(campaignParticipaton.deletedAt).to.deep.equal(now);
-            expect(campaignParticipaton.deletedBy).to.equal(adminUserId);
-          });
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
+          keepPreviousDeletion: true,
         });
 
-        it('should update deleted participation', async function () {
-          const deletedAt = new Date('2024-01-01');
-          const deletedBy = databaseBuilder.factory.buildUser().id;
+        const deletedCampaignParticipation = await knex('campaign-participations')
+          .where({ id: participationId })
+          .first();
 
-          const participationId = databaseBuilder.factory.buildCampaignParticipation({
-            isImproved: true,
-            participantExternalId: 'email olala',
-            organizationLearnerId,
-            userId,
-            deletedAt,
-            deletedBy,
-            campaignId,
-          }).id;
+        expect(deletedCampaignParticipation.participantExternalId).null;
+        expect(deletedCampaignParticipation.userId).null;
+        expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
+        expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+      });
 
-          await databaseBuilder.commit();
+      it('should delete all campaignParticipations even already deleted', async function () {
+        // given
+        const deletedUserId = databaseBuilder.factory.buildUser().id;
 
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          const deletedCampaignParticipation = await knex('campaign-participations')
-            .where({ id: participationId })
-            .first();
-
-          expect(deletedCampaignParticipation.participantExternalId).not.to.equal(null);
-          expect(deletedCampaignParticipation.userId).to.equal(userId);
-          expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
-          expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+        databaseBuilder.factory.buildCampaignParticipation({
+          isImproved: true,
+          participantExternalId: 'email olala',
+          organizationLearnerId,
+          userId,
+          deletedAt: new Date('2024-01-01'),
+          deletedBy: deletedUserId,
+          campaignId,
         });
 
-        it('should update delete participation', async function () {
-          const deletedAt = new Date('2024-01-01');
-          const deletedBy = databaseBuilder.factory.buildUser().id;
+        await databaseBuilder.commit();
 
-          const participationId = databaseBuilder.factory.buildCampaignParticipation({
-            isImproved: true,
-            participantExternalId: 'email olala',
-            organizationLearnerId,
-            userId,
-            deletedAt,
-            deletedBy,
-            campaignId,
-          }).id;
-
-          await databaseBuilder.commit();
-
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-            keepPreviousDeletion: true,
-          });
-
-          const deletedCampaignParticipation = await knex('campaign-participations')
-            .where({ id: participationId })
-            .first();
-
-          expect(deletedCampaignParticipation.participantExternalId).null;
-          expect(deletedCampaignParticipation.userId).null;
-          expect(deletedCampaignParticipation.deletedAt).to.deep.equal(deletedAt);
-          expect(deletedCampaignParticipation.deletedBy).to.equal(deletedBy);
+        // when
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
+          keepPreviousDeletion: true,
         });
 
-        it('should delete all campaignParticipations even already deleted', async function () {
-          // given
-          const deletedUserId = databaseBuilder.factory.buildUser().id;
+        // then
+        const results = await knex('campaign-participations')
+          .select('userId', 'participantExternalId', 'deletedAt', 'deletedBy')
+          .where({ organizationLearnerId });
 
-          databaseBuilder.factory.buildCampaignParticipation({
-            isImproved: true,
-            participantExternalId: 'email olala',
-            organizationLearnerId,
-            userId,
+        expect(results).to.have.lengthOf(2);
+        expect(results).deep.members([
+          {
+            userId: null,
+            participantExternalId: null,
+            deletedAt: now,
+            deletedBy: adminUserId,
+          },
+          {
+            userId: null,
+            participantExternalId: null,
             deletedAt: new Date('2024-01-01'),
             deletedBy: deletedUserId,
-            campaignId,
+          },
+        ]);
+      });
+
+      it('should publish an event to historize action', async function () {
+        // when
+        // when
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
+        });
+
+        // then
+        await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+          client: 'PIX_ORGA',
+          action: CampaignParticipationLoggerContext.DELETION,
+          role: 'ORGA_ADMIN',
+          userId: adminUserId,
+          occurredAt: now.toISOString(),
+          targetUserIds: [campaignParticipationId],
+          data: {},
+        });
+      });
+
+      context('when there are badges linked to the campaign participations', function () {
+        let badgesAcquisitions;
+        let certifiableBadge;
+        let nonCertifiableBadge;
+
+        beforeEach(async function () {
+          // given
+          nonCertifiableBadge = buildBadge({
+            targetProfileId,
+            isCertifiable: false,
+          });
+          certifiableBadge = buildBadge({
+            targetProfileId,
+            isCertifiable: true,
           });
 
+          buildBadgeAcquisition({
+            badgeId: certifiableBadge.id,
+            campaignParticipationId,
+            userId,
+          });
+          buildBadgeAcquisition({
+            badgeId: nonCertifiableBadge.id,
+            campaignParticipationId,
+            userId,
+          });
+
+          await databaseBuilder.commit();
+        });
+
+        it('should delete userId on non certifiable badgesAcquisitions', async function () {
+          // when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          // then
+          badgesAcquisitions = await knex('badge-acquisitions').where({
+            campaignParticipationId,
+          });
+          const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
+            (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
+          );
+          expect(nonCertifiableBadgeAcquisition.userId).to.be.null;
+        });
+
+        it('should not delete userId on certifiable badgesAcquisitions', async function () {
+          // when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          // then
+          badgesAcquisitions = await knex('badge-acquisitions').where({
+            campaignParticipationId,
+          });
+
+          const certifiableBadgeAcquisition = badgesAcquisitions.find(
+            (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
+          );
+          expect(certifiableBadgeAcquisition.userId).to.equal(userId);
+        });
+      });
+
+      context('when there is assessment linked to campaign participation', function () {
+        it('should detach assessments', async function () {
+          // given
+          const assessment1 = buildAssessment({ userId, campaignParticipationId, type: Assessment.types.CAMPAIGN });
+
+          const assessment2 = buildAssessment({
+            userId,
+            campaignParticipationId,
+            type: Assessment.types.CAMPAIGN,
+            isImproving: true,
+          });
+          const otherCampaignParticipationId = buildCampaignParticipation({
+            organizationLearnerId,
+            userId,
+          }).id;
+          const otherAssessment = buildAssessment({
+            userId,
+            campaignParticipationId: otherCampaignParticipationId,
+            type: Assessment.types.CAMPAIGN,
+            isImproving: true,
+          });
           await databaseBuilder.commit();
 
           // when
@@ -507,184 +441,15 @@ describe('Integration | UseCases | delete-campaign', function () {
             userId: adminUserId,
             campaignIds: [campaignId],
             organizationId,
-            keepPreviousDeletion: true,
           });
 
           // then
-          const results = await knex('campaign-participations')
-            .select('userId', 'participantExternalId', 'deletedAt', 'deletedBy')
-            .where({ organizationLearnerId });
-
-          expect(results).to.have.lengthOf(2);
-          expect(results).deep.members([
-            {
-              userId: null,
-              participantExternalId: null,
-              deletedAt: now,
-              deletedBy: adminUserId,
-            },
-            {
-              userId: null,
-              participantExternalId: null,
-              deletedAt: new Date('2024-01-01'),
-              deletedBy: deletedUserId,
-            },
-          ]);
-        });
-
-        it('should publish an event to historize action', async function () {
-          // when
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
+          const assessmentsInDb = await knex('assessments').whereIn('id', [assessment1.id, assessment2.id]);
+          assessmentsInDb.forEach((assessment) => {
+            expect(assessment.campaignParticipationId).null;
           });
-
-          // then
-          await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
-            client: 'PIX_ORGA',
-            action: CampaignParticipationLoggerContext.DELETION,
-            role: 'ORGA_ADMIN',
-            userId: adminUserId,
-            occurredAt: now.toISOString(),
-            targetUserIds: [campaignParticipationId],
-            data: {},
-          });
-        });
-
-        context('when there are badges linked to the campaign participations', function () {
-          let badgesAcquisitions;
-          let certifiableBadge;
-          let nonCertifiableBadge;
-
-          beforeEach(async function () {
-            // given
-            nonCertifiableBadge = buildBadge({
-              targetProfileId,
-              isCertifiable: false,
-            });
-            certifiableBadge = buildBadge({
-              targetProfileId,
-              isCertifiable: true,
-            });
-
-            buildBadgeAcquisition({
-              badgeId: certifiableBadge.id,
-              campaignParticipationId,
-              userId,
-            });
-            buildBadgeAcquisition({
-              badgeId: nonCertifiableBadge.id,
-              campaignParticipationId,
-              userId,
-            });
-
-            await databaseBuilder.commit();
-          });
-
-          it('should delete userId on non certifiable badgesAcquisitions', async function () {
-            // given
-            await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            badgesAcquisitions = await knex('badge-acquisitions').where({
-              campaignParticipationId,
-            });
-            const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
-              (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
-            );
-            expect(nonCertifiableBadgeAcquisition.userId).to.be.null;
-          });
-
-          context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
-            it('should not delete userId on non certifiable badgesAcquisitions', async function () {
-              // given
-              await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
-
-              // when
-              await usecases.deleteCampaigns({
-                userId: adminUserId,
-                campaignIds: [campaignId],
-                organizationId,
-              });
-
-              // then
-              badgesAcquisitions = await knex('badge-acquisitions').where({
-                campaignParticipationId,
-              });
-              const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
-                (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
-              );
-              expect(nonCertifiableBadgeAcquisition.userId).to.equal(userId);
-            });
-          });
-
-          it('should not delete userId on certifiable badgesAcquisitions', async function () {
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            badgesAcquisitions = await knex('badge-acquisitions').where({
-              campaignParticipationId,
-            });
-
-            const certifiableBadgeAcquisition = badgesAcquisitions.find(
-              (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
-            );
-            expect(certifiableBadgeAcquisition.userId).to.equal(userId);
-          });
-        });
-
-        context('when there is assessment linked to campaign participation', function () {
-          it('should detach assessments', async function () {
-            // given
-            const assessment1 = buildAssessment({ userId, campaignParticipationId, type: Assessment.types.CAMPAIGN });
-
-            const assessment2 = buildAssessment({
-              userId,
-              campaignParticipationId,
-              type: Assessment.types.CAMPAIGN,
-              isImproving: true,
-            });
-            const otherCampaignParticipationId = buildCampaignParticipation({
-              organizationLearnerId,
-              userId,
-            }).id;
-            const otherAssessment = buildAssessment({
-              userId,
-              campaignParticipationId: otherCampaignParticipationId,
-              type: Assessment.types.CAMPAIGN,
-              isImproving: true,
-            });
-            await databaseBuilder.commit();
-
-            // when
-            await usecases.deleteCampaigns({
-              userId: adminUserId,
-              campaignIds: [campaignId],
-              organizationId,
-            });
-
-            // then
-            const assessmentsInDb = await knex('assessments').whereIn('id', [assessment1.id, assessment2.id]);
-            assessmentsInDb.forEach((assessment) => {
-              expect(assessment.campaignParticipationId).null;
-            });
-            const otherAssessmentsInDb = await knex('assessments').where('id', otherAssessment.id).first();
-            expect(otherAssessmentsInDb.campaignParticipationId).equal(otherAssessment.campaignParticipationId);
-          });
+          const otherAssessmentsInDb = await knex('assessments').where('id', otherAssessment.id).first();
+          expect(otherAssessmentsInDb.campaignParticipationId).equal(otherAssessment.campaignParticipationId);
         });
       });
     });
@@ -708,46 +473,19 @@ describe('Integration | UseCases | delete-campaign', function () {
         await databaseBuilder.commit();
       });
 
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
-        beforeEach(async function () {
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+      it('should empty external id label param', async function () {
+        // when
+        await usecases.deleteCampaigns({
+          userId: adminUserId,
+          campaignIds: [campaignId],
+          organizationId,
         });
 
-        it('should not empty external id label param', async function () {
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
+        // then
+        const results = await knex('campaign-features').where({ campaignId });
 
-          // then
-          const results = await knex('campaign-features').where({ campaignId });
-
-          expect(results).to.have.lengthOf(1);
-          expect(results[0].params).to.deep.equal({ type: 'email', label: 'External ID' });
-        });
-      });
-
-      context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
-        beforeEach(async function () {
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-        });
-
-        it('should empty external id label param', async function () {
-          // when
-          await usecases.deleteCampaigns({
-            userId: adminUserId,
-            campaignIds: [campaignId],
-            organizationId,
-          });
-
-          // then
-          const results = await knex('campaign-features').where({ campaignId });
-
-          expect(results).to.have.lengthOf(1);
-          expect(results[0].params).to.not.have.property('label');
-        });
+        expect(results).to.have.lengthOf(1);
+        expect(results[0].params).to.not.have.property('label');
       });
     });
   });

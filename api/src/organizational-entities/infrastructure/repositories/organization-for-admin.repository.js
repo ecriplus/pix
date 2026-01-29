@@ -4,7 +4,6 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../shared/domain/errors.js';
-import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationInvitation } from '../../../team/domain/models/OrganizationInvitation.js';
 import { OrganizationForAdmin } from '../../domain/models/OrganizationForAdmin.js';
@@ -39,18 +38,11 @@ const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
     .where({ organizationId: id, status: OrganizationInvitation.StatusType.PENDING })
     .update({ status: OrganizationInvitation.StatusType.CANCELLED, updatedAt: archiveDate });
 
-  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
-  if (isAnonymizationWithDeletionEnabled) {
-    await learnerApi.deleteOrganizationLearnerBeforeImportFeature({
-      userId: archivedBy,
-      organizationId: id,
-    });
-    await campaignApi.deleteActiveCampaigns({ userId: archivedBy, organizationId: id });
-  } else {
-    await knexConnection('campaigns')
-      .where({ organizationId: id, archivedAt: null })
-      .update({ archivedAt: archiveDate });
-  }
+  await learnerApi.deleteOrganizationLearnerBeforeImportFeature({
+    userId: archivedBy,
+    organizationId: id,
+  });
+  await campaignApi.deleteActiveCampaigns({ userId: archivedBy, organizationId: id });
 
   await knexConnection('memberships')
     .where({ organizationId: id, disabledAt: null })

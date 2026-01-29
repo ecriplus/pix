@@ -4,7 +4,6 @@ import { OrganizationForAdmin } from '../../../../../src/organizational-entities
 import { repositories } from '../../../../../src/organizational-entities/infrastructure/repositories/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import {
   catchErr,
@@ -503,134 +502,94 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         expect(acceptedInvitations).to.have.lengthOf(1);
       });
 
-      context('when flag isAnonymizationWithDeletionEnabled is false', function () {
-        it('should archive active campaigns of a given organization', async function () {
-          // given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
-          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          const previousDate = new Date('2021-01-01');
-          const organizationId = 1;
-          databaseBuilder.factory.buildOrganization({ id: organizationId });
+      it('should delete active campaigns of a given organization', async function () {
+        // given
+        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+        const previousDate = new Date('2021-01-01');
+        const organizationId = 1;
+        databaseBuilder.factory.buildOrganization({ id: organizationId });
 
-          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-          databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
-          databaseBuilder.factory.buildCampaign({ organizationId, archivedAt: previousDate });
+        databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+        databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
+        databaseBuilder.factory.buildCampaign({ id: 3, organizationId, archivedAt: previousDate });
+        databaseBuilder.factory.buildCampaign({ id: 4, organizationId, deletedAt: previousDate });
 
-          await databaseBuilder.commit();
+        await databaseBuilder.commit();
 
-          // when
-          await repositories.organizationForAdminRepository.archive({
-            id: organizationId,
-            archivedBy: superAdminUserId,
-          });
-
-          // then
-          const activeCampaigns = await knex('campaigns').where({
-            archivedAt: null,
-          });
-          expect(activeCampaigns).to.have.lengthOf(0);
-
-          const newlyArchivedCampaigns = await knex('campaigns').where({ archivedAt: now });
-          expect(newlyArchivedCampaigns).to.have.lengthOf(2);
-
-          const previousArchivedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
-          expect(previousArchivedCampaigns).to.have.lengthOf(1);
+        // when
+        await repositories.organizationForAdminRepository.archive({
+          id: organizationId,
+          archivedBy: superAdminUserId,
         });
+
+        // then
+        const activeCampaigns = await knex('campaigns').whereNull('deletedAt');
+        expect(activeCampaigns).to.have.lengthOf(0);
+        const newlyArchivedCampaigns = await knex('campaigns').where({ deletedAt: now });
+        expect(newlyArchivedCampaigns).to.have.lengthOf(3);
+
+        const previousDeletedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
+        expect(previousDeletedCampaigns).to.have.lengthOf(1);
       });
 
-      context('when flag isAnonymizationWithDeletionEnabled is true', function () {
-        it('should delete active campaigns of a given organization', async function () {
-          // given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          const previousDate = new Date('2021-01-01');
-          const organizationId = 1;
-          databaseBuilder.factory.buildOrganization({ id: organizationId });
+      it('should delete organization learners', async function () {
+        // given
+        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+        const previousDate = new Date('2021-01-01');
+        const organizationId = 1;
+        databaseBuilder.factory.buildOrganization({ id: organizationId });
+        databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId, deletedAt: previousDate });
 
-          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-          databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
-          databaseBuilder.factory.buildCampaign({ id: 3, organizationId, archivedAt: previousDate });
-          databaseBuilder.factory.buildCampaign({ id: 4, organizationId, deletedAt: previousDate });
+        await databaseBuilder.commit();
 
-          await databaseBuilder.commit();
-
-          // when
-          await repositories.organizationForAdminRepository.archive({
-            id: organizationId,
-            archivedBy: superAdminUserId,
-          });
-
-          // then
-          const activeCampaigns = await knex('campaigns').whereNull('deletedAt');
-          expect(activeCampaigns).to.have.lengthOf(0);
-          const newlyArchivedCampaigns = await knex('campaigns').where({ deletedAt: now });
-          expect(newlyArchivedCampaigns).to.have.lengthOf(3);
-
-          const previousDeletedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
-          expect(previousDeletedCampaigns).to.have.lengthOf(1);
+        // when
+        await repositories.organizationForAdminRepository.archive({
+          id: organizationId,
+          archivedBy: superAdminUserId,
         });
 
-        it('should delete organization learners', async function () {
-          // given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          const previousDate = new Date('2021-01-01');
-          const organizationId = 1;
-          databaseBuilder.factory.buildOrganization({ id: organizationId });
-          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-          databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-          databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-          databaseBuilder.factory.buildOrganizationLearner({ organizationId, deletedAt: previousDate });
+        // then
+        const activeLearners = await knex('organization-learners').whereNull('deletedAt');
+        expect(activeLearners).to.have.lengthOf(0);
+        const deletedLearners = await knex('organization-learners').where({ deletedAt: now });
+        expect(deletedLearners).to.have.lengthOf(2);
 
-          await databaseBuilder.commit();
+        const previousDeletedLearners = await knex('organization-learners').where({ deletedAt: previousDate });
+        expect(previousDeletedLearners).to.have.lengthOf(1);
+      });
 
-          // when
-          await repositories.organizationForAdminRepository.archive({
-            id: organizationId,
-            archivedBy: superAdminUserId,
-          });
+      it('#should delete campaign-participations', async function () {
+        // given
+        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+        const previousDate = new Date('2021-01-01');
+        const organizationId = 1;
+        databaseBuilder.factory.buildOrganization({ id: organizationId });
+        const campaign = databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, deletedAt: previousDate });
 
-          // then
-          const activeLearners = await knex('organization-learners').whereNull('deletedAt');
-          expect(activeLearners).to.have.lengthOf(0);
-          const deletedLearners = await knex('organization-learners').where({ deletedAt: now });
-          expect(deletedLearners).to.have.lengthOf(2);
+        await databaseBuilder.commit();
 
-          const previousDeletedLearners = await knex('organization-learners').where({ deletedAt: previousDate });
-          expect(previousDeletedLearners).to.have.lengthOf(1);
+        // when
+        await repositories.organizationForAdminRepository.archive({
+          id: organizationId,
+          archivedBy: superAdminUserId,
         });
 
-        it('#should delete campaign-participations', async function () {
-          // given
-          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          const previousDate = new Date('2021-01-01');
-          const organizationId = 1;
-          databaseBuilder.factory.buildOrganization({ id: organizationId });
-          const campaign = databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, deletedAt: previousDate });
+        // then
+        const activeParticipations = await knex('campaign-participations').whereNull('deletedAt');
+        expect(activeParticipations).to.have.lengthOf(0);
+        const deletedParticipations = await knex('campaign-participations').where({ deletedAt: now });
+        expect(deletedParticipations).to.have.lengthOf(2);
 
-          await databaseBuilder.commit();
-
-          // when
-          await repositories.organizationForAdminRepository.archive({
-            id: organizationId,
-            archivedBy: superAdminUserId,
-          });
-
-          // then
-          const activeParticipations = await knex('campaign-participations').whereNull('deletedAt');
-          expect(activeParticipations).to.have.lengthOf(0);
-          const deletedParticipations = await knex('campaign-participations').where({ deletedAt: now });
-          expect(deletedParticipations).to.have.lengthOf(2);
-
-          const previousDeletedParticipations = await knex('campaign-participations').where({
-            deletedAt: previousDate,
-          });
-          expect(previousDeletedParticipations).to.have.lengthOf(1);
+        const previousDeletedParticipations = await knex('campaign-participations').where({
+          deletedAt: previousDate,
         });
+        expect(previousDeletedParticipations).to.have.lengthOf(1);
       });
 
       it('should disable active members of a given organization', async function () {

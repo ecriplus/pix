@@ -51,25 +51,6 @@ describe('Campaign', function () {
   });
 
   describe('#delete', function () {
-    it('deletes the campaign', function () {
-      // given
-      const campaign = new Campaign({ id: 1, code: 'ABC123', name: 'Nom de Campagne', title: 'Titre de campagne' });
-      const isAnonymizationWithDeletionEnabled = false;
-
-      // when
-      campaign.delete(777, { isAnonymizationWithDeletionEnabled });
-
-      // then
-      expect(campaign).to.deep.includes({
-        id: 1,
-        code: 'ABC123',
-        name: 'Nom de Campagne',
-        title: 'Titre de campagne',
-        deletedAt: now,
-        deletedBy: 777,
-      });
-    });
-
     context('when the campaign is already deleted', function () {
       it('throws an exception', async function () {
         const campaign = new Campaign({ id: 1, code: 'ABC123', deletedAt: new Date('2023-01-01'), deletedBy: 2 });
@@ -82,7 +63,7 @@ describe('Campaign', function () {
       it('not throws when keepPreviousDeletion is true', async function () {
         const campaign = new Campaign({ id: 1, code: 'ABC123', deletedAt: new Date('2023-01-01'), deletedBy: 2 });
 
-        campaign.delete(1, { isAnonymizationWithDeletionEnabled: true, keepPreviousDeletion: true });
+        campaign.delete(1, { keepPreviousDeletion: true });
 
         expect(campaign.name).equal('(anonymized)');
       });
@@ -98,34 +79,33 @@ describe('Campaign', function () {
       });
     });
 
-    context('when anonymization flag is true', function () {
-      it('anonymize datas', async function () {
-        // given
-        const campaign = new Campaign({
-          name: 'Ma campagne',
-          title: 'Title',
-          customLandingPageText: 'customLandingPageText',
-          externalIdHelpImageUrl: 'externalIdHelpImageUrl',
-          alternativeTextToExternalIdHelpImage: 'alternativeTextToExternalIdHelpImage',
-          customResultPageText: 'customResultPageText',
-          customResultPageButtonText: 'customResultPageButtonText',
-          customResultPageButtonUrl: 'customResultPageButtonUrl',
-        });
-        const isAnonymizationWithDeletionEnabled = true;
-
-        // when
-        campaign.delete(1, { isAnonymizationWithDeletionEnabled });
-
-        // then
-        expect(campaign.name).to.equal('(anonymized)');
-        expect(campaign.title).to.be.null;
-        expect(campaign.customLandingPageText).to.be.null;
-        expect(campaign.externalIdHelpImageUrl).to.be.null;
-        expect(campaign.alternativeTextToExternalIdHelpImage).to.be.null;
-        expect(campaign.customResultPageText).to.be.null;
-        expect(campaign.customResultPageButtonText).to.be.null;
-        expect(campaign.customResultPageButtonUrl).to.be.null;
+    it('anonymize datas', async function () {
+      // given
+      const campaign = new Campaign({
+        name: 'Ma campagne',
+        title: 'Title',
+        customLandingPageText: 'customLandingPageText',
+        externalIdHelpImageUrl: 'externalIdHelpImageUrl',
+        alternativeTextToExternalIdHelpImage: 'alternativeTextToExternalIdHelpImage',
+        customResultPageText: 'customResultPageText',
+        customResultPageButtonText: 'customResultPageButtonText',
+        customResultPageButtonUrl: 'customResultPageButtonUrl',
       });
+
+      // when
+      campaign.delete(1);
+
+      // then
+      expect(campaign.name).to.equal('(anonymized)');
+      expect(campaign.title).to.be.null;
+      expect(campaign.customLandingPageText).to.be.null;
+      expect(campaign.externalIdHelpImageUrl).to.be.null;
+      expect(campaign.alternativeTextToExternalIdHelpImage).to.be.null;
+      expect(campaign.customResultPageText).to.be.null;
+      expect(campaign.customResultPageButtonText).to.be.null;
+      expect(campaign.customResultPageButtonUrl).to.be.null;
+      expect(campaign.deletedAt).deep.equal(now);
+      expect(campaign.deletedBy).equal(1);
     });
   });
 

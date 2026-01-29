@@ -28,23 +28,11 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
       clock.restore();
     });
 
-    it('updates attributes deletedAt and deletedBy', function () {
+    it('updates attributes deletedAt,deletedBy and userId', function () {
       const userId = 4567;
       const campaignParticipation = new CampaignParticipation({ userId: 666, deletedAt: null, deletedBy: null });
 
       campaignParticipation.delete(userId);
-
-      expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.DELETION);
-      expect(campaignParticipation.userId).to.equal(666);
-      expect(campaignParticipation.deletedAt).to.deep.equal(now);
-      expect(campaignParticipation.deletedBy).to.deep.equal(userId);
-    });
-
-    it('remove userId if anonymisation is enabled', function () {
-      const userId = 4567;
-      const campaignParticipation = new CampaignParticipation({ userId: 666, deletedAt: null, deletedBy: null });
-
-      campaignParticipation.delete(userId, { isAnonymizationWithDeletionEnabled: true });
 
       expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.DELETION);
       expect(campaignParticipation.userId).to.equal(null);

@@ -31,14 +31,12 @@ const anonymizeUser = withTransaction(async function ({
   membershipRepository,
   certificationCenterMembershipRepository,
   lastUserApplicationConnectionsRepository,
-  organizationLearnerRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,
   userLoginRepository,
   eventLoggingJobRepository,
   userAcceptanceRepository,
   learnersApiRepository,
-  featureTogglesService,
 }) {
   const user = await userRepository.get(userId);
 
@@ -59,9 +57,7 @@ const anonymizeUser = withTransaction(async function ({
 
   await _anonymizeOrganizationLearner({
     userId,
-    featureTogglesService,
     learnersApiRepository,
-    organizationLearnerRepository,
   });
 
   await _anonymizeMemberships({ membershipRepository, userId, updatedByUserId: anonymizedByUserId });
@@ -148,18 +144,8 @@ async function _anonymizeUser({ user, anonymizedByUserId, userRepository }) {
   );
 }
 
-async function _anonymizeOrganizationLearner({
-  userId,
-  featureTogglesService,
-  learnersApiRepository,
-  organizationLearnerRepository,
-}) {
-  const isAnonymizationWithDeletionEnabled = await featureTogglesService.get('isAnonymizationWithDeletionEnabled');
-  if (isAnonymizationWithDeletionEnabled) {
-    await learnersApiRepository.anonymizeByUserId({ userId });
-  } else {
-    await organizationLearnerRepository.dissociateAllStudentsByUserId({ userId });
-  }
+async function _anonymizeOrganizationLearner({ userId, learnersApiRepository }) {
+  await learnersApiRepository.anonymizeByUserId({ userId });
 }
 
 export { anonymizeUser };

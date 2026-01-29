@@ -715,8 +715,7 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should remove the correct campaign', async function () {
       // given
-      const isAnonymizationWithDeletionEnabled = true;
-      campaign.delete(userId, { isAnonymizationWithDeletionEnabled });
+      campaign.delete(userId);
 
       const anotherCampaign = databaseBuilder.factory.buildCampaign({
         name: 'Another Campaign',
@@ -734,6 +733,7 @@ describe('Integration | Repository | Campaign Administration', function () {
       expect(removedCampaign.name).to.equal('(anonymized)');
       expect(removedCampaign.deletedAt).to.deep.equal(frozenTime);
       expect(removedCampaign.deletedBy).to.equal(userId);
+
       expect(notRemovedCampaign.name).to.equal('Another Campaign');
       expect(notRemovedCampaign.title).to.equal('Another title');
       expect(notRemovedCampaign.deletedBy).to.be.null;
@@ -742,9 +742,7 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should remove campaign deletion attributes fields', async function () {
       // given
-      const isAnonymizationWithDeletionEnabled = true;
-
-      campaign.delete(userId, { isAnonymizationWithDeletionEnabled });
+      campaign.delete(userId);
 
       // when
       await campaignAdministrationRepository.remove([campaign]);
@@ -765,13 +763,11 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should not update other fields', async function () {
       // given
-      const isAnonymizationWithDeletionEnabled = true;
-
       campaign.updateFields({
         multipleSendings: false,
         type: 'PROFILE_COLLECTION',
       });
-      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+      campaign.delete(userId);
 
       // when
       await campaignAdministrationRepository.remove([campaign]);
