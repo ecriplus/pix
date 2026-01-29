@@ -3,7 +3,7 @@ import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { cryptoService } from '../../src/shared/domain/services/crypto-service.js';
 
-class ClientApplicationsScript extends Script {
+export class ClientApplicationsScript extends Script {
   constructor() {
     super({
       description: 'Manage client applications',
@@ -98,6 +98,36 @@ class ClientApplicationsScript extends Script {
             },
           },
         },
+        addJurisdictionTags: {
+          description: 'Add one or more jurisdiction tag to client application',
+          options: {
+            clientId: {
+              description: 'Client ID',
+              demandOption: true,
+              type: 'string',
+            },
+            tags: {
+              description: 'Jurisdiction tag (repeatable)',
+              demandOption: true,
+              type: 'array',
+            },
+          },
+        },
+        removeJurisdictionTags: {
+          description: 'Remove one or more jurisdiction tag from client application',
+          options: {
+            clientId: {
+              description: 'Client ID',
+              demandOption: true,
+              type: 'string',
+            },
+            tags: {
+              description: 'Jurisdiction tag (repeatable)',
+              demandOption: true,
+              type: 'array',
+            },
+          },
+        },
       },
       permanent: true,
     });
@@ -141,35 +171,80 @@ class ClientApplicationsScript extends Script {
   }
 
   async addScope({ clientId, scope: newScopes }, logger) {
-    const udpated = await clientApplicationRepository.addScopes(clientId, newScopes);
-
-    if (udpated) {
-      logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+
+    for (const scope of newScopes) {
+      application.addScope(scope);
+    }
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
   }
 
   async removeScope({ clientId, scope: scopesToRemove }, logger) {
-    const removed = await clientApplicationRepository.removeScopes(clientId, scopesToRemove);
-
-    if (removed) {
-      logger.info({ clientId, scopes: scopesToRemove }, 'removed scopes from client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+
+    for (const scope of scopesToRemove) {
+      application.removeScope(scope);
+    }
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId, scopes: scopesToRemove }, 'removed scopes from client application');
   }
 
   async setClientSecret({ clientId, clientSecret }, logger) {
     const hashedClientSecret = await cryptoService.hashPassword(clientSecret);
-
-    const updated = await clientApplicationRepository.setClientSecret(clientId, hashedClientSecret);
-
-    if (updated) {
-      logger.info({ clientId }, 'set client secret for client application');
-    } else {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
       logger.error({ clientId }, 'did not find client application');
+      return;
     }
+    application.clientSecret = hashedClientSecret;
+
+    await clientApplicationRepository.save(application);
+
+    logger.info({ clientId }, 'set client secret for client application');
+  }
+
+  async addJurisdictionTags({ clientId, tags }, logger) {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
+      logger.error({ clientId }, 'did not find client application');
+      return;
+    }
+
+    for (const tag of tags) {
+      application.addJurisdictionTag(tag);
+    }
+
+    await clientApplicationRepository.save(application);
+    logger.info({ clientId, jurisdictionTags: tags }, 'added jurisdiction tags to client application');
+  }
+
+  async removeJurisdictionTags({ clientId, tags }, logger) {
+    const application = await clientApplicationRepository.findByClientId(clientId);
+    if (!application) {
+      logger.error({ clientId }, 'did not find client application');
+      return;
+    }
+
+    for (const tag of tags) {
+      try {
+        application.removeJurisdictionTag(tag);
+      } catch (error) {
+        logger.error({ tag, error }, 'error while removing tag for client application');
+      }
+    }
+    await clientApplicationRepository.save(application);
+    logger.info({ clientId, jurisdictionTags: tags }, 'removed jurisdiction tags from client application');
   }
 }
 

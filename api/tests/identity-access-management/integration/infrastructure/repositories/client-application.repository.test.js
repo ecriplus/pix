@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { MissingClientApplicationScopesError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { clientApplicationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -145,6 +144,33 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
+  describe('#save', function () {
+    it('should update client application', async function () {
+      // given
+      databaseBuilder.factory.buildClientApplication({
+        clientId: 'app1',
+        scopes: ['scope1'],
+        jurisdiction: { rules: [{ name: 'tags', value: ['tag1'] }] },
+      });
+      await databaseBuilder.commit();
+      const application = await clientApplicationRepository.findByClientId('app1');
+
+      // when
+      application.addScope('scope2');
+      application.clientSecret = 'my-secret';
+      application.addJurisdictionTag('my-tag');
+      const updated = await clientApplicationRepository.save(application);
+
+      // then
+      expect(updated).true;
+
+      const applicationInDb = await knex.select().from('client_applications').where({ clientId: 'app1' }).first();
+      expect(applicationInDb.scopes).members(['scope1', 'scope2']);
+      expect(applicationInDb.jurisdiction).deep.equal({ rules: [{ name: 'tags', value: ['tag1', 'my-tag'] }] });
+      expect(applicationInDb.clientSecret).equal('my-secret');
+    });
+  });
+
   describe('#removeByClientId', function () {
     context('when application clientId is found', function () {
       it('should remove the corresponding application and return true', async function () {
@@ -176,142 +202,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(applications).to.have.lengthOf(2);
         expect(applications[0]).to.deep.contain(application1);
         expect(applications[1]).to.deep.contain(application2);
-      });
-    });
-  });
-
-  describe('#addScopes', function () {
-    context('when application client id is found', function () {
-      it('should add missing scopes to the client application and return true', async function () {
-        // given
-        const clientId = application1.clientId;
-        const newScopes = ['scope2', 'newScope1', 'newScope2', 'newScope1'];
-
-        // when
-        const updated = await clientApplicationRepository.addScopes(clientId, newScopes);
-
-        // then
-        expect(updated).to.be.true;
-        const { scopes, createdAt, updatedAt } = await knex
-          .select()
-          .from('client_applications')
-          .where({ clientId })
-          .first();
-
-        expect(scopes).to.have.lengthOf(4);
-        expect(scopes).to.have.members(['scope1', 'scope2', 'newScope1', 'newScope2']);
-        expect(updatedAt).to.be.greaterThan(createdAt);
-      });
-    });
-
-    context('when application client id is not found', function () {
-      it('should return false', async function () {
-        // given
-        const clientId = 'not found';
-        const newScopes = ['scope2', 'newScope1', 'newScope2', 'newScope1'];
-
-        // when
-        const updated = await clientApplicationRepository.addScopes(clientId, newScopes);
-
-        // then
-        expect(updated).to.be.false;
-      });
-    });
-  });
-
-  describe('#removeScopes', function () {
-    context('when application client id is found', function () {
-      it('should remove scopes from the client application and return true', async function () {
-        // given
-        const clientId = application2.clientId;
-        const scopesToRemove = ['scope3', 'scope5', 'scope3'];
-
-        // when
-        const updated = await clientApplicationRepository.removeScopes(clientId, scopesToRemove);
-
-        // then
-        expect(updated).to.be.true;
-        const { scopes, createdAt, updatedAt } = await knex
-          .select()
-          .from('client_applications')
-          .where({ clientId })
-          .first();
-
-        expect(scopes).to.have.lengthOf(1);
-        expect(scopes).to.deep.equal(['scope4']);
-        expect(updatedAt).to.be.greaterThan(createdAt);
-      });
-    });
-
-    context('when application client id is not found', function () {
-      it('should return false', async function () {
-        // given
-        const clientId = 'not found';
-        const scopesToRemove = ['scope3', 'scope5', 'scope3'];
-
-        // when
-        const updated = await clientApplicationRepository.removeScopes(clientId, scopesToRemove);
-
-        // then
-        expect(updated).to.be.false;
-      });
-    });
-
-    context('when removing all remaining scopes', function () {
-      it('should throw an error', async function () {
-        // given
-        const clientId = application1.clientId;
-        const scopesToRemove = ['scope1', 'scope2'];
-
-        // when
-        const result = clientApplicationRepository.removeScopes(clientId, scopesToRemove);
-
-        // then
-        await expect(result).to.be.rejectedWith(MissingClientApplicationScopesError);
-        const { scopes, createdAt, updatedAt } = await knex
-          .select()
-          .from('client_applications')
-          .where({ clientId })
-          .first();
-        expect(updatedAt).to.deep.equal(createdAt);
-        expect(scopes).to.deep.equal(application1.scopes);
-      });
-    });
-  });
-
-  describe('#setClientSecret', function () {
-    context('when application client id is found', function () {
-      it('should change client secret of the client application and return true', async function () {
-        // given
-        const clientId = application1.clientId;
-        const newSecret = 'newSecret';
-
-        // when
-        const updated = await clientApplicationRepository.setClientSecret(clientId, newSecret);
-
-        // then
-        expect(updated).to.be.true;
-        const { clientSecret, createdAt, updatedAt } = await knex
-          .select()
-          .from('client_applications')
-          .where({ clientId })
-          .first();
-        expect(updatedAt).to.be.greaterThan(createdAt);
-        expect(clientSecret).to.equal(newSecret);
-      });
-    });
-
-    context('when application client id is not found', function () {
-      it('should return false', async function () {
-        // given
-        const clientId = 'not found';
-        const newSecret = 'newSecret';
-
-        // when
-        const updated = await clientApplicationRepository.setClientSecret(clientId, newSecret);
-
-        // then
-        expect(updated).to.be.false;
       });
     });
   });

@@ -35,6 +35,12 @@ class MissingClientApplicationScopesError extends DomainError {
   }
 }
 
+class DeleteUnknownClientApplicationJurisdictionTagError extends DomainError {
+  constructor() {
+    super("Can't delete unknown jurisdiction tag", 'UNKNOW_CLIENT_APPLICATION_JURISDICTION_TAG');
+  }
+}
+
 class OrganizationLearnerNotBelongToOrganizationIdentityError extends DomainError {
   constructor(message = 'Organization Learner identity does not belong to Organization Identity') {
     super(message);
@@ -125,6 +131,7 @@ class InvalidLtiPlatformRegistrationError extends DomainError {
 
 export {
   AuthenticationKeyExpired,
+  DeleteUnknownClientApplicationJurisdictionTagError,
   DifferentExternalIdentifierError,
   InvalidLtiPlatformRegistrationError,
   InvalidOrAlreadyUsedEmailError,
