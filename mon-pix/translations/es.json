@@ -1736,14 +1736,14 @@
         "direction": "Seleccione una sola respuesta."
       },
       "qcuDeclarative": {
-        "complementaryInstruction": "Seleccione una sola respuesta.",
-        "direction": "There is no right or wrong answer."
+        "complementaryInstruction": "No hay respuestas correctas o incorrectas.",
+        "direction": "Seleccione una sola respuesta."
       },
       "qcuDiscovery": {
         "direction": "Seleccione la respuesta que le parezca más adecuada."
       },
       "qrocm": {
-        "direction": "Rellena {count, plural, =1 {le champ vide} other {les champs vides}}."
+        "direction": "Rellena {count, plural, =1 {el campo} other {los campos}}."
       },
       "recap": {
         "backToModuleDetails": "Deje de",

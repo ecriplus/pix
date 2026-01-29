@@ -1755,7 +1755,7 @@
         "direction": "Sélectionnez la réponse qui vous semble la plus juste."
       },
       "qrocm": {
-        "direction": "Remplissez {count, plural, =1 {le champ vide} other {les champs vides}}."
+        "direction": "Remplissez {count, plural, =1 {le champ} other {les champs}}."
       },
       "recap": {
         "backToModuleDetails": "Quitter",

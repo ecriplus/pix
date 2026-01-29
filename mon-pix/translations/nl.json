@@ -1741,13 +1741,13 @@
       },
       "qcuDeclarative": {
         "complementaryInstruction": "Kies één antwoord",
-        "direction": "There is no right or wrong answer."
+        "direction": "Selecteer één antwoord."
       },
       "qcuDiscovery": {
         "direction": "Selecteer het antwoord dat u het meest juist lijkt."
       },
       "qrocm": {
-        "direction": "Vul de lege velden in."
+        "direction": "Vul {count, plural, =1 {het veld} other {de velden}} in."
       },
       "recap": {
         "backToModuleDetails": "Stoppen met",
