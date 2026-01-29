@@ -67,4 +67,22 @@ export class CertificationInformationPage {
       ),
     };
   }
+
+  async cancelCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Annuler la certification' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Désannuler la certification').waitFor({ state: 'visible' });
+  }
+
+  async uncancelCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Désannuler la certification' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Annuler la certification').waitFor({ state: 'visible' });
+  }
 }
