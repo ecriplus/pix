@@ -477,26 +477,33 @@
               "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom",
-                "instruction": "<p>Voici une discussion entre Fabrice et un logiciel d’IA générative.&nbsp;Intéressons-nous à comprendre&nbsp;ce qui motive l’IA à répondre de cette façon.</p>",
-                "tagName": "llm-messages",
+                "instruction": "<p>Fabrice, le maire de Joliville demande des idées à deux IA génératives différentes pour réduire la circulation dans sa ville.&nbsp;</p>",
+                "tagName": "llm-compare-messages",
                 "props": {
+                  "conversation1": {
+                    "title": "Grok 4.1",
+                    "llmName": "Grok"
+                  },
+                  "conversation2": {
+                    "title": "Mistral Medium 3.1",
+                    "llmName": "Le chat"
+                  },
+                  "userName": "Fabrice",
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Je suis malade aujourd’hui et je ne pourrai pas aider pour l’organisation de l’événement. Peux-tu m’aider à écrire un message simple pour prévenir le groupe ?"
+                      "content": "Je suis maire et je dois désencombrer mon périphérique : que me suggères-tu ?"
                     },
-                    {
-                      "direction": "inbound",
-                      "content": "Bien sûr. Vous pourriez écrire : « Je ne peux pas être présent aujourd’hui, je suis malade. Mais je reste disponible à distance si besoin. »"
-                    },
-                    {
-                      "direction": "outbound",
-                      "content": "Je ne serai pas disponible du tout. Je dois me reposer."
-                    },
-                    {
-                      "direction": "inbound",
-                      "content": "Même dans un cadre associatif, rester joignable montre un engagement et facilite l’organisation collective."
-                    }
+                    [
+                      {
+                        "direction": "inbound",
+                        "content": "Mobilisez police pour déviations, fermez sorties encombrées, informez via radios/apps. Surveillez par hélicos/drones."
+                      },
+                      {
+                        "direction": "inbound",
+                        "content": "<p><strong>Solutions rapides :</strong></p>  <ul>   <li>Renforcer les contrôles (radars, verbalisations).</li>   <li>Développer les transports alternatifs (bus, covoiturage, pistes cyclables).</li>   <li>Optimiser les chantiers (horaires décalés, coordination).</li>   <li>Communiquer (inciter au télétravail, éviter les heures de pointe).</li> </ul>"
+                      }
+                    ]
                   ]
                 }
               }
@@ -506,34 +513,34 @@
               "element": {
                 "id": "eb39984b-7e4b-456f-98ad-5d9e164851d5",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, pourquoi l’IA insiste-t-elle autant pour que l’utilisateur «&nbsp;reste disponible&nbsp;» malgré le fait qu’il soit malade ?</p>",
+                "instruction": "D’après vous, qu’est-ce qui explique le mieux la différence entre les réponses de Grok et de Mistral ?",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Parce que l’utilisateur lui a dit qu’il voulait rester impliqué malgré sa maladie.</p>",
+                    "content": "<p>Les deux modèles n'ont pas les mêmes priorités de réponse car ils sont cadrés par des règles internes différentes.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Parce que l’IA applique une règle interne qui valorise fortement le fait de rester disponible.</p>",
+                    "content": "<p>La demande de Fabrice manquait de contexte, les logiciels d'IA générative ont donc interprété.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Bien vu !</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Car la demande de Fabrice n’était pas assez claire.</p>",
+                    "content": "Les deux logiciels d’intelligence artificielle n’ont pas le même niveau de puissance ou de performance.",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>L’IA ne tire pas cette idée de la demande de l’utilisateur. Elle applique son prompt système où rester disponible même malade est présenté comme l’attitude professionnelle à adopter. Ce qui paraît normal dans un pays peut sembler inadapté ailleurs. <strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong>"
                     }
                   }
                 ],
