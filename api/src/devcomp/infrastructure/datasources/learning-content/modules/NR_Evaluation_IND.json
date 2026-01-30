@@ -141,13 +141,7 @@
                   ]
                 },
                 {
-                  "elements": [
-                    {
-                      "id": "a4289de7-f282-4271-96c9-5dbd1a276c4d",
-                      "type": "text",
-                      "content": "<p><strong>PLACEHOLDER – Ressource manquante</strong>&nbsp;: infographie récapitulant les 3 composantes (équipements utilisateurs / réseaux / centres de données) + exemples concrets d’éléments inclus/exclus selon le périmètre.</p>"
-                    }
-                  ]
+                  "elements": []
                 }
               ]
             }
@@ -178,7 +172,7 @@
               "element": {
                 "id": "7262fc2e-baa1-451c-b039-2c64a7ac8376",
                 "type": "text",
-                "content": "<p>Beaucoup d’impacts viennent d’étapes qu’on ne voit pas&nbsp;: extraction de ressources, fabrication, transports… Pour comprendre, on raisonne sur <strong>tout le cycle de vie&nbsp;</strong>de l’appareil.</p>"
+                "content": "<p>Beaucoup d’impacts viennent d’étapes qu’on ne voit pas&nbsp;: extraction de ressources, fabrication, transports… </p>"
               }
             },
             {
@@ -186,7 +180,7 @@
               "element": {
                 "id": "b89045b7-9427-46f2-babb-ebbd092c4e8d",
                 "type": "custom",
-                "instruction": "qsfqzfqzfdqzefqzfq",
+                "instruction": "Pour comprendre, on raisonne sur <strong>tout le cycle de vie&nbsp;</strong>de l’appareil.",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -206,7 +200,7 @@
                       }
                     },
                     {
-                      "title": "Deuxième étape : La distribution (transport)",
+                      "title": "Deuxième étape : Le transport",
                       "description": "Le transport international du smartphone et de ses composants génère du CO₂, mais reste limité par rapport à la phase de production.",
                       "displayWidth": 0,
                       "image": {
@@ -235,7 +229,7 @@
                     },
                     {
                       "title": "Quatrième étape : La fin de vie ",
-                      "description": "Dans l’ensemble il nous manque beaucoup de données pour réellement évaluer la fin de vie des appareils numériques. Mais un recyclage insuffisant oblige à produire de nouveaux smartphones, augmentant indirectement les émissions.",
+                      "description": "À l’heure actuelle, les scientifiques disposent de peu de données pour évaluer correctement l’impact environnemental de la fin de vie des appareils numériques.",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
@@ -269,7 +263,7 @@
               "element": {
                 "id": "5523c5df-0559-42e0-a7c2-d8a695962c10",
                 "type": "text",
-                "content": "<h5>🤔 Comment évalue-t-on l’impact d’un objet numérique ?</h5><p>Avec l’<strong>Analyse de Cycle de Vie (ACV)</strong>. Elle oblige à regarder toutes les étapes&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées.</p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
+                "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées. Elle est appellée l’<strong style=\"font-size: 16px;\">Analyse de Cycle de Vie (ACV)</strong><span style=\"font-size: 16px;\">. <br><br></span></p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
               }
             }
           ]
@@ -299,14 +293,14 @@
               "element": {
                 "id": "f12856b3-74b4-4e72-9079-1aceab56bc35",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Voici différents impacts du numérique selon les catégories d’équipements et leur cycle de vie.",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
                   "slides": [
                     {
                       "title": "Emission de gaz à effet de serre",
-                      "description": "Mesure l’impact du numérique sur l’émission de gaz à effet de serre. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation. C’est lié à la pollution engendré par la production d’électricité.",
+                      "description": "Dans cette ACV, c’est la phase d’utilisation qui a le plus d’impact sur les émissions de gaz à serre.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -320,7 +314,7 @@
                     },
                     {
                       "title": "Épuisement des ressources minérales et métalliques",
-                      "description": "Mesure l’impact du numérique sur la consommation de métaux et de minéraux. Ici, la phase de l’ACV qui prédomine est celle de la fabrication. ⛏️.",
+                      "description": "Dans cette ACV, la c’est la phase de fabrication qui a le plus d’impact sur l’épuisement des ressources minérales et métalliques. ",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-2.png",
@@ -334,7 +328,7 @@
                     },
                     {
                       "title": "Particules fines ",
-                      "description": "Mesure l’impact du numérique sur l’émission de particules fines, nocives pour la santé. Ici, la phase de l’ACV qui prédomine est celle de l’utilisation, en raison de la production d’électricité et des activités industrielles associées 🌫️.",
+                      "description": "Cet indicateur mesure l’émission dans l’air de particules fines responsables ne partie de certaines maladies respiratoires. Dans cette ACV, c’est la phase d’utilisation qui émet le plus de particules fines. ",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -430,7 +424,7 @@
                     {
                       "id": "26a4ad76-5345-406f-8b36-e006afbb5ab8",
                       "type": "qcu-discovery",
-                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?",
+                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?",
                       "proposals": [
                         {
                           "id": "1",
@@ -491,19 +485,20 @@
                     {
                       "id": "ad88b67b-755d-4a36-b480-e479146811fb",
                       "type": "text",
-                      "content": "<p>Voici un tableau récapitulatif (version courte) des principaux indicateurs d’impact environnemental.</p><table>    <caption class=\"sr-only\">Résumé des indicateurs d’impact environnemental (simplifié)</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">À quoi celà correspond</th>            <th scope=\"col\">Impact environnemental</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Réchauffement climatique (GWP)</th>            <td>Gaz à effet de serre sur tout le cycle de vie</td>            <td>Changement climatique</td>        </tr>        <tr>            <th scope=\"row\">Ressources minérales &amp; métaux (ADPe)</th>            <td>Extraction de minerais et métaux non renouvelables</td>            <td>Épuisement des ressources (métaux critiques)</td>        </tr>        <tr>            <th scope=\"row\">Ressources fossiles (ADPf)</th>            <td>Consommation de pétrole, gaz, charbon</td>            <td>Raréfaction + émissions indirectes</td>        </tr>        <tr>            <th scope=\"row\">Particules fines – santé (PM)</th>            <td>Émissions de particules liées aux activités</td>            <td>Impacts santé (respiratoire, cardio…)</td>        </tr>        <tr>            <th scope=\"row\">Acidification (AP)</th>            <td>Substances acidifiantes rejetées dans l’air</td>            <td>Dégradation sols, forêts, eaux douces</td>        </tr>        <tr>            <th scope=\"row\">Eutrophisation eau douce (EPf)</th>            <td>Rejets d’azote et de phosphore dans l’eau</td>            <td>Algues + déséquilibres + perte biodiversité</td>        </tr>    </tbody></table>"
+                      "content": "<p>Voici un tableau récapitulatif des principaux indicateurs d’impact environnemental.</p><table>    <caption class=\"sr-only\">Résumé des indicateurs d’impact environnemental (simplifié)</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">À quoi cela correspond</th>            <th scope=\"col\">Impact environnemental</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Réchauffement climatique (GWP)</th>            <td>Gaz à effet de serre sur tout le cycle de vie</td>            <td>Changement climatique</td>        </tr>        <tr>            <th scope=\"row\">Ressources minérales &amp; métaux (ADPe)</th>            <td>Extraction de minerais et métaux non renouvelables</td>            <td>Épuisement des ressources minérales</td>        </tr>        <tr>            <th scope=\"row\">Ressources fossiles (ADPf)</th>            <td>Consommation de pétrole, gaz, charbon</td>            <td>Épuisement des ressources fossiles<br></td>        </tr>        <tr>            <th scope=\"row\">Particules fines – santé (PM)</th>            <td>Émissions de particules liées aux activités</td>            <td>Augmentation de la fréquence des maladies cardiaques et respiratoires</td>        </tr>        <tr>            <th scope=\"row\">Acidification (AP)</th>            <td>Substances acidifiantes rejetées dans l’air</td>            <td>Dégradation sols, forêts, eaux douces</td>        </tr>        <tr>            <th scope=\"row\">Eutrophisation eau douce (EPf)</th>            <td>Rejets d’azote et de phosphore dans l’eau</td>            <td>Déséquilibre de la flore et de la faune aquatique</td>        </tr>    </tbody></table>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "93427470-f189-47b7-bfa6-d2ad80ac9686",
+                      "type": "text",
+                      "content": "<h5>🤔Ces résultats prédisent-ils l’avenir ?</h5><p>Non. Ils décrivent une situation à un instant donné. Les indicateurs peuvent évoluer, mais <strong>sans action</strong>, les impacts du numérique vont continuer d’augmenter.</p>"
                     }
                   ]
                 }
               ]
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "26abf1bc-fe15-4c04-add5-cb00430d6dd6",
-                "type": "text",
-                "content": "<h5>🤔Ces résultats prédisent-ils l’avenir ?</h5><p>Non. Ils décrivent une situation à un instant donné. Les indicateurs peuvent évoluer, mais <strong>sans action</strong>, les impacts du numérique peuvent continuer d’augmenter.</p>"
-              }
             }
           ]
         }
@@ -523,7 +518,7 @@
               "element": {
                 "id": "ed97ea10-9ed8-4c2d-ad35-35c528d3d08d",
                 "type": "text",
-                "content": "<ul>    <li>Le numérique repose sur <strong>trois composantes</strong>&nbsp;: équipements utilisateurs, réseaux, centres de données.</li>    <li>Ses impacts se mesurent avec l’<strong>ACV</strong>, une méthode <strong>normalisée</strong> et <strong>multicritère</strong>.</li>    <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats via des <strong>indicateurs → impacts</strong> (climat, ressources, santé…).</li>    <li>Les impacts <strong>varient selon l’indicateur, le périmètre et les usages</strong>&nbsp;: les équipements pèsent souvent, mais réseaux et data centers peuvent aussi compter (et sont parfois sous-estimés).</li>    </ul>"
+                "content": "<ul>  <li>Le numérique repose sur <strong>trois composantes</strong>&nbsp;: équipements utilisateurs, réseaux, centres de données. 🧩</li>  <li>Pour mesurer ses impacts, on se sert de <strong>l’analyse du cycle de vie</strong> (ACV), une méthode <strong>normalisée</strong> et <strong>multicritère</strong>. 🔍</li>  <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats via des <strong>indicateurs → impacts</strong> (climat, ressources, santé…). 📏</li>  <li>Les impacts <strong>varient selon l’indicateur, le périmètre et les usages</strong>&nbsp;: les équipements pèsent souvent, mais réseaux et data centers peuvent aussi compter (et sont parfois sous-estimés). 🔄</li></ul>"
               }
             }
           ]
@@ -616,7 +611,7 @@
               "element": {
                 "id": "f0ee88fb-f1d9-4c04-afed-01ddc6e76ab2",
                 "type": "text",
-                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote><br>Avant de conclure, vous devez vérifier si ce chiffre est bien interprétable."
+                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote><br>Il est dit que cette étude mesure les émissions de gaz à effet de serre."
               }
             },
             {
@@ -624,7 +619,7 @@
               "element": {
                 "id": "e393cd8a-1a83-4533-a809-9b7c6bcd1e41",
                 "type": "qcm",
-                "instruction": "Quest sont les trois élements essentils à connaître pour interpréter correctement ce chiffre ?&nbsp;",
+                "instruction": "Quels sont les deux autres élements à connaître pour interpréter correctement cette donnée ?&nbsp;",
                 "proposals": [
                   {
                     "id": "1",
@@ -637,10 +632,6 @@
                   {
                     "id": "3",
                     "content": "La méthodes d’évaluation (ACV ou autre)"
-                  },
-                  {
-                    "id": "4",
-                    "content": "L’indicateur environnement étudié"
                   },
                   {
                     "id": "5",
@@ -663,8 +654,7 @@
                 },
                 "solutions": [
                   "1",
-                  "3",
-                  "4"
+                  "3"
                 ]
               }
             }
@@ -674,6 +664,184 @@
           "id": "6e71e51a-8e61-4d16-8795-6da69a166db6",
           "type": "activity",
           "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7d437b14-66b3-4106-aeb2-41f225057ca3",
+                "type": "qrocm",
+                "instruction": "Complétez le texte pour comprendre comment sont évalués les impacts du numérique.",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Pour évaluer les impacts environnementaux du numérique, on utilise une méthode appelée&nbsp;</p>"
+                  },
+                  {
+                    "input": "a",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "méthode d’évaluation",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "empreinte carbone"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Analyse du Cycle de Vie (ACV)"
+                      },
+                      {
+                        "id": "3",
+                        "content": "bilan énergétique"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>. Cette méthode consiste à analyser&nbsp;</p>"
+                  },
+                  {
+                    "input": "b",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "périmètre du cycle de vie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "uniquement la phase d’utilisation"
+                      },
+                      {
+                        "id": "2",
+                        "content": "les équipements les plus récents"
+                      },
+                      {
+                        "id": "3",
+                        "content": "toutes les étapes du cycle de vie"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>d’un équipement. Les résultats dépendent du&nbsp;</p>"
+                  },
+                  {
+                    "input": "c",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "périmètre de l’étude",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "périmètre de l’étude"
+                      },
+                      {
+                        "id": "2",
+                        "content": "prix de l’équipement"
+                      },
+                      {
+                        "id": "3",
+                        "content": "nombre d’utilisateurs"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>et de l’&nbsp;</p>"
+                  },
+                  {
+                    "input": "d",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "indicateur environnemental",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "usage principal"
+                      },
+                      {
+                        "id": "2",
+                        "content": "indicateur environnemental choisi"
+                      },
+                      {
+                        "id": "3",
+                        "content": "type d’appareil"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>. C’est pourquoi un chiffre sur l’impact du numérique doit toujours être&nbsp;</p>"
+                  },
+                  {
+                    "input": "e",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "lecture critique",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "accepté tel quel"
+                      },
+                      {
+                        "id": "2",
+                        "content": "comparé sans précaution"
+                      },
+                      {
+                        "id": "3",
+                        "content": "interprété avec précaution"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !</p>",
+                    "diagnosis": "<p>Vous avez correctement identifié la méthode (ACV), le rôle du cycle de vie, du périmètre et des indicateurs pour interpréter les impacts du numérique.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non !</p>",
+                    "diagnosis": "<p>Pour interpréter un impact environnemental du numérique, il faut connaître la méthode (ACV), le périmètre étudié et l’indicateur utilisé.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bf6af043-b191-4889-8236-7e0a6f318fb1",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "8f482072-8f80-48b1-9804-a48782fda656",
+          "type": "challenge",
+          "title": "Défi : lire un chiffre du numérique avec esprit critique",
           "components": [
             {
               "type": "element",
@@ -737,58 +905,6 @@
                   }
                 ],
                 "solution": "2"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "bf6af043-b191-4889-8236-7e0a6f318fb1",
-      "type": "go-further",
-      "grains": [
-        {
-          "id": "8f482072-8f80-48b1-9804-a48782fda656",
-          "type": "challenge",
-          "title": "Défi : lire un chiffre du numérique avec esprit critique",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "6d1f5bd5-de96-476d-81f9-d3905a21e03e",
-                "type": "text",
-                "content": "<p><strong>PLACEHOLDER – Défi à compléter</strong></p><p>Objectif&nbsp;: transférer la méthode&nbsp;: quand l’apprenant voit un chiffre («&nbsp;le numérique représente X%…&nbsp;»), il doit poser les bonnes questions.</p><p>Suggestion de consigne&nbsp;: «&nbsp;Choisissez un chiffre (article, post, rapport). Répondez à 3 questions&nbsp;: (1) Quel périmètre ? (2) Quelle méthode (ACV ou autre) ? (3) Quel(s) indicateur(s) ?&nbsp;»</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "23b9bb23-e338-453f-91bc-5b582d2ce809",
-                "type": "qcu-declarative",
-                "instruction": "<p>Quel réflexe vous semble le plus utile pour lire un chiffre sur l’impact du numérique ?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>Vérifier le périmètre&nbsp;: ce qui est inclus et exclu.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Très bon réflexe. Sans périmètre clair, on compare parfois des études qui ne parlent pas de la même chose.</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>Repérer l’indicateur (carbone, ressources, santé…) et la méthode (ACV).</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Excellent. Le choix de l’indicateur change la lecture, et la méthode dit comment le chiffre a été construit.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>Comparer plusieurs sources avant de conclure.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Bonne idée. Comparer des sources fiables aide à éviter les interprétations rapides, surtout si les périmètres diffèrent.</p>"
-                    }
-                  }
-                ]
               }
             }
           ]
