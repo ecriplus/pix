@@ -465,6 +465,43 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.country')));
         assert.notOk(screen.queryByText(t('components.organizations.creation.error-messages.dpo-email')));
       });
+
+      module('when first field in error is an input field', function () {
+        test('it should focus on it after submit', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          // when
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          //then
+          const organizationNameInput = screen.getByRole('textbox', {
+            name: `${t('components.organizations.creation.name.label')} *`,
+          });
+          assert.strictEqual(document.activeElement, organizationNameInput);
+        });
+      });
+
+      module('when first field in error is a select field', function () {
+        test('it should focus on it after submit', async function (assert) {
+          // given
+          const screen = await render(
+            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          );
+
+          await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
+
+          await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+          //then
+          const organizationTypeSelect = screen.getByRole('button', {
+            name: `${t('components.organizations.creation.type.label')} *`,
+          });
+          assert.strictEqual(document.activeElement, organizationTypeSelect);
+        });
+      });
     });
   });
 
