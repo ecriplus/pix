@@ -11,8 +11,8 @@ describe('Unit | Serializer | JSONAPI | campaign-participant-activity-serializer
       // given
       const campaignParticipantsActivities = [
         new CampaignParticipantActivity({
-          userId: 1,
-          campaignParticipationId: '1',
+          organizationLearnerId: 1,
+          campaignParticipationId: 3,
           firstName: 'Karam',
           lastName: 'Habibi',
           participantExternalId: 'Dev',
@@ -20,13 +20,13 @@ describe('Unit | Serializer | JSONAPI | campaign-participant-activity-serializer
           participationCount: 1,
         }),
         new CampaignParticipantActivity({
-          userId: 2,
-          campaignParticipationId: '2',
+          organizationLearnerId: 2,
+          campaignParticipationId: 2,
           firstName: 'Dimitri',
           lastName: 'Payet',
           participantExternalId: 'Footballer',
           status: STARTED,
-          sharedAt: null,
+          participationCount: 2,
         }),
       ];
       const pagination = {
@@ -48,7 +48,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participant-activity-serializer
               'last-name': 'Habibi',
               'participant-external-id': 'Dev',
               status: SHARED,
-              'last-campaign-participation-id': '1',
+              'last-campaign-participation-id': 3,
               'participation-count': 1,
             },
           },
@@ -60,8 +60,8 @@ describe('Unit | Serializer | JSONAPI | campaign-participant-activity-serializer
               'last-name': 'Payet',
               'participant-external-id': 'Footballer',
               status: STARTED,
-              'last-campaign-participation-id': '2',
-              'participation-count': 0,
+              'last-campaign-participation-id': 2,
+              'participation-count': 2,
             },
           },
         ],
