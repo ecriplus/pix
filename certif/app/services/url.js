@@ -29,10 +29,10 @@ export default class Url extends UrlBaseService {
 
   get joiningIssueSheetUrl() {
     if (this.locale.currentLanguage === 'fr') {
-      return 'https://cloud.pix.fr/s/b8BFXX94Ys2WGxM/download/Probl%C3%A8mes%20d%27acc%C3%A8s%20en%20session.pdf';
+      return 'https://cloud.pix.fr/s/QcKnpcTya5iWF5C';
     }
 
-    return 'https://cloud.pix.fr/s/JmBn2q5rpzgrjxN/download';
+    return 'https://cloud.pix.fr/s/aZRMYipSLREiBXP';
   }
 
   get documentationUrl() {
@@ -59,6 +59,10 @@ export default class Url extends UrlBaseService {
   }
 
   get invigilatorDocumentationUrl() {
-    return 'https://cloud.pix.fr/s/s4H9x4PD4eKokqX';
+    if (this.locale.currentLanguage === 'fr') {
+      return 'https://cloud.pix.fr/s/8xB82zdPKYSZzaM';
+    }
+
+    return 'https://cloud.pix.fr/s/Mfd2ggwGHwmprA4';
   }
 }
