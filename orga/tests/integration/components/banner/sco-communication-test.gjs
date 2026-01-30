@@ -49,7 +49,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/RaPpKjFHNX2kSR4');
 
             const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
-            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/GqwW6dFDDrHezfS');
+            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/opiFxfjygR76S8y');
           });
         });
       });
