@@ -61,6 +61,8 @@ export default class ModulixCustomDraft extends ModuleElement {
       </fieldset>
 
       <div class="element-custom-draft__buttons">
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+
         <PixButton
           class="element-custom-draft-buttons__reset"
           @iconBefore="refresh"
@@ -68,8 +70,6 @@ export default class ModulixCustomDraft extends ModuleElement {
           @triggerAction={{this.resetEmbed}}
           aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
         >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
-
-        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>

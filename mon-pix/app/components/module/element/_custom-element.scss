@@ -28,7 +28,8 @@ message-conversation::part(conversation) {
 
   &__buttons {
     display: flex;
-    justify-content: space-between;
+    gap: var(--pix-spacing-4x);
+    justify-content: flex-end;
   }
 
   &__button {
@@ -38,11 +39,11 @@ message-conversation::part(conversation) {
 
   &--reset-state{
     background-color: var(--pix-primary-10);
-    border-radius: 16px 16px 16px 0;
+    border-radius: 16px 16px 0;
   }
 
   &--reset-interactive-state{
-    border-radius: 16px 16px 16px 0;
+    border-radius: 16px 16px 0;
   }
 }
 
