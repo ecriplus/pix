@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.318.0](https://github.com/1024pix/pix/compare/v5.317.1...v5.318.0) (2026-01-30)
+
+### :rocket: Amélioration
+
+- [#14798](https://github.com/1024pix/pix/pull/14798) Ajouter / supprimer une juridiction d'une application cliente (PIX-20818) 
+- [#14921](https://github.com/1024pix/pix/pull/14921) Centrer les légendes des éléments images (PIX-21199) 
+- [#14906](https://github.com/1024pix/pix/pull/14906) Modifier le wording des champs pour le QROCM (PIX-21200) 
+
+### :bug: Correction
+
+- [#14919](https://github.com/1024pix/pix/pull/14919) Changement de condition pour déclarer reuseExistingApps 
+
+### :building_construction: Tech
+
+- [#14923](https://github.com/1024pix/pix/pull/14923) Mise à jour de liens cassés sur Pix Certif (PIX-21279) 
+- [#14900](https://github.com/1024pix/pix/pull/14900) Supprimer le code permettant la désactivation de l'anonymisation (PIX-21282).
+
 ## [5.317.1](https://github.com/1024pix/pix/compare/v5.317.0...v5.317.1) (2026-01-29)
 
 ### :building_construction: Tech
