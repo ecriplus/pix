@@ -166,6 +166,7 @@ export default class ModulixIssueReportModal extends Component {
                 <PixTextarea
                   class="issue-report-modal-form__comment"
                   @maxlength="200"
+                  @value={{this.comment}}
                   rows="5"
                   required
                   aria-required="true"
