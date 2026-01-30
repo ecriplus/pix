@@ -28,13 +28,6 @@
   }
 
   &__feedback {
-    @extend %pix-body-l;
-
-    padding: var(--pix-spacing-6x);
-    color: var(--pix-neutral-0);
-    background: var(--pix-neutral-800);
-    border-radius: 0 0 var(--pix-spacing-4x) var(--pix-spacing-4x);
-
     @media (not (prefers-reduced-motion: reduce)) {
       animation: 0.75s zoom-in-zoom-out ease;
 
@@ -57,20 +50,18 @@
 }
 
 .element-qcu-declarative-feedback {
+
+  &__content {
+    @extend %pix-body-l;
+
+    padding: var(--pix-spacing-6x);
+    color: var(--pix-neutral-0);
+    background: var(--pix-neutral-800);
+    border-radius: 0 0 var(--pix-spacing-4x) var(--pix-spacing-4x);
+  }
+
   &__report-button {
     display: flex;
     justify-content: flex-end;
-
-    button:not([aria-disabled="true"]) {
-      color: var(--pix-neutral-0);
-
-      &:hover {
-        color: var(--pix-neutral-100);
-      }
-
-      &:focus, &:active {
-        color: var(--pix-neutral-0);
-      }
-    }
   }
 }
