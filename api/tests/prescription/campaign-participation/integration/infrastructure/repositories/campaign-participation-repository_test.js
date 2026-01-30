@@ -364,7 +364,9 @@ describe('Integration | Repository | Campaign Participation', function () {
       const error = await catchErr(DomainTransaction.execute)(async () => {
         await campaignParticipationRepository.getLocked(participation.id);
         // we mimick a concurrent call on the campaign-participations table on the same row
-        return knex('campaign-participations').where({ id: participation.id }).first().forUpdate().timeout(100);
+        return knex('campaign-participations').where({ id: participation.id }).first().forUpdate().timeout(100, {
+          cancel: true,
+        });
       });
       expect(error).instanceOf(Error);
       expect(error.message).to.equal('Defined query timeout of 100ms exceeded when running query.');

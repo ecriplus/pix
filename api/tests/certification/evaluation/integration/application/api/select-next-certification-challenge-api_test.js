@@ -47,7 +47,11 @@ describe('Integration | Application | Certification | Evaluation | API', functio
         // In the middle of the selectNextCertificationChallenge transaction, lock is not available
         // Any attempt to concurrently lock will timeout
         // @see {https://github.com/knex/knex/blob/b6507a7129d2b9fafebf5f831494431e64c6a8a0/test/integration2/query/select/selects.spec.js#L953}
-        await knex('assessments').where({ id: originalAssessment.id }).forUpdate().first().timeout(100);
+        await knex('assessments')
+          .where({ id: originalAssessment.id })
+          .forUpdate()
+          .first()
+          .timeout(100, { cancel: true });
       });
 
       // when
@@ -67,7 +71,7 @@ describe('Integration | Application | Certification | Evaluation | API', functio
         .where({ id: originalAssessment.id })
         .forUpdate()
         .first()
-        .timeout(100);
+        .timeout(100, { cancel: true });
       return expect(assessmentAfterLock.id).to.equal(originalAssessment.id);
     });
   });
