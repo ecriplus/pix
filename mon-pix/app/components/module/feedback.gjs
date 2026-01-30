@@ -23,7 +23,9 @@ export default class ModulixFeedback extends Component {
 
       </div>
       <div class="feedback__buttons">
-        <ModulixIssueReportBlock @reportInfo={{@reportInfo}} />
+        {{#if @reportInfo}}
+          <ModulixIssueReportBlock @reportInfo={{@reportInfo}} />
+        {{/if}}
         {{#if @shouldDisplayRetryButton}}
           <PixButton
             class="feedback-buttons__retry"

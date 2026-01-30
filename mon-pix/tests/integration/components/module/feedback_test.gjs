@@ -48,10 +48,13 @@ module('Integration | Component | Module | Feedback', function (hooks) {
       state: 'Correct !',
       diagnosis: "<p>C'est la bonne réponse !</p>",
     };
+    const reportInfo = { answer: 1, elementId: 123 };
 
     // when
     const screen = await render(
-      <template><ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} /></template>,
+      <template>
+        <ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} @reportInfo={{reportInfo}} />
+      </template>,
     );
 
     // then
@@ -65,12 +68,13 @@ module('Integration | Component | Module | Feedback', function (hooks) {
         state: 'Correct !',
         diagnosis: "<p>C'est la bonne réponse !</p>",
       };
+      const reportInfo = { answer: 1, elementId: 123 };
 
       // when
       const screen = await render(
         <template>
           <div id="modal-container"></div>
-          <ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} />
+          <ModulixFeedback @answerIsValid={{true}} @feedback={{feedback}} @reportInfo={{reportInfo}} />
         </template>,
       );
       await click(screen.getByRole('button', { name: t('pages.modulix.issue-report.aria-label') }));
