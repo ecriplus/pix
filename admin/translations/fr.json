@@ -817,6 +817,16 @@
         "no-last-connection-date-info": "Non connecté depuis 03/2025"
       },
       "places": {
+        "creation": {
+          "error-messages": {
+            "activation-date": "La date d'activation est obligatoire.",
+            "category":  "La catégorie est obligatoire.",
+            "count": "Le nombre de places doit être un nombre entier positif.",
+            "expiration-date": "La date d'expiration est obligatoire.",
+            "reference": "La référence est obligatoire.",
+            "submit": "Erreur lors de la création du lot de place."
+          }
+        },
         "statistics": {
           "available-seats-count": {
             "title": "Places disponibles",

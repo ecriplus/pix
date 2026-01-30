@@ -1,5 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click, fillIn } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import PlacesLotCreationForm from 'pix-admin/components/organizations/places-lot-creation-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -57,6 +59,59 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
 
     assert.throws(function () {
       screen.getByRole('button', { name: 'Ajouter' });
+    });
+  });
+
+  module('errors', function () {
+    module('when required fields are not filled in', function () {
+      test('should not submit form', async function (assert) {
+        // given
+        const create = sinon.stub();
+
+        const screen = await render(<template><PlacesLotCreationForm @create={{create}} /></template>);
+
+        // when
+        await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+        // then
+        assert.ok(create.notCalled);
+      });
+    });
+
+    test('should display error toast and display specific error messages on required fields', async function (assert) {
+      // given
+      const errorNotificationStub = sinon.stub();
+      class NotificationsStub extends Service {
+        sendErrorNotification = errorNotificationStub;
+      }
+      this.owner.register('service:pixToast', NotificationsStub);
+
+      const screen = await render(<template><PlacesLotCreationForm /></template>);
+
+      // when
+      await click(screen.getByRole('button', { name: t('common.actions.add') }));
+
+      // then
+      const countErrorMessage = screen.getByText(t('components.organizations.places.creation.error-messages.count'));
+      const expirationDateErrorMessage = screen.getByText(
+        t('components.organizations.places.creation.error-messages.expiration-date'),
+      );
+      const referenceErrorMessage = screen.getByText(
+        t('components.organizations.places.creation.error-messages.reference'),
+      );
+      const categoryErrorMessage = screen.getByText(
+        t('components.organizations.places.creation.error-messages.category'),
+      );
+
+      assert.ok(countErrorMessage);
+      assert.ok(expirationDateErrorMessage);
+      assert.ok(referenceErrorMessage);
+      assert.ok(categoryErrorMessage);
+      assert.ok(
+        errorNotificationStub.calledWithExactly({
+          message: t('components.organizations.places.creation.error-messages.submit'),
+        }),
+      );
     });
   });
 });

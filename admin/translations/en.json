@@ -815,6 +815,16 @@
         "no-last-connection-date-info": "Has not been connected since 03/2025"
       },
       "places": {
+        "creation": {
+          "error-messages": {
+            "activation-date": "Activation date is a mandatory field.",
+            "category": "Category is a mandatory field",
+            "count": "Count must be a positive integer.",
+            "expiration-date": "Expiration date is a mandatory field.",
+            "reference": "Reference is a mandatory field.",
+            "submit": "An error occured during places lot creation."
+          }
+        },
         "statistics": {
           "available-seats-count": {
             "title": "Seats available",
