@@ -17,8 +17,6 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 
 describe('Acceptance | API | campaign-detail-route', function () {
   let server;
-  let campaign;
-  let organization;
 
   beforeEach(async function () {
     server = await createServer();
@@ -27,7 +25,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
   describe('GET /api/campaigns', function () {
     it('should return the campaign requested by code', async function () {
       // given
-      campaign = databaseBuilder.factory.buildCampaign();
+      const campaign = databaseBuilder.factory.buildCampaign();
       const featureId = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID).id;
       databaseBuilder.factory.buildCampaignFeature({
         campaignId: campaign.id,
@@ -154,8 +152,8 @@ describe('Acceptance | API | campaign-detail-route', function () {
 
     beforeEach(async function () {
       const userId = databaseBuilder.factory.buildUser().id;
-      organization = databaseBuilder.factory.buildOrganization();
-      campaign = databaseBuilder.factory.buildCampaign({
+      const organization = databaseBuilder.factory.buildOrganization();
+      const campaign = databaseBuilder.factory.buildCampaign({
         organizationId: organization.id,
         type: 'PROFILES_COLLECTION',
       });
@@ -314,34 +312,53 @@ describe('Acceptance | API | campaign-detail-route', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/participants-activity', function () {
-    const participant1 = { firstName: 'John', lastName: 'McClane', division: '5eme' };
-    const participant2 = { firstName: 'Holly', lastName: 'McClane', division: '4eme' };
-    const participant3 = { firstName: 'Mary', lastName: 'McClane', group: 'L1' };
-
     let campaign;
     let userId;
+    let organizationLearner1;
+    let organizationLearner2;
+    let organizationLearner3;
 
     beforeEach(async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organizationId });
+
       userId = databaseBuilder.factory.buildUser().id;
-      const organization = databaseBuilder.factory.buildOrganization();
+      databaseBuilder.factory.buildMembership({ userId, organizationId: organizationId });
 
-      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'John',
+        lastName: 'McClane',
+        division: '5eme',
+        organizationId,
+      });
+      organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Holly',
+        lastName: 'McClane',
+        division: '4eme',
+        organizationId,
+      });
+      organizationLearner3 = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Mary',
+        lastName: 'McClane',
+        group: 'L1',
+        organizationId,
+      });
 
-      databaseBuilder.factory.buildMembership({ userId, organizationId: organization.id });
-
-      const campaignParticipation = {
+      databaseBuilder.factory.buildCampaignParticipation({
         sharedAt: new Date(2010, 1, 1),
         campaignId: campaign.id,
-      };
-
-      databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant1, campaignParticipation);
-      databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant2, {
+        organizationLearnerId: organizationLearner1.id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         status: STARTED,
+        organizationLearnerId: organizationLearner2.id,
       });
-      databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant3, {
+      databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
+        organizationLearnerId: organizationLearner3.id,
       });
+
       return databaseBuilder.commit();
     });
 
@@ -384,7 +401,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       expect(response.statusCode).to.equal(200);
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
-      expect(participation['first-name']).to.equal(participant1.firstName);
+      expect(participation['first-name']).to.equal(organizationLearner1.firstName);
     });
 
     it('should return the campaign participant activity with status STARTED as JSONAPI', async function () {
@@ -399,7 +416,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       expect(response.statusCode).to.equal(200);
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
-      expect(participation['first-name']).to.equal(participant2.firstName);
+      expect(participation['first-name']).to.equal(organizationLearner2.firstName);
     });
 
     it('should return the campaign participant activity filtered by search as JSONAPI', async function () {
@@ -414,7 +431,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       expect(response.statusCode).to.equal(200);
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
-      expect(participation['first-name']).to.equal(participant3.firstName);
+      expect(participation['first-name']).to.equal(organizationLearner3.firstName);
     });
 
     it('should return the campaign participant activity with group L1 as JSONAPI', async function () {
@@ -429,7 +446,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       expect(response.statusCode).to.equal(200);
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
-      expect(participation['first-name']).to.equal(participant3.firstName);
+      expect(participation['first-name']).to.equal(organizationLearner3.firstName);
     });
 
     it('should return 400 when status is not valid', async function () {

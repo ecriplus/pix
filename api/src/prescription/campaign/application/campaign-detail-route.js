@@ -185,7 +185,7 @@ const register = async function (server) {
             filter: Joi.object({
               divisions: Joi.array().items(Joi.string()),
               status: Joi.string()
-                .valid(...campaignParticipationStatuses)
+                .valid(...campaignParticipationStatuses, 'NOT_STARTED')
                 .empty(''),
               groups: [Joi.string(), Joi.array().items(Joi.string())],
               search: Joi.string().empty(''),
