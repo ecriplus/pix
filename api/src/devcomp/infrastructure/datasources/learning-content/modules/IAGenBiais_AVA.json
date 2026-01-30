@@ -107,7 +107,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
-                "content": "<p>Une équipe de chercheurs déploie un logiciel d’IA générative dans une université afin d’observer les usages des étudiants.</p><p>Dans un premier temps, ils décident de laisser les étudiants l’utiliser librement, afin d’observer ses réponses. En analysant les premières demandes, l’une d’elles attire immédiatement leur attention&nbsp;:</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
+                "content": "<p>Une équipe de chercheurs déploie un logiciel d’IA générative dans une université afin d’observer les usages des étudiants.</p><p>Dans un premier temps, ils décident de laisser les étudiants l’utiliser librement, afin d’analyser ses réponses. En analysant les premières demandes, l’une d’elles attire immédiatement leur attention&nbsp;:</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
               }
             },
             {
@@ -492,7 +492,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Je suis maire et je dois désencombrer mon périphérique : que me suggères-tu ?"
+                      "content": "Je suis maire et je dois désencombrer mon périphérique : que me suggères-tu ?"
                     },
                     [
                       {
@@ -501,7 +501,7 @@
                       },
                       {
                         "direction": "inbound",
-                        "content": "<p><strong>Solutions rapides :</strong></p>  <ul>   <li>Renforcer les contrôles (radars, verbalisations).</li>   <li>Développer les transports alternatifs (bus, covoiturage, pistes cyclables).</li>   <li>Optimiser les chantiers (horaires décalés, coordination).</li>   <li>Communiquer (inciter au télétravail, éviter les heures de pointe).</li> </ul>"
+                        "content": "<p><strong>Solutions rapides :</strong></p>  <ul>   <li>Renforcer les contrôles (radars, verbalisations).</li>   <li>Développer les transports alternatifs (bus, covoiturage, pistes cyclables).</li>   <li>Optimiser les chantiers (horaires décalés, coordination).</li>   <li>Communiquer (inciter au télétravail, éviter les heures de pointe).</li> </ul>"
                       }
                     ]
                   ]
@@ -513,20 +513,20 @@
               "element": {
                 "id": "eb39984b-7e4b-456f-98ad-5d9e164851d5",
                 "type": "qcu-discovery",
-                "instruction": "D’après vous, qu’est-ce qui explique le mieux la différence entre les réponses de Grok et de Mistral ?",
+                "instruction": "D’après vous, qu’est-ce qui explique le mieux la différence entre les réponses de Grok et de Mistral ?",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Les deux modèles n'ont pas les mêmes priorités de réponse car ils sont cadrés par des règles internes différentes.&nbsp;</p>",
+                    "content": "<p>Les deux modèles n’ont pas les mêmes priorités de réponse car ils sont cadrés par des règles internes différentes.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Bien vu !&nbsp;</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>La demande de Fabrice manquait de contexte, les logiciels d'IA générative ont donc interprété.&nbsp;</p>",
+                    "content": "<p>La demande de Fabrice manquait de contexte, les logiciels d’IA générative ont donc interprété.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
@@ -544,7 +544,7 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "1"
               }
             }
           ]
