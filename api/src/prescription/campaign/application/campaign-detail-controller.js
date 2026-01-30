@@ -138,7 +138,7 @@ const findParticipantsActivity = async function (
   }
 
   const { userId } = request.auth.credentials;
-  const paginatedParticipations = await usecases.findPaginatedCampaignParticipantsActivities({
+  const paginatedParticipations = await usecases.findPaginatedCampaignParticipantActivities({
     userId,
     campaignId,
     page,

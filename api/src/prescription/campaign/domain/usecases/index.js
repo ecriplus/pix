@@ -99,7 +99,7 @@ import { findAssessmentParticipationResultList } from './find-assessment-partici
 import { findCampaignProfilesCollectionParticipationSummaries } from './find-campaign-profiles-collection-participation-summaries.js';
 import { findCampaignSkillIdsForCampaignParticipations } from './find-campaign-skill-ids-for-campaign-participations.js';
 import { findPaginatedCampaignManagements } from './find-paginated-campaign-managements.js';
-import { findPaginatedCampaignParticipantsActivities } from './find-paginated-campaign-participants-activities.js';
+import { findPaginatedCampaignParticipantActivities } from './find-paginated-campaign-participant-activities.js';
 import { findPaginatedFilteredOrganizationCampaigns } from './find-paginated-filtered-organization-campaigns.js';
 import { getCampaign } from './get-campaign.js';
 import { getCampaignByCode } from './get-campaign-by-code.js';
@@ -136,7 +136,7 @@ const usecasesWithoutInjectedDependencies = {
   findCampaignProfilesCollectionParticipationSummaries,
   findCampaignSkillIdsForCampaignParticipations,
   findPaginatedCampaignManagements,
-  findPaginatedCampaignParticipantsActivities,
+  findPaginatedCampaignParticipantActivities,
   findPaginatedFilteredOrganizationCampaigns,
   getCampaignByCode,
   getCampaignManagement,
