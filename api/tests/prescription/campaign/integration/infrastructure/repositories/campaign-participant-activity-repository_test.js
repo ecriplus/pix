@@ -336,9 +336,11 @@ describe('Integration | Repository | Campaign Participant activity', function ()
     });
 
     context('when there is a filter on the firstname and lastname', function () {
-      it('returns all participants if the filter is empty', async function () {
+      let campaign;
+
+      beforeEach(async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign({});
+        campaign = databaseBuilder.factory.buildCampaign();
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
@@ -351,7 +353,9 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         );
 
         await databaseBuilder.commit();
+      });
 
+      it('returns all participants if the filter is empty', async function () {
         // when
         const { pagination } = await campaignParticipantActivityRepository.findPaginatedByCampaignId({
           campaignId: campaign.id,
@@ -363,21 +367,6 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       it('return Choupette participant when we search part its firstname', async function () {
-        // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
-          { campaignId: campaign.id },
-        );
-
-        await databaseBuilder.commit();
-
         // when
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
@@ -391,21 +380,6 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       it('return Choupette participant when we search contains a space before', async function () {
-        // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
-          { campaignId: campaign.id },
-        );
-
-        await databaseBuilder.commit();
-
         // when
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
@@ -419,21 +393,6 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       it('return Choupette participant when we search contains a space after', async function () {
-        // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
-          { campaignId: campaign.id },
-        );
-
-        await databaseBuilder.commit();
-
         // when
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
@@ -447,21 +406,6 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       it('return Choupette participant when we search part its lastname', async function () {
-        // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
-          { campaignId: campaign.id },
-        );
-
-        await databaseBuilder.commit();
-
         // when
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
@@ -475,21 +419,6 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       it('return Choupette participant when we search part its fullname', async function () {
-        // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
-          { campaignId: campaign.id },
-        );
-
-        await databaseBuilder.commit();
-
         // when
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
@@ -504,13 +433,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
       it('return Choupette participant only for the involved campaign when we search part of its full name', async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-        const otherCampaign = databaseBuilder.factory.buildCampaign({});
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Right' },
-          { campaignId: campaign.id },
-        );
+        const otherCampaign = databaseBuilder.factory.buildCampaign();
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, firstName: 'Choupette', lastName: 'Wrong' },
@@ -528,20 +451,13 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         // then
         expect(pagination.rowCount).to.equal(1);
-        expect(campaignParticipantsActivities[0].lastName).to.equal('Right');
+        expect(campaignParticipantsActivities[0].lastName).to.equal('Eurasier');
       });
 
       it('return all participants when we search similar part of firstname', async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign({});
-
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, firstName: 'Saphira', lastName: 'Eurasier' },
-          { campaignId: campaign.id },
-        );
-
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
-          { organizationId: campaign.organizationId, firstName: 'Salto', lastName: 'Irish terrier' },
           { campaignId: campaign.id },
         );
 
@@ -564,7 +480,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
     context('when there is a filter on group', function () {
       it('returns participants which have the correct group', async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign();
+        const campaign = databaseBuilder.factory.buildCampaign();
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, group: 'L1' },
