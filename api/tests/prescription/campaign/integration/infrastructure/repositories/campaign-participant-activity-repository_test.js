@@ -2,41 +2,75 @@ import { campaignParticipantActivityRepository } from '../../../../../../src/pre
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
-const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Participant activity', function () {
   describe('#findPaginatedByCampaignId', function () {
-    let campaign;
-
     context('When there is participations for another campaign', function () {
-      beforeEach(async function () {
-        campaign = databaseBuilder.factory.buildCampaign();
+      it('Returns a participation activity for each participant of the given campaign', async function () {
+        const campaign = databaseBuilder.factory.buildCampaign();
         const otherCampaign = databaseBuilder.factory.buildCampaign();
 
+        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+        const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+
         databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
           participantExternalId: 'The good',
           campaignId: campaign.id,
         });
-
         databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
           participantExternalId: 'The bad',
           campaignId: otherCampaign.id,
         });
-
         databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId: organizationLearnerId2,
           participantExternalId: 'The ugly',
           campaignId: campaign.id,
         });
 
         await databaseBuilder.commit();
-      });
 
-      it('Returns a participation activity for each participant of the given campaign', async function () {
         const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
         const participantExternalIds = campaignParticipantsActivities.map((activity) => activity.participantExternalId);
 
         expect(participantExternalIds).to.exactlyContain(['The good', 'The ugly']);
+      });
+    });
+
+    context('when there is no participation', function () {
+      it('should return only participant of the given organization campaign', async function () {
+        // given
+        const campaign = databaseBuilder.factory.buildCampaign();
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+          firstName: 'Bernard',
+          lastName: 'Peur',
+        });
+        databaseBuilder.factory.buildOrganizationLearner();
+        databaseBuilder.factory.buildOrganizationLearner();
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipantsActivities } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+
+            filters: { status: 'NOT_STARTED' },
+          });
+
+        // then
+        expect(campaignParticipantsActivities).lengthOf(1);
+        expect(campaignParticipantsActivities[0].firstName).equal('Bernard');
+        expect(campaignParticipantsActivities[0].lastName).equal('Peur');
       });
     });
 
@@ -72,7 +106,9 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         //when
         const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
 
         //then
         expect(campaignParticipantsActivities).to.have.lengthOf(1);
@@ -80,42 +116,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         expect(campaignParticipantsActivities[0].participationCount).to.equal(2);
       });
 
-      it('Returns the most recent participation with the shared participation Id', async function () {
-        // given
-        const campaign = databaseBuilder.factory.buildCampaign();
-        const user = databaseBuilder.factory.buildUser();
-        const learner = databaseBuilder.factory.buildOrganizationLearner({ userId: user.id });
-
-        databaseBuilder.factory.buildCampaignParticipation({
-          participantExternalId: 'The bad',
-          campaignId: campaign.id,
-          createdAt: '2023-12-27T15:07:57.376Z',
-          status: SHARED,
-          userId: user.id,
-          organizationLearnerId: learner.id,
-          isImproved: true,
-        });
-
-        const lastParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          participantExternalId: 'The good',
-          campaignId: campaign.id,
-          createdAt: '2024-02-17T15:07:57.376Z',
-          status: STARTED,
-          userId: user.id,
-          organizationLearnerId: learner.id,
-          isImproved: false,
-        });
-
-        await databaseBuilder.commit();
-
-        //when
-        const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
-        //then
-        expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(lastParticipation.id);
-      });
-
-      it('Returns the most recent participation of the RIGHT campaign with the shared participation Id', async function () {
+      it('Returns the most recent participation of the RIGHT campaign', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         const campaign = databaseBuilder.factory.buildCampaign({ organizationId });
@@ -147,7 +148,9 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         //when
         const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
 
         //then
         expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(firstParticipation.id);
@@ -157,7 +160,10 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         // given
         const campaign = databaseBuilder.factory.buildCampaign();
         const user = databaseBuilder.factory.buildUser();
-        const learner = databaseBuilder.factory.buildOrganizationLearner({ userId: user.id });
+        const learner = databaseBuilder.factory.buildOrganizationLearner({
+          userId: user.id,
+          organizationId: campaign.organizationId,
+        });
 
         const lastParticipation = databaseBuilder.factory.buildCampaignParticipation({
           participantExternalId: 'The good',
@@ -172,7 +178,9 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         //when
         const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
         //then
         expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(lastParticipation.id);
       });
@@ -182,48 +190,114 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       context('when the participation is shared', function () {
         it('should return status shared', async function () {
           // given
-          campaign = databaseBuilder.factory.buildCampaign();
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, status: SHARED });
+          const campaign = databaseBuilder.factory.buildCampaign();
+          const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: campaign.organizationId,
+          }).id;
+          databaseBuilder.factory.buildCampaignParticipation({
+            organizationLearnerId,
+            campaignId: campaign.id,
+            status: SHARED,
+          });
           await databaseBuilder.commit();
 
           // when
           const { campaignParticipantsActivities } =
-            await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: campaign.id,
+
+              filters: { status: [SHARED] },
+            });
 
           // then
+          expect(campaignParticipantsActivities).lengthOf(1);
           expect(campaignParticipantsActivities[0].status).to.equal(SHARED);
-        });
-      });
-
-      context('when the participation is not shared', function () {
-        it('should return status started', async function () {
-          // given
-          campaign = databaseBuilder.factory.buildCampaign();
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, status: TO_SHARE });
-          await databaseBuilder.commit();
-
-          // when
-          const { campaignParticipantsActivities } =
-            await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
-
-          // then
-          expect(campaignParticipantsActivities[0].status).to.equal(STARTED);
         });
       });
 
       context('when the participation is started', function () {
         it('should return status started', async function () {
           // given
-          campaign = databaseBuilder.factory.buildCampaign();
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, status: STARTED });
+          const campaign = databaseBuilder.factory.buildCampaign();
+          const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: campaign.organizationId,
+          }).id;
+          databaseBuilder.factory.buildCampaignParticipation({
+            organizationLearnerId,
+            campaignId: campaign.id,
+            status: STARTED,
+          });
           await databaseBuilder.commit();
 
           // when
           const { campaignParticipantsActivities } =
-            await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: campaign.id,
+
+              filters: { status: [STARTED] },
+            });
 
           // then
           expect(campaignParticipantsActivities[0].status).to.equal(STARTED);
+        });
+      });
+
+      context('When there is no participant', function () {
+        it('show learners without participation', async function () {
+          // given
+          const campaign = databaseBuilder.factory.buildCampaign();
+
+          databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+            { organizationId: campaign.organizationId, firstName: 'good' },
+            { participantExternalId: 'The good', campaignId: campaign.id, status: STARTED },
+          );
+          databaseBuilder.factory.buildOrganizationLearner({
+            firstName: 'nonParticipant',
+            organizationId: campaign.organizationId,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const { campaignParticipantsActivities } =
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: campaign.id,
+
+              filters: { status: 'NOT_STARTED' },
+            });
+
+          // then
+          expect(campaignParticipantsActivities).lengthOf(1);
+          expect(campaignParticipantsActivities[0].firstName).to.equal('nonParticipant');
+        });
+      });
+
+      context('When there is one participant with a deleted participation', function () {
+        it('show learners without participation', async function () {
+          // given
+          const campaign = databaseBuilder.factory.buildCampaign();
+
+          databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+            { organizationId: campaign.organizationId, firstName: 'good' },
+            { participantExternalId: 'The good', campaignId: campaign.id, status: STARTED, deletedAt: new Date() },
+          );
+          databaseBuilder.factory.buildOrganizationLearner({
+            firstName: 'nonParticipant',
+            organizationId: campaign.organizationId,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const { campaignParticipantsActivities } =
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: campaign.id,
+
+              filters: { status: 'NOT_STARTED' },
+            });
+
+          // then
+          expect(campaignParticipantsActivities).lengthOf(2);
         });
       });
     });
@@ -232,7 +306,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       it('should return participants activities ordered by last name then first name asc from organization-learner', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        campaign = databaseBuilder.factory.buildCampaign({ organizationId });
+        const campaign = databaseBuilder.factory.buildCampaign({ organizationId });
         const campaignParticipation = { campaignId: campaign.id };
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { firstName: 'Jaja', lastName: 'Le raplapla', organizationId },
@@ -259,7 +333,9 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         // when
         const { campaignParticipantsActivities } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
         const names = campaignParticipantsActivities.map((result) => result.firstName);
 
         // then
@@ -270,7 +346,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
     context('when there is a filter on division', function () {
       it('returns participants which have the correct division', async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign();
+        const campaign = databaseBuilder.factory.buildCampaign();
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, division: 'Good Guys Team' },
           { participantExternalId: 'The good', campaignId: campaign.id },
@@ -292,6 +368,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         const { campaignParticipantsActivities, pagination } =
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
             campaignId: campaign.id,
+
             filters: { divisions: ['Good Guys Team', 'Ugly Guys Team'] },
           });
 
@@ -306,7 +383,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
     context('when there is a filter on status', function () {
       it('returns participants which have the correct status', async function () {
         // given
-        campaign = databaseBuilder.factory.buildCampaign({});
+        const campaign = databaseBuilder.factory.buildCampaign();
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId },
@@ -315,7 +392,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId },
-          { participantExternalId: 'The bad', campaignId: campaign.id, status: TO_SHARE },
+          { participantExternalId: 'The bad', campaignId: campaign.id, status: SHARED },
         );
 
         await databaseBuilder.commit();
@@ -330,8 +407,8 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         const participantExternalIds = campaignParticipantsActivities.map((result) => result.participantExternalId);
 
         // then
-        expect(participantExternalIds).to.exactlyContain(['The good']);
         expect(pagination.rowCount).to.equal(1);
+        expect(participantExternalIds).to.exactlyContain(['The good']);
       });
     });
 
@@ -515,13 +592,27 @@ describe('Integration | Repository | Campaign Participant activity', function ()
     });
 
     context('pagination', function () {
+      let campaign;
+
       beforeEach(async function () {
         campaign = databaseBuilder.factory.buildCampaign();
+        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+        const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
 
-        const participation = { campaignId: campaign.id };
-        databaseBuilder.factory.buildCampaignParticipation(participation);
-        databaseBuilder.factory.buildCampaignParticipation(participation);
-        databaseBuilder.factory.buildCampaignParticipation({ ...participation, deletedAt: new Date() });
+        databaseBuilder.factory.buildCampaignParticipation({ organizationLearnerId, campaignId: campaign.id });
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId: organizationLearnerId2,
+          campaignId: campaign.id,
+        });
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          campaignId: campaign.id,
+          deletedAt: new Date(),
+        });
 
         await databaseBuilder.commit();
       });
@@ -532,7 +623,10 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         // when
         const { campaignParticipantsActivities, pagination } =
-          await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id, page });
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+            page,
+          });
 
         // then
         expect(campaignParticipantsActivities).to.have.lengthOf(1);
@@ -552,16 +646,16 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
 
       context('when there are zero rows', function () {
-        beforeEach(async function () {
-          campaign = databaseBuilder.factory.buildCampaign();
+        it('should return the first page with 0 elements', async function () {
+          const anotherCampaign = databaseBuilder.factory.buildCampaign();
 
           await databaseBuilder.commit();
-        });
 
-        it('should return the first page with 0 elements', async function () {
           // when
           const { campaignParticipantsActivities, pagination } =
-            await campaignParticipantActivityRepository.findPaginatedByCampaignId({ campaignId: campaign.id });
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: anotherCampaign.id,
+            });
 
           // then
           expect(campaignParticipantsActivities).to.have.lengthOf(0);
