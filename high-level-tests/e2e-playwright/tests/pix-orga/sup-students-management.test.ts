@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 
 let uid: string;
@@ -33,7 +33,7 @@ test('Managing sup students', async ({ page }) => {
     await page.getByText('Je confirme avoir bien').click();
     await page
       .locator('#students-file-upload-replace')
-      .setInputFiles(path.join(import.meta.dirname, '..', '..', 'fixtures', 'sup-ok.csv'));
+      .setInputFiles(path.join(import.meta.dirname, '..', '..', 'data', 'sup-ok.csv'));
 
     const hasLoader = await page.locator('.app-loader').isVisible();
     if (hasLoader) {

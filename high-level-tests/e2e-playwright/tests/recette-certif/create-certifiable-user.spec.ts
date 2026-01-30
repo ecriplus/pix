@@ -1,5 +1,5 @@
+import { test } from '../../fixtures/certification/index.ts';
 import { knex } from '../../helpers/db.js';
-import { test } from '../../helpers/fixtures.ts';
 import { ChallengePage, IntermediateCheckpointPage, LoginPage } from '../../pages/pix-app/index.ts';
 import data from './data.json' with { type: 'json' };
 

@@ -3,9 +3,9 @@ import { readFile, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
 import { buildFreshPixOrgaUser, createGARUser } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 
 let UAJ: string;
@@ -20,7 +20,7 @@ test.beforeEach(async () => {
     isManagingStudents: true,
   });
 
-  let file = (await readFile(path.join(import.meta.dirname, '..', '..', 'fixtures', 'sco-ok.xml'))).toString();
+  let file = (await readFile(path.join(import.meta.dirname, '..', '..', 'data', 'sco-ok.xml'))).toString();
   let count = 1;
   file = file
     .replace(/<UAJ>.*<\/UAJ>/, `<UAJ>SCO_MANAGING-${UAJ}</UAJ>`)

@@ -36,5 +36,13 @@
     /* Type declaration files to be included in compilation. */
     "types": ["node"]
   },
-  "include": ["tests/**/*", "pages/**/*", "helpers/**/*", "playwright.config*.ts", "global-setup.ts", "package.json"]
+  "include": [
+    "tests/**/*",
+    "pages/**/*",
+    "helpers/**/*",
+    "fixtures/**/*",
+    "playwright.config*.ts",
+    "global-setup.ts",
+    "package.json"
+  ]
 }

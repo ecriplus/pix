@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixOrgaUserWithGenericImport } from '../../helpers/db.ts';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
 
@@ -48,7 +48,7 @@ test('Managing generic import learners', async ({ page }) => {
     await page.getByRole('link', { name: 'Importer', exact: true }).click();
     await page
       .locator('#students-file-upload')
-      .setInputFiles(path.join(import.meta.dirname, '..', '..', 'fixtures', 'generic-ok.csv'));
+      .setInputFiles(path.join(import.meta.dirname, '..', '..', 'data', 'generic-ok.csv'));
 
     await orgaPage.waitForTheImportToComplete(page);
   });

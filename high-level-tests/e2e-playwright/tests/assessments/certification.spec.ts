@@ -1,5 +1,5 @@
+import { expect, test } from '../../fixtures/index.ts';
 import { knex } from '../../helpers/db.js';
-import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
   CertificationStartPage,

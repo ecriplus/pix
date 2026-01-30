@@ -1,5 +1,5 @@
+import { expect, test } from '../../fixtures/index.ts';
 import { buildFreshPixAppUser, createOrganizationInDB, createTargetProfileInDB, knex } from '../../helpers/db.js';
-import { expect, test } from '../../helpers/fixtures.js';
 import { ReconciliationLoginPage } from '../../pages/pix-app/ReconciliationLoginPage.js';
 import { ReconciliationPage } from '../../pages/pix-app/ReconciliationPage.js';
 
