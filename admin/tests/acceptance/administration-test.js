@@ -108,9 +108,14 @@ module('Acceptance | administration | common ', function (hooks) {
 
       // then
       assert
-        .dom(screen.getByRole('heading', { name: 'Configuration des mailles pour le score global', level: 2 }))
+        .dom(
+          screen.getByRole('heading', {
+            name: 'Configuration des dates de réouverture des espaces Pix Certif SCO',
+            level: 2,
+          }),
+        )
         .exists();
-      assert.dom(screen.getByRole('heading', { name: 'Configuration des seuils par compétence', level: 2 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Liste blanche centres SCO', level: 2 })).exists();
     });
   });
   module('when access tab is clicked', function () {
