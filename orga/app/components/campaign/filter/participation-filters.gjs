@@ -123,7 +123,7 @@ export default class ParticipationFilters extends Component {
   }
 
   get statusOptions() {
-    const statuses = ['STARTED', 'SHARED'];
+    const statuses = ['STARTED', 'SHARED', 'NOT_STARTED'];
     return statuses.map((status) => {
       const label = this.intl.t(`components.participation-status.${status}`);
       return { value: status, label };

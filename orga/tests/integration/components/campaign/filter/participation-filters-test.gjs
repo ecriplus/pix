@@ -877,6 +877,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           t('pages.campaign-results.filters.type.status.empty'),
           t('components.participation-status.STARTED'),
           t('components.participation-status.SHARED'),
+          t('components.participation-status.NOT_STARTED'),
         ],
       );
     });

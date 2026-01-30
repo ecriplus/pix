@@ -878,7 +878,7 @@
           },
           "stages": "Success rate",
           "status": {
-            "empty": "All statuses",
+            "empty": "All participations",
             "title": "Status"
           },
           "unacquired-badges": "Unacquired badges"

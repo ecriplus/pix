@@ -12,7 +12,7 @@ export default class ParticipationStatus extends Component {
 
   get label() {
     const { status } = this.args;
-    return this.intl.t(`components.participation-status.${status}`);
+    return this.intl.t(`components.participation-status.${status ?? 'NOT_STARTED'}`);
   }
 
   <template>

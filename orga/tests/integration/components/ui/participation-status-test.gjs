@@ -10,6 +10,7 @@ module('Integration | Component | Ui | ParticipationStatus', function (hooks) {
 
   module('label', function () {
     test('it should display formatted label', async function (assert) {
+      // given
       const status = 'SHARED';
 
       // when
@@ -17,6 +18,16 @@ module('Integration | Component | Ui | ParticipationStatus', function (hooks) {
 
       // then
       assert.ok(screen.getByText(t('components.participation-status.SHARED')));
+    });
+    test('it should display not started label if status is null', async function (assert) {
+      // given
+      const status = null;
+
+      // when
+      const screen = await render(<template><ParticipationStatus @status={{status}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('components.participation-status.NOT_STARTED')));
     });
   });
 });
