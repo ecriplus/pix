@@ -2,13 +2,13 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { DeleteAndAnonymiseOrgnizationLearnerScript } from '../../../../scripts/prod/delete-and-anonymise-organization-learners.js';
+import { DeleteAndAnonymiseOrganizationLearnerScript } from '../../../../scripts/prod/delete-and-anonymise-organization-learners.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
-describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
+describe('DeleteAndAnonymiseOrganizationLearnerScript', function () {
   describe('Options', function () {
     it('has the correct options', function () {
-      const script = new DeleteAndAnonymiseOrgnizationLearnerScript();
+      const script = new DeleteAndAnonymiseOrganizationLearnerScript();
       const { options } = script.metaInfo;
 
       expect(options.organizationLearnerIds).to.deep.include({
@@ -20,7 +20,7 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
 
     it('parses list of organizationLearnerIds', async function () {
       const ids = '1,2,3';
-      const script = new DeleteAndAnonymiseOrgnizationLearnerScript();
+      const script = new DeleteAndAnonymiseOrganizationLearnerScript();
       const { options } = script.metaInfo;
       const parsedData = await options.organizationLearnerIds.coerce(ids);
 
@@ -34,7 +34,7 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
     const ENGINEERING_USER_ID = 99999;
 
     beforeEach(async function () {
-      script = new DeleteAndAnonymiseOrgnizationLearnerScript();
+      script = new DeleteAndAnonymiseOrganizationLearnerScript();
       logger = { info: sinon.spy(), error: sinon.spy() };
       sinon.stub(process, 'env').value({ ENGINEERING_USER_ID });
     });
@@ -92,8 +92,8 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         // then
         const organizationLearnerResult = await knex('organization-learners').whereNull('userId').first();
         expect(organizationLearnerResult.id).to.equal(learner.id);
-        expect(organizationLearnerResult.firstName).to.equal('');
-        expect(organizationLearnerResult.lastName).to.equal('');
+        expect(organizationLearnerResult.firstName).to.equal('(anonymized)');
+        expect(organizationLearnerResult.lastName).to.equal('(anonymized)');
       });
 
       it('anonymise and delete participations', async function () {
