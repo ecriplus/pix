@@ -139,9 +139,6 @@
                       "content": "<h5>🤔Un exemple dans le numérique ?</h5><p>Deux études peuvent donner des résultats différents si elles n’incluent pas les mêmes éléments (par exemple&nbsp;: certains réseaux, certaines infrastructures, ou des équipements spécifiques comme des câbles sous-marins).</p><p><strong>Selon le périmètre choisi, les résultats peuvent varier sans se contredire.</strong></p>"
                     }
                   ]
-                },
-                {
-                  "elements": []
                 }
               ]
             }
@@ -682,7 +679,9 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "méthode d’évaluation",
-                    "tolerances": [],
+                    "tolerances": [
+                      1
+                    ],
                     "options": [
                       {
                         "id": "1",
