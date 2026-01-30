@@ -322,6 +322,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
             feedback: { state: 'Correct !', diagnosis: `<p>${i + 1}</p>` },
           })),
           solution: '1',
+          hasShortProposals: false,
         };
 
         await qcuElementSchema.validateAsync(sample, {
@@ -771,68 +772,34 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     describe('when element requires short answers', function () {
       it('should throw an error when an answer is long', async function () {
         // given
-        const moduleWithInvalidShortAnswer = {
-          id: 'b9a8e4f8-07cb-4448-9007-bb296f91e355',
-          shortId: '378523fb',
-          slug: 'reponses-courtes',
-          title: 'Réponses courtes',
-          isBeta: false,
-          visibility: 'public',
-          details: {
-            image: 'https://assets.pix.org/modules/placeholder-details.svg',
-            description: 'Module de test pour les réponses courtes',
-            duration: 0,
-            level: 'novice',
-            objectives: ['Tester les réponses courtes'],
-            tabletSupport: 'comfortable',
-          },
-          sections: [
+        const moduleWithTooLongShortAnswer = _createModuleWithElement({
+          id: 'ff22d014-ac30-4159-8b49-02a227766151',
+          type: 'qcu',
+          instruction: 'Hello',
+          hasShortProposals: true,
+          proposals: [
             {
-              id: '711c3c8a-b761-43a4-a841-588bfcaed6e8',
-              type: 'question-yourself',
-              grains: [
-                {
-                  id: '94b2eaed-ccc8-41a1-a7d9-875376cd73e8',
-                  type: 'short-lesson',
-                  title: '',
-                  components: [
-                    {
-                      type: 'element',
-                      element: {
-                        id: 'ff22d014-ac30-4159-8b49-02a227766151',
-                        type: 'qcu',
-                        instruction: 'Hello',
-                        hasShortProposals: true,
-                        proposals: [
-                          {
-                            id: '1',
-                            content: 'Une réponse bien',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Oui',
-                            },
-                          },
-                          {
-                            id: '2',
-                            content: 'Une réponse bien trop longue',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Non',
-                            },
-                          },
-                        ],
-                        solution: '1',
-                      },
-                    },
-                  ],
-                },
-              ],
+              id: '1',
+              content: 'Une réponse bien',
+              feedback: {
+                state: '',
+                diagnosis: 'Oui',
+              },
+            },
+            {
+              id: '2',
+              content: 'Une réponse bien trop longue',
+              feedback: {
+                state: '',
+                diagnosis: 'Non',
+              },
             },
           ],
-        };
+          solution: '1',
+        });
 
         try {
-          await moduleSchema.validateAsync(moduleWithInvalidShortAnswer, { abortEarly: false });
+          await moduleSchema.validateAsync(moduleWithTooLongShortAnswer, { abortEarly: false });
           throw new Error('Joi validation should have thrown');
         } catch (joiError) {
           expect(joiError.message).to.deep.equal(
@@ -843,68 +810,34 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
 
       it('should throw an error when an answer short but contains HTML', async function () {
         // given
-        const moduleWithInvalidShortAnswer = {
-          id: 'b9a8e4f8-07cb-4448-9007-bb296f91e355',
-          shortId: '378523fb',
-          slug: 'reponses-courtes',
-          title: 'Réponses courtes',
-          isBeta: false,
-          visibility: 'public',
-          details: {
-            image: 'https://assets.pix.org/modules/placeholder-details.svg',
-            description: 'Module de test pour les réponses courtes',
-            duration: 0,
-            level: 'novice',
-            objectives: ['Tester les réponses courtes'],
-            tabletSupport: 'comfortable',
-          },
-          sections: [
+        const moduleWithShortAnswerContainingHTML = _createModuleWithElement({
+          id: 'ff22d014-ac30-4159-8b49-02a227766151',
+          type: 'qcu',
+          instruction: 'Hello',
+          hasShortProposals: true,
+          proposals: [
             {
-              id: '711c3c8a-b761-43a4-a841-588bfcaed6e8',
-              type: 'question-yourself',
-              grains: [
-                {
-                  id: '94b2eaed-ccc8-41a1-a7d9-875376cd73e8',
-                  type: 'short-lesson',
-                  title: '',
-                  components: [
-                    {
-                      type: 'element',
-                      element: {
-                        id: 'ff22d014-ac30-4159-8b49-02a227766151',
-                        type: 'qcu',
-                        instruction: 'Hello',
-                        hasShortProposals: true,
-                        proposals: [
-                          {
-                            id: '1',
-                            content: 'Une réponse bien',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Oui',
-                            },
-                          },
-                          {
-                            id: '2',
-                            content: '<blink>!</blink>',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Non',
-                            },
-                          },
-                        ],
-                        solution: '1',
-                      },
-                    },
-                  ],
-                },
-              ],
+              id: '1',
+              content: 'Une réponse bien',
+              feedback: {
+                state: '',
+                diagnosis: 'Oui',
+              },
+            },
+            {
+              id: '2',
+              content: '<blink>!</blink>',
+              feedback: {
+                state: '',
+                diagnosis: 'Non',
+              },
             },
           ],
-        };
+          solution: '1',
+        });
 
         try {
-          await moduleSchema.validateAsync(moduleWithInvalidShortAnswer, { abortEarly: false });
+          await moduleSchema.validateAsync(moduleWithShortAnswerContainingHTML, { abortEarly: false });
           throw new Error('Joi validation should have thrown');
         } catch (joiError) {
           expect(joiError.message).to.deep.equal(
@@ -917,68 +850,34 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     describe('when element allows long answers', function () {
       it('should not throw an error when an answer is long', async function () {
         // given
-        const moduleWithInvalidShortAnswer = {
-          id: 'b9a8e4f8-07cb-4448-9007-bb296f91e355',
-          shortId: '378523fb',
-          slug: 'reponses-courtes',
-          title: 'Réponses courtes',
-          isBeta: false,
-          visibility: 'public',
-          details: {
-            image: 'https://assets.pix.org/modules/placeholder-details.svg',
-            description: 'Module de test pour les réponses courtes',
-            duration: 0,
-            level: 'novice',
-            objectives: ['Tester les réponses courtes'],
-            tabletSupport: 'comfortable',
-          },
-          sections: [
+        const moduleWithValidLongAnswer = _createModuleWithElement({
+          id: 'ff22d014-ac30-4159-8b49-02a227766151',
+          type: 'qcu',
+          instruction: 'Hello',
+          hasShortProposals: false,
+          proposals: [
             {
-              id: '711c3c8a-b761-43a4-a841-588bfcaed6e8',
-              type: 'question-yourself',
-              grains: [
-                {
-                  id: '94b2eaed-ccc8-41a1-a7d9-875376cd73e8',
-                  type: 'short-lesson',
-                  title: '',
-                  components: [
-                    {
-                      type: 'element',
-                      element: {
-                        id: 'ff22d014-ac30-4159-8b49-02a227766151',
-                        type: 'qcu',
-                        instruction: 'Hello',
-                        hasShortProposals: false,
-                        proposals: [
-                          {
-                            id: '1',
-                            content: 'Une réponse bien',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Oui',
-                            },
-                          },
-                          {
-                            id: '2',
-                            content: 'Une réponse bien trop longue',
-                            feedback: {
-                              state: '',
-                              diagnosis: 'Non',
-                            },
-                          },
-                        ],
-                        solution: '1',
-                      },
-                    },
-                  ],
-                },
-              ],
+              id: '1',
+              content: 'Une réponse bien',
+              feedback: {
+                state: '',
+                diagnosis: 'Oui',
+              },
+            },
+            {
+              id: '2',
+              content: 'Une réponse bien trop longue',
+              feedback: {
+                state: '',
+                diagnosis: 'Non',
+              },
             },
           ],
-        };
+          solution: '1',
+        });
 
         try {
-          await moduleSchema.validateAsync(moduleWithInvalidShortAnswer, { abortEarly: false });
+          await moduleSchema.validateAsync(moduleWithValidLongAnswer, { abortEarly: false });
         } catch (joiError) {
           const formattedError = joiErrorParser.format(joiError);
           expect(joiError).to.equal(undefined, formattedError);
@@ -987,3 +886,36 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     });
   });
 });
+
+function _createModuleWithElement(element) {
+  return {
+    id: 'b9a8e4f8-07cb-4448-9007-bb296f91e355',
+    shortId: '378523fb',
+    slug: 'test-module',
+    title: 'Test module',
+    isBeta: false,
+    visibility: 'public',
+    details: {
+      image: 'https://assets.pix.org/modules/placeholder-details.svg',
+      description: 'Module de test',
+      duration: 0,
+      level: 'novice',
+      objectives: ['Tester les modules'],
+      tabletSupport: 'comfortable',
+    },
+    sections: [
+      {
+        id: '711c3c8a-b761-43a4-a841-588bfcaed6e8',
+        type: 'question-yourself',
+        grains: [
+          {
+            id: '94b2eaed-ccc8-41a1-a7d9-875376cd73e8',
+            type: 'short-lesson',
+            title: '',
+            components: [{ type: 'element', element }],
+          },
+        ],
+      },
+    ],
+  };
+}
