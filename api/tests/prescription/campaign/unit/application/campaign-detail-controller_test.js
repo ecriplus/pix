@@ -331,7 +331,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
   describe('#findParticipantsActivity', function () {
     let serializedParticipantsActivities;
     let participantsActivities;
-    const filters = { status: ['SHARED'], groups: ['L1'], search: 'Choupette' };
+    const filters = { status: 'SHARED', groups: ['L1'], search: 'Choupette' };
 
     const campaignId = 1;
     const userId = 1;
@@ -362,7 +362,6 @@ describe('Unit | Application | Controller | Campaign detail', function () {
           auth: {
             credentials: { userId },
           },
-
           query: {
             page: { number: 3 },
             filter: {
