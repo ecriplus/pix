@@ -1,7 +1,8 @@
 import type { Page } from '@playwright/test';
 
 import { getNumberValueFromDescriptionList, getStringValueFromDescriptionList } from '../../helpers/utils.ts';
-import { CertificationInformationPage } from './CertificationInformationPage.ts';
+import { CertificationListPage } from './index.ts';
+
 export class CertificationSessionPage {
   constructor(public readonly page: Page) {}
 
@@ -46,16 +47,10 @@ export class CertificationSessionPage {
     };
   }
 
-  async goToCertificationInfoPage(candidateFirstName: string) {
+  async goToCertificationListPage() {
     await this.page.getByRole('link', { name: 'Liste des certifications de la session', exact: true }).click();
     await this.page.waitForURL(/\/sessions\/\d+\/certifications$/);
 
-    await this.page
-      .locator('table tbody tr', { has: this.page.getByText(candidateFirstName) })
-      .getByRole('link')
-      .click();
-    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
-
-    return new CertificationInformationPage(this.page);
+    return new CertificationListPage(this.page);
   }
 }

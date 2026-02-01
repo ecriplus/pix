@@ -2,7 +2,7 @@ import { expect, test } from '../../../../fixtures/certification/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
-  checkSessionInformationAndExpectSuccess,
+  checkSessionInformationAndExpectSuccess
 } from '../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
@@ -84,7 +84,18 @@ test.describe(testRef, () => {
 
         await pixAdminPage.getByRole('link', { name: 'Liste des certifications de la session', exact: true }).click();
         await test.step('Check certification information', async () => {
-          const certificationInformationPage = await sessionPage.goToCertificationInfoPage(
+          const certificationListPage = await sessionPage.goToCertificationListPage();
+          const certificationData = await certificationListPage.getCertificationData();
+          expect(certificationData.length).toBe(1);
+          expect(certificationData[0]).toMatchObject({
+            Prénom: data.certifiableUser.firstName,
+            Nom: data.certifiableUser.lastName,
+            Statut: 'Validée',
+            Score: '895',
+            'Signalements impactants non résolus': '',
+            'Certification passée': 'Double Certification Pix/CléA Numérique',
+          });
+          const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
             data.certifiableUser.firstName,
           );
           certificationNumber = certificationInformationPage.getCertificationNumber();

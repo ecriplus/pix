@@ -1,4 +1,5 @@
 export * from './CertificationInformationPage.ts';
+export * from './CertificationListPage.ts';
 export * from './CertificationSessionPage.ts';
 export * from './CertificationSessionsMainPage.ts';
 export * from './HomePage.ts';
