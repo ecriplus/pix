@@ -1,6 +1,10 @@
 import type { Page } from '@playwright/test';
 
+import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { SessionFinalizationPage } from './SessionFinalizationPage.ts';
+
+export type CertificationKeys = (typeof CERTIFICATIONS_DATA)[keyof typeof CERTIFICATIONS_DATA]['key'] | 'CORE';
+
 export class SessionManagementPage {
   constructor(public readonly page: Page) {}
 
@@ -62,6 +66,7 @@ export class SessionManagementPage {
     birthCountry,
     birthCity,
     postalCode,
+    enrollFor = 'CORE',
   }: {
     sex: string;
     firstName: string;
@@ -70,6 +75,7 @@ export class SessionManagementPage {
     birthCountry: string;
     birthCity: string;
     postalCode: string;
+    enrollFor?: CertificationKeys;
   }) {
     if (sex === 'F') {
       await this.page.getByRole('radio', { name: 'Femme' }).check();
@@ -86,7 +92,16 @@ export class SessionManagementPage {
     await this.page.getByLabel('Commune de naissance').fill(birthCity);
     await this.page.getByRole('button', { name: 'Tarification part Pix *' }).click();
     await this.page.getByRole('option', { name: 'Gratuite' }).click();
-    const radio = this.page.getByRole('radio', { name: 'Certification Pix' });
+    let choice;
+    switch (enrollFor) {
+      case CERTIFICATIONS_DATA.CLEA.key:
+        choice = 'Double Certification Pix-CléA';
+        break;
+      default:
+        choice = 'Certification Pix';
+        break;
+    }
+    const radio = this.page.getByRole('radio', { name: choice, exact: true });
 
     if (await radio.isVisible()) {
       await radio.check();

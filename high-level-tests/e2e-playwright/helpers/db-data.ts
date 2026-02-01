@@ -50,6 +50,12 @@ export const PIX_ORGA_MEMBER_DATA = {
   ],
 };
 
+export const CERTIFICATIONS_DATA = {
+  CLEA: {
+    key: 'CLEA',
+  },
+};
+
 export const PIX_ADMIN_SUPPORT_DATA = {
   id: 1_000_008,
   firstName: 'PixAdmin',
@@ -65,10 +71,13 @@ export const PIX_CERTIF_PRO_DATA = {
   lastName: 'CentrePRO',
   email: 'pix-certif_pro@example.net',
   rawPassword: 'pix123',
-  certificationCenter: {
-    type: 'PRO',
-    externalId: 'CERTIFPRO',
-  },
+  certificationCenters: [
+    {
+      type: 'PRO',
+      externalId: 'CERTIFPRO',
+      habilitations: [CERTIFICATIONS_DATA.CLEA.key],
+    },
+  ],
 };
 
 export const PIX_ADMIN_CERTIF_DATA = {

@@ -1,19 +1,12 @@
 import Knex from 'knex';
 
-// @ts-expect-error getUserHashedPassword from API project
-import { getUserHashedPassword } from '../../../api/db/database-builder/factory/build-authentication-method.js';
 // @ts-expect-error NON_OIDC_IDENTITY_PROVIDERS from API project
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../api/src/identity-access-management/domain/constants/identity-providers.js';
 // @ts-expect-error AuthenticationMethod from API project
 import { AuthenticationMethod } from '../../../api/src/identity-access-management/domain/models/AuthenticationMethod.js';
-import {
-  PIX_ADMIN_CERTIF_DATA,
-  PIX_ADMIN_SUPPORT_DATA,
-  PIX_APP_USER_DATA,
-  PIX_CERTIF_PRO_DATA,
-  PIX_ORGA_ADMIN_DATA,
-  PIX_ORGA_MEMBER_DATA,
-} from './db-data.js';
+import { buildCertificationData } from './certification/db.ts';
+import { PIX_ADMIN_SUPPORT_DATA, PIX_APP_USER_DATA, PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA } from './db-data.js';
+import { createCertificationCenterInDB, createCertificationCenterMembershipInDB, createUserInDB } from './db-utils.ts';
 
 export const knex = Knex({ client: 'postgresql', connection: process.env.DATABASE_URL });
 
@@ -22,7 +15,7 @@ export async function buildStaticData() {
   if (!hasDataAlreadyBeenBuilt) {
     await buildAuthenticatedUsers();
     await buildTargetProfiles();
-    await buildBaseDataForCertification();
+    await buildCertificationData();
   }
 }
 
@@ -33,24 +26,40 @@ export async function buildFreshPixAppUser(
   rawPassword: string,
   mustRevalidateCgu: boolean,
 ) {
-  return createUserInDB(firstName, lastName, email, rawPassword, true, false, mustRevalidateCgu, undefined);
-}
-
-export async function buildFreshPixAdminUser(
-  firstName: string,
-  lastName: string,
-  email: string,
-  rawPassword: string,
-  role: string,
-) {
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, true, false, false, undefined);
-  await knex('pix-admin-roles').insert({ userId, role });
+  return createUserInDB(
+    {
+      firstName,
+      lastName,
+      email,
+      rawPassword,
+      cgu: true,
+      pixCertifTermsOfServiceAccepted: false,
+      mustValidateTermsOfService: mustRevalidateCgu,
+      id: undefined,
+    },
+    knex,
+  );
 }
 
 export async function buildFreshPixCertifUser(firstName: string, lastName: string, email: string, rawPassword: string) {
-  const certificationCenterId = await createCertificationCenterInDB('PRO', 'Certification center for ' + email);
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, false, undefined);
-  await createCertificationCenterMembershipInDB(userId, certificationCenterId);
+  const certificationCenterId = await createCertificationCenterInDB(
+    { type: 'PRO', externalId: 'Certification center for ' + email },
+    knex,
+  );
+  const userId = await createUserInDB(
+    {
+      firstName,
+      lastName,
+      email,
+      rawPassword,
+      cgu: false,
+      pixCertifTermsOfServiceAccepted: false,
+      mustValidateTermsOfService: false,
+      id: undefined,
+    },
+    knex,
+  );
+  await createCertificationCenterMembershipInDB({ userId, certificationCenterId }, knex);
 }
 
 export async function buildFreshPixOrgaUser(
@@ -62,7 +71,19 @@ export async function buildFreshPixOrgaUser(
   organization: { type: string; externalId: string; isManagingStudents: boolean },
 ) {
   const organizationId = await createOrganizationInDB(organization);
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, false, undefined);
+  const userId = await createUserInDB(
+    {
+      firstName,
+      lastName,
+      email,
+      rawPassword,
+      cgu: false,
+      pixCertifTermsOfServiceAccepted: false,
+      mustValidateTermsOfService: false,
+      id: undefined,
+    },
+    knex,
+  );
   await createOrganizationMembershipInDB(userId, organizationId, role);
 
   const targetProfileIds = await knex('target-profiles').pluck('id');
@@ -84,7 +105,19 @@ export async function buildFreshPixOrgaUserWithGenericImport(
   organization: { type: string; externalId: string; isManagingStudents: boolean },
 ) {
   const organizationId = await createOrganizationInDB(organization);
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, true, false, false, undefined);
+  const userId = await createUserInDB(
+    {
+      firstName,
+      lastName,
+      email,
+      rawPassword,
+      cgu: true,
+      pixCertifTermsOfServiceAccepted: false,
+      mustValidateTermsOfService: false,
+      id: undefined,
+    },
+    knex,
+  );
   await createOrganizationMembershipInDB(userId, organizationId, role);
 
   const [targetProfileId] = await knex('target-profiles').pluck('id');
@@ -189,14 +222,17 @@ export async function setAssessmentIdSequence(id: number) {
 async function buildAuthenticatedUsers() {
   // PIX-APP
   await createUserInDB(
-    PIX_APP_USER_DATA.firstName,
-    PIX_APP_USER_DATA.lastName,
-    PIX_APP_USER_DATA.email,
-    PIX_APP_USER_DATA.rawPassword,
-    true,
-    true,
-    false,
-    PIX_APP_USER_DATA.id,
+    {
+      firstName: PIX_APP_USER_DATA.firstName,
+      lastName: PIX_APP_USER_DATA.lastName,
+      email: PIX_APP_USER_DATA.email,
+      rawPassword: PIX_APP_USER_DATA.rawPassword,
+      cgu: true,
+      pixCertifTermsOfServiceAccepted: true,
+      mustValidateTermsOfService: false,
+      id: PIX_APP_USER_DATA.id,
+    },
+    knex,
   );
 
   // PIX-ORGA
@@ -204,58 +240,42 @@ async function buildAuthenticatedUsers() {
   const createdOrganizations: Record<string, number> = {};
   for (const data of [PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA]) {
     const userId = await createUserInDB(
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.rawPassword,
-      true,
-      true,
-      false,
-      data.id,
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        rawPassword: data.rawPassword,
+        cgu: true,
+        pixCertifTermsOfServiceAccepted: true,
+        mustValidateTermsOfService: false,
+        id: data.id,
+      },
+      knex,
     );
     await createLegalDocumentVersionAcceptanceInDB(legalDocumentVersionId, userId);
 
     for (const organization of data.organizations) {
       if (!createdOrganizations[organization.externalId]) {
-        const organizationId = await createOrganizationInDB(organization);
-        createdOrganizations[organization.externalId] = organizationId;
+        createdOrganizations[organization.externalId] = await createOrganizationInDB(organization);
       }
       await createOrganizationMembershipInDB(userId, createdOrganizations[organization.externalId], data.role);
     }
   }
 
-  // PIX-CERTIF
-  const certificationCenterId = await createCertificationCenterInDB(
-    PIX_CERTIF_PRO_DATA.certificationCenter.type,
-    PIX_CERTIF_PRO_DATA.certificationCenter.externalId,
+  const admiUserId = await createUserInDB(
+    {
+      firstName: PIX_ADMIN_SUPPORT_DATA.firstName,
+      lastName: PIX_ADMIN_SUPPORT_DATA.lastName,
+      email: PIX_ADMIN_SUPPORT_DATA.email,
+      rawPassword: PIX_ADMIN_SUPPORT_DATA.rawPassword,
+      cgu: true,
+      pixCertifTermsOfServiceAccepted: true,
+      mustValidateTermsOfService: false,
+      id: PIX_ADMIN_SUPPORT_DATA.id,
+    },
+    knex,
   );
-  const certificationUserId = await createUserInDB(
-    PIX_CERTIF_PRO_DATA.firstName,
-    PIX_CERTIF_PRO_DATA.lastName,
-    PIX_CERTIF_PRO_DATA.email,
-    PIX_CERTIF_PRO_DATA.rawPassword,
-    true,
-    true,
-    false,
-    PIX_CERTIF_PRO_DATA.id,
-  );
-  await createCertificationCenterMembershipInDB(certificationUserId, certificationCenterId);
-
-  // PIX-ADMIN
-  await buildFreshPixAdminUser(
-    PIX_ADMIN_CERTIF_DATA.firstName,
-    PIX_ADMIN_CERTIF_DATA.lastName,
-    PIX_ADMIN_CERTIF_DATA.email,
-    PIX_ADMIN_CERTIF_DATA.rawPassword,
-    PIX_ADMIN_CERTIF_DATA.role,
-  );
-  await buildFreshPixAdminUser(
-    PIX_ADMIN_SUPPORT_DATA.firstName,
-    PIX_ADMIN_SUPPORT_DATA.lastName,
-    PIX_ADMIN_SUPPORT_DATA.email,
-    PIX_ADMIN_SUPPORT_DATA.rawPassword,
-    PIX_ADMIN_SUPPORT_DATA.role,
-  );
+  await knex('pix-admin-roles').insert({ userId: admiUserId, role: PIX_ADMIN_SUPPORT_DATA.role });
 }
 
 async function buildTargetProfiles() {
@@ -295,99 +315,6 @@ async function buildTargetProfiles() {
   const tubeForSmallTargetProfileId = [tubesForBigTargetProfileIds[0]];
   const smallTargetProfileId = await createTargetProfileInDB('petit Profile Cible');
   await createTargetProfileTubesInDB(smallTargetProfileId, 4, tubeForSmallTargetProfileId);
-}
-
-async function buildBaseDataForCertification() {
-  await knex('certification-cpf-countries').insert({
-    code: '99100',
-    commonName: 'FRANCE',
-    originalName: 'FRANCE',
-    matcher: 'ACEFNR',
-  });
-  await knex('certification-cpf-cities').insert({
-    name: 'PERPIGNAN',
-    postalCode: '66000',
-    INSEECode: '66136',
-    isActualName: true,
-  });
-  const [{ id: versionId }] = await knex('certification_versions')
-    .insert({
-      scope: 'CORE',
-      startDate: new Date('2024-10-19'),
-      expirationDate: null,
-      assessmentDuration: 120,
-      globalScoringConfiguration:
-        '[{"bounds": {"max": -1.4, "min": -8}, "meshLevel": 0}, {"bounds": {"max": -0.519, "min": -1.4}, "meshLevel": 1}, {"bounds": {"max": 0.6, "min": -0.519}, "meshLevel": 2}, {"bounds": {"max": 1.5, "min": 0.6}, "meshLevel": 3}, {"bounds": {"max": 2.25, "min": 1.5}, "meshLevel": 4}, {"bounds": {"max": 3.1, "min": 2.25}, "meshLevel": 5}, {"bounds": {"max": 4, "min": 3.1}, "meshLevel": 6}, {"bounds": {"max": 8, "min": 4}, "meshLevel": 7}]',
-      competencesScoringConfiguration:
-        '[{"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "1.1"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "1.2"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "1.3"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "2.1"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "2.2"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "2.3"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "2.4"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "3.1"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "3.2"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "3.3"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "3.4"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "4.1"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "4.2"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "4.3"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "5.1"}, {"values": [{"bounds": {"max": -2, "min": -9007199254740991}, "competenceLevel": 0}, {"bounds": {"max": -1, "min": -2}, "competenceLevel": 1}, {"bounds": {"max": 0.5, "min": -1}, "competenceLevel": 2}, {"bounds": {"max": 1, "min": 0.5}, "competenceLevel": 3}, {"bounds": {"max": 2, "min": 1}, "competenceLevel": 4}, {"bounds": {"max": 3, "min": 2}, "competenceLevel": 5}, {"bounds": {"max": 4, "min": 3}, "competenceLevel": 6}, {"bounds": {"max": 9007199254740991, "min": 4}, "competenceLevel": 7}], "competence": "5.2"}]',
-      challengesConfiguration: JSON.stringify({
-        maximumAssessmentLength: 32,
-        challengesBetweenSameCompetence: 2,
-        limitToOneQuestionPerTube: true,
-        enablePassageByAllCompetences: true,
-        variationPercent: 0.5,
-        defaultCandidateCapacity: -3,
-        defaultProbabilityToPickChallenge: 100,
-      }),
-    })
-    .returning('id');
-  const challenges = await knex('learningcontent.challenges')
-    .whereRaw('?=ANY(??)', ['fr', 'locales'])
-    .where('status', 'validé');
-
-  for (const challenge of challenges) {
-    await knex('certification-frameworks-challenges').insert({
-      challengeId: challenge.id,
-      discriminant: challenge.alpha,
-      difficulty: challenge.delta,
-      versionId,
-    });
-  }
-}
-
-async function createUserInDB(
-  firstName: string,
-  lastName: string,
-  email: string,
-  rawPassword: string,
-  cgu: boolean,
-  pixCertifTermsOfServiceAccepted: boolean,
-  mustValidateTermsOfService: boolean,
-  id: number | undefined,
-) {
-  const someDate = new Date();
-  const [{ id: userId }] = await knex('users')
-    .insert({
-      id,
-      firstName,
-      lastName,
-      email,
-      cgu,
-      pixCertifTermsOfServiceAccepted,
-      lang: 'fr',
-      lastTermsOfServiceValidatedAt: cgu ? someDate : null,
-      lastPixCertifTermsOfServiceValidatedAt: pixCertifTermsOfServiceAccepted ? someDate : null,
-      mustValidateTermsOfService,
-      hasSeenAssessmentInstructions: false,
-      createdAt: someDate,
-      updatedAt: someDate,
-      emailConfirmedAt: someDate,
-    })
-    .returning('id');
-
-  await knex('authentication-methods').insert({
-    userId: userId,
-    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: getUserHashedPassword(rawPassword),
-      shouldChangePassword: false,
-    }),
-    externalIdentifier: undefined,
-    createdAt: someDate,
-    updatedAt: someDate,
-  });
-
-  return userId;
 }
 
 async function createLegalDocumentVersionInDB() {
@@ -469,39 +396,6 @@ async function createLegalDocumentVersionAcceptanceInDB(legalDocumentVersionId: 
     legalDocumentVersionId,
     userId,
     acceptedAt: someDate,
-  });
-}
-
-async function createCertificationCenterInDB(type: string, externalId: string) {
-  const someDate = new Date('2025-07-09');
-  const [{ id }] = await knex('certification-centers')
-    .insert({
-      name: externalId + type,
-      type,
-      externalId,
-      createdAt: someDate,
-      createdBy: null,
-      updatedAt: someDate,
-      isScoBlockedAccessWhitelist: false,
-      archivedAt: null,
-      archivedBy: null,
-    })
-    .returning('id');
-  return id;
-}
-
-async function createCertificationCenterMembershipInDB(userId: number, certificationCenterId: number) {
-  const someDate = new Date('2025-07-09');
-  await knex('certification-center-memberships').insert({
-    userId,
-    updatedByUserId: null,
-    certificationCenterId,
-    createdAt: someDate,
-    updatedAt: someDate,
-    disabledAt: null,
-    isReferer: false,
-    role: 'MEMBER',
-    lastAccessedAt: someDate,
   });
 }
 

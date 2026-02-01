@@ -3,7 +3,7 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
-} from '../../../../helpers/certification/index.ts';
+} from '../../../../helpers/certification/utils.ts';
 import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
 import { LoginPage as AdminLoginPage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
@@ -69,7 +69,7 @@ test.describe(testRef, () => {
         await test.step('Check session information', async () => {
           await checkSessionInformationAndExpectSuccess(sessionPage, {
             certificationCenter:
-              PIX_CERTIF_PRO_DATA.certificationCenter.externalId + PIX_CERTIF_PRO_DATA.certificationCenter.type,
+              PIX_CERTIF_PRO_DATA.certificationCenters[0].externalId + PIX_CERTIF_PRO_DATA.certificationCenters[0].type,
             address: `address ${testRef}`,
             room: `room ${testRef}`,
             invigilatorName: `examiner ${testRef}`,
