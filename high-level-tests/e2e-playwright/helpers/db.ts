@@ -376,7 +376,7 @@ export async function createOrganizationInDB({
   return id;
 }
 
-async function createOrganizationMembershipInDB(userId: number, organizationId: number, role: string) {
+export async function createOrganizationMembershipInDB(userId: number, organizationId: number, role: string) {
   const someDate = new Date();
   await knex('memberships').insert({
     organizationId,
@@ -427,7 +427,7 @@ export async function createTargetProfileInDB(name: string) {
   return id;
 }
 
-async function createTargetProfileTubesInDB(targetProfileId: number, level: number, tubeIds: string[]) {
+export async function createTargetProfileTubesInDB(targetProfileId: number, level: number, tubeIds: string[]) {
   const dataToInsert = tubeIds.map((tubeId) => ({
     targetProfileId,
     tubeId,

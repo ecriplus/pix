@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 
+import { createOrganizationInDB, createOrganizationMembershipInDB } from '../../db.ts';
 import {
   createCertificationCenterHabilitationInDB,
   createCertificationCenterInDB,
@@ -32,6 +33,25 @@ export async function buildPixCertifUser(knex: Knex, userData: any) {
     await createCertificationCenterMembershipInDB({ userId: certificationUserId, certificationCenterId }, knex);
     for (const habilitationKey of certificationCenter.habilitations) {
       await createCertificationCenterHabilitationInDB({ certificationCenterId, key: habilitationKey }, knex);
+    }
+    if (certificationCenter.withOrganization) {
+      const { id: legalDocumentVersionId } = await knex('legal-document-versions').select('id').first();
+      const someDate = new Date('2025-07-09');
+      await knex('legal-document-version-user-acceptances').insert({
+        legalDocumentVersionId,
+        userId: certificationUserId,
+        acceptedAt: someDate,
+      });
+      const organizationId = await createOrganizationInDB({
+        type: certificationCenter.type,
+        externalId: certificationCenter.externalId,
+        isManagingStudents: certificationCenter.withOrganization.isManagingStudents,
+      });
+      await createOrganizationMembershipInDB(certificationUserId, organizationId, 'MEMBER');
+      const allTargetProfileIds = await knex('target-profiles').pluck('id');
+      for (const targetProfileId of allTargetProfileIds) {
+        await knex('target-profile-shares').insert({ targetProfileId, organizationId });
+      }
     }
   }
 }
