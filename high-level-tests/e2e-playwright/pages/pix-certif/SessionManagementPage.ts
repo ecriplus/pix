@@ -95,7 +95,7 @@ export class SessionManagementPage {
     let choice;
     switch (enrollFor) {
       case CERTIFICATIONS_DATA.CLEA.key:
-        choice = 'Double Certification Pix-CléA';
+        choice = 'Double Certification Pix-CléA Numérique';
         break;
       default:
         choice = 'Certification Pix';

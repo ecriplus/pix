@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 import { z } from 'zod';
 
+import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, InvigilatorOverviewPage, SessionListPage } from '../../pages/pix-certif/index.ts';
 import { test as sharedTest } from '../index.ts';
@@ -23,6 +24,7 @@ const ParamsSchema = z.object({
   testRef: z.string().min(1),
   rightWrongAnswersSequence: z.array(z.boolean()).min(1),
   candidateData: CandidateSchema,
+  certificationKey: z.string().min(1),
 });
 
 type PreparedCertificationTestParams = z.infer<typeof ParamsSchema>;
@@ -48,16 +50,25 @@ export const test = sharedTest.extend<
   testRef: ['', { option: true }],
   rightWrongAnswersSequence: [[], { option: true }],
   candidateData: [{} as z.infer<typeof CandidateSchema>, { option: true }],
+  certificationKey: ['CORE', { option: true }],
   preparedCertificationTest: async (
-    { page: pixAppPage, pixCertifProContext, snapshotHandler, testRef, rightWrongAnswersSequence, candidateData },
+    {
+      page: pixAppPage,
+      pixCertifProContext,
+      snapshotHandler,
+      testRef,
+      rightWrongAnswersSequence,
+      candidateData,
+      certificationKey,
+    },
     use,
   ) => {
     validateParams({
       testRef,
       rightWrongAnswersSequence,
       candidateData,
+      certificationKey,
     });
-
     const pixCertifPage = await pixCertifProContext.newPage();
     let sessionNumber = '',
       accessCode = '',
@@ -86,7 +97,10 @@ export const test = sharedTest.extend<
 
       await test.step('enroll for core certification', async () => {
         await sessionManagementPage.goToEnrollCandidateForm();
-        await sessionManagementPage.addCandidate(candidateData);
+        await sessionManagementPage.addCandidate({
+          ...candidateData,
+          enrollFor: certificationKey,
+        });
       });
     });
 
@@ -98,6 +112,9 @@ export const test = sharedTest.extend<
           const loginPage = new LoginPage(pixAppPage);
           const homePage = await loginPage.login(candidateData.email, candidateData.rawPassword);
           const certificationStartPage = await homePage.goToStartCertification();
+          if (certificationKey === CERTIFICATIONS_DATA.CLEA.key) {
+            await expect(pixAppPage.getByText('Prêt pour le CléA numérique')).toBeVisible();
+          }
           return certificationStartPage.fillSessionInfoAndNavigateIntro({
             sessionNumber,
             ...candidateData,
