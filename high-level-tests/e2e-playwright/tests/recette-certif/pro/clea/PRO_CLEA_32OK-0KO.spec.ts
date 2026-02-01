@@ -2,7 +2,7 @@ import { expect, test } from '../../../../fixtures/certification/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
-  checkSessionInformationAndExpectSuccess
+  checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
@@ -104,6 +104,8 @@ test.describe(testRef, () => {
             status: 'Validée',
             score: '895 Pix',
           });
+          const cleaResult = await certificationInformationPage.getCleaResult();
+          expect(cleaResult).toBe('Validée');
           await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
             nbAnsweredQuestionsOverTotal: '32/32',
             nbQuestionsOK: 32,
@@ -126,9 +128,10 @@ test.describe(testRef, () => {
         const status = await certificationsListPage.getCertificationStatus(certificationNumber);
         expect(status).toBe('Obtenue');
         const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
-        const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
+        const { pixScoreObtained, pixLevelReached, isCleaObtained } = await certificationResultPage.getResultInfo();
         expect(pixScoreObtained).toEqual('PIX 895 CERTIFIÉS');
         expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
+        expect(isCleaObtained).toBe(true);
         const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
         await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);

@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 
 import { getNumberValueFromDescriptionList, getStringValueFromDescriptionList } from '../../helpers/utils.ts';
+
 export class CertificationInformationPage {
   constructor(public readonly page: Page) {}
 
@@ -66,6 +67,15 @@ export class CertificationInformationPage {
         { optional: true },
       ),
     };
+  }
+
+  async getCleaResult() {
+    return getStringValueFromDescriptionList(
+      this.page,
+      'pw-certification-information-complementary',
+      'CléA Numérique',
+      { optional: true },
+    );
   }
 
   async cancelCertification() {
