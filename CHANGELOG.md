@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.320.0](https://github.com/1024pix/pix/compare/v5.319.0...v5.320.0) (2026-02-02)
+
+### :rocket: Amélioration
+
+- [#14944](https://github.com/1024pix/pix/pull/14944) Ajouter une Banner pour la campagne IA sur PixOrga (PIX-21344). 
+- [#14897](https://github.com/1024pix/pix/pull/14897) IAGenBiais_AVA retours JTE 
+- [#14812](https://github.com/1024pix/pix/pull/14812) MDX-57 changement découverte 3 NR_Evaluation_IND 
+- [#14934](https://github.com/1024pix/pix/pull/14934) Modification design des feedbacks dans les modules sur Pix App (PIX-21136). 
+- [#14930](https://github.com/1024pix/pix/pull/14930) Permettre de voir les apprenants qui n'ont pas encore participé à une campagne en filtrant la liste (PIX-17952) 
+
+### :building_construction: Tech
+
+- [#14926](https://github.com/1024pix/pix/pull/14926)  Retirer les derniers usages de la table certification-configurations (PIX-21326) 
+- [#14945](https://github.com/1024pix/pix/pull/14945) supprime la sortie de log dans les tests
+
 # [5.319.0](https://github.com/1024pix/pix/compare/v5.318.0...v5.319.0) (2026-02-02)
 
 ### :rocket: Amélioration
