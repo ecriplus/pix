@@ -18,19 +18,41 @@ module('Unit | Adapters | organization', function (hooks) {
   });
 
   module('#findHasMany', function () {
-    test('should build url with query params when type is organization-membership', async function (assert) {
-      // given
-      const snapshot = { modelName: 'organization', id: '1', adapterOptions: { 'page[size]': 2 } };
-      const relationship = { type: 'organization-membership' };
-      const url = '/api/organizations/1/memberships';
+    module('when type is organization-membership', function () {
+      module('when there are no query params', function () {
+        test('builds the correct url', async function (assert) {
+          // given
+          const snapshot = { modelName: 'organization', id: '1' };
+          const relationship = { type: 'organization-membership' };
+          const url = '/api/organizations/1/memberships';
 
-      // when
-      await adapter.findHasMany({}, snapshot, url, relationship);
+          // when
+          await adapter.findHasMany({}, snapshot, url, relationship);
 
-      // then
-      assert.ok(
-        adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/admin/organizations/1/memberships?page%5Bsize%5D=2`, 'GET'),
-      );
+          // then
+          assert.ok(adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/admin/organizations/1/memberships`, 'GET'));
+        });
+      });
+
+      module('when there are query params', function () {
+        test('builds the correct url', async function (assert) {
+          // given
+          const snapshot = { modelName: 'organization', id: '1', adapterOptions: { 'page[size]': 2 } };
+          const relationship = { type: 'organization-membership' };
+          const url = '/api/organizations/1/memberships';
+
+          // when
+          await adapter.findHasMany({}, snapshot, url, relationship);
+
+          // then
+          assert.ok(
+            adapter.ajax.calledWith(
+              `${ENV.APP.API_HOST}/api/admin/organizations/1/memberships?page%5Bsize%5D=2`,
+              'GET',
+            ),
+          );
+        });
+      });
     });
 
     test('should build url without query params when type is not membership', async function (assert) {

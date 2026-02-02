@@ -37,6 +37,18 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
   });
 
   module('listing members', function () {
+    test('it should display the number of active members', async function (assert) {
+      // given
+      const user = this.server.create('user', { firstName: 'John', lastName: 'Doe', email: 'user@example.com' });
+      this.server.create('organization-membership', { user, organization });
+
+      // when
+      const screen = await visit(`/organizations/${organization.id}/team`);
+
+      // then
+      assert.dom(screen.getByText('Équipe (1)')).exists();
+    });
+
     test('it should display the current filter when memberships are filtered by firstName', async function (assert) {
       // when
       const screen = await visit(`/organizations/${organization.id}/team?firstName=sav`);

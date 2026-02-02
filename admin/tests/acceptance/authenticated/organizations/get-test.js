@@ -48,13 +48,17 @@ module('Acceptance | Organizations | Get', function (hooks) {
     module('Navigation tabs', function () {
       module('Team tab', function () {
         module('When organization is active', function () {
-          test('it should display team tab', async function (assert) {
+          test('it should display team tab with number of active members', async function (assert) {
+            // given
+            const user = this.server.create('user', { firstName: 'John', lastName: 'Doe', email: 'user@example.com' });
+            server.create('organization-membership', { user, organizationId: ORGANIZATION_ID });
+
             // when
             const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
 
             // then
             const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-            assert.ok(within(navigationTabs).getByRole('link', { name: t('pages.organization.navbar.team') }));
+            assert.ok(within(navigationTabs).getByRole('link', { name: `${t('pages.organization.navbar.team')} (1)` }));
           });
 
           test('it should navigate to team page when clicking tab', async function (assert) {
@@ -65,7 +69,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
             const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
 
             const teamTab = within(navigationTabs).getByRole('link', {
-              name: t('pages.organization.navbar.team'),
+              name: `${t('pages.organization.navbar.team')} (0)`,
             });
             await click(teamTab);
 
