@@ -5,6 +5,8 @@ import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../shared/domain/models/Assessment.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../shared/domain/constants.js';
 
+const PROGRESS_BAR_TOTAL_LENGTH = 30;
+
 const options = {
   dryRun: {
     type: 'boolean',
@@ -62,16 +64,18 @@ export class RevertCampaignParticipationsToStartedScript extends Script {
       let updatedParticipationsCount = 0;
       let updatedAssessmentsCount = 0;
 
-      for (const participation of participationsToUpdate) {
-        logger.info(`Processing participation id: ${participation.id}`);
+      logger.info(this.#renderProgressBar(updatedParticipationsCount, participationsToUpdate.length));
 
-        logger.info(`Participation is of type: ${participation.type}`);
+      for (const participation of participationsToUpdate) {
+        logger.debug(`Processing participation id: ${participation.id}`);
+
+        logger.debug(`Participation is of type: ${participation.type}`);
 
         if (participation.deletedAt) {
-          logger.info(`Participation has been deleted at: ${participation.deletedAt}`);
+          logger.debug(`Participation has been deleted at: ${participation.deletedAt}`);
         }
 
-        logger.info(`Updating participation id: ${participation.id} status from TO_SHARE to STARTED`);
+        logger.debug(`Updating participation id: ${participation.id} status from TO_SHARE to STARTED`);
 
         await knexConn('campaign-participations')
           .where({ id: participation.id })
@@ -79,13 +83,15 @@ export class RevertCampaignParticipationsToStartedScript extends Script {
 
         updatedParticipationsCount++;
 
+        logger.info(this.#renderProgressBar(updatedParticipationsCount, participationsToUpdate.length));
+
         if (participation.type === CampaignTypes.PROFILES_COLLECTION) {
-          logger.info('Participation is of type PROFILES_COLLECTION, skipping assessment update');
+          logger.debug('Participation is of type PROFILES_COLLECTION, skipping assessment update');
           continue;
         }
 
         if (participation.deletedAt) {
-          logger.info('Participation has been deleted, skipping assessment update');
+          logger.debug('Participation has been deleted, skipping assessment update');
           continue;
         }
 
@@ -103,7 +109,7 @@ export class RevertCampaignParticipationsToStartedScript extends Script {
           continue;
         }
 
-        logger.info(`Updating assessment id: ${lastAssessment.id} state from completed to started`);
+        logger.debug(`Updating assessment id: ${lastAssessment.id} state from completed to started`);
 
         await knexConn('assessments').where({ id: lastAssessment.id }).update({ state: Assessment.states.STARTED });
 
@@ -145,6 +151,17 @@ export class RevertCampaignParticipationsToStartedScript extends Script {
       .where({ campaignParticipationId })
       .orderBy('createdAt', 'desc')
       .first();
+  }
+
+  #renderProgressBar(current, total) {
+    const percent = total === 0 ? 0 : Math.round((current / total) * 100);
+    const filled = Math.round((percent / 100) * PROGRESS_BAR_TOTAL_LENGTH);
+    return (
+      '[' +
+      '#'.repeat(filled) +
+      '.'.repeat(Math.max(0, PROGRESS_BAR_TOTAL_LENGTH - filled)) +
+      `] ${current}/${total} (${percent}%)`
+    );
   }
 }
 
