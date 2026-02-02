@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.319.0](https://github.com/1024pix/pix/compare/v5.318.0...v5.319.0) (2026-02-02)
+
+### :rocket: Amélioration
+
+- [#14936](https://github.com/1024pix/pix/pull/14936) Amélioration de la gestion d'erreur du formulaire de création de lots de places (PIX-21301). 
+- [#14914](https://github.com/1024pix/pix/pull/14914) Augmenter le nombre de retry de 4 à 10 pour les appels réseau en échec de openid-client  (PIX-21302) 
+- [#14924](https://github.com/1024pix/pix/pull/14924) IAGenImpact_NOV, modification consigne 
+- [#14937](https://github.com/1024pix/pix/pull/14937) mdx-18 Passage au chatpix en prod 
+- [#14938](https://github.com/1024pix/pix/pull/14938) Modifier le lien de la banner de certifications (PIX-20819). 
+
+### :building_construction: Tech
+
+- [#14893](https://github.com/1024pix/pix/pull/14893) Ajouter un test e2e Playwright pour a11y de Modulix (PIX-20984) 
+- [#14904](https://github.com/1024pix/pix/pull/14904) Ajouter une fixture Playwright pour mettre en place un candidat, inscrit en session de certification, qui passe son test 
+- [#14922](https://github.com/1024pix/pix/pull/14922) Modifier le script de suppression d' apprenant pour qu'il soit RGPD compliant (PIX-21324). 
+- [#14913](https://github.com/1024pix/pix/pull/14913) Placer la sélection sur le premier élément en erreur dans le formulaire de création d'organisation (PIX-21007) 
+- [#14939](https://github.com/1024pix/pix/pull/14939) Résoudre le problème des tests en timeout qui font échouer la CI
+
 # [5.318.0](https://github.com/1024pix/pix/compare/v5.317.1...v5.318.0) (2026-01-30)
 
 ### :rocket: Amélioration
