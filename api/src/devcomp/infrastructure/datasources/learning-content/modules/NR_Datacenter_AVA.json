@@ -627,28 +627,28 @@
                           "id": "1",
                           "content": "<p>Transférer la chaleur produite par le centre de données.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre. <br></strong>À Champs sur Marne,&nbsp;un centre de données est équipé de panneaux solaires depuis 2024. Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre. <br></strong>À Champs sur Marne,&nbsp;un centre de données est équipé de panneaux solaires depuis 2024. Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<strong></strong></p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         }
                       ],
@@ -704,7 +704,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est partiellement chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
@@ -783,7 +783,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p><p>  L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
@@ -843,28 +843,28 @@
                           "id": "1",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
+                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
                           }
                         }
                       ],
