@@ -7,10 +7,12 @@ import sinon from 'sinon';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Banner::Sco-communication', function (hooks) {
+  let featureToggles;
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
     this.intl = this.owner.lookup('service:intl');
+    featureToggles = this.owner.lookup('service:featureToggles');
   });
 
   module('Import Banner', function () {
@@ -27,7 +29,8 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             isSCOManagingStudents = true;
           }
 
-          test('should render the banner', async function (assert) {
+          test('should render the sco banner', async function (assert) {
+            sinon.stub(featureToggles, 'featureToggles').value({ displayIaCampaignBanner: false });
             // given
             this.owner.register('service:current-user', CurrentUserStub);
 
@@ -51,8 +54,32 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
             assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/opiFxfjygR76S8y');
           });
+
+          test('should render the ia sco banner', async function (assert) {
+            sinon.stub(featureToggles, 'featureToggles').value({ displayIaCampaignBanner: true });
+            // given
+            this.owner.register('service:current-user', CurrentUserStub);
+
+            const router = this.owner.lookup('service:router');
+            sinon.stub(router, 'currentRouteName').value(route);
+            // when
+            const screen = await render(<template><Scommunication /></template>);
+
+            // then
+            assert.ok(screen.getByText(this.intl.t('banners.ia.message')));
+
+            const KitLink = screen.getByRole('link', { name: 'le kit de déploiement' });
+            assert.strictEqual(KitLink.href, 'https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9');
+
+            const webinaireLink = screen.queryByRole('link', { name: 'webinaire' });
+            assert.strictEqual(
+              webinaireLink.href,
+              'https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga',
+            );
+          });
         });
       });
+
       module('when prescriber is on route certification', function () {
         class CurrentUserStub extends Service {
           organization = { isSco: true };

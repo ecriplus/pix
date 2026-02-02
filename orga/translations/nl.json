@@ -66,6 +66,11 @@
     "certification": {
       "message": "'<strong>'Certificaten:'</strong>' Vergeet niet om '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'de sessies af te ronden in Pix Certif'</a>' en de certificaten hier te downloaden via het tabblad \"Certificaten\" voor de start van het schooljaar {year}."
     },
+    "ia": {
+      "message": "De nieuwe Pix-leertrajecten over AI zijn beschikbaar in uw Pix Orga-ruimte! Ze zijn verplicht voor leerlingen van het 4e, 2e (algemeen en technologisch) en 1e jaar van het CAP, met een geleidelijke invoering in de schooljaren 2025-2026 en 2026-2027.",
+      "step1": "Raadpleeg '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='Kit de déploiement IA' class='link link--banner link--bold link--underlined' '>'de implementatiekit'</a>'",
+      "step2": "Aanmelden voor het '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinar'</a>'"
+    },
     "import": {
       "message": "Belangrijke fasen in het schooljaar :",
       "step1a": "Implement&nbsp;: '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Gids download resultaten' class='link link--banner link--bold link--underlined''>'download resultaten'</a>' certificering en",

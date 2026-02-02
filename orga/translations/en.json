@@ -66,6 +66,11 @@
     "certification": {
       "message": "'<strong>'Certifications :'</strong>' Please don't forget to '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'to finalize your sessions in Pix Certif'</a>' and to download the certificates via the \"Certifications\" tab before the start of the {year} academic year."
     },
+    "ia": {
+      "message": "The new Pix learning pathways on AI are available in your Pix Orga space! They are compulsory for pupils in Year 9, Year 12 (general and technological) and Year 11 (CAP), with gradual implementation over the 2025-2026 and 2026-2027 school years.",
+      "step1": "See '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'the deployment kit'</a>'",
+      "step2": "Register for the '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinar'</a>'"
+    },
     "import": {
       "message": "The main stages of the school year :",
       "step1a": " Setting up&nbsp;: '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Downloading results how-to' class='link link--banner link--bold link--underlined' '>'downloading certification results'</a>' and",
