@@ -858,16 +858,18 @@ describe('Acceptance | API | Campaign Participations', function () {
     });
 
     it('should not return participation related to combined course', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
       // given
       sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
 
-      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId });
       databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
         rewardType: null,
         rewardId: null,
         code: 'COMBINIX1',
-        organizationId: campaignInCombinedCourse.organizationId,
+        organizationId,
         combinedCourseContents: [
           { campaignId: campaignInCombinedCourse.id },
           { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
@@ -878,10 +880,12 @@ describe('Acceptance | API | Campaign Participations', function () {
       databaseBuilder.factory.campaignParticipationOverviewFactory.build({
         userId,
         campaignId: campaignInCombinedCourse.id,
+        organizationLearner: organizationLearner.id,
       });
       const sharableCampaignParticipation = databaseBuilder.factory.campaignParticipationOverviewFactory.buildOnGoing({
         userId,
         campaignSkills: ['recSkillId1'],
+        organizationLearnerId: organizationLearner.id,
       });
       await databaseBuilder.commit();
 

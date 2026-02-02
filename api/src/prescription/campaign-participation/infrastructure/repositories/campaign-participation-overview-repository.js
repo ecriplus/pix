@@ -15,6 +15,10 @@ const findByUserIdWithFilters = async function ({ userId, states }) {
     qb.where('campaign-participations.userId', userId).whereNotExists(function () {
       this.select(knex.raw('1'))
         .from('quests')
+        .join('combined_courses', 'combined_courses.questId', 'quests.id')
+        .whereIn('combined_courses.organizationId', function () {
+          this.select('organizationId').from('organization-learners').where('userId', userId);
+        })
         .crossJoin(knex.raw('jsonb_array_elements("successRequirements") as success_elem'))
         .whereNotNull('successRequirements')
         .andWhereRaw("(success_elem->'data'->'campaignId'->>'data')::integer = \"campaigns\".\"id\"");
@@ -25,6 +29,7 @@ const findByUserIdWithFilters = async function ({ userId, states }) {
     _filterByStates(campaignQueryBuilder, states);
     _filterByStates(combinedCourseQueryBuilder, states);
   }
+
   const campaignResults = await campaignQueryBuilder;
   const combinedCourseResults = await combinedCourseQueryBuilder;
   const results = [...combinedCourseResults, ...campaignResults];

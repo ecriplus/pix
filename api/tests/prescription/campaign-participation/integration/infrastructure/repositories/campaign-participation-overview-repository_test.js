@@ -913,15 +913,20 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
     context('when campaign is related to combined-course', function () {
       it('should not return them', async function () {
-        const campaign = databaseBuilder.factory.buildCampaign();
+        const organization = databaseBuilder.factory.buildOrganization();
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+          userId,
+        });
+        const campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
 
-        const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+        const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
         databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix',
           rewardType: null,
           rewardId: null,
           code: 'COMBINIX1',
-          organizationId: campaignInCombinedCourse.organizationId,
+          organizationId: organization.id,
           combinedCourseContents: [
             { campaignId: campaignInCombinedCourse.id },
             { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
