@@ -67,4 +67,58 @@ export class CertificationInformationPage {
       ),
     };
   }
+
+  async cancelCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Annuler la certification' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Désannuler la certification').waitFor({ state: 'visible' });
+  }
+
+  async uncancelCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Désannuler la certification' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Annuler la certification').waitFor({ state: 'visible' });
+  }
+
+  async rejectCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Rejeter la certification' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Annuler le rejet').waitFor({ state: 'visible' });
+    await this.page
+      .getByText(
+        'Une situation de fraude a été détectée : après analyse, nous avons statué sur un rejet de la certification.',
+      )
+      .waitFor({ state: 'visible' });
+  }
+
+  async unrejectCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Annuler le rejet' }).click();
+    await this.page.getByRole('button', { name: 'Confirmer' }).click();
+
+    await this.page.getByText('Rejeter la certification').waitFor({ state: 'visible' });
+    await this.page
+      .getByText(
+        'Une situation de fraude a été détectée : après analyse, nous avons statué sur un rejet de la certification.',
+      )
+      .waitFor({ state: 'detached' });
+  }
+
+  async rescoreCertification() {
+    await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
+    await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
+    await this.page.getByRole('button', { name: 'Re-scorer la certification' }).click();
+
+    await this.page.getByText('La certification a bien été rescorée').waitFor({ state: 'visible' });
+  }
 }
