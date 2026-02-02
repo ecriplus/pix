@@ -18,10 +18,11 @@ export default class CurrentUserService extends Service {
   @tracked combinedCourses;
 
   get canAccessImportPage() {
-    return Boolean(
-      (this.isSCOManagingStudents || this.isSUPManagingStudents || this.hasLearnerImportFeature) &&
-      this.isAdminInOrganization,
-    );
+    return Boolean(this.hasImportFeature && this.isAdminInOrganization);
+  }
+
+  get hasImportFeature() {
+    return this.organization.isManagingStudents || this.hasLearnerImportFeature;
   }
 
   get canAccessAttestationsPage() {
@@ -53,7 +54,7 @@ export default class CurrentUserService extends Service {
   }
 
   get canEditLearnerName() {
-    return this.isAdminInOrganization && !this.hasLearnerImportFeature && !this.organization.isManagingStudents;
+    return this.isAdminInOrganization && !this.hasImportFeature;
   }
 
   get placeStatistics() {
