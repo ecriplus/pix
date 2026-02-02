@@ -1,4 +1,5 @@
 import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import * as campaignResultLevelsPerTubesAndCompetencesSerializer from '../../campaign/infrastructure/serializers/jsonapi/campaign-result-levels-per-tubes-and-competences-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as anonymisedCampaignAssessmentSerializer from '../infrastructure/serializers/jsonapi/anonymised-campaign-assessment-serializer.js';
 import * as availableCampaignParticipationsSerializer from '../infrastructure/serializers/jsonapi/available-campaign-participation-serializer.js';
@@ -48,6 +49,25 @@ const getAnalysis = async function (request, h, dependencies = { campaignAnalysi
     locale,
   });
   return dependencies.campaignAnalysisSerializer.serialize(campaignAnalysis);
+};
+
+const getLevelPerTubesAndCompetences = async function (
+  request,
+  _,
+  dependencies = { campaignResultLevelsPerTubesAndCompetencesSerializer },
+) {
+  const { campaignParticipationId } = request.params;
+  const locale = getChallengeLocale(request);
+
+  const campaignParticipationAnalysis = await usecases.getResultLevelsPerTubesAndCompetences({
+    campaignParticipationId,
+    locale,
+  });
+
+  return dependencies.campaignResultLevelsPerTubesAndCompetencesSerializer.serialize(
+    campaignParticipationAnalysis,
+    true,
+  );
 };
 
 const getCampaignProfile = async function (request, h, dependencies = { campaignProfileSerializer }) {
@@ -209,6 +229,7 @@ const campaignParticipationController = {
   deleteParticipationFromAdmin,
   findPaginatedParticipationsForCampaignManagement,
   getAnalysis,
+  getLevelPerTubesAndCompetences,
   getAnonymisedCampaignAssessments,
   getCampaignAssessmentParticipation,
   getCampaignAssessmentParticipationResult,
