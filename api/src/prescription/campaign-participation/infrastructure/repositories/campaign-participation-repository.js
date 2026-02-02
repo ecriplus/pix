@@ -244,6 +244,10 @@ const hasAssessmentParticipations = async function (userId) {
     .whereNotExists(function () {
       this.select(knex.raw('1'))
         .from('quests')
+        .join('combined_courses', 'combined_courses.questId', 'quests.id')
+        .whereIn('combined_courses.organizationId', function () {
+          this.select('organizationId').from('organization-learners').where('userId', userId);
+        })
         .crossJoin(knex.raw('jsonb_array_elements("successRequirements") as success_elem'))
         .whereNotNull('quests.successRequirements')
         .andWhereRaw("(success_elem->'data'->'campaignId'->>'data')::integer = \"campaigns\".\"id\"");
