@@ -625,6 +625,7 @@ function getAttributesComponents() {
         ],
         feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
         solutions: ['1', '2'],
+        hasShortProposals: false,
         type: 'qcm',
       },
     },
