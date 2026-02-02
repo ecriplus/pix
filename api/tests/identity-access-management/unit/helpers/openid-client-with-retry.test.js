@@ -65,8 +65,8 @@ describe('Unit | Identity Access Management | Domain | Helper | openid-client-wi
         }
 
         // then
-        expect(openidClient.discovery.callCount).to.equal(5);
-        expect(logger.info.callCount).to.equal(4);
+        expect(openidClient.discovery.callCount).to.equal(11);
+        expect(logger.info.callCount).to.equal(10);
       });
     });
   });
@@ -123,8 +123,8 @@ describe('Unit | Identity Access Management | Domain | Helper | openid-client-wi
         }
 
         // then
-        expect(openidClient.authorizationCodeGrant.callCount).to.equal(5);
-        expect(logger.info.callCount).to.equal(4);
+        expect(openidClient.authorizationCodeGrant.callCount).to.equal(11);
+        expect(logger.info.callCount).to.equal(10);
       });
     });
   });
@@ -181,8 +181,8 @@ describe('Unit | Identity Access Management | Domain | Helper | openid-client-wi
         }
 
         // then
-        expect(openidClient.fetchUserInfo.callCount).to.equal(5);
-        expect(logger.info.callCount).to.equal(4);
+        expect(openidClient.fetchUserInfo.callCount).to.equal(11);
+        expect(logger.info.callCount).to.equal(10);
       });
     });
   });
