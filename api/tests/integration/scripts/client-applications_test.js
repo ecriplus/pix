@@ -152,7 +152,7 @@ describe('ClientApplicationsScript', function () {
     describe('list', function () {
       it('should list existing client applications', async function () {
         // given
-        const consoleTableSpy = sinon.spy(console, 'table');
+        const consoleTableSpy = sinon.stub(console, 'table');
         const clientApp = domainBuilder.buildClientApplication();
         databaseBuilder.factory.buildClientApplication(clientApp);
         await databaseBuilder.commit();
