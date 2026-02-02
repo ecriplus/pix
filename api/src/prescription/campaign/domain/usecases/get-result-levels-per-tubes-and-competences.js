@@ -15,7 +15,7 @@ const getResultLevelsPerTubesAndCompetences = async ({
   const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
 
   const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-    campaignId,
+    id: campaignId,
     learningContent,
   });
 

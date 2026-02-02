@@ -3,7 +3,7 @@ import { KnowledgeElementCollection } from '../../../../../../src/prescription/s
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', function () {
+describe('Unit | Domain | Models | CampaignResultLevelsPerTubesAndCompetences', function () {
   describe('compute', function () {
     let learningContent, keData;
 
@@ -109,7 +109,7 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
 
     it('should get max level per tube', function () {
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-        campaignId: 1,
+        id: 1,
         learningContent,
       });
       campaignResult.addKnowledgeElementSnapshots(keData);
@@ -138,7 +138,7 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
 
     it('should get max level per competence', function () {
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-        campaignId: 1,
+        id: 1,
         learningContent,
       });
       campaignResult.addKnowledgeElementSnapshots(keData);
@@ -160,7 +160,7 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
 
     it('should compute the maximum reachable level', function () {
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-        campaignId: 1,
+        id: 1,
         learningContent,
       });
       campaignResult.addKnowledgeElementSnapshots(Object.values(keData));
@@ -170,7 +170,7 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
 
     it('should compute the mean reached level', function () {
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-        campaignId: 1,
+        id: 1,
         learningContent,
       });
       campaignResult.addKnowledgeElementSnapshots(Object.values(keData));

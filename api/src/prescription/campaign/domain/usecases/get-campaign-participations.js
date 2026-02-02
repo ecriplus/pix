@@ -55,7 +55,7 @@ const computeTubes = (campaignId, campaignParticipation, learningContent, knowle
   }
 
   const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
-    campaignId,
+    id: campaignId,
     learningContent,
   });
 
