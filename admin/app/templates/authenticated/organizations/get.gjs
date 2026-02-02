@@ -31,6 +31,7 @@ import InformationSection from 'pix-admin/components/organizations/information-s
 
       <LinkTo @route="authenticated.organizations.get.target-profiles" @model={{@model}}>
         {{t "pages.organization.navbar.target-profiles"}}
+        ({{@model.targetProfileSummaries.length}})
       </LinkTo>
 
       <LinkTo @route="authenticated.organizations.get.campaigns" @model={{@model}}>
