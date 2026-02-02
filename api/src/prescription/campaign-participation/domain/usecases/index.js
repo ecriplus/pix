@@ -97,6 +97,7 @@ import { getCampaignParticipationStatistics } from './get-campaign-participation
 import { getCampaignParticipationsForOrganizationLearner } from './get-campaign-participations-for-organization-learner.js';
 import { getCampaignProfile } from './get-campaign-profile.js';
 import { getPoleEmploiSendings } from './get-pole-emploi-sendings.js';
+import { getResultLevelsPerTubesAndCompetences } from './get-result-levels-per-tubes-and-competences.js';
 import { getSharedCampaignParticipationProfile } from './get-shared-campaign-participation-profile.js';
 import { getUserCampaignAssessmentResult } from './get-user-campaign-assessment-result.js';
 import { getUserCampaignParticipationToCampaign } from './get-user-campaign-participation-to-campaign.js';
@@ -120,6 +121,7 @@ const usecasesWithoutInjectedDependencies = {
   getCampaignParticipationsForOrganizationLearner,
   getCampaignProfile,
   getPoleEmploiSendings,
+  getResultLevelsPerTubesAndCompetences,
   getSharedCampaignParticipationProfile,
   getUserCampaignAssessmentResult,
   getUserCampaignParticipationToCampaign,
