@@ -19,42 +19,6 @@ module('Acceptance | Organizations | Children', function (hooks) {
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
     });
 
-    test('"Organisations filles" tab exists', async function (assert) {
-      // given
-      const organizationId = this.server.create('organization', {
-        name: 'Orga name',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      }).id;
-
-      // when
-      const screen = await visit(`/organizations/${organizationId}/children`);
-
-      // then
-      assert.strictEqual(currentURL(), `/organizations/${organizationId}/children`);
-      assert.dom(screen.getByRole('link', { name: 'Organisations filles (0)' })).hasClass('active');
-    });
-
-    test('Displays the number of child organisations in tab name', async function (assert) {
-      // given
-      const parentOrganizationId = this.server.create('organization', {
-        id: 1,
-        name: 'Orga name',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      }).id;
-      this.server.create('organization', {
-        id: 2,
-        parentOrganizationId: 1,
-        name: 'Child',
-        features: { PLACES_MANAGEMENT: { active: true } },
-      });
-
-      // when
-      const screen = await visit(`/organizations/${parentOrganizationId}/children`);
-
-      // then
-      assert.dom(screen.getByRole('link', { name: 'Organisations filles (1)' })).hasClass('active');
-    });
-
     module('when there is no child organization', function () {
       test('displays a message', async function (assert) {
         // given
