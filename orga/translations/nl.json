@@ -865,7 +865,7 @@
           },
           "stages": "Succesratio",
           "status": {
-            "empty": "Alle statussen",
+            "empty": "Alle deelnames",
             "title": "Status"
           },
           "unacquired-badges": "Thema's niet verkregen"

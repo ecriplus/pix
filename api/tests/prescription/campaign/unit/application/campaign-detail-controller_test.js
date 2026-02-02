@@ -331,7 +331,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
   describe('#findParticipantsActivity', function () {
     let serializedParticipantsActivities;
     let participantsActivities;
-    const filters = { status: ['SHARED'], groups: ['L1'], search: 'Choupette' };
+    const filters = { status: 'SHARED', groups: ['L1'], search: 'Choupette' };
 
     const campaignId = 1;
     const userId = 1;
@@ -340,7 +340,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
     beforeEach(function () {
       participantsActivities = Symbol('participants activities');
       serializedParticipantsActivities = Symbol('serialized participants activities');
-      sinon.stub(usecases, 'findPaginatedCampaignParticipantsActivities');
+      sinon.stub(usecases, 'findPaginatedCampaignParticipantActivities');
       campaignParticipantsActivitySerializerStub = {
         serialize: sinon.stub(),
       };
@@ -348,7 +348,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
 
     it('should return the participants activities properly serialized', async function () {
       // given
-      usecases.findPaginatedCampaignParticipantsActivities
+      usecases.findPaginatedCampaignParticipantActivities
         .withArgs({ campaignId, userId, page: { number: 3 }, filters })
         .resolves(participantsActivities);
       campaignParticipantsActivitySerializerStub.serialize
@@ -362,7 +362,6 @@ describe('Unit | Application | Controller | Campaign detail', function () {
           auth: {
             credentials: { userId },
           },
-
           query: {
             page: { number: 3 },
             filter: {

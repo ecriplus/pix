@@ -2,9 +2,10 @@ import { usecases } from '../../../../../../src/prescription/campaign/domain/use
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Integration | UseCase | find-paginated-campaign-participants-activities', function () {
+describe('Integration | UseCase | find-paginated-campaign-participant-activities', function () {
   let organizationId;
   let campaignId;
+  let organizationLearner;
   let userId;
   const page = { number: 1 };
 
@@ -12,12 +13,15 @@ describe('Integration | UseCase | find-paginated-campaign-participants-activitie
     organizationId = databaseBuilder.factory.buildOrganization().id;
     userId = databaseBuilder.factory.buildUser().id;
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+    organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+
+    await databaseBuilder.commit();
   });
 
   context('when requesting user is not allowed to access campaign informations', function () {
     it('should throw a UserNotAuthorizedToAccessEntityError error', async function () {
       // when
-      const error = await catchErr(usecases.findPaginatedCampaignParticipantsActivities)({
+      const error = await catchErr(usecases.findPaginatedCampaignParticipantActivities)({
         userId,
         campaignId,
       });
@@ -34,16 +38,20 @@ describe('Integration | UseCase | find-paginated-campaign-participants-activitie
       databaseBuilder.factory.buildCampaignParticipation({
         participantExternalId: 'Ashitaka',
         campaignId,
+        organizationLearnerId: organizationLearner.id,
+        userId: organizationLearner.userId,
       });
+
       await databaseBuilder.commit();
     });
 
     it('returns the campaignParticipantsActivites of the participants of the campaign', async function () {
-      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantsActivities({
+      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantActivities({
         userId,
         campaignId,
         page,
       });
+      expect(campaignParticipantsActivities).lengthOf(1);
       expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Ashitaka');
     });
   });
@@ -52,20 +60,34 @@ describe('Integration | UseCase | find-paginated-campaign-participants-activitie
     beforeEach(async function () {
       databaseBuilder.factory.buildMembership({ organizationId, userId });
 
-      const participation1 = { participantExternalId: 'Yubaba', campaignId };
-      const participant1 = { firstName: 'Chihiro', lastName: 'Ogino', division: '6eme' };
-      databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant1, participation1);
-      databaseBuilder.factory.buildOrganizationLearner({ userId: participant1.id, organizationId });
-
-      const participation2 = { participantExternalId: 'Meï', campaignId };
-      const participant2 = { firstName: 'Tonari', lastName: 'No Totoro', division: '5eme' };
-      databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant2, participation2);
+      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Chihiro',
+        lastName: 'Ogino',
+        division: '6eme',
+        organizationId,
+      });
+      const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Tonari',
+        lastName: 'No Totoro',
+        division: '5eme',
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        participantExternalId: 'Yubaba',
+        campaignId,
+        organizationLearnerId: organizationLearner1.id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        participantExternalId: 'Meï',
+        campaignId,
+        organizationLearnerId: organizationLearner2.id,
+      });
 
       await databaseBuilder.commit();
     });
 
     it('returns the campaignParticipantsActivities for the participants for the division', async function () {
-      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantsActivities({
+      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantActivities({
         userId,
         campaignId,
         filters: { divisions: ['6eme'] },
@@ -75,7 +97,7 @@ describe('Integration | UseCase | find-paginated-campaign-participants-activitie
     });
 
     it('returns the campaignParticipantsActivities filtered by the search', async function () {
-      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantsActivities({
+      const { campaignParticipantsActivities } = await usecases.findPaginatedCampaignParticipantActivities({
         userId,
         campaignId,
         filters: { search: 'Tonari N' },

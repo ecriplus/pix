@@ -1,6 +1,7 @@
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
 
-const findPaginatedCampaignParticipantsActivities = async function ({
+const findPaginatedCampaignParticipantActivities = withTransaction(async function ({
   userId,
   campaignId,
   page,
@@ -9,11 +10,14 @@ const findPaginatedCampaignParticipantsActivities = async function ({
   campaignParticipantActivityRepository,
 }) {
   await _checkUserAccessToCampaign(campaignId, userId, campaignRepository);
+  return campaignParticipantActivityRepository.findPaginatedByCampaignId({
+    page,
+    campaignId,
+    filters,
+  });
+});
 
-  return campaignParticipantActivityRepository.findPaginatedByCampaignId({ page, campaignId, filters });
-};
-
-export { findPaginatedCampaignParticipantsActivities };
+export { findPaginatedCampaignParticipantActivities };
 
 async function _checkUserAccessToCampaign(campaignId, userId, campaignRepository) {
   const hasAccess = await campaignRepository.checkIfUserOrganizationHasAccessToCampaign(campaignId, userId);

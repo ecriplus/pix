@@ -866,7 +866,7 @@
           },
           "stages": "Paliers",
           "status": {
-            "empty": "Tous les statuts",
+            "empty": "Toutes les participations",
             "title": "Statut"
           },
           "unacquired-badges": "Badges non obtenus"

@@ -156,6 +156,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
   test('it should hide participation column when showParticipationCount is false', async function (assert) {
     class CurrentUserStub extends Service {
       isAdminInOrganization = true;
+      organization = { isManagingStudents: false };
     }
     this.owner.register('service:current-user', CurrentUserStub);
     this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
@@ -184,6 +185,11 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
   });
 
   test('[A11Y] it should have an aria label', async function (assert) {
+    class CurrentUserStub extends Service {
+      isAdminInOrganization = true;
+      organization = { isManagingStudents: false };
+    }
+    this.owner.register('service:current-user', CurrentUserStub);
     this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [

@@ -301,6 +301,35 @@ module('Unit | Service | current-user', function (hooks) {
       });
     });
 
+    module('#hasImportFeature', function () {
+      test('should return true if organization has feature import activated', function (assert) {
+        currentUserService.prescriber = {
+          hasOrganizationLearnerImport: true,
+        };
+        currentUserService.organization = { isManagingStudents: false };
+
+        assert.true(currentUserService.hasImportFeature);
+      });
+
+      test('should return true if organization is managing student', function (assert) {
+        currentUserService.prescriber = {
+          hasOrganizationLearnerImport: false,
+        };
+        currentUserService.organization = { isManagingStudents: true };
+
+        assert.true(currentUserService.hasImportFeature);
+      });
+
+      test('should return false if organization is not managing student without learner import feature', function (assert) {
+        currentUserService.prescriber = {
+          hasOrganizationLearnerImport: false,
+        };
+        currentUserService.organization = { isManagingStudents: false };
+
+        assert.false(currentUserService.hasImportFeature);
+      });
+    });
+
     module('#canAccessPlacesPage', function () {
       test('should return true if user is admin and organization has feature activated', function (assert) {
         currentUserService.isAdminInOrganization = true;
@@ -401,36 +430,24 @@ module('Unit | Service | current-user', function (hooks) {
       });
 
       module('when is admin of the organization', function () {
-        test('should return false if organization is not sco managing student', function (assert) {
+        test('should return false if organization is not managing student', function (assert) {
           currentUserService.isAdminInOrganization = true;
-          currentUserService.isSCOManagingStudents = false;
+          currentUserService.organization = { isManagingStudents: false };
 
           assert.false(currentUserService.canAccessImportPage);
         });
 
-        test('should return true if organization is sco managing student', function (assert) {
+        test('should return true if organization is managing student', function (assert) {
           currentUserService.isAdminInOrganization = true;
-          currentUserService.isSCOManagingStudents = true;
-
-          assert.true(currentUserService.canAccessImportPage);
-        });
-
-        test('should return false if organization not sup managing student', function (assert) {
-          currentUserService.isAdminInOrganization = true;
-          currentUserService.isSUPManagingStudents = false;
-
-          assert.false(currentUserService.canAccessImportPage);
-        });
-
-        test('should return true if organization is sup managing student', function (assert) {
-          currentUserService.isAdminInOrganization = true;
-          currentUserService.isSUPManagingStudents = true;
+          currentUserService.organization = { isManagingStudents: true };
 
           assert.true(currentUserService.canAccessImportPage);
         });
 
         test('should return true if user can use import learner feature', function (assert) {
           currentUserService.isAdminInOrganization = true;
+          currentUserService.organization = { isManagingStudents: false };
+
           currentUserService.prescriber = { hasOrganizationLearnerImport: true };
 
           assert.true(currentUserService.canAccessImportPage);
@@ -438,36 +455,23 @@ module('Unit | Service | current-user', function (hooks) {
       });
 
       module('when is not admin of the organization', function () {
-        test('should return false if organization is not sco managing student', function (assert) {
+        test('should return false if organization is not managing student', function (assert) {
           currentUserService.isAdminInOrganization = false;
-          currentUserService.isSCOManagingStudents = false;
+          currentUserService.organization = { isManagingStudents: false };
 
           assert.false(currentUserService.canAccessImportPage);
         });
 
-        test('should return false if organization is sco managing student', function (assert) {
+        test('should return false if organization is managing student', function (assert) {
           currentUserService.isAdminInOrganization = false;
-          currentUserService.isSCOManagingStudents = true;
-
-          assert.false(currentUserService.canAccessImportPage);
-        });
-
-        test('should return false if organization not sup managing student', function (assert) {
-          currentUserService.isAdminInOrganization = false;
-          currentUserService.isSUPManagingStudents = false;
-
-          assert.false(currentUserService.canAccessImportPage);
-        });
-
-        test('should return false if organization is sup managing student', function (assert) {
-          currentUserService.isAdminInOrganization = false;
-          currentUserService.isSUPManagingStudents = true;
+          currentUserService.organization = { isManagingStudents: true };
 
           assert.false(currentUserService.canAccessImportPage);
         });
 
         test('should return false if user can use import learner feature', function (assert) {
           currentUserService.isAdminInOrganization = false;
+          currentUserService.organization = { isManagingStudents: false };
           currentUserService.prescriber = { hasOrganizationLearnerImport: true };
 
           assert.false(currentUserService.canAccessImportPage);

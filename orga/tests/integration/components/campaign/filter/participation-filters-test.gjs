@@ -18,7 +18,14 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     store = this.owner.lookup('service:store');
   });
 
-  module('Basic Filter State', function () {
+  module('Basic Filter State', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
+
     test('it should display one filtered participant', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
@@ -228,7 +235,13 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
   });
 
-  module('stages', function () {
+  module('stages', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
     module('when campaign has no stages', function () {
       test('should not displays the stage filter', async function (assert) {
         // given
@@ -475,7 +488,13 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
   });
 
-  module('badges', function () {
+  module('badges', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
     module('when campaign has badges and has type ASSESSMENT', function () {
       test('it displays the badge filters', async function (assert) {
         // given
@@ -798,6 +817,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
   module('status', function () {
     test('it triggers the filter when a status is selected', async function (assert) {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
       // given
       const campaign = store.createRecord('campaign', {
         id: campaignId,
@@ -825,6 +848,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
 
     test('it select the option passed as selectedStatus args', async function (assert) {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
       // given
       const campaign = store.createRecord('campaign', {
         id: campaignId,
@@ -853,7 +880,11 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         .exists();
     });
 
-    test('it should display statuses', async function (assert) {
+    test('it should hide not started status without import feature', async function (assert) {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
       // given
       const campaign = store.createRecord('campaign', {
         id: campaignId,
@@ -880,9 +911,48 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         ],
       );
     });
+
+    test('it should display not started status with import feature', async function (assert) {
+      class CurrentUserStub extends Service {
+        hasImportFeature = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      // given
+      const campaign = store.createRecord('campaign', {
+        id: campaignId,
+        name: 'campagne 1',
+        type: 'ASSESSMENT',
+        targetProfileHasStage: false,
+        stages: [],
+      });
+
+      // when
+      const screen = await render(
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
+      );
+
+      // then
+      await click(screen.getByLabelText(t('pages.campaign-results.filters.type.status.title')));
+      const options = await screen.findAllByRole('option');
+      assert.deepEqual(
+        options.map((option) => option.innerText),
+        [
+          t('pages.campaign-results.filters.type.status.empty'),
+          t('components.participation-status.STARTED'),
+          t('components.participation-status.SHARED'),
+          t('components.participation-status.NOT_STARTED'),
+        ],
+      );
+    });
   });
 
-  module('search', function () {
+  module('search', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
     test('that in the fullname search input we will have the value that we put', async function (assert) {
       const campaign = store.createRecord('campaign', {
         id: '1',
@@ -930,7 +1000,14 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
   });
 
-  module('certificability', function () {
+  module('certificability', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
+
     test('display certificability filter', async function (assert) {
       const campaign = store.createRecord('campaign', {
         id: '1',

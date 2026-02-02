@@ -124,6 +124,9 @@ export default class ParticipationFilters extends Component {
 
   get statusOptions() {
     const statuses = ['STARTED', 'SHARED'];
+
+    if (this.currentUser.hasImportFeature) statuses.push('NOT_STARTED');
+
     return statuses.map((status) => {
       const label = this.intl.t(`components.participation-status.${status}`);
       return { value: status, label };
