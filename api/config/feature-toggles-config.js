@@ -17,6 +17,12 @@ export default {
     defaultValue: false,
     tags: ['team-prescription', 'frontend'],
   },
+  displayIaCampaignBanner: {
+    type: 'boolean',
+    description: 'Use to activate IA banner on PixOrga',
+    defaultValue: false,
+    tags: ['team-prescription', 'frontend', 'orga'],
+  },
   isQuestEnabled: {
     type: 'boolean',
     description: 'Used to enable quests feature',
