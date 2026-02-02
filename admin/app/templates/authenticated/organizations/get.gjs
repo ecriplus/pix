@@ -17,7 +17,7 @@ import InformationSection from 'pix-admin/components/organizations/information-s
       @archiveOrganization={{@controller.archiveOrganization}}
     />
 
-    <PixTabs @variant="primary" @ariaLabel="Navigation de la section organisation" class="navigation">
+    <PixTabs @variant="primary" @ariaLabel={{t "pages.organization.navbar.aria-label"}} class="navigation">
 
       {{#unless @model.isArchived}}
         <LinkTo @route="authenticated.organizations.get.team" @model={{@model}}>

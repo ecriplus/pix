@@ -1286,6 +1286,7 @@
         }
       },
       "navbar": {
+        "aria-label": "Navigation de la section organisation",
         "campaigns": "Campagnes",
         "children": "Organisations filles",
         "invitations": "Invitations",
