@@ -71,7 +71,7 @@ export default class ModulixCustomElement extends ModuleElement {
         </fieldset>
       {{else}}
         <div
-          class="element-custom__container {{if this.resetButtonDisplayed 'element-custom--reset-state'}}"
+          class={{if this.resetButtonDisplayed "element-custom--reset-state"}}
           {{didInsert this.mountCustomElement}}
         />
       {{/if}}
