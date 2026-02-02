@@ -1,7 +1,8 @@
 import Joi from 'joi';
 
-import { htmlNotAllowedSchema, htmlSchema, proposalIdSchema, uuidSchema } from '../utils.js';
+import { htmlSchema, proposalIdSchema, uuidSchema } from '../utils.js';
 import { feedbackSchema } from './feedback-schema.js';
+import { proposalContentSchema } from './proposal-content-schema.js';
 
 const qcuElementSchema = Joi.object({
   id: uuidSchema,
@@ -10,11 +11,7 @@ const qcuElementSchema = Joi.object({
   proposals: Joi.array()
     .items({
       id: proposalIdSchema.required(),
-      content: Joi.when(Joi.ref('....hasShortProposals'), {
-        is: true,
-        then: htmlNotAllowedSchema.required().max(20),
-        otherwise: htmlSchema.required(),
-      }),
+      content: proposalContentSchema,
       feedback: feedbackSchema.required(),
     })
     .required(),
