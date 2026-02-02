@@ -86,7 +86,7 @@
               "element": {
                 "id": "d1d4724c-aadc-4409-a0f5-fd8392e909e8",
                 "type": "text",
-                "content": "La plupart des logiciels d’intelligence artificielle appliquent des règles de sécurité qui peuvent bloquer certaines réponses. Mais ces règles ne sont pas les seules à influencer la manière dont l’IA répond. Voyons ensemble quelles directives l’IA suit et qui les programme."
+                "content": "La plupart des logiciels d’intelligence artificielle appliquent des règles de sécurité qui peuvent bloquer certaines réponses. Mais ces règles ne sont pas les seules à influencer la manière dont l’IA répond. Voyons ensemble quelles directives l’IA suit et qui les définit."
               }
             }
           ]
@@ -161,7 +161,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p>Les IA génératives apprennent sur des contenus qui peuvent contenir des biais ou des informations dangereuses.</p><h5>🤔 Comment réduire le risque que ces contenus apparaissent dans les réponses de l’IA ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5><br>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
+                "content": "<p>     <strong>Les IA génératives sont entraînées sur de vastes ensembles de contenus</strong>, parfois biaisés ou problématiques.    Sans <strong>règles de sécurité</strong>, elles peuvent produire des réponses    <strong>injurieuses, discriminatoires</strong> ou faisant <strong>l’apologie de la violence et d’actes illégaux</strong>.&nbsp;🚫</p><h5>🤔 Comment réduire le risque que cela arrive ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5><br>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
               }
             }
           ]
@@ -341,7 +341,7 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
-                "content": "<p>Ce que vous venez de voir est ce que l’on appelle l’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p><h5><br>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau présentant les <strong>méthodes d’alignement les plus courantes</strong> d’un logiciel d’IA générative.<br><br></p><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>            <th scope=\"col\">Pré-prompt</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses données par le logiciel d’intelligence artificielle. Leurs jugements ajustent le comportement de l’IA.</td>            <td>Consigne écrite par l’utilisateur&nbsp;: modifie le ton temporairement sans changer les règles internes.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>            <td>Utilisateur</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>            <td>Oui</td>        </tr>    </tbody></table>"
+                "content": "<p>Ce que vous venez de voir est ce que l’on appelle l’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p><h5><br>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau présentant les <strong>méthodes d’alignement les plus courantes</strong> d’un logiciel d’IA générative.<br><br></p><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>            <th scope=\"col\">Pré-prompt</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses données par le logiciel d’intelligence artificielle. Leurs jugements ajustent le comportement de l’IA.</td>            <td>Consigne écrite par l’utilisateur&nbsp;: modifie le ton et la posture temporairement sans changer les règles internes.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>            <td>Utilisateur</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>            <td>Oui</td>        </tr>    </tbody></table>"
               }
             }
           ]
@@ -517,30 +517,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Les deux modèles n’ont pas les mêmes priorités de réponse car ils sont cadrés par des règles internes différentes.&nbsp;</p>",
+                    "content": "Les deux modèles sont cadrés par des règles internes différente.",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !&nbsp;</p><p>Le logiciel d'intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Bien vu !&nbsp;</p><p>Le logiciel d’intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>La demande de Fabrice manquait de contexte, les logiciels d’IA générative ont donc interprété.&nbsp;</p>",
+                    "content": "Les différences sont dues à une interprétation différente du profil de l’utilisateur.",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !</p><p>L’IA ne tire pas cette orientation de la demande de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !</p><p>L’IA ne tire pas cette orientation du profil de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "Les deux logiciels d’intelligence artificielle n’ont pas le même niveau de puissance ou de performance.",
+                    "content": "Les différences viennent du fait que les réponses précédentes influencent directement les réponses suivantes.",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;</p><p>Il ne s'agit pas d'un problème de puissance. Ici, le logiciel d'intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>Il ne s’agit pas d’une influence des réponses précedentes, ici la discussion de Fabrice vient tout juste de commencer. Le logiciel d’intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "Le logiciel d'intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong>"
+                      "diagnosis": "Le logiciel d’intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong>"
                     }
                   }
                 ],
