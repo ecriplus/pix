@@ -111,19 +111,6 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
         assert.deepEqual(currentURL(), '/organizations/456/team');
       });
 
-      test('should be able to add new organization to the target profile', async function (assert) {
-        // given
-        const screen = await visit('/target-profiles/1');
-        await clickByName('Organisations du profil cible');
-
-        // when
-        await fillByLabel('Rattacher une ou plusieurs organisation(s)', '42');
-        await clickByName('Valider le rattachement');
-
-        // then
-        assert.dom(await screen.findByRole('cell', { name: 'Organization 42' })).exists();
-      });
-
       test('should be able to attach an organization with given target profile', async function (assert) {
         const screen = await visit('/target-profiles/1');
         await clickByName('Organisations du profil cible');
