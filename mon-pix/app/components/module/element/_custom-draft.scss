@@ -13,13 +13,14 @@
 
   &__buttons {
     display: flex;
-    justify-content: space-between;
+    gap: var(--pix-spacing-4x);
+    justify-content: flex-end;
   }
 
   &__container {
     padding: var(--pix-spacing-2x);
     border: 2px dashed var(--pix-primary-700);
-    border-radius: 8px 8px 8px 0;
+    border-radius: 8px 8px 0;
   }
 }
 

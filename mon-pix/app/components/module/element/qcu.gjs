@@ -151,12 +151,10 @@ export default class ModuleQcu extends ModuleElement {
             </PixRadioButton>
 
             {{#if this.modulixPreviewMode.isEnabled}}
-              <div class="element-qcu__feedback" role="status" tabindex="-1">
-                <ModulixFeedback
-                  @answerIsValid={{this.isValidFeedbackForPreview proposal.id}}
-                  @feedback={{proposal.feedback}}
-                />
-              </div>
+              <ModulixFeedback
+                @answerIsValid={{this.isValidFeedbackForPreview proposal.id}}
+                @feedback={{proposal.feedback}}
+              />
             {{/if}}
           {{/each}}
         </div>
@@ -181,27 +179,14 @@ export default class ModuleQcu extends ModuleElement {
         </PixButton>
       {{/unless}}
 
-      <div class="element-qcu__feedback" role="status" tabindex="-1">
-        {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback
-            @answerIsValid={{this.answerIsValid}}
-            @feedback={{this.correction.feedback}}
-            @reportInfo={{this.reportInfo}}
-          />
-        {{/if}}
-      </div>
-
-      {{#if this.shouldDisplayRetryButton}}
-        <PixButton
-          class="element-qcu__retry-button"
-          @variant="tertiary"
-          @size="small"
-          @type="button"
-          @triggerAction={{this.retry}}
-          @iconBefore="refresh"
-        >
-          {{t "pages.modulix.buttons.activity.retry"}}
-        </PixButton>
+      {{#if this.shouldDisplayFeedback}}
+        <ModulixFeedback
+          @answerIsValid={{this.answerIsValid}}
+          @feedback={{this.correction.feedback}}
+          @reportInfo={{this.reportInfo}}
+          @shouldDisplayRetryButton={{this.shouldDisplayRetryButton}}
+          @retry={{this.retry}}
+        />
       {{/if}}
     </form>
   </template>

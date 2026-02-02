@@ -75,7 +75,6 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     await click(retryButton);
 
     // then
-    assert.strictEqual(screen.queryByRole('status').innerText, '');
     assert.false(qcmForm.disabled);
     assert.false(wrongAnswerCheckbox.checked);
     assert.false(rightAnswerCheckbox.checked);
@@ -155,7 +154,6 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     await click(retryButton);
 
     // then
-    assert.strictEqual(screen.queryByRole('status').innerText, '');
     assert.false(qcmForm.disabled);
     assert.false(wrongAnswerCheckbox.checked);
     assert.false(rightAnswerCheckbox.checked);

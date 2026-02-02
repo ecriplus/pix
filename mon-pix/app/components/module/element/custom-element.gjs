@@ -77,6 +77,8 @@ export default class ModulixCustomElement extends ModuleElement {
       {{/if}}
 
       <div class={{if this.resetButtonDisplayed "element-custom__buttons" "element-custom__button"}}>
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+
         {{#if this.resetButtonDisplayed}}
           <PixButton
             class="element-custom-buttons__reset"
@@ -86,8 +88,6 @@ export default class ModulixCustomElement extends ModuleElement {
             aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
         {{/if}}
-
-        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>

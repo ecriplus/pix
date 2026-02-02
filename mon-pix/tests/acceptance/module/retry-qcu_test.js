@@ -83,7 +83,6 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     await click(retryButton);
 
     // then
-    assert.strictEqual(feedback.innerText, '');
     assert.false(firstQcuForm.disabled);
     assert.false(wrongAnswerRadio.checked);
     assert.false(rightAnswerRadio.checked);
@@ -171,14 +170,11 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     await click(wrongAnswerRadio);
     await click(firstQcuVerifyButton);
 
-    const feedback = await screen.findByRole('status');
-
     // when
     const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
-    assert.strictEqual(feedback.innerText, '');
     assert.false(firstQcuForm.disabled);
     assert.false(wrongAnswerRadio.checked);
     assert.false(rightAnswerRadio.checked);

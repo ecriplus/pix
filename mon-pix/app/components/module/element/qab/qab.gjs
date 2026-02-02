@@ -6,10 +6,10 @@ import { t } from 'ember-intl';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import QabCard from 'mon-pix/components/module/element/qab/qab-card';
 import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
+import ModulixFeedback from 'mon-pix/components/module/feedback';
 import { TrackedArray, TrackedMap } from 'tracked-built-ins';
 
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
-import ModulixIssueReportBlock from '../../issue-report/issue-report-block';
 import ModuleElement from '../module-element';
 
 const NEXT_CARD_REMOVE_DELAY = 400;
@@ -40,10 +40,6 @@ export default class ModuleQab extends ModuleElement {
 
   get currentCard() {
     return this.displayedCards[0];
-  }
-
-  get feedback() {
-    return this.element.feedback.diagnosis;
   }
 
   get shouldDisplayFeedback() {
@@ -186,26 +182,22 @@ export default class ModuleQab extends ModuleElement {
         </div>
       </fieldset>
     </form>
-    {{#if this.shouldDisplayFeedback}}
-      <div class="feedback element-qab__feedback" role="status" tabindex="-1">
-        {{htmlUnsafe this.feedback}}
 
-        <div class="element-qab__report-button">
-          <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+    {{#if this.shouldDisplayFeedback}}
+      <ModulixFeedback
+        @feedback={{this.element.feedback}}
+        @reportInfo={{this.reportInfo}}
+        @shouldDisplayRetryButton={{this.shouldDisplayScore}}
+        @retry={{this.onRetry}}
+      />
+    {{else}}
+      {{#if this.shouldDisplayScore}}
+        <div class="element-qab__retry-button">
+          <PixButton @variant="tertiary" @triggerAction={{this.onRetry}} @iconAfter="refresh">
+            {{t "pages.modulix.qab.retry"}}
+          </PixButton>
         </div>
-      </div>
-    {{/if}}
-    {{#if this.shouldDisplayScore}}
-      <PixButton
-        class="element-qab__retry-button"
-        @variant="tertiary"
-        @size="small"
-        @type="button"
-        @triggerAction={{this.onRetry}}
-        @iconAfter="refresh"
-      >
-        {{t "pages.modulix.qab.retry"}}
-      </PixButton>
+      {{/if}}
     {{/if}}
   </template>
 }

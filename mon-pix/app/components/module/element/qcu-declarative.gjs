@@ -81,7 +81,9 @@ export default class ModuleQcuDeclarative extends ModuleElement {
             />
             {{#if this.modulixPreviewMode.isEnabled}}
               <div class="element-qcu-declarative__feedback" role="status" tabindex="-1">
-                {{htmlUnsafe proposal.feedback.diagnosis}}
+                <div class="element-qcu-declarative-feedback__content">
+                  {{htmlUnsafe proposal.feedback.diagnosis}}
+                </div>
               </div>
             {{/if}}
           {{/each}}
@@ -90,8 +92,9 @@ export default class ModuleQcuDeclarative extends ModuleElement {
     </form>
     {{#if this.shouldDisplayFeedback}}
       <div class="element-qcu-declarative__feedback" role="status" tabindex="-1">
-        {{htmlUnsafe this.selectedProposalFeedback}}
-
+        <div class="element-qcu-declarative-feedback__content">
+          {{htmlUnsafe this.selectedProposalFeedback}}
+        </div>
         <div class="element-qcu-declarative-feedback__report-button">
           <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
         </div>

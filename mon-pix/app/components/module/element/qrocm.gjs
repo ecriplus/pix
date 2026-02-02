@@ -246,37 +246,20 @@ export default class ModuleQrocm extends ModuleElement {
         </PixButton>
       {{/unless}}
 
-      <div class="element-qrocm__feedback" role="status" tabindex="-1">
-        {{#if this.shouldDisplayFeedback}}
-          <ModulixFeedback
-            @answerIsValid={{this.answerIsValid}}
-            @feedback={{this.correction.feedback}}
-            @reportInfo={{this.reportInfo}}
-          />
-        {{/if}}
-      </div>
-
-      {{#if this.modulixPreviewMode.isEnabled}}
-        <div role="status" tabindex="-1">
-          {{#each this.previewFeedbacks as |feedback|}}
-            <div class="element-qrocm__feedback">
-              <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
-            </div>
-          {{/each}}
-        </div>
+      {{#if this.shouldDisplayFeedback}}
+        <ModulixFeedback
+          @answerIsValid={{this.answerIsValid}}
+          @feedback={{this.correction.feedback}}
+          @reportInfo={{this.reportInfo}}
+          @shouldDisplayRetryButton={{this.shouldDisplayRetryButton}}
+          @retry={{this.retry}}
+        />
       {{/if}}
 
-      {{#if this.shouldDisplayRetryButton}}
-        <PixButton
-          class="element-qrocm__retry-button"
-          @variant="tertiary"
-          @size="small"
-          @type="button"
-          @triggerAction={{this.retry}}
-          @iconBefore="refresh"
-        >
-          {{t "pages.modulix.buttons.activity.retry"}}
-        </PixButton>
+      {{#if this.modulixPreviewMode.isEnabled}}
+        {{#each this.previewFeedbacks as |feedback|}}
+          <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
+        {{/each}}
       {{/if}}
     </form>
   </template>

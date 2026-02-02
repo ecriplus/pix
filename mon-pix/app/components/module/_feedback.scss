@@ -1,47 +1,4 @@
 .feedback {
-  position: relative;
-  height: 100%;
-  padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
-  border-radius: var(--pix-spacing-4x);
-
-  &--success {
-    --modulix-feedback-state-color: var(--pix-success-700);
-    --modulix-feedback-hover-color: var(--pix-success-500);
-    --modulix-feedback-focus-color: var(--pix-success-900);
-
-    background-color: var(--pix-success-50);
-  }
-
-  &--error {
-    --modulix-feedback-state-color: var(--pix-warning-700);
-    --modulix-feedback-hover-color: var(--pix-warning-500);
-    --modulix-feedback-focus-color: var(--pix-warning-900);
-
-    background-color: var(--pix-warning-50);
-  }
-
-  &__state {
-    color: var(--modulix-feedback-state-color);
-    font-weight: var(--pix-font-bold);
-  }
-
-  &__report-button {
-    display: flex;
-    justify-content: flex-end;
-
-    button:not([aria-disabled="true"]) {
-      color: var(--modulix-feedback-state-color);
-
-      &:hover {
-        color: var(--modulix-feedback-hover-color);
-      }
-
-      &:focus, &:active {
-        color: var(--modulix-feedback-focus-color);
-      }
-    }
-  }
-
   @media (not (prefers-reduced-motion: reduce)) {
     animation: 0.75s zoom-in-zoom-out ease;
 
@@ -59,5 +16,76 @@
         scale: 100%;
       }
     }
+  }
+
+  &--success {
+    --modulix-feedback-background-color: var(--pix-success-100);
+    --modulix-feedback-state-color: var(--pix-success-900);
+  }
+
+  &--error {
+    --modulix-feedback-background-color: var(--pix-warning-100);
+    --modulix-feedback-state-color: var(--pix-warning-900);
+    --modulix-feedback-retry-content-color: var(--pix-warning-900);
+    --modulix-feedback-retry-background-color: var(--pix-warning-300-inline);
+    --modulix-feedback-hover-retry-background-color: var(--pix-warning-500-inline);
+    --modulix-feedback-focus-retry-content-color: var(--pix-warning-500);
+  }
+
+  &--info {
+    --modulix-feedback-background-color: var(--pix-info-100);
+    --modulix-feedback-state-color: var(--pix-info-700);
+    --modulix-feedback-retry-content-color: var(--pix-info-900);
+    --modulix-feedback-retry-background-color: var(--pix-info-300-inline);
+    --modulix-feedback-hover-retry-background-color: var(--pix-info-500-inline);
+    --modulix-feedback-focus-retry-content-color: var(--pix-info-500);
+  }
+
+  &__content {
+    position: relative;
+    height: 100%;
+    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+    background-color: var(--modulix-feedback-background-color);
+    border-radius: var(--pix-spacing-4x);
+
+    > p {
+      color: var(--modulix-feedback-state-color);
+    }
+
+    &--with-retry-button {
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    justify-content: flex-end;
+  }
+}
+
+.feedback-buttons {
+  &__retry {
+    padding: var(--pix-spacing-1x) var(--pix-spacing-4x);
+    color: var(--modulix-feedback-retry-content-color);
+    background-color: rgb(var(--modulix-feedback-retry-background-color), 0.8);
+    border-radius: 0 0 8px 8px;
+
+    &:not([aria-disabled="true"]) {
+      &:hover {
+        color: var(--modulix-feedback-retry-content-color);
+        background-color: rgb(var(--modulix-feedback-hover-retry-background-color), 0.8);
+      }
+
+      &:focus, &:active {
+        color: var(--modulix-feedback-focus-retry-content-color);
+      }
+    }
+  }
+}
+
+.feedback-content {
+  &__state {
+    font-weight: var(--pix-font-bold);
   }
 }
