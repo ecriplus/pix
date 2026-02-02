@@ -2,8 +2,11 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (results) {
-  return new Serializer('campaign-result-levels-per-tubes-and-competences', {
+const serialize = function (results, isCampaignParticipation = false) {
+  const serializerName = isCampaignParticipation
+    ? 'campaign-participation-levels-per-tubes-and-competences'
+    : 'campaign-result-levels-per-tubes-and-competences';
+  return new Serializer(serializerName, {
     attributes: ['levelsPerCompetence', 'maxReachableLevel', 'meanReachedLevel'],
     transform(results) {
       const levelsPerCompetence = results.levelsPerCompetence.map((competence) => {
