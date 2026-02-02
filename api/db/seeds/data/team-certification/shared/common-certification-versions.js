@@ -127,7 +127,6 @@ export class CommonCertificationVersions {
   }
 
   /**
-   * This does not exist as a feature as of today (current feature still using certification-configurations table)
    * @param {Object} params
    * @param {Knex} params.databaseBuilder
    * @param {number} params.versionId
