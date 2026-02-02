@@ -165,7 +165,7 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Malheureuseument, oui...</p>",
-                          "diagnosis": "<p>Toutes les propositions sont des impacts  de l’extraction de métaux pour la construction de centres de données.</p>"
+                          "diagnosis": "<p>Il fallait cocher toutes les cases car toutes ces propositions sont des impacts  de l’extraction de métaux pour la construction de centres de données.</p>"
                         },
                         "invalid": {
                           "state": "<p>Malheureusement, non...</p>",
@@ -627,28 +627,28 @@
                           "id": "1",
                           "content": "<p>Transférer la chaleur produite par le centre de données.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre. <br></strong>À Champs sur Marne,&nbsp;un centre de données est ainsi équipé de panneaux solaires depuis 2024.</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre. <br></strong>À Champs sur Marne,&nbsp;un centre de données est équipé de panneaux solaires depuis 2024. Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.</p>",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<strong></strong></p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.</p>"
+                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d'énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         }
                       ],
@@ -699,28 +699,28 @@
                           "id": "1",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! </p><p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Bien vu ! </p><p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est partiellement chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces. <br></p>",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Eh non !</p><p>  Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est partiellement chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>  Il s’agit ici d<strong>’utiliser la chaleur fatale produite par le centre de données.</strong> C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>  Il s’agit ici d<strong>’utiliser la chaleur fatale produite par le centre de données.</strong> C’est comme ça qu’est partiellement chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
+                            "diagnosis": "<p>Il s’agit ici d’<strong>utiliser la chaleur fatale produite par le centre de données</strong>. C’est comme ça qu’est&nbsp;partiellement chauffée la piscine de la Butte aux cailles, à Paris, ou des habitations de la ville de Mantsala, en Finlande.</p>"
                           }
                         }
                       ],
@@ -783,7 +783,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.</p>",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p><p>  L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
                           }
@@ -843,28 +843,28 @@
                           "id": "1",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Utiliser des techniques de refroidissement plus efficaces.<br></p>",
+                          "content": "Utiliser des techniques de refroidissement moins consommatrices d'énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft&nbsp;a  tenté l’expérience sur les côtes californiennes, puis écossaises.</p>"
+                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n'a pas donné suite à ce projet.</p>"
                           }
                         }
                       ],
@@ -1007,7 +1007,7 @@
                         },
                         {
                           "type": "text",
-                          "content": "qui sont sollicités pour permettre notre utilisation d’internet et de l’intelligence artificielle.<br>"
+                          "content": "qui sont sollicités pour permettre, entre autres, notre utilisation d’internet et de l’intelligence artificielle.<br>"
                         }
                       ],
                       "feedbacks": {
@@ -1117,7 +1117,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "Ces infrastructure consomme de l’eau"
+                          "content": "Ces infrastructure consomment de l’eau"
                         },
                         {
                           "input": "103432",
@@ -1133,7 +1133,8 @@
                             "t3"
                           ],
                           "solutions": [
-                            "douce"
+                            "douce",
+                            "potable"
                           ]
                         },
                         {
@@ -1210,12 +1211,12 @@
                       }
                     },
                     {
-                      "title": "Le lecteur vidéo de PixVideo adapte automatiquement la qualité selon la largeur de l’écran de l’utilisateur.",
+                      "title": "Le lecteur vidéo de PixVideo propose par défaut une définition standard plutôt que HD. ",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/lecteur-video.webp",
-                        "alt": "Le lecteur vidéo de PixVidéo adapte automatiquement la qualité selon la largeur de l’écran de l’utilisateur."
+                        "alt": "Le lecteur vidéo de PixVideo propose par défaut une définition standard plutôt que HD. "
                       },
                       "license": {
                         "name": "",
@@ -1387,7 +1388,7 @@
                 "props": {
                   "titleLevel": 0,
                   "title": "Les géants du web ouvrent des centres de données au Mexique.",
-                  "author": "La gazette des géants",
+                  "author": "La gazette des pixels",
                   "date": "2026",
                   "paragraphs": [
                     "Plusieurs géants du web ont fait des investissements ou exploitent déjà des <strong>centres de données dans l’État de Querétaro</strong>, renforçant l’infrastructure numérique du pays. Ces installations s’inscrivent dans une démarche de <strong>développement durable</strong>, avec l’objectif d’être neutres en carbone, positifs en eau et zéro déchet d’ici 2030.",
@@ -1454,7 +1455,7 @@
                     {
                       "id": "623a15cf-4b46-4ee2-a068-4bd0b1555022",
                       "type": "qcm",
-                      "instruction": "<p>En faisant des recherches, que peut-on dire concernant les centres de données implanté dans la région du Quérato ?</p>",
+                      "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Quérato ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
                       "proposals": [
                         {
                           "id": "1",
