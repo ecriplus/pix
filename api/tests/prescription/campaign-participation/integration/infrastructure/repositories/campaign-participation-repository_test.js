@@ -1389,13 +1389,14 @@ describe('Integration | Repository | Campaign Participation', function () {
   });
 
   describe('#hasAssessmentParticipations', function () {
-    let userId, organizationLearnerId;
+    let userId, organizationLearnerId, organizationId;
 
     beforeEach(async function () {
       sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
 
       userId = databaseBuilder.factory.buildUser().id;
-      organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId }).id;
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
       await databaseBuilder.commit();
     });
 
@@ -1548,14 +1549,14 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
 
     it('should return true user linked to a combined course', async function () {
-      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId });
 
       const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
         rewardType: null,
         rewardId: null,
         code: 'COMBINIX1',
-        organizationId: campaignInCombinedCourse.organizationId,
+        organizationId,
         combinedCourseContents: [
           { campaignId: campaignInCombinedCourse.id },
           { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
@@ -1578,21 +1579,17 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
 
     it('should return true if at least one assessment is not linked to a combined course', async function () {
-      const campaign = databaseBuilder.factory.buildCampaign();
+      const campaign = databaseBuilder.factory.buildCampaign({ organizationId });
 
-      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId });
 
-      const participationInCombinedCourse = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaignInCombinedCourse.id,
-        organizationLearnerId,
-        userId,
-      });
       const participation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         organizationLearnerId,
         userId,
       });
       databaseBuilder.factory.buildCombinedCourse({
+        organizationId,
         combinedCourseContents: [{ campaignId: campaignInCombinedCourse.id }],
       });
 
@@ -1600,13 +1597,6 @@ describe('Integration | Repository | Campaign Participation', function () {
         campaignParticipationId: participation.id,
         type: Assessment.types.CAMPAIGN,
         createdAt: participation.createdAt,
-        userId,
-      });
-
-      databaseBuilder.factory.buildAssessment({
-        campaignParticipationId: participationInCombinedCourse.id,
-        type: Assessment.types.CAMPAIGN,
-        createdAt: participationInCombinedCourse.createdAt,
         userId,
       });
 
