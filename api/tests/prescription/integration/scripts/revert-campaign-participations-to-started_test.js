@@ -13,6 +13,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
     script = new RevertCampaignParticipationsToStartedScript();
     logger = {
       info: sinon.stub(),
+      debug: sinon.stub(),
       warn: sinon.stub(),
       error: sinon.stub(),
     };
@@ -276,7 +277,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
             await script.handle({ logger, options });
 
             // then
-            expect(logger.info).to.have.been.calledWith(
+            expect(logger.debug).to.have.been.calledWith(
               'Participation is of type PROFILES_COLLECTION, skipping assessment update',
             );
           });
@@ -305,7 +306,7 @@ describe('Integration | Prescription | Scripts | revert-campaign-participations-
             await script.handle({ logger, options });
 
             // then
-            expect(logger.info).to.have.been.calledWith('Participation has been deleted, skipping assessment update');
+            expect(logger.debug).to.have.been.calledWith('Participation has been deleted, skipping assessment update');
           });
         });
       });
