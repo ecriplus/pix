@@ -337,6 +337,24 @@
                 "type": "text",
                 "content": "<p>Dans les mails d’hameçonnage, l’escroc <strong>imite de façon presque parfaite</strong> une personne ou un organisme de confiance. 👺</p><p>Ayez l’œil pour repérer les imperfections !<br></p>"
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d6993f31-86f6-4544-84ac-d5ead738615e",
+                "type": "text",
+                "content": "🤔<strong> Bon à savoir</strong><br>Des indices se cachent parfois dans les URL. Sur ordinateur, <strong>le survol permet de voir l’URL</strong> vers lequel un bouton veut vous rediriger. Si cette URL comporte des fautes ou n’a rien à voir avec l’expediteur ou sa demande, il est possible que le mail soit du phishing."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d0726e19-cab8-4d42-a59d-41508b57dbc5",
+                "type": "short-video",
+                "title": "survol lien phishing",
+                "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/capture-survol-lien-v1.mp4",
+                "transcription": "    "
+              }
             }
           ]
         },
