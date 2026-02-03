@@ -33,6 +33,10 @@ function _isLanguageNotSupported(error) {
   return error.code === 'LANGUAGE_NOT_SUPPORTED';
 }
 
+function _isWrongDomainForPixPlus(error) {
+  return error.code === 'WRONG_PIX_PLUS_CANDIDATE_DOMAIN';
+}
+
 function _isCenterHasHabilitationToHoldTheSession(error) {
   return error.status === '403' && error.code === 'CENTER_HABILITATION_ERROR';
 }
@@ -284,6 +288,10 @@ export default class CertificationJoiner extends Component {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.session-not-accessible');
       } else if (_isCenterHasHabilitationToHoldTheSession(errorDetails)) {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.missing-center-habilitation');
+      } else if (_isWrongDomainForPixPlus(errorDetails)) {
+        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.wrong-domain-for-pix-plus', {
+          htmlSafe: true,
+        });
       } else {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.generic.disclaimer');
         this.errorDetailList = [

@@ -839,7 +839,8 @@
         "wrong-account-sco-link": {
           "label": "Hoe vind ik de rekening die aan de vestiging is gekoppeld?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
-        }
+        },
+        "wrong-domain-for-pix-plus": "Pix+ certificeringen zijn momenteel alleen beschikbaar in het Frans, dus ze zijn niet beschikbaar op <b>https://pix.org</b>.<br/>Gelieve uit te loggen en opnieuw in te loggen via '<a href=\"https://app.pix.fr/connexion\">deze link.</a>'"
       },
       "first-title": "Deelnemen aan een sessie",
       "form": {
