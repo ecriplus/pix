@@ -22,6 +22,7 @@ import InformationSection from 'pix-admin/components/organizations/information-s
       {{#unless @model.isArchived}}
         <LinkTo @route="authenticated.organizations.get.team" @model={{@model}}>
           {{t "pages.organization.navbar.team"}}
+          ({{@model.organizationMemberships.length}})
         </LinkTo>
 
         <LinkTo @route="authenticated.organizations.get.invitations" @model={{@model}}>

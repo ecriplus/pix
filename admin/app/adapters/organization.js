@@ -6,12 +6,14 @@ export default class OrganizationAdapter extends ApplicationAdapter {
   findHasMany(store, snapshot, url, relationship) {
     url = this.urlPrefix(url, this.buildURL(snapshot.modelName, snapshot.id, null, 'findHasMany'));
 
-    if (relationship.type === 'organization-membership' && snapshot.adapterOptions) {
+    if (relationship.type === 'organization-membership') {
       const params = new URLSearchParams();
-      for (const [key, value] of Object.entries(snapshot.adapterOptions)) {
-        if (value) params.append(key, value);
+      if (snapshot.adapterOptions) {
+        for (const [key, value] of Object.entries(snapshot.adapterOptions)) {
+          if (value) params.append(key, value);
+        }
       }
-      url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/memberships?${params.toString()}`;
+      url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/memberships${params.toString() ? '?' + params.toString() : ''}`;
     }
 
     return this.ajax(url, 'GET');
