@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.321.0](https://github.com/1024pix/pix/compare/v5.320.0...v5.321.0) (2026-02-03)
+
+### :rocket: Amélioration
+
+- [#14948](https://github.com/1024pix/pix/pull/14948) Ajouter l'attestation mairie de Paris (PIX-21239)" 
+- [#14902](https://github.com/1024pix/pix/pull/14902) Ne pas afficher le formulaire d'inscription si l'utilisateur se connecte sans invitation (PIX-21275) 
+
+### :bug: Correction
+
+- [#14953](https://github.com/1024pix/pix/pull/14953) Fix d'un flaky sur les profils cibles côté Admin 
+
+### :building_construction: Tech
+
+- [#14915](https://github.com/1024pix/pix/pull/14915) Ajout de tests E2E pour couvrir les cas de scoring et rescoring sur de la certification coeur (PIX-21352) 
+- [#14949](https://github.com/1024pix/pix/pull/14949) Ajouter une barre de progression dans le script de migration des statuts des participations (PIX-21362) 
+- [#14957](https://github.com/1024pix/pix/pull/14957) Ajouter une condition sur l'organisation dans la récupération des parcours combiné (PIX-21369). 
+- [#14928](https://github.com/1024pix/pix/pull/14928) Suppression de la table certification-configurations (PIX-19680) 
+- [#14960](https://github.com/1024pix/pix/pull/14960) Supprime la condition peu performante sur hasAssessmentParticipations (PIX-21367)
+
 # [5.320.0](https://github.com/1024pix/pix/compare/v5.319.0...v5.320.0) (2026-02-02)
 
 ### :rocket: Amélioration
