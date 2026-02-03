@@ -491,6 +491,7 @@ export const buildQuests = async (databaseBuilder) => {
     { templateName: 'edu-collaborer-attestation-template', key: 'EDUCOLLAB' },
     { templateName: 'edu-ia-attestation-template', key: 'EDUIA' },
     { templateName: 'minarm-attestation-template', key: 'MINARM' },
+    { templateName: 'mdp-bureautique-attestation-template', key: 'MAIRIEBUREAU' },
   ];
 
   const educationAttestations = attestationsData.map(({ templateName, key }) =>
@@ -525,7 +526,7 @@ export const buildQuests = async (databaseBuilder) => {
       rewardId: attestation.id,
     }).id;
 
-    if (['MINARM', 'EDUSECU'].includes(attestation.key)) {
+    if (['MINARM', 'EDUSECU', 'MAIRIEBUREAU'].includes(attestation.key)) {
       databaseBuilder.factory.buildOrganizationsProfileRewards({
         userId: allAttestationsUser.id,
         organizationId: PRO_ORGANIZATION_ID,
