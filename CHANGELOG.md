@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## [5.317.2](https://github.com/1024pix/pix/compare/v5.317.1...v5.317.2) (2026-02-03)
+
+### :building_construction: Tech
+
+- feat(api): fixes query on campaign participations overviews and has assessments
+- feat(api): Remove openid connection retrier
+
 ## [5.317.1](https://github.com/1024pix/pix/compare/v5.317.0...v5.317.1) (2026-01-29)
 
 ### :building_construction: Tech
