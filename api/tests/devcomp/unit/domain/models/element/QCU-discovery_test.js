@@ -17,6 +17,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCU-discovery', function 
         instruction: 'instruction',
         proposals: [proposal1, proposal2],
         solution: '1',
+        hasShortProposals: true,
       });
 
       // Then
@@ -25,6 +26,8 @@ describe('Unit | Devcomp | Domain | Models | Element | QCU-discovery', function 
       expect(qcu.type).equal('qcu-discovery');
       expect(qcu.proposals).deep.equal([proposal1, proposal2]);
       expect(qcu.solution).equal('1');
+      expect(qcu.isAnswerable).to.be.true;
+      expect(qcu.hasShortProposals).to.be.true;
     });
   });
 
