@@ -3,7 +3,7 @@ import { ModuleInstantiationError } from '../../errors.js';
 import { Element } from './Element.js';
 
 class QCU extends Element {
-  constructor({ id, instruction, locales, proposals, solution, type = 'qcu' }) {
+  constructor({ id, instruction, locales, proposals, solution, type = 'qcu', hasShortProposals = false } = {}) {
     super({ id, type });
 
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCU');
@@ -16,6 +16,7 @@ class QCU extends Element {
     this.proposals = proposals;
     this.solution = solution;
     this.isAnswerable = true;
+    this.hasShortProposals = Boolean(hasShortProposals);
   }
 
   #assertProposalsAreNotEmpty(proposals) {

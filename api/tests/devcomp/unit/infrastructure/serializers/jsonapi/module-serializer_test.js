@@ -565,6 +565,7 @@ function getAttributesComponents() {
         instruction: 'hello',
         isAnswerable: true,
         locales: undefined,
+        hasShortProposals: false,
         proposals: [
           {
             content: 'toto',

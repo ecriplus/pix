@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { htmlSchema, proposalIdSchema, uuidSchema } from '../utils.js';
+import { htmlNotAllowedSchema, htmlSchema, proposalIdSchema, uuidSchema } from '../utils.js';
 import { feedbackSchema } from './feedback-schema.js';
 
 const qcuElementSchema = Joi.object({
@@ -10,11 +10,16 @@ const qcuElementSchema = Joi.object({
   proposals: Joi.array()
     .items({
       id: proposalIdSchema.required(),
-      content: htmlSchema.required(),
+      content: Joi.when(Joi.ref('....hasShortProposals'), {
+        is: true,
+        then: htmlNotAllowedSchema.required().max(20),
+        otherwise: htmlSchema.required(),
+      }),
       feedback: feedbackSchema.required(),
     })
     .required(),
   solution: proposalIdSchema.required(),
+  hasShortProposals: Joi.boolean().required().default(false),
 });
 
 export { qcuElementSchema };
