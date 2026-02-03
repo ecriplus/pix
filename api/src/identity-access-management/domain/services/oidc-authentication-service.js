@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import jsonwebtoken from 'jsonwebtoken';
 import lodash from 'lodash';
 import ms from 'ms';
+import * as client from 'openid-client';
 
 import { config } from '../../../shared/config.js';
 import { OIDC_ERRORS } from '../../../shared/domain/constants.js';
@@ -12,7 +13,6 @@ import { AuthenticationSessionContent } from '../../../shared/domain/models/Auth
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { DEFAULT_CLAIM_MAPPING } from '../constants/oidc-identity-providers.js';
-import { openidClientWithRetry } from '../helpers/openid-client-with-retry.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
 import { ClaimManager } from '../models/ClaimManager.js';
 
@@ -52,7 +52,7 @@ export class OidcAuthenticationService {
       isVisible = true,
       claimMapping,
     },
-    { sessionTemporaryStorage = defaultSessionTemporaryStorage, openidClient = openidClientWithRetry } = {},
+    { sessionTemporaryStorage = defaultSessionTemporaryStorage, openidClient = client } = {},
   ) {
     this.accessTokenLifespanMs = ms(accessTokenLifespan);
     this.additionalRequiredProperties = additionalRequiredProperties;
