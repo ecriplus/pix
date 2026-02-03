@@ -1,3 +1,4 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
@@ -10,6 +11,16 @@ import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 
   <AuthenticationLayout class="signin-page-layout">
     <:header>
+      {{#unless @controller.currentInvitation}}
+        <PixButton
+          class="back-button"
+          @variant="secondary"
+          @triggerAction={{@controller.goBack}}
+          @iconBefore="arrowLeft"
+        >
+          {{t "common.actions.back"}}
+        </PixButton>
+      {{/unless}}
     </:header>
 
     <:content>
@@ -24,10 +35,15 @@ import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
 
       <LoginForm @onSubmit={{@controller.redirectToAssociationConfirmation}} />
 
-      <PixButtonLink @variant="secondary" @route="authentication.oidc.signup" @model={{@model.identity_provider_slug}}>
-        {{t "pages.oidc.login.signup-button"}}
-      </PixButtonLink>
-
+      {{#if @controller.currentInvitation}}
+        <PixButtonLink
+          @variant="secondary"
+          @route="authentication.oidc.signup"
+          @model={{@model.identity_provider_slug}}
+        >
+          {{t "pages.oidc.login.signup-button"}}
+        </PixButtonLink>
+      {{/if}}
     </:content>
   </AuthenticationLayout>
 </template>
