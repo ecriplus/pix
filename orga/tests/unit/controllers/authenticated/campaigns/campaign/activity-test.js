@@ -102,6 +102,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
         // given
         const campaignParticipantActivity = {
           id: 89,
+          lastCampaignParticipationId: 18,
           destroyRecord: sinon.stub(),
         };
         const campaignId = controller.model.campaign.id;
@@ -112,7 +113,10 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
         //then
         assert.true(
           campaignParticipantActivity.destroyRecord.calledWith({
-            adapterOptions: { campaignId, campaignParticipationId: campaignParticipantActivity.id },
+            adapterOptions: {
+              campaignId,
+              campaignParticipationId: campaignParticipantActivity.lastCampaignParticipationId,
+            },
           }),
         );
 

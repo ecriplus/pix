@@ -146,13 +146,15 @@ export default class ParticipantsList extends Component {
               {{t "pages.campaign-activity.table.column.delete"}}
             </:header>
             <:cell>
-              <PixIconButton
-                @ariaLabel={{t "pages.campaign-activity.table.delete-button-label"}}
-                @iconName="delete"
-                @triggerAction={{fn this.openModal participation}}
-                @size="small"
-                class="campaign-activity-table-actions__button campaign-activity-table-actions__button--delete"
-              />
+              {{#if participation.lastCampaignParticipationId}}
+                <PixIconButton
+                  @ariaLabel={{t "pages.campaign-activity.table.delete-button-label"}}
+                  @iconName="delete"
+                  @triggerAction={{fn this.openModal participation}}
+                  @size="small"
+                  class="campaign-activity-table-actions__button campaign-activity-table-actions__button--delete"
+                />
+              {{/if}}
             </:cell>
           </PixTableColumn>
         {{/if}}

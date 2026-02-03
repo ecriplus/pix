@@ -1,19 +1,22 @@
+/* eslint-disable ember/template-no-let-reference */
 import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ParticipantsList from 'pix-orga/components/campaign/activity/participants-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Campaign::Activity::ParticipantsList', function (hooks) {
+  let noop, clickSpy;
   setupIntlRenderingTest(hooks);
   hooks.beforeEach(function () {
-    this.set('clickSpy', sinon.stub());
-    this.set('noop', sinon.stub());
+    clickSpy = sinon.stub();
+    noop = sinon.stub();
+
     this.owner.lookup('service:store');
     this.owner.setupRouter();
   });
@@ -24,24 +27,26 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     }
     this.owner.register('service:current-user', CurrentUserStub);
 
-    this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         firstName: 'Joe',
         lastName: 'La frite',
         status: 'STARTED',
         participantExternalId: 'patate',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{noop}}
+          @onFilter={{noop}}
+        />
+      </template>,
     );
 
     assert.ok(screen.getByText('Joe'));
@@ -59,24 +64,26 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
 
     this.owner.register('service:current-user', CurrentUserStub);
 
-    this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         firstName: 'Joe',
         lastName: 'La frite',
         status: 'TO_SHARE',
         participantExternalId: 'patate',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{noop}}
+          @onFilter={{noop}}
+        />
+      </template>,
     );
     assert.ok(screen.getByLabelText('items', { exact: false }));
   });
@@ -87,9 +94,9 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     }
     this.owner.register('service:current-user', CurrentUserStub);
 
-    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         id: '123',
         firstName: 'Joe',
@@ -98,19 +105,21 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         participantExternalId: 'patate',
         lastCampaignParticipationId: '456',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.clickSpy}}
-  @onFilter={{this.noop}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{clickSpy}}
+          @onFilter={{noop}}
+        />
+      </template>,
     );
     const row = screen.getByText('La frite').closest('tr');
     await click(row);
-    sinon.assert.calledOnceWithMatch(this.clickSpy, {
+    sinon.assert.calledOnceWithMatch(clickSpy, {
       id: '123',
       firstName: 'Joe',
       lastName: 'La frite',
@@ -126,9 +135,9 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       isAdminInOrganization = true;
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         id: '123',
         firstName: 'Joe',
@@ -138,15 +147,17 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         lastCampaignParticipationId: '456',
         participationCount: 2,
       },
-    ]);
+    ];
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.clickSpy}}
-  @onFilter={{this.noop}}
-  @showParticipationCount={{true}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{clickSpy}}
+          @onFilter={{noop}}
+          @showParticipationCount={{true}}
+        />
+      </template>,
     );
 
     assert.ok(screen.getByText(t('pages.campaign-activity.table.column.participationCount')));
@@ -159,9 +170,9 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       organization = { isManagingStudents: false };
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         id: '123',
         firstName: 'Joe',
@@ -171,14 +182,16 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         lastCampaignParticipationId: '456',
         participationCount: 1,
       },
-    ]);
+    ];
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.clickSpy}}
-  @onFilter={{this.noop}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{clickSpy}}
+          @onFilter={{noop}}
+        />
+      </template>,
     );
 
     assert.notOk(screen.queryByText('Participations'));
@@ -190,24 +203,26 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       organization = { isManagingStudents: false };
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
+    const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
 
-    this.set('participations', [
+    const participations = [
       {
         firstName: 'Joe',
         lastName: 'La frite',
         status: 'TO_SHARE',
         participantExternalId: 'patate',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+      <template>
+        <ParticipantsList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{noop}}
+          @onFilter={{noop}}
+        />
+      </template>,
     );
 
     assert.ok(
@@ -223,8 +238,8 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', isFromCombinedCourse: true };
-        this.participations = [
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', isFromCombinedCourse: true };
+        const participations = [
           {
             firstName: 'Joe',
             lastName: 'La frite',
@@ -233,12 +248,16 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           },
         ];
 
-        const screen = await render(hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`);
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
 
         assert.notOk(screen.queryByRole('button', { name: 'Supprimer la participation' }));
       });
@@ -251,53 +270,125 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
-        this.participations = [
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
+        const participations = [
           {
             firstName: 'Joe',
             lastName: 'La frite',
             status: 'TO_SHARE',
             participantExternalId: 'patate',
+            lastCampaignParticipationId: 18,
           },
         ];
 
-        const screen = await render(hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`);
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
 
         assert.ok(screen.getByRole('button', { name: 'Supprimer la participation' }));
       });
-    });
 
-    module('when the user is the owner of the campaign', function () {
-      test('it displays the trash to delete the participation', async function (assert) {
+      test('it hide the trash to delete the participation if not exist', async function (assert) {
         class CurrentUserStub extends Service {
           isAdminInOrganization = false;
           prescriber = EmberObject.create({ id: '109' });
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
-        this.participations = [
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
+        const participations = [
+          {
+            firstName: 'Joe',
+            lastName: 'La frite',
+            status: 'NOT_STARTED',
+            participantExternalId: 'patate',
+          },
+        ];
+
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
+
+        assert.notOk(screen.queryByRole('button', { name: 'Supprimer la participation' }));
+      });
+    });
+
+    module('when the user is the owner of the campaign', function () {
+      test('it displays the trash to delete the participation if exist', async function (assert) {
+        class CurrentUserStub extends Service {
+          isAdminInOrganization = false;
+          prescriber = EmberObject.create({ id: '109' });
+        }
+        this.owner.register('service:current-user', CurrentUserStub);
+
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
+        const participations = [
           {
             firstName: 'Joe',
             lastName: 'La frite',
             status: 'TO_SHARE',
             participantExternalId: 'patate',
+            lastCampaignParticipationId: 18,
           },
         ];
 
-        const screen = await render(hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`);
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
 
         assert.ok(screen.getByRole('button', { name: 'Supprimer la participation' }));
+      });
+
+      test('it hide the trash to delete the participation if not exist', async function (assert) {
+        class CurrentUserStub extends Service {
+          isAdminInOrganization = false;
+          prescriber = EmberObject.create({ id: '109' });
+        }
+        this.owner.register('service:current-user', CurrentUserStub);
+
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
+        const participations = [
+          {
+            firstName: 'Joe',
+            lastName: 'La frite',
+            status: 'NOT_STARTED',
+            participantExternalId: 'patate',
+          },
+        ];
+
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
+
+        assert.notOk(screen.queryByRole('button', { name: 'Supprimer la participation' }));
       });
     });
 
@@ -309,8 +400,8 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 1 };
-        this.participations = [
+        const campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 1 };
+        const participations = [
           {
             firstName: 'Joe',
             lastName: 'La frite',
@@ -319,15 +410,20 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
           },
         ];
 
-        const screen = await render(hbs`<Campaign::Activity::ParticipantsList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-/>`);
+        const screen = await render(
+          <template>
+            <ParticipantsList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+            />
+          </template>,
+        );
 
         assert.notOk(screen.queryByRole('button', { name: 'Supprimer la participation' }));
       });
     });
   });
 });
+/* eslint-enable ember/template-no-let-reference */

@@ -51,7 +51,10 @@ export default class ActivityController extends Controller {
   async deleteCampaignParticipation(campaignId, campaignParticipantActivity) {
     try {
       await campaignParticipantActivity.destroyRecord({
-        adapterOptions: { campaignId, campaignParticipationId: campaignParticipantActivity.id },
+        adapterOptions: {
+          campaignId,
+          campaignParticipationId: campaignParticipantActivity.lastCampaignParticipationId,
+        },
       });
       this.send('refreshModel');
       this.notifications.sendSuccess(this.intl.t('pages.campaign-activity.delete-participation-modal.success'));
