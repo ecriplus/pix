@@ -51,4 +51,26 @@ module('Integration | Component | LoginForm', function (hooks) {
       assert.dom(screen.getByText('This is an error')).exists();
     });
   });
+
+  module('when the login form is used for an account association', function () {
+    test('it displays associate account button label', async function (assert) {
+      // given & when
+      const screen = await render(
+        <template><LoginForm @submitFormButtonLabel={{t "pages.login-form.associate-account"}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.login-form.associate-account') })).exists();
+    });
+  });
+
+  module('when the login form is not used for an account association', function () {
+    test('it displays associate account button label', async function (assert) {
+      // given & when
+      const screen = await render(<template><LoginForm /></template>);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.login-form.login') })).exists();
+    });
+  });
 });

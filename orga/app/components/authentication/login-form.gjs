@@ -78,6 +78,10 @@ export default class LoginForm extends Component {
     return url.toString();
   }
 
+  get connectionButtonLabel() {
+    return this.args.submitFormButtonLabel || this.intl.t('pages.login-form.login');
+  }
+
   @action
   updatePassword(event) {
     this.password = event.target.value?.trim();
@@ -140,7 +144,7 @@ export default class LoginForm extends Component {
       </div>
 
       <PixButton @type="submit" @isLoading={{this.isLoading}}>
-        {{t "pages.login-form.login"}}
+        {{this.connectionButtonLabel}}
       </PixButton>
     </form>
   </template>
