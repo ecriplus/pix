@@ -43,8 +43,6 @@ describe('Acceptance | Quest | Application | combined-course-api', function () {
 
   it('should throw an error if multiple combined courses found', async function () {
     //given
-    const organizationId = databaseBuilder.factory.buildOrganization().id;
-
     databaseBuilder.factory.buildCombinedCourse({
       code: 'QWERTY123',
       name: combinedCourseName,
