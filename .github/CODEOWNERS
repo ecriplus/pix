@@ -30,22 +30,11 @@
 /api/src/certification/ @1024pix/team-certification
 /api/tests/certification/ @1024pix/team-certification
 
-# Directories maintained by team Evaluation
-/api/db/seeds/data/team-evaluation/ @1024pix/team-evaluation
-/api/src/evaluation/ @1024pix/team-evaluation
-/api/tests/evaluation/ @1024pix/team-evaluation
-
 
 # Directories maintained by team Prescription
 /api/db/seeds/data/team-prescription/ @1024pix/team-prescription
 /api/src/prescription/ @1024pix/team-prescription
 /api/tests/prescription/ @1024pix/team-prescription
-
-
-# Directories maintained by team Junior
-/api/db/seeds/data/team-1d/ @1024pix/team-junior
-/api/src/school/ @1024pix/team-junior
-/api/tests/school/ @1024pix/team-junior
 
 
 # Directories maintained by team Accès
