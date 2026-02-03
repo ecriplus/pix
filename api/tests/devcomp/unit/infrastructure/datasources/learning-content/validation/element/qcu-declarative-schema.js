@@ -15,7 +15,7 @@ const qcuDeclarativeElementSchema = Joi.object({
       feedback: feedbackNeutralSchema.required(),
     })
     .required(),
-  hasShortProposals: Joi.boolean().required().default(false),
+  hasShortProposals: Joi.boolean().optional().default(false),
 });
 
 export { qcuDeclarativeElementSchema };
