@@ -226,6 +226,38 @@ module('Integration | Component | Module | QCU', function (hooks) {
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
   });
 
+  module('when user click on retry button', function () {
+    test('should call action and send an event', async function (assert) {
+      // given
+      const qcuElement = _getQcuElement();
+      const answeredProposal = qcuElement.proposals[1];
+      const onAnswerStub = sinon.stub();
+      const onRetrySpy = sinon.spy();
+
+      // when
+      const screen = await render(
+        <template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerStub}} @onRetry={{onRetrySpy}} /></template>,
+      );
+      await click(screen.getByLabelText(answeredProposal.content));
+
+      const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
+      await click(verifyButton);
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+      const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+      await click(retryButton);
+
+      // then
+      sinon.assert.calledWith(onRetrySpy, { element: qcuElement });
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QCU_RETRIED',
+        data: {
+          elementId: qcuElement.id,
+        },
+      });
+      assert.ok(true);
+    });
+  });
+
   module('when preview mode is enabled', function () {
     test('should display all feedbacks, without answering', async function (assert) {
       // given
