@@ -4,7 +4,6 @@ import Service from '@ember/service';
 import { click, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import InformationSection from 'pix-admin/components/organizations/information-section';
-import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -35,120 +34,6 @@ module('Integration | Component | organizations/information-section', function (
         store.createRecord('country', { code: '99101', name: 'Danemark' }),
         store.createRecord('country', { code: '99100', name: 'France' }),
       ]);
-  });
-
-  module('when displaying organization', function () {
-    test('it displays organization header information', async function (assert) {
-      // given
-      const organization = EmberObject.create({ id: 1, name: 'Organization SCO' });
-
-      // when
-      const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-      // then
-      assert.dom(screen.getByRole('heading', { name: 'Organization SCO' })).exists();
-    });
-
-    test('it generates correct external dashboard URL', async function (assert) {
-      // given
-      ENV.APP.ORGANIZATION_DASHBOARD_URL = 'https://metabase.pix.fr/dashboard/137/?id=';
-      const organization = EmberObject.create({ id: 1, name: 'Test Organization' });
-
-      // when
-      const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-      // then
-      const dashboardLink = screen.getByRole('link', { name: 'Tableau de bord' });
-      assert.dom(dashboardLink).hasAttribute('href', 'https://metabase.pix.fr/dashboard/137/?id=1');
-    });
-
-    module('when organization has tags', function () {
-      test('it should display tags', async function (assert) {
-        // given
-        const organization = EmberObject.create({
-          id: 1,
-          tags: [
-            { id: 1, name: 'CFA' },
-            { id: 2, name: 'PRIVE' },
-            { id: 3, name: 'AGRICULTURE' },
-          ],
-        });
-
-        // when
-        const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-        // then
-        assert.dom(screen.getByText('CFA')).exists();
-        assert.dom(screen.getByText('PRIVE')).exists();
-        assert.dom(screen.getByText('AGRICULTURE')).exists();
-      });
-    });
-
-    module('when organization is parent', function () {
-      test('it should display parent label', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const child = store.createRecord('organization', {
-          type: 'SCO',
-        });
-        const organization = store.createRecord('organization', {
-          type: 'SCO',
-          children: [child],
-        });
-
-        // when
-        const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-        // then
-        assert
-          .dom(screen.getByText(t('components.organizations.information-section-view.parent-organization')))
-          .exists();
-      });
-    });
-
-    module('when organization is child', function () {
-      test('it displays child label and parent organization name', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const parentOrganization = store.createRecord('organization', {
-          id: '5',
-          type: 'SCO',
-        });
-        const organization = store.createRecord('organization', {
-          type: 'SCO',
-          parentOrganizationId: parentOrganization.id,
-          parentOrganizationName: 'Shibusen',
-        });
-
-        // when
-        const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-        // then
-        assert
-          .dom(screen.getByText(t('components.organizations.information-section-view.child-organization')))
-          .exists();
-        assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
-      });
-    });
-
-    module('when organization is neither parent nor children', function () {
-      test('it displays no organization network label', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const organization = store.createRecord('organization', {
-          type: 'SCO',
-          name: 'notParent',
-        });
-
-        // when
-        const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-
-        // then
-        assert
-          .dom(screen.queryByText(t('components.organizations.information-section-view.parent-organization')))
-          .doesNotExist();
-      });
-    });
   });
 
   module('when editing organization', function () {
@@ -193,7 +78,6 @@ module('Integration | Component | organizations/information-section', function (
       await clickByName(t('common.actions.cancel'));
 
       // then
-      assert.ok(await screen.findByRole('heading', { name: 'Organization SCO' }));
       assert.ok(await screen.findByRole('button', { name: t('common.actions.edit') }));
     });
 
@@ -203,7 +87,6 @@ module('Integration | Component | organizations/information-section', function (
 
       await clickByName(t('common.actions.edit'));
 
-      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
       await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
       await fillByLabel(t('components.organizations.editing.province-code.label'), 'new provinceCode');
       await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
@@ -218,7 +101,6 @@ module('Integration | Component | organizations/information-section', function (
       await clickByName(t('common.actions.cancel'));
 
       // then
-      assert.dom(screen.getByRole('heading', { name: organization.name })).exists();
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.external-id')).nextElementSibling)
         .hasText(organization.externalId);
@@ -317,7 +199,6 @@ module('Integration | Component | organizations/information-section', function (
       await clickByName(t('common.actions.save'));
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'new name' })).exists();
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.external-id')).nextElementSibling)
         .hasText('new externalId');

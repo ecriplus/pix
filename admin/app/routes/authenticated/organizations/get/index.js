@@ -5,6 +5,6 @@ export default class IndexRoute extends Route {
   @service router;
 
   beforeModel() {
-    this.router.replaceWith('authenticated.organizations.get.team');
+    this.router.replaceWith('authenticated.organizations.get.details');
   }
 }

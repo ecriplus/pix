@@ -2,22 +2,21 @@ import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { LinkTo } from '@ember/routing';
 import t from 'ember-intl/helpers/t';
 import Breadcrumb from 'pix-admin/components/organizations/breadcrumb';
-import InformationSection from 'pix-admin/components/organizations/information-section';
+import HeadInformation from 'pix-admin/components/organizations/head-information';
+
 <template>
   <header class="page-header">
     <Breadcrumb @currentPageLabel={{@model.name}} />
   </header>
 
   <main class="page-body" id="organizations-get-page">
-
-    <InformationSection
-      @organization={{@model}}
-      @onLogoUpdated={{@controller.updateOrganizationInformation}}
-      @onSubmit={{@controller.updateOrganizationInformation}}
-      @archiveOrganization={{@controller.archiveOrganization}}
-    />
+    <HeadInformation @organization={{@model}} />
 
     <PixTabs @variant="primary" @ariaLabel={{t "pages.organization.navbar.aria-label"}} class="navigation">
+
+      <LinkTo @route="authenticated.organizations.get.details" @model={{@model}}>
+        {{t "pages.organization.navbar.details"}}
+      </LinkTo>
 
       {{#unless @model.isArchived}}
         <LinkTo @route="authenticated.organizations.get.team" @model={{@model}}>

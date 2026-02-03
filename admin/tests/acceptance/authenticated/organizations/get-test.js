@@ -37,15 +37,63 @@ module('Acceptance | Organizations | Get', function (hooks) {
       });
     });
 
-    test('it should be accessible for an authenticated user and redirect to team tab', async function (assert) {
+    test('it should be accessible for an authenticated user and redirect to details tab', async function (assert) {
       // when
       await visit(`/organizations/${ORGANIZATION_ID}`);
 
       // then
-      assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/team`);
+      assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/details`);
     });
 
     module('Navigation tabs', function () {
+      module('Details tab', function () {
+        module('When organization is active', function () {
+          test('it should display details tab', async function (assert) {
+            // when
+            const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
+
+            // then
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+            assert.ok(within(navigationTabs).getByRole('link', { name: t('pages.organization.navbar.details') }));
+          });
+
+          test('it should navigate to details page when clicking tab', async function (assert) {
+            // given
+            const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
+
+            // when
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+
+            const teamTab = within(navigationTabs).getByRole('link', {
+              name: t('pages.organization.navbar.details'),
+            });
+            await click(teamTab);
+
+            // then
+            assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/details`);
+          });
+        });
+
+        module('When organization is archived', function () {
+          test('it should not display teams tab', async function (assert) {
+            // given
+            server.create('organization', {
+              id: ARCHIVED_ORGANIZATION_ID,
+              name: 'My Archived Organization',
+              archivedAt: new Date('2026-01-01'),
+              features: { PLACES_MANAGEMENT: { active: true } },
+            });
+
+            // when
+            const screen = await visit(`/organizations/${ARCHIVED_ORGANIZATION_ID}`);
+
+            // then
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+            assert.notOk(within(navigationTabs).queryByRole('link', { name: t('pages.organization.navbar.team') }));
+          });
+        });
+      });
+
       module('Team tab', function () {
         module('When organization is active', function () {
           test('it should display team tab with number of active members', async function (assert) {

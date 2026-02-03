@@ -3,9 +3,9 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntl from '../../../../helpers/setup-intl';
+import setupIntl from '../../../../../helpers/setup-intl';
 
-module('Unit | Controller | authenticated/organizations/get', function (hooks) {
+module('Unit | Controller | authenticated/organizations/get/details', function (hooks) {
   setupTest(hooks);
   setupIntl(hooks);
 
@@ -13,7 +13,7 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
     module('when the size of the payload is lower than 2.5 Mo limit', function () {
       test('displays a success notification', async function (assert) {
         // Given
-        const controller = this.owner.lookup('controller:authenticated.organizations.get');
+        const controller = this.owner.lookup('controller:authenticated.organizations.get.details');
         controller.router = { transitionTo: sinon.stub() };
         controller.model = {
           id: 3,
@@ -40,7 +40,7 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
     module('when the size of the payload is greater than 2.5 Mo limit', function () {
       test('displays an error notification', async function (assert) {
         // Given
-        const controller = this.owner.lookup('controller:authenticated.organizations.get');
+        const controller = this.owner.lookup('controller:authenticated.organizations.get.details');
         controller.model = {
           id: 3,
           save: sinon.stub(),
@@ -70,7 +70,7 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
   module('#archiveOrganization', function () {
     test('it should update organization and redirect to get route', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated.organizations.get');
+      const controller = this.owner.lookup('controller:authenticated.organizations.get.details');
       controller.router = { transitionTo: sinon.stub() };
       controller.model = {
         id: 3,

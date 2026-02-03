@@ -96,7 +96,7 @@ module('Acceptance | combined course blueprint Organizations', function (hooks) 
         await click(screen.getByRole('link', { name: '456' }));
 
         // then
-        assert.deepEqual(currentURL(), '/organizations/456/team');
+        assert.deepEqual(currentURL(), '/organizations/456/details');
       });
 
       test('it should redirect to combined course blueprint details after detach', async function (assert) {

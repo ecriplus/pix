@@ -84,7 +84,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
   });
 
   module('when organization is archived', function () {
-    test('should redirect to organization target profiles page', async function (assert) {
+    test('should redirect to organization details page', async function (assert) {
       // given
       const organization = this.server.create('organization', {
         name: 'oldOrganizationName',
@@ -97,7 +97,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       await visit(`/organizations/${organization.id}`);
 
       // then
-      assert.strictEqual(currentURL(), `/organizations/${organization.id}/target-profiles`);
+      assert.strictEqual(currentURL(), `/organizations/${organization.id}/details`);
     });
 
     test('should not allow user to access team page', async function (assert) {
