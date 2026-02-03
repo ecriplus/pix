@@ -583,6 +583,7 @@ function getAttributesComponents() {
         id: 'af447a7b-6790-4b3b-b83e-296e6618ca31',
         instruction: 'question declarative',
         isAnswerable: true,
+        hasShortProposals: false,
         proposals: [
           {
             content: 'plop',

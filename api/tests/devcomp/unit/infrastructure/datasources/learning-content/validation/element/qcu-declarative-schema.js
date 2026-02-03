@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { htmlSchema, proposalIdSchema, uuidSchema } from '../utils.js';
 import { feedbackNeutralSchema } from './feedback-neutral-schema.js';
+import { proposalContentSchema } from './proposal-content-schema.js';
 
 const qcuDeclarativeElementSchema = Joi.object({
   id: uuidSchema,
@@ -10,10 +11,11 @@ const qcuDeclarativeElementSchema = Joi.object({
   proposals: Joi.array()
     .items({
       id: proposalIdSchema.required(),
-      content: htmlSchema.required(),
+      content: proposalContentSchema,
       feedback: feedbackNeutralSchema.required(),
     })
     .required(),
+  hasShortProposals: Joi.boolean().required().default(false),
 });
 
 export { qcuDeclarativeElementSchema };
