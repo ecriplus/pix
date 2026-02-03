@@ -357,11 +357,11 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
       const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
 
+      const organization = databaseBuilder.factory.buildOrganization();
       const campaignIdInCombinedCourse = databaseBuilder.factory.buildCampaign({
         targetProfileId: targetProfile1.id,
+        organizationId: organization.id,
       }).id;
-
-      const organization = databaseBuilder.factory.buildOrganization();
 
       databaseBuilder.factory.buildTargetProfileTraining({
         trainingId: training.id,

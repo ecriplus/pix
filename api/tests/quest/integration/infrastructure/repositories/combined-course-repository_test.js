@@ -150,7 +150,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
-  describe('#getByCampaignId', function () {
+  describe('#findByCampaignId', function () {
     let organizationId, combinedCourse, campaignId;
 
     beforeEach(async function () {

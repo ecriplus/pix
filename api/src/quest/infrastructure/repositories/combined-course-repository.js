@@ -65,6 +65,7 @@ const findByCampaignId = async ({ campaignId }) => {
       'questId',
     )
     .join('quests', 'quests.id', 'combined_courses.questId')
+    .where('combined_courses.organizationId', knexConn('campaigns').select('organizationId').where('id', campaignId))
     .whereJsonSupersetOf('quests.successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
 
   return combinedCourses.map(_toDomain);
