@@ -2,6 +2,7 @@
  * @typedef {import ('../../domain/models/Candidate.js').Candidate} Candidate
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { WrongDomainExtensionForPixPlusError } from '../../domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 /**
@@ -12,11 +13,12 @@ import { usecases } from '../../domain/usecases/index.js';
  * @param {string} params.firstName
  * @param {string} params.lastName
  * @param {Date} params.birthdate
+ * @param {boolean} params.isFrenchDomainExtension
  * @param {Function} params.normalizeStringFnc
  * @returns {Promise<Candidate>}
  */
 export const registerCandidateParticipation = withTransaction(
-  async ({ userId, sessionId, firstName, lastName, birthdate, normalizeStringFnc }) => {
+  async ({ userId, sessionId, firstName, lastName, birthdate, isFrenchDomainExtension, normalizeStringFnc }) => {
     const candidate = await usecases.verifyCandidateIdentity({
       userId,
       sessionId,
@@ -25,6 +27,10 @@ export const registerCandidateParticipation = withTransaction(
       birthdate,
       normalizeStringFnc,
     });
+
+    if (candidate.hasComplementarySubscription() && !isFrenchDomainExtension) {
+      throw new WrongDomainExtensionForPixPlusError();
+    }
 
     if (candidate.isReconciled()) {
       return candidate;

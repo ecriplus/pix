@@ -46,6 +46,7 @@ describe('Integration | Application | Service | register-candidate-participation
         firstName: certificationCandidate.firstName,
         lastName: certificationCandidate.lastName,
         birthdate: certificationCandidate.birthdate,
+        isFrenchDomainExtension: true,
         normalizeStringFnc: normalize,
       });
 

@@ -47,12 +47,16 @@ const createCandidateParticipation = async function (request, h) {
   const lastName = trim(request.payload.data.attributes['last-name']);
   const birthdate = request.payload.data.attributes['birthdate'];
 
+  const origin = request.headers.origin || request.headers.referer;
+  const isFrenchDomainExtension = origin ? new URL(origin).hostname.endsWith('.fr') : false;
+
   const candidate = await services.registerCandidateParticipation({
     userId,
     sessionId,
     firstName,
     lastName,
     birthdate,
+    isFrenchDomainExtension,
     normalizeStringFnc: normalize,
   });
 
