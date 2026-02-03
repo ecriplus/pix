@@ -300,6 +300,32 @@ describe('Integration | Repository | Campaign Participant activity', function ()
           expect(campaignParticipantsActivities).lengthOf(2);
         });
       });
+
+      context('When the learner is disabled', function () {
+        it('should return empty list', async function () {
+          // given
+          const campaign = databaseBuilder.factory.buildCampaign();
+
+          databaseBuilder.factory.buildOrganizationLearner({
+            firstName: 'nonParticipant',
+            organizationId: campaign.organizationId,
+            isDisabled: true,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const { campaignParticipantsActivities } =
+            await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+              campaignId: campaign.id,
+
+              filters: { status: 'NOT_STARTED' },
+            });
+
+          // then
+          expect(campaignParticipantsActivities).lengthOf(0);
+        });
+      });
     });
 
     context('order', function () {
