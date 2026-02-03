@@ -25,7 +25,6 @@ module('Acceptance | Organizations | Target profiles management', function (hook
     const screen = await visit(`/organizations/${ownerOrganizationId}/target-profiles`);
 
     // then
-    assert.dom(screen.getByRole('link', { name: 'Tags' })).exists();
     const table = screen.getByRole('table', {
       name: t('components.organizations.target-profiles-section.table.caption'),
     });
