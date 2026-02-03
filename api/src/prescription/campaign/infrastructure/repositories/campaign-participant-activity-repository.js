@@ -80,6 +80,7 @@ const campaignParticipantActivityRepository = {
         'view-active-organization-learners.organizationId',
         knex('campaigns').select('organizationId').where('id', campaignId),
       )
+      .where('view-active-organization-learners.isDisabled', false)
       .modify(filterParticipations, activityFilters)
       .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 
