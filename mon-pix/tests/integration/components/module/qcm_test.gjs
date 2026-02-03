@@ -261,13 +261,20 @@ module('Integration | Component | Module | QCM', function (hooks) {
       type: 'qcm',
     };
     const onAnswerSpy = sinon.spy();
+    const onRetryStub = sinon.stub();
 
     // when
     const screen = await render(
       <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+        <ModulixQcm
+          @onRetry={{onRetryStub}}
+          @element={{qcmElement}}
+          @onAnswer={{onAnswerSpy}}
+          @updateSkipButton={{updateSkipButton}}
+        />
       </template>,
     );
+
     await click(screen.getByLabelText('checkbox1'));
     await click(screen.getByLabelText('checkbox3'));
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
@@ -280,7 +287,16 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox2', disabled: true }));
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox3', disabled: true }));
     assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).doesNotExist();
-    assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
+
+    await click(screen.getByRole('button', { name: 'Réessayer' }));
+    await click(screen.getByLabelText('checkbox1'));
+    await click(screen.getByLabelText('checkbox2'));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    assert.dom(screen.queryByText('Wrong!')).doesNotExist();
+    assert.dom(screen.queryByText('Correct!')).doesNotExist();
+
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+    assert.dom(screen.getByText('Correct!')).exists();
   });
 
   test('should be able to focus back to proposals when feedback appears', async function (assert) {
@@ -327,6 +343,7 @@ module('Integration | Component | Module | QCM', function (hooks) {
       class PreviewModeServiceStub extends Service {
         isEnabled = true;
       }
+
       this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
       const qcm = {
         id: 'a2638f8e-05ee-42e0-9820-13a9977cf5dc',
