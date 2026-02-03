@@ -15,7 +15,7 @@ import {
   sinon,
 } from '../../../../test-helper.js';
 
-describe('Acceptance | API | Campaign Participations', function () {
+describe('Acceptance | Campaign Participation | Application | Route', function () {
   let server, options, userId, organizationId, campaignId;
 
   beforeEach(async function () {
@@ -236,6 +236,94 @@ describe('Acceptance | API | Campaign Participations', function () {
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal(expectedCampaignParticipationAnalysis);
+    });
+  });
+
+  describe('GET /api/campaign-participations/{campaignParticipationId}/level-per-tubes-and-competences', function () {
+    let campaignParticipation;
+
+    beforeEach(async function () {
+      databaseBuilder.factory.buildMembership({
+        userId,
+        organizationId,
+        organizationRole: Membership.roles.MEMBER,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId2' });
+      const sharedAt = new Date('2020-01-01');
+      campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        sharedAt,
+      });
+
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+        snapshot: JSON.stringify([]),
+        campaignParticipationId: campaignParticipation.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const learningContent = [
+        {
+          id: 'recArea1',
+          color: 'specialColor',
+          competences: [
+            {
+              id: 'recCompetence1',
+              name_i18n: { fr: 'Fabriquer un meuble' },
+              tubes: [
+                {
+                  id: 'recTube1',
+                  practicalTitle_i18n: { fr: 'Monter une étagère' },
+                  practicalDescription_i18n: { fr: 'Comment monter une étagère' },
+                  skills: [
+                    {
+                      id: 'recSkillId1',
+                      nom: '@skill1',
+                      level: 1,
+                      challenges: [],
+                      tutorials: [
+                        {
+                          id: 'recTutorial1',
+                          title: 'Apprendre à vivre confiné',
+                          format: '2 mois',
+                          source: 'covid-19',
+                          link: 'www.liberez-moi.fr',
+                          locale: 'fr-fr',
+                          duration: '00:03:31',
+                        },
+                      ],
+                    },
+                    {
+                      id: 'recSkillId2',
+                      nom: '@skill2',
+                      level: 2,
+                      challenges: [],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ];
+      const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
+      await mockLearningContent(learningContentObjects);
+    });
+
+    it('should return 200', async function () {
+      // given
+      options = {
+        method: 'GET',
+        url: `/api/campaign-participations/${campaignParticipation.id}/level-per-tubes-and-competences`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
     });
   });
 

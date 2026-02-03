@@ -1,5 +1,6 @@
 import { campaignParticipationController } from '../../../../../src/prescription/campaign-participation/application/campaign-participation-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign-participation/application/campaign-participation-route.js';
+import { campaignParticipationPreHandlers } from '../../../../../src/prescription/campaign-participation/application/pre-handlers.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
@@ -92,6 +93,64 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
         expect(organizationAccessStub.called).to.be.true;
         expect(getAnalysisStub.called).to.be.false;
       });
+    });
+  });
+
+  describe('GET /api/campaign-participations/{campaignParticipationId}/level-per-tubes-and-competences', function () {
+    let getLevelPerTubesAndCompetencesStub,
+      checkUserCanAccessCampaignParticipationStub,
+      checkOrganizationAccessStub,
+      httpTestServer;
+
+    beforeEach(async function () {
+      getLevelPerTubesAndCompetencesStub = sinon.stub(
+        campaignParticipationController,
+        'getLevelPerTubesAndCompetences',
+      );
+
+      checkUserCanAccessCampaignParticipationStub = sinon.stub(
+        campaignParticipationPreHandlers,
+        'checkUserCanAccessCampaignParticipation',
+      );
+
+      checkOrganizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess');
+
+      httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+    });
+
+    it('should call security pre handler before controller', async function () {
+      // given
+      checkUserCanAccessCampaignParticipationStub.callsFake((request, h) => h.response(true));
+      checkOrganizationAccessStub.callsFake((request, h) => h.response(true));
+      getLevelPerTubesAndCompetencesStub.resolves(true);
+
+      // when
+      const request = await httpTestServer.request(
+        'GET',
+        '/api/campaign-participations/2/level-per-tubes-and-competences',
+      );
+
+      // then
+      sinon.assert.callOrder(
+        checkUserCanAccessCampaignParticipationStub,
+        checkOrganizationAccessStub,
+        getLevelPerTubesAndCompetencesStub,
+      );
+      expect(request.result).equal(true);
+    });
+
+    it('should not call any function if params is not an integer', async function () {
+      // when
+      await httpTestServer.request(
+        'GET',
+        '/api/campaign-participations/I_AM_NOT_AN_INTEGER/level-per-tubes-and-competences',
+      );
+
+      // then
+      expect(checkUserCanAccessCampaignParticipationStub.called).false;
+      expect(checkOrganizationAccessStub.called).false;
+      expect(getLevelPerTubesAndCompetencesStub.called).false;
     });
   });
 
