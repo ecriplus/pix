@@ -1,6 +1,10 @@
 import { expect } from 'chai';
 
-import { meshConfiguration } from '../../../../../../../src/certification/results/domain/models/v3/MeshConfiguration.js';
+import { MESH_CONFIGURATION } from '../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
+import {
+  findIntervalIndexFromScore,
+  findMeshFromScore,
+} from '../../../../../../src/certification/shared/domain/services/mesh-service.js';
 
 describe('Unit | Domain | Models | MeshConfiguration', function () {
   describe('#findMeshFromScore', function () {
@@ -9,30 +13,30 @@ describe('Unit | Domain | Models | MeshConfiguration', function () {
         score: 0,
         meshKey: 'LEVEL_PRE_BEGINNER',
 
-        expectedInterval: meshConfiguration.getMesh('LEVEL_PRE_BEGINNER'),
+        expectedInterval: MESH_CONFIGURATION.get('LEVEL_PRE_BEGINNER'),
       },
       {
         score: 64,
         meshKey: 'LEVEL_BEGINNER_1',
 
-        expectedInterval: meshConfiguration.getMesh('LEVEL_BEGINNER_1'),
+        expectedInterval: MESH_CONFIGURATION.get('LEVEL_BEGINNER_1'),
       },
       {
         score: 200,
         meshKey: 'LEVEL_BEGINNER_2',
 
-        expectedInterval: meshConfiguration.getMesh('LEVEL_BEGINNER_2'),
+        expectedInterval: MESH_CONFIGURATION.get('LEVEL_BEGINNER_2'),
       },
       {
         score: 896,
         meshKey: 'LEVEL_EXPERT_7',
 
-        expectedInterval: meshConfiguration.getMesh('LEVEL_EXPERT_7'),
+        expectedInterval: MESH_CONFIGURATION.get('LEVEL_EXPERT_7'),
       },
     ].forEach(({ score, meshKey, expectedInterval }) => {
       it(`returns the interval ${expectedInterval} of key ${meshKey} when score is ${score}`, function () {
         // when
-        const result = meshConfiguration.findMeshFromScore({
+        const result = findMeshFromScore({
           score,
         });
 
@@ -64,7 +68,7 @@ describe('Unit | Domain | Models | MeshConfiguration', function () {
     ].forEach(({ score, expectedInterval }) => {
       it(`returns the interval ${expectedInterval} when score is ${score}`, function () {
         // when
-        const result = meshConfiguration.findIntervalIndexFromScore({
+        const result = findIntervalIndexFromScore({
           score,
         });
 
