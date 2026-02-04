@@ -71,6 +71,7 @@ export default class ModulixFlashcards extends Component {
 
   @action
   retry() {
+    this.args.onRetry({ element: this.args.flashcards });
     this.currentStep = 'intro';
     this.currentCardIndex = 0;
     this.displayedSideName = 'recto';
