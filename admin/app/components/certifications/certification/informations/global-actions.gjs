@@ -23,7 +23,9 @@ export default class CertificationInformationGlobalActions extends Component {
     return Boolean(
       !this.args.certification.isPublished &&
       this.args.session.finalizedAt &&
-      (this.args.certification.status === 'validated' || this.args.certification.status === 'error'),
+      (this.args.certification.status === 'validated' ||
+        this.args.certification.status === 'error' ||
+        !this.args.certification.status),
     );
   }
 

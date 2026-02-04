@@ -98,6 +98,25 @@ module('Integration | Component | Certifications | Certification | Information |
             .exists();
         });
       });
+      module('when certification has no status, session is finalized and not published', function () {
+        test('should display a cancel button', async function (assert) {
+          // given
+          const certification = store.createRecord('certification', {
+            userId: 1,
+            status: null,
+            isPublished: false,
+          });
+          const session = createFinalizedSession();
+
+          // when
+          const screen = await renderGlobalActions(certification, session);
+
+          // then
+          assert
+            .dom(screen.getByRole('button', { name: t('components.certifications.global-actions.cancel.button') }))
+            .exists();
+        });
+      });
     });
 
     module('when should not display', function () {
@@ -438,6 +457,25 @@ module('Integration | Component | Certifications | Certification | Information |
             .exists();
         });
       });
+      module('when certification has no status, session is finalized and not published', function () {
+        test('should display a cancel button', async function (assert) {
+          // given
+          const certification = store.createRecord('certification', {
+            userId: 1,
+            status: null,
+            isPublished: false,
+          });
+          const session = createFinalizedSession();
+
+          // when
+          const screen = await renderGlobalActions(certification, session);
+
+          // then
+          assert
+            .dom(screen.getByRole('button', { name: t('components.certifications.global-actions.reject.button') }))
+            .exists();
+        });
+      });
     });
 
     module('when should not display', function () {
@@ -765,6 +803,25 @@ module('Integration | Component | Certifications | Certification | Information |
           const certification = store.createRecord('certification', {
             userId: 1,
             status: assessmentResultStatus.ERROR,
+            isPublished: false,
+          });
+          const session = createFinalizedSession();
+
+          // when
+          const screen = await renderGlobalActions(certification, session);
+
+          // then
+          assert
+            .dom(screen.getByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+            .exists();
+        });
+      });
+      module('when certification has no status, session is finalized and not published', function () {
+        test('should display a cancel button', async function (assert) {
+          // given
+          const certification = store.createRecord('certification', {
+            userId: 1,
+            status: null,
             isPublished: false,
           });
           const session = createFinalizedSession();
