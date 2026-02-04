@@ -6,7 +6,7 @@ module('Unit | Helper | TextWithMultipleLang', function (hooks) {
   let helper;
   hooks.beforeEach(function () {
     helper = new textWithMultipleLang();
-    helper.locale = { supportedLocales: ['fr', 'en'] };
+    helper.locale = { availableLocales: ['fr', 'en'] };
   });
 
   [
