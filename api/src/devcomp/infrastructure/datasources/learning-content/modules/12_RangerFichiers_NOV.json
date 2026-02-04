@@ -52,7 +52,7 @@
               "element": {
                 "id": "03b884f7-1d7a-4eb2-8ee2-164f5973484e",
                 "type": "text",
-                "content": "Il y a beaucoup d’éléments différents sur son bureau.<br>"
+                "content": "Il y a beaucoup d’éléments différents sur son bureau."
               }
             },
             {
@@ -106,7 +106,7 @@
               "element": {
                 "id": "ce1d0fb7-8794-4415-ba47-38d3a561c657",
                 "type": "text",
-                "content": "Pour mieux s’organiser sur un ordinateur, il est utile de comprendre ce que l’on voit à l’écran.<br>Commençons par faire la différence entre deux types d’éléments&nbsp;: les fichiers et les dossiers.<br>"
+                "content": "Pour mieux s’organiser sur un ordinateur, il est utile de comprendre ce que l’on voit à l’écran.<br>Commençons par faire la différence entre deux types d’éléments&nbsp;: les fichiers et les dossiers."
               }
             }
           ]
@@ -127,7 +127,7 @@
               "element": {
                 "id": "d0de1b6e-0408-4276-903d-7538af8efcfc",
                 "type": "text",
-                "content": "Observez le bureau de Maëva et essayez de catégoriser les éléments ci-dessous.<br>"
+                "content": "Observez le bureau de Maëva et essayez de catégoriser les éléments ci-dessous."
               }
             },
             {
@@ -289,7 +289,7 @@
               "element": {
                 "id": "87d28944-5b26-48ad-9862-ec8e67c7109d",
                 "type": "text",
-                "content": "Maëva a de nombreuses photos sur son bureau.&nbsp;Elle souhaite les ranger toutes au même endroit.&nbsp;<br>Pour organiser ses fichiers, elle veut créer un nouveau dossier.&nbsp;<br>"
+                "content": "Maëva a de nombreuses photos sur son bureau.&nbsp;Elle souhaite les ranger toutes au même endroit.&nbsp;<br>Pour organiser ses fichiers, elle veut créer un nouveau dossier.&nbsp;"
               }
             },
             {
@@ -297,7 +297,7 @@
               "element": {
                 "id": "617bda78-d613-4dbd-9b18-84dd86bb89d5",
                 "type": "text",
-                "content": "<strong>Créez un dossier “Photos” sur le bureau de Maëva.</strong> <br>[ Objet interactif avec indices procédures (travail de réflexion sur la forme et les modalités avec le design)<br>Actions&nbsp;: clic droit → “Nouveau dossier” ou “dossier” → écrire un nom → appuyer sur Entrée ]<br>"
+                "content": "<strong>Créez un dossier “Photos” sur le bureau de Maëva.</strong> <br>[ Objet interactif avec indices procédures (travail de réflexion sur la forme et les modalités avec le design)<br>Actions&nbsp;: clic droit → “Nouveau dossier” ou “dossier” → écrire un nom → appuyer sur Entrée ]"
               }
             }
           ]
@@ -342,7 +342,7 @@
               "element": {
                 "id": "7aee6701-cb39-46e9-8069-09984704661f",
                 "type": "text",
-                "content": "Maintenant que Maëva a un dossier «&nbsp;Photos&nbsp;», elle y a rangé les photos qui étaient sur son bureau. Sauf la photo nommée «&nbsp;DCIM2115&nbsp;». <br>Elle veut d’abord changer le nom de la photo. Puis la déplacer dans le dossier «&nbsp;Photos&nbsp;».<br>"
+                "content": "Maintenant que Maëva a un dossier «&nbsp;Photos&nbsp;», elle y a rangé les photos qui étaient sur son bureau. Sauf la photo nommée «&nbsp;DCIM2115&nbsp;». <br>Elle veut d’abord changer le nom de la photo. Puis la déplacer dans le dossier «&nbsp;Photos&nbsp;»."
               }
             },
             {
@@ -350,7 +350,7 @@
               "element": {
                 "id": "24580343-0718-4c50-9683-6047f0ee2e10",
                 "type": "text",
-                "content": "<ul><li>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</li><li>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</li></ul><strong>[simulateur avec indices]</strong><br>STEP 1<br>Donnez le nom «&nbsp;Portugal&nbsp;» à la photo «&nbsp;DCIM2115&nbsp;». <br>Actions&nbsp;: clic droit → Renommer → taper le nom<br><strong>Feedback step 1 </strong>: À tout moment, vous pouvez modifier le nom d’un fichier pour choisir un nom qui a du sens pour vous.&nbsp; <br><br>STEP 2<br>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»<br> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ]<br><strong>Feedback step 2</strong>&nbsp;: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.&nbsp;<br>"
+                "content": "<ul><li>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</li><li>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</li></ul><strong>[simulateur avec indices]</strong><br>STEP 1<br>Donnez le nom «&nbsp;Portugal&nbsp;» à la photo «&nbsp;DCIM2115&nbsp;». <br>Actions&nbsp;: clic droit → Renommer → taper le nom<br><strong>Feedback step 1 </strong>: À tout moment, vous pouvez modifier le nom d’un fichier pour choisir un nom qui a du sens pour vous.&nbsp; <br><br>STEP 2<br>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»<br> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ]<br><strong>Feedback step 2</strong>&nbsp;: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.&nbsp;"
               }
             }
           ]
@@ -365,7 +365,7 @@
               "element": {
                 "id": "8c2acdd0-84cb-4c7f-9915-7a5f126796df",
                 "type": "text",
-                "content": "Le <strong>nom du fichier</strong> est parfois créé automatiquement ou choisi par quelqu’un d’autre. De la même manière, vous n’avez peut-être pas choisi <strong>le dossier où un fichier est placé</strong>.<br> <br>Vous pouvez <strong>renommer </strong>et <strong>déplacer </strong>vos fichiers selon votre préférence.<br> <br><strong>🤔 Le saviez-vous ?</strong><br>Un dossier peut contenir autant de fichiers que l’on souhaite. <br><br><strong>Astuce&nbsp;</strong><br>Si vous savez utiliser le glisser-déposer, vous pouvez l’utiliser pour déplacer des fichiers dans des dossiers.<br>"
+                "content": "Le <strong>nom du fichier</strong> est parfois créé automatiquement ou choisi par quelqu’un d’autre. De la même manière, vous n’avez peut-être pas choisi <strong>le dossier où un fichier est placé</strong>.<br> <br>Vous pouvez <strong>renommer </strong>et <strong>déplacer </strong>vos fichiers selon votre préférence.<br> <br><strong>🤔 Le saviez-vous ?</strong><br>Un dossier peut contenir autant de fichiers que l’on souhaite. <br><br><strong>Astuce&nbsp;</strong><br>Si vous savez utiliser le glisser-déposer, vous pouvez l’utiliser pour déplacer des fichiers dans des dossiers."
               }
             }
           ]
@@ -443,7 +443,7 @@
                     {
                       "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
                       "type": "text",
-                      "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva.<br>"
+                      "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva."
                     }
                   ]
                 }
