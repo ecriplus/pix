@@ -20,6 +20,7 @@ const serialize = function (campaignAssessmentParticipation) {
       'badges',
       'campaignAssessmentParticipationResult',
       'campaignAnalysis',
+      'campaignParticipationLevelsPerTubesAndCompetence',
       'reachedStage',
       'totalStage',
       'prescriberTitle',
@@ -48,6 +49,16 @@ const serialize = function (campaignAssessmentParticipation) {
       relationshipLinks: {
         related(record) {
           return `/api/campaign-participations/${record.campaignParticipationId}/analyses`;
+        },
+      },
+    },
+    campaignParticipationLevelsPerTubesAndCompetence: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: {
+        related(record) {
+          return `/api/campaign-participations/${record.campaignParticipationId}/level-per-tubes-and-competences`;
         },
       },
     },

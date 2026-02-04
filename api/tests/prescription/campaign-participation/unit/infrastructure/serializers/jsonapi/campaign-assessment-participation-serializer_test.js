@@ -54,6 +54,11 @@ describe('Unit | Serializer | JSONAPI | campaign-assessment-participation-serial
                   related: '/api/campaigns/2/assessment-participations/1/results',
                 },
               },
+              'campaign-participation-levels-per-tubes-and-competence': {
+                links: {
+                  related: '/api/campaign-participations/1/level-per-tubes-and-competences',
+                },
+              },
             },
           },
           included: [
@@ -138,6 +143,11 @@ describe('Unit | Serializer | JSONAPI | campaign-assessment-participation-serial
               'campaign-assessment-participation-result': {
                 links: {
                   related: '/api/campaigns/2/assessment-participations/1/results',
+                },
+              },
+              'campaign-participation-levels-per-tubes-and-competence': {
+                links: {
+                  related: '/api/campaign-participations/1/level-per-tubes-and-competences',
                 },
               },
             },
