@@ -5,7 +5,9 @@
  */
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
+
 /**
  * @param {object} params
  * @param {number} params.certificationCourseId
@@ -27,6 +29,9 @@ const updateJuryComment = async function ({
     const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
       certificationCourseId,
     });
+    if (!latestAssessmentResult) {
+      throw new NotFoundError('No assessment result found');
+    }
 
     const updatedAssessmentResult = latestAssessmentResult.clone();
     updatedAssessmentResult.commentByJury = assessmentResultCommentByJury;

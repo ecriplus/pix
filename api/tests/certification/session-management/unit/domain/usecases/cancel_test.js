@@ -3,8 +3,10 @@ import { AlgorithmEngineVersion } from '../../../../../../src/certification/shar
 import {
   CertificationCancelNotAllowedError,
   NotFinalizedSessionError,
+  NotFoundError,
 } from '../../../../../../src/shared/domain/errors.js';
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
+import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | cancel', function () {
@@ -37,7 +39,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationRescoringRepository.rescoreV2Certification.resolves();
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
-        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
         await cancel({
@@ -83,7 +85,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
-        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
         const error = await catchErr(cancel)({
@@ -96,6 +98,49 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
 
         // then
         expect(error).to.be.instanceOf(NotFinalizedSessionError);
+      });
+    });
+    describe('when certification has no previous assessment result', function () {
+      it('should not cancel the certification', async function () {
+        // given
+        const juryId = 123;
+        const session = domainBuilder.certification.sessionManagement.buildSession({
+          finalizedAt: new Date('2020-01-01'),
+          version: AlgorithmEngineVersion.V2,
+        });
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: 123,
+          sessionId: session.id,
+          version: AlgorithmEngineVersion.V2,
+        });
+        const certificationCourseRepository = {
+          get: sinon.stub(),
+        };
+        const sessionRepository = {
+          isFinalized: sinon.stub(),
+        };
+        const certificationRescoringRepository = {
+          rescoreV2Certification: sinon.stub(),
+        };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
+        certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
+        certificationRescoringRepository.rescoreV2Certification.resolves();
+        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+
+        // when
+        const error = await catchErr(cancel)({
+          certificationCourseId: 123,
+          certificationCourseRepository,
+          sessionRepository,
+          juryId,
+          courseAssessmentResultRepository,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
       });
     });
   });
@@ -129,7 +174,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationRescoringRepository.rescoreV3Certification.resolves();
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
-        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
         await cancel({
@@ -191,6 +236,51 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       });
     });
   });
+  describe('when certification has no previous assessment result', function () {
+    it('should not reject the certification and throw NotFoundError', async function () {
+      // given
+      const juryId = 123;
+      const session = domainBuilder.certification.sessionManagement.buildSession({
+        finalizedAt: new Date('2020-01-01'),
+        version: AlgorithmEngineVersion.V3,
+      });
+      const certificationCourse = domainBuilder.buildCertificationCourse({
+        id: 123,
+        sessionId: session.id,
+        version: AlgorithmEngineVersion.V3,
+      });
+      const certificationCourseRepository = {
+        get: sinon.stub(),
+      };
+      const sessionRepository = {
+        isFinalized: sinon.stub(),
+      };
+      const certificationRescoringRepository = {
+        rescoreV3Certification: sinon.stub(),
+      };
+      const courseAssessmentResultRepository = {
+        getLatestAssessmentResult: sinon.stub(),
+      };
+      certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
+      certificationRescoringRepository.rescoreV3Certification.resolves();
+      sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+
+      // when
+      const error = await catchErr(cancel)({
+        certificationCourseId: 123,
+        juryId,
+        certificationCourseRepository,
+        sessionRepository,
+        certificationRescoringRepository,
+        courseAssessmentResultRepository,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.called;
+    });
+  });
 
   describe('when certification is rejected', function () {
     it('should not cancel the certification and throw CertificationCancelNotAllowedError', async function () {
@@ -220,8 +310,9 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
 
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
-      courseAssessmentResultRepository.getLatestAssessmentResult.resolves({ status: 'rejected' });
-
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(
+        domainBuilder.buildAssessmentResult({ status: assessmentResultStatuses.REJECTED }),
+      );
       // when
       const error = await catchErr(cancel)({
         certificationCourseId: 123,

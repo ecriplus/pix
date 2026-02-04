@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
@@ -48,18 +47,17 @@ const getLatestAssessmentResult = async function ({ certificationCourseId }) {
     )
     .where({ certificationCourseId })
     .first();
+  if (latestAssessmentResult) {
+    const competencesMarksDTO = await knexConn('competence-marks').where({
+      assessmentResultId: latestAssessmentResult.id,
+    });
 
-  if (!latestAssessmentResult) {
-    throw new NotFoundError('No assessment result found');
+    return _toDomain({
+      assessmentResultDTO: latestAssessmentResult,
+      competencesMarksDTO,
+    });
   }
-  const competencesMarksDTO = await knexConn('competence-marks').where({
-    assessmentResultId: latestAssessmentResult.id,
-  });
-
-  return _toDomain({
-    assessmentResultDTO: latestAssessmentResult,
-    competencesMarksDTO,
-  });
+  return null;
 };
 
 export { getLatestAssessmentResult };

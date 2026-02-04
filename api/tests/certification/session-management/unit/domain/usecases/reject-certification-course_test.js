@@ -2,7 +2,8 @@ import { CertificationCourseRejected } from '../../../../../../src/certification
 import { rejectCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/reject-certification-course.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { CertificationRejectNotAllowedError } from '../../../../../../src/shared/domain/errors.js';
+import { CertificationRejectNotAllowedError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | reject-certification-course', function () {
@@ -25,7 +26,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
       certificationCourseRepository.update.resolves();
       certificationRescoringRepository.rescoreV2Certification.resolves();
-      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
       // when
       await rejectCertificationCourse({
@@ -51,6 +52,45 @@ describe('Unit | UseCase | reject-certification-course', function () {
         }),
       });
     });
+    describe('when certification has no previous assessment result', function () {
+      it('should not cancel the certification', async function () {
+        // given
+        const juryId = 123;
+        const session = domainBuilder.certification.sessionManagement.buildSession({
+          finalizedAt: null,
+          version: AlgorithmEngineVersion.V2,
+        });
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: 123,
+          sessionId: session.id,
+          version: AlgorithmEngineVersion.V2,
+        });
+        const certificationCourseRepository = {
+          get: sinon.stub(),
+        };
+        const sessionRepository = {
+          isFinalized: sinon.stub(),
+        };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
+        certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
+        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+
+        // when
+        const error = await catchErr(rejectCertificationCourse)({
+          certificationCourseId: 123,
+          certificationCourseRepository,
+          sessionRepository,
+          juryId,
+          courseAssessmentResultRepository,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+    });
   });
 
   describe('when certification is a V3', function () {
@@ -72,7 +112,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
       certificationCourseRepository.update.resolves();
       certificationRescoringRepository.rescoreV3Certification.resolves();
-      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
       // when
       await rejectCertificationCourse({
@@ -100,6 +140,39 @@ describe('Unit | UseCase | reject-certification-course', function () {
     });
   });
 
+  describe('when certification has no previous assessment result', function () {
+    it('should not reject the certification and throw NotFoundError', async function () {
+      // given
+      const certificationCourseRepository = { get: sinon.stub(), update: sinon.stub() };
+      const certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
+      const courseAssessmentResultRepository = { getLatestAssessmentResult: sinon.stub() };
+      const juryId = 123;
+
+      const dependencies = {
+        certificationCourseRepository,
+        certificationRescoringRepository,
+        courseAssessmentResultRepository,
+      };
+      const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
+      const certificationCourseId = certificationCourse.getId();
+
+      certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
+
+      // when
+      const error = await catchErr(rejectCertificationCourse)({
+        ...dependencies,
+        juryId,
+        certificationCourseId: certificationCourseId,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(certificationCourseRepository.update).to.not.have.been.called;
+      expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.called;
+    });
+  });
+
   describe('when certification is cancelled', function () {
     it('should not reject the certification and throw CertificationRejectNotAllowedError', async function () {
       // given
@@ -117,7 +190,9 @@ describe('Unit | UseCase | reject-certification-course', function () {
       const certificationCourseId = certificationCourse.getId();
 
       certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
-      courseAssessmentResultRepository.getLatestAssessmentResult.resolves({ status: 'cancelled' });
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves(
+        domainBuilder.buildAssessmentResult({ status: assessmentResultStatuses.CANCELLED }),
+      );
 
       // when
       const error = await catchErr(rejectCertificationCourse)({
