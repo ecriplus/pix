@@ -1,0 +1,725 @@
+{
+  "id": "c89e0ac4-e989-45e7-924d-3e28f417e03d",
+  "shortId": "06ab78b4",
+  "slug": "essentiel-ranger-fichiers",
+  "title": "Fichiers et dossiers : l’essentiel sur un ordinateur",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "Photos, documents écrits, musiques… Sur votre ordinateur de nombreux fichiers sont stockés, rangés dans des dossiers.<br>Ce module vous aide à reconnaître et manipuler les fichiers, les dossiers et la corbeille pour organiser votre ordinateur simplement.",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "Faire la différence entre un fichier et un dossier",
+      "Savoir créer un dossier et y ranger des fichiers",
+      "Savoir à quoi sert la corbeille et comment l’utiliser"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "758f96a3-e6fd-49bc-aa3b-f91069a94070",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "ed77981d-ca0e-4592-9606-8e8785da3cf2",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a508b3f1-51f2-4af6-a71f-4cdb5694d78a",
+                "type": "text",
+                "content": "Voici le bureau de l’ordinateur de Maëva."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "431cf2d3-e3a4-4da5-aa10-02c99a161112",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/bureauaccroche.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "03b884f7-1d7a-4eb2-8ee2-164f5973484e",
+                "type": "text",
+                "content": "Il y a beaucoup d’éléments différents sur son bureau.<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "be1361b1-0008-4a78-bb0e-86c1ba5f1e01",
+                "type": "qcu-discovery",
+                "instruction": "À votre avis, qu’est-ce qui pourrait aider Maëva à mieux s’y retrouver ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Regrouper certains éléments ensemble.",
+                    "feedback": {
+                      "diagnosis": "Effectivement, regrouper des fichiers dans des dossiers est un bon moyen pour s’y retrouver plus facilement. <br>Mais il existe plusieurs autres options&nbsp;: supprimer des fichiers et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur."
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Supprimer ce qui ne sert plus.",
+                    "feedback": {
+                      "diagnosis": "Effectivement, penser à supprimer des fichiers et des dossiers quand ils ne sont plus utiles peut aider à s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper des éléments et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur."
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Donner des noms plus clairs.",
+                    "feedback": {
+                      "diagnosis": "Effectivement, choisir des noms compréhensibles pour ses fichiers et ses dossiers permet de s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper des éléments et supprimer des fichiers peut aussi permettre de mieux s’organiser sur un ordinateur."
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "diagnosis": "Il existe des moyens simples pour mieux s’organiser sur un ordinateur&nbsp;: choisir des noms compréhensibles pour ses fichiers, les ranger dans des dossiers ou encore supprimer les fichiers et les dossiers quand ils ne sont plus utiles."
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4e5fa9a5-541c-4d4b-88e2-c9fd4b619e55",
+          "type": "transition",
+          "title": "Transition accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ce1d0fb7-8794-4415-ba47-38d3a561c657",
+                "type": "text",
+                "content": "Pour mieux s’organiser sur un ordinateur, il est utile de comprendre ce que l’on voit à l’écran.<br>Commençons par faire la différence entre deux types d’éléments&nbsp;: les fichiers et les dossiers.<br>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "31986dfd-dd5e-409e-a8e9-c27e83421466",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "f6589dd6-936b-4f7c-b4d1-3e3efa547241",
+          "type": "discovery",
+          "title": "Découverte #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d0de1b6e-0408-4276-903d-7538af8efcfc",
+                "type": "text",
+                "content": "Observez le bureau de Maëva et essayez de catégoriser les éléments ci-dessous.<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a5e18c9c-bade-4561-9d88-7a9add1910a1",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/bureauaccroche.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "0c8f70da-3f74-4a57-9a33-f5e6a9dd559e",
+                      "type": "qrocm",
+                      "instruction": "Sélectionnez la bonne réponse pour compléter la phrase.",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "«&nbsp;Janvier&nbsp;» est un&nbsp;"
+                        },
+                        {
+                          "input": "janvier",
+                          "type": "select",
+                          "display": "inline",
+                          "placeholder": "Sélectionnez",
+                          "ariaLabel": "",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "fichier"
+                            },
+                            {
+                              "id": "2",
+                              "content": "dossier"
+                            }
+                          ],
+                          "solutions": [
+                            "2"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "."
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "",
+                          "diagnosis": "Effectivement, «&nbsp;Janvier&nbsp;»&nbsp;est bien un <strong>dossier</strong>, il <strong>contient des fichiers</strong>. Les dossiers sont représentés par une icône spécifique, souvent sous forme d’une pochette. 📂"
+                        },
+                        "invalid": {
+                          "state": "",
+                          "diagnosis": "Eh non, «&nbsp;Janvier&nbsp;»&nbsp;est bien un <strong>dossier</strong>, il <strong>contient des fichiers</strong>. Les dossiers sont représentés par une icône spécifique, souvent sous forme d’une pochette. 📂"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "937568c7-f340-4754-8ae8-58b4ee86c18b",
+                      "type": "qrocm",
+                      "instruction": "Sélectionnez la bonne réponse pour compléter la phrase.",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "«&nbsp;Demande de documents&nbsp;» est un&nbsp;"
+                        },
+                        {
+                          "input": "demande de documents",
+                          "type": "select",
+                          "display": "inline",
+                          "placeholder": "Sélectionnez",
+                          "ariaLabel": "",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "fichier"
+                            },
+                            {
+                              "id": "2",
+                              "content": "dossier"
+                            }
+                          ],
+                          "solutions": [
+                            "1"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "."
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "",
+                          "diagnosis": "Effectivement, «&nbsp;Demande de documents&nbsp;» est&nbsp;bien un <strong>fichier</strong>. Un fichier peut être représenté par un aperçu de son contenu, ou par une icône qui varie selon le type de fichier (texte, image, son, vidéo, etc.). Ici c’est un fichier de texte.&nbsp;"
+                        },
+                        "invalid": {
+                          "state": "",
+                          "diagnosis": " Eh non, «&nbsp;Demande de documents&nbsp;» est&nbsp;bien un <strong>fichier</strong>. Un fichier peut être représenté par un aperçu de son contenu, ou par une icône qui varie selon le type de fichier (texte, image, son, vidéo, etc.). Ici c’est un fichier de texte.&nbsp;"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d3099de3-c4a9-4fa5-89d7-67d2e6982cf4",
+          "type": "short-lesson",
+          "title": "Leçon #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b21eb58b-137f-444f-bfcf-e12e92e0adb5",
+                "type": "text",
+                "content": "Sur un ordinateur, il y a souvent beaucoup de <strong>fichiers </strong>différents&nbsp;: des photos de vacances à imprimer, des factures à conserver, des documents à finir d’écrire, des chansons à écouter, des vidéos à regarder, etc.&nbsp; <br>📂 Les<strong> dossiers servent à ranger</strong> les fichiers."
+              }
+            }
+          ]
+        },
+        {
+          "id": "5257094d-7322-44fc-bead-916e65d918bb",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7e61c54c-754e-4427-9929-505c776a526e",
+                "type": "text",
+                "content": "Maintenant que la différence entre fichiers et dossiers est plus claire, voyons comment créer des dossiers."
+              }
+            }
+          ]
+        },
+        {
+          "id": "f881f95d-d179-47dd-b78c-8c288099a9de",
+          "type": "discovery",
+          "title": "Découverte #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "87d28944-5b26-48ad-9862-ec8e67c7109d",
+                "type": "text",
+                "content": "Maëva a de nombreuses photos sur son bureau.&nbsp;Elle souhaite les ranger toutes au même endroit.&nbsp;<br>Pour organiser ses fichiers, elle veut créer un nouveau dossier.&nbsp;<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "617bda78-d613-4dbd-9b18-84dd86bb89d5",
+                "type": "text",
+                "content": "<strong>Créez un dossier “Photos” sur le bureau de Maëva.</strong> <br>[ Objet interactif avec indices procédures (travail de réflexion sur la forme et les modalités avec le design)<br>Actions&nbsp;: clic droit → “Nouveau dossier” ou “dossier” → écrire un nom → appuyer sur Entrée ]<br>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "748d8244-9dc0-43c0-b5f1-d4174e7aaba4",
+          "type": "short-lesson",
+          "title": "Leçon #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "db1d3007-f6d7-4242-aff6-807aa1e1f5a0",
+                "type": "text",
+                "content": "Lors de la <strong>création d’un dossier</strong>, il est possible de lui<strong> donner un nom</strong>. Le choix du nom peut aider à <strong>mieux s’organiser</strong>, par exemple un dossier Photos pour ranger ses photos.<br><br><h5><strong>Comment afficher le contenu d’un dossier ? </strong>📂</h5><p>Pour afficher le contenu d’un dossier, double-cliquez dessus. Une fenêtre s’ouvre et affiche le contenu du dossier.</p><p><strong><br>🤔 Bon à savoir</strong><br>Un dossier peut contenir des fichiers mais aussi d’autres dossiers.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4aced38f-eceb-4a5b-8d2c-f3853aff5157",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5869c7b0-5166-40bf-9661-cbff168fae43",
+                "type": "text",
+                "content": "Une fois un dossier créé, il est temps d’y ranger des fichiers."
+              }
+            }
+          ]
+        },
+        {
+          "id": "7280a96f-05bb-400d-b898-13214e9a90b4",
+          "type": "discovery",
+          "title": "Découverte #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7aee6701-cb39-46e9-8069-09984704661f",
+                "type": "text",
+                "content": "Maintenant que Maëva a un dossier «&nbsp;Photos&nbsp;», elle y a rangé les photos qui étaient sur son bureau. Sauf la photo nommée «&nbsp;DCIM2115&nbsp;». <br>Elle veut d’abord changer le nom de la photo. Puis la déplacer dans le dossier «&nbsp;Photos&nbsp;».<br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "24580343-0718-4c50-9683-6047f0ee2e10",
+                "type": "text",
+                "content": "<ul><li>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</li><li>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</li></ul><strong>[simulateur avec indices]</strong><br>STEP 1<br>Donnez le nom «&nbsp;Portugal&nbsp;» à la photo «&nbsp;DCIM2115&nbsp;». <br>Actions&nbsp;: clic droit → Renommer → taper le nom<br><strong>Feedback step 1 </strong>: À tout moment, vous pouvez modifier le nom d’un fichier pour choisir un nom qui a du sens pour vous.&nbsp; <br><br>STEP 2<br>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»<br> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ]<br><strong>Feedback step 2</strong>&nbsp;: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.&nbsp;<br>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fbdc20e5-8638-4dc7-8187-aa4a1cc373b6",
+          "type": "short-lesson",
+          "title": "Leçon #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8c2acdd0-84cb-4c7f-9915-7a5f126796df",
+                "type": "text",
+                "content": "Le <strong>nom du fichier</strong> est parfois créé automatiquement ou choisi par quelqu’un d’autre. De la même manière, vous n’avez peut-être pas choisi <strong>le dossier où un fichier est placé</strong>.<br> <br>Vous pouvez <strong>renommer </strong>et <strong>déplacer </strong>vos fichiers selon votre préférence.<br> <br><strong>🤔 Le saviez-vous ?</strong><br>Un dossier peut contenir autant de fichiers que l’on souhaite. <br><br><strong>Astuce&nbsp;</strong><br>Si vous savez utiliser le glisser-déposer, vous pouvez l’utiliser pour déplacer des fichiers dans des dossiers.<br>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3a74a7cb-f0ea-4cfa-9cf3-8cd416ef50f5",
+          "type": "transition",
+          "title": "Transition #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aa01d6a4-604e-4a42-abb5-e264b8302ff5",
+                "type": "text",
+                "content": "Voyons à présent ce qu’il se passe lorsqu’un fichier est supprimé."
+              }
+            }
+          ]
+        },
+        {
+          "id": "19548a70-5081-48d9-9975-8d41024f007c",
+          "type": "discovery",
+          "title": "Découverte #4",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "0877e255-8e38-49d9-81f2-e10ec066f070",
+                      "type": "text",
+                      "content": "Maëva a supprimé par erreur le fichier «&nbsp;contact&nbsp;» de son bureau.<br>[+ short vidéo de la suppression]"
+                    },
+                    {
+                      "id": "99528f9d-32b9-4388-ade2-46c05929846d",
+                      "type": "qcu-discovery",
+                      "instruction": "À votre avis, Maëva peut-elle récupérer son fichier ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Non, il est supprimé définitivement de l’ordinateur.",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Oui, mais uniquement dans les 5 minutes qui suivent la suppression.",
+                          "feedback": {
+                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Oui, les fichiers supprimés sont dans la corbeille de l’ordinateur.",
+                          "feedback": {
+                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
+                      "type": "text",
+                      "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva.<br>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "94d6a90f-be60-4d50-83ff-3204ed824dd3",
+          "type": "short-lesson",
+          "title": "Leçon #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aa2945b0-cec7-4b40-8ce7-82d97b37a451",
+                "type": "text",
+                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur “ Supprimer “ (Windows) ou “ Placer dans la corbeille “ (Mac).</p><p><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4f6c8686-520d-44d8-b54a-a718f0c77e72",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "6e5f55eb-921d-4a59-8de6-218716765add",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f9e7d7b2-b97e-4e43-a43b-32c592be79e9",
+                "type": "text",
+                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la Corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la Corbeille. 🗑️</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "572621cf-7f3c-40c4-9a50-dcd1212396c4",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "aaacc9aa-9e99-4505-be4c-c775869d97d2",
+          "type": "activity",
+          "title": "Activité d’application #1 ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1e42e3b4-cb3b-42f5-b32a-84211926c0fd",
+                "type": "qab",
+                "instruction": "Pour chacune des phrases ci-dessous, indiquez si elle est vraie ou fausse.",
+                "cards": [
+                  {
+                    "id": "a11511f9-7ac0-4374-8f7e-5fa192613101",
+                    "text": "Un dossier peut contenir des fichiers et des dossiers. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "f4c2ce68-2381-4c02-880b-766b703e1d1c",
+                    "text": "Sur un ordinateur, une photo est un fichier.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "54542807-85f9-431d-88f1-043c85530e8a",
+                    "text": "Un fichier ne peut pas être renommé.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "4e48d33e-f372-4524-b557-31d608b463ac",
+                    "text": "Quand un fichier est supprimé, il est effacé définitivement de l’ordinateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "60b72551-bab1-4a76-8351-ad1a988fb925",
+          "type": "activity",
+          "title": "Activité d’application #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a3b3eb71-3fb1-4fea-9784-5f6290bdc753",
+                "type": "text",
+                "content": "Observez le bureau ci-dessous puis répondez à la question."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9a1344e6-886a-49df-9a7e-c3b62d21601c",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/bureaua2.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0af6f2d1-0c78-4bb4-9fe5-0d895f900483",
+                "type": "qrocm",
+                "instruction": "Combien de fichiers et combien de dossiers voyez-vous sur ce bureau ?",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "Nombre de dossiers&nbsp;:&nbsp;"
+                  },
+                  {
+                    "input": "dossiers",
+                    "type": "input",
+                    "inputType": "number",
+                    "size": 2,
+                    "display": "inline",
+                    "placeholder": "Tapez un chiffre",
+                    "ariaLabel": "",
+                    "tolerances": [],
+                    "solutions": [
+                      4
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<br>Nombre de fichiers&nbsp;:&nbsp;"
+                  },
+                  {
+                    "input": "fichiers",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 2,
+                    "display": "inline",
+                    "placeholder": "Tapez un chiffre",
+                    "ariaLabel": "",
+                    "tolerances": [],
+                    "solutions": [
+                      6
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bonne réponse !&nbsp;",
+                    "diagnosis": "Sur ce bureau, il y a quatre dossiers, trois fichiers sons et trois fichiers textes."
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "Pour savoir combien il y a de dossiers et de fichiers sur ce bureau, regardez l’icône qui les représentent."
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "200edf6a-cbfd-41c2-b08e-c3c87d7efcd0",
+          "type": "activity",
+          "title": "Activité d’application #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7efd6a00-11a9-4dd9-b8ee-0ff3c9bd18fa",
+                "type": "text",
+                "content": "Dans l’application ci-dessous&nbsp;: <br><ul><li>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;».</li><li>Créez un dossier «&nbsp;Images&nbsp;».</li><li>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</li></ul><strong>[Simulateur bureau (sans indices) avec autovolidation]</strong>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5e90ffaf-f1ea-4b0f-9172-25c354243517",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "bc338863-7deb-45b5-b26c-7faf9308b668",
+          "type": "challenge",
+          "title": "Défi",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8adbf28b-dd8c-4a6c-9725-2a8f5fa0bb6f",
+                "type": "text",
+                "content": "Cette fois, Maëva a supprimé le dossier “Administratif” de son bureau."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "281c9e6c-6b57-4c80-92e9-e9d4afb62677",
+                "type": "text",
+                "content": "Récupérez le dossier “Administratif” dans l’application ci-dessous puis répondez à la question. <br><strong>[Simulateur sans indices internes]</strong><br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "95be29bf-828d-4cb5-aa14-a6cbfbd90392",
+                "type": "qrocm",
+                "instruction": "Comment s’appelle le fichier qui se trouve dans le dossier “Administratif” ?",
+                "proposals": [
+                  {
+                    "input": "nom du fichier",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "nom du fichier",
+                    "ariaLabel": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "courrier"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bonne réponse ! ",
+                    "diagnosis": "Feedback à rédiger"
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "Feedback à rédiger"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
