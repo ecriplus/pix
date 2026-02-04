@@ -118,7 +118,10 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
       expect(updatedUserOrgaSettings.id).to.equal(userOrgaSettings.id);
       expect(updatedUserOrgaSettings.updatedAt).to.deep.equal(now);
       expect(updatedUserOrgaSettings.user).to.deep.include(user);
-      expect(updatedUserOrgaSettings.currentOrganization).to.deep.equal(newOrganization);
+      // TODO: remove omit when epix https://1024pix.atlassian.net/browse/PIX-19561 is completed
+      expect(_.omit(updatedUserOrgaSettings.currentOrganization, 'organizationLearnerTypeId')).to.deep.equal(
+        newOrganization,
+      );
     });
   });
 
