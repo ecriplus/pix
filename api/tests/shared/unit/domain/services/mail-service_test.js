@@ -1,9 +1,7 @@
 import {
-  DUTCH_SPOKEN,
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
-  SPANISH_SPOKEN,
 } from '../../../../../src/shared/domain/services/locale-service.js';
 import * as mailService from '../../../../../src/shared/domain/services/mail-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -540,9 +538,9 @@ describe('Unit | Service | MailService', function () {
       });
     });
 
-    it(`calls sendEmail with from, to, template, tags and locale ${DUTCH_SPOKEN}`, async function () {
+    it('calls sendEmail with from, to, template, tags and locale nl', async function () {
       // given
-      const locale = DUTCH_SPOKEN;
+      const locale = 'nl';
       const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
@@ -571,9 +569,9 @@ describe('Unit | Service | MailService', function () {
       });
     });
 
-    it(`calls sendEmail with from, to, template, tags and locale ${SPANISH_SPOKEN}`, async function () {
+    it('calls sendEmail with from, to, template, tags and locale es', async function () {
       // given
-      const locale = SPANISH_SPOKEN;
+      const locale = 'es';
       const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
