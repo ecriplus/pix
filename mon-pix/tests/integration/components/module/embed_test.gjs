@@ -549,6 +549,31 @@ module('Integration | Component | Module | Embed', function (hooks) {
       const iframe = screen.getByTitle(embed.title);
       assert.strictEqual(document.activeElement, iframe);
     });
+
+    test('should send an event', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: false,
+        url: 'https://example.org',
+        height: 800,
+      };
+      await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+
+      // when
+      await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+      await clickByName(t('pages.modulix.buttons.interactive-element.reset.ariaLabel'));
+
+      // then
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'EMBED_RETRIED',
+        data: {
+          elementId: embed.id,
+        },
+      });
+      assert.ok(true);
+    });
   });
 
   module('when user copy pastes', function () {
