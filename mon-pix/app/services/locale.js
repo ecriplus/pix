@@ -87,15 +87,6 @@ export default class LocaleService extends Service {
       .sort((a, b) => a.label.localeCompare(b.label));
   }
 
-  isSupportedLocale(locale) {
-    try {
-      const localeCanonicalName = Intl.getCanonicalLocales(locale)?.[0];
-      return this.availableLocales.some((availableLocale) => localeCanonicalName == availableLocale);
-    } catch {
-      return false;
-    }
-  }
-
   setCurrentLocale(locale) {
     const nearestLocale = this.#getNearestSupportedLocale(locale);
     this.#setCookieLocale(nearestLocale);
