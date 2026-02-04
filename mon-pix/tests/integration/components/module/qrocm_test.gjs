@@ -380,6 +380,69 @@ module('Integration | Component | Module | QROCM', function (hooks) {
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
   });
 
+  module('when user clicks on retry button', function () {
+    test('should send an event', async function (assert) {
+      // given
+      const clock = sinon.useFakeTimers();
+      const qrocm = {
+        id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
+        instruction: 'Instruction',
+        proposals: [
+          {
+            input: 'symbole',
+            type: 'input',
+            inputType: 'text',
+            size: 1,
+            display: 'block',
+            placeholder: '',
+            ariaLabel: 'Réponse 1',
+            solutions: ['Réponse 1'],
+          },
+        ],
+        feedbacks: {
+          valid: {
+            state: 'Correct!',
+            diagnosis: 'Good job!',
+          },
+          invalid: {
+            state: 'Wrong!',
+            diagnosis: 'Too Bad!',
+          },
+        },
+        type: 'qrocm',
+      };
+      const onElementAnswerStub = sinon.stub();
+      const onRetrySpy = sinon.spy();
+      ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY = 10;
+
+      // when
+      const screen = await render(
+        <template>
+          <ModuleQrocm @element={{qrocm}} @onAnswer={{onElementAnswerStub}} @onRetry={{onRetrySpy}} />
+        </template>,
+      );
+      await fillIn(screen.getByLabelText('Réponse 1'), 'ma super réponse');
+      const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
+      await click(verifyButton);
+      await clock.tickAsync(ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY);
+      const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+      await click(retryButton);
+
+      // then
+      sinon.assert.calledWith(onRetrySpy, {
+        element: qrocm,
+      });
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QROCM_RETRIED',
+        data: {
+          elementId: qrocm.id,
+        },
+      });
+      assert.ok(true);
+      clock.restore();
+    });
+  });
+
   test('should be able to focus back an input to proposals when feedback appears', async function (assert) {
     // given
     const qrocm = {

@@ -124,6 +124,16 @@ export default class ModuleQrocm extends ModuleElement {
     this.isVerifying = false;
   }
 
+  @action
+  retry(event) {
+    super.retry(event);
+
+    this.passageEvents.record({
+      type: 'QROCM_RETRIED',
+      data: { elementId: this.element.id },
+    });
+  }
+
   #waitFor(duration) {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
