@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.322.1](https://github.com/1024pix/pix/compare/v5.322.0...v5.322.1) (2026-02-04)
+
+### :building_construction: Tech
+
+- [#14977](https://github.com/1024pix/pix/pull/14977) Assurer l'usage d'une seule connexion à la base de données lors de l'usage de la route POST /api/answers.
+
 # [5.322.0](https://github.com/1024pix/pix/compare/v5.321.0...v5.322.0) (2026-02-04)
 
 ### :rocket: Amélioration
