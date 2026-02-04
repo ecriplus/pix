@@ -114,20 +114,31 @@ class OrganizationForAdmin {
         params: null,
       };
     }
+
     if (this.type === 'SCO' && this.isManagingStudents) {
       this.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key] = {
         active: true,
         params: null,
       };
     }
+
     if (this.type === 'SCO-1D') {
-      this.features[ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key] = { active: true, params: null };
-      this.features[ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key] = { active: true, params: null };
-      this.features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key] = {
-        active: true,
-        params: { name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE },
-      };
+      if (this.features[ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key] === undefined) {
+        this.features[ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key] = { active: true, params: null };
+      }
+
+      if (this.features[ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key] === undefined) {
+        this.features[ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key] = { active: true, params: null };
+      }
+
+      if (this.features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key] === undefined) {
+        this.features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key] = {
+          active: true,
+          params: { name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE },
+        };
+      }
     }
+
     this.tagsToAdd = [];
     this.tagsToRemove = [];
     this.code = code;
