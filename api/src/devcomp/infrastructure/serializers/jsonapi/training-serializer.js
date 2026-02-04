@@ -10,7 +10,7 @@ const serializeForAdmin = function (training = {}, meta) {
       duration.hours = duration.hours || 0;
       duration.minutes = duration.minutes || 0;
 
-      return JSON.parse(JSON.stringify({ ...record, isRecommendable: record.isRecommendable }));
+      return structuredClone({ ...record, isRecommendable: record.isRecommendable });
     },
     attributes: [
       'id',
