@@ -613,7 +613,7 @@
                   {
                     "input": "fichiers",
                     "type": "input",
-                    "inputType": "text",
+                    "inputType": "number",
                     "size": 2,
                     "display": "inline",
                     "placeholder": "Tapez un chiffre",
