@@ -17,12 +17,12 @@ import { CenterHabilitationError } from '../../../shared/domain/errors.js';
  * @returns {Promise<void>} if candidate is deemed eligible
  * @throws {UserNotAuthorizedToCertifyError} candidate is not certifiable for CORE
  */
-export async function verifyCandidateReconciliationRequirements({
+export const verifyCandidateReconciliationRequirements = async ({
   candidate,
   sessionId,
   placementProfileService,
   certificationCenterRepository,
-}) {
+}) => {
   const placementProfile = await placementProfileService.getPlacementProfile({
     userId: candidate.userId,
     limitDate: candidate.reconciledAt,
@@ -40,4 +40,4 @@ export async function verifyCandidateReconciliationRequirements({
       throw new CenterHabilitationError();
     }
   }
-}
+};
