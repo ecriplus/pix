@@ -138,7 +138,10 @@ async function _getByCompetenceIdAndUserId({ competenceId, userId, forUpdate = f
 }
 
 function _selectOnlyOneCompetenceEvaluationByCompetence(competenceEvaluations) {
-  const assessmentsGroupedByCompetence = _.groupBy(competenceEvaluations, 'competenceId');
+  const assessmentsGroupedByCompetence = Object.groupBy(
+    competenceEvaluations,
+    (competenceEvaluation) => competenceEvaluation.competenceId,
+  );
   return _.map(assessmentsGroupedByCompetence, _.head);
 }
 
