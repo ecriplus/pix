@@ -50,6 +50,7 @@ export default class ModuleQcm extends ModuleElement {
   }
 
   resetAnswers() {
+    this.currentCorrection = null;
     this.selectedAnswerIds = new Set();
   }
 
