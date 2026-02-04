@@ -92,7 +92,8 @@ export default class List extends Component {
   }
 
   get hasActionColumn() {
-    return Boolean(this.actionsForParticipant(this.args.participants[0]).length);
+    const hasOralization = this.customColumns.includes('ORALIZATION');
+    return Boolean(this.currentUser.canEditLearnerName || hasOralization);
   }
 
   get onClickLearner() {
@@ -141,7 +142,7 @@ export default class List extends Component {
   actionsForParticipant(participant) {
     const actions = [];
 
-    if (this.currentUser.canActivateOralizationLearner) {
+    if (this.hasParticipants && this.currentUser.canActivateOralizationLearner) {
       const oralizationActivated = participant.extraColumns['ORALIZATION'];
       actions.push({
         label: oralizationActivated

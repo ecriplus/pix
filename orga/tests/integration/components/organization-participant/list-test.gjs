@@ -1,14 +1,16 @@
+/* eslint-disable ember/template-no-let-reference */
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import List from 'pix-orga/components/organization-participant/list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | OrganizationParticipant | List', function (hooks) {
+  let noop, certificabilityFilter, fullNameFilter;
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -20,30 +22,32 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
     }
 
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('noop', sinon.stub());
+    noop = sinon.stub();
+    certificabilityFilter = [];
+    fullNameFilter = null;
   });
 
   test('it should have a caption to describe the table ', async function (assert) {
     // given
-    this.set('participants', [
+    const participants = [
       {
         lastName: 'La Terreur',
         firstName: 'Gigi',
         id: 34,
       },
-    ]);
-    this.set('certificabilityFilter', []);
-    this.set('fullNameFilter', null);
+    ];
 
     // when
     const screen = await render(
-      hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+      <template>
+        <List
+          @participants={{participants}}
+          @triggerFiltering={{noop}}
+          @onClickLearner={{noop}}
+          @fullName={{fullNameFilter}}
+          @certificabilityFilter={{certificabilityFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -53,18 +57,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
   module('header', function () {
     test('it should display common header labels', async function (assert) {
       // given
-      this.set('participants', []);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+      const participants = [];
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -100,18 +104,17 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         participants.meta = {
           headingCustomColumns: ['awesome.column'],
         };
-        this.set('participants', participants);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
         // when
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+            />
+          </template>,
         );
         // then
         assert.ok(screen.getByRole('columnheader', { name: t('awesome.column') }));
@@ -128,18 +131,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         participants.meta = {
           headingCustomColumns: ['awesome.column'],
         };
-        this.set('participants', participants);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
+
         // when
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+            />
+          </template>,
         );
         // then
         assert.notOk(screen.queryByRole('columnheader', { name: t('awesome.column') }));
@@ -163,18 +166,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           id: 56,
         },
       ];
-      this.set('participants', participants);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -196,18 +199,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           id: 56,
         },
       ];
-      this.set('participants', participants);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -237,18 +240,17 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           headingCustomColumns: ['awesome.column'],
         };
 
-        this.set('participants', participants);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
         // when
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+            />
+          </template>,
         );
 
         // then
@@ -276,18 +278,17 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           headingCustomColumns: ['awesome.column'],
         };
 
-        this.set('participants', participants);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
         // when
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+            />
+          </template>,
         );
 
         // then
@@ -299,7 +300,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
   module('filtering cases', function () {
     test('it should display the students number', async function (assert) {
       // given
-      this.set('participants', [
+      const participants = [
         {
           lastName: 'La Terreur',
           firstName: 'Gigi',
@@ -310,22 +311,22 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           firstName: 'Gi',
           id: 33,
         },
-      ]);
-      this.set('participants.meta', {
+      ];
+      participants.meta = {
         rowCount: 2,
-      });
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+      };
 
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -333,19 +334,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
     });
     test('it should display the filter labels', async function (assert) {
       // given
-      this.set('participants', []);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+      const participants = [];
 
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -360,32 +361,29 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           firstName: 'Gigi',
         },
       ];
-
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
+      const triggerFiltering = sinon.stub();
 
       // when
       await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{triggerFiltering}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       await fillByLabel('Recherche sur le nom et prénom', 'Karam');
       // then
-      sinon.assert.calledWith(this.triggerFiltering, 'fullName', 'Karam');
+      sinon.assert.calledWith(triggerFiltering, 'fullName', 'Karam');
       assert.ok(true);
     });
 
     test('it should trigger filtering with certificability', async function (assert) {
       // given
-      const triggerFiltering = sinon.spy();
-      this.set('triggerFiltering', triggerFiltering);
+      const triggerFiltering = sinon.stub();
       const participants = [
         {
           lastName: 'La Terreur',
@@ -393,18 +391,16 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         },
       ];
 
-      this.set('participants', participants);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
-
       const { getByLabelText, findByRole } = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{triggerFiltering}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
 
       // when
@@ -427,26 +423,26 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           this.owner.register('service:current-user', CurrentUserStub);
           participants.meta = {
             customFilters: ['classe'],
+            headingCustomColumns: [],
           };
         });
 
         test('it should display custom filters', async function (assert) {
           // given
 
-          this.set('participants', participants);
-          this.set('certificabilityFilter', []);
-          this.set('fullNameFilter', null);
-          this.set('customFiltersValues', { classe: 'Troisième' });
+          const customFiltersValues = { classe: 'Troisième' };
           // when
           const screen = await render(
-            hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @customFiltersValues={{this.customFiltersValues}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+            <template>
+              <List
+                @participants={{participants}}
+                @triggerFiltering={{noop}}
+                @onClickLearner={{noop}}
+                @fullName={{fullNameFilter}}
+                @customFiltersValues={{customFiltersValues}}
+                @certificabilityFilter={{certificabilityFilter}}
+              />
+            </template>,
           );
 
           // then
@@ -454,22 +450,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         });
         test('it should trigger filtering with custom filters', async function (assert) {
           // given
-          const triggerFiltering = sinon.spy();
-          this.set('triggerFiltering', triggerFiltering);
-          this.set('participants', participants);
-          this.set('certificabilityFilter', []);
-          this.set('fullNameFilter', null);
-          this.set('customFiltersValues', { classe: '' });
+          const triggerFiltering = sinon.stub();
+
+          const customFiltersValues = { classe: '' };
 
           await render(
-            hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @customFiltersValues={{this.customFiltersValues}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+            <template>
+              <List
+                @participants={{participants}}
+                @triggerFiltering={{triggerFiltering}}
+                @onClickLearner={{noop}}
+                @fullName={{fullNameFilter}}
+                @customFiltersValues={{customFiltersValues}}
+                @certificabilityFilter={{certificabilityFilter}}
+              />
+            </template>,
           );
 
           // when
@@ -494,20 +489,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         test('it should not display custom filters', async function (assert) {
           // given
 
-          this.set('participants', participants);
-          this.set('certificabilityFilter', []);
-          this.set('fullNameFilter', null);
-          this.set('customFiltersValues', { classe: 'Troisième' });
+          const customFiltersValues = { classe: 'Troisième' };
           // when
           const screen = await render(
-            hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @customFiltersValues={{this.customFiltersValues}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+            <template>
+              <List
+                @participants={{participants}}
+                @triggerFiltering={{noop}}
+                @onClickLearner={{noop}}
+                @fullName={{fullNameFilter}}
+                @customFiltersValues={{customFiltersValues}}
+                @certificabilityFilter={{certificabilityFilter}}
+              />
+            </template>,
           );
 
           // then
@@ -521,7 +515,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
     module('sort by participation count', function () {
       test('it should trigger ascending sort on participation count column', async function (assert) {
         // given
-        this.set('participationCountOrder', null);
+        const participationCountOrder = null;
 
         const sortByParticipationCount = sinon.spy();
 
@@ -532,21 +526,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           },
         ];
 
-        this.set('participants', participants);
-        this.set('sortByParticipationCount', sortByParticipationCount);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @participationCountOrder={{this.participationCountOrder}}
-  @sortByParticipationCount={{this.sortByParticipationCount}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @participationCountOrder={{participationCountOrder}}
+              @sortByParticipationCount={{sortByParticipationCount}}
+            />
+          </template>,
         );
 
         // when
@@ -565,7 +556,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       test('it should trigger ascending sort on lastname column', async function (assert) {
         // given
 
-        this.set('lastnameSort', null);
+        const lastnameSort = null;
 
         const sortByLastname = sinon.spy();
 
@@ -576,22 +567,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           },
         ];
 
-        this.set('participants', participants);
-        this.set('sortByLastname', sortByLastname);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @lastnameSort={{this.lastnameSort}}
-  @sortByLastname={{this.sortByLastname}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onFilter={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @lastnameSort={{lastnameSort}}
+              @sortByLastname={{sortByLastname}}
+            />
+          </template>,
         );
 
         // when
@@ -610,7 +598,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       test('it should trigger ascending sort on latestParticipation column', async function (assert) {
         // given
 
-        this.set('latestParticipationOrder', null);
+        const latestParticipationOrder = null;
 
         const sortByLatestParticipation = sinon.spy();
 
@@ -621,22 +609,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           },
         ];
 
-        this.set('participants', participants);
-        this.set('sortByLatestParticipation', sortByLatestParticipation);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
         const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @latestParticipationOrder={{this.latestParticipationOrder}}
-  @sortByLatestParticipation={{this.sortByLatestParticipation}}
-/>`,
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onFilter={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @latestParticipationOrder={{latestParticipationOrder}}
+              @sortByLatestParticipation={{sortByLatestParticipation}}
+            />
+          </template>,
         );
 
         // when
@@ -655,21 +640,20 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
   test('it should display the empty state when no participants', async function (assert) {
     // given
     const participants = [];
-    this.set('participants', participants);
-    this.set('certificabilityFilter', []);
-    this.set('fullNameFilter', null);
 
-    this.triggerFiltering = sinon.stub();
+    const certificabilityFilter = [];
 
     // when
     const screen = await render(
-      hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+      <template>
+        <List
+          @participants={{participants}}
+          @triggerFiltering={{noop}}
+          @onClickLearner={{noop}}
+          @fullName={{fullNameFilter}}
+          @certificabilityFilter={{certificabilityFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -686,20 +670,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       },
     ];
 
-    this.set('participants', participants);
-    this.triggerFiltering = sinon.stub();
-    this.set('certificabilityFilter', []);
-    this.set('fullNameFilter', null);
+    const certificabilityFilter = [];
 
     // when
     const screen = await render(
-      hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+      <template>
+        <List
+          @participants={{participants}}
+          @triggerFiltering={{noop}}
+          @onClickLearner={{noop}}
+          @fullName={{fullNameFilter}}
+          @certificabilityFilter={{certificabilityFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -713,26 +696,27 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         isAdminInOrganization = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-
-      this.triggerFiltering = sinon.stub();
-      this.set('fullNameFilter', null);
-      this.set('certificabilityFilter', []);
     });
 
     test('it should display checkboxes', async function (assert) {
       //given
       const participants = [{ id: '1', firstName: 'Spider', lastName: 'Man' }];
-      this.set('participants', participants);
-
+      const deleteParticipants = sinon.stub();
+      const customFiltersValues = null;
       //when
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+            @deleteParticipants={{deleteParticipants}}
+            @customFiltersValues={{customFiltersValues}}
+          />
+        </template>,
+      );
 
       const mainCheckbox = screen.getByRole('checkbox', {
         name: t('pages.organization-participants.table.column.mainCheckbox'),
@@ -753,18 +737,20 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       //given
       const participants = [];
 
-      this.set('participants', participants);
-      this.deleteParticipants = sinon.stub();
-      this.certificabilityFilter = [];
+      const deleteParticipants = sinon.stub();
       //when
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @fullName={{this.fullNameFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @certificabilityFilter={{certificabilityFilter}}
+            @fullName={{fullNameFilter}}
+            @deleteParticipants={{deleteParticipants}}
+          />
+        </template>,
+      );
       //then
       assert
         .dom(
@@ -787,20 +773,17 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       participants.meta = { page: 1, pageSize: 1, rowCount: 2, pageCount: 2 };
 
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
-
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const firstLearnerSelected = screen.getAllByRole('checkbox')[1];
       const secondLearnerSelected = screen.getAllByRole('checkbox')[2];
@@ -824,20 +807,17 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       participants.meta = { page: 1, pageSize: 10, rowCount: 50, pageCount: 5 };
 
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
-
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const firstLearnerSelected = screen.getAllByRole('checkbox')[1];
 
@@ -851,7 +831,6 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
     test('it should reset selected participant when reset filters', async function (assert) {
       // given
       const resetFilter = sinon.spy();
-      this.set('resetFilter', resetFilter);
       const participants = [
         {
           lastName: 'La Terreur',
@@ -859,19 +838,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         },
       ];
 
-      this.set('participants', participants);
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', 'La Terreur');
+      const fullNameFilter = 'La Terreur';
 
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @onResetFilter={{this.resetFilter}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @onResetFilter={{resetFilter}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const firstLearnerSelected = screen.getAllByRole('checkbox')[1];
 
@@ -896,21 +875,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       participants.meta = { page: 1, pageSize: 10, rowCount: 50, pageCount: 5 };
 
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
-
       // when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @sortByParticipationCount={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @sortByParticipationCount={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const firstLearnerSelected = screen.getAllByRole('checkbox')[1];
 
@@ -929,18 +905,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         //given
         const participants = [{ id: '1', firstName: 'Spider', lastName: 'Man' }];
 
-        this.set('participants', participants);
-        this.deleteParticipants = sinon.stub();
+        const deleteParticipants = sinon.stub();
 
         //when
-        const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+        const screen = await render(
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @deleteParticipants={{deleteParticipants}}
+            />
+          </template>,
+        );
 
         const firstLearnerToDelete = screen.getAllByRole('checkbox')[1];
         await click(firstLearnerToDelete);
@@ -956,18 +935,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         const milesLearner = { id: '3', firstName: 'Miles', lastName: 'Morales' };
         const participants = [spiderLearner, peterLearner, milesLearner];
 
-        this.set('participants', participants);
-        this.deleteParticipants = sinon.stub();
+        const deleteParticipants = sinon.stub();
 
         //when
-        const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+        const screen = await render(
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @deleteParticipants={{deleteParticipants}}
+            />
+          </template>,
+        );
 
         const firstLearnerToDelete = screen.getAllByRole('checkbox')[2];
         const secondLearnerToDelete = screen.getAllByRole('checkbox')[3];
@@ -998,18 +980,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         const milesLearner = { id: '3', firstName: 'Miles', lastName: 'Morales' };
         const participants = [spiderLearner, peterLearner, milesLearner];
 
-        this.set('participants', participants);
-        this.deleteParticipants = sinon.stub();
+        const deleteParticipants = sinon.stub();
 
         //when
-        const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+        const screen = await render(
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @deleteParticipants={{deleteParticipants}}
+            />
+          </template>,
+        );
 
         const firstLearnerToDelete = screen.getAllByRole('checkbox')[2];
         const secondLearnerToDelete = screen.getAllByRole('checkbox')[3];
@@ -1037,7 +1022,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         await click(confirmationButton);
 
         //then
-        sinon.assert.calledWith(this.deleteParticipants, [peterLearner, milesLearner]);
+        sinon.assert.calledWith(deleteParticipants, [peterLearner, milesLearner]);
         assert.ok(true);
       });
 
@@ -1048,18 +1033,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         const milesLearner = { id: '3', firstName: 'Miles', lastName: 'Morales' };
         const participants = [spiderLearner, peterLearner, milesLearner];
 
-        this.set('participants', participants);
-        this.deleteParticipants = sinon.stub();
+        const deleteParticipants = sinon.stub();
 
         //when
-        const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @deleteParticipants={{this.deleteParticipants}}
-/>`);
+        const screen = await render(
+          <template>
+            <List
+              @participants={{participants}}
+              @triggerFiltering={{noop}}
+              @onClickLearner={{noop}}
+              @fullName={{fullNameFilter}}
+              @certificabilityFilter={{certificabilityFilter}}
+              @deleteParticipants={{deleteParticipants}}
+            />
+          </template>,
+        );
         const mainCheckbox = screen.getAllByRole('checkbox')[0];
         const firstLearnerToDelete = screen.getAllByRole('checkbox')[2];
         const secondLearnerToDelete = screen.getAllByRole('checkbox')[3];
@@ -1096,10 +1084,6 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         canEditLearnerName = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-
-      this.triggerFiltering = sinon.stub();
-      this.set('fullNameFilter', null);
-      this.set('certificabilityFilter', []);
     });
 
     test('it should display dropdown actions when user can edit learner name', async function (assert) {
@@ -1112,16 +1096,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           extraColumns: {},
         },
       ];
-      this.set('participants', participants);
 
       // when
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
+      );
 
       // then
       assert.ok(screen.getByRole('button', { name: t('pages.sup-organization-participants.actions.show-actions') }));
@@ -1137,15 +1124,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           extraColumns: {},
         },
       ];
-      this.set('participants', participants);
 
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
+      );
 
       // when
       const dropdownButton = screen.getByRole('button', {
@@ -1171,15 +1161,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           extraColumns: {},
         },
       ];
-      this.set('participants', participants);
 
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
+      );
 
       const dropdownButton = screen.getByRole('button', {
         name: t('pages.sup-organization-participants.actions.show-actions'),
@@ -1215,16 +1208,19 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           extraColumns: {},
         },
       ];
-      this.set('participants', participants);
 
       // when
-      const screen = await render(hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`);
+      const screen = await render(
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
+      );
 
       // then
       assert.notOk(screen.queryByLabelText(t('pages.sup-organization-participants.actions.show-actions')));
@@ -1240,20 +1236,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       this.owner.register('service:current-user', CurrentUserStub);
 
       const participants = [{ id: '1', firstName: 'Spider', lastName: 'Man' }];
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
 
       //when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const checkboxes = screen.queryAllByRole('checkbox');
 
@@ -1270,20 +1264,18 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       this.owner.register('service:current-user', CurrentUserStub);
 
       const participants = [{ id: '1', firstName: 'Spider', lastName: 'Man' }];
-      this.set('participants', participants);
-      this.triggerFiltering = sinon.stub();
-      this.set('certificabilityFilter', []);
-      this.set('fullNameFilter', null);
 
       //when
       const screen = await render(
-        hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.triggerFiltering}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-/>`,
+        <template>
+          <List
+            @participants={{participants}}
+            @triggerFiltering={{noop}}
+            @onClickLearner={{noop}}
+            @fullName={{fullNameFilter}}
+            @certificabilityFilter={{certificabilityFilter}}
+          />
+        </template>,
       );
       const checkboxes = screen.queryAllByRole('checkbox');
 
@@ -1292,3 +1284,4 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
     });
   });
 });
+/* eslint-enable ember/template-no-let-reference */
