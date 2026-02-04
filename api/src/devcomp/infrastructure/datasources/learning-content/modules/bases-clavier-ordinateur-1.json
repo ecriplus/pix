@@ -6,9 +6,9 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg",
     "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
-    "duration": "30",
+    "duration": 30,
     "level": "novice",
     "objectives": [
       "<p>Repérer les touches de base du clavier</p>",
@@ -25,7 +25,7 @@
         {
           "id": "32261c7c-5922-4a48-85f0-7527fed88136",
           "type": "transition",
-          "title": "",
+          "title": "introduction",
           "components": [
             {
               "type": "element",
@@ -47,7 +47,7 @@
               "element": {
                 "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
                 "type": "text",
-                "content": "<p>Le clavier fait partie de l’équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier&nbsp;: </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans un ordinateur</li> </ul>"
+                "content": "<p>Le clavier fait partie de l’équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier&nbsp;: </p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fil,</li> <li>les claviers inclus dans un ordinateur.</li> </ul>"
               }
             },
             {
@@ -55,9 +55,9 @@
               "element": {
                 "id": "9bb0a0d4-0075-46eb-acaf-68e349024028",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/G56zEJA.jpeg",
-                "alt": "",
-                "alternativeText": "<p>Photographies de plusieurs types de claviers de taille et de forme différentes&nbsp;:</p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fils</li> <li>les claviers inclus dans unordinateur</li> </ul>"
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/claviers.png",
+                "alt": "Photographie dont le contenu est détaillé dans l’alternative textuelle",
+                "alternativeText": "<p>Photographies de plusieurs types de claviers de taille et de forme différentes&nbsp;:</p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fils,</li> <li>les claviers inclus dans unordinateur.</li> </ul>"
               }
             },
             {
@@ -88,7 +88,7 @@
         {
           "id": "a3dada31-758c-4e4d-b92a-4e9e29ac76e0",
           "type": "transition",
-          "title": "",
+          "title": "transition 1",
           "components": [
             {
               "type": "element",
@@ -118,8 +118,8 @@
               "element": {
                 "id": "e86e4e5f-868e-4483-a995-86d89121e1a4",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/Cl7Tz1R.png",
-                "alt": "",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/clavier_3zones.svg",
+                "alt": "Schéma détaillé dans l’alternative textuelle",
                 "alternativeText": "<p>Schéma des 3 zones principales sur un clavier&nbsp;:</p><ul><li>chiffres, caractères spéciaux et accents</li><li>lettres de l’alphabet</li><li>flèches directionnelles</li></ul>"
               }
             },
@@ -152,9 +152,9 @@
                 "id": "596c7964-281f-44ee-b94e-babc81c72e7b",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-1-zones/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-zonesv2/index.html",
                 "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇</span> Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -162,7 +162,7 @@
         {
           "id": "99f72474-fa53-4391-afae-441d1b0bcbe3",
           "type": "transition",
-          "title": "",
+          "title": "transition 2",
           "components": [
             {
               "type": "element",
@@ -192,8 +192,8 @@
               "element": {
                 "id": "6c90b56e-2e81-4320-9002-04a81fb07a39",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/KosRqGF.png",
-                "alt": "",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/clavier_5zones_vector.svg",
+                "alt": "Schéma détaillé dans l’alternative textuelle",
                 "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>l’espace</li><li>les flèches directionnelles</li></ul>"
               }
             }
@@ -202,7 +202,7 @@
         {
           "id": "eb9f78a4-cd18-400a-bef7-f1b0850f36ce",
           "type": "transition",
-          "title": "",
+          "title": "transition 3",
           "components": [
             {
               "type": "element",
@@ -225,9 +225,9 @@
                 "id": "62b13b03-4b39-4893-a3ac-5b55c5a4b0a2",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-2-saisie-1er-mots/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-1ersmots/index.html",
                 "instruction": "<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée, puis tapez les mots demandés.</strong></p>",
-                "height": 445
+                "height": 432
               }
             }
           ]
@@ -235,7 +235,7 @@
         {
           "id": "77ea948d-2345-4043-9716-8f999b177847",
           "type": "transition",
-          "title": "",
+          "title": "transition 4",
           "components": [
             {
               "type": "element",
@@ -265,7 +265,7 @@
               "element": {
                 "id": "d970ee82-b300-437f-acab-c5209b515818",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/v9biw6S.png",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/fleche-curseur.svg",
                 "alt": "",
                 "alternativeText": ""
               }
@@ -282,10 +282,10 @@
               "type": "element",
               "element": {
                 "id": "1cc33472-3576-4e95-ac60-2eb49f57d113",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/HhDpWZv.gif",
-                "alt": "",
-                "alternativeText": ""
+                "type": "short-video",
+                "title": "le curseur de la zone de texte",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-chatmiaou.mp4",
+                "transcription": "&nbsp; &nbsp; &nbsp; &nbsp;"
               }
             }
           ]
@@ -298,9 +298,29 @@
             {
               "type": "element",
               "element": {
+                "id": "6e7b48c5-53d3-46b9-8f3b-f43aa0f95e03",
+                "type": "text",
+                "content": "À vous de jouer, observez&nbsp;la phrase ci-dessous."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "17397707-32c1-4c40-a471-288e2b3fc7fb",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/phrase-cornichons.svg",
+                "alt": "Phrase dans l’alternative textuelle",
+                "alternativeText": "La phrase est&nbsp;: «&nbsp;Le bocal de cornichons est vide.&nbsp;».",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "2db275e3-b7e3-4fe9-b0af-54b4f92f5e85",
                 "type": "qrocm",
-                "instruction": "<p>À vous de jouer, la phrase ci-dessous comporte deux zones de texte. Complétez la phrase ainsi&nbsp;: «&nbsp;Le bocal de cornichons est vide.&nbsp;».</p>",
+                "instruction": "<p>Utilisez les deux zones de texte ci-dessous pour compléter la phrase.<br></p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -358,7 +378,7 @@
         {
           "id": "39f2992c-b346-4cad-8bf3-95d373c96a01",
           "type": "transition",
-          "title": "",
+          "title": "transition 5",
           "components": [
             {
               "type": "element",
@@ -388,7 +408,7 @@
               "element": {
                 "id": "fdba280f-e339-4999-befd-33ab52885043",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/wr3plig.png",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/clavier_zones_vierges.svg",
                 "alt": "",
                 "alternativeText": ""
               }
@@ -405,10 +425,10 @@
                     },
                     {
                       "id": "b8805656-09a9-4d92-8a19-d13cd4e6149e",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/GMFTqpY.gif",
-                      "alt": "",
-                      "alternativeText": ""
+                      "type": "short-video",
+                      "title": "touche espace",
+                      "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-espace.mp4",
+                      "transcription": "&nbsp; &nbsp; &nbsp;"
                     }
                   ]
                 },
@@ -421,10 +441,10 @@
                     },
                     {
                       "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/FhGFy0f.gif",
-                      "alt": "",
-                      "alternativeText": ""
+                      "type": "short-video",
+                      "title": "touche entrée",
+                      "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-entree.mp4",
+                      "transcription": "&nbsp; &nbsp; &nbsp;"
                     }
                   ]
                 },
@@ -437,10 +457,10 @@
                     },
                     {
                       "id": "de866e42-a119-461b-b73a-c684da091d77",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/QH4Z4Bq.gif",
-                      "alt": "",
-                      "alternativeText": ""
+                      "type": "short-video",
+                      "title": "touche effacer",
+                      "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-effacer.mp4",
+                      "transcription": "&nbsp; &nbsp; &nbsp;"
                     }
                   ]
                 },
@@ -453,10 +473,10 @@
                     },
                     {
                       "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/fEfcNid.gif",
-                      "alt": "",
-                      "alternativeText": ""
+                      "type": "short-video",
+                      "title": "flèches directionelles",
+                      "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-fleches.mp4",
+                      "transcription": "&nbsp; &nbsp; &nbsp;&nbsp;"
                     }
                   ]
                 }
@@ -467,7 +487,7 @@
         {
           "id": "63ead640-3c01-4dfd-b8a7-566885e01037",
           "type": "transition",
-          "title": "",
+          "title": "transition 6",
           "components": [
             {
               "type": "element",
@@ -490,9 +510,9 @@
                 "id": "247c064e-8d6f-4b8c-9298-0a12f0643e27",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-3-listedecourse/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-liste-de-course/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, vous allez corriger une liste de courses en vous aidant des touches Espace, Entrée, Effacer et des flèches.</strong></p>",
-                "height": 445
+                "height": 432
               }
             },
             {
@@ -515,7 +535,7 @@
               "element": {
                 "id": "d77ec00d-f3f0-4a22-9e90-c6dff041b780",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite&nbsp;:</p><ol><li>La zone de texte est une zone dans laquelle on peut taper du texte. Il faut cliquer dans cette zone avant de commencer à taper.</li><li>La zone des lettres se trouve au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont&nbsp;: Espace, Entrée et Effacer. Les flèches directionnelles permettent de déplacer le curseur de texte.</li></ol>"
+                "content": "<p>Résumons avant de passer à la suite&nbsp;:</p><ol><li><strong>La zone de text</strong><strong>e</strong> est une zone dans laquelle on peut taper du texte. Il faut<strong> cliquer dans cette zone</strong> avant de commencer à taper.</li><li>Les <strong>touches des lettres</strong> se trouvent au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont&nbsp;: <strong>Espace</strong>, <strong>Entrée </strong>et <strong>Effacer</strong>. Les <strong>flèches directionnelles</strong> permettent de déplacer le curseur de texte.</li></ol>"
               }
             },
             {
@@ -523,7 +543,7 @@
               "element": {
                 "id": "3dfeeeec-f51c-4aca-8255-b5dacbcac355",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/swSZAq1.png",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/recap1_4zones.svg",
                 "alt": "",
                 "alternativeText": "<p>Récapitulatif des touches&nbsp;: </p><ul><li>effacer</li><li>entrée</li><li>espace</li><li>les lettres</li><li>les flèches directionnelles</li></ul>",
                 "legend": "",
@@ -544,7 +564,7 @@
         {
           "id": "2b0b77eb-d091-450f-9a92-7ded5f9466bb",
           "type": "transition",
-          "title": "",
+          "title": "transition 7",
           "components": [
             {
               "type": "element",
@@ -574,7 +594,7 @@
               "element": {
                 "id": "b61388bd-29a7-40cb-b3f0-89ce7a0b5565",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/0ANm9TL.png",
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/accents.svg",
                 "alt": "",
                 "alternativeText": ""
               }
@@ -592,7 +612,7 @@
         {
           "id": "3444120b-4205-43df-aa5a-fbc62c7f0cb2",
           "type": "transition",
-          "title": "",
+          "title": "transition 8",
           "components": [
             {
               "type": "element",
@@ -618,117 +638,117 @@
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "4aa07a12-9b12-48ad-8b6b-a40e106beca4",
-                "type": "qrocm",
-                "instruction": "<p>céleri</p>",
-                "proposals": [
-                  {
-                    "input": "1",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 15,
-                    "display": "inline",
-                    "placeholder": "Cliquer ici",
-                    "ariaLabel": "Cliquer ici",
-                    "tolerances": [],
-                    "solutions": [
-                      "céleri"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": ""
-                  },
-                  "invalid": {
-                    "state": "<p>Mauvaise réponse. </p>",
-                    "diagnosis": "<p>N’oubliez pas d’utiliser le e accentué.</p>"
-                  }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "ffc788de-a748-45cd-ab2d-c014b2ccd998",
+                      "type": "qrocm",
+                      "instruction": "céleri",
+                      "proposals": [
+                        {
+                          "input": "1",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "Cliquer ici",
+                          "ariaLabel": "Cliquer ici",
+                          "tolerances": [
+                            "t1"
+                          ],
+                          "solutions": [
+                            "céleri"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse ! 🎉",
+                          "diagnosis": ""
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse.",
+                          "diagnosis": " N’oubliez pas d’utiliser le e accentué."
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5a8ffe7d-2b01-410d-b27d-43c0a2ee93ac",
+                      "type": "qrocm",
+                      "instruction": "pastèque",
+                      "proposals": [
+                        {
+                          "input": "2",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "Cliquer ici",
+                          "ariaLabel": "Cliquer ici",
+                          "tolerances": [
+                            "t1"
+                          ],
+                          "solutions": [
+                            "pastèque"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse ! 🎉",
+                          "diagnosis": ""
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse",
+                          "diagnosis": "N’oubliez pas d’utiliser le e accentué."
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6f8c4f56-461f-425b-8b8c-8408dd580367",
+                      "type": "qrocm",
+                      "instruction": "bac à glaçons",
+                      "proposals": [
+                        {
+                          "input": "3",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 15,
+                          "display": "inline",
+                          "placeholder": "Cliquer ici",
+                          "ariaLabel": "Cliquer ici",
+                          "tolerances": [
+                            "t1"
+                          ],
+                          "solutions": [
+                            "bac à glaçons"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "Bonne réponse ! 🎉",
+                          "diagnosis": ""
+                        },
+                        "invalid": {
+                          "state": "Mauvaise réponse.",
+                          "diagnosis": "N’oubliez pas d’utiliser les deux lettres accentuées."
+                        }
+                      }
+                    }
+                  ]
                 }
-              }
-            }
-          ]
-        },
-        {
-          "id": "9436399e-4792-4a24-b1b6-0496c8b4254d",
-          "type": "discovery",
-          "title": "L’utilisation des lettres accentuées - 2",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "d47a8837-d7b0-46da-89f0-5a6c9fdf2b99",
-                "type": "qrocm",
-                "instruction": "<p>pastèque</p>",
-                "proposals": [
-                  {
-                    "input": "2",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 15,
-                    "display": "inline",
-                    "placeholder": "Cliquer ici",
-                    "ariaLabel": "Cliquer ici",
-                    "tolerances": [],
-                    "solutions": [
-                      "pastèque"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": ""
-                  },
-                  "invalid": {
-                    "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>N’oubliez pas d’utiliser le e accentué.</p>"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "b911861c-732d-4810-892e-0a536dd78859",
-          "type": "discovery",
-          "title": "L’utilisation des lettres accentuées - 3",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "c0f0b040-1a97-4408-934e-bf6e4a00c97a",
-                "type": "qrocm",
-                "instruction": "<p>bac à glaçons</p>",
-                "proposals": [
-                  {
-                    "input": "3",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 15,
-                    "display": "inline",
-                    "placeholder": "Cliquer ici",
-                    "ariaLabel": "Cliquer ici",
-                    "tolerances": [],
-                    "solutions": [
-                      "bac à glaçons"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": ""
-                  },
-                  "invalid": {
-                    "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>N’oubliez pas d’utiliser les deux lettres accentuées.</p>"
-                  }
-                }
-              }
+              ]
             }
           ]
         },
@@ -743,9 +763,9 @@
                 "id": "ddec6ee3-178f-4ab5-862a-fc776e9ff6f4",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-bossfinal2/index.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-modifierphrase/index.html",
                 "instruction": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire&nbsp;:&nbsp;</strong> </p><p>«Quelle bonne idée d’avoir mis de la purée de cornichons dans le bac à glaçons.»</p>",
-                "height": 394
+                "height": 432
               }
             },
             {
@@ -768,7 +788,7 @@
               "element": {
                 "id": "52b120fe-5aa5-4ebc-aafc-ddd173377620",
                 "type": "text",
-                "content": "<p>📌 Pour taper, modifier ou effacer du texte, on clique dans une zone de texte avec la souris. Puis, on utilise les touches du clavier.&nbsp;Voici les touches du clavier à retenir&nbsp;: </p><ul>    <li><strong>Les lettres</strong> pour taper des lettres.</li>    <li><strong>Espace </strong>pour ajouter un espace entre deux mots.</li><li><strong>Entrée</strong> pour aller à la ligne.</li>    <li><strong>Effacer </strong>pour supprimer le caractère à gauche du curseur de texte.</li>    <li><strong>Les flèches directionnelles</strong> pour déplacer le curseur de texte.</li></ul><p><br>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/bases-clavier-ordinateur-1/pix-fiche-revision-premieres-marches-clavier-1.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+                "content": "<p>📌 Pour taper, modifier ou effacer du texte, on clique dans une zone de texte avec la souris. Puis, on utilise les touches du clavier.&nbsp;Voici les touches du clavier à retenir&nbsp;: </p><ul>    <li><strong>Les lettres</strong> pour taper des lettres.</li>    <li><strong>Espace </strong>pour ajouter un espace entre deux mots.</li>    <li><strong>Entrée</strong> pour aller à la ligne.</li>    <li><strong>Effacer </strong>pour supprimer le caractère à gauche du curseur de texte.</li>    <li><strong>Les flèches directionnelles</strong> pour déplacer le curseur de texte.</li></ul><p><br>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier1/pix-fiche-revision-premieres-marches-clavier-1.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
               }
             }
           ]
