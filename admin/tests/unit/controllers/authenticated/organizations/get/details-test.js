@@ -31,7 +31,7 @@ module('Unit | Controller | authenticated/organizations/get/details', function (
         // Then
         sinon.assert.calledOnce(controller.model.save);
         sinon.assert.calledWith(controller.pixToast.sendSuccessNotification, {
-          message: "L'organisation a bien été modifiée.",
+          message: t('components.organizations.information-section-view.update.notifications.success'),
         });
         assert.ok(true);
       });

@@ -114,6 +114,7 @@ module('Integration | Component | organizations/information-section-view', funct
         .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
         .hasText('super-sso');
     });
+
     test('it renders GAR identity provider correctly', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
@@ -315,7 +316,7 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(
           screen.getByRole('button', {
-            name: t('components.organizations.information-section-view.archive-organization'),
+            name: t('components.organizations.information-section-view.archive-organization.action'),
           }),
         )
         .exists();
@@ -844,7 +845,7 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(
           screen.queryByRole('button', {
-            name: t('components.organizations.information-section-view.archive-organization'),
+            name: t('components.organizations.information-section-view.archive-organization.action'),
           }),
         )
         .doesNotExist();

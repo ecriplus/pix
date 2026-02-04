@@ -61,14 +61,14 @@ export default class HeadInformation extends Component {
           {{#if this.hasChildren}}
             <li>
               <PixTag @color="success">
-                {{t "components.organizations.information-section-view.parent-organization"}}
+                {{t "components.organizations.head-information.parent-organization"}}
               </PixTag>
             </li>
           {{/if}}
           {{#if @organization.parentOrganizationId}}
             <li>
               <PixTag class="organization__child-tag" @color="success">
-                {{t "components.organizations.information-section-view.child-organization"}}
+                {{t "components.organizations.head-information.child-organization"}}
                 <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
                   {{@organization.parentOrganizationName}}
                 </LinkTo>

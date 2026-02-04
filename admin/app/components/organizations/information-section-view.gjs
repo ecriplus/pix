@@ -43,7 +43,7 @@ export default class OrganizationInformationSection extends Component {
             </PixButton>
             {{#unless @organization.isArchived}}
               <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
-                {{t "components.organizations.information-section-view.archive-organization"}}
+                {{t "components.organizations.information-section-view.archive-organization.action"}}
               </PixButton>
             {{/unless}}
           </div>

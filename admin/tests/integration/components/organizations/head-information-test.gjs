@@ -73,7 +73,7 @@ module('Integration | Component | organizations/header-information', function (h
         const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText(t('components.organizations.information-section-view.parent-organization'))).exists();
+        assert.dom(screen.getByText(t('components.organizations.head-information.parent-organization'))).exists();
       });
     });
 
@@ -95,7 +95,7 @@ module('Integration | Component | organizations/header-information', function (h
         const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText(t('components.organizations.information-section-view.child-organization'))).exists();
+        assert.dom(screen.getByText(t('components.organizations.head-information.child-organization'))).exists();
         assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
       });
     });
@@ -114,7 +114,7 @@ module('Integration | Component | organizations/header-information', function (h
 
         // then
         assert
-          .dom(screen.queryByText(t('components.organizations.information-section-view.parent-organization')))
+          .dom(screen.queryByText(t('components.organizations.head-information.parent-organization')))
           .doesNotExist();
       });
     });

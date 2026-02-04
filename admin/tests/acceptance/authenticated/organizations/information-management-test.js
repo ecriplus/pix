@@ -6,9 +6,12 @@ import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-in
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
+import setupIntl from '../../../helpers/setup-intl';
+
 module('Acceptance | Organizations | Information management', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   hooks.beforeEach(async function () {
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -36,20 +39,24 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
       const screen = await visit(`/organizations/${organization.id}`);
 
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
       // when
       await fillIn(screen.getByLabelText(/Nom \*/), 'newOrganizationName');
-      await fillByLabel('Prénom du DPO', 'Bru');
-      await fillByLabel('Nom du DPO', 'No');
-      await fillByLabel('Adresse e-mail du DPO', 'bru.no@example.net');
+      await fillByLabel(t('components.organizations.information-section-view.dpo-firstname'), 'Bru');
+      await fillByLabel(t('components.organizations.information-section-view.dpo-lastname'), 'No');
+      await fillByLabel(t('components.organizations.information-section-view.dpo-email'), 'bru.no@example.net');
 
-      await clickByName('Enregistrer');
+      await clickByName(t('common.actions.save'));
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'newOrganizationName', level: 1 })).exists();
-      assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Bru No');
-      assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('bru.no@example.net');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.dpo-lastname')).nextElementSibling)
+        .hasText('Bru No');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.dpo-email')).nextElementSibling)
+        .hasText('bru.no@example.net');
     });
 
     test('should display an error toast if administration team is not filled in', async function (assert) {
@@ -73,10 +80,10 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
       const screen = await visit(`/organizations/${organization.id}`);
 
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
       // when
-      await clickByName('Enregistrer');
+      await clickByName(t('common.actions.save'));
 
       // then
       assert.dom(screen.getByText(t('components.organizations.editing.required-fields-error'))).exists();
@@ -113,7 +120,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       const screen = await visit(`/organizations/${organization.id}/team`);
 
       // then
-      assert.dom(screen.queryByLabelText('Équipe', { selector: 'a' })).doesNotExist();
+      assert.dom(screen.queryByLabelText(t('pages.organization.navbar.team'), { selector: 'a' })).doesNotExist();
       assert.strictEqual(currentURL(), `/organizations/${organization.id}/target-profiles`);
     });
 
@@ -130,7 +137,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       const screen = await visit(`/organizations/${organization.id}/invitations`);
 
       // then
-      assert.dom(screen.queryByLabelText('Invitations')).doesNotExist();
+      assert.dom(screen.queryByLabelText(t('pages.organization.navbar.invitations'))).doesNotExist();
       assert.strictEqual(currentURL(), `/organizations/${organization.id}/target-profiles`);
     });
   });
@@ -146,13 +153,17 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         const screen = await visit(`/organizations/${organization.id}`);
 
         // when
-        await clickByName("Archiver l'organisation");
+        await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
 
         await screen.findByRole('dialog');
 
         // then
         assert.dom(screen.getByRole('heading', { name: "Archiver l'organisation Aude Javel Company" })).exists();
-        assert.dom(screen.getByText('Êtes-vous sûr de vouloir archiver cette organisation ?')).exists();
+        assert
+          .dom(
+            screen.getByText(t('components.organizations.information-section-view.archive-organization.confirmation')),
+          )
+          .exists();
       });
 
       module('when user confirms archiving', function () {
@@ -163,14 +174,20 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
-          await clickByName("Archiver l'organisation");
-
+          await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
           await screen.findByRole('dialog');
+
           // when
-          await clickByName('Confirmer');
+          await clickByName(t('common.actions.confirm'));
 
           // then
-          assert.dom(screen.getByText('Cette organisation a bien été archivée.')).exists();
+          assert
+            .dom(
+              screen.getByText(
+                t('components.organizations.information-section-view.archive-organization.notifications.success'),
+              ),
+            )
+            .exists();
           assert.dom(screen.getByText('Archivée le 02/02/2022 par Clément Tine.')).exists();
         });
 
@@ -194,11 +211,11 @@ module('Acceptance | Organizations | Information management', function (hooks) {
               422,
             );
             const screen = await visit(`/organizations/${organization.id}`);
-            await clickByName("Archiver l'organisation");
-
+            await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
             await screen.findByRole('dialog');
+
             // when
-            await clickByName('Confirmer');
+            await clickByName(t('common.actions.confirm'));
 
             // then
             assert
@@ -226,14 +243,20 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             422,
           );
           const screen = await visit(`/organizations/${organization.id}`);
-          await clickByName("Archiver l'organisation");
+          await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
 
           await screen.findByRole('dialog');
           // when
-          await clickByName('Confirmer');
+          await clickByName(t('common.actions.confirm'));
 
           // then
-          assert.dom(screen.getByText("L'organisation n'a pas pu être archivée.")).exists();
+          assert
+            .dom(
+              screen.getByText(
+                t('components.organizations.information-section-view.archive-organization.notifications.error'),
+              ),
+            )
+            .exists();
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
         });
 
@@ -255,14 +278,14 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             500,
           );
           const screen = await visit(`/organizations/${organization.id}`);
-          await clickByName("Archiver l'organisation");
+          await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
 
           await screen.findByRole('dialog');
           // when
-          await clickByName('Confirmer');
+          await clickByName(t('common.actions.confirm'));
 
           // then
-          assert.dom(screen.getByText('Une erreur est survenue.')).exists();
+          assert.dom(screen.getByText(t('common.notifications.generic-error'))).exists();
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
         });
       });
@@ -275,12 +298,12 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
-          await clickByName("Archiver l'organisation");
+          await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
 
           await screen.findByRole('dialog');
 
           // when
-          await clickByName('Annuler');
+          await clickByName(t('common.actions.cancel'));
 
           // then
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();
@@ -293,11 +316,11 @@ module('Acceptance | Organizations | Information management', function (hooks) {
             features: { PLACES_MANAGEMENT: { active: true } },
           });
           const screen = await visit(`/organizations/${organization.id}`);
-          await clickByName("Archiver l'organisation");
+          await clickByName(t('components.organizations.information-section-view.archive-organization.action'));
 
           await screen.findByRole('dialog');
           // when
-          await click(screen.getByRole('button', { name: 'Fermer' }));
+          await click(screen.getByRole('button', { name: t('common.actions.close') }));
 
           // then
           assert.dom(screen.queryByLabelText('Archivée le 02/02/2022 par Clément Tine.')).doesNotExist();

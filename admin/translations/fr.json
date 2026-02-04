@@ -744,10 +744,27 @@
         },
         "required-fields-error": "Veuillez remplir tous les champs obligatoires."
       },
+      "head-information": {
+        "child-organization": "Organisation fille de",
+        "parent-organization": "Organisation mère"
+      },
       "information-section-view": {
         "administration-team": "Équipe en charge",
-        "archive-organization": "Archiver l'organisation",
-        "child-organization": "Organisation fille de",
+        "archive-organization": {
+          "action": "Archiver l'organisation",
+          "confirmation": "Êtes-vous sûr de vouloir archiver cette organisation ?",
+          "notifications": {
+            "error": "L'organisation n'a pas pu être archivée.",
+            "success": "Cette organisation a bien été archivée."
+          },
+          "warnings": {
+            "active-campaigns": "Les campagnes actives vont être archivées",
+            "active-members": "Les membres actifs vont être désactivés",
+            "linking": "Le rattachement et l'invitation de nouvelles personnes seront bloqués",
+            "pending-invitations": "Les invitations en attente vont être annulées",
+            "undone": "Cette action est irréversible."
+          }
+        },
         "code": "Code",
         "country": {
           "label": "Pays (code INSEE)",
@@ -795,11 +812,15 @@
           "title": "Fonctionnalités"
         },
         "is-archived-warning": "Archivée le {archivedAt} par {archivedBy}.",
-        "parent-organization": "Organisation mère",
         "province-code": "Département",
         "sco-activation-email": "Adresse e-mail d'activation SCO",
         "sso": "SSO",
-        "type": "Type"
+        "type": "Type",
+        "update": {
+          "notifications": {
+            "success": "L'organisation a bien été modifiée."
+          }
+        }
       },
       "invitations": {
         "table": {
@@ -821,7 +842,7 @@
         "creation": {
           "error-messages": {
             "activation-date": "La date d'activation est obligatoire.",
-            "category":  "La catégorie est obligatoire.",
+            "category": "La catégorie est obligatoire.",
             "count": "Le nombre de places doit être un nombre entier positif.",
             "expiration-date": "La date d'expiration est obligatoire.",
             "reference": "La référence est obligatoire.",

@@ -13,7 +13,9 @@ export default class DetailsController extends Controller {
   async updateOrganizationInformation() {
     try {
       await this.model.save();
-      this.pixToast.sendSuccessNotification({ message: "L'organisation a bien été modifiée." });
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.organizations.information-section-view.update.notifications.success'),
+      });
       this.router.transitionTo('authenticated.organizations.get');
     } catch (responseError) {
       this.model.rollbackAttributes();
@@ -37,7 +39,11 @@ export default class DetailsController extends Controller {
     try {
       await this.model.save({ adapterOptions: { archiveOrganization: true } });
 
-      this.pixToast.sendSuccessNotification({ message: 'Cette organisation a bien été archivée.' });
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t(
+          'components.organizations.information-section-view.archive-organization.notifications.success',
+        ),
+      });
       this.router.transitionTo('authenticated.organizations.get');
     } catch (responseError) {
       const status = get(responseError, 'errors[0].status');
@@ -48,9 +54,13 @@ export default class DetailsController extends Controller {
         });
       }
       if (status === '422') {
-        return this.pixToast.sendErrorNotification({ message: "L'organisation n'a pas pu être archivée." });
+        return this.pixToast.sendErrorNotification({
+          message: this.intl.t(
+            'components.organizations.information-section-view.archive-organization.notifications.error',
+          ),
+        });
       }
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     }
   }
 }
