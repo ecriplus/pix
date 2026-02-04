@@ -119,7 +119,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             // when
             await fillIn(await screen.getByRole('textbox', { name: t('pages.login-form.email.label') }), user.email);
             await fillIn(await screen.getByLabelText(t('pages.login-form.password')), 'pix123');
-            const loginButton = screen.getByRole('button', { name: t('pages.login-form.login') });
+            const loginButton = screen.getByRole('button', { name: t('pages.login-form.associate-account') });
             await click(loginButton);
 
             // then
@@ -173,7 +173,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             );
             await fillIn(screen.getByLabelText(t('pages.login-form.password')), 'incorrect-password');
 
-            await click(screen.getByRole('button', { name: t('pages.login-form.login') }));
+            await click(screen.getByRole('button', { name: t('pages.login-form.associate-account') }));
             // eslint-disable-next-line ember/no-settled-after-test-helper
             await settled();
 
@@ -197,7 +197,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             );
             await fillIn(screen.getByLabelText(t('pages.login-form.password')), 'incorrect-password');
 
-            await click(screen.getByRole('button', { name: t('pages.login-form.login') }));
+            await click(screen.getByRole('button', { name: t('pages.login-form.associate-account') }));
             // eslint-disable-next-line ember/no-settled-after-test-helper
             await settled();
 
@@ -216,7 +216,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
               'harry@cover.com',
             );
             await fillIn(await screen.getByLabelText(t('pages.login-form.password')), 'pix123');
-            await click(await screen.getByRole('button', { name: 'Je me connecte' }));
+            await click(await screen.getByRole('button', { name: t('pages.login-form.associate-account') }));
           }
 
           module('when the user has already accepted Pix Orga terms of service', function () {

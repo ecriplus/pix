@@ -1137,6 +1137,7 @@
     "login-form": {
       "active-or-retrieve": "Activez ou devenez l'administrateur de l'espace Pix Orga de votre établissement scolaire",
       "admin-role-question": "Vous êtes personnel de direction ou directeur d'école ?",
+      "associate-account": "Associer mon compte",
       "email": {
         "label": "Adresse e-mail",
         "placeholder": "ex: jean.dupont@email.com"

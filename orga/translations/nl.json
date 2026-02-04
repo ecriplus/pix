@@ -1131,6 +1131,7 @@
     "login-form": {
       "active-or-retrieve": "Activeer of word beheerder van de Pix Orga-ruimte van uw school.",
       "admin-role-question": "Bent u een schoolhoofd?",
+      "associate-account": "Mijn account koppelen",
       "email": {
         "label": "E-mailadres",
         "placeholder": "b.v. jan.jansen@email.com"
