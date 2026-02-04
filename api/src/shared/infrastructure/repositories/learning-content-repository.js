@@ -1,7 +1,7 @@
 import Dataloader from 'dataloader';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { config } from '../../config.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
 import { createCounter, createHistogram } from '../metrics/metrics.js';
 import { child, SCOPES } from '../utils/logger.js';
@@ -161,7 +161,8 @@ export class LearningContentRepository {
    * @returns {Promise<object[]>}
    */
   async #loadDtos(callback, cacheKey) {
-    const ids = await callback(knex.pluck(`${this.#tableName}.id`).from(this.#tableName));
+    const knexConn = DomainTransaction.getConnection();
+    const ids = await callback(knexConn.pluck(`${this.#tableName}.id`).from(this.#tableName));
 
     const dtos = await this.#loadMany(ids, cacheKey);
 
@@ -184,9 +185,10 @@ export class LearningContentRepository {
     const stopLoadCachemissTimer = this.#metrics.loadCacheMiss.startTimer();
 
     try {
-      const dtos = await knex
+      const knexConn = DomainTransaction.getConnection();
+      const dtos = await knexConn
         .select(`${this.#tableName}.*`)
-        .from(knex.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
+        .from(knexConn.raw(`unnest(?::${this.#idType}[]) with ordinality as ids(id, idx)`, [ids])) // eslint-disable-line knex/avoid-injections
         .leftJoin(this.#tableName, `${this.#tableName}.id`, 'ids.id')
         .orderBy('ids.idx');
       return dtos.map((dto) => (dto.id ? dto : null));

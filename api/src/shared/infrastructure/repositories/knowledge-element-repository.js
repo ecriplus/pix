@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
@@ -45,7 +44,7 @@ const batchSave = async function ({ knowledgeElements }) {
   const knexConn = DomainTransaction.getConnection();
   // eslint-disable-next-line no-unused-vars
   const knowledgeElementsToSave = knowledgeElements.map(({ id, createdAt, ...ke }) => ke);
-  const savedKnowledgeElements = await knex
+  const savedKnowledgeElements = await knexConn
     .batchInsert(tableName, knowledgeElementsToSave)
     .transacting(knexConn.isTransaction ? knexConn : null)
     .returning('*');

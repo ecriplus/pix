@@ -1,5 +1,5 @@
 // @ts-check
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { SCOPES } from '../../../shared/domain/models/Scopes.js';
@@ -20,7 +20,9 @@ import { Candidate } from '../../domain/models/Candidate.js';
  * @throws {CertificationCandidateNotFoundError}
  */
 export const findByAssessmentId = async function ({ assessmentId }) {
-  const result = await knex('certification-candidates')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('certification-candidates')
     .select('certification-candidates.accessibilityAdjustmentNeeded', 'certification-candidates.reconciledAt', {
       complementaryCertificationKey: 'complementary-certifications.key',
     })
