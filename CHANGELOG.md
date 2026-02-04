@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.322.0](https://github.com/1024pix/pix/compare/v5.321.0...v5.322.0) (2026-02-04)
+
+### :rocket: Amélioration
+
+- [#14958](https://github.com/1024pix/pix/pull/14958) : Modifs module phishing_ind decouverte 2 suite au point avec produit 
+- [#14951](https://github.com/1024pix/pix/pull/14951) Affichage du nombre de membres actifs dans la page d'une orga (PIX-20831). 
+- [#14952](https://github.com/1024pix/pix/pull/14952) Afficher le nombre de profils cibles sur la page de détail d'une organisation (PIX-20833) 
+- [#14927](https://github.com/1024pix/pix/pull/14927) Créer la table "organization_learner_types" (PIX-21213) 
+- [#14955](https://github.com/1024pix/pix/pull/14955) MDX-12 Biais avancés, retours avant relecture 
+- [#14959](https://github.com/1024pix/pix/pull/14959) MDX-57 changement shortid NR_Evaluation_IND 
+- [#14950](https://github.com/1024pix/pix/pull/14950) Rétropédalage 🚴 → contour POI non interactif sans bordure (PIX-21089) 
+
+### :bug: Correction
+
+- [#14954](https://github.com/1024pix/pix/pull/14954) Afficher les données qui proviennent rééllement de la base de donnée (PIX-21368). 
+- [#14963](https://github.com/1024pix/pix/pull/14963) Exclure les apprenants desactivé sur la page des activités d'une organisation (PIX-21377). 
+- [#14968](https://github.com/1024pix/pix/pull/14968) Supprimer l'effet de clignotement du feedback sur les QCM (PIX-21365) 
+- [#14964](https://github.com/1024pix/pix/pull/14964) Utiliser le bon id pour lancer la suppression d'une participation (PIX-21384). 
+
+### :building_construction: Tech
+
+- [#14931](https://github.com/1024pix/pix/pull/14931) Relier la table "organization_learner_type" à la table "organizations" (PIX-21215)  
+- [#14974](https://github.com/1024pix/pix/pull/14974) Revert openid client retrier 
+
+### :arrow_up: Montée de version
+
+- [#14971](https://github.com/1024pix/pix/pull/14971) Update dependency @1024pix/pix-ui to ^58.4.6 (mon-pix)
+
 # [5.321.0](https://github.com/1024pix/pix/compare/v5.320.0...v5.321.0) (2026-02-03)
 
 ### :rocket: Amélioration
