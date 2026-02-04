@@ -215,7 +215,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
           const recordQabCardRetriedCall = passageEventRecordStub.getCall(2);
           assert.deepEqual(recordQabCardRetriedCall.args, [
             {
-              type: 'QAB_CARD_RETRIED',
+              type: 'QAB_RETRIED',
               data: {
                 elementId: qabElement.id,
               },
