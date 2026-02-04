@@ -82,7 +82,7 @@ export default class ModulixElement extends Component {
         @correction={{this.getLastCorrectionForElement @element}}
       />
     {{else if (eq @element.type "qab")}}
-      <QabElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
+      <QabElement @element={{@element}} @onAnswer={{@onElementAnswer}} @onRetry={{@onElementRetry}} />
     {{/if}}
   </template>
 }

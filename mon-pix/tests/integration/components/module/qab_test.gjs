@@ -195,10 +195,13 @@ module('Integration | Component | Module | QAB', function (hooks) {
           // given
           const qabElement = _getQabElement();
           const onAnswerStub = sinon.stub();
+          const onRetrySpy = sinon.spy();
 
           // when
           const screen = await render(
-            <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+            <template>
+              <ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} @onRetry={{onRetrySpy}} />
+            </template>,
           );
           await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
           await clock.tickAsync(NEXT_CARD_DELAY);
@@ -207,12 +210,12 @@ module('Integration | Component | Module | QAB', function (hooks) {
           await click(screen.getByRole('button', { name: 'Réessayer' }));
 
           // then
-
           assert.dom(screen.getByText('Les chiens ne transpirent pas.')).exists();
           assert.dom(screen.getByText('Maintenant, entraînez-vous sur des exemples concrets !')).exists();
           assert.dom(screen.getByText('Les boules de pétanques sont creuses.')).exists();
 
           const recordQabCardRetriedCall = passageEventRecordStub.getCall(2);
+          sinon.assert.calledWith(onRetrySpy, { element: qabElement });
           assert.deepEqual(recordQabCardRetriedCall.args, [
             {
               type: 'QAB_RETRIED',
