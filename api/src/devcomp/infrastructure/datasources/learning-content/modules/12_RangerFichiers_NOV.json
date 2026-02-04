@@ -694,7 +694,7 @@
                     "input": "nom du fichier",
                     "type": "input",
                     "inputType": "text",
-                    "size": 10,
+                    "size": 12,
                     "display": "inline",
                     "placeholder": "Nom du fichier",
                     "ariaLabel": "Nom du fichier",
