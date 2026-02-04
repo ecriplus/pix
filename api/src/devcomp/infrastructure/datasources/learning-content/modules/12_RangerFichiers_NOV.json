@@ -161,7 +161,7 @@
                           "type": "select",
                           "display": "inline",
                           "placeholder": "Sélectionnez",
-                          "ariaLabel": "",
+                          "ariaLabel": "Sélectionnez",
                           "tolerances": [],
                           "options": [
                             {
@@ -211,7 +211,7 @@
                           "type": "select",
                           "display": "inline",
                           "placeholder": "Sélectionnez",
-                          "ariaLabel": "",
+                          "ariaLabel": "Sélectionnez",
                           "tolerances": [],
                           "options": [
                             {
@@ -600,7 +600,7 @@
                     "size": 2,
                     "display": "inline",
                     "placeholder": "Tapez un chiffre",
-                    "ariaLabel": "",
+                    "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
                     "solutions": [
                       4
@@ -617,7 +617,7 @@
                     "size": 2,
                     "display": "inline",
                     "placeholder": "Tapez un chiffre",
-                    "ariaLabel": "",
+                    "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
                     "solutions": [
                       6
@@ -693,8 +693,8 @@
                     "inputType": "text",
                     "size": 10,
                     "display": "inline",
-                    "placeholder": "nom du fichier",
-                    "ariaLabel": "",
+                    "placeholder": "Nom du fichier",
+                    "ariaLabel": "Nom du fichier",
                     "tolerances": [
                       "t1",
                       "t2",
