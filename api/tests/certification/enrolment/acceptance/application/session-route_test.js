@@ -387,7 +387,10 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
               },
             },
           },
-          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          headers: {
+            ...generateAuthenticatedUserRequestHeaders({ userId }),
+            origin: 'https://app.pix.fr',
+          },
         };
 
         return databaseBuilder.commit();
@@ -511,7 +514,10 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
               },
             },
           },
-          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          headers: {
+            ...generateAuthenticatedUserRequestHeaders({ userId }),
+            origin: 'https://app.pix.org',
+          },
         };
 
         return databaseBuilder.commit();

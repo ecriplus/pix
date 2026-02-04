@@ -90,10 +90,18 @@ class InvalidCertificationCandidate extends DomainError {
   }
 }
 
+class WrongDomainExtensionForPixPlusError extends DomainError {
+  constructor(message = 'Pix Plus candidate is not on french domain') {
+    super(message);
+    this.code = 'WRONG_PIX_PLUS_CANDIDATE_DOMAIN';
+  }
+}
+
 export {
   CertificationCandidateForbiddenDeletionError,
   CertificationCandidateNotFoundError,
   InvalidCertificationCandidate,
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,
+  WrongDomainExtensionForPixPlusError,
 };

@@ -6,6 +6,7 @@ import {
   InvalidCertificationCandidate,
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,
+  WrongDomainExtensionForPixPlusError,
 } from '../domain/errors.js';
 
 const enrolmentDomainErrorMappingConfiguration = [
@@ -25,6 +26,10 @@ const enrolmentDomainErrorMappingConfiguration = [
   {
     name: InvalidCertificationCandidate.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message),
+  },
+  {
+    name: WrongDomainExtensionForPixPlusError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code),
   },
 ].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
 

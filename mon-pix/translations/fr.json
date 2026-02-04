@@ -840,7 +840,8 @@
         "wrong-account-sco-link": {
           "label": "Comment trouver le compte lié à l'établissement ?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
-        }
+        },
+        "wrong-domain-for-pix-plus": "Les certifications Pix+ n'étant disponibles qu'en français pour le moment, elles ne sont pas disponibles sur https://pix.org.<br/>Merci de vous déconnecter puis de vous reconnecter via '<a href=\"https://app.pix.fr/connexion\">ce lien.</a>'"
       },
       "first-title": "Rejoindre une session",
       "form": {

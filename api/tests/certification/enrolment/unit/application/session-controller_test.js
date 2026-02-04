@@ -206,6 +206,7 @@ describe('Certification | Enrolment | Unit | Application | Controller | session-
         },
         auth: { credentials: { userId } },
         params: { sessionId },
+        headers: { origin: 'https://app.pix.fr' },
       };
       const candidate = {
         firstName,
@@ -223,6 +224,7 @@ describe('Certification | Enrolment | Unit | Application | Controller | session-
           firstName,
           lastName,
           birthdate,
+          isFrenchDomainExtension: true,
           normalizeStringFnc: normalize,
         })
         .resolves(candidate);

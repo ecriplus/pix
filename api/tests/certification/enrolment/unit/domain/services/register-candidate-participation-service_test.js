@@ -1,7 +1,8 @@
 import { registerCandidateParticipation } from '../../../../../../src/certification/enrolment/application/services/register-candidate-participation-service.js';
+import { WrongDomainExtensionForPixPlusError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { usecases } from '../../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Application | Service | register-candidate-participation', function () {
   let normalizeStringFnc;
@@ -36,6 +37,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
         ...candidateData,
         userId,
         sessionId,
+        isFrenchDomainExtension: true,
         normalizeStringFnc,
       });
 
@@ -48,6 +50,32 @@ describe('Unit | Application | Service | register-candidate-participation', func
       });
       expect(usecases.reconcileCandidate).to.not.have.been.called;
       expect(usecases.verifyCandidateReconciliationRequirements).to.not.have.been.called;
+    });
+  });
+
+  context('when the candidate has a complementary subscription and is on wrong domain', function () {
+    it('should throw WrongDomainExtensionForPixPlusError', async function () {
+      // given
+      const userId = domainBuilder.buildUser().id;
+      const candidateWithComplementary = domainBuilder.certification.enrolment.buildCandidate({
+        ...candidateData,
+        sessionId,
+        subscriptions: [domainBuilder.certification.enrolment.buildComplementarySubscription()],
+      });
+      sinon.stub(usecases, 'verifyCandidateIdentity').resolves(candidateWithComplementary);
+
+      // when
+      const error = await catchErr(registerCandidateParticipation)({
+        ...candidateData,
+        userId,
+        sessionId,
+        isFrenchDomainExtension: false,
+        normalizeStringFnc,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(WrongDomainExtensionForPixPlusError);
+      expect(usecases.reconcileCandidate).to.not.have.been.called;
     });
   });
 
@@ -72,14 +100,16 @@ describe('Unit | Application | Service | register-candidate-participation', func
     });
 
     it('verifies candidate subscriptions', async function () {
-      // when
+      // given
       unlinkedCandidate.reconcile();
       usecases.reconcileCandidate.resolves(unlinkedCandidate);
 
+      // when
       await registerCandidateParticipation({
         ...candidateData,
         sessionId,
         userId,
+        isFrenchDomainExtension: true,
         normalizeStringFnc,
       });
 
@@ -96,6 +126,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
         ...candidateData,
         userId,
         sessionId,
+        isFrenchDomainExtension: true,
         normalizeStringFnc,
       });
 
