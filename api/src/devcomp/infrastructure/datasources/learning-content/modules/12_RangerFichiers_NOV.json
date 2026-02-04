@@ -388,66 +388,69 @@
         {
           "id": "19548a70-5081-48d9-9975-8d41024f007c",
           "type": "discovery",
-          "title": "Découverte #4",
+          "title": "Découverte #4a",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "0877e255-8e38-49d9-81f2-e10ec066f070",
-                      "type": "text",
-                      "content": "Maëva a supprimé par erreur le fichier «&nbsp;contact&nbsp;» de son bureau.<br>[+ short vidéo de la suppression]"
-                    },
-                    {
-                      "id": "99528f9d-32b9-4388-ade2-46c05929846d",
-                      "type": "qcu-discovery",
-                      "instruction": "À votre avis, Maëva peut-elle récupérer son fichier ?",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Non, il est supprimé définitivement de l’ordinateur.",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Oui, mais uniquement dans les 5 minutes qui suivent la suppression.",
-                          "feedback": {
-                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "Oui, les fichiers supprimés sont dans la corbeille de l’ordinateur.",
-                          "feedback": {
-                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "Je ne sais pas.",
-                          "feedback": {
-                            "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3"
+              "type": "element",
+              "element": {
+                "id": "2145a637-adf8-4142-af2a-178021994a0d",
+                "type": "text",
+                "content": "Maëva a supprimé par erreur le fichier «&nbsp;contact&nbsp;» de son bureau.<br>[+ short vidéo de la suppression]"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "99528f9d-32b9-4388-ade2-46c05929846d",
+                "type": "qcu-discovery",
+                "instruction": "À votre avis, Maëva peut-elle récupérer son fichier ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Non, il est supprimé définitivement de l’ordinateur.",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
-                      "type": "text",
-                      "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva."
+                  },
+                  {
+                    "id": "2",
+                    "content": "Oui, mais uniquement dans les 5 minutes qui suivent la suppression.",
+                    "feedback": {
+                      "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
                     }
-                  ]
-                }
-              ]
+                  },
+                  {
+                    "id": "3",
+                    "content": "Oui, les fichiers supprimés sont dans la corbeille de l’ordinateur.",
+                    "feedback": {
+                      "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cf024b19-dadd-4b85-9eb3-63af63d07723",
+          "type": "discovery",
+          "title": "Découverte #4b",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
+                "type": "text",
+                "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva."
+              }
             }
           ]
         },
