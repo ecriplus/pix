@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../shared/domain/models/Assessment.js';
@@ -52,8 +50,12 @@ async function _getMissionAssessmentsByLearnerId(missionId, organizationLearnerI
     .join('assessments', 'assessments.id', 'mission-assessments.assessmentId')
     .where({ missionId })
     .whereIn('mission-assessments.organizationLearnerId', organizationLearnerIds);
-
-  return Object.entries(_.groupBy(organizationLearnerAssessments, 'organizationLearnerId'));
+  return Object.entries(
+    Object.groupBy(
+      organizationLearnerAssessments,
+      (organizationLearnerAssessment) => organizationLearnerAssessment.organizationLearnerId,
+    ),
+  );
 }
 
 const _byDescendingCreatedAt = (assessmentA, assessmentB) => assessmentB.createdAt - assessmentA.createdAt;
@@ -70,7 +72,10 @@ const getStatusesForLearners = async function (missionId, organizationLearners) 
   });
 
   const decoratedMissionLearners = [];
-  const lastRelevantAssessmentByLearnerId = _.groupBy(lastRelevantAssessments, 'organizationLearnerId');
+  const lastRelevantAssessmentByLearnerId = Object.groupBy(
+    lastRelevantAssessments,
+    (lastRelevantAssessment) => lastRelevantAssessment.organizationLearnerId,
+  );
 
   for (const organizationLearner of organizationLearners) {
     const [organizationLearnerInfo] = lastRelevantAssessmentByLearnerId[`${organizationLearner.id}`] ?? [];
