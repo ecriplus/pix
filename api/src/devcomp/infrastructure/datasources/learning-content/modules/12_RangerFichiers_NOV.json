@@ -259,7 +259,7 @@
               "element": {
                 "id": "b21eb58b-137f-444f-bfcf-e12e92e0adb5",
                 "type": "text",
-                "content": "Sur un ordinateur, il y a souvent beaucoup de <strong>fichiers </strong>différents&nbsp;: des photos de vacances à imprimer, des factures à conserver, des documents à finir d’écrire, des chansons à écouter, des vidéos à regarder, etc.&nbsp; <br>📂 Les<strong> dossiers servent à ranger</strong> les fichiers."
+                "content": "Sur un ordinateur, il y a souvent beaucoup de <strong>fichiers </strong>différents&nbsp;: des photos de vacances à imprimer, des factures à conserver, des documents à finir d’écrire, des chansons à écouter, des vidéos à regarder, etc.&nbsp; <br><br>📂 Les<strong> dossiers servent à ranger</strong> les fichiers."
               }
             }
           ]
@@ -461,7 +461,7 @@
               "element": {
                 "id": "aa2945b0-cec7-4b40-8ce7-82d97b37a451",
                 "type": "text",
-                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur “ Supprimer “ (Windows) ou “ Placer dans la corbeille “ (Mac).</p><p><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
+                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur “ Supprimer “ (Windows) ou “ Placer dans la corbeille “ (Mac).</p><p><br><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
               }
             }
           ]
@@ -482,7 +482,7 @@
               "element": {
                 "id": "f9e7d7b2-b97e-4e43-a43b-32c592be79e9",
                 "type": "text",
-                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la Corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la Corbeille. 🗑️</li></ul>"
+                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><br><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><br><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><br><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la Corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la Corbeille. 🗑️</li></ul>"
               }
             }
           ]
