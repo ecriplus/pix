@@ -669,7 +669,7 @@
               "element": {
                 "id": "8adbf28b-dd8c-4a6c-9725-2a8f5fa0bb6f",
                 "type": "text",
-                "content": "Cette fois, Maëva a supprimé le dossier “Administratif” de son bureau."
+                "content": "Cette fois, Maëva a supprimé le dossier « Administratif » de son bureau."
               }
             },
             {
@@ -677,7 +677,7 @@
               "element": {
                 "id": "281c9e6c-6b57-4c80-92e9-e9d4afb62677",
                 "type": "text",
-                "content": "Récupérez le dossier “Administratif” dans l’application ci-dessous puis répondez à la question. <br><strong>[Simulateur sans indices internes]</strong><br>"
+                "content": "Récupérez le dossier « Administratif » dans l’application ci-dessous puis répondez à la question. <br><strong>[Simulateur sans indices internes]</strong><br>"
               }
             },
             {
@@ -685,7 +685,7 @@
               "element": {
                 "id": "95be29bf-828d-4cb5-aa14-a6cbfbd90392",
                 "type": "qrocm",
-                "instruction": "Comment s’appelle le fichier qui se trouve dans le dossier “Administratif” ?",
+                "instruction": "Comment s’appelle le fichier qui se trouve dans le dossier « Administratif » ?",
                 "proposals": [
                   {
                     "input": "nom du fichier",
