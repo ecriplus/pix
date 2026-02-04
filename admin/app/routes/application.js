@@ -10,11 +10,12 @@ export default class ApplicationRoute extends Route {
   @service intl;
 
   async beforeModel(transition) {
+    await this.featureToggles.load();
+
     const queryParams = transition?.to?.queryParams;
     this.intl.setFormats(formats);
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
-    await this.featureToggles.load();
     await this.currentUser.load();
   }
 }
