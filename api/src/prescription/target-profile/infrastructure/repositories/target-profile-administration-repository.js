@@ -17,6 +17,7 @@ import * as tubeRepository from '../../../../shared/infrastructure/repositories/
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { StageCollection } from '../../domain/models/StageCollection.js';
 import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileSummaryForAdmin.js';
+
 const TARGET_PROFILE_TABLE = 'target-profiles';
 
 const get = async function ({ id, locale = FRENCH_FRANCE }) {
@@ -181,13 +182,13 @@ async function _getLearningContent(targetProfileId, tubesData, locale) {
     );
   }
 
-  const thematicIds = _.keys(_.groupBy(tubes, 'thematicId'));
+  const thematicIds = [...new Set(tubes.map((t) => t.thematicId))];
   const thematics = await thematicRepository.findByRecordIds(thematicIds, locale);
 
-  const competenceIds = _.keys(_.groupBy(thematics, 'competenceId'));
+  const competenceIds = [...new Set(thematics.map((t) => t.competenceId))];
   const competences = await competenceRepository.findByRecordIds({ competenceIds, locale });
 
-  const areaIds = _.keys(_.groupBy(competences, 'areaId'));
+  const areaIds = [...new Set(competences.map((c) => c.areaId))];
   const areas = await areaRepository.findByRecordIds({ areaIds, locale });
 
   for (const tube of tubes) {
