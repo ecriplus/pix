@@ -2,6 +2,7 @@ import { metadata } from '@1024pix/epreuves-components/metadata';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
@@ -18,6 +19,8 @@ export default class ModulixCustomElement extends ModuleElement {
 
   @tracked
   resetButtonDisplayed = false;
+
+  @service passageEvents;
 
   @action
   mountCustomElement(container) {
@@ -36,6 +39,13 @@ export default class ModulixCustomElement extends ModuleElement {
   @action
   resetCustomElement() {
     this.customElement.reset();
+
+    this.passageEvents.record({
+      type: 'CUSTOM_RETRIED',
+      data: {
+        elementId: this.args.component.id,
+      },
+    });
   }
 
   get isInteractive() {

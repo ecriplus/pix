@@ -3,6 +3,7 @@ import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixCustomElement from 'mon-pix/components/module/element/custom-element';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog } from '../../../helpers/wait-for';
@@ -143,6 +144,57 @@ module('Integration | Component | Module | Custom Element', function (hooks) {
       const listbox = await screen.findByRole('listbox');
       const options = within(listbox).getAllByRole('option');
       assert.strictEqual(options.length, 4);
+    });
+  });
+
+  module('when custom element can be reset', function () {
+    module('when user clicks on reset button', function () {
+      test('should send an event', async function (assert) {
+        const customElement = {
+          id: 'id',
+          title: 'clickable-image',
+          instruction: 'Test POI interactif',
+          tagName: 'clickable-image',
+          props: {
+            image: {
+              src: 'https://assets.pix.org/modules/salon-connecte.webp',
+              alt: 'salon connecté',
+              width: 1536,
+              height: 1024,
+            },
+            areas: [
+              {
+                coords: {
+                  x1: 390,
+                  y1: 120,
+                  x2: 842,
+                  y2: 400,
+                },
+                spot: { x: 240, y: 130 },
+                info: 'Info sur le POI',
+              },
+            ],
+          },
+        };
+        const passageEventService = this.owner.lookup('service:passageEvents');
+        const passageEventRecordStub = sinon.stub(passageEventService, 'record');
+
+        // when
+        const screen = await render(<template><ModulixCustomElement @component={{customElement}} /></template>);
+        const resetButton = screen.getByRole('button', {
+          name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel'),
+        });
+        await click(resetButton);
+
+        // then
+        sinon.assert.calledOnceWith(passageEventRecordStub, {
+          type: 'CUSTOM_RETRIED',
+          data: {
+            elementId: customElement.id,
+          },
+        });
+        assert.ok(true);
+      });
     });
   });
 });
