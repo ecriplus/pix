@@ -232,7 +232,7 @@
               "element": {
                 "id": "3255ed2b-a635-4a59-a9ba-b30e1da38c3b",
                 "type": "text",
-                "content": "<h5>C’est quoi un logiciel malveillant ? </h5>\n<p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut s’installer ou agir sans que l'utilisateur s’en rende compte.</p><br>\n<h5>🤔 Bon à savoir</h5>\n<p>Dans le langage courant, on utilise souvent le terme de «&nbsp;<strong>virus</strong>&nbsp;» pour désigner tous les logiciels malveillants. En réalité, le virus est&nbsp;<strong>un</strong><strong> type</strong> de logiciel malveillant parmi d’autres.</p>"
+                "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l'utilisateur s’en rende compte.</p><br>\n<h5>🤔 Bon à savoir</h5>\n<p><strong>Un virus informatique</strong> est <strong>un type</strong> de logiciel malveillant parmi d’autres.</p>"
               }
             }
           ]
@@ -318,7 +318,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante ; 🌐</li><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.) ; ✉️</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance ; 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (sms, mail, discussion de forum) ; ✉️</li><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante ; 🌐</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance ; 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
                 }
               }
             }
@@ -334,7 +334,7 @@
               "element": {
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
-                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégier les sites légaux et les magasins d'applications officiels</strong> pour télécharger un logiciel ou regarder un film. 🌐</li><li><strong>Ne pas cliquer sur des liens </strong>ou <strong>des pièces jointes</strong> dans des messages inconnus. ✉️</li><li><strong>N’ouvrez que les fichiers dont vous êtes sûrs.</strong></li><li><strong>Brancher uniquement des appareils de confiance.</strong></li><li><strong>Charger un appareil sur une prise électrique</strong><strong>. 🔌</strong></li></ul>"
+                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégiez les sites légaux et les magasins d'applications officiels</strong> pour télécharger un logiciel ou regarder un film. 🌐</li><li><strong>Ne pas cliquez sur des liens </strong>ou <strong>des pièces jointes</strong> dans des messages inconnus. ✉️</li><li><strong>Branchez uniquement des appareils de confiance.</strong></li><li><strong>N’ouvrez que les fichiers dont vous êtes sûrs.</strong></li><li><strong>Chargez un appareil sur une prise électrique</strong>. 🔌</li></ul>"
               }
             }
           ]
@@ -436,7 +436,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/cy_virus_nov/infografie1-draft-recap.png",
                 "alt": "",
-                "alternativeText": "<h5>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </h5><p> Un programme malveillant <strong>créé </strong>et<strong> diffusé</strong> par un <strong>pirate informatique </strong>pour <strong>perturber le fonctionnement normal</strong> d’un appareil. Le but est de<strong> nuire</strong> :<br>✔️Par exemple, pour récupérer des données personnelles, ou demander de l’argent. </p><h5>Comment un logiciel malveillant peut infecter un appareil ?&nbsp; </h5><p> Pour <strong>piéger</strong> les utilisateurs à leur insu, les pirates <strong>cachent</strong> des logiciels malveillants dans : des messages, pages web, des publicités, des applications ou logiciels, appareils usb.<br><br>C’est souvent <strong>une action risquée de l’utilisateur</strong> qui permet au logiciel malveillant d’infecter un appareil. </p><h5> Quels sont les effets des logiciels malveillants ?&nbsp; </h5><p> Une fois présent sur un appareil, un logiciel malveillant peut provoquer <strong>des dysfonctionnements</strong>. Certains sont <strong>visibles</strong>, d’autres passent totalement <strong>inaperçus</strong>. (Le pirate peut parfoirs demander de l'argent (une rançon) pour réparer les dégâts causés).</p>",
+                "alternativeText": "<h5>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </h5><p> Un programme malveillant <strong>créé </strong>et<strong> diffusé</strong> par un <strong>pirate informatique </strong>pour <strong>perturber le fonctionnement normal</strong> d’un appareil. Le but est de<strong> nuire</strong> :<br>✔️Par exemple, pour récupérer des données personnelles, ou demander de l’argent. </p><h5>Comment un logiciel malveillant peut infecter un appareil ?&nbsp; </h5><p> Pour <strong>piéger</strong> les utilisateurs à leur insu, les pirates <strong>cachent</strong> des logiciels malveillants dans : des messages, pages web, des publicités, des applications ou logiciels, appareils usb.<br><br>C’est souvent <strong>une action risquée de l’utilisateur</strong> qui permet au logiciel malveillant d’infecter un appareil. </p><h5> Quels sont les effets des logiciels malveillants ?&nbsp; </h5><p> Une fois présent sur un appareil, un logiciel malveillant peut provoquer <strong>des dysfonctionnements</strong>. Certains sont <strong>visibles</strong>, d’autres passent totalement <strong>inaperçus</strong>. (Le pirate peut parfois demander de l'argent (une rançon) pour réparer les dégâts causés).</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -504,7 +504,7 @@
                   },
                   {
                     "id": "6ccf1a10-a2bf-4f55-aa32-372c680ba7b9",
-                    "text": "Un logiciel malveillant peut être utilisé pour voler des données personnelles sur un appareil.",
+                    "text": "Un logiciel malveillant peut être utilisé pour récupérer des données personnelles sur un appareil.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -700,7 +700,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Quel logiciel malveillant se déguise en logiciel inoffensif pour tromper l'utilisateur et accéder à son appareil, mais qui cache une fonctionnalité malveillante ?"
+                      "text": "Quel logiciel malveillant se déguise en logiciel inoffensif pour tromper l'utilisateur et accéder à son appareil, et cache une fonctionnalité malveillante ?"
                     },
                     "verso": {
                       "image": {
@@ -730,7 +730,7 @@
                       "image": {
                         "url": ""
                       },
-                      "text": "Quel logiciel surveille ce que fait l’utilisateur sur son ordinateur pour récupérer des informations ?"
+                      "text": "Quel logiciel malveillant surveille ce que fait l’utilisateur sur son ordinateur pour récupérer des informations ?"
                     },
                     "verso": {
                       "image": {
