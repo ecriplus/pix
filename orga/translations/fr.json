@@ -67,7 +67,7 @@
       "message": "'<strong>'Certifications :'</strong>' n’oubliez pas de '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'finaliser les sessions dans Pix Certif'</a>' puis de télécharger les certificats via l'onglet “Certifications” avant la rentrée {year}."
     },
     "ia": {
-      "message": "Les nouveaux parcours apprenant Pix sur l’IA sont disponibles dans votre espace Pix Orga ! Ils sont obligatoires pour les élèves de 4e, de 2de (générale et technologique) et de 1re année de CAP, avec une mise en œuvre progressive sur les années scolaires 2025-2026 et 2026-2027",
+      "message": "Les nouveaux parcours apprenants Pix sur l’IA sont disponibles dans votre espace Pix Orga ! Ils sont obligatoires pour les élèves de 4e, de 2de (générale et technologique) et de 1re année de CAP, avec une mise en œuvre progressive sur les années scolaires 2025-2026 et 2026-2027",
       "step1": "Consultez '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='Kit de déploiement IA' class='link link--banner link--bold link--underlined' '>'le kit de déploiement'</a>'",
       "step2": "S'inscrire au '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinaire'</a>'"
     },
