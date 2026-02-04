@@ -66,7 +66,11 @@ function _getEasiestSkills(skillsGroupByTube) {
 }
 
 function _getSkillsGroupedByTube(failedSkills) {
-  return _.groupBy(_(_.orderBy(failedSkills, 'difficulty')).uniq().value(), 'tubeName');
+  const sortedSkills = [...failedSkills].sort((a, b) => a.difficulty - b.difficulty);
+
+  const uniqueSkills = Array.from(new Set(sortedSkills));
+
+  return Object.groupBy(uniqueSkills, (skill) => skill.tubeName);
 }
 
 function _getFailedSkills(skills, invalidatedDirectKnowledgeElements) {
