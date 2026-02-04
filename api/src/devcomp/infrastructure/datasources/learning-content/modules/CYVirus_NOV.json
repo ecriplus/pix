@@ -318,7 +318,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>Une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante. 🌐</li><li><strong>Un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.). ✉️</li><li><strong>Un appareil USB</strong> dont on ne connaît pas la provenance.</li><li><strong>Un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante ; 🌐</li><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (e-mails, forum, etc.) ; ✉️</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance ; 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
                 }
               }
             }
