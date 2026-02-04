@@ -23,13 +23,13 @@ const findByCampaignParticipationId = async function ({ campaignParticipationId 
     .select(['id', 'threshold', 'badgeId', 'scope', 'cappedTubes'])
     .whereIn('badgeId', badgeIds)
     .orderBy('badge-criteria.id');
-  const badgeCriteriaDTOByBadge = _.groupBy(badgeCriteriaDTO, 'badgeId');
+  const badgeCriteriaDTOByBadge = Object.groupBy(badgeCriteriaDTO, (badgeCriterionDTO) => badgeCriterionDTO.badgeId);
 
   const campaignSkills = await campaignRepository.findSkillsByCampaignParticipationId({
     campaignParticipationId,
   });
   const campaignSkillIds = campaignSkills.map(({ id }) => id);
-  const campaignSkillsByTube = _.groupBy(campaignSkills, 'tubeId');
+  const campaignSkillsByTube = Object.groupBy(campaignSkills, (campaignSkill) => campaignSkill.tubeId);
 
   const badges = [];
   for (const badgeDTO of badgesDTO) {
@@ -59,13 +59,13 @@ const findByCampaignId = async function ({ campaignId }) {
     .select(['id', 'threshold', 'badgeId', 'scope', 'cappedTubes'])
     .whereIn('badgeId', badgeIds)
     .orderBy('badge-criteria.id');
-  const badgeCriteriaDTOByBadge = _.groupBy(badgeCriteriaDTO, 'badgeId');
+  const badgeCriteriaDTOByBadge = Object.groupBy(badgeCriteriaDTO, (badgeCriterionDTO) => badgeCriterionDTO.badgeId);
 
   const campaignSkills = await campaignRepository.findSkills({
     campaignId,
   });
   const campaignSkillIds = campaignSkills.map(({ id }) => id);
-  const campaignSkillsByTube = _.groupBy(campaignSkills, 'tubeId');
+  const campaignSkillsByTube = Object.groupBy(campaignSkills, (campaignSkill) => campaignSkill.tubeId);
 
   const badges = [];
   for (const badgeDTO of badgesDTO) {
@@ -104,7 +104,7 @@ const getByCertifiableBadgeAcquisition = async function ({ certifiableBadgeAcqui
     campaignId,
   });
   const campaignSkillIds = campaignSkills.map(({ id }) => id);
-  const campaignSkillsByTube = _.groupBy(campaignSkills, 'tubeId');
+  const campaignSkillsByTube = Object.groupBy(campaignSkills, (campaignSkill) => campaignSkill.tubeId);
 
   return _buildBadge(knexConn, campaignSkillsByTube, campaignSkillIds, badgeCriteriaDTO, badgeDTO);
 };
