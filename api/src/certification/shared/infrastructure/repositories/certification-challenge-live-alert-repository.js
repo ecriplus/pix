@@ -70,7 +70,8 @@ const getOngoingByChallengeIdAndAssessmentId = async ({ challengeId, assessmentI
 };
 
 const getOngoingOrValidatedByChallengeIdAndAssessmentId = async ({ challengeId, assessmentId }) => {
-  const certificationChallengeLiveAlertDto = await knex('certification-challenge-live-alerts')
+  const knexConn = DomainTransaction.getConnection();
+  const certificationChallengeLiveAlertDto = await knexConn('certification-challenge-live-alerts')
     .where({
       'certification-challenge-live-alerts.challengeId': challengeId,
       'certification-challenge-live-alerts.assessmentId': assessmentId,
