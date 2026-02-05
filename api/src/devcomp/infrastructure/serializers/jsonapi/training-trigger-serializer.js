@@ -5,7 +5,7 @@ const { Serializer, Deserializer } = jsonapiSerializer;
 const serialize = function (trainingTrigger = {}, meta) {
   return new Serializer('training-triggers', {
     transform(record) {
-      return JSON.parse(JSON.stringify(record));
+      return structuredClone(record);
     },
     attributes: ['id', 'trainingId', 'type', 'threshold', 'areas', 'tubesCount'],
     areas: {
