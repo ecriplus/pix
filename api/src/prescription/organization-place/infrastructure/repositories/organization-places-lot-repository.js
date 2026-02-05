@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { DeletedError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { OrganizationPlacesLotManagement } from '../../domain/read-models/OrganizationPlacesLotManagement.js';
@@ -36,7 +35,7 @@ const baseQuery = ({ organizationIds, callOrderByAndRemoveDeleted = false }) => 
     .whereIn('organization-places.organizationId', organizationIds);
 
   if (callOrderByAndRemoveDeleted) {
-    query = orderByAndRemoveDeleted(query);
+    query = orderByAndRemoveDeleted(query, knexConn);
   }
 
   return query;
@@ -47,11 +46,11 @@ const findAllByOrganizationIds = async ({ organizationIds, callOrderByAndRemoveD
   return placesLots.map((placesLot) => new PlacesLot(placesLot));
 };
 
-const orderByAndRemoveDeleted = (query) => {
+const orderByAndRemoveDeleted = (query, knexConn) => {
   return query
     .whereNull('organization-places.deletedAt')
     .orderBy(
-      knex.raw(
+      knexConn.raw(
         'CASE WHEN "organization-places"."activationDate" <= now() AND "organization-places"."expirationDate" >= now() THEN 1 WHEN "organization-places"."activationDate" > now() THEN 2 ELSE 3 END',
       ),
       'asc',
@@ -62,7 +61,9 @@ const orderByAndRemoveDeleted = (query) => {
 };
 
 const get = async function (id) {
-  const result = await knex('organization-places')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('organization-places')
     .select(
       'organization-places.id AS id',
       'count',
@@ -85,12 +86,16 @@ const get = async function (id) {
 };
 
 const create = async function (places) {
-  const [{ id }] = await knex('organization-places').insert(places).returning('id');
+  const knexConn = DomainTransaction.getConnection();
+
+  const [{ id }] = await knexConn('organization-places').insert(places).returning('id');
   return id;
 };
 
 const remove = async function ({ id, deletedBy }) {
-  const result = await knex('organization-places')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('organization-places')
     .update({ deletedAt: new Date(), deletedBy })
     .where({ id, deletedBy: null });
 
