@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import * as areaRepository from '../../../shared/infrastructure/repositories/area-repository.js';
@@ -162,13 +160,13 @@ async function _toDomainForAdmin({ trainingTrigger, triggerTubes }) {
 }
 
 async function _getLearningContent(tubes, locale = 'fr-fr') {
-  const thematicIds = _.keys(_.groupBy(tubes, 'thematicId'));
+  const thematicIds = [...new Set(tubes.map((t) => t.thematicId))];
   const thematics = await thematicRepository.findByRecordIds(thematicIds, locale);
 
-  const competenceIds = _.keys(_.groupBy(thematics, 'competenceId'));
+  const competenceIds = [...new Set(thematics.map((t) => t.competenceId))];
   const competences = await competenceRepository.findByRecordIds({ competenceIds, locale });
 
-  const areaIds = _.keys(_.groupBy(competences, 'areaId'));
+  const areaIds = [...new Set(competences.map((c) => c.areaId))];
   const areas = await areaRepository.findByRecordIds({ areaIds, locale });
 
   return {

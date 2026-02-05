@@ -5,7 +5,7 @@ import { Student } from '../../../../shared/domain/models/Student.js';
 
 const _toStudents = function (results) {
   const students = [];
-  const resultsGroupedByNatId = _.groupBy(results, 'nationalStudentId');
+  const resultsGroupedByNatId = Object.groupBy(results, (result) => result.nationalStudentId);
   for (const [nationalStudentId, accounts] of Object.entries(resultsGroupedByNatId)) {
     const mostRelevantAccount = _.orderBy(accounts, ['certificationCount', 'updatedAt'], ['desc', 'desc'])[0];
     students.push(

@@ -10,9 +10,10 @@ class CertifiedBadge {
   }
 
   static fromComplementaryCertificationCourseResults(complementaryCertificationCourseResults) {
-    const complementaryCertificationCourseResultsByComplementaryCertificationCourseId = _.groupBy(
+    const complementaryCertificationCourseResultsByComplementaryCertificationCourseId = Object.groupBy(
       complementaryCertificationCourseResults,
-      'complementaryCertificationCourseId',
+      (complementaryCertificationCourseResult) =>
+        complementaryCertificationCourseResult.complementaryCertificationCourseId,
     );
 
     return Object.values(complementaryCertificationCourseResultsByComplementaryCertificationCourseId)

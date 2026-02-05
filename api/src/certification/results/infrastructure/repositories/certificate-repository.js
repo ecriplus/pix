@@ -236,7 +236,7 @@ function _checkOrganizationIsScoIsManagingStudents(qb) {
 }
 
 function _filterMostRecentCertificationCoursePerOrganizationLearner(DTOs) {
-  const groupedByOrganizationLearner = _.groupBy(DTOs, 'organizationLearnerId');
+  const groupedByOrganizationLearner = Object.groupBy(DTOs, (DTO) => DTO.organizationLearnerId);
 
   const mostRecent = [];
   for (const certificationsForOneOrganizationLearner of Object.values(groupedByOrganizationLearner)) {

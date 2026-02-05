@@ -145,7 +145,10 @@ function _enrichDirectKnowledgeElementWithInferredKnowledgeElements({
   targetSkills,
   userId,
 }) {
-  const targetSkillsGroupedByTubeName = _.groupBy(targetSkills, (skill) => skill.tubeNameWithoutPrefix);
+  const targetSkillsGroupedByTubeName = Object.groupBy(
+    targetSkills,
+    (targetSkill) => targetSkill.tubeNameWithoutPrefix,
+  );
   const status = answer.isOk() ? statuses.VALIDATED : statuses.INVALIDATED;
 
   if (directKnowledgeElement) {

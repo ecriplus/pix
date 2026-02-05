@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
@@ -72,7 +70,7 @@ const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }
 
 const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDate }) {
   const knowledgeElements = await findUniqByUserId({ userId, limitDate });
-  return _.groupBy(knowledgeElements, 'competenceId');
+  return Object.groupBy(knowledgeElements, (knowledgeElement) => knowledgeElement.competenceId);
 };
 
 const findInvalidatedAndDirectByUserId = async function ({ userId }) {

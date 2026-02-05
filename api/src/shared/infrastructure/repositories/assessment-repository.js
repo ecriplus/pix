@@ -5,7 +5,7 @@ import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Assessment } from '../../domain/models/Assessment.js';
 
-const { groupBy, map, head, uniqBy, omit } = lodash;
+const { uniqBy, omit } = lodash;
 
 const getWithAnswers = async function (id) {
   const knexConn = DomainTransaction.getConnection();
@@ -49,7 +49,7 @@ const findLastCompletedAssessmentsForEachCompetenceByUser = async function (user
     .where('assessment-results.createdAt', '<', limitDate)
     .where('assessments.state', '=', 'completed')
     .orderBy('assessments.createdAt', 'desc');
-  return _selectLastAssessmentForEachCompetence(lastCompletedAssessments).map(
+  return _selectMostRecentAssessmentForEachCompetence(lastCompletedAssessments).map(
     (assessment) => new Assessment(assessment),
   );
 };
@@ -221,9 +221,9 @@ export {
   updateWhenNewChallengeIsAsked,
 };
 
-function _selectLastAssessmentForEachCompetence(assessments) {
-  const assessmentsGroupedByCompetence = groupBy(assessments, (assessment) => assessment.competenceId);
-  return map(assessmentsGroupedByCompetence, head);
+function _selectMostRecentAssessmentForEachCompetence(assessments) {
+  const assessmentsGroupedByCompetence = Object.groupBy(assessments, (assessment) => assessment.competenceId);
+  return Object.values(assessmentsGroupedByCompetence).map((group) => group[0]);
 }
 
 function _adaptModelToDb(assessment) {

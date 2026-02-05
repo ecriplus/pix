@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
@@ -75,8 +73,8 @@ async function _createCertifiedSkills(skillIds, askedSkillIds) {
 }
 
 async function _createCertifiedTubes(certifiedSkills) {
-  const certifiedSkillsByTube = _.groupBy(certifiedSkills, 'tubeId');
-  const tubes = await tubeRepository.findByRecordIds(Object.keys(certifiedSkillsByTube), FRENCH_SPOKEN);
+  const tubeIds = [...new Set(certifiedSkills.map((certifiedSkill) => certifiedSkill.tubeId))];
+  const tubes = await tubeRepository.findByRecordIds(tubeIds, FRENCH_SPOKEN);
   return tubes.map((tube) => {
     const name = tube.practicalTitle;
     return new CertifiedTube({
@@ -88,9 +86,9 @@ async function _createCertifiedTubes(certifiedSkills) {
 }
 
 async function _createCertifiedCompetences(certifiedTubes) {
-  const certifiedTubesByCompetence = _.groupBy(certifiedTubes, 'competenceId');
+  const competenceIds = [...new Set(certifiedTubes.map((certifiedTube) => certifiedTube.competenceId))];
   const competences = await competenceRepository.findByRecordIds({
-    competenceIds: Object.keys(certifiedTubesByCompetence),
+    competenceIds,
     locale: FRENCH_SPOKEN,
   });
   return competences.map((competence) => {
@@ -105,9 +103,9 @@ async function _createCertifiedCompetences(certifiedTubes) {
 }
 
 async function _createCertifiedAreas(certifiedCompetences) {
-  const certifiedCompetencesByArea = _.groupBy(certifiedCompetences, 'areaId');
+  const areaIds = [...new Set(certifiedCompetences.map((certifiedCompetence) => certifiedCompetence.areaId))];
   const areas = await areaRepository.findByRecordIds({
-    areaIds: Object.keys(certifiedCompetencesByArea),
+    areaIds,
     locale: FRENCH_SPOKEN,
   });
   return areas.map((area) => {
