@@ -70,7 +70,7 @@ function _getSkillsGroupedByTube(failedSkills) {
 
   const uniqueSkills = Array.from(new Set(sortedSkills));
 
-  return Object.groupBy(uniqueSkills, (skill) => skill.tubeName);
+  return Object.groupBy(uniqueSkills, (uniqueSkill) => uniqueSkill.tubeName);
 }
 
 function _getFailedSkills(skills, invalidatedDirectKnowledgeElements) {
