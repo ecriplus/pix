@@ -79,7 +79,12 @@ const CAMPAIGN_DELETION_ATTRIBUTES = [
 ];
 
 const remove = async function (campaigns) {
-  return Promise.all(campaigns.map((campaign) => _update(campaign, CAMPAIGN_DELETION_ATTRIBUTES)));
+  const updatedCampaigns = [];
+  for (const campaign of campaigns) {
+    const updatedCampaign = await _update(campaign, CAMPAIGN_DELETION_ATTRIBUTES);
+    updatedCampaigns.push(updatedCampaign);
+  }
+  return updatedCampaigns;
 };
 
 const _update = async function (campaign, attributes) {
@@ -141,10 +146,8 @@ const swapCampaignCodes = async function ({ firstCampaignId, secondCampaignId })
   const temporaryCode = randomBytesBuffer.toString('base64');
 
   try {
-    const [{ code: firstCode }, { code: secondCode }] = await Promise.all([
-      trx('campaigns').select('code').where({ id: firstCampaignId }).first(),
-      trx('campaigns').select('code').where({ id: secondCampaignId }).first(),
-    ]);
+    const { code: firstCode } = await trx('campaigns').select('code').where({ id: firstCampaignId }).first();
+    const { code: secondCode } = await trx('campaigns').select('code').where({ id: secondCampaignId }).first();
 
     await trx('campaigns').where({ id: secondCampaignId }).update({ code: temporaryCode });
 
@@ -159,10 +162,9 @@ const swapCampaignCodes = async function ({ firstCampaignId, secondCampaignId })
 };
 
 const isFromSameOrganization = async function ({ firstCampaignId, secondCampaignId }) {
-  const [firstCampaign, secondCampaign] = await Promise.all([
-    knex('campaigns').select('organizationId').where({ id: firstCampaignId }).first(),
-    knex('campaigns').select('organizationId').where({ id: secondCampaignId }).first(),
-  ]);
+  const knexConn = DomainTransaction.getConnection();
+  const firstCampaign = await knexConn('campaigns').select('organizationId').where({ id: firstCampaignId }).first();
+  const secondCampaign = await knexConn('campaigns').select('organizationId').where({ id: secondCampaignId }).first();
 
   if (!firstCampaign || !secondCampaign) {
     throw new UnknownCampaignId();
