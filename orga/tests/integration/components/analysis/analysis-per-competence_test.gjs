@@ -107,7 +107,6 @@ module('Integration | Component | analysis-per-competence', function (hooks) {
       );
 
       // then
-      debugger;
       assert.ok(screen.getByText(t('components.analysis-per-competence.description', { count: 1 })));
 
       const filledTable = within(
