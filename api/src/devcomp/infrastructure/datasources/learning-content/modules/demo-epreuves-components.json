@@ -1374,6 +1374,79 @@
           ]
         },
         {
+          "id": "629ce2a5-1e2d-4214-a3d7-313888fcdf9d",
+          "type": "discovery",
+          "title": "quiz-stepper",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "390b1adb-f3fe-4099-8431-99f798c779df",
+                "type": "text",
+                "content": "<p>quiz-stepper</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1645e692-6fb8-473d-a317-243c3b518d29",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "quiz-stepper",
+                "props": {
+                  "titleLevel": 2,
+                  "steps": [
+                    {
+                      "question": "Quelle version de ce message vous inciterait le plus à réagir ?",
+                      "feedback": {
+                        "success": "Effectivement, même si les deux messages transmettent la même idée, le second message crée un sentiment d’urgence et de menace. C’est un biais de cadrage : la manière dont l’information est présentée influence notre réaction.",
+                        "failed": "Ici, même si les deux messages transmettent la même idée, le second message crée un sentiment d’urgence et de menace. C’est un biais de cadrage : la manière dont l’information est présentée influence notre réaction."
+                      },
+                      "choice1": {
+                        "title": "Message 1",
+                        "content": "Bonjour, \n une facture est arrivée à échéance. Merci de la régler dans les plus brefs délais."
+                      },
+                      "choice2": {
+                        "title": "Message 2",
+                        "content": "⚠ URGENT : Si vous ne réglez pas cette facture sous 24h, votre compte sera suspendu et des pénalités financières s’appliqueront.",
+                        "isGoodAnswer": true
+                      }
+                    },
+                    {
+                      "question": "Quelle belle deuxième question que voila ?",
+                      "feedback": {
+                        "success": "Bravo !",
+                        "failed": "Dommage :("
+                      },
+                      "choice1": {
+                        "content": "CONTENT: Réponse 1 sans titre!"
+                      },
+                      "choice2": {
+                        "content": "CONTENT: Réponse 2 sans titre!",
+                        "isGoodAnswer": true
+                      }
+                    },
+                    {
+                      "question": "Quelle belle troisième non-question !",
+                      "feedback": {
+                        "success": "Bravo2 !",
+                        "failed": "Dommage2 :("
+                      },
+                      "choice1": {
+                        "title": "TITLE : Bonne réponse",
+                        "isGoodAnswer": true
+                      },
+                      "choice2": {
+                        "title": "TITLE: Mauvaise réponse"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "45928ed8-83c9-4dfe-b5fb-07f83e60477e",
           "type": "discovery",
           "title": "select-conversation",
