@@ -908,57 +908,6 @@
       "title": "Resultaten",
       "validated-items": "Bevestigde items"
     },
-    "campaign-review": {
-      "description": "Afhankelijk van het geteste kader en de resultaten van de campagne, zal Pix je deze onderwerpen aanbevelen om op te focussen, gerangschikt op mate van relevantie {bubble}.",
-      "sub-table": {
-        "column": {
-          "source": {
-            "value": "Door {source}"
-          }
-        },
-        "title": "{count, plural, =1 {1 tutorial aanbevolen} other{{count} tutorials aanbevolen}} door de Pix Community"
-      },
-      "sub-title": "Aanbeveling van onderwerpen om aan te werken",
-      "table": {
-        "analysis": {
-          "caption": "Tabel met onderwerpen om aan te werken, sommige met extra kolommen met het aantal tutorials over het onderwerp en de toegang hiertoe.",
-          "column": {
-            "relevance": {
-              "ariaLabelDefaultSort": "De tabel is momenteel niet gesorteerd op relevantie. Klik om in oplopende volgorde te sorteren.",
-              "ariaLabelSortDown": "De tabel is gesorteerd op aflopende volgorde van relevantie. Klik om in oplopende volgorde te sorteren.",
-              "ariaLabelSortUp": "De tabel is gesorteerd op oplopende relevantie. Klik om aflopend te sorteren.",
-              "label": "Relevantie"
-            },
-            "subjects": "Onderwerpen ({count, plural, =0 {-} other {{count}}})",
-            "tutorial": {
-              "aria-label": "De lijst met tutorials weergeven"
-            },
-            "tutorial-count": {
-              "aria-label": "Aantal aanbevolen tutorials",
-              "value": "{count, plural, =1 {1 tutorial} other {{count} tutorials}}"
-            }
-          },
-          "recommendations": {
-            "moderately-recommended": "Enigszins aanbevolen",
-            "recommended": "Aanbevolen",
-            "strongly-recommended": "Sterk aanbevolen",
-            "very-strongly-recommended": "Zeer aanbevolen"
-          }
-        },
-        "competences": {
-          "column": {
-            "competences": "Vaardigheden ({count})",
-            "results": {
-              "label": "Resultaten",
-              "tooltip": "'<span class=\"screen-reader-only\">'De deelnemers valideerden'</span>' {result} % '<span class=\"screen-reader-only\">'van de vaardigheid {competence}.'</span>'"
-            }
-          },
-          "title": "Resultaten per vaardigheid"
-        },
-        "empty": "In afwachting van resultaten"
-      },
-      "title": "Analyse"
-    },
     "campaign-settings": {
       "actions": {
         "archive": "Archiveren",

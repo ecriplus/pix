@@ -18,7 +18,6 @@ export default class CampaignAssessmentParticipation extends Model {
   @attr('string') prescriberDescription;
   @attr('number') progression;
 
-  @belongsTo('campaign-analysis', { async: true, inverse: null }) campaignAnalysis;
   @belongsTo('campaign-assessment-participation-result', { async: true, inverse: 'campaignAssessmentParticipation' })
   campaignAssessmentParticipationResult;
   @belongsTo('campaign-participation-levels-per-tubes-and-competence', { async: true, inverse: null })
