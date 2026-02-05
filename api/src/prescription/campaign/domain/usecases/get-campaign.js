@@ -17,11 +17,9 @@ const getCampaign = async function ({
   }
 
   if (campaignReport.isAssessment || campaignReport.isExam) {
-    const [badges, stageCollection, masteryRates] = await Promise.all([
-      badgeRepository.findByCampaignId(campaignId),
-      stageCollectionRepository.findStageCollection({ campaignId }),
-      campaignReportRepository.findMasteryRates(campaignId),
-    ]);
+    const badges = await badgeRepository.findByCampaignId(campaignId);
+    const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
+    const masteryRates = await campaignReportRepository.findMasteryRates(campaignId);
 
     campaignReport.setBadges(badges);
     campaignReport.computeAverageResult(masteryRates);
