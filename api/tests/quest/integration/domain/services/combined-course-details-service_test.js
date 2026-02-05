@@ -131,7 +131,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           isCompleted: false,
           isLocked: true,
           duration: 30,
-          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg',
           totalStagesCount: null,
           validatedStagesCount: null,
         },

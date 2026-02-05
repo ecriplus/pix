@@ -105,7 +105,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           isCompleted: false,
           isLocked: true,
           duration: 30,
-          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          image: 'https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg',
           validatedStagesCount: null,
           totalStagesCount: null,
         },
