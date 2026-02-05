@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg",
-    "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. ⌨️<br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
     "duration": 30,
     "level": "novice",
     "objectives": [
@@ -80,7 +80,7 @@
               "element": {
                 "id": "cd613fa6-2903-4932-a1f7-5b7d51ac0a41",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🔎</span> <strong>Observez&nbsp;: quel type de clavier avez-vous ?</strong><br></p>"
+                "content": "<p>🔎 <strong>Observez&nbsp;: quel type de clavier avez-vous ?</strong><br></p>"
               }
             }
           ]
@@ -128,7 +128,7 @@
               "element": {
                 "id": "9b2e535b-e18d-47ba-bddd-0015c5064e35",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p><p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier.</p>"
+                "content": "<p>🤔 <strong>Bon à savoir</strong> </p><p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. 🌍</p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier.</p>"
               }
             }
           ]
@@ -153,7 +153,7 @@
                 "type": "custom-draft",
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-zonesv2/index.html",
-                "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇</span> Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>",
+                "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇 Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>",
                 "height": 432
               }
             }
@@ -184,7 +184,7 @@
               "element": {
                 "id": "e4c30736-5efe-4a0d-bacc-b41e3546d47c",
                 "type": "text",
-                "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p><p><span aria-hidden=\"true\">👇</span> Voici les touches essentielles&nbsp;:</p>"
+                "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p><p>👇 Voici les touches essentielles&nbsp;:</p>"
               }
             },
             {
@@ -209,7 +209,7 @@
               "element": {
                 "id": "44ad5d6e-1d51-47ac-bd9d-98acf9d7af71",
                 "type": "text",
-                "content": "<p>À vous de jouer ! <span aria-hidden=\"true\">🕹️</span> Commencez par taper des mots en utilisant uniquement les touches lettres.</p>"
+                "content": "<p>À vous de jouer ! 🕹️ Commencez par taper des mots en utilisant uniquement les touches lettres.</p>"
               }
             }
           ]
@@ -242,7 +242,7 @@
               "element": {
                 "id": "18c6f518-9e97-4e94-a5f3-e986cd52c219",
                 "type": "text",
-                "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> Vous avez tapé vos premiers mots. <br>À présent, découvrez la zone de texte.</p>"
+                "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots. <br>À présent, découvrez la zone de texte.</p>"
               }
             }
           ]
@@ -257,7 +257,7 @@
               "element": {
                 "id": "18d43580-47c8-4475-9680-248f91678a3c",
                 "type": "text",
-                "content": "<p>Une <strong>zone de texte</strong> est un endroit où on peut <strong>taper, modifier et effacer du texte</strong>. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"\\&quot;true\\&quot;\">🖱️</span><br></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
+                "content": "<p>Une <strong>zone de texte</strong> est un endroit où on peut <strong>taper, modifier et effacer du texte</strong>. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"\\&quot;true\\&quot;\">🖱️<br></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
               }
             },
             {
@@ -385,7 +385,7 @@
               "element": {
                 "id": "ca6cabdb-6b85-45e1-b873-b809948eb628",
                 "type": "text",
-                "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. <span aria-hidden=\"true\">⌨️</span></p>"
+                "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. ⌨️</p>"
               }
             }
           ]
@@ -469,7 +469,7 @@
                     {
                       "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                       "type": "text",
-                      "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span>Par exemple&nbsp;: vous avez oublié d’aller à la ligne entre deux mots, vous pouvez déplacer le curseur entre les deux mots pour appuyer sur la touche Entrée et aller à la ligne.</p>"
+                      "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p>➡️Par exemple&nbsp;: vous avez oublié d’aller à la ligne entre deux mots, vous pouvez déplacer le curseur entre les deux mots pour appuyer sur la touche Entrée et aller à la ligne.</p>"
                     },
                     {
                       "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
@@ -494,7 +494,7 @@
               "element": {
                 "id": "731fa720-68f8-420b-ae7b-efc86b8aae5a",
                 "type": "text",
-                "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
+                "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
               }
             }
           ]
@@ -520,7 +520,7 @@
               "element": {
                 "id": "caedc436-3ab8-45a8-a4b5-c7ee5b4f38c6",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.<br></p><p><span aria-hidden=\"true\">🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️</span> En cas de difficulté, n’hésitez pas à demandez conseil à la personne qui vous accompagne.</p>"
+                "content": "<p>🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️En cas de difficulté, n’hésitez pas à demandez conseil à la personne qui vous accompagne.</p>"
               }
             }
           ]
@@ -556,7 +556,7 @@
                 "id": "388eb851-d9c2-4434-89a1-5879d80467b2",
                 "type": "expand",
                 "title": "🤔 Bon à savoir",
-                "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
+                "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.🙌 Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
               }
             }
           ]
@@ -619,7 +619,7 @@
               "element": {
                 "id": "6bb8779f-8f08-4a9c-803e-63eebabf80c9",
                 "type": "text",
-                "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">⌨️</span></p>"
+                "content": "<p>Vous allez maintenant passer à la pratique. ⌨️</p>"
               }
             }
           ]
@@ -655,9 +655,7 @@
                           "display": "inline",
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
-                          "tolerances": [
-                            "t1"
-                          ],
+                          "tolerances": [],
                           "solutions": [
                             "céleri"
                           ]
@@ -691,9 +689,7 @@
                           "display": "inline",
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
-                          "tolerances": [
-                            "t1"
-                          ],
+                          "tolerances": [],
                           "solutions": [
                             "pastèque"
                           ]
@@ -727,9 +723,7 @@
                           "display": "inline",
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
-                          "tolerances": [
-                            "t1"
-                          ],
+                          "tolerances": [],
                           "solutions": [
                             "bac à glaçons"
                           ]
@@ -773,7 +767,7 @@
               "element": {
                 "id": "bed8da7e-630d-4400-b1c2-9e250ccee7e4",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Recommencer </strong>pour recommencer depuis le début.</p>"
+                "content": "<p>💡 Si besoin, cliquez sur <strong>Recommencer </strong>pour recommencer depuis le début.</p>"
               }
             }
           ]
