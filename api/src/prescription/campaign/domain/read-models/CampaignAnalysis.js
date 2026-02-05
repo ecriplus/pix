@@ -72,7 +72,9 @@ class CampaignTubeRecommendation {
   }
 
   add({ knowledgeElements = [] }) {
-    const knowledgeElementsByParticipant = Object.values(Object.groupBy(knowledgeElements, (knowledgeElement) => knowledgeElement.userId));
+    const knowledgeElementsByParticipant = Object.values(
+      Object.groupBy(knowledgeElements, (knowledgeElement) => knowledgeElement.userId),
+    );
     this._computeCumulativeScore(knowledgeElementsByParticipant);
     this.cumulativeParticipantCount += knowledgeElementsByParticipant.length;
   }
