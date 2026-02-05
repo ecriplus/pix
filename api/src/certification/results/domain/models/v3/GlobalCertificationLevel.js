@@ -4,7 +4,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../../shared/domain/errors.js';
-import { meshConfiguration } from './MeshConfiguration.js';
+import { findMeshFromScore } from '../../../../shared/domain/services/mesh-service.js';
 
 export class GlobalCertificationLevel {
   static #schema = Joi.object({
@@ -16,8 +16,8 @@ export class GlobalCertificationLevel {
    * @param {number} props.score - certification score in Pix
    * @param {MeshConfiguration} props.[configuration] - certification score in Pix
    */
-  constructor({ score, configuration = meshConfiguration }) {
-    this.meshLevel = configuration.findMeshFromScore({ score }).key;
+  constructor({ score, maxReachableLevel }) {
+    this.meshLevel = findMeshFromScore({ score, maxReachableLevel }).key;
     this.#validate();
   }
 

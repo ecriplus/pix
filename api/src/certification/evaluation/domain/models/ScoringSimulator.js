@@ -1,11 +1,10 @@
-import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
-import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
+import { MESH_CONFIGURATION } from '../../../shared/domain/constants/mesh-configuration.js';
 import { Intervals } from './Intervals.js';
 import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulatorReport.js';
 
 export class ScoringSimulator {
-  static compute({ capacity, certificationScoringIntervals, competencesForScoring }) {
+  static compute({ capacity, certificationScoringIntervals, competencesForScoring, maxReachableLevel }) {
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
 
     const intervalIndex = scoringIntervals.findIntervalIndexFromCapacity(capacity);
@@ -14,6 +13,7 @@ export class ScoringSimulator {
       certificationScoringIntervals: scoringIntervals,
       capacity,
       intervalIndex,
+      maxReachableLevel,
     });
 
     const competences = _computeCompetences({ competencesForScoring, capacity });
@@ -26,8 +26,8 @@ export class ScoringSimulator {
   }
 }
 
-function _calculateScore({ certificationScoringIntervals, capacity, intervalIndex }) {
-  const MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;
+function _calculateScore({ certificationScoringIntervals, capacity, intervalIndex, maxReachableLevel }) {
+  const MAX_REACHABLE_LEVEL = maxReachableLevel;
   const MIN_PIX_SCORE = 0;
   const maximumReachableScore = MAX_REACHABLE_LEVEL * COMPETENCES_COUNT * PIX_COUNT_BY_LEVEL - 1;
 
@@ -41,7 +41,7 @@ function _calculateScore({ certificationScoringIntervals, capacity, intervalInde
 
   const intervalMaximum = certificationScoringIntervals.max(intervalIndex);
   const intervalMinimum = certificationScoringIntervals.min(intervalIndex);
-  const meshes = Array.from(meshConfiguration.MESH_CONFIGURATION.values());
+  const meshes = Array.from(MESH_CONFIGURATION.values());
   const intervalWeight = meshes[intervalIndex].weight;
   const intervalCoefficient = meshes[intervalIndex].coefficient;
   const progressionPercentage = 1 - (intervalMaximum - capacity) / (intervalMaximum - intervalMinimum);
