@@ -20,19 +20,17 @@ async function fetchForCampaigns({
     campaignParticipationId: assessment.campaignParticipationId,
   });
 
-  const [allAnswers, knowledgeElements, [skills, challenges]] = await Promise.all([
-    answerRepository.findByAssessment(assessment.id),
-    _fetchKnowledgeElements({
-      assessment,
-      isRetrying,
-      keepRecentOrValidated: true,
-      campaignParticipationRepository,
-      knowledgeElementForParticipationService,
-      knowledgeElementRepository,
-      improvementService,
-    }),
-    _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale }),
-  ]);
+  const allAnswers = await answerRepository.findByAssessment(assessment.id);
+  const knowledgeElements = await _fetchKnowledgeElements({
+    assessment,
+    isRetrying,
+    keepRecentOrValidated: true,
+    campaignParticipationRepository,
+    knowledgeElementForParticipationService,
+    knowledgeElementRepository,
+    improvementService,
+  });
+  const [skills, challenges] = await _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale });
 
   return {
     allAnswers,
