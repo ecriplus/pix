@@ -1,6 +1,11 @@
 # Pix Changelog
 
-## [5.317.2](https://github.com/1024pix/pix/compare/v5.317.2...v5.317.3) (2026-02-05)
+## [5.317.4](https://github.com/1024pix/pix/compare/v5.317.3...v5.317.4) (2026-02-05)
+
+### :bug: Correction
+- [TECH] Corrige l'épuisement du pool dans le endpoint GET /assessments/{id} et dans l'util "fetchPage" pour récupérer des résultats paginés
+
+## [5.317.3](https://github.com/1024pix/pix/compare/v5.317.2...v5.317.3) (2026-02-05)
 
 ### :bug: Correction
 - refactor(api): disable postdeploy to pass the migration for rollback
