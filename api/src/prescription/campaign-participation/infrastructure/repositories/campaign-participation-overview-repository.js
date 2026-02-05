@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -9,17 +8,19 @@ import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/do
 import { CampaignParticipationOverview } from '../../domain/read-models/CampaignParticipationOverview.js';
 
 const findByUserIdWithFilters = async function ({ userId, states }) {
+  const knexConn = DomainTransaction.getConnection();
+
   const combinedCourseQueryBuilder = _getCombinedCoursesParticipations({ userId });
 
   const campaignQueryBuilder = _getQueryBuilder(function (qb) {
     qb.where('campaign-participations.userId', userId).whereNotExists(function () {
-      this.select(knex.raw('1'))
+      this.select(knexConn.raw('1'))
         .from('quests')
         .join('combined_courses', 'combined_courses.questId', 'quests.id')
         .whereIn('combined_courses.organizationId', function () {
           this.select('organizationId').from('organization-learners').where('userId', userId);
         })
-        .crossJoin(knex.raw('jsonb_array_elements("successRequirements") as success_elem'))
+        .crossJoin(knexConn.raw('jsonb_array_elements("successRequirements") as success_elem'))
         .whereNotNull('successRequirements')
         .andWhereRaw("(success_elem->'data'->'campaignId'->>'data')::integer = \"campaigns\".\"id\"");
     });
@@ -66,7 +67,7 @@ function _getQueryBuilder(callback) {
         campaignArchivedAt: 'campaigns.archivedAt',
         organizationName: 'organizations.name',
         deletedAt: 'campaign-participations.deletedAt',
-        participationState: _computeCampaignParticipationState(),
+        participationState: _computeCampaignParticipationState(knexConn),
         campaignId: 'campaigns.id',
         isCampaignMultipleSendings: 'campaigns.multipleSendings',
         isOrganizationLearnerDisabled: 'view-active-organization-learners.isDisabled',
@@ -103,14 +104,14 @@ function _getCombinedCoursesParticipations({ userId }) {
         organizationName: 'organizations.name',
         status: 'organization_learner_participations.status',
         createdAt: 'organization_learner_participations.createdAt',
-        participationState: _computeCombinedCourseParticipationState(),
+        participationState: _computeCombinedCourseParticipationState(knexConn),
         updatedAt: 'organization_learner_participations.updatedAt',
         campaignType: knexConn.raw('?', OrganizationLearnerParticipationTypes.COMBINED_COURSE),
       })
         .from('organization_learner_participations')
         .join('combined_courses', function () {
           this.on(
-            knex.raw('CAST(organization_learner_participations."referenceId" AS INTEGER)'),
+            knexConn.raw('CAST(organization_learner_participations."referenceId" AS INTEGER)'),
             'combined_courses.id',
           );
         })
@@ -124,8 +125,8 @@ function _getCombinedCoursesParticipations({ userId }) {
     .orderByRaw(_computeCombinedCourseParticipationOrder());
 }
 
-function _computeCampaignParticipationState() {
-  return knex.raw(
+function _computeCampaignParticipationState(knexConn) {
+  return knexConn.raw(
     `
   CASE
     WHEN campaigns."archivedAt" IS NOT NULL THEN 'DISABLED'
@@ -138,8 +139,8 @@ function _computeCampaignParticipationState() {
   );
 }
 
-function _computeCombinedCourseParticipationState() {
-  return knex.raw(
+function _computeCombinedCourseParticipationState(knexConn) {
+  return knexConn.raw(
     `
   CASE
     WHEN organization_learner_participations.status = ? THEN 'ONGOING'
