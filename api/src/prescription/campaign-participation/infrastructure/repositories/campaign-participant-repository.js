@@ -1,6 +1,5 @@
 import pick from 'lodash/pick.js';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -214,8 +213,8 @@ async function _getOrganizationLearner(campaignId, userId) {
       function () {
         this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id');
         this.on('campaign-participations.campaignId', 'campaigns.id');
-        this.on('campaign-participations.deletedAt', knex.raw('IS'), knex.raw('NULL'));
-        this.on('campaign-participations.isImproved', knex.raw('false'));
+        this.on('campaign-participations.deletedAt', knexConnection.raw('IS'), knexConnection.raw('NULL'));
+        this.on('campaign-participations.isImproved', knexConnection.raw('false'));
         this.on('campaign-participations.userId', '!=', 'view-active-organization-learners.userId');
       },
       'view-active-organization-learners.id',
