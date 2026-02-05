@@ -310,8 +310,8 @@
       }
     },
     "analysis-per-competence": {
-      "cover-rate-gauge-label": "Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
-      "description": "Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Sur la compétence votre participant a obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.} other {Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.}}",
+      "description": "{count, plural, =1 {Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement du participant.} other {Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.}}",
       "table": {
         "caption": "Compétences",
         "column": {
@@ -322,8 +322,8 @@
       }
     },
     "analysis-per-tube": {
-      "cover-rate-gauge-label": "Sur le sujet vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
-      "description": "Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Sur le sujet votre participant a obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.} other {Sur le sujet vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.}}",
+      "description": "{count, plural, =1 {Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement du participant.} other {Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement des participants.}}",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -729,9 +729,9 @@
     },
     "campaign-analysis": {
       "description": {
-        "explanation": "Le positionnement reflète le niveau moyen atteint par les participants, par rapport au niveau maximal accessible dans cette campagne.",
-        "nota-bene": "Toutes les données présentées proviennent des participations partagées et non-supprimées des campagnes d’évaluation et sont actualisées à chaque visite.",
-        "resume": "Analysez par compétence ou par sujet, le positionnement de vos participants dans cette campagne qui porte sur une sélection de sujets du référentiel Pix."
+        "explanation": "{count, plural, =1 {Le positionnement reflète le niveau moyen atteint par le participant, par rapport au niveau maximal accessible dans cette campagne.} other {Le positionnement reflète le niveau moyen atteint par les participants, par rapport au niveau maximal accessible dans cette campagne.}}",
+        "nota-bene": "{count, plural, =1 {Toutes les données présentées proviennent de la participation sélectionnée.} other {Toutes les données présentées proviennent des participations partagées et non-supprimées des campagnes d’évaluation et sont actualisées à chaque visite.}}",
+        "resume": "{count, plural, =1 {Analysez par compétence ou par sujet, le positionnement du participant dans cette campagne qui porte sur une sélection de sujets du référentiel Pix.} other {Analysez par compétence ou par sujet, le positionnement de vos participants dans cette campagne qui porte sur une sélection de sujets du référentiel Pix.}}"
       },
       "levels-correspondence": {
         "infos": {

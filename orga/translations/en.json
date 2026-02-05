@@ -310,8 +310,8 @@
       }
     },
     "analysis-per-competence": {
-      "cover-rate-gauge-label": "Your participants have achieved a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
-      "description": "Below are the campaign competences and their descriptions, as well as the positioning of the participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Your participant has achieved a level of {reachedLevel} out of a maximum achievable level of {maxLevel}.} other {Your participants have achieved a level of {reachedLevel} out of a maximum achievable level of {maxLevel}.}}",
+      "description": "{count, plural, =1 {Below, find the campaign skills and their descriptions, as well as the participant's positioning.} other {Below, find the campaign skills and their descriptions, as well as the participants' positioning.}}",
       "table": {
         "caption": "Competences",
         "column": {
@@ -322,8 +322,8 @@
       }
     },
     "analysis-per-tube": {
-      "cover-rate-gauge-label": "On the topic your participants have obtained a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
-      "description": "Below are the campaign topics and their descriptions, as well as the positioning of the participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {On this topic, your participant has achieved a level of {reachedLevel} out of a maximum achievable level of {maxLevel}.} other {On this topic, your participants have achieved a level of {reachedLevel} out of a maximum achievable level of {maxLevel}.}}",
+      "description": "{count, plural, =1 {Below, find the campaign topics and their descriptions, as well as the participant's positioning.} other {Below, find the campaign topics and their descriptions, as well as the participants' positioning.}}",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -729,9 +729,9 @@
     },
     "campaign-analysis": {
       "description": {
-        "explanation": "Each test assesses a selection of digital skills from the Pix reference framework. Positioning reflects the average level achieved by participants in relation to the maximum level achievable on the test.",
-        "nota-bene": "All the data presented comes from shared and undeleted participation in assessment campaigns, and is updated in real time.",
-        "resume": "Analyse by topic or skill, the positioning of your participants in this campaign, which covers a selection of topics from the Pix reference framework."
+        "explanation": "{count, plural, =1 {The ranking reflects the average level achieved by the participant, relative to the maximum level achievable in this campaign.} other {The ranking reflects the average level achieved by participants, relative to the maximum level achievable in this campaign.}}",
+        "nota-bene": "{count, plural, =1 {All data presented comes from selected participation.} other {All data presented comes from shared and non-deleted participation in assessment campaigns and is updated with each visit.}}",
+        "resume": "{count, plural, =1 {Analyse, by skill or subject, the participant's positioning in this campaign, which covers a selection of subjects from the Pix reference framework.} other {Analyse, by skill or subject, the positioning of your participants in this campaign, which covers a selection of subjects from the Pix reference framework.}}"
       },
       "levels-correspondence": {
         "infos": {
