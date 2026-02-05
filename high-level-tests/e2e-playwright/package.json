@@ -19,6 +19,8 @@
     "test": "playwright test",
     "test:snapshot": "UPDATE_SNAPSHOTS=true playwright test --grep @snapshot",
     "test:ui": "playwright test --ui",
+    "test:prescription": "playwright test --config playwright.config.prescription.ts",
+    "test:prescription:ui": "playwright test --config playwright.config.prescription.ts --ui",
     "test:certif": "playwright test --config playwright.config.certif.ts",
     "test:certif:testref": "ts-node scripts/recette-certif/run-by-test-ref.ts",
     "test:certif:snapshot": "UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --grep @snapshot",
