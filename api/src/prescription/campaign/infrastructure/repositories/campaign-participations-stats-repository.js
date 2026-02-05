@@ -5,10 +5,8 @@ import { getLatestParticipationSharedForOneLearner } from './helpers/get-latest-
 const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
 
 const getParticipationsActivityByDate = async function (campaignId) {
-  const [startedParticipations, sharedParticipations] = await Promise.all([
-    _getCumulativeParticipationCountsByDay(campaignId, 'createdAt'),
-    _getCumulativeParticipationCountsByDay(campaignId, 'sharedAt'),
-  ]);
+  const startedParticipations = await _getCumulativeParticipationCountsByDay(campaignId, 'createdAt');
+  const sharedParticipations = await _getCumulativeParticipationCountsByDay(campaignId, 'sharedAt');
   return { startedParticipations, sharedParticipations };
 };
 
