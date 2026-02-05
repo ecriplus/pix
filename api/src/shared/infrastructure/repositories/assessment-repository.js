@@ -151,7 +151,7 @@ const updateLastQuestionDate = async function ({ id, lastQuestionDate }) {
   const knexConn = DomainTransaction.getConnection();
   const [assessmentUpdated] = await knexConn('assessments')
     .where({ id })
-    .update({ lastQuestionDate, updatedAt: new Date() })
+    .update({ lastQuestionDate, updatedAt: knexConn.fn.now() })
     .returning('*');
   if (!assessmentUpdated) return null;
 };
