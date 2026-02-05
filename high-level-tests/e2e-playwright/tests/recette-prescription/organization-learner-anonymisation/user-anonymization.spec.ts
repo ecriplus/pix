@@ -1,5 +1,5 @@
+import { expect, test } from '../../../fixtures/index.ts';
 import { PIX_ADMIN_SUPPORT_DATA } from '../../../helpers/db-data.ts';
-import { expect, test } from '../../../helpers/fixtures.ts';
 import { LoginPage as AdminLoginPage } from '../../../pages/pix-admin/index.ts';
 import { LoginPage as AppLoginPage } from '../../../pages/pix-app/index.ts';
 import { HomePage as PixOrgaHomePage, ParticipantsPage } from '../../../pages/pix-orga/index.ts';

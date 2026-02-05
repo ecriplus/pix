@@ -1,4 +1,4 @@
-import { expect, test } from '../../helpers/fixtures.ts';
+import { expect, test } from '../../fixtures/index.ts';
 import {
   ChallengePage,
   FinalCheckpointPage,
