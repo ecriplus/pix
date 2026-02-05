@@ -22,6 +22,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
           attributes: {
             'dynamic-feature-toggle-system': false,
             'display-ia-campaign-banner': false,
+            'disabled-locales-in-frontend': [],
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-survey-enabled-for-combined-courses': true,
             'is-quest-enabled': true,

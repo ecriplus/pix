@@ -7,7 +7,7 @@ module('Unit | Helper | text with multiple lang', function (hooks) {
 
   hooks.beforeEach(function () {
     textWithMultipleLangHelper = new textWithMultipleLang();
-    textWithMultipleLangHelper.locale = { supportedLocales: ['fr', 'en'] };
+    textWithMultipleLangHelper.locale = { availableLocales: ['fr', 'en'] };
   });
   [
     { text: 'des mots', lang: 'fr', outputText: 'des mots' },

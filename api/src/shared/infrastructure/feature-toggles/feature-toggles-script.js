@@ -46,13 +46,18 @@ export class FeatureToggleScript extends Script {
     }
 
     if (value !== undefined) {
+      let convertedValue;
       if (featureToggle.type === 'boolean') {
-        await featureTogglesClient.set(key, value === 'true');
+        convertedValue = value === 'true';
       } else if (featureToggle.type === 'number') {
-        await featureTogglesClient.set(key, Number(value));
+        convertedValue = Number(value);
+      } else if (featureToggle.type === 'array') {
+        convertedValue = value.split(',').filter((element) => element != '');
       } else {
-        await featureTogglesClient.set(key, value);
+        convertedValue = value;
       }
+
+      await featureTogglesClient.set(key, convertedValue);
     }
 
     // Get a feature toggle

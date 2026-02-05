@@ -1,8 +1,6 @@
 const ENGLISH_SPOKEN = 'en';
 const FRENCH_FRANCE = 'fr-fr';
 const FRENCH_SPOKEN = 'fr';
-const DUTCH_SPOKEN = 'nl';
-const SPANISH_SPOKEN = 'es';
 const FRENCH_FRANCE_LOCALE = 'fr-FR';
 
 const DEFAULT_CHALLENGE_LOCALE = 'fr-fr';
@@ -131,7 +129,6 @@ function getNearestChallengeLocale(locale) {
 
 export {
   coerceLanguage,
-  DUTCH_SPOKEN,
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
@@ -144,5 +141,4 @@ export {
   getSupportedLanguages,
   getSupportedLocales,
   isFranceLocale,
-  SPANISH_SPOKEN,
 };

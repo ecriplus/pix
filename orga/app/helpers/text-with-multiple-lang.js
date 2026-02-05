@@ -11,7 +11,7 @@ export default class textWithMultipleLang extends Helper {
       text = text.toString();
     }
     const lang = this.locale.currentLanguage;
-    const listOfLocales = this.locale.supportedLocales;
+    const listOfLocales = this.locale.availableLocales;
     let outputText = _clean(text, listOfLocales);
 
     if (text && listOfLocales.includes(lang)) {

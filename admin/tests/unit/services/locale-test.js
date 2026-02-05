@@ -22,7 +22,7 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
-    sinon.stub(localeService, 'supportedLocales').value(['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
+    sinon.stub(localeService, 'availableLocales').value(['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
 
     currentDomainService = this.owner.lookup('service:currentDomain');
     sinon.stub(currentDomainService, 'getExtension');
@@ -111,60 +111,6 @@ module('Unit | Services | locale', function (hooks) {
 
         // then
         assert.strictEqual(acceptLanguageHeader, 'nl');
-      });
-    });
-  });
-
-  module('isSupportedLocale', function () {
-    module('when locale is supported', function () {
-      test('returns true', function (assert) {
-        // given
-        const locale = 'nl-BE';
-
-        // when
-        const result = localeService.isSupportedLocale(locale);
-
-        // then
-        assert.true(result);
-      });
-    });
-
-    module('when locale is supported but not given in canonical form', function () {
-      test('returns true', function (assert) {
-        // given
-        const locale = 'nl-be';
-
-        // when
-        const result = localeService.isSupportedLocale(locale);
-
-        // then
-        assert.true(result);
-      });
-    });
-
-    module('when locale is valid but not supported', function () {
-      test('returns false', function (assert) {
-        // given
-        const locale = 'ko';
-
-        // when
-        const result = localeService.isSupportedLocale(locale);
-
-        // then
-        assert.false(result);
-      });
-    });
-
-    module('when locale is invalid', function () {
-      test('returns false', function (assert) {
-        // given
-        const locale = 'invalid_locale_in_bad_format';
-
-        // when
-        const result = localeService.isSupportedLocale(locale);
-
-        // then
-        assert.false(result);
       });
     });
   });

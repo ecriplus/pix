@@ -7,6 +7,7 @@ import { COMPLEMENTARY_KEYS, SUBSCRIPTION_TYPES } from 'pix-certif/models/subscr
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubFeatureTogglesService } from '../../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates', function (hooks) {
@@ -17,10 +18,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
 
-    class FeatureTogglesStub extends Service {
-      featureToggles = { isPixPlusCandidateA11yEnabled: false };
-    }
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
+    stubFeatureTogglesService(this.owner, { isPixPlusCandidateA11yEnabled: false });
 
     const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
       id: '123',
@@ -568,10 +566,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     module('when feature toggle disables Pix+ candidate edition', function () {
       test('it should display edit button only for CORE candidates when feature is disabled', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isPixPlusCandidateA11yEnabled: false };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        stubFeatureTogglesService(this.owner, { isPixPlusCandidateA11yEnabled: false });
 
         const localCertificationCandidates = certificationCandidates;
         const localCountries = countries;
@@ -597,10 +592,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     module('when feature toggle enables Pix+ candidate edition', function () {
       test('it should display edit button for all candidates when feature is enabled', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isPixPlusCandidateA11yEnabled: true };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        stubFeatureTogglesService(this.owner, { isPixPlusCandidateA11yEnabled: true });
 
         const localCertificationCandidates = certificationCandidates;
         const localCountries = countries;

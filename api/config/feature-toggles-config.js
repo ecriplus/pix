@@ -81,4 +81,10 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
   },
+  disabledLocalesInFrontend: {
+    type: 'array',
+    description: 'Disable the specified locales',
+    defaultValue: [],
+    tags: ['team-acces', 'i18n', 'frontend'],
+  },
 };

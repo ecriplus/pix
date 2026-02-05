@@ -27,6 +27,7 @@ const PIX_LANGUAGES = ['fr', 'en', 'nl', 'es'];
 const COOKIE_LOCALE = 'locale';
 
 export default class LocaleService extends Service {
+  @service featureToggles;
   @service cookies;
   @service currentDomain;
   @service intl;
@@ -43,10 +44,10 @@ export default class LocaleService extends Service {
   }
 
   /**
-   * Returns all locales supported by this application
+   * Returns all locales available in this application
    */
-  get supportedLocales() {
-    return SUPPORTED_LOCALES.map((locale) => locale.value);
+  get availableLocales() {
+    return this.#getAvailableLocaleDefinitions().map((locale) => locale.value);
   }
 
   /**
@@ -77,21 +78,13 @@ export default class LocaleService extends Service {
   }
 
   get switcherDisplayedLocales() {
-    return SUPPORTED_LOCALES.filter((locale) => locale.displayedInSwitcher)
+    return this.#getAvailableLocaleDefinitions()
+      .filter((locale) => locale.displayedInSwitcher)
       .map((displayedLocale) => ({
         value: displayedLocale.value,
         label: displayedLocale.nativeName,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
-  }
-
-  isSupportedLocale(locale) {
-    try {
-      const localeCanonicalName = Intl.getCanonicalLocales(locale)?.[0];
-      return this.supportedLocales.some((supportedLocale) => localeCanonicalName == supportedLocale);
-    } catch {
-      return false;
-    }
   }
 
   setCurrentLocale(locale) {
@@ -163,11 +156,11 @@ export default class LocaleService extends Service {
     try {
       const intlLocale = new Intl.Locale(locale);
 
-      if (this.supportedLocales.includes(intlLocale.toString())) {
+      if (this.availableLocales.includes(intlLocale.toString())) {
         return intlLocale.toString();
       }
 
-      const localeMatch = this.supportedLocales.find((l) => new Intl.Locale(l).language === intlLocale.language);
+      const localeMatch = this.availableLocales.find((l) => new Intl.Locale(l).language === intlLocale.language);
       if (localeMatch) return localeMatch;
 
       return DEFAULT_LOCALE;
@@ -177,7 +170,7 @@ export default class LocaleService extends Service {
   }
 
   #getNearestSupportedLanguage(language) {
-    const supportedLanguages = this.pixLanguages.filter((pixLanguage) => this.supportedLocales.includes(pixLanguage));
+    const supportedLanguages = this.pixLanguages.filter((pixLanguage) => this.availableLocales.includes(pixLanguage));
     return supportedLanguages.includes(language) ? language : DEFAULT_LANGUAGE;
   }
 
@@ -188,6 +181,11 @@ export default class LocaleService extends Service {
     } catch {
       return DEFAULT_LANGUAGE;
     }
+  }
+
+  #getAvailableLocaleDefinitions() {
+    const disabledLocalesInFrontend = this.featureToggles.featureToggles?.disabledLocalesInFrontend ?? [];
+    return SUPPORTED_LOCALES.filter((localeDefinition) => !disabledLocalesInFrontend.includes(localeDefinition.value));
   }
 
   #setCookieLocale(locale) {

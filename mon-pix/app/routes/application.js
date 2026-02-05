@@ -34,11 +34,12 @@ export default class ApplicationRoute extends Route {
   }
 
   async beforeModel(transition) {
+    await this.featureToggles.load().catch();
+
     const queryParams = transition?.to?.queryParams;
     this.intl.setFormats(formats);
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
-    await this.featureToggles.load().catch();
     await this.oidcIdentityProviders.load().catch();
     await this.authentication.handleAnonymousAuthentication(transition);
     await this.currentUser.load();
