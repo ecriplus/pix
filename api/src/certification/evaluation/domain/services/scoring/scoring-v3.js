@@ -48,11 +48,14 @@ export const handleV3CertificationScoring =
     scoringDegradationService,
   }) => {
     if (candidate.hasPixPlusSubscription) {
-      return; // WIP : will be done in the future
+      return {
+        coreScoring: null,
+        doubleCertificationScoring: null,
+      }; // WIP : will be done in the future
     }
 
     if (candidate.hasOnlyCoreSubscription) {
-      return _scoreCoreCertification({
+      const coreScoring = _scoreCoreCertification({
         event,
         assessmentSheet,
         algorithm,
@@ -61,10 +64,15 @@ export const handleV3CertificationScoring =
         askedChallengesWithoutLiveAlerts,
         scoringDegradationService,
       });
+
+      return {
+        coreScoring,
+        doubleCertificationScoring: null,
+      };
     }
 
     if (candidate.hasCleaSubscription) {
-      const { coreScoring } = _scoreCoreCertification({
+      const coreScoring = _scoreCoreCertification({
         event,
         assessmentSheet,
         algorithm,
@@ -128,9 +136,7 @@ function _scoreCoreCertification({
     juryId: event?.juryId,
   });
 
-  return {
-    coreScoring: new CoreScoring({ certificationAssessmentScore, assessmentResult }),
-  };
+  return new CoreScoring({ certificationAssessmentScore, assessmentResult });
 }
 
 /**

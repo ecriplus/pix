@@ -124,17 +124,17 @@ export const scoreV3Certification = withTransaction(
         sharedCompetenceMarkRepository,
         certificationCourseRepository,
       });
+    }
 
-      if (doubleCertificationScoring) {
-        await complementaryCertificationCourseResultRepository.save(
-          ComplementaryCertificationCourseResult.from({
-            complementaryCertificationCourseId: doubleCertificationScoring.complementaryCertificationCourseId,
-            complementaryCertificationBadgeId: doubleCertificationScoring.complementaryCertificationBadgeId,
-            source: doubleCertificationScoring.source,
-            acquired: doubleCertificationScoring.isAcquired(),
-          }),
-        );
-      }
+    if (doubleCertificationScoring) {
+      await complementaryCertificationCourseResultRepository.save(
+        ComplementaryCertificationCourseResult.from({
+          complementaryCertificationCourseId: doubleCertificationScoring.complementaryCertificationCourseId,
+          complementaryCertificationBadgeId: doubleCertificationScoring.complementaryCertificationBadgeId,
+          source: doubleCertificationScoring.source,
+          acquired: doubleCertificationScoring.isAcquired(),
+        }),
+      );
     }
   },
 );

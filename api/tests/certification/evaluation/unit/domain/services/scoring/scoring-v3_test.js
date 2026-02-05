@@ -85,7 +85,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
 
         // then
         expect(score.coreScoring).to.be.instanceOf(CoreScoring);
-        expect(score.doubleCertificationScoring).to.be.undefined;
+        expect(score.doubleCertificationScoring).to.be.null;
       });
     });
 
@@ -148,7 +148,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           candidate,
         });
 
-        expect(hasScored).to.be.undefined;
+        expect(hasScored).to.deep.equal({
+          coreScoring: null,
+          doubleCertificationScoring: null,
+        });
       });
     });
   });

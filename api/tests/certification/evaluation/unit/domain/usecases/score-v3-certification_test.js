@@ -71,7 +71,7 @@ describe('Unit | Certification | Evaluation | Domain | UseCase | Score V3 Certif
       });
     });
 
-    context('when session is not finalized ', function () {
+    context('when session is not finalized', function () {
       context('when candidate has seen the test end screen', function () {
         it('should score the certification', async function () {
           const dependencies = createDependencies({
@@ -185,7 +185,7 @@ function stubServices({ hasPixPlusSubscription = false } = {}) {
           }),
           assessmentResult: domainBuilder.buildAssessmentResult({ id: assessmentResultId }),
         }
-      : undefined,
+      : null,
     doubleCertificationScoring: null,
   };
   services.findByCertificationCourseAndVersion.resolves(object);
