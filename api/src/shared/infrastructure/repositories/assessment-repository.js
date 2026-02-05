@@ -222,8 +222,8 @@ export {
 };
 
 function _selectMostRecentAssessmentForEachCompetence(assessments) {
-  const groupedByCompetence = Object.groupBy(assessments, (a) => a.competenceId);
-  return Object.values(groupedByCompetence).map((group) => group[0]);
+  const assessmentsGroupedByCompetence = Object.groupBy(assessments, (assessment) => assessment.competenceId);
+  return Object.values(assessmentsGroupedByCompetence).map((group) => group[0]);
 }
 
 function _adaptModelToDb(assessment) {
