@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
@@ -38,7 +37,8 @@ const findByIds = async (ids) => {
 };
 
 const getByCode = async function (code) {
-  const campaign = await knex.select('id').from('campaigns').where({ code }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const campaign = await knexConn.select('id').from('campaigns').where({ code }).first();
 
   if (!campaign) return null;
 
@@ -46,11 +46,12 @@ const getByCode = async function (code) {
 };
 
 const get = async function (id) {
-  const campaign = await knex('campaigns').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const campaign = await knexConn('campaigns').where({ id }).first();
 
   if (!campaign) return null;
 
-  const { count: participationCount } = await knex('campaign-participations')
+  const { count: participationCount } = await knexConn('campaign-participations')
     .count('id')
     .where({ campaignId: id })
     .first();
@@ -98,18 +99,18 @@ const _update = async function (campaign, attributes) {
 };
 
 const save = async function (campaigns, dependencies = { skillRepository }) {
-  const trx = DomainTransaction.getConnection();
+  const knexConn = DomainTransaction.getConnection();
   const campaignsToCreate = _.isArray(campaigns) ? campaigns : [campaigns];
   const createdCampaigns = [];
   let latestCreatedCampaign;
   for (const campaign of campaignsToCreate) {
     const campaignAttributes = _.pick(campaign, CAMPAIGN_ATTRIBUTES);
-    const [createdCampaignDTO] = await trx('campaigns').insert(campaignAttributes).returning('*');
+    const [createdCampaignDTO] = await knexConn('campaigns').insert(campaignAttributes).returning('*');
     latestCreatedCampaign = new Campaign(createdCampaignDTO);
 
     if (campaign.externalIdLabel) {
-      const feature = await trx('features').where({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).first();
-      const [{ params }] = await trx('campaign-features')
+      const feature = await knexConn('features').where({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).first();
+      const [{ params }] = await knexConn('campaign-features')
         .insert({
           campaignId: latestCreatedCampaign.id,
           featureId: feature.id,
@@ -121,7 +122,7 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
     }
 
     if (latestCreatedCampaign.isAssessment || latestCreatedCampaign.isExam) {
-      const cappedTubes = await trx('target-profile_tubes')
+      const cappedTubes = await knexConn('target-profile_tubes')
         .select('tubeId', 'level')
         .where('targetProfileId', campaignAttributes.targetProfileId);
       const skillData = [];
@@ -132,7 +133,7 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
           ...rightLevelSkills.map((skill) => ({ skillId: skill.id, campaignId: latestCreatedCampaign.id })),
         );
       }
-      await knex.batchInsert('campaign_skills', skillData).transacting(trx);
+      await knexConn.batchInsert('campaign_skills', skillData).transacting(knexConn);
     }
 
     createdCampaigns.push(latestCreatedCampaign);
@@ -141,28 +142,23 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
 };
 
 const swapCampaignCodes = async function ({ firstCampaignId, secondCampaignId }) {
-  const trx = await knex.transaction();
+  const knexConn = DomainTransaction.getConnection();
+
   const randomBytesBuffer = await cryptoService.randomBytes(16);
   const temporaryCode = randomBytesBuffer.toString('base64');
 
-  try {
-    const { code: firstCode } = await trx('campaigns').select('code').where({ id: firstCampaignId }).first();
-    const { code: secondCode } = await trx('campaigns').select('code').where({ id: secondCampaignId }).first();
+  const { code: firstCode } = await knexConn('campaigns').select('code').where({ id: firstCampaignId }).first();
+  const { code: secondCode } = await knexConn('campaigns').select('code').where({ id: secondCampaignId }).first();
 
-    await trx('campaigns').where({ id: secondCampaignId }).update({ code: temporaryCode });
+  await knexConn('campaigns').where({ id: secondCampaignId }).update({ code: temporaryCode });
 
-    await trx('campaigns').where({ id: firstCampaignId }).update({ code: secondCode });
-    await trx('campaigns').where({ id: secondCampaignId }).update({ code: firstCode });
-
-    return trx.commit();
-  } catch (err) {
-    await trx.rollback();
-    throw err;
-  }
+  await knexConn('campaigns').where({ id: firstCampaignId }).update({ code: secondCode });
+  await knexConn('campaigns').where({ id: secondCampaignId }).update({ code: firstCode });
 };
 
 const isFromSameOrganization = async function ({ firstCampaignId, secondCampaignId }) {
   const knexConn = DomainTransaction.getConnection();
+
   const firstCampaign = await knexConn('campaigns').select('organizationId').where({ id: firstCampaignId }).first();
   const secondCampaign = await knexConn('campaigns').select('organizationId').where({ id: secondCampaignId }).first();
 
@@ -174,7 +170,9 @@ const isFromSameOrganization = async function ({ firstCampaignId, secondCampaign
 };
 
 const archiveCampaigns = function (campaignIds, userId) {
-  return knex('campaigns').whereNull('archivedAt').whereInArray('id', campaignIds).update({
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('campaigns').whereNull('archivedAt').whereInArray('id', campaignIds).update({
     archivedBy: userId,
     archivedAt: new Date(),
   });
@@ -189,9 +187,9 @@ const archiveCampaigns = function (campaignIds, userId) {
 export const deleteExternalIdLabelFromCampaigns = (campaignIds) => {
   const knexConn = DomainTransaction.getConnection();
   return knexConn('campaign-features')
-    .update('params', knex.raw("params - 'label'"))
+    .update('params', knexConn.raw("params - 'label'"))
     .updateFrom('features')
-    .where('features.id', '=', knex.raw('??', ['campaign-features.featureId']))
+    .where('features.id', '=', knexConn.raw('??', ['campaign-features.featureId']))
     .where('features.key', '=', CAMPAIGN_FEATURES.EXTERNAL_ID.key)
     .whereIn('campaign-features.campaignId', campaignIds);
 };

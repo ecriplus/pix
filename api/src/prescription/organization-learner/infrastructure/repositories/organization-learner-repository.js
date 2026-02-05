@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import {
   NotFoundError,
   OrganizationLearnerNotFound,
@@ -14,15 +13,15 @@ import { ParticipantRepartition } from '../../domain/models/ParticipantRepartiti
 import { AttestationParticipantStatus } from '../../domain/read-models/AttestationParticipantStatus.js';
 import { OrganizationLearner } from '../../domain/read-models/OrganizationLearner.js';
 
-function _buildIsCertifiable(queryBuilder, organizationLearnerId) {
+function _buildIsCertifiable(queryBuilder, organizationLearnerId, knexConn) {
   queryBuilder
     .distinct('view-active-organization-learners.id')
     .select(
       'view-active-organization-learners.id as organizationLearnerId',
-      knex.raw(
+      knexConn.raw(
         'FIRST_VALUE("campaign-participations"."isCertifiable") OVER(PARTITION BY "view-active-organization-learners"."id" ORDER BY "campaign-participations"."sharedAt" DESC) AS "isCertifiableFromCampaign"',
       ),
-      knex.raw(
+      knexConn.raw(
         'FIRST_VALUE("campaign-participations"."sharedAt") OVER(PARTITION BY "view-active-organization-learners"."id" ORDER BY "campaign-participations"."sharedAt" DESC) AS "certifiableAtFromCampaign"',
       ),
     )
@@ -42,7 +41,7 @@ function _buildIsCertifiable(queryBuilder, organizationLearnerId) {
 async function get({ organizationLearnerId }) {
   const knexConn = DomainTransaction.getConnection();
   const row = await knexConn
-    .with('subquery', (qb) => _buildIsCertifiable(qb, organizationLearnerId))
+    .with('subquery', (qb) => _buildIsCertifiable(qb, organizationLearnerId, knexConn))
     .select(
       'view-active-organization-learners.id',
       'view-active-organization-learners.firstName',
@@ -55,8 +54,8 @@ async function get({ organizationLearnerId }) {
       'view-active-organization-learners.certifiableAt as certifiableAtFromLearner',
       'subquery.isCertifiableFromCampaign',
       'subquery.certifiableAtFromCampaign',
-      knex.raw('array_remove(ARRAY_AGG("identityProvider"), NULL) AS "authenticationMethods"'),
-      knex.raw('array_remove(ARRAY_AGG(features.key), NULL) as features'),
+      knexConn.raw('array_remove(ARRAY_AGG("identityProvider"), NULL) AS "authenticationMethods"'),
+      knexConn.raw('array_remove(ARRAY_AGG(features.key), NULL) as features'),
       'users.email',
       'users.username',
       'users.id AS userId',
@@ -94,7 +93,9 @@ async function get({ organizationLearnerId }) {
 }
 
 async function findPaginatedLearners({ organizationId, page, filter }) {
-  const query = knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const query = knexConn
     .select('id', 'userId', 'firstName', 'lastName', 'organizationId', 'division', 'attributes')
     .from('view-active-organization-learners')
     .where({ isDisabled: false, organizationId })
@@ -163,7 +164,9 @@ async function findPaginatedAttestationStatusForOrganizationLearnersAndKey({
   page,
   attestationsApi,
 }) {
-  const query = knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const query = knexConn
     .select(
       'view-active-organization-learners.id',
       'userId',
@@ -263,7 +266,9 @@ async function findIdByUserIdAndOrganizationId({ organizationId, userId }) {
 }
 
 const findByIds = async function ({ ids }) {
-  const rawOrganizationLearners = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const rawOrganizationLearners = await knexConn
     .select('*')
     .from('view-active-organization-learners')
     .whereIn('id', ids)
@@ -276,6 +281,7 @@ const findByIds = async function ({ ids }) {
 
 const findByOrganizationId = function ({ organizationId }) {
   const knexConn = DomainTransaction.getConnection();
+
   return knexConn('view-active-organization-learners')
     .where({ organizationId })
     .orderByRaw('LOWER("lastName") ASC, LOWER("firstName") ASC')
@@ -286,7 +292,10 @@ const findByOrganizationId = function ({ organizationId }) {
 
 const findByOrganizationIdAndUpdatedAtOrderByDivision = async function ({ organizationId, page, filter }) {
   const BEGINNING_OF_THE_2020_SCHOOL_YEAR = '2020-08-15';
-  const query = knex('view-active-organization-learners')
+
+  const knexConn = DomainTransaction.getConnection();
+
+  const query = knexConn('view-active-organization-learners')
     .where({
       organizationId,
       isDisabled: false,
@@ -308,6 +317,7 @@ const findByOrganizationIdAndUpdatedAtOrderByDivision = async function ({ organi
 
 const findByUserId = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
+
   const rawOrganizationLearners = await knexConn
     .select('*')
     .from('view-active-organization-learners')
@@ -320,7 +330,9 @@ const findByUserId = async function ({ userId }) {
 };
 
 const findByOrganizationIdAndBirthdate = async function ({ organizationId, birthdate }) {
-  const rawOrganizationLearners = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const rawOrganizationLearners = await knexConn
     .select('*')
     .from('view-active-organization-learners')
     .where({ organizationId, birthdate, isDisabled: false })
@@ -332,7 +344,9 @@ const findByOrganizationIdAndBirthdate = async function ({ organizationId, birth
 };
 
 const getLatestOrganizationLearner = async function ({ nationalStudentId, birthdate }) {
-  const organizationLearner = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const organizationLearner = await knexConn
     .where({ nationalStudentId, birthdate })
     .whereNotNull('userId')
     .select()
@@ -351,7 +365,7 @@ const updateUserIdWhereNull = async function ({ organizationLearnerId, userId })
   const knexConn = DomainTransaction.getConnection();
   const [rawOrganizationLearner] = await knexConn('organization-learners')
     .where({ id: organizationLearnerId, userId: null })
-    .update({ userId, updatedAt: knex.fn.now() })
+    .update({ userId, updatedAt: new Date() })
     .returning('*');
 
   if (!rawOrganizationLearner)
@@ -363,7 +377,9 @@ const updateUserIdWhereNull = async function ({ organizationLearnerId, userId })
 };
 
 const isActive = async function ({ userId, campaignId }) {
-  const learner = await knex('view-active-organization-learners')
+  const knexConn = DomainTransaction.getConnection();
+
+  const learner = await knexConn('view-active-organization-learners')
     .select('view-active-organization-learners.isDisabled')
     .join('organizations', 'organizations.id', 'view-active-organization-learners.organizationId')
     .join('campaigns', 'campaigns.organizationId', 'organizations.id')
@@ -466,8 +482,8 @@ const findAllLearnerWithAtLeastOneParticipationByOrganizationId = async function
     .join('campaign-participations', function () {
       this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id').andOnVal(
         'campaign-participations.deletedAt',
-        knex.raw('IS'),
-        knex.raw('NULL'),
+        knexConn.raw('IS'),
+        knexConn.raw('NULL'),
       );
     })
     .where({ organizationId });
@@ -485,8 +501,8 @@ const findAllLearnerWithAtLeastOneParticipationByOrganizationIds = async functio
     .join('campaign-participations', function () {
       this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id').andOnVal(
         'campaign-participations.deletedAt',
-        knex.raw('IS'),
-        knex.raw('NULL'),
+        knexConn.raw('IS'),
+        knexConn.raw('NULL'),
       );
     })
     .whereIn('organizationId', organizationIds);

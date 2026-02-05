@@ -1,5 +1,6 @@
 import { SwapCampaignMismatchOrganizationError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { swapCampaignCodes } from '../../../../../../src/prescription/campaign/domain/usecases/swap-campaign-code.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | swap-campaign-code', function () {
@@ -7,6 +8,8 @@ describe('Unit | UseCase | swap-campaign-code', function () {
 
   beforeEach(function () {
     campaignAdministrationRepository = { swapCampaignCodes: sinon.stub(), isFromSameOrganization: sinon.stub() };
+    sinon.stub(DomainTransaction, 'execute');
+    DomainTransaction.execute.callsFake((callback) => callback());
   });
 
   it('should swap the codes', async function () {

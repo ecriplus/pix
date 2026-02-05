@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import * as combinedCourseApi from '../../../../quest/application/api/combined-course-api.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -16,12 +15,12 @@ const findByUserId = async function (userId) {
         .select({
           campaignParticipationId: 'campaign-participations.id',
           participantExternalId: 'campaign-participations.participantExternalId',
-          status: knex.raw(
+          status: knexConnection.raw(
             `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`, // TODO: stop casting TO_SHARE once the migration is done
           ),
           campaignId: 'campaigns.id',
           campaignCode: 'campaigns.code',
-          createdAt: knex.raw('COALESCE("campaign-participations"."createdAt", assessments."createdAt")'),
+          createdAt: knexConnection.raw('COALESCE("campaign-participations"."createdAt", assessments."createdAt")'),
           sharedAt: 'campaign-participations.sharedAt',
           deletedAt: 'campaign-participations.deletedAt',
           updatedAt: 'assessments.updatedAt',
@@ -43,7 +42,7 @@ const findByUserId = async function (userId) {
           this.select({
             campaignParticipationId: 'campaign-participations.id',
             participantExternalId: 'campaign-participations.participantExternalId',
-            status: knex.raw(
+            status: knexConnection.raw(
               `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`,
             ),
             campaignId: 'campaigns.id',

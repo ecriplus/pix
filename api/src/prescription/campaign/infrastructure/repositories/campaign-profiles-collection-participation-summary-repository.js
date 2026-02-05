@@ -1,7 +1,7 @@
 import chunk from 'lodash/chunk.js';
 import isBoolean from 'lodash/isBoolean.js';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING } from '../../../../shared/infrastructure/constants.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
@@ -38,14 +38,15 @@ function _getResultListPaginated(campaignId, filters, page) {
 }
 
 function _getParticipantsResultList(campaignId, filters) {
-  return knex
-    .with('campaign_participation_summaries', (qb) => _getParticipations(qb, campaignId, filters))
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
+    .with('campaign_participation_summaries', (qb) => _getParticipations(qb, campaignId, filters, knexConn))
     .select('*')
     .from('campaign_participation_summaries')
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 }
 
-async function _getParticipations(qb, campaignId, filters) {
+async function _getParticipations(qb, campaignId, filters, knexConn) {
   await qb
     .with('previousParticipationsInfos', (qbWith) => {
       qbWith
@@ -105,7 +106,7 @@ async function _getParticipations(qb, campaignId, filters) {
         nulls: 'last',
       },
     ])
-    .modify(_filterQuery, filters);
+    .modify(_filterQuery, filters, knexConn);
 }
 
 async function _makeMemoizedGetPlacementProfileForUser(results) {
@@ -133,7 +134,7 @@ async function _makeMemoizedGetPlacementProfileForUser(results) {
   return (userId) => placementProfiles.find((placementProfile) => placementProfile.userId === userId);
 }
 
-function _filterQuery(queryBuilder, filters) {
+function _filterQuery(queryBuilder, filters, knexConn) {
   if (filters.divisions) {
     const divisionsLowerCase = filters.divisions.map((division) => division.toLowerCase());
     queryBuilder.whereRaw('LOWER("view-active-organization-learners"."division") = ANY(:divisionsLowerCase)', {
@@ -142,7 +143,7 @@ function _filterQuery(queryBuilder, filters) {
   }
   if (filters.groups) {
     const groupsLowerCase = filters.groups.map((group) => group.toLowerCase());
-    queryBuilder.whereIn(knex.raw('LOWER("view-active-organization-learners"."group")'), groupsLowerCase);
+    queryBuilder.whereIn(knexConn.raw('LOWER("view-active-organization-learners"."group")'), groupsLowerCase);
   }
   if (filters.search) {
     filterByFullName(

@@ -1,10 +1,12 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { ParticipationForCampaignManagement } from '../../domain/models/ParticipationForCampaignManagement.js';
 
 const updateParticipantExternalId = async function ({ campaignParticipationId, participantExternalId }) {
-  const updatedRows = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const updatedRows = await knexConn('campaign-participations')
     .where('id', campaignParticipationId)
     .update({ participantExternalId });
 
@@ -14,7 +16,9 @@ const updateParticipantExternalId = async function ({ campaignParticipationId, p
 };
 
 const findPaginatedParticipationsForCampaignManagement = async function ({ campaignId, page }) {
-  const query = knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const query = knexConn('campaign-participations')
     .select({
       id: 'campaign-participations.id',
       lastName: 'view-active-organization-learners.lastName',
@@ -23,7 +27,7 @@ const findPaginatedParticipationsForCampaignManagement = async function ({ campa
       userFirstName: 'users.firstName',
       userLastName: 'users.lastName',
       participantExternalId: 'campaign-participations.participantExternalId',
-      status: knex.raw(
+      status: knexConn.raw(
         `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`, // TODO: stop casting TO_SHARE once the migration is done
       ),
       createdAt: 'campaign-participations.createdAt',

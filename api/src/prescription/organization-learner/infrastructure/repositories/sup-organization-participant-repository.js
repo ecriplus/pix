@@ -1,13 +1,13 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../src/prescription/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { SupOrganizationParticipant } from '../../domain/read-models/SupOrganizationParticipant.js';
 
-function _setFilters(qb, { search, studentNumber, groups, certificability } = {}) {
+function _setFilters(qb, { search, studentNumber, groups, certificability } = {}, knexConn) {
   if (search) {
     filterByFullName(qb, search, 'firstName', 'lastName');
   }
@@ -16,7 +16,7 @@ function _setFilters(qb, { search, studentNumber, groups, certificability } = {}
   }
   if (groups) {
     qb.whereIn(
-      knex.raw('LOWER("group")'),
+      knexConn.raw('LOWER("group")'),
       groups.map((group) => group.toLowerCase()),
     );
   }
@@ -31,7 +31,8 @@ function _setFilters(qb, { search, studentNumber, groups, certificability } = {}
 }
 
 const findPaginatedFilteredSupParticipants = async function ({ organizationId, filter, page = {}, sort = {} }) {
-  const { totalSupParticipants } = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const { totalSupParticipants } = await knexConn
     .count('id', { as: 'totalSupParticipants' })
     .from('view-active-organization-learners')
     .where({ organizationId: organizationId, isDisabled: false })
@@ -51,22 +52,22 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
     });
   }
 
-  const query = knex
+  const query = knexConn
     .with(
       'participants',
-      knex
+      knexConn
         .select([
           'view-active-organization-learners.id',
           'view-active-organization-learners.lastName',
           'view-active-organization-learners.firstName',
-          knex.raw('LOWER("view-active-organization-learners"."firstName") AS "lowerFirstName"'),
-          knex.raw('LOWER("view-active-organization-learners"."lastName") AS "lowerLastName"'),
+          knexConn.raw('LOWER("view-active-organization-learners"."firstName") AS "lowerFirstName"'),
+          knexConn.raw('LOWER("view-active-organization-learners"."lastName") AS "lowerLastName"'),
           'view-active-organization-learners.birthdate',
           'view-active-organization-learners.group',
           'view-active-organization-learners.studentNumber',
           'view-active-organization-learners.organizationId',
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('isCertifiable')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -77,7 +78,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('isCertifiable'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('sharedAt')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -88,7 +89,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('certifiableAt'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaigns.name')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -98,7 +99,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('campaignName'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaign-participations.status')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -108,7 +109,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('participationStatus'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaigns.type')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -118,7 +119,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('campaignType'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaign-participations.createdAt')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -128,10 +129,10 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
             .limit(1)
             .as('lastParticipationDate'),
           /**
-           * We use knex.raw here since there is no easy way to wrap
-           * the query into a coalesce with knex
+           * We use knexConn.raw here since there is no easy way to wrap
+           * the query into a coalesce with knexConn
            */
-          knex.raw(`(
+          knexConn.raw(`(
             coalesce (
               (
                 select count("id") as "participationCount"
@@ -158,7 +159,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
     .select('*')
     .from('participants')
     .orderBy(orderByClause)
-    .modify(_setFilters, filter);
+    .modify(_setFilters, filter, knexConn);
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const supOrganizationParticipants = results.map((result) => {

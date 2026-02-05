@@ -1,8 +1,8 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../src/prescription/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationParticipant } from '../../domain/read-models/OrganizationParticipant.js';
@@ -53,11 +53,13 @@ function _organizationLearnerParticipantsQuery({
   sort,
   withImport = true,
 }) {
+  const knexConn = DomainTransaction.getConnection();
+
   const orderByClause = _getOrderClause(sort);
 
-  const withQuery = _buildWithQuery({ organizationId, extraColumns, withImport });
+  const withQuery = _buildWithQuery({ organizationId, extraColumns, withImport, knexConn });
 
-  const query = knex.with('participants', withQuery).select('*').from('participants');
+  const query = knexConn.with('participants', withQuery).select('*').from('participants');
 
   if (!withImport) {
     query.where('participationCount', '>', 0);
@@ -66,7 +68,7 @@ function _organizationLearnerParticipantsQuery({
   query
     .orderBy(orderByClause)
     .modify(_filterBySearch, filters)
-    .modify(_filterByCertificability, filters)
+    .modify(_filterByCertificability, filters, knexConn)
     .modify(_filterByAttributes, extraFilters);
 
   return query;
@@ -97,10 +99,10 @@ function _getOrderClause(sort) {
   return orderByClause;
 }
 
-function _buildWithQuery({ organizationId, extraColumns, withImport }) {
-  const selectElement = _getSelectElement(extraColumns);
+function _buildWithQuery({ organizationId, extraColumns, withImport, knexConn }) {
+  const selectElement = _getSelectElement(extraColumns, knexConn);
 
-  const withQuery = knex.select(selectElement).from('view-active-organization-learners');
+  const withQuery = knexConn.select(selectElement).from('view-active-organization-learners');
 
   if (!withImport) {
     withQuery.leftJoin('users', function () {
@@ -117,8 +119,10 @@ function _buildWithQuery({ organizationId, extraColumns, withImport }) {
 }
 
 async function _countOrganizationParticipant({ organizationId, withImport = true }) {
-  const countParticipationQuery = knex
-    .select(knex.raw('COUNT(DISTINCT "view-active-organization-learners"."id")'))
+  const knexConn = DomainTransaction.getConnection();
+
+  const countParticipationQuery = knexConn
+    .select(knexConn.raw('COUNT(DISTINCT "view-active-organization-learners"."id")'))
     .from('view-active-organization-learners');
 
   if (!withImport) {
@@ -129,8 +133,8 @@ async function _countOrganizationParticipant({ organizationId, withImport = true
       .join('campaign-participations', function () {
         this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id').andOnVal(
           'campaign-participations.deletedAt',
-          knex.raw('IS'),
-          knex.raw('NULL'),
+          knexConn.raw('IS'),
+          knexConn.raw('NULL'),
         );
       });
     countParticipationQuery.where(function () {
@@ -161,11 +165,11 @@ function _filterBySearch(queryBuilder, filters) {
   }
 }
 
-function _filterByCertificability(queryBuilder, filters) {
+function _filterByCertificability(queryBuilder, filters, knexConn) {
   if (filters.certificability) {
     queryBuilder.where(function (query) {
       query.whereInArray(
-        knex.raw(
+        knexConn.raw(
           'case when "certifiableAtFromCampaign" > "certifiableAtFromLearner" OR "certifiableAtFromLearner" IS NULL then "isCertifiableFromCampaign" else "isCertifiableFromLearner" end',
         ),
         filters.certificability,
@@ -179,10 +183,10 @@ function _filterByCertificability(queryBuilder, filters) {
   }
 }
 
-function _getSelectElement(extraColumns) {
+function _getSelectElement(extraColumns, knexConn) {
   const extraSubQueries = extraColumns.map(({ key, name }) => {
-    return knex('organization-learners')
-      .select(knex.raw(`"organization-learners"."attributes" ->> ?`, key))
+    return knexConn('organization-learners')
+      .select(knexConn.raw(`"organization-learners"."attributes" ->> ?`, key))
       .whereRaw('"id" = "view-active-organization-learners"."id"')
       .as(name);
   });
@@ -194,7 +198,7 @@ function _getSelectElement(extraColumns) {
     'view-active-organization-learners.isCertifiable as isCertifiableFromLearner',
     'view-active-organization-learners.certifiableAt as certifiableAtFromLearner',
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('isCertifiable')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -205,7 +209,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('isCertifiableFromCampaign'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('sharedAt')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -216,7 +220,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('certifiableAtFromCampaign'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('campaigns.name')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -226,7 +230,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('campaignName'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('campaign-participations.status')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -236,7 +240,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('participationStatus'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('campaigns.type')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -246,7 +250,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('campaignType'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .join('campaigns', 'campaigns.id', 'campaignId')
       .select('campaign-participations.createdAt')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -256,7 +260,7 @@ function _getSelectElement(extraColumns) {
       .limit(1)
       .as('lastParticipationDate'),
 
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
       .and.whereNull('campaign-participations.deletedAt')
       .and.where('isImproved', false)

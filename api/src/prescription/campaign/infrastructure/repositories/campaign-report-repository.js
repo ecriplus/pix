@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import * as injectedCombinedCourseDetailRepository from '../../../../quest/infrastructure/repositories/combined-course-details-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -37,12 +36,12 @@ const get = async function (id) {
       areKnowledgeElementsResettable: 'target-profiles.areKnowledgeElementsResettable',
     })
     .select(
-      knex.raw('ARRAY_AGG("badges"."id")  AS "badgeIds"'),
-      knex.raw('ARRAY_AGG("stages"."id")  AS "stageIds"'),
-      knex.raw(
+      knexConn.raw('ARRAY_AGG("badges"."id")  AS "badgeIds"'),
+      knexConn.raw('ARRAY_AGG("stages"."id")  AS "stageIds"'),
+      knexConn.raw(
         '(SELECT COUNT(*) from "campaign-participations" WHERE "campaign-participations"."campaignId" = "campaigns"."id" AND "campaign-participations"."isImproved" IS FALSE AND "campaign-participations"."deletedAt" IS NULL) AS "participationsCount"',
       ),
-      knex.raw(
+      knexConn.raw(
         '(SELECT count( distinct "organizationLearnerId" ) from "campaign-participations" WHERE "campaign-participations"."campaignId" = "campaigns"."id" AND "campaign-participations"."status" = \'SHARED\' AND "campaign-participations"."deletedAt" IS NULL) AS "sharedParticipationsCount"',
       ),
     )
@@ -93,7 +92,7 @@ const findMasteryRates = async (campaignId) => {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn
     .from('campaign-participations as cp')
-    .select(['organizationLearnerId', getLatestParticipationSharedForOneLearner(knex, 'masteryRate', campaignId)])
+    .select(['organizationLearnerId', getLatestParticipationSharedForOneLearner(knexConn, 'masteryRate', campaignId)])
     .groupBy('organizationLearnerId')
     .where('status', SHARED)
     .where('deletedAt', null)
@@ -109,9 +108,12 @@ const findPaginatedFilteredByOrganizationId = async function ({
   userId,
   combinedCourseDetailsRepository = injectedCombinedCourseDetailRepository,
 }) {
+  const knexConn = DomainTransaction.getConnection();
+
   const combinedCourses = await combinedCourseDetailsRepository.findByOrganizationId({ organizationId });
   const campaignIdsToExclude = combinedCourses.flatMap((combinedCourse) => combinedCourse.campaignIds);
-  const query = knex('campaigns')
+
+  const query = knexConn('campaigns')
     .distinct('campaigns.id')
     .select(
       'campaigns.id',
@@ -124,10 +126,10 @@ const findPaginatedFilteredByOrganizationId = async function ({
       'users.firstName AS ownerFirstName',
       'users.lastName AS ownerLastName',
       'target-profiles.name AS targetProfileName',
-      knex.raw(
+      knexConn.raw(
         'COUNT(*) FILTER (WHERE "campaign-participations"."id" IS NOT NULL AND "campaign-participations"."isImproved" IS FALSE AND "campaign-participations"."deletedAt" IS NULL) OVER (partition by "campaigns"."id") AS "participationsCount"',
       ),
-      knex.raw(
+      knexConn.raw(
         'COUNT(*) FILTER (WHERE "campaign-participations"."id" IS NOT NULL AND "campaign-participations"."status" = \'SHARED\' AND "campaign-participations"."isImproved" IS FALSE AND "campaign-participations"."deletedAt" IS NULL) OVER (partition by "campaigns"."id") AS "sharedParticipationsCount"',
       ),
     )
@@ -141,7 +143,7 @@ const findPaginatedFilteredByOrganizationId = async function ({
     .orderBy('campaigns.createdAt', 'DESC');
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
-  const atLeastOneCampaign = await knex('campaigns')
+  const atLeastOneCampaign = await knexConn('campaigns')
     .count('id')
     .where({ organizationId })
     .whereNull('deletedAt')

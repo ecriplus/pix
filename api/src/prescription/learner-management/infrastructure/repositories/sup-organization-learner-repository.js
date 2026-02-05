@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationLearnersCouldNotBeSavedError } from '../../domain/errors.js';
 import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
@@ -23,11 +22,14 @@ const ATTRIBUTES_TO_SAVE = [
 ];
 
 const updateStudentNumber = async function (studentId, studentNumber) {
-  await knex('organization-learners').where('id', studentId).update({ studentNumber });
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('organization-learners').where('id', studentId).update({ studentNumber });
 };
 
 const findOneByStudentNumberAndBirthdate = async function ({ organizationId, studentNumber, birthdate }) {
-  const organizationLearner = await knex('view-active-organization-learners')
+  const knexConn = DomainTransaction.getConnection();
+
+  const organizationLearner = await knexConn('view-active-organization-learners')
     .where('organizationId', organizationId)
     .where('birthdate', birthdate)
     .where('isDisabled', false)
@@ -38,7 +40,9 @@ const findOneByStudentNumberAndBirthdate = async function ({ organizationId, stu
 };
 
 const findOneByStudentNumber = async function ({ organizationId, studentNumber }) {
-  const organizationLearner = await knex('view-active-organization-learners')
+  const knexConn = DomainTransaction.getConnection();
+
+  const organizationLearner = await knexConn('view-active-organization-learners')
     .where('organizationId', organizationId)
     .where('isDisabled', false)
     .whereRaw('LOWER(?)=LOWER(??)', [studentNumber, 'studentNumber'])
@@ -48,7 +52,22 @@ const findOneByStudentNumber = async function ({ organizationId, studentNumber }
 };
 
 const addStudents = async function (supOrganizationLearners) {
-  await _upsertStudents(knex, supOrganizationLearners);
+  const knexConn = DomainTransaction.getConnection();
+  const supOrganizationLearnersToInsert = supOrganizationLearners.map((supOrganizationLearner) => ({
+    ..._.pick(supOrganizationLearner, ATTRIBUTES_TO_SAVE),
+    status: supOrganizationLearner.studyScheme,
+    isDisabled: false,
+    updatedAt: knexConn.raw('CURRENT_TIMESTAMP'),
+  }));
+
+  try {
+    await knexConn('organization-learners')
+      .insert(supOrganizationLearnersToInsert)
+      .onConflict(knexConn.raw('("studentNumber", "organizationId") where "deletedAt" is NULL and "deletedBy" is NULL'))
+      .merge();
+  } catch {
+    throw new OrganizationLearnersCouldNotBeSavedError();
+  }
 };
 
 export {
@@ -70,22 +89,4 @@ async function getOrganizationLearnerIdsNotInList({ organizationId, studentNumbe
       this.whereNotIn('studentNumber', studentNumberList).orWhereNull('studentNumber');
     })
     .pluck('id');
-}
-
-async function _upsertStudents(queryBuilder, supOrganizationLearners) {
-  const supOrganizationLearnersToInsert = supOrganizationLearners.map((supOrganizationLearner) => ({
-    ..._.pick(supOrganizationLearner, ATTRIBUTES_TO_SAVE),
-    status: supOrganizationLearner.studyScheme,
-    isDisabled: false,
-    updatedAt: knex.raw('CURRENT_TIMESTAMP'),
-  }));
-
-  try {
-    await queryBuilder('organization-learners')
-      .insert(supOrganizationLearnersToInsert)
-      .onConflict(knex.raw('("studentNumber", "organizationId") where "deletedAt" is NULL and "deletedBy" is NULL'))
-      .merge();
-  } catch {
-    throw new OrganizationLearnersCouldNotBeSavedError();
-  }
 }

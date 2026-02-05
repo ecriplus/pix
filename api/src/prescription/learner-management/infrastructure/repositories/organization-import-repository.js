@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationImportStatus } from '../../domain/models/OrganizationImportStatus.js';
 import { OrganizationImportDetail } from '../../domain/read-models/OrganizationImportDetail.js';
@@ -17,7 +16,9 @@ const getLastByOrganizationId = async function (organizationId) {
 };
 
 const getLastImportDetailForOrganization = async function (organizationId) {
-  const result = await knex('organization-imports')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('organization-imports')
     .select('organization-imports.*', 'users.firstName', 'users.lastName')
     .join('users', 'users.id', 'organization-imports.createdBy')
     .where({ organizationId })
@@ -31,6 +32,7 @@ const getLastImportDetailForOrganization = async function (organizationId) {
 
 const get = async function (id) {
   const knexConn = DomainTransaction.getConnection();
+
   const result = await knexConn('organization-imports').where({ id }).first();
 
   if (!result) return null;
@@ -48,13 +50,14 @@ function _stringifyErrors(errors) {
 }
 
 const save = async function (organizationImport) {
+  const knexConn = DomainTransaction.getConnection();
   const attributes = { ...organizationImport, errors: _stringifyErrors(organizationImport.errors) };
 
   if (organizationImport.id) {
-    const updatedRows = await knex('organization-imports').update(attributes).where({ id: organizationImport.id });
+    const updatedRows = await knexConn('organization-imports').update(attributes).where({ id: organizationImport.id });
     if (updatedRows === 0) throw new Error();
   } else {
-    await knex('organization-imports').insert(attributes);
+    await knexConn('organization-imports').insert(attributes);
   }
 };
 
