@@ -112,6 +112,11 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
                 related: `/api/admin/organizations/${organization.id}/children`,
               },
             },
+            'organization-invitations': {
+              links: {
+                related: `/api/admin/organizations/${organization.id}/invitations`,
+              },
+            },
             tags: {
               data: [
                 {

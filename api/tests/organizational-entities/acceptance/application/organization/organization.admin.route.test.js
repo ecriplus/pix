@@ -649,6 +649,11 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   related: `/api/admin/organizations/${organization.id}/target-profile-summaries`,
                 },
               },
+              'organization-invitations': {
+                links: {
+                  related: `/api/admin/organizations/${organization.id}/invitations`,
+                },
+              },
             },
             type: 'organizations',
           },
