@@ -162,20 +162,16 @@ function _shouldStudentToImportBeReconciled(
   return isFromSameOrganization || isFromDifferentOrganizationWithSameBirthday;
 }
 
-const saveCommonOrganizationLearners = function (learners) {
-  const knex = DomainTransaction.getConnection();
-
-  return Promise.all(
-    learners.map((learner) => {
-      return knex('organization-learners').insert(learner).onConflict('id').merge({
-        firstName: learner.firstName,
-        lastName: learner.lastName,
-        attributes: learner.attributes,
-        isDisabled: false,
-        updatedAt: new Date(),
-      });
-    }),
-  );
+const saveCommonOrganizationLearners = async function (learners) {
+  const knexConn = DomainTransaction.getConnection();
+  const now = new Date();
+  learners.forEach((learner) => {
+    learner.updatedAt = now;
+  });
+  await knexConn('organization-learners')
+    .insert(learners)
+    .onConflict('id')
+    .merge(['firstName', 'lastName', 'attributes', 'isDisabled', 'updatedAt']);
 };
 
 const disableCommonOrganizationLearnersFromOrganizationId = function ({
