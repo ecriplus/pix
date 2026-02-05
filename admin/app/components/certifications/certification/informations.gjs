@@ -1,15 +1,15 @@
-import PixBlock from "@1024pix/pix-ui/components/pix-block";
-import PixButton from "@1024pix/pix-ui/components/pix-button";
-import PixIconButton from "@1024pix/pix-ui/components/pix-icon-button";
-import PixSelect from "@1024pix/pix-ui/components/pix-select";
-import { DescriptionList } from "pix-admin/components/ui/description-list";
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
-import CertificationCompetenceList from "../competence-list";
-import CertificationComments from "./comments";
-import CertificationInformationCandidate from "./informations/candidate";
-import CertificationInformationGlobalActions from "./informations/global-actions";
-import CertificationInformationIssueReports from "./informations/issue-reports";
-import CertificationInformationState from "./informations/state";
+import CertificationCompetenceList from '../competence-list';
+import CertificationComments from './comments';
+import CertificationInformationCandidate from './informations/candidate';
+import CertificationInformationGlobalActions from './informations/global-actions';
+import CertificationInformationIssueReports from './informations/issue-reports';
+import CertificationInformationState from './informations/state';
 
 <template>
   <div class="certification-information">
@@ -27,7 +27,10 @@ import CertificationInformationState from "./informations/state";
           {{#if @certification.commonComplementaryCertificationCourseResult}}
             <h2 class="certification-information__title">Certification complémentaire</h2>
 
-            <DescriptionList data-testid="pw-certification-information-complementary" class="certification-information-complementary">
+            <DescriptionList
+              data-testid="pw-certification-information-complementary"
+              class="certification-information-complementary"
+            >
               <DescriptionList.Item @label={{@certification.commonComplementaryCertificationCourseResult.label}}>
                 {{@certification.commonComplementaryCertificationCourseResult.status}}
               </DescriptionList.Item>
