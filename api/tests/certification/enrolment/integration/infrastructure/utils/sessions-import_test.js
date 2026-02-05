@@ -1,4 +1,4 @@
-import { getCsvHeaders } from '../../../../../../src/certification/enrolment/infrastructure/files/sessions-import.js';
+import { getCsvHeaders } from '../../../../../../src/certification/enrolment/infrastructure/utils/sessions-import.js';
 import { expect } from '../../../../../test-helper.js';
 const BOM_CHAR = '\ufeff';
 
