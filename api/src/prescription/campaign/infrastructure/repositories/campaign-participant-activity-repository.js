@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
@@ -63,7 +62,7 @@ const campaignParticipantActivityRepository = {
         'campaign-participations.id AS campaignParticipationId',
         'campaign-participations.participantExternalId',
         'campaign-participations.status',
-        knex('campaign-participations')
+        knexConn('campaign-participations')
           .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
           .and.whereNull('campaign-participations.deletedAt')
           .and.where('campaignId', campaignId)
@@ -78,10 +77,10 @@ const campaignParticipantActivityRepository = {
       })
       .where(
         'view-active-organization-learners.organizationId',
-        knex('campaigns').select('organizationId').where('id', campaignId),
+        knexConn('campaigns').select('organizationId').where('id', campaignId),
       )
       .where('view-active-organization-learners.isDisabled', false)
-      .modify(filterParticipations, activityFilters)
+      .modify(filterParticipations, activityFilters, knexConn)
       .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 
     const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
@@ -95,11 +94,11 @@ const campaignParticipantActivityRepository = {
   },
 };
 
-function filterParticipations(queryBuilder, filters) {
+function filterParticipations(queryBuilder, filters, knexConn) {
   queryBuilder
-    .modify(filterByDivisions, filters)
+    .modify(filterByDivisions, filters, knexConn)
     .modify(filterByStatus, filters)
-    .modify(filterByGroup, filters)
+    .modify(filterByGroup, filters, knexConn)
     .modify(filterBySearch, filters);
 }
 
@@ -114,9 +113,9 @@ function filterBySearch(queryBuilder, filters) {
   }
 }
 
-function filterByDivisions(queryBuilder, filters) {
+function filterByDivisions(queryBuilder, filters, knexConn) {
   if (filters.divisions) {
-    queryBuilder.whereIn(knex.raw('LOWER("view-active-organization-learners"."division")'), filters.divisions);
+    queryBuilder.whereIn(knexConn.raw('LOWER("view-active-organization-learners"."division")'), filters.divisions);
   }
 }
 
@@ -128,9 +127,9 @@ function filterByStatus(queryBuilder, filters) {
   }
 }
 
-function filterByGroup(queryBuilder, filters) {
+function filterByGroup(queryBuilder, filters, knexConn) {
   if (filters.groups) {
-    queryBuilder.whereIn(knex.raw('LOWER("view-active-organization-learners"."group")'), filters.groups);
+    queryBuilder.whereIn(knexConn.raw('LOWER("view-active-organization-learners"."group")'), filters.groups);
   }
 }
 
