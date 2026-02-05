@@ -4,6 +4,7 @@ import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixCustomDraft from 'mon-pix/components/module/element/custom-draft';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog } from '../../../helpers/wait-for';
@@ -55,6 +56,8 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
   module('when user clicks on reset button', function () {
     test('should focus on the iframe', async function (assert) {
       // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
       const customDraft = {
         id: 'id',
         title: 'title',
@@ -70,6 +73,35 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
       // then
       const iframe = screen.getByTitle(customDraft.title);
       assert.strictEqual(document.activeElement, iframe);
+    });
+
+    test('should send an event', async function (assert) {
+      // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      const passageEventRecordStub = sinon.stub(passageEventService, 'record');
+      const customDraftElement = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: true,
+        url: 'https://example.org',
+        height: 400,
+      };
+      const screen = await render(<template><ModulixCustomDraft @customDraft={{customDraftElement}} /></template>);
+
+      // when
+      const resetButton = screen.getByRole('button', {
+        name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel'),
+      });
+      await click(resetButton);
+
+      // then
+      sinon.assert.calledOnceWith(passageEventRecordStub, {
+        type: 'CUSTOM_DRAFT_RETRIED',
+        data: {
+          elementId: customDraftElement.id,
+        },
+      });
+      assert.ok(true);
     });
   });
 

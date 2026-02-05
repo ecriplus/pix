@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
@@ -11,6 +12,8 @@ import ModuleElement from './module-element';
 
 export default class ModulixCustomDraft extends ModuleElement {
   @tracked reportInfo = {};
+
+  @service passageEvents;
 
   constructor(...args) {
     super(...args);
@@ -33,6 +36,11 @@ export default class ModulixCustomDraft extends ModuleElement {
 
   @action
   resetEmbed() {
+    this.passageEvents.record({
+      type: 'CUSTOM_DRAFT_RETRIED',
+      data: { elementId: this.args.customDraft.id },
+    });
+
     this.iframe.setAttribute('src', this.args.customDraft.url);
     this.iframe.focus();
   }
