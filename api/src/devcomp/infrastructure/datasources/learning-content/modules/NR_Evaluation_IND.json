@@ -260,7 +260,7 @@
               "element": {
                 "id": "5523c5df-0559-42e0-a7c2-d8a695962c10",
                 "type": "text",
-                "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées. Elle est appelée l’<strong>Analyse de Cycle de Vie (ACV)</strong>.<br><br></p>\n<h5>🤔 Pourquoi cette méthode est importante ?</h5>\n<p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
+                "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées. Elle est appelée l’<strong>Analyse de Cycle de Vie (ACV)</strong>.<br><br></p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
               }
             }
           ]
@@ -608,7 +608,7 @@
               "element": {
                 "id": "f0ee88fb-f1d9-4c04-afed-01ddc6e76ab2",
                 "type": "text",
-                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote><br>Il est dit que cette étude mesure les émissions de gaz à effet de serre."
+                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote>"
               }
             },
             {
@@ -671,7 +671,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Pour évaluer les impacts environnementaux du numérique, on utilise une méthode appelée&nbsp;</span>"
+                    "content": "<span>Pour évaluer les impacts environnementaux du numérique, on utilise généralement une méthode appelée&nbsp;</span>"
                   },
                   {
                     "input": "a",
@@ -685,7 +685,7 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "empreinte carbone"
+                        "content": "recherche de consommation"
                       },
                       {
                         "id": "2",
@@ -824,7 +824,7 @@
                   },
                   "invalid": {
                     "state": "<p>Eh non !</p>",
-                    "diagnosis": "<p>Pour interpréter un impact environnemental du numérique, il faut connaître la méthode (ACV), le périmètre étudié et l’indicateur utilisé.</p>"
+                    "diagnosis": "<p>Pour interpréter un impact environnemental du numérique, il faut connaître la méthode utilisée, le périmètre étudié et l’indicateur utilisé.</p>"
                   }
                 }
               }
