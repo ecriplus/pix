@@ -822,7 +822,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>La demande d’information part&nbsp;</p>"
+                    "content": "<span>La demande d’information part&nbsp;</span>"
                   },
                   {
                     "input": "a",
@@ -851,7 +851,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>pour aller dans&nbsp;</p>"
+                    "content": "<span>pour aller dans&nbsp;</span>"
                   },
                   {
                     "input": "b",
@@ -880,7 +880,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>où se trouvent des&nbsp;</p>"
+                    "content": "<span>où se trouvent des&nbsp;</span>"
                   },
                   {
                     "input": "c",
@@ -909,7 +909,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>. Une fois la demande traitée, la réponse revient vers&nbsp;</p>"
+                    "content": "<span>. Une fois la demande traitée, la réponse revient vers&nbsp;</span>"
                   },
                   {
                     "input": "d",
