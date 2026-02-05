@@ -27,9 +27,7 @@ export default class Places extends Component {
 
   <template>
     <section class="page-section">
-      <header class="page-section__header">
-        <h2 class="page-section__title">Places</h2>
-      </header>
+      <h2 class="page-section__title page-section__title--sub">Places</h2>
       <Statistics @statistics={{@placesStatistics}} />
       <div class="places__resume">
         {{#if this.accessControl.hasAccessToOrganizationPlacesActionsScope}}
