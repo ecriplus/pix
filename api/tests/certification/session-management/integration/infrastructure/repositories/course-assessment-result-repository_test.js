@@ -1,8 +1,7 @@
 import * as courseAssessmentResultRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/course-assessment-result-repository.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Course | Integration | Repository | course-assessment-result', function () {
   describe('#getLatestAssessmentResult', function () {
@@ -99,7 +98,7 @@ describe('Certification | Course | Integration | Repository | course-assessment-
     });
 
     context('when no assessment result exists', function () {
-      it('should return a NotFound error', async function () {
+      it('should return undefined', async function () {
         // given
         const certificationCourseId = 1;
         databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
@@ -108,12 +107,12 @@ describe('Certification | Course | Integration | Repository | course-assessment-
         await databaseBuilder.commit();
 
         // when
-        const error = await catchErr(courseAssessmentResultRepository.getLatestAssessmentResult)({
+        const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
           certificationCourseId,
         });
 
         // then
-        expect(error).to.deepEqualInstance(new NotFoundError('No assessment result found'));
+        expect(latestAssessmentResult).to.be.null;
       });
     });
   });

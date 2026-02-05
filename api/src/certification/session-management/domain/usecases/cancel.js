@@ -7,6 +7,7 @@
 
 import CertificationCancelled from '../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { CertificationCancelNotAllowedError, NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
@@ -34,7 +35,10 @@ export const cancel = async function ({
   const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
     certificationCourseId,
   });
-  if (_isAssessmentResultNotCancellable(latestAssessmentResult)) {
+  if (!latestAssessmentResult) {
+    throw new NotFoundError('No assessment result found');
+  }
+  if (latestAssessmentResult.status === 'rejected') {
     throw new CertificationCancelNotAllowedError();
   }
 
@@ -50,8 +54,4 @@ export const cancel = async function ({
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
     await certificationRescoringRepository.rescoreV2Certification({ event });
   }
-};
-
-const _isAssessmentResultNotCancellable = (latestAssessmentResult) => {
-  return latestAssessmentResult && latestAssessmentResult.status === 'rejected';
 };
