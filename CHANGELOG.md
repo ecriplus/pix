@@ -1,5 +1,10 @@
 # Pix Changelog
 
+## [5.317.2](https://github.com/1024pix/pix/compare/v5.317.2...v5.317.3) (2026-02-05)
+
+### :bug: Correction
+- refactor(api): disable postdeploy to pass the migration for rollback
+
 ## [5.317.2](https://github.com/1024pix/pix/compare/v5.317.1...v5.317.2) (2026-02-03)
 
 ### :building_construction: Tech
