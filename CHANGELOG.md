@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.323.0](https://github.com/1024pix/pix/compare/v5.322.1...v5.323.0) (2026-02-05)
+
+### :rocket: Amélioration
+
+- [#14986](https://github.com/1024pix/pix/pull/14986) 1ère intégration ranger fichiers ind 
+- [#14978](https://github.com/1024pix/pix/pull/14978) modif virus nov retours experts 
+- [#14972](https://github.com/1024pix/pix/pull/14972) MVO-coquille-IAGen-Fonc-IND 
+- [#14969](https://github.com/1024pix/pix/pull/14969) Ne pas réconcilier un candidat Pix+ sur pix.org (PIX-21361). 
+- [#14970](https://github.com/1024pix/pix/pull/14970) WIP module RangerFichiers NOV 
+
+### :bug: Correction
+
+- [#14976](https://github.com/1024pix/pix/pull/14976) Corriger le fonctionnement des filtres générique dans le cas ou l'API ne retourne aucun résultats (PIX-21392). 
+- [#14981](https://github.com/1024pix/pix/pull/14981) Corriger une typo sur la banner IA (PIX-21400). 
+- [#14980](https://github.com/1024pix/pix/pull/14980) Permettre le rescoring lorsqu'une certification est terminée mais n'a pas d'assessment-result (PIX-21391) 
+- [#14987](https://github.com/1024pix/pix/pull/14987) Réparer les seeds certif 
+
+### :building_construction: Tech
+
+- [#14932](https://github.com/1024pix/pix/pull/14932) Ajout de tests E2E sur un des cas d'anonymisation (PIX-21269) 
+- [#14988](https://github.com/1024pix/pix/pull/14988) Ajoute l'équipe Data dans le fichier `codeowner` pour leur signaler les changements de base de données 
+- [#14985](https://github.com/1024pix/pix/pull/14985) Remplace le groupBy de lodash par le Object.groupBy() natif de JS 
+- [#14984](https://github.com/1024pix/pix/pull/14984) Remplacer le hack JSON.parse(JSON.stringify()) par la fonction native structuredClone pour dupliquer un objet 
+- [#14962](https://github.com/1024pix/pix/pull/14962) Retirer les équipes qui n'existent plus des code-owners (PIX-21374) 
+
+### :arrow_up: Montée de version
+
+- [#14973](https://github.com/1024pix/pix/pull/14973) Update dependency @1024pix/pix-ui to ^58.4.7 (mon-pix)
+
 ## [5.322.1](https://github.com/1024pix/pix/compare/v5.322.0...v5.322.1) (2026-02-04)
 
 ### :building_construction: Tech
