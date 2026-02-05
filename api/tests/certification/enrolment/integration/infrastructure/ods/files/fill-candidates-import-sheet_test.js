@@ -9,7 +9,7 @@ import * as url from 'node:url';
 import _ from 'lodash';
 
 import { usecases } from '../../../../../../../src/certification/enrolment/domain/usecases/index.js';
-import { fillCandidatesImportSheet } from '../../../../../../../src/certification/enrolment/infrastructure/files/candidates-import/fill-candidates-import-sheet.js';
+import { fillCandidatesImportSheet } from '../../../../../../../src/certification/enrolment/infrastructure/candidates-import/fill-candidates-import-sheet.js';
 import * as readOdsUtils from '../../../../../../../src/certification/enrolment/infrastructure/utils/ods/read-ods-utils.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../../src/shared/domain/constants.js';

@@ -6,7 +6,7 @@ import * as mailCheckImplementation from '../../../../shared/mail/infrastructure
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { getTransformationStructsForPixCertifCandidatesImport } from '../../infrastructure/files/candidates-import/candidates-import-transformation-structures.js';
+import { getTransformationStructsForPixCertifCandidatesImport } from '../../infrastructure/candidates-import/candidates-import-transformation-structures.js';
 import * as readOdsUtils from '../../infrastructure/utils/ods/read-ods-utils.js';
 import { Candidate } from '../models/Candidate.js';
 import { Subscription } from '../models/Subscription.js';

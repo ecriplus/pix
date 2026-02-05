@@ -1,6 +1,6 @@
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { usecases } from '../domain/usecases/index.js';
-import { fillCandidatesImportSheet } from '../infrastructure/files/candidates-import/fill-candidates-import-sheet.js';
+import { fillCandidatesImportSheet } from '../infrastructure/candidates-import/fill-candidates-import-sheet.js';
 import * as enrolledCandidateSerializer from '../infrastructure/serializers/enrolled-candidate-serializer.js';
 
 const enrolStudentsToSession = async function (request, h, dependencies = { enrolledCandidateSerializer }) {

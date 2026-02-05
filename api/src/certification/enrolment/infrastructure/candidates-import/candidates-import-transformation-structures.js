@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { convertDateValue } from '../../../../../shared/infrastructure/utils/date-utils.js';
+import { convertDateValue } from '../../../../shared/infrastructure/utils/date-utils.js';
 
 // These are transformation structures. They provide all the necessary info
 // on how to transform cell values in an attendance sheet into a target JS object.
