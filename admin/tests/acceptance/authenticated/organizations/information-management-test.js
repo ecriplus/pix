@@ -121,7 +121,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
       // then
       assert.dom(screen.queryByLabelText(t('pages.organization.navbar.team'), { selector: 'a' })).doesNotExist();
-      assert.strictEqual(currentURL(), `/organizations/${organization.id}/target-profiles`);
+      assert.strictEqual(currentURL(), `/organizations/${organization.id}/details`);
     });
 
     test('should not allow user to access invitation page', async function (assert) {
@@ -138,7 +138,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
       // then
       assert.dom(screen.queryByLabelText(t('pages.organization.navbar.invitations'))).doesNotExist();
-      assert.strictEqual(currentURL(), `/organizations/${organization.id}/target-profiles`);
+      assert.strictEqual(currentURL(), `/organizations/${organization.id}/details`);
     });
   });
 
