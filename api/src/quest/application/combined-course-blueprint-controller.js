@@ -42,3 +42,10 @@ export const attachOrganizations = async (
     )
     .code(201);
 };
+
+export const findByOrganizationId = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
+  const combinedCourseBlueprint = await usecases.findByOrganizationId({
+    organizationId: request.params.organizationId,
+  });
+  return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
+};

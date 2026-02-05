@@ -60,6 +60,7 @@ const serialize = function (prescriber) {
           'isAgriculture',
           'identityProviderForCampaigns',
           'targetProfiles',
+          'combinedCourseBlueprints',
           'memberships',
           'divisions',
           'organizationInvitations',
@@ -97,6 +98,16 @@ const serialize = function (prescriber) {
           relationshipLinks: {
             related: function (record, current, parent) {
               return `/api/organizations/${parent.id}/target-profiles`;
+            },
+          },
+        },
+        combinedCourseBlueprints: {
+          ref: 'id',
+          ignoreRelationshipData: true,
+          nullIfMissing: true,
+          relationshipLinks: {
+            related: function (record, current, parent) {
+              return `/api/organizations/${parent.id}/combined-course-blueprints`;
             },
           },
         },

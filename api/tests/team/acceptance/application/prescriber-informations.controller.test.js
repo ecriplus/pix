@@ -71,6 +71,11 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
                 related: `/api/organizations/${organization.id}/combined-courses`,
               },
             },
+            'combined-course-blueprints': {
+              links: {
+                related: `/api/organizations/${organization.id}/combined-course-blueprints`,
+              },
+            },
             divisions: {
               links: {
                 related: `/api/organizations/${organization.id}/divisions`,

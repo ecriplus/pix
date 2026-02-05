@@ -176,4 +176,35 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+  describe('GET /api/organizations/:id/combined-course-blueprints', function () {
+    context('when user is authenticated', function () {
+      let user;
+      let organization;
+
+      beforeEach(async function () {
+        user = databaseBuilder.factory.buildUser({});
+        organization = databaseBuilder.factory.buildOrganization({});
+        databaseBuilder.factory.buildMembership({
+          userId: user.id,
+          organizationId: organization.id,
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should return 200', async function () {
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${organization.id}/combined-course-blueprints`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+      });
+    });
+  });
 });
