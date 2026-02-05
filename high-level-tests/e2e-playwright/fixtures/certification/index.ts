@@ -104,6 +104,15 @@ export const test = sharedTest.extend<
       });
     });
 
+    // Force french origin, so PixPlus certification can be enrolled by candidate
+    await pixAppPage.route('**/api/**', (route) => {
+      route.continue({
+        headers: {
+          ...route.request().headers(),
+          origin: 'https://app.e2e.pix.fr',
+        },
+      });
+    });
     const invigilatorOverviewPage = await test.step('Evaluation', async () => {
       await pixAppPage.goto(process.env.PIX_APP_URL!);
 
