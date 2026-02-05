@@ -1,4 +1,4 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 
 const DEFAULT_PAGINATION = {
   PAGE: 1,
@@ -12,19 +12,18 @@ const DEFAULT_PAGINATION = {
  * @param {object} params.paginationParams
  * @param {Number} params.paginationParams.number - the page number to retrieve
  * @param {Number} params.paginationParams.size - the size of the page
- * @param {object|null} params.trx - transaction to use
  * @param {object|null} params.countQueryBuilder - a knex query builder that counts the total number of rows, bypassing the default one
  */
 const fetchPage = async ({
   queryBuilder,
   paginationParams: { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
-  trx = null,
   countQueryBuilder = null,
 }) => {
+  const knexConn = DomainTransaction.getConnection();
   const page = number < 1 ? 1 : number;
   const offset = (page - 1) * size;
 
-  const defaultCountQueryBuilder = knex
+  const defaultCountQueryBuilder = knexConn
     .count('*', { as: 'row_count' })
     .from(queryBuilder.clone().as('query_all_results'));
   const finalCountQueryBuilder = countQueryBuilder || defaultCountQueryBuilder;
@@ -32,9 +31,9 @@ const fetchPage = async ({
   // we cannot execute the query and count the total rows at the same time
   // because it would not work when there are DISTINCT selection in the SELECT clause
   let results, rowCount;
-  if (trx) {
-    results = await queryBuilder.limit(size).offset(offset).transacting(trx);
-    const { row_count } = await finalCountQueryBuilder.transacting(trx).first();
+  if (knexConn.isTransaction) {
+    results = await queryBuilder.limit(size).offset(offset).transacting(knexConn);
+    const { row_count } = await finalCountQueryBuilder.transacting(knexConn).first();
     rowCount = row_count;
   } else {
     results = await queryBuilder.limit(size).offset(offset);
