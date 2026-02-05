@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import { setupIntl } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -33,6 +34,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
     // then
     assert.dom(screen.getByText('user@example.com')).exists();
     assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
+    assert.ok(screen.getByRole('link', { name: `${t('pages.organization.navbar.invitations')} (1)` }));
   });
 
   test('should not allow to invite a member when user does not have access', async function (assert) {

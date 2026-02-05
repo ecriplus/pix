@@ -12,6 +12,9 @@ export default ApplicationSerializer.extend({
       targetProfileSummaries: {
         related: `/api/admin/organizations/${organization.id}/target-profile-summaries`,
       },
+      organizationInvitations: {
+        related: `/api/admin/organizations/${organization.id}/invitations`,
+      },
     };
   },
 });
