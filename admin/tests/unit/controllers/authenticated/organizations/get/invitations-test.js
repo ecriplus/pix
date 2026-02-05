@@ -19,7 +19,17 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       // given
       const queryRecordStub = sinon.stub();
       store.queryRecord = queryRecordStub;
-      controller.model = { organization: { id: 1 } };
+      const reloadStub = sinon.stub();
+
+      controller.model = {
+        organization: {
+          id: 1,
+          hasMany: sinon.stub(),
+        },
+      };
+      controller.model.organization.hasMany.withArgs('organizationInvitations').returns({
+        reload: reloadStub,
+      });
 
       controller.userEmailToInvite = 'test@example.net';
       const locale = 'en';

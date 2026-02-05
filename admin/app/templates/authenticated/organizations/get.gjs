@@ -37,6 +37,7 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
 
         <LinkTo @route="authenticated.organizations.get.invitations" @model={{@model}}>
           {{t "pages.organization.navbar.invitations"}}
+          ({{@model.organizationInvitations.length}})
         </LinkTo>
       {{/unless}}
 

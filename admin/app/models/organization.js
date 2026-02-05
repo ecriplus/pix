@@ -35,6 +35,7 @@ export default class Organization extends Model {
   @hasMany('target-profile-summary', { async: true, inverse: null }) targetProfileSummaries;
   @hasMany('tag', { async: true, inverse: null }) tags;
   @hasMany('organization', { async: true, inverse: null }) children;
+  @hasMany('organization-invitation', { async: true, inverse: null }) organizationInvitations;
 
   static get featureList() {
     return {

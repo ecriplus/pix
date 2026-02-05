@@ -38,6 +38,8 @@ export default class InvitationsController extends Controller {
         organizationId: this.model.organization.id,
       });
 
+      await this.model.organization.hasMany('organizationInvitations').reload();
+
       this.pixToast.sendSuccessNotification({
         message: `Un email a bien a été envoyé à l'adresse ${organizationInvitation.email}.`,
       });

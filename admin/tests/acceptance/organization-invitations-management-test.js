@@ -36,7 +36,7 @@ module('Acceptance | organization invitations management', function (hooks) {
     const screen = await visit(`/organizations/${organization.id}`);
 
     // then
-    assert.dom(screen.getByText('Invitations')).exists();
+    assert.dom(screen.getByText('Invitations (0)')).exists();
   });
 
   module('inviting a member', function () {
