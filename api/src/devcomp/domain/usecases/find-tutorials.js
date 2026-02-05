@@ -66,7 +66,7 @@ function _getEasiestSkills(skillsGroupByTube) {
 }
 
 function _getSkillsGroupedByTube(failedSkills) {
-  const sortedSkills = [...failedSkills].sort((a, b) => a.difficulty - b.difficulty);
+  const sortedSkills = failedSkills.toSorted((a, b) => a.difficulty - b.difficulty);
 
   const uniqueSkills = Array.from(new Set(sortedSkills));
 
