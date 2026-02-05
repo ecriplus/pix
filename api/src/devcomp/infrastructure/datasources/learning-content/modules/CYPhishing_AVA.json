@@ -482,7 +482,7 @@
               "element": {
                 "id": "9cabbbb0-6973-4453-a99b-2fc1ba39a2be",
                 "type": "text",
-                "content": "<p>À quoi ressemblent ces arnaques reposant sur l’ingénierie sociale ? </p>"
+                "content": "<p>À quoi ressemblent ces arnaques reposant sur l’ingénierie sociale ?</p>"
               }
             }
           ]
@@ -510,7 +510,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail2.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: URGENT — Virement confidentiel requis<br>Bonjour Claire,<br>Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: URGENT — Virement confidentiel requis<br>Bonjour Claire,<br>Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -559,7 +559,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail1.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -608,7 +608,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail3.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: J’ai besoin de toi&nbsp;<br>Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: J’ai besoin de toi&nbsp;<br>Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex</p>",
                       "legend": "",
                       "licence": ""
                     },
