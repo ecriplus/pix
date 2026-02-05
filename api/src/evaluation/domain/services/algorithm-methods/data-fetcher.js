@@ -82,12 +82,14 @@ async function fetchForCompetenceEvaluations({
   improvementService,
   locale,
 }) {
-  const [allAnswers, targetSkills, challenges, knowledgeElements] = await Promise.all([
-    answerRepository.findByAssessment(assessment.id),
-    skillRepository.findActiveByCompetenceId(assessment.competenceId),
-    challengeRepository.findValidatedByCompetenceId(assessment.competenceId, locale),
-    _fetchKnowledgeElements({ assessment, knowledgeElementRepository, improvementService }),
-  ]);
+  const allAnswers = await answerRepository.findByAssessment(assessment.id);
+  const targetSkills = await skillRepository.findActiveByCompetenceId(assessment.competenceId);
+  const challenges = await challengeRepository.findValidatedByCompetenceId(assessment.competenceId, locale);
+  const knowledgeElements = await _fetchKnowledgeElements({
+    assessment,
+    knowledgeElementRepository,
+    improvementService,
+  });
 
   return {
     allAnswers,
