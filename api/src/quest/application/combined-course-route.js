@@ -242,6 +242,21 @@ const register = async function (server) {
         tags: ['api', 'admin', 'combined-course'],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/combined-courses',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkOrganizationAccess,
+            assign: 'checkOrganizationAccess',
+          },
+        ],
+        handler: combinedCourseController.createCombinedCourse,
+        notes: ['- Permet au prescripteur connecté de déployer un parcours combiné dans son organisation.'],
+        tags: ['api', 'orga', 'combined-course'],
+      },
+    },
   ]);
 };
 const name = 'combined-courses-api';

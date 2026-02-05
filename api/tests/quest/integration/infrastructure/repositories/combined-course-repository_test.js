@@ -334,6 +334,69 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
+  describe('#save', function () {
+    it('should return adequate model instance after creation', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint();
+
+      const successRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+          data: {
+            campaignId: {
+              data: 1,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+        },
+      ];
+
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements,
+      });
+
+      const combinedCourse = new CombinedCourse(
+        {
+          name: combinedCourseBlueprint.internalName,
+          code: 'ABCDEF',
+          organizationId,
+          description: combinedCourseBlueprint.description,
+          illustration: combinedCourseBlueprint.illustration,
+          blueprintId: combinedCourseBlueprint.id,
+        },
+        quest,
+      );
+
+      await databaseBuilder.commit();
+
+      // when
+      await combinedCourseRepository.save({ combinedCourse });
+
+      // then
+      const savedQuest = await knex('combined_courses')
+        .join('quests', 'quests.id', 'combined_courses.questId')
+        .where('combined_courses.organizationId', organizationId)
+        .first();
+
+      const savedCombinedCourse = await knex('combined_courses')
+        .where('combined_courses.organizationId', organizationId)
+        .first();
+
+      expect(savedQuest.successRequirements).to.deep.equal(successRequirements);
+      expect(savedCombinedCourse.questId).to.deep.equal(savedQuest.id);
+      expect(savedCombinedCourse.combinedCourseBlueprintId).to.equal(combinedCourseBlueprint.id);
+      expect(savedCombinedCourse.code).equal(combinedCourse.code);
+      expect(savedCombinedCourse.organizationId).equal(organizationId);
+    });
+  });
+
   describe('#findByModuleIdAndOrganizationIds', function () {
     it('should return combined course for a given module id and organization ids', async function () {
       //given

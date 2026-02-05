@@ -401,4 +401,89 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
       });
     });
   });
+
+  describe('POST /api/combined-courses', function () {
+    context('when user is authenticated and belongs to organization', function () {
+      let userId, organizationId;
+
+      beforeEach(async function () {
+        organizationId = databaseBuilder.factory.buildOrganization().id;
+        userId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+        await databaseBuilder.commit();
+      });
+
+      it('creates combined course', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
+          content: [
+            { type: 'evaluation', value: targetProfile.id },
+            { type: 'module', value: '27d6ca4f' },
+            { type: 'module', value: 'df82ec66' },
+          ],
+        });
+
+        await databaseBuilder.commit();
+
+        const payload = {
+          data: {
+            type: 'campaign',
+            attributes: {
+              name: 'Parcours combiné collège',
+              type: 'COMBINED_COURSE',
+              ['owner-id']: null,
+            },
+            relationships: {
+              'combined-course-blueprint': {
+                data: {
+                  type: 'combined-course-blueprints',
+                  id: `${combinedCourseBlueprint.id}`,
+                },
+              },
+              organization: {
+                data: {
+                  type: 'organizations',
+                  id: `${organizationId}`,
+                },
+              },
+            },
+          },
+        };
+
+        const options = {
+          method: 'POST',
+          url: '/api/combined-courses',
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          payload,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const createdQuest = await knex('quests')
+          .join('combined_courses', 'combined_courses.questId', 'quests.id')
+          .where('combined_courses.organizationId', organizationId)
+          .first();
+
+        const expectedCampaignSuccessRequirement = createdQuest.successRequirements.find(
+          (requirement) => requirement.requirement_type === 'campaignParticipations',
+        );
+
+        const createdCampaign = await knex('campaigns')
+          .where('id', expectedCampaignSuccessRequirement.data.campaignId.data)
+          .first();
+
+        expect(response.statusCode).to.equal(201);
+        expect(response.result.data.id).to.equal(createdQuest.id.toString());
+        expect(response.result.data.attributes).to.deep.equal({
+          name: payload.data.attributes.name,
+          code: createdQuest.code,
+          type: 'COMBINED_COURSE',
+        });
+        expect(createdCampaign.ownerId).to.equal(userId);
+      });
+    });
+  });
 });

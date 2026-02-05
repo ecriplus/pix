@@ -82,6 +82,19 @@ const saveInBatch = async ({ combinedCourses }) => {
   }
 };
 
+const save = async ({ combinedCourse }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const combinedCourseToSave = _toDTO(combinedCourse);
+  const [{ id: questId }] = await knexConn('quests')
+    .insert({ ...combinedCourseToSave.quest })
+    .returning('id');
+  const [{ id: createdCombinedCourseId }] = await knexConn('combined_courses')
+    .insert({ ...combinedCourseToSave.combinedCourse, questId })
+    .returning('id');
+
+  return getById({ id: createdCombinedCourseId });
+};
+
 const _toDTO = (combinedCourse) => {
   const questDTO = combinedCourse.quest.toDTO();
   return {
@@ -143,4 +156,12 @@ const _toDomain = ({
   });
 };
 
-export { findByCampaignId, findByModuleIdAndOrganizationIds, findByOrganizationId, getByCode, getById, saveInBatch };
+export {
+  findByCampaignId,
+  findByModuleIdAndOrganizationIds,
+  findByOrganizationId,
+  getByCode,
+  getById,
+  save,
+  saveInBatch,
+};
