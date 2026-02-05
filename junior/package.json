@@ -55,7 +55,7 @@
     "@embroider/webpack": "^4.0.9",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
-    "babel-plugin-ember-template-compilation": "^3.0.0",
+    "babel-plugin-ember-template-compilation": "^4.0.0",
     "dotenv": "^17.0.0",
     "ember-auto-import": "^2.7.2",
     "ember-cli": "^6.0.0",
