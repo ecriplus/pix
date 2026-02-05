@@ -24,18 +24,18 @@ const getUserCampaignAssessmentResult = async function ({
     throw new NoCampaignParticipationForUserAndCampaign();
   }
   try {
-    const [badges, knowledgeElements] = await Promise.all([
-      badgeRepository.findByCampaignId(campaignId),
-      knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
-        userId,
-        campaignParticipationId: campaignParticipation.id,
-      }),
-    ]);
+    const badges = await badgeRepository.findByCampaignId(campaignId);
+    const knowledgeElements = await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
+      userId,
+      campaignParticipationId: campaignParticipation.id,
+    });
+
     const stillValidBadgeIds = await checkStillValidBadges(
       campaignId,
       knowledgeElements,
       badgeForCalculationRepository,
     );
+
     const badgeWithAcquisitionPercentage = await getBadgeAcquisitionPercentage(
       campaignId,
       knowledgeElements,
@@ -50,10 +50,8 @@ const getUserCampaignAssessmentResult = async function ({
       ).acquisitionPercentage,
     }));
 
-    const [stages, acquiredStages] = await Promise.all([
-      stageRepository.getByCampaignId(campaignId),
-      stageAcquisitionRepository.getByCampaignParticipation(campaignParticipation.id),
-    ]);
+    const stages = await stageRepository.getByCampaignId(campaignId);
+    const acquiredStages = await stageAcquisitionRepository.getByCampaignParticipation(campaignParticipation.id);
 
     const stagesAndAcquiredStagesComparison = compareStagesAndAcquiredStages.compare(stages, acquiredStages);
 

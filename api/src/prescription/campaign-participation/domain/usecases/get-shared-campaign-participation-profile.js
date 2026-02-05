@@ -22,18 +22,15 @@ const getSharedCampaignParticipationProfile = async function ({
     throw new NoCampaignParticipationForUserAndCampaign();
   }
 
-  const [
-    { multipleSendings: campaignAllowsRetry },
-    isOrganizationLearnerActive,
-    knowledgeElementsGroupedByCompetenceId,
-  ] = await Promise.all([
-    campaignRepository.get(campaignId),
-    organizationLearnerRepository.isActive({ campaignId, userId }),
-    knowledgeElementRepository.findUniqByUserIdGroupedByCompetenceId({
+  const { multipleSendings: campaignAllowsRetry } = await campaignRepository.get(campaignId);
+  const isOrganizationLearnerActive = await organizationLearnerRepository.isActive({ campaignId, userId });
+  const knowledgeElementsGroupedByCompetenceId = await knowledgeElementRepository.findUniqByUserIdGroupedByCompetenceId(
+    {
       userId,
       limitDate: campaignParticipation.sharedAt,
-    }),
-  ]);
+    },
+  );
+
   const competences = await competenceRepository.listPixCompetencesOnly({ locale });
   const allAreas = await areaRepository.list({ locale });
   const maxReachableLevel = constants.MAX_REACHABLE_LEVEL;

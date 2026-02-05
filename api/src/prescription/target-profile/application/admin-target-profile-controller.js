@@ -143,16 +143,15 @@ const copyTargetProfile = withTransaction(async (request) => {
   const copiedTargetProfileId = await prescriptionTargetProfileUsecases.copyTargetProfile({
     targetProfileId: targetProfileIdToCopy,
   });
-  await Promise.all([
-    await evaluationUsecases.copyTargetProfileBadges({
-      originTargetProfileId: targetProfileIdToCopy,
-      destinationTargetProfileId: copiedTargetProfileId,
-    }),
-    await evaluationUsecases.copyTargetProfileStages({
-      originTargetProfileId: targetProfileIdToCopy,
-      destinationTargetProfileId: copiedTargetProfileId,
-    }),
-  ]);
+
+  await evaluationUsecases.copyTargetProfileBadges({
+    originTargetProfileId: targetProfileIdToCopy,
+    destinationTargetProfileId: copiedTargetProfileId,
+  });
+  await evaluationUsecases.copyTargetProfileStages({
+    originTargetProfileId: targetProfileIdToCopy,
+    destinationTargetProfileId: copiedTargetProfileId,
+  });
 
   return copiedTargetProfileId;
 });

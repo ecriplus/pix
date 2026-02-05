@@ -27,10 +27,8 @@ export const getOrganizationLearnerWithParticipations = async function ({
 
   const targetProfileIds = [...targetProfileIdsSet];
 
-  const [stages, acquiredStages] = await Promise.all([
-    stageRepository.getByTargetProfileIds(targetProfileIds),
-    stageAcquisitionRepository.getByCampaignParticipations(campaignParticipationIds),
-  ]);
+  const stages = await stageRepository.getByTargetProfileIds(targetProfileIds);
+  const acquiredStages = await stageAcquisitionRepository.getByCampaignParticipations(campaignParticipationIds);
 
   const campaignParticipationOverviewsWithStages = campaignParticipationOverviews.map(
     (campaignParticipationOverview) => {

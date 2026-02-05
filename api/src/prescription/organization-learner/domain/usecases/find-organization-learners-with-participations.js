@@ -16,31 +16,28 @@ const findOrganizationLearnersWithParticipations = withTransaction(async functio
   if (validationResult.error) {
     return [];
   }
+  let organizationLearners = [];
 
-  const organizationLearners = (
-    await Promise.all(
-      userIds.map((userId) => {
-        return libOrganizationLearnerRepository.findByUserId({ userId });
-      }),
-    )
-  ).flat();
+  for (const userId of userIds) {
+    const learners = await libOrganizationLearnerRepository.findByUserId({ userId });
+    organizationLearners = organizationLearners.concat(learners);
+  }
+  const results = [];
+  for (const organizationLearner of organizationLearners) {
+    const organization = await organizationRepository.get(organizationLearner.organizationId);
+    const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+      organizationLearnerId: organizationLearner.id,
+    });
+    const tags = await tagRepository.findByIds(organization.tags.map((tag) => tag.id));
 
-  return Promise.all(
-    organizationLearners.map(async (organizationLearner) => {
-      const organization = await organizationRepository.get(organizationLearner.organizationId);
-      const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
-        organizationLearnerId: organizationLearner.id,
-      });
-      const tags = await tagRepository.findByIds(organization.tags.map((tag) => tag.id));
-
-      return {
-        organizationLearner,
-        organization,
-        campaignParticipations: campaignParticipationOverviews,
-        tagNames: tags.map((tag) => tag.name),
-      };
-    }),
-  );
+    results.push({
+      organizationLearner,
+      organization,
+      campaignParticipations: campaignParticipationOverviews,
+      tagNames: tags.map((tag) => tag.name),
+    });
+  }
+  return results;
 });
 
 export { findOrganizationLearnersWithParticipations };

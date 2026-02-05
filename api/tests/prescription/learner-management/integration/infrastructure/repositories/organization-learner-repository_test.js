@@ -1251,6 +1251,18 @@ describe('Integration | Repository | Organization Learner Management | Organizat
             INE: '234567890',
           },
         });
+        const organizationLearner2 = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner(
+          {
+            firstName: 'Pikachu',
+            lastName: 'PikaPika',
+            organizationId,
+            isDisabled: false,
+            updatedAt: new Date('2020-01-01'),
+            attributes: {
+              INE: '234567800',
+            },
+          },
+        );
 
         await databaseBuilder.commit();
 
@@ -1262,16 +1274,31 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           INE: '12345',
         });
 
-        await saveCommonOrganizationLearners([learnerData]);
+        const learner2Data = new CommonOrganizationLearner({
+          id: organizationLearner2.id,
+          firstName: 'Raichu',
+          lastName: 'Pika',
+          organizationId,
+          INE: '12345',
+        });
 
-        const [updatedOrganizationLearner] = await knex.from('organization-learners');
+        await saveCommonOrganizationLearners([learnerData, learner2Data]);
 
-        expect(updatedOrganizationLearner.firstName).to.equal(learnerData.firstName);
-        expect(updatedOrganizationLearner.lastName).to.equal(learnerData.lastName);
-        expect(updatedOrganizationLearner.organizationId).to.equal(learnerData.organizationId);
-        expect(updatedOrganizationLearner.attributes).to.deep.equal(learnerData.attributes);
-        expect(updatedOrganizationLearner.isDisabled).to.be.false;
-        expect(updatedOrganizationLearner.updatedAt).to.be.deep.equal(new Date('2023-02-02'));
+        const updatedOrganizationLearners = await knex.from('organization-learners');
+
+        expect(updatedOrganizationLearners[0].firstName).to.equal(learnerData.firstName);
+        expect(updatedOrganizationLearners[0].lastName).to.equal(learnerData.lastName);
+        expect(updatedOrganizationLearners[0].organizationId).to.equal(learnerData.organizationId);
+        expect(updatedOrganizationLearners[0].attributes).to.deep.equal(learnerData.attributes);
+        expect(updatedOrganizationLearners[0].isDisabled).to.be.false;
+        expect(updatedOrganizationLearners[0].updatedAt).to.be.deep.equal(new Date('2023-02-02'));
+
+        expect(updatedOrganizationLearners[1].firstName).to.equal(learner2Data.firstName);
+        expect(updatedOrganizationLearners[1].lastName).to.equal(learner2Data.lastName);
+        expect(updatedOrganizationLearners[1].organizationId).to.equal(learner2Data.organizationId);
+        expect(updatedOrganizationLearners[1].attributes).to.deep.equal(learner2Data.attributes);
+        expect(updatedOrganizationLearners[1].isDisabled).to.be.false;
+        expect(updatedOrganizationLearners[1].updatedAt).to.be.deep.equal(new Date('2023-02-02'));
       });
     });
   });

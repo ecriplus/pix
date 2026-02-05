@@ -11,12 +11,11 @@ const campaignParticipationResultRepository = {
   async getByParticipationId(campaignParticipationId) {
     const campaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
 
-    const [skillIds, competences, assessment, knowledgeElements] = await Promise.all([
-      campaignRepository.findSkillIds({ campaignId: campaignParticipation.campaignId }),
-      competenceRepository.list(),
-      assessmentRepository.get(campaignParticipation.lastAssessment.id),
-      getKnowledgeElements(campaignParticipation),
-    ]);
+    const skillIds = await campaignRepository.findSkillIds({ campaignId: campaignParticipation.campaignId });
+    const competences = await competenceRepository.list();
+    const assessment = await assessmentRepository.get(campaignParticipation.lastAssessment.id);
+    const knowledgeElements = await getKnowledgeElements(campaignParticipation);
+
     const allAreas = await areaRepository.list();
 
     return CampaignParticipationResult.buildFrom({
