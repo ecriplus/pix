@@ -47,6 +47,11 @@ function convertString(joiStringDescribedSchema) {
     jsonSchema.format = 'uuid';
   }
 
+  const isoDateRule = findRule(rules, 'isoDate');
+  if (isoDateRule !== undefined) {
+    jsonSchema.format = 'date';
+  }
+
   const uriRule = findRule(rules, 'uri');
   if (uriRule !== undefined) {
     jsonSchema.format = 'uri';
