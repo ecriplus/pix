@@ -70,7 +70,7 @@ const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }
 
 const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDate }) {
   const knowledgeElements = await findUniqByUserId({ userId, limitDate });
-  return Object.groupBy(knowledgeElements, (ke) => ke.competenceId);
+  return Object.groupBy(knowledgeElements, (knowledgeElement) => knowledgeElement.competenceId);
 };
 
 const findInvalidatedAndDirectByUserId = async function ({ userId }) {
