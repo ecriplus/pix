@@ -1,9 +1,9 @@
 // @ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
-import { Candidate } from '../../../evaluation/domain/models/Candidate.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { SCOPES } from '../../../shared/domain/models/Scopes.js';
+import { Candidate } from '../../domain/models/Candidate.js';
 
 /**
  * @typedef {object} RawCertificationCandidateResult
