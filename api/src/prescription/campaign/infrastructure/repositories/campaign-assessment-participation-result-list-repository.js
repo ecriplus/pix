@@ -1,5 +1,5 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { StageAcquisitionCollection } from '../../../campaign-participation/domain/models/StageAcquisitionCollection.js';
@@ -28,8 +28,10 @@ export const findPaginatedByCampaignId = async ({
   };
 };
 
-const getParticipantsResultList = (campaignId, filters) =>
-  knex
+const getParticipantsResultList = (campaignId, filters) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn
     .with('campaign_participation_summaries', (qb) => getParticipations(qb, campaignId, filters))
     .select('*')
     .from('campaign_participation_summaries')
@@ -37,8 +39,11 @@ const getParticipantsResultList = (campaignId, filters) =>
     .modify(filterByUnacquiredBadges, filters)
     .modify(filterByStage, filters)
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
+};
 
 const getParticipations = (qb, campaignId, filters) => {
+  const knexConn = DomainTransaction.getConnection();
+
   qb.select(
     'view-active-organization-learners.firstName',
     'view-active-organization-learners.lastName',
@@ -47,14 +52,14 @@ const getParticipations = (qb, campaignId, filters) => {
     'campaign-participations.validatedSkillsCount',
     'campaign-participations.id AS campaignParticipationId',
     'campaign-participations.userId',
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .count()
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners".id')
       .where('campaign-participations.campaignId', campaignId)
       .where('campaign-participations.status', SHARED)
       .whereNull('campaign-participations.deletedAt')
       .as('sharedResultCount'),
-    knex('campaign-participations')
+    knexConn('campaign-participations')
       .select('masteryRate')
       .whereRaw('"organizationLearnerId" = "view-active-organization-learners".id')
       .where('campaign-participations.campaignId', campaignId)
@@ -76,12 +81,12 @@ const getParticipations = (qb, campaignId, filters) => {
     .where('campaign-participations.status', '=', SHARED)
     .where('campaign-participations.deletedAt', 'IS', null)
     .modify(filterByDivisions, filters)
-    .modify(filterByGroups, filters)
+    .modify(filterByGroups, filters, knexConn)
 
-    .modify(addAcquiredBadgeIds, filters)
-    .modify(addHighestAcquiredStageId, filters)
+    .modify(addAcquiredBadgeIds, filters, knexConn)
+    .modify(addHighestAcquiredStageId, filters, knexConn)
 
-    .modify(filterBySearch, filters)
+    .modify(filterBySearch, filters, knexConn)
 
     .modify(orderBy, filters);
 };
@@ -95,19 +100,19 @@ const filterByDivisions = (queryBuilder, filters) => {
   }
 };
 
-const filterByGroups = (queryBuilder, filters) => {
+const filterByGroups = (queryBuilder, filters, knexConn) => {
   if (filters.groups) {
     const groupsLowerCase = filters.groups.map((group) => group.toLowerCase());
-    queryBuilder.whereIn(knex.raw('LOWER("view-active-organization-learners"."group")'), groupsLowerCase);
+    queryBuilder.whereIn(knexConn.raw('LOWER("view-active-organization-learners"."group")'), groupsLowerCase);
   }
 };
 
-const filterBySearch = (queryBuilder, filters) => {
+const filterBySearch = (queryBuilder, filters, knexConn) => {
   if (filters.search) {
     const search = filters.search.trim().toLowerCase();
     queryBuilder.where(function () {
       this.where(
-        knex.raw(
+        knexConn.raw(
           `CONCAT ("view-active-organization-learners"."firstName", ' ', "view-active-organization-learners"."lastName") <-> ?`,
           search,
         ),
@@ -120,20 +125,22 @@ const filterBySearch = (queryBuilder, filters) => {
   }
 };
 
-const addAcquiredBadgeIds = (queryBuilder, filters) => {
+const addAcquiredBadgeIds = (queryBuilder, filters, knexConn) => {
   if (filters.badges || filters.unacquiredBadges) {
     queryBuilder
-      .select(knex.raw('ARRAY_AGG("badgeId") OVER (PARTITION BY "campaign-participations"."id") as badges_acquired'))
+      .select(
+        knexConn.raw('ARRAY_AGG("badgeId") OVER (PARTITION BY "campaign-participations"."id") as badges_acquired'),
+      )
       .leftJoin('badge-acquisitions', 'badge-acquisitions.campaignParticipationId', 'campaign-participations.id')
       .distinctOn('campaign-participations.id', 'campaign-participations.organizationLearnerId');
   }
 };
 
-const addHighestAcquiredStageId = (queryBuilder, filters) => {
+const addHighestAcquiredStageId = (queryBuilder, filters, knexConn) => {
   if (filters.stages) {
     queryBuilder
       .select(
-        knex.raw(`(SELECT "stages"."id"
+        knexConn.raw(`(SELECT "stages"."id"
         FROM stages
                  JOIN "stage-acquisitions" ON "stages"."id" = "stage-acquisitions"."stageId"
         WHERE "stage-acquisitions"."campaignParticipationId" = "campaign-participations"."id"
@@ -216,11 +223,17 @@ const buildCampaignAssessmentParticipationResultList = async (results, stageColl
     });
   });
 
-const getAcquiredStages = async (campaignParticipationId) =>
-  await knex(STAGE_ACQUISITIONS_TABLE_NAME).select('*').where({ campaignParticipationId });
+const getAcquiredStages = (campaignParticipationId) => {
+  const knexConn = DomainTransaction.getConnection();
 
-const getAcquiredBadges = async (campaignParticipationId) =>
-  await knex('badge-acquisitions')
+  return knexConn(STAGE_ACQUISITIONS_TABLE_NAME).select('*').where({ campaignParticipationId });
+};
+
+const getAcquiredBadges = (campaignParticipationId) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('badge-acquisitions')
     .select(['badges.id AS id', 'title', 'altMessage', 'imageUrl'])
     .join('badges', 'badges.id', 'badge-acquisitions.badgeId')
     .where({ campaignParticipationId: campaignParticipationId });
+};
