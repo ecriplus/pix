@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -20,7 +19,9 @@ const getByCampaignIdAndCampaignParticipationId = async function ({
 };
 
 const getDetachedByUserId = async ({ userId }) => {
-  const result = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('assessments')
     .select(['id', 'state', 'updatedAt'])
     .whereNull('campaignParticipationId')
     .where({ userId, type: Assessment.types.CAMPAIGN })
@@ -49,7 +50,7 @@ async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campa
         'campaign-participations.validatedSkillsCount',
         'view-active-organization-learners.id AS organizationLearnerId',
         'assessments.state AS assessmentState',
-        _assessmentRankByCreationDate(),
+        _assessmentRankByCreationDate(knexConn),
       ])
         .from('campaign-participations')
         .join('assessments', 'assessments.campaignParticipationId', 'campaign-participations.id')
@@ -74,8 +75,8 @@ async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campa
   return campaignAssessmentParticipation;
 }
 
-function _assessmentRankByCreationDate() {
-  return knex.raw('ROW_NUMBER() OVER (PARTITION BY ?? ORDER BY ?? DESC) AS rank', [
+function _assessmentRankByCreationDate(knexConn) {
+  return knexConn.raw('ROW_NUMBER() OVER (PARTITION BY ?? ORDER BY ?? DESC) AS rank', [
     'assessments.campaignParticipationId',
     'assessments.createdAt',
   ]);
