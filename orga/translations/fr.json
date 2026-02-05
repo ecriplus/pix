@@ -753,6 +753,8 @@
         "create": "Créer la campagne",
         "delete": "Effacer"
       },
+      "combined-course-blueprints-label": "Sélectionner un schéma de parcours",
+      "combined-course-blueprints-list-label": "Sélectionnez un schéma de parcours",
       "copy-of": "Copie de",
       "external-id-label": {
         "label": "Libellé de l’identifiant",
@@ -794,6 +796,7 @@
       "purpose": {
         "assessment": "Évaluer les participants",
         "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
+        "combined-course": "Créer un parcours combiné",
         "exam": "Mode interro [bêta]",
         "exam-info": "Une campagne de type “mode interro” permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur, et sans impacter celui-ci. Les épreuves proposées sont personnalisées pour chaque participant selon son avancement dans le parcours.",
         "label": "Quel est l'objectif de votre campagne ?",

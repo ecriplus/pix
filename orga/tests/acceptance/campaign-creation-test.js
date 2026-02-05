@@ -11,14 +11,11 @@ import { createPrescriberByUser, createUserWithMembershipAndTermsOfServiceAccept
 
 module('Acceptance | Campaign Creation', function (hooks) {
   let availableTargetProfiles;
+  let availableCombinedCourseBlueprints;
 
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
-
-  hooks.beforeEach(() => {
-    availableTargetProfiles = server.createList('target-profile', 2);
-  });
 
   test('it should not be accessible by an unauthenticated user', async function (assert) {
     // when
@@ -28,8 +25,34 @@ module('Acceptance | Campaign Creation', function (hooks) {
     assert.strictEqual(currentURL(), '/connexion');
   });
 
+  test('it should allow to create a combined course and redirect to the newly created combined course', async function (assert) {
+    // given
+    const user = createUserWithMembershipAndTermsOfServiceAccepted();
+    server.create('member-identity', { id: user.id, firstName: user.firstName, lastName: user.lastName });
+    createPrescriberByUser({ user });
+
+    await authenticateSession(user.id);
+    availableCombinedCourseBlueprints = server.createList('combined-course-blueprint', 2);
+    const expectedCombinedCourseBlueprintName = availableCombinedCourseBlueprints[1].name;
+
+    const screen = await visit('/campagnes/creation');
+    await fillByLabel('Nom de la campagne *', 'Mon parcours combiné');
+    await clickByName('Créer un parcours combiné');
+
+    await click(screen.getByLabelText(`${t('pages.campaign-creation.combined-course-blueprints-list-label')} *`));
+    await click(await screen.findByRole('option', { description: expectedCombinedCourseBlueprintName }));
+
+    // when
+    await clickByName('Créer la campagne');
+    // then
+    assert.strictEqual(server.db.campaigns[0].name, 'Mon parcours combiné');
+    assert.strictEqual(currentURL(), `/parcours/${server.db.campaigns[0].id}`);
+  });
+
   module('when the prescriber is authenticated', (hooks) => {
     hooks.beforeEach(async () => {
+      availableTargetProfiles = server.createList('target-profile', 2);
+
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       server.create('member-identity', { id: user.id, firstName: user.firstName, lastName: user.lastName });
       createPrescriberByUser({ user });

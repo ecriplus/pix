@@ -42,6 +42,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     defaultMembers = [prescriber];
     this.owner.register('service:current-user', CurrentUserStub);
     this.set('campaign', store.createRecord('campaign', { ownerId: prescriber.id }));
+    this.combinedCourseBlueprints = [];
     this.set('defaultMembers', defaultMembers);
     this.targetProfiles = [];
   });
@@ -85,42 +86,6 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     assert
       .dom(screen.getByLabelText(t('pages.campaign-creation.name.label'), { exact: false }))
       .hasValue('Campagne de test');
-  });
-
-  test('it should display block information for owner', async function (assert) {
-    // when
-    const screen = await render(
-      hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-    );
-    // then
-    assert.dom(screen.getByText(t('pages.campaign-creation.owner.info'))).exists();
-    assert.dom(screen.getAllByText(t('pages.campaign-creation.owner.title'))[0]).exists();
-  });
-
-  test("it should auto complete owner field with owner's full name", async function (assert) {
-    // when
-    const screen = await render(
-      hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-    );
-    await click(screen.getByLabelText(t('pages.campaign-creation.owner.label'), { exact: false }));
-    await screen.findByRole('listbox');
-
-    // then
-    assert.dom(screen.getByRole('option', { name: 'Adam Troisjour', selected: true })).exists();
   });
 
   test('[a11y] it should display a message that some inputs are required', async function (assert) {
@@ -180,6 +145,29 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
 
         // then
         assert.dom(screen.getByLabelText(t(campaignType.purpose))).isChecked();
+      });
+
+      test("it should display owner fields and auto complete owner field with owner's full name", async function (assert) {
+        // when
+        this.campaign.type = campaignType.status;
+        const screen = await render(
+          hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+        );
+
+        assert.dom(screen.getByText(t('pages.campaign-creation.owner.info'))).exists();
+        assert.dom(screen.getAllByText(t('pages.campaign-creation.owner.title'))[0]).exists();
+        await click(screen.getByLabelText(t('pages.campaign-creation.owner.label'), { exact: false }));
+        await screen.findByRole('listbox');
+
+        // then
+        assert.dom(screen.getByRole('option', { name: 'Adam Troisjour', selected: true })).exists();
       });
 
       test('it should fill target-profile fields', async function (assert) {
@@ -763,6 +751,34 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     });
   });
 
+  module(`when campaign is of type combined course`, function () {
+    test(`it should have checked combined course goal and not display owner fields`, async function (assert) {
+      const campaignType = {
+        status: 'COMBINED_COURSE',
+        purpose: 'pages.campaign-creation.purpose.combined-course',
+      };
+      // given
+      this.campaign.type = campaignType.status;
+      this.combinedCourseBlueprints = [{ id: 1, name: 'Mon schéma de parcours combiné' }];
+      // when
+      const screen = await render(
+        hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+  @combinedCourseBlueprints={{this.combinedCourseBlueprints}}
+/>`,
+      );
+
+      // then
+      assert.dom(screen.getByLabelText(t(campaignType.purpose))).isChecked();
+      assert.dom(screen.queryByText(t('pages.campaign-creation.owner.info'))).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.campaign-creation.owner.title'))).doesNotExist();
+    });
+  });
   test('should not display EXAM type when feature is not enable', async function () {
     // given
     prescriber.features.CAMPAIGN_WITHOUT_USER_PROFILE = { active: false, params: null };
@@ -883,6 +899,39 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
       // then
       assert.dom(screen.getByText(t('pages.campaign-creation.purpose.profiles-collection-info'))).exists();
       assert.dom(screen.queryByText(t('pages.campaign-creation.purpose.assessment-info'))).doesNotExist();
+    });
+  });
+
+  module('when user choose to create a campaign of type COMBINED_COURSE', () => {
+    test('it should not display fields for campaign title and target profile', async function (assert) {
+      // when
+      const combinedCourseBlueprint = store.createRecord('combined-course-blueprint', {
+        id: '1',
+        name: 'Blueprint 1',
+      });
+
+      this.combinedCourseBlueprints = [combinedCourseBlueprint];
+      const screen = await render(
+        hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+  @combinedCourseBlueprints={{this.combinedCourseBlueprints}}
+/>`,
+      );
+
+      await clickByName(t('pages.campaign-creation.purpose.combined-course'));
+
+      // then
+      assert.dom(screen.queryByText(t('pages.campaign-creation.test-title.label'))).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.campaign-creation.target-profiles-list-label'))).doesNotExist();
+      await fillByLabel('Nom de la campagne *', 'Mon parcours combiné');
+      await clickByName('Créer un parcours combiné');
+
+      await click(screen.getByLabelText(`${t('pages.campaign-creation.combined-course-blueprints-list-label')} *`));
+      assert.ok(await screen.findByRole('option', { description: combinedCourseBlueprint.name }));
     });
   });
 

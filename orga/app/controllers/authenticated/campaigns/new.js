@@ -17,7 +17,6 @@ export default class NewController extends Controller {
   async createCampaign() {
     this.notifications.clearAll();
     this.errors = null;
-
     try {
       await this.model.campaign.save();
     } catch (errorResponse) {
@@ -30,7 +29,11 @@ export default class NewController extends Controller {
     }
 
     if (!this.errors) {
-      this.router.transitionTo('authenticated.campaigns.campaign.settings', this.model.campaign.id);
+      if (this.model.campaign.type === 'COMBINED_COURSE') {
+        this.router.transitionTo('authenticated.combined-course', this.model.campaign.id);
+      } else {
+        this.router.transitionTo('authenticated.campaigns.campaign.settings', this.model.campaign.id);
+      }
     }
   }
 
