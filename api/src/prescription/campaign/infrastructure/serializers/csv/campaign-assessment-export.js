@@ -76,19 +76,17 @@ class CampaignAssessmentExport {
           userIds: startedParticipations.map(({ userId }) => userId),
         });
 
-        const csvLines = await Promise.all(
-          campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
-            this.#buildCSVLineForParticipation({
-              acquiredBadges,
-              acquiredStages,
-              campaignParticipationInfo,
-              campaignParticipationInfoChunk,
-              knowledgeElementRepository,
-              knowledgeElementSnapshotRepository,
-              sharedKnowledgeElementsByUserIdAndCompetenceId,
-              startedKnowledgeElementsByUserIdAndCompetenceId,
-            }),
-          ),
+        const csvLines = campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
+          this.#buildCSVLineForParticipation({
+            acquiredBadges,
+            acquiredStages,
+            campaignParticipationInfo,
+            campaignParticipationInfoChunk,
+            knowledgeElementRepository,
+            knowledgeElementSnapshotRepository,
+            sharedKnowledgeElementsByUserIdAndCompetenceId,
+            startedKnowledgeElementsByUserIdAndCompetenceId,
+          }),
         );
         this.stream.write(csvLines.join(''));
       },
@@ -159,7 +157,7 @@ class CampaignAssessmentExport {
     ]);
   }
 
-  async #buildCSVLineForParticipation({
+  #buildCSVLineForParticipation({
     campaignParticipationInfo,
     acquiredStages,
     acquiredBadges,
@@ -176,7 +174,7 @@ class CampaignAssessmentExport {
       areas: this.areas,
       competences: this.competences,
       stageCollection: this.stageCollection,
-      participantKnowledgeElementsByCompetenceId: await this.#getParticipantKnowledgeElementsByCompetenceId({
+      participantKnowledgeElementsByCompetenceId: this.#getParticipantKnowledgeElementsByCompetenceId({
         campaignParticipationInfo,
         sharedKnowledgeElementsByUserIdAndCompetenceId,
         startedKnowledgeElementsByUserIdAndCompetenceId,
@@ -194,7 +192,7 @@ class CampaignAssessmentExport {
     }).toCsvLine();
   }
 
-  async #getParticipantKnowledgeElementsByCompetenceId({
+  #getParticipantKnowledgeElementsByCompetenceId({
     campaignParticipationInfo,
     sharedKnowledgeElementsByUserIdAndCompetenceId,
     startedKnowledgeElementsByUserIdAndCompetenceId,
