@@ -1,0 +1,904 @@
+{
+  "id": "ca47a7a8-4dc9-42bd-a1ac-4b1e849a054b",
+  "shortId": "8a74eba3",
+  "slug": "ranger-fichiers-ind",
+  "title": "Organiser les fichiers de son ordinateur",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "Photos, documents, téléchargements… Quand les fichiers s’accumulent sur un ordinateur, il devient difficile de s’y retrouver. <br>Dans ce module, découvrez comment organiser vos fichiers et vos dossiers à l’aide d’un gestionnaire de fichiers et apprenez à les trouver grâce à leur chemin d’accès.",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "Trouver un fichier en suivant son chemin d’accès",
+      "Comprendre le rôle d’un gestionnaire de fichiers",
+      "Utiliser un gestionnaire de fichiers pour consulter et organiser des dossiers et des fichiers"
+    ],
+    "tabletSupport": "inconvenient"
+  },
+  "sections": [
+    {
+      "id": "2c9a132f-ffaa-4db0-a6f8-7c2fc8b4b8ea",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "68413d52-4fd5-4934-9dbc-3a94e56a340e",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1101ef20-2e66-45c4-ab92-834aeda05a8d",
+                "type": "text",
+                "content": "Voici le dossier «&nbsp;Documents&nbsp;» de l’ordinateur de Marie.<br><br><strong>Observez l’image ci-dessous puis répondez à la question.</strong>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f5ad12bb-a975-4dad-b54b-7e86aa68456a",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/playlist-fetes.png",
+                "alt": "Dossier « Documents » de Marie",
+                "alternativeText": "Interface montrant le dossier « Documents » de Marie dans lequel se trouve :<br><ul><li>Un dossier « Playlist fêtes »</li><li>Des fichiers</li></ul><br>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c8dcae48-0ad7-455a-b72e-afe481648977",
+                "type": "qcu-discovery",
+                "instruction": "D’après ce que vous observez, que peut contenir un dossier ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "des fichiers uniquement",
+                    "feedback": {
+                      "diagnosis": "Eh non. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "des dossiers uniquement",
+                    "feedback": {
+                      "diagnosis": "Eh non. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "des fichiers et des dossiers",
+                    "feedback": {
+                      "diagnosis": "Eh oui. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "diagnosis": "Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c7d28ff9-276e-4dfe-ad86-89907e835221",
+          "type": "transition",
+          "title": "Transition de l'accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9835e064-096b-4daa-bb61-3174397587e9",
+                "type": "text",
+                "content": "Créer une organisation avec plusieurs niveaux de rangement peut être intéressant pour mieux ranger ses fichiers, encore faut-il s’y retrouver ! <br>Pour cela, il faut comprendre comment les dossiers sont organisés entre eux."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24d4981a-9a8c-422e-8ff6-b016d861b645",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "669f6e75-60a3-4a09-9dc8-8d90b20a7c36",
+          "type": "discovery",
+          "title": "Découverte #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "be9ec4db-b29b-4787-ad90-33cbbaa349f7",
+                "type": "text",
+                "content": "Voici un schéma qui présente un exemple d’organisation des dossiers et des fichiers dans un ordinateur. <br><br><strong>Observez le schéma suivant puis répondez aux questions ci-dessous.</strong>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ef363e08-9e60-4f74-9c98-5a98c565b84d",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/arbo-decouverte1.png",
+                "alt": "schéma d'une organisation de dossiers et de fichiers",
+                "alternativeText": "à écrire",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "6c10f52c-a507-4745-9ad1-d1e14dead1ab",
+                      "type": "qcu-discovery",
+                      "instruction": "Dans ce schéma, combien y-a-t-il de dossiers dans « Images » ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "1",
+                          "feedback": {
+                            "diagnosis": "Eh non. Le dossier « Images » contient 2 dossiers :&nbsp; « Famille » et « Voyage ».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "2",
+                          "feedback": {
+                            "diagnosis": "Exactement. Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "4",
+                          "feedback": {
+                            "diagnosis": "Eh non. Le dossier « Images » contient 2 dossiers :&nbsp; « Famille » et « Voyage ».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "5",
+                          "feedback": {
+                            "diagnosis": "Eh non. Le dossier « Images » contient 2 dossiers :&nbsp; « Famille » et « Voyage ».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "Eh non. Le dossier « Images » contient 2 dossiers :&nbsp; « Famille » et « Voyage ».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "a5b5208c-79a5-44d3-a5d1-a3f7d97b7037",
+                      "type": "qcu-discovery",
+                      "instruction": "Dans ce schéma, comment s’appelle l’élément qui contient tous les dossiers et les fichiers ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Documents",
+                          "feedback": {
+                            "diagnosis": "Eh non.&nbsp;Tous les dossiers et fichiers d’un ordinateur sont regroupés dans son espace de stockage : le <strong>disque dur</strong>, ici appelé « Mon ordinateur »."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Images",
+                          "feedback": {
+                            "diagnosis": "Eh non. Tous les dossiers et fichiers d’un ordinateur sont regroupés dans son espace de stockage : le <strong>disque dur</strong>, ici appelé « Mon ordinateur »."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Mon ordinateur",
+                          "feedback": {
+                            "diagnosis": "Eh oui. Tous les dossiers et fichiers d’un ordinateur sont regroupés dans son espace de stockage : le <strong>disque dur</strong>, ici appelé « Mon ordinateur »."
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "Tous les dossiers et fichiers d’un ordinateur sont regroupés dans son espace de stockage : <strong>le disque dur</strong>, ici appelé « Mon ordinateur »."
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "36a386ab-a80a-482e-ba39-1b1ca113f0c7",
+          "type": "short-lesson",
+          "title": "Leçon #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "073ac979-06a6-4be3-896b-781923f214ac",
+                "type": "text",
+                "content": "Cette organisation de dossiers et de fichiers forme une <strong>arborescence</strong>, dans laquelle les <strong>dossiers</strong> (et sous dossiers) sont des niveaux intermédiaires de rangement."
+              }
+            }
+          ]
+        },
+        {
+          "id": "179da7d7-5fc6-4bd3-ba75-cd46b0ebf01c",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5958b280-ca47-4af4-b723-d7253e3724a5",
+                "type": "text",
+                "content": "Dans cette arborescence, tous les dossiers ne donnent pas accès aux mêmes fichiers . Pour accéder à un fichier précis, il faut suivre le bon chemin ! Voyons cela ensemble."
+              }
+            }
+          ]
+        },
+        {
+          "id": "96285439-7821-4544-a3b9-276bca05cac3",
+          "type": "discovery",
+          "title": "Découverte #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fb2f5ae0-2aec-4b38-b94a-adfde8da70e0",
+                "type": "text",
+                "content": "<strong>Observez l’arborescence suivante puis répondez à la question ci-dessous.</strong>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "64198e11-91df-48a0-b6c3-ae4bb0d49577",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/arbo-decouverte2.png",
+                "alt": "schéma d'une arborescence de dossiers et de fichiers",
+                "alternativeText": "à écrire",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4b1f7c83-c5c4-4934-8baa-fbb13a921563",
+                "type": "qrocm",
+                "instruction": "Complétez le chemin qui mène jusqu’au fichier « Anniv2025 »&nbsp;:",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "Mon ordinateur &gt;"
+                  },
+                  {
+                    "input": "Images",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Images"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Documents"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "&gt;"
+                  },
+                  {
+                    "input": "Photos",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Photos"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Captures"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "&gt;"
+                  },
+                  {
+                    "input": "2025",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "2024"
+                      },
+                      {
+                        "id": "2",
+                        "content": "2025"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "input": "Juillet",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Mai"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Juin"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Juillet"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "&gt; Anniv2025"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bien joué.&nbsp;",
+                    "diagnosis": "Pour accéder au fichier « Anniv2025 », il faut ouvrir le dossier « Images », puis le dossier « Photos », puis le dossier « 2025 » et enfin le dossier « Juillet ». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>."
+                  },
+                  "invalid": {
+                    "state": "Presque ça !",
+                    "diagnosis": "Pour accéder au fichier « Anniv2025 », il faut ouvrir le dossier « Images », puis le dossier « Photos », puis le dossier « 2025 » et enfin le dossier « Juillet ». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>."
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "dc89b5a3-c1c0-4372-bc9a-c3728e929acf",
+          "type": "short-lesson",
+          "title": "Leçon #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b2f32e18-08ae-4348-970f-f894d78481a1",
+                "type": "text",
+                "content": "Il faut parfois ouvrir plusieurs dossiers les uns après les autres pour accéder à un fichier. Le <strong>chemin d’accès</strong> à un fichier indique où il se trouve dans l’arborescence."
+              }
+            }
+          ]
+        },
+        {
+          "id": "418d2674-598c-4f0d-b839-f5b464164afa",
+          "type": "discovery",
+          "title": "Découverte #3 partie 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6c314f13-5614-44e0-8959-14ef2ef397c3",
+                "type": "text",
+                "content": "Sur un ordinateur, tous les dossiers et fichiers ne sont pas visibles depuis le Bureau. Un logiciel permet d’y accéder."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "26dc3990-6c99-487b-9d0c-eeb8e354f685",
+                "type": "custom",
+                "instruction": "Sélectionnez un logiciel qui permet de voir les dossiers et fichiers d’un ordinateur.",
+                "tagName": "image-quiz",
+                "props": {
+                  "name": "Gestionnaire de fichiers",
+                  "multiple": false,
+                  "maxChoicesPerLine": 5,
+                  "hideChoicesName": false,
+                  "orderChoices": false,
+                  "imageChoicesSize": "icon",
+                  "choices": [
+                    {
+                      "name": "Finder",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/finder.png"
+                      },
+                      "response": ""
+                    },
+                    {
+                      "name": "Explorateur Windows",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/windows.png"
+                      },
+                      "response": ""
+                    },
+                    {
+                      "name": "Microsoft Excel",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/excel.png"
+                      },
+                      "response": ""
+                    },
+                    {
+                      "name": "Gimp",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/gimp.png"
+                      },
+                      "response": ""
+                    },
+                    {
+                      "name": "Notes",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/notes.png"
+                      },
+                      "response": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "9f8e7709-1e42-45b2-881f-f90557a2c42e",
+          "type": "discovery",
+          "title": "Découverte #3 partie 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5b418658-4e48-4d5e-ba23-4b9a9674b54f",
+                "type": "text",
+                "content": "Une fois le gestionnaire de fichiers ouvert, il est possible d’afficher les dossiers et fichiers de différentes manières selon ce que l’on cherche à voir."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7b54d2e0-2bd8-4522-9f13-ea801afd245d",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Exemple embed existant (éval)",
+                "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=filemanager_compter&lang=fr",
+                "instruction": "Accédez au gestionnaire de fichiers puis : <br>\n<ul>\n    <li>\n\n        Retrouvez la photo « Cousinade » rangée dans le dossier « Images ».</li>\n    <li> Modifiez l'affichage pour retrouver la date de modification de la photo « Cousinade ».<br><br></li>\n</ul><em>[simulateur avec même arborescence que dans découverte 2 ? avec indices --&gt; voir exemple embed ci-dessous]</em>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "327d0d17-0f5b-4d15-81e2-41d05b9dff91",
+                "type": "expand",
+                "title": "🗝️Indice",
+                "content": "Dans le gestionnaire de fichiers, les options d’affichage se trouvent dans la barre d’outils."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6c4d391a-460d-4289-b3e2-7a78e00b2c67",
+                "type": "qcu-discovery",
+                "instruction": "À quelle date la photo « Cousinade » a-t-elle été modifiée ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "02 juillet 2025",
+                    "feedback": {
+                      "diagnosis": "Eh non. La date de modification est le 22 juillet 2025. Dans le gestionnaire de fichiers, il est possible de modifier l’<strong>affichage</strong> des dossiers selon ses besoins et les informations que l’on souhaite voir."
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "14 juillet 2025",
+                    "feedback": {
+                      "diagnosis": "Eh non. La date de modification est le 22 juillet 2025. Dans le gestionnaire de fichiers, il est possible de modifier l’<strong>affichage</strong> des dossiers selon ses besoins et les informations que l’on souhaite voir."
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "22 juillet 2025",
+                    "feedback": {
+                      "diagnosis": "Bien vu ! Dans le gestionnaire de fichiers, il est possible de modifier l’<strong>affichage</strong> des dossiers selon ses besoins et les informations que l’on souhaite voir."
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "diagnosis": "La date de modification est le 22 juillet 2025. Dans le gestionnaire de fichiers, il est possible de modifier l’<strong>affichage</strong> des dossiers selon ses besoins et les informations que l’on souhaite voir."
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "08d58759-0df2-4078-8343-fbfe58bedceb",
+          "type": "short-lesson",
+          "title": "Leçon #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1db4a456-f71c-43c9-90b8-c9a468154260",
+                "type": "text",
+                "content": "Dans le gestionnaire de fichiers :&nbsp; <br><ul><li>Un volet <strong>latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li><li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li><li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li></ul><br><h5>🤔 Bon à savoir</h5> Le gestionnaire de fichiers peut s’ouvrir de deux façons :&nbsp; <br><ul><li>en cliquant sur l'icône dans la barre des tâches (Windows) ou dock (Apple)</li><li>en double cliquant sur un dossier sur le bureau</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "baee6a02-8728-40b0-b192-79df8accd5dd",
+          "type": "discovery",
+          "title": "Découverte #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
+                "type": "text",
+                "content": "Marie souhaite organiser différemment ses dossiers et ses fichiers. Elle a commencé par ranger son dossier « Images ». en créant des sous dossiers par année. <br><br>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a940f5e1-66ee-4c43-975d-35c955b48138",
+                "type": "text",
+                "content": "@organiser4 @organiser3 like<em><strong>&nbsp;<br>[Simulateur avec indices : montrant dossier Documents vu dans l’accroche, en mode vue Liste (comme ça dates visibles)]</strong></em><br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "59d2e281-a445-424d-9690-a0e08b8a6e80",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Exemple embed (éval)",
+                "url": "https://epreuves.pix.fr/filemanager-photos/filemanager-photos.html?lang=fr",
+                "instruction": "Dans le gestionnaire de fichiers ci-dessous :&nbsp; <br><ul><li>rangez le dossier « Documents », en suivant la même organisation que pour le dossier « Images »</li><li>déplacer le dossier « Playlist fêtes » dans un dossier plus approprié.</li></ul>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "349b6092-9221-4578-80ae-45177e93747b",
+                "type": "expand",
+                "title": "🗝️Indice 1",
+                "content": "Pour ranger le dossier « Documents » comme le dossier « Images », commencez par créer des sous dossiers par année."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d542bfe9-7fc2-4a18-88d7-d6406f62956a",
+                "type": "expand",
+                "title": "🗝️Indice 2",
+                "content": "Une fois les sous-dossiers créés, rangez-y les fichiers en fonction de leur date. La vue liste permet de voir la date d’un fichier."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0de4339c-c273-4f16-b1b3-3c148c531a93",
+                "type": "expand",
+                "title": "🗝️Indice 3",
+                "content": "Le dossier « Playlist » contient des fichiers de type audio. Ce dossier sera plus à sa place en le rangeant dans le dossier « Musique ».&nbsp;Le dossier « Musique » est visible dans le volet latéral du gestionnaire."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a6a9bbc0-e0a4-4dfb-8019-12c080b8bcd4",
+                "type": "expand",
+                "title": "Autres astuces",
+                "content": "<ul><li>pour déplacer un fichier ou un dossier : couper-coller (ou glisser-déposer)</li><li>pour déplacer plusieurs fichiers à la fois, sélectionne... ?</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "baf117c9-647e-4715-8b1f-5d4f07182e88",
+                "type": "text",
+                "content": "<strong>Feedback : </strong>Pour organiser ses fichiers, on peut créer des dossiers et des sous-dossiers, puis y déplacer des fichiers ou des dossiers avec leur contenu. Le gestionnaire de fichiers permet de modifier l’organisation à tout moment."
+              }
+            }
+          ]
+        },
+        {
+          "id": "ef2f5aa2-673c-4c48-b093-7ec030f82dee",
+          "type": "short-lesson",
+          "title": "Leçon #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "878db1df-9959-48b5-906a-fc6c6141e2c1",
+                "type": "text",
+                "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><br>Il y a plusieurs manières de s'organiser. Chacun peut choisir de s'organiser en fonction des ses usages, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement. <br>On peut par exemple organiser ses fichiers par : projet, année, types de fichiers etc."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8a3d8b71-d0f8-48aa-b9ab-4083e2cffbe0",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/arbo-lecon3.png",
+                "alt": "",
+                "alternativeText": "à écrire",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "60223c63-944a-4e07-9cd2-a7b558696954",
+                "type": "text",
+                "content": "<h5>💡 Astuce</h5>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous dossiers."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e9639f0e-7a55-47b7-b4cb-4a22bc6be457",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "68ad6756-0f54-4124-8428-861eafdc52d5",
+          "type": "summary",
+          "title": "Recap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a2ef7833-34d7-4801-995e-dfa5815d2c09",
+                "type": "text",
+                "content": "<ul><li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;<br><br></li><li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence. Le gestionnaire de fichier permet de&nbsp;:&nbsp;<ul><li>Accéder aux dossiers et aux fichiers et les ranger.</li><li>Visualiser l’arborescence.</li><li>Consulter des informations sur les dossiers et les fichiers.</li><li>Modifier l’affichage.<br><br> </li></ul></li><li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "28349547-4565-4bd0-a70d-f02017ad590b",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "6282f456-ab40-4a5f-b846-ecff70740f20",
+          "type": "activity",
+          "title": "Activité d'application #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "13074d41-8e00-4339-9376-b22829ec706f",
+                "type": "text",
+                "content": "Voici le chemin du fichier Oui_oui_Baguette&nbsp; : Mon ordinateur &gt; Documents &gt; Boulangerie &gt; Pain &gt; Oui_oui_Baguette<br><br><strong>Trouver le fichier dans l’interface de gestionnaire de fichiers ci-dessous :&nbsp;</strong><br><br>[Auto-embed]<br><br><strong>Feedback :</strong>&nbsp;Bravo ! Vous avez trouvé le fichier « Oui_oui_Baguette ». En suivant le chemin d’accès dossier par dossier (dans le gestionnaire de fichiers), il est possible de retrouver précisément un fichier."
+              }
+            }
+          ]
+        },
+        {
+          "id": "61afc916-5ac2-4d4c-9bc1-5456c3a464c0",
+          "type": "activity",
+          "title": "Activité d'application #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a43c650a-e016-4eb0-8523-6da06aeccaf7",
+                "type": "qab",
+                "instruction": "Pour chacune des phrases ci-dessous, indiquez si elle est vraie ou fausse.<br>Le gestionnaire de fichier permet de :",
+                "cards": [
+                  {
+                    "id": "0ce9fbfa-5e70-4a46-912e-07405307cd14",
+                    "text": "Modifier l’affichage des dossiers pour voir plus d’informations.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "53c66a7e-082f-4627-a3ab-b1e38f54de23",
+                    "text": "Accéder aux dossiers et aux fichiers de l’ordinateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "a4d0598d-c401-44e3-b5a9-49f61f428ae7",
+                    "text": "Organiser ses fichiers en créant des dossiers.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "5ed743a9-9d1f-46ec-8272-254c76b58412",
+                    "text": "Installer des logiciels sur l’ordinateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "88e3951e-5d1a-4f4d-9d61-1c3ba82ec95b",
+                    "text": "Réécrire les documents textes enregistrés sur l’ordinateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "46eb7e67-82bb-4e10-9d91-a03615c5b3e0",
+          "type": "activity",
+          "title": "Activité d'application #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1f6c6b6a-029d-44e4-bc25-a2f9ea557a1e",
+                "type": "text",
+                "content": "Suivre les instructions suivantes pour ranger les photos d’Alice :<br> <br><ul><li><strong>Dans le dossier Images de l’ordinateur d’Alice, créer un dossier « Animaux ».</strong></li><li><strong>Rangez-y toutes les photos avec des noms d’animaux.</strong></li><li><strong>Dans le dossiers « Animaux », créer un dossier 2022.</strong></li><li><strong>Rangez-y toutes les photos datant de 2022.</strong></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b39ab6e2-31e0-4aef-96fc-692b9de1d5bd",
+                "type": "text",
+                "content": "[Auto-embed]<br><br><strong>Feedback : </strong>Bravo ! Vous avez rangé les photos d’Alice comme elle le souhaite. Créer des dossiers et des sous-dossiers permet d’organiser des fichiers par thème et par période pour les retrouver plus facilement.<br>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6885f8a9-8e1f-46fa-ad0a-705c743bab16",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "17be41c4-7964-4933-b962-720e48505aaa",
+          "type": "challenge",
+          "title": "Aller plus loin",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4944ea11-b895-4100-afc4-b43eac782324",
+                "type": "text",
+                "content": "Vous l’aurez compris, il n’existe pas une seule bonne façon d’organiser ses fichiers."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b4e893ca-33a3-439c-87d1-b1859c1ddfe1",
+                "type": "qcu-declarative",
+                "instruction": "Et vous, quel est votre style d’organisation sur votre ordinateur personnel ?",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "J’utilise beaucoup de sous-dossiers pour classer mes fichiers dans des catégories précises.",
+                    "feedback": {
+                      "diagnosis": "Un pro de l’organisation ! Cette organisation permet de structurer finement les fichiers. Chaque organisation a ses avantages et ses limites.<br>Chaque organisation a ses avantages et ses limites. L’important est de choisir une organisation qui vous correspond et qui vous permet de retrouver facilement vos fichiers."
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "J’utilise peu ou pas de sous-dossiers et je regroupe mes fichiers dans quelques dossiers principaux.",
+                    "feedback": {
+                      "diagnosis": "Plutôt minimaliste ! Une organisation simple peut être efficace pour garder une vue d’ensemble et limiter le temps passé à classer.<br>Chaque organisation a ses avantages et ses limites. L’important est de choisir une organisation qui vous correspond et qui vous permet de retrouver facilement vos fichiers."
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Je mets tous mes fichiers dans un seul dossier et je m’en sors comme ça.",
+                    "feedback": {
+                      "diagnosis": "Efficace à votre manière ! Certaines personnes préfèrent s’appuyer sur la recherche ou le tri par date ou par nom plutôt que sur les dossiers.<br>Chaque organisation a ses avantages et ses limites. L’important est de choisir une organisation qui vous correspond et qui vous permet de retrouver facilement vos fichiers."
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Aucune de ses organisations, j’ai un style unique !",
+                    "feedback": {
+                      "diagnosis": "Une organisation à votre image ! Il existe de nombreuses façons d’organiser ses fichiers.<br>Chaque organisation a ses avantages et ses limites. L’important est de choisir une organisation qui vous correspond et qui vous permet de retrouver facilement vos fichiers."
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
