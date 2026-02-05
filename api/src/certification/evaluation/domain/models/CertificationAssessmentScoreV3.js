@@ -78,9 +78,8 @@ export class CertificationAssessmentScoreV3 {
 
     const nbPix = _calculateScore({
       capacity,
-      maxReachableLevelOnCertificationDate,
       certificationScoringIntervals,
-      numberOfIntervals,
+      maxReachableLevel,
     });
 
     const competenceMarks = v3CertificationScoring.getCompetencesScore(capacity);
@@ -109,8 +108,8 @@ export class CertificationAssessmentScoreV3 {
   }
 }
 
-const _calculateScore = ({ capacity, certificationScoringIntervals }) => {
-  const MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;
+const _calculateScore = ({ capacity, certificationScoringIntervals, maxReachableLevel }) => {
+  const MAX_REACHABLE_LEVEL = maxReachableLevel;
   const MIN_PIX_SCORE = 0;
   const maximumReachableScore = MAX_REACHABLE_LEVEL * COMPETENCES_COUNT * PIX_COUNT_BY_LEVEL - 1;
 

@@ -18,6 +18,10 @@ export class V3CertificationScoring {
     return this._certificationScoringConfiguration;
   }
 
+  getMaxReachableLevel() {
+    return this.getNumberOfIntervals() - 1;
+  }
+
   get competencesForScoring() {
     return this._competencesForScoring;
   }
