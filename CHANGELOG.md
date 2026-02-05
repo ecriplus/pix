@@ -4,6 +4,7 @@
 
 ### :bug: Correction
 - [TECH] Corrige l'épuisement du pool dans le endpoint GET /assessments/{id} et dans l'util "fetchPage" pour récupérer des résultats paginés
+- [TECH] Assurer l'usage d'une seule connexion à la base de données lors de l'usage de la route POST /api/answers
 
 ## [5.317.3](https://github.com/1024pix/pix/compare/v5.317.2...v5.317.3) (2026-02-05)
 
