@@ -8,7 +8,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | analysis-per-competence', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('display analysis by tube', function () {
+  module('display analysis by competence for many participants', function () {
     test('it should display content table', async function (assert) {
       // given
       const campaignAnalysisByTubesAndCompetence = {
@@ -36,6 +36,8 @@ module('Integration | Component | analysis-per-competence', function (hooks) {
       );
 
       // then
+      assert.ok(screen.getByText(t('components.analysis-per-competence.description', { count: 2 })));
+
       const filledTable = within(
         screen.getByRole('table', { name: t('components.analysis-per-competence.table.caption') }),
       );
@@ -69,6 +71,7 @@ module('Integration | Component | analysis-per-competence', function (hooks) {
           name: t('components.analysis-per-competence.cover-rate-gauge-label', {
             reachedLevel: 1.1,
             maxLevel: 3,
+            count: 2,
           }),
         }),
       );
@@ -76,6 +79,47 @@ module('Integration | Component | analysis-per-competence', function (hooks) {
       assert.ok(
         filledTable.getByRole('cell', {
           name: t('pages.statistics.level.novice'),
+        }),
+      );
+    });
+  });
+
+  module('display analysis by competence for one participant', function () {
+    test('it should display adequate translations for one participant', async function (assert) {
+      // given
+      const campaignAnalysisByTubesAndCompetence = {
+        levelsPerCompetence: [
+          {
+            index: '3.2',
+            name: 'Développer des documents multimedia',
+            description: 'Développer des documents à contenu multimédia pour créer ses propres productions multimédia',
+            maxLevel: 3,
+            meanLevel: 1.1,
+          },
+        ],
+      };
+
+      // when
+      const screen = await render(
+        <template>
+          <AnalysisPerCompetence @data={{campaignAnalysisByTubesAndCompetence}} @isForParticipant={{true}} />
+        </template>,
+      );
+
+      // then
+      debugger;
+      assert.ok(screen.getByText(t('components.analysis-per-competence.description', { count: 1 })));
+
+      const filledTable = within(
+        screen.getByRole('table', { name: t('components.analysis-per-competence.table.caption') }),
+      );
+      assert.ok(
+        filledTable.getByRole('cell', {
+          name: t('components.analysis-per-competence.cover-rate-gauge-label', {
+            reachedLevel: 1.1,
+            maxLevel: 3,
+            count: 1,
+          }),
         }),
       );
     });
