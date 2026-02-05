@@ -15,6 +15,7 @@ const buildCertificate = function ({
   algorithmEngineVersion = AlgorithmEngineVersion.V3,
   certificationDate = new Date('2015-10-03T01:02:03Z'),
   acquiredComplementaryCertification = null,
+  maxReachableLevelOnCertificationDate = 7,
 } = {}) {
   return new Certificate({
     id,
@@ -30,6 +31,7 @@ const buildCertificate = function ({
     algorithmEngineVersion,
     certificationDate,
     acquiredComplementaryCertification,
+    maxReachableLevelOnCertificationDate,
   });
 };
 

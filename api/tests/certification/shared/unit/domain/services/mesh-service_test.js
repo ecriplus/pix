@@ -6,7 +6,9 @@ import {
   findMeshFromScore,
 } from '../../../../../../src/certification/shared/domain/services/mesh-service.js';
 
-describe('Unit | Domain | Models | MeshConfiguration', function () {
+const MAX_REACHABLE_LEVEL = 8;
+
+describe('Unit | Shared | Domain | Services | Mesh Service', function () {
   describe('#findMeshFromScore', function () {
     [
       {
@@ -28,16 +30,23 @@ describe('Unit | Domain | Models | MeshConfiguration', function () {
         expectedInterval: MESH_CONFIGURATION.get('LEVEL_BEGINNER_2'),
       },
       {
-        score: 896,
+        score: 895,
         meshKey: 'LEVEL_EXPERT_7',
 
         expectedInterval: MESH_CONFIGURATION.get('LEVEL_EXPERT_7'),
       },
+      {
+        score: 1024,
+        meshKey: 'LEVEL_EXPERT_8',
+
+        expectedInterval: MESH_CONFIGURATION.get('LEVEL_EXPERT_8'),
+      },
     ].forEach(({ score, meshKey, expectedInterval }) => {
-      it(`returns the interval ${expectedInterval} of key ${meshKey} when score is ${score}`, function () {
+      it(`returns the interval ${JSON.stringify(expectedInterval)} of key ${meshKey} when score is ${score}`, function () {
         // when
         const result = findMeshFromScore({
           score,
+          maxReachableLevel: MAX_REACHABLE_LEVEL,
         });
 
         // then
@@ -62,14 +71,19 @@ describe('Unit | Domain | Models | MeshConfiguration', function () {
         expectedInterval: 2,
       },
       {
-        score: 896,
+        score: 895,
         expectedInterval: 7,
+      },
+      {
+        score: 1024,
+        expectedInterval: 8,
       },
     ].forEach(({ score, expectedInterval }) => {
       it(`returns the interval ${expectedInterval} when score is ${score}`, function () {
         // when
         const result = findIntervalIndexFromScore({
           score,
+          maxReachableLevel: MAX_REACHABLE_LEVEL,
         });
 
         // then

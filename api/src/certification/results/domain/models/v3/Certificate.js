@@ -46,9 +46,8 @@ export class Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = this.#findLevel();
+    this.globalLevel = this.#findLevel(pixScore, maxReachableLevelOnCertificationDate);
     this.verificationCode = verificationCode;
-    this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
     this.resultCompetenceTree = this.globalLevel ? resultCompetenceTree : null;
     this.algorithmEngineVersion = algorithmEngineVersion;
@@ -56,10 +55,10 @@ export class Certificate {
     this.acquiredComplementaryCertification = acquiredComplementaryCertification;
   }
 
-  #findLevel() {
+  #findLevel(pixScore, maxReachableLevelOnCertificationDate) {
     const globalCertificationLevel = new GlobalCertificationLevel({
-      score: this.pixScore,
-      maxReachableLevel: this.maxReachableLevelOnCertificationDate,
+      score: pixScore,
+      maxReachableLevel: maxReachableLevelOnCertificationDate,
     });
     return globalCertificationLevel.meshLevel === CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }
