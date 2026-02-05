@@ -346,38 +346,6 @@ module('Integration | Component | organizations/information-section-view', funct
         .hasText(t('common.not-specified'));
     });
 
-    module('when organization is archived', function () {
-      test('it should display who archived it', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        const archivedAt = new Date('2022-02-22');
-        const organization = store.createRecord('organization', { archivistFullName: 'Rob Lochon', archivedAt });
-
-        // when
-        const screen = await render(
-          <template>
-            <InformationSectionView
-              @organization={{organization}}
-              @toggleEditMode={{toggleEditMode}}
-              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
-            />
-          </template>,
-        );
-
-        // then
-        assert
-          .dom(
-            screen.getByText(
-              t('components.organizations.information-section-view.is-archived-warning', {
-                archivedAt: '22/02/2022',
-                archivedBy: 'Rob Lochon',
-              }),
-            ),
-          )
-          .exists();
-      });
-    });
-
     module('When organization is SCO or SUP', function () {
       const organization = EmberObject.create({ type: 'SCO', isOrganizationSCO: true });
 

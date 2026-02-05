@@ -45,6 +45,24 @@ module('Acceptance | Organizations | Get', function (hooks) {
       assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/details`);
     });
 
+    module('When organization is archived', function () {
+      test('it should display who archived it', async function (assert) {
+        // given
+        server.create('organization', {
+          id: ARCHIVED_ORGANIZATION_ID,
+          name: 'My Archived Organization',
+          archivedAt: new Date('2026-01-01'),
+          features: { PLACES_MANAGEMENT: { active: true } },
+          archivistFullName: 'Rob Lochon',
+        });
+        // when
+        const screen = await visit(`/organizations/${ARCHIVED_ORGANIZATION_ID}`);
+
+        // then
+        assert.dom(screen.getByText('Archivée le 01/01/2026 par Rob Lochon.')).exists();
+      });
+    });
+
     module('Navigation tabs', function () {
       module('Details tab', function () {
         module('When organization is active', function () {

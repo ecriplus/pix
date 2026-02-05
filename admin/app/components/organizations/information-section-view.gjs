@@ -1,6 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
-import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { concat, get } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -23,32 +22,20 @@ export default class OrganizationInformationSection extends Component {
 
   <template>
     <div class="organization__data">
-      {{#if @organization.isArchived}}
-        <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
-          {{t
-            "components.organizations.information-section-view.is-archived-warning"
-            archivedAt=@organization.archivedFormattedDate
-            archivedBy=@organization.archivistFullName
-          }}
-        </PixNotificationAlert>
-      {{/if}}
+      <OrganizationDescription @organization={{@organization}} />
 
-      <div>
-        <OrganizationDescription @organization={{@organization}} />
-
-        {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-          <div class="form-actions organization-information__actions">
-            <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
-              {{t "common.actions.edit"}}
+      {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
+        <div class="form-actions organization-information__actions">
+          <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
+            {{t "common.actions.edit"}}
+          </PixButton>
+          {{#unless @organization.isArchived}}
+            <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
+              {{t "components.organizations.information-section-view.archive-organization.action"}}
             </PixButton>
-            {{#unless @organization.isArchived}}
-              <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
-                {{t "components.organizations.information-section-view.archive-organization.action"}}
-              </PixButton>
-            {{/unless}}
-          </div>
-        {{/if}}
-      </div>
+          {{/unless}}
+        </div>
+      {{/if}}
     </div>
   </template>
 }
