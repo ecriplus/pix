@@ -3,6 +3,11 @@ import {
   ADMINISTRATION_TEAM_ALPHA_ID,
   ADMINISTRATION_TEAM_ROCKET_ID,
   ADMINISTRATION_TEAM_SOLO_ID,
+  ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
+  ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+  ORGANIZATION_LEARNER_TYPE_TEACHER_ID,
+} from '../team-acquisition/constants.js';
+import {
   COLLEGE_TAG,
   COUNTRY_CANADA_CODE,
   COUNTRY_CANADA_ID,
@@ -21,14 +26,17 @@ import { createTargetProfile } from './tooling/target-profile-tooling.js';
 const { ROLES } = PIX_ADMIN;
 
 export const commonBuilder = async function ({ databaseBuilder }) {
-  // administration teams
-  _createAdministrationTeams(databaseBuilder);
-
   // countries
   _createCountries(databaseBuilder);
 
   // legal-document
   createPixOrgaTermsOfService(databaseBuilder);
+
+  // administration teams
+  _createAdministrationTeams(databaseBuilder);
+
+  // organization learner types
+  _createOrganizationLearnerTypes(databaseBuilder);
 
   // admin accounts
   _createSuperAdmin(databaseBuilder);
@@ -41,6 +49,60 @@ export const commonBuilder = async function ({ databaseBuilder }) {
   await _createPublicTargetProfile(databaseBuilder);
   await databaseBuilder.commit();
 };
+
+function _createAdministrationTeams(databaseBuilder) {
+  _createAdministrationRocketTeam(databaseBuilder);
+  _createAdministrationAlphaTeam(databaseBuilder);
+  _createAdministrationSoloTeam(databaseBuilder);
+}
+
+function _createAdministrationRocketTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_ROCKET_ID,
+    name: 'Team Rocket',
+  });
+}
+
+function _createAdministrationAlphaTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_ALPHA_ID,
+    name: 'Team Alpha',
+  });
+}
+
+function _createAdministrationSoloTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_SOLO_ID,
+    name: 'Team Solo',
+  });
+}
+
+function _createOrganizationLearnerTypes(databaseBuilder) {
+  _createStudentOrganizationLearnerType(databaseBuilder);
+  _createTeacherOrganizationLearnerType(databaseBuilder);
+  _createProfessionalOrganizationLearnerType(databaseBuilder);
+}
+
+function _createStudentOrganizationLearnerType(databaseBuilder) {
+  databaseBuilder.factory.buildOrganizationLearnerType({
+    id: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+    name: 'Student',
+  });
+}
+
+function _createTeacherOrganizationLearnerType(databaseBuilder) {
+  databaseBuilder.factory.buildOrganizationLearnerType({
+    id: ORGANIZATION_LEARNER_TYPE_TEACHER_ID,
+    name: 'Teacher',
+  });
+}
+
+function _createProfessionalOrganizationLearnerType(databaseBuilder) {
+  databaseBuilder.factory.buildOrganizationLearnerType({
+    id: ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
+    name: 'Professional',
+  });
+}
 
 function _createCountries(databaseBuilder) {
   databaseBuilder.factory.buildCertificationCpfCountry({
@@ -76,33 +138,6 @@ function _createCountries(databaseBuilder) {
     commonName: 'TURKS ET CAIQUES (ILES)',
     originalName: 'TURKS ET CAÏQUES (ÎLES)',
   });
-}
-
-function _createAdministrationRocketTeam(databaseBuilder) {
-  databaseBuilder.factory.buildAdministrationTeam({
-    id: ADMINISTRATION_TEAM_ROCKET_ID,
-    name: 'Team Rocket',
-  });
-}
-
-function _createAdministrationAlphaTeam(databaseBuilder) {
-  databaseBuilder.factory.buildAdministrationTeam({
-    id: ADMINISTRATION_TEAM_ALPHA_ID,
-    name: 'Team Alpha',
-  });
-}
-
-function _createAdministrationSoloTeam(databaseBuilder) {
-  databaseBuilder.factory.buildAdministrationTeam({
-    id: ADMINISTRATION_TEAM_SOLO_ID,
-    name: 'Team Solo',
-  });
-}
-
-function _createAdministrationTeams(databaseBuilder) {
-  _createAdministrationRocketTeam(databaseBuilder);
-  _createAdministrationAlphaTeam(databaseBuilder);
-  _createAdministrationSoloTeam(databaseBuilder);
 }
 
 function _createSuperAdmin(databaseBuilder) {

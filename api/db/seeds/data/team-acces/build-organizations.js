@@ -1,4 +1,8 @@
-import { ADMINISTRATION_TEAM_SOLO_ID, COUNTRY_CANADA_CODE } from '../common/constants.js';
+import { COUNTRY_CANADA_CODE } from '../common/constants.js';
+import {
+  ADMINISTRATION_TEAM_SOLO_ID,
+  ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
+} from '../team-acquisition/constants.js';
 
 export function buildOrganizations(databaseBuilder) {
   _buildOrganizationWithoutAdmins(databaseBuilder);
@@ -9,6 +13,8 @@ function _buildOrganizationWithoutAdmins(databaseBuilder) {
     type: 'PRO',
     name: 'Accessorama',
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
+
     countryCode: COUNTRY_CANADA_CODE,
   });
 

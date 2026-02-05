@@ -1,6 +1,7 @@
 import { COUNTRY_FRANCE_CODE } from '../../seeds/data/common/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAdministrationTeam } from './build-administration-team.js';
+import { buildOrganizationLearnerType } from './build-organization-learner-type.js';
 
 const buildOrganization = function buildOrganization({
   id = databaseBuffer.getNextId(),
@@ -25,9 +26,14 @@ const buildOrganization = function buildOrganization({
   parentOrganizationId = null,
   administrationTeamId = null,
   countryCode = COUNTRY_FRANCE_CODE,
+  organizationLearnerTypeId = null,
 } = {}) {
   if (!administrationTeamId) {
     administrationTeamId = buildAdministrationTeam().id;
+  }
+
+  if (!organizationLearnerTypeId) {
+    organizationLearnerTypeId = buildOrganizationLearnerType({ name: `Type pour organisation ${id}` }).id;
   }
 
   const values = {
@@ -53,6 +59,7 @@ const buildOrganization = function buildOrganization({
     parentOrganizationId,
     administrationTeamId,
     countryCode,
+    organizationLearnerTypeId,
   };
 
   return databaseBuffer.pushInsertable({

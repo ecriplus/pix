@@ -70,6 +70,7 @@ async function createOrganization({
   parentOrganizationId,
   administrationTeamId,
   countryCode = COUNTRY_FRANCE_CODE,
+  organizationLearnerTypeId,
 }) {
   organizationId = _buildOrganization({
     databaseBuilder,
@@ -95,6 +96,7 @@ async function createOrganization({
     parentOrganizationId,
     administrationTeamId,
     countryCode,
+    organizationLearnerTypeId,
   }).id;
 
   _buildMemberships({
@@ -221,6 +223,7 @@ function _buildOrganization({
   parentOrganizationId,
   administrationTeamId,
   countryCode,
+  organizationLearnerTypeId,
 }) {
   return databaseBuilder.factory.buildOrganization({
     id: organizationId,
@@ -245,5 +248,6 @@ function _buildOrganization({
     parentOrganizationId,
     administrationTeamId,
     countryCode,
+    organizationLearnerTypeId,
   });
 }

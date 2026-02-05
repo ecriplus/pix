@@ -24,6 +24,9 @@ export class CommonOrganizations {
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
       const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'Sco administration team' });
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'Sco organization learner type',
+      });
       await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
@@ -36,7 +39,8 @@ export class CommonOrganizations {
       });
 
       const scoOrganization = await organizationalEntitiesUsecases.createOrganization({
-        organization,
+        // TODO: add organizationLearnerTypeId in th model and remove it from here
+        organization: { ...organization, organizationLearnerTypeId: organizationLearnerType.id },
         organizationCreationValidator,
       });
 
@@ -62,6 +66,10 @@ export class CommonOrganizations {
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
       const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'Pro administration team' });
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'Pro organization learner type',
+      });
+
       await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
@@ -74,7 +82,8 @@ export class CommonOrganizations {
       });
 
       const proOrganization = await organizationalEntitiesUsecases.createOrganization({
-        organization,
+        // TODO: add organizationLearnerTypeId in th model and remove it from here
+        organization: { ...organization, organizationLearnerTypeId: organizationLearnerType.id },
         organizationCreationValidator,
       });
 
@@ -99,6 +108,9 @@ export class CommonOrganizations {
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
       const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'SUP administration team' });
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'SUP organization learner type',
+      });
       await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
@@ -111,7 +123,8 @@ export class CommonOrganizations {
       });
 
       const supOrganization = await organizationalEntitiesUsecases.createOrganization({
-        organization,
+        // TODO: add organizationLearnerTypeId in th model and remove it from here
+        organization: { ...organization, organizationLearnerTypeId: organizationLearnerType.id },
         organizationCreationValidator,
       });
 
