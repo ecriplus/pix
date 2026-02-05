@@ -128,9 +128,11 @@
             {
               "type": "element",
               "element": {
-                "id": "8f66c79b-a97e-4019-99b0-e45024016a70",
-                "type": "text",
-                "content": "<div style=\" display: flex; justify-content: center; align-items: center; margin-top:1rem; margin-left:8px;\">    <audio controls=\"\">        <source src=\"https://assets.pix.org/draft/modules/cy_phishing_ava/conversation.mp3\" type=\"audio/mpeg\">    </audio></div> <p><details><summary> Afficher la transcription</summary><p> Appel entrant — affichage&nbsp;: “Banque Nationale – Service sécurité”<br> Voix (calme, professionnelle)&nbsp;:&nbsp;Bonjour Madame Dupont, ici Julien Martin, du service sécurité de la Banque Nationale. Nous avons détecté deux tentatives de paiement suspect sur votre compte. Est-ce bien vous qui avez effectué un achat de 980 € à “DigitalMarket Hong Kong” ce matin ?<br>Marie&nbsp;: Euh… non, pas du tout. C’est bizarre… D’ailleurs, comment puis-je être sûre que vous êtes vraiment de ma banque ?<br>Julien&nbsp;:&nbsp;C’est une excellente question, madame, et je vous félicite pour votre vigilance.&nbsp;Vous pouvez vérifier que le numéro qui s’affiche commence bien par 09 72 — c’est le numéro officiel du service sécurité de la Banque Nationale. Je ne vous demanderai jamais votre mot de passe, seulement quelques éléments d’identification pour bloquer la transaction avant qu’elle ne parte.<br>Marie&nbsp;:&nbsp;D’accord… oui, j’ai bien ce numéro.&nbsp;Vous avez besoin de quelles informations exactement ?<br>Julien&nbsp;:&nbsp;Juste de votre date de naissance, de votre adresse mail et des quatre derniers chiffres de votre carte bancaire pour confirmer votre identité.<br>Marie&nbsp;:&nbsp;Très bien. Je suis né le 14/07/1985. Mon adresse mail, c’est marie.dupont@pixmail.org. Les quatre derniers chiffres sont 1234.<br>Julien&nbsp;:&nbsp;Merci.&nbsp;Maintenant, je vais vous envoyer un code de validation par SMS. Il faudra me le transmettre pour que je bloque le débit immédiatement.<br>Marie&nbsp;:&nbsp;Un code par SMS ? Mais normalement, c’est pour valider des paiements, non ?<br> Julien&nbsp;:&nbsp;Tout à fait, mais là c’est une procédure de blocage en urgence. Si vous ne me le transmettez pas immédiatement, le paiement frauduleux passera.&nbsp;Vous verrez, le SMS vient bien de votre banque, c’est donc totalement sécurisé.<br>Marie&nbsp;:&nbsp;Bon… d’accord, le code vient d’arriver. C’est 843219.<br>Julien&nbsp;: Parfait, la transaction est bloquée ! Merci pour votre réactivité, madame.Vous venez d’éviter une fraude de près de 1 000 €. Nous vous enverrons un mail de confirmation dans les 24 heures.</p></details></p>"
+                "id": "5107d0a9-091c-433f-bfcf-5e735943a794",
+                "type": "audio",
+                "title": "Conversation téléphonique",
+                "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/conversation.mp3",
+                "transcription": "<p> Appel entrant — affichage&nbsp;: «Banque Nationale – Service sécurité»<br> Voix (calme, professionnelle)&nbsp;:&nbsp;Bonjour Madame Dupont, ici Julien Martin, du service sécurité de la Banque Nationale. Nous avons détecté deux tentatives de paiement suspect sur votre compte. Est-ce bien vous qui avez effectué un achat de 980 € à “DigitalMarket Hong Kong” ce matin ?<br>Marie&nbsp;: Euh… non, pas du tout. C’est bizarre… D’ailleurs, comment puis-je être sûre que vous êtes vraiment de ma banque ?<br>Julien&nbsp;:&nbsp;C’est une excellente question, madame, et je vous félicite pour votre vigilance.&nbsp;Vous pouvez vérifier que le numéro qui s’affiche commence bien par 09 72 — c’est le numéro officiel du service sécurité de la Banque Nationale. Je ne vous demanderai jamais votre mot de passe, seulement quelques éléments d’identification pour bloquer la transaction avant qu’elle ne parte.<br>Marie&nbsp;:&nbsp;D’accord… oui, j’ai bien ce numéro.&nbsp;Vous avez besoin de quelles informations exactement ?<br>Julien&nbsp;:&nbsp;Juste de votre date de naissance, de votre adresse mail et des quatre derniers chiffres de votre carte bancaire pour confirmer votre identité.<br>Marie&nbsp;:&nbsp;Très bien. Je suis né le 14/07/1985. Mon adresse mail, c’est marie.dupont@pixmail.org. Les quatre derniers chiffres sont 1234.<br>Julien&nbsp;:&nbsp;Merci.&nbsp;Maintenant, je vais vous envoyer un code de validation par SMS. Il faudra me le transmettre pour que je bloque le débit immédiatement.<br>Marie&nbsp;:&nbsp;Un code par SMS ? Mais normalement, c’est pour valider des paiements, non ?<br> Julien&nbsp;:&nbsp;Tout à fait, mais là c’est une procédure de blocage en urgence. Si vous ne me le transmettez pas immédiatement, le paiement frauduleux passera.&nbsp;Vous verrez, le SMS vient bien de votre banque, c’est donc totalement sécurisé.<br>Marie&nbsp;:&nbsp;Bon… d’accord, le code vient d’arriver. C’est 843219.<br>Julien&nbsp;: Parfait, la transaction est bloquée ! Merci pour votre réactivité, madame.Vous venez d’éviter une fraude de près de 1 000 €. Nous vous enverrons un mail de confirmation dans les 24 heures.</p>"
               }
             },
             {
@@ -480,7 +482,7 @@
               "element": {
                 "id": "9cabbbb0-6973-4453-a99b-2fc1ba39a2be",
                 "type": "text",
-                "content": "<p>À quoi ressemblent ces arnaques reposant sur l’ingénierie sociale ? </p>"
+                "content": "<p>À quoi ressemblent ces arnaques reposant sur l’ingénierie sociale ?</p>"
               }
             }
           ]
@@ -508,7 +510,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail2.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: URGENT — Virement confidentiel requis<br>Bonjour Claire,<br>Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: URGENT — Virement confidentiel requis<br>Bonjour Claire,<br>Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -557,7 +559,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail1.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -606,7 +608,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail3.png",
                       "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: J’ai besoin de toi&nbsp;<br>Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex<br><br></p>",
+                      "alternativeText": "<p>Mail contenant les informations suivantes&nbsp;:</p><p>Objet&nbsp;: J’ai besoin de toi&nbsp;<br>Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex</p>",
                       "legend": "",
                       "licence": ""
                     },
