@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { CampaignParticipationInfo } from '../../domain/read-models/CampaignParticipationInfo.js';
@@ -11,7 +10,7 @@ const findByCampaignId = async function (campaignId) {
       qb.select([
         'campaign-participations.*',
         'assessments.state',
-        _assessmentRankByCreationDate(),
+        _assessmentRankByCreationDate(knexConn),
         'view-active-organization-learners.firstName',
         'view-active-organization-learners.lastName',
         'view-active-organization-learners.studentNumber',
@@ -39,8 +38,8 @@ const findByCampaignId = async function (campaignId) {
 
 export { findByCampaignId };
 
-function _assessmentRankByCreationDate() {
-  return knex.raw('ROW_NUMBER() OVER (PARTITION BY ?? ORDER BY ?? DESC) AS rank', [
+function _assessmentRankByCreationDate(knexConn) {
+  return knexConn.raw('ROW_NUMBER() OVER (PARTITION BY ?? ORDER BY ?? DESC) AS rank', [
     'assessments.campaignParticipationId',
     'assessments.createdAt',
   ]);
