@@ -42,7 +42,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/playlist-fetes.png",
                 "alt": "Dossier « Documents » de Marie",
-                "alternativeText": "Interface montrant le dossier « Documents » de Marie dans lequel se trouve :<br><ul><li>Un dossier « Playlist fêtes »</li><li>Des fichiers</li></ul><br>",
+                "alternativeText": "Interface montrant le dossier « Documents » de Marie dans lequel se trouve :<br><ul><li>Un dossier « Playlist fêtes »</li><li>Des fichiers</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -602,7 +602,7 @@
               "element": {
                 "id": "a940f5e1-66ee-4c43-975d-35c955b48138",
                 "type": "text",
-                "content": "@organiser4 @organiser3 like<em><strong>&nbsp;<br>[Simulateur avec indices : montrant dossier Documents vu dans l’accroche, en mode vue Liste (comme ça dates visibles)]</strong></em><br>"
+                "content": "@organiser4 @organiser3 like<em><strong>&nbsp;<br>[Simulateur avec indices : montrant dossier Documents vu dans l’accroche, en mode vue Liste (comme ça dates visibles)]</strong></em>"
               }
             },
             {
@@ -834,7 +834,7 @@
               "element": {
                 "id": "b39ab6e2-31e0-4aef-96fc-692b9de1d5bd",
                 "type": "text",
-                "content": "[Auto-embed]<br><br><strong>Feedback : </strong>Bravo ! Vous avez rangé les photos d’Alice comme elle le souhaite. Créer des dossiers et des sous-dossiers permet d’organiser des fichiers par thème et par période pour les retrouver plus facilement.<br>"
+                "content": "[Auto-embed]<br><strong>Feedback : </strong>Bravo ! Vous avez rangé les photos d’Alice comme elle le souhaite. Créer des dossiers et des sous-dossiers permet d’organiser des fichiers par thème et par période pour les retrouver plus facilement."
               }
             }
           ]
