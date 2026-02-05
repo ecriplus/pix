@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../identity-access-management/domain/constants/identity-providers.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { ScoOrganizationParticipant } from '../../domain/read-models/ScoOrganizationParticipant.js';
 
-function _setFilters(qb, { search, divisions, connectionTypes, certificability } = {}) {
+function _setFilters(qb, { search, divisions, connectionTypes, certificability } = {}, knexConn) {
   if (search) {
     filterByFullName(qb, search, 'firstName', 'lastName');
   }
@@ -45,7 +45,7 @@ function _setFilters(qb, { search, divisions, connectionTypes, certificability }
   if (certificability) {
     qb.where(function (query) {
       query.whereInArray(
-        knex.raw(
+        knexConn.raw(
           'case when "certifiableAtFromCampaign" > "certifiableAtFromLearner" OR "certifiableAtFromLearner" IS NULL then "isCertifiableFromCampaign" else "isCertifiableFromLearner" end',
         ),
         certificability,
@@ -60,7 +60,9 @@ function _setFilters(qb, { search, divisions, connectionTypes, certificability }
 }
 
 const findPaginatedFilteredScoParticipants = async function ({ organizationId, filter, page = {}, sort = {} }) {
-  const { totalScoParticipants } = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const { totalScoParticipants } = await knexConn
     .count('id', { as: 'totalScoParticipants' })
     .from('view-active-organization-learners')
     .where({ organizationId: organizationId, isDisabled: false })
@@ -87,16 +89,16 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
     });
   }
 
-  const query = knex
+  const query = knexConn
     .with(
       'participants',
-      knex
+      knexConn
         .select([
           'view-active-organization-learners.id',
           'view-active-organization-learners.lastName',
           'view-active-organization-learners.firstName',
-          knex.raw('LOWER("view-active-organization-learners"."firstName") AS "lowerFirstName"'),
-          knex.raw('LOWER("view-active-organization-learners"."lastName") AS "lowerLastName"'),
+          knexConn.raw('LOWER("view-active-organization-learners"."firstName") AS "lowerFirstName"'),
+          knexConn.raw('LOWER("view-active-organization-learners"."lastName") AS "lowerLastName"'),
           'view-active-organization-learners.birthdate',
           'users.username',
           'users.email',
@@ -108,7 +110,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
           'view-active-organization-learners.organizationId',
           'view-active-organization-learners.isCertifiable as isCertifiableFromLearner',
           'view-active-organization-learners.certifiableAt as certifiableAtFromLearner',
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('isCertifiable')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -119,7 +121,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .limit(1)
             .as('isCertifiableFromCampaign'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('sharedAt')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -130,7 +132,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .limit(1)
             .as('certifiableAtFromCampaign'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaigns.name')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -140,7 +142,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .limit(1)
             .as('campaignName'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .select('campaign-participations.status')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
             .and.whereNull('campaign-participations.deletedAt')
@@ -149,7 +151,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .limit(1)
             .as('participationStatus'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaigns.type')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
@@ -159,7 +161,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .limit(1)
             .as('campaignType'),
 
-          knex('campaign-participations')
+          knexConn('campaign-participations')
             .select('campaign-participations.createdAt')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
             .and.whereNull('campaign-participations.deletedAt')
@@ -171,7 +173,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
            * We use knex.raw here since there is no easy way to wrap
            * the query into a coalesce with knex)
            */
-          knex.raw(`(
+          knexConn.raw(`(
             coalesce (
               (
                 select count("id") as "participationCount"
@@ -203,7 +205,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
     )
     .select('*')
     .from('participants')
-    .modify(_setFilters, filter)
+    .modify(_setFilters, filter, knexConn)
     .orderBy(orderByClause);
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
