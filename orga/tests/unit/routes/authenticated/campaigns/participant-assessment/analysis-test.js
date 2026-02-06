@@ -40,7 +40,7 @@ module(
       });
 
       module('When places limit is not reached', function () {
-        test('should not redirect on main campaign page', function (assert) {
+        test('should redirect to competences page', function (assert) {
           //given
           const route = this.owner.lookup('route:authenticated/campaigns/participant-assessment/analysis');
           const campaignId = Symbol('CampaignId');
@@ -53,6 +53,7 @@ module(
           //when
           route.beforeModel({
             to: {
+              name: 'maRoute.competences',
               parent: {
                 params: {
                   campaign_id: campaignId,
@@ -62,7 +63,35 @@ module(
           });
 
           //then
-          assert.notOk(replaceWithStub.called);
+          assert.ok(
+            replaceWithStub.calledWithExactly('authenticated.campaigns.participant-assessment.analysis.competences'),
+          );
+        });
+
+        test('should redirect to tubes page', function (assert) {
+          //given
+          const route = this.owner.lookup('route:authenticated/campaigns/participant-assessment/analysis');
+          const campaignId = Symbol('CampaignId');
+
+          const modelForStub = sinon.stub(route, 'modelFor');
+          const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+
+          modelForStub.withArgs('authenticated').returns({ hasReachedMaximumPlacesLimit: false });
+
+          //when
+          route.beforeModel({
+            to: {
+              name: 'maRoute.test',
+              parent: {
+                params: {
+                  campaign_id: campaignId,
+                },
+              },
+            },
+          });
+
+          //then
+          assert.ok(replaceWithStub.calledWithExactly('authenticated.campaigns.participant-assessment.analysis.tubes'));
         });
       });
     });

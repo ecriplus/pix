@@ -85,6 +85,7 @@ const dependencies = {
   userRecommendedTrainingRepository,
 };
 
+import { checkUserHasAccessToCampaignParticipation } from './check-user-has-access-to-campaign-participation.js';
 import { computeCampaignParticipationAnalysis } from './compute-campaign-participation-analysis.js';
 import { deleteCampaignParticipation } from './delete-campaign-participation.js';
 import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
@@ -97,6 +98,7 @@ import { getCampaignParticipationStatistics } from './get-campaign-participation
 import { getCampaignParticipationsForOrganizationLearner } from './get-campaign-participations-for-organization-learner.js';
 import { getCampaignProfile } from './get-campaign-profile.js';
 import { getPoleEmploiSendings } from './get-pole-emploi-sendings.js';
+import { getResultLevelsPerTubesAndCompetences } from './get-result-levels-per-tubes-and-competences.js';
 import { getSharedCampaignParticipationProfile } from './get-shared-campaign-participation-profile.js';
 import { getUserCampaignAssessmentResult } from './get-user-campaign-assessment-result.js';
 import { getUserCampaignParticipationToCampaign } from './get-user-campaign-participation-to-campaign.js';
@@ -109,6 +111,7 @@ import { startCampaignParticipation } from './start-campaign-participation.js';
 import { updateParticipantExternalId } from './update-participant-external-id.js';
 
 const usecasesWithoutInjectedDependencies = {
+  checkUserHasAccessToCampaignParticipation,
   computeCampaignParticipationAnalysis,
   deleteCampaignParticipation,
   findCampaignParticipationsForUserManagement,
@@ -120,6 +123,7 @@ const usecasesWithoutInjectedDependencies = {
   getCampaignParticipationsForOrganizationLearner,
   getCampaignProfile,
   getPoleEmploiSendings,
+  getResultLevelsPerTubesAndCompetences,
   getSharedCampaignParticipationProfile,
   getUserCampaignAssessmentResult,
   getUserCampaignParticipationToCampaign,

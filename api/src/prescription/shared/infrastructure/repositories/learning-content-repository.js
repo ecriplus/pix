@@ -13,6 +13,11 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
+async function findByCampaignParticipationId(campaignParticipationId, locale) {
+  const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
+  return await findByCampaignId(campaignId, locale);
+}
+
 async function findByCampaignId(campaignId, locale) {
   const skills = await campaignRepository.findSkills({ campaignId });
 
@@ -143,4 +148,4 @@ async function _getLearningContentByFrameworks(frameworks, locale) {
   return frameworks;
 }
 
-export { findByCampaignId, findByFrameworkNames, findByTargetProfileId };
+export { findByCampaignId, findByCampaignParticipationId, findByFrameworkNames, findByTargetProfileId };

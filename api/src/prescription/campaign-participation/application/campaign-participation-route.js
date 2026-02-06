@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { campaignParticipationController } from './campaign-participation-controller.js';
+import { campaignParticipationPreHandlers } from './pre-handlers.js';
 
 const register = async function (server) {
   server.route([
@@ -55,6 +56,29 @@ const register = async function (server) {
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
             '- L‘utilisateur doit avoir les droits d‘accès à l‘organisation liée à la participation à la campagne',
+          "- Récupération de l'analyse d'un participant pour la participation à la campagne",
+        ],
+        tags: ['api', 'campaign-participation'],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/campaign-participations/{campaignParticipationId}/level-per-tubes-and-competences',
+      config: {
+        pre: [
+          { method: campaignParticipationPreHandlers.checkUserCanAccessCampaignParticipation },
+          { method: securityPreHandlers.checkOrganizationAccess },
+        ],
+        validate: {
+          params: Joi.object({
+            campaignParticipationId: identifiersType.campaignParticipationId,
+          }),
+        },
+        handler: campaignParticipationController.getLevelPerTubesAndCompetences,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            '- L‘utilisateur doit avoir les droits d‘accès à l‘organisation liée à la participation à la campagne',
+          '- Cette route est restreinte si la gestion des places est activée et la limite de places disponibles dépassée',
           "- Récupération de l'analyse d'un participant pour la participation à la campagne",
         ],
         tags: ['api', 'campaign-participation'],

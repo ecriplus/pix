@@ -9,5 +9,7 @@ export default class LevelsPerCompetence extends Model {
 
   @belongsTo('campaign-analysis-by-tubes-and-competence', { async: false, inverse: null })
   campaignAnalysisBytubesAndCompetences;
+  @belongsTo('campaign-participation-levels-per-tubes-and-competence', { async: false, inverse: null })
+  campaignParticipationLevelsPerTubesAndCompetence;
   @hasMany('levels-per-tube', { async: false, inverse: null }) levelsPerTube;
 }

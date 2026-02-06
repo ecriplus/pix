@@ -82,7 +82,7 @@ function buildCampaignResultLevelsPerTubesAndCompetences() {
   };
 
   const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
-    campaignId: 1,
+    id: 1,
     learningContent,
   });
 

@@ -52,7 +52,7 @@ async function computeCoverRate(
 
   const learningContent = await learningContentRepository.findByCampaignId(campaignReportId, locale);
   const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
-    campaignId: campaignReportId,
+    id: campaignReportId,
     learningContent,
   });
 

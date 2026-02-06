@@ -14,6 +14,10 @@ export default class CoverRateGauge extends Component {
     return this.args.label || 'components.cover-rate-gauge.label';
   }
 
+  get countForPlural() {
+    return this.args.countForPlural ?? 2;
+  }
+
   getGaugeSizeStyle = (level, { withExtraPercentage }) => {
     const gaugeSize = (level / MAX_REACHABLE_LEVEL) * 100;
     return htmlSafe(`width: calc(${gaugeSize}% + ${withExtraPercentage ? 5 : 0}%)`);
@@ -32,7 +36,7 @@ export default class CoverRateGauge extends Component {
         <div class="cover-rate-gauge__background {{if @hideMaxMin ' cover-rate-gauge__background--hide-max-min'}}">
 
           <label for={{this.id}} class="screen-reader-only">
-            {{t this.translation reachedLevel=@userLevel maxLevel=@tubeLevel}}
+            {{t this.translation reachedLevel=@userLevel maxLevel=@tubeLevel count=this.countForPlural}}
           </label>
 
           <progress

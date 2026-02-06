@@ -309,8 +309,8 @@
       }
     },
     "analysis-per-competence": {
-      "cover-rate-gauge-label": "Je deelnemers hebben een niveau bereikt van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}.",
-      "description": "Hieronder staan de campagnevaardigheden en hun beschrijvingen, evenals de positionering van de deelnemers.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Wat betreft de vaardigheid heeft uw deelnemer niveau {reachedLevel} bereikt op een maximaal bereikbaar niveau van {maxLevel}.} other {Wat betreft de vaardigheid hebben uw deelnemers niveau {reachedLevel} bereikt op een maximaal bereikbaar niveau van {maxLevel}.}}",
+      "description": "{count, plural, =1 {Hieronder vindt u de vaardigheden van de campagne en hun beschrijvingen, evenals de positionering van de deelnemer.} other {Hieronder vindt u de vaardigheden van de campagne en hun beschrijvingen, evenals de positionering van de deelnemers.}}",
       "table": {
         "caption": "Competenties",
         "column": {
@@ -321,8 +321,8 @@
       }
     },
     "analysis-per-tube": {
-      "cover-rate-gauge-label": "Over het onderwerp hebben je deelnemers een niveau van {reachedLevel} gehaald uit een maximaal haalbaar niveau van {maxLevel}.",
-      "description": "Hieronder vind je de campagneonderwerpen en hun beschrijvingen, evenals de standpunten van de deelnemers.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Over dit onderwerp heeft uw deelnemer niveau {reachedLevel} bereikt op een maximaal bereikbaar niveau van {maxLevel}.} other {Over dit onderwerp hebben uw deelnemers niveau {reachedLevel} bereikt op een maximaal bereikbaar niveau van {maxLevel}.}}",
+      "description": "{count, plural, =1 {Hieronder vindt u de onderwerpen van de campagne en hun beschrijvingen, evenals de positionering van de deelnemer.} other {Hieronder vindt u de onderwerpen van de campagne en hun beschrijvingen, evenals de positionering van de deelnemers.}}",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -728,9 +728,9 @@
     },
     "campaign-analysis": {
       "description": {
-        "explanation": "Elke toets beoordeelt een selectie van digitale vaardigheden uit het Pix referentiekader. De positionering geeft het gemiddelde niveau weer dat deelnemers hebben bereikt ten opzichte van het maximaal haalbare niveau op de toets.",
-        "nota-bene": "Alle gepresenteerde gegevens zijn afkomstig van gedeelde en niet verwijderde deelname aan beoordelingscampagnes en worden in realtime bijgewerkt.",
-        "resume": "Analyseer op onderwerp of vaardigheid, de positionering van je deelnemers aan deze campagne, die een selectie van onderwerpen uit het Pix-referentiekader omvat."
+        "explanation": "{count, plural, =1 {De positie weerspiegelt het gemiddelde niveau dat de deelnemer heeft bereikt ten opzichte van het maximale niveau dat in deze campagne kan worden bereikt.} other {De positie weerspiegelt het gemiddelde niveau dat de deelnemers hebben bereikt ten opzichte van het maximale niveau dat in deze campagne kan worden bereikt.}}",
+        "nota-bene": "{count, plural, =1 {Alle weergegeven gegevens zijn afkomstig van de geselecteerde deelname.} other {Alle weergegeven gegevens zijn afkomstig van gedeelde en niet-verwijderde deelnames aan evaluatiecampagnes en worden bij elk bezoek bijgewerkt.}}",
+        "resume": "{count, plural, =1 {Analyseer per vaardigheid of per onderwerp de positie van de deelnemer in deze campagne, die betrekking heeft op een selectie van onderwerpen uit het Pix-referentiekader.} other {Analyseer per vaardigheid of per onderwerp de positie van uw deelnemers in deze campagne, die betrekking heeft op een selectie van onderwerpen uit het Pix-referentiekader.}}"
       },
       "levels-correspondence": {
         "infos": {
@@ -907,57 +907,6 @@
       "tested-items": "Beoordeelde verworvenheden",
       "title": "Resultaten",
       "validated-items": "Bevestigde items"
-    },
-    "campaign-review": {
-      "description": "Afhankelijk van het geteste kader en de resultaten van de campagne, zal Pix je deze onderwerpen aanbevelen om op te focussen, gerangschikt op mate van relevantie {bubble}.",
-      "sub-table": {
-        "column": {
-          "source": {
-            "value": "Door {source}"
-          }
-        },
-        "title": "{count, plural, =1 {1 tutorial aanbevolen} other{{count} tutorials aanbevolen}} door de Pix Community"
-      },
-      "sub-title": "Aanbeveling van onderwerpen om aan te werken",
-      "table": {
-        "analysis": {
-          "caption": "Tabel met onderwerpen om aan te werken, sommige met extra kolommen met het aantal tutorials over het onderwerp en de toegang hiertoe.",
-          "column": {
-            "relevance": {
-              "ariaLabelDefaultSort": "De tabel is momenteel niet gesorteerd op relevantie. Klik om in oplopende volgorde te sorteren.",
-              "ariaLabelSortDown": "De tabel is gesorteerd op aflopende volgorde van relevantie. Klik om in oplopende volgorde te sorteren.",
-              "ariaLabelSortUp": "De tabel is gesorteerd op oplopende relevantie. Klik om aflopend te sorteren.",
-              "label": "Relevantie"
-            },
-            "subjects": "Onderwerpen ({count, plural, =0 {-} other {{count}}})",
-            "tutorial": {
-              "aria-label": "De lijst met tutorials weergeven"
-            },
-            "tutorial-count": {
-              "aria-label": "Aantal aanbevolen tutorials",
-              "value": "{count, plural, =1 {1 tutorial} other {{count} tutorials}}"
-            }
-          },
-          "recommendations": {
-            "moderately-recommended": "Enigszins aanbevolen",
-            "recommended": "Aanbevolen",
-            "strongly-recommended": "Sterk aanbevolen",
-            "very-strongly-recommended": "Zeer aanbevolen"
-          }
-        },
-        "competences": {
-          "column": {
-            "competences": "Vaardigheden ({count})",
-            "results": {
-              "label": "Resultaten",
-              "tooltip": "'<span class=\"screen-reader-only\">'De deelnemers valideerden'</span>' {result} % '<span class=\"screen-reader-only\">'van de vaardigheid {competence}.'</span>'"
-            }
-          },
-          "title": "Resultaten per vaardigheid"
-        },
-        "empty": "In afwachting van resultaten"
-      },
-      "title": "Analyse"
     },
     "campaign-settings": {
       "actions": {

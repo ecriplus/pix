@@ -403,12 +403,6 @@ function routes() {
     return campaign.campaignCollectiveResult;
   });
 
-  this.get('/campaigns/:id/analyses', (schema, request) => {
-    const campaignId = request.params.id;
-    const campaign = schema.campaigns.find(campaignId);
-    return campaign.campaignAnalysis;
-  });
-
   this.get(
     '/campaigns/:id/profiles-collection-participations',
     findPaginatedCampaignProfilesCollectionParticipationSummaries,

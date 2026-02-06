@@ -258,6 +258,48 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
     });
   });
 
+  describe('#getLevelPerTubesAndCompetences', function () {
+    let dependencies;
+    const userId = 456;
+    const campaignParticipationId = 101;
+    const locale = FRENCH_SPOKEN;
+
+    beforeEach(function () {
+      sinon.stub(usecases, 'getResultLevelsPerTubesAndCompetences');
+      const campaignResultLevelsPerTubesAndCompetencesSerializer = {
+        serialize: sinon.stub(),
+      };
+      dependencies = {
+        campaignResultLevelsPerTubesAndCompetencesSerializer,
+      };
+    });
+
+    it('should call usecase and serializer with expected parameters', async function () {
+      // given
+      const campaignParticipationAnalysis = Symbol('campaignParticipationAnalysis');
+      const expectedResults = Symbol('results');
+      usecases.getResultLevelsPerTubesAndCompetences
+        .withArgs({ campaignParticipationId, locale })
+        .resolves(campaignParticipationAnalysis);
+      dependencies.campaignResultLevelsPerTubesAndCompetencesSerializer.serialize
+        .withArgs(campaignParticipationAnalysis, true)
+        .returns(expectedResults);
+
+      const h = Symbol('h');
+      const request = {
+        auth: { credentials: { userId } },
+        params: { campaignParticipationId },
+        state: { locale },
+      };
+
+      // when
+      const response = await campaignParticipationController.getLevelPerTubesAndCompetences(request, h, dependencies);
+
+      // then
+      expect(response).to.equal(expectedResults);
+    });
+  });
+
   describe('#getCampaignParticipationsForOrganizationLearner', function () {
     const campaignId = 123;
     const organizationLearnerId = 456;

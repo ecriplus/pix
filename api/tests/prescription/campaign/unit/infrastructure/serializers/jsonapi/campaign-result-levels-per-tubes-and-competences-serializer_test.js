@@ -66,5 +66,11 @@ describe('Unit | Serializer | JSONAPI | campaign-result-levels-per-tubes-and-com
         ],
       });
     });
+
+    it('should serialize with correct type in case of campaign participation', function () {
+      const model = domainBuilder.prescription.campaign.buildCampaignResultLevelsPerTubesAndCompetences();
+      const json = serializer.serialize(model, true);
+      expect(json.data.type).to.equal('campaign-participation-levels-per-tubes-and-competences');
+    });
   });
 });

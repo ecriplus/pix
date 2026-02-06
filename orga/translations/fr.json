@@ -310,8 +310,8 @@
       }
     },
     "analysis-per-competence": {
-      "cover-rate-gauge-label": "Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
-      "description": "Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Sur la compétence votre participant a obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.} other {Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.}}",
+      "description": "{count, plural, =1 {Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement du participant.} other {Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.}}",
       "table": {
         "caption": "Compétences",
         "column": {
@@ -322,8 +322,8 @@
       }
     },
     "analysis-per-tube": {
-      "cover-rate-gauge-label": "Sur le sujet vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
-      "description": "Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
+      "cover-rate-gauge-label": "{count, plural, =1 {Sur le sujet votre participant a obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.} other {Sur le sujet vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.}}",
+      "description": "{count, plural, =1 {Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement du participant.} other {Ci-dessous, retrouvez les sujets de la campagne et leurs descriptifs ainsi que le positionnement des participants.}}",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -729,9 +729,9 @@
     },
     "campaign-analysis": {
       "description": {
-        "explanation": "Le positionnement reflète le niveau moyen atteint par les participants, par rapport au niveau maximal accessible dans cette campagne.",
-        "nota-bene": "Toutes les données présentées proviennent des participations partagées et non-supprimées des campagnes d’évaluation et sont actualisées à chaque visite.",
-        "resume": "Analysez par compétence ou par sujet, le positionnement de vos participants dans cette campagne qui porte sur une sélection de sujets du référentiel Pix."
+        "explanation": "{count, plural, =1 {Le positionnement reflète le niveau moyen atteint par le participant, par rapport au niveau maximal accessible dans cette campagne.} other {Le positionnement reflète le niveau moyen atteint par les participants, par rapport au niveau maximal accessible dans cette campagne.}}",
+        "nota-bene": "{count, plural, =1 {Toutes les données présentées proviennent de la participation sélectionnée.} other {Toutes les données présentées proviennent des participations partagées et non-supprimées des campagnes d’évaluation et sont actualisées à chaque visite.}}",
+        "resume": "{count, plural, =1 {Analysez par compétence ou par sujet, le positionnement du participant dans cette campagne qui porte sur une sélection de sujets du référentiel Pix.} other {Analysez par compétence ou par sujet, le positionnement de vos participants dans cette campagne qui porte sur une sélection de sujets du référentiel Pix.}}"
       },
       "levels-correspondence": {
         "infos": {
@@ -908,57 +908,6 @@
       "tested-items": "Acquis évalués",
       "title": "Résultats",
       "validated-items": "Acquis validés"
-    },
-    "campaign-review": {
-      "description": "En fonction du référentiel testé et des résultats de la campagne, Pix vous recommande ces sujets à travailler, classés par degré de pertinence {bubble}.",
-      "sub-table": {
-        "column": {
-          "source": {
-            "value": "Par {source}"
-          }
-        },
-        "title": "{count, plural, =1 {1 tuto recommandé} other{{count} tutos recommandés}} par la communauté Pix"
-      },
-      "sub-title": "Recommandation de sujets à travailler",
-      "table": {
-        "analysis": {
-          "caption": "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels",
-          "column": {
-            "relevance": {
-              "ariaLabelDefaultSort": "Le tableau n'est actuellement pas trié par pertinence. Cliquez pour trier par ordre croissant.",
-              "ariaLabelSortDown": "Le tableau est trié par pertinence décroissante. Cliquez pour trier en ordre croissant.",
-              "ariaLabelSortUp": "Le tableau est trié par pertinence croissante. Cliquez pour trier en ordre décroissant.",
-              "label": "Pertinence"
-            },
-            "subjects": "Sujets ({count, plural, =0 {-} other {{count}}})",
-            "tutorial": {
-              "aria-label": "Afficher la liste des tutos"
-            },
-            "tutorial-count": {
-              "aria-label": "Nombre de tutoriels recommandés",
-              "value": "{count, plural, =1 {1 tuto} other {{count} tutos}}"
-            }
-          },
-          "recommendations": {
-            "moderately-recommended": "Assez recommandé",
-            "recommended": "Recommandé",
-            "strongly-recommended": "Fortement recommandé",
-            "very-strongly-recommended": "Très recommandé"
-          }
-        },
-        "competences": {
-          "column": {
-            "competences": "Compétences ({count})",
-            "results": {
-              "label": "Résultats",
-              "tooltip": "'<span class=\"screen-reader-only\">'Les participants ont validé'</span>' {result} % '<span class=\"screen-reader-only\">'de la compétence {competence}.'</span>'"
-            }
-          },
-          "title": "Résultats par compétence"
-        },
-        "empty": "En attente de résultats"
-      },
-      "title": "Analyse"
     },
     "campaign-settings": {
       "actions": {

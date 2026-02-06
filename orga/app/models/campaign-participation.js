@@ -8,6 +8,5 @@ export default class CampaignParticipation extends Model {
 
   @belongsTo('campaign', { async: true, inverse: null }) campaign;
   @belongsTo('user', { async: true, inverse: null }) user;
-  @belongsTo('campaign-analysis', { async: true, inverse: null }) campaignAnalysis;
   @belongsTo('campaign-collective-result', { async: true, inverse: null }) campaignCollectiveResult;
 }

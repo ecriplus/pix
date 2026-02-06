@@ -21,21 +21,29 @@ export default class Analysis extends Component {
     return this.router.currentRouteName.endsWith('competences');
   }
 
+  get pluralCount() {
+    return this.args.model.isForParticipant ? 1 : 2;
+  }
+
   @action
   toggleDisplayAnalysisPerCompetences(displayPerCompetence) {
+    const routeRoot = this.args.model.isForParticipant ? 'participant-assessment' : 'campaign';
     const targetRoute = displayPerCompetence
-      ? 'authenticated.campaigns.campaign.analysis.competences'
-      : 'authenticated.campaigns.campaign.analysis.tubes';
+      ? `authenticated.campaigns.${routeRoot}.analysis.competences`
+      : `authenticated.campaigns.${routeRoot}.analysis.tubes`;
 
     this.router.transitionTo(targetRoute).then(() => {
       window.location.hash = 'details';
     });
   }
+
   <template>
     <div class="analysis-description">
-      <b class="analysis-description__resume">{{t "pages.campaign-analysis.description.resume"}}</b>
-      <p>{{t "pages.campaign-analysis.description.explanation"}}</p>
-      <p>{{t "pages.campaign-analysis.description.nota-bene"}}</p>
+      <b class="analysis-description__resume">
+        {{t "pages.campaign-analysis.description.resume" count=this.pluralCount}}
+      </b>
+      <p>{{t "pages.campaign-analysis.description.explanation" count=this.pluralCount}}</p>
+      <p>{{t "pages.campaign-analysis.description.nota-bene" count=this.pluralCount}}</p>
     </div>
     <div class="result-analysis__global-information">
       <GlobalPositioning @data={{@model.analysisData}} />

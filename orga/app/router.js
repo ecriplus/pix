@@ -75,7 +75,10 @@ Router.map(function () {
         { path: '/:campaign_id/evaluations/:campaign_participation_id' },
         function () {
           this.route('results', { path: '/resultats' });
-          this.route('analysis', { path: '/analyse' });
+          this.route('analysis', { path: '/analyse' }, function () {
+            this.route('tubes', { path: '/sujets' });
+            this.route('competences');
+          });
         },
       );
       this.route('participant-profile', { path: '/:campaign_id/profils/:campaign_participation_id' });

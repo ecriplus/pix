@@ -303,6 +303,69 @@ describe('Integration | Repository | learning-content', function () {
     });
   });
 
+  describe('#findByCampaignParticipationId', function () {
+    let campaignParticipation;
+
+    beforeEach(async function () {
+      campaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
+      ['recSkill2', 'recSkill3'].forEach((skillId) =>
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaignParticipation.campaignId, skillId }),
+      );
+      await databaseBuilder.commit();
+
+      framework1Fr.areas = [area1Fr];
+      area1Fr.competences = [competence2Fr];
+      competence2Fr.thematics = [thematic2Fr];
+      competence2Fr.tubes = [tube2Fr];
+      thematic2Fr.tubes = [tube2Fr];
+      tube2Fr.skills = [skill2Fr, skill3Fr];
+
+      framework1En.areas = [area1En];
+      area1En.competences = [competence2En];
+      competence2En.thematics = [thematic2En];
+      competence2En.tubes = [tube2En];
+      thematic2En.tubes = [tube2En];
+      tube2En.skills = [skill2Fr, skill3Fr];
+    });
+
+    it('should return frameworks, areas, competences, thematics and tubes of the skills hierarchy', async function () {
+      // when
+      const learningContentFromCampaign = await learningContentRepository.findByCampaignParticipationId(
+        campaignParticipation.id,
+      );
+      expect(learningContentFromCampaign.areas).to.deep.equal([area1Fr]);
+      expect(learningContentFromCampaign.frameworks).to.deep.equal([framework1Fr]);
+    });
+
+    it('should translate names and descriptions when specifying a locale', async function () {
+      // when
+      const learningContentFromCampaign = await learningContentRepository.findByCampaignParticipationId(
+        campaignParticipation.id,
+        'en',
+      );
+
+      // then
+      expect(learningContentFromCampaign.frameworks).to.deep.equal([framework1En]);
+    });
+
+    it('should throw a NoSkillsInCampaignError when there are no more operative skills', async function () {
+      // given
+      const otherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
+      databaseBuilder.factory.buildCampaignSkill({
+        campaignId: otherCampaignParticipation.campaignId,
+        skillId: 'recSkill4',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const err = await catchErr(learningContentRepository.findByCampaignParticipationId)(
+        otherCampaignParticipation.id,
+      );
+      // then
+      expect(err).to.be.instanceOf(NoSkillsInCampaignError);
+    });
+  });
+
   describe('#findByTargetProfileId', function () {
     context('when target profile does not have capped tubes', function () {
       it('should throw a NotFound error', async function () {
