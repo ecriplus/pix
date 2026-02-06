@@ -2,6 +2,20 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { PassageEventWithElement } from './PassageEventWithElement.js';
 import { PassageEventWithElementAnswered } from './PassageEventWithElementAnswered.js';
 
+class CustomDraftRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'CUSTOM_DRAFT_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 class CustomRetriedEvent extends PassageEventWithElement {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
     super({
@@ -170,6 +184,7 @@ class QROCMRetriedEvent extends PassageEventWithElement {
 }
 
 export {
+  CustomDraftRetriedEvent,
   CustomRetriedEvent,
   EmbedAnsweredEvent,
   EmbedRetriedEvent,

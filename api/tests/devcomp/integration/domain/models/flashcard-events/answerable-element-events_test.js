@@ -1,4 +1,5 @@
 import {
+  CustomDraftRetriedEvent,
   CustomRetriedEvent,
   EmbedAnsweredEvent,
   EmbedRetriedEvent,
@@ -15,6 +16,37 @@ import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Devcomp | Domain | Models | passage-events | answerable-element-events', function () {
+  describe('#CustomDraftRetriedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+
+      // when
+      const customDraftRetriedEvent = new CustomDraftRetriedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+      });
+
+      // then
+      expect(customDraftRetriedEvent.id).to.equal(id);
+      expect(customDraftRetriedEvent.type).to.equal('CUSTOM_DRAFT_RETRIED');
+      expect(customDraftRetriedEvent.occurredAt).to.equal(occurredAt);
+      expect(customDraftRetriedEvent.createdAt).to.equal(createdAt);
+      expect(customDraftRetriedEvent.passageId).to.equal(passageId);
+      expect(customDraftRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(customDraftRetriedEvent.data).to.deep.equal({ elementId });
+    });
+  });
+
   describe('#CustomRetriedEvent', function () {
     it('should init and keep attributes', function () {
       // given

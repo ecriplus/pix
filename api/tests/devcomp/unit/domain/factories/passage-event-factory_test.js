@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import { PassageEventFactory } from '../../../../../src/devcomp/domain/factories/passage-event-factory.js';
 import {
+  CustomDraftRetriedEvent,
   CustomRetriedEvent,
   EmbedAnsweredEvent,
   EmbedRetriedEvent,
@@ -105,6 +106,25 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(AudioTranscriptionOpenedEvent);
+      });
+    });
+
+    describe('when given a CUSTOM_DRAFT_RETRIED event', function () {
+      it('should return a CustomDraftRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'CUSTOM_DRAFT_RETRIED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(CustomDraftRetriedEvent);
       });
     });
 
