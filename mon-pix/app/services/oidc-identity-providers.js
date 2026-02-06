@@ -44,12 +44,7 @@ export default class OidcIdentityProviders extends Service {
     });
   }
 
-  // TODO: Manage this through the API
   get hasOtherIdentityProviders() {
-    if (!this.currentDomain.isFranceDomain) {
-      return false;
-    }
-
     return this.list.some((identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code));
   }
 

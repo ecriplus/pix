@@ -13,10 +13,4 @@ export default class SsoSelectionRoute extends Route {
   buildRouteInfoMetadata() {
     return { doNotTrackPage: !this.currentDomain.isFranceDomain };
   }
-
-  redirect() {
-    if (this.currentDomain.isFranceDomain) return;
-
-    this.router.transitionTo('authentication');
-  }
 }

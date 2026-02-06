@@ -227,56 +227,29 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   });
 
   module('hasOtherIdentityProviders', function () {
-    module('when in France domain', function (hooks) {
-      hooks.beforeEach(function () {
-        const currentDomainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(currentDomainService, 'isFranceDomain').value(true);
-      });
-
-      module('when there is some other identity providers', function () {
-        test('returns true', async function () {
-          // given
-          storeStub = Service.create({
-            findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-            peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-          });
-          oidcIdentityProvidersService.set('store', storeStub);
-
-          // when
-          const hasOtherIdentityProviders = await oidcIdentityProvidersService.hasOtherIdentityProviders;
-
-          // then
-          assert.strictEqual(hasOtherIdentityProviders, true);
-        });
-      });
-
-      module('when there isn’t any other identity providers', function () {
-        test('returns false', async function () {
-          // given
-          const storeStub = Service.create({
-            findAll: sinon.stub().resolves([]),
-            peekAll: sinon.stub().returns([]),
-          });
-          oidcIdentityProvidersService.set('store', storeStub);
-
-          // when
-          const hasOtherIdentityProviders = await oidcIdentityProvidersService.hasOtherIdentityProviders;
-
-          // then
-          assert.strictEqual(hasOtherIdentityProviders, false);
-        });
-      });
-    });
-
-    module('when not in France domain', function () {
-      test('returns false', async function () {
+    module('when there is some other identity providers', function () {
+      test('returns true', async function () {
         // given
-        const currentDomainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(currentDomainService, 'isFranceDomain').value(false);
-
         storeStub = Service.create({
           findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
           peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasOtherIdentityProviders = await oidcIdentityProvidersService.hasOtherIdentityProviders;
+
+        // then
+        assert.strictEqual(hasOtherIdentityProviders, true);
+      });
+    });
+
+    module('when there isn’t any other identity providers', function () {
+      test('returns false', async function () {
+        // given
+        const storeStub = Service.create({
+          findAll: sinon.stub().resolves([]),
+          peekAll: sinon.stub().returns([]),
         });
         oidcIdentityProvidersService.set('store', storeStub);
 
