@@ -87,4 +87,10 @@ export default {
     defaultValue: [],
     tags: ['team-acces', 'i18n', 'frontend'],
   },
+  enableTransactionForGetNext: {
+    type: 'boolean',
+    description: 'Enable wrapping the get next challenge usecase in a transaction',
+    defaultValue: true,
+    tags: ['captain', 'backend', 'db', 'pool'],
+  },
 };
