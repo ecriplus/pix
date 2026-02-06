@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { filterByFullName } from '../../../shared/infrastructure/utils/filter-utils.js';
@@ -64,7 +63,7 @@ export const findById = async function ({ participationId }) {
 export const isParticipationOnCombinedCourse = async function ({ combinedCourseId, participationId }) {
   const knexConnection = DomainTransaction.getConnection();
   const { count } = await knexConnection('organization_learner_participations')
-    .select(knex.raw('count(1)'))
+    .select(knexConnection.raw('count(1)'))
     .where({
       referenceId: combinedCourseId.toString(),
       'organization_learner_participations.id': participationId,
