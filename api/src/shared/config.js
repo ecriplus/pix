@@ -435,6 +435,9 @@ const configuration = (function () {
       exportSenderJobEnabled: process.env.PGBOSS_EXPORT_SENDER_JOB_ENABLED
         ? toBoolean(process.env.PGBOSS_EXPORT_SENDER_JOB_ENABLED)
         : true,
+      updateCombinedCourseJobEnabled: process.env.PGBOSS_UPDATE_COMBINED_COURSE_JOB_ENABLED
+        ? toBoolean(process.env.PGBOSS_UPDATE_COMBINED_COURSE_JOB_ENABLED)
+        : true,
     },
     poleEmploi: {
       clientId: process.env.POLE_EMPLOI_CLIENT_ID,
