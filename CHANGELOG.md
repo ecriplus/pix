@@ -1,5 +1,10 @@
 # Pix Changelog
 
+## [5.317.7](https://github.com/1024pix/pix/compare/v5.317.6...v5.317.7) (2026-02-06)
+
+### :bug: Correction
+- [FIX] Il manque un await
+
 ## [5.317.6](https://github.com/1024pix/pix/compare/v5.317.5...v5.317.6) (2026-02-06)
 
 ### :bug: Correction
