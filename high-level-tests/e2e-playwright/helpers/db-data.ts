@@ -1,3 +1,5 @@
+import { PixAdminUserData } from './certification/builders/build-pix-admin-user.ts';
+
 export const PIX_APP_USER_DATA = {
   id: 1_000_001,
   firstName: 'PixApp',
@@ -83,7 +85,7 @@ export const PIX_CERTIF_PRO_DATA = {
   ],
 };
 
-export const PIX_ADMIN_CERTIF_DATA = {
+export const PIX_ADMIN_CERTIF_DATA: PixAdminUserData = {
   id: 1_000_006,
   firstName: 'PixAdmin',
   lastName: 'RoleCertif',
