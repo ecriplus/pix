@@ -19,7 +19,6 @@ export default class OidcIdentityProviders extends Service {
   }
 
   findBySlug(providerSlug) {
-    if (!this.hasIdentityProviders) return;
     return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
   }
 

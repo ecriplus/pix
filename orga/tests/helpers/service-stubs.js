@@ -38,7 +38,6 @@ export function stubOidcIdentityProvidersService(owner, { oidcIdentityProviders,
     }
 
     findBySlug(providerSlug) {
-      if (!this.hasIdentityProviders) return;
       return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
     }
   }
