@@ -17,8 +17,8 @@ export default class ApplicationRoute extends Route {
   @service currentUser;
   @service locale;
 
-  constructor() {
-    super(...arguments);
+  activate() {
+    this.splash.hide();
 
     const trackRouteChange = (transition) => {
       if (!transition.to || transition.to.metadata?.doNotTrackPage) {
@@ -27,10 +27,6 @@ export default class ApplicationRoute extends Route {
       this.pixMetrics.trackPage();
     };
     this.router.on('routeDidChange', trackRouteChange);
-  }
-
-  activate() {
-    this.splash.hide();
   }
 
   async beforeModel(transition) {
