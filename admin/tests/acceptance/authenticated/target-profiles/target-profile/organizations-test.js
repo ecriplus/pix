@@ -108,7 +108,7 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
         await clickByName('456');
 
         // then
-        assert.deepEqual(currentURL(), '/organizations/456/team');
+        assert.deepEqual(currentURL(), '/organizations/456/details');
       });
 
       test('should be able to attach an organization with given target profile', async function (assert) {

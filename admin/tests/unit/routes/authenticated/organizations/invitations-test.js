@@ -12,7 +12,7 @@ module('Unit | Route | authenticated/organizations/get/invitations', function (h
   });
 
   module('#beforeModel', function () {
-    test('it should transition to target-profiles route when organization is archived', async function (assert) {
+    test('it should transition to details route when organization is archived', async function (assert) {
       // given
       const organization = EmberObject.create({ isArchived: true });
       const route = this.owner.lookup('route:authenticated/organizations/get/invitations');
@@ -23,7 +23,7 @@ module('Unit | Route | authenticated/organizations/get/invitations', function (h
       await route.beforeModel();
 
       // then
-      assert.ok(route.router.replaceWith.calledWith('authenticated.organizations.get.target-profiles'));
+      assert.ok(route.router.replaceWith.calledWith('authenticated.organizations.get.details'));
     });
   });
 });

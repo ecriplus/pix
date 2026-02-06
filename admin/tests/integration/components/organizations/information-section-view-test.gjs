@@ -114,6 +114,7 @@ module('Integration | Component | organizations/information-section-view', funct
         .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
         .hasText('super-sso');
     });
+
     test('it renders GAR identity provider correctly', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
@@ -315,7 +316,7 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(
           screen.getByRole('button', {
-            name: t('components.organizations.information-section-view.archive-organization'),
+            name: t('components.organizations.information-section-view.archive-organization.action'),
           }),
         )
         .exists();
@@ -343,38 +344,6 @@ module('Integration | Component | organizations/information-section-view', funct
             .nextElementSibling,
         )
         .hasText(t('common.not-specified'));
-    });
-
-    module('when organization is archived', function () {
-      test('it should display who archived it', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        const archivedAt = new Date('2022-02-22');
-        const organization = store.createRecord('organization', { archivistFullName: 'Rob Lochon', archivedAt });
-
-        // when
-        const screen = await render(
-          <template>
-            <InformationSectionView
-              @organization={{organization}}
-              @toggleEditMode={{toggleEditMode}}
-              @toggleArchivingConfirmationModal={{toggleArchivingConfirmationModal}}
-            />
-          </template>,
-        );
-
-        // then
-        assert
-          .dom(
-            screen.getByText(
-              t('components.organizations.information-section-view.is-archived-warning', {
-                archivedAt: '22/02/2022',
-                archivedBy: 'Rob Lochon',
-              }),
-            ),
-          )
-          .exists();
-      });
     });
 
     module('When organization is SCO or SUP', function () {
@@ -844,7 +813,7 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(
           screen.queryByRole('button', {
-            name: t('components.organizations.information-section-view.archive-organization'),
+            name: t('components.organizations.information-section-view.archive-organization.action'),
           }),
         )
         .doesNotExist();

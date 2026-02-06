@@ -11,19 +11,25 @@ import { t } from 'ember-intl';
   >
     <:content>
       <p>
-        Êtes-vous sûr de vouloir archiver cette organisation ?
+        {{t "components.organizations.information-section-view.archive-organization.confirmation"}}
       </p>
       <ul class="archiving-confirmation-modal__list">
-        <li class="archiving-confirmation-modal__information">Les membres actifs vont être désactivés</li>
-        <li class="archiving-confirmation-modal__information">Les invitations en attente vont être annulées</li>
-        <li class="archiving-confirmation-modal__information">Les campagnes actives vont être archivées</li>
+        <li class="archiving-confirmation-modal__information">{{t
+            "components.organizations.information-section-view.archive-organization.warnings.active-members"
+          }}</li>
+        <li class="archiving-confirmation-modal__information">{{t
+            "components.organizations.information-section-view.archive-organization.warnings.pending-invitations"
+          }}</li>
+        <li class="archiving-confirmation-modal__information">{{t
+            "components.organizations.information-section-view.archive-organization.warnings.active-campaigns"
+          }}</li>
         <li class="archiving-confirmation-modal__information">
-          Le rattachement et l'invitation de nouvelles personnes seront bloqués
+          {{t "components.organizations.information-section-view.archive-organization.warnings.linking"}}
         </li>
       </ul>
       <p>
         <strong>
-          Cette action est irréversible.
+          {{t "components.organizations.information-section-view.archive-organization.warnings.undone"}}
         </strong>
       </p>
     </:content>
@@ -33,7 +39,7 @@ import { t } from 'ember-intl';
         {{t "common.actions.cancel"}}
       </PixButton>
       <PixButton @type="submit" @size="small" {{on "click" @archiveOrganization}}>
-        Confirmer
+        {{t "common.actions.confirm"}}
       </PixButton>
     </:footer>
   </PixModal>

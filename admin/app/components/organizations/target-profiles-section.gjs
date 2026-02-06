@@ -139,9 +139,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
   <template>
     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
       <section class="page-section">
-        <header class="page-section__header">
-          <h2 class="page-section__title">Rattacher un ou plusieurs profil(s) cible(s)</h2>
-        </header>
+        <h2 class="page-section__title page-section__title--sub">Rattacher un ou plusieurs profil(s) cible(s)</h2>
         <div class="organization__forms-section">
           <form class="organization__sub-form form" {{on "submit" this.attachTargetProfiles}}>
             <PixInput

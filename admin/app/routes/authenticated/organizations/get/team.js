@@ -23,7 +23,7 @@ export default class OrganizationTeamRoute extends Route {
   beforeModel() {
     const organization = this.modelFor('authenticated.organizations.get');
     if (organization.isArchived) {
-      return this.router.replaceWith('authenticated.organizations.get.target-profiles');
+      return this.router.replaceWith('authenticated.organizations.get.details');
     }
   }
 

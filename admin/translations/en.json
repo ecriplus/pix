@@ -742,10 +742,27 @@
         },
         "required-fields-error": "Please fill in all required fields."
       },
+      "head-information": {
+        "child-organization": "Organisation fille de",
+        "parent-organization": "Organisation mère"
+      },
       "information-section-view": {
         "administration-team": "Administration team",
-        "archive-organization": "Archive organization",
-        "child-organization": "Child organization of",
+        "archive-organization":  {
+          "action": "Archive organisation",
+          "confirmation": "Do you really want to archive this organisation ?",
+          "notifications": {
+            "error": "The organisation could not be archived",
+            "success": "This organisation has successfully been archived"
+          },
+          "warnings": {
+            "active-campaigns": "Ongoing campaigns will be archived",
+            "active-members": "Active members will be deactivated",
+            "linking": "You are no longer allowed to attach new members or send invitations",
+            "pending-invitations": "Pending invitations will be cancelled",
+            "undone": "This action cannot be undone."
+          }
+        },
         "code": "Code",
         "country": {
           "label": "Country (INSEE code)",
@@ -793,11 +810,15 @@
           "title": "Features"
         },
         "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
-        "parent-organization": "Parent organization",
         "province-code": "Province code",
         "sco-activation-email": "SCO activation e-mail address",
         "sso": "SSO",
-        "type": "Type"
+        "type": "Type",
+        "update": {
+          "notifications": {
+            "success": "The organisation has successfully been updated"
+          }
+        }
       },
       "invitations": {
         "table": {
@@ -1286,6 +1307,7 @@
         "aria-label": "Organization section navigation",
         "campaigns": "Campaigns",
         "children": "Children organisations",
+        "details": "Details",
         "invitations": "Invitations",
         "places": "Places",
         "tags": "Tags",

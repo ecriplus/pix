@@ -20,12 +20,12 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
     });
   });
 
-  test('should redirect to organization team page', async function (assert) {
+  test('should redirect to organization details page', async function (assert) {
     // when
     await visit(`/organizations/${organization.id}`);
 
     // then
-    assert.strictEqual(currentURL(), `/organizations/${organization.id}/team`);
+    assert.strictEqual(currentURL(), `/organizations/${organization.id}/details`);
   });
 
   test('it should set organizations menubar item active', async function (assert) {
@@ -129,7 +129,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       this.server.create('user', { firstName: 'John', lastName: 'Doe', email: 'user@example.com' });
 
       // when
-      const screen = await visit(`/organizations/${organization.id}`);
+      const screen = await visit(`/organizations/${organization.id}/team`);
       await fillIn(
         screen.getByRole('textbox', { name: "Adresse e-mail de l'utilisateur à ajouter" }),
         'user@example.com',
@@ -153,7 +153,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       this.server.create('organization-membership', { user, organization });
 
       // when
-      const screen = await visit(`/organizations/${organization.id}`);
+      const screen = await visit(`/organizations/${organization.id}/team`);
       await fillIn(
         screen.getByRole('textbox', { name: "Adresse e-mail de l'utilisateur à ajouter" }),
         'denise@example.com',
@@ -175,7 +175,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       this.server.create('organization-membership', { user, organization });
 
       // when
-      const screen = await visit(`/organizations/${organization.id}`);
+      const screen = await visit(`/organizations/${organization.id}/team`);
       await fillIn(
         screen.getByRole('textbox', { name: "Adresse e-mail de l'utilisateur à ajouter" }),
         'unexisting@example.com',
@@ -201,7 +201,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       });
 
       // when
-      const screen = await visit(`/organizations/${organization.id}`);
+      const screen = await visit(`/organizations/${organization.id}/team`);
 
       // then
       assert.dom(screen.queryByText('Ajouter un membre')).doesNotExist();

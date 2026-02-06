@@ -131,7 +131,7 @@ module('Acceptance | Organizations | List', function (hooks) {
       await click(screen.getByRole('link', { name: '1' }));
 
       // then
-      assert.strictEqual(currentURL(), '/organizations/1/team');
+      assert.strictEqual(currentURL(), '/organizations/1/details');
     });
   });
 
