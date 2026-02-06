@@ -17,6 +17,17 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     organizationName: 'Partenaire OIDC',
     shouldCloseSession: false,
     source: 'oidc-externe',
+    isVisible: true,
+  };
+
+  const nonVisibleIdentityProvider = {
+    id: 'oidc-partner',
+    code: 'OIDC_PARTNER',
+    slug: 'partenaire-oidc',
+    organizationName: 'Partenaire OIDC',
+    shouldCloseSession: false,
+    source: 'oidc-externe',
+    isVisible: false,
   };
 
   hooks.beforeEach(function () {
@@ -59,6 +70,60 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       // then
       assert.strictEqual(allProviders.length, 1);
       assert.strictEqual(allProviders[0].code, oidcPartner.code);
+    });
+  });
+
+  module('visibleIdentityProviders', function () {
+    test('lists all the loaded visible identity providers', async function (assert) {
+      // given
+      storeStub = Service.create({
+        findAll: sinon.stub().resolves([Object.create(nonVisibleIdentityProvider), Object.create(oidcPartner)]),
+        peekAll: sinon.stub().returns([Object.create(nonVisibleIdentityProvider), Object.create(oidcPartner)]),
+      });
+      oidcIdentityProvidersService.set('store', storeStub);
+
+      // when
+      const visibleIdentityProviders = oidcIdentityProvidersService.visibleIdentityProviders;
+
+      // then
+      assert.strictEqual(visibleIdentityProviders.length, 1);
+      assert.strictEqual(visibleIdentityProviders[0].code, oidcPartner.code);
+    });
+  });
+
+  module('hasVisibleIdentityProviders', function () {
+    module('when there is at least one visible identity provider', function () {
+      test('returns true', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(nonVisibleIdentityProvider), Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(nonVisibleIdentityProvider), Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasVisibleIdentityProviders = oidcIdentityProvidersService.hasVisibleIdentityProviders;
+
+        // then
+        assert.true(hasVisibleIdentityProviders);
+      });
+    });
+
+    module('when there is no visible identity provider', function () {
+      test('returns false', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(nonVisibleIdentityProvider)]),
+          peekAll: sinon.stub().returns([Object.create(nonVisibleIdentityProvider)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasVisibleIdentityProviders = oidcIdentityProvidersService.hasVisibleIdentityProviders;
+
+        // then
+        assert.false(hasVisibleIdentityProviders);
+      });
     });
   });
 
