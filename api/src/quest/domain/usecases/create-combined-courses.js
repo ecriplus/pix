@@ -1,6 +1,7 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { COMBINED_COURSE_HEADER } from '../constants.js';
+import { Campaign } from '../models/Campaign.js';
 
 export const createCombinedCourses = withTransaction(
   async ({
@@ -13,7 +14,6 @@ export const createCombinedCourses = withTransaction(
     combinedCourseBlueprintRepository,
     recommendedModuleRepository,
     moduleRepository,
-    combinedCourseToCreateService,
     questRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER, { delimiter: ';' });
@@ -34,17 +34,37 @@ export const createCombinedCourses = withTransaction(
         const combinedCourseCode = await codeGenerator.generate(accessCodeRepository, pendingCodes);
         pendingCodes.push(combinedCourseCode);
 
-        const { campaignsToCreate, modules } = await combinedCourseToCreateService.buildModulesAndCampaigns({
-          organizationId,
-          combinedCourseBlueprint,
-          creatorId,
-          moduleRepository,
-          combinedCourseCode,
-          recommendedModuleRepository,
-          targetProfileRepository,
-        });
+        let modules = [];
 
-        const createdCampaigns = await campaignRepository.save({ campaigns: campaignsToCreate });
+        if (combinedCourseBlueprint.moduleShortIds) {
+          modules = await moduleRepository.getByShortIds({
+            moduleShortIds: combinedCourseBlueprint.moduleShortIds,
+          });
+        }
+
+        const targetProfileIds = combinedCourseBlueprint.targetProfileIds ?? [];
+        const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
+        const campaignsToCreate = [];
+        const recommendableModules =
+          targetProfileIds.length > 0
+            ? await recommendedModuleRepository.findIdsByTargetProfileIds({ targetProfileIds })
+            : [];
+
+        for (const targetProfile of targetProfiles) {
+          const campaignForCombinedCourse = Campaign.buildCampaignForCombinedCourse({
+            organizationId,
+            targetProfile,
+            creatorId,
+            combinedCourseCode,
+            recommendableModules,
+            modules,
+          });
+          campaignsToCreate.push(campaignForCombinedCourse);
+        }
+
+        const createdCampaigns = await campaignRepository.save({
+          campaigns: campaignsToCreate,
+        });
 
         const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
           name: combinedCourseInformation.name,
