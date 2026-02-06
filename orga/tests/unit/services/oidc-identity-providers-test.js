@@ -44,6 +44,96 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
+  module('list', function () {
+    test('lists all identity providers loaded', async function (assert) {
+      // given
+      storeStub = Service.create({
+        findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+        peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+      });
+      oidcIdentityProvidersService.set('store', storeStub);
+
+      // when
+      const allProviders = oidcIdentityProvidersService.list;
+
+      // then
+      assert.strictEqual(allProviders.length, 1);
+      assert.strictEqual(allProviders[0].code, oidcPartner.code);
+    });
+  });
+
+  module('hasIdentityProviders', function () {
+    module('when there is at least one provider', function () {
+      test('returns true', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
+
+        // then
+        assert.true(hasIdentityProviders);
+      });
+    });
+
+    module('when there are no providers', function () {
+      test('returns false', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([]),
+          peekAll: sinon.stub().returns([]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
+
+        // then
+        assert.false(hasIdentityProviders);
+      });
+    });
+  });
+
+  module('findBySlug', function () {
+    module('when the requested identity provider is available', function () {
+      test('returns the identity provider', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findBySlug(oidcPartner.slug);
+
+        // then
+        assert.strictEqual(identityProvider.code, oidcPartner.code);
+      });
+    });
+
+    module('when the requested identity provider is not available', function () {
+      test('returns undefined', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findBySlug('not-existing-slug');
+
+        // then
+        assert.strictEqual(identityProvider, undefined);
+      });
+    });
+  });
+
   module('getIdentityProviderNamesByAuthenticationMethods', function () {
     test('should return identity provider names for methods', function (assert) {
       // given
@@ -85,96 +175,6 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
 
       // expect
       assert.deepEqual(names, ['France Connect', 'Impots.gouv']);
-    });
-  });
-
-  module('list', function () {
-    test('lists all identity providers loaded', async function (assert) {
-      // given
-      storeStub = Service.create({
-        findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-        peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-      });
-      oidcIdentityProvidersService.set('store', storeStub);
-
-      // when
-      const allProviders = oidcIdentityProvidersService.list;
-
-      // then
-      assert.strictEqual(allProviders.length, 1);
-      assert.strictEqual(allProviders[0].code, oidcPartner.code);
-    });
-  });
-
-  module('findBySlug', function () {
-    module('when the requested identity provider is available', function () {
-      test('returns the identity provider', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const identityProvider = await oidcIdentityProvidersService.findBySlug(oidcPartner.slug);
-
-        // then
-        assert.strictEqual(identityProvider.code, oidcPartner.code);
-      });
-    });
-
-    module('when the requested identity provider is not available', function () {
-      test('returns undefined', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const identityProvider = await oidcIdentityProvidersService.findBySlug('not-existing-slug');
-
-        // then
-        assert.strictEqual(identityProvider, undefined);
-      });
-    });
-  });
-
-  module('hasIdentityProviders', function () {
-    module('when there is at least one provider', function () {
-      test('returns true', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.true(hasIdentityProviders);
-      });
-    });
-
-    module('when there are no providers', function () {
-      test('returns false', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([]),
-          peekAll: sinon.stub().returns([]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.false(hasIdentityProviders);
-      });
     });
   });
 });
