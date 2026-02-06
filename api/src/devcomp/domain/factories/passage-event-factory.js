@@ -1,5 +1,6 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 import {
+  CustomRetriedEvent,
   EmbedAnsweredEvent,
   EmbedRetriedEvent,
   QCMAnsweredEvent,
@@ -41,6 +42,8 @@ class PassageEventFactory {
         return new AudioTranscriptionOpenedEvent(eventData);
       case 'AUDIO_PLAYED':
         return new AudioPlayedEvent(eventData);
+      case 'CUSTOM_RETRIED':
+        return new CustomRetriedEvent(eventData);
       case 'EMBED_ANSWERED':
         return new EmbedAnsweredEvent(eventData);
       case 'EMBED_RETRIED':
