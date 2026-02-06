@@ -1,6 +1,7 @@
 import {
   EmbedAnsweredEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
@@ -145,6 +146,37 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
       expect(qcuRetriedEvent.passageId).to.equal(passageId);
       expect(qcuRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(qcuRetriedEvent.data).to.deep.equal({ elementId });
+    });
+  });
+
+  describe('#QCMRetriedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
+
+      // when
+      const qcmRetriedEvent = new QCMRetriedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+      });
+
+      // then
+      expect(qcmRetriedEvent.id).to.equal(id);
+      expect(qcmRetriedEvent.type).to.equal('QCM_RETRIED');
+      expect(qcmRetriedEvent.occurredAt).to.equal(occurredAt);
+      expect(qcmRetriedEvent.createdAt).to.equal(createdAt);
+      expect(qcmRetriedEvent.passageId).to.equal(passageId);
+      expect(qcmRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcmRetriedEvent.data).to.deep.equal({ elementId });
     });
   });
 

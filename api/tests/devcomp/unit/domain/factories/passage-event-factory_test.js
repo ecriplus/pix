@@ -4,6 +4,7 @@ import { PassageEventFactory } from '../../../../../src/devcomp/domain/factories
 import {
   EmbedAnsweredEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
@@ -426,6 +427,24 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(QCURetriedEvent);
+      });
+    });
+
+    describe('when given a QCM_RETRIED event', function () {
+      it('should return a QcmRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QCM_RETRIED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(QCMRetriedEvent);
       });
     });
 

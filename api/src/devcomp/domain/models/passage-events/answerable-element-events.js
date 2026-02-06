@@ -34,6 +34,20 @@ class QCMAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
+class QCMRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'QCM_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 class QCUAnsweredEvent extends PassageEventWithElementAnswered {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
     super({
@@ -116,6 +130,7 @@ class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
 export {
   EmbedAnsweredEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,

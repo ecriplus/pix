@@ -2,6 +2,7 @@ import { DomainError } from '../../../shared/domain/errors.js';
 import {
   EmbedAnsweredEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
@@ -76,6 +77,8 @@ class PassageEventFactory {
         return new QROCMAnsweredEvent(eventData);
       case 'QCM_ANSWERED':
         return new QCMAnsweredEvent(eventData);
+      case 'QCM_RETRIED':
+        return new QCMRetriedEvent(eventData);
       case 'QCU_ANSWERED':
         return new QCUAnsweredEvent(eventData);
       case 'QCU_RETRIED':
