@@ -452,9 +452,13 @@
             {
               "type": "element",
               "element": {
-                "id": "466e4d1f-ce33-4084-90d7-f6c2f22a869d",
-                "type": "text",
-                "content": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p><ul>    <li>N’utilisez pas d’informations personnelles ou publiques. 🤫</li>    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;📖</li>    <li>Créez un mot de passe long (au moins 12 caractères). 📏</li>    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
+                "id": "827bc847-0aef-41af-815b-187a0e59f4c9",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/CYMDPNOV/mdp_nov_recap.svg",
+                "alt": "Infographie décrite dans l'alternative textuelle",
+                "alternativeText": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p>\n<ul>\n    <li>N’utilisez pas d’informations personnelles ou publiques.</li>\n    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.</li>\n    <li>Créez un mot de passe long (au moins 12 caractères).</li>\n    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux.</li>\n</ul>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
