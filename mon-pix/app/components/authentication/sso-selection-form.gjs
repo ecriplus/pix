@@ -23,7 +23,9 @@ export default class SsoSelectionForm extends Component {
   }
 
   get providers() {
-    return this.oidcIdentityProviders.list.filter((provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code));
+    return this.oidcIdentityProviders.visibleIdentityProviders.filter(
+      (provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code),
+    );
   }
 
   get hasSelectedProvider() {
@@ -31,14 +33,18 @@ export default class SsoSelectionForm extends Component {
   }
 
   get selectedProviderName() {
-    const provider = this.oidcIdentityProviders.list?.find((provider) => provider.id === this.selectedProviderId);
+    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
+      (provider) => provider.id === this.selectedProviderId,
+    );
     if (!provider) return null;
 
     return provider.organizationName;
   }
 
   get shouldDisplayAccountRecoveryBanner() {
-    const provider = this.oidcIdentityProviders.list.find((provider) => provider.id === this.selectedProviderId);
+    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
+      (provider) => provider.id === this.selectedProviderId,
+    );
     if (!provider) return false;
 
     return this.oidcIdentityProviders.shouldDisplayAccountRecoveryBanner(provider.code);

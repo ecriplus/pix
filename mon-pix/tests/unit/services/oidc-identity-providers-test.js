@@ -133,43 +133,6 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
-  module('hasIdentityProviders', function () {
-    module('when there is some identity providers', function () {
-      test('returns true', async function () {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([oidcPartner]),
-          peekAll: sinon.stub().returns([oidcPartner]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = await oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.strictEqual(hasIdentityProviders, true);
-      });
-    });
-
-    module('when there is no identity providers', function () {
-      test('returns false', async function () {
-        // given
-        const storeStub = Service.create({
-          findAll: sinon.stub().resolves([]),
-          peekAll: sinon.stub().returns([]),
-        });
-        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = await oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.strictEqual(hasIdentityProviders, false);
-      });
-    });
-  });
-
   module('findByCode', function () {
     module('when the requested identity provider is available', function () {
       test('returns the identity provider', async function (assert) {
@@ -240,7 +203,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   });
 
   module('featuredIdentityProvider', function () {
-    module('when there is some identity providers containing a featured one', function () {
+    module('when there is some identity providers containing a visible featured one', function () {
       test('returns the featured identity provider', async function () {
         // given
         const currentDomainService = this.owner.lookup('service:currentDomain');
@@ -253,6 +216,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
           slug: 'fwb',
           shouldCloseSession: false,
           source: 'fwb',
+          isVisible: true,
         };
         storeStub = Service.create({
           findAll: sinon.stub().resolves([Object.create(oidcFwb)]),
@@ -273,7 +237,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       });
     });
 
-    module('when there is some identity providers but no featured one', function () {
+    module('when there is some identity providers but no visible featured one', function () {
       test('returns undefined', async function () {
         // given
         storeStub = Service.create({
@@ -310,7 +274,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   });
 
   module('hasOtherIdentityProviders', function () {
-    module('when there is some other identity providers', function () {
+    module('when there is some other visible identity providers', function () {
       test('returns true', async function () {
         // given
         storeStub = Service.create({
@@ -327,7 +291,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       });
     });
 
-    module('when there isn’t any other identity providers', function () {
+    module('when there isn’t any other visible identity providers', function () {
       test('returns false', async function () {
         // given
         const storeStub = Service.create({

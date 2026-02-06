@@ -32,7 +32,7 @@ export default class AuthenticationIdentityProviders extends Component {
   }
 
   <template>
-    {{#if this.oidcIdentityProviders.hasIdentityProviders}}
+    {{#if this.oidcIdentityProviders.hasVisibleIdentityProviders}}
       <section class="authentication-identity-providers-authentication-section">
         <h2 class="authentication-identity-providers-authentication-section__heading">
           {{#if @isForSignup}}

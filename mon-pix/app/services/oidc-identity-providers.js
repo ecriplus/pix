@@ -33,10 +33,6 @@ export default class OidcIdentityProviders extends Service {
     return this.visibleIdentityProviders.length > 0;
   }
 
-  get hasIdentityProviders() {
-    return this.list.length > 0;
-  }
-
   findByCode(identityProviderCode) {
     return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
   }
@@ -50,7 +46,7 @@ export default class OidcIdentityProviders extends Service {
 
   // TODO: Manage this through the API
   get featuredIdentityProvider() {
-    return this.list.find((identityProvider) => {
+    return this.visibleIdentityProviders.find((identityProvider) => {
       const featuredIdentityProviderCode = this.currentDomain.isFranceDomain
         ? FR_FEATURED_IDENTITY_PROVIDER_CODE
         : ORG_FEATURED_IDENTITY_PROVIDER_CODE;
@@ -60,7 +56,9 @@ export default class OidcIdentityProviders extends Service {
   }
 
   get hasOtherIdentityProviders() {
-    return this.list.some((identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code));
+    return this.visibleIdentityProviders.some(
+      (identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code),
+    );
   }
 
   shouldDisplayAccountRecoveryBanner(identityProviderCode) {
