@@ -86,30 +86,30 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
         assert.strictEqual(currentURL(), '/inscription');
       });
     });
+  });
 
-    module('When on international domain (.org)', function (hooks) {
-      hooks.beforeEach(function () {
-        domainService.getExtension.returns('org');
+  module('When on international domain (.org)', function (hooks) {
+    hooks.beforeEach(function () {
+      domainService.getExtension.returns('org');
+    });
+
+    module('When the user signs in', function () {
+      test('it redirects to the authentication page', async function (assert) {
+        // when
+        await visit('/connexion/sso-selection');
+
+        // then
+        assert.strictEqual(currentURL(), '/connexion');
       });
+    });
 
-      module('When the user signs in', function () {
-        test('it redirects to the authentication page', async function (assert) {
-          // when
-          await visit('/connexion/sso-selection');
+    module('When the user signs up', function () {
+      test('it redirects to the authentication page', async function (assert) {
+        // when
+        await visit('/inscription/sso-selection');
 
-          // then
-          assert.strictEqual(currentURL(), '/connexion');
-        });
-      });
-
-      module('When the user signs up', function () {
-        test('it redirects to the authentication page', async function (assert) {
-          // when
-          await visit('/inscription/sso-selection');
-
-          // then
-          assert.strictEqual(currentURL(), '/connexion');
-        });
+        // then
+        assert.strictEqual(currentURL(), '/connexion');
       });
     });
   });
