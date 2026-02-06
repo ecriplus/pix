@@ -14,15 +14,15 @@ export default class OidcIdentityProviders extends Service {
 
   @tracked isOidcProviderAuthenticationInProgress = false;
 
-  get list() {
-    return this.store.peekAll('oidc-identity-provider');
+  async load() {
+    const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
+    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
+      this[oidcIdentityProvider.id] = oidcIdentityProvider;
+    });
   }
 
-  getIdentityProviderNamesByAuthenticationMethods(methods) {
-    const identityProviderCodes = methods.map(({ identityProvider }) => identityProvider);
-    return this.list
-      .filter((provider) => identityProviderCodes.includes(provider.code))
-      .map((provider) => provider.organizationName);
+  get list() {
+    return this.store.peekAll('oidc-identity-provider');
   }
 
   get hasIdentityProviders() {
@@ -31,6 +31,13 @@ export default class OidcIdentityProviders extends Service {
 
   findByCode(identityProviderCode) {
     return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
+  }
+
+  getIdentityProviderNamesByAuthenticationMethods(methods) {
+    const identityProviderCodes = methods.map(({ identityProvider }) => identityProvider);
+    return this.list
+      .filter((provider) => identityProviderCodes.includes(provider.code))
+      .map((provider) => provider.organizationName);
   }
 
   // TODO: Manage this through the API
@@ -46,13 +53,6 @@ export default class OidcIdentityProviders extends Service {
 
   get hasOtherIdentityProviders() {
     return this.list.some((identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code));
-  }
-
-  async load() {
-    const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
-    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
-      this[oidcIdentityProvider.id] = oidcIdentityProvider;
-    });
   }
 
   shouldDisplayAccountRecoveryBanner(identityProviderCode) {
