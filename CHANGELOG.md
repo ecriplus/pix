@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.324.0](https://github.com/1024pix/pix/compare/v5.323.0...v5.324.0) (2026-02-06)
+
+### :rocket: Amélioration
+
+- [#14961](https://github.com/1024pix/pix/pull/14961) Afficher la nouvelle page d'analyse pour l'analyse d'une participation (PIX-2086) 
+- [#14992](https://github.com/1024pix/pix/pull/14992) ajout élément audio dans module CYPhishingAVA 
+- [#14966](https://github.com/1024pix/pix/pull/14966) Création d'un onglet de détails sur la page d'une organisation (PIX-21196). 
+- [#14907](https://github.com/1024pix/pix/pull/14907) Pouvoir désactiver certaines locales dans les applications Frontend (PIX-19702) 
+
+### :bug: Correction
+
+- [#14942](https://github.com/1024pix/pix/pull/14942) Réparer l'affichage du compteur de nombre de lettres dans le signalement (PIX-21245) 
+
+### :building_construction: Tech
+
+- [#15000](https://github.com/1024pix/pix/pull/15000) Corrige l'épuisement du pool dans le endpoint GET /assessments/{id} et dans l'util "fetchPage" pour récupérer des résultats paginés 
+- [#15007](https://github.com/1024pix/pix/pull/15007) Mettre un FT pour activer ou désactiver la transaction autour du usecase de get next challenge 
+- [#14999](https://github.com/1024pix/pix/pull/14999) Supprimer l'usage du promise.all dans le scope prescription (PIX-21410) 
+- [#14994](https://github.com/1024pix/pix/pull/14994) Utiliser la DomainTransaction dans les repository des Bounded Context Prescription (PIX-21411). 
+
+### :arrow_up: Montée de version
+
+- [#14991](https://github.com/1024pix/pix/pull/14991) Update dependency @1024pix/pix-ui to ^58.4.7 (admin) 
+- [#14996](https://github.com/1024pix/pix/pull/14996) Update dependency @1024pix/pix-ui to ^58.4.8 (admin) 
+- [#14997](https://github.com/1024pix/pix/pull/14997) Update dependency @1024pix/pix-ui to ^58.4.8 (certif) 
+- [#14884](https://github.com/1024pix/pix/pull/14884) Update dependency babel-plugin-ember-template-compilation to v4 (junior)
+
 # [5.323.0](https://github.com/1024pix/pix/compare/v5.322.1...v5.323.0) (2026-02-05)
 
 ### :rocket: Amélioration
