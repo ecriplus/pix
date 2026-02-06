@@ -1,5 +1,10 @@
 # Pix Changelog
 
+## [5.317.6](https://github.com/1024pix/pix/compare/v5.317.5...v5.317.6) (2026-02-06)
+
+### :bug: Correction
+- [FIX] Correction de syntaxe dans le fichier feature-toggles-config
+
 ## [5.317.5](https://github.com/1024pix/pix/compare/v5.317.4...v5.317.5) (2026-02-06)
 
 ### :bug: Correction
