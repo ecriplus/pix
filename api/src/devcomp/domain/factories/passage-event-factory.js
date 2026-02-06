@@ -8,6 +8,7 @@ import {
   QCUDiscoveryAnsweredEvent,
   QCURetriedEvent,
   QROCMAnsweredEvent,
+  QROCMRetriedEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
   AudioPlayedEvent,
@@ -87,6 +88,8 @@ class PassageEventFactory {
         return new QCUDeclarativeAnsweredEvent(eventData);
       case 'QCU_DISCOVERY_ANSWERED':
         return new QCUDiscoveryAnsweredEvent(eventData);
+      case 'QROCM_RETRIED':
+        return new QROCMRetriedEvent(eventData);
       case 'SHORT_VIDEO_TRANSCRIPTION_OPENED':
         return new ShortVideoTranscriptionOpenedEvent(eventData);
       case 'VIDEO_TRANSCRIPTION_OPENED':

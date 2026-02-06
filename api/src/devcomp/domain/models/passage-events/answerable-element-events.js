@@ -127,6 +127,20 @@ class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
+class QROCMRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'QROCM_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 export {
   EmbedAnsweredEvent,
   QCMAnsweredEvent,
@@ -136,4 +150,5 @@ export {
   QCUDiscoveryAnsweredEvent,
   QCURetriedEvent,
   QROCMAnsweredEvent,
+  QROCMRetriedEvent,
 };
