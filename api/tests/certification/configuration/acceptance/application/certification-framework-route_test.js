@@ -1,4 +1,5 @@
 import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
+import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../src/certification/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import {
   createServer,
@@ -6,7 +7,9 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
+  knex,
   mockLearningContent,
+  sinon,
 } from '../../../../test-helper.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 
@@ -188,6 +191,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       expect(response.result.included).to.have.lengthOf(5);
     });
   });
+
   describe('GET /api/admin/certification-frameworks/{scope}/framework-history', function () {
     it('should return the framework history for given scope ordered by start date descending', async function () {
       // given
@@ -229,6 +233,179 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
           ],
         },
       });
+    });
+  });
+
+  describe('POST /api/admin/frameworks/{scope}/new-version', function () {
+    const now = new Date('2025-06-15T12:00:00Z');
+
+    let clock;
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return 201 HTTP status code and create a new framework', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const tubeId = 'myTubeId';
+      const skill = databaseBuilder.factory.learningContent.buildSkill({
+        tubeId,
+        status: 'actif',
+      });
+      const tube1 = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
+      const challenge = databaseBuilder.factory.learningContent.buildChallenge({
+        skillId: skill.id,
+        discriminant: 2.1,
+        difficulty: 3.4,
+        status: 'validé',
+        locales: ['fr-fr'],
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'POST',
+        url: `/api/admin/frameworks/${SCOPES.CORE}/new-version`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        payload: {
+          data: {
+            attributes: {
+              tubeIds: [tube1.id],
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(201);
+      expect(response.result).to.deep.equal({
+        data: {
+          id: SCOPES.CORE,
+          type: 'certification-consolidated-framework',
+        },
+      });
+
+      const certificationVersion = await knex('certification_versions')
+        .where({ scope: SCOPES.CORE })
+        .orderBy('startDate', 'desc')
+        .first();
+
+      expect(certificationVersion).to.deep.include({
+        scope: SCOPES.CORE,
+        startDate: now,
+        expirationDate: null,
+        assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+        challengesConfiguration: {
+          challengesBetweenSameCompetence: 0,
+          variationPercent: 1,
+          defaultCandidateCapacity: 0,
+          maximumAssessmentLength: 32,
+          limitToOneQuestionPerTube: true,
+          enablePassageByAllCompetences: true,
+          defaultProbabilityToPickChallenge: 51,
+        },
+      });
+
+      const consolidatedFramework = await knex('certification-frameworks-challenges')
+        .select('discriminant', 'difficulty', 'challengeId', 'versionId')
+        .where({ versionId: certificationVersion.id });
+      expect(consolidatedFramework).to.deep.equal([
+        {
+          discriminant: null,
+          difficulty: null,
+          challengeId: challenge.id,
+          versionId: certificationVersion.id,
+        },
+      ]);
+    });
+
+    it('should create a new version and expire the previous one when a version already exists', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const existingVersionStartDate = new Date('2024-01-01');
+      const existingVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: SCOPES.CORE,
+        startDate: existingVersionStartDate,
+        expirationDate: null,
+        assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+      });
+
+      const tubeId = 'myTubeId';
+      const skill = databaseBuilder.factory.learningContent.buildSkill({
+        tubeId,
+        status: 'actif',
+      });
+      const tube1 = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
+      const challenge = databaseBuilder.factory.learningContent.buildChallenge({
+        skillId: skill.id,
+        status: 'validé',
+        locales: ['fr-fr'],
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'POST',
+        url: `/api/admin/frameworks/${SCOPES.CORE}/new-version`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        payload: {
+          data: {
+            attributes: {
+              tubeIds: [tube1.id],
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(201);
+      expect(response.result).to.deep.equal({
+        data: {
+          id: SCOPES.CORE,
+          type: 'certification-consolidated-framework',
+        },
+      });
+
+      const versions = await knex('certification_versions').where({ scope: SCOPES.CORE }).orderBy('startDate', 'asc');
+
+      expect(versions).to.have.lengthOf(2);
+
+      const [oldVersion, newVersion] = versions;
+
+      expect(oldVersion).to.deep.include({
+        id: existingVersion.id,
+        startDate: existingVersionStartDate,
+        expirationDate: now,
+      });
+
+      expect(newVersion).to.deep.include({
+        startDate: now,
+        expirationDate: null,
+      });
+
+      const frameworkChallenges = await knex('certification-frameworks-challenges')
+        .select('challengeId', 'versionId')
+        .where({ versionId: newVersion.id });
+
+      expect(frameworkChallenges).to.deep.equal([
+        {
+          challengeId: challenge.id,
+          versionId: newVersion.id,
+        },
+      ]);
     });
   });
 });
