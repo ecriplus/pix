@@ -388,7 +388,7 @@
                     {
                       "id": "baa7a3a1-c6cc-4d07-9689-d10b914d2df2",
                       "type": "qcu-discovery",
-                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique et à quoi cela est-il principalement lié ?",
+                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique ?",
                       "proposals": [
                         {
                           "id": "1",
@@ -421,7 +421,7 @@
                     {
                       "id": "26a4ad76-5345-406f-8b36-e006afbb5ab8",
                       "type": "qcu-discovery",
-                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle conclusion est la plus juste ?",
+                      "instruction": "En observant les graphiques par composantes du numérique, quelle conclusion est la plus juste ?",
                       "proposals": [
                         {
                           "id": "1",
@@ -473,7 +473,7 @@
                     {
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que l’impact environnemental ne se résume pas au carbone. Voici les impacts environnementaux en fonction de la l’indicateur étudié !&nbsp;<br>"
+                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que le numérique à divers impacts sur l'environnement.<br>"
                     }
                   ]
                 },
@@ -888,10 +888,10 @@
                   },
                   {
                     "id": "3",
-                    "content": "… l’article explique que la neutralité carbone des centres de données est déjà atteinte.",
+                    "content": "… l’article confond neutralité carbone et réduction des émissions, en laissant entendre que toute baisse d’émissions équivaut à une neutralité.",
                     "feedback": {
                       "state": "Eh non !",
-                      "diagnosis": "L’article évoque un engagement vers la neutralité carbone et des actions mises en place pour réduire les émissions.<br>Il ne dit pas que cette neutralité est déjà atteinte."
+                      "diagnosis": "L’article évoque des actions de réduction des émissions et un engagement vers la neutralité carbone, mais <strong>ne confond pas</strong> ces deux notions.<br>Il ne dit pas qu’une simple baisse des émissions suffit à atteindre la neutralité carbone."
                     }
                   },
                   {
