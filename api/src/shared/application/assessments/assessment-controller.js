@@ -43,7 +43,7 @@ const getAssessmentWithNextChallenge = async function (request) {
 
   const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId, locale });
 
-  const assessment = sharedUsecases.updateAssessmentWithNextChallenge({
+  const assessment = await sharedUsecases.updateAssessmentWithNextChallenge({
     assessment: assessmentWithoutChallenge,
     userId,
     locale,
