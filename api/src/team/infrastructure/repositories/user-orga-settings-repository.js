@@ -1,6 +1,6 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { User } from '../../../identity-access-management/domain/models/User.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UserOrgaSettingsCreationError } from '../../../shared/domain/errors.js';
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
 import { UserOrgaSettings } from '../../domain/models/UserOrgaSettings.js';
@@ -10,11 +10,14 @@ import { UserOrgaSettings } from '../../domain/models/UserOrgaSettings.js';
  * @return {Promise<{}|UserOrgaSettings>}
  */
 const findOneByUserId = async function (userId) {
-  const userOrgaSettings = await knex('user-orga-settings').where({ userId }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const userOrgaSettings = await knexConn('user-orga-settings').where({ userId }).first();
   if (!userOrgaSettings) return {};
 
-  const user = await knex('users').where('id', userId).first();
-  const currentOrganization = await knex('organizations').where('id', userOrgaSettings.currentOrganizationId).first();
+  const user = await knexConn('users').where('id', userId).first();
+  const currentOrganization = await knexConn('organizations')
+    .where('id', userOrgaSettings.currentOrganizationId)
+    .first();
 
   return new UserOrgaSettings({
     id: userOrgaSettings.id,
@@ -30,11 +33,12 @@ const findOneByUserId = async function (userId) {
  */
 const create = async function (userId, currentOrganizationId) {
   try {
-    const [userOrgaSettingsCreated] = await knex('user-orga-settings')
+    const knexConn = DomainTransaction.getConnection();
+    const [userOrgaSettingsCreated] = await knexConn('user-orga-settings')
       .insert({ userId, currentOrganizationId, createdAt: new Date() })
       .returning('*');
-    const user = await knex('users').where('id', userId).first();
-    const currentOrganization = await knex('organizations')
+    const user = await knexConn('users').where('id', userId).first();
+    const currentOrganization = await knexConn('organizations')
       .where('id', userOrgaSettingsCreated.currentOrganizationId)
       .first();
 
@@ -57,12 +61,13 @@ const create = async function (userId, currentOrganizationId) {
  * @return {Promise<UserOrgaSettings>}
  */
 const update = async function (userId, organizationId) {
-  const [userOrgaSettingsUpdated] = await knex('user-orga-settings')
+  const knexConn = DomainTransaction.getConnection();
+  const [userOrgaSettingsUpdated] = await knexConn('user-orga-settings')
     .where({ userId })
     .update({ currentOrganizationId: organizationId, updatedAt: new Date() })
     .returning('*');
-  const user = await knex('users').where('id', userId).first();
-  const currentOrganization = await knex('organizations')
+  const user = await knexConn('users').where('id', userId).first();
+  const currentOrganization = await knexConn('organizations')
     .where('id', userOrgaSettingsUpdated.currentOrganizationId)
     .first();
   return new UserOrgaSettings({
@@ -79,17 +84,18 @@ const update = async function (userId, organizationId) {
  * @return {Promise<UserOrgaSettings>}
  */
 const createOrUpdate = async function ({ userId, organizationId }) {
+  const knexConn = DomainTransaction.getConnection();
   const knexUserOrgaSetting = (
-    await knex('user-orga-settings')
+    await knexConn('user-orga-settings')
       .insert({ userId, currentOrganizationId: organizationId })
       .onConflict('userId')
       .merge()
       .returning('*')
   )[0];
 
-  const user = await knex('users').where({ id: knexUserOrgaSetting.userId }).first();
+  const user = await knexConn('users').where({ id: knexUserOrgaSetting.userId }).first();
 
-  const organization = await knex('organizations').where({ id: knexUserOrgaSetting.currentOrganizationId }).first();
+  const organization = await knexConn('organizations').where({ id: knexUserOrgaSetting.currentOrganizationId }).first();
 
   return new UserOrgaSettings({
     id: knexUserOrgaSetting.id,
