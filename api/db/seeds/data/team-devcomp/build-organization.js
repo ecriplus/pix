@@ -1,11 +1,14 @@
 import {
-  ADMINISTRATION_TEAM_ALPHA_ID,
-  ADMINISTRATION_TEAM_ROCKET_ID,
   FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID,
   FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
 import { organization } from '../common/tooling/index.js';
+import {
+  ADMINISTRATION_TEAM_ALPHA_ID,
+  ADMINISTRATION_TEAM_ROCKET_ID,
+  ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+} from '../team-acquisition/constants.js';
 import { NB_TARGET_PROFILE_SHARES, TEAM_DEVCOMP_ORGANIZATION_ID } from './constants.js';
 
 export async function createDevcompOrganization({ databaseBuilder, adminId }) {
@@ -23,6 +26,7 @@ export async function createDevcompOrganization({ databaseBuilder, adminId }) {
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ROCKET_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   return _buildOrganizationsIdForTargetProfileShares({
@@ -45,6 +49,7 @@ async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, ad
       adminIds: [adminId],
       memberIds: [USER_ID_MEMBER_ORGANIZATION],
       administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+      organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     });
 
     result.push(organizationId);

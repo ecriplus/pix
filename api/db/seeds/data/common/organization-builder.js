@@ -2,6 +2,10 @@ import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import {
   ADMINISTRATION_TEAM_ALPHA_ID,
   ADMINISTRATION_TEAM_ROCKET_ID,
+  ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
+  ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+} from '../team-acquisition/constants.js';
+import {
   AGRICULTURE_TAG,
   COLLEGE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
@@ -41,6 +45,7 @@ async function _createScoOrganization(databaseBuilder) {
     ],
     tagIds: [COLLEGE_TAG.id],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   await organization.createOrganization({
@@ -57,6 +62,7 @@ async function _createScoOrganization(databaseBuilder) {
       { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID, params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]) },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   await organization.createOrganization({
@@ -71,6 +77,7 @@ async function _createScoOrganization(databaseBuilder) {
     features: [{ id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID }],
     tagIds: [AGRICULTURE_TAG.id],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 }
 
@@ -86,6 +93,7 @@ async function _createSupOrganization(databaseBuilder) {
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
     features: [{ id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID }],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   await organization.createOrganization({
@@ -99,6 +107,7 @@ async function _createSupOrganization(databaseBuilder) {
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
     features: [{ id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID }],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 }
 
@@ -123,6 +132,7 @@ async function _createProOrganization(databaseBuilder) {
       { id: FEATURE_CAMPAIGN_WITHOUT_USER_PROFILE_ID },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ROCKET_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
   });
 
   await organization.createOrganization({
@@ -139,6 +149,7 @@ async function _createProOrganization(databaseBuilder) {
       { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_GENERIC_ID } },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ROCKET_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_PROFESSIONAL_ID,
   });
 }
 

@@ -1,6 +1,7 @@
-import { ADMINISTRATION_TEAM_SOLO_ID, COUNTRY_CANADA_CODE } from '../common/constants.js';
+import { COUNTRY_CANADA_CODE } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
+import { ADMINISTRATION_TEAM_SOLO_ID, ORGANIZATION_LEARNER_TYPE_STUDENT_ID } from '../team-acquisition/constants.js';
 import createAutonomousCourses from './autonomous-courses/create-autonomous-courses.js';
 import {
   ASSESSMENT_CAMPAIGN_PIX_ID,
@@ -32,6 +33,7 @@ function createScoOrganization(databaseBuilder) {
     isManagingStudents: false,
     externalId: 'EVAL',
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     countryCode: COUNTRY_CANADA_CODE,
   });
   databaseBuilder.factory.buildUser.withRawPassword({

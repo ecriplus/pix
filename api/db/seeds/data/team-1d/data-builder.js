@@ -1,5 +1,4 @@
 import {
-  ADMINISTRATION_TEAM_ALPHA_ID,
   FEATURE_LEARNER_IMPORT_ID,
   FEATURE_MISSIONS_MANAGEMENT_ID,
   FEATURE_ORALIZATION_ID,
@@ -9,6 +8,7 @@ import {
 } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
+import { ADMINISTRATION_TEAM_ALPHA_ID, ORGANIZATION_LEARNER_TYPE_STUDENT_ID } from '../team-acquisition/constants.js';
 
 const TEAM_1D_OFFSET_ID = 9000;
 
@@ -56,6 +56,7 @@ async function _createSco1dOrganizations(databaseBuilder) {
       { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_ONDE_ID } },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   const sessionExpirationDate = new Date();
@@ -149,6 +150,7 @@ async function _createSco1dOrganizations(databaseBuilder) {
       { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_ONDE_ID } },
     ],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   });
 
   await databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearnerFeature({

@@ -1,12 +1,12 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import {
-  ADMINISTRATION_TEAM_SOLO_ID,
   COUNTRY_FRANCE_CODE,
   COUNTRY_TOGO_CODE,
   PIX_PUBLIC_TARGET_PROFILE_ID,
   REAL_PIX_SUPER_ADMIN_ID,
 } from '../common/constants.js';
+import { ADMINISTRATION_TEAM_SOLO_ID, ORGANIZATION_LEARNER_TYPE_STUDENT_ID } from '../team-acquisition/constants.js';
 import {
   PIX_ORGA_ADMIN_ID,
   PIX_ORGA_ADMIN_LEAVING_ID,
@@ -38,6 +38,7 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     countryCode: COUNTRY_FRANCE_CODE,
   });
   databaseBuilder.factory.buildOrganization({
@@ -52,6 +53,7 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
     parentOrganizationId: SCO_ORGANIZATION_ID,
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     countryCode: COUNTRY_TOGO_CODE,
   });
 
@@ -100,6 +102,7 @@ function _buildJosephineBaker(databaseBuilder) {
     identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     countryCode: COUNTRY_FRANCE_CODE,
   });
 
@@ -124,6 +127,7 @@ function _buildScoManagingStudentsNoGarOrganization(databaseBuilder) {
     provinceCode: '13',
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
     countryCode: COUNTRY_FRANCE_CODE,
   });
 

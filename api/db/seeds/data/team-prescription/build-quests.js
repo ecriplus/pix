@@ -13,7 +13,6 @@ import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { knex } from '../../../knex-database-connection.js';
 import {
-  ADMINISTRATION_TEAM_SOLO_ID,
   AEFE_TAG,
   COUNTRY_FRANCE_CODE,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
@@ -24,6 +23,7 @@ import {
 } from '../common/constants.js';
 import { createAssessmentCampaign } from '../common/tooling/campaign-tooling.js';
 import { createTargetProfile } from '../common/tooling/target-profile-tooling.js';
+import { ADMINISTRATION_TEAM_SOLO_ID, ORGANIZATION_LEARNER_TYPE_STUDENT_ID } from '../team-acquisition/constants.js';
 import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
@@ -107,6 +107,7 @@ const ORGANIZATION = {
   type: 'SCO',
   isManagingStudents: true,
   administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+  organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
   countryCode: COUNTRY_FRANCE_CODE,
 };
 

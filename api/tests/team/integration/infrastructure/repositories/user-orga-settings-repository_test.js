@@ -34,6 +34,7 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
     'sessionExpirationDate',
     'administrationTeamId',
     'countryCode',
+    'organizationLearnerTypeId',
   ];
 
   let clock;
@@ -108,7 +109,8 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
       const userOrgaSettings = databaseBuilder.factory.buildUserOrgaSettings({
         userId: user.id,
       });
-      const newOrganization = databaseBuilder.factory.buildOrganization();
+      const organizationLearnerTypeId = databaseBuilder.factory.buildOrganizationLearnerType().id;
+      const newOrganization = databaseBuilder.factory.buildOrganization({ organizationLearnerTypeId });
       await databaseBuilder.commit();
 
       // when
@@ -118,10 +120,7 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
       expect(updatedUserOrgaSettings.id).to.equal(userOrgaSettings.id);
       expect(updatedUserOrgaSettings.updatedAt).to.deep.equal(now);
       expect(updatedUserOrgaSettings.user).to.deep.include(user);
-      // TODO: remove omit when epix https://1024pix.atlassian.net/browse/PIX-19561 is completed
-      expect(_.omit(updatedUserOrgaSettings.currentOrganization, 'organizationLearnerTypeId')).to.deep.equal(
-        newOrganization,
-      );
+      expect(updatedUserOrgaSettings.currentOrganization).to.deep.equal(newOrganization);
     });
   });
 
