@@ -50,6 +50,24 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
+  module('list', function () {
+    test('lists all identity providers loaded', async function (assert) {
+      // given
+      storeStub = Service.create({
+        findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+        peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+      });
+      oidcIdentityProvidersService.set('store', storeStub);
+
+      // when
+      const allProviders = oidcIdentityProvidersService.list;
+
+      // then
+      assert.strictEqual(allProviders.length, 1);
+      assert.strictEqual(allProviders[0].code, oidcPartner.code);
+    });
+  });
+
   module('hasIdentityProviders', function () {
     module('when there is some identity providers', function () {
       test('returns true', async function () {
