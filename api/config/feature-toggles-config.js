@@ -75,12 +75,6 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
   },
-  disabledLocalesInFrontend: {
-    type: 'array',
-    description: 'Disable the specified locales',
-    defaultValue: [],
-    tags: ['team-acces', 'i18n', 'frontend'],
-  },
   enableTransactionForGetNext: {
     type: 'boolean',
     description: 'Enable wrapping the get next challenge usecase in a transaction',
