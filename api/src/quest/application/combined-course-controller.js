@@ -95,6 +95,7 @@ const createCombinedCourses = async function (request, h) {
   const stream = createReadStream(filePath);
   const payload = await getDataBuffer(stream);
   await usecases.createCombinedCourses({ payload });
+
   return h.response(null).code(204);
 };
 

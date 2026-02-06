@@ -12,6 +12,7 @@ export const createCombinedCourse = async ({
   recommendedModuleRepository,
   moduleRepository,
   combinedCourseToCreateService,
+  questRepository,
 }) => {
   const combinedCourseBlueprint = await combinedCourseBlueprintRepository.findById({
     id: combinedCourseBlueprintId,
@@ -41,5 +42,5 @@ export const createCombinedCourse = async ({
     modulesByShortId: Object.groupBy(modules, ({ shortId }) => shortId),
   });
 
-  return combinedCourseRepository.save({ combinedCourse });
+  return combinedCourseRepository.save({ combinedCourse, questRepository });
 };

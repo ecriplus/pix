@@ -5,7 +5,7 @@ import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js
 
 describe('Quest | Integration | Repository | quest', function () {
   describe('#saveInBatch', function () {
-    it('should save quests', async function () {
+    it('should save quests and return their ids', async function () {
       const { id: rewardId } = databaseBuilder.factory.buildAttestation();
       const questInDatabase = databaseBuilder.factory.buildQuest({
         createdAt: new Date('2020-01-01T00:00:00Z'),
@@ -30,7 +30,7 @@ describe('Quest | Integration | Repository | quest', function () {
       });
 
       // when
-      await questRepository.saveInBatch({
+      const result = await questRepository.saveInBatch({
         quests: [expectedNewQuest, new Quest(questInDatabase)],
       });
 
@@ -53,6 +53,7 @@ describe('Quest | Integration | Repository | quest', function () {
           }),
         ),
       );
+      expect(result[0]).to.equal(thirdQuest.id);
     });
   });
 

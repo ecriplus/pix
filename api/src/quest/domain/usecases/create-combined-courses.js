@@ -14,6 +14,7 @@ export const createCombinedCourses = withTransaction(
     recommendedModuleRepository,
     moduleRepository,
     combinedCourseToCreateService,
+    questRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER, { delimiter: ';' });
     const csvData = csvParser.parse();
@@ -58,6 +59,6 @@ export const createCombinedCourses = withTransaction(
       }
     }
 
-    await combinedCourseRepository.saveInBatch({ combinedCourses });
+    await combinedCourseRepository.saveInBatch({ combinedCourses, questRepository });
   },
 );

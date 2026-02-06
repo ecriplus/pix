@@ -29,19 +29,35 @@ const saveInBatch = async ({ quests }) => {
   const knexConn = DomainTransaction.getConnection();
 
   const chunks = chunk(quests, 10);
-
+  const questIds = [];
   for (const chunk of chunks) {
     const dtoToSaveInDB = chunk.map((quest) => {
       const dto = quest.toDTO();
       return {
         ...dto,
-        eligibilityRequirements: JSON.stringify(dto.eligibilityRequirements),
-        successRequirements: JSON.stringify(dto.successRequirements),
+        eligibilityRequirements: quest.eligibilityRequirements ? JSON.stringify(dto.eligibilityRequirements) : [],
+        successRequirements: quest.successRequirements ? JSON.stringify(dto.successRequirements) : [],
         updatedAt: new Date(),
       };
     });
-    await knexConn('quests').insert(dtoToSaveInDB).onConflict('id').merge();
+    const questsInserted = await knexConn('quests').insert(dtoToSaveInDB).onConflict('id').merge().returning('id');
+    questsInserted.map((quest) => questIds.push(quest.id));
   }
+  return questIds;
+};
+
+const save = async ({ quest }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const dto = quest.toDTO();
+
+  const dtoToSaveInDB = {
+    ...dto,
+    eligibilityRequirements: quest.eligibilityRequirements ? JSON.stringify(dto.eligibilityRequirements) : [],
+    successRequirements: quest.successRequirements ? JSON.stringify(dto.successRequirements) : [],
+    updatedAt: new Date(),
+  };
+  const result = await knexConn('quests').insert(dtoToSaveInDB).onConflict('id').merge().returning('id');
+  return result[0].id;
 };
 
 const deleteByIds = async ({ questIds }) => {
@@ -49,4 +65,4 @@ const deleteByIds = async ({ questIds }) => {
   return knexConn('quests').whereIn('id', questIds).delete();
 };
 
-export { deleteByIds, findAllWithReward, findById, saveInBatch };
+export { deleteByIds, findAllWithReward, findById, save, saveInBatch };
