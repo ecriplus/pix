@@ -16,16 +16,15 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     const frameworks = _createFrameworks(store);
     sinon.stub(store, 'findAll').withArgs('framework').resolves(frameworks);
 
-    const complementaryCertification = store.createRecord('complementary-certification', {
-      id: '0',
-      key: 'DROIT',
-      label: 'Pix+Droit',
+    store.createRecord('certification-framework', {
+      id: 'DROIT',
+      name: 'Pix+Droit',
     });
 
     const serviceRouter = this.owner.lookup('service:router');
     sinon
       .stub(serviceRouter, 'currentRoute')
-      .value({ parent: { parent: { params: { certification_framework_key: complementaryCertification.key } } } });
+      .value({ parent: { parent: { params: { certification_framework_key: 'DROIT' } } } });
 
     // when
     const screen = await render(<template><CreationForm /></template>);
@@ -33,7 +32,7 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     assert
       .dom(
         screen.getByRole('button', {
-          name: t('components.complementary-certifications.item.framework.creation-form.submit-button'),
+          name: t('components.certification-frameworks.item.framework.creation-form.submit-button'),
         }),
       )
       .hasAttribute('aria-disabled');
@@ -50,16 +49,14 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     assert.ok(within(table).getByRole('columnheader', { name: 'Compatibilité' }));
     assert.ok(
       screen.getByRole('heading', {
-        name: t('components.complementary-certifications.item.framework.creation-form.title', {
-          complementaryCertificationLabel: complementaryCertification.label,
-        }),
+        name: t('components.certification-frameworks.item.framework.creation-form.title'),
         level: 2,
       }),
     );
     assert
       .dom(
         screen.getByRole('button', {
-          name: t('components.complementary-certifications.item.framework.creation-form.submit-button'),
+          name: t('components.certification-frameworks.item.framework.creation-form.submit-button'),
         }),
       )
       .doesNotHaveAttribute('aria-disabled');

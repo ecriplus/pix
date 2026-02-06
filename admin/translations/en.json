@@ -396,6 +396,15 @@
       }
     },
     "certification-frameworks": {
+      "item": {
+        "framework": {
+          "creation-form": {
+            "submit-button": "Submit the new version of the certification framework ",
+            "success-notification": "The new version of the certification framework  has been successfully created.",
+            "title": "Creating a new version of the certification framework for {frameworkLabel}"
+          }
+        }
+      },
       "labels": {
         "CLEA": "CléA Numérique",
         "CORE": "Pix Core",
@@ -508,11 +517,6 @@
         "certification-framework": "Complementary certification",
         "framework": {
           "create-button": "Create a new version of the certification framework",
-          "creation-form": {
-            "submit-button": "Submit the new certification framework",
-            "success-notification": "The new certification framework has been successfully created.",
-            "title": "Creating a new version of the certification framework for {complementaryCertificationLabel}"
-          },
           "details": {
             "title": "Current certification framework details"
           },
@@ -748,7 +752,7 @@
       },
       "information-section-view": {
         "administration-team": "Administration team",
-        "archive-organization":  {
+        "archive-organization": {
           "action": "Archive organisation",
           "confirmation": "Do you really want to archive this organisation ?",
           "notifications": {

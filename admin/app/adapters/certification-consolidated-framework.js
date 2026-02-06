@@ -4,9 +4,8 @@ export default class CertificationConsolidatedFrameworkAdapter extends Applicati
   namespace = 'api/admin';
 
   createRecord(store, type, snapshot) {
-    const complementaryCertification = snapshot.record.get('complementaryCertification');
-
-    const url = `${this.buildURL('complementary-certifications', complementaryCertification.get('key'))}/consolidated-framework`;
+    const scope = snapshot.attr('scope');
+    const url = `${this.host}/${this.namespace}/frameworks/${scope}/new-version`;
     const payload = {
       data: {
         data: {
