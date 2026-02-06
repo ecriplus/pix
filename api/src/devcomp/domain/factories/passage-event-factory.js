@@ -5,6 +5,7 @@ import {
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
+  QCURetriedEvent,
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
@@ -77,6 +78,8 @@ class PassageEventFactory {
         return new QCMAnsweredEvent(eventData);
       case 'QCU_ANSWERED':
         return new QCUAnsweredEvent(eventData);
+      case 'QCU_RETRIED':
+        return new QCURetriedEvent(eventData);
       case 'QCU_DECLARATIVE_ANSWERED':
         return new QCUDeclarativeAnsweredEvent(eventData);
       case 'QCU_DISCOVERY_ANSWERED':

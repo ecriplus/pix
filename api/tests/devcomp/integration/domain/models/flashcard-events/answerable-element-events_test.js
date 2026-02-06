@@ -4,8 +4,10 @@ import {
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
+  QCURetriedEvent,
   QROCMAnsweredEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
+import { QABRetriedEvent } from '../../../../../../src/devcomp/domain/models/passage-events/qab-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
@@ -112,6 +114,37 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
       expect(qcuAnsweredEvent.passageId).to.equal(passageId);
       expect(qcuAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(qcuAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
+  describe('#QCURetriedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
+
+      // when
+      const qcuRetriedEvent = new QCURetriedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+      });
+
+      // then
+      expect(qcuRetriedEvent.id).to.equal(id);
+      expect(qcuRetriedEvent.type).to.equal('QCU_RETRIED');
+      expect(qcuRetriedEvent.occurredAt).to.equal(occurredAt);
+      expect(qcuRetriedEvent.createdAt).to.equal(createdAt);
+      expect(qcuRetriedEvent.passageId).to.equal(passageId);
+      expect(qcuRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcuRetriedEvent.data).to.deep.equal({ elementId });
     });
   });
 
