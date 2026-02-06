@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.317.8](https://github.com/1024pix/pix/compare/v5.317.7...v5.317.8) (2026-02-06)
+
+### :bug: Correction
+- [FIX] Désactiver le job ComputeCertificabilityJob avec une variable d'env
+- [FIX] Corriger les connexion dans le ComputeCertificabilityJob
+
 ## [5.317.7](https://github.com/1024pix/pix/compare/v5.317.6...v5.317.7) (2026-02-06)
 
 ### :bug: Correction
