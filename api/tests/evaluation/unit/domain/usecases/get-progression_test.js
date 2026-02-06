@@ -1,5 +1,5 @@
 import { getProgression } from '../../../../../src/evaluation/domain/usecases/get-progression.js';
-import { ForbiddenAccess, NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -23,230 +23,10 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
     assessmentRepository = { getByAssessmentIdAndUserId: sinon.stub() };
     competenceEvaluationRepository = { getByAssessmentId: sinon.stub() };
     skillRepository = { findActiveByCompetenceId: sinon.stub() };
-    improvementService = { filterKnowledgeElementsIfImproving: sinon.stub() };
+    improvementService = { filterKnowledgeElements: sinon.stub() };
   });
 
   describe('#getProgression', function () {
-    let assessment, campaignParticipation, skillIds, targetProfile;
-
-    context('when the assessment exists and is campaign', function () {
-      beforeEach(function () {
-        targetProfile = domainBuilder.buildTargetProfile();
-        assessment = domainBuilder.buildAssessment({
-          id: assessmentId,
-          userId,
-          state: 'completed',
-          type: Assessment.types.CAMPAIGN,
-          campaignParticipationId: 456,
-        });
-        skillIds = [domainBuilder.buildSkill().id];
-        const campaign = domainBuilder.buildCampaign({ id: 123, targetProfile });
-        campaignParticipation = domainBuilder.buildCampaignParticipation({
-          id: assessment.campaignParticipationId,
-          campaign,
-        });
-
-        assessmentRepository.getByAssessmentIdAndUserId.withArgs(assessment.id, userId).resolves(assessment);
-        campaignParticipationRepository.get
-          .withArgs(assessment.campaignParticipationId)
-          .resolves(campaignParticipation);
-        campaignRepository.findSkillIds.withArgs({ campaignId: campaignParticipation.campaignId }).resolves(skillIds);
-      });
-
-      it('should throw when campaignParticipationId is not linked to the assessment', async function () {
-        // when
-        assessment = domainBuilder.buildAssessment({
-          id: assessmentId,
-          userId,
-          state: 'completed',
-          type: Assessment.types.CAMPAIGN,
-          campaignParticipationId: null,
-        });
-        assessmentRepository.getByAssessmentIdAndUserId.withArgs(assessment.id, userId).resolves(assessment);
-
-        // given
-        domainBuilder.buildProgression({
-          id: progressionId,
-          skillIds,
-          knowledgeElements: [],
-          isProfileCompleted: assessment.isCompleted(),
-        });
-
-        // when
-        const error = await catchErr(getProgression)({
-          userId,
-          progressionId,
-          assessmentRepository,
-          campaignParticipationRepository,
-          competenceEvaluationRepository,
-          knowledgeElementRepository,
-          skillRepository,
-          campaignRepository,
-          improvementService,
-        });
-
-        // then
-        expect(error).instanceOf(ForbiddenAccess);
-      });
-
-      it('should return the progression associated to the assessment', async function () {
-        // given
-        const expectedProgression = domainBuilder.buildProgression({
-          id: progressionId,
-          skillIds,
-          knowledgeElements: [],
-          isProfileCompleted: assessment.isCompleted(),
-        });
-
-        // when
-        const progression = await getProgression({
-          userId,
-          progressionId,
-          assessmentRepository,
-          campaignParticipationRepository,
-          competenceEvaluationRepository,
-          knowledgeElementRepository,
-          skillRepository,
-          campaignRepository,
-          improvementService,
-        });
-
-        // then
-        expect(progression).to.deep.equal(expectedProgression);
-      });
-
-      context('when the assessment is improving', function () {
-        let knowledgeElements, knowledgeElementsFiltered;
-
-        beforeEach(function () {
-          assessment.state = 'improving';
-          knowledgeElements = [domainBuilder.buildKnowledgeElement(), domainBuilder.buildKnowledgeElement()];
-          knowledgeElementsFiltered = [knowledgeElements[0]];
-          knowledgeElementRepository.findUniqByUserId.resolves(knowledgeElements);
-          campaignParticipationRepository.isRetrying
-            .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
-            .resolves(false);
-        });
-
-        it('should filter the knowledge elements', async function () {
-          // when
-          await getProgression({
-            userId,
-            progressionId,
-            assessmentRepository,
-            campaignParticipationRepository,
-            competenceEvaluationRepository,
-            knowledgeElementRepository,
-            skillRepository,
-            campaignRepository,
-            improvementService,
-          });
-
-          // then
-          expect(improvementService.filterKnowledgeElementsIfImproving).to.have.been.calledWithExactly({
-            knowledgeElements,
-            assessment,
-            isRetrying: false,
-          });
-        });
-
-        it('should return the progression associated to the assessment', async function () {
-          // given
-          improvementService.filterKnowledgeElementsIfImproving
-            .withArgs({ knowledgeElements, assessment, isRetrying: false })
-            .returns(knowledgeElementsFiltered);
-          const expectedProgression = domainBuilder.buildProgression({
-            id: progressionId,
-            skillIds,
-            knowledgeElements: knowledgeElementsFiltered,
-            isProfileCompleted: assessment.isCompleted(),
-          });
-
-          // when
-          const progression = await getProgression({
-            userId,
-            progressionId,
-            assessmentRepository,
-            campaignParticipationRepository,
-            competenceEvaluationRepository,
-            knowledgeElementRepository,
-            skillRepository,
-            campaignRepository,
-            improvementService,
-          });
-
-          // then
-          expect(progression).to.deep.equal(expectedProgression);
-        });
-      });
-
-      context('when the assessment is improving because user is retrying campaign participation', function () {
-        let knowledgeElements, knowledgeElementsFiltered;
-
-        beforeEach(function () {
-          assessment.state = 'improving';
-          knowledgeElements = [domainBuilder.buildKnowledgeElement(), domainBuilder.buildKnowledgeElement()];
-          knowledgeElementsFiltered = [knowledgeElements[0]];
-          knowledgeElementRepository.findUniqByUserId.resolves(knowledgeElements);
-          campaignParticipationRepository.isRetrying
-            .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
-            .resolves(true);
-        });
-
-        it('should filter the knowledge elements', async function () {
-          // when
-          await getProgression({
-            userId,
-            progressionId,
-            assessmentRepository,
-            campaignParticipationRepository,
-            competenceEvaluationRepository,
-            knowledgeElementRepository,
-            skillRepository,
-            campaignRepository,
-            improvementService,
-          });
-
-          // then
-          expect(improvementService.filterKnowledgeElementsIfImproving).to.have.been.calledWithExactly({
-            knowledgeElements,
-            assessment,
-            isRetrying: true,
-          });
-        });
-
-        it('should return the progression associated to the assessment', async function () {
-          // given
-          improvementService.filterKnowledgeElementsIfImproving
-            .withArgs({ knowledgeElements, assessment, isRetrying: true })
-            .returns(knowledgeElementsFiltered);
-
-          const expectedProgression = domainBuilder.buildProgression({
-            id: progressionId,
-            skillIds,
-            knowledgeElements: knowledgeElementsFiltered,
-            isProfileCompleted: assessment.isCompleted(),
-          });
-
-          // when
-          const progression = await getProgression({
-            userId,
-            progressionId,
-            assessmentRepository,
-            campaignParticipationRepository,
-            competenceEvaluationRepository,
-            knowledgeElementRepository,
-            skillRepository,
-            campaignRepository,
-            improvementService,
-          });
-
-          // then
-          expect(progression).to.deep.equal(expectedProgression);
-        });
-      });
-    });
-
     context('when the assessment exists and is competence evaluation', function () {
       let competenceEvaluationAssessment, competenceEvaluation, competenceSkills;
 
@@ -266,8 +46,12 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
         assessmentRepository.getByAssessmentIdAndUserId.resolves(competenceEvaluationAssessment);
         competenceEvaluationRepository.getByAssessmentId.resolves(competenceEvaluation);
         skillRepository.findActiveByCompetenceId.resolves(competenceSkills);
-        improvementService.filterKnowledgeElementsIfImproving
-          .withArgs({ knowledgeElements: [], assessment: competenceEvaluationAssessment })
+        improvementService.filterKnowledgeElements
+          .withArgs({
+            knowledgeElements: [],
+            createdAt: competenceEvaluationAssessment.createdAt,
+            isImproving: competenceEvaluationAssessment.isImproving,
+          })
           .returns([]);
       });
 
@@ -324,8 +108,12 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
           knowledgeElementsFiltered = [knowledgeElements[0]];
           knowledgeElementRepository.findUniqByUserId.resolves(knowledgeElements);
 
-          improvementService.filterKnowledgeElementsIfImproving
-            .withArgs({ knowledgeElements, assessment: competenceEvaluationAssessment })
+          improvementService.filterKnowledgeElements
+            .withArgs({
+              knowledgeElements,
+              createdAt: competenceEvaluationAssessment.createdAt,
+              isImproving: competenceEvaluationAssessment.isImproving,
+            })
             .returns(knowledgeElementsFiltered);
         });
 
@@ -344,9 +132,10 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
           });
 
           // then
-          expect(improvementService.filterKnowledgeElementsIfImproving).to.have.been.calledWithExactly({
+          expect(improvementService.filterKnowledgeElements).to.have.been.calledWithExactly({
             knowledgeElements,
-            assessment: competenceEvaluationAssessment,
+            createdAt: competenceEvaluationAssessment.createdAt,
+            isImproving: competenceEvaluationAssessment.isImproving,
           });
         });
 
