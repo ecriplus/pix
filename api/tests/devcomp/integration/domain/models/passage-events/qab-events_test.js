@@ -1,6 +1,6 @@
 import {
   QABCardAnsweredEvent,
-  QABCardRetriedEvent,
+  QABRetriedEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/qab-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
@@ -76,7 +76,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
     });
   });
 
-  describe('#QABCardRetriedEvent', function () {
+  describe('#QABRetriedEvent', function () {
     it('should init and keep attributes', function () {
       // given
       const id = Symbol('id');
@@ -87,7 +87,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
       const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
 
       // when
-      const qabCardAnsweredEvent = new QABCardRetriedEvent({
+      const qabRetriedEvent = new QABRetriedEvent({
         id,
         occurredAt,
         createdAt,
@@ -97,13 +97,13 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
       });
 
       // then
-      expect(qabCardAnsweredEvent.id).to.equal(id);
-      expect(qabCardAnsweredEvent.type).to.equal('QAB_CARD_RETRIED');
-      expect(qabCardAnsweredEvent.occurredAt).to.equal(occurredAt);
-      expect(qabCardAnsweredEvent.createdAt).to.equal(createdAt);
-      expect(qabCardAnsweredEvent.passageId).to.equal(passageId);
-      expect(qabCardAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(qabCardAnsweredEvent.data).to.deep.equal({ elementId });
+      expect(qabRetriedEvent.id).to.equal(id);
+      expect(qabRetriedEvent.type).to.equal('QAB_RETRIED');
+      expect(qabRetriedEvent.occurredAt).to.equal(occurredAt);
+      expect(qabRetriedEvent.createdAt).to.equal(createdAt);
+      expect(qabRetriedEvent.passageId).to.equal(passageId);
+      expect(qabRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qabRetriedEvent.data).to.deep.equal({ elementId });
     });
   });
 });

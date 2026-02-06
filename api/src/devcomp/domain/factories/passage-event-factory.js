@@ -27,7 +27,7 @@ import {
 } from '../models/passage-events/flashcard-events.js';
 import { GrainContinuedEvent, GrainSkippedEvent } from '../models/passage-events/grain-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
-import { QABCardAnsweredEvent, QABCardRetriedEvent } from '../models/passage-events/qab-events.js';
+import { QABCardAnsweredEvent, QABRetriedEvent } from '../models/passage-events/qab-events.js';
 import { StepperNextStepEvent } from '../models/passage-events/stepper-events.js';
 
 class PassageEventFactory {
@@ -69,8 +69,8 @@ class PassageEventFactory {
         return new PassageTerminatedEvent(eventData);
       case 'QAB_CARD_ANSWERED':
         return new QABCardAnsweredEvent(eventData);
-      case 'QAB_CARD_RETRIED':
-        return new QABCardRetriedEvent(eventData);
+      case 'QAB_RETRIED':
+        return new QABRetriedEvent(eventData);
       case 'QROCM_ANSWERED':
         return new QROCMAnsweredEvent(eventData);
       case 'QCM_ANSWERED':

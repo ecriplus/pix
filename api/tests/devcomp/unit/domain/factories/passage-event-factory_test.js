@@ -37,7 +37,7 @@ import {
 } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import {
   QABCardAnsweredEvent,
-  QABCardRetriedEvent,
+  QABRetriedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/qab-events.js';
 import { StepperNextStepEvent } from '../../../../../src/devcomp/domain/models/passage-events/stepper-events.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
@@ -352,21 +352,21 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
-    describe('when given a QAB_CARD_RETRIED event', function () {
-      it('should return a QabCardAnsweredEvent instance', function () {
+    describe('when given a QAB_RETRIED event', function () {
+      it('should return a QabRetriedEvent instance', function () {
         // given
         const rawEvent = {
           occurredAt: new Date(),
           passageId: 2,
           sequenceNumber: 3,
           elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
-          type: 'QAB_CARD_RETRIED',
+          type: 'QAB_RETRIED',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
 
         // then
-        expect(builtEvent).to.be.instanceOf(QABCardRetriedEvent);
+        expect(builtEvent).to.be.instanceOf(QABRetriedEvent);
       });
     });
 
