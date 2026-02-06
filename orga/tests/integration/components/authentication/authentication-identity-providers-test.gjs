@@ -12,9 +12,15 @@ module('Integration | Component | Authentication | authentication-identity-provi
   module('when there are identity providers', function (hooks) {
     hooks.beforeEach(function () {
       const oidcIdentityProviders = this.owner.lookup('service:oidcIdentityProviders');
-      sinon
-        .stub(oidcIdentityProviders, 'list')
-        .value([{ id: 'cem', slug: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi' }]);
+      sinon.stub(oidcIdentityProviders, 'list').value([
+        {
+          id: 'cem',
+          slug: 'cem',
+          code: 'CEM',
+          organizationName: 'ConnectEtMoi',
+          isVisible: true,
+        },
+      ]);
     });
 
     module('when it’s for login through SSO', function () {

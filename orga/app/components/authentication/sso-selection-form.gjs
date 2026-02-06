@@ -45,7 +45,7 @@ export default class SsoSelectionForm extends Component {
       </p>
 
       <OidcProviderSelector
-        @providers={{this.oidcIdentityProviders.list}}
+        @providers={{this.oidcIdentityProviders.visibleIdentityProviders}}
         @onProviderChange={{this.onProviderChange}}
       />
 

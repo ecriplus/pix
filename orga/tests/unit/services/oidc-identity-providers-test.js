@@ -127,42 +127,6 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
-  module('hasIdentityProviders', function () {
-    module('when there is at least one provider', function () {
-      test('returns true', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
-          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.true(hasIdentityProviders);
-      });
-    });
-
-    module('when there are no providers', function () {
-      test('returns false', async function (assert) {
-        // given
-        storeStub = Service.create({
-          findAll: sinon.stub().resolves([]),
-          peekAll: sinon.stub().returns([]),
-        });
-        oidcIdentityProvidersService.set('store', storeStub);
-
-        // when
-        const hasIdentityProviders = oidcIdentityProvidersService.hasIdentityProviders;
-
-        // then
-        assert.false(hasIdentityProviders);
-      });
-    });
-  });
-
   module('findBySlug', function () {
     module('when the requested identity provider is available', function () {
       test('returns the identity provider', async function (assert) {

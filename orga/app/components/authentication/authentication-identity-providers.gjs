@@ -27,7 +27,7 @@ export default class AuthenticationIdentityProviders extends Component {
   }
 
   <template>
-    {{#if this.oidcIdentityProviders.hasIdentityProviders}}
+    {{#if this.oidcIdentityProviders.hasVisibleIdentityProviders}}
       <section class="authentication-identity-providers-authentication-section">
         <p class="authentication-identity-providers-authentication-section__spacer">
           {{t "components.authentication.authentication-identity-providers.spacer.or"}}
