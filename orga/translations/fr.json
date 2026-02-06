@@ -1137,6 +1137,7 @@
     "login-form": {
       "active-or-retrieve": "Activez ou devenez l'administrateur de l'espace Pix Orga de votre établissement scolaire",
       "admin-role-question": "Vous êtes personnel de direction ou directeur d'école ?",
+      "associate-account": "Associer mon compte",
       "email": {
         "label": "Adresse e-mail",
         "placeholder": "ex: jean.dupont@email.com"
@@ -1156,7 +1157,6 @@
       "invitation-not-found": "Cette invitation n'a pas été trouvée. Contactez l’administrateur de votre espace Pix Orga.",
       "invitation-was-cancelled": "Cette invitation n’est plus valide. Contactez l’administrateur de votre espace Pix Orga.",
       "login": "Je me connecte",
-      "only-for-admin": "Réservé aux personnels de direction des établissements scolaires publics et privés sous contrat.",
       "password": "Mot de passe"
     },
     "login-or-register": {

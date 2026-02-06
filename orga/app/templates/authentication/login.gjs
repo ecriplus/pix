@@ -30,9 +30,6 @@ import AuthenticationLayout from 'pix-orga/components/authentication-layout/inde
           <LinkTo class="link link--black link--underlined" @route="join-request">
             {{t "pages.login-form.active-or-retrieve"}}
           </LinkTo>
-          <div class="authentication-login__recover-access__message">
-            ({{t "pages.login-form.only-for-admin"}})
-          </div>
         </div>
       {{/if}}
 

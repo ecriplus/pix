@@ -26,7 +26,6 @@ module('Integration | Template | Authentication | login', function (hooks) {
       // then
       assert.dom('.authentication-login-form__recover-access__question').doesNotExist();
       assert.dom('.authentication-login-form__recover-access .link--underlined').doesNotExist();
-      assert.dom('.authentication-login-form__recover-access__message').doesNotExist();
     });
   });
 
@@ -42,7 +41,6 @@ module('Integration | Template | Authentication | login', function (hooks) {
       // then
       assert.dom('.authentication-login__recover-access__question').exists();
       assert.dom('.authentication-login__recover-access .link--underlined').exists();
-      assert.dom('.authentication-login__recover-access__message').exists();
     });
   });
 });

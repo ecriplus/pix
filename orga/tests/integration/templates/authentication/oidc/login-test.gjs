@@ -52,7 +52,7 @@ module('Integration | Template | Authentication | OIDC | login', function (hooks
         .exists();
       assert.dom(screen.getByRole('textbox', { name: t('pages.login-form.email.label') })).exists();
       assert.dom(screen.getByLabelText(t('pages.login-form.password'))).exists();
-      assert.dom(screen.getByRole('button', { name: t('pages.login-form.login') })).exists();
+      assert.dom(screen.getByRole('button', { name: t('pages.login-form.associate-account') })).exists();
       assert.dom(screen.getByRole('link', { name: t('pages.oidc.login.signup-button') })).exists();
     });
   });

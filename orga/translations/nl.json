@@ -1131,6 +1131,7 @@
     "login-form": {
       "active-or-retrieve": "Activeer of word beheerder van de Pix Orga-ruimte van uw school.",
       "admin-role-question": "Bent u een schoolhoofd?",
+      "associate-account": "Mijn account koppelen",
       "email": {
         "label": "E-mailadres",
         "placeholder": "b.v. jan.jansen@email.com"
@@ -1150,7 +1151,6 @@
       "invitation-not-found": "Deze uitnodiging is niet gevonden. Neem contact op met de beheerder van je Pix Orga-ruimte.",
       "invitation-was-cancelled": "Deze uitnodiging is niet langer geldig. Neem contact op met de beheerder van je Pix Orga-ruimte.",
       "login": "Ik log in",
-      "only-for-admin": "Gereserveerd voor directiepersoneel van openbare en privéscholen onder contract.",
       "password": "Wachtwoord"
     },
     "login-or-register": {

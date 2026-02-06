@@ -33,7 +33,10 @@ import InvitationBanner from 'pix-orga/components/banner/invitation-banner';
         <h3 class="pix-body-l">{{t "pages.oidc.login.sub-title"}}</h3>
       </div>
 
-      <LoginForm @onSubmit={{@controller.redirectToAssociationConfirmation}} />
+      <LoginForm
+        @onSubmit={{@controller.redirectToAssociationConfirmation}}
+        @submitFormButtonLabel={{t "pages.login-form.associate-account"}}
+      />
 
       {{#if @controller.currentInvitation}}
         <PixButtonLink

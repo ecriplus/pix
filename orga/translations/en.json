@@ -1149,6 +1149,7 @@
     "login-form": {
       "active-or-retrieve": "Activate or become the administrator of your school's Pix Orga space",
       "admin-role-question": "Are you a headteacher?",
+      "associate-account": "Associate my account",
       "email": {
         "label": "Email address",
         "placeholder": "e.g. john.smith@email.com"
@@ -1168,7 +1169,6 @@
       "invitation-not-found": "This invitation was not found. Please contact the administrator of your Pix Orga space.",
       "invitation-was-cancelled": "This invitation is no longer valid. Please contact the administrator of your Pix Orga space.",
       "login": "Log in",
-      "only-for-admin": "only for school administrations",
       "password": "Password"
     },
     "login-or-register": {
