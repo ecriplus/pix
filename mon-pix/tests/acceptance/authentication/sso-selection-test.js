@@ -13,7 +13,7 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
   setupIntl(hooks);
 
   module('When the user logs in', function () {
-    test('it displays the sso selection page and displays the sign up section', async function (assert) {
+    test('it displays the sso selection page for login', async function (assert) {
       // given
       const screen = await visit('/connexion/sso-selection');
 
@@ -45,7 +45,7 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
   });
 
   module('When the user signs up', function () {
-    test('it displays the sso selection page and hides the sign up section', async function (assert) {
+    test('it displays the sso selection page for login', async function (assert) {
       // given
       const screen = await visit('/inscription/sso-selection');
 
@@ -62,7 +62,7 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
       assert.dom(signUpLink).doesNotExist();
     });
 
-    test('it goes back to the signup page', async function (assert) {
+    test('it can go back to the login page', async function (assert) {
       // given
       await visit('/inscription/sso-selection');
 
