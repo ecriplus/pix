@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { PlacesLot } from '../../../organizational-entities/domain/read-models/PlacesLot.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
@@ -22,17 +21,17 @@ const baseQuery = ({ organizationIds, callOrderByAndRemoveDeleted = false }) => 
     .whereIn('organization-places.organizationId', organizationIds);
 
   if (callOrderByAndRemoveDeleted) {
-    query = orderByAndRemoveDeleted(query);
+    query = orderByAndRemoveDeleted(query, knexConn);
   }
 
   return query;
 };
 
-const orderByAndRemoveDeleted = (query) => {
+const orderByAndRemoveDeleted = (query, knexConn) => {
   return query
     .whereNull('organization-places.deletedAt')
     .orderBy(
-      knex.raw(
+      knexConn.raw(
         'CASE WHEN "organization-places"."activationDate" <= now() AND "organization-places"."expirationDate" >= now() THEN 1 WHEN "organization-places"."activationDate" > now() THEN 2 ELSE 3 END',
       ),
       'asc',
