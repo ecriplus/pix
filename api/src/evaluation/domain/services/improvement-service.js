@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 
 import { constants } from '../../../shared/domain/constants.js';
 
-function _keepKnowledgeElementsRecentOrValidated({ currentUserKnowledgeElements, assessment, minimumDelayInDays }) {
-  const startedDateOfAssessment = assessment.createdAt;
+function keepKnowledgeElementsRecentOrValidated({ currentUserKnowledgeElements, createdAt, minimumDelayInDays }) {
+  const startedDateOfAssessment = createdAt;
 
   return currentUserKnowledgeElements.filter((knowledgeElement) => {
     const isNotOldEnoughToBeImproved =
@@ -12,25 +12,26 @@ function _keepKnowledgeElementsRecentOrValidated({ currentUserKnowledgeElements,
   });
 }
 
-function filterKnowledgeElementsIfImproving({
+function filterKnowledgeElements({
   knowledgeElements,
-  assessment,
+  createdAt,
   isRetrying = false,
-  keepRecentOrValidated = false,
+  isImproving = false,
+  isFromCampaign = false,
 }) {
-  const minimumDelayInDays =
-    isRetrying || keepRecentOrValidated
+  const isFromCampaignImprovingOrRetrying = isFromCampaign && (isImproving || isRetrying);
+  if (isFromCampaignImprovingOrRetrying || isImproving) {
+    const minimumDelayInDays = isFromCampaignImprovingOrRetrying
       ? constants.MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING
       : constants.MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING;
 
-  if (keepRecentOrValidated || assessment.isImproving) {
-    return _keepKnowledgeElementsRecentOrValidated({
+    return keepKnowledgeElementsRecentOrValidated({
       currentUserKnowledgeElements: knowledgeElements,
-      assessment,
+      createdAt,
       minimumDelayInDays,
     });
   }
   return knowledgeElements;
 }
 
-export { filterKnowledgeElementsIfImproving };
+export { filterKnowledgeElements };
