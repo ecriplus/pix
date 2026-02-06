@@ -1,6 +1,6 @@
 {
   "name": "pix-admin",
-  "version": "5.317.6",
+  "version": "5.317.7",
   "private": false,
   "description": "Interface d'administration pour les membres de Pix.",
   "license": "AGPL-3.0",
