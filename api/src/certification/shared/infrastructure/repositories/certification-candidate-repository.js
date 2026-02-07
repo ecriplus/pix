@@ -1,8 +1,7 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Subscription } from '../../../enrolment/domain/models/Subscription.js';
-import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
+import { CertificationCandidate } from '../../domain/models/CertificationCandidate.js';
 import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
 /**
@@ -37,7 +36,8 @@ const findBySessionId = async function (sessionId) {
 };
 
 const update = async function (certificationCandidate) {
-  const result = await knex('certification-candidates')
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('certification-candidates')
     .where({ id: certificationCandidate.id })
     .update({ authorizedToStart: certificationCandidate.authorizedToStart });
 
@@ -76,8 +76,8 @@ function _toDomain({ candidateData, subscriptionData }) {
 }
 
 function _candidateBaseQuery() {
-  const knex = DomainTransaction.getConnection();
-  return knex
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
     .select({
       certificationCandidate: 'certification-candidates.*',
       complementaryCertificationId: 'complementary-certifications.id',
@@ -99,8 +99,8 @@ function _candidateBaseQuery() {
 }
 
 async function _getSubscriptions(candidateId) {
-  const knex = DomainTransaction.getConnection();
-  return knex
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
     .select(
       'certification-subscriptions.complementaryCertificationId',
       'certification-subscriptions.certificationCandidateId',
