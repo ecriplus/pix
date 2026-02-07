@@ -1,7 +1,6 @@
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
 
-const findPaginatedCampaignParticipantActivities = withTransaction(async function ({
+const findPaginatedCampaignParticipantActivities = async function ({
   userId,
   campaignId,
   page,
@@ -15,7 +14,7 @@ const findPaginatedCampaignParticipantActivities = withTransaction(async functio
     campaignId,
     filters,
   });
-});
+};
 
 export { findPaginatedCampaignParticipantActivities };
 

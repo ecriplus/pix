@@ -4,7 +4,7 @@ export function buildPostgresEnvironment({ connection, pool, migrationsDirectory
     client: 'postgresql',
     connection,
     pool: {
-      min: pool?.min || 1,
+      min: pool?.min || 0,
       max: pool?.max || 4,
     },
     migrations: {
