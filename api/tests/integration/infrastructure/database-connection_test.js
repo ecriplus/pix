@@ -59,7 +59,7 @@ describe('Integration | Infrastructure | database-connection', function () {
           free: 0,
           pendingAcquires: 0,
           pendingCreates: 0,
-          min: 1,
+          min: 0,
           max: 4,
         },
       });
