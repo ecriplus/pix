@@ -1,8 +1,12 @@
 import { SessionStartedDeletionError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { deleteSession } from '../../../../../../src/certification/enrolment/domain/usecases/delete-session.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | delete-session', function () {
+  beforeEach(async function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
+  });
   context('when there are no certification courses', function () {
     it('should delete the session', async function () {
       // given
