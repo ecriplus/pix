@@ -9,8 +9,11 @@ const findPaginatedCampaignParticipantsActivities = async function ({
   campaignParticipantActivityRepository,
 }) {
   await _checkUserAccessToCampaign(campaignId, userId, campaignRepository);
-
-  return campaignParticipantActivityRepository.findPaginatedByCampaignId({ page, campaignId, filters });
+  return campaignParticipantActivityRepository.findPaginatedByCampaignId({
+    page,
+    campaignId,
+    filters,
+  });
 };
 
 export { findPaginatedCampaignParticipantsActivities };
