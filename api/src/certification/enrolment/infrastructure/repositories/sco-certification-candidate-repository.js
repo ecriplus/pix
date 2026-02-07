@@ -6,6 +6,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 
+// I LET IT THAT WAY. THE TRANSACTION IS CONTAINED HERE IN THE USECASE THAT USES IT
+// USECASE IS A SEMI-LONG RUNNING WORK (enroll a lot of students at once)
 /**
  * @function
  * @param {object} params
