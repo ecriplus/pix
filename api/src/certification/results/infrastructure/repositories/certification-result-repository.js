@@ -1,8 +1,9 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { CertificationResult } from '../../domain/models/CertificationResult.js';
 
 const findBySessionId = async function ({ sessionId }) {
+  const knexConn = DomainTransaction.getConnection();
   const certificationResultDTOs = await _selectCertificationResults()
     .where('certification-courses.sessionId', sessionId)
     .orderBy('certification-courses.lastName', 'ASC')
@@ -10,6 +11,7 @@ const findBySessionId = async function ({ sessionId }) {
 
   const complementaryCertificationCourseResultsByCertificationCourseId =
     await _selectComplementaryCertificationCourseResultsBySessionId({
+      knexConn,
       sessionId,
     });
 
@@ -19,6 +21,7 @@ const findBySessionId = async function ({ sessionId }) {
 };
 
 const findByCertificationCandidateIds = async function ({ certificationCandidateIds }) {
+  const knexConn = DomainTransaction.getConnection();
   const certificationResultDTOs = await _selectCertificationResults()
     .join('certification-candidates', function () {
       this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
@@ -35,6 +38,7 @@ const findByCertificationCandidateIds = async function ({ certificationCandidate
 
   const complementaryCertificationCourseResultsByCertificationCourseId =
     await _selectComplementaryCertificationCourseResultsBySessionId({
+      knexConn,
       sessionId: certificationResultDTOs[0].sessionId,
     });
 
@@ -46,7 +50,8 @@ const findByCertificationCandidateIds = async function ({ certificationCandidate
 export { findByCertificationCandidateIds, findBySessionId };
 
 function _selectCertificationResults() {
-  return knex
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
     .select({
       id: 'certification-courses.id',
       firstName: 'certification-courses.firstName',
@@ -62,7 +67,7 @@ function _selectCertificationResults() {
       commentForOrganization: 'assessment-results.commentForOrganization',
     })
     .select(
-      knex.raw(`
+      knexConn.raw(`
         json_agg("competence-marks".* ORDER BY "competence-marks"."competence_code" asc)  as "competenceMarks"`),
     )
     .from('certification-courses')
@@ -81,8 +86,8 @@ function _selectCertificationResults() {
     .where('certification-courses.isPublished', true);
 }
 
-function _selectComplementaryCertificationCourseResultsBySessionId({ sessionId }) {
-  return knex('complementary-certification-course-results')
+function _selectComplementaryCertificationCourseResultsBySessionId({ knexConn, sessionId }) {
+  return knexConn('complementary-certification-course-results')
     .select({
       certificationCourseId: 'certification-courses.id',
       complementaryCertificationCourseId:
