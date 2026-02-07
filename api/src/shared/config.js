@@ -157,6 +157,7 @@ const schema = Joi.object({
   TLD_FR: Joi.string().optional(),
   TLD_ORG: Joi.string().optional(),
   APIM_URL: Joi.string().optional(),
+  HTTP_SERVER_RESPONSE_TIMEOUT_MS: Joi.number().integer().min(0).optional(),
 }).options({ allowUnknown: true });
 
 const configuration = (function () {
@@ -475,6 +476,9 @@ const configuration = (function () {
     },
     temporaryStorageForAnonymousUserTokens: {
       expirationDelaySeconds: ms(process.env.ANONYMOUS_USER_TOKEN_TEMPORARY_STORAGE_LIFESPAN || '1d') / 1000,
+    },
+    timeouts: {
+      server: parseInt(process.env.HTTP_SERVER_RESPONSE_TIMEOUT_MS, 10) || 0,
     },
     v3Certification: {
       scoring: {

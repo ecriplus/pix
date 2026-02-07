@@ -1,8 +1,8 @@
-export function buildPostgresEnvironment({ databaseUrl, pool, migrationsDirectory, seedsDirectory, name }) {
+export function buildPostgresEnvironment({ connection, pool, migrationsDirectory, seedsDirectory, name }) {
   return {
     name,
     client: 'postgresql',
-    connection: databaseUrl,
+    connection,
     pool: {
       min: pool?.min || 1,
       max: pool?.max || 4,

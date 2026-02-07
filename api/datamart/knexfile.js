@@ -7,13 +7,21 @@ const baseConfiguration = {
   name: 'datamart',
   migrationsDirectory: './migrations/',
   seedsDirectory: './seeds/',
-  databaseUrl: process.env.DATAMART_DATABASE_URL,
+  connection: {
+    connectionString: process.env.DATAMART_DATABASE_URL,
+  },
 };
 
 const environments = {
   development: buildPostgresEnvironment(baseConfiguration),
 
-  test: buildPostgresEnvironment({ ...baseConfiguration, databaseUrl: process.env.TEST_DATAMART_DATABASE_URL }),
+  test: buildPostgresEnvironment({
+    ...baseConfiguration,
+    connection: {
+      ...baseConfiguration.connection,
+      connectionString: process.env.TEST_DATAMART_DATABASE_URL,
+    },
+  }),
 
   production: buildPostgresEnvironment(baseConfiguration),
 };

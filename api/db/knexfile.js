@@ -7,10 +7,18 @@ const baseConfiguration = {
   name: 'live',
   migrationsDirectory: './migrations/',
   seedsDirectory: './seeds/',
-  databaseUrl: process.env.DATABASE_URL,
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    statement_timeout: parseInt(process.env.DATABASE_STATEMENT_TIMEOUT_MS, 10) || undefined,
+    query_timeout: parseInt(process.env.DATABASE_QUERY_TIMEOUT_MS, 10) || undefined,
+    idle_in_transaction_session_timeout:
+      parseInt(process.env.DATABASE_IDLE_IN_TRANSACTION_SESSION_TIMEOUT_MS, 10) || undefined,
+    connectionTimeoutMillis: parseInt(process.env.DATABASE_CONNECTION_TIMEOUT_MS, 10) || undefined,
+  },
   pool: {
     min: parseInt(process.env.DATABASE_CONNECTION_POOL_MIN_SIZE, 10),
     max: parseInt(process.env.DATABASE_CONNECTION_POOL_MAX_SIZE, 10),
+    idleTimeoutMillis: parseInt(process.env.DATABASE_IDLE_TIMEOUT_MS, 10) || 10_000,
   },
 };
 
@@ -19,7 +27,10 @@ export default {
 
   test: buildPostgresEnvironment({
     ...baseConfiguration,
-    databaseUrl: process.env.TEST_DATABASE_URL,
+    connection: {
+      ...baseConfiguration.connection,
+      connectionString: process.env.TEST_DATABASE_URL,
+    },
   }),
 
   production: buildPostgresEnvironment(baseConfiguration),

@@ -13,33 +13,41 @@ const { logging } = config;
 export class DatabaseConnection {
   knex;
   #name;
+  #hasConnection;
 
   static databaseUrlFromConfig(knexConfig) {
-    return new URL(knexConfig.connection);
+    return knexConfig?.connection?.connectionString ? new URL(knexConfig.connection.connectionString) : null;
   }
 
   constructor(knexConfig) {
-    this.knex = Knex(knexConfig);
-    this.#name = knexConfig.name;
-    this.knex.on('query', function (data) {
-      if (logging.enableKnexPerformanceMonitoring) {
-        const queryId = data.__knexQueryUid;
-        monitoringTools.setInContext(`knexQueryStartTimes.${queryId}`, performance.now());
-      }
-    });
-
-    this.knex.on('query-response', function (response, data) {
-      monitoringTools.incrementInContext('metrics.knexQueryCount');
-      if (logging.enableKnexPerformanceMonitoring) {
-        const queryStartedTime = monitoringTools.getInContext(`knexQueryStartTimes.${data.__knexQueryUid}`);
-        if (queryStartedTime) {
-          const duration = performance.now() - queryStartedTime;
-          monitoringTools.incrementInContext('metrics.knexTotalTimeSpent', duration);
+    this.#hasConnection = Boolean(knexConfig?.connection?.connectionString);
+    if (this.#hasConnection) {
+      this.knex = Knex(knexConfig);
+      this.#name = knexConfig.name;
+      const url = DatabaseConnection.databaseUrlFromConfig(knexConfig);
+      this.knex.__pix__database = url.pathname.slice(1);
+      this.knex.on('query', function (data) {
+        if (logging.enableKnexPerformanceMonitoring) {
+          const queryId = data.__knexQueryUid;
+          monitoringTools.setInContext(`knexQueryStartTimes.${queryId}`, performance.now());
         }
-      }
-    });
+      });
 
-    configureConnectionExtension(this.knex);
+      this.knex.on('query-response', function (response, data) {
+        monitoringTools.incrementInContext('metrics.knexQueryCount');
+        if (logging.enableKnexPerformanceMonitoring) {
+          const queryStartedTime = monitoringTools.getInContext(`knexQueryStartTimes.${data.__knexQueryUid}`);
+          if (queryStartedTime) {
+            const duration = performance.now() - queryStartedTime;
+            monitoringTools.incrementInContext('metrics.knexTotalTimeSpent', duration);
+          }
+        }
+      });
+
+      configureConnectionExtension(this.knex);
+    } else {
+      logger.error('Database connection not found');
+    }
   }
 
   async checkStatus() {
@@ -56,8 +64,10 @@ export class DatabaseConnection {
   }
 
   async disconnect() {
-    await this.knex.destroy();
-    logger.info(`Closing connections to ${this.#name}`);
+    if (this.#hasConnection) {
+      await this.knex.destroy();
+      logger.info(`Closing connections to ${this.#name}`);
+    }
   }
 
   async emptyAllTables() {
@@ -78,7 +88,7 @@ export class DatabaseConnection {
   async #listAllTableNames() {
     const resultSet = await this.knex.raw(
       'SELECT table_name FROM information_schema.tables WHERE table_schema = current_schema() AND table_catalog = ?',
-      [this.knex.client.database()],
+      [this.knex.__pix__database],
     );
 
     const rows = resultSet.rows;
@@ -86,7 +96,7 @@ export class DatabaseConnection {
   }
 
   getPoolMetrics() {
-    if (!this.knex.client.pool) {
+    if (!this.#hasConnection) {
       return {};
     }
 

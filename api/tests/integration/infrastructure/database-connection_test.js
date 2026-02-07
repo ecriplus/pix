@@ -70,7 +70,9 @@ describe('Integration | Infrastructure | database-connection', function () {
       const databaseConnection = new DatabaseConnection({
         name: 'not-existing-pg',
         client: 'postgresql',
-        connection: undefined,
+        connection: {
+          connectionString: undefined,
+        },
         pool: {
           min: 1,
           max: 2,

@@ -1,6 +1,7 @@
 /* eslint-disable knex/avoid-injections */
 import _ from 'lodash';
 
+import { DatabaseConnection } from '../database-connection.js';
 import { databaseBuffer as defaultDatabaseBuffer } from './database-buffer.js';
 import * as databaseHelpers from './database-helpers.js';
 import { factory } from './factory/index.js';
@@ -118,7 +119,11 @@ export class DatabaseBuilder {
   }
 
   async #getDirtyTablesSequencesInfo() {
-    const database = this.knex.client.database();
+    // TODO: find a better way to do it
+    const knexConfig = this.knex.context.client.config;
+    const url = DatabaseConnection.databaseUrlFromConfig(knexConfig);
+    this.knex.__pix__database = url.pathname.slice(1);
+    const database = this.knex.__pix__database;
 
     const rawSequencesInfo = await this.knex
       .from('information_schema.columns')

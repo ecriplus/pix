@@ -71,7 +71,7 @@ installHapiHook();
 
 const { logOpsMetrics, port, logging } = config;
 const createServer = async () => {
-  const server = createBareServer();
+  const server = await createBareServer();
 
   // initialisation of Datadog link for metrics publication
   const metrics = new Metrics({ config });
@@ -97,7 +97,8 @@ const createServer = async () => {
   return server;
 };
 
-const createBareServer = function () {
+const createBareServer = async function () {
+  const serverResponseTimeout = config.timeouts.server;
   const serverConfiguration = {
     compression: false,
     debug: { request: false, log: false },
@@ -111,6 +112,9 @@ const createBareServer = function () {
       },
       response: {
         emptyStatusCode: 204,
+      },
+      timeout: {
+        server: serverResponseTimeout === 0 ? false : serverResponseTimeout,
       },
     },
     port,
