@@ -1,7 +1,6 @@
 // @ts-check
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionEnrolment } from '../../domain/models/SessionEnrolment.js';
@@ -43,7 +42,6 @@ export async function save({ session }) {
  */
 export async function get({ id }) {
   const knexConn = DomainTransaction.getConnection();
-
   const foundSession = await knexConn
     .select('sessions.*')
     .select({ certificationCenterType: 'certification-centers.type' })
@@ -68,7 +66,8 @@ export async function get({ id }) {
  * @returns {Promise<boolean>}
  */
 export async function isSessionExistingByCertificationCenterId({ address, room, date, time, certificationCenterId }) {
-  const sessions = await knex('sessions').where({ address, room, date, time }).andWhere({ certificationCenterId });
+  const knexConn = DomainTransaction.getConnection();
+  const sessions = await knexConn('sessions').where({ address, room, date, time }).andWhere({ certificationCenterId });
   return sessions.length > 0;
 }
 
@@ -80,7 +79,8 @@ export async function isSessionExistingByCertificationCenterId({ address, room, 
  * @returns {Promise<boolean>}
  */
 export async function isSessionExistingBySessionAndCertificationCenterIds({ sessionId, certificationCenterId }) {
-  const [session] = await knex('sessions').where({ id: sessionId, certificationCenterId });
+  const knexConn = DomainTransaction.getConnection();
+  const [session] = await knexConn('sessions').where({ id: sessionId, certificationCenterId });
   return Boolean(session);
 }
 
@@ -90,6 +90,7 @@ export async function isSessionExistingBySessionAndCertificationCenterIds({ sess
  * @returns {Promise<void>}
  */
 export async function update(session) {
+  const knexConn = DomainTransaction.getConnection();
   const sessionDataToUpdate = _.pick(session, [
     'address',
     'room',
@@ -100,7 +101,7 @@ export async function update(session) {
     'description',
   ]);
 
-  await knex('sessions').where({ id: session.id }).update(sessionDataToUpdate);
+  await knexConn('sessions').where({ id: session.id }).update(sessionDataToUpdate);
 }
 
 /**
@@ -111,23 +112,22 @@ export async function update(session) {
  * @throws {NotFoundError}
  */
 export async function remove({ id }) {
-  await knex.transaction(async (trx) => {
-    const certificationCandidateIdsInSession = await trx('certification-candidates')
-      .where({ sessionId: id })
-      .pluck('id');
-    const invigilatorAccessIds = await trx('invigilator_accesses').where({ sessionId: id }).pluck('id');
+  const knexConn = DomainTransaction.getConnection();
+  const certificationCandidateIdsInSession = await knexConn('certification-candidates')
+    .where({ sessionId: id })
+    .pluck('id');
+  const invigilatorAccessIds = await knexConn('invigilator_accesses').where({ sessionId: id }).pluck('id');
 
-    if (invigilatorAccessIds) {
-      await trx('invigilator_accesses').whereIn('id', invigilatorAccessIds).del();
-    }
+  if (invigilatorAccessIds) {
+    await knexConn('invigilator_accesses').whereIn('id', invigilatorAccessIds).del();
+  }
 
-    if (certificationCandidateIdsInSession.length) {
-      await trx('certification-subscriptions')
-        .whereIn('certificationCandidateId', certificationCandidateIdsInSession)
-        .del();
-      await trx('certification-candidates').whereIn('id', certificationCandidateIdsInSession).del();
-    }
-    const nbSessionsDeleted = await trx('sessions').where('id', id).del();
-    if (nbSessionsDeleted === 0) throw new NotFoundError();
-  });
+  if (certificationCandidateIdsInSession.length) {
+    await knexConn('certification-subscriptions')
+      .whereIn('certificationCandidateId', certificationCandidateIdsInSession)
+      .del();
+    await knexConn('certification-candidates').whereIn('id', certificationCandidateIdsInSession).del();
+  }
+  const nbSessionsDeleted = await knexConn('sessions').where('id', id).del();
+  if (nbSessionsDeleted === 0) throw new NotFoundError();
 }
