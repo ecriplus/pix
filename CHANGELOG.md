@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## [5.317.9](https://github.com/1024pix/pix/compare/v5.317.8...v5.317.9) (2026-02-07)
+
+### :bug: Correction
+[TECH] Mise en place de timeouts divers, à la fois niveau serveur et niveau client BDD, afin de ne pas laisser de l'activité orpheline dans le cas où le client a fermé la connexion
+[TECH] Utiliser les DomainTransaction dans les repository de devcomp (PIX-21418)
+[TECH] Fixe le minimum de connexions à maintenir dans le pool knex à 1 et retire le wrapping transactionnel d'un usecase qui fait uniquement des lectures lourdes (#15027)
+
 ## [5.317.8](https://github.com/1024pix/pix/compare/v5.317.7...v5.317.8) (2026-02-06)
 
 ### :bug: Correction
