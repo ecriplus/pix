@@ -3,7 +3,6 @@
  * @typedef {import('../../../shared/domain/models/Scopes.js').SCOPES} SCOPES
  * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
@@ -99,12 +98,9 @@ export async function create({ version, challenges }) {
     versionId: id,
   }));
 
-  const batchInsertQuery = knex.batchInsert('certification-frameworks-challenges', challengesDTO);
-
-  if (knexConn.isTransaction) {
-    batchInsertQuery.transacting(/** @type {import('knex').Knex.Transaction} */ (knexConn));
-  }
-  await batchInsertQuery;
+  await knexConn
+    .batchInsert('certification-frameworks-challenges', challengesDTO)
+    .transacting(knexConn.isTransaction ? knexConn : null);
 
   return id;
 }
