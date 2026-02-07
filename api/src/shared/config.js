@@ -439,6 +439,9 @@ const configuration = (function () {
       updateCombinedCourseJobEnabled: process.env.PGBOSS_UPDATE_COMBINED_COURSE_JOB_ENABLED
         ? toBoolean(process.env.PGBOSS_UPDATE_COMBINED_COURSE_JOB_ENABLED)
         : true,
+      computeCertificabilityJobEnabled: process.env.PGBOSS_COMPUTE_CERTIFICABILITY_JOB_ENABLED
+        ? toBoolean(process.env.PGBOSS_COMPUTE_CERTIFICABILITY_JOB_ENABLED)
+        : true,
     },
     poleEmploi: {
       clientId: process.env.POLE_EMPLOI_CLIENT_ID,

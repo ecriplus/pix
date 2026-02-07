@@ -1,11 +1,17 @@
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
+import { config } from '../../../../shared/config.js';
 import { ComputeCertificabilityJob } from '../../domain/models/ComputeCertificabilityJob.js';
 
 class ComputeCertificabilityJobController extends JobController {
   constructor() {
     super(ComputeCertificabilityJob.name);
   }
+
+  get isJobEnabled() {
+    return config.pgBoss.computeCertificabilityJobEnabled;
+  }
+
   async handle({ data }) {
     const { organizationLearnerId } = data;
 
