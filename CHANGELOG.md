@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.325.0](https://github.com/1024pix/pix/compare/v5.324.0...v5.325.0) (2026-02-07)
+
+### :rocket: Amélioration
+
+- [#14989](https://github.com/1024pix/pix/pull/14989) Ajouter des seeds pour les organization learner types (PIX-21243) 
+- [#14975](https://github.com/1024pix/pix/pull/14975) Changer des textes et labels de bouton sur la mire de connexion Pix Orga (PIX-20585). 
+
+### :bug: Correction
+
+- [#15021](https://github.com/1024pix/pix/pull/15021) Autoriser momentanément la désynchro des passages et des organization-learner-participations 
+
+### :building_construction: Tech
+
+- [#15026](https://github.com/1024pix/pix/pull/15026) Appliquer les modifications des hotfixes 5.317.x sur dev 
+- [#15020](https://github.com/1024pix/pix/pull/15020) Mise en place de timeouts divers, à la fois niveau serveur et niveau client BDD, afin de ne pas laisser de l'activité orpheline dans le cas où le client a fermé la connexion 
+- [#15017](https://github.com/1024pix/pix/pull/15017) Utiliser la DomainTransaction partout dans quests 
+- [#15019](https://github.com/1024pix/pix/pull/15019) Utiliser les DomainTransaction dans les repository de devcomp (PIX-21418)
+
 # [5.324.0](https://github.com/1024pix/pix/compare/v5.323.0...v5.324.0) (2026-02-06)
 
 ### :rocket: Amélioration
