@@ -1,10 +1,12 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { TutorialEvaluation } from '../../domain/models/TutorialEvaluation.js';
 
 const TABLE_NAME = 'tutorial-evaluations';
 
 const createOrUpdate = async function ({ userId, tutorialId, status }) {
-  const tutorialEvaluation = await knex(TABLE_NAME)
+  const knexConn = DomainTransaction.getConnection();
+  const tutorialEvaluation = await knexConn(TABLE_NAME)
     .insert({
       userId,
       tutorialId,
@@ -20,7 +22,8 @@ const createOrUpdate = async function ({ userId, tutorialId, status }) {
 };
 
 const find = async function ({ userId }) {
-  const tutorialEvaluation = await knex(TABLE_NAME).where({ userId });
+  const knexConn = DomainTransaction.getConnection();
+  const tutorialEvaluation = await knexConn(TABLE_NAME).where({ userId });
   return tutorialEvaluation.map(_toDomain);
 };
 
