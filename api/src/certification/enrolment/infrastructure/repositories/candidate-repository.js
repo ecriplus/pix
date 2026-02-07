@@ -3,7 +3,6 @@
  */
 
 // @ts-check
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CertificationCandidateNotFoundError } from '../../domain/errors.js';
@@ -18,7 +17,8 @@ import { Subscription } from '../../domain/models/Subscription.js';
  * @returns {Promise<Candidate | null>}
  */
 export async function get({ certificationCandidateId }) {
-  const candidateData = await buildBaseReadQuery(knex)
+  const knexConn = DomainTransaction.getConnection();
+  const candidateData = await buildBaseReadQuery(knexConn)
     .where({ 'certification-candidates.id': certificationCandidateId })
     .first();
 
@@ -35,7 +35,6 @@ export async function get({ certificationCandidateId }) {
  */
 export async function findBySessionId({ sessionId }) {
   const knexConn = DomainTransaction.getConnection();
-
   const candidatesData = await buildBaseReadQuery(knexConn)
     .where({ 'certification-candidates.sessionId': sessionId })
     .orderBy('certification-candidates.id');
@@ -51,8 +50,8 @@ export async function findBySessionId({ sessionId }) {
  * @returns {Promise<Array<Candidate>>}
  */
 export async function findByUserId({ userId }) {
-  const knexTransaction = DomainTransaction.getConnection();
-  const candidatesData = await buildBaseReadQuery(knexTransaction).where({ 'certification-candidates.userId': userId });
+  const knexConn = DomainTransaction.getConnection();
+  const candidatesData = await buildBaseReadQuery(knexConn).where({ 'certification-candidates.userId': userId });
   return candidatesData.map(toDomain);
 }
 
@@ -201,23 +200,20 @@ export async function saveInSession({ candidate, sessionId }) {
  * @returns {Promise<boolean>}
  */
 export async function remove({ id }) {
-  await knex.transaction(async (trx) => {
-    await trx('certification-subscriptions').where({ certificationCandidateId: id }).del();
-    return trx('certification-candidates').where({ id }).del();
-  });
-
-  return true;
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-subscriptions').where({ certificationCandidateId: id }).del();
+  return knexConn('certification-candidates').where({ id }).del();
 }
 
 /**
- * @param {import('knex').Knex} knexConnection
+ * @param {import('knex').Knex} knexConn
  * @returns {import('knex').Knex.QueryBuilder}
  */
-function buildBaseReadQuery(knexConnection) {
-  return knexConnection('certification-candidates')
+function buildBaseReadQuery(knexConn) {
+  return knexConn('certification-candidates')
     .select('certification-candidates.*')
     .select({
-      subscriptions: knex.raw(
+      subscriptions: knexConn.raw(
         `json_agg(
           json_build_object(
             'type', "certification-subscriptions"."type",
