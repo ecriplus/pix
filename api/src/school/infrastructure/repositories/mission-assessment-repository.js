@@ -65,10 +65,10 @@ const getStatusesForLearners = async function (missionId, organizationLearners) 
   const missionAssessmentsByLearnerId = await _getMissionAssessmentsByLearnerId(missionId, organizationLearnerIds);
 
   const lastRelevantAssessments = missionAssessmentsByLearnerId.map(([_organizationLearnerId, assessments]) => {
-    if (assessments.length > 1) {
-      return assessments.filter((assessment) => assessment.status === 'completed').sort(_byDescendingCreatedAt)[0];
-    }
-    return assessments[0];
+    const sortedAssessments = assessments.sort(_byDescendingCreatedAt);
+    const mostRecentCompletedAssessment = sortedAssessments.find((assessment) => assessment.status === 'completed');
+    if (mostRecentCompletedAssessment) return mostRecentCompletedAssessment;
+    return sortedAssessments[0];
   });
 
   const decoratedMissionLearners = [];
