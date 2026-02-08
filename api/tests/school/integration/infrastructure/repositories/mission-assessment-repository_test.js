@@ -200,7 +200,7 @@ describe('Integration | Repository | mission-assessment-repository', function ()
   describe('#getStatusesForLearners', function () {
     it('should return references or last assessment started and completed', async function () {
       const organizationLearnerWithCompletedAssessment = databaseBuilder.factory.buildOrganizationLearner();
-      const organizationLearnerWithStartedAssessment = databaseBuilder.factory.buildOrganizationLearner();
+      const organizationLearnerWithStartedAndAbortedAssessment = databaseBuilder.factory.buildOrganizationLearner();
       const organizationLearnerWithoutAssessment = databaseBuilder.factory.buildOrganizationLearner();
       const organizationLearnerWhoRetriedMission = databaseBuilder.factory.buildOrganizationLearner();
       const organizationLearnerWhoRetriedAndCompletedMissions = databaseBuilder.factory.buildOrganizationLearner();
@@ -209,9 +209,17 @@ describe('Integration | Repository | mission-assessment-repository', function ()
 
       const startedMissionAssessment = databaseBuilder.factory.buildMissionAssessment({
         missionId,
-        organizationLearnerId: organizationLearnerWithStartedAssessment.id,
+        organizationLearnerId: organizationLearnerWithStartedAndAbortedAssessment.id,
         state: Assessment.states.STARTED,
         createdAt: new Date('2023-10-10'),
+        result: null,
+      });
+
+      databaseBuilder.factory.buildMissionAssessment({
+        missionId,
+        organizationLearnerId: organizationLearnerWithStartedAndAbortedAssessment.id,
+        state: Assessment.states.ABORTED,
+        createdAt: new Date('2023-05-05'),
         result: null,
       });
 
@@ -270,7 +278,7 @@ describe('Integration | Repository | mission-assessment-repository', function ()
       const organizationLearners = [
         organizationLearnerWithCompletedAssessment,
         organizationLearnerWithoutAssessment,
-        organizationLearnerWithStartedAssessment,
+        organizationLearnerWithStartedAndAbortedAssessment,
         organizationLearnerWhoRetriedMission,
         organizationLearnerWhoRetriedAndCompletedMissions,
       ];
@@ -284,7 +292,7 @@ describe('Integration | Repository | mission-assessment-repository', function ()
         }),
         new MissionLearner({ ...organizationLearnerWithoutAssessment, missionStatus: 'not-started' }),
         new MissionLearner({
-          ...organizationLearnerWithStartedAssessment,
+          ...organizationLearnerWithStartedAndAbortedAssessment,
           missionStatus: 'started',
           result: startedMissionAssessment.result,
         }),
