@@ -7,7 +7,7 @@ const COLUMN_NAME = 'accessCode';
  * @returns { Promise<void> }
  */
 const up = async function (knex) {
-  await knex.raw(`DROP INDEX IF EXISTS ??;`, [INDEX_NAME]);
+  await knex.raw(`DROP INDEX CONCURRENTLY IF EXISTS ??;`, [INDEX_NAME]);
 };
 
 /**
@@ -20,4 +20,7 @@ const down = async function (knex) {
   });
 };
 
-export { down, up };
+// DROP INDEX CONCURRENTLY cannot run inside a transaction block
+const config = { transaction: false };
+
+export { config, down, up };
