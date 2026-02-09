@@ -468,12 +468,13 @@ export default function routes() {
   });
 
   this.post('/admin/organizations/:id/invitations', (schema, request) => {
+    const organizationId = request.params.id;
     const params = JSON.parse(request.requestBody);
     const email = params.data.attributes.email;
     const lang = params.data.attributes.lang;
     const role = params.data.attributes.role;
     const updatedAt = Date.now();
-    return schema.organizationInvitations.create({ email, lang, role, updatedAt });
+    return schema.organizationInvitations.create({ email, lang, role, updatedAt, organizationId });
   });
   this.delete('/admin/organizations/:id/invitations/:invitation-id', (schema, request) => {
     const organizationInvitationId = request.params['invitation-id'];

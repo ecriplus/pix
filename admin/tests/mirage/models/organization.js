@@ -5,4 +5,5 @@ export default Model.extend({
   targetProfileSummaries: hasMany('targetProfileSummary'),
   tags: hasMany('tag'),
   children: hasMany('organization'),
+  organizationInvitations: hasMany('organizationInvitation'),
 });

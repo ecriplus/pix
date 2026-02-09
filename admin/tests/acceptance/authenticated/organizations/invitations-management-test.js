@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import { setupIntl } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -17,37 +18,68 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
     intl = this.owner.lookup('service:intl');
   });
 
-  test('should allow to invite a member when user has access', async function (assert) {
-    // given
-    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    const organization = this.server.create('organization', {
-      name: 'Aude Javel Company',
-      features: { PLACES_MANAGEMENT: { active: true } },
+  module('inviting a member', function () {
+    test('should allow to invite a member when user has access', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const organization = this.server.create('organization', {
+        name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
+
+      // when
+      const screen = await visit(`/organizations/${organization.id}/invitations`);
+      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' }), 'user@example.com');
+      await click(screen.getByRole('button', { name: 'Inviter un membre' }));
+
+      // then
+      const createdInvitation = screen.getByRole('cell', { name: 'user@example.com' });
+
+      assert.ok(createdInvitation);
+      assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
+      assert.ok(screen.getByRole('link', { name: `${t('pages.organization.navbar.invitations')} (1)` }));
+      assert.ok(screen.getByText("Un email a bien a été envoyé à l'adresse user@example.com."));
     });
 
-    // when
-    const screen = await visit(`/organizations/${organization.id}/invitations`);
-    await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' }), 'user@example.com');
-    await click(screen.getByRole('button', { name: 'Inviter un membre' }));
+    test('should display an error if the creation has failed', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const organization = this.server.create('organization', {
+        name: 'Orga name',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
 
-    // then
-    assert.dom(screen.getByText('user@example.com')).exists();
-    assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
-  });
+      this.server.post(
+        '/admin/organizations/:id/invitations',
+        () => ({ errors: [{ status: '500', title: 'An error occurred' }] }),
+        500,
+      );
 
-  test('should not allow to invite a member when user does not have access', async function (assert) {
-    // given
-    await authenticateAdminMemberWithRole({ isCertif: true })(server);
-    const organization = this.server.create('organization', {
-      name: 'Aude Javel Company',
-      features: { PLACES_MANAGEMENT: { active: true } },
+      // when
+      const screen = await visit(`/organizations/${organization.id}/invitations`);
+      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' }), 'user@example.com');
+      await click(screen.getByRole('button', { name: 'Inviter un membre' }));
+
+      // then
+      const createdInvitation = screen.queryByRole('cell', { name: 'user@example.com' });
+      assert.notOk(createdInvitation);
+      assert.ok(screen.getByText('Une erreur s’est produite, veuillez réessayer.'));
     });
 
-    // when
-    const screen = await visit(`/organizations/${organization.id}/invitations`);
+    test('should not allow to invite a member when user does not have access', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isCertif: true })(server);
+      const organization = this.server.create('organization', {
+        name: 'Aude Javel Company',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
 
-    // then
-    assert.dom(screen.queryByText('Inviter un membre')).doesNotExist();
+      // when
+      const screen = await visit(`/organizations/${organization.id}/invitations`);
+
+      // then
+      assert.notOk(screen.queryByRole('button', { name: 'Inviter un membre' }));
+    });
   });
 
   module('when an admin member cancels an invitation', function () {
@@ -70,7 +102,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
       await click(screen.getByRole('button', { name: 'Annuler l’invitation de kabuki@example.net' }));
 
       // then
-      assert.dom(screen.getByText('Cette invitation a bien été annulée.')).exists();
+      assert.ok(screen.getByText('Cette invitation a bien été annulée.'));
     });
 
     module('and an error occurs', function () {
@@ -102,9 +134,9 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
         await click(screen.getByRole('button', { name: 'Annuler l’invitation de kabuki@example.net' }));
 
         // then
-        assert.dom(screen.getByText('Une erreur s’est produite, veuillez réessayer.')).exists();
-        assert.dom(screen.getByRole('cell', { name: 'kabuki@example.net' })).exists();
-        assert.dom(screen.getByRole('cell', { name: intl.formatDate(updatedAt, { format: 'medium' }) })).exists();
+        assert.ok(screen.getByText('Une erreur s’est produite, veuillez réessayer.'));
+        assert.ok(screen.getByRole('cell', { name: 'kabuki@example.net' }));
+        assert.ok(screen.getByRole('cell', { name: intl.formatDate(updatedAt, { format: 'medium' }) }));
       });
     });
   });

@@ -166,12 +166,16 @@ module('Acceptance | Organizations | Get', function (hooks) {
 
       module('Invitations tab', function () {
         test('it should display invitations tab', async function (assert) {
+          // given
+          server.create('organization-invitation', { email: 'toto@example.net', status: 'pending' });
           // when
           const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
 
           // then
           const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-          assert.ok(within(navigationTabs).getByRole('link', { name: t('pages.organization.navbar.invitations') }));
+          assert.ok(
+            within(navigationTabs).getByRole('link', { name: `${t('pages.organization.navbar.invitations')} (0)` }),
+          );
         });
 
         test('it should navigate to invitations page when clicking tab', async function (assert) {
@@ -182,7 +186,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
           const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
 
           const invitationsTab = within(navigationTabs).getByRole('link', {
-            name: t('pages.organization.navbar.invitations'),
+            name: `${t('pages.organization.navbar.invitations')} (0)`,
           });
           await click(invitationsTab);
 
@@ -191,7 +195,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
         });
 
         module('When organization is archived', function () {
-          test('it should not display team tab', async function (assert) {
+          test('it should not display invitations tab', async function (assert) {
             // given
             server.create('organization', {
               id: ARCHIVED_ORGANIZATION_ID,
@@ -204,7 +208,9 @@ module('Acceptance | Organizations | Get', function (hooks) {
 
             // then
             const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-            assert.notOk(within(navigationTabs).queryByRole('link', { name: t('pages.organization.navbar.team') }));
+            assert.notOk(
+              within(navigationTabs).queryByRole('link', { name: t('pages.organization.navbar.invitations') }),
+            );
           });
         });
       });
