@@ -19,6 +19,7 @@ export const replications = [
         'competence_code',
         'area_name',
         'certification_courses_id',
+        'configuration',
       );
     },
     to: ({ datamartKnex }, chunk) => {
@@ -44,6 +45,7 @@ export const replications = [
         'competence_code',
         'area_name',
         'certification_courses_id',
+        'configuration',
       );
     },
     to: ({ datamartKnex }, chunk) => {

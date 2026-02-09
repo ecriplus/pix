@@ -24,6 +24,7 @@ export class CertificationResult {
     pixScore,
     certificationDate,
     competences,
+    maxReachableLevel,
   }) {
     this.ine = ine;
     this.organizationUai = organizationUai;

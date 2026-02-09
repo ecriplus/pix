@@ -61,6 +61,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 5,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });
@@ -115,6 +116,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 3,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });
@@ -201,6 +203,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 5,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });
@@ -265,6 +268,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 5,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });
@@ -353,6 +357,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 5,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });
@@ -410,6 +415,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               level: 3,
             }),
           ],
+          maxReachableLevel: 7,
         });
         expect(results).to.deep.equal([expectedCertification]);
       });

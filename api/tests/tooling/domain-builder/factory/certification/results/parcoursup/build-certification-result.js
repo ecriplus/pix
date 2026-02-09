@@ -10,6 +10,7 @@ const buildCertificationResult = function ({
   pixScore,
   certificationDate,
   competences,
+  maxReachableLevel,
 }) {
   return new CertificationResult({
     ine,
@@ -21,6 +22,7 @@ const buildCertificationResult = function ({
     pixScore,
     certificationDate,
     competences,
+    maxReachableLevel,
   });
 };
 
