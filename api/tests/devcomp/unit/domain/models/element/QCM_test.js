@@ -20,6 +20,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
         proposals: [proposal1, proposal2],
         feedbacks,
         solutions,
+        hasShortProposals: true,
       });
 
       // Then
@@ -30,6 +31,8 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       expect(qcm.proposals).deep.equal([proposal1, proposal2]);
       expect(qcm.feedbacks).deep.equal(feedbacks);
       expect(qcm.solutions).deep.equal(solutions);
+      expect(qcm.isAnswerable).to.be.true;
+      expect(qcm.hasShortProposals).to.be.true;
     });
   });
 

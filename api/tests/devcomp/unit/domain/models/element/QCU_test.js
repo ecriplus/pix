@@ -17,6 +17,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCU', function () {
         locales: ['fr-FR'],
         proposals: [proposal1, proposal2],
         solution: 'proposal1',
+        hasShortProposals: true,
       });
 
       // Then
@@ -26,6 +27,8 @@ describe('Unit | Devcomp | Domain | Models | Element | QCU', function () {
       expect(qcu.locales).deep.equal(['fr-FR']);
       expect(qcu.proposals).deep.equal([proposal1, proposal2]);
       expect(qcu.solution).deep.equal('proposal1');
+      expect(qcu.isAnswerable).to.be.true;
+      expect(qcu.hasShortProposals).to.be.true;
       expect(qcu.feedbacks).to.be.undefined;
     });
   });

@@ -20,6 +20,8 @@ describe('Unit | Devcomp | Domain | Models | Element | QCU-declarative', functio
       expect(qcu.instruction).equal('instruction');
       expect(qcu.type).equal('qcu-declarative');
       expect(qcu.proposals).deep.equal([proposal1, proposal2]);
+      expect(qcu.isAnswerable).to.be.true;
+      expect(qcu.hasShortProposals).to.be.false;
     });
   });
 });
