@@ -30,6 +30,7 @@ export default class Organization extends Model {
   @attr('string') administrationTeamName;
   @attr('number') countryCode;
   @attr('string') countryName;
+  @attr('string') organizationLearnerTypeName;
 
   @hasMany('organization-membership', { async: true, inverse: 'organization' }) organizationMemberships;
   @hasMany('target-profile-summary', { async: true, inverse: null }) targetProfileSummaries;

@@ -112,6 +112,12 @@ class OrganizationDescription extends Component {
         </div>
         <div class="organization-information-section__right-block">
           <div class="organization-information-section__field">
+            <span class="organization-information-section__label">
+              {{t "components.organizations.information-section-view.organization-learner-type"}}
+            </span>
+            <span class="organization-information-section__value">{{@organization.organizationLearnerTypeName}}</span>
+          </div>
+          <div class="organization-information-section__field">
             <span class="organization-information-section__label">{{t
                 "components.organizations.information-section-view.country.label"
               }}</span>
