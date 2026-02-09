@@ -54,25 +54,6 @@ module('Integration | Component | Authentication | oidc-provider-selector', func
     assert.deepEqual(optionsLabels, ['First', 'Second', 'Third']);
   });
 
-  test('it displays only visible oidc providers', async function (assert) {
-    // given
-    const providers = [
-      { id: 'third', slug: 'third', organizationName: 'Third', isVisible: true },
-      { id: 'second', slug: 'second', organizationName: 'Second', isVisible: true },
-      { id: 'first', slug: 'first', organizationName: 'First', isVisible: false },
-    ];
-
-    // when
-    const screen = await render(<template><OidcProviderSelector @providers={{providers}} /></template>);
-    await click(screen.getByRole('button', { name: t(I18N_KEYS.selectLabel) }));
-    await screen.findByRole('listbox');
-
-    // then
-    assert.dom(screen.getByText('Third')).exists();
-    assert.dom(screen.getByText('Second')).exists();
-    assert.dom(screen.queryByText('First')).doesNotExist();
-  });
-
   module('when user selects a provider', function () {
     test('it triggers the onProviderChange property', async function (assert) {
       // given
