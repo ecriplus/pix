@@ -46,10 +46,6 @@ export class CandidateData {
     this.firstName = firstName || '';
     this.lastName = lastName || '';
     this.sex = sex || '';
-    this.birthPostalCode = birthPostalCode || '';
-    this.birthINSEECode = birthINSEECode || '';
-    //this.birthCity = #extractBirthCity(birthCity, birthCountry) || '';
-    this.birthCity = birthCity || '';
     this.birthProvinceCode = birthProvinceCode || '';
     this.birthCountry = birthCountry || '';
     this.email = email || '';
@@ -67,9 +63,10 @@ export class CandidateData {
     this.organizationLearnerId = organizationLearnerId || '';
     this.billingMode = CertificationCandidate.translateBillingMode({ billingMode, translate: this.translate });
     this.prepaymentCode = prepaymentCode || '';
+    this.#setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode);
     this.#setupKindOfCertificationAttributes(complementaryCertification);
     this.count = number;
-    this.#clearBirthInformationDataForExport();
+    this.#setBirthINSEECode(birthINSEECode, birthCountry);
   }
 
   #setupKindOfCertificationAttributes(complementaryCertification) {
@@ -83,22 +80,16 @@ export class CandidateData {
     this.pixPlusEduCPE = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE ? yes : '';
   }
 
-  #extractBirthCity(birthCity, birthCountry) {
-    return birthCountry.toUpperCase() === 'FRANCE' ? '' : birthCity;
+  #setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode) {
+    this.birthCity = birthCountry?.toUpperCase() === 'FRANCE' && birthINSEECode ? '' : birthCity;
+    this.birthPostalCode = birthCountry?.toUpperCase() === 'FRANCE' && birthINSEECode ? '' : birthPostalCode;
   }
 
-  #clearBirthInformationDataForExport() {
-    if (this.birthCountry.toUpperCase() === 'FRANCE') {
-      if (this.birthINSEECode) {
-        this.birthPostalCode = '';
-        this.birthCity = '';
-      }
-
-      return;
-    }
-
-    if (this.birthINSEECode && this.birthINSEECode !== FRANCE_COUNTRY_CODE) {
+  #setBirthINSEECode(birthINSEECode, birthCountry) {
+    if (birthCountry != 'FRANCE' && birthINSEECode && birthINSEECode !== FRANCE_COUNTRY_CODE) {
       this.birthINSEECode = '99';
+    } else {
+      this.birthINSEECode = birthINSEECode;
     }
   }
 
