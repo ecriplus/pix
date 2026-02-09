@@ -54,6 +54,7 @@ module('Integration | Component | organizations/information-section-view', funct
         administrationTeamName: 'team Rocket',
         countryCode: 99100,
         countryName: 'France',
+        organizationLearnerTypeName: 'super-type-de-prescrit',
       };
 
       // when
@@ -113,6 +114,12 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
         .hasText('super-sso');
+      assert
+        .dom(
+          screen.getByText(t('components.organizations.information-section-view.organization-learner-type'))
+            .nextElementSibling,
+        )
+        .hasText('super-type-de-prescrit');
     });
 
     test('it renders GAR identity provider correctly', async function (assert) {

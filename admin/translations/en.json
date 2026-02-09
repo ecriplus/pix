@@ -810,6 +810,7 @@
           "title": "Features"
         },
         "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
+        "organization-learner-type": "Organization learner type",
         "province-code": "Province code",
         "sco-activation-email": "SCO activation e-mail address",
         "sso": "SSO",

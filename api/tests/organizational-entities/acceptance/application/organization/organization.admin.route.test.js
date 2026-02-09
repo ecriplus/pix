@@ -616,6 +616,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'administration-team-name': administrationTeam.name,
               'country-code': country.code,
               'country-name': country.commonName,
+              'organization-learner-type-name': `Type pour organisation ${organization.id}`,
               features: {
                 [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
                 [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true, params: null },

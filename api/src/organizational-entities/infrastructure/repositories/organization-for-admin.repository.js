@@ -115,6 +115,7 @@ const get = async function ({ organizationId }) {
       administrationTeamId: 'organizations.administrationTeamId',
       administrationTeamName: 'administrationTeams.name',
       countryCode: 'organizations.countryCode',
+      organizationLearnerTypeName: 'organization_learner_types.name',
     })
     .leftJoin('users AS archivists', 'archivists.id', 'organizations.archivedBy')
     .leftJoin(
@@ -122,6 +123,7 @@ const get = async function ({ organizationId }) {
       'administrationTeams.id',
       'organizations.administrationTeamId',
     )
+    .leftJoin('organization_learner_types', 'organization_learner_types.id', 'organizations.organizationLearnerTypeId')
     .leftJoin('users AS creators', 'creators.id', 'organizations.createdBy')
     .leftJoin(
       'data-protection-officers AS dataProtectionOfficers',
@@ -471,6 +473,7 @@ function _toDomain(rawOrganization) {
     administrationTeamId: rawOrganization.administrationTeamId,
     administrationTeamName: rawOrganization.administrationTeamName,
     countryCode: rawOrganization.countryCode,
+    organizationLearnerTypeName: rawOrganization.organizationLearnerTypeName,
   });
 
   return organization;

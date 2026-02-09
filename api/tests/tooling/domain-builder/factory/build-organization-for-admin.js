@@ -33,6 +33,7 @@ function buildOrganizationForAdmin({
   administrationTeamName = null,
   countryCode = null,
   countryName = null,
+  organizationLearnerTypeName = null,
 } = {}) {
   return new OrganizationForAdmin({
     id,
@@ -67,6 +68,7 @@ function buildOrganizationForAdmin({
     administrationTeamName,
     countryCode,
     countryName,
+    organizationLearnerTypeName,
   });
 }
 

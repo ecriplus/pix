@@ -54,6 +54,7 @@ class OrganizationForAdmin {
     administrationTeamName,
     countryCode,
     countryName,
+    organizationLearnerTypeName,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -84,6 +85,7 @@ class OrganizationForAdmin {
     this.tagIds = tagIds;
     this.administrationTeamId = administrationTeamId;
     this.administrationTeamName = administrationTeamName;
+    this.organizationLearnerTypeName = organizationLearnerTypeName;
 
     // @deprecated you should use value stored in features property
     this.isManagingStudents = isManagingStudents;

@@ -32,6 +32,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         name: 'motherSco',
         countryCode: 99100,
         countryName: 'France',
+        organizationLearnerTypeName: 'Learner type',
       });
       const organization = domainBuilder.buildOrganizationForAdmin({
         email: 'sco.generic.account@example.net',
@@ -54,6 +55,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         administrationTeamName: administrationTeam.name,
         countryCode: 99100,
         countryName: 'France',
+        organizationLearnerTypeName: 'Learner type',
       });
       const meta = { some: 'meta' };
 
@@ -95,6 +97,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             features: organization.features,
             'country-code': organization.countryCode,
             'country-name': organization.countryName,
+            'organization-learner-type-name': organization.organizationLearnerTypeName,
           },
           relationships: {
             'organization-memberships': {
