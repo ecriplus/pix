@@ -34,7 +34,7 @@ export async function findCampaignParticipationKnowledgeElementSnapshots(campaig
   return campaignParticipationIds.map(
     (campaignParticipationId) =>
       new CampaignParticipationKnowledgeElementSnapshots({
-        knowledgeElements: knowledgeElementsByCampaignParticipation[campaignParticipationId],
+        knowledgeElements: knowledgeElementsByCampaignParticipation[campaignParticipationId] ?? [],
         campaignParticipationId: campaignParticipationId,
       }),
   );

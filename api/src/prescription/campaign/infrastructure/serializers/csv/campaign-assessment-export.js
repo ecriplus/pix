@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import * as improvementService from '../../../../../evaluation/domain/services/improvement-service.js';
 import {
   CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
   CONCURRENCY_HEAVY_OPERATIONS,
@@ -35,11 +36,13 @@ class CampaignAssessmentExport {
   }
 
   export(
-    campaignParticipationInfos,
-    knowledgeElementRepository,
-    badgeAcquisitionRepository,
-    stageAcquisitionRepository,
-    knowledgeElementSnapshotRepository,
+    {
+      campaignParticipationInfos,
+      knowledgeElementForParticipationService,
+      badgeAcquisitionRepository,
+      stageAcquisitionRepository,
+      knowledgeElementSnapshotRepository,
+    },
     constants = {
       CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
       CONCURRENCY_HEAVY_OPERATIONS,
@@ -72,9 +75,14 @@ class CampaignAssessmentExport {
         const startedParticipations = campaignParticipationInfoChunk.filter(
           ({ isShared, isCompleted }) => !isShared && !isCompleted,
         );
-        const startedKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
-          userIds: startedParticipations.map(({ userId }) => userId),
-        });
+
+        const startedKnowledgeElementsByUserIdAndCompetenceId =
+          await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+            participationInfos: startedParticipations.map(({ userId, campaignParticipationId }) => {
+              return { userId, campaignParticipationId };
+            }),
+            fetchFromSnapshot: this.campaign.isExam,
+          });
 
         const csvLines = campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
           this.#buildCSVLineForParticipation({
@@ -82,8 +90,6 @@ class CampaignAssessmentExport {
             acquiredStages,
             campaignParticipationInfo,
             campaignParticipationInfoChunk,
-            knowledgeElementRepository,
-            knowledgeElementSnapshotRepository,
             sharedKnowledgeElementsByUserIdAndCompetenceId,
             startedKnowledgeElementsByUserIdAndCompetenceId,
           }),
@@ -216,12 +222,27 @@ class CampaignAssessmentExport {
       );
     } else if (campaignParticipationInfo.isCompleted === false) {
       const othersResultInfo = startedKnowledgeElementsByUserIdAndCompetenceId.find(
-        (knowledElementForOtherParticipation) =>
-          campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId,
+        (knowledElementForOtherParticipation) => {
+          const assessmentValidation =
+            !this.campaign.isExam && campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId;
+          const examValidation =
+            this.campaign.isExam &&
+            campaignParticipationInfo.campaignParticipationId ===
+              knowledElementForOtherParticipation.campaignParticipationId;
+
+          return assessmentValidation || examValidation;
+        },
       );
-      participantKnowledgeElementsByCompetenceId = this.learningContent.getKnowledgeElementsGroupedByCompetence(
-        othersResultInfo.knowledgeElements,
-      );
+
+      const filteredKnowledgeElements = improvementService.filterKnowledgeElements({
+        knowledgeElements: othersResultInfo.knowledgeElements,
+        isFromCampaign: true,
+        isImproving: true,
+        createdAt: campaignParticipationInfo.createdAt,
+      });
+
+      participantKnowledgeElementsByCompetenceId =
+        this.learningContent.getKnowledgeElementsGroupedByCompetence(filteredKnowledgeElements);
     }
     return participantKnowledgeElementsByCompetenceId;
   }

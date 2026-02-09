@@ -592,6 +592,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               userId: participant.id,
               state: Assessment.states.STARTED,
               type: Assessment.types.CAMPAIGN,
+              createdAt,
             });
 
             databaseBuilder.factory.buildKnowledgeElement({
@@ -599,6 +600,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               skillId: 'recSkillWeb1',
               competenceId: 'recCompetence1',
               userId: participant.id,
+              createdAt,
             });
 
             // anonymized learner
@@ -631,6 +633,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               skillId: 'recSkillWeb1',
               competenceId: 'recCompetence1',
               userId: anonymizedUser.id,
+              createdAt: new Date('2018-01-01'),
             });
 
             await databaseBuilder.commit();
