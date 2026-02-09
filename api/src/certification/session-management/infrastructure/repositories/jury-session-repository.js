@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../../../db/pgsql-errors.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -23,7 +22,8 @@ const ALIASED_COLUMNS = Object.freeze({
 });
 
 const get = async function ({ id }) {
-  const jurySessionDTO = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const jurySessionDTO = await knexConn
     .select(COLUMNS)
     .select(ALIASED_COLUMNS)
     .from('sessions')
@@ -42,7 +42,8 @@ const get = async function ({ id }) {
 };
 
 const findPaginatedFiltered = async function ({ filters, page }) {
-  const query = knex
+  const knexConn = DomainTransaction.getConnection();
+  const query = knexConn
     .select(COLUMNS)
     .select(ALIASED_COLUMNS)
     .from('sessions')
@@ -64,9 +65,9 @@ const findPaginatedFiltered = async function ({ filters, page }) {
 };
 
 const getCounters = async function ({ sessionId }) {
-  const knex = DomainTransaction.getConnection();
+  const knexConn = DomainTransaction.getConnection();
 
-  const { startedCertifications } = await knex
+  const { startedCertifications } = await knexConn
     .from('certification-courses')
     .innerJoin('assessments', 'certification-courses.id', 'assessments.certificationCourseId')
     .where('assessments.state', '=', CertificationAssessment.states.STARTED)
@@ -74,7 +75,7 @@ const getCounters = async function ({ sessionId }) {
     .count('assessments.state as startedCertifications')
     .first();
 
-  const { certificationsWithScoringError } = await knex
+  const { certificationsWithScoringError } = await knexConn
     .from('certification-courses')
     .innerJoin(
       'certification-courses-last-assessment-results',
@@ -91,7 +92,7 @@ const getCounters = async function ({ sessionId }) {
     .count('assessment-results.id as certificationsWithScoringError')
     .first();
 
-  const issueReports = await knex
+  const issueReports = await knexConn
     .from('certification-courses')
     .innerJoin(
       'certification-issue-reports',
@@ -113,8 +114,9 @@ const _toJurySessionCountersDomainModel = ({ startedCertifications, certificatio
 };
 
 const assignCertificationOfficer = async function ({ id, assignedCertificationOfficerId }) {
+  const knexConn = DomainTransaction.getConnection();
   try {
-    const updatedLines = await knex('sessions').where({ id }).update({ assignedCertificationOfficerId });
+    const updatedLines = await knexConn('sessions').where({ id }).update({ assignedCertificationOfficerId });
     if (updatedLines === 0) {
       throw new NotFoundError(`La session d'id ${id} n'existe pas.`);
     }

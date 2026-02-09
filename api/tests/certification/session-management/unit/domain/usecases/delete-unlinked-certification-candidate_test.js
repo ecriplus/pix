@@ -1,5 +1,6 @@
 import { CertificationCandidateForbiddenDeletionError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { deleteUnlinkedCertificationCandidate } from '../../../../../../src/certification/enrolment/domain/usecases/delete-unlinked-certification-candidate.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -14,6 +15,7 @@ describe('Unit | UseCase | delete-unlinked-certification-candidate', function ()
       remove: sinon.stub(),
     };
     candidateRepository.remove.withArgs({ id: candidateId }).resolves(true);
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
   });
 
   context('When the certification candidate is not linked to a user', function () {

@@ -6,6 +6,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 
+// We voluntarily let the transaction contained in the repository as the usecase initiate a lengthy treatment
+
 /**
  * @function
  * @param {object} params

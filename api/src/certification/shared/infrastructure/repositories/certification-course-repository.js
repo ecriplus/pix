@@ -30,15 +30,15 @@ async function save({ certificationCourse }) {
   return get({ id: certificationCourseId });
 }
 
-const _findCertificationCourse = async function (id, knexConn = knex) {
+const _findCertificationCourse = async function (id, knexConn) {
   return knexConn('certification-courses').where({ id }).first();
 };
 
-const _findAssessment = async function (certificationCourseId, knexConn = knex) {
+const _findAssessment = async function (certificationCourseId, knexConn) {
   return knexConn('assessments').where({ certificationCourseId }).first();
 };
 
-const _findAllChallenges = async function (certificationCourseId, knexConn = knex) {
+const _findAllChallenges = async function (certificationCourseId, knexConn) {
   return knexConn('certification-challenges').where({ courseId: certificationCourseId });
 };
 
@@ -167,6 +167,7 @@ async function findAllByUserId({ userId }) {
   });
 }
 
+// TODO revoir plus tard la pertinence ou pas
 async function update({ certificationCourse, noTransaction = false }) {
   const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
 
@@ -180,7 +181,7 @@ async function update({ certificationCourse, noTransaction = false }) {
     throw new NotFoundError(`No rows updated for certification course of id ${certificationCourse.getId()}.`);
   }
 
-  return get({ id: certificationCourseData.id });
+  return get({ id: certificationCourseData.id }); // should have pass it noTransaction as well ?
 }
 
 async function isVerificationCodeAvailable({ verificationCode }) {
