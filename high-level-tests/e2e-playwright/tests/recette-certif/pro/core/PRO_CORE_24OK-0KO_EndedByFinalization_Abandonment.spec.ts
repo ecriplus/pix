@@ -3,9 +3,9 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
-} from '../../../../helpers/certification/index.ts';
-import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
-import { LoginPage as AdminLoginPage } from '../../../../pages/pix-admin/index.ts';
+} from '../../../../helpers/certification/utils.ts';
+import { PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
+import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 import data from '../../data.json' with { type: 'json' };
@@ -56,8 +56,7 @@ test.describe(testRef, () => {
 
       const pixAdminPage = await pixSuperAdminContext.newPage();
       await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
-      const adminLoginPage = new AdminLoginPage(pixAdminPage);
-      const adminHomepage = await adminLoginPage.login(PIX_ADMIN_CERTIF_DATA.email, PIX_ADMIN_CERTIF_DATA.rawPassword);
+      const adminHomepage = new AdminHomePage(pixAdminPage);
 
       await test.step('Check all session data', async () => {
         const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
@@ -66,7 +65,7 @@ test.describe(testRef, () => {
         await test.step('Check session information', async () => {
           await checkSessionInformationAndExpectSuccess(sessionPage, {
             certificationCenter:
-              PIX_CERTIF_PRO_DATA.certificationCenter.externalId + PIX_CERTIF_PRO_DATA.certificationCenter.type,
+              PIX_CERTIF_PRO_DATA.certificationCenters[0].externalId + PIX_CERTIF_PRO_DATA.certificationCenters[0].type,
             address: `address ${testRef}`,
             room: `room ${testRef}`,
             invigilatorName: `examiner ${testRef}`,
@@ -80,7 +79,18 @@ test.describe(testRef, () => {
 
         await pixAdminPage.getByRole('link', { name: 'Liste des certifications de la session', exact: true }).click();
         await test.step('Check certification information', async () => {
-          const certificationInformationPage = await sessionPage.goToCertificationInfoPage(
+          const certificationListPage = await sessionPage.goToCertificationListPage();
+          const certificationData = await certificationListPage.getCertificationData();
+          expect(certificationData.length).toBe(1);
+          expect(certificationData[0]).toMatchObject({
+            Prénom: data.certifiableUser.firstName,
+            Nom: data.certifiableUser.lastName,
+            Statut: 'Validée',
+            Score: '808',
+            'Signalements impactants non résolus': '',
+            'Certification passée': 'Certification Pix',
+          });
+          const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
             data.certifiableUser.firstName,
           );
           certificationNumber = certificationInformationPage.getCertificationNumber();

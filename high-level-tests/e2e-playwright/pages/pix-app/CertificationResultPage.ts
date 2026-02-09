@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 
 import { normalizeWhitespace } from '../../helpers/utils.ts';
+
 export class CertificationResultPage {
   constructor(public readonly page: Page) {}
 
@@ -22,9 +23,11 @@ export class CertificationResultPage {
       this.page.getByTestId('pw-candidate-certificate-global-level').innerText(),
       this.page.getByTestId('pw-candidate-certificate-insufficient-global-level').innerText(),
     ]);
+    const isCleaObtained = await this.page.getByText('Certification CléA Numérique by Pix').isVisible();
     return {
       pixScoreObtained: normalizeWhitespace(pixScoreRaw),
       pixLevelReached: normalizeWhitespace(globalLevelRaw),
+      isCleaObtained,
     };
   }
 }

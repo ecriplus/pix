@@ -5,13 +5,13 @@ import {
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
-import { PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
+import { CERTIFICATIONS_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 import data from '../../data.json' with { type: 'json' };
 
-const testRef = 'PRO_CORE_32OK-0KO_Rescore';
+const testRef = 'PRO_CLEA_32OK-0KO_Rescore';
 const snapshotPath = `recette-certif/${testRef}.json`;
 const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
@@ -20,10 +20,11 @@ test.describe(testRef, () => {
     testRef,
     rightWrongAnswersSequence: Array(32).fill(true),
     candidateData: data.certifiableUser,
+    certificationKey: CERTIFICATIONS_DATA.CLEA.key,
   });
 
   test(
-    `${testRef} - User takes a certification test for a PRO certification center, only CORE subscription. 32 right answers. Certification is rescored`,
+    `${testRef} - User takes a certification test for a PRO certification center, CLEA subscription. 32 right answers. Certification is rescored`,
     {
       tag: ['@snapshot'],
       annotation: [
@@ -93,7 +94,7 @@ test.describe(testRef, () => {
             Statut: 'Validée',
             Score: '895',
             'Signalements impactants non résolus': '',
-            'Certification passée': 'Certification Pix',
+            'Certification passée': 'Double Certification Pix/CléA Numérique',
           });
           const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
             data.certifiableUser.firstName,
@@ -104,6 +105,8 @@ test.describe(testRef, () => {
             status: 'Validée',
             score: '895 Pix',
           });
+          const cleaResult = await certificationInformationPage.getCleaResult();
+          expect(cleaResult).toBe('Validée');
           await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
             nbAnsweredQuestionsOverTotal: '32/32',
             nbQuestionsOK: 32,
@@ -121,6 +124,8 @@ test.describe(testRef, () => {
 
           await test.step('Rescore certification', async () => {
             await certificationInformationPage.rescoreCertification();
+            const cleaResult = await certificationInformationPage.getCleaResult();
+            expect(cleaResult).toBe('Validée');
             await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
               sessionNumber,
               status: 'Validée',
@@ -142,9 +147,10 @@ test.describe(testRef, () => {
         const status = await certificationsListPage.getCertificationStatus(certificationNumber);
         expect(status).toBe('Obtenue');
         const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
-        const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
+        const { pixScoreObtained, pixLevelReached, isCleaObtained } = await certificationResultPage.getResultInfo();
         expect(pixScoreObtained).toEqual('PIX 528 CERTIFIÉS');
         expect(pixLevelReached).toEqual('Vous avez atteint le niveau Avancé 1 de la Certification Pix !');
+        expect(isCleaObtained).toBe(true);
         const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
         await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);

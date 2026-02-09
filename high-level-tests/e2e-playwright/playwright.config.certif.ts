@@ -6,15 +6,15 @@ export default defineConfig({
   ...sharedConfig,
   projects: [
     {
-      name: 'recette certif - création utilisateur certifiable',
+      name: 'Setup - utilisateur certifiable et prêt pour le cléa',
       testDir: 'tests/recette-certif',
-      testMatch: '**/create-certifiable-user.spec.ts',
+      testMatch: '**/prepare-user-ready-for-certifications.spec.ts',
     },
     {
-      name: 'recette certif - passage de certif PRO coeur',
+      name: 'Recette',
       testDir: 'tests/recette-certif',
       testMatch: '**/pro/**/*.spec.ts',
-      dependencies: ['recette certif - création utilisateur certifiable'],
+      dependencies: ['Setup - utilisateur certifiable et prêt pour le cléa'],
     },
   ],
 

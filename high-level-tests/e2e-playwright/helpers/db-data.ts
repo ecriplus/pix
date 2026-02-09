@@ -1,3 +1,5 @@
+import { PixAdminUserData } from './certification/builders/build-pix-admin-user.ts';
+
 export const PIX_APP_USER_DATA = {
   id: 1_000_001,
   firstName: 'PixApp',
@@ -50,6 +52,12 @@ export const PIX_ORGA_MEMBER_DATA = {
   ],
 };
 
+export const CERTIFICATIONS_DATA = {
+  CLEA: {
+    key: 'CLEA',
+  },
+};
+
 export const PIX_ADMIN_SUPPORT_DATA = {
   id: 1_000_008,
   firstName: 'PixAdmin',
@@ -65,13 +73,19 @@ export const PIX_CERTIF_PRO_DATA = {
   lastName: 'CentrePRO',
   email: 'pix-certif_pro@example.net',
   rawPassword: 'pix123',
-  certificationCenter: {
-    type: 'PRO',
-    externalId: 'CERTIFPRO',
-  },
+  certificationCenters: [
+    {
+      type: 'PRO',
+      externalId: 'CERTIFPRO',
+      habilitations: [CERTIFICATIONS_DATA.CLEA.key],
+      withOrganization: {
+        isManagingStudents: false,
+      },
+    },
+  ],
 };
 
-export const PIX_ADMIN_CERTIF_DATA = {
+export const PIX_ADMIN_CERTIF_DATA: PixAdminUserData = {
   id: 1_000_006,
   firstName: 'PixAdmin',
   lastName: 'RoleCertif',
