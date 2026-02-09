@@ -90,5 +90,12 @@ describe.only('Unit | infrastructure | candidates-import | CandidateData', funct
         expect(candidateData.pixPlusProSante).to.be.equal('');
       });
     });
+
+    describe('use empty string instead of null value', function () {
+      it('replace null by empty string for id attribute', function () {
+        const candidateData = new CandidateData({ i18n, id: null });
+        expect(candidateData.id).to.equal('');
+      });
+    });
   });
 });

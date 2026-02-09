@@ -11,7 +11,7 @@ import { ComplementaryCertificationKeys } from '../../../shared/domain/models/Co
 
 const FRANCE_COUNTRY_CODE = '99100';
 
-class CandidateData {
+export class CandidateData {
   /**
    * @param {object} params
    * @param {ComplementaryCertification|null} params.complementaryCertification
@@ -42,63 +42,52 @@ class CandidateData {
     i18n = null,
   }) {
     this.translate = i18n.__;
-    this.id = this._emptyStringIfNull(id);
-    this.firstName = this._emptyStringIfNull(firstName);
-    this.lastName = this._emptyStringIfNull(lastName);
-    this.sex = this._emptyStringIfNull(sex);
-    this.birthPostalCode = this._emptyStringIfNull(birthPostalCode);
-    this.birthINSEECode = this._emptyStringIfNull(birthINSEECode);
-    this.birthCity = this._emptyStringIfNull(birthCity);
-    this.birthProvinceCode = this._emptyStringIfNull(birthProvinceCode);
-    this.birthCountry = this._emptyStringIfNull(birthCountry);
-    this.email = this._emptyStringIfNull(email);
-    this.resultRecipientEmail = this._emptyStringIfNull(resultRecipientEmail);
-    this.externalId = this._emptyStringIfNull(externalId);
+    this.id = id || '';
+    this.firstName = firstName || '';
+    this.lastName = lastName || '';
+    this.sex = sex || '';
+    this.birthPostalCode = birthPostalCode || '';
+    this.birthINSEECode = birthINSEECode || '';
+    //this.birthCity = #extractBirthCity(birthCity, birthCountry) || '';
+    this.birthCity = birthCity || '';
+    this.birthProvinceCode = birthProvinceCode || '';
+    this.birthCountry = birthCountry || '';
+    this.email = email || '';
+    this.resultRecipientEmail = resultRecipientEmail || '';
+    this.externalId = externalId || '';
     this.birthdate = birthdate === null ? '' : dayjs(birthdate, 'YYYY-MM-DD').format('YYYY-MM-DD');
     if (!_.isFinite(extraTimePercentage) || extraTimePercentage <= 0) {
       this.extraTimePercentage = '';
     } else {
       this.extraTimePercentage = extraTimePercentage;
     }
-    this.createdAt = this._emptyStringIfNull(createdAt);
-    this.sessionId = this._emptyStringIfNull(sessionId);
-    this.userId = this._emptyStringIfNull(userId);
-    this.organizationLearnerId = this._emptyStringIfNull(organizationLearnerId);
+    this.createdAt = createdAt || '';
+    this.sessionId = sessionId || '';
+    this.userId = userId || '';
+    this.organizationLearnerId = organizationLearnerId || '';
     this.billingMode = CertificationCandidate.translateBillingMode({ billingMode, translate: this.translate });
-    this.prepaymentCode = this._emptyStringIfNull(prepaymentCode);
-    this.cleaNumerique = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.CLEA,
-    );
-    this.pixPlusDroit = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-    );
-    this.pixPlusEdu1erDegre = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-    );
-    this.pixPlusEdu2ndDegre = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
-    );
-    this.pixPlusProSante = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-    );
-    this.pixPlusEduCPE = this._displayYesIfCandidateHasComplementaryCertification(
-      complementaryCertification,
-      ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
-    );
+    this.prepaymentCode = prepaymentCode || '';
+    this.#setupKindOfCertificationAttributes(complementaryCertification);
     this.count = number;
-    this._clearBirthInformationDataForExport();
+    this.#clearBirthInformationDataForExport();
   }
 
-  _emptyStringIfNull(value) {
-    return value === null ? '' : value;
+  #setupKindOfCertificationAttributes(complementaryCertification) {
+    const key = complementaryCertification?.key;
+    const yes = this.translate('candidate-list-template.yes');
+    this.cleaNumerique = key === ComplementaryCertificationKeys.CLEA ? yes : '';
+    this.pixPlusDroit = key === ComplementaryCertificationKeys.PIX_PLUS_DROIT ? yes : '';
+    this.pixPlusEdu1erDegre = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE ? yes : '';
+    this.pixPlusEdu2ndDegre = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE ? yes : '';
+    this.pixPlusProSante = key === ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE ? yes : '';
+    this.pixPlusEduCPE = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE ? yes : '';
   }
 
-  _clearBirthInformationDataForExport() {
+  #extractBirthCity(birthCity, birthCountry) {
+    return birthCountry.toUpperCase() === 'FRANCE' ? '' : birthCity;
+  }
+
+  #clearBirthInformationDataForExport() {
     if (this.birthCountry.toUpperCase() === 'FRANCE') {
       if (this.birthINSEECode) {
         this.birthPostalCode = '';
@@ -111,14 +100,6 @@ class CandidateData {
     if (this.birthINSEECode && this.birthINSEECode !== FRANCE_COUNTRY_CODE) {
       this.birthINSEECode = '99';
     }
-  }
-
-  _displayYesIfCandidateHasComplementaryCertification(complementaryCertification, certificationKey) {
-    if (!complementaryCertification) {
-      return '';
-    }
-    const hasComplementaryCertification = complementaryCertification.key === certificationKey;
-    return hasComplementaryCertification ? this.translate('candidate-list-template.yes') : '';
   }
 
   /**
@@ -161,5 +142,3 @@ class CandidateData {
     return new CandidateData({ number, i18n });
   }
 }
-
-export { CandidateData };
