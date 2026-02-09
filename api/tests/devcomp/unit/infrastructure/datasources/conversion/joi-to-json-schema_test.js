@@ -43,6 +43,12 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
       expect(jsonSchema).to.deep.equal({ type: 'string', format: 'email' });
     });
 
+    it('should convert Joi.string.isoDate to JSON Schema with format date', function () {
+      const joiSchema = Joi.string().isoDate();
+      const jsonSchema = convertJoiToJsonSchema(joiSchema);
+      expect(jsonSchema).to.deep.equal({ type: 'string', format: 'date' });
+    });
+
     it('should convert Joi.string.uri to JSON Schema with format uri', function () {
       const joiSchema = Joi.string().uri();
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
