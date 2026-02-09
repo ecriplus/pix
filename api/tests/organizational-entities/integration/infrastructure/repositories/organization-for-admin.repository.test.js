@@ -761,6 +761,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     it('returns an organization for admin by provided id', async function () {
       // given
       const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({ name: 'Type Toto' });
       const parentOrganization = databaseBuilder.factory.buildOrganization({
         type: 'SCO',
         name: 'Mother Of Dark Side',
@@ -772,6 +773,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         email: 'sco.generic.account@example.net',
         createdBy: superAdminUser.id,
         documentationUrl: 'https://pix.fr/',
+        organizationLearnerTypeId: organizationLearnerType.id,
       });
       const organization = databaseBuilder.factory.buildOrganization({
         type: 'SCO',
@@ -792,6 +794,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         parentOrganizationId: parentOrganization.id,
         administrationTeamId: administrationTeam.id,
         countryCode: 99100,
+        organizationLearnerTypeId: organizationLearnerType.id,
       });
 
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -851,6 +854,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         identityProviderForCampaigns: 'genericOidcProviderCode',
         administrationTeamId: administrationTeam.id,
         administrationTeamName: administrationTeam.name,
+        organizationLearnerTypeName: organizationLearnerType.name,
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false },
           [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'BIDON' } },
@@ -956,6 +960,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
+          organizationLearnerTypeName: `Type pour organisation ${organization.id}`,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -1066,6 +1071,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
+          organizationLearnerTypeName: `Type pour organisation ${organization.id}`,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -1171,6 +1177,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
+          organizationLearnerTypeName: `Type pour organisation ${insertedOrganization.id}`,
         });
         expect(foundOrganizationForAdmin).to.deepEqualInstance(expectedOrganizationForAdmin);
       });
