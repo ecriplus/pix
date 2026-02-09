@@ -115,6 +115,16 @@ export default class ModuleQcm extends ModuleElement {
     });
   }
 
+  @action
+  retry(event) {
+    super.retry(event);
+
+    this.passageEvents.record({
+      type: 'QCM_RETRIED',
+      data: { elementId: this.element.id },
+    });
+  }
+
   waitFor(duration) {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }

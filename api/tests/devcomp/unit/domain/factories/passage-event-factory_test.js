@@ -2,12 +2,18 @@ import { expect } from 'chai';
 
 import { PassageEventFactory } from '../../../../../src/devcomp/domain/factories/passage-event-factory.js';
 import {
+  CustomDraftRetriedEvent,
+  CustomRetriedEvent,
   EmbedAnsweredEvent,
+  EmbedRetriedEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
+  QCURetriedEvent,
   QROCMAnsweredEvent,
+  QROCMRetriedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import {
   AudioPlayedEvent,
@@ -37,7 +43,7 @@ import {
 } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import {
   QABCardAnsweredEvent,
-  QABCardRetriedEvent,
+  QABRetriedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/qab-events.js';
 import { StepperNextStepEvent } from '../../../../../src/devcomp/domain/models/passage-events/stepper-events.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
@@ -103,6 +109,44 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
+    describe('when given a CUSTOM_DRAFT_RETRIED event', function () {
+      it('should return a CustomDraftRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'CUSTOM_DRAFT_RETRIED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(CustomDraftRetriedEvent);
+      });
+    });
+
+    describe('when given an CUSTOM_RETRIED event', function () {
+      it('should return a CustomRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'CUSTOM_RETRIED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(CustomRetriedEvent);
+      });
+    });
+
     describe('when given a EXPAND_CLOSED event', function () {
       it('should return an ExpandClosedEvent instance', function () {
         // given
@@ -139,6 +183,25 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(EmbedAnsweredEvent);
+      });
+    });
+
+    describe('when given an EMBED_RETRIED event', function () {
+      it('should return a EmbedRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'EMBED_RETRIED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(EmbedRetriedEvent);
       });
     });
 
@@ -352,21 +415,21 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
-    describe('when given a QAB_CARD_RETRIED event', function () {
-      it('should return a QabCardAnsweredEvent instance', function () {
+    describe('when given a QAB_RETRIED event', function () {
+      it('should return a QabRetriedEvent instance', function () {
         // given
         const rawEvent = {
           occurredAt: new Date(),
           passageId: 2,
           sequenceNumber: 3,
           elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
-          type: 'QAB_CARD_RETRIED',
+          type: 'QAB_RETRIED',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
 
         // then
-        expect(builtEvent).to.be.instanceOf(QABCardRetriedEvent);
+        expect(builtEvent).to.be.instanceOf(QABRetriedEvent);
       });
     });
 
@@ -407,6 +470,60 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(QCUAnsweredEvent);
+      });
+    });
+
+    describe('when given a QCU_RETRIED event', function () {
+      it('should return a QcuRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QCU_RETRIED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(QCURetriedEvent);
+      });
+    });
+
+    describe('when given a QCM_RETRIED event', function () {
+      it('should return a QcmRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QCM_RETRIED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(QCMRetriedEvent);
+      });
+    });
+
+    describe('when given a QROCM_RETRIED event', function () {
+      it('should return a QrocmRetriedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QROCM_RETRIED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(QROCMRetriedEvent);
       });
     });
 

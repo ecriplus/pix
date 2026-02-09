@@ -299,6 +299,61 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.dom(screen.getByText('Correct!')).exists();
   });
 
+  module('when user clicks on retry button', function () {
+    test('should send an event', async function (assert) {
+      // given
+      const qcmElement = {
+        id: 'qcm-id-1',
+        instruction: 'Instruction',
+        proposals: [
+          { id: '1', content: 'choix1' },
+          { id: '2', content: 'choix2' },
+          { id: '3', content: 'choix3' },
+        ],
+        feedbacks: {
+          valid: 'Bravo',
+          invalid: 'Pas bravo',
+        },
+        solutions: ['1', '3'],
+        type: 'qcm',
+      };
+      const onAnswerStub = sinon.stub();
+      const onRetrySpy = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template>
+          <ModulixQcm
+            @element={{qcmElement}}
+            @onAnswer={{onAnswerStub}}
+            @updateSkipButton={{updateSkipButton}}
+            @onRetry={{onRetrySpy}}
+          />
+        </template>,
+      );
+      const proposal1Element = screen.getByLabelText(qcmElement.proposals[0].content);
+      const proposal2Element = screen.getByLabelText(qcmElement.proposals[1].content);
+      await click(proposal1Element);
+      await click(proposal2Element);
+
+      const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
+      await click(verifyButton);
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+      const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+      await click(retryButton);
+
+      // then
+      sinon.assert.calledWith(onRetrySpy, { element: qcmElement });
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QCM_RETRIED',
+        data: {
+          elementId: qcmElement.id,
+        },
+      });
+      assert.ok(true);
+    });
+  });
+
   test('should be able to focus back to proposals when feedback appears', async function (assert) {
     // given
     const qcmElement = {

@@ -316,10 +316,13 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       const { flashcards } = _getFlashcards();
 
       const onAnswerStub = sinon.stub();
+      const onRetrySpy = sinon.spy();
 
       // when
       const screen = await render(
-        <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
+        <template>
+          <ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} @onRetry={{onRetrySpy}} />
+        </template>,
       );
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
@@ -330,10 +333,11 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
+      assert.ok(onRetrySpy.calledOnceWithExactly({ element: flashcards }));
       assert.ok(
-        passageEventsService.record.calledWith({
+        passageEventsService.record.calledWithExactly({
           type: 'FLASHCARDS_RETRIED',
-          data: { elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+          data: { elementId: flashcards.id },
         }),
       );
     });
@@ -344,10 +348,13 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         const { flashcards, firstCard } = _getFlashcards();
 
         const onAnswerStub = sinon.stub();
+        const onRetryStub = sinon.stub();
 
         // when
         const screen = await render(
-          <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
+          <template>
+            <ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} @onRetry={{onRetryStub}} />
+          </template>,
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));

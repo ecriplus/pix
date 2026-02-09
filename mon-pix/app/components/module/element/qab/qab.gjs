@@ -114,6 +114,7 @@ export default class ModuleQab extends ModuleElement {
 
   @action
   onRetry() {
+    this.args.onRetry({ element: this.element });
     this.currentStep = 'cards';
     this.removedCards.clear();
     this.cardStatuses.clear();
@@ -121,7 +122,7 @@ export default class ModuleQab extends ModuleElement {
     this.score = 0;
 
     this.passageEvents.record({
-      type: 'QAB_CARD_RETRIED',
+      type: 'QAB_RETRIED',
       data: {
         elementId: this.element.id,
       },

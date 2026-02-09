@@ -58,6 +58,13 @@ export default class ModulixEmbed extends ModuleElement {
   resetEmbed() {
     this.iframe.setAttribute('src', this.args.embed.url);
     this.iframe.focus();
+
+    this.passageEvents.record({
+      type: 'EMBED_RETRIED',
+      data: {
+        elementId: this.args.embed.id,
+      },
+    });
   }
 
   get heightStyle() {

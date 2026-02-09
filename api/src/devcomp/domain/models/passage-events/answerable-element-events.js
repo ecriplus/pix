@@ -2,6 +2,34 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { PassageEventWithElement } from './PassageEventWithElement.js';
 import { PassageEventWithElementAnswered } from './PassageEventWithElementAnswered.js';
 
+class CustomDraftRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'CUSTOM_DRAFT_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+class CustomRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'CUSTOM_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 class EmbedAnsweredEvent extends PassageEventWithElementAnswered {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
     super({
@@ -14,6 +42,20 @@ class EmbedAnsweredEvent extends PassageEventWithElementAnswered {
       elementId,
       answer,
       status,
+    });
+  }
+}
+
+class EmbedRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'EMBED_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
     });
   }
 }
@@ -34,6 +76,20 @@ class QCMAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
+class QCMRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'QCM_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 class QCUAnsweredEvent extends PassageEventWithElementAnswered {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
     super({
@@ -46,6 +102,20 @@ class QCUAnsweredEvent extends PassageEventWithElementAnswered {
       elementId,
       answer,
       status,
+    });
+  }
+}
+
+class QCURetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'QCU_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
     });
   }
 }
@@ -99,11 +169,31 @@ class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
+class QROCMRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'QROCM_RETRIED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
 export {
+  CustomDraftRetriedEvent,
+  CustomRetriedEvent,
   EmbedAnsweredEvent,
+  EmbedRetriedEvent,
   QCMAnsweredEvent,
+  QCMRetriedEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
   QCUDiscoveryAnsweredEvent,
+  QCURetriedEvent,
   QROCMAnsweredEvent,
+  QROCMRetriedEvent,
 };

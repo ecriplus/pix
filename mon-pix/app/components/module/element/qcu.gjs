@@ -114,6 +114,10 @@ export default class ModuleQcu extends ModuleElement {
     super.retry(event);
     this.currentCorrection = null;
     this.displayFeedbackState = false;
+    this.passageEvents.record({
+      type: 'QCU_RETRIED',
+      data: { elementId: this.element.id },
+    });
   }
 
   get selectedProposalFeedback() {

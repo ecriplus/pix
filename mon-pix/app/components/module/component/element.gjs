@@ -54,7 +54,7 @@ export default class ModulixElement extends Component {
     {{else if (eq @element.type "separator")}}
       <SeparatorElement />
     {{else if (eq @element.type "flashcards")}}
-      <FlashcardsElement @flashcards={{@element}} @onAnswer={{@onElementAnswer}} />
+      <FlashcardsElement @flashcards={{@element}} @onAnswer={{@onElementAnswer}} @onRetry={{@onElementRetry}} />
     {{else if (eq @element.type "qcu")}}
       <QcuElement
         @element={{@element}}
@@ -82,7 +82,7 @@ export default class ModulixElement extends Component {
         @correction={{this.getLastCorrectionForElement @element}}
       />
     {{else if (eq @element.type "qab")}}
-      <QabElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
+      <QabElement @element={{@element}} @onAnswer={{@onElementAnswer}} @onRetry={{@onElementRetry}} />
     {{/if}}
   </template>
 }
