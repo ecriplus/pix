@@ -4,7 +4,6 @@
  * @typedef {import('i18n')} i18n
  */
 import dayjs from 'dayjs';
-import _ from 'lodash';
 
 import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
@@ -52,11 +51,7 @@ export class CandidateData {
     this.resultRecipientEmail = resultRecipientEmail || '';
     this.externalId = externalId || '';
     this.birthdate = birthdate === null ? '' : dayjs(birthdate, 'YYYY-MM-DD').format('YYYY-MM-DD');
-    if (!_.isFinite(extraTimePercentage) || extraTimePercentage <= 0) {
-      this.extraTimePercentage = '';
-    } else {
-      this.extraTimePercentage = extraTimePercentage;
-    }
+    this.#setExtraTimePercentage(extraTimePercentage);
     this.createdAt = createdAt || '';
     this.sessionId = sessionId || '';
     this.userId = userId || '';
@@ -90,6 +85,14 @@ export class CandidateData {
       this.birthINSEECode = '99';
     } else {
       this.birthINSEECode = birthINSEECode;
+    }
+  }
+
+  #setExtraTimePercentage(extraTimePercentage) {
+    if (Number.isFinite(extraTimePercentage) && extraTimePercentage > 0) {
+      this.extraTimePercentage = extraTimePercentage;
+    } else {
+      this.extraTimePercentage = '';
     }
   }
 

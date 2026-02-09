@@ -139,5 +139,25 @@ describe.only('Unit | infrastructure | candidates-import | CandidateData', funct
         expect(candidateData.birthINSEECode).to.equal('75115');
       });
     });
+
+    describe('extraTimePercentage', function () {
+      it('set to empty string if not a number given', function () {
+        const extraTimePercentage = 'string';
+        const candidateData = new CandidateData({ i18n, extraTimePercentage });
+        expect(candidateData.extraTimePercentage).to.equal('');
+      });
+
+      it('set to empty string if number given is negative', function () {
+        const extraTimePercentage = -13;
+        const candidateData = new CandidateData({ i18n, extraTimePercentage });
+        expect(candidateData.extraTimePercentage).to.equal('');
+      });
+
+      it('set to value if number given is positive', function () {
+        const extraTimePercentage = 25;
+        const candidateData = new CandidateData({ i18n, extraTimePercentage });
+        expect(candidateData.extraTimePercentage).to.equal(25);
+      });
+    });
   });
 });
