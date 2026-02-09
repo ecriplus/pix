@@ -95,7 +95,7 @@ export const test = sharedTest.extend<
         return sessionManagementPage;
       });
 
-      await test.step('enroll for core certification', async () => {
+      await test.step('enroll for specific certification', async () => {
         await sessionManagementPage.goToEnrollCandidateForm();
         await sessionManagementPage.addCandidate({
           ...candidateData,
