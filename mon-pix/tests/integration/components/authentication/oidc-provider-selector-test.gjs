@@ -76,7 +76,8 @@ module('Integration | Component | Authentication | oidc-provider-selector', func
       await click(screen.getByRole('option', { name: 'ConnectEtMoi' }));
 
       // then
-      assert.ok(onProviderChangeStub.calledWith('1'));
+      sinon.assert.calledWith(onProviderChangeStub, '1');
+      assert.ok(true);
     });
   });
 });
