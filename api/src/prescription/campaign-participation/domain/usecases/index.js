@@ -1,6 +1,7 @@
 import * as learningContentRepository from '../../../../../src/prescription/shared/infrastructure/repositories/learning-content-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
+import * as improvementService from '../../../../evaluation/domain/services/improvement-service.js';
 import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
@@ -43,6 +44,7 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
 
 const dependencies = {
   areaRepository,
+  improvementService,
   assessmentRepository,
   badgeAcquisitionRepository,
   badgeForCalculationRepository,

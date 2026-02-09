@@ -8,7 +8,7 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign-assessment-participation', function () {
-  let userId, campaignId, campaignParticipationId, targetProfileId;
+  let userId, campaignId, targetProfileId, organizationLearner;
 
   context('when user has access to organization that owns campaign', function () {
     beforeEach(async function () {
@@ -55,10 +55,9 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId });
-      const organizationLearnerId = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-        userId,
+      organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
         organizationId,
-      }).id;
+      });
       targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId }).id;
 
       campaignId = databaseBuilder.factory.buildCampaign({
@@ -71,14 +70,20 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId });
 
-      campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+      await databaseBuilder.commit();
+    });
+
+    it('should get the campaignAssessmentParticipation', async function () {
+      // when
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
-        userId,
+        userId: organizationLearner.userId,
         status: CampaignParticipationStatuses.STARTED,
-        organizationLearnerId,
+        organizationLearnerId: organizationLearner.id,
         masteryRate: 0,
         validatedSkillsCount: 0,
       }).id;
+
       databaseBuilder.factory.buildAssessment({
         campaignParticipationId,
         userId,
@@ -87,10 +92,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       });
 
       await databaseBuilder.commit();
-    });
 
-    it('should get the campaignAssessmentParticipation', async function () {
-      // when
       const result = await usecases.getCampaignAssessmentParticipation({
         userId,
         campaignId,
@@ -111,7 +113,25 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
         await databaseBuilder.commit();
       });
 
-      it('should not set badges when participation has none', async function () {
+      it('should not set badges when participation is not shared', async function () {
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId: organizationLearner.userId,
+          status: CampaignParticipationStatuses.STARTED,
+          organizationLearnerId: organizationLearner.id,
+          masteryRate: 0,
+          validatedSkillsCount: 0,
+        }).id;
+
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId,
+          userId,
+          type: Assessment.types.CAMPAIGN,
+          state: Assessment.states.STARTED,
+        });
+
+        await databaseBuilder.commit();
+
         // when
         const result = await usecases.getCampaignAssessmentParticipation({
           userId,
@@ -120,10 +140,26 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
         });
 
         // then
-        expect(result.badges).to.be.undefined;
+        expect(result.badges).lengthOf(0);
       });
 
       it('should set badges when participation obtained some', async function () {
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId: organizationLearner.userId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date(),
+          organizationLearnerId: organizationLearner.id,
+          masteryRate: 0,
+          validatedSkillsCount: 0,
+        }).id;
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId,
+          userId,
+          type: Assessment.types.CAMPAIGN,
+          state: Assessment.states.COMPLETED,
+        });
+
         databaseBuilder.factory.buildBadgeAcquisition({
           userId,
           badgeId,
@@ -164,6 +200,23 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
           threshold: null,
         });
 
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId: organizationLearner.userId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date(),
+          organizationLearnerId: organizationLearner.id,
+          masteryRate: 0,
+          validatedSkillsCount: 0,
+        }).id;
+
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId,
+          userId,
+          type: Assessment.types.CAMPAIGN,
+          state: Assessment.states.COMPLETED,
+        });
+
         await databaseBuilder.commit();
 
         // when
@@ -181,6 +234,24 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       });
 
       it('should not set stages when target profile does not have stages', async function () {
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId: organizationLearner.userId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date(),
+          organizationLearnerId: organizationLearner.id,
+          masteryRate: 0,
+          validatedSkillsCount: 0,
+        }).id;
+
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId,
+          userId,
+          type: Assessment.types.CAMPAIGN,
+          state: Assessment.states.STARTED,
+        });
+
+        await databaseBuilder.commit();
         // when
         const result = await usecases.getCampaignAssessmentParticipation({
           userId,
