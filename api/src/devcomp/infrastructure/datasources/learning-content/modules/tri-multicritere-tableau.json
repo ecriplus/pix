@@ -328,7 +328,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Le deuxième au classement est</p>"
+                    "content": "<span>Le deuxième au classement est</span>"
                   },
                   {
                     "input": "prenom-activite",
@@ -347,7 +347,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>Les vainqueurs remportent une</p>"
+                    "content": "<span>. Les vainqueurs remportent une</span>"
                   },
                   {
                     "input": "lot-activite",
@@ -529,7 +529,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Le prénom du deuxième est :</p>"
+                    "content": "<span>Le prénom du deuxième est :</span>"
                   },
                   {
                     "input": "prenom-boss",
@@ -548,7 +548,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>Le contenu du trésor est :</p>"
+                    "content": "<span>. Le contenu du trésor est :</span>"
                   },
                   {
                     "input": "tresor-boss",

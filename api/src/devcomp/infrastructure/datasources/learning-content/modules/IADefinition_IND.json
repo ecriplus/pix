@@ -795,7 +795,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><strong>\"L’ail des ours peut se manger en ____\" </strong></p>"
+                    "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong></span>"
                   },
                   {
                     "input": "627e8063-9059-4bd6-9492-396cfb983c48",
@@ -820,7 +820,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><strong>Salade</strong><br></p>"
+                    "content": "<span><strong>Salade</strong></span>"
                   },
                   {
                     "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",

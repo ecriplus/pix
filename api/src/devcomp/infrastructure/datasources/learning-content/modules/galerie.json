@@ -636,7 +636,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>d'intérêt public qui a été créé en</span></p>"
+                    "content": "<span>d'intérêt public qui a été créé en</span>"
                   },
                   {
                     "input": "pix-birth",

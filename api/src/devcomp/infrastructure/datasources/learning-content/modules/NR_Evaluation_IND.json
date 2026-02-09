@@ -671,7 +671,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Pour évaluer les impacts environnementaux du numérique, on utilise une méthode appelée&nbsp;</p>"
+                    "content": "<span>Pour évaluer les impacts environnementaux du numérique, on utilise une méthode appelée&nbsp;</span>"
                   },
                   {
                     "input": "a",
@@ -702,7 +702,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>. Cette méthode consiste à analyser&nbsp;</p>"
+                    "content": "<span>. Cette méthode consiste à analyser&nbsp;</span>"
                   },
                   {
                     "input": "b",
@@ -731,7 +731,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>d’un équipement. Les résultats dépendent du&nbsp;</p>"
+                    "content": "<span>d’un équipement. Les résultats dépendent du&nbsp;</span>"
                   },
                   {
                     "input": "c",
@@ -760,7 +760,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>et de l’&nbsp;</p>"
+                    "content": "<span>et de l’&nbsp;</span>"
                   },
                   {
                     "input": "d",
@@ -789,7 +789,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>. C’est pourquoi un chiffre sur l’impact du numérique doit toujours être&nbsp;</p>"
+                    "content": "<span>. C’est pourquoi un chiffre sur l’impact du numérique doit toujours être&nbsp;</span>"
                   },
                   {
                     "input": "e",

@@ -596,13 +596,13 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>pour vous voler de l’argent ou escroquer vos proches.</p>"
+                    "content": "<span>pour vous voler de l’argent ou escroquer vos proches.</span>"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse !</p>",
-                    "diagnosis": "<p>Vous avez correctement  identifié les caractéristiques des messages de phishing.</p>"
+                    "diagnosis": "<p>Vous avez correctement identifié les caractéristiques des messages de phishing.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
