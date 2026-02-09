@@ -1,8 +1,10 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Organization } from '../../domain/models/Organization.js';
 
 export async function findIdsByTagNames(tagNames) {
-  return knex
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn
     .pluck('organization-tags.organizationId')
     .from('organization-tags')
     .join('tags', 'tags.id', 'organization-tags.tagId')
@@ -13,7 +15,9 @@ export async function findIdsByTagNames(tagNames) {
 }
 
 export async function findIdentityProviderForCampaignsByCampaignId(campaignId) {
-  const { identityProviderForCampaigns } = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const { identityProviderForCampaigns } = await knexConn
     .select('organizations.identityProviderForCampaigns')
     .from('organizations')
     .join('campaigns', 'campaigns.organizationId', 'organizations.id')
@@ -24,7 +28,9 @@ export async function findIdentityProviderForCampaignsByCampaignId(campaignId) {
 }
 
 export async function findByIds(organizationIds) {
-  const rawOrganizations = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const rawOrganizations = await knexConn
     .select('id', 'name', 'externalId')
     .from('organizations')
     .whereIn('id', organizationIds)
