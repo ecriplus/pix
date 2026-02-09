@@ -812,7 +812,7 @@
           "title": "Fonctionnalités"
         },
         "is-archived-warning": "Archivée le {archivedAt} par {archivedBy}.",
-        "organization-learner-type": "Typologie de prescrits",
+        "organization-learner-type": "Public prescrit",
         "province-code": "Département",
         "sco-activation-email": "Adresse e-mail d'activation SCO",
         "sso": "SSO",
