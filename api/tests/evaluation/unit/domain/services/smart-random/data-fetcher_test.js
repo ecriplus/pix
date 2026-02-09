@@ -31,7 +31,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         isRetrying: sinon.stub(),
       };
       improvementService = {
-        filterKnowledgeElementsIfImproving: sinon.stub(),
+        filterKnowledgeElements: sinon.stub(),
       };
     });
 
@@ -61,8 +61,14 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       campaignParticipationRepository.isRetrying
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(isRetrying);
-      improvementService.filterKnowledgeElementsIfImproving
-        .withArgs({ knowledgeElements, assessment, isRetrying, keepRecentOrValidated: true })
+      improvementService.filterKnowledgeElements
+        .withArgs({
+          knowledgeElements,
+          isRetrying,
+          isImproving: true,
+          createdAt: assessment.createdAt,
+          isFromCampaign: true,
+        })
         .resolves(filteredKnowledgeElements);
 
       // when
@@ -111,8 +117,14 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       campaignParticipationRepository.isRetrying
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(isRetrying);
-      improvementService.filterKnowledgeElementsIfImproving
-        .withArgs({ knowledgeElements, assessment, isRetrying, keepRecentOrValidated: true })
+      improvementService.filterKnowledgeElements
+        .withArgs({
+          knowledgeElements,
+          isFromCampaign: true,
+          isRetrying,
+          createdAt: assessment.createdAt,
+          isImproving: true,
+        })
         .resolves(filteredKnowledgeElements);
 
       // when
@@ -163,7 +175,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         findActiveByCompetenceId: sinon.stub(),
       };
       improvementService = {
-        filterKnowledgeElementsIfImproving: sinon.stub(),
+        filterKnowledgeElements: sinon.stub(),
       };
 
       answer = domainBuilder.buildAnswer();
@@ -177,8 +189,14 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       skillRepository.findActiveByCompetenceId.withArgs(assessment.competenceId).resolves(skills);
       challengeRepository.findValidatedByCompetenceId.withArgs(assessment.competenceId).resolves(challenges);
       knowledgeElementRepository.findUniqByUserId.withArgs({ userId: assessment.userId }).resolves(knowledgeElements);
-      improvementService.filterKnowledgeElementsIfImproving
-        .withArgs({ knowledgeElements, assessment, isRetrying: false, keepRecentOrValidated: false })
+      improvementService.filterKnowledgeElements
+        .withArgs({
+          knowledgeElements,
+          isRetrying: false,
+          isFromCampaign: false,
+          isImproving: assessment.isImproving,
+          createdAt: assessment.createdAt,
+        })
         .resolves(filteredKnowledgeElements);
 
       // when
@@ -194,7 +212,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
 
     it('filter knowledge elements if assessment is an improving one', async function () {
       // then
-      expect(improvementService.filterKnowledgeElementsIfImproving).to.be.called;
+      expect(improvementService.filterKnowledgeElements).to.be.called;
     });
 
     it('fetches answers, targetsSkills challenges and knowledgeElements', async function () {

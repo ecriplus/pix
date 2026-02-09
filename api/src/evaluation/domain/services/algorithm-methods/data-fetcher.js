@@ -24,7 +24,8 @@ async function fetchForCampaigns({
   const knowledgeElements = await _fetchKnowledgeElements({
     assessment,
     isRetrying,
-    keepRecentOrValidated: true,
+    isFromCampaign: true,
+    isImproving: true,
     campaignParticipationRepository,
     knowledgeElementForParticipationService,
     knowledgeElementRepository,
@@ -44,7 +45,8 @@ async function fetchForCampaigns({
 async function _fetchKnowledgeElements({
   assessment,
   isRetrying = false,
-  keepRecentOrValidated = false,
+  isFromCampaign = false,
+  isImproving = false,
   knowledgeElementForParticipationService,
   knowledgeElementRepository,
   improvementService,
@@ -58,11 +60,13 @@ async function _fetchKnowledgeElements({
   } else {
     knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId: assessment.userId });
   }
-  return improvementService.filterKnowledgeElementsIfImproving({
+
+  return improvementService.filterKnowledgeElements({
     knowledgeElements,
-    assessment,
+    isFromCampaign,
     isRetrying,
-    keepRecentOrValidated,
+    isImproving: isImproving ?? assessment.isImproving,
+    createdAt: assessment.createdAt,
   });
 }
 
