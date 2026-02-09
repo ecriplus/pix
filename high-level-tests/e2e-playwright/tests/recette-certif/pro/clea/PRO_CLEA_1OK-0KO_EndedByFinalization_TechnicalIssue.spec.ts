@@ -86,7 +86,7 @@ test.describe(testRef, () => {
             Prénom: data.certifiableUser.firstName,
             Nom: data.certifiableUser.lastName,
             Statut: 'Annulée',
-            Score: '56',
+            Score: '55',
             'Signalements impactants non résolus': '',
             'Certification passée': 'Double Certification Pix/CléA Numérique',
           });
@@ -97,7 +97,7 @@ test.describe(testRef, () => {
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Annulée',
-            score: '56 Pix',
+            score: '55 Pix',
           });
           const cleaResult = await certificationInformationPage.getCleaResult();
           expect(cleaResult).toBe('Rejetée'); // todo verifier si c'est bon

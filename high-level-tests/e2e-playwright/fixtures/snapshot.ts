@@ -1,8 +1,7 @@
 import { glob, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { test as base } from '@playwright/test';
-import { expect } from '@playwright/test';
+import { expect, test as base } from '@playwright/test';
 import * as fs from 'fs/promises';
 import { PDFParse } from 'pdf-parse';
 import pixelmatch from 'pixelmatch';
@@ -74,7 +73,7 @@ class SnapshotHandler {
         });
         const diffRatio = diffPixels / (width * height);
         // data différente entre deux runs : code de vérification du certificat et date de délivrance
-        expect(diffRatio).toBeLessThan(0.03); // < 3% pixels différents
+        expect(diffRatio).toBeLessThan(0.0015); // < 0.15% pixels différents
       }
     }
   }

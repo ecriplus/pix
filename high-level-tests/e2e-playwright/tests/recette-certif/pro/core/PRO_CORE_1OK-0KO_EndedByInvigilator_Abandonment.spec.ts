@@ -92,7 +92,7 @@ test.describe(testRef, () => {
             Prénom: data.certifiableUser.firstName,
             Nom: data.certifiableUser.lastName,
             Statut: 'Terminée par le surveillant',
-            Score: '56',
+            Score: '55',
             'Signalements impactants non résolus': '',
             'Certification passée': 'Certification Pix',
           });
@@ -103,7 +103,7 @@ test.describe(testRef, () => {
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Rejetée',
-            score: '56 Pix',
+            score: '55 Pix',
           });
           await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
             nbAnsweredQuestionsOverTotal: '1/32',

@@ -86,7 +86,7 @@ test.describe(testRef, () => {
             Prénom: data.certifiableUser.firstName,
             Nom: data.certifiableUser.lastName,
             Statut: 'Validée',
-            Score: '808',
+            Score: '862',
             'Signalements impactants non résolus': '',
             'Certification passée': 'Certification Pix',
           });
@@ -97,7 +97,7 @@ test.describe(testRef, () => {
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Validée',
-            score: '808 Pix',
+            score: '862 Pix',
           });
           await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
             nbAnsweredQuestionsOverTotal: '24/32',
@@ -124,7 +124,7 @@ test.describe(testRef, () => {
         expect(status).toBe('Obtenue');
         const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
         const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
-        expect(pixScoreObtained).toEqual('PIX 808 CERTIFIÉS');
+        expect(pixScoreObtained).toEqual('PIX 862 CERTIFIÉS');
         expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
         const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
