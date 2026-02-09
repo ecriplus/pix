@@ -26,12 +26,25 @@ export async function buildCoreVersion(knex: Knex) {
     .whereRaw('?=ANY(??)', ['fr', 'locales'])
     .where('status', 'validé');
 
+  const discriminantGenerator = generateBoundedValue(0.5, 1.5, 0.005);
+  const difficultyGenerator = generateBoundedValue(-4.5, 6.8, 0.2);
   for (const challenge of challenges) {
     await knex('certification-frameworks-challenges').insert({
       challengeId: challenge.id,
-      discriminant: challenge.alpha,
-      difficulty: challenge.delta,
+      discriminant: discriminantGenerator.next().value,
+      difficulty: difficultyGenerator.next().value,
       versionId,
     });
+  }
+}
+
+function* generateBoundedValue(min: number, max: number, step: number) {
+  let currentVal = min;
+  while (true) {
+    yield currentVal;
+    currentVal = currentVal + step;
+    if (currentVal > max) {
+      currentVal = min;
+    }
   }
 }
