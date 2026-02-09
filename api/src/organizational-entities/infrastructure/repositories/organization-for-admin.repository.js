@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../shared/domain/errors.js';
@@ -23,7 +22,7 @@ const ORGANIZATIONS_TABLE_NAME = 'organizations';
  */
 const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
   const knexConnection = DomainTransaction.getConnection();
-  const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id }).first();
+  const organization = await knexConnection(ORGANIZATIONS_TABLE_NAME).where({ id }).first();
   if (!organization) {
     throw new NotFoundError();
   }
@@ -59,7 +58,8 @@ const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
  * @return {Promise<boolean>}
  */
 const exist = async function ({ organizationId }) {
-  const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id: organizationId }).first();
+  const knexConnection = DomainTransaction.getConnection();
+  const organization = await knexConnection(ORGANIZATIONS_TABLE_NAME).where({ id: organizationId }).first();
 
   return Boolean(organization);
 };
@@ -70,7 +70,10 @@ const exist = async function ({ organizationId }) {
  * @return {Promise<OrganizationForAdmin[]>}
  */
 const findChildrenByParentOrganizationId = async function ({ parentOrganizationId }) {
-  const children = await knex(ORGANIZATIONS_TABLE_NAME).where({ parentOrganizationId }).orderBy('name', 'ASC');
+  const knexConnection = DomainTransaction.getConnection();
+  const children = await knexConnection(ORGANIZATIONS_TABLE_NAME)
+    .where({ parentOrganizationId })
+    .orderBy('name', 'ASC');
   return children.map(_toDomain);
 };
 
@@ -142,7 +145,7 @@ const get = async function ({ organizationId }) {
     .select(
       'key',
       'organization-features.params',
-      knex.raw('"organization-features"."organizationId" IS NOT NULL as enabled'),
+      knexConn.raw('"organization-features"."organizationId" IS NOT NULL as enabled'),
     )
     .leftJoin(ORGANIZATION_FEATURES_TABLE_NAME, function () {
       this.on('features.id', 'organization-features.featureId').andOn(
@@ -151,7 +154,7 @@ const get = async function ({ organizationId }) {
       );
     });
 
-  const importFormats = await knex('organization-learner-import-formats');
+  const importFormats = await knexConn('organization-learner-import-formats');
 
   organization.features = availableFeatures.reduce((features, { key, enabled, params }) => {
     switch (key) {
@@ -275,7 +278,7 @@ const findPaginatedFiltered = async function ({ filter, page }) {
       administrationTeamName: 'administration_teams.name',
     })
     .leftJoin('administration_teams', 'administration_teams.id', 'organizations.administrationTeamId')
-    .modify(_setSearchFiltersForQueryBuilder, filter)
+    .modify(_setSearchFiltersForQueryBuilder, filter, knexConn)
     .orderBy('organizations.name', 'ASC');
 
   const { results, pagination } = await fetchPage({
@@ -370,7 +373,7 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
     .merge(['params']);
 }
 
-function _setSearchFiltersForQueryBuilder(qb, filter) {
+function _setSearchFiltersForQueryBuilder(qb, filter, knexConn) {
   const { id, name, type, externalId, hideArchived, administrationTeamId, targetProfileId, combinedCourseBlueprintId } =
     filter;
   if (id) {
@@ -386,7 +389,7 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
   }
   if (name) {
     qb.where(
-      knex.raw(
+      knexConn.raw(
         `
       regexp_replace(unaccent(organizations.name), '[^[:alnum:]]', '', 'g')
       ILIKE

@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
@@ -51,7 +50,9 @@ const get = async function (id) {
 };
 
 const getIdByCertificationCenterId = async function (certificationCenterId) {
-  const organizationIds = await knex
+  const knexConn = DomainTransaction.getConnection();
+
+  const organizationIds = await knexConn
     .pluck('organizations.id')
     .from(ORGANIZATIONS_TABLE_NAME)
     .innerJoin('certification-centers', function () {
@@ -68,7 +69,8 @@ const getIdByCertificationCenterId = async function (certificationCenterId) {
 };
 
 const findActiveScoOrganizationsByExternalId = async function (externalId) {
-  const organizationsDB = await knex(ORGANIZATIONS_TABLE_NAME)
+  const knexConn = DomainTransaction.getConnection();
+  const organizationsDB = await knexConn(ORGANIZATIONS_TABLE_NAME)
     .where({ archivedAt: null })
     .whereIn('type', [Organization.types.SCO, Organization.types.SCO1D])
     .whereRaw('LOWER("externalId") = ?', `${externalId.toLowerCase()}`);

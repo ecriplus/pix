@@ -1,11 +1,12 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
 import { AdminMember } from '../../../team/domain/models/AdminMember.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 
 const TABLE_NAME = 'pix-admin-roles';
 
 const findAll = async function () {
-  const members = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const members = await knexConn
     .select(`${TABLE_NAME}.id`, 'users.id as userId', 'firstName', 'lastName', 'email', 'role')
     .from(TABLE_NAME)
     .where({ disabledAt: null })
@@ -16,7 +17,8 @@ const findAll = async function () {
 };
 
 const getById = async function (id) {
-  const adminMember = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const adminMember = await knexConn
     .select(`${TABLE_NAME}.id`, 'users.id as userId', 'firstName', 'lastName', 'email', 'role', 'disabledAt')
     .from(TABLE_NAME)
     .where({ 'pix-admin-roles.id': id })
@@ -27,7 +29,8 @@ const getById = async function (id) {
 };
 
 const get = async function ({ userId }) {
-  const adminMember = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const adminMember = await knexConn
     .select(`${TABLE_NAME}.id`, 'users.id as userId', 'firstName', 'lastName', 'email', 'role', 'disabledAt')
     .from(TABLE_NAME)
     .where({ userId })
@@ -38,8 +41,9 @@ const get = async function ({ userId }) {
 };
 
 const update = async function ({ id, attributesToUpdate }) {
+  const knexConn = DomainTransaction.getConnection();
   const now = new Date();
-  const [updatedAdminMember] = await knex
+  const [updatedAdminMember] = await knexConn
     .from(TABLE_NAME)
     .where({ id })
     .update({ ...attributesToUpdate, updatedAt: now })
@@ -56,13 +60,15 @@ const update = async function ({ id, attributesToUpdate }) {
 };
 
 const save = async function (pixAdminRole) {
-  const [savedAdminMember] = await knex(TABLE_NAME).insert(pixAdminRole).returning('*');
+  const knexConn = DomainTransaction.getConnection();
+  const [savedAdminMember] = await knexConn(TABLE_NAME).insert(pixAdminRole).returning('*');
   return new AdminMember(savedAdminMember);
 };
 
 const deactivate = async function ({ id }) {
+  const knexConn = DomainTransaction.getConnection();
   const now = new Date();
-  const [deactivateddAdminMember] = await knex
+  const [deactivateddAdminMember] = await knexConn
     .from('pix-admin-roles')
     .where({ id })
     .whereRaw('"disabledAt" IS NULL')

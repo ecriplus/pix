@@ -5,15 +5,15 @@ import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
 
 const { omit } = lodash;
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { OrganizationTag } from '../../../shared/domain/models/OrganizationTag.js';
 import { Tag } from '../../domain/models/Tag.js';
 
 const create = async function (organizationTag) {
+  const knexConn = DomainTransaction.getConnection();
   try {
     const organizationTagToCreate = omit(organizationTag, 'id');
-    const [organizationTagCreated] = await knex('organization-tags').insert(organizationTagToCreate).returning('*');
+    const [organizationTagCreated] = await knexConn('organization-tags').insert(organizationTagToCreate).returning('*');
     return new OrganizationTag(organizationTagCreated);
   } catch (err) {
     if (knexUtils.isUniqConstraintViolated(err)) {
@@ -28,20 +28,26 @@ const create = async function (organizationTag) {
 const batchCreate = async function (organizationsTags) {
   const knexConn = DomainTransaction.getConnection();
 
-  return knex.batchInsert('organization-tags', organizationsTags).transacting(knexConn.isTransaction ? knexConn : null);
+  return knexConn
+    .batchInsert('organization-tags', organizationsTags)
+    .transacting(knexConn.isTransaction ? knexConn : null);
 };
 
 const isExistingByOrganizationIdAndTagId = async function ({ organizationId, tagId }) {
-  const organizationTag = await knex('organization-tags').where({ organizationId, tagId }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const organizationTag = await knexConn('organization-tags').where({ organizationId, tagId }).first();
   return Boolean(organizationTag);
 };
 
 const getRecentlyUsedTags = async function ({ tagId, numberOfRecentTags }) {
+  const knexConn = DomainTransaction.getConnection();
   const organizationIds = (
-    await knex.select('organizationId').from('organization-tags').where('tagId', '=', tagId)
+    await knexConn.select('organizationId').from('organization-tags').where('tagId', '=', tagId)
   ).map(({ organizationId }) => organizationId);
-  const tags = await knex
-    .select(knex.raw('"organization-tags"."tagId", "tags"."name", COUNT("organization-tags"."tagId") AS "usedCount"'))
+  const tags = await knexConn
+    .select(
+      knexConn.raw('"organization-tags"."tagId", "tags"."name", COUNT("organization-tags"."tagId") AS "usedCount"'),
+    )
     .from('organization-tags')
     .join('tags', 'tags.id', '=', 'organization-tags.tagId')
     .whereIn('organization-tags.organizationId', organizationIds)

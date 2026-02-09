@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DataProtectionOfficer } from '../../domain/models/DataProtectionOfficer.js';
 
@@ -6,7 +5,7 @@ const DATA_PROTECTION_OFFICERS_TABLE_NAME = 'data-protection-officers';
 
 async function batchAddDataProtectionOfficerToOrganization(organizationDataProtectionOfficer) {
   const knexConn = DomainTransaction.getConnection();
-  await knex
+  await knexConn
     .batchInsert(DATA_PROTECTION_OFFICERS_TABLE_NAME, organizationDataProtectionOfficer)
     .transacting(knexConn.isTransaction ? knexConn : null);
 }
