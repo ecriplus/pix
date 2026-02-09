@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 const BADGE_TABLE = 'badges';
@@ -18,7 +17,7 @@ const createOrUpdate = async function ({ badgeAcquisitionsToCreate = [] }) {
       await knexConn(BADGE_ACQUISITIONS_TABLE).insert(badgeAcquisitionsToCreate);
     } else {
       await knexConn(BADGE_ACQUISITIONS_TABLE)
-        .update({ updatedAt: knex.raw('CURRENT_TIMESTAMP') })
+        .update({ updatedAt: knexConn.raw('CURRENT_TIMESTAMP') })
         .where({ userId, badgeId, campaignParticipationId });
     }
   }
@@ -28,11 +27,11 @@ const createOrUpdate = async function ({ badgeAcquisitionsToCreate = [] }) {
  * @param {number[]} campaignParticipationIds
  */
 const deleteUserIdOnNonCertifiableBadgesForCampaignParticipations = async (campaignParticipationIds) => {
-  const knexConnection = DomainTransaction.getConnection();
-  return knexConnection(BADGE_ACQUISITIONS_TABLE)
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn(BADGE_ACQUISITIONS_TABLE)
     .update({ userId: null })
     .updateFrom(BADGE_TABLE)
-    .where(`${BADGE_ACQUISITIONS_TABLE}.badgeId`, knex.raw('??', [`${BADGE_TABLE}.id`]))
+    .where(`${BADGE_ACQUISITIONS_TABLE}.badgeId`, knexConn.raw('??', [`${BADGE_TABLE}.id`]))
     .where(`${BADGE_TABLE}.isCertifiable`, '=', false)
     .whereIn(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId`, campaignParticipationIds);
 };
@@ -45,10 +44,12 @@ const getAcquiredBadgeIds = async function ({ badgeIds, userId }) {
 /**
  * @param {number[]} campaignParticipationsIds
  */
-const getAcquiredBadgesForCampaignParticipations = (campaignParticipationsIds) =>
-  DomainTransaction.getConnection()(BADGE_ACQUISITIONS_TABLE)
+const getAcquiredBadgesForCampaignParticipations = (campaignParticipationsIds) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn(BADGE_ACQUISITIONS_TABLE)
     .where(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId`, 'IN', campaignParticipationsIds)
     .orderBy(`${BADGE_ACQUISITIONS_TABLE}.id`);
+};
 
 const getAcquiredBadgesByCampaignParticipations = async function ({ campaignParticipationsIds }) {
   const knexConn = DomainTransaction.getConnection();

@@ -1,6 +1,5 @@
 import omit from 'lodash/omit.js';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { AlreadyExistingEntityError, NotFoundError } from '../../../shared/domain/errors.js';
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
@@ -54,7 +53,11 @@ const saveAll = async (badges) => {
 
 const update = async (badge) => {
   try {
-    const [updatedBadge] = await knex(TABLE_NAME).update(adaptModelToDb(badge)).where({ id: badge.id }).returning('*');
+    const knexConnection = DomainTransaction.getConnection();
+    const [updatedBadge] = await knexConnection(TABLE_NAME)
+      .update(adaptModelToDb(badge))
+      .where({ id: badge.id })
+      .returning('*');
     return new Badge({ ...badge, ...updatedBadge });
   } catch (error) {
     if (knexUtils.isUniqConstraintViolated(error) && error.constraint === BADGE_KEY_UNIQUE_CONSTRAINT) {
@@ -77,7 +80,8 @@ const remove = async (badgeId) => {
 };
 
 const findAllByIds = async ({ ids }) => {
-  const badges = await knex.from('badges').whereIn('id', ids);
+  const knexConnection = DomainTransaction.getConnection();
+  const badges = await knexConnection.from('badges').whereIn('id', ids);
 
   return badges.map((badge) => {
     return new Badge(badge);
