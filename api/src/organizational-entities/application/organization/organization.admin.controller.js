@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -161,11 +160,8 @@ const updateOrganizationInformation = async function (
 ) {
   const organizationDeserialized = dependencies.organizationForAdminSerializer.deserialize(request.payload);
 
-  const organizationUpdated = await DomainTransaction.execute(function (domainTransaction) {
-    return usecases.updateOrganizationInformation({
-      organization: organizationDeserialized,
-      domainTransaction,
-    });
+  const organizationUpdated = await usecases.updateOrganizationInformation({
+    organization: organizationDeserialized,
   });
   return h.response(dependencies.organizationForAdminSerializer.serialize(organizationUpdated));
 };
