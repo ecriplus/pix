@@ -19,19 +19,19 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
   await knex.transaction(async (trx) => {
     const organizationLearnerIds = scoCertificationCandidates.map((candidate) => candidate.organizationLearnerId);
 
-    const alreadyEnrolledCandidate = await trx
+    const alreadyEnrolledCandidates = await trx
       .select(['organizationLearnerId'])
       .from('certification-candidates')
       .whereIn('organizationLearnerId', organizationLearnerIds)
       .where({ sessionId });
 
-    const alreadyEnrolledCandidateOrganizationLearnerIds = alreadyEnrolledCandidate.map(
-      (candidate) => candidate.organizationLearnerId,
+    const alreadyEnrolledCandidateOrganizationLearnerIds = new Set(
+      alreadyEnrolledCandidates.map((c) => c.organizationLearnerId),
     );
 
     const scoCandidateToDTO = _scoCandidateToDTOForSession(sessionId);
     const candidatesToBeEnrolledDTOs = scoCertificationCandidates
-      .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.includes(candidate.organizationLearnerId))
+      .filter((c) => !alreadyEnrolledCandidateOrganizationLearnerIds.has(c.organizationLearnerId))
       .map((candidate) => scoCandidateToDTO(candidate));
 
     for (const candidateDTO of candidatesToBeEnrolledDTOs) {
