@@ -1,5 +1,6 @@
 import { InvalidIdentityProviderError } from '../../../shared/domain/errors.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
+import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-provider-repository.js';
 import { FwbOidcAuthenticationService } from './fwb-oidc-authentication-service.js';
 import { OidcAuthenticationService } from './oidc-authentication-service.js';
@@ -56,19 +57,18 @@ export class OidcAuthenticationServiceRegistry {
 
     if (!oidcProviderServices) {
       const oidcProviders = await oidcProviderRepository.findAllOidcProviders();
-      oidcProviderServices = await Promise.all(
-        oidcProviders.map(async (oidcProvider) => {
-          await oidcProvider.decryptClientSecret(cryptoService);
-          switch (oidcProvider.identityProvider) {
-            case 'FWB':
-              return new FwbOidcAuthenticationService(oidcProvider);
-            case 'POLE_EMPLOI':
-              return new PoleEmploiOidcAuthenticationService(oidcProvider);
-            default:
-              return new OidcAuthenticationService(oidcProvider);
-          }
-        }),
-      );
+
+      oidcProviderServices = await PromiseUtils.mapSeries(oidcProviders, async (oidcProvider) => {
+        await oidcProvider.decryptClientSecret(cryptoService);
+        switch (oidcProvider.identityProvider) {
+          case 'FWB':
+            return new FwbOidcAuthenticationService(oidcProvider);
+          case 'POLE_EMPLOI':
+            return new PoleEmploiOidcAuthenticationService(oidcProvider);
+          default:
+            return new OidcAuthenticationService(oidcProvider);
+        }
+      });
     }
 
     this.#allOidcProviderServices = oidcProviderServices;
