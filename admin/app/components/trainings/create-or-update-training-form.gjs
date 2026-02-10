@@ -274,7 +274,6 @@ export default class CreateOrUpdateTrainingForm extends Component {
             @subLabel="Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité"
             required={{true}}
             aria-required={{true}}
-            placeholder="Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité."
             @value={{this.form.editorName}}
             {{on "change" (fn this.updateForm "editorName")}}
           >
