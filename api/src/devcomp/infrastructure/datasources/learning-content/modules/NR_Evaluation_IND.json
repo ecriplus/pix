@@ -184,7 +184,7 @@
                   "slides": [
                     {
                       "title": "Première étape : La fabrication ",
-                      "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très consommateur d’énergie et souvent réalisées avec une une électricité qui émet beaucoup de CO₂.",
+                      "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très consommateur d’énergie et souvent réalisées avec une électricité qui émet beaucoup de CO₂.",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
@@ -473,7 +473,7 @@
                     {
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que le numérique à divers impacts sur l'environnement.<br>"
+                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que le numérique a divers impacts sur l'environnement.<br>"
                     }
                   ]
                 },
@@ -847,7 +847,7 @@
               "element": {
                 "id": "07a84acb-a283-41a5-9c2c-e51a5d64d104",
                 "type": "custom",
-                "instruction": "Lisez attentivement l’article suivant, puis répondez à la question. ",
+                "instruction": "Lisez attentivement l’article suivant, puis répondez aux questions. ",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
@@ -864,47 +864,125 @@
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "eac5211b-c09a-417b-91a1-c134728a2d47",
-                "type": "qcu",
-                "instruction": "D’après l’article, les centres de données peuvent être présentés comme neutres en carbone.<br>Cependant, cette affirmation peut être discutée car…",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "… l’article mélange l’impact des centres de données avec celui des services numériques qu’ils hébergent.",
-                    "feedback": {
-                      "state": "Eh non !&nbsp;",
-                      "diagnosis": "L’article parle uniquement des infrastructures (centres de données) et de leur fonctionnement.<br>Il ne traite pas de l’impact des services numériques ou des usages des utilisateurs."
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "de994ec2-bfae-4036-9652-bbc59971b874",
+                      "type": "qcu",
+                      "instruction": "Quelle phase du cycle de vie est abordée dans cet article ?&nbsp;",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "La fabrication.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne parle pas de la fabrication des centres de données ni de la production des équipements nécessaires à leur construction."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Le transport.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne mentionne pas le transport des équipements ou des matériaux liés aux centres de données."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "L'utilisation.",
+                          "feedback": {
+                            "state": "Bien vu !&nbsp;",
+                            "diagnosis": "L’article se concentre uniquement sur le fonctionnement des centres de données, notamment leur consommation d’énergie, leur efficacité énergétique et leurs systèmes de refroidissement."
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "La fin de vie.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne traite pas de la fin de vie des centres de données ou du traitement des équipements en fin d’usage."
+                          }
+                        }
+                      ],
+                      "solution": "3"
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "… elle ne prend en compte que certaines phases, comme le fonctionnement énergétique, sans considérer l’ensemble du cycle de vie des infrastructures.",
-                    "feedback": {
-                      "state": "Bien vu !&nbsp;",
-                      "diagnosis": "Vous avez identifié un point clé&nbsp;:<strong> un chiffre ou une affirmation environnementale dépend du périmètre étudié</strong>. Ici, l’article met l’accent sur la phase d’usage (énergie, émissions), mais <strong>ne traite pas l’ensemble du cycle de vie</strong> (fabrication, construction, fin de vie)."
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "4310a9fb-5cf9-4fca-9e18-81cb8f8a5db1",
+                      "type": "qcu",
+                      "instruction": "Quel est le message clé de cet article ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Les centres de données sont neutres en carbone.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne dit pas que les centres de données sont déjà neutres en carbone. Il évoque des actions et des engagements, mais pas un état atteint."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Les centres de données disent vouloir être neutres en carbone.",
+                          "feedback": {
+                            "state": "Bien vu !&nbsp;",
+                            "diagnosis": "L’article met en avant un engagement vers la neutralité carbone, ainsi que des actions présentées comme allant dans ce sens. Attention, ces engagements ne concernent que la phase \"utilisation\" de l'ACV du centres de données !"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Les centres de données seront neutres en carbone d’ici quelques années.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne donne pas d’échéance précise et ne permet pas d’affirmer qu’une neutralité carbone sera atteinte à une date donnée."
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
-                  },
-                  {
-                    "id": "3",
-                    "content": "… l’article confond neutralité carbone et réduction des émissions, en laissant entendre que toute baisse d’émissions équivaut à une neutralité.",
-                    "feedback": {
-                      "state": "Eh non !",
-                      "diagnosis": "L’article évoque des actions de réduction des émissions et un engagement vers la neutralité carbone, mais <strong>ne confond pas</strong> ces deux notions.<br>Il ne dit pas qu’une simple baisse des émissions suffit à atteindre la neutralité carbone."
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "59b488cd-00d8-4f36-bc79-72de86e782b8",
+                      "type": "qcu",
+                      "instruction": "Dans cet article, quel indicateur environnemental est principalement abordé ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Le réchauffement climatique.",
+                          "feedback": {
+                            "state": "Bien vu !",
+                            "diagnosis": "L’article parle de neutralité carbone, d’émissions et d’énergie. Il traite donc principalement des émissions de gaz à effet de serre, liées au réchauffement climatique. Uniquement sur la phase de d'utilisation des centres de données."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "L’épuisement des ressources minérales et métalliques.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne mentionne pas l’extraction de ressources, les métaux ou les matériaux nécessaires à la construction des centres de données."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Les émissions de particules fines nocives pour la santé.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne parle pas de pollution de l’air ni d’effets sur la santé humaine liés aux particules fines."
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  },
-                  {
-                    "id": "4",
-                    "content": "… les certifications environnementales n’existent pas pour ce type d’infrastructure.",
-                    "feedback": {
-                      "state": "Eh non !",
-                      "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
-                    }
-                  }
-                ],
-                "solution": "2"
-              }
+                  ]
+                }
+              ]
             }
           ]
         }
