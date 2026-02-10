@@ -6,7 +6,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 
-// We voluntarily let the transaction contained in the repository as the usecase initiate a lengthy treatment
+// We voluntarily keep the transaction contained in the repository as the usecase initiate a lengthy treatment
 
 /**
  * @function
