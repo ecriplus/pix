@@ -217,6 +217,50 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       assert.dom(screen.getByRole('button', { name: 'Module' })).exists();
     });
 
+    test('it should auto fill the editor logo url', async function (assert) {
+      // given
+      // when
+      const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
+
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('textbox', {
+            name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+          }),
+        )
+        .hasValue('https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg');
+    });
+
+    module('when editor logo url was already provided', function () {
+      test('it should not auto fill the editor logo url', async function (assert) {
+        // given
+        const editorLogoUrlValue = 'https://assets.pix.org/contenu-formatif/editeur/hello.svg';
+
+        // when
+        const screen = await render(
+          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        );
+        const editorLogoUrl = screen.getByRole('textbox', {
+          name: "Url du logo de l'éditeur (.svg) Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg",
+        });
+
+        await fillIn(editorLogoUrl, editorLogoUrlValue);
+        await click(screen.getByRole('button', { name: 'Format' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+        // then
+        assert.dom(editorLogoUrl).hasValue(editorLogoUrlValue);
+      });
+    });
+
     module('when model is provided', function () {
       test('it should display correct module on editing form', async function (assert) {
         // given & when

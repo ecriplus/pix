@@ -44,6 +44,9 @@ class Form {
   }
 }
 
+const MODULIX_TYPE = 'modulix';
+const MODULIX_EDITOR_LOGO_URL = 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg';
+
 export default class CreateOrUpdateTrainingForm extends Component {
   @service featureToggles;
   @service store;
@@ -86,6 +89,17 @@ export default class CreateOrUpdateTrainingForm extends Component {
   @action
   updateSelect(key, value) {
     set(this.form, key, value);
+
+    this.fillInputsForModulixTraining();
+  }
+
+  @action
+  fillInputsForModulixTraining() {
+    if (this.form.type === MODULIX_TYPE) {
+      if (!this.form.editorLogoUrl) {
+        set(this.form, 'editorLogoUrl', MODULIX_EDITOR_LOGO_URL);
+      }
+    }
   }
 
   @action
