@@ -75,7 +75,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -127,7 +128,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             }
           ]
@@ -255,7 +257,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -518,7 +521,8 @@
                     }
                   }
                 ],
-                "solution": "4"
+                "solution": "4",
+                "hasShortProposals": false
               }
             }
           ]
@@ -640,7 +644,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -759,7 +764,8 @@
                       "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d’IA générative peut faire des erreurs. Il faut donc toujours vérifier les réponses qu'il donne.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

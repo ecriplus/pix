@@ -618,7 +618,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             },
             {

@@ -86,7 +86,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -349,7 +350,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -387,7 +389,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -425,7 +428,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -524,7 +528,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -573,7 +578,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -622,7 +628,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -724,7 +731,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             }
           ]
@@ -802,7 +810,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -840,7 +849,8 @@
                           "diagnosis": "<p>Les attaquants n’ont pas seulement exploité une faille technique pour pouvoir entrer dans les systèmes.</p>"
                         }
                       },
-                      "solutions": ["2", "3"]
+                      "solutions": ["2", "3"],
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -884,7 +894,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -993,7 +1004,8 @@
                       "diagnosis": "<p>Même sans expertise technique, chacun peut participer à sensibiliser les autres en partageant ses connaissances&nbsp;:&nbsp;parler des arnaques, donner l’alerte, relayer les bonnes pratiques. Faire circuler l’information protège tout le groupe.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

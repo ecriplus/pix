@@ -85,7 +85,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -120,7 +121,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -155,7 +157,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -262,7 +265,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -306,7 +310,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -350,7 +355,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -394,7 +400,8 @@
                           }
                         }
                       ],
-                      "solution": "4"
+                      "solution": "4",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -523,7 +530,8 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Retournez voir la leçon ci-dessus si besoin&nbsp;<span aria-hidden=\"true\">⬆</span>!</p>"
                   }
                 },
-                "solutions": ["2", "3", "5"]
+                "solutions": ["2", "3", "5"],
+                "hasShortProposals": false
               }
             }
           ]
@@ -584,7 +592,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -627,7 +636,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -675,7 +685,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -795,7 +806,8 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Essayez à nouveau, en appliquant la méthode « Qui ? Quand ? D'où ? ». Si vous avez un doute sur ces informations, il faut être prudent.</p>"
                   }
                 },
-                "solutions": ["2", "3"]
+                "solutions": ["2", "3"],
+                "hasShortProposals": false
               }
             }
           ]

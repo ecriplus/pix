@@ -146,7 +146,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             }
           ]
@@ -326,7 +327,8 @@
                       "diagnosis": "<p>Une règle orientée vers le soutien peut renforcer la motivation, mais elle peut aussi donner des réponses <strong>trop positives</strong> ou <strong>peu critiques</strong>. Ces comportements viennent directement des <strong>règles internes</strong> que les éditeurs lui imposent.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]
@@ -432,7 +434,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -544,7 +547,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             }
           ]
@@ -672,7 +676,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -743,7 +748,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -797,7 +803,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -851,7 +858,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -987,7 +995,8 @@
                       "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle&nbsp;: son <strong>prompt système est&nbsp;:&nbsp;</strong></p><blockquote><code>Vous êtes une IA chargée de rédiger les e-mails de communication envoyés aux clients au nom du festival.<br>Vous devez toujours adopter un ton enthousiaste, optimiste et tourné vers les opportunités.<br>Vous ne devez jamais mettre en défaut l’organisation du festival ni suggérer une faute ou une défaillance de sa part.<br>Les situations évoquées doivent être abordées sous un angle constructif, en valorisant les perspectives positives ou les suites possibles.<br>Les réponses doivent rester brèves (500 caractères maximum).</code><br></blockquote><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong>&nbsp;: chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

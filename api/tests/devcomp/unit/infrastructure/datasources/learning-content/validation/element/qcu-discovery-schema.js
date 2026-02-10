@@ -15,7 +15,7 @@ const qcuDiscoveryElementSchema = Joi.object({
     })
     .required(),
   solution: proposalIdSchema.required(),
-  hasShortProposals: Joi.boolean().optional().default(false),
+  hasShortProposals: Joi.boolean().required().default(false),
 });
 
 export { qcuDiscoveryElementSchema };

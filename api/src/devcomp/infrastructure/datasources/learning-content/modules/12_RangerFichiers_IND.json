@@ -83,7 +83,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -180,7 +181,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -220,7 +222,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -556,7 +559,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -885,7 +889,8 @@
                       "diagnosis": "Une organisation à votre image ! Il existe de nombreuses façons d’organiser ses fichiers.<br>Chaque organisation a ses avantages et ses limites. L’important est de choisir une organisation qui vous correspond et qui vous permet de retrouver facilement vos fichiers."
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

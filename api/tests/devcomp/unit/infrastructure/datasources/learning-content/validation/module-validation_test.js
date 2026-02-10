@@ -299,6 +299,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
             },
           },
           solutions: ['1', '2'],
+          hasShortProposals: false,
         };
 
         await qcmElementSchema.validateAsync(sample, {
@@ -346,6 +347,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
             feedback: { diagnosis: `<p> Diagnostic ${i + 1}</p>` },
           })),
           solution: '1',
+          hasShortProposals: false,
         };
 
         await qcuDiscoveryElementSchema.validateAsync(sample, {

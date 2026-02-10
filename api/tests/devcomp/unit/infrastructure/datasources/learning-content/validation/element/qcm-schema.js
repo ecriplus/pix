@@ -20,7 +20,7 @@ const qcmElementSchema = Joi.object({
     invalid: feedbackSchema,
   }).required(),
   solutions: Joi.array().items(proposalIdSchema).min(2).required(),
-  hasShortProposals: Joi.boolean().optional().default(false),
+  hasShortProposals: Joi.boolean().required().default(false),
 }).required();
 
 export { qcmElementSchema };
