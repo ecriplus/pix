@@ -1,8 +1,6 @@
 import { Progression } from '../../../../evaluation/domain/models/Progression.js';
-import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
 
 const getCampaignAssessmentParticipation = async function ({
-  userId,
   campaignId,
   campaignParticipationId,
   campaignRepository,
@@ -13,11 +11,6 @@ const getCampaignAssessmentParticipation = async function ({
   knowledgeElementForParticipationService,
   improvementService,
 }) {
-  // TODO : throw when campaignId not matching campaignParticipationId ? may be move this to pre handler
-  if (!(await campaignRepository.checkIfUserOrganizationHasAccessToCampaign(campaignId, userId))) {
-    throw new UserNotAuthorizedToAccessEntityError('User does not belong to the organization that owns the campaign');
-  }
-
   const campaignAssessmentParticipation =
     await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
       campaignId,

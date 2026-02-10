@@ -130,6 +130,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/campaigns/{campaignId}/assessment-participations/{campaignParticipationId}',
       config: {
+        pre: [{ method: campaignParticipationPreHandlers.checkUserCanAccessCampaignParticipation }],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,

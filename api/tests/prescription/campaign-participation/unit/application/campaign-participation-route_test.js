@@ -473,4 +473,67 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       );
     });
   });
+
+  describe('GET /api/campaigns/{campaignId}/assessment-participations/{campaignParticipationId}', function () {
+    const method = 'GET';
+
+    context('when campaignId is not an integer', function () {
+      it('should return 400 - Bad request', async function () {
+        // given
+        const getCampaignAssessmentParticipationStub = sinon.stub(
+          campaignParticipationController,
+          'getCampaignAssessmentParticipation',
+        );
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+        // when
+        const response = await httpTestServer.request(method, '/api/campaigns/FAKE_ID/assessment-participations/1');
+
+        // then
+        expect(getCampaignAssessmentParticipationStub.called).false;
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+
+    context('when campaignParticipationId is not an integer', function () {
+      it('should return 400 - Bad request', async function () {
+        // given
+        const getCampaignAssessmentParticipationStub = sinon.stub(
+          campaignParticipationController,
+          'getCampaignAssessmentParticipation',
+        );
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(method, '/api/campaigns/1/assessment-participations/FAKE_ID');
+
+        // then
+        expect(getCampaignAssessmentParticipationStub.called).false;
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+
+    it('should called right security prehandler', async function () {
+      // given
+      const checkUserCanAccessCampaignParticipationStub = sinon
+        .stub(campaignParticipationPreHandlers, 'checkUserCanAccessCampaignParticipation')
+        .callsFake((request, h) => h.response(true));
+      const getCampaignAssessmentParticipationStub = sinon
+        .stub(campaignParticipationController, 'getCampaignAssessmentParticipation')
+        .resolves(true);
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request(method, '/api/campaigns/1/assessment-participations/1');
+
+      // then
+      expect(checkUserCanAccessCampaignParticipationStub.called).true;
+      expect(getCampaignAssessmentParticipationStub.called).true;
+    });
+  });
 });
