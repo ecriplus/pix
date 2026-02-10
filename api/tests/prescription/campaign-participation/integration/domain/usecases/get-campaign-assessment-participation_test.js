@@ -10,7 +10,7 @@ import { KnowledgeElement } from '../../../../../../src/shared/domain/models/Kno
 import { databaseBuilder, expect, mockLearningContent, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign-assessment-participation', function () {
-  let userId, campaignId, targetProfileId, organizationLearner, organizationId;
+  let campaignId, targetProfileId, organizationLearner, organizationId;
 
   let skillId, skillId2, skillId3;
 
@@ -72,8 +72,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
     await mockLearningContent(learningContent);
 
     organizationId = databaseBuilder.factory.buildOrganization().id;
-    userId = databaseBuilder.factory.buildUser().id;
-    databaseBuilder.factory.buildMembership({ organizationId, userId });
     organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
       organizationId,
     });
@@ -83,8 +81,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       type: CampaignTypes.ASSESSMENT,
       targetProfileId,
       organizationId,
-      creatorId: userId,
-      ownerId: userId,
     }).id;
 
     databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId });
@@ -116,7 +112,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       databaseBuilder.factory.buildAssessment({
         campaignParticipationId,
-        userId,
+        userId: organizationLearner.userId,
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.STARTED,
       });
@@ -125,7 +121,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       // when
       const result = await usecases.getCampaignAssessmentParticipation({
-        userId,
         campaignId,
         campaignParticipationId,
       });
@@ -146,13 +141,13 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       }).id;
       databaseBuilder.factory.buildAssessment({
         campaignParticipationId,
-        userId,
+        userId: organizationLearner.userId,
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.COMPLETED,
       });
 
       databaseBuilder.factory.buildBadgeAcquisition({
-        userId,
+        userId: organizationLearner.userId,
         badgeId,
         campaignParticipationId,
         createdAt: new Date('2020-01-01'),
@@ -162,7 +157,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       // when
       const result = await usecases.getCampaignAssessmentParticipation({
-        userId,
         campaignId,
         campaignParticipationId,
       });
@@ -203,7 +197,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       databaseBuilder.factory.buildAssessment({
         campaignParticipationId,
-        userId,
+        userId: organizationLearner.userId,
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.COMPLETED,
       });
@@ -212,7 +206,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       // when
       const result = await usecases.getCampaignAssessmentParticipation({
-        userId,
         campaignId,
         campaignParticipationId,
       });
@@ -237,7 +230,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       databaseBuilder.factory.buildAssessment({
         campaignParticipationId,
-        userId,
+        userId: organizationLearner.userId,
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.STARTED,
       });
@@ -246,7 +239,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
       // when
       const result = await usecases.getCampaignAssessmentParticipation({
-        userId,
         campaignId,
         campaignParticipationId,
       });
@@ -288,7 +280,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
         databaseBuilder.factory.buildAssessment({
           campaignParticipationId,
-          userId,
+          userId: organizationLearner.userId,
           type: Assessment.types.CAMPAIGN,
           state: Assessment.states.STARTED,
         });
@@ -296,7 +288,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
         await databaseBuilder.commit();
 
         const result = await usecases.getCampaignAssessmentParticipation({
-          userId,
           campaignId,
           campaignParticipationId,
         });
@@ -326,7 +317,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
@@ -379,7 +369,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
@@ -425,7 +414,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
@@ -442,8 +430,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
           type: CampaignTypes.EXAM,
           targetProfileId,
           organizationId,
-          creatorId: userId,
-          ownerId: userId,
         }).id;
 
         databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId });
@@ -466,7 +452,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
         databaseBuilder.factory.buildAssessment({
           campaignParticipationId,
-          userId,
+          userId: organizationLearner.userId,
           type: Assessment.types.CAMPAIGN,
           state: Assessment.states.STARTED,
         });
@@ -474,7 +460,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
         await databaseBuilder.commit();
 
         const result = await usecases.getCampaignAssessmentParticipation({
-          userId,
           campaignId,
           campaignParticipationId,
         });
@@ -504,7 +489,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
@@ -545,7 +529,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
@@ -589,7 +572,6 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
 
           // when
           const result = await usecases.getCampaignAssessmentParticipation({
-            userId,
             campaignId,
             campaignParticipationId,
           });
