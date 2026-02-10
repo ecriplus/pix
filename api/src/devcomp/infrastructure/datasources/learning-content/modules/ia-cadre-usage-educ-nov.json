@@ -636,11 +636,7 @@
                     "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2",
-                  "3"
-                ]
+                "solutions": ["1", "2", "3"]
               }
             }
           ]
@@ -684,11 +680,7 @@
                     "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2",
-                  "3"
-                ]
+                "solutions": ["1", "2", "3"]
               }
             }
           ]

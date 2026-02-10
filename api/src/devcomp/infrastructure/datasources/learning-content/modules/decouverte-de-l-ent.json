@@ -198,10 +198,7 @@
                     "diagnosis": "<p>Pas tout à fait ! Grâce à l'ENT, Martin peut consulter des informations qui concernent sa fille&nbsp;: ses notes, son emploi du temps, ses devoirs. Par contre, il ne peut pas modifier l'emploi du temps de la classe.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2"
-                ]
+                "solutions": ["1", "2"]
               }
             }
           ]

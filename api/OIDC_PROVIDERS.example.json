@@ -28,8 +28,8 @@
     "enabled": true,
     "openidConfigurationUrl": "https://file-b.oidc.example.net/.well-known/openid-configuration",
     "redirectUri": "https://app.dev.pix.org/connexion/file-b-oidc-example-net"
-   },
-   {
+  },
+  {
     "application": "orga",
     "applicationTld": ".org",
     "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-B-ORGA",
@@ -44,7 +44,7 @@
     "enabled": true,
     "openidConfigurationUrl": "https://file-b.oidc.example.net/.well-known/openid-configuration",
     "redirectUri": "https://app.dev.pix.org/connexion/file-b-oidc-example-net"
-   },
+  },
   {
     "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-C",
     "application": "app",
@@ -59,6 +59,6 @@
     "enabled": true,
     "openidConfigurationUrl": "https://file-c.oidc.example.net/.well-known/openid-configuration",
     "redirectUri": "https://app.dev.pix.org/connexion/file-c-oidc-example-net",
-     "isVisible": false
+    "isVisible": false
   }
 ]

@@ -650,9 +650,7 @@
                         "content": "Réparer"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -683,9 +681,7 @@
                         "content": "Réparer"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -716,9 +712,7 @@
                         "content": "Réemployer"
                       }
                     ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "solutions": ["4"]
                   },
                   {
                     "type": "text",
@@ -749,9 +743,7 @@
                         "content": "Réparer"
                       }
                     ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "solutions": ["4"]
                   }
                 ],
                 "feedbacks": {

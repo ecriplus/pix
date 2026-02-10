@@ -11,9 +11,7 @@
     "duration": 1,
     "level": "novice",
     "tabletSupport": "inconvenient",
-    "objectives": [
-      "Test parcours combiné"
-    ]
+    "objectives": ["Test parcours combiné"]
   },
   "sections": [
     {

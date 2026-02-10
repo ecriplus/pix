@@ -211,9 +211,7 @@
                         "content": "Circuits électroniques"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -240,9 +238,7 @@
                         "content": "Écrans (couleurs et sensibilité tactile)"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -269,9 +265,7 @@
                         "content": "Batteries"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   }
                 ],
                 "feedbacks": {
@@ -834,11 +828,7 @@
                     "diagnosis": "<p>Certaines conséquences importantes ne figurent pas dans votre sélection. L’extraction peut entraîner divers effets environnementaux, sociaux et sanitaires. Et ce ne sont que quelques exemples : d’autres impacts existent, même s’ils ne sont pas listés ici.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "4",
-                  "5"
-                ]
+                "solutions": ["1", "4", "5"]
               }
             }
           ]
@@ -884,9 +874,7 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "solutions": ["4"]
                   },
                   {
                     "type": "text",
@@ -917,9 +905,7 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -950,9 +936,7 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -983,9 +967,7 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   }
                 ],
                 "feedbacks": {

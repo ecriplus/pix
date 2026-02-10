@@ -492,7 +492,7 @@
           "type": "activity",
           "title": "Activité d’application #1",
           "components": [
-             {
+            {
               "type": "element",
               "element": {
                 "id": "90e0818e-bd50-4a22-b488-f7b72a747fbf",

@@ -57,9 +57,7 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Mot de passe",
-                    "tolerances": [
-                      "t1"
-                    ],
+                    "tolerances": ["t1"],
                     "solutions": [
                       "123456",
                       "123456789",
@@ -191,9 +189,7 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Mot de passe d'Austin",
-                    "tolerances": [
-                      "t1"
-                    ],
+                    "tolerances": ["t1"],
                     "solutions": [
                       "Bill15111984",
                       "15111984Bill",
@@ -557,10 +553,7 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Un mot de passe long est plus solide. Se servir d'une phrase permet de mieux s'en souvenir.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "4"
-                ]
+                "solutions": ["1", "4"]
               }
             }
           ]

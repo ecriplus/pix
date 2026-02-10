@@ -1,21 +1,6 @@
 {
   "signal": "SIGTERM",
-  "watch": [
-    "src",
-    "lib",
-    "index.js",
-    "server.js",
-    "worker.js",
-    "package.json",
-    "db",
-    "translations",
-    ".env",
-    "tests"
-  ],
-  "ignore": [
-    "db/seeds",
-    "db/migrations",
-    "db/database-builder"
-  ],
+  "watch": ["src", "lib", "index.js", "server.js", "worker.js", "package.json", "db", "translations", ".env", "tests"],
+  "ignore": ["db/seeds", "db/migrations", "db/database-builder"],
   "ext": "js,json"
 }

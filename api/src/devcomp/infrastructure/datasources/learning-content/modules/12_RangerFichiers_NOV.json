@@ -173,9 +173,7 @@
                               "content": "dossier"
                             }
                           ],
-                          "solutions": [
-                            "2"
-                          ]
+                          "solutions": ["2"]
                         },
                         {
                           "type": "text",
@@ -223,9 +221,7 @@
                               "content": "dossier"
                             }
                           ],
-                          "solutions": [
-                            "1"
-                          ]
+                          "solutions": ["1"]
                         },
                         {
                           "type": "text",
@@ -605,9 +601,7 @@
                     "placeholder": "Tapez un chiffre",
                     "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
-                    "solutions": [
-                      4
-                    ]
+                    "solutions": [4]
                   },
                   {
                     "type": "text",
@@ -622,9 +616,7 @@
                     "placeholder": "Tapez un chiffre",
                     "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
-                    "solutions": [
-                      6
-                    ]
+                    "solutions": [6]
                   }
                 ],
                 "feedbacks": {
@@ -698,14 +690,8 @@
                     "display": "inline",
                     "placeholder": "Nom du fichier",
                     "ariaLabel": "Nom du fichier",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "courrier"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["courrier"]
                   }
                 ],
                 "feedbacks": {

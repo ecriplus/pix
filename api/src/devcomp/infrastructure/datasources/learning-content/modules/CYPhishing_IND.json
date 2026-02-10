@@ -532,9 +532,7 @@
                         "content": "imitent"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -561,9 +559,7 @@
                         "content": "techniciens"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -590,9 +586,7 @@
                         "content": "mises à jour"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -637,12 +631,8 @@
                     "display": "inline",
                     "placeholder": "tapez le nom",
                     "ariaLabel": "tapez le nom",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "hameçonnage"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["hameçonnage"]
                   },
                   {
                     "type": "text",
@@ -714,10 +704,7 @@
                     "diagnosis": "<p>Pour vérifier la légitimité des adresses mail, regardez bien des deux côtés de l’arobase. Vous pouvez réessayer.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]

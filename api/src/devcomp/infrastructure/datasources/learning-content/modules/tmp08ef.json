@@ -374,9 +374,7 @@
                         "content": "code"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -403,9 +401,7 @@
                         "content": "superviser"
                       }
                     ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "solutions": ["4"]
                   },
                   {
                     "type": "text",
@@ -432,9 +428,7 @@
                         "content": "tergiversation"
                       }
                     ],
-                    "solutions": [
-                      "8"
-                    ]
+                    "solutions": ["8"]
                   },
                   {
                     "type": "text",

@@ -172,12 +172,7 @@
                           "diagnosis": "<p>Toutes les propositions sont des impacts de l’extraction de métaux pour la construction de centres de données.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                      ]
+                      "solutions": ["1", "2", "3", "4"]
                     }
                   ]
                 },
@@ -224,10 +219,7 @@
                           "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "3"
-                      ]
+                      "solutions": ["1", "3"]
                     }
                   ]
                 },
@@ -279,12 +271,7 @@
                           "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine."
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                      ]
+                      "solutions": ["1", "2", "3", "4"]
                     }
                   ]
                 }
@@ -975,14 +962,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "centre de données"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["centre de données"]
                         },
                         {
                           "type": "text",
@@ -996,14 +977,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "serveurs"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["serveurs"]
                         },
                         {
                           "type": "text",
@@ -1051,14 +1026,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "métaux"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["métaux"]
                         },
                         {
                           "type": "text",
@@ -1072,14 +1041,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "terres"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["terres"]
                         },
                         {
                           "type": "text",
@@ -1127,15 +1090,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "douce",
-                            "potable"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["douce", "potable"]
                         },
                         {
                           "type": "text",
@@ -1149,15 +1105,8 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "pénuries",
-                            "manques"
-                          ]
+                          "tolerances": ["t1", "t2", "t3"],
+                          "solutions": ["pénuries", "manques"]
                         },
                         {
                           "type": "text",
@@ -1295,10 +1244,7 @@
                     "diagnosis": "<p>Essayer de vous demandez quelles pratiques sollicitent le moins les serveurs.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]
@@ -1480,11 +1426,7 @@
                           "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
-                      ]
+                      "solutions": ["1", "2", "3"]
                     }
                   ]
                 }

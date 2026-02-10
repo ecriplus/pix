@@ -152,11 +152,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
+                    "tolerances": ["t1", "t2", "t3"],
                     "options": [
                       {
                         "id": "1",
@@ -171,9 +167,7 @@
                         "content": "ami"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -185,11 +179,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
+                    "tolerances": ["t1", "t2", "t3"],
                     "options": [
                       {
                         "id": "1",
@@ -204,9 +194,7 @@
                         "content": "la manipulation psychologique"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -218,11 +206,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
+                    "tolerances": ["t1", "t2", "t3"],
                     "options": [
                       {
                         "id": "1",
@@ -237,9 +221,7 @@
                         "content": "son adresse postale"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -251,11 +233,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
+                    "tolerances": ["t1", "t2", "t3"],
                     "options": [
                       {
                         "id": "1",
@@ -270,9 +248,7 @@
                         "content": "une enquête d’opinion"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -864,10 +840,7 @@
                           "diagnosis": "<p>Les attaquants n’ont pas seulement exploité une faille technique pour pouvoir entrer dans les systèmes.</p>"
                         }
                       },
-                      "solutions": [
-                        "2",
-                        "3"
-                      ]
+                      "solutions": ["2", "3"]
                     }
                   ]
                 },
@@ -932,11 +905,7 @@
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
+                          "tolerances": ["t1", "t2", "t3"],
                           "options": [
                             {
                               "id": "1",
@@ -951,9 +920,7 @@
                               "content": "du coût irrécupérable"
                             }
                           ],
-                          "solutions": [
-                            "1"
-                          ]
+                          "solutions": ["1"]
                         }
                       ],
                       "feedbacks": {

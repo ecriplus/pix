@@ -428,9 +428,7 @@
                     "placeholder": " ",
                     "ariaLabel": "nombre d’utilisation de l’IA",
                     "tolerances": [],
-                    "solutions": [
-                      6
-                    ]
+                    "solutions": [6]
                   }
                 ],
                 "feedbacks": {

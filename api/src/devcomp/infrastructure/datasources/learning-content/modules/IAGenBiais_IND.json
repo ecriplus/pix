@@ -917,10 +917,7 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple ou vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "4"
-                ]
+                "solutions": ["2", "4"]
               }
             }
           ]

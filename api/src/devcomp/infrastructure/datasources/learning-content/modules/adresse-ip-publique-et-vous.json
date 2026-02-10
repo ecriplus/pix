@@ -439,13 +439,8 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "Nom du pays :",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "Japon",
-                      "Tokyo"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["Japon", "Tokyo"]
                   }
                 ],
                 "feedbacks": {

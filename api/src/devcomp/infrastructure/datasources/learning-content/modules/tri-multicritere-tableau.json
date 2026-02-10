@@ -338,12 +338,8 @@
                     "display": "inline",
                     "placeholder": "prénom",
                     "ariaLabel": "écrivez le prénom ici",
-                    "tolerances": [
-                      "t3"
-                    ],
-                    "solutions": [
-                      "emma"
-                    ]
+                    "tolerances": ["t3"],
+                    "solutions": ["emma"]
                   },
                   {
                     "type": "text",
@@ -357,13 +353,8 @@
                     "display": "inline",
                     "placeholder": "lot",
                     "ariaLabel": "écrivez le lot ici",
-                    "tolerances": [
-                      "t3"
-                    ],
-                    "solutions": [
-                      "glace",
-                      "glaces"
-                    ]
+                    "tolerances": ["t3"],
+                    "solutions": ["glace", "glaces"]
                   }
                 ],
                 "feedbacks": {
@@ -539,12 +530,8 @@
                     "display": "inline",
                     "placeholder": "prénom",
                     "ariaLabel": "écrivez ici le prénom",
-                    "tolerances": [
-                      "t3"
-                    ],
-                    "solutions": [
-                      "inès"
-                    ]
+                    "tolerances": ["t3"],
+                    "solutions": ["inès"]
                   },
                   {
                     "type": "text",
@@ -558,13 +545,8 @@
                     "display": "inline",
                     "placeholder": "trésor",
                     "ariaLabel": "écrivez ici le contenu du trésor",
-                    "tolerances": [
-                      "t3"
-                    ],
-                    "solutions": [
-                      "des bonbons",
-                      "bonbons"
-                    ]
+                    "tolerances": ["t3"],
+                    "solutions": ["des bonbons", "bonbons"]
                   }
                 ],
                 "feedbacks": {
