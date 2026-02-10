@@ -16,6 +16,7 @@ import * as dataProtectionOfficerRepository from '../../infrastructure/repositor
 import { repositories as organizationalEntitiesRepositories } from '../../infrastructure/repositories/index.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner.repository.js';
+import * as organizationLearnerTypeRepository from '../../infrastructure/repositories/organization-learner-type-repository.js';
 import * as organizationPlacesLotRepository from '../../infrastructure/repositories/organization-places-lot.repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
@@ -35,6 +36,7 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
  * @typedef {import ('../../infrastructure/repositories/organization-places-lot.repository.js')} OrganizationPlacesLotRepository
  * @typedef {import ('../../infrastructure/repositories/organization-learner.repository.js')} OrganizationLearnerRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-learner-type-repository.js')} OrganizationLearnerTypeRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
  * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
@@ -62,6 +64,7 @@ const repositories = {
   organizationForAdminRepository: organizationalEntitiesRepositories.organizationForAdminRepository,
   organizationFeatureRepository,
   organizationLearnerRepository,
+  organizationLearnerTypeRepository,
   organizationPlacesLotRepository,
   schoolRepository,
   learnersApi,
@@ -86,6 +89,7 @@ import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizat
 import { createTag } from './create-tag.js';
 import { detachParentOrganizationFromOrganization } from './detach-parent-organization-from-organization.usecase.js';
 import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
+import { findAllOrganizationLearnerTypes } from './find-all-organization-learner-types.refactor.js';
 import { findAllTags } from './find-all-tags.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
 import { findOrganizationFeatures } from './find-organization-features.js';
@@ -120,6 +124,7 @@ const usecasesWithoutInjectedDependencies = {
   findPaginatedFilteredCertificationCenters,
   findPaginatedFilteredOrganizations,
   findAllAdministrationTeams,
+  findAllOrganizationLearnerTypes,
   getCenterForAdmin,
   getOrganizationById,
   getOrganizationDetails,

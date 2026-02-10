@@ -1,5 +1,6 @@
 import { buildCertificate } from '../factory/certification/results/build-v3-certification-attestation.js';
 import { buildPassage } from '../factory/devcomp/build-passage.js';
+import { buildOrganizationLearnerType } from './acquisition/build-organization-learner-type.js';
 import { buildEmptyInformationBanner, buildInformationBanner } from './banner/build-banner-information.js';
 import { buildAccountRecoveryDemand } from './build-account-recovery-demand.js';
 import { buildActivity } from './build-activity.js';
@@ -239,6 +240,10 @@ import { buildOrganizationToJoin } from './prescription/organization-learner/bui
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
 
+const acquisition = {
+  buildOrganizationLearnerType,
+};
+
 const banner = {
   buildEmptyInformationBanner,
   buildInformationBanner,
@@ -358,6 +363,7 @@ const llm = {
 };
 
 export {
+  acquisition,
   banner,
   buildAccountRecoveryDemand,
   buildActivity,
