@@ -1,5 +1,61 @@
 # Pix Changelog
 
+# [5.326.0](https://github.com/1024pix/pix/compare/v5.325.0...v5.326.0) (2026-02-10)
+
+### :rocket: Amélioration
+
+- [#15001](https://github.com/1024pix/pix/pull/15001) Afficher le nombre d'invitations dans la page d'une organisation (PIX-20832) 
+- [#14933](https://github.com/1024pix/pix/pull/14933) Ajouter la propriété hasShortProposals dans le schéma des QCU, QCM et QCU Découverte et QCU Déclaratif (PIX-21284) 
+- [#15038](https://github.com/1024pix/pix/pull/15038) Créer une route pour faire remonter la liste de public préscrit (PIX-21247) 
+- [#14896](https://github.com/1024pix/pix/pull/14896) Donner la possibilité aux prescripteurs de déployer un parcours combiné dans leur organisation (PIX-21179) 
+- [#14979](https://github.com/1024pix/pix/pull/14979) Enregistrer un passage-event quand on clique sur Réessayer ou Réinitialiser (PIX-21197) 
+- [#15034](https://github.com/1024pix/pix/pull/15034) Remonter le type de prescrit dans le détail d'une organisation (PIX-21244). 
+- [#14947](https://github.com/1024pix/pix/pull/14947) Update NR_Datacenter_AVA.json 
+
+### :bug: Correction
+
+- [#15033](https://github.com/1024pix/pix/pull/15033) Corriger l'affichage de la progression dans PixOrga sur la page Assessement Result (PIX-21430). 
+- [#15008](https://github.com/1024pix/pix/pull/15008) Corriger la jauge de progression dans le cadre d'un participation à un campagne (PIX-21388). 
+- [#14685](https://github.com/1024pix/pix/pull/14685) Empêcher le scoring des certifications PixPlus (PIX-21041) 
+- [#15029](https://github.com/1024pix/pix/pull/15029) Empêcher les bugs de récupération de missions lorsqu'il existe plusieurs assessments commencés pour une même mission 
+- [#15035](https://github.com/1024pix/pix/pull/15035) Utiliser la DomainConnection dans tous les repositories `shared`, `school` et `maddo`. 
+
+### :building_construction: Tech
+
+- [#15012](https://github.com/1024pix/pix/pull/15012) Ajout d'une colonne contenant la configuration de scoring sur les tables permettant la remontée Parcoursup du Datamart (PIX-21422) 
+- [#14943](https://github.com/1024pix/pix/pull/14943) Ajout de tests Playwright liés au passage du CléA Numérique (PIX-21353) 
+- [#14993](https://github.com/1024pix/pix/pull/14993) Correction de balises HTML dans les modules pour les textes à trous (PIX-21233). 
+- [#15037](https://github.com/1024pix/pix/pull/15037) Dans les tests E2E, génère la calibration des épreuves pour le passage en certif dans le setup 
+- [#15028](https://github.com/1024pix/pix/pull/15028) Utilise la connexion ouverte pour transaction, le cas échéant, dans les repositories des Bounded Contexts de certification 
+- [#15018](https://github.com/1024pix/pix/pull/15018) Utiliser la DomainTransaction dans les repositories du domaine Acquisition (PIX-21420). 
+- [#15022](https://github.com/1024pix/pix/pull/15022) Utiliser la DomainTransaction dans les repository des Bounded Context Accès (PIX-21408). 
+
+### :arrow_up: Montée de version
+
+- [#15068](https://github.com/1024pix/pix/pull/15068) Lock file maintenance (api) 
+- [#15045](https://github.com/1024pix/pix/pull/15045) Lock file maintenance (api) 
+- [#15069](https://github.com/1024pix/pix/pull/15069) Lock file maintenance (audit-logger) 
+- [#15046](https://github.com/1024pix/pix/pull/15046) Lock file maintenance (audit-logger) 
+- [#15054](https://github.com/1024pix/pix/pull/15054) Lock file maintenance (certif) 
+- [#15047](https://github.com/1024pix/pix/pull/15047) Lock file maintenance (certif) 
+- [#15048](https://github.com/1024pix/pix/pull/15048) Lock file maintenance (dossier racine) 
+- [#15071](https://github.com/1024pix/pix/pull/15071) Lock file maintenance (junior) 
+- [#15064](https://github.com/1024pix/pix/pull/15064) Lock file maintenance (junior) 
+- [#15055](https://github.com/1024pix/pix/pull/15055) Lock file maintenance (junior) 
+- [#15056](https://github.com/1024pix/pix/pull/15056) Lock file maintenance (load-testing) 
+- [#15072](https://github.com/1024pix/pix/pull/15072) Lock file maintenance (mon-pix) 
+- [#15062](https://github.com/1024pix/pix/pull/15062) Lock file maintenance (mon-pix) 
+- [#15057](https://github.com/1024pix/pix/pull/15057) Lock file maintenance (mon-pix) 
+- [#15073](https://github.com/1024pix/pix/pull/15073) Lock file maintenance (orga) 
+- [#15063](https://github.com/1024pix/pix/pull/15063) Lock file maintenance (orga) 
+- [#15058](https://github.com/1024pix/pix/pull/15058) Lock file maintenance (orga) 
+- [#15004](https://github.com/1024pix/pix/pull/15004) Mise à jour de @1024pix/epreuves-components à 2.7.0 
+- [#15005](https://github.com/1024pix/pix/pull/15005) Update dependency @1024pix/pix-ui to ^58.4.9 (admin) 
+- [#15002](https://github.com/1024pix/pix/pull/15002) Update dependency @1024pix/pix-ui to ^58.4.9 (certif) 
+- [#15042](https://github.com/1024pix/pix/pull/15042) Update dependency @1024pix/pix-ui to ^58.4.9 (junior) 
+- [#15043](https://github.com/1024pix/pix/pull/15043) Update dependency @1024pix/pix-ui to ^58.4.9 (mon-pix) 
+- [#15044](https://github.com/1024pix/pix/pull/15044) Update dependency @1024pix/pix-ui to ^58.4.9 (orga)
+
 # [5.325.0](https://github.com/1024pix/pix/compare/v5.324.0...v5.325.0) (2026-02-07)
 
 ### :rocket: Amélioration
