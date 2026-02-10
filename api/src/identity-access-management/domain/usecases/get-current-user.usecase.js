@@ -16,11 +16,15 @@ export const getCurrentUser = async function ({
   userRecommendedTrainingRepository,
   anonymousUserTokenRepository,
 }) {
-  const [hasAssessmentParticipations, codeForLastProfileToShare, hasRecommendedTrainings] = await Promise.all([
-    campaignParticipationRepository.hasAssessmentParticipations(authenticatedUserId),
-    campaignParticipationRepository.getCodeOfLastParticipationToProfilesCollectionCampaignForUser(authenticatedUserId),
-    userRecommendedTrainingRepository.hasRecommendedTrainings({ userId: authenticatedUserId }),
-  ]);
+  const hasAssessmentParticipations =
+    await campaignParticipationRepository.hasAssessmentParticipations(authenticatedUserId);
+  const codeForLastProfileToShare =
+    await campaignParticipationRepository.getCodeOfLastParticipationToProfilesCollectionCampaignForUser(
+      authenticatedUserId,
+    );
+  const hasRecommendedTrainings = await userRecommendedTrainingRepository.hasRecommendedTrainings({
+    userId: authenticatedUserId,
+  });
 
   const user = await userRepository.get(authenticatedUserId);
   const shouldSeeDataProtectionPolicyInformationBanner = user.shouldSeeDataProtectionPolicyInformationBanner;
