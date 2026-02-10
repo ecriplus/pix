@@ -16,11 +16,10 @@ export async function computeScorecard({
   allowExcessLevel = false,
   locale,
 }) {
-  const [knowledgeElements, competence, competenceEvaluations] = await Promise.all([
-    knowledgeElementRepository.findUniqByUserIdAndCompetenceId({ userId, competenceId }),
-    competenceRepository.get({ id: competenceId, locale }),
-    competenceEvaluationRepository.findByUserId(userId),
-  ]);
+  const knowledgeElements = await knowledgeElementRepository.findUniqByUserIdAndCompetenceId({ userId, competenceId });
+  const competence = await competenceRepository.get({ id: competenceId, locale });
+  const competenceEvaluations = await competenceEvaluationRepository.findByUserId(userId);
+
   const competenceEvaluation = _.find(competenceEvaluations, { competenceId: competence.id });
   const area = await areaRepository.get({ id: competence.areaId, locale });
   return Scorecard.buildFrom({
@@ -89,30 +88,21 @@ export async function resetScorecard({
   const resetSkillIds = _.map(newKnowledgeElements, (knowledgeElement) => knowledgeElement.skillId);
 
   // user can have only answered to questions in campaign, in that case, competenceEvaluation does not exists
-  if (shouldResetCompetenceEvaluation) {
-    return Promise.all([
-      newKnowledgeElements,
-      _resetCampaignAssessments({
-        userId,
-        resetSkillIds,
-        assessmentRepository,
-        campaignRepository,
-        campaignParticipationRepository,
-      }),
-      _resetCompetenceEvaluation({ userId, competenceId, competenceEvaluationRepository }),
-    ]);
-  }
+  await _resetCampaignAssessments({
+    userId,
+    resetSkillIds,
+    assessmentRepository,
+    campaignRepository,
+    campaignParticipationRepository,
+  });
 
-  return Promise.all([
-    newKnowledgeElements,
-    _resetCampaignAssessments({
+  if (shouldResetCompetenceEvaluation) {
+    await _resetCompetenceEvaluation({
       userId,
-      resetSkillIds,
-      assessmentRepository,
-      campaignParticipationRepository,
-      campaignRepository,
-    }),
-  ]);
+      competenceId,
+      competenceEvaluationRepository,
+    });
+  }
 }
 
 async function _resetKnowledgeElements({ userId, competenceId, knowledgeElementRepository }) {
@@ -124,8 +114,8 @@ async function _resetKnowledgeElements({ userId, competenceId, knowledgeElementR
   return knowledgeElementRepository.batchSave({ knowledgeElements: resetKnowledgeElements });
 }
 
-function _resetCompetenceEvaluation({ userId, competenceId, competenceEvaluationRepository }) {
-  return competenceEvaluationRepository.updateStatusByUserIdAndCompetenceId({
+async function _resetCompetenceEvaluation({ userId, competenceId, competenceEvaluationRepository }) {
+  return await competenceEvaluationRepository.updateStatusByUserIdAndCompetenceId({
     competenceId,
     userId,
     status: CompetenceEvaluation.statuses.RESET,
@@ -145,16 +135,15 @@ async function _resetCampaignAssessments({
     return null;
   }
 
-  const resetCampaignAssessmentsPromises = _.map(notAbortedCampaignAssessments, (campaignAssessment) =>
-    _resetCampaignAssessment({
+  for (const campaignAssessment of notAbortedCampaignAssessments) {
+    await _resetCampaignAssessment({
       assessment: campaignAssessment,
       resetSkillIds,
       assessmentRepository,
       campaignParticipationRepository,
       campaignRepository,
-    }),
-  );
-  return Promise.all(resetCampaignAssessmentsPromises);
+    });
+  }
 }
 
 async function _resetCampaignAssessment({
@@ -189,6 +178,7 @@ async function _resetCampaignAssessment({
     campaignParticipationId: assessment.campaignParticipationId,
     campaign,
   });
+
   await assessmentRepository.abortByAssessmentId(assessment.id);
   return await assessmentRepository.save({ assessment: newAssessment });
 }
