@@ -77,7 +77,7 @@ export default class PlacesLotCreationForm extends Component {
     <section class="page-section">
       <div class="places__add-form">
         <form class="form" {{on "submit" this.onSubmit}}>
-          <span class="form__instructions">
+          <span class="admin-form__mandatory-text">
             {{t "common.forms.mandatory-fields" htmlSafe=true}}
           </span>
           <div class="form-field">
