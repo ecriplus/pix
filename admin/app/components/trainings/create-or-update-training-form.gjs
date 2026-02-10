@@ -175,7 +175,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
 
           {{#if this.form.type}}
-            {{#if (eq this.form.type "modulix")}}
+            {{#if (eq this.form.type MODULIX_TYPE)}}
               <PixSelect
                 @id="trainingModule"
                 @placeholder="-- Sélectionnez un module --"
@@ -253,7 +253,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
           <PixInput
             @id="trainingEditorLogoUrl"
-            @subLabel="Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg"
+            @subLabel="Exemple : {{MODULIX_EDITOR_LOGO_URL}}"
             required={{true}}
             aria-required={{true}}
             @value={{this.form.editorLogoUrl}}
