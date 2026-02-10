@@ -10,6 +10,7 @@ export class Candidate {
     subscriptionScope: Joi.string()
       .valid(...Object.values(SCOPES))
       .required(),
+    hasCleaSubscription: Joi.boolean().required(),
   });
 
   /**
@@ -17,13 +18,23 @@ export class Candidate {
    * @param {Date} params.reconciledAt
    * @param {boolean} [params.accessibilityAdjustmentNeeded]
    * @param {SCOPES} params.subscriptionScope
+   * @param {boolean} params.hasCleaSubscription
    */
-  constructor({ accessibilityAdjustmentNeeded, reconciledAt, subscriptionScope } = {}) {
+  constructor({ accessibilityAdjustmentNeeded, reconciledAt, subscriptionScope, hasCleaSubscription }) {
     this.accessibilityAdjustmentNeeded = !!accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
     this.subscriptionScope = subscriptionScope;
+    this.hasCleaSubscription = hasCleaSubscription;
 
     this.#validate();
+  }
+
+  get hasOnlyCoreSubscription() {
+    return this.subscriptionScope === SCOPES.CORE && !this.hasCleaSubscription;
+  }
+
+  get hasPixPlusSubscription() {
+    return this.subscriptionScope !== SCOPES.CORE && !this.hasCleaSubscription;
   }
 
   #validate() {

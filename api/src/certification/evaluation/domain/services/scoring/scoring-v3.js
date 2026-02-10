@@ -1,247 +1,161 @@
 /**
- * @typedef {import('./calibrated-challenge-service.js').findByCertificationCourseAndVersion} FindByCertificationCourseAndVersion
+ * @typedef {import('../../models/Candidate.js')} Candidate
+ * @typedef {import('../../models/FlashAssessmentAlgorithm.js')} FlashAssessmentAlgorithm
+ * @typedef {import('../../../../shared/domain/models/V3CertificationScoring.js')} V3CertificationScoring
+ * @typedef {import('../../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
+ * @typedef {import('../../../../../shared/domain/models/AssessmentResult.js')} AssessmentResult
+ * @typedef {import('../../models/AssessmentSheet.js')} AssessmentSheet
+ * @typedef {import('../../models/ComplementaryCertificationScoringCriteria.js')} ComplementaryCertificationScoringCriteria
+ * @typedef {import('../index.js').services.scoringDegradationService} ScoringDegradationService
+ * @typedef {import('../../../../../shared/domain/events/CertificationCourseUnrejected.js').CertificationCourseUnrejected} CertificationCourseUnrejected
+ * @typedef {import('../../../../../shared/domain/events/CertificationUncancelled.js').default} CertificationUncancelled
+ * @typedef {import('../../../../session-management/domain/events/CertificationCourseRejected.js').CertificationCourseRejected} CertificationCourseRejected
+ * @typedef {import('../../../../session-management/domain/events/CertificationJuryDone.js').CertificationJuryDone} CertificationJuryDone
+ * @typedef {import('../../events/CertificationRescored.js').default} CertificationRescored
+ * @typedef {CertificationJuryDone | CertificationCourseRejected | CertificationCourseUnrejected | CertificationCancelled | CertificationRescored | CertificationUncancelled} CertificationRescoringEvent
  */
 
-/**
- * @typedef {object} ScoringV3Dependencies
- * @property {FindByCertificationCourseAndVersion} findByCertificationCourseAndVersion
- */
+import CertificationCancelled from '../../../../../shared/domain/events/CertificationCancelled.js';
+import { CertificationAssessmentScoreV3 } from '../../models/CertificationAssessmentScoreV3.js';
+import { CoreScoring } from '../../models/CoreScoring.js';
+import { DoubleCertificationScoring } from '../../models/DoubleCertificationScoring.js';
+import { createV3AssessmentResult } from './create-v3-assessment-result.js';
 
-/**
- * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
- * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
- * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
- * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
- * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {import('../index.js').SharedVersionRepository} SharedVersionRepository
- * @typedef {import('../index.js').SharedCertificationCandidateRepository} SharedCertificationCandidateRepository
- * @typedef {import('../index.js').AnswerRepository} AnswerRepository
- * @typedef {import('../index.js').FlashAlgorithmService} FlashAlgorithmService
- */
-
-import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { config } from '../../../../../shared/config.js';
-import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
-import { CertificationCandidateNotFoundError } from '../../../../../shared/domain/errors.js';
-import { FlashAssessmentAlgorithm } from '../../../../evaluation/domain/models/FlashAssessmentAlgorithm.js';
-import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
-import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
-import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
-import { CompetenceMark } from '../../../../shared/domain/models/CompetenceMark.js';
-
-export const handleV3CertificationScoring = withTransaction(
+export const handleV3CertificationScoring =
   /**
    * @param {object} params
-   * @param {AssessmentResultRepository} params.assessmentResultRepository
-   * @param {CertificationCourseRepository} params.certificationCourseRepository
-   * @param {CompetenceMarkRepository} params.competenceMarkRepository
-   * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
-   * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {SharedVersionRepository} params.sharedVersionRepository
-   * @param {SharedCertificationCandidateRepository} params.sharedCertificationCandidateRepository
-   * @param {AnswerRepository} params.answerRepository
-   * @param {FlashAlgorithmService} params.flashAlgorithmService
+   * @param {CertificationRescoringEvent} [params.event]
+   * @param {Candidate} params.candidate
+   * @param {AssessmentSheet} params.assessmentSheet
+   * @param {FlashAssessmentAlgorithm} params.algorithm
+   * @param {V3CertificationScoring} params.v3CertificationScoring
+   * @param {Array<CalibratedChallenge>} params.allChallenges
+   * @param {Array<CalibratedChallenge>} params.askedChallengesWithoutLiveAlerts
+   * @param {ComplementaryCertificationScoringCriteria} params.cleaScoringCriteria
    * @param {ScoringDegradationService} params.scoringDegradationService
-   * @param {ScoringV3Dependencies} params.dependencies
+   *
+   * @return {Object<CoreScoring, DoubleCertificationScoring>}
    */
-  async ({
+  ({
     event,
-    locale,
-    certificationAssessment,
-    answerRepository,
-    assessmentResultRepository,
-    certificationAssessmentHistoryRepository,
-    certificationCourseRepository,
-    competenceMarkRepository,
-    sharedVersionRepository,
-    flashAlgorithmService,
+    candidate,
+    assessmentSheet,
+    allChallenges,
+    askedChallengesWithoutLiveAlerts,
+    algorithm,
+    v3CertificationScoring,
+    cleaScoringCriteria,
     scoringDegradationService,
-    scoringConfigurationRepository,
-    sharedCertificationCandidateRepository,
-    dependencies,
   }) => {
-    const { certificationCourseId, id: assessmentId } = certificationAssessment;
-    const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
-
-    const toBeCancelled = event instanceof CertificationCancelled;
-
-    const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-
-    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
-    const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
-      sessionId: certificationCourse.getSessionId(),
-      userId: certificationCourse.getUserId(),
-    });
-
-    if (!certificationCandidate) {
-      throw new CertificationCandidateNotFoundError();
+    if (candidate.hasPixPlusSubscription) {
+      return {
+        coreScoring: null,
+        doubleCertificationScoring: null,
+      }; // WIP : will be done in the future
     }
 
-    const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
-      scope,
-      reconciliationDate: certificationCandidate.reconciledAt,
-    });
+    if (candidate.hasOnlyCoreSubscription) {
+      const coreScoring = _scoreCoreCertification({
+        event,
+        assessmentSheet,
+        algorithm,
+        v3CertificationScoring,
+        allChallenges,
+        askedChallengesWithoutLiveAlerts,
+        scoringDegradationService,
+      });
 
-    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-      await dependencies.findByCertificationCourseAndVersion({ certificationCourse, version });
+      return {
+        coreScoring,
+        doubleCertificationScoring: null,
+      };
+    }
 
-    const algorithm = new FlashAssessmentAlgorithm({
-      flashAlgorithmImplementation: flashAlgorithmService,
-      configuration: version.challengesConfiguration,
-    });
+    if (candidate.hasCleaSubscription) {
+      const coreScoring = _scoreCoreCertification({
+        event,
+        assessmentSheet,
+        algorithm,
+        v3CertificationScoring,
+        allChallenges,
+        askedChallengesWithoutLiveAlerts,
+        scoringDegradationService,
+      });
 
-    const v3CertificationScoring = await scoringConfigurationRepository.getLatestByVersionAndLocale({
-      locale,
-      version,
-    });
+      const doubleCertificationScoring = _scoreDoubleCertification({
+        assessmentSheet,
+        assessmentResult: coreScoring.assessmentResult,
+        cleaScoringCriteria,
+      });
+      return { coreScoring, doubleCertificationScoring };
+    }
+  };
 
-    const abortReason = certificationCourse.getAbortReason();
-    const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
-      abortReason,
-      algorithm,
-      // The following spread operation prevents the original array to be mutated during the simulation
-      // so that in can be used during the assessment result creation
-      allAnswers: [...candidateAnswers],
-      allChallenges,
-      challenges: askedChallengesWithoutLiveAlerts,
-      maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
-      v3CertificationScoring,
-      scoringDegradationService,
-    });
-
-    const assessmentResult = _createV3AssessmentResult({
-      toBeCancelled,
-      allAnswers: candidateAnswers,
-      certificationAssessment,
-      certificationAssessmentScore,
-      certificationCourse,
-      juryId: event?.juryId,
-    });
-
-    const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
-      algorithm,
-      challenges: challengeCalibrationsWithoutLiveAlerts,
-      allAnswers: candidateAnswers,
-    });
-
-    await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
-
-    await _saveV3Result({
-      assessmentResult,
-      certificationCourseId,
-      certificationAssessmentScore,
-      assessmentResultRepository,
-      competenceMarkRepository,
-    });
-
-    return certificationCourse;
-  },
-);
-
-function _createV3AssessmentResult({
-  toBeCancelled,
-  allAnswers,
-  certificationAssessment,
-  certificationAssessmentScore,
-  certificationCourse,
-  juryId,
+/**
+ * @param {object} params
+ * @param {CertificationRescoringEvent} [params.event]
+ * @param {AssessmentSheet} params.assessmentSheet
+ * @param {FlashAssessmentAlgorithm} params.algorithm
+ * @param {V3CertificationScoring} params.v3CertificationScoring
+ * @param {Array<CalibratedChallenge>} params.allChallenges
+ * @param {Array<CalibratedChallenge>} params.askedChallengesWithoutLiveAlerts
+ * @param {ScoringDegradationService} params.scoringDegradationService
+ *
+ * @returns {CoreScoring}
+ */
+function _scoreCoreCertification({
+  event,
+  assessmentSheet,
+  algorithm,
+  v3CertificationScoring,
+  allChallenges,
+  askedChallengesWithoutLiveAlerts,
+  scoringDegradationService,
 }) {
-  if (toBeCancelled) {
-    return AssessmentResultFactory.buildCancelledAssessmentResult({
-      juryId,
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      assessmentId: certificationAssessment.id,
-    });
-  }
-
-  if (certificationCourse.isRejectedForFraud()) {
-    return AssessmentResultFactory.buildFraud({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      assessmentId: certificationAssessment.id,
-      juryId,
-    });
-  }
-
-  if (_shouldRejectWhenV3CertificationCandidateDidNotAnswerToEnoughQuestions({ allAnswers, certificationCourse })) {
-    return AssessmentResultFactory.buildLackOfAnswers({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      status: certificationAssessmentScore.status,
-      assessmentId: certificationAssessment.id,
-      juryId,
-    });
-  }
-
-  if (_hasV3CertificationLacksOfAnswersForTechnicalReason({ allAnswers, certificationCourse })) {
-    return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      assessmentId: certificationAssessment.id,
-      juryId,
-    });
-  }
-
-  if (certificationAssessmentScore.nbPix === 0) {
-    return AssessmentResultFactory.buildRejectedDueToZeroPixScore({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      assessmentId: certificationAssessment.id,
-      juryId,
-      competenceMarks: certificationAssessmentScore.competenceMarks,
-    });
-  }
-
-  return AssessmentResultFactory.buildStandardAssessmentResult({
-    pixScore: certificationAssessmentScore.nbPix,
-    reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-    status: certificationAssessmentScore.status,
-    assessmentId: certificationAssessment.id,
-    juryId,
+  const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
+    abortReason: assessmentSheet.abortReason,
+    algorithm,
+    // The following spread operation prevents the original array to be mutated during the simulation
+    // so that in can be used during the assessment result creation
+    allAnswers: [...assessmentSheet.answers],
+    allChallenges,
+    challenges: askedChallengesWithoutLiveAlerts,
+    maxReachableLevelOnCertificationDate: assessmentSheet.maxReachableLevelOnCertificationDate,
+    v3CertificationScoring,
+    scoringDegradationService,
   });
+
+  const toBeCancelled = event instanceof CertificationCancelled;
+  const assessmentResult = createV3AssessmentResult({
+    toBeCancelled,
+    allAnswers: assessmentSheet.answers,
+    assessmentId: assessmentSheet.assessmentId,
+    certificationAssessmentScore,
+    isRejectedForFraud: assessmentSheet.isRejectedForFraud,
+    isAbortReasonTechnical: assessmentSheet.isAbortReasonTechnical,
+    juryId: event?.juryId,
+  });
+
+  return new CoreScoring({ certificationAssessmentScore, assessmentResult });
 }
 
 /**
  * @param {object} params
- * @param {AssessmentResultRepository} params.assessmentResultRepository
- * @param {CompetenceMarkRepository} params.competenceMarkRepository
+ * @param {AssessmentSheet} params.assessmentSheet
+ * @param {AssessmentResult} params.assessmentResult
+ * @param {ComplementaryCertificationScoringCriteria} params.cleaScoringCriteria
+ *
+ * @returns {DoubleCertificationScoring}
  */
-async function _saveV3Result({
-  assessmentResult,
-  certificationCourseId,
-  certificationAssessmentScore,
-  assessmentResultRepository,
-  competenceMarkRepository,
-}) {
-  const newAssessmentResult = await assessmentResultRepository.save({
-    certificationCourseId,
-    assessmentResult,
+function _scoreDoubleCertification({ assessmentSheet, assessmentResult, cleaScoringCriteria }) {
+  return new DoubleCertificationScoring({
+    complementaryCertificationCourseId: cleaScoringCriteria.complementaryCertificationCourseId,
+    complementaryCertificationBadgeId: cleaScoringCriteria.complementaryCertificationBadgeId,
+    reproducibilityRate: assessmentResult.reproducibilityRate,
+    pixScore: assessmentResult.pixScore,
+    minimumEarnedPix: cleaScoringCriteria.minimumEarnedPix,
+    hasAcquiredPixCertification: assessmentResult.isValidated(),
+    minimumReproducibilityRate: cleaScoringCriteria.minimumReproducibilityRate,
+    isRejectedForFraud: assessmentSheet.isRejectedForFraud,
   });
-
-  for (const competenceMark of certificationAssessmentScore.competenceMarks) {
-    const competenceMarkDomain = new CompetenceMark({
-      ...competenceMark,
-      assessmentResultId: newAssessmentResult.id,
-    });
-    await competenceMarkRepository.save(competenceMarkDomain);
-  }
-}
-
-function _shouldRejectWhenV3CertificationCandidateDidNotAnswerToEnoughQuestions({ allAnswers, certificationCourse }) {
-  if (certificationCourse.isAbortReasonTechnical()) {
-    return false;
-  }
-  return _candidateDidNotAnswerEnoughV3CertificationQuestions({ allAnswers });
-}
-
-function _candidateDidNotAnswerEnoughV3CertificationQuestions({ allAnswers }) {
-  return allAnswers.length < config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification;
-}
-
-function _hasV3CertificationLacksOfAnswersForTechnicalReason({ allAnswers, certificationCourse }) {
-  return (
-    certificationCourse.isAbortReasonTechnical() && _candidateDidNotAnswerEnoughV3CertificationQuestions({ allAnswers })
-  );
 }

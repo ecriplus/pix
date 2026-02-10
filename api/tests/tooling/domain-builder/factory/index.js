@@ -193,6 +193,7 @@ import {
 } from './certification/enrolment/build-subscription.js';
 import { buildUserEnrolment } from './certification/enrolment/build-user.js';
 import { buildUserCertificationEligibility } from './certification/enrolment/build-user-certification-eligibility.js';
+import { buildAssessmentSheet } from './certification/evaluation/build-assessment-sheet.js';
 import { buildCalibratedChallenge } from './certification/evaluation/build-calibrated-challenge.js';
 import { buildCalibratedChallengeSkill } from './certification/evaluation/build-calibrated-challenge-skill.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
@@ -295,6 +296,7 @@ const certification = {
     buildComplementaryCertificationScoringWithComplementaryReferential,
     buildDoubleCertificationScoring,
     buildPixPlusCertificationCourse,
+    buildAssessmentSheet,
   },
   sessionManagement: {
     buildAllowedCertificationCenterAccess: buildSessionManagementAllowedCertificationCenterAccess,

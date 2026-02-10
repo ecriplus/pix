@@ -2,7 +2,7 @@ import { knex } from '../../../../../../db/knex-database-connection.js';
 import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
 import {
   getLatestByDateAndLocale,
-  getLatestByVersionAndLocale,
+  getLatestByVersion,
   saveCertificationScoringConfiguration,
   saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
@@ -100,7 +100,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
     });
   });
 
-  describe('#getLatestByVersionAndLocale', function () {
+  describe('#getLatestByVersion', function () {
     it('should return a list of Pix Origin competences for scoring', async function () {
       // given
       // Competences exist in multiple frameworks with the same index
@@ -124,7 +124,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
       await databaseBuilder.commit();
 
       // when
-      const result = await getLatestByVersionAndLocale({ locale: 'fr-fr', version });
+      const result = await getLatestByVersion({ version });
 
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);

@@ -30,10 +30,10 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   });
 };
 
-export const getLatestByVersionAndLocale = async ({ version, locale }) => {
+export const getLatestByVersion = async ({ version }) => {
   const knexConn = DomainTransaction.getConnection();
   const allAreas = await areaRepository.list();
-  const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
+  const competenceList = await competenceRepository.listPixCompetencesOnly();
 
   const { globalScoringConfiguration, competencesScoringConfiguration } = await knexConn('certification_versions')
     .select('globalScoringConfiguration', 'competencesScoringConfiguration')
