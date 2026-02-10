@@ -2,7 +2,7 @@ import { CandidateData } from '../../../../../../src/certification/enrolment/inf
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe.only('Unit | infrastructure | candidates-import | CandidateData', function () {
+describe('Unit | infrastructure | candidates-import | CandidateData', function () {
   describe('CandidateData constructor', function () {
     let i18n;
 
