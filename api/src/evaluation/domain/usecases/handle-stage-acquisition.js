@@ -43,15 +43,13 @@ const handleStageAcquisition = async function ({
     convertLevelStagesIntoThresholdsService.convertLevelStagesIntoThresholds(stagesForThisCampaign, skills);
   }
 
-  const [knowledgeElements, campaignSkillsIds] = await Promise.all([
-    knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
-      userId: assessment.userId,
-      campaignParticipationId: assessment.campaignParticipationId,
-    }),
-    campaignRepository.findSkillIdsByCampaignParticipationId({
-      campaignParticipationId: assessment.campaignParticipationId,
-    }),
-  ]);
+  const knowledgeElements = await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
+    userId: assessment.userId,
+    campaignParticipationId: assessment.campaignParticipationId,
+  });
+  const campaignSkillsIds = await campaignRepository.findSkillIdsByCampaignParticipationId({
+    campaignParticipationId: assessment.campaignParticipationId,
+  });
 
   const masteryPercentage = getMasteryPercentageService.getMasteryPercentage(knowledgeElements, campaignSkillsIds);
 
