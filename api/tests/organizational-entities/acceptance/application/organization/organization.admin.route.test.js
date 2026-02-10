@@ -774,6 +774,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
       // then
       expect(response.statusCode).to.equal(200);
+      expect(response.result.data['external-id']).not.to.equal(organization.externalId);
     });
   });
 
