@@ -1,69 +1,22 @@
 import { CampaignAssessmentParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignAssessmentParticipation.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignAssessmentParticipation', function () {
   describe('#progression', function () {
-    context('when state is STARTED', function () {
-      context('when testedSkillsCount = 0', function () {
-        it('should compute a progression of 0', function () {
-          const testedSkillsCount = 0;
-          const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
-            state: Assessment.states.STARTED,
-            testedSkillsCount,
-            targetedSkillsCount: 10,
-          });
+    it('should return progression on instantiation ', function () {
+      // when
+      const campaignAssessmentParticipation = new CampaignAssessmentParticipation({ progression: 0.5 });
 
-          expect(campaignAssessmentParticipation.progression).equal(0);
-        });
-
-        it('should not compute a progression given no targetedSkillsCount', function () {
-          const testedSkillsCount = 0;
-          const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
-            state: Assessment.states.STARTED,
-            testedSkillsCount,
-            targetedSkillsCount: null,
-          });
-
-          expect(campaignAssessmentParticipation.progression).equal(null);
-        });
-      });
-
-      context('when testedSkillsCount != 0', function () {
-        it('should compute a progression accordingly', function () {
-          const targetedSkillsCount = 40;
-          const testedSkillsCount = 10;
-          const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
-            state: Assessment.states.STARTED,
-            testedSkillsCount,
-            targetedSkillsCount,
-          });
-
-          expect(campaignAssessmentParticipation.progression).equal(0.25);
-        });
-
-        it('should compute a progression accordingly with rounded value', function () {
-          const targetedSkillsCount = 30;
-          const testedSkillsCount = 10;
-          const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
-            state: Assessment.states.STARTED,
-            testedSkillsCount,
-            targetedSkillsCount,
-          });
-
-          expect(campaignAssessmentParticipation.progression).equal(0.33);
-        });
-      });
+      // then
+      expect(campaignAssessmentParticipation.progression).to.equal(0.5);
     });
 
-    context('when state is COMPLETED', function () {
-      it('should return 100', function () {
-        const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
-          assessmentState: Assessment.states.COMPLETED,
-        });
-
-        expect(campaignAssessmentParticipation.progression).equal(1);
-      });
+    it('should return set progression', function () {
+      // when
+      const campaignAssessmentParticipation = new CampaignAssessmentParticipation({ progression: null });
+      campaignAssessmentParticipation.setProgression(0.2);
+      // then
+      expect(campaignAssessmentParticipation.progression).to.equal(0.2);
     });
   });
 

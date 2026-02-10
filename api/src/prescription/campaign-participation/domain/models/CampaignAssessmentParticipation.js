@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 
 const { SHARED } = CampaignParticipationStatuses;
@@ -13,20 +12,18 @@ class CampaignAssessmentParticipation {
     campaignParticipationId,
     campaignId,
     participantExternalId,
-    assessmentState,
     masteryRate,
     validatedSkillsCount,
     sharedAt,
     status,
     createdAt,
-    targetedSkillsCount,
-    testedSkillsCount,
     organizationLearnerId,
-    badges = [],
+    badges,
     reachedStage,
     totalStage,
     prescriberTitle,
     prescriberDescription,
+    progression,
   }) {
     this.userId = userId;
     this.firstName = firstName;
@@ -38,8 +35,8 @@ class CampaignAssessmentParticipation {
     this.sharedAt = sharedAt;
     this.isShared = status === SHARED;
     this.createdAt = createdAt;
-    this.progression = this._computeProgression(assessmentState, testedSkillsCount, targetedSkillsCount);
-    this.badges = badges;
+    this.progression = progression;
+    this.badges = badges ?? [];
     this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
     this.validatedSkillsCount = validatedSkillsCount;
     this.reachedStage = reachedStage;
@@ -48,14 +45,12 @@ class CampaignAssessmentParticipation {
     this.prescriberDescription = prescriberDescription;
   }
 
-  _computeProgression(assessmentState, testedSkillsCount, targetedSkillsCount) {
-    if (assessmentState === Assessment.states.COMPLETED) return 1;
-    if (!targetedSkillsCount) return null;
-    return Number((testedSkillsCount / targetedSkillsCount).toFixed(2));
-  }
-
   setBadges(badges) {
     this.badges = badges;
+  }
+
+  setProgression(completionRate) {
+    this.progression = completionRate;
   }
 
   setStageInfo(reachedStage) {

@@ -4,10 +4,9 @@ import * as campaignAssessmentParticipationRepository from '../../../../../../sr
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
 
-const { STARTED, SHARED } = CampaignParticipationStatuses;
+const { STARTED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Assessment Participation', function () {
   describe('#getByCampaignIdAndCampaignParticipationId', function () {
@@ -68,7 +67,6 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
           campaignId,
           campaignParticipationId,
           masteryRate: 0.5,
-          progression: 1,
           badges: [],
         };
 
@@ -80,52 +78,6 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
         expect(campaignAssessmentParticipation).to.be.instanceOf(CampaignAssessmentParticipation);
         expect(campaignAssessmentParticipation).to.deep.contains(expectedResult);
-      });
-    });
-
-    context('When there is another assessment for the same participation', function () {
-      beforeEach(async function () {
-        const skill1 = { id: 'skill1', status: 'actif' };
-        const skill2 = { id: 'skill2', status: 'actif' };
-        await mockLearningContent({ skills: [skill1, skill2] });
-
-        campaignId = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [skill1, skill2]).id;
-        const userId = databaseBuilder.factory.buildUser().id;
-        campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId,
-          userId,
-          sharedAt: new Date('2020-12-12'),
-        }).id;
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId,
-          userId,
-          createdAt: new Date('2020-10-10'),
-          state: Assessment.states.COMPLETED,
-        });
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId,
-          userId,
-          createdAt: new Date('2020-11-11'),
-          state: Assessment.states.STARTED,
-        });
-
-        databaseBuilder.factory.buildKnowledgeElement({
-          userId,
-          skillId: skill1.id,
-          createdAt: new Date('2020-11-11'),
-        });
-
-        await databaseBuilder.commit();
-      });
-
-      it('computes progression with last assessment', async function () {
-        const campaignAssessmentParticipation =
-          await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
-            campaignId,
-            campaignParticipationId,
-          });
-
-        expect(campaignAssessmentParticipation.progression).to.equal(0.5);
       });
     });
 
@@ -163,120 +115,6 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
           });
 
         expect(campaignAssessmentParticipation.masteryRate).to.equal(null);
-        expect(campaignAssessmentParticipation.progression).to.equal(1);
-      });
-
-      context('when assessment is started', function () {
-        it('computes the progression', async function () {
-          //given
-          databaseBuilder.factory.buildAssessment({
-            userId: campaignParticipation.userId,
-            campaignParticipationId,
-            state: Assessment.states.STARTED,
-          });
-          databaseBuilder.factory.buildKnowledgeElement({
-            status: KnowledgeElement.StatusType.VALIDATED,
-            userId: campaignParticipation.userId,
-            skillId: skill1.id,
-            createdAt: new Date('2020-01-01'),
-          });
-          await databaseBuilder.commit();
-          // then
-          const campaignAssessmentParticipation =
-            await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
-              campaignId,
-              campaignParticipationId,
-            });
-
-          expect(campaignAssessmentParticipation.progression).to.equal(0.5);
-        });
-
-        it('not computes the progression given false to shouldBuildProgression params', async function () {
-          //given
-          databaseBuilder.factory.buildAssessment({
-            userId: campaignParticipation.userId,
-            campaignParticipationId,
-            state: Assessment.states.STARTED,
-          });
-          databaseBuilder.factory.buildKnowledgeElement({
-            status: KnowledgeElement.StatusType.VALIDATED,
-            userId: campaignParticipation.userId,
-            skillId: skill1.id,
-            createdAt: new Date('2020-01-01'),
-          });
-          await databaseBuilder.commit();
-          // then
-          const campaignAssessmentParticipation =
-            await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
-              campaignId,
-              campaignParticipationId,
-              shouldBuildProgression: false,
-            });
-
-          expect(campaignAssessmentParticipation.progression).to.equal(null);
-        });
-      });
-    });
-
-    context('When campaign participation is shared', function () {
-      context('progression', function () {
-        let userId;
-
-        beforeEach(async function () {
-          const skill1 = { id: 'skill1', status: 'actif' };
-          const skill2 = { id: 'skill2', status: 'actif' };
-          const skill3 = { id: 'skill3', status: 'actif' };
-          const skill4 = { id: 'skill4', status: 'périmé' };
-          await mockLearningContent({ skills: [skill1, skill2, skill3] });
-
-          campaignId = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [skill1, skill3, skill4]).id;
-          userId = databaseBuilder.factory.buildUser().id;
-          campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-            campaignId,
-            userId,
-            status: SHARED,
-            sharedAt: new Date('2020-01-02'),
-          }).id;
-
-          databaseBuilder.factory.buildKnowledgeElement({
-            status: KnowledgeElement.StatusType.VALIDATED,
-            userId,
-            skillId: skill1.id,
-            createdAt: new Date('2020-01-01'),
-          });
-          databaseBuilder.factory.buildKnowledgeElement({
-            status: KnowledgeElement.StatusType.INVALIDATED,
-            userId,
-            skillId: skill2.id,
-            createdAt: new Date('2020-01-01'),
-          });
-          databaseBuilder.factory.buildKnowledgeElement({
-            status: KnowledgeElement.StatusType.INVALIDATED,
-            userId,
-            skillId: skill3.id,
-            createdAt: new Date('2020-01-04'),
-          });
-          await databaseBuilder.commit();
-        });
-
-        context('when assessment is completed', function () {
-          it('returns a progression of 1', async function () {
-            databaseBuilder.factory.buildAssessment({
-              campaignParticipationId,
-              userId,
-              state: Assessment.states.COMPLETED,
-            });
-            await databaseBuilder.commit();
-
-            const campaignAssessmentParticipation =
-              await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
-                campaignId,
-                campaignParticipationId,
-              });
-
-            expect(campaignAssessmentParticipation.progression).to.equal(1);
-          });
-        });
       });
     });
 
