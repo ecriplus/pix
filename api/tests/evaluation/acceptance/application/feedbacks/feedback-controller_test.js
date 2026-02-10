@@ -1,9 +1,5 @@
-import lodash from 'lodash';
-
 import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
-
-const { cloneDeep } = lodash;
 
 describe('Acceptance | Controller | feedback-controller', function () {
   let server;
@@ -64,7 +60,7 @@ describe('Acceptance | Controller | feedback-controller', function () {
 
     it('should return 201 HTTP status code with empty content', function () {
       // when
-      const optionsWithEmptyContent = cloneDeep(options);
+      const optionsWithEmptyContent = structuredClone(options);
       optionsWithEmptyContent.payload.data.attributes.content = '';
       const promise = server.inject(options);
 

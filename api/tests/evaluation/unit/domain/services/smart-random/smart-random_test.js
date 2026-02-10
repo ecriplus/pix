@@ -12,12 +12,12 @@ const KNOWLEDGE_ELEMENT_STATUS = {
 const ONE_MINUTE = 60;
 
 function turnIntoTimedChallenge(challenge) {
-  return _.assign(_.cloneDeep(challenge), { timer: ONE_MINUTE });
+  return _.assign(structuredClone(challenge), { timer: ONE_MINUTE });
 }
 
 function duplicateChallengeOfSameDifficulty(challenge) {
   const challengeId = parseInt(challenge.id[0]) + 1;
-  return _.assign(_.cloneDeep(challenge), { id: 'rec' + challengeId });
+  return _.assign(structuredClone(challenge), { id: 'rec' + challengeId });
 }
 
 describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
@@ -144,7 +144,7 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
         lastAnswer = domainBuilder.buildAnswer({ timeout: 50 });
         targetSkills = [url2, web1];
         const challenge_defaultLevel_Timed = turnIntoTimedChallenge(challengeUrl_2);
-        const challenge_notDefaultLevel_Untimed = _.assign(_.cloneDeep(challengeWeb_1));
+        const challenge_notDefaultLevel_Untimed = _.assign(structuredClone(challengeWeb_1));
         challenges = [challenge_defaultLevel_Timed, challenge_notDefaultLevel_Untimed];
 
         // when

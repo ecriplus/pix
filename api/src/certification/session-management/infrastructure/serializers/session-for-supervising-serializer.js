@@ -1,12 +1,11 @@
 import jsonapiSerializer from 'jsonapi-serializer';
-import _ from 'lodash';
 
 const { Serializer } = jsonapiSerializer;
 
 const serialize = function (sessions) {
   return new Serializer('sessionForSupervising', {
     transform(currentSessionForSupervising) {
-      const cloneSession = _.cloneDeep(currentSessionForSupervising);
+      const cloneSession = structuredClone(currentSessionForSupervising);
 
       cloneSession.certificationCandidates.forEach((candidate) => {
         candidate.enrolledComplementaryCertificationLabel = candidate.enrolledComplementaryCertification?.label ?? null;

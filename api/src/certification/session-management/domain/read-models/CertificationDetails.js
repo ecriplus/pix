@@ -60,8 +60,8 @@ class CertificationDetails {
       status: this.status,
       totalScore: this.totalScore,
       percentageCorrectAnswers: this.percentageCorrectAnswers,
-      competencesWithMark: _.cloneDeep(this.competencesWithMark),
-      listChallengesAndAnswers: _.cloneDeep(this.listChallengesAndAnswers),
+      competencesWithMark: structuredClone(this.competencesWithMark),
+      listChallengesAndAnswers: structuredClone(this.listChallengesAndAnswers),
     };
   }
 }

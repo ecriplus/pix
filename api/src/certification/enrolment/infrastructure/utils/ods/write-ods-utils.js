@@ -17,7 +17,7 @@ class OdsUtilsBuilder {
   }
 
   withData(dataToInject, templateValues) {
-    const intermediateXmlDom = _.cloneDeep(this.xmlDom);
+    const intermediateXmlDom = structuredClone(this.xmlDom);
     for (const { placeholder, propertyName } of templateValues) {
       const targetXmlDomElement = _getXmlDomElementByText(intermediateXmlDom, placeholder);
       if (targetXmlDomElement) {
@@ -32,7 +32,7 @@ class OdsUtilsBuilder {
   }
 
   headersTranslation({ headersValues, translate }) {
-    const intermediateXmlDom = _.cloneDeep(this.xmlDom);
+    const intermediateXmlDom = structuredClone(this.xmlDom);
     for (const propertyName of headersValues) {
       const targetXmlDomElement = _getXmlDomElementByText(intermediateXmlDom, propertyName);
       if (targetXmlDomElement) {
@@ -481,7 +481,7 @@ function updateXmlSparseValues({ stringifiedXml, templateValues, dataToInject })
 }
 
 function _updateXmlDomWithData(parsedXmlDom, dataToInject, templateValues) {
-  const parsedXmlDomUpdated = _.cloneDeep(parsedXmlDom);
+  const parsedXmlDomUpdated = structuredClone(parsedXmlDom);
   for (const { placeholder, propertyName } of templateValues) {
     const targetXmlDomElement = _getXmlDomElementByText(parsedXmlDomUpdated, placeholder);
     if (targetXmlDomElement) {
