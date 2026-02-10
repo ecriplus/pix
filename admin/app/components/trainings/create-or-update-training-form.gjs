@@ -46,6 +46,7 @@ class Form {
 
 const MODULIX_TYPE = 'modulix';
 const MODULIX_EDITOR_LOGO_URL = 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg';
+const MODULIX_EDITOR_NAME = 'Pix';
 
 export default class CreateOrUpdateTrainingForm extends Component {
   @service featureToggles;
@@ -98,6 +99,10 @@ export default class CreateOrUpdateTrainingForm extends Component {
     if (this.form.type === MODULIX_TYPE) {
       if (!this.form.editorLogoUrl) {
         set(this.form, 'editorLogoUrl', MODULIX_EDITOR_LOGO_URL);
+      }
+
+      if (!this.form.editorName) {
+        set(this.form, 'editorName', MODULIX_EDITOR_NAME);
       }
     }
   }

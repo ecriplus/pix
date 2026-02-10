@@ -261,6 +261,50 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       });
     });
 
+    test('it should auto fill the editor name', async function (assert) {
+      // given
+      // when
+      const screen = await render(
+      <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
+
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+      // then
+      assert
+        .dom(
+          screen.getByLabelText(
+            "Nom de l'éditeur Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
+          ),
+        )
+        .hasValue('Pix');
+    });
+
+    module('when editor name was already provided', function () {
+      test('it should not auto fill the editor name', async function (assert) {
+        // given
+        const editorNameValue = 'Super éditeur !';
+
+        // when
+        const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        );
+        const editorNameInput = screen.getByLabelText(
+          "Nom de l'éditeur Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
+        );
+
+        await fillIn(editorNameInput, editorNameValue);
+        await click(screen.getByRole('button', { name: 'Format' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Module Pix' }));
+
+        // then
+        assert.dom(editorNameInput).hasValue(editorNameValue);
+      });
+    });
+
     module('when model is provided', function () {
       test('it should display correct module on editing form', async function (assert) {
         // given & when
