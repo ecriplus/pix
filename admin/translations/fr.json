@@ -399,7 +399,7 @@
     "certification-frameworks": {
       "item": {
         "framework": {
-          "creation-form": {
+          "new-version-form": {
             "submit-button": "Créer la nouvelle version du référentiel de certification",
             "success-notification": "La nouvelle version du référentiel de certification a été créé avec succès",
             "title": "Création d'une nouvelle version du référentiel de certification"

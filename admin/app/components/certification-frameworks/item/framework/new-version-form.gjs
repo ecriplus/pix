@@ -8,7 +8,7 @@ import { t } from 'ember-intl';
 
 import TubesSelection from '../../../common/tubes-selection';
 
-export default class CreationForm extends Component {
+export default class NewVersionForm extends Component {
   @service intl;
   @service pixToast;
   @service router;
@@ -53,7 +53,9 @@ export default class CreationForm extends Component {
 
       this.router.transitionTo('authenticated.certification-frameworks.item.framework');
       this.pixToast.sendSuccessNotification({
-        message: this.intl.t('components.certification-frameworks.item.framework.creation-form.success-notification'),
+        message: this.intl.t(
+          'components.certification-frameworks.item.framework.new-version-form.success-notification',
+        ),
       });
     } catch (error) {
       this.pixToast.sendErrorNotification({ message: error.errors?.[0].detail });
@@ -62,7 +64,7 @@ export default class CreationForm extends Component {
 
   <template>
     <h2 class="framework-creation-form__title">
-      {{t "components.certification-frameworks.item.framework.creation-form.title"}}
+      {{t "components.certification-frameworks.item.framework.new-version-form.title"}}
     </h2>
 
     <form>
@@ -79,7 +81,7 @@ export default class CreationForm extends Component {
           <ul class="framework-creation-form__buttons">
             <li>
               <PixButton @triggerAction={{this.onSubmit}} @isDisabled={{if this.selectedTubes.length false true}}>
-                {{t "components.certification-frameworks.item.framework.creation-form.submit-button"}}
+                {{t "components.certification-frameworks.item.framework.new-version-form.submit-button"}}
               </PixButton>
             </li>
             <li>
