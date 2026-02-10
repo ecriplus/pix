@@ -6,24 +6,21 @@ export async function copyTargetProfileBadges({
 }) {
   const targetProfileBadgesToCopy = await badgeRepository.findAllByTargetProfileId(originTargetProfileId);
 
-  if (targetProfileBadgesToCopy.length) {
-    await Promise.all(
-      targetProfileBadgesToCopy.map(async (badge) => {
-        const clonedBadge = badge.clone(destinationTargetProfileId);
-        const savedBadge = await badgeRepository.save(clonedBadge);
+  for (const badge of targetProfileBadgesToCopy) {
+    const clonedBadge = badge.clone(destinationTargetProfileId);
+    const savedBadge = await badgeRepository.save(clonedBadge);
 
-        const badgeCriteriaToCopy = await badgeCriteriaRepository.findAllByBadgeId(badge.id);
-        await copyBadgeCriteria({ badgeCriteriaToCopy, savedBadge, badgeCriteriaRepository });
-      }),
-    );
+    const badgeCriteriaToCopy = await badgeCriteriaRepository.findAllByBadgeId(badge.id);
+    if (badgeCriteriaToCopy.length > 0)
+      await copyBadgeCriteria({ badgeCriteriaToCopy, savedBadge, badgeCriteriaRepository });
   }
 }
 
 const copyBadgeCriteria = async ({ badgeCriteriaToCopy, savedBadge, badgeCriteriaRepository }) => {
-  return Promise.all(
-    badgeCriteriaToCopy.map(async (badgeCriterionToCopy) => {
-      badgeCriterionToCopy.badgeId = savedBadge.id;
-      await badgeCriteriaRepository.save({ badgeCriterion: badgeCriterionToCopy });
-    }),
-  );
+  const badgeCriterion = badgeCriteriaToCopy.map((badgeCriterionToCopy) => {
+    badgeCriterionToCopy.badgeId = savedBadge.id;
+    return badgeCriterionToCopy;
+  });
+
+  return await badgeCriteriaRepository.saveAll(badgeCriterion);
 };
