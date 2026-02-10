@@ -131,27 +131,27 @@ const IMPORT_CANDIDATES_TEMPLATE_VALUES = [
   },
   {
     placeholder: ComplementaryCertificationKeys.CLEA,
-    propertyName: 'cleaNumerique',
+    propertyName: ComplementaryCertificationKeys.CLEA,
   },
   {
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-    propertyName: 'pixPlusDroit',
+    propertyName: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
   },
   {
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-    propertyName: 'pixPlusEdu1erDegre',
+    propertyName: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
   },
   {
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
-    propertyName: 'pixPlusEdu2ndDegre',
+    propertyName: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
   },
   {
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-    propertyName: 'pixPlusProSante',
+    propertyName: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
   },
   {
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
-    propertyName: 'pixPlusEduCPE',
+    propertyName: ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
   },
 ];
 

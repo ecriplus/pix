@@ -51,40 +51,41 @@ export class CandidateData {
     this.resultRecipientEmail = resultRecipientEmail || '';
     this.externalId = externalId || '';
     this.birthdate = birthdate === null ? '' : dayjs(birthdate, 'YYYY-MM-DD').format('YYYY-MM-DD');
-    this.#setExtraTimePercentage(extraTimePercentage);
     this.createdAt = createdAt || '';
     this.sessionId = sessionId || '';
     this.userId = userId || '';
     this.organizationLearnerId = organizationLearnerId || '';
     this.billingMode = CertificationCandidate.translateBillingMode({ billingMode, translate: this.translate });
     this.prepaymentCode = prepaymentCode || '';
-    this.#setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode);
-    this.#setupKindOfCertificationAttributes(complementaryCertification);
     this.count = number;
+    this.#setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode);
+    this.#setKindOfCertificationAttributes(complementaryCertification);
     this.#setBirthINSEECode(birthINSEECode, birthCountry);
+    this.#setExtraTimePercentage(extraTimePercentage);
   }
 
-  #setupKindOfCertificationAttributes(complementaryCertification) {
-    const key = complementaryCertification?.key;
+  #setKindOfCertificationAttributes(complementaryCertification) {
+    const currentKey = complementaryCertification?.key;
     const yes = this.translate('candidate-list-template.yes');
-    this.cleaNumerique = key === ComplementaryCertificationKeys.CLEA ? yes : '';
-    this.pixPlusDroit = key === ComplementaryCertificationKeys.PIX_PLUS_DROIT ? yes : '';
-    this.pixPlusEdu1erDegre = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE ? yes : '';
-    this.pixPlusEdu2ndDegre = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE ? yes : '';
-    this.pixPlusProSante = key === ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE ? yes : '';
-    this.pixPlusEduCPE = key === ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE ? yes : '';
+
+    Object.keys(ComplementaryCertificationKeys).forEach((key) => {
+      this[key] = currentKey === key ? yes : '';
+    });
   }
 
   #setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode) {
-    this.birthCity = birthCountry?.toUpperCase() === 'FRANCE' && birthINSEECode ? '' : birthCity;
-    this.birthPostalCode = birthCountry?.toUpperCase() === 'FRANCE' && birthINSEECode ? '' : birthPostalCode;
+    this.birthCity = birthCity === null || (birthCountry.toUpperCase() === 'FRANCE' && birthINSEECode) ? '' : birthCity;
+    this.birthPostalCode =
+      birthPostalCode === null || (birthCountry && birthCountry.toUpperCase() === 'FRANCE' && birthINSEECode)
+        ? ''
+        : birthPostalCode;
   }
 
   #setBirthINSEECode(birthINSEECode, birthCountry) {
     if (birthCountry != 'FRANCE' && birthINSEECode && birthINSEECode !== FRANCE_COUNTRY_CODE) {
       this.birthINSEECode = '99';
     } else {
-      this.birthINSEECode = birthINSEECode;
+      this.birthINSEECode = birthINSEECode || '';
     }
   }
 
