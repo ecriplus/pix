@@ -5,15 +5,29 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../src/prescription/shared/domain/constants.js';
+import { constants } from '../../../../../src/shared/domain/constants.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Domain | UseCases | get-progression', function () {
   describe('when the assessment is link to a campaign participation', function () {
     describe('campaign cases', function () {
+      let originalConstantValueRetrying, originalConstantValueImproving;
       let campaign, assessmentId, userId, assessmentCreatedDate, organizationLearner;
+      before(function () {
+        originalConstantValueRetrying = constants.MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING;
+        originalConstantValueImproving = constants.MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING;
+
+        sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING').value(0);
+        sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(4);
+      });
+
+      after(function () {
+        sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING').value(originalConstantValueRetrying);
+        sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(originalConstantValueImproving);
+      });
 
       beforeEach(async function () {
         campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
