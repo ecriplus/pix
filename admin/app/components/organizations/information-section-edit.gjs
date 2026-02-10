@@ -192,6 +192,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
               @errorMessage={{this.validator.errors.name}}
               @validationStatus={{if this.validator.errors.name "error"}}
               @value={{this.form.name}}
+              @isFullWidth={{true}}
               {{on "input" (fn this.updateFormValue "name")}}
             ><:label>
                 {{t "components.organizations.editing.name.label"}}
@@ -211,8 +212,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @value={{this.form.administrationTeamId}}
             @onChange={{fn this.updateValue "administrationTeamId"}}
             @hideDefaultOption={{true}}
-            class="admin-form__select"
             @placeholder={{t "components.organizations.editing.administration-team.selector.placeholder"}}
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.editing.administration-team.selector.label"}}</:label>
           </PixSelect>
@@ -229,8 +230,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @hideDefaultOption={{true}}
             @isSearchable={{true}}
             @locale={{this.locale.currentLocale}}
-            class="admin-form__select"
             @placeholder={{t "components.organizations.editing.country.selector.placeholder"}}
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.editing.country.selector.label"}}</:label>
           </PixSelect>
@@ -247,6 +248,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
               @errorMessage={{this.validator.errors.externalId}}
               @validationStatus={{if this.validator.errors.externalId "error"}}
               @value={{this.form.externalId}}
+              @isFullWidth={{true}}
               {{on "input" (fn this.updateFormValue "externalId")}}
             ><:label>{{t "components.organizations.information-section-view.external-id"}}</:label></PixInput>
           </div>
@@ -261,6 +263,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
               @errorMessage={{this.validator.errors.documentationUrl}}
               @validationStatus={{if this.validator.errors.documentationUrl "error"}}
               @value={{this.form.documentationUrl}}
+              @isFullWidth={{true}}
               {{on "input" (fn this.updateFormValue "documentationUrl")}}
             ><:label>{{t "components.organizations.information-section-view.documentation-link"}}</:label></PixInput>
           </div>
@@ -270,7 +273,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @value={{this.form.identityProviderForCampaigns}}
             @onChange={{fn this.updateValue "identityProviderForCampaigns"}}
             @hideDefaultOption={{true}}
-            class="admin-form__select"
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.information-section-view.sso"}}</:label>
           </PixSelect>
@@ -323,6 +326,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
               @errorMessage={{this.validator.errors.dataProtectionOfficerEmail}}
               @validationStatus={{if this.validator.errors.dataProtectionOfficerEmail "error"}}
               @value={{this.form.dataProtectionOfficerEmail}}
+              @isFullWidth={{true}}
               {{on "input" (fn this.updateFormValue "dataProtectionOfficerEmail")}}
             ><:label>{{t "components.organizations.information-section-view.dpo-email"}}</:label></PixInput>
           </div>

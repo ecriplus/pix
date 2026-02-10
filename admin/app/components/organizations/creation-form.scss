@@ -5,16 +5,11 @@
     .card__content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: var(--pix-spacing-6x);
-      row-gap: var(--pix-spacing-6x);
+      gap: var(--pix-spacing-6x) var(--pix-spacing-6x);
     }
 
     .card__content > * + * {
-      margin-top: 0px;
-    }
-
-    .pix-select {
-      width: 100%;
+      margin-top: 0;
     }
 
     .pix-input__input {
@@ -25,10 +20,6 @@
   &__input {
     &--full {
       grid-column: 1 / span 2;
-
-      .pix-input {
-        width: 100%;
-      }
     }
   }
 
