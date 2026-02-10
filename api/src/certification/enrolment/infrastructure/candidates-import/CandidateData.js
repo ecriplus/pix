@@ -74,11 +74,9 @@ export class CandidateData {
   }
 
   #setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode) {
-    this.birthCity = birthCity === null || (birthCountry.toUpperCase() === 'FRANCE' && birthINSEECode) ? '' : birthCity;
-    this.birthPostalCode =
-      birthPostalCode === null || (birthCountry && birthCountry.toUpperCase() === 'FRANCE' && birthINSEECode)
-        ? ''
-        : birthPostalCode;
+    const birthInFranceWithCodeINSEE = birthCountry?.toUpperCase() === 'FRANCE' && birthINSEECode;
+    this.birthCity = birthCity === null || birthInFranceWithCodeINSEE ? '' : birthCity;
+    this.birthPostalCode = birthPostalCode === null || birthInFranceWithCodeINSEE ? '' : birthPostalCode;
   }
 
   #setBirthINSEECode(birthINSEECode, birthCountry) {
