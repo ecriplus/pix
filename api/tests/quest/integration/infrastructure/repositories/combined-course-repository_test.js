@@ -7,6 +7,7 @@ import {
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
 import * as combinedCourseRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-repository.js';
+import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -244,7 +245,10 @@ describe('Quest | Integration | Repository | combined-course', function () {
       );
 
       // when
-      await combinedCourseRepository.saveInBatch({ combinedCourses: [firstCombinedCourse, secondCombinedCourse] });
+      await combinedCourseRepository.saveInBatch({
+        combinedCourses: [firstCombinedCourse, secondCombinedCourse],
+        questRepository,
+      });
 
       // then
       const firstSavedQuest = await knex('combined_courses')
@@ -310,7 +314,10 @@ describe('Quest | Integration | Repository | combined-course', function () {
       );
 
       // when
-      await combinedCourseRepository.saveInBatch({ combinedCourses: [firstCombinedCourse, secondCombinedCourse] });
+      await combinedCourseRepository.saveInBatch({
+        combinedCourses: [firstCombinedCourse, secondCombinedCourse],
+        questRepository,
+      });
 
       // then
       const firstSavedCombinedCourse = await knex('combined_courses')
@@ -331,6 +338,71 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(secondSavedCombinedCourse.description).null;
       expect(secondSavedCombinedCourse.illustration).null;
       expect(secondSavedCombinedCourse.code).equal('secondCode');
+    });
+  });
+
+  describe('#save', function () {
+    it('should return adequate model instance after creation', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint();
+
+      const successRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+          data: {
+            campaignId: {
+              data: 1,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+        },
+      ];
+
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements,
+      });
+
+      const combinedCourse = new CombinedCourse(
+        {
+          name: combinedCourseBlueprint.internalName,
+          code: 'ABCDEF',
+          organizationId,
+          description: combinedCourseBlueprint.description,
+          illustration: combinedCourseBlueprint.illustration,
+          blueprintId: combinedCourseBlueprint.id,
+        },
+        quest,
+      );
+
+      await databaseBuilder.commit();
+
+      // when
+      await combinedCourseRepository.save({ combinedCourse, questRepository });
+
+      // then
+      const savedQuest = await knex
+        .select('quests.id', 'quests.successRequirements')
+        .from('quests')
+        .join('combined_courses', 'quests.id', 'combined_courses.questId')
+        .where('combined_courses.organizationId', organizationId)
+        .first();
+
+      const savedCombinedCourse = await knex('combined_courses')
+        .where('combined_courses.organizationId', organizationId)
+        .first();
+
+      //expect(savedQuest.successRequirements).to.deep.equal(successRequirements);
+      expect(savedCombinedCourse.questId).to.deep.equal(savedQuest.id);
+      expect(savedCombinedCourse.combinedCourseBlueprintId).to.equal(combinedCourseBlueprint.id);
+      expect(savedCombinedCourse.code).equal(combinedCourse.code);
+      expect(savedCombinedCourse.organizationId).equal(organizationId);
     });
   });
 

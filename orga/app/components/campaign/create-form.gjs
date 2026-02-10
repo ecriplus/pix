@@ -24,6 +24,7 @@ export default class CreateForm extends Component {
   @service currentUser;
   @service intl;
   @service locale;
+  @service store;
 
   @tracked wantIdPix = Boolean(this.args.campaign.externalIdLabel);
 
@@ -51,6 +52,16 @@ export default class CreateForm extends Component {
     return orderBy(options, ['order', 'category', 'label']);
   }
 
+  get blueprintOwnerOptions() {
+    const options = this.args.combinedCourseBlueprints.map((blueprint) => {
+      return {
+        value: blueprint.id,
+        label: blueprint.name,
+      };
+    });
+    return orderBy(options, ['label']);
+  }
+
   get campaignOwnerOptions() {
     if (!this.args.membersSortedByFullName) return [];
 
@@ -59,7 +70,9 @@ export default class CreateForm extends Component {
 
   get isMultipleSendingEnabled() {
     const isMulipleSendingsAllowed =
-      this.isMultipleSendingAssessmentEnabled && (this.isCampaignGoalAssessment || this.isCampaignGoalExam);
+      this.isMultipleSendingAssessmentEnabled &&
+      (this.isCampaignGoalAssessment || this.isCampaignGoalExam) &&
+      !this.isCombinedCourseGoal;
 
     return this.isCampaignGoalProfileCollection || isMulipleSendingsAllowed;
   }
@@ -94,6 +107,10 @@ export default class CreateForm extends Component {
     return this.args.campaign.type === 'PROFILES_COLLECTION';
   }
 
+  get isCombinedCourseGoal() {
+    return this.args.campaign.type === 'COMBINED_COURSE';
+  }
+
   get isExternalIdSelectedChecked() {
     return this.wantIdPix === true;
   }
@@ -106,8 +123,20 @@ export default class CreateForm extends Component {
     return this.isCampaignGoalAssessment || this.isCampaignGoalExam;
   }
 
+  get isCombinedCourseBlueprintSelectable() {
+    return this.isCombinedCourseGoal;
+  }
+
   get isTitleInputEnable() {
-    return this.isCampaignGoalAssessment || this.isCampaignGoalExam;
+    return (this.isCampaignGoalAssessment || this.isCampaignGoalExam) && !this.isCombinedCourseGoal;
+  }
+
+  get hasCombinedCourseBlueprintShares() {
+    return this.args.combinedCourseBlueprints ? this.args.combinedCourseBlueprints.length > 0 : false;
+  }
+
+  get displayOwnerField() {
+    return this.isCampaignGoalAssessment || this.isCampaignGoalExam || this.isCampaignGoalProfileCollection;
   }
 
   @action
@@ -132,6 +161,14 @@ export default class CreateForm extends Component {
   }
 
   @action
+  selectCombinedCourseBlueprint(blueprintId) {
+    // We call blueprint target profiles temporarily as we plan to create a parent domain model for the two
+    // Same for the combined courses and campaigns
+    const record = this.store.createRecord('target-profile', { id: blueprintId });
+    this.args.campaign.targetProfile = record;
+  }
+
+  @action
   selectMultipleSendingsStatus(value) {
     this.args.campaign.multipleSendings = value;
   }
@@ -142,8 +179,10 @@ export default class CreateForm extends Component {
       this.args.campaign.setType('PROFILES_COLLECTION');
     } else if (event.target.value === 'exam-participants') {
       this.args.campaign.setType('EXAM');
-    } else {
+    } else if (event.target.value === 'assess-participants') {
       this.args.campaign.setType('ASSESSMENT');
+    } else if (event.target.value === 'combined-course') {
+      this.args.campaign.setType('COMBINED_COURSE');
     }
   }
 
@@ -207,33 +246,6 @@ export default class CreateForm extends Component {
 
       <FormField>
         <:default>
-          <PixSelect
-            class="pix-select-owner"
-            @options={{this.campaignOwnerOptions}}
-            @onChange={{this.onChangeCampaignOwner}}
-            @value="{{@campaign.ownerId}}"
-            @isSearchable={{true}}
-            @placeholder={{t "pages.campaign-creation.owner.placeholder"}}
-            @locale={{this.locale.currentLocale}}
-            @searchPlaceholder={{t "pages.campaign-creation.owner.search-placeholder"}}
-            @requiredLabel={{t "common.form.mandatory-fields-title"}}
-            @hideDefaultOption={{true}}
-          >
-            <:label>{{t "pages.campaign-creation.owner.label"}}</:label>
-          </PixSelect>
-        </:default>
-
-        <:information>
-          <ExplanationCard>
-            <:title>{{t "pages.campaign-creation.owner.title"}}</:title>
-
-            <:message>{{t "pages.campaign-creation.owner.info"}}</:message>
-          </ExplanationCard>
-        </:information>
-      </FormField>
-
-      <FormField>
-        <:default>
           <PixFieldset @required={{true}} aria-labelledby="campaign-goal" role="radiogroup">
             <:title>{{t "pages.campaign-creation.purpose.label"}}</:title>
             <:content>
@@ -266,6 +278,18 @@ export default class CreateForm extends Component {
                   checked={{this.isCampaignGoalExam}}
                 >
                   <:label>{{t "pages.campaign-creation.purpose.exam"}}</:label>
+                </PixRadioButton>
+              {{/if}}
+
+              {{#if this.hasCombinedCourseBlueprintShares}}
+                <PixRadioButton
+                  name="campaign-goal"
+                  @value="combined-course"
+                  {{on "change" this.setCampaignGoal}}
+                  aria-describedby="combined-course-info"
+                  checked={{this.isCombinedCourseGoal}}
+                >
+                  <:label>{{t "pages.campaign-creation.purpose.combined-course"}}</:label>
                 </PixRadioButton>
               {{/if}}
 
@@ -308,6 +332,40 @@ export default class CreateForm extends Component {
           {{/if}}
         </:information>
       </FormField>
+
+      {{#if this.displayOwnerField}}
+
+        <FormField>
+          <:default>
+            <PixSelect
+              class="pix-select-owner"
+              @options={{this.campaignOwnerOptions}}
+              @onChange={{this.onChangeCampaignOwner}}
+              @value="{{@campaign.ownerId}}"
+              @isSearchable={{true}}
+              @placeholder={{t "pages.campaign-creation.owner.placeholder"}}
+              @locale={{this.locale.currentLocale}}
+              @searchPlaceholder={{t "pages.campaign-creation.owner.search-placeholder"}}
+              @requiredLabel={{t "common.form.mandatory-fields-title"}}
+              @hideDefaultOption={{true}}
+            >
+              <:label>{{t "pages.campaign-creation.owner.label"}}</:label>
+            </PixSelect>
+
+          </:default>
+
+          <:information>
+            <ExplanationCard>
+              <:title>{{t "pages.campaign-creation.owner.title"}}</:title>
+
+              <:message>{{t "pages.campaign-creation.owner.info"}}</:message>
+            </ExplanationCard>
+
+          </:information>
+
+        </FormField>
+
+      {{/if}}
 
       {{#if this.isTargetProfileSelectable}}
         <FormField>
@@ -354,6 +412,29 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
+      {{#if this.isCombinedCourseBlueprintSelectable}}
+        <FormField>
+          <:default>
+            <PixSelect
+              @placeholder={{t "pages.campaign-creation.combined-course-blueprints-label"}}
+              @options={{this.blueprintOwnerOptions}}
+              @hideDefaultOption={{true}}
+              @onChange={{this.selectCombinedCourseBlueprint}}
+              @value={{@campaign.targetProfile.id}}
+              @requiredLabel={{t "common.form.mandatory-fields-title"}}
+              @errorMessage={{if
+                @errors.combinedCourse
+                (t "api-error-messages.campaign-creation.combined-course-blueprint-required")
+              }}
+              @locale={{this.locale.currentLocale}}
+              @searchLabel={{t "pages.campaign-creation.combined-course-blueprints-search-placeholder"}}
+            >
+              <:label>{{t "pages.campaign-creation.combined-course-blueprints-list-label"}}</:label>
+            </PixSelect>
+          </:default>
+        </FormField>
+      {{/if}}
+
       {{#if this.isMultipleSendingEnabled}}
         <FormField>
           <:default>
@@ -397,29 +478,31 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      <FormField>
-        <PixFieldset aria-labelledby="external-ids-label" role="radiogroup">
-          <:title>{{t "pages.campaign-creation.external-id-label.question-label"}}</:title>
-          <:content>
-            <PixRadioButton
-              name="external-id-label"
-              @value="false"
-              {{on "change" this.doNotAskLabelIdPix}}
-              checked={{not this.isExternalIdSelectedChecked}}
-            >
-              <:label>{{t "pages.campaign-creation.no"}}</:label>
-            </PixRadioButton>
-            <PixRadioButton
-              name="external-id-label"
-              @value="true"
-              {{on "change" this.askLabelIdPix}}
-              checked={{this.isExternalIdSelectedChecked}}
-            >
-              <:label>{{t "pages.campaign-creation.yes"}}</:label>
-            </PixRadioButton>
-          </:content>
-        </PixFieldset>
-      </FormField>
+      {{#unless this.isCombinedCourseGoal}}
+        <FormField>
+          <PixFieldset aria-labelledby="external-ids-label" role="radiogroup">
+            <:title>{{t "pages.campaign-creation.external-id-label.question-label"}}</:title>
+            <:content>
+              <PixRadioButton
+                name="external-id-label"
+                @value="false"
+                {{on "change" this.doNotAskLabelIdPix}}
+                checked={{not this.isExternalIdSelectedChecked}}
+              >
+                <:label>{{t "pages.campaign-creation.no"}}</:label>
+              </PixRadioButton>
+              <PixRadioButton
+                name="external-id-label"
+                @value="true"
+                {{on "change" this.askLabelIdPix}}
+                checked={{this.isExternalIdSelectedChecked}}
+              >
+                <:label>{{t "pages.campaign-creation.yes"}}</:label>
+              </PixRadioButton>
+            </:content>
+          </PixFieldset>
+        </FormField>
+      {{/unless}}
 
       {{#if this.wantIdPix}}
         <FormField>
@@ -486,18 +569,20 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      <FormField>
-        <PixTextarea
-          @id="custom-landing-page-text"
-          @maxlength="5000"
-          @value={{@campaign.customLandingPageText}}
-          @subLabel={{t "pages.campaign-creation.landing-page-text.sublabel"}}
-          {{on "change" this.onChangeCampaignCustomLandingPageText}}
-          rows="8"
-        >
-          <:label>{{t "pages.campaign-creation.landing-page-text.label"}}</:label>
-        </PixTextarea>
-      </FormField>
+      {{#unless this.isCombinedCourseGoal}}
+        <FormField>
+          <PixTextarea
+            @id="custom-landing-page-text"
+            @maxlength="5000"
+            @value={{@campaign.customLandingPageText}}
+            @subLabel={{t "pages.campaign-creation.landing-page-text.sublabel"}}
+            {{on "change" this.onChangeCampaignCustomLandingPageText}}
+            rows="8"
+          >
+            <:label>{{t "pages.campaign-creation.landing-page-text.label"}}</:label>
+          </PixTextarea>
+        </FormField>
+      {{/unless}}
 
       <div class="form__validation">
         <PixButton @triggerAction={{@onCancel}} @variant="secondary">

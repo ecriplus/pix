@@ -12,7 +12,7 @@ export async function findAll() {
   const knexConn = DomainTransaction.getConnection();
 
   const results = await knexConn('combined_course_blueprints');
-  return results.map((data) => new CombinedCourseBlueprint(data));
+  return results.map(_toDomain);
 }
 
 export async function save({ combinedCourseBlueprint }) {
@@ -23,7 +23,7 @@ export async function save({ combinedCourseBlueprint }) {
       .insert(_toDTO({ combinedCourseBlueprint }))
       .returning('*');
 
-    return new CombinedCourseBlueprint(insertedValues);
+    return _toDomain(insertedValues);
   }
 
   const [updatedValues] = await knexConn('combined_course_blueprints')
@@ -32,7 +32,7 @@ export async function save({ combinedCourseBlueprint }) {
     .returning('*');
   await updateShares({ combinedCourseBlueprint, knexConn });
 
-  return new CombinedCourseBlueprint({
+  return _toDomain({
     ...updatedValues,
     organizationIds: combinedCourseBlueprint.organizationIds,
   });
@@ -71,19 +71,7 @@ async function updateShares({ combinedCourseBlueprint, knexConn }) {
 export async function findById({ id }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn('combined_course_blueprints')
-    .select({
-      id: 'combined_course_blueprints.id',
-      name: 'combined_course_blueprints.name',
-      internalName: 'combined_course_blueprints.internalName',
-      description: 'combined_course_blueprints.description',
-      illustration: 'combined_course_blueprints.illustration',
-      content: 'combined_course_blueprints.content',
-      createdAt: 'combined_course_blueprints.createdAt',
-      updatedAt: 'combined_course_blueprints.updatedAt',
-      organizationIds: knexConn.raw(
-        `array_remove(array_agg("combined_course_blueprint_shares"."organizationId"), NULL)`,
-      ),
-    })
+    .select(_buildSelectFields(knexConn))
     .leftJoin(
       'combined_course_blueprint_shares',
       'combined_course_blueprints.id',
@@ -96,7 +84,21 @@ export async function findById({ id }) {
   if (!result) {
     return null;
   }
-  return new CombinedCourseBlueprint(result);
+  return _toDomain(result);
+}
+
+export async function findByOrganizationId({ organizationId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const results = await knexConn('combined_course_blueprints')
+    .select(_buildSelectFields(knexConn))
+    .join(
+      'combined_course_blueprint_shares',
+      'combined_course_blueprints.id',
+      'combined_course_blueprint_shares.combinedCourseBlueprintId',
+    )
+    .where({ organizationId })
+    .groupBy('combined_course_blueprints.id');
+  return results.map(_toDomain);
 }
 
 function _toDTO({ combinedCourseBlueprint }) {
@@ -109,5 +111,33 @@ function _toDTO({ combinedCourseBlueprint }) {
     content: JSON.stringify(combinedCourseBlueprint.content),
     createdAt: combinedCourseBlueprint.createdAt,
     updatedAt: combinedCourseBlueprint.updatedAt,
+  };
+}
+
+function _toDomain(rawData) {
+  return new CombinedCourseBlueprint({
+    id: rawData.id,
+    name: rawData.name,
+    internalName: rawData.internalName,
+    description: rawData.description,
+    illustration: rawData.illustration,
+    content: rawData.content,
+    createdAt: rawData.createdAt,
+    updatedAt: rawData.updatedAt,
+    organizationIds: rawData.organizationIds,
+  });
+}
+
+function _buildSelectFields(knexConn) {
+  return {
+    id: 'combined_course_blueprints.id',
+    name: 'combined_course_blueprints.name',
+    internalName: 'combined_course_blueprints.internalName',
+    description: 'combined_course_blueprints.description',
+    illustration: 'combined_course_blueprints.illustration',
+    content: 'combined_course_blueprints.content',
+    createdAt: 'combined_course_blueprints.createdAt',
+    updatedAt: 'combined_course_blueprints.updatedAt',
+    organizationIds: knexConn.raw(`array_remove(array_agg("combined_course_blueprint_shares"."organizationId"), NULL)`),
   };
 }

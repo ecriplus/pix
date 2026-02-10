@@ -16,5 +16,6 @@ import PageTitle from 'pix-orga/components/ui/page-title';
     @onSubmit={{@controller.createCampaign}}
     @onCancel={{@controller.cancel}}
     @membersSortedByFullName={{@model.membersSortedByFullName}}
+    @combinedCourseBlueprints={{@model.combinedCourseBlueprints}}
   />
 </template>

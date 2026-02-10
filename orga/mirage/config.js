@@ -375,6 +375,10 @@ function routes() {
     return schema.targetProfiles.all();
   });
 
+  this.get('/organizations/:id/combined-course-blueprints', (schema) => {
+    return schema.combinedCourseBlueprints.all();
+  });
+
   this.post('/campaigns', (schema, request) => {
     const body = JSON.parse(request.requestBody);
 
@@ -505,6 +509,17 @@ function routes() {
     };
   });
 
+  this.post('/combined-courses', (schema, request) => {
+    const body = JSON.parse(request.requestBody);
+
+    const campaign = {
+      ...body.data.attributes,
+      customLandingPageText: body.data.attributes['custom-landing-page-text'],
+      externalIdLabel: body.data.attributes['id-pix-label'],
+    };
+    const combinedCourseBlueprintId = body.data.relationships['combined-course-blueprint'].data.id;
+    return schema.campaigns.create({ ...campaign, combinedCourseBlueprintId });
+  });
   this.get('feature-toggles', (schema) => {
     return schema.featureToggles.findOrCreateBy({ id: 0 });
   });

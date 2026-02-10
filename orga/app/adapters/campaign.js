@@ -26,4 +26,18 @@ export default class CampaignAdapter extends ApplicationAdapter {
     const url = this.buildURL('campaign', model.id) + '/archive';
     return this.ajax(url, 'DELETE');
   }
+  createRecord(store, type, snapshot) {
+    const payload = this.serialize(snapshot);
+
+    if (payload.data.attributes.type === 'COMBINED_COURSE') {
+      payload.data.relationships['combined-course-blueprint'] = { data: { id: snapshot.record.targetProfile.id } };
+      const url = `${this.host}/${this.namespace}/combined-courses`;
+
+      return this.ajax(url, 'POST', { data: payload });
+    } else {
+      const url = `${this.host}/${this.namespace}/campaigns`;
+
+      return this.ajax(url, 'POST', { data: payload });
+    }
+  }
 }

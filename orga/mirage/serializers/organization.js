@@ -14,6 +14,9 @@ export default ApplicationSerializer.extend({
       targetProfiles: {
         related: `/api/organizations/${organization.id}/target-profiles`,
       },
+      combinedCourseBlueprints: {
+        related: `/api/organizations/${organization.id}/combined-course-blueprints`,
+      },
       memberships: {
         related: `/api/organizations/${organization.id}/memberships`,
       },

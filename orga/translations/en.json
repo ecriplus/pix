@@ -765,6 +765,8 @@
         "create": "Create a campaign",
         "delete": "Delete"
       },
+      "combined-course-blueprints-label": "Select a combined course blueprint",
+      "combined-course-blueprints-list-label": "Select a combined course blueprint",
       "copy-of": "Copy of",
       "external-id-label": {
         "label": "external user ID label",
@@ -806,6 +808,7 @@
       "purpose": {
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
+        "combined-course": "Create a combined course",
         "exam": "Exam mode [beta]",
         "exam-info": "A ‘exam mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
@@ -1080,6 +1083,7 @@
         }
       }
     },
+    "combined-course-blueprints-list-label": "Sélectionnez un schéma de parcours",
     "combined-courses": {
       "empty-state": "No learning course available at the moment.",
       "table": {

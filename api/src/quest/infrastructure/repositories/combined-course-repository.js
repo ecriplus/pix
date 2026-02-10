@@ -71,33 +71,36 @@ const findByCampaignId = async ({ campaignId }) => {
   return combinedCourses.map(_toDomain);
 };
 
-const saveInBatch = async ({ combinedCourses }) => {
+const saveInBatch = async ({ combinedCourses, questRepository }) => {
   const knexConn = DomainTransaction.getConnection();
   const combinedCoursesToSave = combinedCourses.map(_toDTO);
-  for (const combinedCourseToSave of combinedCoursesToSave) {
-    const [{ id: questId }] = await knexConn('quests')
-      .insert({ ...combinedCourseToSave.quest })
-      .returning('id');
-    await knexConn('combined_courses').insert({ ...combinedCourseToSave.combinedCourse, questId });
+  const questsToSave = combinedCourses.map((combinedCourse) => combinedCourse.quest);
+  const questIds = await questRepository.saveInBatch({ quests: questsToSave });
+
+  for (let i = 0; i < questIds.length; i++) {
+    await knexConn('combined_courses').insert({ ...combinedCoursesToSave[i], questId: questIds[i] });
   }
 };
 
+const save = async ({ combinedCourse, questRepository }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const combinedCourseToSave = _toDTO(combinedCourse);
+  const questId = await questRepository.save({ quest: combinedCourse.quest });
+  const [{ id: createdCombinedCourseId }] = await knexConn('combined_courses')
+    .insert({ ...combinedCourseToSave, questId })
+    .returning('id');
+
+  return getById({ id: createdCombinedCourseId });
+};
+
 const _toDTO = (combinedCourse) => {
-  const questDTO = combinedCourse.quest.toDTO();
   return {
-    quest: {
-      ...questDTO,
-      eligibilityRequirements: JSON.stringify([]),
-      successRequirements: JSON.stringify(questDTO.successRequirements),
-    },
-    combinedCourse: {
-      combinedCourseBlueprintId: combinedCourse.blueprintId,
-      organizationId: combinedCourse.organizationId,
-      code: combinedCourse.code,
-      name: combinedCourse.name,
-      description: combinedCourse.description,
-      illustration: combinedCourse.illustration,
-    },
+    combinedCourseBlueprintId: combinedCourse.blueprintId,
+    organizationId: combinedCourse.organizationId,
+    code: combinedCourse.code,
+    name: combinedCourse.name,
+    description: combinedCourse.description,
+    illustration: combinedCourse.illustration,
   };
 };
 
@@ -143,4 +146,12 @@ const _toDomain = ({
   });
 };
 
-export { findByCampaignId, findByModuleIdAndOrganizationIds, findByOrganizationId, getByCode, getById, saveInBatch };
+export {
+  findByCampaignId,
+  findByModuleIdAndOrganizationIds,
+  findByOrganizationId,
+  getByCode,
+  getById,
+  save,
+  saveInBatch,
+};

@@ -6,6 +6,7 @@ import * as combinedCourseBlueprintRepository from '../../infrastructure/reposit
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import combinedCourseDetailsService from '../services/combined-course-details-service.js';
+import combinedCourseToCreateService from '../services/combined-course-to-create-service.js';
 
 const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = injectDependencies(
   { combinedCourseDetailsService },
@@ -17,6 +18,17 @@ const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = i
     moduleRepository: repositories.moduleRepository,
     eligibilityRepository: repositories.eligibilityRepository,
     recommendedModuleRepository: repositories.recommendedModuleRepository,
+  },
+);
+
+const { combinedCourseToCreateService: injectedCombinedCourseToCreateService } = injectDependencies(
+  { combinedCourseToCreateService },
+  {
+    moduleRepository: repositories.moduleRepository,
+    codeGenerator,
+    accessCodeRepository: repositories.accessCodeRepository,
+    recommendedModuleRepository: repositories.recommendedModuleRepository,
+    targetProfileRepository: repositories.targetProfileRepository,
   },
 );
 
@@ -36,6 +48,7 @@ const dependencies = {
   targetProfileRepository: repositories.targetProfileRepository,
   organizationLearnerParticipationRepository: repositories.organizationLearnerParticipationRepository,
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
+  combinedCourseToCreateService: injectedCombinedCourseToCreateService,
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
   combinedCourseBlueprintRepository,
@@ -45,10 +58,12 @@ const dependencies = {
 
 import { attachOrganizationsToCombinedCourseBlueprint } from './attach-organizations-to-combined-course-blueprint.js';
 import { checkUserQuest } from './check-user-quest-success.js';
+import { createCombinedCourse } from './create-combined-course.js';
 import { createCombinedCourseBlueprint } from './create-combined-course-blueprint.js';
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
 import { detachOrganizationFromCombinedCourseBlueprint } from './detach-organization-from-combined-course-blueprint.js';
+import { findByOrganizationId } from './find-by-organization-id.js';
 import { findCombinedCourseBlueprints } from './find-combined-course-blueprints.js';
 import { findCombinedCourseByCampaignId } from './find-combined-course-by-campaign-id.js';
 import { findCombinedCourseByModuleIdAndUserId } from './find-combined-course-by-moduleId-and-user-id.js';
@@ -87,6 +102,8 @@ const usecasesWithoutInjectedDependencies = {
   updateCombinedCourse,
   createCombinedCourses,
   createCombinedCourseBlueprint,
+  createCombinedCourse,
+  findByOrganizationId,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

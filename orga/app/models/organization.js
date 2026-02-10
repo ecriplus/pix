@@ -15,6 +15,7 @@ export default class Organization extends Model {
   @hasMany('combined-course', { async: true, inverse: null }) combinedCourses;
   @hasMany('campaign', { async: true, inverse: 'organization' }) campaigns;
   @hasMany('target-profile', { async: true, inverse: null }) targetProfiles;
+  @hasMany('combined-course-blueprint', { async: true, inverse: null }) combinedCourseBlueprints;
   @hasMany('organization-invitation', { async: true, inverse: 'organization' }) organizationInvitations;
   @hasMany('group', { async: true, inverse: null }) groups;
   @hasMany('division', { async: true, inverse: null }) divisions;

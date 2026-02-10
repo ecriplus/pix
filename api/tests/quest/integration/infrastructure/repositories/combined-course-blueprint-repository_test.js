@@ -155,4 +155,49 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       expect(result).null;
     });
   });
+  describe('#findByOrganizationId', function () {
+    it('should return blueprint if the given organization has at least one combined course blueprint share', async function () {
+      //given
+      const blueprintShare = databaseBuilder.factory.buildCombinedCourseBlueprintShare();
+      const blueprintShare2 = databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+        organizationId: blueprintShare.organizationId,
+      });
+
+      databaseBuilder.factory.buildCombinedCourseBlueprintShare();
+
+      await databaseBuilder.commit();
+
+      const expectedCombinedCourseBlueprint = await combinedCourseBluePrintRepository.findById({
+        id: blueprintShare.combinedCourseBlueprintId,
+      });
+
+      const expectedCombinedCourseBlueprint2 = await combinedCourseBluePrintRepository.findById({
+        id: blueprintShare2.combinedCourseBlueprintId,
+      });
+
+      //when
+      const result = await combinedCourseBluePrintRepository.findByOrganizationId({
+        organizationId: blueprintShare.organizationId,
+      });
+
+      //then
+      expect(result.length).to.equal(2);
+      expect(result[0]).to.deep.equal(expectedCombinedCourseBlueprint);
+      expect(result[1]).to.deep.equal(expectedCombinedCourseBlueprint2);
+    });
+    it('should return an empty array when the organization is not found', async function () {
+      const result = await combinedCourseBluePrintRepository.findByOrganizationId({ organizationId: 123 });
+
+      expect(result.length).to.equal(0);
+    });
+
+    it('should return an empty array when the organization has no shares', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      const result = await combinedCourseBluePrintRepository.findByOrganizationId({ organizationId });
+
+      expect(result.length).to.equal(0);
+    });
+  });
 });

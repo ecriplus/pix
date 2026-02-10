@@ -145,6 +145,26 @@ const register = async function (server) {
         tags: ['api', 'combined-course'],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/combined-course-blueprints',
+      config: {
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        pre: [
+          {
+            method: securityPreHandlers.checkOrganizationAccess,
+            assign: 'checkOrganizationAccess',
+          },
+        ],
+        handler: combinedCourseBlueprintController.findByOrganizationId,
+        notes: ["- Récupère les schémas de parcours combinés partagés avec l'organisation"],
+        tags: ['api', 'combined-course'],
+      },
+    },
   ]);
 };
 

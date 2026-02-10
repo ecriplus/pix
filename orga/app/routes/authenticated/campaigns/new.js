@@ -24,6 +24,7 @@ export default class NewRoute extends Route {
   async model(params) {
     const organization = this.currentUser.organization;
     await organization.targetProfiles;
+    await organization.combinedCourseBlueprints;
     const membersSortedByFullName = await this.store.findAll('member-identity', {
       adapterOptions: { organizationId: organization.id },
     });
@@ -63,7 +64,8 @@ export default class NewRoute extends Route {
         ownerId: this.currentUser.prescriber.id,
         ...(campaignAttributes ?? campaignAttributes),
       }),
-      targetProfiles: organization.targetProfiles,
+      targetProfiles: organization.targetProfiles ?? undefined,
+      combinedCourseBlueprints: organization.combinedCourseBlueprints ?? undefined,
       membersSortedByFullName,
     });
   }

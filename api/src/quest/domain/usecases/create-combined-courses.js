@@ -14,12 +14,14 @@ export const createCombinedCourses = withTransaction(
     combinedCourseBlueprintRepository,
     recommendedModuleRepository,
     moduleRepository,
+    questRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER, { delimiter: ';' });
     const csvData = csvParser.parse();
 
     const combinedCourses = [];
     const pendingCodes = [];
+
     for (const row of csvData) {
       const { organizationIds: organizationIdsSeparatedByComma, creatorId, content, combinedCourseBlueprintId } = row;
       const organizationIds = organizationIdsSeparatedByComma.split(',');
@@ -28,46 +30,41 @@ export const createCombinedCourses = withTransaction(
         id: combinedCourseBlueprintId,
       });
 
-      const targetProfileIds = combinedCourseBlueprint.targetProfileIds;
-      const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
-
       for (const organizationId of organizationIds) {
-        const campaigns = [];
         const combinedCourseCode = await codeGenerator.generate(accessCodeRepository, pendingCodes);
         pendingCodes.push(combinedCourseCode);
 
-        const modules = await moduleRepository.getByShortIds({
-          moduleShortIds: combinedCourseBlueprint.moduleShortIds,
-        });
+        let modules = [];
 
-        for (const targetProfile of targetProfiles) {
-          const recommendableModules = await recommendedModuleRepository.findIdsByTargetProfileIds({
-            targetProfileIds: [targetProfile.id],
+        if (combinedCourseBlueprint.moduleShortIds) {
+          modules = await moduleRepository.getByShortIds({
+            moduleShortIds: combinedCourseBlueprint.moduleShortIds,
           });
-
-          const hasRecommendableModulesInTargetProfile =
-            recommendableModules.length > 0 &&
-            Boolean(recommendableModules.filter(({ moduleId }) => modules.map(({ id }) => id).includes(moduleId)));
-
-          let combinedCourseUrl = '/parcours/' + combinedCourseCode;
-
-          if (hasRecommendableModulesInTargetProfile) combinedCourseUrl += '/chargement';
-
-          campaigns.push(
-            new Campaign({
-              organizationId: parseInt(organizationId),
-              targetProfileId: targetProfile.id,
-              creatorId: parseInt(creatorId),
-              ownerId: parseInt(creatorId),
-              name: targetProfile.internalName,
-              title: targetProfile.name,
-              customResultPageButtonUrl: combinedCourseUrl,
-              customResultPageButtonText: 'Continuer',
-            }),
-          );
         }
 
-        const createdCampaigns = await campaignRepository.save({ campaigns });
+        const targetProfileIds = combinedCourseBlueprint.targetProfileIds ?? [];
+        const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
+        const campaignsToCreate = [];
+        const recommendableModules =
+          targetProfileIds.length > 0
+            ? await recommendedModuleRepository.findIdsByTargetProfileIds({ targetProfileIds })
+            : [];
+
+        for (const targetProfile of targetProfiles) {
+          const campaignForCombinedCourse = Campaign.buildCampaignForCombinedCourse({
+            organizationId,
+            targetProfile,
+            creatorId,
+            combinedCourseCode,
+            recommendableModules,
+            modules,
+          });
+          campaignsToCreate.push(campaignForCombinedCourse);
+        }
+
+        const createdCampaigns = await campaignRepository.save({
+          campaigns: campaignsToCreate,
+        });
 
         const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
           name: combinedCourseInformation.name,
@@ -82,7 +79,6 @@ export const createCombinedCourses = withTransaction(
       }
     }
 
-    await combinedCourseRepository.saveInBatch({ combinedCourses });
+    await combinedCourseRepository.saveInBatch({ combinedCourses, questRepository });
   },
-  { isolationLevel: 'repeatable read' },
 );
