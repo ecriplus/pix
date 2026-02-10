@@ -91,12 +91,17 @@ export default class CreateOrUpdateTrainingForm extends Component {
   updateSelect(key, value) {
     set(this.form, key, value);
 
-    this.fillInputsForModulixTraining();
+    this.fillInputsForModulixTraining(key, value);
   }
 
   @action
-  fillInputsForModulixTraining() {
+  fillInputsForModulixTraining(key, value) {
     if (this.form.type === MODULIX_TYPE) {
+      if (key === 'link') {
+        const selectedModule = this.modules.find((module) => module.link === value);
+        set(this.form, 'duration.minutes', selectedModule.duration);
+      }
+
       if (!this.form.editorLogoUrl) {
         set(this.form, 'editorLogoUrl', MODULIX_EDITOR_LOGO_URL);
       }

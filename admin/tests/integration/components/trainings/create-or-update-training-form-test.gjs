@@ -16,8 +16,16 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
   hooks.beforeEach(async function () {
     const store = this.owner.lookup('service:store');
-    store.createRecord('module-metadata', { title: 'Faire un clic droit', link: '/modules/r2d2droi/clic-droit' });
-    store.createRecord('module-metadata', { title: 'Utiliser un LLM', link: '/modules/k2000tro/use-llm' });
+    store.createRecord('module-metadata', {
+      title: 'Faire un clic droit',
+      link: '/modules/r2d2droi/clic-droit',
+      duration: 30,
+    });
+    store.createRecord('module-metadata', {
+      title: 'Utiliser un LLM',
+      link: '/modules/k2000tro/use-llm',
+      duration: 10,
+    });
   });
 
   test('it should display the items', async function (assert) {
@@ -265,7 +273,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       // given
       // when
       const screen = await render(
-      <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
       );
 
       await click(screen.getByRole('button', { name: 'Format' }));
@@ -289,7 +297,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
         // when
         const screen = await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+          <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
         );
         const editorNameInput = screen.getByLabelText(
           "Nom de l'éditeur Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
@@ -303,6 +311,24 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         // then
         assert.dom(editorNameInput).hasValue(editorNameValue);
       });
+    });
+
+    test('it should auto fill the duration', async function (assert) {
+      // given
+      // when
+      const screen = await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
+      );
+
+      await click(screen.getByRole('button', { name: 'Format' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Module Pix' }));
+      await click(screen.getByRole('button', { name: 'Module' }));
+      await screen.findByRole('listbox');
+      await click(await screen.findByRole('option', { name: 'Utiliser un LLM' }));
+
+      // then
+      assert.dom(screen.getByRole('spinbutton', { name: 'Minutes (MM)' })).hasValue('10');
     });
 
     module('when model is provided', function () {
