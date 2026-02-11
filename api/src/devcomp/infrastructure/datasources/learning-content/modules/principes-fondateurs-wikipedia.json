@@ -94,10 +94,7 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> La construction permanente et les différentes langues de Wikipédia sont symbolisées prioritairement à travers ce logo.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "4"
-                ]
+                "solutions": ["1", "4"]
               }
             }
           ]
@@ -254,11 +251,7 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p>Remonter la page pour relire la leçon.&nbsp;<span aria-hidden=\"true\">⬆</span></p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3",
-                  "4"
-                ]
+                "solutions": ["1", "3", "4"]
               }
             }
           ]
@@ -466,12 +459,8 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Remplir le nom de la cinquième section du sommaire de l'article Wikipédia proposé",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "Honneur"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["Honneur"]
                   }
                 ],
                 "feedbacks": {
@@ -513,12 +502,8 @@
                     "display": "block",
                     "placeholder": "",
                     "ariaLabel": "Remplir avec le nombre de notes et références",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["1"]
                   }
                 ],
                 "feedbacks": {
@@ -573,9 +558,7 @@
                         "content": "Non renseigné"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {

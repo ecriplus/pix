@@ -144,9 +144,7 @@
                     "placeholder": "nombre de comptes",
                     "ariaLabel": "nombre de comptes",
                     "tolerances": [],
-                    "solutions": [
-                      3
-                    ]
+                    "solutions": [3]
                   }
                 ],
                 "feedbacks": {
@@ -586,11 +584,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionner -",
                     "ariaLabel": "nom du gestionnaire",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
+                    "tolerances": ["t1", "t2", "t3"],
                     "options": [
                       {
                         "id": "1",
@@ -601,9 +595,7 @@
                         "content": "Youshallpass"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   }
                 ],
                 "feedbacks": {

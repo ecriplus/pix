@@ -241,12 +241,8 @@
                           "display": "inline",
                           "placeholder": "",
                           "ariaLabel": "Réponse 1 sur 1",
-                          "tolerances": [
-                            "t1"
-                          ],
-                          "solutions": [
-                            "@"
-                          ]
+                          "tolerances": ["t1"],
+                          "solutions": ["@"]
                         }
                       ],
                       "feedbacks": {
@@ -299,9 +295,7 @@
                               "content": "le fournisseur d'adresse mail"
                             }
                           ],
-                          "solutions": [
-                            "1"
-                          ]
+                          "solutions": ["1"]
                         },
                         {
                           "type": "text",
@@ -328,9 +322,7 @@
                               "content": "le fournisseur d'adresse mail"
                             }
                           ],
-                          "solutions": [
-                            "2"
-                          ]
+                          "solutions": ["2"]
                         }
                       ],
                       "feedbacks": {
@@ -536,13 +528,8 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "Adresse mail de Naomi",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "naomizao457@yahoo.com",
-                      "naomizao457@yahoo.fr"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["naomizao457@yahoo.com", "naomizao457@yahoo.fr"]
                   }
                 ],
                 "feedbacks": {

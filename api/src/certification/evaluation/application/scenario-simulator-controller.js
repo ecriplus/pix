@@ -55,20 +55,22 @@ async function simulateFlashAssessmentScenario(
 
       const simulationReport = await usecases.simulateFlashAssessmentScenario(usecaseParams);
 
-      yield JSON.stringify({
-        index,
-        simulationReport: simulationReport.map((answer) => ({
-          challengeId: answer.challenge.id,
-          minimumCapability: answer.challenge.minimumCapability,
-          difficulty: answer.challenge.difficulty,
-          discriminant: answer.challenge.discriminant,
-          reward: answer.reward,
-          errorRate: answer.errorRate,
-          answerStatus: answer.answerStatus,
-          capacity: answer.capacity,
-          numberOfAvailableChallenges: answer.numberOfAvailableChallenges,
-        })),
-      }) + '\n';
+      yield (
+        JSON.stringify({
+          index,
+          simulationReport: simulationReport.map((answer) => ({
+            challengeId: answer.challenge.id,
+            minimumCapability: answer.challenge.minimumCapability,
+            difficulty: answer.challenge.difficulty,
+            discriminant: answer.challenge.discriminant,
+            reward: answer.reward,
+            errorRate: answer.errorRate,
+            answerStatus: answer.answerStatus,
+            capacity: answer.capacity,
+            numberOfAvailableChallenges: answer.numberOfAvailableChallenges,
+          })),
+        }) + '\n'
+      );
     }
   }
 

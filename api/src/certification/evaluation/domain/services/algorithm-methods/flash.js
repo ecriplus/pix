@@ -203,7 +203,8 @@ function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
     samples.map((sample, index) => normalizedPosteriori[index] * (sample - latestCapacity) ** 2),
   );
 
-  return Math.sqrt(rawErrorRate - (ERROR_RATE_CLASS_INTERVAL ** 2) / 12.0); // prettier-ignore
+  // oxfmt-ignore
+  return Math.sqrt(rawErrorRate - (ERROR_RATE_CLASS_INTERVAL ** 2) / 12.0);
 }
 
 /**

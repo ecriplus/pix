@@ -523,11 +523,7 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Retournez voir la leçon ci-dessus si besoin&nbsp;<span aria-hidden=\"true\">⬆</span>!</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3",
-                  "5"
-                ]
+                "solutions": ["2", "3", "5"]
               }
             }
           ]
@@ -799,10 +795,7 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Essayez à nouveau, en appliquant la méthode « Qui ? Quand ? D'où ? ». Si vous avez un doute sur ces informations, il faut être prudent.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]

@@ -78,10 +78,7 @@
                     "placeholder": "Tapez ici",
                     "ariaLabel": "zone de saisie",
                     "tolerances": [],
-                    "solutions": [
-                      "voilà le zèbre déçu",
-                      "« voilà le zèbre déçu »"
-                    ]
+                    "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
                   }
                 ],
                 "feedbacks": {
@@ -367,12 +364,8 @@
                     "display": "inline",
                     "placeholder": "recopiez la phrase ",
                     "ariaLabel": "zone de saisie",
-                    "tolerances": [
-                      "t1"
-                    ],
-                    "solutions": [
-                      "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
-                    ]
+                    "tolerances": ["t1"],
+                    "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
                   }
                 ],
                 "feedbacks": {

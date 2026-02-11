@@ -6,13 +6,11 @@ import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import knex from 'eslint-plugin-knex';
 import mocha from 'eslint-plugin-mocha';
 import nRecommendedConfig from 'eslint-plugin-n';
-import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
 import unicorn from 'eslint-plugin-unicorn';
 
 export default defineConfig([
   // Loads plugins and apply their rules
   ...pixRecommendedConfig,
-  prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
   chaiExpect.configs['recommended-flat'],
   // Loads plugins only (rules not applied yet)

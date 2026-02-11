@@ -790,7 +790,7 @@
               "type": "element",
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
-                 "type": "qrocm",
+                "type": "qrocm",
                 "instruction": "<p>Dans ce cas&nbsp;: quel serait un exemple de donnée d’entrée ? et l’exemple d’étiquette associé ?</p>",
                 "proposals": [
                   {
@@ -814,9 +814,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -839,9 +837,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {

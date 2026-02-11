@@ -469,15 +469,8 @@
                     "display": "inline",
                     "placeholder": "- deux mots manquants -",
                     "ariaLabel": "deux mots",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "failles techniques",
-                      "failles logicielles"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["failles techniques", "failles logicielles"]
                   },
                   {
                     "type": "text",
@@ -491,15 +484,8 @@
                     "display": "inline",
                     "placeholder": "- trois mots manquants -",
                     "ariaLabel": "trois mots manquants",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "mises à jour",
-                      "MAJ"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["mises à jour", "MAJ"]
                   },
                   {
                     "type": "text",
@@ -559,10 +545,7 @@
                     "diagnosis": "<p>Un logiciel antivirus est un logiciel supplémentaire qui s’installe sur un appareil.&nbsp;<br>Il se concentre sur la protection.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
+                "solutions": ["1", "3"]
               }
             }
           ]

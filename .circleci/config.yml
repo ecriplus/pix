@@ -391,8 +391,20 @@ jobs:
       - attach_workspace:
           at: ~/pix
       - run:
-          name: Lint
-          command: npm run lint
+          name: Lint dependencies
+          command: npm run lint:dependencies
+          when: always
+      - run:
+          name: Lint filenames
+          command: npm run lint:filenames
+          when: always
+      - run:
+          name: Lint JS
+          command: npm run lint:js
+          when: always
+      - run:
+          name: Check files format
+          command: npm run lint:format
           when: always
 
   api_unit_test:

@@ -649,10 +649,7 @@
                     "diagnosis": "Certains éléments peuvent être intéressants, mais ils ne suffisent pas à interpréter un chiffre environnemental. Réessayez.&nbsp;"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
+                "solutions": ["1", "3"]
               }
             }
           ]
@@ -679,9 +676,7 @@
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "méthode d’évaluation",
-                    "tolerances": [
-                      1
-                    ],
+                    "tolerances": [1],
                     "options": [
                       {
                         "id": "1",
@@ -696,9 +691,7 @@
                         "content": "bilan énergétique"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -725,9 +718,7 @@
                         "content": "toutes les étapes du cycle de vie"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -754,9 +745,7 @@
                         "content": "nombre d’utilisateurs"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -783,9 +772,7 @@
                         "content": "appareils"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -812,9 +799,7 @@
                         "content": "interprété avec précaution"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   }
                 ],
                 "feedbacks": {

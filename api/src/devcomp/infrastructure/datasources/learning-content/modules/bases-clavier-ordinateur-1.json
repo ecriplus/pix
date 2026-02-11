@@ -335,9 +335,7 @@
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
                     "tolerances": [],
-                    "solutions": [
-                      "cornichons"
-                    ]
+                    "solutions": ["cornichons"]
                   },
                   {
                     "type": "text",
@@ -352,9 +350,7 @@
                     "placeholder": "Cliquer ici",
                     "ariaLabel": "Cliquer ici",
                     "tolerances": [],
-                    "solutions": [
-                      "vide"
-                    ]
+                    "solutions": ["vide"]
                   },
                   {
                     "type": "text",
@@ -656,9 +652,7 @@
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
                           "tolerances": [],
-                          "solutions": [
-                            "céleri"
-                          ]
+                          "solutions": ["céleri"]
                         }
                       ],
                       "feedbacks": {
@@ -690,9 +684,7 @@
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
                           "tolerances": [],
-                          "solutions": [
-                            "pastèque"
-                          ]
+                          "solutions": ["pastèque"]
                         }
                       ],
                       "feedbacks": {
@@ -724,9 +716,7 @@
                           "placeholder": "Cliquer ici",
                           "ariaLabel": "Cliquer ici",
                           "tolerances": [],
-                          "solutions": [
-                            "bac à glaçons"
-                          ]
+                          "solutions": ["bac à glaçons"]
                         }
                       ],
                       "feedbacks": {

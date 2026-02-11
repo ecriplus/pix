@@ -624,16 +624,8 @@
                     "display": "inline",
                     "placeholder": "Nom du pays",
                     "ariaLabel": "Nom du pays",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "la Grèce",
-                      "Grèce",
-                      "Grec"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["la Grèce", "Grèce", "Grec"]
                   }
                 ],
                 "feedbacks": {
