@@ -2,8 +2,6 @@
  * @typedef {import('../models/Subscription.js').Subscription} Subscription
  * @typedef {import('../models/Candidate.js').Candidate} Candidate
  */
-import _ from 'lodash';
-
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 
 /**
@@ -54,7 +52,7 @@ export class EnrolledCandidate {
     this.resultRecipientEmail = resultRecipientEmail;
     this.externalId = externalId;
     this.birthdate = birthdate;
-    this.extraTimePercentage = !_.isNil(extraTimePercentage) ? parseFloat(extraTimePercentage) : null;
+    this.extraTimePercentage = extraTimePercentage != null ? parseFloat(extraTimePercentage) : null;
     this.isLinked = Boolean(userId);
     this.userId = userId;
     this.sessionId = sessionId;

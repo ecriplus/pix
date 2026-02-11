@@ -2,14 +2,15 @@ import lodash from 'lodash';
 
 const { Serializer } = jsonapiSerializer;
 
-const { omit, get } = lodash;
+const { get } = lodash;
 
 import jsonapiSerializer from 'jsonapi-serializer';
 
 const serialize = function (juryCertificationSummary, meta, { translate }) {
   return new Serializer('jury-certification-summary', {
     transform(juryCertificationSummary) {
-      const result = omit(juryCertificationSummary, 'certificationIssueReports');
+      // eslint-disable-next-line no-unused-vars
+      const { certificationIssueReports, ...result } = juryCertificationSummary;
       result.certificationObtained = juryCertificationSummary.getCertificationLabel(translate);
       result.examinerComment = get(juryCertificationSummary, 'certificationIssueReports[0].description');
       result.numberOfCertificationIssueReports = juryCertificationSummary.certificationIssueReports.length;
