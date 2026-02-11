@@ -15,7 +15,6 @@ export class AssessmentSheet {
    * @param {number} params.certificationCourseId
    * @param {number} params.assessmentId
    * @param {ABORT_REASONS} params.abortReason
-   * @param {number} params.maxReachableLevelOnCertificationDate
    * @param {boolean} params.isRejectedForFraud
    * @param {Assessment.states} params.state
    * @param {Date} params.updatedAt
@@ -27,7 +26,6 @@ export class AssessmentSheet {
     abortReason: Joi.string()
       .valid(...Object.values(ABORT_REASONS))
       .allow(null),
-    maxReachableLevelOnCertificationDate: Joi.number().required(),
     isRejectedForFraud: Joi.boolean().required(),
     state: Joi.string()
       .valid(...Object.values(Assessment.states))
@@ -36,20 +34,10 @@ export class AssessmentSheet {
     answers: Joi.array().items(Joi.object().instance(Answer)).required(),
   });
 
-  constructor({
-    certificationCourseId,
-    assessmentId,
-    abortReason,
-    maxReachableLevelOnCertificationDate,
-    isRejectedForFraud,
-    state,
-    updatedAt,
-    answers,
-  }) {
+  constructor({ certificationCourseId, assessmentId, abortReason, isRejectedForFraud, state, updatedAt, answers }) {
     this.certificationCourseId = certificationCourseId;
     this.assessmentId = assessmentId;
     this.abortReason = abortReason;
-    this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
     this.updatedAt = updatedAt;

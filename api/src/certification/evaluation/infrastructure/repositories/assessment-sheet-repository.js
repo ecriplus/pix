@@ -9,7 +9,6 @@ export async function findByCertificationCourseId(certificationCourseId) {
       certificationCourseId: 'certification-courses.id',
       assessmentId: 'assessments.id',
       abortReason: 'certification-courses.abortReason',
-      maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       state: 'assessments.state',
       updatedAt: 'assessments.updatedAt',

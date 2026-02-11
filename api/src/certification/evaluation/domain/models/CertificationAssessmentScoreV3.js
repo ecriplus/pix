@@ -36,7 +36,6 @@ export class CertificationAssessmentScoreV3 {
    * @param {Answer[]} params.allAnswers
    * @param {CalibratedChallenge[]} params.allChallenges
    * @param {ABORT_REASONS} params.abortReason
-   * @param {number} params.maxReachableLevelOnCertificationDate
    * @param {V3CertificationScoring} params.v3CertificationScoring
    * @param {ScoringDegradationService} params.scoringDegradationService
    * @returns {CertificationAssessmentScoreV3}

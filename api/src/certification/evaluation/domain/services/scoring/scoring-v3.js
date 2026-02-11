@@ -121,7 +121,6 @@ function _scoreCoreCertification({
     allAnswers: [...assessmentSheet.answers],
     allChallenges,
     challenges: askedChallengesWithoutLiveAlerts,
-    maxReachableLevelOnCertificationDate: assessmentSheet.maxReachableLevelOnCertificationDate,
     v3CertificationScoring,
     scoringDegradationService,
   });
