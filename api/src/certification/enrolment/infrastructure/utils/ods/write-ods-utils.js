@@ -1,12 +1,10 @@
 import xmldom from '@xmldom/xmldom';
-
-import { loadOdsZip } from './common-ods-utils.js';
-
-const { DOMParser, XMLSerializer } = xmldom;
-
 import _ from 'lodash';
 
 import { AddedCellOption } from './added-cell-option.js';
+import { loadOdsZip } from './common-ods-utils.js';
+
+const { DOMParser, XMLSerializer } = xmldom;
 
 const CONTENT_XML_IN_ODS = 'content.xml';
 
@@ -17,32 +15,25 @@ class OdsUtilsBuilder {
   }
 
   withData(dataToInject, templateValues) {
-    const intermediateXmlDom = structuredClone(this.xmlDom);
     for (const { placeholder, propertyName } of templateValues) {
-      const targetXmlDomElement = _getXmlDomElementByText(intermediateXmlDom, placeholder);
+      const targetXmlDomElement = _findXmlDomElementByText(this.xmlDom, placeholder);
       if (targetXmlDomElement) {
-        const newXmlValue = dataToInject[propertyName];
-        targetXmlDomElement.textContent = newXmlValue;
+        targetXmlDomElement.textContent = dataToInject[propertyName];
       }
     }
-
-    this.xmlDom = intermediateXmlDom;
 
     return this;
   }
 
   headersTranslation({ headersValues, translate }) {
-    const intermediateXmlDom = structuredClone(this.xmlDom);
     for (const propertyName of headersValues) {
-      const targetXmlDomElement = _getXmlDomElementByText(intermediateXmlDom, propertyName);
+      const targetXmlDomElement = _findXmlDomElementByText(this.xmlDom, propertyName);
       if (targetXmlDomElement) {
         _translateNoteBackgroundTitle(targetXmlDomElement, translate);
         const translatedHeader = translate(`candidate-list-template.${propertyName}`);
         targetXmlDomElement.textContent = translatedHeader;
       }
     }
-
-    this.xmlDom = intermediateXmlDom;
   }
 
   withTooltipOnCell({ xmlDom, tooltipName, tooltipTitle, tooltipContentLines }) {
@@ -150,7 +141,7 @@ class OdsUtilsBuilder {
   }
 
   _withCellToEndOfLineWithStyleOfCellLabelled({ lineNumber, cellToCopyLabel, addedCellOption }) {
-    const cellToCopy = _getXmlDomElementByText(this.xmlDom, cellToCopyLabel).parentNode;
+    const cellToCopy = _findXmlDomElementByText(this.xmlDom, cellToCopyLabel).parentNode;
     const clonedCell = _deepCloneDomElement(cellToCopy);
 
     _updateCellTextContent({ clonedCell, textContent: addedCellOption.labels });
@@ -228,8 +219,7 @@ class OdsUtilsBuilder {
   async generateODSBuffer({ stringifiedXML, templateFilePath }) {
     const inMemoryZippedTemplate = await loadOdsZip(templateFilePath);
     await inMemoryZippedTemplate.file(CONTENT_XML_IN_ODS, stringifiedXML);
-    const odsBuffer = await inMemoryZippedTemplate.generateAsync({ type: 'nodebuffer' });
-    return odsBuffer;
+    return await inMemoryZippedTemplate.generateAsync({ type: 'nodebuffer' });
   }
 }
 
@@ -281,7 +271,7 @@ function incrementRowsColumnSpan({ stringifiedXml, startLine, endLine, increment
 
 function addCellToEndOfLineWithStyleOfCellLabelled({ stringifiedXml, lineNumber, cellToCopyLabel, addedCellOption }) {
   const parsedXmlDom = _buildXmlDomFromXmlString(stringifiedXml);
-  const cellToCopy = _getXmlDomElementByText(parsedXmlDom, cellToCopyLabel).parentNode;
+  const cellToCopy = _findXmlDomElementByText(parsedXmlDom, cellToCopyLabel).parentNode;
   const clonedCell = _deepCloneDomElement(cellToCopy);
 
   _updateCellTextContent({ clonedCell, textContent: addedCellOption.labels });
@@ -386,7 +376,7 @@ function addTooltipOnCell({ stringifiedXml, tooltipName, tooltipTitle, tooltipCo
 }
 
 function _getRefRowAndContainerDomElements(parsedXmlDom, rowMarkerPlaceholder) {
-  const referenceRowElement = _getXmlDomElementByText(parsedXmlDom, rowMarkerPlaceholder).parentNode.parentNode;
+  const referenceRowElement = _findXmlDomElementByText(parsedXmlDom, rowMarkerPlaceholder).parentNode.parentNode;
   return {
     referenceRowElement,
     rowsContainerElement: referenceRowElement.parentNode,
@@ -404,7 +394,7 @@ function _buildXmlDomFromXmlString(stringifiedXml) {
 
 function _updateXmlElementWithData(xmlElement, dataToInject, templateValues) {
   for (const { placeholder, propertyName, validator } of templateValues) {
-    const targetXmlDomElement = _getXmlDomElementByText(xmlElement, placeholder);
+    const targetXmlDomElement = _findXmlDomElementByText(xmlElement, placeholder);
     if (targetXmlDomElement) {
       _updateXmlElementByType(
         targetXmlDomElement.parentNode,
@@ -462,7 +452,7 @@ function _updatePercentageXmlElement(xmlElement, xmlElementTextChild, data) {
   xmlElement.removeChild(xmlElementTextChild);
 }
 
-function _getXmlDomElementByText(parsedXmlDom, text) {
+function _findXmlDomElementByText(parsedXmlDom, text) {
   for (const xmlDomElement of Array.from(parsedXmlDom.getElementsByTagName('text:p'))) {
     if (xmlDomElement.textContent === text) {
       return xmlDomElement;
@@ -472,24 +462,6 @@ function _getXmlDomElementByText(parsedXmlDom, text) {
 
 function _buildStringifiedXmlFromXmlDom(parsedXmlDom) {
   return new XMLSerializer().serializeToString(parsedXmlDom);
-}
-
-function updateXmlSparseValues({ stringifiedXml, templateValues, dataToInject }) {
-  const parsedXmlDom = _buildXmlDomFromXmlString(stringifiedXml);
-  const parsedXmlDomUpdated = _updateXmlDomWithData(parsedXmlDom, dataToInject, templateValues);
-  return _buildStringifiedXmlFromXmlDom(parsedXmlDomUpdated);
-}
-
-function _updateXmlDomWithData(parsedXmlDom, dataToInject, templateValues) {
-  const parsedXmlDomUpdated = structuredClone(parsedXmlDom);
-  for (const { placeholder, propertyName } of templateValues) {
-    const targetXmlDomElement = _getXmlDomElementByText(parsedXmlDomUpdated, placeholder);
-    if (targetXmlDomElement) {
-      const newXmlValue = dataToInject[propertyName];
-      targetXmlDomElement.textContent = newXmlValue;
-    }
-  }
-  return parsedXmlDomUpdated;
 }
 
 function _translateNoteBackgroundTitle(targetXmlDomElement, translate) {
@@ -509,5 +481,4 @@ export {
   makeUpdatedOdsByContentXml,
   OdsUtilsBuilder,
   updateXmlRows,
-  updateXmlSparseValues,
 };

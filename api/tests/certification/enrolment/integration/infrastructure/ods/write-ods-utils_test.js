@@ -1,9 +1,4 @@
 import fs from 'node:fs';
-
-const { promises } = fs;
-
-const { writeFile, unlink } = promises;
-
 import * as url from 'node:url';
 
 import { AddedCellOption } from '../../../../../../src/certification/enrolment/infrastructure/utils/ods/added-cell-option.js';
@@ -15,9 +10,13 @@ import {
   incrementRowsColumnSpan,
   makeUpdatedOdsByContentXml,
   updateXmlRows,
-  updateXmlSparseValues,
 } from '../../../../../../src/certification/enrolment/infrastructure/utils/ods/write-ods-utils.js';
 import { expect } from '../../../../../test-helper.js';
+
+const { promises } = fs;
+
+const { writeFile, unlink } = promises;
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 describe('Integration | Shared | Infrastructure | Utils | Ods | write-ods-utils', function () {
@@ -45,60 +44,6 @@ describe('Integration | Shared | Infrastructure | Utils | Ods | write-ods-utils'
 
     afterEach(async function () {
       await unlink(updatedOdsFilePath);
-    });
-  });
-
-  describe('#updateXmlSparseValues', function () {
-    const templateValues = [
-      {
-        placeholder: 'PLACEHOLDER_1',
-        propertyName: 'name',
-      },
-      {
-        placeholder: 'PLACEHOLDER_2',
-        propertyName: 'age',
-      },
-    ];
-
-    const dataToInject = {
-      name: 'Dummy name',
-      age: 'Dummy age',
-    };
-
-    const stringifiedXml =
-      '<xml xmlns:some="some namespace" xmlns:text="text namespace">' +
-      '<some:element>' +
-      '<text:p>PLACEHOLDER_1</text:p>' +
-      '<text:p>Some value</text:p>' +
-      '<some:block>' +
-      '<text:p>PLACEHOLDER_2</text:p>' +
-      '</some:block>' +
-      '</some:element>' +
-      '<text:p>Some other value</text:p>' +
-      '</xml>';
-
-    const updatedStringifiedXml =
-      '<xml xmlns:some="some namespace" xmlns:text="text namespace">' +
-      '<some:element>' +
-      '<text:p>Dummy name</text:p>' +
-      '<text:p>Some value</text:p>' +
-      '<some:block>' +
-      '<text:p>Dummy age</text:p>' +
-      '</some:block>' +
-      '</some:element>' +
-      '<text:p>Some other value</text:p>' +
-      '</xml>';
-
-    it('should transform an xml by replacing templatized cells and data to inject', function () {
-      // when
-      const result = updateXmlSparseValues({
-        stringifiedXml,
-        templateValues,
-        dataToInject,
-      });
-
-      // then
-      expect(result).to.deep.equal(updatedStringifiedXml);
     });
   });
 
