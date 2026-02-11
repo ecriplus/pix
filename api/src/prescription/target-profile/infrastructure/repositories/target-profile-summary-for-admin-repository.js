@@ -1,3 +1,4 @@
+import * as combinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileSummaryForAdmin.js';
@@ -20,7 +21,7 @@ const findPaginatedFiltered = async function ({ filter, page }) {
 const findByTraining = async function ({ trainingId }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const results = await knexConn('target-profiles')
+  const targetProfiles = await knexConn('target-profiles')
     .select({
       id: 'target-profiles.id',
       internalName: 'target-profiles.internalName',
@@ -31,11 +32,16 @@ const findByTraining = async function ({ trainingId }) {
     .where({ trainingId })
     .orderBy('id', 'ASC');
 
-  // FIXME: computing `isPartOfCombinedCourse` is quite heavy by now, we temporary set it  to false for every TargetProfileSummaryForAdmin
-  return results.map((result) => {
+  const targetProfileIds = targetProfiles.map((result) => result.id);
+
+  const targetProfilesPartOfAnyCombinedCourse = await combinedCourseRepository.targetProfileIdsPartOfAnyCombinedCourse({
+    targetProfileIds,
+  });
+
+  return targetProfiles.map((result) => {
     return new TargetProfileSummaryForAdmin({
       ...result,
-      isPartOfCombinedCourse: false,
+      isPartOfCombinedCourse: targetProfilesPartOfAnyCombinedCourse.includes(result.id),
     });
   });
 };
