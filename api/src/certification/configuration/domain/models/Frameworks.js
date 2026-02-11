@@ -13,6 +13,4 @@ const FRAMEWORKS = Object.freeze({
   CLEA: 'CLEA',
 });
 
-export const Frameworks = {
-  ...FRAMEWORKS,
-};
+export const Frameworks = FRAMEWORKS;
