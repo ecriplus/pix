@@ -350,7 +350,9 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       expect(targetProfileSummaries).to.be.empty;
     });
 
-    it('should return a targetProfileSummary instance with correct attribute when target profile is used in a combined course', async function () {
+    // FIXME: computing `isPartOfCombinedCourse` is quite heavy by now, we temporary set it  to false for every TargetProfileSummaryForAdmin
+    // eslint-disable-next-line mocha/no-pending-tests
+    it.skip('should return a targetProfileSummary instance with correct attribute when target profile is used in a combined course', async function () {
       // given
       const training = databaseBuilder.factory.buildTraining();
 
