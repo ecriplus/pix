@@ -1,5 +1,5 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CandidateData } from '../../../../../../src/certification/enrolment/infrastructure/candidates-import/CandidateData.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | infrastructure | candidates-import | CandidateData', function () {
@@ -14,9 +14,9 @@ describe('Unit | infrastructure | candidates-import | CandidateData', function (
       };
     });
 
-    Object.keys(ComplementaryCertificationKeys).forEach((key) => {
+    Object.keys(Frameworks).forEach((key) => {
       describe(`.${key}`, function () {
-        it(`returns 'YES' when complementaryCertification key is ${key}`, function () {
+        it(`returns 'YES' when framework key is ${key}`, function () {
           const complementaryCertification = { key };
           const candidateData = new CandidateData({ i18n, complementaryCertification });
           expect(candidateData[key]).to.be.equal('YES');

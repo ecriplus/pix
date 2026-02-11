@@ -176,7 +176,7 @@ function _getCandidatesData({ enrolledCandidates, certificationCenterHabilitatio
 }
 
 function _getCandidatesImportTemplatePath() {
-  return __dirname + '/1.5/candidates_import_template.ods';
+  return __dirname + '/candidates_import_template.ods';
 }
 
 function _certificationCandidatesToCandidatesData({ enrolledCandidates, certificationCenterHabilitations, i18n }) {

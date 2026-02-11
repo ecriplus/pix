@@ -5,8 +5,8 @@
  */
 import dayjs from 'dayjs';
 
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 
 const FRANCE_COUNTRY_CODE = '99100';
 
@@ -55,7 +55,10 @@ export class CandidateData {
     this.sessionId = sessionId || '';
     this.userId = userId || '';
     this.organizationLearnerId = organizationLearnerId || '';
-    this.billingMode = CertificationCandidate.translateBillingMode({ billingMode, translate: this.translate });
+    this.billingMode = CertificationCandidate.translateBillingMode({
+      billingMode,
+      translate: this.translate,
+    });
     this.prepaymentCode = prepaymentCode || '';
     this.count = number;
     this.#setBirthCityAndPostalCode(birthCity, birthCountry, birthINSEECode, birthPostalCode);
@@ -68,7 +71,7 @@ export class CandidateData {
     const currentKey = complementaryCertification?.key;
     const yes = this.translate('candidate-list-template.yes');
 
-    Object.keys(ComplementaryCertificationKeys).forEach((key) => {
+    Object.keys(Frameworks).forEach((key) => {
       this[key] = currentKey === key ? yes : '';
     });
   }
@@ -80,7 +83,7 @@ export class CandidateData {
   }
 
   #setBirthINSEECode(birthINSEECode, birthCountry) {
-    if (birthCountry != 'FRANCE' && birthINSEECode && birthINSEECode !== FRANCE_COUNTRY_CODE) {
+    if (birthCountry?.toUpperCase() !== 'FRANCE' && birthINSEECode && birthINSEECode !== FRANCE_COUNTRY_CODE) {
       this.birthINSEECode = '99';
     } else {
       this.birthINSEECode = birthINSEECode || '';

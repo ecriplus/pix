@@ -1,9 +1,4 @@
 import fs from 'node:fs';
-
-const { promises } = fs;
-
-const { unlink, writeFile } = promises;
-
 import * as url from 'node:url';
 
 import _ from 'lodash';
@@ -15,6 +10,11 @@ import { ComplementaryCertificationKeys } from '../../../../../../src/certificat
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
+
+const { promises } = fs;
+
+const { unlink, writeFile } = promises;
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet', function () {
@@ -36,8 +36,8 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
   context('when certification center is of type SCO', function () {
     it('should return a candidate import sheet with session data, certification candidates data prefilled', async function () {
       // given
-      expectedOdsFilePath = `${__dirname}/1.5/candidates_import_template-sco.ods`;
-      actualOdsFilePath = `${__dirname}/1.5/candidates_import_template-sco.tmp.ods`;
+      expectedOdsFilePath = `${__dirname}/candidates_import_template-sco.ods`;
+      actualOdsFilePath = `${__dirname}/candidates_import_template-sco.tmp.ods`;
 
       const certificationCenterName = 'Centre de certification';
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({
@@ -46,7 +46,10 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
       }).id;
 
       userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+      });
 
       sessionId = databaseBuilder.factory.buildSession({
         id: 10,
@@ -126,7 +129,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         ],
         (candidate) => {
           const aCandidate = databaseBuilder.factory.buildCertificationCandidate(candidate);
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: aCandidate.id });
+          databaseBuilder.factory.buildCoreSubscription({
+            certificationCandidateId: aCandidate.id,
+          });
         },
       );
 
@@ -140,8 +145,12 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         i18n,
       });
       await writeFile(actualOdsFilePath, updatedOdsFileBuffer);
-      const actualResult = await readOdsUtils.getContentXml({ odsFilePath: actualOdsFilePath });
-      const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
+      const actualResult = await readOdsUtils.getContentXml({
+        odsFilePath: actualOdsFilePath,
+      });
+      const expectedResult = await readOdsUtils.getContentXml({
+        odsFilePath: expectedOdsFilePath,
+      });
 
       // then
       expect(actualResult).to.deep.equal(expectedResult);
@@ -149,8 +158,8 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
 
     it('should return a candidate import sheet with session data, certification candidates data prefilled with one complementary certification', async function () {
       // given
-      expectedOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-one-complementary-certification-sco.ods`;
-      actualOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-one-complementary-certification-sco.tmp.ods`;
+      expectedOdsFilePath = `${__dirname}/candidates_import_template-with-one-complementary-certification-sco.ods`;
+      actualOdsFilePath = `${__dirname}/candidates_import_template-with-one-complementary-certification-sco.tmp.ods`;
 
       const cleaNumerique = databaseBuilder.factory.buildComplementaryCertification({
         key: ComplementaryCertificationKeys.CLEA,
@@ -169,7 +178,10 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
       });
 
       userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+      });
 
       sessionId = databaseBuilder.factory.buildSession({
         id: 10,
@@ -200,7 +212,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: 1.5,
         complementaryCertification: null,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: cleaNumeriqueCandidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: cleaNumeriqueCandidate.id,
+      });
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         certificationCandidateId: cleaNumeriqueCandidate.id,
         complementaryCertificationId: cleaNumerique.id,
@@ -222,7 +236,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: 0.15,
         complementaryCertification: null,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidate.id,
+      });
 
       await databaseBuilder.commit();
       // when
@@ -240,8 +256,12 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         i18n,
       });
       await writeFile(actualOdsFilePath, updatedOdsFileBuffer);
-      const actualResult = await readOdsUtils.getContentXml({ odsFilePath: actualOdsFilePath });
-      const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
+      const actualResult = await readOdsUtils.getContentXml({
+        odsFilePath: actualOdsFilePath,
+      });
+      const expectedResult = await readOdsUtils.getContentXml({
+        odsFilePath: expectedOdsFilePath,
+      });
 
       // then
       expect(actualResult).to.deep.equal(expectedResult);
@@ -249,8 +269,8 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
 
     it('should return a candidate import sheet with session data, certification candidates data prefilled with all complementary certifications', async function () {
       // given
-      expectedOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-all-complementary-certifications-sco.ods`;
-      actualOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-all-complementary-certifications-sco.tmp.ods`;
+      expectedOdsFilePath = `${__dirname}/candidates_import_template-with-all-complementary-certifications-sco.ods`;
+      actualOdsFilePath = `${__dirname}/candidates_import_template-with-all-complementary-certifications-sco.tmp.ods`;
 
       const cleaNumerique = databaseBuilder.factory.buildComplementaryCertification({
         key: ComplementaryCertificationKeys.CLEA,
@@ -293,7 +313,10 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
       });
 
       userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+      });
 
       sessionId = databaseBuilder.factory.buildSession({
         id: 10,
@@ -324,7 +347,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: 0.6,
         complementaryCertification: pixPlusEdu2ndDegre,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: onlyPixPlusEdu2ndDegreCandidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: onlyPixPlusEdu2ndDegreCandidate.id,
+      });
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         certificationCandidateId: onlyPixPlusEdu2ndDegreCandidate.id,
         complementaryCertificationId: pixPlusEdu2ndDegre.id,
@@ -346,7 +371,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: null,
         complementaryCertification: pixPlusDroit,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: onlyPixPlusDroitCandidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: onlyPixPlusDroitCandidate.id,
+      });
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         certificationCandidateId: onlyPixPlusDroitCandidate.id,
         complementaryCertificationId: pixPlusDroit.id,
@@ -368,7 +395,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: 1.5,
         complementaryCertification: cleaNumerique,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: onlyCleaNumeriqueCandidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: onlyCleaNumeriqueCandidate.id,
+      });
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         certificationCandidateId: onlyCleaNumeriqueCandidate.id,
         complementaryCertificationId: cleaNumerique.id,
@@ -390,7 +419,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         extraTimePercentage: 0.15,
         complementaryCertification: null,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidate.id,
+      });
 
       await databaseBuilder.commit();
       // when
@@ -407,8 +438,12 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         i18n,
       });
       await writeFile(actualOdsFilePath, updatedOdsFileBuffer);
-      const actualResult = await readOdsUtils.getContentXml({ odsFilePath: actualOdsFilePath });
-      const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
+      const actualResult = await readOdsUtils.getContentXml({
+        odsFilePath: actualOdsFilePath,
+      });
+      const expectedResult = await readOdsUtils.getContentXml({
+        odsFilePath: expectedOdsFilePath,
+      });
 
       // then
       expect(actualResult).to.deep.equal(expectedResult);
@@ -418,8 +453,8 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
   context('when certification center is not of type SCO', function () {
     it('should return a candidate import sheet with session data, candidates data prefilled', async function () {
       // given
-      expectedOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-billing-columns.ods`;
-      actualOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-billing-columns.tmp.ods`;
+      expectedOdsFilePath = `${__dirname}/candidates_import_template-with-billing-columns.ods`;
+      actualOdsFilePath = `${__dirname}/candidates_import_template-with-billing-columns.tmp.ods`;
 
       const certificationCenterName = 'Centre de certification';
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({
@@ -428,7 +463,10 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
       }).id;
 
       const userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+      });
 
       sessionId = databaseBuilder.factory.buildSession({
         id: 10,
@@ -450,7 +488,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         prepaymentCode: null,
         sessionId,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateA.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateA.id,
+      });
 
       const candidateB = databaseBuilder.factory.buildCertificationCandidate({
         firstName: 'Candidat',
@@ -459,7 +499,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         prepaymentCode: null,
         sessionId,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateB.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateB.id,
+      });
 
       const candidateC = databaseBuilder.factory.buildCertificationCandidate({
         firstName: 'A Man',
@@ -468,7 +510,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         prepaymentCode: 'CODECODECODEC',
         sessionId,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateC.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateC.id,
+      });
 
       const candidateD = databaseBuilder.factory.buildCertificationCandidate({
         firstName: 'Yo',
@@ -477,26 +521,36 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         prepaymentCode: null,
         sessionId,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateD.id });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateD.id,
+      });
 
       await databaseBuilder.commit();
       const { session, enrolledCandidates } = await usecases.getCandidateImportSheetData({ sessionId, userId });
 
       // when
-      const updatedOdsFileBuffer = await fillCandidatesImportSheet({ session, enrolledCandidates, i18n });
+      const updatedOdsFileBuffer = await fillCandidatesImportSheet({
+        session,
+        enrolledCandidates,
+        i18n,
+      });
 
       // then
       await writeFile(actualOdsFilePath, updatedOdsFileBuffer);
-      const actualResult = await readOdsUtils.getContentXml({ odsFilePath: actualOdsFilePath });
-      const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
+      const actualResult = await readOdsUtils.getContentXml({
+        odsFilePath: actualOdsFilePath,
+      });
+      const expectedResult = await readOdsUtils.getContentXml({
+        odsFilePath: expectedOdsFilePath,
+      });
       expect(actualResult).to.deep.equal(expectedResult);
     });
 
     context('when some candidate have complementary certification', function () {
       it('should return a candidate import sheet with session data, candidates data prefilled', async function () {
         // given
-        expectedOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-billing-columns-complementary.ods`;
-        actualOdsFilePath = `${__dirname}/1.5/candidates_import_template-with-billing-columns-complementary.tmp.ods`;
+        expectedOdsFilePath = `${__dirname}/candidates_import_template-with-billing-columns-complementary.ods`;
+        actualOdsFilePath = `${__dirname}/candidates_import_template-with-billing-columns-complementary.tmp.ods`;
 
         const cleaNumerique = databaseBuilder.factory.buildComplementaryCertification({
           key: ComplementaryCertificationKeys.CLEA,
@@ -515,7 +569,10 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
         });
 
         const userId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+        databaseBuilder.factory.buildCertificationCenterMembership({
+          userId,
+          certificationCenterId,
+        });
 
         sessionId = databaseBuilder.factory.buildSession({
           id: 10,
@@ -537,7 +594,9 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
           prepaymentCode: null,
           sessionId,
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: cleaNumeriqueCandidate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: cleaNumeriqueCandidate.id,
+        });
         databaseBuilder.factory.buildComplementaryCertificationSubscription({
           certificationCandidateId: cleaNumeriqueCandidate.id,
           complementaryCertificationId: cleaNumerique.id,
@@ -560,8 +619,12 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
 
         // then
         await writeFile(actualOdsFilePath, updatedOdsFileBuffer);
-        const actualResult = await readOdsUtils.getContentXml({ odsFilePath: actualOdsFilePath });
-        const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
+        const actualResult = await readOdsUtils.getContentXml({
+          odsFilePath: actualOdsFilePath,
+        });
+        const expectedResult = await readOdsUtils.getContentXml({
+          odsFilePath: expectedOdsFilePath,
+        });
         expect(actualResult).to.deep.equal(expectedResult);
       });
     });
