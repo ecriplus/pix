@@ -7,9 +7,19 @@ const updateOrganizationInformation = withTransaction(async function ({
   organizationForAdminRepository,
   tagRepository,
   administrationTeamRepository,
+  organizationLearnerTypeRepository,
   countryRepository,
 }) {
   const existingOrganization = await organizationForAdminRepository.get({ organizationId: organization.id });
+
+  let organizationLearnerType;
+  if (organization.organizationLearnerType) {
+    organizationLearnerType = await organizationLearnerTypeRepository.getByName(
+      organization.organizationLearnerType.name,
+    );
+    organization.organizationLearnerType = organizationLearnerType;
+  }
+
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);
 
   await _checkAdministrationTeamExists(organization.administrationTeamId, administrationTeamRepository);

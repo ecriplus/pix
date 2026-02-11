@@ -1,5 +1,6 @@
 import * as organizationLearnerTypeRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-learner-type-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | organization-learner-type-repository', function () {
   describe('#findAll', function () {
@@ -37,6 +38,35 @@ describe('Integration | Repository | organization-learner-type-repository', func
 
       // then
       expect(result).to.deep.equal([]);
+    });
+  });
+
+  describe('#getByName', function () {
+    it('should return the organization learner type with the given name', async function () {
+      // given
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'Type A',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await organizationLearnerTypeRepository.getByName(organizationLearnerType.name);
+
+      // then
+      expect(result).to.deep.equal(
+        domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: organizationLearnerType.id,
+          name: organizationLearnerType.name,
+        }),
+      );
+    });
+
+    it('should throw if there is no organization learner type with the given name', async function () {
+      // when
+      const error = await catchErr(organizationLearnerTypeRepository.getByName)('Unknown name');
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
     });
   });
 });
