@@ -45,12 +45,9 @@
     position: relative;
     height: 100%;
     padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+    color: var(--modulix-feedback-state-color);
     background-color: var(--modulix-feedback-background-color);
     border-radius: var(--pix-spacing-4x);
-
-    > p {
-      color: var(--modulix-feedback-state-color);
-    }
 
     &--with-retry-button {
       border-bottom-right-radius: 0;

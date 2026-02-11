@@ -58,7 +58,7 @@
                           "content": "Vrai",
                           "feedback": {
                             "state": "Correct&#8239;!",
-                            "diagnosis": "<p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
+                            "diagnosis": "Ces 16 compétences sont rangées dans 5 domaines."
                           }
                         },
                         {
