@@ -31,6 +31,14 @@
     color: var(--pix-neutral-500);
   }
 
+  .page-body-template {
+    padding: var(--pix-spacing-6x) var(--pix-spacing-4x);
+
+    &__content {
+      margin-bottom: var(--pix-spacing-8x);
+    }
+  }
+
   .page-body {
     inset: 60px 0 0 80px;
 
@@ -59,14 +67,6 @@
       &__content {
         margin-bottom: 10px;
       }
-    }
-  }
-
-  .page-body-template {
-    padding: var(--pix-spacing-6x) var(--pix-spacing-4x);
-
-    &__content {
-      margin-bottom: var(--pix-spacing-8x);
     }
   }
 }
