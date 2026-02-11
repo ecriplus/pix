@@ -21,9 +21,13 @@ describe('Integration | Repository | organization-learner-type-repository', func
       // then
       expect(result).to.have.deep.members([
         domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: secondOrganizationLearnerType.id,
           name: secondOrganizationLearnerType.name,
         }),
-        domainBuilder.acquisition.buildOrganizationLearnerType({ name: firstOrganizationLearnerType.name }),
+        domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: firstOrganizationLearnerType.id,
+          name: firstOrganizationLearnerType.name,
+        }),
       ]);
     });
 

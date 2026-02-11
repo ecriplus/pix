@@ -14,6 +14,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         domainBuilder.buildTag({ id: 7, name: 'AEFE' }),
         domainBuilder.buildTag({ id: 44, name: 'PUBLIC' }),
       ];
+      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType();
+
       const parentOrganization = domainBuilder.buildOrganizationForAdmin({
         email: 'motherSco.generic.account@example.net',
         tags,
@@ -32,8 +34,9 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         name: 'motherSco',
         countryCode: 99100,
         countryName: 'France',
-        organizationLearnerTypeName: 'Learner type',
+        organizationLearnerType: organizationLearnerType,
       });
+
       const organization = domainBuilder.buildOrganizationForAdmin({
         email: 'sco.generic.account@example.net',
         tags,
@@ -55,7 +58,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         administrationTeamName: administrationTeam.name,
         countryCode: 99100,
         countryName: 'France',
-        organizationLearnerTypeName: 'Learner type',
+        organizationLearnerType: organizationLearnerType,
       });
       const meta = { some: 'meta' };
 
@@ -97,7 +100,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             features: organization.features,
             'country-code': organization.countryCode,
             'country-name': organization.countryName,
-            'organization-learner-type-name': organization.organizationLearnerTypeName,
+            'organization-learner-type-name': organization.organizationLearnerType.name,
           },
           relationships: {
             'organization-memberships': {

@@ -8,7 +8,7 @@ import { OrganizationLearnerType } from '../../domain/models/OrganizationLearner
 const findAll = async function () {
   const knexConn = DomainTransaction.getConnection();
   const organizationLearnerTypes = await knexConn
-    .select('name')
+    .select('name', 'id')
     .from('organization_learner_types')
     .orderBy('name', 'asc');
 
@@ -17,6 +17,7 @@ const findAll = async function () {
 
 const _toDomain = function (organizationLearnerTypeDTO) {
   return new OrganizationLearnerType({
+    id: organizationLearnerTypeDTO.id,
     name: organizationLearnerTypeDTO.name,
   });
 };

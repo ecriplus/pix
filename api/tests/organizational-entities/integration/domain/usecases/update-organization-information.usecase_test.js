@@ -23,6 +23,11 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
 
+    const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+      id: 1,
+      name: 'New Type',
+    });
+
     const newCountry = databaseBuilder.factory.buildCertificationCpfCountry({
       code: 99102,
       originalName: 'Islande',
@@ -31,16 +36,20 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     await databaseBuilder.commit();
 
-    const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+    const organizationNewInformation = domainBuilder.buildOrganizationForAdmin({
       id: organizationId,
       name: "Nouveau nom d'organization",
       administrationTeamId: newAdministrationTeamId,
       countryCode: newCountry.code,
+      organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+        id: null,
+        name: newOrganizationLearnerType.name,
+      }),
     });
 
     // when
     const updatedOrganization = await usecases.updateOrganizationInformation({
-      organization: organizationNewInformations,
+      organization: organizationNewInformation,
     });
 
     // then
@@ -48,6 +57,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization.name).to.equal("Nouveau nom d'organization");
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
     expect(updatedOrganization.countryCode).to.equal(99102);
+    expect(updatedOrganization.organizationLearnerType.id).to.equal(newOrganizationLearnerType.id);
   });
 
   context('when administration team does not exist', function () {

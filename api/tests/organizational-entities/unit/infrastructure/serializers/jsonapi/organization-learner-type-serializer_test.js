@@ -1,0 +1,24 @@
+import * as organizationLearnerTypeSerializer from '../../../../../../src/organizational-entities/infrastructure/serializers/jsonapi/organization-learner-type/organization-learner-type-serializer.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+
+describe('Unit | Serializer | organization-learner-type-serializer', function () {
+  describe('#serialize', function () {
+    it('should return a JSON API serialized organization learner type', function () {
+      // given
+      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType();
+
+      // when
+      const serializedOrganizationLearnerType = organizationLearnerTypeSerializer.serialize(organizationLearnerType);
+
+      // then
+      expect(serializedOrganizationLearnerType).to.deep.equal({
+        data: {
+          type: 'organization-learner-types',
+          attributes: {
+            name: organizationLearnerType.name,
+          },
+        },
+      });
+    });
+  });
+});

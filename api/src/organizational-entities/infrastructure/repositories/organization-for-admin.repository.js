@@ -6,6 +6,7 @@ import { MissingAttributesError, NotFoundError } from '../../../shared/domain/er
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationInvitation } from '../../../team/domain/models/OrganizationInvitation.js';
 import { OrganizationForAdmin } from '../../domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../domain/models/OrganizationLearnerType.js';
 import { Tag } from '../../domain/models/Tag.js';
 
 const DATA_PROTECTION_OFFICERS_TABLE_NAME = 'data-protection-officers';
@@ -116,6 +117,7 @@ const get = async function ({ organizationId }) {
       administrationTeamName: 'administrationTeams.name',
       countryCode: 'organizations.countryCode',
       organizationLearnerTypeName: 'organization_learner_types.name',
+      organizationLearnerTypeId: 'organization_learner_types.id',
     })
     .leftJoin('users AS archivists', 'archivists.id', 'organizations.archivedBy')
     .leftJoin(
@@ -189,6 +191,16 @@ const get = async function ({ organizationId }) {
     return new Tag(tag);
   });
 
+  // TODO: supprimer la condition quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
+  if (organization.organizationLearnerTypeId) {
+    organization.organizationLearnerType = new OrganizationLearnerType({
+      id: organization.organizationLearnerTypeId,
+      name: organization.organizationLearnerTypeName,
+    });
+  } else {
+    organization.organizationLearnerType = null;
+  }
+
   return _toDomain(organization);
 };
 
@@ -257,7 +269,11 @@ const update = async function ({ organization }) {
   await _removeTags(knexConn, organization.tagsToRemove);
 
   await knexConn(ORGANIZATIONS_TABLE_NAME)
-    .update({ ...organizationRawData, updatedAt: new Date() })
+    .update({
+      ...organizationRawData,
+      organizationLearnerTypeId: organization.organizationLearnerType?.id,
+      updatedAt: new Date(),
+    })
     .where({ id: organization.id });
 };
 
@@ -473,7 +489,7 @@ function _toDomain(rawOrganization) {
     administrationTeamId: rawOrganization.administrationTeamId,
     administrationTeamName: rawOrganization.administrationTeamName,
     countryCode: rawOrganization.countryCode,
-    organizationLearnerTypeName: rawOrganization.organizationLearnerTypeName,
+    organizationLearnerType: rawOrganization.organizationLearnerType,
   });
 
   return organization;
