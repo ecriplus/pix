@@ -6,8 +6,8 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c'est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒</p>",
+    "image": "https://assets.pix.org/modules/CYMDPNOV/picto_cyber_mdp_nov.svg",
+    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c’est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -61,13 +61,13 @@
                       "userName": "Emma",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Bah oui, je pense. C'était le prénom de mon fils et l'année de naissance de mon chat !"
+                      "content": "Bah oui, je pense. C’était le prénom de mon fils et l’année de naissance de mon chat !"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mais non, ce mot de passe n'est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"
+                      "content": "Mais non, ce mot de passe n’est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"
                     }
                   ]
                 }
@@ -430,7 +430,7 @@
                       "userName": "Jennifer",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Eh oui ! Le mieux, c'est même d’avoir un mot de passe différent pour chacun de tes services en ligne ! ☺️"
+                      "content": "Eh oui ! Le mieux, c’est même d’avoir un mot de passe différent pour chacun de tes services en ligne ! ☺️"
                     }
                   ]
                 }
@@ -452,9 +452,13 @@
             {
               "type": "element",
               "element": {
-                "id": "466e4d1f-ce33-4084-90d7-f6c2f22a869d",
-                "type": "text",
-                "content": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p><ul>    <li>N’utilisez pas d’informations personnelles ou publiques. 🤫</li>    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;📖</li>    <li>Créez un mot de passe long (au moins 12 caractères). 📏</li>    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
+                "id": "827bc847-0aef-41af-815b-187a0e59f4c9",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/CYMDPNOV/mdp_nov_recap.svg",
+                "alt": "Infographie décrite dans l’alternative textuelle",
+                "alternativeText": "<p>Voici <strong>quelques règles</strong> à suivre pour <strong>créer un mot de passe fort donc difficile à deviner</strong> pour un pirate ou un proche&nbsp;:&nbsp;</p><ul>    <li>N’utilisez pas d’informations personnelles ou publiques.</li>    <li>N’utilisez pas de prénoms, de noms ni de mots du dictionnaire.</li>    <li>Créez un mot de passe long (au moins 12 caractères).</li>    <li>Mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux.</li></ul>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
