@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { oidcAuthenticationServiceRegistry, usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
@@ -10,11 +9,9 @@ import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/u
  */
 async function createInBatch(request, h) {
   const oidcProviders = request.payload;
-
-  await DomainTransaction.execute(() => {
-    return Promise.all(oidcProviders.map((oidcProvider) => usecases.addOidcProvider({ ...oidcProvider })));
-  });
-
+  for (const oidcProvider of oidcProviders) {
+    await usecases.addOidcProvider(oidcProvider);
+  }
   return h.response().code(204);
 }
 

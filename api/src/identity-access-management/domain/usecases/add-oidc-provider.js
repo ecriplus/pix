@@ -1,3 +1,5 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+
 /**
  * @typedef {import ('../usecases/index.js').OidcProviderRepository} OidcProviderRepository
  */
@@ -31,7 +33,7 @@
  * @param {CryptoService} params.cryptoService
  * @returns {Promise<void>}
  */
-const addOidcProvider = async function ({
+export const addOidcProvider = withTransaction(async function ({
   accessTokenLifespan,
   additionalRequiredProperties,
   application,
@@ -92,6 +94,4 @@ const addOidcProvider = async function ({
   const propertiesWithEncryptedClientSecret = { encryptedClientSecret, ...propertiesWithoutClientSecret };
 
   await oidcProviderRepository.create(propertiesWithEncryptedClientSecret);
-};
-
-export { addOidcProvider };
+});

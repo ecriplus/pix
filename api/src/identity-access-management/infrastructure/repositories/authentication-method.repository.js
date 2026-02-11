@@ -237,16 +237,14 @@ const update = async function ({ id, authenticationComplement }) {
     .update({ authenticationComplement, updatedAt: new Date() });
 };
 
-const batchUpsertPasswordThatShouldBeChanged = function ({ usersToUpdateWithNewPassword }) {
-  return Promise.all(
-    usersToUpdateWithNewPassword.map(async ({ userId, hashedPassword }) => {
-      if (await hasIdentityProviderPIX({ userId })) {
-        return updatePassword({ userId, hashedPassword, shouldChangePassword: true });
-      } else {
-        return createPasswordThatShouldBeChanged({ userId, hashedPassword });
-      }
-    }),
-  );
+const batchUpsertPasswordThatShouldBeChanged = async function ({ usersToUpdateWithNewPassword }) {
+  for (const { userId, hashedPassword } of usersToUpdateWithNewPassword) {
+    if (await hasIdentityProviderPIX({ userId })) {
+      await updatePassword({ userId, hashedPassword, shouldChangePassword: true });
+    } else {
+      await createPasswordThatShouldBeChanged({ userId, hashedPassword });
+    }
+  }
 };
 
 /**
