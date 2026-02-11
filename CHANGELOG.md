@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.328.0](https://github.com/1024pix/pix/compare/v5.327.0...v5.328.0) (2026-02-11)
+
+### :rocket: Amélioration
+
+- [#15016](https://github.com/1024pix/pix/pull/15016) ajout IMG définitives CYMDPNOV 
+- [#15023](https://github.com/1024pix/pix/pull/15023) Permettre de créer une nouvelle version de tout type de référentiel de certif (PIX-21027). 
+
+### :bug: Correction
+
+- [#15066](https://github.com/1024pix/pix/pull/15066) (Problèmes de la production) Corrections dans le scope Accès de la transactions d’un usecase read-only et de Promise.all (PIX-21455) 
+- [#15086](https://github.com/1024pix/pix/pull/15086) Désactive le calcul de `isPartOfCombinedCourse`qui prend beaucoup de ressources. 
+- [#15024](https://github.com/1024pix/pix/pull/15024) les textes des feedbacks sans balises <p> ne se colorent pas (PIX-21417). 
+- [#15083](https://github.com/1024pix/pix/pull/15083) MDX-112 IAPrompt_NOV : remplacement de l'image du POI par une plus lisible 
+
+### :building_construction: Tech
+
+- [#15053](https://github.com/1024pix/pix/pull/15053) Améliore l'usage du pool de connexions à la BDD via un refacto sur le usecase d'inscription de candidats de certification dans le SCO  
+- [#15085](https://github.com/1024pix/pix/pull/15085) Pousser l'erreur dans un objet pour être identifier dans le logger.
+
 # [5.327.0](https://github.com/1024pix/pix/compare/v5.326.0...v5.327.0) (2026-02-11)
 
 ### :rocket: Amélioration
