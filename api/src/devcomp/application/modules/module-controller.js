@@ -16,6 +16,17 @@ const getBySlug = async function (request, h, { moduleSerializer }) {
   return moduleSerializer.serialize(module);
 };
 
-const modulesController = { getByShortId, getBySlug };
+const getJsonSchema = async function (_request, h) {
+  const { jsonSchema, jsonSchemaChecksum } = usecases.getModuleJsonSchema();
+
+  return h
+    .response(jsonSchema)
+    .type('application/json')
+    .charset('UTF-8')
+    .header('Cache-Control', 'public, max-age=900')
+    .etag(jsonSchemaChecksum);
+};
+
+const modulesController = { getByShortId, getBySlug, getJsonSchema };
 
 export { modulesController };

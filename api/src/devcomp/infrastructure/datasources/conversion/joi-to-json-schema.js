@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
-const logger = console;
+import { child, SCOPES } from '../../../../shared/infrastructure/utils/logger.js';
+
+const logger = child('devcomp:joi-to-json-schema', { event: SCOPES.DEVCOMP });
 
 export function convertJoiToJsonSchema(joiSchema) {
   if (!Joi.isSchema(joiSchema)) {
@@ -25,7 +27,7 @@ function convertFromType(joiDescribedSchema, key = '') {
     case 'alternatives':
       return convertAlternatives(joiDescribedSchema);
     default:
-      logger.warn('Unsupported type', joiDescribedSchema.type);
+      logger.warn({ type: joiDescribedSchema.type, schema: joiDescribedSchema }, 'Unsupported schema type');
   }
 }
 
@@ -220,7 +222,7 @@ function convertAlternatives(joiAlternativesDescribedSchema) {
       if (match.switch !== undefined) {
         return match.switch.map(getAlternativeSwitchCaseJsonSchema);
       } else {
-        logger.warn('Unsupported conditional schema is/then/otherwise');
+        logger.warn({ match }, 'Unsupported conditional schema is/then/otherwise');
       }
     } else {
       return convertFromType(match.schema);

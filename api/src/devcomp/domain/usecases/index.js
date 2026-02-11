@@ -52,6 +52,7 @@ import { findTargetProfileSummariesForTraining } from './find-target-profile-sum
 import { findTutorials } from './find-tutorials.js';
 import { getModule } from './get-module.js';
 import { getModuleByShortId } from './get-module-by-short-id.js';
+import { getModuleJsonSchema } from './get-module-json-schema.js';
 import { getModuleMetadataList } from './get-module-metadata-list.js';
 import { getModuleMetadataListByIds } from './get-module-metadata-list-by-ids.js';
 import { getModuleMetadataListByShortIds } from './get-module-metadata-list-by-short-ids.js';
@@ -90,6 +91,7 @@ const usecasesWithoutInjectedDependencies = {
   getModuleMetadataListByShortIds,
   getModule,
   getModuleByShortId,
+  getModuleJsonSchema,
   getTraining,
   getUserModuleStatuses,
   handleTrainingRecommendation,
