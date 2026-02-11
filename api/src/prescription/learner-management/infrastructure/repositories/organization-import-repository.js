@@ -1,3 +1,4 @@
+import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationImportStatus } from '../../domain/models/OrganizationImportStatus.js';
 import { OrganizationImportDetail } from '../../domain/read-models/OrganizationImportDetail.js';
@@ -50,14 +51,13 @@ function _stringifyErrors(errors) {
 }
 
 const save = async function (organizationImport) {
-  const knexConn = DomainTransaction.getConnection();
   const attributes = { ...organizationImport, errors: _stringifyErrors(organizationImport.errors) };
 
   if (organizationImport.id) {
-    const updatedRows = await knexConn('organization-imports').update(attributes).where({ id: organizationImport.id });
+    const updatedRows = await knex('organization-imports').update(attributes).where({ id: organizationImport.id });
     if (updatedRows === 0) throw new Error();
   } else {
-    await knexConn('organization-imports').insert(attributes);
+    await knex('organization-imports').insert(attributes);
   }
 };
 
