@@ -6,7 +6,6 @@ import * as combinedCourseBlueprintRepository from '../../infrastructure/reposit
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import combinedCourseDetailsService from '../services/combined-course-details-service.js';
-import combinedCourseToCreateService from '../services/combined-course-to-create-service.js';
 
 const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = injectDependencies(
   { combinedCourseDetailsService },
@@ -18,17 +17,6 @@ const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = i
     moduleRepository: repositories.moduleRepository,
     eligibilityRepository: repositories.eligibilityRepository,
     recommendedModuleRepository: repositories.recommendedModuleRepository,
-  },
-);
-
-const { combinedCourseToCreateService: injectedCombinedCourseToCreateService } = injectDependencies(
-  { combinedCourseToCreateService },
-  {
-    moduleRepository: repositories.moduleRepository,
-    codeGenerator,
-    accessCodeRepository: repositories.accessCodeRepository,
-    recommendedModuleRepository: repositories.recommendedModuleRepository,
-    targetProfileRepository: repositories.targetProfileRepository,
   },
 );
 
@@ -48,7 +36,6 @@ const dependencies = {
   targetProfileRepository: repositories.targetProfileRepository,
   organizationLearnerParticipationRepository: repositories.organizationLearnerParticipationRepository,
   combinedCourseDetailsService: injectedCombinedCourseDetailsService,
-  combinedCourseToCreateService: injectedCombinedCourseToCreateService,
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
   combinedCourseBlueprintRepository,

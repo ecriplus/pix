@@ -1,3 +1,5 @@
+import { Campaign } from '../models/Campaign.js';
+
 export const createCombinedCourse = async ({
   combinedCourseBlueprintId,
   name,
@@ -11,26 +13,44 @@ export const createCombinedCourse = async ({
   combinedCourseBlueprintRepository,
   recommendedModuleRepository,
   moduleRepository,
-  combinedCourseToCreateService,
   questRepository,
 }) => {
   const combinedCourseBlueprint = await combinedCourseBlueprintRepository.findById({
     id: combinedCourseBlueprintId,
   });
 
-  const { campaignsToCreate, modules } = await combinedCourseToCreateService.buildModulesAndCampaigns({
-    organizationId,
-    combinedCourseBlueprint,
-    creatorId,
-    moduleRepository,
-    codeGenerator,
-    accessCodeRepository,
-    recommendedModuleRepository,
-    targetProfileRepository,
+  let modules = [];
+
+  if (combinedCourseBlueprint.moduleShortIds) {
+    modules = await moduleRepository.getByShortIds({
+      moduleShortIds: combinedCourseBlueprint.moduleShortIds,
+    });
+  }
+
+  const combinedCourseCode = await codeGenerator.generate(accessCodeRepository);
+
+  const targetProfileIds = combinedCourseBlueprint.targetProfileIds ?? [];
+  const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
+  const campaignsToCreate = [];
+  const recommendableModules = await recommendedModuleRepository.findIdsByTargetProfileIds({
+    targetProfileIds: [targetProfileIds],
   });
 
-  const createdCampaigns = await campaignRepository.save({ campaigns: campaignsToCreate });
-  const combinedCourseCode = await codeGenerator.generate(accessCodeRepository);
+  for (const targetProfile of targetProfiles) {
+    const campaignForCombinedCourse = Campaign.buildCampaignForCombinedCourse({
+      organizationId,
+      targetProfile,
+      creatorId,
+      combinedCourseCode,
+      recommendableModules,
+      modules,
+    });
+    campaignsToCreate.push(campaignForCombinedCourse);
+  }
+
+  const createdCampaigns = await campaignRepository.save({
+    campaigns: campaignsToCreate,
+  });
 
   const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
     name,
