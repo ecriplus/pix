@@ -13,22 +13,6 @@ const searchAttachableTargetProfilesForComplementaryCertifications = async funct
   return attachableTargetProfilesSerializer.serialize(attachableTargetProfiles);
 };
 
-const createCertificationVersion = async function (request, h) {
-  const { complementaryCertificationKey } = request.params;
-  const { tubeIds } = request.payload.data.attributes;
-
-  await usecases.createCertificationVersion({ scope: complementaryCertificationKey, tubeIds });
-
-  return h
-    .response({
-      data: {
-        id: complementaryCertificationKey,
-        type: 'certification-consolidated-framework',
-      },
-    })
-    .code(201);
-};
-
 const calibrateFrameworkVersion = async function (request, h) {
   const { versionId, calibrationId } = request.payload.data.attributes;
   await usecases.calibrateFrameworkVersion({ versionId, calibrationId });
@@ -46,7 +30,6 @@ const getComplementaryCertificationTargetProfileHistory = async function (reques
 
 const complementaryCertificationController = {
   calibrateFrameworkVersion,
-  createCertificationVersion,
   findComplementaryCertifications,
   getComplementaryCertificationTargetProfileHistory,
   searchAttachableTargetProfilesForComplementaryCertifications,

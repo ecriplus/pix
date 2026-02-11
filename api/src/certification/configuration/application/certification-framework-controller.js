@@ -24,7 +24,24 @@ const getFrameworkHistory = async function (request) {
   return frameworkHistorySerializer.serialize({ scope, frameworkHistory });
 };
 
+const createCertificationVersion = async function (request, h) {
+  const { scope } = request.params;
+  const { tubeIds } = request.payload.data.attributes;
+
+  await usecases.createCertificationVersion({ scope, tubeIds });
+
+  return h
+    .response({
+      data: {
+        id: scope,
+        type: 'certification-consolidated-framework',
+      },
+    })
+    .code(201);
+};
+
 const certificationFrameworkController = {
+  createCertificationVersion,
   findCertificationFrameworks,
   getActiveConsolidatedFramework,
   getFrameworkHistory,

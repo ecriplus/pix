@@ -8,13 +8,12 @@ import { t } from 'ember-intl';
 
 import TubesSelection from '../../../common/tubes-selection';
 
-export default class CreationForm extends Component {
+export default class NewVersionForm extends Component {
   @service intl;
   @service pixToast;
   @service router;
   @service store;
 
-  @tracked complementaryCertification = [];
   @tracked frameworks = [];
   @tracked selectedTubes = [];
 
@@ -24,15 +23,17 @@ export default class CreationForm extends Component {
     this.#onMount();
   }
 
+  get scope() {
+    return this.router.currentRoute.parent.parent.params.certification_framework_key;
+  }
+
+  get frameworkLabel() {
+    return this.store.peekRecord('certification-framework', this.scope)?.name;
+  }
+
   async #onMount() {
     const foundFrameworks = await this.store.findAll('framework');
     this.frameworks = foundFrameworks.map((framework) => framework);
-
-    const routeParams = this.router.currentRoute.parent.parent.params;
-    const complementaryCertifications = this.store.peekAll('complementary-certification');
-    this.complementaryCertification = complementaryCertifications.find(
-      (cc) => cc.key === routeParams.certification_framework_key,
-    );
   }
 
   @action
@@ -43,7 +44,7 @@ export default class CreationForm extends Component {
   @action
   async onSubmit() {
     const consolidatedFramework = this.store.createRecord('certification-consolidated-framework', {
-      complementaryCertification: this.complementaryCertification,
+      scope: this.scope,
       tubes: this.selectedTubes,
     });
 
@@ -53,7 +54,7 @@ export default class CreationForm extends Component {
       this.router.transitionTo('authenticated.certification-frameworks.item.framework');
       this.pixToast.sendSuccessNotification({
         message: this.intl.t(
-          'components.complementary-certifications.item.framework.creation-form.success-notification',
+          'components.certification-frameworks.item.framework.new-version-form.success-notification',
         ),
       });
     } catch (error) {
@@ -63,10 +64,7 @@ export default class CreationForm extends Component {
 
   <template>
     <h2 class="framework-creation-form__title">
-      {{t
-        "components.complementary-certifications.item.framework.creation-form.title"
-        complementaryCertificationLabel=this.complementaryCertification.label
-      }}
+      {{t "components.certification-frameworks.item.framework.new-version-form.title"}}
     </h2>
 
     <form>
@@ -83,7 +81,7 @@ export default class CreationForm extends Component {
           <ul class="framework-creation-form__buttons">
             <li>
               <PixButton @triggerAction={{this.onSubmit}} @isDisabled={{if this.selectedTubes.length false true}}>
-                {{t "components.complementary-certifications.item.framework.creation-form.submit-button"}}
+                {{t "components.certification-frameworks.item.framework.new-version-form.submit-button"}}
               </PixButton>
             </li>
             <li>

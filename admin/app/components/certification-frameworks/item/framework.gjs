@@ -53,7 +53,7 @@ export default class CertificationFramework extends Component {
 
         <PixButtonLink
           class="framework__creation-button"
-          @route="authenticated.certification-frameworks.item.framework.new"
+          @route="authenticated.certification-frameworks.item.framework.new-version"
         >
           {{t "components.complementary-certifications.item.framework.create-button"}}
         </PixButtonLink>

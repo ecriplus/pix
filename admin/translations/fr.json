@@ -397,6 +397,15 @@
       }
     },
     "certification-frameworks": {
+      "item": {
+        "framework": {
+          "new-version-form": {
+            "submit-button": "Créer la nouvelle version du référentiel de certification",
+            "success-notification": "La nouvelle version du référentiel de certification a été créé avec succès",
+            "title": "Création d'une nouvelle version du référentiel de certification"
+          }
+        }
+      },
       "labels": {
         "CLEA": "CléA Numérique",
         "CORE": "Pix Cœur (transverse)",
@@ -509,11 +518,6 @@
         "certification-framework": "Référentiel de certification",
         "framework": {
           "create-button": "Créer une nouvelle version du référentiel",
-          "creation-form": {
-            "submit-button": "Créer le nouveau référentiel de certification",
-            "success-notification": "Le nouveau référentiel de certification a été créé avec succès",
-            "title": "Créer une nouvelle version du référentiel de certification pour {complementaryCertificationLabel}"
-          },
           "details": {
             "empty-current-framework": "Le référentiel de certification actuel est vide.",
             "title": "Détails du référentiel de certification actuel"
