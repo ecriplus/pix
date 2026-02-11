@@ -254,7 +254,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       });
     });
 
-    module('when there isn’t any identity providers', function () {
+    module('when there isn’t any identity provider', function () {
       test('returns undefined', async function () {
         // given
         const storeStub = Service.create({
